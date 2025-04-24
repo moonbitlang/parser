@@ -4,6 +4,11 @@
       "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --mode only-tokens $input -o $output",
       "input": "parser.mbty",
       "output": "tokens.mbt"
+    },
+    {
+      "command": "$mod_dir/.mooncakes/moonbitlang/ulex/moonlex --code-unit 1 --default-encoding utf8 $input -o $output",
+      "input": "lexer.mbtx",
+      "output": "lexer.mbt"
     }
   ]
 }

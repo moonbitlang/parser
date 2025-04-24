@@ -1,28 +1,30 @@
 // revision: b596cbbe0b642858aae4fe6947670712b6f16f8b
 
+%derive<Show> Token
+
 %start structure
 %start expression
 
-%token CHAR
-%token INT
-%token BYTE
-%token BYTES
-%token FLOAT
-%token STRING
-%token MULTILINE_STRING
-%token MULTILINE_INTERP
-%token INTERP
-%token ATTRIBUTE
-%token LIDENT
-%token UIDENT
-%token POST_LABEL
-%token COMMENT
+%token<CharLiteral> CHAR
+%token<String> INT
+%token<CharLiteral> BYTE
+%token<StringLiteral> BYTES
+%token<String> FLOAT
+%token<StringLiteral> STRING
+%token<String> MULTILINE_STRING
+%token<InterpLiteral> MULTILINE_INTERP
+%token<InterpLiteral> INTERP
+%token<String> ATTRIBUTE
+%token<String> LIDENT
+%token<String> UIDENT
+%token<String> POST_LABEL
+%token<Comment> COMMENT
 %token NEWLINE
-%token INFIX1
-%token INFIX2
-%token INFIX3
-%token INFIX4
-%token AUGMENTED_ASSIGNMENT
+%token<String> INFIX1
+%token<String> INFIX2
+%token<String> INFIX3
+%token<String> INFIX4
+%token<String> AUGMENTED_ASSIGNMENT
 %token EOF
 %token FALSE
 %token TRUE
@@ -54,13 +56,13 @@
 %token MINUS "-"
 %token QUESTION "?"
 %token EXCLAMATION "!"
-%token DOT_LIDENT
-%token DOT_UIDENT
-%token DOT_INT
+%token<String> DOT_LIDENT
+%token<String> DOT_UIDENT
+%token<Int> DOT_INT
 %token DOT_LPAREN ".("
 %token COLONCOLON "::"
 %token COLON ":"
-%token SEMI
+%token<Bool> SEMI
 %token LBRACKET "["
 %token PLUS "+"
 %token RBRACKET "]"
@@ -72,7 +74,7 @@
 %token AMPER "&"
 %token CARET "^"
 %token BARBAR "||"
-%token PACKAGE_NAME
+%token<String> PACKAGE_NAME
 %token AS "as"
 %token PIPE "|>"
 %token ELSE "else"
