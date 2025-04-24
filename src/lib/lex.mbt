@@ -7,7 +7,7 @@ pub fn tokens_from_bytes(
   comment~ : Bool,
   errors~ : Array[(Position, Position, String)] = [],
   bytes : Bytes
-) -> Array[TokenTriple] {
+) -> Array[(Token, Position, Position)] {
   let lexbuf = Lexbuf::from_bytes(bytes)
   let arr = Array::new(capacity=100)
   let (start_lnum, start_bol, start_cnum) = (

@@ -10,5 +10,8 @@
       "input": "lexer.mbtx",
       "output": "lexer.mbt"
     }
+  ],
+  "test-import": [
+    "moonbitlang/x/fs"
   ]
 }

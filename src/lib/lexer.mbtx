@@ -244,7 +244,7 @@ rule invalid_byte(lexbuf : Lexbuf, env~ : LexEnv, start~ : Int) -> Unit {
   }
 }
 
-rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int) -> Unit) -> Array[TokenTriple] {
+rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int) -> Unit) -> Array[(Token, Position, Position)] {
   parse {
     newline as repr => {
       env.add_token_with_loc(NEWLINE, start=$startpos(repr), end=$endpos(repr))

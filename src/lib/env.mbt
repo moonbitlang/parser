@@ -4,7 +4,7 @@ priv struct LexEnv {
   docstrings : Array[@immut/list.T[(Loc, Comment)]]?
   comment : Bool
   name : String
-  arr : Array[TokenTriple]
+  arr : Array[(Token, Position, Position)]
   mut current_line : Int
   mut current_bol : Int
   last_unhandled_comment : Ref[(Comment, Int)?]
@@ -96,15 +96,15 @@ fn LexEnv::add_token(
         while true {
           let target_index = index + direction
           match self.arr.get(target_index) {
-            Some(TokenTriple((COMMENT(_), _, _))) => return count
-            Some(TokenTriple((NEWLINE, _, _))) =>
+            Some((COMMENT(_), _, _)) => return count
+            Some((NEWLINE, _, _)) =>
               if count >= 2 {
                 return count
               } else {
                 count += 1
                 index = target_index
               }
-            None | Some(TokenTriple((EOF, _, _))) => {
+            None | Some((EOF, _, _)) => {
               if direction < 0 {
                 at_file_start = true
               }
@@ -120,7 +120,7 @@ fn LexEnv::add_token(
       let leading_newlines = @math.minimum(2, count_newlines(i, -1))
       // Make sure add trailing newline if the comment is at end of file
       let trailing_newlines = @math.minimum(2, count_newlines(i, 1))
-      let TokenTriple((_, start, end)) = self.arr[i]
+      let (_, start, end) = self.arr[i]
       let kind = if leading_newlines == 0 && not(at_file_start) {
         InlineTrailing
       } else {
@@ -129,7 +129,7 @@ fn LexEnv::add_token(
           trailing_blank_line=trailing_newlines == 2,
         )
       }
-      self.arr[i] = TokenTriple((COMMENT({ ..c, kind, }), start, end))
+      self.arr[i] = (COMMENT({ ..c, kind, }), start, end)
     }
 
     match (self.last_unhandled_comment.val, tok) {

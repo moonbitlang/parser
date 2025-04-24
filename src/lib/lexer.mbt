@@ -1538,7 +1538,7 @@ fn invalid_byte(lexbuf : Lexbuf, env~ : LexEnv, start~ : Int) -> Unit  {
 }
 
 
-fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int) -> Unit) -> Array[TokenTriple]  {
+fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int) -> Unit) -> Array[(Token, Position, Position)]  {
   // The matched pattern id
   let mut matched = @int.max_value
   let mut _end_pos = -1

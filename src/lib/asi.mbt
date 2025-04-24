@@ -160,10 +160,10 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     COMMENT(_) | NEWLINE => true
     // [MINUS] is both a binary operator and a unary operator.
     // So it may occur on the beginning of a statement.
-    // 
+    //
     // It is possible to *NOT* insert a semi before [MINUS].
     // If the user doesn't want a semi here, she can wrap the [MINUS] expression in parenthesis.
-    // 
+    //
     // The choice we take here is to be more conservative and always insert a semi before [MINUS].
     // But this may change in the future.
     MINUS => true
@@ -238,7 +238,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
 //  However, there can be arbitarily many newlines and comments after a newline.
 //  So we use [last_unhandled_newline] to keep track of
 //  the index of the last newline not processed by ASI.
-//  
+//
 //  [-1] indicate all newlines are already processed by ASI.
 ///|
 priv struct ASIContext {
@@ -260,7 +260,7 @@ fn ASIContext::new() -> ASIContext {
 ///|
 fn ASIContext::add_token[C](
   self : ASIContext,
-  tokens~ : Array[TokenTriple],
+  tokens~ : Array[(Token, Position, Position)],
   last_unhandled_comment~ : Ref[(C, Int)?],
   next_token : Token
 ) -> Unit {
@@ -274,7 +274,7 @@ fn ASIContext::add_token[C](
       // try insert
       loop self.last_unhandled_newline - 1 {
         0..<_ as top =>
-          match tokens[top]._ {
+          match tokens[top] {
             (COMMENT(_), _, _) => continue top - 1
             (last_token, _, endp) =>
               if can_occur_before_semicolon(last_token) &&
