@@ -1,0 +1,15 @@
+{
+  "name": "moonbitlang/parser",
+  "version": "0.1.0",
+  "deps": {},
+  "bin-deps": {
+    "moonbitlang/yacc": "0.3.39",
+    "moonbitlang/ulex": "0.1.13"
+  },
+  "readme": "README.md",
+  "repository": "",
+  "license": "Apache-2.0",
+  "keywords": [],
+  "description": "",
+  "source": "src"
+}
