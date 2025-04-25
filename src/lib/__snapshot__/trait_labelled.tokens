@@ -89,11 +89,7 @@
 (NEWLINE 11:69-11:70)
 ((LIDENT println) 12:3-12:10)
 (LPAREN 12:10-12:11)
-((INTERP
-  ((Interp_lit) (Interp_source ((source self))) (Interp_lit)
-   (Interp_source ((source x))) (Interp_lit) (Interp_source ((source w)))
-   (Interp_lit) (Interp_source ((source y))) (Interp_lit)))
- 12:11-12:45)
+((INTERP [InterpLit(repr="f(", loc={start: {fname: "", lnum: 12, bol: 200, cnum: 210}, end: {fname: "", lnum: 12, bol: 200, cnum: 215}}), InterpSource({source: "self", loc: {start: {fname: "", lnum: 12, bol: 200, cnum: 215}, end: {fname: "", lnum: 12, bol: 200, cnum: 219}}}), InterpLit(repr=", x=", loc={start: {fname: "", lnum: 12, bol: 200, cnum: 210}, end: {fname: "", lnum: 12, bol: 200, cnum: 226}}), InterpSource({source: "x", loc: {start: {fname: "", lnum: 12, bol: 200, cnum: 226}, end: {fname: "", lnum: 12, bol: 200, cnum: 227}}}), InterpLit(repr=", ", loc={start: {fname: "", lnum: 12, bol: 200, cnum: 210}, end: {fname: "", lnum: 12, bol: 200, cnum: 232}}), InterpSource({source: "w", loc: {start: {fname: "", lnum: 12, bol: 200, cnum: 232}, end: {fname: "", lnum: 12, bol: 200, cnum: 233}}}), InterpLit(repr=", y=", loc={start: {fname: "", lnum: 12, bol: 200, cnum: 210}, end: {fname: "", lnum: 12, bol: 200, cnum: 240}}), InterpSource({source: "y", loc: {start: {fname: "", lnum: 12, bol: 200, cnum: 240}, end: {fname: "", lnum: 12, bol: 200, cnum: 241}}}), InterpLit(repr=")", loc={start: {fname: "", lnum: 12, bol: 200, cnum: 210}, end: {fname: "", lnum: 12, bol: 200, cnum: 244}})]) 12:11-12:45)
 (RPAREN 12:45-12:46)
 (NEWLINE 12:46-12:47)
 (RBRACE 13:1-13:2)
