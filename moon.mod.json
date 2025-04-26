@@ -4,7 +4,7 @@
   "deps": {},
   "bin-deps": {
     "moonbitlang/yacc": "0.3.39",
-    "moonbitlang/ulex": "0.2.3"
+    "moonbitlang/ulex": "0.2.4"
   },
   "readme": "README.md",
   "repository": "",
