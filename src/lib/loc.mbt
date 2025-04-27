@@ -12,7 +12,7 @@ fn column(self : Position) -> Int {
 }
 
 ///|
-pub struct Loc {
+pub struct Location {
   start : Position
   end : Position
 } derive(Show)

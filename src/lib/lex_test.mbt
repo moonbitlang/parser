@@ -1,9 +1,9 @@
 ///|
 fn test_tokens(t : @test.T, label : String) -> Unit!Error {
   let source = @fs.read_file_to_bytes!("src/lib/fixtures/\{label}.mbt_")
-  let triples = tokens_from_bytes(comment=true, source)
+  let result = tokens_from_bytes(comment=true, source)
   let buf = StringBuilder::new()
-  for triple in triples {
+  for triple in result.tokens {
     buf.write_char('(')
     buf.write_string(
       match triple.0 {

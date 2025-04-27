@@ -287,7 +287,7 @@ fn ASIContext::add_token[C](
                     | MULTILINE_INTERP(_),
                   ) => ()
                   _ => {
-                    tokens.insert(top + 1, (fake_semicolon, endp, endp))
+                    tokens.insert(top + 1, (SEMI(false), endp, endp))
                     match last_unhandled_comment.val {
                       Some((c, i)) if i >= top + 1 =>
                         last_unhandled_comment.val = Some((c, i + 1))

@@ -10,7 +10,7 @@ fn string(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_interp
     [
       InterpLit(
         repr = "",
-        loc = Loc::{ start : env.make_position(startpos), end : env.make_position(lexbuf.curr_pos()) }
+        loc = Location::{ start : env.make_pos(startpos), end : env.make_pos(lexbuf.curr_pos()) }
       )
     ]
   } else {
@@ -123,7 +123,7 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
           string_interps.val.push(
             InterpLit(
               repr=string_repr_buf.to_string(),
-              loc=Loc::{ start : env.make_position(startpos), end : env.make_position($endpos(repr)) }
+              loc=Location::{ start : env.make_pos(startpos), end : env.make_pos($endpos(repr)) }
             )
           )
         }
@@ -167,14 +167,14 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
           string_interps.val.push(
             InterpLit(
               repr=string_repr_buf.to_string(),
-              loc=Loc::{ start : env.make_position(startpos), end : env.make_position($endpos(repr)) }
+              loc=Location::{ start : env.make_pos(startpos), end : env.make_pos($endpos(repr)) }
             )
           )
         }
         string_repr_buf.reset()
         let apos = $endpos(repr)
         let bpos = interp_handle(lexbuf, env~)
-        let loc = Loc::{ start: env.make_position(apos), end : env.make_position(bpos) }
+        let loc = Location::{ start: env.make_pos(apos), end : env.make_pos(bpos) }
         if string_repr_buf.is_empty() {
           env.add_lexing_error(start=$startpos(repr), end = $endpos(repr),InterpMissingExpression)
         } else {
@@ -201,7 +201,7 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
         string_interps.val.push(
           InterpLit(
             repr=string_repr_buf.to_string(),
-            loc=Loc::{ start : env.make_position(startpos), end : env.make_position($endpos(repr)) }
+            loc=Location::{ start : env.make_pos(startpos), end : env.make_pos($endpos(repr)) }
           )
         )
       }
@@ -216,7 +216,7 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
         string_interps.val.push(
           InterpLit(
             repr=string_repr_buf.to_string(),
-            loc=Loc::{ start : env.make_position(startpos), end : env.make_position($endpos(repr)) }
+            loc=Location::{ start : env.make_pos(startpos), end : env.make_pos($endpos(repr)) }
           )
         )
       }
@@ -244,7 +244,7 @@ rule invalid_byte(lexbuf : Lexbuf, env~ : LexEnv, start~ : Int) -> Unit {
   }
 }
 
-rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int) -> Unit) -> Array[(Token, Position, Position)] {
+rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int) -> Unit) -> Unit {
   parse {
     newline as repr => {
       env.add_token_with_loc(NEWLINE, start=$startpos(repr), end=$endpos(repr))
@@ -320,7 +320,7 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
           interps => INTERP(interps)
         }
       let endpos = lexbuf.curr_pos()
-      env.add_token(tok, env.make_position(startpos), env.make_position(endpos))
+      env.add_token(tok, env.make_pos(startpos), env.make_pos(endpos))
       tokens(lexbuf, env~, preserve_comment~)
     }
     "b\"" as repr => {
@@ -331,7 +331,7 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
           _interps => panic()
         }
       let endpos = lexbuf.curr_pos()
-      env.add_token(tok, env.make_position(startpos), env.make_position(endpos))
+      env.add_token(tok, env.make_pos(startpos), env.make_pos(endpos))
       tokens(lexbuf, env~, preserve_comment~)
     }
     "$|" as repr => {
@@ -341,7 +341,7 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
       let startpos = $startpos(repr)
       let tok = MULTILINE_INTERP(string(lexbuf, env~, end_with_newline = true, allow_interp = true, startpos~))
       let endpos = lexbuf.curr_pos()
-      env.add_token(tok, env.make_position(startpos), env.make_position(endpos))
+      env.add_token(tok, env.make_pos(startpos), env.make_pos(endpos))
       tokens(lexbuf, env~, preserve_comment~)
     }
     "#|" ([^ '\r' '\n']* as s) as repr => {
@@ -476,7 +476,7 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
       tokens(lexbuf, env~, preserve_comment~)
     }
     ";" as repr => {
-      env.add_token_with_loc(real_semicolon, start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(SEMI(true), start=$startpos(repr), end=$endpos(repr))
       tokens(lexbuf, env~, preserve_comment~)
     }
     "==" as repr => {
@@ -571,17 +571,6 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
     eof => {
       let end = lexbuf.curr_pos()
       env.add_token_with_loc(EOF, start=end, end=end)
-      match env.docstrings {
-        None => ()
-        Some(c) => {
-          if not(c.is_empty()) {
-            let last_idx = c.length() - 1
-            c[last_idx] = c[last_idx].rev()
-          }
-          c.rev_inplace()
-        }
-      }
-      return env.arr
     }
     ['A'-'Z'] unicode_id_char* as raw => {
       env.add_token_with_loc(UIDENT(raw), start=$startpos, end=$endpos)

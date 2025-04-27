@@ -1,10 +1,10 @@
 ///|
 priv struct LexEnv {
-  errors : Array[(Position, Position, String)]
-  docstrings : Array[@immut/list.T[(Loc, Comment)]]?
+  errors : Array[(Position, Position, LexicalError)]
+  docstrings : Array[@immut/list.T[(Location, Comment)]]
   comment : Bool
-  name : String
-  arr : Array[(Token, Position, Position)]
+  file : String
+  tokens : Array[(Token, Position, Position)]
   mut current_line : Int
   mut current_bol : Int
   last_unhandled_comment : Ref[(Comment, Int)?]
@@ -14,53 +14,21 @@ priv struct LexEnv {
 }
 
 ///|
-fn LexEnv::new() -> LexEnv {
-  LexEnv::{
-    errors: [],
-    docstrings: None,
-    comment: false,
-    name: "",
-    arr: [],
-    current_line: 1,
-    current_bol: 0,
-    start_cnum: 0,
-    last_unhandled_comment: @ref.new(None),
-    asi_context: ASIContext::new(),
-    is_interpolation: false,
-  }
-}
-
-///|
 fn add_lexing_error(
   self : LexEnv,
   start~ : Int,
   end~ : Int,
   err : LexicalError
 ) -> Unit {
-  let loc_start = self.make_position(start)
-  let loc_end = self.make_position(end)
-  let message = match err {
-    InvalidDotInt(s) => "invalid byte literal: \{s}"
-    InvalidEscapeSequence(seq) => "invalid escape sequence: \{seq}"
-    InterpMissingExpression => "missing expression in string interpolation"
-    InterpInvalidAttribute => "invalid attribute in string interpolation"
-    InterpInvalidComment => "invalid comment in string interpolation"
-    InterpInvalidMultilineString =>
-      "invalid multiline string in string interpolation"
-    UnterminatedStringInVariableInterploation =>
-      "(unterminated string in variable interpolation)"
-    UnterminatedString => "(unterminated string)"
-    IllegalCharacter(c) => "unrecognized character u32: \{c}"
-    InvalidByteLiteral(s) => "invalid byte literal: \{s}"
-    Reserved_keyword(s) => "reserved keyword: \{s}"
-  }
-  self.errors.push((loc_start, loc_end, message))
+  let loc_start = self.make_pos(start)
+  let loc_end = self.make_pos(end)
+  self.errors.push((loc_start, loc_end, err))
 }
 
 ///|
-fn make_position(self : LexEnv, cnum : Int) -> Position {
+fn make_pos(self : LexEnv, cnum : Int) -> Position {
   Position::{
-    fname: self.name,
+    fname: self.file,
     lnum: self.current_line,
     cnum: self.start_cnum + cnum,
     bol: self.current_bol,
@@ -75,14 +43,14 @@ fn LexEnv::add_token(
   end : Position
 ) -> Unit {
   self.asi_context.add_token(
-    tokens=self.arr,
+    tokens=self.tokens,
     last_unhandled_comment=self.last_unhandled_comment,
     tok,
   )
   // handle comment: add comments to token array
-  self.arr.push((tok, start, end))
+  self.tokens.push((tok, start, end))
   if self.comment {
-    let tok_index = self.arr.length() - 1
+    let tok_index = self.tokens.length() - 1
     fn prehandle_comment(c : Comment) -> Unit {
       self.last_unhandled_comment.val = Some((c, tok_index))
     }
@@ -95,7 +63,7 @@ fn LexEnv::add_token(
         let mut index = start_index
         while true {
           let target_index = index + direction
-          match self.arr.get(target_index) {
+          match self.tokens.get(target_index) {
             Some((COMMENT(_), _, _)) => return count
             Some((NEWLINE, _, _)) =>
               if count >= 2 {
@@ -120,7 +88,7 @@ fn LexEnv::add_token(
       let leading_newlines = @math.minimum(2, count_newlines(i, -1))
       // Make sure add trailing newline if the comment is at end of file
       let trailing_newlines = @math.minimum(2, count_newlines(i, 1))
-      let (_, start, end) = self.arr[i]
+      let (_, start, end) = self.tokens[i]
       let kind = if leading_newlines == 0 && not(at_file_start) {
         InlineTrailing
       } else {
@@ -129,7 +97,7 @@ fn LexEnv::add_token(
           trailing_blank_line=trailing_newlines == 2,
         )
       }
-      self.arr[i] = (COMMENT({ ..c, kind, }), start, end)
+      self.tokens[i] = (COMMENT({ ..c, kind, }), start, end)
     }
 
     match (self.last_unhandled_comment.val, tok) {
@@ -153,41 +121,36 @@ fn add_token_with_loc(
   end~ : Int,
   start_offset~ : Int = 0
 ) -> Unit {
-  let start = self.make_position(start + start_offset)
-  let end = self.make_position(end)
+  let start = self.make_pos(start + start_offset)
+  let end = self.make_pos(end)
   self.add_token(tok, start, end)
 }
 
 ///|
 fn preserve_comment(self : LexEnv) -> (Comment, Int, Int) -> Unit {
-  fn ignore3(cmt, start, end) {
-    ignore(cmt)
-    ignore(start)
-    ignore(end)
-  }
-
-  match self.docstrings {
-    Some(c) if self.comment =>
-      fn(comment, start, end) {
-        if comment.content is [_, _, '/', ..] {
-          let loc = Loc::{
-            start: self.make_position(start),
-            end: self.make_position(end),
-          }
-          if c.is_empty() {
-            c.push(@immut/list.singleton((loc, comment)))
+  if self.comment {
+    fn(comment, start, end) {
+      let docstrings = self.docstrings
+      if comment.content is [_, _, '/', ..] {
+        let loc = Location::{
+          start: self.make_pos(start),
+          end: self.make_pos(end),
+        }
+        if docstrings.is_empty() {
+          docstrings.push(@immut/list.singleton((loc, comment)))
+        } else {
+          guard docstrings.last() is Some(Cons(head, _) as last)
+          let last_idx = docstrings.length() - 1
+          if loc.start.lnum - head.0.start.lnum > 1 {
+            docstrings[last_idx] = last.rev()
+            docstrings.push(@immut/list.singleton((loc, comment)))
           } else {
-            guard c.last() is Some(Cons(head, _) as last)
-            let last_idx = c.length() - 1
-            if loc.start.lnum - head.0.start.lnum > 1 {
-              c[last_idx] = last.rev()
-              c.push(@immut/list.singleton((loc, comment)))
-            } else {
-              c[last_idx] = Cons((loc, comment), c[last_idx])
-            }
+            docstrings[last_idx] = Cons((loc, comment), docstrings[last_idx])
           }
         }
       }
-    _ => ignore3
+    }
+  } else {
+    fn(_cmt, _start, _end) {  }
   }
 }
