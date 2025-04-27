@@ -84,21 +84,21 @@ regex whitespace = ('\u0009' | '\u000B' | '\u000C' | '\u0020' | '\u00A0' | '\uFE
 
 rule interp_handle(lexbuf : Lexbuf, env~ : LexEnv) -> Int {
   parse {
-    whitespace* '}' as repr => {
-      $startpos(repr)
+    whitespace* '}' => {
+      $startpos
     }
-    eof as repr => {
-      env.add_lexing_error(start=$startpos(repr), end = $endpos(repr), UnterminatedString)
-      $startpos(repr)
+    eof => {
+      env.add_lexing_error(start=$startpos, end = $endpos, UnterminatedString)
+      $startpos
     }
-    '\r' | '\n' as repr => {
-      env.add_lexing_error(start=$startpos(repr), end = $endpos(repr), UnterminatedStringInVariableInterploation)
+    '\r' | '\n' => {
+      env.add_lexing_error(start=$startpos, end = $endpos, UnterminatedStringInVariableInterploation)
       lexbuf.reset(pos=$startpos)
-      $startpos(repr)
+      $startpos
     }
-    eof as repr => {
-      env.add_lexing_error(start=$startpos(repr), end = $endpos(repr), UnterminatedStringInVariableInterploation)
-      $startpos(repr)
+    eof => {
+      env.add_lexing_error(start=$startpos, end = $endpos, UnterminatedStringInVariableInterploation)
+      $startpos
     }
     (valid_unicode_char \ ['\n' '"' '{']) as c => {
       string_repr_buf.write_char(c)
@@ -114,7 +114,7 @@ rule interp_handle(lexbuf : Lexbuf, env~ : LexEnv) -> Int {
 
 rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_interp~ : Bool, startpos~ : Int) -> Unit {
   parse {
-    '"' as repr => {
+    '"' => {
       if end_with_newline {
         string_repr_buf.write_char('"')
         normal(lexbuf, env~, end_with_newline~, allow_interp~, startpos~)
@@ -123,7 +123,7 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
           string_interps.val.push(
             InterpLit(
               repr=string_repr_buf.to_string(),
-              loc=Location::{ start : env.make_pos(startpos), end : env.make_pos($endpos(repr)) }
+              loc=Location::{ start : env.make_pos(startpos), end : env.make_pos($endpos) }
             )
           )
         }
@@ -138,7 +138,7 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
       normal(lexbuf, env~, end_with_newline~, allow_interp~, startpos~)
     }
     '\\' 'x' _ _ as repr => {
-      env.add_lexing_error(start=$startpos(repr), end = $endpos(repr), InvalidEscapeSequence(repr))
+      env.add_lexing_error(start=$startpos, end=$endpos, InvalidEscapeSequence(repr))
       normal(lexbuf, env~, end_with_newline~, allow_interp~, startpos~)
     }
     '\\' 'o' qua_digit oct_digit oct_digit as repr => {
@@ -146,7 +146,7 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
       normal(lexbuf, env~, end_with_newline~, allow_interp~, startpos~)
     }
     '\\' 'o' _ _ _ as repr => {
-      env.add_lexing_error(start=$startpos(repr), end = $endpos(repr), InvalidEscapeSequence(repr))
+      env.add_lexing_error(start=$startpos, end=$endpos, InvalidEscapeSequence(repr))
       normal(lexbuf, env~, end_with_newline~, allow_interp~, startpos~)
     }
     '\\' 'u' hex_digit hex_digit hex_digit hex_digit as repr => {
@@ -158,7 +158,7 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
       normal(lexbuf, env~, end_with_newline~, allow_interp~, startpos~)
     }
     '\\' 'u' '{' [^ '}' '\r' '\n']* '}' as repr => {
-      env.add_lexing_error(start=$startpos(repr), end = $endpos(repr),InvalidEscapeSequence(repr))
+      env.add_lexing_error(start=$startpos, end=$endpos, InvalidEscapeSequence(repr))
       normal(lexbuf, env~, end_with_newline~, allow_interp~, startpos~)
     }
     '\\' '{' whitespace* as repr => {
@@ -167,16 +167,16 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
           string_interps.val.push(
             InterpLit(
               repr=string_repr_buf.to_string(),
-              loc=Location::{ start : env.make_pos(startpos), end : env.make_pos($endpos(repr)) }
+              loc=Location::{ start : env.make_pos(startpos), end : env.make_pos($endpos) }
             )
           )
         }
         string_repr_buf.reset()
-        let apos = $endpos(repr)
+        let apos = $endpos
         let bpos = interp_handle(lexbuf, env~)
         let loc = Location::{ start: env.make_pos(apos), end : env.make_pos(bpos) }
         if string_repr_buf.is_empty() {
-          env.add_lexing_error(start=$startpos(repr), end = $endpos(repr),InterpMissingExpression)
+          env.add_lexing_error(start=$startpos, end=$endpos, InterpMissingExpression)
         } else {
           let source = string_repr_buf.to_string()
           string_interps.val.push(
@@ -187,36 +187,36 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
         }
         string_repr_buf.reset()
       } else {
-        env.add_lexing_error(start=$startpos(repr), end = $endpos(repr), InvalidEscapeSequence(repr))
+        env.add_lexing_error(start=$startpos, end=$endpos, InvalidEscapeSequence(repr))
       }
       normal(lexbuf, env~, end_with_newline~, allow_interp~, startpos~)
     }
     '\\' _ as repr => {
-      env.add_lexing_error(start=$startpos(repr), end = $endpos(repr),InvalidEscapeSequence(repr))
+      env.add_lexing_error(start=$startpos, end=$endpos, InvalidEscapeSequence(repr))
       normal(lexbuf, env~, end_with_newline~, allow_interp~, startpos~)
     }
-    eof as repr => {
-      env.add_lexing_error(start=$startpos(repr), end = $endpos(repr),UnterminatedString)
+    eof => {
+      env.add_lexing_error(start=$startpos, end=$endpos, UnterminatedString)
       if not(string_repr_buf.is_empty()) {
         string_interps.val.push(
           InterpLit(
             repr=string_repr_buf.to_string(),
-            loc=Location::{ start : env.make_pos(startpos), end : env.make_pos($endpos(repr)) }
+            loc=Location::{ start : env.make_pos(startpos), end : env.make_pos($endpos) }
           )
         )
       }
     }
-    '\r' '\n' as repr => {
+    '\r' '\n' => {
       // we need insert a NEWLINE token here, so back off to main tokenizer
       lexbuf.reset(pos=lexbuf.curr_pos() - 1)
       if not(end_with_newline) {
-        env.add_lexing_error(start=$startpos(repr), end = $endpos(repr),UnterminatedString)
+        env.add_lexing_error(start=$startpos, end=$endpos, UnterminatedString)
       }
       if not(string_repr_buf.is_empty()) {
         string_interps.val.push(
           InterpLit(
             repr=string_repr_buf.to_string(),
-            loc=Location::{ start : env.make_pos(startpos), end : env.make_pos($endpos(repr)) }
+            loc=Location::{ start: env.make_pos(startpos), end: env.make_pos($endpos) }
           )
         )
       }
@@ -230,15 +230,15 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
 
 rule invalid_byte(lexbuf : Lexbuf, env~ : LexEnv, start~ : Int) -> Unit {
   parse {
-    ['\'' '\r' '\n'] | eof as repr => {
-      env.add_lexing_error(InvalidByteLiteral(invalid_byte_repr_buf.to_string()), start~, end=$endpos(repr))
+    ['\'' '\r' '\n'] | eof => {
+      env.add_lexing_error(InvalidByteLiteral(invalid_byte_repr_buf.to_string()), start~, end=$endpos)
       invalid_byte_repr_buf.reset()
     }
-    _ as repr => {
-      guard repr is c
-      // if is_common_ascii(c) || is_valid_unicode_codepoint(c.to_uint()) {
-        invalid_byte_repr_buf.write_char(c)
-      // }
+    valid_unicode_char as c => {
+      invalid_byte_repr_buf.write_char(c)
+      invalid_byte(lexbuf, env~, start~)
+    }
+    _ => {
       invalid_byte(lexbuf, env~, start~)
     }
   }
@@ -246,26 +246,26 @@ rule invalid_byte(lexbuf : Lexbuf, env~ : LexEnv, start~ : Int) -> Unit {
 
 rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int) -> Unit) -> Unit {
   parse {
-    newline as repr => {
-      env.add_token_with_loc(NEWLINE, start=$startpos(repr), end=$endpos(repr))
-      env.current_bol = $endpos(repr)
+    newline => {
+      env.add_token_with_loc(NEWLINE, start=$startpos, end=$endpos)
+      env.current_bol = $endpos
       env.current_line += 1
       tokens(lexbuf, env~, preserve_comment~)
     }
     whitespace+ => {
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "=>" as repr => {
-      env.add_token_with_loc(FAT_ARROW, start=$startpos(repr), end=$endpos(repr))
+    "=>" => {
+      env.add_token_with_loc(FAT_ARROW, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "->" as repr => {
-      env.add_token_with_loc(THIN_ARROW, start=$startpos(repr), end=$endpos(repr))
+    "->" => {
+      env.add_token_with_loc(THIN_ARROW, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     "//" [^ '\r' '\n']* as repr => {
       if env.is_interpolation {
-        env.add_lexing_error(start=$startpos(repr), end = $endpos(repr),InterpInvalidComment)
+        env.add_lexing_error(start=$startpos, end = $endpos,InterpInvalidComment)
       }
       if env.comment {
         let comment = Comment::{
@@ -273,34 +273,29 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
           kind : InlineTrailing,
           consumed_by_docstring : @ref.new(false)
         }
-        preserve_comment(comment, $startpos(repr), $endpos(repr))
-        env.add_token_with_loc(COMMENT(comment), start=$startpos(repr), end=$endpos(repr))
+        preserve_comment(comment, $startpos, $endpos)
+        env.add_token_with_loc(COMMENT(comment), start=$startpos, end=$endpos)
       }
       tokens(lexbuf, env~, preserve_comment~)
     }
     "'" [^ '\\' '\'' '\n' '\r'] "'" as repr => {
-      let literal = repr
-      env.add_token_with_loc(CHAR(literal), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     "'\\" ['\\' '\'' '"' 'n' 't' 'b' 'r' ' '] "'" as repr => {
-      let literal = repr
-      env.add_token_with_loc(CHAR(literal), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     "'\\x" hex_digit hex_digit "'" as repr => {
-      let literal = repr
-      env.add_token_with_loc(CHAR(literal), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     "'\\o" qua_digit oct_digit oct_digit "'" as repr => {
-      let literal = repr
-      env.add_token_with_loc(CHAR(literal), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     "'\\u" hex_digit hex_digit hex_digit hex_digit "'" as repr => {
-      let literal = repr
-      env.add_token_with_loc(CHAR(literal), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     "'\\u{" (hex_digit* as hex) "}'" as repr => {
@@ -308,12 +303,11 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
         // Overflow
         env.add_lexing_error(start=$startpos(repr), end = $endpos(repr), InvalidEscapeSequence(repr))
       }
-      let literal = repr
-      env.add_token_with_loc(CHAR(literal), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    '"' as repr => {
-      let startpos = $startpos(repr)
+    '"' => {
+      let startpos = $startpos
       let tok =
         match string(lexbuf, env~, end_with_newline = false, allow_interp = true, startpos~) {
           [ InterpLit(repr~, ..) ] => STRING(repr)
@@ -323,8 +317,8 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
       env.add_token(tok, env.make_pos(startpos), env.make_pos(endpos))
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "b\"" as repr => {
-      let startpos = $startpos(repr)
+    "b\"" => {
+      let startpos = $startpos
       let tok =
         match string(lexbuf, env~, end_with_newline = false, allow_interp = false, startpos~) {
           [ InterpLit(repr~, ..) ] => STRING(repr)
@@ -334,100 +328,100 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
       env.add_token(tok, env.make_pos(startpos), env.make_pos(endpos))
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "$|" as repr => {
+    "$|" => {
       if env.is_interpolation {
-        env.add_lexing_error(start=$startpos(repr), end = $endpos(repr), InterpInvalidMultilineString)
+        env.add_lexing_error(start=$startpos, end = $endpos, InterpInvalidMultilineString)
       }
-      let startpos = $startpos(repr)
+      let startpos = $startpos
       let tok = MULTILINE_INTERP(string(lexbuf, env~, end_with_newline = true, allow_interp = true, startpos~))
       let endpos = lexbuf.curr_pos()
       env.add_token(tok, env.make_pos(startpos), env.make_pos(endpos))
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "#|" ([^ '\r' '\n']* as s) as repr => {
+    "#|" ([^ '\r' '\n']* as s) => {
       if env.is_interpolation {
-        env.add_lexing_error(start=$startpos(repr), end = $endpos(repr), InterpInvalidMultilineString)
+        env.add_lexing_error(start=$startpos, end=$endpos, InterpInvalidMultilineString)
       }
-      env.add_token_with_loc(MULTILINE_STRING(s), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(MULTILINE_STRING(s), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    '#' ((lower | upper) [^ '\r' '\n']* as attr) as repr => {
+    '#' ((lower | upper) [^ '\r' '\n']* as attr) => {
       if env.is_interpolation {
-        env.add_lexing_error(start=$startpos(repr), end = $endpos(repr), InterpInvalidAttribute)
+        env.add_lexing_error(start=$startpos, end=$endpos, InterpInvalidAttribute)
       }
-      env.add_token_with_loc(ATTRIBUTE(attr), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(ATTRIBUTE(attr), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    '@' ((identifier '/')* identifier as pkgname) as repr => {
-      env.add_token_with_loc(PACKAGE_NAME(pkgname), start=$startpos(repr), end=$endpos(repr))
+    '@' ((identifier '/')* identifier as pkgname) => {
+      env.add_token_with_loc(PACKAGE_NAME(pkgname), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "b'\\x" (hex_digit hex_digit as hex) "'" as repr => {
+    "b'\\x" (hex_digit hex_digit as hex) "'" => {
       let literal = "\\x" + hex
-      env.add_token_with_loc(BYTE(literal), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(BYTE(literal), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "b'\\o" (qua_digit oct_digit oct_digit as oct) "'" as repr => {
+    "b'\\o" (qua_digit oct_digit oct_digit as oct) "'" => {
       let literal = "\\o" + oct
-      env.add_token_with_loc(BYTE(literal), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(BYTE(literal), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "b'" (ascii as ascii) "'" as repr => {
+    "b'" (ascii as ascii) "'" => {
       let literal = ascii
-      env.add_token_with_loc(BYTE([literal]), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(BYTE([literal]), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "b'\\" (['\\' '\'' '"' 'n' 't' 'b' 'r' ' '] as e) "'" as repr => {
+    "b'\\" (['\\' '\'' '"' 'n' 't' 'b' 'r' ' '] as e) "'" => {
       let literal = "\\" + [e]
-      env.add_token_with_loc(BYTE(literal), start=$startpos(repr), end=$endpos(repr))
+      env.add_token_with_loc(BYTE(literal), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     "b'" as repr => {
       invalid_byte(lexbuf, env~, start=$startpos(repr))
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "&&" as repr => {
-      env.add_token_with_loc(AMPERAMPER, start=$startpos(repr), end=$endpos(repr))
+    "&&" => {
+      env.add_token_with_loc(AMPERAMPER, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "&" as repr => {
-      env.add_token_with_loc(AMPER, start=$startpos(repr), end=$endpos(repr))
+    "&" => {
+      env.add_token_with_loc(AMPER, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "^" as repr => {
-      env.add_token_with_loc(CARET, start=$startpos(repr), end=$endpos(repr))
+    "^" => {
+      env.add_token_with_loc(CARET, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "(" as repr => {
-      env.add_token_with_loc(LPAREN, start=$startpos(repr), end=$endpos(repr))
+    "(" => {
+      env.add_token_with_loc(LPAREN, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    ")" as repr => {
-      env.add_token_with_loc(RPAREN, start=$startpos(repr), end=$endpos(repr))
+    ")" => {
+      env.add_token_with_loc(RPAREN, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     (('+' | '-' | '*' | '/' | '%') as op) '=' as repr => {
       env.add_token_with_loc(AUGMENTED_ASSIGNMENT([op]), start=$startpos(repr), end=$endpos(repr))
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "*" as repr => {
-      env.add_token_with_loc(INFIX3("*"), start=$startpos(repr), end=$endpos(repr))
+    "*" => {
+      env.add_token_with_loc(INFIX3("*"), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "/" as repr => {
-      env.add_token_with_loc(INFIX3("/"), start=$startpos(repr), end=$endpos(repr))
+    "/" => {
+      env.add_token_with_loc(INFIX3("/"), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "%" as repr => {
-      env.add_token_with_loc(INFIX3("%"), start=$startpos(repr), end=$endpos(repr))
+    "%" => {
+      env.add_token_with_loc(INFIX3("%"), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "," as repr => {
-      env.add_token_with_loc(COMMA, start=$startpos(repr), end=$endpos(repr))
+    "," => {
+      env.add_token_with_loc(COMMA, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    ".(" as repr => {
-      env.add_token_with_loc(DOT_LPAREN, start=$startpos(repr), end=$endpos(repr))
+    ".(" => {
+      env.add_token_with_loc(DOT_LPAREN, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     "." (digit+ as digits) as repr => {
@@ -443,20 +437,20 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
       env.add_token_with_loc(DOT_INT(idx), start=$startpos(repr), end=$endpos(repr), start_offset = 1)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "..." as repr => {
-      env.add_token_with_loc(ELLIPSIS, start=$startpos(repr), end=$endpos(repr))
+    "..." => {
+      env.add_token_with_loc(ELLIPSIS, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "..=" as repr => {
-      env.add_token_with_loc(RANGE_INCLUSIVE, start=$startpos(repr), end=$endpos(repr))
+    "..=" => {
+      env.add_token_with_loc(RANGE_INCLUSIVE, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "..<" as repr => {
-      env.add_token_with_loc(RANGE_EXCLUSIVE, start=$startpos(repr), end=$endpos(repr))
+    "..<" => {
+      env.add_token_with_loc(RANGE_EXCLUSIVE, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    ".." as repr => {
-      env.add_token_with_loc(DOTDOT, start=$startpos(repr), end=$endpos(repr))
+    ".." => {
+      env.add_token_with_loc(DOTDOT, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     '.' (['A'-'Z'] unicode_id_char* as name) => {
@@ -467,92 +461,96 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
       env.add_token_with_loc(DOT_LIDENT(name), start=$startpos(name), end=$endpos(name))
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "::" as repr => {
-      env.add_token_with_loc(COLONCOLON, start=$startpos(repr), end=$endpos(repr))
+    "::" => {
+      env.add_token_with_loc(COLONCOLON, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    ":" as repr => {
-      env.add_token_with_loc(COLON, start=$startpos(repr), end=$endpos(repr))
+    ":" => {
+      env.add_token_with_loc(COLON, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    ";" as repr => {
-      env.add_token_with_loc(SEMI(true), start=$startpos(repr), end=$endpos(repr))
+    ";" => {
+      env.add_token_with_loc(SEMI(true), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "==" as repr => {
-      env.add_token_with_loc(INFIX1("=="), start=$startpos(repr), end=$endpos(repr))
+    "==" => {
+      env.add_token_with_loc(INFIX1("=="), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "=" as repr => {
-      env.add_token_with_loc(EQUAL, start=$startpos(repr), end=$endpos(repr))
+    "=" => {
+      env.add_token_with_loc(EQUAL, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "<=" | ">=" as repr => {
-      env.add_token_with_loc(INFIX1(repr), start=$startpos(repr), end=$endpos(repr))
+    "<=" => {
+      env.add_token_with_loc(INFIX1("<="), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    ">>" as repr => {
-      env.add_token_with_loc(INFIX2(">>"), start=$startpos(repr), end=$endpos(repr))
+    ">=" => {
+      env.add_token_with_loc(INFIX1(">="), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    ">" as repr => {
-      env.add_token_with_loc(INFIX1(">"), start=$startpos(repr), end=$endpos(repr))
+    ">>" => {
+      env.add_token_with_loc(INFIX2(">>"), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "<<" as repr => {
-      env.add_token_with_loc(INFIX2("<<"), start=$startpos(repr), end=$endpos(repr))
+    ">" => {
+      env.add_token_with_loc(INFIX1(">"), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "<" as repr => {
-      env.add_token_with_loc(INFIX1("<"), start=$startpos(repr), end=$endpos(repr))
+    "<<" => {
+      env.add_token_with_loc(INFIX2("<<"), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "[" as repr => {
-      env.add_token_with_loc(LBRACKET, start=$startpos(repr), end=$endpos(repr))
+    "<" => {
+      env.add_token_with_loc(INFIX1("<"), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "]" as repr => {
-      env.add_token_with_loc(RBRACKET, start=$startpos(repr), end=$endpos(repr))
+    "[" => {
+      env.add_token_with_loc(LBRACKET, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "{" as repr => {
-      env.add_token_with_loc(LBRACE, start=$startpos(repr), end=$endpos(repr))
+    "]" => {
+      env.add_token_with_loc(RBRACKET, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "}" as repr => {
-      env.add_token_with_loc(RBRACE, start=$startpos(repr), end=$endpos(repr))
+    "{" => {
+      env.add_token_with_loc(LBRACE, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "|>" as repr => {
-      env.add_token_with_loc(PIPE, start=$startpos(repr), end=$endpos(repr))
+    "}" => {
+      env.add_token_with_loc(RBRACE, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "||" as repr => {
-      env.add_token_with_loc(BARBAR, start=$startpos(repr), end=$endpos(repr))
+    "|>" => {
+      env.add_token_with_loc(PIPE, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "|" as repr => {
-      env.add_token_with_loc(BAR, start=$startpos(repr), end=$endpos(repr))
+    "||" => {
+      env.add_token_with_loc(BARBAR, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "+" as repr => {
-      env.add_token_with_loc(PLUS, start=$startpos(repr), end=$endpos(repr))
+    "|" => {
+      env.add_token_with_loc(BAR, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "-" as repr => {
-      env.add_token_with_loc(MINUS, start=$startpos(repr), end=$endpos(repr))
+    "+" => {
+      env.add_token_with_loc(PLUS, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "?" as repr => {
-      env.add_token_with_loc(QUESTION, start=$startpos(repr), end=$endpos(repr))
+    "-" => {
+      env.add_token_with_loc(MINUS, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "!=" as repr => {
-      env.add_token_with_loc(INFIX1("!="), start=$startpos(repr), end=$endpos(repr))
+    "?" => {
+      env.add_token_with_loc(QUESTION, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "!" as repr => {
-      env.add_token_with_loc(EXCLAMATION, start=$startpos(repr), end=$endpos(repr))
+    "!=" => {
+      env.add_token_with_loc(INFIX1("!="), start=$startpos, end=$endpos)
+      tokens(lexbuf, env~, preserve_comment~)
+    }
+    "!" => {
+      env.add_token_with_loc(EXCLAMATION, start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     (integer_literal as integer) ".." => {
@@ -561,11 +559,11 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
       tokens(lexbuf, env~, preserve_comment~)
     }
     float_literal as float => {
-      env.add_token_with_loc(FLOAT(float), start=$startpos(float), end=$endpos(float))
+      env.add_token_with_loc(FLOAT(float), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     integer_literal as integer => {
-      env.add_token_with_loc(INT(integer), start=$startpos(integer), end=$endpos(integer))
+      env.add_token_with_loc(INT(integer), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     eof => {
