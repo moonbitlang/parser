@@ -90,7 +90,7 @@ fn LexEnv::add_token(
       let trailing_newlines = @math.minimum(2, count_newlines(i, 1))
       let (_, start, end) = self.tokens[i]
       let kind = if leading_newlines == 0 && not(at_file_start) {
-        InlineTrailing
+        CommentKind::InlineTrailing
       } else {
         Ownline(
           leading_blank_line=leading_newlines == 2 && not(at_file_start),

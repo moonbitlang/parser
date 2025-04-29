@@ -11,13 +11,13 @@ pub typealias ByteLiteral = String
 pub typealias BytesLiteral = String
 
 ///|
-pub struct InterpSource {
+pub(all) struct InterpSource {
   source : String
   loc : Location
 } derive(Show)
 
 ///|
-pub enum InterpElem {
+pub(all) enum InterpElem {
   InterpLit(repr~ : String, loc~ : Location)
   InterpSource(InterpSource)
 } derive(Show)

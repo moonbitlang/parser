@@ -1,0 +1,12 @@
+{
+  "pre-build": [
+    {
+      "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --mode only-tokens $input -o $output",
+      "input": "../parser/parser.mbty",
+      "output": "tokens.mbt"
+    }
+  ],
+  "import": [
+    "moonbitlang/parser/lib/ast_types"
+  ]
+}

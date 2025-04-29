@@ -4112,7 +4112,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       ()
 
       let startpos = _start_pos
-      let tok =
+      let tok : Token =
         match string(lexbuf, env~, end_with_newline = false, allow_interp = true, startpos~) {
           [ InterpLit(repr~, ..) ] => STRING(repr)
           interps => INTERP(interps)
@@ -4126,7 +4126,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       ()
 
       let startpos = _start_pos
-      let tok =
+      let tok : Token =
         match string(lexbuf, env~, end_with_newline = false, allow_interp = false, startpos~) {
           [ InterpLit(repr~, ..) ] => STRING(repr)
           _interps => panic()
@@ -4143,7 +4143,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         env.add_lexing_error(start=_start_pos, end = _end_pos, InterpInvalidMultilineString)
       }
       let startpos = _start_pos
-      let tok = MULTILINE_INTERP(string(lexbuf, env~, end_with_newline = true, allow_interp = true, startpos~))
+      let tok : Token = MULTILINE_INTERP(string(lexbuf, env~, end_with_newline = true, allow_interp = true, startpos~))
       let endpos = lexbuf.curr_pos()
       env.add_token(tok, env.make_pos(startpos), env.make_pos(endpos))
       tokens(lexbuf, env~, preserve_comment~)

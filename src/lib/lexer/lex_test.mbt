@@ -1,6 +1,6 @@
 ///|
 fn test_tokens(t : @test.T, label : String) -> Unit!Error {
-  let source = @fs.read_file_to_bytes!("src/lib/fixtures/\{label}.mbt_")
+  let source = @fs.read_file_to_bytes!("src/lib/lexer/fixtures/\{label}.mbt_")
   let result = tokens_from_bytes(comment=true, source)
   let buf = StringBuilder::new()
   for triple in result.tokens {
