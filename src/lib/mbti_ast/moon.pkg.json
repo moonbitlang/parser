@@ -1,0 +1,6 @@
+{
+  "import": [
+    "moonbitlang/parser/lib/ast_types",
+    "moonbitlang/parser/lib/ast"
+  ]
+}

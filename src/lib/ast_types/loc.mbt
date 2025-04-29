@@ -4,7 +4,7 @@ pub(all) struct Position {
   lnum : Int
   bol : Int
   cnum : Int
-} derive(Show)
+} derive(Show, ToJson)
 
 ///|
 fn column(self : Position) -> Int {
@@ -15,4 +15,4 @@ fn column(self : Position) -> Int {
 pub(all) struct Location {
   start : Position
   end : Position
-} derive(Show)
+} derive(Show, ToJson)
