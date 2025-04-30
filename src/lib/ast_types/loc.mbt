@@ -20,4 +20,11 @@ fn column(self : Position) -> Int {
 pub(all) struct Location {
   start : Position
   end : Position
-} derive(Show, ToJson)
+} derive(Show)
+
+///|
+pub impl ToJson for Location with to_json(self) {
+  Json::string(
+    "\{self.start.fname}:\{self.start.lnum}:\{self.start.cnum-self.start.bol}-\{self.end.lnum}:\{self.end.cnum-self.end.bol}",
+  )
+}
