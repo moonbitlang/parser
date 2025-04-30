@@ -1,25 +1,26 @@
-%start<unit> t
+%position<@ast_types.Position>
+%start mbti
 
-%token CHAR
-%token INT
-%token BYTE
-%token BYTES
-%token FLOAT
-%token STRING
-%token MULTILINE_STRING
-%token MULTILINE_INTERP
-%token INTERP
-%token ATTRIBUTE
-%token LIDENT
-%token UIDENT
-%token POST_LABEL
-%token COMMENT
+%token<CharLiteral> CHAR
+%token<String> INT
+%token<CharLiteral> BYTE
+%token<StringLiteral> BYTES
+%token<String> FLOAT
+%token<StringLiteral> STRING
+%token<String> MULTILINE_STRING
+%token<InterpLiteral> MULTILINE_INTERP
+%token<InterpLiteral> INTERP
+%token<String> ATTRIBUTE
+%token<String> LIDENT
+%token<String> UIDENT
+%token<String> POST_LABEL
+%token<Comment> COMMENT
 %token NEWLINE
-%token INFIX1
-%token INFIX2
-%token INFIX3
-%token INFIX4
-%token AUGMENTED_ASSIGNMENT
+%token<String> INFIX1
+%token<String> INFIX2
+%token<String> INFIX3
+%token<String> INFIX4
+%token<String> AUGMENTED_ASSIGNMENT
 %token EOF
 %token FALSE
 %token TRUE
@@ -51,13 +52,13 @@
 %token MINUS "-"
 %token QUESTION "?"
 %token EXCLAMATION "!"
-%token DOT_LIDENT
-%token DOT_UIDENT
-%token DOT_INT
+%token<String> DOT_LIDENT
+%token<String> DOT_UIDENT
+%token<Int> DOT_INT
 %token DOT_LPAREN ".("
 %token COLONCOLON "::"
 %token COLON ":"
-%token SEMI ";"
+%token<Bool> SEMI ";"
 %token LBRACKET "["
 %token PLUS "+"
 %token RBRACKET "]"
@@ -69,7 +70,7 @@
 %token AMPER "&"
 %token CARET "^"
 %token BARBAR "||"
-%token PACKAGE_NAME
+%token<String> PACKAGE_NAME
 %token AS "as"
 %token PIPE "|>"
 %token ELSE "else"
@@ -100,226 +101,239 @@
 
 %%
 
-t
-  : LIDENT STRING ioption(";") imports sigs EOF {}
+mbti -> Mbti
+  : LIDENT STRING ioption(";") imports sigs EOF { Mbti::{package_name: $2, imports: $4, sigs: $5} }
   ;
 
-imports
-  :  {}
-  | "import" "(" separated_nonempty_list(";", package_import) ")" ";" {}
+imports -> @immut/list.T[PackageImport]
+  :  { Nil }
+  | "import" "(" separated_nonempty_list(";", package_import) ")" ";" { $3 }
   ;
 
-package_import
-  : STRING {}
-  | STRING "as" LIDENT {}
+package_import -> PackageImport
+  : STRING { PackageImport::{name: $1, alias_: None} }
+  | STRING "as" LIDENT { PackageImport::{name: $1, alias_: Some($3)} }
   ;
 
-sigs
-  :  {}
-  | sig_ {}
-  | sig_ ";" sigs {}
+sigs -> @immut/list.T[(Sig, Location)]
+  :  { Nil }
+  | sig_ { Cons(($1, mk_loc($sloc)), Nil) }
+  | sig_ ";" sigs { Cons(($1, mk_loc($loc($1))), $3) }
   ;
 
-sig_
-  : func_sig {}
-  | type_sig {}
-  | alias_sig {}
-  | trait_sig {}
-  | impl_sig {}
-  | const_sig {}
-  | value_sig {}
+sig_ -> Sig
+  : func_sig { Func($1) }
+  | type_sig { Type($1) }
+  | alias_sig { Alias($1) }
+  | trait_sig { Trait($1) }
+  | impl_sig { Impl($1) }
+  | const_sig { Const($1) }
+  | value_sig { Value($1) }
   ;
 
-const_sig
-  : "const" uident ":" type_ "=" constant {}
+const_sig -> ConstSig
+  : "const" uident ":" type_ "=" constant { ConstSig::{name: $2, type_: $4, value: $6} }
   ;
 
-value_sig
-  : "let" lident ":" type_ {}
+value_sig -> ValueSig
+  : "let" lident ":" type_ { ValueSig::{name: $2, type_: $4} }
   ;
 
-func_sig_no_attr
-  : FN lident loption(type_params_with_constraints) delimited("(", separated_list(",", parameter), ")") "->" return_type {}
+func_sig_no_attr -> FuncSig
+  : FN lident loption(type_params_with_constraints) delimited("(", separated_list(",", parameter), ")") "->" return_type { FuncSig::{name: $2, type_params: $3, params: $4, return_: $6} }
   ;
 
-func_sig
-  : func_sig_no_attr {}
-  | nonempty_list(ATTRIBUTE) func_sig_no_attr {}
+func_sig -> FuncSig
+  : func_sig_no_attr { $1 }
+  | nonempty_list(ATTRIBUTE) func_sig_no_attr { $2 } /* todo: attributes are discarded */
   ;
 
-impl_method_sig
-  : list(ATTRIBUTE) lident loption(type_params_with_constraints) delimited("(", separated_list(",", parameter), ")") "->" return_type {}
+impl_method_sig -> FuncSig
+  : list(ATTRIBUTE) lident loption(type_params_with_constraints) delimited("(", separated_list(",", parameter), ")") "->" return_type { FuncSig::{name: $2, type_params: $3, params: $4, return_: $6} }
   ;
 
-trait_method_sig
-  : lident delimited("(", separated_list(",", trait_method_parameter), ")") "->" return_type option(eq_underscore) {}
+trait_method_sig -> TraitMethodSig
+  : lident delimited("(", separated_list(",", trait_method_parameter), ")") "->" return_type boption(eq_underscore) { TraitMethodSig::{name: $1, params: $2, return_: $4, has_default: $5} }
   ;
 
 %inline eq_underscore
   : "=" "_" {}
   ;
 
-type_sig
-  : vis "extern" "type" type_decl_name_with_params {}
-  | vis "type" type_decl_name_with_params {}
-  | vis "type" type_decl_name_with_params type_ {}
-  | vis "type" "!" UIDENT option(type_) {}
-  | vis "type" "!" UIDENT "{" separated_list(";", enum_constructor) "}" {}
-  | vis "struct" type_decl_name_with_params "{" separated_list(";", record_decl_field) "}" {}
-  | vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" {}
+type_sig -> TypeSig
+  : vis "extern" "type" type_decl_name_with_params { TypeSig::{vis: $1, name: $4.0, type_params: $4.1, components: Extern} }
+  | vis "type" type_decl_name_with_params { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Abstract} }
+  | vis "type" type_decl_name_with_params type_ { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Newtype($4)} }
+  | vis "type" "!" uident { TypeSig::{vis: $1, name: $4, type_params: Nil, components: Error(NoPayload)} }
+  | vis "type" "!" uident type_ { TypeSig::{vis: $1, name: $4, type_params: Nil, components: Error(SinglePayload($5))} }
+  | vis "type" "!" uident "{" separated_list(";", enum_constructor) "}" { TypeSig::{vis: $1, name: $4, type_params: Nil, components: Error(EnumPayload($6))} }
+  | vis "struct" type_decl_name_with_params "{" separated_list(";", record_decl_field) "}" { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Record($5)} }
+  | vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Variant($5)} }
   ;
 
-impl_sig
-  : "impl" type_params_with_constraints qualified_uident "for" type_ {}
-  | "impl" qualified_uident "for" type_ {}
-  | "impl" uident "{" separated_nonempty_list(";", impl_method_sig) "}" {}
-  | "impl" uident "::" lident {}
+impl_sig -> ImplSig
+  : "impl" type_params_with_constraints qualified_uident "for" type_ { Trait(type_params=$2, trait_name=$3, type_=$5) }
+  | "impl" qualified_uident "for" type_ { Trait(type_params=Nil, trait_name=$2, type_=$4) }
+  | "impl" uident "{" separated_nonempty_list(";", impl_method_sig) "}" { Methods(type_name=$2, methods=$4) }
+  | "impl" uident "::" lident { DefaultImpl(trait_name=$2, method_name=$4) }
   ;
 
-trait_sig
-  : vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) "{" separated_nonempty_list(";", trait_method_sig) "}" {}
-  | vis "trait" uident {}
+trait_sig -> TraitSig
+  : vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) "{" separated_nonempty_list(";", trait_method_sig) "}" { TraitSig::{vis: $1, name: $3, super_traits: $4, methods: $6} }
+  | vis "trait" uident { TraitSig::{vis: $1, name: $3, super_traits: Nil, methods: Nil} }
   ;
 
-alias_sig
-  : vis "typealias" type_decl_name_with_params "=" type_ {}
-  | vis "traitalias" uident "=" qualified_uident {}
+alias_sig -> AliasSig
+  : vis "typealias" type_decl_name_with_params "=" type_ { TypeAlias(vis=$1, name=$3.0, type_params=$3.1, type_=$5) }
+  | vis "traitalias" uident "=" qualified_uident { TraitAlias(vis=$1, name=$3, trait_name=$5) }
   ;
 
-enum_constructor
-  : UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {}
+enum_constructor -> ConstrDecl
+  : uident option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { ConstrDecl::{name: $1, args: $2, tag: $3, loc: mk_loc($sloc)} }
   ;
 
-%inline eq_tag
-  : "=" INT {}
+%inline eq_tag -> (String, Location)
+  : "=" INT { ($2, mk_loc($loc($2))) }
   ;
 
-constructor_param
-  : option("mut") type_ {}
-  | option("mut") POST_LABEL ":" type_ {}
+constructor_param -> ConstrParam
+  : boption("mut") type_ { ConstrParam::{mut_: $1, type_: $2, label: None} }
+  | boption("mut") post_label ":" type_ { ConstrParam::{mut_: $1, type_: $4, label: Some($2)} }
   ;
 
-record_decl_field
-  : option("mut") LIDENT ":" type_ {}
+record_decl_field -> FieldDecl
+  : boption("mut") lident ":" type_ { FieldDecl::{name: $2, vis: Default, mut_: $1, type_: $4, loc: mk_loc($sloc)} }
   ;
 
-type_param_with_constraints
-  : uident {}
-  | uident ":" separated_nonempty_list("+", type_constraint) {}
+type_param_with_constraints -> TypeParamWithConstraints
+  : uident { TypeParamWithConstraints::{name: $1, constraints: Nil} }
+  | uident ":" separated_nonempty_list("+", type_constraint) { TypeParamWithConstraints::{name: $1, constraints: $3} }
   ;
 
-type_params_with_constraints
-  : "[" separated_list(",", type_param_with_constraints) "]" {}
+type_params_with_constraints -> @immut/list.T[TypeParamWithConstraints]
+  : "[" separated_list(",", type_param_with_constraints) "]" { $2 }
   ;
 
-type_param_no_constraints
-  : uident {}
-  | "_" {}
+type_param_no_constraints -> TypeParamNoConstraints
+  : uident { Name($1) }
+  | "_" { Underscore(mk_loc($sloc)) }
   ;
 
-type_params_no_constraints
-  : "[" separated_list(",", type_param_no_constraints) "]" {}
+type_params_no_constraints -> @immut/list.T[TypeParamNoConstraints]
+  : "[" separated_list(",", type_param_no_constraints) "]" { $2 }
   ;
 
-optional_type_params_no_constraints
-  :  {}
-  | type_params_no_constraints {}
+optional_type_params_no_constraints -> @immut/list.T[TypeParamNoConstraints]
+  : { Nil }
+  | type_params_no_constraints { $1 }
   ;
 
-type_constraint
-  : qualified_uident {}
+type_constraint -> QualifiedName
+  : qualified_uident { $1 }
   ;
 
-type_decl_name_with_params
-  : uident optional_type_params_no_constraints {}
+type_decl_name_with_params -> (Name, @immut/list.T[TypeParamNoConstraints])
+  : uident optional_type_params_no_constraints { ($1, $2) }
   ;
 
-type_
-  : type_ "?" {}
-  | "(" type_ "," separated_nonempty_list(",", type_) ")" {}
-  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type {}
-  | is_async "(" ")" "->" return_type {}
-  | "(" type_ ")" {}
-  | is_async "(" type_ ")" "->" return_type {}
-  | qualified_uident_ optional_type_arguments {}
-  | "&" qualified_uident_ {}
-  | "_" {}
+type_ -> Type
+  : type_ "?" { TOption($1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
+  | "(" type_ "," separated_nonempty_list(",", type_) ")" { TTuple(Cons($2, $4), loc=mk_loc($sloc)) }
+  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { TArrow(Cons($3, $5.or(Nil)), $8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" ")" "->" return_type { TArrow(Nil, $5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
+  | "(" type_ ")" { $2 }
+  | is_async "(" type_ ")" "->" return_type { TArrow(Cons($3, Nil), $6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
+  | qualified_uident_ optional_type_arguments { TName($1, $2, loc=mk_loc($sloc)) }
+  | "&" qualified_uident_ { TObject($2) }
+  | "_" { TAny(mk_loc($sloc)) }
   ;
 
-return_type
-  : type_ %prec prec_type {}
-  | type_ "!" {}
-  | type_ "!" separated_nonempty_list("+", error_type) {}
+return_type -> (Type, ErrorType)
+  : type_ %prec prec_type { ($1, NoErrorType) }
+  | type_ "!" { ($1, DefaultErrorType(mk_loc($loc($2)))) }
+  | type_ "!" separated_nonempty_list("+", error_type) { ($1, ErrorType($3)) }
   ;
 
-error_type
-  : qualified_uident_ {}
+error_type -> Type
+  : qualified_uident_ { TName($1, Nil, loc=mk_loc($sloc)) }
   ;
 
-optional_type_arguments
-  : delimited("[", separated_nonempty_list(",", type_), "]") {}
-  |  {}
+optional_type_arguments -> @immut/list.T[Type]
+  : delimited("[", separated_nonempty_list(",", type_), "]") { $1 }
+  |  { Nil }
   ;
 
-parameter
-  : type_ {}
-  | POST_LABEL ":" type_ {}
-  | POST_LABEL ":" type_ "=" ".." {}
-  | POST_LABEL ":" type_ "=" "_" {}
-  | label "?" ":" type_ {}
+parameter -> Parameter
+  : type_ { Positional($1) }
+  | post_label ":" type_ { Labelled($1, $3) }
+  | post_label ":" type_ "=" ".." { OptionalDefault($1, $3) }
+  | post_label ":" type_ "=" "_" { Autofill($1, $3) }
+  | label "?" ":" type_ { OptionalOption($1, $4) }
   ;
 
-trait_method_parameter
-  : type_ {}
-  | POST_LABEL ":" type_ {}
+trait_method_parameter -> TraitMethodParameter
+  : type_ { Positional($1) }
+  | post_label ":" type_ { Labelled($1, $3) }
   ;
 
-constant
-  : TRUE {}
-  | FALSE {}
-  | BYTE {}
-  | BYTES {}
-  | CHAR {}
-  | INT {}
-  | FLOAT {}
-  | STRING {}
+constant -> Constant
+  : TRUE { Bool(true) }
+  | FALSE { Bool(false) }
+  | BYTE { Byte($1) }
+  | BYTES { Bytes($1) }
+  | CHAR { Char($1) }
+  | INT {
+    match $1 {
+      [.. lit, .. "UL"] => UInt64(lit.to_string())
+      [.. lit, 'L'] => Int64(lit.to_string())
+      [.. lit, 'U'] => UInt(lit.to_string())
+      [.. lit, 'N'] => BigInt(lit.to_string())
+      lit => Int(lit)
+    }
+  }
+  | FLOAT { Double($1) }
+  | STRING { String($1) }
   ;
 
-%inline vis
-  :  {}
-  | "priv" {}
-  | "pub" pub_attr {}
+%inline vis -> Visibility
+  : { Default }
+  | "priv" { Priv(loc=mk_loc($sloc)) }
+  | "pub" pub_attr { Pub(attr=$2, loc=mk_loc($sloc)) }
   ;
 
-pub_attr
-  :  {}
-  | "(" "readonly" ")" {}
-  | "(" LIDENT ")" {}
+pub_attr -> String?
+  : { None }
+  | "(" "readonly" ")" { Some("readonly") }
+  | "(" LIDENT ")" { Some($2) }
   ;
 
-%inline is_async
-  : "async" {}
-  |  {}
+%inline is_async -> Bool
+  : "async" { true }
+  | { false }
   ;
 
-qualified_uident
-  : UIDENT {}
-  | PACKAGE_NAME DOT_UIDENT {}
+qualified_uident -> QualifiedName
+  : UIDENT { QualifiedName::{pkg: None, name: $1, loc: mk_loc($sloc)} }
+  | PACKAGE_NAME DOT_UIDENT { QualifiedName::{pkg: Some($1), name: $2, loc: mk_loc($sloc)} }
   ;
 
-qualified_uident_
-  : UIDENT {}
-  | PACKAGE_NAME DOT_UIDENT {}
+qualified_uident_ -> QualifiedName
+  : UIDENT { QualifiedName::{pkg: None, name: $1, loc: mk_loc($sloc)} }
+  | PACKAGE_NAME DOT_UIDENT { QualifiedName::{pkg: Some($1), name: $2, loc: mk_loc($sloc)} }
   ;
 
-uident
-  : UIDENT {}
+uident -> Name
+  : UIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
   ;
 
-lident
-  : LIDENT {}
+lident -> Name
+  : LIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
   ;
 
-label
-  : LIDENT {}
+label -> Name
+  : LIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
+  ;
+
+post_label -> Name
+  : POST_LABEL { Name::{name: $1, loc: mk_loc($sloc)} }
   ;

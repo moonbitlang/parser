@@ -1,1 +1,20 @@
-{}
+{
+  "pre-build": [
+    {
+      "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --external-tokens --input-mode array $input -o $output",
+      "input": "mbti_parser.mbty",
+      "output": "mbti_parser.mbt"
+    }
+  ],
+  "import": [
+    "moonbitlang/parser/lib/tokens",
+    "moonbitlang/parser/lib/ast_types",
+    "moonbitlang/parser/lib/mbti_ast",
+    "moonbitlang/parser/lib/ast"
+  ],
+  "warn-list": "-6",
+  "test-import": [
+    "moonbitlang/x/fs",
+    "moonbitlang/parser/lib/lexer"
+  ]
+}

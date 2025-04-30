@@ -9,5 +9,8 @@ pub typealias @ast.(
   QualifiedName,
   Type,
   ErrorType,
-  TypeDesc
+  TypeDesc,
+  FieldDecl,
+  ConstrDecl,
+  ConstrParam
 )

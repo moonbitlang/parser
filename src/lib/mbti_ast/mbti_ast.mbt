@@ -1,6 +1,6 @@
 ///|
 pub(all) struct TypeParamWithConstraints {
-  name : String
+  name : Name
   constraints : @immut/list.T[QualifiedName]
 } derive(ToJson)
 
@@ -45,7 +45,7 @@ pub(all) struct TypeSig {
 pub(all) enum AliasSig {
   TypeAlias(
     name~ : Name,
-    type_params~ : TypeParamNoConstraints,
+    type_params~ : @immut/list.T[TypeParamNoConstraints],
     type_~ : Type,
     vis~ : Visibility
   )
@@ -75,7 +75,7 @@ pub(all) enum ImplSig {
     type_~ : Type,
     trait_name~ : QualifiedName
   )
-  Method(type_name~ : Name, methods~ : @immut/list.T[FuncSig])
+  Methods(type_name~ : Name, methods~ : @immut/list.T[FuncSig])
   DefaultImpl(trait_name~ : Name, method_name~ : Name)
 } derive(ToJson)
 
