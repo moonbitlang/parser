@@ -41,25 +41,21 @@ pub fn Lexbuf::reset(self : Lexbuf, pos~ : Int) -> Unit {
 fn Lexbuf::get_char(self : Lexbuf, start : Int, end : Int) -> Char {
   match self.content[start:end] {
     // 1-byte sequence (ASCII): 0xxxxxxx
-    [0x00..=0x7F as b] => Char::from_int(b.to_int())
+    [0x00..=0x7F as b] => b.to_int().unsafe_to_char()
     // 2-byte sequence: 110xxxxx 10xxxxxx
     [0xC0..=0xDF as b1, 0x80..=0xBF as b2] =>
-      Char::from_int(((b1.to_int() & 0x1F) << 6) | (b2.to_int() & 0x3F))
+      (((b1.to_int() & 0x1F) << 6) | (b2.to_int() & 0x3F)).unsafe_to_char()
     // 3-byte sequence: 1110xxxx 10xxxxxx 10xxxxxx
     [0xE0..=0xEF as b1, 0x80..=0xBF as b2, 0x80..=0xBF as b3] =>
-      Char::from_int(
-        ((b1.to_int() & 0x0F) << 12) |
-        ((b2.to_int() & 0x3F) << 6) |
-        (b3.to_int() & 0x3F),
-      )
+      (((b1.to_int() & 0x0F) << 12) |
+      ((b2.to_int() & 0x3F) << 6) |
+      (b3.to_int() & 0x3F)).unsafe_to_char()
     // 4-byte sequence: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
     [0xF0..=0xF7 as b1, 0x80..=0xBF as b2, 0x80..=0xBF as b3, 0x80..=0xBF as b4] =>
-      Char::from_int(
-        ((b1.to_int() & 0x07) << 18) |
-        ((b2.to_int() & 0x3F) << 12) |
-        ((b3.to_int() & 0x3F) << 6) |
-        (b4.to_int() & 0x3F),
-      )
+      (((b1.to_int() & 0x07) << 18) |
+      ((b2.to_int() & 0x3F) << 12) |
+      ((b3.to_int() & 0x3F) << 6) |
+      (b4.to_int() & 0x3F)).unsafe_to_char()
     _ => panic()
   }
 }
@@ -70,14 +66,14 @@ fn Lexbuf::get_string(self : Lexbuf, start : Int, end : Int) -> String {
   loop self.content[start:end] {
     // 1-byte sequence (ASCII): 0xxxxxxx
     [0x00..=0x7F as b, .. next] => {
-      buf.write_char(Char::from_int(b.to_int()))
+      buf.write_char(b.to_int().unsafe_to_char())
       continue next
     }
 
     // 2-byte sequence: 110xxxxx 10xxxxxx
     [0xC0..=0xDF as b1, 0x80..=0xBF as b2, .. next] => {
       buf.write_char(
-        Char::from_int(((b1.to_int() & 0x1F) << 6) | (b2.to_int() & 0x3F)),
+        (((b1.to_int() & 0x1F) << 6) | (b2.to_int() & 0x3F)).unsafe_to_char(),
       )
       continue next
     }
@@ -85,11 +81,11 @@ fn Lexbuf::get_string(self : Lexbuf, start : Int, end : Int) -> String {
     // 3-byte sequence: 1110xxxx 10xxxxxx 10xxxxxx
     [0xE0..=0xEF as b1, 0x80..=0xBF as b2, 0x80..=0xBF as b3, .. next] => {
       buf.write_char(
-        Char::from_int(
+        (
           ((b1.to_int() & 0x0F) << 12) |
           ((b2.to_int() & 0x3F) << 6) |
           (b3.to_int() & 0x3F),
-        ),
+        ).unsafe_to_char(),
       )
       continue next
     }
@@ -103,12 +99,12 @@ fn Lexbuf::get_string(self : Lexbuf, start : Int, end : Int) -> String {
       .. next,
     ] => {
       buf.write_char(
-        Char::from_int(
+        (
           ((b1.to_int() & 0x07) << 18) |
           ((b2.to_int() & 0x3F) << 12) |
           ((b3.to_int() & 0x3F) << 6) |
           (b4.to_int() & 0x3F),
-        ),
+        ).unsafe_to_char(),
       )
       continue next
     }

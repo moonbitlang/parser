@@ -4135,7 +4135,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         env.add_lexing_error(Reserved_keyword(raw), start=_start_pos, end=_end_pos)
       }
       env.add_token_with_loc(
-        match keyword_table[raw] {
+        match keyword_table.get(raw) {
           None => LIDENT(raw)
           Some(tok) => tok
         },

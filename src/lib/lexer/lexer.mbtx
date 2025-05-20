@@ -583,7 +583,7 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
         env.add_lexing_error(Reserved_keyword(raw), start=$startpos, end=$endpos)
       }
       env.add_token_with_loc(
-        match keyword_table[raw] {
+        match keyword_table.get(raw) {
           None => LIDENT(raw)
           Some(tok) => tok
         },
