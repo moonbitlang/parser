@@ -1,4 +1,5 @@
 %position<@ast_types.Position>
+%derive<Show> ParseError
 %start mbti
 
 %token<CharLiteral> CHAR
