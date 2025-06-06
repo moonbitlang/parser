@@ -97,9 +97,6 @@
 %token IN "in"
 %token IS "is"
 
-%nonassoc prec_type
-%nonassoc "?" "!"
-
 %%
 
 mbti -> Mbti
@@ -140,8 +137,13 @@ value_sig -> ValueSig
   : "let" lident ":" type_ { ValueSig::{name: $2, type_: $4} }
   ;
 
+method_prefix -> Option[Name]
+  : { None }
+  | uident "::" { Some($1) }
+  ;
+
 func_sig_no_attr -> FuncSig
-  : FN lident loption(type_params_with_constraints) delimited("(", separated_list(",", parameter), ")") "->" return_type { FuncSig::{name: $2, type_params: $3, params: $4, return_: $6} }
+  : FN loption(type_params_with_constraints) method_prefix lident delimited("(", separated_list(",", parameter), ")") "->" return_type { FuncSig::{type_name: $3, name: $4, type_params: $2, params: $5, return_: $7} }
   ;
 
 func_sig -> FuncSig
@@ -175,7 +177,6 @@ type_sig -> TypeSig
 impl_sig -> ImplSig
   : "impl" type_params_with_constraints qualified_uident "for" type_ { Trait(type_params=$2, trait_name=$3, type_=$5) }
   | "impl" qualified_uident "for" type_ { Trait(type_params=Nil, trait_name=$2, type_=$4) }
-  | "impl" uident "{" separated_nonempty_list(";", impl_method_sig) "}" { Methods(type_name=$2, methods=$4) }
   | "impl" uident "::" lident { DefaultImpl(trait_name=$2, method_name=$4) }
   ;
 
@@ -237,22 +238,27 @@ type_decl_name_with_params -> (Name, @immut/list.T[TypeParamNoConstraints])
   : uident optional_type_params_no_constraints { ($1, $2) }
   ;
 
-type_ -> Type
-  : type_ "?" { TOption($1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
+simple_type -> Type
+  : simple_type "?" { TOption($1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
   | "(" type_ "," separated_nonempty_list(",", type_) ")" { TTuple(Cons($2, $4), loc=mk_loc($sloc)) }
-  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { TArrow(Cons($3, $5.or(Nil)), $8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
-  | is_async "(" ")" "->" return_type { TArrow(Nil, $5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
   | "(" type_ ")" { $2 }
-  | is_async "(" type_ ")" "->" return_type { TArrow(Cons($3, Nil), $6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
   | qualified_uident_ optional_type_arguments { TName($1, $2, loc=mk_loc($sloc)) }
   | "&" qualified_uident_ { TObject($2) }
   | "_" { TAny(mk_loc($sloc)) }
+  
+
+type_ -> Type
+  : simple_type { $1 }
+  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { TArrow(Cons($3, $5.or(Nil)), $8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" ")" "->" return_type { TArrow(Nil, $5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" type_ ")" "->" return_type { TArrow(Cons($3, Nil), $6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
   ;
 
 return_type -> (Type, ErrorType)
-  : type_ %prec prec_type { ($1, NoErrorType) }
-  | type_ "!" { ($1, DefaultErrorType(mk_loc($loc($2)))) }
-  | type_ "!" separated_nonempty_list("+", error_type) { ($1, ErrorType($3)) }
+  : type_ { ($1, NoErrorType) }
+  | simple_type "!" { ($1, DefaultErrorType(mk_loc($loc($2)))) }
+  | simple_type "!" separated_nonempty_list("+", error_type) { ($1, ErrorType($3)) }
+  | simple_type "?" error_type { ($1, MaybeError($3)) }
   ;
 
 error_type -> Type

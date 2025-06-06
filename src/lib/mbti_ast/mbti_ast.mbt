@@ -27,6 +27,7 @@ pub(all) enum TraitMethodParameter {
 
 ///|
 pub(all) struct FuncSig {
+  type_name : Name?
   name : Name
   params : @immut/list.T[Parameter]
   return_ : (Type, ErrorType)
@@ -75,7 +76,6 @@ pub(all) enum ImplSig {
     type_~ : Type,
     trait_name~ : QualifiedName
   )
-  Methods(type_name~ : Name, methods~ : @immut/list.T[FuncSig])
   DefaultImpl(trait_name~ : Name, method_name~ : Name)
 } derive(ToJson)
 

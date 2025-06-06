@@ -54,6 +54,7 @@ pub(all) enum ErrorType {
   ErrorType(@immut/list.T[Type])
   DefaultErrorType(Location)
   NoErrorType
+  MaybeError(Type)
 } derive(ToJson)
 
 ///|
