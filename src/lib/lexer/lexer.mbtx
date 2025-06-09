@@ -41,8 +41,14 @@ regex decimal = digit (digit | '_')*;
 
 regex integer_literal = (decimal | hexidecimal | octal | binary) ("UL"? | "U"? | 'L'? | 'N'?);
 
-regex float_dec = decimal '.' (digit | '_')* (['e' 'E'] ['+' '-']? decimal)?;
-regex float_hex = hexidecimal '.' (hex_digit | '_')* (['p' 'P'] ['+' '-']? decimal)?;
+regex double_dec = decimal '.' (digit | '_')* (['e' 'E'] ['+' '-']? decimal)?;
+regex double_hex = hexidecimal '.' (hex_digit | '_')* (['p' 'P'] ['+' '-']? decimal)?;
+
+regex double_literal = double_dec | double_hex;
+
+
+regex float_dec = decimal '.' (digit | '_')* (['e' 'E'] ['+' '-']? decimal)? 'F';
+regex float_hex = hexidecimal '.' (hex_digit | '_')* (['p' 'P'] ['+' '-']? decimal) 'F';
 
 regex float_literal = float_dec | float_hex;
 
@@ -560,6 +566,10 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
     }
     float_literal as float => {
       env.add_token_with_loc(FLOAT(float), start=$startpos, end=$endpos)
+      tokens(lexbuf, env~, preserve_comment~)
+    }
+    double_literal as double => {
+      env.add_token_with_loc(DOUBLE(double), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     integer_literal as integer => {

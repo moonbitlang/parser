@@ -1408,15 +1408,15 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
     }
     1 => {
-      if matched >= 66 {
-        matched = 66
+      if matched >= 67 {
+        matched = 67
         _end_pos = lexbuf.curr_pos()
       }
       break
     }
     2 => {
-      if matched >= 70 {
-        matched = 70
+      if matched >= 71 {
+        matched = 71
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -1475,8 +1475,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       break
     }
     8 => {
-      if matched >= 70 {
-        matched = 70
+      if matched >= 71 {
+        matched = 71
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -1489,8 +1489,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
     }
     9 => {
-      if matched >= 70 {
-        matched = 70
+      if matched >= 71 {
+        matched = 71
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -1521,8 +1521,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
     }
     12 => {
-      if matched >= 70 {
-        matched = 70
+      if matched >= 71 {
+        matched = 71
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -1594,8 +1594,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
     }
     19 => {
-      if matched >= 70 {
-        matched = 70
+      if matched >= 71 {
+        matched = 71
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -1635,8 +1635,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
     }
     21 => {
-      if matched >= 65 {
-        matched = 65
+      if matched >= 66 {
+        matched = 66
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -1658,8 +1658,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
     }
     22 => {
-      if matched >= 65 {
-        matched = 65
+      if matched >= 66 {
+        matched = 66
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -1732,8 +1732,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       break
     }
     29 => {
-      if matched >= 70 {
-        matched = 70
+      if matched >= 71 {
+        matched = 71
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -1746,8 +1746,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
     }
     30 => {
-      if matched >= 67 {
-        matched = 67
+      if matched >= 68 {
+        matched = 68
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -1795,8 +1795,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       break
     }
     34 => {
-      if matched >= 69 {
-        matched = 69
+      if matched >= 70 {
+        matched = 70
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -1824,8 +1824,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
     }
     35 => {
-      if matched >= 69 {
-        matched = 69
+      if matched >= 70 {
+        matched = 70
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -2030,8 +2030,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
     }
     57 => {
-      if matched >= 68 {
-        matched = 68
+      if matched >= 69 {
+        matched = 69
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos + -1
@@ -2191,8 +2191,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
     }
     80 => {
-      if matched >= 64 {
-        matched = 64
+      if matched >= 65 {
+        matched = 65
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -2201,6 +2201,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         46 => 148
         48..=57 => 149
         69 => 150
+        70 => 151
         95 => 149
         101 => 150
         _ => break
@@ -2208,46 +2209,46 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
     }
     81 => {
       continue match lexbuf.next_as_int() {
-        48..=49 => 152
+        48..=49 => 153
         _ => break
       }
     }
     82 => {
-      if matched >= 65 {
-        matched = 65
+      if matched >= 66 {
+        matched = 66
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
       }
       continue match lexbuf.next_as_int() {
-        46 => 151
+        46 => 152
         _ => break
       }
     }
     83 => {
       continue match lexbuf.next_as_int() {
-        48..=55 => 153
+        48..=55 => 154
         _ => break
       }
     }
     84 => {
-      if matched >= 65 {
-        matched = 65
+      if matched >= 66 {
+        matched = 66
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
       }
       continue match lexbuf.next_as_int() {
-        46 => 151
+        46 => 152
         76 => 82
         _ => break
       }
     }
     85 => {
       continue match lexbuf.next_as_int() {
-        48..=57 => 154
-        65..=70 => 154
-        97..=102 => 154
+        48..=57 => 155
+        65..=70 => 155
+        97..=102 => 155
         _ => break
       }
     }
@@ -2320,9 +2321,9 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         _end_pos = lexbuf.curr_pos()
       }
       continue match lexbuf.next_as_int() {
-        46 => 171
-        60 => 172
-        61 => 173
+        46 => 172
+        60 => 173
+        61 => 174
         _ => break
       }
     }
@@ -2352,19 +2353,19 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         65..=90 => 97
         95 => 97
         97..=122 => 97
-        194 => 159
-        195..=201 => 160
-        202 => 161
-        225 => 162
-        226 => 163
-        227 => 164
-        228..=233 => 165
-        234 => 166
-        235..=236 => 165
-        237 => 167
-        239 => 168
-        240 => 169
-        243 => 170
+        194 => 160
+        195..=201 => 161
+        202 => 162
+        225 => 163
+        226 => 164
+        227 => 165
+        228..=233 => 166
+        234 => 167
+        235..=236 => 166
+        237 => 168
+        239 => 169
+        240 => 170
+        243 => 171
         _ => break
       }
     }
@@ -2427,7 +2428,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         129..=130 => 100
         133..=134 => 100
         186..=187 => 100
-        191 => 158
+        191 => 159
         _ => break
       }
     }
@@ -2465,16 +2466,16 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
     }
     109 => {
       continue match lexbuf.next_as_int() {
-        159 => 156
+        159 => 157
         160..=174 => 105
-        175 => 157
+        175 => 158
         176..=178 => 105
         _ => break
       }
     }
     110 => {
       continue match lexbuf.next_as_int() {
-        160 => 155
+        160 => 156
         _ => break
       }
     }
@@ -2504,7 +2505,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         _capture_0_end = _end_pos
       }
       continue match lexbuf.next_as_int() {
-        47 => 174
+        47 => 175
         48..=57 => 113
         65..=90 => 113
         95 => 113
@@ -2523,10 +2524,10 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         0..=9 => 114
         11..=12 => 114
         14..=127 => 114
-        194..=223 => 175
-        224..=239 => 176
-        240 => 177
-        241..=244 => 178
+        194..=223 => 176
+        224..=239 => 177
+        240 => 178
+        241..=244 => 179
         _ => break
       }
     }
@@ -2541,10 +2542,10 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         0..=9 => 115
         11..=12 => 115
         14..=127 => 115
-        194..=223 => 179
-        224..=239 => 180
-        240 => 181
-        241..=244 => 182
+        194..=223 => 180
+        224..=239 => 181
+        240 => 182
+        241..=244 => 183
         _ => break
       }
     }
@@ -2570,31 +2571,31 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         _capture_0_end = _start_pos + 2
       }
       continue match lexbuf.next_as_int() {
-        0..=91 => 183
-        92 => 184
-        93..=127 => 183
+        0..=91 => 184
+        92 => 185
+        93..=127 => 184
         _ => break
       }
     }
     119 => {
       continue match lexbuf.next_as_int() {
-        39 => 189
+        39 => 190
         _ => break
       }
     }
     120 => {
       continue match lexbuf.next_as_int() {
-        32 => 185
-        34 => 185
-        39 => 185
-        92 => 185
-        98 => 185
-        110 => 185
-        111 => 186
-        114 => 185
-        116 => 185
-        117 => 187
-        120 => 188
+        32 => 186
+        34 => 186
+        39 => 186
+        92 => 186
+        98 => 186
+        110 => 186
+        111 => 187
+        114 => 186
+        116 => 186
+        117 => 188
+        120 => 189
         _ => break
       }
     }
@@ -2633,10 +2634,10 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         0..=9 => 125
         11..=12 => 125
         14..=127 => 125
-        194..=223 => 190
-        224..=239 => 191
-        240 => 192
-        241..=244 => 193
+        194..=223 => 191
+        224..=239 => 192
+        240 => 193
+        241..=244 => 194
         _ => break
       }
     }
@@ -2670,7 +2671,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
     }
     130 => {
       continue match lexbuf.next_as_int() {
-        128 => 194
+        128 => 195
         129..=191 => 34
         _ => break
       }
@@ -2690,26 +2691,26 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
     }
     133 => {
       continue match lexbuf.next_as_int() {
-        154 => 196
+        154 => 197
         _ => break
       }
     }
     134 => {
       continue match lexbuf.next_as_int() {
-        128 => 197
-        129 => 198
+        128 => 198
+        129 => 199
         _ => break
       }
     }
     135 => {
       continue match lexbuf.next_as_int() {
-        128 => 196
+        128 => 197
         _ => break
       }
     }
     136 => {
       continue match lexbuf.next_as_int() {
-        187 => 195
+        187 => 196
         _ => break
       }
     }
@@ -2727,7 +2728,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
     138 => {
       continue match lexbuf.next_as_int() {
         128..=158 => 34
-        159 => 194
+        159 => 195
         160..=191 => 34
         _ => break
       }
@@ -2797,8 +2798,8 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       break
     }
     149 => {
-      if matched >= 64 {
-        matched = 64
+      if matched >= 65 {
+        matched = 65
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
@@ -2806,6 +2807,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       continue match lexbuf.next_as_int() {
         48..=57 => 149
         69 => 150
+        70 => 151
         95 => 149
         101 => 150
         _ => break
@@ -2813,45 +2815,37 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
     }
     150 => {
       continue match lexbuf.next_as_int() {
-        43 => 199
-        45 => 199
-        48..=57 => 200
+        43 => 200
+        45 => 200
+        48..=57 => 201
         _ => break
       }
     }
     151 => {
+      if matched >= 64 {
+        matched = 64
+        _end_pos = lexbuf.curr_pos()
+        _capture_0_start = _start_pos
+        _capture_0_end = _end_pos
+      }
+      break
+    }
+    152 => {
       continue match lexbuf.next_as_int() {
         46 => 148
         _ => break
       }
     }
-    152 => {
-      if matched >= 65 {
-        matched = 65
-        _end_pos = lexbuf.curr_pos()
-        _capture_0_start = _start_pos
-        _capture_0_end = _end_pos
-      }
-      continue match lexbuf.next_as_int() {
-        46 => 151
-        48..=49 => 152
-        76 => 82
-        78 => 82
-        85 => 84
-        95 => 152
-        _ => break
-      }
-    }
     153 => {
-      if matched >= 65 {
-        matched = 65
+      if matched >= 66 {
+        matched = 66
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
       }
       continue match lexbuf.next_as_int() {
-        46 => 151
-        48..=55 => 153
+        46 => 152
+        48..=49 => 153
         76 => 82
         78 => 82
         85 => 84
@@ -2860,152 +2854,169 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
     }
     154 => {
-      if matched >= 65 {
-        matched = 65
+      if matched >= 66 {
+        matched = 66
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
       }
       continue match lexbuf.next_as_int() {
-        46 => 201
-        48..=57 => 154
-        65..=70 => 154
+        46 => 152
+        48..=55 => 154
         76 => 82
         78 => 82
         85 => 84
         95 => 154
-        97..=102 => 154
         _ => break
       }
     }
     155 => {
+      if matched >= 66 {
+        matched = 66
+        _end_pos = lexbuf.curr_pos()
+        _capture_0_start = _start_pos
+        _capture_0_end = _end_pos
+      }
       continue match lexbuf.next_as_int() {
-        132..=135 => 100
+        46 => 202
+        48..=57 => 155
+        65..=70 => 155
+        76 => 82
+        78 => 82
+        85 => 84
+        95 => 155
+        97..=102 => 155
         _ => break
       }
     }
     156 => {
       continue match lexbuf.next_as_int() {
-        128..=175 => 100
+        132..=135 => 100
         _ => break
       }
     }
     157 => {
       continue match lexbuf.next_as_int() {
-        160..=168 => 100
+        128..=175 => 100
         _ => break
       }
     }
     158 => {
       continue match lexbuf.next_as_int() {
-        176..=191 => 98
+        160..=168 => 100
         _ => break
       }
     }
     159 => {
+      continue match lexbuf.next_as_int() {
+        176..=191 => 98
+        _ => break
+      }
+    }
+    160 => {
       continue match lexbuf.next_as_int() {
         161..=172 => 97
         174..=191 => 97
         _ => break
       }
     }
-    160 => {
+    161 => {
       continue match lexbuf.next_as_int() {
         128..=191 => 97
         _ => break
       }
     }
-    161 => {
+    162 => {
       continue match lexbuf.next_as_int() {
         128..=175 => 97
         _ => break
       }
     }
-    162 => {
-      continue match lexbuf.next_as_int() {
-        132..=135 => 160
-        184..=187 => 160
-        _ => break
-      }
-    }
     163 => {
       continue match lexbuf.next_as_int() {
-        129..=130 => 160
-        133..=134 => 160
-        186..=187 => 160
-        191 => 205
+        132..=135 => 161
+        184..=187 => 161
         _ => break
       }
     }
     164 => {
       continue match lexbuf.next_as_int() {
-        128..=131 => 160
-        135..=191 => 160
+        129..=130 => 161
+        133..=134 => 161
+        186..=187 => 161
+        191 => 206
         _ => break
       }
     }
     165 => {
       continue match lexbuf.next_as_int() {
-        128..=191 => 160
+        128..=131 => 161
+        135..=191 => 161
         _ => break
       }
     }
     166 => {
       continue match lexbuf.next_as_int() {
-        176..=191 => 160
+        128..=191 => 161
         _ => break
       }
     }
     167 => {
       continue match lexbuf.next_as_int() {
-        128..=159 => 160
+        176..=191 => 161
         _ => break
       }
     }
     168 => {
       continue match lexbuf.next_as_int() {
-        164..=171 => 160
-        184..=185 => 160
+        128..=159 => 161
         _ => break
       }
     }
     169 => {
       continue match lexbuf.next_as_int() {
-        159 => 203
-        160..=174 => 165
-        175 => 204
-        176..=178 => 165
+        164..=171 => 161
+        184..=185 => 161
         _ => break
       }
     }
     170 => {
       continue match lexbuf.next_as_int() {
-        160 => 202
+        159 => 204
+        160..=174 => 166
+        175 => 205
+        176..=178 => 166
         _ => break
       }
     }
     171 => {
+      continue match lexbuf.next_as_int() {
+        160 => 203
+        _ => break
+      }
+    }
+    172 => {
       if matched >= 34 {
         matched = 34
         _end_pos = lexbuf.curr_pos()
       }
       break
     }
-    172 => {
+    173 => {
       if matched >= 36 {
         matched = 36
         _end_pos = lexbuf.curr_pos()
       }
       break
     }
-    173 => {
+    174 => {
       if matched >= 35 {
         matched = 35
         _end_pos = lexbuf.curr_pos()
       }
       break
     }
-    174 => {
+    175 => {
       continue match lexbuf.next_as_int() {
         65..=90 => 113
         95 => 113
@@ -3013,105 +3024,105 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         _ => break
       }
     }
-    175 => {
+    176 => {
       continue match lexbuf.next_as_int() {
         128..=191 => 114
         _ => break
       }
     }
-    176 => {
-      continue match lexbuf.next_as_int() {
-        128..=191 => 175
-        _ => break
-      }
-    }
     177 => {
-      continue match lexbuf.next_as_int() {
-        144..=191 => 176
-        _ => break
-      }
-    }
-    178 => {
       continue match lexbuf.next_as_int() {
         128..=191 => 176
         _ => break
       }
     }
+    178 => {
+      continue match lexbuf.next_as_int() {
+        144..=191 => 177
+        _ => break
+      }
+    }
     179 => {
       continue match lexbuf.next_as_int() {
-        128..=191 => 115
+        128..=191 => 177
         _ => break
       }
     }
     180 => {
       continue match lexbuf.next_as_int() {
-        128..=191 => 179
+        128..=191 => 115
         _ => break
       }
     }
     181 => {
       continue match lexbuf.next_as_int() {
-        144..=191 => 180
+        128..=191 => 180
         _ => break
       }
     }
     182 => {
       continue match lexbuf.next_as_int() {
-        128..=191 => 180
+        144..=191 => 181
         _ => break
       }
     }
     183 => {
       continue match lexbuf.next_as_int() {
-        39 => 206
+        128..=191 => 181
         _ => break
       }
     }
     184 => {
       continue match lexbuf.next_as_int() {
-        32 => 207
-        34 => 207
-        39 => 208
-        92 => 207
-        98 => 207
-        110 => 207
-        111 => 209
-        114 => 207
-        116 => 207
-        120 => 210
+        39 => 207
         _ => break
       }
     }
     185 => {
       continue match lexbuf.next_as_int() {
-        39 => 215
+        32 => 208
+        34 => 208
+        39 => 209
+        92 => 208
+        98 => 208
+        110 => 208
+        111 => 210
+        114 => 208
+        116 => 208
+        120 => 211
         _ => break
       }
     }
     186 => {
       continue match lexbuf.next_as_int() {
-        48..=51 => 213
+        39 => 216
         _ => break
       }
     }
     187 => {
       continue match lexbuf.next_as_int() {
-        48..=57 => 211
-        65..=70 => 211
-        97..=102 => 211
-        123 => 212
+        48..=51 => 214
         _ => break
       }
     }
     188 => {
       continue match lexbuf.next_as_int() {
-        48..=57 => 214
-        65..=70 => 214
-        97..=102 => 214
+        48..=57 => 212
+        65..=70 => 212
+        97..=102 => 212
+        123 => 213
         _ => break
       }
     }
     189 => {
+      continue match lexbuf.next_as_int() {
+        48..=57 => 215
+        65..=70 => 215
+        97..=102 => 215
+        _ => break
+      }
+    }
+    190 => {
       if matched >= 5 {
         matched = 5
         _end_pos = lexbuf.curr_pos()
@@ -3120,31 +3131,31 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
       break
     }
-    190 => {
+    191 => {
       continue match lexbuf.next_as_int() {
         128..=191 => 125
         _ => break
       }
     }
-    191 => {
-      continue match lexbuf.next_as_int() {
-        128..=191 => 190
-        _ => break
-      }
-    }
     192 => {
-      continue match lexbuf.next_as_int() {
-        144..=191 => 191
-        _ => break
-      }
-    }
-    193 => {
       continue match lexbuf.next_as_int() {
         128..=191 => 191
         _ => break
       }
     }
+    193 => {
+      continue match lexbuf.next_as_int() {
+        144..=191 => 192
+        _ => break
+      }
+    }
     194 => {
+      continue match lexbuf.next_as_int() {
+        128..=191 => 192
+        _ => break
+      }
+    }
+    195 => {
       if matched >= 1 {
         matched = 1
         _end_pos = lexbuf.curr_pos()
@@ -3158,109 +3169,110 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         95 => 34
         97..=122 => 34
         126 => 57
-        194 => 216
+        194 => 217
         195..=201 => 40
         202 => 59
-        225 => 217
-        226 => 218
-        227 => 219
+        225 => 218
+        226 => 219
+        227 => 220
         228..=233 => 47
         234 => 63
         235..=236 => 47
         237 => 64
-        239 => 220
+        239 => 221
         240 => 66
         243 => 67
         _ => break
       }
     }
-    195 => {
+    196 => {
       continue match lexbuf.next_as_int() {
         191 => 3
         _ => break
       }
     }
-    196 => {
+    197 => {
       continue match lexbuf.next_as_int() {
         128 => 3
         _ => break
       }
     }
-    197 => {
+    198 => {
       continue match lexbuf.next_as_int() {
         128..=138 => 3
         175 => 3
         _ => break
       }
     }
-    198 => {
+    199 => {
       continue match lexbuf.next_as_int() {
         159 => 3
         _ => break
       }
     }
-    199 => {
+    200 => {
       continue match lexbuf.next_as_int() {
-        48..=57 => 200
+        48..=57 => 201
         _ => break
       }
     }
-    200 => {
-      if matched >= 64 {
-        matched = 64
+    201 => {
+      if matched >= 65 {
+        matched = 65
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
       }
       continue match lexbuf.next_as_int() {
-        48..=57 => 200
-        95 => 200
+        48..=57 => 201
+        70 => 151
+        95 => 201
         _ => break
       }
     }
-    201 => {
-      if matched >= 64 {
-        matched = 64
+    202 => {
+      if matched >= 65 {
+        matched = 65
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
       }
       continue match lexbuf.next_as_int() {
         46 => 148
-        48..=57 => 221
-        65..=70 => 221
+        48..=57 => 222
+        65..=70 => 222
         80 => 150
-        95 => 221
-        97..=102 => 221
+        95 => 222
+        97..=102 => 222
         112 => 150
-        _ => break
-      }
-    }
-    202 => {
-      continue match lexbuf.next_as_int() {
-        132..=135 => 160
         _ => break
       }
     }
     203 => {
       continue match lexbuf.next_as_int() {
-        128..=175 => 160
+        132..=135 => 161
         _ => break
       }
     }
     204 => {
       continue match lexbuf.next_as_int() {
-        160..=168 => 160
+        128..=175 => 161
         _ => break
       }
     }
     205 => {
       continue match lexbuf.next_as_int() {
-        176..=191 => 97
+        160..=168 => 161
         _ => break
       }
     }
     206 => {
+      continue match lexbuf.next_as_int() {
+        176..=191 => 97
+        _ => break
+      }
+    }
+    207 => {
       if matched >= 19 {
         matched = 19
         _end_pos = lexbuf.curr_pos()
@@ -3269,13 +3281,13 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
       break
     }
-    207 => {
+    208 => {
       continue match lexbuf.next_as_int() {
-        39 => 222
+        39 => 223
         _ => break
       }
     }
-    208 => {
+    209 => {
       if matched >= 19 {
         matched = 19
         _end_pos = lexbuf.curr_pos()
@@ -3283,56 +3295,56 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         _capture_0_end = _start_pos + 3
       }
       continue match lexbuf.next_as_int() {
-        39 => 222
-        _ => break
-      }
-    }
-    209 => {
-      continue match lexbuf.next_as_int() {
-        48..=51 => 223
+        39 => 223
         _ => break
       }
     }
     210 => {
       continue match lexbuf.next_as_int() {
-        48..=57 => 224
-        65..=70 => 224
-        97..=102 => 224
+        48..=51 => 224
         _ => break
       }
     }
     211 => {
       continue match lexbuf.next_as_int() {
-        48..=57 => 226
-        65..=70 => 226
-        97..=102 => 226
+        48..=57 => 225
+        65..=70 => 225
+        97..=102 => 225
         _ => break
       }
     }
     212 => {
       continue match lexbuf.next_as_int() {
-        48..=57 => 212
-        65..=70 => 212
-        97..=102 => 212
-        125 => 225
+        48..=57 => 227
+        65..=70 => 227
+        97..=102 => 227
         _ => break
       }
     }
     213 => {
       continue match lexbuf.next_as_int() {
-        48..=55 => 227
+        48..=57 => 213
+        65..=70 => 213
+        97..=102 => 213
+        125 => 226
         _ => break
       }
     }
     214 => {
       continue match lexbuf.next_as_int() {
-        48..=57 => 228
-        65..=70 => 228
-        97..=102 => 228
+        48..=55 => 228
         _ => break
       }
     }
     215 => {
+      continue match lexbuf.next_as_int() {
+        48..=57 => 229
+        65..=70 => 229
+        97..=102 => 229
+        _ => break
+      }
+    }
+    216 => {
       if matched >= 6 {
         matched = 6
         _end_pos = lexbuf.curr_pos()
@@ -3341,7 +3353,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
       break
     }
-    216 => {
+    217 => {
       continue match lexbuf.next_as_int() {
         160 => 3
         161..=172 => 34
@@ -3349,17 +3361,17 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         _ => break
       }
     }
-    217 => {
+    218 => {
       continue match lexbuf.next_as_int() {
         132..=135 => 40
-        154 => 196
+        154 => 197
         184..=187 => 40
         _ => break
       }
     }
-    218 => {
+    219 => {
       continue match lexbuf.next_as_int() {
-        128 => 197
+        128 => 198
         129 => 138
         130 => 40
         133..=134 => 40
@@ -3368,7 +3380,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         _ => break
       }
     }
-    219 => {
+    220 => {
       continue match lexbuf.next_as_int() {
         128 => 130
         129..=131 => 40
@@ -3376,32 +3388,32 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
         _ => break
       }
     }
-    220 => {
+    221 => {
       continue match lexbuf.next_as_int() {
         164..=171 => 40
         184..=185 => 40
-        187 => 195
+        187 => 196
         _ => break
       }
     }
-    221 => {
-      if matched >= 64 {
-        matched = 64
+    222 => {
+      if matched >= 65 {
+        matched = 65
         _end_pos = lexbuf.curr_pos()
         _capture_0_start = _start_pos
         _capture_0_end = _end_pos
       }
       continue match lexbuf.next_as_int() {
-        48..=57 => 221
-        65..=70 => 221
+        48..=57 => 222
+        65..=70 => 222
         80 => 150
-        95 => 221
-        97..=102 => 221
+        95 => 222
+        97..=102 => 222
         112 => 150
         _ => break
       }
     }
-    222 => {
+    223 => {
       if matched >= 20 {
         matched = 20
         _end_pos = lexbuf.curr_pos()
@@ -3410,59 +3422,59 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
       break
     }
-    223 => {
-      continue match lexbuf.next_as_int() {
-        48..=55 => 229
-        _ => break
-      }
-    }
     224 => {
       continue match lexbuf.next_as_int() {
-        48..=57 => 230
-        65..=70 => 230
-        97..=102 => 230
+        48..=55 => 230
         _ => break
       }
     }
     225 => {
       continue match lexbuf.next_as_int() {
-        39 => 231
+        48..=57 => 231
+        65..=70 => 231
+        97..=102 => 231
         _ => break
       }
     }
     226 => {
       continue match lexbuf.next_as_int() {
-        48..=57 => 232
-        65..=70 => 232
-        97..=102 => 232
+        39 => 232
         _ => break
       }
     }
     227 => {
       continue match lexbuf.next_as_int() {
-        48..=55 => 233
+        48..=57 => 233
+        65..=70 => 233
+        97..=102 => 233
         _ => break
       }
     }
     228 => {
       continue match lexbuf.next_as_int() {
-        39 => 234
+        48..=55 => 234
         _ => break
       }
     }
     229 => {
       continue match lexbuf.next_as_int() {
-        48..=55 => 235
+        39 => 235
         _ => break
       }
     }
     230 => {
       continue match lexbuf.next_as_int() {
-        39 => 236
+        48..=55 => 236
         _ => break
       }
     }
     231 => {
+      continue match lexbuf.next_as_int() {
+        39 => 237
+        _ => break
+      }
+    }
+    232 => {
       if matched >= 10 {
         matched = 10
         _end_pos = lexbuf.curr_pos()
@@ -3473,21 +3485,21 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
       break
     }
-    232 => {
-      continue match lexbuf.next_as_int() {
-        48..=57 => 237
-        65..=70 => 237
-        97..=102 => 237
-        _ => break
-      }
-    }
     233 => {
       continue match lexbuf.next_as_int() {
-        39 => 238
+        48..=57 => 238
+        65..=70 => 238
+        97..=102 => 238
         _ => break
       }
     }
     234 => {
+      continue match lexbuf.next_as_int() {
+        39 => 239
+        _ => break
+      }
+    }
+    235 => {
       if matched >= 7 {
         matched = 7
         _end_pos = lexbuf.curr_pos()
@@ -3496,13 +3508,13 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
       break
     }
-    235 => {
+    236 => {
       continue match lexbuf.next_as_int() {
-        39 => 239
+        39 => 240
         _ => break
       }
     }
-    236 => {
+    237 => {
       if matched >= 17 {
         matched = 17
         _end_pos = lexbuf.curr_pos()
@@ -3511,13 +3523,13 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
       break
     }
-    237 => {
+    238 => {
       continue match lexbuf.next_as_int() {
-        39 => 240
+        39 => 241
         _ => break
       }
     }
-    238 => {
+    239 => {
       if matched >= 8 {
         matched = 8
         _end_pos = lexbuf.curr_pos()
@@ -3526,7 +3538,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
       break
     }
-    239 => {
+    240 => {
       if matched >= 18 {
         matched = 18
         _end_pos = lexbuf.curr_pos()
@@ -3535,7 +3547,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       }
       break
     }
-    240 => {
+    241 => {
       if matched >= 9 {
         matched = 9
         _end_pos = lexbuf.curr_pos()
@@ -3547,7 +3559,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
     _ => panic()
   }
 
-  guard matched <= 70 else {
+  guard matched <= 71 else {
     // No pattern matched
     panic()
   }
@@ -4098,20 +4110,28 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
     }
     65 => {
       ()
+      let double = lexbuf.get_string(_capture_0_start, _capture_0_end)
+
+      env.add_token_with_loc(DOUBLE(double), start=_start_pos, end=_end_pos)
+      tokens(lexbuf, env~, preserve_comment~)
+    
+    }
+    66 => {
+      ()
       let integer = lexbuf.get_string(_capture_0_start, _capture_0_end)
 
       env.add_token_with_loc(INT(integer), start=_start_pos, end=_end_pos)
       tokens(lexbuf, env~, preserve_comment~)
     
     }
-    66 => {
+    67 => {
       ()
 
       let end = lexbuf.curr_pos()
       env.add_token_with_loc(EOF, start=end, end=end)
     
     }
-    67 => {
+    68 => {
       ()
       let raw = lexbuf.get_string(_capture_0_start, _capture_0_end)
 
@@ -4119,7 +4139,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       tokens(lexbuf, env~, preserve_comment~)
     
     }
-    68 => {
+    69 => {
       ()
       let raw = lexbuf.get_string(_capture_0_start, _capture_0_end)
 
@@ -4127,7 +4147,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       tokens(lexbuf, env~, preserve_comment~)
     
     }
-    69 => {
+    70 => {
       ()
       let raw = lexbuf.get_string(_capture_0_start, _capture_0_end)
 
@@ -4144,7 +4164,7 @@ fn tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, Int
       tokens(lexbuf, env~, preserve_comment~)
     
     }
-    70 => {
+    71 => {
       ()
       let c = lexbuf.get_char(_capture_0_start, _capture_0_end)
 

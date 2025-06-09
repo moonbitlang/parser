@@ -10,6 +10,7 @@
 %token<CharLiteral> BYTE
 %token<StringLiteral> BYTES
 %token<String> FLOAT
+%token<String> DOUBLE
 %token<StringLiteral> STRING
 %token<String> MULTILINE_STRING
 %token<InterpLiteral> MULTILINE_INTERP

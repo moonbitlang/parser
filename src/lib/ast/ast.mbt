@@ -15,6 +15,7 @@ pub(all) enum Constant {
   Int64(String)
   UInt(String)
   UInt64(String)
+  Float(String)
   Double(String)
   String(StringLiteral)
   BigInt(String)
