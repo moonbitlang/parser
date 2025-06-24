@@ -15,6 +15,7 @@ pub(all) enum Constant {
   Int64(String)
   UInt(String)
   UInt64(String)
+  Float(String)
   Double(String)
   String(StringLiteral)
   BigInt(String)
@@ -54,6 +55,7 @@ pub(all) enum ErrorType {
   ErrorType(@immut/list.T[Type])
   DefaultErrorType(Location)
   NoErrorType
+  MaybeError(Type)
 } derive(ToJson)
 
 ///|

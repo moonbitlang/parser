@@ -4,6 +4,7 @@ pub(all) enum Token {
   BYTE(CharLiteral)
   BYTES(StringLiteral)
   FLOAT(String)
+  DOUBLE(String)
   STRING(StringLiteral)
   MULTILINE_STRING(String)
   MULTILINE_INTERP(InterpLiteral)
@@ -102,6 +103,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     BYTE(_) => TK_BYTE
     BYTES(_) => TK_BYTES
     FLOAT(_) => TK_FLOAT
+    DOUBLE(_) => TK_DOUBLE
     STRING(_) => TK_STRING
     MULTILINE_STRING(_) => TK_MULTILINE_STRING
     MULTILINE_INTERP(_) => TK_MULTILINE_INTERP
@@ -200,6 +202,7 @@ pub(all) enum TokenKind {
   TK_BYTE
   TK_BYTES
   TK_FLOAT
+  TK_DOUBLE
   TK_STRING
   TK_MULTILINE_STRING
   TK_MULTILINE_INTERP
@@ -299,6 +302,7 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_BYTE => "BYTE"
       TK_BYTES => "BYTES"
       TK_FLOAT => "FLOAT"
+      TK_DOUBLE => "DOUBLE"
       TK_STRING => "STRING"
       TK_MULTILINE_STRING => "MULTILINE_STRING"
       TK_MULTILINE_INTERP => "MULTILINE_INTERP"
