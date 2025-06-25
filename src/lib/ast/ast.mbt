@@ -52,7 +52,7 @@ pub(all) enum Type {
 
 ///|
 pub(all) enum ErrorType {
-  ErrorType(@immut/list.T[Type])
+  ErrorType(Type)
   DefaultErrorType(Location)
   NoErrorType
   MaybeError(Type)

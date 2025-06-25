@@ -26,6 +26,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | CONTINUE
     | RETURN
     | THROW
+    | RAISE
     | QUESTION
     | EXCLAMATION
     | RANGE_INCLUSIVE
@@ -37,6 +38,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     // | EXCEPT
     TYPE
     | TYPEALIAS
+    | SUBERROR
     | STRUCT
     | SEMI(_)
     | PLUS
@@ -96,7 +98,6 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | FOR
     | AMPER
     | CARET
-    | RAISE
     | ATTRIBUTE(_) => false
   }
 }
@@ -129,6 +130,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | RAISE
     | TYPE
     | TYPEALIAS
+    | SUBERROR
     | STRUCT
     | TRAIT
     | TRAITALIAS

@@ -100,6 +100,8 @@
 %token FOR "for"
 %token IN "in"
 %token IS "is"
+%token SUBERROR        "suberror"
+
 
 %right BARBAR
 %right AMPERAMPER
