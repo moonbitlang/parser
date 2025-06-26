@@ -97,6 +97,7 @@
 %token FOR "for"
 %token IN "in"
 %token IS "is"
+%token SUBERROR        "suberror"
 
 %%
 
@@ -168,9 +169,9 @@ type_sig -> TypeSig
   : vis "extern" "type" type_decl_name_with_params { TypeSig::{vis: $1, name: $4.0, type_params: $4.1, components: Extern} }
   | vis "type" type_decl_name_with_params { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Abstract} }
   | vis "type" type_decl_name_with_params type_ { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Newtype($4)} }
-  | vis "type" "!" uident { TypeSig::{vis: $1, name: $4, type_params: Nil, components: Error(NoPayload)} }
-  | vis "type" "!" uident type_ { TypeSig::{vis: $1, name: $4, type_params: Nil, components: Error(SinglePayload($5))} }
-  | vis "type" "!" uident "{" separated_list(";", enum_constructor) "}" { TypeSig::{vis: $1, name: $4, type_params: Nil, components: Error(EnumPayload($6))} }
+  | vis "suberror" uident { TypeSig::{vis: $1, name: $3, type_params: Nil, components: Error(NoPayload)} }
+  | vis "suberror" uident type_ { TypeSig::{vis: $1, name: $3, type_params: Nil, components: Error(SinglePayload($4))} }
+  | vis "suberror" uident "{" separated_list(";", enum_constructor) "}" { TypeSig::{vis: $1, name: $3, type_params: Nil, components: Error(EnumPayload($5))} }
   | vis "struct" type_decl_name_with_params "{" separated_list(";", record_decl_field) "}" { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Record($5)} }
   | vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Variant($5)} }
   ;
@@ -187,8 +188,8 @@ trait_sig -> TraitSig
   ;
 
 alias_sig -> AliasSig
-  : vis "typealias" type_decl_name_with_params "=" type_ { TypeAlias(vis=$1, name=$3.0, type_params=$3.1, type_=$5) }
-  | vis "traitalias" uident "=" qualified_uident { TraitAlias(vis=$1, name=$3, trait_name=$5) }
+  : vis "typealias" type_ "as" type_decl_name_with_params  { TypeAlias(vis=$1, name=$5.0, type_params=$5.1, type_=$3) }
+  | vis "traitalias" qualified_uident "as" uident { TraitAlias(vis=$1, name=$5, trait_name=$3) }
   ;
 
 enum_constructor -> ConstrDecl
@@ -257,9 +258,12 @@ type_ -> Type
 
 return_type -> (Type, ErrorType)
   : type_ { ($1, NoErrorType) }
-  | simple_type "!" { ($1, DefaultErrorType(mk_loc($loc($2)))) }
-  | simple_type "!" separated_nonempty_list("+", error_type) { ($1, ErrorType($3)) }
-  | simple_type "?" error_type { ($1, MaybeError($3)) }
+  | simple_type "raise" { ($1, DefaultErrorType(mk_loc($loc($2)))) }
+  | simple_type "raise" error_type { ($1, ErrorType($3)) }
+  | simple_type "raise" "?" {
+    let fake_error : Type = TName(@ast.QualifiedName::{ pkg : None, name :"Error", loc :@ast.no_location }, Nil, loc=@ast.no_location)
+    ($1, MaybeError(fake_error)) 
+  }
   ;
 
 error_type -> Type

@@ -1,14 +1,14 @@
 ///|
-pub typealias CharLiteral = String
+pub typealias String as CharLiteral
 
 ///|
-pub typealias StringLiteral = String
+pub typealias String as StringLiteral
 
 ///|
-pub typealias ByteLiteral = String
+pub typealias String as ByteLiteral
 
 ///|
-pub typealias BytesLiteral = String
+pub typealias String as BytesLiteral
 
 ///|
 pub(all) struct InterpSource {
@@ -23,4 +23,4 @@ pub(all) enum InterpElem {
 } derive(Show)
 
 ///|
-pub typealias InterpLiteral = Array[InterpElem]
+pub typealias Array[InterpElem] as InterpLiteral

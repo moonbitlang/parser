@@ -94,6 +94,7 @@ pub(all) enum Token {
   FOR
   IN
   IS
+  SUBERROR
 } derive(Show)
 
 pub fn Token::kind(self : Token) -> TokenKind {
@@ -193,6 +194,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     FOR => TK_FOR
     IN => TK_IN
     IS => TK_IS
+    SUBERROR => TK_SUBERROR
   }
 }
 
@@ -292,6 +294,7 @@ pub(all) enum TokenKind {
   TK_FOR
   TK_IN
   TK_IS
+  TK_SUBERROR
 }
 
 pub impl Show for TokenKind with output(self, logger) {
@@ -392,6 +395,7 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_FOR => "\"for\""
       TK_IN => "\"in\""
       TK_IS => "\"is\""
+      TK_SUBERROR => "\"suberror\""
     }
   )
 }

@@ -1,6 +1,6 @@
 ///|
-fn test_tokens(t : @test.T, label : String) -> Unit!Error {
-  let source = @fs.read_file_to_bytes!("src/lib/lexer/fixtures/\{label}.mbt_")
+fn test_tokens(t : @test.T, label : String) -> Unit raise Error {
+  let source = @fs.read_file_to_bytes("src/lib/lexer/fixtures/\{label}.mbt_")
   let result = tokens_from_bytes(comment=true, source)
   let buf = StringBuilder::new()
   for triple in result.tokens {
@@ -44,55 +44,55 @@ fn test_tokens(t : @test.T, label : String) -> Unit!Error {
     buf.write_char('\n')
   }
   t.write(buf.to_string())
-  t.snapshot!(filename="\{label}.tokens")
+  t.snapshot(filename="\{label}.tokens")
 }
 
 ///|
 test "tokens 001" (t : @test.T) {
-  test_tokens!(t, "001")
+  test_tokens(t, "001")
 }
 
 ///|
 test "tokens double_to_string" (t : @test.T) {
-  test_tokens!(t, "double_to_string")
+  test_tokens(t, "double_to_string")
 }
 
 ///|
 test "tokens pattern_guard" (t : @test.T) {
-  test_tokens!(t, "pattern_guard")
+  test_tokens(t, "pattern_guard")
 }
 
 ///|
 test "tokens range_pattern" (t : @test.T) {
-  test_tokens!(t, "range_pattern")
+  test_tokens(t, "range_pattern")
 }
 
 ///|
 test "tokens string_escape" (t : @test.T) {
-  test_tokens!(t, "string_escape")
+  test_tokens(t, "string_escape")
 }
 
 ///|
 test "tokens string_literal" (t : @test.T) {
-  test_tokens!(t, "string_literal")
+  test_tokens(t, "string_literal")
 }
 
 ///|
 test "tokens super_trait3" (t : @test.T) {
-  test_tokens!(t, "super_trait3")
+  test_tokens(t, "super_trait3")
 }
 
 ///|
 test "tokens trait_labelled" (t : @test.T) {
-  test_tokens!(t, "trait_labelled")
+  test_tokens(t, "trait_labelled")
 }
 
 ///|
 test "tokens unicode_test" (t : @test.T) {
-  test_tokens!(t, "unicode_test")
+  test_tokens(t, "unicode_test")
 }
 
 ///|
 test "tokens utf16_escape" (t : @test.T) {
-  test_tokens!(t, "utf16_escape")
+  test_tokens(t, "utf16_escape")
 }

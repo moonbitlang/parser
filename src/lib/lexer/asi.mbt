@@ -26,6 +26,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | CONTINUE
     | RETURN
     | THROW
+    | RAISE
     | QUESTION
     | EXCLAMATION
     | RANGE_INCLUSIVE
@@ -37,6 +38,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     // | EXCEPT
     TYPE
     | TYPEALIAS
+    | SUBERROR
     | STRUCT
     | SEMI(_)
     | PLUS
@@ -96,7 +98,6 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | FOR
     | AMPER
     | CARET
-    | RAISE
     | ATTRIBUTE(_) => false
   }
 }
@@ -129,6 +130,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | RAISE
     | TYPE
     | TYPEALIAS
+    | SUBERROR
     | STRUCT
     | TRAIT
     | TRAITALIAS
@@ -242,6 +244,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
 //  the index of the last newline not processed by ASI.
 //
 //  [-1] indicate all newlines are already processed by ASI.
+
 ///|
 priv struct ASIContext {
   mut last_unhandled_newline : Int
@@ -259,8 +262,9 @@ fn ASIContext::new() -> ASIContext {
 //  - the token before the newline is not a valid token for the end of a statement
 //  - the token after the newline is not a valid token for the beginning of a statement
 //  There are a few exception and ambiguity cases though. See [can_occur_after_semi] for more detail.
+
 ///|
-fn ASIContext::add_token[C](
+fn[C] ASIContext::add_token(
   self : ASIContext,
   tokens~ : Array[(Token, Position, Position)],
   last_unhandled_comment~ : Ref[(C, Int)?],
