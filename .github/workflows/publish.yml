@@ -15,6 +15,7 @@ jobs:
           moon version --all
       - name: moon build
         run: |
+          moon update
           moon build --target all
       - name: moon check
         run: |
