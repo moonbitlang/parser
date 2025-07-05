@@ -9,7 +9,7 @@ pub(all) enum Token {
   MULTILINE_STRING(String)
   MULTILINE_INTERP(InterpLiteral)
   INTERP(InterpLiteral)
-  ATTRIBUTE(String)
+  ATTRIBUTE((String, String?, String))
   LIDENT(String)
   UIDENT(String)
   POST_LABEL(String)

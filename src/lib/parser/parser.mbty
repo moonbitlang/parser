@@ -15,7 +15,7 @@
 %token<String> MULTILINE_STRING
 %token<InterpLiteral> MULTILINE_INTERP
 %token<InterpLiteral> INTERP
-%token<String> ATTRIBUTE
+%token<(String, String?, String)> ATTRIBUTE
 %token<String> LIDENT
 %token<String> UIDENT
 %token<String> POST_LABEL

@@ -82,8 +82,6 @@ priv suberror YYObj_TypeParamWithConstraints TypeParamWithConstraints
 
 priv suberror YYObj__immut_list_T_Type_ @immut/list.T[Type]
 
-priv suberror YYObj__immut_list_T_String_ @immut/list.T[String]
-
 priv suberror YYObj__immut_list_T_FieldDecl_ @immut/list.T[FieldDecl]
 
 priv suberror YYObj__immut_list_T_Parameter_ @immut/list.T[Parameter]
@@ -106,6 +104,8 @@ priv suberror YYObj__immut_list_T_TypeParamWithConstraints_ @immut/list.T[TypePa
 
 priv suberror YYObj__immut_list_T__Sig__Location__ @immut/list.T[(Sig, Location)]
 
+priv suberror YYObj__immut_list_T__String__Option_String___String__ @immut/list.T[(String, Option[String], String)]
+
 priv suberror YYObj_String_ String?
 
 priv suberror YYObj__Name___immut_list_T_TypeParamNoConstraints__ (Name, @immut/list.T[TypeParamNoConstraints])
@@ -113,6 +113,8 @@ priv suberror YYObj__Name___immut_list_T_TypeParamNoConstraints__ (Name, @immut/
 priv suberror YYObj__Type__ErrorType_ (Type, ErrorType)
 
 priv suberror YYObj__String__Location_ (String, Location)
+
+priv suberror YYObj__String__Option_String___String_ (String, Option[String], String)
 
 typealias (YYSymbol) -> YYDecision as YYState
 
@@ -1643,8 +1645,8 @@ fn yy_action_162(_last_pos : @ast_types.Position, _args : ArrayView[(YYObj, @ast
 // file:///./stdlib.mbty
 // 49|    X { Cons($1, Nil) }
 fn yy_action_163(_last_pos : @ast_types.Position, _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(_dollar1)
-  YYObj__immut_list_T_String_({();  Cons(_dollar1, Nil) })
+  guard _args[0].0 is YYObj__String__Option_String___String_(_dollar1)
+  YYObj__immut_list_T__String__Option_String___String__({();  Cons(_dollar1, Nil) })
 }
 
 // file:///./mbti_parser.mbty
@@ -1708,9 +1710,9 @@ fn yy_action_168(_last_pos : @ast_types.Position, _args : ArrayView[(YYObj, @ast
 // file:///./stdlib.mbty
 // 50|    X nonempty_list(X) { Cons($1, $2) }
 fn yy_action_169(_last_pos : @ast_types.Position, _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(_dollar1)
-  guard _args[1].0 is YYObj__immut_list_T_String_(_dollar2)
-  YYObj__immut_list_T_String_({();  Cons(_dollar1, _dollar2) })
+  guard _args[0].0 is YYObj__String__Option_String___String_(_dollar1)
+  guard _args[1].0 is YYObj__immut_list_T__String__Option_String___String__(_dollar2)
+  YYObj__immut_list_T__String__Option_String___String__({();  Cons(_dollar1, _dollar2) })
 }
 
 // file:///./stdlib.mbty
@@ -1899,7 +1901,7 @@ fn yy_input(token : Token, _start_pos : @ast_types.Position, _end_pos : @ast_typ
     MULTILINE_STRING(data) => (T_MULTILINE_STRING, YYObj_String(data))
     MULTILINE_INTERP(data) => (T_MULTILINE_INTERP, YYObj_InterpLiteral(data))
     INTERP(data) => (T_INTERP, YYObj_InterpLiteral(data))
-    ATTRIBUTE(data) => (T_ATTRIBUTE, YYObj_String(data))
+    ATTRIBUTE(data) => (T_ATTRIBUTE, YYObj__String__Option_String___String_(data))
     LIDENT(data) => (T_LIDENT, YYObj_String(data))
     UIDENT(data) => (T_UIDENT, YYObj_String(data))
     POST_LABEL(data) => (T_POST_LABEL, YYObj_String(data))
