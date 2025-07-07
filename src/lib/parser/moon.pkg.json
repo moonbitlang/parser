@@ -1,22 +1,25 @@
 {
   "pre-build": [
-    // {
-    //   "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --mode only-tokens $input -o $output",
-    //   "input": "parser.mbty",
-    //   "output": "tokens.mbt"
-    // },
+    {
+      "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --mode only-tokens $input -o $output",
+      "input": "parser.mbty",
+      "output": "tokens.mbt"
+    },
+    {
+      "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --external-tokens --mode json-cst --input-mode pull $input -o $output",
+      "input": "parser.mbty",
+      "output": "parser.mbt"
+    }
     // {
     //   "command": "$mod_dir/.mooncakes/moonbitlang/ulex/moonlex --code-unit 1 --default-encoding utf8 $input -o $output",
     //   "input": "lexer.mbtx",
     //   "output": "lexer.mbt"
     // }
-    // {
-    //   "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --external-tokens --input-mode pull $input -o $output",
-    //   "input": "mbti_parser.mbty",
-    //   "output": "mbti_parser.mbt"
-    // }
   ],
   "test-import": [
     "moonbitlang/x/fs"
+  ],
+  "import": [
+    "moonbitlang/parser/lib/ast_types"
   ]
 }
