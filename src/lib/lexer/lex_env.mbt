@@ -1,7 +1,7 @@
 ///|
 priv struct LexEnv {
   errors : Array[(Position, Position, LexicalError)]
-  docstrings : Array[@immut/list.T[(Location, Comment)]]
+  docstrings : Array[@list.T[(Location, Comment)]]
   comment : Bool
   file : String
   tokens : Array[(Token, Position, Position)]
@@ -85,9 +85,9 @@ fn LexEnv::add_token(
         }
       }
 
-      let leading_newlines = @math.minimum(2, count_newlines(i, -1))
+      let leading_newlines = @cmp.minimum(2, count_newlines(i, -1))
       // Make sure add trailing newline if the comment is at end of file
-      let trailing_newlines = @math.minimum(2, count_newlines(i, 1))
+      let trailing_newlines = @cmp.minimum(2, count_newlines(i, 1))
       let (_, start, end) = self.tokens[i]
       let kind = if leading_newlines == 0 && not(at_file_start) {
         CommentKind::InlineTrailing
@@ -137,15 +137,15 @@ fn preserve_comment(self : LexEnv) -> (Comment, Int, Int) -> Unit {
           end: self.make_pos(end),
         }
         if docstrings.is_empty() {
-          docstrings.push(@immut/list.singleton((loc, comment)))
+          docstrings.push(@list.singleton((loc, comment)))
         } else {
-          guard docstrings.last() is Some(Cons(head, _) as last)
+          guard docstrings.last() is Some(More(head, ..) as last)
           let last_idx = docstrings.length() - 1
           if loc.start.lnum - head.0.start.lnum > 1 {
             docstrings[last_idx] = last.rev()
-            docstrings.push(@immut/list.singleton((loc, comment)))
+            docstrings.push(@list.singleton((loc, comment)))
           } else {
-            docstrings[last_idx] = Cons((loc, comment), docstrings[last_idx])
+            docstrings[last_idx] = docstrings[last_idx].add((loc, comment))
           }
         }
       }

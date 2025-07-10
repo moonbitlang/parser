@@ -12,8 +12,10 @@ typealias @ast_types.(
 
 ///|
 typealias @mbti_ast.(
+  QualifiedIdent,
   Name,
   QualifiedName,
+  Label,
   Visibility,
   Constant,
   Type,
@@ -23,7 +25,10 @@ typealias @mbti_ast.(
   TypeParamWithConstraints,
   TraitMethodParameter,
   FieldDecl,
+  FieldName,
   ConstrDecl,
+  ConstrId,
+  ConstrName,
   ConstrParam,
   AliasSig,
   TraitSig,

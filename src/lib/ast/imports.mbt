@@ -5,5 +5,7 @@ pub typealias @ast_types.(
   ByteLiteral,
   BytesLiteral,
   CharLiteral,
-  StringLiteral
+  StringLiteral,
+  Attribute,
+  DocString
 )

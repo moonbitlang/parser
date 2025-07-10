@@ -1,0 +1,16 @@
+{
+  "mappings": [
+    {
+      "source": "parser.mbty",
+      "original_offset": 4538,
+      "generated_offset": 10721,
+      "length": 1
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 4562,
+      "generated_offset": 10915,
+      "length": 1
+    }
+  ]
+}

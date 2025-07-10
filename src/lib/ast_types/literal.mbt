@@ -14,7 +14,7 @@ pub typealias String as BytesLiteral
 pub(all) struct InterpSource {
   source : String
   loc : Location
-} derive(Show)
+} derive(Show, ToJson)
 
 ///|
 pub(all) enum InterpElem {

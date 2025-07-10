@@ -9,7 +9,7 @@ pub(all) enum Token {
   MULTILINE_STRING(String)
   MULTILINE_INTERP(InterpLiteral)
   INTERP(InterpLiteral)
-  ATTRIBUTE(String)
+  ATTRIBUTE((String, String?, String))
   LIDENT(String)
   UIDENT(String)
   POST_LABEL(String)
@@ -78,6 +78,7 @@ pub(all) enum Token {
   LET
   CONST
   MATCH
+  USING
   MUTABLE
   TYPE
   FAT_ARROW
@@ -95,6 +96,10 @@ pub(all) enum Token {
   IN
   IS
   SUBERROR
+  AND
+  LETREC
+  ENUMVIEW
+  NORAISE
 } derive(Show)
 
 pub fn Token::kind(self : Token) -> TokenKind {
@@ -178,6 +183,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     LET => TK_LET
     CONST => TK_CONST
     MATCH => TK_MATCH
+    USING => TK_USING
     MUTABLE => TK_MUTABLE
     TYPE => TK_TYPE
     FAT_ARROW => TK_FAT_ARROW
@@ -195,6 +201,10 @@ pub fn Token::kind(self : Token) -> TokenKind {
     IN => TK_IN
     IS => TK_IS
     SUBERROR => TK_SUBERROR
+    AND => TK_AND
+    LETREC => TK_LETREC
+    ENUMVIEW => TK_ENUMVIEW
+    NORAISE => TK_NORAISE
   }
 }
 
@@ -278,6 +288,7 @@ pub(all) enum TokenKind {
   TK_LET
   TK_CONST
   TK_MATCH
+  TK_USING
   TK_MUTABLE
   TK_TYPE
   TK_FAT_ARROW
@@ -295,6 +306,10 @@ pub(all) enum TokenKind {
   TK_IN
   TK_IS
   TK_SUBERROR
+  TK_AND
+  TK_LETREC
+  TK_ENUMVIEW
+  TK_NORAISE
 }
 
 pub impl Show for TokenKind with output(self, logger) {
@@ -379,6 +394,7 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_LET => "\"let\""
       TK_CONST => "\"const\""
       TK_MATCH => "\"match\""
+      TK_USING => "\"using\""
       TK_MUTABLE => "\"mut\""
       TK_TYPE => "\"type\""
       TK_FAT_ARROW => "\"=>\""
@@ -396,6 +412,10 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_IN => "\"in\""
       TK_IS => "\"is\""
       TK_SUBERROR => "\"suberror\""
+      TK_AND => "\"and\""
+      TK_LETREC => "\"letrec\""
+      TK_ENUMVIEW => "\"enumview\""
+      TK_NORAISE => "\"noraise\""
     }
   )
 }

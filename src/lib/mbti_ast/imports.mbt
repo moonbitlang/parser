@@ -5,12 +5,15 @@ pub typealias @ast_types.(Position, Location)
 pub typealias @ast.(
   Visibility,
   Constant,
-  Name,
-  QualifiedName,
   Type,
   ErrorType,
   TypeDesc,
   FieldDecl,
+  FieldName,
   ConstrDecl,
-  ConstrParam
+  ConstrId,
+  ConstrName,
+  ConstrParam,
+  LongIdent as QualifiedIdent,
+  Label
 )
