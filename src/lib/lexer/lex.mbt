@@ -2,7 +2,7 @@
 pub struct LexResult {
   tokens : Array[(Token, Position, Position)]
   errors : Array[(Position, Position, LexicalError)]
-  docstrings : Array[@immut/list.T[(Location, Comment)]]
+  docstrings : Array[@list.T[(Location, Comment)]]
 }
 
 ///|

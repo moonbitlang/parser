@@ -351,11 +351,52 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
       env.add_token_with_loc(MULTILINE_STRING(s), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    '#' ((lower | upper) [^ '\r' '\n']* as attr) => {
+    '#' (identifier as ident) '.' (identifier as dot_ident) ([^ '\r' '\n']* as raw_payload) => {
       if env.is_interpolation {
         env.add_lexing_error(start=$startpos, end=$endpos, InterpInvalidAttribute)
+      } else {
+        env.add_token_with_loc(
+          ATTRIBUTE((ident, Some(dot_ident), raw_payload)),
+          start=$startpos,
+          end=$endpos
+        )
       }
-      env.add_token_with_loc(ATTRIBUTE(attr), start=$startpos, end=$endpos)
+      tokens(lexbuf, env~, preserve_comment~)
+    }
+    '#' (identifier as ident) ([^ '\r' '\n']* as raw_payload) => {
+      if env.is_interpolation {
+        env.add_lexing_error(start=$startpos, end=$endpos, InterpInvalidAttribute)
+      } else {
+        env.add_token_with_loc(
+          ATTRIBUTE((ident, None, raw_payload)),
+          start=$startpos,
+          end=$endpos
+        )
+      }
+      tokens(lexbuf, env~, preserve_comment~)
+    }
+    '#' (identifier as ident) '.' (identifier as dot_ident) => {
+      if env.is_interpolation {
+        env.add_lexing_error(start=$startpos, end=$endpos, InterpInvalidAttribute)
+      } else {
+        env.add_token_with_loc(
+          ATTRIBUTE((ident, Some(dot_ident), "")),
+          start=$startpos,
+          end=$endpos
+        )
+      }
+      tokens(lexbuf, env~, preserve_comment~)
+    }
+    '#' (identifier as ident) => {
+      if env.is_interpolation {
+        env.add_lexing_error(start=$startpos, end=$endpos, InterpInvalidAttribute)
+      } else {
+        env.add_token_with_loc(
+          ATTRIBUTE((ident, None, "")),
+          start=$startpos,
+          end=$endpos
+        )
+      }
       tokens(lexbuf, env~, preserve_comment~)
     }
     '@' ((identifier '/')* identifier as pkgname) => {
@@ -433,7 +474,7 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
     "." (digit+ as digits) as repr => {
       let idx =
         try {
-          @strconv.parse_int!(digits)
+          @strconv.parse_int(digits)
         } catch {
           StrConvError(_) => {
             env.add_lexing_error(InvalidDotInt(repr), start=$startpos(repr), end=$endpos(repr))
