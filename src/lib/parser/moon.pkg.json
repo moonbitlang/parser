@@ -1,4 +1,8 @@
 {
+  "import": [
+    "moonbitlang/parser/lib/ast_types",
+    "moonbitlang/parser/lib/ast"
+  ],
   "pre-build": [
     // {
     //   "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --mode only-tokens $input -o $output",
@@ -10,11 +14,11 @@
     //   "input": "lexer.mbtx",
     //   "output": "lexer.mbt"
     // }
-    // {
-    //   "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --external-tokens --input-mode pull $input -o $output",
-    //   "input": "mbti_parser.mbty",
-    //   "output": "mbti_parser.mbt"
-    // }
+    {
+      "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc $input -o $output",
+      "input": "parser.mbty",
+      "output": "parser.mbt"
+    }
   ],
   "test-import": [
     "moonbitlang/x/fs"

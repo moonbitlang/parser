@@ -52,6 +52,8 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | LPAREN
     | DOT_LPAREN
     | LET
+    | LETREC
+    | AND
     | CONST
     | LBRACKET
     | LBRACE
@@ -75,7 +77,9 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | AUGMENTED_ASSIGNMENT(_)
     | EOF
     | ENUM
+    | ENUMVIEW
     | ELSE
+    | NORAISE
     | EXTERN
     | COMMENT(_)
     | COMMA
@@ -98,7 +102,8 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | FOR
     | AMPER
     | CARET
-    | ATTRIBUTE(_) => false
+    | ATTRIBUTE(_)
+    | USING => false
   }
 }
 
@@ -139,6 +144,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | MATCH
     | TRY
     | LET
+    | LETREC
     | CONST
     | IMPL
     | IMPORT
@@ -151,6 +157,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | FNALIAS
     | EOF
     | ENUM
+    | ENUMVIEW
     | PUB
     | PRIV
     | READONLY
@@ -222,6 +229,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | EQUAL
     | AUGMENTED_ASSIGNMENT(_)
     | ELSE
+    | NORAISE
     | CATCH
     | COMMA
     | COLON
@@ -234,7 +242,9 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | QUESTION
     | RANGE_INCLUSIVE
     | RANGE_EXCLUSIVE
-    | EXCLAMATION => false
+    | EXCLAMATION
+    | USING
+    | AND => false
   }
 }
 

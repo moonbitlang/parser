@@ -12,7 +12,7 @@
 %token<String> MULTILINE_STRING
 %token<InterpLiteral> MULTILINE_INTERP
 %token<InterpLiteral> INTERP
-%token<String> ATTRIBUTE
+%token<(String, Option[String], String)> ATTRIBUTE
 %token<String> LIDENT
 %token<String> UIDENT
 %token<String> POST_LABEL
@@ -98,6 +98,12 @@
 %token IN "in"
 %token IS "is"
 %token SUBERROR        "suberror"
+%token AND "and"
+%token LETREC "letrec"
+%token USING "using"
+%token NORAISE "noraise"
+%token ENUMVIEW "enumview"
+
 
 %%
 
@@ -105,8 +111,8 @@ mbti -> Mbti
   : LIDENT STRING ioption(";") imports sigs EOF { Mbti::{package_name: $2, imports: $4, sigs: $5} }
   ;
 
-imports -> @immut/list.T[PackageImport]
-  :  { Nil }
+imports -> @list.T[PackageImport]
+  :  { @list.empty() }
   | "import" "(" separated_nonempty_list(";", package_import) ")" ";" { $3 }
   ;
 
@@ -115,10 +121,10 @@ package_import -> PackageImport
   | STRING "as" LIDENT { PackageImport::{name: $1, alias_: Some($3)} }
   ;
 
-sigs -> @immut/list.T[(Sig, Location)]
-  :  { Nil }
-  | sig_ { Cons(($1, mk_loc($sloc)), Nil) }
-  | sig_ ";" sigs { Cons(($1, mk_loc($loc($1))), $3) }
+sigs -> @list.T[(Sig, Location)]
+  :  { @list.empty() }
+  | sig_ { @list.singleton(($1, mk_loc($sloc))) }
+  | sig_ ";" sigs { $3.add(($1, mk_loc($loc($1)))) }
   ;
 
 sig_ -> Sig
@@ -169,31 +175,32 @@ type_sig -> TypeSig
   : vis "extern" "type" type_decl_name_with_params { TypeSig::{vis: $1, name: $4.0, type_params: $4.1, components: Extern} }
   | vis "type" type_decl_name_with_params { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Abstract} }
   | vis "type" type_decl_name_with_params type_ { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Newtype($4)} }
-  | vis "suberror" uident { TypeSig::{vis: $1, name: $3, type_params: Nil, components: Error(NoPayload)} }
-  | vis "suberror" uident type_ { TypeSig::{vis: $1, name: $3, type_params: Nil, components: Error(SinglePayload($4))} }
-  | vis "suberror" uident "{" separated_list(";", enum_constructor) "}" { TypeSig::{vis: $1, name: $3, type_params: Nil, components: Error(EnumPayload($5))} }
+  | vis "suberror" uident { TypeSig::{vis: $1, name: $3, type_params: @list.empty(), components: Error(NoPayload)} }
+  | vis "suberror" uident type_ { TypeSig::{vis: $1, name: $3, type_params: @list.empty(), components: Error(SinglePayload($4))} }
+  | vis "suberror" uident "{" separated_list(";", enum_constructor) "}" { TypeSig::{vis: $1, name: $3, type_params: @list.empty(), components: Error(EnumPayload($5))} }
   | vis "struct" type_decl_name_with_params "{" separated_list(";", record_decl_field) "}" { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Record($5)} }
   | vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Variant($5)} }
   ;
 
 impl_sig -> ImplSig
   : "impl" type_params_with_constraints qualified_uident "for" type_ { Trait(type_params=$2, trait_name=$3, type_=$5) }
-  | "impl" qualified_uident "for" type_ { Trait(type_params=Nil, trait_name=$2, type_=$4) }
+  | "impl" qualified_uident "for" type_ { Trait(type_params=@list.empty(), trait_name=$2, type_=$4) }
   | "impl" uident "::" lident { DefaultImpl(trait_name=$2, method_name=$4) }
   ;
 
 trait_sig -> TraitSig
   : vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) "{" separated_nonempty_list(";", trait_method_sig) "}" { TraitSig::{vis: $1, name: $3, super_traits: $4, methods: $6} }
-  | vis "trait" uident { TraitSig::{vis: $1, name: $3, super_traits: Nil, methods: Nil} }
+  | vis "trait" uident { TraitSig::{vis: $1, name: $3, super_traits: @list.empty(), methods: @list.empty()} }
   ;
 
 alias_sig -> AliasSig
   : vis "typealias" type_ "as" type_decl_name_with_params  { TypeAlias(vis=$1, name=$5.0, type_params=$5.1, type_=$3) }
   | vis "traitalias" qualified_uident "as" uident { TraitAlias(vis=$1, name=$5, trait_name=$3) }
+  | "fnalias" qualified_uident "::" lident { FnAlias(name=$4, type_name=$2, loc=mk_loc($sloc)) }
   ;
 
 enum_constructor -> ConstrDecl
-  : uident option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { ConstrDecl::{name: $1, args: $2, tag: $3, loc: mk_loc($sloc)} }
+  : UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { ConstrDecl::{name: ConstrName::{ name : $1, loc : mk_loc($loc($1)) }, args: $2, tag: $3, loc: mk_loc($sloc)} }
   ;
 
 %inline eq_tag -> (String, Location)
@@ -206,15 +213,15 @@ constructor_param -> ConstrParam
   ;
 
 record_decl_field -> FieldDecl
-  : boption("mut") lident ":" type_ { FieldDecl::{name: $2, vis: Default, mut_: $1, type_: $4, loc: mk_loc($sloc)} }
+  : boption("mut") LIDENT ":" type_ { FieldDecl::{ name: FieldName::{ name : $2, loc : mk_loc($loc($2)) }, vis: Default, mut_: $1, type_: $4, loc: mk_loc($sloc)} }
   ;
 
 type_param_with_constraints -> TypeParamWithConstraints
-  : uident { TypeParamWithConstraints::{name: $1, constraints: Nil} }
+  : uident { TypeParamWithConstraints::{name: $1, constraints: @list.empty()} }
   | uident ":" separated_nonempty_list("+", type_constraint) { TypeParamWithConstraints::{name: $1, constraints: $3} }
   ;
 
-type_params_with_constraints -> @immut/list.T[TypeParamWithConstraints]
+type_params_with_constraints -> @list.T[TypeParamWithConstraints]
   : "[" separated_list(",", type_param_with_constraints) "]" { $2 }
   ;
 
@@ -223,12 +230,12 @@ type_param_no_constraints -> TypeParamNoConstraints
   | "_" { Underscore(mk_loc($sloc)) }
   ;
 
-type_params_no_constraints -> @immut/list.T[TypeParamNoConstraints]
+type_params_no_constraints -> @list.T[TypeParamNoConstraints]
   : "[" separated_list(",", type_param_no_constraints) "]" { $2 }
   ;
 
-optional_type_params_no_constraints -> @immut/list.T[TypeParamNoConstraints]
-  : { Nil }
+optional_type_params_no_constraints -> @list.T[TypeParamNoConstraints]
+  : { @list.empty() }
   | type_params_no_constraints { $1 }
   ;
 
@@ -236,13 +243,13 @@ type_constraint -> QualifiedName
   : qualified_uident { $1 }
   ;
 
-type_decl_name_with_params -> (Name, @immut/list.T[TypeParamNoConstraints])
+type_decl_name_with_params -> (Name, @list.T[TypeParamNoConstraints])
   : uident optional_type_params_no_constraints { ($1, $2) }
   ;
 
 simple_type -> Type
   : simple_type "?" { TOption($1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
-  | "(" type_ "," separated_nonempty_list(",", type_) ")" { TTuple(Cons($2, $4), loc=mk_loc($sloc)) }
+  | "(" type_ "," separated_nonempty_list(",", type_) ")" { TTuple($4.add($2), loc=mk_loc($sloc)) }
   | "(" type_ ")" { $2 }
   | qualified_uident_ optional_type_arguments { TName($1, $2, loc=mk_loc($sloc)) }
   | "&" qualified_uident_ { TObject($2) }
@@ -251,28 +258,28 @@ simple_type -> Type
 
 type_ -> Type
   : simple_type { $1 }
-  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { TArrow(Cons($3, $5.or(Nil)), $8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
-  | is_async "(" ")" "->" return_type { TArrow(Nil, $5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
-  | is_async "(" type_ ")" "->" return_type { TArrow(Cons($3, Nil), $6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { TArrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" ")" "->" return_type { TArrow(args=@list.empty(), res=$5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" type_ ")" "->" return_type { TArrow(args=@list.singleton($3), res=$6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
   ;
 
 return_type -> (Type, ErrorType)
   : type_ { ($1, NoErrorType) }
-  | simple_type "raise" { ($1, DefaultErrorType(mk_loc($loc($2)))) }
-  | simple_type "raise" error_type { ($1, ErrorType($3)) }
+  | simple_type "raise" { ($1, DefaultErrorType(mk_loc($loc($2)), is_old_syntax = false)) }
+  | simple_type "raise" error_type { ($1, ErrorType(ty = $3, is_old_syntax = false)) }
   | simple_type "raise" "?" {
-    let fake_error : Type = TName(@ast.QualifiedName::{ pkg : None, name :"Error", loc :@ast.no_location }, Nil, loc=@ast.no_location)
-    ($1, MaybeError(fake_error)) 
+    let fake_error : Type = TName(ConstrId::{ id : QualifiedIdent::Ident(name="Error"), loc :@ast.no_location }, @list.empty(), loc=@ast.no_location)
+    ($1, MaybeError(fake_error, is_old_syntax = false)) 
   }
   ;
 
 error_type -> Type
-  : qualified_uident_ { TName($1, Nil, loc=mk_loc($sloc)) }
+  : qualified_uident_ { TName($1, @list.empty(), loc=mk_loc($sloc)) }
   ;
 
-optional_type_arguments -> @immut/list.T[Type]
+optional_type_arguments -> @list.T[Type]
   : delimited("[", separated_nonempty_list(",", type_), "]") { $1 }
-  |  { Nil }
+  |  { @list.empty() }
   ;
 
 parameter -> Parameter
@@ -326,13 +333,13 @@ pub_attr -> String?
   ;
 
 qualified_uident -> QualifiedName
-  : UIDENT { QualifiedName::{pkg: None, name: $1, loc: mk_loc($sloc)} }
-  | PACKAGE_NAME DOT_UIDENT { QualifiedName::{pkg: Some($1), name: $2, loc: mk_loc($sloc)} }
+  : UIDENT { QualifiedName::{ name: Ident(name=$1), loc: mk_loc($sloc)} }
+  | PACKAGE_NAME DOT_UIDENT { QualifiedName::{ name: Qualified(pkg=$1, name=$2), loc: mk_loc($sloc)} }
   ;
 
-qualified_uident_ -> QualifiedName
-  : UIDENT { QualifiedName::{pkg: None, name: $1, loc: mk_loc($sloc)} }
-  | PACKAGE_NAME DOT_UIDENT { QualifiedName::{pkg: Some($1), name: $2, loc: mk_loc($sloc)} }
+qualified_uident_ -> ConstrId
+  : UIDENT { ConstrId::{ id: Ident(name=$1), loc: mk_loc($sloc)} }
+  | PACKAGE_NAME DOT_UIDENT { ConstrId::{ id: Qualified(pkg=$1, name=$2), loc: mk_loc($sloc)} }
   ;
 
 uident -> Name
@@ -343,10 +350,10 @@ lident -> Name
   : LIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
   ;
 
-label -> Name
-  : LIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
+label -> Label
+  : LIDENT { Label::{name: $1, loc: mk_loc($sloc)} }
   ;
 
-post_label -> Name
-  : POST_LABEL { Name::{name: $1, loc: mk_loc($sloc)} }
+post_label -> Label
+  : POST_LABEL { Label::{name: $1, loc: mk_loc($sloc)} }
   ;
