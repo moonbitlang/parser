@@ -1,6 +1,8 @@
 ///|
 fn iter_mbti_files(dir : String, f : (String) -> Unit raise) -> Unit raise {
-  for entry in @fs.read_dir(dir) {
+  let files = @fs.read_dir(dir)
+  files.sort()
+  for entry in files {
     let path = "\{dir}/\{entry}"
     if @fs.is_dir(path) {
       iter_mbti_files(path, f)

@@ -21,6 +21,6 @@
     // }
   ],
   "test-import": [
-    "moonbitlang/x/fs"
+    // "moonbitlang/x/fs"
   ]
 }
