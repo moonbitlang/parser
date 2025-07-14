@@ -1,0 +1,22 @@
+package "moonbitlang/parser/lib/mbti_parser"
+
+import(
+  "moonbitlang/parser/lib/ast_types"
+  "moonbitlang/parser/lib/mbti_ast"
+  "moonbitlang/parser/lib/tokens"
+)
+
+// Values
+fn mbti(Array[(@tokens.Token, @ast_types.Position, @ast_types.Position)], initial_pos? : @ast_types.Position) -> @mbti_ast.Mbti raise ParseError
+
+// Types and methods
+pub suberror ParseError {
+  UnexpectedToken(@tokens.Token, (@ast_types.Position, @ast_types.Position), Array[@tokens.TokenKind])
+  UnexpectedEndOfInput(@ast_types.Position, Array[@tokens.TokenKind])
+}
+impl Show for ParseError
+
+// Type aliases
+
+// Traits
+

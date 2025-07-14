@@ -1,0 +1,42 @@
+package "moonbitlang/parser/lib/lexer"
+
+import(
+  "moonbitlang/core/list"
+  "moonbitlang/parser/lib/ast_types"
+  "moonbitlang/parser/lib/tokens"
+)
+
+// Values
+fn tokens_from_bytes(name~ : String = .., start_pos~ : @ast_types.Position = .., is_interpolation~ : Bool = .., comment~ : Bool, Bytes) -> LexResult
+
+// Types and methods
+pub struct LexResult {
+  tokens : Array[(@tokens.Token, @ast_types.Position, @ast_types.Position)]
+  errors : Array[(@ast_types.Position, @ast_types.Position, LexicalError)]
+  docstrings : Array[@list.T[(@ast_types.Location, @ast_types.Comment)]]
+}
+
+type Lexbuf
+fn Lexbuf::curr_pos(Self) -> Int
+fn Lexbuf::from_bytes(Bytes, start~ : Int = .., end~ : Int = ..) -> Self
+fn Lexbuf::reset(Self, pos~ : Int) -> Unit
+
+pub enum LexicalError {
+  IllegalCharacter(Char)
+  UnterminatedString
+  UnterminatedStringInVariableInterploation
+  InterpInvalidMultilineString
+  InterpInvalidComment
+  InterpInvalidAttribute
+  InterpMissingExpression
+  InvalidEscapeSequence(String)
+  InvalidDotInt(String)
+  InvalidByteLiteral(String)
+  Reserved_keyword(String)
+}
+impl Show for LexicalError
+
+// Type aliases
+
+// Traits
+

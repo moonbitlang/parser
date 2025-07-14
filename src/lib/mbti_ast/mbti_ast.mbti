@@ -1,0 +1,166 @@
+package "moonbitlang/parser/lib/mbti_ast"
+
+import(
+  "moonbitlang/core/list"
+  "moonbitlang/parser/lib/ast"
+  "moonbitlang/parser/lib/ast_types"
+)
+
+// Values
+
+// Types and methods
+pub(all) enum AliasSig {
+  TypeAlias(name~ : Name, type_params~ : @list.T[TypeParamNoConstraints], type_~ : @ast.Type, vis~ : @ast.Visibility)
+  TraitAlias(name~ : Name, trait_name~ : QualifiedName, vis~ : @ast.Visibility)
+  FnAlias(name~ : Name, type_name~ : QualifiedName, loc~ : @ast_types.Location)
+}
+impl ToJson for AliasSig
+
+pub(all) struct ConstSig {
+  name : Name
+  type_ : @ast.Type
+  value : @ast.Constant
+}
+impl ToJson for ConstSig
+
+pub(all) struct FuncSig {
+  type_name : Name?
+  name : Name
+  params : @list.T[Parameter]
+  return_ : (@ast.Type, @ast.ErrorType)
+  type_params : @list.T[TypeParamWithConstraints]
+}
+impl ToJson for FuncSig
+
+pub(all) enum ImplSig {
+  Trait(type_params~ : @list.T[TypeParamWithConstraints], type_~ : @ast.Type, trait_name~ : QualifiedName)
+  DefaultImpl(trait_name~ : Name, method_name~ : Name)
+}
+impl ToJson for ImplSig
+
+pub(all) struct Mbti {
+  package_name : String
+  imports : @list.T[PackageImport]
+  sigs : @list.T[(Sig, @ast_types.Location)]
+}
+impl ToJson for Mbti
+
+pub(all) struct Name {
+  name : String
+  loc : @ast_types.Location
+}
+impl ToJson for Name
+
+pub(all) struct PackageImport {
+  name : String
+  alias_ : String?
+}
+impl ToJson for PackageImport
+
+pub(all) enum Parameter {
+  Positional(@ast.Type)
+  Labelled(@ast.Label, @ast.Type)
+  Autofill(@ast.Label, @ast.Type)
+  OptionalDefault(@ast.Label, @ast.Type)
+  OptionalOption(@ast.Label, @ast.Type)
+}
+impl ToJson for Parameter
+
+pub(all) struct QualifiedName {
+  name : @ast.LongIdent
+  loc : @ast_types.Location
+}
+impl ToJson for QualifiedName
+
+pub(all) enum Sig {
+  Func(FuncSig)
+  Type(TypeSig)
+  Alias(AliasSig)
+  Trait(TraitSig)
+  Impl(ImplSig)
+  Const(ConstSig)
+  Value(ValueSig)
+}
+impl ToJson for Sig
+
+pub(all) enum TraitMethodParameter {
+  Positional(@ast.Type)
+  Labelled(@ast.Label, @ast.Type)
+}
+impl ToJson for TraitMethodParameter
+
+pub(all) struct TraitMethodSig {
+  name : Name
+  params : @list.T[TraitMethodParameter]
+  has_default : Bool
+  return_ : (@ast.Type, @ast.ErrorType)
+}
+impl ToJson for TraitMethodSig
+
+pub(all) struct TraitSig {
+  name : Name
+  super_traits : @list.T[QualifiedName]
+  methods : @list.T[TraitMethodSig]
+  vis : @ast.Visibility
+}
+impl ToJson for TraitSig
+
+pub(all) enum TypeParamNoConstraints {
+  Name(Name)
+  Underscore(@ast_types.Location)
+}
+impl ToJson for TypeParamNoConstraints
+
+pub(all) struct TypeParamWithConstraints {
+  name : Name
+  constraints : @list.T[QualifiedName]
+}
+impl ToJson for TypeParamWithConstraints
+
+pub(all) struct TypeSig {
+  name : Name
+  type_params : @list.T[TypeParamNoConstraints]
+  components : @ast.TypeDesc
+  vis : @ast.Visibility
+}
+impl ToJson for TypeSig
+
+pub(all) struct ValueSig {
+  name : Name
+  type_ : @ast.Type
+}
+impl ToJson for ValueSig
+
+// Type aliases
+pub typealias @ast.Constant as Constant
+
+pub typealias @ast.ConstrDecl as ConstrDecl
+
+pub typealias @ast.ConstrId as ConstrId
+
+pub typealias @ast.ConstrName as ConstrName
+
+pub typealias @ast.ConstrParam as ConstrParam
+
+pub typealias @ast.ErrorType as ErrorType
+
+pub typealias @ast.FieldDecl as FieldDecl
+
+pub typealias @ast.FieldName as FieldName
+
+pub typealias @ast.Label as Label
+
+pub typealias @ast_types.Location as Location
+
+pub typealias @ast_types.Position as Position
+
+pub typealias @ast.LongIdent as QualifiedIdent
+
+pub typealias @ast.Type as Type
+
+pub typealias @ast.TypeDesc as TypeDesc
+
+pub typealias @ast.Visibility as Visibility
+
+// Traits
+

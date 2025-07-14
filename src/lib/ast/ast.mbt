@@ -30,6 +30,7 @@ pub(all) struct Label {
   loc : Location
 } derive(ToJson)
 
+///|
 pub(all) struct ConstrName {
   name : String
   loc : Location
@@ -42,7 +43,7 @@ pub(all) enum LongIdent {
   Qualified(pkg~ : String, name~ : String)
 } derive(ToJson)
 
-
+///|
 pub(all) struct TypeName {
   name : LongIdent
   is_object : Bool
@@ -106,6 +107,7 @@ pub(all) enum ExceptionDecl {
   EnumPayload(@list.T[ConstrDecl])
 } derive(ToJson)
 
+///|
 pub(all) struct FieldName {
   name : String
   loc : Location
@@ -405,11 +407,7 @@ pub(all) enum Expr {
   Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : Location)
   Is(expr~ : Expr, pat~ : Pattern, loc~ : Location)
   LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : Location)
-  LetRec(
-    bindings~ : @list.T[(Binder, Func)],
-    body~ : Expr,
-    loc~ : Location
-  )
+  LetRec(bindings~ : @list.T[(Binder, Func)], body~ : Expr, loc~ : Location)
   LetAnd(
     bindings~ : @list.T[(Binder, Type?, Func)],
     body~ : Expr,
@@ -545,7 +543,6 @@ pub(all) struct FieldPat {
   is_pun : Bool
   loc : Location
 } derive(ToJson)
-
 
 ///|
 // checked!

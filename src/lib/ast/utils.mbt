@@ -20,10 +20,7 @@ pub fn make_tuple_expr(loc : Location, exprs : @list.T[Expr]) -> Expr {
 }
 
 ///| Create array expression with possible spread elements
-pub fn make_array_expr(
-  loc : Location,
-  elems : @list.T[SpreadableElem]
-) -> Expr {
+pub fn make_array_expr(loc : Location, elems : @list.T[SpreadableElem]) -> Expr {
   // Try to convert to regular array if no spread elements
   ...
 }
@@ -76,10 +73,7 @@ pub fn make_constant_pattern(loc : Location, c : Constant) -> Pattern {
 }
 
 ///| Create tuple pattern
-pub fn make_tuple_pattern(
-  loc : Location,
-  pats : @list.T[Pattern]
-) -> Pattern {
+pub fn make_tuple_pattern(loc : Location, pats : @list.T[Pattern]) -> Pattern {
   Tuple(pats~, loc~)
 }
 
@@ -172,7 +166,7 @@ pub fn make_uminus(loc : Location, name : String, arg : Expr) -> Expr {
 
 ///| Create logical not expression
 pub fn make_unot(loc : Location, arg : Expr) -> Expr {
-  let op = Var::{ name: Ident(name = "!"), loc }
+  let op = Var::{ name: Ident(name="!"), loc }
   Unary(op~, expr=arg, loc~)
 }
 
@@ -231,18 +225,12 @@ pub fn desugar_array_augmented_set(
   let arr_name = "*array_" + counter.val.to_string()
   counter.val = counter.val + 1
   let arr_loc = loc_of_expression(array)
-  let arr_var = Var::{
-    name: Ident(name=arr_name),
-    loc: arr_loc,
-  }
+  let arr_var = Var::{ name: Ident(name=arr_name), loc: arr_loc }
   let arr_ident = make_ident_expr(arr_loc, arr_var)
   let idx_name = "*index_" + counter.val.to_string()
   counter.val = counter.val + 1
   let idx_loc = loc_of_expression(index)
-  let idx_var = Var::{
-    name: Ident(name=idx_name),
-    loc: idx_loc,
-  }
+  let idx_var = Var::{ name: Ident(name=idx_name), loc: idx_loc }
   let idx_ident = make_ident_expr(idx_loc, idx_var)
   Let(
     pattern=Pattern::Var(Binder::{ name: arr_name, loc: no_location }),
@@ -310,10 +298,7 @@ pub fn make_field_def(
 
 ///| Convert label to expression
 pub fn label_to_expr(loc : Location, label : Label) -> Expr {
-  make_ident_expr(loc, Var::{
-    name: Ident(name=label.name),
-    loc,
-  })
+  make_ident_expr(loc, Var::{ name: Ident(name=label.name), loc })
 }
 
 ///| Convert label to pattern
@@ -377,10 +362,7 @@ pub enum ArrowFnParam {
 
 ///| Convert binder to expression
 pub fn binder_to_expr(p : Binder) -> Expr {
-  make_ident_expr(p.loc, Var::{
-    name:Ident(name=p.name),
-    loc: p.loc,
-  })
+  make_ident_expr(p.loc, Var::{ name: Ident(name=p.name), loc: p.loc })
 }
 
 ///| Convert arrow function parameter to expression

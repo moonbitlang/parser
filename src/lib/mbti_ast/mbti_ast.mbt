@@ -1,8 +1,10 @@
+///|
 pub(all) struct Name {
   name : String
   loc : Location
 } derive(ToJson)
 
+///|
 pub(all) struct QualifiedName {
   name : QualifiedIdent
   loc : Location
