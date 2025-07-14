@@ -80,6 +80,7 @@ pub(all) struct Position {
   bol : Int
   cnum : Int
 }
+fn Position::column(Self) -> Int
 impl Eq for Position
 impl Show for Position
 impl ToJson for Position

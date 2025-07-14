@@ -18,7 +18,7 @@ pub struct LexResult {
 
 type Lexbuf
 fn Lexbuf::curr_pos(Self) -> Int
-fn Lexbuf::from_bytes(Bytes, start~ : Int = .., end~ : Int = ..) -> Self
+fn Lexbuf::from_bytes(Bytes, start~ : Int = .., end? : Int) -> Self
 fn Lexbuf::reset(Self, pos~ : Int) -> Unit
 
 pub enum LexicalError {

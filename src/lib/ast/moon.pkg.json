@@ -1,5 +1,6 @@
 {
   "import": [
     "moonbitlang/parser/lib/ast_types"
-  ]
+  ],
+  "warn-list": "-28"
 }

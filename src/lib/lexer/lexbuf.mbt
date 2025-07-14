@@ -9,8 +9,12 @@ struct Lexbuf {
 pub fn Lexbuf::from_bytes(
   bytes : Bytes,
   start~ : Int = 0,
-  end~ : Int = bytes.length()
+  end? : Int
 ) -> Lexbuf {
+  let end = match end {
+    None => bytes.length()
+    Some(e) => e
+  }
   return { content: bytes, pos: start, end }
 }
 

@@ -124,7 +124,7 @@ pub(all) enum ArrayPatterns {
 }
 impl ToJson for ArrayPatterns
 
-pub enum ArrowFnParam {
+pub(all) enum ArrowFnParam {
   Named(Binder)
   Unnamed(@ast_types.Location)
 }
@@ -405,7 +405,7 @@ pub(all) enum InterpElem {
 }
 impl ToJson for InterpElem
 
-pub enum InterpolationComponent {
+pub(all) enum InterpolationComponent {
   InterpLit(String, @ast_types.Location)
   InterpSource(@ast_types.InterpSource)
 }

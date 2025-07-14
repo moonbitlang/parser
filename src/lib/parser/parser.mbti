@@ -3,7 +3,6 @@ package "moonbitlang/parser/lib/parser"
 // Values
 
 // Types and methods
-type LeftValue
 
 // Type aliases
 

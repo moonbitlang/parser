@@ -12,7 +12,7 @@ pub impl Eq for Position with op_equal(self, other) {
 }
 
 ///|
-fn column(self : Position) -> Int {
+pub fn column(self : Position) -> Int {
   self.cnum - self.bol + 1
 }
 
