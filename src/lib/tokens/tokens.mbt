@@ -1,3 +1,4 @@
+///|
 pub(all) enum Token {
   CHAR(CharLiteral)
   INT(String)
@@ -102,6 +103,7 @@ pub(all) enum Token {
   NORAISE
 } derive(Show)
 
+///|
 pub fn Token::kind(self : Token) -> TokenKind {
   match self {
     CHAR(_) => TK_CHAR
@@ -208,6 +210,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
   }
 }
 
+///|
 pub(all) enum TokenKind {
   TK_CHAR
   TK_INT
@@ -312,6 +315,7 @@ pub(all) enum TokenKind {
   TK_NORAISE
 }
 
+///|
 pub impl Show for TokenKind with output(self, logger) {
   logger.write_string(
     match self {
@@ -416,7 +420,6 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_LETREC => "\"letrec\""
       TK_ENUMVIEW => "\"enumview\""
       TK_NORAISE => "\"noraise\""
-    }
+    },
   )
 }
-
