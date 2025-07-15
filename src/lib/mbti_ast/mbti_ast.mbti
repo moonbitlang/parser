@@ -24,6 +24,7 @@ pub(all) struct ConstSig {
 impl ToJson for ConstSig
 
 pub(all) struct FuncSig {
+  attr : @list.T[(String, String?, String)]
   type_name : Name?
   name : Name
   params : @list.T[Parameter]

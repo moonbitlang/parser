@@ -39,6 +39,7 @@ pub(all) enum TraitMethodParameter {
 
 ///|
 pub(all) struct FuncSig {
+  attr : @list.T[(String, String?, String)]
   type_name : Name?
   name : Name
   params : @list.T[Parameter]

@@ -151,16 +151,12 @@ method_prefix -> Option[Name]
   ;
 
 func_sig_no_attr -> FuncSig
-  : FN loption(type_params_with_constraints) method_prefix lident delimited("(", separated_list(",", parameter), ")") "->" return_type { FuncSig::{type_name: $3, name: $4, type_params: $2, params: $5, return_: $7} }
+  : FN loption(type_params_with_constraints) method_prefix lident delimited("(", separated_list(",", parameter), ")") "->" return_type { FuncSig::{ attr: @list.empty(), type_name: $3, name: $4, type_params: $2, params: $5, return_: $7} }
   ;
 
 func_sig -> FuncSig
   : func_sig_no_attr { $1 }
-  | nonempty_list(ATTRIBUTE) func_sig_no_attr { $2 } /* todo: attributes are discarded */
-  ;
-
-impl_method_sig -> FuncSig
-  : list(ATTRIBUTE) lident loption(type_params_with_constraints) delimited("(", separated_list(",", parameter), ")") "->" return_type { FuncSig::{name: $2, type_params: $3, params: $4, return_: $6} }
+  | nonempty_list(ATTRIBUTE) func_sig_no_attr { { ..$2, attr : $1 } }
   ;
 
 trait_method_sig -> TraitMethodSig
