@@ -1,0 +1,3267 @@
+{
+  "package_name": "moonbitlang/core/hashmap",
+  "imports": [
+    {
+      "name": "moonbitlang/core/quickcheck"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_array",
+            "loc": "core/hashmap/hashmap.mbti:8:21-8:31"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Array"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:8:32-8:37"
+                },
+                "1": [
+                  {
+                    "type": "TTuple",
+                    "0": [
+                      {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "K"
+                          },
+                          "loc": "core/hashmap/hashmap.mbti:8:39-8:40"
+                        },
+                        "1": [],
+                        "loc": "core/hashmap/hashmap.mbti:8:39-8:40"
+                      },
+                      {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "V"
+                          },
+                          "loc": "core/hashmap/hashmap.mbti:8:42-8:43"
+                        },
+                        "1": [],
+                        "loc": "core/hashmap/hashmap.mbti:8:42-8:43"
+                      }
+                    ],
+                    "loc": "core/hashmap/hashmap.mbti:8:38-8:44"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:8:32-8:45"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/hashmap/hashmap.mbti:8:50-8:51"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:8:52-8:53"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:8:52-8:53"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "V"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:8:55-8:56"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:8:55-8:56"
+                }
+              ],
+              "loc": "core/hashmap/hashmap.mbti:8:50-8:57"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:8:3-8:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:8:7-8:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:8:14-8:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:8:18-8:19"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:8:0-8:57"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_iter",
+            "loc": "core/hashmap/hashmap.mbti:10:21-10:30"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Iter"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:10:31-10:35"
+                },
+                "1": [
+                  {
+                    "type": "TTuple",
+                    "0": [
+                      {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "K"
+                          },
+                          "loc": "core/hashmap/hashmap.mbti:10:37-10:38"
+                        },
+                        "1": [],
+                        "loc": "core/hashmap/hashmap.mbti:10:37-10:38"
+                      },
+                      {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "V"
+                          },
+                          "loc": "core/hashmap/hashmap.mbti:10:40-10:41"
+                        },
+                        "1": [],
+                        "loc": "core/hashmap/hashmap.mbti:10:40-10:41"
+                      }
+                    ],
+                    "loc": "core/hashmap/hashmap.mbti:10:36-10:42"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:10:31-10:43"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/hashmap/hashmap.mbti:10:48-10:49"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:10:50-10:51"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:10:50-10:51"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "V"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:10:53-10:54"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:10:53-10:54"
+                }
+              ],
+              "loc": "core/hashmap/hashmap.mbti:10:48-10:55"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:10:3-10:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:10:7-10:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:10:14-10:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:10:18-10:19"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:10:0-10:55"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "new",
+            "loc": "core/hashmap/hashmap.mbti:12:9-12:12"
+          },
+          "params": [
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "capacity",
+                "loc": "core/hashmap/hashmap.mbti:12:13-12:22"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:12:25-12:28"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:12:25-12:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/hashmap/hashmap.mbti:12:38-12:39"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:12:40-12:41"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:12:40-12:41"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "V"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:12:43-12:44"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:12:43-12:44"
+                }
+              ],
+              "loc": "core/hashmap/hashmap.mbti:12:38-12:45"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:12:3-12:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:12:6-12:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:12:0-12:45"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "of",
+            "loc": "core/hashmap/hashmap.mbti:14:21-14:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "FixedArray"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:14:24-14:34"
+                },
+                "1": [
+                  {
+                    "type": "TTuple",
+                    "0": [
+                      {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "K"
+                          },
+                          "loc": "core/hashmap/hashmap.mbti:14:36-14:37"
+                        },
+                        "1": [],
+                        "loc": "core/hashmap/hashmap.mbti:14:36-14:37"
+                      },
+                      {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "V"
+                          },
+                          "loc": "core/hashmap/hashmap.mbti:14:39-14:40"
+                        },
+                        "1": [],
+                        "loc": "core/hashmap/hashmap.mbti:14:39-14:40"
+                      }
+                    ],
+                    "loc": "core/hashmap/hashmap.mbti:14:35-14:41"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:14:24-14:42"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/hashmap/hashmap.mbti:14:47-14:48"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:14:49-14:50"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:14:49-14:50"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "V"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:14:52-14:53"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:14:52-14:53"
+                }
+              ],
+              "loc": "core/hashmap/hashmap.mbti:14:47-14:54"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:14:3-14:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:14:7-14:9"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:14:12-14:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:14:18-14:19"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:14:0-14:54"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:17:5-17:6"
+          },
+          "type_params": [
+            {
+              "$tag": "Name",
+              "0": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:17:7-17:8"
+              }
+            },
+            {
+              "$tag": "Name",
+              "0": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:17:10-17:11"
+              }
+            }
+          ],
+          "components": {
+            "type": "Abstract"
+          },
+          "vis": {
+            "type": "Default"
+          }
+        }
+      },
+      "core/hashmap/hashmap.mbti:17:0-17:12"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:18:9-18:10"
+          },
+          "name": {
+            "name": "capacity",
+            "loc": "core/hashmap/hashmap.mbti:18:12-18:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:18:21-18:25"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:18:26-18:27"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:18:26-18:27"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:18:29-18:30"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:18:29-18:30"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:18:21-18:31"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/hashmap/hashmap.mbti:18:36-18:39"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:18:36-18:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:18:3-18:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:18:6-18:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:18:0-18:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:19:9-19:10"
+          },
+          "name": {
+            "name": "clear",
+            "loc": "core/hashmap/hashmap.mbti:19:12-19:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:19:18-19:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:19:23-19:24"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:19:23-19:24"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:19:26-19:27"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:19:26-19:27"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:19:18-19:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/hashmap/hashmap.mbti:19:33-19:37"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:19:33-19:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:19:3-19:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:19:6-19:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:19:0-19:37"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:20:21-20:22"
+          },
+          "name": {
+            "name": "contains",
+            "loc": "core/hashmap/hashmap.mbti:20:24-20:32"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:20:33-20:37"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:20:38-20:39"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:20:38-20:39"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:20:41-20:42"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:20:41-20:42"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:20:33-20:43"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:20:45-20:46"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:20:45-20:46"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/hashmap/hashmap.mbti:20:51-20:55"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:20:51-20:55"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:20:3-20:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:20:7-20:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:20:14-20:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:20:18-20:19"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:20:0-20:55"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:21:26-21:27"
+          },
+          "name": {
+            "name": "contains_kv",
+            "loc": "core/hashmap/hashmap.mbti:21:29-21:40"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:21:41-21:45"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:21:46-21:47"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:21:46-21:47"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:21:49-21:50"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:21:49-21:50"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:21:41-21:51"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:21:53-21:54"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:21:53-21:54"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:21:56-21:57"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:21:56-21:57"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/hashmap/hashmap.mbti:21:62-21:66"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:21:62-21:66"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:21:3-21:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:21:7-21:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:21:14-21:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:21:18-21:19"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:21:22-21:24"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:21:0-21:66"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:22:9-22:10"
+          },
+          "name": {
+            "name": "each",
+            "loc": "core/hashmap/hashmap.mbti:22:12-22:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:22:17-22:21"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:22:22-22:23"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:22:22-22:23"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:22:25-22:26"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:22:25-22:26"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:22:17-22:27"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:22:30-22:31"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:22:30-22:31"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:22:33-22:34"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:22:33-22:34"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:22:39-22:43"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:22:39-22:43"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/hashmap/hashmap.mbti:22:29-22:43"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/hashmap/hashmap.mbti:22:48-22:52"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:22:48-22:52"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:22:3-22:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:22:6-22:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:22:0-22:52"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:23:9-23:10"
+          },
+          "name": {
+            "name": "eachi",
+            "loc": "core/hashmap/hashmap.mbti:23:12-23:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:23:18-23:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:23:23-23:24"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:23:23-23:24"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:23:26-23:27"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:23:26-23:27"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:23:18-23:28"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Int"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:23:31-23:34"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:23:31-23:34"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:23:36-23:37"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:23:36-23:37"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:23:39-23:40"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:23:39-23:40"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:23:45-23:49"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:23:45-23:49"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/hashmap/hashmap.mbti:23:30-23:49"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/hashmap/hashmap.mbti:23:54-23:58"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:23:54-23:58"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:23:3-23:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:23:6-23:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:23:0-23:58"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:24:21-24:22"
+          },
+          "name": {
+            "name": "get",
+            "loc": "core/hashmap/hashmap.mbti:24:24-24:27"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:24:28-24:32"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:24:33-24:34"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:24:33-24:34"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:24:36-24:37"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:24:36-24:37"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:24:28-24:38"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:24:40-24:41"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:24:40-24:41"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:24:46-24:47"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:24:46-24:47"
+              },
+              "loc": "core/hashmap/hashmap.mbti:24:46-24:48",
+              "question_loc": "core/hashmap/hashmap.mbti:24:47-24:48"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:24:3-24:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:24:7-24:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:24:14-24:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:24:18-24:19"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:24:0-24:48"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:25:21-25:22"
+          },
+          "name": {
+            "name": "get_or_default",
+            "loc": "core/hashmap/hashmap.mbti:25:24-25:38"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:25:39-25:43"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:25:44-25:45"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:25:44-25:45"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:25:47-25:48"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:25:47-25:48"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:25:39-25:49"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:25:51-25:52"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:25:51-25:52"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:25:54-25:55"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:25:54-25:55"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "V"
+                },
+                "loc": "core/hashmap/hashmap.mbti:25:60-25:61"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:25:60-25:61"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:25:3-25:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:25:7-25:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:25:14-25:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:25:18-25:19"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:25:0-25:61"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:26:21-26:22"
+          },
+          "name": {
+            "name": "get_or_init",
+            "loc": "core/hashmap/hashmap.mbti:26:24-26:35"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:26:36-26:40"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:26:41-26:42"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:26:41-26:42"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:26:44-26:45"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:26:44-26:45"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:26:36-26:46"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:26:48-26:49"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:26:48-26:49"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "V"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:26:57-26:58"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:26:57-26:58"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/hashmap/hashmap.mbti:26:51-26:58"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "V"
+                },
+                "loc": "core/hashmap/hashmap.mbti:26:63-26:64"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:26:63-26:64"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:26:3-26:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:26:7-26:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:26:14-26:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:26:18-26:19"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:26:0-26:64"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:27:9-27:10"
+          },
+          "name": {
+            "name": "is_empty",
+            "loc": "core/hashmap/hashmap.mbti:27:12-27:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:27:21-27:25"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:27:26-27:27"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:27:26-27:27"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:27:29-27:30"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:27:29-27:30"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:27:21-27:31"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/hashmap/hashmap.mbti:27:36-27:40"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:27:36-27:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:27:3-27:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:27:6-27:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:27:0-27:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:28:9-28:10"
+          },
+          "name": {
+            "name": "iter",
+            "loc": "core/hashmap/hashmap.mbti:28:12-28:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:28:17-28:21"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:28:22-28:23"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:28:22-28:23"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:28:25-28:26"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:28:25-28:26"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:28:17-28:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter"
+                },
+                "loc": "core/hashmap/hashmap.mbti:28:32-28:36"
+              },
+              "1": [
+                {
+                  "type": "TTuple",
+                  "0": [
+                    {
+                      "type": "TName",
+                      "0": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "Ident",
+                          "name": "K"
+                        },
+                        "loc": "core/hashmap/hashmap.mbti:28:38-28:39"
+                      },
+                      "1": [],
+                      "loc": "core/hashmap/hashmap.mbti:28:38-28:39"
+                    },
+                    {
+                      "type": "TName",
+                      "0": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "Ident",
+                          "name": "V"
+                        },
+                        "loc": "core/hashmap/hashmap.mbti:28:41-28:42"
+                      },
+                      "1": [],
+                      "loc": "core/hashmap/hashmap.mbti:28:41-28:42"
+                    }
+                  ],
+                  "loc": "core/hashmap/hashmap.mbti:28:37-28:43"
+                }
+              ],
+              "loc": "core/hashmap/hashmap.mbti:28:32-28:44"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:28:3-28:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:28:6-28:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:28:0-28:44"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:29:9-29:10"
+          },
+          "name": {
+            "name": "iter2",
+            "loc": "core/hashmap/hashmap.mbti:29:12-29:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:29:18-29:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:29:23-29:24"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:29:23-29:24"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:29:26-29:27"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:29:26-29:27"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:29:18-29:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter2"
+                },
+                "loc": "core/hashmap/hashmap.mbti:29:33-29:38"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:29:39-29:40"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:29:39-29:40"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "V"
+                    },
+                    "loc": "core/hashmap/hashmap.mbti:29:42-29:43"
+                  },
+                  "1": [],
+                  "loc": "core/hashmap/hashmap.mbti:29:42-29:43"
+                }
+              ],
+              "loc": "core/hashmap/hashmap.mbti:29:33-29:44"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:29:3-29:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:29:6-29:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:29:0-29:44"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:31:21-31:22"
+          },
+          "name": {
+            "name": "op_get",
+            "loc": "core/hashmap/hashmap.mbti:31:24-31:30"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:31:31-31:35"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:31:36-31:37"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:31:36-31:37"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:31:39-31:40"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:31:39-31:40"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:31:31-31:41"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:31:43-31:44"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:31:43-31:44"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:31:49-31:50"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:31:49-31:50"
+              },
+              "loc": "core/hashmap/hashmap.mbti:31:49-31:51",
+              "question_loc": "core/hashmap/hashmap.mbti:31:50-31:51"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:31:3-31:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:31:7-31:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:31:14-31:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:31:18-31:19"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:30:0-31:51"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:32:21-32:22"
+          },
+          "name": {
+            "name": "op_set",
+            "loc": "core/hashmap/hashmap.mbti:32:24-32:30"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:32:31-32:35"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:32:36-32:37"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:32:36-32:37"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:32:39-32:40"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:32:39-32:40"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:32:31-32:41"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:32:43-32:44"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:32:43-32:44"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:32:46-32:47"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:32:46-32:47"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/hashmap/hashmap.mbti:32:52-32:56"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:32:52-32:56"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:32:3-32:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:32:7-32:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:32:14-32:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:32:18-32:19"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:32:0-32:56"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:33:21-33:22"
+          },
+          "name": {
+            "name": "remove",
+            "loc": "core/hashmap/hashmap.mbti:33:24-33:30"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:33:31-33:35"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:33:36-33:37"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:33:36-33:37"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:33:39-33:40"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:33:39-33:40"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:33:31-33:41"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:33:43-33:44"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:33:43-33:44"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/hashmap/hashmap.mbti:33:49-33:53"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:33:49-33:53"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:33:3-33:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:33:7-33:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:33:14-33:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:33:18-33:19"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:33:0-33:53"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:34:21-34:22"
+          },
+          "name": {
+            "name": "set",
+            "loc": "core/hashmap/hashmap.mbti:34:24-34:27"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:34:28-34:32"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:34:33-34:34"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:34:33-34:34"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:34:36-34:37"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:34:36-34:37"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:34:28-34:38"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:34:40-34:41"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:34:40-34:41"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:34:43-34:44"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:34:43-34:44"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/hashmap/hashmap.mbti:34:49-34:53"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:34:49-34:53"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:34:3-34:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:34:7-34:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:34:14-34:16"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:34:18-34:19"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:34:0-34:53"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:35:9-35:10"
+          },
+          "name": {
+            "name": "size",
+            "loc": "core/hashmap/hashmap.mbti:35:12-35:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:35:17-35:21"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:35:22-35:23"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:35:22-35:23"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:35:25-35:26"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:35:25-35:26"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:35:17-35:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/hashmap/hashmap.mbti:35:32-35:35"
+              },
+              "1": [],
+              "loc": "core/hashmap/hashmap.mbti:35:32-35:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:35:3-35:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:35:6-35:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:35:0-35:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/hashmap/hashmap.mbti:36:9-36:10"
+          },
+          "name": {
+            "name": "to_array",
+            "loc": "core/hashmap/hashmap.mbti:36:12-36:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:36:21-36:25"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:36:26-36:27"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:36:26-36:27"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/hashmap/hashmap.mbti:36:29-36:30"
+                    },
+                    "1": [],
+                    "loc": "core/hashmap/hashmap.mbti:36:29-36:30"
+                  }
+                ],
+                "loc": "core/hashmap/hashmap.mbti:36:21-36:31"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Array"
+                },
+                "loc": "core/hashmap/hashmap.mbti:36:36-36:41"
+              },
+              "1": [
+                {
+                  "type": "TTuple",
+                  "0": [
+                    {
+                      "type": "TName",
+                      "0": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "Ident",
+                          "name": "K"
+                        },
+                        "loc": "core/hashmap/hashmap.mbti:36:43-36:44"
+                      },
+                      "1": [],
+                      "loc": "core/hashmap/hashmap.mbti:36:43-36:44"
+                    },
+                    {
+                      "type": "TName",
+                      "0": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "Ident",
+                          "name": "V"
+                        },
+                        "loc": "core/hashmap/hashmap.mbti:36:46-36:47"
+                      },
+                      "1": [],
+                      "loc": "core/hashmap/hashmap.mbti:36:46-36:47"
+                    }
+                  ],
+                  "loc": "core/hashmap/hashmap.mbti:36:42-36:48"
+                }
+              ],
+              "loc": "core/hashmap/hashmap.mbti:36:36-36:49"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:36:3-36:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:36:6-36:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/hashmap/hashmap.mbti:36:0-36:49"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:37:5-37:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:37:9-37:13"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:37:16-37:18"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:37:20-37:21"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:37:24-37:26"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/hashmap/hashmap.mbti:37:35-37:36"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:37:37-37:38"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:37:37-37:38"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:37:40-37:41"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:37:40-37:41"
+              }
+            ],
+            "loc": "core/hashmap/hashmap.mbti:37:35-37:42"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/hashmap/hashmap.mbti:37:28-37:30"
+          }
+        }
+      },
+      "core/hashmap/hashmap.mbti:37:0-37:42"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:38:5-38:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:38:9-38:13"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:38:15-38:16"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:38:19-38:23"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/hashmap/hashmap.mbti:38:34-38:35"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:38:36-38:37"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:38:36-38:37"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:38:39-38:40"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:38:39-38:40"
+              }
+            ],
+            "loc": "core/hashmap/hashmap.mbti:38:34-38:41"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/hashmap/hashmap.mbti:38:25-38:29"
+          }
+        }
+      },
+      "core/hashmap/hashmap.mbti:38:0-38:41"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:39:5-39:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:39:9-39:13"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:39:15-39:16"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "ToJson"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:39:19-39:25"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/hashmap/hashmap.mbti:39:38-39:39"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:39:40-39:41"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:39:40-39:41"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:39:43-39:44"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:39:43-39:44"
+              }
+            ],
+            "loc": "core/hashmap/hashmap.mbti:39:38-39:45"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/hashmap/hashmap.mbti:39:27-39:33"
+          }
+        }
+      },
+      "core/hashmap/hashmap.mbti:39:0-39:45"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/hashmap/hashmap.mbti:40:5-40:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:40:9-40:30"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:40:33-40:37"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:40:40-40:42"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/hashmap/hashmap.mbti:40:44-40:45"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:40:48-40:69"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/hashmap/hashmap.mbti:40:97-40:98"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:40:99-40:100"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:40:99-40:100"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/hashmap/hashmap.mbti:40:102-40:103"
+                },
+                "1": [],
+                "loc": "core/hashmap/hashmap.mbti:40:102-40:103"
+              }
+            ],
+            "loc": "core/hashmap/hashmap.mbti:40:97-40:104"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "quickcheck",
+              "name": "Arbitrary"
+            },
+            "loc": "core/hashmap/hashmap.mbti:40:71-40:92"
+          }
+        }
+      },
+      "core/hashmap/hashmap.mbti:40:0-40:104"
+    ]
+  ]
+}

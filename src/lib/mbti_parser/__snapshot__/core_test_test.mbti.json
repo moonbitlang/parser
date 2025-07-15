@@ -1,0 +1,1203 @@
+{
+  "package_name": "moonbitlang/core/test",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "eq",
+            "loc": "core/test/test.mbti:5:18-5:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/test/test.mbti:5:21-5:22"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:5:21-5:22"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/test/test.mbti:5:24-5:25"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:5:24-5:25"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/test/test.mbti:5:27-5:31"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/test/test.mbti:5:34-5:43"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:5:34-5:43"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/test/test.mbti:5:52-5:56"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:5:52-5:56"
+            },
+            {
+              "type": "DefaultErrorType",
+              "0": "core/test/test.mbti:5:57-5:62",
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/test/test.mbti:5:3-5:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/test/test.mbti:5:7-5:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/test/test.mbti:5:14-5:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/test/test.mbti:4:0-5:62"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "fail",
+            "loc": "core/test/test.mbti:7:6-7:10"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/test/test.mbti:7:11-7:17"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:7:11-7:17"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/test/test.mbti:7:19-7:23"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/test/test.mbti:7:26-7:35"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:7:26-7:35"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/test/test.mbti:7:44-7:45"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:7:44-7:45"
+            },
+            {
+              "type": "DefaultErrorType",
+              "0": "core/test/test.mbti:7:46-7:51",
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/test/test.mbti:7:3-7:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/test/test.mbti:7:0-7:51"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "is_false",
+            "loc": "core/test/test.mbti:10:3-10:11"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/test/test.mbti:10:12-10:16"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:10:12-10:16"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/test/test.mbti:10:18-10:22"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/test/test.mbti:10:25-10:34"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:10:25-10:34"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/test/test.mbti:10:43-10:47"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:10:43-10:47"
+            },
+            {
+              "type": "DefaultErrorType",
+              "0": "core/test/test.mbti:10:48-10:53",
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/test/test.mbti:9:0-10:53"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "is_not",
+            "loc": "core/test/test.mbti:12:13-12:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/test/test.mbti:12:20-12:21"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:12:20-12:21"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/test/test.mbti:12:23-12:24"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:12:23-12:24"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/test/test.mbti:12:26-12:30"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/test/test.mbti:12:33-12:42"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:12:33-12:42"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/test/test.mbti:12:51-12:55"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:12:51-12:55"
+            },
+            {
+              "type": "DefaultErrorType",
+              "0": "core/test/test.mbti:12:56-12:61",
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/test/test.mbti:12:3-12:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/test/test.mbti:12:7-12:11"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/test/test.mbti:12:0-12:61"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "is_true",
+            "loc": "core/test/test.mbti:15:3-15:10"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/test/test.mbti:15:11-15:15"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:15:11-15:15"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/test/test.mbti:15:17-15:21"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/test/test.mbti:15:24-15:33"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:15:24-15:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/test/test.mbti:15:42-15:46"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:15:42-15:46"
+            },
+            {
+              "type": "DefaultErrorType",
+              "0": "core/test/test.mbti:15:47-15:52",
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/test/test.mbti:14:0-15:52"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "ne",
+            "loc": "core/test/test.mbti:18:18-18:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/test/test.mbti:18:21-18:22"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:18:21-18:22"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/test/test.mbti:18:24-18:25"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:18:24-18:25"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/test/test.mbti:18:27-18:31"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/test/test.mbti:18:34-18:43"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:18:34-18:43"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/test/test.mbti:18:52-18:56"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:18:52-18:56"
+            },
+            {
+              "type": "DefaultErrorType",
+              "0": "core/test/test.mbti:18:57-18:62",
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/test/test.mbti:18:3-18:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/test/test.mbti:18:7-18:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/test/test.mbti:18:14-18:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/test/test.mbti:17:0-18:62"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "new",
+            "loc": "core/test/test.mbti:20:3-20:6"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/test/test.mbti:20:7-20:13"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:20:7-20:13"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/test/test.mbti:20:18-20:19"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:20:18-20:19"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/test/test.mbti:20:0-20:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "same_object",
+            "loc": "core/test/test.mbti:22:13-22:24"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/test/test.mbti:22:25-22:26"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:22:25-22:26"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/test/test.mbti:22:28-22:29"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:22:28-22:29"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/test/test.mbti:22:31-22:35"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/test/test.mbti:22:38-22:47"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:22:38-22:47"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/test/test.mbti:22:56-22:60"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:22:56-22:60"
+            },
+            {
+              "type": "DefaultErrorType",
+              "0": "core/test/test.mbti:22:61-22:66",
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/test/test.mbti:22:3-22:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/test/test.mbti:22:7-22:11"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/test/test.mbti:22:0-22:66"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "T",
+            "loc": "core/test/test.mbti:25:16-25:17"
+          },
+          "type_params": [],
+          "components": {
+            "type": "Record",
+            "0": [
+              {
+                "type": "FieldDecl",
+                "name": {
+                  "type": "FieldName",
+                  "name": "name",
+                  "loc": "core/test/test.mbti:26:2-26:6"
+                },
+                "type_": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "String"
+                    },
+                    "loc": "core/test/test.mbti:26:9-26:15"
+                  },
+                  "1": [],
+                  "loc": "core/test/test.mbti:26:9-26:15"
+                },
+                "mut_": false,
+                "vis": {
+                  "type": "Default"
+                },
+                "loc": "core/test/test.mbti:26:2-26:15"
+              },
+              {
+                "type": "FieldDecl",
+                "name": {
+                  "type": "FieldName",
+                  "name": "buffer",
+                  "loc": "core/test/test.mbti:27:2-27:8"
+                },
+                "type_": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "StringBuilder"
+                    },
+                    "loc": "core/test/test.mbti:27:11-27:24"
+                  },
+                  "1": [],
+                  "loc": "core/test/test.mbti:27:11-27:24"
+                },
+                "mut_": false,
+                "vis": {
+                  "type": "Default"
+                },
+                "loc": "core/test/test.mbti:27:2-27:24"
+              }
+            ]
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": "all",
+            "loc": "core/test/test.mbti:25:0-25:8"
+          }
+        }
+      },
+      "core/test/test.mbti:25:0-28:1"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/test/test.mbti:30:3-30:4"
+          },
+          "name": {
+            "name": "bench",
+            "loc": "core/test/test.mbti:30:6-30:11"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/test/test.mbti:30:12-30:16"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:30:12-30:16"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/test/test.mbti:30:24-30:28"
+                  },
+                  "1": [],
+                  "loc": "core/test/test.mbti:30:24-30:28"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/test/test.mbti:30:18-30:28"
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "count",
+                "loc": "core/test/test.mbti:30:30-30:36"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt"
+                  },
+                  "loc": "core/test/test.mbti:30:39-30:43"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:30:39-30:43"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/test/test.mbti:30:53-30:57"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:30:53-30:57"
+            },
+            {
+              "type": "ErrorType",
+              "ty": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "BenchError"
+                  },
+                  "loc": "core/test/test.mbti:30:64-30:74"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:30:64-30:74"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/test/test.mbti:29:0-30:74"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/test/test.mbti:31:3-31:4"
+          },
+          "name": {
+            "name": "snapshot",
+            "loc": "core/test/test.mbti:31:6-31:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/test/test.mbti:31:15-31:19"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:31:15-31:19"
+              }
+            },
+            {
+              "$tag": "Labelled",
+              "0": {
+                "type": "Label",
+                "name": "filename",
+                "loc": "core/test/test.mbti:31:21-31:30"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/test/test.mbti:31:33-31:39"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:31:33-31:39"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/test/test.mbti:31:41-31:45"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/test/test.mbti:31:48-31:57"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:31:48-31:57"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "args_loc",
+                "loc": "core/test/test.mbti:31:63-31:72"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "ArgsLoc"
+                  },
+                  "loc": "core/test/test.mbti:31:75-31:82"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:31:75-31:82"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/test/test.mbti:31:91-31:95"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:31:91-31:95"
+            },
+            {
+              "type": "ErrorType",
+              "ty": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "SnapshotError"
+                  },
+                  "loc": "core/test/test.mbti:31:102-31:115"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:31:102-31:115"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/test/test.mbti:31:0-31:115"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/test/test.mbti:32:3-32:4"
+          },
+          "name": {
+            "name": "write",
+            "loc": "core/test/test.mbti:32:6-32:11"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/test/test.mbti:32:12-32:16"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:32:12-32:16"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TObject",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/test/test.mbti:32:19-32:23"
+                }
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/test/test.mbti:32:28-32:32"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:32:28-32:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/test/test.mbti:32:0-32:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/test/test.mbti:33:3-33:4"
+          },
+          "name": {
+            "name": "writeln",
+            "loc": "core/test/test.mbti:33:6-33:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/test/test.mbti:33:14-33:18"
+                },
+                "1": [],
+                "loc": "core/test/test.mbti:33:14-33:18"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TObject",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/test/test.mbti:33:21-33:25"
+                }
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/test/test.mbti:33:30-33:34"
+              },
+              "1": [],
+              "loc": "core/test/test.mbti:33:30-33:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/test/test.mbti:33:0-33:34"
+    ]
+  ]
+}

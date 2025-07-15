@@ -1,0 +1,2448 @@
+{
+  "package_name": "moonbitlang/core/prelude",
+  "imports": [
+    {
+      "name": "moonbitlang/core/builtin"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "abort",
+            "loc": "core/prelude/prelude.mbti:8:6-8:11"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/prelude/prelude.mbti:8:12-8:18"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:8:12-8:18"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/prelude/prelude.mbti:8:23-8:24"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:8:23-8:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:8:3-8:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:8:0-8:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "assert_eq",
+            "loc": "core/prelude/prelude.mbti:10:36-10:45"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:10:46-10:47"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:10:46-10:47"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:10:49-10:50"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:10:49-10:50"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "msg",
+                "loc": "core/prelude/prelude.mbti:10:52-10:55"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/prelude/prelude.mbti:10:59-10:65"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:10:59-10:65"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/prelude/prelude.mbti:10:67-10:71"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/prelude/prelude.mbti:10:74-10:92"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:10:74-10:92"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/prelude/prelude.mbti:10:101-10:105"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:10:101-10:105"
+            },
+            {
+              "type": "DefaultErrorType",
+              "0": "core/prelude/prelude.mbti:10:106-10:111",
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:10:3-10:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "Eq"
+                  },
+                  "loc": "core/prelude/prelude.mbti:10:7-10:18"
+                },
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "Show"
+                  },
+                  "loc": "core/prelude/prelude.mbti:10:21-10:34"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:10:0-10:111"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "assert_false",
+            "loc": "core/prelude/prelude.mbti:12:3-12:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/prelude/prelude.mbti:12:16-12:20"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:12:16-12:20"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "msg",
+                "loc": "core/prelude/prelude.mbti:12:22-12:25"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/prelude/prelude.mbti:12:29-12:35"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:12:29-12:35"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/prelude/prelude.mbti:12:37-12:41"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/prelude/prelude.mbti:12:44-12:62"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:12:44-12:62"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/prelude/prelude.mbti:12:71-12:75"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:12:71-12:75"
+            },
+            {
+              "type": "DefaultErrorType",
+              "0": "core/prelude/prelude.mbti:12:76-12:81",
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/prelude/prelude.mbti:12:0-12:81"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "assert_not_eq",
+            "loc": "core/prelude/prelude.mbti:14:36-14:49"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:14:50-14:51"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:14:50-14:51"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:14:53-14:54"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:14:53-14:54"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "msg",
+                "loc": "core/prelude/prelude.mbti:14:56-14:59"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/prelude/prelude.mbti:14:63-14:69"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:14:63-14:69"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/prelude/prelude.mbti:14:71-14:75"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/prelude/prelude.mbti:14:78-14:96"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:14:78-14:96"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/prelude/prelude.mbti:14:105-14:109"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:14:105-14:109"
+            },
+            {
+              "type": "DefaultErrorType",
+              "0": "core/prelude/prelude.mbti:14:110-14:115",
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:14:3-14:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "Eq"
+                  },
+                  "loc": "core/prelude/prelude.mbti:14:7-14:18"
+                },
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "Show"
+                  },
+                  "loc": "core/prelude/prelude.mbti:14:21-14:34"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:14:0-14:115"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "assert_true",
+            "loc": "core/prelude/prelude.mbti:16:3-16:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/prelude/prelude.mbti:16:15-16:19"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:16:15-16:19"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "msg",
+                "loc": "core/prelude/prelude.mbti:16:21-16:24"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/prelude/prelude.mbti:16:28-16:34"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:16:28-16:34"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/prelude/prelude.mbti:16:36-16:40"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/prelude/prelude.mbti:16:43-16:61"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:16:43-16:61"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/prelude/prelude.mbti:16:70-16:74"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:16:70-16:74"
+            },
+            {
+              "type": "DefaultErrorType",
+              "0": "core/prelude/prelude.mbti:16:75-16:80",
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/prelude/prelude.mbti:16:0-16:80"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "dump",
+            "loc": "core/prelude/prelude.mbti:19:6-19:10"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:19:11-19:12"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:19:11-19:12"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "name",
+                "loc": "core/prelude/prelude.mbti:19:14-19:18"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/prelude/prelude.mbti:19:22-19:28"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:19:22-19:28"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/prelude/prelude.mbti:19:30-19:34"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/prelude/prelude.mbti:19:37-19:55"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:19:37-19:55"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/prelude/prelude.mbti:19:64-19:65"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:19:64-19:65"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:19:3-19:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:18:0-19:65"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "fail",
+            "loc": "core/prelude/prelude.mbti:21:6-21:10"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/prelude/prelude.mbti:21:11-21:17"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:21:11-21:17"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/prelude/prelude.mbti:21:19-21:23"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/prelude/prelude.mbti:21:26-21:44"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:21:26-21:44"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/prelude/prelude.mbti:21:53-21:54"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:21:53-21:54"
+            },
+            {
+              "type": "ErrorType",
+              "ty": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "Failure"
+                  },
+                  "loc": "core/prelude/prelude.mbti:21:61-21:77"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:21:61-21:77"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:21:3-21:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:21:0-21:77"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "ignore",
+            "loc": "core/prelude/prelude.mbti:23:6-23:12"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:23:13-23:14"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:23:13-23:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/prelude/prelude.mbti:23:19-23:23"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:23:19-23:23"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:23:3-23:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:23:0-23:23"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "inspect",
+            "loc": "core/prelude/prelude.mbti:25:3-25:10"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TObject",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "Show"
+                  },
+                  "loc": "core/prelude/prelude.mbti:25:12-25:25"
+                }
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "content",
+                "loc": "core/prelude/prelude.mbti:25:27-25:35"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/prelude/prelude.mbti:25:38-25:44"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:25:38-25:44"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/prelude/prelude.mbti:25:51-25:55"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/prelude/prelude.mbti:25:58-25:76"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:25:58-25:76"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "args_loc",
+                "loc": "core/prelude/prelude.mbti:25:82-25:91"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "ArgsLoc"
+                  },
+                  "loc": "core/prelude/prelude.mbti:25:94-25:110"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:25:94-25:110"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/prelude/prelude.mbti:25:119-25:123"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:25:119-25:123"
+            },
+            {
+              "type": "ErrorType",
+              "ty": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "InspectError"
+                  },
+                  "loc": "core/prelude/prelude.mbti:25:130-25:151"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:25:130-25:151"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/prelude/prelude.mbti:25:0-25:151"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "not",
+            "loc": "core/prelude/prelude.mbti:27:3-27:6"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/prelude/prelude.mbti:27:7-27:11"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:27:7-27:11"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/prelude/prelude.mbti:27:16-27:20"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:27:16-27:20"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/prelude/prelude.mbti:27:0-27:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "panic",
+            "loc": "core/prelude/prelude.mbti:29:6-29:11"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/prelude/prelude.mbti:29:17-29:18"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:29:17-29:18"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:29:3-29:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:29:0-29:18"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "physical_equal",
+            "loc": "core/prelude/prelude.mbti:31:6-31:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:31:21-31:22"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:31:21-31:22"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:31:24-31:25"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:31:24-31:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/prelude/prelude.mbti:31:30-31:34"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:31:30-31:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:31:3-31:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:31:0-31:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "println",
+            "loc": "core/prelude/prelude.mbti:33:22-33:29"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:33:30-33:31"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:33:30-33:31"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/prelude/prelude.mbti:33:36-33:40"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:33:36-33:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:33:3-33:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "Show"
+                  },
+                  "loc": "core/prelude/prelude.mbti:33:7-33:20"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:33:0-33:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "repr",
+            "loc": "core/prelude/prelude.mbti:35:22-35:26"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:35:27-35:28"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:35:27-35:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "String"
+                },
+                "loc": "core/prelude/prelude.mbti:35:33-35:39"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:35:33-35:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:35:3-35:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "builtin",
+                    "name": "Show"
+                  },
+                  "loc": "core/prelude/prelude.mbti:35:7-35:20"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:35:0-35:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "tap",
+            "loc": "core/prelude/prelude.mbti:37:6-37:9"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:37:10-37:11"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:37:10-37:11"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/prelude/prelude.mbti:37:14-37:15"
+                    },
+                    "1": [],
+                    "loc": "core/prelude/prelude.mbti:37:14-37:15"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/prelude/prelude.mbti:37:20-37:24"
+                  },
+                  "1": [],
+                  "loc": "core/prelude/prelude.mbti:37:20-37:24"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/prelude/prelude.mbti:37:13-37:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/prelude/prelude.mbti:37:29-37:30"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:37:29-37:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:37:3-37:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:37:0-37:30"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "then",
+            "loc": "core/prelude/prelude.mbti:39:9-39:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/prelude/prelude.mbti:39:14-39:15"
+                },
+                "1": [],
+                "loc": "core/prelude/prelude.mbti:39:14-39:15"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/prelude/prelude.mbti:39:18-39:19"
+                    },
+                    "1": [],
+                    "loc": "core/prelude/prelude.mbti:39:18-39:19"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "R"
+                    },
+                    "loc": "core/prelude/prelude.mbti:39:24-39:25"
+                  },
+                  "1": [],
+                  "loc": "core/prelude/prelude.mbti:39:24-39:25"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/prelude/prelude.mbti:39:17-39:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "R"
+                },
+                "loc": "core/prelude/prelude.mbti:39:30-39:31"
+              },
+              "1": [],
+              "loc": "core/prelude/prelude.mbti:39:30-39:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/prelude/prelude.mbti:39:3-39:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "R",
+                "loc": "core/prelude/prelude.mbti:39:6-39:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/prelude/prelude.mbti:39:0-39:31"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "ArgsLoc",
+            "loc": "core/prelude/prelude.mbti:44:34-44:41"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "ArgsLoc"
+              },
+              "loc": "core/prelude/prelude.mbti:44:14-44:30"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:44:14-44:30"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:44:0-44:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:44:0-44:41"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Array",
+            "loc": "core/prelude/prelude.mbti:46:32-46:37"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "Array"
+              },
+              "loc": "core/prelude/prelude.mbti:46:14-46:28"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:46:14-46:28"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:46:0-46:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:46:0-46:37"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "ArrayView",
+            "loc": "core/prelude/prelude.mbti:48:36-48:45"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "ArrayView"
+              },
+              "loc": "core/prelude/prelude.mbti:48:14-48:32"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:48:14-48:32"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:48:0-48:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:48:0-48:45"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "BigInt",
+            "loc": "core/prelude/prelude.mbti:50:49-50:55"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "moonbitlang/core/bigint",
+                "name": "BigInt"
+              },
+              "loc": "core/prelude/prelude.mbti:50:14-50:45"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:50:14-50:45"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:50:0-50:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:50:0-50:55"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Failure",
+            "loc": "core/prelude/prelude.mbti:52:34-52:41"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "Failure"
+              },
+              "loc": "core/prelude/prelude.mbti:52:14-52:30"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:52:14-52:30"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:52:0-52:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:52:0-52:41"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Hasher",
+            "loc": "core/prelude/prelude.mbti:54:33-54:39"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "Hasher"
+              },
+              "loc": "core/prelude/prelude.mbti:54:14-54:29"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:54:14-54:29"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:54:0-54:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:54:0-54:39"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "InspectError",
+            "loc": "core/prelude/prelude.mbti:56:39-56:51"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "InspectError"
+              },
+              "loc": "core/prelude/prelude.mbti:56:14-56:35"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:56:14-56:35"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:56:0-56:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:56:0-56:51"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Iter",
+            "loc": "core/prelude/prelude.mbti:58:31-58:35"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "Iter"
+              },
+              "loc": "core/prelude/prelude.mbti:58:14-58:27"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:58:14-58:27"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:58:0-58:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:58:0-58:35"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Iter2",
+            "loc": "core/prelude/prelude.mbti:60:32-60:37"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "Iter2"
+              },
+              "loc": "core/prelude/prelude.mbti:60:14-60:28"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:60:14-60:28"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:60:0-60:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:60:0-60:37"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "IterResult",
+            "loc": "core/prelude/prelude.mbti:62:37-62:47"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "IterResult"
+              },
+              "loc": "core/prelude/prelude.mbti:62:14-62:33"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:62:14-62:33"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:62:0-62:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:62:0-62:47"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Json",
+            "loc": "core/prelude/prelude.mbti:64:31-64:35"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "Json"
+              },
+              "loc": "core/prelude/prelude.mbti:64:14-64:27"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:64:14-64:27"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:64:0-64:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:64:0-64:35"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Map",
+            "loc": "core/prelude/prelude.mbti:66:30-66:33"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "Map"
+              },
+              "loc": "core/prelude/prelude.mbti:66:14-66:26"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:66:14-66:26"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:66:0-66:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:66:0-66:33"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Set",
+            "loc": "core/prelude/prelude.mbti:68:43-68:46"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "moonbitlang/core/set",
+                "name": "Set"
+              },
+              "loc": "core/prelude/prelude.mbti:68:14-68:39"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:68:14-68:39"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:68:0-68:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:68:0-68:46"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "SnapshotError",
+            "loc": "core/prelude/prelude.mbti:70:40-70:53"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "SnapshotError"
+              },
+              "loc": "core/prelude/prelude.mbti:70:14-70:36"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:70:14-70:36"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:70:0-70:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:70:0-70:53"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "SourceLoc",
+            "loc": "core/prelude/prelude.mbti:72:36-72:45"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "SourceLoc"
+              },
+              "loc": "core/prelude/prelude.mbti:72:14-72:32"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:72:14-72:32"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:72:0-72:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:72:0-72:45"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "StringBuilder",
+            "loc": "core/prelude/prelude.mbti:74:40-74:53"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "StringBuilder"
+              },
+              "loc": "core/prelude/prelude.mbti:74:14-74:36"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:74:14-74:36"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:74:0-74:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:74:0-74:53"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "UninitializedArray",
+            "loc": "core/prelude/prelude.mbti:76:45-76:63"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "builtin",
+                "name": "UninitializedArray"
+              },
+              "loc": "core/prelude/prelude.mbti:76:14-76:41"
+            },
+            "1": [],
+            "loc": "core/prelude/prelude.mbti:76:14-76:41"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:76:0-76:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:76:0-76:63"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Add",
+            "loc": "core/prelude/prelude.mbti:78:31-78:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Add"
+            },
+            "loc": "core/prelude/prelude.mbti:78:15-78:27"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:78:0-78:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:78:0-78:34"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "BitAnd",
+            "loc": "core/prelude/prelude.mbti:80:34-80:40"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "BitAnd"
+            },
+            "loc": "core/prelude/prelude.mbti:80:15-80:30"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:80:0-80:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:80:0-80:40"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "BitOr",
+            "loc": "core/prelude/prelude.mbti:82:33-82:38"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "BitOr"
+            },
+            "loc": "core/prelude/prelude.mbti:82:15-82:29"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:82:0-82:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:82:0-82:38"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "BitXOr",
+            "loc": "core/prelude/prelude.mbti:84:34-84:40"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "BitXOr"
+            },
+            "loc": "core/prelude/prelude.mbti:84:15-84:30"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:84:0-84:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:84:0-84:40"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Compare",
+            "loc": "core/prelude/prelude.mbti:86:35-86:42"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Compare"
+            },
+            "loc": "core/prelude/prelude.mbti:86:15-86:31"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:86:0-86:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:86:0-86:42"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Default",
+            "loc": "core/prelude/prelude.mbti:88:35-88:42"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Default"
+            },
+            "loc": "core/prelude/prelude.mbti:88:15-88:31"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:88:0-88:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:88:0-88:42"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Div",
+            "loc": "core/prelude/prelude.mbti:90:31-90:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Div"
+            },
+            "loc": "core/prelude/prelude.mbti:90:15-90:27"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:90:0-90:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:90:0-90:34"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Eq",
+            "loc": "core/prelude/prelude.mbti:92:30-92:32"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Eq"
+            },
+            "loc": "core/prelude/prelude.mbti:92:15-92:26"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:92:0-92:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:92:0-92:32"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Hash",
+            "loc": "core/prelude/prelude.mbti:94:32-94:36"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Hash"
+            },
+            "loc": "core/prelude/prelude.mbti:94:15-94:28"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:94:0-94:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:94:0-94:36"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Logger",
+            "loc": "core/prelude/prelude.mbti:96:34-96:40"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Logger"
+            },
+            "loc": "core/prelude/prelude.mbti:96:15-96:30"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:96:0-96:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:96:0-96:40"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Mod",
+            "loc": "core/prelude/prelude.mbti:98:31-98:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Mod"
+            },
+            "loc": "core/prelude/prelude.mbti:98:15-98:27"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:98:0-98:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:98:0-98:34"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Mul",
+            "loc": "core/prelude/prelude.mbti:100:31-100:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Mul"
+            },
+            "loc": "core/prelude/prelude.mbti:100:15-100:27"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:100:0-100:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:100:0-100:34"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Neg",
+            "loc": "core/prelude/prelude.mbti:102:31-102:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Neg"
+            },
+            "loc": "core/prelude/prelude.mbti:102:15-102:27"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:102:0-102:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:102:0-102:34"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Shl",
+            "loc": "core/prelude/prelude.mbti:104:31-104:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Shl"
+            },
+            "loc": "core/prelude/prelude.mbti:104:15-104:27"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:104:0-104:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:104:0-104:34"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Show",
+            "loc": "core/prelude/prelude.mbti:106:32-106:36"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Show"
+            },
+            "loc": "core/prelude/prelude.mbti:106:15-106:28"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:106:0-106:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:106:0-106:36"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Shr",
+            "loc": "core/prelude/prelude.mbti:108:31-108:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Shr"
+            },
+            "loc": "core/prelude/prelude.mbti:108:15-108:27"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:108:0-108:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:108:0-108:34"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Sub",
+            "loc": "core/prelude/prelude.mbti:110:31-110:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "Sub"
+            },
+            "loc": "core/prelude/prelude.mbti:110:15-110:27"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:110:0-110:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:110:0-110:34"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "ToJson",
+            "loc": "core/prelude/prelude.mbti:112:34-112:40"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "builtin",
+              "name": "ToJson"
+            },
+            "loc": "core/prelude/prelude.mbti:112:15-112:30"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/prelude/prelude.mbti:112:0-112:3"
+          }
+        }
+      },
+      "core/prelude/prelude.mbti:112:0-112:40"
+    ]
+  ]
+}

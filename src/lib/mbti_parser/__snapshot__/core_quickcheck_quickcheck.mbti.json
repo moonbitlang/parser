@@ -1,0 +1,683 @@
+{
+  "package_name": "moonbitlang/core/quickcheck",
+  "imports": [
+    {
+      "name": "moonbitlang/core/quickcheck/splitmix"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "gen",
+            "loc": "core/quickcheck/quickcheck.mbti:8:18-8:21"
+          },
+          "params": [
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "size",
+                "loc": "core/quickcheck/quickcheck.mbti:8:22-8:26"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/quickcheck/quickcheck.mbti:8:30-8:33"
+                },
+                "1": [],
+                "loc": "core/quickcheck/quickcheck.mbti:8:30-8:33"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "state",
+                "loc": "core/quickcheck/quickcheck.mbti:8:35-8:40"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "splitmix",
+                    "name": "RandomState"
+                  },
+                  "loc": "core/quickcheck/quickcheck.mbti:8:44-8:65"
+                },
+                "1": [],
+                "loc": "core/quickcheck/quickcheck.mbti:8:44-8:65"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/quickcheck/quickcheck.mbti:8:70-8:71"
+              },
+              "1": [],
+              "loc": "core/quickcheck/quickcheck.mbti:8:70-8:71"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/quickcheck/quickcheck.mbti:8:3-8:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/quickcheck/quickcheck.mbti:8:7-8:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:8:0-8:71"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "samples",
+            "loc": "core/quickcheck/quickcheck.mbti:10:18-10:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/quickcheck/quickcheck.mbti:10:26-10:29"
+                },
+                "1": [],
+                "loc": "core/quickcheck/quickcheck.mbti:10:26-10:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Array"
+                },
+                "loc": "core/quickcheck/quickcheck.mbti:10:34-10:39"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "X"
+                    },
+                    "loc": "core/quickcheck/quickcheck.mbti:10:40-10:41"
+                  },
+                  "1": [],
+                  "loc": "core/quickcheck/quickcheck.mbti:10:40-10:41"
+                }
+              ],
+              "loc": "core/quickcheck/quickcheck.mbti:10:34-10:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/quickcheck/quickcheck.mbti:10:3-10:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/quickcheck/quickcheck.mbti:10:7-10:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:10:0-10:42"
+    ],
+    [
+      {
+        "$tag": "Trait",
+        "0": {
+          "name": {
+            "name": "Arbitrary",
+            "loc": "core/quickcheck/quickcheck.mbti:17:16-17:25"
+          },
+          "super_traits": [],
+          "methods": [
+            {
+              "name": {
+                "name": "arbitrary",
+                "loc": "core/quickcheck/quickcheck.mbti:18:2-18:11"
+              },
+              "params": [
+                {
+                  "$tag": "Positional",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Int"
+                      },
+                      "loc": "core/quickcheck/quickcheck.mbti:18:12-18:15"
+                    },
+                    "1": [],
+                    "loc": "core/quickcheck/quickcheck.mbti:18:12-18:15"
+                  }
+                },
+                {
+                  "$tag": "Positional",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Qualified",
+                        "pkg": "splitmix",
+                        "name": "RandomState"
+                      },
+                      "loc": "core/quickcheck/quickcheck.mbti:18:17-18:38"
+                    },
+                    "1": [],
+                    "loc": "core/quickcheck/quickcheck.mbti:18:17-18:38"
+                  }
+                }
+              ],
+              "has_default": false,
+              "return_": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Self"
+                    },
+                    "loc": "core/quickcheck/quickcheck.mbti:18:43-18:47"
+                  },
+                  "1": [],
+                  "loc": "core/quickcheck/quickcheck.mbti:18:43-18:47"
+                },
+                {
+                  "type": "NoErrorType"
+                }
+              ]
+            }
+          ],
+          "vis": {
+            "type": "Pub",
+            "attr": "open",
+            "loc": "core/quickcheck/quickcheck.mbti:17:0-17:9"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:17:0-19:1"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Unit"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:20:19-20:23"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:20:19-20:23"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:20:5-20:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:20:0-20:23"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Bool"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:21:19-21:23"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:21:19-21:23"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:21:5-21:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:21:0-21:23"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Byte"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:22:19-22:23"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:22:19-22:23"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:22:5-22:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:22:0-22:23"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Char"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:23:19-23:23"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:23:19-23:23"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:23:5-23:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:23:0-23:23"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Int"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:24:19-24:22"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:24:19-24:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:24:5-24:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:24:0-24:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Int64"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:25:19-25:24"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:25:19-25:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:25:5-25:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:25:0-25:24"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:26:19-26:23"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:26:19-26:23"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:26:5-26:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:26:0-26:23"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt64"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:27:19-27:25"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:27:19-27:25"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:27:5-27:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:27:0-27:25"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Float"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:28:19-28:24"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:28:19-28:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:28:5-28:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:28:0-28:24"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Double"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:29:19-29:25"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:29:19-29:25"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:29:5-29:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:29:0-29:25"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "String"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:30:19-30:25"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:30:19-30:25"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:30:5-30:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:30:0-30:25"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Bytes"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:31:19-31:24"
+            },
+            "1": [],
+            "loc": "core/quickcheck/quickcheck.mbti:31:19-31:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:31:5-31:14"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:31:0-31:24"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/quickcheck/quickcheck.mbti:32:5-32:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/quickcheck/quickcheck.mbti:32:9-32:18"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Iter"
+              },
+              "loc": "core/quickcheck/quickcheck.mbti:32:34-32:38"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/quickcheck/quickcheck.mbti:32:39-32:40"
+                },
+                "1": [],
+                "loc": "core/quickcheck/quickcheck.mbti:32:39-32:40"
+              }
+            ],
+            "loc": "core/quickcheck/quickcheck.mbti:32:34-32:41"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Arbitrary"
+            },
+            "loc": "core/quickcheck/quickcheck.mbti:32:20-32:29"
+          }
+        }
+      },
+      "core/quickcheck/quickcheck.mbti:32:0-32:41"
+    ]
+  ]
+}

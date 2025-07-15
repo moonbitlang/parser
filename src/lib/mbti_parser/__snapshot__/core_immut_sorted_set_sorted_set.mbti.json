@@ -1,0 +1,5012 @@
+{
+  "package_name": "moonbitlang/core/immut/sorted_set",
+  "imports": [
+    {
+      "name": "moonbitlang/core/json"
+    },
+    {
+      "name": "moonbitlang/core/quickcheck"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_array",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:9:16-9:26"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Array"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:9:27-9:32"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:9:33-9:34"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:9:33-9:34"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:9:27-9:35"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:9:40-9:41"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:9:42-9:43"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:9:42-9:43"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:9:40-9:44"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:9:3-9:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:9:7-9:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:9:0-9:44"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_iter",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:11:16-11:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Iter"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:11:26-11:30"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:11:31-11:32"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:11:31-11:32"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:11:26-11:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:11:38-11:39"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:11:40-11:41"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:11:40-11:41"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:11:38-11:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:11:3-11:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:11:7-11:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:11:0-11:42"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_json",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:13:33-13:42"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Json"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:13:43-13:47"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:13:43-13:47"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:13:52-13:53"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:13:54-13:55"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:13:54-13:55"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:13:52-13:56"
+            },
+            {
+              "type": "ErrorType",
+              "ty": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "json",
+                    "name": "JsonDecodeError"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:13:63-13:84"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:13:63-13:84"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:13:3-13:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "json",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:13:7-13:21"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:13:24-13:31"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:13:0-13:84"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "new",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:15:6-15:9"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:15:15-15:16"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:15:17-15:18"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:15:17-15:18"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:15:15-15:19"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:15:3-15:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:15:0-15:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "of",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:17:16-17:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "FixedArray"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:17:19-17:29"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:17:30-17:31"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:17:30-17:31"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:17:19-17:32"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:17:37-17:38"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:17:39-17:40"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:17:39-17:40"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:17:37-17:41"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:17:3-17:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:17:7-17:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:17:0-17:41"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "singleton",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:19:6-19:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:19:16-19:17"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:19:16-19:17"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:19:22-19:23"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:19:24-19:25"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:19:24-19:25"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:19:22-19:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:19:3-19:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:19:0-19:26"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:22:5-22:6"
+          },
+          "type_params": [
+            {
+              "$tag": "Name",
+              "0": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:22:7-22:8"
+              }
+            }
+          ],
+          "components": {
+            "type": "Abstract"
+          },
+          "vis": {
+            "type": "Default"
+          }
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:22:0-22:9"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:23:16-23:17"
+          },
+          "name": {
+            "name": "add",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:23:19-23:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:23:23-23:27"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:23:28-23:29"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:23:28-23:29"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:23:23-23:30"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:23:32-23:33"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:23:32-23:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:23:38-23:42"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:23:43-23:44"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:23:43-23:44"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:23:38-23:45"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:23:3-23:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:23:7-23:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:23:0-23:45"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:24:16-24:17"
+          },
+          "name": {
+            "name": "all",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:24:19-24:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:24:23-24:27"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:24:28-24:29"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:24:28-24:29"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:24:23-24:30"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:24:33-24:34"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:24:33-24:34"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Bool"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:24:39-24:43"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:24:39-24:43"
+                },
+                "err": {
+                  "type": "MaybeError",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Error"
+                      },
+                      "loc": "<no location>:-1:0--1:0"
+                    },
+                    "1": [],
+                    "loc": "<no location>:-1:0--1:0"
+                  },
+                  "is_old_syntax": false
+                },
+                "is_async": false,
+                "loc": "core/immut/sorted_set/sorted_set.mbti:24:32-24:50"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:24:55-24:59"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:24:55-24:59"
+            },
+            {
+              "type": "MaybeError",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "<no location>:-1:0--1:0"
+                },
+                "1": [],
+                "loc": "<no location>:-1:0--1:0"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:24:3-24:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:24:7-24:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:24:0-24:66"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:25:16-25:17"
+          },
+          "name": {
+            "name": "any",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:25:19-25:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:25:23-25:27"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:25:28-25:29"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:25:28-25:29"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:25:23-25:30"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:25:33-25:34"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:25:33-25:34"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Bool"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:25:39-25:43"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:25:39-25:43"
+                },
+                "err": {
+                  "type": "MaybeError",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Error"
+                      },
+                      "loc": "<no location>:-1:0--1:0"
+                    },
+                    "1": [],
+                    "loc": "<no location>:-1:0--1:0"
+                  },
+                  "is_old_syntax": false
+                },
+                "is_async": false,
+                "loc": "core/immut/sorted_set/sorted_set.mbti:25:32-25:50"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:25:55-25:59"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:25:55-25:59"
+            },
+            {
+              "type": "MaybeError",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "<no location>:-1:0--1:0"
+                },
+                "1": [],
+                "loc": "<no location>:-1:0--1:0"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:25:3-25:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:25:7-25:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:25:0-25:66"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:26:16-26:17"
+          },
+          "name": {
+            "name": "contains",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:26:19-26:27"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:26:28-26:32"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:26:33-26:34"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:26:33-26:34"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:26:28-26:35"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:26:37-26:38"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:26:37-26:38"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:26:43-26:47"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:26:43-26:47"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:26:3-26:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:26:7-26:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:26:0-26:47"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:28:16-28:17"
+          },
+          "name": {
+            "name": "diff",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:28:19-28:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:28:24-28:28"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:28:29-28:30"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:28:29-28:30"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:28:24-28:31"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:28:33-28:37"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:28:38-28:39"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:28:38-28:39"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:28:33-28:40"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:28:45-28:49"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:28:50-28:51"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:28:50-28:51"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:28:45-28:52"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:28:3-28:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:28:7-28:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:27:0-28:52"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:29:16-29:17"
+          },
+          "name": {
+            "name": "difference",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:29:19-29:29"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:29:30-29:34"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:29:35-29:36"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:29:35-29:36"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:29:30-29:37"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:29:39-29:43"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:29:44-29:45"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:29:44-29:45"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:29:39-29:46"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:29:51-29:55"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:29:56-29:57"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:29:56-29:57"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:29:51-29:58"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:29:3-29:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:29:7-29:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:29:0-29:58"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:30:16-30:17"
+          },
+          "name": {
+            "name": "disjoint",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:30:19-30:27"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:30:28-30:32"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:30:33-30:34"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:30:33-30:34"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:30:28-30:35"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:30:37-30:41"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:30:42-30:43"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:30:42-30:43"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:30:37-30:44"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:30:49-30:53"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:30:49-30:53"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:30:3-30:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:30:7-30:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:30:0-30:53"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:31:6-31:7"
+          },
+          "name": {
+            "name": "each",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:31:9-31:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:31:14-31:18"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:31:19-31:20"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:31:19-31:20"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:31:14-31:21"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:31:24-31:25"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:31:24-31:25"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:31:30-31:34"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:31:30-31:34"
+                },
+                "err": {
+                  "type": "MaybeError",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Error"
+                      },
+                      "loc": "<no location>:-1:0--1:0"
+                    },
+                    "1": [],
+                    "loc": "<no location>:-1:0--1:0"
+                  },
+                  "is_old_syntax": false
+                },
+                "is_async": false,
+                "loc": "core/immut/sorted_set/sorted_set.mbti:31:23-31:41"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:31:46-31:50"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:31:46-31:50"
+            },
+            {
+              "type": "MaybeError",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "<no location>:-1:0--1:0"
+                },
+                "1": [],
+                "loc": "<no location>:-1:0--1:0"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:31:3-31:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:31:0-31:57"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:32:16-32:17"
+          },
+          "name": {
+            "name": "filter",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:32:19-32:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:32:26-32:30"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:32:31-32:32"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:32:31-32:32"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:32:26-32:33"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:32:36-32:37"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:32:36-32:37"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Bool"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:32:42-32:46"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:32:42-32:46"
+                },
+                "err": {
+                  "type": "MaybeError",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Error"
+                      },
+                      "loc": "<no location>:-1:0--1:0"
+                    },
+                    "1": [],
+                    "loc": "<no location>:-1:0--1:0"
+                  },
+                  "is_old_syntax": false
+                },
+                "is_async": false,
+                "loc": "core/immut/sorted_set/sorted_set.mbti:32:35-32:53"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:32:58-32:62"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:32:63-32:64"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:32:63-32:64"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:32:58-32:65"
+            },
+            {
+              "type": "MaybeError",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "<no location>:-1:0--1:0"
+                },
+                "1": [],
+                "loc": "<no location>:-1:0--1:0"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:32:3-32:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:32:7-32:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:32:0-32:72"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:33:19-33:20"
+          },
+          "name": {
+            "name": "fold",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:33:22-33:26"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:33:27-33:31"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:33:32-33:33"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:33:32-33:33"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:33:27-33:34"
+              }
+            },
+            {
+              "$tag": "Labelled",
+              "0": {
+                "type": "Label",
+                "name": "init",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:33:36-33:41"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:33:44-33:45"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:33:44-33:45"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "B"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:33:48-33:49"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:33:48-33:49"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:33:51-33:52"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:33:51-33:52"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "B"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:33:57-33:58"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:33:57-33:58"
+                },
+                "err": {
+                  "type": "MaybeError",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Error"
+                      },
+                      "loc": "<no location>:-1:0--1:0"
+                    },
+                    "1": [],
+                    "loc": "<no location>:-1:0--1:0"
+                  },
+                  "is_old_syntax": false
+                },
+                "is_async": false,
+                "loc": "core/immut/sorted_set/sorted_set.mbti:33:47-33:65"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "B"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:33:70-33:71"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:33:70-33:71"
+            },
+            {
+              "type": "MaybeError",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "<no location>:-1:0--1:0"
+                },
+                "1": [],
+                "loc": "<no location>:-1:0--1:0"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:33:3-33:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:33:7-33:14"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:33:16-33:17"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:33:0-33:78"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:35:16-35:17"
+          },
+          "name": {
+            "name": "from_array",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:35:19-35:29"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Array"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:35:30-35:35"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:35:36-35:37"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:35:36-35:37"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:35:30-35:38"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:35:43-35:47"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:35:48-35:49"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:35:48-35:49"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:35:43-35:50"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:35:3-35:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:35:7-35:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:34:0-35:50"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:37:16-37:17"
+          },
+          "name": {
+            "name": "from_iter",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:37:19-37:28"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Iter"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:37:29-37:33"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:37:34-37:35"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:37:34-37:35"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:37:29-37:36"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:37:41-37:45"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:37:46-37:47"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:37:46-37:47"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:37:41-37:48"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:37:3-37:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:37:7-37:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:36:0-37:48"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:39:33-39:34"
+          },
+          "name": {
+            "name": "from_json",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:39:36-39:45"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Json"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:39:46-39:50"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:39:46-39:50"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:39:55-39:59"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:39:60-39:61"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:39:60-39:61"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:39:55-39:62"
+            },
+            {
+              "type": "ErrorType",
+              "ty": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "json",
+                    "name": "JsonDecodeError"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:39:69-39:90"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:39:69-39:90"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:39:3-39:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "json",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:39:7-39:21"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:39:24-39:31"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:38:0-39:90"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:41:16-41:17"
+          },
+          "name": {
+            "name": "inter",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:41:19-41:24"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:41:25-41:29"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:41:30-41:31"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:41:30-41:31"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:41:25-41:32"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:41:34-41:38"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:41:39-41:40"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:41:39-41:40"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:41:34-41:41"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:41:46-41:50"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:41:51-41:52"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:41:51-41:52"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:41:46-41:53"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:41:3-41:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:41:7-41:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:40:0-41:53"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:42:16-42:17"
+          },
+          "name": {
+            "name": "intersection",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:42:19-42:31"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:42:32-42:36"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:42:37-42:38"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:42:37-42:38"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:42:32-42:39"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:42:41-42:45"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:42:46-42:47"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:42:46-42:47"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:42:41-42:48"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:42:53-42:57"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:42:58-42:59"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:42:58-42:59"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:42:53-42:60"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:42:3-42:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:42:7-42:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:42:0-42:60"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:43:6-43:7"
+          },
+          "name": {
+            "name": "is_empty",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:43:9-43:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:43:18-43:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:43:23-43:24"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:43:23-43:24"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:43:18-43:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:43:30-43:34"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:43:30-43:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:43:3-43:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:43:0-43:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:44:6-44:7"
+          },
+          "name": {
+            "name": "iter",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:44:9-44:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:44:14-44:18"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:44:19-44:20"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:44:19-44:20"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:44:14-44:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:44:26-44:30"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:44:31-44:32"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:44:31-44:32"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:44:26-44:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:44:3-44:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:44:0-44:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:45:29-45:30"
+          },
+          "name": {
+            "name": "map",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:45:32-45:35"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:45:36-45:40"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:45:41-45:42"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:45:41-45:42"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:45:36-45:43"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:45:46-45:47"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:45:46-45:47"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "B"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:45:52-45:53"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:45:52-45:53"
+                },
+                "err": {
+                  "type": "MaybeError",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Error"
+                      },
+                      "loc": "<no location>:-1:0--1:0"
+                    },
+                    "1": [],
+                    "loc": "<no location>:-1:0--1:0"
+                  },
+                  "is_old_syntax": false
+                },
+                "is_async": false,
+                "loc": "core/immut/sorted_set/sorted_set.mbti:45:45-45:60"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:45:65-45:69"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "B"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:45:70-45:71"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:45:70-45:71"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:45:65-45:72"
+            },
+            {
+              "type": "MaybeError",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "<no location>:-1:0--1:0"
+                },
+                "1": [],
+                "loc": "<no location>:-1:0--1:0"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:45:3-45:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:45:7-45:14"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:45:16-45:17"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:45:20-45:27"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:45:0-45:79"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:46:16-46:17"
+          },
+          "name": {
+            "name": "max",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:46:19-46:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:46:23-46:27"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:46:28-46:29"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:46:28-46:29"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:46:23-46:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "A"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:46:35-46:36"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:46:35-46:36"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:46:3-46:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:46:7-46:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:46:0-46:36"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:47:16-47:17"
+          },
+          "name": {
+            "name": "max_option",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:47:19-47:29"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:47:30-47:34"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:47:35-47:36"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:47:35-47:36"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:47:30-47:37"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:47:42-47:43"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:47:42-47:43"
+              },
+              "loc": "core/immut/sorted_set/sorted_set.mbti:47:42-47:44",
+              "question_loc": "core/immut/sorted_set/sorted_set.mbti:47:43-47:44"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:47:3-47:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:47:7-47:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:47:0-47:44"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:48:16-48:17"
+          },
+          "name": {
+            "name": "min",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:48:19-48:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:48:23-48:27"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:48:28-48:29"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:48:28-48:29"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:48:23-48:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "A"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:48:35-48:36"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:48:35-48:36"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:48:3-48:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:48:7-48:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:48:0-48:36"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:49:16-49:17"
+          },
+          "name": {
+            "name": "min_option",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:49:19-49:29"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:49:30-49:34"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:49:35-49:36"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:49:35-49:36"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:49:30-49:37"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:49:42-49:43"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:49:42-49:43"
+              },
+              "loc": "core/immut/sorted_set/sorted_set.mbti:49:42-49:44",
+              "question_loc": "core/immut/sorted_set/sorted_set.mbti:49:43-49:44"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:49:3-49:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:49:7-49:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:49:0-49:44"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:51:6-51:7"
+          },
+          "name": {
+            "name": "new",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:51:9-51:12"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:51:18-51:22"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:51:23-51:24"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:51:23-51:24"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:51:18-51:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:51:3-51:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:50:0-51:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:53:16-53:17"
+          },
+          "name": {
+            "name": "of",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:53:19-53:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "FixedArray"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:53:22-53:32"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:53:33-53:34"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:53:33-53:34"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:53:22-53:35"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:53:40-53:44"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:53:45-53:46"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:53:45-53:46"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:53:40-53:47"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:53:3-53:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:53:7-53:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:52:0-53:47"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:54:16-54:17"
+          },
+          "name": {
+            "name": "remove",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:54:19-54:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:54:26-54:30"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:54:31-54:32"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:54:31-54:32"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:54:26-54:33"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:54:35-54:36"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:54:35-54:36"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:54:41-54:45"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:54:46-54:47"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:54:46-54:47"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:54:41-54:48"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:54:3-54:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:54:7-54:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:54:0-54:48"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:55:16-55:17"
+          },
+          "name": {
+            "name": "remove_min",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:55:19-55:29"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:55:30-55:34"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:55:35-55:36"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:55:35-55:36"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:55:30-55:37"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:55:42-55:46"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:55:47-55:48"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:55:47-55:48"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:55:42-55:49"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:55:3-55:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:55:7-55:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:55:0-55:49"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:57:6-57:7"
+          },
+          "name": {
+            "name": "singleton",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:57:9-57:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:57:19-57:20"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:57:19-57:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:57:25-57:29"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:57:30-57:31"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:57:30-57:31"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:57:25-57:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:57:3-57:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:56:0-57:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:58:6-58:7"
+          },
+          "name": {
+            "name": "size",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:58:9-58:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:58:14-58:18"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:58:19-58:20"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:58:19-58:20"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:58:14-58:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:58:26-58:29"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:58:26-58:29"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:58:3-58:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:58:0-58:29"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:59:16-59:17"
+          },
+          "name": {
+            "name": "split",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:59:19-59:24"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:59:25-59:29"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:59:30-59:31"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:59:30-59:31"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:59:25-59:32"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:59:34-59:35"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:59:34-59:35"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TTuple",
+              "0": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Self"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:59:41-59:45"
+                  },
+                  "1": [
+                    {
+                      "type": "TName",
+                      "0": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "Ident",
+                          "name": "A"
+                        },
+                        "loc": "core/immut/sorted_set/sorted_set.mbti:59:46-59:47"
+                      },
+                      "1": [],
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:59:46-59:47"
+                    }
+                  ],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:59:41-59:48"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Bool"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:59:50-59:54"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:59:50-59:54"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Self"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:59:56-59:60"
+                  },
+                  "1": [
+                    {
+                      "type": "TName",
+                      "0": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "Ident",
+                          "name": "A"
+                        },
+                        "loc": "core/immut/sorted_set/sorted_set.mbti:59:61-59:62"
+                      },
+                      "1": [],
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:59:61-59:62"
+                    }
+                  ],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:59:56-59:63"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:59:40-59:64"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:59:3-59:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:59:7-59:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:59:0-59:64"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:60:16-60:17"
+          },
+          "name": {
+            "name": "subset",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:60:19-60:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:60:26-60:30"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:60:31-60:32"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:60:31-60:32"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:60:26-60:33"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:60:35-60:39"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:60:40-60:41"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:60:40-60:41"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:60:35-60:42"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:60:47-60:51"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:60:47-60:51"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:60:3-60:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:60:7-60:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:60:0-60:51"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:61:16-61:17"
+          },
+          "name": {
+            "name": "symmetric_difference",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:61:19-61:39"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:61:40-61:44"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:61:45-61:46"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:61:45-61:46"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:61:40-61:47"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:61:49-61:53"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:61:54-61:55"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:61:54-61:55"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:61:49-61:56"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:61:61-61:65"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:61:66-61:67"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:61:66-61:67"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:61:61-61:68"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:61:3-61:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:61:7-61:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:61:0-61:68"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:62:6-62:7"
+          },
+          "name": {
+            "name": "to_array",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:62:9-62:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:62:18-62:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:62:23-62:24"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:62:23-62:24"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:62:18-62:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Array"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:62:30-62:35"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:62:36-62:37"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:62:36-62:37"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:62:30-62:38"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:62:3-62:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:62:0-62:38"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:63:15-63:16"
+          },
+          "name": {
+            "name": "to_json",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:63:18-63:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:63:26-63:30"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:63:31-63:32"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:63:31-63:32"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:63:26-63:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Json"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:63:38-63:42"
+              },
+              "1": [],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:63:38-63:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:63:3-63:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "ToJson"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:63:7-63:13"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:63:0-63:42"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:64:16-64:17"
+          },
+          "name": {
+            "name": "union",
+            "loc": "core/immut/sorted_set/sorted_set.mbti:64:19-64:24"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:64:25-64:29"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:64:30-64:31"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:64:30-64:31"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:64:25-64:32"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:64:34-64:38"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/immut/sorted_set/sorted_set.mbti:64:39-64:40"
+                    },
+                    "1": [],
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:64:39-64:40"
+                  }
+                ],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:64:34-64:41"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/sorted_set/sorted_set.mbti:64:46-64:50"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/immut/sorted_set/sorted_set.mbti:64:51-64:52"
+                  },
+                  "1": [],
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:64:51-64:52"
+                }
+              ],
+              "loc": "core/immut/sorted_set/sorted_set.mbti:64:46-64:53"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:64:3-64:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:64:7-64:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:64:0-64:53"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:65:5-65:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:65:9-65:16"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/immut/sorted_set/sorted_set.mbti:65:26-65:27"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:65:28-65:29"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:65:28-65:29"
+              }
+            ],
+            "loc": "core/immut/sorted_set/sorted_set.mbti:65:26-65:30"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Add"
+            },
+            "loc": "core/immut/sorted_set/sorted_set.mbti:65:18-65:21"
+          }
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:65:0-65:30"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:66:5-66:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:66:9-66:16"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/immut/sorted_set/sorted_set.mbti:66:30-66:31"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:66:32-66:33"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:66:32-66:33"
+              }
+            ],
+            "loc": "core/immut/sorted_set/sorted_set.mbti:66:30-66:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Compare"
+            },
+            "loc": "core/immut/sorted_set/sorted_set.mbti:66:18-66:25"
+          }
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:66:0-66:34"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:67:5-67:6"
+              },
+              "constraints": []
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/immut/sorted_set/sorted_set.mbti:67:20-67:21"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:67:22-67:23"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:67:22-67:23"
+              }
+            ],
+            "loc": "core/immut/sorted_set/sorted_set.mbti:67:20-67:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Default"
+            },
+            "loc": "core/immut/sorted_set/sorted_set.mbti:67:8-67:15"
+          }
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:67:0-67:24"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:68:5-68:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:68:9-68:11"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/immut/sorted_set/sorted_set.mbti:68:20-68:21"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:68:22-68:23"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:68:22-68:23"
+              }
+            ],
+            "loc": "core/immut/sorted_set/sorted_set.mbti:68:20-68:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/immut/sorted_set/sorted_set.mbti:68:13-68:15"
+          }
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:68:0-68:24"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:69:5-69:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:69:9-69:13"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/immut/sorted_set/sorted_set.mbti:69:24-69:25"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:69:26-69:27"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:69:26-69:27"
+              }
+            ],
+            "loc": "core/immut/sorted_set/sorted_set.mbti:69:24-69:28"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Hash"
+            },
+            "loc": "core/immut/sorted_set/sorted_set.mbti:69:15-69:19"
+          }
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:69:0-69:28"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:70:5-70:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:70:9-70:13"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/immut/sorted_set/sorted_set.mbti:70:24-70:25"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:70:26-70:27"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:70:26-70:27"
+              }
+            ],
+            "loc": "core/immut/sorted_set/sorted_set.mbti:70:24-70:28"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/immut/sorted_set/sorted_set.mbti:70:15-70:19"
+          }
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:70:0-70:28"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:71:5-71:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "ToJson"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:71:9-71:15"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/immut/sorted_set/sorted_set.mbti:71:28-71:29"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:71:30-71:31"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:71:30-71:31"
+              }
+            ],
+            "loc": "core/immut/sorted_set/sorted_set.mbti:71:28-71:32"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/immut/sorted_set/sorted_set.mbti:71:17-71:23"
+          }
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:71:0-71:32"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:72:5-72:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "json",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:72:9-72:23"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:72:26-72:33"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/immut/sorted_set/sorted_set.mbti:72:54-72:55"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:72:56-72:57"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:72:56-72:57"
+              }
+            ],
+            "loc": "core/immut/sorted_set/sorted_set.mbti:72:54-72:58"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "json",
+              "name": "FromJson"
+            },
+            "loc": "core/immut/sorted_set/sorted_set.mbti:72:35-72:49"
+          }
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:72:0-72:58"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/sorted_set/sorted_set.mbti:73:5-73:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:73:9-73:30"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:73:33-73:40"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/immut/sorted_set/sorted_set.mbti:73:68-73:69"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/immut/sorted_set/sorted_set.mbti:73:70-73:71"
+                },
+                "1": [],
+                "loc": "core/immut/sorted_set/sorted_set.mbti:73:70-73:71"
+              }
+            ],
+            "loc": "core/immut/sorted_set/sorted_set.mbti:73:68-73:72"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "quickcheck",
+              "name": "Arbitrary"
+            },
+            "loc": "core/immut/sorted_set/sorted_set.mbti:73:42-73:63"
+          }
+        }
+      },
+      "core/immut/sorted_set/sorted_set.mbti:73:0-73:72"
+    ]
+  ]
+}

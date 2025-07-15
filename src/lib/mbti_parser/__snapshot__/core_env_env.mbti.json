@@ -1,0 +1,124 @@
+{
+  "package_name": "moonbitlang/core/env",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "args",
+            "loc": "core/env/env.mbti:4:3-4:7"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Array"
+                },
+                "loc": "core/env/env.mbti:4:13-4:18"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "String"
+                    },
+                    "loc": "core/env/env.mbti:4:19-4:25"
+                  },
+                  "1": [],
+                  "loc": "core/env/env.mbti:4:19-4:25"
+                }
+              ],
+              "loc": "core/env/env.mbti:4:13-4:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/env/env.mbti:4:0-4:26"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "current_dir",
+            "loc": "core/env/env.mbti:6:3-6:14"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/env/env.mbti:6:20-6:26"
+                },
+                "1": [],
+                "loc": "core/env/env.mbti:6:20-6:26"
+              },
+              "loc": "core/env/env.mbti:6:20-6:27",
+              "question_loc": "core/env/env.mbti:6:26-6:27"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/env/env.mbti:6:0-6:27"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "now",
+            "loc": "core/env/env.mbti:8:3-8:6"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt64"
+                },
+                "loc": "core/env/env.mbti:8:12-8:18"
+              },
+              "1": [],
+              "loc": "core/env/env.mbti:8:12-8:18"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/env/env.mbti:8:0-8:18"
+    ]
+  ]
+}

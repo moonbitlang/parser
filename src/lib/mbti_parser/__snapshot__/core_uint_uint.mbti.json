@@ -1,0 +1,281 @@
+{
+  "package_name": "moonbitlang/core/uint",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "default",
+            "loc": "core/uint/uint.mbti:4:3-4:10"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt"
+                },
+                "loc": "core/uint/uint.mbti:4:16-4:20"
+              },
+              "1": [],
+              "loc": "core/uint/uint.mbti:4:16-4:20"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/uint/uint.mbti:4:0-4:20"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "max_value",
+            "loc": "core/uint/uint.mbti:6:4-6:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt"
+              },
+              "loc": "core/uint/uint.mbti:6:16-6:20"
+            },
+            "1": [],
+            "loc": "core/uint/uint.mbti:6:16-6:20"
+          }
+        }
+      },
+      "core/uint/uint.mbti:6:0-6:20"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "min_value",
+            "loc": "core/uint/uint.mbti:8:4-8:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt"
+              },
+              "loc": "core/uint/uint.mbti:8:16-8:20"
+            },
+            "1": [],
+            "loc": "core/uint/uint.mbti:8:16-8:20"
+          }
+        }
+      },
+      "core/uint/uint.mbti:8:0-8:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "UInt",
+            "loc": "core/uint/uint.mbti:11:3-11:7"
+          },
+          "name": {
+            "name": "to_be_bytes",
+            "loc": "core/uint/uint.mbti:11:9-11:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt"
+                  },
+                  "loc": "core/uint/uint.mbti:11:21-11:25"
+                },
+                "1": [],
+                "loc": "core/uint/uint.mbti:11:21-11:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/uint/uint.mbti:11:30-11:35"
+              },
+              "1": [],
+              "loc": "core/uint/uint.mbti:11:30-11:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/uint/uint.mbti:11:0-11:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "UInt",
+            "loc": "core/uint/uint.mbti:12:3-12:7"
+          },
+          "name": {
+            "name": "to_int64",
+            "loc": "core/uint/uint.mbti:12:9-12:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt"
+                  },
+                  "loc": "core/uint/uint.mbti:12:18-12:22"
+                },
+                "1": [],
+                "loc": "core/uint/uint.mbti:12:18-12:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int64"
+                },
+                "loc": "core/uint/uint.mbti:12:27-12:32"
+              },
+              "1": [],
+              "loc": "core/uint/uint.mbti:12:27-12:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/uint/uint.mbti:12:0-12:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "UInt",
+            "loc": "core/uint/uint.mbti:13:3-13:7"
+          },
+          "name": {
+            "name": "to_le_bytes",
+            "loc": "core/uint/uint.mbti:13:9-13:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt"
+                  },
+                  "loc": "core/uint/uint.mbti:13:21-13:25"
+                },
+                "1": [],
+                "loc": "core/uint/uint.mbti:13:21-13:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/uint/uint.mbti:13:30-13:35"
+              },
+              "1": [],
+              "loc": "core/uint/uint.mbti:13:30-13:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/uint/uint.mbti:13:0-13:35"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt"
+              },
+              "loc": "core/uint/uint.mbti:14:17-14:21"
+            },
+            "1": [],
+            "loc": "core/uint/uint.mbti:14:17-14:21"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Default"
+            },
+            "loc": "core/uint/uint.mbti:14:5-14:12"
+          }
+        }
+      },
+      "core/uint/uint.mbti:14:0-14:21"
+    ]
+  ]
+}

@@ -1,0 +1,1084 @@
+{
+  "package_name": "moonbitlang/core/char",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:6:3-6:7"
+          },
+          "name": {
+            "name": "is_ascii",
+            "loc": "core/char/char.mbti:6:9-6:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:6:18-6:22"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:6:18-6:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:6:27-6:31"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:6:27-6:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:6:0-6:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:7:3-7:7"
+          },
+          "name": {
+            "name": "is_ascii_alphabetic",
+            "loc": "core/char/char.mbti:7:9-7:28"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:7:29-7:33"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:7:29-7:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:7:38-7:42"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:7:38-7:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:7:0-7:42"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:8:3-8:7"
+          },
+          "name": {
+            "name": "is_ascii_control",
+            "loc": "core/char/char.mbti:8:9-8:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:8:26-8:30"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:8:26-8:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:8:35-8:39"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:8:35-8:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:8:0-8:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:9:3-9:7"
+          },
+          "name": {
+            "name": "is_ascii_digit",
+            "loc": "core/char/char.mbti:9:9-9:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:9:24-9:28"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:9:24-9:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:9:33-9:37"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:9:33-9:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:9:0-9:37"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:10:3-10:7"
+          },
+          "name": {
+            "name": "is_ascii_graphic",
+            "loc": "core/char/char.mbti:10:9-10:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:10:26-10:30"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:10:26-10:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:10:35-10:39"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:10:35-10:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:10:0-10:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:11:3-11:7"
+          },
+          "name": {
+            "name": "is_ascii_hexdigit",
+            "loc": "core/char/char.mbti:11:9-11:26"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:11:27-11:31"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:11:27-11:31"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:11:36-11:40"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:11:36-11:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:11:0-11:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:12:3-12:7"
+          },
+          "name": {
+            "name": "is_ascii_lowercase",
+            "loc": "core/char/char.mbti:12:9-12:27"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:12:28-12:32"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:12:28-12:32"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:12:37-12:41"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:12:37-12:41"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:12:0-12:41"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:13:3-13:7"
+          },
+          "name": {
+            "name": "is_ascii_octdigit",
+            "loc": "core/char/char.mbti:13:9-13:26"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:13:27-13:31"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:13:27-13:31"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:13:36-13:40"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:13:36-13:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:13:0-13:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:14:3-14:7"
+          },
+          "name": {
+            "name": "is_ascii_punctuation",
+            "loc": "core/char/char.mbti:14:9-14:29"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:14:30-14:34"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:14:30-14:34"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:14:39-14:43"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:14:39-14:43"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:14:0-14:43"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:15:3-15:7"
+          },
+          "name": {
+            "name": "is_ascii_uppercase",
+            "loc": "core/char/char.mbti:15:9-15:27"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:15:28-15:32"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:15:28-15:32"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:15:37-15:41"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:15:37-15:41"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:15:0-15:41"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:16:3-16:7"
+          },
+          "name": {
+            "name": "is_ascii_whitespace",
+            "loc": "core/char/char.mbti:16:9-16:28"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:16:29-16:33"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:16:29-16:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:16:38-16:42"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:16:38-16:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:16:0-16:42"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:17:3-17:7"
+          },
+          "name": {
+            "name": "is_control",
+            "loc": "core/char/char.mbti:17:9-17:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:17:20-17:24"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:17:20-17:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:17:29-17:33"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:17:29-17:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:17:0-17:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:18:3-18:7"
+          },
+          "name": {
+            "name": "is_digit",
+            "loc": "core/char/char.mbti:18:9-18:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:18:18-18:22"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:18:18-18:22"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt"
+                  },
+                  "loc": "core/char/char.mbti:18:24-18:28"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:18:24-18:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:18:33-18:37"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:18:33-18:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:18:0-18:37"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:19:3-19:7"
+          },
+          "name": {
+            "name": "is_numeric",
+            "loc": "core/char/char.mbti:19:9-19:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:19:20-19:24"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:19:20-19:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:19:29-19:33"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:19:29-19:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:19:0-19:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:20:3-20:7"
+          },
+          "name": {
+            "name": "is_printable",
+            "loc": "core/char/char.mbti:20:9-20:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:20:22-20:26"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:20:22-20:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:20:31-20:35"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:20:31-20:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:20:0-20:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:21:3-21:7"
+          },
+          "name": {
+            "name": "is_whitespace",
+            "loc": "core/char/char.mbti:21:9-21:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:21:23-21:27"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:21:23-21:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/char/char.mbti:21:32-21:36"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:21:32-21:36"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:21:0-21:36"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:22:3-22:7"
+          },
+          "name": {
+            "name": "to_ascii_lowercase",
+            "loc": "core/char/char.mbti:22:9-22:27"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:22:28-22:32"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:22:28-22:32"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Char"
+                },
+                "loc": "core/char/char.mbti:22:37-22:41"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:22:37-22:41"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:22:0-22:41"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": "core/char/char.mbti:23:3-23:7"
+          },
+          "name": {
+            "name": "to_ascii_uppercase",
+            "loc": "core/char/char.mbti:23:9-23:27"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": "core/char/char.mbti:23:28-23:32"
+                },
+                "1": [],
+                "loc": "core/char/char.mbti:23:28-23:32"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Char"
+                },
+                "loc": "core/char/char.mbti:23:37-23:41"
+              },
+              "1": [],
+              "loc": "core/char/char.mbti:23:37-23:41"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/char/char.mbti:23:0-23:41"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Char"
+              },
+              "loc": "core/char/char.mbti:24:14-24:18"
+            },
+            "1": [],
+            "loc": "core/char/char.mbti:24:14-24:18"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Hash"
+            },
+            "loc": "core/char/char.mbti:24:5-24:9"
+          }
+        }
+      },
+      "core/char/char.mbti:24:0-24:18"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Char"
+              },
+              "loc": "core/char/char.mbti:25:14-25:18"
+            },
+            "1": [],
+            "loc": "core/char/char.mbti:25:14-25:18"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/char/char.mbti:25:5-25:9"
+          }
+        }
+      },
+      "core/char/char.mbti:25:0-25:18"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Char"
+              },
+              "loc": "core/char/char.mbti:26:16-26:20"
+            },
+            "1": [],
+            "loc": "core/char/char.mbti:26:16-26:20"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/char/char.mbti:26:5-26:11"
+          }
+        }
+      },
+      "core/char/char.mbti:26:0-26:20"
+    ]
+  ]
+}

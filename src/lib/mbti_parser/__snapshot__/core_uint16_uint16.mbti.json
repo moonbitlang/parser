@@ -1,0 +1,614 @@
+{
+  "package_name": "moonbitlang/core/uint16",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "max_value",
+            "loc": "core/uint16/uint16.mbti:4:4-4:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:4:16-4:22"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:4:16-4:22"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:4:0-4:22"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "min_value",
+            "loc": "core/uint16/uint16.mbti:6:4-6:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:6:16-6:22"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:6:16-6:22"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:6:0-6:22"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "UInt16",
+            "loc": "core/uint16/uint16.mbti:9:3-9:9"
+          },
+          "name": {
+            "name": "to_uint",
+            "loc": "core/uint16/uint16.mbti:9:11-9:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt16"
+                  },
+                  "loc": "core/uint16/uint16.mbti:9:19-9:25"
+                },
+                "1": [],
+                "loc": "core/uint16/uint16.mbti:9:19-9:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt"
+                },
+                "loc": "core/uint16/uint16.mbti:9:30-9:34"
+              },
+              "1": [],
+              "loc": "core/uint16/uint16.mbti:9:30-9:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/uint16/uint16.mbti:9:0-9:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "UInt16",
+            "loc": "core/uint16/uint16.mbti:10:3-10:9"
+          },
+          "name": {
+            "name": "to_uint64",
+            "loc": "core/uint16/uint16.mbti:10:11-10:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt16"
+                  },
+                  "loc": "core/uint16/uint16.mbti:10:21-10:27"
+                },
+                "1": [],
+                "loc": "core/uint16/uint16.mbti:10:21-10:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt64"
+                },
+                "loc": "core/uint16/uint16.mbti:10:32-10:38"
+              },
+              "1": [],
+              "loc": "core/uint16/uint16.mbti:10:32-10:38"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/uint16/uint16.mbti:10:0-10:38"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:11:13-11:19"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:11:13-11:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Add"
+            },
+            "loc": "core/uint16/uint16.mbti:11:5-11:8"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:11:0-11:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:12:16-12:22"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:12:16-12:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "BitAnd"
+            },
+            "loc": "core/uint16/uint16.mbti:12:5-12:11"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:12:0-12:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:13:15-13:21"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:13:15-13:21"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "BitOr"
+            },
+            "loc": "core/uint16/uint16.mbti:13:5-13:10"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:13:0-13:21"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:14:16-14:22"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:14:16-14:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "BitXOr"
+            },
+            "loc": "core/uint16/uint16.mbti:14:5-14:11"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:14:0-14:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:15:17-15:23"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:15:17-15:23"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Compare"
+            },
+            "loc": "core/uint16/uint16.mbti:15:5-15:12"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:15:0-15:23"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:16:17-16:23"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:16:17-16:23"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Default"
+            },
+            "loc": "core/uint16/uint16.mbti:16:5-16:12"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:16:0-16:23"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:17:13-17:19"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:17:13-17:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Div"
+            },
+            "loc": "core/uint16/uint16.mbti:17:5-17:8"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:17:0-17:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:18:12-18:18"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:18:12-18:18"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/uint16/uint16.mbti:18:5-18:7"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:18:0-18:18"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:19:14-19:20"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:19:14-19:20"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Hash"
+            },
+            "loc": "core/uint16/uint16.mbti:19:5-19:9"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:19:0-19:20"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:20:13-20:19"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:20:13-20:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Mod"
+            },
+            "loc": "core/uint16/uint16.mbti:20:5-20:8"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:20:0-20:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:21:13-21:19"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:21:13-21:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Mul"
+            },
+            "loc": "core/uint16/uint16.mbti:21:5-21:8"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:21:0-21:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:22:13-22:19"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:22:13-22:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Shl"
+            },
+            "loc": "core/uint16/uint16.mbti:22:5-22:8"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:22:0-22:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:23:13-23:19"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:23:13-23:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Shr"
+            },
+            "loc": "core/uint16/uint16.mbti:23:5-23:8"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:23:0-23:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:24:13-24:19"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:24:13-24:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Sub"
+            },
+            "loc": "core/uint16/uint16.mbti:24:5-24:8"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:24:0-24:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt16"
+              },
+              "loc": "core/uint16/uint16.mbti:25:16-25:22"
+            },
+            "1": [],
+            "loc": "core/uint16/uint16.mbti:25:16-25:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/uint16/uint16.mbti:25:5-25:11"
+          }
+        }
+      },
+      "core/uint16/uint16.mbti:25:0-25:22"
+    ]
+  ]
+}

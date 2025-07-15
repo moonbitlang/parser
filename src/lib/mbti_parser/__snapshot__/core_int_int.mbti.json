@@ -1,0 +1,239 @@
+{
+  "package_name": "moonbitlang/core/int",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "max_value",
+            "loc": "core/int/int.mbti:4:4-4:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Int"
+              },
+              "loc": "core/int/int.mbti:4:16-4:19"
+            },
+            "1": [],
+            "loc": "core/int/int.mbti:4:16-4:19"
+          }
+        }
+      },
+      "core/int/int.mbti:4:0-4:19"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "min_value",
+            "loc": "core/int/int.mbti:6:4-6:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Int"
+              },
+              "loc": "core/int/int.mbti:6:16-6:19"
+            },
+            "1": [],
+            "loc": "core/int/int.mbti:6:16-6:19"
+          }
+        }
+      },
+      "core/int/int.mbti:6:0-6:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Int",
+            "loc": "core/int/int.mbti:9:3-9:6"
+          },
+          "name": {
+            "name": "abs",
+            "loc": "core/int/int.mbti:9:8-9:11"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/int/int.mbti:9:12-9:15"
+                },
+                "1": [],
+                "loc": "core/int/int.mbti:9:12-9:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/int/int.mbti:9:20-9:23"
+              },
+              "1": [],
+              "loc": "core/int/int.mbti:9:20-9:23"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/int/int.mbti:9:0-9:23"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "abs",
+            "loc": "core/int/int.mbti:10:13-10:16"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Int"
+            },
+            "loc": "core/int/int.mbti:10:8-10:11"
+          },
+          "loc": "core/int/int.mbti:10:0-10:16"
+        }
+      },
+      "core/int/int.mbti:10:0-10:16"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Int",
+            "loc": "core/int/int.mbti:11:3-11:6"
+          },
+          "name": {
+            "name": "to_be_bytes",
+            "loc": "core/int/int.mbti:11:8-11:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/int/int.mbti:11:20-11:23"
+                },
+                "1": [],
+                "loc": "core/int/int.mbti:11:20-11:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/int/int.mbti:11:28-11:33"
+              },
+              "1": [],
+              "loc": "core/int/int.mbti:11:28-11:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/int/int.mbti:11:0-11:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Int",
+            "loc": "core/int/int.mbti:12:3-12:6"
+          },
+          "name": {
+            "name": "to_le_bytes",
+            "loc": "core/int/int.mbti:12:8-12:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/int/int.mbti:12:20-12:23"
+                },
+                "1": [],
+                "loc": "core/int/int.mbti:12:20-12:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/int/int.mbti:12:28-12:33"
+              },
+              "1": [],
+              "loc": "core/int/int.mbti:12:28-12:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/int/int.mbti:12:0-12:33"
+    ]
+  ]
+}

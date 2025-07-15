@@ -1,0 +1,2528 @@
+{
+  "package_name": "moonbitlang/core/bytes",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "default",
+            "loc": "core/bytes/bytes.mbti:4:3-4:10"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bytes/bytes.mbti:4:16-4:21"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:4:16-4:21"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:4:0-4:21"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_array",
+            "loc": "core/bytes/bytes.mbti:6:3-6:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Array"
+                  },
+                  "loc": "core/bytes/bytes.mbti:6:14-6:19"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Byte"
+                      },
+                      "loc": "core/bytes/bytes.mbti:6:20-6:24"
+                    },
+                    "1": [],
+                    "loc": "core/bytes/bytes.mbti:6:20-6:24"
+                  }
+                ],
+                "loc": "core/bytes/bytes.mbti:6:14-6:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bytes/bytes.mbti:6:30-6:35"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:6:30-6:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:6:0-6:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_fixedarray",
+            "loc": "core/bytes/bytes.mbti:8:3-8:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "FixedArray"
+                  },
+                  "loc": "core/bytes/bytes.mbti:8:19-8:29"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Byte"
+                      },
+                      "loc": "core/bytes/bytes.mbti:8:30-8:34"
+                    },
+                    "1": [],
+                    "loc": "core/bytes/bytes.mbti:8:30-8:34"
+                  }
+                ],
+                "loc": "core/bytes/bytes.mbti:8:19-8:35"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "len",
+                "loc": "core/bytes/bytes.mbti:8:37-8:40"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bytes/bytes.mbti:8:44-8:47"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:8:44-8:47"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bytes/bytes.mbti:8:52-8:57"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:8:52-8:57"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:8:0-8:57"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_iter",
+            "loc": "core/bytes/bytes.mbti:10:3-10:12"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Iter"
+                  },
+                  "loc": "core/bytes/bytes.mbti:10:13-10:17"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Byte"
+                      },
+                      "loc": "core/bytes/bytes.mbti:10:18-10:22"
+                    },
+                    "1": [],
+                    "loc": "core/bytes/bytes.mbti:10:18-10:22"
+                  }
+                ],
+                "loc": "core/bytes/bytes.mbti:10:13-10:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bytes/bytes.mbti:10:28-10:33"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:10:28-10:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:10:0-10:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "of",
+            "loc": "core/bytes/bytes.mbti:12:3-12:5"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "FixedArray"
+                  },
+                  "loc": "core/bytes/bytes.mbti:12:6-12:16"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Byte"
+                      },
+                      "loc": "core/bytes/bytes.mbti:12:17-12:21"
+                    },
+                    "1": [],
+                    "loc": "core/bytes/bytes.mbti:12:17-12:21"
+                  }
+                ],
+                "loc": "core/bytes/bytes.mbti:12:6-12:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bytes/bytes.mbti:12:27-12:32"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:12:27-12:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:12:0-12:32"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:15:5-15:9"
+          },
+          "type_params": [],
+          "components": {
+            "type": "Abstract"
+          },
+          "vis": {
+            "type": "Default"
+          }
+        }
+      },
+      "core/bytes/bytes.mbti:15:0-15:9"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:16:3-16:7"
+          },
+          "name": {
+            "name": "data",
+            "loc": "core/bytes/bytes.mbti:16:9-16:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:16:14-16:18"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:16:14-16:18"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bytes/bytes.mbti:16:23-16:28"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:16:23-16:28"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:16:0-16:28"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:17:3-17:7"
+          },
+          "name": {
+            "name": "get",
+            "loc": "core/bytes/bytes.mbti:17:9-17:12"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:17:13-17:17"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:17:13-17:17"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bytes/bytes.mbti:17:19-17:22"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:17:19-17:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Byte"
+                  },
+                  "loc": "core/bytes/bytes.mbti:17:27-17:31"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:17:27-17:31"
+              },
+              "loc": "core/bytes/bytes.mbti:17:27-17:32",
+              "question_loc": "core/bytes/bytes.mbti:17:31-17:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:17:0-17:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:18:3-18:7"
+          },
+          "name": {
+            "name": "iter",
+            "loc": "core/bytes/bytes.mbti:18:9-18:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:18:14-18:18"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:18:14-18:18"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter"
+                },
+                "loc": "core/bytes/bytes.mbti:18:23-18:27"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Byte"
+                    },
+                    "loc": "core/bytes/bytes.mbti:18:28-18:32"
+                  },
+                  "1": [],
+                  "loc": "core/bytes/bytes.mbti:18:28-18:32"
+                }
+              ],
+              "loc": "core/bytes/bytes.mbti:18:23-18:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:18:0-18:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:19:3-19:7"
+          },
+          "name": {
+            "name": "length",
+            "loc": "core/bytes/bytes.mbti:19:9-19:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:19:16-19:20"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:19:16-19:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/bytes/bytes.mbti:19:25-19:28"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:19:25-19:28"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:19:0-19:28"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:20:3-20:7"
+          },
+          "name": {
+            "name": "op_as_view",
+            "loc": "core/bytes/bytes.mbti:20:9-20:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:20:20-20:24"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:20:20-20:24"
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "start",
+                "loc": "core/bytes/bytes.mbti:20:26-20:32"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bytes/bytes.mbti:20:35-20:38"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:20:35-20:38"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "end",
+                "loc": "core/bytes/bytes.mbti:20:45-20:48"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bytes/bytes.mbti:20:52-20:55"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:20:52-20:55"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bytes/bytes.mbti:20:60-20:64"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:20:60-20:64"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:20:0-20:64"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:21:3-21:7"
+          },
+          "name": {
+            "name": "op_get",
+            "loc": "core/bytes/bytes.mbti:21:9-21:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:21:16-21:20"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:21:16-21:20"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bytes/bytes.mbti:21:22-21:25"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:21:22-21:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Byte"
+                },
+                "loc": "core/bytes/bytes.mbti:21:30-21:34"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:21:30-21:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:21:0-21:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:22:3-22:7"
+          },
+          "name": {
+            "name": "start_offset",
+            "loc": "core/bytes/bytes.mbti:22:9-22:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:22:22-22:26"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:22:22-22:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/bytes/bytes.mbti:22:31-22:34"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:22:31-22:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:22:0-22:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:23:3-23:7"
+          },
+          "name": {
+            "name": "to_bytes",
+            "loc": "core/bytes/bytes.mbti:23:9-23:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:23:18-23:22"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:23:18-23:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bytes/bytes.mbti:23:27-23:32"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:23:27-23:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:23:0-23:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:24:3-24:7"
+          },
+          "name": {
+            "name": "to_double_be",
+            "loc": "core/bytes/bytes.mbti:24:9-24:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:24:22-24:26"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:24:22-24:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/bytes/bytes.mbti:24:31-24:37"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:24:31-24:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:24:0-24:37"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:25:3-25:7"
+          },
+          "name": {
+            "name": "to_double_le",
+            "loc": "core/bytes/bytes.mbti:25:9-25:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:25:22-25:26"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:25:22-25:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/bytes/bytes.mbti:25:31-25:37"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:25:31-25:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:25:0-25:37"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:26:3-26:7"
+          },
+          "name": {
+            "name": "to_float_be",
+            "loc": "core/bytes/bytes.mbti:26:9-26:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:26:21-26:25"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:26:21-26:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/bytes/bytes.mbti:26:30-26:35"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:26:30-26:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:26:0-26:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:27:3-27:7"
+          },
+          "name": {
+            "name": "to_float_le",
+            "loc": "core/bytes/bytes.mbti:27:9-27:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:27:21-27:25"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:27:21-27:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/bytes/bytes.mbti:27:30-27:35"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:27:30-27:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:27:0-27:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:28:3-28:7"
+          },
+          "name": {
+            "name": "to_int64_be",
+            "loc": "core/bytes/bytes.mbti:28:9-28:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:28:21-28:25"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:28:21-28:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int64"
+                },
+                "loc": "core/bytes/bytes.mbti:28:30-28:35"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:28:30-28:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:28:0-28:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:29:3-29:7"
+          },
+          "name": {
+            "name": "to_int64_le",
+            "loc": "core/bytes/bytes.mbti:29:9-29:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:29:21-29:25"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:29:21-29:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int64"
+                },
+                "loc": "core/bytes/bytes.mbti:29:30-29:35"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:29:30-29:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:29:0-29:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:30:3-30:7"
+          },
+          "name": {
+            "name": "to_int_be",
+            "loc": "core/bytes/bytes.mbti:30:9-30:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:30:19-30:23"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:30:19-30:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/bytes/bytes.mbti:30:28-30:31"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:30:28-30:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:30:0-30:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:31:3-31:7"
+          },
+          "name": {
+            "name": "to_int_le",
+            "loc": "core/bytes/bytes.mbti:31:9-31:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:31:19-31:23"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:31:19-31:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/bytes/bytes.mbti:31:28-31:31"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:31:28-31:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:31:0-31:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:32:3-32:7"
+          },
+          "name": {
+            "name": "to_uint64_be",
+            "loc": "core/bytes/bytes.mbti:32:9-32:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:32:22-32:26"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:32:22-32:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt64"
+                },
+                "loc": "core/bytes/bytes.mbti:32:31-32:37"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:32:31-32:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:32:0-32:37"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:33:3-33:7"
+          },
+          "name": {
+            "name": "to_uint64_le",
+            "loc": "core/bytes/bytes.mbti:33:9-33:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:33:22-33:26"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:33:22-33:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt64"
+                },
+                "loc": "core/bytes/bytes.mbti:33:31-33:37"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:33:31-33:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:33:0-33:37"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:34:3-34:7"
+          },
+          "name": {
+            "name": "to_uint_be",
+            "loc": "core/bytes/bytes.mbti:34:9-34:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:34:20-34:24"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:34:20-34:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt"
+                },
+                "loc": "core/bytes/bytes.mbti:34:29-34:33"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:34:29-34:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:34:0-34:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:35:3-35:7"
+          },
+          "name": {
+            "name": "to_uint_le",
+            "loc": "core/bytes/bytes.mbti:35:9-35:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:35:20-35:24"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:35:20-35:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt"
+                },
+                "loc": "core/bytes/bytes.mbti:35:29-35:33"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:35:29-35:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:35:0-35:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "View",
+            "loc": "core/bytes/bytes.mbti:36:3-36:7"
+          },
+          "name": {
+            "name": "unsafe_get",
+            "loc": "core/bytes/bytes.mbti:36:9-36:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bytes/bytes.mbti:36:20-36:24"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:36:20-36:24"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bytes/bytes.mbti:36:26-36:29"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:36:26-36:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Byte"
+                },
+                "loc": "core/bytes/bytes.mbti:36:34-36:38"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:36:34-36:38"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:36:0-36:38"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "View"
+              },
+              "loc": "core/bytes/bytes.mbti:37:17-37:21"
+            },
+            "1": [],
+            "loc": "core/bytes/bytes.mbti:37:17-37:21"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Compare"
+            },
+            "loc": "core/bytes/bytes.mbti:37:5-37:12"
+          }
+        }
+      },
+      "core/bytes/bytes.mbti:37:0-37:21"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "View"
+              },
+              "loc": "core/bytes/bytes.mbti:38:12-38:16"
+            },
+            "1": [],
+            "loc": "core/bytes/bytes.mbti:38:12-38:16"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/bytes/bytes.mbti:38:5-38:7"
+          }
+        }
+      },
+      "core/bytes/bytes.mbti:38:0-38:16"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "View"
+              },
+              "loc": "core/bytes/bytes.mbti:39:14-39:18"
+            },
+            "1": [],
+            "loc": "core/bytes/bytes.mbti:39:14-39:18"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/bytes/bytes.mbti:39:5-39:9"
+          }
+        }
+      },
+      "core/bytes/bytes.mbti:39:0-39:18"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bytes",
+            "loc": "core/bytes/bytes.mbti:41:3-41:8"
+          },
+          "name": {
+            "name": "from_array",
+            "loc": "core/bytes/bytes.mbti:41:10-41:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Array"
+                  },
+                  "loc": "core/bytes/bytes.mbti:41:21-41:26"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Byte"
+                      },
+                      "loc": "core/bytes/bytes.mbti:41:27-41:31"
+                    },
+                    "1": [],
+                    "loc": "core/bytes/bytes.mbti:41:27-41:31"
+                  }
+                ],
+                "loc": "core/bytes/bytes.mbti:41:21-41:32"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bytes/bytes.mbti:41:37-41:42"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:41:37-41:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:41:0-41:42"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bytes",
+            "loc": "core/bytes/bytes.mbti:42:3-42:8"
+          },
+          "name": {
+            "name": "from_fixedarray",
+            "loc": "core/bytes/bytes.mbti:42:10-42:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "FixedArray"
+                  },
+                  "loc": "core/bytes/bytes.mbti:42:26-42:36"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Byte"
+                      },
+                      "loc": "core/bytes/bytes.mbti:42:37-42:41"
+                    },
+                    "1": [],
+                    "loc": "core/bytes/bytes.mbti:42:37-42:41"
+                  }
+                ],
+                "loc": "core/bytes/bytes.mbti:42:26-42:42"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "len",
+                "loc": "core/bytes/bytes.mbti:42:44-42:47"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bytes/bytes.mbti:42:51-42:54"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:42:51-42:54"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bytes/bytes.mbti:42:59-42:64"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:42:59-42:64"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:42:0-42:64"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bytes",
+            "loc": "core/bytes/bytes.mbti:43:3-43:8"
+          },
+          "name": {
+            "name": "from_iter",
+            "loc": "core/bytes/bytes.mbti:43:10-43:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Iter"
+                  },
+                  "loc": "core/bytes/bytes.mbti:43:20-43:24"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Byte"
+                      },
+                      "loc": "core/bytes/bytes.mbti:43:25-43:29"
+                    },
+                    "1": [],
+                    "loc": "core/bytes/bytes.mbti:43:25-43:29"
+                  }
+                ],
+                "loc": "core/bytes/bytes.mbti:43:20-43:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bytes/bytes.mbti:43:35-43:40"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:43:35-43:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:43:0-43:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bytes",
+            "loc": "core/bytes/bytes.mbti:44:3-44:8"
+          },
+          "name": {
+            "name": "get",
+            "loc": "core/bytes/bytes.mbti:44:10-44:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bytes"
+                  },
+                  "loc": "core/bytes/bytes.mbti:44:14-44:19"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:44:14-44:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bytes/bytes.mbti:44:21-44:24"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:44:21-44:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Byte"
+                  },
+                  "loc": "core/bytes/bytes.mbti:44:29-44:33"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:44:29-44:33"
+              },
+              "loc": "core/bytes/bytes.mbti:44:29-44:34",
+              "question_loc": "core/bytes/bytes.mbti:44:33-44:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:44:0-44:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bytes",
+            "loc": "core/bytes/bytes.mbti:45:3-45:8"
+          },
+          "name": {
+            "name": "iter",
+            "loc": "core/bytes/bytes.mbti:45:10-45:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bytes"
+                  },
+                  "loc": "core/bytes/bytes.mbti:45:15-45:20"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:45:15-45:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter"
+                },
+                "loc": "core/bytes/bytes.mbti:45:25-45:29"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Byte"
+                    },
+                    "loc": "core/bytes/bytes.mbti:45:30-45:34"
+                  },
+                  "1": [],
+                  "loc": "core/bytes/bytes.mbti:45:30-45:34"
+                }
+              ],
+              "loc": "core/bytes/bytes.mbti:45:25-45:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:45:0-45:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bytes",
+            "loc": "core/bytes/bytes.mbti:46:3-46:8"
+          },
+          "name": {
+            "name": "iter2",
+            "loc": "core/bytes/bytes.mbti:46:10-46:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bytes"
+                  },
+                  "loc": "core/bytes/bytes.mbti:46:16-46:21"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:46:16-46:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter2"
+                },
+                "loc": "core/bytes/bytes.mbti:46:26-46:31"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Int"
+                    },
+                    "loc": "core/bytes/bytes.mbti:46:32-46:35"
+                  },
+                  "1": [],
+                  "loc": "core/bytes/bytes.mbti:46:32-46:35"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Byte"
+                    },
+                    "loc": "core/bytes/bytes.mbti:46:37-46:41"
+                  },
+                  "1": [],
+                  "loc": "core/bytes/bytes.mbti:46:37-46:41"
+                }
+              ],
+              "loc": "core/bytes/bytes.mbti:46:26-46:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:46:0-46:42"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bytes",
+            "loc": "core/bytes/bytes.mbti:47:3-47:8"
+          },
+          "name": {
+            "name": "of",
+            "loc": "core/bytes/bytes.mbti:47:10-47:12"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "FixedArray"
+                  },
+                  "loc": "core/bytes/bytes.mbti:47:13-47:23"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Byte"
+                      },
+                      "loc": "core/bytes/bytes.mbti:47:24-47:28"
+                    },
+                    "1": [],
+                    "loc": "core/bytes/bytes.mbti:47:24-47:28"
+                  }
+                ],
+                "loc": "core/bytes/bytes.mbti:47:13-47:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bytes/bytes.mbti:47:34-47:39"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:47:34-47:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:47:0-47:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bytes",
+            "loc": "core/bytes/bytes.mbti:48:3-48:8"
+          },
+          "name": {
+            "name": "op_as_view",
+            "loc": "core/bytes/bytes.mbti:48:10-48:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bytes"
+                  },
+                  "loc": "core/bytes/bytes.mbti:48:21-48:26"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:48:21-48:26"
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "start",
+                "loc": "core/bytes/bytes.mbti:48:28-48:34"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bytes/bytes.mbti:48:37-48:40"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:48:37-48:40"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "end",
+                "loc": "core/bytes/bytes.mbti:48:47-48:50"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bytes/bytes.mbti:48:54-48:57"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:48:54-48:57"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "View"
+                },
+                "loc": "core/bytes/bytes.mbti:48:62-48:66"
+              },
+              "1": [],
+              "loc": "core/bytes/bytes.mbti:48:62-48:66"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:48:0-48:66"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bytes",
+            "loc": "core/bytes/bytes.mbti:49:3-49:8"
+          },
+          "name": {
+            "name": "to_array",
+            "loc": "core/bytes/bytes.mbti:49:10-49:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bytes"
+                  },
+                  "loc": "core/bytes/bytes.mbti:49:19-49:24"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:49:19-49:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Array"
+                },
+                "loc": "core/bytes/bytes.mbti:49:29-49:34"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Byte"
+                    },
+                    "loc": "core/bytes/bytes.mbti:49:35-49:39"
+                  },
+                  "1": [],
+                  "loc": "core/bytes/bytes.mbti:49:35-49:39"
+                }
+              ],
+              "loc": "core/bytes/bytes.mbti:49:29-49:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:49:0-49:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bytes",
+            "loc": "core/bytes/bytes.mbti:50:3-50:8"
+          },
+          "name": {
+            "name": "to_fixedarray",
+            "loc": "core/bytes/bytes.mbti:50:10-50:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bytes"
+                  },
+                  "loc": "core/bytes/bytes.mbti:50:24-50:29"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:50:24-50:29"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "len",
+                "loc": "core/bytes/bytes.mbti:50:31-50:34"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bytes/bytes.mbti:50:38-50:41"
+                },
+                "1": [],
+                "loc": "core/bytes/bytes.mbti:50:38-50:41"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "FixedArray"
+                },
+                "loc": "core/bytes/bytes.mbti:50:46-50:56"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Byte"
+                    },
+                    "loc": "core/bytes/bytes.mbti:50:57-50:61"
+                  },
+                  "1": [],
+                  "loc": "core/bytes/bytes.mbti:50:57-50:61"
+                }
+              ],
+              "loc": "core/bytes/bytes.mbti:50:46-50:62"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bytes/bytes.mbti:50:0-50:62"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Bytes"
+              },
+              "loc": "core/bytes/bytes.mbti:51:13-51:18"
+            },
+            "1": [],
+            "loc": "core/bytes/bytes.mbti:51:13-51:18"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Add"
+            },
+            "loc": "core/bytes/bytes.mbti:51:5-51:8"
+          }
+        }
+      },
+      "core/bytes/bytes.mbti:51:0-51:18"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Bytes"
+              },
+              "loc": "core/bytes/bytes.mbti:52:17-52:22"
+            },
+            "1": [],
+            "loc": "core/bytes/bytes.mbti:52:17-52:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Default"
+            },
+            "loc": "core/bytes/bytes.mbti:52:5-52:12"
+          }
+        }
+      },
+      "core/bytes/bytes.mbti:52:0-52:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Bytes"
+              },
+              "loc": "core/bytes/bytes.mbti:53:14-53:19"
+            },
+            "1": [],
+            "loc": "core/bytes/bytes.mbti:53:14-53:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Hash"
+            },
+            "loc": "core/bytes/bytes.mbti:53:5-53:9"
+          }
+        }
+      },
+      "core/bytes/bytes.mbti:53:0-53:19"
+    ]
+  ]
+}

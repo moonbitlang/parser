@@ -1,0 +1,1940 @@
+{
+  "package_name": "moonbitlang/core/option",
+  "imports": [
+    {
+      "name": "moonbitlang/core/quickcheck"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "empty",
+            "loc": "core/option/option.mbti:9:6-9:11"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/option/option.mbti:9:17-9:18"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:9:17-9:18"
+              },
+              "loc": "core/option/option.mbti:9:17-9:19",
+              "question_loc": "core/option/option.mbti:9:18-9:19"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:9:3-9:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:8:0-9:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "some",
+            "loc": "core/option/option.mbti:12:6-12:10"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/option/option.mbti:12:11-12:12"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:12:11-12:12"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/option/option.mbti:12:17-12:18"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:12:17-12:18"
+              },
+              "loc": "core/option/option.mbti:12:17-12:19",
+              "question_loc": "core/option/option.mbti:12:18-12:19"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:12:3-12:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:11:0-12:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "unless",
+            "loc": "core/option/option.mbti:15:6-15:12"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/option/option.mbti:15:13-15:17"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:15:13-15:17"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:15:25-15:26"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:15:25-15:26"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/option/option.mbti:15:19-15:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/option/option.mbti:15:31-15:32"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:15:31-15:32"
+              },
+              "loc": "core/option/option.mbti:15:31-15:33",
+              "question_loc": "core/option/option.mbti:15:32-15:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:15:3-15:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:14:0-15:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "when",
+            "loc": "core/option/option.mbti:18:6-18:10"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/option/option.mbti:18:11-18:15"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:18:11-18:15"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:18:23-18:24"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:18:23-18:24"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/option/option.mbti:18:17-18:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/option/option.mbti:18:29-18:30"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:18:29-18:30"
+              },
+              "loc": "core/option/option.mbti:18:29-18:31",
+              "question_loc": "core/option/option.mbti:18:30-18:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:18:3-18:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:17:0-18:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:21:9-21:15"
+          },
+          "name": {
+            "name": "bind",
+            "loc": "core/option/option.mbti:21:17-21:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:21:22-21:23"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:21:22-21:23"
+                },
+                "loc": "core/option/option.mbti:21:22-21:24",
+                "question_loc": "core/option/option.mbti:21:23-21:24"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/option/option.mbti:21:27-21:28"
+                    },
+                    "1": [],
+                    "loc": "core/option/option.mbti:21:27-21:28"
+                  }
+                ],
+                "res": {
+                  "type": "TOption",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "U"
+                      },
+                      "loc": "core/option/option.mbti:21:33-21:34"
+                    },
+                    "1": [],
+                    "loc": "core/option/option.mbti:21:33-21:34"
+                  },
+                  "loc": "core/option/option.mbti:21:33-21:35",
+                  "question_loc": "core/option/option.mbti:21:34-21:35"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/option/option.mbti:21:26-21:35"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "U"
+                  },
+                  "loc": "core/option/option.mbti:21:40-21:41"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:21:40-21:41"
+              },
+              "loc": "core/option/option.mbti:21:40-21:42",
+              "question_loc": "core/option/option.mbti:21:41-21:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:21:3-21:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/option/option.mbti:21:6-21:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:21:0-21:42"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:22:6-22:12"
+          },
+          "name": {
+            "name": "filter",
+            "loc": "core/option/option.mbti:22:14-22:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:22:21-22:22"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:22:21-22:22"
+                },
+                "loc": "core/option/option.mbti:22:21-22:23",
+                "question_loc": "core/option/option.mbti:22:22-22:23"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/option/option.mbti:22:26-22:27"
+                    },
+                    "1": [],
+                    "loc": "core/option/option.mbti:22:26-22:27"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Bool"
+                    },
+                    "loc": "core/option/option.mbti:22:32-22:36"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:22:32-22:36"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/option/option.mbti:22:25-22:36"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/option/option.mbti:22:41-22:42"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:22:41-22:42"
+              },
+              "loc": "core/option/option.mbti:22:41-22:43",
+              "question_loc": "core/option/option.mbti:22:42-22:43"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:22:3-22:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:22:0-22:43"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:23:6-23:12"
+          },
+          "name": {
+            "name": "flatten",
+            "loc": "core/option/option.mbti:23:14-23:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TOption",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/option/option.mbti:23:22-23:23"
+                    },
+                    "1": [],
+                    "loc": "core/option/option.mbti:23:22-23:23"
+                  },
+                  "loc": "core/option/option.mbti:23:22-23:24",
+                  "question_loc": "core/option/option.mbti:23:23-23:24"
+                },
+                "loc": "core/option/option.mbti:23:22-23:25",
+                "question_loc": "core/option/option.mbti:23:24-23:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/option/option.mbti:23:30-23:31"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:23:30-23:31"
+              },
+              "loc": "core/option/option.mbti:23:30-23:32",
+              "question_loc": "core/option/option.mbti:23:31-23:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:23:3-23:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:23:0-23:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:24:6-24:12"
+          },
+          "name": {
+            "name": "is_empty",
+            "loc": "core/option/option.mbti:24:14-24:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:24:23-24:24"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:24:23-24:24"
+                },
+                "loc": "core/option/option.mbti:24:23-24:25",
+                "question_loc": "core/option/option.mbti:24:24-24:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/option/option.mbti:24:30-24:34"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:24:30-24:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:24:3-24:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:24:0-24:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:25:6-25:12"
+          },
+          "name": {
+            "name": "iter",
+            "loc": "core/option/option.mbti:25:14-25:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:25:19-25:20"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:25:19-25:20"
+                },
+                "loc": "core/option/option.mbti:25:19-25:21",
+                "question_loc": "core/option/option.mbti:25:20-25:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter"
+                },
+                "loc": "core/option/option.mbti:25:26-25:30"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:25:31-25:32"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:25:31-25:32"
+                }
+              ],
+              "loc": "core/option/option.mbti:25:26-25:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:25:3-25:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:25:0-25:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:26:9-26:15"
+          },
+          "name": {
+            "name": "map",
+            "loc": "core/option/option.mbti:26:17-26:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:26:21-26:22"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:26:21-26:22"
+                },
+                "loc": "core/option/option.mbti:26:21-26:23",
+                "question_loc": "core/option/option.mbti:26:22-26:23"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/option/option.mbti:26:26-26:27"
+                    },
+                    "1": [],
+                    "loc": "core/option/option.mbti:26:26-26:27"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/option/option.mbti:26:32-26:33"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:26:32-26:33"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/option/option.mbti:26:25-26:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "U"
+                  },
+                  "loc": "core/option/option.mbti:26:38-26:39"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:26:38-26:39"
+              },
+              "loc": "core/option/option.mbti:26:38-26:40",
+              "question_loc": "core/option/option.mbti:26:39-26:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:26:3-26:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/option/option.mbti:26:6-26:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:26:0-26:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:27:9-27:15"
+          },
+          "name": {
+            "name": "map_or",
+            "loc": "core/option/option.mbti:27:17-27:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:27:24-27:25"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:27:24-27:25"
+                },
+                "loc": "core/option/option.mbti:27:24-27:26",
+                "question_loc": "core/option/option.mbti:27:25-27:26"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "U"
+                  },
+                  "loc": "core/option/option.mbti:27:28-27:29"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:27:28-27:29"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/option/option.mbti:27:32-27:33"
+                    },
+                    "1": [],
+                    "loc": "core/option/option.mbti:27:32-27:33"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/option/option.mbti:27:38-27:39"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:27:38-27:39"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/option/option.mbti:27:31-27:39"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "U"
+                },
+                "loc": "core/option/option.mbti:27:44-27:45"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:27:44-27:45"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:27:3-27:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/option/option.mbti:27:6-27:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:27:0-27:45"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:28:9-28:15"
+          },
+          "name": {
+            "name": "map_or_else",
+            "loc": "core/option/option.mbti:28:17-28:28"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:28:29-28:30"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:28:29-28:30"
+                },
+                "loc": "core/option/option.mbti:28:29-28:31",
+                "question_loc": "core/option/option.mbti:28:30-28:31"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/option/option.mbti:28:39-28:40"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:28:39-28:40"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/option/option.mbti:28:33-28:40"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/option/option.mbti:28:43-28:44"
+                    },
+                    "1": [],
+                    "loc": "core/option/option.mbti:28:43-28:44"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/option/option.mbti:28:49-28:50"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:28:49-28:50"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/option/option.mbti:28:42-28:50"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "U"
+                },
+                "loc": "core/option/option.mbti:28:55-28:56"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:28:55-28:56"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:28:3-28:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/option/option.mbti:28:6-28:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:28:0-28:56"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:30:6-30:12"
+          },
+          "name": {
+            "name": "or",
+            "loc": "core/option/option.mbti:30:14-30:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:30:17-30:18"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:30:17-30:18"
+                },
+                "loc": "core/option/option.mbti:30:17-30:19",
+                "question_loc": "core/option/option.mbti:30:18-30:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/option/option.mbti:30:21-30:22"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:30:21-30:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/option/option.mbti:30:27-30:28"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:30:27-30:28"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:30:3-30:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:29:0-30:28"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:32:16-32:22"
+          },
+          "name": {
+            "name": "or_default",
+            "loc": "core/option/option.mbti:32:24-32:34"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:32:35-32:36"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:32:35-32:36"
+                },
+                "loc": "core/option/option.mbti:32:35-32:37",
+                "question_loc": "core/option/option.mbti:32:36-32:37"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/option/option.mbti:32:42-32:43"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:32:42-32:43"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:32:3-32:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Default"
+                  },
+                  "loc": "core/option/option.mbti:32:7-32:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:31:0-32:43"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:34:6-34:12"
+          },
+          "name": {
+            "name": "or_else",
+            "loc": "core/option/option.mbti:34:14-34:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:34:22-34:23"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:34:22-34:23"
+                },
+                "loc": "core/option/option.mbti:34:22-34:24",
+                "question_loc": "core/option/option.mbti:34:23-34:24"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:34:32-34:33"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:34:32-34:33"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/option/option.mbti:34:26-34:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/option/option.mbti:34:38-34:39"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:34:38-34:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:34:3-34:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:33:0-34:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:35:19-35:25"
+          },
+          "name": {
+            "name": "or_error",
+            "loc": "core/option/option.mbti:35:27-35:35"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:35:36-35:37"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:35:36-35:37"
+                },
+                "loc": "core/option/option.mbti:35:36-35:38",
+                "question_loc": "core/option/option.mbti:35:37-35:38"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Err"
+                  },
+                  "loc": "core/option/option.mbti:35:40-35:43"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:35:40-35:43"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/option/option.mbti:35:48-35:49"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:35:48-35:49"
+            },
+            {
+              "type": "ErrorType",
+              "ty": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Err"
+                  },
+                  "loc": "core/option/option.mbti:35:56-35:59"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:35:56-35:59"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:35:3-35:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "Err",
+                "loc": "core/option/option.mbti:35:6-35:9"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "core/option/option.mbti:35:12-35:17"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:35:0-35:59"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:36:6-36:12"
+          },
+          "name": {
+            "name": "unwrap_or",
+            "loc": "core/option/option.mbti:36:14-36:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:36:24-36:25"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:36:24-36:25"
+                },
+                "loc": "core/option/option.mbti:36:24-36:26",
+                "question_loc": "core/option/option.mbti:36:25-36:26"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/option/option.mbti:36:28-36:29"
+                },
+                "1": [],
+                "loc": "core/option/option.mbti:36:28-36:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/option/option.mbti:36:34-36:35"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:36:34-36:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:36:3-36:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:36:0-36:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:37:16-37:22"
+          },
+          "name": {
+            "name": "unwrap_or_default",
+            "loc": "core/option/option.mbti:37:24-37:41"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:37:42-37:43"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:37:42-37:43"
+                },
+                "loc": "core/option/option.mbti:37:42-37:44",
+                "question_loc": "core/option/option.mbti:37:43-37:44"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/option/option.mbti:37:49-37:50"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:37:49-37:50"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:37:3-37:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Default"
+                  },
+                  "loc": "core/option/option.mbti:37:7-37:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:37:0-37:50"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Option",
+            "loc": "core/option/option.mbti:38:6-38:12"
+          },
+          "name": {
+            "name": "unwrap_or_else",
+            "loc": "core/option/option.mbti:38:14-38:28"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TOption",
+                "0": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:38:29-38:30"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:38:29-38:30"
+                },
+                "loc": "core/option/option.mbti:38:29-38:31",
+                "question_loc": "core/option/option.mbti:38:30-38:31"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/option/option.mbti:38:39-38:40"
+                  },
+                  "1": [],
+                  "loc": "core/option/option.mbti:38:39-38:40"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/option/option.mbti:38:33-38:40"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/option/option.mbti:38:45-38:46"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:38:45-38:46"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/option/option.mbti:38:3-38:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/option/option.mbti:38:0-38:46"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/option/option.mbti:39:5-39:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/option/option.mbti:39:9-39:16"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TOption",
+            "0": {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "X"
+                },
+                "loc": "core/option/option.mbti:39:30-39:31"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:39:30-39:31"
+            },
+            "loc": "core/option/option.mbti:39:30-39:32",
+            "question_loc": "core/option/option.mbti:39:31-39:32"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Compare"
+            },
+            "loc": "core/option/option.mbti:39:18-39:25"
+          }
+        }
+      },
+      "core/option/option.mbti:39:0-39:32"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/option/option.mbti:40:5-40:6"
+              },
+              "constraints": []
+            }
+          ],
+          "type_": {
+            "type": "TOption",
+            "0": {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "X"
+                },
+                "loc": "core/option/option.mbti:40:20-40:21"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:40:20-40:21"
+            },
+            "loc": "core/option/option.mbti:40:20-40:22",
+            "question_loc": "core/option/option.mbti:40:21-40:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Default"
+            },
+            "loc": "core/option/option.mbti:40:8-40:15"
+          }
+        }
+      },
+      "core/option/option.mbti:40:0-40:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/option/option.mbti:41:5-41:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/option/option.mbti:41:9-41:30"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TOption",
+            "0": {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "X"
+                },
+                "loc": "core/option/option.mbti:41:58-41:59"
+              },
+              "1": [],
+              "loc": "core/option/option.mbti:41:58-41:59"
+            },
+            "loc": "core/option/option.mbti:41:58-41:60",
+            "question_loc": "core/option/option.mbti:41:59-41:60"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "quickcheck",
+              "name": "Arbitrary"
+            },
+            "loc": "core/option/option.mbti:41:32-41:53"
+          }
+        }
+      },
+      "core/option/option.mbti:41:0-41:60"
+    ]
+  ]
+}

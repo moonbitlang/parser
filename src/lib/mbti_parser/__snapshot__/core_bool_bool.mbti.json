@@ -1,0 +1,360 @@
+{
+  "package_name": "moonbitlang/core/bool",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bool",
+            "loc": "core/bool/bool.mbti:6:3-6:7"
+          },
+          "name": {
+            "name": "to_int",
+            "loc": "core/bool/bool.mbti:6:9-6:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/bool/bool.mbti:6:16-6:20"
+                },
+                "1": [],
+                "loc": "core/bool/bool.mbti:6:16-6:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/bool/bool.mbti:6:25-6:28"
+              },
+              "1": [],
+              "loc": "core/bool/bool.mbti:6:25-6:28"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bool/bool.mbti:6:0-6:28"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bool",
+            "loc": "core/bool/bool.mbti:7:3-7:7"
+          },
+          "name": {
+            "name": "to_int16",
+            "loc": "core/bool/bool.mbti:7:9-7:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/bool/bool.mbti:7:18-7:22"
+                },
+                "1": [],
+                "loc": "core/bool/bool.mbti:7:18-7:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int16"
+                },
+                "loc": "core/bool/bool.mbti:7:27-7:32"
+              },
+              "1": [],
+              "loc": "core/bool/bool.mbti:7:27-7:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bool/bool.mbti:7:0-7:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bool",
+            "loc": "core/bool/bool.mbti:8:3-8:7"
+          },
+          "name": {
+            "name": "to_int64",
+            "loc": "core/bool/bool.mbti:8:9-8:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/bool/bool.mbti:8:18-8:22"
+                },
+                "1": [],
+                "loc": "core/bool/bool.mbti:8:18-8:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int64"
+                },
+                "loc": "core/bool/bool.mbti:8:27-8:32"
+              },
+              "1": [],
+              "loc": "core/bool/bool.mbti:8:27-8:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bool/bool.mbti:8:0-8:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bool",
+            "loc": "core/bool/bool.mbti:9:3-9:7"
+          },
+          "name": {
+            "name": "to_uint",
+            "loc": "core/bool/bool.mbti:9:9-9:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/bool/bool.mbti:9:17-9:21"
+                },
+                "1": [],
+                "loc": "core/bool/bool.mbti:9:17-9:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt"
+                },
+                "loc": "core/bool/bool.mbti:9:26-9:30"
+              },
+              "1": [],
+              "loc": "core/bool/bool.mbti:9:26-9:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bool/bool.mbti:9:0-9:30"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bool",
+            "loc": "core/bool/bool.mbti:10:3-10:7"
+          },
+          "name": {
+            "name": "to_uint16",
+            "loc": "core/bool/bool.mbti:10:9-10:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/bool/bool.mbti:10:19-10:23"
+                },
+                "1": [],
+                "loc": "core/bool/bool.mbti:10:19-10:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt16"
+                },
+                "loc": "core/bool/bool.mbti:10:28-10:34"
+              },
+              "1": [],
+              "loc": "core/bool/bool.mbti:10:28-10:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bool/bool.mbti:10:0-10:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bool",
+            "loc": "core/bool/bool.mbti:11:3-11:7"
+          },
+          "name": {
+            "name": "to_uint64",
+            "loc": "core/bool/bool.mbti:11:9-11:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/bool/bool.mbti:11:19-11:23"
+                },
+                "1": [],
+                "loc": "core/bool/bool.mbti:11:19-11:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt64"
+                },
+                "loc": "core/bool/bool.mbti:11:28-11:34"
+              },
+              "1": [],
+              "loc": "core/bool/bool.mbti:11:28-11:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bool/bool.mbti:11:0-11:34"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Bool"
+              },
+              "loc": "core/bool/bool.mbti:12:14-12:18"
+            },
+            "1": [],
+            "loc": "core/bool/bool.mbti:12:14-12:18"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Hash"
+            },
+            "loc": "core/bool/bool.mbti:12:5-12:9"
+          }
+        }
+      },
+      "core/bool/bool.mbti:12:0-12:18"
+    ]
+  ]
+}

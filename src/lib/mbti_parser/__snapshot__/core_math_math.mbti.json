@@ -1,0 +1,2928 @@
+{
+  "package_name": "moonbitlang/core/math",
+  "imports": [
+    {
+      "name": "moonbitlang/core/bigint"
+    },
+    {
+      "name": "moonbitlang/core/random"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Const",
+        "0": {
+          "name": {
+            "name": "PI",
+            "loc": "core/math/math.mbti:9:6-9:8"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Double"
+              },
+              "loc": "core/math/math.mbti:9:11-9:17"
+            },
+            "1": [],
+            "loc": "core/math/math.mbti:9:11-9:17"
+          },
+          "value": {
+            "type": "Double",
+            "0": "0x3.243F6A8885A308CA8A54"
+          }
+        }
+      },
+      "core/math/math.mbti:9:0-9:44"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "acos",
+            "loc": "core/math/math.mbti:11:3-11:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:11:8-11:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:11:8-11:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:11:19-11:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:11:19-11:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:11:0-11:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "acosf",
+            "loc": "core/math/math.mbti:13:3-13:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:13:9-13:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:13:9-13:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:13:19-13:24"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:13:19-13:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:13:0-13:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "acosh",
+            "loc": "core/math/math.mbti:15:3-15:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:15:9-15:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:15:9-15:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:15:20-15:26"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:15:20-15:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:15:0-15:26"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "acoshf",
+            "loc": "core/math/math.mbti:17:3-17:9"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:17:10-17:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:17:10-17:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:17:20-17:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:17:20-17:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:17:0-17:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "asin",
+            "loc": "core/math/math.mbti:19:3-19:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:19:8-19:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:19:8-19:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:19:19-19:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:19:19-19:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:19:0-19:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "asinf",
+            "loc": "core/math/math.mbti:21:3-21:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:21:9-21:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:21:9-21:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:21:19-21:24"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:21:19-21:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:21:0-21:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "asinh",
+            "loc": "core/math/math.mbti:23:3-23:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:23:9-23:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:23:9-23:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:23:20-23:26"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:23:20-23:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:23:0-23:26"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "asinhf",
+            "loc": "core/math/math.mbti:25:3-25:9"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:25:10-25:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:25:10-25:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:25:20-25:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:25:20-25:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:25:0-25:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "atan",
+            "loc": "core/math/math.mbti:27:3-27:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:27:8-27:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:27:8-27:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:27:19-27:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:27:19-27:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:27:0-27:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "atan2",
+            "loc": "core/math/math.mbti:29:3-29:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:29:9-29:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:29:9-29:15"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:29:17-29:23"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:29:17-29:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:29:28-29:34"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:29:28-29:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:29:0-29:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "atan2f",
+            "loc": "core/math/math.mbti:31:3-31:9"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:31:10-31:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:31:10-31:15"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:31:17-31:22"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:31:17-31:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:31:27-31:32"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:31:27-31:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:31:0-31:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "atanf",
+            "loc": "core/math/math.mbti:33:3-33:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:33:9-33:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:33:9-33:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:33:19-33:24"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:33:19-33:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:33:0-33:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "atanh",
+            "loc": "core/math/math.mbti:35:3-35:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:35:9-35:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:35:9-35:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:35:20-35:26"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:35:20-35:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:35:0-35:26"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "atanhf",
+            "loc": "core/math/math.mbti:37:3-37:9"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:37:10-37:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:37:10-37:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:37:20-37:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:37:20-37:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:37:0-37:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "cbrt",
+            "loc": "core/math/math.mbti:39:3-39:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:39:8-39:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:39:8-39:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:39:19-39:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:39:19-39:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:39:0-39:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "cbrtf",
+            "loc": "core/math/math.mbti:41:3-41:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:41:9-41:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:41:9-41:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:41:19-41:24"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:41:19-41:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:41:0-41:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "ceil",
+            "loc": "core/math/math.mbti:43:3-43:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:43:8-43:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:43:8-43:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:43:19-43:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:43:19-43:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:43:0-43:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "cos",
+            "loc": "core/math/math.mbti:45:3-45:6"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:45:7-45:13"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:45:7-45:13"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:45:18-45:24"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:45:18-45:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:45:0-45:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "cosf",
+            "loc": "core/math/math.mbti:47:3-47:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:47:8-47:13"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:47:8-47:13"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:47:18-47:23"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:47:18-47:23"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:47:0-47:23"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "cosh",
+            "loc": "core/math/math.mbti:49:3-49:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:49:8-49:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:49:8-49:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:49:19-49:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:49:19-49:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:49:0-49:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "coshf",
+            "loc": "core/math/math.mbti:51:3-51:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:51:9-51:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:51:9-51:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:51:19-51:24"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:51:19-51:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:51:0-51:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "exp",
+            "loc": "core/math/math.mbti:53:3-53:6"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:53:7-53:13"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:53:7-53:13"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:53:18-53:24"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:53:18-53:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:53:0-53:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "expf",
+            "loc": "core/math/math.mbti:55:3-55:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:55:8-55:13"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:55:8-55:13"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:55:18-55:23"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:55:18-55:23"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:55:0-55:23"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "expm1",
+            "loc": "core/math/math.mbti:57:3-57:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:57:9-57:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:57:9-57:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:57:20-57:26"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:57:20-57:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:57:0-57:26"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "expm1f",
+            "loc": "core/math/math.mbti:59:3-59:9"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:59:10-59:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:59:10-59:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:59:20-59:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:59:20-59:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:59:0-59:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "floor",
+            "loc": "core/math/math.mbti:61:3-61:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:61:9-61:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:61:9-61:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:61:20-61:26"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:61:20-61:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:61:0-61:26"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "hypot",
+            "loc": "core/math/math.mbti:63:3-63:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:63:9-63:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:63:9-63:15"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:63:17-63:23"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:63:17-63:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:63:28-63:34"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:63:28-63:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:63:0-63:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "hypotf",
+            "loc": "core/math/math.mbti:65:3-65:9"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:65:10-65:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:65:10-65:15"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:65:17-65:22"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:65:17-65:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:65:27-65:32"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:65:27-65:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:65:0-65:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "is_probable_prime",
+            "loc": "core/math/math.mbti:67:3-67:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "bigint",
+                    "name": "BigInt"
+                  },
+                  "loc": "core/math/math.mbti:67:21-67:35"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:67:21-67:35"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "random",
+                    "name": "Rand"
+                  },
+                  "loc": "core/math/math.mbti:67:37-67:49"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:67:37-67:49"
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "iters",
+                "loc": "core/math/math.mbti:67:51-67:57"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/math/math.mbti:67:60-67:63"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:67:60-67:63"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/math/math.mbti:67:73-67:77"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:67:73-67:77"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:67:0-67:77"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "ln",
+            "loc": "core/math/math.mbti:69:3-69:5"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:69:6-69:12"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:69:6-69:12"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:69:17-69:23"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:69:17-69:23"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:69:0-69:23"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "ln_1p",
+            "loc": "core/math/math.mbti:71:3-71:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:71:9-71:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:71:9-71:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:71:20-71:26"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:71:20-71:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:71:0-71:26"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "ln_1pf",
+            "loc": "core/math/math.mbti:73:3-73:9"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:73:10-73:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:73:10-73:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:73:20-73:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:73:20-73:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:73:0-73:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "lnf",
+            "loc": "core/math/math.mbti:75:3-75:6"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:75:7-75:12"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:75:7-75:12"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:75:17-75:22"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:75:17-75:22"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:75:0-75:22"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "log10",
+            "loc": "core/math/math.mbti:77:3-77:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:77:9-77:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:77:9-77:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:77:20-77:26"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:77:20-77:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:77:0-77:26"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "log2",
+            "loc": "core/math/math.mbti:79:3-79:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:79:8-79:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:79:8-79:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:79:19-79:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:79:19-79:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:79:0-79:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "maximum",
+            "loc": "core/math/math.mbti:82:16-82:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/math/math.mbti:82:24-82:25"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:82:24-82:25"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/math/math.mbti:82:27-82:28"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:82:27-82:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/math/math.mbti:82:33-82:34"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:82:33-82:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/math/math.mbti:82:3-82:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/math/math.mbti:82:7-82:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/math/math.mbti:81:0-82:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "minimum",
+            "loc": "core/math/math.mbti:85:16-85:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/math/math.mbti:85:24-85:25"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:85:24-85:25"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/math/math.mbti:85:27-85:28"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:85:27-85:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/math/math.mbti:85:33-85:34"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:85:33-85:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/math/math.mbti:85:3-85:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/math/math.mbti:85:7-85:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/math/math.mbti:84:0-85:34"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "pi",
+            "loc": "core/math/math.mbti:87:4-87:6"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Double"
+              },
+              "loc": "core/math/math.mbti:87:9-87:15"
+            },
+            "1": [],
+            "loc": "core/math/math.mbti:87:9-87:15"
+          }
+        }
+      },
+      "core/math/math.mbti:87:0-87:15"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "pow",
+            "loc": "core/math/math.mbti:89:3-89:6"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:89:7-89:13"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:89:7-89:13"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:89:15-89:21"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:89:15-89:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:89:26-89:32"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:89:26-89:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:89:0-89:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "powf",
+            "loc": "core/math/math.mbti:91:3-91:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:91:8-91:13"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:91:8-91:13"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:91:15-91:20"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:91:15-91:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:91:25-91:30"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:91:25-91:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:91:0-91:30"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "probable_prime",
+            "loc": "core/math/math.mbti:93:3-93:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/math/math.mbti:93:18-93:21"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:93:18-93:21"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "random",
+                    "name": "Rand"
+                  },
+                  "loc": "core/math/math.mbti:93:23-93:35"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:93:23-93:35"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Qualified",
+                  "pkg": "bigint",
+                  "name": "BigInt"
+                },
+                "loc": "core/math/math.mbti:93:40-93:54"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:93:40-93:54"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:93:0-93:54"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "round",
+            "loc": "core/math/math.mbti:95:3-95:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:95:9-95:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:95:9-95:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:95:20-95:26"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:95:20-95:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:95:0-95:26"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "scalbn",
+            "loc": "core/math/math.mbti:97:3-97:9"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:97:10-97:16"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:97:10-97:16"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/math/math.mbti:97:18-97:21"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:97:18-97:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:97:26-97:32"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:97:26-97:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:97:0-97:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "scalbnf",
+            "loc": "core/math/math.mbti:99:3-99:10"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:99:11-99:16"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:99:11-99:16"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/math/math.mbti:99:18-99:21"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:99:18-99:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:99:26-99:31"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:99:26-99:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:99:0-99:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "sin",
+            "loc": "core/math/math.mbti:101:3-101:6"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:101:7-101:13"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:101:7-101:13"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:101:18-101:24"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:101:18-101:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:101:0-101:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "sinf",
+            "loc": "core/math/math.mbti:103:3-103:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:103:8-103:13"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:103:8-103:13"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:103:18-103:23"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:103:18-103:23"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:103:0-103:23"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "sinh",
+            "loc": "core/math/math.mbti:105:3-105:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:105:8-105:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:105:8-105:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:105:19-105:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:105:19-105:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:105:0-105:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "sinhf",
+            "loc": "core/math/math.mbti:107:3-107:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:107:9-107:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:107:9-107:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:107:19-107:24"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:107:19-107:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:107:0-107:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "tan",
+            "loc": "core/math/math.mbti:109:3-109:6"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:109:7-109:13"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:109:7-109:13"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:109:18-109:24"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:109:18-109:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:109:0-109:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "tanf",
+            "loc": "core/math/math.mbti:111:3-111:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:111:8-111:13"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:111:8-111:13"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:111:18-111:23"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:111:18-111:23"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:111:0-111:23"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "tanh",
+            "loc": "core/math/math.mbti:113:3-113:7"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:113:8-113:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:113:8-113:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:113:19-113:25"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:113:19-113:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:113:0-113:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "tanhf",
+            "loc": "core/math/math.mbti:115:3-115:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/math/math.mbti:115:9-115:14"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:115:9-115:14"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/math/math.mbti:115:19-115:24"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:115:19-115:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:115:0-115:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "trunc",
+            "loc": "core/math/math.mbti:117:3-117:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/math/math.mbti:117:9-117:15"
+                },
+                "1": [],
+                "loc": "core/math/math.mbti:117:9-117:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Double"
+                },
+                "loc": "core/math/math.mbti:117:20-117:26"
+              },
+              "1": [],
+              "loc": "core/math/math.mbti:117:20-117:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/math/math.mbti:117:0-117:26"
+    ]
+  ]
+}

@@ -1,0 +1,2169 @@
+{
+  "package_name": "moonbitlang/core/tuple",
+  "imports": [
+    {
+      "name": "moonbitlang/core/quickcheck"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "curry",
+            "loc": "core/tuple/tuple.mbti:9:12-9:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/tuple/tuple.mbti:9:19-9:20"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:9:19-9:20"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "U"
+                      },
+                      "loc": "core/tuple/tuple.mbti:9:22-9:23"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:9:22-9:23"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "V"
+                    },
+                    "loc": "core/tuple/tuple.mbti:9:28-9:29"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:9:28-9:29"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/tuple/tuple.mbti:9:18-9:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TArrow",
+              "args": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/tuple/tuple.mbti:9:35-9:36"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:9:35-9:36"
+                }
+              ],
+              "res": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "U"
+                      },
+                      "loc": "core/tuple/tuple.mbti:9:42-9:43"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:9:42-9:43"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "V"
+                    },
+                    "loc": "core/tuple/tuple.mbti:9:48-9:49"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:9:48-9:49"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/tuple/tuple.mbti:9:41-9:49"
+              },
+              "err": {
+                "type": "NoErrorType"
+              },
+              "is_async": false,
+              "loc": "core/tuple/tuple.mbti:9:34-9:49"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/tuple/tuple.mbti:9:3-9:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/tuple/tuple.mbti:9:6-9:7"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/tuple/tuple.mbti:9:9-9:10"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/tuple/tuple.mbti:8:0-9:49"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "fst",
+            "loc": "core/tuple/tuple.mbti:12:9-12:12"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TTuple",
+                "0": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/tuple/tuple.mbti:12:14-12:15"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:12:14-12:15"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "U"
+                      },
+                      "loc": "core/tuple/tuple.mbti:12:17-12:18"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:12:17-12:18"
+                  }
+                ],
+                "loc": "core/tuple/tuple.mbti:12:13-12:19"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/tuple/tuple.mbti:12:24-12:25"
+              },
+              "1": [],
+              "loc": "core/tuple/tuple.mbti:12:24-12:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/tuple/tuple.mbti:12:3-12:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/tuple/tuple.mbti:12:6-12:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/tuple/tuple.mbti:11:0-12:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "map_both",
+            "loc": "core/tuple/tuple.mbti:15:15-15:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/tuple/tuple.mbti:15:25-15:26"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:15:25-15:26"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/tuple/tuple.mbti:15:31-15:32"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:15:31-15:32"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/tuple/tuple.mbti:15:24-15:32"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/tuple/tuple.mbti:15:35-15:36"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:15:35-15:36"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "W"
+                    },
+                    "loc": "core/tuple/tuple.mbti:15:41-15:42"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:15:41-15:42"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/tuple/tuple.mbti:15:34-15:42"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TTuple",
+                "0": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/tuple/tuple.mbti:15:45-15:46"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:15:45-15:46"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/tuple/tuple.mbti:15:48-15:49"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:15:48-15:49"
+                  }
+                ],
+                "loc": "core/tuple/tuple.mbti:15:44-15:50"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TTuple",
+              "0": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/tuple/tuple.mbti:15:56-15:57"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:15:56-15:57"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "W"
+                    },
+                    "loc": "core/tuple/tuple.mbti:15:59-15:60"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:15:59-15:60"
+                }
+              ],
+              "loc": "core/tuple/tuple.mbti:15:55-15:61"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/tuple/tuple.mbti:15:3-15:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/tuple/tuple.mbti:15:6-15:7"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/tuple/tuple.mbti:15:9-15:10"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "W",
+                "loc": "core/tuple/tuple.mbti:15:12-15:13"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/tuple/tuple.mbti:14:0-15:61"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "map_fst",
+            "loc": "core/tuple/tuple.mbti:18:12-18:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/tuple/tuple.mbti:18:21-18:22"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:18:21-18:22"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/tuple/tuple.mbti:18:27-18:28"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:18:27-18:28"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/tuple/tuple.mbti:18:20-18:28"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TTuple",
+                "0": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/tuple/tuple.mbti:18:31-18:32"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:18:31-18:32"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/tuple/tuple.mbti:18:34-18:35"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:18:34-18:35"
+                  }
+                ],
+                "loc": "core/tuple/tuple.mbti:18:30-18:36"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TTuple",
+              "0": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/tuple/tuple.mbti:18:42-18:43"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:18:42-18:43"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "V"
+                    },
+                    "loc": "core/tuple/tuple.mbti:18:45-18:46"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:18:45-18:46"
+                }
+              ],
+              "loc": "core/tuple/tuple.mbti:18:41-18:47"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/tuple/tuple.mbti:18:3-18:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/tuple/tuple.mbti:18:6-18:7"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/tuple/tuple.mbti:18:9-18:10"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/tuple/tuple.mbti:17:0-18:47"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "map_snd",
+            "loc": "core/tuple/tuple.mbti:21:12-21:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/tuple/tuple.mbti:21:21-21:22"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:21:21-21:22"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/tuple/tuple.mbti:21:27-21:28"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:21:27-21:28"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/tuple/tuple.mbti:21:20-21:28"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TTuple",
+                "0": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/tuple/tuple.mbti:21:31-21:32"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:21:31-21:32"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/tuple/tuple.mbti:21:34-21:35"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:21:34-21:35"
+                  }
+                ],
+                "loc": "core/tuple/tuple.mbti:21:30-21:36"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TTuple",
+              "0": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "V"
+                    },
+                    "loc": "core/tuple/tuple.mbti:21:42-21:43"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:21:42-21:43"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/tuple/tuple.mbti:21:45-21:46"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:21:45-21:46"
+                }
+              ],
+              "loc": "core/tuple/tuple.mbti:21:41-21:47"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/tuple/tuple.mbti:21:3-21:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/tuple/tuple.mbti:21:6-21:7"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/tuple/tuple.mbti:21:9-21:10"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/tuple/tuple.mbti:20:0-21:47"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "pair",
+            "loc": "core/tuple/tuple.mbti:24:9-24:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/tuple/tuple.mbti:24:14-24:15"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:24:14-24:15"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "U"
+                  },
+                  "loc": "core/tuple/tuple.mbti:24:17-24:18"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:24:17-24:18"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TTuple",
+              "0": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/tuple/tuple.mbti:24:24-24:25"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:24:24-24:25"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/tuple/tuple.mbti:24:27-24:28"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:24:27-24:28"
+                }
+              ],
+              "loc": "core/tuple/tuple.mbti:24:23-24:29"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/tuple/tuple.mbti:24:3-24:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/tuple/tuple.mbti:24:6-24:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/tuple/tuple.mbti:23:0-24:29"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "snd",
+            "loc": "core/tuple/tuple.mbti:27:9-27:12"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TTuple",
+                "0": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/tuple/tuple.mbti:27:14-27:15"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:27:14-27:15"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "U"
+                      },
+                      "loc": "core/tuple/tuple.mbti:27:17-27:18"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:27:17-27:18"
+                  }
+                ],
+                "loc": "core/tuple/tuple.mbti:27:13-27:19"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "U"
+                },
+                "loc": "core/tuple/tuple.mbti:27:24-27:25"
+              },
+              "1": [],
+              "loc": "core/tuple/tuple.mbti:27:24-27:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/tuple/tuple.mbti:27:3-27:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/tuple/tuple.mbti:27:6-27:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/tuple/tuple.mbti:26:0-27:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "swap",
+            "loc": "core/tuple/tuple.mbti:30:9-30:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TTuple",
+                "0": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/tuple/tuple.mbti:30:15-30:16"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:30:15-30:16"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "U"
+                      },
+                      "loc": "core/tuple/tuple.mbti:30:18-30:19"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:30:18-30:19"
+                  }
+                ],
+                "loc": "core/tuple/tuple.mbti:30:14-30:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TTuple",
+              "0": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/tuple/tuple.mbti:30:26-30:27"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:30:26-30:27"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/tuple/tuple.mbti:30:29-30:30"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:30:29-30:30"
+                }
+              ],
+              "loc": "core/tuple/tuple.mbti:30:25-30:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/tuple/tuple.mbti:30:3-30:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/tuple/tuple.mbti:30:6-30:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/tuple/tuple.mbti:29:0-30:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "uncurry",
+            "loc": "core/tuple/tuple.mbti:33:12-33:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/tuple/tuple.mbti:33:21-33:22"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:33:21-33:22"
+                  }
+                ],
+                "res": {
+                  "type": "TArrow",
+                  "args": [
+                    {
+                      "type": "TName",
+                      "0": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "Ident",
+                          "name": "U"
+                        },
+                        "loc": "core/tuple/tuple.mbti:33:28-33:29"
+                      },
+                      "1": [],
+                      "loc": "core/tuple/tuple.mbti:33:28-33:29"
+                    }
+                  ],
+                  "res": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "V"
+                      },
+                      "loc": "core/tuple/tuple.mbti:33:34-33:35"
+                    },
+                    "1": [],
+                    "loc": "core/tuple/tuple.mbti:33:34-33:35"
+                  },
+                  "err": {
+                    "type": "NoErrorType"
+                  },
+                  "is_async": false,
+                  "loc": "core/tuple/tuple.mbti:33:27-33:35"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/tuple/tuple.mbti:33:20-33:35"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TArrow",
+              "args": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "T"
+                    },
+                    "loc": "core/tuple/tuple.mbti:33:41-33:42"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:33:41-33:42"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/tuple/tuple.mbti:33:44-33:45"
+                  },
+                  "1": [],
+                  "loc": "core/tuple/tuple.mbti:33:44-33:45"
+                }
+              ],
+              "res": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/tuple/tuple.mbti:33:50-33:51"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:33:50-33:51"
+              },
+              "err": {
+                "type": "NoErrorType"
+              },
+              "is_async": false,
+              "loc": "core/tuple/tuple.mbti:33:40-33:51"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/tuple/tuple.mbti:33:3-33:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/tuple/tuple.mbti:33:6-33:7"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/tuple/tuple.mbti:33:9-33:10"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/tuple/tuple.mbti:32:0-33:51"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/tuple/tuple.mbti:36:5-36:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:36:9-36:30"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/tuple/tuple.mbti:36:32-36:33"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:36:36-36:57"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/tuple/tuple.mbti:36:86-36:87"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:36:86-36:87"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/tuple/tuple.mbti:36:89-36:90"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:36:89-36:90"
+              }
+            ],
+            "loc": "core/tuple/tuple.mbti:36:85-36:91"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "quickcheck",
+              "name": "Arbitrary"
+            },
+            "loc": "core/tuple/tuple.mbti:36:59-36:80"
+          }
+        }
+      },
+      "core/tuple/tuple.mbti:36:0-36:91"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/tuple/tuple.mbti:38:5-38:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:38:9-38:30"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/tuple/tuple.mbti:38:32-38:33"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:38:36-38:57"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": "core/tuple/tuple.mbti:38:59-38:60"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:38:63-38:84"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/tuple/tuple.mbti:38:113-38:114"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:38:113-38:114"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/tuple/tuple.mbti:38:116-38:117"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:38:116-38:117"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "C"
+                  },
+                  "loc": "core/tuple/tuple.mbti:38:119-38:120"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:38:119-38:120"
+              }
+            ],
+            "loc": "core/tuple/tuple.mbti:38:112-38:121"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "quickcheck",
+              "name": "Arbitrary"
+            },
+            "loc": "core/tuple/tuple.mbti:38:86-38:107"
+          }
+        }
+      },
+      "core/tuple/tuple.mbti:38:0-38:121"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/tuple/tuple.mbti:40:5-40:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:40:9-40:30"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/tuple/tuple.mbti:40:32-40:33"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:40:36-40:57"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": "core/tuple/tuple.mbti:40:59-40:60"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:40:63-40:84"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": "core/tuple/tuple.mbti:40:86-40:87"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:40:90-40:111"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/tuple/tuple.mbti:40:140-40:141"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:40:140-40:141"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/tuple/tuple.mbti:40:143-40:144"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:40:143-40:144"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "C"
+                  },
+                  "loc": "core/tuple/tuple.mbti:40:146-40:147"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:40:146-40:147"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "D"
+                  },
+                  "loc": "core/tuple/tuple.mbti:40:149-40:150"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:40:149-40:150"
+              }
+            ],
+            "loc": "core/tuple/tuple.mbti:40:139-40:151"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "quickcheck",
+              "name": "Arbitrary"
+            },
+            "loc": "core/tuple/tuple.mbti:40:113-40:134"
+          }
+        }
+      },
+      "core/tuple/tuple.mbti:40:0-40:151"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/tuple/tuple.mbti:42:5-42:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:42:9-42:30"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/tuple/tuple.mbti:42:32-42:33"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:42:36-42:57"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": "core/tuple/tuple.mbti:42:59-42:60"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:42:63-42:84"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": "core/tuple/tuple.mbti:42:86-42:87"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:42:90-42:111"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "E",
+                "loc": "core/tuple/tuple.mbti:42:113-42:114"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:42:117-42:138"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/tuple/tuple.mbti:42:167-42:168"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:42:167-42:168"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/tuple/tuple.mbti:42:170-42:171"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:42:170-42:171"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "C"
+                  },
+                  "loc": "core/tuple/tuple.mbti:42:173-42:174"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:42:173-42:174"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "D"
+                  },
+                  "loc": "core/tuple/tuple.mbti:42:176-42:177"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:42:176-42:177"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "E"
+                  },
+                  "loc": "core/tuple/tuple.mbti:42:179-42:180"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:42:179-42:180"
+              }
+            ],
+            "loc": "core/tuple/tuple.mbti:42:166-42:181"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "quickcheck",
+              "name": "Arbitrary"
+            },
+            "loc": "core/tuple/tuple.mbti:42:140-42:161"
+          }
+        }
+      },
+      "core/tuple/tuple.mbti:42:0-42:181"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/tuple/tuple.mbti:44:5-44:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:9-44:30"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/tuple/tuple.mbti:44:32-44:33"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:36-44:57"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": "core/tuple/tuple.mbti:44:59-44:60"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:63-44:84"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": "core/tuple/tuple.mbti:44:86-44:87"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:90-44:111"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "E",
+                "loc": "core/tuple/tuple.mbti:44:113-44:114"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:117-44:138"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "F",
+                "loc": "core/tuple/tuple.mbti:44:140-44:141"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:144-44:165"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:194-44:195"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:44:194-44:195"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:197-44:198"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:44:197-44:198"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "C"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:200-44:201"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:44:200-44:201"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "D"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:203-44:204"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:44:203-44:204"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "E"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:206-44:207"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:44:206-44:207"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "F"
+                  },
+                  "loc": "core/tuple/tuple.mbti:44:209-44:210"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:44:209-44:210"
+              }
+            ],
+            "loc": "core/tuple/tuple.mbti:44:193-44:211"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "quickcheck",
+              "name": "Arbitrary"
+            },
+            "loc": "core/tuple/tuple.mbti:44:167-44:188"
+          }
+        }
+      },
+      "core/tuple/tuple.mbti:44:0-44:211"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/tuple/tuple.mbti:46:5-46:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:9-46:30"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/tuple/tuple.mbti:46:32-46:33"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:36-46:57"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": "core/tuple/tuple.mbti:46:59-46:60"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:63-46:84"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": "core/tuple/tuple.mbti:46:86-46:87"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:90-46:111"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "E",
+                "loc": "core/tuple/tuple.mbti:46:113-46:114"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:117-46:138"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "F",
+                "loc": "core/tuple/tuple.mbti:46:140-46:141"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:144-46:165"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "G",
+                "loc": "core/tuple/tuple.mbti:46:167-46:168"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "quickcheck",
+                    "name": "Arbitrary"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:171-46:192"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:221-46:222"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:46:221-46:222"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:224-46:225"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:46:224-46:225"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "C"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:227-46:228"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:46:227-46:228"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "D"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:230-46:231"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:46:230-46:231"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "E"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:233-46:234"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:46:233-46:234"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "F"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:236-46:237"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:46:236-46:237"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "G"
+                  },
+                  "loc": "core/tuple/tuple.mbti:46:239-46:240"
+                },
+                "1": [],
+                "loc": "core/tuple/tuple.mbti:46:239-46:240"
+              }
+            ],
+            "loc": "core/tuple/tuple.mbti:46:220-46:241"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "quickcheck",
+              "name": "Arbitrary"
+            },
+            "loc": "core/tuple/tuple.mbti:46:194-46:215"
+          }
+        }
+      },
+      "core/tuple/tuple.mbti:46:0-46:241"
+    ]
+  ]
+}

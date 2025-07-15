@@ -1,0 +1,164 @@
+{
+  "package_name": "moonbitlang/core/byte",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "max_value",
+            "loc": "core/byte/byte.mbti:4:4-4:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Byte"
+              },
+              "loc": "core/byte/byte.mbti:4:16-4:20"
+            },
+            "1": [],
+            "loc": "core/byte/byte.mbti:4:16-4:20"
+          }
+        }
+      },
+      "core/byte/byte.mbti:4:0-4:20"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "min_value",
+            "loc": "core/byte/byte.mbti:6:4-6:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Byte"
+              },
+              "loc": "core/byte/byte.mbti:6:16-6:20"
+            },
+            "1": [],
+            "loc": "core/byte/byte.mbti:6:16-6:20"
+          }
+        }
+      },
+      "core/byte/byte.mbti:6:0-6:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Byte",
+            "loc": "core/byte/byte.mbti:9:3-9:7"
+          },
+          "name": {
+            "name": "popcnt",
+            "loc": "core/byte/byte.mbti:9:9-9:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Byte"
+                  },
+                  "loc": "core/byte/byte.mbti:9:16-9:20"
+                },
+                "1": [],
+                "loc": "core/byte/byte.mbti:9:16-9:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/byte/byte.mbti:9:25-9:28"
+              },
+              "1": [],
+              "loc": "core/byte/byte.mbti:9:25-9:28"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/byte/byte.mbti:9:0-9:28"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Byte",
+            "loc": "core/byte/byte.mbti:10:3-10:7"
+          },
+          "name": {
+            "name": "to_uint64",
+            "loc": "core/byte/byte.mbti:10:9-10:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Byte"
+                  },
+                  "loc": "core/byte/byte.mbti:10:19-10:23"
+                },
+                "1": [],
+                "loc": "core/byte/byte.mbti:10:19-10:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt64"
+                },
+                "loc": "core/byte/byte.mbti:10:28-10:34"
+              },
+              "1": [],
+              "loc": "core/byte/byte.mbti:10:28-10:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/byte/byte.mbti:10:0-10:34"
+    ]
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "package_name": "moonbitlang/core/unit",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "default",
+            "loc": "core/unit/unit.mbti:4:3-4:10"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/unit/unit.mbti:4:16-4:20"
+              },
+              "1": [],
+              "loc": "core/unit/unit.mbti:4:16-4:20"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/unit/unit.mbti:4:0-4:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Unit",
+            "loc": "core/unit/unit.mbti:7:3-7:7"
+          },
+          "name": {
+            "name": "to_string",
+            "loc": "core/unit/unit.mbti:7:9-7:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Unit"
+                  },
+                  "loc": "core/unit/unit.mbti:7:19-7:23"
+                },
+                "1": [],
+                "loc": "core/unit/unit.mbti:7:19-7:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "String"
+                },
+                "loc": "core/unit/unit.mbti:7:28-7:34"
+              },
+              "1": [],
+              "loc": "core/unit/unit.mbti:7:28-7:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/unit/unit.mbti:7:0-7:34"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Unit"
+              },
+              "loc": "core/unit/unit.mbti:8:17-8:21"
+            },
+            "1": [],
+            "loc": "core/unit/unit.mbti:8:17-8:21"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Compare"
+            },
+            "loc": "core/unit/unit.mbti:8:5-8:12"
+          }
+        }
+      },
+      "core/unit/unit.mbti:8:0-8:21"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Unit"
+              },
+              "loc": "core/unit/unit.mbti:9:17-9:21"
+            },
+            "1": [],
+            "loc": "core/unit/unit.mbti:9:17-9:21"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Default"
+            },
+            "loc": "core/unit/unit.mbti:9:5-9:12"
+          }
+        }
+      },
+      "core/unit/unit.mbti:9:0-9:21"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Unit"
+              },
+              "loc": "core/unit/unit.mbti:10:14-10:18"
+            },
+            "1": [],
+            "loc": "core/unit/unit.mbti:10:14-10:18"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Hash"
+            },
+            "loc": "core/unit/unit.mbti:10:5-10:9"
+          }
+        }
+      },
+      "core/unit/unit.mbti:10:0-10:18"
+    ]
+  ]
+}

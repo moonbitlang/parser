@@ -1,0 +1,56 @@
+{
+  "package_name": "moonbitlang/core/double/internal/ryu",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "ryu_to_string",
+            "loc": "core/double/internal/ryu/ryu.mbti:4:3-4:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/double/internal/ryu/ryu.mbti:4:17-4:23"
+                },
+                "1": [],
+                "loc": "core/double/internal/ryu/ryu.mbti:4:17-4:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "String"
+                },
+                "loc": "core/double/internal/ryu/ryu.mbti:4:28-4:34"
+              },
+              "1": [],
+              "loc": "core/double/internal/ryu/ryu.mbti:4:28-4:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/double/internal/ryu/ryu.mbti:4:0-4:34"
+    ]
+  ]
+}

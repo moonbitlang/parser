@@ -1,0 +1,164 @@
+{
+  "package_name": "moonbitlang/core/uint64",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "max_value",
+            "loc": "core/uint64/uint64.mbti:4:4-4:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt64"
+              },
+              "loc": "core/uint64/uint64.mbti:4:16-4:22"
+            },
+            "1": [],
+            "loc": "core/uint64/uint64.mbti:4:16-4:22"
+          }
+        }
+      },
+      "core/uint64/uint64.mbti:4:0-4:22"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "min_value",
+            "loc": "core/uint64/uint64.mbti:6:4-6:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt64"
+              },
+              "loc": "core/uint64/uint64.mbti:6:16-6:22"
+            },
+            "1": [],
+            "loc": "core/uint64/uint64.mbti:6:16-6:22"
+          }
+        }
+      },
+      "core/uint64/uint64.mbti:6:0-6:22"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "UInt64",
+            "loc": "core/uint64/uint64.mbti:9:3-9:9"
+          },
+          "name": {
+            "name": "to_be_bytes",
+            "loc": "core/uint64/uint64.mbti:9:11-9:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt64"
+                  },
+                  "loc": "core/uint64/uint64.mbti:9:23-9:29"
+                },
+                "1": [],
+                "loc": "core/uint64/uint64.mbti:9:23-9:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/uint64/uint64.mbti:9:34-9:39"
+              },
+              "1": [],
+              "loc": "core/uint64/uint64.mbti:9:34-9:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/uint64/uint64.mbti:9:0-9:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "UInt64",
+            "loc": "core/uint64/uint64.mbti:10:3-10:9"
+          },
+          "name": {
+            "name": "to_le_bytes",
+            "loc": "core/uint64/uint64.mbti:10:11-10:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt64"
+                  },
+                  "loc": "core/uint64/uint64.mbti:10:23-10:29"
+                },
+                "1": [],
+                "loc": "core/uint64/uint64.mbti:10:23-10:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/uint64/uint64.mbti:10:34-10:39"
+              },
+              "1": [],
+              "loc": "core/uint64/uint64.mbti:10:34-10:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/uint64/uint64.mbti:10:0-10:39"
+    ]
+  ]
+}

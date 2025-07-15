@@ -1,0 +1,2639 @@
+{
+  "package_name": "moonbitlang/core/set",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:6:5-6:8"
+          },
+          "type_params": [
+            {
+              "$tag": "Name",
+              "0": {
+                "name": "K",
+                "loc": "core/set/set.mbti:6:9-6:10"
+              }
+            }
+          ],
+          "components": {
+            "type": "Abstract"
+          },
+          "vis": {
+            "type": "Default"
+          }
+        }
+      },
+      "core/set/set.mbti:6:0-6:11"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:7:18-7:21"
+          },
+          "name": {
+            "name": "add",
+            "loc": "core/set/set.mbti:7:23-7:26"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:7:27-7:31"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:7:32-7:33"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:7:32-7:33"
+                  }
+                ],
+                "loc": "core/set/set.mbti:7:27-7:34"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/set/set.mbti:7:36-7:37"
+                },
+                "1": [],
+                "loc": "core/set/set.mbti:7:36-7:37"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/set/set.mbti:7:42-7:46"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:7:42-7:46"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:7:3-7:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:7:7-7:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:7:14-7:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:7:0-7:46"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:8:18-8:21"
+          },
+          "name": {
+            "name": "add_and_check",
+            "loc": "core/set/set.mbti:8:23-8:36"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:8:37-8:41"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:8:42-8:43"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:8:42-8:43"
+                  }
+                ],
+                "loc": "core/set/set.mbti:8:37-8:44"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/set/set.mbti:8:46-8:47"
+                },
+                "1": [],
+                "loc": "core/set/set.mbti:8:46-8:47"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/set/set.mbti:8:52-8:56"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:8:52-8:56"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:8:3-8:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:8:7-8:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:8:14-8:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:8:0-8:56"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:9:6-9:9"
+          },
+          "name": {
+            "name": "capacity",
+            "loc": "core/set/set.mbti:9:11-9:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:9:20-9:24"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:9:25-9:26"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:9:25-9:26"
+                  }
+                ],
+                "loc": "core/set/set.mbti:9:20-9:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/set/set.mbti:9:32-9:35"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:9:32-9:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:9:3-9:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:9:0-9:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:10:6-10:9"
+          },
+          "name": {
+            "name": "clear",
+            "loc": "core/set/set.mbti:10:11-10:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:10:17-10:21"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:10:22-10:23"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:10:22-10:23"
+                  }
+                ],
+                "loc": "core/set/set.mbti:10:17-10:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/set/set.mbti:10:29-10:33"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:10:29-10:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:10:3-10:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:10:0-10:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:11:18-11:21"
+          },
+          "name": {
+            "name": "contains",
+            "loc": "core/set/set.mbti:11:23-11:31"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:11:32-11:36"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:11:37-11:38"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:11:37-11:38"
+                  }
+                ],
+                "loc": "core/set/set.mbti:11:32-11:39"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/set/set.mbti:11:41-11:42"
+                },
+                "1": [],
+                "loc": "core/set/set.mbti:11:41-11:42"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/set/set.mbti:11:47-11:51"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:11:47-11:51"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:11:3-11:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:11:7-11:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:11:14-11:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:11:0-11:51"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:12:18-12:21"
+          },
+          "name": {
+            "name": "difference",
+            "loc": "core/set/set.mbti:12:23-12:33"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:12:34-12:38"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:12:39-12:40"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:12:39-12:40"
+                  }
+                ],
+                "loc": "core/set/set.mbti:12:34-12:41"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:12:43-12:47"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:12:48-12:49"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:12:48-12:49"
+                  }
+                ],
+                "loc": "core/set/set.mbti:12:43-12:50"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/set/set.mbti:12:55-12:59"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/set/set.mbti:12:60-12:61"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:12:60-12:61"
+                }
+              ],
+              "loc": "core/set/set.mbti:12:55-12:62"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:12:3-12:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:12:7-12:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:12:14-12:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:12:0-12:62"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:13:6-13:9"
+          },
+          "name": {
+            "name": "each",
+            "loc": "core/set/set.mbti:13:11-13:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:13:16-13:20"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:13:21-13:22"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:13:21-13:22"
+                  }
+                ],
+                "loc": "core/set/set.mbti:13:16-13:23"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:13:26-13:27"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:13:26-13:27"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/set/set.mbti:13:32-13:36"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:13:32-13:36"
+                },
+                "err": {
+                  "type": "MaybeError",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Error"
+                      },
+                      "loc": "<no location>:-1:0--1:0"
+                    },
+                    "1": [],
+                    "loc": "<no location>:-1:0--1:0"
+                  },
+                  "is_old_syntax": false
+                },
+                "is_async": false,
+                "loc": "core/set/set.mbti:13:25-13:43"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/set/set.mbti:13:48-13:52"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:13:48-13:52"
+            },
+            {
+              "type": "MaybeError",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "<no location>:-1:0--1:0"
+                },
+                "1": [],
+                "loc": "<no location>:-1:0--1:0"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:13:3-13:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:13:0-13:59"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:14:6-14:9"
+          },
+          "name": {
+            "name": "eachi",
+            "loc": "core/set/set.mbti:14:11-14:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:14:17-14:21"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:14:22-14:23"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:14:22-14:23"
+                  }
+                ],
+                "loc": "core/set/set.mbti:14:17-14:24"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Int"
+                      },
+                      "loc": "core/set/set.mbti:14:27-14:30"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:14:27-14:30"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:14:32-14:33"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:14:32-14:33"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/set/set.mbti:14:38-14:42"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:14:38-14:42"
+                },
+                "err": {
+                  "type": "MaybeError",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Error"
+                      },
+                      "loc": "<no location>:-1:0--1:0"
+                    },
+                    "1": [],
+                    "loc": "<no location>:-1:0--1:0"
+                  },
+                  "is_old_syntax": false
+                },
+                "is_async": false,
+                "loc": "core/set/set.mbti:14:26-14:49"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/set/set.mbti:14:54-14:58"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:14:54-14:58"
+            },
+            {
+              "type": "MaybeError",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "<no location>:-1:0--1:0"
+                },
+                "1": [],
+                "loc": "<no location>:-1:0--1:0"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:14:3-14:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:14:0-14:65"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:15:18-15:21"
+          },
+          "name": {
+            "name": "from_array",
+            "loc": "core/set/set.mbti:15:23-15:33"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Array"
+                  },
+                  "loc": "core/set/set.mbti:15:34-15:39"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:15:40-15:41"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:15:40-15:41"
+                  }
+                ],
+                "loc": "core/set/set.mbti:15:34-15:42"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/set/set.mbti:15:47-15:51"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/set/set.mbti:15:52-15:53"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:15:52-15:53"
+                }
+              ],
+              "loc": "core/set/set.mbti:15:47-15:54"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:15:3-15:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:15:7-15:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:15:14-15:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:15:0-15:54"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:16:18-16:21"
+          },
+          "name": {
+            "name": "from_iter",
+            "loc": "core/set/set.mbti:16:23-16:32"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Iter"
+                  },
+                  "loc": "core/set/set.mbti:16:33-16:37"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:16:38-16:39"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:16:38-16:39"
+                  }
+                ],
+                "loc": "core/set/set.mbti:16:33-16:40"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/set/set.mbti:16:45-16:49"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/set/set.mbti:16:50-16:51"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:16:50-16:51"
+                }
+              ],
+              "loc": "core/set/set.mbti:16:45-16:52"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:16:3-16:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:16:7-16:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:16:14-16:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:16:0-16:52"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:18:18-18:21"
+          },
+          "name": {
+            "name": "insert",
+            "loc": "core/set/set.mbti:18:23-18:29"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:18:30-18:34"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:18:35-18:36"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:18:35-18:36"
+                  }
+                ],
+                "loc": "core/set/set.mbti:18:30-18:37"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/set/set.mbti:18:39-18:40"
+                },
+                "1": [],
+                "loc": "core/set/set.mbti:18:39-18:40"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/set/set.mbti:18:45-18:49"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:18:45-18:49"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:18:3-18:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:18:7-18:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:18:14-18:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:17:0-18:49"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:19:18-19:21"
+          },
+          "name": {
+            "name": "intersection",
+            "loc": "core/set/set.mbti:19:23-19:35"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:19:36-19:40"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:19:41-19:42"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:19:41-19:42"
+                  }
+                ],
+                "loc": "core/set/set.mbti:19:36-19:43"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:19:45-19:49"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:19:50-19:51"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:19:50-19:51"
+                  }
+                ],
+                "loc": "core/set/set.mbti:19:45-19:52"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/set/set.mbti:19:57-19:61"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/set/set.mbti:19:62-19:63"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:19:62-19:63"
+                }
+              ],
+              "loc": "core/set/set.mbti:19:57-19:64"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:19:3-19:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:19:7-19:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:19:14-19:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:19:0-19:64"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:20:6-20:9"
+          },
+          "name": {
+            "name": "is_empty",
+            "loc": "core/set/set.mbti:20:11-20:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:20:20-20:24"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:20:25-20:26"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:20:25-20:26"
+                  }
+                ],
+                "loc": "core/set/set.mbti:20:20-20:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/set/set.mbti:20:32-20:36"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:20:32-20:36"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:20:3-20:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:20:0-20:36"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:21:6-21:9"
+          },
+          "name": {
+            "name": "iter",
+            "loc": "core/set/set.mbti:21:11-21:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:21:16-21:20"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:21:21-21:22"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:21:21-21:22"
+                  }
+                ],
+                "loc": "core/set/set.mbti:21:16-21:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter"
+                },
+                "loc": "core/set/set.mbti:21:28-21:32"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/set/set.mbti:21:33-21:34"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:21:33-21:34"
+                }
+              ],
+              "loc": "core/set/set.mbti:21:28-21:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:21:3-21:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:21:0-21:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:22:6-22:9"
+          },
+          "name": {
+            "name": "new",
+            "loc": "core/set/set.mbti:22:11-22:14"
+          },
+          "params": [
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "capacity",
+                "loc": "core/set/set.mbti:22:15-22:24"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/set/set.mbti:22:27-22:30"
+                },
+                "1": [],
+                "loc": "core/set/set.mbti:22:27-22:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/set/set.mbti:22:40-22:44"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/set/set.mbti:22:45-22:46"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:22:45-22:46"
+                }
+              ],
+              "loc": "core/set/set.mbti:22:40-22:47"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:22:3-22:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:22:0-22:47"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:23:18-23:21"
+          },
+          "name": {
+            "name": "of",
+            "loc": "core/set/set.mbti:23:23-23:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "FixedArray"
+                  },
+                  "loc": "core/set/set.mbti:23:26-23:36"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:23:37-23:38"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:23:37-23:38"
+                  }
+                ],
+                "loc": "core/set/set.mbti:23:26-23:39"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/set/set.mbti:23:44-23:48"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/set/set.mbti:23:49-23:50"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:23:49-23:50"
+                }
+              ],
+              "loc": "core/set/set.mbti:23:44-23:51"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:23:3-23:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:23:7-23:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:23:14-23:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:23:0-23:51"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:24:18-24:21"
+          },
+          "name": {
+            "name": "remove",
+            "loc": "core/set/set.mbti:24:23-24:29"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:24:30-24:34"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:24:35-24:36"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:24:35-24:36"
+                  }
+                ],
+                "loc": "core/set/set.mbti:24:30-24:37"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/set/set.mbti:24:39-24:40"
+                },
+                "1": [],
+                "loc": "core/set/set.mbti:24:39-24:40"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/set/set.mbti:24:45-24:49"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:24:45-24:49"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:24:3-24:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:24:7-24:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:24:14-24:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:24:0-24:49"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:25:18-25:21"
+          },
+          "name": {
+            "name": "remove_and_check",
+            "loc": "core/set/set.mbti:25:23-25:39"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:25:40-25:44"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:25:45-25:46"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:25:45-25:46"
+                  }
+                ],
+                "loc": "core/set/set.mbti:25:40-25:47"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/set/set.mbti:25:49-25:50"
+                },
+                "1": [],
+                "loc": "core/set/set.mbti:25:49-25:50"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/set/set.mbti:25:55-25:59"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:25:55-25:59"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:25:3-25:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:25:7-25:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:25:14-25:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:25:0-25:59"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:26:6-26:9"
+          },
+          "name": {
+            "name": "size",
+            "loc": "core/set/set.mbti:26:11-26:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:26:16-26:20"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:26:21-26:22"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:26:21-26:22"
+                  }
+                ],
+                "loc": "core/set/set.mbti:26:16-26:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/set/set.mbti:26:28-26:31"
+              },
+              "1": [],
+              "loc": "core/set/set.mbti:26:28-26:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:26:3-26:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:26:0-26:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:27:18-27:21"
+          },
+          "name": {
+            "name": "symmetric_difference",
+            "loc": "core/set/set.mbti:27:23-27:43"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:27:44-27:48"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:27:49-27:50"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:27:49-27:50"
+                  }
+                ],
+                "loc": "core/set/set.mbti:27:44-27:51"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:27:53-27:57"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:27:58-27:59"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:27:58-27:59"
+                  }
+                ],
+                "loc": "core/set/set.mbti:27:53-27:60"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/set/set.mbti:27:65-27:69"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/set/set.mbti:27:70-27:71"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:27:70-27:71"
+                }
+              ],
+              "loc": "core/set/set.mbti:27:65-27:72"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:27:3-27:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:27:7-27:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:27:14-27:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:27:0-27:72"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:28:6-28:9"
+          },
+          "name": {
+            "name": "to_array",
+            "loc": "core/set/set.mbti:28:11-28:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:28:20-28:24"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:28:25-28:26"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:28:25-28:26"
+                  }
+                ],
+                "loc": "core/set/set.mbti:28:20-28:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Array"
+                },
+                "loc": "core/set/set.mbti:28:32-28:37"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/set/set.mbti:28:38-28:39"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:28:38-28:39"
+                }
+              ],
+              "loc": "core/set/set.mbti:28:32-28:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:28:3-28:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:28:0-28:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Set",
+            "loc": "core/set/set.mbti:29:18-29:21"
+          },
+          "name": {
+            "name": "union",
+            "loc": "core/set/set.mbti:29:23-29:28"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:29:29-29:33"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:29:34-29:35"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:29:34-29:35"
+                  }
+                ],
+                "loc": "core/set/set.mbti:29:29-29:36"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/set/set.mbti:29:38-29:42"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "K"
+                      },
+                      "loc": "core/set/set.mbti:29:43-29:44"
+                    },
+                    "1": [],
+                    "loc": "core/set/set.mbti:29:43-29:44"
+                  }
+                ],
+                "loc": "core/set/set.mbti:29:38-29:45"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/set/set.mbti:29:50-29:54"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/set/set.mbti:29:55-29:56"
+                  },
+                  "1": [],
+                  "loc": "core/set/set.mbti:29:55-29:56"
+                }
+              ],
+              "loc": "core/set/set.mbti:29:50-29:57"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:29:3-29:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:29:7-29:11"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:29:14-29:16"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/set/set.mbti:29:0-29:57"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:30:5-30:6"
+              },
+              "constraints": []
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Set"
+              },
+              "loc": "core/set/set.mbti:30:20-30:23"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/set/set.mbti:30:24-30:25"
+                },
+                "1": [],
+                "loc": "core/set/set.mbti:30:24-30:25"
+              }
+            ],
+            "loc": "core/set/set.mbti:30:20-30:26"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Default"
+            },
+            "loc": "core/set/set.mbti:30:8-30:15"
+          }
+        }
+      },
+      "core/set/set.mbti:30:0-30:26"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:31:5-31:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/set/set.mbti:31:9-31:13"
+                },
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/set/set.mbti:31:16-31:18"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Set"
+              },
+              "loc": "core/set/set.mbti:31:27-31:30"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/set/set.mbti:31:31-31:32"
+                },
+                "1": [],
+                "loc": "core/set/set.mbti:31:31-31:32"
+              }
+            ],
+            "loc": "core/set/set.mbti:31:27-31:33"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/set/set.mbti:31:20-31:22"
+          }
+        }
+      },
+      "core/set/set.mbti:31:0-31:33"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/set/set.mbti:32:5-32:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/set/set.mbti:32:9-32:13"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Set"
+              },
+              "loc": "core/set/set.mbti:32:24-32:27"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "K"
+                  },
+                  "loc": "core/set/set.mbti:32:28-32:29"
+                },
+                "1": [],
+                "loc": "core/set/set.mbti:32:28-32:29"
+              }
+            ],
+            "loc": "core/set/set.mbti:32:24-32:30"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/set/set.mbti:32:15-32:19"
+          }
+        }
+      },
+      "core/set/set.mbti:32:0-32:30"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/set/set.mbti:33:5-33:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "ToJson"
+                  },
+                  "loc": "core/set/set.mbti:33:9-33:15"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Set"
+              },
+              "loc": "core/set/set.mbti:33:28-33:31"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/set/set.mbti:33:32-33:33"
+                },
+                "1": [],
+                "loc": "core/set/set.mbti:33:32-33:33"
+              }
+            ],
+            "loc": "core/set/set.mbti:33:28-33:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/set/set.mbti:33:17-33:23"
+          }
+        }
+      },
+      "core/set/set.mbti:33:0-33:34"
+    ]
+  ]
+}

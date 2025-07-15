@@ -1,0 +1,2330 @@
+{
+  "package_name": "moonbitlang/core/immut/internal/sparse_array",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "doubleton",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:6-4:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:16-4:19"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:16-4:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:21-4:22"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:21-4:22"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:24-4:27"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:24-4:27"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:29-4:30"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:29-4:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "SparseArray"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:35-4:46"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "X"
+                    },
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:47-4:48"
+                  },
+                  "1": [],
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:47-4:48"
+                }
+              ],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:35-4:49"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:3-4:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:4:0-4:49"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "empty",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:6-6:11"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "SparseArray"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:17-6:28"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "X"
+                    },
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:29-6:30"
+                  },
+                  "1": [],
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:29-6:30"
+                }
+              ],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:17-6:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:3-6:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:6:0-6:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "singleton",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:6-8:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:16-8:19"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:16-8:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:21-8:22"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:21-8:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "SparseArray"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:27-8:38"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "X"
+                    },
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:39-8:40"
+                  },
+                  "1": [],
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:39-8:40"
+                }
+              ],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:27-8:41"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:3-8:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:8:0-8:41"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "Bitset",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:11:14-11:20"
+          },
+          "type_params": [],
+          "components": {
+            "type": "Newtype",
+            "0": {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:11:21-11:25"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:11:21-11:25"
+            }
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": "all",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:11:0-11:8"
+          }
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:11:0-11:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bitset",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:3-12:9"
+          },
+          "name": {
+            "name": "add",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:11-12:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:15-12:19"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:15-12:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:21-12:24"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:21-12:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:29-12:33"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:29-12:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:12:0-12:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bitset",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:3-13:9"
+          },
+          "name": {
+            "name": "first_idx",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:11-13:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:21-13:25"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:21-13:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:30-13:33"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:30-13:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:13:0-13:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bitset",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:3-14:9"
+          },
+          "name": {
+            "name": "has",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:11-14:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:15-14:19"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:15-14:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:21-14:24"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:21-14:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:29-14:33"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:29-14:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:14:0-14:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bitset",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:3-15:9"
+          },
+          "name": {
+            "name": "index_of",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:11-15:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:20-15:24"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:20-15:24"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:26-15:29"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:26-15:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:34-15:37"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:34-15:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:15:0-15:37"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bitset",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:3-16:9"
+          },
+          "name": {
+            "name": "inner",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:11-16:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:17-16:21"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:17-16:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:26-16:30"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:26-16:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:16:0-16:30"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bitset",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:3-17:9"
+          },
+          "name": {
+            "name": "intersection",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:11-17:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:24-17:28"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:24-17:28"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:30-17:34"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:30-17:34"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:39-17:43"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:39-17:43"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:17:0-17:43"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bitset",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:3-18:9"
+          },
+          "name": {
+            "name": "remove",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:11-18:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:18-18:22"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:18-18:22"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:24-18:27"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:24-18:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:32-18:36"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:32-18:36"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:18:0-18:36"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bitset",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:3-19:9"
+          },
+          "name": {
+            "name": "size",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:11-19:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:16-19:20"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:16-19:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:25-19:28"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:25-19:28"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:19:0-19:28"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Bitset",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:3-20:9"
+          },
+          "name": {
+            "name": "union",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:11-20:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:17-20:21"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:17-20:21"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:23-20:27"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:23-20:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:32-20:36"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:32-20:36"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:20:0-20:36"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Bitset"
+              },
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:21:12-21:18"
+            },
+            "1": [],
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:21:12-21:18"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:21:5-21:7"
+          }
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:21:0-21:18"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "SparseArray",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:23:16-23:27"
+          },
+          "type_params": [
+            {
+              "$tag": "Name",
+              "0": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:23:28-23:29"
+              }
+            }
+          ],
+          "components": {
+            "type": "Record",
+            "0": [
+              {
+                "type": "FieldDecl",
+                "name": {
+                  "type": "FieldName",
+                  "name": "elem_info",
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:24:2-24:11"
+                },
+                "type_": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Bitset"
+                    },
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:24:14-24:20"
+                  },
+                  "1": [],
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:24:14-24:20"
+                },
+                "mut_": false,
+                "vis": {
+                  "type": "Default"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:24:2-24:20"
+              },
+              {
+                "type": "FieldDecl",
+                "name": {
+                  "type": "FieldName",
+                  "name": "data",
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:2-25:6"
+                },
+                "type_": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "FixedArray"
+                    },
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:9-25:19"
+                  },
+                  "1": [
+                    {
+                      "type": "TName",
+                      "0": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "Ident",
+                          "name": "X"
+                        },
+                        "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:20-25:21"
+                      },
+                      "1": [],
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:20-25:21"
+                    }
+                  ],
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:9-25:22"
+                },
+                "mut_": false,
+                "vis": {
+                  "type": "Default"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:2-25:22"
+              }
+            ]
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": "all",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:23:0-23:8"
+          }
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:23:0-26:1"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "SparseArray",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:6-27:17"
+          },
+          "name": {
+            "name": "add",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:19-27:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:23-27:27"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:28-27:29"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:28-27:29"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:23-27:30"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:32-27:35"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:32-27:35"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:37-27:38"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:37-27:38"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:43-27:47"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "X"
+                    },
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:48-27:49"
+                  },
+                  "1": [],
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:48-27:49"
+                }
+              ],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:43-27:50"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:3-27:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:27:0-27:50"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "SparseArray",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:6-28:17"
+          },
+          "name": {
+            "name": "difference",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:19-28:29"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:30-28:34"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:35-28:36"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:35-28:36"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:30-28:37"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:39-28:43"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:44-28:45"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:44-28:45"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:39-28:46"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:49-28:50"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:49-28:50"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:52-28:53"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:52-28:53"
+                  }
+                ],
+                "res": {
+                  "type": "TOption",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:58-28:59"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:58-28:59"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:58-28:60",
+                  "question_loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:59-28:60"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:48-28:60"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:65-28:69"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:70-28:71"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:70-28:71"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:65-28:72"
+              },
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:65-28:73",
+              "question_loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:72-28:73"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:3-28:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:28:0-28:73"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "SparseArray",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:6-29:17"
+          },
+          "name": {
+            "name": "each",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:19-29:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:24-29:28"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:29-29:30"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:29-29:30"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:24-29:31"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:34-29:35"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:34-29:35"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:40-29:44"
+                  },
+                  "1": [],
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:40-29:44"
+                },
+                "err": {
+                  "type": "MaybeError",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Error"
+                      },
+                      "loc": "<no location>:-1:0--1:0"
+                    },
+                    "1": [],
+                    "loc": "<no location>:-1:0--1:0"
+                  },
+                  "is_old_syntax": false
+                },
+                "is_async": false,
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:33-29:51"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:56-29:60"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:56-29:60"
+            },
+            {
+              "type": "MaybeError",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "<no location>:-1:0--1:0"
+                },
+                "1": [],
+                "loc": "<no location>:-1:0--1:0"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:3-29:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:29:0-29:67"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "SparseArray",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:6-30:17"
+          },
+          "name": {
+            "name": "intersection",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:19-30:31"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:32-30:36"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:37-30:38"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:37-30:38"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:32-30:39"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:41-30:45"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:46-30:47"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:46-30:47"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:41-30:48"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:51-30:52"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:51-30:52"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:54-30:55"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:54-30:55"
+                  }
+                ],
+                "res": {
+                  "type": "TOption",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:60-30:61"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:60-30:61"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:60-30:62",
+                  "question_loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:61-30:62"
+                },
+                "err": {
+                  "type": "MaybeError",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Error"
+                      },
+                      "loc": "<no location>:-1:0--1:0"
+                    },
+                    "1": [],
+                    "loc": "<no location>:-1:0--1:0"
+                  },
+                  "is_old_syntax": false
+                },
+                "is_async": false,
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:50-30:69"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:74-30:78"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:79-30:80"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:79-30:80"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:74-30:81"
+              },
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:74-30:82",
+              "question_loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:81-30:82"
+            },
+            {
+              "type": "MaybeError",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "<no location>:-1:0--1:0"
+                },
+                "1": [],
+                "loc": "<no location>:-1:0--1:0"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:3-30:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:30:0-30:89"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "SparseArray",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:6-31:17"
+          },
+          "name": {
+            "name": "op_get",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:19-31:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:26-31:30"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:31-31:32"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:31-31:32"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:26-31:33"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:35-31:38"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:35-31:38"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:43-31:44"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:43-31:44"
+              },
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:43-31:45",
+              "question_loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:44-31:45"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:3-31:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:31:0-31:45"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "SparseArray",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:6-32:17"
+          },
+          "name": {
+            "name": "remove",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:19-32:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:26-32:30"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:31-32:32"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:31-32:32"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:26-32:33"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:35-32:38"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:35-32:38"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:43-32:47"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "X"
+                    },
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:48-32:49"
+                  },
+                  "1": [],
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:48-32:49"
+                }
+              ],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:43-32:50"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:3-32:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:32:0-32:50"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "SparseArray",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:6-33:17"
+          },
+          "name": {
+            "name": "replace",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:19-33:26"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:27-33:31"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:32-33:33"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:32-33:33"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:27-33:34"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:36-33:39"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:36-33:39"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:41-33:42"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:41-33:42"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:47-33:51"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "X"
+                    },
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:52-33:53"
+                  },
+                  "1": [],
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:52-33:53"
+                }
+              ],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:47-33:54"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:3-33:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:33:0-33:54"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "SparseArray",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:6-34:17"
+          },
+          "name": {
+            "name": "size",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:19-34:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:24-34:28"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:29-34:30"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:29-34:30"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:24-34:31"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:36-34:39"
+              },
+              "1": [],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:36-34:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:3-34:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:34:0-34:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "SparseArray",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:6-35:17"
+          },
+          "name": {
+            "name": "union",
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:19-35:24"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:25-35:29"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:30-35:31"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:30-35:31"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:25-35:32"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:34-35:38"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:39-35:40"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:39-35:40"
+                  }
+                ],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:34-35:41"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:44-35:45"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:44-35:45"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "X"
+                      },
+                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:47-35:48"
+                    },
+                    "1": [],
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:47-35:48"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "X"
+                    },
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:53-35:54"
+                  },
+                  "1": [],
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:53-35:54"
+                },
+                "err": {
+                  "type": "MaybeError",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Error"
+                      },
+                      "loc": "<no location>:-1:0--1:0"
+                    },
+                    "1": [],
+                    "loc": "<no location>:-1:0--1:0"
+                  },
+                  "is_old_syntax": false
+                },
+                "is_async": false,
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:43-35:61"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:66-35:70"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "X"
+                    },
+                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:71-35:72"
+                  },
+                  "1": [],
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:71-35:72"
+                }
+              ],
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:66-35:73"
+            },
+            {
+              "type": "MaybeError",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Error"
+                  },
+                  "loc": "<no location>:-1:0--1:0"
+                },
+                "1": [],
+                "loc": "<no location>:-1:0--1:0"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:3-35:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:35:0-35:80"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:5-36:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:9-36:11"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "SparseArray"
+              },
+              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:20-36:31"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:32-36:33"
+                },
+                "1": [],
+                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:32-36:33"
+              }
+            ],
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:20-36:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:13-36:15"
+          }
+        }
+      },
+      "core/immut/internal/sparse_array/sparse_array.mbti:36:0-36:34"
+    ]
+  ]
+}

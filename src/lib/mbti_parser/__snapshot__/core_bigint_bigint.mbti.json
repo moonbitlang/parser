@@ -1,0 +1,2365 @@
+{
+  "package_name": "moonbitlang/core/bigint",
+  "imports": [
+    {
+      "name": "moonbitlang/core/json"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:10:5-10:11"
+          },
+          "type_params": [],
+          "components": {
+            "type": "Abstract"
+          },
+          "vis": {
+            "type": "Default"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:10:0-10:11"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:12:3-12:9"
+          },
+          "name": {
+            "name": "asr",
+            "loc": "core/bigint/bigint.mbti:12:11-12:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:12:15-12:19"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:12:15-12:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bigint/bigint.mbti:12:21-12:24"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:12:21-12:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:12:29-12:33"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:12:29-12:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:11:0-12:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:13:3-13:9"
+          },
+          "name": {
+            "name": "bit_length",
+            "loc": "core/bigint/bigint.mbti:13:11-13:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:13:22-13:26"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:13:22-13:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/bigint/bigint.mbti:13:31-13:34"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:13:31-13:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:13:0-13:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:14:3-14:9"
+          },
+          "name": {
+            "name": "compare_int",
+            "loc": "core/bigint/bigint.mbti:14:11-14:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:14:23-14:27"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:14:23-14:27"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bigint/bigint.mbti:14:29-14:32"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:14:29-14:32"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/bigint/bigint.mbti:14:37-14:40"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:14:37-14:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:14:0-14:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:15:3-15:9"
+          },
+          "name": {
+            "name": "compare_int64",
+            "loc": "core/bigint/bigint.mbti:15:11-15:24"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:15:25-15:29"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:15:25-15:29"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int64"
+                  },
+                  "loc": "core/bigint/bigint.mbti:15:31-15:36"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:15:31-15:36"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/bigint/bigint.mbti:15:41-15:44"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:15:41-15:44"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:15:0-15:44"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:16:3-16:9"
+          },
+          "name": {
+            "name": "ctz",
+            "loc": "core/bigint/bigint.mbti:16:11-16:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:16:15-16:19"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:16:15-16:19"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/bigint/bigint.mbti:16:24-16:27"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:16:24-16:27"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:16:0-16:27"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:17:3-17:9"
+          },
+          "name": {
+            "name": "equal_int",
+            "loc": "core/bigint/bigint.mbti:17:11-17:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:17:21-17:25"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:17:21-17:25"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bigint/bigint.mbti:17:27-17:30"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:17:27-17:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/bigint/bigint.mbti:17:35-17:39"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:17:35-17:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:17:0-17:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:18:3-18:9"
+          },
+          "name": {
+            "name": "equal_int64",
+            "loc": "core/bigint/bigint.mbti:18:11-18:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:18:23-18:27"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:18:23-18:27"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int64"
+                  },
+                  "loc": "core/bigint/bigint.mbti:18:29-18:34"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:18:29-18:34"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/bigint/bigint.mbti:18:39-18:43"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:18:39-18:43"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:18:0-18:43"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:19:3-19:9"
+          },
+          "name": {
+            "name": "from_hex",
+            "loc": "core/bigint/bigint.mbti:19:11-19:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/bigint/bigint.mbti:19:20-19:26"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:19:20-19:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:19:31-19:35"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:19:31-19:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:19:0-19:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:20:3-20:9"
+          },
+          "name": {
+            "name": "from_int",
+            "loc": "core/bigint/bigint.mbti:20:11-20:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bigint/bigint.mbti:20:20-20:23"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:20:20-20:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:20:28-20:32"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:20:28-20:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:20:0-20:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:21:3-21:9"
+          },
+          "name": {
+            "name": "from_int64",
+            "loc": "core/bigint/bigint.mbti:21:11-21:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int64"
+                  },
+                  "loc": "core/bigint/bigint.mbti:21:22-21:27"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:21:22-21:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:21:32-21:36"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:21:32-21:36"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:21:0-21:36"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:22:3-22:9"
+          },
+          "name": {
+            "name": "from_octets",
+            "loc": "core/bigint/bigint.mbti:22:11-22:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bytes"
+                  },
+                  "loc": "core/bigint/bigint.mbti:22:23-22:28"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:22:23-22:28"
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "signum",
+                "loc": "core/bigint/bigint.mbti:22:30-22:37"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bigint/bigint.mbti:22:40-22:43"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:22:40-22:43"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:22:53-22:57"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:22:53-22:57"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:22:0-22:57"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:23:3-23:9"
+          },
+          "name": {
+            "name": "from_string",
+            "loc": "core/bigint/bigint.mbti:23:11-23:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/bigint/bigint.mbti:23:23-23:29"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:23:23-23:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:23:34-23:38"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:23:34-23:38"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:23:0-23:38"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:24:3-24:9"
+          },
+          "name": {
+            "name": "from_uint",
+            "loc": "core/bigint/bigint.mbti:24:11-24:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt"
+                  },
+                  "loc": "core/bigint/bigint.mbti:24:21-24:25"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:24:21-24:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:24:30-24:34"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:24:30-24:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:24:0-24:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:25:3-25:9"
+          },
+          "name": {
+            "name": "from_uint64",
+            "loc": "core/bigint/bigint.mbti:25:11-25:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt64"
+                  },
+                  "loc": "core/bigint/bigint.mbti:25:23-25:29"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:25:23-25:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:25:34-25:38"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:25:34-25:38"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:25:0-25:38"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:26:3-26:9"
+          },
+          "name": {
+            "name": "is_zero",
+            "loc": "core/bigint/bigint.mbti:26:11-26:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:26:19-26:23"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:26:19-26:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/bigint/bigint.mbti:26:28-26:32"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:26:28-26:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:26:0-26:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:28:3-28:9"
+          },
+          "name": {
+            "name": "lsl",
+            "loc": "core/bigint/bigint.mbti:28:11-28:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:28:15-28:19"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:28:15-28:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bigint/bigint.mbti:28:21-28:24"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:28:21-28:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:28:29-28:33"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:28:29-28:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:27:0-28:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:29:3-29:9"
+          },
+          "name": {
+            "name": "pow",
+            "loc": "core/bigint/bigint.mbti:29:11-29:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:29:15-29:19"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:29:15-29:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:29:21-29:25"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:29:21-29:25"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "modulus",
+                "loc": "core/bigint/bigint.mbti:29:27-29:34"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:29:38-29:42"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:29:38-29:42"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:29:47-29:51"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:29:47-29:51"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:29:0-29:51"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:31:3-31:9"
+          },
+          "name": {
+            "name": "shl",
+            "loc": "core/bigint/bigint.mbti:31:11-31:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:31:15-31:19"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:31:15-31:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bigint/bigint.mbti:31:21-31:24"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:31:21-31:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:31:29-31:33"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:31:29-31:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:30:0-31:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:33:3-33:9"
+          },
+          "name": {
+            "name": "shr",
+            "loc": "core/bigint/bigint.mbti:33:11-33:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:33:15-33:19"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:33:15-33:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bigint/bigint.mbti:33:21-33:24"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:33:21-33:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/bigint/bigint.mbti:33:29-33:33"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:33:29-33:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:32:0-33:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:34:3-34:9"
+          },
+          "name": {
+            "name": "to_hex",
+            "loc": "core/bigint/bigint.mbti:34:11-34:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:34:18-34:22"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:34:18-34:22"
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "uppercase",
+                "loc": "core/bigint/bigint.mbti:34:24-34:34"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/bigint/bigint.mbti:34:37-34:41"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:34:37-34:41"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "String"
+                },
+                "loc": "core/bigint/bigint.mbti:34:51-34:57"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:34:51-34:57"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:34:0-34:57"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:35:3-35:9"
+          },
+          "name": {
+            "name": "to_int",
+            "loc": "core/bigint/bigint.mbti:35:11-35:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:35:18-35:22"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:35:18-35:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/bigint/bigint.mbti:35:27-35:30"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:35:27-35:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:35:0-35:30"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:36:3-36:9"
+          },
+          "name": {
+            "name": "to_int16",
+            "loc": "core/bigint/bigint.mbti:36:11-36:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:36:20-36:24"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:36:20-36:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int16"
+                },
+                "loc": "core/bigint/bigint.mbti:36:29-36:34"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:36:29-36:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:36:0-36:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:37:3-37:9"
+          },
+          "name": {
+            "name": "to_int64",
+            "loc": "core/bigint/bigint.mbti:37:11-37:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:37:20-37:24"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:37:20-37:24"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int64"
+                },
+                "loc": "core/bigint/bigint.mbti:37:29-37:34"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:37:29-37:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:37:0-37:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:38:3-38:9"
+          },
+          "name": {
+            "name": "to_octets",
+            "loc": "core/bigint/bigint.mbti:38:11-38:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:38:21-38:25"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:38:21-38:25"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "length",
+                "loc": "core/bigint/bigint.mbti:38:27-38:33"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/bigint/bigint.mbti:38:37-38:40"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:38:37-38:40"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/bigint/bigint.mbti:38:45-38:50"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:38:45-38:50"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:38:0-38:50"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:39:3-39:9"
+          },
+          "name": {
+            "name": "to_string",
+            "loc": "core/bigint/bigint.mbti:39:11-39:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:39:21-39:25"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:39:21-39:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "String"
+                },
+                "loc": "core/bigint/bigint.mbti:39:30-39:36"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:39:30-39:36"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:39:0-39:36"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:40:3-40:9"
+          },
+          "name": {
+            "name": "to_uint",
+            "loc": "core/bigint/bigint.mbti:40:11-40:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:40:19-40:23"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:40:19-40:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt"
+                },
+                "loc": "core/bigint/bigint.mbti:40:28-40:32"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:40:28-40:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:40:0-40:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:41:3-41:9"
+          },
+          "name": {
+            "name": "to_uint16",
+            "loc": "core/bigint/bigint.mbti:41:11-41:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:41:21-41:25"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:41:21-41:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt16"
+                },
+                "loc": "core/bigint/bigint.mbti:41:30-41:36"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:41:30-41:36"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:41:0-41:36"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "BigInt",
+            "loc": "core/bigint/bigint.mbti:42:3-42:9"
+          },
+          "name": {
+            "name": "to_uint64",
+            "loc": "core/bigint/bigint.mbti:42:11-42:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/bigint/bigint.mbti:42:21-42:25"
+                },
+                "1": [],
+                "loc": "core/bigint/bigint.mbti:42:21-42:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt64"
+                },
+                "loc": "core/bigint/bigint.mbti:42:30-42:36"
+              },
+              "1": [],
+              "loc": "core/bigint/bigint.mbti:42:30-42:36"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/bigint/bigint.mbti:42:0-42:36"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:43:13-43:19"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:43:13-43:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Add"
+            },
+            "loc": "core/bigint/bigint.mbti:43:5-43:8"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:43:0-43:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:44:16-44:22"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:44:16-44:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "BitAnd"
+            },
+            "loc": "core/bigint/bigint.mbti:44:5-44:11"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:44:0-44:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:45:15-45:21"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:45:15-45:21"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "BitOr"
+            },
+            "loc": "core/bigint/bigint.mbti:45:5-45:10"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:45:0-45:21"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:46:16-46:22"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:46:16-46:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "BitXOr"
+            },
+            "loc": "core/bigint/bigint.mbti:46:5-46:11"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:46:0-46:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:47:17-47:23"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:47:17-47:23"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Compare"
+            },
+            "loc": "core/bigint/bigint.mbti:47:5-47:12"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:47:0-47:23"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:48:17-48:23"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:48:17-48:23"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Default"
+            },
+            "loc": "core/bigint/bigint.mbti:48:5-48:12"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:48:0-48:23"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:49:13-49:19"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:49:13-49:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Div"
+            },
+            "loc": "core/bigint/bigint.mbti:49:5-49:8"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:49:0-49:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:50:12-50:18"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:50:12-50:18"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/bigint/bigint.mbti:50:5-50:7"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:50:0-50:18"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:51:14-51:20"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:51:14-51:20"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Hash"
+            },
+            "loc": "core/bigint/bigint.mbti:51:5-51:9"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:51:0-51:20"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:52:13-52:19"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:52:13-52:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Mod"
+            },
+            "loc": "core/bigint/bigint.mbti:52:5-52:8"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:52:0-52:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:53:13-53:19"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:53:13-53:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Mul"
+            },
+            "loc": "core/bigint/bigint.mbti:53:5-53:8"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:53:0-53:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:54:13-54:19"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:54:13-54:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Neg"
+            },
+            "loc": "core/bigint/bigint.mbti:54:5-54:8"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:54:0-54:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:55:13-55:19"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:55:13-55:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Shl"
+            },
+            "loc": "core/bigint/bigint.mbti:55:5-55:8"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:55:0-55:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:56:14-56:20"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:56:14-56:20"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/bigint/bigint.mbti:56:5-56:9"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:56:0-56:20"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:57:13-57:19"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:57:13-57:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Shr"
+            },
+            "loc": "core/bigint/bigint.mbti:57:5-57:8"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:57:0-57:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:58:13-58:19"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:58:13-58:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Sub"
+            },
+            "loc": "core/bigint/bigint.mbti:58:5-58:8"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:58:0-58:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:59:16-59:22"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:59:16-59:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/bigint/bigint.mbti:59:5-59:11"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:59:0-59:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:60:24-60:30"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:60:24-60:30"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "json",
+              "name": "FromJson"
+            },
+            "loc": "core/bigint/bigint.mbti:60:5-60:19"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:60:0-60:30"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "BigInt"
+              },
+              "loc": "core/bigint/bigint.mbti:61:48-61:54"
+            },
+            "1": [],
+            "loc": "core/bigint/bigint.mbti:61:48-61:54"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "moonbitlang/core/quickcheck",
+              "name": "Arbitrary"
+            },
+            "loc": "core/bigint/bigint.mbti:61:5-61:43"
+          }
+        }
+      },
+      "core/bigint/bigint.mbti:61:0-61:54"
+    ]
+  ]
+}

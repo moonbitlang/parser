@@ -1,0 +1,64 @@
+{
+  "package_name": "moonbitlang/core/abort",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "abort",
+            "loc": "core/abort/abort.mbti:4:6-4:11"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/abort/abort.mbti:4:12-4:18"
+                },
+                "1": [],
+                "loc": "core/abort/abort.mbti:4:12-4:18"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/abort/abort.mbti:4:23-4:24"
+              },
+              "1": [],
+              "loc": "core/abort/abort.mbti:4:23-4:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/abort/abort.mbti:4:3-4:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/abort/abort.mbti:4:0-4:24"
+    ]
+  ]
+}

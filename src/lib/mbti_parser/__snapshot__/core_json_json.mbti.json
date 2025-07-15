@@ -1,0 +1,6752 @@
+{
+  "package_name": "moonbitlang/core/json",
+  "imports": [
+    {
+      "name": "moonbitlang/core/string"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_json",
+            "loc": "core/json/json.mbti:8:17-8:26"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Json"
+                  },
+                  "loc": "core/json/json.mbti:8:27-8:31"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:8:27-8:31"
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "path",
+                "loc": "core/json/json.mbti:8:33-8:38"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "JsonPath"
+                  },
+                  "loc": "core/json/json.mbti:8:41-8:49"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:8:41-8:49"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/json/json.mbti:8:59-8:60"
+              },
+              "1": [],
+              "loc": "core/json/json.mbti:8:59-8:60"
+            },
+            {
+              "type": "ErrorType",
+              "ty": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "JsonDecodeError"
+                  },
+                  "loc": "core/json/json.mbti:8:67-8:82"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:8:67-8:82"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/json/json.mbti:8:3-8:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:8:7-8:15"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/json/json.mbti:8:0-8:82"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "inspect",
+            "loc": "core/json/json.mbti:10:3-10:10"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TObject",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "ToJson"
+                  },
+                  "loc": "core/json/json.mbti:10:12-10:18"
+                }
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "content",
+                "loc": "core/json/json.mbti:10:20-10:27"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Json"
+                  },
+                  "loc": "core/json/json.mbti:10:31-10:35"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:10:31-10:35"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": "core/json/json.mbti:10:37-10:41"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "SourceLoc"
+                  },
+                  "loc": "core/json/json.mbti:10:44-10:53"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:10:44-10:53"
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "args_loc",
+                "loc": "core/json/json.mbti:10:59-10:68"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "ArgsLoc"
+                  },
+                  "loc": "core/json/json.mbti:10:71-10:78"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:10:71-10:78"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/json/json.mbti:10:87-10:91"
+              },
+              "1": [],
+              "loc": "core/json/json.mbti:10:87-10:91"
+            },
+            {
+              "type": "ErrorType",
+              "ty": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "InspectError"
+                  },
+                  "loc": "core/json/json.mbti:10:98-10:110"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:10:98-10:110"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:10:0-10:110"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "parse",
+            "loc": "core/json/json.mbti:12:3-12:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/json/json.mbti:12:9-12:15"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:12:9-12:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Json"
+                },
+                "loc": "core/json/json.mbti:12:20-12:24"
+              },
+              "1": [],
+              "loc": "core/json/json.mbti:12:20-12:24"
+            },
+            {
+              "type": "ErrorType",
+              "ty": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "ParseError"
+                  },
+                  "loc": "core/json/json.mbti:12:31-12:41"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:12:31-12:41"
+              },
+              "is_old_syntax": false
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:12:0-12:41"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "valid",
+            "loc": "core/json/json.mbti:14:3-14:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/json/json.mbti:14:9-14:15"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:14:9-14:15"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/json/json.mbti:14:20-14:24"
+              },
+              "1": [],
+              "loc": "core/json/json.mbti:14:20-14:24"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:14:0-14:24"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "JsonDecodeError",
+            "loc": "core/json/json.mbti:17:18-17:33"
+          },
+          "type_params": [],
+          "components": {
+            "type": "Error",
+            "0": {
+              "type": "SinglePayload",
+              "0": {
+                "type": "TTuple",
+                "0": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "JsonPath"
+                      },
+                      "loc": "core/json/json.mbti:17:35-17:43"
+                    },
+                    "1": [],
+                    "loc": "core/json/json.mbti:17:35-17:43"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "String"
+                      },
+                      "loc": "core/json/json.mbti:17:45-17:51"
+                    },
+                    "1": [],
+                    "loc": "core/json/json.mbti:17:45-17:51"
+                  }
+                ],
+                "loc": "core/json/json.mbti:17:34-17:52"
+              }
+            }
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": "all",
+            "loc": "core/json/json.mbti:17:0-17:8"
+          }
+        }
+      },
+      "core/json/json.mbti:17:0-17:52"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "JsonDecodeError"
+              },
+              "loc": "core/json/json.mbti:18:12-18:27"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:18:12-18:27"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/json/json.mbti:18:5-18:7"
+          }
+        }
+      },
+      "core/json/json.mbti:18:0-18:27"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "JsonDecodeError"
+              },
+              "loc": "core/json/json.mbti:19:14-19:29"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:19:14-19:29"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/json/json.mbti:19:5-19:9"
+          }
+        }
+      },
+      "core/json/json.mbti:19:0-19:29"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "JsonDecodeError"
+              },
+              "loc": "core/json/json.mbti:20:16-20:31"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:20:16-20:31"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/json/json.mbti:20:5-20:11"
+          }
+        }
+      },
+      "core/json/json.mbti:20:0-20:31"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "JsonPath",
+            "loc": "core/json/json.mbti:22:5-22:13"
+          },
+          "type_params": [],
+          "components": {
+            "type": "Abstract"
+          },
+          "vis": {
+            "type": "Default"
+          }
+        }
+      },
+      "core/json/json.mbti:22:0-22:13"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "JsonPath",
+            "loc": "core/json/json.mbti:23:3-23:11"
+          },
+          "name": {
+            "name": "add_index",
+            "loc": "core/json/json.mbti:23:13-23:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:23:23-23:27"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:23:23-23:27"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/json/json.mbti:23:29-23:32"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:23:29-23:32"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/json/json.mbti:23:37-23:41"
+              },
+              "1": [],
+              "loc": "core/json/json.mbti:23:37-23:41"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:23:0-23:41"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "JsonPath",
+            "loc": "core/json/json.mbti:24:3-24:11"
+          },
+          "name": {
+            "name": "add_key",
+            "loc": "core/json/json.mbti:24:13-24:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:24:21-24:25"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:24:21-24:25"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/json/json.mbti:24:27-24:33"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:24:27-24:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/json/json.mbti:24:38-24:42"
+              },
+              "1": [],
+              "loc": "core/json/json.mbti:24:38-24:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:24:0-24:42"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "JsonPath"
+              },
+              "loc": "core/json/json.mbti:25:12-25:20"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:25:12-25:20"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/json/json.mbti:25:5-25:7"
+          }
+        }
+      },
+      "core/json/json.mbti:25:0-25:20"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "JsonPath"
+              },
+              "loc": "core/json/json.mbti:26:14-26:22"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:26:14-26:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/json/json.mbti:26:5-26:9"
+          }
+        }
+      },
+      "core/json/json.mbti:26:0-26:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "JsonPath"
+              },
+              "loc": "core/json/json.mbti:27:16-27:24"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:27:16-27:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/json/json.mbti:27:5-27:11"
+          }
+        }
+      },
+      "core/json/json.mbti:27:0-27:24"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "ParseError",
+            "loc": "core/json/json.mbti:29:18-29:28"
+          },
+          "type_params": [],
+          "components": {
+            "type": "Error",
+            "0": {
+              "type": "EnumPayload",
+              "0": [
+                {
+                  "type": "ConstrDecl",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "InvalidChar",
+                    "loc": "core/json/json.mbti:30:2-30:13"
+                  },
+                  "args": [
+                    {
+                      "type": "ConstrParam",
+                      "type_": {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "Position"
+                          },
+                          "loc": "core/json/json.mbti:30:14-30:22"
+                        },
+                        "1": [],
+                        "loc": "core/json/json.mbti:30:14-30:22"
+                      },
+                      "mut_": false
+                    },
+                    {
+                      "type": "ConstrParam",
+                      "type_": {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "Char"
+                          },
+                          "loc": "core/json/json.mbti:30:24-30:28"
+                        },
+                        "1": [],
+                        "loc": "core/json/json.mbti:30:24-30:28"
+                      },
+                      "mut_": false
+                    }
+                  ],
+                  "loc": "core/json/json.mbti:30:2-30:29"
+                },
+                {
+                  "type": "ConstrDecl",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "InvalidEof",
+                    "loc": "core/json/json.mbti:31:2-31:12"
+                  },
+                  "loc": "core/json/json.mbti:31:2-31:12"
+                },
+                {
+                  "type": "ConstrDecl",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "InvalidNumber",
+                    "loc": "core/json/json.mbti:32:2-32:15"
+                  },
+                  "args": [
+                    {
+                      "type": "ConstrParam",
+                      "type_": {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "Position"
+                          },
+                          "loc": "core/json/json.mbti:32:16-32:24"
+                        },
+                        "1": [],
+                        "loc": "core/json/json.mbti:32:16-32:24"
+                      },
+                      "mut_": false
+                    },
+                    {
+                      "type": "ConstrParam",
+                      "type_": {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "String"
+                          },
+                          "loc": "core/json/json.mbti:32:26-32:32"
+                        },
+                        "1": [],
+                        "loc": "core/json/json.mbti:32:26-32:32"
+                      },
+                      "mut_": false
+                    }
+                  ],
+                  "loc": "core/json/json.mbti:32:2-32:33"
+                },
+                {
+                  "type": "ConstrDecl",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "InvalidIdentEscape",
+                    "loc": "core/json/json.mbti:33:2-33:20"
+                  },
+                  "args": [
+                    {
+                      "type": "ConstrParam",
+                      "type_": {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "Position"
+                          },
+                          "loc": "core/json/json.mbti:33:21-33:29"
+                        },
+                        "1": [],
+                        "loc": "core/json/json.mbti:33:21-33:29"
+                      },
+                      "mut_": false
+                    }
+                  ],
+                  "loc": "core/json/json.mbti:33:2-33:30"
+                }
+              ]
+            }
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": "all",
+            "loc": "core/json/json.mbti:29:0-29:8"
+          }
+        }
+      },
+      "core/json/json.mbti:29:0-34:1"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "ParseError"
+              },
+              "loc": "core/json/json.mbti:35:12-35:22"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:35:12-35:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/json/json.mbti:35:5-35:7"
+          }
+        }
+      },
+      "core/json/json.mbti:35:0-35:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "ParseError"
+              },
+              "loc": "core/json/json.mbti:36:14-36:24"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:36:14-36:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/json/json.mbti:36:5-36:9"
+          }
+        }
+      },
+      "core/json/json.mbti:36:0-36:24"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "ParseError"
+              },
+              "loc": "core/json/json.mbti:37:16-37:26"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:37:16-37:26"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/json/json.mbti:37:5-37:11"
+          }
+        }
+      },
+      "core/json/json.mbti:37:0-37:26"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "Position",
+            "loc": "core/json/json.mbti:39:16-39:24"
+          },
+          "type_params": [],
+          "components": {
+            "type": "Record",
+            "0": [
+              {
+                "type": "FieldDecl",
+                "name": {
+                  "type": "FieldName",
+                  "name": "line",
+                  "loc": "core/json/json.mbti:40:2-40:6"
+                },
+                "type_": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Int"
+                    },
+                    "loc": "core/json/json.mbti:40:9-40:12"
+                  },
+                  "1": [],
+                  "loc": "core/json/json.mbti:40:9-40:12"
+                },
+                "mut_": false,
+                "vis": {
+                  "type": "Default"
+                },
+                "loc": "core/json/json.mbti:40:2-40:12"
+              },
+              {
+                "type": "FieldDecl",
+                "name": {
+                  "type": "FieldName",
+                  "name": "column",
+                  "loc": "core/json/json.mbti:41:2-41:8"
+                },
+                "type_": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Int"
+                    },
+                    "loc": "core/json/json.mbti:41:11-41:14"
+                  },
+                  "1": [],
+                  "loc": "core/json/json.mbti:41:11-41:14"
+                },
+                "mut_": false,
+                "vis": {
+                  "type": "Default"
+                },
+                "loc": "core/json/json.mbti:41:2-41:14"
+              }
+            ]
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": "all",
+            "loc": "core/json/json.mbti:39:0-39:8"
+          }
+        }
+      },
+      "core/json/json.mbti:39:0-42:1"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Position"
+              },
+              "loc": "core/json/json.mbti:43:12-43:20"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:43:12-43:20"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/json/json.mbti:43:5-43:7"
+          }
+        }
+      },
+      "core/json/json.mbti:43:0-43:20"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Position"
+              },
+              "loc": "core/json/json.mbti:44:16-44:24"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:44:16-44:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/json/json.mbti:44:5-44:11"
+          }
+        }
+      },
+      "core/json/json.mbti:44:0-44:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": "core/json/json.mbti:46:3-46:7"
+          },
+          "name": {
+            "name": "as_array",
+            "loc": "core/json/json.mbti:46:9-46:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:46:18-46:22"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:46:18-46:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Array"
+                  },
+                  "loc": "core/json/json.mbti:46:27-46:32"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Self"
+                      },
+                      "loc": "core/json/json.mbti:46:33-46:37"
+                    },
+                    "1": [],
+                    "loc": "core/json/json.mbti:46:33-46:37"
+                  }
+                ],
+                "loc": "core/json/json.mbti:46:27-46:38"
+              },
+              "loc": "core/json/json.mbti:46:27-46:39",
+              "question_loc": "core/json/json.mbti:46:38-46:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:46:0-46:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": "core/json/json.mbti:47:3-47:7"
+          },
+          "name": {
+            "name": "as_bool",
+            "loc": "core/json/json.mbti:47:9-47:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:47:17-47:21"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:47:17-47:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/json/json.mbti:47:26-47:30"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:47:26-47:30"
+              },
+              "loc": "core/json/json.mbti:47:26-47:31",
+              "question_loc": "core/json/json.mbti:47:30-47:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:47:0-47:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": "core/json/json.mbti:48:3-48:7"
+          },
+          "name": {
+            "name": "as_null",
+            "loc": "core/json/json.mbti:48:9-48:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:48:17-48:21"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:48:17-48:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Unit"
+                  },
+                  "loc": "core/json/json.mbti:48:26-48:30"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:48:26-48:30"
+              },
+              "loc": "core/json/json.mbti:48:26-48:31",
+              "question_loc": "core/json/json.mbti:48:30-48:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:48:0-48:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": "core/json/json.mbti:49:3-49:7"
+          },
+          "name": {
+            "name": "as_number",
+            "loc": "core/json/json.mbti:49:9-49:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:49:19-49:23"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:49:19-49:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Double"
+                  },
+                  "loc": "core/json/json.mbti:49:28-49:34"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:49:28-49:34"
+              },
+              "loc": "core/json/json.mbti:49:28-49:35",
+              "question_loc": "core/json/json.mbti:49:34-49:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:49:0-49:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": "core/json/json.mbti:50:3-50:7"
+          },
+          "name": {
+            "name": "as_object",
+            "loc": "core/json/json.mbti:50:9-50:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:50:19-50:23"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:50:19-50:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Map"
+                  },
+                  "loc": "core/json/json.mbti:50:28-50:31"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "String"
+                      },
+                      "loc": "core/json/json.mbti:50:32-50:38"
+                    },
+                    "1": [],
+                    "loc": "core/json/json.mbti:50:32-50:38"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Self"
+                      },
+                      "loc": "core/json/json.mbti:50:40-50:44"
+                    },
+                    "1": [],
+                    "loc": "core/json/json.mbti:50:40-50:44"
+                  }
+                ],
+                "loc": "core/json/json.mbti:50:28-50:45"
+              },
+              "loc": "core/json/json.mbti:50:28-50:46",
+              "question_loc": "core/json/json.mbti:50:45-50:46"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:50:0-50:46"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": "core/json/json.mbti:51:3-51:7"
+          },
+          "name": {
+            "name": "as_string",
+            "loc": "core/json/json.mbti:51:9-51:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:51:19-51:23"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:51:19-51:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/json/json.mbti:51:28-51:34"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:51:28-51:34"
+              },
+              "loc": "core/json/json.mbti:51:28-51:35",
+              "question_loc": "core/json/json.mbti:51:34-51:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:51:0-51:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": "core/json/json.mbti:52:3-52:7"
+          },
+          "name": {
+            "name": "item",
+            "loc": "core/json/json.mbti:52:9-52:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:52:14-52:18"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:52:14-52:18"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/json/json.mbti:52:20-52:23"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:52:20-52:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:52:28-52:32"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:52:28-52:32"
+              },
+              "loc": "core/json/json.mbti:52:28-52:33",
+              "question_loc": "core/json/json.mbti:52:32-52:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:52:0-52:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": "core/json/json.mbti:53:3-53:7"
+          },
+          "name": {
+            "name": "stringify",
+            "loc": "core/json/json.mbti:53:9-53:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:53:19-53:23"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:53:19-53:23"
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "escape_slash",
+                "loc": "core/json/json.mbti:53:25-53:38"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bool"
+                  },
+                  "loc": "core/json/json.mbti:53:41-53:45"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:53:41-53:45"
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "indent",
+                "loc": "core/json/json.mbti:53:52-53:59"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/json/json.mbti:53:62-53:65"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:53:62-53:65"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "String"
+                },
+                "loc": "core/json/json.mbti:53:75-53:81"
+              },
+              "1": [],
+              "loc": "core/json/json.mbti:53:75-53:81"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:53:0-53:81"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": "core/json/json.mbti:54:3-54:7"
+          },
+          "name": {
+            "name": "value",
+            "loc": "core/json/json.mbti:54:9-54:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:54:15-54:19"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:54:15-54:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/json/json.mbti:54:21-54:27"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:54:21-54:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/json/json.mbti:54:32-54:36"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:54:32-54:36"
+              },
+              "loc": "core/json/json.mbti:54:32-54:37",
+              "question_loc": "core/json/json.mbti:54:36-54:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/json/json.mbti:54:0-54:37"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Json"
+              },
+              "loc": "core/json/json.mbti:55:14-55:18"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:55:14-55:18"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/json/json.mbti:55:5-55:9"
+          }
+        }
+      },
+      "core/json/json.mbti:55:0-55:18"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Json"
+              },
+              "loc": "core/json/json.mbti:56:16-56:20"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:56:16-56:20"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/json/json.mbti:56:5-56:11"
+          }
+        }
+      },
+      "core/json/json.mbti:56:0-56:20"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "JsonValue",
+            "loc": "core/json/json.mbti:59:22-59:31"
+          },
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Json"
+              },
+              "loc": "core/json/json.mbti:59:14-59:18"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:59:14-59:18"
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": null,
+            "loc": "core/json/json.mbti:59:0-59:3"
+          }
+        }
+      },
+      "core/json/json.mbti:59:0-59:31"
+    ],
+    [
+      {
+        "$tag": "Trait",
+        "0": {
+          "name": {
+            "name": "FromJson",
+            "loc": "core/json/json.mbti:62:16-62:24"
+          },
+          "super_traits": [],
+          "methods": [
+            {
+              "name": {
+                "name": "from_json",
+                "loc": "core/json/json.mbti:63:2-63:11"
+              },
+              "params": [
+                {
+                  "$tag": "Positional",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Json"
+                      },
+                      "loc": "core/json/json.mbti:63:12-63:16"
+                    },
+                    "1": [],
+                    "loc": "core/json/json.mbti:63:12-63:16"
+                  }
+                },
+                {
+                  "$tag": "Positional",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "JsonPath"
+                      },
+                      "loc": "core/json/json.mbti:63:18-63:26"
+                    },
+                    "1": [],
+                    "loc": "core/json/json.mbti:63:18-63:26"
+                  }
+                }
+              ],
+              "has_default": false,
+              "return_": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Self"
+                    },
+                    "loc": "core/json/json.mbti:63:31-63:35"
+                  },
+                  "1": [],
+                  "loc": "core/json/json.mbti:63:31-63:35"
+                },
+                {
+                  "type": "ErrorType",
+                  "ty": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "JsonDecodeError"
+                      },
+                      "loc": "core/json/json.mbti:63:42-63:57"
+                    },
+                    "1": [],
+                    "loc": "core/json/json.mbti:63:42-63:57"
+                  },
+                  "is_old_syntax": false
+                }
+              ]
+            }
+          ],
+          "vis": {
+            "type": "Pub",
+            "attr": "open",
+            "loc": "core/json/json.mbti:62:0-62:9"
+          }
+        }
+      },
+      "core/json/json.mbti:62:0-64:1"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Unit"
+              },
+              "loc": "core/json/json.mbti:65:18-65:22"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:65:18-65:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:65:5-65:13"
+          }
+        }
+      },
+      "core/json/json.mbti:65:0-65:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Bool"
+              },
+              "loc": "core/json/json.mbti:66:18-66:22"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:66:18-66:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:66:5-66:13"
+          }
+        }
+      },
+      "core/json/json.mbti:66:0-66:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Char"
+              },
+              "loc": "core/json/json.mbti:67:18-67:22"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:67:18-67:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:67:5-67:13"
+          }
+        }
+      },
+      "core/json/json.mbti:67:0-67:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Int"
+              },
+              "loc": "core/json/json.mbti:68:18-68:21"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:68:18-68:21"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:68:5-68:13"
+          }
+        }
+      },
+      "core/json/json.mbti:68:0-68:21"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Int64"
+              },
+              "loc": "core/json/json.mbti:69:18-69:23"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:69:18-69:23"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:69:5-69:13"
+          }
+        }
+      },
+      "core/json/json.mbti:69:0-69:23"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt"
+              },
+              "loc": "core/json/json.mbti:70:18-70:22"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:70:18-70:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:70:5-70:13"
+          }
+        }
+      },
+      "core/json/json.mbti:70:0-70:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "UInt64"
+              },
+              "loc": "core/json/json.mbti:71:18-71:24"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:71:18-71:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:71:5-71:13"
+          }
+        }
+      },
+      "core/json/json.mbti:71:0-71:24"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Double"
+              },
+              "loc": "core/json/json.mbti:72:18-72:24"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:72:18-72:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:72:5-72:13"
+          }
+        }
+      },
+      "core/json/json.mbti:72:0-72:24"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "String"
+              },
+              "loc": "core/json/json.mbti:73:18-73:24"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:73:18-73:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:73:5-73:13"
+          }
+        }
+      },
+      "core/json/json.mbti:73:0-73:24"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/json/json.mbti:74:5-74:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:74:9-74:17"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TOption",
+            "0": {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/json/json.mbti:74:32-74:33"
+              },
+              "1": [],
+              "loc": "core/json/json.mbti:74:32-74:33"
+            },
+            "loc": "core/json/json.mbti:74:32-74:34",
+            "question_loc": "core/json/json.mbti:74:33-74:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:74:19-74:27"
+          }
+        }
+      },
+      "core/json/json.mbti:74:0-74:34"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "Ok",
+                "loc": "core/json/json.mbti:75:5-75:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:75:10-75:18"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "Err",
+                "loc": "core/json/json.mbti:75:20-75:23"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:75:26-75:34"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Result"
+              },
+              "loc": "core/json/json.mbti:75:49-75:55"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Ok"
+                  },
+                  "loc": "core/json/json.mbti:75:56-75:58"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:75:56-75:58"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Err"
+                  },
+                  "loc": "core/json/json.mbti:75:60-75:63"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:75:60-75:63"
+              }
+            ],
+            "loc": "core/json/json.mbti:75:49-75:64"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:75:36-75:44"
+          }
+        }
+      },
+      "core/json/json.mbti:75:0-75:64"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/json/json.mbti:76:5-76:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:76:9-76:17"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "FixedArray"
+              },
+              "loc": "core/json/json.mbti:76:32-76:42"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/json/json.mbti:76:43-76:44"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:76:43-76:44"
+              }
+            ],
+            "loc": "core/json/json.mbti:76:32-76:45"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:76:19-76:27"
+          }
+        }
+      },
+      "core/json/json.mbti:76:0-76:45"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": "core/json/json.mbti:77:5-77:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:77:9-77:17"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Array"
+              },
+              "loc": "core/json/json.mbti:77:32-77:37"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "X"
+                  },
+                  "loc": "core/json/json.mbti:77:38-77:39"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:77:38-77:39"
+              }
+            ],
+            "loc": "core/json/json.mbti:77:32-77:40"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:77:19-77:27"
+          }
+        }
+      },
+      "core/json/json.mbti:77:0-77:40"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Json"
+              },
+              "loc": "core/json/json.mbti:78:18-78:22"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:78:18-78:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:78:5-78:13"
+          }
+        }
+      },
+      "core/json/json.mbti:78:0-78:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "V",
+                "loc": "core/json/json.mbti:79:5-79:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:79:9-79:17"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Map"
+              },
+              "loc": "core/json/json.mbti:79:32-79:35"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": "core/json/json.mbti:79:36-79:42"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:79:36-79:42"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "V"
+                  },
+                  "loc": "core/json/json.mbti:79:44-79:45"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:79:44-79:45"
+              }
+            ],
+            "loc": "core/json/json.mbti:79:32-79:46"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:79:19-79:27"
+          }
+        }
+      },
+      "core/json/json.mbti:79:0-79:46"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Qualified",
+                "pkg": "string",
+                "name": "StringView"
+              },
+              "loc": "core/json/json.mbti:80:18-80:36"
+            },
+            "1": [],
+            "loc": "core/json/json.mbti:80:18-80:36"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:80:5-80:13"
+          }
+        }
+      },
+      "core/json/json.mbti:80:0-80:36"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/json/json.mbti:81:5-81:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:81:9-81:17"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/json/json.mbti:81:19-81:20"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:81:23-81:31"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/json/json.mbti:81:47-81:48"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:81:47-81:48"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/json/json.mbti:81:50-81:51"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:81:50-81:51"
+              }
+            ],
+            "loc": "core/json/json.mbti:81:46-81:52"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:81:33-81:41"
+          }
+        }
+      },
+      "core/json/json.mbti:81:0-81:52"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/json/json.mbti:82:5-82:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:82:9-82:17"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/json/json.mbti:82:19-82:20"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:82:23-82:31"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": "core/json/json.mbti:82:33-82:34"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:82:37-82:45"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/json/json.mbti:82:61-82:62"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:82:61-82:62"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/json/json.mbti:82:64-82:65"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:82:64-82:65"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "C"
+                  },
+                  "loc": "core/json/json.mbti:82:67-82:68"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:82:67-82:68"
+              }
+            ],
+            "loc": "core/json/json.mbti:82:60-82:69"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:82:47-82:55"
+          }
+        }
+      },
+      "core/json/json.mbti:82:0-82:69"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/json/json.mbti:83:5-83:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:83:9-83:17"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/json/json.mbti:83:19-83:20"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:83:23-83:31"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": "core/json/json.mbti:83:33-83:34"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:83:37-83:45"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": "core/json/json.mbti:83:47-83:48"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:83:51-83:59"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/json/json.mbti:83:75-83:76"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:83:75-83:76"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/json/json.mbti:83:78-83:79"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:83:78-83:79"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "C"
+                  },
+                  "loc": "core/json/json.mbti:83:81-83:82"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:83:81-83:82"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "D"
+                  },
+                  "loc": "core/json/json.mbti:83:84-83:85"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:83:84-83:85"
+              }
+            ],
+            "loc": "core/json/json.mbti:83:74-83:86"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:83:61-83:69"
+          }
+        }
+      },
+      "core/json/json.mbti:83:0-83:86"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/json/json.mbti:84:5-84:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:84:9-84:17"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/json/json.mbti:84:19-84:20"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:84:23-84:31"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": "core/json/json.mbti:84:33-84:34"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:84:37-84:45"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": "core/json/json.mbti:84:47-84:48"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:84:51-84:59"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "E",
+                "loc": "core/json/json.mbti:84:61-84:62"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:84:65-84:73"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/json/json.mbti:84:89-84:90"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:84:89-84:90"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/json/json.mbti:84:92-84:93"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:84:92-84:93"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "C"
+                  },
+                  "loc": "core/json/json.mbti:84:95-84:96"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:84:95-84:96"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "D"
+                  },
+                  "loc": "core/json/json.mbti:84:98-84:99"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:84:98-84:99"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "E"
+                  },
+                  "loc": "core/json/json.mbti:84:101-84:102"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:84:101-84:102"
+              }
+            ],
+            "loc": "core/json/json.mbti:84:88-84:103"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:84:75-84:83"
+          }
+        }
+      },
+      "core/json/json.mbti:84:0-84:103"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/json/json.mbti:85:5-85:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:85:9-85:17"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/json/json.mbti:85:19-85:20"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:85:23-85:31"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": "core/json/json.mbti:85:33-85:34"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:85:37-85:45"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": "core/json/json.mbti:85:47-85:48"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:85:51-85:59"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "E",
+                "loc": "core/json/json.mbti:85:61-85:62"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:85:65-85:73"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "F",
+                "loc": "core/json/json.mbti:85:75-85:76"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:85:79-85:87"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/json/json.mbti:85:103-85:104"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:85:103-85:104"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/json/json.mbti:85:106-85:107"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:85:106-85:107"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "C"
+                  },
+                  "loc": "core/json/json.mbti:85:109-85:110"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:85:109-85:110"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "D"
+                  },
+                  "loc": "core/json/json.mbti:85:112-85:113"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:85:112-85:113"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "E"
+                  },
+                  "loc": "core/json/json.mbti:85:115-85:116"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:85:115-85:116"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "F"
+                  },
+                  "loc": "core/json/json.mbti:85:118-85:119"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:85:118-85:119"
+              }
+            ],
+            "loc": "core/json/json.mbti:85:102-85:120"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:85:89-85:97"
+          }
+        }
+      },
+      "core/json/json.mbti:85:0-85:120"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/json/json.mbti:86:5-86:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:86:9-86:17"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": "core/json/json.mbti:86:19-86:20"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:86:23-86:31"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": "core/json/json.mbti:86:33-86:34"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:86:37-86:45"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": "core/json/json.mbti:86:47-86:48"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:86:51-86:59"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "E",
+                "loc": "core/json/json.mbti:86:61-86:62"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:86:65-86:73"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "F",
+                "loc": "core/json/json.mbti:86:75-86:76"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:86:79-86:87"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "G",
+                "loc": "core/json/json.mbti:86:89-86:90"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:86:93-86:101"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/json/json.mbti:86:117-86:118"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:86:117-86:118"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "B"
+                  },
+                  "loc": "core/json/json.mbti:86:120-86:121"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:86:120-86:121"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "C"
+                  },
+                  "loc": "core/json/json.mbti:86:123-86:124"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:86:123-86:124"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "D"
+                  },
+                  "loc": "core/json/json.mbti:86:126-86:127"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:86:126-86:127"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "E"
+                  },
+                  "loc": "core/json/json.mbti:86:129-86:130"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:86:129-86:130"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "F"
+                  },
+                  "loc": "core/json/json.mbti:86:132-86:133"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:86:132-86:133"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "G"
+                  },
+                  "loc": "core/json/json.mbti:86:135-86:136"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:86:135-86:136"
+              }
+            ],
+            "loc": "core/json/json.mbti:86:116-86:137"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:86:103-86:111"
+          }
+        }
+      },
+      "core/json/json.mbti:86:0-86:137"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": "core/json/json.mbti:87:5-87:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:87:10-87:18"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": "core/json/json.mbti:87:20-87:22"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:87:25-87:33"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": "core/json/json.mbti:87:35-87:37"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:87:40-87:48"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": "core/json/json.mbti:87:50-87:52"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:87:55-87:63"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": "core/json/json.mbti:87:65-87:67"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:87:70-87:78"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": "core/json/json.mbti:87:80-87:82"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:87:85-87:93"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": "core/json/json.mbti:87:95-87:97"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:87:100-87:108"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": "core/json/json.mbti:87:110-87:112"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:87:115-87:123"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T0"
+                  },
+                  "loc": "core/json/json.mbti:87:139-87:141"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:87:139-87:141"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T1"
+                  },
+                  "loc": "core/json/json.mbti:87:143-87:145"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:87:143-87:145"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T2"
+                  },
+                  "loc": "core/json/json.mbti:87:147-87:149"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:87:147-87:149"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T3"
+                  },
+                  "loc": "core/json/json.mbti:87:151-87:153"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:87:151-87:153"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T4"
+                  },
+                  "loc": "core/json/json.mbti:87:155-87:157"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:87:155-87:157"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T5"
+                  },
+                  "loc": "core/json/json.mbti:87:159-87:161"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:87:159-87:161"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T6"
+                  },
+                  "loc": "core/json/json.mbti:87:163-87:165"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:87:163-87:165"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T7"
+                  },
+                  "loc": "core/json/json.mbti:87:167-87:169"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:87:167-87:169"
+              }
+            ],
+            "loc": "core/json/json.mbti:87:138-87:170"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:87:125-87:133"
+          }
+        }
+      },
+      "core/json/json.mbti:87:0-87:170"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": "core/json/json.mbti:88:5-88:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:88:10-88:18"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": "core/json/json.mbti:88:20-88:22"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:88:25-88:33"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": "core/json/json.mbti:88:35-88:37"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:88:40-88:48"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": "core/json/json.mbti:88:50-88:52"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:88:55-88:63"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": "core/json/json.mbti:88:65-88:67"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:88:70-88:78"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": "core/json/json.mbti:88:80-88:82"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:88:85-88:93"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": "core/json/json.mbti:88:95-88:97"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:88:100-88:108"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": "core/json/json.mbti:88:110-88:112"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:88:115-88:123"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": "core/json/json.mbti:88:125-88:127"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:88:130-88:138"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T0"
+                  },
+                  "loc": "core/json/json.mbti:88:154-88:156"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:88:154-88:156"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T1"
+                  },
+                  "loc": "core/json/json.mbti:88:158-88:160"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:88:158-88:160"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T2"
+                  },
+                  "loc": "core/json/json.mbti:88:162-88:164"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:88:162-88:164"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T3"
+                  },
+                  "loc": "core/json/json.mbti:88:166-88:168"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:88:166-88:168"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T4"
+                  },
+                  "loc": "core/json/json.mbti:88:170-88:172"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:88:170-88:172"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T5"
+                  },
+                  "loc": "core/json/json.mbti:88:174-88:176"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:88:174-88:176"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T6"
+                  },
+                  "loc": "core/json/json.mbti:88:178-88:180"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:88:178-88:180"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T7"
+                  },
+                  "loc": "core/json/json.mbti:88:182-88:184"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:88:182-88:184"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T8"
+                  },
+                  "loc": "core/json/json.mbti:88:186-88:188"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:88:186-88:188"
+              }
+            ],
+            "loc": "core/json/json.mbti:88:153-88:189"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:88:140-88:148"
+          }
+        }
+      },
+      "core/json/json.mbti:88:0-88:189"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": "core/json/json.mbti:89:5-89:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:89:10-89:18"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": "core/json/json.mbti:89:20-89:22"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:89:25-89:33"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": "core/json/json.mbti:89:35-89:37"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:89:40-89:48"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": "core/json/json.mbti:89:50-89:52"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:89:55-89:63"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": "core/json/json.mbti:89:65-89:67"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:89:70-89:78"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": "core/json/json.mbti:89:80-89:82"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:89:85-89:93"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": "core/json/json.mbti:89:95-89:97"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:89:100-89:108"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": "core/json/json.mbti:89:110-89:112"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:89:115-89:123"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": "core/json/json.mbti:89:125-89:127"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:89:130-89:138"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": "core/json/json.mbti:89:140-89:142"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:89:145-89:153"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T0"
+                  },
+                  "loc": "core/json/json.mbti:89:169-89:171"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:89:169-89:171"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T1"
+                  },
+                  "loc": "core/json/json.mbti:89:173-89:175"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:89:173-89:175"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T2"
+                  },
+                  "loc": "core/json/json.mbti:89:177-89:179"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:89:177-89:179"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T3"
+                  },
+                  "loc": "core/json/json.mbti:89:181-89:183"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:89:181-89:183"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T4"
+                  },
+                  "loc": "core/json/json.mbti:89:185-89:187"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:89:185-89:187"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T5"
+                  },
+                  "loc": "core/json/json.mbti:89:189-89:191"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:89:189-89:191"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T6"
+                  },
+                  "loc": "core/json/json.mbti:89:193-89:195"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:89:193-89:195"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T7"
+                  },
+                  "loc": "core/json/json.mbti:89:197-89:199"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:89:197-89:199"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T8"
+                  },
+                  "loc": "core/json/json.mbti:89:201-89:203"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:89:201-89:203"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T9"
+                  },
+                  "loc": "core/json/json.mbti:89:205-89:207"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:89:205-89:207"
+              }
+            ],
+            "loc": "core/json/json.mbti:89:168-89:208"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:89:155-89:163"
+          }
+        }
+      },
+      "core/json/json.mbti:89:0-89:208"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": "core/json/json.mbti:90:5-90:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:90:10-90:18"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": "core/json/json.mbti:90:20-90:22"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:90:25-90:33"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": "core/json/json.mbti:90:35-90:37"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:90:40-90:48"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": "core/json/json.mbti:90:50-90:52"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:90:55-90:63"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": "core/json/json.mbti:90:65-90:67"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:90:70-90:78"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": "core/json/json.mbti:90:80-90:82"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:90:85-90:93"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": "core/json/json.mbti:90:95-90:97"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:90:100-90:108"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": "core/json/json.mbti:90:110-90:112"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:90:115-90:123"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": "core/json/json.mbti:90:125-90:127"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:90:130-90:138"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": "core/json/json.mbti:90:140-90:142"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:90:145-90:153"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": "core/json/json.mbti:90:155-90:158"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:90:161-90:169"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T0"
+                  },
+                  "loc": "core/json/json.mbti:90:185-90:187"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:90:185-90:187"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T1"
+                  },
+                  "loc": "core/json/json.mbti:90:189-90:191"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:90:189-90:191"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T2"
+                  },
+                  "loc": "core/json/json.mbti:90:193-90:195"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:90:193-90:195"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T3"
+                  },
+                  "loc": "core/json/json.mbti:90:197-90:199"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:90:197-90:199"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T4"
+                  },
+                  "loc": "core/json/json.mbti:90:201-90:203"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:90:201-90:203"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T5"
+                  },
+                  "loc": "core/json/json.mbti:90:205-90:207"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:90:205-90:207"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T6"
+                  },
+                  "loc": "core/json/json.mbti:90:209-90:211"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:90:209-90:211"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T7"
+                  },
+                  "loc": "core/json/json.mbti:90:213-90:215"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:90:213-90:215"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T8"
+                  },
+                  "loc": "core/json/json.mbti:90:217-90:219"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:90:217-90:219"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T9"
+                  },
+                  "loc": "core/json/json.mbti:90:221-90:223"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:90:221-90:223"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T10"
+                  },
+                  "loc": "core/json/json.mbti:90:225-90:228"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:90:225-90:228"
+              }
+            ],
+            "loc": "core/json/json.mbti:90:184-90:229"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:90:171-90:179"
+          }
+        }
+      },
+      "core/json/json.mbti:90:0-90:229"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": "core/json/json.mbti:91:5-91:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:10-91:18"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": "core/json/json.mbti:91:20-91:22"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:25-91:33"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": "core/json/json.mbti:91:35-91:37"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:40-91:48"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": "core/json/json.mbti:91:50-91:52"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:55-91:63"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": "core/json/json.mbti:91:65-91:67"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:70-91:78"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": "core/json/json.mbti:91:80-91:82"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:85-91:93"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": "core/json/json.mbti:91:95-91:97"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:100-91:108"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": "core/json/json.mbti:91:110-91:112"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:115-91:123"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": "core/json/json.mbti:91:125-91:127"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:130-91:138"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": "core/json/json.mbti:91:140-91:142"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:145-91:153"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": "core/json/json.mbti:91:155-91:158"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:161-91:169"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T11",
+                "loc": "core/json/json.mbti:91:171-91:174"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:91:177-91:185"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T0"
+                  },
+                  "loc": "core/json/json.mbti:91:201-91:203"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:201-91:203"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T1"
+                  },
+                  "loc": "core/json/json.mbti:91:205-91:207"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:205-91:207"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T2"
+                  },
+                  "loc": "core/json/json.mbti:91:209-91:211"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:209-91:211"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T3"
+                  },
+                  "loc": "core/json/json.mbti:91:213-91:215"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:213-91:215"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T4"
+                  },
+                  "loc": "core/json/json.mbti:91:217-91:219"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:217-91:219"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T5"
+                  },
+                  "loc": "core/json/json.mbti:91:221-91:223"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:221-91:223"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T6"
+                  },
+                  "loc": "core/json/json.mbti:91:225-91:227"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:225-91:227"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T7"
+                  },
+                  "loc": "core/json/json.mbti:91:229-91:231"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:229-91:231"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T8"
+                  },
+                  "loc": "core/json/json.mbti:91:233-91:235"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:233-91:235"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T9"
+                  },
+                  "loc": "core/json/json.mbti:91:237-91:239"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:237-91:239"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T10"
+                  },
+                  "loc": "core/json/json.mbti:91:241-91:244"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:241-91:244"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T11"
+                  },
+                  "loc": "core/json/json.mbti:91:246-91:249"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:91:246-91:249"
+              }
+            ],
+            "loc": "core/json/json.mbti:91:200-91:250"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:91:187-91:195"
+          }
+        }
+      },
+      "core/json/json.mbti:91:0-91:250"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": "core/json/json.mbti:92:5-92:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:10-92:18"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": "core/json/json.mbti:92:20-92:22"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:25-92:33"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": "core/json/json.mbti:92:35-92:37"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:40-92:48"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": "core/json/json.mbti:92:50-92:52"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:55-92:63"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": "core/json/json.mbti:92:65-92:67"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:70-92:78"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": "core/json/json.mbti:92:80-92:82"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:85-92:93"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": "core/json/json.mbti:92:95-92:97"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:100-92:108"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": "core/json/json.mbti:92:110-92:112"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:115-92:123"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": "core/json/json.mbti:92:125-92:127"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:130-92:138"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": "core/json/json.mbti:92:140-92:142"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:145-92:153"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": "core/json/json.mbti:92:155-92:158"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:161-92:169"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T11",
+                "loc": "core/json/json.mbti:92:171-92:174"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:177-92:185"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T12",
+                "loc": "core/json/json.mbti:92:187-92:190"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:92:193-92:201"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T0"
+                  },
+                  "loc": "core/json/json.mbti:92:217-92:219"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:217-92:219"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T1"
+                  },
+                  "loc": "core/json/json.mbti:92:221-92:223"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:221-92:223"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T2"
+                  },
+                  "loc": "core/json/json.mbti:92:225-92:227"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:225-92:227"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T3"
+                  },
+                  "loc": "core/json/json.mbti:92:229-92:231"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:229-92:231"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T4"
+                  },
+                  "loc": "core/json/json.mbti:92:233-92:235"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:233-92:235"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T5"
+                  },
+                  "loc": "core/json/json.mbti:92:237-92:239"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:237-92:239"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T6"
+                  },
+                  "loc": "core/json/json.mbti:92:241-92:243"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:241-92:243"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T7"
+                  },
+                  "loc": "core/json/json.mbti:92:245-92:247"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:245-92:247"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T8"
+                  },
+                  "loc": "core/json/json.mbti:92:249-92:251"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:249-92:251"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T9"
+                  },
+                  "loc": "core/json/json.mbti:92:253-92:255"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:253-92:255"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T10"
+                  },
+                  "loc": "core/json/json.mbti:92:257-92:260"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:257-92:260"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T11"
+                  },
+                  "loc": "core/json/json.mbti:92:262-92:265"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:262-92:265"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T12"
+                  },
+                  "loc": "core/json/json.mbti:92:267-92:270"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:92:267-92:270"
+              }
+            ],
+            "loc": "core/json/json.mbti:92:216-92:271"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:92:203-92:211"
+          }
+        }
+      },
+      "core/json/json.mbti:92:0-92:271"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": "core/json/json.mbti:93:5-93:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:10-93:18"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": "core/json/json.mbti:93:20-93:22"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:25-93:33"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": "core/json/json.mbti:93:35-93:37"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:40-93:48"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": "core/json/json.mbti:93:50-93:52"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:55-93:63"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": "core/json/json.mbti:93:65-93:67"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:70-93:78"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": "core/json/json.mbti:93:80-93:82"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:85-93:93"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": "core/json/json.mbti:93:95-93:97"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:100-93:108"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": "core/json/json.mbti:93:110-93:112"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:115-93:123"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": "core/json/json.mbti:93:125-93:127"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:130-93:138"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": "core/json/json.mbti:93:140-93:142"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:145-93:153"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": "core/json/json.mbti:93:155-93:158"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:161-93:169"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T11",
+                "loc": "core/json/json.mbti:93:171-93:174"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:177-93:185"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T12",
+                "loc": "core/json/json.mbti:93:187-93:190"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:193-93:201"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T13",
+                "loc": "core/json/json.mbti:93:203-93:206"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:93:209-93:217"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T0"
+                  },
+                  "loc": "core/json/json.mbti:93:233-93:235"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:233-93:235"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T1"
+                  },
+                  "loc": "core/json/json.mbti:93:237-93:239"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:237-93:239"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T2"
+                  },
+                  "loc": "core/json/json.mbti:93:241-93:243"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:241-93:243"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T3"
+                  },
+                  "loc": "core/json/json.mbti:93:245-93:247"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:245-93:247"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T4"
+                  },
+                  "loc": "core/json/json.mbti:93:249-93:251"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:249-93:251"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T5"
+                  },
+                  "loc": "core/json/json.mbti:93:253-93:255"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:253-93:255"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T6"
+                  },
+                  "loc": "core/json/json.mbti:93:257-93:259"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:257-93:259"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T7"
+                  },
+                  "loc": "core/json/json.mbti:93:261-93:263"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:261-93:263"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T8"
+                  },
+                  "loc": "core/json/json.mbti:93:265-93:267"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:265-93:267"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T9"
+                  },
+                  "loc": "core/json/json.mbti:93:269-93:271"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:269-93:271"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T10"
+                  },
+                  "loc": "core/json/json.mbti:93:273-93:276"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:273-93:276"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T11"
+                  },
+                  "loc": "core/json/json.mbti:93:278-93:281"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:278-93:281"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T12"
+                  },
+                  "loc": "core/json/json.mbti:93:283-93:286"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:283-93:286"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T13"
+                  },
+                  "loc": "core/json/json.mbti:93:288-93:291"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:93:288-93:291"
+              }
+            ],
+            "loc": "core/json/json.mbti:93:232-93:292"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:93:219-93:227"
+          }
+        }
+      },
+      "core/json/json.mbti:93:0-93:292"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": "core/json/json.mbti:94:5-94:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:10-94:18"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": "core/json/json.mbti:94:20-94:22"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:25-94:33"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": "core/json/json.mbti:94:35-94:37"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:40-94:48"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": "core/json/json.mbti:94:50-94:52"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:55-94:63"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": "core/json/json.mbti:94:65-94:67"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:70-94:78"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": "core/json/json.mbti:94:80-94:82"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:85-94:93"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": "core/json/json.mbti:94:95-94:97"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:100-94:108"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": "core/json/json.mbti:94:110-94:112"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:115-94:123"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": "core/json/json.mbti:94:125-94:127"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:130-94:138"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": "core/json/json.mbti:94:140-94:142"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:145-94:153"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": "core/json/json.mbti:94:155-94:158"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:161-94:169"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T11",
+                "loc": "core/json/json.mbti:94:171-94:174"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:177-94:185"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T12",
+                "loc": "core/json/json.mbti:94:187-94:190"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:193-94:201"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T13",
+                "loc": "core/json/json.mbti:94:203-94:206"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:209-94:217"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T14",
+                "loc": "core/json/json.mbti:94:219-94:222"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:94:225-94:233"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T0"
+                  },
+                  "loc": "core/json/json.mbti:94:249-94:251"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:249-94:251"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T1"
+                  },
+                  "loc": "core/json/json.mbti:94:253-94:255"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:253-94:255"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T2"
+                  },
+                  "loc": "core/json/json.mbti:94:257-94:259"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:257-94:259"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T3"
+                  },
+                  "loc": "core/json/json.mbti:94:261-94:263"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:261-94:263"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T4"
+                  },
+                  "loc": "core/json/json.mbti:94:265-94:267"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:265-94:267"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T5"
+                  },
+                  "loc": "core/json/json.mbti:94:269-94:271"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:269-94:271"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T6"
+                  },
+                  "loc": "core/json/json.mbti:94:273-94:275"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:273-94:275"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T7"
+                  },
+                  "loc": "core/json/json.mbti:94:277-94:279"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:277-94:279"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T8"
+                  },
+                  "loc": "core/json/json.mbti:94:281-94:283"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:281-94:283"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T9"
+                  },
+                  "loc": "core/json/json.mbti:94:285-94:287"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:285-94:287"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T10"
+                  },
+                  "loc": "core/json/json.mbti:94:289-94:292"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:289-94:292"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T11"
+                  },
+                  "loc": "core/json/json.mbti:94:294-94:297"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:294-94:297"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T12"
+                  },
+                  "loc": "core/json/json.mbti:94:299-94:302"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:299-94:302"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T13"
+                  },
+                  "loc": "core/json/json.mbti:94:304-94:307"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:304-94:307"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T14"
+                  },
+                  "loc": "core/json/json.mbti:94:309-94:312"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:94:309-94:312"
+              }
+            ],
+            "loc": "core/json/json.mbti:94:248-94:313"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:94:235-94:243"
+          }
+        }
+      },
+      "core/json/json.mbti:94:0-94:313"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": "core/json/json.mbti:95:5-95:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:10-95:18"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": "core/json/json.mbti:95:20-95:22"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:25-95:33"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": "core/json/json.mbti:95:35-95:37"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:40-95:48"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": "core/json/json.mbti:95:50-95:52"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:55-95:63"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": "core/json/json.mbti:95:65-95:67"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:70-95:78"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": "core/json/json.mbti:95:80-95:82"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:85-95:93"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": "core/json/json.mbti:95:95-95:97"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:100-95:108"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": "core/json/json.mbti:95:110-95:112"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:115-95:123"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": "core/json/json.mbti:95:125-95:127"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:130-95:138"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": "core/json/json.mbti:95:140-95:142"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:145-95:153"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": "core/json/json.mbti:95:155-95:158"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:161-95:169"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T11",
+                "loc": "core/json/json.mbti:95:171-95:174"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:177-95:185"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T12",
+                "loc": "core/json/json.mbti:95:187-95:190"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:193-95:201"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T13",
+                "loc": "core/json/json.mbti:95:203-95:206"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:209-95:217"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T14",
+                "loc": "core/json/json.mbti:95:219-95:222"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:225-95:233"
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T15",
+                "loc": "core/json/json.mbti:95:235-95:238"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/json/json.mbti:95:241-95:249"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TTuple",
+            "0": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T0"
+                  },
+                  "loc": "core/json/json.mbti:95:265-95:267"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:265-95:267"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T1"
+                  },
+                  "loc": "core/json/json.mbti:95:269-95:271"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:269-95:271"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T2"
+                  },
+                  "loc": "core/json/json.mbti:95:273-95:275"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:273-95:275"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T3"
+                  },
+                  "loc": "core/json/json.mbti:95:277-95:279"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:277-95:279"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T4"
+                  },
+                  "loc": "core/json/json.mbti:95:281-95:283"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:281-95:283"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T5"
+                  },
+                  "loc": "core/json/json.mbti:95:285-95:287"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:285-95:287"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T6"
+                  },
+                  "loc": "core/json/json.mbti:95:289-95:291"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:289-95:291"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T7"
+                  },
+                  "loc": "core/json/json.mbti:95:293-95:295"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:293-95:295"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T8"
+                  },
+                  "loc": "core/json/json.mbti:95:297-95:299"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:297-95:299"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T9"
+                  },
+                  "loc": "core/json/json.mbti:95:301-95:303"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:301-95:303"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T10"
+                  },
+                  "loc": "core/json/json.mbti:95:305-95:308"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:305-95:308"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T11"
+                  },
+                  "loc": "core/json/json.mbti:95:310-95:313"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:310-95:313"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T12"
+                  },
+                  "loc": "core/json/json.mbti:95:315-95:318"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:315-95:318"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T13"
+                  },
+                  "loc": "core/json/json.mbti:95:320-95:323"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:320-95:323"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T14"
+                  },
+                  "loc": "core/json/json.mbti:95:325-95:328"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:325-95:328"
+              },
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T15"
+                  },
+                  "loc": "core/json/json.mbti:95:330-95:333"
+                },
+                "1": [],
+                "loc": "core/json/json.mbti:95:330-95:333"
+              }
+            ],
+            "loc": "core/json/json.mbti:95:264-95:334"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "FromJson"
+            },
+            "loc": "core/json/json.mbti:95:251-95:259"
+          }
+        }
+      },
+      "core/json/json.mbti:95:0-95:334"
+    ]
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "package_name": "moonbitlang/core/random/internal/random_source",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "ChaCha8",
+            "loc": "core/random/internal/random_source/random_source.mbti:6:5-6:12"
+          },
+          "type_params": [],
+          "components": {
+            "type": "Abstract"
+          },
+          "vis": {
+            "type": "Default"
+          }
+        }
+      },
+      "core/random/internal/random_source/random_source.mbti:6:0-6:12"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "ChaCha8",
+            "loc": "core/random/internal/random_source/random_source.mbti:7:3-7:10"
+          },
+          "name": {
+            "name": "new",
+            "loc": "core/random/internal/random_source/random_source.mbti:7:12-7:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Bytes"
+                  },
+                  "loc": "core/random/internal/random_source/random_source.mbti:7:16-7:21"
+                },
+                "1": [],
+                "loc": "core/random/internal/random_source/random_source.mbti:7:16-7:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/random/internal/random_source/random_source.mbti:7:26-7:30"
+              },
+              "1": [],
+              "loc": "core/random/internal/random_source/random_source.mbti:7:26-7:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/random/internal/random_source/random_source.mbti:7:0-7:30"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "ChaCha8",
+            "loc": "core/random/internal/random_source/random_source.mbti:8:3-8:10"
+          },
+          "name": {
+            "name": "next",
+            "loc": "core/random/internal/random_source/random_source.mbti:8:12-8:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/random/internal/random_source/random_source.mbti:8:17-8:21"
+                },
+                "1": [],
+                "loc": "core/random/internal/random_source/random_source.mbti:8:17-8:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "UInt64"
+                  },
+                  "loc": "core/random/internal/random_source/random_source.mbti:8:26-8:32"
+                },
+                "1": [],
+                "loc": "core/random/internal/random_source/random_source.mbti:8:26-8:32"
+              },
+              "loc": "core/random/internal/random_source/random_source.mbti:8:26-8:33",
+              "question_loc": "core/random/internal/random_source/random_source.mbti:8:32-8:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/random/internal/random_source/random_source.mbti:8:0-8:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "ChaCha8",
+            "loc": "core/random/internal/random_source/random_source.mbti:9:3-9:10"
+          },
+          "name": {
+            "name": "refill",
+            "loc": "core/random/internal/random_source/random_source.mbti:9:12-9:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/random/internal/random_source/random_source.mbti:9:19-9:23"
+                },
+                "1": [],
+                "loc": "core/random/internal/random_source/random_source.mbti:9:19-9:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/random/internal/random_source/random_source.mbti:9:28-9:32"
+              },
+              "1": [],
+              "loc": "core/random/internal/random_source/random_source.mbti:9:28-9:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/random/internal/random_source/random_source.mbti:9:0-9:32"
+    ]
+  ]
+}

@@ -1,0 +1,2836 @@
+{
+  "package_name": "moonbitlang/core/float",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "default",
+            "loc": "core/float/float.mbti:4:3-4:10"
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:4:16-4:21"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:4:16-4:21"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:4:0-4:21"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "infinity",
+            "loc": "core/float/float.mbti:6:4-6:12"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Float"
+              },
+              "loc": "core/float/float.mbti:6:15-6:20"
+            },
+            "1": [],
+            "loc": "core/float/float.mbti:6:15-6:20"
+          }
+        }
+      },
+      "core/float/float.mbti:6:0-6:20"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "max_value",
+            "loc": "core/float/float.mbti:8:4-8:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Float"
+              },
+              "loc": "core/float/float.mbti:8:16-8:21"
+            },
+            "1": [],
+            "loc": "core/float/float.mbti:8:16-8:21"
+          }
+        }
+      },
+      "core/float/float.mbti:8:0-8:21"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "min_positive",
+            "loc": "core/float/float.mbti:10:4-10:16"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Float"
+              },
+              "loc": "core/float/float.mbti:10:19-10:24"
+            },
+            "1": [],
+            "loc": "core/float/float.mbti:10:19-10:24"
+          }
+        }
+      },
+      "core/float/float.mbti:10:0-10:24"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "min_value",
+            "loc": "core/float/float.mbti:12:4-12:13"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Float"
+              },
+              "loc": "core/float/float.mbti:12:16-12:21"
+            },
+            "1": [],
+            "loc": "core/float/float.mbti:12:16-12:21"
+          }
+        }
+      },
+      "core/float/float.mbti:12:0-12:21"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "neg_infinity",
+            "loc": "core/float/float.mbti:14:4-14:16"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Float"
+              },
+              "loc": "core/float/float.mbti:14:19-14:24"
+            },
+            "1": [],
+            "loc": "core/float/float.mbti:14:19-14:24"
+          }
+        }
+      },
+      "core/float/float.mbti:14:0-14:24"
+    ],
+    [
+      {
+        "$tag": "Value",
+        "0": {
+          "name": {
+            "name": "not_a_number",
+            "loc": "core/float/float.mbti:16:4-16:16"
+          },
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Float"
+              },
+              "loc": "core/float/float.mbti:16:19-16:24"
+            },
+            "1": [],
+            "loc": "core/float/float.mbti:16:19-16:24"
+          }
+        }
+      },
+      "core/float/float.mbti:16:0-16:24"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:19:3-19:8"
+          },
+          "name": {
+            "name": "abs",
+            "loc": "core/float/float.mbti:19:10-19:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:19:14-19:19"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:19:14-19:19"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:19:24-19:29"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:19:24-19:29"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:19:0-19:29"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "abs",
+            "loc": "core/float/float.mbti:20:15-20:18"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:20:8-20:13"
+          },
+          "loc": "core/float/float.mbti:20:0-20:18"
+        }
+      },
+      "core/float/float.mbti:20:0-20:18"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:22:3-22:8"
+          },
+          "name": {
+            "name": "acos",
+            "loc": "core/float/float.mbti:22:10-22:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:22:15-22:20"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:22:15-22:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:22:25-22:30"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:22:25-22:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:21:0-22:30"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "acos",
+            "loc": "core/float/float.mbti:23:15-23:19"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:23:8-23:13"
+          },
+          "loc": "core/float/float.mbti:23:0-23:19"
+        }
+      },
+      "core/float/float.mbti:23:0-23:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:25:3-25:8"
+          },
+          "name": {
+            "name": "acosh",
+            "loc": "core/float/float.mbti:25:10-25:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:25:16-25:21"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:25:16-25:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:25:26-25:31"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:25:26-25:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:24:0-25:31"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "acosh",
+            "loc": "core/float/float.mbti:26:15-26:20"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:26:8-26:13"
+          },
+          "loc": "core/float/float.mbti:26:0-26:20"
+        }
+      },
+      "core/float/float.mbti:26:0-26:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:28:3-28:8"
+          },
+          "name": {
+            "name": "asin",
+            "loc": "core/float/float.mbti:28:10-28:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:28:15-28:20"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:28:15-28:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:28:25-28:30"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:28:25-28:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:27:0-28:30"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "asin",
+            "loc": "core/float/float.mbti:29:15-29:19"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:29:8-29:13"
+          },
+          "loc": "core/float/float.mbti:29:0-29:19"
+        }
+      },
+      "core/float/float.mbti:29:0-29:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:31:3-31:8"
+          },
+          "name": {
+            "name": "asinh",
+            "loc": "core/float/float.mbti:31:10-31:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:31:16-31:21"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:31:16-31:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:31:26-31:31"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:31:26-31:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:30:0-31:31"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "asinh",
+            "loc": "core/float/float.mbti:32:15-32:20"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:32:8-32:13"
+          },
+          "loc": "core/float/float.mbti:32:0-32:20"
+        }
+      },
+      "core/float/float.mbti:32:0-32:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:34:3-34:8"
+          },
+          "name": {
+            "name": "atan",
+            "loc": "core/float/float.mbti:34:10-34:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:34:15-34:20"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:34:15-34:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:34:25-34:30"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:34:25-34:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:33:0-34:30"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "atan",
+            "loc": "core/float/float.mbti:35:15-35:19"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:35:8-35:13"
+          },
+          "loc": "core/float/float.mbti:35:0-35:19"
+        }
+      },
+      "core/float/float.mbti:35:0-35:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:37:3-37:8"
+          },
+          "name": {
+            "name": "atan2",
+            "loc": "core/float/float.mbti:37:10-37:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:37:16-37:21"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:37:16-37:21"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:37:23-37:28"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:37:23-37:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:37:33-37:38"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:37:33-37:38"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:36:0-37:38"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "atan2",
+            "loc": "core/float/float.mbti:38:15-38:20"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:38:8-38:13"
+          },
+          "loc": "core/float/float.mbti:38:0-38:20"
+        }
+      },
+      "core/float/float.mbti:38:0-38:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:40:3-40:8"
+          },
+          "name": {
+            "name": "atanh",
+            "loc": "core/float/float.mbti:40:10-40:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:40:16-40:21"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:40:16-40:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:40:26-40:31"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:40:26-40:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:39:0-40:31"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "atanh",
+            "loc": "core/float/float.mbti:41:15-41:20"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:41:8-41:13"
+          },
+          "loc": "core/float/float.mbti:41:0-41:20"
+        }
+      },
+      "core/float/float.mbti:41:0-41:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:43:3-43:8"
+          },
+          "name": {
+            "name": "cbrt",
+            "loc": "core/float/float.mbti:43:10-43:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:43:15-43:20"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:43:15-43:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:43:25-43:30"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:43:25-43:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:42:0-43:30"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "cbrt",
+            "loc": "core/float/float.mbti:44:15-44:19"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:44:8-44:13"
+          },
+          "loc": "core/float/float.mbti:44:0-44:19"
+        }
+      },
+      "core/float/float.mbti:44:0-44:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:45:3-45:8"
+          },
+          "name": {
+            "name": "ceil",
+            "loc": "core/float/float.mbti:45:10-45:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:45:15-45:20"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:45:15-45:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:45:25-45:30"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:45:25-45:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:45:0-45:30"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "ceil",
+            "loc": "core/float/float.mbti:46:15-46:19"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:46:8-46:13"
+          },
+          "loc": "core/float/float.mbti:46:0-46:19"
+        }
+      },
+      "core/float/float.mbti:46:0-46:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:48:3-48:8"
+          },
+          "name": {
+            "name": "cos",
+            "loc": "core/float/float.mbti:48:10-48:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:48:14-48:19"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:48:14-48:19"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:48:24-48:29"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:48:24-48:29"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:47:0-48:29"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "cos",
+            "loc": "core/float/float.mbti:49:15-49:18"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:49:8-49:13"
+          },
+          "loc": "core/float/float.mbti:49:0-49:18"
+        }
+      },
+      "core/float/float.mbti:49:0-49:18"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:51:3-51:8"
+          },
+          "name": {
+            "name": "cosh",
+            "loc": "core/float/float.mbti:51:10-51:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:51:15-51:20"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:51:15-51:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:51:25-51:30"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:51:25-51:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:50:0-51:30"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "cosh",
+            "loc": "core/float/float.mbti:52:15-52:19"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:52:8-52:13"
+          },
+          "loc": "core/float/float.mbti:52:0-52:19"
+        }
+      },
+      "core/float/float.mbti:52:0-52:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:54:3-54:8"
+          },
+          "name": {
+            "name": "exp",
+            "loc": "core/float/float.mbti:54:10-54:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:54:14-54:19"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:54:14-54:19"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:54:24-54:29"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:54:24-54:29"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:53:0-54:29"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "exp",
+            "loc": "core/float/float.mbti:55:15-55:18"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:55:8-55:13"
+          },
+          "loc": "core/float/float.mbti:55:0-55:18"
+        }
+      },
+      "core/float/float.mbti:55:0-55:18"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:57:3-57:8"
+          },
+          "name": {
+            "name": "expm1",
+            "loc": "core/float/float.mbti:57:10-57:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:57:16-57:21"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:57:16-57:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:57:26-57:31"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:57:26-57:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:56:0-57:31"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "expm1",
+            "loc": "core/float/float.mbti:58:15-58:20"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:58:8-58:13"
+          },
+          "loc": "core/float/float.mbti:58:0-58:20"
+        }
+      },
+      "core/float/float.mbti:58:0-58:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:59:3-59:8"
+          },
+          "name": {
+            "name": "floor",
+            "loc": "core/float/float.mbti:59:10-59:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:59:16-59:21"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:59:16-59:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:59:26-59:31"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:59:26-59:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:59:0-59:31"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "floor",
+            "loc": "core/float/float.mbti:60:15-60:20"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:60:8-60:13"
+          },
+          "loc": "core/float/float.mbti:60:0-60:20"
+        }
+      },
+      "core/float/float.mbti:60:0-60:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:62:3-62:8"
+          },
+          "name": {
+            "name": "hypot",
+            "loc": "core/float/float.mbti:62:10-62:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:62:16-62:21"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:62:16-62:21"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:62:23-62:28"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:62:23-62:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:62:33-62:38"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:62:33-62:38"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:61:0-62:38"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "hypot",
+            "loc": "core/float/float.mbti:63:15-63:20"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:63:8-63:13"
+          },
+          "loc": "core/float/float.mbti:63:0-63:20"
+        }
+      },
+      "core/float/float.mbti:63:0-63:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:64:3-64:8"
+          },
+          "name": {
+            "name": "is_close",
+            "loc": "core/float/float.mbti:64:10-64:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:64:19-64:24"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:64:19-64:24"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:64:26-64:31"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:64:26-64:31"
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "relative_tolerance",
+                "loc": "core/float/float.mbti:64:33-64:52"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:64:55-64:60"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:64:55-64:60"
+              }
+            },
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "absolute_tolerance",
+                "loc": "core/float/float.mbti:64:67-64:86"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:64:89-64:94"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:64:89-64:94"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/float/float.mbti:64:104-64:108"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:64:104-64:108"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:64:0-64:108"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:65:3-65:8"
+          },
+          "name": {
+            "name": "is_inf",
+            "loc": "core/float/float.mbti:65:10-65:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:65:17-65:22"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:65:17-65:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/float/float.mbti:65:27-65:31"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:65:27-65:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:65:0-65:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:66:3-66:8"
+          },
+          "name": {
+            "name": "is_nan",
+            "loc": "core/float/float.mbti:66:10-66:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:66:17-66:22"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:66:17-66:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/float/float.mbti:66:27-66:31"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:66:27-66:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:66:0-66:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:67:3-67:8"
+          },
+          "name": {
+            "name": "is_neg_inf",
+            "loc": "core/float/float.mbti:67:10-67:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:67:21-67:26"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:67:21-67:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/float/float.mbti:67:31-67:35"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:67:31-67:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:67:0-67:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:68:3-68:8"
+          },
+          "name": {
+            "name": "is_pos_inf",
+            "loc": "core/float/float.mbti:68:10-68:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:68:21-68:26"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:68:21-68:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/float/float.mbti:68:31-68:35"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:68:31-68:35"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:68:0-68:35"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:70:3-70:8"
+          },
+          "name": {
+            "name": "ln",
+            "loc": "core/float/float.mbti:70:10-70:12"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:70:13-70:18"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:70:13-70:18"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:70:23-70:28"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:70:23-70:28"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:69:0-70:28"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "ln",
+            "loc": "core/float/float.mbti:71:15-71:17"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:71:8-71:13"
+          },
+          "loc": "core/float/float.mbti:71:0-71:17"
+        }
+      },
+      "core/float/float.mbti:71:0-71:17"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:73:3-73:8"
+          },
+          "name": {
+            "name": "ln_1p",
+            "loc": "core/float/float.mbti:73:10-73:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:73:16-73:21"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:73:16-73:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:73:26-73:31"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:73:26-73:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:72:0-73:31"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "ln_1p",
+            "loc": "core/float/float.mbti:74:15-74:20"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:74:8-74:13"
+          },
+          "loc": "core/float/float.mbti:74:0-74:20"
+        }
+      },
+      "core/float/float.mbti:74:0-74:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:75:3-75:8"
+          },
+          "name": {
+            "name": "pow",
+            "loc": "core/float/float.mbti:75:10-75:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:75:14-75:19"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:75:14-75:19"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:75:21-75:26"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:75:21-75:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:75:31-75:36"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:75:31-75:36"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:75:0-75:36"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "pow",
+            "loc": "core/float/float.mbti:76:15-76:18"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:76:8-76:13"
+          },
+          "loc": "core/float/float.mbti:76:0-76:18"
+        }
+      },
+      "core/float/float.mbti:76:0-76:18"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:77:3-77:8"
+          },
+          "name": {
+            "name": "round",
+            "loc": "core/float/float.mbti:77:10-77:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:77:16-77:21"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:77:16-77:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:77:26-77:31"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:77:26-77:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:77:0-77:31"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "round",
+            "loc": "core/float/float.mbti:78:15-78:20"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:78:8-78:13"
+          },
+          "loc": "core/float/float.mbti:78:0-78:20"
+        }
+      },
+      "core/float/float.mbti:78:0-78:20"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:80:3-80:8"
+          },
+          "name": {
+            "name": "sin",
+            "loc": "core/float/float.mbti:80:10-80:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:80:14-80:19"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:80:14-80:19"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:80:24-80:29"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:80:24-80:29"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:79:0-80:29"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "sin",
+            "loc": "core/float/float.mbti:81:15-81:18"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:81:8-81:13"
+          },
+          "loc": "core/float/float.mbti:81:0-81:18"
+        }
+      },
+      "core/float/float.mbti:81:0-81:18"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:83:3-83:8"
+          },
+          "name": {
+            "name": "sinh",
+            "loc": "core/float/float.mbti:83:10-83:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:83:15-83:20"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:83:15-83:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:83:25-83:30"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:83:25-83:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:82:0-83:30"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "sinh",
+            "loc": "core/float/float.mbti:84:15-84:19"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:84:8-84:13"
+          },
+          "loc": "core/float/float.mbti:84:0-84:19"
+        }
+      },
+      "core/float/float.mbti:84:0-84:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:86:3-86:8"
+          },
+          "name": {
+            "name": "tan",
+            "loc": "core/float/float.mbti:86:10-86:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:86:14-86:19"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:86:14-86:19"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:86:24-86:29"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:86:24-86:29"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:85:0-86:29"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "tan",
+            "loc": "core/float/float.mbti:87:15-87:18"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:87:8-87:13"
+          },
+          "loc": "core/float/float.mbti:87:0-87:18"
+        }
+      },
+      "core/float/float.mbti:87:0-87:18"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:89:3-89:8"
+          },
+          "name": {
+            "name": "tanh",
+            "loc": "core/float/float.mbti:89:10-89:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:89:15-89:20"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:89:15-89:20"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:89:25-89:30"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:89:25-89:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:88:0-89:30"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "tanh",
+            "loc": "core/float/float.mbti:90:15-90:19"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:90:8-90:13"
+          },
+          "loc": "core/float/float.mbti:90:0-90:19"
+        }
+      },
+      "core/float/float.mbti:90:0-90:19"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:91:3-91:8"
+          },
+          "name": {
+            "name": "to_be_bytes",
+            "loc": "core/float/float.mbti:91:10-91:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:91:22-91:27"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:91:22-91:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/float/float.mbti:91:32-91:37"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:91:32-91:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:91:0-91:37"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:92:3-92:8"
+          },
+          "name": {
+            "name": "to_int",
+            "loc": "core/float/float.mbti:92:10-92:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:92:17-92:22"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:92:17-92:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/float/float.mbti:92:27-92:30"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:92:27-92:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:92:0-92:30"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:93:3-93:8"
+          },
+          "name": {
+            "name": "to_le_bytes",
+            "loc": "core/float/float.mbti:93:10-93:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:93:22-93:27"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:93:22-93:27"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bytes"
+                },
+                "loc": "core/float/float.mbti:93:32-93:37"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:93:32-93:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:93:0-93:37"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Float",
+            "loc": "core/float/float.mbti:94:3-94:8"
+          },
+          "name": {
+            "name": "trunc",
+            "loc": "core/float/float.mbti:94:10-94:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Float"
+                  },
+                  "loc": "core/float/float.mbti:94:16-94:21"
+                },
+                "1": [],
+                "loc": "core/float/float.mbti:94:16-94:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Float"
+                },
+                "loc": "core/float/float.mbti:94:26-94:31"
+              },
+              "1": [],
+              "loc": "core/float/float.mbti:94:26-94:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/float/float.mbti:94:0-94:31"
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "FnAlias",
+          "name": {
+            "name": "trunc",
+            "loc": "core/float/float.mbti:95:15-95:20"
+          },
+          "type_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Float"
+            },
+            "loc": "core/float/float.mbti:95:8-95:13"
+          },
+          "loc": "core/float/float.mbti:95:0-95:20"
+        }
+      },
+      "core/float/float.mbti:95:0-95:20"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Float"
+              },
+              "loc": "core/float/float.mbti:96:17-96:22"
+            },
+            "1": [],
+            "loc": "core/float/float.mbti:96:17-96:22"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Default"
+            },
+            "loc": "core/float/float.mbti:96:5-96:12"
+          }
+        }
+      },
+      "core/float/float.mbti:96:0-96:22"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Float"
+              },
+              "loc": "core/float/float.mbti:97:14-97:19"
+            },
+            "1": [],
+            "loc": "core/float/float.mbti:97:14-97:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Hash"
+            },
+            "loc": "core/float/float.mbti:97:5-97:9"
+          }
+        }
+      },
+      "core/float/float.mbti:97:0-97:19"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Float"
+              },
+              "loc": "core/float/float.mbti:98:13-98:18"
+            },
+            "1": [],
+            "loc": "core/float/float.mbti:98:13-98:18"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Mod"
+            },
+            "loc": "core/float/float.mbti:98:5-98:8"
+          }
+        }
+      },
+      "core/float/float.mbti:98:0-98:18"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Float"
+              },
+              "loc": "core/float/float.mbti:99:14-99:19"
+            },
+            "1": [],
+            "loc": "core/float/float.mbti:99:14-99:19"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/float/float.mbti:99:5-99:9"
+          }
+        }
+      },
+      "core/float/float.mbti:99:0-99:19"
+    ]
+  ]
+}

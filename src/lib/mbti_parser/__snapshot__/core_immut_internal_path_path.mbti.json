@@ -1,0 +1,422 @@
+{
+  "package_name": "moonbitlang/core/immut/internal/path",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "of",
+            "loc": "core/immut/internal/path/path.mbti:4:13-4:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/immut/internal/path/path.mbti:4:16-4:17"
+                },
+                "1": [],
+                "loc": "core/immut/internal/path/path.mbti:4:16-4:17"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Path"
+                },
+                "loc": "core/immut/internal/path/path.mbti:4:22-4:26"
+              },
+              "1": [],
+              "loc": "core/immut/internal/path/path.mbti:4:22-4:26"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/immut/internal/path/path.mbti:4:3-4:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Hash"
+                  },
+                  "loc": "core/immut/internal/path/path.mbti:4:7-4:11"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/immut/internal/path/path.mbti:4:0-4:26"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "Path",
+            "loc": "core/immut/internal/path/path.mbti:7:14-7:18"
+          },
+          "type_params": [],
+          "components": {
+            "type": "Newtype",
+            "0": {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt"
+                },
+                "loc": "core/immut/internal/path/path.mbti:7:19-7:23"
+              },
+              "1": [],
+              "loc": "core/immut/internal/path/path.mbti:7:19-7:23"
+            }
+          },
+          "vis": {
+            "type": "Pub",
+            "attr": "all",
+            "loc": "core/immut/internal/path/path.mbti:7:0-7:8"
+          }
+        }
+      },
+      "core/immut/internal/path/path.mbti:7:0-7:23"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Path",
+            "loc": "core/immut/internal/path/path.mbti:8:3-8:7"
+          },
+          "name": {
+            "name": "idx",
+            "loc": "core/immut/internal/path/path.mbti:8:9-8:12"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/path/path.mbti:8:13-8:17"
+                },
+                "1": [],
+                "loc": "core/immut/internal/path/path.mbti:8:13-8:17"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/immut/internal/path/path.mbti:8:22-8:25"
+              },
+              "1": [],
+              "loc": "core/immut/internal/path/path.mbti:8:22-8:25"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/path/path.mbti:8:0-8:25"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Path",
+            "loc": "core/immut/internal/path/path.mbti:9:3-9:7"
+          },
+          "name": {
+            "name": "inner",
+            "loc": "core/immut/internal/path/path.mbti:9:9-9:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/path/path.mbti:9:15-9:19"
+                },
+                "1": [],
+                "loc": "core/immut/internal/path/path.mbti:9:15-9:19"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "UInt"
+                },
+                "loc": "core/immut/internal/path/path.mbti:9:24-9:28"
+              },
+              "1": [],
+              "loc": "core/immut/internal/path/path.mbti:9:24-9:28"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/path/path.mbti:9:0-9:28"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Path",
+            "loc": "core/immut/internal/path/path.mbti:10:3-10:7"
+          },
+          "name": {
+            "name": "is_last",
+            "loc": "core/immut/internal/path/path.mbti:10:9-10:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/path/path.mbti:10:17-10:21"
+                },
+                "1": [],
+                "loc": "core/immut/internal/path/path.mbti:10:17-10:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/immut/internal/path/path.mbti:10:26-10:30"
+              },
+              "1": [],
+              "loc": "core/immut/internal/path/path.mbti:10:26-10:30"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/path/path.mbti:10:0-10:30"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Path",
+            "loc": "core/immut/internal/path/path.mbti:11:3-11:7"
+          },
+          "name": {
+            "name": "next",
+            "loc": "core/immut/internal/path/path.mbti:11:9-11:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/path/path.mbti:11:14-11:18"
+                },
+                "1": [],
+                "loc": "core/immut/internal/path/path.mbti:11:14-11:18"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/internal/path/path.mbti:11:23-11:27"
+              },
+              "1": [],
+              "loc": "core/immut/internal/path/path.mbti:11:23-11:27"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/path/path.mbti:11:0-11:27"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Path",
+            "loc": "core/immut/internal/path/path.mbti:12:3-12:7"
+          },
+          "name": {
+            "name": "push",
+            "loc": "core/immut/internal/path/path.mbti:12:9-12:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/immut/internal/path/path.mbti:12:14-12:18"
+                },
+                "1": [],
+                "loc": "core/immut/internal/path/path.mbti:12:14-12:18"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/immut/internal/path/path.mbti:12:20-12:23"
+                },
+                "1": [],
+                "loc": "core/immut/internal/path/path.mbti:12:20-12:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/immut/internal/path/path.mbti:12:28-12:32"
+              },
+              "1": [],
+              "loc": "core/immut/internal/path/path.mbti:12:28-12:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/immut/internal/path/path.mbti:12:0-12:32"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "Path"
+              },
+              "loc": "core/immut/internal/path/path.mbti:13:12-13:16"
+            },
+            "1": [],
+            "loc": "core/immut/internal/path/path.mbti:13:12-13:16"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/immut/internal/path/path.mbti:13:5-13:7"
+          }
+        }
+      },
+      "core/immut/internal/path/path.mbti:13:0-13:16"
+    ]
+  ]
+}

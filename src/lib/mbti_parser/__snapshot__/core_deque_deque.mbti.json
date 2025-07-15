@@ -1,0 +1,4978 @@
+{
+  "package_name": "moonbitlang/core/deque",
+  "imports": [
+    {
+      "name": "moonbitlang/core/json"
+    },
+    {
+      "name": "moonbitlang/core/string"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_array",
+            "loc": "core/deque/deque.mbti:9:6-9:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Array"
+                  },
+                  "loc": "core/deque/deque.mbti:9:17-9:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:9:23-9:24"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:9:23-9:24"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:9:17-9:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/deque/deque.mbti:9:30-9:31"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:9:32-9:33"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:9:32-9:33"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:9:30-9:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:9:3-9:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:9:0-9:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_iter",
+            "loc": "core/deque/deque.mbti:11:6-11:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Iter"
+                  },
+                  "loc": "core/deque/deque.mbti:11:16-11:20"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:11:21-11:22"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:11:21-11:22"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:11:16-11:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/deque/deque.mbti:11:28-11:29"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:11:30-11:31"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:11:30-11:31"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:11:28-11:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:11:3-11:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:11:0-11:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "new",
+            "loc": "core/deque/deque.mbti:13:6-13:9"
+          },
+          "params": [
+            {
+              "$tag": "OptionalDefault",
+              "0": {
+                "type": "Label",
+                "name": "capacity",
+                "loc": "core/deque/deque.mbti:13:10-13:19"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/deque/deque.mbti:13:22-13:25"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:13:22-13:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/deque/deque.mbti:13:35-13:36"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:13:37-13:38"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:13:37-13:38"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:13:35-13:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:13:3-13:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:13:0-13:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "of",
+            "loc": "core/deque/deque.mbti:15:6-15:8"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "FixedArray"
+                  },
+                  "loc": "core/deque/deque.mbti:15:9-15:19"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:15:20-15:21"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:15:20-15:21"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:15:9-15:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/deque/deque.mbti:15:27-15:28"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:15:29-15:30"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:15:29-15:30"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:15:27-15:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:15:3-15:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:15:0-15:31"
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:18:5-18:6"
+          },
+          "type_params": [
+            {
+              "$tag": "Name",
+              "0": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:18:7-18:8"
+              }
+            }
+          ],
+          "components": {
+            "type": "Abstract"
+          },
+          "vis": {
+            "type": "Default"
+          }
+        }
+      },
+      "core/deque/deque.mbti:18:0-18:9"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:19:6-19:7"
+          },
+          "name": {
+            "name": "as_views",
+            "loc": "core/deque/deque.mbti:19:9-19:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:19:18-19:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:19:23-19:24"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:19:23-19:24"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:19:18-19:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TTuple",
+              "0": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "ArrayView"
+                    },
+                    "loc": "core/deque/deque.mbti:19:31-19:40"
+                  },
+                  "1": [
+                    {
+                      "type": "TName",
+                      "0": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "Ident",
+                          "name": "A"
+                        },
+                        "loc": "core/deque/deque.mbti:19:41-19:42"
+                      },
+                      "1": [],
+                      "loc": "core/deque/deque.mbti:19:41-19:42"
+                    }
+                  ],
+                  "loc": "core/deque/deque.mbti:19:31-19:43"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "ArrayView"
+                    },
+                    "loc": "core/deque/deque.mbti:19:45-19:54"
+                  },
+                  "1": [
+                    {
+                      "type": "TName",
+                      "0": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "Ident",
+                          "name": "A"
+                        },
+                        "loc": "core/deque/deque.mbti:19:55-19:56"
+                      },
+                      "1": [],
+                      "loc": "core/deque/deque.mbti:19:55-19:56"
+                    }
+                  ],
+                  "loc": "core/deque/deque.mbti:19:45-19:57"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:19:30-19:58"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:19:3-19:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:19:0-19:58"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:20:6-20:7"
+          },
+          "name": {
+            "name": "back",
+            "loc": "core/deque/deque.mbti:20:9-20:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:20:14-20:18"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:20:19-20:20"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:20:19-20:20"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:20:14-20:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:20:26-20:27"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:20:26-20:27"
+              },
+              "loc": "core/deque/deque.mbti:20:26-20:28",
+              "question_loc": "core/deque/deque.mbti:20:27-20:28"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:20:3-20:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:20:0-20:28"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:21:16-21:17"
+          },
+          "name": {
+            "name": "binary_search",
+            "loc": "core/deque/deque.mbti:21:19-21:32"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:21:33-21:37"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:21:38-21:39"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:21:38-21:39"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:21:33-21:40"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:21:42-21:43"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:21:42-21:43"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Result"
+                },
+                "loc": "core/deque/deque.mbti:21:48-21:54"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Int"
+                    },
+                    "loc": "core/deque/deque.mbti:21:55-21:58"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:21:55-21:58"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Int"
+                    },
+                    "loc": "core/deque/deque.mbti:21:60-21:63"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:21:60-21:63"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:21:48-21:64"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:21:3-21:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/deque/deque.mbti:21:7-21:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:21:0-21:64"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:22:6-22:7"
+          },
+          "name": {
+            "name": "binary_search_by",
+            "loc": "core/deque/deque.mbti:22:9-22:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:22:26-22:30"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:22:31-22:32"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:22:31-22:32"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:22:26-22:33"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:22:36-22:37"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:22:36-22:37"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Int"
+                    },
+                    "loc": "core/deque/deque.mbti:22:42-22:45"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:22:42-22:45"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/deque/deque.mbti:22:35-22:45"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Result"
+                },
+                "loc": "core/deque/deque.mbti:22:50-22:56"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Int"
+                    },
+                    "loc": "core/deque/deque.mbti:22:57-22:60"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:22:57-22:60"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Int"
+                    },
+                    "loc": "core/deque/deque.mbti:22:62-22:65"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:22:62-22:65"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:22:50-22:66"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:22:3-22:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:22:0-22:66"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:23:6-23:7"
+          },
+          "name": {
+            "name": "capacity",
+            "loc": "core/deque/deque.mbti:23:9-23:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:23:18-23:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:23:23-23:24"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:23:23-23:24"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:23:18-23:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/deque/deque.mbti:23:30-23:33"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:23:30-23:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:23:3-23:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:23:0-23:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:24:6-24:7"
+          },
+          "name": {
+            "name": "clear",
+            "loc": "core/deque/deque.mbti:24:9-24:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:24:15-24:19"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:24:20-24:21"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:24:20-24:21"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:24:15-24:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:24:27-24:31"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:24:27-24:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:24:3-24:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:24:0-24:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:25:11-25:12"
+          },
+          "name": {
+            "name": "contains",
+            "loc": "core/deque/deque.mbti:25:14-25:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:25:23-25:27"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:25:28-25:29"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:25:28-25:29"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:25:23-25:30"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:25:32-25:33"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:25:32-25:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/deque/deque.mbti:25:38-25:42"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:25:38-25:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:25:3-25:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/deque/deque.mbti:25:7-25:9"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:25:0-25:42"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:26:6-26:7"
+          },
+          "name": {
+            "name": "copy",
+            "loc": "core/deque/deque.mbti:26:9-26:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:26:14-26:18"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:26:19-26:20"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:26:19-26:20"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:26:14-26:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/deque/deque.mbti:26:26-26:30"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:26:31-26:32"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:26:31-26:32"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:26:26-26:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:26:3-26:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:26:0-26:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:27:6-27:7"
+          },
+          "name": {
+            "name": "drain",
+            "loc": "core/deque/deque.mbti:27:9-27:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:27:15-27:19"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:27:20-27:21"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:27:20-27:21"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:27:15-27:22"
+              }
+            },
+            {
+              "$tag": "Labelled",
+              "0": {
+                "type": "Label",
+                "name": "start",
+                "loc": "core/deque/deque.mbti:27:24-27:30"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/deque/deque.mbti:27:33-27:36"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:27:33-27:36"
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "len",
+                "loc": "core/deque/deque.mbti:27:38-27:41"
+              },
+              "1": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/deque/deque.mbti:27:45-27:48"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:27:45-27:48"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/deque/deque.mbti:27:53-27:57"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:27:58-27:59"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:27:58-27:59"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:27:53-27:60"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:27:3-27:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:27:0-27:60"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:28:6-28:7"
+          },
+          "name": {
+            "name": "each",
+            "loc": "core/deque/deque.mbti:28:9-28:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:28:14-28:18"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:28:19-28:20"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:28:19-28:20"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:28:14-28:21"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:28:24-28:25"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:28:24-28:25"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/deque/deque.mbti:28:30-28:34"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:28:30-28:34"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/deque/deque.mbti:28:23-28:34"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:28:39-28:43"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:28:39-28:43"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:28:3-28:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:28:0-28:43"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:29:6-29:7"
+          },
+          "name": {
+            "name": "eachi",
+            "loc": "core/deque/deque.mbti:29:9-29:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:29:15-29:19"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:29:20-29:21"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:29:20-29:21"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:29:15-29:22"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Int"
+                      },
+                      "loc": "core/deque/deque.mbti:29:25-29:28"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:29:25-29:28"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:29:30-29:31"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:29:30-29:31"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/deque/deque.mbti:29:36-29:40"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:29:36-29:40"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/deque/deque.mbti:29:24-29:40"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:29:45-29:49"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:29:45-29:49"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:29:3-29:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:29:0-29:49"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:31:6-31:7"
+          },
+          "name": {
+            "name": "filter_map_inplace",
+            "loc": "core/deque/deque.mbti:31:9-31:27"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:31:28-31:32"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:31:33-31:34"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:31:33-31:34"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:31:28-31:35"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:31:38-31:39"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:31:38-31:39"
+                  }
+                ],
+                "res": {
+                  "type": "TOption",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:31:44-31:45"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:31:44-31:45"
+                  },
+                  "loc": "core/deque/deque.mbti:31:44-31:46",
+                  "question_loc": "core/deque/deque.mbti:31:45-31:46"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/deque/deque.mbti:31:37-31:46"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:31:51-31:55"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:31:51-31:55"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:31:3-31:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:30:0-31:55"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:32:6-32:7"
+          },
+          "name": {
+            "name": "flatten",
+            "loc": "core/deque/deque.mbti:32:9-32:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:32:17-32:21"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Self"
+                      },
+                      "loc": "core/deque/deque.mbti:32:22-32:26"
+                    },
+                    "1": [
+                      {
+                        "type": "TName",
+                        "0": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "Ident",
+                            "name": "A"
+                          },
+                          "loc": "core/deque/deque.mbti:32:27-32:28"
+                        },
+                        "1": [],
+                        "loc": "core/deque/deque.mbti:32:27-32:28"
+                      }
+                    ],
+                    "loc": "core/deque/deque.mbti:32:22-32:29"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:32:17-32:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/deque/deque.mbti:32:35-32:39"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:32:40-32:41"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:32:40-32:41"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:32:35-32:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:32:3-32:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:32:0-32:42"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:33:6-33:7"
+          },
+          "name": {
+            "name": "front",
+            "loc": "core/deque/deque.mbti:33:9-33:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:33:15-33:19"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:33:20-33:21"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:33:20-33:21"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:33:15-33:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:33:27-33:28"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:33:27-33:28"
+              },
+              "loc": "core/deque/deque.mbti:33:27-33:29",
+              "question_loc": "core/deque/deque.mbti:33:28-33:29"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:33:3-33:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:33:0-33:29"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:34:6-34:7"
+          },
+          "name": {
+            "name": "get",
+            "loc": "core/deque/deque.mbti:34:9-34:12"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:34:13-34:17"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:34:18-34:19"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:34:18-34:19"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:34:13-34:20"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/deque/deque.mbti:34:22-34:25"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:34:22-34:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:34:30-34:31"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:34:30-34:31"
+              },
+              "loc": "core/deque/deque.mbti:34:30-34:32",
+              "question_loc": "core/deque/deque.mbti:34:31-34:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:34:3-34:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:34:0-34:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:35:6-35:7"
+          },
+          "name": {
+            "name": "is_empty",
+            "loc": "core/deque/deque.mbti:35:9-35:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:35:18-35:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:35:23-35:24"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:35:23-35:24"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:35:18-35:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Bool"
+                },
+                "loc": "core/deque/deque.mbti:35:30-35:34"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:35:30-35:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:35:3-35:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:35:0-35:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:36:6-36:7"
+          },
+          "name": {
+            "name": "iter",
+            "loc": "core/deque/deque.mbti:36:9-36:13"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:36:14-36:18"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:36:19-36:20"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:36:19-36:20"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:36:14-36:21"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter"
+                },
+                "loc": "core/deque/deque.mbti:36:26-36:30"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:36:31-36:32"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:36:31-36:32"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:36:26-36:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:36:3-36:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:36:0-36:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:37:6-37:7"
+          },
+          "name": {
+            "name": "iter2",
+            "loc": "core/deque/deque.mbti:37:9-37:14"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:37:15-37:19"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:37:20-37:21"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:37:20-37:21"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:37:15-37:22"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter2"
+                },
+                "loc": "core/deque/deque.mbti:37:27-37:32"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Int"
+                    },
+                    "loc": "core/deque/deque.mbti:37:33-37:36"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:37:33-37:36"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:37:38-37:39"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:37:38-37:39"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:37:27-37:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:37:3-37:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:37:0-37:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:38:3-38:4"
+          },
+          "name": {
+            "name": "join",
+            "loc": "core/deque/deque.mbti:38:6-38:10"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:38:11-38:15"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "String"
+                      },
+                      "loc": "core/deque/deque.mbti:38:16-38:22"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:38:16-38:22"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:38:11-38:23"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Qualified",
+                    "pkg": "string",
+                    "name": "StringView"
+                  },
+                  "loc": "core/deque/deque.mbti:38:25-38:43"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:38:25-38:43"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "String"
+                },
+                "loc": "core/deque/deque.mbti:38:48-38:54"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:38:48-38:54"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      "core/deque/deque.mbti:38:0-38:54"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:39:6-39:7"
+          },
+          "name": {
+            "name": "length",
+            "loc": "core/deque/deque.mbti:39:9-39:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:39:16-39:20"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:39:21-39:22"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:39:21-39:22"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:39:16-39:23"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Int"
+                },
+                "loc": "core/deque/deque.mbti:39:28-39:31"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:39:28-39:31"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:39:3-39:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:39:0-39:31"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:40:9-40:10"
+          },
+          "name": {
+            "name": "map",
+            "loc": "core/deque/deque.mbti:40:12-40:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:40:16-40:20"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:40:21-40:22"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:40:21-40:22"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:40:16-40:23"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:40:26-40:27"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:40:26-40:27"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/deque/deque.mbti:40:32-40:33"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:40:32-40:33"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/deque/deque.mbti:40:25-40:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/deque/deque.mbti:40:38-40:42"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/deque/deque.mbti:40:43-40:44"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:40:43-40:44"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:40:38-40:45"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:40:3-40:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/deque/deque.mbti:40:6-40:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:40:0-40:45"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:41:9-41:10"
+          },
+          "name": {
+            "name": "mapi",
+            "loc": "core/deque/deque.mbti:41:12-41:16"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:41:17-41:21"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:41:22-41:23"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:41:22-41:23"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:41:17-41:24"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Int"
+                      },
+                      "loc": "core/deque/deque.mbti:41:27-41:30"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:41:27-41:30"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:41:32-41:33"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:41:32-41:33"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/deque/deque.mbti:41:38-41:39"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:41:38-41:39"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/deque/deque.mbti:41:26-41:39"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Self"
+                },
+                "loc": "core/deque/deque.mbti:41:44-41:48"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "U"
+                    },
+                    "loc": "core/deque/deque.mbti:41:49-41:50"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:41:49-41:50"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:41:44-41:51"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:41:3-41:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "U",
+                "loc": "core/deque/deque.mbti:41:6-41:7"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:41:0-41:51"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:42:6-42:7"
+          },
+          "name": {
+            "name": "op_get",
+            "loc": "core/deque/deque.mbti:42:9-42:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:42:16-42:20"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:42:21-42:22"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:42:21-42:22"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:42:16-42:23"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/deque/deque.mbti:42:25-42:28"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:42:25-42:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "A"
+                },
+                "loc": "core/deque/deque.mbti:42:33-42:34"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:42:33-42:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:42:3-42:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:42:0-42:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:43:6-43:7"
+          },
+          "name": {
+            "name": "op_set",
+            "loc": "core/deque/deque.mbti:43:9-43:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:43:16-43:20"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:43:21-43:22"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:43:21-43:22"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:43:16-43:23"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/deque/deque.mbti:43:25-43:28"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:43:25-43:28"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:43:30-43:31"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:43:30-43:31"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:43:36-43:40"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:43:36-43:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:43:3-43:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:43:0-43:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:44:6-44:7"
+          },
+          "name": {
+            "name": "pop_back",
+            "loc": "core/deque/deque.mbti:44:9-44:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:44:18-44:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:44:23-44:24"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:44:23-44:24"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:44:18-44:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:44:30-44:31"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:44:30-44:31"
+              },
+              "loc": "core/deque/deque.mbti:44:30-44:32",
+              "question_loc": "core/deque/deque.mbti:44:31-44:32"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:44:3-44:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:44:0-44:32"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:46:6-46:7"
+          },
+          "name": {
+            "name": "pop_back_exn",
+            "loc": "core/deque/deque.mbti:46:9-46:21"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:46:22-46:26"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:46:27-46:28"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:46:27-46:28"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:46:22-46:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:46:34-46:38"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:46:34-46:38"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:46:3-46:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:45:0-46:38"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:47:6-47:7"
+          },
+          "name": {
+            "name": "pop_front",
+            "loc": "core/deque/deque.mbti:47:9-47:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:47:19-47:23"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:47:24-47:25"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:47:24-47:25"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:47:19-47:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:47:31-47:32"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:47:31-47:32"
+              },
+              "loc": "core/deque/deque.mbti:47:31-47:33",
+              "question_loc": "core/deque/deque.mbti:47:32-47:33"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:47:3-47:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:47:0-47:33"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:49:6-49:7"
+          },
+          "name": {
+            "name": "pop_front_exn",
+            "loc": "core/deque/deque.mbti:49:9-49:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:49:23-49:27"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:49:28-49:29"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:49:28-49:29"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:49:23-49:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:49:35-49:39"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:49:35-49:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:49:3-49:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:48:0-49:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:50:6-50:7"
+          },
+          "name": {
+            "name": "push_back",
+            "loc": "core/deque/deque.mbti:50:9-50:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:50:19-50:23"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:50:24-50:25"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:50:24-50:25"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:50:19-50:26"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:50:28-50:29"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:50:28-50:29"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:50:34-50:38"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:50:34-50:38"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:50:3-50:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:50:0-50:38"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:51:6-51:7"
+          },
+          "name": {
+            "name": "push_front",
+            "loc": "core/deque/deque.mbti:51:9-51:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:51:20-51:24"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:51:25-51:26"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:51:25-51:26"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:51:20-51:27"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:51:29-51:30"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:51:29-51:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:51:35-51:39"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:51:35-51:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:51:3-51:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:51:0-51:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:52:6-52:7"
+          },
+          "name": {
+            "name": "reserve_capacity",
+            "loc": "core/deque/deque.mbti:52:9-52:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:52:26-52:30"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:52:31-52:32"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:52:31-52:32"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:52:26-52:33"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/deque/deque.mbti:52:35-52:38"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:52:35-52:38"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:52:43-52:47"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:52:43-52:47"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:52:3-52:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:52:0-52:47"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:53:6-53:7"
+          },
+          "name": {
+            "name": "retain",
+            "loc": "core/deque/deque.mbti:53:9-53:15"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:53:16-53:20"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:53:21-53:22"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:53:21-53:22"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:53:16-53:23"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:53:26-53:27"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:53:26-53:27"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Bool"
+                    },
+                    "loc": "core/deque/deque.mbti:53:32-53:36"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:53:32-53:36"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/deque/deque.mbti:53:25-53:36"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:53:41-53:45"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:53:41-53:45"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:53:3-53:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:53:0-53:45"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:54:6-54:7"
+          },
+          "name": {
+            "name": "retain_map",
+            "loc": "core/deque/deque.mbti:54:9-54:19"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:54:20-54:24"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:54:25-54:26"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:54:25-54:26"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:54:20-54:27"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:54:30-54:31"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:54:30-54:31"
+                  }
+                ],
+                "res": {
+                  "type": "TOption",
+                  "0": {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:54:36-54:37"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:54:36-54:37"
+                  },
+                  "loc": "core/deque/deque.mbti:54:36-54:38",
+                  "question_loc": "core/deque/deque.mbti:54:37-54:38"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/deque/deque.mbti:54:29-54:38"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:54:43-54:47"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:54:43-54:47"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:54:3-54:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:54:0-54:47"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:55:6-55:7"
+          },
+          "name": {
+            "name": "rev_each",
+            "loc": "core/deque/deque.mbti:55:9-55:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:55:18-55:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:55:23-55:24"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:55:23-55:24"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:55:18-55:25"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:55:28-55:29"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:55:28-55:29"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/deque/deque.mbti:55:34-55:38"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:55:34-55:38"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/deque/deque.mbti:55:27-55:38"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:55:43-55:47"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:55:43-55:47"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:55:3-55:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:55:0-55:47"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:56:6-56:7"
+          },
+          "name": {
+            "name": "rev_eachi",
+            "loc": "core/deque/deque.mbti:56:9-56:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:56:19-56:23"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:56:24-56:25"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:56:24-56:25"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:56:19-56:26"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "Int"
+                      },
+                      "loc": "core/deque/deque.mbti:56:29-56:32"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:56:29-56:32"
+                  },
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:56:34-56:35"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:56:34-56:35"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Unit"
+                    },
+                    "loc": "core/deque/deque.mbti:56:40-56:44"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:56:40-56:44"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/deque/deque.mbti:56:28-56:44"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:56:49-56:53"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:56:49-56:53"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:56:3-56:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:56:0-56:53"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:57:6-57:7"
+          },
+          "name": {
+            "name": "rev_iter",
+            "loc": "core/deque/deque.mbti:57:9-57:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:57:18-57:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:57:23-57:24"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:57:23-57:24"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:57:18-57:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter"
+                },
+                "loc": "core/deque/deque.mbti:57:30-57:34"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:57:35-57:36"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:57:35-57:36"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:57:30-57:37"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:57:3-57:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:57:0-57:37"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:58:6-58:7"
+          },
+          "name": {
+            "name": "rev_iter2",
+            "loc": "core/deque/deque.mbti:58:9-58:18"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:58:19-58:23"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:58:24-58:25"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:58:24-58:25"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:58:19-58:26"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Iter2"
+                },
+                "loc": "core/deque/deque.mbti:58:31-58:36"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "Int"
+                    },
+                    "loc": "core/deque/deque.mbti:58:37-58:40"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:58:37-58:40"
+                },
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:58:42-58:43"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:58:42-58:43"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:58:31-58:44"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:58:3-58:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:58:0-58:44"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:59:11-59:12"
+          },
+          "name": {
+            "name": "search",
+            "loc": "core/deque/deque.mbti:59:14-59:20"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:59:21-59:25"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:59:26-59:27"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:59:26-59:27"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:59:21-59:28"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:59:30-59:31"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:59:30-59:31"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TOption",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/deque/deque.mbti:59:36-59:39"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:59:36-59:39"
+              },
+              "loc": "core/deque/deque.mbti:59:36-59:40",
+              "question_loc": "core/deque/deque.mbti:59:39-59:40"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:59:3-59:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/deque/deque.mbti:59:7-59:9"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:59:0-59:40"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:60:6-60:7"
+          },
+          "name": {
+            "name": "shrink_to_fit",
+            "loc": "core/deque/deque.mbti:60:9-60:22"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:60:23-60:27"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:60:28-60:29"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:60:28-60:29"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:60:23-60:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:60:35-60:39"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:60:35-60:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:60:3-60:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:60:0-60:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:61:6-61:7"
+          },
+          "name": {
+            "name": "to_array",
+            "loc": "core/deque/deque.mbti:61:9-61:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:61:18-61:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:61:23-61:24"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:61:23-61:24"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:61:18-61:25"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Array"
+                },
+                "loc": "core/deque/deque.mbti:61:30-61:35"
+              },
+              "1": [
+                {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "A"
+                    },
+                    "loc": "core/deque/deque.mbti:61:36-61:37"
+                  },
+                  "1": [],
+                  "loc": "core/deque/deque.mbti:61:36-61:37"
+                }
+              ],
+              "loc": "core/deque/deque.mbti:61:30-61:38"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:61:3-61:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:61:0-61:38"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:62:6-62:7"
+          },
+          "name": {
+            "name": "truncate",
+            "loc": "core/deque/deque.mbti:62:9-62:17"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:62:18-62:22"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:62:23-62:24"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:62:23-62:24"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:62:18-62:25"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": "core/deque/deque.mbti:62:27-62:30"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:62:27-62:30"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:62:35-62:39"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:62:35-62:39"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:62:3-62:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:62:0-62:39"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:63:6-63:7"
+          },
+          "name": {
+            "name": "unsafe_pop_back",
+            "loc": "core/deque/deque.mbti:63:9-63:24"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:63:25-63:29"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:63:30-63:31"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:63:30-63:31"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:63:25-63:32"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:63:37-63:41"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:63:37-63:41"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:63:3-63:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:63:0-63:41"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": "core/deque/deque.mbti:64:6-64:7"
+          },
+          "name": {
+            "name": "unsafe_pop_front",
+            "loc": "core/deque/deque.mbti:64:9-64:25"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": "core/deque/deque.mbti:64:26-64:30"
+                },
+                "1": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "A"
+                      },
+                      "loc": "core/deque/deque.mbti:64:31-64:32"
+                    },
+                    "1": [],
+                    "loc": "core/deque/deque.mbti:64:31-64:32"
+                  }
+                ],
+                "loc": "core/deque/deque.mbti:64:26-64:33"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "Unit"
+                },
+                "loc": "core/deque/deque.mbti:64:38-64:42"
+              },
+              "1": [],
+              "loc": "core/deque/deque.mbti:64:38-64:42"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:64:3-64:4"
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      "core/deque/deque.mbti:64:0-64:42"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:65:5-65:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/deque/deque.mbti:65:9-65:16"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/deque/deque.mbti:65:30-65:31"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:65:32-65:33"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:65:32-65:33"
+              }
+            ],
+            "loc": "core/deque/deque.mbti:65:30-65:34"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Compare"
+            },
+            "loc": "core/deque/deque.mbti:65:18-65:25"
+          }
+        }
+      },
+      "core/deque/deque.mbti:65:0-65:34"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:66:5-66:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Eq"
+                  },
+                  "loc": "core/deque/deque.mbti:66:9-66:11"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/deque/deque.mbti:66:20-66:21"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:66:22-66:23"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:66:22-66:23"
+              }
+            ],
+            "loc": "core/deque/deque.mbti:66:20-66:24"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Eq"
+            },
+            "loc": "core/deque/deque.mbti:66:13-66:15"
+          }
+        }
+      },
+      "core/deque/deque.mbti:66:0-66:24"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:67:5-67:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Show"
+                  },
+                  "loc": "core/deque/deque.mbti:67:9-67:13"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/deque/deque.mbti:67:24-67:25"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:67:26-67:27"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:67:26-67:27"
+              }
+            ],
+            "loc": "core/deque/deque.mbti:67:24-67:28"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "Show"
+            },
+            "loc": "core/deque/deque.mbti:67:15-67:19"
+          }
+        }
+      },
+      "core/deque/deque.mbti:67:0-67:28"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:68:5-68:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "ToJson"
+                  },
+                  "loc": "core/deque/deque.mbti:68:9-68:15"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/deque/deque.mbti:68:28-68:29"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:68:30-68:31"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:68:30-68:31"
+              }
+            ],
+            "loc": "core/deque/deque.mbti:68:28-68:32"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Ident",
+              "name": "ToJson"
+            },
+            "loc": "core/deque/deque.mbti:68:17-68:23"
+          }
+        }
+      },
+      "core/deque/deque.mbti:68:0-68:32"
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": "core/deque/deque.mbti:69:5-69:6"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Qualified",
+                    "pkg": "json",
+                    "name": "FromJson"
+                  },
+                  "loc": "core/deque/deque.mbti:69:9-69:23"
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "TName",
+            "0": {
+              "type": "ConstrId",
+              "id": {
+                "type": "Ident",
+                "name": "T"
+              },
+              "loc": "core/deque/deque.mbti:69:44-69:45"
+            },
+            "1": [
+              {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "A"
+                  },
+                  "loc": "core/deque/deque.mbti:69:46-69:47"
+                },
+                "1": [],
+                "loc": "core/deque/deque.mbti:69:46-69:47"
+              }
+            ],
+            "loc": "core/deque/deque.mbti:69:44-69:48"
+          },
+          "trait_name": {
+            "name": {
+              "type": "Qualified",
+              "pkg": "json",
+              "name": "FromJson"
+            },
+            "loc": "core/deque/deque.mbti:69:25-69:39"
+          }
+        }
+      },
+      "core/deque/deque.mbti:69:0-69:48"
+    ]
+  ]
+}

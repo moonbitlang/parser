@@ -1,0 +1,426 @@
+{
+  "package_name": "moonbitlang/core/cmp",
+  "imports": [],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "maximum",
+            "loc": "core/cmp/cmp.mbti:4:16-4:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/cmp/cmp.mbti:4:24-4:25"
+                },
+                "1": [],
+                "loc": "core/cmp/cmp.mbti:4:24-4:25"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/cmp/cmp.mbti:4:27-4:28"
+                },
+                "1": [],
+                "loc": "core/cmp/cmp.mbti:4:27-4:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/cmp/cmp.mbti:4:33-4:34"
+              },
+              "1": [],
+              "loc": "core/cmp/cmp.mbti:4:33-4:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/cmp/cmp.mbti:4:3-4:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/cmp/cmp.mbti:4:7-4:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/cmp/cmp.mbti:4:0-4:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "maximum_by_key",
+            "loc": "core/cmp/cmp.mbti:6:19-6:33"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/cmp/cmp.mbti:6:34-6:35"
+                },
+                "1": [],
+                "loc": "core/cmp/cmp.mbti:6:34-6:35"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/cmp/cmp.mbti:6:37-6:38"
+                },
+                "1": [],
+                "loc": "core/cmp/cmp.mbti:6:37-6:38"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/cmp/cmp.mbti:6:41-6:42"
+                    },
+                    "1": [],
+                    "loc": "core/cmp/cmp.mbti:6:41-6:42"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/cmp/cmp.mbti:6:47-6:48"
+                  },
+                  "1": [],
+                  "loc": "core/cmp/cmp.mbti:6:47-6:48"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/cmp/cmp.mbti:6:40-6:48"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/cmp/cmp.mbti:6:53-6:54"
+              },
+              "1": [],
+              "loc": "core/cmp/cmp.mbti:6:53-6:54"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/cmp/cmp.mbti:6:3-6:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/cmp/cmp.mbti:6:6-6:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/cmp/cmp.mbti:6:10-6:17"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/cmp/cmp.mbti:6:0-6:54"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "minimum",
+            "loc": "core/cmp/cmp.mbti:8:16-8:23"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/cmp/cmp.mbti:8:24-8:25"
+                },
+                "1": [],
+                "loc": "core/cmp/cmp.mbti:8:24-8:25"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/cmp/cmp.mbti:8:27-8:28"
+                },
+                "1": [],
+                "loc": "core/cmp/cmp.mbti:8:27-8:28"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/cmp/cmp.mbti:8:33-8:34"
+              },
+              "1": [],
+              "loc": "core/cmp/cmp.mbti:8:33-8:34"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/cmp/cmp.mbti:8:3-8:4"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/cmp/cmp.mbti:8:7-8:14"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/cmp/cmp.mbti:8:0-8:34"
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "minimum_by_key",
+            "loc": "core/cmp/cmp.mbti:10:19-10:33"
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/cmp/cmp.mbti:10:34-10:35"
+                },
+                "1": [],
+                "loc": "core/cmp/cmp.mbti:10:34-10:35"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TName",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "T"
+                  },
+                  "loc": "core/cmp/cmp.mbti:10:37-10:38"
+                },
+                "1": [],
+                "loc": "core/cmp/cmp.mbti:10:37-10:38"
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "TArrow",
+                "args": [
+                  {
+                    "type": "TName",
+                    "0": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "Ident",
+                        "name": "T"
+                      },
+                      "loc": "core/cmp/cmp.mbti:10:41-10:42"
+                    },
+                    "1": [],
+                    "loc": "core/cmp/cmp.mbti:10:41-10:42"
+                  }
+                ],
+                "res": {
+                  "type": "TName",
+                  "0": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "Ident",
+                      "name": "K"
+                    },
+                    "loc": "core/cmp/cmp.mbti:10:47-10:48"
+                  },
+                  "1": [],
+                  "loc": "core/cmp/cmp.mbti:10:47-10:48"
+                },
+                "err": {
+                  "type": "NoErrorType"
+                },
+                "is_async": false,
+                "loc": "core/cmp/cmp.mbti:10:40-10:48"
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "TName",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "Ident",
+                  "name": "T"
+                },
+                "loc": "core/cmp/cmp.mbti:10:53-10:54"
+              },
+              "1": [],
+              "loc": "core/cmp/cmp.mbti:10:53-10:54"
+            },
+            {
+              "type": "NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": "core/cmp/cmp.mbti:10:3-10:4"
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "K",
+                "loc": "core/cmp/cmp.mbti:10:6-10:7"
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "Ident",
+                    "name": "Compare"
+                  },
+                  "loc": "core/cmp/cmp.mbti:10:10-10:17"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "core/cmp/cmp.mbti:10:0-10:54"
+    ]
+  ]
+}
