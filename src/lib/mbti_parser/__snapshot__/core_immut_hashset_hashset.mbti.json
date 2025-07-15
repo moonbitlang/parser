@@ -13,7 +13,7 @@
           "attr": [],
           "name": {
             "name": "from_array",
-            "loc": "core/immut/hashset/hashset.mbti:8:18-8:28"
+            "loc": null
           },
           "params": [
             {
@@ -26,7 +26,7 @@
                     "type": "Ident",
                     "name": "Array"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:8:29-8:34"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -37,13 +37,13 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:8:35-8:36"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:8:35-8:36"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:8:29-8:37"
+                "loc": null
               }
             }
           ],
@@ -56,7 +56,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:8:42-8:43"
+                "loc": null
               },
               "1": [
                 {
@@ -67,13 +67,13 @@
                       "type": "Ident",
                       "name": "A"
                     },
-                    "loc": "core/immut/hashset/hashset.mbti:8:44-8:45"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/hashset/hashset.mbti:8:44-8:45"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/hashset/hashset.mbti:8:42-8:46"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -83,7 +83,7 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:8:3-8:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -91,21 +91,21 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:8:7-8:9"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:8:12-8:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:8:0-8:46"
+      null
     ],
     [
       {
@@ -114,7 +114,7 @@
           "attr": [],
           "name": {
             "name": "from_iter",
-            "loc": "core/immut/hashset/hashset.mbti:10:18-10:27"
+            "loc": null
           },
           "params": [
             {
@@ -127,7 +127,7 @@
                     "type": "Ident",
                     "name": "Iter"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:10:28-10:32"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -138,13 +138,13 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:10:33-10:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:10:33-10:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:10:28-10:35"
+                "loc": null
               }
             }
           ],
@@ -157,7 +157,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:10:40-10:41"
+                "loc": null
               },
               "1": [
                 {
@@ -168,13 +168,13 @@
                       "type": "Ident",
                       "name": "A"
                     },
-                    "loc": "core/immut/hashset/hashset.mbti:10:42-10:43"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/hashset/hashset.mbti:10:42-10:43"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/hashset/hashset.mbti:10:40-10:44"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -184,7 +184,7 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:10:3-10:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -192,21 +192,21 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:10:7-10:9"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:10:12-10:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:10:0-10:44"
+      null
     ],
     [
       {
@@ -215,7 +215,7 @@
           "attr": [],
           "name": {
             "name": "new",
-            "loc": "core/immut/hashset/hashset.mbti:12:6-12:9"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -227,7 +227,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:12:15-12:16"
+                "loc": null
               },
               "1": [
                 {
@@ -238,13 +238,13 @@
                       "type": "Ident",
                       "name": "A"
                     },
-                    "loc": "core/immut/hashset/hashset.mbti:12:17-12:18"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/hashset/hashset.mbti:12:17-12:18"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/hashset/hashset.mbti:12:15-12:19"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -254,14 +254,14 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:12:3-12:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:12:0-12:19"
+      null
     ],
     [
       {
@@ -270,7 +270,7 @@
           "attr": [],
           "name": {
             "name": "of",
-            "loc": "core/immut/hashset/hashset.mbti:14:18-14:20"
+            "loc": null
           },
           "params": [
             {
@@ -283,7 +283,7 @@
                     "type": "Ident",
                     "name": "FixedArray"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:14:21-14:31"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -294,13 +294,13 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:14:32-14:33"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:14:32-14:33"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:14:21-14:34"
+                "loc": null
               }
             }
           ],
@@ -313,7 +313,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:14:39-14:40"
+                "loc": null
               },
               "1": [
                 {
@@ -324,13 +324,13 @@
                       "type": "Ident",
                       "name": "A"
                     },
-                    "loc": "core/immut/hashset/hashset.mbti:14:41-14:42"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/hashset/hashset.mbti:14:41-14:42"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/hashset/hashset.mbti:14:39-14:43"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -340,7 +340,7 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:14:3-14:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -348,21 +348,21 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:14:7-14:9"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:14:12-14:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:14:0-14:43"
+      null
     ],
     [
       {
@@ -370,14 +370,14 @@
         "0": {
           "name": {
             "name": "T",
-            "loc": "core/immut/hashset/hashset.mbti:17:5-17:6"
+            "loc": null
           },
           "type_params": [
             {
               "$tag": "Name",
               "0": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:17:7-17:8"
+                "loc": null
               }
             }
           ],
@@ -389,7 +389,7 @@
           }
         }
       },
-      "core/immut/hashset/hashset.mbti:17:0-17:9"
+      null
     ],
     [
       {
@@ -398,11 +398,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/immut/hashset/hashset.mbti:18:18-18:19"
+            "loc": null
           },
           "name": {
             "name": "add",
-            "loc": "core/immut/hashset/hashset.mbti:18:21-18:24"
+            "loc": null
           },
           "params": [
             {
@@ -415,7 +415,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:18:25-18:29"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -426,13 +426,13 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:18:30-18:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:18:30-18:31"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:18:25-18:32"
+                "loc": null
               }
             },
             {
@@ -445,10 +445,10 @@
                     "type": "Ident",
                     "name": "A"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:18:34-18:35"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/hashset/hashset.mbti:18:34-18:35"
+                "loc": null
               }
             }
           ],
@@ -461,7 +461,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:18:40-18:44"
+                "loc": null
               },
               "1": [
                 {
@@ -472,13 +472,13 @@
                       "type": "Ident",
                       "name": "A"
                     },
-                    "loc": "core/immut/hashset/hashset.mbti:18:45-18:46"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/hashset/hashset.mbti:18:45-18:46"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/hashset/hashset.mbti:18:40-18:47"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -488,7 +488,7 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:18:3-18:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -496,21 +496,21 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:18:7-18:9"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:18:12-18:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:18:0-18:47"
+      null
     ],
     [
       {
@@ -519,11 +519,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/immut/hashset/hashset.mbti:19:18-19:19"
+            "loc": null
           },
           "name": {
             "name": "contains",
-            "loc": "core/immut/hashset/hashset.mbti:19:21-19:29"
+            "loc": null
           },
           "params": [
             {
@@ -536,7 +536,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:19:30-19:34"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -547,13 +547,13 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:19:35-19:36"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:19:35-19:36"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:19:30-19:37"
+                "loc": null
               }
             },
             {
@@ -566,10 +566,10 @@
                     "type": "Ident",
                     "name": "A"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:19:39-19:40"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/hashset/hashset.mbti:19:39-19:40"
+                "loc": null
               }
             }
           ],
@@ -582,10 +582,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:19:45-19:49"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/hashset/hashset.mbti:19:45-19:49"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -595,7 +595,7 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:19:3-19:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -603,21 +603,21 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:19:7-19:9"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:19:12-19:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:19:0-19:49"
+      null
     ],
     [
       {
@@ -626,11 +626,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/immut/hashset/hashset.mbti:20:11-20:12"
+            "loc": null
           },
           "name": {
             "name": "difference",
-            "loc": "core/immut/hashset/hashset.mbti:20:14-20:24"
+            "loc": null
           },
           "params": [
             {
@@ -643,7 +643,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:20:25-20:29"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -654,13 +654,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:20:30-20:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:20:30-20:31"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:20:25-20:32"
+                "loc": null
               }
             },
             {
@@ -673,7 +673,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:20:34-20:38"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -684,13 +684,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:20:39-20:40"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:20:39-20:40"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:20:34-20:41"
+                "loc": null
               }
             }
           ],
@@ -703,7 +703,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:20:46-20:50"
+                "loc": null
               },
               "1": [
                 {
@@ -714,13 +714,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/immut/hashset/hashset.mbti:20:51-20:52"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/hashset/hashset.mbti:20:51-20:52"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/hashset/hashset.mbti:20:46-20:53"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -730,7 +730,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/immut/hashset/hashset.mbti:20:3-20:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -738,14 +738,14 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:20:7-20:9"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:20:0-20:53"
+      null
     ],
     [
       {
@@ -754,11 +754,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/immut/hashset/hashset.mbti:21:6-21:7"
+            "loc": null
           },
           "name": {
             "name": "each",
-            "loc": "core/immut/hashset/hashset.mbti:21:9-21:13"
+            "loc": null
           },
           "params": [
             {
@@ -771,7 +771,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:21:14-21:18"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -782,13 +782,13 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:21:19-21:20"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:21:19-21:20"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:21:14-21:21"
+                "loc": null
               }
             },
             {
@@ -804,10 +804,10 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:21:24-21:25"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:21:24-21:25"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -818,10 +818,10 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/immut/hashset/hashset.mbti:21:30-21:34"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/hashset/hashset.mbti:21:30-21:34"
+                  "loc": null
                 },
                 "err": {
                   "type": "MaybeError",
@@ -833,15 +833,15 @@
                         "type": "Ident",
                         "name": "Error"
                       },
-                      "loc": "<no location>:-1:0--1:0"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "<no location>:-1:0--1:0"
+                    "loc": null
                   },
                   "is_old_syntax": false
                 },
                 "is_async": false,
-                "loc": "core/immut/hashset/hashset.mbti:21:23-21:41"
+                "loc": null
               }
             }
           ],
@@ -854,10 +854,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:21:46-21:50"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/hashset/hashset.mbti:21:46-21:50"
+              "loc": null
             },
             {
               "type": "MaybeError",
@@ -869,10 +869,10 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "<no location>:-1:0--1:0"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "<no location>:-1:0--1:0"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -881,14 +881,14 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:21:3-21:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:21:0-21:57"
+      null
     ],
     [
       {
@@ -897,11 +897,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/immut/hashset/hashset.mbti:22:11-22:12"
+            "loc": null
           },
           "name": {
             "name": "intersection",
-            "loc": "core/immut/hashset/hashset.mbti:22:14-22:26"
+            "loc": null
           },
           "params": [
             {
@@ -914,7 +914,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:22:27-22:31"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -925,13 +925,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:22:32-22:33"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:22:32-22:33"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:22:27-22:34"
+                "loc": null
               }
             },
             {
@@ -944,7 +944,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:22:36-22:40"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -955,13 +955,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:22:41-22:42"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:22:41-22:42"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:22:36-22:43"
+                "loc": null
               }
             }
           ],
@@ -974,7 +974,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:22:48-22:52"
+                "loc": null
               },
               "1": [
                 {
@@ -985,13 +985,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/immut/hashset/hashset.mbti:22:53-22:54"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/hashset/hashset.mbti:22:53-22:54"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/hashset/hashset.mbti:22:48-22:55"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1001,7 +1001,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/immut/hashset/hashset.mbti:22:3-22:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1009,14 +1009,14 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:22:7-22:9"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:22:0-22:55"
+      null
     ],
     [
       {
@@ -1025,11 +1025,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/immut/hashset/hashset.mbti:23:6-23:7"
+            "loc": null
           },
           "name": {
             "name": "is_empty",
-            "loc": "core/immut/hashset/hashset.mbti:23:9-23:17"
+            "loc": null
           },
           "params": [
             {
@@ -1042,7 +1042,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:23:18-23:22"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1053,13 +1053,13 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:23:23-23:24"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:23:23-23:24"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:23:18-23:25"
+                "loc": null
               }
             }
           ],
@@ -1072,10 +1072,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:23:30-23:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/hashset/hashset.mbti:23:30-23:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1085,14 +1085,14 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:23:3-23:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:23:0-23:34"
+      null
     ],
     [
       {
@@ -1101,11 +1101,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/immut/hashset/hashset.mbti:24:6-24:7"
+            "loc": null
           },
           "name": {
             "name": "iter",
-            "loc": "core/immut/hashset/hashset.mbti:24:9-24:13"
+            "loc": null
           },
           "params": [
             {
@@ -1118,7 +1118,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:24:14-24:18"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1129,13 +1129,13 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:24:19-24:20"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:24:19-24:20"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:24:14-24:21"
+                "loc": null
               }
             }
           ],
@@ -1148,7 +1148,7 @@
                   "type": "Ident",
                   "name": "Iter"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:24:26-24:30"
+                "loc": null
               },
               "1": [
                 {
@@ -1159,13 +1159,13 @@
                       "type": "Ident",
                       "name": "A"
                     },
-                    "loc": "core/immut/hashset/hashset.mbti:24:31-24:32"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/hashset/hashset.mbti:24:31-24:32"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/hashset/hashset.mbti:24:26-24:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1175,14 +1175,14 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:24:3-24:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:24:0-24:33"
+      null
     ],
     [
       {
@@ -1191,11 +1191,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/immut/hashset/hashset.mbti:25:18-25:19"
+            "loc": null
           },
           "name": {
             "name": "remove",
-            "loc": "core/immut/hashset/hashset.mbti:25:21-25:27"
+            "loc": null
           },
           "params": [
             {
@@ -1208,7 +1208,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:25:28-25:32"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1219,13 +1219,13 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:25:33-25:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:25:33-25:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:25:28-25:35"
+                "loc": null
               }
             },
             {
@@ -1238,10 +1238,10 @@
                     "type": "Ident",
                     "name": "A"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:25:37-25:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/hashset/hashset.mbti:25:37-25:38"
+                "loc": null
               }
             }
           ],
@@ -1254,7 +1254,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:25:43-25:47"
+                "loc": null
               },
               "1": [
                 {
@@ -1265,13 +1265,13 @@
                       "type": "Ident",
                       "name": "A"
                     },
-                    "loc": "core/immut/hashset/hashset.mbti:25:48-25:49"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/hashset/hashset.mbti:25:48-25:49"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/hashset/hashset.mbti:25:43-25:50"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1281,7 +1281,7 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:25:3-25:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1289,21 +1289,21 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:25:7-25:9"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:25:12-25:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:25:0-25:50"
+      null
     ],
     [
       {
@@ -1312,11 +1312,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/immut/hashset/hashset.mbti:26:6-26:7"
+            "loc": null
           },
           "name": {
             "name": "size",
-            "loc": "core/immut/hashset/hashset.mbti:26:9-26:13"
+            "loc": null
           },
           "params": [
             {
@@ -1329,7 +1329,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:26:14-26:18"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1340,13 +1340,13 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:26:19-26:20"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:26:19-26:20"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:26:14-26:21"
+                "loc": null
               }
             }
           ],
@@ -1359,10 +1359,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:26:26-26:29"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/hashset/hashset.mbti:26:26-26:29"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1372,14 +1372,14 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:26:3-26:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:26:0-26:29"
+      null
     ],
     [
       {
@@ -1388,11 +1388,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/immut/hashset/hashset.mbti:27:11-27:12"
+            "loc": null
           },
           "name": {
             "name": "union",
-            "loc": "core/immut/hashset/hashset.mbti:27:14-27:19"
+            "loc": null
           },
           "params": [
             {
@@ -1405,7 +1405,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:27:20-27:24"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1416,13 +1416,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:27:25-27:26"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:27:25-27:26"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:27:20-27:27"
+                "loc": null
               }
             },
             {
@@ -1435,7 +1435,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:27:29-27:33"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1446,13 +1446,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/immut/hashset/hashset.mbti:27:34-27:35"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/hashset/hashset.mbti:27:34-27:35"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/hashset/hashset.mbti:27:29-27:36"
+                "loc": null
               }
             }
           ],
@@ -1465,7 +1465,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/hashset/hashset.mbti:27:41-27:45"
+                "loc": null
               },
               "1": [
                 {
@@ -1476,13 +1476,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/immut/hashset/hashset.mbti:27:46-27:47"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/hashset/hashset.mbti:27:46-27:47"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/hashset/hashset.mbti:27:41-27:48"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1492,7 +1492,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/immut/hashset/hashset.mbti:27:3-27:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1500,14 +1500,14 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:27:7-27:9"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/immut/hashset/hashset.mbti:27:0-27:48"
+      null
     ],
     [
       {
@@ -1518,7 +1518,7 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:28:5-28:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1526,7 +1526,7 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:28:9-28:11"
+                  "loc": null
                 }
               ]
             }
@@ -1539,7 +1539,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/immut/hashset/hashset.mbti:28:20-28:21"
+              "loc": null
             },
             "1": [
               {
@@ -1550,24 +1550,24 @@
                     "type": "Ident",
                     "name": "A"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:28:22-28:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/hashset/hashset.mbti:28:22-28:23"
+                "loc": null
               }
             ],
-            "loc": "core/immut/hashset/hashset.mbti:28:20-28:24"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Eq"
             },
-            "loc": "core/immut/hashset/hashset.mbti:28:13-28:15"
+            "loc": null
           }
         }
       },
-      "core/immut/hashset/hashset.mbti:28:0-28:24"
+      null
     ],
     [
       {
@@ -1578,7 +1578,7 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:29:5-29:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1586,7 +1586,7 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:29:9-29:13"
+                  "loc": null
                 }
               ]
             }
@@ -1599,7 +1599,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/immut/hashset/hashset.mbti:29:24-29:25"
+              "loc": null
             },
             "1": [
               {
@@ -1610,24 +1610,24 @@
                     "type": "Ident",
                     "name": "A"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:29:26-29:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/hashset/hashset.mbti:29:26-29:27"
+                "loc": null
               }
             ],
-            "loc": "core/immut/hashset/hashset.mbti:29:24-29:28"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Hash"
             },
-            "loc": "core/immut/hashset/hashset.mbti:29:15-29:19"
+            "loc": null
           }
         }
       },
-      "core/immut/hashset/hashset.mbti:29:0-29:28"
+      null
     ],
     [
       {
@@ -1638,7 +1638,7 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/hashset/hashset.mbti:30:5-30:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1646,7 +1646,7 @@
                     "type": "Ident",
                     "name": "Show"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:30:9-30:13"
+                  "loc": null
                 }
               ]
             }
@@ -1659,7 +1659,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/immut/hashset/hashset.mbti:30:24-30:25"
+              "loc": null
             },
             "1": [
               {
@@ -1670,24 +1670,24 @@
                     "type": "Ident",
                     "name": "A"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:30:26-30:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/hashset/hashset.mbti:30:26-30:27"
+                "loc": null
               }
             ],
-            "loc": "core/immut/hashset/hashset.mbti:30:24-30:28"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Show"
             },
-            "loc": "core/immut/hashset/hashset.mbti:30:15-30:19"
+            "loc": null
           }
         }
       },
-      "core/immut/hashset/hashset.mbti:30:0-30:28"
+      null
     ],
     [
       {
@@ -1698,7 +1698,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/immut/hashset/hashset.mbti:31:5-31:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1706,22 +1706,22 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:31:9-31:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:31:14-31:18"
+                  "loc": null
                 },
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "quickcheck",
-                    "name": "Arbitrary"
+                    "id": "Arbitrary"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:31:21-31:42"
+                  "loc": null
                 }
               ]
             }
@@ -1734,7 +1734,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/immut/hashset/hashset.mbti:31:70-31:71"
+              "loc": null
             },
             "1": [
               {
@@ -1745,25 +1745,25 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/immut/hashset/hashset.mbti:31:72-31:73"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/hashset/hashset.mbti:31:72-31:73"
+                "loc": null
               }
             ],
-            "loc": "core/immut/hashset/hashset.mbti:31:70-31:74"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "quickcheck",
-              "name": "Arbitrary"
+              "id": "Arbitrary"
             },
-            "loc": "core/immut/hashset/hashset.mbti:31:44-31:65"
+            "loc": null
           }
         }
       },
-      "core/immut/hashset/hashset.mbti:31:0-31:74"
+      null
     ]
   ]
 }

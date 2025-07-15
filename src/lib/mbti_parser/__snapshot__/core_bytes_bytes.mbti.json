@@ -9,7 +9,7 @@
           "attr": [],
           "name": {
             "name": "default",
-            "loc": "core/bytes/bytes.mbti:4:3-4:10"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -21,10 +21,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bytes/bytes.mbti:4:16-4:21"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:4:16-4:21"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -33,7 +33,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:4:0-4:21"
+      null
     ],
     [
       {
@@ -42,7 +42,7 @@
           "attr": [],
           "name": {
             "name": "from_array",
-            "loc": "core/bytes/bytes.mbti:6:3-6:13"
+            "loc": null
           },
           "params": [
             {
@@ -55,7 +55,7 @@
                     "type": "Ident",
                     "name": "Array"
                   },
-                  "loc": "core/bytes/bytes.mbti:6:14-6:19"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -66,13 +66,13 @@
                         "type": "Ident",
                         "name": "Byte"
                       },
-                      "loc": "core/bytes/bytes.mbti:6:20-6:24"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/bytes/bytes.mbti:6:20-6:24"
+                    "loc": null
                   }
                 ],
-                "loc": "core/bytes/bytes.mbti:6:14-6:25"
+                "loc": null
               }
             }
           ],
@@ -85,10 +85,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bytes/bytes.mbti:6:30-6:35"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:6:30-6:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -97,7 +97,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:6:0-6:35"
+      null
     ],
     [
       {
@@ -106,7 +106,7 @@
           "attr": [],
           "name": {
             "name": "from_fixedarray",
-            "loc": "core/bytes/bytes.mbti:8:3-8:18"
+            "loc": null
           },
           "params": [
             {
@@ -119,7 +119,7 @@
                     "type": "Ident",
                     "name": "FixedArray"
                   },
-                  "loc": "core/bytes/bytes.mbti:8:19-8:29"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -130,13 +130,13 @@
                         "type": "Ident",
                         "name": "Byte"
                       },
-                      "loc": "core/bytes/bytes.mbti:8:30-8:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/bytes/bytes.mbti:8:30-8:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/bytes/bytes.mbti:8:19-8:35"
+                "loc": null
               }
             },
             {
@@ -144,7 +144,7 @@
               "0": {
                 "type": "Label",
                 "name": "len",
-                "loc": "core/bytes/bytes.mbti:8:37-8:40"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -154,10 +154,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bytes/bytes.mbti:8:44-8:47"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:8:44-8:47"
+                "loc": null
               }
             }
           ],
@@ -170,10 +170,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bytes/bytes.mbti:8:52-8:57"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:8:52-8:57"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -182,7 +182,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:8:0-8:57"
+      null
     ],
     [
       {
@@ -191,7 +191,7 @@
           "attr": [],
           "name": {
             "name": "from_iter",
-            "loc": "core/bytes/bytes.mbti:10:3-10:12"
+            "loc": null
           },
           "params": [
             {
@@ -204,7 +204,7 @@
                     "type": "Ident",
                     "name": "Iter"
                   },
-                  "loc": "core/bytes/bytes.mbti:10:13-10:17"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -215,13 +215,13 @@
                         "type": "Ident",
                         "name": "Byte"
                       },
-                      "loc": "core/bytes/bytes.mbti:10:18-10:22"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/bytes/bytes.mbti:10:18-10:22"
+                    "loc": null
                   }
                 ],
-                "loc": "core/bytes/bytes.mbti:10:13-10:23"
+                "loc": null
               }
             }
           ],
@@ -234,10 +234,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bytes/bytes.mbti:10:28-10:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:10:28-10:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -246,7 +246,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:10:0-10:33"
+      null
     ],
     [
       {
@@ -255,7 +255,7 @@
           "attr": [],
           "name": {
             "name": "of",
-            "loc": "core/bytes/bytes.mbti:12:3-12:5"
+            "loc": null
           },
           "params": [
             {
@@ -268,7 +268,7 @@
                     "type": "Ident",
                     "name": "FixedArray"
                   },
-                  "loc": "core/bytes/bytes.mbti:12:6-12:16"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -279,13 +279,13 @@
                         "type": "Ident",
                         "name": "Byte"
                       },
-                      "loc": "core/bytes/bytes.mbti:12:17-12:21"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/bytes/bytes.mbti:12:17-12:21"
+                    "loc": null
                   }
                 ],
-                "loc": "core/bytes/bytes.mbti:12:6-12:22"
+                "loc": null
               }
             }
           ],
@@ -298,10 +298,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bytes/bytes.mbti:12:27-12:32"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:12:27-12:32"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -310,7 +310,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:12:0-12:32"
+      null
     ],
     [
       {
@@ -318,7 +318,7 @@
         "0": {
           "name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:15:5-15:9"
+            "loc": null
           },
           "type_params": [],
           "components": {
@@ -329,7 +329,7 @@
           }
         }
       },
-      "core/bytes/bytes.mbti:15:0-15:9"
+      null
     ],
     [
       {
@@ -338,11 +338,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:16:3-16:7"
+            "loc": null
           },
           "name": {
             "name": "data",
-            "loc": "core/bytes/bytes.mbti:16:9-16:13"
+            "loc": null
           },
           "params": [
             {
@@ -355,10 +355,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:16:14-16:18"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:16:14-16:18"
+                "loc": null
               }
             }
           ],
@@ -371,10 +371,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bytes/bytes.mbti:16:23-16:28"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:16:23-16:28"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -383,7 +383,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:16:0-16:28"
+      null
     ],
     [
       {
@@ -392,11 +392,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:17:3-17:7"
+            "loc": null
           },
           "name": {
             "name": "get",
-            "loc": "core/bytes/bytes.mbti:17:9-17:12"
+            "loc": null
           },
           "params": [
             {
@@ -409,10 +409,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:17:13-17:17"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:17:13-17:17"
+                "loc": null
               }
             },
             {
@@ -425,10 +425,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bytes/bytes.mbti:17:19-17:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:17:19-17:22"
+                "loc": null
               }
             }
           ],
@@ -443,13 +443,13 @@
                     "type": "Ident",
                     "name": "Byte"
                   },
-                  "loc": "core/bytes/bytes.mbti:17:27-17:31"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:17:27-17:31"
+                "loc": null
               },
-              "loc": "core/bytes/bytes.mbti:17:27-17:32",
-              "question_loc": "core/bytes/bytes.mbti:17:31-17:32"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -458,7 +458,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:17:0-17:32"
+      null
     ],
     [
       {
@@ -467,11 +467,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:18:3-18:7"
+            "loc": null
           },
           "name": {
             "name": "iter",
-            "loc": "core/bytes/bytes.mbti:18:9-18:13"
+            "loc": null
           },
           "params": [
             {
@@ -484,10 +484,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:18:14-18:18"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:18:14-18:18"
+                "loc": null
               }
             }
           ],
@@ -500,7 +500,7 @@
                   "type": "Ident",
                   "name": "Iter"
                 },
-                "loc": "core/bytes/bytes.mbti:18:23-18:27"
+                "loc": null
               },
               "1": [
                 {
@@ -511,13 +511,13 @@
                       "type": "Ident",
                       "name": "Byte"
                     },
-                    "loc": "core/bytes/bytes.mbti:18:28-18:32"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/bytes/bytes.mbti:18:28-18:32"
+                  "loc": null
                 }
               ],
-              "loc": "core/bytes/bytes.mbti:18:23-18:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -526,7 +526,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:18:0-18:33"
+      null
     ],
     [
       {
@@ -535,11 +535,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:19:3-19:7"
+            "loc": null
           },
           "name": {
             "name": "length",
-            "loc": "core/bytes/bytes.mbti:19:9-19:15"
+            "loc": null
           },
           "params": [
             {
@@ -552,10 +552,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:19:16-19:20"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:19:16-19:20"
+                "loc": null
               }
             }
           ],
@@ -568,10 +568,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/bytes/bytes.mbti:19:25-19:28"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:19:25-19:28"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -580,7 +580,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:19:0-19:28"
+      null
     ],
     [
       {
@@ -589,11 +589,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:20:3-20:7"
+            "loc": null
           },
           "name": {
             "name": "op_as_view",
-            "loc": "core/bytes/bytes.mbti:20:9-20:19"
+            "loc": null
           },
           "params": [
             {
@@ -606,10 +606,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:20:20-20:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:20:20-20:24"
+                "loc": null
               }
             },
             {
@@ -617,7 +617,7 @@
               "0": {
                 "type": "Label",
                 "name": "start",
-                "loc": "core/bytes/bytes.mbti:20:26-20:32"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -627,10 +627,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bytes/bytes.mbti:20:35-20:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:20:35-20:38"
+                "loc": null
               }
             },
             {
@@ -638,7 +638,7 @@
               "0": {
                 "type": "Label",
                 "name": "end",
-                "loc": "core/bytes/bytes.mbti:20:45-20:48"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -648,10 +648,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bytes/bytes.mbti:20:52-20:55"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:20:52-20:55"
+                "loc": null
               }
             }
           ],
@@ -664,10 +664,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bytes/bytes.mbti:20:60-20:64"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:20:60-20:64"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -676,7 +676,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:20:0-20:64"
+      null
     ],
     [
       {
@@ -685,11 +685,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:21:3-21:7"
+            "loc": null
           },
           "name": {
             "name": "op_get",
-            "loc": "core/bytes/bytes.mbti:21:9-21:15"
+            "loc": null
           },
           "params": [
             {
@@ -702,10 +702,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:21:16-21:20"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:21:16-21:20"
+                "loc": null
               }
             },
             {
@@ -718,10 +718,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bytes/bytes.mbti:21:22-21:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:21:22-21:25"
+                "loc": null
               }
             }
           ],
@@ -734,10 +734,10 @@
                   "type": "Ident",
                   "name": "Byte"
                 },
-                "loc": "core/bytes/bytes.mbti:21:30-21:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:21:30-21:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -746,7 +746,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:21:0-21:34"
+      null
     ],
     [
       {
@@ -755,11 +755,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:22:3-22:7"
+            "loc": null
           },
           "name": {
             "name": "start_offset",
-            "loc": "core/bytes/bytes.mbti:22:9-22:21"
+            "loc": null
           },
           "params": [
             {
@@ -772,10 +772,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:22:22-22:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:22:22-22:26"
+                "loc": null
               }
             }
           ],
@@ -788,10 +788,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/bytes/bytes.mbti:22:31-22:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:22:31-22:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -800,7 +800,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:22:0-22:34"
+      null
     ],
     [
       {
@@ -809,11 +809,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:23:3-23:7"
+            "loc": null
           },
           "name": {
             "name": "to_bytes",
-            "loc": "core/bytes/bytes.mbti:23:9-23:17"
+            "loc": null
           },
           "params": [
             {
@@ -826,10 +826,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:23:18-23:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:23:18-23:22"
+                "loc": null
               }
             }
           ],
@@ -842,10 +842,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bytes/bytes.mbti:23:27-23:32"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:23:27-23:32"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -854,7 +854,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:23:0-23:32"
+      null
     ],
     [
       {
@@ -863,11 +863,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:24:3-24:7"
+            "loc": null
           },
           "name": {
             "name": "to_double_be",
-            "loc": "core/bytes/bytes.mbti:24:9-24:21"
+            "loc": null
           },
           "params": [
             {
@@ -880,10 +880,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:24:22-24:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:24:22-24:26"
+                "loc": null
               }
             }
           ],
@@ -896,10 +896,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/bytes/bytes.mbti:24:31-24:37"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:24:31-24:37"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -908,7 +908,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:24:0-24:37"
+      null
     ],
     [
       {
@@ -917,11 +917,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:25:3-25:7"
+            "loc": null
           },
           "name": {
             "name": "to_double_le",
-            "loc": "core/bytes/bytes.mbti:25:9-25:21"
+            "loc": null
           },
           "params": [
             {
@@ -934,10 +934,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:25:22-25:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:25:22-25:26"
+                "loc": null
               }
             }
           ],
@@ -950,10 +950,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/bytes/bytes.mbti:25:31-25:37"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:25:31-25:37"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -962,7 +962,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:25:0-25:37"
+      null
     ],
     [
       {
@@ -971,11 +971,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:26:3-26:7"
+            "loc": null
           },
           "name": {
             "name": "to_float_be",
-            "loc": "core/bytes/bytes.mbti:26:9-26:20"
+            "loc": null
           },
           "params": [
             {
@@ -988,10 +988,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:26:21-26:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:26:21-26:25"
+                "loc": null
               }
             }
           ],
@@ -1004,10 +1004,10 @@
                   "type": "Ident",
                   "name": "Float"
                 },
-                "loc": "core/bytes/bytes.mbti:26:30-26:35"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:26:30-26:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1016,7 +1016,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:26:0-26:35"
+      null
     ],
     [
       {
@@ -1025,11 +1025,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:27:3-27:7"
+            "loc": null
           },
           "name": {
             "name": "to_float_le",
-            "loc": "core/bytes/bytes.mbti:27:9-27:20"
+            "loc": null
           },
           "params": [
             {
@@ -1042,10 +1042,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:27:21-27:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:27:21-27:25"
+                "loc": null
               }
             }
           ],
@@ -1058,10 +1058,10 @@
                   "type": "Ident",
                   "name": "Float"
                 },
-                "loc": "core/bytes/bytes.mbti:27:30-27:35"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:27:30-27:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1070,7 +1070,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:27:0-27:35"
+      null
     ],
     [
       {
@@ -1079,11 +1079,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:28:3-28:7"
+            "loc": null
           },
           "name": {
             "name": "to_int64_be",
-            "loc": "core/bytes/bytes.mbti:28:9-28:20"
+            "loc": null
           },
           "params": [
             {
@@ -1096,10 +1096,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:28:21-28:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:28:21-28:25"
+                "loc": null
               }
             }
           ],
@@ -1112,10 +1112,10 @@
                   "type": "Ident",
                   "name": "Int64"
                 },
-                "loc": "core/bytes/bytes.mbti:28:30-28:35"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:28:30-28:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1124,7 +1124,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:28:0-28:35"
+      null
     ],
     [
       {
@@ -1133,11 +1133,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:29:3-29:7"
+            "loc": null
           },
           "name": {
             "name": "to_int64_le",
-            "loc": "core/bytes/bytes.mbti:29:9-29:20"
+            "loc": null
           },
           "params": [
             {
@@ -1150,10 +1150,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:29:21-29:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:29:21-29:25"
+                "loc": null
               }
             }
           ],
@@ -1166,10 +1166,10 @@
                   "type": "Ident",
                   "name": "Int64"
                 },
-                "loc": "core/bytes/bytes.mbti:29:30-29:35"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:29:30-29:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1178,7 +1178,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:29:0-29:35"
+      null
     ],
     [
       {
@@ -1187,11 +1187,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:30:3-30:7"
+            "loc": null
           },
           "name": {
             "name": "to_int_be",
-            "loc": "core/bytes/bytes.mbti:30:9-30:18"
+            "loc": null
           },
           "params": [
             {
@@ -1204,10 +1204,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:30:19-30:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:30:19-30:23"
+                "loc": null
               }
             }
           ],
@@ -1220,10 +1220,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/bytes/bytes.mbti:30:28-30:31"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:30:28-30:31"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1232,7 +1232,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:30:0-30:31"
+      null
     ],
     [
       {
@@ -1241,11 +1241,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:31:3-31:7"
+            "loc": null
           },
           "name": {
             "name": "to_int_le",
-            "loc": "core/bytes/bytes.mbti:31:9-31:18"
+            "loc": null
           },
           "params": [
             {
@@ -1258,10 +1258,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:31:19-31:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:31:19-31:23"
+                "loc": null
               }
             }
           ],
@@ -1274,10 +1274,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/bytes/bytes.mbti:31:28-31:31"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:31:28-31:31"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1286,7 +1286,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:31:0-31:31"
+      null
     ],
     [
       {
@@ -1295,11 +1295,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:32:3-32:7"
+            "loc": null
           },
           "name": {
             "name": "to_uint64_be",
-            "loc": "core/bytes/bytes.mbti:32:9-32:21"
+            "loc": null
           },
           "params": [
             {
@@ -1312,10 +1312,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:32:22-32:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:32:22-32:26"
+                "loc": null
               }
             }
           ],
@@ -1328,10 +1328,10 @@
                   "type": "Ident",
                   "name": "UInt64"
                 },
-                "loc": "core/bytes/bytes.mbti:32:31-32:37"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:32:31-32:37"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1340,7 +1340,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:32:0-32:37"
+      null
     ],
     [
       {
@@ -1349,11 +1349,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:33:3-33:7"
+            "loc": null
           },
           "name": {
             "name": "to_uint64_le",
-            "loc": "core/bytes/bytes.mbti:33:9-33:21"
+            "loc": null
           },
           "params": [
             {
@@ -1366,10 +1366,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:33:22-33:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:33:22-33:26"
+                "loc": null
               }
             }
           ],
@@ -1382,10 +1382,10 @@
                   "type": "Ident",
                   "name": "UInt64"
                 },
-                "loc": "core/bytes/bytes.mbti:33:31-33:37"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:33:31-33:37"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1394,7 +1394,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:33:0-33:37"
+      null
     ],
     [
       {
@@ -1403,11 +1403,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:34:3-34:7"
+            "loc": null
           },
           "name": {
             "name": "to_uint_be",
-            "loc": "core/bytes/bytes.mbti:34:9-34:19"
+            "loc": null
           },
           "params": [
             {
@@ -1420,10 +1420,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:34:20-34:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:34:20-34:24"
+                "loc": null
               }
             }
           ],
@@ -1436,10 +1436,10 @@
                   "type": "Ident",
                   "name": "UInt"
                 },
-                "loc": "core/bytes/bytes.mbti:34:29-34:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:34:29-34:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1448,7 +1448,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:34:0-34:33"
+      null
     ],
     [
       {
@@ -1457,11 +1457,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:35:3-35:7"
+            "loc": null
           },
           "name": {
             "name": "to_uint_le",
-            "loc": "core/bytes/bytes.mbti:35:9-35:19"
+            "loc": null
           },
           "params": [
             {
@@ -1474,10 +1474,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:35:20-35:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:35:20-35:24"
+                "loc": null
               }
             }
           ],
@@ -1490,10 +1490,10 @@
                   "type": "Ident",
                   "name": "UInt"
                 },
-                "loc": "core/bytes/bytes.mbti:35:29-35:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:35:29-35:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1502,7 +1502,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:35:0-35:33"
+      null
     ],
     [
       {
@@ -1511,11 +1511,11 @@
           "attr": [],
           "type_name": {
             "name": "View",
-            "loc": "core/bytes/bytes.mbti:36:3-36:7"
+            "loc": null
           },
           "name": {
             "name": "unsafe_get",
-            "loc": "core/bytes/bytes.mbti:36:9-36:19"
+            "loc": null
           },
           "params": [
             {
@@ -1528,10 +1528,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bytes/bytes.mbti:36:20-36:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:36:20-36:24"
+                "loc": null
               }
             },
             {
@@ -1544,10 +1544,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bytes/bytes.mbti:36:26-36:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:36:26-36:29"
+                "loc": null
               }
             }
           ],
@@ -1560,10 +1560,10 @@
                   "type": "Ident",
                   "name": "Byte"
                 },
-                "loc": "core/bytes/bytes.mbti:36:34-36:38"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:36:34-36:38"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1572,7 +1572,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:36:0-36:38"
+      null
     ],
     [
       {
@@ -1588,21 +1588,21 @@
                 "type": "Ident",
                 "name": "View"
               },
-              "loc": "core/bytes/bytes.mbti:37:17-37:21"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bytes/bytes.mbti:37:17-37:21"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Compare"
             },
-            "loc": "core/bytes/bytes.mbti:37:5-37:12"
+            "loc": null
           }
         }
       },
-      "core/bytes/bytes.mbti:37:0-37:21"
+      null
     ],
     [
       {
@@ -1618,21 +1618,21 @@
                 "type": "Ident",
                 "name": "View"
               },
-              "loc": "core/bytes/bytes.mbti:38:12-38:16"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bytes/bytes.mbti:38:12-38:16"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Eq"
             },
-            "loc": "core/bytes/bytes.mbti:38:5-38:7"
+            "loc": null
           }
         }
       },
-      "core/bytes/bytes.mbti:38:0-38:16"
+      null
     ],
     [
       {
@@ -1648,21 +1648,21 @@
                 "type": "Ident",
                 "name": "View"
               },
-              "loc": "core/bytes/bytes.mbti:39:14-39:18"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bytes/bytes.mbti:39:14-39:18"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Show"
             },
-            "loc": "core/bytes/bytes.mbti:39:5-39:9"
+            "loc": null
           }
         }
       },
-      "core/bytes/bytes.mbti:39:0-39:18"
+      null
     ],
     [
       {
@@ -1671,11 +1671,11 @@
           "attr": [],
           "type_name": {
             "name": "Bytes",
-            "loc": "core/bytes/bytes.mbti:41:3-41:8"
+            "loc": null
           },
           "name": {
             "name": "from_array",
-            "loc": "core/bytes/bytes.mbti:41:10-41:20"
+            "loc": null
           },
           "params": [
             {
@@ -1688,7 +1688,7 @@
                     "type": "Ident",
                     "name": "Array"
                   },
-                  "loc": "core/bytes/bytes.mbti:41:21-41:26"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1699,13 +1699,13 @@
                         "type": "Ident",
                         "name": "Byte"
                       },
-                      "loc": "core/bytes/bytes.mbti:41:27-41:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/bytes/bytes.mbti:41:27-41:31"
+                    "loc": null
                   }
                 ],
-                "loc": "core/bytes/bytes.mbti:41:21-41:32"
+                "loc": null
               }
             }
           ],
@@ -1718,10 +1718,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bytes/bytes.mbti:41:37-41:42"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:41:37-41:42"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1730,7 +1730,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:41:0-41:42"
+      null
     ],
     [
       {
@@ -1739,11 +1739,11 @@
           "attr": [],
           "type_name": {
             "name": "Bytes",
-            "loc": "core/bytes/bytes.mbti:42:3-42:8"
+            "loc": null
           },
           "name": {
             "name": "from_fixedarray",
-            "loc": "core/bytes/bytes.mbti:42:10-42:25"
+            "loc": null
           },
           "params": [
             {
@@ -1756,7 +1756,7 @@
                     "type": "Ident",
                     "name": "FixedArray"
                   },
-                  "loc": "core/bytes/bytes.mbti:42:26-42:36"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1767,13 +1767,13 @@
                         "type": "Ident",
                         "name": "Byte"
                       },
-                      "loc": "core/bytes/bytes.mbti:42:37-42:41"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/bytes/bytes.mbti:42:37-42:41"
+                    "loc": null
                   }
                 ],
-                "loc": "core/bytes/bytes.mbti:42:26-42:42"
+                "loc": null
               }
             },
             {
@@ -1781,7 +1781,7 @@
               "0": {
                 "type": "Label",
                 "name": "len",
-                "loc": "core/bytes/bytes.mbti:42:44-42:47"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -1791,10 +1791,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bytes/bytes.mbti:42:51-42:54"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:42:51-42:54"
+                "loc": null
               }
             }
           ],
@@ -1807,10 +1807,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bytes/bytes.mbti:42:59-42:64"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:42:59-42:64"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1819,7 +1819,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:42:0-42:64"
+      null
     ],
     [
       {
@@ -1828,11 +1828,11 @@
           "attr": [],
           "type_name": {
             "name": "Bytes",
-            "loc": "core/bytes/bytes.mbti:43:3-43:8"
+            "loc": null
           },
           "name": {
             "name": "from_iter",
-            "loc": "core/bytes/bytes.mbti:43:10-43:19"
+            "loc": null
           },
           "params": [
             {
@@ -1845,7 +1845,7 @@
                     "type": "Ident",
                     "name": "Iter"
                   },
-                  "loc": "core/bytes/bytes.mbti:43:20-43:24"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1856,13 +1856,13 @@
                         "type": "Ident",
                         "name": "Byte"
                       },
-                      "loc": "core/bytes/bytes.mbti:43:25-43:29"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/bytes/bytes.mbti:43:25-43:29"
+                    "loc": null
                   }
                 ],
-                "loc": "core/bytes/bytes.mbti:43:20-43:30"
+                "loc": null
               }
             }
           ],
@@ -1875,10 +1875,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bytes/bytes.mbti:43:35-43:40"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:43:35-43:40"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1887,7 +1887,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:43:0-43:40"
+      null
     ],
     [
       {
@@ -1896,11 +1896,11 @@
           "attr": [],
           "type_name": {
             "name": "Bytes",
-            "loc": "core/bytes/bytes.mbti:44:3-44:8"
+            "loc": null
           },
           "name": {
             "name": "get",
-            "loc": "core/bytes/bytes.mbti:44:10-44:13"
+            "loc": null
           },
           "params": [
             {
@@ -1913,10 +1913,10 @@
                     "type": "Ident",
                     "name": "Bytes"
                   },
-                  "loc": "core/bytes/bytes.mbti:44:14-44:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:44:14-44:19"
+                "loc": null
               }
             },
             {
@@ -1929,10 +1929,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bytes/bytes.mbti:44:21-44:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:44:21-44:24"
+                "loc": null
               }
             }
           ],
@@ -1947,13 +1947,13 @@
                     "type": "Ident",
                     "name": "Byte"
                   },
-                  "loc": "core/bytes/bytes.mbti:44:29-44:33"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:44:29-44:33"
+                "loc": null
               },
-              "loc": "core/bytes/bytes.mbti:44:29-44:34",
-              "question_loc": "core/bytes/bytes.mbti:44:33-44:34"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -1962,7 +1962,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:44:0-44:34"
+      null
     ],
     [
       {
@@ -1971,11 +1971,11 @@
           "attr": [],
           "type_name": {
             "name": "Bytes",
-            "loc": "core/bytes/bytes.mbti:45:3-45:8"
+            "loc": null
           },
           "name": {
             "name": "iter",
-            "loc": "core/bytes/bytes.mbti:45:10-45:14"
+            "loc": null
           },
           "params": [
             {
@@ -1988,10 +1988,10 @@
                     "type": "Ident",
                     "name": "Bytes"
                   },
-                  "loc": "core/bytes/bytes.mbti:45:15-45:20"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:45:15-45:20"
+                "loc": null
               }
             }
           ],
@@ -2004,7 +2004,7 @@
                   "type": "Ident",
                   "name": "Iter"
                 },
-                "loc": "core/bytes/bytes.mbti:45:25-45:29"
+                "loc": null
               },
               "1": [
                 {
@@ -2015,13 +2015,13 @@
                       "type": "Ident",
                       "name": "Byte"
                     },
-                    "loc": "core/bytes/bytes.mbti:45:30-45:34"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/bytes/bytes.mbti:45:30-45:34"
+                  "loc": null
                 }
               ],
-              "loc": "core/bytes/bytes.mbti:45:25-45:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2030,7 +2030,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:45:0-45:35"
+      null
     ],
     [
       {
@@ -2039,11 +2039,11 @@
           "attr": [],
           "type_name": {
             "name": "Bytes",
-            "loc": "core/bytes/bytes.mbti:46:3-46:8"
+            "loc": null
           },
           "name": {
             "name": "iter2",
-            "loc": "core/bytes/bytes.mbti:46:10-46:15"
+            "loc": null
           },
           "params": [
             {
@@ -2056,10 +2056,10 @@
                     "type": "Ident",
                     "name": "Bytes"
                   },
-                  "loc": "core/bytes/bytes.mbti:46:16-46:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:46:16-46:21"
+                "loc": null
               }
             }
           ],
@@ -2072,7 +2072,7 @@
                   "type": "Ident",
                   "name": "Iter2"
                 },
-                "loc": "core/bytes/bytes.mbti:46:26-46:31"
+                "loc": null
               },
               "1": [
                 {
@@ -2083,10 +2083,10 @@
                       "type": "Ident",
                       "name": "Int"
                     },
-                    "loc": "core/bytes/bytes.mbti:46:32-46:35"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/bytes/bytes.mbti:46:32-46:35"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -2096,13 +2096,13 @@
                       "type": "Ident",
                       "name": "Byte"
                     },
-                    "loc": "core/bytes/bytes.mbti:46:37-46:41"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/bytes/bytes.mbti:46:37-46:41"
+                  "loc": null
                 }
               ],
-              "loc": "core/bytes/bytes.mbti:46:26-46:42"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2111,7 +2111,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:46:0-46:42"
+      null
     ],
     [
       {
@@ -2120,11 +2120,11 @@
           "attr": [],
           "type_name": {
             "name": "Bytes",
-            "loc": "core/bytes/bytes.mbti:47:3-47:8"
+            "loc": null
           },
           "name": {
             "name": "of",
-            "loc": "core/bytes/bytes.mbti:47:10-47:12"
+            "loc": null
           },
           "params": [
             {
@@ -2137,7 +2137,7 @@
                     "type": "Ident",
                     "name": "FixedArray"
                   },
-                  "loc": "core/bytes/bytes.mbti:47:13-47:23"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2148,13 +2148,13 @@
                         "type": "Ident",
                         "name": "Byte"
                       },
-                      "loc": "core/bytes/bytes.mbti:47:24-47:28"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/bytes/bytes.mbti:47:24-47:28"
+                    "loc": null
                   }
                 ],
-                "loc": "core/bytes/bytes.mbti:47:13-47:29"
+                "loc": null
               }
             }
           ],
@@ -2167,10 +2167,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bytes/bytes.mbti:47:34-47:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:47:34-47:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2179,7 +2179,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:47:0-47:39"
+      null
     ],
     [
       {
@@ -2188,11 +2188,11 @@
           "attr": [],
           "type_name": {
             "name": "Bytes",
-            "loc": "core/bytes/bytes.mbti:48:3-48:8"
+            "loc": null
           },
           "name": {
             "name": "op_as_view",
-            "loc": "core/bytes/bytes.mbti:48:10-48:20"
+            "loc": null
           },
           "params": [
             {
@@ -2205,10 +2205,10 @@
                     "type": "Ident",
                     "name": "Bytes"
                   },
-                  "loc": "core/bytes/bytes.mbti:48:21-48:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:48:21-48:26"
+                "loc": null
               }
             },
             {
@@ -2216,7 +2216,7 @@
               "0": {
                 "type": "Label",
                 "name": "start",
-                "loc": "core/bytes/bytes.mbti:48:28-48:34"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -2226,10 +2226,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bytes/bytes.mbti:48:37-48:40"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:48:37-48:40"
+                "loc": null
               }
             },
             {
@@ -2237,7 +2237,7 @@
               "0": {
                 "type": "Label",
                 "name": "end",
-                "loc": "core/bytes/bytes.mbti:48:47-48:50"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -2247,10 +2247,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bytes/bytes.mbti:48:54-48:57"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:48:54-48:57"
+                "loc": null
               }
             }
           ],
@@ -2263,10 +2263,10 @@
                   "type": "Ident",
                   "name": "View"
                 },
-                "loc": "core/bytes/bytes.mbti:48:62-48:66"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bytes/bytes.mbti:48:62-48:66"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2275,7 +2275,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:48:0-48:66"
+      null
     ],
     [
       {
@@ -2284,11 +2284,11 @@
           "attr": [],
           "type_name": {
             "name": "Bytes",
-            "loc": "core/bytes/bytes.mbti:49:3-49:8"
+            "loc": null
           },
           "name": {
             "name": "to_array",
-            "loc": "core/bytes/bytes.mbti:49:10-49:18"
+            "loc": null
           },
           "params": [
             {
@@ -2301,10 +2301,10 @@
                     "type": "Ident",
                     "name": "Bytes"
                   },
-                  "loc": "core/bytes/bytes.mbti:49:19-49:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:49:19-49:24"
+                "loc": null
               }
             }
           ],
@@ -2317,7 +2317,7 @@
                   "type": "Ident",
                   "name": "Array"
                 },
-                "loc": "core/bytes/bytes.mbti:49:29-49:34"
+                "loc": null
               },
               "1": [
                 {
@@ -2328,13 +2328,13 @@
                       "type": "Ident",
                       "name": "Byte"
                     },
-                    "loc": "core/bytes/bytes.mbti:49:35-49:39"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/bytes/bytes.mbti:49:35-49:39"
+                  "loc": null
                 }
               ],
-              "loc": "core/bytes/bytes.mbti:49:29-49:40"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2343,7 +2343,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:49:0-49:40"
+      null
     ],
     [
       {
@@ -2352,11 +2352,11 @@
           "attr": [],
           "type_name": {
             "name": "Bytes",
-            "loc": "core/bytes/bytes.mbti:50:3-50:8"
+            "loc": null
           },
           "name": {
             "name": "to_fixedarray",
-            "loc": "core/bytes/bytes.mbti:50:10-50:23"
+            "loc": null
           },
           "params": [
             {
@@ -2369,10 +2369,10 @@
                     "type": "Ident",
                     "name": "Bytes"
                   },
-                  "loc": "core/bytes/bytes.mbti:50:24-50:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:50:24-50:29"
+                "loc": null
               }
             },
             {
@@ -2380,7 +2380,7 @@
               "0": {
                 "type": "Label",
                 "name": "len",
-                "loc": "core/bytes/bytes.mbti:50:31-50:34"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -2390,10 +2390,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bytes/bytes.mbti:50:38-50:41"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bytes/bytes.mbti:50:38-50:41"
+                "loc": null
               }
             }
           ],
@@ -2406,7 +2406,7 @@
                   "type": "Ident",
                   "name": "FixedArray"
                 },
-                "loc": "core/bytes/bytes.mbti:50:46-50:56"
+                "loc": null
               },
               "1": [
                 {
@@ -2417,13 +2417,13 @@
                       "type": "Ident",
                       "name": "Byte"
                     },
-                    "loc": "core/bytes/bytes.mbti:50:57-50:61"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/bytes/bytes.mbti:50:57-50:61"
+                  "loc": null
                 }
               ],
-              "loc": "core/bytes/bytes.mbti:50:46-50:62"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2432,7 +2432,7 @@
           "type_params": []
         }
       },
-      "core/bytes/bytes.mbti:50:0-50:62"
+      null
     ],
     [
       {
@@ -2448,21 +2448,21 @@
                 "type": "Ident",
                 "name": "Bytes"
               },
-              "loc": "core/bytes/bytes.mbti:51:13-51:18"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bytes/bytes.mbti:51:13-51:18"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Add"
             },
-            "loc": "core/bytes/bytes.mbti:51:5-51:8"
+            "loc": null
           }
         }
       },
-      "core/bytes/bytes.mbti:51:0-51:18"
+      null
     ],
     [
       {
@@ -2478,21 +2478,21 @@
                 "type": "Ident",
                 "name": "Bytes"
               },
-              "loc": "core/bytes/bytes.mbti:52:17-52:22"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bytes/bytes.mbti:52:17-52:22"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Default"
             },
-            "loc": "core/bytes/bytes.mbti:52:5-52:12"
+            "loc": null
           }
         }
       },
-      "core/bytes/bytes.mbti:52:0-52:22"
+      null
     ],
     [
       {
@@ -2508,21 +2508,21 @@
                 "type": "Ident",
                 "name": "Bytes"
               },
-              "loc": "core/bytes/bytes.mbti:53:14-53:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bytes/bytes.mbti:53:14-53:19"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Hash"
             },
-            "loc": "core/bytes/bytes.mbti:53:5-53:9"
+            "loc": null
           }
         }
       },
-      "core/bytes/bytes.mbti:53:0-53:19"
+      null
     ]
   ]
 }

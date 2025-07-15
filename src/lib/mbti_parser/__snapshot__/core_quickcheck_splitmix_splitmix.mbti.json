@@ -9,7 +9,7 @@
           "attr": [],
           "name": {
             "name": "new",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:4:3-4:6"
+            "loc": null
           },
           "params": [
             {
@@ -17,7 +17,7 @@
               "0": {
                 "type": "Label",
                 "name": "seed",
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:4:7-4:12"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -27,10 +27,10 @@
                     "type": "Ident",
                     "name": "UInt64"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:4:15-4:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:4:15-4:21"
+                "loc": null
               }
             }
           ],
@@ -43,10 +43,10 @@
                   "type": "Ident",
                   "name": "RandomState"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:4:31-4:42"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:4:31-4:42"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -55,7 +55,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:4:0-4:42"
+      null
     ],
     [
       {
@@ -63,7 +63,7 @@
         "0": {
           "name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:7:5-7:16"
+            "loc": null
           },
           "type_params": [],
           "components": {
@@ -74,7 +74,7 @@
           }
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:7:0-7:16"
+      null
     ],
     [
       {
@@ -83,11 +83,11 @@
           "attr": [],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:8:3-8:14"
+            "loc": null
           },
           "name": {
             "name": "clone",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:8:16-8:21"
+            "loc": null
           },
           "params": [
             {
@@ -100,10 +100,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:8:22-8:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:8:22-8:26"
+                "loc": null
               }
             }
           ],
@@ -116,10 +116,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:8:31-8:35"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:8:31-8:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -128,7 +128,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:8:0-8:35"
+      null
     ],
     [
       {
@@ -143,11 +143,11 @@
           ],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:10:3-10:14"
+            "loc": null
           },
           "name": {
             "name": "new",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:10:16-10:19"
+            "loc": null
           },
           "params": [
             {
@@ -155,7 +155,7 @@
               "0": {
                 "type": "Label",
                 "name": "seed",
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:10:20-10:25"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -165,10 +165,10 @@
                     "type": "Ident",
                     "name": "UInt64"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:10:28-10:34"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:10:28-10:34"
+                "loc": null
               }
             }
           ],
@@ -181,10 +181,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:10:44-10:48"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:10:44-10:48"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -193,7 +193,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:9:0-10:48"
+      null
     ],
     [
       {
@@ -202,11 +202,11 @@
           "attr": [],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:11:3-11:14"
+            "loc": null
           },
           "name": {
             "name": "next",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:11:16-11:20"
+            "loc": null
           },
           "params": [
             {
@@ -219,10 +219,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:11:21-11:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:11:21-11:25"
+                "loc": null
               }
             }
           ],
@@ -235,10 +235,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:11:30-11:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:11:30-11:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -247,7 +247,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:11:0-11:34"
+      null
     ],
     [
       {
@@ -256,11 +256,11 @@
           "attr": [],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:12:3-12:14"
+            "loc": null
           },
           "name": {
             "name": "next_double",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:12:16-12:27"
+            "loc": null
           },
           "params": [
             {
@@ -273,10 +273,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:12:28-12:32"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:12:28-12:32"
+                "loc": null
               }
             }
           ],
@@ -289,10 +289,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:12:37-12:43"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:12:37-12:43"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -301,7 +301,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:12:0-12:43"
+      null
     ],
     [
       {
@@ -310,11 +310,11 @@
           "attr": [],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:13:3-13:14"
+            "loc": null
           },
           "name": {
             "name": "next_float",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:13:16-13:26"
+            "loc": null
           },
           "params": [
             {
@@ -327,10 +327,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:13:27-13:31"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:13:27-13:31"
+                "loc": null
               }
             }
           ],
@@ -343,10 +343,10 @@
                   "type": "Ident",
                   "name": "Float"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:13:36-13:41"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:13:36-13:41"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -355,7 +355,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:13:0-13:41"
+      null
     ],
     [
       {
@@ -364,11 +364,11 @@
           "attr": [],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:14:3-14:14"
+            "loc": null
           },
           "name": {
             "name": "next_int",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:14:16-14:24"
+            "loc": null
           },
           "params": [
             {
@@ -381,10 +381,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:14:25-14:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:14:25-14:29"
+                "loc": null
               }
             }
           ],
@@ -397,10 +397,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:14:34-14:37"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:14:34-14:37"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -409,7 +409,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:14:0-14:37"
+      null
     ],
     [
       {
@@ -418,11 +418,11 @@
           "attr": [],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:15:3-15:14"
+            "loc": null
           },
           "name": {
             "name": "next_int64",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:15:16-15:26"
+            "loc": null
           },
           "params": [
             {
@@ -435,10 +435,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:15:27-15:31"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:15:27-15:31"
+                "loc": null
               }
             }
           ],
@@ -451,10 +451,10 @@
                   "type": "Ident",
                   "name": "Int64"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:15:36-15:41"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:15:36-15:41"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -463,7 +463,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:15:0-15:41"
+      null
     ],
     [
       {
@@ -472,11 +472,11 @@
           "attr": [],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:16:3-16:14"
+            "loc": null
           },
           "name": {
             "name": "next_positive_int",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:16:16-16:33"
+            "loc": null
           },
           "params": [
             {
@@ -489,10 +489,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:16:34-16:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:16:34-16:38"
+                "loc": null
               }
             }
           ],
@@ -505,10 +505,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:16:43-16:46"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:16:43-16:46"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -517,7 +517,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:16:0-16:46"
+      null
     ],
     [
       {
@@ -526,11 +526,11 @@
           "attr": [],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:17:3-17:14"
+            "loc": null
           },
           "name": {
             "name": "next_two_uint",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:17:16-17:29"
+            "loc": null
           },
           "params": [
             {
@@ -543,10 +543,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:17:30-17:34"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:17:30-17:34"
+                "loc": null
               }
             }
           ],
@@ -562,10 +562,10 @@
                       "type": "Ident",
                       "name": "UInt"
                     },
-                    "loc": "core/quickcheck/splitmix/splitmix.mbti:17:40-17:44"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:17:40-17:44"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -575,13 +575,13 @@
                       "type": "Ident",
                       "name": "UInt"
                     },
-                    "loc": "core/quickcheck/splitmix/splitmix.mbti:17:46-17:50"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:17:46-17:50"
+                  "loc": null
                 }
               ],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:17:39-17:51"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -590,7 +590,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:17:0-17:51"
+      null
     ],
     [
       {
@@ -599,11 +599,11 @@
           "attr": [],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:18:3-18:14"
+            "loc": null
           },
           "name": {
             "name": "next_uint",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:18:16-18:25"
+            "loc": null
           },
           "params": [
             {
@@ -616,10 +616,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:18:26-18:30"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:18:26-18:30"
+                "loc": null
               }
             }
           ],
@@ -632,10 +632,10 @@
                   "type": "Ident",
                   "name": "UInt"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:18:35-18:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:18:35-18:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -644,7 +644,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:18:0-18:39"
+      null
     ],
     [
       {
@@ -653,11 +653,11 @@
           "attr": [],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:19:3-19:14"
+            "loc": null
           },
           "name": {
             "name": "next_uint64",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:19:16-19:27"
+            "loc": null
           },
           "params": [
             {
@@ -670,10 +670,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:19:28-19:32"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:19:28-19:32"
+                "loc": null
               }
             }
           ],
@@ -686,10 +686,10 @@
                   "type": "Ident",
                   "name": "UInt64"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:19:37-19:43"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:19:37-19:43"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -698,7 +698,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:19:0-19:43"
+      null
     ],
     [
       {
@@ -707,11 +707,11 @@
           "attr": [],
           "type_name": {
             "name": "RandomState",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:20:3-20:14"
+            "loc": null
           },
           "name": {
             "name": "split",
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:20:16-20:21"
+            "loc": null
           },
           "params": [
             {
@@ -724,10 +724,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/quickcheck/splitmix/splitmix.mbti:20:22-20:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:20:22-20:26"
+                "loc": null
               }
             }
           ],
@@ -740,10 +740,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/quickcheck/splitmix/splitmix.mbti:20:31-20:35"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:20:31-20:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -752,7 +752,7 @@
           "type_params": []
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:20:0-20:35"
+      null
     ],
     [
       {
@@ -768,21 +768,21 @@
                 "type": "Ident",
                 "name": "RandomState"
               },
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:21:17-21:28"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:21:17-21:28"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Default"
             },
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:21:5-21:12"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:21:0-21:28"
+      null
     ],
     [
       {
@@ -798,21 +798,21 @@
                 "type": "Ident",
                 "name": "RandomState"
               },
-              "loc": "core/quickcheck/splitmix/splitmix.mbti:22:14-22:25"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:22:14-22:25"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Show"
             },
-            "loc": "core/quickcheck/splitmix/splitmix.mbti:22:5-22:9"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/splitmix/splitmix.mbti:22:0-22:25"
+      null
     ]
   ]
 }

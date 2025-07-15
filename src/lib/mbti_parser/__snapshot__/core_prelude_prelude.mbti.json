@@ -13,7 +13,7 @@
           "attr": [],
           "name": {
             "name": "abort",
-            "loc": "core/prelude/prelude.mbti:8:6-8:11"
+            "loc": null
           },
           "params": [
             {
@@ -26,10 +26,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/prelude/prelude.mbti:8:12-8:18"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:8:12-8:18"
+                "loc": null
               }
             }
           ],
@@ -42,10 +42,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/prelude/prelude.mbti:8:23-8:24"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:8:23-8:24"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -55,14 +55,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:8:3-8:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:8:0-8:24"
+      null
     ],
     [
       {
@@ -71,7 +71,7 @@
           "attr": [],
           "name": {
             "name": "assert_eq",
-            "loc": "core/prelude/prelude.mbti:10:36-10:45"
+            "loc": null
           },
           "params": [
             {
@@ -84,10 +84,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:10:46-10:47"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:10:46-10:47"
+                "loc": null
               }
             },
             {
@@ -100,10 +100,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:10:49-10:50"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:10:49-10:50"
+                "loc": null
               }
             },
             {
@@ -111,7 +111,7 @@
               "0": {
                 "type": "Label",
                 "name": "msg",
-                "loc": "core/prelude/prelude.mbti:10:52-10:55"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -121,10 +121,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/prelude/prelude.mbti:10:59-10:65"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:10:59-10:65"
+                "loc": null
               }
             },
             {
@@ -132,21 +132,21 @@
               "0": {
                 "type": "Label",
                 "name": "loc",
-                "loc": "core/prelude/prelude.mbti:10:67-10:71"
+                "loc": null
               },
               "1": {
                 "type": "TName",
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "SourceLoc"
+                    "id": "SourceLoc"
                   },
-                  "loc": "core/prelude/prelude.mbti:10:74-10:92"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:10:74-10:92"
+                "loc": null
               }
             }
           ],
@@ -159,14 +159,14 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/prelude/prelude.mbti:10:101-10:105"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:10:101-10:105"
+              "loc": null
             },
             {
               "type": "DefaultErrorType",
-              "0": "core/prelude/prelude.mbti:10:106-10:111",
+              "0": null,
               "is_old_syntax": false
             }
           ],
@@ -174,31 +174,31 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:10:3-10:4"
+                "loc": null
               },
               "constraints": [
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "Eq"
+                    "id": "Eq"
                   },
-                  "loc": "core/prelude/prelude.mbti:10:7-10:18"
+                  "loc": null
                 },
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "Show"
+                    "id": "Show"
                   },
-                  "loc": "core/prelude/prelude.mbti:10:21-10:34"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:10:0-10:111"
+      null
     ],
     [
       {
@@ -207,7 +207,7 @@
           "attr": [],
           "name": {
             "name": "assert_false",
-            "loc": "core/prelude/prelude.mbti:12:3-12:15"
+            "loc": null
           },
           "params": [
             {
@@ -220,10 +220,10 @@
                     "type": "Ident",
                     "name": "Bool"
                   },
-                  "loc": "core/prelude/prelude.mbti:12:16-12:20"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:12:16-12:20"
+                "loc": null
               }
             },
             {
@@ -231,7 +231,7 @@
               "0": {
                 "type": "Label",
                 "name": "msg",
-                "loc": "core/prelude/prelude.mbti:12:22-12:25"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -241,10 +241,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/prelude/prelude.mbti:12:29-12:35"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:12:29-12:35"
+                "loc": null
               }
             },
             {
@@ -252,21 +252,21 @@
               "0": {
                 "type": "Label",
                 "name": "loc",
-                "loc": "core/prelude/prelude.mbti:12:37-12:41"
+                "loc": null
               },
               "1": {
                 "type": "TName",
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "SourceLoc"
+                    "id": "SourceLoc"
                   },
-                  "loc": "core/prelude/prelude.mbti:12:44-12:62"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:12:44-12:62"
+                "loc": null
               }
             }
           ],
@@ -279,21 +279,21 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/prelude/prelude.mbti:12:71-12:75"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:12:71-12:75"
+              "loc": null
             },
             {
               "type": "DefaultErrorType",
-              "0": "core/prelude/prelude.mbti:12:76-12:81",
+              "0": null,
               "is_old_syntax": false
             }
           ],
           "type_params": []
         }
       },
-      "core/prelude/prelude.mbti:12:0-12:81"
+      null
     ],
     [
       {
@@ -302,7 +302,7 @@
           "attr": [],
           "name": {
             "name": "assert_not_eq",
-            "loc": "core/prelude/prelude.mbti:14:36-14:49"
+            "loc": null
           },
           "params": [
             {
@@ -315,10 +315,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:14:50-14:51"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:14:50-14:51"
+                "loc": null
               }
             },
             {
@@ -331,10 +331,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:14:53-14:54"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:14:53-14:54"
+                "loc": null
               }
             },
             {
@@ -342,7 +342,7 @@
               "0": {
                 "type": "Label",
                 "name": "msg",
-                "loc": "core/prelude/prelude.mbti:14:56-14:59"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -352,10 +352,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/prelude/prelude.mbti:14:63-14:69"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:14:63-14:69"
+                "loc": null
               }
             },
             {
@@ -363,21 +363,21 @@
               "0": {
                 "type": "Label",
                 "name": "loc",
-                "loc": "core/prelude/prelude.mbti:14:71-14:75"
+                "loc": null
               },
               "1": {
                 "type": "TName",
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "SourceLoc"
+                    "id": "SourceLoc"
                   },
-                  "loc": "core/prelude/prelude.mbti:14:78-14:96"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:14:78-14:96"
+                "loc": null
               }
             }
           ],
@@ -390,14 +390,14 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/prelude/prelude.mbti:14:105-14:109"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:14:105-14:109"
+              "loc": null
             },
             {
               "type": "DefaultErrorType",
-              "0": "core/prelude/prelude.mbti:14:110-14:115",
+              "0": null,
               "is_old_syntax": false
             }
           ],
@@ -405,31 +405,31 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:14:3-14:4"
+                "loc": null
               },
               "constraints": [
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "Eq"
+                    "id": "Eq"
                   },
-                  "loc": "core/prelude/prelude.mbti:14:7-14:18"
+                  "loc": null
                 },
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "Show"
+                    "id": "Show"
                   },
-                  "loc": "core/prelude/prelude.mbti:14:21-14:34"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:14:0-14:115"
+      null
     ],
     [
       {
@@ -438,7 +438,7 @@
           "attr": [],
           "name": {
             "name": "assert_true",
-            "loc": "core/prelude/prelude.mbti:16:3-16:14"
+            "loc": null
           },
           "params": [
             {
@@ -451,10 +451,10 @@
                     "type": "Ident",
                     "name": "Bool"
                   },
-                  "loc": "core/prelude/prelude.mbti:16:15-16:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:16:15-16:19"
+                "loc": null
               }
             },
             {
@@ -462,7 +462,7 @@
               "0": {
                 "type": "Label",
                 "name": "msg",
-                "loc": "core/prelude/prelude.mbti:16:21-16:24"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -472,10 +472,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/prelude/prelude.mbti:16:28-16:34"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:16:28-16:34"
+                "loc": null
               }
             },
             {
@@ -483,21 +483,21 @@
               "0": {
                 "type": "Label",
                 "name": "loc",
-                "loc": "core/prelude/prelude.mbti:16:36-16:40"
+                "loc": null
               },
               "1": {
                 "type": "TName",
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "SourceLoc"
+                    "id": "SourceLoc"
                   },
-                  "loc": "core/prelude/prelude.mbti:16:43-16:61"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:16:43-16:61"
+                "loc": null
               }
             }
           ],
@@ -510,21 +510,21 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/prelude/prelude.mbti:16:70-16:74"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:16:70-16:74"
+              "loc": null
             },
             {
               "type": "DefaultErrorType",
-              "0": "core/prelude/prelude.mbti:16:75-16:80",
+              "0": null,
               "is_old_syntax": false
             }
           ],
           "type_params": []
         }
       },
-      "core/prelude/prelude.mbti:16:0-16:80"
+      null
     ],
     [
       {
@@ -539,7 +539,7 @@
           ],
           "name": {
             "name": "dump",
-            "loc": "core/prelude/prelude.mbti:19:6-19:10"
+            "loc": null
           },
           "params": [
             {
@@ -552,10 +552,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:19:11-19:12"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:19:11-19:12"
+                "loc": null
               }
             },
             {
@@ -563,7 +563,7 @@
               "0": {
                 "type": "Label",
                 "name": "name",
-                "loc": "core/prelude/prelude.mbti:19:14-19:18"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -573,10 +573,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/prelude/prelude.mbti:19:22-19:28"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:19:22-19:28"
+                "loc": null
               }
             },
             {
@@ -584,21 +584,21 @@
               "0": {
                 "type": "Label",
                 "name": "loc",
-                "loc": "core/prelude/prelude.mbti:19:30-19:34"
+                "loc": null
               },
               "1": {
                 "type": "TName",
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "SourceLoc"
+                    "id": "SourceLoc"
                   },
-                  "loc": "core/prelude/prelude.mbti:19:37-19:55"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:19:37-19:55"
+                "loc": null
               }
             }
           ],
@@ -611,10 +611,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/prelude/prelude.mbti:19:64-19:65"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:19:64-19:65"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -624,14 +624,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:19:3-19:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:18:0-19:65"
+      null
     ],
     [
       {
@@ -640,7 +640,7 @@
           "attr": [],
           "name": {
             "name": "fail",
-            "loc": "core/prelude/prelude.mbti:21:6-21:10"
+            "loc": null
           },
           "params": [
             {
@@ -653,10 +653,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/prelude/prelude.mbti:21:11-21:17"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:21:11-21:17"
+                "loc": null
               }
             },
             {
@@ -664,21 +664,21 @@
               "0": {
                 "type": "Label",
                 "name": "loc",
-                "loc": "core/prelude/prelude.mbti:21:19-21:23"
+                "loc": null
               },
               "1": {
                 "type": "TName",
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "SourceLoc"
+                    "id": "SourceLoc"
                   },
-                  "loc": "core/prelude/prelude.mbti:21:26-21:44"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:21:26-21:44"
+                "loc": null
               }
             }
           ],
@@ -691,10 +691,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/prelude/prelude.mbti:21:53-21:54"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:21:53-21:54"
+              "loc": null
             },
             {
               "type": "ErrorType",
@@ -703,14 +703,14 @@
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "Failure"
+                    "id": "Failure"
                   },
-                  "loc": "core/prelude/prelude.mbti:21:61-21:77"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:21:61-21:77"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -719,14 +719,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:21:3-21:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:21:0-21:77"
+      null
     ],
     [
       {
@@ -735,7 +735,7 @@
           "attr": [],
           "name": {
             "name": "ignore",
-            "loc": "core/prelude/prelude.mbti:23:6-23:12"
+            "loc": null
           },
           "params": [
             {
@@ -748,10 +748,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:23:13-23:14"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:23:13-23:14"
+                "loc": null
               }
             }
           ],
@@ -764,10 +764,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/prelude/prelude.mbti:23:19-23:23"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:23:19-23:23"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -777,14 +777,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:23:3-23:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:23:0-23:23"
+      null
     ],
     [
       {
@@ -793,7 +793,7 @@
           "attr": [],
           "name": {
             "name": "inspect",
-            "loc": "core/prelude/prelude.mbti:25:3-25:10"
+            "loc": null
           },
           "params": [
             {
@@ -803,11 +803,11 @@
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "Show"
+                    "id": "Show"
                   },
-                  "loc": "core/prelude/prelude.mbti:25:12-25:25"
+                  "loc": null
                 }
               }
             },
@@ -816,7 +816,7 @@
               "0": {
                 "type": "Label",
                 "name": "content",
-                "loc": "core/prelude/prelude.mbti:25:27-25:35"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -826,10 +826,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/prelude/prelude.mbti:25:38-25:44"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:25:38-25:44"
+                "loc": null
               }
             },
             {
@@ -837,21 +837,21 @@
               "0": {
                 "type": "Label",
                 "name": "loc",
-                "loc": "core/prelude/prelude.mbti:25:51-25:55"
+                "loc": null
               },
               "1": {
                 "type": "TName",
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "SourceLoc"
+                    "id": "SourceLoc"
                   },
-                  "loc": "core/prelude/prelude.mbti:25:58-25:76"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:25:58-25:76"
+                "loc": null
               }
             },
             {
@@ -859,21 +859,21 @@
               "0": {
                 "type": "Label",
                 "name": "args_loc",
-                "loc": "core/prelude/prelude.mbti:25:82-25:91"
+                "loc": null
               },
               "1": {
                 "type": "TName",
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "ArgsLoc"
+                    "id": "ArgsLoc"
                   },
-                  "loc": "core/prelude/prelude.mbti:25:94-25:110"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:25:94-25:110"
+                "loc": null
               }
             }
           ],
@@ -886,10 +886,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/prelude/prelude.mbti:25:119-25:123"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:25:119-25:123"
+              "loc": null
             },
             {
               "type": "ErrorType",
@@ -898,14 +898,14 @@
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "InspectError"
+                    "id": "InspectError"
                   },
-                  "loc": "core/prelude/prelude.mbti:25:130-25:151"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:25:130-25:151"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -913,7 +913,7 @@
           "type_params": []
         }
       },
-      "core/prelude/prelude.mbti:25:0-25:151"
+      null
     ],
     [
       {
@@ -922,7 +922,7 @@
           "attr": [],
           "name": {
             "name": "not",
-            "loc": "core/prelude/prelude.mbti:27:3-27:6"
+            "loc": null
           },
           "params": [
             {
@@ -935,10 +935,10 @@
                     "type": "Ident",
                     "name": "Bool"
                   },
-                  "loc": "core/prelude/prelude.mbti:27:7-27:11"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:27:7-27:11"
+                "loc": null
               }
             }
           ],
@@ -951,10 +951,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/prelude/prelude.mbti:27:16-27:20"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:27:16-27:20"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -963,7 +963,7 @@
           "type_params": []
         }
       },
-      "core/prelude/prelude.mbti:27:0-27:20"
+      null
     ],
     [
       {
@@ -972,7 +972,7 @@
           "attr": [],
           "name": {
             "name": "panic",
-            "loc": "core/prelude/prelude.mbti:29:6-29:11"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -984,10 +984,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/prelude/prelude.mbti:29:17-29:18"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:29:17-29:18"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -997,14 +997,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:29:3-29:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:29:0-29:18"
+      null
     ],
     [
       {
@@ -1013,7 +1013,7 @@
           "attr": [],
           "name": {
             "name": "physical_equal",
-            "loc": "core/prelude/prelude.mbti:31:6-31:20"
+            "loc": null
           },
           "params": [
             {
@@ -1026,10 +1026,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:31:21-31:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:31:21-31:22"
+                "loc": null
               }
             },
             {
@@ -1042,10 +1042,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:31:24-31:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:31:24-31:25"
+                "loc": null
               }
             }
           ],
@@ -1058,10 +1058,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/prelude/prelude.mbti:31:30-31:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:31:30-31:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1071,14 +1071,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:31:3-31:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:31:0-31:34"
+      null
     ],
     [
       {
@@ -1087,7 +1087,7 @@
           "attr": [],
           "name": {
             "name": "println",
-            "loc": "core/prelude/prelude.mbti:33:22-33:29"
+            "loc": null
           },
           "params": [
             {
@@ -1100,10 +1100,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:33:30-33:31"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:33:30-33:31"
+                "loc": null
               }
             }
           ],
@@ -1116,10 +1116,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/prelude/prelude.mbti:33:36-33:40"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:33:36-33:40"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1129,23 +1129,23 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:33:3-33:4"
+                "loc": null
               },
               "constraints": [
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "Show"
+                    "id": "Show"
                   },
-                  "loc": "core/prelude/prelude.mbti:33:7-33:20"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:33:0-33:40"
+      null
     ],
     [
       {
@@ -1154,7 +1154,7 @@
           "attr": [],
           "name": {
             "name": "repr",
-            "loc": "core/prelude/prelude.mbti:35:22-35:26"
+            "loc": null
           },
           "params": [
             {
@@ -1167,10 +1167,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:35:27-35:28"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:35:27-35:28"
+                "loc": null
               }
             }
           ],
@@ -1183,10 +1183,10 @@
                   "type": "Ident",
                   "name": "String"
                 },
-                "loc": "core/prelude/prelude.mbti:35:33-35:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:35:33-35:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1196,23 +1196,23 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:35:3-35:4"
+                "loc": null
               },
               "constraints": [
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "builtin",
-                    "name": "Show"
+                    "id": "Show"
                   },
-                  "loc": "core/prelude/prelude.mbti:35:7-35:20"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:35:0-35:39"
+      null
     ],
     [
       {
@@ -1221,7 +1221,7 @@
           "attr": [],
           "name": {
             "name": "tap",
-            "loc": "core/prelude/prelude.mbti:37:6-37:9"
+            "loc": null
           },
           "params": [
             {
@@ -1234,10 +1234,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:37:10-37:11"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:37:10-37:11"
+                "loc": null
               }
             },
             {
@@ -1253,10 +1253,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/prelude/prelude.mbti:37:14-37:15"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/prelude/prelude.mbti:37:14-37:15"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1267,16 +1267,16 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/prelude/prelude.mbti:37:20-37:24"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/prelude/prelude.mbti:37:20-37:24"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/prelude/prelude.mbti:37:13-37:24"
+                "loc": null
               }
             }
           ],
@@ -1289,10 +1289,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/prelude/prelude.mbti:37:29-37:30"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:37:29-37:30"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1302,14 +1302,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:37:3-37:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:37:0-37:30"
+      null
     ],
     [
       {
@@ -1318,7 +1318,7 @@
           "attr": [],
           "name": {
             "name": "then",
-            "loc": "core/prelude/prelude.mbti:39:9-39:13"
+            "loc": null
           },
           "params": [
             {
@@ -1331,10 +1331,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/prelude/prelude.mbti:39:14-39:15"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/prelude/prelude.mbti:39:14-39:15"
+                "loc": null
               }
             },
             {
@@ -1350,10 +1350,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/prelude/prelude.mbti:39:18-39:19"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/prelude/prelude.mbti:39:18-39:19"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1364,16 +1364,16 @@
                       "type": "Ident",
                       "name": "R"
                     },
-                    "loc": "core/prelude/prelude.mbti:39:24-39:25"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/prelude/prelude.mbti:39:24-39:25"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/prelude/prelude.mbti:39:17-39:25"
+                "loc": null
               }
             }
           ],
@@ -1386,10 +1386,10 @@
                   "type": "Ident",
                   "name": "R"
                 },
-                "loc": "core/prelude/prelude.mbti:39:30-39:31"
+                "loc": null
               },
               "1": [],
-              "loc": "core/prelude/prelude.mbti:39:30-39:31"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1399,21 +1399,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/prelude/prelude.mbti:39:3-39:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "R",
-                "loc": "core/prelude/prelude.mbti:39:6-39:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/prelude/prelude.mbti:39:0-39:31"
+      null
     ],
     [
       {
@@ -1422,7 +1422,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "ArgsLoc",
-            "loc": "core/prelude/prelude.mbti:44:34-44:41"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1430,23 +1430,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "ArgsLoc"
+                "id": "ArgsLoc"
               },
-              "loc": "core/prelude/prelude.mbti:44:14-44:30"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:44:14-44:30"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:44:0-44:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:44:0-44:41"
+      null
     ],
     [
       {
@@ -1455,7 +1455,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "Array",
-            "loc": "core/prelude/prelude.mbti:46:32-46:37"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1463,23 +1463,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "Array"
+                "id": "Array"
               },
-              "loc": "core/prelude/prelude.mbti:46:14-46:28"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:46:14-46:28"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:46:0-46:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:46:0-46:37"
+      null
     ],
     [
       {
@@ -1488,7 +1488,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "ArrayView",
-            "loc": "core/prelude/prelude.mbti:48:36-48:45"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1496,23 +1496,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "ArrayView"
+                "id": "ArrayView"
               },
-              "loc": "core/prelude/prelude.mbti:48:14-48:32"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:48:14-48:32"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:48:0-48:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:48:0-48:45"
+      null
     ],
     [
       {
@@ -1521,7 +1521,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "BigInt",
-            "loc": "core/prelude/prelude.mbti:50:49-50:55"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1529,23 +1529,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "moonbitlang/core/bigint",
-                "name": "BigInt"
+                "id": "BigInt"
               },
-              "loc": "core/prelude/prelude.mbti:50:14-50:45"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:50:14-50:45"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:50:0-50:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:50:0-50:55"
+      null
     ],
     [
       {
@@ -1554,7 +1554,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "Failure",
-            "loc": "core/prelude/prelude.mbti:52:34-52:41"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1562,23 +1562,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "Failure"
+                "id": "Failure"
               },
-              "loc": "core/prelude/prelude.mbti:52:14-52:30"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:52:14-52:30"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:52:0-52:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:52:0-52:41"
+      null
     ],
     [
       {
@@ -1587,7 +1587,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "Hasher",
-            "loc": "core/prelude/prelude.mbti:54:33-54:39"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1595,23 +1595,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "Hasher"
+                "id": "Hasher"
               },
-              "loc": "core/prelude/prelude.mbti:54:14-54:29"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:54:14-54:29"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:54:0-54:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:54:0-54:39"
+      null
     ],
     [
       {
@@ -1620,7 +1620,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "InspectError",
-            "loc": "core/prelude/prelude.mbti:56:39-56:51"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1628,23 +1628,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "InspectError"
+                "id": "InspectError"
               },
-              "loc": "core/prelude/prelude.mbti:56:14-56:35"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:56:14-56:35"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:56:0-56:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:56:0-56:51"
+      null
     ],
     [
       {
@@ -1653,7 +1653,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "Iter",
-            "loc": "core/prelude/prelude.mbti:58:31-58:35"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1661,23 +1661,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "Iter"
+                "id": "Iter"
               },
-              "loc": "core/prelude/prelude.mbti:58:14-58:27"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:58:14-58:27"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:58:0-58:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:58:0-58:35"
+      null
     ],
     [
       {
@@ -1686,7 +1686,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "Iter2",
-            "loc": "core/prelude/prelude.mbti:60:32-60:37"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1694,23 +1694,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "Iter2"
+                "id": "Iter2"
               },
-              "loc": "core/prelude/prelude.mbti:60:14-60:28"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:60:14-60:28"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:60:0-60:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:60:0-60:37"
+      null
     ],
     [
       {
@@ -1719,7 +1719,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "IterResult",
-            "loc": "core/prelude/prelude.mbti:62:37-62:47"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1727,23 +1727,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "IterResult"
+                "id": "IterResult"
               },
-              "loc": "core/prelude/prelude.mbti:62:14-62:33"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:62:14-62:33"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:62:0-62:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:62:0-62:47"
+      null
     ],
     [
       {
@@ -1752,7 +1752,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "Json",
-            "loc": "core/prelude/prelude.mbti:64:31-64:35"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1760,23 +1760,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "Json"
+                "id": "Json"
               },
-              "loc": "core/prelude/prelude.mbti:64:14-64:27"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:64:14-64:27"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:64:0-64:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:64:0-64:35"
+      null
     ],
     [
       {
@@ -1785,7 +1785,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "Map",
-            "loc": "core/prelude/prelude.mbti:66:30-66:33"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1793,23 +1793,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "Map"
+                "id": "Map"
               },
-              "loc": "core/prelude/prelude.mbti:66:14-66:26"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:66:14-66:26"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:66:0-66:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:66:0-66:33"
+      null
     ],
     [
       {
@@ -1818,7 +1818,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "Set",
-            "loc": "core/prelude/prelude.mbti:68:43-68:46"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1826,23 +1826,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "moonbitlang/core/set",
-                "name": "Set"
+                "id": "Set"
               },
-              "loc": "core/prelude/prelude.mbti:68:14-68:39"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:68:14-68:39"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:68:0-68:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:68:0-68:46"
+      null
     ],
     [
       {
@@ -1851,7 +1851,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "SnapshotError",
-            "loc": "core/prelude/prelude.mbti:70:40-70:53"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1859,23 +1859,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "SnapshotError"
+                "id": "SnapshotError"
               },
-              "loc": "core/prelude/prelude.mbti:70:14-70:36"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:70:14-70:36"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:70:0-70:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:70:0-70:53"
+      null
     ],
     [
       {
@@ -1884,7 +1884,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "SourceLoc",
-            "loc": "core/prelude/prelude.mbti:72:36-72:45"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1892,23 +1892,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "SourceLoc"
+                "id": "SourceLoc"
               },
-              "loc": "core/prelude/prelude.mbti:72:14-72:32"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:72:14-72:32"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:72:0-72:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:72:0-72:45"
+      null
     ],
     [
       {
@@ -1917,7 +1917,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "StringBuilder",
-            "loc": "core/prelude/prelude.mbti:74:40-74:53"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1925,23 +1925,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "StringBuilder"
+                "id": "StringBuilder"
               },
-              "loc": "core/prelude/prelude.mbti:74:14-74:36"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:74:14-74:36"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:74:0-74:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:74:0-74:53"
+      null
     ],
     [
       {
@@ -1950,7 +1950,7 @@
           "$tag": "TypeAlias",
           "name": {
             "name": "UninitializedArray",
-            "loc": "core/prelude/prelude.mbti:76:45-76:63"
+            "loc": null
           },
           "type_params": [],
           "type_": {
@@ -1958,23 +1958,23 @@
             "0": {
               "type": "ConstrId",
               "id": {
-                "type": "Qualified",
+                "type": "Dot",
                 "pkg": "builtin",
-                "name": "UninitializedArray"
+                "id": "UninitializedArray"
               },
-              "loc": "core/prelude/prelude.mbti:76:14-76:41"
+              "loc": null
             },
             "1": [],
-            "loc": "core/prelude/prelude.mbti:76:14-76:41"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:76:0-76:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:76:0-76:63"
+      null
     ],
     [
       {
@@ -1983,24 +1983,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Add",
-            "loc": "core/prelude/prelude.mbti:78:31-78:34"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Add"
+              "id": "Add"
             },
-            "loc": "core/prelude/prelude.mbti:78:15-78:27"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:78:0-78:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:78:0-78:34"
+      null
     ],
     [
       {
@@ -2009,24 +2009,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "BitAnd",
-            "loc": "core/prelude/prelude.mbti:80:34-80:40"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "BitAnd"
+              "id": "BitAnd"
             },
-            "loc": "core/prelude/prelude.mbti:80:15-80:30"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:80:0-80:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:80:0-80:40"
+      null
     ],
     [
       {
@@ -2035,24 +2035,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "BitOr",
-            "loc": "core/prelude/prelude.mbti:82:33-82:38"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "BitOr"
+              "id": "BitOr"
             },
-            "loc": "core/prelude/prelude.mbti:82:15-82:29"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:82:0-82:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:82:0-82:38"
+      null
     ],
     [
       {
@@ -2061,24 +2061,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "BitXOr",
-            "loc": "core/prelude/prelude.mbti:84:34-84:40"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "BitXOr"
+              "id": "BitXOr"
             },
-            "loc": "core/prelude/prelude.mbti:84:15-84:30"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:84:0-84:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:84:0-84:40"
+      null
     ],
     [
       {
@@ -2087,24 +2087,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Compare",
-            "loc": "core/prelude/prelude.mbti:86:35-86:42"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Compare"
+              "id": "Compare"
             },
-            "loc": "core/prelude/prelude.mbti:86:15-86:31"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:86:0-86:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:86:0-86:42"
+      null
     ],
     [
       {
@@ -2113,24 +2113,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Default",
-            "loc": "core/prelude/prelude.mbti:88:35-88:42"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Default"
+              "id": "Default"
             },
-            "loc": "core/prelude/prelude.mbti:88:15-88:31"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:88:0-88:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:88:0-88:42"
+      null
     ],
     [
       {
@@ -2139,24 +2139,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Div",
-            "loc": "core/prelude/prelude.mbti:90:31-90:34"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Div"
+              "id": "Div"
             },
-            "loc": "core/prelude/prelude.mbti:90:15-90:27"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:90:0-90:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:90:0-90:34"
+      null
     ],
     [
       {
@@ -2165,24 +2165,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Eq",
-            "loc": "core/prelude/prelude.mbti:92:30-92:32"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Eq"
+              "id": "Eq"
             },
-            "loc": "core/prelude/prelude.mbti:92:15-92:26"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:92:0-92:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:92:0-92:32"
+      null
     ],
     [
       {
@@ -2191,24 +2191,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Hash",
-            "loc": "core/prelude/prelude.mbti:94:32-94:36"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Hash"
+              "id": "Hash"
             },
-            "loc": "core/prelude/prelude.mbti:94:15-94:28"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:94:0-94:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:94:0-94:36"
+      null
     ],
     [
       {
@@ -2217,24 +2217,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Logger",
-            "loc": "core/prelude/prelude.mbti:96:34-96:40"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Logger"
+              "id": "Logger"
             },
-            "loc": "core/prelude/prelude.mbti:96:15-96:30"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:96:0-96:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:96:0-96:40"
+      null
     ],
     [
       {
@@ -2243,24 +2243,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Mod",
-            "loc": "core/prelude/prelude.mbti:98:31-98:34"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Mod"
+              "id": "Mod"
             },
-            "loc": "core/prelude/prelude.mbti:98:15-98:27"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:98:0-98:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:98:0-98:34"
+      null
     ],
     [
       {
@@ -2269,24 +2269,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Mul",
-            "loc": "core/prelude/prelude.mbti:100:31-100:34"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Mul"
+              "id": "Mul"
             },
-            "loc": "core/prelude/prelude.mbti:100:15-100:27"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:100:0-100:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:100:0-100:34"
+      null
     ],
     [
       {
@@ -2295,24 +2295,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Neg",
-            "loc": "core/prelude/prelude.mbti:102:31-102:34"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Neg"
+              "id": "Neg"
             },
-            "loc": "core/prelude/prelude.mbti:102:15-102:27"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:102:0-102:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:102:0-102:34"
+      null
     ],
     [
       {
@@ -2321,24 +2321,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Shl",
-            "loc": "core/prelude/prelude.mbti:104:31-104:34"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Shl"
+              "id": "Shl"
             },
-            "loc": "core/prelude/prelude.mbti:104:15-104:27"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:104:0-104:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:104:0-104:34"
+      null
     ],
     [
       {
@@ -2347,24 +2347,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Show",
-            "loc": "core/prelude/prelude.mbti:106:32-106:36"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Show"
+              "id": "Show"
             },
-            "loc": "core/prelude/prelude.mbti:106:15-106:28"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:106:0-106:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:106:0-106:36"
+      null
     ],
     [
       {
@@ -2373,24 +2373,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Shr",
-            "loc": "core/prelude/prelude.mbti:108:31-108:34"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Shr"
+              "id": "Shr"
             },
-            "loc": "core/prelude/prelude.mbti:108:15-108:27"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:108:0-108:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:108:0-108:34"
+      null
     ],
     [
       {
@@ -2399,24 +2399,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "Sub",
-            "loc": "core/prelude/prelude.mbti:110:31-110:34"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "Sub"
+              "id": "Sub"
             },
-            "loc": "core/prelude/prelude.mbti:110:15-110:27"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:110:0-110:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:110:0-110:34"
+      null
     ],
     [
       {
@@ -2425,24 +2425,24 @@
           "$tag": "TraitAlias",
           "name": {
             "name": "ToJson",
-            "loc": "core/prelude/prelude.mbti:112:34-112:40"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "builtin",
-              "name": "ToJson"
+              "id": "ToJson"
             },
-            "loc": "core/prelude/prelude.mbti:112:15-112:30"
+            "loc": null
           },
           "vis": {
             "type": "Pub",
             "attr": null,
-            "loc": "core/prelude/prelude.mbti:112:0-112:3"
+            "loc": null
           }
         }
       },
-      "core/prelude/prelude.mbti:112:0-112:40"
+      null
     ]
   ]
 }

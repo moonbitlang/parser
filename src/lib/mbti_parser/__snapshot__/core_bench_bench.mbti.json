@@ -9,7 +9,7 @@
           "attr": [],
           "name": {
             "name": "monotonic_clock_end",
-            "loc": "core/bench/bench.mbti:4:3-4:22"
+            "loc": null
           },
           "params": [
             {
@@ -22,10 +22,10 @@
                     "type": "Ident",
                     "name": "Timestamp"
                   },
-                  "loc": "core/bench/bench.mbti:4:23-4:32"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bench/bench.mbti:4:23-4:32"
+                "loc": null
               }
             }
           ],
@@ -38,10 +38,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/bench/bench.mbti:4:37-4:43"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bench/bench.mbti:4:37-4:43"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -50,7 +50,7 @@
           "type_params": []
         }
       },
-      "core/bench/bench.mbti:4:0-4:43"
+      null
     ],
     [
       {
@@ -59,7 +59,7 @@
           "attr": [],
           "name": {
             "name": "monotonic_clock_start",
-            "loc": "core/bench/bench.mbti:6:3-6:24"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -71,10 +71,10 @@
                   "type": "Ident",
                   "name": "Timestamp"
                 },
-                "loc": "core/bench/bench.mbti:6:30-6:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bench/bench.mbti:6:30-6:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -83,7 +83,7 @@
           "type_params": []
         }
       },
-      "core/bench/bench.mbti:6:0-6:39"
+      null
     ],
     [
       {
@@ -92,7 +92,7 @@
           "attr": [],
           "name": {
             "name": "new",
-            "loc": "core/bench/bench.mbti:8:3-8:6"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -104,10 +104,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/bench/bench.mbti:8:12-8:13"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bench/bench.mbti:8:12-8:13"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -116,7 +116,7 @@
           "type_params": []
         }
       },
-      "core/bench/bench.mbti:8:0-8:13"
+      null
     ],
     [
       {
@@ -125,7 +125,7 @@
           "attr": [],
           "name": {
             "name": "single_bench",
-            "loc": "core/bench/bench.mbti:10:3-10:15"
+            "loc": null
           },
           "params": [
             {
@@ -133,7 +133,7 @@
               "0": {
                 "type": "Label",
                 "name": "name",
-                "loc": "core/bench/bench.mbti:10:16-10:20"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -143,10 +143,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/bench/bench.mbti:10:24-10:30"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bench/bench.mbti:10:24-10:30"
+                "loc": null
               }
             },
             {
@@ -162,16 +162,16 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/bench/bench.mbti:10:38-10:42"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/bench/bench.mbti:10:38-10:42"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/bench/bench.mbti:10:32-10:42"
+                "loc": null
               }
             },
             {
@@ -179,7 +179,7 @@
               "0": {
                 "type": "Label",
                 "name": "count",
-                "loc": "core/bench/bench.mbti:10:44-10:50"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -189,10 +189,10 @@
                     "type": "Ident",
                     "name": "UInt"
                   },
-                  "loc": "core/bench/bench.mbti:10:53-10:57"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bench/bench.mbti:10:53-10:57"
+                "loc": null
               }
             }
           ],
@@ -205,10 +205,10 @@
                   "type": "Ident",
                   "name": "Summary"
                 },
-                "loc": "core/bench/bench.mbti:10:67-10:74"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bench/bench.mbti:10:67-10:74"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -217,7 +217,7 @@
           "type_params": []
         }
       },
-      "core/bench/bench.mbti:10:0-10:74"
+      null
     ],
     [
       {
@@ -225,7 +225,7 @@
         "0": {
           "name": {
             "name": "Summary",
-            "loc": "core/bench/bench.mbti:13:5-13:12"
+            "loc": null
           },
           "type_params": [],
           "components": {
@@ -236,7 +236,7 @@
           }
         }
       },
-      "core/bench/bench.mbti:13:0-13:12"
+      null
     ],
     [
       {
@@ -252,21 +252,21 @@
                 "type": "Ident",
                 "name": "Summary"
               },
-              "loc": "core/bench/bench.mbti:14:16-14:23"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bench/bench.mbti:14:16-14:23"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "ToJson"
             },
-            "loc": "core/bench/bench.mbti:14:5-14:11"
+            "loc": null
           }
         }
       },
-      "core/bench/bench.mbti:14:0-14:23"
+      null
     ],
     [
       {
@@ -274,7 +274,7 @@
         "0": {
           "name": {
             "name": "T",
-            "loc": "core/bench/bench.mbti:16:5-16:6"
+            "loc": null
           },
           "type_params": [],
           "components": {
@@ -285,7 +285,7 @@
           }
         }
       },
-      "core/bench/bench.mbti:16:0-16:6"
+      null
     ],
     [
       {
@@ -294,11 +294,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/bench/bench.mbti:17:3-17:4"
+            "loc": null
           },
           "name": {
             "name": "bench",
-            "loc": "core/bench/bench.mbti:17:6-17:11"
+            "loc": null
           },
           "params": [
             {
@@ -311,10 +311,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bench/bench.mbti:17:12-17:16"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bench/bench.mbti:17:12-17:16"
+                "loc": null
               }
             },
             {
@@ -322,7 +322,7 @@
               "0": {
                 "type": "Label",
                 "name": "name",
-                "loc": "core/bench/bench.mbti:17:18-17:22"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -332,10 +332,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/bench/bench.mbti:17:26-17:32"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bench/bench.mbti:17:26-17:32"
+                "loc": null
               }
             },
             {
@@ -351,16 +351,16 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/bench/bench.mbti:17:40-17:44"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/bench/bench.mbti:17:40-17:44"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/bench/bench.mbti:17:34-17:44"
+                "loc": null
               }
             },
             {
@@ -368,7 +368,7 @@
               "0": {
                 "type": "Label",
                 "name": "count",
-                "loc": "core/bench/bench.mbti:17:46-17:52"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -378,10 +378,10 @@
                     "type": "Ident",
                     "name": "UInt"
                   },
-                  "loc": "core/bench/bench.mbti:17:55-17:59"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bench/bench.mbti:17:55-17:59"
+                "loc": null
               }
             }
           ],
@@ -394,10 +394,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/bench/bench.mbti:17:69-17:73"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bench/bench.mbti:17:69-17:73"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -406,7 +406,7 @@
           "type_params": []
         }
       },
-      "core/bench/bench.mbti:17:0-17:73"
+      null
     ],
     [
       {
@@ -415,11 +415,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/bench/bench.mbti:18:3-18:4"
+            "loc": null
           },
           "name": {
             "name": "dump_summaries",
-            "loc": "core/bench/bench.mbti:18:6-18:20"
+            "loc": null
           },
           "params": [
             {
@@ -432,10 +432,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bench/bench.mbti:18:21-18:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bench/bench.mbti:18:21-18:25"
+                "loc": null
               }
             }
           ],
@@ -448,10 +448,10 @@
                   "type": "Ident",
                   "name": "String"
                 },
-                "loc": "core/bench/bench.mbti:18:30-18:36"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bench/bench.mbti:18:30-18:36"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -460,7 +460,7 @@
           "type_params": []
         }
       },
-      "core/bench/bench.mbti:18:0-18:36"
+      null
     ],
     [
       {
@@ -469,11 +469,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/bench/bench.mbti:19:8-19:9"
+            "loc": null
           },
           "name": {
             "name": "keep",
-            "loc": "core/bench/bench.mbti:19:11-19:15"
+            "loc": null
           },
           "params": [
             {
@@ -486,10 +486,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bench/bench.mbti:19:16-19:20"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bench/bench.mbti:19:16-19:20"
+                "loc": null
               }
             },
             {
@@ -502,10 +502,10 @@
                     "type": "Ident",
                     "name": "Any"
                   },
-                  "loc": "core/bench/bench.mbti:19:22-19:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bench/bench.mbti:19:22-19:25"
+                "loc": null
               }
             }
           ],
@@ -518,10 +518,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/bench/bench.mbti:19:30-19:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bench/bench.mbti:19:30-19:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -531,14 +531,14 @@
             {
               "name": {
                 "name": "Any",
-                "loc": "core/bench/bench.mbti:19:3-19:6"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/bench/bench.mbti:19:0-19:34"
+      null
     ],
     [
       {
@@ -546,7 +546,7 @@
         "0": {
           "name": {
             "name": "Timestamp",
-            "loc": "core/bench/bench.mbti:21:5-21:14"
+            "loc": null
           },
           "type_params": [],
           "components": {
@@ -557,7 +557,7 @@
           }
         }
       },
-      "core/bench/bench.mbti:21:0-21:14"
+      null
     ]
   ]
 }

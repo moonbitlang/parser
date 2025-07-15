@@ -9,7 +9,7 @@
           "attr": [],
           "name": {
             "name": "args",
-            "loc": "core/env/env.mbti:4:3-4:7"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -21,7 +21,7 @@
                   "type": "Ident",
                   "name": "Array"
                 },
-                "loc": "core/env/env.mbti:4:13-4:18"
+                "loc": null
               },
               "1": [
                 {
@@ -32,13 +32,13 @@
                       "type": "Ident",
                       "name": "String"
                     },
-                    "loc": "core/env/env.mbti:4:19-4:25"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/env/env.mbti:4:19-4:25"
+                  "loc": null
                 }
               ],
-              "loc": "core/env/env.mbti:4:13-4:26"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -47,7 +47,7 @@
           "type_params": []
         }
       },
-      "core/env/env.mbti:4:0-4:26"
+      null
     ],
     [
       {
@@ -56,7 +56,7 @@
           "attr": [],
           "name": {
             "name": "current_dir",
-            "loc": "core/env/env.mbti:6:3-6:14"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -70,13 +70,13 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/env/env.mbti:6:20-6:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/env/env.mbti:6:20-6:26"
+                "loc": null
               },
-              "loc": "core/env/env.mbti:6:20-6:27",
-              "question_loc": "core/env/env.mbti:6:26-6:27"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -85,7 +85,7 @@
           "type_params": []
         }
       },
-      "core/env/env.mbti:6:0-6:27"
+      null
     ],
     [
       {
@@ -94,7 +94,7 @@
           "attr": [],
           "name": {
             "name": "now",
-            "loc": "core/env/env.mbti:8:3-8:6"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -106,10 +106,10 @@
                   "type": "Ident",
                   "name": "UInt64"
                 },
-                "loc": "core/env/env.mbti:8:12-8:18"
+                "loc": null
               },
               "1": [],
-              "loc": "core/env/env.mbti:8:12-8:18"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -118,7 +118,7 @@
           "type_params": []
         }
       },
-      "core/env/env.mbti:8:0-8:18"
+      null
     ]
   ]
 }

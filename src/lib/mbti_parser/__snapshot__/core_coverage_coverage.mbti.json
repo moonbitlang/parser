@@ -9,7 +9,7 @@
           "attr": [],
           "name": {
             "name": "end",
-            "loc": "core/coverage/coverage.mbti:4:3-4:6"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -21,10 +21,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/coverage/coverage.mbti:4:12-4:16"
+                "loc": null
               },
               "1": [],
-              "loc": "core/coverage/coverage.mbti:4:12-4:16"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -33,7 +33,7 @@
           "type_params": []
         }
       },
-      "core/coverage/coverage.mbti:4:0-4:16"
+      null
     ],
     [
       {
@@ -42,7 +42,7 @@
           "attr": [],
           "name": {
             "name": "track",
-            "loc": "core/coverage/coverage.mbti:6:3-6:8"
+            "loc": null
           },
           "params": [
             {
@@ -55,10 +55,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/coverage/coverage.mbti:6:9-6:15"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/coverage/coverage.mbti:6:9-6:15"
+                "loc": null
               }
             },
             {
@@ -71,10 +71,10 @@
                     "type": "Ident",
                     "name": "CoverageCounter"
                   },
-                  "loc": "core/coverage/coverage.mbti:6:17-6:32"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/coverage/coverage.mbti:6:17-6:32"
+                "loc": null
               }
             }
           ],
@@ -87,10 +87,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/coverage/coverage.mbti:6:37-6:41"
+                "loc": null
               },
               "1": [],
-              "loc": "core/coverage/coverage.mbti:6:37-6:41"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -99,7 +99,7 @@
           "type_params": []
         }
       },
-      "core/coverage/coverage.mbti:6:0-6:41"
+      null
     ],
     [
       {
@@ -107,7 +107,7 @@
         "0": {
           "name": {
             "name": "CoverageCounter",
-            "loc": "core/coverage/coverage.mbti:9:5-9:20"
+            "loc": null
           },
           "type_params": [],
           "components": {
@@ -118,7 +118,7 @@
           }
         }
       },
-      "core/coverage/coverage.mbti:9:0-9:20"
+      null
     ],
     [
       {
@@ -127,11 +127,11 @@
           "attr": [],
           "type_name": {
             "name": "CoverageCounter",
-            "loc": "core/coverage/coverage.mbti:10:3-10:18"
+            "loc": null
           },
           "name": {
             "name": "incr",
-            "loc": "core/coverage/coverage.mbti:10:20-10:24"
+            "loc": null
           },
           "params": [
             {
@@ -144,10 +144,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/coverage/coverage.mbti:10:25-10:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/coverage/coverage.mbti:10:25-10:29"
+                "loc": null
               }
             },
             {
@@ -160,10 +160,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/coverage/coverage.mbti:10:31-10:34"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/coverage/coverage.mbti:10:31-10:34"
+                "loc": null
               }
             }
           ],
@@ -176,10 +176,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/coverage/coverage.mbti:10:39-10:43"
+                "loc": null
               },
               "1": [],
-              "loc": "core/coverage/coverage.mbti:10:39-10:43"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -188,7 +188,7 @@
           "type_params": []
         }
       },
-      "core/coverage/coverage.mbti:10:0-10:43"
+      null
     ],
     [
       {
@@ -197,11 +197,11 @@
           "attr": [],
           "type_name": {
             "name": "CoverageCounter",
-            "loc": "core/coverage/coverage.mbti:11:3-11:18"
+            "loc": null
           },
           "name": {
             "name": "new",
-            "loc": "core/coverage/coverage.mbti:11:20-11:23"
+            "loc": null
           },
           "params": [
             {
@@ -214,10 +214,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/coverage/coverage.mbti:11:24-11:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/coverage/coverage.mbti:11:24-11:27"
+                "loc": null
               }
             }
           ],
@@ -230,10 +230,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/coverage/coverage.mbti:11:32-11:36"
+                "loc": null
               },
               "1": [],
-              "loc": "core/coverage/coverage.mbti:11:32-11:36"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -242,7 +242,7 @@
           "type_params": []
         }
       },
-      "core/coverage/coverage.mbti:11:0-11:36"
+      null
     ],
     [
       {
@@ -258,21 +258,21 @@
                 "type": "Ident",
                 "name": "CoverageCounter"
               },
-              "loc": "core/coverage/coverage.mbti:12:14-12:29"
+              "loc": null
             },
             "1": [],
-            "loc": "core/coverage/coverage.mbti:12:14-12:29"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Show"
             },
-            "loc": "core/coverage/coverage.mbti:12:5-12:9"
+            "loc": null
           }
         }
       },
-      "core/coverage/coverage.mbti:12:0-12:29"
+      null
     ]
   ]
 }

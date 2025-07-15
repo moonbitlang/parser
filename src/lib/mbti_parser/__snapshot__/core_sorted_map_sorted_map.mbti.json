@@ -13,7 +13,7 @@
           "attr": [],
           "name": {
             "name": "from_array",
-            "loc": "core/sorted_map/sorted_map.mbti:8:19-8:29"
+            "loc": null
           },
           "params": [
             {
@@ -26,7 +26,7 @@
                     "type": "Ident",
                     "name": "Array"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:8:30-8:35"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -40,10 +40,10 @@
                             "type": "Ident",
                             "name": "K"
                           },
-                          "loc": "core/sorted_map/sorted_map.mbti:8:37-8:38"
+                          "loc": null
                         },
                         "1": [],
-                        "loc": "core/sorted_map/sorted_map.mbti:8:37-8:38"
+                        "loc": null
                       },
                       {
                         "type": "TName",
@@ -53,16 +53,16 @@
                             "type": "Ident",
                             "name": "V"
                           },
-                          "loc": "core/sorted_map/sorted_map.mbti:8:40-8:41"
+                          "loc": null
                         },
                         "1": [],
-                        "loc": "core/sorted_map/sorted_map.mbti:8:40-8:41"
+                        "loc": null
                       }
                     ],
-                    "loc": "core/sorted_map/sorted_map.mbti:8:36-8:42"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:8:30-8:43"
+                "loc": null
               }
             }
           ],
@@ -75,7 +75,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:8:48-8:49"
+                "loc": null
               },
               "1": [
                 {
@@ -86,10 +86,10 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:8:50-8:51"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:8:50-8:51"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -99,13 +99,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:8:53-8:54"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:8:53-8:54"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_map/sorted_map.mbti:8:48-8:55"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -115,7 +115,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:8:3-8:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -123,21 +123,21 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:8:7-8:14"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:8:16-8:17"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:8:0-8:55"
+      null
     ],
     [
       {
@@ -146,7 +146,7 @@
           "attr": [],
           "name": {
             "name": "from_iter",
-            "loc": "core/sorted_map/sorted_map.mbti:10:19-10:28"
+            "loc": null
           },
           "params": [
             {
@@ -159,7 +159,7 @@
                     "type": "Ident",
                     "name": "Iter"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:10:29-10:33"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -173,10 +173,10 @@
                             "type": "Ident",
                             "name": "K"
                           },
-                          "loc": "core/sorted_map/sorted_map.mbti:10:35-10:36"
+                          "loc": null
                         },
                         "1": [],
-                        "loc": "core/sorted_map/sorted_map.mbti:10:35-10:36"
+                        "loc": null
                       },
                       {
                         "type": "TName",
@@ -186,16 +186,16 @@
                             "type": "Ident",
                             "name": "V"
                           },
-                          "loc": "core/sorted_map/sorted_map.mbti:10:38-10:39"
+                          "loc": null
                         },
                         "1": [],
-                        "loc": "core/sorted_map/sorted_map.mbti:10:38-10:39"
+                        "loc": null
                       }
                     ],
-                    "loc": "core/sorted_map/sorted_map.mbti:10:34-10:40"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:10:29-10:41"
+                "loc": null
               }
             }
           ],
@@ -208,7 +208,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:10:46-10:47"
+                "loc": null
               },
               "1": [
                 {
@@ -219,10 +219,10 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:10:48-10:49"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:10:48-10:49"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -232,13 +232,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:10:51-10:52"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:10:51-10:52"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_map/sorted_map.mbti:10:46-10:53"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -248,7 +248,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:10:3-10:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -256,21 +256,21 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:10:7-10:14"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:10:16-10:17"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:10:0-10:53"
+      null
     ],
     [
       {
@@ -279,7 +279,7 @@
           "attr": [],
           "name": {
             "name": "new",
-            "loc": "core/sorted_map/sorted_map.mbti:12:9-12:12"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -291,7 +291,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:12:18-12:19"
+                "loc": null
               },
               "1": [
                 {
@@ -302,10 +302,10 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:12:20-12:21"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:12:20-12:21"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -315,13 +315,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:12:23-12:24"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:12:23-12:24"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_map/sorted_map.mbti:12:18-12:25"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -331,21 +331,21 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:12:3-12:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:12:6-12:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:12:0-12:25"
+      null
     ],
     [
       {
@@ -360,7 +360,7 @@
           ],
           "name": {
             "name": "of",
-            "loc": "core/sorted_map/sorted_map.mbti:15:19-15:21"
+            "loc": null
           },
           "params": [
             {
@@ -373,7 +373,7 @@
                     "type": "Ident",
                     "name": "Array"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:15:22-15:27"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -387,10 +387,10 @@
                             "type": "Ident",
                             "name": "K"
                           },
-                          "loc": "core/sorted_map/sorted_map.mbti:15:29-15:30"
+                          "loc": null
                         },
                         "1": [],
-                        "loc": "core/sorted_map/sorted_map.mbti:15:29-15:30"
+                        "loc": null
                       },
                       {
                         "type": "TName",
@@ -400,16 +400,16 @@
                             "type": "Ident",
                             "name": "V"
                           },
-                          "loc": "core/sorted_map/sorted_map.mbti:15:32-15:33"
+                          "loc": null
                         },
                         "1": [],
-                        "loc": "core/sorted_map/sorted_map.mbti:15:32-15:33"
+                        "loc": null
                       }
                     ],
-                    "loc": "core/sorted_map/sorted_map.mbti:15:28-15:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:15:22-15:35"
+                "loc": null
               }
             }
           ],
@@ -422,7 +422,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:15:40-15:41"
+                "loc": null
               },
               "1": [
                 {
@@ -433,10 +433,10 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:15:42-15:43"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:15:42-15:43"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -446,13 +446,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:15:45-15:46"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:15:45-15:46"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_map/sorted_map.mbti:15:40-15:47"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -462,7 +462,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:15:3-15:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -470,21 +470,21 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:15:7-15:14"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:15:16-15:17"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:14:0-15:47"
+      null
     ],
     [
       {
@@ -492,21 +492,21 @@
         "0": {
           "name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:18:5-18:6"
+            "loc": null
           },
           "type_params": [
             {
               "$tag": "Name",
               "0": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:18:7-18:8"
+                "loc": null
               }
             },
             {
               "$tag": "Name",
               "0": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:18:10-18:11"
+                "loc": null
               }
             }
           ],
@@ -518,7 +518,7 @@
           }
         }
       },
-      "core/sorted_map/sorted_map.mbti:18:0-18:12"
+      null
     ],
     [
       {
@@ -527,11 +527,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:19:19-19:20"
+            "loc": null
           },
           "name": {
             "name": "add",
-            "loc": "core/sorted_map/sorted_map.mbti:19:22-19:25"
+            "loc": null
           },
           "params": [
             {
@@ -544,7 +544,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:19:26-19:30"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -555,10 +555,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:19:31-19:32"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:19:31-19:32"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -568,13 +568,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:19:34-19:35"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:19:34-19:35"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:19:26-19:36"
+                "loc": null
               }
             },
             {
@@ -587,10 +587,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:19:38-19:39"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:19:38-19:39"
+                "loc": null
               }
             },
             {
@@ -603,10 +603,10 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:19:41-19:42"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:19:41-19:42"
+                "loc": null
               }
             }
           ],
@@ -619,10 +619,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:19:47-19:51"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_map/sorted_map.mbti:19:47-19:51"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -632,7 +632,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:19:3-19:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -640,21 +640,21 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:19:7-19:14"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:19:16-19:17"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:19:0-19:51"
+      null
     ],
     [
       {
@@ -663,11 +663,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:20:9-20:10"
+            "loc": null
           },
           "name": {
             "name": "clear",
-            "loc": "core/sorted_map/sorted_map.mbti:20:12-20:17"
+            "loc": null
           },
           "params": [
             {
@@ -680,7 +680,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:20:18-20:22"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -691,10 +691,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:20:23-20:24"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:20:23-20:24"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -704,13 +704,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:20:26-20:27"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:20:26-20:27"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:20:18-20:28"
+                "loc": null
               }
             }
           ],
@@ -723,10 +723,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:20:33-20:37"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_map/sorted_map.mbti:20:33-20:37"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -736,21 +736,21 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:20:3-20:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:20:6-20:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:20:0-20:37"
+      null
     ],
     [
       {
@@ -759,11 +759,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:21:19-21:20"
+            "loc": null
           },
           "name": {
             "name": "contains",
-            "loc": "core/sorted_map/sorted_map.mbti:21:22-21:30"
+            "loc": null
           },
           "params": [
             {
@@ -776,7 +776,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:21:31-21:35"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -787,10 +787,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:21:36-21:37"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:21:36-21:37"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -800,13 +800,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:21:39-21:40"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:21:39-21:40"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:21:31-21:41"
+                "loc": null
               }
             },
             {
@@ -819,10 +819,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:21:43-21:44"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:21:43-21:44"
+                "loc": null
               }
             }
           ],
@@ -835,10 +835,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:21:49-21:53"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_map/sorted_map.mbti:21:49-21:53"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -848,7 +848,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:21:3-21:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -856,21 +856,21 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:21:7-21:14"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:21:16-21:17"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:21:0-21:53"
+      null
     ],
     [
       {
@@ -879,11 +879,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:22:9-22:10"
+            "loc": null
           },
           "name": {
             "name": "each",
-            "loc": "core/sorted_map/sorted_map.mbti:22:12-22:16"
+            "loc": null
           },
           "params": [
             {
@@ -896,7 +896,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:22:17-22:21"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -907,10 +907,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:22:22-22:23"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:22:22-22:23"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -920,13 +920,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:22:25-22:26"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:22:25-22:26"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:22:17-22:27"
+                "loc": null
               }
             },
             {
@@ -942,10 +942,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:22:30-22:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:22:30-22:31"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -955,10 +955,10 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:22:33-22:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:22:33-22:34"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -969,10 +969,10 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:22:39-22:43"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:22:39-22:43"
+                  "loc": null
                 },
                 "err": {
                   "type": "MaybeError",
@@ -984,15 +984,15 @@
                         "type": "Ident",
                         "name": "Error"
                       },
-                      "loc": "<no location>:-1:0--1:0"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "<no location>:-1:0--1:0"
+                    "loc": null
                   },
                   "is_old_syntax": false
                 },
                 "is_async": false,
-                "loc": "core/sorted_map/sorted_map.mbti:22:29-22:50"
+                "loc": null
               }
             }
           ],
@@ -1005,10 +1005,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:22:55-22:59"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_map/sorted_map.mbti:22:55-22:59"
+              "loc": null
             },
             {
               "type": "MaybeError",
@@ -1020,10 +1020,10 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "<no location>:-1:0--1:0"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "<no location>:-1:0--1:0"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -1032,21 +1032,21 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:22:3-22:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:22:6-22:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:22:0-22:66"
+      null
     ],
     [
       {
@@ -1055,11 +1055,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:23:9-23:10"
+            "loc": null
           },
           "name": {
             "name": "eachi",
-            "loc": "core/sorted_map/sorted_map.mbti:23:12-23:17"
+            "loc": null
           },
           "params": [
             {
@@ -1072,7 +1072,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:23:18-23:22"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1083,10 +1083,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:23:23-23:24"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:23:23-23:24"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1096,13 +1096,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:23:26-23:27"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:23:26-23:27"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:23:18-23:28"
+                "loc": null
               }
             },
             {
@@ -1118,10 +1118,10 @@
                         "type": "Ident",
                         "name": "Int"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:23:31-23:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:23:31-23:34"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1131,10 +1131,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:23:36-23:37"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:23:36-23:37"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1144,10 +1144,10 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:23:39-23:40"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:23:39-23:40"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1158,10 +1158,10 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:23:45-23:49"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:23:45-23:49"
+                  "loc": null
                 },
                 "err": {
                   "type": "MaybeError",
@@ -1173,15 +1173,15 @@
                         "type": "Ident",
                         "name": "Error"
                       },
-                      "loc": "<no location>:-1:0--1:0"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "<no location>:-1:0--1:0"
+                    "loc": null
                   },
                   "is_old_syntax": false
                 },
                 "is_async": false,
-                "loc": "core/sorted_map/sorted_map.mbti:23:30-23:56"
+                "loc": null
               }
             }
           ],
@@ -1194,10 +1194,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:23:61-23:65"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_map/sorted_map.mbti:23:61-23:65"
+              "loc": null
             },
             {
               "type": "MaybeError",
@@ -1209,10 +1209,10 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "<no location>:-1:0--1:0"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "<no location>:-1:0--1:0"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -1221,21 +1221,21 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:23:3-23:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:23:6-23:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:23:0-23:72"
+      null
     ],
     [
       {
@@ -1244,11 +1244,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:24:19-24:20"
+            "loc": null
           },
           "name": {
             "name": "get",
-            "loc": "core/sorted_map/sorted_map.mbti:24:22-24:25"
+            "loc": null
           },
           "params": [
             {
@@ -1261,7 +1261,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:24:26-24:30"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1272,10 +1272,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:24:31-24:32"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:24:31-24:32"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1285,13 +1285,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:24:34-24:35"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:24:34-24:35"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:24:26-24:36"
+                "loc": null
               }
             },
             {
@@ -1304,10 +1304,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:24:38-24:39"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:24:38-24:39"
+                "loc": null
               }
             }
           ],
@@ -1322,13 +1322,13 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:24:44-24:45"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:24:44-24:45"
+                "loc": null
               },
-              "loc": "core/sorted_map/sorted_map.mbti:24:44-24:46",
-              "question_loc": "core/sorted_map/sorted_map.mbti:24:45-24:46"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -1338,7 +1338,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:24:3-24:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1346,21 +1346,21 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:24:7-24:14"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:24:16-24:17"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:24:0-24:46"
+      null
     ],
     [
       {
@@ -1369,11 +1369,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:25:9-25:10"
+            "loc": null
           },
           "name": {
             "name": "is_empty",
-            "loc": "core/sorted_map/sorted_map.mbti:25:12-25:20"
+            "loc": null
           },
           "params": [
             {
@@ -1386,7 +1386,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:25:21-25:25"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1397,10 +1397,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:25:26-25:27"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:25:26-25:27"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1410,13 +1410,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:25:29-25:30"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:25:29-25:30"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:25:21-25:31"
+                "loc": null
               }
             }
           ],
@@ -1429,10 +1429,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:25:36-25:40"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_map/sorted_map.mbti:25:36-25:40"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1442,21 +1442,21 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:25:3-25:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:25:6-25:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:25:0-25:40"
+      null
     ],
     [
       {
@@ -1465,11 +1465,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:26:9-26:10"
+            "loc": null
           },
           "name": {
             "name": "iter",
-            "loc": "core/sorted_map/sorted_map.mbti:26:12-26:16"
+            "loc": null
           },
           "params": [
             {
@@ -1482,7 +1482,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:26:17-26:21"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1493,10 +1493,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:26:22-26:23"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:26:22-26:23"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1506,13 +1506,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:26:25-26:26"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:26:25-26:26"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:26:17-26:27"
+                "loc": null
               }
             }
           ],
@@ -1525,7 +1525,7 @@
                   "type": "Ident",
                   "name": "Iter"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:26:32-26:36"
+                "loc": null
               },
               "1": [
                 {
@@ -1539,10 +1539,10 @@
                           "type": "Ident",
                           "name": "K"
                         },
-                        "loc": "core/sorted_map/sorted_map.mbti:26:38-26:39"
+                        "loc": null
                       },
                       "1": [],
-                      "loc": "core/sorted_map/sorted_map.mbti:26:38-26:39"
+                      "loc": null
                     },
                     {
                       "type": "TName",
@@ -1552,16 +1552,16 @@
                           "type": "Ident",
                           "name": "V"
                         },
-                        "loc": "core/sorted_map/sorted_map.mbti:26:41-26:42"
+                        "loc": null
                       },
                       "1": [],
-                      "loc": "core/sorted_map/sorted_map.mbti:26:41-26:42"
+                      "loc": null
                     }
                   ],
-                  "loc": "core/sorted_map/sorted_map.mbti:26:37-26:43"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_map/sorted_map.mbti:26:32-26:44"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1571,21 +1571,21 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:26:3-26:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:26:6-26:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:26:0-26:44"
+      null
     ],
     [
       {
@@ -1594,11 +1594,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:27:9-27:10"
+            "loc": null
           },
           "name": {
             "name": "iter2",
-            "loc": "core/sorted_map/sorted_map.mbti:27:12-27:17"
+            "loc": null
           },
           "params": [
             {
@@ -1611,7 +1611,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:27:18-27:22"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1622,10 +1622,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:27:23-27:24"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:27:23-27:24"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1635,13 +1635,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:27:26-27:27"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:27:26-27:27"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:27:18-27:28"
+                "loc": null
               }
             }
           ],
@@ -1654,7 +1654,7 @@
                   "type": "Ident",
                   "name": "Iter2"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:27:33-27:38"
+                "loc": null
               },
               "1": [
                 {
@@ -1665,10 +1665,10 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:27:39-27:40"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:27:39-27:40"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -1678,13 +1678,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:27:42-27:43"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:27:42-27:43"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_map/sorted_map.mbti:27:33-27:44"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1694,21 +1694,21 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:27:3-27:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:27:6-27:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:27:0-27:44"
+      null
     ],
     [
       {
@@ -1717,11 +1717,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:28:9-28:10"
+            "loc": null
           },
           "name": {
             "name": "keys",
-            "loc": "core/sorted_map/sorted_map.mbti:28:12-28:16"
+            "loc": null
           },
           "params": [
             {
@@ -1734,7 +1734,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:28:17-28:21"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1745,10 +1745,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:28:22-28:23"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:28:22-28:23"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1758,13 +1758,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:28:25-28:26"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:28:25-28:26"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:28:17-28:27"
+                "loc": null
               }
             }
           ],
@@ -1777,7 +1777,7 @@
                   "type": "Ident",
                   "name": "Array"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:28:32-28:37"
+                "loc": null
               },
               "1": [
                 {
@@ -1788,13 +1788,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:28:38-28:39"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:28:38-28:39"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_map/sorted_map.mbti:28:32-28:40"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1804,21 +1804,21 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:28:3-28:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:28:6-28:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:28:0-28:40"
+      null
     ],
     [
       {
@@ -1833,11 +1833,11 @@
           ],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:30:19-30:20"
+            "loc": null
           },
           "name": {
             "name": "op_get",
-            "loc": "core/sorted_map/sorted_map.mbti:30:22-30:28"
+            "loc": null
           },
           "params": [
             {
@@ -1850,7 +1850,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:30:29-30:33"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1861,10 +1861,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:30:34-30:35"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:30:34-30:35"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1874,13 +1874,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:30:37-30:38"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:30:37-30:38"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:30:29-30:39"
+                "loc": null
               }
             },
             {
@@ -1893,10 +1893,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:30:41-30:42"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:30:41-30:42"
+                "loc": null
               }
             }
           ],
@@ -1911,13 +1911,13 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:30:47-30:48"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:30:47-30:48"
+                "loc": null
               },
-              "loc": "core/sorted_map/sorted_map.mbti:30:47-30:49",
-              "question_loc": "core/sorted_map/sorted_map.mbti:30:48-30:49"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -1927,7 +1927,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:30:3-30:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1935,21 +1935,21 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:30:7-30:14"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:30:16-30:17"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:29:0-30:49"
+      null
     ],
     [
       {
@@ -1958,11 +1958,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:31:19-31:20"
+            "loc": null
           },
           "name": {
             "name": "op_set",
-            "loc": "core/sorted_map/sorted_map.mbti:31:22-31:28"
+            "loc": null
           },
           "params": [
             {
@@ -1975,7 +1975,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:31:29-31:33"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1986,10 +1986,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:31:34-31:35"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:31:34-31:35"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1999,13 +1999,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:31:37-31:38"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:31:37-31:38"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:31:29-31:39"
+                "loc": null
               }
             },
             {
@@ -2018,10 +2018,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:31:41-31:42"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:31:41-31:42"
+                "loc": null
               }
             },
             {
@@ -2034,10 +2034,10 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:31:44-31:45"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:31:44-31:45"
+                "loc": null
               }
             }
           ],
@@ -2050,10 +2050,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:31:50-31:54"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_map/sorted_map.mbti:31:50-31:54"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2063,7 +2063,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:31:3-31:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2071,21 +2071,21 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:31:7-31:14"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:31:16-31:17"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:31:0-31:54"
+      null
     ],
     [
       {
@@ -2094,11 +2094,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:32:19-32:20"
+            "loc": null
           },
           "name": {
             "name": "range",
-            "loc": "core/sorted_map/sorted_map.mbti:32:22-32:27"
+            "loc": null
           },
           "params": [
             {
@@ -2111,7 +2111,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:32:28-32:32"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2122,10 +2122,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:32:33-32:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:32:33-32:34"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -2135,13 +2135,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:32:36-32:37"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:32:36-32:37"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:32:28-32:38"
+                "loc": null
               }
             },
             {
@@ -2154,10 +2154,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:32:40-32:41"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:32:40-32:41"
+                "loc": null
               }
             },
             {
@@ -2170,10 +2170,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:32:43-32:44"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:32:43-32:44"
+                "loc": null
               }
             }
           ],
@@ -2186,7 +2186,7 @@
                   "type": "Ident",
                   "name": "Iter2"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:32:49-32:54"
+                "loc": null
               },
               "1": [
                 {
@@ -2197,10 +2197,10 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:32:55-32:56"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:32:55-32:56"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -2210,13 +2210,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:32:58-32:59"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:32:58-32:59"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_map/sorted_map.mbti:32:49-32:60"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2226,7 +2226,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:32:3-32:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2234,21 +2234,21 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:32:7-32:14"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:32:16-32:17"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:32:0-32:60"
+      null
     ],
     [
       {
@@ -2257,11 +2257,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:33:19-33:20"
+            "loc": null
           },
           "name": {
             "name": "remove",
-            "loc": "core/sorted_map/sorted_map.mbti:33:22-33:28"
+            "loc": null
           },
           "params": [
             {
@@ -2274,7 +2274,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:33:29-33:33"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2285,10 +2285,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:33:34-33:35"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:33:34-33:35"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -2298,13 +2298,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:33:37-33:38"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:33:37-33:38"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:33:29-33:39"
+                "loc": null
               }
             },
             {
@@ -2317,10 +2317,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:33:41-33:42"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:33:41-33:42"
+                "loc": null
               }
             }
           ],
@@ -2333,10 +2333,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:33:47-33:51"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_map/sorted_map.mbti:33:47-33:51"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2346,7 +2346,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:33:3-33:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2354,21 +2354,21 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:33:7-33:14"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:33:16-33:17"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:33:0-33:51"
+      null
     ],
     [
       {
@@ -2377,11 +2377,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:34:9-34:10"
+            "loc": null
           },
           "name": {
             "name": "size",
-            "loc": "core/sorted_map/sorted_map.mbti:34:12-34:16"
+            "loc": null
           },
           "params": [
             {
@@ -2394,7 +2394,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:34:17-34:21"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2405,10 +2405,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:34:22-34:23"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:34:22-34:23"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -2418,13 +2418,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:34:25-34:26"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:34:25-34:26"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:34:17-34:27"
+                "loc": null
               }
             }
           ],
@@ -2437,10 +2437,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:34:32-34:35"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_map/sorted_map.mbti:34:32-34:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2450,21 +2450,21 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:34:3-34:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:34:6-34:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:34:0-34:35"
+      null
     ],
     [
       {
@@ -2473,11 +2473,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:35:9-35:10"
+            "loc": null
           },
           "name": {
             "name": "to_array",
-            "loc": "core/sorted_map/sorted_map.mbti:35:12-35:20"
+            "loc": null
           },
           "params": [
             {
@@ -2490,7 +2490,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:35:21-35:25"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2501,10 +2501,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:35:26-35:27"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:35:26-35:27"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -2514,13 +2514,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:35:29-35:30"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:35:29-35:30"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:35:21-35:31"
+                "loc": null
               }
             }
           ],
@@ -2533,7 +2533,7 @@
                   "type": "Ident",
                   "name": "Array"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:35:36-35:41"
+                "loc": null
               },
               "1": [
                 {
@@ -2547,10 +2547,10 @@
                           "type": "Ident",
                           "name": "K"
                         },
-                        "loc": "core/sorted_map/sorted_map.mbti:35:43-35:44"
+                        "loc": null
                       },
                       "1": [],
-                      "loc": "core/sorted_map/sorted_map.mbti:35:43-35:44"
+                      "loc": null
                     },
                     {
                       "type": "TName",
@@ -2560,16 +2560,16 @@
                           "type": "Ident",
                           "name": "V"
                         },
-                        "loc": "core/sorted_map/sorted_map.mbti:35:46-35:47"
+                        "loc": null
                       },
                       "1": [],
-                      "loc": "core/sorted_map/sorted_map.mbti:35:46-35:47"
+                      "loc": null
                     }
                   ],
-                  "loc": "core/sorted_map/sorted_map.mbti:35:42-35:48"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_map/sorted_map.mbti:35:36-35:49"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2579,21 +2579,21 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:35:3-35:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:35:6-35:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:35:0-35:49"
+      null
     ],
     [
       {
@@ -2602,11 +2602,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_map/sorted_map.mbti:36:9-36:10"
+            "loc": null
           },
           "name": {
             "name": "values",
-            "loc": "core/sorted_map/sorted_map.mbti:36:12-36:18"
+            "loc": null
           },
           "params": [
             {
@@ -2619,7 +2619,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:36:19-36:23"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2630,10 +2630,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:36:24-36:25"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:36:24-36:25"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -2643,13 +2643,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_map/sorted_map.mbti:36:27-36:28"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_map/sorted_map.mbti:36:27-36:28"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_map/sorted_map.mbti:36:19-36:29"
+                "loc": null
               }
             }
           ],
@@ -2662,7 +2662,7 @@
                   "type": "Ident",
                   "name": "Array"
                 },
-                "loc": "core/sorted_map/sorted_map.mbti:36:34-36:39"
+                "loc": null
               },
               "1": [
                 {
@@ -2673,13 +2673,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_map/sorted_map.mbti:36:40-36:41"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_map/sorted_map.mbti:36:40-36:41"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_map/sorted_map.mbti:36:34-36:42"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2689,21 +2689,21 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:36:3-36:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:36:6-36:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_map/sorted_map.mbti:36:0-36:42"
+      null
     ],
     [
       {
@@ -2714,14 +2714,14 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:37:5-37:6"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:37:8-37:9"
+                "loc": null
               },
               "constraints": []
             }
@@ -2734,7 +2734,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/sorted_map/sorted_map.mbti:37:23-37:24"
+              "loc": null
             },
             "1": [
               {
@@ -2745,10 +2745,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:37:25-37:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:37:25-37:26"
+                "loc": null
               },
               {
                 "type": "TName",
@@ -2758,24 +2758,24 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:37:28-37:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:37:28-37:29"
+                "loc": null
               }
             ],
-            "loc": "core/sorted_map/sorted_map.mbti:37:23-37:30"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Default"
             },
-            "loc": "core/sorted_map/sorted_map.mbti:37:11-37:18"
+            "loc": null
           }
         }
       },
-      "core/sorted_map/sorted_map.mbti:37:0-37:30"
+      null
     ],
     [
       {
@@ -2786,7 +2786,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:38:5-38:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2794,14 +2794,14 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:38:9-38:11"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:38:13-38:14"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2809,7 +2809,7 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:38:17-38:19"
+                  "loc": null
                 }
               ]
             }
@@ -2822,7 +2822,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/sorted_map/sorted_map.mbti:38:28-38:29"
+              "loc": null
             },
             "1": [
               {
@@ -2833,10 +2833,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:38:30-38:31"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:38:30-38:31"
+                "loc": null
               },
               {
                 "type": "TName",
@@ -2846,24 +2846,24 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:38:33-38:34"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:38:33-38:34"
+                "loc": null
               }
             ],
-            "loc": "core/sorted_map/sorted_map.mbti:38:28-38:35"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Eq"
             },
-            "loc": "core/sorted_map/sorted_map.mbti:38:21-38:23"
+            "loc": null
           }
         }
       },
-      "core/sorted_map/sorted_map.mbti:38:0-38:35"
+      null
     ],
     [
       {
@@ -2874,7 +2874,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:39:5-39:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2882,14 +2882,14 @@
                     "type": "Ident",
                     "name": "Show"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:39:9-39:13"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:39:15-39:16"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2897,7 +2897,7 @@
                     "type": "Ident",
                     "name": "Show"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:39:19-39:23"
+                  "loc": null
                 }
               ]
             }
@@ -2910,7 +2910,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/sorted_map/sorted_map.mbti:39:34-39:35"
+              "loc": null
             },
             "1": [
               {
@@ -2921,10 +2921,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:39:36-39:37"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:39:36-39:37"
+                "loc": null
               },
               {
                 "type": "TName",
@@ -2934,24 +2934,24 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:39:39-39:40"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:39:39-39:40"
+                "loc": null
               }
             ],
-            "loc": "core/sorted_map/sorted_map.mbti:39:34-39:41"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Show"
             },
-            "loc": "core/sorted_map/sorted_map.mbti:39:25-39:29"
+            "loc": null
           }
         }
       },
-      "core/sorted_map/sorted_map.mbti:39:0-39:41"
+      null
     ],
     [
       {
@@ -2962,39 +2962,39 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_map/sorted_map.mbti:40:5-40:6"
+                "loc": null
               },
               "constraints": [
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "quickcheck",
-                    "name": "Arbitrary"
+                    "id": "Arbitrary"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:40:9-40:30"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:40:33-40:40"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_map/sorted_map.mbti:40:42-40:43"
+                "loc": null
               },
               "constraints": [
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "quickcheck",
-                    "name": "Arbitrary"
+                    "id": "Arbitrary"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:40:46-40:67"
+                  "loc": null
                 }
               ]
             }
@@ -3007,7 +3007,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/sorted_map/sorted_map.mbti:40:95-40:96"
+              "loc": null
             },
             "1": [
               {
@@ -3018,10 +3018,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:40:97-40:98"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:40:97-40:98"
+                "loc": null
               },
               {
                 "type": "TName",
@@ -3031,25 +3031,25 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_map/sorted_map.mbti:40:100-40:101"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_map/sorted_map.mbti:40:100-40:101"
+                "loc": null
               }
             ],
-            "loc": "core/sorted_map/sorted_map.mbti:40:95-40:102"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "quickcheck",
-              "name": "Arbitrary"
+              "id": "Arbitrary"
             },
-            "loc": "core/sorted_map/sorted_map.mbti:40:69-40:90"
+            "loc": null
           }
         }
       },
-      "core/sorted_map/sorted_map.mbti:40:0-40:102"
+      null
     ]
   ]
 }

@@ -9,7 +9,7 @@
           "attr": [],
           "name": {
             "name": "of",
-            "loc": "core/immut/internal/path/path.mbti:4:13-4:15"
+            "loc": null
           },
           "params": [
             {
@@ -22,10 +22,10 @@
                     "type": "Ident",
                     "name": "A"
                   },
-                  "loc": "core/immut/internal/path/path.mbti:4:16-4:17"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/path/path.mbti:4:16-4:17"
+                "loc": null
               }
             }
           ],
@@ -38,10 +38,10 @@
                   "type": "Ident",
                   "name": "Path"
                 },
-                "loc": "core/immut/internal/path/path.mbti:4:22-4:26"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/path/path.mbti:4:22-4:26"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -51,7 +51,7 @@
             {
               "name": {
                 "name": "A",
-                "loc": "core/immut/internal/path/path.mbti:4:3-4:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -59,14 +59,14 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/immut/internal/path/path.mbti:4:7-4:11"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/immut/internal/path/path.mbti:4:0-4:26"
+      null
     ],
     [
       {
@@ -74,7 +74,7 @@
         "0": {
           "name": {
             "name": "Path",
-            "loc": "core/immut/internal/path/path.mbti:7:14-7:18"
+            "loc": null
           },
           "type_params": [],
           "components": {
@@ -87,20 +87,20 @@
                   "type": "Ident",
                   "name": "UInt"
                 },
-                "loc": "core/immut/internal/path/path.mbti:7:19-7:23"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/path/path.mbti:7:19-7:23"
+              "loc": null
             }
           },
           "vis": {
             "type": "Pub",
             "attr": "all",
-            "loc": "core/immut/internal/path/path.mbti:7:0-7:8"
+            "loc": null
           }
         }
       },
-      "core/immut/internal/path/path.mbti:7:0-7:23"
+      null
     ],
     [
       {
@@ -109,11 +109,11 @@
           "attr": [],
           "type_name": {
             "name": "Path",
-            "loc": "core/immut/internal/path/path.mbti:8:3-8:7"
+            "loc": null
           },
           "name": {
             "name": "idx",
-            "loc": "core/immut/internal/path/path.mbti:8:9-8:12"
+            "loc": null
           },
           "params": [
             {
@@ -126,10 +126,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/path/path.mbti:8:13-8:17"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/path/path.mbti:8:13-8:17"
+                "loc": null
               }
             }
           ],
@@ -142,10 +142,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/immut/internal/path/path.mbti:8:22-8:25"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/path/path.mbti:8:22-8:25"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -154,7 +154,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/path/path.mbti:8:0-8:25"
+      null
     ],
     [
       {
@@ -163,11 +163,11 @@
           "attr": [],
           "type_name": {
             "name": "Path",
-            "loc": "core/immut/internal/path/path.mbti:9:3-9:7"
+            "loc": null
           },
           "name": {
             "name": "inner",
-            "loc": "core/immut/internal/path/path.mbti:9:9-9:14"
+            "loc": null
           },
           "params": [
             {
@@ -180,10 +180,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/path/path.mbti:9:15-9:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/path/path.mbti:9:15-9:19"
+                "loc": null
               }
             }
           ],
@@ -196,10 +196,10 @@
                   "type": "Ident",
                   "name": "UInt"
                 },
-                "loc": "core/immut/internal/path/path.mbti:9:24-9:28"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/path/path.mbti:9:24-9:28"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -208,7 +208,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/path/path.mbti:9:0-9:28"
+      null
     ],
     [
       {
@@ -217,11 +217,11 @@
           "attr": [],
           "type_name": {
             "name": "Path",
-            "loc": "core/immut/internal/path/path.mbti:10:3-10:7"
+            "loc": null
           },
           "name": {
             "name": "is_last",
-            "loc": "core/immut/internal/path/path.mbti:10:9-10:16"
+            "loc": null
           },
           "params": [
             {
@@ -234,10 +234,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/path/path.mbti:10:17-10:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/path/path.mbti:10:17-10:21"
+                "loc": null
               }
             }
           ],
@@ -250,10 +250,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/immut/internal/path/path.mbti:10:26-10:30"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/path/path.mbti:10:26-10:30"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -262,7 +262,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/path/path.mbti:10:0-10:30"
+      null
     ],
     [
       {
@@ -271,11 +271,11 @@
           "attr": [],
           "type_name": {
             "name": "Path",
-            "loc": "core/immut/internal/path/path.mbti:11:3-11:7"
+            "loc": null
           },
           "name": {
             "name": "next",
-            "loc": "core/immut/internal/path/path.mbti:11:9-11:13"
+            "loc": null
           },
           "params": [
             {
@@ -288,10 +288,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/path/path.mbti:11:14-11:18"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/path/path.mbti:11:14-11:18"
+                "loc": null
               }
             }
           ],
@@ -304,10 +304,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/internal/path/path.mbti:11:23-11:27"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/path/path.mbti:11:23-11:27"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -316,7 +316,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/path/path.mbti:11:0-11:27"
+      null
     ],
     [
       {
@@ -325,11 +325,11 @@
           "attr": [],
           "type_name": {
             "name": "Path",
-            "loc": "core/immut/internal/path/path.mbti:12:3-12:7"
+            "loc": null
           },
           "name": {
             "name": "push",
-            "loc": "core/immut/internal/path/path.mbti:12:9-12:13"
+            "loc": null
           },
           "params": [
             {
@@ -342,10 +342,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/path/path.mbti:12:14-12:18"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/path/path.mbti:12:14-12:18"
+                "loc": null
               }
             },
             {
@@ -358,10 +358,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/path/path.mbti:12:20-12:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/path/path.mbti:12:20-12:23"
+                "loc": null
               }
             }
           ],
@@ -374,10 +374,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/internal/path/path.mbti:12:28-12:32"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/path/path.mbti:12:28-12:32"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -386,7 +386,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/path/path.mbti:12:0-12:32"
+      null
     ],
     [
       {
@@ -402,21 +402,21 @@
                 "type": "Ident",
                 "name": "Path"
               },
-              "loc": "core/immut/internal/path/path.mbti:13:12-13:16"
+              "loc": null
             },
             "1": [],
-            "loc": "core/immut/internal/path/path.mbti:13:12-13:16"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Eq"
             },
-            "loc": "core/immut/internal/path/path.mbti:13:5-13:7"
+            "loc": null
           }
         }
       },
-      "core/immut/internal/path/path.mbti:13:0-13:16"
+      null
     ]
   ]
 }

@@ -9,7 +9,7 @@
           "attr": [],
           "name": {
             "name": "from_int",
-            "loc": "core/double/double.mbti:4:3-4:11"
+            "loc": null
           },
           "params": [
             {
@@ -22,10 +22,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/double/double.mbti:4:12-4:15"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:4:12-4:15"
+                "loc": null
               }
             }
           ],
@@ -38,10 +38,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:4:20-4:26"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:4:20-4:26"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -50,7 +50,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:4:0-4:26"
+      null
     ],
     [
       {
@@ -58,7 +58,7 @@
         "0": {
           "name": {
             "name": "infinity",
-            "loc": "core/double/double.mbti:6:4-6:12"
+            "loc": null
           },
           "type_": {
             "type": "TName",
@@ -68,14 +68,14 @@
                 "type": "Ident",
                 "name": "Double"
               },
-              "loc": "core/double/double.mbti:6:15-6:21"
+              "loc": null
             },
             "1": [],
-            "loc": "core/double/double.mbti:6:15-6:21"
+            "loc": null
           }
         }
       },
-      "core/double/double.mbti:6:0-6:21"
+      null
     ],
     [
       {
@@ -83,7 +83,7 @@
         "0": {
           "name": {
             "name": "max_value",
-            "loc": "core/double/double.mbti:8:4-8:13"
+            "loc": null
           },
           "type_": {
             "type": "TName",
@@ -93,14 +93,14 @@
                 "type": "Ident",
                 "name": "Double"
               },
-              "loc": "core/double/double.mbti:8:16-8:22"
+              "loc": null
             },
             "1": [],
-            "loc": "core/double/double.mbti:8:16-8:22"
+            "loc": null
           }
         }
       },
-      "core/double/double.mbti:8:0-8:22"
+      null
     ],
     [
       {
@@ -108,7 +108,7 @@
         "0": {
           "name": {
             "name": "min_positive",
-            "loc": "core/double/double.mbti:10:4-10:16"
+            "loc": null
           },
           "type_": {
             "type": "TName",
@@ -118,14 +118,14 @@
                 "type": "Ident",
                 "name": "Double"
               },
-              "loc": "core/double/double.mbti:10:19-10:25"
+              "loc": null
             },
             "1": [],
-            "loc": "core/double/double.mbti:10:19-10:25"
+            "loc": null
           }
         }
       },
-      "core/double/double.mbti:10:0-10:25"
+      null
     ],
     [
       {
@@ -133,7 +133,7 @@
         "0": {
           "name": {
             "name": "min_value",
-            "loc": "core/double/double.mbti:12:4-12:13"
+            "loc": null
           },
           "type_": {
             "type": "TName",
@@ -143,14 +143,14 @@
                 "type": "Ident",
                 "name": "Double"
               },
-              "loc": "core/double/double.mbti:12:16-12:22"
+              "loc": null
             },
             "1": [],
-            "loc": "core/double/double.mbti:12:16-12:22"
+            "loc": null
           }
         }
       },
-      "core/double/double.mbti:12:0-12:22"
+      null
     ],
     [
       {
@@ -158,7 +158,7 @@
         "0": {
           "name": {
             "name": "neg_infinity",
-            "loc": "core/double/double.mbti:14:4-14:16"
+            "loc": null
           },
           "type_": {
             "type": "TName",
@@ -168,14 +168,14 @@
                 "type": "Ident",
                 "name": "Double"
               },
-              "loc": "core/double/double.mbti:14:19-14:25"
+              "loc": null
             },
             "1": [],
-            "loc": "core/double/double.mbti:14:19-14:25"
+            "loc": null
           }
         }
       },
-      "core/double/double.mbti:14:0-14:25"
+      null
     ],
     [
       {
@@ -183,7 +183,7 @@
         "0": {
           "name": {
             "name": "not_a_number",
-            "loc": "core/double/double.mbti:16:4-16:16"
+            "loc": null
           },
           "type_": {
             "type": "TName",
@@ -193,14 +193,14 @@
                 "type": "Ident",
                 "name": "Double"
               },
-              "loc": "core/double/double.mbti:16:19-16:25"
+              "loc": null
             },
             "1": [],
-            "loc": "core/double/double.mbti:16:19-16:25"
+            "loc": null
           }
         }
       },
-      "core/double/double.mbti:16:0-16:25"
+      null
     ],
     [
       {
@@ -209,11 +209,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:19:3-19:9"
+            "loc": null
           },
           "name": {
             "name": "abs",
-            "loc": "core/double/double.mbti:19:11-19:14"
+            "loc": null
           },
           "params": [
             {
@@ -226,10 +226,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:19:15-19:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:19:15-19:21"
+                "loc": null
               }
             }
           ],
@@ -242,10 +242,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:19:26-19:32"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:19:26-19:32"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -254,7 +254,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:19:0-19:32"
+      null
     ],
     [
       {
@@ -263,19 +263,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "abs",
-            "loc": "core/double/double.mbti:20:16-20:19"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:20:8-20:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:20:0-20:19"
+          "loc": null
         }
       },
-      "core/double/double.mbti:20:0-20:19"
+      null
     ],
     [
       {
@@ -290,11 +290,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:22:3-22:9"
+            "loc": null
           },
           "name": {
             "name": "acos",
-            "loc": "core/double/double.mbti:22:11-22:15"
+            "loc": null
           },
           "params": [
             {
@@ -307,10 +307,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:22:16-22:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:22:16-22:22"
+                "loc": null
               }
             }
           ],
@@ -323,10 +323,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:22:27-22:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:22:27-22:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -335,7 +335,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:21:0-22:33"
+      null
     ],
     [
       {
@@ -344,19 +344,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "acos",
-            "loc": "core/double/double.mbti:23:16-23:20"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:23:8-23:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:23:0-23:20"
+          "loc": null
         }
       },
-      "core/double/double.mbti:23:0-23:20"
+      null
     ],
     [
       {
@@ -371,11 +371,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:25:3-25:9"
+            "loc": null
           },
           "name": {
             "name": "acosh",
-            "loc": "core/double/double.mbti:25:11-25:16"
+            "loc": null
           },
           "params": [
             {
@@ -388,10 +388,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:25:17-25:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:25:17-25:23"
+                "loc": null
               }
             }
           ],
@@ -404,10 +404,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:25:28-25:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:25:28-25:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -416,7 +416,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:24:0-25:34"
+      null
     ],
     [
       {
@@ -425,19 +425,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "acosh",
-            "loc": "core/double/double.mbti:26:16-26:21"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:26:8-26:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:26:0-26:21"
+          "loc": null
         }
       },
-      "core/double/double.mbti:26:0-26:21"
+      null
     ],
     [
       {
@@ -452,11 +452,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:28:3-28:9"
+            "loc": null
           },
           "name": {
             "name": "asin",
-            "loc": "core/double/double.mbti:28:11-28:15"
+            "loc": null
           },
           "params": [
             {
@@ -469,10 +469,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:28:16-28:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:28:16-28:22"
+                "loc": null
               }
             }
           ],
@@ -485,10 +485,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:28:27-28:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:28:27-28:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -497,7 +497,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:27:0-28:33"
+      null
     ],
     [
       {
@@ -506,19 +506,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "asin",
-            "loc": "core/double/double.mbti:29:16-29:20"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:29:8-29:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:29:0-29:20"
+          "loc": null
         }
       },
-      "core/double/double.mbti:29:0-29:20"
+      null
     ],
     [
       {
@@ -533,11 +533,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:31:3-31:9"
+            "loc": null
           },
           "name": {
             "name": "asinh",
-            "loc": "core/double/double.mbti:31:11-31:16"
+            "loc": null
           },
           "params": [
             {
@@ -550,10 +550,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:31:17-31:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:31:17-31:23"
+                "loc": null
               }
             }
           ],
@@ -566,10 +566,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:31:28-31:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:31:28-31:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -578,7 +578,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:30:0-31:34"
+      null
     ],
     [
       {
@@ -587,19 +587,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "asinh",
-            "loc": "core/double/double.mbti:32:16-32:21"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:32:8-32:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:32:0-32:21"
+          "loc": null
         }
       },
-      "core/double/double.mbti:32:0-32:21"
+      null
     ],
     [
       {
@@ -614,11 +614,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:34:3-34:9"
+            "loc": null
           },
           "name": {
             "name": "atan",
-            "loc": "core/double/double.mbti:34:11-34:15"
+            "loc": null
           },
           "params": [
             {
@@ -631,10 +631,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:34:16-34:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:34:16-34:22"
+                "loc": null
               }
             }
           ],
@@ -647,10 +647,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:34:27-34:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:34:27-34:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -659,7 +659,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:33:0-34:33"
+      null
     ],
     [
       {
@@ -668,19 +668,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "atan",
-            "loc": "core/double/double.mbti:35:16-35:20"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:35:8-35:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:35:0-35:20"
+          "loc": null
         }
       },
-      "core/double/double.mbti:35:0-35:20"
+      null
     ],
     [
       {
@@ -695,11 +695,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:37:3-37:9"
+            "loc": null
           },
           "name": {
             "name": "atan2",
-            "loc": "core/double/double.mbti:37:11-37:16"
+            "loc": null
           },
           "params": [
             {
@@ -712,10 +712,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:37:17-37:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:37:17-37:23"
+                "loc": null
               }
             },
             {
@@ -728,10 +728,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:37:25-37:31"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:37:25-37:31"
+                "loc": null
               }
             }
           ],
@@ -744,10 +744,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:37:36-37:42"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:37:36-37:42"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -756,7 +756,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:36:0-37:42"
+      null
     ],
     [
       {
@@ -765,19 +765,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "atan2",
-            "loc": "core/double/double.mbti:38:16-38:21"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:38:8-38:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:38:0-38:21"
+          "loc": null
         }
       },
-      "core/double/double.mbti:38:0-38:21"
+      null
     ],
     [
       {
@@ -792,11 +792,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:40:3-40:9"
+            "loc": null
           },
           "name": {
             "name": "atanh",
-            "loc": "core/double/double.mbti:40:11-40:16"
+            "loc": null
           },
           "params": [
             {
@@ -809,10 +809,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:40:17-40:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:40:17-40:23"
+                "loc": null
               }
             }
           ],
@@ -825,10 +825,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:40:28-40:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:40:28-40:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -837,7 +837,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:39:0-40:34"
+      null
     ],
     [
       {
@@ -846,19 +846,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "atanh",
-            "loc": "core/double/double.mbti:41:16-41:21"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:41:8-41:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:41:0-41:21"
+          "loc": null
         }
       },
-      "core/double/double.mbti:41:0-41:21"
+      null
     ],
     [
       {
@@ -873,11 +873,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:43:3-43:9"
+            "loc": null
           },
           "name": {
             "name": "cbrt",
-            "loc": "core/double/double.mbti:43:11-43:15"
+            "loc": null
           },
           "params": [
             {
@@ -890,10 +890,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:43:16-43:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:43:16-43:22"
+                "loc": null
               }
             }
           ],
@@ -906,10 +906,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:43:27-43:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:43:27-43:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -918,7 +918,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:42:0-43:33"
+      null
     ],
     [
       {
@@ -927,19 +927,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "cbrt",
-            "loc": "core/double/double.mbti:44:16-44:20"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:44:8-44:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:44:0-44:20"
+          "loc": null
         }
       },
-      "core/double/double.mbti:44:0-44:20"
+      null
     ],
     [
       {
@@ -948,11 +948,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:45:3-45:9"
+            "loc": null
           },
           "name": {
             "name": "ceil",
-            "loc": "core/double/double.mbti:45:11-45:15"
+            "loc": null
           },
           "params": [
             {
@@ -965,10 +965,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:45:16-45:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:45:16-45:22"
+                "loc": null
               }
             }
           ],
@@ -981,10 +981,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:45:27-45:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:45:27-45:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -993,7 +993,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:45:0-45:33"
+      null
     ],
     [
       {
@@ -1002,19 +1002,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "ceil",
-            "loc": "core/double/double.mbti:46:16-46:20"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:46:8-46:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:46:0-46:20"
+          "loc": null
         }
       },
-      "core/double/double.mbti:46:0-46:20"
+      null
     ],
     [
       {
@@ -1029,11 +1029,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:48:3-48:9"
+            "loc": null
           },
           "name": {
             "name": "cos",
-            "loc": "core/double/double.mbti:48:11-48:14"
+            "loc": null
           },
           "params": [
             {
@@ -1046,10 +1046,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:48:15-48:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:48:15-48:21"
+                "loc": null
               }
             }
           ],
@@ -1062,10 +1062,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:48:26-48:32"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:48:26-48:32"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1074,7 +1074,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:47:0-48:32"
+      null
     ],
     [
       {
@@ -1083,19 +1083,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "cos",
-            "loc": "core/double/double.mbti:49:16-49:19"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:49:8-49:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:49:0-49:19"
+          "loc": null
         }
       },
-      "core/double/double.mbti:49:0-49:19"
+      null
     ],
     [
       {
@@ -1110,11 +1110,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:51:3-51:9"
+            "loc": null
           },
           "name": {
             "name": "cosh",
-            "loc": "core/double/double.mbti:51:11-51:15"
+            "loc": null
           },
           "params": [
             {
@@ -1127,10 +1127,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:51:16-51:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:51:16-51:22"
+                "loc": null
               }
             }
           ],
@@ -1143,10 +1143,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:51:27-51:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:51:27-51:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1155,7 +1155,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:50:0-51:33"
+      null
     ],
     [
       {
@@ -1164,19 +1164,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "cosh",
-            "loc": "core/double/double.mbti:52:16-52:20"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:52:8-52:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:52:0-52:20"
+          "loc": null
         }
       },
-      "core/double/double.mbti:52:0-52:20"
+      null
     ],
     [
       {
@@ -1191,11 +1191,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:54:3-54:9"
+            "loc": null
           },
           "name": {
             "name": "exp",
-            "loc": "core/double/double.mbti:54:11-54:14"
+            "loc": null
           },
           "params": [
             {
@@ -1208,10 +1208,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:54:15-54:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:54:15-54:21"
+                "loc": null
               }
             }
           ],
@@ -1224,10 +1224,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:54:26-54:32"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:54:26-54:32"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1236,7 +1236,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:53:0-54:32"
+      null
     ],
     [
       {
@@ -1245,19 +1245,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "exp",
-            "loc": "core/double/double.mbti:55:16-55:19"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:55:8-55:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:55:0-55:19"
+          "loc": null
         }
       },
-      "core/double/double.mbti:55:0-55:19"
+      null
     ],
     [
       {
@@ -1272,11 +1272,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:57:3-57:9"
+            "loc": null
           },
           "name": {
             "name": "expm1",
-            "loc": "core/double/double.mbti:57:11-57:16"
+            "loc": null
           },
           "params": [
             {
@@ -1289,10 +1289,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:57:17-57:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:57:17-57:23"
+                "loc": null
               }
             }
           ],
@@ -1305,10 +1305,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:57:28-57:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:57:28-57:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1317,7 +1317,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:56:0-57:34"
+      null
     ],
     [
       {
@@ -1326,19 +1326,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "expm1",
-            "loc": "core/double/double.mbti:58:16-58:21"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:58:8-58:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:58:0-58:21"
+          "loc": null
         }
       },
-      "core/double/double.mbti:58:0-58:21"
+      null
     ],
     [
       {
@@ -1347,11 +1347,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:59:3-59:9"
+            "loc": null
           },
           "name": {
             "name": "floor",
-            "loc": "core/double/double.mbti:59:11-59:16"
+            "loc": null
           },
           "params": [
             {
@@ -1364,10 +1364,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:59:17-59:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:59:17-59:23"
+                "loc": null
               }
             }
           ],
@@ -1380,10 +1380,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:59:28-59:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:59:28-59:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1392,7 +1392,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:59:0-59:34"
+      null
     ],
     [
       {
@@ -1401,19 +1401,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "floor",
-            "loc": "core/double/double.mbti:60:16-60:21"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:60:8-60:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:60:0-60:21"
+          "loc": null
         }
       },
-      "core/double/double.mbti:60:0-60:21"
+      null
     ],
     [
       {
@@ -1422,11 +1422,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:61:3-61:9"
+            "loc": null
           },
           "name": {
             "name": "from_int",
-            "loc": "core/double/double.mbti:61:11-61:19"
+            "loc": null
           },
           "params": [
             {
@@ -1439,10 +1439,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/double/double.mbti:61:20-61:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:61:20-61:23"
+                "loc": null
               }
             }
           ],
@@ -1455,10 +1455,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:61:28-61:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:61:28-61:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1467,7 +1467,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:61:0-61:34"
+      null
     ],
     [
       {
@@ -1482,11 +1482,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:63:3-63:9"
+            "loc": null
           },
           "name": {
             "name": "hypot",
-            "loc": "core/double/double.mbti:63:11-63:16"
+            "loc": null
           },
           "params": [
             {
@@ -1499,10 +1499,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:63:17-63:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:63:17-63:23"
+                "loc": null
               }
             },
             {
@@ -1515,10 +1515,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:63:25-63:31"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:63:25-63:31"
+                "loc": null
               }
             }
           ],
@@ -1531,10 +1531,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:63:36-63:42"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:63:36-63:42"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1543,7 +1543,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:62:0-63:42"
+      null
     ],
     [
       {
@@ -1552,19 +1552,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "hypot",
-            "loc": "core/double/double.mbti:64:16-64:21"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:64:8-64:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:64:0-64:21"
+          "loc": null
         }
       },
-      "core/double/double.mbti:64:0-64:21"
+      null
     ],
     [
       {
@@ -1579,11 +1579,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:66:3-66:9"
+            "loc": null
           },
           "name": {
             "name": "inf",
-            "loc": "core/double/double.mbti:66:11-66:14"
+            "loc": null
           },
           "params": [
             {
@@ -1596,10 +1596,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/double/double.mbti:66:15-66:18"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:66:15-66:18"
+                "loc": null
               }
             }
           ],
@@ -1612,10 +1612,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:66:23-66:29"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:66:23-66:29"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1624,7 +1624,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:65:0-66:29"
+      null
     ],
     [
       {
@@ -1633,11 +1633,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:67:3-67:9"
+            "loc": null
           },
           "name": {
             "name": "is_close",
-            "loc": "core/double/double.mbti:67:11-67:19"
+            "loc": null
           },
           "params": [
             {
@@ -1650,10 +1650,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:67:20-67:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:67:20-67:26"
+                "loc": null
               }
             },
             {
@@ -1666,10 +1666,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:67:28-67:34"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:67:28-67:34"
+                "loc": null
               }
             },
             {
@@ -1677,7 +1677,7 @@
               "0": {
                 "type": "Label",
                 "name": "relative_tolerance",
-                "loc": "core/double/double.mbti:67:36-67:55"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -1687,10 +1687,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:67:58-67:64"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:67:58-67:64"
+                "loc": null
               }
             },
             {
@@ -1698,7 +1698,7 @@
               "0": {
                 "type": "Label",
                 "name": "absolute_tolerance",
-                "loc": "core/double/double.mbti:67:71-67:90"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -1708,10 +1708,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:67:93-67:99"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:67:93-67:99"
+                "loc": null
               }
             }
           ],
@@ -1724,10 +1724,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/double/double.mbti:67:109-67:113"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:67:109-67:113"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1736,7 +1736,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:67:0-67:113"
+      null
     ],
     [
       {
@@ -1745,19 +1745,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "is_close",
-            "loc": "core/double/double.mbti:68:16-68:24"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:68:8-68:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:68:0-68:24"
+          "loc": null
         }
       },
-      "core/double/double.mbti:68:0-68:24"
+      null
     ],
     [
       {
@@ -1766,11 +1766,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:69:3-69:9"
+            "loc": null
           },
           "name": {
             "name": "is_inf",
-            "loc": "core/double/double.mbti:69:11-69:17"
+            "loc": null
           },
           "params": [
             {
@@ -1783,10 +1783,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:69:18-69:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:69:18-69:24"
+                "loc": null
               }
             }
           ],
@@ -1799,10 +1799,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/double/double.mbti:69:29-69:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:69:29-69:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1811,7 +1811,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:69:0-69:33"
+      null
     ],
     [
       {
@@ -1820,11 +1820,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:70:3-70:9"
+            "loc": null
           },
           "name": {
             "name": "is_nan",
-            "loc": "core/double/double.mbti:70:11-70:17"
+            "loc": null
           },
           "params": [
             {
@@ -1837,10 +1837,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:70:18-70:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:70:18-70:24"
+                "loc": null
               }
             }
           ],
@@ -1853,10 +1853,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/double/double.mbti:70:29-70:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:70:29-70:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1865,7 +1865,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:70:0-70:33"
+      null
     ],
     [
       {
@@ -1874,11 +1874,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:71:3-71:9"
+            "loc": null
           },
           "name": {
             "name": "is_neg_inf",
-            "loc": "core/double/double.mbti:71:11-71:21"
+            "loc": null
           },
           "params": [
             {
@@ -1891,10 +1891,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:71:22-71:28"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:71:22-71:28"
+                "loc": null
               }
             }
           ],
@@ -1907,10 +1907,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/double/double.mbti:71:33-71:37"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:71:33-71:37"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1919,7 +1919,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:71:0-71:37"
+      null
     ],
     [
       {
@@ -1928,11 +1928,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:72:3-72:9"
+            "loc": null
           },
           "name": {
             "name": "is_pos_inf",
-            "loc": "core/double/double.mbti:72:11-72:21"
+            "loc": null
           },
           "params": [
             {
@@ -1945,10 +1945,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:72:22-72:28"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:72:22-72:28"
+                "loc": null
               }
             }
           ],
@@ -1961,10 +1961,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/double/double.mbti:72:33-72:37"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:72:33-72:37"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1973,7 +1973,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:72:0-72:37"
+      null
     ],
     [
       {
@@ -1988,11 +1988,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:74:3-74:9"
+            "loc": null
           },
           "name": {
             "name": "ln",
-            "loc": "core/double/double.mbti:74:11-74:13"
+            "loc": null
           },
           "params": [
             {
@@ -2005,10 +2005,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:74:14-74:20"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:74:14-74:20"
+                "loc": null
               }
             }
           ],
@@ -2021,10 +2021,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:74:25-74:31"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:74:25-74:31"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2033,7 +2033,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:73:0-74:31"
+      null
     ],
     [
       {
@@ -2042,19 +2042,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "ln",
-            "loc": "core/double/double.mbti:75:16-75:18"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:75:8-75:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:75:0-75:18"
+          "loc": null
         }
       },
-      "core/double/double.mbti:75:0-75:18"
+      null
     ],
     [
       {
@@ -2069,11 +2069,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:77:3-77:9"
+            "loc": null
           },
           "name": {
             "name": "ln_1p",
-            "loc": "core/double/double.mbti:77:11-77:16"
+            "loc": null
           },
           "params": [
             {
@@ -2086,10 +2086,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:77:17-77:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:77:17-77:23"
+                "loc": null
               }
             }
           ],
@@ -2102,10 +2102,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:77:28-77:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:77:28-77:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2114,7 +2114,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:76:0-77:34"
+      null
     ],
     [
       {
@@ -2123,19 +2123,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "ln_1p",
-            "loc": "core/double/double.mbti:78:16-78:21"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:78:8-78:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:78:0-78:21"
+          "loc": null
         }
       },
-      "core/double/double.mbti:78:0-78:21"
+      null
     ],
     [
       {
@@ -2150,11 +2150,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:80:3-80:9"
+            "loc": null
           },
           "name": {
             "name": "log10",
-            "loc": "core/double/double.mbti:80:11-80:16"
+            "loc": null
           },
           "params": [
             {
@@ -2167,10 +2167,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:80:17-80:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:80:17-80:23"
+                "loc": null
               }
             }
           ],
@@ -2183,10 +2183,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:80:28-80:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:80:28-80:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2195,7 +2195,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:79:0-80:34"
+      null
     ],
     [
       {
@@ -2204,19 +2204,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "log10",
-            "loc": "core/double/double.mbti:81:16-81:21"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:81:8-81:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:81:0-81:21"
+          "loc": null
         }
       },
-      "core/double/double.mbti:81:0-81:21"
+      null
     ],
     [
       {
@@ -2231,11 +2231,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:83:3-83:9"
+            "loc": null
           },
           "name": {
             "name": "log2",
-            "loc": "core/double/double.mbti:83:11-83:15"
+            "loc": null
           },
           "params": [
             {
@@ -2248,10 +2248,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:83:16-83:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:83:16-83:22"
+                "loc": null
               }
             }
           ],
@@ -2264,10 +2264,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:83:27-83:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:83:27-83:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2276,7 +2276,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:82:0-83:33"
+      null
     ],
     [
       {
@@ -2285,19 +2285,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "log2",
-            "loc": "core/double/double.mbti:84:16-84:20"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:84:8-84:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:84:0-84:20"
+          "loc": null
         }
       },
-      "core/double/double.mbti:84:0-84:20"
+      null
     ],
     [
       {
@@ -2312,11 +2312,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:86:3-86:9"
+            "loc": null
           },
           "name": {
             "name": "min_normal",
-            "loc": "core/double/double.mbti:86:11-86:21"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -2328,10 +2328,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:86:27-86:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:86:27-86:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2340,7 +2340,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:85:0-86:33"
+      null
     ],
     [
       {
@@ -2355,11 +2355,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:88:3-88:9"
+            "loc": null
           },
           "name": {
             "name": "nan",
-            "loc": "core/double/double.mbti:88:11-88:14"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -2371,10 +2371,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:88:20-88:26"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:88:20-88:26"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2383,7 +2383,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:87:0-88:26"
+      null
     ],
     [
       {
@@ -2392,11 +2392,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:89:3-89:9"
+            "loc": null
           },
           "name": {
             "name": "pow",
-            "loc": "core/double/double.mbti:89:11-89:14"
+            "loc": null
           },
           "params": [
             {
@@ -2409,10 +2409,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:89:15-89:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:89:15-89:21"
+                "loc": null
               }
             },
             {
@@ -2425,10 +2425,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:89:23-89:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:89:23-89:29"
+                "loc": null
               }
             }
           ],
@@ -2441,10 +2441,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:89:34-89:40"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:89:34-89:40"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2453,7 +2453,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:89:0-89:40"
+      null
     ],
     [
       {
@@ -2462,19 +2462,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "pow",
-            "loc": "core/double/double.mbti:90:16-90:19"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:90:8-90:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:90:0-90:19"
+          "loc": null
         }
       },
-      "core/double/double.mbti:90:0-90:19"
+      null
     ],
     [
       {
@@ -2483,11 +2483,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:91:3-91:9"
+            "loc": null
           },
           "name": {
             "name": "round",
-            "loc": "core/double/double.mbti:91:11-91:16"
+            "loc": null
           },
           "params": [
             {
@@ -2500,10 +2500,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:91:17-91:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:91:17-91:23"
+                "loc": null
               }
             }
           ],
@@ -2516,10 +2516,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:91:28-91:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:91:28-91:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2528,7 +2528,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:91:0-91:34"
+      null
     ],
     [
       {
@@ -2537,19 +2537,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "round",
-            "loc": "core/double/double.mbti:92:16-92:21"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:92:8-92:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:92:0-92:21"
+          "loc": null
         }
       },
-      "core/double/double.mbti:92:0-92:21"
+      null
     ],
     [
       {
@@ -2558,11 +2558,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:93:3-93:9"
+            "loc": null
           },
           "name": {
             "name": "signum",
-            "loc": "core/double/double.mbti:93:11-93:17"
+            "loc": null
           },
           "params": [
             {
@@ -2575,10 +2575,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:93:18-93:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:93:18-93:24"
+                "loc": null
               }
             }
           ],
@@ -2591,10 +2591,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:93:29-93:35"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:93:29-93:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2603,7 +2603,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:93:0-93:35"
+      null
     ],
     [
       {
@@ -2618,11 +2618,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:95:3-95:9"
+            "loc": null
           },
           "name": {
             "name": "sin",
-            "loc": "core/double/double.mbti:95:11-95:14"
+            "loc": null
           },
           "params": [
             {
@@ -2635,10 +2635,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:95:15-95:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:95:15-95:21"
+                "loc": null
               }
             }
           ],
@@ -2651,10 +2651,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:95:26-95:32"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:95:26-95:32"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2663,7 +2663,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:94:0-95:32"
+      null
     ],
     [
       {
@@ -2672,19 +2672,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "sin",
-            "loc": "core/double/double.mbti:96:16-96:19"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:96:8-96:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:96:0-96:19"
+          "loc": null
         }
       },
-      "core/double/double.mbti:96:0-96:19"
+      null
     ],
     [
       {
@@ -2699,11 +2699,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:98:3-98:9"
+            "loc": null
           },
           "name": {
             "name": "sinh",
-            "loc": "core/double/double.mbti:98:11-98:15"
+            "loc": null
           },
           "params": [
             {
@@ -2716,10 +2716,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:98:16-98:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:98:16-98:22"
+                "loc": null
               }
             }
           ],
@@ -2732,10 +2732,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:98:27-98:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:98:27-98:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2744,7 +2744,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:97:0-98:33"
+      null
     ],
     [
       {
@@ -2753,19 +2753,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "sinh",
-            "loc": "core/double/double.mbti:99:16-99:20"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:99:8-99:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:99:0-99:20"
+          "loc": null
         }
       },
-      "core/double/double.mbti:99:0-99:20"
+      null
     ],
     [
       {
@@ -2780,11 +2780,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:101:3-101:9"
+            "loc": null
           },
           "name": {
             "name": "tan",
-            "loc": "core/double/double.mbti:101:11-101:14"
+            "loc": null
           },
           "params": [
             {
@@ -2797,10 +2797,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:101:15-101:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:101:15-101:21"
+                "loc": null
               }
             }
           ],
@@ -2813,10 +2813,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:101:26-101:32"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:101:26-101:32"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2825,7 +2825,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:100:0-101:32"
+      null
     ],
     [
       {
@@ -2834,19 +2834,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "tan",
-            "loc": "core/double/double.mbti:102:16-102:19"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:102:8-102:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:102:0-102:19"
+          "loc": null
         }
       },
-      "core/double/double.mbti:102:0-102:19"
+      null
     ],
     [
       {
@@ -2861,11 +2861,11 @@
           ],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:104:3-104:9"
+            "loc": null
           },
           "name": {
             "name": "tanh",
-            "loc": "core/double/double.mbti:104:11-104:15"
+            "loc": null
           },
           "params": [
             {
@@ -2878,10 +2878,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:104:16-104:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:104:16-104:22"
+                "loc": null
               }
             }
           ],
@@ -2894,10 +2894,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:104:27-104:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:104:27-104:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2906,7 +2906,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:103:0-104:33"
+      null
     ],
     [
       {
@@ -2915,19 +2915,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "tanh",
-            "loc": "core/double/double.mbti:105:16-105:20"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:105:8-105:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:105:0-105:20"
+          "loc": null
         }
       },
-      "core/double/double.mbti:105:0-105:20"
+      null
     ],
     [
       {
@@ -2936,11 +2936,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:106:3-106:9"
+            "loc": null
           },
           "name": {
             "name": "to_be_bytes",
-            "loc": "core/double/double.mbti:106:11-106:22"
+            "loc": null
           },
           "params": [
             {
@@ -2953,10 +2953,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:106:23-106:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:106:23-106:29"
+                "loc": null
               }
             }
           ],
@@ -2969,10 +2969,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/double/double.mbti:106:34-106:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:106:34-106:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2981,7 +2981,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:106:0-106:39"
+      null
     ],
     [
       {
@@ -2990,11 +2990,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:107:3-107:9"
+            "loc": null
           },
           "name": {
             "name": "to_le_bytes",
-            "loc": "core/double/double.mbti:107:11-107:22"
+            "loc": null
           },
           "params": [
             {
@@ -3007,10 +3007,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:107:23-107:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:107:23-107:29"
+                "loc": null
               }
             }
           ],
@@ -3023,10 +3023,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/double/double.mbti:107:34-107:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:107:34-107:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -3035,7 +3035,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:107:0-107:39"
+      null
     ],
     [
       {
@@ -3044,11 +3044,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:108:3-108:9"
+            "loc": null
           },
           "name": {
             "name": "to_string",
-            "loc": "core/double/double.mbti:108:11-108:20"
+            "loc": null
           },
           "params": [
             {
@@ -3061,10 +3061,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:108:21-108:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:108:21-108:27"
+                "loc": null
               }
             }
           ],
@@ -3077,10 +3077,10 @@
                   "type": "Ident",
                   "name": "String"
                 },
-                "loc": "core/double/double.mbti:108:32-108:38"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:108:32-108:38"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -3089,7 +3089,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:108:0-108:38"
+      null
     ],
     [
       {
@@ -3098,11 +3098,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:109:3-109:9"
+            "loc": null
           },
           "name": {
             "name": "to_uint",
-            "loc": "core/double/double.mbti:109:11-109:18"
+            "loc": null
           },
           "params": [
             {
@@ -3115,10 +3115,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:109:19-109:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:109:19-109:25"
+                "loc": null
               }
             }
           ],
@@ -3131,10 +3131,10 @@
                   "type": "Ident",
                   "name": "UInt"
                 },
-                "loc": "core/double/double.mbti:109:30-109:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:109:30-109:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -3143,7 +3143,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:109:0-109:34"
+      null
     ],
     [
       {
@@ -3152,11 +3152,11 @@
           "attr": [],
           "type_name": {
             "name": "Double",
-            "loc": "core/double/double.mbti:110:3-110:9"
+            "loc": null
           },
           "name": {
             "name": "trunc",
-            "loc": "core/double/double.mbti:110:11-110:16"
+            "loc": null
           },
           "params": [
             {
@@ -3169,10 +3169,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/double.mbti:110:17-110:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/double.mbti:110:17-110:23"
+                "loc": null
               }
             }
           ],
@@ -3185,10 +3185,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/double/double.mbti:110:28-110:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/double.mbti:110:28-110:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -3197,7 +3197,7 @@
           "type_params": []
         }
       },
-      "core/double/double.mbti:110:0-110:34"
+      null
     ],
     [
       {
@@ -3206,19 +3206,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "trunc",
-            "loc": "core/double/double.mbti:111:16-111:21"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Double"
             },
-            "loc": "core/double/double.mbti:111:8-111:14"
+            "loc": null
           },
-          "loc": "core/double/double.mbti:111:0-111:21"
+          "loc": null
         }
       },
-      "core/double/double.mbti:111:0-111:21"
+      null
     ],
     [
       {
@@ -3234,21 +3234,21 @@
                 "type": "Ident",
                 "name": "Double"
               },
-              "loc": "core/double/double.mbti:112:14-112:20"
+              "loc": null
             },
             "1": [],
-            "loc": "core/double/double.mbti:112:14-112:20"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Hash"
             },
-            "loc": "core/double/double.mbti:112:5-112:9"
+            "loc": null
           }
         }
       },
-      "core/double/double.mbti:112:0-112:20"
+      null
     ],
     [
       {
@@ -3264,21 +3264,21 @@
                 "type": "Ident",
                 "name": "Double"
               },
-              "loc": "core/double/double.mbti:113:13-113:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/double/double.mbti:113:13-113:19"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Mod"
             },
-            "loc": "core/double/double.mbti:113:5-113:8"
+            "loc": null
           }
         }
       },
-      "core/double/double.mbti:113:0-113:19"
+      null
     ],
     [
       {
@@ -3294,21 +3294,21 @@
                 "type": "Ident",
                 "name": "Double"
               },
-              "loc": "core/double/double.mbti:114:14-114:20"
+              "loc": null
             },
             "1": [],
-            "loc": "core/double/double.mbti:114:14-114:20"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Show"
             },
-            "loc": "core/double/double.mbti:114:5-114:9"
+            "loc": null
           }
         }
       },
-      "core/double/double.mbti:114:0-114:20"
+      null
     ]
   ]
 }

@@ -269,7 +269,7 @@
 ((LIDENT t) 52:24-52:25)
 (RPAREN 52:25-52:26)
 (FAT_ARROW 52:27-52:29)
-((INTERP [InterpLit(repr="Some(", loc={start: {fname: "", lnum: 52, bol: 897, cnum: 926}, end: {fname: "", lnum: 52, bol: 897, cnum: 934}}), InterpSource({source: "t", loc: {start: {fname: "", lnum: 52, bol: 897, cnum: 934}, end: {fname: "", lnum: 52, bol: 897, cnum: 935}}}), InterpLit(repr=")", loc={start: {fname: "", lnum: 52, bol: 897, cnum: 926}, end: {fname: "", lnum: 52, bol: 897, cnum: 938}})]) 52:30-52:42)
+((INTERP [InterpLit(repr="Some(", loc=:52-29-52:37), InterpSource({source: "t", loc: :52-37-52:38}), InterpLit(repr=")", loc=:52-29-52:41)]) 52:30-52:42)
 (NEWLINE 52:42-52:43)
 (RBRACE 53:3-53:4)
 (NEWLINE 53:4-53:5)

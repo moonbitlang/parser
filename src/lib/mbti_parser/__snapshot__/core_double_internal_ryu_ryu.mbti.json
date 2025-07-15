@@ -9,7 +9,7 @@
           "attr": [],
           "name": {
             "name": "ryu_to_string",
-            "loc": "core/double/internal/ryu/ryu.mbti:4:3-4:16"
+            "loc": null
           },
           "params": [
             {
@@ -22,10 +22,10 @@
                     "type": "Ident",
                     "name": "Double"
                   },
-                  "loc": "core/double/internal/ryu/ryu.mbti:4:17-4:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/double/internal/ryu/ryu.mbti:4:17-4:23"
+                "loc": null
               }
             }
           ],
@@ -38,10 +38,10 @@
                   "type": "Ident",
                   "name": "String"
                 },
-                "loc": "core/double/internal/ryu/ryu.mbti:4:28-4:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/double/internal/ryu/ryu.mbti:4:28-4:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -50,7 +50,7 @@
           "type_params": []
         }
       },
-      "core/double/internal/ryu/ryu.mbti:4:0-4:34"
+      null
     ]
   ]
 }

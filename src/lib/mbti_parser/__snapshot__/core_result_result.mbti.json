@@ -13,7 +13,7 @@
           "attr": [],
           "name": {
             "name": "err",
-            "loc": "core/result/result.mbti:8:9-8:12"
+            "loc": null
           },
           "params": [
             {
@@ -26,10 +26,10 @@
                     "type": "Ident",
                     "name": "E"
                   },
-                  "loc": "core/result/result.mbti:8:13-8:14"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:8:13-8:14"
+                "loc": null
               }
             }
           ],
@@ -42,7 +42,7 @@
                   "type": "Ident",
                   "name": "Result"
                 },
-                "loc": "core/result/result.mbti:8:19-8:25"
+                "loc": null
               },
               "1": [
                 {
@@ -53,10 +53,10 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/result/result.mbti:8:26-8:27"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:8:26-8:27"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -66,13 +66,13 @@
                       "type": "Ident",
                       "name": "E"
                     },
-                    "loc": "core/result/result.mbti:8:29-8:30"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:8:29-8:30"
+                  "loc": null
                 }
               ],
-              "loc": "core/result/result.mbti:8:19-8:31"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -82,21 +82,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:8:3-8:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:8:6-8:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:8:0-8:31"
+      null
     ],
     [
       {
@@ -105,7 +105,7 @@
           "attr": [],
           "name": {
             "name": "ok",
-            "loc": "core/result/result.mbti:10:9-10:11"
+            "loc": null
           },
           "params": [
             {
@@ -118,10 +118,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/result/result.mbti:10:12-10:13"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:10:12-10:13"
+                "loc": null
               }
             }
           ],
@@ -134,7 +134,7 @@
                   "type": "Ident",
                   "name": "Result"
                 },
-                "loc": "core/result/result.mbti:10:18-10:24"
+                "loc": null
               },
               "1": [
                 {
@@ -145,10 +145,10 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/result/result.mbti:10:25-10:26"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:10:25-10:26"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -158,13 +158,13 @@
                       "type": "Ident",
                       "name": "E"
                     },
-                    "loc": "core/result/result.mbti:10:28-10:29"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:10:28-10:29"
+                  "loc": null
                 }
               ],
-              "loc": "core/result/result.mbti:10:18-10:30"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -174,21 +174,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:10:3-10:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:10:6-10:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:10:0-10:30"
+      null
     ],
     [
       {
@@ -203,7 +203,7 @@
           ],
           "name": {
             "name": "wrap0",
-            "loc": "core/result/result.mbti:13:17-13:22"
+            "loc": null
           },
           "params": [
             {
@@ -211,7 +211,7 @@
               "0": {
                 "type": "Label",
                 "name": "f",
-                "loc": "core/result/result.mbti:13:23-13:25"
+                "loc": null
               },
               "1": {
                 "type": "TArrow",
@@ -224,10 +224,10 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/result/result.mbti:13:34-13:35"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:13:34-13:35"
+                  "loc": null
                 },
                 "err": {
                   "type": "ErrorType",
@@ -239,15 +239,15 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:13:42-13:43"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:13:42-13:43"
+                    "loc": null
                   },
                   "is_old_syntax": false
                 },
                 "is_async": false,
-                "loc": "core/result/result.mbti:13:28-13:43"
+                "loc": null
               }
             }
           ],
@@ -260,7 +260,7 @@
                   "type": "Ident",
                   "name": "Result"
                 },
-                "loc": "core/result/result.mbti:13:48-13:54"
+                "loc": null
               },
               "1": [
                 {
@@ -271,10 +271,10 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/result/result.mbti:13:55-13:56"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:13:55-13:56"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -284,13 +284,13 @@
                       "type": "Ident",
                       "name": "E"
                     },
-                    "loc": "core/result/result.mbti:13:58-13:59"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:13:58-13:59"
+                  "loc": null
                 }
               ],
-              "loc": "core/result/result.mbti:13:48-13:60"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -300,14 +300,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:13:3-13:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:13:6-13:7"
+                "loc": null
               },
               "constraints": [
                 {
@@ -315,14 +315,14 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "core/result/result.mbti:13:10-13:15"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/result/result.mbti:12:0-13:60"
+      null
     ],
     [
       {
@@ -337,7 +337,7 @@
           ],
           "name": {
             "name": "wrap1",
-            "loc": "core/result/result.mbti:16:20-16:25"
+            "loc": null
           },
           "params": [
             {
@@ -345,7 +345,7 @@
               "0": {
                 "type": "Label",
                 "name": "f",
-                "loc": "core/result/result.mbti:16:26-16:28"
+                "loc": null
               },
               "1": {
                 "type": "TArrow",
@@ -358,10 +358,10 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/result/result.mbti:16:32-16:33"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:16:32-16:33"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -372,10 +372,10 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/result/result.mbti:16:38-16:39"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:16:38-16:39"
+                  "loc": null
                 },
                 "err": {
                   "type": "ErrorType",
@@ -387,15 +387,15 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:16:46-16:47"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:16:46-16:47"
+                    "loc": null
                   },
                   "is_old_syntax": false
                 },
                 "is_async": false,
-                "loc": "core/result/result.mbti:16:31-16:47"
+                "loc": null
               }
             },
             {
@@ -408,10 +408,10 @@
                     "type": "Ident",
                     "name": "A"
                   },
-                  "loc": "core/result/result.mbti:16:49-16:50"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:16:49-16:50"
+                "loc": null
               }
             }
           ],
@@ -424,7 +424,7 @@
                   "type": "Ident",
                   "name": "Result"
                 },
-                "loc": "core/result/result.mbti:16:55-16:61"
+                "loc": null
               },
               "1": [
                 {
@@ -435,10 +435,10 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/result/result.mbti:16:62-16:63"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:16:62-16:63"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -448,13 +448,13 @@
                       "type": "Ident",
                       "name": "E"
                     },
-                    "loc": "core/result/result.mbti:16:65-16:66"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:16:65-16:66"
+                  "loc": null
                 }
               ],
-              "loc": "core/result/result.mbti:16:55-16:67"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -464,21 +464,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:16:3-16:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "A",
-                "loc": "core/result/result.mbti:16:6-16:7"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:16:9-16:10"
+                "loc": null
               },
               "constraints": [
                 {
@@ -486,14 +486,14 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "core/result/result.mbti:16:13-16:18"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/result/result.mbti:15:0-16:67"
+      null
     ],
     [
       {
@@ -508,7 +508,7 @@
           ],
           "name": {
             "name": "wrap2",
-            "loc": "core/result/result.mbti:19:23-19:28"
+            "loc": null
           },
           "params": [
             {
@@ -516,7 +516,7 @@
               "0": {
                 "type": "Label",
                 "name": "f",
-                "loc": "core/result/result.mbti:19:29-19:31"
+                "loc": null
               },
               "1": {
                 "type": "TArrow",
@@ -529,10 +529,10 @@
                         "type": "Ident",
                         "name": "A"
                       },
-                      "loc": "core/result/result.mbti:19:35-19:36"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:19:35-19:36"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -542,10 +542,10 @@
                         "type": "Ident",
                         "name": "B"
                       },
-                      "loc": "core/result/result.mbti:19:38-19:39"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:19:38-19:39"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -556,10 +556,10 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/result/result.mbti:19:44-19:45"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:19:44-19:45"
+                  "loc": null
                 },
                 "err": {
                   "type": "ErrorType",
@@ -571,15 +571,15 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:19:52-19:53"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:19:52-19:53"
+                    "loc": null
                   },
                   "is_old_syntax": false
                 },
                 "is_async": false,
-                "loc": "core/result/result.mbti:19:34-19:53"
+                "loc": null
               }
             },
             {
@@ -592,10 +592,10 @@
                     "type": "Ident",
                     "name": "A"
                   },
-                  "loc": "core/result/result.mbti:19:55-19:56"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:19:55-19:56"
+                "loc": null
               }
             },
             {
@@ -608,10 +608,10 @@
                     "type": "Ident",
                     "name": "B"
                   },
-                  "loc": "core/result/result.mbti:19:58-19:59"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:19:58-19:59"
+                "loc": null
               }
             }
           ],
@@ -624,7 +624,7 @@
                   "type": "Ident",
                   "name": "Result"
                 },
-                "loc": "core/result/result.mbti:19:64-19:70"
+                "loc": null
               },
               "1": [
                 {
@@ -635,10 +635,10 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/result/result.mbti:19:71-19:72"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:19:71-19:72"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -648,13 +648,13 @@
                       "type": "Ident",
                       "name": "E"
                     },
-                    "loc": "core/result/result.mbti:19:74-19:75"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:19:74-19:75"
+                  "loc": null
                 }
               ],
-              "loc": "core/result/result.mbti:19:64-19:76"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -664,28 +664,28 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:19:3-19:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "A",
-                "loc": "core/result/result.mbti:19:6-19:7"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "B",
-                "loc": "core/result/result.mbti:19:9-19:10"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:19:12-19:13"
+                "loc": null
               },
               "constraints": [
                 {
@@ -693,14 +693,14 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "core/result/result.mbti:19:16-19:21"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/result/result.mbti:18:0-19:76"
+      null
     ],
     [
       {
@@ -709,11 +709,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:22:12-22:18"
+            "loc": null
           },
           "name": {
             "name": "bind",
-            "loc": "core/result/result.mbti:22:20-22:24"
+            "loc": null
           },
           "params": [
             {
@@ -726,7 +726,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:22:25-22:29"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -737,10 +737,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:22:30-22:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:22:30-22:31"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -750,13 +750,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:22:33-22:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:22:33-22:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:22:25-22:35"
+                "loc": null
               }
             },
             {
@@ -772,10 +772,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:22:38-22:39"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:22:38-22:39"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -786,7 +786,7 @@
                       "type": "Ident",
                       "name": "Self"
                     },
-                    "loc": "core/result/result.mbti:22:44-22:48"
+                    "loc": null
                   },
                   "1": [
                     {
@@ -797,10 +797,10 @@
                           "type": "Ident",
                           "name": "U"
                         },
-                        "loc": "core/result/result.mbti:22:49-22:50"
+                        "loc": null
                       },
                       "1": [],
-                      "loc": "core/result/result.mbti:22:49-22:50"
+                      "loc": null
                     },
                     {
                       "type": "TName",
@@ -810,19 +810,19 @@
                           "type": "Ident",
                           "name": "E"
                         },
-                        "loc": "core/result/result.mbti:22:52-22:53"
+                        "loc": null
                       },
                       "1": [],
-                      "loc": "core/result/result.mbti:22:52-22:53"
+                      "loc": null
                     }
                   ],
-                  "loc": "core/result/result.mbti:22:44-22:54"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/result/result.mbti:22:37-22:54"
+                "loc": null
               }
             }
           ],
@@ -835,7 +835,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/result/result.mbti:22:59-22:63"
+                "loc": null
               },
               "1": [
                 {
@@ -846,10 +846,10 @@
                       "type": "Ident",
                       "name": "U"
                     },
-                    "loc": "core/result/result.mbti:22:64-22:65"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:22:64-22:65"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -859,13 +859,13 @@
                       "type": "Ident",
                       "name": "E"
                     },
-                    "loc": "core/result/result.mbti:22:67-22:68"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:22:67-22:68"
+                  "loc": null
                 }
               ],
-              "loc": "core/result/result.mbti:22:59-22:69"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -875,28 +875,28 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:22:3-22:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:22:6-22:7"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "U",
-                "loc": "core/result/result.mbti:22:9-22:10"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:22:0-22:69"
+      null
     ],
     [
       {
@@ -905,11 +905,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:23:9-23:15"
+            "loc": null
           },
           "name": {
             "name": "flatten",
-            "loc": "core/result/result.mbti:23:17-23:24"
+            "loc": null
           },
           "params": [
             {
@@ -922,7 +922,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:23:25-23:29"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -933,7 +933,7 @@
                         "type": "Ident",
                         "name": "Self"
                       },
-                      "loc": "core/result/result.mbti:23:30-23:34"
+                      "loc": null
                     },
                     "1": [
                       {
@@ -944,10 +944,10 @@
                             "type": "Ident",
                             "name": "T"
                           },
-                          "loc": "core/result/result.mbti:23:35-23:36"
+                          "loc": null
                         },
                         "1": [],
-                        "loc": "core/result/result.mbti:23:35-23:36"
+                        "loc": null
                       },
                       {
                         "type": "TName",
@@ -957,13 +957,13 @@
                             "type": "Ident",
                             "name": "E"
                           },
-                          "loc": "core/result/result.mbti:23:38-23:39"
+                          "loc": null
                         },
                         "1": [],
-                        "loc": "core/result/result.mbti:23:38-23:39"
+                        "loc": null
                       }
                     ],
-                    "loc": "core/result/result.mbti:23:30-23:40"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -973,13 +973,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:23:42-23:43"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:23:42-23:43"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:23:25-23:44"
+                "loc": null
               }
             }
           ],
@@ -992,7 +992,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/result/result.mbti:23:49-23:53"
+                "loc": null
               },
               "1": [
                 {
@@ -1003,10 +1003,10 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/result/result.mbti:23:54-23:55"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:23:54-23:55"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -1016,13 +1016,13 @@
                       "type": "Ident",
                       "name": "E"
                     },
-                    "loc": "core/result/result.mbti:23:57-23:58"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:23:57-23:58"
+                  "loc": null
                 }
               ],
-              "loc": "core/result/result.mbti:23:49-23:59"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1032,21 +1032,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:23:3-23:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:23:6-23:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:23:0-23:59"
+      null
     ],
     [
       {
@@ -1055,11 +1055,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:24:12-24:18"
+            "loc": null
           },
           "name": {
             "name": "fold",
-            "loc": "core/result/result.mbti:24:20-24:24"
+            "loc": null
           },
           "params": [
             {
@@ -1072,7 +1072,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:24:25-24:29"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1083,10 +1083,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:24:30-24:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:24:30-24:31"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1096,13 +1096,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:24:33-24:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:24:33-24:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:24:25-24:35"
+                "loc": null
               }
             },
             {
@@ -1118,10 +1118,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:24:38-24:39"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:24:38-24:39"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1132,16 +1132,16 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/result/result.mbti:24:44-24:45"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:24:44-24:45"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/result/result.mbti:24:37-24:45"
+                "loc": null
               }
             },
             {
@@ -1157,10 +1157,10 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:24:48-24:49"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:24:48-24:49"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1171,16 +1171,16 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/result/result.mbti:24:54-24:55"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:24:54-24:55"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/result/result.mbti:24:47-24:55"
+                "loc": null
               }
             }
           ],
@@ -1193,10 +1193,10 @@
                   "type": "Ident",
                   "name": "V"
                 },
-                "loc": "core/result/result.mbti:24:60-24:61"
+                "loc": null
               },
               "1": [],
-              "loc": "core/result/result.mbti:24:60-24:61"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1206,28 +1206,28 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:24:3-24:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:24:6-24:7"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "V",
-                "loc": "core/result/result.mbti:24:9-24:10"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:24:0-24:61"
+      null
     ],
     [
       {
@@ -1236,11 +1236,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:25:9-25:15"
+            "loc": null
           },
           "name": {
             "name": "is_err",
-            "loc": "core/result/result.mbti:25:17-25:23"
+            "loc": null
           },
           "params": [
             {
@@ -1253,7 +1253,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:25:24-25:28"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1264,10 +1264,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:25:29-25:30"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:25:29-25:30"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1277,13 +1277,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:25:32-25:33"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:25:32-25:33"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:25:24-25:34"
+                "loc": null
               }
             }
           ],
@@ -1296,10 +1296,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/result/result.mbti:25:39-25:43"
+                "loc": null
               },
               "1": [],
-              "loc": "core/result/result.mbti:25:39-25:43"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1309,21 +1309,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:25:3-25:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:25:6-25:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:25:0-25:43"
+      null
     ],
     [
       {
@@ -1332,11 +1332,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:26:9-26:15"
+            "loc": null
           },
           "name": {
             "name": "is_ok",
-            "loc": "core/result/result.mbti:26:17-26:22"
+            "loc": null
           },
           "params": [
             {
@@ -1349,7 +1349,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:26:23-26:27"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1360,10 +1360,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:26:28-26:29"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:26:28-26:29"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1373,13 +1373,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:26:31-26:32"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:26:31-26:32"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:26:23-26:33"
+                "loc": null
               }
             }
           ],
@@ -1392,10 +1392,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/result/result.mbti:26:38-26:42"
+                "loc": null
               },
               "1": [],
-              "loc": "core/result/result.mbti:26:38-26:42"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1405,21 +1405,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:26:3-26:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:26:6-26:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:26:0-26:42"
+      null
     ],
     [
       {
@@ -1428,11 +1428,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:27:12-27:18"
+            "loc": null
           },
           "name": {
             "name": "map",
-            "loc": "core/result/result.mbti:27:20-27:23"
+            "loc": null
           },
           "params": [
             {
@@ -1445,7 +1445,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:27:24-27:28"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1456,10 +1456,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:27:29-27:30"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:27:29-27:30"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1469,13 +1469,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:27:32-27:33"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:27:32-27:33"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:27:24-27:34"
+                "loc": null
               }
             },
             {
@@ -1491,10 +1491,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:27:37-27:38"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:27:37-27:38"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1505,16 +1505,16 @@
                       "type": "Ident",
                       "name": "U"
                     },
-                    "loc": "core/result/result.mbti:27:43-27:44"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:27:43-27:44"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/result/result.mbti:27:36-27:44"
+                "loc": null
               }
             }
           ],
@@ -1527,7 +1527,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/result/result.mbti:27:49-27:53"
+                "loc": null
               },
               "1": [
                 {
@@ -1538,10 +1538,10 @@
                       "type": "Ident",
                       "name": "U"
                     },
-                    "loc": "core/result/result.mbti:27:54-27:55"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:27:54-27:55"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -1551,13 +1551,13 @@
                       "type": "Ident",
                       "name": "E"
                     },
-                    "loc": "core/result/result.mbti:27:57-27:58"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:27:57-27:58"
+                  "loc": null
                 }
               ],
-              "loc": "core/result/result.mbti:27:49-27:59"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1567,28 +1567,28 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:27:3-27:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:27:6-27:7"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "U",
-                "loc": "core/result/result.mbti:27:9-27:10"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:27:0-27:59"
+      null
     ],
     [
       {
@@ -1597,11 +1597,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:28:12-28:18"
+            "loc": null
           },
           "name": {
             "name": "map_err",
-            "loc": "core/result/result.mbti:28:20-28:27"
+            "loc": null
           },
           "params": [
             {
@@ -1614,7 +1614,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:28:28-28:32"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1625,10 +1625,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:28:33-28:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:28:33-28:34"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1638,13 +1638,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:28:36-28:37"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:28:36-28:37"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:28:28-28:38"
+                "loc": null
               }
             },
             {
@@ -1660,10 +1660,10 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:28:41-28:42"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:28:41-28:42"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1674,16 +1674,16 @@
                       "type": "Ident",
                       "name": "F"
                     },
-                    "loc": "core/result/result.mbti:28:47-28:48"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:28:47-28:48"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/result/result.mbti:28:40-28:48"
+                "loc": null
               }
             }
           ],
@@ -1696,7 +1696,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/result/result.mbti:28:53-28:57"
+                "loc": null
               },
               "1": [
                 {
@@ -1707,10 +1707,10 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/result/result.mbti:28:58-28:59"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:28:58-28:59"
+                  "loc": null
                 },
                 {
                   "type": "TName",
@@ -1720,13 +1720,13 @@
                       "type": "Ident",
                       "name": "F"
                     },
-                    "loc": "core/result/result.mbti:28:61-28:62"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:28:61-28:62"
+                  "loc": null
                 }
               ],
-              "loc": "core/result/result.mbti:28:53-28:63"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1736,28 +1736,28 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:28:3-28:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:28:6-28:7"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "F",
-                "loc": "core/result/result.mbti:28:9-28:10"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:28:0-28:63"
+      null
     ],
     [
       {
@@ -1766,11 +1766,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:29:9-29:15"
+            "loc": null
           },
           "name": {
             "name": "or",
-            "loc": "core/result/result.mbti:29:17-29:19"
+            "loc": null
           },
           "params": [
             {
@@ -1783,7 +1783,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:29:20-29:24"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1794,10 +1794,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:29:25-29:26"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:29:25-29:26"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1807,13 +1807,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:29:28-29:29"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:29:28-29:29"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:29:20-29:30"
+                "loc": null
               }
             },
             {
@@ -1826,10 +1826,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/result/result.mbti:29:32-29:33"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:29:32-29:33"
+                "loc": null
               }
             }
           ],
@@ -1842,10 +1842,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/result/result.mbti:29:38-29:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/result/result.mbti:29:38-29:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1855,21 +1855,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:29:3-29:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:29:6-29:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:29:0-29:39"
+      null
     ],
     [
       {
@@ -1878,11 +1878,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:30:9-30:15"
+            "loc": null
           },
           "name": {
             "name": "or_else",
-            "loc": "core/result/result.mbti:30:17-30:24"
+            "loc": null
           },
           "params": [
             {
@@ -1895,7 +1895,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:30:25-30:29"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1906,10 +1906,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:30:30-30:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:30:30-30:31"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1919,13 +1919,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:30:33-30:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:30:33-30:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:30:25-30:35"
+                "loc": null
               }
             },
             {
@@ -1941,16 +1941,16 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/result/result.mbti:30:43-30:44"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/result/result.mbti:30:43-30:44"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/result/result.mbti:30:37-30:44"
+                "loc": null
               }
             }
           ],
@@ -1963,10 +1963,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/result/result.mbti:30:49-30:50"
+                "loc": null
               },
               "1": [],
-              "loc": "core/result/result.mbti:30:49-30:50"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1976,21 +1976,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:30:3-30:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:30:6-30:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:30:0-30:50"
+      null
     ],
     [
       {
@@ -1999,11 +1999,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:31:9-31:15"
+            "loc": null
           },
           "name": {
             "name": "to_option",
-            "loc": "core/result/result.mbti:31:17-31:26"
+            "loc": null
           },
           "params": [
             {
@@ -2016,7 +2016,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:31:27-31:31"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2027,10 +2027,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:31:32-31:33"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:31:32-31:33"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -2040,13 +2040,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:31:35-31:36"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:31:35-31:36"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:31:27-31:37"
+                "loc": null
               }
             }
           ],
@@ -2061,13 +2061,13 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/result/result.mbti:31:42-31:43"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:31:42-31:43"
+                "loc": null
               },
-              "loc": "core/result/result.mbti:31:42-31:44",
-              "question_loc": "core/result/result.mbti:31:43-31:44"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -2077,21 +2077,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:31:3-31:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:31:6-31:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:31:0-31:44"
+      null
     ],
     [
       {
@@ -2100,11 +2100,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:32:9-32:15"
+            "loc": null
           },
           "name": {
             "name": "unwrap",
-            "loc": "core/result/result.mbti:32:17-32:23"
+            "loc": null
           },
           "params": [
             {
@@ -2117,7 +2117,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:32:24-32:28"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2128,10 +2128,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:32:29-32:30"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:32:29-32:30"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -2141,13 +2141,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:32:32-32:33"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:32:32-32:33"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:32:24-32:34"
+                "loc": null
               }
             }
           ],
@@ -2160,10 +2160,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/result/result.mbti:32:39-32:40"
+                "loc": null
               },
               "1": [],
-              "loc": "core/result/result.mbti:32:39-32:40"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2173,21 +2173,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:32:3-32:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:32:6-32:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:32:0-32:40"
+      null
     ],
     [
       {
@@ -2196,11 +2196,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:33:9-33:15"
+            "loc": null
           },
           "name": {
             "name": "unwrap_err",
-            "loc": "core/result/result.mbti:33:17-33:27"
+            "loc": null
           },
           "params": [
             {
@@ -2213,7 +2213,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:33:28-33:32"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2224,10 +2224,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:33:33-33:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:33:33-33:34"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -2237,13 +2237,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:33:36-33:37"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:33:36-33:37"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:33:28-33:38"
+                "loc": null
               }
             }
           ],
@@ -2256,10 +2256,10 @@
                   "type": "Ident",
                   "name": "E"
                 },
-                "loc": "core/result/result.mbti:33:43-33:44"
+                "loc": null
               },
               "1": [],
-              "loc": "core/result/result.mbti:33:43-33:44"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2269,21 +2269,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:33:3-33:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:33:6-33:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/result/result.mbti:33:0-33:44"
+      null
     ],
     [
       {
@@ -2292,11 +2292,11 @@
           "attr": [],
           "type_name": {
             "name": "Result",
-            "loc": "core/result/result.mbti:34:17-34:23"
+            "loc": null
           },
           "name": {
             "name": "unwrap_or_error",
-            "loc": "core/result/result.mbti:34:25-34:40"
+            "loc": null
           },
           "params": [
             {
@@ -2309,7 +2309,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/result/result.mbti:34:41-34:45"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2320,10 +2320,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/result/result.mbti:34:46-34:47"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:34:46-34:47"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -2333,13 +2333,13 @@
                         "type": "Ident",
                         "name": "E"
                       },
-                      "loc": "core/result/result.mbti:34:49-34:50"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/result/result.mbti:34:49-34:50"
+                    "loc": null
                   }
                 ],
-                "loc": "core/result/result.mbti:34:41-34:51"
+                "loc": null
               }
             }
           ],
@@ -2352,10 +2352,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/result/result.mbti:34:56-34:57"
+                "loc": null
               },
               "1": [],
-              "loc": "core/result/result.mbti:34:56-34:57"
+              "loc": null
             },
             {
               "type": "ErrorType",
@@ -2367,10 +2367,10 @@
                     "type": "Ident",
                     "name": "E"
                   },
-                  "loc": "core/result/result.mbti:34:64-34:65"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:34:64-34:65"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -2379,14 +2379,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:34:3-34:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:34:6-34:7"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2394,14 +2394,14 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "core/result/result.mbti:34:10-34:15"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/result/result.mbti:34:0-34:65"
+      null
     ],
     [
       {
@@ -2412,7 +2412,7 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:35:5-35:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2420,14 +2420,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/result/result.mbti:35:9-35:16"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:35:18-35:19"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2435,7 +2435,7 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/result/result.mbti:35:22-35:29"
+                  "loc": null
                 }
               ]
             }
@@ -2448,7 +2448,7 @@
                 "type": "Ident",
                 "name": "Result"
               },
-              "loc": "core/result/result.mbti:35:43-35:49"
+              "loc": null
             },
             "1": [
               {
@@ -2459,10 +2459,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/result/result.mbti:35:50-35:51"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:35:50-35:51"
+                "loc": null
               },
               {
                 "type": "TName",
@@ -2472,24 +2472,24 @@
                     "type": "Ident",
                     "name": "E"
                   },
-                  "loc": "core/result/result.mbti:35:53-35:54"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:35:53-35:54"
+                "loc": null
               }
             ],
-            "loc": "core/result/result.mbti:35:43-35:55"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Compare"
             },
-            "loc": "core/result/result.mbti:35:31-35:38"
+            "loc": null
           }
         }
       },
-      "core/result/result.mbti:35:0-35:55"
+      null
     ],
     [
       {
@@ -2500,32 +2500,32 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/result/result.mbti:36:5-36:6"
+                "loc": null
               },
               "constraints": [
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "quickcheck",
-                    "name": "Arbitrary"
+                    "id": "Arbitrary"
                   },
-                  "loc": "core/result/result.mbti:36:9-36:30"
+                  "loc": null
                 }
               ]
             },
             {
               "name": {
                 "name": "E",
-                "loc": "core/result/result.mbti:36:32-36:33"
+                "loc": null
               },
               "constraints": [
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "quickcheck",
-                    "name": "Arbitrary"
+                    "id": "Arbitrary"
                   },
-                  "loc": "core/result/result.mbti:36:36-36:57"
+                  "loc": null
                 }
               ]
             }
@@ -2538,7 +2538,7 @@
                 "type": "Ident",
                 "name": "Result"
               },
-              "loc": "core/result/result.mbti:36:85-36:91"
+              "loc": null
             },
             "1": [
               {
@@ -2549,10 +2549,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/result/result.mbti:36:92-36:93"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:36:92-36:93"
+                "loc": null
               },
               {
                 "type": "TName",
@@ -2562,25 +2562,25 @@
                     "type": "Ident",
                     "name": "E"
                   },
-                  "loc": "core/result/result.mbti:36:95-36:96"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/result/result.mbti:36:95-36:96"
+                "loc": null
               }
             ],
-            "loc": "core/result/result.mbti:36:85-36:97"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "quickcheck",
-              "name": "Arbitrary"
+              "id": "Arbitrary"
             },
-            "loc": "core/result/result.mbti:36:59-36:80"
+            "loc": null
           }
         }
       },
-      "core/result/result.mbti:36:0-36:97"
+      null
     ]
   ]
 }

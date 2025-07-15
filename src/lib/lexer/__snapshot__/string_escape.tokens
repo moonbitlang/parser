@@ -22,7 +22,7 @@
 (NEWLINE 4:17-4:18)
 ((LIDENT println) 5:3-5:10)
 (LPAREN 5:10-5:11)
-((INTERP [InterpSource({source: "empty", loc: {start: {fname: "", lnum: 5, bol: 67, cnum: 80}, end: {fname: "", lnum: 5, bol: 67, cnum: 85}}}), InterpLit(repr="\\u6211", loc={start: {fname: "", lnum: 5, bol: 67, cnum: 77}, end: {fname: "", lnum: 5, bol: 67, cnum: 93}})]) 5:11-5:27)
+((INTERP [InterpSource({source: "empty", loc: :5-13-5:18}), InterpLit(repr="\\u6211", loc=:5-10-5:26)]) 5:11-5:27)
 (RPAREN 5:27-5:28)
 ((SEMI false) 5:28-5:28)
 (NEWLINE 5:28-5:29)

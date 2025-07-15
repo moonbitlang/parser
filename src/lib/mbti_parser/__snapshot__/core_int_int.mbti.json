@@ -8,7 +8,7 @@
         "0": {
           "name": {
             "name": "max_value",
-            "loc": "core/int/int.mbti:4:4-4:13"
+            "loc": null
           },
           "type_": {
             "type": "TName",
@@ -18,14 +18,14 @@
                 "type": "Ident",
                 "name": "Int"
               },
-              "loc": "core/int/int.mbti:4:16-4:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/int/int.mbti:4:16-4:19"
+            "loc": null
           }
         }
       },
-      "core/int/int.mbti:4:0-4:19"
+      null
     ],
     [
       {
@@ -33,7 +33,7 @@
         "0": {
           "name": {
             "name": "min_value",
-            "loc": "core/int/int.mbti:6:4-6:13"
+            "loc": null
           },
           "type_": {
             "type": "TName",
@@ -43,14 +43,14 @@
                 "type": "Ident",
                 "name": "Int"
               },
-              "loc": "core/int/int.mbti:6:16-6:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/int/int.mbti:6:16-6:19"
+            "loc": null
           }
         }
       },
-      "core/int/int.mbti:6:0-6:19"
+      null
     ],
     [
       {
@@ -59,11 +59,11 @@
           "attr": [],
           "type_name": {
             "name": "Int",
-            "loc": "core/int/int.mbti:9:3-9:6"
+            "loc": null
           },
           "name": {
             "name": "abs",
-            "loc": "core/int/int.mbti:9:8-9:11"
+            "loc": null
           },
           "params": [
             {
@@ -76,10 +76,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/int/int.mbti:9:12-9:15"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/int/int.mbti:9:12-9:15"
+                "loc": null
               }
             }
           ],
@@ -92,10 +92,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/int/int.mbti:9:20-9:23"
+                "loc": null
               },
               "1": [],
-              "loc": "core/int/int.mbti:9:20-9:23"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -104,7 +104,7 @@
           "type_params": []
         }
       },
-      "core/int/int.mbti:9:0-9:23"
+      null
     ],
     [
       {
@@ -113,19 +113,19 @@
           "$tag": "FnAlias",
           "name": {
             "name": "abs",
-            "loc": "core/int/int.mbti:10:13-10:16"
+            "loc": null
           },
           "type_name": {
             "name": {
               "type": "Ident",
               "name": "Int"
             },
-            "loc": "core/int/int.mbti:10:8-10:11"
+            "loc": null
           },
-          "loc": "core/int/int.mbti:10:0-10:16"
+          "loc": null
         }
       },
-      "core/int/int.mbti:10:0-10:16"
+      null
     ],
     [
       {
@@ -134,11 +134,11 @@
           "attr": [],
           "type_name": {
             "name": "Int",
-            "loc": "core/int/int.mbti:11:3-11:6"
+            "loc": null
           },
           "name": {
             "name": "to_be_bytes",
-            "loc": "core/int/int.mbti:11:8-11:19"
+            "loc": null
           },
           "params": [
             {
@@ -151,10 +151,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/int/int.mbti:11:20-11:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/int/int.mbti:11:20-11:23"
+                "loc": null
               }
             }
           ],
@@ -167,10 +167,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/int/int.mbti:11:28-11:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/int/int.mbti:11:28-11:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -179,7 +179,7 @@
           "type_params": []
         }
       },
-      "core/int/int.mbti:11:0-11:33"
+      null
     ],
     [
       {
@@ -188,11 +188,11 @@
           "attr": [],
           "type_name": {
             "name": "Int",
-            "loc": "core/int/int.mbti:12:3-12:6"
+            "loc": null
           },
           "name": {
             "name": "to_le_bytes",
-            "loc": "core/int/int.mbti:12:8-12:19"
+            "loc": null
           },
           "params": [
             {
@@ -205,10 +205,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/int/int.mbti:12:20-12:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/int/int.mbti:12:20-12:23"
+                "loc": null
               }
             }
           ],
@@ -221,10 +221,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/int/int.mbti:12:28-12:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/int/int.mbti:12:28-12:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -233,7 +233,7 @@
           "type_params": []
         }
       },
-      "core/int/int.mbti:12:0-12:33"
+      null
     ]
   ]
 }

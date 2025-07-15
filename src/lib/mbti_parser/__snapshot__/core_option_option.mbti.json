@@ -19,7 +19,7 @@
           ],
           "name": {
             "name": "empty",
-            "loc": "core/option/option.mbti:9:6-9:11"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -33,13 +33,13 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/option/option.mbti:9:17-9:18"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:9:17-9:18"
+                "loc": null
               },
-              "loc": "core/option/option.mbti:9:17-9:19",
-              "question_loc": "core/option/option.mbti:9:18-9:19"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -49,14 +49,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:9:3-9:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:8:0-9:19"
+      null
     ],
     [
       {
@@ -71,7 +71,7 @@
           ],
           "name": {
             "name": "some",
-            "loc": "core/option/option.mbti:12:6-12:10"
+            "loc": null
           },
           "params": [
             {
@@ -84,10 +84,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/option/option.mbti:12:11-12:12"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:12:11-12:12"
+                "loc": null
               }
             }
           ],
@@ -102,13 +102,13 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/option/option.mbti:12:17-12:18"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:12:17-12:18"
+                "loc": null
               },
-              "loc": "core/option/option.mbti:12:17-12:19",
-              "question_loc": "core/option/option.mbti:12:18-12:19"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -118,14 +118,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:12:3-12:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:11:0-12:19"
+      null
     ],
     [
       {
@@ -140,7 +140,7 @@
           ],
           "name": {
             "name": "unless",
-            "loc": "core/option/option.mbti:15:6-15:12"
+            "loc": null
           },
           "params": [
             {
@@ -153,10 +153,10 @@
                     "type": "Ident",
                     "name": "Bool"
                   },
-                  "loc": "core/option/option.mbti:15:13-15:17"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:15:13-15:17"
+                "loc": null
               }
             },
             {
@@ -172,16 +172,16 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:15:25-15:26"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:15:25-15:26"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/option/option.mbti:15:19-15:26"
+                "loc": null
               }
             }
           ],
@@ -196,13 +196,13 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/option/option.mbti:15:31-15:32"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:15:31-15:32"
+                "loc": null
               },
-              "loc": "core/option/option.mbti:15:31-15:33",
-              "question_loc": "core/option/option.mbti:15:32-15:33"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -212,14 +212,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:15:3-15:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:14:0-15:33"
+      null
     ],
     [
       {
@@ -234,7 +234,7 @@
           ],
           "name": {
             "name": "when",
-            "loc": "core/option/option.mbti:18:6-18:10"
+            "loc": null
           },
           "params": [
             {
@@ -247,10 +247,10 @@
                     "type": "Ident",
                     "name": "Bool"
                   },
-                  "loc": "core/option/option.mbti:18:11-18:15"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:18:11-18:15"
+                "loc": null
               }
             },
             {
@@ -266,16 +266,16 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:18:23-18:24"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:18:23-18:24"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/option/option.mbti:18:17-18:24"
+                "loc": null
               }
             }
           ],
@@ -290,13 +290,13 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/option/option.mbti:18:29-18:30"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:18:29-18:30"
+                "loc": null
               },
-              "loc": "core/option/option.mbti:18:29-18:31",
-              "question_loc": "core/option/option.mbti:18:30-18:31"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -306,14 +306,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:18:3-18:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:17:0-18:31"
+      null
     ],
     [
       {
@@ -322,11 +322,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:21:9-21:15"
+            "loc": null
           },
           "name": {
             "name": "bind",
-            "loc": "core/option/option.mbti:21:17-21:21"
+            "loc": null
           },
           "params": [
             {
@@ -341,13 +341,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:21:22-21:23"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:21:22-21:23"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:21:22-21:24",
-                "question_loc": "core/option/option.mbti:21:23-21:24"
+                "loc": null,
+                "question_loc": null
               }
             },
             {
@@ -363,10 +363,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/option/option.mbti:21:27-21:28"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/option/option.mbti:21:27-21:28"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -379,19 +379,19 @@
                         "type": "Ident",
                         "name": "U"
                       },
-                      "loc": "core/option/option.mbti:21:33-21:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/option/option.mbti:21:33-21:34"
+                    "loc": null
                   },
-                  "loc": "core/option/option.mbti:21:33-21:35",
-                  "question_loc": "core/option/option.mbti:21:34-21:35"
+                  "loc": null,
+                  "question_loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/option/option.mbti:21:26-21:35"
+                "loc": null
               }
             }
           ],
@@ -406,13 +406,13 @@
                     "type": "Ident",
                     "name": "U"
                   },
-                  "loc": "core/option/option.mbti:21:40-21:41"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:21:40-21:41"
+                "loc": null
               },
-              "loc": "core/option/option.mbti:21:40-21:42",
-              "question_loc": "core/option/option.mbti:21:41-21:42"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -422,21 +422,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:21:3-21:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "U",
-                "loc": "core/option/option.mbti:21:6-21:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:21:0-21:42"
+      null
     ],
     [
       {
@@ -445,11 +445,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:22:6-22:12"
+            "loc": null
           },
           "name": {
             "name": "filter",
-            "loc": "core/option/option.mbti:22:14-22:20"
+            "loc": null
           },
           "params": [
             {
@@ -464,13 +464,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:22:21-22:22"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:22:21-22:22"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:22:21-22:23",
-                "question_loc": "core/option/option.mbti:22:22-22:23"
+                "loc": null,
+                "question_loc": null
               }
             },
             {
@@ -486,10 +486,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/option/option.mbti:22:26-22:27"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/option/option.mbti:22:26-22:27"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -500,16 +500,16 @@
                       "type": "Ident",
                       "name": "Bool"
                     },
-                    "loc": "core/option/option.mbti:22:32-22:36"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:22:32-22:36"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/option/option.mbti:22:25-22:36"
+                "loc": null
               }
             }
           ],
@@ -524,13 +524,13 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/option/option.mbti:22:41-22:42"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:22:41-22:42"
+                "loc": null
               },
-              "loc": "core/option/option.mbti:22:41-22:43",
-              "question_loc": "core/option/option.mbti:22:42-22:43"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -540,14 +540,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:22:3-22:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:22:0-22:43"
+      null
     ],
     [
       {
@@ -556,11 +556,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:23:6-23:12"
+            "loc": null
           },
           "name": {
             "name": "flatten",
-            "loc": "core/option/option.mbti:23:14-23:21"
+            "loc": null
           },
           "params": [
             {
@@ -577,16 +577,16 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/option/option.mbti:23:22-23:23"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/option/option.mbti:23:22-23:23"
+                    "loc": null
                   },
-                  "loc": "core/option/option.mbti:23:22-23:24",
-                  "question_loc": "core/option/option.mbti:23:23-23:24"
+                  "loc": null,
+                  "question_loc": null
                 },
-                "loc": "core/option/option.mbti:23:22-23:25",
-                "question_loc": "core/option/option.mbti:23:24-23:25"
+                "loc": null,
+                "question_loc": null
               }
             }
           ],
@@ -601,13 +601,13 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/option/option.mbti:23:30-23:31"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:23:30-23:31"
+                "loc": null
               },
-              "loc": "core/option/option.mbti:23:30-23:32",
-              "question_loc": "core/option/option.mbti:23:31-23:32"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -617,14 +617,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:23:3-23:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:23:0-23:32"
+      null
     ],
     [
       {
@@ -633,11 +633,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:24:6-24:12"
+            "loc": null
           },
           "name": {
             "name": "is_empty",
-            "loc": "core/option/option.mbti:24:14-24:22"
+            "loc": null
           },
           "params": [
             {
@@ -652,13 +652,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:24:23-24:24"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:24:23-24:24"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:24:23-24:25",
-                "question_loc": "core/option/option.mbti:24:24-24:25"
+                "loc": null,
+                "question_loc": null
               }
             }
           ],
@@ -671,10 +671,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/option/option.mbti:24:30-24:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:24:30-24:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -684,14 +684,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:24:3-24:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:24:0-24:34"
+      null
     ],
     [
       {
@@ -700,11 +700,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:25:6-25:12"
+            "loc": null
           },
           "name": {
             "name": "iter",
-            "loc": "core/option/option.mbti:25:14-25:18"
+            "loc": null
           },
           "params": [
             {
@@ -719,13 +719,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:25:19-25:20"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:25:19-25:20"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:25:19-25:21",
-                "question_loc": "core/option/option.mbti:25:20-25:21"
+                "loc": null,
+                "question_loc": null
               }
             }
           ],
@@ -738,7 +738,7 @@
                   "type": "Ident",
                   "name": "Iter"
                 },
-                "loc": "core/option/option.mbti:25:26-25:30"
+                "loc": null
               },
               "1": [
                 {
@@ -749,13 +749,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:25:31-25:32"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:25:31-25:32"
+                  "loc": null
                 }
               ],
-              "loc": "core/option/option.mbti:25:26-25:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -765,14 +765,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:25:3-25:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:25:0-25:33"
+      null
     ],
     [
       {
@@ -781,11 +781,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:26:9-26:15"
+            "loc": null
           },
           "name": {
             "name": "map",
-            "loc": "core/option/option.mbti:26:17-26:20"
+            "loc": null
           },
           "params": [
             {
@@ -800,13 +800,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:26:21-26:22"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:26:21-26:22"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:26:21-26:23",
-                "question_loc": "core/option/option.mbti:26:22-26:23"
+                "loc": null,
+                "question_loc": null
               }
             },
             {
@@ -822,10 +822,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/option/option.mbti:26:26-26:27"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/option/option.mbti:26:26-26:27"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -836,16 +836,16 @@
                       "type": "Ident",
                       "name": "U"
                     },
-                    "loc": "core/option/option.mbti:26:32-26:33"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:26:32-26:33"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/option/option.mbti:26:25-26:33"
+                "loc": null
               }
             }
           ],
@@ -860,13 +860,13 @@
                     "type": "Ident",
                     "name": "U"
                   },
-                  "loc": "core/option/option.mbti:26:38-26:39"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:26:38-26:39"
+                "loc": null
               },
-              "loc": "core/option/option.mbti:26:38-26:40",
-              "question_loc": "core/option/option.mbti:26:39-26:40"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -876,21 +876,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:26:3-26:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "U",
-                "loc": "core/option/option.mbti:26:6-26:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:26:0-26:40"
+      null
     ],
     [
       {
@@ -899,11 +899,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:27:9-27:15"
+            "loc": null
           },
           "name": {
             "name": "map_or",
-            "loc": "core/option/option.mbti:27:17-27:23"
+            "loc": null
           },
           "params": [
             {
@@ -918,13 +918,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:27:24-27:25"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:27:24-27:25"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:27:24-27:26",
-                "question_loc": "core/option/option.mbti:27:25-27:26"
+                "loc": null,
+                "question_loc": null
               }
             },
             {
@@ -937,10 +937,10 @@
                     "type": "Ident",
                     "name": "U"
                   },
-                  "loc": "core/option/option.mbti:27:28-27:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:27:28-27:29"
+                "loc": null
               }
             },
             {
@@ -956,10 +956,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/option/option.mbti:27:32-27:33"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/option/option.mbti:27:32-27:33"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -970,16 +970,16 @@
                       "type": "Ident",
                       "name": "U"
                     },
-                    "loc": "core/option/option.mbti:27:38-27:39"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:27:38-27:39"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/option/option.mbti:27:31-27:39"
+                "loc": null
               }
             }
           ],
@@ -992,10 +992,10 @@
                   "type": "Ident",
                   "name": "U"
                 },
-                "loc": "core/option/option.mbti:27:44-27:45"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:27:44-27:45"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1005,21 +1005,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:27:3-27:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "U",
-                "loc": "core/option/option.mbti:27:6-27:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:27:0-27:45"
+      null
     ],
     [
       {
@@ -1028,11 +1028,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:28:9-28:15"
+            "loc": null
           },
           "name": {
             "name": "map_or_else",
-            "loc": "core/option/option.mbti:28:17-28:28"
+            "loc": null
           },
           "params": [
             {
@@ -1047,13 +1047,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:28:29-28:30"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:28:29-28:30"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:28:29-28:31",
-                "question_loc": "core/option/option.mbti:28:30-28:31"
+                "loc": null,
+                "question_loc": null
               }
             },
             {
@@ -1069,16 +1069,16 @@
                       "type": "Ident",
                       "name": "U"
                     },
-                    "loc": "core/option/option.mbti:28:39-28:40"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:28:39-28:40"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/option/option.mbti:28:33-28:40"
+                "loc": null
               }
             },
             {
@@ -1094,10 +1094,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/option/option.mbti:28:43-28:44"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/option/option.mbti:28:43-28:44"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1108,16 +1108,16 @@
                       "type": "Ident",
                       "name": "U"
                     },
-                    "loc": "core/option/option.mbti:28:49-28:50"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:28:49-28:50"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/option/option.mbti:28:42-28:50"
+                "loc": null
               }
             }
           ],
@@ -1130,10 +1130,10 @@
                   "type": "Ident",
                   "name": "U"
                 },
-                "loc": "core/option/option.mbti:28:55-28:56"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:28:55-28:56"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1143,21 +1143,21 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:28:3-28:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "U",
-                "loc": "core/option/option.mbti:28:6-28:7"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:28:0-28:56"
+      null
     ],
     [
       {
@@ -1172,11 +1172,11 @@
           ],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:30:6-30:12"
+            "loc": null
           },
           "name": {
             "name": "or",
-            "loc": "core/option/option.mbti:30:14-30:16"
+            "loc": null
           },
           "params": [
             {
@@ -1191,13 +1191,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:30:17-30:18"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:30:17-30:18"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:30:17-30:19",
-                "question_loc": "core/option/option.mbti:30:18-30:19"
+                "loc": null,
+                "question_loc": null
               }
             },
             {
@@ -1210,10 +1210,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/option/option.mbti:30:21-30:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:30:21-30:22"
+                "loc": null
               }
             }
           ],
@@ -1226,10 +1226,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/option/option.mbti:30:27-30:28"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:30:27-30:28"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1239,14 +1239,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:30:3-30:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:29:0-30:28"
+      null
     ],
     [
       {
@@ -1261,11 +1261,11 @@
           ],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:32:16-32:22"
+            "loc": null
           },
           "name": {
             "name": "or_default",
-            "loc": "core/option/option.mbti:32:24-32:34"
+            "loc": null
           },
           "params": [
             {
@@ -1280,13 +1280,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:32:35-32:36"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:32:35-32:36"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:32:35-32:37",
-                "question_loc": "core/option/option.mbti:32:36-32:37"
+                "loc": null,
+                "question_loc": null
               }
             }
           ],
@@ -1299,10 +1299,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/option/option.mbti:32:42-32:43"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:32:42-32:43"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1312,7 +1312,7 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:32:3-32:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1320,14 +1320,14 @@
                     "type": "Ident",
                     "name": "Default"
                   },
-                  "loc": "core/option/option.mbti:32:7-32:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/option/option.mbti:31:0-32:43"
+      null
     ],
     [
       {
@@ -1342,11 +1342,11 @@
           ],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:34:6-34:12"
+            "loc": null
           },
           "name": {
             "name": "or_else",
-            "loc": "core/option/option.mbti:34:14-34:21"
+            "loc": null
           },
           "params": [
             {
@@ -1361,13 +1361,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:34:22-34:23"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:34:22-34:23"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:34:22-34:24",
-                "question_loc": "core/option/option.mbti:34:23-34:24"
+                "loc": null,
+                "question_loc": null
               }
             },
             {
@@ -1383,16 +1383,16 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:34:32-34:33"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:34:32-34:33"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/option/option.mbti:34:26-34:33"
+                "loc": null
               }
             }
           ],
@@ -1405,10 +1405,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/option/option.mbti:34:38-34:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:34:38-34:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1418,14 +1418,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:34:3-34:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:33:0-34:39"
+      null
     ],
     [
       {
@@ -1434,11 +1434,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:35:19-35:25"
+            "loc": null
           },
           "name": {
             "name": "or_error",
-            "loc": "core/option/option.mbti:35:27-35:35"
+            "loc": null
           },
           "params": [
             {
@@ -1453,13 +1453,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:35:36-35:37"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:35:36-35:37"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:35:36-35:38",
-                "question_loc": "core/option/option.mbti:35:37-35:38"
+                "loc": null,
+                "question_loc": null
               }
             },
             {
@@ -1472,10 +1472,10 @@
                     "type": "Ident",
                     "name": "Err"
                   },
-                  "loc": "core/option/option.mbti:35:40-35:43"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:35:40-35:43"
+                "loc": null
               }
             }
           ],
@@ -1488,10 +1488,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/option/option.mbti:35:48-35:49"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:35:48-35:49"
+              "loc": null
             },
             {
               "type": "ErrorType",
@@ -1503,10 +1503,10 @@
                     "type": "Ident",
                     "name": "Err"
                   },
-                  "loc": "core/option/option.mbti:35:56-35:59"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:35:56-35:59"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -1515,14 +1515,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:35:3-35:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "Err",
-                "loc": "core/option/option.mbti:35:6-35:9"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1530,14 +1530,14 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "core/option/option.mbti:35:12-35:17"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/option/option.mbti:35:0-35:59"
+      null
     ],
     [
       {
@@ -1546,11 +1546,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:36:6-36:12"
+            "loc": null
           },
           "name": {
             "name": "unwrap_or",
-            "loc": "core/option/option.mbti:36:14-36:23"
+            "loc": null
           },
           "params": [
             {
@@ -1565,13 +1565,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:36:24-36:25"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:36:24-36:25"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:36:24-36:26",
-                "question_loc": "core/option/option.mbti:36:25-36:26"
+                "loc": null,
+                "question_loc": null
               }
             },
             {
@@ -1584,10 +1584,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/option/option.mbti:36:28-36:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/option/option.mbti:36:28-36:29"
+                "loc": null
               }
             }
           ],
@@ -1600,10 +1600,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/option/option.mbti:36:34-36:35"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:36:34-36:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1613,14 +1613,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:36:3-36:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:36:0-36:35"
+      null
     ],
     [
       {
@@ -1629,11 +1629,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:37:16-37:22"
+            "loc": null
           },
           "name": {
             "name": "unwrap_or_default",
-            "loc": "core/option/option.mbti:37:24-37:41"
+            "loc": null
           },
           "params": [
             {
@@ -1648,13 +1648,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:37:42-37:43"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:37:42-37:43"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:37:42-37:44",
-                "question_loc": "core/option/option.mbti:37:43-37:44"
+                "loc": null,
+                "question_loc": null
               }
             }
           ],
@@ -1667,10 +1667,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/option/option.mbti:37:49-37:50"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:37:49-37:50"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1680,7 +1680,7 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:37:3-37:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1688,14 +1688,14 @@
                     "type": "Ident",
                     "name": "Default"
                   },
-                  "loc": "core/option/option.mbti:37:7-37:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/option/option.mbti:37:0-37:50"
+      null
     ],
     [
       {
@@ -1704,11 +1704,11 @@
           "attr": [],
           "type_name": {
             "name": "Option",
-            "loc": "core/option/option.mbti:38:6-38:12"
+            "loc": null
           },
           "name": {
             "name": "unwrap_or_else",
-            "loc": "core/option/option.mbti:38:14-38:28"
+            "loc": null
           },
           "params": [
             {
@@ -1723,13 +1723,13 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:38:29-38:30"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:38:29-38:30"
+                  "loc": null
                 },
-                "loc": "core/option/option.mbti:38:29-38:31",
-                "question_loc": "core/option/option.mbti:38:30-38:31"
+                "loc": null,
+                "question_loc": null
               }
             },
             {
@@ -1745,16 +1745,16 @@
                       "type": "Ident",
                       "name": "T"
                     },
-                    "loc": "core/option/option.mbti:38:39-38:40"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/option/option.mbti:38:39-38:40"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/option/option.mbti:38:33-38:40"
+                "loc": null
               }
             }
           ],
@@ -1767,10 +1767,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/option/option.mbti:38:45-38:46"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:38:45-38:46"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1780,14 +1780,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/option/option.mbti:38:3-38:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/option/option.mbti:38:0-38:46"
+      null
     ],
     [
       {
@@ -1798,7 +1798,7 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/option/option.mbti:39:5-39:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1806,7 +1806,7 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/option/option.mbti:39:9-39:16"
+                  "loc": null
                 }
               ]
             }
@@ -1821,24 +1821,24 @@
                   "type": "Ident",
                   "name": "X"
                 },
-                "loc": "core/option/option.mbti:39:30-39:31"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:39:30-39:31"
+              "loc": null
             },
-            "loc": "core/option/option.mbti:39:30-39:32",
-            "question_loc": "core/option/option.mbti:39:31-39:32"
+            "loc": null,
+            "question_loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Compare"
             },
-            "loc": "core/option/option.mbti:39:18-39:25"
+            "loc": null
           }
         }
       },
-      "core/option/option.mbti:39:0-39:32"
+      null
     ],
     [
       {
@@ -1849,7 +1849,7 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/option/option.mbti:40:5-40:6"
+                "loc": null
               },
               "constraints": []
             }
@@ -1864,24 +1864,24 @@
                   "type": "Ident",
                   "name": "X"
                 },
-                "loc": "core/option/option.mbti:40:20-40:21"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:40:20-40:21"
+              "loc": null
             },
-            "loc": "core/option/option.mbti:40:20-40:22",
-            "question_loc": "core/option/option.mbti:40:21-40:22"
+            "loc": null,
+            "question_loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Default"
             },
-            "loc": "core/option/option.mbti:40:8-40:15"
+            "loc": null
           }
         }
       },
-      "core/option/option.mbti:40:0-40:22"
+      null
     ],
     [
       {
@@ -1892,16 +1892,16 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/option/option.mbti:41:5-41:6"
+                "loc": null
               },
               "constraints": [
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "quickcheck",
-                    "name": "Arbitrary"
+                    "id": "Arbitrary"
                   },
-                  "loc": "core/option/option.mbti:41:9-41:30"
+                  "loc": null
                 }
               ]
             }
@@ -1916,25 +1916,25 @@
                   "type": "Ident",
                   "name": "X"
                 },
-                "loc": "core/option/option.mbti:41:58-41:59"
+                "loc": null
               },
               "1": [],
-              "loc": "core/option/option.mbti:41:58-41:59"
+              "loc": null
             },
-            "loc": "core/option/option.mbti:41:58-41:60",
-            "question_loc": "core/option/option.mbti:41:59-41:60"
+            "loc": null,
+            "question_loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "quickcheck",
-              "name": "Arbitrary"
+              "id": "Arbitrary"
             },
-            "loc": "core/option/option.mbti:41:32-41:53"
+            "loc": null
           }
         }
       },
-      "core/option/option.mbti:41:0-41:60"
+      null
     ]
   ]
 }

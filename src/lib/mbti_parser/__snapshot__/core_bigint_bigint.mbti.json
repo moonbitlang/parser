@@ -12,7 +12,7 @@
         "0": {
           "name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:10:5-10:11"
+            "loc": null
           },
           "type_params": [],
           "components": {
@@ -23,7 +23,7 @@
           }
         }
       },
-      "core/bigint/bigint.mbti:10:0-10:11"
+      null
     ],
     [
       {
@@ -38,11 +38,11 @@
           ],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:12:3-12:9"
+            "loc": null
           },
           "name": {
             "name": "asr",
-            "loc": "core/bigint/bigint.mbti:12:11-12:14"
+            "loc": null
           },
           "params": [
             {
@@ -55,10 +55,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:12:15-12:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:12:15-12:19"
+                "loc": null
               }
             },
             {
@@ -71,10 +71,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bigint/bigint.mbti:12:21-12:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:12:21-12:24"
+                "loc": null
               }
             }
           ],
@@ -87,10 +87,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:12:29-12:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:12:29-12:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -99,7 +99,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:11:0-12:33"
+      null
     ],
     [
       {
@@ -108,11 +108,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:13:3-13:9"
+            "loc": null
           },
           "name": {
             "name": "bit_length",
-            "loc": "core/bigint/bigint.mbti:13:11-13:21"
+            "loc": null
           },
           "params": [
             {
@@ -125,10 +125,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:13:22-13:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:13:22-13:26"
+                "loc": null
               }
             }
           ],
@@ -141,10 +141,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/bigint/bigint.mbti:13:31-13:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:13:31-13:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -153,7 +153,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:13:0-13:34"
+      null
     ],
     [
       {
@@ -162,11 +162,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:14:3-14:9"
+            "loc": null
           },
           "name": {
             "name": "compare_int",
-            "loc": "core/bigint/bigint.mbti:14:11-14:22"
+            "loc": null
           },
           "params": [
             {
@@ -179,10 +179,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:14:23-14:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:14:23-14:27"
+                "loc": null
               }
             },
             {
@@ -195,10 +195,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bigint/bigint.mbti:14:29-14:32"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:14:29-14:32"
+                "loc": null
               }
             }
           ],
@@ -211,10 +211,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/bigint/bigint.mbti:14:37-14:40"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:14:37-14:40"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -223,7 +223,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:14:0-14:40"
+      null
     ],
     [
       {
@@ -232,11 +232,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:15:3-15:9"
+            "loc": null
           },
           "name": {
             "name": "compare_int64",
-            "loc": "core/bigint/bigint.mbti:15:11-15:24"
+            "loc": null
           },
           "params": [
             {
@@ -249,10 +249,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:15:25-15:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:15:25-15:29"
+                "loc": null
               }
             },
             {
@@ -265,10 +265,10 @@
                     "type": "Ident",
                     "name": "Int64"
                   },
-                  "loc": "core/bigint/bigint.mbti:15:31-15:36"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:15:31-15:36"
+                "loc": null
               }
             }
           ],
@@ -281,10 +281,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/bigint/bigint.mbti:15:41-15:44"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:15:41-15:44"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -293,7 +293,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:15:0-15:44"
+      null
     ],
     [
       {
@@ -302,11 +302,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:16:3-16:9"
+            "loc": null
           },
           "name": {
             "name": "ctz",
-            "loc": "core/bigint/bigint.mbti:16:11-16:14"
+            "loc": null
           },
           "params": [
             {
@@ -319,10 +319,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:16:15-16:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:16:15-16:19"
+                "loc": null
               }
             }
           ],
@@ -335,10 +335,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/bigint/bigint.mbti:16:24-16:27"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:16:24-16:27"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -347,7 +347,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:16:0-16:27"
+      null
     ],
     [
       {
@@ -356,11 +356,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:17:3-17:9"
+            "loc": null
           },
           "name": {
             "name": "equal_int",
-            "loc": "core/bigint/bigint.mbti:17:11-17:20"
+            "loc": null
           },
           "params": [
             {
@@ -373,10 +373,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:17:21-17:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:17:21-17:25"
+                "loc": null
               }
             },
             {
@@ -389,10 +389,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bigint/bigint.mbti:17:27-17:30"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:17:27-17:30"
+                "loc": null
               }
             }
           ],
@@ -405,10 +405,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/bigint/bigint.mbti:17:35-17:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:17:35-17:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -417,7 +417,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:17:0-17:39"
+      null
     ],
     [
       {
@@ -426,11 +426,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:18:3-18:9"
+            "loc": null
           },
           "name": {
             "name": "equal_int64",
-            "loc": "core/bigint/bigint.mbti:18:11-18:22"
+            "loc": null
           },
           "params": [
             {
@@ -443,10 +443,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:18:23-18:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:18:23-18:27"
+                "loc": null
               }
             },
             {
@@ -459,10 +459,10 @@
                     "type": "Ident",
                     "name": "Int64"
                   },
-                  "loc": "core/bigint/bigint.mbti:18:29-18:34"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:18:29-18:34"
+                "loc": null
               }
             }
           ],
@@ -475,10 +475,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/bigint/bigint.mbti:18:39-18:43"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:18:39-18:43"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -487,7 +487,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:18:0-18:43"
+      null
     ],
     [
       {
@@ -496,11 +496,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:19:3-19:9"
+            "loc": null
           },
           "name": {
             "name": "from_hex",
-            "loc": "core/bigint/bigint.mbti:19:11-19:19"
+            "loc": null
           },
           "params": [
             {
@@ -513,10 +513,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/bigint/bigint.mbti:19:20-19:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:19:20-19:26"
+                "loc": null
               }
             }
           ],
@@ -529,10 +529,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:19:31-19:35"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:19:31-19:35"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -541,7 +541,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:19:0-19:35"
+      null
     ],
     [
       {
@@ -550,11 +550,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:20:3-20:9"
+            "loc": null
           },
           "name": {
             "name": "from_int",
-            "loc": "core/bigint/bigint.mbti:20:11-20:19"
+            "loc": null
           },
           "params": [
             {
@@ -567,10 +567,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bigint/bigint.mbti:20:20-20:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:20:20-20:23"
+                "loc": null
               }
             }
           ],
@@ -583,10 +583,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:20:28-20:32"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:20:28-20:32"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -595,7 +595,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:20:0-20:32"
+      null
     ],
     [
       {
@@ -604,11 +604,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:21:3-21:9"
+            "loc": null
           },
           "name": {
             "name": "from_int64",
-            "loc": "core/bigint/bigint.mbti:21:11-21:21"
+            "loc": null
           },
           "params": [
             {
@@ -621,10 +621,10 @@
                     "type": "Ident",
                     "name": "Int64"
                   },
-                  "loc": "core/bigint/bigint.mbti:21:22-21:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:21:22-21:27"
+                "loc": null
               }
             }
           ],
@@ -637,10 +637,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:21:32-21:36"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:21:32-21:36"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -649,7 +649,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:21:0-21:36"
+      null
     ],
     [
       {
@@ -658,11 +658,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:22:3-22:9"
+            "loc": null
           },
           "name": {
             "name": "from_octets",
-            "loc": "core/bigint/bigint.mbti:22:11-22:22"
+            "loc": null
           },
           "params": [
             {
@@ -675,10 +675,10 @@
                     "type": "Ident",
                     "name": "Bytes"
                   },
-                  "loc": "core/bigint/bigint.mbti:22:23-22:28"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:22:23-22:28"
+                "loc": null
               }
             },
             {
@@ -686,7 +686,7 @@
               "0": {
                 "type": "Label",
                 "name": "signum",
-                "loc": "core/bigint/bigint.mbti:22:30-22:37"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -696,10 +696,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bigint/bigint.mbti:22:40-22:43"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:22:40-22:43"
+                "loc": null
               }
             }
           ],
@@ -712,10 +712,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:22:53-22:57"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:22:53-22:57"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -724,7 +724,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:22:0-22:57"
+      null
     ],
     [
       {
@@ -733,11 +733,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:23:3-23:9"
+            "loc": null
           },
           "name": {
             "name": "from_string",
-            "loc": "core/bigint/bigint.mbti:23:11-23:22"
+            "loc": null
           },
           "params": [
             {
@@ -750,10 +750,10 @@
                     "type": "Ident",
                     "name": "String"
                   },
-                  "loc": "core/bigint/bigint.mbti:23:23-23:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:23:23-23:29"
+                "loc": null
               }
             }
           ],
@@ -766,10 +766,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:23:34-23:38"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:23:34-23:38"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -778,7 +778,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:23:0-23:38"
+      null
     ],
     [
       {
@@ -787,11 +787,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:24:3-24:9"
+            "loc": null
           },
           "name": {
             "name": "from_uint",
-            "loc": "core/bigint/bigint.mbti:24:11-24:20"
+            "loc": null
           },
           "params": [
             {
@@ -804,10 +804,10 @@
                     "type": "Ident",
                     "name": "UInt"
                   },
-                  "loc": "core/bigint/bigint.mbti:24:21-24:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:24:21-24:25"
+                "loc": null
               }
             }
           ],
@@ -820,10 +820,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:24:30-24:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:24:30-24:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -832,7 +832,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:24:0-24:34"
+      null
     ],
     [
       {
@@ -841,11 +841,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:25:3-25:9"
+            "loc": null
           },
           "name": {
             "name": "from_uint64",
-            "loc": "core/bigint/bigint.mbti:25:11-25:22"
+            "loc": null
           },
           "params": [
             {
@@ -858,10 +858,10 @@
                     "type": "Ident",
                     "name": "UInt64"
                   },
-                  "loc": "core/bigint/bigint.mbti:25:23-25:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:25:23-25:29"
+                "loc": null
               }
             }
           ],
@@ -874,10 +874,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:25:34-25:38"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:25:34-25:38"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -886,7 +886,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:25:0-25:38"
+      null
     ],
     [
       {
@@ -895,11 +895,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:26:3-26:9"
+            "loc": null
           },
           "name": {
             "name": "is_zero",
-            "loc": "core/bigint/bigint.mbti:26:11-26:18"
+            "loc": null
           },
           "params": [
             {
@@ -912,10 +912,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:26:19-26:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:26:19-26:23"
+                "loc": null
               }
             }
           ],
@@ -928,10 +928,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/bigint/bigint.mbti:26:28-26:32"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:26:28-26:32"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -940,7 +940,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:26:0-26:32"
+      null
     ],
     [
       {
@@ -955,11 +955,11 @@
           ],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:28:3-28:9"
+            "loc": null
           },
           "name": {
             "name": "lsl",
-            "loc": "core/bigint/bigint.mbti:28:11-28:14"
+            "loc": null
           },
           "params": [
             {
@@ -972,10 +972,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:28:15-28:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:28:15-28:19"
+                "loc": null
               }
             },
             {
@@ -988,10 +988,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bigint/bigint.mbti:28:21-28:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:28:21-28:24"
+                "loc": null
               }
             }
           ],
@@ -1004,10 +1004,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:28:29-28:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:28:29-28:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1016,7 +1016,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:27:0-28:33"
+      null
     ],
     [
       {
@@ -1025,11 +1025,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:29:3-29:9"
+            "loc": null
           },
           "name": {
             "name": "pow",
-            "loc": "core/bigint/bigint.mbti:29:11-29:14"
+            "loc": null
           },
           "params": [
             {
@@ -1042,10 +1042,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:29:15-29:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:29:15-29:19"
+                "loc": null
               }
             },
             {
@@ -1058,10 +1058,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:29:21-29:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:29:21-29:25"
+                "loc": null
               }
             },
             {
@@ -1069,7 +1069,7 @@
               "0": {
                 "type": "Label",
                 "name": "modulus",
-                "loc": "core/bigint/bigint.mbti:29:27-29:34"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -1079,10 +1079,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:29:38-29:42"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:29:38-29:42"
+                "loc": null
               }
             }
           ],
@@ -1095,10 +1095,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:29:47-29:51"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:29:47-29:51"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1107,7 +1107,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:29:0-29:51"
+      null
     ],
     [
       {
@@ -1122,11 +1122,11 @@
           ],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:31:3-31:9"
+            "loc": null
           },
           "name": {
             "name": "shl",
-            "loc": "core/bigint/bigint.mbti:31:11-31:14"
+            "loc": null
           },
           "params": [
             {
@@ -1139,10 +1139,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:31:15-31:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:31:15-31:19"
+                "loc": null
               }
             },
             {
@@ -1155,10 +1155,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bigint/bigint.mbti:31:21-31:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:31:21-31:24"
+                "loc": null
               }
             }
           ],
@@ -1171,10 +1171,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:31:29-31:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:31:29-31:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1183,7 +1183,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:30:0-31:33"
+      null
     ],
     [
       {
@@ -1198,11 +1198,11 @@
           ],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:33:3-33:9"
+            "loc": null
           },
           "name": {
             "name": "shr",
-            "loc": "core/bigint/bigint.mbti:33:11-33:14"
+            "loc": null
           },
           "params": [
             {
@@ -1215,10 +1215,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:33:15-33:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:33:15-33:19"
+                "loc": null
               }
             },
             {
@@ -1231,10 +1231,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bigint/bigint.mbti:33:21-33:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:33:21-33:24"
+                "loc": null
               }
             }
           ],
@@ -1247,10 +1247,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/bigint/bigint.mbti:33:29-33:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:33:29-33:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1259,7 +1259,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:32:0-33:33"
+      null
     ],
     [
       {
@@ -1268,11 +1268,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:34:3-34:9"
+            "loc": null
           },
           "name": {
             "name": "to_hex",
-            "loc": "core/bigint/bigint.mbti:34:11-34:17"
+            "loc": null
           },
           "params": [
             {
@@ -1285,10 +1285,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:34:18-34:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:34:18-34:22"
+                "loc": null
               }
             },
             {
@@ -1296,7 +1296,7 @@
               "0": {
                 "type": "Label",
                 "name": "uppercase",
-                "loc": "core/bigint/bigint.mbti:34:24-34:34"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -1306,10 +1306,10 @@
                     "type": "Ident",
                     "name": "Bool"
                   },
-                  "loc": "core/bigint/bigint.mbti:34:37-34:41"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:34:37-34:41"
+                "loc": null
               }
             }
           ],
@@ -1322,10 +1322,10 @@
                   "type": "Ident",
                   "name": "String"
                 },
-                "loc": "core/bigint/bigint.mbti:34:51-34:57"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:34:51-34:57"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1334,7 +1334,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:34:0-34:57"
+      null
     ],
     [
       {
@@ -1343,11 +1343,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:35:3-35:9"
+            "loc": null
           },
           "name": {
             "name": "to_int",
-            "loc": "core/bigint/bigint.mbti:35:11-35:17"
+            "loc": null
           },
           "params": [
             {
@@ -1360,10 +1360,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:35:18-35:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:35:18-35:22"
+                "loc": null
               }
             }
           ],
@@ -1376,10 +1376,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/bigint/bigint.mbti:35:27-35:30"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:35:27-35:30"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1388,7 +1388,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:35:0-35:30"
+      null
     ],
     [
       {
@@ -1397,11 +1397,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:36:3-36:9"
+            "loc": null
           },
           "name": {
             "name": "to_int16",
-            "loc": "core/bigint/bigint.mbti:36:11-36:19"
+            "loc": null
           },
           "params": [
             {
@@ -1414,10 +1414,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:36:20-36:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:36:20-36:24"
+                "loc": null
               }
             }
           ],
@@ -1430,10 +1430,10 @@
                   "type": "Ident",
                   "name": "Int16"
                 },
-                "loc": "core/bigint/bigint.mbti:36:29-36:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:36:29-36:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1442,7 +1442,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:36:0-36:34"
+      null
     ],
     [
       {
@@ -1451,11 +1451,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:37:3-37:9"
+            "loc": null
           },
           "name": {
             "name": "to_int64",
-            "loc": "core/bigint/bigint.mbti:37:11-37:19"
+            "loc": null
           },
           "params": [
             {
@@ -1468,10 +1468,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:37:20-37:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:37:20-37:24"
+                "loc": null
               }
             }
           ],
@@ -1484,10 +1484,10 @@
                   "type": "Ident",
                   "name": "Int64"
                 },
-                "loc": "core/bigint/bigint.mbti:37:29-37:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:37:29-37:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1496,7 +1496,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:37:0-37:34"
+      null
     ],
     [
       {
@@ -1505,11 +1505,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:38:3-38:9"
+            "loc": null
           },
           "name": {
             "name": "to_octets",
-            "loc": "core/bigint/bigint.mbti:38:11-38:20"
+            "loc": null
           },
           "params": [
             {
@@ -1522,10 +1522,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:38:21-38:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:38:21-38:25"
+                "loc": null
               }
             },
             {
@@ -1533,7 +1533,7 @@
               "0": {
                 "type": "Label",
                 "name": "length",
-                "loc": "core/bigint/bigint.mbti:38:27-38:33"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -1543,10 +1543,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/bigint/bigint.mbti:38:37-38:40"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:38:37-38:40"
+                "loc": null
               }
             }
           ],
@@ -1559,10 +1559,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/bigint/bigint.mbti:38:45-38:50"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:38:45-38:50"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1571,7 +1571,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:38:0-38:50"
+      null
     ],
     [
       {
@@ -1580,11 +1580,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:39:3-39:9"
+            "loc": null
           },
           "name": {
             "name": "to_string",
-            "loc": "core/bigint/bigint.mbti:39:11-39:20"
+            "loc": null
           },
           "params": [
             {
@@ -1597,10 +1597,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:39:21-39:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:39:21-39:25"
+                "loc": null
               }
             }
           ],
@@ -1613,10 +1613,10 @@
                   "type": "Ident",
                   "name": "String"
                 },
-                "loc": "core/bigint/bigint.mbti:39:30-39:36"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:39:30-39:36"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1625,7 +1625,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:39:0-39:36"
+      null
     ],
     [
       {
@@ -1634,11 +1634,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:40:3-40:9"
+            "loc": null
           },
           "name": {
             "name": "to_uint",
-            "loc": "core/bigint/bigint.mbti:40:11-40:18"
+            "loc": null
           },
           "params": [
             {
@@ -1651,10 +1651,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:40:19-40:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:40:19-40:23"
+                "loc": null
               }
             }
           ],
@@ -1667,10 +1667,10 @@
                   "type": "Ident",
                   "name": "UInt"
                 },
-                "loc": "core/bigint/bigint.mbti:40:28-40:32"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:40:28-40:32"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1679,7 +1679,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:40:0-40:32"
+      null
     ],
     [
       {
@@ -1688,11 +1688,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:41:3-41:9"
+            "loc": null
           },
           "name": {
             "name": "to_uint16",
-            "loc": "core/bigint/bigint.mbti:41:11-41:20"
+            "loc": null
           },
           "params": [
             {
@@ -1705,10 +1705,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:41:21-41:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:41:21-41:25"
+                "loc": null
               }
             }
           ],
@@ -1721,10 +1721,10 @@
                   "type": "Ident",
                   "name": "UInt16"
                 },
-                "loc": "core/bigint/bigint.mbti:41:30-41:36"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:41:30-41:36"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1733,7 +1733,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:41:0-41:36"
+      null
     ],
     [
       {
@@ -1742,11 +1742,11 @@
           "attr": [],
           "type_name": {
             "name": "BigInt",
-            "loc": "core/bigint/bigint.mbti:42:3-42:9"
+            "loc": null
           },
           "name": {
             "name": "to_uint64",
-            "loc": "core/bigint/bigint.mbti:42:11-42:20"
+            "loc": null
           },
           "params": [
             {
@@ -1759,10 +1759,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/bigint/bigint.mbti:42:21-42:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/bigint/bigint.mbti:42:21-42:25"
+                "loc": null
               }
             }
           ],
@@ -1775,10 +1775,10 @@
                   "type": "Ident",
                   "name": "UInt64"
                 },
-                "loc": "core/bigint/bigint.mbti:42:30-42:36"
+                "loc": null
               },
               "1": [],
-              "loc": "core/bigint/bigint.mbti:42:30-42:36"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1787,7 +1787,7 @@
           "type_params": []
         }
       },
-      "core/bigint/bigint.mbti:42:0-42:36"
+      null
     ],
     [
       {
@@ -1803,21 +1803,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:43:13-43:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:43:13-43:19"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Add"
             },
-            "loc": "core/bigint/bigint.mbti:43:5-43:8"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:43:0-43:19"
+      null
     ],
     [
       {
@@ -1833,21 +1833,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:44:16-44:22"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:44:16-44:22"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "BitAnd"
             },
-            "loc": "core/bigint/bigint.mbti:44:5-44:11"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:44:0-44:22"
+      null
     ],
     [
       {
@@ -1863,21 +1863,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:45:15-45:21"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:45:15-45:21"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "BitOr"
             },
-            "loc": "core/bigint/bigint.mbti:45:5-45:10"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:45:0-45:21"
+      null
     ],
     [
       {
@@ -1893,21 +1893,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:46:16-46:22"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:46:16-46:22"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "BitXOr"
             },
-            "loc": "core/bigint/bigint.mbti:46:5-46:11"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:46:0-46:22"
+      null
     ],
     [
       {
@@ -1923,21 +1923,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:47:17-47:23"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:47:17-47:23"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Compare"
             },
-            "loc": "core/bigint/bigint.mbti:47:5-47:12"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:47:0-47:23"
+      null
     ],
     [
       {
@@ -1953,21 +1953,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:48:17-48:23"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:48:17-48:23"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Default"
             },
-            "loc": "core/bigint/bigint.mbti:48:5-48:12"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:48:0-48:23"
+      null
     ],
     [
       {
@@ -1983,21 +1983,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:49:13-49:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:49:13-49:19"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Div"
             },
-            "loc": "core/bigint/bigint.mbti:49:5-49:8"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:49:0-49:19"
+      null
     ],
     [
       {
@@ -2013,21 +2013,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:50:12-50:18"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:50:12-50:18"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Eq"
             },
-            "loc": "core/bigint/bigint.mbti:50:5-50:7"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:50:0-50:18"
+      null
     ],
     [
       {
@@ -2043,21 +2043,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:51:14-51:20"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:51:14-51:20"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Hash"
             },
-            "loc": "core/bigint/bigint.mbti:51:5-51:9"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:51:0-51:20"
+      null
     ],
     [
       {
@@ -2073,21 +2073,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:52:13-52:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:52:13-52:19"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Mod"
             },
-            "loc": "core/bigint/bigint.mbti:52:5-52:8"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:52:0-52:19"
+      null
     ],
     [
       {
@@ -2103,21 +2103,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:53:13-53:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:53:13-53:19"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Mul"
             },
-            "loc": "core/bigint/bigint.mbti:53:5-53:8"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:53:0-53:19"
+      null
     ],
     [
       {
@@ -2133,21 +2133,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:54:13-54:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:54:13-54:19"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Neg"
             },
-            "loc": "core/bigint/bigint.mbti:54:5-54:8"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:54:0-54:19"
+      null
     ],
     [
       {
@@ -2163,21 +2163,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:55:13-55:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:55:13-55:19"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Shl"
             },
-            "loc": "core/bigint/bigint.mbti:55:5-55:8"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:55:0-55:19"
+      null
     ],
     [
       {
@@ -2193,21 +2193,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:56:14-56:20"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:56:14-56:20"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Show"
             },
-            "loc": "core/bigint/bigint.mbti:56:5-56:9"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:56:0-56:20"
+      null
     ],
     [
       {
@@ -2223,21 +2223,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:57:13-57:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:57:13-57:19"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Shr"
             },
-            "loc": "core/bigint/bigint.mbti:57:5-57:8"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:57:0-57:19"
+      null
     ],
     [
       {
@@ -2253,21 +2253,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:58:13-58:19"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:58:13-58:19"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Sub"
             },
-            "loc": "core/bigint/bigint.mbti:58:5-58:8"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:58:0-58:19"
+      null
     ],
     [
       {
@@ -2283,21 +2283,21 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:59:16-59:22"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:59:16-59:22"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "ToJson"
             },
-            "loc": "core/bigint/bigint.mbti:59:5-59:11"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:59:0-59:22"
+      null
     ],
     [
       {
@@ -2313,22 +2313,22 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:60:24-60:30"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:60:24-60:30"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "json",
-              "name": "FromJson"
+              "id": "FromJson"
             },
-            "loc": "core/bigint/bigint.mbti:60:5-60:19"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:60:0-60:30"
+      null
     ],
     [
       {
@@ -2344,22 +2344,22 @@
                 "type": "Ident",
                 "name": "BigInt"
               },
-              "loc": "core/bigint/bigint.mbti:61:48-61:54"
+              "loc": null
             },
             "1": [],
-            "loc": "core/bigint/bigint.mbti:61:48-61:54"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "moonbitlang/core/quickcheck",
-              "name": "Arbitrary"
+              "id": "Arbitrary"
             },
-            "loc": "core/bigint/bigint.mbti:61:5-61:43"
+            "loc": null
           }
         }
       },
-      "core/bigint/bigint.mbti:61:0-61:54"
+      null
     ]
   ]
 }

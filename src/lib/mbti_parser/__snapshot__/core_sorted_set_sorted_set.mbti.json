@@ -13,7 +13,7 @@
           "attr": [],
           "name": {
             "name": "from_array",
-            "loc": "core/sorted_set/sorted_set.mbti:8:16-8:26"
+            "loc": null
           },
           "params": [
             {
@@ -26,7 +26,7 @@
                     "type": "Ident",
                     "name": "Array"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:8:27-8:32"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -37,13 +37,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:8:33-8:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:8:33-8:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:8:27-8:35"
+                "loc": null
               }
             }
           ],
@@ -56,7 +56,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:8:40-8:41"
+                "loc": null
               },
               "1": [
                 {
@@ -67,13 +67,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:8:42-8:43"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:8:42-8:43"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:8:40-8:44"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -83,7 +83,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:8:3-8:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -91,14 +91,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:8:7-8:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:8:0-8:44"
+      null
     ],
     [
       {
@@ -107,7 +107,7 @@
           "attr": [],
           "name": {
             "name": "from_iter",
-            "loc": "core/sorted_set/sorted_set.mbti:10:16-10:25"
+            "loc": null
           },
           "params": [
             {
@@ -120,7 +120,7 @@
                     "type": "Ident",
                     "name": "Iter"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:10:26-10:30"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -131,13 +131,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:10:31-10:32"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:10:31-10:32"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:10:26-10:33"
+                "loc": null
               }
             }
           ],
@@ -150,7 +150,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:10:38-10:39"
+                "loc": null
               },
               "1": [
                 {
@@ -161,13 +161,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:10:40-10:41"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:10:40-10:41"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:10:38-10:42"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -177,7 +177,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:10:3-10:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -185,14 +185,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:10:7-10:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:10:0-10:42"
+      null
     ],
     [
       {
@@ -201,7 +201,7 @@
           "attr": [],
           "name": {
             "name": "new",
-            "loc": "core/sorted_set/sorted_set.mbti:12:6-12:9"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -213,7 +213,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:12:15-12:16"
+                "loc": null
               },
               "1": [
                 {
@@ -224,13 +224,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:12:17-12:18"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:12:17-12:18"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:12:15-12:19"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -240,14 +240,14 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:12:3-12:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:12:0-12:19"
+      null
     ],
     [
       {
@@ -262,7 +262,7 @@
           ],
           "name": {
             "name": "of",
-            "loc": "core/sorted_set/sorted_set.mbti:15:16-15:18"
+            "loc": null
           },
           "params": [
             {
@@ -275,7 +275,7 @@
                     "type": "Ident",
                     "name": "Array"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:15:19-15:24"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -286,13 +286,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:15:25-15:26"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:15:25-15:26"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:15:19-15:27"
+                "loc": null
               }
             }
           ],
@@ -305,7 +305,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:15:32-15:33"
+                "loc": null
               },
               "1": [
                 {
@@ -316,13 +316,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:15:34-15:35"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:15:34-15:35"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:15:32-15:36"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -332,7 +332,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:15:3-15:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -340,14 +340,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:15:7-15:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:14:0-15:36"
+      null
     ],
     [
       {
@@ -356,7 +356,7 @@
           "attr": [],
           "name": {
             "name": "singleton",
-            "loc": "core/sorted_set/sorted_set.mbti:17:6-17:15"
+            "loc": null
           },
           "params": [
             {
@@ -369,10 +369,10 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:17:16-17:17"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_set/sorted_set.mbti:17:16-17:17"
+                "loc": null
               }
             }
           ],
@@ -385,7 +385,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:17:22-17:23"
+                "loc": null
               },
               "1": [
                 {
@@ -396,13 +396,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:17:24-17:25"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:17:24-17:25"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:17:22-17:26"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -412,14 +412,14 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:17:3-17:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:17:0-17:26"
+      null
     ],
     [
       {
@@ -427,14 +427,14 @@
         "0": {
           "name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:20:5-20:6"
+            "loc": null
           },
           "type_params": [
             {
               "$tag": "Name",
               "0": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:20:7-20:8"
+                "loc": null
               }
             }
           ],
@@ -446,7 +446,7 @@
           }
         }
       },
-      "core/sorted_set/sorted_set.mbti:20:0-20:9"
+      null
     ],
     [
       {
@@ -455,11 +455,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:21:16-21:17"
+            "loc": null
           },
           "name": {
             "name": "add",
-            "loc": "core/sorted_set/sorted_set.mbti:21:19-21:22"
+            "loc": null
           },
           "params": [
             {
@@ -472,7 +472,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:21:23-21:27"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -483,13 +483,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:21:28-21:29"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:21:28-21:29"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:21:23-21:30"
+                "loc": null
               }
             },
             {
@@ -502,10 +502,10 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:21:32-21:33"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_set/sorted_set.mbti:21:32-21:33"
+                "loc": null
               }
             }
           ],
@@ -518,10 +518,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:21:38-21:42"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_set/sorted_set.mbti:21:38-21:42"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -531,7 +531,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:21:3-21:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -539,14 +539,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:21:7-21:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:21:0-21:42"
+      null
     ],
     [
       {
@@ -555,11 +555,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:22:16-22:17"
+            "loc": null
           },
           "name": {
             "name": "contains",
-            "loc": "core/sorted_set/sorted_set.mbti:22:19-22:27"
+            "loc": null
           },
           "params": [
             {
@@ -572,7 +572,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:22:28-22:32"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -583,13 +583,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:22:33-22:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:22:33-22:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:22:28-22:35"
+                "loc": null
               }
             },
             {
@@ -602,10 +602,10 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:22:37-22:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_set/sorted_set.mbti:22:37-22:38"
+                "loc": null
               }
             }
           ],
@@ -618,10 +618,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:22:43-22:47"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_set/sorted_set.mbti:22:43-22:47"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -631,7 +631,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:22:3-22:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -639,14 +639,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:22:7-22:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:22:0-22:47"
+      null
     ],
     [
       {
@@ -655,11 +655,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:23:6-23:7"
+            "loc": null
           },
           "name": {
             "name": "copy",
-            "loc": "core/sorted_set/sorted_set.mbti:23:9-23:13"
+            "loc": null
           },
           "params": [
             {
@@ -672,7 +672,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:23:14-23:18"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -683,13 +683,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:23:19-23:20"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:23:19-23:20"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:23:14-23:21"
+                "loc": null
               }
             }
           ],
@@ -702,7 +702,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:23:26-23:30"
+                "loc": null
               },
               "1": [
                 {
@@ -713,13 +713,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:23:31-23:32"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:23:31-23:32"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:23:26-23:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -729,14 +729,14 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:23:3-23:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:23:0-23:33"
+      null
     ],
     [
       {
@@ -751,11 +751,11 @@
           ],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:25:6-25:7"
+            "loc": null
           },
           "name": {
             "name": "deep_clone",
-            "loc": "core/sorted_set/sorted_set.mbti:25:9-25:19"
+            "loc": null
           },
           "params": [
             {
@@ -768,7 +768,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:25:20-25:24"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -779,13 +779,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:25:25-25:26"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:25:25-25:26"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:25:20-25:27"
+                "loc": null
               }
             }
           ],
@@ -798,7 +798,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:25:32-25:36"
+                "loc": null
               },
               "1": [
                 {
@@ -809,13 +809,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:25:37-25:38"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:25:37-25:38"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:25:32-25:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -825,14 +825,14 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:25:3-25:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:24:0-25:39"
+      null
     ],
     [
       {
@@ -847,11 +847,11 @@
           ],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:27:16-27:17"
+            "loc": null
           },
           "name": {
             "name": "diff",
-            "loc": "core/sorted_set/sorted_set.mbti:27:19-27:23"
+            "loc": null
           },
           "params": [
             {
@@ -864,7 +864,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:27:24-27:28"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -875,13 +875,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:27:29-27:30"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:27:29-27:30"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:27:24-27:31"
+                "loc": null
               }
             },
             {
@@ -894,7 +894,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:27:33-27:37"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -905,13 +905,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:27:38-27:39"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:27:38-27:39"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:27:33-27:40"
+                "loc": null
               }
             }
           ],
@@ -924,7 +924,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:27:45-27:49"
+                "loc": null
               },
               "1": [
                 {
@@ -935,13 +935,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:27:50-27:51"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:27:50-27:51"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:27:45-27:52"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -951,7 +951,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:27:3-27:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -959,14 +959,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:27:7-27:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:26:0-27:52"
+      null
     ],
     [
       {
@@ -975,11 +975,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:28:16-28:17"
+            "loc": null
           },
           "name": {
             "name": "difference",
-            "loc": "core/sorted_set/sorted_set.mbti:28:19-28:29"
+            "loc": null
           },
           "params": [
             {
@@ -992,7 +992,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:28:30-28:34"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1003,13 +1003,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:28:35-28:36"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:28:35-28:36"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:28:30-28:37"
+                "loc": null
               }
             },
             {
@@ -1022,7 +1022,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:28:39-28:43"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1033,13 +1033,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:28:44-28:45"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:28:44-28:45"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:28:39-28:46"
+                "loc": null
               }
             }
           ],
@@ -1052,7 +1052,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:28:51-28:55"
+                "loc": null
               },
               "1": [
                 {
@@ -1063,13 +1063,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:28:56-28:57"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:28:56-28:57"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:28:51-28:58"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1079,7 +1079,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:28:3-28:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1087,14 +1087,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:28:7-28:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:28:0-28:58"
+      null
     ],
     [
       {
@@ -1103,11 +1103,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:29:16-29:17"
+            "loc": null
           },
           "name": {
             "name": "disjoint",
-            "loc": "core/sorted_set/sorted_set.mbti:29:19-29:27"
+            "loc": null
           },
           "params": [
             {
@@ -1120,7 +1120,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:29:28-29:32"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1131,13 +1131,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:29:33-29:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:29:33-29:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:29:28-29:35"
+                "loc": null
               }
             },
             {
@@ -1150,7 +1150,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:29:37-29:41"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1161,13 +1161,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:29:42-29:43"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:29:42-29:43"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:29:37-29:44"
+                "loc": null
               }
             }
           ],
@@ -1180,10 +1180,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:29:49-29:53"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_set/sorted_set.mbti:29:49-29:53"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1193,7 +1193,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:29:3-29:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1201,14 +1201,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:29:7-29:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:29:0-29:53"
+      null
     ],
     [
       {
@@ -1217,11 +1217,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:30:6-30:7"
+            "loc": null
           },
           "name": {
             "name": "each",
-            "loc": "core/sorted_set/sorted_set.mbti:30:9-30:13"
+            "loc": null
           },
           "params": [
             {
@@ -1234,7 +1234,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:30:14-30:18"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1245,13 +1245,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:30:19-30:20"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:30:19-30:20"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:30:14-30:21"
+                "loc": null
               }
             },
             {
@@ -1267,10 +1267,10 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:30:24-30:25"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:30:24-30:25"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1281,10 +1281,10 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:30:30-30:34"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:30:30-30:34"
+                  "loc": null
                 },
                 "err": {
                   "type": "MaybeError",
@@ -1296,15 +1296,15 @@
                         "type": "Ident",
                         "name": "Error"
                       },
-                      "loc": "<no location>:-1:0--1:0"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "<no location>:-1:0--1:0"
+                    "loc": null
                   },
                   "is_old_syntax": false
                 },
                 "is_async": false,
-                "loc": "core/sorted_set/sorted_set.mbti:30:23-30:41"
+                "loc": null
               }
             }
           ],
@@ -1317,10 +1317,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:30:46-30:50"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_set/sorted_set.mbti:30:46-30:50"
+              "loc": null
             },
             {
               "type": "MaybeError",
@@ -1332,10 +1332,10 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "<no location>:-1:0--1:0"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "<no location>:-1:0--1:0"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -1344,14 +1344,14 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:30:3-30:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:30:0-30:57"
+      null
     ],
     [
       {
@@ -1360,11 +1360,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:31:6-31:7"
+            "loc": null
           },
           "name": {
             "name": "eachi",
-            "loc": "core/sorted_set/sorted_set.mbti:31:9-31:14"
+            "loc": null
           },
           "params": [
             {
@@ -1377,7 +1377,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:31:15-31:19"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1388,13 +1388,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:31:20-31:21"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:31:20-31:21"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:31:15-31:22"
+                "loc": null
               }
             },
             {
@@ -1410,10 +1410,10 @@
                         "type": "Ident",
                         "name": "Int"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:31:25-31:28"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:31:25-31:28"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1423,10 +1423,10 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:31:30-31:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:31:30-31:31"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1437,10 +1437,10 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:31:36-31:40"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:31:36-31:40"
+                  "loc": null
                 },
                 "err": {
                   "type": "MaybeError",
@@ -1452,15 +1452,15 @@
                         "type": "Ident",
                         "name": "Error"
                       },
-                      "loc": "<no location>:-1:0--1:0"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "<no location>:-1:0--1:0"
+                    "loc": null
                   },
                   "is_old_syntax": false
                 },
                 "is_async": false,
-                "loc": "core/sorted_set/sorted_set.mbti:31:24-31:47"
+                "loc": null
               }
             }
           ],
@@ -1473,10 +1473,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:31:52-31:56"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_set/sorted_set.mbti:31:52-31:56"
+              "loc": null
             },
             {
               "type": "MaybeError",
@@ -1488,10 +1488,10 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "<no location>:-1:0--1:0"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "<no location>:-1:0--1:0"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -1500,14 +1500,14 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:31:3-31:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:31:0-31:63"
+      null
     ],
     [
       {
@@ -1522,11 +1522,11 @@
           ],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:33:16-33:17"
+            "loc": null
           },
           "name": {
             "name": "from_iter",
-            "loc": "core/sorted_set/sorted_set.mbti:33:19-33:28"
+            "loc": null
           },
           "params": [
             {
@@ -1539,7 +1539,7 @@
                     "type": "Ident",
                     "name": "Iter"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:33:29-33:33"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1550,13 +1550,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:33:34-33:35"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:33:34-33:35"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:33:29-33:36"
+                "loc": null
               }
             }
           ],
@@ -1569,7 +1569,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:33:41-33:45"
+                "loc": null
               },
               "1": [
                 {
@@ -1580,13 +1580,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:33:46-33:47"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:33:46-33:47"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:33:41-33:48"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1596,7 +1596,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:33:3-33:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1604,14 +1604,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:33:7-33:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:32:0-33:48"
+      null
     ],
     [
       {
@@ -1626,11 +1626,11 @@
           ],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:35:16-35:17"
+            "loc": null
           },
           "name": {
             "name": "intersect",
-            "loc": "core/sorted_set/sorted_set.mbti:35:19-35:28"
+            "loc": null
           },
           "params": [
             {
@@ -1643,7 +1643,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:35:29-35:33"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1654,13 +1654,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:35:34-35:35"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:35:34-35:35"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:35:29-35:36"
+                "loc": null
               }
             },
             {
@@ -1673,7 +1673,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:35:38-35:42"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1684,13 +1684,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:35:43-35:44"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:35:43-35:44"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:35:38-35:45"
+                "loc": null
               }
             }
           ],
@@ -1703,7 +1703,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:35:50-35:54"
+                "loc": null
               },
               "1": [
                 {
@@ -1714,13 +1714,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:35:55-35:56"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:35:55-35:56"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:35:50-35:57"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1730,7 +1730,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:35:3-35:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1738,14 +1738,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:35:7-35:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:34:0-35:57"
+      null
     ],
     [
       {
@@ -1754,11 +1754,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:36:16-36:17"
+            "loc": null
           },
           "name": {
             "name": "intersection",
-            "loc": "core/sorted_set/sorted_set.mbti:36:19-36:31"
+            "loc": null
           },
           "params": [
             {
@@ -1771,7 +1771,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:36:32-36:36"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1782,13 +1782,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:36:37-36:38"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:36:37-36:38"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:36:32-36:39"
+                "loc": null
               }
             },
             {
@@ -1801,7 +1801,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:36:41-36:45"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1812,13 +1812,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:36:46-36:47"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:36:46-36:47"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:36:41-36:48"
+                "loc": null
               }
             }
           ],
@@ -1831,7 +1831,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:36:53-36:57"
+                "loc": null
               },
               "1": [
                 {
@@ -1842,13 +1842,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:36:58-36:59"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:36:58-36:59"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:36:53-36:60"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1858,7 +1858,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:36:3-36:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1866,14 +1866,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:36:7-36:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:36:0-36:60"
+      null
     ],
     [
       {
@@ -1882,11 +1882,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:37:6-37:7"
+            "loc": null
           },
           "name": {
             "name": "is_empty",
-            "loc": "core/sorted_set/sorted_set.mbti:37:9-37:17"
+            "loc": null
           },
           "params": [
             {
@@ -1899,7 +1899,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:37:18-37:22"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1910,13 +1910,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:37:23-37:24"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:37:23-37:24"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:37:18-37:25"
+                "loc": null
               }
             }
           ],
@@ -1929,10 +1929,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:37:30-37:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_set/sorted_set.mbti:37:30-37:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1942,14 +1942,14 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:37:3-37:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:37:0-37:34"
+      null
     ],
     [
       {
@@ -1958,11 +1958,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:38:6-38:7"
+            "loc": null
           },
           "name": {
             "name": "iter",
-            "loc": "core/sorted_set/sorted_set.mbti:38:9-38:13"
+            "loc": null
           },
           "params": [
             {
@@ -1975,7 +1975,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:38:14-38:18"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1986,13 +1986,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:38:19-38:20"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:38:19-38:20"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:38:14-38:21"
+                "loc": null
               }
             }
           ],
@@ -2005,7 +2005,7 @@
                   "type": "Ident",
                   "name": "Iter"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:38:26-38:30"
+                "loc": null
               },
               "1": [
                 {
@@ -2016,13 +2016,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:38:31-38:32"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:38:31-38:32"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:38:26-38:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2032,14 +2032,14 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:38:3-38:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:38:0-38:33"
+      null
     ],
     [
       {
@@ -2048,11 +2048,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:39:16-39:17"
+            "loc": null
           },
           "name": {
             "name": "range",
-            "loc": "core/sorted_set/sorted_set.mbti:39:19-39:24"
+            "loc": null
           },
           "params": [
             {
@@ -2065,7 +2065,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:39:25-39:29"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2076,13 +2076,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:39:30-39:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:39:30-39:31"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:39:25-39:32"
+                "loc": null
               }
             },
             {
@@ -2095,10 +2095,10 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:39:34-39:35"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_set/sorted_set.mbti:39:34-39:35"
+                "loc": null
               }
             },
             {
@@ -2111,10 +2111,10 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:39:37-39:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_set/sorted_set.mbti:39:37-39:38"
+                "loc": null
               }
             }
           ],
@@ -2127,7 +2127,7 @@
                   "type": "Ident",
                   "name": "Iter"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:39:43-39:47"
+                "loc": null
               },
               "1": [
                 {
@@ -2138,13 +2138,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:39:48-39:49"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:39:48-39:49"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:39:43-39:50"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2154,7 +2154,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:39:3-39:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2162,14 +2162,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:39:7-39:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:39:0-39:50"
+      null
     ],
     [
       {
@@ -2178,11 +2178,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:40:16-40:17"
+            "loc": null
           },
           "name": {
             "name": "remove",
-            "loc": "core/sorted_set/sorted_set.mbti:40:19-40:25"
+            "loc": null
           },
           "params": [
             {
@@ -2195,7 +2195,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:40:26-40:30"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2206,13 +2206,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:40:31-40:32"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:40:31-40:32"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:40:26-40:33"
+                "loc": null
               }
             },
             {
@@ -2225,10 +2225,10 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:40:35-40:36"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_set/sorted_set.mbti:40:35-40:36"
+                "loc": null
               }
             }
           ],
@@ -2241,10 +2241,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:40:41-40:45"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_set/sorted_set.mbti:40:41-40:45"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2254,7 +2254,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:40:3-40:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2262,14 +2262,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:40:7-40:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:40:0-40:45"
+      null
     ],
     [
       {
@@ -2278,11 +2278,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:41:6-41:7"
+            "loc": null
           },
           "name": {
             "name": "size",
-            "loc": "core/sorted_set/sorted_set.mbti:41:9-41:13"
+            "loc": null
           },
           "params": [
             {
@@ -2295,7 +2295,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:41:14-41:18"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2306,13 +2306,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:41:19-41:20"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:41:19-41:20"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:41:14-41:21"
+                "loc": null
               }
             }
           ],
@@ -2325,10 +2325,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:41:26-41:29"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_set/sorted_set.mbti:41:26-41:29"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2338,14 +2338,14 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:41:3-41:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:41:0-41:29"
+      null
     ],
     [
       {
@@ -2354,11 +2354,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:42:16-42:17"
+            "loc": null
           },
           "name": {
             "name": "subset",
-            "loc": "core/sorted_set/sorted_set.mbti:42:19-42:25"
+            "loc": null
           },
           "params": [
             {
@@ -2371,7 +2371,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:42:26-42:30"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2382,13 +2382,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:42:31-42:32"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:42:31-42:32"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:42:26-42:33"
+                "loc": null
               }
             },
             {
@@ -2401,7 +2401,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:42:35-42:39"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2412,13 +2412,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:42:40-42:41"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:42:40-42:41"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:42:35-42:42"
+                "loc": null
               }
             }
           ],
@@ -2431,10 +2431,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:42:47-42:51"
+                "loc": null
               },
               "1": [],
-              "loc": "core/sorted_set/sorted_set.mbti:42:47-42:51"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2444,7 +2444,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:42:3-42:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2452,14 +2452,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:42:7-42:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:42:0-42:51"
+      null
     ],
     [
       {
@@ -2468,11 +2468,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:43:16-43:17"
+            "loc": null
           },
           "name": {
             "name": "symmetric_difference",
-            "loc": "core/sorted_set/sorted_set.mbti:43:19-43:39"
+            "loc": null
           },
           "params": [
             {
@@ -2485,7 +2485,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:43:40-43:44"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2496,13 +2496,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:43:45-43:46"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:43:45-43:46"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:43:40-43:47"
+                "loc": null
               }
             },
             {
@@ -2515,7 +2515,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:43:49-43:53"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2526,13 +2526,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:43:54-43:55"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:43:54-43:55"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:43:49-43:56"
+                "loc": null
               }
             }
           ],
@@ -2545,7 +2545,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:43:61-43:65"
+                "loc": null
               },
               "1": [
                 {
@@ -2556,13 +2556,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:43:66-43:67"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:43:66-43:67"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:43:61-43:68"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2572,7 +2572,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:43:3-43:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2580,14 +2580,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:43:7-43:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:43:0-43:68"
+      null
     ],
     [
       {
@@ -2596,11 +2596,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:44:6-44:7"
+            "loc": null
           },
           "name": {
             "name": "to_array",
-            "loc": "core/sorted_set/sorted_set.mbti:44:9-44:17"
+            "loc": null
           },
           "params": [
             {
@@ -2613,7 +2613,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:44:18-44:22"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2624,13 +2624,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:44:23-44:24"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:44:23-44:24"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:44:18-44:25"
+                "loc": null
               }
             }
           ],
@@ -2643,7 +2643,7 @@
                   "type": "Ident",
                   "name": "Array"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:44:30-44:35"
+                "loc": null
               },
               "1": [
                 {
@@ -2654,13 +2654,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:44:36-44:37"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:44:36-44:37"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:44:30-44:38"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2670,14 +2670,14 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:44:3-44:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:44:0-44:38"
+      null
     ],
     [
       {
@@ -2686,11 +2686,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/sorted_set/sorted_set.mbti:45:16-45:17"
+            "loc": null
           },
           "name": {
             "name": "union",
-            "loc": "core/sorted_set/sorted_set.mbti:45:19-45:24"
+            "loc": null
           },
           "params": [
             {
@@ -2703,7 +2703,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:45:25-45:29"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2714,13 +2714,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:45:30-45:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:45:30-45:31"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:45:25-45:32"
+                "loc": null
               }
             },
             {
@@ -2733,7 +2733,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:45:34-45:38"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2744,13 +2744,13 @@
                         "type": "Ident",
                         "name": "V"
                       },
-                      "loc": "core/sorted_set/sorted_set.mbti:45:39-45:40"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/sorted_set/sorted_set.mbti:45:39-45:40"
+                    "loc": null
                   }
                 ],
-                "loc": "core/sorted_set/sorted_set.mbti:45:34-45:41"
+                "loc": null
               }
             }
           ],
@@ -2763,7 +2763,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/sorted_set/sorted_set.mbti:45:46-45:50"
+                "loc": null
               },
               "1": [
                 {
@@ -2774,13 +2774,13 @@
                       "type": "Ident",
                       "name": "V"
                     },
-                    "loc": "core/sorted_set/sorted_set.mbti:45:51-45:52"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/sorted_set/sorted_set.mbti:45:51-45:52"
+                  "loc": null
                 }
               ],
-              "loc": "core/sorted_set/sorted_set.mbti:45:46-45:53"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2790,7 +2790,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:45:3-45:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2798,14 +2798,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:45:7-45:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/sorted_set/sorted_set.mbti:45:0-45:53"
+      null
     ],
     [
       {
@@ -2816,7 +2816,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/sorted_set/sorted_set.mbti:46:5-46:6"
+                "loc": null
               },
               "constraints": []
             }
@@ -2829,7 +2829,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/sorted_set/sorted_set.mbti:46:20-46:21"
+              "loc": null
             },
             "1": [
               {
@@ -2840,24 +2840,24 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:46:22-46:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_set/sorted_set.mbti:46:22-46:23"
+                "loc": null
               }
             ],
-            "loc": "core/sorted_set/sorted_set.mbti:46:20-46:24"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Default"
             },
-            "loc": "core/sorted_set/sorted_set.mbti:46:8-46:15"
+            "loc": null
           }
         }
       },
-      "core/sorted_set/sorted_set.mbti:46:0-46:24"
+      null
     ],
     [
       {
@@ -2868,7 +2868,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:47:5-47:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2876,7 +2876,7 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:47:9-47:11"
+                  "loc": null
                 }
               ]
             }
@@ -2889,7 +2889,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/sorted_set/sorted_set.mbti:47:20-47:21"
+              "loc": null
             },
             "1": [
               {
@@ -2900,24 +2900,24 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:47:22-47:23"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_set/sorted_set.mbti:47:22-47:23"
+                "loc": null
               }
             ],
-            "loc": "core/sorted_set/sorted_set.mbti:47:20-47:24"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Eq"
             },
-            "loc": "core/sorted_set/sorted_set.mbti:47:13-47:15"
+            "loc": null
           }
         }
       },
-      "core/sorted_set/sorted_set.mbti:47:0-47:24"
+      null
     ],
     [
       {
@@ -2928,7 +2928,7 @@
             {
               "name": {
                 "name": "V",
-                "loc": "core/sorted_set/sorted_set.mbti:48:5-48:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2936,7 +2936,7 @@
                     "type": "Ident",
                     "name": "Show"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:48:9-48:13"
+                  "loc": null
                 }
               ]
             }
@@ -2949,7 +2949,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/sorted_set/sorted_set.mbti:48:24-48:25"
+              "loc": null
             },
             "1": [
               {
@@ -2960,24 +2960,24 @@
                     "type": "Ident",
                     "name": "V"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:48:26-48:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_set/sorted_set.mbti:48:26-48:27"
+                "loc": null
               }
             ],
-            "loc": "core/sorted_set/sorted_set.mbti:48:24-48:28"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Show"
             },
-            "loc": "core/sorted_set/sorted_set.mbti:48:15-48:19"
+            "loc": null
           }
         }
       },
-      "core/sorted_set/sorted_set.mbti:48:0-48:28"
+      null
     ],
     [
       {
@@ -2988,23 +2988,23 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/sorted_set/sorted_set.mbti:49:5-49:6"
+                "loc": null
               },
               "constraints": [
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "quickcheck",
-                    "name": "Arbitrary"
+                    "id": "Arbitrary"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:49:9-49:30"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:49:33-49:40"
+                  "loc": null
                 }
               ]
             }
@@ -3017,7 +3017,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/sorted_set/sorted_set.mbti:49:68-49:69"
+              "loc": null
             },
             "1": [
               {
@@ -3028,25 +3028,25 @@
                     "type": "Ident",
                     "name": "X"
                   },
-                  "loc": "core/sorted_set/sorted_set.mbti:49:70-49:71"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/sorted_set/sorted_set.mbti:49:70-49:71"
+                "loc": null
               }
             ],
-            "loc": "core/sorted_set/sorted_set.mbti:49:68-49:72"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "quickcheck",
-              "name": "Arbitrary"
+              "id": "Arbitrary"
             },
-            "loc": "core/sorted_set/sorted_set.mbti:49:42-49:63"
+            "loc": null
           }
         }
       },
-      "core/sorted_set/sorted_set.mbti:49:0-49:72"
+      null
     ]
   ]
 }

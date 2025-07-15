@@ -9,7 +9,7 @@
           "attr": [],
           "name": {
             "name": "maximum",
-            "loc": "core/cmp/cmp.mbti:4:16-4:23"
+            "loc": null
           },
           "params": [
             {
@@ -22,10 +22,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/cmp/cmp.mbti:4:24-4:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/cmp/cmp.mbti:4:24-4:25"
+                "loc": null
               }
             },
             {
@@ -38,10 +38,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/cmp/cmp.mbti:4:27-4:28"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/cmp/cmp.mbti:4:27-4:28"
+                "loc": null
               }
             }
           ],
@@ -54,10 +54,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/cmp/cmp.mbti:4:33-4:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/cmp/cmp.mbti:4:33-4:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -67,7 +67,7 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/cmp/cmp.mbti:4:3-4:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -75,14 +75,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/cmp/cmp.mbti:4:7-4:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/cmp/cmp.mbti:4:0-4:34"
+      null
     ],
     [
       {
@@ -91,7 +91,7 @@
           "attr": [],
           "name": {
             "name": "maximum_by_key",
-            "loc": "core/cmp/cmp.mbti:6:19-6:33"
+            "loc": null
           },
           "params": [
             {
@@ -104,10 +104,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/cmp/cmp.mbti:6:34-6:35"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/cmp/cmp.mbti:6:34-6:35"
+                "loc": null
               }
             },
             {
@@ -120,10 +120,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/cmp/cmp.mbti:6:37-6:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/cmp/cmp.mbti:6:37-6:38"
+                "loc": null
               }
             },
             {
@@ -139,10 +139,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/cmp/cmp.mbti:6:41-6:42"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/cmp/cmp.mbti:6:41-6:42"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -153,16 +153,16 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/cmp/cmp.mbti:6:47-6:48"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/cmp/cmp.mbti:6:47-6:48"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/cmp/cmp.mbti:6:40-6:48"
+                "loc": null
               }
             }
           ],
@@ -175,10 +175,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/cmp/cmp.mbti:6:53-6:54"
+                "loc": null
               },
               "1": [],
-              "loc": "core/cmp/cmp.mbti:6:53-6:54"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -188,14 +188,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/cmp/cmp.mbti:6:3-6:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "K",
-                "loc": "core/cmp/cmp.mbti:6:6-6:7"
+                "loc": null
               },
               "constraints": [
                 {
@@ -203,14 +203,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/cmp/cmp.mbti:6:10-6:17"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/cmp/cmp.mbti:6:0-6:54"
+      null
     ],
     [
       {
@@ -219,7 +219,7 @@
           "attr": [],
           "name": {
             "name": "minimum",
-            "loc": "core/cmp/cmp.mbti:8:16-8:23"
+            "loc": null
           },
           "params": [
             {
@@ -232,10 +232,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/cmp/cmp.mbti:8:24-8:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/cmp/cmp.mbti:8:24-8:25"
+                "loc": null
               }
             },
             {
@@ -248,10 +248,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/cmp/cmp.mbti:8:27-8:28"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/cmp/cmp.mbti:8:27-8:28"
+                "loc": null
               }
             }
           ],
@@ -264,10 +264,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/cmp/cmp.mbti:8:33-8:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/cmp/cmp.mbti:8:33-8:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -277,7 +277,7 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/cmp/cmp.mbti:8:3-8:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -285,14 +285,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/cmp/cmp.mbti:8:7-8:14"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/cmp/cmp.mbti:8:0-8:34"
+      null
     ],
     [
       {
@@ -301,7 +301,7 @@
           "attr": [],
           "name": {
             "name": "minimum_by_key",
-            "loc": "core/cmp/cmp.mbti:10:19-10:33"
+            "loc": null
           },
           "params": [
             {
@@ -314,10 +314,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/cmp/cmp.mbti:10:34-10:35"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/cmp/cmp.mbti:10:34-10:35"
+                "loc": null
               }
             },
             {
@@ -330,10 +330,10 @@
                     "type": "Ident",
                     "name": "T"
                   },
-                  "loc": "core/cmp/cmp.mbti:10:37-10:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/cmp/cmp.mbti:10:37-10:38"
+                "loc": null
               }
             },
             {
@@ -349,10 +349,10 @@
                         "type": "Ident",
                         "name": "T"
                       },
-                      "loc": "core/cmp/cmp.mbti:10:41-10:42"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/cmp/cmp.mbti:10:41-10:42"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -363,16 +363,16 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/cmp/cmp.mbti:10:47-10:48"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/cmp/cmp.mbti:10:47-10:48"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/cmp/cmp.mbti:10:40-10:48"
+                "loc": null
               }
             }
           ],
@@ -385,10 +385,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/cmp/cmp.mbti:10:53-10:54"
+                "loc": null
               },
               "1": [],
-              "loc": "core/cmp/cmp.mbti:10:53-10:54"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -398,14 +398,14 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/cmp/cmp.mbti:10:3-10:4"
+                "loc": null
               },
               "constraints": []
             },
             {
               "name": {
                 "name": "K",
-                "loc": "core/cmp/cmp.mbti:10:6-10:7"
+                "loc": null
               },
               "constraints": [
                 {
@@ -413,14 +413,14 @@
                     "type": "Ident",
                     "name": "Compare"
                   },
-                  "loc": "core/cmp/cmp.mbti:10:10-10:17"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/cmp/cmp.mbti:10:0-10:54"
+      null
     ]
   ]
 }

@@ -19,7 +19,7 @@
           ],
           "name": {
             "name": "chacha8",
-            "loc": "core/random/random.mbti:9:3-9:10"
+            "loc": null
           },
           "params": [
             {
@@ -27,7 +27,7 @@
               "0": {
                 "type": "Label",
                 "name": "seed",
-                "loc": "core/random/random.mbti:9:11-9:16"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -37,10 +37,10 @@
                     "type": "Ident",
                     "name": "Bytes"
                   },
-                  "loc": "core/random/random.mbti:9:19-9:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:9:19-9:24"
+                "loc": null
               }
             }
           ],
@@ -53,7 +53,7 @@
                   "type": "Ident",
                   "name": "Source"
                 },
-                "loc": "core/random/random.mbti:9:35-9:41"
+                "loc": null
               }
             },
             {
@@ -63,7 +63,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:8:0-9:41"
+      null
     ],
     [
       {
@@ -78,7 +78,7 @@
           ],
           "name": {
             "name": "new",
-            "loc": "core/random/random.mbti:12:3-12:6"
+            "loc": null
           },
           "params": [
             {
@@ -86,7 +86,7 @@
               "0": {
                 "type": "Label",
                 "name": "seed",
-                "loc": "core/random/random.mbti:12:7-12:12"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -96,10 +96,10 @@
                     "type": "Ident",
                     "name": "Bytes"
                   },
-                  "loc": "core/random/random.mbti:12:15-12:20"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:12:15-12:20"
+                "loc": null
               }
             }
           ],
@@ -112,10 +112,10 @@
                   "type": "Ident",
                   "name": "Rand"
                 },
-                "loc": "core/random/random.mbti:12:30-12:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/random/random.mbti:12:30-12:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -124,7 +124,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:11:0-12:34"
+      null
     ],
     [
       {
@@ -132,7 +132,7 @@
         "0": {
           "name": {
             "name": "Rand",
-            "loc": "core/random/random.mbti:15:5-15:9"
+            "loc": null
           },
           "type_params": [],
           "components": {
@@ -143,7 +143,7 @@
           }
         }
       },
-      "core/random/random.mbti:15:0-15:9"
+      null
     ],
     [
       {
@@ -152,11 +152,11 @@
           "attr": [],
           "type_name": {
             "name": "Rand",
-            "loc": "core/random/random.mbti:16:3-16:7"
+            "loc": null
           },
           "name": {
             "name": "bigint",
-            "loc": "core/random/random.mbti:16:9-16:15"
+            "loc": null
           },
           "params": [
             {
@@ -169,10 +169,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/random/random.mbti:16:16-16:20"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:16:16-16:20"
+                "loc": null
               }
             },
             {
@@ -185,10 +185,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/random/random.mbti:16:22-16:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:16:22-16:25"
+                "loc": null
               }
             }
           ],
@@ -198,14 +198,14 @@
               "0": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Qualified",
+                  "type": "Dot",
                   "pkg": "bigint",
-                  "name": "BigInt"
+                  "id": "BigInt"
                 },
-                "loc": "core/random/random.mbti:16:30-16:44"
+                "loc": null
               },
               "1": [],
-              "loc": "core/random/random.mbti:16:30-16:44"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -214,7 +214,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:16:0-16:44"
+      null
     ],
     [
       {
@@ -223,11 +223,11 @@
           "attr": [],
           "type_name": {
             "name": "Rand",
-            "loc": "core/random/random.mbti:17:3-17:7"
+            "loc": null
           },
           "name": {
             "name": "chacha8",
-            "loc": "core/random/random.mbti:17:9-17:16"
+            "loc": null
           },
           "params": [
             {
@@ -235,7 +235,7 @@
               "0": {
                 "type": "Label",
                 "name": "seed",
-                "loc": "core/random/random.mbti:17:17-17:22"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -245,10 +245,10 @@
                     "type": "Ident",
                     "name": "Bytes"
                   },
-                  "loc": "core/random/random.mbti:17:25-17:30"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:17:25-17:30"
+                "loc": null
               }
             }
           ],
@@ -261,10 +261,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/random/random.mbti:17:40-17:44"
+                "loc": null
               },
               "1": [],
-              "loc": "core/random/random.mbti:17:40-17:44"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -273,7 +273,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:17:0-17:44"
+      null
     ],
     [
       {
@@ -282,11 +282,11 @@
           "attr": [],
           "type_name": {
             "name": "Rand",
-            "loc": "core/random/random.mbti:18:3-18:7"
+            "loc": null
           },
           "name": {
             "name": "double",
-            "loc": "core/random/random.mbti:18:9-18:15"
+            "loc": null
           },
           "params": [
             {
@@ -299,10 +299,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/random/random.mbti:18:16-18:20"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:18:16-18:20"
+                "loc": null
               }
             }
           ],
@@ -315,10 +315,10 @@
                   "type": "Ident",
                   "name": "Double"
                 },
-                "loc": "core/random/random.mbti:18:25-18:31"
+                "loc": null
               },
               "1": [],
-              "loc": "core/random/random.mbti:18:25-18:31"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -327,7 +327,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:18:0-18:31"
+      null
     ],
     [
       {
@@ -336,11 +336,11 @@
           "attr": [],
           "type_name": {
             "name": "Rand",
-            "loc": "core/random/random.mbti:19:3-19:7"
+            "loc": null
           },
           "name": {
             "name": "float",
-            "loc": "core/random/random.mbti:19:9-19:14"
+            "loc": null
           },
           "params": [
             {
@@ -353,10 +353,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/random/random.mbti:19:15-19:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:19:15-19:19"
+                "loc": null
               }
             }
           ],
@@ -369,10 +369,10 @@
                   "type": "Ident",
                   "name": "Float"
                 },
-                "loc": "core/random/random.mbti:19:24-19:29"
+                "loc": null
               },
               "1": [],
-              "loc": "core/random/random.mbti:19:24-19:29"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -381,7 +381,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:19:0-19:29"
+      null
     ],
     [
       {
@@ -390,11 +390,11 @@
           "attr": [],
           "type_name": {
             "name": "Rand",
-            "loc": "core/random/random.mbti:20:3-20:7"
+            "loc": null
           },
           "name": {
             "name": "int",
-            "loc": "core/random/random.mbti:20:9-20:12"
+            "loc": null
           },
           "params": [
             {
@@ -407,10 +407,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/random/random.mbti:20:13-20:17"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:20:13-20:17"
+                "loc": null
               }
             },
             {
@@ -418,7 +418,7 @@
               "0": {
                 "type": "Label",
                 "name": "limit",
-                "loc": "core/random/random.mbti:20:19-20:25"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -428,10 +428,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/random/random.mbti:20:28-20:31"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:20:28-20:31"
+                "loc": null
               }
             }
           ],
@@ -444,10 +444,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/random/random.mbti:20:41-20:44"
+                "loc": null
               },
               "1": [],
-              "loc": "core/random/random.mbti:20:41-20:44"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -456,7 +456,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:20:0-20:44"
+      null
     ],
     [
       {
@@ -465,11 +465,11 @@
           "attr": [],
           "type_name": {
             "name": "Rand",
-            "loc": "core/random/random.mbti:21:3-21:7"
+            "loc": null
           },
           "name": {
             "name": "int64",
-            "loc": "core/random/random.mbti:21:9-21:14"
+            "loc": null
           },
           "params": [
             {
@@ -482,10 +482,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/random/random.mbti:21:15-21:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:21:15-21:19"
+                "loc": null
               }
             },
             {
@@ -493,7 +493,7 @@
               "0": {
                 "type": "Label",
                 "name": "limit",
-                "loc": "core/random/random.mbti:21:21-21:27"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -503,10 +503,10 @@
                     "type": "Ident",
                     "name": "Int64"
                   },
-                  "loc": "core/random/random.mbti:21:30-21:35"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:21:30-21:35"
+                "loc": null
               }
             }
           ],
@@ -519,10 +519,10 @@
                   "type": "Ident",
                   "name": "Int64"
                 },
-                "loc": "core/random/random.mbti:21:45-21:50"
+                "loc": null
               },
               "1": [],
-              "loc": "core/random/random.mbti:21:45-21:50"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -531,7 +531,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:21:0-21:50"
+      null
     ],
     [
       {
@@ -540,11 +540,11 @@
           "attr": [],
           "type_name": {
             "name": "Rand",
-            "loc": "core/random/random.mbti:22:3-22:7"
+            "loc": null
           },
           "name": {
             "name": "new",
-            "loc": "core/random/random.mbti:22:9-22:12"
+            "loc": null
           },
           "params": [
             {
@@ -552,7 +552,7 @@
               "0": {
                 "type": "Label",
                 "name": "generator",
-                "loc": "core/random/random.mbti:22:13-22:22"
+                "loc": null
               },
               "1": {
                 "type": "TObject",
@@ -562,7 +562,7 @@
                     "type": "Ident",
                     "name": "Source"
                   },
-                  "loc": "core/random/random.mbti:22:27-22:33"
+                  "loc": null
                 }
               }
             }
@@ -576,10 +576,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/random/random.mbti:22:38-22:42"
+                "loc": null
               },
               "1": [],
-              "loc": "core/random/random.mbti:22:38-22:42"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -588,7 +588,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:22:0-22:42"
+      null
     ],
     [
       {
@@ -597,11 +597,11 @@
           "attr": [],
           "type_name": {
             "name": "Rand",
-            "loc": "core/random/random.mbti:23:3-23:7"
+            "loc": null
           },
           "name": {
             "name": "shuffle",
-            "loc": "core/random/random.mbti:23:9-23:16"
+            "loc": null
           },
           "params": [
             {
@@ -614,10 +614,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/random/random.mbti:23:17-23:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:23:17-23:21"
+                "loc": null
               }
             },
             {
@@ -630,10 +630,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/random/random.mbti:23:23-23:26"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:23:23-23:26"
+                "loc": null
               }
             },
             {
@@ -649,10 +649,10 @@
                         "type": "Ident",
                         "name": "Int"
                       },
-                      "loc": "core/random/random.mbti:23:29-23:32"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/random/random.mbti:23:29-23:32"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -662,10 +662,10 @@
                         "type": "Ident",
                         "name": "Int"
                       },
-                      "loc": "core/random/random.mbti:23:34-23:37"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/random/random.mbti:23:34-23:37"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -676,16 +676,16 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/random/random.mbti:23:42-23:46"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/random/random.mbti:23:42-23:46"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/random/random.mbti:23:28-23:46"
+                "loc": null
               }
             }
           ],
@@ -698,10 +698,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/random/random.mbti:23:51-23:55"
+                "loc": null
               },
               "1": [],
-              "loc": "core/random/random.mbti:23:51-23:55"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -710,7 +710,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:23:0-23:55"
+      null
     ],
     [
       {
@@ -719,11 +719,11 @@
           "attr": [],
           "type_name": {
             "name": "Rand",
-            "loc": "core/random/random.mbti:24:3-24:7"
+            "loc": null
           },
           "name": {
             "name": "uint",
-            "loc": "core/random/random.mbti:24:9-24:13"
+            "loc": null
           },
           "params": [
             {
@@ -736,10 +736,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/random/random.mbti:24:14-24:18"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:24:14-24:18"
+                "loc": null
               }
             },
             {
@@ -747,7 +747,7 @@
               "0": {
                 "type": "Label",
                 "name": "limit",
-                "loc": "core/random/random.mbti:24:20-24:26"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -757,10 +757,10 @@
                     "type": "Ident",
                     "name": "UInt"
                   },
-                  "loc": "core/random/random.mbti:24:29-24:33"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:24:29-24:33"
+                "loc": null
               }
             }
           ],
@@ -773,10 +773,10 @@
                   "type": "Ident",
                   "name": "UInt"
                 },
-                "loc": "core/random/random.mbti:24:43-24:47"
+                "loc": null
               },
               "1": [],
-              "loc": "core/random/random.mbti:24:43-24:47"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -785,7 +785,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:24:0-24:47"
+      null
     ],
     [
       {
@@ -794,11 +794,11 @@
           "attr": [],
           "type_name": {
             "name": "Rand",
-            "loc": "core/random/random.mbti:25:3-25:7"
+            "loc": null
           },
           "name": {
             "name": "uint64",
-            "loc": "core/random/random.mbti:25:9-25:15"
+            "loc": null
           },
           "params": [
             {
@@ -811,10 +811,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/random/random.mbti:25:16-25:20"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:25:16-25:20"
+                "loc": null
               }
             },
             {
@@ -822,7 +822,7 @@
               "0": {
                 "type": "Label",
                 "name": "limit",
-                "loc": "core/random/random.mbti:25:22-25:28"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -832,10 +832,10 @@
                     "type": "Ident",
                     "name": "UInt64"
                   },
-                  "loc": "core/random/random.mbti:25:31-25:37"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/random/random.mbti:25:31-25:37"
+                "loc": null
               }
             }
           ],
@@ -848,10 +848,10 @@
                   "type": "Ident",
                   "name": "UInt64"
                 },
-                "loc": "core/random/random.mbti:25:47-25:53"
+                "loc": null
               },
               "1": [],
-              "loc": "core/random/random.mbti:25:47-25:53"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -860,7 +860,7 @@
           "type_params": []
         }
       },
-      "core/random/random.mbti:25:0-25:53"
+      null
     ],
     [
       {
@@ -868,14 +868,14 @@
         "0": {
           "name": {
             "name": "Source",
-            "loc": "core/random/random.mbti:30:16-30:22"
+            "loc": null
           },
           "super_traits": [],
           "methods": [
             {
               "name": {
                 "name": "next",
-                "loc": "core/random/random.mbti:31:2-31:6"
+                "loc": null
               },
               "params": [
                 {
@@ -888,10 +888,10 @@
                         "type": "Ident",
                         "name": "Self"
                       },
-                      "loc": "core/random/random.mbti:31:7-31:11"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/random/random.mbti:31:7-31:11"
+                    "loc": null
                   }
                 }
               ],
@@ -905,10 +905,10 @@
                       "type": "Ident",
                       "name": "UInt64"
                     },
-                    "loc": "core/random/random.mbti:31:16-31:22"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/random/random.mbti:31:16-31:22"
+                  "loc": null
                 },
                 {
                   "type": "NoErrorType"
@@ -919,11 +919,11 @@
           "vis": {
             "type": "Pub",
             "attr": "open",
-            "loc": "core/random/random.mbti:30:0-30:9"
+            "loc": null
           }
         }
       },
-      "core/random/random.mbti:30:0-32:1"
+      null
     ]
   ]
 }

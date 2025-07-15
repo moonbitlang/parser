@@ -9,7 +9,7 @@
           "attr": [],
           "name": {
             "name": "doubleton",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:6-4:15"
+            "loc": null
           },
           "params": [
             {
@@ -22,10 +22,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:16-4:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:16-4:19"
+                "loc": null
               }
             },
             {
@@ -38,10 +38,10 @@
                     "type": "Ident",
                     "name": "X"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:21-4:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:21-4:22"
+                "loc": null
               }
             },
             {
@@ -54,10 +54,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:24-4:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:24-4:27"
+                "loc": null
               }
             },
             {
@@ -70,10 +70,10 @@
                     "type": "Ident",
                     "name": "X"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:29-4:30"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:29-4:30"
+                "loc": null
               }
             }
           ],
@@ -86,7 +86,7 @@
                   "type": "Ident",
                   "name": "SparseArray"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:35-4:46"
+                "loc": null
               },
               "1": [
                 {
@@ -97,13 +97,13 @@
                       "type": "Ident",
                       "name": "X"
                     },
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:47-4:48"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:47-4:48"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:35-4:49"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -113,14 +113,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:4:3-4:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:4:0-4:49"
+      null
     ],
     [
       {
@@ -129,7 +129,7 @@
           "attr": [],
           "name": {
             "name": "empty",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:6-6:11"
+            "loc": null
           },
           "params": [],
           "return_": [
@@ -141,7 +141,7 @@
                   "type": "Ident",
                   "name": "SparseArray"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:17-6:28"
+                "loc": null
               },
               "1": [
                 {
@@ -152,13 +152,13 @@
                       "type": "Ident",
                       "name": "X"
                     },
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:29-6:30"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:29-6:30"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:17-6:31"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -168,14 +168,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:6:3-6:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:6:0-6:31"
+      null
     ],
     [
       {
@@ -184,7 +184,7 @@
           "attr": [],
           "name": {
             "name": "singleton",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:6-8:15"
+            "loc": null
           },
           "params": [
             {
@@ -197,10 +197,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:16-8:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:16-8:19"
+                "loc": null
               }
             },
             {
@@ -213,10 +213,10 @@
                     "type": "Ident",
                     "name": "X"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:21-8:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:21-8:22"
+                "loc": null
               }
             }
           ],
@@ -229,7 +229,7 @@
                   "type": "Ident",
                   "name": "SparseArray"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:27-8:38"
+                "loc": null
               },
               "1": [
                 {
@@ -240,13 +240,13 @@
                       "type": "Ident",
                       "name": "X"
                     },
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:39-8:40"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:39-8:40"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:27-8:41"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -256,14 +256,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:8:3-8:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:8:0-8:41"
+      null
     ],
     [
       {
@@ -271,7 +271,7 @@
         "0": {
           "name": {
             "name": "Bitset",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:11:14-11:20"
+            "loc": null
           },
           "type_params": [],
           "components": {
@@ -284,20 +284,20 @@
                   "type": "Ident",
                   "name": "UInt"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:11:21-11:25"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:11:21-11:25"
+              "loc": null
             }
           },
           "vis": {
             "type": "Pub",
             "attr": "all",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:11:0-11:8"
+            "loc": null
           }
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:11:0-11:25"
+      null
     ],
     [
       {
@@ -306,11 +306,11 @@
           "attr": [],
           "type_name": {
             "name": "Bitset",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:3-12:9"
+            "loc": null
           },
           "name": {
             "name": "add",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:11-12:14"
+            "loc": null
           },
           "params": [
             {
@@ -323,10 +323,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:15-12:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:15-12:19"
+                "loc": null
               }
             },
             {
@@ -339,10 +339,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:21-12:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:21-12:24"
+                "loc": null
               }
             }
           ],
@@ -355,10 +355,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:29-12:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:12:29-12:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -367,7 +367,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:12:0-12:33"
+      null
     ],
     [
       {
@@ -376,11 +376,11 @@
           "attr": [],
           "type_name": {
             "name": "Bitset",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:3-13:9"
+            "loc": null
           },
           "name": {
             "name": "first_idx",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:11-13:20"
+            "loc": null
           },
           "params": [
             {
@@ -393,10 +393,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:21-13:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:21-13:25"
+                "loc": null
               }
             }
           ],
@@ -409,10 +409,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:30-13:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:13:30-13:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -421,7 +421,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:13:0-13:33"
+      null
     ],
     [
       {
@@ -430,11 +430,11 @@
           "attr": [],
           "type_name": {
             "name": "Bitset",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:3-14:9"
+            "loc": null
           },
           "name": {
             "name": "has",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:11-14:14"
+            "loc": null
           },
           "params": [
             {
@@ -447,10 +447,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:15-14:19"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:15-14:19"
+                "loc": null
               }
             },
             {
@@ -463,10 +463,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:21-14:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:21-14:24"
+                "loc": null
               }
             }
           ],
@@ -479,10 +479,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:29-14:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:14:29-14:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -491,7 +491,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:14:0-14:33"
+      null
     ],
     [
       {
@@ -500,11 +500,11 @@
           "attr": [],
           "type_name": {
             "name": "Bitset",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:3-15:9"
+            "loc": null
           },
           "name": {
             "name": "index_of",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:11-15:19"
+            "loc": null
           },
           "params": [
             {
@@ -517,10 +517,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:20-15:24"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:20-15:24"
+                "loc": null
               }
             },
             {
@@ -533,10 +533,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:26-15:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:26-15:29"
+                "loc": null
               }
             }
           ],
@@ -549,10 +549,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:34-15:37"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:15:34-15:37"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -561,7 +561,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:15:0-15:37"
+      null
     ],
     [
       {
@@ -570,11 +570,11 @@
           "attr": [],
           "type_name": {
             "name": "Bitset",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:3-16:9"
+            "loc": null
           },
           "name": {
             "name": "inner",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:11-16:16"
+            "loc": null
           },
           "params": [
             {
@@ -587,10 +587,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:17-16:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:17-16:21"
+                "loc": null
               }
             }
           ],
@@ -603,10 +603,10 @@
                   "type": "Ident",
                   "name": "UInt"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:26-16:30"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:16:26-16:30"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -615,7 +615,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:16:0-16:30"
+      null
     ],
     [
       {
@@ -624,11 +624,11 @@
           "attr": [],
           "type_name": {
             "name": "Bitset",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:3-17:9"
+            "loc": null
           },
           "name": {
             "name": "intersection",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:11-17:23"
+            "loc": null
           },
           "params": [
             {
@@ -641,10 +641,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:24-17:28"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:24-17:28"
+                "loc": null
               }
             },
             {
@@ -657,10 +657,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:30-17:34"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:30-17:34"
+                "loc": null
               }
             }
           ],
@@ -673,10 +673,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:39-17:43"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:17:39-17:43"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -685,7 +685,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:17:0-17:43"
+      null
     ],
     [
       {
@@ -694,11 +694,11 @@
           "attr": [],
           "type_name": {
             "name": "Bitset",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:3-18:9"
+            "loc": null
           },
           "name": {
             "name": "remove",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:11-18:17"
+            "loc": null
           },
           "params": [
             {
@@ -711,10 +711,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:18-18:22"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:18-18:22"
+                "loc": null
               }
             },
             {
@@ -727,10 +727,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:24-18:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:24-18:27"
+                "loc": null
               }
             }
           ],
@@ -743,10 +743,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:32-18:36"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:18:32-18:36"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -755,7 +755,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:18:0-18:36"
+      null
     ],
     [
       {
@@ -764,11 +764,11 @@
           "attr": [],
           "type_name": {
             "name": "Bitset",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:3-19:9"
+            "loc": null
           },
           "name": {
             "name": "size",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:11-19:15"
+            "loc": null
           },
           "params": [
             {
@@ -781,10 +781,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:16-19:20"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:16-19:20"
+                "loc": null
               }
             }
           ],
@@ -797,10 +797,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:25-19:28"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:19:25-19:28"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -809,7 +809,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:19:0-19:28"
+      null
     ],
     [
       {
@@ -818,11 +818,11 @@
           "attr": [],
           "type_name": {
             "name": "Bitset",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:3-20:9"
+            "loc": null
           },
           "name": {
             "name": "union",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:11-20:16"
+            "loc": null
           },
           "params": [
             {
@@ -835,10 +835,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:17-20:21"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:17-20:21"
+                "loc": null
               }
             },
             {
@@ -851,10 +851,10 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:23-20:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:23-20:27"
+                "loc": null
               }
             }
           ],
@@ -867,10 +867,10 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:32-20:36"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:20:32-20:36"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -879,7 +879,7 @@
           "type_params": []
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:20:0-20:36"
+      null
     ],
     [
       {
@@ -895,21 +895,21 @@
                 "type": "Ident",
                 "name": "Bitset"
               },
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:21:12-21:18"
+              "loc": null
             },
             "1": [],
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:21:12-21:18"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Eq"
             },
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:21:5-21:7"
+            "loc": null
           }
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:21:0-21:18"
+      null
     ],
     [
       {
@@ -917,14 +917,14 @@
         "0": {
           "name": {
             "name": "SparseArray",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:23:16-23:27"
+            "loc": null
           },
           "type_params": [
             {
               "$tag": "Name",
               "0": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:23:28-23:29"
+                "loc": null
               }
             }
           ],
@@ -936,7 +936,7 @@
                 "name": {
                   "type": "FieldName",
                   "name": "elem_info",
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:24:2-24:11"
+                  "loc": null
                 },
                 "type_": {
                   "type": "TName",
@@ -946,23 +946,23 @@
                       "type": "Ident",
                       "name": "Bitset"
                     },
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:24:14-24:20"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:24:14-24:20"
+                  "loc": null
                 },
                 "mut_": false,
                 "vis": {
                   "type": "Default"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:24:2-24:20"
+                "loc": null
               },
               {
                 "type": "FieldDecl",
                 "name": {
                   "type": "FieldName",
                   "name": "data",
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:2-25:6"
+                  "loc": null
                 },
                 "type_": {
                   "type": "TName",
@@ -972,7 +972,7 @@
                       "type": "Ident",
                       "name": "FixedArray"
                     },
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:9-25:19"
+                    "loc": null
                   },
                   "1": [
                     {
@@ -983,30 +983,30 @@
                           "type": "Ident",
                           "name": "X"
                         },
-                        "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:20-25:21"
+                        "loc": null
                       },
                       "1": [],
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:20-25:21"
+                      "loc": null
                     }
                   ],
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:9-25:22"
+                  "loc": null
                 },
                 "mut_": false,
                 "vis": {
                   "type": "Default"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:25:2-25:22"
+                "loc": null
               }
             ]
           },
           "vis": {
             "type": "Pub",
             "attr": "all",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:23:0-23:8"
+            "loc": null
           }
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:23:0-26:1"
+      null
     ],
     [
       {
@@ -1015,11 +1015,11 @@
           "attr": [],
           "type_name": {
             "name": "SparseArray",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:6-27:17"
+            "loc": null
           },
           "name": {
             "name": "add",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:19-27:22"
+            "loc": null
           },
           "params": [
             {
@@ -1032,7 +1032,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:23-27:27"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1043,13 +1043,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:28-27:29"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:28-27:29"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:23-27:30"
+                "loc": null
               }
             },
             {
@@ -1062,10 +1062,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:32-27:35"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:32-27:35"
+                "loc": null
               }
             },
             {
@@ -1078,10 +1078,10 @@
                     "type": "Ident",
                     "name": "X"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:37-27:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:37-27:38"
+                "loc": null
               }
             }
           ],
@@ -1094,7 +1094,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:43-27:47"
+                "loc": null
               },
               "1": [
                 {
@@ -1105,13 +1105,13 @@
                       "type": "Ident",
                       "name": "X"
                     },
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:48-27:49"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:48-27:49"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:43-27:50"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1121,14 +1121,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:27:3-27:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:27:0-27:50"
+      null
     ],
     [
       {
@@ -1137,11 +1137,11 @@
           "attr": [],
           "type_name": {
             "name": "SparseArray",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:6-28:17"
+            "loc": null
           },
           "name": {
             "name": "difference",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:19-28:29"
+            "loc": null
           },
           "params": [
             {
@@ -1154,7 +1154,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:30-28:34"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1165,13 +1165,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:35-28:36"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:35-28:36"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:30-28:37"
+                "loc": null
               }
             },
             {
@@ -1184,7 +1184,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:39-28:43"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1195,13 +1195,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:44-28:45"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:44-28:45"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:39-28:46"
+                "loc": null
               }
             },
             {
@@ -1217,10 +1217,10 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:49-28:50"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:49-28:50"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1230,10 +1230,10 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:52-28:53"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:52-28:53"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1246,19 +1246,19 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:58-28:59"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:58-28:59"
+                    "loc": null
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:58-28:60",
-                  "question_loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:59-28:60"
+                  "loc": null,
+                  "question_loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:48-28:60"
+                "loc": null
               }
             }
           ],
@@ -1273,7 +1273,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:65-28:69"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1284,16 +1284,16 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:70-28:71"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:70-28:71"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:65-28:72"
+                "loc": null
               },
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:65-28:73",
-              "question_loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:72-28:73"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -1303,14 +1303,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:28:3-28:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:28:0-28:73"
+      null
     ],
     [
       {
@@ -1319,11 +1319,11 @@
           "attr": [],
           "type_name": {
             "name": "SparseArray",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:6-29:17"
+            "loc": null
           },
           "name": {
             "name": "each",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:19-29:23"
+            "loc": null
           },
           "params": [
             {
@@ -1336,7 +1336,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:24-29:28"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1347,13 +1347,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:29-29:30"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:29-29:30"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:24-29:31"
+                "loc": null
               }
             },
             {
@@ -1369,10 +1369,10 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:34-29:35"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:34-29:35"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1383,10 +1383,10 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:40-29:44"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:40-29:44"
+                  "loc": null
                 },
                 "err": {
                   "type": "MaybeError",
@@ -1398,15 +1398,15 @@
                         "type": "Ident",
                         "name": "Error"
                       },
-                      "loc": "<no location>:-1:0--1:0"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "<no location>:-1:0--1:0"
+                    "loc": null
                   },
                   "is_old_syntax": false
                 },
                 "is_async": false,
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:33-29:51"
+                "loc": null
               }
             }
           ],
@@ -1419,10 +1419,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:56-29:60"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:56-29:60"
+              "loc": null
             },
             {
               "type": "MaybeError",
@@ -1434,10 +1434,10 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "<no location>:-1:0--1:0"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "<no location>:-1:0--1:0"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -1446,14 +1446,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:29:3-29:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:29:0-29:67"
+      null
     ],
     [
       {
@@ -1462,11 +1462,11 @@
           "attr": [],
           "type_name": {
             "name": "SparseArray",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:6-30:17"
+            "loc": null
           },
           "name": {
             "name": "intersection",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:19-30:31"
+            "loc": null
           },
           "params": [
             {
@@ -1479,7 +1479,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:32-30:36"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1490,13 +1490,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:37-30:38"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:37-30:38"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:32-30:39"
+                "loc": null
               }
             },
             {
@@ -1509,7 +1509,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:41-30:45"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1520,13 +1520,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:46-30:47"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:46-30:47"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:41-30:48"
+                "loc": null
               }
             },
             {
@@ -1542,10 +1542,10 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:51-30:52"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:51-30:52"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1555,10 +1555,10 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:54-30:55"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:54-30:55"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1571,13 +1571,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:60-30:61"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:60-30:61"
+                    "loc": null
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:60-30:62",
-                  "question_loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:61-30:62"
+                  "loc": null,
+                  "question_loc": null
                 },
                 "err": {
                   "type": "MaybeError",
@@ -1589,15 +1589,15 @@
                         "type": "Ident",
                         "name": "Error"
                       },
-                      "loc": "<no location>:-1:0--1:0"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "<no location>:-1:0--1:0"
+                    "loc": null
                   },
                   "is_old_syntax": false
                 },
                 "is_async": false,
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:50-30:69"
+                "loc": null
               }
             }
           ],
@@ -1612,7 +1612,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:74-30:78"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1623,16 +1623,16 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:79-30:80"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:79-30:80"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:74-30:81"
+                "loc": null
               },
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:74-30:82",
-              "question_loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:81-30:82"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "MaybeError",
@@ -1644,10 +1644,10 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "<no location>:-1:0--1:0"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "<no location>:-1:0--1:0"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -1656,14 +1656,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:30:3-30:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:30:0-30:89"
+      null
     ],
     [
       {
@@ -1672,11 +1672,11 @@
           "attr": [],
           "type_name": {
             "name": "SparseArray",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:6-31:17"
+            "loc": null
           },
           "name": {
             "name": "op_get",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:19-31:25"
+            "loc": null
           },
           "params": [
             {
@@ -1689,7 +1689,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:26-31:30"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1700,13 +1700,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:31-31:32"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:31-31:32"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:26-31:33"
+                "loc": null
               }
             },
             {
@@ -1719,10 +1719,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:35-31:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:35-31:38"
+                "loc": null
               }
             }
           ],
@@ -1737,13 +1737,13 @@
                     "type": "Ident",
                     "name": "X"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:43-31:44"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:43-31:44"
+                "loc": null
               },
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:43-31:45",
-              "question_loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:44-31:45"
+              "loc": null,
+              "question_loc": null
             },
             {
               "type": "NoErrorType"
@@ -1753,14 +1753,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:31:3-31:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:31:0-31:45"
+      null
     ],
     [
       {
@@ -1769,11 +1769,11 @@
           "attr": [],
           "type_name": {
             "name": "SparseArray",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:6-32:17"
+            "loc": null
           },
           "name": {
             "name": "remove",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:19-32:25"
+            "loc": null
           },
           "params": [
             {
@@ -1786,7 +1786,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:26-32:30"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1797,13 +1797,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:31-32:32"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:31-32:32"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:26-32:33"
+                "loc": null
               }
             },
             {
@@ -1816,10 +1816,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:35-32:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:35-32:38"
+                "loc": null
               }
             }
           ],
@@ -1832,7 +1832,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:43-32:47"
+                "loc": null
               },
               "1": [
                 {
@@ -1843,13 +1843,13 @@
                       "type": "Ident",
                       "name": "X"
                     },
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:48-32:49"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:48-32:49"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:43-32:50"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1859,14 +1859,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:32:3-32:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:32:0-32:50"
+      null
     ],
     [
       {
@@ -1875,11 +1875,11 @@
           "attr": [],
           "type_name": {
             "name": "SparseArray",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:6-33:17"
+            "loc": null
           },
           "name": {
             "name": "replace",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:19-33:26"
+            "loc": null
           },
           "params": [
             {
@@ -1892,7 +1892,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:27-33:31"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1903,13 +1903,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:32-33:33"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:32-33:33"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:27-33:34"
+                "loc": null
               }
             },
             {
@@ -1922,10 +1922,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:36-33:39"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:36-33:39"
+                "loc": null
               }
             },
             {
@@ -1938,10 +1938,10 @@
                     "type": "Ident",
                     "name": "X"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:41-33:42"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:41-33:42"
+                "loc": null
               }
             }
           ],
@@ -1954,7 +1954,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:47-33:51"
+                "loc": null
               },
               "1": [
                 {
@@ -1965,13 +1965,13 @@
                       "type": "Ident",
                       "name": "X"
                     },
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:52-33:53"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:52-33:53"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:47-33:54"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1981,14 +1981,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:33:3-33:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:33:0-33:54"
+      null
     ],
     [
       {
@@ -1997,11 +1997,11 @@
           "attr": [],
           "type_name": {
             "name": "SparseArray",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:6-34:17"
+            "loc": null
           },
           "name": {
             "name": "size",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:19-34:23"
+            "loc": null
           },
           "params": [
             {
@@ -2014,7 +2014,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:24-34:28"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2025,13 +2025,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:29-34:30"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:29-34:30"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:24-34:31"
+                "loc": null
               }
             }
           ],
@@ -2044,10 +2044,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:36-34:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:36-34:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2057,14 +2057,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:34:3-34:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:34:0-34:39"
+      null
     ],
     [
       {
@@ -2073,11 +2073,11 @@
           "attr": [],
           "type_name": {
             "name": "SparseArray",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:6-35:17"
+            "loc": null
           },
           "name": {
             "name": "union",
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:19-35:24"
+            "loc": null
           },
           "params": [
             {
@@ -2090,7 +2090,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:25-35:29"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2101,13 +2101,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:30-35:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:30-35:31"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:25-35:32"
+                "loc": null
               }
             },
             {
@@ -2120,7 +2120,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:34-35:38"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2131,13 +2131,13 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:39-35:40"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:39-35:40"
+                    "loc": null
                   }
                 ],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:34-35:41"
+                "loc": null
               }
             },
             {
@@ -2153,10 +2153,10 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:44-35:45"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:44-35:45"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -2166,10 +2166,10 @@
                         "type": "Ident",
                         "name": "X"
                       },
-                      "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:47-35:48"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:47-35:48"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -2180,10 +2180,10 @@
                       "type": "Ident",
                       "name": "X"
                     },
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:53-35:54"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:53-35:54"
+                  "loc": null
                 },
                 "err": {
                   "type": "MaybeError",
@@ -2195,15 +2195,15 @@
                         "type": "Ident",
                         "name": "Error"
                       },
-                      "loc": "<no location>:-1:0--1:0"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "<no location>:-1:0--1:0"
+                    "loc": null
                   },
                   "is_old_syntax": false
                 },
                 "is_async": false,
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:43-35:61"
+                "loc": null
               }
             }
           ],
@@ -2216,7 +2216,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:66-35:70"
+                "loc": null
               },
               "1": [
                 {
@@ -2227,13 +2227,13 @@
                       "type": "Ident",
                       "name": "X"
                     },
-                    "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:71-35:72"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:71-35:72"
+                  "loc": null
                 }
               ],
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:66-35:73"
+              "loc": null
             },
             {
               "type": "MaybeError",
@@ -2245,10 +2245,10 @@
                     "type": "Ident",
                     "name": "Error"
                   },
-                  "loc": "<no location>:-1:0--1:0"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "<no location>:-1:0--1:0"
+                "loc": null
               },
               "is_old_syntax": false
             }
@@ -2257,14 +2257,14 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:35:3-35:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:35:0-35:80"
+      null
     ],
     [
       {
@@ -2275,7 +2275,7 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:5-36:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2283,7 +2283,7 @@
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:9-36:11"
+                  "loc": null
                 }
               ]
             }
@@ -2296,7 +2296,7 @@
                 "type": "Ident",
                 "name": "SparseArray"
               },
-              "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:20-36:31"
+              "loc": null
             },
             "1": [
               {
@@ -2307,24 +2307,24 @@
                     "type": "Ident",
                     "name": "X"
                   },
-                  "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:32-36:33"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:32-36:33"
+                "loc": null
               }
             ],
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:20-36:34"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Eq"
             },
-            "loc": "core/immut/internal/sparse_array/sparse_array.mbti:36:13-36:15"
+            "loc": null
           }
         }
       },
-      "core/immut/internal/sparse_array/sparse_array.mbti:36:0-36:34"
+      null
     ]
   ]
 }

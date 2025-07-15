@@ -8,7 +8,7 @@
         "0": {
           "name": {
             "name": "max_value",
-            "loc": "core/uint64/uint64.mbti:4:4-4:13"
+            "loc": null
           },
           "type_": {
             "type": "TName",
@@ -18,14 +18,14 @@
                 "type": "Ident",
                 "name": "UInt64"
               },
-              "loc": "core/uint64/uint64.mbti:4:16-4:22"
+              "loc": null
             },
             "1": [],
-            "loc": "core/uint64/uint64.mbti:4:16-4:22"
+            "loc": null
           }
         }
       },
-      "core/uint64/uint64.mbti:4:0-4:22"
+      null
     ],
     [
       {
@@ -33,7 +33,7 @@
         "0": {
           "name": {
             "name": "min_value",
-            "loc": "core/uint64/uint64.mbti:6:4-6:13"
+            "loc": null
           },
           "type_": {
             "type": "TName",
@@ -43,14 +43,14 @@
                 "type": "Ident",
                 "name": "UInt64"
               },
-              "loc": "core/uint64/uint64.mbti:6:16-6:22"
+              "loc": null
             },
             "1": [],
-            "loc": "core/uint64/uint64.mbti:6:16-6:22"
+            "loc": null
           }
         }
       },
-      "core/uint64/uint64.mbti:6:0-6:22"
+      null
     ],
     [
       {
@@ -59,11 +59,11 @@
           "attr": [],
           "type_name": {
             "name": "UInt64",
-            "loc": "core/uint64/uint64.mbti:9:3-9:9"
+            "loc": null
           },
           "name": {
             "name": "to_be_bytes",
-            "loc": "core/uint64/uint64.mbti:9:11-9:22"
+            "loc": null
           },
           "params": [
             {
@@ -76,10 +76,10 @@
                     "type": "Ident",
                     "name": "UInt64"
                   },
-                  "loc": "core/uint64/uint64.mbti:9:23-9:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/uint64/uint64.mbti:9:23-9:29"
+                "loc": null
               }
             }
           ],
@@ -92,10 +92,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/uint64/uint64.mbti:9:34-9:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/uint64/uint64.mbti:9:34-9:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -104,7 +104,7 @@
           "type_params": []
         }
       },
-      "core/uint64/uint64.mbti:9:0-9:39"
+      null
     ],
     [
       {
@@ -113,11 +113,11 @@
           "attr": [],
           "type_name": {
             "name": "UInt64",
-            "loc": "core/uint64/uint64.mbti:10:3-10:9"
+            "loc": null
           },
           "name": {
             "name": "to_le_bytes",
-            "loc": "core/uint64/uint64.mbti:10:11-10:22"
+            "loc": null
           },
           "params": [
             {
@@ -130,10 +130,10 @@
                     "type": "Ident",
                     "name": "UInt64"
                   },
-                  "loc": "core/uint64/uint64.mbti:10:23-10:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/uint64/uint64.mbti:10:23-10:29"
+                "loc": null
               }
             }
           ],
@@ -146,10 +146,10 @@
                   "type": "Ident",
                   "name": "Bytes"
                 },
-                "loc": "core/uint64/uint64.mbti:10:34-10:39"
+                "loc": null
               },
               "1": [],
-              "loc": "core/uint64/uint64.mbti:10:34-10:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -158,7 +158,7 @@
           "type_params": []
         }
       },
-      "core/uint64/uint64.mbti:10:0-10:39"
+      null
     ]
   ]
 }

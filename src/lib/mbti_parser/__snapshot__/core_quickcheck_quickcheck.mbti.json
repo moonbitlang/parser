@@ -13,7 +13,7 @@
           "attr": [],
           "name": {
             "name": "gen",
-            "loc": "core/quickcheck/quickcheck.mbti:8:18-8:21"
+            "loc": null
           },
           "params": [
             {
@@ -21,7 +21,7 @@
               "0": {
                 "type": "Label",
                 "name": "size",
-                "loc": "core/quickcheck/quickcheck.mbti:8:22-8:26"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -31,10 +31,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/quickcheck/quickcheck.mbti:8:30-8:33"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/quickcheck.mbti:8:30-8:33"
+                "loc": null
               }
             },
             {
@@ -42,21 +42,21 @@
               "0": {
                 "type": "Label",
                 "name": "state",
-                "loc": "core/quickcheck/quickcheck.mbti:8:35-8:40"
+                "loc": null
               },
               "1": {
                 "type": "TName",
                 "0": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "splitmix",
-                    "name": "RandomState"
+                    "id": "RandomState"
                   },
-                  "loc": "core/quickcheck/quickcheck.mbti:8:44-8:65"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/quickcheck.mbti:8:44-8:65"
+                "loc": null
               }
             }
           ],
@@ -69,10 +69,10 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/quickcheck/quickcheck.mbti:8:70-8:71"
+                "loc": null
               },
               "1": [],
-              "loc": "core/quickcheck/quickcheck.mbti:8:70-8:71"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -82,7 +82,7 @@
             {
               "name": {
                 "name": "T",
-                "loc": "core/quickcheck/quickcheck.mbti:8:3-8:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -90,14 +90,14 @@
                     "type": "Ident",
                     "name": "Arbitrary"
                   },
-                  "loc": "core/quickcheck/quickcheck.mbti:8:7-8:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/quickcheck/quickcheck.mbti:8:0-8:71"
+      null
     ],
     [
       {
@@ -106,7 +106,7 @@
           "attr": [],
           "name": {
             "name": "samples",
-            "loc": "core/quickcheck/quickcheck.mbti:10:18-10:25"
+            "loc": null
           },
           "params": [
             {
@@ -119,10 +119,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/quickcheck/quickcheck.mbti:10:26-10:29"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/quickcheck.mbti:10:26-10:29"
+                "loc": null
               }
             }
           ],
@@ -135,7 +135,7 @@
                   "type": "Ident",
                   "name": "Array"
                 },
-                "loc": "core/quickcheck/quickcheck.mbti:10:34-10:39"
+                "loc": null
               },
               "1": [
                 {
@@ -146,13 +146,13 @@
                       "type": "Ident",
                       "name": "X"
                     },
-                    "loc": "core/quickcheck/quickcheck.mbti:10:40-10:41"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/quickcheck/quickcheck.mbti:10:40-10:41"
+                  "loc": null
                 }
               ],
-              "loc": "core/quickcheck/quickcheck.mbti:10:34-10:42"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -162,7 +162,7 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/quickcheck/quickcheck.mbti:10:3-10:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -170,14 +170,14 @@
                     "type": "Ident",
                     "name": "Arbitrary"
                   },
-                  "loc": "core/quickcheck/quickcheck.mbti:10:7-10:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/quickcheck/quickcheck.mbti:10:0-10:42"
+      null
     ],
     [
       {
@@ -185,14 +185,14 @@
         "0": {
           "name": {
             "name": "Arbitrary",
-            "loc": "core/quickcheck/quickcheck.mbti:17:16-17:25"
+            "loc": null
           },
           "super_traits": [],
           "methods": [
             {
               "name": {
                 "name": "arbitrary",
-                "loc": "core/quickcheck/quickcheck.mbti:18:2-18:11"
+                "loc": null
               },
               "params": [
                 {
@@ -205,10 +205,10 @@
                         "type": "Ident",
                         "name": "Int"
                       },
-                      "loc": "core/quickcheck/quickcheck.mbti:18:12-18:15"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/quickcheck/quickcheck.mbti:18:12-18:15"
+                    "loc": null
                   }
                 },
                 {
@@ -218,14 +218,14 @@
                     "0": {
                       "type": "ConstrId",
                       "id": {
-                        "type": "Qualified",
+                        "type": "Dot",
                         "pkg": "splitmix",
-                        "name": "RandomState"
+                        "id": "RandomState"
                       },
-                      "loc": "core/quickcheck/quickcheck.mbti:18:17-18:38"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/quickcheck/quickcheck.mbti:18:17-18:38"
+                    "loc": null
                   }
                 }
               ],
@@ -239,10 +239,10 @@
                       "type": "Ident",
                       "name": "Self"
                     },
-                    "loc": "core/quickcheck/quickcheck.mbti:18:43-18:47"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/quickcheck/quickcheck.mbti:18:43-18:47"
+                  "loc": null
                 },
                 {
                   "type": "NoErrorType"
@@ -253,11 +253,11 @@
           "vis": {
             "type": "Pub",
             "attr": "open",
-            "loc": "core/quickcheck/quickcheck.mbti:17:0-17:9"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:17:0-19:1"
+      null
     ],
     [
       {
@@ -273,21 +273,21 @@
                 "type": "Ident",
                 "name": "Unit"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:20:19-20:23"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:20:19-20:23"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:20:5-20:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:20:0-20:23"
+      null
     ],
     [
       {
@@ -303,21 +303,21 @@
                 "type": "Ident",
                 "name": "Bool"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:21:19-21:23"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:21:19-21:23"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:21:5-21:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:21:0-21:23"
+      null
     ],
     [
       {
@@ -333,21 +333,21 @@
                 "type": "Ident",
                 "name": "Byte"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:22:19-22:23"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:22:19-22:23"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:22:5-22:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:22:0-22:23"
+      null
     ],
     [
       {
@@ -363,21 +363,21 @@
                 "type": "Ident",
                 "name": "Char"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:23:19-23:23"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:23:19-23:23"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:23:5-23:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:23:0-23:23"
+      null
     ],
     [
       {
@@ -393,21 +393,21 @@
                 "type": "Ident",
                 "name": "Int"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:24:19-24:22"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:24:19-24:22"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:24:5-24:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:24:0-24:22"
+      null
     ],
     [
       {
@@ -423,21 +423,21 @@
                 "type": "Ident",
                 "name": "Int64"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:25:19-25:24"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:25:19-25:24"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:25:5-25:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:25:0-25:24"
+      null
     ],
     [
       {
@@ -453,21 +453,21 @@
                 "type": "Ident",
                 "name": "UInt"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:26:19-26:23"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:26:19-26:23"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:26:5-26:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:26:0-26:23"
+      null
     ],
     [
       {
@@ -483,21 +483,21 @@
                 "type": "Ident",
                 "name": "UInt64"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:27:19-27:25"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:27:19-27:25"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:27:5-27:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:27:0-27:25"
+      null
     ],
     [
       {
@@ -513,21 +513,21 @@
                 "type": "Ident",
                 "name": "Float"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:28:19-28:24"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:28:19-28:24"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:28:5-28:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:28:0-28:24"
+      null
     ],
     [
       {
@@ -543,21 +543,21 @@
                 "type": "Ident",
                 "name": "Double"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:29:19-29:25"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:29:19-29:25"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:29:5-29:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:29:0-29:25"
+      null
     ],
     [
       {
@@ -573,21 +573,21 @@
                 "type": "Ident",
                 "name": "String"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:30:19-30:25"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:30:19-30:25"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:30:5-30:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:30:0-30:25"
+      null
     ],
     [
       {
@@ -603,21 +603,21 @@
                 "type": "Ident",
                 "name": "Bytes"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:31:19-31:24"
+              "loc": null
             },
             "1": [],
-            "loc": "core/quickcheck/quickcheck.mbti:31:19-31:24"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:31:5-31:14"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:31:0-31:24"
+      null
     ],
     [
       {
@@ -628,7 +628,7 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/quickcheck/quickcheck.mbti:32:5-32:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -636,7 +636,7 @@
                     "type": "Ident",
                     "name": "Arbitrary"
                   },
-                  "loc": "core/quickcheck/quickcheck.mbti:32:9-32:18"
+                  "loc": null
                 }
               ]
             }
@@ -649,7 +649,7 @@
                 "type": "Ident",
                 "name": "Iter"
               },
-              "loc": "core/quickcheck/quickcheck.mbti:32:34-32:38"
+              "loc": null
             },
             "1": [
               {
@@ -660,24 +660,24 @@
                     "type": "Ident",
                     "name": "X"
                   },
-                  "loc": "core/quickcheck/quickcheck.mbti:32:39-32:40"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/quickcheck/quickcheck.mbti:32:39-32:40"
+                "loc": null
               }
             ],
-            "loc": "core/quickcheck/quickcheck.mbti:32:34-32:41"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Arbitrary"
             },
-            "loc": "core/quickcheck/quickcheck.mbti:32:20-32:29"
+            "loc": null
           }
         }
       },
-      "core/quickcheck/quickcheck.mbti:32:0-32:41"
+      null
     ]
   ]
 }

@@ -13,7 +13,7 @@
           "attr": [],
           "name": {
             "name": "from_array",
-            "loc": "core/hashset/hashset.mbti:8:18-8:28"
+            "loc": null
           },
           "params": [
             {
@@ -26,7 +26,7 @@
                     "type": "Ident",
                     "name": "Array"
                   },
-                  "loc": "core/hashset/hashset.mbti:8:29-8:34"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -37,13 +37,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:8:35-8:36"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:8:35-8:36"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:8:29-8:37"
+                "loc": null
               }
             }
           ],
@@ -56,7 +56,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/hashset/hashset.mbti:8:42-8:43"
+                "loc": null
               },
               "1": [
                 {
@@ -67,13 +67,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/hashset/hashset.mbti:8:44-8:45"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:8:44-8:45"
+                  "loc": null
                 }
               ],
-              "loc": "core/hashset/hashset.mbti:8:42-8:46"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -83,7 +83,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:8:3-8:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -91,21 +91,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:8:7-8:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:8:14-8:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:8:0-8:46"
+      null
     ],
     [
       {
@@ -114,7 +114,7 @@
           "attr": [],
           "name": {
             "name": "from_iter",
-            "loc": "core/hashset/hashset.mbti:10:18-10:27"
+            "loc": null
           },
           "params": [
             {
@@ -127,7 +127,7 @@
                     "type": "Ident",
                     "name": "Iter"
                   },
-                  "loc": "core/hashset/hashset.mbti:10:28-10:32"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -138,13 +138,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:10:33-10:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:10:33-10:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:10:28-10:35"
+                "loc": null
               }
             }
           ],
@@ -157,7 +157,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/hashset/hashset.mbti:10:40-10:41"
+                "loc": null
               },
               "1": [
                 {
@@ -168,13 +168,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/hashset/hashset.mbti:10:42-10:43"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:10:42-10:43"
+                  "loc": null
                 }
               ],
-              "loc": "core/hashset/hashset.mbti:10:40-10:44"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -184,7 +184,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:10:3-10:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -192,21 +192,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:10:7-10:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:10:14-10:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:10:0-10:44"
+      null
     ],
     [
       {
@@ -215,7 +215,7 @@
           "attr": [],
           "name": {
             "name": "new",
-            "loc": "core/hashset/hashset.mbti:12:6-12:9"
+            "loc": null
           },
           "params": [
             {
@@ -223,7 +223,7 @@
               "0": {
                 "type": "Label",
                 "name": "capacity",
-                "loc": "core/hashset/hashset.mbti:12:10-12:19"
+                "loc": null
               },
               "1": {
                 "type": "TName",
@@ -233,10 +233,10 @@
                     "type": "Ident",
                     "name": "Int"
                   },
-                  "loc": "core/hashset/hashset.mbti:12:22-12:25"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/hashset/hashset.mbti:12:22-12:25"
+                "loc": null
               }
             }
           ],
@@ -249,7 +249,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/hashset/hashset.mbti:12:35-12:36"
+                "loc": null
               },
               "1": [
                 {
@@ -260,13 +260,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/hashset/hashset.mbti:12:37-12:38"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:12:37-12:38"
+                  "loc": null
                 }
               ],
-              "loc": "core/hashset/hashset.mbti:12:35-12:39"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -276,14 +276,14 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:12:3-12:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:12:0-12:39"
+      null
     ],
     [
       {
@@ -292,7 +292,7 @@
           "attr": [],
           "name": {
             "name": "of",
-            "loc": "core/hashset/hashset.mbti:14:18-14:20"
+            "loc": null
           },
           "params": [
             {
@@ -305,7 +305,7 @@
                     "type": "Ident",
                     "name": "FixedArray"
                   },
-                  "loc": "core/hashset/hashset.mbti:14:21-14:31"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -316,13 +316,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:14:32-14:33"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:14:32-14:33"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:14:21-14:34"
+                "loc": null
               }
             }
           ],
@@ -335,7 +335,7 @@
                   "type": "Ident",
                   "name": "T"
                 },
-                "loc": "core/hashset/hashset.mbti:14:39-14:40"
+                "loc": null
               },
               "1": [
                 {
@@ -346,13 +346,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/hashset/hashset.mbti:14:41-14:42"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:14:41-14:42"
+                  "loc": null
                 }
               ],
-              "loc": "core/hashset/hashset.mbti:14:39-14:43"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -362,7 +362,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:14:3-14:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -370,21 +370,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:14:7-14:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:14:14-14:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:14:0-14:43"
+      null
     ],
     [
       {
@@ -392,14 +392,14 @@
         "0": {
           "name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:17:5-17:6"
+            "loc": null
           },
           "type_params": [
             {
               "$tag": "Name",
               "0": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:17:7-17:8"
+                "loc": null
               }
             }
           ],
@@ -411,7 +411,7 @@
           }
         }
       },
-      "core/hashset/hashset.mbti:17:0-17:9"
+      null
     ],
     [
       {
@@ -420,11 +420,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:18:18-18:19"
+            "loc": null
           },
           "name": {
             "name": "add",
-            "loc": "core/hashset/hashset.mbti:18:21-18:24"
+            "loc": null
           },
           "params": [
             {
@@ -437,7 +437,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:18:25-18:29"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -448,13 +448,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:18:30-18:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:18:30-18:31"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:18:25-18:32"
+                "loc": null
               }
             },
             {
@@ -467,10 +467,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/hashset/hashset.mbti:18:34-18:35"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/hashset/hashset.mbti:18:34-18:35"
+                "loc": null
               }
             }
           ],
@@ -483,10 +483,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/hashset/hashset.mbti:18:40-18:44"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:18:40-18:44"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -496,7 +496,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:18:3-18:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -504,21 +504,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:18:7-18:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:18:14-18:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:18:0-18:44"
+      null
     ],
     [
       {
@@ -527,11 +527,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:19:6-19:7"
+            "loc": null
           },
           "name": {
             "name": "capacity",
-            "loc": "core/hashset/hashset.mbti:19:9-19:17"
+            "loc": null
           },
           "params": [
             {
@@ -544,7 +544,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:19:18-19:22"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -555,13 +555,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:19:23-19:24"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:19:23-19:24"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:19:18-19:25"
+                "loc": null
               }
             }
           ],
@@ -574,10 +574,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/hashset/hashset.mbti:19:30-19:33"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:19:30-19:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -587,14 +587,14 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:19:3-19:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:19:0-19:33"
+      null
     ],
     [
       {
@@ -603,11 +603,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:20:6-20:7"
+            "loc": null
           },
           "name": {
             "name": "clear",
-            "loc": "core/hashset/hashset.mbti:20:9-20:14"
+            "loc": null
           },
           "params": [
             {
@@ -620,7 +620,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:20:15-20:19"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -631,13 +631,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:20:20-20:21"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:20:20-20:21"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:20:15-20:22"
+                "loc": null
               }
             }
           ],
@@ -650,10 +650,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/hashset/hashset.mbti:20:27-20:31"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:20:27-20:31"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -663,14 +663,14 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:20:3-20:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:20:0-20:31"
+      null
     ],
     [
       {
@@ -679,11 +679,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:21:18-21:19"
+            "loc": null
           },
           "name": {
             "name": "contains",
-            "loc": "core/hashset/hashset.mbti:21:21-21:29"
+            "loc": null
           },
           "params": [
             {
@@ -696,7 +696,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:21:30-21:34"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -707,13 +707,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:21:35-21:36"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:21:35-21:36"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:21:30-21:37"
+                "loc": null
               }
             },
             {
@@ -726,10 +726,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/hashset/hashset.mbti:21:39-21:40"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/hashset/hashset.mbti:21:39-21:40"
+                "loc": null
               }
             }
           ],
@@ -742,10 +742,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/hashset/hashset.mbti:21:45-21:49"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:21:45-21:49"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -755,7 +755,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:21:3-21:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -763,21 +763,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:21:7-21:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:21:14-21:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:21:0-21:49"
+      null
     ],
     [
       {
@@ -786,11 +786,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:22:18-22:19"
+            "loc": null
           },
           "name": {
             "name": "difference",
-            "loc": "core/hashset/hashset.mbti:22:21-22:31"
+            "loc": null
           },
           "params": [
             {
@@ -803,7 +803,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:22:32-22:36"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -814,13 +814,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:22:37-22:38"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:22:37-22:38"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:22:32-22:39"
+                "loc": null
               }
             },
             {
@@ -833,7 +833,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:22:41-22:45"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -844,13 +844,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:22:46-22:47"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:22:46-22:47"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:22:41-22:48"
+                "loc": null
               }
             }
           ],
@@ -863,7 +863,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/hashset/hashset.mbti:22:53-22:57"
+                "loc": null
               },
               "1": [
                 {
@@ -874,13 +874,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/hashset/hashset.mbti:22:58-22:59"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:22:58-22:59"
+                  "loc": null
                 }
               ],
-              "loc": "core/hashset/hashset.mbti:22:53-22:60"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -890,7 +890,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:22:3-22:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -898,21 +898,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:22:7-22:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:22:14-22:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:22:0-22:60"
+      null
     ],
     [
       {
@@ -921,11 +921,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:23:6-23:7"
+            "loc": null
           },
           "name": {
             "name": "each",
-            "loc": "core/hashset/hashset.mbti:23:9-23:13"
+            "loc": null
           },
           "params": [
             {
@@ -938,7 +938,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:23:14-23:18"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -949,13 +949,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:23:19-23:20"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:23:19-23:20"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:23:14-23:21"
+                "loc": null
               }
             },
             {
@@ -971,10 +971,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:23:24-23:25"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:23:24-23:25"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -985,16 +985,16 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/hashset/hashset.mbti:23:30-23:34"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:23:30-23:34"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/hashset/hashset.mbti:23:23-23:34"
+                "loc": null
               }
             }
           ],
@@ -1007,10 +1007,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/hashset/hashset.mbti:23:39-23:43"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:23:39-23:43"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1020,14 +1020,14 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:23:3-23:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:23:0-23:43"
+      null
     ],
     [
       {
@@ -1036,11 +1036,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:24:6-24:7"
+            "loc": null
           },
           "name": {
             "name": "eachi",
-            "loc": "core/hashset/hashset.mbti:24:9-24:14"
+            "loc": null
           },
           "params": [
             {
@@ -1053,7 +1053,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:24:15-24:19"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1064,13 +1064,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:24:20-24:21"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:24:20-24:21"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:24:15-24:22"
+                "loc": null
               }
             },
             {
@@ -1086,10 +1086,10 @@
                         "type": "Ident",
                         "name": "Int"
                       },
-                      "loc": "core/hashset/hashset.mbti:24:25-24:28"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:24:25-24:28"
+                    "loc": null
                   },
                   {
                     "type": "TName",
@@ -1099,10 +1099,10 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:24:30-24:31"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:24:30-24:31"
+                    "loc": null
                   }
                 ],
                 "res": {
@@ -1113,16 +1113,16 @@
                       "type": "Ident",
                       "name": "Unit"
                     },
-                    "loc": "core/hashset/hashset.mbti:24:36-24:40"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:24:36-24:40"
+                  "loc": null
                 },
                 "err": {
                   "type": "NoErrorType"
                 },
                 "is_async": false,
-                "loc": "core/hashset/hashset.mbti:24:24-24:40"
+                "loc": null
               }
             }
           ],
@@ -1135,10 +1135,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/hashset/hashset.mbti:24:45-24:49"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:24:45-24:49"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1148,14 +1148,14 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:24:3-24:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:24:0-24:49"
+      null
     ],
     [
       {
@@ -1170,11 +1170,11 @@
           ],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:26:18-26:19"
+            "loc": null
           },
           "name": {
             "name": "insert",
-            "loc": "core/hashset/hashset.mbti:26:21-26:27"
+            "loc": null
           },
           "params": [
             {
@@ -1187,7 +1187,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:26:28-26:32"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1198,13 +1198,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:26:33-26:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:26:33-26:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:26:28-26:35"
+                "loc": null
               }
             },
             {
@@ -1217,10 +1217,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/hashset/hashset.mbti:26:37-26:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/hashset/hashset.mbti:26:37-26:38"
+                "loc": null
               }
             }
           ],
@@ -1233,10 +1233,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/hashset/hashset.mbti:26:43-26:47"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:26:43-26:47"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1246,7 +1246,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:26:3-26:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1254,21 +1254,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:26:7-26:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:26:14-26:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:25:0-26:47"
+      null
     ],
     [
       {
@@ -1277,11 +1277,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:27:18-27:19"
+            "loc": null
           },
           "name": {
             "name": "intersection",
-            "loc": "core/hashset/hashset.mbti:27:21-27:33"
+            "loc": null
           },
           "params": [
             {
@@ -1294,7 +1294,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:27:34-27:38"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1305,13 +1305,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:27:39-27:40"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:27:39-27:40"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:27:34-27:41"
+                "loc": null
               }
             },
             {
@@ -1324,7 +1324,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:27:43-27:47"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1335,13 +1335,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:27:48-27:49"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:27:48-27:49"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:27:43-27:50"
+                "loc": null
               }
             }
           ],
@@ -1354,7 +1354,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/hashset/hashset.mbti:27:55-27:59"
+                "loc": null
               },
               "1": [
                 {
@@ -1365,13 +1365,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/hashset/hashset.mbti:27:60-27:61"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:27:60-27:61"
+                  "loc": null
                 }
               ],
-              "loc": "core/hashset/hashset.mbti:27:55-27:62"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1381,7 +1381,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:27:3-27:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1389,21 +1389,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:27:7-27:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:27:14-27:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:27:0-27:62"
+      null
     ],
     [
       {
@@ -1412,11 +1412,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:28:18-28:19"
+            "loc": null
           },
           "name": {
             "name": "is_disjoint",
-            "loc": "core/hashset/hashset.mbti:28:21-28:32"
+            "loc": null
           },
           "params": [
             {
@@ -1429,7 +1429,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:28:33-28:37"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1440,13 +1440,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:28:38-28:39"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:28:38-28:39"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:28:33-28:40"
+                "loc": null
               }
             },
             {
@@ -1459,7 +1459,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:28:42-28:46"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1470,13 +1470,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:28:47-28:48"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:28:47-28:48"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:28:42-28:49"
+                "loc": null
               }
             }
           ],
@@ -1489,10 +1489,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/hashset/hashset.mbti:28:54-28:58"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:28:54-28:58"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1502,7 +1502,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:28:3-28:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1510,21 +1510,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:28:7-28:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:28:14-28:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:28:0-28:58"
+      null
     ],
     [
       {
@@ -1533,11 +1533,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:29:6-29:7"
+            "loc": null
           },
           "name": {
             "name": "is_empty",
-            "loc": "core/hashset/hashset.mbti:29:9-29:17"
+            "loc": null
           },
           "params": [
             {
@@ -1550,7 +1550,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:29:18-29:22"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1561,13 +1561,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:29:23-29:24"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:29:23-29:24"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:29:18-29:25"
+                "loc": null
               }
             }
           ],
@@ -1580,10 +1580,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/hashset/hashset.mbti:29:30-29:34"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:29:30-29:34"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1593,14 +1593,14 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:29:3-29:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:29:0-29:34"
+      null
     ],
     [
       {
@@ -1609,11 +1609,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:30:18-30:19"
+            "loc": null
           },
           "name": {
             "name": "is_subset",
-            "loc": "core/hashset/hashset.mbti:30:21-30:30"
+            "loc": null
           },
           "params": [
             {
@@ -1626,7 +1626,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:30:31-30:35"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1637,13 +1637,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:30:36-30:37"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:30:36-30:37"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:30:31-30:38"
+                "loc": null
               }
             },
             {
@@ -1656,7 +1656,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:30:40-30:44"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1667,13 +1667,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:30:45-30:46"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:30:45-30:46"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:30:40-30:47"
+                "loc": null
               }
             }
           ],
@@ -1686,10 +1686,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/hashset/hashset.mbti:30:52-30:56"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:30:52-30:56"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1699,7 +1699,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:30:3-30:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1707,21 +1707,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:30:7-30:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:30:14-30:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:30:0-30:56"
+      null
     ],
     [
       {
@@ -1730,11 +1730,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:31:18-31:19"
+            "loc": null
           },
           "name": {
             "name": "is_superset",
-            "loc": "core/hashset/hashset.mbti:31:21-31:32"
+            "loc": null
           },
           "params": [
             {
@@ -1747,7 +1747,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:31:33-31:37"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1758,13 +1758,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:31:38-31:39"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:31:38-31:39"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:31:33-31:40"
+                "loc": null
               }
             },
             {
@@ -1777,7 +1777,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:31:42-31:46"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1788,13 +1788,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:31:47-31:48"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:31:47-31:48"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:31:42-31:49"
+                "loc": null
               }
             }
           ],
@@ -1807,10 +1807,10 @@
                   "type": "Ident",
                   "name": "Bool"
                 },
-                "loc": "core/hashset/hashset.mbti:31:54-31:58"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:31:54-31:58"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1820,7 +1820,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:31:3-31:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -1828,21 +1828,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:31:7-31:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:31:14-31:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:31:0-31:58"
+      null
     ],
     [
       {
@@ -1851,11 +1851,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:32:6-32:7"
+            "loc": null
           },
           "name": {
             "name": "iter",
-            "loc": "core/hashset/hashset.mbti:32:9-32:13"
+            "loc": null
           },
           "params": [
             {
@@ -1868,7 +1868,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:32:14-32:18"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1879,13 +1879,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:32:19-32:20"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:32:19-32:20"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:32:14-32:21"
+                "loc": null
               }
             }
           ],
@@ -1898,7 +1898,7 @@
                   "type": "Ident",
                   "name": "Iter"
                 },
-                "loc": "core/hashset/hashset.mbti:32:26-32:30"
+                "loc": null
               },
               "1": [
                 {
@@ -1909,13 +1909,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/hashset/hashset.mbti:32:31-32:32"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:32:31-32:32"
+                  "loc": null
                 }
               ],
-              "loc": "core/hashset/hashset.mbti:32:26-32:33"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -1925,14 +1925,14 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:32:3-32:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:32:0-32:33"
+      null
     ],
     [
       {
@@ -1941,11 +1941,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:33:18-33:19"
+            "loc": null
           },
           "name": {
             "name": "remove",
-            "loc": "core/hashset/hashset.mbti:33:21-33:27"
+            "loc": null
           },
           "params": [
             {
@@ -1958,7 +1958,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:33:28-33:32"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -1969,13 +1969,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:33:33-33:34"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:33:33-33:34"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:33:28-33:35"
+                "loc": null
               }
             },
             {
@@ -1988,10 +1988,10 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/hashset/hashset.mbti:33:37-33:38"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/hashset/hashset.mbti:33:37-33:38"
+                "loc": null
               }
             }
           ],
@@ -2004,10 +2004,10 @@
                   "type": "Ident",
                   "name": "Unit"
                 },
-                "loc": "core/hashset/hashset.mbti:33:43-33:47"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:33:43-33:47"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2017,7 +2017,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:33:3-33:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2025,21 +2025,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:33:7-33:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:33:14-33:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:33:0-33:47"
+      null
     ],
     [
       {
@@ -2048,11 +2048,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:34:6-34:7"
+            "loc": null
           },
           "name": {
             "name": "size",
-            "loc": "core/hashset/hashset.mbti:34:9-34:13"
+            "loc": null
           },
           "params": [
             {
@@ -2065,7 +2065,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:34:14-34:18"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2076,13 +2076,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:34:19-34:20"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:34:19-34:20"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:34:14-34:21"
+                "loc": null
               }
             }
           ],
@@ -2095,10 +2095,10 @@
                   "type": "Ident",
                   "name": "Int"
                 },
-                "loc": "core/hashset/hashset.mbti:34:26-34:29"
+                "loc": null
               },
               "1": [],
-              "loc": "core/hashset/hashset.mbti:34:26-34:29"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2108,14 +2108,14 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:34:3-34:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:34:0-34:29"
+      null
     ],
     [
       {
@@ -2124,11 +2124,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:35:18-35:19"
+            "loc": null
           },
           "name": {
             "name": "symmetric_difference",
-            "loc": "core/hashset/hashset.mbti:35:21-35:41"
+            "loc": null
           },
           "params": [
             {
@@ -2141,7 +2141,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:35:42-35:46"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2152,13 +2152,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:35:47-35:48"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:35:47-35:48"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:35:42-35:49"
+                "loc": null
               }
             },
             {
@@ -2171,7 +2171,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:35:51-35:55"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2182,13 +2182,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:35:56-35:57"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:35:56-35:57"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:35:51-35:58"
+                "loc": null
               }
             }
           ],
@@ -2201,7 +2201,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/hashset/hashset.mbti:35:63-35:67"
+                "loc": null
               },
               "1": [
                 {
@@ -2212,13 +2212,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/hashset/hashset.mbti:35:68-35:69"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:35:68-35:69"
+                  "loc": null
                 }
               ],
-              "loc": "core/hashset/hashset.mbti:35:63-35:70"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2228,7 +2228,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:35:3-35:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2236,21 +2236,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:35:7-35:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:35:14-35:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:35:0-35:70"
+      null
     ],
     [
       {
@@ -2259,11 +2259,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:36:6-36:7"
+            "loc": null
           },
           "name": {
             "name": "to_array",
-            "loc": "core/hashset/hashset.mbti:36:9-36:17"
+            "loc": null
           },
           "params": [
             {
@@ -2276,7 +2276,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:36:18-36:22"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2287,13 +2287,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:36:23-36:24"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:36:23-36:24"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:36:18-36:25"
+                "loc": null
               }
             }
           ],
@@ -2306,7 +2306,7 @@
                   "type": "Ident",
                   "name": "Array"
                 },
-                "loc": "core/hashset/hashset.mbti:36:30-36:35"
+                "loc": null
               },
               "1": [
                 {
@@ -2317,13 +2317,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/hashset/hashset.mbti:36:36-36:37"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:36:36-36:37"
+                  "loc": null
                 }
               ],
-              "loc": "core/hashset/hashset.mbti:36:30-36:38"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2333,14 +2333,14 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:36:3-36:4"
+                "loc": null
               },
               "constraints": []
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:36:0-36:38"
+      null
     ],
     [
       {
@@ -2349,11 +2349,11 @@
           "attr": [],
           "type_name": {
             "name": "T",
-            "loc": "core/hashset/hashset.mbti:37:18-37:19"
+            "loc": null
           },
           "name": {
             "name": "union",
-            "loc": "core/hashset/hashset.mbti:37:21-37:26"
+            "loc": null
           },
           "params": [
             {
@@ -2366,7 +2366,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:37:27-37:31"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2377,13 +2377,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:37:32-37:33"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:37:32-37:33"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:37:27-37:34"
+                "loc": null
               }
             },
             {
@@ -2396,7 +2396,7 @@
                     "type": "Ident",
                     "name": "Self"
                   },
-                  "loc": "core/hashset/hashset.mbti:37:36-37:40"
+                  "loc": null
                 },
                 "1": [
                   {
@@ -2407,13 +2407,13 @@
                         "type": "Ident",
                         "name": "K"
                       },
-                      "loc": "core/hashset/hashset.mbti:37:41-37:42"
+                      "loc": null
                     },
                     "1": [],
-                    "loc": "core/hashset/hashset.mbti:37:41-37:42"
+                    "loc": null
                   }
                 ],
-                "loc": "core/hashset/hashset.mbti:37:36-37:43"
+                "loc": null
               }
             }
           ],
@@ -2426,7 +2426,7 @@
                   "type": "Ident",
                   "name": "Self"
                 },
-                "loc": "core/hashset/hashset.mbti:37:48-37:52"
+                "loc": null
               },
               "1": [
                 {
@@ -2437,13 +2437,13 @@
                       "type": "Ident",
                       "name": "K"
                     },
-                    "loc": "core/hashset/hashset.mbti:37:53-37:54"
+                    "loc": null
                   },
                   "1": [],
-                  "loc": "core/hashset/hashset.mbti:37:53-37:54"
+                  "loc": null
                 }
               ],
-              "loc": "core/hashset/hashset.mbti:37:48-37:55"
+              "loc": null
             },
             {
               "type": "NoErrorType"
@@ -2453,7 +2453,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:37:3-37:4"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2461,21 +2461,21 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:37:7-37:11"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:37:14-37:16"
+                  "loc": null
                 }
               ]
             }
           ]
         }
       },
-      "core/hashset/hashset.mbti:37:0-37:55"
+      null
     ],
     [
       {
@@ -2486,7 +2486,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:38:5-38:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2494,14 +2494,14 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:38:9-38:13"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:38:16-38:18"
+                  "loc": null
                 }
               ]
             }
@@ -2514,7 +2514,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/hashset/hashset.mbti:38:31-38:32"
+              "loc": null
             },
             "1": [
               {
@@ -2525,24 +2525,24 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/hashset/hashset.mbti:38:33-38:34"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/hashset/hashset.mbti:38:33-38:34"
+                "loc": null
               }
             ],
-            "loc": "core/hashset/hashset.mbti:38:31-38:35"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "BitAnd"
             },
-            "loc": "core/hashset/hashset.mbti:38:20-38:26"
+            "loc": null
           }
         }
       },
-      "core/hashset/hashset.mbti:38:0-38:35"
+      null
     ],
     [
       {
@@ -2553,7 +2553,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:39:5-39:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2561,14 +2561,14 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:39:9-39:13"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:39:16-39:18"
+                  "loc": null
                 }
               ]
             }
@@ -2581,7 +2581,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/hashset/hashset.mbti:39:30-39:31"
+              "loc": null
             },
             "1": [
               {
@@ -2592,24 +2592,24 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/hashset/hashset.mbti:39:32-39:33"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/hashset/hashset.mbti:39:32-39:33"
+                "loc": null
               }
             ],
-            "loc": "core/hashset/hashset.mbti:39:30-39:34"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "BitOr"
             },
-            "loc": "core/hashset/hashset.mbti:39:20-39:25"
+            "loc": null
           }
         }
       },
-      "core/hashset/hashset.mbti:39:0-39:34"
+      null
     ],
     [
       {
@@ -2620,7 +2620,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:40:5-40:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2628,14 +2628,14 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:40:9-40:13"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:40:16-40:18"
+                  "loc": null
                 }
               ]
             }
@@ -2648,7 +2648,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/hashset/hashset.mbti:40:31-40:32"
+              "loc": null
             },
             "1": [
               {
@@ -2659,24 +2659,24 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/hashset/hashset.mbti:40:33-40:34"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/hashset/hashset.mbti:40:33-40:34"
+                "loc": null
               }
             ],
-            "loc": "core/hashset/hashset.mbti:40:31-40:35"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "BitXOr"
             },
-            "loc": "core/hashset/hashset.mbti:40:20-40:26"
+            "loc": null
           }
         }
       },
-      "core/hashset/hashset.mbti:40:0-40:35"
+      null
     ],
     [
       {
@@ -2687,7 +2687,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:41:5-41:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2695,7 +2695,7 @@
                     "type": "Ident",
                     "name": "Show"
                   },
-                  "loc": "core/hashset/hashset.mbti:41:9-41:13"
+                  "loc": null
                 }
               ]
             }
@@ -2708,7 +2708,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/hashset/hashset.mbti:41:24-41:25"
+              "loc": null
             },
             "1": [
               {
@@ -2719,24 +2719,24 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/hashset/hashset.mbti:41:26-41:27"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/hashset/hashset.mbti:41:26-41:27"
+                "loc": null
               }
             ],
-            "loc": "core/hashset/hashset.mbti:41:24-41:28"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Show"
             },
-            "loc": "core/hashset/hashset.mbti:41:15-41:19"
+            "loc": null
           }
         }
       },
-      "core/hashset/hashset.mbti:41:0-41:28"
+      null
     ],
     [
       {
@@ -2747,7 +2747,7 @@
             {
               "name": {
                 "name": "K",
-                "loc": "core/hashset/hashset.mbti:42:5-42:6"
+                "loc": null
               },
               "constraints": [
                 {
@@ -2755,14 +2755,14 @@
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:42:9-42:13"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:42:16-42:18"
+                  "loc": null
                 }
               ]
             }
@@ -2775,7 +2775,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/hashset/hashset.mbti:42:28-42:29"
+              "loc": null
             },
             "1": [
               {
@@ -2786,24 +2786,24 @@
                     "type": "Ident",
                     "name": "K"
                   },
-                  "loc": "core/hashset/hashset.mbti:42:30-42:31"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/hashset/hashset.mbti:42:30-42:31"
+                "loc": null
               }
             ],
-            "loc": "core/hashset/hashset.mbti:42:28-42:32"
+            "loc": null
           },
           "trait_name": {
             "name": {
               "type": "Ident",
               "name": "Sub"
             },
-            "loc": "core/hashset/hashset.mbti:42:20-42:23"
+            "loc": null
           }
         }
       },
-      "core/hashset/hashset.mbti:42:0-42:32"
+      null
     ],
     [
       {
@@ -2814,30 +2814,30 @@
             {
               "name": {
                 "name": "X",
-                "loc": "core/hashset/hashset.mbti:43:5-43:6"
+                "loc": null
               },
               "constraints": [
                 {
                   "name": {
-                    "type": "Qualified",
+                    "type": "Dot",
                     "pkg": "quickcheck",
-                    "name": "Arbitrary"
+                    "id": "Arbitrary"
                   },
-                  "loc": "core/hashset/hashset.mbti:43:9-43:30"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Eq"
                   },
-                  "loc": "core/hashset/hashset.mbti:43:33-43:35"
+                  "loc": null
                 },
                 {
                   "name": {
                     "type": "Ident",
                     "name": "Hash"
                   },
-                  "loc": "core/hashset/hashset.mbti:43:38-43:42"
+                  "loc": null
                 }
               ]
             }
@@ -2850,7 +2850,7 @@
                 "type": "Ident",
                 "name": "T"
               },
-              "loc": "core/hashset/hashset.mbti:43:70-43:71"
+              "loc": null
             },
             "1": [
               {
@@ -2861,25 +2861,25 @@
                     "type": "Ident",
                     "name": "X"
                   },
-                  "loc": "core/hashset/hashset.mbti:43:72-43:73"
+                  "loc": null
                 },
                 "1": [],
-                "loc": "core/hashset/hashset.mbti:43:72-43:73"
+                "loc": null
               }
             ],
-            "loc": "core/hashset/hashset.mbti:43:70-43:74"
+            "loc": null
           },
           "trait_name": {
             "name": {
-              "type": "Qualified",
+              "type": "Dot",
               "pkg": "quickcheck",
-              "name": "Arbitrary"
+              "id": "Arbitrary"
             },
-            "loc": "core/hashset/hashset.mbti:43:44-43:65"
+            "loc": null
           }
         }
       },
-      "core/hashset/hashset.mbti:43:0-43:74"
+      null
     ]
   ]
 }
