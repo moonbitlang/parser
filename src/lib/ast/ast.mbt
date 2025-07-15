@@ -611,7 +611,7 @@ pub(all) struct TypeDecl {
   tycon_loc : Location
   params : @list.T[TypeDeclBinder]
   components : TypeDesc
-  attrs : @list.T[Attribute]
+  attrs : @list.T[(String, String?, String)]
   mut doc : DocString
   type_vis : Visibility
   deriving : @list.T[DerivingDirective]
@@ -653,7 +653,7 @@ pub(all) struct FunDecl {
   return_type : Type?
   error_type : ErrorType
   vis : Visibility
-  attrs : @list.T[Attribute]
+  attrs : @list.T[(String, String?, String)]
   mut doc : DocString
 } derive(ToJson(repr(tag="type")))
 
@@ -679,7 +679,7 @@ pub(all) struct TraitDecl {
   trait_methods : @list.T[TraitMethodDecl]
   trait_vis : Visibility
   trait_loc : Location
-  trait_attrs : @list.T[Attribute]
+  trait_attrs : @list.T[(String, String?, String)]
   mut trait_doc : DocString
 } derive(ToJson(repr(tag="type")))
 
@@ -698,7 +698,7 @@ pub(all) enum Impl {
     params~ : Parameters?,
     local_types~ : @list.T[LocalTypeDecl],
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.T[(String, String?, String)],
     mut doc~ : DocString
   )
   TopTypeDef(TypeDecl)
@@ -708,7 +708,7 @@ pub(all) enum Impl {
     type_name~ : TypeName?,
     targets~ : @list.T[AliasTarget],
     vis~ : Visibility,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.T[(String, String?, String)],
     is_list~ : Bool,
     mut doc~ : DocString,
     loc~ : Location
@@ -720,7 +720,7 @@ pub(all) enum Impl {
     vis~ : Visibility,
     is_constant~ : Bool,
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.T[(String, String?, String)],
     mut doc~ : DocString
   )
   TopTrait(TraitDecl)
@@ -730,7 +730,7 @@ pub(all) enum Impl {
     vis~ : Visibility,
     deriving~ : @list.T[DerivingDirective],
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.T[(String, String?, String)],
     mut doc~ : DocString
   )
   TopBatchTypeAlias(
@@ -738,7 +738,7 @@ pub(all) enum Impl {
     targets~ : @list.T[AliasTarget],
     vis~ : Visibility,
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.T[(String, String?, String)],
     is_list~ : Bool,
     mut doc~ : DocString
   )
@@ -747,7 +747,7 @@ pub(all) enum Impl {
     targets~ : @list.T[AliasTarget],
     vis~ : Visibility,
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.T[(String, String?, String)],
     is_list~ : Bool,
     is_old_syntax~ : Bool,
     mut doc~ : DocString
@@ -764,7 +764,7 @@ pub(all) enum Impl {
     body~ : DeclBody,
     vis~ : Visibility,
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.T[(String, String?, String)],
     mut doc~ : DocString
   )
   TopView(
@@ -774,7 +774,7 @@ pub(all) enum Impl {
     body~ : @list.T[Case],
     vis~ : Visibility,
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.T[(String, String?, String)],
     mut doc~ : DocString
   )
   TopImplRelation(
@@ -782,7 +782,7 @@ pub(all) enum Impl {
     trait_~ : TypeName,
     quantifiers~ : @list.T[TypeVarBinder],
     vis~ : Visibility,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.T[(String, String?, String)],
     loc~ : Location,
     mut doc~ : DocString
   )
