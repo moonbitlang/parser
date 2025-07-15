@@ -20,7 +20,7 @@ pub fn column(self : Position) -> Int {
 pub(all) struct Location {
   start : Position
   end : Position
-} derive(Show)
+}
 
 ///|
 pub fn Location::trim_first_char(self : Location) -> Location {
@@ -49,8 +49,20 @@ pub fn Location::trim_last_char(self : Location) -> Location {
 }
 
 ///|
-pub impl ToJson for Location with to_json(self) {
-  Json::string(
-    "\{self.start.fname}:\{self.start.lnum}:\{self.start.cnum-self.start.bol}-\{self.end.lnum}:\{self.end.cnum-self.end.bol}",
-  )
+pub impl Show for Location with output(self, buf) {
+  buf
+  ..write_string(self.start.fname)
+  ..write_string(":")
+  ..write_string(self.start.lnum.to_string())
+  ..write_string("-")
+  ..write_string((self.start.cnum - self.start.bol).to_string())
+  ..write_string("-")
+  ..write_string(self.end.lnum.to_string())
+  ..write_string(":")
+  ..write_string((self.end.cnum - self.end.bol).to_string())
+}
+
+///|
+pub impl ToJson for Location with to_json(_) {
+  Json::null()
 }
