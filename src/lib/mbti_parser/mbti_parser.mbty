@@ -330,12 +330,12 @@ pub_attr -> String?
 
 qualified_uident -> QualifiedName
   : UIDENT { QualifiedName::{ name: Ident(name=$1), loc: mk_loc($sloc)} }
-  | PACKAGE_NAME DOT_UIDENT { QualifiedName::{ name: Qualified(pkg=$1, name=$2), loc: mk_loc($sloc)} }
+  | PACKAGE_NAME DOT_UIDENT { QualifiedName::{ name: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
   ;
 
 qualified_uident_ -> ConstrId
   : UIDENT { ConstrId::{ id: Ident(name=$1), loc: mk_loc($sloc)} }
-  | PACKAGE_NAME DOT_UIDENT { ConstrId::{ id: Qualified(pkg=$1, name=$2), loc: mk_loc($sloc)} }
+  | PACKAGE_NAME DOT_UIDENT { ConstrId::{ id: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
   ;
 
 uident -> Name

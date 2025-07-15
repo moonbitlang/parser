@@ -426,7 +426,7 @@ impl ToJson for LocalTypeDecl
 
 pub(all) enum LongIdent {
   Ident(name~ : String)
-  Qualified(pkg~ : String, name~ : String)
+  Dot(pkg~ : String, id~ : String)
 }
 impl ToJson for LongIdent
 

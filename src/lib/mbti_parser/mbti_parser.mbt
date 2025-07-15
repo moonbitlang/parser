@@ -2525,7 +2525,7 @@ fn yy_action_107(
 }
 
 // file:///./mbti_parser.mbty
-// 338|    PACKAGE_NAME DOT_UIDENT { ConstrId::{ id: Qualified(pkg=$1, name=$2), loc: mk_loc($sloc)} }
+// 338|    PACKAGE_NAME DOT_UIDENT { ConstrId::{ id: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
 
 ///|
 fn yy_action_108(
@@ -2544,7 +2544,7 @@ fn yy_action_108(
     {
       ()
       ConstrId::{
-        id: Qualified(pkg=_dollar1, name=_dollar2),
+        id: Dot(pkg=_dollar1, id=_dollar2),
         loc: mk_loc((_symbol_start_pos, _end_pos)),
       }
     },
@@ -3146,7 +3146,7 @@ fn yy_action_136(
 }
 
 // file:///./mbti_parser.mbty
-// 333|    PACKAGE_NAME DOT_UIDENT { QualifiedName::{ name: Qualified(pkg=$1, name=$2), loc: mk_loc($sloc)} }
+// 333|    PACKAGE_NAME DOT_UIDENT { QualifiedName::{ name: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
 
 ///|
 fn yy_action_137(
@@ -3165,7 +3165,7 @@ fn yy_action_137(
     {
       ()
       QualifiedName::{
-        name: Qualified(pkg=_dollar1, name=_dollar2),
+        name: Dot(pkg=_dollar1, id=_dollar2),
         loc: mk_loc((_symbol_start_pos, _end_pos)),
       }
     },

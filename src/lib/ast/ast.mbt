@@ -40,7 +40,7 @@ pub(all) struct ConstrName {
 // checked!
 pub(all) enum LongIdent {
   Ident(name~ : String)
-  Qualified(pkg~ : String, name~ : String)
+  Dot(pkg~ : String, id~ : String)
 } derive(ToJson(repr(tag="type")))
 
 ///|
