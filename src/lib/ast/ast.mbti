@@ -14,63 +14,65 @@ fn bracket_loc(Expr) -> @ast_types.Location
 
 fn desugar_array_augmented_set(@ast_types.Location, Var, Expr, Expr, Expr) -> Expr
 
-fn desugar_array_get(@ast_types.Location, Expr, Expr) -> Expr
+fn desugar_array_get(loc~ : @ast_types.Location, Expr, Expr) -> Expr
 
-fn desugar_array_set(@ast_types.Location, Expr, Expr, Expr) -> Expr
+fn desugar_array_set(loc~ : @ast_types.Location, Expr, Expr, Expr) -> Expr
 
-fn label_to_expr(@ast_types.Location, Label) -> Expr
+fn label_to_expr(loc~ : @ast_types.Location, Label) -> Expr
 
-fn label_to_pat(@ast_types.Location, Label) -> Pattern
+fn label_to_pat(loc~ : @ast_types.Location, Label) -> Pattern
 
-fn make_alias_pattern(@ast_types.Location, Pattern, Binder) -> Pattern
+fn make_alias_pattern(loc~ : @ast_types.Location, Pattern, Binder) -> Pattern
 
-fn make_array_expr(@ast_types.Location, @list.T[SpreadableElem]) -> Expr
+fn make_array_expr(loc~ : @ast_types.Location, @list.T[SpreadableElem]) -> Expr
 
-fn make_arrow_fn(@list.T[(ArrowFnParam, Type?)], Expr, @ast_types.Location) -> Func
+fn make_arrow_fn(@list.T[(ArrowFnParam, Type?)], Expr, loc~ : @ast_types.Location) -> Func
 
-fn make_assign_opt(@ast_types.Location, Expr, Expr) -> Expr?
+fn make_assign_opt(loc~ : @ast_types.Location, Expr, Expr) -> Expr?
 
-fn make_augmented_assign_opt(@ast_types.Location, Var, Expr, Expr) -> Expr?
+fn make_attribute(loc~ : @ast_types.Location, id~ : String, dot_id~ : String?, raw_payload~ : String) -> @ast_types.Attribute
 
-fn make_constant_expr(@ast_types.Location, Constant) -> Expr
+fn make_augmented_assign_opt(loc~ : @ast_types.Location, Var, Expr, Expr) -> Expr?
 
-fn make_constant_pattern(@ast_types.Location, Constant) -> Pattern
+fn make_constant_expr(loc~ : @ast_types.Location, Constant) -> Expr
 
-fn make_constr_pattern(@ast_types.Location, Constructor, @list.T[ConstrPatArg]?, Bool) -> Pattern
+fn make_constant_pattern(loc~ : @ast_types.Location, Constant) -> Pattern
+
+fn make_constr_pattern(loc~ : @ast_types.Location, Constructor, @list.T[ConstrPatArg]?, Bool) -> Pattern
 
 fn make_double(String) -> Constant
 
-fn make_field_def(@ast_types.Location, Label, Expr, Bool) -> FieldDef
+fn make_field_def(loc~ : @ast_types.Location, Label, Expr, Bool) -> FieldDef
 
-fn make_field_pat(@ast_types.Location, Label, Pattern, Bool) -> FieldPat
+fn make_field_pat(loc~ : @ast_types.Location, Label, Pattern, Bool) -> FieldPat
 
 fn make_float(String) -> Constant
 
-fn make_ident_expr(@ast_types.Location, Var) -> Expr
+fn make_ident_expr(loc~ : @ast_types.Location, Var) -> Expr
 
 fn make_int(String) -> Constant
 
-fn make_interp_expr(@ast_types.Location, Array[InterpolationComponent]) -> Expr
+fn make_interp_expr(loc~ : @ast_types.Location, Array[InterpolationComponent]) -> Expr
 
 fn make_interps(Array[InterpolationComponent]) -> @list.T[InterpElem]
 
-fn make_legacy_type_alias(Type, Type, @list.T[String], Visibility, @list.T[DerivingDirective], @ast_types.Location) -> TypeDecl?
+fn make_legacy_type_alias(Type, Type, attrs~ : @list.T[@ast_types.Attribute], vis~ : Visibility, deriving~ : @list.T[DerivingDirective], loc~ : @ast_types.Location, doc~ : @ast_types.DocString) -> TypeDecl?
 
-fn make_option_type(@ast_types.Location, @ast_types.Location, Type) -> Type
+fn make_option_type(loc~ : @ast_types.Location, constr_loc~ : @ast_types.Location, Type) -> Type
 
-fn make_record_expr(@ast_types.Location, TrailingMark, TypeName?, @list.T[FieldDef]) -> Expr
+fn make_record_expr(loc~ : @ast_types.Location, trailing~ : TrailingMark, TypeName?, @list.T[FieldDef]) -> Expr
 
-fn make_tuple_expr(@ast_types.Location, @list.T[Expr]) -> Expr
+fn make_tuple_expr(loc~ : @ast_types.Location, @list.T[Expr]) -> Expr
 
-fn make_tuple_pattern(@ast_types.Location, @list.T[Pattern]) -> Pattern
+fn make_tuple_pattern(loc~ : @ast_types.Location, @list.T[Pattern]) -> Pattern
 
-fn make_tuple_type(@ast_types.Location, @list.T[Type]) -> Type
+fn make_tuple_type(loc~ : @ast_types.Location, @list.T[Type]) -> Type
 
-fn make_uminus(@ast_types.Location, String, Expr) -> Expr
+fn make_uminus(loc~ : @ast_types.Location, String, Expr) -> Expr
 
-fn make_unot(@ast_types.Location, Expr) -> Expr
+fn make_unot(loc~ : @ast_types.Location, Expr) -> Expr
 
-fn make_uplus(@ast_types.Location, String, Expr) -> Expr
+fn make_uplus(loc~ : @ast_types.Location, String, Expr) -> Expr
 
 let no_location : @ast_types.Location
 
