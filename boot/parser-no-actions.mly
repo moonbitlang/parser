@@ -5,6 +5,7 @@
 %token INT
 %token BYTE
 %token BYTES
+%token DOUBLE
 %token FLOAT
 %token STRING
 %token MULTILINE_STRING
@@ -79,6 +80,7 @@
 %token LET "let"
 %token CONST "const"
 %token MATCH "match"
+%token USING "using"
 %token MUTABLE "mut"
 %token TYPE "type"
 %token FAT_ARROW "=>"
@@ -92,9 +94,15 @@
 %token TEST "test"
 %token LOOP "loop"
 %token GUARD "guard"
+%token DEFER "defer"
 %token FOR "for"
 %token IN "in"
 %token IS "is"
+%token SUBERROR "suberror"
+%token AND "and"
+%token LETREC "letrec"
+%token ENUMVIEW "enumview"
+%token NORAISE "noraise"
 
 %right BARBAR
 %right AMPERAMPER
@@ -108,10 +116,15 @@
 %left PLUS MINUS
 %left INFIX3
 %left INFIX4
-%nonassoc prec_type
+%nonassoc prec_lower_than_as
+%nonassoc "as"
 %nonassoc prec_apply_non_ident_fn
 %nonassoc "!"
 %nonassoc "?"
+%nonassoc prec_lower_than_arrow_fn
+%nonassoc ","
+%nonassoc ")"
+%nonassoc ":"
 
 %%
 
@@ -228,8 +241,8 @@ optional_type_parameters_no_constraints
   : option(delimited("[", non_empty_list_commas(id(type_decl_binder)), "]")) {}
   ;
 
-optional_type_arguments
-  : option(delimited("[", non_empty_list_commas(type_), "]")) {}
+%inline optional_type_arguments
+  : ioption(delimited("[", non_empty_list_commas(type_), "]")) {}
   ;
 
 fun_binder
@@ -238,7 +251,12 @@ fun_binder
   ;
 
 fun_header
-  : attributes visibility is_async "fn" fun_binder optional_bang optional_type_parameters option(parameters) option(preceded("->", return_type)) {}
+  : attributes visibility is_async fun_header_generic option(parameters) func_return_type {}
+  ;
+
+fun_header_generic
+  : "fn" type_parameters fun_binder optional_bang {}
+  | "fn" fun_binder optional_bang optional_type_parameters {}
   ;
 
 local_type_decl
@@ -248,7 +266,7 @@ local_type_decl
   ;
 
 extern_fun_header
-  : attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) option(preceded("->", return_type)) {}
+  : attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {}
   ;
 
 block_expr
@@ -287,9 +305,8 @@ structure_item
   : type_header deriving_directive_list {}
   | attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {}
   | type_header type_ deriving_directive_list {}
-  | type_header_bang option(type_) deriving_directive_list {}
-  | type_header_bang "{" list_semis(enum_constructor) "}" deriving_directive_list {}
-  | type_alias_header "=" type_ deriving_directive_list {}
+  | suberror_header option(type_) deriving_directive_list {}
+  | suberror_header "{" list_semis(enum_constructor) "}" deriving_directive_list {}
   | struct_header "{" list_semis(record_decl_field) "}" deriving_directive_list {}
   | enum_header "{" list_semis(enum_constructor) "}" deriving_directive_list {}
   | val_header "=" expr {}
@@ -302,11 +319,15 @@ structure_item
   | attributes visibility "fnalias" func_alias_targets {}
   | attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {}
   | attributes visibility "traitalias" luident "=" type_name {}
-  | attributes visibility "typealias" PACKAGE_NAME batch_type_alias_targets {}
-  | attributes visibility "traitalias" PACKAGE_NAME batch_trait_alias_targets {}
+  | attributes visibility "typealias" batch_type_alias_targets {}
+  | attributes visibility "typealias" type_ "=" type_ deriving_directive_list {}
+  | attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {}
+  | attributes visibility "traitalias" batch_type_alias_targets {}
   | attributes "test" option(loced_string) option(parameters) block_expr_with_local_types {}
-  | attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters option(preceded("->", return_type)) impl_body {}
-  | attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters option(preceded("->", return_type)) impl_body {}
+  | attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {}
+  | attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {}
+  | attributes visibility "impl" optional_type_parameters type_name "for" type_ {}
+  | attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {}
   ;
 
 %inline attributes
@@ -334,12 +355,9 @@ type_header
   : attributes visibility "type" luident optional_type_parameters_no_constraints {}
   ;
 
-type_header_bang
+suberror_header
   : attributes visibility "type" "!" luident {}
-  ;
-
-type_alias_header
-  : attributes visibility "typealias" luident optional_type_parameters_no_constraints {}
+  | attributes visibility "suberror" luident {}
   ;
 
 struct_header
@@ -351,23 +369,19 @@ enum_header
   ;
 
 batch_type_alias_targets
-  : DOT_LIDENT optional_type_parameters_no_constraints {}
-  | DOT_UIDENT optional_type_parameters_no_constraints {}
-  | ".(" non_empty_list_commas(batch_type_alias_target) ")" {}
+  : PACKAGE_NAME batch_type_alias_target(dot_luident) {}
+  | PACKAGE_NAME ".(" non_empty_list_commas(batch_type_alias_target(luident)) ")" {}
+  | batch_type_alias_target(luident) {}
   ;
 
-batch_type_alias_target
-  : luident optional_type_parameters_no_constraints {}
-  ;
-
-batch_trait_alias_targets
+%inline dot_luident
   : DOT_LIDENT {}
   | DOT_UIDENT {}
-  | ".(" non_empty_list_commas(batch_trait_alias_target) ")" {}
   ;
 
-batch_trait_alias_target
-  : luident {}
+batch_type_alias_target(LUIDENT_MAYBE_DOT)
+  : LUIDENT_MAYBE_DOT {}
+  | LUIDENT_MAYBE_DOT "as" luident {}
   ;
 
 func_alias_targets
@@ -399,7 +413,7 @@ deriving_directive_list
   ;
 
 trait_method_decl
-  : binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" option(preceded("->", return_type)) option(preceded("=", wildcard)) {}
+  : is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) {}
   ;
 
 wildcard
@@ -427,10 +441,14 @@ qual_ident_simple_expr
   | PACKAGE_NAME DOT_LIDENT {}
   ;
 
-qual_ident_ty
+%inline qual_ident_ty_inline
   : luident {}
   | PACKAGE_NAME DOT_LIDENT {}
  | PACKAGE_NAME DOT_UIDENT {}
+  ;
+
+qual_ident_ty
+  : qual_ident_ty_inline {}
   ;
 
 %inline semi_expr_semi_opt
@@ -450,20 +468,29 @@ fn_header_no_binder
   : "fn" optional_bang "{" {}
   ;
 
+letand_func
+  : arrow_fn_expr {}
+  | anony_fn {}
+  ;
+
+and_func
+  : "and" binder opt_annot "=" letand_func {}
+  ;
+
 statement
   : "let" pattern opt_annot "=" expr {}
+  | "letrec" binder opt_annot "=" letand_func list(and_func) {}
   | "let" "mut" binder opt_annot "=" expr {}
-  | is_async "fn" binder optional_bang parameters option(preceded("->", return_type)) block_expr {}
+  | is_async "fn" binder optional_bang parameters func_return_type block_expr {}
   | is_async fn_header list_semis(multi_pattern_case) "}" {}
   | guard_statement {}
+  | "defer" pipe_expr {}
   | expr_statement {}
   ;
 
 guard_statement
   : "guard" infix_expr {}
   | "guard" infix_expr "else" block_expr {}
-  | "guard" "let" pattern "=" infix_expr {}
-  | "guard" "let" pattern "=" infix_expr "else" "{" single_pattern_cases "}" {}
   ;
 
 %inline assignment_expr
@@ -474,17 +501,21 @@ guard_statement
   : left_value assignop expr {}
   ;
 
+expr_statement_no_break_continue_return
+  : "raise" expr {}
+  | "..." {}
+  | augmented_assignment_expr {}
+ | assignment_expr {}
+ | expr {}
+  ;
+
 expr_statement
   : "break" POST_LABEL option(expr) {}
   | "break" option(expr) {}
   | "continue" POST_LABEL list_commas_no_trailing(expr) {}
   | "continue" list_commas_no_trailing(expr) {}
   | "return" option(expr) {}
-  | "raise" expr {}
-  | "..." {}
-  | augmented_assignment_expr {}
- | assignment_expr {}
- | expr {}
+  | expr_statement_no_break_continue_return {}
   ;
 
 loop_label_colon
@@ -497,7 +528,8 @@ while_expr
   ;
 
 single_pattern_case
-  : pattern option(preceded("if", expr)) "=>" expr_statement {}
+  : pattern option(preceded("if", infix_expr)) "=>" expr_statement {}
+  | "..." {}
   ;
 
 single_pattern_cases
@@ -505,22 +537,23 @@ single_pattern_cases
   ;
 
 multi_pattern_case
-  : non_empty_list_commas(pattern) option(preceded("if", expr)) "=>" expr_statement {}
+  : non_empty_list_commas(pattern) option(preceded("if", infix_expr)) "=>" expr_statement {}
   ;
 
 catch_keyword
   : "catch" "{" {}
- | "{" {}
   | "catch" "!" "{" {}
   ;
 
 %inline else_keyword
   : "else" "{" {}
+  | "noraise" "{" {}
   ;
 
 try_expr
-  : "try" expr catch_keyword single_pattern_cases "}" {}
-  | "try" expr catch_keyword single_pattern_cases "}" else_keyword single_pattern_cases "}" {}
+  : "try" pipe_expr catch_keyword single_pattern_cases "}" {}
+  | "try" pipe_expr catch_keyword single_pattern_cases "}" else_keyword single_pattern_cases "}" {}
+  | "try" "?" pipe_expr {}
   ;
 
 if_expr
@@ -529,8 +562,9 @@ if_expr
   | "if" infix_expr block_expr {}
   ;
 
-%inline match_header
+match_header
   : "match" infix_expr "{" {}
+  | "match" infix_expr "using" label "{" {}
   ;
 
 match_expr
@@ -577,7 +611,38 @@ expr
  | try_expr {}
  | if_expr {}
  | match_expr {}
- | pipe_expr {}
+ | simple_try_expr {}
+  | arrow_fn_expr {}
+  ;
+
+simple_try_expr
+  : pipe_expr catch_keyword single_pattern_cases "}" {}
+  | pipe_expr {}
+  ;
+
+arrow_fn_expr
+  : "(" arrow_fn_prefix "=>" expr_statement_no_break_continue_return {}
+  | "(" ")" "=>" expr_statement_no_break_continue_return {}
+  | binder "=>" expr_statement_no_break_continue_return {}
+  | "_" "=>" expr_statement_no_break_continue_return {}
+  ;
+
+arrow_fn_prefix
+  : binder ioption(",") ")" {}
+  | "_" ioption(",") ")" {}
+  | binder ":" type_ ioption(",") ")" {}
+  | "_" ":" type_ ioption(",") ")" {}
+  | binder "," arrow_fn_prefix {}
+  | "_" "," arrow_fn_prefix {}
+  | binder ":" type_ "," arrow_fn_prefix {}
+  | "_" ":" type_ "," arrow_fn_prefix {}
+  ;
+
+arrow_fn_prefix_no_constraint
+  : binder ioption(",") ")" {}
+  | "_" ioption(",") ")" {}
+  | binder "," arrow_fn_prefix_no_constraint {}
+  | "_" "," arrow_fn_prefix_no_constraint {}
   ;
 
 pipe_expr
@@ -605,6 +670,7 @@ range_expr
 prefix_expr
   : id(plus) prefix_expr {}
   | id(minus) prefix_expr {}
+  | "!" prefix_expr {}
   | simple_expr {}
   ;
 
@@ -631,8 +697,32 @@ constr
 %inline apply_attr
   :  {}
   | "!" {}
-  | "!" "!" {}
   | "?" {}
+  ;
+
+non_empty_tuple_elems
+  : expr ioption(",") ")" {}
+  | expr "," non_empty_tuple_elems {}
+  ;
+
+non_empty_tuple_elems_with_prefix
+  : binder "," non_empty_tuple_elems_with_prefix {}
+  | "_" "," non_empty_tuple_elems_with_prefix {}
+  | non_empty_tuple_elems {}
+  ;
+
+tuple_expr
+  : "(" arrow_fn_prefix_no_constraint {}
+  | "(" non_empty_tuple_elems_with_prefix {}
+  | "(" binder ":" type_ ")" {}
+  | "(" "_" ":" type_ ")" {}
+  | "(" expr ":" type_ ")" {}
+  | "(" ")" {}
+  ;
+
+anony_fn
+  : is_async "fn" optional_bang parameters func_return_type block_expr {}
+  | is_async fn_header_no_binder list_semis(multi_pattern_case) "}" {}
   ;
 
 simple_expr
@@ -642,10 +732,9 @@ simple_expr
   | ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "," list_commas(record_defn_single) "}" {}
   | "{" semi_expr_semi_opt "}" {}
   | "{" list_commas(map_expr_elem) "}" {}
-  | is_async "fn" optional_bang parameters option(preceded("->", return_type)) block_expr {}
-  | is_async fn_header_no_binder list_semis(multi_pattern_case) "}" {}
+  | anony_fn {}
   | atomic_expr {}
-  | "_" {}
+  | "_" %prec prec_lower_than_arrow_fn {}
   | qual_ident_simple_expr {}
   | constr {}
   | LIDENT "?" "(" list_commas(argument) ")" {}
@@ -656,9 +745,8 @@ simple_expr
   | simple_expr ".." LIDENT apply_attr "(" list_commas(argument) ")" {}
   | simple_expr accessor %prec prec_field {}
   | type_name "::" LIDENT {}
-  | "(" list_commas(expr) ")" {}
-  | "(" expr annot ")" {}
   | "[" list_commas(spreadable_elem) "]" {}
+  | tuple_expr {}
   ;
 
 %inline label
@@ -686,7 +774,6 @@ type_decl_binder
 
 tvar_constraint
   : qual_ident_ty {}
-  | UIDENT "?" {}
   ;
 
 %inline var
@@ -716,6 +803,7 @@ simple_constant
   | BYTES {}
   | CHAR {}
   | INT {}
+  | DOUBLE {}
   | FLOAT {}
   | STRING {}
   ;
@@ -723,6 +811,7 @@ simple_constant
 map_syntax_key
   : simple_constant {}
   | MINUS INT {}
+  | MINUS DOUBLE {}
   | MINUS FLOAT {}
   ;
 
@@ -791,8 +880,10 @@ simple_pattern
   | CHAR {}
   | INT {}
   | BYTE {}
+  | DOUBLE {}
   | FLOAT {}
   | "-" INT {}
+  | "-" DOUBLE {}
   | "-" FLOAT {}
   | STRING {}
   | BYTES {}
@@ -832,10 +923,25 @@ array_sub_patterns
   | dotdot_binder ioption(",") {}
   ;
 
+error_annotation
+  : "raise" {}
+  | "raise" error_type {}
+  | "noraise" {}
+  | "raise" "?" {}
+  ;
+
 return_type
-  : type_ %prec prec_type {}
-  | type_ "!" {}
-  | type_ "!" separated_nonempty_list("+", error_type) {}
+  : type_ {}
+  | simple_type "!" {}
+  | simple_type "!" error_type {}
+  | simple_type "?" error_type {}
+  | simple_type error_annotation {}
+  ;
+
+func_return_type
+  : "->" return_type {}
+  | error_annotation {}
+  |  {}
   ;
 
 error_type
@@ -843,16 +949,20 @@ error_type
   | "_" {}
   ;
 
-type_
-  : type_ "?" {}
+simple_type
+  : simple_type "?" {}
   | "(" type_ "," non_empty_list_commas(type_) ")" {}
-  | is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {}
-  | is_async "(" ")" "->" return_type {}
   | "(" type_ ")" {}
-  | is_async "(" type_ ")" "->" return_type {}
-  | qual_ident_ty optional_type_arguments {}
+  | qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {}
   | "&" qual_ident_ty {}
   | "_" {}
+  ;
+
+type_
+  : simple_type {}
+  | is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {}
+  | is_async "(" ")" "->" return_type {}
+  | is_async "(" type_ ")" "->" return_type {}
   ;
 
 record_decl_field

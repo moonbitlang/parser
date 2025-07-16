@@ -5,6 +5,7 @@
 %token BYTE
 %token BYTES
 %token FLOAT
+%token DOUBLE
 %token STRING
 %token MULTILINE_STRING
 %token MULTILINE_INTERP
@@ -78,6 +79,7 @@
 %token LET "let"
 %token CONST "const"
 %token MATCH "match"
+%token USING "using"
 %token MUTABLE "mut"
 %token TYPE "type"
 %token FAT_ARROW "=>"
@@ -91,12 +93,15 @@
 %token TEST "test"
 %token LOOP "loop"
 %token GUARD "guard"
+%token DEFER "defer"
 %token FOR "for"
 %token IN "in"
 %token IS "is"
-
-%nonassoc prec_type
-%nonassoc "?" "!"
+%token SUBERROR "suberror"
+%token AND "and"
+%token LETREC "letrec"
+%token ENUMVIEW "enumview"
+%token NORAISE "noraise"
 
 %%
 
@@ -138,17 +143,18 @@ value_sig
   : "let" lident ":" type_ {}
   ;
 
+type_name_coloncolon
+  : uident "::" {}
+  ;
+
 func_sig_no_attr
-  : FN lident loption(type_params_with_constraints) delimited("(", separated_list(",", parameter), ")") "->" return_type {}
+  : is_async FN option(type_name_coloncolon) lident loption(type_params_with_constraints) delimited("(", separated_list(",", parameter), ")") "->" return_type {}
+  | is_async FN type_params_with_constraints option(type_name_coloncolon) lident delimited("(", separated_list(",", parameter), ")") "->" return_type {}
   ;
 
 func_sig
   : func_sig_no_attr {}
   | nonempty_list(ATTRIBUTE) func_sig_no_attr {}
-  ;
-
-impl_method_sig
-  : list(ATTRIBUTE) lident loption(type_params_with_constraints) delimited("(", separated_list(",", parameter), ")") "->" return_type {}
   ;
 
 trait_method_sig
@@ -159,12 +165,17 @@ trait_method_sig
   : "=" "_" {}
   ;
 
+suberror_keyword
+  : "suberror" {}
+  | "type" "!" {}
+  ;
+
 type_sig
   : vis "extern" "type" type_decl_name_with_params {}
   | vis "type" type_decl_name_with_params {}
   | vis "type" type_decl_name_with_params type_ {}
-  | vis "type" "!" UIDENT option(type_) {}
-  | vis "type" "!" UIDENT "{" separated_list(";", enum_constructor) "}" {}
+  | vis suberror_keyword UIDENT option(type_) {}
+  | vis suberror_keyword UIDENT "{" separated_list(";", enum_constructor) "}" {}
   | vis "struct" type_decl_name_with_params "{" separated_list(";", record_decl_field) "}" {}
   | vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" {}
   ;
@@ -172,8 +183,6 @@ type_sig
 impl_sig
   : "impl" type_params_with_constraints qualified_uident "for" type_ {}
   | "impl" qualified_uident "for" type_ {}
-  | "impl" uident "{" separated_nonempty_list(";", impl_method_sig) "}" {}
-  | "impl" uident "::" lident {}
   ;
 
 trait_sig
@@ -182,8 +191,9 @@ trait_sig
   ;
 
 alias_sig
-  : vis "typealias" type_decl_name_with_params "=" type_ {}
-  | vis "traitalias" uident "=" qualified_uident {}
+  : vis "typealias" type_ "as" type_decl_name_with_params {}
+  | vis "traitalias" qualified_uident "as" uident {}
+  | "fnalias" uident "::" lident {}
   ;
 
 enum_constructor
@@ -234,22 +244,30 @@ type_decl_name_with_params
   : uident optional_type_params_no_constraints {}
   ;
 
-type_
-  : type_ "?" {}
+simple_type
+  : simple_type "?" {}
   | "(" type_ "," separated_nonempty_list(",", type_) ")" {}
-  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type {}
-  | is_async "(" ")" "->" return_type {}
   | "(" type_ ")" {}
-  | is_async "(" type_ ")" "->" return_type {}
   | qualified_uident_ optional_type_arguments {}
   | "&" qualified_uident_ {}
   | "_" {}
   ;
 
+type_
+  : simple_type {}
+  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type {}
+  | is_async "(" ")" "->" return_type {}
+  | is_async "(" type_ ")" "->" return_type {}
+  ;
+
 return_type
-  : type_ %prec prec_type {}
-  | type_ "!" {}
-  | type_ "!" separated_nonempty_list("+", error_type) {}
+  : type_ {}
+  | simple_type "!" {}
+  | simple_type "!" error_type {}
+  | simple_type "?" error_type {}
+  | simple_type "raise" {}
+  | simple_type "raise" error_type {}
+  | simple_type "raise" "?" {}
   ;
 
 error_type
@@ -281,7 +299,7 @@ constant
   | BYTES {}
   | CHAR {}
   | INT {}
-  | FLOAT {}
+  | DOUBLE {}
   | STRING {}
   ;
 
