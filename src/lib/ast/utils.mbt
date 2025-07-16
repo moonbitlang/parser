@@ -553,3 +553,15 @@ pub(all) enum InterpolationComponent {
   InterpLit(StringLiteral, Location)
   InterpSource(@ast_types.InterpSource)
 }
+
+pub fn loc_of_statement(stmt : SemiExprProp) -> Location {
+  match stmt {
+    StmtExpr(expr) => loc_of_expression(expr)
+    StmtLetand(loc~, ..)
+    | StmtFunc(loc~, ..)
+    | StmtLetmut(loc~, ..)
+    | StmtGuard(loc~, ..)
+    | StmtLet(loc~, ..)
+    | StmtDefer(loc~, ..) => loc
+  }
+}

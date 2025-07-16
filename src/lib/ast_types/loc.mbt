@@ -48,6 +48,32 @@ pub fn Location::trim_last_char(self : Location) -> Location {
   }
 }
 
+pub fn Location::merge(self : Location, other : Location) -> Location {
+  let start = if self.start.lnum < other.start.lnum {
+    self.start
+  } else if self.start.lnum > other.start.lnum {
+    other.start
+  } else {
+    if self.start.bol < other.start.bol {
+      self.start
+    } else {
+      other.start
+    }
+  }
+  let end = if self.end.lnum > other.end.lnum {
+    self.end
+  } else if self.end.lnum < other.end.lnum {
+    other.end
+  } else {
+    if self.end.bol > other.end.bol {
+      self.end
+    } else {
+      other.end
+    }
+  }
+  Location::{ start, end }
+}
+
 ///|
 pub impl Show for Location with output(self, buf) {
   buf
