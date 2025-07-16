@@ -93,6 +93,7 @@ pub(all) enum Token {
   TEST
   LOOP
   GUARD
+  DEFER
   FOR
   IN
   IS
@@ -199,6 +200,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     TEST => TK_TEST
     LOOP => TK_LOOP
     GUARD => TK_GUARD
+    DEFER => TK_DEFER
     FOR => TK_FOR
     IN => TK_IN
     IS => TK_IS
@@ -305,6 +307,7 @@ pub(all) enum TokenKind {
   TK_TEST
   TK_LOOP
   TK_GUARD
+  TK_DEFER
   TK_FOR
   TK_IN
   TK_IS
@@ -412,6 +415,7 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_TEST => "\"test\""
       TK_LOOP => "\"loop\""
       TK_GUARD => "\"guard\""
+      TK_DEFER => "\"defer\""
       TK_FOR => "\"for\""
       TK_IN => "\"in\""
       TK_IS => "\"is\""
