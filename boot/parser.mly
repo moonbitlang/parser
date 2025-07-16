@@ -3,14 +3,13 @@
 [%%use
 Parsing_util.(
   ( i
-  , enter_next_block
-  , aloc
   , label_to_expr
   , label_to_pat
   , make_field_def
   , make_field_pat
   , make_uminus
   , make_uplus
+  , make_unot
   , make_Pexpr_array
   , make_Pexpr_constant
   , make_Pexpr_ident
@@ -31,12 +30,13 @@ Parsing_util.(
 %token <string> INT
 %token <Lex_literal.char_literal> BYTE
 %token <Lex_literal.string_literal> BYTES
+%token <string> DOUBLE
 %token <string> FLOAT
 %token <Lex_literal.string_literal> STRING
 %token <string> MULTILINE_STRING
 %token <Lex_literal.interp_literal> MULTILINE_INTERP
 %token <Lex_literal.interp_literal> INTERP
-%token <string> ATTRIBUTE
+%token <(string * string option * string)> ATTRIBUTE
 %token <string> LIDENT
 %token <string> UIDENT
 %token <string> POST_LABEL
@@ -115,6 +115,7 @@ Parsing_util.(
 %token LET            "let"
 %token CONST          "const"
 %token MATCH          "match"
+%token USING          "using"
 %token MUTABLE        "mut"
 %token TYPE            "type"
 %token FAT_ARROW       "=>"
@@ -128,10 +129,16 @@ Parsing_util.(
 %token TEST            "test"
 %token LOOP            "loop"
 %token GUARD           "guard"
+%token DEFER           "defer"
 
 %token FOR             "for"
 %token IN              "in"
 %token IS              "is"
+%token SUBERROR        "suberror"
+%token AND             "and"
+%token LETREC          "letrec"
+%token ENUMVIEW        "enumview"
+%token NORAISE         "noraise"
 
 %right BARBAR
 %right AMPERAMPER
@@ -149,16 +156,26 @@ Parsing_util.(
 %left PLUS MINUS
 %left INFIX3 // * / % 
 %left INFIX4 // not used
-%nonassoc prec_type
+%nonassoc prec_lower_than_as
+%nonassoc "as"
 %nonassoc prec_apply_non_ident_fn
 %nonassoc "!"
 %nonassoc "?"
+
+/* the precedence of "," and ")" are used to compare with prec_apply_non_ident_fn
+   to make sure when parsing (a, b) => ...
+   the comma and rparen are always shifted */
+%nonassoc prec_lower_than_arrow_fn   
+%nonassoc ","
+%nonassoc ")"
+%nonassoc ":"
+
 %start    structure
 %start    expression
 
 
 %type <Parsing_syntax.expr> expression
-%type <Parsing_syntax.impls> structure
+%type <Parsing_syntax.impl list> structure
 %type <Parsing_compact.semi_expr_prop > statement
 %%
 
@@ -275,8 +292,8 @@ optional_type_parameters_no_constraints:
     | None -> []
     | Some params -> params
    }
-optional_type_arguments:
-  | params = option(delimited("[" ,non_empty_list_commas(type_), "]")) {
+%inline optional_type_arguments:
+  | params = ioption(delimited("[" ,non_empty_list_commas(type_), "]")) {
     match params with
     | None -> []
     | Some params -> params
@@ -293,14 +310,12 @@ fun_header:
   attrs=attributes
   vis=visibility
   is_async=is_async
-    "fn"
-    fun_binder=fun_binder
-    has_error=optional_bang
-    quants=optional_type_parameters
+    header=fun_header_generic
     ps=option(parameters)
-    ts=option(preceded("->", return_type))
+    ts=func_return_type
     {
-      let type_name, f = fun_binder in
+      let (type_name, f), has_error, quants = header in
+      let return_type, error_type = ts in
       { Parsing_syntax.type_name
       ; name = f
       ; has_error
@@ -308,12 +323,21 @@ fun_header:
       ; quantifiers = quants
       ; decl_params = ps
       ; params_loc_=(i $loc(ps))
-      ; return_type = ts
+      ; return_type
+      ; error_type
       ; vis
       ; doc_ = Docstring.empty
       ; attrs
       }
     }
+
+fun_header_generic:
+  | "fn" ty_params=type_parameters binder=fun_binder has_error=optional_bang {
+    binder, has_error, ty_params
+  }
+  | "fn" binder=fun_binder has_error=optional_bang ty_params=optional_type_parameters {
+    binder, has_error, ty_params
+  }
 
 local_type_decl:
   | "struct" tycon=luident "{" fs=list_semis(record_decl_field) "}" deriving_=deriving_directive_list {
@@ -331,18 +355,20 @@ extern_fun_header:
     has_error=optional_bang
     quants=optional_type_parameters
     ps=option(parameters)
-    ts=option(preceded("->", return_type))
+    ts=func_return_type
     {
       let type_name, f = fun_binder in
+      let return_type, error_type = ts in
       language,
       { Parsing_syntax.type_name
       ; name = f
-       ; has_error
+      ; has_error
       ; is_async = false
       ; quantifiers = quants
       ; decl_params = ps
       ; params_loc_=(i $loc(ps))
-      ; return_type = ts
+      ; return_type
+      ; error_type
       ; vis
       ; doc_ = Docstring.empty
       ; attrs
@@ -378,117 +404,100 @@ val_header :
 structure : list_semis(structure_item) EOF {$1}
 structure_item:
   | type_header=type_header deriving_=deriving_directive_list {
-      enter_next_block ();
       let attrs, type_vis, tycon, tycon_loc_, params = type_header in
-      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_abstract; type_vis; doc_ = Docstring.empty; deriving_; loc_ = aloc $sloc; attrs }
+      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_abstract; type_vis; doc_ = Docstring.empty; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ = false }
     }
   | attrs=attributes type_vis=visibility
     "extern" "type" tycon=luident params=optional_type_parameters_no_constraints
     deriving_=deriving_directive_list {
+      let tycon_loc_ = i $loc(tycon) in
       Ptop_typedef
         { tycon
-        ; tycon_loc_ = i $loc(tycon)
+        ; tycon_loc_
         ; params
         ; components = Ptd_extern
         ; type_vis
         ; doc_ = Docstring.empty
         ; deriving_
-        ; loc_ = aloc $sloc
+        ; loc_ = i $sloc
         ; attrs
+        ; deprecated_type_bang_ = false
         }
     }
   | type_header=type_header ty=type_ deriving_=deriving_directive_list {
-      enter_next_block ();
       let attrs, type_vis, tycon, tycon_loc_, params = type_header in
-      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_newtype ty; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = aloc $sloc; attrs }
+      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_newtype ty; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ =false }
     }
-  | type_header=type_header_bang ty=option(type_) deriving_=deriving_directive_list {
-      enter_next_block ();
-      let attrs, type_vis, tycon, tycon_loc_ = type_header in
+  | type_header=suberror_header ty=option(type_) deriving_=deriving_directive_list {
+      let attrs, type_vis, tycon, tycon_loc_, deprecated_type_bang_ = type_header in
       let exception_decl: Parsing_syntax.exception_decl =
         match ty with | None -> No_payload | Some ty -> Single_payload ty
       in
-      Ptop_typedef { tycon; tycon_loc_; params = []; components = Ptd_error exception_decl; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = aloc $sloc; attrs }
+      Ptop_typedef { tycon; tycon_loc_; params = []; components = Ptd_error exception_decl; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ }
     }
-  | type_header=type_header_bang "{" cs=list_semis(enum_constructor) "}" deriving_=deriving_directive_list {
-      enter_next_block ();
-      let attrs, type_vis, tycon, tycon_loc_ = type_header in
+  | type_header=suberror_header "{" cs=list_semis(enum_constructor) "}" deriving_=deriving_directive_list {
+      let attrs, type_vis, tycon, tycon_loc_, deprecated_type_bang_ = type_header in
       let exception_decl: Parsing_syntax.exception_decl = Enum_payload cs in
-      Ptop_typedef { tycon; tycon_loc_; params = []; components = Ptd_error exception_decl; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = aloc $sloc; attrs }
-    }
-  | type_header=type_alias_header "=" ty=type_ deriving_=deriving_directive_list {
-      enter_next_block ();
-      let attrs, type_vis, tycon, tycon_loc_, params = type_header in
-      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_alias ty; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = aloc $sloc; attrs }
+      Ptop_typedef { tycon; tycon_loc_; params = []; components = Ptd_error exception_decl; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ }
     }
   | struct_header=struct_header "{" fs=list_semis(record_decl_field) "}" deriving_=deriving_directive_list {
-      enter_next_block ();
       let attrs, type_vis, tycon, tycon_loc_, params = struct_header in
-      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_record fs; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = aloc $sloc; attrs }
+      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_record fs; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ = false }
     }
   | enum_header=enum_header "{" cs=list_semis(enum_constructor) "}" deriving_=deriving_directive_list {
-      enter_next_block ();
       let attrs, type_vis, tycon, tycon_loc_, params = enum_header in
-      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_variant cs; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = aloc $sloc; attrs }
+      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_variant cs; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ = false }
     }
   | val_header=val_header "=" expr = expr {
-    enter_next_block ();
     let attrs, is_constant, vis, binder, ty = val_header in
-    Ptop_letdef { binder; ty; expr; vis; is_constant; loc_ = aloc $sloc; doc_ = Docstring.empty; attrs }
+    Ptop_letdef { binder; ty; expr; vis; is_constant; loc_ = i $sloc; doc_ = Docstring.empty; attrs }
   }
   | t=fun_header "=" mname=STRING fname=STRING {
-      enter_next_block ();
       Parsing_syntax.Ptop_funcdef {
-        loc_ = (aloc $sloc);
+        loc_ = (i $sloc);
         fun_decl = t ;
         decl_body = Decl_stubs (Import {module_name = mname; func_name = fname });
       }
     }
   | t=fun_header "=" s=STRING {
-      enter_next_block ();
       Parsing_syntax.Ptop_funcdef {
-        loc_ = (aloc $sloc);
+        loc_ = (i $sloc);
         fun_decl = t ;
         decl_body = Decl_stubs (Embedded { language = None; code = Code_string s });
       }
     }
   | t=fun_header "=" xs=non_empty_list(MULTILINE_STRING) {
-      enter_next_block ();
       Parsing_syntax.Ptop_funcdef {
-        loc_ = (aloc $sloc);
+        loc_ = (i $sloc);
         fun_decl = t ;
         decl_body = Decl_stubs (Embedded { language = None; code = Code_multiline_string xs });
       }
     }
   | t=extern_fun_header "=" s=STRING {
-      enter_next_block ();
       let language, decl = t in
       Parsing_syntax.Ptop_funcdef {
-        loc_ = (aloc $sloc);
+        loc_ = (i $sloc);
         fun_decl = decl ;
-        decl_body = Decl_stubs (Embedded { language = Some language; code = Code_string s })
+        decl_body = Decl_stubs (Embedded { language = Some language; code = Code_string s });
       }
     }
   | t=extern_fun_header "=" xs=non_empty_list(MULTILINE_STRING) {
-      enter_next_block ();
       let language, decl = t in
       Parsing_syntax.Ptop_funcdef {
-        loc_ = (aloc $sloc);
+        loc_ = (i $sloc);
         fun_decl = decl ;
         decl_body = Decl_stubs (Embedded { language = Some language; code = Code_multiline_string xs });
       }
     }
   | t=fun_header body=block_expr_with_local_types {
-      enter_next_block ();
       let local_types, body = body in
       Parsing_syntax.Ptop_funcdef {
-        loc_ = (aloc $sloc);
+        loc_ = (i $sloc);
         fun_decl = t;
         decl_body = Decl_body { expr=body; local_types };
       }
     }
   | attrs=attributes vis=visibility "fnalias" target=func_alias_targets {
-    enter_next_block ();
     let pkg, type_name, is_list_, targets = target in
     Parsing_syntax.Ptop_func_alias
       { pkg
@@ -498,14 +507,13 @@ structure_item:
       ; attrs
       ; is_list_
       ; doc_ = Docstring.empty
-      ; loc_ = aloc $sloc
+      ; loc_ = i $sloc
       }
   }
   | attrs=attributes vis=visibility "trait" name=luident
     supers=option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint)))
     "{" methods=list_semis(trait_method_decl) "}" {
       let trait_name : Parsing_syntax.binder = { binder_name = name; loc_ = i ($loc(name)) } in
-      enter_next_block ();
       let supers =
         match supers with None -> [] | Some supers -> supers
       in
@@ -514,42 +522,78 @@ structure_item:
         trait_supers = supers;
         trait_methods = methods;
         trait_vis = vis;
-        trait_loc_ = (aloc $sloc);
+        trait_loc_ = i $sloc;
         trait_doc_ = Docstring.empty;
         trait_attrs = attrs;
       }
     }
   | attrs=attributes vis=visibility "traitalias" name=luident "=" target=type_name {
     let binder : Parsing_syntax.binder = { binder_name = name; loc_ = i $loc(name) } in
-    enter_next_block ();
-    Parsing_syntax.Ptop_trait_alias
-      { binder
-      ; target
+    let (pkg : Parsing_syntax.label option), (target : Parsing_syntax.label) =
+      let loc_ = (target : Parsing_syntax.type_name).loc_ in
+      match target.name with
+      | Ldot { pkg; id } ->
+        Some { label_name = pkg; loc_ }, { label_name = id; loc_ }
+      | Lident id ->
+        None, { label_name = id; loc_ }
+    in
+    Parsing_syntax.Ptop_batch_trait_alias
+      { pkg
+      ; targets = [ { binder; target = Some target } ]
       ; vis
-      ; loc_ = aloc $sloc
+      ; loc_ = i $sloc
       ; attrs
+      ; is_list_ = false
+      ; is_old_syntax_ = true
       ; doc_ = Docstring.empty
       }
   }
-  | attrs=attributes vis=visibility "typealias"
-    pkg=PACKAGE_NAME targets=batch_type_alias_targets {
+  | attrs=attributes vis=visibility "typealias" targets=batch_type_alias_targets {
+      let is_list_, pkg, targets = targets in
       Parsing_syntax.Ptop_batch_type_alias
-        { pkg; targets; vis; attrs; loc_ = aloc $sloc; doc_ = Docstring.empty }
+        { pkg; targets; vis; attrs; loc_ = i $sloc; is_list_; doc_ = Docstring.empty }
     }
-  | attrs=attributes vis=visibility "traitalias"
-    pkg=PACKAGE_NAME targets=batch_trait_alias_targets {
+  | attrs=attributes vis=visibility "typealias"
+    binder=type_ "=" target=type_ deriving_=deriving_directive_list {
+    Ptop_legacy_type_alias
+      { vis
+      ; binder
+      ; target
+      ; deriving_
+      ; attrs
+      ; doc_ = Docstring.empty
+      ; loc_ = i $sloc
+      }
+    }
+  | attrs=attributes type_vis=visibility "typealias"
+    target=type_
+    "as" tycon=luident params=optional_type_parameters_no_constraints {
+      Ptop_typedef
+        { tycon
+        ; tycon_loc_ = i $loc(tycon)
+        ; type_vis
+        ; params
+        ; components = Ptd_alias target
+        ; attrs
+        ; deriving_ = []
+        ; doc_ = Docstring.empty
+        ; loc_ = i $sloc
+        ; deprecated_type_bang_ = false
+        }
+    }
+  | attrs=attributes vis=visibility "traitalias" targets=batch_type_alias_targets {
+      let is_list_, pkg, targets = targets in
       Parsing_syntax.Ptop_batch_trait_alias
-        { pkg; targets; vis; attrs; loc_ = aloc $sloc; doc_ = Docstring.empty }
+        { pkg; targets; vis; attrs; loc_ = i $sloc; is_list_; is_old_syntax_ = false; doc_ = Docstring.empty }
     }
   | attrs=attributes "test" name=option(loced_string) params=option(parameters) body=block_expr_with_local_types {
-      enter_next_block ();
       let local_types, body = body in
       Parsing_syntax.Ptop_test {
         expr = body;
         name;
         params;
         local_types;
-        loc_ = (aloc $sloc);
+        loc_ = (i $sloc);
         doc_ = Docstring.empty;
         attrs;
       }
@@ -563,10 +607,10 @@ structure_item:
     "with"
       method_name=binder
       has_error=optional_bang
-      params=parameters ret_ty=option(preceded("->", return_type))
+      params=parameters ret_ty=func_return_type
       body=impl_body
   {
-    enter_next_block ();
+    let ret_ty, err_ty = ret_ty in
     Parsing_syntax.Ptop_impl
       { self_ty = Some self_ty
       ; trait
@@ -575,9 +619,10 @@ structure_item:
       ; quantifiers
       ; params
       ; ret_ty
+      ; err_ty
       ; body
       ; vis
-      ; loc_ = aloc $sloc
+      ; loc_ = i $sloc
       ; doc_ = Docstring.empty
       ; attrs
       }
@@ -590,10 +635,10 @@ structure_item:
     "with"
       method_name=binder
       has_error=optional_bang
-      params=parameters ret_ty=option(preceded("->", return_type))
+      params=parameters ret_ty=func_return_type
       body=impl_body
   {
-    enter_next_block ();
+    let ret_ty, err_ty = ret_ty in
     Parsing_syntax.Ptop_impl
       { self_ty = None
       ; trait
@@ -602,24 +647,53 @@ structure_item:
       ; quantifiers
       ; params
       ; ret_ty
+      ; err_ty
       ; body
       ; vis
-      ; loc_ = aloc $sloc
+      ; loc_ = i $sloc
       ; doc_ = Docstring.empty
       ; attrs
       }
   }
-  /*
-  | pub=ioption("pub")
+  | attrs=attributes
+    vis=visibility
     "impl"
        quantifiers=optional_type_parameters
        trait=type_name
     "for" self_ty=type_
   {
     Parsing_syntax.Ptop_impl_relation
-      { self_ty; trait; quantifiers; is_pub = [%p? Some _] pub; loc_ = i $sloc }
+      { self_ty; trait; quantifiers; vis; attrs; loc_ = i $sloc; doc_ = Docstring.empty }
   }
-  */
+  | attrs=attributes
+    vis=visibility
+    "enumview"
+    quantifiers=optional_type_parameters
+    view_ty_name=UIDENT
+    "{" cs=list_semis(enum_constructor) "}"
+    "for"
+    source_ty=type_
+    "with"
+    view_func_name=binder
+    parameters=parameters
+    body=block_expr
+  {
+    Parsing_syntax.Ptop_view {
+      quantifiers;
+      source_ty;
+      view_ty_name;
+      view_ty_loc_ = i $loc(view_ty_name);
+      view_func_name;
+      parameters;
+      params_loc_ = i $loc(parameters);
+      view_constrs = cs;
+      body;
+      vis;
+      loc_ = i $sloc;
+      attrs;
+      doc_ = Docstring.empty;
+    }
+  }
 
 %inline attributes: 
   | /* empty */               { [] } 
@@ -639,12 +713,12 @@ pub_attr:
 type_header: attrs=attributes vis=visibility "type" tycon=luident params=optional_type_parameters_no_constraints {
   attrs, vis, tycon, i $loc(tycon), params
 }
-type_header_bang: attrs=attributes vis=visibility "type" "!" tycon=luident {
-  attrs, vis, tycon, i $loc(tycon)
+suberror_header: attrs=attributes vis=visibility "type" "!" tycon=luident {
+  attrs, vis, tycon, i $loc(tycon), true
 }
-type_alias_header: attrs=attributes vis=visibility "typealias" tycon=luident params=optional_type_parameters_no_constraints {
-  attrs, vis, tycon, i $loc(tycon), params
-}
+| attrs=attributes vis=visibility "suberror" tycon=luident {
+  attrs, vis, tycon, i $loc(tycon), false
+} 
 struct_header: attrs=attributes vis=visibility "struct" tycon=luident params=optional_type_parameters_no_constraints {
   attrs, vis, tycon, i $loc(tycon), params
 }
@@ -653,33 +727,35 @@ enum_header: attrs=attributes vis=visibility "enum" tycon=luident params=optiona
 }
 
 batch_type_alias_targets:
-  | binder_name=DOT_LIDENT params=optional_type_parameters_no_constraints {
-      [ ({ binder_name; loc_ = i $loc(binder_name) } : Parsing_syntax.binder), params ]
-    }
-  | binder_name=DOT_UIDENT params=optional_type_parameters_no_constraints {
-      [ ({ binder_name; loc_ = i $loc(binder_name) } : Parsing_syntax.binder), params ]
-    }
-  | ".(" targets=non_empty_list_commas(batch_type_alias_target) ")" { targets }
+  | pkg=PACKAGE_NAME target=batch_type_alias_target(dot_luident) {
+    let pkg : Parsing_syntax.label = { label_name = pkg; loc_ = i $loc(pkg) } in
+    false, Some pkg, [ target ]
+  }
+  | pkg=PACKAGE_NAME
+    ".(" targets=non_empty_list_commas(batch_type_alias_target(luident)) ")" {
+    let pkg : Parsing_syntax.label = { label_name = pkg; loc_ = i $loc(pkg) } in
+    true, Some pkg, targets
+  }
+  | target=batch_type_alias_target(luident) {
+    false, None, [ target ]
+  }
 
-batch_type_alias_target:
-  | binder_name=luident params=optional_type_parameters_no_constraints {
+%inline dot_luident:
+  | DOT_LIDENT { $1 }
+  | DOT_UIDENT { $1 }
+
+batch_type_alias_target(LUIDENT_MAYBE_DOT):
+  | binder_name=LUIDENT_MAYBE_DOT
+  {
     let binder : Parsing_syntax.binder = { binder_name; loc_ = i $loc(binder_name) } in
-    (binder, params)
+    ({ binder; target = None } : Parsing_syntax.alias_target)
   }
-
-batch_trait_alias_targets:
-  | binder_name=DOT_LIDENT {
-      [ ({ binder_name; loc_ = i $loc(binder_name) } : Parsing_syntax.binder) ]
+  | target_name=LUIDENT_MAYBE_DOT "as" binder_name=luident
+    {
+      let binder : Parsing_syntax.binder = { binder_name; loc_ = i $loc(binder_name) } in
+      let target : Parsing_syntax.label = { label_name = target_name; loc_ = i $loc(target_name) } in
+      ({ binder; target = Some target } : Parsing_syntax.alias_target)
     }
-  | binder_name=DOT_UIDENT {
-      [ ({ binder_name; loc_ = i $loc(binder_name) } : Parsing_syntax.binder) ]
-    }
-  | ".(" targets=non_empty_list_commas(batch_trait_alias_target) ")" { targets }
-
-batch_trait_alias_target:
-  | binder_name=luident {
-    ({ binder_name; loc_ = i $loc(binder_name) } : Parsing_syntax.binder)
-  }
 
 func_alias_targets:
   | type_name=ioption(func_alias_type_name(LIDENT, UIDENT))
@@ -754,21 +830,25 @@ deriving_directive_list:
   | "derive" "(" list_commas(deriving_directive) ")" { $3 }
 
 trait_method_decl:
+  is_async=is_async
   name=binder
   has_error=optional_bang
   quantifiers=optional_type_parameters
   "("
   params=list_commas(trait_method_param)
   ")"
-  return_type=option(preceded("->", return_type))
+  return_type=func_return_type
   has_default=option(preceded("=", wildcard))
   {
+    let return_type, error_type = return_type in
     Parsing_syntax.Trait_method {
       name;
       has_error;
+      is_async;
       quantifiers;
       params;
       return_type;
+      error_type;
       has_default;
       loc_ = i $sloc;
     }
@@ -820,10 +900,13 @@ qual_ident_simple_expr:
   | i=LIDENT %prec prec_apply_non_ident_fn { Lident(i) }
   | ps=PACKAGE_NAME id=DOT_LIDENT { Ldot({ pkg = ps; id}) }
 
-qual_ident_ty:
-  | i=luident { Lident(i) }
+%inline qual_ident_ty_inline:
+  | id=luident { Basic_longident.Lident(id) }
   | ps=PACKAGE_NAME id=DOT_LIDENT
-  | ps=PACKAGE_NAME id=DOT_UIDENT { Ldot({ pkg = ps; id}) }
+  | ps=PACKAGE_NAME id=DOT_UIDENT { Basic_longident.Ldot({ pkg = ps; id}) }
+
+qual_ident_ty:
+  | x=qual_ident_ty_inline { x }
 
 %inline semi_expr_semi_opt: none_empty_list_semis_rev_with_trailing_info(statement)  {
   let ls, trailing = $1 in
@@ -839,6 +922,14 @@ fn_header:
 
 fn_header_no_binder:
   | "fn" has_error=optional_bang "{" { has_error }
+
+// the func that appears on the rhs of letand
+letand_func:
+  | arrow_fn_expr { $1 }
+  | anony_fn { $1 }
+
+and_func:
+  | "and" b=binder ty=opt_annot "=" e=letand_func { (b, ty, e) }
 
 statement:
   | "let" pat=pattern ty_opt=opt_annot "=" expr=expr
@@ -857,18 +948,23 @@ statement:
                         (Parsing_syntax.loc_of_type_expression ty);
                   } in
       Stmt_let {pat; expr; loc=(i $sloc);  }}
+  | "letrec" binder=binder ty=opt_annot "=" fn=letand_func rest=list(and_func) {
+    Parsing_compact.Stmt_letand { bindings = (binder, ty, fn) :: rest; loc = i $sloc }
+  }
   | "let" "mut" binder=binder ty=opt_annot "=" expr=expr
     { Stmt_letmut {binder; ty_opt=ty; expr; loc=(i $sloc)} }
-  | is_async=is_async "fn" binder=binder has_error=optional_bang params=parameters ty_opt=option(preceded("->", return_type)) block = block_expr
+  | is_async=is_async "fn" binder=binder has_error=optional_bang params=parameters ty_opt=func_return_type block = block_expr
     {
       (* FIXME: `func` should have explicit return type in the ast *)
       let locb = i $sloc in
+      let return_type, error_type = ty_opt in
       let func : Parsing_syntax.func =
         Lambda
           { parameters = params
           ; params_loc_ = (i $loc(params))
           ; body = block
-          ; return_type = ty_opt
+          ; return_type
+          ; error_type
           ; kind_ = Lambda
           ; has_error
           ; is_async
@@ -891,6 +987,9 @@ statement:
         ; loc=i $sloc}
     }
   | guard_statement { $1 }
+  | "defer" expr=pipe_expr {
+      Parsing_compact.Stmt_defer { expr; loc = i $sloc }
+    }
   | expr_statement { Parsing_compact.Stmt_expr { expr = $1 } }
 
 guard_statement: 
@@ -898,10 +997,6 @@ guard_statement:
     { Parsing_compact.Stmt_guard { cond; otherwise=None; loc=(i $sloc) } }
   | "guard" cond=infix_expr "else" else_=block_expr 
     { Parsing_compact.Stmt_guard { cond; otherwise=Some else_; loc=(i $sloc) } }
-  | "guard" "let" pat=pattern "=" expr=infix_expr
-    { Parsing_compact.Stmt_guard_let { pat; expr; otherwise=None; loc=(i $sloc) } }
-  | "guard" "let" pat=pattern "=" expr=infix_expr "else" "{" cases=single_pattern_cases "}"
-    { Parsing_compact.Stmt_guard_let { pat; expr; otherwise=Some cases; loc=(i $sloc) } } 
 
 %inline assignment_expr:
   | lv = left_value "=" e=expr {
@@ -927,6 +1022,16 @@ guard_statement:
       Pexpr_array_augmented_set {op; array; index; value=e; loc_}
   }
 
+// this is for the body of arrow fn, where continue is conflicting:
+// f(x => continue 1, 2)
+// return is also conflicting
+// loop x => return { ... }
+expr_statement_no_break_continue_return:
+  | "raise" expr = expr { Parsing_syntax.Pexpr_raise { err_value = expr; loc_ = i $sloc } }
+  | "..." { Parsing_syntax.Pexpr_hole { loc_ = i $sloc; kind = Todo } }
+  | augmented_assignment_expr
+  | assignment_expr
+  | expr { $1 }
 
 expr_statement:
   | "break" label=POST_LABEL arg=option(expr) {
@@ -944,11 +1049,7 @@ expr_statement:
       Parsing_syntax.Pexpr_continue { args; label = None; loc_ = i $sloc }
     }
   | "return" expr = option(expr) { Parsing_syntax.Pexpr_return { return_value = expr; loc_ = i $sloc } }
-  | "raise" expr = expr { Parsing_syntax.Pexpr_raise { err_value = expr; loc_ = i $sloc } }
-  | "..." { Parsing_syntax.Pexpr_hole { loc_ = i $sloc; kind = Todo } }
-  | augmented_assignment_expr
-  | assignment_expr
-  | expr { $1 }
+  | expr_statement_no_break_continue_return { $1 }
 
 loop_label_colon:
   | label=POST_LABEL ":" { Some { Parsing_syntax.label_name = label; loc_ = i $loc(label) } }
@@ -959,46 +1060,54 @@ while_expr:
     { Parsing_syntax.Pexpr_while { loc_=(i $sloc); loop_cond = cond; loop_body = body; while_else; label } }
 
 single_pattern_case:
-  | pat=pattern guard=option(preceded("if", expr)) "=>" body=expr_statement
+  | pat=pattern guard=option(preceded("if", infix_expr)) "=>" body=expr_statement
    { ({ pattern = pat; guard; body }: Parsing_syntax.case) }
+  | "..."
+   { ({ pattern = Ppat_any { loc_ = i $sloc }; guard = None; body = Pexpr_hole { loc_ = i $sloc; kind = Todo } }: Parsing_syntax.case) }
 
 single_pattern_cases:
 | cases=list_semis(single_pattern_case) { cases }
 
 multi_pattern_case:
-  | pats=non_empty_list_commas(pattern) guard=option(preceded("if", expr)) "=>" body=expr_statement
+  | pats=non_empty_list_commas(pattern) guard=option(preceded("if", infix_expr)) "=>" body=expr_statement
    { ({ patterns = pats; guard; body }: Parsing_syntax.multi_arg_case) }
 
 catch_keyword:
-  | "catch" "{"  | "{" { false, i $sloc }
+  | "catch" "{"  { false, i $sloc }
   | "catch" "!" "{" { true, i $sloc }
 
 %inline else_keyword:
-  | "else" "{" { i $sloc }
+  | "else" "{" { true, i $sloc }
+  | "noraise" "{" { false, i $sloc }
 
 try_expr:
-  | "try" body=expr catch_keyword=catch_keyword catch=single_pattern_cases "}"
+  | "try" body=pipe_expr catch_keyword=catch_keyword catch=single_pattern_cases "}"
     { let catch_all, catch_loc_ = catch_keyword in
       Parsing_syntax.Pexpr_try { loc_=(i $sloc); body; catch; catch_all; try_else = None;
-                                 else_loc_ = Rloc.no_location; try_loc_ = i $loc($1); catch_loc_ } }
-  | "try" body=expr catch_keyword=catch_keyword catch=single_pattern_cases "}"
+                                 else_loc_ = Rloc.no_location; legacy_else_ = false; try_loc_ = i $loc($1); catch_loc_; has_try_ = true } }
+  | "try" body=pipe_expr catch_keyword=catch_keyword catch=single_pattern_cases "}"
     else_loc_=else_keyword try_else=single_pattern_cases "}"
     { let catch_all, catch_loc_ = catch_keyword in
+      let legacy_else_, else_loc_ = else_loc_ in
       Parsing_syntax.Pexpr_try { loc_=(i $sloc); body; catch; catch_all; try_else = Some try_else;
-                                 else_loc_; try_loc_ = i $loc($1); catch_loc_ } }
+                                 else_loc_; legacy_else_; try_loc_ = i $loc($1); catch_loc_; has_try_ = true } }
+  | "try" "?" body=pipe_expr {
+      Parsing_syntax.Pexpr_try_question { body; try_loc_ = i $loc($1); loc_ = i $sloc }
+    }
 
 if_expr:
   | "if"  b=infix_expr ifso=block_expr "else" ifnot=block_expr 
   | "if"  b=infix_expr ifso=block_expr "else" ifnot=if_expr { Pexpr_if {loc_=(i $sloc);  cond=b; ifso; ifnot =  Some ifnot} } 
   | "if"  b=infix_expr ifso=block_expr {Parsing_syntax.Pexpr_if {loc_=(i $sloc); cond = b; ifso; ifnot =None}}  
 
-%inline match_header:
-  | "match" e=infix_expr "{" { e }
+match_header:
+  | "match" e=infix_expr "{" { (e, None) }
+  | "match" e=infix_expr "using" label=label "{" { (e, Some label) }
 
 match_expr:
-  | e=match_header mat=non_empty_list_semis( single_pattern_case )  "}"  {
-    Pexpr_match {loc_=(i $sloc);  expr = e ; cases =  mat; match_loc_ = i $loc(e)} }
-  | e=match_header "}" { Parsing_syntax.Pexpr_match { loc_ = (i $sloc) ; expr = e ; cases =  []; match_loc_ = i $loc(e)}}
+  | h=match_header mat=non_empty_list_semis( single_pattern_case )  "}"  {
+    Pexpr_match {loc_=(i $sloc);  expr = fst h; cases =  mat; match_loc_ = i $loc(h); using = snd h} }
+  | h=match_header "}" { Parsing_syntax.Pexpr_match {loc_ = (i $sloc) ; expr = fst h; cases =  []; match_loc_ = i $loc(h); using = snd h}}
 
 %inline loop_header:
   | "loop" args=non_empty_list_commas_no_trailing(expr) "{" { args }
@@ -1045,13 +1154,46 @@ expr:
   | try_expr 
   | if_expr 
   | match_expr 
-  | pipe_expr {$1}
+  | simple_try_expr {$1}
+  | func=arrow_fn_expr { Pexpr_function { loc_ = i $sloc; func } }
+
+
+simple_try_expr:
+  | body=pipe_expr catch_keyword=catch_keyword catch=single_pattern_cases "}"
+    { let catch_all, catch_loc_ = catch_keyword in
+      Parsing_syntax.Pexpr_try { loc_=(i $sloc); body; catch; catch_all; try_else = None; has_try_ = false;
+                                 else_loc_ = Rloc.no_location; legacy_else_ = false; try_loc_ = i $loc(body); catch_loc_ } }
+  | pipe_expr { $1 }
+
+arrow_fn_expr:
+  | "(" bs=arrow_fn_prefix "=>" body=expr_statement_no_break_continue_return { Parsing_util.make_arrow_fn ~loc_:(i $sloc) bs body }
+  | "(" ")" "=>" body=expr_statement_no_break_continue_return { Parsing_util.make_arrow_fn ~loc_:(i $sloc) [] body }
+  | b=binder "=>" body=expr_statement_no_break_continue_return { Parsing_util.make_arrow_fn ~loc_:(i $sloc) [Parsing_util.Named b, None] body }
+  | _l="_" "=>" body=expr_statement_no_break_continue_return { Parsing_util.make_arrow_fn ~loc_:(i $sloc) [Parsing_util.Unnamed(i $loc(_l)), None] body }
+
+
+arrow_fn_prefix:
+  | b=binder ioption(",") ")" { [ Parsing_util.Named b, None ] }
+  | _l="_" ioption(",") ")" { [ Parsing_util.Unnamed(i $loc(_l)), None ] }
+  | b=binder ":" t=type_ ioption(",") ")" { [ Parsing_util.Named b, Some t ] }
+  | _l="_" ":" t=type_ ioption(",") ")" { [ Parsing_util.Unnamed(i $loc(_l)), Some t ] }
+  | b=binder "," bs=arrow_fn_prefix { (Parsing_util.Named b, None)::bs }
+  | _l="_" "," bs=arrow_fn_prefix { (Parsing_util.Unnamed(i $loc(_l)), None)::bs }
+  | b=binder ":" t=type_ "," bs=arrow_fn_prefix { (Parsing_util.Named b, Some t):: bs }
+  | _l="_" ":" t=type_ "," bs=arrow_fn_prefix { (Parsing_util.Unnamed(i $loc(_l)), Some t):: bs }
+
+arrow_fn_prefix_no_constraint:
+  | b=binder ioption(",") ")" { [ Parsing_util.Named b ] }
+  | _l="_" ioption(",") ")" { [ Parsing_util.Unnamed(i $loc(_l)) ] }
+  | b=binder "," bs=arrow_fn_prefix_no_constraint { Parsing_util.Named b::bs }
+  | _l="_" "," bs=arrow_fn_prefix_no_constraint { Parsing_util.Unnamed(i $loc(_l))::bs }
 
 pipe_expr: 
   | lhs=pipe_expr "|>" rhs=infix_expr {
     Parsing_syntax.Pexpr_pipe { lhs; rhs; loc_ = i $sloc }
   }
   | infix_expr { $1 }
+
 
 infix_expr:
   | lhs=infix_expr op=infixop rhs=infix_expr {
@@ -1078,6 +1220,7 @@ range_expr:
 prefix_expr:
   | op=id(plus) e=prefix_expr { make_uplus ~loc_:(i $sloc) op e }
   | op=id(minus) e=prefix_expr { make_uminus ~loc_:(i $sloc) op e }
+  | "!" e=prefix_expr { make_unot ~loc_:(i $sloc) e}
   | simple_expr { $1 }
 
 %inline plus:
@@ -1119,8 +1262,55 @@ constr:
 %inline apply_attr:
   | { Parsing_syntax.No_attr }
   | "!" { Parsing_syntax.Exclamation }
-  | "!" "!" { Parsing_syntax.Double_exclamation }
   | "?" { Parsing_syntax.Question }
+
+non_empty_tuple_elems:
+  | e=expr ioption(",") ")" { [e] }
+  | e=expr "," es=non_empty_tuple_elems { e::es }
+
+non_empty_tuple_elems_with_prefix:
+  | b=binder "," es=non_empty_tuple_elems_with_prefix { Parsing_util.binder_to_expr b::es }
+  | _l="_" "," es=non_empty_tuple_elems_with_prefix { Pexpr_hole { loc_ = i $loc(_l); kind = Incomplete }::es }
+  | es=non_empty_tuple_elems { es }
+
+tuple_expr:
+  | "(" ps=arrow_fn_prefix_no_constraint {
+    let es = Basic_lst.map ps Parsing_util.arrow_fn_param_to_expr in
+    match es with
+      | [ Pexpr_constraint _ as e ] -> e
+      | [expr] -> Pexpr_group { expr; group = Group_paren; loc_ = i $sloc }
+      | _ -> make_Pexpr_tuple ~loc_:(i $sloc) es
+  }
+  | "(" es=non_empty_tuple_elems_with_prefix { 
+    match es with
+    | [expr] -> Pexpr_group { expr; group = Group_paren; loc_ = i $sloc }
+    | _ -> make_Pexpr_tuple ~loc_:(i $sloc) es }
+  | "(" b=binder ":" t=type_ ")" {
+    Parsing_syntax.Pexpr_constraint {loc_=(i $sloc); expr=Parsing_util.binder_to_expr b; ty=t}
+  }
+  | "(" _l="_" ":" t=type_ ")" {
+    Parsing_syntax.Pexpr_constraint {loc_=(i $sloc); expr=Pexpr_hole {loc_ = i $loc(_l); kind = Incomplete}; ty=t}
+  }
+  | "(" e=expr ":" t=type_ ")" {
+    Parsing_syntax.Pexpr_constraint {loc_=(i $sloc); expr=e; ty=t}
+  }
+  | "(" ")" { Parsing_syntax.Pexpr_unit {loc_ = i $sloc; faked = false} }
+
+anony_fn:
+  | is_async=is_async "fn" has_error=optional_bang ps=parameters ty_opt=func_return_type f=block_expr
+    { let return_type, error_type = ty_opt in
+      Lambda { parameters = ps
+              ; has_error
+              ; is_async
+              ; params_loc_ = (i $loc(ps))
+              ; body = f
+              ; return_type
+              ; error_type
+              ; kind_ = Lambda
+              ; loc_ = i $sloc
+              }}
+  | is_async=is_async has_error=fn_header_no_binder cases=list_semis( multi_pattern_case ) "}"
+    { Match { cases; has_error; is_async; loc_ = i $sloc; fn_loc_ = i $loc(has_error) } }
 
 simple_expr:
   | "{" x=record_defn "}" {
@@ -1150,39 +1340,9 @@ simple_expr:
   | "{" elems=list_commas(map_expr_elem) "}" {
       Parsing_syntax.Pexpr_map { elems; loc_ = i $sloc }
     }
-  | is_async=is_async "fn" has_error=optional_bang ps=parameters ty_opt=option(preceded("->", return_type)) f=block_expr
-    {
-      Pexpr_function
-        { loc_= i $sloc
-        ; func =
-            Lambda
-              { parameters = ps
-              ; has_error
-              ; is_async
-              ; params_loc_ = (i $loc(ps))
-              ; body = f
-              ; return_type = ty_opt
-              ; kind_ = Lambda
-              ; loc_ = i $sloc
-              }
-        }
-    }
-  | is_async=is_async has_error=fn_header_no_binder cases=list_semis( multi_pattern_case ) "}"
-    {
-      Pexpr_function
-        { loc_= i $sloc
-        ; func =
-            Match
-              { cases
-              ; has_error
-              ; is_async
-              ; loc_ = i $sloc
-              ; fn_loc_ = i $loc(has_error)
-              }
-        }
-    }
+  | a = anony_fn { Pexpr_function { loc_ = i $sloc; func = a } }
   | e = atomic_expr {e}
-  | "_" { Pexpr_hole { loc_ = (i $sloc) ; kind = Incomplete } }
+  | "_" %prec prec_lower_than_arrow_fn { Pexpr_hole { loc_ = (i $sloc) ; kind = Incomplete } }
   | var_name=qual_ident_simple_expr { make_Pexpr_ident ~loc_:(i $sloc) { var_name; loc_ = i $sloc } }
   | c=constr { Parsing_syntax.Pexpr_constr {loc_ = (i $sloc); constr = c} }
   | func=LIDENT "?" "(" args=list_commas(argument) ")" {
@@ -1220,15 +1380,8 @@ simple_expr:
       { label_name = meth; loc_ = i ($loc(meth)) } in
     Pexpr_method { type_name; method_name; loc_ = i $sloc }
   }
-  | "("  bs=list_commas(expr) ")" {
-    match bs with
-    | [] -> Pexpr_unit {loc_ = i $sloc; faked = false}
-    | [expr] -> Pexpr_group { expr; group = Group_paren; loc_ = i $sloc }
-    | _ -> make_Pexpr_tuple ~loc_:(i $sloc) bs
-  }
-  | "(" expr=expr ty=annot ")"
-    { Parsing_syntax.Pexpr_constraint {loc_=(i $sloc); expr; ty} }
   | "[" es = list_commas(spreadable_elem) "]" { (make_Pexpr_array ~loc_:(i $sloc) es) }
+  | tuple_expr { $1 }
 
 %inline label:
   name = LIDENT { { Parsing_syntax.label_name = name; loc_=(i $loc) } }
@@ -1253,8 +1406,6 @@ type_decl_binder:
   | "_" { { Parsing_syntax.tvar_name = None; loc_ = (i $loc) } }
 tvar_constraint:
   | qual_ident_ty { { Parsing_syntax.tvc_trait = $1; loc_ = i $sloc } }
-  /* special case for Error? */
-  | id=UIDENT "?" { { Parsing_syntax.tvc_trait = Lident (id ^ "?"); loc_ = i $sloc } }
 %inline var:
   name = qual_ident { { Parsing_syntax.var_name = name; loc_=(i $loc) } }
 
@@ -1284,13 +1435,15 @@ simple_constant:
   | BYTES { Parsing_syntax.Const_bytes $1 }
   | CHAR { Parsing_syntax.Const_char $1 }
   | INT { Parsing_util.make_int $1 }
+  | DOUBLE { Parsing_util.make_double $1 }
   | FLOAT { Parsing_util.make_float $1 }
   | STRING { Parsing_syntax.Const_string $1 }
 
 map_syntax_key:
   | simple_constant { $1 }
   | MINUS INT { Parsing_util.make_int ("-" ^ $2) }
-  | MINUS FLOAT { Parsing_syntax.Const_double ("-" ^ $2) }
+  | MINUS DOUBLE { Parsing_util.make_double ("-" ^ $2) }
+  | MINUS FLOAT { Parsing_util.make_float ("-" ^ $2) }
 
 %inline loced_string:
   | STRING { {Rloc.v = $1; loc_ = i $sloc}}
@@ -1379,9 +1532,11 @@ simple_pattern:
   | CHAR { make_Ppat_constant ~loc_:(i $sloc) (Const_char $1) }
   | INT { (make_Ppat_constant ~loc_:(i $sloc) (Parsing_util.make_int $1)) }
   | BYTE { (make_Ppat_constant ~loc_:(i $sloc) (Const_byte $1)) }
-  | FLOAT { (make_Ppat_constant ~loc_:(i $sloc) (Const_double $1)) }
+  | DOUBLE { (make_Ppat_constant ~loc_:(i $sloc) (Const_double $1)) }
+  | FLOAT { (make_Ppat_constant ~loc_:(i $sloc) (Parsing_util.make_float $1)) }
   | "-" INT { (make_Ppat_constant ~loc_:(i $sloc) (Parsing_util.make_int ("-" ^ $2))) }
-  | "-" FLOAT { (make_Ppat_constant ~loc_:(i $sloc) (Const_double ("-" ^ $2))) }
+  | "-" DOUBLE { (make_Ppat_constant ~loc_:(i $sloc) (Parsing_util.make_double ("-" ^ $2))) }
+  | "-" FLOAT { (make_Ppat_constant ~loc_:(i $sloc) (Parsing_util.make_float ("-" ^ $2))) }
   | STRING { (make_Ppat_constant ~loc_:(i $sloc) (Const_string $1)) }
   | BYTES { (make_Ppat_constant ~loc_:(i $sloc) (Const_bytes $1)) }
   | UNDERSCORE { Ppat_any {loc_ = i $sloc } }
@@ -1432,12 +1587,45 @@ array_sub_patterns:
   // optional trailing comma
   | b=dotdot_binder ioption(",") { Open([], [], b) }
 
-return_type:
-  | t=type_ %prec prec_type { (t, No_error_typ) }
-  | t1=type_ "!" { (t1, Default_error_typ { loc_ = i $loc($2) }) }
-  | t1=type_ "!" tys=separated_nonempty_list("+", error_type) {
-    (t1, Error_typ { tys })
+error_annotation:
+  | "raise" {
+    Parsing_syntax.Default_error_typ { loc_ = i $loc($1); is_old_syntax_ = false }
   }
+  | "raise" ty=error_type {
+    Parsing_syntax.Error_typ { ty; is_old_syntax_ = false }
+  }
+  | "noraise" { Noraise { loc_ = i $sloc } }
+  | "raise" "?" {
+    let fake_error : Parsing_syntax.typ =
+      Ptype_name
+        { constr_id = { lid = Lident "Error"; loc_ = i $sloc }
+        ; tys = []
+        ; loc_ = i $sloc
+        }
+    in
+    Parsing_syntax.Maybe_error { ty = fake_error; is_old_syntax_ = false }
+  }
+
+return_type:
+  | t=type_ { t, No_error_typ }
+  | t1=simple_type "!" {
+    t1, Default_error_typ { loc_ = i $loc($2); is_old_syntax_ = true }
+  }
+  | t1=simple_type "!" ty=error_type {
+    t1, Error_typ { ty; is_old_syntax_ = true }
+  }
+  | ret=simple_type "?" err=error_type {
+      ret, Maybe_error { ty = err; is_old_syntax_ = true }
+  }
+  | ret=simple_type err=error_annotation { ret, err }
+
+func_return_type:
+  | "->" ret=return_type {
+    let return_type, error_type = ret in
+    Some return_type, error_type
+  }
+  | err=error_annotation { None, err }
+  | /* empty */ { None, No_error_typ }
 
 error_type:
   | lid=qual_ident_ty {
@@ -1448,10 +1636,20 @@ error_type:
     (Ptype_any { loc_ = i $sloc } : Parsing_syntax.typ)
   }
 
-type_:
-  | ty=type_ "?" { make_Ptype_option ~loc_:(i $sloc) ~constr_loc:(i $loc($2)) ty }
+simple_type:
+  | ty=simple_type "?" { make_Ptype_option ~loc_:(i $sloc) ~constr_loc:(i $loc($2)) ty }
   (* The tuple requires at least two elements, so non_empty_list_commas is used *)
   | "(" t=type_ "," ts=non_empty_list_commas(type_) ")" { (make_Ptype_tuple ~loc_:(i $sloc) (t::ts)) }
+  | "(" t=type_ ")" { t }
+  | id=qual_ident_ty_inline params=optional_type_arguments %prec prec_lower_than_as {
+    Ptype_name {loc_ = (i $sloc) ;  constr_id = {lid=id;loc_=(i $loc(id))} ; tys =  params} }
+  | "&" lid=qual_ident_ty {
+    Ptype_object { lid; loc_ = i $loc(lid) }
+  }
+  | "_" { Parsing_syntax.Ptype_any {loc_ = i $sloc } }
+
+type_:
+  | ty=simple_type { ty }
   (* Arrow type input is not a tuple, it does not have arity restriction *)
   | is_async=is_async "(" t=type_ "," ts=ioption(non_empty_list_commas(type_)) ")" "->" rty=return_type {
     let (ty_res, ty_err) = rty in
@@ -1462,24 +1660,16 @@ type_:
       let (ty_res, ty_err) = rty in
       Ptype_arrow { loc_ = i $sloc ; ty_arg = [] ; ty_res; ty_err; is_async }
     }
-  | "(" t=type_ ")" { t }
   | is_async=is_async "(" t=type_ ")""->"  rty=return_type
       {
         let (ty_res, ty_err) = rty in
-        Ptype_arrow { loc_=i($sloc); ty_arg=[t]; ty_res; ty_err; is_async }
+        Parsing_syntax.Ptype_arrow { loc_=i($sloc); ty_arg=[t]; ty_res; ty_err; is_async }
       }
-  // | "(" type_ ")" { $2 }
-  | id=qual_ident_ty params=optional_type_arguments {
-    Ptype_name {loc_ = (i $sloc) ;  constr_id = {lid=id;loc_=(i $loc(id))} ; tys =  params} }
-  | "&" lid=qual_ident_ty {
-    Ptype_object { lid; loc_ = i $loc(lid) }
-  }
-  | "_" { Parsing_syntax.Ptype_any {loc_ = i $sloc } }
 
 
 record_decl_field:
   | field_vis=visibility mutflag=option("mut") name=LIDENT ":" ty=type_ {
-    {Parsing_syntax.field_name = {Parsing_syntax.label = name; loc_ = i $loc(name)}; field_ty = ty; field_mut = mutflag <> None; field_vis; field_loc_ = i $sloc;}
+    {Parsing_syntax.field_name = {Parsing_syntax.label = name; loc_ = i $loc(name)}; field_ty = ty; field_mut = mutflag <> None; field_vis; field_loc_ = i $sloc; field_doc = Docstring.empty }
   }
 
 constructor_param:
@@ -1497,7 +1687,7 @@ enum_constructor:
     constr_args=option(delimited("(", non_empty_list_commas(constructor_param), ")"))
     constr_tag=option(eq_int_tag) {
     let constr_name : Parsing_syntax.constr_name = { name = id; loc_ = i $loc(id) } in
-    {Parsing_syntax.constr_name; constr_args; constr_tag; constr_loc_ = i $sloc;}
+    {Parsing_syntax.constr_name; constr_args; constr_tag; constr_loc_ = i $sloc; constr_doc = Docstring.empty }
   }
 
 %inline eq_int_tag:
