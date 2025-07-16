@@ -920,6 +920,8 @@
                   "name": "Nil",
                   "loc": null
                 },
+                "args": null,
+                "tag": null,
                 "loc": null
               },
               {
@@ -945,7 +947,8 @@
                       "1": [],
                       "loc": null
                     },
-                    "mut_": false
+                    "mut_": false,
+                    "label": null
                   },
                   {
                     "type": "ConstrParam",
@@ -976,9 +979,11 @@
                       ],
                       "loc": null
                     },
-                    "mut_": false
+                    "mut_": false,
+                    "label": null
                   }
                 ],
+                "tag": null,
                 "loc": null
               }
             ]

@@ -458,6 +458,8 @@ test "exception_decl to_json" {
       {
         "type": "ConstrDecl",
         "name": { "type": "ConstrName", "name": "TestConstr", "loc": null },
+        "args": null,
+        "tag": null,
         "loc": null,
       },
     ],
@@ -834,6 +836,7 @@ test "case to_json" {
   @json.inspect(case_without_guard, content={
     "type": "Case",
     "pattern": { "type": "Any", "loc": null },
+    "guard_": null,
     "body": { "type": "Unit_", "loc": null, "faked": false },
   })
 }
@@ -965,6 +968,7 @@ test "func to_json" {
         {
           "type": "MultiArgCase",
           "patterns": [{ "type": "Any", "loc": null }],
+          "guard_": null,
           "body": { "type": "Unit_", "loc": null, "faked": false },
         },
       ],
@@ -1300,6 +1304,7 @@ test "expr complex types to_json" {
         {
           "type": "Case",
           "pattern": { "type": "Any", "loc": null },
+          "guard_": null,
           "body": { "type": "Unit_", "loc": null, "faked": false },
         },
       ],
@@ -1639,6 +1644,7 @@ test "constr_param to_json" {
       "loc": null,
     },
     "mut_": true,
+    "label": null,
   })
 }
 
@@ -1694,6 +1700,8 @@ test "constr_decl to_json" {
   @json.inspect(constr_without_args, content={
     "type": "ConstrDecl",
     "name": { "type": "ConstrName", "name": "TestConstructor", "loc": null },
+    "args": null,
+    "tag": null,
     "loc": null,
   })
 }
@@ -1750,6 +1758,7 @@ test "type_decl_binder to_json" {
   })
   @json.inspect(binder_without_name, content={
     "type": "TypeDeclBinder",
+    "name": null,
     "loc": null,
   })
 }
@@ -1768,6 +1777,7 @@ test "alias_target to_json" {
   @json.inspect(alias_without_target, content={
     "type": "AliasTarget",
     "binder": { "type": "Binder", "name": "test_binder", "loc": null },
+    "target": null,
   })
 }
 
@@ -2099,6 +2109,7 @@ test "trait_method_decl to_json" {
   @json.inspect(trait_method, content={
     "type": "TraitMethodDecl",
     "name": { "type": "Binder", "name": "trait_method", "loc": null },
+    "has_error": null,
     "is_async": false,
     "quantifiers": [
       { "type": "TypeVarBinder", "name": "T", "constraints": [], "loc": null },
@@ -2181,10 +2192,13 @@ test "trait_decl to_json" {
       {
         "type": "TraitMethodDecl",
         "name": { "type": "Binder", "name": "method", "loc": null },
+        "has_error": null,
         "is_async": false,
         "quantifiers": [],
         "params": [],
+        "return_type": null,
         "error_type": { "type": "NoErrorType" },
+        "has_default": null,
         "loc": null,
       },
     ],
@@ -2244,7 +2258,7 @@ test "impl variants to_json" {
     content={
       "type": "TopTest",
       "expr": { "type": "Unit_", "loc": null, "faked": false },
-      "name": [["test_string", null]],
+      "name": ["test_string", null],
       "params": null,
       "local_types": [],
       "loc": null,
@@ -2287,10 +2301,14 @@ test "impl variants to_json" {
     "type": "TopFuncDef",
     "fun_decl": {
       "type": "FunDecl",
+      "type_name": null,
       "name": { "type": "Binder", "name": "test", "loc": null },
+      "has_error": null,
       "is_async": false,
+      "decl_params": null,
       "params_loc": null,
       "quantifiers": [],
+      "return_type": null,
       "error_type": { "type": "NoErrorType" },
       "vis": { "type": "Default" },
       "attrs": [],
