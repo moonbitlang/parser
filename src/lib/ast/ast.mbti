@@ -165,6 +165,7 @@ pub(all) struct ConstrDecl {
   args : @list.T[ConstrParam]?
   tag : (String, @ast_types.Location)?
   loc : @ast_types.Location
+  doc : @ast_types.DocString
 }
 impl ToJson for ConstrDecl
 
@@ -181,7 +182,7 @@ pub(all) struct ConstrName {
 impl ToJson for ConstrName
 
 pub(all) struct ConstrParam {
-  type_ : Type
+  ty : Type
   mut_ : Bool
   label : Label?
 }
@@ -224,7 +225,7 @@ pub(all) enum DotDotBinder {
   Underscore
   NoBinder
   BinderAs(Binder)
-  Binder_(Binder)
+  Binder(Binder)
 }
 impl ToJson for DotDotBinder
 
@@ -235,10 +236,11 @@ pub(all) enum EmbeddedCode {
 impl ToJson for EmbeddedCode
 
 pub(all) enum ErrorType {
-  ErrorType(ty~ : Type, is_old_syntax~ : Bool)
-  DefaultErrorType(@ast_types.Location, is_old_syntax~ : Bool)
+  ErrorType(ty~ : Type)
+  DefaultErrorType(loc~ : @ast_types.Location)
   NoErrorType
-  MaybeError(Type, is_old_syntax~ : Bool)
+  Noraise(loc~ : @ast_types.Location)
+  MaybeError(ty~ : Type)
 }
 impl ToJson for ErrorType
 
@@ -253,7 +255,7 @@ pub(all) enum Expr {
   Apply(func~ : Expr, args~ : @list.T[Argument], attr~ : ApplyAttr, loc~ : @ast_types.Location)
   Infix(op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @ast_types.Location)
   Unary(op~ : Var, expr~ : Expr, loc~ : @ast_types.Location)
-  Array_(exprs~ : @list.T[Expr], loc~ : @ast_types.Location)
+  Array(exprs~ : @list.T[Expr], loc~ : @ast_types.Location)
   ArraySpread(elems~ : @list.T[SpreadableElem], loc~ : @ast_types.Location)
   ArrayGet(array~ : Expr, index~ : Expr, loc~ : @ast_types.Location)
   ArrayGetSlice(array~ : Expr, start_index~ : Expr?, end_index~ : Expr?, index_loc~ : @ast_types.Location, loc~ : @ast_types.Location)
@@ -265,7 +267,7 @@ pub(all) enum Expr {
   Constraint(expr~ : Expr, ty~ : Type, loc~ : @ast_types.Location)
   Constr(constr~ : Constructor, loc~ : @ast_types.Location)
   While(loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @ast_types.Location)
-  Function_(func~ : Func, loc~ : @ast_types.Location)
+  Function(func~ : Func, loc~ : @ast_types.Location)
   Ident(id~ : Var, loc~ : @ast_types.Location)
   If(cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @ast_types.Location)
   Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @ast_types.Location)
@@ -287,10 +289,10 @@ pub(all) enum Expr {
   LetMut(binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @ast_types.Location)
   Pipe(lhs~ : Expr, rhs~ : Expr, loc~ : @ast_types.Location)
   Assign(var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @ast_types.Location)
-  Hole_(loc~ : @ast_types.Location, kind~ : Hole)
+  Hole(loc~ : @ast_types.Location, kind~ : Hole)
   Return(return_value~ : Expr?, loc~ : @ast_types.Location)
   Raise(err_value~ : Expr, loc~ : @ast_types.Location)
-  Unit_(loc~ : @ast_types.Location, faked~ : Bool)
+  Unit(loc~ : @ast_types.Location, faked~ : Bool)
   Break(arg~ : Expr?, label~ : Label?, loc~ : @ast_types.Location)
   Continue(args~ : @list.T[Expr], label~ : Label?, loc~ : @ast_types.Location)
   Loop(args~ : @list.T[Expr], body~ : @list.T[MultiArgCase], label~ : Label?, loop_loc~ : @ast_types.Location, loc~ : @ast_types.Location)
@@ -306,7 +308,7 @@ impl ToJson for Expr
 
 pub(all) struct FieldDecl {
   name : FieldName
-  type_ : Type
+  ty : Type
   mut_ : Bool
   vis : Visibility
   loc : @ast_types.Location
@@ -322,7 +324,7 @@ pub(all) struct FieldDef {
 impl ToJson for FieldDef
 
 pub(all) struct FieldName {
-  name : String
+  label : String
   loc : @ast_types.Location
 }
 impl ToJson for FieldName
@@ -371,8 +373,8 @@ pub(all) enum FuncStubs {
 impl ToJson for FuncStubs
 
 pub(all) enum Group {
-  GroupBrace
-  GroupParen
+  Brace
+  Paren
 }
 impl ToJson for Group
 
@@ -401,9 +403,9 @@ pub(all) enum Impl {
 impl ToJson for Impl
 
 pub(all) enum InterpElem {
-  InterpLit(repr~ : String, loc~ : @ast_types.Location)
-  InterpExpr(expr~ : Expr, loc~ : @ast_types.Location)
-  InterpSource(@ast_types.InterpSource)
+  Literal(repr~ : String, loc~ : @ast_types.Location)
+  Expr(expr~ : Expr, loc~ : @ast_types.Location)
+  Source(@ast_types.InterpSource)
 }
 impl ToJson for InterpElem
 
@@ -457,8 +459,8 @@ pub(all) struct MultiArgCase {
 impl ToJson for MultiArgCase
 
 pub(all) enum MultilineStringElem {
-  MultilineString(String)
-  MultilineInterp(@list.T[InterpElem])
+  String(String)
+  Interp(@list.T[InterpElem])
 }
 impl ToJson for MultilineStringElem
 
@@ -474,7 +476,7 @@ impl ToJson for Parameter
 pub(all) enum Pattern {
   Alias(pat~ : Pattern, alias_~ : Binder, loc~ : @ast_types.Location)
   Any(loc~ : @ast_types.Location)
-  Array_(pats~ : ArrayPatterns, loc~ : @ast_types.Location)
+  Array(pats~ : ArrayPatterns, loc~ : @ast_types.Location)
   Constant(c~ : Constant, loc~ : @ast_types.Location)
   Constraint(pat~ : Pattern, ty~ : Type, loc~ : @ast_types.Location)
   Constr(constr~ : Constructor, args~ : @list.T[ConstrPatArg]?, is_open~ : Bool, loc~ : @ast_types.Location)
@@ -488,34 +490,34 @@ pub(all) enum Pattern {
 impl ToJson for Pattern
 
 pub(all) enum SpreadableElem {
-  ElemRegular(Expr)
-  ElemSpread(expr~ : Expr, loc~ : @ast_types.Location)
+  Regular(Expr)
+  Spread(expr~ : Expr, loc~ : @ast_types.Location)
 }
 impl ToJson for SpreadableElem
 
 pub(all) struct StaticAssertion {
-  assert_type : Type
-  assert_trait : LongIdent
-  assert_loc : @ast_types.Location
-  assert_msg : String
+  ty : Type
+  trait_ : LongIdent
+  loc : @ast_types.Location
+  msg : String
 }
 impl ToJson for StaticAssertion
 
 pub(all) enum TrailingMark {
-  TrailingComma
-  TrailingSemi
-  TrailingNone
+  Comma
+  Semi
+  None
 }
 impl ToJson for TrailingMark
 
 pub(all) struct TraitDecl {
-  trait_name : Binder
-  trait_supers : @list.T[TypeVarConstraint]
-  trait_methods : @list.T[TraitMethodDecl]
-  trait_vis : Visibility
-  trait_loc : @ast_types.Location
-  trait_attrs : @list.T[@ast_types.Attribute]
-  mut trait_doc : @ast_types.DocString
+  name : Binder
+  supers : @list.T[TypeVarConstraint]
+  methods : @list.T[TraitMethodDecl]
+  vis : Visibility
+  loc : @ast_types.Location
+  attrs : @list.T[@ast_types.Attribute]
+  mut doc : @ast_types.DocString
 }
 impl ToJson for TraitDecl
 
@@ -533,12 +535,12 @@ pub(all) struct TraitMethodDecl {
 impl ToJson for TraitMethodDecl
 
 pub(all) enum Type {
-  TAny(@ast_types.Location)
-  TArrow(args~ : @list.T[Type], res~ : Type, err~ : ErrorType, is_async~ : Bool, loc~ : @ast_types.Location)
-  TTuple(@list.T[Type], loc~ : @ast_types.Location)
-  TName(ConstrId, @list.T[Type], loc~ : @ast_types.Location)
-  TOption(Type, loc~ : @ast_types.Location, question_loc~ : @ast_types.Location)
-  TObject(ConstrId)
+  Any(loc~ : @ast_types.Location)
+  Arrow(args~ : @list.T[Type], res~ : Type, err~ : ErrorType, is_async~ : Bool, loc~ : @ast_types.Location)
+  Tuple(tys~ : @list.T[Type], loc~ : @ast_types.Location)
+  Name(constr_id~ : ConstrId, tys~ : @list.T[Type], loc~ : @ast_types.Location)
+  Option(ty~ : Type, loc~ : @ast_types.Location, question_loc~ : @ast_types.Location)
+  Object(ConstrId)
 }
 impl ToJson for Type
 
@@ -552,7 +554,6 @@ pub(all) struct TypeDecl {
   type_vis : Visibility
   deriving : @list.T[DerivingDirective]
   loc : @ast_types.Location
-  deprecated_type_bang : Bool
 }
 impl ToJson for TypeDecl
 

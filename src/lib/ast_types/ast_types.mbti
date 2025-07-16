@@ -50,6 +50,7 @@ pub(all) struct DocString {
   content : @list.T[String]
   loc : Location
 }
+fn DocString::empty() -> Self
 impl ToJson for DocString
 
 pub(all) enum InterpElem {
