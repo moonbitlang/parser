@@ -22,8 +22,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -31,10 +31,10 @@
                   },
                   "loc": null
                 },
-                "1": [
+                "tys": [
                   {
-                    "type": "TName",
-                    "0": {
+                    "type": "Type::Name",
+                    "constr_id": {
                       "type": "ConstrId",
                       "id": {
                         "type": "Ident",
@@ -42,7 +42,7 @@
                       },
                       "loc": null
                     },
-                    "1": [],
+                    "tys": [],
                     "loc": null
                   }
                 ],
@@ -52,8 +52,8 @@
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -61,11 +61,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -86,8 +86,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -95,15 +95,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -111,11 +111,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -136,8 +136,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -145,10 +145,10 @@
                   },
                   "loc": null
                 },
-                "1": [
+                "tys": [
                   {
-                    "type": "TName",
-                    "0": {
+                    "type": "Type::Name",
+                    "constr_id": {
                       "type": "ConstrId",
                       "id": {
                         "type": "Ident",
@@ -156,7 +156,7 @@
                       },
                       "loc": null
                     },
-                    "1": [],
+                    "tys": [],
                     "loc": null
                   }
                 ],
@@ -166,8 +166,8 @@
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -175,11 +175,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -205,8 +205,8 @@
                 "loc": null
               },
               "1": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -214,15 +214,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -230,11 +230,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -252,7 +252,7 @@
           },
           "type_params": [],
           "components": {
-            "type": "Abstract"
+            "type": "TypeDesc::Abstract"
           },
           "vis": {
             "type": "Default"
@@ -278,8 +278,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -287,15 +287,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -303,11 +303,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -332,8 +332,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -341,15 +341,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -357,11 +357,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -386,8 +386,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -395,15 +395,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -411,11 +411,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -440,8 +440,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -449,15 +449,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -465,11 +465,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -494,8 +494,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -503,15 +503,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -519,11 +519,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -548,8 +548,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -557,15 +557,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -573,15 +573,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -589,11 +589,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -618,8 +618,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -627,15 +627,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -643,15 +643,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -659,11 +659,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -688,8 +688,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -697,15 +697,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Dot",
@@ -714,15 +714,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -730,11 +730,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -759,8 +759,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -768,15 +768,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -784,15 +784,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -800,11 +800,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -829,8 +829,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -838,15 +838,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -854,15 +854,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -870,11 +870,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -899,8 +899,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -908,15 +908,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -924,15 +924,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -940,11 +940,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -969,8 +969,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -978,15 +978,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -994,15 +994,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1010,11 +1010,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1039,8 +1039,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1048,15 +1048,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1064,15 +1064,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1080,11 +1080,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1109,8 +1109,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1118,15 +1118,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1134,15 +1134,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1150,11 +1150,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1179,8 +1179,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1188,15 +1188,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1204,15 +1204,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1220,11 +1220,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1249,8 +1249,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1258,15 +1258,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1274,15 +1274,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1290,11 +1290,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1319,8 +1319,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1328,15 +1328,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1344,10 +1344,10 @@
                   },
                   "loc": null
                 },
-                "1": [
+                "tys": [
                   {
-                    "type": "TName",
-                    "0": {
+                    "type": "Type::Name",
+                    "constr_id": {
                       "type": "ConstrId",
                       "id": {
                         "type": "Ident",
@@ -1355,7 +1355,7 @@
                       },
                       "loc": null
                     },
-                    "1": [],
+                    "tys": [],
                     "loc": null
                   }
                 ],
@@ -1365,8 +1365,8 @@
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1374,11 +1374,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1403,8 +1403,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1412,14 +1412,14 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TObject",
+                "type": "Type::Object",
                 "0": {
                   "type": "ConstrId",
                   "id": {
@@ -1433,8 +1433,8 @@
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1442,11 +1442,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1471,8 +1471,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1480,15 +1480,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Dot",
@@ -1497,15 +1497,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1513,11 +1513,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1542,8 +1542,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1551,15 +1551,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1567,15 +1567,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1583,11 +1583,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1612,8 +1612,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1621,15 +1621,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1637,15 +1637,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1653,11 +1653,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1682,8 +1682,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1691,15 +1691,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1707,15 +1707,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1723,11 +1723,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1752,8 +1752,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1761,15 +1761,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -1777,15 +1777,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -1793,11 +1793,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []
@@ -1812,8 +1812,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -1821,7 +1821,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -1842,8 +1842,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -1851,7 +1851,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -1876,8 +1876,8 @@
           },
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -1885,7 +1885,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "vis": {

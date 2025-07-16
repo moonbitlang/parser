@@ -15,8 +15,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -24,15 +24,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -40,11 +40,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": []

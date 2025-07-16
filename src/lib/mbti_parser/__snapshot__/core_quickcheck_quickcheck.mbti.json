@@ -24,8 +24,8 @@
                 "loc": null
               },
               "1": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -33,7 +33,7 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             },
@@ -45,8 +45,8 @@
                 "loc": null
               },
               "1": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Dot",
@@ -55,15 +55,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -71,11 +71,11 @@
                 },
                 "loc": null
               },
-              "1": [],
+              "tys": [],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": [
@@ -112,8 +112,8 @@
             {
               "$tag": "Positional",
               "0": {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -121,15 +121,15 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             }
           ],
           "return_": [
             {
-              "type": "TName",
-              "0": {
+              "type": "Type::Name",
+              "constr_id": {
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
@@ -137,10 +137,10 @@
                 },
                 "loc": null
               },
-              "1": [
+              "tys": [
                 {
-                  "type": "TName",
-                  "0": {
+                  "type": "Type::Name",
+                  "constr_id": {
                     "type": "ConstrId",
                     "id": {
                       "type": "Ident",
@@ -148,14 +148,14 @@
                     },
                     "loc": null
                   },
-                  "1": [],
+                  "tys": [],
                   "loc": null
                 }
               ],
               "loc": null
             },
             {
-              "type": "NoErrorType"
+              "type": "ErrorType::NoErrorType"
             }
           ],
           "type_params": [
@@ -198,8 +198,8 @@
                 {
                   "$tag": "Positional",
                   "0": {
-                    "type": "TName",
-                    "0": {
+                    "type": "Type::Name",
+                    "constr_id": {
                       "type": "ConstrId",
                       "id": {
                         "type": "Ident",
@@ -207,15 +207,15 @@
                       },
                       "loc": null
                     },
-                    "1": [],
+                    "tys": [],
                     "loc": null
                   }
                 },
                 {
                   "$tag": "Positional",
                   "0": {
-                    "type": "TName",
-                    "0": {
+                    "type": "Type::Name",
+                    "constr_id": {
                       "type": "ConstrId",
                       "id": {
                         "type": "Dot",
@@ -224,7 +224,7 @@
                       },
                       "loc": null
                     },
-                    "1": [],
+                    "tys": [],
                     "loc": null
                   }
                 }
@@ -232,8 +232,8 @@
               "has_default": false,
               "return_": [
                 {
-                  "type": "TName",
-                  "0": {
+                  "type": "Type::Name",
+                  "constr_id": {
                     "type": "ConstrId",
                     "id": {
                       "type": "Ident",
@@ -241,11 +241,11 @@
                     },
                     "loc": null
                   },
-                  "1": [],
+                  "tys": [],
                   "loc": null
                 },
                 {
-                  "type": "NoErrorType"
+                  "type": "ErrorType::NoErrorType"
                 }
               ]
             }
@@ -266,8 +266,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -275,7 +275,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -296,8 +296,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -305,7 +305,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -326,8 +326,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -335,7 +335,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -356,8 +356,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -365,7 +365,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -386,8 +386,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -395,7 +395,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -416,8 +416,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -425,7 +425,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -446,8 +446,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -455,7 +455,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -476,8 +476,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -485,7 +485,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -506,8 +506,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -515,7 +515,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -536,8 +536,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -545,7 +545,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -566,8 +566,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -575,7 +575,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -596,8 +596,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -605,7 +605,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -642,8 +642,8 @@
             }
           ],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -651,10 +651,10 @@
               },
               "loc": null
             },
-            "1": [
+            "tys": [
               {
-                "type": "TName",
-                "0": {
+                "type": "Type::Name",
+                "constr_id": {
                   "type": "ConstrId",
                   "id": {
                     "type": "Ident",
@@ -662,7 +662,7 @@
                   },
                   "loc": null
                 },
-                "1": [],
+                "tys": [],
                 "loc": null
               }
             ],

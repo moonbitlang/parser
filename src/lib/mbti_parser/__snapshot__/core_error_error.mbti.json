@@ -9,8 +9,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -18,7 +18,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -39,8 +39,8 @@
           "$tag": "Trait",
           "type_params": [],
           "type_": {
-            "type": "TName",
-            "0": {
+            "type": "Type::Name",
+            "constr_id": {
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
@@ -48,7 +48,7 @@
               },
               "loc": null
             },
-            "1": [],
+            "tys": [],
             "loc": null
           },
           "trait_name": {
