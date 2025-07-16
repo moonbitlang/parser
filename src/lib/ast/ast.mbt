@@ -4,7 +4,7 @@ pub(all) enum Visibility {
   Default
   Pub(attr~ : String?, loc~ : Location)
   Priv(loc~ : Location)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -21,40 +21,40 @@ pub(all) enum Constant {
   Double(String)
   String(StringLiteral)
   BigInt(String)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) struct Label {
   name : String
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 pub(all) struct ConstrName {
   name : String
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) enum LongIdent {
   Ident(name~ : String)
   Dot(pkg~ : String, id~ : String)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 pub(all) struct TypeName {
   name : LongIdent
   is_object : Bool
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 pub(all) struct ConstrId {
   id : LongIdent
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -71,7 +71,7 @@ pub(all) enum Type {
   TName(ConstrId, @list.T[Type], loc~ : Location)
   TOption(Type, loc~ : Location, question_loc~ : Location)
   TObject(ConstrId)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -80,7 +80,7 @@ pub(all) enum ErrorType {
   DefaultErrorType(Location, is_old_syntax~ : Bool)
   NoErrorType
   MaybeError(Type, is_old_syntax~ : Bool)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -88,7 +88,7 @@ pub(all) struct ConstrParam {
   type_ : Type
   mut_ : Bool
   label : Label?
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -97,7 +97,7 @@ pub(all) struct ConstrDecl {
   args : @list.T[ConstrParam]?
   tag : (String, Location)?
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -105,13 +105,13 @@ pub(all) enum ExceptionDecl {
   NoPayload
   SinglePayload(Type)
   EnumPayload(@list.T[ConstrDecl])
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 pub(all) struct FieldName {
   name : String
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -121,7 +121,7 @@ pub(all) struct FieldDecl {
   mut_ : Bool
   vis : Visibility
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -133,7 +133,7 @@ pub(all) enum TypeDesc {
   Variant(@list.T[ConstrDecl])
   Record(@list.T[FieldDecl])
   Alias(Type)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -141,7 +141,7 @@ pub(all) enum Hole {
   Synthesized
   Incomplete
   Todo
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -151,7 +151,7 @@ pub(all) enum ArgumentKind {
   LabelledPun(Label)
   LabelledOption(label~ : Label, question_loc~ : Location)
   LabelledOptionPun(label~ : Label, question_loc~ : Location)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -159,14 +159,14 @@ pub(all) enum FnKind {
   Lambda
   Matrix
   Arrow
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) enum Group {
   GroupBrace
   GroupParen
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -174,7 +174,7 @@ pub(all) enum TrailingMark {
   TrailingComma
   TrailingSemi
   TrailingNone
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -182,14 +182,14 @@ pub(all) enum ApplyAttr {
   NoAttr
   Exclamation
   Question
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) struct TypeVarConstraint {
   trait_ : LongIdent
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -197,28 +197,28 @@ pub(all) struct TypeVarBinder {
   name : String
   constraints : @list.T[TypeVarConstraint]
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) struct TypeDeclBinder {
   name : String?
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) struct Binder {
   name : String
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) struct Var {
   name : LongIdent
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -226,7 +226,7 @@ pub(all) enum ConstructorExtraInfo {
   TypeName(TypeName)
   Package(String)
   NoExtraInfo
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -234,7 +234,7 @@ pub(all) struct Constructor {
   name : ConstrName
   extra_info : ConstructorExtraInfo
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -242,21 +242,21 @@ pub(all) enum Accessor {
   Label(Label)
   Index(tuple_index~ : Int, loc~ : Location)
   Newtype(loc~ : Location)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) struct AliasTarget {
   binder : Binder
   target : Label?
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) struct Argument {
   value : Expr
   kind : ArgumentKind
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -266,7 +266,7 @@ pub(all) enum Parameter {
   Labelled(binder~ : Binder, ty~ : Type?)
   Optional(binder~ : Binder, default~ : Expr, ty~ : Type?)
   QuestionOptional(binder~ : Binder, ty~ : Type?)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -278,7 +278,7 @@ pub(all) struct Case {
   pattern : Pattern
   guard_ : Expr?
   body : Expr
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -286,14 +286,14 @@ pub(all) struct MultiArgCase {
   patterns : @list.T[Pattern]
   guard_ : Expr?
   body : Expr
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) enum SpreadableElem {
   ElemRegular(Expr)
   ElemSpread(expr~ : Expr, loc~ : Location)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -302,7 +302,7 @@ pub(all) struct MapExprElem {
   expr : Expr
   key_loc : Location
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -311,7 +311,7 @@ pub(all) struct StaticAssertion {
   assert_trait : LongIdent
   assert_loc : Location
   assert_msg : String
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -334,7 +334,7 @@ pub(all) enum Func {
     fn_loc~ : Location,
     loc~ : Location
   )
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -343,7 +343,7 @@ pub(all) struct FieldDef {
   expr : Expr
   is_pun : Bool
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -351,14 +351,14 @@ pub(all) enum InterpElem {
   InterpLit(repr~ : StringLiteral, loc~ : Location)
   InterpExpr(expr~ : Expr, loc~ : Location)
   InterpSource(@ast_types.InterpSource)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) enum MultilineStringElem {
   MultilineString(String)
   MultilineInterp(@list.T[InterpElem])
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -508,7 +508,7 @@ pub(all) enum Expr {
   Map(elems~ : @list.T[MapExprElem], loc~ : Location)
   Group(expr~ : Expr, group~ : Group, loc~ : Location)
   StaticAssert(asserts~ : @list.T[StaticAssertion], body~ : Expr)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -517,7 +517,7 @@ pub(all) enum DotDotBinder {
   NoBinder
   BinderAs(Binder)
   Binder_(Binder)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -526,14 +526,14 @@ pub(all) enum ArrayPattern {
   StringSpread(StringLiteral)
   BytesSpread(BytesLiteral)
   ConstSpread(binder~ : Binder, pkg~ : String?, loc~ : Location)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) enum ArrayPatterns {
   Closed(@list.T[ArrayPattern])
   Open(@list.T[ArrayPattern], @list.T[ArrayPattern], DotDotBinder)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -542,14 +542,14 @@ pub(all) struct FieldPat {
   pattern : Pattern
   is_pun : Bool
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) struct ConstrPatArg {
   pat : Pattern
   kind : ArgumentKind
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -559,7 +559,7 @@ pub(all) struct MapPatElem {
   match_absent : Bool
   key_loc : Location
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -581,7 +581,7 @@ pub(all) enum Pattern {
   Record(fields~ : @list.T[FieldPat], is_closed~ : Bool, loc~ : Location)
   Map(elems~ : @list.T[MapPatElem], is_closed~ : Bool, loc~ : Location)
   Range(lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : Location)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -594,7 +594,7 @@ pub(all) struct LocalTypeDecl {
   tycon_loc : Location
   components : TypeDesc
   deriving : @list.T[DerivingDirective]
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -602,7 +602,7 @@ pub(all) struct DerivingDirective {
   type_name : TypeName
   args : @list.T[Argument]
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -617,28 +617,28 @@ pub(all) struct TypeDecl {
   deriving : @list.T[DerivingDirective]
   loc : Location
   deprecated_type_bang : Bool
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) enum FuncStubs {
   Import(module_name~ : StringLiteral, func_name~ : StringLiteral)
   Embedded(language~ : StringLiteral?, code~ : EmbeddedCode)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) enum EmbeddedCode {
   CodeString(StringLiteral)
   CodeMultilineString(@list.T[String])
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
 pub(all) enum DeclBody {
   DeclBody(local_types~ : @list.T[LocalTypeDecl], expr~ : Expr)
   DeclStubs(FuncStubs)
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -655,7 +655,7 @@ pub(all) struct FunDecl {
   vis : Visibility
   attrs : @list.T[Attribute]
   mut doc : DocString
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 /// checked!
@@ -669,7 +669,7 @@ pub(all) struct TraitMethodDecl {
   error_type : ErrorType
   has_default : Location?
   loc : Location
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -681,7 +681,7 @@ pub(all) struct TraitDecl {
   trait_loc : Location
   trait_attrs : @list.T[Attribute]
   mut trait_doc : DocString
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 // checked!
@@ -786,7 +786,7 @@ pub(all) enum Impl {
     loc~ : Location,
     mut doc~ : DocString
   )
-} derive(ToJson(repr(tag="type")))
+}
 
 ///|
 pub typealias @list.T[Impl] as Impls
