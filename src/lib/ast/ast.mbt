@@ -673,15 +673,6 @@ pub(all) enum Impl {
     mut doc~ : DocString
   )
   TopTrait(TraitDecl)
-  TopLegacyTypeAlias(
-    binder~ : Type,
-    target~ : Type,
-    vis~ : Visibility,
-    deriving~ : @list.T[DerivingDirective],
-    loc~ : Location,
-    attrs~ : @list.T[Attribute],
-    mut doc~ : DocString
-  )
   TopBatchTypeAlias(
     pkg~ : Label?,
     targets~ : @list.T[AliasTarget],
@@ -698,7 +689,6 @@ pub(all) enum Impl {
     loc~ : Location,
     attrs~ : @list.T[Attribute],
     is_list~ : Bool,
-    is_old_syntax~ : Bool,
     mut doc~ : DocString
   )
   TopImpl(

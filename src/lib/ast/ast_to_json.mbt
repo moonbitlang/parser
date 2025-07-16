@@ -1187,17 +1187,6 @@ pub impl ToJson for Impl with to_json(self) {
       }
     TopTrait(trait_decl) =>
       { "type": "Impl::TopTrait", "trait_decl": trait_decl }
-    TopLegacyTypeAlias(binder~, target~, vis~, deriving~, loc~, attrs~, doc~) =>
-      {
-        "type": "Impl::TopLegacyTypeAlias",
-        "binder": binder,
-        "target": target,
-        "vis": vis,
-        "deriving": list_to_json(deriving),
-        "loc": loc,
-        "attrs": list_to_json(attrs),
-        "doc": doc,
-      }
     TopBatchTypeAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
       {
         "type": "Impl::TopBatchTypeAlias",
@@ -1209,16 +1198,7 @@ pub impl ToJson for Impl with to_json(self) {
         "is_list": is_list,
         "doc": doc,
       }
-    TopBatchTraitAlias(
-      pkg~,
-      targets~,
-      vis~,
-      loc~,
-      attrs~,
-      is_list~,
-      is_old_syntax~,
-      doc~
-    ) =>
+    TopBatchTraitAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
       {
         "type": "Impl::TopBatchTraitAlias",
         "pkg": option_to_json(pkg),
@@ -1227,7 +1207,6 @@ pub impl ToJson for Impl with to_json(self) {
         "loc": loc,
         "attrs": list_to_json(attrs),
         "is_list": is_list,
-        "is_old_syntax": is_old_syntax,
         "doc": doc,
       }
     TopImpl(
