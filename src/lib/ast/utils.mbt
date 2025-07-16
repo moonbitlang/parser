@@ -28,12 +28,12 @@ pub fn make_array_expr(
   let mut acc : (@list.T[Expr]) -> @list.T[Expr] = fn(lst) { lst }
   for elem in elems {
     match elem {
-      ElemRegular(e) => acc = fn(lst) { acc(lst).add(e) }
-      ElemSpread(_) => return ArraySpread(elems~, loc~)
+      Regular(e) => acc = fn(lst) { acc(lst).add(e) }
+      Spread(_) => return ArraySpread(elems~, loc~)
     }
   } else {
     // If we have only regular elements, create a simple array
-    return Array_(exprs=acc(@list.empty()), loc~)
+    return Array(exprs=acc(@list.empty()), loc~)
   }
 }
 
@@ -43,8 +43,8 @@ pub fn make_interps(
 ) -> @list.T[InterpElem] {
   let result = components.map(fn(lit) {
     match lit {
-      InterpLit(repr, loc) => InterpElem::InterpLit(repr~, loc~)
-      InterpSource(s) => InterpElem::InterpSource(s)
+      InterpLit(repr, loc) => Literal(repr~, loc~)
+      InterpSource(s) => Source(s)
     }
   })
   @list.from_array(result)
@@ -100,7 +100,7 @@ pub fn make_constr_pattern(
 
 ///| Create tuple type
 pub fn make_tuple_type(loc~ : Location, tys : @list.T[Type]) -> Type {
-  TTuple(tys, loc~)
+  Tuple(tys~, loc~)
 }
 
 ///| Create option type
@@ -109,7 +109,7 @@ pub fn make_option_type(
   constr_loc~ : Location,
   ty : Type
 ) -> Type {
-  TOption(ty, loc~, question_loc=constr_loc)
+  Option(ty~, loc~, question_loc=constr_loc)
 }
 
 ///| Create field pattern
@@ -388,11 +388,12 @@ pub fn make_legacy_type_alias(
   doc~ : DocString
 ) -> TypeDecl? {
   match binder_expr {
-    TName({ id: Ident(name=tycon), .. }, tys, loc=tycon_loc) if tys.all(t => t
-        is TName({ id: Ident(..), .. }, tys, ..) &&
-        tys.is_empty()) => {
+    Name(constr_id={ id: Ident(name=tycon), .. }, loc=tycon_loc, tys~) if tys.all(t => t
+          is Name(constr_id={ id: Ident(..), .. }, tys~, ..) &&
+          tys.is_empty(),
+      ) => {
       let params = tys.map(fn(ty) {
-        guard ty is TName({ id: Ident(name~), .. }, _, ..)
+        guard ty is Name(constr_id={ id: Ident(name~), .. }, ..)
         TypeDeclBinder::{ name: Some(name), loc }
       })
       Some(TypeDecl::{
@@ -405,7 +406,6 @@ pub fn make_legacy_type_alias(
         type_vis: vis,
         deriving,
         loc,
-        deprecated_type_bang: false,
       })
     }
     _ => None
@@ -427,7 +427,7 @@ pub fn binder_to_expr(p : Binder) -> Expr {
 pub fn arrow_fn_param_to_expr(p : ArrowFnParam) -> Expr {
   match p {
     Named(b) => binder_to_expr(b)
-    Unnamed(loc) => Hole_(loc~, kind=Hole::Incomplete)
+    Unnamed(loc) => Hole(loc~, kind=Hole::Incomplete)
   }
 }
 
@@ -465,7 +465,7 @@ fn loc_of_expression(expr : Expr) -> Location {
     Apply(func=_, args=_, attr=_, loc~) => loc
     Infix(op=_, lhs=_, rhs=_, loc~) => loc
     Unary(op=_, expr=_, loc~) => loc
-    Array_(exprs=_, loc~) => loc
+    Array(exprs=_, loc~) => loc
     ArraySpread(elems=_, loc~) => loc
     ArrayGet(array=_, index=_, loc~) => loc
     ArrayGetSlice(array=_, start_index=_, end_index=_, index_loc=_, loc~) => loc
@@ -477,7 +477,7 @@ fn loc_of_expression(expr : Expr) -> Location {
     Constraint(expr=_, ty=_, loc~) => loc
     Constr(constr=_, loc~) => loc
     While(loop_cond=_, loop_body=_, while_else=_, label=_, loc~) => loc
-    Function_(func=_, loc~) => loc
+    Function(func=_, loc~) => loc
     Ident(id=_, loc~) => loc
     If(cond=_, ifso=_, ifnot=_, loc~) => loc
     Guard(cond=_, otherwise=_, body=_, loc~) => loc
@@ -499,10 +499,10 @@ fn loc_of_expression(expr : Expr) -> Location {
     LetMut(binder=_, ty=_, expr=_, body=_, loc~) => loc
     Pipe(lhs=_, rhs=_, loc~) => loc
     Assign(var_=_, expr=_, augmented_by=_, loc~) => loc
-    Hole_(loc~, kind=_) => loc
+    Hole(loc~, kind=_) => loc
     Return(return_value=_, loc~) => loc
     Raise(err_value=_, loc~) => loc
-    Unit_(loc~, faked=_) => loc
+    Unit(loc~, faked=_) => loc
     Break(arg=_, label=_, loc~) => loc
     Continue(args=_, label=_, loc~) => loc
     Loop(args=_, body=_, label=_, loop_loc=_, loc~) => loc

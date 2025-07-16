@@ -196,7 +196,7 @@ alias_sig -> AliasSig
   ;
 
 enum_constructor -> ConstrDecl
-  : UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { ConstrDecl::{name: ConstrName::{ name : $1, loc : mk_loc($loc($1)) }, args: $2, tag: $3, loc: mk_loc($sloc)} }
+  : UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { ConstrDecl::{name: ConstrName::{ name : $1, loc : mk_loc($loc($1)) }, args: $2, tag: $3, loc: mk_loc($sloc), doc: DocString::empty()} }
   ;
 
 %inline eq_tag -> (String, Location)
@@ -204,12 +204,12 @@ enum_constructor -> ConstrDecl
   ;
 
 constructor_param -> ConstrParam
-  : boption("mut") type_ { ConstrParam::{mut_: $1, type_: $2, label: None} }
-  | boption("mut") post_label ":" type_ { ConstrParam::{mut_: $1, type_: $4, label: Some($2)} }
+  : boption("mut") type_ { ConstrParam::{mut_: $1, ty: $2, label: None} }
+  | boption("mut") post_label ":" type_ { ConstrParam::{mut_: $1, ty: $4, label: Some($2)} }
   ;
 
 record_decl_field -> FieldDecl
-  : boption("mut") LIDENT ":" type_ { FieldDecl::{ name: FieldName::{ name : $2, loc : mk_loc($loc($2)) }, vis: Default, mut_: $1, type_: $4, loc: mk_loc($sloc)} }
+  : boption("mut") LIDENT ":" type_ { FieldDecl::{ name: FieldName::{ label: $2, loc : mk_loc($loc($2)) }, vis: Default, mut_: $1, ty: $4, loc: mk_loc($sloc)} }
   ;
 
 type_param_with_constraints -> TypeParamWithConstraints
@@ -244,33 +244,33 @@ type_decl_name_with_params -> (Name, @list.T[TypeParamNoConstraints])
   ;
 
 simple_type -> Type
-  : simple_type "?" { TOption($1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
-  | "(" type_ "," separated_nonempty_list(",", type_) ")" { TTuple($4.add($2), loc=mk_loc($sloc)) }
+  : simple_type "?" { Option(ty=$1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
+  | "(" type_ "," separated_nonempty_list(",", type_) ")" { Tuple(tys=$4.add($2), loc=mk_loc($sloc)) }
   | "(" type_ ")" { $2 }
-  | qualified_uident_ optional_type_arguments { TName($1, $2, loc=mk_loc($sloc)) }
-  | "&" qualified_uident_ { TObject($2) }
-  | "_" { TAny(mk_loc($sloc)) }
+  | qualified_uident_ optional_type_arguments { Name(constr_id=$1, tys=$2, loc=mk_loc($sloc)) }
+  | "&" qualified_uident_ { Object($2) }
+  | "_" { Any(loc=mk_loc($sloc)) }
   
 
 type_ -> Type
   : simple_type { $1 }
-  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { TArrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
-  | is_async "(" ")" "->" return_type { TArrow(args=@list.empty(), res=$5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
-  | is_async "(" type_ ")" "->" return_type { TArrow(args=@list.singleton($3), res=$6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" ")" "->" return_type { Arrow(args=@list.empty(), res=$5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
   ;
 
 return_type -> (Type, ErrorType)
   : type_ { ($1, NoErrorType) }
-  | simple_type "raise" { ($1, DefaultErrorType(mk_loc($loc($2)), is_old_syntax = false)) }
-  | simple_type "raise" error_type { ($1, ErrorType(ty = $3, is_old_syntax = false)) }
+  | simple_type "raise" { ($1, DefaultErrorType(loc=mk_loc($loc($2)))) }
+  | simple_type "raise" error_type { ($1, ErrorType(ty = $3)) }
   | simple_type "raise" "?" {
-    let fake_error : Type = TName(ConstrId::{ id : QualifiedIdent::Ident(name="Error"), loc :@ast.no_location }, @list.empty(), loc=@ast.no_location)
-    ($1, MaybeError(fake_error, is_old_syntax = false)) 
+    let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@ast.no_location }, tys=@list.empty(), loc=@ast.no_location)
+    ($1, MaybeError(ty=fake_error)) 
   }
   ;
 
 error_type -> Type
-  : qualified_uident_ { TName($1, @list.empty(), loc=mk_loc($sloc)) }
+  : qualified_uident_ { Name(constr_id=$1, tys=@list.empty(), loc=mk_loc($sloc)) }
   ;
 
 optional_type_arguments -> @list.T[Type]

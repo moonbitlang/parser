@@ -117,151 +117,143 @@ pub impl ToJson for ConstrId with to_json(self) {
 }
 
 ///|
-// ErrorType
 pub impl ToJson for ErrorType with to_json(self) {
   match self {
-    ErrorType(ty~, is_old_syntax~) =>
-      {
-        "type": "ErrorType",
-        "ty": ty.to_json(),
-        "is_old_syntax": is_old_syntax,
-      }
-    DefaultErrorType(loc, is_old_syntax~) =>
-      {
-        "type": "DefaultErrorType",
-        "0": loc.to_json(),
-        "is_old_syntax": is_old_syntax,
-      }
-    NoErrorType => { "type": "NoErrorType" }
-    MaybeError(ty, is_old_syntax~) =>
-      {
-        "type": "MaybeError",
-        "0": ty.to_json(),
-        "is_old_syntax": is_old_syntax,
-      }
+    ErrorType(ty~) => { "type": "ErrorType::ErrorType", "ty": ty }
+    DefaultErrorType(loc~) =>
+      { "type": "ErrorType::DefaultErrorType", "loc": loc }
+    NoErrorType => { "type": "ErrorType::NoErrorType" }
+    Noraise(loc~) => { "type": "ErrorType::Noraise", "loc": loc }
+    MaybeError(ty~) => { "type": "ErrorType::MaybeError", "ty": ty }
   }
 }
 
 ///|
 pub impl ToJson for Type with to_json(self) {
   match self {
-    TAny(loc) => { "type": "TAny", "0": loc.to_json() }
-    TArrow(args~, res~, err~, is_async~, loc~) =>
+    Any(loc~) => { "type": "Type::Any", "loc": loc }
+    Arrow(args~, res~, err~, is_async~, loc~) =>
       {
-        "type": "TArrow",
+        "type": "Type::Arrow",
         "args": list_to_json(args),
-        "res": res.to_json(),
-        "err": err.to_json(),
+        "res": res,
+        "err": err,
         "is_async": is_async,
-        "loc": loc.to_json(),
+        "loc": loc,
       }
-    TTuple(types, loc~) =>
-      { "type": "TTuple", "0": list_to_json(types), "loc": loc.to_json() }
-    TName(constr_id, type_args, loc~) =>
+    Tuple(tys~, loc~) =>
+      { "type": "Type::Tuple", "tys": list_to_json(tys), "loc": loc }
+    Name(constr_id~, tys~, loc~) =>
       {
-        "type": "TName",
-        "0": constr_id.to_json(),
-        "1": list_to_json(type_args),
-        "loc": loc.to_json(),
+        "type": "Type::Name",
+        "constr_id": constr_id,
+        "tys": list_to_json(tys),
+        "loc": loc,
       }
-    TOption(inner_type, loc~, question_loc~) =>
+    Option(ty~, loc~, question_loc~) =>
       {
-        "type": "TOption",
-        "0": inner_type.to_json(),
-        "loc": loc.to_json(),
-        "question_loc": question_loc.to_json(),
+        "type": "Type::Option",
+        "ty": ty,
+        "loc": loc,
+        "question_loc": question_loc,
       }
-    TObject(constr_id) => { "type": "TObject", "0": constr_id.to_json() }
+    Object(constr_id) => { "type": "Type::Object", "0": constr_id }
   }
 }
 
 ///|
 pub impl ToJson for ConstrParam with to_json(self) {
+  let { ty, mut_, label } = self
   {
     "type": "ConstrParam",
-    "type_": self.type_.to_json(),
-    "mut_": self.mut_,
-    "label": option_to_json(self.label),
+    "ty": ty,
+    "mut_": mut_,
+    "label": option_to_json(label),
   }
 }
 
 ///|
 pub impl ToJson for ConstrDecl with to_json(self) {
+  let { name, args, tag, loc, doc } = self
   {
     "type": "ConstrDecl",
-    "name": self.name.to_json(),
-    "args": option_to_json(self.args.map(list_to_json)),
-    "tag": option_to_json(self.tag.map(tuple_to_json)),
-    "loc": self.loc.to_json(),
+    "name": name,
+    "args": option_to_json(args.map(list_to_json)),
+    "tag": option_to_json(tag.map(tuple_to_json)),
+    "doc": doc,
+    "loc": loc,
   }
 }
 
 ///|
 pub impl ToJson for ExceptionDecl with to_json(self) {
   match self {
-    NoPayload => { "type": "NoPayload" }
-    SinglePayload(ty) => { "type": "SinglePayload", "0": ty.to_json() }
+    NoPayload => { "type": "ExceptionDecl::NoPayload" }
+    SinglePayload(ty) => { "type": "ExceptionDecl::SinglePayload", "0": ty }
     EnumPayload(constrs) =>
-      { "type": "EnumPayload", "0": list_to_json(constrs) }
+      { "type": "ExceptionDecl::EnumPayload", "0": list_to_json(constrs) }
   }
 }
 
 ///|
 pub impl ToJson for FieldName with to_json(self) {
-  { "type": "FieldName", "name": self.name, "loc": self.loc.to_json() }
+  let { label, loc } = self
+  { "type": "FieldName", "label": label, "loc": loc }
 }
 
 ///|
 pub impl ToJson for FieldDecl with to_json(self) {
+  let { name, ty, mut_, vis, loc } = self
   {
     "type": "FieldDecl",
-    "name": self.name.to_json(),
-    "type_": self.type_.to_json(),
-    "mut_": self.mut_,
-    "vis": self.vis.to_json(),
-    "loc": self.loc.to_json(),
+    "name": name,
+    "ty": ty,
+    "mut_": mut_,
+    "vis": vis,
+    "loc": loc,
   }
 }
 
 ///|
 pub impl ToJson for TypeDesc with to_json(self) {
   match self {
-    Abstract => { "type": "Abstract" }
-    Extern => { "type": "Extern" }
-    Newtype(ty) => { "type": "Newtype", "0": ty.to_json() }
-    Error(exception_decl) => { "type": "Error", "0": exception_decl.to_json() }
-    Variant(constrs) => { "type": "Variant", "0": list_to_json(constrs) }
-    Record(fields) => { "type": "Record", "0": list_to_json(fields) }
-    Alias(ty) => { "type": "Alias", "0": ty.to_json() }
+    Abstract => { "type": "TypeDesc::Abstract" }
+    Extern => { "type": "TypeDesc::Extern" }
+    Newtype(ty) => { "type": "TypeDesc::Newtype", "0": ty }
+    Error(exception_decl) => { "type": "TypeDesc::Error", "0": exception_decl }
+    Variant(constrs) =>
+      { "type": "TypeDesc::Variant", "0": list_to_json(constrs) }
+    Record(fields) => { "type": "TypeDesc::Record", "0": list_to_json(fields) }
+    Alias(ty) => { "type": "TypeDesc::Alias", "0": ty }
   }
 }
 
 ///|
 pub impl ToJson for Hole with to_json(self) {
   match self {
-    Synthesized => { "type": "Synthesized" }
-    Incomplete => { "type": "Incomplete" }
-    Todo => { "type": "Todo" }
+    Synthesized => { "type": "Hole::Synthesized" }
+    Incomplete => { "type": "Hole::Incomplete" }
+    Todo => { "type": "Hole::Todo" }
   }
 }
 
 ///|
 pub impl ToJson for ArgumentKind with to_json(self) {
   match self {
-    Positional => { "type": "Positional" }
-    Labelled(label) => { "type": "Labelled", "0": label.to_json() }
-    LabelledPun(label) => { "type": "LabelledPun", "0": label.to_json() }
+    Positional => { "type": "ArgumentKind::Positional" }
+    Labelled(label) => { "type": "ArgumentKind::Labelled", "0": label }
+    LabelledPun(label) => { "type": "ArgumentKind::LabelledPun", "0": label }
     LabelledOption(label~, question_loc~) =>
       {
-        "type": "LabelledOption",
-        "label": label.to_json(),
-        "question_loc": question_loc.to_json(),
+        "type": "ArgumentKind::LabelledOption",
+        "label": label,
+        "question_loc": question_loc,
       }
     LabelledOptionPun(label~, question_loc~) =>
       {
-        "type": "LabelledOptionPun",
-        "label": label.to_json(),
-        "question_loc": question_loc.to_json(),
+        "type": "ArgumentKind::LabelledOptionPun",
+        "label": label,
+        "question_loc": question_loc,
       }
   }
 }
@@ -269,121 +261,109 @@ pub impl ToJson for ArgumentKind with to_json(self) {
 ///|
 pub impl ToJson for FnKind with to_json(self) {
   match self {
-    Lambda => { "type": "Lambda" }
-    Matrix => { "type": "Matrix" }
-    Arrow => { "type": "Arrow" }
+    Lambda => { "type": "FnKind::Lambda" }
+    Matrix => { "type": "FnKind::Matrix" }
+    Arrow => { "type": "FnKind::Arrow" }
   }
 }
 
 ///|
 pub impl ToJson for Group with to_json(self) {
   match self {
-    GroupBrace => { "type": "GroupBrace" }
-    GroupParen => { "type": "GroupParen" }
+    Brace => { "type": "Group::Brace" }
+    Paren => { "type": "Group::Paren" }
   }
 }
 
 ///|
 pub impl ToJson for TrailingMark with to_json(self) {
   match self {
-    TrailingComma => { "type": "TrailingComma" }
-    TrailingSemi => { "type": "TrailingSemi" }
-    TrailingNone => { "type": "TrailingNone" }
+    Comma => { "type": "Trailing::Comma" }
+    Semi => { "type": "Trailing::Semi" }
+    None => { "type": "Trailing::None" }
   }
 }
 
 ///|
 pub impl ToJson for ApplyAttr with to_json(self) {
   match self {
-    NoAttr => { "type": "NoAttr" }
-    Exclamation => { "type": "Exclamation" }
-    Question => { "type": "Question" }
+    NoAttr => { "type": "ApplyAttr::NoAttr" }
+    Exclamation => { "type": "ApplyAttr::Exclamation" }
+    Question => { "type": "ApplyAttr::Question" }
   }
 }
 
 ///|
 pub impl ToJson for TypeVarConstraint with to_json(self) {
-  {
-    "type": "TypeVarConstraint",
-    "trait_": self.trait_.to_json(),
-    "loc": self.loc.to_json(),
-  }
+  let { trait_, loc } = self
+  { "type": "TypeVarConstraint", "trait_": trait_, "loc": loc }
 }
 
 ///|
 pub impl ToJson for TypeVarBinder with to_json(self) {
+  let { name, constraints, loc } = self
   {
     "type": "TypeVarBinder",
-    "name": self.name,
-    "constraints": list_to_json(self.constraints),
-    "loc": self.loc.to_json(),
+    "name": name,
+    "constraints": list_to_json(constraints),
+    "loc": loc,
   }
 }
 
 ///|
 pub impl ToJson for TypeDeclBinder with to_json(self) {
-  {
-    "type": "TypeDeclBinder",
-    "name": option_to_json(self.name),
-    "loc": self.loc.to_json(),
-  }
+  let { name, loc } = self
+  { "type": "TypeDeclBinder", "name": option_to_json(name), "loc": loc }
 }
 
 ///|
 pub impl ToJson for Binder with to_json(self) {
-  { "type": "Binder", "name": self.name, "loc": self.loc.to_json() }
+  let { name, loc } = self
+  { "type": "Binder", "name": name, "loc": loc }
 }
 
 ///|
 pub impl ToJson for Var with to_json(self) {
-  { "type": "Var", "name": self.name.to_json(), "loc": self.loc.to_json() }
+  let { name, loc } = self
+  { "type": "Var", "name": name, "loc": loc }
 }
 
 ///|
 pub impl ToJson for ConstructorExtraInfo with to_json(self) {
   match self {
-    TypeName(type_name) => { "type": "TypeName", "0": type_name.to_json() }
-    Package(pkg) => { "type": "Package", "0": pkg }
-    NoExtraInfo => { "type": "NoExtraInfo" }
+    TypeName(type_name) =>
+      { "type": "ConstructorExtraInfo::TypeName", "0": type_name }
+    Package(pkg) => { "type": "ConstructorExtraInfo::Package", "0": pkg }
+    NoExtraInfo => { "type": "ConstructorExtraInfo::NoExtraInfo" }
   }
 }
 
 ///|
 pub impl ToJson for Constructor with to_json(self) {
-  {
-    "type": "Constructor",
-    "name": self.name.to_json(),
-    "extra_info": self.extra_info.to_json(),
-    "loc": self.loc.to_json(),
-  }
+  let { name, extra_info, loc } = self
+  { "type": "Constructor", "name": name, "extra_info": extra_info, "loc": loc }
 }
 
 ///|
 pub impl ToJson for Accessor with to_json(self) {
   match self {
-    Label(label) => { "type": "Label", "0": label.to_json() }
+    Label(label) => { "type": "Accessor::Label", "0": label }
     Index(tuple_index~, loc~) =>
-      { "type": "Index", "tuple_index": tuple_index, "loc": loc.to_json() }
-    Newtype(loc~) => { "type": "Newtype", "loc": loc.to_json() }
+      { "type": "Accessor::Index", "tuple_index": tuple_index, "loc": loc }
+    Newtype(loc~) => { "type": "Accessor::Newtype", "loc": loc }
   }
 }
 
 ///|
 pub impl ToJson for AliasTarget with to_json(self) {
-  {
-    "type": "AliasTarget",
-    "binder": self.binder.to_json(),
-    "target": option_to_json(self.target),
-  }
+  let { binder, target } = self
+  { "type": "AliasTarget", "binder": binder, "target": option_to_json(target) }
 }
 
 ///|
 pub impl ToJson for Argument with to_json(self) {
-  {
-    "type": "Argument",
-    "value": self.value.to_json(),
-    "kind": self.kind.to_json(),
-  }
+  let { value, kind } = self
+  { "type": "Argument", "value": value, "kind": kind }
 }
 
 ///|
@@ -391,33 +371,33 @@ pub impl ToJson for Parameter with to_json(self) {
   match self {
     DiscardPositional(ty~, loc~) =>
       {
-        "type": "DiscardPositional",
+        "type": "Parameter::DiscardPositional",
         "ty": option_to_json(ty),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Positional(binder~, ty~) =>
       {
-        "type": "Positional",
-        "binder": binder.to_json(),
+        "type": "Parameter::Positional",
+        "binder": binder,
         "ty": option_to_json(ty),
       }
     Labelled(binder~, ty~) =>
       {
-        "type": "Labelled",
-        "binder": binder.to_json(),
+        "type": "Parameter::Labelled",
+        "binder": binder,
         "ty": option_to_json(ty),
       }
     Optional(binder~, default~, ty~) =>
       {
-        "type": "Optional",
-        "binder": binder.to_json(),
-        "default": default.to_json(),
+        "type": "Parameter::Optional",
+        "binder": binder,
+        "default": default,
         "ty": option_to_json(ty),
       }
     QuestionOptional(binder~, ty~) =>
       {
-        "type": "QuestionOptional",
-        "binder": binder.to_json(),
+        "type": "Parameter::QuestionOptional",
+        "binder": binder,
         "ty": option_to_json(ty),
       }
   }
@@ -425,52 +405,56 @@ pub impl ToJson for Parameter with to_json(self) {
 
 ///|
 pub impl ToJson for Case with to_json(self) {
+  let { pattern, guard_, body } = self
   {
     "type": "Case",
-    "pattern": self.pattern.to_json(),
-    "guard_": option_to_json(self.guard_),
-    "body": self.body.to_json(),
+    "pattern": pattern,
+    "guard_": option_to_json(guard_),
+    "body": body,
   }
 }
 
 ///|
 pub impl ToJson for MultiArgCase with to_json(self) {
+  let { patterns, guard_, body } = self
   {
     "type": "MultiArgCase",
-    "patterns": list_to_json(self.patterns),
-    "guard_": option_to_json(self.guard_),
-    "body": self.body.to_json(),
+    "patterns": list_to_json(patterns),
+    "guard_": option_to_json(guard_),
+    "body": body,
   }
 }
 
 ///|
 pub impl ToJson for SpreadableElem with to_json(self) {
   match self {
-    ElemRegular(expr) => { "type": "ElemRegular", "0": expr.to_json() }
-    ElemSpread(expr~, loc~) =>
-      { "type": "ElemSpread", "expr": expr.to_json(), "loc": loc.to_json() }
+    Regular(expr) => { "type": "SpreadableElem::Regular", "0": expr }
+    Spread(expr~, loc~) =>
+      { "type": "SpreadableElem::Spread", "expr": expr, "loc": loc }
   }
 }
 
 ///|
 pub impl ToJson for MapExprElem with to_json(self) {
+  let { key, expr, key_loc, loc } = self
   {
     "type": "MapExprElem",
-    "key": self.key.to_json(),
-    "expr": self.expr.to_json(),
-    "key_loc": self.key_loc.to_json(),
-    "loc": self.loc.to_json(),
+    "key": key,
+    "expr": expr,
+    "key_loc": key_loc,
+    "loc": loc,
   }
 }
 
 ///|
 pub impl ToJson for StaticAssertion with to_json(self) {
+  let { ty, trait_, loc, msg } = self
   {
     "type": "StaticAssertion",
-    "assert_type": self.assert_type.to_json(),
-    "assert_trait": self.assert_trait.to_json(),
-    "assert_loc": self.assert_loc.to_json(),
-    "assert_msg": self.assert_msg,
+    "ty": ty,
+    "trait_": trait_,
+    "loc": loc,
+    "msg": msg,
   }
 }
 
@@ -489,80 +473,84 @@ pub impl ToJson for Func with to_json(self) {
       loc~
     ) =>
       {
-        "type": "Lambda",
+        "type": "Func::Lambda",
         "parameters": list_to_json(parameters),
-        "params_loc": params_loc.to_json(),
-        "body": body.to_json(),
+        "params_loc": params_loc,
+        "body": body,
         "return_type": option_to_json(return_type),
-        "error_type": error_type.to_json(),
-        "kind": kind.to_json(),
+        "error_type": error_type,
+        "kind": kind,
         "has_error": option_to_json(has_error),
         "is_async": is_async,
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Match(cases~, has_error~, is_async~, fn_loc~, loc~) =>
       {
-        "type": "Match",
+        "type": "Func::Match",
         "cases": list_to_json(cases),
         "has_error": option_to_json(has_error),
         "is_async": is_async,
-        "fn_loc": fn_loc.to_json(),
-        "loc": loc.to_json(),
+        "fn_loc": fn_loc,
+        "loc": loc,
       }
   }
 }
 
 ///|
 pub impl ToJson for FieldDef with to_json(self) {
+  let { label, expr, is_pun, loc } = self
   {
     "type": "FieldDef",
-    "label": self.label.to_json(),
-    "expr": self.expr.to_json(),
-    "is_pun": self.is_pun,
-    "loc": self.loc.to_json(),
+    "label": label,
+    "expr": expr,
+    "is_pun": is_pun,
+    "loc": loc,
   }
 }
 
 ///|
 pub impl ToJson for InterpElem with to_json(self) {
   match self {
-    InterpLit(repr~, loc~) =>
-      { "type": "InterpLit", "repr": repr, "loc": loc.to_json() }
-    InterpExpr(expr~, loc~) =>
-      { "type": "InterpExpr", "expr": expr.to_json(), "loc": loc.to_json() }
-    InterpSource(source) =>
-      { "type": "InterpSource", "source": source.to_json() }
+    Literal(repr~, loc~) =>
+      { "type": "InterpElem::Literal", "repr": repr, "loc": loc.to_json() }
+    Expr(expr~, loc~) =>
+      {
+        "type": "InterpElem::Expr",
+        "expr": expr.to_json(),
+        "loc": loc.to_json(),
+      }
+    Source(source) => { "type": "InterpSource", "source": source.to_json() }
   }
 }
 
 ///|
 pub impl ToJson for MultilineStringElem with to_json(self) {
   match self {
-    MultilineString(s) => { "type": "MultilineString", "0": s }
-    MultilineInterp(elems) =>
-      { "type": "MultilineInterp", "0": list_to_json(elems) }
+    String(s) => { "type": "MultilineString::String", "0": s }
+    Interp(elems) =>
+      { "type": "MultilineString::Interp", "0": list_to_json(elems) }
   }
 }
 
 ///|
 pub impl ToJson for DotDotBinder with to_json(self) {
   match self {
-    Underscore => { "type": "Underscore" }
-    NoBinder => { "type": "NoBinder" }
-    BinderAs(binder) => { "type": "BinderAs", "0": binder.to_json() }
-    Binder_(binder) => { "type": "Binder_", "0": binder.to_json() }
+    Underscore => { "type": "DotDotBinder::Underscore" }
+    NoBinder => { "type": "DotDotBinder::NoBinder" }
+    BinderAs(binder) => { "type": "DotDotBinder::BinderAs", "0": binder }
+    Binder(binder) => { "type": "DotDotBinder::Binder", "0": binder }
   }
 }
 
 ///|
 pub impl ToJson for ArrayPattern with to_json(self) {
   match self {
-    Pattern(pattern) => { "type": "Pattern", "0": pattern.to_json() }
-    StringSpread(s) => { "type": "StringSpread", "0": s }
-    BytesSpread(s) => { "type": "BytesSpread", "0": s }
+    Pattern(pattern) => { "type": "ArrayPattern::Pattern", "0": pattern }
+    StringSpread(s) => { "type": "ArrayPattern::StringSpread", "0": s }
+    BytesSpread(s) => { "type": "ArrayPattern::BytesSpread", "0": s }
     ConstSpread(binder~, pkg~, loc~) =>
       {
-        "type": "ConstSpread",
+        "type": "ArrayPattern::ConstSpread",
         "binder": binder.to_json(),
         "pkg": option_to_json(pkg),
         "loc": loc.to_json(),
@@ -573,10 +561,11 @@ pub impl ToJson for ArrayPattern with to_json(self) {
 ///|
 pub impl ToJson for ArrayPatterns with to_json(self) {
   match self {
-    Closed(patterns) => { "type": "Closed", "0": list_to_json(patterns) }
+    Closed(patterns) =>
+      { "type": "ArrayPatterns::Closed", "0": list_to_json(patterns) }
     Open(start_patterns, end_patterns, dot_dot_binder) =>
       {
-        "type": "Open",
+        "type": "ArrayPatterns::Open",
         "0": list_to_json(start_patterns),
         "1": list_to_json(end_patterns),
         "2": dot_dot_binder.to_json(),
@@ -586,33 +575,32 @@ pub impl ToJson for ArrayPatterns with to_json(self) {
 
 ///|
 pub impl ToJson for FieldPat with to_json(self) {
+  let { label, pattern, is_pun, loc } = self
   {
     "type": "FieldPat",
-    "label": self.label.to_json(),
-    "pattern": self.pattern.to_json(),
-    "is_pun": self.is_pun,
-    "loc": self.loc.to_json(),
+    "label": label,
+    "pattern": pattern,
+    "is_pun": is_pun,
+    "loc": loc,
   }
 }
 
 ///|
 pub impl ToJson for ConstrPatArg with to_json(self) {
-  {
-    "type": "ConstrPatArg",
-    "pat": self.pat.to_json(),
-    "kind": self.kind.to_json(),
-  }
+  let { pat, kind } = self
+  { "type": "ConstrPatArg", "pat": pat, "kind": kind }
 }
 
 ///|
 pub impl ToJson for MapPatElem with to_json(self) {
+  let { key, pat, match_absent, key_loc, loc } = self
   {
     "type": "MapPatElem",
-    "key": self.key.to_json(),
-    "pat": self.pat.to_json(),
-    "match_absent": self.match_absent,
-    "key_loc": self.key_loc.to_json(),
-    "loc": self.loc.to_json(),
+    "key": key,
+    "pat": pat,
+    "match_absent": match_absent,
+    "key_loc": key_loc,
+    "loc": loc,
   }
 }
 
@@ -620,102 +608,97 @@ pub impl ToJson for MapPatElem with to_json(self) {
 pub impl ToJson for Pattern with to_json(self) {
   match self {
     Alias(pat~, alias_~, loc~) =>
-      {
-        "type": "Alias",
-        "pat": pat.to_json(),
-        "alias_": alias_.to_json(),
-        "loc": loc.to_json(),
-      }
-    Any(loc~) => { "type": "Any", "loc": loc.to_json() }
-    Array_(pats~, loc~) =>
-      { "type": "Array_", "pats": pats.to_json(), "loc": loc.to_json() }
-    Constant(c~, loc~) =>
-      { "type": "Constant", "c": c.to_json(), "loc": loc.to_json() }
+      { "type": "Pattern::Alias", "pat": pat, "alias": alias_, "loc": loc }
+    Any(loc~) => { "type": "Pattern::Any", "loc": loc }
+    Array(pats~, loc~) => { "type": "Pattern::Array", "pats": pats, "loc": loc }
+    Constant(c~, loc~) => { "type": "Pattern::Constant", "c": c, "loc": loc }
     Constraint(pat~, ty~, loc~) =>
-      {
-        "type": "Constraint",
-        "pat": pat.to_json(),
-        "ty": ty.to_json(),
-        "loc": loc.to_json(),
-      }
+      { "type": "Pattern::Constraint", "pat": pat, "ty": ty, "loc": loc }
     Constr(constr~, args~, is_open~, loc~) =>
       {
-        "type": "Constr",
-        "constr": constr.to_json(),
+        "type": "Pattern::Constr",
+        "constr": constr,
         "args": option_to_json(args.map(list_to_json)),
         "is_open": is_open,
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Or(pat1~, pat2~, loc~) =>
-      {
-        "type": "Or",
-        "pat1": pat1.to_json(),
-        "pat2": pat2.to_json(),
-        "loc": loc.to_json(),
-      }
+      { "type": "Pattern::Or", "pat1": pat1, "pat2": pat2, "loc": loc }
     Tuple(pats~, loc~) =>
-      { "type": "Tuple", "pats": list_to_json(pats), "loc": loc.to_json() }
-    Var(binder) => { "type": "Var", "0": binder.to_json() }
+      { "type": "Pattern::Tuple", "pats": list_to_json(pats), "loc": loc }
+    Var(binder) => { "type": "Pattern::Var", "0": binder }
     Record(fields~, is_closed~, loc~) =>
       {
-        "type": "Record",
+        "type": "Pattern::Record",
         "fields": list_to_json(fields),
         "is_closed": is_closed,
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Map(elems~, is_closed~, loc~) =>
       {
-        "type": "Map",
+        "type": "Pattern::Map",
         "elems": list_to_json(elems),
         "is_closed": is_closed,
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Range(lhs~, rhs~, inclusive~, loc~) =>
       {
-        "type": "Range",
-        "lhs": lhs.to_json(),
-        "rhs": rhs.to_json(),
+        "type": "Pattern::Range",
+        "lhs": lhs,
+        "rhs": rhs,
         "inclusive": inclusive,
-        "loc": loc.to_json(),
+        "loc": loc,
       }
   }
 }
 
 ///|
 pub impl ToJson for LocalTypeDecl with to_json(self) {
+  let { tycon, tycon_loc, components, deriving } = self
   {
     "type": "LocalTypeDecl",
-    "tycon": self.tycon,
-    "tycon_loc": self.tycon_loc.to_json(),
-    "components": self.components.to_json(),
-    "deriving": list_to_json(self.deriving),
+    "tycon": tycon,
+    "tycon_loc": tycon_loc,
+    "components": components,
+    "deriving": list_to_json(deriving),
   }
 }
 
 ///|
 pub impl ToJson for DerivingDirective with to_json(self) {
+  let { type_name, args, loc } = self
   {
     "type": "DerivingDirective",
-    "type_name": self.type_name.to_json(),
-    "args": list_to_json(self.args),
-    "loc": self.loc.to_json(),
+    "type_name": type_name,
+    "args": list_to_json(args),
+    "loc": loc,
   }
 }
 
 ///|
 pub impl ToJson for TypeDecl with to_json(self) {
+  let {
+    tycon,
+    tycon_loc,
+    params,
+    components,
+    attrs,
+    doc,
+    type_vis,
+    deriving,
+    loc,
+  } = self
   {
     "type": "TypeDecl",
-    "tycon": self.tycon,
-    "tycon_loc": self.tycon_loc.to_json(),
-    "params": list_to_json(self.params),
-    "components": self.components.to_json(),
-    "attrs": list_to_json(self.attrs),
-    "doc": self.doc.to_json(),
-    "type_vis": self.type_vis.to_json(),
-    "deriving": list_to_json(self.deriving),
-    "loc": self.loc.to_json(),
-    "deprecated_type_bang": self.deprecated_type_bang,
+    "tycon": tycon,
+    "tycon_loc": tycon_loc,
+    "params": list_to_json(params),
+    "components": components,
+    "attrs": list_to_json(attrs),
+    "doc": doc,
+    "type_vis": type_vis,
+    "deriving": list_to_json(deriving),
+    "loc": loc,
   }
 }
 
@@ -723,12 +706,16 @@ pub impl ToJson for TypeDecl with to_json(self) {
 pub impl ToJson for FuncStubs with to_json(self) {
   match self {
     Import(module_name~, func_name~) =>
-      { "type": "Import", "module_name": module_name, "func_name": func_name }
+      {
+        "type": "FuncStubs::Import",
+        "module_name": module_name,
+        "func_name": func_name,
+      }
     Embedded(language~, code~) =>
       {
-        "type": "Embedded",
+        "type": "FuncStubs::Embedded",
         "language": option_to_json(language),
-        "code": code.to_json(),
+        "code": code,
       }
   }
 }
@@ -736,9 +723,9 @@ pub impl ToJson for FuncStubs with to_json(self) {
 ///|
 pub impl ToJson for EmbeddedCode with to_json(self) {
   match self {
-    CodeString(s) => { "type": "CodeString", "0": s }
+    CodeString(s) => { "type": "EmbeddedCode::CodeString", "0": s }
     CodeMultilineString(lines) =>
-      { "type": "CodeMultilineString", "0": list_to_json(lines) }
+      { "type": "EmbeddedCode::CodeMultilineString", "0": list_to_json(lines) }
   }
 }
 
@@ -747,60 +734,86 @@ pub impl ToJson for DeclBody with to_json(self) {
   match self {
     DeclBody(local_types~, expr~) =>
       {
-        "type": "DeclBody",
+        "type": "DeclBody::DeclBody",
         "local_types": list_to_json(local_types),
-        "expr": expr.to_json(),
+        "expr": expr,
       }
-    DeclStubs(stubs) => { "type": "DeclStubs", "0": stubs.to_json() }
+    DeclStubs(stubs) => { "type": "DeclBody::DeclStubs", "0": stubs }
   }
 }
 
 ///|
 pub impl ToJson for FunDecl with to_json(self) {
+  let {
+    type_name,
+    name,
+    has_error,
+    is_async,
+    decl_params,
+    params_loc,
+    quantifiers,
+    return_type,
+    error_type,
+    vis,
+    attrs,
+    doc,
+  } = self
   {
     "type": "FunDecl",
-    "type_name": option_to_json(self.type_name),
-    "name": self.name.to_json(),
-    "has_error": option_to_json(self.has_error),
-    "is_async": self.is_async,
-    "decl_params": option_to_json(self.decl_params.map(list_to_json)),
-    "params_loc": self.params_loc.to_json(),
-    "quantifiers": list_to_json(self.quantifiers),
-    "return_type": option_to_json(self.return_type),
-    "error_type": self.error_type.to_json(),
-    "vis": self.vis.to_json(),
-    "attrs": list_to_json(self.attrs),
-    "doc": self.doc.to_json(),
+    "type_name": option_to_json(type_name),
+    "name": name,
+    "has_error": option_to_json(has_error),
+    "is_async": is_async,
+    "decl_params": option_to_json(decl_params.map(list_to_json)),
+    "params_loc": params_loc,
+    "quantifiers": list_to_json(quantifiers),
+    "return_type": option_to_json(return_type),
+    "error_type": error_type,
+    "vis": vis,
+    "attrs": list_to_json(attrs),
+    "doc": doc,
   }
 }
 
 ///|
 pub impl ToJson for TraitMethodDecl with to_json(self) {
+  let {
+    name,
+    has_error,
+    is_async,
+    quantifiers,
+    params,
+    return_type,
+    error_type,
+    has_default,
+    loc,
+  } = self
   {
     "type": "TraitMethodDecl",
-    "name": self.name.to_json(),
-    "has_error": option_to_json(self.has_error),
-    "is_async": self.is_async,
-    "quantifiers": list_to_json(self.quantifiers),
-    "params": list_to_json(self.params),
-    "return_type": option_to_json(self.return_type),
-    "error_type": self.error_type.to_json(),
-    "has_default": option_to_json(self.has_default),
-    "loc": self.loc.to_json(),
+    "name": name,
+    "has_error": option_to_json(has_error),
+    "is_async": is_async,
+    "quantifiers": list_to_json(quantifiers),
+    "params": list_to_json(params),
+    "return_type": option_to_json(return_type),
+    "error_type": error_type,
+    "has_default": option_to_json(has_default),
+    "loc": loc,
   }
 }
 
 ///|
 pub impl ToJson for TraitDecl with to_json(self) {
+  let { name, supers, methods, vis, loc, attrs, doc } = self
   {
     "type": "TraitDecl",
-    "trait_name": self.trait_name.to_json(),
-    "trait_supers": list_to_json(self.trait_supers),
-    "trait_methods": list_to_json(self.trait_methods),
-    "trait_vis": self.trait_vis.to_json(),
-    "trait_loc": self.trait_loc.to_json(),
-    "trait_attrs": list_to_json(self.trait_attrs),
-    "trait_doc": self.trait_doc.to_json(),
+    "name": name,
+    "supers": list_to_json(supers),
+    "methods": list_to_json(methods),
+    "vis": vis,
+    "loc": loc,
+    "attrs": list_to_json(attrs),
+    "doc": doc,
   }
 }
 
@@ -810,310 +823,262 @@ pub impl ToJson for Expr with to_json(self) {
   match self {
     Apply(func~, args~, attr~, loc~) =>
       {
-        "type": "Apply",
-        "func": func.to_json(),
+        "type": "Expr::Apply",
+        "func": func,
         "args": list_to_json(args),
-        "attr": attr.to_json(),
-        "loc": loc.to_json(),
+        "attr": attr,
+        "loc": loc,
       }
     Infix(op~, lhs~, rhs~, loc~) =>
-      {
-        "type": "Infix",
-        "op": op.to_json(),
-        "lhs": lhs.to_json(),
-        "rhs": rhs.to_json(),
-        "loc": loc.to_json(),
-      }
+      { "type": "Expr::Infix", "op": op, "lhs": lhs, "rhs": rhs, "loc": loc }
     Unary(op~, expr~, loc~) =>
-      {
-        "type": "Unary",
-        "op": op.to_json(),
-        "expr": expr.to_json(),
-        "loc": loc.to_json(),
-      }
-    Array_(exprs~, loc~) =>
-      { "type": "Array_", "exprs": list_to_json(exprs), "loc": loc.to_json() }
+      { "type": "Expr::Unary", "op": op, "expr": expr, "loc": loc }
+    Array(exprs~, loc~) =>
+      { "type": "Expr::Array", "exprs": list_to_json(exprs), "loc": loc }
     ArraySpread(elems~, loc~) =>
-      {
-        "type": "ArraySpread",
-        "elems": list_to_json(elems),
-        "loc": loc.to_json(),
-      }
+      { "type": "Expr::ArraySpread", "elems": list_to_json(elems), "loc": loc }
     ArrayGet(array~, index~, loc~) =>
-      {
-        "type": "ArrayGet",
-        "array": array.to_json(),
-        "index": index.to_json(),
-        "loc": loc.to_json(),
-      }
+      { "type": "Expr::ArrayGet", "array": array, "index": index, "loc": loc }
     ArrayGetSlice(array~, start_index~, end_index~, index_loc~, loc~) =>
       {
-        "type": "ArrayGetSlice",
-        "array": array.to_json(),
+        "type": "Expr::ArrayGetSlice",
+        "array": array,
         "start_index": option_to_json(start_index),
         "end_index": option_to_json(end_index),
-        "index_loc": index_loc.to_json(),
-        "loc": loc.to_json(),
+        "index_loc": index_loc,
+        "loc": loc,
       }
     ArraySet(array~, index~, value~, loc~) =>
       {
-        "type": "ArraySet",
-        "array": array.to_json(),
-        "index": index.to_json(),
-        "value": value.to_json(),
-        "loc": loc.to_json(),
+        "type": "Expr::ArraySet",
+        "array": array,
+        "index": index,
+        "value": value,
+        "loc": loc,
       }
     ArrayAugmentedSet(op~, array~, index~, value~, loc~) =>
       {
-        "type": "ArrayAugmentedSet",
-        "op": op.to_json(),
-        "array": array.to_json(),
-        "index": index.to_json(),
-        "value": value.to_json(),
-        "loc": loc.to_json(),
+        "type": "Expr::ArrayAugmentedSet",
+        "op": op,
+        "array": array,
+        "index": index,
+        "value": value,
+        "loc": loc,
       }
-    Constant(c~, loc~) =>
-      { "type": "Constant", "c": c.to_json(), "loc": loc.to_json() }
+    Constant(c~, loc~) => { "type": "Expr::Constant", "c": c, "loc": loc }
     MultilineString(elems~, loc~) =>
       {
-        "type": "MultilineString",
+        "type": "Expr::MultilineString",
         "elems": list_to_json(elems),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Interp(elems~, loc~) =>
-      { "type": "Interp", "elems": list_to_json(elems), "loc": loc.to_json() }
+      { "type": "Expr::Interp", "elems": list_to_json(elems), "loc": loc }
     Constraint(expr~, ty~, loc~) =>
-      {
-        "type": "Constraint",
-        "expr": expr.to_json(),
-        "ty": ty.to_json(),
-        "loc": loc.to_json(),
-      }
+      { "type": "Expr::Constraint", "expr": expr, "ty": ty, "loc": loc }
     Constr(constr~, loc~) =>
-      { "type": "Constr", "constr": constr.to_json(), "loc": loc.to_json() }
+      { "type": "Expr::Constr", "constr": constr, "loc": loc }
     While(loop_cond~, loop_body~, while_else~, label~, loc~) =>
       {
-        "type": "While",
-        "loop_cond": loop_cond.to_json(),
-        "loop_body": loop_body.to_json(),
+        "type": "Expr::While",
+        "loop_cond": loop_cond,
+        "loop_body": loop_body,
         "while_else": option_to_json(while_else),
         "label": option_to_json(label),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
-    Function_(func~, loc~) =>
-      { "type": "Function_", "func": func.to_json(), "loc": loc.to_json() }
-    Ident(id~, loc~) =>
-      { "type": "Ident", "id": id.to_json(), "loc": loc.to_json() }
+    Function(func~, loc~) =>
+      { "type": "Expr::Function", "func": func, "loc": loc }
+    Ident(id~, loc~) => { "type": "Expr::Ident", "id": id, "loc": loc }
     If(cond~, ifso~, ifnot~, loc~) =>
       {
-        "type": "If",
-        "cond": cond.to_json(),
-        "ifso": ifso.to_json(),
+        "type": "Expr::If",
+        "cond": cond,
+        "ifso": ifso,
         "ifnot": option_to_json(ifnot),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Guard(cond~, otherwise~, body~, loc~) =>
       {
-        "type": "Guard",
-        "cond": cond.to_json(),
+        "type": "Expr::Guard",
+        "cond": cond,
         "otherwise": option_to_json(otherwise),
-        "body": body.to_json(),
-        "loc": loc.to_json(),
+        "body": body,
+        "loc": loc,
       }
     Is(expr~, pat~, loc~) =>
-      {
-        "type": "Is",
-        "expr": expr.to_json(),
-        "pat": pat.to_json(),
-        "loc": loc.to_json(),
-      }
+      { "type": "Expr::Is", "expr": expr, "pat": pat, "loc": loc }
     LetFn(name~, func~, body~, loc~) =>
       {
-        "type": "LetFn",
-        "name": name.to_json(),
-        "func": func.to_json(),
-        "body": body.to_json(),
-        "loc": loc.to_json(),
+        "type": "Expr::LetFn",
+        "name": name,
+        "func": func,
+        "body": body,
+        "loc": loc,
       }
     LetRec(bindings~, body~, loc~) =>
       {
-        "type": "LetRec",
+        "type": "Expr::LetRec",
         "bindings": list_tuple_to_json(bindings),
-        "body": body.to_json(),
-        "loc": loc.to_json(),
+        "body": body,
+        "loc": loc,
       }
     LetAnd(bindings~, body~, loc~) =>
       {
-        "type": "LetAnd",
+        "type": "Expr::LetAnd",
         "bindings": letand_bindings_to_json(bindings),
-        "body": body.to_json(),
-        "loc": loc.to_json(),
+        "body": body,
+        "loc": loc,
       }
     Let(pattern~, expr~, body~, loc~) =>
       {
-        "type": "Let",
-        "pattern": pattern.to_json(),
-        "expr": expr.to_json(),
-        "body": body.to_json(),
-        "loc": loc.to_json(),
+        "type": "Expr::Let",
+        "pattern": pattern,
+        "expr": expr,
+        "body": body,
+        "loc": loc,
       }
     Sequence(exprs~, last_expr~, loc~) =>
       {
-        "type": "Sequence",
+        "type": "Expr::Sequence",
         "exprs": list_to_json(exprs),
-        "last_expr": last_expr.to_json(),
-        "loc": loc.to_json(),
+        "last_expr": last_expr,
+        "loc": loc,
       }
     Tuple(exprs~, loc~) =>
-      { "type": "Tuple", "exprs": list_to_json(exprs), "loc": loc.to_json() }
+      { "type": "Expr::Tuple", "exprs": list_to_json(exprs), "loc": loc }
     Record(type_name~, fields~, trailing~, loc~) =>
       {
-        "type": "Record",
+        "type": "Expr::Record",
         "type_name": option_to_json(type_name),
         "fields": list_to_json(fields),
-        "trailing": trailing.to_json(),
-        "loc": loc.to_json(),
+        "trailing": trailing,
+        "loc": loc,
       }
     RecordUpdate(type_name~, record~, fields~, loc~) =>
       {
-        "type": "RecordUpdate",
+        "type": "Expr::RecordUpdate",
         "type_name": option_to_json(type_name),
-        "record": record.to_json(),
+        "record": record,
         "fields": list_to_json(fields),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Field(record~, accessor~, loc~) =>
       {
-        "type": "Field",
-        "record": record.to_json(),
-        "accessor": accessor.to_json(),
-        "loc": loc.to_json(),
+        "type": "Expr::Field",
+        "record": record,
+        "accessor": accessor,
+        "loc": loc,
       }
     Method(type_name~, method_name~, loc~) =>
       {
-        "type": "Method",
-        "type_name": type_name.to_json(),
-        "method_name": method_name.to_json(),
-        "loc": loc.to_json(),
+        "type": "Expr::Method",
+        "type_name": type_name,
+        "method_name": method_name,
+        "loc": loc,
       }
     DotApply(self~, method_name~, args~, return_self~, attr~, loc~) =>
       {
-        "type": "DotApply",
-        "self": self.to_json(),
-        "method_name": method_name.to_json(),
+        "type": "Expr::DotApply",
+        "self": self,
+        "method_name": method_name,
         "args": list_to_json(args),
         "return_self": return_self,
-        "attr": attr.to_json(),
-        "loc": loc.to_json(),
+        "attr": attr,
+        "loc": loc,
       }
     As(expr~, trait_~, loc~) =>
-      {
-        "type": "As",
-        "expr": expr.to_json(),
-        "trait_": trait_.to_json(),
-        "loc": loc.to_json(),
-      }
+      { "type": "Expr::As", "expr": expr, "trait_": trait_, "loc": loc }
     Mutate(record~, accessor~, field~, augmented_by~, loc~) =>
       {
-        "type": "Mutate",
-        "record": record.to_json(),
-        "accessor": accessor.to_json(),
-        "field": field.to_json(),
+        "type": "Expr::Mutate",
+        "record": record,
+        "accessor": accessor,
+        "field": field,
         "augmented_by": option_to_json(augmented_by),
         "loc": loc.to_json(),
       }
     Match(expr~, cases~, match_loc~, using_~, loc~) =>
       {
-        "type": "Match",
-        "expr": expr.to_json(),
+        "type": "Expr::Match",
+        "expr": expr,
         "cases": list_to_json(cases),
-        "match_loc": match_loc.to_json(),
+        "match_loc": match_loc,
         "using_": option_to_json(using_),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     LetMut(binder~, ty~, expr~, body~, loc~) =>
       {
-        "type": "LetMut",
-        "binder": binder.to_json(),
+        "type": "Expr::LetMut",
+        "binder": binder,
         "ty": option_to_json(ty),
-        "expr": expr.to_json(),
-        "body": body.to_json(),
-        "loc": loc.to_json(),
+        "expr": expr,
+        "body": body,
+        "loc": loc,
       }
     Pipe(lhs~, rhs~, loc~) =>
-      {
-        "type": "Pipe",
-        "lhs": lhs.to_json(),
-        "rhs": rhs.to_json(),
-        "loc": loc.to_json(),
-      }
+      { "type": "Expr::Pipe", "lhs": lhs, "rhs": rhs, "loc": loc }
     Assign(var_~, expr~, augmented_by~, loc~) =>
       {
-        "type": "Assign",
-        "var_": var_.to_json(),
-        "expr": expr.to_json(),
+        "type": "Expr::Assign",
+        "var_": var_,
+        "expr": expr,
         "augmented_by": option_to_json(augmented_by),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
-    Hole_(loc~, kind~) =>
-      { "type": "Hole_", "loc": loc.to_json(), "kind": kind.to_json() }
+    Hole(loc~, kind~) => { "type": "Expr::Hole", "loc": loc, "kind": kind }
     Return(return_value~, loc~) =>
       {
-        "type": "Return",
+        "type": "Expr::Return",
         "return_value": option_to_json(return_value),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Raise(err_value~, loc~) =>
-      {
-        "type": "Raise",
-        "err_value": err_value.to_json(),
-        "loc": loc.to_json(),
-      }
-    Unit_(loc~, faked~) =>
-      { "type": "Unit_", "loc": loc.to_json(), "faked": faked }
+      { "type": "Expr::Raise", "err_value": err_value, "loc": loc }
+    Unit(loc~, faked~) => { "type": "Unit", "loc": loc, "faked": faked }
     Break(arg~, label~, loc~) =>
       {
-        "type": "Break",
+        "type": "Expr::Break",
         "arg": option_to_json(arg),
         "label": option_to_json(label),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Continue(args~, label~, loc~) =>
       {
-        "type": "Continue",
+        "type": "Expr::Continue",
         "args": list_to_json(args),
         "label": option_to_json(label),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Loop(args~, body~, label~, loop_loc~, loc~) =>
       {
-        "type": "Loop",
+        "type": "Expr::Loop",
         "args": list_to_json(args),
         "body": list_to_json(body),
         "label": option_to_json(label),
-        "loop_loc": loop_loc.to_json(),
-        "loc": loc.to_json(),
+        "loop_loc": loop_loc,
+        "loc": loc,
       }
     For(binders~, condition~, continue_block~, body~, for_else~, label~, loc~) =>
       {
-        "type": "For",
+        "type": "Expr::For",
         "binders": list_tuple_to_json(binders),
         "condition": option_to_json(condition),
         "continue_block": list_tuple_to_json(continue_block),
-        "body": body.to_json(),
+        "body": body,
         "for_else": option_to_json(for_else),
         "label": option_to_json(label),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     ForEach(binders~, expr~, body~, else_block~, label~, loc~) =>
       {
-        "type": "ForEach",
+        "type": "Expr::ForEach",
         "binders": list_to_json(binders.map(option_to_json)),
-        "expr": expr.to_json(),
-        "body": body.to_json(),
+        "expr": expr,
+        "body": body,
         "else_block": option_to_json(else_block),
         "label": option_to_json(label),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     Try(
       body~,
@@ -1128,39 +1093,34 @@ pub impl ToJson for Expr with to_json(self) {
       loc~
     ) =>
       {
-        "type": "Try",
-        "body": body.to_json(),
+        "type": "Expr::Try",
+        "body": body,
         "catch_": list_to_json(catch_),
         "catch_all": catch_all,
         "try_else": option_to_json(try_else.map(list_to_json)),
         "has_try": has_try,
         "legacy_else": legacy_else,
-        "try_loc": try_loc.to_json(),
-        "catch_loc": catch_loc.to_json(),
-        "else_loc": else_loc.to_json(),
-        "loc": loc.to_json(),
+        "try_loc": try_loc,
+        "catch_loc": catch_loc,
+        "else_loc": else_loc,
+        "loc": loc,
       }
     TryQuestion(body~, try_loc~, loc~) =>
       {
-        "type": "TryQuestion",
-        "body": body.to_json(),
-        "try_loc": try_loc.to_json(),
-        "loc": loc.to_json(),
+        "type": "Expr::TryQuestion",
+        "body": body,
+        "try_loc": try_loc,
+        "loc": loc,
       }
     Map(elems~, loc~) =>
-      { "type": "Map", "elems": list_to_json(elems), "loc": loc.to_json() }
+      { "type": "Expr::Map", "elems": list_to_json(elems), "loc": loc }
     Group(expr~, group~, loc~) =>
-      {
-        "type": "Group",
-        "expr": expr.to_json(),
-        "group": group.to_json(),
-        "loc": loc.to_json(),
-      }
+      { "type": "Expr::Group", "expr": expr, "group": group, "loc": loc }
     StaticAssert(asserts~, body~) =>
       {
-        "type": "StaticAssert",
+        "type": "Expr::StaticAssert",
         "asserts": list_to_json(asserts),
-        "body": body.to_json(),
+        "body": body,
       }
   }
 }
@@ -1171,83 +1131,83 @@ pub impl ToJson for Impl with to_json(self) {
   match self {
     TopExpr(expr~, is_main~, local_types~, loc~) =>
       {
-        "type": "TopExpr",
-        "expr": expr.to_json(),
+        "type": "Impl::TopExpr",
+        "expr": expr,
         "is_main": is_main,
         "local_types": list_to_json(local_types),
-        "loc": loc.to_json(),
+        "loc": loc,
       }
     TopTest(expr~, name~, params~, local_types~, loc~, attrs~, doc~) =>
       {
-        "type": "TopTest",
-        "expr": expr.to_json(),
+        "type": "Impl::TopTest",
+        "expr": expr,
         "name": option_to_json(
           name.map(fn(tuple) {
             let (s, l) = tuple
-            Json::array([s.to_json(), l.to_json()])
+            ([s, l] : Json)
           }),
         ),
         "params": option_to_json(params.map(list_to_json)),
         "local_types": list_to_json(local_types),
-        "loc": loc.to_json(),
+        "loc": loc,
         "attrs": list_to_json(attrs),
-        "doc": doc.to_json(),
+        "doc": doc,
       }
-    TopTypeDef(type_decl) => { "type": "TopTypeDef", "0": type_decl.to_json() }
+    TopTypeDef(type_decl) => { "type": "Impl::TopTypeDef", "0": type_decl }
     TopFuncDef(fun_decl~, decl_body~, loc~) =>
       {
-        "type": "TopFuncDef",
-        "fun_decl": fun_decl.to_json(),
-        "decl_body": decl_body.to_json(),
-        "loc": loc.to_json(),
+        "type": "Impl::TopFuncDef",
+        "fun_decl": fun_decl,
+        "decl_body": decl_body,
+        "loc": loc,
       }
     TopFuncAlias(pkg~, type_name~, targets~, vis~, attrs~, is_list~, doc~, loc~) =>
       {
-        "type": "TopFuncAlias",
+        "type": "Impl::TopFuncAlias",
         "pkg": option_to_json(pkg),
         "type_name": option_to_json(type_name),
         "targets": list_to_json(targets),
-        "vis": vis.to_json(),
+        "vis": vis,
         "attrs": list_to_json(attrs),
         "is_list": is_list,
-        "doc": doc.to_json(),
-        "loc": loc.to_json(),
+        "doc": doc,
+        "loc": loc,
       }
     TopLetDef(binder~, ty~, expr~, vis~, is_constant~, loc~, attrs~, doc~) =>
       {
-        "type": "TopLetDef",
-        "binder": binder.to_json(),
+        "type": "Impl::TopLetDef",
+        "binder": binder,
         "ty": option_to_json(ty),
-        "expr": expr.to_json(),
-        "vis": vis.to_json(),
+        "expr": expr,
+        "vis": vis,
         "is_constant": is_constant,
-        "loc": loc.to_json(),
+        "loc": loc,
         "attrs": list_to_json(attrs),
-        "doc": doc.to_json(),
+        "doc": doc,
       }
     TopTrait(trait_decl) =>
-      { "type": "TopTrait", "trait_decl": trait_decl.to_json() }
+      { "type": "Impl::TopTrait", "trait_decl": trait_decl }
     TopLegacyTypeAlias(binder~, target~, vis~, deriving~, loc~, attrs~, doc~) =>
       {
-        "type": "TopLegacyTypeAlias",
-        "binder": binder.to_json(),
-        "target": target.to_json(),
-        "vis": vis.to_json(),
+        "type": "Impl::TopLegacyTypeAlias",
+        "binder": binder,
+        "target": target,
+        "vis": vis,
         "deriving": list_to_json(deriving),
-        "loc": loc.to_json(),
+        "loc": loc,
         "attrs": list_to_json(attrs),
-        "doc": doc.to_json(),
+        "doc": doc,
       }
     TopBatchTypeAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
       {
-        "type": "TopBatchTypeAlias",
+        "type": "Impl::TopBatchTypeAlias",
         "pkg": option_to_json(pkg),
         "targets": list_to_json(targets),
-        "vis": vis.to_json(),
-        "loc": loc.to_json(),
+        "vis": vis,
+        "loc": loc,
         "attrs": list_to_json(attrs),
         "is_list": is_list,
-        "doc": doc.to_json(),
+        "doc": doc,
       }
     TopBatchTraitAlias(
       pkg~,
@@ -1260,15 +1220,15 @@ pub impl ToJson for Impl with to_json(self) {
       doc~
     ) =>
       {
-        "type": "TopBatchTraitAlias",
+        "type": "Impl::TopBatchTraitAlias",
         "pkg": option_to_json(pkg),
         "targets": list_to_json(targets),
-        "vis": vis.to_json(),
-        "loc": loc.to_json(),
+        "vis": vis,
+        "loc": loc,
         "attrs": list_to_json(attrs),
         "is_list": is_list,
         "is_old_syntax": is_old_syntax,
-        "doc": doc.to_json(),
+        "doc": doc,
       }
     TopImpl(
       self_ty~,
@@ -1286,20 +1246,20 @@ pub impl ToJson for Impl with to_json(self) {
       doc~
     ) =>
       {
-        "type": "TopImpl",
+        "type": "Impl::TopImpl",
         "self_ty": option_to_json(self_ty),
-        "trait_": trait_.to_json(),
-        "method_name": method_name.to_json(),
+        "trait_": trait_,
+        "method_name": method_name,
         "has_error": option_to_json(has_error),
         "quantifiers": list_to_json(quantifiers),
         "params": list_to_json(params),
         "ret_ty": option_to_json(ret_ty),
-        "err_ty": err_ty.to_json(),
-        "body": body.to_json(),
-        "vis": vis.to_json(),
-        "loc": loc.to_json(),
+        "err_ty": err_ty,
+        "body": body,
+        "vis": vis,
+        "loc": loc,
         "attrs": list_to_json(attrs),
-        "doc": doc.to_json(),
+        "doc": doc,
       }
     TopView(
       quantifiers~,
@@ -1312,26 +1272,26 @@ pub impl ToJson for Impl with to_json(self) {
       doc~
     ) =>
       {
-        "type": "TopView",
+        "type": "Impl::TopView",
         "quantifiers": list_to_json(quantifiers),
-        "source_ty": source_ty.to_json(),
+        "source_ty": source_ty,
         "view_constrs": list_to_json(view_constrs),
         "body": list_to_json(body),
-        "vis": vis.to_json(),
-        "loc": loc.to_json(),
+        "vis": vis,
+        "loc": loc,
         "attrs": list_to_json(attrs),
-        "doc": doc.to_json(),
+        "doc": doc,
       }
     TopImplRelation(self_ty~, trait_~, quantifiers~, vis~, attrs~, doc~, loc~) =>
       {
-        "type": "TopImplRelation",
-        "self_ty": self_ty.to_json(),
-        "trait_": trait_.to_json(),
+        "type": "Impl::TopImplRelation",
+        "self_ty": self_ty,
+        "trait_": trait_,
         "quantifiers": list_to_json(quantifiers),
-        "vis": vis.to_json(),
+        "vis": vis,
         "attrs": list_to_json(attrs),
-        "loc": loc.to_json(),
-        "doc": doc.to_json(),
+        "loc": loc,
+        "doc": doc,
       }
   }
 }

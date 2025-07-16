@@ -451,7 +451,7 @@ fn yy_action_2(
 }
 
 // file:///./mbti_parser.mbty
-// 252|    "_" { TAny(mk_loc($sloc)) }
+// 252|    "_" { Any(loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_4(
@@ -467,7 +467,7 @@ fn yy_action_4(
   YYObj_Type(
     {
       ()
-      TAny(mk_loc((_symbol_start_pos, _end_pos)))
+      Any(loc=mk_loc((_symbol_start_pos, _end_pos)))
     },
   )
 }
@@ -490,7 +490,7 @@ fn yy_action_5(
 }
 
 // file:///./mbti_parser.mbty
-// 257|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { TArrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
+// 257|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_6(
@@ -512,7 +512,7 @@ fn yy_action_6(
   YYObj_Type(
     {
       ()
-      TArrow(
+      Arrow(
         args=_dollar5.unwrap_or(@list.empty()).add(_dollar3),
         res=_dollar8.0,
         err=_dollar8.1,
@@ -657,8 +657,8 @@ fn yy_action_17(
 
 // file:///./mbti_parser.mbty
 // 266|    simple_type "raise" "?" {
-// 267|    let fake_error : Type = TName(ConstrId::{ id : QualifiedIdent::Ident(name="Error"), loc :@ast.no_location }, @list.empty(), loc=@ast.no_location)
-// 268|    ($1, MaybeError(fake_error, is_old_syntax = false)) 
+// 267|    let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@ast.no_location }, tys=@list.empty(), loc=@ast.no_location)
+// 268|    ($1, MaybeError(ty=fake_error)) 
 // 269|  }
 
 ///|
@@ -670,15 +670,15 @@ fn yy_action_18(
   YYObj__Type__ErrorType_(
     {
       ()
-      let fake_error : Type = TName(
-        ConstrId::{
+      let fake_error : Type = Name(
+        constr_id={
           id: QualifiedIdent::Ident(name="Error"),
           loc: @ast.no_location,
         },
-        @list.empty(),
+        tys=@list.empty(),
         loc=@ast.no_location,
       )
-      (_dollar1, MaybeError(fake_error, is_old_syntax=false))
+      (_dollar1, MaybeError(ty=fake_error))
     },
   )
 }
@@ -764,7 +764,7 @@ fn yy_action_21(
 }
 
 // file:///./mbti_parser.mbty
-// 247|    simple_type "?" { TOption($1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
+// 247|    simple_type "?" { Option(ty=$1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
 
 ///|
 fn yy_action_22(
@@ -783,8 +783,8 @@ fn yy_action_22(
   YYObj_Type(
     {
       ()
-      TOption(
-        _dollar1,
+      Option(
+        ty=_dollar1,
         loc=mk_loc((_symbol_start_pos, _end_pos)),
         question_loc=mk_loc((_start_pos_of_item1, _end_pos_of_item1)),
       )
@@ -883,7 +883,7 @@ fn yy_action_25(
 }
 
 // file:///./mbti_parser.mbty
-// 265|    simple_type "raise" error_type { ($1, ErrorType(ty = $3, is_old_syntax = false)) }
+// 265|    simple_type "raise" error_type { ($1, ErrorType(ty = $3)) }
 
 ///|
 fn yy_action_26(
@@ -895,7 +895,7 @@ fn yy_action_26(
   YYObj__Type__ErrorType_(
     {
       ()
-      (_dollar1, ErrorType(ty=_dollar3, is_old_syntax=false))
+      (_dollar1, ErrorType(ty=_dollar3))
     },
   )
 }
@@ -972,7 +972,7 @@ fn yy_action_30(
 }
 
 // file:///./mbti_parser.mbty
-// 208|    boption("mut") post_label ":" type_ { ConstrParam::{mut_: $1, type_: $4, label: Some($2)} }
+// 208|    boption("mut") post_label ":" type_ { ConstrParam::{mut_: $1, ty: $4, label: Some($2)} }
 
 ///|
 fn yy_action_31(
@@ -985,7 +985,7 @@ fn yy_action_31(
   YYObj_ConstrParam(
     {
       ()
-      ConstrParam::{ mut_: _dollar1, type_: _dollar4, label: Some(_dollar2) }
+      ConstrParam::{ mut_: _dollar1, ty: _dollar4, label: Some(_dollar2) }
     },
   )
 }
@@ -1387,7 +1387,7 @@ fn yy_action_52(
 }
 
 // file:///./mbti_parser.mbty
-// 251|    "&" qualified_uident_ { TObject($2) }
+// 251|    "&" qualified_uident_ { Object($2) }
 
 ///|
 fn yy_action_53(
@@ -1398,7 +1398,7 @@ fn yy_action_53(
   YYObj_Type(
     {
       ()
-      TObject(_dollar2)
+      Object(_dollar2)
     },
   )
 }
@@ -1620,7 +1620,7 @@ fn yy_action_63(
 }
 
 // file:///./mbti_parser.mbty
-// 212|    boption("mut") LIDENT ":" type_ { FieldDecl::{ name: FieldName::{ name : $2, loc : mk_loc($loc($2)) }, vis: Default, mut_: $1, type_: $4, loc: mk_loc($sloc)} }
+// 212|    boption("mut") LIDENT ":" type_ { FieldDecl::{ name: FieldName::{ label: $2, loc : mk_loc($loc($2)) }, vis: Default, mut_: $1, ty: $4, loc: mk_loc($sloc)} }
 
 ///|
 fn yy_action_64(
@@ -1643,12 +1643,12 @@ fn yy_action_64(
       ()
       FieldDecl::{
         name: FieldName::{
-          name: _dollar2,
+          label: _dollar2,
           loc: mk_loc((_start_pos_of_item1, _end_pos_of_item1)),
         },
         vis: Default,
         mut_: _dollar1,
-        type_: _dollar4,
+        ty: _dollar4,
         loc: mk_loc((_symbol_start_pos, _end_pos)),
       }
     },
@@ -1832,7 +1832,7 @@ fn yy_action_74(
 }
 
 // file:///./mbti_parser.mbty
-// 264|    simple_type "raise" { ($1, DefaultErrorType(mk_loc($loc($2)), is_old_syntax = false)) }
+// 264|    simple_type "raise" { ($1, DefaultErrorType(loc=mk_loc($loc($2)))) }
 
 ///|
 fn yy_action_75(
@@ -1847,10 +1847,7 @@ fn yy_action_75(
       ()
       (
         _dollar1,
-        DefaultErrorType(
-          mk_loc((_start_pos_of_item1, _end_pos_of_item1)),
-          is_old_syntax=false,
-        ),
+        DefaultErrorType(loc=mk_loc((_start_pos_of_item1, _end_pos_of_item1))),
       )
     },
   )
@@ -2021,7 +2018,7 @@ fn yy_action_83(
 }
 
 // file:///./mbti_parser.mbty
-// 250|    qualified_uident_ optional_type_arguments { TName($1, $2, loc=mk_loc($sloc)) }
+// 250|    qualified_uident_ optional_type_arguments { Name(constr_id=$1, tys=$2, loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_84(
@@ -2039,7 +2036,11 @@ fn yy_action_84(
   YYObj_Type(
     {
       ()
-      TName(_dollar1, _dollar2, loc=mk_loc((_symbol_start_pos, _end_pos)))
+      Name(
+        constr_id=_dollar1,
+        tys=_dollar2,
+        loc=mk_loc((_symbol_start_pos, _end_pos)),
+      )
     },
   )
 }
@@ -2069,7 +2070,7 @@ fn yy_action_85(
 }
 
 // file:///./mbti_parser.mbty
-// 199|    UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { ConstrDecl::{name: ConstrName::{ name : $1, loc : mk_loc($loc($1)) }, args: $2, tag: $3, loc: mk_loc($sloc)} }
+// 199|    UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { ConstrDecl::{name: ConstrName::{ name : $1, loc : mk_loc($loc($1)) }, args: $2, tag: $3, loc: mk_loc($sloc), doc: DocString::empty()} }
 
 ///|
 fn yy_action_86(
@@ -2098,6 +2099,7 @@ fn yy_action_86(
         args: _dollar2,
         tag: _dollar3,
         loc: mk_loc((_symbol_start_pos, _end_pos)),
+        doc: DocString::empty(),
       }
     },
   )
@@ -2204,7 +2206,7 @@ fn yy_action_90(
 }
 
 // file:///./mbti_parser.mbty
-// 248|    "(" type_ "," separated_nonempty_list(",", type_) ")" { TTuple($4.add($2), loc=mk_loc($sloc)) }
+// 248|    "(" type_ "," separated_nonempty_list(",", type_) ")" { Tuple(tys=$4.add($2), loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_91(
@@ -2222,7 +2224,10 @@ fn yy_action_91(
   YYObj_Type(
     {
       ()
-      TTuple(_dollar4.add(_dollar2), loc=mk_loc((_symbol_start_pos, _end_pos)))
+      Tuple(
+        tys=_dollar4.add(_dollar2),
+        loc=mk_loc((_symbol_start_pos, _end_pos)),
+      )
     },
   )
 }
@@ -2377,7 +2382,7 @@ fn yy_action_99(
 }
 
 // file:///./mbti_parser.mbty
-// 259|    is_async "(" type_ ")" "->" return_type { TArrow(args=@list.singleton($3), res=$6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
+// 259|    is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_100(
@@ -2397,7 +2402,7 @@ fn yy_action_100(
   YYObj_Type(
     {
       ()
-      TArrow(
+      Arrow(
         args=@list.singleton(_dollar3),
         res=_dollar6.0,
         err=_dollar6.1,
@@ -2689,7 +2694,7 @@ fn yy_action_115(
 }
 
 // file:///./mbti_parser.mbty
-// 257|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { TArrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
+// 257|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_116(
@@ -2711,7 +2716,7 @@ fn yy_action_116(
   YYObj_Type(
     {
       ()
-      TArrow(
+      Arrow(
         args=_dollar5.unwrap_or(@list.empty()).add(_dollar3),
         res=_dollar8.0,
         err=_dollar8.1,
@@ -3022,7 +3027,7 @@ fn yy_action_3(
 }
 
 // file:///./mbti_parser.mbty
-// 257|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { TArrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
+// 257|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_132(
@@ -3044,7 +3049,7 @@ fn yy_action_132(
   YYObj_Type(
     {
       ()
-      TArrow(
+      Arrow(
         args=_dollar5.unwrap_or(@list.empty()).add(_dollar3),
         res=_dollar8.0,
         err=_dollar8.1,
@@ -3056,7 +3061,7 @@ fn yy_action_132(
 }
 
 // file:///./mbti_parser.mbty
-// 257|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { TArrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
+// 257|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_133(
@@ -3078,7 +3083,7 @@ fn yy_action_133(
   YYObj_Type(
     {
       ()
-      TArrow(
+      Arrow(
         args=_dollar5.unwrap_or(@list.empty()).add(_dollar3),
         res=_dollar8.0,
         err=_dollar8.1,
@@ -3173,7 +3178,7 @@ fn yy_action_137(
 }
 
 // file:///./mbti_parser.mbty
-// 258|    is_async "(" ")" "->" return_type { TArrow(args=@list.empty(), res=$5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
+// 258|    is_async "(" ")" "->" return_type { Arrow(args=@list.empty(), res=$5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_138(
@@ -3192,7 +3197,7 @@ fn yy_action_138(
   YYObj_Type(
     {
       ()
-      TArrow(
+      Arrow(
         args=@list.empty(),
         res=_dollar5.0,
         err=_dollar5.1,
@@ -3765,7 +3770,7 @@ fn yy_action_165(
 }
 
 // file:///./mbti_parser.mbty
-// 259|    is_async "(" type_ ")" "->" return_type { TArrow(args=@list.singleton($3), res=$6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
+// 259|    is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_166(
@@ -3785,7 +3790,7 @@ fn yy_action_166(
   YYObj_Type(
     {
       ()
-      TArrow(
+      Arrow(
         args=@list.singleton(_dollar3),
         res=_dollar6.0,
         err=_dollar6.1,
@@ -3922,7 +3927,7 @@ fn yy_action_172(
 }
 
 // file:///./mbti_parser.mbty
-// 258|    is_async "(" ")" "->" return_type { TArrow(args=@list.empty(), res=$5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
+// 258|    is_async "(" ")" "->" return_type { Arrow(args=@list.empty(), res=$5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_173(
@@ -3941,7 +3946,7 @@ fn yy_action_173(
   YYObj_Type(
     {
       ()
-      TArrow(
+      Arrow(
         args=@list.empty(),
         res=_dollar5.0,
         err=_dollar5.1,
@@ -3971,7 +3976,7 @@ fn yy_action_174(
 }
 
 // file:///./mbti_parser.mbty
-// 207|    boption("mut") type_ { ConstrParam::{mut_: $1, type_: $2, label: None} }
+// 207|    boption("mut") type_ { ConstrParam::{mut_: $1, ty: $2, label: None} }
 
 ///|
 fn yy_action_175(
@@ -3983,7 +3988,7 @@ fn yy_action_175(
   YYObj_ConstrParam(
     {
       ()
-      ConstrParam::{ mut_: _dollar1, type_: _dollar2, label: None }
+      ConstrParam::{ mut_: _dollar1, ty: _dollar2, label: None }
     },
   )
 }
@@ -4152,7 +4157,7 @@ fn yy_action_184(
 }
 
 // file:///./mbti_parser.mbty
-// 273|    qualified_uident_ { TName($1, @list.empty(), loc=mk_loc($sloc)) }
+// 273|    qualified_uident_ { Name(constr_id=$1, tys=@list.empty(), loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_185(
@@ -4169,7 +4174,11 @@ fn yy_action_185(
   YYObj_Type(
     {
       ()
-      TName(_dollar1, @list.empty(), loc=mk_loc((_symbol_start_pos, _end_pos)))
+      Name(
+        constr_id=_dollar1,
+        tys=@list.empty(),
+        loc=mk_loc((_symbol_start_pos, _end_pos)),
+      )
     },
   )
 }

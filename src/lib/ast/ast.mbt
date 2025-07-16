@@ -1,5 +1,4 @@
 ///|
-//
 pub(all) enum Visibility {
   Default
   Pub(attr~ : String?, loc~ : Location)
@@ -7,7 +6,6 @@ pub(all) enum Visibility {
 }
 
 ///|
-// checked!
 pub(all) enum Constant {
   Bool(Bool)
   Byte(ByteLiteral)
@@ -24,7 +22,6 @@ pub(all) enum Constant {
 }
 
 ///|
-// checked!
 pub(all) struct Label {
   name : String
   loc : Location
@@ -57,50 +54,47 @@ pub(all) struct ConstrId {
 }
 
 ///|
-// checked!
 pub(all) enum Type {
-  TAny(Location)
-  TArrow(
+  Any(loc~ : Location)
+  Arrow(
     args~ : @list.T[Type],
     res~ : Type,
     err~ : ErrorType,
     is_async~ : Bool,
     loc~ : Location
   )
-  TTuple(@list.T[Type], loc~ : Location)
-  TName(ConstrId, @list.T[Type], loc~ : Location)
-  TOption(Type, loc~ : Location, question_loc~ : Location)
-  TObject(ConstrId)
+  Tuple(tys~ : @list.T[Type], loc~ : Location)
+  Name(constr_id~ : ConstrId, tys~ : @list.T[Type], loc~ : Location)
+  Option(ty~ : Type, loc~ : Location, question_loc~ : Location)
+  Object(ConstrId)
 }
 
 ///|
-// checked!
 pub(all) enum ErrorType {
-  ErrorType(ty~ : Type, is_old_syntax~ : Bool)
-  DefaultErrorType(Location, is_old_syntax~ : Bool)
+  ErrorType(ty~ : Type)
+  DefaultErrorType(loc~ : Location)
   NoErrorType
-  MaybeError(Type, is_old_syntax~ : Bool)
+  Noraise(loc~ : Location)
+  MaybeError(ty~ : Type)
 }
 
 ///|
-// checked!
 pub(all) struct ConstrParam {
-  type_ : Type
+  ty : Type
   mut_ : Bool
   label : Label?
 }
 
 ///|
-// checked!
 pub(all) struct ConstrDecl {
   name : ConstrName
   args : @list.T[ConstrParam]?
   tag : (String, Location)?
   loc : Location
+  doc : DocString
 }
 
 ///|
-// checked!
 pub(all) enum ExceptionDecl {
   NoPayload
   SinglePayload(Type)
@@ -109,22 +103,20 @@ pub(all) enum ExceptionDecl {
 
 ///|
 pub(all) struct FieldName {
-  name : String
+  label : String
   loc : Location
 }
 
 ///|
-// checked!
 pub(all) struct FieldDecl {
   name : FieldName
-  type_ : Type
+  ty : Type
   mut_ : Bool
   vis : Visibility
   loc : Location
 }
 
 ///|
-// checked!
 pub(all) enum TypeDesc {
   Abstract
   Extern
@@ -136,7 +128,6 @@ pub(all) enum TypeDesc {
 }
 
 ///|
-// checked!
 pub(all) enum Hole {
   Synthesized
   Incomplete
@@ -144,7 +135,6 @@ pub(all) enum Hole {
 }
 
 ///|
-// checked!
 pub(all) enum ArgumentKind {
   Positional
   Labelled(Label)
@@ -154,7 +144,6 @@ pub(all) enum ArgumentKind {
 }
 
 ///|
-// checked!
 pub(all) enum FnKind {
   Lambda
   Matrix
@@ -162,18 +151,16 @@ pub(all) enum FnKind {
 }
 
 ///|
-// checked!
 pub(all) enum Group {
-  GroupBrace
-  GroupParen
+  Brace
+  Paren
 }
 
 ///|
-// checked!
 pub(all) enum TrailingMark {
-  TrailingComma
-  TrailingSemi
-  TrailingNone
+  Comma
+  Semi
+  None
 }
 
 ///|
@@ -185,14 +172,12 @@ pub(all) enum ApplyAttr {
 }
 
 ///|
-// checked!
 pub(all) struct TypeVarConstraint {
   trait_ : LongIdent
   loc : Location
 }
 
 ///|
-// checked!
 pub(all) struct TypeVarBinder {
   name : String
   constraints : @list.T[TypeVarConstraint]
@@ -200,28 +185,24 @@ pub(all) struct TypeVarBinder {
 }
 
 ///|
-// checked!
 pub(all) struct TypeDeclBinder {
   name : String?
   loc : Location
 }
 
 ///|
-// checked!
 pub(all) struct Binder {
   name : String
   loc : Location
 }
 
 ///|
-// checked!
 pub(all) struct Var {
   name : LongIdent
   loc : Location
 }
 
 ///|
-// checked!
 pub(all) enum ConstructorExtraInfo {
   TypeName(TypeName)
   Package(String)
@@ -229,7 +210,6 @@ pub(all) enum ConstructorExtraInfo {
 }
 
 ///|
-// checked!
 pub(all) struct Constructor {
   name : ConstrName
   extra_info : ConstructorExtraInfo
@@ -237,7 +217,6 @@ pub(all) struct Constructor {
 }
 
 ///|
-// checked!
 pub(all) enum Accessor {
   Label(Label)
   Index(tuple_index~ : Int, loc~ : Location)
@@ -245,21 +224,18 @@ pub(all) enum Accessor {
 }
 
 ///|
-// checked!
 pub(all) struct AliasTarget {
   binder : Binder
   target : Label?
 }
 
 ///|
-// checked!
 pub(all) struct Argument {
   value : Expr
   kind : ArgumentKind
 }
 
 ///|
-// checked!
 pub(all) enum Parameter {
   DiscardPositional(ty~ : Type?, loc~ : Location)
   Positional(binder~ : Binder, ty~ : Type?)
@@ -269,11 +245,9 @@ pub(all) enum Parameter {
 }
 
 ///|
-// checked!
 pub typealias @list.T[Parameter] as Parameters
 
 ///|
-// checked!
 pub(all) struct Case {
   pattern : Pattern
   guard_ : Expr?
@@ -281,7 +255,6 @@ pub(all) struct Case {
 }
 
 ///|
-// checked!
 pub(all) struct MultiArgCase {
   patterns : @list.T[Pattern]
   guard_ : Expr?
@@ -289,14 +262,12 @@ pub(all) struct MultiArgCase {
 }
 
 ///|
-// checked!
 pub(all) enum SpreadableElem {
-  ElemRegular(Expr)
-  ElemSpread(expr~ : Expr, loc~ : Location)
+  Regular(Expr)
+  Spread(expr~ : Expr, loc~ : Location)
 }
 
 ///|
-// checked!
 pub(all) struct MapExprElem {
   key : Constant
   expr : Expr
@@ -305,16 +276,14 @@ pub(all) struct MapExprElem {
 }
 
 ///|
-// checked!
 pub(all) struct StaticAssertion {
-  assert_type : Type
-  assert_trait : LongIdent
-  assert_loc : Location
-  assert_msg : String
+  ty : Type
+  trait_ : LongIdent
+  loc : Location
+  msg : String
 }
 
 ///|
-// checked!
 pub(all) enum Func {
   Lambda(
     parameters~ : Parameters,
@@ -337,7 +306,6 @@ pub(all) enum Func {
 }
 
 ///|
-// checked!
 pub(all) struct FieldDef {
   label : Label
   expr : Expr
@@ -346,18 +314,16 @@ pub(all) struct FieldDef {
 }
 
 ///|
-// checked!
 pub(all) enum InterpElem {
-  InterpLit(repr~ : StringLiteral, loc~ : Location)
-  InterpExpr(expr~ : Expr, loc~ : Location)
-  InterpSource(@ast_types.InterpSource)
+  Literal(repr~ : StringLiteral, loc~ : Location)
+  Expr(expr~ : Expr, loc~ : Location)
+  Source(@ast_types.InterpSource)
 }
 
 ///|
-// checked!
 pub(all) enum MultilineStringElem {
-  MultilineString(String)
-  MultilineInterp(@list.T[InterpElem])
+  String(String)
+  Interp(@list.T[InterpElem])
 }
 
 ///|
@@ -371,7 +337,7 @@ pub(all) enum Expr {
   )
   Infix(op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : Location)
   Unary(op~ : Var, expr~ : Expr, loc~ : Location)
-  Array_(exprs~ : @list.T[Expr], loc~ : Location)
+  Array(exprs~ : @list.T[Expr], loc~ : Location)
   ArraySpread(elems~ : @list.T[SpreadableElem], loc~ : Location)
   ArrayGet(array~ : Expr, index~ : Expr, loc~ : Location)
   ArrayGetSlice(
@@ -401,7 +367,7 @@ pub(all) enum Expr {
     label~ : Label?,
     loc~ : Location
   )
-  Function_(func~ : Func, loc~ : Location)
+  Function(func~ : Func, loc~ : Location)
   Ident(id~ : Var, loc~ : Location)
   If(cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : Location)
   Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : Location)
@@ -462,10 +428,10 @@ pub(all) enum Expr {
   )
   Pipe(lhs~ : Expr, rhs~ : Expr, loc~ : Location)
   Assign(var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : Location)
-  Hole_(loc~ : Location, kind~ : Hole)
+  Hole(loc~ : Location, kind~ : Hole)
   Return(return_value~ : Expr?, loc~ : Location)
   Raise(err_value~ : Expr, loc~ : Location)
-  Unit_(loc~ : Location, faked~ : Bool)
+  Unit(loc~ : Location, faked~ : Bool)
   Break(arg~ : Expr?, label~ : Label?, loc~ : Location)
   Continue(args~ : @list.T[Expr], label~ : Label?, loc~ : Location)
   Loop(
@@ -511,16 +477,14 @@ pub(all) enum Expr {
 }
 
 ///|
-// checked!
 pub(all) enum DotDotBinder {
   Underscore
   NoBinder
   BinderAs(Binder)
-  Binder_(Binder)
+  Binder(Binder)
 }
 
 ///|
-// checked!
 pub(all) enum ArrayPattern {
   Pattern(Pattern)
   StringSpread(StringLiteral)
@@ -529,14 +493,12 @@ pub(all) enum ArrayPattern {
 }
 
 ///|
-// checked!
 pub(all) enum ArrayPatterns {
   Closed(@list.T[ArrayPattern])
   Open(@list.T[ArrayPattern], @list.T[ArrayPattern], DotDotBinder)
 }
 
 ///|
-// checked!
 pub(all) struct FieldPat {
   label : Label
   pattern : Pattern
@@ -545,14 +507,12 @@ pub(all) struct FieldPat {
 }
 
 ///|
-// checked!
 pub(all) struct ConstrPatArg {
   pat : Pattern
   kind : ArgumentKind
 }
 
 ///|
-// checked!
 pub(all) struct MapPatElem {
   key : Constant
   pat : Pattern
@@ -566,7 +526,7 @@ pub(all) struct MapPatElem {
 pub(all) enum Pattern {
   Alias(pat~ : Pattern, alias_~ : Binder, loc~ : Location)
   Any(loc~ : Location)
-  Array_(pats~ : ArrayPatterns, loc~ : Location)
+  Array(pats~ : ArrayPatterns, loc~ : Location)
   Constant(c~ : Constant, loc~ : Location)
   Constraint(pat~ : Pattern, ty~ : Type, loc~ : Location)
   Constr(
@@ -584,11 +544,9 @@ pub(all) enum Pattern {
 }
 
 ///|
-// checked!
 pub typealias (StringLiteral, Location)? as TestName
 
 ///|
-// checked!
 pub(all) struct LocalTypeDecl {
   tycon : String
   tycon_loc : Location
@@ -605,7 +563,6 @@ pub(all) struct DerivingDirective {
 }
 
 ///|
-// checked!
 pub(all) struct TypeDecl {
   tycon : String
   tycon_loc : Location
@@ -616,32 +573,27 @@ pub(all) struct TypeDecl {
   type_vis : Visibility
   deriving : @list.T[DerivingDirective]
   loc : Location
-  deprecated_type_bang : Bool
 }
 
 ///|
-// checked!
 pub(all) enum FuncStubs {
   Import(module_name~ : StringLiteral, func_name~ : StringLiteral)
   Embedded(language~ : StringLiteral?, code~ : EmbeddedCode)
 }
 
 ///|
-// checked!
 pub(all) enum EmbeddedCode {
   CodeString(StringLiteral)
   CodeMultilineString(@list.T[String])
 }
 
 ///|
-// checked!
 pub(all) enum DeclBody {
   DeclBody(local_types~ : @list.T[LocalTypeDecl], expr~ : Expr)
   DeclStubs(FuncStubs)
 }
 
 ///|
-// checked!
 pub(all) struct FunDecl {
   type_name : TypeName?
   name : Binder
@@ -658,7 +610,6 @@ pub(all) struct FunDecl {
 }
 
 ///|
-/// checked!
 pub(all) struct TraitMethodDecl {
   name : Binder
   has_error : Location?
@@ -672,19 +623,17 @@ pub(all) struct TraitMethodDecl {
 }
 
 ///|
-// checked!
 pub(all) struct TraitDecl {
-  trait_name : Binder
-  trait_supers : @list.T[TypeVarConstraint]
-  trait_methods : @list.T[TraitMethodDecl]
-  trait_vis : Visibility
-  trait_loc : Location
-  trait_attrs : @list.T[Attribute]
-  mut trait_doc : DocString
+  name : Binder
+  supers : @list.T[TypeVarConstraint]
+  methods : @list.T[TraitMethodDecl]
+  vis : Visibility
+  loc : Location
+  attrs : @list.T[Attribute]
+  mut doc : DocString
 }
 
 ///|
-// checked!
 pub(all) enum Impl {
   TopExpr(
     expr~ : Expr,
