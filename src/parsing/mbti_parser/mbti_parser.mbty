@@ -94,6 +94,7 @@
 %token TEST "test"
 %token LOOP "loop"
 %token GUARD "guard"
+%token DEFER "defer"
 %token FOR "for"
 %token IN "in"
 %token IS "is"

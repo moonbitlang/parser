@@ -101,6 +101,7 @@ pub(all) enum Token {
   TEST
   LOOP
   GUARD
+  DEFER
   FOR
   IN
   IS
@@ -207,6 +208,7 @@ pub(all) enum TokenKind {
   TK_TEST
   TK_LOOP
   TK_GUARD
+  TK_DEFER
   TK_FOR
   TK_IN
   TK_IS

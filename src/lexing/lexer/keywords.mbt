@@ -42,6 +42,11 @@ let keyword_table : @hashmap.T[String, Token] = [
     ("async", ASYNC),
     ("is", IS),
     ("suberror", SUBERROR),
+    ("and", AND),
+    ("letrec", LETREC),
+    ("enumview", ENUMVIEW),
+    ("noraise", NORAISE),
+    ("defer", DEFER),
   ]
   |> @hashmap.from_array()
 

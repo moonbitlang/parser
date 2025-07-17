@@ -66,6 +66,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | IMPORT
     | IF
     | GUARD
+    | DEFER
     | WHILE
     | ASYNC
     | FN
@@ -151,6 +152,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | EXTERN
     | IF
     | GUARD
+    | DEFER
     | WHILE
     | ASYNC
     | FN
