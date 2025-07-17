@@ -482,6 +482,7 @@ fn loc_of_expression(expr : Expr) -> Location {
     If(cond=_, ifso=_, ifnot=_, loc~) => loc
     Guard(cond=_, otherwise=_, body=_, loc~) => loc
     Is(expr=_, pat=_, loc~) => loc
+    Defer(loc~, ..) => loc
     LetFn(name=_, func=_, body=_, loc~) => loc
     LetRec(bindings=_, body=_, loc~) => loc
     LetAnd(bindings=_, body=_, loc~) => loc

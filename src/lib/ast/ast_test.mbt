@@ -1246,6 +1246,12 @@ test "expr complex types to_json" {
       "loc": null,
     },
   )
+  @json.inspect(@ast.Defer(expr=unit_expr, body=unit_expr, loc=dummy_loc), content={
+    "type": "Expr::Is",
+    "expr": { "type": "Unit", "loc": null, "faked": false },
+    "pat": { "type": "Pattern::Any", "loc": null },
+    "loc": null,
+  })
   @json.inspect(@ast.Is(expr=unit_expr, pat=any_pattern, loc=dummy_loc), content={
     "type": "Expr::Is",
     "expr": { "type": "Unit", "loc": null, "faked": false },

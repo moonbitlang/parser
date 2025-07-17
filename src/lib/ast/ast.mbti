@@ -272,6 +272,7 @@ pub(all) enum Expr {
   If(cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @ast_types.Location)
   Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @ast_types.Location)
   Is(expr~ : Expr, pat~ : Pattern, loc~ : @ast_types.Location)
+  Defer(expr~ : Expr, body~ : Expr, loc~ : @ast_types.Location)
   LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : @ast_types.Location)
   LetRec(bindings~ : @list.T[(Binder, Func)], body~ : Expr, loc~ : @ast_types.Location)
   LetAnd(bindings~ : @list.T[(Binder, Type?, Func)], body~ : Expr, loc~ : @ast_types.Location)

@@ -908,6 +908,8 @@ pub impl ToJson for Expr with to_json(self) {
       }
     Is(expr~, pat~, loc~) =>
       { "type": "Expr::Is", "expr": expr, "pat": pat, "loc": loc }
+    Defer(expr~, body~, loc~) =>
+      { "type": "Expr::Defer", "expr": expr, "body": body, "loc": loc }
     LetFn(name~, func~, body~, loc~) =>
       {
         "type": "Expr::LetFn",
