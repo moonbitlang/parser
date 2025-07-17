@@ -1,19 +1,19 @@
-package "moonbitlang/parser/lib/lexer"
+package "moonbitlang/parser/lexing/lexer"
 
 import(
   "moonbitlang/core/list"
-  "moonbitlang/parser/lib/ast_types"
-  "moonbitlang/parser/lib/tokens"
+  "moonbitlang/parser/lexing/tokens"
+  "moonbitlang/parser/parsing/syntax_types"
 )
 
 // Values
-fn tokens_from_bytes(name~ : String = .., start_pos~ : @ast_types.Position = .., is_interpolation~ : Bool = .., comment~ : Bool, Bytes) -> LexResult
+fn tokens_from_bytes(name~ : String = .., start_pos~ : @syntax_types.Position = .., is_interpolation~ : Bool = .., comment~ : Bool, Bytes) -> LexResult
 
 // Types and methods
 pub struct LexResult {
-  tokens : Array[(@tokens.Token, @ast_types.Position, @ast_types.Position)]
-  errors : Array[(@ast_types.Position, @ast_types.Position, LexicalError)]
-  docstrings : Array[@list.T[(@ast_types.Location, @ast_types.Comment)]]
+  tokens : Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)]
+  errors : Array[(@syntax_types.Position, @syntax_types.Position, LexicalError)]
+  docstrings : Array[@list.T[(@syntax_types.Location, @syntax_types.Comment)]]
 }
 
 type Lexbuf

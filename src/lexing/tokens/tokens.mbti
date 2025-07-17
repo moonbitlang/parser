@@ -1,7 +1,7 @@
-package "moonbitlang/parser/lib/tokens"
+package "moonbitlang/parser/lexing/tokens"
 
 import(
-  "moonbitlang/parser/lib/ast_types"
+  "moonbitlang/parser/parsing/syntax_types"
 )
 
 // Values
@@ -16,13 +16,13 @@ pub(all) enum Token {
   DOUBLE(String)
   STRING(String)
   MULTILINE_STRING(String)
-  MULTILINE_INTERP(Array[@ast_types.InterpElem])
-  INTERP(Array[@ast_types.InterpElem])
+  MULTILINE_INTERP(Array[@syntax_types.InterpElem])
+  INTERP(Array[@syntax_types.InterpElem])
   ATTRIBUTE((String, String?, String))
   LIDENT(String)
   UIDENT(String)
   POST_LABEL(String)
-  COMMENT(@ast_types.Comment)
+  COMMENT(@syntax_types.Comment)
   NEWLINE
   INFIX1(String)
   INFIX2(String)

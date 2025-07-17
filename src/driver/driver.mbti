@@ -1,4 +1,4 @@
-package "moonbitlang/parser/parsing/parser"
+package "moonbitlang/parser/driver"
 
 // Values
 
