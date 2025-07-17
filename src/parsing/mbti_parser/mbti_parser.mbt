@@ -657,7 +657,7 @@ fn yy_action_17(
 
 // file:///./mbti_parser.mbty
 // 266|    simple_type "raise" "?" {
-// 267|    let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@ast.no_location }, tys=@list.empty(), loc=@ast.no_location)
+// 267|    let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
 // 268|    ($1, MaybeError(ty=fake_error)) 
 // 269|  }
 
@@ -673,10 +673,10 @@ fn yy_action_18(
       let fake_error : Type = Name(
         constr_id={
           id: QualifiedIdent::Ident(name="Error"),
-          loc: @ast.no_location,
+          loc: @syntax.no_location,
         },
         tys=@list.empty(),
-        loc=@ast.no_location,
+        loc=@syntax.no_location,
       )
       (_dollar1, MaybeError(ty=fake_error))
     },

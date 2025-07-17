@@ -34221,7 +34221,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "String",
             "loc": null
@@ -34583,82 +34589,6 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [
-            [
-              "deprecated",
-              null,
-              ""
-            ]
-          ],
-          "type_name": {
-            "name": "String",
-            "loc": null
-          },
-          "name": {
-            "name": "get",
-            "loc": null
-          },
-          "params": [
-            {
-              "$tag": "Positional",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "Ident",
-                    "name": "String"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            },
-            {
-              "$tag": "Positional",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "Ident",
-                    "name": "Int"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            }
-          ],
-          "return_": [
-            {
-              "type": "Type::Name",
-              "constr_id": {
-                "type": "ConstrId",
-                "id": {
-                  "type": "Ident",
-                  "name": "Char"
-                },
-                "loc": null
-              },
-              "tys": [],
-              "loc": null
-            },
-            {
-              "type": "ErrorType::NoErrorType"
-            }
-          ],
-          "type_params": []
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Func",
-        "0": {
           "attr": [],
           "type_name": {
             "name": "String",
@@ -34783,13 +34713,7 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [
-            [
-              "deprecated",
-              null,
-              ""
-            ]
-          ],
+          "attr": [],
           "type_name": {
             "name": "String",
             "loc": null
@@ -34839,7 +34763,7 @@
                 "type": "ConstrId",
                 "id": {
                   "type": "Ident",
-                  "name": "Char"
+                  "name": "Int"
                 },
                 "loc": null
               },
@@ -35009,7 +34933,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "String",
             "loc": null

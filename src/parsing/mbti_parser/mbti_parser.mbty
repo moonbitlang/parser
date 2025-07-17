@@ -264,7 +264,7 @@ return_type -> (Type, ErrorType)
   | simple_type "raise" { ($1, DefaultErrorType(loc=mk_loc($loc($2)))) }
   | simple_type "raise" error_type { ($1, ErrorType(ty = $3)) }
   | simple_type "raise" "?" {
-    let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@ast.no_location }, tys=@list.empty(), loc=@ast.no_location)
+    let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
     ($1, MaybeError(ty=fake_error)) 
   }
   ;

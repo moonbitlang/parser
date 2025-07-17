@@ -10,7 +10,10 @@
     "moonbitlang/x/fs"
   ],
   "import": [
-    "moonbitlang/parser/lib/tokens",
-    "moonbitlang/parser/lib/ast_types"
+    "moonbitlang/parser/lexing/tokens",
+    {
+      "path": "moonbitlang/parser/parsing/syntax_types",
+      "alias": "ast_types"
+    }
   ]
 }

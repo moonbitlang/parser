@@ -1,5 +1,5 @@
 ///| MoonBit parsing utilities - translated from OCaml parsing_util.ml
-// Translated from src/lib/ast/parsing_util.ml
+// Translated from src/ast/parsing_util.ml
 
 // Global counter for generating unique variable names
 let counter : Ref[Int] = Ref::new(0)

@@ -3,7 +3,7 @@
 set -euo pipefail
 
 CORE_PATH="core"
-TEST_FILE="src/lib/mbti_parser/mbti_parser_test.mbt"
+TEST_FILE="src/mbti_parser/mbti_parser_test.mbt"
 
 gen_compress_path() {
 cat <<EOF
@@ -24,7 +24,7 @@ test "parse $1" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@ast.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")

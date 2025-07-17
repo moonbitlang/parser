@@ -259,44 +259,51 @@
         "$tag": "Type",
         "0": {
           "name": {
-            "name": "StringIndex",
+            "name": "CreatingViewError",
             "loc": null
           },
           "type_params": [],
           "components": {
-            "type": "TypeDesc::Abstract"
+            "type": "TypeDesc::Error",
+            "0": {
+              "type": "ExceptionDecl::EnumPayload",
+              "0": [
+                {
+                  "type": "ConstrDecl",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "IndexOutOfBounds",
+                    "loc": null
+                  },
+                  "args": null,
+                  "tag": null,
+                  "doc": {
+                    "content": [],
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                {
+                  "type": "ConstrDecl",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "InvalidIndex",
+                    "loc": null
+                  },
+                  "args": null,
+                  "tag": null,
+                  "doc": {
+                    "content": [],
+                    "loc": null
+                  },
+                  "loc": null
+                }
+              ]
+            }
           },
           "vis": {
-            "type": "Default"
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Impl",
-        "0": {
-          "$tag": "Trait",
-          "type_params": [],
-          "type_": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "Ident",
-                "name": "StringIndex"
-              },
-              "loc": null
-            },
-            "tys": [],
-            "loc": null
-          },
-          "trait_name": {
-            "name": {
-              "type": "Ident",
-              "name": "Eq"
-            },
+            "type": "Pub",
+            "attr": null,
             "loc": null
           }
         }
@@ -315,7 +322,7 @@
               "type": "ConstrId",
               "id": {
                 "type": "Ident",
-                "name": "StringIndex"
+                "name": "CreatingViewError"
               },
               "loc": null
             },
@@ -356,7 +363,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "StringView",
             "loc": null
@@ -620,7 +633,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "StringView",
             "loc": null
@@ -1430,6 +1449,156 @@
             "loc": null
           },
           "name": {
+            "name": "get",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "StringView",
+            "loc": null
+          },
+          "name": {
+            "name": "get_char",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "StringView",
+            "loc": null
+          },
+          "name": {
             "name": "has_prefix",
             "loc": null
           },
@@ -2020,13 +2189,7 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [
-            [
-              "deprecated",
-              null,
-              ""
-            ]
-          ],
+          "attr": [],
           "type_name": {
             "name": "StringView",
             "loc": null
@@ -2110,7 +2273,20 @@
               "loc": null
             },
             {
-              "type": "ErrorType::NoErrorType"
+              "type": "ErrorType::ErrorType",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "CreatingViewError"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
             }
           ],
           "type_params": []
@@ -3814,7 +3990,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "String",
             "loc": null
@@ -4965,6 +5147,156 @@
             "loc": null
           },
           "name": {
+            "name": "get",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "String",
+            "loc": null
+          },
+          "name": {
+            "name": "get_char",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "Char"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "String",
+            "loc": null
+          },
+          "name": {
             "name": "has_prefix",
             "loc": null
           },
@@ -5085,210 +5417,6 @@
               },
               "tys": [],
               "loc": null
-            },
-            {
-              "type": "ErrorType::NoErrorType"
-            }
-          ],
-          "type_params": []
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Func",
-        "0": {
-          "attr": [
-            [
-              "deprecated",
-              null,
-              ""
-            ]
-          ],
-          "type_name": {
-            "name": "String",
-            "loc": null
-          },
-          "name": {
-            "name": "index_at",
-            "loc": null
-          },
-          "params": [
-            {
-              "$tag": "Positional",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "Ident",
-                    "name": "String"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            },
-            {
-              "$tag": "Positional",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "Ident",
-                    "name": "Int"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            },
-            {
-              "$tag": "OptionalDefault",
-              "0": {
-                "type": "Label",
-                "name": "start",
-                "loc": null
-              },
-              "1": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "Ident",
-                    "name": "StringIndex"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            }
-          ],
-          "return_": [
-            {
-              "type": "Type::Option",
-              "ty": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "Ident",
-                    "name": "StringIndex"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              },
-              "loc": null,
-              "question_loc": null
-            },
-            {
-              "type": "ErrorType::NoErrorType"
-            }
-          ],
-          "type_params": []
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Func",
-        "0": {
-          "attr": [
-            [
-              "deprecated",
-              null,
-              ""
-            ]
-          ],
-          "type_name": {
-            "name": "String",
-            "loc": null
-          },
-          "name": {
-            "name": "index_at_rev",
-            "loc": null
-          },
-          "params": [
-            {
-              "$tag": "Positional",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "Ident",
-                    "name": "String"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            },
-            {
-              "$tag": "Positional",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "Ident",
-                    "name": "Int"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            },
-            {
-              "$tag": "OptionalOption",
-              "0": {
-                "type": "Label",
-                "name": "end",
-                "loc": null
-              },
-              "1": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "Ident",
-                    "name": "StringIndex"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            }
-          ],
-          "return_": [
-            {
-              "type": "Type::Option",
-              "ty": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "Ident",
-                    "name": "StringIndex"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              },
-              "loc": null,
-              "question_loc": null
             },
             {
               "type": "ErrorType::NoErrorType"
@@ -5871,13 +5999,7 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [
-            [
-              "deprecated",
-              null,
-              ""
-            ]
-          ],
+          "attr": [],
           "type_name": {
             "name": "String",
             "loc": null
@@ -5961,7 +6083,20 @@
               "loc": null
             },
             {
-              "type": "ErrorType::NoErrorType"
+              "type": "ErrorType::ErrorType",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "Ident",
+                    "name": "CreatingViewError"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
             }
           ],
           "type_params": []

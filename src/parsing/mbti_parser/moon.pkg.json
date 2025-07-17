@@ -7,14 +7,17 @@
     }
   ],
   "import": [
-    "moonbitlang/parser/lib/tokens",
-    "moonbitlang/parser/lib/ast_types",
-    "moonbitlang/parser/lib/mbti_ast",
-    "moonbitlang/parser/lib/ast"
+    "moonbitlang/parser/lexing/tokens",
+    {
+      "path": "moonbitlang/parser/parsing/syntax_types",
+      "alias": "ast_types"
+    },
+    "moonbitlang/parser/parsing/mbti_ast",
+    "moonbitlang/parser/parsing/syntax",
   ],
   "warn-list": "-6",
   "test-import": [
     "moonbitlang/x/fs",
-    "moonbitlang/parser/lib/lexer"
+    "moonbitlang/parser/lexing/lexer"
   ]
 }

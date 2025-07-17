@@ -34,17 +34,17 @@ let dummy_attribute : @ast_types.Attribute = {
 
 ///|
 test "visibility to_json" {
-  @json.inspect(@ast.Default, content={ "type": "Default" })
-  @json.inspect(@ast.Priv(loc=dummy_loc), content={
+  @json.inspect(@syntax.Default, content={ "type": "Default" })
+  @json.inspect(@syntax.Priv(loc=dummy_loc), content={
     "type": "Priv",
     "loc": null,
   })
-  @json.inspect(@ast.Pub(attr=Some("readonly"), loc=dummy_loc), content={
+  @json.inspect(@syntax.Pub(attr=Some("readonly"), loc=dummy_loc), content={
     "type": "Pub",
     "attr": "readonly",
     "loc": null,
   })
-  @json.inspect(@ast.Pub(attr=None, loc=dummy_loc), content={
+  @json.inspect(@syntax.Pub(attr=None, loc=dummy_loc), content={
     "type": "Pub",
     "attr": null,
     "loc": null,
@@ -53,33 +53,36 @@ test "visibility to_json" {
 
 ///|
 test "constant to_json" {
-  @json.inspect(@ast.Bool(true), content={ "type": "Bool", "0": true })
-  @json.inspect(@ast.Byte(dummy_byte_literal), content={
+  @json.inspect(@syntax.Bool(true), content={ "type": "Bool", "0": true })
+  @json.inspect(@syntax.Byte(dummy_byte_literal), content={
     "type": "Byte",
     "0": "b'A'",
   })
-  @json.inspect(@ast.Bytes(dummy_bytes_literal), content={
+  @json.inspect(@syntax.Bytes(dummy_bytes_literal), content={
     "type": "Bytes",
     "0": "b\"ABC\"",
   })
-  @json.inspect(@ast.Char(dummy_char_literal), content={
+  @json.inspect(@syntax.Char(dummy_char_literal), content={
     "type": "Char",
     "0": "'A'",
   })
-  @json.inspect(@ast.Int("42"), content={ "type": "Int", "0": "42" })
-  @json.inspect(@ast.Int64("42L"), content={ "type": "Int64", "0": "42L" })
-  @json.inspect(@ast.UInt("42U"), content={ "type": "UInt", "0": "42U" })
-  @json.inspect(@ast.UInt64("42UL"), content={ "type": "UInt64", "0": "42UL" })
-  @json.inspect(@ast.Float("3.14"), content={ "type": "Float", "0": "3.14" })
-  @json.inspect(@ast.Double("3.14159"), content={
+  @json.inspect(@syntax.Int("42"), content={ "type": "Int", "0": "42" })
+  @json.inspect(@syntax.Int64("42L"), content={ "type": "Int64", "0": "42L" })
+  @json.inspect(@syntax.UInt("42U"), content={ "type": "UInt", "0": "42U" })
+  @json.inspect(@syntax.UInt64("42UL"), content={
+    "type": "UInt64",
+    "0": "42UL",
+  })
+  @json.inspect(@syntax.Float("3.14"), content={ "type": "Float", "0": "3.14" })
+  @json.inspect(@syntax.Double("3.14159"), content={
     "type": "Double",
     "0": "3.14159",
   })
-  @json.inspect(@ast.Constant::String(dummy_string_literal), content={
+  @json.inspect(@syntax.Constant::String(dummy_string_literal), content={
     "type": "String",
     "0": "test_string",
   })
-  @json.inspect(@ast.BigInt("123456789012345678901234567890"), content={
+  @json.inspect(@syntax.BigInt("123456789012345678901234567890"), content={
     "type": "BigInt",
     "0": "123456789012345678901234567890",
   })
@@ -87,7 +90,7 @@ test "constant to_json" {
 
 ///|
 test "label to_json" {
-  let label = @ast.Label::{ name: "test_label", loc: dummy_loc }
+  let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
   @json.inspect(label, content={
     "type": "Label",
     "name": "test_label",
@@ -97,7 +100,10 @@ test "label to_json" {
 
 ///|
 test "constr_name to_json" {
-  let constr_name = @ast.ConstrName::{ name: "TestConstructor", loc: dummy_loc }
+  let constr_name = @syntax.ConstrName::{
+    name: "TestConstructor",
+    loc: dummy_loc,
+  }
   @json.inspect(constr_name, content={
     "type": "ConstrName",
     "name": "TestConstructor",
@@ -107,11 +113,11 @@ test "constr_name to_json" {
 
 ///|
 test "long_ident to_json" {
-  @json.inspect(@ast.LongIdent::Ident(name="test_ident"), content={
+  @json.inspect(@syntax.LongIdent::Ident(name="test_ident"), content={
     "type": "Ident",
     "name": "test_ident",
   })
-  @json.inspect(@ast.LongIdent::Dot(pkg="test_pkg", id="test_name"), content={
+  @json.inspect(@syntax.LongIdent::Dot(pkg="test_pkg", id="test_name"), content={
     "type": "Dot",
     "pkg": "test_pkg",
     "id": "test_name",
@@ -120,8 +126,8 @@ test "long_ident to_json" {
 
 ///|
 test "type_name to_json" {
-  let type_name = @ast.TypeName::{
-    name: @ast.LongIdent::Ident(name="TestType"),
+  let type_name = @syntax.TypeName::{
+    name: @syntax.LongIdent::Ident(name="TestType"),
     is_object: false,
     loc: dummy_loc,
   }
@@ -135,8 +141,8 @@ test "type_name to_json" {
 
 ///|
 test "constr_id to_json" {
-  let constr_id = @ast.ConstrId::{
-    id: @ast.Dot(pkg="test_pkg", id="TestConstructor"),
+  let constr_id = @syntax.ConstrId::{
+    id: @syntax.Dot(pkg="test_pkg", id="TestConstructor"),
     loc: dummy_loc,
   }
   @json.inspect(constr_id, content={
@@ -148,20 +154,22 @@ test "constr_id to_json" {
 
 ///|
 test "error_type to_json" {
-  @json.inspect(@ast.NoErrorType, content={ "type": "ErrorType::NoErrorType" })
-  @json.inspect(@ast.ErrorType::DefaultErrorType(loc=dummy_loc), content={
+  @json.inspect(@syntax.NoErrorType, content={
+    "type": "ErrorType::NoErrorType",
+  })
+  @json.inspect(@syntax.ErrorType::DefaultErrorType(loc=dummy_loc), content={
     "type": "ErrorType::DefaultErrorType",
     "loc": null,
   })
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  @json.inspect(@ast.ErrorType(ty=int_type), content={
+  @json.inspect(@syntax.ErrorType(ty=int_type), content={
     "type": "ErrorType::ErrorType",
     "ty": {
       "type": "Type::Name",
@@ -174,7 +182,7 @@ test "error_type to_json" {
       "loc": null,
     },
   })
-  @json.inspect(@ast.MaybeError(ty=int_type), content={
+  @json.inspect(@syntax.MaybeError(ty=int_type), content={
     "type": "ErrorType::MaybeError",
     "ty": {
       "type": "Type::Name",
@@ -191,23 +199,23 @@ test "error_type to_json" {
 
 ///|
 test "type to_json" {
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  @json.inspect(@ast.Type::Any(loc=dummy_loc), content={
+  @json.inspect(@syntax.Type::Any(loc=dummy_loc), content={
     "type": "Type::Any",
     "loc": null,
   })
   @json.inspect(
-    @ast.Type::Arrow(
+    @syntax.Type::Arrow(
       args=@list.of([int_type]),
       res=int_type,
-      err=@ast.NoErrorType,
+      err=@syntax.NoErrorType,
       is_async=false,
       loc=dummy_loc,
     ),
@@ -240,7 +248,7 @@ test "type to_json" {
       "loc": null,
     },
   )
-  @json.inspect(@ast.Type::Tuple(tys=@list.of([int_type]), loc=dummy_loc), content={
+  @json.inspect(@syntax.Type::Tuple(tys=@list.of([int_type]), loc=dummy_loc), content={
     "type": "Type::Tuple",
     "tys": [
       {
@@ -257,7 +265,7 @@ test "type to_json" {
     "loc": null,
   })
   @json.inspect(
-    @ast.Type::Option(ty=int_type, loc=dummy_loc, question_loc=dummy_loc),
+    @syntax.Type::Option(ty=int_type, loc=dummy_loc, question_loc=dummy_loc),
     content={
       "type": "Type::Option",
       "ty": {
@@ -275,8 +283,8 @@ test "type to_json" {
     },
   )
   @json.inspect(
-    @ast.Type::Object(@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="TestObject"),
+    @syntax.Type::Object(@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="TestObject"),
       loc: dummy_loc,
     }),
     content={
@@ -292,27 +300,27 @@ test "type to_json" {
 
 ///|
 test "hole to_json" {
-  @json.inspect(@ast.Synthesized, content={ "type": "Hole::Synthesized" })
-  @json.inspect(@ast.Incomplete, content={ "type": "Hole::Incomplete" })
-  @json.inspect(@ast.Todo, content={ "type": "Hole::Todo" })
+  @json.inspect(@syntax.Synthesized, content={ "type": "Hole::Synthesized" })
+  @json.inspect(@syntax.Incomplete, content={ "type": "Hole::Incomplete" })
+  @json.inspect(@syntax.Todo, content={ "type": "Hole::Todo" })
 }
 
 ///|
 test "argument_kind to_json" {
-  let label = @ast.Label::{ name: "test_label", loc: dummy_loc }
-  @json.inspect(@ast.ArgumentKind::Positional, content={
+  let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
+  @json.inspect(@syntax.ArgumentKind::Positional, content={
     "type": "ArgumentKind::Positional",
   })
-  @json.inspect(@ast.ArgumentKind::Labelled(label), content={
+  @json.inspect(@syntax.ArgumentKind::Labelled(label), content={
     "type": "ArgumentKind::Labelled",
     "0": { "type": "Label", "name": "test_label", "loc": null },
   })
-  @json.inspect(@ast.ArgumentKind::LabelledPun(label), content={
+  @json.inspect(@syntax.ArgumentKind::LabelledPun(label), content={
     "type": "ArgumentKind::LabelledPun",
     "0": { "type": "Label", "name": "test_label", "loc": null },
   })
   @json.inspect(
-    @ast.ArgumentKind::LabelledOption(label~, question_loc=dummy_loc),
+    @syntax.ArgumentKind::LabelledOption(label~, question_loc=dummy_loc),
     content={
       "type": "ArgumentKind::LabelledOption",
       "label": { "type": "Label", "name": "test_label", "loc": null },
@@ -320,7 +328,7 @@ test "argument_kind to_json" {
     },
   )
   @json.inspect(
-    @ast.ArgumentKind::LabelledOptionPun(label~, question_loc=dummy_loc),
+    @syntax.ArgumentKind::LabelledOptionPun(label~, question_loc=dummy_loc),
     content={
       "type": "ArgumentKind::LabelledOptionPun",
       "label": { "type": "Label", "name": "test_label", "loc": null },
@@ -331,48 +339,50 @@ test "argument_kind to_json" {
 
 ///|
 test "fn_kind to_json" {
-  @json.inspect(@ast.FnKind::Lambda, content={ "type": "FnKind::Lambda" })
-  @json.inspect(@ast.FnKind::Matrix, content={ "type": "FnKind::Matrix" })
-  @json.inspect(@ast.FnKind::Arrow, content={ "type": "FnKind::Arrow" })
+  @json.inspect(@syntax.FnKind::Lambda, content={ "type": "FnKind::Lambda" })
+  @json.inspect(@syntax.FnKind::Matrix, content={ "type": "FnKind::Matrix" })
+  @json.inspect(@syntax.FnKind::Arrow, content={ "type": "FnKind::Arrow" })
 }
 
 ///|
 test "group to_json" {
-  @json.inspect(@ast.Group::Brace, content={ "type": "Group::Brace" })
-  @json.inspect(@ast.Group::Paren, content={ "type": "Group::Paren" })
+  @json.inspect(@syntax.Group::Brace, content={ "type": "Group::Brace" })
+  @json.inspect(@syntax.Group::Paren, content={ "type": "Group::Paren" })
 }
 
 ///|
 test "trailing_mark to_json" {
-  @json.inspect(@ast.TrailingMark::Comma, content={ "type": "Trailing::Comma" })
-  @json.inspect(@ast.TrailingMark::Semi, content={ "type": "Trailing::Semi" })
-  @json.inspect(@ast.TrailingMark::None, content={ "type": "Trailing::None" })
+  @json.inspect(@syntax.TrailingMark::Comma, content={
+    "type": "Trailing::Comma",
+  })
+  @json.inspect(@syntax.TrailingMark::Semi, content={ "type": "Trailing::Semi" })
+  @json.inspect(@syntax.TrailingMark::None, content={ "type": "Trailing::None" })
 }
 
 ///|
 test "apply_attr to_json" {
-  @json.inspect(@ast.NoAttr, content={ "type": "ApplyAttr::NoAttr" })
-  @json.inspect(@ast.ApplyAttr::Exclamation, content={
+  @json.inspect(@syntax.NoAttr, content={ "type": "ApplyAttr::NoAttr" })
+  @json.inspect(@syntax.ApplyAttr::Exclamation, content={
     "type": "ApplyAttr::Exclamation",
   })
-  @json.inspect(@ast.ApplyAttr::Question, content={
+  @json.inspect(@syntax.ApplyAttr::Question, content={
     "type": "ApplyAttr::Question",
   })
 }
 
 ///|
 test "TryOperatorKind to_json" {
-  @json.inspect(@ast.TryOperatorKind::Question, content={
+  @json.inspect(@syntax.TryOperatorKind::Question, content={
     "type": "TryOperatorKind::Question",
   })
-  @json.inspect(@ast.TryOperatorKind::Exclamation, content={
+  @json.inspect(@syntax.TryOperatorKind::Exclamation, content={
     "type": "TryOperatorKind::Exclamation",
   })
 }
 
 ///|
 test "binder to_json" {
-  let binder = @ast.Binder::{ name: "test_binder", loc: dummy_loc }
+  let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
   @json.inspect(binder, content={
     "type": "Binder",
     "name": "test_binder",
@@ -382,8 +392,8 @@ test "binder to_json" {
 
 ///|
 test "var to_json" {
-  let variable = @ast.Var::{
-    name: @ast.LongIdent::Ident(name="test_var"),
+  let variable = @syntax.Var::{
+    name: @syntax.LongIdent::Ident(name="test_var"),
     loc: dummy_loc,
   }
   @json.inspect(variable, content={
@@ -395,15 +405,15 @@ test "var to_json" {
 
 ///|
 test "constructor_extra_info to_json" {
-  let type_name = @ast.TypeName::{
-    name: @ast.LongIdent::Ident(name="TestType"),
+  let type_name = @syntax.TypeName::{
+    name: @syntax.LongIdent::Ident(name="TestType"),
     is_object: false,
     loc: dummy_loc,
   }
-  @json.inspect(@ast.NoExtraInfo, content={
+  @json.inspect(@syntax.NoExtraInfo, content={
     "type": "ConstructorExtraInfo::NoExtraInfo",
   })
-  @json.inspect(@ast.TypeName(type_name), content={
+  @json.inspect(@syntax.TypeName(type_name), content={
     "type": "ConstructorExtraInfo::TypeName",
     "0": {
       "type": "TypeName",
@@ -412,7 +422,7 @@ test "constructor_extra_info to_json" {
       "loc": null,
     },
   })
-  @json.inspect(@ast.Package("test_package"), content={
+  @json.inspect(@syntax.Package("test_package"), content={
     "type": "ConstructorExtraInfo::Package",
     "0": "test_package",
   })
@@ -420,10 +430,13 @@ test "constructor_extra_info to_json" {
 
 ///|
 test "constructor to_json" {
-  let constr_name = @ast.ConstrName::{ name: "TestConstructor", loc: dummy_loc }
-  let constr = @ast.Constructor::{
+  let constr_name = @syntax.ConstrName::{
+    name: "TestConstructor",
+    loc: dummy_loc,
+  }
+  let constr = @syntax.Constructor::{
     name: constr_name,
-    extra_info: @ast.NoExtraInfo,
+    extra_info: @syntax.NoExtraInfo,
     loc: dummy_loc,
   }
   @json.inspect(constr, content={
@@ -436,17 +449,17 @@ test "constructor to_json" {
 
 ///|
 test "accessor to_json" {
-  let label = @ast.Label::{ name: "test_field", loc: dummy_loc }
-  @json.inspect(@ast.Accessor::Label(label), content={
+  let label = @syntax.Label::{ name: "test_field", loc: dummy_loc }
+  @json.inspect(@syntax.Accessor::Label(label), content={
     "type": "Accessor::Label",
     "0": { "type": "Label", "name": "test_field", "loc": null },
   })
-  @json.inspect(@ast.Accessor::Index(tuple_index=0, loc=dummy_loc), content={
+  @json.inspect(@syntax.Accessor::Index(tuple_index=0, loc=dummy_loc), content={
     "type": "Accessor::Index",
     "tuple_index": 0,
     "loc": null,
   })
-  @json.inspect(@ast.Accessor::Newtype(loc=dummy_loc), content={
+  @json.inspect(@syntax.Accessor::Newtype(loc=dummy_loc), content={
     "type": "Accessor::Newtype",
     "loc": null,
   })
@@ -454,16 +467,18 @@ test "accessor to_json" {
 
 ///|
 test "exception_decl to_json" {
-  @json.inspect(@ast.NoPayload, content={ "type": "ExceptionDecl::NoPayload" })
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  @json.inspect(@syntax.NoPayload, content={
+    "type": "ExceptionDecl::NoPayload",
+  })
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  @json.inspect(@ast.SinglePayload(int_type), content={
+  @json.inspect(@syntax.SinglePayload(int_type), content={
     "type": "ExceptionDecl::SinglePayload",
     "0": {
       "type": "Type::Name",
@@ -476,15 +491,15 @@ test "exception_decl to_json" {
       "loc": null,
     },
   })
-  let constr_name = @ast.ConstrName::{ name: "TestConstr", loc: dummy_loc }
-  let constr_decl = @ast.ConstrDecl::{
+  let constr_name = @syntax.ConstrName::{ name: "TestConstr", loc: dummy_loc }
+  let constr_decl = @syntax.ConstrDecl::{
     name: constr_name,
     args: None,
     tag: None,
     loc: dummy_loc,
     doc: dummy_docstring,
   }
-  @json.inspect(@ast.EnumPayload(@list.of([constr_decl])), content={
+  @json.inspect(@syntax.EnumPayload(@list.of([constr_decl])), content={
     "type": "ExceptionDecl::EnumPayload",
     "0": [
       {
@@ -501,17 +516,17 @@ test "exception_decl to_json" {
 
 ///|
 test "type_desc to_json" {
-  @json.inspect(@ast.Abstract, content={ "type": "TypeDesc::Abstract" })
-  @json.inspect(@ast.Extern, content={ "type": "TypeDesc::Extern" })
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  @json.inspect(@syntax.Abstract, content={ "type": "TypeDesc::Abstract" })
+  @json.inspect(@syntax.Extern, content={ "type": "TypeDesc::Extern" })
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  @json.inspect(@ast.SinglePayload(int_type), content={
+  @json.inspect(@syntax.SinglePayload(int_type), content={
     "type": "ExceptionDecl::SinglePayload",
     "0": {
       "type": "Type::Name",
@@ -524,11 +539,11 @@ test "type_desc to_json" {
       "loc": null,
     },
   })
-  @json.inspect(@ast.Error(@ast.NoPayload), content={
+  @json.inspect(@syntax.Error(@syntax.NoPayload), content={
     "type": "TypeDesc::Error",
     "0": { "type": "ExceptionDecl::NoPayload" },
   })
-  @json.inspect(@ast.TypeDesc::Alias(int_type), content={
+  @json.inspect(@syntax.TypeDesc::Alias(int_type), content={
     "type": "TypeDesc::Alias",
     "0": {
       "type": "Type::Name",
@@ -545,14 +560,16 @@ test "type_desc to_json" {
 
 ///|
 test "dot_dot_binder to_json" {
-  @json.inspect(@ast.Underscore, content={ "type": "DotDotBinder::Underscore" })
-  @json.inspect(@ast.NoBinder, content={ "type": "DotDotBinder::NoBinder" })
-  let binder = @ast.Binder::{ name: "test_binder", loc: dummy_loc }
-  @json.inspect(@ast.BinderAs(binder), content={
+  @json.inspect(@syntax.Underscore, content={
+    "type": "DotDotBinder::Underscore",
+  })
+  @json.inspect(@syntax.NoBinder, content={ "type": "DotDotBinder::NoBinder" })
+  let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
+  @json.inspect(@syntax.BinderAs(binder), content={
     "type": "DotDotBinder::BinderAs",
     "0": { "type": "Binder", "name": "test_binder", "loc": null },
   })
-  @json.inspect(@ast.DotDotBinder::Binder(binder), content={
+  @json.inspect(@syntax.DotDotBinder::Binder(binder), content={
     "type": "DotDotBinder::Binder",
     "0": { "type": "Binder", "name": "test_binder", "loc": null },
   })
@@ -560,22 +577,22 @@ test "dot_dot_binder to_json" {
 
 ///|
 test "array_pattern to_json" {
-  let any_pattern = @ast.Pattern::Any(loc=dummy_loc)
-  @json.inspect(@ast.Pattern(any_pattern), content={
+  let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
+  @json.inspect(@syntax.Pattern(any_pattern), content={
     "type": "ArrayPattern::Pattern",
     "0": { "type": "Pattern::Any", "loc": null },
   })
-  @json.inspect(@ast.StringSpread(dummy_string_literal), content={
+  @json.inspect(@syntax.StringSpread(dummy_string_literal), content={
     "type": "ArrayPattern::StringSpread",
     "0": "test_string",
   })
-  @json.inspect(@ast.BytesSpread(dummy_bytes_literal), content={
+  @json.inspect(@syntax.BytesSpread(dummy_bytes_literal), content={
     "type": "ArrayPattern::BytesSpread",
     "0": "b\"ABC\"",
   })
-  let binder = @ast.Binder::{ name: "test_binder", loc: dummy_loc }
+  let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
   @json.inspect(
-    @ast.ConstSpread(binder~, pkg=Some("test_pkg"), loc=dummy_loc),
+    @syntax.ConstSpread(binder~, pkg=Some("test_pkg"), loc=dummy_loc),
     content={
       "type": "ArrayPattern::ConstSpread",
       "binder": { "type": "Binder", "name": "test_binder", "loc": null },
@@ -583,7 +600,7 @@ test "array_pattern to_json" {
       "loc": null,
     },
   )
-  @json.inspect(@ast.ConstSpread(binder~, pkg=None, loc=dummy_loc), content={
+  @json.inspect(@syntax.ConstSpread(binder~, pkg=None, loc=dummy_loc), content={
     "type": "ArrayPattern::ConstSpread",
     "binder": { "type": "Binder", "name": "test_binder", "loc": null },
     "pkg": null,
@@ -593,8 +610,8 @@ test "array_pattern to_json" {
 
 ///|
 test "array_patterns to_json" {
-  let any_pattern = @ast.Pattern(@ast.Pattern::Any(loc=dummy_loc))
-  @json.inspect(@ast.Closed(@list.of([any_pattern])), content={
+  let any_pattern = @syntax.Pattern(@syntax.Pattern::Any(loc=dummy_loc))
+  @json.inspect(@syntax.Closed(@list.of([any_pattern])), content={
     "type": "ArrayPatterns::Closed",
     "0": [
       {
@@ -604,7 +621,11 @@ test "array_patterns to_json" {
     ],
   })
   @json.inspect(
-    @ast.Open(@list.of([any_pattern]), @list.of([any_pattern]), @ast.Underscore),
+    @syntax.Open(
+      @list.of([any_pattern]),
+      @list.of([any_pattern]),
+      @syntax.Underscore,
+    ),
     content={
       "type": "ArrayPatterns::Open",
       "0": [
@@ -626,12 +647,12 @@ test "array_patterns to_json" {
 
 ///|
 test "embedded_code to_json" {
-  @json.inspect(@ast.CodeString(dummy_string_literal), content={
+  @json.inspect(@syntax.CodeString(dummy_string_literal), content={
     "type": "EmbeddedCode::CodeString",
     "0": "test_string",
   })
   @json.inspect(
-    @ast.CodeMultilineString(@list.of(["line1", "line2", "line3"])),
+    @syntax.CodeMultilineString(@list.of(["line1", "line2", "line3"])),
     content={
       "type": "EmbeddedCode::CodeMultilineString",
       "0": ["line1", "line2", "line3"],
@@ -642,7 +663,7 @@ test "embedded_code to_json" {
 ///|
 test "func_stubs to_json" {
   @json.inspect(
-    @ast.Import(
+    @syntax.Import(
       module_name=dummy_string_literal,
       func_name=dummy_string_literal,
     ),
@@ -653,9 +674,9 @@ test "func_stubs to_json" {
     },
   )
   @json.inspect(
-    @ast.Embedded(
+    @syntax.Embedded(
       language=Some(dummy_string_literal),
-      code=@ast.CodeString(dummy_string_literal),
+      code=@syntax.CodeString(dummy_string_literal),
     ),
     content={
       "type": "FuncStubs::Embedded",
@@ -664,7 +685,10 @@ test "func_stubs to_json" {
     },
   )
   @json.inspect(
-    @ast.Embedded(language=None, code=@ast.CodeString(dummy_string_literal)),
+    @syntax.Embedded(
+      language=None,
+      code=@syntax.CodeString(dummy_string_literal),
+    ),
     content={
       "type": "FuncStubs::Embedded",
       "language": null,
@@ -675,18 +699,18 @@ test "func_stubs to_json" {
 
 ///|
 test "parameter to_json" {
-  let binder = @ast.Binder::{ name: "param", loc: dummy_loc }
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let binder = @syntax.Binder::{ name: "param", loc: dummy_loc }
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   @json.inspect(
-    @ast.Parameter::DiscardPositional(ty=Some(int_type), loc=dummy_loc),
+    @syntax.Parameter::DiscardPositional(ty=Some(int_type), loc=dummy_loc),
     content={
       "type": "Parameter::DiscardPositional",
       "ty": {
@@ -702,12 +726,12 @@ test "parameter to_json" {
       "loc": null,
     },
   )
-  @json.inspect(@ast.Parameter::DiscardPositional(ty=None, loc=dummy_loc), content={
+  @json.inspect(@syntax.Parameter::DiscardPositional(ty=None, loc=dummy_loc), content={
     "type": "Parameter::DiscardPositional",
     "ty": null,
     "loc": null,
   })
-  @json.inspect(@ast.Parameter::Positional(binder~, ty=Some(int_type)), content={
+  @json.inspect(@syntax.Parameter::Positional(binder~, ty=Some(int_type)), content={
     "type": "Parameter::Positional",
     "binder": { "type": "Binder", "name": "param", "loc": null },
     "ty": {
@@ -721,12 +745,12 @@ test "parameter to_json" {
       "loc": null,
     },
   })
-  @json.inspect(@ast.Parameter::Positional(binder~, ty=None), content={
+  @json.inspect(@syntax.Parameter::Positional(binder~, ty=None), content={
     "type": "Parameter::Positional",
     "binder": { "type": "Binder", "name": "param", "loc": null },
     "ty": null,
   })
-  @json.inspect(@ast.Parameter::Labelled(binder~, ty=Some(int_type)), content={
+  @json.inspect(@syntax.Parameter::Labelled(binder~, ty=Some(int_type)), content={
     "type": "Parameter::Labelled",
     "binder": { "type": "Binder", "name": "param", "loc": null },
     "ty": {
@@ -741,7 +765,7 @@ test "parameter to_json" {
     },
   })
   @json.inspect(
-    @ast.Parameter::Optional(binder~, default=unit_expr, ty=Some(int_type)),
+    @syntax.Parameter::Optional(binder~, default=unit_expr, ty=Some(int_type)),
     content={
       "type": "Parameter::Optional",
       "binder": { "type": "Binder", "name": "param", "loc": null },
@@ -758,34 +782,37 @@ test "parameter to_json" {
       },
     },
   )
-  @json.inspect(@ast.Parameter::QuestionOptional(binder~, ty=Some(int_type)), content={
-    "type": "Parameter::QuestionOptional",
-    "binder": { "type": "Binder", "name": "param", "loc": null },
-    "ty": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+  @json.inspect(
+    @syntax.Parameter::QuestionOptional(binder~, ty=Some(int_type)),
+    content={
+      "type": "Parameter::QuestionOptional",
+      "binder": { "type": "Binder", "name": "param", "loc": null },
+      "ty": {
+        "type": "Type::Name",
+        "constr_id": {
+          "type": "ConstrId",
+          "id": { "type": "Ident", "name": "Int" },
+          "loc": null,
+        },
+        "tys": [],
         "loc": null,
       },
-      "tys": [],
-      "loc": null,
     },
-  })
+  )
 }
 
 ///|
 test "interp_elem to_json" {
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   @json.inspect(
-    @ast.InterpElem::Literal(repr=dummy_string_literal, loc=dummy_loc),
+    @syntax.InterpElem::Literal(repr=dummy_string_literal, loc=dummy_loc),
     content={
       "type": "InterpElem::Literal",
       "repr": "test_string",
       "loc": null,
     },
   )
-  @json.inspect(@ast.InterpElem::Expr(expr=unit_expr, loc=dummy_loc), content={
+  @json.inspect(@syntax.InterpElem::Expr(expr=unit_expr, loc=dummy_loc), content={
     "type": "InterpElem::Expr",
     "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
@@ -794,15 +821,15 @@ test "interp_elem to_json" {
 
 ///|
 test "multiline_string_elem to_json" {
-  let interp_elem = @ast.InterpElem::Literal(
+  let interp_elem = @syntax.InterpElem::Literal(
     repr=dummy_string_literal,
     loc=dummy_loc,
   )
-  @json.inspect(@ast.MultilineStringElem::String("test string"), content={
+  @json.inspect(@syntax.MultilineStringElem::String("test string"), content={
     "type": "MultilineString::String",
     "0": "test string",
   })
-  @json.inspect(@ast.MultilineStringElem::Interp(@list.of([interp_elem])), content={
+  @json.inspect(@syntax.MultilineStringElem::Interp(@list.of([interp_elem])), content={
     "type": "MultilineString::Interp",
     "0": [{ "type": "InterpElem::Literal", "repr": "test_string", "loc": null }],
   })
@@ -810,12 +837,12 @@ test "multiline_string_elem to_json" {
 
 ///|
 test "spreadable_elem to_json" {
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  @json.inspect(@ast.SpreadableElem::Regular(unit_expr), content={
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  @json.inspect(@syntax.SpreadableElem::Regular(unit_expr), content={
     "type": "SpreadableElem::Regular",
     "0": { "type": "Expr::Unit", "loc": null, "faked": false },
   })
-  @json.inspect(@ast.SpreadableElem::Spread(expr=unit_expr, loc=dummy_loc), content={
+  @json.inspect(@syntax.SpreadableElem::Spread(expr=unit_expr, loc=dummy_loc), content={
     "type": "SpreadableElem::Spread",
     "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
@@ -824,9 +851,9 @@ test "spreadable_elem to_json" {
 
 ///|
 test "map_expr_elem to_json" {
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  let int_constant = @ast.Int("42")
-  let map_elem = @ast.MapExprElem::{
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  let int_constant = @syntax.Int("42")
+  let map_elem = @syntax.MapExprElem::{
     key: int_constant,
     expr: unit_expr,
     key_loc: dummy_loc,
@@ -843,9 +870,9 @@ test "map_expr_elem to_json" {
 
 ///|
 test "field_def to_json" {
-  let label = @ast.Label::{ name: "field_name", loc: dummy_loc }
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  let field_def = @ast.FieldDef::{
+  let label = @syntax.Label::{ name: "field_name", loc: dummy_loc }
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  let field_def = @syntax.FieldDef::{
     label,
     expr: unit_expr,
     is_pun: false,
@@ -862,10 +889,10 @@ test "field_def to_json" {
 
 ///|
 test "argument to_json" {
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  let argument = @ast.Argument::{
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  let argument = @syntax.Argument::{
     value: unit_expr,
-    kind: @ast.ArgumentKind::Positional,
+    kind: @syntax.ArgumentKind::Positional,
   }
   @json.inspect(argument, content={
     "type": "Argument",
@@ -876,14 +903,14 @@ test "argument to_json" {
 
 ///|
 test "case to_json" {
-  let any_pattern = @ast.Pattern::Any(loc=dummy_loc)
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  let case_with_guard = @ast.Case::{
+  let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  let case_with_guard = @syntax.Case::{
     pattern: any_pattern,
     guard_: Some(unit_expr),
     body: unit_expr,
   }
-  let case_without_guard = @ast.Case::{
+  let case_without_guard = @syntax.Case::{
     pattern: any_pattern,
     guard_: None,
     body: unit_expr,
@@ -904,9 +931,9 @@ test "case to_json" {
 
 ///|
 test "multi_arg_case to_json" {
-  let any_pattern = @ast.Pattern::Any(loc=dummy_loc)
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  let multi_case = @ast.MultiArgCase::{
+  let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  let multi_case = @syntax.MultiArgCase::{
     patterns: @list.of([any_pattern]),
     guard_: Some(unit_expr),
     body: unit_expr,
@@ -921,17 +948,17 @@ test "multi_arg_case to_json" {
 
 ///|
 test "static_assertion to_json" {
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  let assertion = @ast.StaticAssertion::{
+  let assertion = @syntax.StaticAssertion::{
     ty: int_type,
-    trait_: @ast.LongIdent::Ident(name="Show"),
+    trait_: @syntax.LongIdent::Ident(name="Show"),
     loc: dummy_loc,
     msg: "Test assertion message",
   }
@@ -955,31 +982,31 @@ test "static_assertion to_json" {
 
 ///|
 test "func to_json" {
-  let binder = @ast.Binder::{ name: "param", loc: dummy_loc }
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let binder = @syntax.Binder::{ name: "param", loc: dummy_loc }
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  let param = @ast.Parameter::Positional(binder~, ty=Some(int_type))
-  let any_pattern = @ast.Pattern::Any(loc=dummy_loc)
-  let multi_case = @ast.MultiArgCase::{
+  let param = @syntax.Parameter::Positional(binder~, ty=Some(int_type))
+  let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
+  let multi_case = @syntax.MultiArgCase::{
     patterns: @list.of([any_pattern]),
     guard_: None,
     body: unit_expr,
   }
   @json.inspect(
-    @ast.Func::Lambda(
+    @syntax.Func::Lambda(
       parameters=@list.of([param]),
       params_loc=dummy_loc,
       body=unit_expr,
       return_type=Some(int_type),
-      error_type=@ast.NoErrorType,
-      kind=@ast.FnKind::Lambda,
+      error_type=@syntax.NoErrorType,
+      kind=@syntax.FnKind::Lambda,
       has_error=Some(dummy_loc),
       is_async=false,
       loc=dummy_loc,
@@ -1022,7 +1049,7 @@ test "func to_json" {
     },
   )
   @json.inspect(
-    @ast.Func::Match(
+    @syntax.Func::Match(
       cases=@list.of([multi_case]),
       has_error=None,
       is_async=true,
@@ -1049,25 +1076,28 @@ test "func to_json" {
 
 ///|
 test "expr basic types to_json" {
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  let int_constant = @ast.Int("42")
-  let variable = @ast.Var::{
-    name: @ast.LongIdent::Ident(name="test_var"),
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  let int_constant = @syntax.Int("42")
+  let variable = @syntax.Var::{
+    name: @syntax.LongIdent::Ident(name="test_var"),
     loc: dummy_loc,
   }
-  let label = @ast.Label::{ name: "test_label", loc: dummy_loc }
-  let argument = @ast.Argument::{ value: unit_expr, kind: @ast.Positional }
-  @json.inspect(@ast.Expr::Unit(loc=dummy_loc, faked=false), content={
+  let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
+  let argument = @syntax.Argument::{
+    value: unit_expr,
+    kind: @syntax.Positional,
+  }
+  @json.inspect(@syntax.Expr::Unit(loc=dummy_loc, faked=false), content={
     "type": "Expr::Unit",
     "loc": null,
     "faked": false,
   })
-  @json.inspect(@ast.Expr::Constant(c=int_constant, loc=dummy_loc), content={
+  @json.inspect(@syntax.Expr::Constant(c=int_constant, loc=dummy_loc), content={
     "type": "Expr::Constant",
     "c": { "type": "Int", "0": "42" },
     "loc": null,
   })
-  @json.inspect(@ast.Expr::Ident(id=variable, loc=dummy_loc), content={
+  @json.inspect(@syntax.Expr::Ident(id=variable, loc=dummy_loc), content={
     "type": "Expr::Ident",
     "id": {
       "type": "Var",
@@ -1077,10 +1107,10 @@ test "expr basic types to_json" {
     "loc": null,
   })
   @json.inspect(
-    @ast.Apply(
+    @syntax.Apply(
       func=unit_expr,
       args=@list.of([argument]),
-      attr=@ast.NoAttr,
+      attr=@syntax.NoAttr,
       loc=dummy_loc,
     ),
     content={
@@ -1098,7 +1128,7 @@ test "expr basic types to_json" {
     },
   )
   @json.inspect(
-    @ast.Infix(op=variable, lhs=unit_expr, rhs=unit_expr, loc=dummy_loc),
+    @syntax.Infix(op=variable, lhs=unit_expr, rhs=unit_expr, loc=dummy_loc),
     content={
       "type": "Expr::Infix",
       "op": {
@@ -1111,7 +1141,7 @@ test "expr basic types to_json" {
       "loc": null,
     },
   )
-  @json.inspect(@ast.Unary(op=variable, expr=unit_expr, loc=dummy_loc), content={
+  @json.inspect(@syntax.Unary(op=variable, expr=unit_expr, loc=dummy_loc), content={
     "type": "Expr::Unary",
     "op": {
       "type": "Var",
@@ -1121,14 +1151,17 @@ test "expr basic types to_json" {
     "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
-  @json.inspect(@ast.Expr::Array(exprs=@list.of([unit_expr]), loc=dummy_loc), content={
-    "type": "Expr::Array",
-    "exprs": [{ "type": "Expr::Unit", "loc": null, "faked": false }],
-    "loc": null,
-  })
-  let spread_elem = @ast.SpreadableElem::Regular(unit_expr)
   @json.inspect(
-    @ast.ArraySpread(elems=@list.of([spread_elem]), loc=dummy_loc),
+    @syntax.Expr::Array(exprs=@list.of([unit_expr]), loc=dummy_loc),
+    content={
+      "type": "Expr::Array",
+      "exprs": [{ "type": "Expr::Unit", "loc": null, "faked": false }],
+      "loc": null,
+    },
+  )
+  let spread_elem = @syntax.SpreadableElem::Regular(unit_expr)
+  @json.inspect(
+    @syntax.ArraySpread(elems=@list.of([spread_elem]), loc=dummy_loc),
     content={
       "type": "Expr::ArraySpread",
       "elems": [
@@ -1141,7 +1174,7 @@ test "expr basic types to_json" {
     },
   )
   @json.inspect(
-    @ast.ArrayGet(array=unit_expr, index=unit_expr, loc=dummy_loc),
+    @syntax.ArrayGet(array=unit_expr, index=unit_expr, loc=dummy_loc),
     content={
       "type": "Expr::ArrayGet",
       "array": { "type": "Expr::Unit", "loc": null, "faked": false },
@@ -1150,7 +1183,7 @@ test "expr basic types to_json" {
     },
   )
   @json.inspect(
-    @ast.Expr::Tuple(exprs=@list.of([unit_expr, unit_expr]), loc=dummy_loc),
+    @syntax.Expr::Tuple(exprs=@list.of([unit_expr, unit_expr]), loc=dummy_loc),
     content={
       "type": "Expr::Tuple",
       "exprs": [
@@ -1160,28 +1193,28 @@ test "expr basic types to_json" {
       "loc": null,
     },
   )
-  @json.inspect(@ast.Expr::Hole(loc=dummy_loc, kind=@ast.Todo), content={
+  @json.inspect(@syntax.Expr::Hole(loc=dummy_loc, kind=@syntax.Todo), content={
     "type": "Expr::Hole",
     "loc": null,
     "kind": { "type": "Hole::Todo" },
   })
-  @json.inspect(@ast.Return(return_value=Some(unit_expr), loc=dummy_loc), content={
+  @json.inspect(@syntax.Return(return_value=Some(unit_expr), loc=dummy_loc), content={
     "type": "Expr::Return",
     "return_value": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
-  @json.inspect(@ast.Return(return_value=None, loc=dummy_loc), content={
+  @json.inspect(@syntax.Return(return_value=None, loc=dummy_loc), content={
     "type": "Expr::Return",
     "return_value": null,
     "loc": null,
   })
-  @json.inspect(@ast.Raise(err_value=unit_expr, loc=dummy_loc), content={
+  @json.inspect(@syntax.Raise(err_value=unit_expr, loc=dummy_loc), content={
     "type": "Expr::Raise",
     "err_value": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
   @json.inspect(
-    @ast.Break(arg=Some(unit_expr), label=Some(label), loc=dummy_loc),
+    @syntax.Break(arg=Some(unit_expr), label=Some(label), loc=dummy_loc),
     content={
       "type": "Expr::Break",
       "arg": { "type": "Expr::Unit", "loc": null, "faked": false },
@@ -1190,7 +1223,7 @@ test "expr basic types to_json" {
     },
   )
   @json.inspect(
-    @ast.Continue(args=@list.of([unit_expr]), label=None, loc=dummy_loc),
+    @syntax.Continue(args=@list.of([unit_expr]), label=None, loc=dummy_loc),
     content={
       "type": "Expr::Continue",
       "args": [{ "type": "Expr::Unit", "loc": null, "faked": false }],
@@ -1202,36 +1235,40 @@ test "expr basic types to_json" {
 
 ///|
 test "expr complex types to_json" {
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  let binder = @ast.Binder::{ name: "test_binder", loc: dummy_loc }
-  let label = @ast.Label::{ name: "test_label", loc: dummy_loc }
-  let any_pattern = @ast.Pattern::Any(loc=dummy_loc)
-  let case = @ast.Case::{ pattern: any_pattern, guard_: None, body: unit_expr }
-  let type_name = @ast.TypeName::{
-    name: @ast.LongIdent::Ident(name="TestType"),
+  let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
+  let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
+  let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
+  let case = @syntax.Case::{
+    pattern: any_pattern,
+    guard_: None,
+    body: unit_expr,
+  }
+  let type_name = @syntax.TypeName::{
+    name: @syntax.LongIdent::Ident(name="TestType"),
     is_object: false,
     loc: dummy_loc,
   }
-  let field_def = @ast.FieldDef::{
+  let field_def = @syntax.FieldDef::{
     label,
     expr: unit_expr,
     is_pun: false,
     loc: dummy_loc,
   }
-  let variable = @ast.Var::{
-    name: @ast.LongIdent::Ident(name="test_var"),
+  let variable = @syntax.Var::{
+    name: @syntax.LongIdent::Ident(name="test_var"),
     loc: dummy_loc,
   }
   @json.inspect(
-    @ast.If(
+    @syntax.If(
       cond=unit_expr,
       ifso=unit_expr,
       ifnot=Some(unit_expr),
@@ -1246,7 +1283,7 @@ test "expr complex types to_json" {
     },
   )
   @json.inspect(
-    @ast.Guard(
+    @syntax.Guard(
       cond=unit_expr,
       otherwise=Some(unit_expr),
       body=unit_expr,
@@ -1260,20 +1297,25 @@ test "expr complex types to_json" {
       "loc": null,
     },
   )
-  @json.inspect(@ast.Defer(expr=unit_expr, body=unit_expr, loc=dummy_loc), content={
+  @json.inspect(@syntax.Defer(expr=unit_expr, body=unit_expr, loc=dummy_loc), content={
     "type": "Expr::Defer",
     "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "body": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
-  @json.inspect(@ast.Is(expr=unit_expr, pat=any_pattern, loc=dummy_loc), content={
+  @json.inspect(@syntax.Is(expr=unit_expr, pat=any_pattern, loc=dummy_loc), content={
     "type": "Expr::Is",
     "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "pat": { "type": "Pattern::Any", "loc": null },
     "loc": null,
   })
   @json.inspect(
-    @ast.Let(pattern=any_pattern, expr=unit_expr, body=unit_expr, loc=dummy_loc),
+    @syntax.Let(
+      pattern=any_pattern,
+      expr=unit_expr,
+      body=unit_expr,
+      loc=dummy_loc,
+    ),
     content={
       "type": "Expr::Let",
       "pattern": { "type": "Pattern::Any", "loc": null },
@@ -1283,7 +1325,7 @@ test "expr complex types to_json" {
     },
   )
   @json.inspect(
-    @ast.LetMut(
+    @syntax.LetMut(
       binder~,
       ty=Some(int_type),
       expr=unit_expr,
@@ -1309,7 +1351,7 @@ test "expr complex types to_json" {
     },
   )
   @json.inspect(
-    @ast.Sequence(
+    @syntax.Sequence(
       exprs=@list.of([unit_expr]),
       last_expr=unit_expr,
       loc=dummy_loc,
@@ -1322,10 +1364,10 @@ test "expr complex types to_json" {
     },
   )
   @json.inspect(
-    @ast.Expr::Record(
+    @syntax.Expr::Record(
       type_name=Some(type_name),
       fields=@list.of([field_def]),
-      trailing=@ast.TrailingMark::Comma,
+      trailing=@syntax.TrailingMark::Comma,
       loc=dummy_loc,
     ),
     content={
@@ -1350,9 +1392,9 @@ test "expr complex types to_json" {
     },
   )
   @json.inspect(
-    @ast.Field(
+    @syntax.Field(
       record=unit_expr,
-      accessor=@ast.Accessor::Label(label),
+      accessor=@syntax.Accessor::Label(label),
       loc=dummy_loc,
     ),
     content={
@@ -1366,7 +1408,7 @@ test "expr complex types to_json" {
     },
   )
   @json.inspect(
-    @ast.Expr::Match(
+    @syntax.Expr::Match(
       expr=unit_expr,
       cases=@list.of([case]),
       match_loc=dummy_loc,
@@ -1389,14 +1431,14 @@ test "expr complex types to_json" {
       "loc": null,
     },
   )
-  @json.inspect(@ast.Pipe(lhs=unit_expr, rhs=unit_expr, loc=dummy_loc), content={
+  @json.inspect(@syntax.Pipe(lhs=unit_expr, rhs=unit_expr, loc=dummy_loc), content={
     "type": "Expr::Pipe",
     "lhs": { "type": "Expr::Unit", "loc": null, "faked": false },
     "rhs": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
   @json.inspect(
-    @ast.Assign(
+    @syntax.Assign(
       var_=variable,
       expr=unit_expr,
       augmented_by=Some(variable),
@@ -1422,45 +1464,51 @@ test "expr complex types to_json" {
 
 ///|
 test "pattern to_json" {
-  let binder = @ast.Binder::{ name: "test_binder", loc: dummy_loc }
-  let any_pattern = @ast.Pattern::Any(loc=dummy_loc)
-  let int_constant = @ast.Int("42")
-  let constant_pattern = @ast.Pattern::Constant(c=int_constant, loc=dummy_loc)
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
+  let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
+  let int_constant = @syntax.Int("42")
+  let constant_pattern = @syntax.Pattern::Constant(
+    c=int_constant,
+    loc=dummy_loc,
+  )
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  let constr_name = @ast.ConstrName::{ name: "TestConstructor", loc: dummy_loc }
-  let constr = @ast.Constructor::{
-    name: constr_name,
-    extra_info: @ast.NoExtraInfo,
+  let constr_name = @syntax.ConstrName::{
+    name: "TestConstructor",
     loc: dummy_loc,
   }
-  let label = @ast.Label::{ name: "test_field", loc: dummy_loc }
-  let field_pat = @ast.FieldPat::{
+  let constr = @syntax.Constructor::{
+    name: constr_name,
+    extra_info: @syntax.NoExtraInfo,
+    loc: dummy_loc,
+  }
+  let label = @syntax.Label::{ name: "test_field", loc: dummy_loc }
+  let field_pat = @syntax.FieldPat::{
     label,
     pattern: any_pattern,
     is_pun: false,
     loc: dummy_loc,
   }
-  let map_elem = @ast.MapPatElem::{
+  let map_elem = @syntax.MapPatElem::{
     key: int_constant,
     pat: any_pattern,
     match_absent: false,
     key_loc: dummy_loc,
     loc: dummy_loc,
   }
-  let constr_pat_arg = @ast.ConstrPatArg::{
+  let constr_pat_arg = @syntax.ConstrPatArg::{
     pat: any_pattern,
-    kind: @ast.ArgumentKind::Positional,
+    kind: @syntax.ArgumentKind::Positional,
   }
-  let array_patterns = @ast.ArrayPatterns::Closed(@list.of([]))
+  let array_patterns = @syntax.ArrayPatterns::Closed(@list.of([]))
   @json.inspect(
-    @ast.Pattern::Alias(pat=any_pattern, alias_=binder, loc=dummy_loc),
+    @syntax.Pattern::Alias(pat=any_pattern, alias_=binder, loc=dummy_loc),
     content={
       "type": "Pattern::Alias",
       "pat": { "type": "Pattern::Any", "loc": null },
@@ -1468,18 +1516,18 @@ test "pattern to_json" {
       "loc": null,
     },
   )
-  @json.inspect(@ast.Pattern::Array(pats=array_patterns, loc=dummy_loc), content={
+  @json.inspect(@syntax.Pattern::Array(pats=array_patterns, loc=dummy_loc), content={
     "type": "Pattern::Array",
     "pats": { "type": "ArrayPatterns::Closed", "0": [] },
     "loc": null,
   })
-  @json.inspect(@ast.Expr::Constant(c=int_constant, loc=dummy_loc), content={
+  @json.inspect(@syntax.Expr::Constant(c=int_constant, loc=dummy_loc), content={
     "type": "Expr::Constant",
     "c": { "type": "Int", "0": "42" },
     "loc": null,
   })
   @json.inspect(
-    @ast.Pattern::Constraint(pat=any_pattern, ty=int_type, loc=dummy_loc),
+    @syntax.Pattern::Constraint(pat=any_pattern, ty=int_type, loc=dummy_loc),
     content={
       "type": "Pattern::Constraint",
       "pat": { "type": "Pattern::Any", "loc": null },
@@ -1497,7 +1545,7 @@ test "pattern to_json" {
     },
   )
   @json.inspect(
-    @ast.Pattern::Constr(
+    @syntax.Pattern::Constr(
       constr~,
       args=Some(@list.of([constr_pat_arg])),
       is_open=false,
@@ -1523,7 +1571,7 @@ test "pattern to_json" {
     },
   )
   @json.inspect(
-    @ast.Pattern::Constr(constr~, args=None, is_open=true, loc=dummy_loc),
+    @syntax.Pattern::Constr(constr~, args=None, is_open=true, loc=dummy_loc),
     content={
       "type": "Pattern::Constr",
       "constr": {
@@ -1538,7 +1586,7 @@ test "pattern to_json" {
     },
   )
   @json.inspect(
-    @ast.Or(pat1=any_pattern, pat2=constant_pattern, loc=dummy_loc),
+    @syntax.Or(pat1=any_pattern, pat2=constant_pattern, loc=dummy_loc),
     content={
       "type": "Pattern::Or",
       "pat1": { "type": "Pattern::Any", "loc": null },
@@ -1551,7 +1599,7 @@ test "pattern to_json" {
     },
   )
   @json.inspect(
-    @ast.Pattern::Tuple(
+    @syntax.Pattern::Tuple(
       pats=@list.of([any_pattern, constant_pattern]),
       loc=dummy_loc,
     ),
@@ -1569,7 +1617,7 @@ test "pattern to_json" {
     },
   )
   @json.inspect(
-    @ast.Pattern::Record(
+    @syntax.Pattern::Record(
       fields=@list.of([field_pat]),
       is_closed=true,
       loc=dummy_loc,
@@ -1590,7 +1638,7 @@ test "pattern to_json" {
     },
   )
   @json.inspect(
-    @ast.Pattern::Map(
+    @syntax.Pattern::Map(
       elems=@list.of([map_elem]),
       is_closed=false,
       loc=dummy_loc,
@@ -1612,7 +1660,7 @@ test "pattern to_json" {
     },
   )
   @json.inspect(
-    @ast.Range(
+    @syntax.Range(
       lhs=any_pattern,
       rhs=constant_pattern,
       inclusive=true,
@@ -1634,7 +1682,7 @@ test "pattern to_json" {
 
 ///|
 test "field_name to_json" {
-  let field_name = @ast.FieldName::{ label: "test_field", loc: dummy_loc }
+  let field_name = @syntax.FieldName::{ label: "test_field", loc: dummy_loc }
   @json.inspect(field_name, content={
     "type": "FieldName",
     "label": "test_field",
@@ -1644,20 +1692,20 @@ test "field_name to_json" {
 
 ///|
 test "field_decl to_json" {
-  let field_name = @ast.FieldName::{ label: "test_field", loc: dummy_loc }
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let field_name = @syntax.FieldName::{ label: "test_field", loc: dummy_loc }
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  let field_decl = @ast.FieldDecl::{
+  let field_decl = @syntax.FieldDecl::{
     name: field_name,
     ty: int_type,
     mut_: false,
-    vis: @ast.Default,
+    vis: @syntax.Default,
     loc: dummy_loc,
   }
   @json.inspect(field_decl, content={
@@ -1681,21 +1729,21 @@ test "field_decl to_json" {
 
 ///|
 test "constr_param to_json" {
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  let label = @ast.Label::{ name: "test_label", loc: dummy_loc }
-  let param_with_label = @ast.ConstrParam::{
+  let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
+  let param_with_label = @syntax.ConstrParam::{
     ty: int_type,
     mut_: false,
     label: Some(label),
   }
-  let param_without_label = @ast.ConstrParam::{
+  let param_without_label = @syntax.ConstrParam::{
     ty: int_type,
     mut_: true,
     label: None,
@@ -1734,29 +1782,32 @@ test "constr_param to_json" {
 
 ///|
 test "constr_decl to_json" {
-  let constr_name = @ast.ConstrName::{ name: "TestConstructor", loc: dummy_loc }
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let constr_name = @syntax.ConstrName::{
+    name: "TestConstructor",
+    loc: dummy_loc,
+  }
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  let label = @ast.Label::{ name: "test_label", loc: dummy_loc }
-  let param = @ast.ConstrParam::{
+  let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
+  let param = @syntax.ConstrParam::{
     ty: int_type,
     mut_: false,
     label: Some(label),
   }
-  let constr_with_args = @ast.ConstrDecl::{
+  let constr_with_args = @syntax.ConstrDecl::{
     name: constr_name,
     args: Some(@list.of([param])),
     tag: Some(("tag_value", dummy_loc)),
     loc: dummy_loc,
     doc: dummy_docstring,
   }
-  let constr_without_args = @ast.ConstrDecl::{
+  let constr_without_args = @syntax.ConstrDecl::{
     name: constr_name,
     args: None,
     tag: None,
@@ -1799,8 +1850,8 @@ test "constr_decl to_json" {
 
 ///|
 test "type_var_constraint to_json" {
-  let constraint = @ast.TypeVarConstraint::{
-    trait_: @ast.LongIdent::Ident(name="Show"),
+  let constraint = @syntax.TypeVarConstraint::{
+    trait_: @syntax.LongIdent::Ident(name="Show"),
     loc: dummy_loc,
   }
   @json.inspect(constraint, content={
@@ -1812,11 +1863,11 @@ test "type_var_constraint to_json" {
 
 ///|
 test "type_var_binder to_json" {
-  let constraint = @ast.TypeVarConstraint::{
-    trait_: @ast.LongIdent::Ident(name="Show"),
+  let constraint = @syntax.TypeVarConstraint::{
+    trait_: @syntax.LongIdent::Ident(name="Show"),
     loc: dummy_loc,
   }
-  let type_var_binder = @ast.TypeVarBinder::{
+  let type_var_binder = @syntax.TypeVarBinder::{
     name: "T",
     constraints: @list.of([constraint]),
     loc: dummy_loc,
@@ -1837,11 +1888,14 @@ test "type_var_binder to_json" {
 
 ///|
 test "type_decl_binder to_json" {
-  let binder_with_name = @ast.TypeDeclBinder::{
+  let binder_with_name = @syntax.TypeDeclBinder::{
     name: Some("TypeVar"),
     loc: dummy_loc,
   }
-  let binder_without_name = @ast.TypeDeclBinder::{ name: None, loc: dummy_loc }
+  let binder_without_name = @syntax.TypeDeclBinder::{
+    name: None,
+    loc: dummy_loc,
+  }
   @json.inspect(binder_with_name, content={
     "type": "TypeDeclBinder",
     "name": "TypeVar",
@@ -1856,10 +1910,10 @@ test "type_decl_binder to_json" {
 
 ///|
 test "alias_target to_json" {
-  let binder = @ast.Binder::{ name: "test_binder", loc: dummy_loc }
-  let label = @ast.Label::{ name: "target_label", loc: dummy_loc }
-  let alias_with_target = @ast.AliasTarget::{ binder, target: Some(label) }
-  let alias_without_target = @ast.AliasTarget::{ binder, target: None }
+  let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
+  let label = @syntax.Label::{ name: "target_label", loc: dummy_loc }
+  let alias_with_target = @syntax.AliasTarget::{ binder, target: Some(label) }
+  let alias_without_target = @syntax.AliasTarget::{ binder, target: None }
   @json.inspect(alias_with_target, content={
     "type": "AliasTarget",
     "binder": { "type": "Binder", "name": "test_binder", "loc": null },
@@ -1874,9 +1928,9 @@ test "alias_target to_json" {
 
 ///|
 test "field_pat to_json" {
-  let label = @ast.Label::{ name: "field_label", loc: dummy_loc }
-  let any_pattern = @ast.Pattern::Any(loc=dummy_loc)
-  let field_pat = @ast.FieldPat::{
+  let label = @syntax.Label::{ name: "field_label", loc: dummy_loc }
+  let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
+  let field_pat = @syntax.FieldPat::{
     label,
     pattern: any_pattern,
     is_pun: true,
@@ -1893,11 +1947,11 @@ test "field_pat to_json" {
 
 ///|
 test "constr_pat_arg to_json" {
-  let any_pattern = @ast.Pattern::Any(loc=dummy_loc)
-  let label = @ast.Label::{ name: "arg_label", loc: dummy_loc }
-  let arg = @ast.ConstrPatArg::{
+  let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
+  let label = @syntax.Label::{ name: "arg_label", loc: dummy_loc }
+  let arg = @syntax.ConstrPatArg::{
     pat: any_pattern,
-    kind: @ast.ArgumentKind::Labelled(label),
+    kind: @syntax.ArgumentKind::Labelled(label),
   }
   @json.inspect(arg, content={
     "type": "ConstrPatArg",
@@ -1911,9 +1965,9 @@ test "constr_pat_arg to_json" {
 
 ///|
 test "map_pat_elem to_json" {
-  let int_constant = @ast.Int("42")
-  let any_pattern = @ast.Pattern::Any(loc=dummy_loc)
-  let map_elem = @ast.MapPatElem::{
+  let int_constant = @syntax.Int("42")
+  let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
+  let map_elem = @syntax.MapPatElem::{
     key: int_constant,
     pat: any_pattern,
     match_absent: true,
@@ -1932,19 +1986,19 @@ test "map_pat_elem to_json" {
 
 ///|
 test "local_type_decl to_json" {
-  let deriving_directive = @ast.DerivingDirective::{
-    type_name: @ast.TypeName::{
-      name: @ast.LongIdent::Ident(name="Show"),
+  let deriving_directive = @syntax.DerivingDirective::{
+    type_name: @syntax.TypeName::{
+      name: @syntax.LongIdent::Ident(name="Show"),
       is_object: false,
       loc: dummy_loc,
     },
     args: @list.of([]),
     loc: dummy_loc,
   }
-  let local_type_decl = @ast.LocalTypeDecl::{
+  let local_type_decl = @syntax.LocalTypeDecl::{
     tycon: "TestType",
     tycon_loc: dummy_loc,
-    components: @ast.Abstract,
+    components: @syntax.Abstract,
     deriving: @list.of([deriving_directive]),
   }
   @json.inspect(local_type_decl, content={
@@ -1970,11 +2024,14 @@ test "local_type_decl to_json" {
 
 ///|
 test "deriving_directive to_json" {
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  let argument = @ast.Argument::{ value: unit_expr, kind: @ast.Positional }
-  let deriving_directive = @ast.DerivingDirective::{
-    type_name: @ast.TypeName::{
-      name: @ast.Dot(pkg="std", id="Show"),
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  let argument = @syntax.Argument::{
+    value: unit_expr,
+    kind: @syntax.Positional,
+  }
+  let deriving_directive = @syntax.DerivingDirective::{
+    type_name: @syntax.TypeName::{
+      name: @syntax.Dot(pkg="std", id="Show"),
       is_object: true,
       loc: dummy_loc,
     },
@@ -2002,18 +2059,18 @@ test "deriving_directive to_json" {
 
 ///|
 test "type_decl to_json" {
-  let type_decl_binder = @ast.TypeDeclBinder::{
+  let type_decl_binder = @syntax.TypeDeclBinder::{
     name: Some("T"),
     loc: dummy_loc,
   }
-  let type_decl = @ast.TypeDecl::{
+  let type_decl = @syntax.TypeDecl::{
     tycon: "TestType",
     tycon_loc: dummy_loc,
     params: @list.of([type_decl_binder]),
-    components: @ast.Extern,
+    components: @syntax.Extern,
     attrs: @list.of([dummy_attribute]),
     doc: dummy_docstring,
-    type_vis: @ast.Default,
+    type_vis: @syntax.Default,
     deriving: @list.of([]),
     loc: dummy_loc,
   }
@@ -2033,15 +2090,15 @@ test "type_decl to_json" {
 
 ///|
 test "decl_body to_json" {
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  let local_type_decl = @ast.LocalTypeDecl::{
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  let local_type_decl = @syntax.LocalTypeDecl::{
     tycon: "LocalType",
     tycon_loc: dummy_loc,
-    components: @ast.Abstract,
+    components: @syntax.Abstract,
     deriving: @list.of([]),
   }
   @json.inspect(
-    @ast.DeclBody(local_types=@list.of([local_type_decl]), expr=unit_expr),
+    @syntax.DeclBody(local_types=@list.of([local_type_decl]), expr=unit_expr),
     content={
       "type": "DeclBody::DeclBody",
       "local_types": [
@@ -2057,8 +2114,8 @@ test "decl_body to_json" {
     },
   )
   @json.inspect(
-    @ast.DeclStubs(
-      @ast.Import(
+    @syntax.DeclStubs(
+      @syntax.Import(
         module_name=dummy_string_literal,
         func_name=dummy_string_literal,
       ),
@@ -2076,31 +2133,31 @@ test "decl_body to_json" {
 
 ///|
 test "fun_decl to_json" {
-  let binder = @ast.Binder::{ name: "test_func", loc: dummy_loc }
-  let type_name = @ast.TypeName::{
-    name: @ast.LongIdent::Ident(name="TestType"),
+  let binder = @syntax.Binder::{ name: "test_func", loc: dummy_loc }
+  let type_name = @syntax.TypeName::{
+    name: @syntax.LongIdent::Ident(name="TestType"),
     is_object: false,
     loc: dummy_loc,
   }
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  let param = @ast.Parameter::Positional(binder~, ty=Some(int_type))
-  let type_var_constraint = @ast.TypeVarConstraint::{
-    trait_: @ast.LongIdent::Ident(name="Show"),
+  let param = @syntax.Parameter::Positional(binder~, ty=Some(int_type))
+  let type_var_constraint = @syntax.TypeVarConstraint::{
+    trait_: @syntax.LongIdent::Ident(name="Show"),
     loc: dummy_loc,
   }
-  let type_var_binder = @ast.TypeVarBinder::{
+  let type_var_binder = @syntax.TypeVarBinder::{
     name: "T",
     constraints: @list.of([type_var_constraint]),
     loc: dummy_loc,
   }
-  let fun_decl = @ast.FunDecl::{
+  let fun_decl = @syntax.FunDecl::{
     type_name: Some(type_name),
     name: binder,
     has_error: Some(dummy_loc),
@@ -2109,8 +2166,8 @@ test "fun_decl to_json" {
     params_loc: dummy_loc,
     quantifiers: @list.of([type_var_binder]),
     return_type: Some(int_type),
-    error_type: @ast.NoErrorType,
-    vis: @ast.Priv(loc=dummy_loc),
+    error_type: @syntax.NoErrorType,
+    vis: @syntax.Priv(loc=dummy_loc),
     attrs: @list.of([dummy_attribute]),
     doc: dummy_docstring,
   }
@@ -2175,29 +2232,29 @@ test "fun_decl to_json" {
 
 ///|
 test "trait_method_decl to_json" {
-  let binder = @ast.Binder::{ name: "trait_method", loc: dummy_loc }
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let binder = @syntax.Binder::{ name: "trait_method", loc: dummy_loc }
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
-  let param = @ast.Parameter::Positional(binder~, ty=Some(int_type))
-  let type_var_binder = @ast.TypeVarBinder::{
+  let param = @syntax.Parameter::Positional(binder~, ty=Some(int_type))
+  let type_var_binder = @syntax.TypeVarBinder::{
     name: "T",
     constraints: @list.of([]),
     loc: dummy_loc,
   }
-  let trait_method = @ast.TraitMethodDecl::{
+  let trait_method = @syntax.TraitMethodDecl::{
     name: binder,
     has_error: None,
     is_async: false,
     quantifiers: @list.of([type_var_binder]),
     params: @list.of([param]),
     return_type: Some(int_type),
-    error_type: @ast.ErrorType::DefaultErrorType(loc=dummy_loc),
+    error_type: @syntax.ErrorType::DefaultErrorType(loc=dummy_loc),
     has_default: Some(dummy_loc),
     loc: dummy_loc,
   }
@@ -2243,28 +2300,28 @@ test "trait_method_decl to_json" {
 
 ///|
 test "trait_decl to_json" {
-  let trait_binder = @ast.Binder::{ name: "TestTrait", loc: dummy_loc }
-  let super_constraint = @ast.TypeVarConstraint::{
-    trait_: @ast.LongIdent::Ident(name="SuperTrait"),
+  let trait_binder = @syntax.Binder::{ name: "TestTrait", loc: dummy_loc }
+  let super_constraint = @syntax.TypeVarConstraint::{
+    trait_: @syntax.LongIdent::Ident(name="SuperTrait"),
     loc: dummy_loc,
   }
-  let method_binder = @ast.Binder::{ name: "method", loc: dummy_loc }
-  let trait_method = @ast.TraitMethodDecl::{
+  let method_binder = @syntax.Binder::{ name: "method", loc: dummy_loc }
+  let trait_method = @syntax.TraitMethodDecl::{
     name: method_binder,
     has_error: None,
     is_async: false,
     quantifiers: @list.of([]),
     params: @list.of([]),
     return_type: None,
-    error_type: @ast.NoErrorType,
+    error_type: @syntax.NoErrorType,
     has_default: None,
     loc: dummy_loc,
   }
-  let trait_decl = @ast.TraitDecl::{
+  let trait_decl = @syntax.TraitDecl::{
     name: trait_binder,
     supers: @list.of([super_constraint]),
     methods: @list.of([trait_method]),
-    vis: @ast.Pub(attr=None, loc=dummy_loc),
+    vis: @syntax.Pub(attr=None, loc=dummy_loc),
     loc: dummy_loc,
     attrs: @list.of([dummy_attribute]),
     doc: dummy_docstring,
@@ -2302,29 +2359,29 @@ test "trait_decl to_json" {
 
 ///|
 test "impl variants to_json" {
-  let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
-  let type_decl = @ast.TypeDecl::{
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  let type_decl = @syntax.TypeDecl::{
     tycon: "TestType",
     tycon_loc: dummy_loc,
     params: @list.of([]),
-    components: @ast.Abstract,
+    components: @syntax.Abstract,
     attrs: @list.of([]),
     doc: dummy_docstring,
-    type_vis: @ast.Default,
+    type_vis: @syntax.Default,
     deriving: @list.of([]),
     loc: dummy_loc,
   }
-  let binder = @ast.Binder::{ name: "test", loc: dummy_loc }
-  let int_type = @ast.Name(
-    constr_id=@ast.ConstrId::{
-      id: @ast.LongIdent::Ident(name="Int"),
+  let binder = @syntax.Binder::{ name: "test", loc: dummy_loc }
+  let int_type = @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
     tys=@list.of([]),
     loc=dummy_loc,
   )
   @json.inspect(
-    @ast.TopExpr(
+    @syntax.TopExpr(
       expr=unit_expr,
       is_main=true,
       local_types=@list.of([]),
@@ -2339,7 +2396,7 @@ test "impl variants to_json" {
     },
   )
   @json.inspect(
-    @ast.TopTest(
+    @syntax.TopTest(
       expr=unit_expr,
       name=Some((dummy_string_literal, dummy_loc)),
       params=None,
@@ -2359,7 +2416,7 @@ test "impl variants to_json" {
       "doc": { "content": ["Test documentation"], "loc": null },
     },
   )
-  @json.inspect(@ast.TopTypeDef(type_decl), content={
+  @json.inspect(@syntax.TopTypeDef(type_decl), content={
     "type": "Impl::TopTypeDef",
     "0": {
       "type": "TypeDecl",
@@ -2374,7 +2431,7 @@ test "impl variants to_json" {
       "loc": null,
     },
   })
-  let fun_decl = @ast.FunDecl::{
+  let fun_decl = @syntax.FunDecl::{
     type_name: None,
     name: binder,
     has_error: None,
@@ -2383,13 +2440,13 @@ test "impl variants to_json" {
     params_loc: dummy_loc,
     quantifiers: @list.of([]),
     return_type: None,
-    error_type: @ast.NoErrorType,
-    vis: @ast.Default,
+    error_type: @syntax.NoErrorType,
+    vis: @syntax.Default,
     attrs: @list.of([]),
     doc: dummy_docstring,
   }
-  let decl_body = @ast.DeclBody(local_types=@list.of([]), expr=unit_expr)
-  @json.inspect(@ast.TopFuncDef(fun_decl~, decl_body~, loc=dummy_loc), content={
+  let decl_body = @syntax.DeclBody(local_types=@list.of([]), expr=unit_expr)
+  @json.inspect(@syntax.TopFuncDef(fun_decl~, decl_body~, loc=dummy_loc), content={
     "type": "Impl::TopFuncDef",
     "fun_decl": {
       "type": "FunDecl",
@@ -2414,11 +2471,11 @@ test "impl variants to_json" {
     "loc": null,
   })
   @json.inspect(
-    @ast.TopLetDef(
+    @syntax.TopLetDef(
       binder~,
       ty=Some(int_type),
       expr=unit_expr,
-      vis=@ast.Default,
+      vis=@syntax.Default,
       is_constant=true,
       loc=dummy_loc,
       attrs=@list.of([]),
