@@ -25,15 +25,15 @@ pub fn make_array_expr(
   elems : @list.T[SpreadableElem],
 ) -> Expr {
   // Try to convert to regular array if no spread elements
-  let mut acc : (@list.T[Expr]) -> @list.T[Expr] = fn(lst) { lst }
+  let mut acc : @list.T[Expr] = @list.empty()
   for elem in elems {
     match elem {
-      Regular(e) => acc = fn(lst) { acc(lst).add(e) }
+      Regular(e) => acc = acc.add(e)
       Spread(_) => return ArraySpread(elems~, loc~)
     }
   } else {
     // If we have only regular elements, create a simple array
-    return Array(exprs=acc(@list.empty()), loc~)
+    return Array(exprs=acc.rev(), loc~)
   }
 }
 
@@ -370,41 +370,6 @@ pub fn make_attribute(
   // TODO: Attribute Parser
   // let raw_payload = @encoding.encode(UTF8, raw_payload)
   // let tokens = @lexer.tokens_from_bytes(is_interpolation = false, comment = false, raw_payload).tokens
-}
-
-///| Create legacy type alias
-pub fn make_legacy_type_alias(
-  binder_expr : Type,
-  target : Type,
-  attrs~ : @list.T[Attribute],
-  vis~ : Visibility,
-  deriving~ : @list.T[DerivingDirective],
-  loc~ : Location,
-  doc~ : DocString,
-) -> TypeDecl? {
-  match binder_expr {
-    Name(constr_id={ id: Ident(name=tycon), .. }, loc=tycon_loc, tys~) if tys.all(t => t
-          is Name(constr_id={ id: Ident(..), .. }, tys~, ..) &&
-          tys.is_empty(),
-      ) => {
-      let params = tys.map(fn(ty) {
-        guard ty is Name(constr_id={ id: Ident(name~), .. }, ..)
-        TypeDeclBinder::{ name: Some(name), loc }
-      })
-      Some(TypeDecl::{
-        tycon,
-        tycon_loc,
-        params,
-        components: TypeDesc::Alias(target),
-        attrs,
-        doc,
-        type_vis: vis,
-        deriving,
-        loc,
-      })
-    }
-    _ => None
-  }
 }
 
 ///| Arrow function parameter type

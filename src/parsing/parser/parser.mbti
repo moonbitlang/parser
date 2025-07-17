@@ -1,9 +1,24 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/parser/parsing/parser"
 
+import(
+  "moonbitlang/core/list"
+  "moonbitlang/parser/lexing/tokens"
+  "moonbitlang/parser/parsing/syntax"
+  "moonbitlang/parser/parsing/syntax_types"
+)
+
 // Values
+fn expression(Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)], initial_pos? : @syntax_types.Position) -> @syntax.Expr raise ParseError
+
+fn structure(Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)], initial_pos? : @syntax_types.Position) -> @list.T[@syntax.Impl] raise ParseError
 
 // Errors
+pub suberror ParseError {
+  UnexpectedToken(@tokens.Token, (@syntax_types.Position, @syntax_types.Position), Array[@tokens.TokenKind])
+  UnexpectedEndOfInput(@syntax_types.Position, Array[@tokens.TokenKind])
+}
+impl Show for ParseError
 
 // Types and methods
 

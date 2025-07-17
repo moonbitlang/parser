@@ -59,8 +59,6 @@ fn make_interp_expr(loc~ : @syntax_types.Location, Array[@syntax_types.InterpEle
 
 fn make_interps(Array[@syntax_types.InterpElem]) -> @list.T[InterpElem]
 
-fn make_legacy_type_alias(Type, Type, attrs~ : @list.T[@syntax_types.Attribute], vis~ : Visibility, deriving~ : @list.T[DerivingDirective], loc~ : @syntax_types.Location, doc~ : @syntax_types.DocString) -> TypeDecl?
-
 fn make_option_type(loc~ : @syntax_types.Location, constr_loc~ : @syntax_types.Location, Type) -> Type
 
 fn make_record_expr(loc~ : @syntax_types.Location, trailing~ : TrailingMark, TypeName?, @list.T[FieldDef]) -> Expr

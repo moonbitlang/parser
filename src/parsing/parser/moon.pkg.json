@@ -1,7 +1,9 @@
 {
   "import": [
     "moonbitlang/parser/parsing/syntax_types",
-    "moonbitlang/parser/parsing/syntax"
+    "moonbitlang/parser/parsing/syntax",
+    "moonbitlang/parser/parsing/compact",
+    "moonbitlang/parser/lexing/tokens"
   ],
   "pre-build": [
     // {
@@ -14,14 +16,15 @@
     //   "input": "lexer.mbtx",
     //   "output": "lexer.mbt"
     // }
-    // {
-    //   "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc $input -o $output",
-    //   "input": "parser.mbty",
-    //   "output": "parser.mbt"
-    // }
+    {
+      "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --external-tokens $input -o $output && moonfmt -w $output && moonfmt -w $output",
+      "input": "parser.mbty",
+      "output": "parser.mbt"
+    }
   ],
   "test-import": [
-    // "moonbitlang/x/fs"
+    "moonbitlang/x/fs",
+    "moonbitlang/parser/lexing/lexer"
   ],
-  "warn-list": "-1-6"
+  "warn-list": "-6"
 }
