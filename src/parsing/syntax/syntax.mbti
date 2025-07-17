@@ -489,6 +489,20 @@ pub(all) enum Pattern {
 }
 impl ToJson for Pattern
 
+pub(all) enum SemiExprProp {
+  StmtExpr(Expr)
+  StmtLet(pat~ : Pattern, expr~ : Expr, loc~ : @syntax_types.Location)
+  StmtGuard(cond~ : Expr, otherwise~ : Expr?, loc~ : @syntax_types.Location)
+  StmtLetmut(binder~ : Binder, ty_opt~ : Type?, expr~ : Expr, loc~ : @syntax_types.Location)
+  StmtFunc(binder~ : Binder, func~ : Func, loc~ : @syntax_types.Location)
+  StmtLetand(bindings~ : @list.T[(Binder, Type?, Func)], loc~ : @syntax_types.Location)
+  StmtDefer(expr~ : Expr, loc~ : @syntax_types.Location)
+}
+fn SemiExprProp::collect_letrec(loc~ : @syntax_types.Location, @list.T[(Binder, Func)], @list.T[Self], Expr) -> Expr
+fn SemiExprProp::collect_rev(@list.T[Self], Expr) -> Expr
+fn SemiExprProp::collect_sequence(loc~ : @syntax_types.Location, @list.T[Expr], @list.T[Self], Expr) -> Expr
+fn SemiExprProp::compact_rev(@list.T[Self], loc~ : @syntax_types.Location) -> Expr
+
 pub(all) enum SpreadableElem {
   Regular(Expr)
   Spread(expr~ : Expr, loc~ : @syntax_types.Location)

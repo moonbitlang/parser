@@ -70,6 +70,7 @@ pub(all) struct Location {
   start : Position
   end : Position
 }
+fn Location::merge(Self, Self) -> Self
 fn Location::trim_first_char(Self) -> Self
 fn Location::trim_last_char(Self) -> Self
 impl Show for Location
