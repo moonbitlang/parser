@@ -300,7 +300,7 @@ pub(all) enum Expr {
   For(binders~ : @list.T[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.T[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @ast_types.Location)
   ForEach(binders~ : @list.T[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @ast_types.Location)
   Try(body~ : Expr, catch_~ : @list.T[Case], catch_all~ : Bool, try_else~ : @list.T[Case]?, has_try~ : Bool, legacy_else~ : Bool, try_loc~ : @ast_types.Location, catch_loc~ : @ast_types.Location, else_loc~ : @ast_types.Location, loc~ : @ast_types.Location)
-  TryQuestion(body~ : Expr, try_loc~ : @ast_types.Location, loc~ : @ast_types.Location)
+  TryOperator(body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @ast_types.Location, loc~ : @ast_types.Location)
   Map(elems~ : @list.T[MapExprElem], loc~ : @ast_types.Location)
   Group(expr~ : Expr, group~ : Group, loc~ : @ast_types.Location)
   StaticAssert(asserts~ : @list.T[StaticAssertion], body~ : Expr)
@@ -533,6 +533,12 @@ pub(all) struct TraitMethodDecl {
   loc : @ast_types.Location
 }
 impl ToJson for TraitMethodDecl
+
+pub(all) enum TryOperatorKind {
+  Question
+  Exclamation
+}
+impl ToJson for TryOperatorKind
 
 pub(all) enum Type {
   Any(loc~ : @ast_types.Location)

@@ -1107,9 +1107,10 @@ pub impl ToJson for Expr with to_json(self) {
         "else_loc": else_loc,
         "loc": loc,
       }
-    TryQuestion(body~, try_loc~, loc~) =>
+    TryOperator(body~, kind~, try_loc~, loc~) =>
       {
-        "type": "Expr::TryQuestion",
+        "type": "Expr::TryOperator",
+        "kind": kind,
         "body": body,
         "try_loc": try_loc,
         "loc": loc,
@@ -1274,5 +1275,13 @@ pub impl ToJson for Impl with to_json(self) {
         "loc": loc,
         "doc": doc,
       }
+  }
+}
+
+///|
+pub impl ToJson for TryOperatorKind with to_json(self) {
+  match self {
+    Question => { "type": "TryOperatorKind::Question" }
+    Exclamation => { "type": "TryOperatorKind::Exclamation" }
   }
 }

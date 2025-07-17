@@ -529,7 +529,7 @@ fn loc_of_expression(expr : Expr) -> Location {
       else_loc=_,
       loc~
     ) => loc
-    TryQuestion(body=_, try_loc=_, loc~) => loc
+    TryOperator(loc~, ..) => loc
     Map(elems=_, loc~) => loc
     Group(expr=_, group=_, loc~) => loc
     StaticAssert(asserts=_, body=_) => no_location

@@ -352,8 +352,22 @@ test "trailing_mark to_json" {
 ///|
 test "apply_attr to_json" {
   @json.inspect(@ast.NoAttr, content={ "type": "ApplyAttr::NoAttr" })
-  @json.inspect(@ast.Exclamation, content={ "type": "ApplyAttr::Exclamation" })
-  @json.inspect(@ast.Question, content={ "type": "ApplyAttr::Question" })
+  @json.inspect(@ast.ApplyAttr::Exclamation, content={
+    "type": "ApplyAttr::Exclamation",
+  })
+  @json.inspect(@ast.ApplyAttr::Question, content={
+    "type": "ApplyAttr::Question",
+  })
+}
+
+///|
+test "TryOperatorKind to_json" {
+  @json.inspect(@ast.TryOperatorKind::Question, content={
+    "type": "TryOperatorKind::Question",
+  })
+  @json.inspect(@ast.TryOperatorKind::Exclamation, content={
+    "type": "TryOperatorKind::Exclamation",
+  })
 }
 
 ///|
@@ -1247,9 +1261,9 @@ test "expr complex types to_json" {
     },
   )
   @json.inspect(@ast.Defer(expr=unit_expr, body=unit_expr, loc=dummy_loc), content={
-    "type": "Expr::Is",
+    "type": "Expr::Defer",
     "expr": { "type": "Unit", "loc": null, "faked": false },
-    "pat": { "type": "Pattern::Any", "loc": null },
+    "body": { "type": "Unit", "loc": null, "faked": false },
     "loc": null,
   })
   @json.inspect(@ast.Is(expr=unit_expr, pat=any_pattern, loc=dummy_loc), content={

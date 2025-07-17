@@ -471,10 +471,21 @@ pub(all) enum Expr {
     else_loc~ : Location,
     loc~ : Location
   )
-  TryQuestion(body~ : Expr, try_loc~ : Location, loc~ : Location)
+  TryOperator(
+    body~ : Expr,
+    kind~ : TryOperatorKind,
+    try_loc~ : Location,
+    loc~ : Location
+  )
   Map(elems~ : @list.T[MapExprElem], loc~ : Location)
   Group(expr~ : Expr, group~ : Group, loc~ : Location)
   StaticAssert(asserts~ : @list.T[StaticAssertion], body~ : Expr)
+}
+
+///|
+pub(all) enum TryOperatorKind {
+  Question
+  Exclamation
 }
 
 ///|
