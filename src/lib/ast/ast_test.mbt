@@ -745,7 +745,7 @@ test "parameter to_json" {
     content={
       "type": "Parameter::Optional",
       "binder": { "type": "Binder", "name": "param", "loc": null },
-      "default": { "type": "Unit", "loc": null, "faked": false },
+      "default": { "type": "Expr::Unit", "loc": null, "faked": false },
       "ty": {
         "type": "Type::Name",
         "constr_id": {
@@ -787,7 +787,7 @@ test "interp_elem to_json" {
   )
   @json.inspect(@ast.InterpElem::Expr(expr=unit_expr, loc=dummy_loc), content={
     "type": "InterpElem::Expr",
-    "expr": { "type": "Unit", "loc": null, "faked": false },
+    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
 }
@@ -813,11 +813,11 @@ test "spreadable_elem to_json" {
   let unit_expr = @ast.Expr::Unit(loc=dummy_loc, faked=false)
   @json.inspect(@ast.SpreadableElem::Regular(unit_expr), content={
     "type": "SpreadableElem::Regular",
-    "0": { "type": "Unit", "loc": null, "faked": false },
+    "0": { "type": "Expr::Unit", "loc": null, "faked": false },
   })
   @json.inspect(@ast.SpreadableElem::Spread(expr=unit_expr, loc=dummy_loc), content={
     "type": "SpreadableElem::Spread",
-    "expr": { "type": "Unit", "loc": null, "faked": false },
+    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
 }
@@ -835,7 +835,7 @@ test "map_expr_elem to_json" {
   @json.inspect(map_elem, content={
     "type": "MapExprElem",
     "key": { "type": "Int", "0": "42" },
-    "expr": { "type": "Unit", "loc": null, "faked": false },
+    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "key_loc": null,
     "loc": null,
   })
@@ -854,7 +854,7 @@ test "field_def to_json" {
   @json.inspect(field_def, content={
     "type": "FieldDef",
     "label": { "type": "Label", "name": "field_name", "loc": null },
-    "expr": { "type": "Unit", "loc": null, "faked": false },
+    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "is_pun": false,
     "loc": null,
   })
@@ -869,7 +869,7 @@ test "argument to_json" {
   }
   @json.inspect(argument, content={
     "type": "Argument",
-    "value": { "type": "Unit", "loc": null, "faked": false },
+    "value": { "type": "Expr::Unit", "loc": null, "faked": false },
     "kind": { "type": "ArgumentKind::Positional" },
   })
 }
@@ -891,14 +891,14 @@ test "case to_json" {
   @json.inspect(case_with_guard, content={
     "type": "Case",
     "pattern": { "type": "Pattern::Any", "loc": null },
-    "guard_": { "type": "Unit", "loc": null, "faked": false },
-    "body": { "type": "Unit", "loc": null, "faked": false },
+    "guard_": { "type": "Expr::Unit", "loc": null, "faked": false },
+    "body": { "type": "Expr::Unit", "loc": null, "faked": false },
   })
   @json.inspect(case_without_guard, content={
     "type": "Case",
     "pattern": { "type": "Pattern::Any", "loc": null },
     "guard_": null,
-    "body": { "type": "Unit", "loc": null, "faked": false },
+    "body": { "type": "Expr::Unit", "loc": null, "faked": false },
   })
 }
 
@@ -914,8 +914,8 @@ test "multi_arg_case to_json" {
   @json.inspect(multi_case, content={
     "type": "MultiArgCase",
     "patterns": [{ "type": "Pattern::Any", "loc": null }],
-    "guard_": { "type": "Unit", "loc": null, "faked": false },
-    "body": { "type": "Unit", "loc": null, "faked": false },
+    "guard_": { "type": "Expr::Unit", "loc": null, "faked": false },
+    "body": { "type": "Expr::Unit", "loc": null, "faked": false },
   })
 }
 
@@ -1003,7 +1003,7 @@ test "func to_json" {
         },
       ],
       "params_loc": null,
-      "body": { "type": "Unit", "loc": null, "faked": false },
+      "body": { "type": "Expr::Unit", "loc": null, "faked": false },
       "return_type": {
         "type": "Type::Name",
         "constr_id": {
@@ -1036,7 +1036,7 @@ test "func to_json" {
           "type": "MultiArgCase",
           "patterns": [{ "type": "Pattern::Any", "loc": null }],
           "guard_": null,
-          "body": { "type": "Unit", "loc": null, "faked": false },
+          "body": { "type": "Expr::Unit", "loc": null, "faked": false },
         },
       ],
       "has_error": null,
@@ -1058,7 +1058,7 @@ test "expr basic types to_json" {
   let label = @ast.Label::{ name: "test_label", loc: dummy_loc }
   let argument = @ast.Argument::{ value: unit_expr, kind: @ast.Positional }
   @json.inspect(@ast.Expr::Unit(loc=dummy_loc, faked=false), content={
-    "type": "Unit",
+    "type": "Expr::Unit",
     "loc": null,
     "faked": false,
   })
@@ -1085,11 +1085,11 @@ test "expr basic types to_json" {
     ),
     content={
       "type": "Expr::Apply",
-      "func": { "type": "Unit", "loc": null, "faked": false },
+      "func": { "type": "Expr::Unit", "loc": null, "faked": false },
       "args": [
         {
           "type": "Argument",
-          "value": { "type": "Unit", "loc": null, "faked": false },
+          "value": { "type": "Expr::Unit", "loc": null, "faked": false },
           "kind": { "type": "ArgumentKind::Positional" },
         },
       ],
@@ -1106,8 +1106,8 @@ test "expr basic types to_json" {
         "name": { "type": "Ident", "name": "test_var" },
         "loc": null,
       },
-      "lhs": { "type": "Unit", "loc": null, "faked": false },
-      "rhs": { "type": "Unit", "loc": null, "faked": false },
+      "lhs": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "rhs": { "type": "Expr::Unit", "loc": null, "faked": false },
       "loc": null,
     },
   )
@@ -1118,12 +1118,12 @@ test "expr basic types to_json" {
       "name": { "type": "Ident", "name": "test_var" },
       "loc": null,
     },
-    "expr": { "type": "Unit", "loc": null, "faked": false },
+    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
   @json.inspect(@ast.Expr::Array(exprs=@list.of([unit_expr]), loc=dummy_loc), content={
     "type": "Expr::Array",
-    "exprs": [{ "type": "Unit", "loc": null, "faked": false }],
+    "exprs": [{ "type": "Expr::Unit", "loc": null, "faked": false }],
     "loc": null,
   })
   let spread_elem = @ast.SpreadableElem::Regular(unit_expr)
@@ -1134,7 +1134,7 @@ test "expr basic types to_json" {
       "elems": [
         {
           "type": "SpreadableElem::Regular",
-          "0": { "type": "Unit", "loc": null, "faked": false },
+          "0": { "type": "Expr::Unit", "loc": null, "faked": false },
         },
       ],
       "loc": null,
@@ -1144,8 +1144,8 @@ test "expr basic types to_json" {
     @ast.ArrayGet(array=unit_expr, index=unit_expr, loc=dummy_loc),
     content={
       "type": "Expr::ArrayGet",
-      "array": { "type": "Unit", "loc": null, "faked": false },
-      "index": { "type": "Unit", "loc": null, "faked": false },
+      "array": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "index": { "type": "Expr::Unit", "loc": null, "faked": false },
       "loc": null,
     },
   )
@@ -1154,8 +1154,8 @@ test "expr basic types to_json" {
     content={
       "type": "Expr::Tuple",
       "exprs": [
-        { "type": "Unit", "loc": null, "faked": false },
-        { "type": "Unit", "loc": null, "faked": false },
+        { "type": "Expr::Unit", "loc": null, "faked": false },
+        { "type": "Expr::Unit", "loc": null, "faked": false },
       ],
       "loc": null,
     },
@@ -1167,7 +1167,7 @@ test "expr basic types to_json" {
   })
   @json.inspect(@ast.Return(return_value=Some(unit_expr), loc=dummy_loc), content={
     "type": "Expr::Return",
-    "return_value": { "type": "Unit", "loc": null, "faked": false },
+    "return_value": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
   @json.inspect(@ast.Return(return_value=None, loc=dummy_loc), content={
@@ -1177,14 +1177,14 @@ test "expr basic types to_json" {
   })
   @json.inspect(@ast.Raise(err_value=unit_expr, loc=dummy_loc), content={
     "type": "Expr::Raise",
-    "err_value": { "type": "Unit", "loc": null, "faked": false },
+    "err_value": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
   @json.inspect(
     @ast.Break(arg=Some(unit_expr), label=Some(label), loc=dummy_loc),
     content={
       "type": "Expr::Break",
-      "arg": { "type": "Unit", "loc": null, "faked": false },
+      "arg": { "type": "Expr::Unit", "loc": null, "faked": false },
       "label": { "type": "Label", "name": "test_label", "loc": null },
       "loc": null,
     },
@@ -1193,7 +1193,7 @@ test "expr basic types to_json" {
     @ast.Continue(args=@list.of([unit_expr]), label=None, loc=dummy_loc),
     content={
       "type": "Expr::Continue",
-      "args": [{ "type": "Unit", "loc": null, "faked": false }],
+      "args": [{ "type": "Expr::Unit", "loc": null, "faked": false }],
       "label": null,
       "loc": null,
     },
@@ -1239,9 +1239,9 @@ test "expr complex types to_json" {
     ),
     content={
       "type": "Expr::If",
-      "cond": { "type": "Unit", "loc": null, "faked": false },
-      "ifso": { "type": "Unit", "loc": null, "faked": false },
-      "ifnot": { "type": "Unit", "loc": null, "faked": false },
+      "cond": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "ifso": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "ifnot": { "type": "Expr::Unit", "loc": null, "faked": false },
       "loc": null,
     },
   )
@@ -1254,21 +1254,21 @@ test "expr complex types to_json" {
     ),
     content={
       "type": "Expr::Guard",
-      "cond": { "type": "Unit", "loc": null, "faked": false },
-      "otherwise": { "type": "Unit", "loc": null, "faked": false },
-      "body": { "type": "Unit", "loc": null, "faked": false },
+      "cond": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "otherwise": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "body": { "type": "Expr::Unit", "loc": null, "faked": false },
       "loc": null,
     },
   )
   @json.inspect(@ast.Defer(expr=unit_expr, body=unit_expr, loc=dummy_loc), content={
     "type": "Expr::Defer",
-    "expr": { "type": "Unit", "loc": null, "faked": false },
-    "body": { "type": "Unit", "loc": null, "faked": false },
+    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
+    "body": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
   @json.inspect(@ast.Is(expr=unit_expr, pat=any_pattern, loc=dummy_loc), content={
     "type": "Expr::Is",
-    "expr": { "type": "Unit", "loc": null, "faked": false },
+    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "pat": { "type": "Pattern::Any", "loc": null },
     "loc": null,
   })
@@ -1277,8 +1277,8 @@ test "expr complex types to_json" {
     content={
       "type": "Expr::Let",
       "pattern": { "type": "Pattern::Any", "loc": null },
-      "expr": { "type": "Unit", "loc": null, "faked": false },
-      "body": { "type": "Unit", "loc": null, "faked": false },
+      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "body": { "type": "Expr::Unit", "loc": null, "faked": false },
       "loc": null,
     },
   )
@@ -1303,8 +1303,8 @@ test "expr complex types to_json" {
         "tys": [],
         "loc": null,
       },
-      "expr": { "type": "Unit", "loc": null, "faked": false },
-      "body": { "type": "Unit", "loc": null, "faked": false },
+      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "body": { "type": "Expr::Unit", "loc": null, "faked": false },
       "loc": null,
     },
   )
@@ -1316,8 +1316,8 @@ test "expr complex types to_json" {
     ),
     content={
       "type": "Expr::Sequence",
-      "exprs": [{ "type": "Unit", "loc": null, "faked": false }],
-      "last_expr": { "type": "Unit", "loc": null, "faked": false },
+      "exprs": [{ "type": "Expr::Unit", "loc": null, "faked": false }],
+      "last_expr": { "type": "Expr::Unit", "loc": null, "faked": false },
       "loc": null,
     },
   )
@@ -1340,7 +1340,7 @@ test "expr complex types to_json" {
         {
           "type": "FieldDef",
           "label": { "type": "Label", "name": "test_label", "loc": null },
-          "expr": { "type": "Unit", "loc": null, "faked": false },
+          "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
           "is_pun": false,
           "loc": null,
         },
@@ -1357,7 +1357,7 @@ test "expr complex types to_json" {
     ),
     content={
       "type": "Expr::Field",
-      "record": { "type": "Unit", "loc": null, "faked": false },
+      "record": { "type": "Expr::Unit", "loc": null, "faked": false },
       "accessor": {
         "type": "Accessor::Label",
         "0": { "type": "Label", "name": "test_label", "loc": null },
@@ -1375,13 +1375,13 @@ test "expr complex types to_json" {
     ),
     content={
       "type": "Expr::Match",
-      "expr": { "type": "Unit", "loc": null, "faked": false },
+      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
       "cases": [
         {
           "type": "Case",
           "pattern": { "type": "Pattern::Any", "loc": null },
           "guard_": null,
-          "body": { "type": "Unit", "loc": null, "faked": false },
+          "body": { "type": "Expr::Unit", "loc": null, "faked": false },
         },
       ],
       "match_loc": null,
@@ -1391,8 +1391,8 @@ test "expr complex types to_json" {
   )
   @json.inspect(@ast.Pipe(lhs=unit_expr, rhs=unit_expr, loc=dummy_loc), content={
     "type": "Expr::Pipe",
-    "lhs": { "type": "Unit", "loc": null, "faked": false },
-    "rhs": { "type": "Unit", "loc": null, "faked": false },
+    "lhs": { "type": "Expr::Unit", "loc": null, "faked": false },
+    "rhs": { "type": "Expr::Unit", "loc": null, "faked": false },
     "loc": null,
   })
   @json.inspect(
@@ -1409,7 +1409,7 @@ test "expr complex types to_json" {
         "name": { "type": "Ident", "name": "test_var" },
         "loc": null,
       },
-      "expr": { "type": "Unit", "loc": null, "faked": false },
+      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
       "augmented_by": {
         "type": "Var",
         "name": { "type": "Ident", "name": "test_var" },
@@ -1992,7 +1992,7 @@ test "deriving_directive to_json" {
     "args": [
       {
         "type": "Argument",
-        "value": { "type": "Unit", "loc": null, "faked": false },
+        "value": { "type": "Expr::Unit", "loc": null, "faked": false },
         "kind": { "type": "ArgumentKind::Positional" },
       },
     ],
@@ -2053,7 +2053,7 @@ test "decl_body to_json" {
           "deriving": [],
         },
       ],
-      "expr": { "type": "Unit", "loc": null, "faked": false },
+      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     },
   )
   @json.inspect(
@@ -2332,7 +2332,7 @@ test "impl variants to_json" {
     ),
     content={
       "type": "Impl::TopExpr",
-      "expr": { "type": "Unit", "loc": null, "faked": false },
+      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
       "is_main": true,
       "local_types": [],
       "loc": null,
@@ -2350,7 +2350,7 @@ test "impl variants to_json" {
     ),
     content={
       "type": "Impl::TopTest",
-      "expr": { "type": "Unit", "loc": null, "faked": false },
+      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
       "name": ["test_string", null],
       "params": null,
       "local_types": [],
@@ -2409,7 +2409,7 @@ test "impl variants to_json" {
     "decl_body": {
       "type": "DeclBody::DeclBody",
       "local_types": [],
-      "expr": { "type": "Unit", "loc": null, "faked": false },
+      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     },
     "loc": null,
   })
@@ -2437,7 +2437,7 @@ test "impl variants to_json" {
         "tys": [],
         "loc": null,
       },
-      "expr": { "type": "Unit", "loc": null, "faked": false },
+      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
       "vis": { "type": "Default" },
       "is_constant": true,
       "loc": null,

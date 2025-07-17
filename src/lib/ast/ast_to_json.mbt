@@ -1037,7 +1037,7 @@ pub impl ToJson for Expr with to_json(self) {
       }
     Raise(err_value~, loc~) =>
       { "type": "Expr::Raise", "err_value": err_value, "loc": loc }
-    Unit(loc~, faked~) => { "type": "Unit", "loc": loc, "faked": faked }
+    Unit(loc~, faked~) => { "type": "Expr::Unit", "loc": loc, "faked": faked }
     Break(arg~, label~, loc~) =>
       {
         "type": "Expr::Break",
