@@ -397,7 +397,7 @@ pub(all) enum Impl {
   TopBatchTypeAlias(pkg~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, mut doc~ : @syntax_types.DocString)
   TopBatchTraitAlias(pkg~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, mut doc~ : @syntax_types.DocString)
   TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @syntax_types.Location?, quantifiers~ : @list.T[TypeVarBinder], params~ : @list.T[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
-  TopView(quantifiers~ : @list.T[TypeVarBinder], source_ty~ : Type, view_constrs~ : @list.T[ConstrDecl], body~ : @list.T[Case], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
+  TopView(quantifiers~ : @list.T[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @syntax_types.Location, view_constrs~ : @list.T[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.T[Parameter], params_loc~ : @syntax_types.Location, body~ : Expr, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
   TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.T[TypeVarBinder], vis~ : Visibility, attrs~ : @list.T[@syntax_types.Attribute], loc~ : @syntax_types.Location, mut doc~ : @syntax_types.DocString)
 }
 impl ToJson for Impl
