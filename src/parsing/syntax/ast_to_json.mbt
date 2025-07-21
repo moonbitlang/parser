@@ -1251,6 +1251,11 @@ pub impl ToJson for Impl with to_json(self) {
       vis~,
       loc~,
       attrs~,
+      view_type_name~,
+      parameters~,
+      view_func_name~,
+      view_type_loc~,
+      params_loc~,
       doc~
     ) =>
       {
@@ -1258,7 +1263,12 @@ pub impl ToJson for Impl with to_json(self) {
         "quantifiers": list_to_json(quantifiers),
         "source_ty": source_ty,
         "view_constrs": list_to_json(view_constrs),
-        "body": list_to_json(body),
+        "body": body,
+        "ty_name": view_type_name,
+        "parameters": list_to_json(parameters),
+        "func_name": view_func_name,
+        "ty_loc": view_type_loc,
+        "params_loc": params_loc,
         "vis": vis,
         "loc": loc,
         "attrs": list_to_json(attrs),
