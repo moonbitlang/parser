@@ -1,0 +1,57 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "constant",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Constant",
+        "c": {
+          "type": "Constant::Int",
+          "0": "1"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Pub",
+        "attr": null,
+        "loc": null
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "variable",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Constant",
+        "c": {
+          "type": "Constant::Int",
+          "0": "2"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Pub",
+        "attr": null,
+        "loc": null
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "E1",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Variant",
+          "0": [
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "A",
+                "loc": null
+              },
+              "args": null,
+              "tag": [
+                "0",
+                null
+              ],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "B",
+                "loc": null
+              },
+              "args": null,
+              "tag": null,
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "C",
+                "loc": null
+              },
+              "args": null,
+              "tag": null,
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "D",
+                "loc": null
+              },
+              "args": null,
+              "tag": [
+                "42",
+                null
+              ],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "E",
+                "loc": null
+              },
+              "args": null,
+              "tag": null,
+              "loc": null,
+              "doc": ""
+            }
+          ]
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "E2",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Variant",
+          "0": [
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "F1",
+                "loc": null
+              },
+              "args": null,
+              "tag": [
+                "0x0001",
+                null
+              ],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "F2",
+                "loc": null
+              },
+              "args": null,
+              "tag": [
+                "0x0002",
+                null
+              ],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "F3",
+                "loc": null
+              },
+              "args": null,
+              "tag": [
+                "0x0004",
+                null
+              ],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "F4",
+                "loc": null
+              },
+              "args": null,
+              "tag": [
+                "0x0008",
+                null
+              ],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "F5",
+                "loc": null
+              },
+              "args": null,
+              "tag": [
+                "0x0010",
+                null
+              ],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "F6",
+                "loc": null
+              },
+              "args": null,
+              "tag": [
+                "0x0020",
+                null
+              ],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "F7",
+                "loc": null
+              },
+              "args": null,
+              "tag": [
+                "0x0040",
+                null
+              ],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "F8",
+                "loc": null
+              },
+              "args": null,
+              "tag": [
+                "0x0080",
+                null
+              ],
+              "loc": null,
+              "doc": ""
+            }
+          ]
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    }
+  ]
+}

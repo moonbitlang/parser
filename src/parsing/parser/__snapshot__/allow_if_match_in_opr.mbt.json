@@ -1,0 +1,431 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "init",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "a",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::Infix",
+            "op": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "+"
+              },
+              "loc": null
+            },
+            "lhs": {
+              "type": "Expr::Group",
+              "expr": {
+                "type": "Expr::If",
+                "cond": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Bool",
+                    "0": true
+                  },
+                  "loc": null
+                },
+                "ifso": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "0"
+                  },
+                  "loc": null
+                },
+                "ifnot": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "1"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "group": {
+                "type": "Group::Paren"
+              },
+              "loc": null
+            },
+            "rhs": {
+              "type": "Expr::Group",
+              "expr": {
+                "type": "Expr::If",
+                "cond": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Bool",
+                    "0": false
+                  },
+                  "loc": null
+                },
+                "ifso": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "1"
+                  },
+                  "loc": null
+                },
+                "ifnot": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "0"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "group": {
+                "type": "Group::Paren"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Var",
+              "0": {
+                "type": "Binder",
+                "name": "b",
+                "loc": null
+              }
+            },
+            "expr": {
+              "type": "Expr::Infix",
+              "op": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "+"
+                },
+                "loc": null
+              },
+              "lhs": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Match",
+                  "expr": {
+                    "type": "Expr::Constant",
+                    "c": {
+                      "type": "Constant::Bool",
+                      "0": true
+                    },
+                    "loc": null
+                  },
+                  "cases": [
+                    {
+                      "type": "Case",
+                      "pattern": {
+                        "type": "Pattern::Constant",
+                        "c": {
+                          "type": "Constant::Bool",
+                          "0": true
+                        },
+                        "loc": null
+                      },
+                      "guard_": null,
+                      "body": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::Int",
+                          "0": "1"
+                        },
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "Case",
+                      "pattern": {
+                        "type": "Pattern::Constant",
+                        "c": {
+                          "type": "Constant::Bool",
+                          "0": false
+                        },
+                        "loc": null
+                      },
+                      "guard_": null,
+                      "body": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::Int",
+                          "0": "0"
+                        },
+                        "loc": null
+                      }
+                    }
+                  ],
+                  "match_loc": null,
+                  "using": null,
+                  "loc": null
+                },
+                "group": {
+                  "type": "Group::Paren"
+                },
+                "loc": null
+              },
+              "rhs": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Match",
+                  "expr": {
+                    "type": "Expr::Constant",
+                    "c": {
+                      "type": "Constant::Bool",
+                      "0": false
+                    },
+                    "loc": null
+                  },
+                  "cases": [
+                    {
+                      "type": "Case",
+                      "pattern": {
+                        "type": "Pattern::Constant",
+                        "c": {
+                          "type": "Constant::Bool",
+                          "0": true
+                        },
+                        "loc": null
+                      },
+                      "guard_": null,
+                      "body": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::Int",
+                          "0": "0"
+                        },
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "Case",
+                      "pattern": {
+                        "type": "Pattern::Constant",
+                        "c": {
+                          "type": "Constant::Bool",
+                          "0": false
+                        },
+                        "loc": null
+                      },
+                      "guard_": null,
+                      "body": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::Int",
+                          "0": "1"
+                        },
+                        "loc": null
+                      }
+                    }
+                  ],
+                  "match_loc": null,
+                  "using": null,
+                  "loc": null
+                },
+                "group": {
+                  "type": "Group::Paren"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Let",
+              "pattern": {
+                "type": "Pattern::Var",
+                "0": {
+                  "type": "Binder",
+                  "name": "c",
+                  "loc": null
+                }
+              },
+              "expr": {
+                "type": "Expr::Unary",
+                "op": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "-"
+                  },
+                  "loc": null
+                },
+                "expr": {
+                  "type": "Expr::Group",
+                  "expr": {
+                    "type": "Expr::If",
+                    "cond": {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Bool",
+                        "0": true
+                      },
+                      "loc": null
+                    },
+                    "ifso": {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "1"
+                      },
+                      "loc": null
+                    },
+                    "ifnot": {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "0"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "group": {
+                    "type": "Group::Paren"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "body": {
+                "type": "Expr::Let",
+                "pattern": {
+                  "type": "Pattern::Var",
+                  "0": {
+                    "type": "Binder",
+                    "name": "d",
+                    "loc": null
+                  }
+                },
+                "expr": {
+                  "type": "Expr::Unary",
+                  "op": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "-"
+                    },
+                    "loc": null
+                  },
+                  "expr": {
+                    "type": "Expr::Group",
+                    "expr": {
+                      "type": "Expr::Match",
+                      "expr": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::Bool",
+                          "0": false
+                        },
+                        "loc": null
+                      },
+                      "cases": [
+                        {
+                          "type": "Case",
+                          "pattern": {
+                            "type": "Pattern::Constant",
+                            "c": {
+                              "type": "Constant::Bool",
+                              "0": false
+                            },
+                            "loc": null
+                          },
+                          "guard_": null,
+                          "body": {
+                            "type": "Expr::Constant",
+                            "c": {
+                              "type": "Constant::Int",
+                              "0": "1"
+                            },
+                            "loc": null
+                          }
+                        },
+                        {
+                          "type": "Case",
+                          "pattern": {
+                            "type": "Pattern::Constant",
+                            "c": {
+                              "type": "Constant::Bool",
+                              "0": true
+                            },
+                            "loc": null
+                          },
+                          "guard_": null,
+                          "body": {
+                            "type": "Expr::Constant",
+                            "c": {
+                              "type": "Constant::Int",
+                              "0": "0"
+                            },
+                            "loc": null
+                          }
+                        }
+                      ],
+                      "match_loc": null,
+                      "using": null,
+                      "loc": null
+                    },
+                    "group": {
+                      "type": "Group::Paren"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "body": {
+                  "type": "Expr::Unit",
+                  "loc": null,
+                  "faked": true
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    }
+  ]
+}

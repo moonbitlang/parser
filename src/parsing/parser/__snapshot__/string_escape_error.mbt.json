@@ -1,0 +1,195 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Sequence",
+        "exprs": [
+          {
+            "type": "Expr::Apply",
+            "func": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "println"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "args": [
+              {
+                "type": "Argument",
+                "value": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::String",
+                    "0": ""
+                  },
+                  "loc": null
+                },
+                "kind": {
+                  "type": "ArgumentKind::Positional"
+                }
+              }
+            ],
+            "attr": {
+              "type": "ApplyAttr::NoAttr"
+            },
+            "loc": null
+          },
+          {
+            "type": "Expr::Apply",
+            "func": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "println"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "args": [
+              {
+                "type": "Argument",
+                "value": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::String",
+                    "0": ""
+                  },
+                  "loc": null
+                },
+                "kind": {
+                  "type": "ArgumentKind::Positional"
+                }
+              }
+            ],
+            "attr": {
+              "type": "ApplyAttr::NoAttr"
+            },
+            "loc": null
+          },
+          {
+            "type": "Expr::Apply",
+            "func": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "println"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "args": [
+              {
+                "type": "Argument",
+                "value": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::String",
+                    "0": ""
+                  },
+                  "loc": null
+                },
+                "kind": {
+                  "type": "ArgumentKind::Positional"
+                }
+              }
+            ],
+            "attr": {
+              "type": "ApplyAttr::NoAttr"
+            },
+            "loc": null
+          },
+          {
+            "type": "Expr::Apply",
+            "func": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "println"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "args": [
+              {
+                "type": "Argument",
+                "value": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::String",
+                    "0": "\\u{fffffffff}"
+                  },
+                  "loc": null
+                },
+                "kind": {
+                  "type": "ArgumentKind::Positional"
+                }
+              }
+            ],
+            "attr": {
+              "type": "ApplyAttr::NoAttr"
+            },
+            "loc": null
+          }
+        ],
+        "last_expr": {
+          "type": "Expr::Apply",
+          "func": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "println"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "args": [
+            {
+              "type": "Argument",
+              "value": {
+                "type": "Expr::Constant",
+                "c": {
+                  "type": "Constant::String",
+                  "0": "\\uDC00"
+                },
+                "loc": null
+              },
+              "kind": {
+                "type": "ArgumentKind::Positional"
+              }
+            }
+          ],
+          "attr": {
+            "type": "ApplyAttr::NoAttr"
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": null,
+      "params": null,
+      "local_types": [],
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    }
+  ]
+}

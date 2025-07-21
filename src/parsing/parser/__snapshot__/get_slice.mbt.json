@@ -1,0 +1,591 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "init",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Any",
+            "loc": null
+          },
+          "expr": {
+            "type": "Expr::ArrayGetSlice",
+            "array": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "a"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "start_index": null,
+            "end_index": null,
+            "index_loc_": null,
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Any",
+              "loc": null
+            },
+            "expr": {
+              "type": "Expr::ArrayGetSlice",
+              "array": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "a"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "start_index": {
+                "type": "Expr::Constant",
+                "c": {
+                  "type": "Constant::Int",
+                  "0": "1"
+                },
+                "loc": null
+              },
+              "end_index": null,
+              "index_loc_": null,
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Let",
+              "pattern": {
+                "type": "Pattern::Any",
+                "loc": null
+              },
+              "expr": {
+                "type": "Expr::ArrayGetSlice",
+                "array": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "a"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "start_index": null,
+                "end_index": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "1"
+                  },
+                  "loc": null
+                },
+                "index_loc_": null,
+                "loc": null
+              },
+              "body": {
+                "type": "Expr::Let",
+                "pattern": {
+                  "type": "Pattern::Any",
+                  "loc": null
+                },
+                "expr": {
+                  "type": "Expr::ArrayGetSlice",
+                  "array": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "a"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "start_index": {
+                    "type": "Expr::Constant",
+                    "c": {
+                      "type": "Constant::Int",
+                      "0": "1"
+                    },
+                    "loc": null
+                  },
+                  "end_index": {
+                    "type": "Expr::Constant",
+                    "c": {
+                      "type": "Constant::Int",
+                      "0": "2"
+                    },
+                    "loc": null
+                  },
+                  "index_loc_": null,
+                  "loc": null
+                },
+                "body": {
+                  "type": "Expr::Let",
+                  "pattern": {
+                    "type": "Pattern::Any",
+                    "loc": null
+                  },
+                  "expr": {
+                    "type": "Expr::ArrayGetSlice",
+                    "array": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "a"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "start_index": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "x"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "end_index": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "y"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "index_loc_": null,
+                    "loc": null
+                  },
+                  "body": {
+                    "type": "Expr::Let",
+                    "pattern": {
+                      "type": "Pattern::Any",
+                      "loc": null
+                    },
+                    "expr": {
+                      "type": "Expr::ArrayGetSlice",
+                      "array": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "a"
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "start_index": {
+                        "type": "Expr::Infix",
+                        "op": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "+"
+                          },
+                          "loc": null
+                        },
+                        "lhs": {
+                          "type": "Expr::Ident",
+                          "id": {
+                            "type": "Var",
+                            "name": {
+                              "type": "LongIdent::Ident",
+                              "0": "x"
+                            },
+                            "loc": null
+                          },
+                          "loc": null
+                        },
+                        "rhs": {
+                          "type": "Expr::Ident",
+                          "id": {
+                            "type": "Var",
+                            "name": {
+                              "type": "LongIdent::Ident",
+                              "0": "y"
+                            },
+                            "loc": null
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "end_index": {
+                        "type": "Expr::DotApply",
+                        "self": {
+                          "type": "Expr::Ident",
+                          "id": {
+                            "type": "Var",
+                            "name": {
+                              "type": "LongIdent::Ident",
+                              "0": "a"
+                            },
+                            "loc": null
+                          },
+                          "loc": null
+                        },
+                        "method_name": {
+                          "type": "Label",
+                          "name": "length",
+                          "loc": null
+                        },
+                        "args": [],
+                        "return_self": false,
+                        "attr": {
+                          "type": "ApplyAttr::NoAttr"
+                        },
+                        "loc": null
+                      },
+                      "index_loc_": null,
+                      "loc": null
+                    },
+                    "body": {
+                      "type": "Expr::Let",
+                      "pattern": {
+                        "type": "Pattern::Any",
+                        "loc": null
+                      },
+                      "expr": {
+                        "type": "Expr::ArrayGetSlice",
+                        "array": {
+                          "type": "Expr::ArrayGetSlice",
+                          "array": {
+                            "type": "Expr::Ident",
+                            "id": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "a"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "start_index": {
+                            "type": "Expr::Infix",
+                            "op": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "+"
+                              },
+                              "loc": null
+                            },
+                            "lhs": {
+                              "type": "Expr::Ident",
+                              "id": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "x"
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            },
+                            "rhs": {
+                              "type": "Expr::Ident",
+                              "id": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "y"
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "end_index": {
+                            "type": "Expr::DotApply",
+                            "self": {
+                              "type": "Expr::Ident",
+                              "id": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "a"
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            },
+                            "method_name": {
+                              "type": "Label",
+                              "name": "length",
+                              "loc": null
+                            },
+                            "args": [],
+                            "return_self": false,
+                            "attr": {
+                              "type": "ApplyAttr::NoAttr"
+                            },
+                            "loc": null
+                          },
+                          "index_loc_": null,
+                          "loc": null
+                        },
+                        "start_index": null,
+                        "end_index": null,
+                        "index_loc_": null,
+                        "loc": null
+                      },
+                      "body": {
+                        "type": "Expr::Let",
+                        "pattern": {
+                          "type": "Pattern::Any",
+                          "loc": null
+                        },
+                        "expr": {
+                          "type": "Expr::ArrayGetSlice",
+                          "array": {
+                            "type": "Expr::ArrayGetSlice",
+                            "array": {
+                              "type": "Expr::Ident",
+                              "id": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "a"
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            },
+                            "start_index": {
+                              "type": "Expr::Infix",
+                              "op": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "+"
+                                },
+                                "loc": null
+                              },
+                              "lhs": {
+                                "type": "Expr::Ident",
+                                "id": {
+                                  "type": "Var",
+                                  "name": {
+                                    "type": "LongIdent::Ident",
+                                    "0": "x"
+                                  },
+                                  "loc": null
+                                },
+                                "loc": null
+                              },
+                              "rhs": {
+                                "type": "Expr::Ident",
+                                "id": {
+                                  "type": "Var",
+                                  "name": {
+                                    "type": "LongIdent::Ident",
+                                    "0": "y"
+                                  },
+                                  "loc": null
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            },
+                            "end_index": {
+                              "type": "Expr::DotApply",
+                              "self": {
+                                "type": "Expr::Ident",
+                                "id": {
+                                  "type": "Var",
+                                  "name": {
+                                    "type": "LongIdent::Ident",
+                                    "0": "a"
+                                  },
+                                  "loc": null
+                                },
+                                "loc": null
+                              },
+                              "method_name": {
+                                "type": "Label",
+                                "name": "length",
+                                "loc": null
+                              },
+                              "args": [],
+                              "return_self": false,
+                              "attr": {
+                                "type": "ApplyAttr::NoAttr"
+                              },
+                              "loc": null
+                            },
+                            "index_loc_": null,
+                            "loc": null
+                          },
+                          "start_index": {
+                            "type": "Expr::Constant",
+                            "c": {
+                              "type": "Constant::Int",
+                              "0": "1"
+                            },
+                            "loc": null
+                          },
+                          "end_index": {
+                            "type": "Expr::DotApply",
+                            "self": {
+                              "type": "Expr::Ident",
+                              "id": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "a"
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            },
+                            "method_name": {
+                              "type": "Label",
+                              "name": "length",
+                              "loc": null
+                            },
+                            "args": [],
+                            "return_self": false,
+                            "attr": {
+                              "type": "ApplyAttr::NoAttr"
+                            },
+                            "loc": null
+                          },
+                          "index_loc_": null,
+                          "loc": null
+                        },
+                        "body": {
+                          "type": "Expr::Unit",
+                          "loc": null,
+                          "faked": true
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Pipe",
+        "lhs": {
+          "type": "Expr::ArrayGetSlice",
+          "array": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "a"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "start_index": {
+            "type": "Expr::Constant",
+            "c": {
+              "type": "Constant::Int",
+              "0": "0"
+            },
+            "loc": null
+          },
+          "end_index": {
+            "type": "Expr::Constant",
+            "c": {
+              "type": "Constant::Int",
+              "0": "1"
+            },
+            "loc": null
+          },
+          "index_loc_": null,
+          "loc": null
+        },
+        "rhs": {
+          "type": "Expr::Ident",
+          "id": {
+            "type": "Var",
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "f"
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": null,
+      "params": null,
+      "local_types": [],
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    }
+  ]
+}

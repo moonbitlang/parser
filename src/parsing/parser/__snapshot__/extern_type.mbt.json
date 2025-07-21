@@ -1,0 +1,159 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "T",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Extern"
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "T",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Extern"
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Pub",
+          "attr": null,
+          "loc": null
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "T",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Extern"
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [
+          {
+            "type": "DerivingDirective",
+            "type_name": {
+              "type": "TypeName",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "Show"
+              },
+              "is_object": false,
+              "loc": null
+            },
+            "args": [],
+            "loc": null
+          }
+        ],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "T",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Abstract"
+        },
+        "attrs": [
+          null
+        ],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "T",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Abstract"
+        },
+        "attrs": [
+          null
+        ],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Pub",
+          "attr": null,
+          "loc": null
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "T",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Abstract"
+        },
+        "attrs": [
+          null
+        ],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [
+          {
+            "type": "DerivingDirective",
+            "type_name": {
+              "type": "TypeName",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "Show"
+              },
+              "is_object": false,
+              "loc": null
+            },
+            "args": [],
+            "loc": null
+          }
+        ],
+        "loc": null
+      }
+    }
+  ]
+}

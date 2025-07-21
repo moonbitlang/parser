@@ -1,0 +1,80 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Foo",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Record",
+          "0": [
+            {
+              "type": "FieldDecl",
+              "name": {
+                "type": "FieldName",
+                "label": "foo",
+                "loc": null
+              },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "mut": false,
+              "vis": {
+                "type": "Visibility::Default"
+              },
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "FieldDecl",
+              "name": {
+                "type": "FieldName",
+                "label": "bar",
+                "loc": null
+              },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "mut": false,
+              "vis": {
+                "type": "Visibility::Default"
+              },
+              "loc": null,
+              "doc": ""
+            }
+          ]
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    }
+  ]
+}

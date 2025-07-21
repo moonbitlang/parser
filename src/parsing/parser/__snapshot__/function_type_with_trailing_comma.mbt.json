@@ -1,0 +1,272 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Callback1",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Arrow",
+            "args": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "res": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "err": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "is_async": false,
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Callback2",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Arrow",
+            "args": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "res": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "err": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "is_async": false,
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "ModalRenderer",
+        "tycon_loc": null,
+        "params": [
+          {
+            "type": "TypeDeclBinder",
+            "name": "T",
+            "loc": null
+          }
+        ],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Arrow",
+            "args": [
+              {
+                "type": "Type::Arrow",
+                "args": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Dot",
+                        "pkg": "node",
+                        "id": "DispatchFn"
+                      },
+                      "loc": null
+                    },
+                    "tys": [
+                      {
+                        "type": "Type::Name",
+                        "constr_id": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "LongIdent::Ident",
+                            "0": "T"
+                          },
+                          "loc": null
+                        },
+                        "tys": [],
+                        "loc": null
+                      }
+                    ],
+                    "loc": null
+                  }
+                ],
+                "res": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Unit"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "err": {
+                  "type": "ErrorType::ErrorType",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Dot",
+                        "pkg": "node",
+                        "id": "RespoCommonError"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                },
+                "is_async": false,
+                "loc": null
+              }
+            ],
+            "res": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Dot",
+                  "pkg": "node",
+                  "id": "RespoNode"
+                },
+                "loc": null
+              },
+              "tys": [
+                {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "T"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                }
+              ],
+              "loc": null
+            },
+            "err": {
+              "type": "ErrorType::ErrorType",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "node",
+                    "id": "RespoCommonError"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            "is_async": false,
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Pub",
+          "attr": "all",
+          "loc": null
+        },
+        "deriving": [],
+        "loc": null
+      }
+    }
+  ]
+}

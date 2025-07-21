@@ -1,0 +1,201 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "init",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "min",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::Constant",
+            "c": {
+              "type": "Constant::UInt",
+              "0": "0"
+            },
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Var",
+              "0": {
+                "type": "Binder",
+                "name": "max",
+                "loc": null
+              }
+            },
+            "expr": {
+              "type": "Expr::Constant",
+              "c": {
+                "type": "Constant::UInt",
+                "0": "4294967295"
+              },
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Let",
+              "pattern": {
+                "type": "Pattern::Var",
+                "0": {
+                  "type": "Binder",
+                  "name": "max",
+                  "loc": null
+                }
+              },
+              "expr": {
+                "type": "Expr::Constant",
+                "c": {
+                  "type": "Constant::UInt",
+                  "0": "4_294_967_295"
+                },
+                "loc": null
+              },
+              "body": {
+                "type": "Expr::Let",
+                "pattern": {
+                  "type": "Pattern::Var",
+                  "0": {
+                    "type": "Binder",
+                    "name": "max",
+                    "loc": null
+                  }
+                },
+                "expr": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::UInt",
+                    "0": "0xFFFFFFFF"
+                  },
+                  "loc": null
+                },
+                "body": {
+                  "type": "Expr::Let",
+                  "pattern": {
+                    "type": "Pattern::Var",
+                    "0": {
+                      "type": "Binder",
+                      "name": "min",
+                      "loc": null
+                    }
+                  },
+                  "expr": {
+                    "type": "Expr::Constant",
+                    "c": {
+                      "type": "Constant::UInt64",
+                      "0": "0"
+                    },
+                    "loc": null
+                  },
+                  "body": {
+                    "type": "Expr::Let",
+                    "pattern": {
+                      "type": "Pattern::Var",
+                      "0": {
+                        "type": "Binder",
+                        "name": "max",
+                        "loc": null
+                      }
+                    },
+                    "expr": {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::UInt64",
+                        "0": "18446744073709551615"
+                      },
+                      "loc": null
+                    },
+                    "body": {
+                      "type": "Expr::Let",
+                      "pattern": {
+                        "type": "Pattern::Var",
+                        "0": {
+                          "type": "Binder",
+                          "name": "max",
+                          "loc": null
+                        }
+                      },
+                      "expr": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::UInt64",
+                          "0": "18_446_744_073_709_551_615"
+                        },
+                        "loc": null
+                      },
+                      "body": {
+                        "type": "Expr::Let",
+                        "pattern": {
+                          "type": "Pattern::Var",
+                          "0": {
+                            "type": "Binder",
+                            "name": "max",
+                            "loc": null
+                          }
+                        },
+                        "expr": {
+                          "type": "Expr::Constant",
+                          "c": {
+                            "type": "Constant::UInt64",
+                            "0": "0xFFFFFFFFFFFFFFFF"
+                          },
+                          "loc": null
+                        },
+                        "body": {
+                          "type": "Expr::Unit",
+                          "loc": null,
+                          "faked": true
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    }
+  ]
+}

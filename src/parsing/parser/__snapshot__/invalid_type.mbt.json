@@ -1,0 +1,28 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "AI",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Any",
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    }
+  ]
+}

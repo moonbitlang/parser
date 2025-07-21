@@ -1,0 +1,131 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "f",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [],
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Unit"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Group",
+          "expr": {
+            "type": "Expr::Try",
+            "body": {
+              "type": "Expr::Group",
+              "expr": {
+                "type": "Expr::Pipe",
+                "lhs": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "x"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "rhs": {
+                  "type": "Expr::Constr",
+                  "constr": {
+                    "type": "Constructor",
+                    "name": {
+                      "type": "ConstrName",
+                      "name": "Ok",
+                      "loc": null
+                    },
+                    "extra_info": {
+                      "type": "ConstructorExtraInfo::NoExtraInfo"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "group": {
+                "type": "Group::Brace"
+              },
+              "loc": null
+            },
+            "catch": [
+              {
+                "type": "Case",
+                "pattern": {
+                  "type": "Pattern::Any",
+                  "loc": null
+                },
+                "guard_": null,
+                "body": {
+                  "type": "Expr::Constr",
+                  "constr": {
+                    "type": "Constructor",
+                    "name": {
+                      "type": "ConstrName",
+                      "name": "Err",
+                      "loc": null
+                    },
+                    "extra_info": {
+                      "type": "ConstructorExtraInfo::NoExtraInfo"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                }
+              }
+            ],
+            "catch_all": false,
+            "try_else": null,
+            "has_try": true,
+            "legacy_else": false,
+            "try_loc": null,
+            "catch_loc": null,
+            "else_loc": null,
+            "loc": null
+          },
+          "group": {
+            "type": "Group::Paren"
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    }
+  ]
+}

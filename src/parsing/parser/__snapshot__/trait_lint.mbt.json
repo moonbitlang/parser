@@ -1,0 +1,777 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Self",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Record",
+          "0": []
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Self",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Variant",
+          "0": []
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "f",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [
+          {
+            "type": "Parameter::Positional",
+            "binder": {
+              "type": "Binder",
+              "name": "x",
+              "loc": null
+            },
+            "ty": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Self"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            }
+          }
+        ],
+        "params_loc": null,
+        "quantifiers": [
+          {
+            "type": "TypeVarBinder",
+            "name": "Self",
+            "constraints": [],
+            "loc": null
+          }
+        ],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Self"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Ident",
+          "id": {
+            "type": "Var",
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "x"
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "T",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Record",
+          "0": []
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Priv",
+          "loc": null
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTrait",
+      "0": {
+        "type": "TraitDecl",
+        "name": {
+          "type": "Binder",
+          "name": "I",
+          "loc": null
+        },
+        "supers": [],
+        "methods": [
+          {
+            "type": "TraitMethod",
+            "name": {
+              "type": "Binder",
+              "name": "f",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [],
+            "params": [
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              }
+            ],
+            "return_type": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "T"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "loc": null
+          },
+          {
+            "type": "TraitMethod",
+            "name": {
+              "type": "Binder",
+              "name": "f",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [
+              {
+                "type": "TypeVarBinder",
+                "name": "X",
+                "constraints": [],
+                "loc": null
+              }
+            ],
+            "params": [
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              }
+            ],
+            "return_type": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "loc": null
+          }
+        ],
+        "vis": {
+          "type": "Visibility::Pub",
+          "attr": null,
+          "loc": null
+        },
+        "loc_": null,
+        "attrs": [],
+        "doc": ""
+      }
+    },
+    {
+      "type": "Impl::TopTrait",
+      "0": {
+        "type": "TraitDecl",
+        "name": {
+          "type": "Binder",
+          "name": "I_private",
+          "loc": null
+        },
+        "supers": [],
+        "methods": [
+          {
+            "type": "TraitMethod",
+            "name": {
+              "type": "Binder",
+              "name": "m",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [],
+            "params": [
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              }
+            ],
+            "return_type": null,
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "loc": null
+          }
+        ],
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "loc_": null,
+        "attrs": [],
+        "doc": ""
+      }
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "f",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [
+          {
+            "type": "Parameter::Positional",
+            "binder": {
+              "type": "Binder",
+              "name": "x",
+              "loc": null
+            },
+            "ty": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "X"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            }
+          }
+        ],
+        "params_loc": null,
+        "quantifiers": [
+          {
+            "type": "TypeVarBinder",
+            "name": "X",
+            "constraints": [
+              {
+                "type": "TypeVarConstraint",
+                "trait_": {
+                  "type": "LongIdent::Ident",
+                  "0": "I_private"
+                },
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        ],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Pub",
+          "attr": null,
+          "loc": null
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Unit",
+          "loc": null,
+          "faked": true
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopTrait",
+      "0": {
+        "type": "TraitDecl",
+        "name": {
+          "type": "Binder",
+          "name": "I_dup_method",
+          "loc": null
+        },
+        "supers": [],
+        "methods": [
+          {
+            "type": "TraitMethod",
+            "name": {
+              "type": "Binder",
+              "name": "m1",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [],
+            "params": [
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              }
+            ],
+            "return_type": null,
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "loc": null
+          },
+          {
+            "type": "TraitMethod",
+            "name": {
+              "type": "Binder",
+              "name": "m1",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [],
+            "params": [
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              }
+            ],
+            "return_type": null,
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "loc": null
+          },
+          {
+            "type": "TraitMethod",
+            "name": {
+              "type": "Binder",
+              "name": "m2",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [],
+            "params": [
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              }
+            ],
+            "return_type": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "loc": null
+          },
+          {
+            "type": "TraitMethod",
+            "name": {
+              "type": "Binder",
+              "name": "m2",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [],
+            "params": [
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              }
+            ],
+            "return_type": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "loc": null
+          },
+          {
+            "type": "TraitMethod",
+            "name": {
+              "type": "Binder",
+              "name": "m2",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [],
+            "params": [
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              }
+            ],
+            "return_type": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Char"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "loc": null
+          }
+        ],
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "loc_": null,
+        "attrs": [],
+        "doc": ""
+      }
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "I_private"
+          },
+          "is_object": false,
+          "loc": null
+        },
+        "name": {
+          "type": "Binder",
+          "name": "m",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [
+          {
+            "type": "Parameter::Positional",
+            "binder": {
+              "type": "Binder",
+              "name": "self",
+              "loc": null
+            },
+            "ty": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            }
+          }
+        ],
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Pub",
+          "attr": null,
+          "loc": null
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Unit",
+          "loc": null,
+          "faked": true
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "I_private"
+          },
+          "is_object": false,
+          "loc": null
+        },
+        "name": {
+          "type": "Binder",
+          "name": "m",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [
+          {
+            "type": "Parameter::Positional",
+            "binder": {
+              "type": "Binder",
+              "name": "self",
+              "loc": null
+            },
+            "ty": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "String"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            }
+          }
+        ],
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Unit",
+          "loc": null,
+          "faked": true
+        }
+      },
+      "loc": null
+    }
+  ]
+}
