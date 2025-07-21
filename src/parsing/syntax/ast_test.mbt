@@ -2502,4 +2502,44 @@ test "impl variants to_json" {
       "doc": { "content": ["Test documentation"], "loc": null },
     },
   )
+  let view = @syntax.TopView(
+    quantifiers=@list.empty(),
+    source_ty=int_type,
+    view_type_name="TestViewType",
+    view_func_name=binder,
+    view_type_loc=dummy_loc,
+    params_loc=dummy_loc,
+    view_constrs=@list.empty(),
+    parameters=@list.empty(),
+    body=unit_expr,
+    vis=@syntax.Default,
+    attrs=@list.empty(),
+    doc=dummy_docstring,
+    loc=dummy_loc,
+  )
+  @json.inspect(view, content={
+    "type": "Impl::TopView",
+    "quantifiers": [],
+    "source_ty": {
+      "type": "Type::Name",
+      "constr_id": {
+        "type": "ConstrId",
+        "id": { "type": "Ident", "name": "Int" },
+        "loc": null,
+      },
+      "tys": [],
+      "loc": null,
+    },
+    "view_constrs": [],
+    "body": { "type": "Expr::Unit", "loc": null, "faked": false },
+    "ty_name": "TestViewType",
+    "parameters": [],
+    "func_name": { "type": "Binder", "name": "test", "loc": null },
+    "ty_loc": null,
+    "params_loc": null,
+    "vis": { "type": "Default" },
+    "loc": null,
+    "attrs": [],
+    "doc": { "content": ["Test documentation"], "loc": null },
+  })
 }
