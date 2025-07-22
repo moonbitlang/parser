@@ -11,7 +11,7 @@ pub fn tokens_from_bytes(
   start_pos~ : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
   is_interpolation~ : Bool = false,
   comment~ : Bool,
-  bytes : Bytes
+  bytes : Bytes,
 ) -> LexResult {
   let lexbuf = Lexbuf::from_bytes(bytes)
   let arr = Array::new(capacity=100)

@@ -9,7 +9,7 @@ struct Lexbuf {
 pub fn Lexbuf::from_bytes(
   bytes : Bytes,
   start~ : Int = 0,
-  end? : Int
+  end? : Int,
 ) -> Lexbuf {
   let end = match end {
     None => bytes.length()

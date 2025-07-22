@@ -710,7 +710,7 @@ test "parse core/prelude/prelude.mbti" (it : @test.T) {
 
 ///|
 test "parse core/random/internal/random_source/random_source.mbti" (
-  it : @test.T
+  it : @test.T,
 ) {
   let path = "core/random/internal/random_source/random_source.mbti"
   let content = @fs.read_file_to_bytes(path)

@@ -12,7 +12,7 @@ fn string(
   env~ : LexEnv,
   end_with_newline~ : Bool,
   allow_interp~ : Bool,
-  startpos~ : Int
+  startpos~ : Int,
 ) -> Array[InterpElem] {
   string_repr_buf.reset()
   normal(lexbuf, env~, end_with_newline~, allow_interp~, startpos~)
@@ -344,7 +344,7 @@ fn normal(
   env~ : LexEnv,
   end_with_newline~ : Bool,
   allow_interp~ : Bool,
-  startpos~ : Int
+  startpos~ : Int,
 ) -> Unit {
   // The matched pattern id
   let mut _match_pattern = @int.max_value
@@ -1201,7 +1201,7 @@ fn invalid_byte(lexbuf : Lexbuf, env~ : LexEnv, start~ : Int) -> Unit {
 fn tokens(
   lexbuf : Lexbuf,
   env~ : LexEnv,
-  preserve_comment~ : (Comment, Int, Int) -> Unit
+  preserve_comment~ : (Comment, Int, Int) -> Unit,
 ) -> Unit {
   // The matched pattern id
   let mut _match_pattern = @int.max_value

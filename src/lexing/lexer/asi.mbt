@@ -280,7 +280,7 @@ fn[C] ASIContext::add_token(
   self : ASIContext,
   tokens~ : Array[(Token, Position, Position)],
   last_unhandled_comment~ : Ref[(C, Int)?],
-  next_token : Token
+  next_token : Token,
 ) -> Unit {
   match next_token {
     COMMENT(_) => ()

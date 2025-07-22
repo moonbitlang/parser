@@ -18,7 +18,7 @@ fn add_lexing_error(
   self : LexEnv,
   start~ : Int,
   end~ : Int,
-  err : LexicalError
+  err : LexicalError,
 ) -> Unit {
   let loc_start = self.make_pos(start)
   let loc_end = self.make_pos(end)
@@ -40,7 +40,7 @@ fn LexEnv::add_token(
   self : LexEnv,
   tok : Token,
   start : Position,
-  end : Position
+  end : Position,
 ) -> Unit {
   self.asi_context.add_token(
     tokens=self.tokens,
@@ -119,7 +119,7 @@ fn add_token_with_loc(
   tok : Token,
   start~ : Int,
   end~ : Int,
-  start_offset~ : Int = 0
+  start_offset~ : Int = 0,
 ) -> Unit {
   let start = self.make_pos(start + start_offset)
   let end = self.make_pos(end)

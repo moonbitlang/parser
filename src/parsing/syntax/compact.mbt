@@ -12,7 +12,7 @@ pub(all) enum SemiExprProp {
 ///|
 pub fn SemiExprProp::compact_rev(
   ls : @list.T[SemiExprProp],
-  loc~ : Location
+  loc~ : Location,
 ) -> Expr {
   match ls {
     More(StmtExpr(expr), tail=rest) => SemiExprProp::collect_rev(rest, expr)
@@ -38,7 +38,7 @@ pub fn SemiExprProp::compact_rev(
 ///|
 pub fn SemiExprProp::collect_rev(
   rest : @list.T[SemiExprProp],
-  cont : Expr
+  cont : Expr,
 ) -> Expr {
   match rest {
     Empty => cont
@@ -93,7 +93,7 @@ pub fn SemiExprProp::collect_sequence(
   loc~ : Location,
   acc : @list.T[Expr],
   todo : @list.T[SemiExprProp],
-  cont : Expr
+  cont : Expr,
 ) -> Expr {
   match todo {
     More(StmtExpr(expr), tail=rest) => {
@@ -113,7 +113,7 @@ pub fn SemiExprProp::collect_letrec(
   loc~ : Location,
   acc : @list.T[(Binder, Func)],
   todo : @list.T[SemiExprProp],
-  cont : Expr
+  cont : Expr,
 ) -> Expr {
   match todo {
     More(StmtFunc(binder~, func~, loc~), tail=rest) =>

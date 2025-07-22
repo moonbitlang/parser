@@ -22,7 +22,7 @@ pub fn make_tuple_expr(loc~ : Location, exprs : @list.T[Expr]) -> Expr {
 ///| Create array expression with possible spread elements
 pub fn make_array_expr(
   loc~ : Location,
-  elems : @list.T[SpreadableElem]
+  elems : @list.T[SpreadableElem],
 ) -> Expr {
   // Try to convert to regular array if no spread elements
   let mut acc : (@list.T[Expr]) -> @list.T[Expr] = fn(lst) { lst }
@@ -39,7 +39,7 @@ pub fn make_array_expr(
 
 ///| Create interpolation elements from literal components
 pub fn make_interps(
-  components : Array[InterpolationComponent]
+  components : Array[InterpolationComponent],
 ) -> @list.T[InterpElem] {
   let result = components.map(fn(lit) {
     match lit {
@@ -53,7 +53,7 @@ pub fn make_interps(
 ///| Create interpolation expression
 pub fn make_interp_expr(
   loc~ : Location,
-  components : Array[InterpolationComponent]
+  components : Array[InterpolationComponent],
 ) -> Expr {
   let elems = make_interps(components)
   Interp(elems~, loc~)
@@ -64,7 +64,7 @@ pub fn make_record_expr(
   loc~ : Location,
   trailing~ : TrailingMark,
   type_name : TypeName?,
-  fields : @list.T[FieldDef]
+  fields : @list.T[FieldDef],
 ) -> Expr {
   Record(type_name~, fields~, trailing~, loc~)
 }
@@ -73,7 +73,7 @@ pub fn make_record_expr(
 pub fn make_alias_pattern(
   loc~ : Location,
   pat : Pattern,
-  alias_ : Binder
+  alias_ : Binder,
 ) -> Pattern {
   Alias(pat~, alias_~, loc~)
 }
@@ -93,7 +93,7 @@ pub fn make_constr_pattern(
   loc~ : Location,
   constr : Constructor,
   args : @list.T[ConstrPatArg]?,
-  is_open : Bool
+  is_open : Bool,
 ) -> Pattern {
   Constr(constr~, args~, is_open~, loc~)
 }
@@ -107,7 +107,7 @@ pub fn make_tuple_type(loc~ : Location, tys : @list.T[Type]) -> Type {
 pub fn make_option_type(
   loc~ : Location,
   constr_loc~ : Location,
-  ty : Type
+  ty : Type,
 ) -> Type {
   Option(ty~, loc~, question_loc=constr_loc)
 }
@@ -117,12 +117,12 @@ pub fn make_field_pat(
   loc~ : Location,
   label : Label,
   pattern : Pattern,
-  is_pun : Bool
+  is_pun : Bool,
 ) -> FieldPat {
   FieldPat::{ label, pattern, is_pun, loc }
 }
 
-///| Create unary plus expression  
+///| Create unary plus expression
 pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
   match (name, arg) {
     ("+", Constant(c=Constant::Int(_), loc=_)) => arg
@@ -146,7 +146,7 @@ pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
 pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
   match (name, arg) {
     ("-", Constant(c=Constant::Int(x), loc=_)) => {
-      let new_val = if x.length() > 0 && x.charcode_at(0) == '-' {
+      let new_val = if x.length() > 0 && x[0] == '-' {
         x.substring(start=1)
       } else {
         "-" + x
@@ -154,7 +154,7 @@ pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
       make_constant_expr(loc~, Constant::Int(new_val))
     }
     ("-", Constant(c=Constant::Int64(x), loc=_)) => {
-      let new_val = if x.length() > 0 && x.charcode_at(0) == '-' {
+      let new_val = if x.length() > 0 && x[0] == '-' {
         x.substring(start=1)
       } else {
         "-" + x
@@ -162,7 +162,7 @@ pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
       make_constant_expr(loc~, Constant::Int64(new_val))
     }
     ("-", Constant(c=Constant::Double(x), loc=_)) => {
-      let new_val = if x.length() > 0 && x.charcode_at(0) == '-' {
+      let new_val = if x.length() > 0 && x[0] == '-' {
         x.substring(start=1)
       } else {
         "-" + x
@@ -207,12 +207,12 @@ pub fn desugar_array_get(loc~ : Location, obj : Expr, index : Expr) -> Expr {
   )
 }
 
-///| Desugar array set operation to method call  
+///| Desugar array set operation to method call
 pub fn desugar_array_set(
   loc~ : Location,
   obj : Expr,
   index : Expr,
-  value : Expr
+  value : Expr,
 ) -> Expr {
   DotApply(
     self=obj,
@@ -236,7 +236,7 @@ pub fn desugar_array_augmented_set(
   op : Var,
   array : Expr,
   index : Expr,
-  value : Expr
+  value : Expr,
 ) -> Expr {
   // Generate unique variable names for array and index
   // Use a simple counter instead of random for reproducibility
@@ -291,7 +291,7 @@ pub fn make_augmented_assign_opt(
   loc~ : Location,
   op : Var,
   lhs : Expr,
-  rhs : Expr
+  rhs : Expr,
 ) -> Expr? {
   match lhs {
     Ident(id~, loc=_) =>
@@ -309,7 +309,7 @@ pub fn make_field_def(
   loc~ : Location,
   label : Label,
   expr : Expr,
-  is_pun : Bool
+  is_pun : Bool,
 ) -> FieldDef {
   FieldDef::{ label, expr, is_pun, loc }
 }
@@ -350,7 +350,7 @@ pub fn make_double(f : String) -> Constant {
   Constant::Double(f)
 }
 
-///| Create float constant 
+///| Create float constant
 pub fn make_float(f : String) -> Constant {
   if f.has_suffix("F") {
     let base = f.substring(end=f.length() - 1)
@@ -365,7 +365,7 @@ pub fn make_attribute(
   loc~ : Location,
   id~ : String,
   dot_id~ : String?,
-  raw_payload~ : String
+  raw_payload~ : String,
 ) -> Attribute {
   let raw = match dot_id {
     None => "#" + id + raw_payload
@@ -385,7 +385,7 @@ pub fn make_legacy_type_alias(
   vis~ : Visibility,
   deriving~ : @list.T[DerivingDirective],
   loc~ : Location,
-  doc~ : DocString
+  doc~ : DocString,
 ) -> TypeDecl? {
   match binder_expr {
     Name(constr_id={ id: Ident(name=tycon), .. }, loc=tycon_loc, tys~) if tys.all(t => t
@@ -435,7 +435,7 @@ pub fn arrow_fn_param_to_expr(p : ArrowFnParam) -> Expr {
 pub fn make_arrow_fn(
   params : @list.T[(ArrowFnParam, Type?)],
   body : Expr,
-  loc~ : Location
+  loc~ : Location,
 ) -> Func {
   let parameters = params.map(fn(p) {
     let (param, ty) = p
