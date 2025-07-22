@@ -58,10 +58,14 @@ fn letand_bindings_to_json(list : @list.T[(Binder, Type?, Func)]) -> Json {
 // Visibility
 pub impl ToJson for Visibility with to_json(self) {
   match self {
-    Default => { "type": "Default" }
+    Default => { "type": "Visibility::Default" }
     Pub(attr~, loc~) =>
-      { "type": "Pub", "attr": option_to_json(attr), "loc": loc.to_json() }
-    Priv(loc~) => { "type": "Priv", "loc": loc.to_json() }
+      {
+        "type": "Visibility::Pub",
+        "attr": option_to_json(attr),
+        "loc": loc.to_json(),
+      }
+    Priv(loc~) => { "type": "Visibility::Priv", "loc": loc.to_json() }
   }
 }
 
@@ -69,18 +73,18 @@ pub impl ToJson for Visibility with to_json(self) {
 // Constant 
 pub impl ToJson for Constant with to_json(self) {
   match self {
-    Bool(b) => { "type": "Bool", "0": b.to_json() }
-    Byte(s) => { "type": "Byte", "0": s.to_json() }
-    Bytes(s) => { "type": "Bytes", "0": s.to_json() }
-    Char(s) => { "type": "Char", "0": s.to_json() }
-    Int(s) => { "type": "Int", "0": s.to_json() }
-    Int64(s) => { "type": "Int64", "0": s.to_json() }
-    UInt(s) => { "type": "UInt", "0": s.to_json() }
-    UInt64(s) => { "type": "UInt64", "0": s.to_json() }
-    Float(s) => { "type": "Float", "0": s.to_json() }
-    Double(s) => { "type": "Double", "0": s.to_json() }
-    String(s) => { "type": "String", "0": s.to_json() }
-    BigInt(s) => { "type": "BigInt", "0": s.to_json() }
+    Bool(b) => { "type": "Constant::Bool", "0": b.to_json() }
+    Byte(s) => { "type": "Constant::Byte", "0": s.to_json() }
+    Bytes(s) => { "type": "Constant::Bytes", "0": s.to_json() }
+    Char(s) => { "type": "Constant::Char", "0": s.to_json() }
+    Int(s) => { "type": "Constant::Int", "0": s.to_json() }
+    Int64(s) => { "type": "Constant::Int64", "0": s.to_json() }
+    UInt(s) => { "type": "Constant::UInt", "0": s.to_json() }
+    UInt64(s) => { "type": "Constant::UInt64", "0": s.to_json() }
+    Float(s) => { "type": "Constant::Float", "0": s.to_json() }
+    Double(s) => { "type": "Constant::Double", "0": s.to_json() }
+    String(s) => { "type": "Constant::String", "0": s.to_json() }
+    BigInt(s) => { "type": "Constant::BigInt", "0": s.to_json() }
   }
 }
 
@@ -94,8 +98,8 @@ pub impl ToJson for ConstrName with to_json(self) {
 // LongIdent
 pub impl ToJson for LongIdent with to_json(self) {
   match self {
-    Ident(name~) => { "type": "Ident", "name": name }
-    Dot(pkg~, id~) => { "type": "Dot", "pkg": pkg, "id": id }
+    Ident(name~) => { "type": "LongIdent::Ident", "0": name }
+    Dot(pkg~, id~) => { "type": "LongIdent::Dot", "pkg": pkg, "id": id }
   }
 }
 
