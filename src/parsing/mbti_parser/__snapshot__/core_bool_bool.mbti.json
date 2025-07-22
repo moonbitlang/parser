@@ -23,8 +23,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bool"
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
                   },
                   "loc": null
                 },
@@ -39,8 +39,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Int"
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
                 },
                 "loc": null
               },
@@ -77,8 +77,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bool"
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
                   },
                   "loc": null
                 },
@@ -93,8 +93,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Int16"
+                  "type": "LongIdent::Ident",
+                  "0": "Int16"
                 },
                 "loc": null
               },
@@ -131,8 +131,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bool"
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
                   },
                   "loc": null
                 },
@@ -147,8 +147,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Int64"
+                  "type": "LongIdent::Ident",
+                  "0": "Int64"
                 },
                 "loc": null
               },
@@ -185,8 +185,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bool"
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
                   },
                   "loc": null
                 },
@@ -201,8 +201,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "UInt"
+                  "type": "LongIdent::Ident",
+                  "0": "UInt"
                 },
                 "loc": null
               },
@@ -239,8 +239,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bool"
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
                   },
                   "loc": null
                 },
@@ -255,8 +255,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "UInt16"
+                  "type": "LongIdent::Ident",
+                  "0": "UInt16"
                 },
                 "loc": null
               },
@@ -293,8 +293,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bool"
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
                   },
                   "loc": null
                 },
@@ -309,8 +309,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "UInt64"
+                  "type": "LongIdent::Ident",
+                  "0": "UInt64"
                 },
                 "loc": null
               },
@@ -337,8 +337,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Bool"
+                "type": "LongIdent::Ident",
+                "0": "Bool"
               },
               "loc": null
             },
@@ -347,8 +347,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "Hash"
+              "type": "LongIdent::Ident",
+              "0": "Hash"
             },
             "loc": null
           }

@@ -13,8 +13,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Error"
+                "type": "LongIdent::Ident",
+                "0": "Error"
               },
               "loc": null
             },
@@ -23,8 +23,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "Show"
+              "type": "LongIdent::Ident",
+              "0": "Show"
             },
             "loc": null
           }
@@ -43,8 +43,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Error"
+                "type": "LongIdent::Ident",
+                "0": "Error"
               },
               "loc": null
             },
@@ -53,8 +53,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "ToJson"
+              "type": "LongIdent::Ident",
+              "0": "ToJson"
             },
             "loc": null
           }

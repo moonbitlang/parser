@@ -34,18 +34,18 @@ let dummy_attribute : @ast_types.Attribute = {
 
 ///|
 test "visibility to_json" {
-  @json.inspect(@syntax.Default, content={ "type": "Default" })
+  @json.inspect(@syntax.Default, content={ "type": "Visibility::Default" })
   @json.inspect(@syntax.Priv(loc=dummy_loc), content={
-    "type": "Priv",
+    "type": "Visibility::Priv",
     "loc": null,
   })
   @json.inspect(@syntax.Pub(attr=Some("readonly"), loc=dummy_loc), content={
-    "type": "Pub",
+    "type": "Visibility::Pub",
     "attr": "readonly",
     "loc": null,
   })
   @json.inspect(@syntax.Pub(attr=None, loc=dummy_loc), content={
-    "type": "Pub",
+    "type": "Visibility::Pub",
     "attr": null,
     "loc": null,
   })
@@ -53,37 +53,52 @@ test "visibility to_json" {
 
 ///|
 test "constant to_json" {
-  @json.inspect(@syntax.Bool(true), content={ "type": "Bool", "0": true })
+  @json.inspect(@syntax.Bool(true), content={
+    "type": "Constant::Bool",
+    "0": true,
+  })
   @json.inspect(@syntax.Byte(dummy_byte_literal), content={
-    "type": "Byte",
+    "type": "Constant::Byte",
     "0": "b'A'",
   })
   @json.inspect(@syntax.Bytes(dummy_bytes_literal), content={
-    "type": "Bytes",
+    "type": "Constant::Bytes",
     "0": "b\"ABC\"",
   })
   @json.inspect(@syntax.Char(dummy_char_literal), content={
-    "type": "Char",
+    "type": "Constant::Char",
     "0": "'A'",
   })
-  @json.inspect(@syntax.Int("42"), content={ "type": "Int", "0": "42" })
-  @json.inspect(@syntax.Int64("42L"), content={ "type": "Int64", "0": "42L" })
-  @json.inspect(@syntax.UInt("42U"), content={ "type": "UInt", "0": "42U" })
+  @json.inspect(@syntax.Int("42"), content={
+    "type": "Constant::Int",
+    "0": "42",
+  })
+  @json.inspect(@syntax.Int64("42L"), content={
+    "type": "Constant::Int64",
+    "0": "42L",
+  })
+  @json.inspect(@syntax.UInt("42U"), content={
+    "type": "Constant::UInt",
+    "0": "42U",
+  })
   @json.inspect(@syntax.UInt64("42UL"), content={
-    "type": "UInt64",
+    "type": "Constant::UInt64",
     "0": "42UL",
   })
-  @json.inspect(@syntax.Float("3.14"), content={ "type": "Float", "0": "3.14" })
+  @json.inspect(@syntax.Float("3.14"), content={
+    "type": "Constant::Float",
+    "0": "3.14",
+  })
   @json.inspect(@syntax.Double("3.14159"), content={
-    "type": "Double",
+    "type": "Constant::Double",
     "0": "3.14159",
   })
   @json.inspect(@syntax.Constant::String(dummy_string_literal), content={
-    "type": "String",
+    "type": "Constant::String",
     "0": "test_string",
   })
   @json.inspect(@syntax.BigInt("123456789012345678901234567890"), content={
-    "type": "BigInt",
+    "type": "Constant::BigInt",
     "0": "123456789012345678901234567890",
   })
 }
@@ -114,11 +129,11 @@ test "constr_name to_json" {
 ///|
 test "long_ident to_json" {
   @json.inspect(@syntax.LongIdent::Ident(name="test_ident"), content={
-    "type": "Ident",
-    "name": "test_ident",
+    "type": "LongIdent::Ident",
+    "0": "test_ident",
   })
   @json.inspect(@syntax.LongIdent::Dot(pkg="test_pkg", id="test_name"), content={
-    "type": "Dot",
+    "type": "LongIdent::Dot",
     "pkg": "test_pkg",
     "id": "test_name",
   })
@@ -133,7 +148,7 @@ test "type_name to_json" {
   }
   @json.inspect(type_name, content={
     "type": "TypeName",
-    "name": { "type": "Ident", "name": "TestType" },
+    "name": { "type": "LongIdent::Ident", "0": "TestType" },
     "is_object": false,
     "loc": null,
   })
@@ -147,7 +162,11 @@ test "constr_id to_json" {
   }
   @json.inspect(constr_id, content={
     "type": "ConstrId",
-    "id": { "type": "Dot", "pkg": "test_pkg", "id": "TestConstructor" },
+    "id": {
+      "type": "LongIdent::Dot",
+      "pkg": "test_pkg",
+      "id": "TestConstructor",
+    },
     "loc": null,
   })
 }
@@ -175,7 +194,7 @@ test "error_type to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
@@ -188,7 +207,7 @@ test "error_type to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
@@ -226,7 +245,7 @@ test "type to_json" {
           "type": "Type::Name",
           "constr_id": {
             "type": "ConstrId",
-            "id": { "type": "Ident", "name": "Int" },
+            "id": { "type": "LongIdent::Ident", "0": "Int" },
             "loc": null,
           },
           "tys": [],
@@ -237,7 +256,7 @@ test "type to_json" {
         "type": "Type::Name",
         "constr_id": {
           "type": "ConstrId",
-          "id": { "type": "Ident", "name": "Int" },
+          "id": { "type": "LongIdent::Ident", "0": "Int" },
           "loc": null,
         },
         "tys": [],
@@ -255,7 +274,7 @@ test "type to_json" {
         "type": "Type::Name",
         "constr_id": {
           "type": "ConstrId",
-          "id": { "type": "Ident", "name": "Int" },
+          "id": { "type": "LongIdent::Ident", "0": "Int" },
           "loc": null,
         },
         "tys": [],
@@ -272,7 +291,7 @@ test "type to_json" {
         "type": "Type::Name",
         "constr_id": {
           "type": "ConstrId",
-          "id": { "type": "Ident", "name": "Int" },
+          "id": { "type": "LongIdent::Ident", "0": "Int" },
           "loc": null,
         },
         "tys": [],
@@ -291,7 +310,7 @@ test "type to_json" {
       "type": "Type::Object",
       "0": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "TestObject" },
+        "id": { "type": "LongIdent::Ident", "0": "TestObject" },
         "loc": null,
       },
     },
@@ -398,7 +417,7 @@ test "var to_json" {
   }
   @json.inspect(variable, content={
     "type": "Var",
-    "name": { "type": "Ident", "name": "test_var" },
+    "name": { "type": "LongIdent::Ident", "0": "test_var" },
     "loc": null,
   })
 }
@@ -417,7 +436,7 @@ test "constructor_extra_info to_json" {
     "type": "ConstructorExtraInfo::TypeName",
     "0": {
       "type": "TypeName",
-      "name": { "type": "Ident", "name": "TestType" },
+      "name": { "type": "LongIdent::Ident", "0": "TestType" },
       "is_object": false,
       "loc": null,
     },
@@ -484,7 +503,7 @@ test "exception_decl to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
@@ -532,7 +551,7 @@ test "type_desc to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
@@ -549,7 +568,7 @@ test "type_desc to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
@@ -717,7 +736,7 @@ test "parameter to_json" {
         "type": "Type::Name",
         "constr_id": {
           "type": "ConstrId",
-          "id": { "type": "Ident", "name": "Int" },
+          "id": { "type": "LongIdent::Ident", "0": "Int" },
           "loc": null,
         },
         "tys": [],
@@ -738,7 +757,7 @@ test "parameter to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
@@ -757,7 +776,7 @@ test "parameter to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
@@ -774,7 +793,7 @@ test "parameter to_json" {
         "type": "Type::Name",
         "constr_id": {
           "type": "ConstrId",
-          "id": { "type": "Ident", "name": "Int" },
+          "id": { "type": "LongIdent::Ident", "0": "Int" },
           "loc": null,
         },
         "tys": [],
@@ -791,7 +810,7 @@ test "parameter to_json" {
         "type": "Type::Name",
         "constr_id": {
           "type": "ConstrId",
-          "id": { "type": "Ident", "name": "Int" },
+          "id": { "type": "LongIdent::Ident", "0": "Int" },
           "loc": null,
         },
         "tys": [],
@@ -861,7 +880,7 @@ test "map_expr_elem to_json" {
   }
   @json.inspect(map_elem, content={
     "type": "MapExprElem",
-    "key": { "type": "Int", "0": "42" },
+    "key": { "type": "Constant::Int", "0": "42" },
     "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
     "key_loc": null,
     "loc": null,
@@ -968,13 +987,13 @@ test "static_assertion to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
       "loc": null,
     },
-    "trait_": { "type": "Ident", "name": "Show" },
+    "trait_": { "type": "LongIdent::Ident", "0": "Show" },
     "loc": null,
     "msg": "Test assertion message",
   })
@@ -1021,7 +1040,7 @@ test "func to_json" {
             "type": "Type::Name",
             "constr_id": {
               "type": "ConstrId",
-              "id": { "type": "Ident", "name": "Int" },
+              "id": { "type": "LongIdent::Ident", "0": "Int" },
               "loc": null,
             },
             "tys": [],
@@ -1035,7 +1054,7 @@ test "func to_json" {
         "type": "Type::Name",
         "constr_id": {
           "type": "ConstrId",
-          "id": { "type": "Ident", "name": "Int" },
+          "id": { "type": "LongIdent::Ident", "0": "Int" },
           "loc": null,
         },
         "tys": [],
@@ -1094,14 +1113,14 @@ test "expr basic types to_json" {
   })
   @json.inspect(@syntax.Expr::Constant(c=int_constant, loc=dummy_loc), content={
     "type": "Expr::Constant",
-    "c": { "type": "Int", "0": "42" },
+    "c": { "type": "Constant::Int", "0": "42" },
     "loc": null,
   })
   @json.inspect(@syntax.Expr::Ident(id=variable, loc=dummy_loc), content={
     "type": "Expr::Ident",
     "id": {
       "type": "Var",
-      "name": { "type": "Ident", "name": "test_var" },
+      "name": { "type": "LongIdent::Ident", "0": "test_var" },
       "loc": null,
     },
     "loc": null,
@@ -1133,7 +1152,7 @@ test "expr basic types to_json" {
       "type": "Expr::Infix",
       "op": {
         "type": "Var",
-        "name": { "type": "Ident", "name": "test_var" },
+        "name": { "type": "LongIdent::Ident", "0": "test_var" },
         "loc": null,
       },
       "lhs": { "type": "Expr::Unit", "loc": null, "faked": false },
@@ -1145,7 +1164,7 @@ test "expr basic types to_json" {
     "type": "Expr::Unary",
     "op": {
       "type": "Var",
-      "name": { "type": "Ident", "name": "test_var" },
+      "name": { "type": "LongIdent::Ident", "0": "test_var" },
       "loc": null,
     },
     "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
@@ -1339,7 +1358,7 @@ test "expr complex types to_json" {
         "type": "Type::Name",
         "constr_id": {
           "type": "ConstrId",
-          "id": { "type": "Ident", "name": "Int" },
+          "id": { "type": "LongIdent::Ident", "0": "Int" },
           "loc": null,
         },
         "tys": [],
@@ -1374,7 +1393,7 @@ test "expr complex types to_json" {
       "type": "Expr::Record",
       "type_name": {
         "type": "TypeName",
-        "name": { "type": "Ident", "name": "TestType" },
+        "name": { "type": "LongIdent::Ident", "0": "TestType" },
         "is_object": false,
         "loc": null,
       },
@@ -1448,13 +1467,13 @@ test "expr complex types to_json" {
       "type": "Expr::Assign",
       "var_": {
         "type": "Var",
-        "name": { "type": "Ident", "name": "test_var" },
+        "name": { "type": "LongIdent::Ident", "0": "test_var" },
         "loc": null,
       },
       "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
       "augmented_by": {
         "type": "Var",
-        "name": { "type": "Ident", "name": "test_var" },
+        "name": { "type": "LongIdent::Ident", "0": "test_var" },
         "loc": null,
       },
       "loc": null,
@@ -1523,7 +1542,7 @@ test "pattern to_json" {
   })
   @json.inspect(@syntax.Expr::Constant(c=int_constant, loc=dummy_loc), content={
     "type": "Expr::Constant",
-    "c": { "type": "Int", "0": "42" },
+    "c": { "type": "Constant::Int", "0": "42" },
     "loc": null,
   })
   @json.inspect(
@@ -1535,7 +1554,7 @@ test "pattern to_json" {
         "type": "Type::Name",
         "constr_id": {
           "type": "ConstrId",
-          "id": { "type": "Ident", "name": "Int" },
+          "id": { "type": "LongIdent::Ident", "0": "Int" },
           "loc": null,
         },
         "tys": [],
@@ -1592,7 +1611,7 @@ test "pattern to_json" {
       "pat1": { "type": "Pattern::Any", "loc": null },
       "pat2": {
         "type": "Pattern::Constant",
-        "c": { "type": "Int", "0": "42" },
+        "c": { "type": "Constant::Int", "0": "42" },
         "loc": null,
       },
       "loc": null,
@@ -1609,7 +1628,7 @@ test "pattern to_json" {
         { "type": "Pattern::Any", "loc": null },
         {
           "type": "Pattern::Constant",
-          "c": { "type": "Int", "0": "42" },
+          "c": { "type": "Constant::Int", "0": "42" },
           "loc": null,
         },
       ],
@@ -1648,7 +1667,7 @@ test "pattern to_json" {
       "elems": [
         {
           "type": "MapPatElem",
-          "key": { "type": "Int", "0": "42" },
+          "key": { "type": "Constant::Int", "0": "42" },
           "pat": { "type": "Pattern::Any", "loc": null },
           "match_absent": false,
           "key_loc": null,
@@ -1671,7 +1690,7 @@ test "pattern to_json" {
       "lhs": { "type": "Pattern::Any", "loc": null },
       "rhs": {
         "type": "Pattern::Constant",
-        "c": { "type": "Int", "0": "42" },
+        "c": { "type": "Constant::Int", "0": "42" },
         "loc": null,
       },
       "inclusive": true,
@@ -1715,14 +1734,14 @@ test "field_decl to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
       "loc": null,
     },
     "mut_": false,
-    "vis": { "type": "Default" },
+    "vis": { "type": "Visibility::Default" },
     "loc": null,
   })
 }
@@ -1754,7 +1773,7 @@ test "constr_param to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
@@ -1769,7 +1788,7 @@ test "constr_param to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
@@ -1824,7 +1843,7 @@ test "constr_decl to_json" {
           "type": "Type::Name",
           "constr_id": {
             "type": "ConstrId",
-            "id": { "type": "Ident", "name": "Int" },
+            "id": { "type": "LongIdent::Ident", "0": "Int" },
             "loc": null,
           },
           "tys": [],
@@ -1856,7 +1875,7 @@ test "type_var_constraint to_json" {
   }
   @json.inspect(constraint, content={
     "type": "TypeVarConstraint",
-    "trait_": { "type": "Ident", "name": "Show" },
+    "trait_": { "type": "LongIdent::Ident", "0": "Show" },
     "loc": null,
   })
 }
@@ -1878,7 +1897,7 @@ test "type_var_binder to_json" {
     "constraints": [
       {
         "type": "TypeVarConstraint",
-        "trait_": { "type": "Ident", "name": "Show" },
+        "trait_": { "type": "LongIdent::Ident", "0": "Show" },
         "loc": null,
       },
     ],
@@ -1976,7 +1995,7 @@ test "map_pat_elem to_json" {
   }
   @json.inspect(map_elem, content={
     "type": "MapPatElem",
-    "key": { "type": "Int", "0": "42" },
+    "key": { "type": "Constant::Int", "0": "42" },
     "pat": { "type": "Pattern::Any", "loc": null },
     "match_absent": true,
     "key_loc": null,
@@ -2011,7 +2030,7 @@ test "local_type_decl to_json" {
         "type": "DerivingDirective",
         "type_name": {
           "type": "TypeName",
-          "name": { "type": "Ident", "name": "Show" },
+          "name": { "type": "LongIdent::Ident", "0": "Show" },
           "is_object": false,
           "loc": null,
         },
@@ -2042,7 +2061,7 @@ test "deriving_directive to_json" {
     "type": "DerivingDirective",
     "type_name": {
       "type": "TypeName",
-      "name": { "type": "Dot", "pkg": "std", "id": "Show" },
+      "name": { "type": "LongIdent::Dot", "pkg": "std", "id": "Show" },
       "is_object": true,
       "loc": null,
     },
@@ -2082,7 +2101,7 @@ test "type_decl to_json" {
     "components": { "type": "TypeDesc::Extern" },
     "attrs": [{ "loc": null, "raw": "test_attr" }],
     "doc": { "content": ["Test documentation"], "loc": null },
-    "type_vis": { "type": "Default" },
+    "type_vis": { "type": "Visibility::Default" },
     "deriving": [],
     "loc": null,
   })
@@ -2175,7 +2194,7 @@ test "fun_decl to_json" {
     "type": "FunDecl",
     "type_name": {
       "type": "TypeName",
-      "name": { "type": "Ident", "name": "TestType" },
+      "name": { "type": "LongIdent::Ident", "0": "TestType" },
       "is_object": false,
       "loc": null,
     },
@@ -2190,7 +2209,7 @@ test "fun_decl to_json" {
           "type": "Type::Name",
           "constr_id": {
             "type": "ConstrId",
-            "id": { "type": "Ident", "name": "Int" },
+            "id": { "type": "LongIdent::Ident", "0": "Int" },
             "loc": null,
           },
           "tys": [],
@@ -2206,7 +2225,7 @@ test "fun_decl to_json" {
         "constraints": [
           {
             "type": "TypeVarConstraint",
-            "trait_": { "type": "Ident", "name": "Show" },
+            "trait_": { "type": "LongIdent::Ident", "0": "Show" },
             "loc": null,
           },
         ],
@@ -2217,14 +2236,14 @@ test "fun_decl to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
       "loc": null,
     },
     "error_type": { "type": "ErrorType::NoErrorType" },
-    "vis": { "type": "Priv", "loc": null },
+    "vis": { "type": "Visibility::Priv", "loc": null },
     "attrs": [{ "loc": null, "raw": "test_attr" }],
     "doc": { "content": ["Test documentation"], "loc": null },
   })
@@ -2274,7 +2293,7 @@ test "trait_method_decl to_json" {
           "type": "Type::Name",
           "constr_id": {
             "type": "ConstrId",
-            "id": { "type": "Ident", "name": "Int" },
+            "id": { "type": "LongIdent::Ident", "0": "Int" },
             "loc": null,
           },
           "tys": [],
@@ -2286,7 +2305,7 @@ test "trait_method_decl to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
@@ -2332,7 +2351,7 @@ test "trait_decl to_json" {
     "supers": [
       {
         "type": "TypeVarConstraint",
-        "trait_": { "type": "Ident", "name": "SuperTrait" },
+        "trait_": { "type": "LongIdent::Ident", "0": "SuperTrait" },
         "loc": null,
       },
     ],
@@ -2350,7 +2369,7 @@ test "trait_decl to_json" {
         "loc": null,
       },
     ],
-    "vis": { "type": "Pub", "attr": null, "loc": null },
+    "vis": { "type": "Visibility::Pub", "attr": null, "loc": null },
     "loc": null,
     "attrs": [{ "loc": null, "raw": "test_attr" }],
     "doc": { "content": ["Test documentation"], "loc": null },
@@ -2426,7 +2445,7 @@ test "impl variants to_json" {
       "components": { "type": "TypeDesc::Abstract" },
       "attrs": [],
       "doc": { "content": ["Test documentation"], "loc": null },
-      "type_vis": { "type": "Default" },
+      "type_vis": { "type": "Visibility::Default" },
       "deriving": [],
       "loc": null,
     },
@@ -2459,7 +2478,7 @@ test "impl variants to_json" {
       "quantifiers": [],
       "return_type": null,
       "error_type": { "type": "ErrorType::NoErrorType" },
-      "vis": { "type": "Default" },
+      "vis": { "type": "Visibility::Default" },
       "attrs": [],
       "doc": { "content": ["Test documentation"], "loc": null },
     },
@@ -2488,14 +2507,14 @@ test "impl variants to_json" {
         "type": "Type::Name",
         "constr_id": {
           "type": "ConstrId",
-          "id": { "type": "Ident", "name": "Int" },
+          "id": { "type": "LongIdent::Ident", "0": "Int" },
           "loc": null,
         },
         "tys": [],
         "loc": null,
       },
       "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "vis": { "type": "Default" },
+      "vis": { "type": "Visibility::Default" },
       "is_constant": true,
       "loc": null,
       "attrs": [],
@@ -2524,7 +2543,7 @@ test "impl variants to_json" {
       "type": "Type::Name",
       "constr_id": {
         "type": "ConstrId",
-        "id": { "type": "Ident", "name": "Int" },
+        "id": { "type": "LongIdent::Ident", "0": "Int" },
         "loc": null,
       },
       "tys": [],
@@ -2537,7 +2556,7 @@ test "impl variants to_json" {
     "func_name": { "type": "Binder", "name": "test", "loc": null },
     "ty_loc": null,
     "params_loc": null,
-    "vis": { "type": "Default" },
+    "vis": { "type": "Visibility::Default" },
     "loc": null,
     "attrs": [],
     "doc": { "content": ["Test documentation"], "loc": null },

@@ -15,7 +15,7 @@
             "type": "TypeDesc::Abstract"
           },
           "vis": {
-            "type": "Default"
+            "type": "Visibility::Default"
           }
         }
       },
@@ -42,8 +42,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bytes"
+                    "type": "LongIdent::Ident",
+                    "0": "Bytes"
                   },
                   "loc": null
                 },
@@ -58,8 +58,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Self"
+                  "type": "LongIdent::Ident",
+                  "0": "Self"
                 },
                 "loc": null
               },
@@ -96,8 +96,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -114,8 +114,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "UInt64"
+                    "type": "LongIdent::Ident",
+                    "0": "UInt64"
                   },
                   "loc": null
                 },
@@ -155,8 +155,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -171,8 +171,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Unit"
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
                 },
                 "loc": null
               },

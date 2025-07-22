@@ -18,8 +18,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -52,8 +52,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Array"
+                    "type": "LongIdent::Ident",
+                    "0": "Array"
                   },
                   "loc": null
                 },
@@ -63,8 +63,8 @@
                     "constr_id": {
                       "type": "ConstrId",
                       "id": {
-                        "type": "Ident",
-                        "name": "Byte"
+                        "type": "LongIdent::Ident",
+                        "0": "Byte"
                       },
                       "loc": null
                     },
@@ -82,8 +82,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -116,8 +116,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "FixedArray"
+                    "type": "LongIdent::Ident",
+                    "0": "FixedArray"
                   },
                   "loc": null
                 },
@@ -127,8 +127,8 @@
                     "constr_id": {
                       "type": "ConstrId",
                       "id": {
-                        "type": "Ident",
-                        "name": "Byte"
+                        "type": "LongIdent::Ident",
+                        "0": "Byte"
                       },
                       "loc": null
                     },
@@ -151,8 +151,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -167,8 +167,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -201,8 +201,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Iter"
+                    "type": "LongIdent::Ident",
+                    "0": "Iter"
                   },
                   "loc": null
                 },
@@ -212,8 +212,8 @@
                     "constr_id": {
                       "type": "ConstrId",
                       "id": {
-                        "type": "Ident",
-                        "name": "Byte"
+                        "type": "LongIdent::Ident",
+                        "0": "Byte"
                       },
                       "loc": null
                     },
@@ -231,8 +231,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -265,8 +265,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "FixedArray"
+                    "type": "LongIdent::Ident",
+                    "0": "FixedArray"
                   },
                   "loc": null
                 },
@@ -276,8 +276,8 @@
                     "constr_id": {
                       "type": "ConstrId",
                       "id": {
-                        "type": "Ident",
-                        "name": "Byte"
+                        "type": "LongIdent::Ident",
+                        "0": "Byte"
                       },
                       "loc": null
                     },
@@ -295,8 +295,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -325,7 +325,7 @@
             "type": "TypeDesc::Abstract"
           },
           "vis": {
-            "type": "Default"
+            "type": "Visibility::Default"
           }
         }
       },
@@ -352,8 +352,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -368,8 +368,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -406,8 +406,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -422,8 +422,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -440,8 +440,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Byte"
+                    "type": "LongIdent::Ident",
+                    "0": "Byte"
                   },
                   "loc": null
                 },
@@ -481,8 +481,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -497,8 +497,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Iter"
+                  "type": "LongIdent::Ident",
+                  "0": "Iter"
                 },
                 "loc": null
               },
@@ -508,8 +508,8 @@
                   "constr_id": {
                     "type": "ConstrId",
                     "id": {
-                      "type": "Ident",
-                      "name": "Byte"
+                      "type": "LongIdent::Ident",
+                      "0": "Byte"
                     },
                     "loc": null
                   },
@@ -549,8 +549,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -565,8 +565,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Int"
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
                 },
                 "loc": null
               },
@@ -603,8 +603,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -624,8 +624,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -645,8 +645,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -661,8 +661,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Self"
+                  "type": "LongIdent::Ident",
+                  "0": "Self"
                 },
                 "loc": null
               },
@@ -699,8 +699,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -715,8 +715,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -731,8 +731,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Byte"
+                  "type": "LongIdent::Ident",
+                  "0": "Byte"
                 },
                 "loc": null
               },
@@ -769,8 +769,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -785,8 +785,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Int"
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
                 },
                 "loc": null
               },
@@ -823,8 +823,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -839,8 +839,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -877,8 +877,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -893,8 +893,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -931,8 +931,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -947,8 +947,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -985,8 +985,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -1001,8 +1001,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Float"
+                  "type": "LongIdent::Ident",
+                  "0": "Float"
                 },
                 "loc": null
               },
@@ -1039,8 +1039,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -1055,8 +1055,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Float"
+                  "type": "LongIdent::Ident",
+                  "0": "Float"
                 },
                 "loc": null
               },
@@ -1093,8 +1093,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -1109,8 +1109,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Int64"
+                  "type": "LongIdent::Ident",
+                  "0": "Int64"
                 },
                 "loc": null
               },
@@ -1147,8 +1147,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -1163,8 +1163,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Int64"
+                  "type": "LongIdent::Ident",
+                  "0": "Int64"
                 },
                 "loc": null
               },
@@ -1201,8 +1201,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -1217,8 +1217,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Int"
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
                 },
                 "loc": null
               },
@@ -1255,8 +1255,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -1271,8 +1271,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Int"
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
                 },
                 "loc": null
               },
@@ -1309,8 +1309,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -1325,8 +1325,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "UInt64"
+                  "type": "LongIdent::Ident",
+                  "0": "UInt64"
                 },
                 "loc": null
               },
@@ -1363,8 +1363,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -1379,8 +1379,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "UInt64"
+                  "type": "LongIdent::Ident",
+                  "0": "UInt64"
                 },
                 "loc": null
               },
@@ -1417,8 +1417,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -1433,8 +1433,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "UInt"
+                  "type": "LongIdent::Ident",
+                  "0": "UInt"
                 },
                 "loc": null
               },
@@ -1471,8 +1471,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -1487,8 +1487,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "UInt"
+                  "type": "LongIdent::Ident",
+                  "0": "UInt"
                 },
                 "loc": null
               },
@@ -1525,8 +1525,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Self"
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
                   },
                   "loc": null
                 },
@@ -1541,8 +1541,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -1557,8 +1557,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Byte"
+                  "type": "LongIdent::Ident",
+                  "0": "Byte"
                 },
                 "loc": null
               },
@@ -1585,8 +1585,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "View"
+                "type": "LongIdent::Ident",
+                "0": "View"
               },
               "loc": null
             },
@@ -1595,8 +1595,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "Compare"
+              "type": "LongIdent::Ident",
+              "0": "Compare"
             },
             "loc": null
           }
@@ -1615,8 +1615,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "View"
+                "type": "LongIdent::Ident",
+                "0": "View"
               },
               "loc": null
             },
@@ -1625,8 +1625,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "Eq"
+              "type": "LongIdent::Ident",
+              "0": "Eq"
             },
             "loc": null
           }
@@ -1645,8 +1645,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "View"
+                "type": "LongIdent::Ident",
+                "0": "View"
               },
               "loc": null
             },
@@ -1655,8 +1655,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "Show"
+              "type": "LongIdent::Ident",
+              "0": "Show"
             },
             "loc": null
           }
@@ -1685,8 +1685,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Array"
+                    "type": "LongIdent::Ident",
+                    "0": "Array"
                   },
                   "loc": null
                 },
@@ -1696,8 +1696,8 @@
                     "constr_id": {
                       "type": "ConstrId",
                       "id": {
-                        "type": "Ident",
-                        "name": "Byte"
+                        "type": "LongIdent::Ident",
+                        "0": "Byte"
                       },
                       "loc": null
                     },
@@ -1715,8 +1715,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -1753,8 +1753,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "FixedArray"
+                    "type": "LongIdent::Ident",
+                    "0": "FixedArray"
                   },
                   "loc": null
                 },
@@ -1764,8 +1764,8 @@
                     "constr_id": {
                       "type": "ConstrId",
                       "id": {
-                        "type": "Ident",
-                        "name": "Byte"
+                        "type": "LongIdent::Ident",
+                        "0": "Byte"
                       },
                       "loc": null
                     },
@@ -1788,8 +1788,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -1804,8 +1804,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -1842,8 +1842,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Iter"
+                    "type": "LongIdent::Ident",
+                    "0": "Iter"
                   },
                   "loc": null
                 },
@@ -1853,8 +1853,8 @@
                     "constr_id": {
                       "type": "ConstrId",
                       "id": {
-                        "type": "Ident",
-                        "name": "Byte"
+                        "type": "LongIdent::Ident",
+                        "0": "Byte"
                       },
                       "loc": null
                     },
@@ -1872,8 +1872,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -1910,8 +1910,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bytes"
+                    "type": "LongIdent::Ident",
+                    "0": "Bytes"
                   },
                   "loc": null
                 },
@@ -1926,8 +1926,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -1944,8 +1944,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Byte"
+                    "type": "LongIdent::Ident",
+                    "0": "Byte"
                   },
                   "loc": null
                 },
@@ -1985,8 +1985,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bytes"
+                    "type": "LongIdent::Ident",
+                    "0": "Bytes"
                   },
                   "loc": null
                 },
@@ -2001,8 +2001,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Iter"
+                  "type": "LongIdent::Ident",
+                  "0": "Iter"
                 },
                 "loc": null
               },
@@ -2012,8 +2012,8 @@
                   "constr_id": {
                     "type": "ConstrId",
                     "id": {
-                      "type": "Ident",
-                      "name": "Byte"
+                      "type": "LongIdent::Ident",
+                      "0": "Byte"
                     },
                     "loc": null
                   },
@@ -2053,8 +2053,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bytes"
+                    "type": "LongIdent::Ident",
+                    "0": "Bytes"
                   },
                   "loc": null
                 },
@@ -2069,8 +2069,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Iter2"
+                  "type": "LongIdent::Ident",
+                  "0": "Iter2"
                 },
                 "loc": null
               },
@@ -2080,8 +2080,8 @@
                   "constr_id": {
                     "type": "ConstrId",
                     "id": {
-                      "type": "Ident",
-                      "name": "Int"
+                      "type": "LongIdent::Ident",
+                      "0": "Int"
                     },
                     "loc": null
                   },
@@ -2093,8 +2093,8 @@
                   "constr_id": {
                     "type": "ConstrId",
                     "id": {
-                      "type": "Ident",
-                      "name": "Byte"
+                      "type": "LongIdent::Ident",
+                      "0": "Byte"
                     },
                     "loc": null
                   },
@@ -2134,8 +2134,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "FixedArray"
+                    "type": "LongIdent::Ident",
+                    "0": "FixedArray"
                   },
                   "loc": null
                 },
@@ -2145,8 +2145,8 @@
                     "constr_id": {
                       "type": "ConstrId",
                       "id": {
-                        "type": "Ident",
-                        "name": "Byte"
+                        "type": "LongIdent::Ident",
+                        "0": "Byte"
                       },
                       "loc": null
                     },
@@ -2164,8 +2164,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -2202,8 +2202,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bytes"
+                    "type": "LongIdent::Ident",
+                    "0": "Bytes"
                   },
                   "loc": null
                 },
@@ -2223,8 +2223,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -2244,8 +2244,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -2260,8 +2260,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "View"
+                  "type": "LongIdent::Ident",
+                  "0": "View"
                 },
                 "loc": null
               },
@@ -2298,8 +2298,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bytes"
+                    "type": "LongIdent::Ident",
+                    "0": "Bytes"
                   },
                   "loc": null
                 },
@@ -2314,8 +2314,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Array"
+                  "type": "LongIdent::Ident",
+                  "0": "Array"
                 },
                 "loc": null
               },
@@ -2325,8 +2325,8 @@
                   "constr_id": {
                     "type": "ConstrId",
                     "id": {
-                      "type": "Ident",
-                      "name": "Byte"
+                      "type": "LongIdent::Ident",
+                      "0": "Byte"
                     },
                     "loc": null
                   },
@@ -2366,8 +2366,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Bytes"
+                    "type": "LongIdent::Ident",
+                    "0": "Bytes"
                   },
                   "loc": null
                 },
@@ -2387,8 +2387,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -2403,8 +2403,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "FixedArray"
+                  "type": "LongIdent::Ident",
+                  "0": "FixedArray"
                 },
                 "loc": null
               },
@@ -2414,8 +2414,8 @@
                   "constr_id": {
                     "type": "ConstrId",
                     "id": {
-                      "type": "Ident",
-                      "name": "Byte"
+                      "type": "LongIdent::Ident",
+                      "0": "Byte"
                     },
                     "loc": null
                   },
@@ -2445,8 +2445,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Bytes"
+                "type": "LongIdent::Ident",
+                "0": "Bytes"
               },
               "loc": null
             },
@@ -2455,8 +2455,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "Add"
+              "type": "LongIdent::Ident",
+              "0": "Add"
             },
             "loc": null
           }
@@ -2475,8 +2475,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Bytes"
+                "type": "LongIdent::Ident",
+                "0": "Bytes"
               },
               "loc": null
             },
@@ -2485,8 +2485,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "Default"
+              "type": "LongIdent::Ident",
+              "0": "Default"
             },
             "loc": null
           }
@@ -2505,8 +2505,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Bytes"
+                "type": "LongIdent::Ident",
+                "0": "Bytes"
               },
               "loc": null
             },
@@ -2515,8 +2515,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "Hash"
+              "type": "LongIdent::Ident",
+              "0": "Hash"
             },
             "loc": null
           }

@@ -19,8 +19,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -35,8 +35,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -65,8 +65,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Double"
+                "type": "LongIdent::Ident",
+                "0": "Double"
               },
               "loc": null
             },
@@ -90,8 +90,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Double"
+                "type": "LongIdent::Ident",
+                "0": "Double"
               },
               "loc": null
             },
@@ -115,8 +115,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Double"
+                "type": "LongIdent::Ident",
+                "0": "Double"
               },
               "loc": null
             },
@@ -140,8 +140,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Double"
+                "type": "LongIdent::Ident",
+                "0": "Double"
               },
               "loc": null
             },
@@ -165,8 +165,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Double"
+                "type": "LongIdent::Ident",
+                "0": "Double"
               },
               "loc": null
             },
@@ -190,8 +190,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Double"
+                "type": "LongIdent::Ident",
+                "0": "Double"
               },
               "loc": null
             },
@@ -223,8 +223,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -239,8 +239,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -267,8 +267,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -304,8 +304,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -320,8 +320,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -348,8 +348,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -385,8 +385,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -401,8 +401,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -429,8 +429,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -466,8 +466,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -482,8 +482,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -510,8 +510,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -547,8 +547,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -563,8 +563,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -591,8 +591,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -628,8 +628,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -644,8 +644,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -672,8 +672,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -709,8 +709,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -725,8 +725,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -741,8 +741,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -769,8 +769,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -806,8 +806,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -822,8 +822,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -850,8 +850,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -887,8 +887,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -903,8 +903,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -931,8 +931,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -962,8 +962,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -978,8 +978,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -1006,8 +1006,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -1043,8 +1043,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1059,8 +1059,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -1087,8 +1087,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -1124,8 +1124,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1140,8 +1140,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -1168,8 +1168,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -1205,8 +1205,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1221,8 +1221,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -1249,8 +1249,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -1286,8 +1286,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1302,8 +1302,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -1330,8 +1330,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -1361,8 +1361,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1377,8 +1377,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -1405,8 +1405,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -1436,8 +1436,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -1452,8 +1452,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -1496,8 +1496,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1512,8 +1512,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1528,8 +1528,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -1556,8 +1556,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -1593,8 +1593,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Int"
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -1609,8 +1609,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -1647,8 +1647,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1663,8 +1663,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1684,8 +1684,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1705,8 +1705,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1721,8 +1721,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bool"
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
                 },
                 "loc": null
               },
@@ -1749,8 +1749,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -1780,8 +1780,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1796,8 +1796,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bool"
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
                 },
                 "loc": null
               },
@@ -1834,8 +1834,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1850,8 +1850,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bool"
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
                 },
                 "loc": null
               },
@@ -1888,8 +1888,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1904,8 +1904,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bool"
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
                 },
                 "loc": null
               },
@@ -1942,8 +1942,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -1958,8 +1958,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bool"
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
                 },
                 "loc": null
               },
@@ -2002,8 +2002,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2018,8 +2018,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2046,8 +2046,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -2083,8 +2083,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2099,8 +2099,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2127,8 +2127,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -2164,8 +2164,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2180,8 +2180,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2208,8 +2208,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -2245,8 +2245,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2261,8 +2261,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2289,8 +2289,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -2325,8 +2325,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2368,8 +2368,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2406,8 +2406,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2422,8 +2422,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2438,8 +2438,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2466,8 +2466,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -2497,8 +2497,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2513,8 +2513,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2541,8 +2541,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -2572,8 +2572,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2588,8 +2588,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2632,8 +2632,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2648,8 +2648,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2676,8 +2676,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -2713,8 +2713,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2729,8 +2729,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2757,8 +2757,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -2794,8 +2794,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2810,8 +2810,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2838,8 +2838,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -2875,8 +2875,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2891,8 +2891,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -2919,8 +2919,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -2950,8 +2950,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -2966,8 +2966,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -3004,8 +3004,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -3020,8 +3020,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Bytes"
+                  "type": "LongIdent::Ident",
+                  "0": "Bytes"
                 },
                 "loc": null
               },
@@ -3058,8 +3058,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -3074,8 +3074,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "String"
+                  "type": "LongIdent::Ident",
+                  "0": "String"
                 },
                 "loc": null
               },
@@ -3112,8 +3112,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -3128,8 +3128,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "UInt"
+                  "type": "LongIdent::Ident",
+                  "0": "UInt"
                 },
                 "loc": null
               },
@@ -3166,8 +3166,8 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "Ident",
-                    "name": "Double"
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
                   },
                   "loc": null
                 },
@@ -3182,8 +3182,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "Ident",
-                  "name": "Double"
+                  "type": "LongIdent::Ident",
+                  "0": "Double"
                 },
                 "loc": null
               },
@@ -3210,8 +3210,8 @@
           },
           "type_name": {
             "name": {
-              "type": "Ident",
-              "name": "Double"
+              "type": "LongIdent::Ident",
+              "0": "Double"
             },
             "loc": null
           },
@@ -3231,8 +3231,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Double"
+                "type": "LongIdent::Ident",
+                "0": "Double"
               },
               "loc": null
             },
@@ -3241,8 +3241,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "Hash"
+              "type": "LongIdent::Ident",
+              "0": "Hash"
             },
             "loc": null
           }
@@ -3261,8 +3261,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Double"
+                "type": "LongIdent::Ident",
+                "0": "Double"
               },
               "loc": null
             },
@@ -3271,8 +3271,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "Mod"
+              "type": "LongIdent::Ident",
+              "0": "Mod"
             },
             "loc": null
           }
@@ -3291,8 +3291,8 @@
             "constr_id": {
               "type": "ConstrId",
               "id": {
-                "type": "Ident",
-                "name": "Double"
+                "type": "LongIdent::Ident",
+                "0": "Double"
               },
               "loc": null
             },
@@ -3301,8 +3301,8 @@
           },
           "trait_name": {
             "name": {
-              "type": "Ident",
-              "name": "Show"
+              "type": "LongIdent::Ident",
+              "0": "Show"
             },
             "loc": null
           }
