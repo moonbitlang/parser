@@ -453,6 +453,10 @@ pub(all) struct MapPatElem {
 }
 impl ToJson for MapPatElem
 
+pub type MapVisitorBase[T] T
+fn[T] MapVisitorBase::inner(Self[T]) -> T
+impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T]
+
 pub(all) struct MultiArgCase {
   patterns : @list.T[Pattern]
   guard_ : Expr?
@@ -655,4 +659,72 @@ pub typealias String as StringLiteral
 pub typealias (String, @syntax_types.Location)? as TestName
 
 // Traits
+pub trait ImplMapVisitor {
+  visit_impl(Self, Impl) -> Impl
+  visit_top_expr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.T[LocalTypeDecl], loc~ : @syntax_types.Location) -> Impl
+  visit_top_test(Self, expr~ : Expr, name~ : (String, @syntax_types.Location)?, params~ : @list.T[Parameter]?, local_types~ : @list.T[LocalTypeDecl], loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl
+  visit_top_type_def(Self, TypeDecl) -> Impl
+  visit_top_func_def(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @syntax_types.Location) -> Impl
+  visit_top_func_alias(Self, pkg~ : Label?, type_name~ : TypeName?, targets~ : @list.T[AliasTarget], vis~ : Visibility, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString, loc~ : @syntax_types.Location) -> Impl
+  visit_top_let_def(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl
+  visit_top_trait(Self, TraitDecl) -> Impl
+  visit_top_batch_type_alias(Self, pkg~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString) -> Impl
+  visit_top_batch_trait_alias(Self, pkg~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString) -> Impl
+  visit_top_impl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @syntax_types.Location?, quantifiers~ : @list.T[TypeVarBinder], params~ : @list.T[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl
+  visit_top_view(Self, quantifiers~ : @list.T[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @syntax_types.Location, view_constrs~ : @list.T[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.T[Parameter], params_loc~ : @syntax_types.Location, body~ : Expr, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl
+  visit_top_impl_relation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.T[TypeVarBinder], vis~ : Visibility, attrs~ : @list.T[@syntax_types.Attribute], loc~ : @syntax_types.Location, doc~ : @syntax_types.DocString) -> Impl
+  visit_expr(Self, Expr) -> Expr
+  visit_apply(Self, func~ : Expr, args~ : @list.T[Argument], attr~ : ApplyAttr, loc~ : @syntax_types.Location) -> Expr
+  visit_infix(Self, op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_unary(Self, op~ : Var, expr~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_array(Self, exprs~ : @list.T[Expr], loc~ : @syntax_types.Location) -> Expr
+  visit_array_spread(Self, elems~ : @list.T[SpreadableElem], loc~ : @syntax_types.Location) -> Expr
+  visit_array_get(Self, array~ : Expr, index~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_array_get_slice(Self, array~ : Expr, start_index~ : Expr?, end_index~ : Expr?, index_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location) -> Expr
+  visit_array_set(Self, array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_array_augmented_set(Self, op~ : Var, array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_constant(Self, c~ : Constant, loc~ : @syntax_types.Location) -> Expr
+  visit_multiline_string(Self, elems~ : @list.T[MultilineStringElem], loc~ : @syntax_types.Location) -> Expr
+  visit_interp(Self, elems~ : @list.T[InterpElem], loc~ : @syntax_types.Location) -> Expr
+  visit_constraint(Self, expr~ : Expr, ty~ : Type, loc~ : @syntax_types.Location) -> Expr
+  visit_constr(Self, constr~ : Constructor, loc~ : @syntax_types.Location) -> Expr
+  visit_while(Self, loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location) -> Expr
+  visit_function(Self, func~ : Func, loc~ : @syntax_types.Location) -> Expr
+  visit_ident(Self, id~ : Var, loc~ : @syntax_types.Location) -> Expr
+  visit_if(Self, cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @syntax_types.Location) -> Expr
+  visit_guard(Self, cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_is(Self, expr~ : Expr, pat~ : Pattern, loc~ : @syntax_types.Location) -> Expr
+  visit_defer(Self, expr~ : Expr, body~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_let_fn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_let_rec(Self, bindings~ : @list.T[(Binder, Func)], body~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_let_and(Self, bindings~ : @list.T[(Binder, Type?, Func)], body~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_let(Self, pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_sequence(Self, exprs~ : @list.T[Expr], last_expr~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_tuple(Self, exprs~ : @list.T[Expr], loc~ : @syntax_types.Location) -> Expr
+  visit_record(Self, type_name~ : TypeName?, fields~ : @list.T[FieldDef], trailing~ : TrailingMark, loc~ : @syntax_types.Location) -> Expr
+  visit_record_update(Self, type_name~ : TypeName?, record~ : Expr, fields~ : @list.T[FieldDef], loc~ : @syntax_types.Location) -> Expr
+  visit_field(Self, record~ : Expr, accessor~ : Accessor, loc~ : @syntax_types.Location) -> Expr
+  visit_method(Self, type_name~ : TypeName, method_name~ : Label, loc~ : @syntax_types.Location) -> Expr
+  visit_dot_apply(Self, self~ : Expr, method_name~ : Label, args~ : @list.T[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @syntax_types.Location) -> Expr
+  visit_as(Self, expr~ : Expr, trait_~ : TypeName, loc~ : @syntax_types.Location) -> Expr
+  visit_mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @syntax_types.Location) -> Expr
+  visit_match(Self, expr~ : Expr, cases~ : @list.T[Case], match_loc~ : @syntax_types.Location, using_~ : Label?, loc~ : @syntax_types.Location) -> Expr
+  visit_let_mut(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_pipe(Self, lhs~ : Expr, rhs~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_assign(Self, var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @syntax_types.Location) -> Expr
+  visit_hole(Self, loc~ : @syntax_types.Location, kind~ : Hole) -> Expr
+  visit_return(Self, return_value~ : Expr?, loc~ : @syntax_types.Location) -> Expr
+  visit_raise(Self, err_value~ : Expr, loc~ : @syntax_types.Location) -> Expr
+  visit_unit(Self, loc~ : @syntax_types.Location, faked~ : Bool) -> Expr
+  visit_break(Self, arg~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location) -> Expr
+  visit_continue(Self, args~ : @list.T[Expr], label~ : Label?, loc~ : @syntax_types.Location) -> Expr
+  visit_loop(Self, args~ : @list.T[Expr], body~ : @list.T[MultiArgCase], label~ : Label?, loop_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location) -> Expr
+  visit_for(Self, binders~ : @list.T[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.T[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location) -> Expr
+  visit_for_each(Self, binders~ : @list.T[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location) -> Expr
+  visit_try(Self, body~ : Expr, catch_~ : @list.T[Case], catch_all~ : Bool, try_else~ : @list.T[Case]?, has_try~ : Bool, try_loc~ : @syntax_types.Location, catch_loc~ : @syntax_types.Location, else_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location) -> Expr
+  visit_try_operator(Self, body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location) -> Expr
+  visit_map(Self, elems~ : @list.T[MapExprElem], loc~ : @syntax_types.Location) -> Expr
+  visit_group(Self, expr~ : Expr, group~ : Group, loc~ : @syntax_types.Location) -> Expr
+  visit_static_assert(Self, asserts~ : @list.T[StaticAssertion], body~ : Expr) -> Expr
+}
 
