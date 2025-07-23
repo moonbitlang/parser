@@ -1043,7 +1043,11 @@
                 "vis": {
                   "type": "Visibility::Default"
                 },
-                "loc": null
+                "loc": null,
+                "doc": {
+                  "content": [],
+                  "loc": null
+                }
               },
               {
                 "type": "FieldDecl",
@@ -1069,7 +1073,11 @@
                 "vis": {
                   "type": "Visibility::Default"
                 },
-                "loc": null
+                "loc": null,
+                "doc": {
+                  "content": [],
+                  "loc": null
+                }
               }
             ]
           },

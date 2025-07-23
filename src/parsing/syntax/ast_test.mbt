@@ -1744,6 +1744,7 @@ test "field_decl to_json" {
     "mut_": false,
     "vis": { "type": "Visibility::Default" },
     "loc": null,
+    "doc": { "content": ["Test documentation"], "loc": null },
   })
 }
 

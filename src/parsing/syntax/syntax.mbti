@@ -166,7 +166,7 @@ pub(all) struct ConstrDecl {
   args : @list.T[ConstrParam]?
   tag : (String, @syntax_types.Location)?
   loc : @syntax_types.Location
-  doc : @syntax_types.DocString
+  mut doc : @syntax_types.DocString
 }
 impl ToJson for ConstrDecl
 
