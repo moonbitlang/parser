@@ -523,7 +523,6 @@ fn loc_of_expression(expr : Expr) -> Location {
       catch_all=_,
       try_else=_,
       has_try=_,
-      legacy_else=_,
       try_loc=_,
       catch_loc=_,
       else_loc=_,

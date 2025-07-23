@@ -465,7 +465,6 @@ pub(all) enum Expr {
     catch_all~ : Bool,
     try_else~ : @list.T[Case]?,
     has_try~ : Bool,
-    legacy_else~ : Bool,
     try_loc~ : Location,
     catch_loc~ : Location,
     else_loc~ : Location,
