@@ -1,0 +1,23 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/parsing/hand_parser"
+
+import(
+  "moonbitlang/core/list"
+  "moonbitlang/parser/lexing/tokens"
+  "moonbitlang/parser/parsing/syntax"
+  "moonbitlang/parser/parsing/syntax_types"
+)
+
+// Values
+fn parse(Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)]) -> (@list.T[@syntax.Impl], Array[Report])
+
+// Types and methods
+pub(all) struct Report {
+  loc : @syntax_types.Location
+  msg : String
+}
+
+// Type aliases
+
+// Traits
+

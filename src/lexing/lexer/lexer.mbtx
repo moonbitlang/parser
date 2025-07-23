@@ -277,7 +277,7 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
         let comment = Comment::{
           content : repr,
           kind : InlineTrailing,
-          consumed_by_docstring : @ref.new(false)
+          consumed_by_docstring : false
         }
         preserve_comment(comment, $startpos, $endpos)
         env.add_token_with_loc(COMMENT(comment), start=$startpos, end=$endpos)

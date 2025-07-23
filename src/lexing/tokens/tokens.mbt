@@ -316,7 +316,7 @@ pub(all) enum TokenKind {
   TK_LETREC
   TK_ENUMVIEW
   TK_NORAISE
-}
+} derive(Eq)
 
 ///|
 pub impl Show for TokenKind with output(self, logger) {

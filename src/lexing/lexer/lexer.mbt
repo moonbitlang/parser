@@ -3344,7 +3344,7 @@ fn tokens(
         let comment = Comment::{
           content: repr,
           kind: InlineTrailing,
-          consumed_by_docstring: @ref.new(false),
+          consumed_by_docstring: false,
         }
         preserve_comment(comment, _match_start, _match_end)
         env.add_token_with_loc(
