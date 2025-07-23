@@ -77,6 +77,8 @@ fn make_uplus(loc~ : @syntax_types.Location, String, Expr) -> Expr
 
 let no_location : @syntax_types.Location
 
+fn post_process(@list.T[Impl]) -> @list.T[Impl]
+
 // Types and methods
 pub(all) enum Accessor {
   Label(Label)
@@ -636,6 +638,8 @@ impl ToJson for Visibility
 // Type aliases
 pub typealias @syntax_types.Attribute as Attribute
 
+pub typealias @syntax_types.AttributeExpr as AttributeExpr
+
 pub typealias String as ByteLiteral
 
 pub typealias String as BytesLiteral
@@ -665,7 +669,7 @@ pub trait ImplMapVisitor {
   visit_top_test(Self, expr~ : Expr, name~ : (String, @syntax_types.Location)?, params~ : @list.T[Parameter]?, local_types~ : @list.T[LocalTypeDecl], loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl
   visit_top_type_def(Self, TypeDecl) -> Impl
   visit_top_func_def(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @syntax_types.Location) -> Impl
-  visit_top_func_alias(Self, pkg~ : Label?, type_name~ : TypeName?, targets~ : @list.T[AliasTarget], vis~ : Visibility, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString, loc~ : @syntax_types.Location) -> Impl
+  visit_top_func_alias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString, loc~ : @syntax_types.Location) -> Impl
   visit_top_let_def(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl
   visit_top_trait(Self, TraitDecl) -> Impl
   visit_top_batch_type_alias(Self, pkg~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString) -> Impl

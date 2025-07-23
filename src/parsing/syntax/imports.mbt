@@ -8,5 +8,6 @@ pub typealias @ast_types.(
   StringLiteral,
   Attribute,
   DocString,
-  InterpSource
+  InterpSource,
+  AttributeExpr
 )
