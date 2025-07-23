@@ -36,14 +36,16 @@ pub(all) enum AttributeProp {
 pub(all) struct Comment {
   content : String
   kind : CommentKind
-  consumed_by_docstring : Ref[Bool]
+  mut consumed_by_docstring : Bool
 }
+impl Eq for Comment
 impl Show for Comment
 
 pub(all) enum CommentKind {
   InlineTrailing
   Ownline(leading_blank_line~ : Bool, trailing_blank_line~ : Bool)
 }
+impl Eq for CommentKind
 impl Show for CommentKind
 
 pub(all) struct DocString {
@@ -57,12 +59,14 @@ pub(all) enum InterpElem {
   InterpLit(repr~ : String, loc~ : Location)
   InterpSource(InterpSource)
 }
+impl Eq for InterpElem
 impl Show for InterpElem
 
 pub(all) struct InterpSource {
   source : String
   loc : Location
 }
+impl Eq for InterpSource
 impl Show for InterpSource
 impl ToJson for InterpSource
 
@@ -73,6 +77,7 @@ pub(all) struct Location {
 fn Location::merge(Self, Self) -> Self
 fn Location::trim_first_char(Self) -> Self
 fn Location::trim_last_char(Self) -> Self
+impl Eq for Location
 impl Show for Location
 impl ToJson for Location
 

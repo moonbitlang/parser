@@ -1,0 +1,29 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/parsing/compact"
+
+import(
+  "moonbitlang/core/list"
+  "moonbitlang/parser/parsing/syntax"
+  "moonbitlang/parser/parsing/syntax_types"
+)
+
+// Values
+
+// Types and methods
+pub(all) enum SemiExprProp {
+  StmtExpr(@syntax.Expr)
+  StmtLet(pat~ : @syntax.Pattern, expr~ : @syntax.Expr, loc~ : @syntax_types.Location)
+  StmtGuard(cond~ : @syntax.Expr, otherwise~ : @syntax.Expr?, loc~ : @syntax_types.Location)
+  StmtLetmut(binder~ : @syntax.Binder, ty_opt~ : @syntax.Type?, expr~ : @syntax.Expr, loc~ : @syntax_types.Location)
+  StmtFunc(binder~ : @syntax.Binder, func~ : @syntax.Func, loc~ : @syntax_types.Location)
+  StmtLetand(bindings~ : @list.T[(@syntax.Binder, @syntax.Type?, @syntax.Func)], loc~ : @syntax_types.Location)
+  StmtDefer(expr~ : @syntax.Expr, loc~ : @syntax_types.Location)
+}
+fn SemiExprProp::collect_letrec(loc~ : @syntax_types.Location, @list.T[(@syntax.Binder, @syntax.Func)], @list.T[Self], @syntax.Expr) -> @syntax.Expr
+fn SemiExprProp::collect_rev(@list.T[Self], @syntax.Expr) -> @syntax.Expr
+fn SemiExprProp::compact_rev(@list.T[Self], loc~ : @syntax_types.Location) -> @syntax.Expr
+
+// Type aliases
+
+// Traits
+

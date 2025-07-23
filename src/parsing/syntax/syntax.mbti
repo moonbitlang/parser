@@ -310,6 +310,7 @@ pub(all) enum Expr {
   Group(expr~ : Expr, group~ : Group, loc~ : @syntax_types.Location)
   StaticAssert(asserts~ : @list.T[StaticAssertion], body~ : Expr)
 }
+fn Expr::loc(Self) -> @syntax_types.Location
 impl ToJson for Expr
 
 pub(all) struct FieldDecl {
@@ -438,6 +439,7 @@ pub(all) enum LongIdent {
   Ident(name~ : String)
   Dot(pkg~ : String, id~ : String)
 }
+fn LongIdent::dummy() -> Self
 impl ToJson for LongIdent
 
 pub(all) struct MapExprElem {
@@ -558,6 +560,7 @@ pub(all) enum Type {
   Option(ty~ : Type, loc~ : @syntax_types.Location, question_loc~ : @syntax_types.Location)
   Object(ConstrId)
 }
+fn Type::loc(Self) -> @syntax_types.Location
 impl ToJson for Type
 
 pub(all) struct TypeDecl {

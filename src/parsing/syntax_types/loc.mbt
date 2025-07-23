@@ -20,7 +20,7 @@ pub fn column(self : Position) -> Int {
 pub(all) struct Location {
   start : Position
   end : Position
-}
+} derive(Eq)
 
 ///|
 pub fn Location::trim_first_char(self : Location) -> Location {

@@ -453,6 +453,25 @@ pub fn make_arrow_fn(
 }
 
 ///|
+pub fn Expr::loc(self : Self) -> Location {
+  self |> loc_of_expression
+}
+
+///|
+pub fn Type::loc(self : Type) -> Location {
+  match self {
+    Option(loc~, ..)
+    | Name(loc~, ..)
+    | Tuple(loc~, ..)
+    | Arrow(loc~, ..)
+    | Any(loc~)
+    | Object({ loc, .. }) => loc
+  }
+}
+
+// Helper functions that need to be defined elsewhere
+
+///|
 pub fn loc_of_expression(expr : Expr) -> Location {
   match expr {
     Apply(func=_, args=_, attr=_, loc~) => loc

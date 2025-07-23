@@ -221,6 +221,7 @@ pub(all) enum TokenKind {
   TK_ENUMVIEW
   TK_NORAISE
 }
+impl Eq for TokenKind
 impl Show for TokenKind
 
 // Type aliases

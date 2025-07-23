@@ -1,5 +1,5 @@
 ///|
-priv enum SemiExprProp {
+pub(all) enum SemiExprProp {
   StmtExpr(Expr)
   StmtLet(pat~ : Pattern, expr~ : Expr, loc~ : Location)
   StmtGuard(cond~ : Expr, otherwise~ : Expr?, loc~ : Location)
@@ -10,7 +10,7 @@ priv enum SemiExprProp {
 }
 
 ///|
-fn SemiExprProp::compact_rev(
+pub fn SemiExprProp::compact_rev(
   ls : @list.T[SemiExprProp],
   loc~ : Location,
 ) -> Expr {
@@ -36,7 +36,10 @@ fn SemiExprProp::compact_rev(
 }
 
 ///|
-fn SemiExprProp::collect_rev(rest : @list.T[SemiExprProp], cont : Expr) -> Expr {
+pub fn SemiExprProp::collect_rev(
+  rest : @list.T[SemiExprProp],
+  cont : Expr,
+) -> Expr {
   match rest {
     Empty => cont
     More(x, tail=xs) =>
@@ -106,7 +109,7 @@ fn SemiExprProp::collect_sequence(
 }
 
 ///|
-fn SemiExprProp::collect_letrec(
+pub fn SemiExprProp::collect_letrec(
   loc~ : Location,
   acc : @list.T[(Binder, Func)],
   todo : @list.T[SemiExprProp],
