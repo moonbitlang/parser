@@ -1726,6 +1726,7 @@ test "field_decl to_json" {
     mut_: false,
     vis: @syntax.Default,
     loc: dummy_loc,
+    doc: dummy_docstring,
   }
   @json.inspect(field_decl, content={
     "type": "FieldDecl",

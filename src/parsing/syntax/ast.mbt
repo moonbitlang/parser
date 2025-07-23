@@ -91,7 +91,7 @@ pub(all) struct ConstrDecl {
   args : @list.T[ConstrParam]?
   tag : (String, Location)?
   loc : Location
-  doc : DocString
+  mut doc : DocString
 }
 
 ///|
@@ -114,6 +114,7 @@ pub(all) struct FieldDecl {
   mut_ : Bool
   vis : Visibility
   loc : Location
+  mut doc : DocString
 }
 
 ///|
@@ -665,7 +666,7 @@ pub(all) enum Impl {
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : Location)
   TopFuncAlias(
     pkg~ : Label?,
-    type_name~ : TypeName?,
+    type_name~ : Label?,
     targets~ : @list.T[AliasTarget],
     vis~ : Visibility,
     attrs~ : @list.T[Attribute],

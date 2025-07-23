@@ -314,6 +314,7 @@ pub(all) struct FieldDecl {
   mut_ : Bool
   vis : Visibility
   loc : @syntax_types.Location
+  mut doc : @syntax_types.DocString
 }
 impl ToJson for FieldDecl
 
@@ -392,7 +393,7 @@ pub(all) enum Impl {
   TopTest(expr~ : Expr, name~ : (String, @syntax_types.Location)?, params~ : @list.T[Parameter]?, local_types~ : @list.T[LocalTypeDecl], loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
   TopTypeDef(TypeDecl)
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @syntax_types.Location)
-  TopFuncAlias(pkg~ : Label?, type_name~ : TypeName?, targets~ : @list.T[AliasTarget], vis~ : Visibility, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, mut doc~ : @syntax_types.DocString, loc~ : @syntax_types.Location)
+  TopFuncAlias(pkg~ : Label?, type_name~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, mut doc~ : @syntax_types.DocString, loc~ : @syntax_types.Location)
   TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
   TopTrait(TraitDecl)
   TopBatchTypeAlias(pkg~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, mut doc~ : @syntax_types.DocString)

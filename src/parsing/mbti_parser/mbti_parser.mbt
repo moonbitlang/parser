@@ -1621,7 +1621,7 @@ fn yy_action_63(
 }
 
 // file:///./mbti_parser.mbty
-// 213|    boption("mut") LIDENT ":" type_ { FieldDecl::{ name: FieldName::{ label: $2, loc : mk_loc($loc($2)) }, vis: Default, mut_: $1, ty: $4, loc: mk_loc($sloc)} }
+// 213|    boption("mut") LIDENT ":" type_ { FieldDecl::{ name: FieldName::{ label: $2, loc : mk_loc($loc($2)) }, vis: Default, mut_: $1, ty: $4, loc: mk_loc($sloc), doc: DocString::empty() } }
 
 ///|
 fn yy_action_64(
@@ -1651,6 +1651,7 @@ fn yy_action_64(
         mut_: _dollar1,
         ty: _dollar4,
         loc: mk_loc((_symbol_start_pos, _end_pos)),
+        doc: DocString::empty(),
       }
     },
   )

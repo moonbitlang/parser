@@ -210,7 +210,7 @@ constructor_param -> ConstrParam
   ;
 
 record_decl_field -> FieldDecl
-  : boption("mut") LIDENT ":" type_ { FieldDecl::{ name: FieldName::{ label: $2, loc : mk_loc($loc($2)) }, vis: Default, mut_: $1, ty: $4, loc: mk_loc($sloc)} }
+  : boption("mut") LIDENT ":" type_ { FieldDecl::{ name: FieldName::{ label: $2, loc : mk_loc($loc($2)) }, vis: Default, mut_: $1, ty: $4, loc: mk_loc($sloc), doc: DocString::empty() } }
   ;
 
 type_param_with_constraints -> TypeParamWithConstraints

@@ -207,7 +207,7 @@ pub impl ToJson for FieldName with to_json(self) {
 
 ///|
 pub impl ToJson for FieldDecl with to_json(self) {
-  let { name, ty, mut_, vis, loc } = self
+  let { name, ty, mut_, vis, loc, doc } = self
   {
     "type": "FieldDecl",
     "name": name,
@@ -215,6 +215,7 @@ pub impl ToJson for FieldDecl with to_json(self) {
     "mut_": mut_,
     "vis": vis,
     "loc": loc,
+    "doc": doc,
   }
 }
 
