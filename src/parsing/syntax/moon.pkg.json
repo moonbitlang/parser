@@ -6,5 +6,5 @@
     },
     "moonbitlang/parser/basic"
   ],
-  "warn-list": "-28"
+  "warn-list": "-28-6-7"
 }
