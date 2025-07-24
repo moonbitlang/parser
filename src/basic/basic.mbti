@@ -1,0 +1,169 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/basic"
+
+// Values
+let builtin_package : String
+
+let default_impl_placeholder : TypePath
+
+let trait_add : TypePath
+
+let trait_bit_and : TypePath
+
+let trait_bit_or : TypePath
+
+let trait_bit_xor : TypePath
+
+let trait_compare : TypePath
+
+let trait_default : TypePath
+
+let trait_div : TypePath
+
+let trait_eq : TypePath
+
+let trait_hash : TypePath
+
+let trait_mod : TypePath
+
+let trait_mul : TypePath
+
+let trait_neg : TypePath
+
+let trait_shl : TypePath
+
+let trait_show : TypePath
+
+let trait_shr : TypePath
+
+let trait_sub : TypePath
+
+let trait_to_json : TypePath
+
+let type_path_argsloc : TypePath
+
+let type_path_array : TypePath
+
+let type_path_arrayview : TypePath
+
+let type_path_bigint : TypePath
+
+let type_path_bool : TypePath
+
+let type_path_byte : TypePath
+
+let type_path_bytes : TypePath
+
+let type_path_bytesview : TypePath
+
+let type_path_char : TypePath
+
+let type_path_double : TypePath
+
+let type_path_error : TypePath
+
+let type_path_fixed_array : TypePath
+
+let type_path_float : TypePath
+
+let type_path_foreach_result : TypePath
+
+let type_path_func_ref : TypePath
+
+let type_path_int : TypePath
+
+let type_path_int16 : TypePath
+
+let type_path_int64 : TypePath
+
+let type_path_iter : TypePath
+
+let type_path_iter2 : TypePath
+
+let type_path_iter_result : TypePath
+
+let type_path_json : TypePath
+
+let type_path_map : TypePath
+
+let type_path_maybe_error : TypePath
+
+let type_path_maybe_uninit : TypePath
+
+let type_path_multi_value_result : TypePath
+
+let type_path_no_error : TypePath
+
+let type_path_option : TypePath
+
+let type_path_ref : TypePath
+
+let type_path_result : TypePath
+
+let type_path_sourceloc : TypePath
+
+let type_path_string : TypePath
+
+let type_path_stringview : TypePath
+
+let type_path_uint : TypePath
+
+let type_path_uint16 : TypePath
+
+let type_path_uint64 : TypePath
+
+let type_path_unit : TypePath
+
+// Types and methods
+pub(all) enum ConstrTag {
+}
+impl Compare for ConstrTag
+impl Eq for ConstrTag
+impl Hash for ConstrTag
+
+pub(all) enum ToplevelId {
+  Regular(pkg~ : String, name~ : String)
+  Method(self_type~ : TypePath, name~ : String)
+  LocalMethod(pkg~ : String, self_type~ : TypePath, name~ : String)
+  ExtMethod(pkg~ : String, trait_~ : TypePath, self_type~ : TypePath, name~ : String)
+}
+impl Compare for ToplevelId
+impl Eq for ToplevelId
+impl Hash for ToplevelId
+
+pub(all) enum TypePath {
+  Unit
+  Bool
+  Byte
+  Char
+  Int
+  Int16
+  Int64
+  UInt
+  UInt16
+  UInt64
+  Float
+  Double
+  String
+  Option
+  Result
+  ErrorValueResult
+  FixedArray
+  Bytes
+  Ref
+  Error
+  Toplevel(pkg~ : String, id~ : String)
+  Local(toplevel_id~ : ToplevelId, name~ : String)
+  Tuple(Int)
+  Constr(ty~ : TypePath, tag~ : ConstrTag)
+  MaybeError
+}
+fn TypePath::equal_with(Self, Self) -> Bool
+impl Compare for TypePath
+impl Eq for TypePath
+impl Hash for TypePath
+
+// Type aliases
+
+// Traits
+
