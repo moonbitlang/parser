@@ -22,5 +22,6 @@
   ],
   "test-import": [
     // "moonbitlang/x/fs"
-  ]
+  ],
+  "warn-list": "-1-6"
 }
