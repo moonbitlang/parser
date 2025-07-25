@@ -457,10 +457,8 @@ pub fn make_arrow_fn(
   )
 }
 
-// Helper functions that need to be defined elsewhere
-
 ///|
-fn loc_of_expression(expr : Expr) -> Location {
+pub fn loc_of_expression(expr : Expr) -> Location {
   match expr {
     Apply(func=_, args=_, attr=_, loc~) => loc
     Infix(op=_, lhs=_, rhs=_, loc~) => loc

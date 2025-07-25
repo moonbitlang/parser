@@ -46,7 +46,7 @@ impl ImplMapVisitor for AstLintEnv with visit_array_augmented_set(
 impl ImplMapVisitor for AstLintEnv with visit_group(env, expr~, group~, loc~) {
   ignore(group)
   ignore(loc)
-  MapVisitorBase(env).visit_expr(expr)
+  @syntax.MapVisitorBase(env).visit_expr(expr)
 }
 
 ///|
@@ -65,7 +65,7 @@ impl ImplMapVisitor for AstLintEnv with visit_unary(env, op~, expr~, loc~) {
         type_name=TypeName::{
           name: trait_name,
           is_object: false,
-          loc: no_location,
+          loc: @syntax.no_location,
         },
         method_name=Label::{ name: method_name, loc: op.loc },
         loc~,
@@ -110,7 +110,7 @@ pub fn post_process(impls : Impls) -> Impls {
             decl_body=DeclBody(expr~, local_types~),
             loc~
           ) => {
-            let impl_ = TopExpr(expr~, is_main=false, local_types~, loc~)
+            let impl_ = Impl::TopExpr(expr~, is_main=false, local_types~, loc~)
             go(rest).add(impl_)
           }
           TopFuncDef(

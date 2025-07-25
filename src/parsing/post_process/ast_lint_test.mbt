@@ -1,27 +1,30 @@
 ///|
+let null : Json = Json::null()
+
+///|
 test "map fn init to top expr" {
-  let loc = no_location
+  let loc = @syntax.no_location
   let fun_decl = @syntax.FunDecl::{
     type_name: None,
-    name: Binder::{ name: "init", loc },
+    name: @syntax.Binder::{ name: "init", loc },
     has_error: None,
     is_async: false,
     decl_params: None,
-    params_loc: dummy_loc,
+    params_loc: @syntax.no_location,
     quantifiers: @list.of([]),
     return_type: None,
     error_type: @syntax.NoErrorType,
     vis: @syntax.Default,
     attrs: @list.of([]),
-    doc: dummy_docstring,
+    doc: @syntax_types.DocString::empty(),
   }
-  let func_def = Impl::TopFuncDef(
+  let func_def = @syntax.Impl::TopFuncDef(
     fun_decl~,
     decl_body=DeclBody(
-      expr=Expr::Constant(c=Int("42"), loc~),
+      expr=@syntax.Expr::Constant(c=Int("42"), loc~),
       local_types=@list.empty(),
     ),
-    loc=no_location,
+    loc=@syntax.no_location,
   )
   @json.inspect(post_process(@list.singleton(func_def)), content=[
     {

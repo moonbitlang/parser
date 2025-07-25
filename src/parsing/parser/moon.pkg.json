@@ -1,7 +1,7 @@
 {
   "import": [
-    //"moonbitlang/parser/lib/ast_types",
-    //"moonbitlang/parser/lib/ast"
+    "moonbitlang/parser/parsing/syntax_types",
+    "moonbitlang/parser/parsing/syntax"
   ],
   "pre-build": [
     // {

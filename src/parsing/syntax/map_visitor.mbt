@@ -1,5 +1,5 @@
 ///|
-pub trait ImplMapVisitor {
+pub(open) trait ImplMapVisitor {
   visit_impl(Self, Impl) -> Impl = _
   visit_top_expr(
     Self,
@@ -978,7 +978,7 @@ impl ImplMapVisitor with visit_static_assert(env, asserts~, body~) {
 }
 
 ///|
-pub type MapVisitorBase[T] T
+pub(all) type MapVisitorBase[T] T
 
 ///|
 pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_impl(

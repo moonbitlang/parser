@@ -1,0 +1,17 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/parsing/post_process"
+
+import(
+  "moonbitlang/core/list"
+  "moonbitlang/parser/parsing/syntax"
+)
+
+// Values
+fn post_process(@list.T[@syntax.Impl]) -> @list.T[@syntax.Impl]
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

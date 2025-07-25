@@ -3,8 +3,7 @@
     {
       "path": "moonbitlang/parser/parsing/syntax_types",
       "alias": "ast_types"
-    },
-    "moonbitlang/parser/basic"
+    }
   ],
   "warn-list": "-28"
 }

@@ -1,0 +1,9 @@
+{
+    "import": [
+        "moonbitlang/parser/parsing/syntax",
+        "moonbitlang/parser/basic"
+   ],
+   "test-import": [
+      "moonbitlang/parser/parsing/syntax_types"
+   ]
+}
