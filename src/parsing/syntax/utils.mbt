@@ -38,12 +38,10 @@ pub fn make_array_expr(
 }
 
 ///| Create interpolation elements from literal components
-pub fn make_interps(
-  components : Array[InterpolationComponent],
-) -> @list.T[InterpElem] {
-  let result = components.map(fn(lit) {
+pub fn make_interps(c : @ast_types.InterpLiteral) -> @list.T[InterpElem] {
+  let result = c.map(fn(lit) {
     match lit {
-      InterpLit(repr, loc) => Literal(repr~, loc~)
+      InterpLit(repr~, loc~) => Literal(repr~, loc~)
       InterpSource(s) => Source(s)
     }
   })
@@ -51,11 +49,8 @@ pub fn make_interps(
 }
 
 ///| Create interpolation expression
-pub fn make_interp_expr(
-  loc~ : Location,
-  components : Array[InterpolationComponent],
-) -> Expr {
-  let elems = make_interps(components)
+pub fn make_interp_expr(loc~ : Location, c : @ast_types.InterpLiteral) -> Expr {
+  let elems = make_interps(c)
   Interp(elems~, loc~)
 }
 

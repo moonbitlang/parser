@@ -55,9 +55,9 @@ fn make_ident_expr(loc~ : @syntax_types.Location, Var) -> Expr
 
 fn make_int(String) -> Constant
 
-fn make_interp_expr(loc~ : @syntax_types.Location, Array[InterpolationComponent]) -> Expr
+fn make_interp_expr(loc~ : @syntax_types.Location, Array[@syntax_types.InterpElem]) -> Expr
 
-fn make_interps(Array[InterpolationComponent]) -> @list.T[InterpElem]
+fn make_interps(Array[@syntax_types.InterpElem]) -> @list.T[InterpElem]
 
 fn make_legacy_type_alias(Type, Type, attrs~ : @list.T[@syntax_types.Attribute], vis~ : Visibility, deriving~ : @list.T[DerivingDirective], loc~ : @syntax_types.Location, doc~ : @syntax_types.DocString) -> TypeDecl?
 
