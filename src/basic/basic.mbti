@@ -6,10 +6,6 @@ let builtin_package : String
 
 let current_package : Ref[String]
 
-fn encode_base16(String) -> String
-
-let test_mode : Ref[Bool]
-
 // Types and methods
 
 // Type aliases
