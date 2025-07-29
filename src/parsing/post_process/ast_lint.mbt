@@ -118,7 +118,7 @@ pub fn post_process(impls : Impls) -> Impls {
             decl_body=DeclBody(expr~, local_types~),
             loc~
           ) => go(rest).add(TopExpr(expr~, is_main=true, local_types~, loc~))
-          _ => go(rest).add(impl_)
+          impl_ => go(rest).add(impl_)
         }
     }
   }
