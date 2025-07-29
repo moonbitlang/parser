@@ -53,11 +53,10 @@ fn State::parse_toplevel(self : Self) -> Impls {
   while self.mode is Normal && !(self.peek_token() is EOF) {
     let top = self.with_syncs(first_impl_, State::parse_top)
     result.push(top)
+    if self.peek_token() is SEMI(_) {
+      self.skip()
+    }
     match self.peek_token() {
-      SEMI(_) => {
-        self.expect_token(TK_SEMI)
-        continue
-      }
       PUB
       | PRIV
       | TYPE
@@ -74,7 +73,10 @@ fn State::parse_toplevel(self : Self) -> Impls {
       | EXTERN
       | TEST
       | IMPL => continue
-      EOF => self..pop_sync(TK_EOF)..expect_token(TK_EOF)
+      EOF => {
+        self..pop_sync(TK_EOF)..expect_token(TK_EOF)
+        break
+      }
       other => {
         let loc = self.with_syncs(first_impl_, State::panic)
         self.report_unexpected(other, first_impl_, loc)
@@ -4351,7 +4353,7 @@ fn State::parse_block_expr_with_local_types(
     (@list.from_array(local_types), @list.from_array(stmts))
   })
   let loc = self.loc_start_with(spos)
-  let expr = SemiExprProp::compact_rev(stmts, loc~)
+  let expr = SemiExprProp::compact_rev(stmts.rev(), loc~) // FIXME: remove rev
   (local_types, expr)
 }
 

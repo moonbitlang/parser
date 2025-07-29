@@ -34,7 +34,7 @@ let null : Json = Json::null()
 
 ///|
 test "" {
-  let tokens = lex("let a : TyCon[Ty] = 100 + 5") 
+  let tokens = lex("let a : TyCon[Ty] = 100 + 5")
   let result = parse(tokens)
   @json.inspect(result)
 }

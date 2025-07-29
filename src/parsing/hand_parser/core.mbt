@@ -18,7 +18,7 @@ test {
   match
     Panic(fail_at=TK_AMPER, sync_at=1, loc={ start: dummy_pos, end: dummy_pos }) {
     Normal => ()
-    Panic(fail_at~, ..) => println(fail_at)
+    Panic(fail_at~, ..) => fail_at |> ignore
   }
 }
 
@@ -47,21 +47,30 @@ fn inidex_of_token_kind(xs : Array[TokenKind], kind : TokenKind) -> Int? {
 /// peek(nth=0) returns the next not consumed token
 /// peek(nth=1) returns the next token after the next not consumed token
 fn State::peek(state : Self, nth~ : Int = 0) -> Triple {
-  let mut nth = nth
-  while state.tokens.get(state.next) is Some((token, _, _) as triple) {
+  let mut ofs = 0
+  let mut step = 0
+  while state.tokens.get(state.next + ofs) is Some((token, _, _) as triple) {
     match token {
-      NEWLINE | COMMENT(_) => ()
+      NEWLINE | COMMENT(_) => ofs += 1
       EOF => return triple
-      _ => if nth == 0 { return triple }
+      _ =>
+        if step == nth {
+          return triple
+        } else {
+          step += 1
+          ofs += 1
+          continue
+        }
     }
-    nth -= 1
   }
-  panic()
+  guard state.tokens.last() is Some((_, last_spos, last_epos))
+  return (EOF, last_spos, last_epos)
 }
 
 ///|
 fn State::consume(state : Self) -> Triple {
   while state.tokens.get(state.next) is Some((token, _, _) as triple) {
+    // println("consumed: \{state.peek_token()}")
     match token {
       NEWLINE | COMMENT(_) => state.next += 1
       EOF => return triple
@@ -76,22 +85,22 @@ fn State::consume(state : Self) -> Triple {
 }
 
 ///|
-fn State::peek_token(state : Self, nth~ : Int = 1) -> Token {
+fn State::peek_token(state : Self, nth~ : Int = 0) -> Token {
   state.peek(nth~).0
 }
 
 ///|
-fn State::peek_kind(state : Self, nth~ : Int = 1) -> TokenKind {
+fn State::peek_kind(state : Self, nth~ : Int = 0) -> TokenKind {
   state.peek(nth~).0.kind()
 }
 
 ///|
-fn State::peek_spos(state : Self, nth~ : Int = 1) -> Position {
+fn State::peek_spos(state : Self, nth~ : Int = 0) -> Position {
   state.peek(nth~).1
 }
 
 ///|
-fn State::peek_epos(state : Self, nth~ : Int = 1) -> Position {
+fn State::peek_epos(state : Self, nth~ : Int = 0) -> Position {
   state.peek(nth~).2
 }
 
@@ -232,7 +241,7 @@ fn State::push_syncs(state : Self, syncs : Array[TokenKind]) -> Unit {
 
 ///|
 fn State::pop_syncs(state : Self, syncs : Array[TokenKind]) -> Unit {
-  syncs.each(x => state.pop_sync(x))
+  syncs.rev_each(x => state.pop_sync(x))
 }
 
 ///|
@@ -598,6 +607,7 @@ fn[A] State::delimited_with_follow(
             }
           }
         }
+        break // TODO: report dead code after the dead loop
       }
       self.pop_syncs(follow_set)
       let has_trailing_delim = self.previous_triple().0.kind() == delim
