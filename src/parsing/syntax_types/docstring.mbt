@@ -4,7 +4,27 @@ pub(all) struct DocString {
   content : @list.T[String]
   /// The location of the docstring in the source code.
   loc : Location
-} derive(ToJson)
+}
+
+///|
+pub impl ToJson for DocString with to_json(self) {
+  let mut docs = self.content
+  let init_str = match docs {
+    Empty => return ""
+    More(head, tail~) => {
+      docs = tail
+      head
+    }
+  }
+  let buf = StringBuilder::new()
+  buf.write_string(init_str)
+  for doc in docs {
+    buf.write_string("\n")
+    buf.write_string(doc)
+  } else {
+    Json::string(buf.to_string())
+  }
+}
 
 ///|
 pub fn DocString::empty() -> DocString {
