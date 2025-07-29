@@ -798,10 +798,7 @@
                     }
                   ],
                   "tag": null,
-                  "doc": {
-                    "content": [],
-                    "loc": null
-                  },
+                  "doc": "",
                   "loc": null
                 },
                 {
@@ -813,10 +810,7 @@
                   },
                   "args": null,
                   "tag": null,
-                  "doc": {
-                    "content": [],
-                    "loc": null
-                  },
+                  "doc": "",
                   "loc": null
                 },
                 {
@@ -865,10 +859,7 @@
                     }
                   ],
                   "tag": null,
-                  "doc": {
-                    "content": [],
-                    "loc": null
-                  },
+                  "doc": "",
                   "loc": null
                 },
                 {
@@ -899,10 +890,7 @@
                     }
                   ],
                   "tag": null,
-                  "doc": {
-                    "content": [],
-                    "loc": null
-                  },
+                  "doc": "",
                   "loc": null
                 }
               ]
@@ -1044,10 +1032,7 @@
                   "type": "Visibility::Default"
                 },
                 "loc": null,
-                "doc": {
-                  "content": [],
-                  "loc": null
-                }
+                "doc": ""
               },
               {
                 "type": "FieldDecl",
@@ -1074,10 +1059,7 @@
                   "type": "Visibility::Default"
                 },
                 "loc": null,
-                "doc": {
-                  "content": [],
-                  "loc": null
-                }
+                "doc": ""
               }
             ]
           },

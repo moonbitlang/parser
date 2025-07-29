@@ -956,10 +956,7 @@
                   "type": "Visibility::Default"
                 },
                 "loc": null,
-                "doc": {
-                  "content": [],
-                  "loc": null
-                }
+                "doc": ""
               },
               {
                 "type": "FieldDecl",
@@ -1000,10 +997,7 @@
                   "type": "Visibility::Default"
                 },
                 "loc": null,
-                "doc": {
-                  "content": [],
-                  "loc": null
-                }
+                "doc": ""
               }
             ]
           },

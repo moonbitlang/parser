@@ -919,10 +919,7 @@
                 },
                 "args": null,
                 "tag": null,
-                "doc": {
-                  "content": [],
-                  "loc": null
-                },
+                "doc": "",
                 "loc": null
               },
               {
@@ -985,10 +982,7 @@
                   }
                 ],
                 "tag": null,
-                "doc": {
-                  "content": [],
-                  "loc": null
-                },
+                "doc": "",
                 "loc": null
               }
             ]

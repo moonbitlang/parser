@@ -526,7 +526,7 @@ test "exception_decl to_json" {
         "name": { "type": "ConstrName", "name": "TestConstr", "loc": null },
         "args": null,
         "tag": null,
-        "doc": { "content": ["Test documentation"], "loc": null },
+        "doc": "Test documentation",
         "loc": null,
       },
     ],
@@ -1744,7 +1744,7 @@ test "field_decl to_json" {
     "mut_": false,
     "vis": { "type": "Visibility::Default" },
     "loc": null,
-    "doc": { "content": ["Test documentation"], "loc": null },
+    "doc": "Test documentation",
   })
 }
 
@@ -1856,7 +1856,7 @@ test "constr_decl to_json" {
       },
     ],
     "tag": ["tag_value", null],
-    "doc": { "content": ["Test documentation"], "loc": null },
+    "doc": "Test documentation",
     "loc": null,
   })
   @json.inspect(constr_without_args, content={
@@ -1864,7 +1864,7 @@ test "constr_decl to_json" {
     "name": { "type": "ConstrName", "name": "TestConstructor", "loc": null },
     "args": null,
     "tag": null,
-    "doc": { "content": ["Test documentation"], "loc": null },
+    "doc": "Test documentation",
     "loc": null,
   })
 }
@@ -2101,8 +2101,8 @@ test "type_decl to_json" {
     "tycon_loc": null,
     "params": [{ "type": "TypeDeclBinder", "name": "T", "loc": null }],
     "components": { "type": "TypeDesc::Extern" },
-    "attrs": [{ "loc": null, "raw": "test_attr" }],
-    "doc": { "content": ["Test documentation"], "loc": null },
+    "attrs": [null],
+    "doc": "Test documentation",
     "type_vis": { "type": "Visibility::Default" },
     "deriving": [],
     "loc": null,
@@ -2246,8 +2246,8 @@ test "fun_decl to_json" {
     },
     "error_type": { "type": "ErrorType::NoErrorType" },
     "vis": { "type": "Visibility::Priv", "loc": null },
-    "attrs": [{ "loc": null, "raw": "test_attr" }],
-    "doc": { "content": ["Test documentation"], "loc": null },
+    "attrs": [null],
+    "doc": "Test documentation",
   })
 }
 
@@ -2373,8 +2373,8 @@ test "trait_decl to_json" {
     ],
     "vis": { "type": "Visibility::Pub", "attr": null, "loc": null },
     "loc": null,
-    "attrs": [{ "loc": null, "raw": "test_attr" }],
-    "doc": { "content": ["Test documentation"], "loc": null },
+    "attrs": [null],
+    "doc": "Test documentation",
   })
 }
 
@@ -2434,7 +2434,7 @@ test "impl variants to_json" {
       "local_types": [],
       "loc": null,
       "attrs": [],
-      "doc": { "content": ["Test documentation"], "loc": null },
+      "doc": "Test documentation",
     },
   )
   @json.inspect(@syntax.TopTypeDef(type_decl), content={
@@ -2446,7 +2446,7 @@ test "impl variants to_json" {
       "params": [],
       "components": { "type": "TypeDesc::Abstract" },
       "attrs": [],
-      "doc": { "content": ["Test documentation"], "loc": null },
+      "doc": "Test documentation",
       "type_vis": { "type": "Visibility::Default" },
       "deriving": [],
       "loc": null,
@@ -2482,7 +2482,7 @@ test "impl variants to_json" {
       "error_type": { "type": "ErrorType::NoErrorType" },
       "vis": { "type": "Visibility::Default" },
       "attrs": [],
-      "doc": { "content": ["Test documentation"], "loc": null },
+      "doc": "Test documentation",
     },
     "decl_body": {
       "type": "DeclBody::DeclBody",
@@ -2520,7 +2520,7 @@ test "impl variants to_json" {
       "is_constant": true,
       "loc": null,
       "attrs": [],
-      "doc": { "content": ["Test documentation"], "loc": null },
+      "doc": "Test documentation",
     },
   )
   let view = @syntax.TopView(
@@ -2561,6 +2561,6 @@ test "impl variants to_json" {
     "vis": { "type": "Visibility::Default" },
     "loc": null,
     "attrs": [],
-    "doc": { "content": ["Test documentation"], "loc": null },
+    "doc": "Test documentation",
   })
 }
