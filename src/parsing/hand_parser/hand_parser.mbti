@@ -11,11 +11,14 @@ import(
 // Values
 fn parse(Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)]) -> (@list.T[@syntax.Impl], Array[Report])
 
+// Errors
+
 // Types and methods
 pub(all) struct Report {
   loc : @syntax_types.Location
   msg : String
 }
+impl ToJson for Report
 
 // Type aliases
 
