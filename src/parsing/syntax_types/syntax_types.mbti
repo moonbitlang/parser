@@ -7,6 +7,8 @@ import(
 
 // Values
 
+// Errors
+
 // Types and methods
 pub(all) struct Attribute {
   loc : Location

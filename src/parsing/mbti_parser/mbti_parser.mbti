@@ -10,12 +10,14 @@ import(
 // Values
 fn mbti(Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)], initial_pos? : @syntax_types.Position) -> @mbti_ast.Mbti raise ParseError
 
-// Types and methods
+// Errors
 pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@syntax_types.Position, @syntax_types.Position), Array[@tokens.TokenKind])
   UnexpectedEndOfInput(@syntax_types.Position, Array[@tokens.TokenKind])
 }
 impl Show for ParseError
+
+// Types and methods
 
 // Type aliases
 

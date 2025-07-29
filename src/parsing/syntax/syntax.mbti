@@ -79,6 +79,8 @@ fn make_uplus(loc~ : @syntax_types.Location, String, Expr) -> Expr
 
 let no_location : @syntax_types.Location
 
+// Errors
+
 // Types and methods
 pub(all) enum Accessor {
   Label(Label)

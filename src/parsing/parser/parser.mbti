@@ -3,6 +3,8 @@ package "moonbitlang/parser/parsing/parser"
 
 // Values
 
+// Errors
+
 // Types and methods
 
 // Type aliases

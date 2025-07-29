@@ -9,6 +9,8 @@ import(
 // Values
 fn post_process(@list.T[@syntax.Impl]) -> @list.T[@syntax.Impl]
 
+// Errors
+
 // Types and methods
 
 // Type aliases

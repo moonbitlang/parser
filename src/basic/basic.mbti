@@ -6,6 +6,8 @@ let builtin_package : String
 
 let current_package : Ref[String]
 
+// Errors
+
 // Types and methods
 
 // Type aliases

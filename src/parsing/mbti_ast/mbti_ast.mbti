@@ -9,6 +9,8 @@ import(
 
 // Values
 
+// Errors
+
 // Types and methods
 pub(all) enum AliasSig {
   TypeAlias(name~ : Name, type_params~ : @list.T[TypeParamNoConstraints], type_~ : @syntax.Type, vis~ : @syntax.Visibility)

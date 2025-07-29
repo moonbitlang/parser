@@ -10,6 +10,8 @@ import(
 // Values
 fn tokens_from_bytes(name~ : String = .., start_pos~ : @syntax_types.Position = .., is_interpolation~ : Bool = .., comment~ : Bool, Bytes) -> LexResult
 
+// Errors
+
 // Types and methods
 pub struct LexResult {
   tokens : Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)]
