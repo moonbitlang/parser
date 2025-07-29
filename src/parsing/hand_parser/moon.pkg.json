@@ -4,5 +4,10 @@
     "moonbitlang/parser/parsing/syntax",
     "moonbitlang/parser/lexing/tokens",
     "moonbitlang/parser/parsing/compact"
+  ],
+  "test-import": [
+    "moonbitlang/parser/lexing/tokens",
+    "moonbitlang/parser/lexing/lexer",
+    "moonbitlang/parser/parsing/syntax"
   ]
 }
