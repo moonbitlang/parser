@@ -1446,7 +1446,7 @@ test "expr complex types to_json" {
         },
       ],
       "match_loc": null,
-      "using_": { "type": "Label", "name": "test_label", "loc": null },
+      "using": { "type": "Label", "name": "test_label", "loc": null },
       "loc": null,
     },
   )
@@ -1465,7 +1465,7 @@ test "expr complex types to_json" {
     ),
     content={
       "type": "Expr::Assign",
-      "var_": {
+      "var": {
         "type": "Var",
         "name": { "type": "LongIdent::Ident", "0": "test_var" },
         "loc": null,
