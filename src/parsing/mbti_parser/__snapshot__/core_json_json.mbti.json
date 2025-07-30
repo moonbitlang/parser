@@ -798,8 +798,8 @@
                     }
                   ],
                   "tag": null,
-                  "doc": "",
-                  "loc": null
+                  "loc": null,
+                  "doc": ""
                 },
                 {
                   "type": "ConstrDecl",
@@ -810,8 +810,8 @@
                   },
                   "args": null,
                   "tag": null,
-                  "doc": "",
-                  "loc": null
+                  "loc": null,
+                  "doc": ""
                 },
                 {
                   "type": "ConstrDecl",
@@ -859,8 +859,8 @@
                     }
                   ],
                   "tag": null,
-                  "doc": "",
-                  "loc": null
+                  "loc": null,
+                  "doc": ""
                 },
                 {
                   "type": "ConstrDecl",
@@ -890,8 +890,8 @@
                     }
                   ],
                   "tag": null,
-                  "doc": "",
-                  "loc": null
+                  "loc": null,
+                  "doc": ""
                 }
               ]
             }
@@ -1027,7 +1027,7 @@
                   "tys": [],
                   "loc": null
                 },
-                "mut_": false,
+                "mut": false,
                 "vis": {
                   "type": "Visibility::Default"
                 },
@@ -1054,7 +1054,7 @@
                   "tys": [],
                   "loc": null
                 },
-                "mut_": false,
+                "mut": false,
                 "vis": {
                   "type": "Visibility::Default"
                 },

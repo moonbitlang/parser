@@ -951,7 +951,7 @@
                   "tys": [],
                   "loc": null
                 },
-                "mut_": false,
+                "mut": false,
                 "vis": {
                   "type": "Visibility::Default"
                 },
@@ -992,7 +992,7 @@
                   ],
                   "loc": null
                 },
-                "mut_": false,
+                "mut": false,
                 "vis": {
                   "type": "Visibility::Default"
                 },

@@ -277,8 +277,8 @@
                   },
                   "args": null,
                   "tag": null,
-                  "doc": "",
-                  "loc": null
+                  "loc": null,
+                  "doc": ""
                 },
                 {
                   "type": "ConstrDecl",
@@ -289,8 +289,8 @@
                   },
                   "args": null,
                   "tag": null,
-                  "doc": "",
-                  "loc": null
+                  "loc": null,
+                  "doc": ""
                 }
               ]
             }

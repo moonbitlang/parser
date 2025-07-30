@@ -526,8 +526,8 @@ test "exception_decl to_json" {
         "name": { "type": "ConstrName", "name": "TestConstr", "loc": null },
         "args": null,
         "tag": null,
-        "doc": "Test documentation",
         "loc": null,
+        "doc": "Test documentation",
       },
     ],
   })
@@ -1741,7 +1741,7 @@ test "field_decl to_json" {
       "tys": [],
       "loc": null,
     },
-    "mut_": false,
+    "mut": false,
     "vis": { "type": "Visibility::Default" },
     "loc": null,
     "doc": "Test documentation",
@@ -1856,16 +1856,16 @@ test "constr_decl to_json" {
       },
     ],
     "tag": ["tag_value", null],
-    "doc": "Test documentation",
     "loc": null,
+    "doc": "Test documentation",
   })
   @json.inspect(constr_without_args, content={
     "type": "ConstrDecl",
     "name": { "type": "ConstrName", "name": "TestConstructor", "loc": null },
     "args": null,
     "tag": null,
-    "doc": "Test documentation",
     "loc": null,
+    "doc": "Test documentation",
   })
 }
 
