@@ -184,8 +184,8 @@ pub impl ToJson for ConstrDecl with to_json(self) {
     "name": name,
     "args": option_to_json(args.map(list_to_json)),
     "tag": option_to_json(tag.map(tuple_to_json)),
-    "doc": doc,
     "loc": loc,
+    "doc": doc,
   }
 }
 
@@ -212,7 +212,7 @@ pub impl ToJson for FieldDecl with to_json(self) {
     "type": "FieldDecl",
     "name": name,
     "ty": ty,
-    "mut_": mut_,
+    "mut": mut_,
     "vis": vis,
     "loc": loc,
     "doc": doc,
