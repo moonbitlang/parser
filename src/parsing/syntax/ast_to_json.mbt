@@ -1011,7 +1011,7 @@ pub impl ToJson for Expr with to_json(self) {
         "expr": expr,
         "cases": list_to_json(cases),
         "match_loc": match_loc,
-        "using_": option_to_json(using_),
+        "using": option_to_json(using_),
         "loc": loc,
       }
     LetMut(binder~, ty~, expr~, body~, loc~) =>
@@ -1028,7 +1028,7 @@ pub impl ToJson for Expr with to_json(self) {
     Assign(var_~, expr~, augmented_by~, loc~) =>
       {
         "type": "Expr::Assign",
-        "var_": var_,
+        "var": var_,
         "expr": expr,
         "augmented_by": option_to_json(augmented_by),
         "loc": loc,
