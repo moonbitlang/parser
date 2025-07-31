@@ -6,6 +6,8 @@ let builtin_package : String
 
 let current_package : Ref[String]
 
+let show_loc : Ref[Bool]
+
 // Errors
 
 // Types and methods

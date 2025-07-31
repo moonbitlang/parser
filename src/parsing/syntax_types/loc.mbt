@@ -63,8 +63,16 @@ pub impl Show for Location with output(self, buf) {
 }
 
 ///|
-pub impl ToJson for Location with to_json(_) {
-  Json::null()
+pub impl ToJson for Location with to_json(loc) {
+  if @basic.show_loc.val == true {
+    {
+      "file": loc.start.fname,
+      "start": { "line": loc.start.lnum, "column": loc.start.column() },
+      "end": { "line": loc.end.lnum, "column": loc.end.column() },
+    }
+  } else {
+    Json::null()
+  }
 }
 
 ///|

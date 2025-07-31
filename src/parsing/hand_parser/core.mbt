@@ -2,7 +2,7 @@
 pub(all) struct Report {
   loc : Location
   msg : String
-} derive(ToJson)
+} derive(ToJson, Show)
 
 ///|
 priv enum Mode {

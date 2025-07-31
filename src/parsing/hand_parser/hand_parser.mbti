@@ -18,6 +18,7 @@ pub(all) struct Report {
   loc : @syntax_types.Location
   msg : String
 }
+impl Show for Report
 impl ToJson for Report
 
 // Type aliases
