@@ -937,13 +937,13 @@ test "case to_json" {
   @json.inspect(case_with_guard, content={
     "type": "Case",
     "pattern": { "type": "Pattern::Any", "loc": null },
-    "guard_": { "type": "Expr::Unit", "loc": null, "faked": false },
+    "guard": { "type": "Expr::Unit", "loc": null, "faked": false },
     "body": { "type": "Expr::Unit", "loc": null, "faked": false },
   })
   @json.inspect(case_without_guard, content={
     "type": "Case",
     "pattern": { "type": "Pattern::Any", "loc": null },
-    "guard_": null,
+    "guard": null,
     "body": { "type": "Expr::Unit", "loc": null, "faked": false },
   })
 }
@@ -960,7 +960,7 @@ test "multi_arg_case to_json" {
   @json.inspect(multi_case, content={
     "type": "MultiArgCase",
     "patterns": [{ "type": "Pattern::Any", "loc": null }],
-    "guard_": { "type": "Expr::Unit", "loc": null, "faked": false },
+    "guard": { "type": "Expr::Unit", "loc": null, "faked": false },
     "body": { "type": "Expr::Unit", "loc": null, "faked": false },
   })
 }
@@ -993,7 +993,7 @@ test "static_assertion to_json" {
       "tys": [],
       "loc": null,
     },
-    "trait_": { "type": "LongIdent::Ident", "0": "Show" },
+    "trait": { "type": "LongIdent::Ident", "0": "Show" },
     "loc": null,
     "msg": "Test assertion message",
   })
@@ -1081,7 +1081,7 @@ test "func to_json" {
         {
           "type": "MultiArgCase",
           "patterns": [{ "type": "Pattern::Any", "loc": null }],
-          "guard_": null,
+          "guard": null,
           "body": { "type": "Expr::Unit", "loc": null, "faked": false },
         },
       ],
@@ -1441,7 +1441,7 @@ test "expr complex types to_json" {
         {
           "type": "Case",
           "pattern": { "type": "Pattern::Any", "loc": null },
-          "guard_": null,
+          "guard": null,
           "body": { "type": "Expr::Unit", "loc": null, "faked": false },
         },
       ],
@@ -1781,7 +1781,7 @@ test "constr_param to_json" {
       "tys": [],
       "loc": null,
     },
-    "mut_": false,
+    "mut": false,
     "label": { "type": "Label", "name": "test_label", "loc": null },
   })
   @json.inspect(param_without_label, content={
@@ -1796,7 +1796,7 @@ test "constr_param to_json" {
       "tys": [],
       "loc": null,
     },
-    "mut_": true,
+    "mut": true,
     "label": null,
   })
 }
@@ -1851,7 +1851,7 @@ test "constr_decl to_json" {
           "tys": [],
           "loc": null,
         },
-        "mut_": false,
+        "mut": false,
         "label": { "type": "Label", "name": "test_label", "loc": null },
       },
     ],
@@ -1877,7 +1877,7 @@ test "type_var_constraint to_json" {
   }
   @json.inspect(constraint, content={
     "type": "TypeVarConstraint",
-    "trait_": { "type": "LongIdent::Ident", "0": "Show" },
+    "trait": { "type": "LongIdent::Ident", "0": "Show" },
     "loc": null,
   })
 }
@@ -1899,7 +1899,7 @@ test "type_var_binder to_json" {
     "constraints": [
       {
         "type": "TypeVarConstraint",
-        "trait_": { "type": "LongIdent::Ident", "0": "Show" },
+        "trait": { "type": "LongIdent::Ident", "0": "Show" },
         "loc": null,
       },
     ],
@@ -2227,7 +2227,7 @@ test "fun_decl to_json" {
         "constraints": [
           {
             "type": "TypeVarConstraint",
-            "trait_": { "type": "LongIdent::Ident", "0": "Show" },
+            "trait": { "type": "LongIdent::Ident", "0": "Show" },
             "loc": null,
           },
         ],
@@ -2353,7 +2353,7 @@ test "trait_decl to_json" {
     "supers": [
       {
         "type": "TypeVarConstraint",
-        "trait_": { "type": "LongIdent::Ident", "0": "SuperTrait" },
+        "trait": { "type": "LongIdent::Ident", "0": "SuperTrait" },
         "loc": null,
       },
     ],

@@ -22,9 +22,5 @@
       "output": "parser.mbt"
     }
   ],
-  "test-import": [
-    "moonbitlang/x/fs",
-    "moonbitlang/parser/lexing/lexer"
-  ],
   "warn-list": "-6"
 }

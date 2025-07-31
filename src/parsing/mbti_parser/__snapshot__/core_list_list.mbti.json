@@ -1276,7 +1276,7 @@
                       "tys": [],
                       "loc": null
                     },
-                    "mut_": false,
+                    "mut": false,
                     "label": null
                   },
                   {
@@ -1308,7 +1308,7 @@
                       ],
                       "loc": null
                     },
-                    "mut_": true,
+                    "mut": true,
                     "label": {
                       "type": "Label",
                       "name": "tail",

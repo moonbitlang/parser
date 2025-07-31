@@ -171,7 +171,7 @@ pub impl ToJson for ConstrParam with to_json(self) {
   {
     "type": "ConstrParam",
     "ty": ty,
-    "mut_": mut_,
+    "mut": mut_,
     "label": option_to_json(label),
   }
 }
@@ -301,7 +301,7 @@ pub impl ToJson for ApplyAttr with to_json(self) {
 ///|
 pub impl ToJson for TypeVarConstraint with to_json(self) {
   let { trait_, loc } = self
-  { "type": "TypeVarConstraint", "trait_": trait_, "loc": loc }
+  { "type": "TypeVarConstraint", "trait": trait_, "loc": loc }
 }
 
 ///|
@@ -414,7 +414,7 @@ pub impl ToJson for Case with to_json(self) {
   {
     "type": "Case",
     "pattern": pattern,
-    "guard_": option_to_json(guard_),
+    "guard": option_to_json(guard_),
     "body": body,
   }
 }
@@ -425,7 +425,7 @@ pub impl ToJson for MultiArgCase with to_json(self) {
   {
     "type": "MultiArgCase",
     "patterns": list_to_json(patterns),
-    "guard_": option_to_json(guard_),
+    "guard": option_to_json(guard_),
     "body": body,
   }
 }
@@ -457,7 +457,7 @@ pub impl ToJson for StaticAssertion with to_json(self) {
   {
     "type": "StaticAssertion",
     "ty": ty,
-    "trait_": trait_,
+    "trait": trait_,
     "loc": loc,
     "msg": msg,
   }
@@ -995,7 +995,7 @@ pub impl ToJson for Expr with to_json(self) {
         "loc": loc,
       }
     As(expr~, trait_~, loc~) =>
-      { "type": "Expr::As", "expr": expr, "trait_": trait_, "loc": loc }
+      { "type": "Expr::As", "expr": expr, "trait": trait_, "loc": loc }
     Mutate(record~, accessor~, field~, augmented_by~, loc~) =>
       {
         "type": "Expr::Mutate",
@@ -1101,7 +1101,7 @@ pub impl ToJson for Expr with to_json(self) {
       {
         "type": "Expr::Try",
         "body": body,
-        "catch_": list_to_json(catch_),
+        "catch": list_to_json(catch_),
         "catch_all": catch_all,
         "try_else": option_to_json(try_else.map(list_to_json)),
         "has_try": has_try,
@@ -1191,8 +1191,7 @@ pub impl ToJson for Impl with to_json(self) {
         "attrs": list_to_json(attrs),
         "doc": doc,
       }
-    TopTrait(trait_decl) =>
-      { "type": "Impl::TopTrait", "trait_decl": trait_decl }
+    TopTrait(trait_decl) => { "type": "Impl::TopTrait", "0": trait_decl }
     TopBatchTypeAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
       {
         "type": "Impl::TopBatchTypeAlias",
@@ -1233,7 +1232,7 @@ pub impl ToJson for Impl with to_json(self) {
       {
         "type": "Impl::TopImpl",
         "self_ty": option_to_json(self_ty),
-        "trait_": trait_,
+        "trait": trait_,
         "method_name": method_name,
         "has_error": option_to_json(has_error),
         "quantifiers": list_to_json(quantifiers),
@@ -1281,7 +1280,7 @@ pub impl ToJson for Impl with to_json(self) {
       {
         "type": "Impl::TopImplRelation",
         "self_ty": self_ty,
-        "trait_": trait_,
+        "trait": trait_,
         "quantifiers": list_to_json(quantifiers),
         "vis": vis,
         "attrs": list_to_json(attrs),
@@ -1297,4 +1296,9 @@ pub impl ToJson for TryOperatorKind with to_json(self) {
     Question => { "type": "TryOperatorKind::Question" }
     Exclamation => { "type": "TryOperatorKind::Exclamation" }
   }
+}
+
+///|
+pub fn impls_to_json(impls : Impls) -> Json {
+  { "type": "Program", "body": list_to_json(impls) }
 }

@@ -19,6 +19,8 @@ fn desugar_array_get(loc~ : @syntax_types.Location, Expr, Expr) -> Expr
 
 fn desugar_array_set(loc~ : @syntax_types.Location, Expr, Expr, Expr) -> Expr
 
+fn impls_to_json(@list.T[Impl]) -> Json
+
 fn label_to_expr(loc~ : @syntax_types.Location, Label) -> Expr
 
 fn label_to_pat(loc~ : @syntax_types.Location, Label) -> Pattern
