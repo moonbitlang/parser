@@ -1,0 +1,22 @@
+{
+    "import": [
+        "moonbitlang/parser/lexing/lexer",
+        "moonbitlang/parser/parsing/syntax",
+        "moonbitlang/parser/parsing/hand_parser",
+        "moonbitlang/parser/basic"
+    ],
+    "link": {
+        "wasm-gc": {
+            "exports": [
+                "parse"
+            ],
+            "use-js-builtin-string": true
+        },
+        "wasm": {
+            "exports": [
+                "parse"
+            ],
+            "use-js-builtin-string": true
+        }
+    }
+}

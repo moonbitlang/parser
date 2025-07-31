@@ -1,0 +1,15 @@
+{
+    "is-main": true,
+    "import": [
+        "moonbitlang/parser/lexing/tokens",
+        "moonbitlang/parser/lexing/lexer",
+        "moonbitlang/parser/parsing/syntax",
+        "moonbitlang/parser/parsing/hand_parser",
+        "moonbitlang/parser/basic",
+        "moonbitlang/x/fs",
+        {
+            "path": "Yoorkin/ArgParser",
+            "alias": "args"
+        }
+    ]
+}
