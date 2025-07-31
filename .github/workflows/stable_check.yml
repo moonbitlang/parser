@@ -9,14 +9,9 @@ on:
 
 jobs:
   check:
-    strategy:
-      matrix:
-        os:
-          - name: ubuntu-latest
-            triple: x86_64-linux-gnu
-          
+    strategy:    
       fail-fast: false
-    runs-on: ${{ matrix.os.name }}
+    runs-on: ubuntu-latest
     continue-on-error: false
     steps:
       - uses: actions/checkout@v4
@@ -50,12 +45,7 @@ jobs:
           moon fmt
           git diff --exit-code
 
-      - name: Setup MSVC
-        if: ${{ matrix.os.name == 'windows-latest' }}
-        uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Set ulimit on unix
-        if: ${{ matrix.os.name != 'windows-latest' }}
+      - name: Set ulimit
         run: |
           ulimit -s 8176
 
