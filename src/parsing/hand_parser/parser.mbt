@@ -3476,13 +3476,13 @@ fn State::parse_prefix_expr(
   }
   let spos = self.peek_spos()
   match self.peek_token() {
-    PLUS => {
+    PLUS if parsed is None => {
       self.expect_token(TK_PLUS)
       let expr = self.parse_prefix_expr(parsed=None)
       let loc = self.loc_start_with(spos)
       @syntax.make_uplus(loc~, "+", expr)
     }
-    MINUS => {
+    MINUS if parsed is None => {
       self.expect_token(TK_MINUS)
       let expr = self.parse_prefix_expr(parsed=None)
       let loc = self.loc_start_with(spos)
