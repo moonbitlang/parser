@@ -8,7 +8,7 @@ pub(all) struct Report {
 priv enum Mode {
   Normal
   Panic(fail_at~ : TokenKind, sync_at~ : Int, loc~ : Location)
-}
+} derive(Show)
 
 ///|
 let dummy_pos : Position = { fname: "", lnum: 0, bol: 0, cnum: 0 }
@@ -33,11 +33,33 @@ priv struct State {
 }
 
 ///|
+impl Show for State with output(parser, buf) {
+  let { tokens, diagnostics, next, syncs, mode, parsed_position } = parser
+  buf
+  ..write_string("{ ")
+  ..write_string("next: ")
+  ..write_string(
+    if next < tokens.length() {
+      tokens[next].0.to_string()
+    } else {
+      "<EOF>"
+    },
+  )
+  ..write_string("\n, syncs: ")
+  ..write_string(syncs.to_string())
+  ..write_string("\n, mode: ")
+  ..write_string(mode.to_string())
+  ..write_string("\n}")
+}
+
+///|
 fn inidex_of_token_kind(xs : Array[TokenKind], kind : TokenKind) -> Int? {
-  for i, x in xs {
-    if x == kind {
+  let mut i = xs.length() - 1
+  while i >= 0 {
+    if xs[i] == kind {
       return Some(i)
     }
+    i -= 1
   }
   None
 }
@@ -460,31 +482,31 @@ fn[A] State::optional(
 
 ///| Parse a list of elements separated by a delimiter. 
 /// The trailing delimiter is optional.
-//fn[A] State::delimited(
-//  self : Self,
-//  first_set : Array[TokenKind],
-//  delim~ : TokenKind,
-//  f : (State) -> A,
-//) -> Array[A] {
-//  match self.mode {
-//    Panic(_) => []
-//    Normal => {
-//      self.push_sync(delim)
-//      if first_set.contains(self.peek_kind()) {
-//        let result = [f(self)]
-//        while self.peek_kind() == delim {
-//          self..pop_sync(delim)..expect_token(delim)..push_sync(delim)
-//          result.push(f(self))
-//        }
-//        self.pop_sync(delim) // FIXME: expect_token(delim) is missing here?
-//        result
-//      } else {
-//        self.pop_sync(delim)
-//        []
-//      }
-//    }
-//  }
-//}
+fn[A] State::delimited(
+  self : Self,
+  first_set~ : Array[TokenKind],
+  delim~ : TokenKind,
+  f : (State) -> A,
+) -> Array[A] {
+  match self.mode {
+    Panic(_) => []
+    Normal => {
+      self.push_sync(delim)
+      if first_set.contains(self.peek_kind()) {
+        let result = [f(self)]
+        while self.peek_kind() == delim {
+          self..pop_sync(delim)..expect_token(delim)..push_sync(delim)
+          result.push(f(self))
+        }
+        self.pop_sync(delim) // FIXME: expect_token(delim) is missing here?
+        result
+      } else {
+        self.pop_sync(delim)
+        []
+      }
+    }
+  }
+}
 
 ///| Parse a list of elements separated by a delimiter, with at least one element.
 /// The trailing delimiter is optional.

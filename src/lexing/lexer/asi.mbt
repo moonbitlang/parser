@@ -210,6 +210,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | AMPERAMPER
     | BARBAR
     | CARET
+    | EXCLAMATION
     | AMPER => true
     // It is possible to have a semi before [RBRACE].
     // However, this semi is optional for statement block.
@@ -248,7 +249,6 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | QUESTION
     | RANGE_INCLUSIVE
     | RANGE_EXCLUSIVE
-    | EXCLAMATION
     | USING
     | AND => false
   }

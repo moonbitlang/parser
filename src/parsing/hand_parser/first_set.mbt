@@ -73,6 +73,7 @@ let first_expr : Array[TokenKind] = [
     TK_UNDERSCORE,
     TK_LPAREN,
     TK_LIDENT,
+    TK_EXCLAMATION,
   ]
 
 ///|

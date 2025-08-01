@@ -106,6 +106,7 @@ fn State::parse_qual_lident(
       @syntax.LongIdent::dummy()
     }
     PACKAGE_NAME(pkg) => {
+      self.skip()
       let id = self.expect_dot_lident(context~)
       Dot(pkg~, id~)
     }
@@ -126,7 +127,8 @@ fn State::parse_qual_luident(self : Self) -> @syntax.LongIdent {
       self.skip()
       Ident(name=id)
     }
-    PACKAGE_NAME(pkg) =>
+    PACKAGE_NAME(pkg) => {
+      self.skip()
       match self.peek_token() {
         DOT_LIDENT(id) | DOT_UIDENT(id) => {
           self.skip()
@@ -139,6 +141,7 @@ fn State::parse_qual_luident(self : Self) -> @syntax.LongIdent {
           @syntax.LongIdent::dummy()
         }
       }
+    }
     other => {
       let loc = self.peek_location()
       self.report_unexpected(other, first_qual_luident, loc)
@@ -292,7 +295,7 @@ fn State::parse_constr(self : Self) -> @syntax.Constructor {
       { name: { name, loc }, extra_info: NoExtraInfo, loc: loc_constr }
     }
     PACKAGE_NAME(pkg) if self.peek_token(nth=1) is DOT_UIDENT(_) &&
-      self.peek_token(nth=2) is COLONCOLON => {
+      !(self.peek_token(nth=2) is COLONCOLON) => {
       // @pkg.Constr
       self.skip()
       let name : @syntax.ConstrName = {
@@ -304,7 +307,8 @@ fn State::parse_constr(self : Self) -> @syntax.Constructor {
       { name, extra_info: Package(pkg), loc }
     }
     LIDENT(_) | UIDENT(_) | PACKAGE_NAME(_) | AMPER(_) => {
-      // TypeName::Csontr
+      // @pkg.TypeName::Constr
+      // TypeName::Constr
       // The "&" case is just for error recovery and consistency with yacc parser
       let type_name = self.parse_type_name()
       self.expect_token(TK_COLONCOLON)
@@ -1073,38 +1077,34 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
     ASYNC | FN => {
       let fun_decl = self.parse_fun_decl(attrs~)
       let fun_decl = { ..fun_decl, vis, }
-      if self.peek_token() is EQUAL {
-        self.expect_token(TK_EQUAL)
+      let decl_body : @syntax.DeclBody = if self.peek_token() is EQUAL {
+        self.skip()
         if self.peek_token() is MULTILINE_STRING(_) {
           let xs = []
           while self.peek_token() is MULTILINE_STRING(x) {
             xs.push(x)
           }
-          let loc = self.loc_start_with(spos)
-          TopFuncDef(
-            fun_decl~,
-            decl_body=DeclStubs(
-              Embedded(
-                language=None,
-                code=CodeMultilineString(@list.from_array(xs)),
-              ),
+          DeclStubs(
+            Embedded(
+              language=None,
+              code=CodeMultilineString(@list.from_array(xs)),
             ),
-            loc~,
           )
         } else {
-          let (local_types, body) = self.parse_block_expr_with_local_types()
-          let loc = self.loc_start_with(spos)
-          TopFuncDef(
-            fun_decl~,
-            decl_body=DeclBody(expr=body, local_types~),
-            loc~,
-          )
+          let name1 = self.expect_string()
+          if self.peek_token() is STRING(name2) {
+            self.skip()
+            DeclStubs(Import(module_name=name1, func_name=name2))
+          } else {
+            DeclStubs(Embedded(language=None, code=CodeString(name1)))
+          }
         }
       } else {
         let (local_types, body) = self.parse_block_expr_with_local_types()
-        let loc = self.loc_start_with(spos)
-        TopFuncDef(fun_decl~, decl_body=DeclBody(expr=body, local_types~), loc~)
+        DeclBody(expr=body, local_types~)
       }
+      let loc = self.loc_start_with(spos)
+      TopFuncDef(fun_decl~, decl_body~, loc~)
     }
     FNALIAS => {
       self.skip()
@@ -1615,7 +1615,9 @@ fn State::parse_deriving_directive_list(
   }
   if self.peek_token() is DERIVE {
     self.skip()
-    let directives = self.delimited1(
+    let directives = self.surround_delimited(
+      left=TK_LPAREN,
+      right=TK_RPAREN,
       delim=TK_COMMA,
       State::parse_deriving_directive,
     )
@@ -2162,7 +2164,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             field_or_dotdots : @array.View[MapPatternFragment],
           ) -> @syntax.Pattern {
             match field_or_dotdots {
-              [] => Record(fields=acc, is_closed=!has_dotdot, loc~)
+              [] => Record(fields=acc.rev(), is_closed=!has_dotdot, loc~)
               [Dotdot(loc), .. rest] => {
                 if rest is [] {
                   self.report_error({
@@ -2192,16 +2194,16 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
           // so it's fine to assume it is a map pattern in this case
           fn collect_elems(
             has_dotdot,
-            acc,
+            acc : List[_],
             field_pat_or_dotdots : @array.View[MapPatternFragment],
           ) -> @syntax.Pattern {
             match field_pat_or_dotdots {
-              [] => Map(elems=acc, is_closed=!has_dotdot, loc~)
+              [] => Map(elems=acc.rev(), is_closed=!has_dotdot, loc~)
               [Dotdot(loc), .. rest] => {
                 if !(rest is []) {
                   self.report_error({ loc, msg: "Unexpected `..` here" })
                 }
-                collect_elems(has_dotdot, acc, rest)
+                collect_elems(true, acc, rest)
               }
               [Field({ loc, .. }), .. rest] => {
                 self.report_error({ loc, msg: "Unexpected `..` here" })
@@ -3687,17 +3689,29 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
     }
     // label~
     POST_LABEL(label_name) => {
+      let spos = self.peek_spos()
+      self.skip()
       let label : @syntax.Label = {
         name: label_name,
         loc: self.peek_location(),
       }
-      self.expect_token(TK_LIDENT) // lident
-      let kind = @syntax.LabelledPun(label)
-      let value = @syntax.label_to_expr(
-        loc=Location::trim_last_char(label.loc),
-        label,
-      )
-      { value, kind }
+      // error recovery for `label~=value`
+      if self.peek_token() is EQUAL {
+        self.skip()
+        let value = self.parse_expr()
+        let loc = self.loc_start_with(spos)
+        self.report_error({
+          loc,
+          msg: "Invalid syntax `label~=value`. Do you mean `label=value`?",
+        })
+        { value, kind: Labelled(label) }
+      } else {
+        let value = @syntax.label_to_expr(
+          loc=Location::trim_last_char(label.loc),
+          label,
+        )
+        { value, kind: LabelledPun(label) }
+      }
     }
     // label?
     LIDENT(label_name) if self.peek_token(nth=1) is QUESTION &&
@@ -4018,7 +4032,8 @@ fn State::parse_simple_expr(
     ASYNC => {
       let spos = self.peek_spos()
       self.expect_token(TK_ASYNC) // async
-      self.expect_token(TK_FN) // fn
+      // TODO: improve error recovery for case like `async \n trait`
+      self.with_syncs([TK_LPAREN, TK_LBRACE], _.expect_token(TK_FN)) // fn
       let has_error = self.parse_optional_bang()
       let func = self.parse_func(has_error~, is_async=true)
       let loc = self.loc_start_with(spos)
@@ -4338,19 +4353,28 @@ fn State::parse_block_expr_with_local_types(
     self,
   ) {
     let local_types = []
+    // TODO: maybe use delimited_with_follow instead
+    let mut allow_following_stmt = true
     while self.mode is Normal && self.peek_token() is (STRUCT | ENUM | TYPE) {
       self.push_sync(TK_SEMI)
       local_types.push(self.parse_local_type_decl())
       self.pop_sync(TK_SEMI)
-      if self.peek_token() is SEMI(_) {
+      allow_following_stmt = if self.peek_token() is SEMI(_) {
         self.skip()
+        true
+      } else {
+        false
       }
     }
-    let (stmts, _) = self.delimited_with_follow(
-      delim=TK_SEMI,
-      follow_set=[TK_RBRACE],
-      State::parse_stmt,
-    )
+    let stmts = if allow_following_stmt {
+      self.delimited_with_follow(
+        delim=TK_SEMI,
+        follow_set=[TK_RBRACE],
+        State::parse_stmt,
+      ).0
+    } else {
+      []
+    }
     (@list.from_array(local_types), @list.from_array(stmts))
   })
   let loc = self.loc_start_with(spos)
@@ -4432,7 +4456,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
       } else {
         false
       }
-      self.expect_token(TK_FN)
+      self.with_syncs([TK_LPAREN, TK_LBRACE], _.expect_token(TK_FN)) // fn
       let has_error = self.parse_optional_bang()
       self.parse_func(has_error~, is_async~)
     }
@@ -4673,13 +4697,22 @@ fn State::parse_expr_stmt(self : Self) -> @syntax.Expr {
       let spos = self.peek_spos()
       self.expect_token(TK_CONTINUE)
       let label : @syntax.Label? = match self.peek_token() {
-        POST_LABEL(label_name) => {
+        //  Consider the case:
+        //  ```
+        //  continue l~: loop 0 { ... } 
+        // ```
+        //  Here the label l~ is for the loop instead of the continue statement.
+        POST_LABEL(label_name) if !(self.peek_token(nth=1) is COLON) => {
           self.skip()
           Some({ name: label_name, loc: self.peek_location() })
         }
         _ => None
       }
-      let args = self.delimited1(delim=TK_COMMA, State::parse_expr)
+      let args = self.delimited(
+          delim=TK_COMMA,
+          first_set=first_expr,
+          State::parse_expr,
+        )
         |> @list.from_array
       Continue(args~, loc=self.loc_start_with(spos), label~)
     }
