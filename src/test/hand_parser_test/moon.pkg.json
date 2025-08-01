@@ -1,0 +1,8 @@
+{
+    "test-import": [
+      "moonbitlang/parser/parsing/hand_parser",
+      "moonbitlang/parser/lexing/lexer",
+      "moonbitlang/parser/parsing/syntax",
+      "moonbitlang/x/fs"
+    ]
+}
