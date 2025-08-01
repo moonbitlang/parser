@@ -504,7 +504,7 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
       env.add_token_with_loc(DOT_UIDENT(name), start=$startpos(name), end=$endpos(name))
       tokens(lexbuf, env~, preserve_comment~)
     }
-    '.' ((unicode_id_char \ ['A'-'Z' '0'-'9']) unicode_id_char* as name) => {
+    '.' (((unicode_id_char \ ['A'-'Z' '0'-'9']) unicode_id_char*)? as name) => {
       env.add_token_with_loc(DOT_LIDENT(name), start=$startpos(name), end=$endpos(name))
       tokens(lexbuf, env~, preserve_comment~)
     }

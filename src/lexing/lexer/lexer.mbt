@@ -1442,9 +1442,9 @@ fn tokens(
         }
     }
     19 => {
-      _match_pattern = 74
+      _match_pattern = 42
       _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
+      _capture_0_start = _match_start + 1
       _capture_0_end = _match_end
       continue match lexbuf.next_as_int() {
           40 => 94
