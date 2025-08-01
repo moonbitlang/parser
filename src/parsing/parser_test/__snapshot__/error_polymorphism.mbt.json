@@ -155,7 +155,7 @@
         "type": "DeclBody::DeclBody",
         "local_types": [],
         "expr": {
-          "type": "Expr::Foreach",
+          "type": "Expr::ForEach",
           "binders": [
             {
               "type": "Binder",

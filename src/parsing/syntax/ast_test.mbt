@@ -2429,7 +2429,7 @@ test "impl variants to_json" {
     content={
       "type": "Impl::TopTest",
       "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "name": ["test_string", null],
+      "name": { "v": "test_string", "loc": null },
       "params": null,
       "local_types": [],
       "loc": null,

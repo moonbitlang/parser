@@ -695,7 +695,7 @@
                                           "type": "Expr::Sequence",
                                           "exprs": [
                                             {
-                                              "type": "Expr::Foreach",
+                                              "type": "Expr::ForEach",
                                               "binders": [
                                                 {
                                                   "type": "Binder",
@@ -759,7 +759,7 @@
                                               "loc": null
                                             },
                                             {
-                                              "type": "Expr::Foreach",
+                                              "type": "Expr::ForEach",
                                               "binders": [
                                                 {
                                                   "type": "Binder",
@@ -840,7 +840,7 @@
                                             }
                                           ],
                                           "last_expr": {
-                                            "type": "Expr::Foreach",
+                                            "type": "Expr::ForEach",
                                             "binders": [
                                               {
                                                 "type": "Binder",

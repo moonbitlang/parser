@@ -1113,8 +1113,8 @@ pub impl ToJson for Expr with to_json(self) {
     TryOperator(body~, kind~, try_loc~, loc~) =>
       {
         "type": "Expr::TryOperator",
-        "kind": kind,
         "body": body,
+        "kind": kind,
         "try_loc": try_loc,
         "loc": loc,
       }
@@ -1150,7 +1150,7 @@ pub impl ToJson for Impl with to_json(self) {
         "name": option_to_json(
           name.map(fn(tuple) {
             let (s, l) = tuple
-            ([s, l] : Json)
+            ({ "v": s, "loc": l } : Json)
           }),
         ),
         "params": option_to_json(params.map(list_to_json)),
