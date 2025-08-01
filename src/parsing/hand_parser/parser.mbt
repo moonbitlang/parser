@@ -239,7 +239,7 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
     return { name: "?tvar_name", loc, constraints: @list.of([]) }
   }
   let spos = self.peek_spos()
-  let name = self.expect_lident(context="name of type variable")
+  let name = self.parse_luident()
   let loc = self.loc_start_with(spos)
   let constraints : @list.List[@syntax.TypeVarConstraint]? = self.optional(
     [TK_COLON],
@@ -1044,6 +1044,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       if self.peek_token() is MULTILINE_STRING(_) {
         let xs = []
         while self.peek_token() is MULTILINE_STRING(x) {
+          self.skip()
           xs.push(x)
         }
         let loc = self.loc_start_with(spos)
@@ -2003,7 +2004,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
 
       let _ = self.surround_delimited(
         left=TK_LBRACKET,
-        right=TK_LBRACKET,
+        right=TK_RBRACKET,
         delim=TK_COMMA,
         fn(self) {
           if self.peek_token() is DOTDOT {
@@ -4337,7 +4338,7 @@ fn State::parse_block_expr_with_local_types(
     self,
   ) {
     let local_types = []
-    while self.peek_token() is (STRUCT | ENUM | TYPE) {
+    while self.mode is Normal && self.peek_token() is (STRUCT | ENUM | TYPE) {
       self.push_sync(TK_SEMI)
       local_types.push(self.parse_local_type_decl())
       self.pop_sync(TK_SEMI)
