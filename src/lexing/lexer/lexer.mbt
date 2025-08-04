@@ -358,7 +358,9 @@ fn normal(
     0 =>
       continue match lexbuf.next_as_int() {
           -1 => 1
-          0..=12 => 2
+          0..=9 => 2
+          10 => 3
+          11..=12 => 2
           13 => 3
           14..=33 => 2
           34 => 4
@@ -384,14 +386,9 @@ fn normal(
       break
     }
     3 => {
-      _match_pattern = 13
+      _match_pattern = 12
       _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_end
-      continue match lexbuf.next_as_int() {
-          10 => 10
-          _ => break
-        }
+      break
     }
     4 => {
       _match_pattern = 0
@@ -404,33 +401,33 @@ fn normal(
       _capture_0_start = _match_start
       _capture_0_end = _match_end
       continue match lexbuf.next_as_int() {
-          0..=31 => 11
-          32 => 12
-          33 => 11
-          34 => 12
-          35..=38 => 11
-          39 => 12
-          40..=91 => 11
-          92 => 12
-          93..=97 => 11
-          98 => 12
-          99..=109 => 11
-          110 => 12
-          111 => 13
-          112..=113 => 11
-          114 => 12
-          115 => 11
-          116 => 12
-          117 => 14
-          118..=119 => 11
-          120 => 15
-          121..=122 => 11
-          123 => 16
-          124..=127 => 11
-          194..=223 => 17
-          224..=239 => 18
-          240 => 19
-          241..=244 => 20
+          0..=31 => 10
+          32 => 11
+          33 => 10
+          34 => 11
+          35..=38 => 10
+          39 => 11
+          40..=91 => 10
+          92 => 11
+          93..=97 => 10
+          98 => 11
+          99..=109 => 10
+          110 => 11
+          111 => 12
+          112..=113 => 10
+          114 => 11
+          115 => 10
+          116 => 11
+          117 => 13
+          118..=119 => 10
+          120 => 14
+          121..=122 => 10
+          123 => 15
+          124..=127 => 10
+          194..=223 => 16
+          224..=239 => 17
+          240 => 18
+          241..=244 => 19
           _ => break
         }
     }
@@ -455,23 +452,34 @@ fn normal(
           _ => break
         }
     10 => {
-      _match_pattern = 12
-      _match_end = lexbuf.curr_pos()
-      break
-    }
-    11 => {
       _match_pattern = 10
       _match_end = lexbuf.curr_pos()
       _capture_0_start = _match_start
       _capture_0_end = _match_end
       break
     }
-    12 => {
+    11 => {
       _match_pattern = 1
       _match_end = lexbuf.curr_pos()
       _capture_0_start = _match_start
       _capture_0_end = _match_start + 2
       break
+    }
+    12 => {
+      _match_pattern = 10
+      _match_end = lexbuf.curr_pos()
+      _capture_0_start = _match_start
+      _capture_0_end = _match_end
+      continue match lexbuf.next_as_int() {
+          0..=47 => 27
+          48..=51 => 28
+          52..=127 => 27
+          194..=223 => 29
+          224..=239 => 30
+          240 => 31
+          241..=244 => 32
+          _ => break
+        }
     }
     13 => {
       _match_pattern = 10
@@ -479,13 +487,10 @@ fn normal(
       _capture_0_start = _match_start
       _capture_0_end = _match_end
       continue match lexbuf.next_as_int() {
-          0..=47 => 28
-          48..=51 => 29
-          52..=127 => 28
-          194..=223 => 30
-          224..=239 => 31
-          240 => 32
-          241..=244 => 33
+          48..=57 => 25
+          65..=70 => 25
+          97..=102 => 25
+          123 => 26
           _ => break
         }
     }
@@ -495,300 +500,292 @@ fn normal(
       _capture_0_start = _match_start
       _capture_0_end = _match_end
       continue match lexbuf.next_as_int() {
-          48..=57 => 26
-          65..=70 => 26
-          97..=102 => 26
-          123 => 27
+          0..=47 => 33
+          48..=57 => 34
+          58..=64 => 33
+          65..=70 => 34
+          71..=96 => 33
+          97..=102 => 34
+          103..=127 => 33
+          194..=223 => 35
+          224..=239 => 36
+          240 => 37
+          241..=244 => 38
           _ => break
         }
     }
     15 => {
-      _match_pattern = 10
-      _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_end
-      continue match lexbuf.next_as_int() {
-          0..=47 => 34
-          48..=57 => 35
-          58..=64 => 34
-          65..=70 => 35
-          71..=96 => 34
-          97..=102 => 35
-          103..=127 => 34
-          194..=223 => 36
-          224..=239 => 37
-          240 => 38
-          241..=244 => 39
-          _ => break
-        }
-    }
-    16 => {
       _match_pattern = 9
       _match_end = lexbuf.curr_pos()
       _capture_0_start = _match_start
       _capture_0_end = _match_end
       continue match lexbuf.next_as_int() {
-          9 => 16
-          11..=12 => 16
-          32 => 16
-          194 => 21
-          225 => 22
-          226 => 23
-          227 => 24
-          239 => 25
+          9 => 15
+          11..=12 => 15
+          32 => 15
+          194 => 20
+          225 => 21
+          226 => 22
+          227 => 23
+          239 => 24
           _ => break
         }
     }
+    16 =>
+      continue match lexbuf.next_as_int() {
+          128..=191 => 10
+          _ => break
+        }
     17 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 11
+          128..=191 => 16
           _ => break
         }
     18 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 17
+          144..=191 => 17
           _ => break
         }
     19 =>
       continue match lexbuf.next_as_int() {
-          144..=191 => 18
+          128..=191 => 17
           _ => break
         }
     20 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 18
+          160 => 15
           _ => break
         }
     21 =>
       continue match lexbuf.next_as_int() {
-          160 => 16
+          154 => 40
           _ => break
         }
     22 =>
       continue match lexbuf.next_as_int() {
-          154 => 41
+          128 => 41
+          129 => 42
           _ => break
         }
     23 =>
       continue match lexbuf.next_as_int() {
-          128 => 42
-          129 => 43
+          128 => 40
           _ => break
         }
     24 =>
       continue match lexbuf.next_as_int() {
-          128 => 41
+          187 => 39
           _ => break
         }
     25 =>
       continue match lexbuf.next_as_int() {
-          187 => 40
+          48..=57 => 50
+          65..=70 => 50
+          97..=102 => 50
           _ => break
         }
     26 =>
       continue match lexbuf.next_as_int() {
-          48..=57 => 51
-          65..=70 => 51
-          97..=102 => 51
+          0..=9 => 43
+          11..=12 => 43
+          14..=47 => 43
+          48..=57 => 44
+          58..=64 => 43
+          65..=70 => 44
+          71..=96 => 43
+          97..=102 => 44
+          103..=124 => 43
+          125 => 45
+          126..=127 => 43
+          194..=223 => 46
+          224..=239 => 47
+          240 => 48
+          241..=244 => 49
           _ => break
         }
     27 =>
       continue match lexbuf.next_as_int() {
-          0..=9 => 44
-          11..=12 => 44
-          14..=47 => 44
-          48..=57 => 45
-          58..=64 => 44
-          65..=70 => 45
-          71..=96 => 44
-          97..=102 => 45
-          103..=124 => 44
-          125 => 46
-          126..=127 => 44
-          194..=223 => 47
-          224..=239 => 48
-          240 => 49
-          241..=244 => 50
+          0..=127 => 51
+          194..=223 => 52
+          224..=239 => 53
+          240 => 54
+          241..=244 => 55
           _ => break
         }
     28 =>
       continue match lexbuf.next_as_int() {
-          0..=127 => 52
-          194..=223 => 53
-          224..=239 => 54
-          240 => 55
-          241..=244 => 56
+          0..=47 => 51
+          48..=55 => 56
+          56..=127 => 51
+          194..=223 => 52
+          224..=239 => 53
+          240 => 54
+          241..=244 => 55
           _ => break
         }
     29 =>
       continue match lexbuf.next_as_int() {
-          0..=47 => 52
-          48..=55 => 57
-          56..=127 => 52
-          194..=223 => 53
-          224..=239 => 54
-          240 => 55
-          241..=244 => 56
+          128..=191 => 27
           _ => break
         }
     30 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 28
+          128..=191 => 29
           _ => break
         }
     31 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 30
+          144..=191 => 30
           _ => break
         }
     32 =>
       continue match lexbuf.next_as_int() {
-          144..=191 => 31
+          128..=191 => 30
           _ => break
         }
     33 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 31
+          0..=127 => 57
+          194..=223 => 58
+          224..=239 => 59
+          240 => 60
+          241..=244 => 61
           _ => break
         }
     34 =>
       continue match lexbuf.next_as_int() {
-          0..=127 => 58
-          194..=223 => 59
-          224..=239 => 60
-          240 => 61
-          241..=244 => 62
+          0..=47 => 57
+          48..=57 => 62
+          58..=64 => 57
+          65..=70 => 62
+          71..=96 => 57
+          97..=102 => 62
+          103..=127 => 57
+          194..=223 => 58
+          224..=239 => 59
+          240 => 60
+          241..=244 => 61
           _ => break
         }
     35 =>
       continue match lexbuf.next_as_int() {
-          0..=47 => 58
-          48..=57 => 63
-          58..=64 => 58
-          65..=70 => 63
-          71..=96 => 58
-          97..=102 => 63
-          103..=127 => 58
-          194..=223 => 59
-          224..=239 => 60
-          240 => 61
-          241..=244 => 62
+          128..=191 => 33
           _ => break
         }
     36 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 34
+          128..=191 => 35
           _ => break
         }
     37 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 36
+          144..=191 => 36
           _ => break
         }
     38 =>
       continue match lexbuf.next_as_int() {
-          144..=191 => 37
+          128..=191 => 36
           _ => break
         }
     39 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 37
+          191 => 15
           _ => break
         }
     40 =>
       continue match lexbuf.next_as_int() {
-          191 => 16
+          128 => 15
           _ => break
         }
     41 =>
       continue match lexbuf.next_as_int() {
-          128 => 16
+          128..=138 => 15
+          175 => 15
           _ => break
         }
     42 =>
       continue match lexbuf.next_as_int() {
-          128..=138 => 16
-          175 => 16
+          159 => 15
           _ => break
         }
     43 =>
       continue match lexbuf.next_as_int() {
-          159 => 16
+          0..=9 => 43
+          11..=12 => 43
+          14..=124 => 43
+          125 => 45
+          126..=127 => 43
+          194..=223 => 46
+          224..=239 => 47
+          240 => 48
+          241..=244 => 49
           _ => break
         }
     44 =>
       continue match lexbuf.next_as_int() {
-          0..=9 => 44
-          11..=12 => 44
-          14..=124 => 44
-          125 => 46
-          126..=127 => 44
-          194..=223 => 47
-          224..=239 => 48
-          240 => 49
-          241..=244 => 50
+          0..=9 => 43
+          11..=12 => 43
+          14..=47 => 43
+          48..=57 => 44
+          58..=64 => 43
+          65..=70 => 44
+          71..=96 => 43
+          97..=102 => 44
+          103..=124 => 43
+          125 => 63
+          126..=127 => 43
+          194..=223 => 46
+          224..=239 => 47
+          240 => 48
+          241..=244 => 49
           _ => break
         }
-    45 =>
-      continue match lexbuf.next_as_int() {
-          0..=9 => 44
-          11..=12 => 44
-          14..=47 => 44
-          48..=57 => 45
-          58..=64 => 44
-          65..=70 => 45
-          71..=96 => 44
-          97..=102 => 45
-          103..=124 => 44
-          125 => 64
-          126..=127 => 44
-          194..=223 => 47
-          224..=239 => 48
-          240 => 49
-          241..=244 => 50
-          _ => break
-        }
-    46 => {
+    45 => {
       _match_pattern = 8
       _match_end = lexbuf.curr_pos()
       _capture_0_start = _match_start
       _capture_0_end = _match_end
       break
     }
+    46 =>
+      continue match lexbuf.next_as_int() {
+          128..=191 => 43
+          _ => break
+        }
     47 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 44
+          128..=191 => 46
           _ => break
         }
     48 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 47
+          144..=191 => 47
           _ => break
         }
     49 =>
       continue match lexbuf.next_as_int() {
-          144..=191 => 48
+          128..=191 => 47
           _ => break
         }
     50 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 48
+          48..=57 => 64
+          65..=70 => 64
+          97..=102 => 64
           _ => break
         }
     51 =>
       continue match lexbuf.next_as_int() {
-          48..=57 => 65
-          65..=70 => 65
-          97..=102 => 65
+          0..=127 => 65
+          194..=223 => 66
+          224..=239 => 67
+          240 => 68
+          241..=244 => 69
           _ => break
         }
     52 =>
       continue match lexbuf.next_as_int() {
-          0..=127 => 66
-          194..=223 => 67
-          224..=239 => 68
-          240 => 69
-          241..=244 => 70
+          128..=191 => 51
           _ => break
         }
     53 =>
@@ -798,37 +795,37 @@ fn normal(
         }
     54 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 53
+          144..=191 => 53
           _ => break
         }
     55 =>
       continue match lexbuf.next_as_int() {
-          144..=191 => 54
+          128..=191 => 53
           _ => break
         }
     56 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 54
+          0..=47 => 65
+          48..=55 => 70
+          56..=127 => 65
+          194..=223 => 66
+          224..=239 => 67
+          240 => 68
+          241..=244 => 69
           _ => break
         }
-    57 =>
-      continue match lexbuf.next_as_int() {
-          0..=47 => 66
-          48..=55 => 71
-          56..=127 => 66
-          194..=223 => 67
-          224..=239 => 68
-          240 => 69
-          241..=244 => 70
-          _ => break
-        }
-    58 => {
+    57 => {
       _match_pattern = 3
       _match_end = lexbuf.curr_pos()
       _capture_0_start = _match_start
       _capture_0_end = _match_end
       break
     }
+    58 =>
+      continue match lexbuf.next_as_int() {
+          128..=191 => 57
+          _ => break
+        }
     59 =>
       continue match lexbuf.next_as_int() {
           128..=191 => 58
@@ -836,47 +833,47 @@ fn normal(
         }
     60 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 59
+          144..=191 => 59
           _ => break
         }
     61 =>
       continue match lexbuf.next_as_int() {
-          144..=191 => 60
+          128..=191 => 59
           _ => break
         }
-    62 =>
-      continue match lexbuf.next_as_int() {
-          128..=191 => 60
-          _ => break
-        }
-    63 => {
+    62 => {
       _match_pattern = 2
       _match_end = lexbuf.curr_pos()
       _capture_0_start = _match_start
       _capture_0_end = _match_start + 4
       break
     }
-    64 => {
+    63 => {
       _match_pattern = 7
       _match_end = lexbuf.curr_pos()
       _capture_0_start = _match_start
       _capture_0_end = _match_end
       break
     }
-    65 =>
+    64 =>
       continue match lexbuf.next_as_int() {
-          48..=57 => 72
-          65..=70 => 72
-          97..=102 => 72
+          48..=57 => 71
+          65..=70 => 71
+          97..=102 => 71
           _ => break
         }
-    66 => {
+    65 => {
       _match_pattern = 5
       _match_end = lexbuf.curr_pos()
       _capture_0_start = _match_start
       _capture_0_end = _match_end
       break
     }
+    66 =>
+      continue match lexbuf.next_as_int() {
+          128..=191 => 65
+          _ => break
+        }
     67 =>
       continue match lexbuf.next_as_int() {
           128..=191 => 66
@@ -884,27 +881,22 @@ fn normal(
         }
     68 =>
       continue match lexbuf.next_as_int() {
-          128..=191 => 67
+          144..=191 => 67
           _ => break
         }
     69 =>
       continue match lexbuf.next_as_int() {
-          144..=191 => 68
+          128..=191 => 67
           _ => break
         }
-    70 =>
-      continue match lexbuf.next_as_int() {
-          128..=191 => 68
-          _ => break
-        }
-    71 => {
+    70 => {
       _match_pattern = 4
       _match_end = lexbuf.curr_pos()
       _capture_0_start = _match_start
       _capture_0_end = _match_start + 5
       break
     }
-    72 => {
+    71 => {
       _match_pattern = 6
       _match_end = lexbuf.curr_pos()
       _capture_0_start = _match_start

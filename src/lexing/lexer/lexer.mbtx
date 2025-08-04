@@ -212,7 +212,7 @@ rule normal(lexbuf : Lexbuf, env~ : LexEnv, end_with_newline~ : Bool, allow_inte
         )
       }
     }
-    '\r' '\n' => {
+    '\r' | '\n' => {
       // we need insert a NEWLINE token here, so back off to main tokenizer
       lexbuf.reset(pos=lexbuf.curr_pos() - 1)
       if not(end_with_newline) {
