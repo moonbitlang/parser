@@ -327,7 +327,7 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
       let startpos = $startpos
       let tok : Token =
         match string(lexbuf, env~, end_with_newline = false, allow_interp = false, startpos~) {
-          [ InterpLit(repr~, ..) ] => STRING(repr)
+          [ InterpLit(repr~, ..) ] => BYTES(repr)
           _interps => panic()
         }
       let endpos = lexbuf.curr_pos()

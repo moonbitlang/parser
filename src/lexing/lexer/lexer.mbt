@@ -3422,7 +3422,7 @@ fn tokens(
           allow_interp=false,
           startpos~,
         ) {
-        [InterpLit(repr~, ..)] => STRING(repr)
+        [InterpLit(repr~, ..)] => BYTES(repr)
         _interps => panic()
       }
       let endpos = lexbuf.curr_pos()

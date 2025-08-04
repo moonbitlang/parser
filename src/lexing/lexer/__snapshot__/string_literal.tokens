@@ -14,7 +14,7 @@
 (LET 5:3-5:6)
 ((LIDENT y) 5:7-5:8)
 (EQUAL 5:9-5:10)
-((STRING \x01\x02\x03) 5:11-5:26)
+((BYTES \x01\x02\x03) 5:11-5:26)
 ((SEMI false) 5:26-5:26)
 (NEWLINE 5:26-5:27)
 ((LIDENT println) 6:3-6:10)
