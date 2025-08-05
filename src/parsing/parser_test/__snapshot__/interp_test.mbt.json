@@ -2,96 +2,34 @@
   "type": "Program",
   "body": [
     {
-      "type": "Impl::TopExpr",
-      "expr": {
-        "type": "Expr::Let",
-        "pattern": {
-          "type": "Pattern::Var",
-          "0": {
-            "type": "Binder",
-            "name": "s",
-            "loc": null
-          }
-        },
-        "expr": {
-          "type": "Expr::Interp",
-          "elems": [
-            {
-              "type": "InterpElem::Literal",
-              "repr": "hello ",
-              "loc": null
-            },
-            {
-              "type": "InterpElem::Expr",
-              "expr": {
-                "type": "Expr::Ident",
-                "id": {
-                  "type": "Var",
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "untermin"
-                  },
-                  "loc": null
-                },
-                "loc": null
-              },
-              "loc": null
-            }
-          ],
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "init",
           "loc": null
         },
-        "body": {
-          "type": "Expr::Let",
-          "pattern": {
-            "type": "Pattern::Var",
-            "0": {
-              "type": "Binder",
-              "name": "h",
-              "loc": null
-            }
-          },
-          "expr": {
-            "type": "Expr::Constant",
-            "c": {
-              "type": "Constant::String",
-              "0": "hello"
-            },
-            "loc": null
-          },
-          "body": {
-            "type": "Expr::Unit",
-            "loc": null,
-            "faked": true
-          },
-          "loc": null
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
         },
-        "loc": null
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
       },
-      "is_main": false,
-      "local_types": [],
-      "loc": null
-    },
-    {
-      "type": "Impl::TopExpr",
-      "expr": {
-        "type": "Expr::Let",
-        "pattern": {
-          "type": "Pattern::Var",
-          "0": {
-            "type": "Binder",
-            "name": "a",
-            "loc": null
-          }
-        },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
         "expr": {
-          "type": "Expr::Constant",
-          "c": {
-            "type": "Constant::Int",
-            "0": "3"
-          },
-          "loc": null
-        },
-        "body": {
           "type": "Expr::Let",
           "pattern": {
             "type": "Pattern::Var",
@@ -110,64 +48,162 @@
                 "loc": null
               },
               {
-                "type": "InterpElem::Expr",
-                "expr": {
-                  "type": "Expr::Ident",
-                  "id": {
-                    "type": "Var",
-                    "name": {
-                      "type": "LongIdent::Ident",
-                      "0": "a"
-                    },
-                    "loc": null
-                  },
-                  "loc": null
-                },
+                "type": "InterpElem::Source",
+                "source": "untermin",
                 "loc": null
               }
             ],
             "loc": null
           },
           "body": {
-            "type": "Expr::Unit",
-            "loc": null,
-            "faked": true
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Var",
+              "0": {
+                "type": "Binder",
+                "name": "h",
+                "loc": null
+              }
+            },
+            "expr": {
+              "type": "Expr::Constant",
+              "c": {
+                "type": "Constant::String",
+                "0": "hello"
+              },
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Unit",
+              "loc": null,
+              "faked": true
+            },
+            "loc": null
           },
           "loc": null
-        },
-        "loc": null
+        }
       },
-      "is_main": false,
-      "local_types": [],
       "loc": null
     },
     {
-      "type": "Impl::TopExpr",
-      "expr": {
-        "type": "Expr::Let",
-        "pattern": {
-          "type": "Pattern::Var",
-          "0": {
-            "type": "Binder",
-            "name": "s",
-            "loc": null
-          }
-        },
-        "expr": {
-          "type": "Expr::Constant",
-          "c": {
-            "type": "Constant::String",
-            "0": "hello"
-          },
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "init",
           "loc": null
         },
-        "body": {
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
           "type": "Expr::Let",
           "pattern": {
             "type": "Pattern::Var",
             "0": {
               "type": "Binder",
-              "name": "h",
+              "name": "a",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::Constant",
+            "c": {
+              "type": "Constant::Int",
+              "0": "3"
+            },
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Var",
+              "0": {
+                "type": "Binder",
+                "name": "s",
+                "loc": null
+              }
+            },
+            "expr": {
+              "type": "Expr::Interp",
+              "elems": [
+                {
+                  "type": "InterpElem::Literal",
+                  "repr": "hello ",
+                  "loc": null
+                },
+                {
+                  "type": "InterpElem::Source",
+                  "source": "a",
+                  "loc": null
+                }
+              ],
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Unit",
+              "loc": null,
+              "faked": true
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "init",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "s",
               "loc": null
             }
           },
@@ -175,21 +211,38 @@
             "type": "Expr::Constant",
             "c": {
               "type": "Constant::String",
-              "0": "x"
+              "0": "hello"
             },
             "loc": null
           },
           "body": {
-            "type": "Expr::Unit",
-            "loc": null,
-            "faked": true
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Var",
+              "0": {
+                "type": "Binder",
+                "name": "h",
+                "loc": null
+              }
+            },
+            "expr": {
+              "type": "Expr::Constant",
+              "c": {
+                "type": "Constant::String",
+                "0": "x"
+              },
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Unit",
+              "loc": null,
+              "faked": true
+            },
+            "loc": null
           },
           "loc": null
-        },
-        "loc": null
+        }
       },
-      "is_main": false,
-      "local_types": [],
       "loc": null
     },
     {
@@ -345,15 +398,8 @@
             "loc": null
           },
           {
-            "type": "InterpElem::Expr",
-            "expr": {
-              "type": "Expr::Constant",
-              "c": {
-                "type": "Constant::Int",
-                "0": "5"
-              },
-              "loc": null
-            },
+            "type": "InterpElem::Source",
+            "source": "5",
             "loc": null
           },
           {
@@ -362,59 +408,8 @@
             "loc": null
           },
           {
-            "type": "InterpElem::Expr",
-            "expr": {
-              "type": "Expr::Infix",
-              "op": {
-                "type": "Var",
-                "name": {
-                  "type": "LongIdent::Ident",
-                  "0": "+"
-                },
-                "loc": null
-              },
-              "lhs": {
-                "type": "Expr::Constant",
-                "c": {
-                  "type": "Constant::Int",
-                  "0": "1"
-                },
-                "loc": null
-              },
-              "rhs": {
-                "type": "Expr::Infix",
-                "op": {
-                  "type": "Var",
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "*"
-                  },
-                  "loc": null
-                },
-                "lhs": {
-                  "type": "Expr::Constant",
-                  "c": {
-                    "type": "Constant::Int",
-                    "0": "2"
-                  },
-                  "loc": null
-                },
-                "rhs": {
-                  "type": "Expr::Ident",
-                  "id": {
-                    "type": "Var",
-                    "name": {
-                      "type": "LongIdent::Ident",
-                      "0": "a"
-                    },
-                    "loc": null
-                  },
-                  "loc": null
-                },
-                "loc": null
-              },
-              "loc": null
-            },
+            "type": "InterpElem::Source",
+            "source": "1 + (2 * a)",
             "loc": null
           }
         ],
@@ -445,35 +440,8 @@
             "loc": null
           },
           {
-            "type": "InterpElem::Expr",
-            "expr": {
-              "type": "Expr::Infix",
-              "op": {
-                "type": "Var",
-                "name": {
-                  "type": "LongIdent::Ident",
-                  "0": "+"
-                },
-                "loc": null
-              },
-              "lhs": {
-                "type": "Expr::Constant",
-                "c": {
-                  "type": "Constant::Int",
-                  "0": "3"
-                },
-                "loc": null
-              },
-              "rhs": {
-                "type": "Expr::Constant",
-                "c": {
-                  "type": "Constant::Int",
-                  "0": "2"
-                },
-                "loc": null
-              },
-              "loc": null
-            },
+            "type": "InterpElem::Source",
+            "source": "3 + 2 #|mulitline string",
             "loc": null
           },
           {
@@ -482,19 +450,8 @@
             "loc": null
           },
           {
-            "type": "InterpElem::Expr",
-            "expr": {
-              "type": "Expr::Ident",
-              "id": {
-                "type": "Var",
-                "name": {
-                  "type": "LongIdent::Ident",
-                  "0": "s1"
-                },
-                "loc": null
-              },
-              "loc": null
-            },
+            "type": "InterpElem::Source",
+            "source": "s1",
             "loc": null
           }
         ],
@@ -525,35 +482,8 @@
             "loc": null
           },
           {
-            "type": "InterpElem::Expr",
-            "expr": {
-              "type": "Expr::Infix",
-              "op": {
-                "type": "Var",
-                "name": {
-                  "type": "LongIdent::Ident",
-                  "0": "+"
-                },
-                "loc": null
-              },
-              "lhs": {
-                "type": "Expr::Constant",
-                "c": {
-                  "type": "Constant::Int",
-                  "0": "3"
-                },
-                "loc": null
-              },
-              "rhs": {
-                "type": "Expr::Constant",
-                "c": {
-                  "type": "Constant::Int",
-                  "0": "2"
-                },
-                "loc": null
-              },
-              "loc": null
-            },
+            "type": "InterpElem::Source",
+            "source": "3 + 2 //comment",
             "loc": null
           },
           {
@@ -562,19 +492,8 @@
             "loc": null
           },
           {
-            "type": "InterpElem::Expr",
-            "expr": {
-              "type": "Expr::Ident",
-              "id": {
-                "type": "Var",
-                "name": {
-                  "type": "LongIdent::Ident",
-                  "0": "s1"
-                },
-                "loc": null
-              },
-              "loc": null
-            },
+            "type": "InterpElem::Source",
+            "source": "s1",
             "loc": null
           }
         ],
@@ -605,15 +524,8 @@
             "loc": null
           },
           {
-            "type": "InterpElem::Expr",
-            "expr": {
-              "type": "Expr::Constant",
-              "c": {
-                "type": "Constant::Int",
-                "0": "3"
-              },
-              "loc": null
-            },
+            "type": "InterpElem::Source",
+            "source": "3 ggosgho",
             "loc": null
           },
           {
@@ -622,19 +534,8 @@
             "loc": null
           },
           {
-            "type": "InterpElem::Expr",
-            "expr": {
-              "type": "Expr::Ident",
-              "id": {
-                "type": "Var",
-                "name": {
-                  "type": "LongIdent::Ident",
-                  "0": "s1"
-                },
-                "loc": null
-              },
-              "loc": null
-            },
+            "type": "InterpElem::Source",
+            "source": "s1",
             "loc": null
           }
         ],

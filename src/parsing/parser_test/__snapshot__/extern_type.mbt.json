@@ -86,7 +86,11 @@
           "type": "TypeDesc::Abstract"
         },
         "attrs": [
-          null
+          {
+            "type": "Attribute",
+            "raw": "#external",
+            "loc": null
+          }
         ],
         "doc": "",
         "type_vis": {
@@ -107,7 +111,11 @@
           "type": "TypeDesc::Abstract"
         },
         "attrs": [
-          null
+          {
+            "type": "Attribute",
+            "raw": "#external",
+            "loc": null
+          }
         ],
         "doc": "",
         "type_vis": {
@@ -130,7 +138,11 @@
           "type": "TypeDesc::Abstract"
         },
         "attrs": [
-          null
+          {
+            "type": "Attribute",
+            "raw": "#external",
+            "loc": null
+          }
         ],
         "doc": "",
         "type_vis": {

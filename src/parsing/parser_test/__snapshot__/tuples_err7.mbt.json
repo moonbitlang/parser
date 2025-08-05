@@ -51,40 +51,11 @@
                 "loc": null
               },
               {
-                "type": "Expr::Infix",
-                "op": {
-                  "type": "Var",
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "+"
-                  },
-                  "loc": null
-                },
-                "lhs": {
-                  "type": "Expr::Ident",
-                  "id": {
-                    "type": "Var",
-                    "name": {
-                      "type": "LongIdent::Ident",
-                      "0": "a"
-                    },
-                    "loc": null
-                  },
-                  "loc": null
-                },
-                "rhs": {
-                  "type": "Expr::Ident",
-                  "id": {
-                    "type": "Var",
-                    "name": {
-                      "type": "LongIdent::Ident",
-                      "0": "b"
-                    },
-                    "loc": null
-                  },
-                  "loc": null
-                },
-                "loc": null
+                "type": "Expr::Hole",
+                "loc": null,
+                "kind": {
+                  "type": "Hole::Synthesized"
+                }
               }
             ],
             "loc": null

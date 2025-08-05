@@ -60,8 +60,16 @@
           "loc": null
         },
         "attrs": [
-          null,
-          null
+          {
+            "type": "Attribute",
+            "raw": "#alert(category1,\"reason\")",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#alert(category2,\"reason\")",
+            "loc": null
+          }
         ],
         "doc": " docs for f1\n some docs\n @alert category3 \"reason\""
       },
@@ -162,9 +170,21 @@
           "loc": null
         },
         "attrs": [
-          null,
-          null,
-          null
+          {
+            "type": "Attribute",
+            "raw": "#alert(deprecated1,\"reason\")",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#alert(unsafe1,\"reason\")",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#alert(unsafe2,\"reason\")",
+            "loc": null
+          }
         ],
         "doc": ""
       },
@@ -265,8 +285,16 @@
           "loc": null
         },
         "attrs": [
-          null,
-          null
+          {
+            "type": "Attribute",
+            "raw": "#alert(category1,\"reason\")",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#alert(category2,\"reason\")",
+            "loc": null
+          }
         ],
         "doc": ""
       },
@@ -342,8 +370,16 @@
           "loc": null
         },
         "attrs": [
-          null,
-          null
+          {
+            "type": "Attribute",
+            "raw": "#alert(category1,\"reason\")",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#alert(category2,\"reason\")",
+            "loc": null
+          }
         ],
         "doc": " docs for f5\n some docs\n @alert category3 \"reason\""
       },
@@ -361,67 +397,34 @@
       "loc": null
     },
     {
-      "type": "Impl::TopFuncDef",
-      "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "__test_6174747269627574652e6d6274_0",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": false,
-        "decl_params": [],
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": {
-          "type": "Type::Name",
-          "constr_id": {
-            "type": "ConstrId",
-            "id": {
-              "type": "LongIdent::Ident",
-              "0": "Unit"
-            },
-            "loc": null
-          },
-          "tys": [],
-          "loc": null
-        },
-        "error_type": {
-          "type": "ErrorType::ErrorType",
-          "ty": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "Error"
-              },
-              "loc": null
-            },
-            "tys": [],
-            "loc": null
-          }
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::Hole",
-          "loc": null,
-          "kind": {
-            "type": "Hole::Todo"
-          }
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Hole",
+        "loc": null,
+        "kind": {
+          "type": "Hole::Todo"
         }
       },
-      "loc": null
+      "name": {
+        "v": "test",
+        "loc": null
+      },
+      "params": null,
+      "local_types": [],
+      "loc": null,
+      "attrs": [
+        {
+          "type": "Attribute",
+          "raw": "#alert(category1,\"reason\")",
+          "loc": null
+        },
+        {
+          "type": "Attribute",
+          "raw": "#alert(category2,\"reason\")",
+          "loc": null
+        }
+      ],
+      "doc": ""
     },
     {
       "type": "Impl::TopTypeDef",
@@ -435,8 +438,16 @@
           "0": []
         },
         "attrs": [
-          null,
-          null
+          {
+            "type": "Attribute",
+            "raw": "#alert(category1,\"reason\")",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#alert(category2,\"reason\")",
+            "loc": null
+          }
         ],
         "doc": "",
         "type_vis": {
@@ -488,8 +499,16 @@
           ]
         },
         "attrs": [
-          null,
-          null
+          {
+            "type": "Attribute",
+            "raw": "#alert(category1,\"reason\")",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#alert(category2,\"reason\")",
+            "loc": null
+          }
         ],
         "doc": "",
         "type_vis": {
@@ -525,45 +544,16 @@
           }
         },
         "attrs": [
-          null,
-          null
-        ],
-        "doc": "",
-        "type_vis": {
-          "type": "Visibility::Pub",
-          "attr": null,
-          "loc": null
-        },
-        "deriving": [],
-        "loc": null
-      }
-    },
-    {
-      "type": "Impl::TopTypeDef",
-      "0": {
-        "type": "TypeDecl",
-        "tycon": "MyTypeAlias",
-        "tycon_loc": null,
-        "params": [],
-        "components": {
-          "type": "TypeDesc::Alias",
-          "0": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "Int"
-              },
-              "loc": null
-            },
-            "tys": [],
+          {
+            "type": "Attribute",
+            "raw": "#alert(category1,\"reason\")",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#alert(category2,\"reason\")",
             "loc": null
           }
-        },
-        "attrs": [
-          null,
-          null
         ],
         "doc": "",
         "type_vis": {
@@ -602,8 +592,16 @@
           }
         },
         "attrs": [
-          null,
-          null
+          {
+            "type": "Attribute",
+            "raw": "#alert(category1,\"reason\")",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#alert(category2,\"reason\")",
+            "loc": null
+          }
         ],
         "doc": "",
         "type_vis": {
@@ -655,8 +653,16 @@
           }
         },
         "attrs": [
-          null,
-          null
+          {
+            "type": "Attribute",
+            "raw": "#alert(category1,\"reason\")",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#alert(category2,\"reason\")",
+            "loc": null
+          }
         ],
         "doc": "",
         "type_vis": {
@@ -735,8 +741,16 @@
         },
         "loc": null,
         "attrs": [
-          null,
-          null
+          {
+            "type": "Attribute",
+            "raw": "#alert(category1,\"reason\")",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#alert(category2,\"reason\")",
+            "loc": null
+          }
         ],
         "doc": ""
       }
@@ -805,8 +819,16 @@
       },
       "loc": null,
       "attrs": [
-        null,
-        null
+        {
+          "type": "Attribute",
+          "raw": "#coverage.skip",
+          "loc": null
+        },
+        {
+          "type": "Attribute",
+          "raw": "#custom1.name",
+          "loc": null
+        }
       ],
       "doc": ""
     }

@@ -805,7 +805,11 @@
         "type": "Visibility::Default"
       },
       "attrs": [
-        null
+        {
+          "type": "Attribute",
+          "raw": "#deprecated(\"msg\")",
+          "loc": null
+        }
       ],
       "loc": null,
       "doc": ""

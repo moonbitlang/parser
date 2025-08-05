@@ -36,51 +36,16 @@
             "loc": null
           },
           "expr": {
-            "type": "Expr::Function",
-            "func": {
-              "type": "Func::Lambda",
-              "parameters": [
-                {
-                  "type": "Parameter::Positional",
-                  "binder": {
-                    "type": "Binder",
-                    "name": "a",
-                    "loc": null
-                  },
-                  "ty": {
-                    "type": "Type::Name",
-                    "constr_id": {
-                      "type": "ConstrId",
-                      "id": {
-                        "type": "LongIdent::Ident",
-                        "0": "Int"
-                      },
-                      "loc": null
-                    },
-                    "tys": [],
-                    "loc": null
-                  }
-                }
-              ],
-              "params_loc": null,
-              "body": {
+            "type": "Expr::Tuple",
+            "exprs": [
+              {
                 "type": "Expr::Hole",
                 "loc": null,
                 "kind": {
                   "type": "Hole::Synthesized"
                 }
-              },
-              "return_type": null,
-              "error_type": {
-                "type": "ErrorType::NoErrorType"
-              },
-              "kind": {
-                "type": "FnKind::Arrow"
-              },
-              "has_error": null,
-              "is_async": false,
-              "loc": null
-            },
+              }
+            ],
             "loc": null
           },
           "body": {

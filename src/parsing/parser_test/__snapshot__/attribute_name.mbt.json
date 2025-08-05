@@ -36,7 +36,11 @@
           "type": "Visibility::Default"
         },
         "attrs": [
-          null
+          {
+            "type": "Attribute",
+            "raw": "#test",
+            "loc": null
+          }
         ],
         "doc": ""
       },
@@ -86,7 +90,11 @@
           "type": "Visibility::Default"
         },
         "attrs": [
-          null
+          {
+            "type": "Attribute",
+            "raw": "#test.bench",
+            "loc": null
+          }
         ],
         "doc": ""
       },
@@ -136,7 +144,11 @@
           "type": "Visibility::Default"
         },
         "attrs": [
-          null
+          {
+            "type": "Attribute",
+            "raw": "#test.bench",
+            "loc": null
+          }
         ],
         "doc": ""
       },

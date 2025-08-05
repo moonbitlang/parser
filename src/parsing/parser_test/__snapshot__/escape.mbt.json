@@ -344,19 +344,8 @@
                       "loc": null
                     },
                     {
-                      "type": "InterpElem::Expr",
-                      "expr": {
-                        "type": "Expr::Ident",
-                        "id": {
-                          "type": "Var",
-                          "name": {
-                            "type": "LongIdent::Ident",
-                            "0": "a"
-                          },
-                          "loc": null
-                        },
-                        "loc": null
-                      },
+                      "type": "InterpElem::Source",
+                      "source": "a",
                       "loc": null
                     },
                     {

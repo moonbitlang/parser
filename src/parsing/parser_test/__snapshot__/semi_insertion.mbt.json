@@ -134,19 +134,8 @@
                     "loc": null
                   },
                   {
-                    "type": "InterpElem::Expr",
-                    "expr": {
-                      "type": "Expr::Ident",
-                      "id": {
-                        "type": "Var",
-                        "name": {
-                          "type": "LongIdent::Ident",
-                          "0": "x"
-                        },
-                        "loc": null
-                      },
-                      "loc": null
-                    },
+                    "type": "InterpElem::Source",
+                    "source": "x",
                     "loc": null
                   }
                 ],
@@ -513,32 +502,39 @@
                     "type": "Expr::Sequence",
                     "exprs": [
                       {
-                        "type": "Expr::Sequence",
-                        "exprs": [
-                          {
+                        "type": "Expr::Group",
+                        "expr": {
+                          "type": "Expr::Sequence",
+                          "exprs": [
+                            {
+                              "type": "Expr::Ident",
+                              "id": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "x"
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            }
+                          ],
+                          "last_expr": {
                             "type": "Expr::Ident",
                             "id": {
                               "type": "Var",
                               "name": {
                                 "type": "LongIdent::Ident",
-                                "0": "x"
+                                "0": "y"
                               },
                               "loc": null
                             },
                             "loc": null
-                          }
-                        ],
-                        "last_expr": {
-                          "type": "Expr::Ident",
-                          "id": {
-                            "type": "Var",
-                            "name": {
-                              "type": "LongIdent::Ident",
-                              "0": "y"
-                            },
-                            "loc": null
                           },
                           "loc": null
+                        },
+                        "group": {
+                          "type": "Group::Brace"
                         },
                         "loc": null
                       }
@@ -692,51 +688,58 @@
                             "rhs": {
                               "type": "Expr::Constraint",
                               "expr": {
-                                "type": "Expr::Function",
-                                "func": {
-                                  "type": "Func::Lambda",
-                                  "parameters": [
-                                    {
-                                      "type": "Parameter::Positional",
-                                      "binder": {
-                                        "type": "Binder",
-                                        "name": "x",
-                                        "loc": null
-                                      },
-                                      "ty": null
-                                    }
-                                  ],
-                                  "params_loc": null,
-                                  "body": {
-                                    "type": "Expr::Apply",
-                                    "func": {
-                                      "type": "Expr::Ident",
-                                      "id": {
-                                        "type": "Var",
-                                        "name": {
-                                          "type": "LongIdent::Ident",
-                                          "0": "veryLooooooooooooooongFunction"
+                                "type": "Expr::Group",
+                                "expr": {
+                                  "type": "Expr::Function",
+                                  "func": {
+                                    "type": "Func::Lambda",
+                                    "parameters": [
+                                      {
+                                        "type": "Parameter::Positional",
+                                        "binder": {
+                                          "type": "Binder",
+                                          "name": "x",
+                                          "loc": null
+                                        },
+                                        "ty": null
+                                      }
+                                    ],
+                                    "params_loc": null,
+                                    "body": {
+                                      "type": "Expr::Apply",
+                                      "func": {
+                                        "type": "Expr::Ident",
+                                        "id": {
+                                          "type": "Var",
+                                          "name": {
+                                            "type": "LongIdent::Ident",
+                                            "0": "veryLooooooooooooooongFunction"
+                                          },
+                                          "loc": null
                                         },
                                         "loc": null
                                       },
+                                      "args": [],
+                                      "attr": {
+                                        "type": "ApplyAttr::NoAttr"
+                                      },
                                       "loc": null
                                     },
-                                    "args": [],
-                                    "attr": {
-                                      "type": "ApplyAttr::NoAttr"
+                                    "return_type": null,
+                                    "error_type": {
+                                      "type": "ErrorType::NoErrorType"
                                     },
+                                    "kind": {
+                                      "type": "FnKind::Lambda"
+                                    },
+                                    "has_error": null,
+                                    "is_async": false,
                                     "loc": null
                                   },
-                                  "return_type": null,
-                                  "error_type": {
-                                    "type": "ErrorType::NoErrorType"
-                                  },
-                                  "kind": {
-                                    "type": "FnKind::Lambda"
-                                  },
-                                  "has_error": null,
-                                  "is_async": false,
                                   "loc": null
+                                },
+                                "group": {
+                                  "type": "Group::Paren"
                                 },
                                 "loc": null
                               },
@@ -880,42 +883,49 @@
                                   "loc": null
                                 },
                                 "rhs": {
-                                  "type": "Expr::If",
-                                  "cond": {
-                                    "type": "Expr::Ident",
-                                    "id": {
-                                      "type": "Var",
-                                      "name": {
-                                        "type": "LongIdent::Ident",
-                                        "0": "cond"
+                                  "type": "Expr::Group",
+                                  "expr": {
+                                    "type": "Expr::If",
+                                    "cond": {
+                                      "type": "Expr::Ident",
+                                      "id": {
+                                        "type": "Var",
+                                        "name": {
+                                          "type": "LongIdent::Ident",
+                                          "0": "cond"
+                                        },
+                                        "loc": null
+                                      },
+                                      "loc": null
+                                    },
+                                    "ifso": {
+                                      "type": "Expr::Ident",
+                                      "id": {
+                                        "type": "Var",
+                                        "name": {
+                                          "type": "LongIdent::Ident",
+                                          "0": "abc"
+                                        },
+                                        "loc": null
+                                      },
+                                      "loc": null
+                                    },
+                                    "ifnot": {
+                                      "type": "Expr::Ident",
+                                      "id": {
+                                        "type": "Var",
+                                        "name": {
+                                          "type": "LongIdent::Ident",
+                                          "0": "def"
+                                        },
+                                        "loc": null
                                       },
                                       "loc": null
                                     },
                                     "loc": null
                                   },
-                                  "ifso": {
-                                    "type": "Expr::Ident",
-                                    "id": {
-                                      "type": "Var",
-                                      "name": {
-                                        "type": "LongIdent::Ident",
-                                        "0": "abc"
-                                      },
-                                      "loc": null
-                                    },
-                                    "loc": null
-                                  },
-                                  "ifnot": {
-                                    "type": "Expr::Ident",
-                                    "id": {
-                                      "type": "Var",
-                                      "name": {
-                                        "type": "LongIdent::Ident",
-                                        "0": "def"
-                                      },
-                                      "loc": null
-                                    },
-                                    "loc": null
+                                  "group": {
+                                    "type": "Group::Paren"
                                   },
                                   "loc": null
                                 },
@@ -950,47 +960,54 @@
                                     "loc": null
                                   },
                                   "rhs": {
-                                    "type": "Expr::Match",
+                                    "type": "Expr::Group",
                                     "expr": {
-                                      "type": "Expr::Ident",
-                                      "id": {
-                                        "type": "Var",
-                                        "name": {
-                                          "type": "LongIdent::Ident",
-                                          "0": "cond"
+                                      "type": "Expr::Match",
+                                      "expr": {
+                                        "type": "Expr::Ident",
+                                        "id": {
+                                          "type": "Var",
+                                          "name": {
+                                            "type": "LongIdent::Ident",
+                                            "0": "cond"
+                                          },
+                                          "loc": null
                                         },
                                         "loc": null
                                       },
-                                      "loc": null
-                                    },
-                                    "cases": [
-                                      {
-                                        "type": "Case",
-                                        "pattern": {
-                                          "type": "Pattern::Var",
-                                          "0": {
-                                            "type": "Binder",
-                                            "name": "pat",
-                                            "loc": null
-                                          }
-                                        },
-                                        "guard": null,
-                                        "body": {
-                                          "type": "Expr::Ident",
-                                          "id": {
-                                            "type": "Var",
-                                            "name": {
-                                              "type": "LongIdent::Ident",
-                                              "0": "body"
+                                      "cases": [
+                                        {
+                                          "type": "Case",
+                                          "pattern": {
+                                            "type": "Pattern::Var",
+                                            "0": {
+                                              "type": "Binder",
+                                              "name": "pat",
+                                              "loc": null
+                                            }
+                                          },
+                                          "guard": null,
+                                          "body": {
+                                            "type": "Expr::Ident",
+                                            "id": {
+                                              "type": "Var",
+                                              "name": {
+                                                "type": "LongIdent::Ident",
+                                                "0": "body"
+                                              },
+                                              "loc": null
                                             },
                                             "loc": null
-                                          },
-                                          "loc": null
+                                          }
                                         }
-                                      }
-                                    ],
-                                    "match_loc": null,
-                                    "using": null,
+                                      ],
+                                      "match_loc": null,
+                                      "using": null,
+                                      "loc": null
+                                    },
+                                    "group": {
+                                      "type": "Group::Paren"
+                                    },
                                     "loc": null
                                   },
                                   "loc": null
@@ -1013,48 +1030,26 @@
                                     "type": "Expr::Sequence",
                                     "exprs": [
                                       {
-                                        "type": "Expr::Apply",
-                                        "func": {
-                                          "type": "Expr::Method",
-                                          "type_name": {
-                                            "type": "TypeName",
-                                            "name": {
-                                              "type": "LongIdent::Dot",
-                                              "pkg": "moonbitlang/core/builtin",
-                                              "id": "Neg"
-                                            },
-                                            "is_object": false,
-                                            "loc": null
-                                          },
-                                          "method_name": {
-                                            "type": "Label",
-                                            "name": "op_neg",
-                                            "loc": null
+                                        "type": "Expr::Unary",
+                                        "op": {
+                                          "type": "Var",
+                                          "name": {
+                                            "type": "LongIdent::Ident",
+                                            "0": "-"
                                           },
                                           "loc": null
                                         },
-                                        "args": [
-                                          {
-                                            "type": "Argument",
-                                            "value": {
-                                              "type": "Expr::Ident",
-                                              "id": {
-                                                "type": "Var",
-                                                "name": {
-                                                  "type": "LongIdent::Ident",
-                                                  "0": "negative"
-                                                },
-                                                "loc": null
-                                              },
-                                              "loc": null
+                                        "expr": {
+                                          "type": "Expr::Ident",
+                                          "id": {
+                                            "type": "Var",
+                                            "name": {
+                                              "type": "LongIdent::Ident",
+                                              "0": "negative"
                                             },
-                                            "kind": {
-                                              "type": "ArgumentKind::Positional"
-                                            }
-                                          }
-                                        ],
-                                        "attr": {
-                                          "type": "ApplyAttr::NoAttr"
+                                            "loc": null
+                                          },
+                                          "loc": null
                                         },
                                         "loc": null
                                       }
@@ -1174,48 +1169,26 @@
               }
             ],
             "last_expr": {
-              "type": "Expr::Apply",
-              "func": {
-                "type": "Expr::Method",
-                "type_name": {
-                  "type": "TypeName",
-                  "name": {
-                    "type": "LongIdent::Dot",
-                    "pkg": "moonbitlang/core/builtin",
-                    "id": "Neg"
-                  },
-                  "is_object": false,
-                  "loc": null
-                },
-                "method_name": {
-                  "type": "Label",
-                  "name": "op_neg",
-                  "loc": null
+              "type": "Expr::Unary",
+              "op": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "-"
                 },
                 "loc": null
               },
-              "args": [
-                {
-                  "type": "Argument",
-                  "value": {
-                    "type": "Expr::Ident",
-                    "id": {
-                      "type": "Var",
-                      "name": {
-                        "type": "LongIdent::Ident",
-                        "0": "expr3"
-                      },
-                      "loc": null
-                    },
-                    "loc": null
+              "expr": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "expr3"
                   },
-                  "kind": {
-                    "type": "ArgumentKind::Positional"
-                  }
-                }
-              ],
-              "attr": {
-                "type": "ApplyAttr::NoAttr"
+                  "loc": null
+                },
+                "loc": null
               },
               "loc": null
             },

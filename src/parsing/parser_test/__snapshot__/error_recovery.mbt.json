@@ -259,18 +259,25 @@
         "expr": {
           "type": "Expr::Raise",
           "err_value": {
-            "type": "Expr::Constr",
-            "constr": {
-              "type": "Constructor",
-              "name": {
-                "type": "ConstrName",
-                "name": "Failure",
+            "type": "Expr::Group",
+            "expr": {
+              "type": "Expr::Constr",
+              "constr": {
+                "type": "Constructor",
+                "name": {
+                  "type": "ConstrName",
+                  "name": "Failure",
+                  "loc": null
+                },
+                "extra_info": {
+                  "type": "ConstructorExtraInfo::NoExtraInfo"
+                },
                 "loc": null
               },
-              "extra_info": {
-                "type": "ConstructorExtraInfo::NoExtraInfo"
-              },
               "loc": null
+            },
+            "group": {
+              "type": "Group::Paren"
             },
             "loc": null
           },
