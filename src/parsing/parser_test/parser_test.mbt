@@ -38,10 +38,10 @@ test "parse allow_trailing_comma" (t : @test.T) {
   test_yacc_parser(t, "allow_trailing_comma")
 }
 
-// TODO: align CharLiteral in lexer with ideas
-// test "parse array_pat_trailing_comma" (t : @test.T) {
-//   test_yacc_parser(t, "array_pat_trailing_comma")
-// }
+///|
+test "parse array_pat_trailing_comma" (t : @test.T) {
+  test_yacc_parser(t, "array_pat_trailing_comma")
+}
 
 // ignore error recovery related testcase for moonyacc parser
 // test "parse array_rest_pat" (t : @test.T) {
@@ -438,10 +438,10 @@ test "parse local_types2" (t : @test.T) {
 //   test_yacc_parser(t, "main_fn_with_return_unit")
 // }
 
-// TODO: align CharLiteral in lexer with ideas
-// test "parse map_literal" (t : @test.T) {
-//   test_yacc_parser(t, "map_literal")
-// }
+///|
+test "parse map_literal" (t : @test.T) {
+  test_yacc_parser(t, "map_literal")
+}
 
 // ignore error recovery related testcase for moonyacc parser
 // test "parse map_pattern" (t : @test.T) {
@@ -663,10 +663,10 @@ test "parse pub_test5" (t : @test.T) {
 //   test_yacc_parser(t, "question_optional_arg")
 // }
 
-// TODO: align CharLiteral in lexer with ideas
-// test "parse range_pattern" (t : @test.T) {
-//   test_yacc_parser(t, "range_pattern")
-// }
+///|
+test "parse range_pattern" (t : @test.T) {
+  test_yacc_parser(t, "range_pattern")
+}
 
 ///|
 test "parse recand" (t : @test.T) {

@@ -2836,8 +2836,8 @@ fn tokens(
     193 => {
       _match_pattern = 5
       _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_end
+      _capture_0_start = _match_start + 1
+      _capture_0_end = _match_end + -1
       break
     }
     194 =>
@@ -3055,8 +3055,8 @@ fn tokens(
     220 => {
       _match_pattern = 6
       _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_start + 4
+      _capture_0_start = _match_start + 1
+      _capture_0_end = _match_start + 3
       break
     }
     221 =>
@@ -3240,8 +3240,10 @@ fn tokens(
       _match_end = lexbuf.curr_pos()
       _capture_0_start = _match_start + 4
       _capture_0_end = _match_end + -2
-      _capture_1_start = _match_start
-      _capture_1_end = _match_end
+      _capture_1_start = _match_start + 1
+      _capture_1_end = _match_end + -1
+      _capture_2_start = _match_start
+      _capture_2_end = _match_end
       break
     }
     243 =>
@@ -3259,8 +3261,8 @@ fn tokens(
     245 => {
       _match_pattern = 7
       _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_start + 6
+      _capture_0_start = _match_start + 1
+      _capture_0_end = _match_start + 5
       break
     }
     246 =>
@@ -3283,8 +3285,8 @@ fn tokens(
     249 => {
       _match_pattern = 8
       _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_start + 7
+      _capture_0_start = _match_start + 1
+      _capture_0_end = _match_start + 6
       break
     }
     250 => {
@@ -3297,8 +3299,8 @@ fn tokens(
     251 => {
       _match_pattern = 9
       _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_start + 8
+      _capture_0_start = _match_start + 1
+      _capture_0_end = _match_start + 7
       break
     }
     _ => panic()
@@ -3357,48 +3359,53 @@ fn tokens(
     }
     5 => {
       ()
-      let repr = lexbuf.get_string(_capture_0_start, _capture_0_end)
-      env.add_token_with_loc(CHAR(repr), start=_match_start, end=_match_end)
+      let lit = lexbuf.get_char(_capture_0_start, _capture_0_end)
+      env.add_token_with_loc(
+        CHAR(lit.to_string()),
+        start=_match_start,
+        end=_match_end,
+      )
       tokens(lexbuf, env~, preserve_comment~)
     }
     6 => {
       ()
-      let repr = lexbuf.get_string(_capture_0_start, _capture_0_end)
-      env.add_token_with_loc(CHAR(repr), start=_match_start, end=_match_end)
+      let lit = lexbuf.get_string(_capture_0_start, _capture_0_end)
+      env.add_token_with_loc(CHAR(lit), start=_match_start, end=_match_end)
       tokens(lexbuf, env~, preserve_comment~)
     }
     7 => {
       ()
-      let repr = lexbuf.get_string(_capture_0_start, _capture_0_end)
-      env.add_token_with_loc(CHAR(repr), start=_match_start, end=_match_end)
+      let lit = lexbuf.get_string(_capture_0_start, _capture_0_end)
+      env.add_token_with_loc(CHAR(lit), start=_match_start, end=_match_end)
       tokens(lexbuf, env~, preserve_comment~)
     }
     8 => {
       ()
-      let repr = lexbuf.get_string(_capture_0_start, _capture_0_end)
-      env.add_token_with_loc(CHAR(repr), start=_match_start, end=_match_end)
+      let lit = lexbuf.get_string(_capture_0_start, _capture_0_end)
+      env.add_token_with_loc(CHAR(lit), start=_match_start, end=_match_end)
       tokens(lexbuf, env~, preserve_comment~)
     }
     9 => {
       ()
-      let repr = lexbuf.get_string(_capture_0_start, _capture_0_end)
-      env.add_token_with_loc(CHAR(repr), start=_match_start, end=_match_end)
+      let lit = lexbuf.get_string(_capture_0_start, _capture_0_end)
+      env.add_token_with_loc(CHAR(lit), start=_match_start, end=_match_end)
       tokens(lexbuf, env~, preserve_comment~)
     }
     10 => {
       ()
       let hex = lexbuf.get_string(_capture_0_start, _capture_0_end)
-      let repr = lexbuf.get_string(_capture_1_start, _capture_1_end)
+      let lit = lexbuf.get_string(_capture_1_start, _capture_1_end)
+      let repr = lexbuf.get_string(_capture_2_start, _capture_2_end)
       let _ = repr
       if char_for_hex_escape(hex) is None {
         // Overflow
         env.add_lexing_error(
-          start=_capture_1_start,
-          end=_capture_1_end,
+          start=_capture_2_start,
+          end=_capture_2_end,
           InvalidEscapeSequence(repr),
         )
       }
-      env.add_token_with_loc(CHAR(repr), start=_match_start, end=_match_end)
+      env.add_token_with_loc(CHAR(lit), start=_match_start, end=_match_end)
       tokens(lexbuf, env~, preserve_comment~)
     }
     11 => {

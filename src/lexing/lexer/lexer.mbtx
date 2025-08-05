@@ -284,32 +284,32 @@ rule tokens(lexbuf : Lexbuf, env~ : LexEnv, preserve_comment~ : (Comment, Int, I
       }
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "'" [^ '\\' '\'' '\n' '\r'] "'" as repr => {
-      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
+    "'" ([^ '\\' '\'' '\n' '\r'] as lit) "'" => {
+      env.add_token_with_loc(CHAR(lit.to_string()), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "'\\" ['\\' '\'' '"' 'n' 't' 'b' 'r' ' '] "'" as repr => {
-      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
+    "'" ("\\" ['\\' '\'' '"' 'n' 't' 'b' 'r' ' '] as lit) "'" => {
+      env.add_token_with_loc(CHAR(lit), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "'\\x" hex_digit hex_digit "'" as repr => {
-      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
+    "'" ("\\x" hex_digit hex_digit as lit) "'" => {
+      env.add_token_with_loc(CHAR(lit), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "'\\o" qua_digit oct_digit oct_digit "'" as repr => {
-      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
+    "'" ("\\o" qua_digit oct_digit oct_digit as lit) "'" => {
+      env.add_token_with_loc(CHAR(lit), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "'\\u" hex_digit hex_digit hex_digit hex_digit "'" as repr => {
-      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
+    "'" ("\\u" hex_digit hex_digit hex_digit hex_digit as lit) "'" => {
+      env.add_token_with_loc(CHAR(lit), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
-    "'\\u{" (hex_digit* as hex) "}'" as repr => {
+    "'" ("\\u{" (hex_digit* as hex) "}" as lit) "'" as repr => {
       if char_for_hex_escape(hex) is None {
         // Overflow
         env.add_lexing_error(start=$startpos(repr), end = $endpos(repr), InvalidEscapeSequence(repr))
       }
-      env.add_token_with_loc(CHAR(repr), start=$startpos, end=$endpos)
+      env.add_token_with_loc(CHAR(lit), start=$startpos, end=$endpos)
       tokens(lexbuf, env~, preserve_comment~)
     }
     '"' => {
