@@ -917,3 +917,8 @@ test "parse utf16_escape" (t : @test.T) {
 // test "parse while_else" (t : @test.T) {
 //   test_yacc_parser(t, "while_else")
 // }
+
+///|
+test "parse cfg_test_main_init" (t : @test.T) {
+  test_yacc_parser(t, "cfg_test_main_init")
+}
