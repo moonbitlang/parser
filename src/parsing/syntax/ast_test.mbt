@@ -2101,7 +2101,7 @@ test "type_decl to_json" {
     "tycon_loc": null,
     "params": [{ "type": "TypeDeclBinder", "name": "T", "loc": null }],
     "components": { "type": "TypeDesc::Extern" },
-    "attrs": [null],
+    "attrs": [{ "type": "Attribute", "raw": "test_attr", "loc": null }],
     "doc": "Test documentation",
     "type_vis": { "type": "Visibility::Default" },
     "deriving": [],
@@ -2246,7 +2246,7 @@ test "fun_decl to_json" {
     },
     "error_type": { "type": "ErrorType::NoErrorType" },
     "vis": { "type": "Visibility::Priv", "loc": null },
-    "attrs": [null],
+    "attrs": [{ "type": "Attribute", "raw": "test_attr", "loc": null }],
     "doc": "Test documentation",
   })
 }
@@ -2373,7 +2373,7 @@ test "trait_decl to_json" {
     ],
     "vis": { "type": "Visibility::Pub", "attr": null, "loc": null },
     "loc": null,
-    "attrs": [null],
+    "attrs": [{ "type": "Attribute", "raw": "test_attr", "loc": null }],
     "doc": "Test documentation",
   })
 }

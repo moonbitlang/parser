@@ -25,6 +25,6 @@ pub(all) struct Attribute {
 }
 
 ///|
-pub impl ToJson for Attribute with to_json(_) {
-  Json::null()
+pub impl ToJson for Attribute with to_json(attr) {
+  { "type": "Attribute", "raw": attr.raw, "loc": attr.loc }
 }
