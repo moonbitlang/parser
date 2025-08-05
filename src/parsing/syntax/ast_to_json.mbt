@@ -524,7 +524,12 @@ pub impl ToJson for InterpElem with to_json(self) {
         "expr": expr.to_json(),
         "loc": loc.to_json(),
       }
-    Source(source) => { "type": "InterpSource", "source": source.to_json() }
+    Source(source) =>
+      {
+        "type": "InterpElem::Source",
+        "source": source.source,
+        "loc": source.loc,
+      }
   }
 }
 

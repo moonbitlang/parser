@@ -213,10 +213,10 @@ test "parse error_polymorphism" (t : @test.T) {
 //   test_yacc_parser(t, "error_recovery")
 // }
 
-// TODO: interp parser && CharLiteral
-// test "parse escape" (t : @test.T) {
-//   test_yacc_parser(t, "escape")
-// }
+///|
+test "parse escape" (t : @test.T) {
+  test_yacc_parser(t, "escape")
+}
 
 ///|
 test "parse explicit_method" (t : @test.T) {
