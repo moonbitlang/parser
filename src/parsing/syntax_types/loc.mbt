@@ -28,7 +28,7 @@ pub fn Location::trim_first_char(self : Location) -> Location {
     start: Position::{
       fname: self.start.fname,
       lnum: self.start.lnum,
-      bol: self.start.bol + 1,
+      bol: self.start.bol,
       cnum: self.start.cnum + 1,
     },
     end: self.end,
@@ -42,7 +42,7 @@ pub fn Location::trim_last_char(self : Location) -> Location {
     end: Position::{
       fname: self.end.fname,
       lnum: self.end.lnum,
-      bol: self.end.bol - 1,
+      bol: self.end.bol,
       cnum: self.end.cnum - 1,
     },
   }
