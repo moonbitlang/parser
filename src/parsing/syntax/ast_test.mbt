@@ -526,6 +526,7 @@ test "exception_decl to_json" {
         "name": { "type": "ConstrName", "name": "TestConstr", "loc": null },
         "args": null,
         "tag": null,
+        "attrs": [],
         "loc": null,
         "doc": "Test documentation",
       },
@@ -1744,6 +1745,7 @@ test "field_decl to_json" {
     "mut": false,
     "vis": { "type": "Visibility::Default" },
     "loc": null,
+    "attrs": [],
     "doc": "Test documentation",
   })
 }
@@ -1856,6 +1858,7 @@ test "constr_decl to_json" {
       },
     ],
     "tag": ["tag_value", null],
+    "attrs": [],
     "loc": null,
     "doc": "Test documentation",
   })
@@ -1864,6 +1867,7 @@ test "constr_decl to_json" {
     "name": { "type": "ConstrName", "name": "TestConstructor", "loc": null },
     "args": null,
     "tag": null,
+    "attrs": [],
     "loc": null,
     "doc": "Test documentation",
   })
@@ -2315,6 +2319,7 @@ test "trait_method_decl to_json" {
     },
     "error_type": { "type": "ErrorType::DefaultErrorType", "loc": null },
     "has_default": null,
+    "attrs": [],
     "loc": null,
   })
 }
@@ -2368,6 +2373,7 @@ test "trait_decl to_json" {
         "return_type": null,
         "error_type": { "type": "ErrorType::NoErrorType" },
         "has_default": null,
+        "attrs": [],
         "loc": null,
       },
     ],

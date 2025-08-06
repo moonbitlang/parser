@@ -186,6 +186,7 @@ pub impl ToJson for ConstrDecl with to_json(self) {
     "name": name,
     "args": option_to_json(args.map(list_to_json)),
     "tag": option_to_json(tag.map(tuple_to_json)),
+    "attrs": [], // FIXME: add attrs to ConstrDecl
     "loc": loc,
     "doc": doc,
   }
@@ -217,6 +218,7 @@ pub impl ToJson for FieldDecl with to_json(self) {
     "mut": mut_,
     "vis": vis,
     "loc": loc,
+    "attrs": [], // FIXME: add attrs to FieldDecl
     "doc": doc,
   }
 }
@@ -812,6 +814,7 @@ pub impl ToJson for TraitMethodDecl with to_json(self) {
     "return_type": option_to_json(return_type),
     "error_type": error_type,
     "has_default": option_to_json(has_default),
+    "attrs": [], // FIXME: add attrs to TraitMethodDecl
     "loc": loc,
   }
 }
