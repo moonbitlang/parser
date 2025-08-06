@@ -12,6 +12,36 @@ pub impl Eq for Position with op_equal(self, other) {
 }
 
 ///|
+pub impl Compare for Position with compare(self, other) {
+  match self.fname.compare(other.fname) {
+    0 =>
+      match self.lnum.compare(other.lnum) {
+        0 => self.column().compare(other.column())
+        r => r
+      }
+    r => r
+  }
+}
+
+///|
+test "compre position" {
+  let a = { fname: "", lnum: 10, bol: 0, cnum: 0 }
+  let b = { fname: "", lnum: 10, bol: 0, cnum: 0 }
+  inspect(a.compare(b), content="0")
+  let a = { fname: "", lnum: 10, bol: 0, cnum: 0 }
+  let b = { fname: "", lnum: 1, bol: 0, cnum: 0 }
+  inspect(a.compare(b), content="1")
+  inspect(b.compare(a), content="-1")
+  let a = { fname: "", lnum: 10, bol: 2, cnum: 5 }
+  let b = { fname: "", lnum: 10, bol: 2, cnum: 5 }
+  inspect(a.compare(b), content="0")
+  let a = { fname: "", lnum: 10, bol: 2, cnum: 5 }
+  let b = { fname: "", lnum: 10, bol: 2, cnum: 10 }
+  inspect(a.compare(b), content="-1")
+  inspect(b.compare(a), content="1")
+}
+
+///|
 pub fn column(self : Position) -> Int {
   self.cnum - self.bol + 1
 }
