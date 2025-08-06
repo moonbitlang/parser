@@ -13,7 +13,7 @@
       "alias": "ast_types"
     },
     "moonbitlang/parser/parsing/mbti_ast",
-    "moonbitlang/parser/parsing/syntax",
+    "moonbitlang/parser/parsing/syntax"
   ],
   "warn-list": "-6",
   "test-import": [

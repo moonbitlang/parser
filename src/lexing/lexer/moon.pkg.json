@@ -1,11 +1,4 @@
 {
-  "pre-build": [
-    {
-      "command": "node $mod_dir/.mooncakes/moonbitlang/ulex/boot/snapshot/moonlex.js --code-unit 1 --default-encoding utf8 $input -o $output && moonfmt -w $output && moonfmt -w $output",
-      "input": "lexer.mbtx",
-      "output": "lexer.mbt"
-    }
-  ],
   "test-import": [
     "moonbitlang/x/fs"
   ],

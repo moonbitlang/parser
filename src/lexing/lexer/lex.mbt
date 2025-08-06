@@ -13,7 +13,6 @@ pub fn tokens_from_bytes(
   comment~ : Bool,
   bytes : Bytes,
 ) -> LexResult {
-  let lexbuf = Lexbuf::from_bytes(bytes)
   let arr = Array::new(capacity=100)
   let (start_lnum, start_bol, start_cnum) = (
     start_pos.lnum,
@@ -33,7 +32,7 @@ pub fn tokens_from_bytes(
     asi_context: ASIContext::new(),
     is_interpolation,
   }
-  tokens(lexbuf, env~, preserve_comment=env.preserve_comment())
+  lex_tokens(bytes, base=bytes, env~, preserve_comment=env.preserve_comment())
   let docstrings = env.docstrings
   if not(docstrings.is_empty()) {
     let last_idx = docstrings.length() - 1
