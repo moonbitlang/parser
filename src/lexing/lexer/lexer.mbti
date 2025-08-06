@@ -8,7 +8,7 @@ import(
 )
 
 // Values
-fn tokens_from_bytes(name~ : String = .., start_pos~ : @syntax_types.Position = .., is_interpolation~ : Bool = .., comment~ : Bool, Bytes) -> LexResult
+fn tokens_from_bytes(name? : String, start_pos? : @syntax_types.Position, is_interpolation? : Bool, comment~ : Bool, Bytes) -> LexResult
 
 // Errors
 
@@ -21,7 +21,7 @@ pub struct LexResult {
 
 type Lexbuf
 fn Lexbuf::curr_pos(Self) -> Int
-fn Lexbuf::from_bytes(Bytes, start~ : Int = .., end? : Int) -> Self
+fn Lexbuf::from_bytes(Bytes, start? : Int, end? : Int) -> Self
 fn Lexbuf::reset(Self, pos~ : Int) -> Unit
 
 pub enum LexicalError {

@@ -978,7 +978,7 @@ impl ImplMapVisitor with visit_static_assert(env, asserts~, body~) {
 }
 
 ///|
-pub(all) type MapVisitorBase[T] T
+pub(all) struct MapVisitorBase[T](T)
 
 ///|
 pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_impl(

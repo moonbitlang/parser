@@ -1,10 +1,11 @@
 ///|
 
 ///|
+#callsite(autofill(loc))
 fn test_yacc_parser(
   t : @test.T,
   label : String,
-  loc~ : SourceLoc = _,
+  loc~ : SourceLoc,
 ) -> Unit raise Error {
   let filename = "src/parsing/parser_test/fixtures/\{label}.mbt_"
   let bytes = @fs.read_file_to_bytes(filename) catch {

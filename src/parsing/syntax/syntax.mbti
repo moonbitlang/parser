@@ -459,7 +459,7 @@ pub(all) struct MapPatElem {
 }
 impl ToJson for MapPatElem
 
-pub(all) type MapVisitorBase[T] T
+pub(all) struct MapVisitorBase[T](T)
 fn[T] MapVisitorBase::inner(Self[T]) -> T
 impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T]
 

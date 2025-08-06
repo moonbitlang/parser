@@ -20,7 +20,7 @@ pub(all) struct TypeParamWithConstraints {
 pub(all) enum TypeParamNoConstraints {
   Name(Name)
   Underscore(Location)
-} derive(ToJson)
+} derive(ToJson(style="legacy"))
 
 ///|
 pub(all) enum Parameter {
@@ -29,13 +29,13 @@ pub(all) enum Parameter {
   Autofill(Label, Type)
   OptionalDefault(Label, Type)
   OptionalOption(Label, Type)
-} derive(ToJson)
+} derive(ToJson(style="legacy"))
 
 ///|
 pub(all) enum TraitMethodParameter {
   Positional(Type)
   Labelled(Label, Type)
-} derive(ToJson)
+} derive(ToJson(style="legacy"))
 
 ///|
 pub(all) struct FuncSig {
@@ -65,7 +65,7 @@ pub(all) enum AliasSig {
   )
   TraitAlias(name~ : Name, trait_name~ : QualifiedName, vis~ : Visibility)
   FnAlias(name~ : Name, type_name~ : QualifiedName, loc~ : Location)
-} derive(ToJson)
+} derive(ToJson(style="legacy"))
 
 ///|
 pub(all) struct TraitMethodSig {
@@ -91,7 +91,7 @@ pub(all) enum ImplSig {
     trait_name~ : QualifiedName
   )
   DefaultImpl(trait_name~ : Name, method_name~ : Name)
-} derive(ToJson)
+} derive(ToJson(style="legacy"))
 
 ///|
 pub(all) struct ConstSig {
@@ -121,7 +121,7 @@ pub(all) enum Sig {
   Impl(ImplSig)
   Const(ConstSig)
   Value(ValueSig)
-} derive(ToJson)
+} derive(ToJson(style="legacy"))
 
 ///|
 pub(all) struct Mbti {

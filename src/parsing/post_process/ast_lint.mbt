@@ -1,5 +1,5 @@
 ///|
-priv type AstLintEnv Unit
+priv struct AstLintEnv(Unit)
 
 ///|
 impl ImplMapVisitor for AstLintEnv with visit_array_get(
