@@ -88,6 +88,7 @@ pub(all) struct Position {
   cnum : Int
 }
 fn Position::column(Self) -> Int
+impl Compare for Position
 impl Eq for Position
 impl Show for Position
 impl ToJson for Position
