@@ -193,10 +193,10 @@ test "num_literal" (t : @test.T) {
   t.run("num_literal")
 }
 
-// FIXME: bug in lexer
-// test "bad_interp" (t : @test.T) {
-//   t.run("bad_interp")
-// }
+///|
+test "bad_interp" (t : @test.T) {
+  t.run("bad_interp")
+}
 
 ///|
 test "guard_if" (t : @test.T) {
@@ -293,10 +293,10 @@ test "newtype" (t : @test.T) {
   t.run("newtype")
 }
 
-// FIXME: fix bug in lexer
-// test "array_rest_pat" (t : @test.T) {
-//   t.run("array_rest_pat")
-// }
+///|
+test "array_rest_pat" (t : @test.T) {
+  t.run("array_rest_pat")
+}
 
 ///|
 test "record_punning" (t : @test.T) {
@@ -326,6 +326,11 @@ test "error_type" (t : @test.T) {
 ///|
 test "bad_recovery" (t : @test.T) {
   t.run("bad_recovery")
+}
+
+///|
+test "cfg_test_main_init" (t : @test.T) {
+  t.run("cfg_test_main_init")
 }
 
 ///|
@@ -678,10 +683,10 @@ test "try_question" (t : @test.T) {
   t.run("try_question")
 }
 
-// FIXME: fix char literal
-// test "array_pat_trailing_comma" (t : @test.T) {
-//   t.run("array_pat_trailing_comma")
-// }
+///|
+test "array_pat_trailing_comma" (t : @test.T) {
+  t.run("array_pat_trailing_comma")
+}
 
 ///|
 test "relaxed_for" (t : @test.T) {
@@ -926,6 +931,11 @@ test "nested_exp" (t : @test.T) {
 ///|
 test "error_polymorphism" (t : @test.T) {
   t.run("error_polymorphism")
+}
+
+///|
+test "local_attrs" (t : @test.T) {
+  t.run("local_attrs")
 }
 
 ///|

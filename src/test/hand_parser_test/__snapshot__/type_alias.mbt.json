@@ -1,0 +1,703 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopBatchTraitAlias",
+      "pkg": null,
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "I1",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "Show",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": false,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopBatchTraitAlias",
+      "pkg": null,
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "I2",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "Eq",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Pub",
+        "attr": null,
+        "loc": null
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": false,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopBatchTraitAlias",
+      "pkg": null,
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "I3",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "I1",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": false,
+      "doc": ""
+    },
+    {
+      "type": "Impl::BatchTypeAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "T",
+            "loc": null
+          },
+          "target": null
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": false,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopExpr",
+      "expr": {
+        "type": "Expr::Hole",
+        "loc": null,
+        "kind": {
+          "type": "Hole::Synthesized"
+        }
+      },
+      "is_main": false,
+      "local_types": [],
+      "loc": null
+    },
+    {
+      "type": "Impl::BatchTypeAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "T1",
+            "loc": null
+          },
+          "target": null
+        },
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "T2",
+            "loc": null
+          },
+          "target": null
+        },
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "T3",
+            "loc": null
+          },
+          "target": null
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Pub",
+        "attr": null,
+        "loc": null
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": true,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopBatchTraitAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "T",
+            "loc": null
+          },
+          "target": null
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": false,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopBatchTraitAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "A",
+            "loc": null
+          },
+          "target": null
+        },
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "B",
+            "loc": null
+          },
+          "target": null
+        },
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "C",
+            "loc": null
+          },
+          "target": null
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Pub",
+        "attr": null,
+        "loc": null
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": true,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopBatchTraitAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "T",
+            "loc": null
+          },
+          "target": null
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": false,
+      "doc": ""
+    },
+    {
+      "type": "Impl::BatchTypeAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "A",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "T",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": false,
+      "doc": ""
+    },
+    {
+      "type": "Impl::BatchTypeAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "T1",
+            "loc": null
+          },
+          "target": null
+        },
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "A",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "T2",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": true,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopBatchTraitAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "A",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "T",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": false,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopBatchTraitAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "T1",
+            "loc": null
+          },
+          "target": null
+        },
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "A",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "T2",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": true,
+      "doc": ""
+    },
+    {
+      "type": "Impl::BatchTypeAlias",
+      "pkg": null,
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "I",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "Int",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": false,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopBatchTraitAlias",
+      "pkg": null,
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "E",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "Eq",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": false,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "AAI",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Alias",
+          "0": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Array"
+              },
+              "loc": null
+            },
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Array"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Int"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "AAX",
+        "tycon_loc": null,
+        "params": [
+          {
+            "type": "TypeDeclBinder",
+            "name": "X",
+            "loc": null
+          }
+        ],
+        "components": {
+          "type": "TypeDesc::Alias",
+          "0": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Array"
+              },
+              "loc": null
+            },
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Array"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "X"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "MyTuple",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Alias",
+          "0": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "MyFunction",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Alias",
+          "0": {
+            "type": "Type::Arrow",
+            "args": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "res": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "err": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "is_async": false,
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    }
+  ]
+}

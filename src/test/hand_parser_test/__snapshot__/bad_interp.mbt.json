@@ -1,0 +1,75 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Let",
+        "pattern": {
+          "type": "Pattern::Var",
+          "0": {
+            "type": "Binder",
+            "name": "a",
+            "loc": null
+          }
+        },
+        "expr": {
+          "type": "Expr::MultilineString",
+          "elems": [
+            {
+              "type": "MultilineString::Interp",
+              "0": [
+                {
+                  "type": "InterpElem::Source",
+                  "source": "guard true is a a a a a a",
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "loc": null
+        },
+        "body": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "a",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::MultilineString",
+            "elems": [
+              {
+                "type": "MultilineString::Interp",
+                "0": [
+                  {
+                    "type": "InterpElem::Source",
+                    "source": "(a => a => a => a => a => )(5)",
+                    "loc": null
+                  }
+                ]
+              }
+            ],
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Unit",
+            "loc": null,
+            "faked": true
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": null,
+      "params": null,
+      "local_types": [],
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    }
+  ]
+}
