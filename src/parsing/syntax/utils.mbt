@@ -519,6 +519,24 @@ pub fn loc_of_expression(expr : Expr) -> Location {
 }
 
 ///|
+pub fn Impl::loc(self : Self) -> Location {
+  match self {
+    TopTypeDef({ loc, .. })
+    | TopFuncDef(loc~, ..)
+    | TopFuncAlias(loc~, ..)
+    | TopLetDef(loc~, ..)
+    | TopExpr(loc~, ..)
+    | TopImplRelation(loc~, ..)
+    | TopTest(loc~, ..)
+    | TopTrait({ loc, .. })
+    | TopBatchTypeAlias(loc~, ..)
+    | TopBatchTraitAlias(loc~, ..)
+    | TopView(loc~, ..)
+    | TopImpl(loc~, ..) => loc
+  }
+}
+
+///|
 fn shift_col(pos : Position, offset : Int) -> Position {
   Position::{
     lnum: pos.lnum,
