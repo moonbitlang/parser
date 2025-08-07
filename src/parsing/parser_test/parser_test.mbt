@@ -64,7 +64,7 @@ test "parse array2" (t : @test.T) {
   test_yacc_parser(t, "array2")
 }
 
-// TODO: fix parse arrow_fn_error
+// ignore error recovery related testcase for moonyacc parser
 // test "parse arrow_fn_error" (t : @test.T) {
 //   test_yacc_parser(t, "arrow_fn_error")
 // }
@@ -84,7 +84,7 @@ test "parse async_fn" (t : @test.T) {
   test_yacc_parser(t, "async_fn")
 }
 
-// TODO: fix parse async_lambda
+// ignore error recovery related testcase for moonyacc parser
 // test "parse async_lambda" (t : @test.T) {
 //   test_yacc_parser(t, "async_lambda")
 // }
@@ -99,7 +99,7 @@ test "parse attribute_name" (t : @test.T) {
   test_yacc_parser(t, "attribute_name")
 }
 
-// TODO: fix parse attribute
+// ignore testcase that contain oldsyntax
 // test "parse attribute" (t : @test.T) {
 //   test_yacc_parser(t, "attribute")
 // }
@@ -119,7 +119,7 @@ test "parse byte_literal_in_parens" (t : @test.T) {
   test_yacc_parser(t, "byte_literal_in_parens")
 }
 
-// TODO: fix parse callback_test
+// ignore error recovery related testcase for moonyacc parser
 // test "parse callback_test" (t : @test.T) {
 //   test_yacc_parser(t, "callback_test")
 // }
@@ -154,7 +154,7 @@ test "parse constr_unit" (t : @test.T) {
   test_yacc_parser(t, "constr_unit")
 }
 
-// TODO: fix parse
+// ignore error recovery related testcase for moonyacc parser
 // test "parse constrained_type_param" (t : @test.T) {
 //   test_yacc_parser(t, "constrained_type_param")
 // }
@@ -179,7 +179,7 @@ test "parse defer" (t : @test.T) {
 //   test_yacc_parser(t, "derive_arguments")
 // }
 
-// TODO: fix parse derive
+// ignore error recovery related testcase for moonyacc parser
 // test "parse derive" (t : @test.T) {
 //   test_yacc_parser(t, "derive")
 // }
@@ -209,7 +209,7 @@ test "parse error_polymorphism" (t : @test.T) {
   test_yacc_parser(t, "error_polymorphism")
 }
 
-// TODO: fix parse error_recovery
+// ignore error recovery related testcase for moonyacc parser
 // test "parse error_recovery" (t : @test.T) {
 //   test_yacc_parser(t, "error_recovery")
 // }
@@ -264,7 +264,7 @@ test "parse fnname_bang" (t : @test.T) {
   test_yacc_parser(t, "fnname_bang")
 }
 
-// TODO: fix parse for_else
+// ignore error recovery related testcase for moonyacc parser
 // test "parse for_else" (t : @test.T) {
 //   test_yacc_parser(t, "for_else")
 // }
@@ -314,12 +314,12 @@ test "parse get_slice" (t : @test.T) {
 //   test_yacc_parser(t, "gitlab_issue_1612")
 // }
 
-// TODO: fix parse guard_error
+// ignore error recovery related testcase for moonyacc parser
 // test "parse guard_error" (t : @test.T) {
 //   test_yacc_parser(t, "guard_error")
 // }
 
-// TODO: fix parse guard_if
+// ignore error recovery related testcase for moonyacc parser
 // test "parse guard_if" (t : @test.T) {
 //   test_yacc_parser(t, "guard_if")
 // }
@@ -384,7 +384,7 @@ test "parse iter_range" (t : @test.T) {
   test_yacc_parser(t, "iter_range")
 }
 
-// TODO: fix parse labelled_arg
+// ignore error recovery related testcase for moonyacc parser
 // test "parse labelled_arg" (t : @test.T) {
 //   test_yacc_parser(t, "labelled_arg")
 // }
@@ -454,7 +454,7 @@ test "parse match_arm" (t : @test.T) {
   test_yacc_parser(t, "match_arm")
 }
 
-// 
+// ignore error recovery related testcase for moonyacc parser
 // test "parse match_match" (t : @test.T) {
 //   test_yacc_parser(t, "match_match")
 // }
@@ -729,10 +729,10 @@ test "parse string_pattern" (t : @test.T) {
   test_yacc_parser(t, "string_pattern")
 }
 
-// TODO: fix parse struct_spread
-// test "parse struct_spread" (t : @test.T) {
-//   test_yacc_parser(t, "struct_spread")
-// }
+///|
+test "parse struct_spread" (t : @test.T) {
+  test_yacc_parser(t, "struct_spread")
+}
 
 // TODO: check this
 // test "parse super_trait" (t : @test.T) {

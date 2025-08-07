@@ -172,8 +172,8 @@ list_commas_no_trailing[T](X : T) -> @list.T[T]
   ;
 
 non_empty_list_commas_with_trailing_info[T](X : T) -> (@list.T[T], Bool)
-  : non_empty_list_commas_no_trailing(X) option(",") { 
-    ($1, $2 is Some(_)) 
+  : non_empty_list_commas_rev(X) option(",") { 
+    ($1.rev(), $2 is Some(_)) 
   }
   ;
 
