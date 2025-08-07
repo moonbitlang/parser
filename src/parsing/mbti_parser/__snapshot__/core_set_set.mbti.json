@@ -1571,7 +1571,7 @@
           },
           "params": [
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "capacity",

@@ -1673,7 +1673,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "relative_tolerance",
@@ -1694,7 +1694,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "absolute_tolerance",

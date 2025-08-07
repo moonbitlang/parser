@@ -606,6 +606,60 @@
             "loc": null
           },
           "name": {
+            "name": "is_bmp",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Char"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": null
+          },
+          "name": {
             "name": "is_control",
             "loc": null
           },
@@ -975,6 +1029,60 @@
                 "id": {
                   "type": "LongIdent::Ident",
                   "0": "Char"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Char",
+            "loc": null
+          },
+          "name": {
+            "name": "utf16_len",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Char"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
                 },
                 "loc": null
               },

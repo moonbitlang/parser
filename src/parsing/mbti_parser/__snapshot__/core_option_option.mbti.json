@@ -697,6 +697,152 @@
       {
         "$tag": "Func",
         "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Option",
+            "loc": null
+          },
+          "name": {
+            "name": "is_none",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Option",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "T"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null,
+                "question_loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "type_name": {
+            "name": "Option",
+            "loc": null
+          },
+          "name": {
+            "name": "is_some",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Option",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "T"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null,
+                "question_loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
           "attr": [],
           "type_name": {
             "name": "Option",

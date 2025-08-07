@@ -791,7 +791,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "content",
@@ -1602,44 +1602,254 @@
         "$tag": "Type",
         "0": {
           "name": {
+            "name": "BenchError",
+            "loc": null
+          },
+          "type_params": [],
+          "components": {
+            "type": "TypeDesc::Error",
+            "0": {
+              "type": "ExceptionDecl::SinglePayload",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": "all",
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "Failure",
+            "loc": null
+          },
+          "type_params": [],
+          "components": {
+            "type": "TypeDesc::Error",
+            "0": {
+              "type": "ExceptionDecl::SinglePayload",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": "all",
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Failure"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Show"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Failure"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "ToJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "InspectError",
+            "loc": null
+          },
+          "type_params": [],
+          "components": {
+            "type": "TypeDesc::Error",
+            "0": {
+              "type": "ExceptionDecl::SinglePayload",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": "all",
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "SnapshotError",
+            "loc": null
+          },
+          "type_params": [],
+          "components": {
+            "type": "TypeDesc::Error",
+            "0": {
+              "type": "ExceptionDecl::SinglePayload",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": "all",
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
             "name": "ArgsLoc",
             "loc": null
           },
           "type_params": [],
           "components": {
-            "type": "TypeDesc::Newtype",
-            "0": {
-              "type": "Type::Name",
-              "constr_id": {
-                "type": "ConstrId",
-                "id": {
-                  "type": "LongIdent::Ident",
-                  "0": "Array"
+            "type": "TypeDesc::TupleStruct",
+            "0": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Array"
+                  },
+                  "loc": null
                 },
-                "loc": null
-              },
-              "tys": [
-                {
-                  "type": "Type::Option",
-                  "ty": {
-                    "type": "Type::Name",
-                    "constr_id": {
-                      "type": "ConstrId",
-                      "id": {
-                        "type": "LongIdent::Ident",
-                        "0": "SourceLoc"
+                "tys": [
+                  {
+                    "type": "Type::Option",
+                    "ty": {
+                      "type": "Type::Name",
+                      "constr_id": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "LongIdent::Ident",
+                          "0": "SourceLoc"
+                        },
+                        "loc": null
                       },
+                      "tys": [],
                       "loc": null
                     },
-                    "tys": [],
-                    "loc": null
-                  },
-                  "loc": null,
-                  "question_loc": null
-                }
-              ],
-              "loc": null
-            }
+                    "loc": null,
+                    "question_loc": null
+                  }
+                ],
+                "loc": null
+              }
+            ]
           },
           "vis": {
             "type": "Visibility::Pub",
@@ -2305,7 +2515,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "src_offset",
@@ -2326,7 +2536,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "dst_offset",
@@ -6679,7 +6889,7 @@
           },
           "params": [
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "capacity",
@@ -6790,7 +7000,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "start",
@@ -11306,7 +11516,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "start",
@@ -11840,140 +12050,6 @@
                 "loc": null
               }
             ],
-            "loc": null
-          },
-          "trait_name": {
-            "name": {
-              "type": "LongIdent::Ident",
-              "0": "ToJson"
-            },
-            "loc": null
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Type",
-        "0": {
-          "name": {
-            "name": "BenchError",
-            "loc": null
-          },
-          "type_params": [],
-          "components": {
-            "type": "TypeDesc::Error",
-            "0": {
-              "type": "ExceptionDecl::SinglePayload",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            }
-          },
-          "vis": {
-            "type": "Visibility::Pub",
-            "attr": "all",
-            "loc": null
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Type",
-        "0": {
-          "name": {
-            "name": "Failure",
-            "loc": null
-          },
-          "type_params": [],
-          "components": {
-            "type": "TypeDesc::Error",
-            "0": {
-              "type": "ExceptionDecl::SinglePayload",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            }
-          },
-          "vis": {
-            "type": "Visibility::Pub",
-            "attr": "all",
-            "loc": null
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Impl",
-        "0": {
-          "$tag": "Trait",
-          "type_params": [],
-          "type_": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "Failure"
-              },
-              "loc": null
-            },
-            "tys": [],
-            "loc": null
-          },
-          "trait_name": {
-            "name": {
-              "type": "LongIdent::Ident",
-              "0": "Show"
-            },
-            "loc": null
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Impl",
-        "0": {
-          "$tag": "Trait",
-          "type_params": [],
-          "type_": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "Failure"
-              },
-              "loc": null
-            },
-            "tys": [],
             "loc": null
           },
           "trait_name": {
@@ -12985,7 +13061,7 @@
           },
           "params": [
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "seed",
@@ -13025,43 +13101,6 @@
             }
           ],
           "type_params": []
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Type",
-        "0": {
-          "name": {
-            "name": "InspectError",
-            "loc": null
-          },
-          "type_params": [],
-          "components": {
-            "type": "TypeDesc::Error",
-            "0": {
-              "type": "ExceptionDecl::SinglePayload",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            }
-          },
-          "vis": {
-            "type": "Visibility::Pub",
-            "attr": "all",
-            "loc": null
-          }
         }
       },
       null
@@ -17095,7 +17134,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "start",
@@ -22443,7 +22482,7 @@
           },
           "params": [
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "capacity",
@@ -23459,6 +23498,182 @@
             "loc": null
           },
           "name": {
+            "name": "update",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "K"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "V"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "K"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Arrow",
+                "args": [
+                  {
+                    "type": "Type::Option",
+                    "ty": {
+                      "type": "Type::Name",
+                      "constr_id": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "LongIdent::Ident",
+                          "0": "V"
+                        },
+                        "loc": null
+                      },
+                      "tys": [],
+                      "loc": null
+                    },
+                    "loc": null,
+                    "question_loc": null
+                  }
+                ],
+                "res": {
+                  "type": "Type::Option",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "V"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  "loc": null,
+                  "question_loc": null
+                },
+                "err": {
+                  "type": "ErrorType::NoErrorType"
+                },
+                "is_async": false,
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "K",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "Hash"
+                  },
+                  "loc": null
+                },
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "Eq"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "V",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Map",
+            "loc": null
+          },
+          "name": {
             "name": "values",
             "loc": null
           },
@@ -23907,43 +24122,6 @@
         "$tag": "Type",
         "0": {
           "name": {
-            "name": "SnapshotError",
-            "loc": null
-          },
-          "type_params": [],
-          "components": {
-            "type": "TypeDesc::Error",
-            "0": {
-              "type": "ExceptionDecl::SinglePayload",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            }
-          },
-          "vis": {
-            "type": "Visibility::Pub",
-            "attr": "all",
-            "loc": null
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Type",
-        "0": {
-          "name": {
             "name": "SourceLoc",
             "loc": null
           },
@@ -24132,7 +24310,7 @@
           },
           "params": [
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "size_hint",
@@ -24738,7 +24916,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "start",
@@ -26201,6 +26379,102 @@
             "loc": null
           },
           "name": {
+            "name": "clamp",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Labelled",
+              "0": {
+                "type": "Label",
+                "name": "min",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Labelled",
+              "0": {
+                "type": "Label",
+                "name": "max",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Int",
+            "loc": null
+          },
+          "name": {
             "name": "clz",
             "loc": null
           },
@@ -26284,6 +26558,60 @@
                 "id": {
                   "type": "LongIdent::Ident",
                   "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Int",
+            "loc": null
+          },
+          "name": {
+            "name": "is_leading_surrogate",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
                 },
                 "loc": null
               },
@@ -26472,6 +26800,114 @@
           },
           "name": {
             "name": "is_pos",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Int",
+            "loc": null
+          },
+          "name": {
+            "name": "is_surrogate",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Int",
+            "loc": null
+          },
+          "name": {
+            "name": "is_trailing_surrogate",
             "loc": null
           },
           "params": [
@@ -26891,6 +27327,200 @@
                 "loc": null
               }
             },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Int",
+            "loc": null
+          },
+          "name": {
+            "name": "max",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Int",
+            "loc": null
+          },
+          "name": {
+            "name": "min",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Int",
+            "loc": null
+          },
+          "name": {
+            "name": "next_power_of_two",
+            "loc": null
+          },
+          "params": [
             {
               "$tag": "Positional",
               "0": {
@@ -27605,7 +28235,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "radix",
@@ -27918,7 +28548,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "step",
@@ -27939,7 +28569,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "inclusive",
@@ -28050,7 +28680,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "inclusive",
@@ -28301,7 +28931,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "radix",
@@ -29350,7 +29980,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "radix",
@@ -29555,7 +30185,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "step",
@@ -29576,7 +30206,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "inclusive",
@@ -29687,7 +30317,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "inclusive",
@@ -30906,7 +31536,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "radix",
@@ -31111,7 +31741,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "inclusive",
@@ -31362,7 +31992,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "radix",
@@ -32395,7 +33025,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "radix",
@@ -32600,7 +33230,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "inclusive",
@@ -32991,7 +33621,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "step",
@@ -33012,7 +33642,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "inclusive",
@@ -33123,7 +33753,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "inclusive",
@@ -33904,7 +34534,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "step",
@@ -33925,7 +34555,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "inclusive",
@@ -34036,7 +34666,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "inclusive",
@@ -34125,7 +34755,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "start_offset",
@@ -34439,7 +35069,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "start_offset",
@@ -34783,7 +35413,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "start",
@@ -35845,7 +36475,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "src_offset",
@@ -35866,7 +36496,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "dst_offset",
@@ -37821,7 +38451,20 @@
                   "loc": null
                 },
                 "err": {
-                  "type": "ErrorType::NoErrorType"
+                  "type": "ErrorType::MaybeError",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Error"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
                 },
                 "is_async": false,
                 "loc": null
@@ -37843,7 +38486,20 @@
               "loc": null
             },
             {
-              "type": "ErrorType::NoErrorType"
+              "type": "ErrorType::MaybeError",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Error"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
             }
           ],
           "type_params": []
@@ -38066,7 +38722,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "offset",
@@ -38260,7 +38916,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "prefix",
@@ -38281,7 +38937,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "suffix",
@@ -38302,7 +38958,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "sep",
@@ -38323,7 +38979,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "trailing",

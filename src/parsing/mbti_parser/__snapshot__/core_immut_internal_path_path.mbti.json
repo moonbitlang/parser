@@ -78,20 +78,22 @@
           },
           "type_params": [],
           "components": {
-            "type": "TypeDesc::Newtype",
-            "0": {
-              "type": "Type::Name",
-              "constr_id": {
-                "type": "ConstrId",
-                "id": {
-                  "type": "LongIdent::Ident",
-                  "0": "UInt"
+            "type": "TypeDesc::TupleStruct",
+            "0": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "UInt"
+                  },
+                  "loc": null
                 },
+                "tys": [],
                 "loc": null
-              },
-              "tys": [],
-              "loc": null
-            }
+              }
+            ]
           },
           "vis": {
             "type": "Visibility::Pub",

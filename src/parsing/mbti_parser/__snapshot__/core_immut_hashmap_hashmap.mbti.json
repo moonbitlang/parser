@@ -595,7 +595,15 @@
                 "name": "K",
                 "loc": null
               },
-              "constraints": []
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "Hash"
+                  },
+                  "loc": null
+                }
+              ]
             },
             {
               "name": {
@@ -1099,13 +1107,6 @@
                     "0": "Eq"
                   },
                   "loc": null
-                },
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Hash"
-                  },
-                  "loc": null
                 }
               ]
             },
@@ -1585,22 +1586,7 @@
                 "name": "K",
                 "loc": null
               },
-              "constraints": [
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Eq"
-                  },
-                  "loc": null
-                },
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Hash"
-                  },
-                  "loc": null
-                }
-              ]
+              "constraints": []
             },
             {
               "name": {
@@ -2460,13 +2446,6 @@
                     "0": "Eq"
                   },
                   "loc": null
-                },
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Hash"
-                  },
-                  "loc": null
                 }
               ]
             },
@@ -2730,13 +2709,6 @@
                   "name": {
                     "type": "LongIdent::Ident",
                     "0": "Eq"
-                  },
-                  "loc": null
-                },
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Hash"
                   },
                   "loc": null
                 }
@@ -3290,22 +3262,7 @@
                 "name": "K",
                 "loc": null
               },
-              "constraints": [
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Eq"
-                  },
-                  "loc": null
-                },
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Hash"
-                  },
-                  "loc": null
-                }
-              ]
+              "constraints": []
             },
             {
               "name": {
@@ -3513,22 +3470,7 @@
                 "name": "K",
                 "loc": null
               },
-              "constraints": [
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Eq"
-                  },
-                  "loc": null
-                },
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Hash"
-                  },
-                  "loc": null
-                }
-              ]
+              "constraints": []
             },
             {
               "name": {
@@ -4225,13 +4167,6 @@
                     "0": "Eq"
                   },
                   "loc": null
-                },
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Hash"
-                  },
-                  "loc": null
                 }
               ]
             },
@@ -4497,13 +4432,6 @@
                     "0": "Eq"
                   },
                   "loc": null
-                },
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Hash"
-                  },
-                  "loc": null
                 }
               ]
             },
@@ -4645,13 +4573,6 @@
                   "name": {
                     "type": "LongIdent::Ident",
                     "0": "Eq"
-                  },
-                  "loc": null
-                },
-                {
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "Hash"
                   },
                   "loc": null
                 }

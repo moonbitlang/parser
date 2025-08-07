@@ -33,7 +33,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "path",
@@ -494,255 +494,6 @@
         "$tag": "Type",
         "0": {
           "name": {
-            "name": "JsonPath",
-            "loc": null
-          },
-          "type_params": [],
-          "components": {
-            "type": "TypeDesc::Abstract"
-          },
-          "vis": {
-            "type": "Visibility::Default"
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Func",
-        "0": {
-          "attr": [],
-          "type_name": {
-            "name": "JsonPath",
-            "loc": null
-          },
-          "name": {
-            "name": "add_index",
-            "loc": null
-          },
-          "params": [
-            {
-              "$tag": "Positional",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "Self"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            },
-            {
-              "$tag": "Positional",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "Int"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            }
-          ],
-          "return_": [
-            {
-              "type": "Type::Name",
-              "constr_id": {
-                "type": "ConstrId",
-                "id": {
-                  "type": "LongIdent::Ident",
-                  "0": "Self"
-                },
-                "loc": null
-              },
-              "tys": [],
-              "loc": null
-            },
-            {
-              "type": "ErrorType::NoErrorType"
-            }
-          ],
-          "type_params": []
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Func",
-        "0": {
-          "attr": [],
-          "type_name": {
-            "name": "JsonPath",
-            "loc": null
-          },
-          "name": {
-            "name": "add_key",
-            "loc": null
-          },
-          "params": [
-            {
-              "$tag": "Positional",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "Self"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            },
-            {
-              "$tag": "Positional",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            }
-          ],
-          "return_": [
-            {
-              "type": "Type::Name",
-              "constr_id": {
-                "type": "ConstrId",
-                "id": {
-                  "type": "LongIdent::Ident",
-                  "0": "Self"
-                },
-                "loc": null
-              },
-              "tys": [],
-              "loc": null
-            },
-            {
-              "type": "ErrorType::NoErrorType"
-            }
-          ],
-          "type_params": []
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Impl",
-        "0": {
-          "$tag": "Trait",
-          "type_params": [],
-          "type_": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "JsonPath"
-              },
-              "loc": null
-            },
-            "tys": [],
-            "loc": null
-          },
-          "trait_name": {
-            "name": {
-              "type": "LongIdent::Ident",
-              "0": "Eq"
-            },
-            "loc": null
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Impl",
-        "0": {
-          "$tag": "Trait",
-          "type_params": [],
-          "type_": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "JsonPath"
-              },
-              "loc": null
-            },
-            "tys": [],
-            "loc": null
-          },
-          "trait_name": {
-            "name": {
-              "type": "LongIdent::Ident",
-              "0": "Show"
-            },
-            "loc": null
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Impl",
-        "0": {
-          "$tag": "Trait",
-          "type_params": [],
-          "type_": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "JsonPath"
-              },
-              "loc": null
-            },
-            "tys": [],
-            "loc": null
-          },
-          "trait_name": {
-            "name": {
-              "type": "LongIdent::Ident",
-              "0": "ToJson"
-            },
-            "loc": null
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Type",
-        "0": {
-          "name": {
             "name": "ParseError",
             "loc": null
           },
@@ -978,6 +729,255 @@
               "id": {
                 "type": "LongIdent::Ident",
                 "0": "ParseError"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "ToJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "JsonPath",
+            "loc": null
+          },
+          "type_params": [],
+          "components": {
+            "type": "TypeDesc::Abstract"
+          },
+          "vis": {
+            "type": "Visibility::Default"
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "JsonPath",
+            "loc": null
+          },
+          "name": {
+            "name": "add_index",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Self"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "JsonPath",
+            "loc": null
+          },
+          "name": {
+            "name": "add_key",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Self"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "JsonPath"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Eq"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "JsonPath"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Show"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "JsonPath"
               },
               "loc": null
             },
@@ -1633,7 +1633,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "escape_slash",
@@ -1654,7 +1654,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "indent",

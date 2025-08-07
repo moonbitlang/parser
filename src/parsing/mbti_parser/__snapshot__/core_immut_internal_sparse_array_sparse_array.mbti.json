@@ -275,20 +275,22 @@
           },
           "type_params": [],
           "components": {
-            "type": "TypeDesc::Newtype",
-            "0": {
-              "type": "Type::Name",
-              "constr_id": {
-                "type": "ConstrId",
-                "id": {
-                  "type": "LongIdent::Ident",
-                  "0": "UInt"
+            "type": "TypeDesc::TupleStruct",
+            "0": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "UInt"
+                  },
+                  "loc": null
                 },
+                "tys": [],
                 "loc": null
-              },
-              "tys": [],
-              "loc": null
-            }
+              }
+            ]
           },
           "vis": {
             "type": "Visibility::Pub",
@@ -1465,6 +1467,171 @@
             "loc": null
           },
           "name": {
+            "name": "filter",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "X"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Arrow",
+                "args": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "X"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "res": {
+                  "type": "Type::Option",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "X"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  "loc": null,
+                  "question_loc": null
+                },
+                "err": {
+                  "type": "ErrorType::MaybeError",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Error"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                },
+                "is_async": false,
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "X"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::MaybeError",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Error"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "SparseArray",
+            "loc": null
+          },
+          "name": {
             "name": "intersection",
             "loc": null
           },
@@ -1654,6 +1821,168 @@
             {
               "name": {
                 "name": "X",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "SparseArray",
+            "loc": null
+          },
+          "name": {
+            "name": "map",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "X"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Arrow",
+                "args": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "X"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "res": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Y"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "err": {
+                  "type": "ErrorType::MaybeError",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Error"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                },
+                "is_async": false,
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Self"
+                },
+                "loc": null
+              },
+              "tys": [
+                {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Y"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                }
+              ],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::MaybeError",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Error"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": null
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "Y",
                 "loc": null
               },
               "constraints": []

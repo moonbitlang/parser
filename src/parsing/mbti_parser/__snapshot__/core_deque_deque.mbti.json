@@ -192,7 +192,7 @@
           },
           "params": [
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "capacity",
@@ -4469,6 +4469,260 @@
                     "loc": null
                   }
                 ],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": null
+          },
+          "name": {
+            "name": "shuffle",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "A"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Labelled",
+              "0": {
+                "type": "Label",
+                "name": "rand",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Arrow",
+                "args": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Int"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "res": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Int"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "err": {
+                  "type": "ErrorType::NoErrorType"
+                },
+                "is_async": false,
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Self"
+                },
+                "loc": null
+              },
+              "tys": [
+                {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "A"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                }
+              ],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "T",
+            "loc": null
+          },
+          "name": {
+            "name": "shuffle_in_place",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "A"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Labelled",
+              "0": {
+                "type": "Label",
+                "name": "rand",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Arrow",
+                "args": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Int"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "res": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Int"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "err": {
+                  "type": "ErrorType::NoErrorType"
+                },
+                "is_async": false,
                 "loc": null
               }
             }

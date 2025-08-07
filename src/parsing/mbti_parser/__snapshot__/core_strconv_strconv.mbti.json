@@ -1,6 +1,10 @@
 {
   "package_name": "moonbitlang/core/strconv",
-  "imports": [],
+  "imports": [
+    {
+      "name": "moonbitlang/core/string"
+    }
+  ],
   "sigs": [
     [
       {
@@ -98,8 +102,9 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
+                    "type": "LongIdent::Dot",
+                    "pkg": "string",
+                    "id": "StringView"
                   },
                   "loc": null
                 },
@@ -167,8 +172,9 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
+                    "type": "LongIdent::Dot",
+                    "pkg": "string",
+                    "id": "StringView"
                   },
                   "loc": null
                 },
@@ -230,8 +236,9 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
+                    "type": "LongIdent::Dot",
+                    "pkg": "string",
+                    "id": "StringView"
                   },
                   "loc": null
                 },
@@ -293,8 +300,9 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
+                    "type": "LongIdent::Dot",
+                    "pkg": "string",
+                    "id": "StringView"
                   },
                   "loc": null
                 },
@@ -303,7 +311,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "base",
@@ -377,8 +385,9 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
+                    "type": "LongIdent::Dot",
+                    "pkg": "string",
+                    "id": "StringView"
                   },
                   "loc": null
                 },
@@ -387,7 +396,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "base",
@@ -461,8 +470,9 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
+                    "type": "LongIdent::Dot",
+                    "pkg": "string",
+                    "id": "StringView"
                   },
                   "loc": null
                 },
@@ -471,7 +481,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "base",
@@ -545,8 +555,9 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
+                    "type": "LongIdent::Dot",
+                    "pkg": "string",
+                    "id": "StringView"
                   },
                   "loc": null
                 },
@@ -555,7 +566,7 @@
               }
             },
             {
-              "$tag": "OptionalDefault",
+              "$tag": "OptionalOption",
               "0": {
                 "type": "Label",
                 "name": "base",
@@ -608,6 +619,73 @@
             }
           ],
           "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "StrConvError",
+            "loc": null
+          },
+          "type_params": [],
+          "components": {
+            "type": "TypeDesc::Error",
+            "0": {
+              "type": "ExceptionDecl::SinglePayload",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": "all",
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "StrConvError"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Show"
+            },
+            "loc": null
+          }
         }
       },
       null
@@ -761,8 +839,9 @@
                 "constr_id": {
                   "type": "ConstrId",
                   "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
+                    "type": "LongIdent::Dot",
+                    "pkg": "string",
+                    "id": "StringView"
                   },
                   "loc": null
                 },
@@ -969,73 +1048,6 @@
               "id": {
                 "type": "LongIdent::Ident",
                 "0": "Decimal"
-              },
-              "loc": null
-            },
-            "tys": [],
-            "loc": null
-          },
-          "trait_name": {
-            "name": {
-              "type": "LongIdent::Ident",
-              "0": "Show"
-            },
-            "loc": null
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Type",
-        "0": {
-          "name": {
-            "name": "StrConvError",
-            "loc": null
-          },
-          "type_params": [],
-          "components": {
-            "type": "TypeDesc::Error",
-            "0": {
-              "type": "ExceptionDecl::SinglePayload",
-              "0": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "String"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            }
-          },
-          "vis": {
-            "type": "Visibility::Pub",
-            "attr": "all",
-            "loc": null
-          }
-        }
-      },
-      null
-    ],
-    [
-      {
-        "$tag": "Impl",
-        "0": {
-          "$tag": "Trait",
-          "type_params": [],
-          "type_": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "StrConvError"
               },
               "loc": null
             },

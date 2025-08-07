@@ -6,7 +6,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "name": {
             "name": "from_double",
             "loc": null
@@ -69,7 +75,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "name": {
             "name": "new",
             "loc": null
@@ -286,7 +298,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "T",
             "loc": null
@@ -361,7 +379,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "T",
             "loc": null
@@ -436,7 +460,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "T",
             "loc": null
@@ -511,7 +541,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "T",
             "loc": null
@@ -565,7 +601,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "T",
             "loc": null
@@ -619,7 +661,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "T",
             "loc": null
@@ -694,7 +742,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "T",
             "loc": null
@@ -748,7 +802,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "T",
             "loc": null
@@ -802,7 +862,13 @@
       {
         "$tag": "Func",
         "0": {
-          "attr": [],
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
           "type_name": {
             "name": "T",
             "loc": null
