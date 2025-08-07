@@ -8,7 +8,8 @@ typealias @ast_types.(
   CharLiteral,
   StringLiteral,
   InterpLiteral,
-  DocString
+  DocString,
+  Attribute
 )
 
 ///|
@@ -43,3 +44,6 @@ typealias @mbti_ast.(
   PackageImport,
   Mbti
 )
+
+///|
+fnalias @syntax.make_attribute

@@ -143,7 +143,7 @@ const_sig -> ConstSig
   ;
 
 value_sig -> ValueSig
-  : "let" lident ":" type_ { ValueSig::{name: $2, type_: $4} }
+  : attributes "let" lident ":" type_ { ValueSig::{name: $3, type_: $5} }
   ;
 
 method_prefix -> Option[Name]
@@ -176,6 +176,7 @@ type_sig -> TypeSig
   | vis "suberror" uident type_ { TypeSig::{vis: $1, name: $3, type_params: @list.empty(), components: Error(SinglePayload($4))} }
   | vis "suberror" uident "{" separated_list(";", enum_constructor) "}" { TypeSig::{vis: $1, name: $3, type_params: @list.empty(), components: Error(EnumPayload($5))} }
   | vis "struct" type_decl_name_with_params "{" separated_list(";", record_decl_field) "}" { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Record($5)} }
+  | vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: TupleStruct($5)} }
   | vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" { TypeSig::{vis: $1, name: $3.0, type_params: $3.1, components: Variant($5)} }
   ;
 
@@ -353,4 +354,13 @@ label -> Label
 
 post_label -> Label
   : POST_LABEL { Label::{name: $1, loc: mk_loc($sloc)} }
+  ;
+
+%inline attributes -> @list.T[Attribute]
+  :  {  @list.empty() }
+  | nonempty_list(attribute) { $1 }
+  ;
+
+%inline attribute -> Attribute
+  : ATTRIBUTE { make_attribute(loc=mk_loc($sloc), id = $1.0, dot_id = $1.1, raw_payload = $1.2) }
   ;
