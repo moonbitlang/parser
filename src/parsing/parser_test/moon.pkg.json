@@ -1,13 +1,12 @@
 {
     "import": [
-        
+
     ],
     "test-import": [
-        "moonbitlang/parser/lexing/lexer",
-        "moonbitlang/parser/lexing/tokens",
-        "moonbitlang/parser/parsing/parser",
-        "moonbitlang/x/fs",
-        "moonbitlang/parser/parsing/syntax"
-        // "moonbitlang/parser/parsing/hand_parser"
+      "moonbitlang/parser/lexing/tokens",
+      "moonbitlang/parser/parsing/parser",
+      "moonbitlang/x/fs",
+      "moonbitlang/parser/parsing/syntax",
+      "moonbitlang/parser/lexing/lexer2"
     ]
 }
