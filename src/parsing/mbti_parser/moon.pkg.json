@@ -19,5 +19,6 @@
   "test-import": [
     "moonbitlang/x/fs",
     "moonbitlang/parser/lexing/lexer"
-  ]
+  ],
+  "alert-list": "-deprecated"
 }

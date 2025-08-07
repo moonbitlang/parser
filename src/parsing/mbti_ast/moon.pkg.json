@@ -8,5 +8,6 @@
       "path": "moonbitlang/parser/parsing/syntax",
       "alias": "ast"
     }
-  ]
+  ],
+  "alert-list": "-deprecated"
 }

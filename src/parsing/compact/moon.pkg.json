@@ -23,6 +23,7 @@
     "test-import": [
       // "moonbitlang/x/fs"
     ],
-    "warn-list": "-1-6"
+    "warn-list": "-1-6",
+    "alert-list": "-deprecated"
   }
   

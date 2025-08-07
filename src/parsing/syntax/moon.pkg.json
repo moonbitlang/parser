@@ -5,5 +5,6 @@
       "alias": "ast_types"
     }
   ],
-  "warn-list": "-28"
+  "warn-list": "-28",
+  "alert-list": "-deprecated"
 }
