@@ -230,6 +230,8 @@ pub impl ToJson for TypeDesc with to_json(self) {
       { "type": "TypeDesc::Variant", "0": list_to_json(constrs) }
     Record(fields) => { "type": "TypeDesc::Record", "0": list_to_json(fields) }
     Alias(ty) => { "type": "TypeDesc::Alias", "0": ty }
+    TupleStruct(tys) =>
+      { "type": "TypeDesc::TupleStruct", "0": list_to_json(tys) }
   }
 }
 

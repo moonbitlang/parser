@@ -130,6 +130,7 @@ pub(all) enum TypeDesc {
   Error(ExceptionDecl)
   Variant(@list.T[ConstrDecl])
   Record(@list.T[FieldDecl])
+  TupleStruct(@list.T[Type])
   Alias(Type)
 }
 
