@@ -131,7 +131,7 @@ fn preserve_comment(self : LexEnv) -> (Comment, Int, Int) -> Unit {
   if self.comment {
     fn(comment, start, end) {
       let docstrings = self.docstrings
-      if comment.content is [_, _, '/', ..] {
+      if comment.content.has_prefix("///") {
         let loc = Location::{
           start: self.make_pos(start),
           end: self.make_pos(end),
