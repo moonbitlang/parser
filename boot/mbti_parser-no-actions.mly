@@ -40,6 +40,8 @@
 %token RAISE "raise"
 %token THROW "throw"
 %token TRY "try"
+%token TRY_QUESTION "try?"
+%token TRY_EXCLAMATION "try!"
 %token CATCH "catch"
 %token ASYNC "async"
 %token TYPEALIAS "typealias"
@@ -147,18 +149,13 @@ type_name_coloncolon
   : uident "::" {}
   ;
 
-func_sig_no_attr
-  : is_async FN option(type_name_coloncolon) lident loption(type_params_with_constraints) delimited("(", separated_list(",", parameter), ")") "->" return_type {}
-  | is_async FN type_params_with_constraints option(type_name_coloncolon) lident delimited("(", separated_list(",", parameter), ")") "->" return_type {}
-  ;
-
 func_sig
-  : func_sig_no_attr {}
-  | nonempty_list(ATTRIBUTE) func_sig_no_attr {}
+  : attributes is_async FN option(type_name_coloncolon) lident loption(type_params_with_constraints) delimited("(", separated_list(",", parameter), ")") "->" return_type {}
+  | attributes is_async FN type_params_with_constraints option(type_name_coloncolon) lident delimited("(", separated_list(",", parameter), ")") "->" return_type {}
   ;
 
 trait_method_sig
-  : lident delimited("(", separated_list(",", trait_method_parameter), ")") "->" return_type option(eq_underscore) {}
+  : attributes lident delimited("(", separated_list(",", trait_method_parameter), ")") "->" return_type option(eq_underscore) {}
   ;
 
 %inline eq_underscore
@@ -171,18 +168,18 @@ suberror_keyword
   ;
 
 type_sig
-  : vis "extern" "type" type_decl_name_with_params {}
-  | vis "type" type_decl_name_with_params {}
-  | vis "type" type_decl_name_with_params type_ {}
-  | vis suberror_keyword UIDENT option(type_) {}
-  | vis suberror_keyword UIDENT "{" separated_list(";", enum_constructor) "}" {}
-  | vis "struct" type_decl_name_with_params "{" separated_list(";", record_decl_field) "}" {}
-  | vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" {}
+  : attributes vis "extern" "type" type_decl_name_with_params {}
+  | attributes vis "type" type_decl_name_with_params {}
+  | attributes vis suberror_keyword UIDENT option(type_) {}
+  | attributes vis suberror_keyword UIDENT "{" separated_list(";", enum_constructor) "}" {}
+  | attributes vis "struct" type_decl_name_with_params "{" separated_list(";", record_decl_field) "}" {}
+  | attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" {}
+  | attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" {}
   ;
 
 impl_sig
-  : "impl" type_params_with_constraints qualified_uident "for" type_ {}
-  | "impl" qualified_uident "for" type_ {}
+  : attributes "impl" type_params_with_constraints qualified_uident "for" type_ {}
+  | attributes "impl" qualified_uident "for" type_ {}
   ;
 
 trait_sig
@@ -197,7 +194,7 @@ alias_sig
   ;
 
 enum_constructor
-  : UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {}
+  : attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {}
   ;
 
 %inline eq_tag
@@ -210,7 +207,7 @@ constructor_param
   ;
 
 record_decl_field
-  : option("mut") LIDENT ":" type_ {}
+  : attributes option("mut") LIDENT ":" type_ {}
   ;
 
 type_param_with_constraints
@@ -340,6 +337,15 @@ lident
 
 label
   : LIDENT {}
+  ;
+
+%inline attributes
+  :  {}
+  | nonempty_list(attribute) {}
+  ;
+
+%inline attribute
+  : ATTRIBUTE {}
   ;
 
 

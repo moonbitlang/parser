@@ -103,6 +103,8 @@
 %token LETREC "letrec"
 %token ENUMVIEW "enumview"
 %token NORAISE "noraise"
+%token TRY_QUESTION "try?"
+%token TRY_EXCLAMATION "try!"
 
 %right BARBAR
 %right AMPERAMPER
@@ -217,6 +219,7 @@ parameter
   | binder opt_annot {}
   | POST_LABEL opt_annot {}
   | POST_LABEL opt_annot "=" expr {}
+  | LIDENT "?" opt_annot "=" expr {}
   | LIDENT "?" opt_annot {}
   ;
 
@@ -261,6 +264,7 @@ fun_header_generic
 
 local_type_decl
   : "struct" luident "{" list_semis(record_decl_field) "}" deriving_directive_list {}
+  | "struct" luident "(" non_empty_list_commas(type_) ")" deriving_directive_list {}
   | "enum" luident "{" list_semis(enum_constructor) "}" deriving_directive_list {}
   | "type" luident type_ deriving_directive_list {}
   ;
@@ -308,6 +312,7 @@ structure_item
   | suberror_header option(type_) deriving_directive_list {}
   | suberror_header "{" list_semis(enum_constructor) "}" deriving_directive_list {}
   | struct_header "{" list_semis(record_decl_field) "}" deriving_directive_list {}
+  | struct_header "(" non_empty_list_commas(type_) ")" deriving_directive_list {}
   | enum_header "{" list_semis(enum_constructor) "}" deriving_directive_list {}
   | val_header "=" expr {}
   | fun_header "=" STRING STRING {}
@@ -413,7 +418,7 @@ deriving_directive_list
   ;
 
 trait_method_decl
-  : is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) {}
+  : attributes is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) {}
   ;
 
 wildcard
@@ -553,7 +558,8 @@ catch_keyword
 try_expr
   : "try" pipe_expr catch_keyword single_pattern_cases "}" {}
   | "try" pipe_expr catch_keyword single_pattern_cases "}" else_keyword single_pattern_cases "}" {}
-  | "try" "?" pipe_expr {}
+  | "try?" pipe_expr {}
+  | "try!" pipe_expr {}
   ;
 
 if_expr
@@ -846,6 +852,7 @@ argument
   : label optional_question "=" expr {}
   | expr {}
   | POST_LABEL {}
+  | POST_LABEL "=" expr {}
   | LIDENT "?" {}
   ;
 
@@ -966,7 +973,7 @@ type_
   ;
 
 record_decl_field
-  : visibility option("mut") LIDENT ":" type_ {}
+  : attributes visibility option("mut") LIDENT ":" type_ {}
   ;
 
 constructor_param
@@ -975,7 +982,7 @@ constructor_param
   ;
 
 enum_constructor
-  : UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) {}
+  : attributes UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) {}
   ;
 
 %inline eq_int_tag

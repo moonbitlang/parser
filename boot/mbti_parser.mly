@@ -46,6 +46,8 @@ let i (start, end_) =
 %token RAISE           "raise"
 %token THROW           "throw"
 %token TRY             "try"
+%token TRY_QUESTION    "try?"
+%token TRY_EXCLAMATION "try!"
 %token CATCH           "catch"
 // %token EXCEPT          "except"
 %token ASYNC           "async"
@@ -172,31 +174,29 @@ value_sig:
 type_name_coloncolon:
   | type_name=uident "::" { type_name }
 
-func_sig_no_attr:
-  | is_async=is_async FN type_name=option(type_name_coloncolon) name=lident
+func_sig:
+  | attrs=attributes
+    is_async=is_async FN type_name=option(type_name_coloncolon) name=lident
     type_params=loption(type_params_with_constraints)
     params=delimited("(", separated_list(",", parameter), ")") 
     "->" return_=return_type {
-    ({ name; type_name; params; return_; type_params; is_async }: Mbti.func_sig)
+    ({ name; type_name; params; return_; type_params; is_async; attrs }: Mbti.func_sig)
   }
-  | is_async=is_async FN type_params=type_params_with_constraints
+  | attrs=attributes
+    is_async=is_async FN type_params=type_params_with_constraints
     type_name=option(type_name_coloncolon) name=lident
     params=delimited("(", separated_list(",", parameter), ")") 
     "->" return_=return_type {
-    ({ name; params; type_name; return_; type_params; is_async }: Mbti.func_sig)
+    ({ name; params; type_name; return_; type_params; is_async; attrs }: Mbti.func_sig)
   }
 
-func_sig:
-  | func_sig_no_attr { $1 }
-  | nonempty_list(ATTRIBUTE) /* todo: attributes are discarded */
-    func_sig_no_attr { $2 }
-
 trait_method_sig:
+  attrs=attributes
   name=lident
   params=delimited("(", separated_list(",", trait_method_parameter), ")") 
   "->" return_=return_type has_default=option(eq_underscore) {
     let has_default_ = [%p? Some _] has_default in
-    ({ name; params; has_default_; return_ }: Mbti.trait_method_sig)
+    ({ name; params; has_default_; return_; attrs }: Mbti.trait_method_sig)
   }
 
 %inline eq_underscore:
@@ -207,42 +207,51 @@ suberror_keyword:
   | "type" "!" {}
 
 type_sig:
-  | vis=vis "extern" "type" t=type_decl_name_with_params {
+  | attrs=attributes
+    vis=vis "extern" "type" t=type_decl_name_with_params {
       let name, type_params = t in
-      { name; type_params; components = Ptd_extern; vis; }
+      { name; type_params; components = Ptd_extern; vis; attrs }
     }
-  | vis=vis "type" t=type_decl_name_with_params {
+  | attrs=attributes
+    vis=vis "type" t=type_decl_name_with_params {
       let name, type_params = t in
-      { name; type_params; components = Ptd_abstract; vis; }
+      { name; type_params; components = Ptd_abstract; vis; attrs }
     }
-  | vis=vis "type" t=type_decl_name_with_params ty=type_ {
-      let name, type_params = t in
-      { name; type_params; components = Ptd_newtype ty; vis; }
-    }
-  | vis=vis suberror_keyword type_name=UIDENT ty=option(type_) {
+  | attrs=attributes
+    vis=vis suberror_keyword type_name=UIDENT ty=option(type_) {
       let exception_decl: Parsing_syntax.exception_decl =
         match ty with | None -> No_payload | Some ty -> Single_payload ty
       in
-      { name = { name = type_name; loc_ = i $loc(type_name) }; type_params = []; components = Ptd_error exception_decl; vis; }
+      { name = { name = type_name; loc_ = i $loc(type_name) }; type_params = []; components = Ptd_error exception_decl; vis; attrs }
     }
-  | vis=vis suberror_keyword type_name=UIDENT "{" cs=separated_list(";", enum_constructor) "}" {
+  | attrs=attributes
+    vis=vis suberror_keyword type_name=UIDENT "{" cs=separated_list(";", enum_constructor) "}" {
       let exception_decl: Parsing_syntax.exception_decl = Enum_payload cs in
-      { name = { name = type_name; loc_ = i $loc(type_name) }; type_params = []; components = Ptd_error exception_decl; vis; }
+      { name = { name = type_name; loc_ = i $loc(type_name) }; type_params = []; components = Ptd_error exception_decl; vis; attrs }
     }
-  | vis=vis "struct" t=type_decl_name_with_params "{" fs=separated_list(";", record_decl_field) "}" {
+  | attrs=attributes
+    vis=vis "struct" t=type_decl_name_with_params "{" fs=separated_list(";", record_decl_field) "}" {
       let name, type_params = t in
-      { name; type_params; components = Ptd_record fs; vis; }
+      { name; type_params; components = Ptd_record fs; vis; attrs }
     }
-  | vis=vis "enum" t=type_decl_name_with_params "{" cs=separated_list(";", enum_constructor) "}" {
+  | attrs=attributes
+    vis=vis "struct" t=type_decl_name_with_params "(" ts=separated_list(",", type_) ")" {
       let name, type_params = t in
-      ({ name; type_params; components = Ptd_variant cs; vis; }: Mbti.type_sig)
+      { name; type_params; components = Ptd_tuple_struct ts; vis; attrs }
+    }
+  | attrs=attributes
+    vis=vis "enum" t=type_decl_name_with_params "{" cs=separated_list(";", enum_constructor) "}" {
+      let name, type_params = t in
+      ({ name; type_params; components = Ptd_variant cs; vis; attrs }: Mbti.type_sig)
     }
 
 impl_sig:
-   | "impl" type_params=type_params_with_constraints trait_name=qualified_uident "for" type_=type_
-     { { type_params; type_; trait_name } }
-   | "impl" trait_name=qualified_uident "for" type_=type_
-     { { type_params = []; type_; trait_name } }
+   | attrs=attributes
+     "impl" type_params=type_params_with_constraints trait_name=qualified_uident "for" type_=type_
+     { { type_params; type_; trait_name; attrs } }
+   | attrs=attributes
+     "impl" trait_name=qualified_uident "for" type_=type_
+     { { type_params = []; type_; trait_name; attrs } }
 
 trait_sig:
   | vis=vis "trait" name=uident 
@@ -267,11 +276,12 @@ alias_sig:
 // --------------------------------------------
 
 enum_constructor:
-  | id=UIDENT
+  | attrs=attributes
+    id=UIDENT
     constr_args=option(delimited("(", separated_nonempty_list(",", constructor_param), ")"))
     constr_tag=option(eq_tag) {
     let constr_name : Parsing_syntax.constr_name = { name = id; loc_ = i $loc(id) } in
-    {Parsing_syntax.constr_name; constr_args; constr_tag; constr_loc_ = i $sloc; constr_doc = Docstring.empty }
+    {Parsing_syntax.constr_name; constr_args; constr_tag; constr_attrs=attrs; constr_loc_ = i $sloc; constr_doc = Docstring.empty }
   }
 
 %inline eq_tag:
@@ -288,8 +298,9 @@ constructor_param:
   }
 
 record_decl_field:
-  | mutflag=option("mut") name=LIDENT ":" ty=type_ {
-    {Parsing_syntax.field_name = {label = name; loc_ = i $loc(name)}; field_ty = ty; field_mut = mutflag <> None; field_vis = Vis_default; field_loc_ = i $sloc; field_doc = Docstring.empty }
+  | attrs=attributes
+    mutflag=option("mut") name=LIDENT ":" ty=type_ {
+    {Parsing_syntax.field_name = {label = name; loc_ = i $loc(name)}; field_attrs=attrs; field_ty = ty; field_mut = mutflag <> None; field_vis = Vis_default; field_loc_ = i $sloc; field_doc = Docstring.empty }
   }
 
 // --------------------------------------------
@@ -436,3 +447,11 @@ lident:
 
 label:
   | LIDENT { ({ label_name = $1; loc_ = i $sloc }: Mbti.label) }
+
+%inline attributes: 
+  | /* empty */               { [] } 
+  | nonempty_list(attribute) { $1 } 
+
+%inline attribute:
+  | ATTRIBUTE { Parsing_util.make_attribute ~loc_:(i $sloc) $1}
+

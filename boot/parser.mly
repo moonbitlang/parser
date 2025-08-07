@@ -139,6 +139,8 @@ Parsing_util.(
 %token LETREC          "letrec"
 %token ENUMVIEW        "enumview"
 %token NORAISE         "noraise"
+%token TRY_QUESTION    "try?"
+%token TRY_EXCLAMATION "try!"
 
 %right BARBAR
 %right AMPERAMPER
@@ -263,6 +265,13 @@ parameter:
     Parsing_syntax.Optional { default; binder = param_binder; ty = param_annot }
   }
   (* binder? : Type = expr *)
+  | binder_name=LIDENT "?" param_annot=opt_annot "=" default=expr {
+    let param_binder : Parsing_syntax.binder =
+      { binder_name; loc_ = i $loc(binder_name) }
+    in
+    Parsing_syntax.Optional { default; binder = param_binder; ty = param_annot }
+  }
+  (* binder? : Type *)
   | binder_name=LIDENT "?" param_annot=opt_annot {
     let param_binder : Parsing_syntax.binder =
       { binder_name; loc_ = i $loc(binder_name) }
@@ -342,6 +351,8 @@ fun_header_generic:
 local_type_decl:
   | "struct" tycon=luident "{" fs=list_semis(record_decl_field) "}" deriving_=deriving_directive_list {
     ({ local_tycon = tycon; local_tycon_loc_ = i $loc(tycon); local_components = Ptd_record fs; deriving_ = deriving_ }: Parsing_syntax.local_type_decl) }
+  | "struct" tycon=luident "(" ts=non_empty_list_commas(type_) ")" deriving_=deriving_directive_list {
+    ({ local_tycon = tycon; local_tycon_loc_ = i $loc(tycon); local_components = Ptd_tuple_struct ts; deriving_ = deriving_ }: Parsing_syntax.local_type_decl) }
   | "enum" tycon=luident "{" cs=list_semis(enum_constructor) "}" deriving_=deriving_directive_list {
     ({ local_tycon = tycon; local_tycon_loc_ = i $loc(tycon); local_components = Ptd_variant cs; deriving_ = deriving_ }: Parsing_syntax.local_type_decl) }
   | "type" tycon=luident ty=type_ deriving_=deriving_directive_list {
@@ -443,6 +454,10 @@ structure_item:
   | struct_header=struct_header "{" fs=list_semis(record_decl_field) "}" deriving_=deriving_directive_list {
       let attrs, type_vis, tycon, tycon_loc_, params = struct_header in
       Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_record fs; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ = false }
+    }
+  | struct_header=struct_header "(" ts=non_empty_list_commas(type_) ")" deriving_=deriving_directive_list {
+      let attrs, type_vis, tycon, tycon_loc_, params = struct_header in
+      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_tuple_struct ts; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ = false }
     }
   | enum_header=enum_header "{" cs=list_semis(enum_constructor) "}" deriving_=deriving_directive_list {
       let attrs, type_vis, tycon, tycon_loc_, params = enum_header in
@@ -830,6 +845,7 @@ deriving_directive_list:
   | "derive" "(" list_commas(deriving_directive) ")" { $3 }
 
 trait_method_decl:
+  attrs=attributes
   is_async=is_async
   name=binder
   has_error=optional_bang
@@ -850,6 +866,7 @@ trait_method_decl:
       return_type;
       error_type;
       has_default;
+      attrs;
       loc_ = i $sloc;
     }
   }
@@ -1091,8 +1108,11 @@ try_expr:
       let legacy_else_, else_loc_ = else_loc_ in
       Parsing_syntax.Pexpr_try { loc_=(i $sloc); body; catch; catch_all; try_else = Some try_else;
                                  else_loc_; legacy_else_; try_loc_ = i $loc($1); catch_loc_; has_try_ = true } }
-  | "try" "?" body=pipe_expr {
-      Parsing_syntax.Pexpr_try_question { body; try_loc_ = i $loc($1); loc_ = i $sloc }
+  | "try?" body=pipe_expr {
+      Parsing_syntax.Pexpr_try_operator { body; try_loc_ = i $loc($1); loc_ = i $sloc; try_operator_kind = Parsing_syntax.Try_question }
+    }
+  | "try!" body=pipe_expr {
+      Parsing_syntax.Pexpr_try_operator { body; try_loc_ = i $loc($1); loc_ = i $sloc; try_operator_kind = Parsing_syntax.Try_exclamation }
     }
 
 if_expr:
@@ -1486,6 +1506,11 @@ argument:
     let arg_value = Parsing_util.label_to_expr ~loc_:(Rloc.trim_last_char (i $loc(label))) label in
     { Parsing_syntax.arg_value; arg_kind = Labelled_pun label }
   }
+  (* label~=expr. this is not recommended *)
+  | label=POST_LABEL "=" arg_value=expr {
+    let label = { Parsing_syntax.label_name = label; loc_ = i $loc(label) } in
+    { Parsing_syntax.arg_value; arg_kind = Labelled label }
+  }
   (* label? *)
   | id=LIDENT "?" {
     let loc_ = i $loc(id) in
@@ -1668,8 +1693,8 @@ type_:
 
 
 record_decl_field:
-  | field_vis=visibility mutflag=option("mut") name=LIDENT ":" ty=type_ {
-    {Parsing_syntax.field_name = {Parsing_syntax.label = name; loc_ = i $loc(name)}; field_ty = ty; field_mut = mutflag <> None; field_vis; field_loc_ = i $sloc; field_doc = Docstring.empty }
+  | attrs=attributes field_vis=visibility mutflag=option("mut") name=LIDENT ":" ty=type_ {
+    {Parsing_syntax.field_name = {Parsing_syntax.label = name; loc_ = i $loc(name)}; field_attrs=attrs; field_ty = ty; field_mut = mutflag <> None; field_vis; field_loc_ = i $sloc; field_doc = Docstring.empty }
   }
 
 constructor_param:
@@ -1683,11 +1708,12 @@ constructor_param:
   }
 
 enum_constructor:
-  | id=UIDENT
+  | attrs=attributes
+    id=UIDENT
     constr_args=option(delimited("(", non_empty_list_commas(constructor_param), ")"))
     constr_tag=option(eq_int_tag) {
     let constr_name : Parsing_syntax.constr_name = { name = id; loc_ = i $loc(id) } in
-    {Parsing_syntax.constr_name; constr_args; constr_tag; constr_loc_ = i $sloc; constr_doc = Docstring.empty }
+    {Parsing_syntax.constr_name; constr_args; constr_tag; constr_attrs=attrs; constr_loc_ = i $sloc; constr_doc = Docstring.empty }
   }
 
 %inline eq_int_tag:
