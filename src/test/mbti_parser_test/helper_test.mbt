@@ -3,8 +3,10 @@ let fixtures_path = "src/test/mbti_parser_test/fixtures"
 
 ///|
 fn @test.T::run(t : Self, filename : String) -> Unit raise {
-  let content = @fs.read_file_to_bytes(fixtures_path + "/" + filename + ".mbti")
-  let lex_result = @lexer.tokens_from_bytes(
+  let content = @fs.read_file_to_string(
+    fixtures_path + "/" + filename + ".mbti",
+  )
+  let lex_result = @lexer2.tokens_from_string(
     name=filename,
     content,
     comment=false,

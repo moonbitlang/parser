@@ -1,7 +1,7 @@
 {
   "test-import": [
     "moonbitlang/x/fs",
-    "moonbitlang/parser/lexer",
+    "moonbitlang/parser/lexer2",
     "moonbitlang/parser/tokens",
     "moonbitlang/parser/basic"
   ]

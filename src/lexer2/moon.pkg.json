@@ -1,0 +1,6 @@
+{
+  "import": [
+    "moonbitlang/parser/tokens",
+    "moonbitlang/parser/basic"
+  ]
+}

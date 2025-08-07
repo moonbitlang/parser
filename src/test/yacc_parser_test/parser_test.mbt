@@ -8,10 +8,10 @@ fn test_yacc_parser(
   loc~ : SourceLoc,
 ) -> Unit raise Error {
   let filename = "src/test/yacc_parser_test/fixtures/\{label}.mbt_"
-  let bytes = @fs.read_file_to_bytes(filename) catch {
+  let bytes = @fs.read_file_to_string(filename) catch {
     err => fail("failed to read file \{filename}: \{err}", loc~)
   }
-  let tokens = @lexer.tokens_from_bytes(bytes, comment=false, name=filename).tokens.filter(fn(
+  let tokens = @lexer2.tokens_from_string(bytes, comment=false, name=filename).tokens.filter(fn(
       triple,
     ) {
       !(triple.0 is @tokens.Token::NEWLINE ||
