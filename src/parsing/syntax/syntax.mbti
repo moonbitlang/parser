@@ -19,7 +19,7 @@ fn desugar_array_get(loc~ : @syntax_types.Location, Expr, Expr) -> Expr
 
 fn desugar_array_set(loc~ : @syntax_types.Location, Expr, Expr, Expr) -> Expr
 
-fn impls_to_json(@list.T[Impl]) -> Json
+fn impls_to_json(@list.List[Impl]) -> Json
 
 fn label_to_expr(loc~ : @syntax_types.Location, Label) -> Expr
 
@@ -29,9 +29,9 @@ fn loc_of_expression(Expr) -> @syntax_types.Location
 
 fn make_alias_pattern(loc~ : @syntax_types.Location, Pattern, Binder) -> Pattern
 
-fn make_array_expr(loc~ : @syntax_types.Location, @list.T[SpreadableElem]) -> Expr
+fn make_array_expr(loc~ : @syntax_types.Location, @list.List[SpreadableElem]) -> Expr
 
-fn make_arrow_fn(@list.T[(ArrowFnParam, Type?)], Expr, loc~ : @syntax_types.Location) -> Func
+fn make_arrow_fn(@list.List[(ArrowFnParam, Type?)], Expr, loc~ : @syntax_types.Location) -> Func
 
 fn make_assign_opt(loc~ : @syntax_types.Location, Expr, Expr) -> Expr?
 
@@ -43,7 +43,7 @@ fn make_constant_expr(loc~ : @syntax_types.Location, Constant) -> Expr
 
 fn make_constant_pattern(loc~ : @syntax_types.Location, Constant) -> Pattern
 
-fn make_constr_pattern(loc~ : @syntax_types.Location, Constructor, @list.T[ConstrPatArg]?, Bool) -> Pattern
+fn make_constr_pattern(loc~ : @syntax_types.Location, Constructor, @list.List[ConstrPatArg]?, Bool) -> Pattern
 
 fn make_double(String) -> Constant
 
@@ -59,17 +59,17 @@ fn make_int(String) -> Constant
 
 fn make_interp_expr(loc~ : @syntax_types.Location, Array[@syntax_types.InterpElem]) -> Expr
 
-fn make_interps(Array[@syntax_types.InterpElem]) -> @list.T[InterpElem]
+fn make_interps(Array[@syntax_types.InterpElem]) -> @list.List[InterpElem]
 
 fn make_option_type(loc~ : @syntax_types.Location, constr_loc~ : @syntax_types.Location, Type) -> Type
 
-fn make_record_expr(loc~ : @syntax_types.Location, trailing~ : TrailingMark, TypeName?, @list.T[FieldDef]) -> Expr
+fn make_record_expr(loc~ : @syntax_types.Location, trailing~ : TrailingMark, TypeName?, @list.List[FieldDef]) -> Expr
 
-fn make_tuple_expr(loc~ : @syntax_types.Location, @list.T[Expr]) -> Expr
+fn make_tuple_expr(loc~ : @syntax_types.Location, @list.List[Expr]) -> Expr
 
-fn make_tuple_pattern(loc~ : @syntax_types.Location, @list.T[Pattern]) -> Pattern
+fn make_tuple_pattern(loc~ : @syntax_types.Location, @list.List[Pattern]) -> Pattern
 
-fn make_tuple_type(loc~ : @syntax_types.Location, @list.T[Type]) -> Type
+fn make_tuple_type(loc~ : @syntax_types.Location, @list.List[Type]) -> Type
 
 fn make_uminus(loc~ : @syntax_types.Location, String, Expr) -> Expr
 
@@ -126,8 +126,8 @@ pub(all) enum ArrayPattern {
 impl ToJson for ArrayPattern
 
 pub(all) enum ArrayPatterns {
-  Closed(@list.T[ArrayPattern])
-  Open(@list.T[ArrayPattern], @list.T[ArrayPattern], DotDotBinder)
+  Closed(@list.List[ArrayPattern])
+  Open(@list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder)
 }
 impl ToJson for ArrayPatterns
 
@@ -167,7 +167,7 @@ impl ToJson for Constant
 
 pub(all) struct ConstrDecl {
   name : ConstrName
-  args : @list.T[ConstrParam]?
+  args : @list.List[ConstrParam]?
   tag : (String, @syntax_types.Location)?
   loc : @syntax_types.Location
   mut doc : @syntax_types.DocString
@@ -214,14 +214,14 @@ pub(all) enum ConstructorExtraInfo {
 impl ToJson for ConstructorExtraInfo
 
 pub(all) enum DeclBody {
-  DeclBody(local_types~ : @list.T[LocalTypeDecl], expr~ : Expr)
+  DeclBody(local_types~ : @list.List[LocalTypeDecl], expr~ : Expr)
   DeclStubs(FuncStubs)
 }
 impl ToJson for DeclBody
 
 pub(all) struct DerivingDirective {
   type_name : TypeName
-  args : @list.T[Argument]
+  args : @list.List[Argument]
   loc : @syntax_types.Location
 }
 impl ToJson for DerivingDirective
@@ -236,7 +236,7 @@ impl ToJson for DotDotBinder
 
 pub(all) enum EmbeddedCode {
   CodeString(String)
-  CodeMultilineString(@list.T[String])
+  CodeMultilineString(@list.List[String])
 }
 impl ToJson for EmbeddedCode
 
@@ -252,23 +252,23 @@ impl ToJson for ErrorType
 pub(all) enum ExceptionDecl {
   NoPayload
   SinglePayload(Type)
-  EnumPayload(@list.T[ConstrDecl])
+  EnumPayload(@list.List[ConstrDecl])
 }
 impl ToJson for ExceptionDecl
 
 pub(all) enum Expr {
-  Apply(func~ : Expr, args~ : @list.T[Argument], attr~ : ApplyAttr, loc~ : @syntax_types.Location)
+  Apply(func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @syntax_types.Location)
   Infix(op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @syntax_types.Location)
   Unary(op~ : Var, expr~ : Expr, loc~ : @syntax_types.Location)
-  Array(exprs~ : @list.T[Expr], loc~ : @syntax_types.Location)
-  ArraySpread(elems~ : @list.T[SpreadableElem], loc~ : @syntax_types.Location)
+  Array(exprs~ : @list.List[Expr], loc~ : @syntax_types.Location)
+  ArraySpread(elems~ : @list.List[SpreadableElem], loc~ : @syntax_types.Location)
   ArrayGet(array~ : Expr, index~ : Expr, loc~ : @syntax_types.Location)
   ArrayGetSlice(array~ : Expr, start_index~ : Expr?, end_index~ : Expr?, index_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location)
   ArraySet(array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @syntax_types.Location)
   ArrayAugmentedSet(op~ : Var, array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @syntax_types.Location)
   Constant(c~ : Constant, loc~ : @syntax_types.Location)
-  MultilineString(elems~ : @list.T[MultilineStringElem], loc~ : @syntax_types.Location)
-  Interp(elems~ : @list.T[InterpElem], loc~ : @syntax_types.Location)
+  MultilineString(elems~ : @list.List[MultilineStringElem], loc~ : @syntax_types.Location)
+  Interp(elems~ : @list.List[InterpElem], loc~ : @syntax_types.Location)
   Constraint(expr~ : Expr, ty~ : Type, loc~ : @syntax_types.Location)
   Constr(constr~ : Constructor, loc~ : @syntax_types.Location)
   While(loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location)
@@ -279,19 +279,19 @@ pub(all) enum Expr {
   Is(expr~ : Expr, pat~ : Pattern, loc~ : @syntax_types.Location)
   Defer(expr~ : Expr, body~ : Expr, loc~ : @syntax_types.Location)
   LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : @syntax_types.Location)
-  LetRec(bindings~ : @list.T[(Binder, Func)], body~ : Expr, loc~ : @syntax_types.Location)
-  LetAnd(bindings~ : @list.T[(Binder, Type?, Func)], body~ : Expr, loc~ : @syntax_types.Location)
+  LetRec(bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @syntax_types.Location)
+  LetAnd(bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @syntax_types.Location)
   Let(pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @syntax_types.Location)
-  Sequence(exprs~ : @list.T[Expr], last_expr~ : Expr, loc~ : @syntax_types.Location)
-  Tuple(exprs~ : @list.T[Expr], loc~ : @syntax_types.Location)
-  Record(type_name~ : TypeName?, fields~ : @list.T[FieldDef], trailing~ : TrailingMark, loc~ : @syntax_types.Location)
-  RecordUpdate(type_name~ : TypeName?, record~ : Expr, fields~ : @list.T[FieldDef], loc~ : @syntax_types.Location)
+  Sequence(exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @syntax_types.Location)
+  Tuple(exprs~ : @list.List[Expr], loc~ : @syntax_types.Location)
+  Record(type_name~ : TypeName?, fields~ : @list.List[FieldDef], trailing~ : TrailingMark, loc~ : @syntax_types.Location)
+  RecordUpdate(type_name~ : TypeName?, record~ : Expr, fields~ : @list.List[FieldDef], loc~ : @syntax_types.Location)
   Field(record~ : Expr, accessor~ : Accessor, loc~ : @syntax_types.Location)
   Method(type_name~ : TypeName, method_name~ : Label, loc~ : @syntax_types.Location)
-  DotApply(self~ : Expr, method_name~ : Label, args~ : @list.T[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @syntax_types.Location)
+  DotApply(self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @syntax_types.Location)
   As(expr~ : Expr, trait_~ : TypeName, loc~ : @syntax_types.Location)
   Mutate(record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @syntax_types.Location)
-  Match(expr~ : Expr, cases~ : @list.T[Case], match_loc~ : @syntax_types.Location, using_~ : Label?, loc~ : @syntax_types.Location)
+  Match(expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @syntax_types.Location, using_~ : Label?, loc~ : @syntax_types.Location)
   LetMut(binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @syntax_types.Location)
   Pipe(lhs~ : Expr, rhs~ : Expr, loc~ : @syntax_types.Location)
   Assign(var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @syntax_types.Location)
@@ -300,15 +300,15 @@ pub(all) enum Expr {
   Raise(err_value~ : Expr, loc~ : @syntax_types.Location)
   Unit(loc~ : @syntax_types.Location, faked~ : Bool)
   Break(arg~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location)
-  Continue(args~ : @list.T[Expr], label~ : Label?, loc~ : @syntax_types.Location)
-  Loop(args~ : @list.T[Expr], body~ : @list.T[MultiArgCase], label~ : Label?, loop_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location)
-  For(binders~ : @list.T[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.T[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location)
-  ForEach(binders~ : @list.T[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location)
-  Try(body~ : Expr, catch_~ : @list.T[Case], catch_all~ : Bool, try_else~ : @list.T[Case]?, has_try~ : Bool, try_loc~ : @syntax_types.Location, catch_loc~ : @syntax_types.Location, else_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location)
+  Continue(args~ : @list.List[Expr], label~ : Label?, loc~ : @syntax_types.Location)
+  Loop(args~ : @list.List[Expr], body~ : @list.List[MultiArgCase], label~ : Label?, loop_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location)
+  For(binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location)
+  ForEach(binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location)
+  Try(body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @syntax_types.Location, catch_loc~ : @syntax_types.Location, else_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location)
   TryOperator(body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location)
-  Map(elems~ : @list.T[MapExprElem], loc~ : @syntax_types.Location)
+  Map(elems~ : @list.List[MapExprElem], loc~ : @syntax_types.Location)
   Group(expr~ : Expr, group~ : Group, loc~ : @syntax_types.Location)
-  StaticAssert(asserts~ : @list.T[StaticAssertion], body~ : Expr)
+  StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
 }
 fn Expr::loc(Self) -> @syntax_types.Location
 impl ToJson for Expr
@@ -357,20 +357,20 @@ pub(all) struct FunDecl {
   name : Binder
   has_error : @syntax_types.Location?
   is_async : Bool
-  decl_params : @list.T[Parameter]?
+  decl_params : @list.List[Parameter]?
   params_loc : @syntax_types.Location
-  quantifiers : @list.T[TypeVarBinder]
+  quantifiers : @list.List[TypeVarBinder]
   return_type : Type?
   error_type : ErrorType
   vis : Visibility
-  attrs : @list.T[@syntax_types.Attribute]
+  attrs : @list.List[@syntax_types.Attribute]
   mut doc : @syntax_types.DocString
 }
 impl ToJson for FunDecl
 
 pub(all) enum Func {
-  Lambda(parameters~ : @list.T[Parameter], params_loc~ : @syntax_types.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @syntax_types.Location?, is_async~ : Bool, loc~ : @syntax_types.Location)
-  Match(cases~ : @list.T[MultiArgCase], has_error~ : @syntax_types.Location?, is_async~ : Bool, fn_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location)
+  Lambda(parameters~ : @list.List[Parameter], params_loc~ : @syntax_types.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @syntax_types.Location?, is_async~ : Bool, loc~ : @syntax_types.Location)
+  Match(cases~ : @list.List[MultiArgCase], has_error~ : @syntax_types.Location?, is_async~ : Bool, fn_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location)
 }
 impl ToJson for Func
 
@@ -394,18 +394,18 @@ pub(all) enum Hole {
 impl ToJson for Hole
 
 pub(all) enum Impl {
-  TopExpr(expr~ : Expr, is_main~ : Bool, local_types~ : @list.T[LocalTypeDecl], loc~ : @syntax_types.Location)
-  TopTest(expr~ : Expr, name~ : (String, @syntax_types.Location)?, params~ : @list.T[Parameter]?, local_types~ : @list.T[LocalTypeDecl], loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
+  TopExpr(expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @syntax_types.Location)
+  TopTest(expr~ : Expr, name~ : (String, @syntax_types.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
   TopTypeDef(TypeDecl)
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @syntax_types.Location)
-  TopFuncAlias(pkg~ : Label?, type_name~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, mut doc~ : @syntax_types.DocString, loc~ : @syntax_types.Location)
-  TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
+  TopFuncAlias(pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@syntax_types.Attribute], is_list~ : Bool, mut doc~ : @syntax_types.DocString, loc~ : @syntax_types.Location)
+  TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
   TopTrait(TraitDecl)
-  TopBatchTypeAlias(pkg~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, mut doc~ : @syntax_types.DocString)
-  TopBatchTraitAlias(pkg~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, mut doc~ : @syntax_types.DocString)
-  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @syntax_types.Location?, quantifiers~ : @list.T[TypeVarBinder], params~ : @list.T[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
-  TopView(quantifiers~ : @list.T[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @syntax_types.Location, view_constrs~ : @list.T[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.T[Parameter], params_loc~ : @syntax_types.Location, body~ : Expr, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
-  TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.T[TypeVarBinder], vis~ : Visibility, attrs~ : @list.T[@syntax_types.Attribute], loc~ : @syntax_types.Location, mut doc~ : @syntax_types.DocString)
+  TopBatchTypeAlias(pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], is_list~ : Bool, mut doc~ : @syntax_types.DocString)
+  TopBatchTraitAlias(pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], is_list~ : Bool, mut doc~ : @syntax_types.DocString)
+  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @syntax_types.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
+  TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @syntax_types.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @syntax_types.Location, body~ : Expr, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
+  TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@syntax_types.Attribute], loc~ : @syntax_types.Location, mut doc~ : @syntax_types.DocString)
 }
 impl ToJson for Impl
 
@@ -431,7 +431,7 @@ pub(all) struct LocalTypeDecl {
   tycon : String
   tycon_loc : @syntax_types.Location
   components : TypeDesc
-  deriving : @list.T[DerivingDirective]
+  deriving : @list.List[DerivingDirective]
 }
 impl ToJson for LocalTypeDecl
 
@@ -464,7 +464,7 @@ fn[T] MapVisitorBase::inner(Self[T]) -> T
 impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T]
 
 pub(all) struct MultiArgCase {
-  patterns : @list.T[Pattern]
+  patterns : @list.List[Pattern]
   guard_ : Expr?
   body : Expr
 }
@@ -472,7 +472,7 @@ impl ToJson for MultiArgCase
 
 pub(all) enum MultilineStringElem {
   String(String)
-  Interp(@list.T[InterpElem])
+  Interp(@list.List[InterpElem])
 }
 impl ToJson for MultilineStringElem
 
@@ -491,12 +491,12 @@ pub(all) enum Pattern {
   Array(pats~ : ArrayPatterns, loc~ : @syntax_types.Location)
   Constant(c~ : Constant, loc~ : @syntax_types.Location)
   Constraint(pat~ : Pattern, ty~ : Type, loc~ : @syntax_types.Location)
-  Constr(constr~ : Constructor, args~ : @list.T[ConstrPatArg]?, is_open~ : Bool, loc~ : @syntax_types.Location)
+  Constr(constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @syntax_types.Location)
   Or(pat1~ : Pattern, pat2~ : Pattern, loc~ : @syntax_types.Location)
-  Tuple(pats~ : @list.T[Pattern], loc~ : @syntax_types.Location)
+  Tuple(pats~ : @list.List[Pattern], loc~ : @syntax_types.Location)
   Var(Binder)
-  Record(fields~ : @list.T[FieldPat], is_closed~ : Bool, loc~ : @syntax_types.Location)
-  Map(elems~ : @list.T[MapPatElem], is_closed~ : Bool, loc~ : @syntax_types.Location)
+  Record(fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : @syntax_types.Location)
+  Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : @syntax_types.Location)
   Range(lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : @syntax_types.Location)
 }
 impl ToJson for Pattern
@@ -524,11 +524,11 @@ impl ToJson for TrailingMark
 
 pub(all) struct TraitDecl {
   name : Binder
-  supers : @list.T[TypeVarConstraint]
-  methods : @list.T[TraitMethodDecl]
+  supers : @list.List[TypeVarConstraint]
+  methods : @list.List[TraitMethodDecl]
   vis : Visibility
   loc : @syntax_types.Location
-  attrs : @list.T[@syntax_types.Attribute]
+  attrs : @list.List[@syntax_types.Attribute]
   mut doc : @syntax_types.DocString
 }
 impl ToJson for TraitDecl
@@ -537,8 +537,8 @@ pub(all) struct TraitMethodDecl {
   name : Binder
   has_error : @syntax_types.Location?
   is_async : Bool
-  quantifiers : @list.T[TypeVarBinder]
-  params : @list.T[Parameter]
+  quantifiers : @list.List[TypeVarBinder]
+  params : @list.List[Parameter]
   return_type : Type?
   error_type : ErrorType
   has_default : @syntax_types.Location?
@@ -554,9 +554,9 @@ impl ToJson for TryOperatorKind
 
 pub(all) enum Type {
   Any(loc~ : @syntax_types.Location)
-  Arrow(args~ : @list.T[Type], res~ : Type, err~ : ErrorType, is_async~ : Bool, loc~ : @syntax_types.Location)
-  Tuple(tys~ : @list.T[Type], loc~ : @syntax_types.Location)
-  Name(constr_id~ : ConstrId, tys~ : @list.T[Type], loc~ : @syntax_types.Location)
+  Arrow(args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : Bool, loc~ : @syntax_types.Location)
+  Tuple(tys~ : @list.List[Type], loc~ : @syntax_types.Location)
+  Name(constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @syntax_types.Location)
   Option(ty~ : Type, loc~ : @syntax_types.Location, question_loc~ : @syntax_types.Location)
   Object(ConstrId)
 }
@@ -566,12 +566,12 @@ impl ToJson for Type
 pub(all) struct TypeDecl {
   tycon : String
   tycon_loc : @syntax_types.Location
-  params : @list.T[TypeDeclBinder]
+  params : @list.List[TypeDeclBinder]
   components : TypeDesc
-  attrs : @list.T[@syntax_types.Attribute]
+  attrs : @list.List[@syntax_types.Attribute]
   mut doc : @syntax_types.DocString
   type_vis : Visibility
-  deriving : @list.T[DerivingDirective]
+  deriving : @list.List[DerivingDirective]
   loc : @syntax_types.Location
 }
 impl ToJson for TypeDecl
@@ -587,9 +587,9 @@ pub(all) enum TypeDesc {
   Extern
   Newtype(Type)
   Error(ExceptionDecl)
-  Variant(@list.T[ConstrDecl])
-  Record(@list.T[FieldDecl])
-  TupleStruct(@list.T[Type])
+  Variant(@list.List[ConstrDecl])
+  Record(@list.List[FieldDecl])
+  TupleStruct(@list.List[Type])
   Alias(Type)
 }
 impl ToJson for TypeDesc
@@ -603,7 +603,7 @@ impl ToJson for TypeName
 
 pub(all) struct TypeVarBinder {
   name : String
-  constraints : @list.T[TypeVarConstraint]
+  constraints : @list.List[TypeVarConstraint]
   loc : @syntax_types.Location
 }
 impl ToJson for TypeVarBinder
@@ -640,13 +640,13 @@ pub typealias String as CharLiteral
 
 pub typealias @syntax_types.DocString as DocString
 
-pub typealias @list.T[Impl] as Impls
+pub typealias @list.List[Impl] as Impls
 
 pub typealias @syntax_types.InterpSource as InterpSource
 
 pub typealias @syntax_types.Location as Location
 
-pub typealias @list.T[Parameter] as Parameters
+pub typealias @list.List[Parameter] as Parameters
 
 pub typealias @syntax_types.Position as Position
 
@@ -657,31 +657,31 @@ pub typealias (String, @syntax_types.Location)? as TestName
 // Traits
 pub(open) trait ImplMapVisitor {
   visit_impl(Self, Impl) -> Impl = _
-  visit_top_expr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.T[LocalTypeDecl], loc~ : @syntax_types.Location) -> Impl = _
-  visit_top_test(Self, expr~ : Expr, name~ : (String, @syntax_types.Location)?, params~ : @list.T[Parameter]?, local_types~ : @list.T[LocalTypeDecl], loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl = _
+  visit_top_expr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @syntax_types.Location) -> Impl = _
+  visit_top_test(Self, expr~ : Expr, name~ : (String, @syntax_types.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl = _
   visit_top_type_def(Self, TypeDecl) -> Impl = _
   visit_top_func_def(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @syntax_types.Location) -> Impl = _
-  visit_top_func_alias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString, loc~ : @syntax_types.Location) -> Impl = _
-  visit_top_let_def(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl = _
+  visit_top_func_alias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString, loc~ : @syntax_types.Location) -> Impl = _
+  visit_top_let_def(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl = _
   visit_top_trait(Self, TraitDecl) -> Impl = _
-  visit_top_batch_type_alias(Self, pkg~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString) -> Impl = _
-  visit_top_batch_trait_alias(Self, pkg~ : Label?, targets~ : @list.T[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString) -> Impl = _
-  visit_top_impl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @syntax_types.Location?, quantifiers~ : @list.T[TypeVarBinder], params~ : @list.T[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl = _
-  visit_top_view(Self, quantifiers~ : @list.T[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @syntax_types.Location, view_constrs~ : @list.T[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.T[Parameter], params_loc~ : @syntax_types.Location, body~ : Expr, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.T[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl = _
-  visit_top_impl_relation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.T[TypeVarBinder], vis~ : Visibility, attrs~ : @list.T[@syntax_types.Attribute], loc~ : @syntax_types.Location, doc~ : @syntax_types.DocString) -> Impl = _
+  visit_top_batch_type_alias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString) -> Impl = _
+  visit_top_batch_trait_alias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], is_list~ : Bool, doc~ : @syntax_types.DocString) -> Impl = _
+  visit_top_impl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @syntax_types.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl = _
+  visit_top_view(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @syntax_types.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @syntax_types.Location, body~ : Expr, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], doc~ : @syntax_types.DocString) -> Impl = _
+  visit_top_impl_relation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@syntax_types.Attribute], loc~ : @syntax_types.Location, doc~ : @syntax_types.DocString) -> Impl = _
   visit_expr(Self, Expr) -> Expr = _
-  visit_apply(Self, func~ : Expr, args~ : @list.T[Argument], attr~ : ApplyAttr, loc~ : @syntax_types.Location) -> Expr = _
+  visit_apply(Self, func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @syntax_types.Location) -> Expr = _
   visit_infix(Self, op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
   visit_unary(Self, op~ : Var, expr~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
-  visit_array(Self, exprs~ : @list.T[Expr], loc~ : @syntax_types.Location) -> Expr = _
-  visit_array_spread(Self, elems~ : @list.T[SpreadableElem], loc~ : @syntax_types.Location) -> Expr = _
+  visit_array(Self, exprs~ : @list.List[Expr], loc~ : @syntax_types.Location) -> Expr = _
+  visit_array_spread(Self, elems~ : @list.List[SpreadableElem], loc~ : @syntax_types.Location) -> Expr = _
   visit_array_get(Self, array~ : Expr, index~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
   visit_array_get_slice(Self, array~ : Expr, start_index~ : Expr?, end_index~ : Expr?, index_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location) -> Expr = _
   visit_array_set(Self, array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
   visit_array_augmented_set(Self, op~ : Var, array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
   visit_constant(Self, c~ : Constant, loc~ : @syntax_types.Location) -> Expr = _
-  visit_multiline_string(Self, elems~ : @list.T[MultilineStringElem], loc~ : @syntax_types.Location) -> Expr = _
-  visit_interp(Self, elems~ : @list.T[InterpElem], loc~ : @syntax_types.Location) -> Expr = _
+  visit_multiline_string(Self, elems~ : @list.List[MultilineStringElem], loc~ : @syntax_types.Location) -> Expr = _
+  visit_interp(Self, elems~ : @list.List[InterpElem], loc~ : @syntax_types.Location) -> Expr = _
   visit_constraint(Self, expr~ : Expr, ty~ : Type, loc~ : @syntax_types.Location) -> Expr = _
   visit_constr(Self, constr~ : Constructor, loc~ : @syntax_types.Location) -> Expr = _
   visit_while(Self, loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location) -> Expr = _
@@ -692,19 +692,19 @@ pub(open) trait ImplMapVisitor {
   visit_is(Self, expr~ : Expr, pat~ : Pattern, loc~ : @syntax_types.Location) -> Expr = _
   visit_defer(Self, expr~ : Expr, body~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
   visit_let_fn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
-  visit_let_rec(Self, bindings~ : @list.T[(Binder, Func)], body~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
-  visit_let_and(Self, bindings~ : @list.T[(Binder, Type?, Func)], body~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
+  visit_let_rec(Self, bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
+  visit_let_and(Self, bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
   visit_let(Self, pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
-  visit_sequence(Self, exprs~ : @list.T[Expr], last_expr~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
-  visit_tuple(Self, exprs~ : @list.T[Expr], loc~ : @syntax_types.Location) -> Expr = _
-  visit_record(Self, type_name~ : TypeName?, fields~ : @list.T[FieldDef], trailing~ : TrailingMark, loc~ : @syntax_types.Location) -> Expr = _
-  visit_record_update(Self, type_name~ : TypeName?, record~ : Expr, fields~ : @list.T[FieldDef], loc~ : @syntax_types.Location) -> Expr = _
+  visit_sequence(Self, exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
+  visit_tuple(Self, exprs~ : @list.List[Expr], loc~ : @syntax_types.Location) -> Expr = _
+  visit_record(Self, type_name~ : TypeName?, fields~ : @list.List[FieldDef], trailing~ : TrailingMark, loc~ : @syntax_types.Location) -> Expr = _
+  visit_record_update(Self, type_name~ : TypeName?, record~ : Expr, fields~ : @list.List[FieldDef], loc~ : @syntax_types.Location) -> Expr = _
   visit_field(Self, record~ : Expr, accessor~ : Accessor, loc~ : @syntax_types.Location) -> Expr = _
   visit_method(Self, type_name~ : TypeName, method_name~ : Label, loc~ : @syntax_types.Location) -> Expr = _
-  visit_dot_apply(Self, self~ : Expr, method_name~ : Label, args~ : @list.T[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @syntax_types.Location) -> Expr = _
+  visit_dot_apply(Self, self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @syntax_types.Location) -> Expr = _
   visit_as(Self, expr~ : Expr, trait_~ : TypeName, loc~ : @syntax_types.Location) -> Expr = _
   visit_mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @syntax_types.Location) -> Expr = _
-  visit_match(Self, expr~ : Expr, cases~ : @list.T[Case], match_loc~ : @syntax_types.Location, using_~ : Label?, loc~ : @syntax_types.Location) -> Expr = _
+  visit_match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @syntax_types.Location, using_~ : Label?, loc~ : @syntax_types.Location) -> Expr = _
   visit_let_mut(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
   visit_pipe(Self, lhs~ : Expr, rhs~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
   visit_assign(Self, var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @syntax_types.Location) -> Expr = _
@@ -713,14 +713,14 @@ pub(open) trait ImplMapVisitor {
   visit_raise(Self, err_value~ : Expr, loc~ : @syntax_types.Location) -> Expr = _
   visit_unit(Self, loc~ : @syntax_types.Location, faked~ : Bool) -> Expr = _
   visit_break(Self, arg~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location) -> Expr = _
-  visit_continue(Self, args~ : @list.T[Expr], label~ : Label?, loc~ : @syntax_types.Location) -> Expr = _
-  visit_loop(Self, args~ : @list.T[Expr], body~ : @list.T[MultiArgCase], label~ : Label?, loop_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location) -> Expr = _
-  visit_for(Self, binders~ : @list.T[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.T[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location) -> Expr = _
-  visit_for_each(Self, binders~ : @list.T[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location) -> Expr = _
-  visit_try(Self, body~ : Expr, catch_~ : @list.T[Case], catch_all~ : Bool, try_else~ : @list.T[Case]?, has_try~ : Bool, try_loc~ : @syntax_types.Location, catch_loc~ : @syntax_types.Location, else_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location) -> Expr = _
+  visit_continue(Self, args~ : @list.List[Expr], label~ : Label?, loc~ : @syntax_types.Location) -> Expr = _
+  visit_loop(Self, args~ : @list.List[Expr], body~ : @list.List[MultiArgCase], label~ : Label?, loop_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location) -> Expr = _
+  visit_for(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location) -> Expr = _
+  visit_for_each(Self, binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @syntax_types.Location) -> Expr = _
+  visit_try(Self, body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @syntax_types.Location, catch_loc~ : @syntax_types.Location, else_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location) -> Expr = _
   visit_try_operator(Self, body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @syntax_types.Location, loc~ : @syntax_types.Location) -> Expr = _
-  visit_map(Self, elems~ : @list.T[MapExprElem], loc~ : @syntax_types.Location) -> Expr = _
+  visit_map(Self, elems~ : @list.List[MapExprElem], loc~ : @syntax_types.Location) -> Expr = _
   visit_group(Self, expr~ : Expr, group~ : Group, loc~ : @syntax_types.Location) -> Expr = _
-  visit_static_assert(Self, asserts~ : @list.T[StaticAssertion], body~ : Expr) -> Expr = _
+  visit_static_assert(Self, asserts~ : @list.List[StaticAssertion], body~ : Expr) -> Expr = _
 }
 

@@ -20,7 +20,7 @@ impl ToJson for Attribute
 pub(all) enum AttributeExpr {
   Ident(AttributeId)
   Str(String)
-  Apply(AttributeId, @list.T[AttributeProp])
+  Apply(AttributeId, @list.List[AttributeProp])
 }
 
 pub(all) struct AttributeId {
@@ -49,7 +49,7 @@ impl Eq for CommentKind
 impl Show for CommentKind
 
 pub(all) struct DocString {
-  content : @list.T[String]
+  content : @list.List[String]
   loc : Location
 }
 fn DocString::empty() -> Self

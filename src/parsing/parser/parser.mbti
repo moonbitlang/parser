@@ -11,7 +11,7 @@ import(
 // Values
 fn expression(Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)], initial_pos? : @syntax_types.Position) -> @syntax.Expr raise ParseError
 
-fn structure(Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)], initial_pos? : @syntax_types.Position) -> @list.T[@syntax.Impl] raise ParseError
+fn structure(Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)], initial_pos? : @syntax_types.Position) -> @list.List[@syntax.Impl] raise ParseError
 
 // Errors
 pub suberror ParseError {

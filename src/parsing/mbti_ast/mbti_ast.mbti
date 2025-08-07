@@ -13,7 +13,7 @@ import(
 
 // Types and methods
 pub(all) enum AliasSig {
-  TypeAlias(name~ : Name, type_params~ : @list.T[TypeParamNoConstraints], type_~ : @syntax.Type, vis~ : @syntax.Visibility)
+  TypeAlias(name~ : Name, type_params~ : @list.List[TypeParamNoConstraints], type_~ : @syntax.Type, vis~ : @syntax.Visibility)
   TraitAlias(name~ : Name, trait_name~ : QualifiedName, vis~ : @syntax.Visibility)
   FnAlias(name~ : Name, type_name~ : QualifiedName, loc~ : @syntax_types.Location)
 }
@@ -27,25 +27,25 @@ pub(all) struct ConstSig {
 impl ToJson for ConstSig
 
 pub(all) struct FuncSig {
-  attr : @list.T[(String, String?, String)]
+  attr : @list.List[(String, String?, String)]
   type_name : Name?
   name : Name
-  params : @list.T[Parameter]
+  params : @list.List[Parameter]
   return_ : (@syntax.Type, @syntax.ErrorType)
-  type_params : @list.T[TypeParamWithConstraints]
+  type_params : @list.List[TypeParamWithConstraints]
 }
 impl ToJson for FuncSig
 
 pub(all) enum ImplSig {
-  Trait(type_params~ : @list.T[TypeParamWithConstraints], type_~ : @syntax.Type, trait_name~ : QualifiedName)
+  Trait(type_params~ : @list.List[TypeParamWithConstraints], type_~ : @syntax.Type, trait_name~ : QualifiedName)
   DefaultImpl(trait_name~ : Name, method_name~ : Name)
 }
 impl ToJson for ImplSig
 
 pub(all) struct Mbti {
   package_name : String
-  imports : @list.T[PackageImport]
-  sigs : @list.T[(Sig, @syntax_types.Location)]
+  imports : @list.List[PackageImport]
+  sigs : @list.List[(Sig, @syntax_types.Location)]
 }
 impl ToJson for Mbti
 
@@ -95,7 +95,7 @@ impl ToJson for TraitMethodParameter
 
 pub(all) struct TraitMethodSig {
   name : Name
-  params : @list.T[TraitMethodParameter]
+  params : @list.List[TraitMethodParameter]
   has_default : Bool
   return_ : (@syntax.Type, @syntax.ErrorType)
 }
@@ -103,8 +103,8 @@ impl ToJson for TraitMethodSig
 
 pub(all) struct TraitSig {
   name : Name
-  super_traits : @list.T[QualifiedName]
-  methods : @list.T[TraitMethodSig]
+  super_traits : @list.List[QualifiedName]
+  methods : @list.List[TraitMethodSig]
   vis : @syntax.Visibility
 }
 impl ToJson for TraitSig
@@ -117,13 +117,13 @@ impl ToJson for TypeParamNoConstraints
 
 pub(all) struct TypeParamWithConstraints {
   name : Name
-  constraints : @list.T[QualifiedName]
+  constraints : @list.List[QualifiedName]
 }
 impl ToJson for TypeParamWithConstraints
 
 pub(all) struct TypeSig {
   name : Name
-  type_params : @list.T[TypeParamNoConstraints]
+  type_params : @list.List[TypeParamNoConstraints]
   components : @syntax.TypeDesc
   vis : @syntax.Visibility
 }

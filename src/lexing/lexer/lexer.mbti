@@ -16,7 +16,7 @@ fn tokens_from_bytes(name? : String, start_pos? : @syntax_types.Position, is_int
 pub struct LexResult {
   tokens : Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)]
   errors : Array[(@syntax_types.Position, @syntax_types.Position, LexicalError)]
-  docstrings : Array[@list.T[(@syntax_types.Location, @syntax_types.Comment)]]
+  docstrings : Array[@list.List[(@syntax_types.Location, @syntax_types.Comment)]]
 }
 
 pub enum LexicalError {
