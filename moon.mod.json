@@ -6,7 +6,7 @@
     "Yoorkin/ArgParser": "0.1.9"
   },
   "bin-deps": {
-    "moonbitlang/yacc": "0.6.9",
+    "moonbitlang/yacc": "0.6.10",
     "moonbitlang/ulex": "0.3.14"
   },
   "readme": "README.md",
