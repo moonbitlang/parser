@@ -2744,30 +2744,30 @@ fn State::parse_try_expr(self : Self) -> @syntax.Expr {
 }
 
 ///|
-// fn State::parse_try_question(self : Self) -> @syntax.Expr {
-//   if self.mode is Panic(loc~, ..) {
-//     return Hole(loc~, kind=Synthesized)
-//   }
-//   let spos = self.peek_spos()
-//   let try_loc = self.peek_location()
-//   self.skip()
-//   let body = self.parse_pipe_expr(parsed=None)
-//   let loc = self.loc_start_with(spos)
-//   TryOperator(body~, kind=Question, try_loc~, loc~)
-// }
+fn State::parse_try_question(self : Self) -> @syntax.Expr {
+  if self.mode is Panic(loc~, ..) {
+    return Hole(loc~, kind=Synthesized)
+  }
+  let spos = self.peek_spos()
+  let try_loc = self.peek_location()
+  self.skip()
+  let body = self.parse_pipe_expr(parsed=None)
+  let loc = self.loc_start_with(spos)
+  TryOperator(body~, kind=Question, try_loc~, loc~)
+}
 
 ///|
-// fn State::parse_try_exclamation(self : Self) -> @syntax.Expr {
-//   if self.mode is Panic(loc~, ..) {
-//     return Hole(loc~, kind=Synthesized)
-//   }
-//   let spos = self.peek_spos()
-//   let try_loc = self.peek_location()
-//   self.skip()
-//   let body = self.parse_pipe_expr(parsed=None)
-//   let loc = self.loc_start_with(spos)
-//   TryOperator(body~, kind=Exclamation, try_loc~, loc~)
-// }
+fn State::parse_try_exclamation(self : Self) -> @syntax.Expr {
+  if self.mode is Panic(loc~, ..) {
+    return Hole(loc~, kind=Synthesized)
+  }
+  let spos = self.peek_spos()
+  let try_loc = self.peek_location()
+  self.skip()
+  let body = self.parse_pipe_expr(parsed=None)
+  let loc = self.loc_start_with(spos)
+  TryOperator(body~, kind=Exclamation, try_loc~, loc~)
+}
 
 ///|
 fn State::parse_if_expr(self : Self) -> @syntax.Expr {
@@ -3242,6 +3242,8 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
     FOR => self.parse_for_expr(label=None)
     WHILE => self.parse_while_loop(label=None)
     TRY => self.parse_try_expr()
+    TRY_QUESTION => self.parse_try_question()
+    TRY_EXCLAMATION => self.parse_try_exclamation()
     IF => self.parse_if_expr()
     MATCH => self.parse_match_expr()
     LPAREN => self.handle_lparen()
