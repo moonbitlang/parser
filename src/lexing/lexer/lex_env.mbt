@@ -1,7 +1,7 @@
 ///|
 priv struct LexEnv {
   errors : Array[(Position, Position, LexicalError)]
-  docstrings : Array[@list.T[(Location, Comment)]]
+  docstrings : Array[@list.List[(Location, Comment)]]
   comment : Bool
   file : String
   tokens : Array[(Token, Position, Position)]

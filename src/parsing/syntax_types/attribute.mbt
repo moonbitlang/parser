@@ -8,7 +8,7 @@ pub(all) struct AttributeId {
 pub(all) enum AttributeExpr {
   Ident(AttributeId)
   Str(StringLiteral)
-  Apply(AttributeId, @list.T[AttributeProp])
+  Apply(AttributeId, @list.List[AttributeProp])
 }
 
 ///|

@@ -15,17 +15,17 @@ pub fn make_ident_expr(loc~ : Location, id : Var) -> Expr {
 }
 
 ///| Create tuple expression
-pub fn make_tuple_expr(loc~ : Location, exprs : @list.T[Expr]) -> Expr {
+pub fn make_tuple_expr(loc~ : Location, exprs : @list.List[Expr]) -> Expr {
   Tuple(exprs~, loc~)
 }
 
 ///| Create array expression with possible spread elements
 pub fn make_array_expr(
   loc~ : Location,
-  elems : @list.T[SpreadableElem],
+  elems : @list.List[SpreadableElem],
 ) -> Expr {
   // Try to convert to regular array if no spread elements
-  let mut acc : @list.T[Expr] = @list.empty()
+  let mut acc : @list.List[Expr] = @list.empty()
   for elem in elems {
     match elem {
       Regular(e) => acc = acc.add(e)
@@ -38,7 +38,7 @@ pub fn make_array_expr(
 }
 
 ///| Create interpolation elements from literal components
-pub fn make_interps(c : @ast_types.InterpLiteral) -> @list.T[InterpElem] {
+pub fn make_interps(c : @ast_types.InterpLiteral) -> @list.List[InterpElem] {
   let result = c.map(fn(lit) {
     match lit {
       InterpLit(repr~, loc~) => Literal(repr~, loc~)
@@ -59,7 +59,7 @@ pub fn make_record_expr(
   loc~ : Location,
   trailing~ : TrailingMark,
   type_name : TypeName?,
-  fields : @list.T[FieldDef],
+  fields : @list.List[FieldDef],
 ) -> Expr {
   Record(type_name~, fields~, trailing~, loc~)
 }
@@ -79,7 +79,10 @@ pub fn make_constant_pattern(loc~ : Location, c : Constant) -> Pattern {
 }
 
 ///| Create tuple pattern
-pub fn make_tuple_pattern(loc~ : Location, pats : @list.T[Pattern]) -> Pattern {
+pub fn make_tuple_pattern(
+  loc~ : Location,
+  pats : @list.List[Pattern],
+) -> Pattern {
   Tuple(pats~, loc~)
 }
 
@@ -87,14 +90,14 @@ pub fn make_tuple_pattern(loc~ : Location, pats : @list.T[Pattern]) -> Pattern {
 pub fn make_constr_pattern(
   loc~ : Location,
   constr : Constructor,
-  args : @list.T[ConstrPatArg]?,
+  args : @list.List[ConstrPatArg]?,
   is_open : Bool,
 ) -> Pattern {
   Constr(constr~, args~, is_open~, loc~)
 }
 
 ///| Create tuple type
-pub fn make_tuple_type(loc~ : Location, tys : @list.T[Type]) -> Type {
+pub fn make_tuple_type(loc~ : Location, tys : @list.List[Type]) -> Type {
   Tuple(tys~, loc~)
 }
 
@@ -393,7 +396,7 @@ pub fn arrow_fn_param_to_expr(p : ArrowFnParam) -> Expr {
 
 ///| Create arrow function
 pub fn make_arrow_fn(
-  params : @list.T[(ArrowFnParam, Type?)],
+  params : @list.List[(ArrowFnParam, Type?)],
   body : Expr,
   loc~ : Location,
 ) -> Func {

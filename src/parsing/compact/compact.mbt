@@ -5,13 +5,13 @@ pub(all) enum SemiExprProp {
   StmtGuard(cond~ : Expr, otherwise~ : Expr?, loc~ : Location)
   StmtLetmut(binder~ : Binder, ty_opt~ : Type?, expr~ : Expr, loc~ : Location)
   StmtFunc(binder~ : Binder, func~ : Func, loc~ : Location)
-  StmtLetand(bindings~ : @list.T[(Binder, Type?, Func)], loc~ : Location)
+  StmtLetand(bindings~ : @list.List[(Binder, Type?, Func)], loc~ : Location)
   StmtDefer(expr~ : Expr, loc~ : Location)
 }
 
 ///|
 pub fn SemiExprProp::compact_rev(
-  ls : @list.T[SemiExprProp],
+  ls : @list.List[SemiExprProp],
   loc~ : Location,
 ) -> Expr {
   match ls {
@@ -37,7 +37,7 @@ pub fn SemiExprProp::compact_rev(
 
 ///|
 pub fn SemiExprProp::collect_rev(
-  rest : @list.T[SemiExprProp],
+  rest : @list.List[SemiExprProp],
   cont : Expr,
 ) -> Expr {
   match rest {
@@ -91,8 +91,8 @@ pub fn SemiExprProp::collect_rev(
 ///|
 fn SemiExprProp::collect_sequence(
   loc~ : Location,
-  acc : @list.T[Expr],
-  todo : @list.T[SemiExprProp],
+  acc : @list.List[Expr],
+  todo : @list.List[SemiExprProp],
   cont : Expr,
 ) -> Expr {
   match todo {
@@ -111,8 +111,8 @@ fn SemiExprProp::collect_sequence(
 ///|
 pub fn SemiExprProp::collect_letrec(
   loc~ : Location,
-  acc : @list.T[(Binder, Func)],
-  todo : @list.T[SemiExprProp],
+  acc : @list.List[(Binder, Func)],
+  todo : @list.List[SemiExprProp],
   cont : Expr,
 ) -> Expr {
   match todo {

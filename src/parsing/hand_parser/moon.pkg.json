@@ -9,6 +9,5 @@
     "moonbitlang/parser/lexing/tokens",
     "moonbitlang/parser/lexing/lexer",
     "moonbitlang/parser/parsing/syntax"
-  ],
-  "alert-list": "-deprecated"
+  ]
 }

@@ -13,7 +13,7 @@ pub(all) struct QualifiedName {
 ///|
 pub(all) struct TypeParamWithConstraints {
   name : Name
-  constraints : @list.T[QualifiedName]
+  constraints : @list.List[QualifiedName]
 } derive(ToJson)
 
 ///|
@@ -39,18 +39,18 @@ pub(all) enum TraitMethodParameter {
 
 ///|
 pub(all) struct FuncSig {
-  attr : @list.T[(String, String?, String)]
+  attr : @list.List[(String, String?, String)]
   type_name : Name?
   name : Name
-  params : @list.T[Parameter]
+  params : @list.List[Parameter]
   return_ : (Type, ErrorType)
-  type_params : @list.T[TypeParamWithConstraints]
+  type_params : @list.List[TypeParamWithConstraints]
 } derive(ToJson)
 
 ///|
 pub(all) struct TypeSig {
   name : Name
-  type_params : @list.T[TypeParamNoConstraints]
+  type_params : @list.List[TypeParamNoConstraints]
   components : TypeDesc
   vis : Visibility
 } derive(ToJson)
@@ -59,7 +59,7 @@ pub(all) struct TypeSig {
 pub(all) enum AliasSig {
   TypeAlias(
     name~ : Name,
-    type_params~ : @list.T[TypeParamNoConstraints],
+    type_params~ : @list.List[TypeParamNoConstraints],
     type_~ : Type,
     vis~ : Visibility
   )
@@ -70,7 +70,7 @@ pub(all) enum AliasSig {
 ///|
 pub(all) struct TraitMethodSig {
   name : Name
-  params : @list.T[TraitMethodParameter]
+  params : @list.List[TraitMethodParameter]
   has_default : Bool
   return_ : (Type, ErrorType)
 } derive(ToJson)
@@ -78,15 +78,15 @@ pub(all) struct TraitMethodSig {
 ///|
 pub(all) struct TraitSig {
   name : Name
-  super_traits : @list.T[QualifiedName]
-  methods : @list.T[TraitMethodSig]
+  super_traits : @list.List[QualifiedName]
+  methods : @list.List[TraitMethodSig]
   vis : Visibility
 } derive(ToJson)
 
 ///|
 pub(all) enum ImplSig {
   Trait(
-    type_params~ : @list.T[TypeParamWithConstraints],
+    type_params~ : @list.List[TypeParamWithConstraints],
     type_~ : Type,
     trait_name~ : QualifiedName
   )
@@ -126,6 +126,6 @@ pub(all) enum Sig {
 ///|
 pub(all) struct Mbti {
   package_name : String
-  imports : @list.T[PackageImport]
-  sigs : @list.T[(Sig, Location)]
+  imports : @list.List[PackageImport]
+  sigs : @list.List[(Sig, Location)]
 } derive(ToJson)

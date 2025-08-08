@@ -34,7 +34,7 @@ fn State::parse_optional_bang(self : Self) -> Location? {
 }
 
 ///|
-fn State::parse_attributes(self : Self) -> @list.T[@syntax.Attribute] {
+fn State::parse_attributes(self : Self) -> @list.List[@syntax.Attribute] {
   let result = []
   while self.peek_token() is ATTRIBUTE((id, dot_id, raw_payload)) {
     let loc = self.peek_location()
@@ -241,7 +241,7 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
   let spos = self.peek_spos()
   let name = self.expect_lident(context="name of type variable")
   let loc = self.loc_start_with(spos)
-  let constraints : @list.T[@syntax.TypeVarConstraint]? = self.optional(
+  let constraints : @list.List[@syntax.TypeVarConstraint]? = self.optional(
     [TK_COLON],
     fn(state) {
       state.expect_token(TK_COLON)
@@ -412,7 +412,7 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
 ///|
 fn State::parse_fun_decl(
   self : Self,
-  attrs~ : @list.T[@syntax.Attribute],
+  attrs~ : @list.List[@syntax.Attribute],
 ) -> @syntax.FunDecl {
   if self.mode is Panic(loc~, ..) {
     return {
@@ -4328,7 +4328,7 @@ fn State::parse_opt_annot(self : Self) -> @syntax.Type? {
 ///|
 fn State::parse_block_expr_with_local_types(
   self : Self,
-) -> (@list.T[@syntax.LocalTypeDecl], @syntax.Expr) {
+) -> (@list.List[@syntax.LocalTypeDecl], @syntax.Expr) {
   if self.mode is Panic(loc~, ..) {
     return (@list.new(), Hole(loc~, kind=Synthesized))
   }
@@ -4694,7 +4694,7 @@ fn State::parse_expr_stmt(self : Self) -> @syntax.Expr {
 }
 
 ///|
-fn State::parse_match_fn_body(self : Self) -> @list.T[@syntax.MultiArgCase] {
+fn State::parse_match_fn_body(self : Self) -> @list.List[@syntax.MultiArgCase] {
   self.surround_delimited(
     left=TK_LBRACE,
     right=TK_RBRACE,
@@ -4959,7 +4959,9 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
 }
 
 ///|
-fn State::parse_opt_typ_params(self : Self) -> @list.T[@syntax.TypeVarBinder] {
+fn State::parse_opt_typ_params(
+  self : Self,
+) -> @list.List[@syntax.TypeVarBinder] {
   if self.mode is Panic(..) {
     return @list.new()
   }

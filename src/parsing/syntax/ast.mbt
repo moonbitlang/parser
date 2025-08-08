@@ -62,14 +62,14 @@ pub(all) struct ConstrId {
 pub(all) enum Type {
   Any(loc~ : Location)
   Arrow(
-    args~ : @list.T[Type],
+    args~ : @list.List[Type],
     res~ : Type,
     err~ : ErrorType,
     is_async~ : Bool,
     loc~ : Location
   )
-  Tuple(tys~ : @list.T[Type], loc~ : Location)
-  Name(constr_id~ : ConstrId, tys~ : @list.T[Type], loc~ : Location)
+  Tuple(tys~ : @list.List[Type], loc~ : Location)
+  Name(constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : Location)
   Option(ty~ : Type, loc~ : Location, question_loc~ : Location)
   Object(ConstrId)
 }
@@ -93,7 +93,7 @@ pub(all) struct ConstrParam {
 ///|
 pub(all) struct ConstrDecl {
   name : ConstrName
-  args : @list.T[ConstrParam]?
+  args : @list.List[ConstrParam]?
   tag : (String, Location)?
   loc : Location
   mut doc : DocString
@@ -103,7 +103,7 @@ pub(all) struct ConstrDecl {
 pub(all) enum ExceptionDecl {
   NoPayload
   SinglePayload(Type)
-  EnumPayload(@list.T[ConstrDecl])
+  EnumPayload(@list.List[ConstrDecl])
 }
 
 ///|
@@ -128,9 +128,9 @@ pub(all) enum TypeDesc {
   Extern
   Newtype(Type)
   Error(ExceptionDecl)
-  Variant(@list.T[ConstrDecl])
-  Record(@list.T[FieldDecl])
-  TupleStruct(@list.T[Type])
+  Variant(@list.List[ConstrDecl])
+  Record(@list.List[FieldDecl])
+  TupleStruct(@list.List[Type])
   Alias(Type)
 }
 
@@ -187,7 +187,7 @@ pub(all) struct TypeVarConstraint {
 ///|
 pub(all) struct TypeVarBinder {
   name : String
-  constraints : @list.T[TypeVarConstraint]
+  constraints : @list.List[TypeVarConstraint]
   loc : Location
 }
 
@@ -252,7 +252,7 @@ pub(all) enum Parameter {
 }
 
 ///|
-pub typealias @list.T[Parameter] as Parameters
+pub typealias @list.List[Parameter] as Parameters
 
 ///|
 pub(all) struct Case {
@@ -263,7 +263,7 @@ pub(all) struct Case {
 
 ///|
 pub(all) struct MultiArgCase {
-  patterns : @list.T[Pattern]
+  patterns : @list.List[Pattern]
   guard_ : Expr?
   body : Expr
 }
@@ -304,7 +304,7 @@ pub(all) enum Func {
     loc~ : Location
   )
   Match(
-    cases~ : @list.T[MultiArgCase],
+    cases~ : @list.List[MultiArgCase],
     has_error~ : Location?,
     is_async~ : Bool,
     fn_loc~ : Location,
@@ -330,7 +330,7 @@ pub(all) enum InterpElem {
 ///|
 pub(all) enum MultilineStringElem {
   String(String)
-  Interp(@list.T[InterpElem])
+  Interp(@list.List[InterpElem])
 }
 
 ///|
@@ -338,14 +338,14 @@ pub(all) enum MultilineStringElem {
 pub(all) enum Expr {
   Apply(
     func~ : Expr,
-    args~ : @list.T[Argument],
+    args~ : @list.List[Argument],
     attr~ : ApplyAttr,
     loc~ : Location
   )
   Infix(op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : Location)
   Unary(op~ : Var, expr~ : Expr, loc~ : Location)
-  Array(exprs~ : @list.T[Expr], loc~ : Location)
-  ArraySpread(elems~ : @list.T[SpreadableElem], loc~ : Location)
+  Array(exprs~ : @list.List[Expr], loc~ : Location)
+  ArraySpread(elems~ : @list.List[SpreadableElem], loc~ : Location)
   ArrayGet(array~ : Expr, index~ : Expr, loc~ : Location)
   ArrayGetSlice(
     array~ : Expr,
@@ -363,8 +363,8 @@ pub(all) enum Expr {
     loc~ : Location
   )
   Constant(c~ : Constant, loc~ : Location)
-  MultilineString(elems~ : @list.T[MultilineStringElem], loc~ : Location)
-  Interp(elems~ : @list.T[InterpElem], loc~ : Location)
+  MultilineString(elems~ : @list.List[MultilineStringElem], loc~ : Location)
+  Interp(elems~ : @list.List[InterpElem], loc~ : Location)
   Constraint(expr~ : Expr, ty~ : Type, loc~ : Location)
   Constr(constr~ : Constructor, loc~ : Location)
   While(
@@ -381,25 +381,25 @@ pub(all) enum Expr {
   Is(expr~ : Expr, pat~ : Pattern, loc~ : Location)
   Defer(expr~ : Expr, body~ : Expr, loc~ : Location)
   LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : Location)
-  LetRec(bindings~ : @list.T[(Binder, Func)], body~ : Expr, loc~ : Location)
+  LetRec(bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : Location)
   LetAnd(
-    bindings~ : @list.T[(Binder, Type?, Func)],
+    bindings~ : @list.List[(Binder, Type?, Func)],
     body~ : Expr,
     loc~ : Location
   )
   Let(pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : Location)
-  Sequence(exprs~ : @list.T[Expr], last_expr~ : Expr, loc~ : Location)
-  Tuple(exprs~ : @list.T[Expr], loc~ : Location)
+  Sequence(exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : Location)
+  Tuple(exprs~ : @list.List[Expr], loc~ : Location)
   Record(
     type_name~ : TypeName?,
-    fields~ : @list.T[FieldDef],
+    fields~ : @list.List[FieldDef],
     trailing~ : TrailingMark,
     loc~ : Location
   )
   RecordUpdate(
     type_name~ : TypeName?,
     record~ : Expr,
-    fields~ : @list.T[FieldDef],
+    fields~ : @list.List[FieldDef],
     loc~ : Location
   )
   Field(record~ : Expr, accessor~ : Accessor, loc~ : Location)
@@ -407,7 +407,7 @@ pub(all) enum Expr {
   DotApply(
     self~ : Expr,
     method_name~ : Label,
-    args~ : @list.T[Argument],
+    args~ : @list.List[Argument],
     return_self~ : Bool,
     attr~ : ApplyAttr,
     loc~ : Location
@@ -422,7 +422,7 @@ pub(all) enum Expr {
   )
   Match(
     expr~ : Expr,
-    cases~ : @list.T[Case],
+    cases~ : @list.List[Case],
     match_loc~ : Location,
     using_~ : Label?,
     loc~ : Location
@@ -441,25 +441,25 @@ pub(all) enum Expr {
   Raise(err_value~ : Expr, loc~ : Location)
   Unit(loc~ : Location, faked~ : Bool)
   Break(arg~ : Expr?, label~ : Label?, loc~ : Location)
-  Continue(args~ : @list.T[Expr], label~ : Label?, loc~ : Location)
+  Continue(args~ : @list.List[Expr], label~ : Label?, loc~ : Location)
   Loop(
-    args~ : @list.T[Expr],
-    body~ : @list.T[MultiArgCase],
+    args~ : @list.List[Expr],
+    body~ : @list.List[MultiArgCase],
     label~ : Label?,
     loop_loc~ : Location,
     loc~ : Location
   )
   For(
-    binders~ : @list.T[(Binder, Expr)],
+    binders~ : @list.List[(Binder, Expr)],
     condition~ : Expr?,
-    continue_block~ : @list.T[(Binder, Expr)],
+    continue_block~ : @list.List[(Binder, Expr)],
     body~ : Expr,
     for_else~ : Expr?,
     label~ : Label?,
     loc~ : Location
   )
   ForEach(
-    binders~ : @list.T[Binder?],
+    binders~ : @list.List[Binder?],
     expr~ : Expr,
     body~ : Expr,
     else_block~ : Expr?,
@@ -468,9 +468,9 @@ pub(all) enum Expr {
   )
   Try(
     body~ : Expr,
-    catch_~ : @list.T[Case],
+    catch_~ : @list.List[Case],
     catch_all~ : Bool,
-    try_else~ : @list.T[Case]?,
+    try_else~ : @list.List[Case]?,
     has_try~ : Bool,
     try_loc~ : Location,
     catch_loc~ : Location,
@@ -483,9 +483,9 @@ pub(all) enum Expr {
     try_loc~ : Location,
     loc~ : Location
   )
-  Map(elems~ : @list.T[MapExprElem], loc~ : Location)
+  Map(elems~ : @list.List[MapExprElem], loc~ : Location)
   Group(expr~ : Expr, group~ : Group, loc~ : Location)
-  StaticAssert(asserts~ : @list.T[StaticAssertion], body~ : Expr)
+  StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
 }
 
 ///|
@@ -512,8 +512,8 @@ pub(all) enum ArrayPattern {
 
 ///|
 pub(all) enum ArrayPatterns {
-  Closed(@list.T[ArrayPattern])
-  Open(@list.T[ArrayPattern], @list.T[ArrayPattern], DotDotBinder)
+  Closed(@list.List[ArrayPattern])
+  Open(@list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder)
 }
 
 ///|
@@ -549,15 +549,15 @@ pub(all) enum Pattern {
   Constraint(pat~ : Pattern, ty~ : Type, loc~ : Location)
   Constr(
     constr~ : Constructor,
-    args~ : @list.T[ConstrPatArg]?,
+    args~ : @list.List[ConstrPatArg]?,
     is_open~ : Bool,
     loc~ : Location
   )
   Or(pat1~ : Pattern, pat2~ : Pattern, loc~ : Location)
-  Tuple(pats~ : @list.T[Pattern], loc~ : Location)
+  Tuple(pats~ : @list.List[Pattern], loc~ : Location)
   Var(Binder)
-  Record(fields~ : @list.T[FieldPat], is_closed~ : Bool, loc~ : Location)
-  Map(elems~ : @list.T[MapPatElem], is_closed~ : Bool, loc~ : Location)
+  Record(fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : Location)
+  Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : Location)
   Range(lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : Location)
 }
 
@@ -569,14 +569,14 @@ pub(all) struct LocalTypeDecl {
   tycon : String
   tycon_loc : Location
   components : TypeDesc
-  deriving : @list.T[DerivingDirective]
+  deriving : @list.List[DerivingDirective]
 }
 
 ///|
 // checked!
 pub(all) struct DerivingDirective {
   type_name : TypeName
-  args : @list.T[Argument]
+  args : @list.List[Argument]
   loc : Location
 }
 
@@ -584,12 +584,12 @@ pub(all) struct DerivingDirective {
 pub(all) struct TypeDecl {
   tycon : String
   tycon_loc : Location
-  params : @list.T[TypeDeclBinder]
+  params : @list.List[TypeDeclBinder]
   components : TypeDesc
-  attrs : @list.T[Attribute]
+  attrs : @list.List[Attribute]
   mut doc : DocString
   type_vis : Visibility
-  deriving : @list.T[DerivingDirective]
+  deriving : @list.List[DerivingDirective]
   loc : Location
 }
 
@@ -602,12 +602,12 @@ pub(all) enum FuncStubs {
 ///|
 pub(all) enum EmbeddedCode {
   CodeString(StringLiteral)
-  CodeMultilineString(@list.T[String])
+  CodeMultilineString(@list.List[String])
 }
 
 ///|
 pub(all) enum DeclBody {
-  DeclBody(local_types~ : @list.T[LocalTypeDecl], expr~ : Expr)
+  DeclBody(local_types~ : @list.List[LocalTypeDecl], expr~ : Expr)
   DeclStubs(FuncStubs)
 }
 
@@ -619,11 +619,11 @@ pub(all) struct FunDecl {
   is_async : Bool
   decl_params : Parameters?
   params_loc : Location
-  quantifiers : @list.T[TypeVarBinder]
+  quantifiers : @list.List[TypeVarBinder]
   return_type : Type?
   error_type : ErrorType
   vis : Visibility
-  attrs : @list.T[Attribute]
+  attrs : @list.List[Attribute]
   mut doc : DocString
 }
 
@@ -632,7 +632,7 @@ pub(all) struct TraitMethodDecl {
   name : Binder
   has_error : Location?
   is_async : Bool
-  quantifiers : @list.T[TypeVarBinder]
+  quantifiers : @list.List[TypeVarBinder]
   params : Parameters
   return_type : Type?
   error_type : ErrorType
@@ -643,11 +643,11 @@ pub(all) struct TraitMethodDecl {
 ///|
 pub(all) struct TraitDecl {
   name : Binder
-  supers : @list.T[TypeVarConstraint]
-  methods : @list.T[TraitMethodDecl]
+  supers : @list.List[TypeVarConstraint]
+  methods : @list.List[TraitMethodDecl]
   vis : Visibility
   loc : Location
-  attrs : @list.T[Attribute]
+  attrs : @list.List[Attribute]
   mut doc : DocString
 }
 
@@ -656,16 +656,16 @@ pub(all) enum Impl {
   TopExpr(
     expr~ : Expr,
     is_main~ : Bool,
-    local_types~ : @list.T[LocalTypeDecl],
+    local_types~ : @list.List[LocalTypeDecl],
     loc~ : Location
   )
   TopTest(
     expr~ : Expr,
     name~ : TestName,
     params~ : Parameters?,
-    local_types~ : @list.T[LocalTypeDecl],
+    local_types~ : @list.List[LocalTypeDecl],
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.List[Attribute],
     mut doc~ : DocString
   )
   TopTypeDef(TypeDecl)
@@ -673,9 +673,9 @@ pub(all) enum Impl {
   TopFuncAlias(
     pkg~ : Label?,
     type_name~ : Label?,
-    targets~ : @list.T[AliasTarget],
+    targets~ : @list.List[AliasTarget],
     vis~ : Visibility,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.List[Attribute],
     is_list~ : Bool,
     mut doc~ : DocString,
     loc~ : Location
@@ -687,25 +687,25 @@ pub(all) enum Impl {
     vis~ : Visibility,
     is_constant~ : Bool,
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.List[Attribute],
     mut doc~ : DocString
   )
   TopTrait(TraitDecl)
   TopBatchTypeAlias(
     pkg~ : Label?,
-    targets~ : @list.T[AliasTarget],
+    targets~ : @list.List[AliasTarget],
     vis~ : Visibility,
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.List[Attribute],
     is_list~ : Bool,
     mut doc~ : DocString
   )
   TopBatchTraitAlias(
     pkg~ : Label?,
-    targets~ : @list.T[AliasTarget],
+    targets~ : @list.List[AliasTarget],
     vis~ : Visibility,
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.List[Attribute],
     is_list~ : Bool,
     mut doc~ : DocString
   )
@@ -714,41 +714,41 @@ pub(all) enum Impl {
     trait_~ : TypeName,
     method_name~ : Binder,
     has_error~ : Location?,
-    quantifiers~ : @list.T[TypeVarBinder],
+    quantifiers~ : @list.List[TypeVarBinder],
     params~ : Parameters,
     ret_ty~ : Type?,
     err_ty~ : ErrorType,
     body~ : DeclBody,
     vis~ : Visibility,
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.List[Attribute],
     mut doc~ : DocString
   )
   TopView(
-    quantifiers~ : @list.T[TypeVarBinder],
+    quantifiers~ : @list.List[TypeVarBinder],
     source_ty~ : Type,
     view_type_name~ : String,
     view_type_loc~ : Location,
-    view_constrs~ : @list.T[ConstrDecl],
+    view_constrs~ : @list.List[ConstrDecl],
     view_func_name~ : Binder,
     parameters~ : Parameters,
     params_loc~ : Location,
     body~ : Expr,
     vis~ : Visibility,
     loc~ : Location,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.List[Attribute],
     mut doc~ : DocString
   )
   TopImplRelation(
     self_ty~ : Type,
     trait_~ : TypeName,
-    quantifiers~ : @list.T[TypeVarBinder],
+    quantifiers~ : @list.List[TypeVarBinder],
     vis~ : Visibility,
-    attrs~ : @list.T[Attribute],
+    attrs~ : @list.List[Attribute],
     loc~ : Location,
     mut doc~ : DocString
   )
 }
 
 ///|
-pub typealias @list.T[Impl] as Impls
+pub typealias @list.List[Impl] as Impls

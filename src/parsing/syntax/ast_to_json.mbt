@@ -17,7 +17,7 @@ fn[T : ToJson] option_to_json(opt : T?) -> Json {
 
 ///|
 // Helper function to convert lists to JSON arrays
-fn[T : ToJson] list_to_json(list : @list.T[T]) -> Json {
+fn[T : ToJson] list_to_json(list : @list.List[T]) -> Json {
   let array = []
   list.each(fn(item) { array.push(item.to_json()) })
   Json::array(array)
@@ -32,7 +32,9 @@ fn[A : ToJson, B : ToJson] tuple_to_json(tuple : (A, B)) -> Json {
 
 ///|
 // Helper function to convert list of tuples to JSON array
-fn[A : ToJson, B : ToJson] list_tuple_to_json(list : @list.T[(A, B)]) -> Json {
+fn[A : ToJson, B : ToJson] list_tuple_to_json(
+  list : @list.List[(A, B)],
+) -> Json {
   let array = []
   list.each(fn(binding) {
     let (a, b) = binding
@@ -43,7 +45,7 @@ fn[A : ToJson, B : ToJson] list_tuple_to_json(list : @list.T[(A, B)]) -> Json {
 
 ///|
 // Helper function for LetAnd bindings specifically
-fn letand_bindings_to_json(list : @list.T[(Binder, Type?, Func)]) -> Json {
+fn letand_bindings_to_json(list : @list.List[(Binder, Type?, Func)]) -> Json {
   let array = []
   list.each(fn(binding) {
     let (binder, ty, func) = binding

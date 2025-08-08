@@ -21,4 +21,4 @@ typealias (Token, Position, Position) as Triple
 typealias @compact.SemiExprProp
 
 ///|
-typealias @list.T as List
+typealias @list.List
