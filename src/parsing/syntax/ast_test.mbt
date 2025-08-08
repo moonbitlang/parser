@@ -1,6 +1,6 @@
 ///|
-let dummy_loc : @ast_types.Location = {
-  let pos = @ast_types.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }
+let dummy_loc : @syntax_types.Location = {
+  let pos = @syntax_types.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }
   { start: pos, end: pos }
 }
 
@@ -8,25 +8,25 @@ let dummy_loc : @ast_types.Location = {
 let null : Json = Json::null()
 
 ///|
-let dummy_string_literal : @ast_types.StringLiteral = "test_string"
+let dummy_string_literal : @syntax_types.StringLiteral = "test_string"
 
 ///|
-let dummy_byte_literal : @ast_types.ByteLiteral = "b'A'"
+let dummy_byte_literal : @syntax_types.ByteLiteral = "b'A'"
 
 ///|
-let dummy_bytes_literal : @ast_types.BytesLiteral = "b\"ABC\""
+let dummy_bytes_literal : @syntax_types.BytesLiteral = "b\"ABC\""
 
 ///|
-let dummy_char_literal : @ast_types.CharLiteral = "'A'"
+let dummy_char_literal : @syntax_types.CharLiteral = "'A'"
 
 ///|
-let dummy_docstring : @ast_types.DocString = {
+let dummy_docstring : @syntax_types.DocString = {
   content: @list.of(["Test documentation"]),
   loc: dummy_loc,
 }
 
 ///|
-let dummy_attribute : @ast_types.Attribute = {
+let dummy_attribute : @syntax_types.Attribute = {
   loc: dummy_loc,
   raw: "test_attr",
   parsed: None,

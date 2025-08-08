@@ -324,7 +324,7 @@ pub(all) struct FieldDef {
 pub(all) enum InterpElem {
   Literal(repr~ : StringLiteral, loc~ : Location)
   Expr(expr~ : Expr, loc~ : Location)
-  Source(@ast_types.InterpSource)
+  Source(@syntax_types.InterpSource)
 }
 
 ///|

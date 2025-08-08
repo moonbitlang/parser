@@ -1,5 +1,5 @@
 ///|
-pub typealias @ast_types.(
+pub typealias @syntax_types.(
   Position,
   Location,
   ByteLiteral,

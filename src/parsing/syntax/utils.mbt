@@ -38,7 +38,7 @@ pub fn make_array_expr(
 }
 
 ///| Create interpolation elements from literal components
-pub fn make_interps(c : @ast_types.InterpLiteral) -> @list.List[InterpElem] {
+pub fn make_interps(c : @syntax_types.InterpLiteral) -> @list.List[InterpElem] {
   let result = c.map(fn(lit) {
     match lit {
       InterpLit(repr~, loc~) => Literal(repr~, loc~)
@@ -49,7 +49,10 @@ pub fn make_interps(c : @ast_types.InterpLiteral) -> @list.List[InterpElem] {
 }
 
 ///| Create interpolation expression
-pub fn make_interp_expr(loc~ : Location, c : @ast_types.InterpLiteral) -> Expr {
+pub fn make_interp_expr(
+  loc~ : Location,
+  c : @syntax_types.InterpLiteral,
+) -> Expr {
   let elems = make_interps(c)
   Interp(elems~, loc~)
 }
@@ -530,5 +533,5 @@ fn shift_col(pos : Position, offset : Int) -> Position {
 ///|
 pub(all) enum InterpolationComponent {
   InterpLit(StringLiteral, Location)
-  InterpSource(@ast_types.InterpSource)
+  InterpSource(@syntax_types.InterpSource)
 }

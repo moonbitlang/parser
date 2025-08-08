@@ -1,12 +1,6 @@
 {
   "import": [
-    {
-      "path": "moonbitlang/parser/parsing/syntax_types",
-      "alias": "ast_types"
-    },
-    {
-      "path": "moonbitlang/parser/parsing/syntax",
-      "alias": "ast"
-    }
+    "moonbitlang/parser/parsing/syntax_types",
+    "moonbitlang/parser/parsing/syntax"
   ]
 }

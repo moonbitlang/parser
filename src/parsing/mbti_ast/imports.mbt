@@ -1,8 +1,8 @@
 ///|
-pub typealias @ast_types.(Position, Location)
+pub typealias @syntax_types.(Position, Location)
 
 ///|
-pub typealias @ast.(
+pub typealias @syntax.(
   Visibility,
   Constant,
   Type,

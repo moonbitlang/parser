@@ -1,2 +1,2 @@
 ///|
-typealias @ast_types.(Comment, CharLiteral, StringLiteral, InterpLiteral)
+typealias @syntax_types.(Comment, CharLiteral, StringLiteral, InterpLiteral)

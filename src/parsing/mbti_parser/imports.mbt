@@ -2,7 +2,7 @@
 typealias @tokens.(Token, TokenKind)
 
 ///|
-typealias @ast_types.(
+typealias @syntax_types.(
   Location,
   Comment,
   CharLiteral,

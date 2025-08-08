@@ -8,10 +8,7 @@
   ],
   "import": [
     "moonbitlang/parser/lexing/tokens",
-    {
-      "path": "moonbitlang/parser/parsing/syntax_types",
-      "alias": "ast_types"
-    },
+    "moonbitlang/parser/parsing/syntax_types",
     "moonbitlang/parser/parsing/mbti_ast",
     "moonbitlang/parser/parsing/syntax"
   ],
