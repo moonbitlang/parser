@@ -7,9 +7,9 @@ pub struct LexResult {
 
 ///|
 pub fn tokens_from_bytes(
-  name~ : String = "",
-  start_pos~ : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
-  is_interpolation~ : Bool = false,
+  name? : String = "",
+  start_pos? : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
+  is_interpolation? : Bool = false,
   comment~ : Bool,
   bytes : Bytes,
 ) -> LexResult {

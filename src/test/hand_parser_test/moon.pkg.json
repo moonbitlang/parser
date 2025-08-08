@@ -1,7 +1,6 @@
 {
     "test-import": [
       "moonbitlang/parser/parsing",
-      "moonbitlang/parser/lexing/lexer",
       "moonbitlang/parser/parsing/syntax",
       "moonbitlang/x/fs"
     ]

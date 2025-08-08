@@ -8,7 +8,7 @@ pub(all) struct Report {
 priv enum Mode {
   Normal
   Panic(fail_at~ : TokenKind, sync_at~ : Int, loc~ : Location)
-} derive(Show)
+}
 
 ///|
 let dummy_pos : Position = { fname: "", lnum: 0, bol: 0, cnum: 0 }
@@ -32,19 +32,19 @@ priv struct State {
   mut parsed_position : Position
 }
 
-///|
-impl Show for State with output(parser, buf) {
-  let { tokens, diagnostics, next, syncs, mode, parsed_position } = parser
-  buf
-  ..write_string("{ ")
-  ..write_string("next: ")
-  ..write_string(parser.peek_token().to_string())
-  ..write_string("\n, syncs: ")
-  ..write_string(syncs.to_string())
-  ..write_string("\n, mode: ")
-  ..write_string(mode.to_string())
-  ..write_string("\n}")
-}
+// ///|
+// impl Show for State with output(parser, buf) {
+//   let { tokens: _, diagnostics: _, next: _, syncs, mode, parsed_position: _ } = parser
+//   buf
+//   ..write_string("{ ")
+//   ..write_string("next: ")
+//   ..write_string(parser.peek_token().to_string())
+//   ..write_string("\n, syncs: ")
+//   ..write_string(syncs.to_string())
+//   ..write_string("\n, mode: ")
+//   ..write_string(mode.to_string())
+//   ..write_string("\n}")
+// }
 
 ///|
 fn inidex_of_token_kind(xs : Array[TokenKind], kind : TokenKind) -> Int? {
@@ -62,7 +62,7 @@ fn inidex_of_token_kind(xs : Array[TokenKind], kind : TokenKind) -> Int? {
 /// 
 /// peek(nth=0) returns the next not consumed token
 /// peek(nth=1) returns the next token after the next not consumed token
-fn State::peek(state : Self, nth~ : Int = 0) -> Triple {
+fn State::peek(state : Self, nth? : Int = 0) -> Triple {
   let mut ofs = 0
   let mut step = 0
   while state.tokens.get(state.next + ofs) is Some((token, _, _) as triple) {
@@ -101,22 +101,22 @@ fn State::consume(state : Self) -> Triple {
 }
 
 ///|
-fn State::peek_token(state : Self, nth~ : Int = 0) -> Token {
+fn State::peek_token(state : Self, nth? : Int = 0) -> Token {
   state.peek(nth~).0
 }
 
 ///|
-fn State::peek_kind(state : Self, nth~ : Int = 0) -> TokenKind {
+fn State::peek_kind(state : Self, nth? : Int = 0) -> TokenKind {
   state.peek(nth~).0.kind()
 }
 
 ///|
-fn State::peek_spos(state : Self, nth~ : Int = 0) -> Position {
+fn State::peek_spos(state : Self, nth? : Int = 0) -> Position {
   state.peek(nth~).1
 }
 
 ///|
-fn State::peek_epos(state : Self, nth~ : Int = 0) -> Position {
+fn State::peek_epos(state : Self, nth? : Int = 0) -> Position {
   state.peek(nth~).2
 }
 
@@ -570,9 +570,9 @@ fn[A] State::with_follow(
 ///|
 fn[A] State::delimited_with_follow(
   self : Self,
-  invalid_delims~ : Array[TokenKind] = [],
+  invalid_delims? : Array[TokenKind] = [],
   delim~ : TokenKind,
-  follow_set~ : Array[TokenKind] = [],
+  follow_set? : Array[TokenKind] = [],
   f : (State) -> A,
 ) -> (Array[A], Bool) {
   fn try_recover_to_delim() {
@@ -635,7 +635,7 @@ fn[A] State::delimited_with_follow(
 ///|
 fn[A] State::surround_delimited(
   self : Self,
-  invalid_delims~ : Array[TokenKind] = [],
+  invalid_delims? : Array[TokenKind] = [],
   left~ : TokenKind,
   right~ : TokenKind,
   delim~ : TokenKind,

@@ -3005,7 +3005,7 @@ fn State::handle_lparen(self : Self) -> @syntax.Expr {
       }
 
       let parameters = expr_or_binders.map(x => match x {
-          Binder(expr, colon_loc~, ty~) => (as_binder(expr), Some(ty))
+          Binder(expr, colon_loc=_, ty~) => (as_binder(expr), Some(ty))
           Expr(expr) => (as_binder(expr), None)
         })
         |> @list.from_array
@@ -3017,7 +3017,7 @@ fn State::handle_lparen(self : Self) -> @syntax.Expr {
       let loc = self.loc_start_with(spos)
       handle_expr(Unit(loc~, faked=false))
     }
-    (_, [Binder(expr, ty~, colon_loc~)]) => {
+    (_, [Binder(expr, ty~, colon_loc=_)]) if !has_trailing => {
       let loc = self.loc_start_with(spos)
       handle_expr(Constraint(expr~, ty~, loc~))
     }
@@ -3027,7 +3027,7 @@ fn State::handle_lparen(self : Self) -> @syntax.Expr {
     }
     (_, _) => {
       let exprs = expr_or_binders.map(x => match x {
-          Binder(expr, colon_loc~, ty~) => {
+          Binder(expr, colon_loc~, ty=_) => {
             self.report_unexpected(COLON, [TK_COMMA, TK_RPAREN], colon_loc)
             @syntax.Hole(kind=Synthesized, loc=expr.loc())
           }

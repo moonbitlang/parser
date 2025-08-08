@@ -1,12 +1,5 @@
 ///| Import types from ast_types package
-typealias @syntax_types.(
-  Location,
-  Position,
-  CharLiteral,
-  StringLiteral,
-  InterpLiteral,
-  DocString
-)
+typealias @syntax_types.(Location, Position, DocString)
 
 ///| Import AST types 
 typealias @syntax.Impls

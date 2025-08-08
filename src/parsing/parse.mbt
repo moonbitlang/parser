@@ -93,11 +93,12 @@ pub fn attach_docstrings(
 }
 
 ///|
-pub fn parse_string(
+pub fn parse_bytes(
   source : Bytes,
-  name~ : String = "",
+  name? : String = "",
   config~ : Parser,
 ) -> @syntax.Impls {
+  ignore(config)
   let { tokens, docstrings, .. } = @lexer.tokens_from_bytes(
     source,
     comment=true,
@@ -114,5 +115,5 @@ pub fn parse_file(
   config~ : Parser,
 ) -> @syntax.Impls raise @fs.IOError {
   let source = @fs.read_file_to_bytes(path)
-  parse_string(source, name=path, config~)
+  parse_bytes(source, name=path, config~)
 }
