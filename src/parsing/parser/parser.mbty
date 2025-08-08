@@ -108,6 +108,8 @@
 %token LETREC "letrec"
 %token ENUMVIEW "enumview"
 %token NORAISE "noraise"
+%token TRY_QUESTION    "try?"
+%token TRY_EXCLAMATION "try!"
 
 %right BARBAR
 %right AMPERAMPER
@@ -1095,13 +1097,11 @@ try_expr -> Expr
       loc = mk_loc($sloc)
     )
   }
-  | "try" "?" pipe_expr { 
-    TryOperator(
-      body = $3,
-      kind = Question,
-      try_loc = mk_loc($loc($1)),
-      loc = mk_loc($sloc)
-    )
+  | "try?" pipe_expr { 
+    TryOperator(body = $2, kind = Question, try_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+  }
+  | "try!" pipe_expr {
+    TryOperator(body = $2, kind = Exclamation, try_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
   }
   ;
 

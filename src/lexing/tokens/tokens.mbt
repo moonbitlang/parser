@@ -102,6 +102,8 @@ pub(all) enum Token {
   LETREC
   ENUMVIEW
   NORAISE
+  TRY_QUESTION
+  TRY_EXCLAMATION
 } derive(Show)
 
 ///|
@@ -209,6 +211,8 @@ pub fn Token::kind(self : Token) -> TokenKind {
     LETREC => TK_LETREC
     ENUMVIEW => TK_ENUMVIEW
     NORAISE => TK_NORAISE
+    TRY_QUESTION => TK_TRY_QUESTION
+    TRY_EXCLAMATION => TK_TRY_EXCLAMATION
   }
 }
 
@@ -316,6 +320,8 @@ pub(all) enum TokenKind {
   TK_LETREC
   TK_ENUMVIEW
   TK_NORAISE
+  TK_TRY_QUESTION
+  TK_TRY_EXCLAMATION
 } derive(Eq)
 
 ///|
@@ -424,6 +430,8 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_LETREC => "\"letrec\""
       TK_ENUMVIEW => "\"enumview\""
       TK_NORAISE => "\"noraise\""
+      TK_TRY_QUESTION => "\"try?\""
+      TK_TRY_EXCLAMATION => "\"try!\""
     },
   )
 }

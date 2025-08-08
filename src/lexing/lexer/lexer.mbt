@@ -409,6 +409,22 @@ fn lex_tokens(
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
+    ["try\\?", .. rest] => {
+      env.add_token_with_loc(
+        @tokens.Token::TRY_QUESTION,
+        start=calc_offset(input, base~),
+        end=calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+    ["try!", .. rest] => {
+      env.add_token_with_loc(
+        @tokens.Token::TRY_EXCLAMATION,
+        start=calc_offset(input, base~),
+        end=calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
     ["==", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX1("=="),

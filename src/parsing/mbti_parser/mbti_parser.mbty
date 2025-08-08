@@ -104,6 +104,8 @@
 %token USING "using"
 %token NORAISE "noraise"
 %token ENUMVIEW "enumview"
+%token TRY_QUESTION    "try?"
+%token TRY_EXCLAMATION "try!"
 
 
 %%

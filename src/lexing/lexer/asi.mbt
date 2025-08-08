@@ -48,6 +48,8 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | MINUS
     | MATCH
     | TRY
+    | TRY_QUESTION
+    | TRY_EXCLAMATION
     | CATCH
     | LPAREN
     | DOT_LPAREN
@@ -144,6 +146,8 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | MUTABLE
     | MATCH
     | TRY
+    | TRY_QUESTION
+    | TRY_EXCLAMATION
     | LET
     | LETREC
     | CONST
