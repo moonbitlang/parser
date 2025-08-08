@@ -475,10 +475,12 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
       return_type: None,
       error_type: NoErrorType,
       has_default: None,
+      attrs: @list.empty(),
       loc,
     }
   }
   let spos = self.peek_spos()
+  let attrs = self.parse_attributes()
   self.push_sync(TK_LPAREN)
   let is_async = if self.peek_token() is ASYNC {
     self.skip()
@@ -552,6 +554,7 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
     return_type,
     error_type,
     has_default,
+    attrs,
     loc,
   }
 }
@@ -1649,10 +1652,12 @@ fn State::parse_field_decl(self : Self) -> @syntax.FieldDecl {
       mut_: false,
       vis: Default,
       doc: DocString::empty(),
+      attrs: @list.empty(),
       loc,
     }
   }
   let spos = self.peek_spos()
+  let attrs = self.parse_attributes()
   let vis = self.parse_visibility()
   let mut_ = if self.peek_token() is MUTABLE {
     self.expect_token(TK_MUTABLE)
@@ -1671,6 +1676,7 @@ fn State::parse_field_decl(self : Self) -> @syntax.FieldDecl {
     mut_,
     vis,
     loc,
+    attrs,
     doc: DocString::empty(),
   }
 }
@@ -1683,10 +1689,12 @@ fn State::parse_constr_decl(self : Self) -> @syntax.ConstrDecl {
       args: None,
       tag: None,
       loc,
+      attrs: @list.empty(),
       doc: @syntax.DocString::empty(),
     }
   }
   let spos = self.peek_spos()
+  let attrs = self.parse_attributes()
   if self.peek_token() is (PRIV | PUB | READONLY) {
     let loc = self.peek_location()
     self.skip()
@@ -1737,7 +1745,7 @@ fn State::parse_constr_decl(self : Self) -> @syntax.ConstrDecl {
     None
   }
   let loc = self.loc_start_with(spos)
-  { name: constr_name, args, tag, loc, doc: DocString::empty() }
+  { name: constr_name, args, tag, loc, attrs, doc: DocString::empty() }
 }
 
 ///|

@@ -3,7 +3,7 @@
     "moonbitlang/parser/parsing/syntax_types",
     "moonbitlang/parser/parsing/syntax",
     "moonbitlang/parser/lexing/tokens",
-    "moonbitlang/parser/parsing/compact"
+    "moonbitlang/parser/parsing/compact",
   ],
   "test-import": [
     "moonbitlang/parser/lexing/tokens",

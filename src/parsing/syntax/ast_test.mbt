@@ -516,6 +516,7 @@ test "exception_decl to_json" {
     args: None,
     tag: None,
     loc: dummy_loc,
+    attrs: @list.empty(),
     doc: dummy_docstring,
   }
   @json.inspect(@syntax.EnumPayload(@list.of([constr_decl])), content={
@@ -1727,6 +1728,7 @@ test "field_decl to_json" {
     mut_: false,
     vis: @syntax.Default,
     loc: dummy_loc,
+    attrs: @list.empty(),
     doc: dummy_docstring,
   }
   @json.inspect(field_decl, content={
@@ -1828,6 +1830,7 @@ test "constr_decl to_json" {
     args: Some(@list.of([param])),
     tag: Some(("tag_value", dummy_loc)),
     loc: dummy_loc,
+    attrs: @list.empty(),
     doc: dummy_docstring,
   }
   let constr_without_args = @syntax.ConstrDecl::{
@@ -1835,6 +1838,7 @@ test "constr_decl to_json" {
     args: None,
     tag: None,
     loc: dummy_loc,
+    attrs: @list.empty(),
     doc: dummy_docstring,
   }
   @json.inspect(constr_with_args, content={
@@ -2281,6 +2285,7 @@ test "trait_method_decl to_json" {
     return_type: Some(int_type),
     error_type: @syntax.ErrorType::DefaultErrorType(loc=dummy_loc),
     has_default: Some(dummy_loc),
+    attrs: @list.empty(),
     loc: dummy_loc,
   }
   @json.inspect(trait_method, content={
@@ -2341,6 +2346,7 @@ test "trait_decl to_json" {
     return_type: None,
     error_type: @syntax.NoErrorType,
     has_default: None,
+    attrs: @list.empty(),
     loc: dummy_loc,
   }
   let trait_decl = @syntax.TraitDecl::{

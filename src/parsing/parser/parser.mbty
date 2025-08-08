@@ -853,17 +853,18 @@ deriving_directive_list -> List[DerivingDirective]
   ;
 
 trait_method_decl -> TraitMethodDecl
-  : is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) { 
-    let (return_type, error_type) = $8
+  : attributes is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) { 
+    let (return_type, error_type) = $9
     TraitMethodDecl::{
-      name: $2,
-      has_error: $3,
-      is_async: $1,
-      quantifiers: $4,
-      params: $6,
+      name: $3,
+      has_error: $4,
+      is_async: $2,
+      quantifiers: $5,
+      params: $7,
       return_type,
       error_type,
-      has_default: $9,
+      has_default: $10,
+      attrs: $1,
       loc: mk_loc($sloc)
     }
   }
@@ -1836,13 +1837,14 @@ type_ -> Type
   ;
 
 record_decl_field -> FieldDecl
-  : visibility option("mut") LIDENT ":" type_ { 
+  : attributes visibility option("mut") LIDENT ":" type_ { 
     FieldDecl::{
-      name: FieldName::{ label: $3, loc: mk_loc($loc($3)) },
-      ty: $5,
-      mut_: $2 is Some(_),
-      vis: $1,
+      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
+      ty: $6,
+      mut_: $3 is Some(_),
+      vis: $2,
       loc: mk_loc($sloc),
+      attrs: $1,
       doc: DocString::empty()
     }
   }
@@ -1867,12 +1869,13 @@ constructor_param -> ConstrParam
   ;
 
 enum_constructor -> ConstrDecl
-  : UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) { 
+  : attributes UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) { 
     ConstrDecl::{
-      name: ConstrName::{ name: $1, loc: mk_loc($loc($1)) },
-      args: $2,
-      tag: $3,
+      name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
+      args: $3,
+      tag: $4,
       loc: mk_loc($sloc),
+      attrs: $1,
       doc: DocString::empty()
     }
   }

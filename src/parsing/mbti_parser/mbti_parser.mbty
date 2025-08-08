@@ -200,7 +200,9 @@ alias_sig -> AliasSig
   ;
 
 enum_constructor -> ConstrDecl
-  : UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { ConstrDecl::{name: ConstrName::{ name : $1, loc : mk_loc($loc($1)) }, args: $2, tag: $3, loc: mk_loc($sloc), doc: DocString::empty()} }
+  : attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { 
+    ConstrDecl::{name: ConstrName::{ name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()} 
+  }
   ;
 
 %inline eq_tag -> (String, Location)
@@ -213,7 +215,9 @@ constructor_param -> ConstrParam
   ;
 
 record_decl_field -> FieldDecl
-  : boption("mut") LIDENT ":" type_ { FieldDecl::{ name: FieldName::{ label: $2, loc : mk_loc($loc($2)) }, vis: Default, mut_: $1, ty: $4, loc: mk_loc($sloc), doc: DocString::empty() } }
+  : attributes boption("mut") LIDENT ":" type_ { 
+    FieldDecl::{ name: FieldName::{ label: $3, loc : mk_loc($loc($3)) }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() } 
+  }
   ;
 
 type_param_with_constraints -> TypeParamWithConstraints

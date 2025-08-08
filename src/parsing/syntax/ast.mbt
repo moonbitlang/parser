@@ -96,6 +96,7 @@ pub(all) struct ConstrDecl {
   args : @list.List[ConstrParam]?
   tag : (String, Location)?
   loc : Location
+  attrs : @list.List[Attribute]
   mut doc : DocString
 }
 
@@ -119,6 +120,7 @@ pub(all) struct FieldDecl {
   mut_ : Bool
   vis : Visibility
   loc : Location
+  attrs : @list.List[Attribute]
   mut doc : DocString
 }
 
@@ -637,6 +639,7 @@ pub(all) struct TraitMethodDecl {
   return_type : Type?
   error_type : ErrorType
   has_default : Location?
+  attrs : @list.List[Attribute]
   loc : Location
 }
 
