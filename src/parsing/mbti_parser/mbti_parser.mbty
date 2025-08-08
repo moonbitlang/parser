@@ -112,7 +112,7 @@ mbti -> Mbti
   : LIDENT STRING ioption(";") imports sigs EOF { Mbti::{package_name: $2, imports: $4, sigs: $5} }
   ;
 
-imports -> @list.T[PackageImport]
+imports -> @list.List[PackageImport]
   :  { @list.empty() }
   | "import" "(" separated_nonempty_list(";", package_import) ")" ";" { $3 }
   ;
@@ -122,7 +122,7 @@ package_import -> PackageImport
   | STRING "as" LIDENT { PackageImport::{name: $1, alias_: Some($3)} }
   ;
 
-sigs -> @list.T[(Sig, Location)]
+sigs -> @list.List[(Sig, Location)]
   :  { @list.empty() }
   | sig_ { @list.singleton(($1, mk_loc($sloc))) }
   | sig_ ";" sigs { $3.add(($1, mk_loc($loc($1)))) }
@@ -219,7 +219,7 @@ type_param_with_constraints -> TypeParamWithConstraints
   | uident ":" separated_nonempty_list("+", type_constraint) { TypeParamWithConstraints::{name: $1, constraints: $3} }
   ;
 
-type_params_with_constraints -> @list.T[TypeParamWithConstraints]
+type_params_with_constraints -> @list.List[TypeParamWithConstraints]
   : "[" separated_list(",", type_param_with_constraints) "]" { $2 }
   ;
 
@@ -228,11 +228,11 @@ type_param_no_constraints -> TypeParamNoConstraints
   | "_" { Underscore(mk_loc($sloc)) }
   ;
 
-type_params_no_constraints -> @list.T[TypeParamNoConstraints]
+type_params_no_constraints -> @list.List[TypeParamNoConstraints]
   : "[" separated_list(",", type_param_no_constraints) "]" { $2 }
   ;
 
-optional_type_params_no_constraints -> @list.T[TypeParamNoConstraints]
+optional_type_params_no_constraints -> @list.List[TypeParamNoConstraints]
   : { @list.empty() }
   | type_params_no_constraints { $1 }
   ;
@@ -241,7 +241,7 @@ type_constraint -> QualifiedName
   : qualified_uident { $1 }
   ;
 
-type_decl_name_with_params -> (Name, @list.T[TypeParamNoConstraints])
+type_decl_name_with_params -> (Name, @list.List[TypeParamNoConstraints])
   : uident optional_type_params_no_constraints { ($1, $2) }
   ;
 
@@ -275,7 +275,7 @@ error_type -> Type
   : qualified_uident_ { Name(constr_id=$1, tys=@list.empty(), loc=mk_loc($sloc)) }
   ;
 
-optional_type_arguments -> @list.T[Type]
+optional_type_arguments -> @list.List[Type]
   : delimited("[", separated_nonempty_list(",", type_), "]") { $1 }
   |  { @list.empty() }
   ;
@@ -356,7 +356,7 @@ post_label -> Label
   : POST_LABEL { Label::{name: $1, loc: mk_loc($sloc)} }
   ;
 
-%inline attributes -> @list.T[Attribute]
+%inline attributes -> @list.List[Attribute]
   :  {  @list.empty() }
   | nonempty_list(attribute) { $1 }
   ;

@@ -45,10 +45,10 @@ priv suberror YYObj_Option_Bool_ Bool?
 priv suberror YYObj_Option_Name_ Name?
 
 ///|
-priv suberror YYObj_Option__list_T_Type__ @list.T[Type]?
+priv suberror YYObj_Option__list_List_Type__ @list.List[Type]?
 
 ///|
-priv suberror YYObj_Option__list_T_ConstrParam__ @list.T[ConstrParam]?
+priv suberror YYObj_Option__list_List_ConstrParam__ @list.List[ConstrParam]?
 
 ///|
 priv suberror YYObj_Option__String__Location__ (String, Location)?
@@ -132,50 +132,52 @@ priv suberror YYObj_TypeParamNoConstraints TypeParamNoConstraints
 priv suberror YYObj_TypeParamWithConstraints TypeParamWithConstraints
 
 ///|
-priv suberror YYObj__list_T_Type_ @list.T[Type]
+priv suberror YYObj__list_List_Type_ @list.List[Type]
 
 ///|
-priv suberror YYObj__list_T_Attribute_ @list.T[Attribute]
+priv suberror YYObj__list_List_Attribute_ @list.List[Attribute]
 
 ///|
-priv suberror YYObj__list_T_FieldDecl_ @list.T[FieldDecl]
+priv suberror YYObj__list_List_FieldDecl_ @list.List[FieldDecl]
 
 ///|
-priv suberror YYObj__list_T_Parameter_ @list.T[Parameter]
+priv suberror YYObj__list_List_Parameter_ @list.List[Parameter]
 
 ///|
-priv suberror YYObj__list_T_ConstrDecl_ @list.T[ConstrDecl]
+priv suberror YYObj__list_List_ConstrDecl_ @list.List[ConstrDecl]
 
 ///|
-priv suberror YYObj__list_T_ConstrParam_ @list.T[ConstrParam]
+priv suberror YYObj__list_List_ConstrParam_ @list.List[ConstrParam]
 
 ///|
-priv suberror YYObj__list_T_PackageImport_ @list.T[PackageImport]
+priv suberror YYObj__list_List_PackageImport_ @list.List[PackageImport]
 
 ///|
-priv suberror YYObj__list_T_QualifiedName_ @list.T[QualifiedName]
+priv suberror YYObj__list_List_QualifiedName_ @list.List[QualifiedName]
 
 ///|
-priv suberror YYObj__list_T_TraitMethodSig_ @list.T[TraitMethodSig]
+priv suberror YYObj__list_List_TraitMethodSig_ @list.List[TraitMethodSig]
 
 ///|
-priv suberror YYObj__list_T_TraitMethodParameter_ @list.T[TraitMethodParameter]
+priv suberror YYObj__list_List_TraitMethodParameter_ @list.List[
+  TraitMethodParameter,
+]
 
 ///|
-priv suberror YYObj__list_T_TypeParamNoConstraints_ @list.T[
+priv suberror YYObj__list_List_TypeParamNoConstraints_ @list.List[
   TypeParamNoConstraints,
 ]
 
 ///|
-priv suberror YYObj__list_T_TypeParamWithConstraints_ @list.T[
+priv suberror YYObj__list_List_TypeParamWithConstraints_ @list.List[
   TypeParamWithConstraints,
 ]
 
 ///|
-priv suberror YYObj__list_T__Sig__Location__ @list.T[(Sig, Location)]
+priv suberror YYObj__list_List__Sig__Location__ @list.List[(Sig, Location)]
 
 ///|
-priv suberror YYObj__list_T__String__Option_String___String__ @list.T[
+priv suberror YYObj__list_List__String__Option_String___String__ @list.List[
   (String, String?, String),
 ]
 
@@ -183,9 +185,9 @@ priv suberror YYObj__list_T__String__Option_String___String__ @list.T[
 priv suberror YYObj_String_ String?
 
 ///|
-priv suberror YYObj__Name___list_T_TypeParamNoConstraints__ (
+priv suberror YYObj__Name___list_List_TypeParamNoConstraints__ (
   Name,
-  @list.T[TypeParamNoConstraints],
+  @list.List[TypeParamNoConstraints],
 )
 
 ///|
@@ -408,7 +410,7 @@ fn yy_action_0(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_TypeParamNoConstraints(_dollar1)
-  YYObj__list_T_TypeParamNoConstraints_(
+  YYObj__list_List_TypeParamNoConstraints_(
     {
       ()
       @list.singleton(_dollar1)
@@ -424,8 +426,8 @@ fn yy_action_1(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__list_T_FieldDecl_(_dollar1)
-  YYObj__list_T_FieldDecl_(
+  guard _args[0].0 is YYObj__list_List_FieldDecl_(_dollar1)
+  YYObj__list_List_FieldDecl_(
     {
       ()
       _dollar1
@@ -494,7 +496,7 @@ fn yy_action_5(
   } else {
     _args[_args.length() - 1].2
   }
-  YYObj__list_T__Sig__Location__(
+  YYObj__list_List__Sig__Location__(
     {
       ()
       @list.singleton((_dollar1, mk_loc((_symbol_start_pos, _end_pos))))
@@ -512,8 +514,8 @@ fn yy_action_6(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_7(_last_pos, _args[0:1])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[2].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
-  guard _args[4].0 is YYObj__list_T_Type_(_dollar5)
+  guard _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
+  guard _args[4].0 is YYObj__list_List_Type_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -561,7 +563,7 @@ fn yy_action_10(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[1].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
+  guard _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
   YYObj_TypeSig(
     {
       ()
@@ -648,7 +650,7 @@ fn yy_action_15(
   let _sub_action_0_result = yy_action_7(_last_pos, _args[0:1])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
   guard _args[2].0 is YYObj_Name(_dollar3)
-  guard _args[4].0 is YYObj__list_T_ConstrDecl_(_dollar5)
+  guard _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -688,7 +690,7 @@ fn yy_action_17(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_7(_last_pos, _args[0:1])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[2].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
+  guard _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
   guard _args[3].0 is YYObj_Type(_dollar4)
   YYObj_TypeSig(
     {
@@ -714,7 +716,7 @@ fn yy_action_18(
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
   guard _args[1].0 is YYObj_Name(_dollar3)
-  guard _args[3].0 is YYObj__list_T_ConstrDecl_(_dollar5)
+  guard _args[3].0 is YYObj__list_List_ConstrDecl_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -736,8 +738,8 @@ fn yy_action_19(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[1].0 is YYObj__list_T_TypeParamNoConstraints_(_dollar2)
-  YYObj__list_T_TypeParamNoConstraints_(
+  guard _args[1].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar2)
+  YYObj__list_List_TypeParamNoConstraints_(
     {
       ()
       _dollar2
@@ -755,7 +757,7 @@ fn yy_action_20(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[2].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar4)
+  guard _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   YYObj_TypeSig(
     {
       ()
@@ -840,7 +842,7 @@ fn yy_action_13(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_Attribute_(
+  YYObj__list_List_Attribute_(
     {
       ()
       @list.empty()
@@ -913,7 +915,7 @@ fn yy_action_25(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[1].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
+  guard _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
   guard _args[2].0 is YYObj_Type(_dollar4)
   YYObj_TypeSig(
     {
@@ -953,7 +955,7 @@ fn yy_action_27(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_TraitMethodParameter(_dollar1)
-  YYObj__list_T_TraitMethodParameter_(
+  YYObj__list_List_TraitMethodParameter_(
     {
       ()
       @list.singleton(_dollar1)
@@ -971,7 +973,7 @@ fn yy_action_28(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_7(_last_pos, _args[0:1])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[2].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
+  guard _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
   YYObj_TypeSig(
     {
       ()
@@ -1009,7 +1011,7 @@ fn yy_action_29(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_Type_(
+  YYObj__list_List_Type_(
     {
       ()
       @list.empty()
@@ -1026,7 +1028,7 @@ fn yy_action_30(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_ConstrDecl(_dollar1)
-  YYObj__list_T_ConstrDecl_(
+  YYObj__list_List_ConstrDecl_(
     {
       ()
       @list.singleton(_dollar1)
@@ -1042,8 +1044,8 @@ fn yy_action_31(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__list_T_Parameter_(_dollar1)
-  YYObj__list_T_Parameter_(
+  guard _args[0].0 is YYObj__list_List_Parameter_(_dollar1)
+  YYObj__list_List_Parameter_(
     {
       ()
       _dollar1
@@ -1059,8 +1061,8 @@ fn yy_action_32(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_PackageImport_(_dollar3)
-  YYObj__list_T_PackageImport_(
+  guard _args[2].0 is YYObj__list_List_PackageImport_(_dollar3)
+  YYObj__list_List_PackageImport_(
     {
       ()
       _dollar3
@@ -1076,9 +1078,10 @@ fn yy_action_33(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[1].0 is YYObj__list_T__String__Option_String___String__(_dollar2)
+  guard _args[1].0
+    is YYObj__list_List__String__Option_String___String__(_dollar2)
   guard _args[0].0 is YYObj__String__Option_String___String_(_dollar1)
-  YYObj__list_T__String__Option_String___String__(
+  YYObj__list_List__String__Option_String___String__(
     {
       ()
       _dollar2.add(_dollar1)
@@ -1095,7 +1098,7 @@ fn yy_action_34(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_QualifiedName(_dollar1)
-  YYObj__list_T_QualifiedName_(
+  YYObj__list_List_QualifiedName_(
     {
       ()
       @list.singleton(_dollar1)
@@ -1113,7 +1116,7 @@ fn yy_action_35(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_22(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_36(_args[2].2, _args[3:4])
-  guard _sub_action_1_result is YYObj_Option__list_T_Type__(_dollar5)
+  guard _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard _args[1].0 is YYObj_Type(_dollar3)
   guard _args[6].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _sub_action_0_result is YYObj_Bool(_dollar1)
@@ -1174,7 +1177,7 @@ fn yy_action_38(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[3].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar5)
+  guard _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar5)
   guard _args[1].0 is YYObj_Type(_dollar3)
   YYObj_AliasSig(
     {
@@ -1217,7 +1220,7 @@ fn yy_action_41(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_FieldDecl(_dollar1)
-  YYObj__list_T_FieldDecl_(
+  YYObj__list_List_FieldDecl_(
     {
       ()
       @list.singleton(_dollar1)
@@ -1251,7 +1254,7 @@ fn yy_action_43(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_TypeParamWithConstraints(_dollar1)
-  YYObj__list_T_TypeParamWithConstraints_(
+  YYObj__list_List_TypeParamWithConstraints_(
     {
       ()
       @list.singleton(_dollar1)
@@ -1335,8 +1338,8 @@ fn yy_action_48(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_Name(_dollar1)
-  guard _args[1].0 is YYObj__list_T_TypeParamNoConstraints_(_dollar2)
-  YYObj__Name___list_T_TypeParamNoConstraints__(
+  guard _args[1].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar2)
+  YYObj__Name___list_List_TypeParamNoConstraints__(
     {
       ()
       (_dollar1, _dollar2)
@@ -1353,9 +1356,9 @@ fn yy_action_49(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   let _sub_action_0_result = yy_action_50(_last_pos, _args[0:1])
-  guard _args[1].0 is YYObj__list_T_Attribute_(_dollar2)
+  guard _args[1].0 is YYObj__list_List_Attribute_(_dollar2)
   guard _sub_action_0_result is YYObj_Attribute(_dollar1)
-  YYObj__list_T_Attribute_(
+  YYObj__list_List_Attribute_(
     {
       ()
       _dollar2.add(_dollar1)
@@ -1371,8 +1374,8 @@ fn yy_action_51(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__list_T_TypeParamWithConstraints_(_dollar1)
-  YYObj__list_T_TypeParamWithConstraints_(
+  guard _args[0].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar1)
+  YYObj__list_List_TypeParamWithConstraints_(
     {
       ()
       _dollar1
@@ -1388,8 +1391,8 @@ fn yy_action_40(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__list_T_Attribute_(_dollar1)
-  YYObj__list_T_Attribute_(
+  guard _args[0].0 is YYObj__list_List_Attribute_(_dollar1)
+  YYObj__list_List_Attribute_(
     {
       ()
       _dollar1
@@ -1405,7 +1408,7 @@ fn yy_action_52(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj_Option__list_T_ConstrParam__(
+  YYObj_Option__list_List_ConstrParam__(
     {
       ()
       None
@@ -1432,9 +1435,9 @@ fn yy_action_53(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_QualifiedName_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_QualifiedName_(_dollar3)
   guard _args[0].0 is YYObj_QualifiedName(_dollar1)
-  YYObj__list_T_QualifiedName_(
+  YYObj__list_List_QualifiedName_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -1450,7 +1453,7 @@ fn yy_action_54(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_TypeParamNoConstraints_(
+  YYObj__list_List_TypeParamNoConstraints_(
     {
       ()
       @list.empty()
@@ -1482,7 +1485,7 @@ fn yy_action_56(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[3].0 is YYObj__list_T_Type_(_dollar4)
+  guard _args[3].0 is YYObj__list_List_Type_(_dollar4)
   guard _args[1].0 is YYObj_Type(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
@@ -1509,8 +1512,8 @@ fn yy_action_57(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__list_T_Type_(_dollar1)
-  YYObj__list_T_Type_(
+  guard _args[0].0 is YYObj__list_List_Type_(_dollar1)
+  YYObj__list_List_Type_(
     {
       ()
       _dollar1
@@ -1606,7 +1609,7 @@ fn yy_action_62(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_63(_last_pos, _args[0:2])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[3].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
+  guard _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
   YYObj_TypeSig(
     {
       ()
@@ -1658,7 +1661,7 @@ fn yy_action_65(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_63(_last_pos, _args[0:2])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[3].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
+  guard _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
   guard _args[4].0 is YYObj_Type(_dollar4)
   YYObj_TypeSig(
     {
@@ -1681,8 +1684,8 @@ fn yy_action_66(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__list_T_TypeParamWithConstraints_(_dollar1)
-  YYObj__list_T_TypeParamWithConstraints_(
+  guard _args[0].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar1)
+  YYObj__list_List_TypeParamWithConstraints_(
     {
       ()
       _dollar1
@@ -1737,7 +1740,7 @@ fn yy_action_69(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_63(_last_pos, _args[0:2])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[4].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar4)
+  guard _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   YYObj_TypeSig(
     {
       ()
@@ -1798,9 +1801,9 @@ fn yy_action_72(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_FieldDecl_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_FieldDecl_(_dollar3)
   guard _args[0].0 is YYObj_FieldDecl(_dollar1)
-  YYObj__list_T_FieldDecl_(
+  YYObj__list_List_FieldDecl_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -1835,7 +1838,7 @@ fn yy_action_74(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_7(_last_pos, _args[0:1])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[4].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar5)
+  guard _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar5)
   guard _args[2].0 is YYObj_Type(_dollar3)
   YYObj_AliasSig(
     {
@@ -1898,7 +1901,7 @@ fn yy_action_77(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_FieldDecl_(
+  YYObj__list_List_FieldDecl_(
     {
       ()
       @list.empty()
@@ -1914,9 +1917,9 @@ fn yy_action_78(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_ConstrParam_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_ConstrParam_(_dollar3)
   guard _args[0].0 is YYObj_ConstrParam(_dollar1)
-  YYObj__list_T_ConstrParam_(
+  YYObj__list_List_ConstrParam_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -1950,8 +1953,8 @@ fn yy_action_36(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__list_T_Type_(_dollar1)
-  YYObj_Option__list_T_Type__(
+  guard _args[0].0 is YYObj__list_List_Type_(_dollar1)
+  YYObj_Option__list_List_Type__(
     {
       ()
       Some(_dollar1)
@@ -1969,8 +1972,8 @@ fn yy_action_80(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_63(_last_pos, _args[0:2])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[3].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
-  guard _args[5].0 is YYObj__list_T_FieldDecl_(_dollar5)
+  guard _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
+  guard _args[5].0 is YYObj__list_List_FieldDecl_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -2012,9 +2015,9 @@ fn yy_action_82(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_TypeParamWithConstraints_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar3)
   guard _args[0].0 is YYObj_TypeParamWithConstraints(_dollar1)
-  YYObj__list_T_TypeParamWithConstraints_(
+  YYObj__list_List_TypeParamWithConstraints_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -2030,9 +2033,9 @@ fn yy_action_83(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_ConstrDecl_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_ConstrDecl_(_dollar3)
   guard _args[0].0 is YYObj_ConstrDecl(_dollar1)
-  YYObj__list_T_ConstrDecl_(
+  YYObj__list_List_ConstrDecl_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -2086,8 +2089,8 @@ fn yy_action_86(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_87(_args[1].2, _args[2:3])
   guard _args[1].0 is YYObj_StringLiteral(_dollar2)
-  guard _args[3].0 is YYObj__list_T_PackageImport_(_dollar4)
-  guard _args[4].0 is YYObj__list_T__Sig__Location__(_dollar5)
+  guard _args[3].0 is YYObj__list_List_PackageImport_(_dollar4)
+  guard _args[4].0 is YYObj__list_List__Sig__Location__(_dollar5)
   YYObj_Mbti(
     {
       ()
@@ -2253,7 +2256,7 @@ fn yy_action_95(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_TypeParamNoConstraints_(
+  YYObj__list_List_TypeParamNoConstraints_(
     {
       ()
       @list.empty()
@@ -2270,7 +2273,7 @@ fn yy_action_96(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_ConstrId(_dollar1)
-  guard _args[1].0 is YYObj__list_T_Type_(_dollar2)
+  guard _args[1].0 is YYObj__list_List_Type_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -2297,7 +2300,7 @@ fn yy_action_97(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_TypeParamWithConstraints_(
+  YYObj__list_List_TypeParamWithConstraints_(
     {
       ()
       @list.empty()
@@ -2361,7 +2364,7 @@ fn yy_action_100(
   let _sub_action_0_result = yy_action_63(_last_pos, _args[0:2])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
   guard _args[3].0 is YYObj_Name(_dollar3)
-  guard _args[5].0 is YYObj__list_T_ConstrDecl_(_dollar5)
+  guard _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -2385,7 +2388,7 @@ fn yy_action_101(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_50(_last_pos, _args[0:1])
   guard _sub_action_0_result is YYObj_Attribute(_dollar1)
-  YYObj__list_T_Attribute_(
+  YYObj__list_List_Attribute_(
     {
       ()
       @list.singleton(_dollar1)
@@ -2401,8 +2404,8 @@ fn yy_action_102(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[1].0 is YYObj__list_T_Parameter_(_dollar2)
-  YYObj__list_T_Parameter_(
+  guard _args[1].0 is YYObj__list_List_Parameter_(_dollar2)
+  YYObj__list_List_Parameter_(
     {
       ()
       _dollar2
@@ -2418,7 +2421,7 @@ fn yy_action_103(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T__Sig__Location__(
+  YYObj__list_List__Sig__Location__(
     {
       ()
       @list.empty()
@@ -2435,8 +2438,8 @@ fn yy_action_104(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   let _sub_action_0_result = yy_action_105(_last_pos, _args[0:3])
-  guard _sub_action_0_result is YYObj__list_T_ConstrParam_(_dollar1)
-  YYObj_Option__list_T_ConstrParam__(
+  guard _sub_action_0_result is YYObj__list_List_ConstrParam_(_dollar1)
+  YYObj_Option__list_List_ConstrParam__(
     {
       ()
       Some(_dollar1)
@@ -2452,7 +2455,7 @@ fn yy_action_106(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_PackageImport_(
+  YYObj__list_List_PackageImport_(
     {
       ()
       @list.empty()
@@ -2491,8 +2494,8 @@ fn yy_action_108(
   let _sub_action_0_result = yy_action_63(_last_pos, _args[0:2])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
   guard _args[3].0 is YYObj_Name(_dollar3)
-  guard _args[4].0 is YYObj__list_T_QualifiedName_(_dollar4)
-  guard _args[6].0 is YYObj__list_T_TraitMethodSig_(_dollar6)
+  guard _args[4].0 is YYObj__list_List_QualifiedName_(_dollar4)
+  guard _args[6].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
   YYObj_TraitSig(
     {
       ()
@@ -2556,7 +2559,7 @@ fn yy_action_111(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj_Option__list_T_Type__(
+  YYObj_Option__list_List_Type__(
     {
       ()
       None
@@ -2573,7 +2576,8 @@ fn yy_action_112(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[1].0 is YYObj_FuncSig(_dollar2)
-  guard _args[0].0 is YYObj__list_T__String__Option_String___String__(_dollar1)
+  guard _args[0].0
+    is YYObj__list_List__String__Option_String___String__(_dollar1)
   YYObj_FuncSig(
     {
       ()
@@ -2592,8 +2596,8 @@ fn yy_action_113(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[1].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
-  guard _args[3].0 is YYObj__list_T_FieldDecl_(_dollar5)
+  guard _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
+  guard _args[3].0 is YYObj__list_List_FieldDecl_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -2668,7 +2672,7 @@ fn yy_action_116(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_TypeParamWithConstraints_(
+  YYObj__list_List_TypeParamWithConstraints_(
     {
       ()
       @list.empty()
@@ -2684,7 +2688,7 @@ fn yy_action_117(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_TraitMethodParameter_(
+  YYObj__list_List_TraitMethodParameter_(
     {
       ()
       @list.empty()
@@ -2734,7 +2738,7 @@ fn yy_action_119(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_115(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_36(_args[3].2, _args[4:5])
-  guard _sub_action_1_result is YYObj_Option__list_T_Type__(_dollar5)
+  guard _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[7].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _sub_action_0_result is YYObj_Bool(_dollar1)
@@ -2808,8 +2812,8 @@ fn yy_action_105(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[1].0 is YYObj__list_T_ConstrParam_(_dollar2)
-  YYObj__list_T_ConstrParam_(
+  guard _args[1].0 is YYObj__list_List_ConstrParam_(_dollar2)
+  YYObj__list_List_ConstrParam_(
     {
       ()
       _dollar2
@@ -2869,11 +2873,11 @@ fn yy_action_123(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T__Sig__Location__(_dollar3)
+  guard _args[2].0 is YYObj__list_List__Sig__Location__(_dollar3)
   guard _args[0].0 is YYObj_Sig(_dollar1)
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  YYObj__list_T__Sig__Location__(
+  YYObj__list_List__Sig__Location__(
     {
       ()
       _dollar3.add((_dollar1, mk_loc((_start_pos_of_item0, _end_pos_of_item0))))
@@ -2891,8 +2895,8 @@ fn yy_action_124(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[1].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
-  guard _args[3].0 is YYObj__list_T_ConstrDecl_(_dollar5)
+  guard _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
+  guard _args[3].0 is YYObj__list_List_ConstrDecl_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -2931,8 +2935,8 @@ fn yy_action_126(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[1].0 is YYObj__list_T_QualifiedName_(_dollar2)
-  YYObj__list_T_QualifiedName_(
+  guard _args[1].0 is YYObj__list_List_QualifiedName_(_dollar2)
+  YYObj__list_List_QualifiedName_(
     {
       ()
       _dollar2
@@ -2985,7 +2989,7 @@ fn yy_action_129(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_QualifiedName(_dollar1)
-  YYObj__list_T_QualifiedName_(
+  YYObj__list_List_QualifiedName_(
     {
       ()
       @list.singleton(_dollar1)
@@ -3001,9 +3005,9 @@ fn yy_action_130(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_TraitMethodSig_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_TraitMethodSig_(_dollar3)
   guard _args[0].0 is YYObj_TraitMethodSig(_dollar1)
-  YYObj__list_T_TraitMethodSig_(
+  YYObj__list_List_TraitMethodSig_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -3021,8 +3025,8 @@ fn yy_action_131(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[1].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
-  guard _args[3].0 is YYObj__list_T_Type_(_dollar5)
+  guard _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
+  guard _args[3].0 is YYObj__list_List_Type_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -3070,7 +3074,7 @@ fn yy_action_133(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_134(_args[0].2, _args[1:4])
   guard _args[0].0 is YYObj_Name(_dollar1)
-  guard _sub_action_0_result is YYObj__list_T_TraitMethodParameter_(_dollar2)
+  guard _sub_action_0_result is YYObj__list_List_TraitMethodParameter_(_dollar2)
   guard _args[5].0 is YYObj__Type__ErrorType_(_dollar4)
   guard _args[6].0 is YYObj_Bool(_dollar5)
   YYObj_TraitMethodSig(
@@ -3095,7 +3099,7 @@ fn yy_action_135(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_ConstrParam(_dollar1)
-  YYObj__list_T_ConstrParam_(
+  YYObj__list_List_ConstrParam_(
     {
       ()
       @list.singleton(_dollar1)
@@ -3112,7 +3116,7 @@ fn yy_action_136(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_Name(_dollar1)
-  guard _args[2].0 is YYObj__list_T_QualifiedName_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_QualifiedName_(_dollar3)
   YYObj_TypeParamWithConstraints(
     {
       ()
@@ -3129,7 +3133,7 @@ fn yy_action_137(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_Type_(
+  YYObj__list_List_Type_(
     {
       ()
       @list.empty()
@@ -3147,7 +3151,7 @@ fn yy_action_138(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_7(_last_pos, _args[0:1])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[3].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar4)
+  guard _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   YYObj_TypeSig(
     {
       ()
@@ -3169,7 +3173,7 @@ fn yy_action_139(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[1].0 is YYObj__list_T_TypeParamWithConstraints_(_dollar2)
+  guard _args[1].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar2)
   guard _args[2].0 is YYObj_QualifiedName(_dollar3)
   guard _args[4].0 is YYObj_Type(_dollar5)
   YYObj_ImplSig(
@@ -3207,8 +3211,8 @@ fn yy_action_141(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_7(_last_pos, _args[0:1])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[2].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
-  guard _args[4].0 is YYObj__list_T_ConstrDecl_(_dollar5)
+  guard _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
+  guard _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -3232,8 +3236,8 @@ fn yy_action_142(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_63(_last_pos, _args[0:2])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[3].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
-  guard _args[5].0 is YYObj__list_T_Type_(_dollar5)
+  guard _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
+  guard _args[5].0 is YYObj__list_List_Type_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -3255,9 +3259,9 @@ fn yy_action_143(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_Parameter_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_Parameter_(_dollar3)
   guard _args[0].0 is YYObj_Parameter(_dollar1)
-  YYObj__list_T_Parameter_(
+  YYObj__list_List_Parameter_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -3274,7 +3278,7 @@ fn yy_action_144(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_Type(_dollar1)
-  YYObj__list_T_Type_(
+  YYObj__list_List_Type_(
     {
       ()
       @list.singleton(_dollar1)
@@ -3320,7 +3324,7 @@ fn yy_action_146(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_22(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_111(_args[2].2, _args[3:3])
-  guard _sub_action_1_result is YYObj_Option__list_T_Type__(_dollar5)
+  guard _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard _args[1].0 is YYObj_Type(_dollar3)
   guard _args[5].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _sub_action_0_result is YYObj_Bool(_dollar1)
@@ -3354,7 +3358,7 @@ fn yy_action_147(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_115(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_111(_args[3].2, _args[4:4])
-  guard _sub_action_1_result is YYObj_Option__list_T_Type__(_dollar5)
+  guard _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[6].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _sub_action_0_result is YYObj_Bool(_dollar1)
@@ -3404,8 +3408,8 @@ fn yy_action_149(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_63(_last_pos, _args[0:2])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[3].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
-  guard _args[5].0 is YYObj__list_T_ConstrDecl_(_dollar5)
+  guard _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
+  guard _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -3469,8 +3473,8 @@ fn yy_action_151(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_122(_args[1].2, _args[2:2])
   guard _args[1].0 is YYObj_StringLiteral(_dollar2)
-  guard _args[2].0 is YYObj__list_T_PackageImport_(_dollar4)
-  guard _args[3].0 is YYObj__list_T__Sig__Location__(_dollar5)
+  guard _args[2].0 is YYObj__list_List_PackageImport_(_dollar4)
+  guard _args[3].0 is YYObj__list_List__Sig__Location__(_dollar5)
   YYObj_Mbti(
     {
       ()
@@ -3532,9 +3536,9 @@ fn yy_action_154(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_TypeParamNoConstraints_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar3)
   guard _args[0].0 is YYObj_TypeParamNoConstraints(_dollar1)
-  YYObj__list_T_TypeParamNoConstraints_(
+  YYObj__list_List_TypeParamNoConstraints_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -3550,8 +3554,8 @@ fn yy_action_155(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__list_T_ConstrDecl_(_dollar1)
-  YYObj__list_T_ConstrDecl_(
+  guard _args[0].0 is YYObj__list_List_ConstrDecl_(_dollar1)
+  YYObj__list_List_ConstrDecl_(
     {
       ()
       _dollar1
@@ -3613,7 +3617,7 @@ fn yy_action_158(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj__String__Option_String___String_(_dollar1)
-  YYObj__list_T__String__Option_String___String__(
+  YYObj__list_List__String__Option_String___String__(
     {
       ()
       @list.singleton(_dollar1)
@@ -3660,8 +3664,8 @@ fn yy_action_134(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[1].0 is YYObj__list_T_TraitMethodParameter_(_dollar2)
-  YYObj__list_T_TraitMethodParameter_(
+  guard _args[1].0 is YYObj__list_List_TraitMethodParameter_(_dollar2)
+  YYObj__list_List_TraitMethodParameter_(
     {
       ()
       _dollar2
@@ -3694,9 +3698,9 @@ fn yy_action_161(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_Type_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_Type_(_dollar3)
   guard _args[0].0 is YYObj_Type(_dollar1)
-  YYObj__list_T_Type_(
+  YYObj__list_List_Type_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -3728,7 +3732,7 @@ fn yy_action_163(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_Parameter_(
+  YYObj__list_List_Parameter_(
     {
       ()
       @list.empty()
@@ -3745,7 +3749,7 @@ fn yy_action_164(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_Parameter(_dollar1)
-  YYObj__list_T_Parameter_(
+  YYObj__list_List_Parameter_(
     {
       ()
       @list.singleton(_dollar1)
@@ -3764,8 +3768,8 @@ fn yy_action_165(
   let _sub_action_0_result = yy_action_102(_args[3].2, _args[4:7])
   guard _args[2].0 is YYObj_Option_Name_(_dollar3)
   guard _args[3].0 is YYObj_Name(_dollar4)
-  guard _args[1].0 is YYObj__list_T_TypeParamWithConstraints_(_dollar2)
-  guard _sub_action_0_result is YYObj__list_T_Parameter_(_dollar5)
+  guard _args[1].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar2)
+  guard _sub_action_0_result is YYObj__list_List_Parameter_(_dollar5)
   guard _args[8].0 is YYObj__Type__ErrorType_(_dollar7)
   YYObj_FuncSig(
     {
@@ -3843,7 +3847,7 @@ fn yy_action_169(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_TraitMethodSig(_dollar1)
-  YYObj__list_T_TraitMethodSig_(
+  YYObj__list_List_TraitMethodSig_(
     {
       ()
       @list.singleton(_dollar1)
@@ -3859,8 +3863,8 @@ fn yy_action_170(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__list_T_TypeParamNoConstraints_(_dollar1)
-  YYObj__list_T_TypeParamNoConstraints_(
+  guard _args[0].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar1)
+  YYObj__list_List_TypeParamNoConstraints_(
     {
       ()
       _dollar1
@@ -3901,8 +3905,8 @@ fn yy_action_172(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[1].0 is YYObj__list_T_TypeParamWithConstraints_(_dollar2)
-  YYObj__list_T_TypeParamWithConstraints_(
+  guard _args[1].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar2)
+  YYObj__list_List_TypeParamWithConstraints_(
     {
       ()
       _dollar2
@@ -4041,8 +4045,8 @@ fn yy_action_179(
   let _sub_action_0_result = yy_action_7(_last_pos, _args[0:1])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
   guard _args[2].0 is YYObj_Name(_dollar3)
-  guard _args[3].0 is YYObj__list_T_QualifiedName_(_dollar4)
-  guard _args[5].0 is YYObj__list_T_TraitMethodSig_(_dollar6)
+  guard _args[3].0 is YYObj__list_List_QualifiedName_(_dollar4)
+  guard _args[5].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
   YYObj_TraitSig(
     {
       ()
@@ -4083,8 +4087,8 @@ fn yy_action_180(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_7(_last_pos, _args[0:1])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[2].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar3)
-  guard _args[4].0 is YYObj__list_T_FieldDecl_(_dollar5)
+  guard _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar3)
+  guard _args[4].0 is YYObj__list_List_FieldDecl_(_dollar5)
   YYObj_TypeSig(
     {
       ()
@@ -4106,9 +4110,9 @@ fn yy_action_181(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_QualifiedName_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_QualifiedName_(_dollar3)
   guard _args[0].0 is YYObj_QualifiedName(_dollar1)
-  YYObj__list_T_QualifiedName_(
+  YYObj__list_List_QualifiedName_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -4165,7 +4169,7 @@ fn yy_action_184(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_PackageImport(_dollar1)
-  YYObj__list_T_PackageImport_(
+  YYObj__list_List_PackageImport_(
     {
       ()
       @list.singleton(_dollar1)
@@ -4182,8 +4186,8 @@ fn yy_action_185(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   let _sub_action_0_result = yy_action_186(_last_pos, _args[0:3])
-  guard _sub_action_0_result is YYObj__list_T_Type_(_dollar1)
-  YYObj__list_T_Type_(
+  guard _sub_action_0_result is YYObj__list_List_Type_(_dollar1)
+  YYObj__list_List_Type_(
     {
       ()
       _dollar1
@@ -4199,7 +4203,7 @@ fn yy_action_187(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_ConstrDecl_(
+  YYObj__list_List_ConstrDecl_(
     {
       ()
       @list.empty()
@@ -4218,8 +4222,8 @@ fn yy_action_188(
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
   guard _args[1].0 is YYObj_Name(_dollar3)
-  guard _args[2].0 is YYObj__list_T_QualifiedName_(_dollar4)
-  guard _args[4].0 is YYObj__list_T_TraitMethodSig_(_dollar6)
+  guard _args[2].0 is YYObj__list_List_QualifiedName_(_dollar4)
+  guard _args[4].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
   YYObj_TraitSig(
     {
       ()
@@ -4241,8 +4245,8 @@ fn yy_action_186(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[1].0 is YYObj__list_T_Type_(_dollar2)
-  YYObj__list_T_Type_(
+  guard _args[1].0 is YYObj__list_List_Type_(_dollar2)
+  YYObj__list_List_Type_(
     {
       ()
       _dollar2
@@ -4258,7 +4262,7 @@ fn yy_action_189(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  YYObj__list_T_QualifiedName_(
+  YYObj__list_List_QualifiedName_(
     {
       ()
       @list.empty()
@@ -4277,7 +4281,7 @@ fn yy_action_190(
   guard _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  guard _args[1].0 is YYObj_Option__list_T_ConstrParam__(_dollar2)
+  guard _args[1].0 is YYObj_Option__list_List_ConstrParam__(_dollar2)
   guard _args[2].0 is YYObj_Option__String__Location__(_dollar3)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
@@ -4310,8 +4314,8 @@ fn yy_action_191(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__list_T_TraitMethodParameter_(_dollar1)
-  YYObj__list_T_TraitMethodParameter_(
+  guard _args[0].0 is YYObj__list_List_TraitMethodParameter_(_dollar1)
+  YYObj__list_List_TraitMethodParameter_(
     {
       ()
       _dollar1
@@ -4396,8 +4400,8 @@ fn yy_action_196(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__list_T_TypeParamNoConstraints_(_dollar1)
-  YYObj__list_T_TypeParamNoConstraints_(
+  guard _args[0].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar1)
+  YYObj__list_List_TypeParamNoConstraints_(
     {
       ()
       _dollar1
@@ -4437,9 +4441,9 @@ fn yy_action_198(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_TraitMethodParameter_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_TraitMethodParameter_(_dollar3)
   guard _args[0].0 is YYObj_TraitMethodParameter(_dollar1)
-  YYObj__list_T_TraitMethodParameter_(
+  YYObj__list_List_TraitMethodParameter_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -4456,8 +4460,8 @@ fn yy_action_199(
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
   let _sub_action_0_result = yy_action_126(_last_pos, _args[0:2])
-  guard _sub_action_0_result is YYObj__list_T_QualifiedName_(_dollar1)
-  YYObj__list_T_QualifiedName_(
+  guard _sub_action_0_result is YYObj__list_List_QualifiedName_(_dollar1)
+  YYObj__list_List_QualifiedName_(
     {
       ()
       _dollar1
@@ -4491,9 +4495,9 @@ fn yy_action_201(
   _last_pos : @ast_types.Position,
   _args : ArrayView[(YYObj, @ast_types.Position, @ast_types.Position)],
 ) -> YYObj {
-  guard _args[2].0 is YYObj__list_T_PackageImport_(_dollar3)
+  guard _args[2].0 is YYObj__list_List_PackageImport_(_dollar3)
   guard _args[0].0 is YYObj_PackageImport(_dollar1)
-  YYObj__list_T_PackageImport_(
+  YYObj__list_List_PackageImport_(
     {
       ()
       _dollar3.add(_dollar1)
@@ -4511,7 +4515,7 @@ fn yy_action_202(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_63(_last_pos, _args[0:2])
   guard _sub_action_0_result is YYObj_Visibility(_dollar1)
-  guard _args[5].0 is YYObj__Name___list_T_TypeParamNoConstraints__(_dollar5)
+  guard _args[5].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar5)
   guard _args[3].0 is YYObj_Type(_dollar3)
   YYObj_AliasSig(
     {
@@ -10391,7 +10395,10 @@ fn[T] yy_parse(
   initial_pos? : @ast_types.Position,
 ) -> T raise ParseError {
   let mut cursor = 0
-  let mut state_stack : @list.T[YYState] = @list.construct(start, @list.empty())
+  let mut state_stack : @list.List[YYState] = @list.construct(
+    start,
+    @list.empty(),
+  )
   let data_stack : Array[(YYObj, @ast_types.Position, @ast_types.Position)] = []
   let mut last_pos = initial_pos.unwrap_or(tokens[0].1)
   let mut state = start
@@ -10474,20 +10481,20 @@ fn[T] yy_parse(
 
 ///|
 fn error(
-  stack : @list.T[YYState],
+  stack : @list.List[YYState],
   token : Token?,
   loc : (@ast_types.Position, @ast_types.Position),
 ) -> Unit raise ParseError {
   let expected = []
   fn try_add(symbol : YYSymbol, kind : TokenKind) {
-    fn go(stack : @list.T[YYState]) {
+    fn go(stack : @list.List[YYState]) {
       match stack {
         Empty => ()
         More(state, ..) =>
           match state(symbol) {
             Accept | Shift(_) => expected.push(kind)
             Reduce(count, symbol, _) | ReduceNoLookahead(count, symbol, _) => {
-              fn inner_go(stack : @list.T[YYState], count, symbol) {
+              fn inner_go(stack : @list.List[YYState], count, symbol) {
                 let stack = stack.drop(count)
                 guard stack is More(state, ..)
                 match state(symbol) {
