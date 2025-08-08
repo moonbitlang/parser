@@ -1,13 +1,7 @@
 ///|
-priv enum AfterLParen {
-  ResolvedExpr(@syntax.Expr)
-  /// Whne the parser sees an expr that's not an LIDENT, it cannot be arrow fn
-  ResolvedTuple(Array[@syntax.Expr])
-  /// Whne the parser sees more than one elements and at least one of them has type annotation, it must be arrow fn
-  ResolvedArrowFnParams(Array[(@syntax.ArrowFnParam, @syntax.Type?)])
-  UnresolvedArrowFnParams(@syntax.ArrowFnParam, @syntax.Type)
-  UnresolvedArrowFnOrTuple(Array[@syntax.ArrowFnParam])
-  UnresolvedEmpty
+priv enum ExprOrBinderFragment {
+  Binder(@syntax.Expr, colon_loc~ : Location, ty~ : @syntax.Type)
+  Expr(@syntax.Expr)
 }
 
 ///|
@@ -2934,169 +2928,6 @@ fn State::parse_multi_pattern_case(self : Self) -> @syntax.MultiArgCase {
 }
 
 ///|
-fn State::parse_after_lparen(self : Self) -> AfterLParen {
-  if self.mode is Panic(..) {
-    return UnresolvedEmpty
-  }
-  fn parse_type_annotation(state : State) -> @syntax.Type? {
-    if state.peek_token() is COLON {
-      state.expect_token(TK_COLON)
-      Some(state.parse_type())
-    } else {
-      None
-    }
-  }
-
-  fn parse_arrow_fn_param(state : State) -> @syntax.ArrowFnParam {
-    if state.peek_token() is UNDERSCORE {
-      let loc = state.peek_location()
-      state.expect_token(TK_UNDERSCORE)
-      Unnamed(loc)
-    } else {
-      let binder = state.parse_binder(context="function parameter")
-      Named(binder)
-    }
-  }
-
-  fn loop_arrow_fn_params(
-    result : Array[(@syntax.ArrowFnParam, @syntax.Type?)],
-  ) -> AfterLParen {
-    // trailing comma already handled
-    if self.peek_token() is RPAREN {
-      self.expect_token(TK_RPAREN)
-      ResolvedArrowFnParams(result)
-    } else {
-      let (rest, _) = self.delimited_with_follow(
-        delim=TK_COMMA,
-        follow_set=[TK_RPAREN],
-        fn(state) {
-          let p = parse_arrow_fn_param(state)
-          let t = parse_type_annotation(state)
-          (p, t)
-        },
-      )
-      rest.each(x => result.push(x))
-      self.expect_token(TK_RPAREN)
-      ResolvedArrowFnParams(result)
-    }
-  }
-
-  fn loop_tuple(self : State, result : Array[@syntax.Expr]) -> AfterLParen {
-    // trailing comma already handled
-    if self.peek_token() is RPAREN {
-      self.skip()
-      ResolvedTuple(result)
-    } else {
-      let (rest, _) = self.delimited_with_follow(
-        delim=TK_COMMA,
-        follow_set=[TK_RPAREN],
-        State::parse_expr,
-      )
-      rest.each(x => result.push(x))
-      self.expect_token(TK_RPAREN)
-      ResolvedTuple(result)
-    }
-  }
-
-  fn loop_tuple_or_arrow_fn_params(
-    acc : Array[@syntax.ArrowFnParam],
-  ) -> AfterLParen {
-    match self.peek_token() {
-      RPAREN => {
-        self.expect_token(TK_RPAREN)
-        UnresolvedArrowFnOrTuple(acc)
-      }
-      LIDENT(_) | UNDERSCORE =>
-        match self.peek_token(nth=1) {
-          COLON => {
-            let p = parse_arrow_fn_param(self)
-            self.expect_token(TK_COLON)
-            let t = self.parse_type()
-            // possible trailing comma
-            if self.peek_token() is COMMA {
-              self.expect_token(TK_COMMA)
-            }
-            let acc = acc.map(x => (x, None))
-            acc.push((p, Some(t)))
-            loop_arrow_fn_params(acc)
-          }
-          COMMA => {
-            // possible trailing comma
-            let p = parse_arrow_fn_param(self)
-            self.expect_token(TK_COMMA)
-            acc.push(p)
-            loop_tuple_or_arrow_fn_params(acc)
-          }
-          RPAREN => {
-            let p = parse_arrow_fn_param(self)
-            self.expect_token(TK_RPAREN)
-            acc.push(p)
-            UnresolvedArrowFnOrTuple(acc)
-          }
-          _ => {
-            // Convert acc to expressions and continue with tuple parsing
-            let acc = acc.map(@syntax.arrow_fn_param_to_expr)
-            loop_tuple(self, acc)
-          }
-        }
-      _ => {
-        // Convert acc to expressions and continue with tuple parsing  
-        let acc = acc.map(@syntax.arrow_fn_param_to_expr)
-        loop_tuple(self, acc)
-      }
-    }
-  }
-
-  match self.peek_token(nth=1) {
-    RPAREN => {
-      // need to check next token to see if it is an arrow fn or a unit
-      self.expect_token(TK_LPAREN)
-      self.expect_token(TK_RPAREN)
-      UnresolvedEmpty
-    }
-    LIDENT(_) | UNDERSCORE =>
-      match self.peek_token(nth=2) {
-        COLON => {
-          // cannot be tuple
-          self.expect_token(TK_LPAREN)
-          let p = parse_arrow_fn_param(self)
-          self.expect_token(TK_COLON)
-          let t = self.parse_type()
-          if self.peek_token() is RPAREN {
-            self.expect_token(TK_RPAREN)
-            // `(a: T)` will be resolved when seeing the next token
-            UnresolvedArrowFnParams(p, t)
-          } else {
-            self.expect_token(TK_COMMA)
-            loop_arrow_fn_params([(p, Some(t))])
-          }
-        }
-        COMMA => {
-          // cannot be constraint
-          self.expect_token(TK_LPAREN)
-          let p = parse_arrow_fn_param(self)
-          self.expect_token(TK_COMMA)
-          // this is possibly a trailing comma
-          loop_tuple_or_arrow_fn_params([p])
-        }
-        RPAREN => {
-          self.expect_token(TK_LPAREN)
-          let p = parse_arrow_fn_param(self)
-          self.expect_token(TK_RPAREN)
-          UnresolvedArrowFnOrTuple([p])
-        }
-        _ =>
-          // it cannot be arrow fn
-          ResolvedExpr(self.parse_tuple_or_constraint())
-      }
-    _ =>
-      // If the first token following `(` is not ident, then we use the normal
-      // parsing to resolve between tuple and constraints
-      ResolvedExpr(self.parse_tuple_or_constraint())
-  }
-}
-
-///|
 fn State::parse_tuple_or_constraint(self : Self) -> @syntax.Expr {
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
@@ -3144,72 +2975,84 @@ fn State::parse_tuple_or_constraint(self : Self) -> @syntax.Expr {
 
 ///|
 fn State::handle_lparen(self : Self) -> @syntax.Expr {
-  if self.mode is Panic(loc~, ..) {
-    return Hole(loc~, kind=Synthesized)
-  }
   let spos = self.peek_spos()
-  fn go_simple_expr(e : @syntax.Expr) -> @syntax.Expr {
-    match self.mode {
-      Normal => self.parse_simple_try_expr(parsed=Some(e))
-      Panic(_) => e
-    }
-  }
-
-  fn go_arrow_fn(
-    self : State,
-    spos : Position,
-    parameters : Array[(@syntax.ArrowFnParam, @syntax.Type?)],
-  ) -> @syntax.Expr {
-    self.expect_token(TK_FAT_ARROW)
-    let body = self.parse_expr_stmt_no_break_continue_return()
-    let loc = self.loc_start_with(spos)
-    let func = @syntax.make_arrow_fn(@list.from_array(parameters), body, loc~)
-    Function(loc~, func~)
-  }
-
-  match self.parse_after_lparen() {
-    ResolvedExpr(e) => go_simple_expr(e)
-    ResolvedTuple([e]) => {
-      let loc = self.loc_start_with(spos)
-      let e : @syntax.Expr = Group(expr=e, group=Paren, loc~)
-      go_simple_expr(e)
-    }
-    ResolvedTuple(es) => {
-      let loc = self.loc_start_with(spos)
-      let e : @syntax.Expr = Tuple(exprs=@list.from_array(es), loc~)
-      go_simple_expr(e)
-    }
-    ResolvedArrowFnParams(params) => go_arrow_fn(self, spos, params)
-    UnresolvedArrowFnParams(p, t) =>
-      if self.peek_token() is FAT_ARROW {
-        go_arrow_fn(self, spos, [(p, Some(t))])
-      } else {
-        let loc = self.loc_start_with(spos)
-        let expr = @syntax.arrow_fn_param_to_expr(p)
-        go_simple_expr(Constraint(expr~, ty=t, loc~))
-      }
-    UnresolvedArrowFnOrTuple(params) =>
-      if self.peek_token() is FAT_ARROW {
-        let params_with_types = params.map(p => (p, None))
-        go_arrow_fn(self, spos, params_with_types)
-      } else {
-        let loc = self.loc_start_with(spos)
-        let e : @syntax.Expr = if params is [p] {
-          let expr = @syntax.arrow_fn_param_to_expr(p)
-          Group(expr~, group=Paren, loc~)
-        } else {
-          let exprs = params.map(@syntax.arrow_fn_param_to_expr)
-          Tuple(exprs=@list.from_array(exprs), loc~)
+  self.expect_token(TK_LPAREN)
+  let (expr_or_binders, has_trailing) = self.delimited_with_follow(
+    delim=TK_COMMA,
+    follow_set=[TK_RPAREN],
+    State::parse_expr_or_binder,
+  )
+  self.expect_token(TK_RPAREN)
+  let handle_expr = fn(expr) { self.parse_simple_try_expr(parsed=Some(expr)) }
+  match (self.peek_token(), expr_or_binders) {
+    (FAT_ARROW, _) => {
+      self.skip()
+      fn as_binder(expr : @syntax.Expr) -> @syntax.ArrowFnParam {
+        match expr {
+          Ident(id={ name: Ident(name~), .. }, loc~) => Named({ name, loc })
+          Hole(kind=Incomplete, loc~) => Unnamed(loc)
+          // error recovery
+          Hole(kind=Synthesized, loc~) => Unnamed(loc)
+          expr => {
+            let loc = expr.loc()
+            self.report_error({
+              loc,
+              msg: "Unexpected expression. You may expect parameter here.",
+            })
+            Unnamed(loc)
+          }
         }
-        go_simple_expr(e)
       }
-    UnresolvedEmpty =>
-      if self.peek_token() is FAT_ARROW {
-        go_arrow_fn(self, spos, [])
-      } else {
-        let loc = self.loc_start_with(spos)
-        go_simple_expr(Unit(loc~, faked=false))
-      }
+
+      let parameters = expr_or_binders.map(x => match x {
+          Binder(expr, colon_loc~, ty~) => (as_binder(expr), Some(ty))
+          Expr(expr) => (as_binder(expr), None)
+        })
+        |> @list.from_array
+      let body = self.parse_expr_stmt_no_break_continue_return()
+      let loc = self.loc_start_with(spos)
+      Function(loc~, func=@syntax.make_arrow_fn(loc~, parameters, body))
+    }
+    (_, []) => {
+      let loc = self.loc_start_with(spos)
+      handle_expr(Unit(loc~, faked=false))
+    }
+    (_, [Binder(expr, ty~, colon_loc~)]) => {
+      let loc = self.loc_start_with(spos)
+      handle_expr(Constraint(expr~, ty~, loc~))
+    }
+    (_, [Expr(expr)]) => {
+      let loc = self.loc_start_with(spos)
+      handle_expr(Group(expr~, group=Paren, loc~))
+    }
+    (_, _) => {
+      let exprs = expr_or_binders.map(x => match x {
+          Binder(expr, colon_loc~, ty~) => {
+            self.report_unexpected(COLON, [TK_COMMA, TK_RPAREN], colon_loc)
+            @syntax.Hole(kind=Synthesized, loc=expr.loc())
+          }
+          Expr(expr) => expr
+        })
+        |> @list.from_array
+      let loc = self.loc_start_with(spos)
+      handle_expr(Tuple(exprs~, loc~))
+    }
+  }
+}
+
+///|
+fn State::parse_expr_or_binder(self : Self) -> ExprOrBinderFragment {
+  if self.mode is Panic(loc~, ..) {
+    return Expr(Hole(kind=Synthesized, loc~))
+  }
+  let expr = self.parse_expr()
+  if self.peek_token() is COLON {
+    let colon_loc = self.peek_location()
+    self.skip()
+    let ty = self.parse_type()
+    Binder(expr, colon_loc~, ty~)
+  } else {
+    Expr(expr)
   }
 }
 
