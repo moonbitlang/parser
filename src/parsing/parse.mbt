@@ -95,7 +95,7 @@ pub fn attach_docstrings(
 ///|
 pub fn parse_bytes(
   source : Bytes,
-  name? : String = "",
+  name~ : String = "",
   config~ : Parser,
 ) -> @syntax.Impls {
   ignore(config)
