@@ -113,6 +113,8 @@ pub(all) enum Token {
   LETREC
   ENUMVIEW
   NORAISE
+  TRY_QUESTION
+  TRY_EXCLAMATION
 }
 fn Token::kind(Self) -> TokenKind
 impl Show for Token
@@ -220,6 +222,8 @@ pub(all) enum TokenKind {
   TK_LETREC
   TK_ENUMVIEW
   TK_NORAISE
+  TK_TRY_QUESTION
+  TK_TRY_EXCLAMATION
 }
 impl Eq for TokenKind
 impl Show for TokenKind
