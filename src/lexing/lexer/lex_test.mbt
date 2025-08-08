@@ -106,3 +106,8 @@ test "tokens multiline_string_interp" (t : @test.T) {
 test "tokens multiline_string_interp" (t : @test.T) {
   test_tokens(t, "attribute_name")
 }
+
+///|
+test "try" (t : @test.T) {
+  test_tokens(t, "try")
+}
