@@ -38,13 +38,7 @@ impl Show for State with output(parser, buf) {
   buf
   ..write_string("{ ")
   ..write_string("next: ")
-  ..write_string(
-    if next < tokens.length() {
-      tokens[next].0.to_string()
-    } else {
-      "<EOF>"
-    },
-  )
+  ..write_string(parser.peek_token().to_string())
   ..write_string("\n, syncs: ")
   ..write_string(syncs.to_string())
   ..write_string("\n, mode: ")
@@ -92,11 +86,11 @@ fn State::peek(state : Self, nth~ : Int = 0) -> Triple {
 ///|
 fn State::consume(state : Self) -> Triple {
   while state.tokens.get(state.next) is Some((token, _, _) as triple) {
-    // println("consumed: \{state.peek_token()}")
     match token {
       NEWLINE | COMMENT(_) => state.next += 1
       EOF => return triple
       _ => {
+        // println("consumed: \{state.peek_token()}")
         state.parsed_position = state.previous_triple().2
         state.next += 1
         return triple

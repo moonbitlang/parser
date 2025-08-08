@@ -34,13 +34,12 @@ fn State::parse_optional_bang(self : Self) -> Location? {
 }
 
 ///|
-fn State::parse_attributes(self : Self) -> @list.List[@syntax.Attribute] {
+fn State::parse_attributes(self : Self) -> List[@syntax.Attribute] {
   let result = []
   while self.peek_token() is ATTRIBUTE((id, dot_id, raw_payload)) {
     let loc = self.peek_location()
+    result.push(@syntax.make_attribute(loc~, id~, dot_id~, raw_payload~))
     self.skip()
-    let head = @syntax.make_attribute(loc~, id~, dot_id~, raw_payload~)
-    result.push(head)
   }
   @list.from_array(result)
 }
@@ -51,39 +50,27 @@ fn State::parse_toplevel(self : Self) -> Impls {
   let result = []
   self.push_sync(TK_EOF)
   while self.mode is Normal && !(self.peek_token() is EOF) {
-    let top = self.with_syncs(first_impl_, State::parse_top)
-    result.push(top)
-    if self.peek_token() is SEMI(_) {
-      self.skip()
-    }
-    match self.peek_token() {
-      PUB
-      | PRIV
-      | TYPE
-      | TYPEALIAS
-      | TRAIT
-      | TRAITALIAS
-      | ASYNC
-      | FN
-      | FNALIAS
-      | STRUCT
-      | ENUM
-      | LET
-      | CONST
-      | EXTERN
-      | TEST
-      | IMPL => continue
-      EOF => {
-        self..pop_sync(TK_EOF)..expect_token(TK_EOF)
-        break
-      }
-      other => {
-        let loc = self.with_syncs(first_impl_, State::panic)
-        self.report_unexpected(other, first_impl_, loc)
-        continue
+    self.push_syncs(first_impl_)
+    result.push(self.parse_top())
+    if self.mode is Normal {
+      match self.peek_token() {
+        SEMI(_) => self.skip()
+        EOF => ()
+        other => {
+          self.panic() |> ignore
+          let loc = self.peek_location()
+          let report = if first_impl_.contains(other.kind()) {
+            { loc, msg: "Missing newline here." }
+          } else {
+            { loc, msg: "Unexpected token here." }
+          }
+          self.report_error(report)
+        }
       }
     }
+    self.pop_syncs(first_impl_)
   }
+  self.pop_sync(TK_EOF)
   @list.from_array(result)
 }
 
