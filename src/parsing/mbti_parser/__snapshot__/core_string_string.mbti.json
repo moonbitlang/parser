@@ -277,6 +277,7 @@
                   },
                   "args": null,
                   "tag": null,
+                  "attrs": [],
                   "loc": null,
                   "doc": ""
                 },
@@ -289,6 +290,7 @@
                   },
                   "args": null,
                   "tag": null,
+                  "attrs": [],
                   "loc": null,
                   "doc": ""
                 }

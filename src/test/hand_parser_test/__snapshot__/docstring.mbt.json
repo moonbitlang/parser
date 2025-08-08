@@ -232,7 +232,7 @@
               },
               "loc": null,
               "attrs": [],
-              "doc": " useless comment\n useless comment\n useless comment"
+              "doc": ""
             },
             {
               "type": "FieldDecl",
@@ -260,7 +260,7 @@
               },
               "loc": null,
               "attrs": [],
-              "doc": ""
+              "doc": " useless comment\n useless comment\n useless comment"
             }
           ]
         },

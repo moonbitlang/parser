@@ -567,6 +567,19 @@
       }
     },
     {
+      "type": "Impl::TopExpr",
+      "expr": {
+        "type": "Expr::Hole",
+        "loc": null,
+        "kind": {
+          "type": "Hole::Synthesized"
+        }
+      },
+      "is_main": false,
+      "local_types": [],
+      "loc": null
+    },
+    {
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",

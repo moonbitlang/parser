@@ -627,7 +627,7 @@
       "loc": null
     },
     {
-      "type": "Impl::BatchTypeAlias",
+      "type": "Impl::TopBatchTypeAlias",
       "pkg": null,
       "targets": [
         {
@@ -853,18 +853,7 @@
       },
       "decl_body": {
         "type": "DeclBody::DeclBody",
-        "local_types": [
-          {
-            "type": "LocalTypeDecl",
-            "tycon": "?local_tycon",
-            "tycon_loc": null,
-            "components": {
-              "type": "TypeDesc::Variant",
-              "0": []
-            },
-            "deriving": []
-          }
-        ],
+        "local_types": [],
         "expr": {
           "type": "Expr::Unit",
           "loc": null,
@@ -923,18 +912,7 @@
       },
       "decl_body": {
         "type": "DeclBody::DeclBody",
-        "local_types": [
-          {
-            "type": "LocalTypeDecl",
-            "tycon": "?local_tycon",
-            "tycon_loc": null,
-            "components": {
-              "type": "TypeDesc::Variant",
-              "0": []
-            },
-            "deriving": []
-          }
-        ],
+        "local_types": [],
         "expr": {
           "type": "Expr::Unit",
           "loc": null,
@@ -1229,7 +1207,7 @@
       "loc": null
     },
     {
-      "type": "Impl::BatchTypeAlias",
+      "type": "Impl::TopBatchTypeAlias",
       "pkg": null,
       "targets": [
         {
@@ -1270,7 +1248,16 @@
         "params_loc": null,
         "quantifiers": [],
         "return_type": {
-          "type": "Type::Any",
+          "type": "Type::Arrow",
+          "args": [],
+          "res": {
+            "type": "Type::Any",
+            "loc": null
+          },
+          "err": {
+            "type": "ErrorType::NoErrorType"
+          },
+          "is_async": true,
           "loc": null
         },
         "error_type": {
@@ -1286,9 +1273,11 @@
         "type": "DeclBody::DeclBody",
         "local_types": [],
         "expr": {
-          "type": "Expr::Unit",
+          "type": "Expr::Hole",
           "loc": null,
-          "faked": true
+          "kind": {
+            "type": "Hole::Synthesized"
+          }
         }
       },
       "loc": null
@@ -1304,7 +1293,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": true,
+        "is_async": false,
         "decl_params": [],
         "params_loc": null,
         "quantifiers": [],

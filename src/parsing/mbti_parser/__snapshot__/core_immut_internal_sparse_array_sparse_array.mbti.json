@@ -958,6 +958,7 @@
                   "type": "Visibility::Default"
                 },
                 "loc": null,
+                "attrs": [],
                 "doc": ""
               },
               {
@@ -999,6 +1000,7 @@
                   "type": "Visibility::Default"
                 },
                 "loc": null,
+                "attrs": [],
                 "doc": ""
               }
             ]

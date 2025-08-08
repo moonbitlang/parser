@@ -67,6 +67,7 @@
                   }
                 ],
                 "tag": null,
+                "attrs": [],
                 "loc": null,
                 "doc": ""
               }
@@ -345,6 +346,7 @@
                 }
               ],
               "tag": null,
+              "attrs": [],
               "loc": null,
               "doc": ""
             }
@@ -625,6 +627,7 @@
                 "type": "Visibility::Default"
               },
               "loc": null,
+              "attrs": [],
               "doc": ""
             },
             {
@@ -652,6 +655,7 @@
                 "type": "Visibility::Default"
               },
               "loc": null,
+              "attrs": [],
               "doc": ""
             }
           ]
@@ -1385,6 +1389,7 @@
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
+            "attrs": [],
             "loc": null
           }
         ],

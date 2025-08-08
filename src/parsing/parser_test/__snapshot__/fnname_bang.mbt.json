@@ -94,6 +94,7 @@
               "loc": null
             },
             "has_default": null,
+            "attrs": [],
             "loc": null
           },
           {
@@ -143,6 +144,7 @@
               "loc": null
             },
             "has_default": null,
+            "attrs": [],
             "loc": null
           },
           {
@@ -191,6 +193,7 @@
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
+            "attrs": [],
             "loc": null
           },
           {
@@ -252,6 +255,7 @@
               }
             },
             "has_default": null,
+            "attrs": [],
             "loc": null
           }
         ],

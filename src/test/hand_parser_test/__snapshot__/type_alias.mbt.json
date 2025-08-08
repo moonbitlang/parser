@@ -2,6 +2,45 @@
   "type": "Program",
   "body": [
     {
+      "type": "Impl::TopExpr",
+      "expr": {
+        "type": "Expr::Hole",
+        "loc": null,
+        "kind": {
+          "type": "Hole::Synthesized"
+        }
+      },
+      "is_main": false,
+      "local_types": [],
+      "loc": null
+    },
+    {
+      "type": "Impl::TopExpr",
+      "expr": {
+        "type": "Expr::Hole",
+        "loc": null,
+        "kind": {
+          "type": "Hole::Synthesized"
+        }
+      },
+      "is_main": false,
+      "local_types": [],
+      "loc": null
+    },
+    {
+      "type": "Impl::TopExpr",
+      "expr": {
+        "type": "Expr::Hole",
+        "loc": null,
+        "kind": {
+          "type": "Hole::Synthesized"
+        }
+      },
+      "is_main": false,
+      "local_types": [],
+      "loc": null
+    },
+    {
       "type": "Impl::TopBatchTraitAlias",
       "pkg": null,
       "targets": [
@@ -82,7 +121,20 @@
       "doc": ""
     },
     {
-      "type": "Impl::BatchTypeAlias",
+      "type": "Impl::TopExpr",
+      "expr": {
+        "type": "Expr::Hole",
+        "loc": null,
+        "kind": {
+          "type": "Hole::Synthesized"
+        }
+      },
+      "is_main": false,
+      "local_types": [],
+      "loc": null
+    },
+    {
+      "type": "Impl::TopBatchTypeAlias",
       "pkg": {
         "type": "Label",
         "name": "pkg",
@@ -108,20 +160,7 @@
       "doc": ""
     },
     {
-      "type": "Impl::TopExpr",
-      "expr": {
-        "type": "Expr::Hole",
-        "loc": null,
-        "kind": {
-          "type": "Hole::Synthesized"
-        }
-      },
-      "is_main": false,
-      "local_types": [],
-      "loc": null
-    },
-    {
-      "type": "Impl::BatchTypeAlias",
+      "type": "Impl::TopBatchTypeAlias",
       "pkg": {
         "type": "Label",
         "name": "pkg",
@@ -265,37 +304,40 @@
       "doc": ""
     },
     {
-      "type": "Impl::BatchTypeAlias",
-      "pkg": {
-        "type": "Label",
-        "name": "pkg",
-        "loc": null
-      },
-      "targets": [
-        {
-          "type": "AliasTarget",
-          "binder": {
-            "type": "Binder",
-            "name": "A",
-            "loc": null
-          },
-          "target": {
-            "type": "Label",
-            "name": "T",
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "A",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Alias",
+          "0": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "pkg",
+                "id": "T"
+              },
+              "loc": null
+            },
+            "tys": [],
             "loc": null
           }
-        }
-      ],
-      "vis": {
-        "type": "Visibility::Default"
-      },
-      "loc": null,
-      "attrs": [],
-      "is_list": false,
-      "doc": ""
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
     },
     {
-      "type": "Impl::BatchTypeAlias",
+      "type": "Impl::TopBatchTypeAlias",
       "pkg": {
         "type": "Label",
         "name": "pkg",
@@ -403,7 +445,7 @@
       "doc": ""
     },
     {
-      "type": "Impl::BatchTypeAlias",
+      "type": "Impl::TopBatchTypeAlias",
       "pkg": null,
       "targets": [
         {
@@ -698,6 +740,19 @@
         "deriving": [],
         "loc": null
       }
+    },
+    {
+      "type": "Impl::TopExpr",
+      "expr": {
+        "type": "Expr::Hole",
+        "loc": null,
+        "kind": {
+          "type": "Hole::Synthesized"
+        }
+      },
+      "is_main": false,
+      "local_types": [],
+      "loc": null
     }
   ]
 }

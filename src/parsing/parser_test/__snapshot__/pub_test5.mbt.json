@@ -37,6 +37,7 @@
                 "loc": null
               },
               "loc": null,
+              "attrs": [],
               "doc": ""
             },
             {
@@ -66,6 +67,7 @@
                 "loc": null
               },
               "loc": null,
+              "attrs": [],
               "doc": ""
             },
             {
@@ -93,6 +95,7 @@
                 "type": "Visibility::Default"
               },
               "loc": null,
+              "attrs": [],
               "doc": ""
             },
             {
@@ -122,6 +125,7 @@
                 "loc": null
               },
               "loc": null,
+              "attrs": [],
               "doc": ""
             }
           ]
@@ -156,6 +160,7 @@
               },
               "args": null,
               "tag": null,
+              "attrs": [],
               "loc": null,
               "doc": ""
             }

@@ -23,6 +23,7 @@
                 "0",
                 null
               ],
+              "attrs": [],
               "loc": null,
               "doc": ""
             },
@@ -35,6 +36,7 @@
               },
               "args": null,
               "tag": null,
+              "attrs": [],
               "loc": null,
               "doc": ""
             },
@@ -47,6 +49,7 @@
               },
               "args": null,
               "tag": null,
+              "attrs": [],
               "loc": null,
               "doc": ""
             },
@@ -62,6 +65,7 @@
                 "42",
                 null
               ],
+              "attrs": [],
               "loc": null,
               "doc": ""
             },
@@ -74,6 +78,7 @@
               },
               "args": null,
               "tag": null,
+              "attrs": [],
               "loc": null,
               "doc": ""
             }
@@ -110,6 +115,7 @@
                 "0x0001",
                 null
               ],
+              "attrs": [],
               "loc": null,
               "doc": ""
             },
@@ -125,6 +131,7 @@
                 "0x0002",
                 null
               ],
+              "attrs": [],
               "loc": null,
               "doc": ""
             },
@@ -140,6 +147,7 @@
                 "0x0004",
                 null
               ],
+              "attrs": [],
               "loc": null,
               "doc": ""
             },
@@ -155,6 +163,7 @@
                 "0x0008",
                 null
               ],
+              "attrs": [],
               "loc": null,
               "doc": ""
             },
@@ -170,6 +179,7 @@
                 "0x0010",
                 null
               ],
+              "attrs": [],
               "loc": null,
               "doc": ""
             },
@@ -185,6 +195,7 @@
                 "0x0020",
                 null
               ],
+              "attrs": [],
               "loc": null,
               "doc": ""
             },
@@ -200,6 +211,7 @@
                 "0x0040",
                 null
               ],
+              "attrs": [],
               "loc": null,
               "doc": ""
             },
@@ -215,6 +227,7 @@
                 "0x0080",
                 null
               ],
+              "attrs": [],
               "loc": null,
               "doc": ""
             }

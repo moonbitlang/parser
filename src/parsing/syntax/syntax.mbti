@@ -170,6 +170,7 @@ pub(all) struct ConstrDecl {
   args : @list.List[ConstrParam]?
   tag : (String, @syntax_types.Location)?
   loc : @syntax_types.Location
+  attrs : @list.List[@syntax_types.Attribute]
   mut doc : @syntax_types.DocString
 }
 impl ToJson for ConstrDecl
@@ -319,6 +320,7 @@ pub(all) struct FieldDecl {
   mut_ : Bool
   vis : Visibility
   loc : @syntax_types.Location
+  attrs : @list.List[@syntax_types.Attribute]
   mut doc : @syntax_types.DocString
 }
 impl ToJson for FieldDecl
@@ -407,6 +409,7 @@ pub(all) enum Impl {
   TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @syntax_types.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @syntax_types.Location, body~ : Expr, vis~ : Visibility, loc~ : @syntax_types.Location, attrs~ : @list.List[@syntax_types.Attribute], mut doc~ : @syntax_types.DocString)
   TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@syntax_types.Attribute], loc~ : @syntax_types.Location, mut doc~ : @syntax_types.DocString)
 }
+fn Impl::loc(Self) -> @syntax_types.Location
 impl ToJson for Impl
 
 pub(all) enum InterpElem {
@@ -542,6 +545,7 @@ pub(all) struct TraitMethodDecl {
   return_type : Type?
   error_type : ErrorType
   has_default : @syntax_types.Location?
+  attrs : @list.List[@syntax_types.Attribute]
   loc : @syntax_types.Location
 }
 impl ToJson for TraitMethodDecl

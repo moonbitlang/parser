@@ -9,11 +9,11 @@ import(
 )
 
 // Values
-fn attach_docstrings(Array[@list.T[(@syntax_types.Location, @syntax_types.Comment)]], @list.T[@syntax.Impl]) -> Unit
+fn attach_docstrings(Array[@list.List[(@syntax_types.Location, @syntax_types.Comment)]], @list.List[@syntax.Impl]) -> Unit
 
-fn parse_file(String, config~ : Parser) -> @list.T[@syntax.Impl] raise @fs.IOError
+fn parse_bytes(Bytes, name? : String, config~ : Parser) -> @list.List[@syntax.Impl]
 
-fn parse_string(Bytes, name~ : String = .., config~ : Parser) -> @list.T[@syntax.Impl]
+fn parse_file(String, config~ : Parser) -> @list.List[@syntax.Impl] raise @fs.IOError
 
 // Errors
 

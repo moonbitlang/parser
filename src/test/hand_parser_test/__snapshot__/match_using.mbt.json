@@ -78,11 +78,7 @@
             }
           ],
           "match_loc": null,
-          "using": {
-            "type": "Label",
-            "name": "regex",
-            "loc": null
-          },
+          "using": null,
           "loc": null
         }
       },
