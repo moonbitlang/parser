@@ -19,33 +19,64 @@ pub fn attach_docstrings(
   docstrings : Array[List[(Location, Comment)]],
   toplevels : @syntax.Impls,
 ) -> Unit {
-  for toplevel in toplevels {
+
+  // skip the docstring before the posisiton, return the last skipped docstring.
+  fn skip_docstrings_before(pos : Position) -> List[(Location, Comment)]? {
     let mut previous = None
     while docstrings.last() is Some(comments) &&
-          comments.last().unwrap().0.end <= toplevel.loc().start {
+          comments.last().unwrap().0.end <= pos {
       previous = docstrings.pop()
     }
-    let doc = match previous {
-      None => @syntax.DocString::empty()
-      Some(comments) =>
-        {
-          content: comments.map(p => {
-            let content = p.1.content
-            if content.has_prefix("///|") {
-              content.substring(start=4)
-            } else {
-              content.substring(start=3)
-            }
-          }),
-          loc: {
-            start: comments.head().unwrap().0.start,
-            end: comments.last().unwrap().0.end,
-          },
-        }
+    previous
+  }
+
+  fn make_doc(
+    comments : List[(@syntax_types.Location, @syntax_types.Comment)],
+  ) -> @syntax.DocString {
+    {
+      content: comments.map(p => {
+        let content = p.1.content
+        content.substring(start=if content.has_prefix("///|") { 4 } else { 3 })
+      }),
+      loc: {
+        start: comments.head().unwrap().0.start,
+        end: comments.last().unwrap().0.end,
+      },
     }
+  }
+
+  for toplevel in toplevels {
+    let previous = skip_docstrings_before(toplevel.loc().start)
+    let doc = previous.map(make_doc).unwrap_or(@syntax.DocString::empty())
     match toplevel {
-      TopTypeDef(td) => td.doc = doc
-      TopFuncDef(fun_decl~) => fun_decl.doc = doc
+      TopTypeDef(td) => {
+        td.doc = doc
+        match td.components {
+          // there is no docstring inside the types
+          Abstract
+          | Extern
+          | Newtype(_)
+          | Alias(_)
+          | Error(NoPayload | SinglePayload(_))
+          | TupleStruct(_) => ()
+          // handle docstring before the enum/suberror constructor and struct fields 
+          Error(EnumPayload(constrs)) | Variant(constrs) =>
+            constrs.each(constr => {
+              let previous = skip_docstrings_before(constr.loc.start)
+                .map(make_doc)
+                .unwrap_or(@syntax.DocString::empty())
+              constr.doc = previous
+            })
+          Record(fields) =>
+            fields.each(field => {
+              let previous = skip_docstrings_before(field.loc.start)
+                .map(make_doc)
+                .unwrap_or(@syntax.DocString::empty())
+              field.doc = previous
+            })
+        }
+      }
+      TopFuncDef(fun_decl~, ..) => fun_decl.doc = doc
       TopFuncAlias(..) as fa => fa.doc = doc
       TopLetDef(..) as ld => ld.doc = doc
       TopExpr(..) => ()
@@ -57,10 +88,7 @@ pub fn attach_docstrings(
       TopView(..) as view => view.doc = doc
       TopImpl(..) as imp => imp.doc = doc
     }
-    while docstrings.last() is Some(comments) &&
-          comments.last().unwrap().0.end <= toplevel.loc().end {
-      docstrings.pop() |> ignore
-    }
+    skip_docstrings_before(toplevel.loc().end) |> ignore
   }
 }
 
