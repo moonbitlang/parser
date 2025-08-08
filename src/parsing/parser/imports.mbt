@@ -84,3 +84,6 @@ fnalias @syntax.(
 
 ///|
 typealias @compact.SemiExprProp
+
+///|
+typealias @list.List

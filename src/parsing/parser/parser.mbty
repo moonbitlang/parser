@@ -134,78 +134,78 @@
 %%
 
 
-non_empty_list_rev[T](X : T) -> @list.T[T]
+non_empty_list_rev[T](X : T) -> List[T]
   : X { @list.singleton($1) }
   | non_empty_list_rev(X) X { $1.add($2) }
   ;
 
-non_empty_list[T](X : T) -> @list.T[T] 
+non_empty_list[T](X : T) -> List[T] 
   : X { @list.singleton($1) }
   | X non_empty_list(X) { $2.add($1) }
   ;
 
-non_empty_list_commas_rev[T](X : T) -> @list.T[T]
+non_empty_list_commas_rev[T](X : T) -> List[T]
   : X { @list.singleton($1) }
   | non_empty_list_commas_rev(X) "," X { $1.add($3) }
   ;
 
-non_empty_list_commas_no_trailing[T](X : T) -> @list.T[T]
+non_empty_list_commas_no_trailing[T](X : T) -> List[T]
   : non_empty_list_commas_rev(X) { $1.rev() }
   ;
 
-non_empty_list_commas[T](X : T) -> @list.T[T]
+non_empty_list_commas[T](X : T) -> List[T]
   : non_empty_list_commas_rev(X) option(",") { $1.rev() }
   ;
 
-non_empty_list_commas_with_tail[T](X : T) -> @list.T[T]
+non_empty_list_commas_with_tail[T](X : T) -> List[T]
   : non_empty_list_commas_rev(X) "," { $1.rev() }
   ;
 
-list_commas[T](X : T) -> @list.T[T]
+list_commas[T](X : T) -> List[T]
   : { @list.empty() }
   | non_empty_list_commas(X) { $1 }
   ;
 
-list_commas_no_trailing[T](X : T) -> @list.T[T]
+list_commas_no_trailing[T](X : T) -> List[T]
   : { @list.empty() }
   | non_empty_list_commas_no_trailing(X) { $1 }
   ;
 
-non_empty_list_commas_with_trailing_info[T](X : T) -> (@list.T[T], Bool)
+non_empty_list_commas_with_trailing_info[T](X : T) -> (List[T], Bool)
   : non_empty_list_commas_rev(X) option(",") { 
     ($1.rev(), $2 is Some(_)) 
   }
   ;
 
-list_commas_with_trailing_info[T](X : T) -> (@list.T[T], Bool)
+list_commas_with_trailing_info[T](X : T) -> (List[T], Bool)
   : { (@list.empty(), false) }
   | non_empty_list_commas_with_trailing_info(X) { $1 }
   ;
 
-non_empty_list_semi_rev_aux[T](X : T) -> @list.T[T]
+non_empty_list_semi_rev_aux[T](X : T) -> List[T]
   : X { @list.singleton($1) }
   | non_empty_list_semi_rev_aux(X) SEMI X { $1.add($3) }
   ;
 
-non_empty_list_semis_rev[T](X : T) -> @list.T[T]
+non_empty_list_semis_rev[T](X : T) -> List[T]
   : non_empty_list_semi_rev_aux(X) option(SEMI) { $1 }
   ;
 
-none_empty_list_semis_rev_with_trailing_info[T](X : T) -> (@list.T[T], Bool)
+none_empty_list_semis_rev_with_trailing_info[T](X : T) -> (List[T], Bool)
   : non_empty_list_semi_rev_aux(X) option(SEMI) { ($1, $2 is Some(_)) }
   ;
 
-non_empty_list_semis[T](X : T) -> @list.T[T]
+non_empty_list_semis[T](X : T) -> List[T]
   : X option(SEMI) { @list.singleton($1) }
   | X SEMI non_empty_list_semis(X) { $3.add($1) }
   ;
 
-list_semis_rev[T](X : T) -> @list.T[T]
+list_semis_rev[T](X : T) -> List[T]
   : { @list.empty() }
   | non_empty_list_semis_rev(X) { $1 }
   ;
 
-list_semis[T](X : T) -> @list.T[T]
+list_semis[T](X : T) -> List[T]
   : { @list.empty() }
   | non_empty_list_semis(X) { $1 }
   ;
@@ -239,11 +239,11 @@ parameter -> Parameter
     }
   ;
 
-parameters -> @list.T[Parameter]
+parameters -> List[Parameter]
   : delimited("(", list_commas(parameter), ")") { $1 }
   ;
 
-type_parameters -> @list.T[TypeVarBinder]
+type_parameters -> List[TypeVarBinder]
   : delimited("[", non_empty_list_commas(id(tvar_binder)), "]") { $1 }
   ;
 
@@ -252,7 +252,7 @@ type_parameters -> @list.T[TypeVarBinder]
   |  { false }
   ;
 
-optional_type_parameters -> @list.T[TypeVarBinder]
+optional_type_parameters -> List[TypeVarBinder]
   : option(type_parameters) {
     match $1 {
       None => @list.empty()
@@ -261,7 +261,7 @@ optional_type_parameters -> @list.T[TypeVarBinder]
   }
   ;
 
-optional_type_parameters_no_constraints -> @list.T[TypeDeclBinder]
+optional_type_parameters_no_constraints -> List[TypeDeclBinder]
   : option(delimited("[", non_empty_list_commas(id(type_decl_binder)), "]")) {
     match $1 {
       None => @list.empty()
@@ -270,7 +270,7 @@ optional_type_parameters_no_constraints -> @list.T[TypeDeclBinder]
   }
   ;
 
-%inline optional_type_arguments -> @list.T[Type]
+%inline optional_type_arguments -> List[Type]
   : ioption(delimited("[", non_empty_list_commas(type_), "]")) {
     match $1 {
       None => @list.empty()
@@ -308,7 +308,7 @@ fun_header -> FunDecl
   }
   ;
 
-fun_header_generic -> ((TypeName?, Binder), Location?, @list.T[TypeVarBinder])
+fun_header_generic -> ((TypeName?, Binder), Location?, List[TypeVarBinder])
   : "fn" type_parameters fun_binder optional_bang { ($3, $4, $2) }
   | "fn" fun_binder optional_bang optional_type_parameters { ($2, $3, $4) }
   ;
@@ -368,13 +368,13 @@ block_expr -> Expr
   }
   ;
 
-local_types_and_stmts -> (@list.T[LocalTypeDecl], Expr)
+local_types_and_stmts -> (List[LocalTypeDecl], Expr)
   : local_type_decl { (@list.singleton($1), Expr::Unit(loc = mk_loc($sloc), faked = true)) }
   | list_semis_rev(statement) { (@list.empty(), SemiExprProp::compact_rev($1, loc = mk_loc($sloc))) }
   | local_type_decl SEMI local_types_and_stmts { ($3.0.add($1), $3.1) }
   ;
 
-block_expr_with_local_types -> (@list.T[LocalTypeDecl], Expr)
+block_expr_with_local_types -> (List[LocalTypeDecl], Expr)
   : "{" local_types_and_stmts "}" { $2 }
   ;
 
@@ -390,12 +390,12 @@ expression -> Expr
   : expr EOF { $1 }
   ;
 
-val_header -> (@list.T[Attribute], Bool, Visibility, Binder, Type?)
+val_header -> (List[Attribute], Bool, Visibility, Binder, Type?)
   : attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
   | attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
   ;
 
-structure -> @list.T[Impl]
+structure -> List[Impl]
   : list_semis(structure_item) EOF { $1 }
   ;
 
@@ -723,7 +723,7 @@ structure_item -> Impl
   }
   ;
 
-%inline attributes -> @list.T[Attribute]
+%inline attributes -> List[Attribute]
   :  { @list.empty() }
   | non_empty_list(attribute) { $1 }
   ;
@@ -744,29 +744,29 @@ pub_attr -> String?
   | "(" LIDENT ")" { Some($2) }
   ;
 
-type_header -> (@list.T[Attribute], Visibility, String, Location, @list.T[TypeDeclBinder])
+type_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
   : attributes visibility "type" luident optional_type_parameters_no_constraints { 
     ($1, $2, $4, mk_loc($loc($4)), $5) 
   }
   ;
 
-suberror_header -> (@list.T[Attribute], Visibility, String, Location)
+suberror_header -> (List[Attribute], Visibility, String, Location)
   : attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
   ;
 
-struct_header -> (@list.T[Attribute], Visibility, String, Location, @list.T[TypeDeclBinder])
+struct_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
   : attributes visibility "struct" luident optional_type_parameters_no_constraints { 
     ($1, $2, $4, mk_loc($loc($4)), $5) 
   }
   ;
 
-enum_header -> (@list.T[Attribute], Visibility, String, Location, @list.T[TypeDeclBinder])
+enum_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
   : attributes visibility "enum" luident optional_type_parameters_no_constraints { 
     ($1, $2, $4, mk_loc($loc($4)), $5) 
   }
   ;
 
-batch_type_alias_targets -> (Bool, Label?, @list.T[AliasTarget])
+batch_type_alias_targets -> (Bool, Label?, List[AliasTarget])
   : PACKAGE_NAME batch_type_alias_target(dot_luident) { 
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (false, Some(pkg), @list.singleton($2))
@@ -795,7 +795,7 @@ batch_type_alias_target(LUIDENT_MAYBE_DOT) -> AliasTarget
   }
   ;
 
-func_alias_targets -> (Label?, Label?, Bool, @list.T[AliasTarget])
+func_alias_targets -> (Label?, Label?, Bool, List[AliasTarget])
   : ioption(func_alias_type_name(LIDENT, UIDENT)) func_alias_target(LIDENT) { 
     (None, $1, false, @list.singleton($2))
   }
@@ -845,7 +845,7 @@ deriving_directive -> DerivingDirective
   | type_name "(" list_commas(argument) ")" { DerivingDirective::{ type_name: $1, args: $3, loc: mk_loc($sloc) } }
   ;
 
-deriving_directive_list -> @list.T[DerivingDirective]
+deriving_directive_list -> List[DerivingDirective]
   :  { @list.empty() }
   | "derive" "(" list_commas(deriving_directive) ")" { $3 }
   ;
@@ -1060,7 +1060,7 @@ single_pattern_case -> Case
   }
   ;
 
-single_pattern_cases -> @list.T[Case]
+single_pattern_cases -> List[Case]
   : list_semis(single_pattern_case) { $1 }
   ;
 
@@ -1145,7 +1145,7 @@ match_expr -> Expr
   }
   ;
 
-%inline loop_header -> @list.T[Expr]
+%inline loop_header -> List[Expr]
   : "loop" non_empty_list_commas_no_trailing(expr) "{" { $2 }
   ;
 
@@ -1161,7 +1161,7 @@ loop_expr -> Expr
   }
   ;
 
-for_binders -> @list.T[(Binder, Expr)]
+for_binders -> List[(Binder, Expr)]
   : list_commas_no_trailing(separated_pair(binder, "=", expr)) { $1 }
   ;
 
@@ -1258,7 +1258,7 @@ arrow_fn_expr -> Func
   }
   ;
 
-arrow_fn_prefix -> @list.T[(ArrowFnParam, Type?)]
+arrow_fn_prefix -> List[(ArrowFnParam, Type?)]
   : binder ioption(",") ")" { @list.singleton((Named($1), None)) }
   | "_" ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), None)) }
   | binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
@@ -1269,7 +1269,7 @@ arrow_fn_prefix -> @list.T[(ArrowFnParam, Type?)]
   | "_" ":" type_ "," arrow_fn_prefix { $5.add((Unnamed(mk_loc($loc($1))), Some($3))) }
   ;
 
-arrow_fn_prefix_no_constraint -> @list.T[ArrowFnParam]
+arrow_fn_prefix_no_constraint -> List[ArrowFnParam]
   : binder ioption(",") ")" { @list.singleton(Named($1)) }
   | "_" ioption(",") ")" { @list.singleton(Unnamed(mk_loc($loc($1)))) }
   | binder "," arrow_fn_prefix_no_constraint { $3.add(Named($1)) }
@@ -1371,12 +1371,12 @@ constr -> Constructor
   | "?" { Question }
   ;
 
-non_empty_tuple_elems -> @list.T[Expr]
+non_empty_tuple_elems -> List[Expr]
   : expr ioption(",") ")" { @list.singleton($1) }
   | expr "," non_empty_tuple_elems { $3.add($1) }
   ;
 
-non_empty_tuple_elems_with_prefix -> @list.T[Expr]
+non_empty_tuple_elems_with_prefix -> List[Expr]
   : binder "," non_empty_tuple_elems_with_prefix { $3.add(@syntax.binder_to_expr($1)) }
   | "_" "," non_empty_tuple_elems_with_prefix { $3.add(Expr::Hole(loc = mk_loc($loc($1)), kind = Incomplete)) }
   | non_empty_tuple_elems { $1 }
@@ -1882,7 +1882,7 @@ enum_constructor -> ConstrDecl
   : "=" INT { ($2, mk_loc($loc($2))) }
   ;
 
-record_defn -> (@list.T[FieldDef], TrailingMark)
+record_defn -> (List[FieldDef], TrailingMark)
   : label_pun "," list_commas_with_trailing_info(record_defn_single) { 
     let (fs, trailing) = $3
     let trailing_mark = if fs.is_empty() || trailing { TrailingMark::Comma } else { TrailingMark::None }
@@ -1912,7 +1912,7 @@ record_defn_single -> FieldDef
   : label { @syntax.make_field_def(loc = mk_loc($sloc), $1, @syntax.label_to_expr(loc = mk_loc($sloc), $1), true) }
   ;
 
-non_empty_fields_pat -> (@list.T[FieldPat], Bool)
+non_empty_fields_pat -> (List[FieldPat], Bool)
   : non_empty_list_commas(fields_pat_single) { ($1, true) }
   | non_empty_list_commas_with_tail(fields_pat_single) ".." option(",") { ($1, false) }
   ;
@@ -1930,7 +1930,7 @@ fields_pat_single -> FieldPat
   : label { @syntax.make_field_pat(loc = mk_loc($sloc), $1, @syntax.label_to_pat(loc = mk_loc($sloc), $1), true) }
   ;
 
-non_empty_map_elems_pat -> (@list.T[MapPatElem], Bool)
+non_empty_map_elems_pat -> (List[MapPatElem], Bool)
   : non_empty_list_commas(map_elem_pat) { ($1, true) }
   | non_empty_list_commas_with_tail(map_elem_pat) ".." option(",") { ($1, false) }
   ;
@@ -1947,7 +1947,7 @@ non_empty_map_elems_pat -> (@list.T[MapPatElem], Bool)
   }
   ;
 
-constr_pat_arguments -> (@list.T[ConstrPatArg], Bool)
+constr_pat_arguments -> (List[ConstrPatArg], Bool)
   : constr_pat_argument option(",") { (@list.singleton($1), false) }
   | ".." option(",") { (@list.empty(), true) }
   | constr_pat_argument "," constr_pat_arguments { 

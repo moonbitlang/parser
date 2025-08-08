@@ -22,6 +22,5 @@
       "output": "parser.mbt"
     }
   ],
-  "warn-list": "-6",
-  "alert-list": "-deprecated"
+  "warn-list": "-6"
 }
