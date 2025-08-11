@@ -1,7 +1,7 @@
 {
   "import": [
     "moonbitlang/parser/syntax",
-    "moonbitlang/parser/compact",
+    "moonbitlang/parser/syntax/util",
     "moonbitlang/parser/tokens",
     "moonbitlang/parser/basic",
   ],

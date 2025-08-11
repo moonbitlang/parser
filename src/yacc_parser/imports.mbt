@@ -80,7 +80,7 @@ fnalias @syntax.(
 )
 
 ///|
-typealias @compact.Statement
+typealias @util.Statement
 
 ///|
 typealias @list.List

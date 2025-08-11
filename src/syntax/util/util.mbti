@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "moonbitlang/parser/compact"
+package "moonbitlang/parser/syntax/util"
 
 import(
   "moonbitlang/core/list"
