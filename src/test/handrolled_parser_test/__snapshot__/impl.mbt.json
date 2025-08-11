@@ -814,5 +814,67 @@
       "loc": null,
       "doc": ""
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/impl.mbt",
+        "start": {
+          "line": 7,
+          "column": 28
+        },
+        "end": {
+          "line": 7,
+          "column": 32
+        }
+      },
+      "msg": "Unexpected token `with`, you may expect `,`, `]`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/impl.mbt",
+        "start": {
+          "line": 13,
+          "column": 16
+        },
+        "end": {
+          "line": 13,
+          "column": 16
+        }
+      },
+      "msg": "Unexpected line break here, missing `{` at the end of this line."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/impl.mbt",
+        "start": {
+          "line": 16,
+          "column": 16
+        },
+        "end": {
+          "line": 16,
+          "column": 16
+        }
+      },
+      "msg": "Unexpected line break here, missing `{` at the end of this line."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/impl.mbt",
+        "start": {
+          "line": 22,
+          "column": 26
+        },
+        "end": {
+          "line": 22,
+          "column": 26
+        }
+      },
+      "msg": "Unexpected line break here, missing `(` at the end of this line."
+    }
   ]
 }

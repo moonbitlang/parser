@@ -70,5 +70,22 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/tuples_err2.mbt",
+        "start": {
+          "line": 2,
+          "column": 16
+        },
+        "end": {
+          "line": 2,
+          "column": 17
+        }
+      },
+      "msg": "Unexpected token `:`, you may expect `,`, `)`."
+    }
   ]
 }

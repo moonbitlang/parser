@@ -67,5 +67,22 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/fun_binder.mbt",
+        "start": {
+          "line": 4,
+          "column": 1
+        },
+        "end": {
+          "line": 4,
+          "column": 2
+        }
+      },
+      "msg": "Unexpected token `}`, you may expect simple expression."
+    }
   ]
 }

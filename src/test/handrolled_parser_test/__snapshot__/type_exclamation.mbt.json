@@ -190,5 +190,22 @@
         "loc": null
       }
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/type_exclamation.mbt",
+        "start": {
+          "line": 7,
+          "column": 1
+        },
+        "end": {
+          "line": 7,
+          "column": 1
+        }
+      },
+      "msg": "Unexpected token here."
+    }
   ]
 }

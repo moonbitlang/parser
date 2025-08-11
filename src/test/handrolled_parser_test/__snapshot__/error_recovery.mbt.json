@@ -286,5 +286,67 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/error_recovery.mbt",
+        "start": {
+          "line": 3,
+          "column": 1
+        },
+        "end": {
+          "line": 3,
+          "column": 2
+        }
+      },
+      "msg": "Unexpected token `}`, you may expect simple expression."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/error_recovery.mbt",
+        "start": {
+          "line": 7,
+          "column": 1
+        },
+        "end": {
+          "line": 7,
+          "column": 2
+        }
+      },
+      "msg": "Unexpected token `}`, you may expect simple expression."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/error_recovery.mbt",
+        "start": {
+          "line": 11,
+          "column": 1
+        },
+        "end": {
+          "line": 11,
+          "column": 2
+        }
+      },
+      "msg": "Unexpected token `}`, you may expect `,`, `)`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/error_recovery.mbt",
+        "start": {
+          "line": 14,
+          "column": 18
+        },
+        "end": {
+          "line": 14,
+          "column": 21
+        }
+      },
+      "msg": "Unexpected token string, you may expect `,`, `)`."
+    }
   ]
 }

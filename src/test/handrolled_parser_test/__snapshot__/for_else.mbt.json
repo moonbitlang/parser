@@ -627,5 +627,37 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/for_else.mbt",
+        "start": {
+          "line": 24,
+          "column": 10
+        },
+        "end": {
+          "line": 24,
+          "column": 12
+        }
+      },
+      "msg": "Unexpected token `if`, you may expect `{`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/for_else.mbt",
+        "start": {
+          "line": 24,
+          "column": 17
+        },
+        "end": {
+          "line": 24,
+          "column": 18
+        }
+      },
+      "msg": "Unexpected token `)`, you may expect `{`."
+    }
   ]
 }

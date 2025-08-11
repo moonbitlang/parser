@@ -154,5 +154,22 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/bad_recovery.mbt",
+        "start": {
+          "line": 8,
+          "column": 15
+        },
+        "end": {
+          "line": 8,
+          "column": 16
+        }
+      },
+      "msg": "Unexpected let statement in the action part of a matching case"
+    }
   ]
 }

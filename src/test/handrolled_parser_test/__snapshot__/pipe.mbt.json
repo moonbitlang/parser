@@ -575,5 +575,52 @@
       "attrs": [],
       "doc": ""
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/pipe.mbt",
+        "start": {
+          "line": 14,
+          "column": 12
+        },
+        "end": {
+          "line": 14,
+          "column": 12
+        }
+      },
+      "msg": "Unexpected line break here, missing simple expression at the end of this line."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/pipe.mbt",
+        "start": {
+          "line": 19,
+          "column": 6
+        },
+        "end": {
+          "line": 19,
+          "column": 6
+        }
+      },
+      "msg": "Unexpected line break here, missing simple expression at the end of this line."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/pipe.mbt",
+        "start": {
+          "line": 24,
+          "column": 6
+        },
+        "end": {
+          "line": 24,
+          "column": 6
+        }
+      },
+      "msg": "Unexpected line break here, missing simple expression at the end of this line."
+    }
   ]
 }

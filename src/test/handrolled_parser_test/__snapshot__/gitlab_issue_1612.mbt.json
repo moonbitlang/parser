@@ -338,5 +338,22 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/gitlab_issue_1612.mbt",
+        "start": {
+          "line": 4,
+          "column": 20
+        },
+        "end": {
+          "line": 4,
+          "column": 23
+        }
+      },
+      "msg": "Unexpected token string, you may expect `,`, `)`."
+    }
   ]
 }

@@ -224,5 +224,22 @@
         "loc": null
       }
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/derive.mbt",
+        "start": {
+          "line": 15,
+          "column": 1
+        },
+        "end": {
+          "line": 15,
+          "column": 1
+        }
+      },
+      "msg": "Unexpected end of file, missing `(` here."
+    }
   ]
 }

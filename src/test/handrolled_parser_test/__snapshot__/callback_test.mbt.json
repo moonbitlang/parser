@@ -2040,5 +2040,22 @@
       "attrs": [],
       "doc": ""
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/callback_test.mbt",
+        "start": {
+          "line": 47,
+          "column": 12
+        },
+        "end": {
+          "line": 47,
+          "column": 18
+        }
+      },
+      "msg": "Unexpected token `struct`, you may expect simple expression."
+    }
   ]
 }

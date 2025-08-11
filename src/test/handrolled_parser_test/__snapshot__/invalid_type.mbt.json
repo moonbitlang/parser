@@ -24,5 +24,22 @@
         "loc": null
       }
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/invalid_type.mbt",
+        "start": {
+          "line": 2,
+          "column": 9
+        },
+        "end": {
+          "line": 2,
+          "column": 10
+        }
+      },
+      "msg": "Unexpected token `=`, you may expect type."
+    }
   ]
 }

@@ -9,17 +9,11 @@ import(
 )
 
 // Values
-fn parse(Array[(@tokens.Token, @basic.Position, @basic.Position)]) -> (@list.List[@syntax.Impl], Array[Report])
+fn parse(Array[(@tokens.Token, @basic.Position, @basic.Position)]) -> (@list.List[@syntax.Impl], Array[@basic.Report])
 
 // Errors
 
 // Types and methods
-pub(all) struct Report {
-  loc : @basic.Location
-  msg : String
-}
-impl Show for Report
-impl ToJson for Report
 
 // Type aliases
 

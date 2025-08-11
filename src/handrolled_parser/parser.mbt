@@ -53,7 +53,7 @@ fn State::parse_toplevel(self : Self) -> Impls {
         other => {
           self.panic() |> ignore
           let loc = self.peek_location()
-          let report = if first_impl_.contains(other.kind()) {
+          let report : Report = if first_impl_.contains(other.kind()) {
             { loc, msg: "Missing newline here." }
           } else {
             { loc, msg: "Unexpected token here." }
@@ -2028,7 +2028,10 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
               _ =>
                 match dotdot {
                   NoBinder | WithBinder(_) | Underscore | WithAsBinder(_) =>
-                    self.report_error({ loc: self.peek_location(), msg: "" })
+                    self.report_error({
+                      loc: self.peek_location(),
+                      msg: "At most one `..` is allowed in array pattern.",
+                    })
                   NoDotDot =>
                     dotdot = match self.peek_token() {
                       LIDENT(_) => {
@@ -4411,21 +4414,20 @@ fn State::handle_unexpected_expr_or_statement(
   }
 
   let (actual, expr) = match token {
-    IF => ("IfExpr", self.parse_if_expr())
-    MATCH => ("MatchExpr", self.parse_match_expr())
-    LOOP => ("LoopExpr", self.parse_loop_expr(label=None))
-    WHILE => ("WhileExpr", self.parse_while_loop(label=None))
-    FOR => ("ForExpr", self.parse_for_expr(label=None))
-    TRY => ("TryExpr", self.parse_try_expr())
-    // TODO:
-    // TRY_QUESTION => ...
-    // TRY_EXCLAMATION => ...
-    LET | LETREC => ("LetStmt", handle_stmt(self))
-    GUARD => ("GuardStmt", handle_stmt(self))
-    DEFER => ("DeferStmt", handle_stmt(self))
-    BREAK => ("BreakStmt", handle_stmt(self))
-    CONTINUE => ("BreakStmt", handle_stmt(self))
-    RETURN => ("ReturnStmt", handle_stmt(self))
+    IF => ("if expression", self.parse_if_expr())
+    MATCH => ("match expression", self.parse_match_expr())
+    LOOP => ("loop expression", self.parse_loop_expr(label=None))
+    WHILE => ("while expression", self.parse_while_loop(label=None))
+    FOR => ("for expression", self.parse_for_expr(label=None))
+    TRY => ("try expression", self.parse_try_expr())
+    TRY_EXCLAMATION => ("`try!` expression", self.parse_try_exclamation())
+    TRY_QUESTION => ("`try?` expression", self.parse_try_question())
+    LET | LETREC => ("let statement", handle_stmt(self))
+    GUARD => ("guard statement", handle_stmt(self))
+    DEFER => ("defer statement", handle_stmt(self))
+    BREAK => ("break statement", handle_stmt(self))
+    CONTINUE => ("break statement", handle_stmt(self))
+    RETURN => ("return statement", handle_stmt(self))
     _ => panic()
   }
   let loc = expr.loc()
@@ -4444,7 +4446,8 @@ fn State::try_parse_condition_expr(self : Self) -> @syntax.Expr {
     | WHILE
     | FOR
     | TRY
-    // TODO: TRY_QUESTION | TRY_EXCLAMATION
+    | TRY_QUESTION
+    | TRY_EXCLAMATION
     | LET
     | LETREC
     | GUARD

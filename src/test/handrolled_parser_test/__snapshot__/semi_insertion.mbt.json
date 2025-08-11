@@ -1199,5 +1199,22 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/semi_insertion.mbt",
+        "start": {
+          "line": 88,
+          "column": 5
+        },
+        "end": {
+          "line": 88,
+          "column": 6
+        }
+      },
+      "msg": "Unexpected token infix operator, you may expect simple expression."
+    }
   ]
 }

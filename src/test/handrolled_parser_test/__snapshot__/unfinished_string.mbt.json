@@ -154,5 +154,22 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/unfinished_string.mbt",
+        "start": {
+          "line": 6,
+          "column": 14
+        },
+        "end": {
+          "line": 6,
+          "column": 14
+        }
+      },
+      "msg": "Unexpected end of file, missing `;`, `}` here."
+    }
   ]
 }

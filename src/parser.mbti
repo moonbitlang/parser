@@ -3,19 +3,21 @@ package "moonbitlang/parser"
 
 import(
   "moonbitlang/core/list"
+  "moonbitlang/parser/basic"
   "moonbitlang/parser/syntax"
   "moonbitlang/x/fs"
 )
 
 // Values
-fn parse_bytes(Bytes, name? : String, config~ : Parser) -> @list.List[@syntax.Impl]
+fn parse_bytes(Bytes, name? : String, parser? : Parser) -> (@list.List[@syntax.Impl], Array[@basic.Report])
 
-fn parse_file(String, config~ : Parser) -> @list.List[@syntax.Impl] raise @fs.IOError
+fn parse_file(String, parser? : Parser) -> (@list.List[@syntax.Impl], Array[@basic.Report]) raise @fs.IOError
 
 // Errors
 
 // Types and methods
 pub(all) enum Parser {
+  MoonYacc
   Handrolled
 }
 

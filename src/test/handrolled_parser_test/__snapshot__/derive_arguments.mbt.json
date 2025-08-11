@@ -932,5 +932,22 @@
         "loc": null
       }
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/derive_arguments.mbt",
+        "start": {
+          "line": 29,
+          "column": 24
+        },
+        "end": {
+          "line": 29,
+          "column": 41
+        }
+      },
+      "msg": "Unexpected token id (lowercase start), you may expect `,`, `)`."
+    }
   ]
 }

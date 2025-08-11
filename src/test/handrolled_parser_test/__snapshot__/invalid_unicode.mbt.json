@@ -102,5 +102,52 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/invalid_unicode.mbt",
+        "start": {
+          "line": 2,
+          "column": 11
+        },
+        "end": {
+          "line": 2,
+          "column": 12
+        }
+      },
+      "msg": "Unexpected token `+`, you may expect `true`, `false`, char, int, b'...', float, double, `-`, b\"...\", string, `_`, id (lowercase start), `@pkg.id`, id (uppercase start), `(`, `[`, `{`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/invalid_unicode.mbt",
+        "start": {
+          "line": 3,
+          "column": 8
+        },
+        "end": {
+          "line": 3,
+          "column": 9
+        }
+      },
+      "msg": "Unexpected token id (lowercase start), you may expect `=`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/invalid_unicode.mbt",
+        "start": {
+          "line": 4,
+          "column": 11
+        },
+        "end": {
+          "line": 4,
+          "column": 14
+        }
+      },
+      "msg": "Unexpected token id (lowercase start), you may expect `=`."
+    }
   ]
 }

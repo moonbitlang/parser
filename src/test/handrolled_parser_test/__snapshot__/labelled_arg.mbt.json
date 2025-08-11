@@ -1280,5 +1280,37 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/labelled_arg.mbt",
+        "start": {
+          "line": 10,
+          "column": 7
+        },
+        "end": {
+          "line": 10,
+          "column": 8
+        }
+      },
+      "msg": "Only labeled argument can have default value"
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/labelled_arg.mbt",
+        "start": {
+          "line": 47,
+          "column": 5
+        },
+        "end": {
+          "line": 47,
+          "column": 8
+        }
+      },
+      "msg": "Invalid syntax `label~=value`. Do you mean `label=value`?"
+    }
   ]
 }

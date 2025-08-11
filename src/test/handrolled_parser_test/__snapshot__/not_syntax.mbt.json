@@ -211,5 +211,22 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/not_syntax.mbt",
+        "start": {
+          "line": 9,
+          "column": 11
+        },
+        "end": {
+          "line": 9,
+          "column": 12
+        }
+      },
+      "msg": "Unexpected token `;`, you may expect simple expression."
+    }
   ]
 }

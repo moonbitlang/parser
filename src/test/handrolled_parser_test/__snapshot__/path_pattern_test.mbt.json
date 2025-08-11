@@ -340,5 +340,22 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/path_pattern_test.mbt",
+        "start": {
+          "line": 4,
+          "column": 8
+        },
+        "end": {
+          "line": 4,
+          "column": 9
+        }
+      },
+      "msg": "Unexpected lowercase identifier x, expected uppercase identifier in constructor name."
+    }
   ]
 }

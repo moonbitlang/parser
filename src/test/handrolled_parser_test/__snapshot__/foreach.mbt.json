@@ -405,5 +405,67 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/foreach.mbt",
+        "start": {
+          "line": 15,
+          "column": 7
+        },
+        "end": {
+          "line": 15,
+          "column": 9
+        }
+      },
+      "msg": "Unexpected token `in`, you may expect id (lowercase start), `_`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/foreach.mbt",
+        "start": {
+          "line": 16,
+          "column": 9
+        },
+        "end": {
+          "line": 16,
+          "column": 10
+        }
+      },
+      "msg": "Unexpected token `{`, you may expect `=`, `,`, `in`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/foreach.mbt",
+        "start": {
+          "line": 17,
+          "column": 9
+        },
+        "end": {
+          "line": 17,
+          "column": 10
+        }
+      },
+      "msg": "Unexpected token `+`, you may expect `=`, `,`, `in`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/foreach.mbt",
+        "start": {
+          "line": 18,
+          "column": 7
+        },
+        "end": {
+          "line": 18,
+          "column": 8
+        }
+      },
+      "msg": "Unexpected token `?`, you may expect id (lowercase start), `;`, `{`."
+    }
   ]
 }

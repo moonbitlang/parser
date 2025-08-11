@@ -919,5 +919,37 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/guard_if.mbt",
+        "start": {
+          "line": 3,
+          "column": 10
+        },
+        "end": {
+          "line": 3,
+          "column": 40
+        }
+      },
+      "msg": "Unexpected if expression in pattern guard"
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/guard_if.mbt",
+        "start": {
+          "line": 17,
+          "column": 11
+        },
+        "end": {
+          "line": 17,
+          "column": 30
+        }
+      },
+      "msg": "Unexpected match expression in pattern guard"
+    }
   ]
 }

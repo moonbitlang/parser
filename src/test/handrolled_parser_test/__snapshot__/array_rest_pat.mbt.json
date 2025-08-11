@@ -1638,5 +1638,142 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/array_rest_pat.mbt",
+        "start": {
+          "line": 31,
+          "column": 10
+        },
+        "end": {
+          "line": 31,
+          "column": 12
+        }
+      },
+      "msg": "Unexpected token `..`, you may expect `,`, `]`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/array_rest_pat.mbt",
+        "start": {
+          "line": 33,
+          "column": 15
+        },
+        "end": {
+          "line": 33,
+          "column": 16
+        }
+      },
+      "msg": "At most one `..` is allowed in array pattern."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/array_rest_pat.mbt",
+        "start": {
+          "line": 34,
+          "column": 18
+        },
+        "end": {
+          "line": 34,
+          "column": 19
+        }
+      },
+      "msg": "At most one `..` is allowed in array pattern."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/array_rest_pat.mbt",
+        "start": {
+          "line": 34,
+          "column": 18
+        },
+        "end": {
+          "line": 34,
+          "column": 19
+        }
+      },
+      "msg": "Unexpected token `_`, you may expect `,`, `]`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/array_rest_pat.mbt",
+        "start": {
+          "line": 35,
+          "column": 18
+        },
+        "end": {
+          "line": 35,
+          "column": 19
+        }
+      },
+      "msg": "At most one `..` is allowed in array pattern."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/array_rest_pat.mbt",
+        "start": {
+          "line": 35,
+          "column": 18
+        },
+        "end": {
+          "line": 35,
+          "column": 19
+        }
+      },
+      "msg": "Unexpected token `_`, you may expect `,`, `]`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/array_rest_pat.mbt",
+        "start": {
+          "line": 42,
+          "column": 3
+        },
+        "end": {
+          "line": 42,
+          "column": 4
+        }
+      },
+      "msg": "Unexpected token `}`, you may expect `true`, `false`, char, int, b'...', float, double, `-`, b\"...\", string, `_`, id (lowercase start), `@pkg.id`, id (uppercase start), `(`, `[`, `{`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/array_rest_pat.mbt",
+        "start": {
+          "line": 47,
+          "column": 10
+        },
+        "end": {
+          "line": 47,
+          "column": 10
+        }
+      },
+      "msg": "Unexpected token `.id` (lowercase start), you may expect `true`, `false`, char, int, b'...', float, double, `-`, b\"...\", string, `_`, id (lowercase start), `@pkg.id`, id (uppercase start), `(`, `[`, `{`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/array_rest_pat.mbt",
+        "start": {
+          "line": 48,
+          "column": 3
+        },
+        "end": {
+          "line": 48,
+          "column": 4
+        }
+      },
+      "msg": "Unexpected token `}`, you may expect `=>`."
+    }
   ]
 }

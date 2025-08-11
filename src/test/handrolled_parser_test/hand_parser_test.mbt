@@ -1,14 +1,4 @@
 ///|
-fn @test.T::run(t : Self, name : String) -> Unit raise Error {
-  let source_file = "src/test/handrolled_parser_test/fixtures/\{name}.mbt"
-  let ast = @parser.parse_file(source_file, config=Handrolled) catch {
-    err => fail("failed to read file \{name}.mbt: \{err}")
-  }
-  t.write(ast |> @syntax.impls_to_json |> _.stringify(indent=2))
-  t.snapshot(filename="\{name}.mbt.json")
-}
-
-///|
 test "no_trailing_newline_extern" (t : @test.T) {
   t.run("no_trailing_newline_extern")
 }

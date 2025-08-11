@@ -154,5 +154,22 @@
         "loc": null
       }
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/constrained_type_param.mbt",
+        "start": {
+          "line": 5,
+          "column": 12
+        },
+        "end": {
+          "line": 5,
+          "column": 13
+        }
+      },
+      "msg": "Unexpected token `:`, you may expect `,`, `]`."
+    }
   ]
 }

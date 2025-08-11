@@ -293,5 +293,37 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/open_constr_pat.mbt",
+        "start": {
+          "line": 6,
+          "column": 7
+        },
+        "end": {
+          "line": 6,
+          "column": 9
+        }
+      },
+      "msg": "Unexpected `..` here, add `, ..` behind the last argument to ignore the rest arguments."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/open_constr_pat.mbt",
+        "start": {
+          "line": 7,
+          "column": 7
+        },
+        "end": {
+          "line": 7,
+          "column": 9
+        }
+      },
+      "msg": "Unexpected `..` here, add `, ..` behind the last argument to ignore the rest arguments."
+    }
   ]
 }

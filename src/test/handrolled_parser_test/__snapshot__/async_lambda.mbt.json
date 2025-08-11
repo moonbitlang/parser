@@ -84,5 +84,37 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/async_lambda.mbt",
+        "start": {
+          "line": 2,
+          "column": 7
+        },
+        "end": {
+          "line": 2,
+          "column": 8
+        }
+      },
+      "msg": "Unexpected token `;`, you may expect id (lowercase start), id (uppercase start)."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/async_lambda.mbt",
+        "start": {
+          "line": 4,
+          "column": 17
+        },
+        "end": {
+          "line": 4,
+          "column": 18
+        }
+      },
+      "msg": "Unexpected token `(`, you may expect `fn`."
+    }
   ]
 }

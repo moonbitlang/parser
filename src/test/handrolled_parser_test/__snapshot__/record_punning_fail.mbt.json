@@ -174,5 +174,22 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/record_punning_fail.mbt",
+        "start": {
+          "line": 6,
+          "column": 22
+        },
+        "end": {
+          "line": 6,
+          "column": 24
+        }
+      },
+      "msg": "Unexpected token id (lowercase start), you may expect `,`, `}`."
+    }
   ]
 }

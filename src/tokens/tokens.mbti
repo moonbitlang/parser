@@ -147,6 +147,7 @@ pub(all) enum Token {
   TRY_EXCLAMATION
 }
 fn Token::kind(Self) -> TokenKind
+fn Token::to_expect_string(Self) -> String
 impl Show for Token
 
 pub(all) enum TokenKind {
@@ -255,6 +256,7 @@ pub(all) enum TokenKind {
   TK_TRY_QUESTION
   TK_TRY_EXCLAMATION
 }
+fn TokenKind::to_expect_string(Self) -> String
 impl Eq for TokenKind
 impl Show for TokenKind
 

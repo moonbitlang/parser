@@ -1,10 +1,4 @@
 ///|
-pub(all) struct Report {
-  loc : Location
-  msg : String
-} derive(ToJson, Show)
-
-///|
 priv enum Mode {
   Normal
   Panic(fail_at~ : TokenKind, sync_at~ : Int, loc~ : Location)
@@ -198,10 +192,9 @@ fn State::report_failed_to_parse(
   let msg = match found {
     SEMI(false) =>
       "Unexpected line break here, missing \{expected} at the end of this line."
-    EOF =>
-      "Parse error, expect \{expected}. Hint: Did you forget to indent the local definition?"
+    EOF => "Unexpected end of file, missing \{expected} here."
     _ =>
-      "Parse error, unexpected token \{found.kind()}, you may expect \{expected}."
+      "Unexpected token \{found.to_expect_string()}, you may expect \{expected}."
   }
   state.diagnostics.push({ loc, msg })
 }
@@ -210,8 +203,8 @@ fn State::report_failed_to_parse(
 fn expect_tokens_to_string(expect_tokens : Array[TokenKind]) -> String {
   match expect_tokens {
     [] => ""
-    [x] => x.to_string()
-    xs => xs.iter().map(x => x.to_string()).join(" or ")
+    [x] => x.to_expect_string()
+    xs => xs.iter().map(x => x.to_expect_string()).join(", ")
   }
 }
 
@@ -611,7 +604,7 @@ fn[A] State::delimited_with_follow(
                 self
                 ..report_error({
                   loc: self.peek_location(),
-                  msg: "Expecting a newline or `;` here, but encountered \{delim}.",
+                  msg: "Expecting a newline or `;` here, but encountered \{delim.to_expect_string()}.",
                 })
                 ..skip()
                 continue

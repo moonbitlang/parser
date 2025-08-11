@@ -1225,5 +1225,37 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/or_alias_pattern_prec.mbt",
+        "start": {
+          "line": 23,
+          "column": 15
+        },
+        "end": {
+          "line": 23,
+          "column": 16
+        }
+      },
+      "msg": "Unexpected token `|`, you may expect `=>`."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/or_alias_pattern_prec.mbt",
+        "start": {
+          "line": 27,
+          "column": 15
+        },
+        "end": {
+          "line": 27,
+          "column": 16
+        }
+      },
+      "msg": "Unexpected token `|`, you may expect `=>`."
+    }
   ]
 }

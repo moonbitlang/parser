@@ -10,17 +10,6 @@ pub fn normalize(json : String) -> String {
 }
 
 ///|
-let helper_code =
-  #| fn @test.T::run(t : Self, name : String) -> Unit raise Error {
-  $|   let source_file = "\{sources_path}/\\{name}.mbt"
-  #|   let ast = @parser.parse_file(source_file, config=Handrolled) catch {
-  #|     err => fail("failed to read file \{name}.mbt: \{err}")
-  #|   }
-  #|   t.write(ast |> @syntax.impls_to_json |> _.stringify(indent=2))
-  #|   t.snapshot(filename="\{name}.mbt.json")
-  #| }
-
-///|
 pub fn gen_test(name : String) -> String {
   (
     $|test "\{name}" (t : @test.T) {
@@ -31,9 +20,6 @@ pub fn gen_test(name : String) -> String {
 
 ///|
 let root = "src/test/handrolled_parser_test"
-
-///|
-let sources_path : String = root + "/fixtures"
 
 ///|
 let snapshot_path : String = root + "/__snapshot__"
@@ -53,7 +39,6 @@ fn main {
       @fs.write_string_to_file(target, content)
     })
     let buf = StringBuilder::new()
-    buf.write_string(helper_code)
     for name in tests {
       buf
       ..write_string(gen_test(name.split(".").head().unwrap().to_string()))

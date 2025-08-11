@@ -34,6 +34,13 @@ impl Eq for Position
 impl Show for Position
 impl ToJson for Position
 
+pub(all) struct Report {
+  loc : Location
+  msg : String
+}
+impl Show for Report
+impl ToJson for Report
+
 // Type aliases
 
 // Traits

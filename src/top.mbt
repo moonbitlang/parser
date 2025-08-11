@@ -11,8 +11,11 @@ typealias @list.T as List
 typealias @basic.Position
 
 ///|
+typealias @basic.Report
+
+///|
 pub(all) enum Parser {
-  // MoonYacc
+  MoonYacc
   Handrolled
   // Mixed
 }
@@ -99,24 +102,46 @@ fn attach_docstrings(
 pub fn parse_bytes(
   source : Bytes,
   name~ : String = "",
-  config~ : Parser,
-) -> @syntax.Impls {
-  ignore(config)
+  parser~ : Parser = Handrolled,
+) -> (@syntax.Impls, Array[Report]) {
   let { tokens, docstrings, .. } = @lexer.tokens_from_bytes(
     source,
     comment=true,
     name~,
   )
-  let impls = @handrolled_parser.parse(tokens).0
+  fn parse_by_moonyacc(tokens) {
+    (@yacc_parser.structure(tokens), []) catch {
+      UnexpectedEndOfInput(pos, _) =>
+        (
+          @list.empty(),
+          [
+            Report::{
+              loc: { start: pos, end: pos },
+              msg: "Unexpected end of file.",
+            },
+          ],
+        )
+      UnexpectedToken(token, (start, end), _) =>
+        (
+          @list.empty(),
+          [Report::{ loc: { start, end }, msg: "Unexpected `\{token}`." }],
+        )
+    }
+  }
+
+  let (impls, diagnostics) = match parser {
+    MoonYacc => parse_by_moonyacc(tokens)
+    Handrolled => @handrolled_parser.parse(tokens)
+  }
   attach_docstrings(docstrings, impls)
-  impls
+  (impls, diagnostics)
 }
 
 ///|
 pub fn parse_file(
   path : String,
-  config~ : Parser,
-) -> @syntax.Impls raise @fs.IOError {
+  parser~ : Parser = Handrolled,
+) -> (@syntax.Impls, Array[Report]) raise @fs.IOError {
   let source = @fs.read_file_to_bytes(path)
-  parse_bytes(source, name=path, config~)
+  parse_bytes(source, name=path, parser~)
 }

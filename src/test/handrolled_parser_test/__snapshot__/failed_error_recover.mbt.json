@@ -105,5 +105,22 @@
       "attrs": [],
       "doc": ""
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/failed_error_recover.mbt",
+        "start": {
+          "line": 2,
+          "column": 12
+        },
+        "end": {
+          "line": 2,
+          "column": 13
+        }
+      },
+      "msg": "Unexpected token id (lowercase start), you may expect `;`, `}`."
+    }
   ]
 }

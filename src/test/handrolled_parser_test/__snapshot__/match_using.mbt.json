@@ -84,5 +84,22 @@
       },
       "loc": null
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/match_using.mbt",
+        "start": {
+          "line": 2,
+          "column": 11
+        },
+        "end": {
+          "line": 2,
+          "column": 16
+        }
+      },
+      "msg": "Unexpected token id (lowercase start), you may expect `{`."
+    }
   ]
 }

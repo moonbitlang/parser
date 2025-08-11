@@ -281,5 +281,37 @@
         "doc": ""
       }
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/super_trait.mbt",
+        "start": {
+          "line": 4,
+          "column": 14
+        },
+        "end": {
+          "line": 4,
+          "column": 15
+        }
+      },
+      "msg": "Unexpected token `{`, you may expect id (lowercase start), `@pkg.id`, id (uppercase start)."
+    },
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/super_trait.mbt",
+        "start": {
+          "line": 5,
+          "column": 10
+        },
+        "end": {
+          "line": 5,
+          "column": 11
+        }
+      },
+      "msg": "Unexpected token `{`, you may expect id (lowercase start), `@pkg.id`, id (uppercase start)."
+    }
   ]
 }

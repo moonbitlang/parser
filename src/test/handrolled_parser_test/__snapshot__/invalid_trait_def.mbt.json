@@ -187,5 +187,22 @@
         "doc": ""
       }
     }
+  ],
+  "diagnostics": [
+    {
+      "type": "Error",
+      "loc": {
+        "file": "src/test/handrolled_parser_test/fixtures/invalid_trait_def.mbt",
+        "start": {
+          "line": 3,
+          "column": 3
+        },
+        "end": {
+          "line": 3,
+          "column": 4
+        }
+      },
+      "msg": "Unexpected token `(`, you may expect id (lowercase start)."
+    }
   ]
 }
