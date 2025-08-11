@@ -30,7 +30,7 @@ pub fn gen_test(name : String) -> String {
 }
 
 ///|
-let root = "src/test/hand_parser_test"
+let root = "src/test/handrolled_parser_test"
 
 ///|
 let sources_path : String = root + "/fixtures"

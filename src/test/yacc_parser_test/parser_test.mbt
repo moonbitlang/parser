@@ -7,7 +7,7 @@ fn test_yacc_parser(
   label : String,
   loc~ : SourceLoc,
 ) -> Unit raise Error {
-  let filename = "src/parsing/parser_test/fixtures/\{label}.mbt_"
+  let filename = "src/test/yacc_parser_test/fixtures/\{label}.mbt_"
   let bytes = @fs.read_file_to_bytes(filename) catch {
     err => fail("failed to read file \{filename}: \{err}", loc~)
   }
