@@ -11,7 +11,7 @@ typealias @tokens.(Token, TokenKind)
 typealias (Token, Position, Position) as Triple
 
 ///|
-typealias @compact.SemiExprProp
+typealias @compact.Statement
 
 ///|
 typealias @list.List

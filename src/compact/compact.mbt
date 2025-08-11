@@ -1,5 +1,5 @@
 ///|
-pub(all) enum SemiExprProp {
+pub(all) enum Statement {
   StmtExpr(Expr)
   StmtLet(pat~ : Pattern, expr~ : Expr, loc~ : Location)
   StmtGuard(cond~ : Expr, otherwise~ : Expr?, loc~ : Location)
@@ -10,12 +10,12 @@ pub(all) enum SemiExprProp {
 }
 
 ///|
-pub fn SemiExprProp::compact_rev(
-  ls : @list.List[SemiExprProp],
+pub fn Statement::compact_rev(
+  ls : @list.List[Statement],
   loc~ : Location,
 ) -> Expr {
   match ls {
-    More(StmtExpr(expr), tail=rest) => SemiExprProp::collect_rev(rest, expr)
+    More(StmtExpr(expr), tail=rest) => Statement::collect_rev(rest, expr)
     rest => {
       let loc = match rest {
         Empty => loc
@@ -30,14 +30,14 @@ pub fn SemiExprProp::compact_rev(
         ) => loc
         More(StmtExpr(_), ..) => panic()
       }
-      SemiExprProp::collect_rev(rest, Expr::Unit(loc~, faked=true))
+      Statement::collect_rev(rest, Expr::Unit(loc~, faked=true))
     }
   }
 }
 
 ///|
-pub fn SemiExprProp::collect_rev(
-  rest : @list.List[SemiExprProp],
+pub fn Statement::collect_rev(
+  rest : @list.List[Statement],
   cont : Expr,
 ) -> Expr {
   match rest {
@@ -45,14 +45,14 @@ pub fn SemiExprProp::collect_rev(
     More(x, tail=xs) =>
       match x {
         StmtFunc(binder~, func~, loc~) =>
-          SemiExprProp::collect_letrec(
+          Statement::collect_letrec(
             loc~,
             @list.singleton((binder, func)),
             xs,
             cont,
           )
         StmtExpr(_) =>
-          SemiExprProp::collect_sequence(
+          Statement::collect_sequence(
             loc=loc_of_expression(cont),
             @list.empty(),
             rest,
@@ -82,26 +82,26 @@ pub fn SemiExprProp::collect_rev(
             }
             StmtExpr(_) | StmtFunc(..) => panic()
           }
-          SemiExprProp::collect_rev(xs, acc)
+          Statement::collect_rev(xs, acc)
         }
       }
   }
 }
 
 ///|
-fn SemiExprProp::collect_sequence(
+fn Statement::collect_sequence(
   loc~ : Location,
   acc : @list.List[Expr],
-  todo : @list.List[SemiExprProp],
+  todo : @list.List[Statement],
   cont : Expr,
 ) -> Expr {
   match todo {
     More(StmtExpr(expr), tail=rest) => {
       let loc = Location::merge(loc_of_expression(expr), loc)
-      SemiExprProp::collect_sequence(loc~, acc.add(expr), rest, cont)
+      Statement::collect_sequence(loc~, acc.add(expr), rest, cont)
     }
     _ =>
-      SemiExprProp::collect_rev(
+      Statement::collect_rev(
         todo,
         Expr::Sequence(exprs=acc, last_expr=cont, loc~),
       )
@@ -109,15 +109,15 @@ fn SemiExprProp::collect_sequence(
 }
 
 ///|
-pub fn SemiExprProp::collect_letrec(
+pub fn Statement::collect_letrec(
   loc~ : Location,
   acc : @list.List[(Binder, Func)],
-  todo : @list.List[SemiExprProp],
+  todo : @list.List[Statement],
   cont : Expr,
 ) -> Expr {
   match todo {
     More(StmtFunc(binder~, func~, loc~), tail=rest) =>
-      SemiExprProp::collect_letrec(loc~, acc.add((binder, func)), rest, cont)
+      Statement::collect_letrec(loc~, acc.add((binder, func)), rest, cont)
     _ => {
       let expr = match acc {
         More((name, func), tail=Empty) =>
@@ -134,7 +134,7 @@ pub fn SemiExprProp::collect_letrec(
             loc=Location::merge(loc, loc_of_expression(cont)),
           )
       }
-      SemiExprProp::collect_rev(todo, expr)
+      Statement::collect_rev(todo, expr)
     }
   }
 }

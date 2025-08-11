@@ -12,7 +12,7 @@ import(
 // Errors
 
 // Types and methods
-pub(all) enum SemiExprProp {
+pub(all) enum Statement {
   StmtExpr(@syntax.Expr)
   StmtLet(pat~ : @syntax.Pattern, expr~ : @syntax.Expr, loc~ : @basic.Location)
   StmtGuard(cond~ : @syntax.Expr, otherwise~ : @syntax.Expr?, loc~ : @basic.Location)
@@ -21,9 +21,9 @@ pub(all) enum SemiExprProp {
   StmtLetand(bindings~ : @list.List[(@syntax.Binder, @syntax.Type?, @syntax.Func)], loc~ : @basic.Location)
   StmtDefer(expr~ : @syntax.Expr, loc~ : @basic.Location)
 }
-fn SemiExprProp::collect_letrec(loc~ : @basic.Location, @list.List[(@syntax.Binder, @syntax.Func)], @list.List[Self], @syntax.Expr) -> @syntax.Expr
-fn SemiExprProp::collect_rev(@list.List[Self], @syntax.Expr) -> @syntax.Expr
-fn SemiExprProp::compact_rev(@list.List[Self], loc~ : @basic.Location) -> @syntax.Expr
+fn Statement::collect_letrec(loc~ : @basic.Location, @list.List[(@syntax.Binder, @syntax.Func)], @list.List[Self], @syntax.Expr) -> @syntax.Expr
+fn Statement::collect_rev(@list.List[Self], @syntax.Expr) -> @syntax.Expr
+fn Statement::compact_rev(@list.List[Self], loc~ : @basic.Location) -> @syntax.Expr
 
 // Type aliases
 

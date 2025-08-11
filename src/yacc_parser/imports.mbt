@@ -80,7 +80,7 @@ fnalias @syntax.(
 )
 
 ///|
-typealias @compact.SemiExprProp
+typealias @compact.Statement
 
 ///|
 typealias @list.List

@@ -68,6 +68,9 @@ priv suberror YYObj_List_FieldDecl_ List[FieldDecl]
 priv suberror YYObj_List_Parameter_ List[Parameter]
 
 ///|
+priv suberror YYObj_List_Statement_ List[Statement]
+
+///|
 priv suberror YYObj_List_ConstrDecl_ List[ConstrDecl]
 
 ///|
@@ -90,9 +93,6 @@ priv suberror YYObj_List_ArrowFnParam_ List[ArrowFnParam]
 
 ///|
 priv suberror YYObj_List_MultiArgCase_ List[MultiArgCase]
-
-///|
-priv suberror YYObj_List_SemiExprProp_ List[SemiExprProp]
 
 ///|
 priv suberror YYObj_List_TypeVarBinder_ List[TypeVarBinder]
@@ -244,6 +244,9 @@ priv suberror YYObj_LongIdent LongIdent
 priv suberror YYObj_Parameter Parameter
 
 ///|
+priv suberror YYObj_Statement Statement
+
+///|
 priv suberror YYObj_ConstrDecl ConstrDecl
 
 ///|
@@ -278,9 +281,6 @@ priv suberror YYObj_DotDotBinder DotDotBinder
 
 ///|
 priv suberror YYObj_MultiArgCase MultiArgCase
-
-///|
-priv suberror YYObj_SemiExprProp SemiExprProp
 
 ///|
 priv suberror YYObj_ArrayPatterns ArrayPatterns
@@ -363,13 +363,13 @@ priv suberror YYObj__List_FieldDef___TrailingMark_ (
 priv suberror YYObj__List_FieldPat___Bool_ (List[FieldPat], Bool)
 
 ///|
+priv suberror YYObj__List_Statement___Bool_ (List[Statement], Bool)
+
+///|
 priv suberror YYObj__List_MapPatElem___Bool_ (List[MapPatElem], Bool)
 
 ///|
 priv suberror YYObj__List_ConstrPatArg___Bool_ (List[ConstrPatArg], Bool)
-
-///|
-priv suberror YYObj__List_SemiExprProp___Bool_ (List[SemiExprProp], Bool)
 
 ///|
 priv suberror YYObj__List_LocalTypeDecl___Expr_ (List[LocalTypeDecl], Expr)
@@ -1754,7 +1754,7 @@ fn yy_action_51(
   } else {
     _args[_args.length() - 1].2
   }
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       let (binder, has_error) = _dollar2
@@ -2471,7 +2471,7 @@ fn yy_action_78(
   } else {
     _args[_args.length() - 1].2
   }
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       StmtGuard(
@@ -3020,7 +3020,7 @@ fn yy_action_99(
     _args[_args.length() - 1].2
   }
   guard _sub_action_1_result is YYObj_Binder(_dollar3)
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       let (return_type, error_type) = _dollar6
@@ -3307,9 +3307,9 @@ fn yy_action_109(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj_List_SemiExprProp_(_dollar1)
+  guard _args[0].0 is YYObj_List_Statement_(_dollar1)
   guard _args[1].0 is YYObj_Option_Bool_(_dollar2)
-  YYObj__List_SemiExprProp___Bool_(
+  YYObj__List_Statement___Bool_(
     {
       ()
       (_dollar1, _dollar2 is Some(_))
@@ -5598,7 +5598,7 @@ fn yy_action_193(
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_Expr(_dollar1)
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       StmtExpr(_dollar1)
@@ -5682,8 +5682,8 @@ fn yy_action_198(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj_SemiExprProp(_dollar1)
-  YYObj_List_SemiExprProp_(
+  guard _args[0].0 is YYObj_Statement(_dollar1)
+  YYObj_List_Statement_(
     {
       ()
       @list.singleton(_dollar1)
@@ -6475,7 +6475,7 @@ fn yy_action_227(
   } else {
     _args[_args.length() - 1].2
   }
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       StmtLetmut(
@@ -6765,7 +6765,7 @@ fn yy_action_238(
   } else {
     _args[_args.length() - 1].2
   }
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       StmtDefer(expr=_dollar2, loc=mk_loc((_symbol_start_pos, _end_pos)))
@@ -6792,7 +6792,7 @@ fn yy_action_239(
 
 // file:///./parser.mbty
 // 368|    "{" list_semis_rev(statement) "}" {
-// 369|    SemiExprProp::compact_rev($2, loc = mk_loc($sloc))
+// 369|    Statement::compact_rev($2, loc = mk_loc($sloc))
 // 370|  }
 
 ///|
@@ -6800,7 +6800,7 @@ fn yy_action_240(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  guard _args[1].0 is YYObj_List_SemiExprProp_(_dollar2)
+  guard _args[1].0 is YYObj_List_Statement_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -6810,7 +6810,7 @@ fn yy_action_240(
   YYObj_Expr(
     {
       ()
-      SemiExprProp::compact_rev(
+      Statement::compact_rev(
         _dollar2,
         loc=mk_loc((_symbol_start_pos, _end_pos)),
       )
@@ -7231,14 +7231,14 @@ fn yy_action_258(
 }
 
 // file:///./parser.mbty
-// 375|    list_semis_rev(statement) { (@list.empty(), SemiExprProp::compact_rev($1, loc = mk_loc($sloc))) }
+// 375|    list_semis_rev(statement) { (@list.empty(), Statement::compact_rev($1, loc = mk_loc($sloc))) }
 
 ///|
 fn yy_action_259(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj_List_SemiExprProp_(_dollar1)
+  guard _args[0].0 is YYObj_List_Statement_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -7250,7 +7250,7 @@ fn yy_action_259(
       ()
       (
         @list.empty(),
-        SemiExprProp::compact_rev(
+        Statement::compact_rev(
           _dollar1,
           loc=mk_loc((_symbol_start_pos, _end_pos)),
         ),
@@ -9019,7 +9019,7 @@ fn yy_action_319(
   } else {
     _args[_args.length() - 1].2
   }
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       StmtLetmut(
@@ -10210,8 +10210,8 @@ fn yy_action_360(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj_List_SemiExprProp_(_dollar1)
-  YYObj_List_SemiExprProp_(
+  guard _args[0].0 is YYObj_List_Statement_(_dollar1)
+  YYObj_List_Statement_(
     {
       ()
       _dollar1
@@ -10514,8 +10514,8 @@ fn yy_action_371(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj_SemiExprProp(_dollar1)
-  YYObj_SemiExprProp(
+  guard _args[0].0 is YYObj_Statement(_dollar1)
+  YYObj_Statement(
     {
       ()
       _dollar1
@@ -10561,7 +10561,7 @@ fn yy_action_372(
     _args[_args.length() - 1].2
   }
   guard _sub_action_1_result is YYObj_Binder(_dollar3)
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       let (return_type, error_type) = _dollar6
@@ -10609,7 +10609,7 @@ fn yy_action_373(
     _args[_args.length() - 1].2
   }
   guard _args[3].0 is YYObj_Expr(_dollar5)
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       let pat = match _dollar3 {
@@ -11899,7 +11899,7 @@ fn yy_action_419(
   } else {
     _args[_args.length() - 1].2
   }
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       let bindings = _dollar6.add((_dollar2, _dollar3, _dollar5))
@@ -12749,7 +12749,7 @@ fn yy_action_452(
     _args[_args.length() - 1].2
   }
   guard _args[5].0 is YYObj_Expr(_dollar5)
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       let pat = match _dollar3 {
@@ -13918,7 +13918,7 @@ fn yy_action_489(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  YYObj_List_SemiExprProp_(
+  YYObj_List_Statement_(
     {
       ()
       @list.empty()
@@ -16452,7 +16452,7 @@ fn yy_action_571(
 // file:///./parser.mbty
 // 912|    none_empty_list_semis_rev_with_trailing_info(statement) { 
 // 913|    let (ls, trailing) = $1
-// 914|    (SemiExprProp::compact_rev(ls, loc = mk_loc($sloc)), trailing)
+// 914|    (Statement::compact_rev(ls, loc = mk_loc($sloc)), trailing)
 // 915|  }
 
 ///|
@@ -16460,7 +16460,7 @@ fn yy_action_572(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj__List_SemiExprProp___Bool_(_dollar1)
+  guard _args[0].0 is YYObj__List_Statement___Bool_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -16472,7 +16472,7 @@ fn yy_action_572(
       ()
       let (ls, trailing) = _dollar1
       (
-        SemiExprProp::compact_rev(ls, loc=mk_loc((_symbol_start_pos, _end_pos))),
+        Statement::compact_rev(ls, loc=mk_loc((_symbol_start_pos, _end_pos))),
         trailing,
       )
     },
@@ -16613,7 +16613,7 @@ fn yy_action_575(
   } else {
     _args[_args.length() - 1].2
   }
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       let (binder, has_error) = _dollar2
@@ -17636,8 +17636,8 @@ fn yy_action_611(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj_List_SemiExprProp_(_dollar1)
-  YYObj_List_SemiExprProp_(
+  guard _args[0].0 is YYObj_List_Statement_(_dollar1)
+  YYObj_List_Statement_(
     {
       ()
       _dollar1
@@ -19124,7 +19124,7 @@ fn yy_action_664(
   } else {
     _args[_args.length() - 1].2
   }
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       StmtGuard(
@@ -22014,9 +22014,9 @@ fn yy_action_756(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  guard _args[0].0 is YYObj_List_SemiExprProp_(_dollar1)
-  guard _args[2].0 is YYObj_SemiExprProp(_dollar3)
-  YYObj_List_SemiExprProp_(
+  guard _args[0].0 is YYObj_List_Statement_(_dollar1)
+  guard _args[2].0 is YYObj_Statement(_dollar3)
+  YYObj_List_Statement_(
     {
       ()
       _dollar1.add(_dollar3)
@@ -22265,7 +22265,7 @@ fn yy_action_766(
   } else {
     _args[_args.length() - 1].2
   }
-  YYObj_SemiExprProp(
+  YYObj_Statement(
     {
       ()
       let bindings = _dollar6.add((_dollar2, _dollar3, _dollar5))

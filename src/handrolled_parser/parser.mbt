@@ -4218,7 +4218,7 @@ fn State::parse_block_expr_with_local_types(
     (@list.from_array(local_types), @list.from_array(stmts))
   })
   let loc = self.loc_start_with(spos)
-  let expr = SemiExprProp::compact_rev(stmts.rev(), loc~) // FIXME: remove rev
+  let expr = Statement::compact_rev(stmts.rev(), loc~) // FIXME: remove rev
   (local_types, expr)
 }
 
@@ -4232,10 +4232,10 @@ fn State::parse_block_expr(self : Self) -> @syntax.Expr {
     left=TK_LBRACE,
     right=TK_RBRACE,
     delim=TK_SEMI,
-    fn(s) -> SemiExprProp { s.parse_stmt() },
+    fn(s) -> Statement { s.parse_stmt() },
   )
   let loc = self.loc_start_with(loc_start)
-  SemiExprProp::compact_rev(@list.from_array(stmts).rev(), loc~)
+  Statement::compact_rev(@list.from_array(stmts).rev(), loc~)
 }
 
 ///|
@@ -4304,9 +4304,9 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
 }
 
 ///|
-fn State::parse_stmt(self : Self) -> SemiExprProp {
+fn State::parse_stmt(self : Self) -> Statement {
   if self.mode is Panic(loc~, ..) {
-    return SemiExprProp::StmtExpr(Hole(loc~, kind=Synthesized))
+    return Statement::StmtExpr(Hole(loc~, kind=Synthesized))
   }
   match self.peek_token() {
     LET => {
@@ -4407,7 +4407,7 @@ fn State::handle_unexpected_expr_or_statement(
       | StmtDefer(loc~, ..)
       | StmtGuard(loc~, ..) => loc
     }
-    SemiExprProp::compact_rev(@list.of([stmt]), loc~)
+    Statement::compact_rev(@list.of([stmt]), loc~)
   }
 
   let (actual, expr) = match token {

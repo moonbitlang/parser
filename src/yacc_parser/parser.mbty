@@ -366,13 +366,13 @@ extern_fun_header -> (StringLiteral, FunDecl)
 
 block_expr -> Expr
   : "{" list_semis_rev(statement) "}" {
-    SemiExprProp::compact_rev($2, loc = mk_loc($sloc))
+    Statement::compact_rev($2, loc = mk_loc($sloc))
   }
   ;
 
 local_types_and_stmts -> (List[LocalTypeDecl], Expr)
   : local_type_decl { (@list.singleton($1), Expr::Unit(loc = mk_loc($sloc), faked = true)) }
-  | list_semis_rev(statement) { (@list.empty(), SemiExprProp::compact_rev($1, loc = mk_loc($sloc))) }
+  | list_semis_rev(statement) { (@list.empty(), Statement::compact_rev($1, loc = mk_loc($sloc))) }
   | local_type_decl SEMI local_types_and_stmts { ($3.0.add($1), $3.1) }
   ;
 
@@ -911,7 +911,7 @@ qual_ident_ty -> LongIdent
 %inline semi_expr_semi_opt -> (Expr, Bool)
   : none_empty_list_semis_rev_with_trailing_info(statement) { 
     let (ls, trailing) = $1
-    (SemiExprProp::compact_rev(ls, loc = mk_loc($sloc)), trailing)
+    (Statement::compact_rev(ls, loc = mk_loc($sloc)), trailing)
   }
   ;
 
@@ -937,7 +937,7 @@ and_func -> (Binder, Type?, Func)
   : "and" binder opt_annot "=" letand_func { ($2, $3, $5) }
   ;
 
-statement -> SemiExprProp
+statement -> Statement
   : "let" pattern opt_annot "=" expr { 
     let pat = match $3 {
       None => $2
@@ -983,7 +983,7 @@ statement -> SemiExprProp
   | expr_statement { StmtExpr($1) }
   ;
 
-guard_statement -> SemiExprProp
+guard_statement -> Statement
   : "guard" infix_expr { StmtGuard(cond = $2, otherwise = None, loc = mk_loc($sloc)) }
   | "guard" infix_expr "else" block_expr { StmtGuard(cond = $2, otherwise = Some($4), loc = mk_loc($sloc)) }
   ;
