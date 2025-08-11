@@ -1,12 +1,5 @@
 ///|
-typealias @tokens.Token
+typealias @tokens.(Token, Comment, CommentKind, InterpElem, InterpSource)
 
 ///|
-typealias @syntax_types.(
-  Position,
-  Location,
-  Comment,
-  CommentKind,
-  InterpElem,
-  InterpSource
-)
+typealias @basic.(Position, Location)

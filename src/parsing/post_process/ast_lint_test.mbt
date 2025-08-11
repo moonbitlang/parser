@@ -16,7 +16,7 @@ test "map fn init to top expr" {
     error_type: @syntax.NoErrorType,
     vis: @syntax.Default,
     attrs: @list.of([]),
-    doc: @syntax_types.DocString::empty(),
+    doc: @syntax.DocString::empty(),
   }
   let func_def = @syntax.Impl::TopFuncDef(
     fun_decl~,

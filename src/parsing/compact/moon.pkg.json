@@ -1,7 +1,7 @@
 {
     "import": [
-      "moonbitlang/parser/parsing/syntax_types",
-      "moonbitlang/parser/parsing/syntax"
+      "moonbitlang/parser/parsing/syntax",
+      "moonbitlang/parser/basic"
     ],
     "pre-build": [
       // {

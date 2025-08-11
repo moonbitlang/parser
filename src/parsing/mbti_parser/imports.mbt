@@ -2,15 +2,13 @@
 typealias @tokens.(Token, TokenKind)
 
 ///|
-typealias @syntax_types.(
-  Location,
-  Comment,
-  CharLiteral,
-  StringLiteral,
-  InterpLiteral,
-  DocString,
-  Attribute
-)
+typealias @basic.(Location, Position)
+
+///|
+typealias @tokens.(Comment, CharLiteral, StringLiteral, InterpLiteral)
+
+///|
+typealias @syntax.(DocString, Attribute)
 
 ///|
 typealias @mbti_ast.(

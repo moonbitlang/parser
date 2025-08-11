@@ -1,5 +1,5 @@
 ///|
-pub typealias @syntax_types.(Position, Location)
+typealias @basic.Location
 
 ///|
 pub typealias @syntax.(

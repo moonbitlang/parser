@@ -12,7 +12,7 @@ test "parse core/cmp/cmp.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -27,7 +27,7 @@ test "parse core/bench/bench.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -42,7 +42,7 @@ test "parse core/abort/abort.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -57,7 +57,7 @@ test "parse core/unit/unit.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -72,7 +72,7 @@ test "parse core/uint64/uint64.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -87,7 +87,7 @@ test "parse core/strconv/strconv.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -102,7 +102,7 @@ test "parse core/ref/ref.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -117,7 +117,7 @@ test "parse core/result/result.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -132,7 +132,7 @@ test "parse core/sorted_set/sorted_set.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -147,7 +147,7 @@ test "parse core/bigint/bigint.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -162,7 +162,7 @@ test "parse core/uint/uint.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -177,7 +177,7 @@ test "parse core/priority_queue/priority_queue.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -192,7 +192,7 @@ test "parse core/char/char.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -207,7 +207,7 @@ test "parse core/int16/int16.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -222,7 +222,7 @@ test "parse core/test/test.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -237,7 +237,7 @@ test "parse core/bytes/bytes.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -252,7 +252,7 @@ test "parse core/hashset/hashset.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -267,7 +267,7 @@ test "parse core/tuple/tuple.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -282,7 +282,7 @@ test "parse core/array/array.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -297,7 +297,7 @@ test "parse core/immut/sorted_set/sorted_set.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -312,7 +312,7 @@ test "parse core/immut/priority_queue/priority_queue.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -327,7 +327,7 @@ test "parse core/immut/hashset/hashset.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -342,7 +342,7 @@ test "parse core/immut/array/array.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -357,7 +357,7 @@ test "parse core/immut/internal/sparse_array/sparse_array.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -372,7 +372,7 @@ test "parse core/immut/internal/path/path.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -387,7 +387,7 @@ test "parse core/immut/sorted_map/sorted_map.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -402,7 +402,7 @@ test "parse core/immut/hashmap/hashmap.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -417,7 +417,7 @@ test "parse core/immut/list/list.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -432,7 +432,7 @@ test "parse core/sorted_map/sorted_map.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -447,7 +447,7 @@ test "parse core/option/option.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -462,7 +462,7 @@ test "parse core/math/math.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -477,7 +477,7 @@ test "parse core/hashmap/hashmap.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -492,7 +492,7 @@ test "parse core/env/env.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -507,7 +507,7 @@ test "parse core/deque/deque.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -522,7 +522,7 @@ test "parse core/int/int.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -537,7 +537,7 @@ test "parse core/json/json.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -552,7 +552,7 @@ test "parse core/float/float.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -567,7 +567,7 @@ test "parse core/list/list.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -582,7 +582,7 @@ test "parse core/rational/rational.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -597,7 +597,7 @@ test "parse core/bool/bool.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -612,7 +612,7 @@ test "parse core/queue/queue.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -627,7 +627,7 @@ test "parse core/byte/byte.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -642,7 +642,7 @@ test "parse core/double/internal/ryu/ryu.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -657,7 +657,7 @@ test "parse core/double/double.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -672,7 +672,7 @@ test "parse core/string/string.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -687,7 +687,7 @@ test "parse core/set/set.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -702,7 +702,7 @@ test "parse core/prelude/prelude.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -719,7 +719,7 @@ test "parse core/random/internal/random_source/random_source.mbti" (
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -734,7 +734,7 @@ test "parse core/random/random.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -749,7 +749,7 @@ test "parse core/int64/int64.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -764,7 +764,7 @@ test "parse core/uint16/uint16.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -779,7 +779,7 @@ test "parse core/error/error.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -794,7 +794,7 @@ test "parse core/builtin/builtin.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -809,7 +809,7 @@ test "parse core/coverage/coverage.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -824,7 +824,7 @@ test "parse core/buffer/buffer.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -839,7 +839,7 @@ test "parse core/quickcheck/quickcheck.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")
@@ -854,7 +854,7 @@ test "parse core/quickcheck/splitmix/splitmix.mbti" (it : @test.T) {
     lex_result.tokens.filter(fn(triple) {
       not(triple.0 is (NEWLINE | COMMENT(_)))
     }),
-    initial_pos=@syntax.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
+    initial_pos=@basic.Position::{ fname: path, lnum: 1, bol: 0, cnum: 0 },
   )
   it.writeln(mbti.to_json().stringify(indent=2))
   it.snapshot(filename=compress_path(path) + ".json")

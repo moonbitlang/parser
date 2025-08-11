@@ -3,8 +3,8 @@ package "moonbitlang/parser/parsing/mbti_ast"
 
 import(
   "moonbitlang/core/list"
+  "moonbitlang/parser/basic"
   "moonbitlang/parser/parsing/syntax"
-  "moonbitlang/parser/parsing/syntax_types"
 )
 
 // Values
@@ -15,7 +15,7 @@ import(
 pub(all) enum AliasSig {
   TypeAlias(name~ : Name, type_params~ : @list.List[TypeParamNoConstraints], type_~ : @syntax.Type, vis~ : @syntax.Visibility)
   TraitAlias(name~ : Name, trait_name~ : QualifiedName, vis~ : @syntax.Visibility)
-  FnAlias(name~ : Name, type_name~ : QualifiedName, loc~ : @syntax_types.Location)
+  FnAlias(name~ : Name, type_name~ : QualifiedName, loc~ : @basic.Location)
 }
 impl ToJson for AliasSig
 
@@ -45,13 +45,13 @@ impl ToJson for ImplSig
 pub(all) struct Mbti {
   package_name : String
   imports : @list.List[PackageImport]
-  sigs : @list.List[(Sig, @syntax_types.Location)]
+  sigs : @list.List[(Sig, @basic.Location)]
 }
 impl ToJson for Mbti
 
 pub(all) struct Name {
   name : String
-  loc : @syntax_types.Location
+  loc : @basic.Location
 }
 impl ToJson for Name
 
@@ -72,7 +72,7 @@ impl ToJson for Parameter
 
 pub(all) struct QualifiedName {
   name : @syntax.LongIdent
-  loc : @syntax_types.Location
+  loc : @basic.Location
 }
 impl ToJson for QualifiedName
 
@@ -111,7 +111,7 @@ impl ToJson for TraitSig
 
 pub(all) enum TypeParamNoConstraints {
   Name(Name)
-  Underscore(@syntax_types.Location)
+  Underscore(@basic.Location)
 }
 impl ToJson for TypeParamNoConstraints
 
@@ -153,10 +153,6 @@ pub typealias @syntax.FieldDecl as FieldDecl
 pub typealias @syntax.FieldName as FieldName
 
 pub typealias @syntax.Label as Label
-
-pub typealias @syntax_types.Location as Location
-
-pub typealias @syntax_types.Position as Position
 
 pub typealias @syntax.LongIdent as QualifiedIdent
 

@@ -3,19 +3,19 @@ package "moonbitlang/parser/parsing/hand_parser"
 
 import(
   "moonbitlang/core/list"
+  "moonbitlang/parser/basic"
   "moonbitlang/parser/lexing/tokens"
   "moonbitlang/parser/parsing/syntax"
-  "moonbitlang/parser/parsing/syntax_types"
 )
 
 // Values
-fn parse(Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)]) -> (@list.List[@syntax.Impl], Array[Report])
+fn parse(Array[(@tokens.Token, @basic.Position, @basic.Position)]) -> (@list.List[@syntax.Impl], Array[Report])
 
 // Errors
 
 // Types and methods
 pub(all) struct Report {
-  loc : @syntax_types.Location
+  loc : @basic.Location
   msg : String
 }
 impl Show for Report

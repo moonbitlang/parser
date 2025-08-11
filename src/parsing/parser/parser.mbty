@@ -1,6 +1,6 @@
 %derive<Show> Token
 %derive<Eq> TokenKind
-%position<@syntax_types.Position>
+%position<Position>
 %derive<Show> ParseError
 
 %start structure
@@ -1094,7 +1094,7 @@ try_expr -> Expr
       has_try = true,
       try_loc = mk_loc($loc($1)),
       catch_loc~,
-      else_loc = @syntax_types.Location::{ start: @syntax_types.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }, end: @syntax_types.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 } },
+      else_loc = @basic.Location::{ start: @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }, end: @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 } },
       loc = mk_loc($sloc)
     )
   }
@@ -1237,7 +1237,7 @@ simple_try_expr -> Expr
       has_try = false,
       try_loc = mk_loc($loc($1)),
       catch_loc~,
-      else_loc = @syntax_types.Location::{ start: @syntax_types.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }, end: @syntax_types.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 } },
+      else_loc = Location::{ start: Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }, end: Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 } },
       loc = mk_loc($sloc)
     )
   }

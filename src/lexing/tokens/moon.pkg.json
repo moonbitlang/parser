@@ -7,6 +7,6 @@
     }
   ],
   "import": [
-    "moonbitlang/parser/parsing/syntax_types"
+    "moonbitlang/parser/basic"
   ]
 }

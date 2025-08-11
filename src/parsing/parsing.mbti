@@ -3,13 +3,14 @@ package "moonbitlang/parser/parsing"
 
 import(
   "moonbitlang/core/list"
+  "moonbitlang/parser/basic"
+  "moonbitlang/parser/lexing/tokens"
   "moonbitlang/parser/parsing/syntax"
-  "moonbitlang/parser/parsing/syntax_types"
   "moonbitlang/x/fs"
 )
 
 // Values
-fn attach_docstrings(Array[@list.List[(@syntax_types.Location, @syntax_types.Comment)]], @list.List[@syntax.Impl]) -> Unit
+fn attach_docstrings(Array[@list.List[(@basic.Location, @tokens.Comment)]], @list.List[@syntax.Impl]) -> Unit
 
 fn parse_bytes(Bytes, name? : String, config~ : Parser) -> @list.List[@syntax.Impl]
 

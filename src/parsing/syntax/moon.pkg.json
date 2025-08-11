@@ -1,6 +1,7 @@
 {
   "import": [
-    "moonbitlang/parser/parsing/syntax_types"
+    "moonbitlang/parser/lexing/tokens",
+    "moonbitlang/parser/basic"
   ],
-  "warn-list": "-28"
+  "warn-list": "-28",
 }

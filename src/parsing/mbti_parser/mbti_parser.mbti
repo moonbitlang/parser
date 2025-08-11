@@ -2,18 +2,18 @@
 package "moonbitlang/parser/parsing/mbti_parser"
 
 import(
+  "moonbitlang/parser/basic"
   "moonbitlang/parser/lexing/tokens"
   "moonbitlang/parser/parsing/mbti_ast"
-  "moonbitlang/parser/parsing/syntax_types"
 )
 
 // Values
-fn mbti(Array[(@tokens.Token, @syntax_types.Position, @syntax_types.Position)], initial_pos? : @syntax_types.Position) -> @mbti_ast.Mbti raise ParseError
+fn mbti(Array[(@tokens.Token, @basic.Position, @basic.Position)], initial_pos? : @basic.Position) -> @mbti_ast.Mbti raise ParseError
 
 // Errors
 pub suberror ParseError {
-  UnexpectedToken(@tokens.Token, (@syntax_types.Position, @syntax_types.Position), Array[@tokens.TokenKind])
-  UnexpectedEndOfInput(@syntax_types.Position, Array[@tokens.TokenKind])
+  UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
+  UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
 }
 impl Show for ParseError
 

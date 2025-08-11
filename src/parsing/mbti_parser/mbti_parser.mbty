@@ -1,4 +1,4 @@
-%position<@syntax_types.Position>
+%position<@basic.Position>
 %derive<Show> ParseError
 %start mbti
 

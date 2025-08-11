@@ -3,7 +3,8 @@
         "moonbitlang/parser/parsing/syntax",
         "moonbitlang/parser/parsing/hand_parser",
         "moonbitlang/parser/lexing/lexer",
+        "moonbitlang/parser/lexing/tokens",
         "moonbitlang/x/fs",
-        "moonbitlang/parser/parsing/syntax_types"
+        "moonbitlang/parser/basic"
     ]
 }

@@ -11,6 +11,28 @@ let show_loc : Ref[Bool]
 // Errors
 
 // Types and methods
+pub(all) struct Location {
+  start : Position
+  end : Position
+}
+fn Location::merge(Self, Self) -> Self
+fn Location::trim_first_char(Self) -> Self
+fn Location::trim_last_char(Self) -> Self
+impl Eq for Location
+impl Show for Location
+impl ToJson for Location
+
+pub(all) struct Position {
+  fname : String
+  lnum : Int
+  bol : Int
+  cnum : Int
+}
+fn Position::column(Self) -> Int
+impl Compare for Position
+impl Eq for Position
+impl Show for Position
+impl ToJson for Position
 
 // Type aliases
 

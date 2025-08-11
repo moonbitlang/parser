@@ -1,8 +1,8 @@
 ///| Import types from ast_types package
-typealias @syntax_types.(Location, Position, DocString)
+typealias @basic.(Location, Position)
 
 ///| Import AST types 
-typealias @syntax.Impls
+typealias @syntax.(Impls, DocString)
 
 ///|
 typealias @tokens.(Token, TokenKind)

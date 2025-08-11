@@ -1,2 +1,2 @@
 ///|
-typealias @syntax_types.(Comment, CharLiteral, StringLiteral, InterpLiteral)
+typealias @basic.Location

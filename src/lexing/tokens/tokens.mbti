@@ -2,7 +2,7 @@
 package "moonbitlang/parser/lexing/tokens"
 
 import(
-  "moonbitlang/parser/parsing/syntax_types"
+  "moonbitlang/parser/basic"
 )
 
 // Values
@@ -10,6 +10,36 @@ import(
 // Errors
 
 // Types and methods
+pub(all) struct Comment {
+  content : String
+  kind : CommentKind
+  mut consumed_by_docstring : Bool
+}
+impl Eq for Comment
+impl Show for Comment
+
+pub(all) enum CommentKind {
+  InlineTrailing
+  Ownline(leading_blank_line~ : Bool, trailing_blank_line~ : Bool)
+}
+impl Eq for CommentKind
+impl Show for CommentKind
+
+pub(all) enum InterpElem {
+  InterpLit(repr~ : String, loc~ : @basic.Location)
+  InterpSource(InterpSource)
+}
+impl Eq for InterpElem
+impl Show for InterpElem
+
+pub(all) struct InterpSource {
+  source : String
+  loc : @basic.Location
+}
+impl Eq for InterpSource
+impl Show for InterpSource
+impl ToJson for InterpSource
+
 pub(all) enum Token {
   CHAR(String)
   INT(String)
@@ -19,13 +49,13 @@ pub(all) enum Token {
   DOUBLE(String)
   STRING(String)
   MULTILINE_STRING(String)
-  MULTILINE_INTERP(Array[@syntax_types.InterpElem])
-  INTERP(Array[@syntax_types.InterpElem])
+  MULTILINE_INTERP(Array[InterpElem])
+  INTERP(Array[InterpElem])
   ATTRIBUTE((String, String?, String))
   LIDENT(String)
   UIDENT(String)
   POST_LABEL(String)
-  COMMENT(@syntax_types.Comment)
+  COMMENT(Comment)
   NEWLINE
   INFIX1(String)
   INFIX2(String)
@@ -229,6 +259,15 @@ impl Eq for TokenKind
 impl Show for TokenKind
 
 // Type aliases
+pub typealias String as ByteLiteral
+
+pub typealias String as BytesLiteral
+
+pub typealias String as CharLiteral
+
+pub typealias Array[InterpElem] as InterpLiteral
+
+pub typealias String as StringLiteral
 
 // Traits
 

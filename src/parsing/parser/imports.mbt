@@ -1,11 +1,8 @@
 ///|
-typealias @syntax_types.(
-  Location,
-  Comment,
-  CharLiteral,
-  StringLiteral,
-  InterpLiteral
-)
+typealias @basic.(Position, Location)
+
+///|
+typealias @tokens.(Comment, CharLiteral, StringLiteral, InterpLiteral)
 
 ///|
 typealias @tokens.(Token, TokenKind)

@@ -53,7 +53,7 @@ pub fn parse(source : String) -> (String, String) {
 ///|
 fn lex(
   utf8 : Bytes,
-) -> Array[(@tokens.Token, @syntax.Position, @syntax.Position)] {
+) -> Array[(@tokens.Token, @basic.Position, @basic.Position)] {
   @lexer.tokens_from_bytes(utf8, comment=false).tokens
 }
 

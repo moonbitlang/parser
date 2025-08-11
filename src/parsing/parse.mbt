@@ -1,11 +1,14 @@
 ///|
-typealias @syntax_types.(Location, Comment)
+typealias @basic.Location
+
+///|
+typealias @tokens.Comment
 
 ///|
 typealias @list.T as List
 
 ///|
-typealias @syntax.Position
+typealias @basic.Position
 
 ///|
 pub(all) enum Parser {
@@ -31,7 +34,7 @@ pub fn attach_docstrings(
   }
 
   fn make_doc(
-    comments : List[(@syntax_types.Location, @syntax_types.Comment)],
+    comments : List[(@basic.Location, @tokens.Comment)],
   ) -> @syntax.DocString {
     {
       content: comments.map(p => {

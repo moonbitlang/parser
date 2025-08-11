@@ -1,13 +1,11 @@
 ///|
-pub typealias @syntax_types.(
-  Position,
-  Location,
+typealias @tokens.(
   ByteLiteral,
   BytesLiteral,
   CharLiteral,
   StringLiteral,
-  Attribute,
-  DocString,
-  InterpSource,
-  AttributeExpr
+  InterpSource
 )
+
+///|
+typealias @basic.(Position, Location)

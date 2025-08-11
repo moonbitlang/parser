@@ -4,6 +4,6 @@
         "moonbitlang/parser/basic"
    ],
    "test-import": [
-      "moonbitlang/parser/parsing/syntax_types"
+      "moonbitlang/parser/parsing/syntax"
    ]
 }

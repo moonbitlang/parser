@@ -1,6 +1,6 @@
 ///|
-let dummy_loc : @syntax_types.Location = {
-  let pos = @syntax_types.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }
+let dummy_loc : @basic.Location = {
+  let pos = @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }
   { start: pos, end: pos }
 }
 
@@ -8,25 +8,25 @@ let dummy_loc : @syntax_types.Location = {
 let null : Json = Json::null()
 
 ///|
-let dummy_string_literal : @syntax_types.StringLiteral = "test_string"
+let dummy_string_literal : @tokens.StringLiteral = "test_string"
 
 ///|
-let dummy_byte_literal : @syntax_types.ByteLiteral = "b'A'"
+let dummy_byte_literal : @tokens.ByteLiteral = "b'A'"
 
 ///|
-let dummy_bytes_literal : @syntax_types.BytesLiteral = "b\"ABC\""
+let dummy_bytes_literal : @tokens.BytesLiteral = "b\"ABC\""
 
 ///|
-let dummy_char_literal : @syntax_types.CharLiteral = "'A'"
+let dummy_char_literal : @tokens.CharLiteral = "'A'"
 
 ///|
-let dummy_docstring : @syntax_types.DocString = {
+let dummy_docstring : @syntax.DocString = {
   content: @list.of(["Test documentation"]),
   loc: dummy_loc,
 }
 
 ///|
-let dummy_attribute : @syntax_types.Attribute = {
+let dummy_attribute : @syntax.Attribute = {
   loc: dummy_loc,
   raw: "test_attr",
   parsed: None,
@@ -1128,7 +1128,7 @@ test "expr basic types to_json" {
     "loc": null,
   })
   @json.inspect(
-    @syntax.Apply(
+    @syntax.Expr::Apply(
       func=unit_expr,
       args=@list.of([argument]),
       attr=@syntax.NoAttr,

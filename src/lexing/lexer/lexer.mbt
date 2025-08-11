@@ -940,7 +940,7 @@ fn lex_string(
   let interps = []
   fn add_literal(repr : String, start : Int, end : Int) -> Unit {
     interps.push(
-      @syntax_types.InterpElem::InterpLit(repr~, loc=Location::{
+      @tokens.InterpElem::InterpLit(repr~, loc=Location::{
         start: env.make_pos(start),
         end: env.make_pos(end),
       }),
@@ -1084,10 +1084,7 @@ fn lex_string(
           } else {
             let source = string_repr_buf.to_string()
             interps.push(
-              @syntax_types.InterpElem::InterpSource(InterpSource::{
-                source,
-                loc,
-              }),
+              @tokens.InterpElem::InterpSource(InterpSource::{ source, loc }),
             )
           }
           string_repr_buf.reset()
@@ -1153,7 +1150,7 @@ fn lex_string(
   let rest = process_string(input)
   if interps.length() == 0 {
     let interps : Array[InterpElem] = [
-      @syntax_types.InterpElem::InterpLit(repr="", loc=Location::{
+      @tokens.InterpElem::InterpLit(repr="", loc=Location::{
         start: env.make_pos(start_pos),
         end: env.make_pos(calc_offset(base~, rest)),
       }),
