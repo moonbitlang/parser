@@ -126,12 +126,19 @@ pub(all) struct FieldDecl {
 
 ///|
 pub(all) enum TypeDesc {
+  /// `type T`
   Abstract
+  /// `extern type T`
   Extern
+  /// `type TypeName Type`
   Newtype(Type)
+  /// `suberror`
   Error(ExceptionDecl)
+  /// `enum T { C1; C2 }`
   Variant(@list.List[ConstrDecl])
+  /// `struct T { field1: T1; field2: T2 }`
   Record(@list.List[FieldDecl])
+  /// `struct T (T1,T2)`
   TupleStruct(@list.List[Type])
   Alias(Type)
 }
@@ -272,7 +279,9 @@ pub(all) struct MultiArgCase {
 
 ///|
 pub(all) enum SpreadableElem {
+  /// `expr`
   Regular(Expr)
+  /// `..expr`
   Spread(expr~ : Expr, loc~ : Location)
 }
 
@@ -336,19 +345,25 @@ pub(all) enum MultilineStringElem {
 }
 
 ///|
-// checked!
 pub(all) enum Expr {
+  /// f(args)
   Apply(
     func~ : Expr,
     args~ : @list.List[Argument],
     attr~ : ApplyAttr,
     loc~ : Location
   )
+  /// e1 + e2
   Infix(op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : Location)
+  /// -e
   Unary(op~ : Var, expr~ : Expr, loc~ : Location)
+  /// [e1, e2, e3]
   Array(exprs~ : @list.List[Expr], loc~ : Location)
+  /// [..arr1, e1, ..arr2, e2]
   ArraySpread(elems~ : @list.List[SpreadableElem], loc~ : Location)
+  /// e1[e2]
   ArrayGet(array~ : Expr, index~ : Expr, loc~ : Location)
+  /// e1[e2:e3]
   ArrayGetSlice(
     array~ : Expr,
     start_index~ : Expr?,
@@ -356,7 +371,9 @@ pub(all) enum Expr {
     index_loc~ : Location,
     loc~ : Location
   )
+  /// e1[i] = e2
   ArraySet(array~ : Expr, index~ : Expr, value~ : Expr, loc~ : Location)
+  /// e1[i] += e2
   ArrayAugmentedSet(
     op~ : Var,
     array~ : Expr,
@@ -365,10 +382,18 @@ pub(all) enum Expr {
     loc~ : Location
   )
   Constant(c~ : Constant, loc~ : Location)
+  /// ```skip
+  /// #| multiline
+  /// #| string
+  /// ```
   MultilineString(elems~ : @list.List[MultilineStringElem], loc~ : Location)
+  /// `"text \{e1}"`
   Interp(elems~ : @list.List[InterpElem], loc~ : Location)
+  /// `(expr : Type)`
   Constraint(expr~ : Expr, ty~ : Type, loc~ : Location)
+  /// `Constructor(e1, e2, e3)`
   Constr(constr~ : Constructor, loc~ : Location)
+  /// `while e1 { e2 } else { e3 }`
   While(
     loop_cond~ : Expr,
     loop_body~ : Expr,
@@ -376,36 +401,55 @@ pub(all) enum Expr {
     label~ : Label?,
     loc~ : Location
   )
+  /// `fn(args){ expr }` or `(args) => expr`
   Function(func~ : Func, loc~ : Location)
+  /// `id`
   Ident(id~ : Var, loc~ : Location)
+  /// `if e1 { e2 } else { e3 }`
   If(cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : Location)
+  /// `guard e1 else {e2}; e3`
   Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : Location)
+  /// `expr is pattern`
   Is(expr~ : Expr, pat~ : Pattern, loc~ : Location)
+  /// `defer e1; e2`
   Defer(expr~ : Expr, body~ : Expr, loc~ : Location)
+  /// `fn local(args){ e1 }; e2`
   LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : Location)
+  /// `fn f(args){ e1 }; fn g(args){ e2 }; e3`, 
+  /// where `f` and `g` are mutually recursive functions.
   LetRec(bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : Location)
   LetAnd(
     bindings~ : @list.List[(Binder, Type?, Func)],
     body~ : Expr,
     loc~ : Location
   )
+  /// `let pattern = e1; e2`
   Let(pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : Location)
+  /// `e1; e2`
   Sequence(exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : Location)
+  /// `(e1, e2, e3)`
   Tuple(exprs~ : @list.List[Expr], loc~ : Location)
+  /// `TypeName::{ field1: e1, field2: e2 }`
+  /// The `trailing` field is used to determine whether the source has a trailing separator.
+  /// If the trailing separator is SEMI, the AST is invalid.
   Record(
     type_name~ : TypeName?,
     fields~ : @list.List[FieldDef],
     trailing~ : TrailingMark,
     loc~ : Location
   )
+  /// `{ ..record, field1: expr, field2: expr }`
   RecordUpdate(
     type_name~ : TypeName?,
     record~ : Expr,
     fields~ : @list.List[FieldDef],
     loc~ : Location
   )
+  /// `record.field`
   Field(record~ : Expr, accessor~ : Accessor, loc~ : Location)
+  /// `TypeName::method`
   Method(type_name~ : TypeName, method_name~ : Label, loc~ : Location)
+  /// `self.method(args)`
   DotApply(
     self~ : Expr,
     method_name~ : Label,
@@ -414,7 +458,9 @@ pub(all) enum Expr {
     attr~ : ApplyAttr,
     loc~ : Location
   )
+  /// `expr as Trait`
   As(expr~ : Expr, trait_~ : TypeName, loc~ : Location)
+  /// `record.field = expr`
   Mutate(
     record~ : Expr,
     accessor~ : Accessor,
@@ -422,6 +468,7 @@ pub(all) enum Expr {
     augmented_by~ : Var?,
     loc~ : Location
   )
+  /// `match e0 { p1 => e1; p2 => e2 }`
   Match(
     expr~ : Expr,
     cases~ : @list.List[Case],
@@ -429,6 +476,7 @@ pub(all) enum Expr {
     using_~ : Label?,
     loc~ : Location
   )
+  /// `let mut binder : Type = expr`
   LetMut(
     binder~ : Binder,
     ty~ : Type?,
@@ -436,14 +484,26 @@ pub(all) enum Expr {
     body~ : Expr,
     loc~ : Location
   )
+  /// `lhs |> rhs`
+  /// The rhs is restricted to `f`, `f(args)`, `_.method(args)`, `Constructor`, or `Constructor(args)`.
   Pipe(lhs~ : Expr, rhs~ : Expr, loc~ : Location)
+  /// `n = e` or `n += e`
   Assign(var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : Location)
+  /// `_`
+  /// This expression is only allowed in partial application.
   Hole(loc~ : Location, kind~ : Hole)
+  /// `return expr`
   Return(return_value~ : Expr?, loc~ : Location)
+  /// `raise expr`
   Raise(err_value~ : Expr, loc~ : Location)
+  /// `()`
+  /// If `faked` is true, it means it was inserted by the parser.
   Unit(loc~ : Location, faked~ : Bool)
+  /// `break expr`
   Break(arg~ : Expr?, label~ : Label?, loc~ : Location)
+  /// `continue e1, e2, e3`
   Continue(args~ : @list.List[Expr], label~ : Label?, loc~ : Location)
+  /// `loop args { ps1 => e1; ps2 => e2 }`
   Loop(
     args~ : @list.List[Expr],
     body~ : @list.List[MultiArgCase],
@@ -451,6 +511,7 @@ pub(all) enum Expr {
     loop_loc~ : Location,
     loc~ : Location
   )
+  /// `for binders; condition; continue_block { body } else { expr }`
   For(
     binders~ : @list.List[(Binder, Expr)],
     condition~ : Expr?,
@@ -460,6 +521,7 @@ pub(all) enum Expr {
     label~ : Label?,
     loc~ : Location
   )
+  /// `for b1,b2 in e1 { e2 }`
   ForEach(
     binders~ : @list.List[Binder?],
     expr~ : Expr,
@@ -468,6 +530,7 @@ pub(all) enum Expr {
     label~ : Label?,
     loc~ : Location
   )
+  /// `try e0 catch { p1 => e1 } noraise { p2 => e2 }` or `e0 catch { p1 => e1 }`
   Try(
     body~ : Expr,
     catch_~ : @list.List[Case],
@@ -479,14 +542,18 @@ pub(all) enum Expr {
     else_loc~ : Location,
     loc~ : Location
   )
+  /// `try! expr` or `try? expr`
   TryOperator(
     body~ : Expr,
     kind~ : TryOperatorKind,
     try_loc~ : Location,
     loc~ : Location
   )
+  /// `{ k1: e1, k2: e2 }`
   Map(elems~ : @list.List[MapExprElem], loc~ : Location)
+  /// `(expr)` or `{expr}`
   Group(expr~ : Expr, group~ : Group, loc~ : Location)
+  /// generated by compiler
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
 }
 
@@ -542,24 +609,34 @@ pub(all) struct MapPatElem {
 }
 
 ///|
-// checked!
 pub(all) enum Pattern {
+  /// `pattern as binder`
   Alias(pat~ : Pattern, alias_~ : Binder, loc~ : Location)
+  /// `_`
   Any(loc~ : Location)
+  /// `[p1, p2, p3]`
   Array(pats~ : ArrayPatterns, loc~ : Location)
   Constant(c~ : Constant, loc~ : Location)
+  /// `(pattern : Type)`
   Constraint(pat~ : Pattern, ty~ : Type, loc~ : Location)
+  /// `Constructor` or `Constructor(p1, p2, p3)`
   Constr(
     constr~ : Constructor,
     args~ : @list.List[ConstrPatArg]?,
     is_open~ : Bool,
     loc~ : Location
   )
+  /// `pat1 | pat2`
   Or(pat1~ : Pattern, pat2~ : Pattern, loc~ : Location)
+  /// `(p1, p2, p3)`
   Tuple(pats~ : @list.List[Pattern], loc~ : Location)
+  /// `binder`
   Var(Binder)
+  /// `{ field1, field2, .. }`
   Record(fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : Location)
+  /// `{ "k1": e1, "k2": e2, .. }`
   Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : Location)
+  /// `p1..=p2` or `p1..<p2` if inclusive is false.
   Range(lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : Location)
 }
 

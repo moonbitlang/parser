@@ -1,11 +1,48 @@
 ///|
+/// The `Statement` type is not part of MoonBit's AST.
+/// In fact, a statement in MoonBit is simply an incomplete expression. For example, consider a
+/// block with a let statement:
+///
+/// ```skip
+/// {
+///   let _ = a
+/// }
+/// ```
+///
+/// The resulting AST is `Expr::Let(pattern=Any, expr=Ident("a"), body=Unit)`,
+/// where the result value is the body. Since the body part is missing, we fill it with a `Unit`.
+/// 
+/// This type provides methods to convert an `Array[Statement]` into an `Expr`.
 pub(all) enum Statement {
+  /// Single expression
   StmtExpr(Expr)
+  /// let statement
+  /// 
+  /// ```skip
+  /// let pat = expr
+  /// ```
   StmtLet(pat~ : Pattern, expr~ : Expr, loc~ : Location)
+  /// guard statement
+  ///
+  /// ```skip
+  /// guard cond else { otherwise }
+  /// ```
   StmtGuard(cond~ : Expr, otherwise~ : Expr?, loc~ : Location)
+  /// let mut statement
+  ///
+  /// ```skip
+  /// let mut binder : ty_opt = expr
+  /// ```
   StmtLetmut(binder~ : Binder, ty_opt~ : Type?, expr~ : Expr, loc~ : Location)
+  /// local function
+  /// 
+  /// ```skip
+  /// fn local() { ... }
+  /// ```
   StmtFunc(binder~ : Binder, func~ : Func, loc~ : Location)
+  /// letand statement
   StmtLetand(bindings~ : @list.List[(Binder, Type?, Func)], loc~ : Location)
+  /// defer statement
   StmtDefer(expr~ : Expr, loc~ : Location)
 }
 
