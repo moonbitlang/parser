@@ -1,0 +1,10 @@
+{
+    "import": [
+        "moonbitlang/parser/syntax",
+        "moonbitlang/parser/hand_parser",
+        "moonbitlang/parser/lexer",
+        "moonbitlang/parser/tokens",
+        "moonbitlang/x/fs",
+        "moonbitlang/parser/basic"
+    ]
+}

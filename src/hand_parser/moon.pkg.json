@@ -1,0 +1,13 @@
+{
+  "import": [
+    "moonbitlang/parser/syntax",
+    "moonbitlang/parser/tokens",
+    "moonbitlang/parser/compact",
+    "moonbitlang/parser/basic"
+  ],
+  "test-import": [
+    "moonbitlang/parser/tokens",
+    "moonbitlang/parser/lexer",
+    "moonbitlang/parser/syntax"
+  ]
+}

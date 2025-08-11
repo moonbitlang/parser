@@ -1,7 +1,0 @@
-{
-  "import": [
-    "moonbitlang/parser/lexing/tokens",
-    "moonbitlang/parser/basic"
-  ],
-  "warn-list": "-28",
-}

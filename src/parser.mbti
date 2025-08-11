@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser"
+
+import(
+  "moonbitlang/core/list"
+  "moonbitlang/parser/syntax"
+  "moonbitlang/x/fs"
+)
+
+// Values
+fn parse_bytes(Bytes, name? : String, config~ : Parser) -> @list.List[@syntax.Impl]
+
+fn parse_file(String, config~ : Parser) -> @list.List[@syntax.Impl] raise @fs.IOError
+
+// Errors
+
+// Types and methods
+pub(all) enum Parser {
+  Handrolled
+}
+
+// Type aliases
+
+// Traits
+

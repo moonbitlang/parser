@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/hand_parser"
+
+import(
+  "moonbitlang/core/list"
+  "moonbitlang/parser/basic"
+  "moonbitlang/parser/syntax"
+  "moonbitlang/parser/tokens"
+)
+
+// Values
+fn parse(Array[(@tokens.Token, @basic.Position, @basic.Position)]) -> (@list.List[@syntax.Impl], Array[Report])
+
+// Errors
+
+// Types and methods
+pub(all) struct Report {
+  loc : @basic.Location
+  msg : String
+}
+impl Show for Report
+impl ToJson for Report
+
+// Type aliases
+
+// Traits
+

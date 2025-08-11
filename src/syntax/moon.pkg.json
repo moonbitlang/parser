@@ -1,0 +1,7 @@
+{
+  "import": [
+    "moonbitlang/parser/tokens",
+    "moonbitlang/parser/basic"
+  ],
+  "warn-list": "-28",
+}

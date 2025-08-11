@@ -13,7 +13,7 @@ pub fn normalize(json : String) -> String {
 let helper_code =
   #| fn @test.T::run(t : Self, name : String) -> Unit raise Error {
   $|   let source_file = "\{sources_path}/\\{name}.mbt"
-  #|   let ast = @parsing.parse_file(source_file, config=Handrolled) catch {
+  #|   let ast = @parser.parse_file(source_file, config=Handrolled) catch {
   #|     err => fail("failed to read file \{name}.mbt: \{err}")
   #|   }
   #|   t.write(ast |> @syntax.impls_to_json |> _.stringify(indent=2))

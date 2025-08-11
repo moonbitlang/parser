@@ -1,0 +1,9 @@
+{
+  "test-import": [
+    "moonbitlang/x/fs"
+  ],
+  "import": [
+    "moonbitlang/parser/tokens",
+    "moonbitlang/parser/basic",
+  ]
+}

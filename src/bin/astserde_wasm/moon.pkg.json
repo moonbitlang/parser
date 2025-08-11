@@ -1,8 +1,8 @@
 {
     "import": [
-        "moonbitlang/parser/lexing/lexer",
-        "moonbitlang/parser/parsing/syntax",
-        "moonbitlang/parser/parsing/hand_parser",
+        "moonbitlang/parser/lexer",
+        "moonbitlang/parser/syntax",
+        "moonbitlang/parser/hand_parser",
         "moonbitlang/parser/basic"
     ],
     "link": {
