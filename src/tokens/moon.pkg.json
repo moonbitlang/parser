@@ -2,7 +2,7 @@
   "pre-build": [
     {
       "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --mode only-tokens $input -o $output && moonfmt -w $output && moonfmt -w $output",
-      "input": "../parser/parser.mbty",
+      "input": "../yacc_parser/parser.mbty",
       "output": "tokens.mbt"
     }
   ],

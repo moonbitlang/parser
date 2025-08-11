@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "moonbitlang/parser/hand_parser"
+package "moonbitlang/parser/handrolled_parser"
 
 import(
   "moonbitlang/core/list"

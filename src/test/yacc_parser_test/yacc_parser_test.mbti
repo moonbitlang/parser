@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "moonbitlang/parser/parser_test"
+package "moonbitlang/parser/test/yacc_parser_test"
 
 // Values
 

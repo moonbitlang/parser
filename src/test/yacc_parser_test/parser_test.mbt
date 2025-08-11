@@ -19,7 +19,7 @@ fn test_yacc_parser(
     },
   )
   t.writeln(
-    @syntax.impls_to_json(@parser.structure(tokens)).stringify(indent=2),
+    @syntax.impls_to_json(@yacc_parser.structure(tokens)).stringify(indent=2),
   )
   t.snapshot(filename="\{label}.mbt.json")
 }

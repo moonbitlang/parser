@@ -5,7 +5,7 @@
     "test-import": [
         "moonbitlang/parser/lexer",
         "moonbitlang/parser/tokens",
-        "moonbitlang/parser/parser",
+        "moonbitlang/parser/yacc_parser",
         "moonbitlang/x/fs",
         "moonbitlang/parser/syntax"
         // "moonbitlang/parser/parsing/hand_parser"

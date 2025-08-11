@@ -107,7 +107,7 @@ pub fn parse_bytes(
     comment=true,
     name~,
   )
-  let impls = @hand_parser.parse(tokens).0
+  let impls = @handrolled_parser.parse(tokens).0
   attach_docstrings(docstrings, impls)
   impls
 }

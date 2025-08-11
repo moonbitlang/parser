@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "moonbitlang/parser/test/hand_parser_test/gen_test"
+package "moonbitlang/parser/test/handrolled_parser_test/gen_test"
 
 // Values
 fn gen_test(String) -> String
