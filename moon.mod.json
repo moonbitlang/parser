@@ -2,7 +2,7 @@
   "name": "moonbitlang/parser",
   "version": "0.1.0",
   "deps": {
-    "moonbitlang/x": "0.4.30",
+    "moonbitlang/x": "0.4.30"
   },
   "bin-deps": {
     "moonbitlang/yacc": "0.6.10"

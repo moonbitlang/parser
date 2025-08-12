@@ -8,6 +8,5 @@
         "moonbitlang/parser/yacc_parser",
         "moonbitlang/x/fs",
         "moonbitlang/parser/syntax"
-        // "moonbitlang/parser/parsing/hand_parser"
     ]
 }

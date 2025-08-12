@@ -3,5 +3,5 @@
     "moonbitlang/parser/tokens",
     "moonbitlang/parser/basic"
   ],
-  "warn-list": "-28",
+  "warn-list": "-28"
 }

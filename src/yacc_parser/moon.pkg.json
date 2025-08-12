@@ -3,19 +3,9 @@
     "moonbitlang/parser/syntax",
     "moonbitlang/parser/syntax/util",
     "moonbitlang/parser/tokens",
-    "moonbitlang/parser/basic",
+    "moonbitlang/parser/basic"
   ],
   "pre-build": [
-    // {
-    //   "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --mode only-tokens $input -o $output",
-    //   "input": "parser.mbty",
-    //   "output": "tokens.mbt"
-    // },
-    // {
-    //   "command": "$mod_dir/.mooncakes/moonbitlang/ulex/moonlex --code-unit 1 --default-encoding utf8 $input -o $output",
-    //   "input": "lexer.mbtx",
-    //   "output": "lexer.mbt"
-    // }
     {
       "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --no-comments --external-tokens $input -o $output && moonfmt -w $output && moonfmt -w $output",
       "input": "parser.mbty",
