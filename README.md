@@ -25,7 +25,7 @@ src/
 
 ```moonbit
 // Parse MoonBit source code from bytes
-let source = b"fn hello() { println(\"Hello, World!\") }"
+let source = b"fn hello() -> Unit { println(\"Hello, World!\") }"
 let (impls, diagnostics) = @moonbitlang/parser.parse_bytes(source)
 ```
 

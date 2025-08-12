@@ -3,15 +3,19 @@
   "version": "0.1.0",
   "deps": {
     "moonbitlang/x": "0.4.30",
-    "Yoorkin/ArgParser": "0.1.9"
   },
   "bin-deps": {
     "moonbitlang/yacc": "0.6.10"
   },
   "readme": "README.md",
-  "repository": "",
+  "repository": "https://github.com/moonbitlang/parser",
   "license": "Apache-2.0",
-  "keywords": [],
-  "description": "",
+  "keywords": [
+    "parser",
+    "lexer",
+    "AST",
+    "MoonBit"
+  ],
+  "description": "AST and parsers for the MoonBit programming language",
   "source": "src"
 }
