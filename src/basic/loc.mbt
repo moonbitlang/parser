@@ -4,7 +4,7 @@ pub(all) struct Position {
   lnum : Int
   bol : Int
   cnum : Int
-} derive(Show, ToJson)
+} derive(Show, Hash, ToJson)
 
 ///|
 pub impl Eq for Position with op_equal(self, other) {
@@ -50,7 +50,7 @@ pub fn column(self : Position) -> Int {
 pub(all) struct Location {
   start : Position
   end : Position
-} derive(Eq)
+} derive(Eq, Compare, Hash)
 
 ///|
 pub fn Location::trim_first_char(self : Location) -> Location {
