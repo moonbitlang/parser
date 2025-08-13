@@ -85,8 +85,8 @@ fn State::consume(state : Self) -> Triple {
       EOF => return triple
       _ => {
         // println("consumed: \{state.peek_token()}")
-        state.parsed_position = state.previous_triple().2
         state.next += 1
+        state.parsed_position = state.previous_triple().2
         return triple
       }
     }
