@@ -98,23 +98,23 @@ pub fn Statement::collect_rev(
         _ => {
           let acc = match x {
             StmtLet(pat~, expr~, loc~) => {
-              let loc = Location::merge(loc, loc_of_expression(expr))
+              let loc = loc.merge(cont.loc())
               Expr::Let(pattern=pat, expr~, loc~, body=cont)
             }
             StmtGuard(cond~, otherwise~, loc~) => {
-              let loc = Location::merge(loc, loc_of_expression(cond))
+              let loc = loc.merge(cont.loc())
               Expr::Guard(cond~, otherwise~, loc~, body=cont)
             }
             StmtLetmut(binder~, ty_opt~, expr~, loc~) => {
-              let loc = Location::merge(loc, loc_of_expression(expr))
+              let loc = loc.merge(cont.loc())
               Expr::LetMut(binder~, ty=ty_opt, expr~, loc~, body=cont)
             }
             StmtLetand(bindings~, loc~) => {
-              let loc = Location::merge(loc, loc_of_expression(cont))
+              let loc = loc.merge(loc_of_expression(cont))
               Expr::LetAnd(bindings~, loc~, body=cont)
             }
             StmtDefer(expr~, loc~) => {
-              let loc = Location::merge(loc, loc_of_expression(expr))
+              let loc = loc.merge(loc_of_expression(cont))
               Expr::Defer(expr~, loc~, body=cont)
             }
             StmtExpr(_) | StmtFunc(..) => panic()
@@ -134,7 +134,7 @@ fn Statement::collect_sequence(
 ) -> Expr {
   match todo {
     More(StmtExpr(expr), tail=rest) => {
-      let loc = Location::merge(loc_of_expression(expr), loc)
+      let loc = loc.merge(expr.loc())
       Statement::collect_sequence(loc~, acc.add(expr), rest, cont)
     }
     _ =>
