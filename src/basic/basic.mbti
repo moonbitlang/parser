@@ -6,11 +6,17 @@ let builtin_package : String
 
 let current_package : Ref[String]
 
-let show_loc : Ref[Bool]
+let show_loc : Ref[LocStyle]
 
 // Errors
 
 // Types and methods
+pub(all) enum LocStyle {
+  Hidden
+  Json
+  String
+}
+
 pub(all) struct Location {
   start : Position
   end : Position
