@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "1:9-1:3",
+        "params_loc": "1:9-1:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -40,7 +40,7 @@
             "exprs": [
               {
                 "type": "Expr::Hole",
-                "loc": "2:12-2:12",
+                "loc": "2:12-2:13",
                 "kind": {
                   "type": "Hole::Synthesized"
                 }
@@ -63,9 +63,9 @@
                       "type": "LongIdent::Ident",
                       "0": "a"
                     },
-                    "loc": "2:21-2:20"
+                    "loc": "2:21-2:22"
                   },
-                  "loc": "2:21-2:20"
+                  "loc": "2:21-2:22"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -75,24 +75,24 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": "2:23-2:23"
+                    "loc": "2:23-2:24"
                   },
-                  "loc": "2:23-2:23"
+                  "loc": "2:23-2:24"
                 },
-                "loc": "2:21-2:23"
+                "loc": "2:21-2:24"
               }
             ],
-            "loc": "2:11-2:24"
+            "loc": "2:11-2:25"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": "2:3-2:6",
+            "loc": "2:3-2:25",
             "faked": true
           },
-          "loc": "2:11-2:24"
+          "loc": "2:3-2:25"
         }
       },
-      "loc": "1:1-2:26"
+      "loc": "1:1-3:2"
     }
   ],
   "diagnostics": [

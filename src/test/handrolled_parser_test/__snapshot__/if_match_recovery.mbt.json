@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "2:9-2:3",
+        "params_loc": "2:9-2:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -42,9 +42,9 @@
                     "type": "LongIdent::Ident",
                     "0": "cond"
                   },
-                  "loc": "3:6-3:5"
+                  "loc": "3:6-3:10"
                 },
-                "loc": "3:6-3:5"
+                "loc": "3:6-3:10"
               },
               "ifso": {
                 "type": "Expr::Hole",
@@ -66,9 +66,9 @@
                     "type": "LongIdent::Ident",
                     "0": "parse"
                   },
-                  "loc": "4:6-4:5"
+                  "loc": "4:6-4:11"
                 },
-                "loc": "4:6-4:5"
+                "loc": "4:6-4:11"
               },
               "ifso": {
                 "type": "Expr::Hole",
@@ -78,7 +78,7 @@
                 }
               },
               "ifnot": null,
-              "loc": "4:3-4:11"
+              "loc": "4:3-4:17"
             },
             {
               "type": "Expr::If",
@@ -90,17 +90,17 @@
                     "type": "LongIdent::Ident",
                     "0": "parse"
                   },
-                  "loc": "5:6-5:5"
+                  "loc": "5:6-5:11"
                 },
-                "loc": "5:6-5:5"
+                "loc": "5:6-5:11"
               },
               "ifso": {
                 "type": "Expr::Unit",
-                "loc": "5:18-5:20",
+                "loc": "5:18-6:4",
                 "faked": true
               },
               "ifnot": null,
-              "loc": "5:3-5:20"
+              "loc": "5:3-6:4"
             },
             {
               "type": "Expr::Match",
@@ -112,9 +112,9 @@
                     "type": "LongIdent::Ident",
                     "0": "e"
                   },
-                  "loc": "8:9-8:8"
+                  "loc": "8:9-8:10"
                 },
-                "loc": "8:9-8:8"
+                "loc": "8:9-8:10"
               },
               "cases": [],
               "match_loc": "8:3-8:10",
@@ -131,14 +131,14 @@
                     "type": "LongIdent::Ident",
                     "0": "parse"
                   },
-                  "loc": "9:9-9:8"
+                  "loc": "9:9-9:14"
                 },
-                "loc": "9:9-9:8"
+                "loc": "9:9-9:14"
               },
               "cases": [],
               "match_loc": "9:3-9:20",
               "using": null,
-              "loc": "9:3-9:14"
+              "loc": "9:3-9:20"
             }
           ],
           "last_expr": {
@@ -151,19 +151,19 @@
                   "type": "LongIdent::Ident",
                   "0": "parse"
                 },
-                "loc": "10:9-10:8"
+                "loc": "10:9-10:14"
               },
-              "loc": "10:9-10:8"
+              "loc": "10:9-10:14"
             },
             "cases": [],
             "match_loc": "10:3-10:22",
             "using": null,
-            "loc": "10:3-10:23"
+            "loc": "10:3-11:4"
           },
-          "loc": "3:3-10:23"
+          "loc": "3:3-11:4"
         }
       },
-      "loc": "2:1-11:5"
+      "loc": "2:1-12:2"
     }
   ],
   "diagnostics": [

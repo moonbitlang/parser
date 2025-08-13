@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "2:9-2:3",
+        "params_loc": "2:9-2:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -44,7 +44,7 @@
                 "0": "T"
               },
               "is_object": false,
-              "loc": "3:11-3:10"
+              "loc": "3:11-3:12"
             },
             "fields": [
               {
@@ -63,7 +63,7 @@
                   "loc": "3:19-3:20"
                 },
                 "is_pun": false,
-                "loc": "3:16-3:18"
+                "loc": "3:16-3:20"
               },
               {
                 "type": "FieldDef",
@@ -81,13 +81,13 @@
                   "loc": "3:25-3:26"
                 },
                 "is_pun": false,
-                "loc": "3:22-3:24"
+                "loc": "3:22-3:26"
               }
             ],
             "trailing": {
               "type": "Trailing::None"
             },
-            "loc": "3:14-3:26"
+            "loc": "3:14-3:28"
           },
           "body": {
             "type": "Expr::Let",
@@ -104,7 +104,7 @@
                   "0": "T"
                 },
                 "is_object": false,
-                "loc": "4:11-4:10"
+                "loc": "4:11-4:12"
               },
               "fields": [
                 {
@@ -127,13 +127,13 @@
                     "loc": "4:16-4:17"
                   },
                   "is_pun": true,
-                  "loc": "4:16-4:15"
+                  "loc": "4:16-4:17"
                 }
               ],
               "trailing": {
                 "type": "Trailing::None"
               },
-              "loc": "4:14-4:17"
+              "loc": "4:14-4:19"
             },
             "body": {
               "type": "Expr::Let",
@@ -150,7 +150,7 @@
                     "0": "t"
                   },
                   "is_object": false,
-                  "loc": "5:11-5:10"
+                  "loc": "5:11-5:12"
                 },
                 "fields": [
                   {
@@ -173,13 +173,13 @@
                       "loc": "5:16-5:17"
                     },
                     "is_pun": true,
-                    "loc": "5:16-5:15"
+                    "loc": "5:16-5:17"
                   }
                 ],
                 "trailing": {
                   "type": "Trailing::None"
                 },
-                "loc": "5:14-5:17"
+                "loc": "5:14-5:19"
               },
               "body": {
                 "type": "Expr::Let",
@@ -197,7 +197,7 @@
                       "id": "T"
                     },
                     "is_object": false,
-                    "loc": "6:11-6:15"
+                    "loc": "6:11-6:17"
                   },
                   "fields": [
                     {
@@ -220,7 +220,7 @@
                         "loc": "6:23-6:24"
                       },
                       "is_pun": true,
-                      "loc": "6:23-6:22"
+                      "loc": "6:23-6:24"
                     },
                     {
                       "type": "FieldDef",
@@ -242,13 +242,13 @@
                         "loc": "6:26-6:27"
                       },
                       "is_pun": true,
-                      "loc": "6:26-6:25"
+                      "loc": "6:26-6:27"
                     }
                   ],
                   "trailing": {
                     "type": "Trailing::None"
                   },
-                  "loc": "6:21-6:27"
+                  "loc": "6:21-6:29"
                 },
                 "body": {
                   "type": "Expr::Let",
@@ -266,7 +266,7 @@
                         "id": "t"
                       },
                       "is_object": false,
-                      "loc": "7:11-7:15"
+                      "loc": "7:11-7:17"
                     },
                     "record": {
                       "type": "Expr::Ident",
@@ -276,9 +276,9 @@
                           "type": "LongIdent::Ident",
                           "0": "r"
                         },
-                        "loc": "7:25-7:25"
+                        "loc": "7:25-7:26"
                       },
-                      "loc": "7:25-7:25"
+                      "loc": "7:25-7:26"
                     },
                     "fields": [
                       {
@@ -301,10 +301,10 @@
                           "loc": "7:28-7:29"
                         },
                         "is_pun": true,
-                        "loc": "7:28-7:27"
+                        "loc": "7:28-7:29"
                       }
                     ],
-                    "loc": "7:21-7:29"
+                    "loc": "7:21-7:31"
                   },
                   "body": {
                     "type": "Expr::Let",
@@ -322,7 +322,7 @@
                           "id": "t"
                         },
                         "is_object": false,
-                        "loc": "8:11-8:15"
+                        "loc": "8:11-8:17"
                       },
                       "record": {
                         "type": "Expr::Ident",
@@ -332,32 +332,32 @@
                             "type": "LongIdent::Ident",
                             "0": "r"
                           },
-                          "loc": "8:25-8:25"
+                          "loc": "8:25-8:26"
                         },
-                        "loc": "8:25-8:25"
+                        "loc": "8:25-8:26"
                       },
                       "fields": [],
-                      "loc": "8:21-8:26"
+                      "loc": "8:21-8:28"
                     },
                     "body": {
                       "type": "Expr::Unit",
-                      "loc": "8:3-8:6",
+                      "loc": "8:3-8:28",
                       "faked": true
                     },
-                    "loc": "8:21-8:26"
+                    "loc": "8:3-8:28"
                   },
-                  "loc": "7:21-7:29"
+                  "loc": "7:3-8:28"
                 },
-                "loc": "6:21-6:27"
+                "loc": "6:3-8:28"
               },
-              "loc": "5:14-5:17"
+              "loc": "5:3-8:28"
             },
-            "loc": "4:14-4:17"
+            "loc": "4:3-8:28"
           },
-          "loc": "3:14-3:26"
+          "loc": "3:3-8:28"
         }
       },
-      "loc": "2:1-8:29"
+      "loc": "2:1-9:2"
     }
   ]
 }

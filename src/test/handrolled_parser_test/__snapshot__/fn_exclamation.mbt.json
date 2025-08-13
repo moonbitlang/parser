@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "1:5-1:6",
+        "params_loc": "1:5-1:7",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -41,7 +41,7 @@
               {
                 "type": "Func::Lambda",
                 "parameters": [],
-                "params_loc": "2:9-2:10",
+                "params_loc": "2:9-2:11",
                 "body": {
                   "type": "Expr::Constant",
                   "c": {
@@ -93,7 +93,7 @@
                 "has_error": "3:8-3:9",
                 "is_async": false,
                 "fn_loc": "-1:1--1:1",
-                "loc": "3:10-4:13"
+                "loc": "3:10-5:4"
               }
             ]
           ],
@@ -110,9 +110,9 @@
                       "type": "LongIdent::Ident",
                       "0": "apply"
                     },
-                    "loc": "6:3-5:5"
+                    "loc": "6:3-6:8"
                   },
-                  "loc": "6:3-5:5"
+                  "loc": "6:3-6:8"
                 },
                 "args": [
                   {
@@ -132,7 +132,7 @@
                             "ty": null
                           }
                         ],
-                        "params_loc": "6:13-6:15",
+                        "params_loc": "6:13-6:16",
                         "body": {
                           "type": "Expr::Infix",
                           "op": {
@@ -151,9 +151,9 @@
                                 "type": "LongIdent::Ident",
                                 "0": "x"
                               },
-                              "loc": "6:19-6:18"
+                              "loc": "6:19-6:20"
                             },
-                            "loc": "6:19-6:18"
+                            "loc": "6:19-6:20"
                           },
                           "rhs": {
                             "type": "Expr::Constant",
@@ -163,7 +163,7 @@
                             },
                             "loc": "6:23-6:24"
                           },
-                          "loc": "6:19-6:22"
+                          "loc": "6:19-6:24"
                         },
                         "return_type": null,
                         "error_type": {
@@ -176,7 +176,7 @@
                         "is_async": false,
                         "loc": "-1:1--1:1"
                       },
-                      "loc": "6:9-6:24"
+                      "loc": "6:9-6:26"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -200,7 +200,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "6:3-6:30"
+                "loc": "6:3-6:31"
               }
             ],
             "last_expr": {
@@ -213,9 +213,9 @@
                     "type": "LongIdent::Ident",
                     "0": "apply"
                   },
-                  "loc": "7:3-6:32"
+                  "loc": "7:3-7:8"
                 },
-                "loc": "7:3-6:32"
+                "loc": "7:3-7:8"
               },
               "args": [
                 {
@@ -256,9 +256,9 @@
                                   "type": "LongIdent::Ident",
                                   "0": "x"
                                 },
-                                "loc": "7:20-7:19"
+                                "loc": "7:20-7:21"
                               },
-                              "loc": "7:20-7:19"
+                              "loc": "7:20-7:21"
                             },
                             "rhs": {
                               "type": "Expr::Constant",
@@ -268,16 +268,16 @@
                               },
                               "loc": "7:24-7:25"
                             },
-                            "loc": "7:20-7:23"
+                            "loc": "7:20-7:25"
                           }
                         }
                       ],
                       "has_error": "7:11-7:12",
                       "is_async": false,
                       "fn_loc": "-1:1--1:1",
-                      "loc": "7:13-7:25"
+                      "loc": "7:13-7:26"
                     },
-                    "loc": "7:9-7:25"
+                    "loc": "7:9-7:26"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -301,14 +301,14 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "7:3-7:30"
+              "loc": "7:3-7:31"
             },
-            "loc": "6:3-7:30"
+            "loc": "6:3-7:31"
           },
-          "loc": "2:3-7:30"
+          "loc": "2:3-7:31"
         }
       },
-      "loc": "1:1-7:32"
+      "loc": "1:1-8:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -323,7 +323,7 @@
         "has_error": "10:5-10:6",
         "is_async": false,
         "decl_params": [],
-        "params_loc": "10:6-10:7",
+        "params_loc": "10:6-10:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -340,11 +340,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "10:9-11:2",
+          "loc": "10:9-12:2",
           "faked": true
         }
       },
-      "loc": "10:1-11:2"
+      "loc": "10:1-12:2"
     }
   ]
 }

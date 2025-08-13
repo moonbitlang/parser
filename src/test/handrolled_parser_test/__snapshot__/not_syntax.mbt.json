@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "1:18-1:19",
+        "params_loc": "1:18-1:20",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -27,7 +27,7 @@
             "loc": "1:24-1:28"
           },
           "tys": [],
-          "loc": "1:24-1:23"
+          "loc": "1:24-1:28"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -64,9 +64,9 @@
                 "loc": "2:11-2:15"
               },
               "tys": [],
-              "loc": "2:11-2:10"
+              "loc": "2:11-2:15"
             },
-            "loc": "2:3-2:10"
+            "loc": "2:11-2:15"
           },
           "expr": {
             "type": "Expr::Constant",
@@ -84,7 +84,7 @@
                 "type": "LongIdent::Ident",
                 "0": "!"
               },
-              "loc": "3:3-3:4"
+              "loc": "3:3-3:5"
             },
             "expr": {
               "type": "Expr::Ident",
@@ -94,16 +94,16 @@
                   "type": "LongIdent::Ident",
                   "0": "a"
                 },
-                "loc": "3:4-3:4"
+                "loc": "3:4-3:5"
               },
-              "loc": "3:4-3:4"
+              "loc": "3:4-3:5"
             },
-            "loc": "3:3-3:4"
+            "loc": "3:3-3:5"
           },
-          "loc": "2:18-2:23"
+          "loc": "2:3-3:5"
         }
       },
-      "loc": "1:1-3:6"
+      "loc": "1:1-4:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -118,7 +118,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "8:18-8:19",
+        "params_loc": "8:18-8:20",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -131,7 +131,7 @@
             "loc": "8:24-8:28"
           },
           "tys": [],
-          "loc": "8:24-8:23"
+          "loc": "8:24-8:28"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -178,7 +178,7 @@
                     "type": "LongIdent::Ident",
                     "0": "!"
                   },
-                  "loc": "10:12-10:13"
+                  "loc": "10:12-10:14"
                 },
                 "expr": {
                   "type": "Expr::Ident",
@@ -188,28 +188,28 @@
                       "type": "LongIdent::Ident",
                       "0": "a"
                     },
-                    "loc": "10:13-10:13"
+                    "loc": "10:13-10:14"
                   },
-                  "loc": "10:13-10:13"
+                  "loc": "10:13-10:14"
                 },
-                "loc": "10:12-10:13"
+                "loc": "10:12-10:14"
               },
               "group": {
                 "type": "Group::Paren"
               },
-              "loc": "10:11-10:14"
+              "loc": "10:11-10:15"
             },
             "body": {
               "type": "Expr::Unit",
-              "loc": "10:3-10:6",
+              "loc": "10:3-10:15",
               "faked": true
             },
-            "loc": "10:11-10:14"
+            "loc": "10:3-10:15"
           },
-          "loc": "9:10-9:11"
+          "loc": "9:3-10:15"
         }
       },
-      "loc": "8:1-10:16"
+      "loc": "8:1-11:2"
     }
   ],
   "diagnostics": [

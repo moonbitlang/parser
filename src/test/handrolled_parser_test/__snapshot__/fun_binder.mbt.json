@@ -12,7 +12,7 @@
             "0": "Int"
           },
           "is_object": false,
-          "loc": "2:4-2:3"
+          "loc": "2:4-2:7"
         },
         "name": {
           "type": "Binder",
@@ -22,7 +22,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "2:16-2:17",
+        "params_loc": "2:16-2:18",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -65,7 +65,7 @@
           "loc": "3:3-4:1"
         }
       },
-      "loc": "2:1-3:49"
+      "loc": "2:1-4:2"
     }
   ],
   "diagnostics": [

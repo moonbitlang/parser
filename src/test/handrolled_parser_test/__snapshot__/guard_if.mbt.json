@@ -32,11 +32,11 @@
                 "loc": "1:11-1:14"
               },
               "tys": [],
-              "loc": "1:11-1:10"
+              "loc": "1:11-1:14"
             }
           }
         ],
-        "params_loc": "1:6-1:14",
+        "params_loc": "1:6-1:15",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -49,7 +49,7 @@
             "loc": "1:19-1:23"
           },
           "tys": [],
-          "loc": "1:19-1:18"
+          "loc": "1:19-1:23"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -73,9 +73,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": "2:9-2:8"
+              "loc": "2:9-2:10"
             },
-            "loc": "2:9-2:8"
+            "loc": "2:9-2:10"
           },
           "cases": [
             {
@@ -108,9 +108,9 @@
                         "type": "LongIdent::Ident",
                         "0": "x"
                       },
-                      "loc": "3:13-3:12"
+                      "loc": "3:13-3:14"
                     },
-                    "loc": "3:13-3:12"
+                    "loc": "3:13-3:14"
                   },
                   "rhs": {
                     "type": "Expr::Constant",
@@ -120,7 +120,7 @@
                     },
                     "loc": "3:17-3:18"
                   },
-                  "loc": "3:13-3:16"
+                  "loc": "3:13-3:18"
                 },
                 "ifso": {
                   "type": "Expr::Constant",
@@ -138,7 +138,7 @@
                   },
                   "loc": "3:35-3:40"
                 },
-                "loc": "3:10-3:40"
+                "loc": "3:10-3:42"
               },
               "body": {
                 "type": "Expr::Apply",
@@ -150,9 +150,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "3:46-3:45"
+                    "loc": "3:46-3:53"
                   },
-                  "loc": "3:46-3:45"
+                  "loc": "3:46-3:53"
                 },
                 "args": [
                   {
@@ -165,9 +165,9 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": "3:54-3:54"
+                        "loc": "3:54-3:55"
                       },
-                      "loc": "3:54-3:54"
+                      "loc": "3:54-3:55"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -177,7 +177,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "3:46-3:55"
+                "loc": "3:46-3:56"
               }
             },
             {
@@ -197,9 +197,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "4:10-4:9"
+                    "loc": "4:10-4:17"
                   },
-                  "loc": "4:10-4:9"
+                  "loc": "4:10-4:17"
                 },
                 "args": [
                   {
@@ -212,9 +212,9 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": "4:18-4:18"
+                        "loc": "4:18-4:19"
                       },
-                      "loc": "4:18-4:18"
+                      "loc": "4:18-4:19"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -224,16 +224,16 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "4:10-4:19"
+                "loc": "4:10-4:20"
               }
             }
           ],
           "match_loc": "2:3-2:12",
           "using": null,
-          "loc": "2:3-4:21"
+          "loc": "2:3-5:4"
         }
       },
-      "loc": "1:1-5:5"
+      "loc": "1:1-6:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -266,11 +266,11 @@
                 "loc": "8:11-8:14"
               },
               "tys": [],
-              "loc": "8:11-8:10"
+              "loc": "8:11-8:14"
             }
           }
         ],
-        "params_loc": "8:6-8:14",
+        "params_loc": "8:6-8:15",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -283,7 +283,7 @@
             "loc": "8:19-8:23"
           },
           "tys": [],
-          "loc": "8:19-8:18"
+          "loc": "8:19-8:23"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -307,9 +307,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": "9:9-9:8"
+              "loc": "9:9-9:10"
             },
-            "loc": "9:9-9:8"
+            "loc": "9:9-9:10"
           },
           "cases": [
             {
@@ -344,9 +344,9 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": "10:14-10:13"
+                        "loc": "10:14-10:15"
                       },
-                      "loc": "10:14-10:13"
+                      "loc": "10:14-10:15"
                     },
                     "rhs": {
                       "type": "Expr::Constant",
@@ -356,7 +356,7 @@
                       },
                       "loc": "10:18-10:19"
                     },
-                    "loc": "10:14-10:17"
+                    "loc": "10:14-10:19"
                   },
                   "ifso": {
                     "type": "Expr::Constant",
@@ -374,12 +374,12 @@
                     },
                     "loc": "10:36-10:41"
                   },
-                  "loc": "10:11-10:41"
+                  "loc": "10:11-10:43"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "10:10-10:41"
+                "loc": "10:10-10:43"
               },
               "body": {
                 "type": "Expr::Apply",
@@ -391,9 +391,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "10:48-10:47"
+                    "loc": "10:48-10:55"
                   },
-                  "loc": "10:48-10:47"
+                  "loc": "10:48-10:55"
                 },
                 "args": [
                   {
@@ -406,9 +406,9 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": "10:56-10:56"
+                        "loc": "10:56-10:57"
                       },
-                      "loc": "10:56-10:56"
+                      "loc": "10:56-10:57"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -418,7 +418,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "10:48-10:57"
+                "loc": "10:48-10:58"
               }
             },
             {
@@ -438,9 +438,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "11:10-11:9"
+                    "loc": "11:10-11:17"
                   },
-                  "loc": "11:10-11:9"
+                  "loc": "11:10-11:17"
                 },
                 "args": [
                   {
@@ -453,9 +453,9 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": "11:18-11:18"
+                        "loc": "11:18-11:19"
                       },
-                      "loc": "11:18-11:18"
+                      "loc": "11:18-11:19"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -465,16 +465,16 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "11:10-11:19"
+                "loc": "11:10-11:20"
               }
             }
           ],
           "match_loc": "9:3-9:12",
           "using": null,
-          "loc": "9:3-11:21"
+          "loc": "9:3-12:4"
         }
       },
-      "loc": "8:1-12:5"
+      "loc": "8:1-13:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -507,11 +507,11 @@
                 "loc": "15:11-15:14"
               },
               "tys": [],
-              "loc": "15:11-15:10"
+              "loc": "15:11-15:14"
             }
           }
         ],
-        "params_loc": "15:6-15:14",
+        "params_loc": "15:6-15:15",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -524,7 +524,7 @@
             "loc": "15:19-15:23"
           },
           "tys": [],
-          "loc": "15:19-15:18"
+          "loc": "15:19-15:23"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -548,9 +548,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": "16:9-16:8"
+              "loc": "16:9-16:10"
             },
-            "loc": "16:9-16:8"
+            "loc": "16:9-16:10"
           },
           "cases": [
             {
@@ -573,9 +573,9 @@
                       "type": "LongIdent::Ident",
                       "0": "x"
                     },
-                    "loc": "17:17-17:16"
+                    "loc": "17:17-17:18"
                   },
-                  "loc": "17:17-17:16"
+                  "loc": "17:17-17:18"
                 },
                 "cases": [
                   {
@@ -597,7 +597,7 @@
                 ],
                 "match_loc": "17:11-17:20",
                 "using": null,
-                "loc": "17:11-17:30"
+                "loc": "17:11-17:31"
               },
               "body": {
                 "type": "Expr::Apply",
@@ -609,9 +609,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "17:36-17:35"
+                    "loc": "17:36-17:43"
                   },
-                  "loc": "17:36-17:35"
+                  "loc": "17:36-17:43"
                 },
                 "args": [
                   {
@@ -624,9 +624,9 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": "17:44-17:44"
+                        "loc": "17:44-17:45"
                       },
-                      "loc": "17:44-17:44"
+                      "loc": "17:44-17:45"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -636,7 +636,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "17:36-17:45"
+                "loc": "17:36-17:46"
               }
             },
             {
@@ -656,9 +656,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "18:10-18:9"
+                    "loc": "18:10-18:17"
                   },
-                  "loc": "18:10-18:9"
+                  "loc": "18:10-18:17"
                 },
                 "args": [
                   {
@@ -671,9 +671,9 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": "18:18-18:18"
+                        "loc": "18:18-18:19"
                       },
-                      "loc": "18:18-18:18"
+                      "loc": "18:18-18:19"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -683,16 +683,16 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "18:10-18:19"
+                "loc": "18:10-18:20"
               }
             }
           ],
           "match_loc": "16:3-16:12",
           "using": null,
-          "loc": "16:3-18:21"
+          "loc": "16:3-19:4"
         }
       },
-      "loc": "15:1-19:5"
+      "loc": "15:1-20:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -725,11 +725,11 @@
                 "loc": "22:11-22:14"
               },
               "tys": [],
-              "loc": "22:11-22:10"
+              "loc": "22:11-22:14"
             }
           }
         ],
-        "params_loc": "22:6-22:14",
+        "params_loc": "22:6-22:15",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -742,7 +742,7 @@
             "loc": "22:19-22:23"
           },
           "tys": [],
-          "loc": "22:19-22:18"
+          "loc": "22:19-22:23"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -766,9 +766,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": "23:9-23:8"
+              "loc": "23:9-23:10"
             },
-            "loc": "23:9-23:8"
+            "loc": "23:9-23:10"
           },
           "cases": [
             {
@@ -793,9 +793,9 @@
                         "type": "LongIdent::Ident",
                         "0": "x"
                       },
-                      "loc": "24:18-24:17"
+                      "loc": "24:18-24:19"
                     },
-                    "loc": "24:18-24:17"
+                    "loc": "24:18-24:19"
                   },
                   "cases": [
                     {
@@ -817,12 +817,12 @@
                   ],
                   "match_loc": "24:12-24:21",
                   "using": null,
-                  "loc": "24:12-24:31"
+                  "loc": "24:12-24:32"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "24:11-24:31"
+                "loc": "24:11-24:32"
               },
               "body": {
                 "type": "Expr::Apply",
@@ -834,9 +834,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "24:38-24:37"
+                    "loc": "24:38-24:45"
                   },
-                  "loc": "24:38-24:37"
+                  "loc": "24:38-24:45"
                 },
                 "args": [
                   {
@@ -849,9 +849,9 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": "24:46-24:46"
+                        "loc": "24:46-24:47"
                       },
-                      "loc": "24:46-24:46"
+                      "loc": "24:46-24:47"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -861,7 +861,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "24:38-24:47"
+                "loc": "24:38-24:48"
               }
             },
             {
@@ -881,9 +881,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "25:10-25:9"
+                    "loc": "25:10-25:17"
                   },
-                  "loc": "25:10-25:9"
+                  "loc": "25:10-25:17"
                 },
                 "args": [
                   {
@@ -896,9 +896,9 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": "25:18-25:18"
+                        "loc": "25:18-25:19"
                       },
-                      "loc": "25:18-25:18"
+                      "loc": "25:18-25:19"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -908,27 +908,27 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "25:10-25:19"
+                "loc": "25:10-25:20"
               }
             }
           ],
           "match_loc": "23:3-23:12",
           "using": null,
-          "loc": "23:3-25:21"
+          "loc": "23:3-26:4"
         }
       },
-      "loc": "22:1-26:5"
+      "loc": "22:1-27:2"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": "3:10-3:40",
+      "loc": "3:10-3:42",
       "msg": "Unexpected if expression in pattern guard"
     },
     {
       "type": "Error",
-      "loc": "17:11-17:30",
+      "loc": "17:11-17:31",
       "msg": "Unexpected match expression in pattern guard"
     }
   ]

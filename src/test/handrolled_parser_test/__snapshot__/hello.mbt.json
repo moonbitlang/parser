@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "2:9-2:3",
+        "params_loc": "2:9-2:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -31,11 +31,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "3:3-3:4",
+          "loc": "3:3-3:5",
           "faked": false
         }
       },
-      "loc": "2:1-3:6"
+      "loc": "2:1-4:2"
     }
   ]
 }

@@ -32,7 +32,7 @@
                       "loc": "6:11-6:17"
                     },
                     "tys": [],
-                    "loc": "6:11-6:11"
+                    "loc": "6:11-6:17"
                   },
                   "mut": false,
                   "label": null
@@ -40,7 +40,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": "6:4-6:17",
+              "loc": "6:4-6:18",
               "doc": " Stirng constructor\n String doc"
             },
             {
@@ -64,7 +64,7 @@
                       "loc": "9:11-9:17"
                     },
                     "tys": [],
-                    "loc": "9:11-9:11"
+                    "loc": "9:11-9:17"
                   },
                   "mut": false,
                   "label": null
@@ -72,7 +72,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": "9:4-9:17",
+              "loc": "9:4-9:18",
               "doc": " Number constructor\n Number doc"
             },
             {
@@ -96,7 +96,7 @@
                       "loc": "12:12-12:16"
                     },
                     "tys": [],
-                    "loc": "12:12-12:12"
+                    "loc": "12:12-12:16"
                   },
                   "mut": false,
                   "label": null
@@ -104,7 +104,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": "12:4-12:16",
+              "loc": "12:4-12:17",
               "doc": " Boolean constructor\n Boolean doc"
             },
             {
@@ -139,10 +139,10 @@
                           "loc": "14:19-14:26"
                         },
                         "tys": [],
-                        "loc": "14:19-14:19"
+                        "loc": "14:19-14:26"
                       }
                     ],
-                    "loc": "14:13-14:26"
+                    "loc": "14:13-14:27"
                   },
                   "mut": false,
                   "label": null
@@ -150,7 +150,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": "14:4-14:27",
+              "loc": "14:4-14:28",
               "doc": " Array constructor"
             }
           ]
@@ -161,7 +161,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": "3:1-14:29"
+        "loc": "3:1-15:2"
       }
     },
     {
@@ -192,13 +192,13 @@
                   "loc": "21:7-21:10"
                 },
                 "tys": [],
-                "loc": "21:7-21:6"
+                "loc": "21:7-21:10"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "21:3-21:6",
+              "loc": "21:3-21:10",
               "attrs": [],
               "doc": " X coordinate"
             },
@@ -220,13 +220,13 @@
                   "loc": "23:7-23:10"
                 },
                 "tys": [],
-                "loc": "23:7-23:6"
+                "loc": "23:7-23:10"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "23:3-23:6",
+              "loc": "23:3-23:10",
               "attrs": [],
               "doc": " Y coordinate"
             },
@@ -248,13 +248,13 @@
                   "loc": "26:7-26:13"
                 },
                 "tys": [],
-                "loc": "26:7-26:6"
+                "loc": "26:7-26:13"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "26:3-26:6",
+              "loc": "26:3-26:13",
               "attrs": [],
               "doc": " Z coordinate\n The type is Double"
             }
@@ -266,7 +266,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": "19:1-26:14"
+        "loc": "19:1-27:2"
       }
     }
   ]

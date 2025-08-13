@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "4:5-4:6",
+        "params_loc": "4:5-4:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -27,7 +27,7 @@
             "loc": "4:11-4:15"
           },
           "tys": [],
-          "loc": "4:11-4:10"
+          "loc": "4:11-4:15"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -49,11 +49,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "4:16-5:2",
+          "loc": "4:16-6:2",
           "faked": true
         }
       },
-      "loc": "3:1-5:2"
+      "loc": "3:1-6:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -68,7 +68,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "9:5-9:6",
+        "params_loc": "9:5-9:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -81,7 +81,7 @@
             "loc": "9:11-9:15"
           },
           "tys": [],
-          "loc": "9:11-9:10"
+          "loc": "9:11-9:15"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -103,11 +103,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "9:16-10:2",
+          "loc": "9:16-11:2",
           "faked": true
         }
       },
-      "loc": "8:1-10:2"
+      "loc": "8:1-11:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -122,7 +122,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "14:5-14:6",
+        "params_loc": "14:5-14:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -135,7 +135,7 @@
             "loc": "14:11-14:15"
           },
           "tys": [],
-          "loc": "14:11-14:10"
+          "loc": "14:11-14:15"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -157,11 +157,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "14:16-15:2",
+          "loc": "14:16-16:2",
           "faked": true
         }
       },
-      "loc": "13:1-15:2"
+      "loc": "13:1-16:2"
     }
   ]
 }

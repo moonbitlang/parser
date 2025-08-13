@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "1:9-1:3",
+        "params_loc": "1:9-1:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -54,10 +54,10 @@
             "func": {
               "type": "Func::Lambda",
               "parameters": [],
-              "params_loc": "4:17-4:18",
+              "params_loc": "4:17-4:19",
               "body": {
                 "type": "Expr::Unit",
-                "loc": "4:28-5:2",
+                "loc": "4:28-6:4",
                 "faked": true
               },
               "return_type": null,
@@ -72,17 +72,17 @@
               "is_async": true,
               "loc": "-1:1--1:1"
             },
-            "loc": "4:11-5:2"
+            "loc": "4:11-6:4"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": "4:3-4:6",
+            "loc": "4:3-6:4",
             "faked": true
           },
-          "loc": "4:11-5:2"
+          "loc": "4:3-6:4"
         }
       },
-      "loc": "1:1-6:5"
+      "loc": "1:1-7:2"
     }
   ],
   "diagnostics": [

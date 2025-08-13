@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "4:9-4:3",
+        "params_loc": "4:9-4:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -42,9 +42,9 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": "6:9-6:8"
+                  "loc": "6:9-6:10"
                 },
-                "loc": "6:9-6:8"
+                "loc": "6:9-6:10"
               },
               "cases": [
                 {
@@ -78,16 +78,16 @@
                     },
                     "body": {
                       "type": "Expr::Unit",
-                      "loc": "8:7-8:10",
+                      "loc": "8:7-8:16",
                       "faked": true
                     },
-                    "loc": "8:15-8:16"
+                    "loc": "8:7-8:16"
                   }
                 }
               ],
               "match_loc": "6:3-6:12",
               "using": null,
-              "loc": "6:3-8:17"
+              "loc": "6:3-9:4"
             }
           ],
           "last_expr": {
@@ -118,9 +118,9 @@
                     "type": "LongIdent::Ident",
                     "0": "println"
                   },
-                  "loc": "14:3-13:17"
+                  "loc": "14:3-14:10"
                 },
-                "loc": "14:3-13:17"
+                "loc": "14:3-14:10"
               },
               "args": [
                 {
@@ -133,9 +133,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": "14:11-14:11"
+                      "loc": "14:11-14:12"
                     },
-                    "loc": "14:11-14:11"
+                    "loc": "14:11-14:12"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -145,20 +145,20 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "14:3-14:12"
+              "loc": "14:3-14:13"
             },
-            "loc": "13:11-13:16"
+            "loc": "13:3-14:13"
           },
-          "loc": "6:3-13:16"
+          "loc": "6:3-14:13"
         }
       },
-      "loc": "4:1-14:14"
+      "loc": "4:1-15:2"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": "8:15-8:16",
+      "loc": "8:7-8:16",
       "msg": "Unexpected let statement in the action part of a matching case"
     }
   ]

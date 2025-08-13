@@ -29,13 +29,13 @@
                   "loc": "1:15-1:18"
                 },
                 "tys": [],
-                "loc": "1:15-1:14"
+                "loc": "1:15-1:18"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "1:11-1:14",
+              "loc": "1:11-1:18",
               "attrs": [],
               "doc": ""
             },
@@ -57,13 +57,13 @@
                   "loc": "1:24-1:28"
                 },
                 "tys": [],
-                "loc": "1:24-1:23"
+                "loc": "1:24-1:28"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "1:20-1:23",
+              "loc": "1:20-1:28",
               "attrs": [],
               "doc": ""
             }
@@ -75,7 +75,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": "1:1-1:28"
+        "loc": "1:1-1:29"
       }
     },
     {
@@ -91,7 +91,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "4:9-4:3",
+        "params_loc": "4:9-4:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -154,25 +154,25 @@
                     "loc": "6:20-6:21"
                   },
                   "is_pun": false,
-                  "loc": "6:17-6:20"
+                  "loc": "6:17-6:21"
                 }
               ],
               "trailing": {
                 "type": "Trailing::None"
               },
-              "loc": "6:16-6:24"
+              "loc": "6:16-6:25"
             },
             "body": {
               "type": "Expr::Unit",
-              "loc": "6:5-6:8",
+              "loc": "6:5-6:25",
               "faked": true
             },
-            "loc": "6:16-6:24"
+            "loc": "6:5-6:25"
           },
-          "loc": "5:14-5:19"
+          "loc": "5:5-6:25"
         }
       },
-      "loc": "4:1-6:26"
+      "loc": "4:1-7:2"
     }
   ],
   "diagnostics": [

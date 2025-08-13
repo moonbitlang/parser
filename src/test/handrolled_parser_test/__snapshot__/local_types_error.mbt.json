@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "1:9-1:3",
+        "params_loc": "1:9-1:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -57,7 +57,7 @@
                           "loc": "3:7-3:10"
                         },
                         "tys": [],
-                        "loc": "3:7-3:7"
+                        "loc": "3:7-3:10"
                       },
                       "mut": false,
                       "label": null
@@ -65,7 +65,7 @@
                   ],
                   "tag": null,
                   "attrs": [],
-                  "loc": "3:5-3:10",
+                  "loc": "3:5-3:11",
                   "doc": ""
                 }
               ]
@@ -86,9 +86,9 @@
                     "type": "LongIdent::Ident",
                     "0": "println"
                   },
-                  "loc": "5:3-4:5"
+                  "loc": "5:3-5:10"
                 },
-                "loc": "5:3-4:5"
+                "loc": "5:3-5:10"
               },
               "args": [
                 {
@@ -109,7 +109,7 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "5:3-5:13"
+              "loc": "5:3-5:14"
             }
           ],
           "last_expr": {
@@ -119,7 +119,7 @@
               "type": "Hole::Synthesized"
             }
           },
-          "loc": "5:14-6:3"
+          "loc": "5:3-6:3"
         }
       },
       "loc": "1:1-6:3"
@@ -155,7 +155,7 @@
                       "loc": "7:7-7:10"
                     },
                     "tys": [],
-                    "loc": "7:7-7:7"
+                    "loc": "7:7-7:10"
                   },
                   "mut": false,
                   "label": null
@@ -163,7 +163,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": "7:5-7:10",
+              "loc": "7:5-7:11",
               "doc": ""
             }
           ]
@@ -174,7 +174,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": "6:3-7:12"
+        "loc": "6:3-8:4"
       }
     },
     {
@@ -190,7 +190,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "11:9-11:3",
+        "params_loc": "11:9-11:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -218,11 +218,11 @@
         ],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "11:9-13:10",
+          "loc": "11:9-14:4",
           "faked": true
         }
       },
-      "loc": "11:1-13:10"
+      "loc": "11:1-14:4"
     },
     {
       "type": "Impl::TopExpr",
@@ -250,7 +250,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "18:9-18:3",
+        "params_loc": "18:9-18:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -275,7 +275,7 @@
           "func": {
             "type": "Func::Lambda",
             "parameters": [],
-            "params_loc": "19:7-19:8",
+            "params_loc": "19:7-19:9",
             "body": {
               "type": "Expr::Hole",
               "loc": "19:11-20:5",
@@ -324,7 +324,7 @@
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": "21:7-20:15",
+              "loc": "21:7-21:8",
               "doc": ""
             }
           ]
@@ -335,7 +335,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": "20:5-21:9"
+        "loc": "20:5-22:6"
       }
     },
     {

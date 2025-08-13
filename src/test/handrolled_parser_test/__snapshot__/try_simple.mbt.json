@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "1:9-1:3",
+        "params_loc": "1:9-1:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -49,9 +49,9 @@
                       "type": "LongIdent::Ident",
                       "0": "a"
                     },
-                    "loc": "2:15-2:14"
+                    "loc": "2:15-2:16"
                   },
-                  "loc": "2:15-2:14"
+                  "loc": "2:15-2:16"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -61,11 +61,11 @@
                       "type": "LongIdent::Ident",
                       "0": "f"
                     },
-                    "loc": "2:20-2:19"
+                    "loc": "2:20-2:21"
                   },
-                  "loc": "2:20-2:19"
+                  "loc": "2:20-2:21"
                 },
-                "loc": "2:15-2:19"
+                "loc": "2:15-2:21"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -75,11 +75,11 @@
                     "type": "LongIdent::Ident",
                     "0": "g"
                   },
-                  "loc": "2:25-2:24"
+                  "loc": "2:25-2:26"
                 },
-                "loc": "2:25-2:24"
+                "loc": "2:25-2:26"
               },
-              "loc": "2:15-2:24"
+              "loc": "2:15-2:26"
             },
             "catch": [
               {
@@ -105,7 +105,7 @@
             "try_loc": "2:11-2:14",
             "catch_loc": "2:27-2:34",
             "else_loc": "-1:1--1:1",
-            "loc": "2:11-2:41"
+            "loc": "2:11-2:43"
           },
           "body": {
             "type": "Expr::Let",
@@ -127,9 +127,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": "3:11-3:10"
+                      "loc": "3:11-3:12"
                     },
-                    "loc": "3:11-3:10"
+                    "loc": "3:11-3:12"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -139,11 +139,11 @@
                         "type": "LongIdent::Ident",
                         "0": "f"
                       },
-                      "loc": "3:16-3:15"
+                      "loc": "3:16-3:17"
                     },
-                    "loc": "3:16-3:15"
+                    "loc": "3:16-3:17"
                   },
-                  "loc": "3:11-3:15"
+                  "loc": "3:11-3:17"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -153,11 +153,11 @@
                       "type": "LongIdent::Ident",
                       "0": "g"
                     },
-                    "loc": "3:21-3:20"
+                    "loc": "3:21-3:22"
                   },
-                  "loc": "3:21-3:20"
+                  "loc": "3:21-3:22"
                 },
-                "loc": "3:11-3:20"
+                "loc": "3:11-3:22"
               },
               "catch": [
                 {
@@ -180,10 +180,10 @@
               "catch_all": false,
               "try_else": null,
               "has_try": false,
-              "try_loc": "3:23-3:22",
-              "catch_loc": "3:23-3:22",
+              "try_loc": "3:23-3:28",
+              "catch_loc": "3:23-3:28",
               "else_loc": "-1:1--1:1",
-              "loc": "3:11-3:37"
+              "loc": "3:11-3:39"
             },
             "body": {
               "type": "Expr::Let",
@@ -205,9 +205,9 @@
                           "type": "LongIdent::Ident",
                           "0": "a"
                         },
-                        "loc": "4:16-4:15"
+                        "loc": "4:16-4:17"
                       },
-                      "loc": "4:16-4:15"
+                      "loc": "4:16-4:17"
                     },
                     "rhs": {
                       "type": "Expr::Ident",
@@ -217,11 +217,11 @@
                           "type": "LongIdent::Ident",
                           "0": "f"
                         },
-                        "loc": "4:21-4:20"
+                        "loc": "4:21-4:22"
                       },
-                      "loc": "4:21-4:20"
+                      "loc": "4:21-4:22"
                     },
-                    "loc": "4:16-4:20"
+                    "loc": "4:16-4:22"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -231,17 +231,17 @@
                         "type": "LongIdent::Ident",
                         "0": "g"
                       },
-                      "loc": "4:26-4:25"
+                      "loc": "4:26-4:27"
                     },
-                    "loc": "4:26-4:25"
+                    "loc": "4:26-4:27"
                   },
-                  "loc": "4:16-4:25"
+                  "loc": "4:16-4:27"
                 },
                 "kind": {
                   "type": "TryOperatorKind::Question"
                 },
                 "try_loc": "4:11-4:15",
-                "loc": "4:11-4:25"
+                "loc": "4:11-4:27"
               },
               "body": {
                 "type": "Expr::Let",
@@ -269,9 +269,9 @@
                           "type": "LongIdent::Ident",
                           "0": "a"
                         },
-                        "loc": "6:15-6:14"
+                        "loc": "6:15-6:16"
                       },
-                      "loc": "6:15-6:14"
+                      "loc": "6:15-6:16"
                     },
                     "rhs": {
                       "type": "Expr::Ident",
@@ -281,11 +281,11 @@
                           "type": "LongIdent::Ident",
                           "0": "b"
                         },
-                        "loc": "6:19-6:18"
+                        "loc": "6:19-6:20"
                       },
-                      "loc": "6:19-6:18"
+                      "loc": "6:19-6:20"
                     },
-                    "loc": "6:15-6:18"
+                    "loc": "6:15-6:20"
                   },
                   "catch": [
                     {
@@ -311,7 +311,7 @@
                   "try_loc": "6:11-6:14",
                   "catch_loc": "6:21-6:28",
                   "else_loc": "-1:1--1:1",
-                  "loc": "6:11-6:35"
+                  "loc": "6:11-6:37"
                 },
                 "body": {
                   "type": "Expr::Let",
@@ -339,9 +339,9 @@
                             "type": "LongIdent::Ident",
                             "0": "a"
                           },
-                          "loc": "7:11-7:10"
+                          "loc": "7:11-7:12"
                         },
-                        "loc": "7:11-7:10"
+                        "loc": "7:11-7:12"
                       },
                       "rhs": {
                         "type": "Expr::Ident",
@@ -351,11 +351,11 @@
                             "type": "LongIdent::Ident",
                             "0": "b"
                           },
-                          "loc": "7:15-7:14"
+                          "loc": "7:15-7:16"
                         },
-                        "loc": "7:15-7:14"
+                        "loc": "7:15-7:16"
                       },
-                      "loc": "7:11-7:14"
+                      "loc": "7:11-7:16"
                     },
                     "catch": [
                       {
@@ -378,10 +378,10 @@
                     "catch_all": false,
                     "try_else": null,
                     "has_try": false,
-                    "try_loc": "7:17-7:16",
-                    "catch_loc": "7:17-7:16",
+                    "try_loc": "7:17-7:22",
+                    "catch_loc": "7:17-7:22",
                     "else_loc": "-1:1--1:1",
-                    "loc": "7:11-7:31"
+                    "loc": "7:11-7:33"
                   },
                   "body": {
                     "type": "Expr::Let",
@@ -409,9 +409,9 @@
                               "type": "LongIdent::Ident",
                               "0": "a"
                             },
-                            "loc": "8:16-8:15"
+                            "loc": "8:16-8:17"
                           },
-                          "loc": "8:16-8:15"
+                          "loc": "8:16-8:17"
                         },
                         "rhs": {
                           "type": "Expr::Ident",
@@ -421,17 +421,17 @@
                               "type": "LongIdent::Ident",
                               "0": "b"
                             },
-                            "loc": "8:20-8:19"
+                            "loc": "8:20-8:21"
                           },
-                          "loc": "8:20-8:19"
+                          "loc": "8:20-8:21"
                         },
-                        "loc": "8:16-8:19"
+                        "loc": "8:16-8:21"
                       },
                       "kind": {
                         "type": "TryOperatorKind::Question"
                       },
                       "try_loc": "8:11-8:15",
-                      "loc": "8:11-8:19"
+                      "loc": "8:11-8:21"
                     },
                     "body": {
                       "type": "Expr::Let",
@@ -458,9 +458,9 @@
                               "0": "Show"
                             },
                             "is_object": true,
-                            "loc": "9:21-9:22"
+                            "loc": "9:21-9:26"
                           },
-                          "loc": "9:15-9:22"
+                          "loc": "9:15-9:26"
                         },
                         "catch": [
                           {
@@ -486,7 +486,7 @@
                         "try_loc": "9:11-9:14",
                         "catch_loc": "9:27-9:34",
                         "else_loc": "-1:1--1:1",
-                        "loc": "9:11-9:41"
+                        "loc": "9:11-9:43"
                       },
                       "body": {
                         "type": "Expr::Let",
@@ -513,9 +513,9 @@
                                 "0": "Show"
                               },
                               "is_object": true,
-                              "loc": "10:17-10:18"
+                              "loc": "10:17-10:22"
                             },
-                            "loc": "10:11-10:18"
+                            "loc": "10:11-10:22"
                           },
                           "catch": [
                             {
@@ -538,10 +538,10 @@
                           "catch_all": false,
                           "try_else": null,
                           "has_try": false,
-                          "try_loc": "10:23-10:22",
-                          "catch_loc": "10:23-10:22",
+                          "try_loc": "10:23-10:28",
+                          "catch_loc": "10:23-10:28",
                           "else_loc": "-1:1--1:1",
-                          "loc": "10:11-10:37"
+                          "loc": "10:11-10:39"
                         },
                         "body": {
                           "type": "Expr::Let",
@@ -568,15 +568,15 @@
                                   "0": "Show"
                                 },
                                 "is_object": true,
-                                "loc": "11:22-11:23"
+                                "loc": "11:22-11:27"
                               },
-                              "loc": "11:16-11:23"
+                              "loc": "11:16-11:27"
                             },
                             "kind": {
                               "type": "TryOperatorKind::Question"
                             },
                             "try_loc": "11:11-11:15",
-                            "loc": "11:11-11:23"
+                            "loc": "11:11-11:27"
                           },
                           "body": {
                             "type": "Expr::Let",
@@ -604,7 +604,7 @@
                                   },
                                   "loc": "13:20-13:21"
                                 },
-                                "loc": "13:15-13:19"
+                                "loc": "13:15-13:21"
                               },
                               "catch": [
                                 {
@@ -630,7 +630,7 @@
                               "try_loc": "13:11-13:14",
                               "catch_loc": "13:22-13:29",
                               "else_loc": "-1:1--1:1",
-                              "loc": "13:11-13:36"
+                              "loc": "13:11-13:38"
                             },
                             "body": {
                               "type": "Expr::Let",
@@ -658,7 +658,7 @@
                                     },
                                     "loc": "14:16-14:17"
                                   },
-                                  "loc": "14:11-14:15"
+                                  "loc": "14:11-14:17"
                                 },
                                 "catch": [
                                   {
@@ -681,10 +681,10 @@
                                 "catch_all": false,
                                 "try_else": null,
                                 "has_try": false,
-                                "try_loc": "14:18-14:17",
-                                "catch_loc": "14:18-14:17",
+                                "try_loc": "14:18-14:23",
+                                "catch_loc": "14:18-14:23",
                                 "else_loc": "-1:1--1:1",
-                                "loc": "14:11-14:32"
+                                "loc": "14:11-14:34"
                               },
                               "body": {
                                 "type": "Expr::Let",
@@ -712,13 +712,13 @@
                                       },
                                       "loc": "15:21-15:22"
                                     },
-                                    "loc": "15:16-15:20"
+                                    "loc": "15:16-15:22"
                                   },
                                   "kind": {
                                     "type": "TryOperatorKind::Question"
                                   },
                                   "try_loc": "15:11-15:15",
-                                  "loc": "15:11-15:20"
+                                  "loc": "15:11-15:22"
                                 },
                                 "body": {
                                   "type": "Expr::Let",
@@ -748,13 +748,13 @@
                                             "loc": "17:20-17:21"
                                           },
                                           "is_pun": false,
-                                          "loc": "17:17-17:19"
+                                          "loc": "17:17-17:21"
                                         }
                                       ],
                                       "trailing": {
                                         "type": "Trailing::None"
                                       },
-                                      "loc": "17:15-17:21"
+                                      "loc": "17:15-17:23"
                                     },
                                     "catch": [
                                       {
@@ -780,7 +780,7 @@
                                     "try_loc": "17:11-17:14",
                                     "catch_loc": "17:24-17:31",
                                     "else_loc": "-1:1--1:1",
-                                    "loc": "17:11-17:38"
+                                    "loc": "17:11-17:39"
                                   },
                                   "body": {
                                     "type": "Expr::Let",
@@ -810,13 +810,13 @@
                                               "loc": "18:16-18:17"
                                             },
                                             "is_pun": false,
-                                            "loc": "18:13-18:15"
+                                            "loc": "18:13-18:17"
                                           }
                                         ],
                                         "trailing": {
                                           "type": "Trailing::None"
                                         },
-                                        "loc": "18:11-18:17"
+                                        "loc": "18:11-18:19"
                                       },
                                       "catch": [
                                         {
@@ -839,10 +839,10 @@
                                       "catch_all": false,
                                       "try_else": null,
                                       "has_try": false,
-                                      "try_loc": "18:20-18:19",
-                                      "catch_loc": "18:20-18:19",
+                                      "try_loc": "18:20-18:25",
+                                      "catch_loc": "18:20-18:25",
                                       "else_loc": "-1:1--1:1",
-                                      "loc": "18:11-18:34"
+                                      "loc": "18:11-18:35"
                                     },
                                     "body": {
                                       "type": "Expr::Let",
@@ -872,19 +872,19 @@
                                                 "loc": "19:21-19:22"
                                               },
                                               "is_pun": false,
-                                              "loc": "19:18-19:20"
+                                              "loc": "19:18-19:22"
                                             }
                                           ],
                                           "trailing": {
                                             "type": "Trailing::None"
                                           },
-                                          "loc": "19:16-19:22"
+                                          "loc": "19:16-19:24"
                                         },
                                         "kind": {
                                           "type": "TryOperatorKind::Question"
                                         },
                                         "try_loc": "19:11-19:15",
-                                        "loc": "19:11-19:22"
+                                        "loc": "19:11-19:24"
                                       },
                                       "body": {
                                         "type": "Expr::Let",
@@ -901,7 +901,7 @@
                                               "name": {
                                                 "type": "ConstrName",
                                                 "name": "A",
-                                                "loc": "21:18-21:18"
+                                                "loc": "21:18-21:19"
                                               },
                                               "extra_info": {
                                                 "type": "ConstructorExtraInfo::TypeName",
@@ -912,12 +912,12 @@
                                                     "0": "T"
                                                   },
                                                   "is_object": false,
-                                                  "loc": "21:15-21:14"
+                                                  "loc": "21:15-21:16"
                                                 }
                                               },
-                                              "loc": "21:18-21:18"
+                                              "loc": "21:18-21:19"
                                             },
-                                            "loc": "21:15-21:18"
+                                            "loc": "21:15-21:19"
                                           },
                                           "catch": [
                                             {
@@ -943,7 +943,7 @@
                                           "try_loc": "21:11-21:14",
                                           "catch_loc": "21:20-21:27",
                                           "else_loc": "-1:1--1:1",
-                                          "loc": "21:11-21:34"
+                                          "loc": "21:11-21:36"
                                         },
                                         "body": {
                                           "type": "Expr::Let",
@@ -960,7 +960,7 @@
                                                 "name": {
                                                   "type": "ConstrName",
                                                   "name": "A",
-                                                  "loc": "22:14-22:14"
+                                                  "loc": "22:14-22:15"
                                                 },
                                                 "extra_info": {
                                                   "type": "ConstructorExtraInfo::TypeName",
@@ -971,12 +971,12 @@
                                                       "0": "T"
                                                     },
                                                     "is_object": false,
-                                                    "loc": "22:11-22:10"
+                                                    "loc": "22:11-22:12"
                                                   }
                                                 },
-                                                "loc": "22:14-22:14"
+                                                "loc": "22:14-22:15"
                                               },
-                                              "loc": "22:11-22:14"
+                                              "loc": "22:11-22:15"
                                             },
                                             "catch": [
                                               {
@@ -999,10 +999,10 @@
                                             "catch_all": false,
                                             "try_else": null,
                                             "has_try": false,
-                                            "try_loc": "22:16-22:15",
-                                            "catch_loc": "22:16-22:15",
+                                            "try_loc": "22:16-22:21",
+                                            "catch_loc": "22:16-22:21",
                                             "else_loc": "-1:1--1:1",
-                                            "loc": "22:11-22:30"
+                                            "loc": "22:11-22:31"
                                           },
                                           "body": {
                                             "type": "Expr::Let",
@@ -1019,7 +1019,7 @@
                                                   "name": {
                                                     "type": "ConstrName",
                                                     "name": "A",
-                                                    "loc": "23:19-23:19"
+                                                    "loc": "23:19-23:20"
                                                   },
                                                   "extra_info": {
                                                     "type": "ConstructorExtraInfo::TypeName",
@@ -1030,18 +1030,18 @@
                                                         "0": "T"
                                                       },
                                                       "is_object": false,
-                                                      "loc": "23:16-23:15"
+                                                      "loc": "23:16-23:17"
                                                     }
                                                   },
-                                                  "loc": "23:19-23:19"
+                                                  "loc": "23:19-23:20"
                                                 },
-                                                "loc": "23:16-23:19"
+                                                "loc": "23:16-23:20"
                                               },
                                               "kind": {
                                                 "type": "TryOperatorKind::Question"
                                               },
                                               "try_loc": "23:11-23:15",
-                                              "loc": "23:11-23:19"
+                                              "loc": "23:11-23:20"
                                             },
                                             "body": {
                                               "type": "Expr::Let",
@@ -1063,9 +1063,9 @@
                                                           "type": "LongIdent::Ident",
                                                           "0": "println"
                                                         },
-                                                        "loc": "25:17-25:16"
+                                                        "loc": "25:17-25:24"
                                                       },
-                                                      "loc": "25:17-25:16"
+                                                      "loc": "25:17-25:24"
                                                     },
                                                     "args": [
                                                       {
@@ -1086,12 +1086,12 @@
                                                     "attr": {
                                                       "type": "ApplyAttr::NoAttr"
                                                     },
-                                                    "loc": "25:17-25:27"
+                                                    "loc": "25:17-25:28"
                                                   },
                                                   "group": {
                                                     "type": "Group::Brace"
                                                   },
-                                                  "loc": "25:15-25:10"
+                                                  "loc": "25:15-25:14"
                                                 },
                                                 "catch": [
                                                   {
@@ -1117,7 +1117,7 @@
                                                 "try_loc": "25:11-25:14",
                                                 "catch_loc": "25:31-25:38",
                                                 "else_loc": "-1:1--1:1",
-                                                "loc": "25:11-25:45"
+                                                "loc": "25:11-25:47"
                                               },
                                               "body": {
                                                 "type": "Expr::Let",
@@ -1139,9 +1139,9 @@
                                                             "type": "LongIdent::Ident",
                                                             "0": "println"
                                                           },
-                                                          "loc": "26:13-26:12"
+                                                          "loc": "26:13-26:20"
                                                         },
-                                                        "loc": "26:13-26:12"
+                                                        "loc": "26:13-26:20"
                                                       },
                                                       "args": [
                                                         {
@@ -1162,12 +1162,12 @@
                                                       "attr": {
                                                         "type": "ApplyAttr::NoAttr"
                                                       },
-                                                      "loc": "26:13-26:23"
+                                                      "loc": "26:13-26:24"
                                                     },
                                                     "group": {
                                                       "type": "Group::Brace"
                                                     },
-                                                    "loc": "26:11-26:8"
+                                                    "loc": "26:11-26:10"
                                                   },
                                                   "catch": [
                                                     {
@@ -1190,10 +1190,10 @@
                                                   "catch_all": false,
                                                   "try_else": null,
                                                   "has_try": false,
-                                                  "try_loc": "26:27-26:26",
-                                                  "catch_loc": "26:27-26:26",
+                                                  "try_loc": "26:27-26:32",
+                                                  "catch_loc": "26:27-26:32",
                                                   "else_loc": "-1:1--1:1",
-                                                  "loc": "26:11-26:41"
+                                                  "loc": "26:11-26:43"
                                                 },
                                                 "body": {
                                                   "type": "Expr::Let",
@@ -1215,9 +1215,9 @@
                                                               "type": "LongIdent::Ident",
                                                               "0": "println"
                                                             },
-                                                            "loc": "27:18-27:17"
+                                                            "loc": "27:18-27:25"
                                                           },
-                                                          "loc": "27:18-27:17"
+                                                          "loc": "27:18-27:25"
                                                         },
                                                         "args": [
                                                           {
@@ -1238,18 +1238,18 @@
                                                         "attr": {
                                                           "type": "ApplyAttr::NoAttr"
                                                         },
-                                                        "loc": "27:18-27:28"
+                                                        "loc": "27:18-27:29"
                                                       },
                                                       "group": {
                                                         "type": "Group::Brace"
                                                       },
-                                                      "loc": "27:16-27:10"
+                                                      "loc": "27:16-27:15"
                                                     },
                                                     "kind": {
                                                       "type": "TryOperatorKind::Question"
                                                     },
                                                     "try_loc": "27:11-27:15",
-                                                    "loc": "27:11-27:29"
+                                                    "loc": "27:11-27:31"
                                                   },
                                                   "body": {
                                                     "type": "Expr::Let",
@@ -1286,9 +1286,9 @@
                                                           "has_error": null,
                                                           "is_async": false,
                                                           "fn_loc": "-1:1--1:1",
-                                                          "loc": "29:18-29:27"
+                                                          "loc": "29:18-29:29"
                                                         },
-                                                        "loc": "29:15-29:27"
+                                                        "loc": "29:15-29:29"
                                                       },
                                                       "catch": [
                                                         {
@@ -1314,7 +1314,7 @@
                                                       "try_loc": "29:11-29:14",
                                                       "catch_loc": "29:30-29:37",
                                                       "else_loc": "-1:1--1:1",
-                                                      "loc": "29:11-29:44"
+                                                      "loc": "29:11-29:46"
                                                     },
                                                     "body": {
                                                       "type": "Expr::Let",
@@ -1351,9 +1351,9 @@
                                                             "has_error": null,
                                                             "is_async": false,
                                                             "fn_loc": "-1:1--1:1",
-                                                            "loc": "30:14-30:23"
+                                                            "loc": "30:14-30:25"
                                                           },
-                                                          "loc": "30:11-30:23"
+                                                          "loc": "30:11-30:25"
                                                         },
                                                         "catch": [
                                                           {
@@ -1376,10 +1376,10 @@
                                                         "catch_all": false,
                                                         "try_else": null,
                                                         "has_try": false,
-                                                        "try_loc": "30:26-30:25",
-                                                        "catch_loc": "30:26-30:25",
+                                                        "try_loc": "30:26-30:31",
+                                                        "catch_loc": "30:26-30:31",
                                                         "else_loc": "-1:1--1:1",
-                                                        "loc": "30:11-30:40"
+                                                        "loc": "30:11-30:42"
                                                       },
                                                       "body": {
                                                         "type": "Expr::Let",
@@ -1416,71 +1416,71 @@
                                                               "has_error": null,
                                                               "is_async": false,
                                                               "fn_loc": "-1:1--1:1",
-                                                              "loc": "31:19-31:28"
+                                                              "loc": "31:19-31:30"
                                                             },
-                                                            "loc": "31:16-31:28"
+                                                            "loc": "31:16-31:30"
                                                           },
                                                           "kind": {
                                                             "type": "TryOperatorKind::Question"
                                                           },
                                                           "try_loc": "31:11-31:15",
-                                                          "loc": "31:11-31:28"
+                                                          "loc": "31:11-31:30"
                                                         },
                                                         "body": {
                                                           "type": "Expr::Unit",
-                                                          "loc": "31:3-31:6",
+                                                          "loc": "31:3-31:30",
                                                           "faked": true
                                                         },
-                                                        "loc": "31:11-31:28"
+                                                        "loc": "31:3-31:30"
                                                       },
-                                                      "loc": "30:11-30:40"
+                                                      "loc": "30:3-31:30"
                                                     },
-                                                    "loc": "29:11-29:44"
+                                                    "loc": "29:3-31:30"
                                                   },
-                                                  "loc": "27:11-27:29"
+                                                  "loc": "27:3-31:30"
                                                 },
-                                                "loc": "26:11-26:41"
+                                                "loc": "26:3-31:30"
                                               },
-                                              "loc": "25:11-25:45"
+                                              "loc": "25:3-31:30"
                                             },
-                                            "loc": "23:11-23:19"
+                                            "loc": "23:3-31:30"
                                           },
-                                          "loc": "22:11-22:30"
+                                          "loc": "22:3-31:30"
                                         },
-                                        "loc": "21:11-21:34"
+                                        "loc": "21:3-31:30"
                                       },
-                                      "loc": "19:11-19:22"
+                                      "loc": "19:3-31:30"
                                     },
-                                    "loc": "18:11-18:34"
+                                    "loc": "18:3-31:30"
                                   },
-                                  "loc": "17:11-17:38"
+                                  "loc": "17:3-31:30"
                                 },
-                                "loc": "15:11-15:20"
+                                "loc": "15:3-31:30"
                               },
-                              "loc": "14:11-14:32"
+                              "loc": "14:3-31:30"
                             },
-                            "loc": "13:11-13:36"
+                            "loc": "13:3-31:30"
                           },
-                          "loc": "11:11-11:23"
+                          "loc": "11:3-31:30"
                         },
-                        "loc": "10:11-10:37"
+                        "loc": "10:3-31:30"
                       },
-                      "loc": "9:11-9:41"
+                      "loc": "9:3-31:30"
                     },
-                    "loc": "8:11-8:19"
+                    "loc": "8:3-31:30"
                   },
-                  "loc": "7:11-7:31"
+                  "loc": "7:3-31:30"
                 },
-                "loc": "6:11-6:35"
+                "loc": "6:3-31:30"
               },
-              "loc": "4:11-4:25"
+              "loc": "4:3-31:30"
             },
-            "loc": "3:11-3:37"
+            "loc": "3:3-31:30"
           },
-          "loc": "2:11-2:41"
+          "loc": "2:3-31:30"
         }
       },
-      "loc": "1:1-32:4"
+      "loc": "1:1-33:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -1495,7 +1495,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "35:9-35:3",
+        "params_loc": "35:9-35:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -1559,15 +1559,15 @@
                 "catch_all": false,
                 "try_else": null,
                 "has_try": false,
-                "try_loc": "37:14-37:13",
-                "catch_loc": "37:14-37:13",
+                "try_loc": "37:14-37:19",
+                "catch_loc": "37:14-37:19",
                 "else_loc": "-1:1--1:1",
-                "loc": "37:12-37:28"
+                "loc": "37:12-37:30"
               },
               "group": {
                 "type": "Group::Paren"
               },
-              "loc": "37:11-37:30"
+              "loc": "37:11-37:31"
             },
             "rhs": {
               "type": "Expr::Group",
@@ -1602,17 +1602,17 @@
                 "catch_all": false,
                 "try_else": null,
                 "has_try": false,
-                "try_loc": "37:37-37:36",
-                "catch_loc": "37:37-37:36",
+                "try_loc": "37:37-37:42",
+                "catch_loc": "37:37-37:42",
                 "else_loc": "-1:1--1:1",
-                "loc": "37:35-37:51"
+                "loc": "37:35-37:52"
               },
               "group": {
                 "type": "Group::Paren"
               },
-              "loc": "37:34-37:51"
+              "loc": "37:34-37:52"
             },
-            "loc": "37:11-37:52"
+            "loc": "37:11-37:53"
           },
           "body": {
             "type": "Expr::Let",
@@ -1655,15 +1655,15 @@
                   "catch_all": false,
                   "try_else": null,
                   "has_try": false,
-                  "try_loc": "39:14-39:13",
-                  "catch_loc": "39:14-39:13",
+                  "try_loc": "39:14-39:19",
+                  "catch_loc": "39:14-39:19",
                   "else_loc": "-1:1--1:1",
-                  "loc": "39:12-39:28"
+                  "loc": "39:12-39:29"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "39:11-39:29"
+                "loc": "39:11-39:30"
               },
               "trait": {
                 "type": "TypeName",
@@ -1672,9 +1672,9 @@
                   "0": "Show"
                 },
                 "is_object": true,
-                "loc": "39:34-39:35"
+                "loc": "39:34-39:39"
               },
-              "loc": "39:11-39:35"
+              "loc": "39:11-39:39"
             },
             "body": {
               "type": "Expr::Let",
@@ -1719,15 +1719,15 @@
                       "catch_all": false,
                       "try_else": null,
                       "has_try": false,
-                      "try_loc": "41:14-41:13",
-                      "catch_loc": "41:14-41:13",
+                      "try_loc": "41:14-41:19",
+                      "catch_loc": "41:14-41:19",
                       "else_loc": "-1:1--1:1",
-                      "loc": "41:12-41:28"
+                      "loc": "41:12-41:29"
                     },
                     "group": {
                       "type": "Group::Paren"
                     },
-                    "loc": "41:11-41:29"
+                    "loc": "41:11-41:30"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1737,11 +1737,11 @@
                         "type": "LongIdent::Ident",
                         "0": "f"
                       },
-                      "loc": "41:34-41:33"
+                      "loc": "41:34-41:35"
                     },
-                    "loc": "41:34-41:33"
+                    "loc": "41:34-41:35"
                   },
-                  "loc": "41:11-41:33"
+                  "loc": "41:11-41:35"
                 },
                 "catch": [
                   {
@@ -1764,10 +1764,10 @@
                 "catch_all": false,
                 "try_else": null,
                 "has_try": false,
-                "try_loc": "41:36-41:35",
-                "catch_loc": "41:36-41:35",
+                "try_loc": "41:36-41:41",
+                "catch_loc": "41:36-41:41",
                 "else_loc": "-1:1--1:1",
-                "loc": "41:31-41:50"
+                "loc": "41:31-41:51"
               },
               "body": {
                 "type": "Expr::Let",
@@ -1810,15 +1810,15 @@
                       "catch_all": false,
                       "try_else": null,
                       "has_try": false,
-                      "try_loc": "42:14-42:13",
-                      "catch_loc": "42:14-42:13",
+                      "try_loc": "42:14-42:19",
+                      "catch_loc": "42:14-42:19",
                       "else_loc": "-1:1--1:1",
-                      "loc": "42:12-42:28"
+                      "loc": "42:12-42:29"
                     },
                     "group": {
                       "type": "Group::Paren"
                     },
-                    "loc": "42:11-42:29"
+                    "loc": "42:11-42:30"
                   },
                   "rhs": {
                     "type": "Expr::Group",
@@ -1832,9 +1832,9 @@
                             "type": "LongIdent::Ident",
                             "0": "f"
                           },
-                          "loc": "42:35-42:35"
+                          "loc": "42:35-42:36"
                         },
-                        "loc": "42:35-42:35"
+                        "loc": "42:35-42:36"
                       },
                       "catch": [
                         {
@@ -1857,33 +1857,33 @@
                       "catch_all": false,
                       "try_else": null,
                       "has_try": false,
-                      "try_loc": "42:37-42:36",
-                      "catch_loc": "42:37-42:36",
+                      "try_loc": "42:37-42:42",
+                      "catch_loc": "42:37-42:42",
                       "else_loc": "-1:1--1:1",
-                      "loc": "42:35-42:51"
+                      "loc": "42:35-42:52"
                     },
                     "group": {
                       "type": "Group::Paren"
                     },
-                    "loc": "42:34-42:51"
+                    "loc": "42:34-42:52"
                   },
-                  "loc": "42:11-42:52"
+                  "loc": "42:11-42:53"
                 },
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": "42:3-42:6",
+                  "loc": "42:3-42:53",
                   "faked": true
                 },
-                "loc": "42:11-42:52"
+                "loc": "42:3-42:53"
               },
-              "loc": "41:31-41:50"
+              "loc": "41:3-42:53"
             },
-            "loc": "39:11-39:35"
+            "loc": "39:3-42:53"
           },
-          "loc": "37:11-37:52"
+          "loc": "37:3-42:53"
         }
       },
-      "loc": "35:1-48:2"
+      "loc": "35:1-49:2"
     }
   ]
 }

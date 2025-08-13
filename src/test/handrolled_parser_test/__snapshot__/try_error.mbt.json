@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "1:9-1:3",
+        "params_loc": "1:9-1:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -65,7 +65,7 @@
             "try_loc": "3:7-3:10",
             "catch_loc": "3:13-3:20",
             "else_loc": "-1:1--1:1",
-            "loc": "3:7-3:27"
+            "loc": "3:7-3:29"
           },
           "catch": [
             {
@@ -91,10 +91,10 @@
           "try_loc": "3:3-3:6",
           "catch_loc": "3:30-3:37",
           "else_loc": "-1:1--1:1",
-          "loc": "3:3-3:44"
+          "loc": "3:3-3:46"
         }
       },
-      "loc": "1:1-3:47"
+      "loc": "1:1-4:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -109,7 +109,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "5:9-5:3",
+        "params_loc": "5:9-5:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -152,7 +152,7 @@
               },
               "loc": "7:28-7:29"
             },
-            "loc": "7:7-7:29"
+            "loc": "7:7-7:31"
           },
           "catch": [
             {
@@ -178,10 +178,10 @@
           "try_loc": "7:3-7:6",
           "catch_loc": "7:32-7:39",
           "else_loc": "-1:1--1:1",
-          "loc": "7:3-7:46"
+          "loc": "7:3-7:48"
         }
       },
-      "loc": "5:1-7:49"
+      "loc": "5:1-8:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -196,7 +196,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "10:9-10:3",
+        "params_loc": "10:9-10:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -246,8 +246,8 @@
               }
             ],
             "label": null,
-            "loop_loc": "12:7-12:11",
-            "loc": "12:7-12:22"
+            "loop_loc": "12:7-12:13",
+            "loc": "12:7-12:24"
           },
           "catch": [
             {
@@ -273,10 +273,10 @@
           "try_loc": "12:3-12:6",
           "catch_loc": "12:25-12:32",
           "else_loc": "-1:1--1:1",
-          "loc": "12:3-12:39"
+          "loc": "12:3-12:41"
         }
       },
-      "loc": "10:1-12:42"
+      "loc": "10:1-13:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -291,7 +291,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "15:9-15:3",
+        "params_loc": "15:9-15:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -338,7 +338,7 @@
             ],
             "match_loc": "17:7-17:16",
             "using": null,
-            "loc": "17:7-17:23"
+            "loc": "17:7-17:25"
           },
           "catch": [
             {
@@ -364,10 +364,10 @@
           "try_loc": "17:3-17:6",
           "catch_loc": "17:26-17:33",
           "else_loc": "-1:1--1:1",
-          "loc": "17:3-17:40"
+          "loc": "17:3-17:42"
         }
       },
-      "loc": "15:1-17:43"
+      "loc": "15:1-18:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -382,7 +382,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "20:9-20:3",
+        "params_loc": "20:9-20:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -410,10 +410,10 @@
             "type": "TryOperatorKind::Question"
           },
           "try_loc": "22:3-22:7",
-          "loc": "22:3-22:26"
+          "loc": "22:3-22:28"
         }
       },
-      "loc": "20:1-22:28"
+      "loc": "20:1-22:30"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -428,7 +428,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "25:9-25:3",
+        "params_loc": "25:9-25:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -477,10 +477,10 @@
           "try_loc": "26:3-26:6",
           "catch_loc": "26:10-26:17",
           "else_loc": "-1:1--1:1",
-          "loc": "26:3-26:24"
+          "loc": "26:3-26:26"
         }
       },
-      "loc": "25:1-26:41"
+      "loc": "25:1-26:43"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -495,7 +495,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "29:9-29:3",
+        "params_loc": "29:9-29:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -547,20 +547,20 @@
             "catch_all": false,
             "try_else": null,
             "has_try": false,
-            "try_loc": "31:13-31:12",
-            "catch_loc": "31:13-31:12",
+            "try_loc": "31:13-31:18",
+            "catch_loc": "31:13-31:18",
             "else_loc": "-1:1--1:1",
-            "loc": "31:11-31:27"
+            "loc": "31:11-31:29"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": "31:3-31:6",
+            "loc": "31:3-31:29",
             "faked": true
           },
-          "loc": "31:11-31:27"
+          "loc": "31:3-31:29"
         }
       },
-      "loc": "29:1-31:48"
+      "loc": "29:1-31:49"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -575,7 +575,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "34:9-34:3",
+        "params_loc": "34:9-34:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -627,41 +627,41 @@
             "catch_all": false,
             "try_else": null,
             "has_try": false,
-            "try_loc": "36:13-36:12",
-            "catch_loc": "36:13-36:12",
+            "try_loc": "36:13-36:18",
+            "catch_loc": "36:13-36:18",
             "else_loc": "-1:1--1:1",
-            "loc": "36:11-36:27"
+            "loc": "36:11-36:28"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": "36:3-36:6",
+            "loc": "36:3-36:28",
             "faked": true
           },
-          "loc": "36:11-36:27"
+          "loc": "36:3-36:28"
         }
       },
-      "loc": "34:1-36:38"
+      "loc": "34:1-37:2"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": "3:7-3:27",
+      "loc": "3:7-3:29",
       "msg": "Unexpected try expression in the try body"
     },
     {
       "type": "Error",
-      "loc": "7:7-7:29",
+      "loc": "7:7-7:31",
       "msg": "Unexpected if expression in the try body"
     },
     {
       "type": "Error",
-      "loc": "12:7-12:22",
+      "loc": "12:7-12:24",
       "msg": "Unexpected loop expression in the try body"
     },
     {
       "type": "Error",
-      "loc": "17:7-17:23",
+      "loc": "17:7-17:25",
       "msg": "Unexpected match expression in the try body"
     },
     {

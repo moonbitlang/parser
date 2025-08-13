@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "1:9-1:3",
+        "params_loc": "1:9-1:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -50,14 +50,14 @@
                         "name": {
                           "type": "ConstrName",
                           "name": "Some",
-                          "loc": "3:11-3:11"
+                          "loc": "3:11-3:15"
                         },
                         "extra_info": {
                           "type": "ConstructorExtraInfo::NoExtraInfo"
                         },
-                        "loc": "3:11-3:11"
+                        "loc": "3:11-3:15"
                       },
-                      "loc": "3:11-3:11"
+                      "loc": "3:11-3:15"
                     },
                     "args": [
                       {
@@ -78,15 +78,15 @@
                     "attr": {
                       "type": "ApplyAttr::NoAttr"
                     },
-                    "loc": "3:11-3:17"
+                    "loc": "3:11-3:18"
                   },
                   "group": {
                     "type": "Group::Paren"
                   },
-                  "loc": "3:10-3:18"
+                  "loc": "3:10-3:19"
                 },
                 "label": null,
-                "loc": "3:5-3:18"
+                "loc": "3:5-3:19"
               },
               "for_else": {
                 "type": "Expr::Constr",
@@ -95,17 +95,17 @@
                   "name": {
                     "type": "ConstrName",
                     "name": "None",
-                    "loc": "5:5-4:12"
+                    "loc": "5:5-5:9"
                   },
                   "extra_info": {
                     "type": "ConstructorExtraInfo::NoExtraInfo"
                   },
-                  "loc": "5:5-4:12"
+                  "loc": "5:5-5:9"
                 },
-                "loc": "5:5-4:12"
+                "loc": "5:5-5:9"
               },
               "label": null,
-              "loc": "2:3-5:10"
+              "loc": "2:3-6:4"
             },
             {
               "type": "Expr::For",
@@ -132,9 +132,9 @@
                         "type": "LongIdent::Ident",
                         "0": "println"
                       },
-                      "loc": "10:7-9:15"
+                      "loc": "10:7-10:14"
                     },
-                    "loc": "10:7-9:15"
+                    "loc": "10:7-10:14"
                   },
                   "args": [
                     {
@@ -155,7 +155,7 @@
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": "10:7-10:16"
+                  "loc": "10:7-10:17"
                 },
                 "ifnot": {
                   "type": "Expr::Apply",
@@ -167,9 +167,9 @@
                         "type": "LongIdent::Ident",
                         "0": "println"
                       },
-                      "loc": "12:7-11:14"
+                      "loc": "12:7-12:14"
                     },
-                    "loc": "12:7-11:14"
+                    "loc": "12:7-12:14"
                   },
                   "args": [
                     {
@@ -190,9 +190,9 @@
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": "12:7-12:16"
+                  "loc": "12:7-12:17"
                 },
-                "loc": "9:5-12:18"
+                "loc": "9:5-13:6"
               },
               "for_else": {
                 "type": "Expr::Apply",
@@ -204,9 +204,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "15:5-14:12"
+                    "loc": "15:5-15:12"
                   },
-                  "loc": "15:5-14:12"
+                  "loc": "15:5-15:12"
                 },
                 "args": [
                   {
@@ -227,10 +227,10 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "15:5-15:14"
+                "loc": "15:5-15:15"
               },
               "label": null,
-              "loc": "8:3-15:16"
+              "loc": "8:3-16:4"
             }
           ],
           "last_expr": {
@@ -258,9 +258,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "20:7-19:15"
+                    "loc": "20:7-20:14"
                   },
-                  "loc": "20:7-19:15"
+                  "loc": "20:7-20:14"
                 },
                 "args": [
                   {
@@ -281,7 +281,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "20:7-20:16"
+                "loc": "20:7-20:17"
               },
               "ifnot": {
                 "type": "Expr::Apply",
@@ -293,9 +293,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "22:7-21:14"
+                    "loc": "22:7-22:14"
                   },
-                  "loc": "22:7-21:14"
+                  "loc": "22:7-22:14"
                 },
                 "args": [
                   {
@@ -316,9 +316,9 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "22:7-22:16"
+                "loc": "22:7-22:17"
               },
-              "loc": "19:5-22:18"
+              "loc": "19:5-23:6"
             },
             "for_else": {
               "type": "Expr::Hole",
@@ -328,12 +328,12 @@
               }
             },
             "label": null,
-            "loc": "18:3-24:12"
+            "loc": "18:3-24:13"
           },
-          "loc": "2:3-24:12"
+          "loc": "2:3-24:13"
         }
       },
-      "loc": "1:1-24:12"
+      "loc": "1:1-24:13"
     },
     {
       "type": "Impl::TopTest",
@@ -362,7 +362,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "30:9-30:3",
+        "params_loc": "30:9-30:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -396,17 +396,17 @@
               "continue_block": [],
               "body": {
                 "type": "Expr::Unit",
-                "loc": "31:20-31:21",
+                "loc": "31:20-31:24",
                 "faked": true
               },
               "for_else": null,
               "label": null,
-              "loc": "31:12-31:21"
+              "loc": "31:12-31:24"
             },
             "group": {
               "type": "Group::Paren"
             },
-            "loc": "31:11-31:24"
+            "loc": "31:11-31:25"
           },
           "body": {
             "type": "Expr::Let",
@@ -436,9 +436,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": "32:11-32:10"
+                  "loc": "32:11-32:12"
                 },
-                "loc": "32:11-32:10"
+                "loc": "32:11-32:12"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -449,19 +449,19 @@
                   "continue_block": [],
                   "body": {
                     "type": "Expr::Unit",
-                    "loc": "32:24-32:25",
+                    "loc": "32:24-32:28",
                     "faked": true
                   },
                   "for_else": null,
                   "label": null,
-                  "loc": "32:16-32:25"
+                  "loc": "32:16-32:28"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "32:15-32:25"
+                "loc": "32:15-32:28"
               },
-              "loc": "32:11-32:28"
+              "loc": "32:11-32:29"
             },
             "body": {
               "type": "Expr::Return",
@@ -472,21 +472,21 @@
                 "continue_block": [],
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": "33:18-33:19",
+                  "loc": "33:18-33:22",
                   "faked": true
                 },
                 "for_else": null,
                 "label": null,
-                "loc": "33:10-33:19"
+                "loc": "33:10-33:22"
               },
-              "loc": "33:3-33:19"
+              "loc": "33:3-33:22"
             },
-            "loc": "32:11-32:28"
+            "loc": "32:3-33:22"
           },
-          "loc": "31:11-31:24"
+          "loc": "31:3-33:22"
         }
       },
-      "loc": "30:1-33:23"
+      "loc": "30:1-34:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -501,7 +501,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "36:9-36:3",
+        "params_loc": "36:9-36:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -534,17 +534,17 @@
                   "continue_block": [],
                   "body": {
                     "type": "Expr::Unit",
-                    "loc": "37:20-37:21",
+                    "loc": "37:20-37:24",
                     "faked": true
                   },
                   "for_else": null,
                   "label": null,
-                  "loc": "37:12-37:21"
+                  "loc": "37:12-37:24"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "37:11-37:24"
+                "loc": "37:11-37:25"
               }
             ]
           ],
@@ -566,9 +566,9 @@
                   "type": "LongIdent::Ident",
                   "0": "i"
                 },
-                "loc": "37:27-37:26"
+                "loc": "37:27-37:28"
               },
-              "loc": "37:27-37:26"
+              "loc": "37:27-37:28"
             },
             "rhs": {
               "type": "Expr::Group",
@@ -579,19 +579,19 @@
                 "continue_block": [],
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": "37:40-37:41",
+                  "loc": "37:40-37:44",
                   "faked": true
                 },
                 "for_else": null,
                 "label": null,
-                "loc": "37:32-37:41"
+                "loc": "37:32-37:44"
               },
               "group": {
                 "type": "Group::Paren"
               },
-              "loc": "37:31-37:41"
+              "loc": "37:31-37:44"
             },
-            "loc": "37:27-37:44"
+            "loc": "37:27-37:45"
           },
           "continue_block": [],
           "body": {
@@ -605,27 +605,27 @@
                 "continue_block": [],
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": "38:19-38:20",
+                  "loc": "38:19-38:23",
                   "faked": true
                 },
                 "for_else": null,
                 "label": null,
-                "loc": "38:11-38:20"
+                "loc": "38:11-38:23"
               },
               "group": {
                 "type": "Group::Paren"
               },
-              "loc": "38:10-38:23"
+              "loc": "38:10-38:24"
             },
             "label": null,
-            "loc": "38:5-38:23"
+            "loc": "38:5-38:24"
           },
           "for_else": null,
           "label": null,
-          "loc": "37:3-38:25"
+          "loc": "37:3-39:4"
         }
       },
-      "loc": "36:1-39:5"
+      "loc": "36:1-40:2"
     }
   ],
   "diagnostics": [

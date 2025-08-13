@@ -32,11 +32,11 @@
                 "loc": "1:12-1:15"
               },
               "tys": [],
-              "loc": "1:12-1:11"
+              "loc": "1:12-1:15"
             }
           }
         ],
-        "params_loc": "1:7-1:15",
+        "params_loc": "1:7-1:16",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -49,7 +49,7 @@
             "loc": "1:20-1:23"
           },
           "tys": [],
-          "loc": "1:20-1:19"
+          "loc": "1:20-1:23"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -71,7 +71,7 @@
           }
         }
       },
-      "loc": "1:1-1:25"
+      "loc": "1:1-1:31"
     }
   ]
 }

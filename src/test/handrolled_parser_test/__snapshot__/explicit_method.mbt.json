@@ -12,7 +12,7 @@
             "0": "T"
           },
           "is_object": false,
-          "loc": "2:4-2:3"
+          "loc": "2:4-2:5"
         },
         "name": {
           "type": "Binder",
@@ -40,11 +40,11 @@
                 "loc": "2:22-2:25"
               },
               "tys": [],
-              "loc": "2:22-2:21"
+              "loc": "2:22-2:25"
             }
           }
         ],
-        "params_loc": "2:18-2:25",
+        "params_loc": "2:18-2:26",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -61,11 +61,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "2:27-2:28",
+          "loc": "2:27-2:29",
           "faked": true
         }
       },
-      "loc": "2:1-2:28"
+      "loc": "2:1-2:29"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -79,7 +79,7 @@
             "id": "T"
           },
           "is_object": false,
-          "loc": "3:4-3:8"
+          "loc": "3:4-3:10"
         },
         "name": {
           "type": "Binder",
@@ -89,7 +89,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "3:23-3:24",
+        "params_loc": "3:23-3:25",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -106,11 +106,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "3:26-3:27",
+          "loc": "3:26-3:28",
           "faked": true
         }
       },
-      "loc": "3:1-3:27"
+      "loc": "3:1-3:28"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -125,7 +125,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "5:9-5:3",
+        "params_loc": "5:9-5:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -154,14 +154,14 @@
                     "0": "T"
                   },
                   "is_object": false,
-                  "loc": "6:3-5:11"
+                  "loc": "6:3-6:4"
                 },
                 "method_name": {
                   "type": "Label",
                   "name": "method_name",
                   "loc": "6:6-6:17"
                 },
-                "loc": "6:3-6:6"
+                "loc": "6:3-6:17"
               },
               "args": [
                 {
@@ -182,7 +182,7 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "6:3-6:19"
+              "loc": "6:3-6:20"
             }
           ],
           "last_expr": {
@@ -197,25 +197,25 @@
                   "id": "T"
                 },
                 "is_object": false,
-                "loc": "7:3-7:7"
+                "loc": "7:3-7:9"
               },
               "method_name": {
                 "type": "Label",
                 "name": "method_name",
                 "loc": "7:11-7:22"
               },
-              "loc": "7:3-7:11"
+              "loc": "7:3-7:22"
             },
             "args": [],
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": "7:3-7:23"
+            "loc": "7:3-7:24"
           },
-          "loc": "6:3-7:23"
+          "loc": "6:3-7:24"
         }
       },
-      "loc": "5:1-7:25"
+      "loc": "5:1-8:2"
     },
     {
       "type": "Impl::TopTypeDef",
@@ -234,7 +234,7 @@
           "loc": "10:1-10:5"
         },
         "deriving": [],
-        "loc": "10:1-10:10"
+        "loc": "10:1-10:12"
       }
     },
     {
@@ -248,7 +248,7 @@
             "0": "T"
           },
           "is_object": false,
-          "loc": "11:8-11:7"
+          "loc": "11:8-11:9"
         },
         "name": {
           "type": "Binder",
@@ -258,7 +258,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "11:12-11:13",
+        "params_loc": "11:12-11:14",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -267,7 +267,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "11:1-10:13"
+          "loc": "11:1-11:4"
         },
         "attrs": [],
         "doc": ""
@@ -277,11 +277,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "11:15-11:16",
+          "loc": "11:15-11:17",
           "faked": true
         }
       },
-      "loc": "11:1-11:16"
+      "loc": "11:1-11:17"
     }
   ]
 }

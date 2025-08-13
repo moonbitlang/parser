@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "2:9-2:3",
+        "params_loc": "2:9-2:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -42,9 +42,9 @@
                     "type": "LongIdent::Ident",
                     "0": "x"
                   },
-                  "loc": "3:3-2:11"
+                  "loc": "3:3-3:4"
                 },
-                "loc": "3:3-2:11"
+                "loc": "3:3-3:4"
               },
               "method_name": {
                 "type": "Label",
@@ -56,7 +56,7 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "3:3-3:12"
+              "loc": "3:3-3:13"
             },
             {
               "type": "Expr::DotApply",
@@ -68,9 +68,9 @@
                     "type": "LongIdent::Ident",
                     "0": "x"
                   },
-                  "loc": "4:3-3:14"
+                  "loc": "4:3-4:4"
                 },
-                "loc": "4:3-3:14"
+                "loc": "4:3-4:4"
               },
               "method_name": {
                 "type": "Label",
@@ -88,9 +88,9 @@
                         "type": "LongIdent::Ident",
                         "0": "args"
                       },
-                      "loc": "4:12-4:12"
+                      "loc": "4:12-4:16"
                     },
-                    "loc": "4:12-4:12"
+                    "loc": "4:12-4:16"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -101,7 +101,7 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "4:3-4:16"
+              "loc": "4:3-4:17"
             },
             {
               "type": "Expr::Apply",
@@ -117,9 +117,9 @@
                         "type": "LongIdent::Ident",
                         "0": "x"
                       },
-                      "loc": "5:4-5:4"
+                      "loc": "5:4-5:5"
                     },
-                    "loc": "5:4-5:4"
+                    "loc": "5:4-5:5"
                   },
                   "accessor": {
                     "type": "Accessor::Label",
@@ -129,18 +129,18 @@
                       "loc": "5:6-5:11"
                     }
                   },
-                  "loc": "5:4-5:5"
+                  "loc": "5:4-5:11"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "5:3-5:11"
+                "loc": "5:3-5:12"
               },
               "args": [],
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "5:12-5:13"
+              "loc": "5:12-5:14"
             },
             {
               "type": "Expr::Apply",
@@ -156,9 +156,9 @@
                         "type": "LongIdent::Ident",
                         "0": "x"
                       },
-                      "loc": "6:4-6:4"
+                      "loc": "6:4-6:5"
                     },
-                    "loc": "6:4-6:4"
+                    "loc": "6:4-6:5"
                   },
                   "accessor": {
                     "type": "Accessor::Label",
@@ -168,12 +168,12 @@
                       "loc": "6:6-6:11"
                     }
                   },
-                  "loc": "6:4-6:5"
+                  "loc": "6:4-6:11"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "6:3-6:11"
+                "loc": "6:3-6:12"
               },
               "args": [
                 {
@@ -186,9 +186,9 @@
                         "type": "LongIdent::Ident",
                         "0": "args"
                       },
-                      "loc": "6:13-6:13"
+                      "loc": "6:13-6:17"
                     },
-                    "loc": "6:13-6:13"
+                    "loc": "6:13-6:17"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -198,7 +198,7 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "6:12-6:17"
+              "loc": "6:12-6:18"
             }
           ],
           "last_expr": {
@@ -211,9 +211,9 @@
                   "type": "LongIdent::Ident",
                   "0": "x"
                 },
-                "loc": "7:3-6:19"
+                "loc": "7:3-7:4"
               },
-              "loc": "7:3-6:19"
+              "loc": "7:3-7:4"
             },
             "accessor": {
               "type": "Accessor::Label",
@@ -223,12 +223,12 @@
                 "loc": "7:5-7:10"
               }
             },
-            "loc": "7:3-7:4"
+            "loc": "7:3-7:10"
           },
-          "loc": "3:3-7:4"
+          "loc": "3:3-7:10"
         }
       },
-      "loc": "2:1-7:11"
+      "loc": "2:1-8:2"
     }
   ]
 }

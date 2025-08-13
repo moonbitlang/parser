@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "1:14-1:15",
+        "params_loc": "1:14-1:16",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -54,7 +54,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "3:15-3:16",
+        "params_loc": "3:15-3:17",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -63,7 +63,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "3:1-2:39"
+          "loc": "3:1-3:4"
         },
         "attrs": [],
         "doc": ""
@@ -81,7 +81,7 @@
           "func": {
             "type": "Func::Lambda",
             "parameters": [],
-            "params_loc": "5:11-5:12",
+            "params_loc": "5:11-5:13",
             "body": {
               "type": "Expr::Unit",
               "loc": "5:13-5:13",

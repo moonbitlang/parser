@@ -32,11 +32,11 @@
                 "loc": "1:9-1:12"
               },
               "tys": [],
-              "loc": "1:9-1:8"
+              "loc": "1:9-1:12"
             }
           }
         ],
-        "params_loc": "1:5-1:12",
+        "params_loc": "1:5-1:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -49,7 +49,7 @@
             "loc": "1:17-1:20"
           },
           "tys": [],
-          "loc": "1:17-1:16"
+          "loc": "1:17-1:20"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -77,9 +77,9 @@
                     "type": "LongIdent::Ident",
                     "0": "x"
                   },
-                  "loc": "2:12-2:11"
+                  "loc": "2:12-2:13"
                 },
-                "loc": "2:12-2:11"
+                "loc": "2:12-2:13"
               },
               "pat": {
                 "type": "Pattern::Constant",
@@ -89,15 +89,15 @@
                 },
                 "loc": "2:17-2:19"
               },
-              "loc": "2:12-2:16"
+              "loc": "2:12-2:19"
             },
             "ifso": {
               "type": "Expr::Unit",
-              "loc": "2:22-2:23",
+              "loc": "2:22-2:24",
               "faked": false
             },
             "ifnot": null,
-            "loc": "2:9-2:24"
+            "loc": "2:9-2:26"
           },
           "cases": [
             {
@@ -119,10 +119,10 @@
           ],
           "match_loc": "2:3-2:28",
           "using": null,
-          "loc": "2:3-3:12"
+          "loc": "2:3-4:4"
         }
       },
-      "loc": "1:1-4:5"
+      "loc": "1:1-5:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -155,11 +155,11 @@
                 "loc": "7:9-7:12"
               },
               "tys": [],
-              "loc": "7:9-7:8"
+              "loc": "7:9-7:12"
             }
           }
         ],
-        "params_loc": "7:5-7:12",
+        "params_loc": "7:5-7:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -172,7 +172,7 @@
             "loc": "7:17-7:20"
           },
           "tys": [],
-          "loc": "7:17-7:16"
+          "loc": "7:17-7:20"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -198,9 +198,9 @@
                   "type": "LongIdent::Ident",
                   "0": "x"
                 },
-                "loc": "8:12-8:11"
+                "loc": "8:12-8:13"
               },
-              "loc": "8:12-8:11"
+              "loc": "8:12-8:13"
             },
             "cases": [
               {
@@ -222,7 +222,7 @@
             ],
             "match_loc": "8:6-8:15",
             "using": null,
-            "loc": "8:6-8:25"
+            "loc": "8:6-8:27"
           },
           "ifso": {
             "type": "Expr::Constant",
@@ -240,21 +240,21 @@
             },
             "loc": "11:5-11:6"
           },
-          "loc": "8:3-11:7"
+          "loc": "8:3-12:4"
         }
       },
-      "loc": "7:1-12:5"
+      "loc": "7:1-13:2"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": "2:9-2:24",
+      "loc": "2:9-2:26",
       "msg": "Unexpected if expression in condition"
     },
     {
       "type": "Error",
-      "loc": "8:6-8:25",
+      "loc": "8:6-8:27",
       "msg": "Unexpected match expression in condition"
     }
   ]

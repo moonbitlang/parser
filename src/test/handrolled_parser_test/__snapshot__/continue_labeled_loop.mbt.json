@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "2:9-2:10",
+        "params_loc": "2:9-2:11",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -27,7 +27,7 @@
             "loc": "2:15-2:19"
           },
           "tys": [],
-          "loc": "2:15-2:14"
+          "loc": "2:15-2:19"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -35,7 +35,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "2:1-1:6"
+          "loc": "2:1-2:4"
         },
         "attrs": [],
         "doc": ""
@@ -48,7 +48,7 @@
           "args": [
             {
               "type": "Expr::Unit",
-              "loc": "3:8-3:9",
+              "loc": "3:8-3:10",
               "faked": false
             }
           ],
@@ -101,21 +101,21 @@
                       "name": "l",
                       "loc": "5:16-5:18"
                     },
-                    "loop_loc": "5:20-5:24",
-                    "loc": "5:20-6:20"
+                    "loop_loc": "5:20-5:26",
+                    "loc": "5:20-7:10"
                   }
                 ],
                 "label": null,
-                "loc": "5:7-6:20"
+                "loc": "5:7-7:10"
               }
             }
           ],
           "label": null,
-          "loop_loc": "3:3-3:9",
-          "loc": "3:3-7:11"
+          "loop_loc": "3:3-3:10",
+          "loc": "3:3-8:4"
         }
       },
-      "loc": "2:1-8:5"
+      "loc": "2:1-9:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -130,7 +130,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "11:9-11:10",
+        "params_loc": "11:9-11:11",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -143,7 +143,7 @@
             "loc": "11:15-11:19"
           },
           "tys": [],
-          "loc": "11:15-11:14"
+          "loc": "11:15-11:19"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -151,7 +151,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "11:1-10:2"
+          "loc": "11:1-11:4"
         },
         "attrs": [],
         "doc": ""
@@ -164,7 +164,7 @@
           "args": [
             {
               "type": "Expr::Unit",
-              "loc": "12:12-12:13",
+              "loc": "12:12-12:14",
               "faked": false
             }
           ],
@@ -217,8 +217,8 @@
                       "name": "l",
                       "loc": "14:19-14:21"
                     },
-                    "loop_loc": "14:23-14:27",
-                    "loc": "14:23-15:20"
+                    "loop_loc": "14:23-14:29",
+                    "loc": "14:23-16:10"
                   }
                 ],
                 "label": {
@@ -226,7 +226,7 @@
                   "name": "l",
                   "loc": "14:19-14:21"
                 },
-                "loc": "14:7-15:20"
+                "loc": "14:7-16:10"
               }
             }
           ],
@@ -235,11 +235,11 @@
             "name": "l",
             "loc": "12:3-12:5"
           },
-          "loop_loc": "12:7-12:13",
-          "loc": "12:7-16:11"
+          "loop_loc": "12:7-12:14",
+          "loc": "12:7-17:4"
         }
       },
-      "loc": "11:1-17:5"
+      "loc": "11:1-18:2"
     }
   ]
 }

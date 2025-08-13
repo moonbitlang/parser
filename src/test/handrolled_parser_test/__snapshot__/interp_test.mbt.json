@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "1:9-1:3",
+        "params_loc": "1:9-1:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -75,15 +75,15 @@
             },
             "body": {
               "type": "Expr::Unit",
-              "loc": "3:3-3:6",
+              "loc": "3:3-3:18",
               "faked": true
             },
-            "loc": "3:11-3:18"
+            "loc": "3:3-3:18"
           },
-          "loc": "2:11-2:28"
+          "loc": "2:3-3:18"
         }
       },
-      "loc": "1:1-3:21"
+      "loc": "1:1-4:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -98,7 +98,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "5:9-5:3",
+        "params_loc": "5:9-5:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -159,15 +159,15 @@
             },
             "body": {
               "type": "Expr::Unit",
-              "loc": "7:3-7:6",
+              "loc": "7:3-7:25",
               "faked": true
             },
-            "loc": "7:11-7:25"
+            "loc": "7:3-7:25"
           },
-          "loc": "6:11-6:12"
+          "loc": "6:3-7:25"
         }
       },
-      "loc": "5:1-7:26"
+      "loc": "5:1-8:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -182,7 +182,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "9:9-9:3",
+        "params_loc": "9:9-9:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -235,15 +235,15 @@
             },
             "body": {
               "type": "Expr::Unit",
-              "loc": "11:3-11:6",
+              "loc": "11:3-11:14",
               "faked": true
             },
-            "loc": "11:11-11:14"
+            "loc": "11:3-11:14"
           },
-          "loc": "10:11-10:17"
+          "loc": "10:3-11:14"
         }
       },
-      "loc": "9:1-11:15"
+      "loc": "9:1-12:2"
     },
     {
       "type": "Impl::TopLetDef",
@@ -263,7 +263,7 @@
           "loc": "13:10-13:16"
         },
         "tys": [],
-        "loc": "13:10-13:9"
+        "loc": "13:10-13:16"
       },
       "expr": {
         "type": "Expr::Interp",
@@ -285,7 +285,7 @@
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "13:1-13:18",
+      "loc": "13:1-13:34",
       "attrs": [],
       "doc": ""
     },
@@ -307,7 +307,7 @@
           "loc": "14:10-14:16"
         },
         "tys": [],
-        "loc": "14:10-14:9"
+        "loc": "14:10-14:16"
       },
       "expr": {
         "type": "Expr::Interp",
@@ -329,7 +329,7 @@
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "14:1-14:18",
+      "loc": "14:1-14:37",
       "attrs": [],
       "doc": ""
     },
@@ -351,7 +351,7 @@
           "loc": "15:10-15:16"
         },
         "tys": [],
-        "loc": "15:10-15:9"
+        "loc": "15:10-15:16"
       },
       "expr": {
         "type": "Expr::Constant",
@@ -365,7 +365,7 @@
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "15:1-15:18",
+      "loc": "15:1-15:26",
       "attrs": [],
       "doc": ""
     },
@@ -387,7 +387,7 @@
           "loc": "16:10-16:16"
         },
         "tys": [],
-        "loc": "16:10-16:9"
+        "loc": "16:10-16:16"
       },
       "expr": {
         "type": "Expr::Interp",
@@ -419,7 +419,7 @@
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "16:1-16:18",
+      "loc": "16:1-16:47",
       "attrs": [],
       "doc": ""
     },
@@ -461,7 +461,7 @@
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "17:1-17:9",
+      "loc": "17:1-17:56",
       "attrs": [],
       "doc": ""
     },
@@ -503,7 +503,7 @@
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "18:1-18:9",
+      "loc": "18:1-18:47",
       "attrs": [],
       "doc": ""
     },
@@ -545,7 +545,7 @@
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "19:1-19:9",
+      "loc": "19:1-19:47",
       "attrs": [],
       "doc": ""
     }

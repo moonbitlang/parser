@@ -23,7 +23,7 @@
                 "loc": "1:17-1:20"
               },
               "tys": [],
-              "loc": "1:17-1:16"
+              "loc": "1:17-1:20"
             }
           }
         },
@@ -33,7 +33,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": "1:1-1:16"
+        "loc": "1:1-1:20"
       }
     },
     {
@@ -71,9 +71,9 @@
                     "loc": "4:7-4:11"
                   },
                   "tys": [],
-                  "loc": "4:7-4:7"
+                  "loc": "4:7-4:11"
                 },
-                "loc": "4:7-4:7"
+                "loc": "4:7-4:11"
               }
             ],
             "return_type": {
@@ -87,7 +87,7 @@
                 "loc": "4:16-4:19"
               },
               "tys": [],
-              "loc": "4:16-4:15"
+              "loc": "4:16-4:19"
             },
             "error_type": {
               "type": "ErrorType::DefaultErrorType",
@@ -95,7 +95,7 @@
             },
             "has_default": null,
             "attrs": [],
-            "loc": "4:3-4:19"
+            "loc": "4:3-4:20"
           },
           {
             "type": "TraitMethodDecl",
@@ -121,9 +121,9 @@
                     "loc": "5:6-5:10"
                   },
                   "tys": [],
-                  "loc": "5:6-5:6"
+                  "loc": "5:6-5:10"
                 },
-                "loc": "5:6-5:6"
+                "loc": "5:6-5:10"
               }
             ],
             "return_type": {
@@ -137,7 +137,7 @@
                 "loc": "5:15-5:18"
               },
               "tys": [],
-              "loc": "5:15-5:14"
+              "loc": "5:15-5:18"
             },
             "error_type": {
               "type": "ErrorType::DefaultErrorType",
@@ -145,7 +145,7 @@
             },
             "has_default": null,
             "attrs": [],
-            "loc": "5:3-5:18"
+            "loc": "5:3-5:19"
           },
           {
             "type": "TraitMethodDecl",
@@ -171,9 +171,9 @@
                     "loc": "6:7-6:11"
                   },
                   "tys": [],
-                  "loc": "6:7-6:7"
+                  "loc": "6:7-6:11"
                 },
-                "loc": "6:7-6:7"
+                "loc": "6:7-6:11"
               }
             ],
             "return_type": {
@@ -187,14 +187,14 @@
                 "loc": "6:16-6:19"
               },
               "tys": [],
-              "loc": "6:16-6:15"
+              "loc": "6:16-6:19"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": "6:3-6:15"
+            "loc": "6:3-6:19"
           },
           {
             "type": "TraitMethodDecl",
@@ -220,9 +220,9 @@
                     "loc": "7:7-7:11"
                   },
                   "tys": [],
-                  "loc": "7:7-7:7"
+                  "loc": "7:7-7:11"
                 },
-                "loc": "7:7-7:7"
+                "loc": "7:7-7:11"
               }
             ],
             "return_type": {
@@ -236,7 +236,7 @@
                 "loc": "7:16-7:19"
               },
               "tys": [],
-              "loc": "7:16-7:15"
+              "loc": "7:16-7:19"
             },
             "error_type": {
               "type": "ErrorType::ErrorType",
@@ -248,21 +248,21 @@
                     "type": "LongIdent::Ident",
                     "0": "Error1"
                   },
-                  "loc": "7:20-7:20"
+                  "loc": "7:20-7:26"
                 },
                 "tys": [],
-                "loc": "7:20-7:20"
+                "loc": "7:20-7:26"
               }
             },
             "has_default": null,
             "attrs": [],
-            "loc": "7:3-7:20"
+            "loc": "7:3-7:26"
           }
         ],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": "3:1-7:27",
+        "loc": "3:1-8:2",
         "attrs": [],
         "doc": ""
       }
@@ -280,7 +280,7 @@
         "has_error": "10:6-10:7",
         "is_async": false,
         "decl_params": [],
-        "params_loc": "10:7-10:8",
+        "params_loc": "10:7-10:9",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -293,7 +293,7 @@
             "loc": "10:13-10:16"
           },
           "tys": [],
-          "loc": "10:13-10:12"
+          "loc": "10:13-10:16"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -316,7 +316,7 @@
           "loc": "11:3-11:4"
         }
       },
-      "loc": "10:1-11:5"
+      "loc": "10:1-12:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -331,7 +331,7 @@
         "has_error": "14:6-14:7",
         "is_async": false,
         "decl_params": [],
-        "params_loc": "14:7-14:8",
+        "params_loc": "14:7-14:9",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -344,7 +344,7 @@
             "loc": "14:13-14:16"
           },
           "tys": [],
-          "loc": "14:13-14:12"
+          "loc": "14:13-14:16"
         },
         "error_type": {
           "type": "ErrorType::DefaultErrorType",
@@ -368,7 +368,7 @@
           "loc": "15:3-15:4"
         }
       },
-      "loc": "14:1-15:5"
+      "loc": "14:1-16:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -383,7 +383,7 @@
         "has_error": "18:6-18:7",
         "is_async": false,
         "decl_params": [],
-        "params_loc": "18:7-18:8",
+        "params_loc": "18:7-18:9",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -396,7 +396,7 @@
             "loc": "18:13-18:16"
           },
           "tys": [],
-          "loc": "18:13-18:12"
+          "loc": "18:13-18:16"
         },
         "error_type": {
           "type": "ErrorType::ErrorType",
@@ -408,10 +408,10 @@
                 "type": "LongIdent::Ident",
                 "0": "Error1"
               },
-              "loc": "18:17-18:17"
+              "loc": "18:17-18:23"
             },
             "tys": [],
-            "loc": "18:17-18:17"
+            "loc": "18:17-18:23"
           }
         },
         "vis": {
@@ -432,7 +432,7 @@
           "loc": "19:3-19:4"
         }
       },
-      "loc": "18:1-19:5"
+      "loc": "18:1-20:2"
     },
     {
       "type": "Impl::TopTypeDef",
@@ -454,7 +454,7 @@
               "loc": "22:8-22:11"
             },
             "tys": [],
-            "loc": "22:8-22:7"
+            "loc": "22:8-22:11"
           }
         },
         "attrs": [],
@@ -463,7 +463,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": "22:1-22:7"
+        "loc": "22:1-22:11"
       }
     },
     {
@@ -477,7 +477,7 @@
             "0": "A"
           },
           "is_object": false,
-          "loc": "24:4-24:3"
+          "loc": "24:4-24:5"
         },
         "name": {
           "type": "Binder",
@@ -487,7 +487,7 @@
         "has_error": "24:9-24:10",
         "is_async": false,
         "decl_params": [],
-        "params_loc": "24:10-24:11",
+        "params_loc": "24:10-24:12",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -500,7 +500,7 @@
             "loc": "24:16-24:19"
           },
           "tys": [],
-          "loc": "24:16-24:15"
+          "loc": "24:16-24:19"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -523,7 +523,7 @@
           "loc": "25:3-25:4"
         }
       },
-      "loc": "24:1-25:5"
+      "loc": "24:1-26:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -536,7 +536,7 @@
             "0": "A"
           },
           "is_object": false,
-          "loc": "28:4-28:3"
+          "loc": "28:4-28:5"
         },
         "name": {
           "type": "Binder",
@@ -546,7 +546,7 @@
         "has_error": "28:9-28:10",
         "is_async": false,
         "decl_params": [],
-        "params_loc": "28:10-28:11",
+        "params_loc": "28:10-28:12",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -559,7 +559,7 @@
             "loc": "28:16-28:19"
           },
           "tys": [],
-          "loc": "28:16-28:15"
+          "loc": "28:16-28:19"
         },
         "error_type": {
           "type": "ErrorType::DefaultErrorType",
@@ -583,7 +583,7 @@
           "loc": "29:3-29:4"
         }
       },
-      "loc": "28:1-29:5"
+      "loc": "28:1-30:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -596,7 +596,7 @@
             "0": "A"
           },
           "is_object": false,
-          "loc": "32:4-32:3"
+          "loc": "32:4-32:5"
         },
         "name": {
           "type": "Binder",
@@ -606,7 +606,7 @@
         "has_error": "32:9-32:10",
         "is_async": false,
         "decl_params": [],
-        "params_loc": "32:10-32:11",
+        "params_loc": "32:10-32:12",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -619,7 +619,7 @@
             "loc": "32:16-32:19"
           },
           "tys": [],
-          "loc": "32:16-32:15"
+          "loc": "32:16-32:19"
         },
         "error_type": {
           "type": "ErrorType::ErrorType",
@@ -631,10 +631,10 @@
                 "type": "LongIdent::Ident",
                 "0": "Error1"
               },
-              "loc": "32:20-32:20"
+              "loc": "32:20-32:26"
             },
             "tys": [],
-            "loc": "32:20-32:20"
+            "loc": "32:20-32:26"
           }
         },
         "vis": {
@@ -655,7 +655,7 @@
           "loc": "33:3-33:4"
         }
       },
-      "loc": "32:1-33:5"
+      "loc": "32:1-34:2"
     },
     {
       "type": "Impl::TopImpl",
@@ -667,7 +667,7 @@
           "0": "T"
         },
         "is_object": false,
-        "loc": "36:6-36:5"
+        "loc": "36:6-36:7"
       },
       "method_name": {
         "type": "Binder",
@@ -706,7 +706,7 @@
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": "36:1-37:5",
+      "loc": "36:1-38:2",
       "attrs": [],
       "doc": ""
     },
@@ -723,7 +723,7 @@
           "loc": "40:12-40:13"
         },
         "tys": [],
-        "loc": "40:12-40:11"
+        "loc": "40:12-40:13"
       },
       "trait": {
         "type": "TypeName",
@@ -732,7 +732,7 @@
           "0": "T"
         },
         "is_object": false,
-        "loc": "40:6-40:5"
+        "loc": "40:6-40:7"
       },
       "method_name": {
         "type": "Binder",
@@ -771,7 +771,7 @@
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": "40:1-41:5",
+      "loc": "40:1-42:2",
       "attrs": [],
       "doc": ""
     }

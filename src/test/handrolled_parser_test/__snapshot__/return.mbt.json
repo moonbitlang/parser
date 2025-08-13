@@ -32,11 +32,11 @@
                 "loc": "1:14-1:17"
               },
               "tys": [],
-              "loc": "1:14-1:13"
+              "loc": "1:14-1:17"
             }
           }
         ],
-        "params_loc": "1:10-1:17",
+        "params_loc": "1:10-1:18",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -54,10 +54,10 @@
         "expr": {
           "type": "Expr::Return",
           "return_value": null,
-          "loc": "2:3-1:21"
+          "loc": "2:3-2:9"
         }
       },
-      "loc": "1:1-2:10"
+      "loc": "1:1-3:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -90,7 +90,7 @@
                 "loc": "5:9-5:12"
               },
               "tys": [],
-              "loc": "5:9-5:8"
+              "loc": "5:9-5:12"
             }
           },
           {
@@ -111,11 +111,11 @@
                 "loc": "5:17-5:20"
               },
               "tys": [],
-              "loc": "5:17-5:16"
+              "loc": "5:17-5:20"
             }
           }
         ],
-        "params_loc": "5:5-5:20",
+        "params_loc": "5:5-5:21",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -140,14 +140,14 @@
                 "type": "LongIdent::Ident",
                 "0": "a"
               },
-              "loc": "6:10-6:9"
+              "loc": "6:10-6:11"
             },
-            "loc": "6:10-6:9"
+            "loc": "6:10-6:11"
           },
-          "loc": "6:3-6:9"
+          "loc": "6:3-6:11"
         }
       },
-      "loc": "5:1-6:12"
+      "loc": "5:1-7:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -180,7 +180,7 @@
                 "loc": "9:16-9:19"
               },
               "tys": [],
-              "loc": "9:16-9:15"
+              "loc": "9:16-9:19"
             }
           },
           {
@@ -201,11 +201,11 @@
                 "loc": "9:24-9:27"
               },
               "tys": [],
-              "loc": "9:24-9:23"
+              "loc": "9:24-9:27"
             }
           }
         ],
-        "params_loc": "9:12-9:27",
+        "params_loc": "9:12-9:28",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -218,7 +218,7 @@
             "loc": "9:32-9:36"
           },
           "tys": [],
-          "loc": "9:32-9:31"
+          "loc": "9:32-9:36"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -252,9 +252,9 @@
                   "type": "LongIdent::Ident",
                   "0": "a"
                 },
-                "loc": "10:6-10:5"
+                "loc": "10:6-10:7"
               },
-              "loc": "10:6-10:5"
+              "loc": "10:6-10:7"
             },
             "rhs": {
               "type": "Expr::Ident",
@@ -264,11 +264,11 @@
                   "type": "LongIdent::Ident",
                   "0": "b"
                 },
-                "loc": "10:11-10:10"
+                "loc": "10:11-10:12"
               },
-              "loc": "10:11-10:10"
+              "loc": "10:11-10:12"
             },
-            "loc": "10:6-10:10"
+            "loc": "10:6-10:12"
           },
           "ifso": {
             "type": "Expr::Return",
@@ -280,7 +280,7 @@
               },
               "loc": "10:22-10:26"
             },
-            "loc": "10:15-10:21"
+            "loc": "10:15-10:26"
           },
           "ifnot": {
             "type": "Expr::Return",
@@ -292,12 +292,12 @@
               },
               "loc": "10:43-10:48"
             },
-            "loc": "10:36-10:42"
+            "loc": "10:36-10:48"
           },
-          "loc": "10:3-10:48"
+          "loc": "10:3-10:50"
         }
       },
-      "loc": "9:1-10:51"
+      "loc": "9:1-11:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -312,7 +312,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "13:16-13:17",
+        "params_loc": "13:16-13:18",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -325,7 +325,7 @@
             "loc": "13:22-13:25"
           },
           "tys": [],
-          "loc": "13:22-13:21"
+          "loc": "13:22-13:25"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -359,14 +359,14 @@
               },
               "loc": "15:12-15:13"
             },
-            "loc": "15:5-15:11"
+            "loc": "15:5-15:13"
           },
           "while_else": null,
           "label": null,
-          "loc": "14:3-15:14"
+          "loc": "14:3-16:4"
         }
       },
-      "loc": "13:1-16:5"
+      "loc": "13:1-17:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -381,7 +381,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "19:9-19:3",
+        "params_loc": "19:9-19:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -399,10 +399,10 @@
         "expr": {
           "type": "Expr::Return",
           "return_value": null,
-          "loc": "20:3-19:11"
+          "loc": "20:3-20:9"
         }
       },
-      "loc": "19:1-20:10"
+      "loc": "19:1-21:2"
     },
     {
       "type": "Impl::TopLetDef",
@@ -417,18 +417,18 @@
         "expr": {
           "type": "Expr::Return",
           "return_value": null,
-          "loc": "23:11-23:10"
+          "loc": "23:11-23:17"
         },
         "group": {
           "type": "Group::Brace"
         },
-        "loc": "23:9-23:6"
+        "loc": "23:9-23:8"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "23:1-23:17",
+      "loc": "23:1-23:19",
       "attrs": [],
       "doc": ""
     },
@@ -445,7 +445,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "25:9-25:3",
+        "params_loc": "25:9-25:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -496,7 +496,7 @@
                   "ty": null
                 }
               ],
-              "params_loc": "27:9-27:11",
+              "params_loc": "27:9-27:12",
               "body": {
                 "type": "Expr::If",
                 "cond": {
@@ -517,9 +517,9 @@
                         "type": "LongIdent::Ident",
                         "0": "x"
                       },
-                      "loc": "28:8-28:7"
+                      "loc": "28:8-28:9"
                     },
-                    "loc": "28:8-28:7"
+                    "loc": "28:8-28:9"
                   },
                   "rhs": {
                     "type": "Expr::Constant",
@@ -529,7 +529,7 @@
                     },
                     "loc": "28:12-28:13"
                   },
-                  "loc": "28:8-28:11"
+                  "loc": "28:8-28:13"
                 },
                 "ifso": {
                   "type": "Expr::Return",
@@ -541,7 +541,7 @@
                     },
                     "loc": "28:23-28:24"
                   },
-                  "loc": "28:16-28:22"
+                  "loc": "28:16-28:24"
                 },
                 "ifnot": {
                   "type": "Expr::If",
@@ -563,9 +563,9 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": "28:35-28:34"
+                        "loc": "28:35-28:36"
                       },
-                      "loc": "28:35-28:34"
+                      "loc": "28:35-28:36"
                     },
                     "rhs": {
                       "type": "Expr::Constant",
@@ -573,9 +573,9 @@
                         "type": "Constant::Int",
                         "0": "-2"
                       },
-                      "loc": "28:39-28:40"
+                      "loc": "28:39-28:41"
                     },
-                    "loc": "28:35-28:40"
+                    "loc": "28:35-28:41"
                   },
                   "ifso": {
                     "type": "Expr::Return",
@@ -585,9 +585,9 @@
                         "type": "Constant::Int",
                         "0": "-2"
                       },
-                      "loc": "28:51-28:52"
+                      "loc": "28:51-28:53"
                     },
-                    "loc": "28:44-28:52"
+                    "loc": "28:44-28:53"
                   },
                   "ifnot": {
                     "type": "Expr::Return",
@@ -599,15 +599,15 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": "28:70-28:69"
+                        "loc": "28:70-28:71"
                       },
-                      "loc": "28:70-28:69"
+                      "loc": "28:70-28:71"
                     },
-                    "loc": "28:63-28:69"
+                    "loc": "28:63-28:71"
                   },
-                  "loc": "28:32-28:71"
+                  "loc": "28:32-28:73"
                 },
-                "loc": "28:5-28:71"
+                "loc": "28:5-28:73"
               },
               "return_type": null,
               "error_type": {
@@ -628,7 +628,7 @@
                   "type": "LongIdent::Ident",
                   "0": "x"
                 },
-                "loc": "31:3-30:2"
+                "loc": "31:3-31:4"
               },
               "expr": {
                 "type": "Expr::Apply",
@@ -640,9 +640,9 @@
                       "type": "LongIdent::Ident",
                       "0": "foo"
                     },
-                    "loc": "31:7-31:6"
+                    "loc": "31:7-31:10"
                   },
-                  "loc": "31:7-31:6"
+                  "loc": "31:7-31:10"
                 },
                 "args": [
                   {
@@ -663,17 +663,17 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "31:7-31:13"
+                "loc": "31:7-31:14"
               },
               "augmented_by": null,
-              "loc": "31:3-31:13"
+              "loc": "31:3-31:14"
             },
-            "loc": "27:3-31:13"
+            "loc": "27:3-31:14"
           },
-          "loc": "26:15-26:16"
+          "loc": "26:3-31:14"
         }
       },
-      "loc": "25:1-31:15"
+      "loc": "25:1-32:2"
     }
   ]
 }

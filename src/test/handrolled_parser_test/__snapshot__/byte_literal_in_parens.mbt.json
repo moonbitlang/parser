@@ -13,9 +13,9 @@
               "type": "LongIdent::Ident",
               "0": "assert_eq"
             },
-            "loc": "3:3-2:103"
+            "loc": "3:3-3:12"
           },
-          "loc": "3:3-2:103"
+          "loc": "3:3-3:12"
         },
         "args": [
           {
@@ -50,12 +50,12 @@
                     },
                     "loc": "3:25-3:26"
                   },
-                  "loc": "3:14-3:24"
+                  "loc": "3:14-3:26"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "3:13-3:26"
+                "loc": "3:13-3:27"
               },
               "method_name": {
                 "type": "Label",
@@ -67,7 +67,7 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "3:28-3:35"
+              "loc": "3:28-3:36"
             },
             "kind": {
               "type": "ArgumentKind::Positional"
@@ -91,12 +91,12 @@
         "attr": {
           "type": "ApplyAttr::NoAttr"
         },
-        "loc": "3:3-3:39"
+        "loc": "3:3-3:40"
       },
       "name": null,
       "params": null,
       "local_types": [],
-      "loc": "1:1-3:41",
+      "loc": "1:1-4:2",
       "attrs": [],
       "doc": ""
     }

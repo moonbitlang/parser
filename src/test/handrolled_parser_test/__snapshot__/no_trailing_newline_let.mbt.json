@@ -21,7 +21,7 @@
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "1:1-1:8",
+      "loc": "1:1-1:11",
       "attrs": [],
       "doc": ""
     }

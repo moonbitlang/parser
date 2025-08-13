@@ -14,13 +14,13 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "1:18-1:19",
+        "params_loc": "1:18-1:20",
         "quantifiers": [
           {
             "type": "TypeVarBinder",
             "name": "X",
             "constraints": [],
-            "loc": "1:4-1:4"
+            "loc": "1:4-1:5"
           },
           {
             "type": "TypeVarBinder",
@@ -35,7 +35,7 @@
                 "loc": "1:11-1:15"
               }
             ],
-            "loc": "1:7-1:6"
+            "loc": "1:7-1:8"
           }
         ],
         "return_type": {
@@ -49,7 +49,7 @@
             "loc": "1:24-1:28"
           },
           "tys": [],
-          "loc": "1:24-1:23"
+          "loc": "1:24-1:28"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -65,11 +65,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "1:29-1:30",
+          "loc": "1:29-1:31",
           "faked": true
         }
       },
-      "loc": "1:1-1:30"
+      "loc": "1:1-1:31"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -84,13 +84,13 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "4:8-4:6",
+        "params_loc": "4:8-4:8",
         "quantifiers": [
           {
             "type": "TypeVarBinder",
             "name": "X",
             "constraints": [],
-            "loc": "4:4-4:4"
+            "loc": "4:4-4:5"
           }
         ],
         "return_type": null,

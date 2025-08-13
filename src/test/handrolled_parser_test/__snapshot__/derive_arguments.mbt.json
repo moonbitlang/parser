@@ -29,13 +29,13 @@
                   "loc": "2:6-2:9"
                 },
                 "tys": [],
-                "loc": "2:6-2:5"
+                "loc": "2:6-2:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "2:3-2:5",
+              "loc": "2:3-2:9",
               "attrs": [],
               "doc": ""
             },
@@ -57,13 +57,13 @@
                   "loc": "3:6-3:9"
                 },
                 "tys": [],
-                "loc": "3:6-3:5"
+                "loc": "3:6-3:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "3:3-3:5",
+              "loc": "3:3-3:9",
               "attrs": [],
               "doc": ""
             }
@@ -84,7 +84,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": "4:10-4:10"
+              "loc": "4:10-4:18"
             },
             "args": [
               {
@@ -97,19 +97,19 @@
                       "type": "LongIdent::Ident",
                       "0": "i_am_empty_labelled_arg"
                     },
-                    "loc": "4:19-4:19"
+                    "loc": "4:19-4:42"
                   },
-                  "loc": "4:19-4:19"
+                  "loc": "4:19-4:42"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
                 }
               }
             ],
-            "loc": "4:10-4:42"
+            "loc": "4:10-4:43"
           }
         ],
-        "loc": "1:1-4:43"
+        "loc": "1:1-4:44"
       }
     },
     {
@@ -140,13 +140,13 @@
                   "loc": "7:6-7:9"
                 },
                 "tys": [],
-                "loc": "7:6-7:5"
+                "loc": "7:6-7:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "7:3-7:5",
+              "loc": "7:3-7:9",
               "attrs": [],
               "doc": ""
             },
@@ -168,13 +168,13 @@
                   "loc": "8:6-8:9"
                 },
                 "tys": [],
-                "loc": "8:6-8:5"
+                "loc": "8:6-8:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "8:3-8:5",
+              "loc": "8:3-8:9",
               "attrs": [],
               "doc": ""
             }
@@ -195,7 +195,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": "9:10-9:10"
+              "loc": "9:10-9:18"
             },
             "args": [
               {
@@ -213,10 +213,10 @@
                 }
               }
             ],
-            "loc": "9:10-9:22"
+            "loc": "9:10-9:23"
           }
         ],
-        "loc": "6:1-9:23"
+        "loc": "6:1-9:24"
       }
     },
     {
@@ -247,13 +247,13 @@
                   "loc": "12:6-12:9"
                 },
                 "tys": [],
-                "loc": "12:6-12:5"
+                "loc": "12:6-12:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "12:3-12:5",
+              "loc": "12:3-12:9",
               "attrs": [],
               "doc": ""
             },
@@ -275,13 +275,13 @@
                   "loc": "13:6-13:9"
                 },
                 "tys": [],
-                "loc": "13:6-13:5"
+                "loc": "13:6-13:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "13:3-13:5",
+              "loc": "13:3-13:9",
               "attrs": [],
               "doc": ""
             }
@@ -302,7 +302,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": "14:10-14:10"
+              "loc": "14:10-14:18"
             },
             "args": [
               {
@@ -325,10 +325,10 @@
                 }
               }
             ],
-            "loc": "14:10-14:38"
+            "loc": "14:10-14:39"
           }
         ],
-        "loc": "11:1-14:39"
+        "loc": "11:1-14:40"
       }
     },
     {
@@ -359,13 +359,13 @@
                   "loc": "17:6-17:9"
                 },
                 "tys": [],
-                "loc": "17:6-17:5"
+                "loc": "17:6-17:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "17:3-17:5",
+              "loc": "17:3-17:9",
               "attrs": [],
               "doc": ""
             },
@@ -387,13 +387,13 @@
                   "loc": "18:6-18:9"
                 },
                 "tys": [],
-                "loc": "18:6-18:5"
+                "loc": "18:6-18:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "18:3-18:5",
+              "loc": "18:3-18:9",
               "attrs": [],
               "doc": ""
             }
@@ -414,7 +414,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": "19:10-19:10"
+              "loc": "19:10-19:18"
             },
             "args": [
               {
@@ -429,9 +429,9 @@
                         "type": "LongIdent::Ident",
                         "0": "i_am_also"
                       },
-                      "loc": "19:19-19:19"
+                      "loc": "19:19-19:28"
                     },
-                    "loc": "19:19-19:19"
+                    "loc": "19:19-19:28"
                   },
                   "args": [
                     {
@@ -444,9 +444,9 @@
                             "type": "LongIdent::Ident",
                             "0": "labelled"
                           },
-                          "loc": "19:29-19:29"
+                          "loc": "19:29-19:37"
                         },
-                        "loc": "19:29-19:29"
+                        "loc": "19:29-19:37"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -470,17 +470,17 @@
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": "19:19-19:44"
+                  "loc": "19:19-19:45"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
                 }
               }
             ],
-            "loc": "19:10-19:45"
+            "loc": "19:10-19:46"
           }
         ],
-        "loc": "16:1-19:46"
+        "loc": "16:1-19:47"
       }
     },
     {
@@ -511,13 +511,13 @@
                   "loc": "22:6-22:9"
                 },
                 "tys": [],
-                "loc": "22:6-22:5"
+                "loc": "22:6-22:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "22:3-22:5",
+              "loc": "22:3-22:9",
               "attrs": [],
               "doc": ""
             },
@@ -539,13 +539,13 @@
                   "loc": "23:6-23:9"
                 },
                 "tys": [],
-                "loc": "23:6-23:5"
+                "loc": "23:6-23:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "23:3-23:5",
+              "loc": "23:3-23:9",
               "attrs": [],
               "doc": ""
             }
@@ -566,7 +566,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": "24:10-24:10"
+              "loc": "24:10-24:18"
             },
             "args": [
               {
@@ -600,9 +600,9 @@
                         "type": "LongIdent::Ident",
                         "0": "but"
                       },
-                      "loc": "24:35-24:34"
+                      "loc": "24:35-24:38"
                     },
-                    "loc": "24:35-24:34"
+                    "loc": "24:35-24:38"
                   },
                   "args": [
                     {
@@ -615,9 +615,9 @@
                             "type": "LongIdent::Ident",
                             "0": "this"
                           },
-                          "loc": "24:39-24:39"
+                          "loc": "24:39-24:43"
                         },
-                        "loc": "24:39-24:39"
+                        "loc": "24:39-24:43"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -657,9 +657,9 @@
                               "type": "LongIdent::Ident",
                               "0": "parse"
                             },
-                            "loc": "24:55-24:54"
+                            "loc": "24:55-24:60"
                           },
-                          "loc": "24:55-24:54"
+                          "loc": "24:55-24:60"
                         },
                         "rhs": {
                           "type": "Expr::Constant",
@@ -669,7 +669,7 @@
                           },
                           "loc": "24:64-24:68"
                         },
-                        "loc": "24:55-24:63"
+                        "loc": "24:55-24:68"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -679,17 +679,17 @@
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": "24:35-24:68"
+                  "loc": "24:35-24:69"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
                 }
               }
             ],
-            "loc": "24:10-24:69"
+            "loc": "24:10-24:70"
           }
         ],
-        "loc": "21:1-24:70"
+        "loc": "21:1-24:71"
       }
     },
     {
@@ -720,13 +720,13 @@
                   "loc": "27:6-27:9"
                 },
                 "tys": [],
-                "loc": "27:6-27:5"
+                "loc": "27:6-27:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "27:3-27:5",
+              "loc": "27:3-27:9",
               "attrs": [],
               "doc": ""
             },
@@ -748,13 +748,13 @@
                   "loc": "28:6-28:9"
                 },
                 "tys": [],
-                "loc": "28:6-28:5"
+                "loc": "28:6-28:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "28:3-28:5",
+              "loc": "28:3-28:9",
               "attrs": [],
               "doc": ""
             }
@@ -775,7 +775,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": "29:10-29:10"
+              "loc": "29:10-29:18"
             },
             "args": [
               {
@@ -793,10 +793,10 @@
                 }
               }
             ],
-            "loc": "29:10-29:41"
+            "loc": "29:10-29:42"
           }
         ],
-        "loc": "26:1-29:42"
+        "loc": "26:1-29:43"
       }
     },
     {
@@ -827,13 +827,13 @@
                   "loc": "32:6-32:9"
                 },
                 "tys": [],
-                "loc": "32:6-32:5"
+                "loc": "32:6-32:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "32:3-32:5",
+              "loc": "32:3-32:9",
               "attrs": [],
               "doc": ""
             },
@@ -855,13 +855,13 @@
                   "loc": "33:6-33:9"
                 },
                 "tys": [],
-                "loc": "33:6-33:5"
+                "loc": "33:6-33:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "33:3-33:5",
+              "loc": "33:3-33:9",
               "attrs": [],
               "doc": ""
             }
@@ -882,7 +882,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": "34:10-34:10"
+              "loc": "34:10-34:18"
             },
             "args": [
               {
@@ -894,7 +894,7 @@
                     "func": {
                       "type": "Func::Lambda",
                       "parameters": [],
-                      "params_loc": "34:22-34:23",
+                      "params_loc": "34:22-34:24",
                       "body": {
                         "type": "Expr::Constant",
                         "c": {
@@ -914,22 +914,22 @@
                       "is_async": false,
                       "loc": "-1:1--1:1"
                     },
-                    "loc": "34:20-34:90"
+                    "loc": "34:20-34:91"
                   },
                   "group": {
                     "type": "Group::Paren"
                   },
-                  "loc": "34:19-34:91"
+                  "loc": "34:19-34:92"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
                 }
               }
             ],
-            "loc": "34:10-34:92"
+            "loc": "34:10-34:93"
           }
         ],
-        "loc": "31:1-34:93"
+        "loc": "31:1-34:94"
       }
     }
   ],

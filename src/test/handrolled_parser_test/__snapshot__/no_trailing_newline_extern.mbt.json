@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "2:22-2:23",
+        "params_loc": "2:22-2:24",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -27,7 +27,7 @@
             "loc": "2:28-2:34"
           },
           "tys": [],
-          "loc": "2:28-2:27"
+          "loc": "2:28-2:34"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -51,7 +51,7 @@
           }
         }
       },
-      "loc": "2:1-2:36"
+      "loc": "2:1-2:59"
     }
   ]
 }

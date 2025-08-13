@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "1:9-1:3",
+        "params_loc": "1:9-1:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -47,9 +47,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": "2:14-2:13"
+              "loc": "2:14-2:15"
             },
-            "loc": "2:14-2:13"
+            "loc": "2:14-2:15"
           },
           "body": {
             "type": "Expr::Let",
@@ -76,16 +76,16 @@
                   "type": "LongIdent::Ident",
                   "0": "b"
                 },
-                "loc": "3:10-3:10"
+                "loc": "3:10-3:11"
               },
-              "loc": "3:10-3:10"
+              "loc": "3:10-3:11"
             },
-            "loc": "3:9-3:9"
+            "loc": "3:10-3:11"
           },
-          "loc": "2:14-2:13"
+          "loc": "2:3-3:11"
         }
       },
-      "loc": "1:1-3:27"
+      "loc": "1:1-4:2"
     }
   ],
   "diagnostics": [

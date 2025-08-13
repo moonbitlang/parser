@@ -32,11 +32,11 @@
                 "loc": "7:15-7:18"
               },
               "tys": [],
-              "loc": "7:15-7:14"
+              "loc": "7:15-7:18"
             }
           }
         ],
-        "params_loc": "7:10-7:18",
+        "params_loc": "7:10-7:19",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -49,7 +49,7 @@
             "loc": "7:23-7:26"
           },
           "tys": [],
-          "loc": "7:23-7:22"
+          "loc": "7:23-7:26"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -57,7 +57,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "7:1-6:28"
+          "loc": "7:1-7:4"
         },
         "attrs": [
           {
@@ -102,14 +102,14 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": "8:7-8:6"
+              "loc": "8:7-8:8"
             },
-            "loc": "8:7-8:6"
+            "loc": "8:7-8:8"
           },
-          "loc": "8:3-8:6"
+          "loc": "8:3-8:8"
         }
       },
-      "loc": "5:1-8:9"
+      "loc": "5:1-9:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -142,11 +142,11 @@
                 "loc": "14:15-14:18"
               },
               "tys": [],
-              "loc": "14:15-14:14"
+              "loc": "14:15-14:18"
             }
           }
         ],
-        "params_loc": "14:10-14:18",
+        "params_loc": "14:10-14:19",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -159,7 +159,7 @@
             "loc": "14:23-14:26"
           },
           "tys": [],
-          "loc": "14:23-14:22"
+          "loc": "14:23-14:26"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -167,7 +167,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "14:1-13:26"
+          "loc": "14:1-14:4"
         },
         "attrs": [
           {
@@ -217,14 +217,14 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": "15:7-15:6"
+              "loc": "15:7-15:8"
             },
-            "loc": "15:7-15:6"
+            "loc": "15:7-15:8"
           },
-          "loc": "15:3-15:6"
+          "loc": "15:3-15:8"
         }
       },
-      "loc": "11:1-15:9"
+      "loc": "11:1-16:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -257,11 +257,11 @@
                 "loc": "20:27-20:30"
               },
               "tys": [],
-              "loc": "20:27-20:26"
+              "loc": "20:27-20:30"
             }
           }
         ],
-        "params_loc": "20:22-20:30",
+        "params_loc": "20:22-20:31",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -274,7 +274,7 @@
             "loc": "20:35-20:38"
           },
           "tys": [],
-          "loc": "20:35-20:34"
+          "loc": "20:35-20:38"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -282,7 +282,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "20:1-19:28"
+          "loc": "20:1-20:4"
         },
         "attrs": [
           {
@@ -309,7 +309,7 @@
           }
         }
       },
-      "loc": "18:1-20:40"
+      "loc": "18:1-20:45"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -342,11 +342,11 @@
                 "loc": "27:15-27:18"
               },
               "tys": [],
-              "loc": "27:15-27:14"
+              "loc": "27:15-27:18"
             }
           }
         ],
-        "params_loc": "27:10-27:18",
+        "params_loc": "27:10-27:19",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -359,7 +359,7 @@
             "loc": "27:23-27:26"
           },
           "tys": [],
-          "loc": "27:23-27:22"
+          "loc": "27:23-27:26"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -367,7 +367,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "27:1-26:28"
+          "loc": "27:1-27:4"
         },
         "attrs": [
           {
@@ -394,7 +394,7 @@
           }
         }
       },
-      "loc": "25:1-27:28"
+      "loc": "25:1-27:41"
     },
     {
       "type": "Impl::TopTest",
@@ -411,7 +411,7 @@
       },
       "params": null,
       "local_types": [],
-      "loc": "29:1-31:18",
+      "loc": "29:1-31:20",
       "attrs": [
         {
           "type": "Attribute",
@@ -453,10 +453,10 @@
         "type_vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "35:1-34:28"
+          "loc": "35:1-35:4"
         },
         "deriving": [],
-        "loc": "33:1-35:18"
+        "loc": "33:1-35:19"
       }
     },
     {
@@ -487,13 +487,13 @@
                   "loc": "40:27-40:30"
                 },
                 "tys": [],
-                "loc": "40:27-40:26"
+                "loc": "40:27-40:30"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "40:23-40:26",
+              "loc": "40:23-40:30",
               "attrs": [],
               "doc": ""
             }
@@ -515,10 +515,10 @@
         "type_vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "40:1-39:28"
+          "loc": "40:1-40:4"
         },
         "deriving": [],
-        "loc": "38:1-40:30"
+        "loc": "38:1-40:32"
       }
     },
     {
@@ -541,7 +541,7 @@
               "loc": "44:17-44:20"
             },
             "tys": [],
-            "loc": "44:17-44:16"
+            "loc": "44:17-44:20"
           }
         },
         "attrs": [
@@ -560,10 +560,10 @@
         "type_vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "44:1-43:28"
+          "loc": "44:1-44:4"
         },
         "deriving": [],
-        "loc": "42:1-44:16"
+        "loc": "42:1-44:20"
       }
     },
     {
@@ -601,7 +601,7 @@
                 "loc": "52:20-52:23"
               },
               "tys": [],
-              "loc": "52:20-52:19"
+              "loc": "52:20-52:23"
             }
           }
         },
@@ -621,10 +621,10 @@
         "type_vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "52:1-51:28"
+          "loc": "52:1-52:4"
         },
         "deriving": [],
-        "loc": "50:1-52:19"
+        "loc": "50:1-52:23"
       }
     },
     {
@@ -649,7 +649,7 @@
                 "args": null,
                 "tag": null,
                 "attrs": [],
-                "loc": "57:3-56:23",
+                "loc": "57:3-57:11",
                 "doc": ""
               },
               {
@@ -662,7 +662,7 @@
                 "args": null,
                 "tag": null,
                 "attrs": [],
-                "loc": "58:3-57:12",
+                "loc": "58:3-58:11",
                 "doc": ""
               }
             ]
@@ -684,10 +684,10 @@
         "type_vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "56:1-55:28"
+          "loc": "56:1-56:4"
         },
         "deriving": [],
-        "loc": "54:1-58:12"
+        "loc": "54:1-59:2"
       }
     },
     {
@@ -725,9 +725,9 @@
                     "loc": "64:7-64:10"
                   },
                   "tys": [],
-                  "loc": "64:7-64:7"
+                  "loc": "64:7-64:10"
                 },
-                "loc": "64:7-64:7"
+                "loc": "64:7-64:10"
               }
             ],
             "return_type": {
@@ -741,22 +741,22 @@
                 "loc": "64:15-64:18"
               },
               "tys": [],
-              "loc": "64:15-64:14"
+              "loc": "64:15-64:18"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": "64:4-64:14"
+            "loc": "64:4-64:18"
           }
         ],
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "63:2-62:28"
+          "loc": "63:2-63:5"
         },
-        "loc": "63:6-64:19",
+        "loc": "63:6-65:3",
         "attrs": [
           {
             "type": "Attribute",
@@ -785,7 +785,7 @@
           "loc": "69:23-69:31"
         },
         "tys": [],
-        "loc": "69:23-69:22"
+        "loc": "69:23-69:31"
       },
       "trait": {
         "type": "TypeName",
@@ -794,7 +794,7 @@
           "0": "MyTrait"
         },
         "is_object": false,
-        "loc": "69:11-69:10"
+        "loc": "69:11-69:18"
       },
       "method_name": {
         "type": "Binder",
@@ -832,9 +832,9 @@
       "vis": {
         "type": "Visibility::Pub",
         "attr": null,
-        "loc": "69:2-68:58"
+        "loc": "69:2-69:5"
       },
-      "loc": "67:1-70:8",
+      "loc": "67:1-71:3",
       "attrs": [
         {
           "type": "Attribute",

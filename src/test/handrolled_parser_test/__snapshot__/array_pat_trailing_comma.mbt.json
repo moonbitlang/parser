@@ -32,11 +32,11 @@
                 "loc": "2:15-2:21"
               },
               "tys": [],
-              "loc": "2:15-2:14"
+              "loc": "2:15-2:21"
             }
           }
         ],
-        "params_loc": "2:10-2:21",
+        "params_loc": "2:10-2:22",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -49,7 +49,7 @@
             "loc": "2:26-2:30"
           },
           "tys": [],
-          "loc": "2:26-2:25"
+          "loc": "2:26-2:30"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -57,7 +57,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": "2:1-1:6"
+          "loc": "2:1-2:4"
         },
         "attrs": [],
         "doc": ""
@@ -75,9 +75,9 @@
                 "type": "LongIdent::Ident",
                 "0": "s"
               },
-              "loc": "3:9-3:8"
+              "loc": "3:9-3:10"
             },
-            "loc": "3:9-3:8"
+            "loc": "3:9-3:10"
           },
           "cases": [
             {
@@ -100,7 +100,7 @@
                     }
                   ]
                 },
-                "loc": "4:5-4:10"
+                "loc": "4:5-4:12"
               },
               "guard": null,
               "body": {
@@ -113,9 +113,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "4:16-4:15"
+                    "loc": "4:16-4:23"
                   },
-                  "loc": "4:16-4:15"
+                  "loc": "4:16-4:23"
                 },
                 "args": [
                   {
@@ -136,7 +136,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "4:16-4:25"
+                "loc": "4:16-4:26"
               }
             },
             {
@@ -163,7 +163,7 @@
                     "type": "DotDotBinder::NoBinder"
                   }
                 },
-                "loc": "5:5-5:14"
+                "loc": "5:5-5:15"
               },
               "guard": null,
               "body": {
@@ -176,9 +176,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "5:19-5:18"
+                    "loc": "5:19-5:26"
                   },
-                  "loc": "5:19-5:18"
+                  "loc": "5:19-5:26"
                 },
                 "args": [
                   {
@@ -199,7 +199,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "5:19-5:28"
+                "loc": "5:19-5:29"
               }
             },
             {
@@ -231,7 +231,7 @@
                     }
                   }
                 },
-                "loc": "6:5-6:16"
+                "loc": "6:5-6:17"
               },
               "guard": null,
               "body": {
@@ -244,9 +244,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "6:21-6:20"
+                    "loc": "6:21-6:28"
                   },
-                  "loc": "6:21-6:20"
+                  "loc": "6:21-6:28"
                 },
                 "args": [
                   {
@@ -267,7 +267,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "6:21-6:30"
+                "loc": "6:21-6:31"
               }
             },
             {
@@ -311,7 +311,7 @@
                     }
                   }
                 },
-                "loc": "7:5-7:21"
+                "loc": "7:5-7:22"
               },
               "guard": null,
               "body": {
@@ -324,9 +324,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "7:26-7:25"
+                    "loc": "7:26-7:33"
                   },
-                  "loc": "7:26-7:25"
+                  "loc": "7:26-7:33"
                 },
                 "args": [
                   {
@@ -347,7 +347,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "7:26-7:35"
+                "loc": "7:26-7:36"
               }
             },
             {
@@ -367,9 +367,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": "8:10-8:9"
+                    "loc": "8:10-8:17"
                   },
-                  "loc": "8:10-8:9"
+                  "loc": "8:10-8:17"
                 },
                 "args": [
                   {
@@ -390,16 +390,16 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": "8:10-8:19"
+                "loc": "8:10-8:20"
               }
             }
           ],
           "match_loc": "3:3-3:12",
           "using": null,
-          "loc": "3:3-8:21"
+          "loc": "3:3-9:4"
         }
       },
-      "loc": "2:1-9:5"
+      "loc": "2:1-10:2"
     }
   ]
 }

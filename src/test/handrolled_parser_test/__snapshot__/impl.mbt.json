@@ -14,7 +14,7 @@
           "loc": "2:13-2:16"
         },
         "tys": [],
-        "loc": "2:13-2:12"
+        "loc": "2:13-2:16"
       },
       "trait": {
         "type": "TypeName",
@@ -23,7 +23,7 @@
           "0": "Eq"
         },
         "is_object": false,
-        "loc": "2:6-2:5"
+        "loc": "2:6-2:8"
       },
       "method_name": {
         "type": "Binder",
@@ -61,14 +61,14 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "2:37-2:38",
+          "loc": "2:37-2:39",
           "faked": true
         }
       },
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": "2:1-2:38",
+      "loc": "2:1-2:39",
       "attrs": [],
       "doc": ""
     },
@@ -96,10 +96,10 @@
               "loc": "3:26-3:27"
             },
             "tys": [],
-            "loc": "3:26-3:26"
+            "loc": "3:26-3:27"
           }
         ],
-        "loc": "3:20-3:27"
+        "loc": "3:20-3:28"
       },
       "trait": {
         "type": "TypeName",
@@ -108,7 +108,7 @@
           "0": "Eq"
         },
         "is_object": false,
-        "loc": "3:13-3:12"
+        "loc": "3:13-3:15"
       },
       "method_name": {
         "type": "Binder",
@@ -130,7 +130,7 @@
               "loc": "3:9-3:11"
             }
           ],
-          "loc": "3:6-3:6"
+          "loc": "3:6-3:7"
         }
       ],
       "params": [
@@ -162,14 +162,14 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "3:51-3:52",
+          "loc": "3:51-3:53",
           "faked": true
         }
       },
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": "3:1-3:52",
+      "loc": "3:1-3:53",
       "attrs": [],
       "doc": ""
     },
@@ -183,7 +183,7 @@
           "0": "Eq"
         },
         "is_object": false,
-        "loc": "4:6-4:5"
+        "loc": "4:6-4:8"
       },
       "method_name": {
         "type": "Binder",
@@ -211,7 +211,7 @@
               "loc": "4:29-4:33"
             },
             "tys": [],
-            "loc": "4:29-4:28"
+            "loc": "4:29-4:33"
           }
         },
         {
@@ -232,7 +232,7 @@
               "loc": "4:38-4:42"
             },
             "tys": [],
-            "loc": "4:38-4:37"
+            "loc": "4:38-4:42"
           }
         }
       ],
@@ -247,7 +247,7 @@
           "loc": "4:47-4:51"
         },
         "tys": [],
-        "loc": "4:47-4:46"
+        "loc": "4:47-4:51"
       },
       "err_ty": {
         "type": "ErrorType::NoErrorType"
@@ -257,14 +257,14 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "4:52-4:53",
+          "loc": "4:52-4:54",
           "faked": true
         }
       },
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": "4:1-4:53",
+      "loc": "4:1-4:54",
       "attrs": [],
       "doc": ""
     },
@@ -292,7 +292,7 @@
               "loc": "7:26-7:27"
             },
             "tys": [],
-            "loc": "7:26-7:26"
+            "loc": "7:26-7:27"
           }
         ],
         "loc": "7:20-7:28"
@@ -304,7 +304,7 @@
           "0": "Eq"
         },
         "is_object": false,
-        "loc": "7:13-7:12"
+        "loc": "7:13-7:15"
       },
       "method_name": {
         "type": "Binder",
@@ -326,7 +326,7 @@
               "loc": "7:9-7:11"
             }
           ],
-          "loc": "7:6-7:6"
+          "loc": "7:6-7:7"
         }
       ],
       "params": [
@@ -358,14 +358,14 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "7:50-7:51",
+          "loc": "7:50-7:52",
           "faked": true
         }
       },
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": "7:1-7:51",
+      "loc": "7:1-7:52",
       "attrs": [],
       "doc": ""
     },
@@ -382,7 +382,7 @@
           "loc": "10:15-10:18"
         },
         "tys": [],
-        "loc": "10:15-10:14"
+        "loc": "10:15-10:18"
       },
       "trait": {
         "type": "TypeName",
@@ -391,7 +391,7 @@
           "0": "Hash"
         },
         "is_object": false,
-        "loc": "10:6-10:5"
+        "loc": "10:6-10:10"
       },
       "method_name": {
         "type": "Binder",
@@ -422,7 +422,7 @@
           "loc": "10:38-10:41"
         },
         "tys": [],
-        "loc": "10:38-10:37"
+        "loc": "10:38-10:41"
       },
       "err_ty": {
         "type": "ErrorType::NoErrorType"
@@ -432,14 +432,14 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "10:42-10:43",
+          "loc": "10:42-10:44",
           "faked": true
         }
       },
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": "10:1-10:43",
+      "loc": "10:1-10:44",
       "attrs": [],
       "doc": " docstring"
     },
@@ -456,7 +456,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "13:14-13:15",
+        "params_loc": "13:14-13:16",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -489,7 +489,7 @@
           "0": "Trait"
         },
         "is_object": false,
-        "loc": "14:6-14:5"
+        "loc": "14:6-14:11"
       },
       "method_name": {
         "type": "Binder",
@@ -508,14 +508,14 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "14:26-14:27",
+          "loc": "14:26-14:28",
           "faked": true
         }
       },
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": "14:1-14:27",
+      "loc": "14:1-14:28",
       "attrs": [],
       "doc": ""
     },
@@ -532,7 +532,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "16:14-16:15",
+        "params_loc": "16:14-16:16",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -568,7 +568,7 @@
           "loc": "17:16-17:19"
         },
         "tys": [],
-        "loc": "17:16-17:15"
+        "loc": "17:16-17:19"
       },
       "trait": {
         "type": "TypeName",
@@ -577,7 +577,7 @@
           "0": "Trait"
         },
         "is_object": false,
-        "loc": "17:6-17:5"
+        "loc": "17:6-17:11"
       },
       "method_name": {
         "type": "Binder",
@@ -596,14 +596,14 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "17:34-17:35",
+          "loc": "17:34-17:36",
           "faked": true
         }
       },
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": "17:1-17:35",
+      "loc": "17:1-17:36",
       "attrs": [],
       "doc": ""
     },
@@ -617,7 +617,7 @@
           "0": "Trait"
         },
         "is_object": false,
-        "loc": "19:9-19:8"
+        "loc": "19:9-19:14"
       },
       "method_name": {
         "type": "Binder",
@@ -630,7 +630,7 @@
           "type": "TypeVarBinder",
           "name": "X",
           "constraints": [],
-          "loc": "19:6-19:6"
+          "loc": "19:6-19:7"
         }
       ],
       "params": [],
@@ -643,14 +643,14 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "19:29-19:30",
+          "loc": "19:29-19:31",
           "faked": true
         }
       },
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": "19:1-19:30",
+      "loc": "19:1-19:31",
       "attrs": [],
       "doc": ""
     },
@@ -664,7 +664,7 @@
           "0": "Trait"
         },
         "is_object": false,
-        "loc": "22:9-22:8"
+        "loc": "22:9-22:14"
       },
       "method_name": {
         "type": "Binder",
@@ -677,7 +677,7 @@
           "type": "TypeVarBinder",
           "name": "X",
           "constraints": [],
-          "loc": "22:6-22:6"
+          "loc": "22:6-22:7"
         }
       ],
       "params": [],
@@ -716,7 +716,7 @@
           "loc": "24:13-24:16"
         },
         "tys": [],
-        "loc": "24:13-24:12"
+        "loc": "24:13-24:16"
       },
       "trait": {
         "type": "TypeName",
@@ -725,7 +725,7 @@
           "0": "Eq"
         },
         "is_object": false,
-        "loc": "24:6-24:5"
+        "loc": "24:6-24:8"
       },
       "method_name": {
         "type": "Binder",
@@ -772,7 +772,7 @@
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": "24:1-24:38",
+      "loc": "24:1-24:48",
       "attrs": [],
       "doc": ""
     },
@@ -789,7 +789,7 @@
           "loc": "27:13-27:16"
         },
         "tys": [],
-        "loc": "27:13-27:12"
+        "loc": "27:13-27:16"
       },
       "trait": {
         "type": "TypeName",
@@ -798,7 +798,7 @@
           "0": "Eq"
         },
         "is_object": false,
-        "loc": "27:6-27:5"
+        "loc": "27:6-27:8"
       },
       "quantifiers": [],
       "vis": {
@@ -811,7 +811,7 @@
           "loc": "26:1-26:19"
         }
       ],
-      "loc": "26:1-27:12",
+      "loc": "26:1-27:16",
       "doc": ""
     }
   ],

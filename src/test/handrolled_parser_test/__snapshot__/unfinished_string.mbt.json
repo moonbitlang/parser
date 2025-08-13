@@ -32,11 +32,11 @@
                 "loc": "1:9-1:12"
               },
               "tys": [],
-              "loc": "1:9-1:8"
+              "loc": "1:9-1:12"
             }
           }
         ],
-        "params_loc": "1:5-1:12",
+        "params_loc": "1:5-1:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -49,7 +49,7 @@
             "loc": "1:17-1:20"
           },
           "tys": [],
-          "loc": "1:17-1:16"
+          "loc": "1:17-1:20"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -81,9 +81,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": "2:5-1:23"
+              "loc": "2:5-2:6"
             },
-            "loc": "2:5-1:23"
+            "loc": "2:5-2:6"
           },
           "rhs": {
             "type": "Expr::Constant",
@@ -93,10 +93,10 @@
             },
             "loc": "2:9-2:10"
           },
-          "loc": "2:5-2:8"
+          "loc": "2:5-2:10"
         }
       },
-      "loc": "1:1-2:11"
+      "loc": "1:1-3:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -111,7 +111,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "5:9-5:3",
+        "params_loc": "5:9-5:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -146,10 +146,10 @@
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": "6:5-6:8",
+            "loc": "6:5-6:14",
             "faked": true
           },
-          "loc": "6:13-6:14"
+          "loc": "6:5-6:14"
         }
       },
       "loc": "5:1-6:14"

@@ -29,13 +29,13 @@
                   "loc": "2:6-2:12"
                 },
                 "tys": [],
-                "loc": "2:6-2:6"
+                "loc": "2:6-2:12"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "2:3-2:6",
+              "loc": "2:3-2:12",
               "attrs": [],
               "doc": ""
             },
@@ -57,13 +57,13 @@
                   "loc": "3:6-3:9"
                 },
                 "tys": [],
-                "loc": "3:6-3:6"
+                "loc": "3:6-3:9"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "3:3-3:6",
+              "loc": "3:3-3:9",
               "attrs": [],
               "doc": ""
             },
@@ -85,13 +85,13 @@
                   "loc": "4:6-4:10"
                 },
                 "tys": [],
-                "loc": "4:6-4:6"
+                "loc": "4:6-4:10"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "4:3-4:6",
+              "loc": "4:3-4:10",
               "attrs": [],
               "doc": ""
             }
@@ -103,7 +103,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": "1:1-4:11"
+        "loc": "1:1-5:2"
       }
     },
     {
@@ -119,7 +119,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "7:9-7:3",
+        "params_loc": "7:9-7:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -164,7 +164,7 @@
                   "loc": "8:17-8:20"
                 },
                 "is_pun": false,
-                "loc": "8:14-8:17"
+                "loc": "8:14-8:20"
               },
               {
                 "type": "FieldDef",
@@ -182,7 +182,7 @@
                   "loc": "8:25-8:26"
                 },
                 "is_pun": false,
-                "loc": "8:22-8:25"
+                "loc": "8:22-8:26"
               },
               {
                 "type": "FieldDef",
@@ -200,13 +200,13 @@
                   "loc": "8:31-8:35"
                 },
                 "is_pun": false,
-                "loc": "8:28-8:31"
+                "loc": "8:28-8:35"
               }
             ],
             "trailing": {
               "type": "Trailing::None"
             },
-            "loc": "8:12-8:35"
+            "loc": "8:12-8:37"
           },
           "body": {
             "type": "Expr::Let",
@@ -229,7 +229,7 @@
                     }
                   },
                   "is_pun": true,
-                  "loc": "9:8-9:8"
+                  "loc": "9:8-9:10"
                 },
                 {
                   "type": "FieldPat",
@@ -247,7 +247,7 @@
                     }
                   },
                   "is_pun": true,
-                  "loc": "9:12-9:11"
+                  "loc": "9:12-9:14"
                 },
                 {
                   "type": "FieldPat",
@@ -265,11 +265,11 @@
                     }
                   },
                   "is_pun": true,
-                  "loc": "9:16-9:15"
+                  "loc": "9:16-9:18"
                 }
               ],
               "is_closed": true,
-              "loc": "9:7-9:18"
+              "loc": "9:7-9:19"
             },
             "expr": {
               "type": "Expr::Ident",
@@ -279,9 +279,9 @@
                   "type": "LongIdent::Ident",
                   "0": "aa"
                 },
-                "loc": "9:22-9:21"
+                "loc": "9:22-9:24"
               },
-              "loc": "9:22-9:21"
+              "loc": "9:22-9:24"
             },
             "body": {
               "type": "Expr::Apply",
@@ -293,9 +293,9 @@
                     "type": "LongIdent::Ident",
                     "0": "println"
                   },
-                  "loc": "10:3-9:25"
+                  "loc": "10:3-10:10"
                 },
-                "loc": "10:3-9:25"
+                "loc": "10:3-10:10"
               },
               "args": [
                 {
@@ -308,9 +308,9 @@
                         "type": "LongIdent::Ident",
                         "0": "r1"
                       },
-                      "loc": "10:11-10:11"
+                      "loc": "10:11-10:13"
                     },
-                    "loc": "10:11-10:11"
+                    "loc": "10:11-10:13"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -320,14 +320,14 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "10:3-10:13"
+              "loc": "10:3-10:14"
             },
-            "loc": "9:22-9:21"
+            "loc": "9:3-10:14"
           },
-          "loc": "8:12-8:35"
+          "loc": "8:3-10:14"
         }
       },
-      "loc": "7:1-10:15"
+      "loc": "7:1-11:2"
     }
   ]
 }

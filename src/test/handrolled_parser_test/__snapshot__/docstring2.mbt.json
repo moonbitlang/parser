@@ -15,10 +15,10 @@
             {
               "type": "Func::Lambda",
               "parameters": [],
-              "params_loc": "11:7-11:8",
+              "params_loc": "11:7-11:9",
               "body": {
                 "type": "Expr::Unit",
-                "loc": "11:10-12:2",
+                "loc": "11:10-13:4",
                 "faked": true
               },
               "return_type": null,
@@ -42,10 +42,10 @@
             {
               "type": "Func::Lambda",
               "parameters": [],
-              "params_loc": "16:7-16:8",
+              "params_loc": "16:7-16:9",
               "body": {
                 "type": "Expr::Unit",
-                "loc": "16:10-17:2",
+                "loc": "16:10-18:4",
                 "faked": true
               },
               "return_type": null,
@@ -63,15 +63,15 @@
         ],
         "body": {
           "type": "Expr::Unit",
-          "loc": "16:3-17:2",
+          "loc": "16:3-18:4",
           "faked": true
         },
-        "loc": "11:3-17:2"
+        "loc": "11:3-18:4"
       },
       "name": null,
       "params": null,
       "local_types": [],
-      "loc": "9:1-18:5",
+      "loc": "9:1-19:2",
       "attrs": [],
       "doc": " Useless doc comment, shouldn't appear in AST"
     },
@@ -88,7 +88,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "22:6-22:7",
+        "params_loc": "22:6-22:8",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -101,7 +101,7 @@
             "loc": "22:12-22:16"
           },
           "tys": [],
-          "loc": "22:12-22:11"
+          "loc": "22:12-22:16"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -117,11 +117,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "22:17-23:2",
+          "loc": "22:17-24:2",
           "faked": true
         }
       },
-      "loc": "22:1-23:2"
+      "loc": "22:1-24:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -136,7 +136,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "27:9-27:3",
+        "params_loc": "27:9-27:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -163,10 +163,10 @@
               {
                 "type": "Func::Lambda",
                 "parameters": [],
-                "params_loc": "29:7-29:8",
+                "params_loc": "29:7-29:9",
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": "29:10-30:2",
+                  "loc": "29:10-31:4",
                   "faked": true
                 },
                 "return_type": null,
@@ -190,10 +190,10 @@
               {
                 "type": "Func::Lambda",
                 "parameters": [],
-                "params_loc": "34:7-34:8",
+                "params_loc": "34:7-34:9",
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": "34:10-35:2",
+                  "loc": "34:10-36:4",
                   "faked": true
                 },
                 "return_type": null,
@@ -211,13 +211,13 @@
           ],
           "body": {
             "type": "Expr::Unit",
-            "loc": "34:3-35:2",
+            "loc": "34:3-36:4",
             "faked": true
           },
-          "loc": "29:3-35:2"
+          "loc": "29:3-36:4"
         }
       },
-      "loc": "27:1-36:5"
+      "loc": "27:1-37:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -232,7 +232,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "40:6-40:7",
+        "params_loc": "40:6-40:8",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -245,7 +245,7 @@
             "loc": "40:12-40:16"
           },
           "tys": [],
-          "loc": "40:12-40:11"
+          "loc": "40:12-40:16"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -261,11 +261,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "40:17-41:2",
+          "loc": "40:17-42:2",
           "faked": true
         }
       },
-      "loc": "40:1-41:2"
+      "loc": "40:1-42:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -280,7 +280,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "45:9-45:3",
+        "params_loc": "45:9-45:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -307,10 +307,10 @@
               {
                 "type": "Func::Lambda",
                 "parameters": [],
-                "params_loc": "47:7-47:8",
+                "params_loc": "47:7-47:9",
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": "47:10-48:2",
+                  "loc": "47:10-49:4",
                   "faked": true
                 },
                 "return_type": null,
@@ -334,10 +334,10 @@
               {
                 "type": "Func::Lambda",
                 "parameters": [],
-                "params_loc": "52:7-52:8",
+                "params_loc": "52:7-52:9",
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": "52:10-53:2",
+                  "loc": "52:10-54:4",
                   "faked": true
                 },
                 "return_type": null,
@@ -355,13 +355,13 @@
           ],
           "body": {
             "type": "Expr::Unit",
-            "loc": "52:3-53:2",
+            "loc": "52:3-54:4",
             "faked": true
           },
-          "loc": "47:3-53:2"
+          "loc": "47:3-54:4"
         }
       },
-      "loc": "45:1-54:5"
+      "loc": "45:1-55:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -376,7 +376,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "58:6-58:7",
+        "params_loc": "58:6-58:8",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -389,7 +389,7 @@
             "loc": "58:12-58:16"
           },
           "tys": [],
-          "loc": "58:12-58:11"
+          "loc": "58:12-58:16"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -405,11 +405,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "58:17-59:2",
+          "loc": "58:17-60:2",
           "faked": true
         }
       },
-      "loc": "58:1-59:2"
+      "loc": "58:1-60:2"
     }
   ]
 }

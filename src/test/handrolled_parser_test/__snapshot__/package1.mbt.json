@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "1:9-1:3",
+        "params_loc": "1:9-1:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -31,11 +31,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": "2:3-2:4",
+          "loc": "2:3-2:5",
           "faked": false
         }
       },
-      "loc": "1:1-2:6"
+      "loc": "1:1-3:2"
     },
     {
       "type": "Impl::TopLetDef",
@@ -57,7 +57,7 @@
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "5:1-5:8",
+      "loc": "5:1-5:10",
       "attrs": [],
       "doc": ""
     }

@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "1:5-1:6",
+        "params_loc": "1:5-1:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -27,7 +27,7 @@
             "loc": "1:11-1:15"
           },
           "tys": [],
-          "loc": "1:11-1:10"
+          "loc": "1:11-1:15"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -57,9 +57,9 @@
                       "type": "LongIdent::Ident",
                       "0": "x"
                     },
-                    "loc": "3:5-2:10"
+                    "loc": "3:5-3:6"
                   },
-                  "loc": "3:5-2:10"
+                  "loc": "3:5-3:6"
                 },
                 "rhs": {
                   "type": "Expr::Constr",
@@ -68,21 +68,21 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "Ok",
-                      "loc": "3:10-3:9"
+                      "loc": "3:10-3:12"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": "3:10-3:9"
+                    "loc": "3:10-3:12"
                   },
-                  "loc": "3:10-3:9"
+                  "loc": "3:10-3:12"
                 },
-                "loc": "3:5-3:9"
+                "loc": "3:5-3:12"
               },
               "group": {
                 "type": "Group::Brace"
               },
-              "loc": "2:8-2:4"
+              "loc": "2:8-2:7"
             },
             "catch": [
               {
@@ -99,14 +99,14 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "Err",
-                      "loc": "5:10-5:9"
+                      "loc": "5:10-5:13"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": "5:10-5:9"
+                    "loc": "5:10-5:13"
                   },
-                  "loc": "5:10-5:9"
+                  "loc": "5:10-5:13"
                 }
               }
             ],
@@ -116,15 +116,15 @@
             "try_loc": "2:4-2:7",
             "catch_loc": "4:5-4:12",
             "else_loc": "-1:1--1:1",
-            "loc": "2:4-5:14"
+            "loc": "2:4-6:4"
           },
           "group": {
             "type": "Group::Paren"
           },
-          "loc": "2:3-6:4"
+          "loc": "2:3-6:5"
         }
       },
-      "loc": "1:1-6:6"
+      "loc": "1:1-7:2"
     }
   ]
 }

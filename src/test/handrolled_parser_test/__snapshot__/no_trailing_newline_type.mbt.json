@@ -11,12 +11,12 @@
           {
             "type": "TypeDeclBinder",
             "name": "T",
-            "loc": "1:8-1:8"
+            "loc": "1:8-1:9"
           },
           {
             "type": "TypeDeclBinder",
             "name": "E",
-            "loc": "1:10-1:10"
+            "loc": "1:10-1:11"
           }
         ],
         "components": {
@@ -28,7 +28,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": "1:1-1:11"
+        "loc": "1:1-1:12"
       }
     }
   ]

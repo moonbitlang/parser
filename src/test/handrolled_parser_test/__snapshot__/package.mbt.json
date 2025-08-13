@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "2:9-2:3",
+        "params_loc": "2:9-2:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -38,12 +38,12 @@
               "pkg": "xx",
               "id": "v"
             },
-            "loc": "3:3-3:6"
+            "loc": "3:3-3:8"
           },
-          "loc": "3:3-3:6"
+          "loc": "3:3-3:8"
         }
       },
-      "loc": "2:1-3:9"
+      "loc": "2:1-4:2"
     }
   ]
 }

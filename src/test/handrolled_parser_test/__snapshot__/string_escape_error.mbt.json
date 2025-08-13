@@ -16,9 +16,9 @@
                   "type": "LongIdent::Ident",
                   "0": "println"
                 },
-                "loc": "2:3-1:8"
+                "loc": "2:3-2:10"
               },
-              "loc": "2:3-1:8"
+              "loc": "2:3-2:10"
             },
             "args": [
               {
@@ -39,7 +39,7 @@
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": "2:3-2:15"
+            "loc": "2:3-2:16"
           },
           {
             "type": "Expr::Apply",
@@ -51,9 +51,9 @@
                   "type": "LongIdent::Ident",
                   "0": "println"
                 },
-                "loc": "3:3-2:17"
+                "loc": "3:3-3:10"
               },
-              "loc": "3:3-2:17"
+              "loc": "3:3-3:10"
             },
             "args": [
               {
@@ -74,7 +74,7 @@
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": "3:3-3:18"
+            "loc": "3:3-3:19"
           },
           {
             "type": "Expr::Apply",
@@ -86,9 +86,9 @@
                   "type": "LongIdent::Ident",
                   "0": "println"
                 },
-                "loc": "4:3-3:20"
+                "loc": "4:3-4:10"
               },
-              "loc": "4:3-3:20"
+              "loc": "4:3-4:10"
             },
             "args": [
               {
@@ -109,7 +109,7 @@
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": "4:3-4:20"
+            "loc": "4:3-4:21"
           },
           {
             "type": "Expr::Apply",
@@ -121,9 +121,9 @@
                   "type": "LongIdent::Ident",
                   "0": "println"
                 },
-                "loc": "5:3-4:22"
+                "loc": "5:3-5:10"
               },
-              "loc": "5:3-4:22"
+              "loc": "5:3-5:10"
             },
             "args": [
               {
@@ -144,7 +144,7 @@
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": "5:3-5:26"
+            "loc": "5:3-5:27"
           }
         ],
         "last_expr": {
@@ -157,9 +157,9 @@
                 "type": "LongIdent::Ident",
                 "0": "println"
               },
-              "loc": "6:3-5:28"
+              "loc": "6:3-6:10"
             },
-            "loc": "6:3-5:28"
+            "loc": "6:3-6:10"
           },
           "args": [
             {
@@ -180,14 +180,14 @@
           "attr": {
             "type": "ApplyAttr::NoAttr"
           },
-          "loc": "6:3-6:19"
+          "loc": "6:3-6:20"
         },
-        "loc": "2:3-6:19"
+        "loc": "2:3-6:20"
       },
       "name": null,
       "params": null,
       "local_types": [],
-      "loc": "1:1-6:21",
+      "loc": "1:1-7:2",
       "attrs": [],
       "doc": ""
     }

@@ -29,13 +29,13 @@
                   "loc": "3:7-3:10"
                 },
                 "tys": [],
-                "loc": "3:7-3:6"
+                "loc": "3:7-3:10"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": "3:3-3:6",
+              "loc": "3:3-3:10",
               "attrs": [],
               "doc": ""
             }
@@ -47,7 +47,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": "2:1-3:11"
+        "loc": "2:1-4:2"
       }
     },
     {
@@ -70,7 +70,7 @@
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "6:1-6:8",
+      "loc": "6:1-6:10",
       "attrs": [],
       "doc": ""
     },
@@ -102,19 +102,19 @@
               "loc": "9:15-9:16"
             },
             "is_pun": false,
-            "loc": "9:12-9:14"
+            "loc": "9:12-9:16"
           }
         ],
         "trailing": {
           "type": "Trailing::None"
         },
-        "loc": "9:10-9:16"
+        "loc": "9:10-9:18"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "9:1-9:16",
+      "loc": "9:1-9:18",
       "attrs": [],
       "doc": " record"
     },
@@ -150,19 +150,19 @@
               "loc": "12:12-12:13"
             },
             "is_pun": true,
-            "loc": "12:12-12:11"
+            "loc": "12:12-12:13"
           }
         ],
         "trailing": {
           "type": "Trailing::Semi"
         },
-        "loc": "12:10-12:14"
+        "loc": "12:10-12:16"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "12:1-12:14",
+      "loc": "12:1-12:16",
       "attrs": [],
       "doc": " warning, should be record "
     },
@@ -198,19 +198,19 @@
               "loc": "16:3-16:4"
             },
             "is_pun": true,
-            "loc": "16:3-15:13"
+            "loc": "16:3-16:4"
           }
         ],
         "trailing": {
           "type": "Trailing::None"
         },
-        "loc": "15:10-16:6"
+        "loc": "15:10-17:2"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "15:1-16:6",
+      "loc": "15:1-17:2",
       "attrs": [],
       "doc": " warning, should be record"
     },
@@ -246,19 +246,19 @@
               "loc": "20:12-20:13"
             },
             "is_pun": true,
-            "loc": "20:12-20:11"
+            "loc": "20:12-20:13"
           }
         ],
         "trailing": {
           "type": "Trailing::None"
         },
-        "loc": "20:10-20:13"
+        "loc": "20:10-20:15"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "20:1-20:13",
+      "loc": "20:1-20:15",
       "attrs": [],
       "doc": " warning, should be record"
     },
@@ -294,19 +294,19 @@
               "loc": "23:12-23:13"
             },
             "is_pun": true,
-            "loc": "23:12-23:11"
+            "loc": "23:12-23:13"
           }
         ],
         "trailing": {
           "type": "Trailing::Comma"
         },
-        "loc": "23:10-23:14"
+        "loc": "23:10-23:16"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "23:1-23:14",
+      "loc": "23:1-23:16",
       "attrs": [],
       "doc": " record"
     },
@@ -330,25 +330,25 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": "26:13-26:13"
+              "loc": "26:13-26:14"
             },
-            "loc": "26:13-26:13"
+            "loc": "26:13-26:14"
           },
           "group": {
             "type": "Group::Paren"
           },
-          "loc": "26:12-26:14"
+          "loc": "26:12-26:15"
         },
         "group": {
           "type": "Group::Brace"
         },
-        "loc": "26:10-26:7"
+        "loc": "26:10-26:9"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": "26:1-26:15",
+      "loc": "26:1-26:17",
       "attrs": [],
       "doc": " expression x"
     }

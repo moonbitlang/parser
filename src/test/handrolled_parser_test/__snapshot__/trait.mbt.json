@@ -36,9 +36,9 @@
                     "loc": "4:6-4:10"
                   },
                   "tys": [],
-                  "loc": "4:6-4:6"
+                  "loc": "4:6-4:10"
                 },
-                "loc": "4:6-4:6"
+                "loc": "4:6-4:10"
               }
             ],
             "return_type": {
@@ -52,14 +52,14 @@
                 "loc": "4:15-4:18"
               },
               "tys": [],
-              "loc": "4:15-4:14"
+              "loc": "4:15-4:18"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": "4:3-4:14"
+            "loc": "4:3-4:18"
           },
           {
             "type": "TraitMethodDecl",
@@ -85,9 +85,9 @@
                     "loc": "5:6-5:10"
                   },
                   "tys": [],
-                  "loc": "5:6-5:6"
+                  "loc": "5:6-5:10"
                 },
-                "loc": "5:6-5:6"
+                "loc": "5:6-5:10"
               },
               {
                 "type": "Parameter::DiscardPositional",
@@ -102,9 +102,9 @@
                     "loc": "5:12-5:15"
                   },
                   "tys": [],
-                  "loc": "5:12-5:11"
+                  "loc": "5:12-5:15"
                 },
-                "loc": "5:12-5:11"
+                "loc": "5:12-5:15"
               },
               {
                 "type": "Parameter::DiscardPositional",
@@ -119,9 +119,9 @@
                     "loc": "5:17-5:23"
                   },
                   "tys": [],
-                  "loc": "5:17-5:16"
+                  "loc": "5:17-5:23"
                 },
-                "loc": "5:17-5:16"
+                "loc": "5:17-5:23"
               }
             ],
             "return_type": {
@@ -135,14 +135,14 @@
                 "loc": "5:28-5:34"
               },
               "tys": [],
-              "loc": "5:28-5:27"
+              "loc": "5:28-5:34"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": "5:3-5:27"
+            "loc": "5:3-5:34"
           },
           {
             "type": "TraitMethodDecl",
@@ -166,20 +166,20 @@
                 "loc": "6:11-6:15"
               },
               "tys": [],
-              "loc": "6:11-6:10"
+              "loc": "6:11-6:15"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": "6:3-6:10"
+            "loc": "6:3-6:15"
           }
         ],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": "3:1-6:16",
+        "loc": "3:1-7:2",
         "attrs": [],
         "doc": " doc for I"
       }
@@ -219,9 +219,9 @@
                     "loc": "10:8-10:12"
                   },
                   "tys": [],
-                  "loc": "10:8-10:8"
+                  "loc": "10:8-10:12"
                 },
-                "loc": "10:8-10:8"
+                "loc": "10:8-10:12"
               }
             ],
             "return_type": {
@@ -235,20 +235,20 @@
                 "loc": "10:17-10:21"
               },
               "tys": [],
-              "loc": "10:17-10:16"
+              "loc": "10:17-10:21"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": "10:3-10:16"
+            "loc": "10:3-10:21"
           }
         ],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": "9:1-10:22",
+        "loc": "9:1-11:2",
         "attrs": [],
         "doc": ""
       }

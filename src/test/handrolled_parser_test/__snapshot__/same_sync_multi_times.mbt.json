@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "2:9-2:3",
+        "params_loc": "2:9-2:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -39,9 +39,9 @@
                 "type": "LongIdent::Ident",
                 "0": "e"
               },
-              "loc": "3:9-3:8"
+              "loc": "3:9-3:10"
             },
-            "loc": "3:9-3:8"
+            "loc": "3:9-3:10"
           },
           "cases": [],
           "match_loc": "3:3-4:2",
@@ -49,7 +49,7 @@
           "loc": "3:3-4:1"
         }
       },
-      "loc": "2:1-3:11"
+      "loc": "2:1-4:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -64,7 +64,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "6:9-6:3",
+        "params_loc": "6:9-6:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -89,9 +89,9 @@
                 "type": "LongIdent::Ident",
                 "0": "e"
               },
-              "loc": "7:6-7:5"
+              "loc": "7:6-7:7"
             },
-            "loc": "7:6-7:5"
+            "loc": "7:6-7:7"
           },
           "ifso": {
             "type": "Expr::Hole",
@@ -104,7 +104,7 @@
           "loc": "7:3-8:1"
         }
       },
-      "loc": "6:1-7:8"
+      "loc": "6:1-8:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -119,7 +119,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "10:9-10:3",
+        "params_loc": "10:9-10:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -146,7 +146,7 @@
               {
                 "type": "Func::Lambda",
                 "parameters": [],
-                "params_loc": "11:8-11:9",
+                "params_loc": "11:8-11:10",
                 "body": {
                   "type": "Expr::While",
                   "loop_cond": {
@@ -157,9 +157,9 @@
                         "type": "LongIdent::Ident",
                         "0": "cond"
                       },
-                      "loc": "12:11-12:10"
+                      "loc": "12:11-12:15"
                     },
-                    "loc": "12:11-12:10"
+                    "loc": "12:11-12:15"
                   },
                   "loop_body": {
                     "type": "Expr::Hole",
@@ -193,10 +193,10 @@
               {
                 "type": "Func::Lambda",
                 "parameters": [],
-                "params_loc": "14:8-14:9",
+                "params_loc": "14:8-14:10",
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": "14:11-14:13",
+                  "loc": "14:11-15:4",
                   "faked": true
                 },
                 "return_type": null,
@@ -214,13 +214,13 @@
           ],
           "body": {
             "type": "Expr::Unit",
-            "loc": "14:3-14:13",
+            "loc": "14:3-15:4",
             "faked": true
           },
-          "loc": "11:3-14:13"
+          "loc": "11:3-15:4"
         }
       },
-      "loc": "10:1-15:5"
+      "loc": "10:1-16:2"
     }
   ],
   "diagnostics": [

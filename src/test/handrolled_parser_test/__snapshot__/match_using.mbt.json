@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": "1:9-1:3",
+        "params_loc": "1:9-1:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -39,9 +39,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": "2:9-2:8"
+              "loc": "2:9-2:10"
             },
-            "loc": "2:9-2:8"
+            "loc": "2:9-2:10"
           },
           "cases": [
             {
@@ -64,7 +64,7 @@
                     }
                   ]
                 },
-                "loc": "3:5-3:8"
+                "loc": "3:5-3:9"
               },
               "guard": null,
               "body": {
@@ -79,10 +79,10 @@
           ],
           "match_loc": "2:3-2:24",
           "using": null,
-          "loc": "2:3-3:16"
+          "loc": "2:3-4:4"
         }
       },
-      "loc": "1:1-4:5"
+      "loc": "1:1-5:2"
     }
   ],
   "diagnostics": [

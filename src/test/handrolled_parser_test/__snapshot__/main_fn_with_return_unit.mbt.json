@@ -14,7 +14,7 @@
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": "3:8-3:9",
+        "params_loc": "3:8-3:10",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -27,7 +27,7 @@
             "loc": "3:14-3:18"
           },
           "tys": [],
-          "loc": "3:14-3:13"
+          "loc": "3:14-3:18"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -51,9 +51,9 @@
                 "type": "LongIdent::Ident",
                 "0": "println"
               },
-              "loc": "4:3-3:21"
+              "loc": "4:3-4:10"
             },
-            "loc": "4:3-3:21"
+            "loc": "4:3-4:10"
           },
           "args": [
             {
@@ -74,10 +74,10 @@
           "attr": {
             "type": "ApplyAttr::NoAttr"
           },
-          "loc": "4:3-4:26"
+          "loc": "4:3-4:27"
         }
       },
-      "loc": "3:1-4:28"
+      "loc": "3:1-5:2"
     }
   ]
 }
