@@ -533,6 +533,7 @@ pub(all) enum Pattern {
   Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : @basic.Location)
   Range(lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : @basic.Location)
 }
+fn Pattern::loc(Self) -> @basic.Location
 impl ToJson for Pattern
 
 pub(all) enum SpreadableElem {

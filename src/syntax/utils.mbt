@@ -516,6 +516,24 @@ pub fn loc_of_expression(expr : Expr) -> Location {
 }
 
 ///|
+pub fn Pattern::loc(self : Self) -> Location {
+  match self {
+    Map(loc~, ..)
+    | Record(loc~, ..)
+    | Var({ loc, .. })
+    | Tuple(loc~, ..)
+    | Or(loc~, ..)
+    | Constr(loc~, ..)
+    | Constraint(loc~, ..)
+    | Constant(loc~, ..)
+    | Array(loc~, ..)
+    | Any(loc~)
+    | Alias(loc~, ..)
+    | Range(loc~, ..) => loc
+  }
+}
+
+///|
 pub fn Impl::loc(self : Self) -> Location {
   match self {
     TopTypeDef({ loc, .. })

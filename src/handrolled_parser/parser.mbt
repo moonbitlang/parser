@@ -4326,13 +4326,13 @@ fn State::parse_stmt(self : Self) -> Statement {
       } else {
         let pat = self.parse_pattern()
         let ty_opt = self.parse_opt_annot()
-        let loc = self.loc_start_with(spos)
         let pat : @syntax.Pattern = match ty_opt {
-          Some(ty) => Constraint(pat~, ty~, loc~)
+          Some(ty) => Constraint(pat~, ty~, loc=pat.loc().merge(ty.loc()))
           None => pat
         }
         self.expect_token(TK_EQUAL)
         let expr = self.parse_expr()
+        let loc = self.loc_start_with(spos)
         StmtLet(pat~, expr~, loc~)
       }
     }
