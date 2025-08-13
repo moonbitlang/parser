@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "f",
-          "loc": null
+          "loc": "1:4-1:5"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "1:5-1:6",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -24,10 +24,10 @@
               "type": "LongIdent::Ident",
               "0": "Unit"
             },
-            "loc": null
+            "loc": "1:11-1:15"
           },
           "tys": [],
-          "loc": null
+          "loc": "1:11-1:10"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -57,9 +57,9 @@
                       "type": "LongIdent::Ident",
                       "0": "x"
                     },
-                    "loc": null
+                    "loc": "3:5-2:10"
                   },
-                  "loc": null
+                  "loc": "3:5-2:10"
                 },
                 "rhs": {
                   "type": "Expr::Constr",
@@ -68,28 +68,28 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "Ok",
-                      "loc": null
+                      "loc": "3:10-3:9"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "3:10-3:9"
                   },
-                  "loc": null
+                  "loc": "3:10-3:9"
                 },
-                "loc": null
+                "loc": "3:5-3:9"
               },
               "group": {
                 "type": "Group::Brace"
               },
-              "loc": null
+              "loc": "2:8-2:4"
             },
             "catch": [
               {
                 "type": "Case",
                 "pattern": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "5:5-5:6"
                 },
                 "guard": null,
                 "body": {
@@ -99,32 +99,32 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "Err",
-                      "loc": null
+                      "loc": "5:10-5:9"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "5:10-5:9"
                   },
-                  "loc": null
+                  "loc": "5:10-5:9"
                 }
               }
             ],
             "catch_all": false,
             "try_else": null,
             "has_try": true,
-            "try_loc": null,
-            "catch_loc": null,
-            "else_loc": null,
-            "loc": null
+            "try_loc": "2:4-2:7",
+            "catch_loc": "4:5-4:12",
+            "else_loc": "-1:1--1:1",
+            "loc": "2:4-5:14"
           },
           "group": {
             "type": "Group::Paren"
           },
-          "loc": null
+          "loc": "2:3-6:4"
         }
       },
-      "loc": null
+      "loc": "1:1-6:6"
     }
   ]
 }

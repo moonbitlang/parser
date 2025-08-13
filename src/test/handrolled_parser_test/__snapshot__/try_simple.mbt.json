@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -33,7 +33,7 @@
           "type": "Expr::Let",
           "pattern": {
             "type": "Pattern::Any",
-            "loc": null
+            "loc": "2:7-2:8"
           },
           "expr": {
             "type": "Expr::Try",
@@ -49,9 +49,9 @@
                       "type": "LongIdent::Ident",
                       "0": "a"
                     },
-                    "loc": null
+                    "loc": "2:15-2:14"
                   },
-                  "loc": null
+                  "loc": "2:15-2:14"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -61,11 +61,11 @@
                       "type": "LongIdent::Ident",
                       "0": "f"
                     },
-                    "loc": null
+                    "loc": "2:20-2:19"
                   },
-                  "loc": null
+                  "loc": "2:20-2:19"
                 },
-                "loc": null
+                "loc": "2:15-2:19"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -75,18 +75,18 @@
                     "type": "LongIdent::Ident",
                     "0": "g"
                   },
-                  "loc": null
+                  "loc": "2:25-2:24"
                 },
-                "loc": null
+                "loc": "2:25-2:24"
               },
-              "loc": null
+              "loc": "2:15-2:24"
             },
             "catch": [
               {
                 "type": "Case",
                 "pattern": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "2:35-2:36"
                 },
                 "guard": null,
                 "body": {
@@ -95,23 +95,23 @@
                     "type": "Constant::Int",
                     "0": "2"
                   },
-                  "loc": null
+                  "loc": "2:40-2:41"
                 }
               }
             ],
             "catch_all": false,
             "try_else": null,
             "has_try": true,
-            "try_loc": null,
-            "catch_loc": null,
-            "else_loc": null,
-            "loc": null
+            "try_loc": "2:11-2:14",
+            "catch_loc": "2:27-2:34",
+            "else_loc": "-1:1--1:1",
+            "loc": "2:11-2:41"
           },
           "body": {
             "type": "Expr::Let",
             "pattern": {
               "type": "Pattern::Any",
-              "loc": null
+              "loc": "3:7-3:8"
             },
             "expr": {
               "type": "Expr::Try",
@@ -127,9 +127,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "3:11-3:10"
                     },
-                    "loc": null
+                    "loc": "3:11-3:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -139,11 +139,11 @@
                         "type": "LongIdent::Ident",
                         "0": "f"
                       },
-                      "loc": null
+                      "loc": "3:16-3:15"
                     },
-                    "loc": null
+                    "loc": "3:16-3:15"
                   },
-                  "loc": null
+                  "loc": "3:11-3:15"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -153,18 +153,18 @@
                       "type": "LongIdent::Ident",
                       "0": "g"
                     },
-                    "loc": null
+                    "loc": "3:21-3:20"
                   },
-                  "loc": null
+                  "loc": "3:21-3:20"
                 },
-                "loc": null
+                "loc": "3:11-3:20"
               },
               "catch": [
                 {
                   "type": "Case",
                   "pattern": {
                     "type": "Pattern::Any",
-                    "loc": null
+                    "loc": "3:31-3:32"
                   },
                   "guard": null,
                   "body": {
@@ -173,23 +173,23 @@
                       "type": "Constant::Int",
                       "0": "2"
                     },
-                    "loc": null
+                    "loc": "3:36-3:37"
                   }
                 }
               ],
               "catch_all": false,
               "try_else": null,
               "has_try": false,
-              "try_loc": null,
-              "catch_loc": null,
-              "else_loc": null,
-              "loc": null
+              "try_loc": "3:23-3:22",
+              "catch_loc": "3:23-3:22",
+              "else_loc": "-1:1--1:1",
+              "loc": "3:11-3:37"
             },
             "body": {
               "type": "Expr::Let",
               "pattern": {
                 "type": "Pattern::Any",
-                "loc": null
+                "loc": "4:7-4:8"
               },
               "expr": {
                 "type": "Expr::TryOperator",
@@ -205,9 +205,9 @@
                           "type": "LongIdent::Ident",
                           "0": "a"
                         },
-                        "loc": null
+                        "loc": "4:16-4:15"
                       },
-                      "loc": null
+                      "loc": "4:16-4:15"
                     },
                     "rhs": {
                       "type": "Expr::Ident",
@@ -217,11 +217,11 @@
                           "type": "LongIdent::Ident",
                           "0": "f"
                         },
-                        "loc": null
+                        "loc": "4:21-4:20"
                       },
-                      "loc": null
+                      "loc": "4:21-4:20"
                     },
-                    "loc": null
+                    "loc": "4:16-4:20"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -231,23 +231,23 @@
                         "type": "LongIdent::Ident",
                         "0": "g"
                       },
-                      "loc": null
+                      "loc": "4:26-4:25"
                     },
-                    "loc": null
+                    "loc": "4:26-4:25"
                   },
-                  "loc": null
+                  "loc": "4:16-4:25"
                 },
                 "kind": {
                   "type": "TryOperatorKind::Question"
                 },
-                "try_loc": null,
-                "loc": null
+                "try_loc": "4:11-4:15",
+                "loc": "4:11-4:25"
               },
               "body": {
                 "type": "Expr::Let",
                 "pattern": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "6:7-6:8"
                 },
                 "expr": {
                   "type": "Expr::Try",
@@ -259,7 +259,7 @@
                         "type": "LongIdent::Ident",
                         "0": "+"
                       },
-                      "loc": null
+                      "loc": "6:17-6:18"
                     },
                     "lhs": {
                       "type": "Expr::Ident",
@@ -269,9 +269,9 @@
                           "type": "LongIdent::Ident",
                           "0": "a"
                         },
-                        "loc": null
+                        "loc": "6:15-6:14"
                       },
-                      "loc": null
+                      "loc": "6:15-6:14"
                     },
                     "rhs": {
                       "type": "Expr::Ident",
@@ -281,18 +281,18 @@
                           "type": "LongIdent::Ident",
                           "0": "b"
                         },
-                        "loc": null
+                        "loc": "6:19-6:18"
                       },
-                      "loc": null
+                      "loc": "6:19-6:18"
                     },
-                    "loc": null
+                    "loc": "6:15-6:18"
                   },
                   "catch": [
                     {
                       "type": "Case",
                       "pattern": {
                         "type": "Pattern::Any",
-                        "loc": null
+                        "loc": "6:29-6:30"
                       },
                       "guard": null,
                       "body": {
@@ -301,23 +301,23 @@
                           "type": "Constant::Int",
                           "0": "2"
                         },
-                        "loc": null
+                        "loc": "6:34-6:35"
                       }
                     }
                   ],
                   "catch_all": false,
                   "try_else": null,
                   "has_try": true,
-                  "try_loc": null,
-                  "catch_loc": null,
-                  "else_loc": null,
-                  "loc": null
+                  "try_loc": "6:11-6:14",
+                  "catch_loc": "6:21-6:28",
+                  "else_loc": "-1:1--1:1",
+                  "loc": "6:11-6:35"
                 },
                 "body": {
                   "type": "Expr::Let",
                   "pattern": {
                     "type": "Pattern::Any",
-                    "loc": null
+                    "loc": "7:7-7:8"
                   },
                   "expr": {
                     "type": "Expr::Try",
@@ -329,7 +329,7 @@
                           "type": "LongIdent::Ident",
                           "0": "+"
                         },
-                        "loc": null
+                        "loc": "7:13-7:14"
                       },
                       "lhs": {
                         "type": "Expr::Ident",
@@ -339,9 +339,9 @@
                             "type": "LongIdent::Ident",
                             "0": "a"
                           },
-                          "loc": null
+                          "loc": "7:11-7:10"
                         },
-                        "loc": null
+                        "loc": "7:11-7:10"
                       },
                       "rhs": {
                         "type": "Expr::Ident",
@@ -351,18 +351,18 @@
                             "type": "LongIdent::Ident",
                             "0": "b"
                           },
-                          "loc": null
+                          "loc": "7:15-7:14"
                         },
-                        "loc": null
+                        "loc": "7:15-7:14"
                       },
-                      "loc": null
+                      "loc": "7:11-7:14"
                     },
                     "catch": [
                       {
                         "type": "Case",
                         "pattern": {
                           "type": "Pattern::Any",
-                          "loc": null
+                          "loc": "7:25-7:26"
                         },
                         "guard": null,
                         "body": {
@@ -371,23 +371,23 @@
                             "type": "Constant::Int",
                             "0": "2"
                           },
-                          "loc": null
+                          "loc": "7:30-7:31"
                         }
                       }
                     ],
                     "catch_all": false,
                     "try_else": null,
                     "has_try": false,
-                    "try_loc": null,
-                    "catch_loc": null,
-                    "else_loc": null,
-                    "loc": null
+                    "try_loc": "7:17-7:16",
+                    "catch_loc": "7:17-7:16",
+                    "else_loc": "-1:1--1:1",
+                    "loc": "7:11-7:31"
                   },
                   "body": {
                     "type": "Expr::Let",
                     "pattern": {
                       "type": "Pattern::Any",
-                      "loc": null
+                      "loc": "8:7-8:8"
                     },
                     "expr": {
                       "type": "Expr::TryOperator",
@@ -399,7 +399,7 @@
                             "type": "LongIdent::Ident",
                             "0": "+"
                           },
-                          "loc": null
+                          "loc": "8:18-8:19"
                         },
                         "lhs": {
                           "type": "Expr::Ident",
@@ -409,9 +409,9 @@
                               "type": "LongIdent::Ident",
                               "0": "a"
                             },
-                            "loc": null
+                            "loc": "8:16-8:15"
                           },
-                          "loc": null
+                          "loc": "8:16-8:15"
                         },
                         "rhs": {
                           "type": "Expr::Ident",
@@ -421,23 +421,23 @@
                               "type": "LongIdent::Ident",
                               "0": "b"
                             },
-                            "loc": null
+                            "loc": "8:20-8:19"
                           },
-                          "loc": null
+                          "loc": "8:20-8:19"
                         },
-                        "loc": null
+                        "loc": "8:16-8:19"
                       },
                       "kind": {
                         "type": "TryOperatorKind::Question"
                       },
-                      "try_loc": null,
-                      "loc": null
+                      "try_loc": "8:11-8:15",
+                      "loc": "8:11-8:19"
                     },
                     "body": {
                       "type": "Expr::Let",
                       "pattern": {
                         "type": "Pattern::Any",
-                        "loc": null
+                        "loc": "9:7-9:8"
                       },
                       "expr": {
                         "type": "Expr::Try",
@@ -449,7 +449,7 @@
                               "type": "Constant::Int",
                               "0": "42"
                             },
-                            "loc": null
+                            "loc": "9:15-9:17"
                           },
                           "trait": {
                             "type": "TypeName",
@@ -458,16 +458,16 @@
                               "0": "Show"
                             },
                             "is_object": true,
-                            "loc": null
+                            "loc": "9:21-9:22"
                           },
-                          "loc": null
+                          "loc": "9:15-9:22"
                         },
                         "catch": [
                           {
                             "type": "Case",
                             "pattern": {
                               "type": "Pattern::Any",
-                              "loc": null
+                              "loc": "9:35-9:36"
                             },
                             "guard": null,
                             "body": {
@@ -476,23 +476,23 @@
                                 "type": "Constant::Int",
                                 "0": "2"
                               },
-                              "loc": null
+                              "loc": "9:40-9:41"
                             }
                           }
                         ],
                         "catch_all": false,
                         "try_else": null,
                         "has_try": true,
-                        "try_loc": null,
-                        "catch_loc": null,
-                        "else_loc": null,
-                        "loc": null
+                        "try_loc": "9:11-9:14",
+                        "catch_loc": "9:27-9:34",
+                        "else_loc": "-1:1--1:1",
+                        "loc": "9:11-9:41"
                       },
                       "body": {
                         "type": "Expr::Let",
                         "pattern": {
                           "type": "Pattern::Any",
-                          "loc": null
+                          "loc": "10:7-10:8"
                         },
                         "expr": {
                           "type": "Expr::Try",
@@ -504,7 +504,7 @@
                                 "type": "Constant::Int",
                                 "0": "42"
                               },
-                              "loc": null
+                              "loc": "10:11-10:13"
                             },
                             "trait": {
                               "type": "TypeName",
@@ -513,16 +513,16 @@
                                 "0": "Show"
                               },
                               "is_object": true,
-                              "loc": null
+                              "loc": "10:17-10:18"
                             },
-                            "loc": null
+                            "loc": "10:11-10:18"
                           },
                           "catch": [
                             {
                               "type": "Case",
                               "pattern": {
                                 "type": "Pattern::Any",
-                                "loc": null
+                                "loc": "10:31-10:32"
                               },
                               "guard": null,
                               "body": {
@@ -531,23 +531,23 @@
                                   "type": "Constant::Int",
                                   "0": "2"
                                 },
-                                "loc": null
+                                "loc": "10:36-10:37"
                               }
                             }
                           ],
                           "catch_all": false,
                           "try_else": null,
                           "has_try": false,
-                          "try_loc": null,
-                          "catch_loc": null,
-                          "else_loc": null,
-                          "loc": null
+                          "try_loc": "10:23-10:22",
+                          "catch_loc": "10:23-10:22",
+                          "else_loc": "-1:1--1:1",
+                          "loc": "10:11-10:37"
                         },
                         "body": {
                           "type": "Expr::Let",
                           "pattern": {
                             "type": "Pattern::Any",
-                            "loc": null
+                            "loc": "11:7-11:8"
                           },
                           "expr": {
                             "type": "Expr::TryOperator",
@@ -559,7 +559,7 @@
                                   "type": "Constant::Int",
                                   "0": "42"
                                 },
-                                "loc": null
+                                "loc": "11:16-11:18"
                               },
                               "trait": {
                                 "type": "TypeName",
@@ -568,21 +568,21 @@
                                   "0": "Show"
                                 },
                                 "is_object": true,
-                                "loc": null
+                                "loc": "11:22-11:23"
                               },
-                              "loc": null
+                              "loc": "11:16-11:23"
                             },
                             "kind": {
                               "type": "TryOperatorKind::Question"
                             },
-                            "try_loc": null,
-                            "loc": null
+                            "try_loc": "11:11-11:15",
+                            "loc": "11:11-11:23"
                           },
                           "body": {
                             "type": "Expr::Let",
                             "pattern": {
                               "type": "Pattern::Any",
-                              "loc": null
+                              "loc": "13:7-13:8"
                             },
                             "expr": {
                               "type": "Expr::Try",
@@ -594,7 +594,7 @@
                                     "type": "Constant::Int",
                                     "0": "1"
                                   },
-                                  "loc": null
+                                  "loc": "13:15-13:16"
                                 },
                                 "pat": {
                                   "type": "Pattern::Constant",
@@ -602,16 +602,16 @@
                                     "type": "Constant::Int",
                                     "0": "2"
                                   },
-                                  "loc": null
+                                  "loc": "13:20-13:21"
                                 },
-                                "loc": null
+                                "loc": "13:15-13:19"
                               },
                               "catch": [
                                 {
                                   "type": "Case",
                                   "pattern": {
                                     "type": "Pattern::Any",
-                                    "loc": null
+                                    "loc": "13:30-13:31"
                                   },
                                   "guard": null,
                                   "body": {
@@ -620,23 +620,23 @@
                                       "type": "Constant::Int",
                                       "0": "2"
                                     },
-                                    "loc": null
+                                    "loc": "13:35-13:36"
                                   }
                                 }
                               ],
                               "catch_all": false,
                               "try_else": null,
                               "has_try": true,
-                              "try_loc": null,
-                              "catch_loc": null,
-                              "else_loc": null,
-                              "loc": null
+                              "try_loc": "13:11-13:14",
+                              "catch_loc": "13:22-13:29",
+                              "else_loc": "-1:1--1:1",
+                              "loc": "13:11-13:36"
                             },
                             "body": {
                               "type": "Expr::Let",
                               "pattern": {
                                 "type": "Pattern::Any",
-                                "loc": null
+                                "loc": "14:7-14:8"
                               },
                               "expr": {
                                 "type": "Expr::Try",
@@ -648,7 +648,7 @@
                                       "type": "Constant::Int",
                                       "0": "1"
                                     },
-                                    "loc": null
+                                    "loc": "14:11-14:12"
                                   },
                                   "pat": {
                                     "type": "Pattern::Constant",
@@ -656,16 +656,16 @@
                                       "type": "Constant::Int",
                                       "0": "2"
                                     },
-                                    "loc": null
+                                    "loc": "14:16-14:17"
                                   },
-                                  "loc": null
+                                  "loc": "14:11-14:15"
                                 },
                                 "catch": [
                                   {
                                     "type": "Case",
                                     "pattern": {
                                       "type": "Pattern::Any",
-                                      "loc": null
+                                      "loc": "14:26-14:27"
                                     },
                                     "guard": null,
                                     "body": {
@@ -674,23 +674,23 @@
                                         "type": "Constant::Int",
                                         "0": "2"
                                       },
-                                      "loc": null
+                                      "loc": "14:31-14:32"
                                     }
                                   }
                                 ],
                                 "catch_all": false,
                                 "try_else": null,
                                 "has_try": false,
-                                "try_loc": null,
-                                "catch_loc": null,
-                                "else_loc": null,
-                                "loc": null
+                                "try_loc": "14:18-14:17",
+                                "catch_loc": "14:18-14:17",
+                                "else_loc": "-1:1--1:1",
+                                "loc": "14:11-14:32"
                               },
                               "body": {
                                 "type": "Expr::Let",
                                 "pattern": {
                                   "type": "Pattern::Any",
-                                  "loc": null
+                                  "loc": "15:7-15:8"
                                 },
                                 "expr": {
                                   "type": "Expr::TryOperator",
@@ -702,7 +702,7 @@
                                         "type": "Constant::Int",
                                         "0": "1"
                                       },
-                                      "loc": null
+                                      "loc": "15:16-15:17"
                                     },
                                     "pat": {
                                       "type": "Pattern::Constant",
@@ -710,21 +710,21 @@
                                         "type": "Constant::Int",
                                         "0": "2"
                                       },
-                                      "loc": null
+                                      "loc": "15:21-15:22"
                                     },
-                                    "loc": null
+                                    "loc": "15:16-15:20"
                                   },
                                   "kind": {
                                     "type": "TryOperatorKind::Question"
                                   },
-                                  "try_loc": null,
-                                  "loc": null
+                                  "try_loc": "15:11-15:15",
+                                  "loc": "15:11-15:20"
                                 },
                                 "body": {
                                   "type": "Expr::Let",
                                   "pattern": {
                                     "type": "Pattern::Any",
-                                    "loc": null
+                                    "loc": "17:7-17:8"
                                   },
                                   "expr": {
                                     "type": "Expr::Try",
@@ -737,7 +737,7 @@
                                           "label": {
                                             "type": "Label",
                                             "name": "x",
-                                            "loc": null
+                                            "loc": "17:17-17:18"
                                           },
                                           "expr": {
                                             "type": "Expr::Constant",
@@ -745,23 +745,23 @@
                                               "type": "Constant::Int",
                                               "0": "1"
                                             },
-                                            "loc": null
+                                            "loc": "17:20-17:21"
                                           },
                                           "is_pun": false,
-                                          "loc": null
+                                          "loc": "17:17-17:19"
                                         }
                                       ],
                                       "trailing": {
                                         "type": "Trailing::None"
                                       },
-                                      "loc": null
+                                      "loc": "17:15-17:21"
                                     },
                                     "catch": [
                                       {
                                         "type": "Case",
                                         "pattern": {
                                           "type": "Pattern::Any",
-                                          "loc": null
+                                          "loc": "17:32-17:33"
                                         },
                                         "guard": null,
                                         "body": {
@@ -770,23 +770,23 @@
                                             "type": "Constant::Int",
                                             "0": "2"
                                           },
-                                          "loc": null
+                                          "loc": "17:37-17:38"
                                         }
                                       }
                                     ],
                                     "catch_all": false,
                                     "try_else": null,
                                     "has_try": true,
-                                    "try_loc": null,
-                                    "catch_loc": null,
-                                    "else_loc": null,
-                                    "loc": null
+                                    "try_loc": "17:11-17:14",
+                                    "catch_loc": "17:24-17:31",
+                                    "else_loc": "-1:1--1:1",
+                                    "loc": "17:11-17:38"
                                   },
                                   "body": {
                                     "type": "Expr::Let",
                                     "pattern": {
                                       "type": "Pattern::Any",
-                                      "loc": null
+                                      "loc": "18:7-18:8"
                                     },
                                     "expr": {
                                       "type": "Expr::Try",
@@ -799,7 +799,7 @@
                                             "label": {
                                               "type": "Label",
                                               "name": "x",
-                                              "loc": null
+                                              "loc": "18:13-18:14"
                                             },
                                             "expr": {
                                               "type": "Expr::Constant",
@@ -807,23 +807,23 @@
                                                 "type": "Constant::Int",
                                                 "0": "1"
                                               },
-                                              "loc": null
+                                              "loc": "18:16-18:17"
                                             },
                                             "is_pun": false,
-                                            "loc": null
+                                            "loc": "18:13-18:15"
                                           }
                                         ],
                                         "trailing": {
                                           "type": "Trailing::None"
                                         },
-                                        "loc": null
+                                        "loc": "18:11-18:17"
                                       },
                                       "catch": [
                                         {
                                           "type": "Case",
                                           "pattern": {
                                             "type": "Pattern::Any",
-                                            "loc": null
+                                            "loc": "18:28-18:29"
                                           },
                                           "guard": null,
                                           "body": {
@@ -832,23 +832,23 @@
                                               "type": "Constant::Int",
                                               "0": "2"
                                             },
-                                            "loc": null
+                                            "loc": "18:33-18:34"
                                           }
                                         }
                                       ],
                                       "catch_all": false,
                                       "try_else": null,
                                       "has_try": false,
-                                      "try_loc": null,
-                                      "catch_loc": null,
-                                      "else_loc": null,
-                                      "loc": null
+                                      "try_loc": "18:20-18:19",
+                                      "catch_loc": "18:20-18:19",
+                                      "else_loc": "-1:1--1:1",
+                                      "loc": "18:11-18:34"
                                     },
                                     "body": {
                                       "type": "Expr::Let",
                                       "pattern": {
                                         "type": "Pattern::Any",
-                                        "loc": null
+                                        "loc": "19:7-19:8"
                                       },
                                       "expr": {
                                         "type": "Expr::TryOperator",
@@ -861,7 +861,7 @@
                                               "label": {
                                                 "type": "Label",
                                                 "name": "x",
-                                                "loc": null
+                                                "loc": "19:18-19:19"
                                               },
                                               "expr": {
                                                 "type": "Expr::Constant",
@@ -869,28 +869,28 @@
                                                   "type": "Constant::Int",
                                                   "0": "1"
                                                 },
-                                                "loc": null
+                                                "loc": "19:21-19:22"
                                               },
                                               "is_pun": false,
-                                              "loc": null
+                                              "loc": "19:18-19:20"
                                             }
                                           ],
                                           "trailing": {
                                             "type": "Trailing::None"
                                           },
-                                          "loc": null
+                                          "loc": "19:16-19:22"
                                         },
                                         "kind": {
                                           "type": "TryOperatorKind::Question"
                                         },
-                                        "try_loc": null,
-                                        "loc": null
+                                        "try_loc": "19:11-19:15",
+                                        "loc": "19:11-19:22"
                                       },
                                       "body": {
                                         "type": "Expr::Let",
                                         "pattern": {
                                           "type": "Pattern::Any",
-                                          "loc": null
+                                          "loc": "21:7-21:8"
                                         },
                                         "expr": {
                                           "type": "Expr::Try",
@@ -901,7 +901,7 @@
                                               "name": {
                                                 "type": "ConstrName",
                                                 "name": "A",
-                                                "loc": null
+                                                "loc": "21:18-21:18"
                                               },
                                               "extra_info": {
                                                 "type": "ConstructorExtraInfo::TypeName",
@@ -912,19 +912,19 @@
                                                     "0": "T"
                                                   },
                                                   "is_object": false,
-                                                  "loc": null
+                                                  "loc": "21:15-21:14"
                                                 }
                                               },
-                                              "loc": null
+                                              "loc": "21:18-21:18"
                                             },
-                                            "loc": null
+                                            "loc": "21:15-21:18"
                                           },
                                           "catch": [
                                             {
                                               "type": "Case",
                                               "pattern": {
                                                 "type": "Pattern::Any",
-                                                "loc": null
+                                                "loc": "21:28-21:29"
                                               },
                                               "guard": null,
                                               "body": {
@@ -933,23 +933,23 @@
                                                   "type": "Constant::Int",
                                                   "0": "2"
                                                 },
-                                                "loc": null
+                                                "loc": "21:33-21:34"
                                               }
                                             }
                                           ],
                                           "catch_all": false,
                                           "try_else": null,
                                           "has_try": true,
-                                          "try_loc": null,
-                                          "catch_loc": null,
-                                          "else_loc": null,
-                                          "loc": null
+                                          "try_loc": "21:11-21:14",
+                                          "catch_loc": "21:20-21:27",
+                                          "else_loc": "-1:1--1:1",
+                                          "loc": "21:11-21:34"
                                         },
                                         "body": {
                                           "type": "Expr::Let",
                                           "pattern": {
                                             "type": "Pattern::Any",
-                                            "loc": null
+                                            "loc": "22:7-22:8"
                                           },
                                           "expr": {
                                             "type": "Expr::Try",
@@ -960,7 +960,7 @@
                                                 "name": {
                                                   "type": "ConstrName",
                                                   "name": "A",
-                                                  "loc": null
+                                                  "loc": "22:14-22:14"
                                                 },
                                                 "extra_info": {
                                                   "type": "ConstructorExtraInfo::TypeName",
@@ -971,19 +971,19 @@
                                                       "0": "T"
                                                     },
                                                     "is_object": false,
-                                                    "loc": null
+                                                    "loc": "22:11-22:10"
                                                   }
                                                 },
-                                                "loc": null
+                                                "loc": "22:14-22:14"
                                               },
-                                              "loc": null
+                                              "loc": "22:11-22:14"
                                             },
                                             "catch": [
                                               {
                                                 "type": "Case",
                                                 "pattern": {
                                                   "type": "Pattern::Any",
-                                                  "loc": null
+                                                  "loc": "22:24-22:25"
                                                 },
                                                 "guard": null,
                                                 "body": {
@@ -992,23 +992,23 @@
                                                     "type": "Constant::Int",
                                                     "0": "2"
                                                   },
-                                                  "loc": null
+                                                  "loc": "22:29-22:30"
                                                 }
                                               }
                                             ],
                                             "catch_all": false,
                                             "try_else": null,
                                             "has_try": false,
-                                            "try_loc": null,
-                                            "catch_loc": null,
-                                            "else_loc": null,
-                                            "loc": null
+                                            "try_loc": "22:16-22:15",
+                                            "catch_loc": "22:16-22:15",
+                                            "else_loc": "-1:1--1:1",
+                                            "loc": "22:11-22:30"
                                           },
                                           "body": {
                                             "type": "Expr::Let",
                                             "pattern": {
                                               "type": "Pattern::Any",
-                                              "loc": null
+                                              "loc": "23:7-23:8"
                                             },
                                             "expr": {
                                               "type": "Expr::TryOperator",
@@ -1019,7 +1019,7 @@
                                                   "name": {
                                                     "type": "ConstrName",
                                                     "name": "A",
-                                                    "loc": null
+                                                    "loc": "23:19-23:19"
                                                   },
                                                   "extra_info": {
                                                     "type": "ConstructorExtraInfo::TypeName",
@@ -1030,24 +1030,24 @@
                                                         "0": "T"
                                                       },
                                                       "is_object": false,
-                                                      "loc": null
+                                                      "loc": "23:16-23:15"
                                                     }
                                                   },
-                                                  "loc": null
+                                                  "loc": "23:19-23:19"
                                                 },
-                                                "loc": null
+                                                "loc": "23:16-23:19"
                                               },
                                               "kind": {
                                                 "type": "TryOperatorKind::Question"
                                               },
-                                              "try_loc": null,
-                                              "loc": null
+                                              "try_loc": "23:11-23:15",
+                                              "loc": "23:11-23:19"
                                             },
                                             "body": {
                                               "type": "Expr::Let",
                                               "pattern": {
                                                 "type": "Pattern::Any",
-                                                "loc": null
+                                                "loc": "25:7-25:8"
                                               },
                                               "expr": {
                                                 "type": "Expr::Try",
@@ -1063,9 +1063,9 @@
                                                           "type": "LongIdent::Ident",
                                                           "0": "println"
                                                         },
-                                                        "loc": null
+                                                        "loc": "25:17-25:16"
                                                       },
-                                                      "loc": null
+                                                      "loc": "25:17-25:16"
                                                     },
                                                     "args": [
                                                       {
@@ -1076,7 +1076,7 @@
                                                             "type": "Constant::Int",
                                                             "0": "42"
                                                           },
-                                                          "loc": null
+                                                          "loc": "25:25-25:27"
                                                         },
                                                         "kind": {
                                                           "type": "ArgumentKind::Positional"
@@ -1086,19 +1086,19 @@
                                                     "attr": {
                                                       "type": "ApplyAttr::NoAttr"
                                                     },
-                                                    "loc": null
+                                                    "loc": "25:17-25:27"
                                                   },
                                                   "group": {
                                                     "type": "Group::Brace"
                                                   },
-                                                  "loc": null
+                                                  "loc": "25:15-25:10"
                                                 },
                                                 "catch": [
                                                   {
                                                     "type": "Case",
                                                     "pattern": {
                                                       "type": "Pattern::Any",
-                                                      "loc": null
+                                                      "loc": "25:39-25:40"
                                                     },
                                                     "guard": null,
                                                     "body": {
@@ -1107,23 +1107,23 @@
                                                         "type": "Constant::Int",
                                                         "0": "2"
                                                       },
-                                                      "loc": null
+                                                      "loc": "25:44-25:45"
                                                     }
                                                   }
                                                 ],
                                                 "catch_all": false,
                                                 "try_else": null,
                                                 "has_try": true,
-                                                "try_loc": null,
-                                                "catch_loc": null,
-                                                "else_loc": null,
-                                                "loc": null
+                                                "try_loc": "25:11-25:14",
+                                                "catch_loc": "25:31-25:38",
+                                                "else_loc": "-1:1--1:1",
+                                                "loc": "25:11-25:45"
                                               },
                                               "body": {
                                                 "type": "Expr::Let",
                                                 "pattern": {
                                                   "type": "Pattern::Any",
-                                                  "loc": null
+                                                  "loc": "26:7-26:8"
                                                 },
                                                 "expr": {
                                                   "type": "Expr::Try",
@@ -1139,9 +1139,9 @@
                                                             "type": "LongIdent::Ident",
                                                             "0": "println"
                                                           },
-                                                          "loc": null
+                                                          "loc": "26:13-26:12"
                                                         },
-                                                        "loc": null
+                                                        "loc": "26:13-26:12"
                                                       },
                                                       "args": [
                                                         {
@@ -1152,7 +1152,7 @@
                                                               "type": "Constant::Int",
                                                               "0": "42"
                                                             },
-                                                            "loc": null
+                                                            "loc": "26:21-26:23"
                                                           },
                                                           "kind": {
                                                             "type": "ArgumentKind::Positional"
@@ -1162,19 +1162,19 @@
                                                       "attr": {
                                                         "type": "ApplyAttr::NoAttr"
                                                       },
-                                                      "loc": null
+                                                      "loc": "26:13-26:23"
                                                     },
                                                     "group": {
                                                       "type": "Group::Brace"
                                                     },
-                                                    "loc": null
+                                                    "loc": "26:11-26:8"
                                                   },
                                                   "catch": [
                                                     {
                                                       "type": "Case",
                                                       "pattern": {
                                                         "type": "Pattern::Any",
-                                                        "loc": null
+                                                        "loc": "26:35-26:36"
                                                       },
                                                       "guard": null,
                                                       "body": {
@@ -1183,23 +1183,23 @@
                                                           "type": "Constant::Int",
                                                           "0": "2"
                                                         },
-                                                        "loc": null
+                                                        "loc": "26:40-26:41"
                                                       }
                                                     }
                                                   ],
                                                   "catch_all": false,
                                                   "try_else": null,
                                                   "has_try": false,
-                                                  "try_loc": null,
-                                                  "catch_loc": null,
-                                                  "else_loc": null,
-                                                  "loc": null
+                                                  "try_loc": "26:27-26:26",
+                                                  "catch_loc": "26:27-26:26",
+                                                  "else_loc": "-1:1--1:1",
+                                                  "loc": "26:11-26:41"
                                                 },
                                                 "body": {
                                                   "type": "Expr::Let",
                                                   "pattern": {
                                                     "type": "Pattern::Any",
-                                                    "loc": null
+                                                    "loc": "27:7-27:8"
                                                   },
                                                   "expr": {
                                                     "type": "Expr::TryOperator",
@@ -1215,9 +1215,9 @@
                                                               "type": "LongIdent::Ident",
                                                               "0": "println"
                                                             },
-                                                            "loc": null
+                                                            "loc": "27:18-27:17"
                                                           },
-                                                          "loc": null
+                                                          "loc": "27:18-27:17"
                                                         },
                                                         "args": [
                                                           {
@@ -1228,7 +1228,7 @@
                                                                 "type": "Constant::Int",
                                                                 "0": "42"
                                                               },
-                                                              "loc": null
+                                                              "loc": "27:26-27:28"
                                                             },
                                                             "kind": {
                                                               "type": "ArgumentKind::Positional"
@@ -1238,24 +1238,24 @@
                                                         "attr": {
                                                           "type": "ApplyAttr::NoAttr"
                                                         },
-                                                        "loc": null
+                                                        "loc": "27:18-27:28"
                                                       },
                                                       "group": {
                                                         "type": "Group::Brace"
                                                       },
-                                                      "loc": null
+                                                      "loc": "27:16-27:10"
                                                     },
                                                     "kind": {
                                                       "type": "TryOperatorKind::Question"
                                                     },
-                                                    "try_loc": null,
-                                                    "loc": null
+                                                    "try_loc": "27:11-27:15",
+                                                    "loc": "27:11-27:29"
                                                   },
                                                   "body": {
                                                     "type": "Expr::Let",
                                                     "pattern": {
                                                       "type": "Pattern::Any",
-                                                      "loc": null
+                                                      "loc": "29:7-29:8"
                                                     },
                                                     "expr": {
                                                       "type": "Expr::Try",
@@ -1269,7 +1269,7 @@
                                                               "patterns": [
                                                                 {
                                                                   "type": "Pattern::Any",
-                                                                  "loc": null
+                                                                  "loc": "29:20-29:21"
                                                                 }
                                                               ],
                                                               "guard": null,
@@ -1279,23 +1279,23 @@
                                                                   "type": "Constant::Int",
                                                                   "0": "42"
                                                                 },
-                                                                "loc": null
+                                                                "loc": "29:25-29:27"
                                                               }
                                                             }
                                                           ],
                                                           "has_error": null,
                                                           "is_async": false,
-                                                          "fn_loc": null,
-                                                          "loc": null
+                                                          "fn_loc": "-1:1--1:1",
+                                                          "loc": "29:18-29:27"
                                                         },
-                                                        "loc": null
+                                                        "loc": "29:15-29:27"
                                                       },
                                                       "catch": [
                                                         {
                                                           "type": "Case",
                                                           "pattern": {
                                                             "type": "Pattern::Any",
-                                                            "loc": null
+                                                            "loc": "29:38-29:39"
                                                           },
                                                           "guard": null,
                                                           "body": {
@@ -1304,23 +1304,23 @@
                                                               "type": "Constant::Int",
                                                               "0": "2"
                                                             },
-                                                            "loc": null
+                                                            "loc": "29:43-29:44"
                                                           }
                                                         }
                                                       ],
                                                       "catch_all": false,
                                                       "try_else": null,
                                                       "has_try": true,
-                                                      "try_loc": null,
-                                                      "catch_loc": null,
-                                                      "else_loc": null,
-                                                      "loc": null
+                                                      "try_loc": "29:11-29:14",
+                                                      "catch_loc": "29:30-29:37",
+                                                      "else_loc": "-1:1--1:1",
+                                                      "loc": "29:11-29:44"
                                                     },
                                                     "body": {
                                                       "type": "Expr::Let",
                                                       "pattern": {
                                                         "type": "Pattern::Any",
-                                                        "loc": null
+                                                        "loc": "30:7-30:8"
                                                       },
                                                       "expr": {
                                                         "type": "Expr::Try",
@@ -1334,7 +1334,7 @@
                                                                 "patterns": [
                                                                   {
                                                                     "type": "Pattern::Any",
-                                                                    "loc": null
+                                                                    "loc": "30:16-30:17"
                                                                   }
                                                                 ],
                                                                 "guard": null,
@@ -1344,23 +1344,23 @@
                                                                     "type": "Constant::Int",
                                                                     "0": "42"
                                                                   },
-                                                                  "loc": null
+                                                                  "loc": "30:21-30:23"
                                                                 }
                                                               }
                                                             ],
                                                             "has_error": null,
                                                             "is_async": false,
-                                                            "fn_loc": null,
-                                                            "loc": null
+                                                            "fn_loc": "-1:1--1:1",
+                                                            "loc": "30:14-30:23"
                                                           },
-                                                          "loc": null
+                                                          "loc": "30:11-30:23"
                                                         },
                                                         "catch": [
                                                           {
                                                             "type": "Case",
                                                             "pattern": {
                                                               "type": "Pattern::Any",
-                                                              "loc": null
+                                                              "loc": "30:34-30:35"
                                                             },
                                                             "guard": null,
                                                             "body": {
@@ -1369,23 +1369,23 @@
                                                                 "type": "Constant::Int",
                                                                 "0": "2"
                                                               },
-                                                              "loc": null
+                                                              "loc": "30:39-30:40"
                                                             }
                                                           }
                                                         ],
                                                         "catch_all": false,
                                                         "try_else": null,
                                                         "has_try": false,
-                                                        "try_loc": null,
-                                                        "catch_loc": null,
-                                                        "else_loc": null,
-                                                        "loc": null
+                                                        "try_loc": "30:26-30:25",
+                                                        "catch_loc": "30:26-30:25",
+                                                        "else_loc": "-1:1--1:1",
+                                                        "loc": "30:11-30:40"
                                                       },
                                                       "body": {
                                                         "type": "Expr::Let",
                                                         "pattern": {
                                                           "type": "Pattern::Any",
-                                                          "loc": null
+                                                          "loc": "31:7-31:8"
                                                         },
                                                         "expr": {
                                                           "type": "Expr::TryOperator",
@@ -1399,7 +1399,7 @@
                                                                   "patterns": [
                                                                     {
                                                                       "type": "Pattern::Any",
-                                                                      "loc": null
+                                                                      "loc": "31:21-31:22"
                                                                     }
                                                                   ],
                                                                   "guard": null,
@@ -1409,78 +1409,78 @@
                                                                       "type": "Constant::Int",
                                                                       "0": "42"
                                                                     },
-                                                                    "loc": null
+                                                                    "loc": "31:26-31:28"
                                                                   }
                                                                 }
                                                               ],
                                                               "has_error": null,
                                                               "is_async": false,
-                                                              "fn_loc": null,
-                                                              "loc": null
+                                                              "fn_loc": "-1:1--1:1",
+                                                              "loc": "31:19-31:28"
                                                             },
-                                                            "loc": null
+                                                            "loc": "31:16-31:28"
                                                           },
                                                           "kind": {
                                                             "type": "TryOperatorKind::Question"
                                                           },
-                                                          "try_loc": null,
-                                                          "loc": null
+                                                          "try_loc": "31:11-31:15",
+                                                          "loc": "31:11-31:28"
                                                         },
                                                         "body": {
                                                           "type": "Expr::Unit",
-                                                          "loc": null,
+                                                          "loc": "31:3-31:6",
                                                           "faked": true
                                                         },
-                                                        "loc": null
+                                                        "loc": "31:11-31:28"
                                                       },
-                                                      "loc": null
+                                                      "loc": "30:11-30:40"
                                                     },
-                                                    "loc": null
+                                                    "loc": "29:11-29:44"
                                                   },
-                                                  "loc": null
+                                                  "loc": "27:11-27:29"
                                                 },
-                                                "loc": null
+                                                "loc": "26:11-26:41"
                                               },
-                                              "loc": null
+                                              "loc": "25:11-25:45"
                                             },
-                                            "loc": null
+                                            "loc": "23:11-23:19"
                                           },
-                                          "loc": null
+                                          "loc": "22:11-22:30"
                                         },
-                                        "loc": null
+                                        "loc": "21:11-21:34"
                                       },
-                                      "loc": null
+                                      "loc": "19:11-19:22"
                                     },
-                                    "loc": null
+                                    "loc": "18:11-18:34"
                                   },
-                                  "loc": null
+                                  "loc": "17:11-17:38"
                                 },
-                                "loc": null
+                                "loc": "15:11-15:20"
                               },
-                              "loc": null
+                              "loc": "14:11-14:32"
                             },
-                            "loc": null
+                            "loc": "13:11-13:36"
                           },
-                          "loc": null
+                          "loc": "11:11-11:23"
                         },
-                        "loc": null
+                        "loc": "10:11-10:37"
                       },
-                      "loc": null
+                      "loc": "9:11-9:41"
                     },
-                    "loc": null
+                    "loc": "8:11-8:19"
                   },
-                  "loc": null
+                  "loc": "7:11-7:31"
                 },
-                "loc": null
+                "loc": "6:11-6:35"
               },
-              "loc": null
+              "loc": "4:11-4:25"
             },
-            "loc": null
+            "loc": "3:11-3:37"
           },
-          "loc": null
+          "loc": "2:11-2:41"
         }
       },
-      "loc": null
+      "loc": "1:1-32:4"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -1490,12 +1490,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "35:4-35:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "35:9-35:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -1514,7 +1514,7 @@
           "type": "Expr::Let",
           "pattern": {
             "type": "Pattern::Any",
-            "loc": null
+            "loc": "37:7-37:8"
           },
           "expr": {
             "type": "Expr::Infix",
@@ -1524,7 +1524,7 @@
                 "type": "LongIdent::Ident",
                 "0": "+"
               },
-              "loc": null
+              "loc": "37:32-37:33"
             },
             "lhs": {
               "type": "Expr::Group",
@@ -1536,14 +1536,14 @@
                     "type": "Constant::Int",
                     "0": "1"
                   },
-                  "loc": null
+                  "loc": "37:12-37:13"
                 },
                 "catch": [
                   {
                     "type": "Case",
                     "pattern": {
                       "type": "Pattern::Any",
-                      "loc": null
+                      "loc": "37:22-37:23"
                     },
                     "guard": null,
                     "body": {
@@ -1552,22 +1552,22 @@
                         "type": "Constant::Int",
                         "0": "2"
                       },
-                      "loc": null
+                      "loc": "37:27-37:28"
                     }
                   }
                 ],
                 "catch_all": false,
                 "try_else": null,
                 "has_try": false,
-                "try_loc": null,
-                "catch_loc": null,
-                "else_loc": null,
-                "loc": null
+                "try_loc": "37:14-37:13",
+                "catch_loc": "37:14-37:13",
+                "else_loc": "-1:1--1:1",
+                "loc": "37:12-37:28"
               },
               "group": {
                 "type": "Group::Paren"
               },
-              "loc": null
+              "loc": "37:11-37:30"
             },
             "rhs": {
               "type": "Expr::Group",
@@ -1579,14 +1579,14 @@
                     "type": "Constant::Int",
                     "0": "3"
                   },
-                  "loc": null
+                  "loc": "37:35-37:36"
                 },
                 "catch": [
                   {
                     "type": "Case",
                     "pattern": {
                       "type": "Pattern::Any",
-                      "loc": null
+                      "loc": "37:45-37:46"
                     },
                     "guard": null,
                     "body": {
@@ -1595,30 +1595,30 @@
                         "type": "Constant::Int",
                         "0": "4"
                       },
-                      "loc": null
+                      "loc": "37:50-37:51"
                     }
                   }
                 ],
                 "catch_all": false,
                 "try_else": null,
                 "has_try": false,
-                "try_loc": null,
-                "catch_loc": null,
-                "else_loc": null,
-                "loc": null
+                "try_loc": "37:37-37:36",
+                "catch_loc": "37:37-37:36",
+                "else_loc": "-1:1--1:1",
+                "loc": "37:35-37:51"
               },
               "group": {
                 "type": "Group::Paren"
               },
-              "loc": null
+              "loc": "37:34-37:51"
             },
-            "loc": null
+            "loc": "37:11-37:52"
           },
           "body": {
             "type": "Expr::Let",
             "pattern": {
               "type": "Pattern::Any",
-              "loc": null
+              "loc": "39:7-39:8"
             },
             "expr": {
               "type": "Expr::As",
@@ -1632,14 +1632,14 @@
                       "type": "Constant::Int",
                       "0": "1"
                     },
-                    "loc": null
+                    "loc": "39:12-39:13"
                   },
                   "catch": [
                     {
                       "type": "Case",
                       "pattern": {
                         "type": "Pattern::Any",
-                        "loc": null
+                        "loc": "39:22-39:23"
                       },
                       "guard": null,
                       "body": {
@@ -1648,22 +1648,22 @@
                           "type": "Constant::Int",
                           "0": "2"
                         },
-                        "loc": null
+                        "loc": "39:27-39:28"
                       }
                     }
                   ],
                   "catch_all": false,
                   "try_else": null,
                   "has_try": false,
-                  "try_loc": null,
-                  "catch_loc": null,
-                  "else_loc": null,
-                  "loc": null
+                  "try_loc": "39:14-39:13",
+                  "catch_loc": "39:14-39:13",
+                  "else_loc": "-1:1--1:1",
+                  "loc": "39:12-39:28"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "39:11-39:29"
               },
               "trait": {
                 "type": "TypeName",
@@ -1672,15 +1672,15 @@
                   "0": "Show"
                 },
                 "is_object": true,
-                "loc": null
+                "loc": "39:34-39:35"
               },
-              "loc": null
+              "loc": "39:11-39:35"
             },
             "body": {
               "type": "Expr::Let",
               "pattern": {
                 "type": "Pattern::Any",
-                "loc": null
+                "loc": "41:7-41:8"
               },
               "expr": {
                 "type": "Expr::Try",
@@ -1696,14 +1696,14 @@
                           "type": "Constant::Int",
                           "0": "1"
                         },
-                        "loc": null
+                        "loc": "41:12-41:13"
                       },
                       "catch": [
                         {
                           "type": "Case",
                           "pattern": {
                             "type": "Pattern::Any",
-                            "loc": null
+                            "loc": "41:22-41:23"
                           },
                           "guard": null,
                           "body": {
@@ -1712,22 +1712,22 @@
                               "type": "Constant::Int",
                               "0": "2"
                             },
-                            "loc": null
+                            "loc": "41:27-41:28"
                           }
                         }
                       ],
                       "catch_all": false,
                       "try_else": null,
                       "has_try": false,
-                      "try_loc": null,
-                      "catch_loc": null,
-                      "else_loc": null,
-                      "loc": null
+                      "try_loc": "41:14-41:13",
+                      "catch_loc": "41:14-41:13",
+                      "else_loc": "-1:1--1:1",
+                      "loc": "41:12-41:28"
                     },
                     "group": {
                       "type": "Group::Paren"
                     },
-                    "loc": null
+                    "loc": "41:11-41:29"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1737,18 +1737,18 @@
                         "type": "LongIdent::Ident",
                         "0": "f"
                       },
-                      "loc": null
+                      "loc": "41:34-41:33"
                     },
-                    "loc": null
+                    "loc": "41:34-41:33"
                   },
-                  "loc": null
+                  "loc": "41:11-41:33"
                 },
                 "catch": [
                   {
                     "type": "Case",
                     "pattern": {
                       "type": "Pattern::Any",
-                      "loc": null
+                      "loc": "41:44-41:45"
                     },
                     "guard": null,
                     "body": {
@@ -1757,23 +1757,23 @@
                         "type": "Constant::Int",
                         "0": "3"
                       },
-                      "loc": null
+                      "loc": "41:49-41:50"
                     }
                   }
                 ],
                 "catch_all": false,
                 "try_else": null,
                 "has_try": false,
-                "try_loc": null,
-                "catch_loc": null,
-                "else_loc": null,
-                "loc": null
+                "try_loc": "41:36-41:35",
+                "catch_loc": "41:36-41:35",
+                "else_loc": "-1:1--1:1",
+                "loc": "41:31-41:50"
               },
               "body": {
                 "type": "Expr::Let",
                 "pattern": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "42:7-42:8"
                 },
                 "expr": {
                   "type": "Expr::Pipe",
@@ -1787,14 +1787,14 @@
                           "type": "Constant::Int",
                           "0": "1"
                         },
-                        "loc": null
+                        "loc": "42:12-42:13"
                       },
                       "catch": [
                         {
                           "type": "Case",
                           "pattern": {
                             "type": "Pattern::Any",
-                            "loc": null
+                            "loc": "42:22-42:23"
                           },
                           "guard": null,
                           "body": {
@@ -1803,22 +1803,22 @@
                               "type": "Constant::Int",
                               "0": "2"
                             },
-                            "loc": null
+                            "loc": "42:27-42:28"
                           }
                         }
                       ],
                       "catch_all": false,
                       "try_else": null,
                       "has_try": false,
-                      "try_loc": null,
-                      "catch_loc": null,
-                      "else_loc": null,
-                      "loc": null
+                      "try_loc": "42:14-42:13",
+                      "catch_loc": "42:14-42:13",
+                      "else_loc": "-1:1--1:1",
+                      "loc": "42:12-42:28"
                     },
                     "group": {
                       "type": "Group::Paren"
                     },
-                    "loc": null
+                    "loc": "42:11-42:29"
                   },
                   "rhs": {
                     "type": "Expr::Group",
@@ -1832,16 +1832,16 @@
                             "type": "LongIdent::Ident",
                             "0": "f"
                           },
-                          "loc": null
+                          "loc": "42:35-42:35"
                         },
-                        "loc": null
+                        "loc": "42:35-42:35"
                       },
                       "catch": [
                         {
                           "type": "Case",
                           "pattern": {
                             "type": "Pattern::Any",
-                            "loc": null
+                            "loc": "42:45-42:46"
                           },
                           "guard": null,
                           "body": {
@@ -1850,40 +1850,40 @@
                               "type": "Constant::Int",
                               "0": "3"
                             },
-                            "loc": null
+                            "loc": "42:50-42:51"
                           }
                         }
                       ],
                       "catch_all": false,
                       "try_else": null,
                       "has_try": false,
-                      "try_loc": null,
-                      "catch_loc": null,
-                      "else_loc": null,
-                      "loc": null
+                      "try_loc": "42:37-42:36",
+                      "catch_loc": "42:37-42:36",
+                      "else_loc": "-1:1--1:1",
+                      "loc": "42:35-42:51"
                     },
                     "group": {
                       "type": "Group::Paren"
                     },
-                    "loc": null
+                    "loc": "42:34-42:51"
                   },
-                  "loc": null
+                  "loc": "42:11-42:52"
                 },
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": null,
+                  "loc": "42:3-42:6",
                   "faked": true
                 },
-                "loc": null
+                "loc": "42:11-42:52"
               },
-              "loc": null
+              "loc": "41:31-41:50"
             },
-            "loc": null
+            "loc": "39:11-39:35"
           },
-          "loc": null
+          "loc": "37:11-37:52"
         }
       },
-      "loc": null
+      "loc": "35:1-48:2"
     }
   ]
 }

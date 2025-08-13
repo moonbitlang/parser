@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "2:4-2:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "2:9-2:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -36,7 +36,7 @@
             "0": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "3:7-3:8"
             }
           },
           "expr": {
@@ -48,7 +48,7 @@
                   "type": "Constant::Int",
                   "0": "1"
                 },
-                "loc": null
+                "loc": "3:12-3:13"
               },
               {
                 "type": "Expr::Constant",
@@ -56,7 +56,7 @@
                   "type": "Constant::Int",
                   "0": "2"
                 },
-                "loc": null
+                "loc": "3:15-3:16"
               },
               {
                 "type": "Expr::Tuple",
@@ -67,7 +67,7 @@
                       "type": "Constant::Int",
                       "0": "3"
                     },
-                    "loc": null
+                    "loc": "3:19-3:20"
                   },
                   {
                     "type": "Expr::Tuple",
@@ -78,7 +78,7 @@
                           "type": "Constant::Int",
                           "0": "4"
                         },
-                        "loc": null
+                        "loc": "3:23-3:24"
                       },
                       {
                         "type": "Expr::Constant",
@@ -86,16 +86,16 @@
                           "type": "Constant::Int",
                           "0": "5"
                         },
-                        "loc": null
+                        "loc": "3:26-3:27"
                       }
                     ],
-                    "loc": null
+                    "loc": "3:22-3:27"
                   }
                 ],
-                "loc": null
+                "loc": "3:18-3:28"
               }
             ],
-            "loc": null
+            "loc": "3:11-3:29"
           },
           "body": {
             "type": "Expr::Sequence",
@@ -110,9 +110,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": null
+                    "loc": "4:3-3:31"
                   },
-                  "loc": null
+                  "loc": "4:3-3:31"
                 },
                 "args": [
                   {
@@ -127,16 +127,16 @@
                             "type": "LongIdent::Ident",
                             "0": "x"
                           },
-                          "loc": null
+                          "loc": "4:11-4:11"
                         },
-                        "loc": null
+                        "loc": "4:11-4:11"
                       },
                       "accessor": {
                         "type": "Accessor::Index",
                         "tuple_index": 0,
-                        "loc": null
+                        "loc": "4:12-4:14"
                       },
-                      "loc": null
+                      "loc": "4:11-4:12"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -146,7 +146,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "4:3-4:14"
               },
               {
                 "type": "Expr::Apply",
@@ -158,9 +158,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": null
+                    "loc": "5:3-4:16"
                   },
-                  "loc": null
+                  "loc": "5:3-4:16"
                 },
                 "args": [
                   {
@@ -175,16 +175,16 @@
                             "type": "LongIdent::Ident",
                             "0": "x"
                           },
-                          "loc": null
+                          "loc": "5:11-5:11"
                         },
-                        "loc": null
+                        "loc": "5:11-5:11"
                       },
                       "accessor": {
                         "type": "Accessor::Index",
                         "tuple_index": 1,
-                        "loc": null
+                        "loc": "5:12-5:14"
                       },
-                      "loc": null
+                      "loc": "5:11-5:12"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -194,7 +194,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "5:3-5:14"
               },
               {
                 "type": "Expr::Apply",
@@ -206,9 +206,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": null
+                    "loc": "6:3-5:16"
                   },
-                  "loc": null
+                  "loc": "6:3-5:16"
                 },
                 "args": [
                   {
@@ -225,23 +225,23 @@
                               "type": "LongIdent::Ident",
                               "0": "x"
                             },
-                            "loc": null
+                            "loc": "6:11-6:11"
                           },
-                          "loc": null
+                          "loc": "6:11-6:11"
                         },
                         "accessor": {
                           "type": "Accessor::Index",
                           "tuple_index": 2,
-                          "loc": null
+                          "loc": "6:12-6:14"
                         },
-                        "loc": null
+                        "loc": "6:11-6:12"
                       },
                       "accessor": {
                         "type": "Accessor::Index",
                         "tuple_index": 0,
-                        "loc": null
+                        "loc": "6:14-6:16"
                       },
-                      "loc": null
+                      "loc": "6:11-6:14"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -251,7 +251,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "6:3-6:16"
               },
               {
                 "type": "Expr::Apply",
@@ -263,9 +263,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": null
+                    "loc": "7:3-6:18"
                   },
-                  "loc": null
+                  "loc": "7:3-6:18"
                 },
                 "args": [
                   {
@@ -284,30 +284,30 @@
                                 "type": "LongIdent::Ident",
                                 "0": "x"
                               },
-                              "loc": null
+                              "loc": "7:11-7:11"
                             },
-                            "loc": null
+                            "loc": "7:11-7:11"
                           },
                           "accessor": {
                             "type": "Accessor::Index",
                             "tuple_index": 2,
-                            "loc": null
+                            "loc": "7:12-7:14"
                           },
-                          "loc": null
+                          "loc": "7:11-7:12"
                         },
                         "accessor": {
                           "type": "Accessor::Index",
                           "tuple_index": 1,
-                          "loc": null
+                          "loc": "7:14-7:16"
                         },
-                        "loc": null
+                        "loc": "7:11-7:14"
                       },
                       "accessor": {
                         "type": "Accessor::Index",
                         "tuple_index": 0,
-                        "loc": null
+                        "loc": "7:16-7:18"
                       },
-                      "loc": null
+                      "loc": "7:11-7:16"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -317,7 +317,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "7:3-7:18"
               }
             ],
             "last_expr": {
@@ -330,9 +330,9 @@
                     "type": "LongIdent::Ident",
                     "0": "println"
                   },
-                  "loc": null
+                  "loc": "8:3-7:20"
                 },
-                "loc": null
+                "loc": "8:3-7:20"
               },
               "args": [
                 {
@@ -351,30 +351,30 @@
                               "type": "LongIdent::Ident",
                               "0": "x"
                             },
-                            "loc": null
+                            "loc": "8:11-8:11"
                           },
-                          "loc": null
+                          "loc": "8:11-8:11"
                         },
                         "accessor": {
                           "type": "Accessor::Index",
                           "tuple_index": 2,
-                          "loc": null
+                          "loc": "8:12-8:14"
                         },
-                        "loc": null
+                        "loc": "8:11-8:12"
                       },
                       "accessor": {
                         "type": "Accessor::Index",
                         "tuple_index": 1,
-                        "loc": null
+                        "loc": "8:14-8:16"
                       },
-                      "loc": null
+                      "loc": "8:11-8:14"
                     },
                     "accessor": {
                       "type": "Accessor::Index",
                       "tuple_index": 1,
-                      "loc": null
+                      "loc": "8:16-8:18"
                     },
-                    "loc": null
+                    "loc": "8:11-8:16"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -384,14 +384,14 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": null
+              "loc": "8:3-8:18"
             },
-            "loc": null
+            "loc": "4:3-8:18"
           },
-          "loc": null
+          "loc": "3:11-3:29"
         }
       },
-      "loc": null
+      "loc": "2:1-8:20"
     }
   ]
 }

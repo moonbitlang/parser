@@ -9,7 +9,7 @@
         "name": {
           "type": "Binder",
           "name": "f",
-          "loc": null
+          "loc": "2:36-2:37"
         },
         "has_error": null,
         "is_async": false,
@@ -19,7 +19,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "2:38-2:39"
             },
             "ty": {
               "type": "Type::Name",
@@ -29,14 +29,14 @@
                   "type": "LongIdent::Ident",
                   "0": "X"
                 },
-                "loc": null
+                "loc": "2:41-2:42"
               },
               "tys": [],
-              "loc": null
+              "loc": "2:41-2:40"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "2:37-2:42",
         "quantifiers": [
           {
             "type": "TypeVarBinder",
@@ -48,7 +48,7 @@
                   "type": "LongIdent::Ident",
                   "0": "Eq"
                 },
-                "loc": null
+                "loc": "2:8-2:10"
               },
               {
                 "type": "TypeVarConstraint",
@@ -56,7 +56,7 @@
                   "type": "LongIdent::Ident",
                   "0": "Hash"
                 },
-                "loc": null
+                "loc": "2:13-2:17"
               },
               {
                 "type": "TypeVarConstraint",
@@ -64,7 +64,7 @@
                   "type": "LongIdent::Ident",
                   "0": "Compare"
                 },
-                "loc": null
+                "loc": "2:20-2:27"
               },
               {
                 "type": "TypeVarConstraint",
@@ -72,10 +72,10 @@
                   "type": "LongIdent::Ident",
                   "0": "Show"
                 },
-                "loc": null
+                "loc": "2:30-2:34"
               }
             ],
-            "loc": null
+            "loc": "2:4-2:4"
           }
         ],
         "return_type": null,
@@ -93,23 +93,23 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "2:44-2:46",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "2:1-2:46"
     },
     {
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
         "tycon": "t",
-        "tycon_loc": null,
+        "tycon_loc": "5:8-5:9",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "X",
-            "loc": null
+            "loc": "5:10-5:10"
           }
         ],
         "components": {
@@ -120,7 +120,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "6:3-6:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -130,16 +130,16 @@
                     "type": "LongIdent::Ident",
                     "0": "X"
                   },
-                  "loc": null
+                  "loc": "6:6-6:7"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "6:6-6:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "6:3-6:5",
               "attrs": [],
               "doc": ""
             }
@@ -151,24 +151,14 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "5:1-6:8"
       }
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/constrained_type_param.mbt",
-        "start": {
-          "line": 5,
-          "column": 12
-        },
-        "end": {
-          "line": 5,
-          "column": 13
-        }
-      },
+      "loc": "5:12-5:13",
       "msg": "Unexpected token `:`, you may expect `,`, `]`."
     }
   ]

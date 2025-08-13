@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "T",
-        "tycon_loc": null,
+        "tycon_loc": "1:8-1:9",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -16,7 +16,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "2:3-2:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -26,16 +26,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "2:6-2:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "2:6-2:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "2:3-2:5",
               "attrs": [],
               "doc": ""
             },
@@ -44,7 +44,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "y",
-                "loc": null
+                "loc": "3:3-3:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -54,16 +54,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "3:6-3:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "3:6-3:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "3:3-3:5",
               "attrs": [],
               "doc": ""
             }
@@ -84,7 +84,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": null
+              "loc": "4:10-4:10"
             },
             "args": [
               {
@@ -97,19 +97,19 @@
                       "type": "LongIdent::Ident",
                       "0": "i_am_empty_labelled_arg"
                     },
-                    "loc": null
+                    "loc": "4:19-4:19"
                   },
-                  "loc": null
+                  "loc": "4:19-4:19"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
                 }
               }
             ],
-            "loc": null
+            "loc": "4:10-4:42"
           }
         ],
-        "loc": null
+        "loc": "1:1-4:43"
       }
     },
     {
@@ -117,7 +117,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "T2",
-        "tycon_loc": null,
+        "tycon_loc": "6:8-6:10",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -127,7 +127,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "7:3-7:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -137,16 +137,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "7:6-7:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "7:6-7:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "7:3-7:5",
               "attrs": [],
               "doc": ""
             },
@@ -155,7 +155,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "y",
-                "loc": null
+                "loc": "8:3-8:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -165,16 +165,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "8:6-8:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "8:6-8:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "8:3-8:5",
               "attrs": [],
               "doc": ""
             }
@@ -195,7 +195,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": null
+              "loc": "9:10-9:10"
             },
             "args": [
               {
@@ -206,17 +206,17 @@
                     "type": "Constant::Int",
                     "0": "123"
                   },
-                  "loc": null
+                  "loc": "9:19-9:22"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
                 }
               }
             ],
-            "loc": null
+            "loc": "9:10-9:22"
           }
         ],
-        "loc": null
+        "loc": "6:1-9:23"
       }
     },
     {
@@ -224,7 +224,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "T3",
-        "tycon_loc": null,
+        "tycon_loc": "11:8-11:10",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -234,7 +234,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "12:3-12:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -244,16 +244,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "12:6-12:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "12:6-12:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "12:3-12:5",
               "attrs": [],
               "doc": ""
             },
@@ -262,7 +262,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "y",
-                "loc": null
+                "loc": "13:3-13:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -272,16 +272,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "13:6-13:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "13:6-13:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "13:3-13:5",
               "attrs": [],
               "doc": ""
             }
@@ -302,7 +302,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": null
+              "loc": "14:10-14:10"
             },
             "args": [
               {
@@ -313,22 +313,22 @@
                     "type": "Constant::String",
                     "0": "arg"
                   },
-                  "loc": null
+                  "loc": "14:33-14:38"
                 },
                 "kind": {
                   "type": "ArgumentKind::Labelled",
                   "0": {
                     "type": "Label",
                     "name": "i_am_labelled",
-                    "loc": null
+                    "loc": "14:19-14:32"
                   }
                 }
               }
             ],
-            "loc": null
+            "loc": "14:10-14:38"
           }
         ],
-        "loc": null
+        "loc": "11:1-14:39"
       }
     },
     {
@@ -336,7 +336,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "T4",
-        "tycon_loc": null,
+        "tycon_loc": "16:8-16:10",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -346,7 +346,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "17:3-17:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -356,16 +356,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "17:6-17:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "17:6-17:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "17:3-17:5",
               "attrs": [],
               "doc": ""
             },
@@ -374,7 +374,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "y",
-                "loc": null
+                "loc": "18:3-18:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -384,16 +384,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "18:6-18:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "18:6-18:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "18:3-18:5",
               "attrs": [],
               "doc": ""
             }
@@ -414,7 +414,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": null
+              "loc": "19:10-19:10"
             },
             "args": [
               {
@@ -429,9 +429,9 @@
                         "type": "LongIdent::Ident",
                         "0": "i_am_also"
                       },
-                      "loc": null
+                      "loc": "19:19-19:19"
                     },
-                    "loc": null
+                    "loc": "19:19-19:19"
                   },
                   "args": [
                     {
@@ -444,9 +444,9 @@
                             "type": "LongIdent::Ident",
                             "0": "labelled"
                           },
-                          "loc": null
+                          "loc": "19:29-19:29"
                         },
-                        "loc": null
+                        "loc": "19:29-19:29"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -460,7 +460,7 @@
                           "type": "Constant::String",
                           "0": "arg"
                         },
-                        "loc": null
+                        "loc": "19:39-19:44"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -470,17 +470,17 @@
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": null
+                  "loc": "19:19-19:44"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
                 }
               }
             ],
-            "loc": null
+            "loc": "19:10-19:45"
           }
         ],
-        "loc": null
+        "loc": "16:1-19:46"
       }
     },
     {
@@ -488,7 +488,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "T5",
-        "tycon_loc": null,
+        "tycon_loc": "21:8-21:10",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -498,7 +498,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "22:3-22:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -508,16 +508,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "22:6-22:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "22:6-22:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "22:3-22:5",
               "attrs": [],
               "doc": ""
             },
@@ -526,7 +526,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "y",
-                "loc": null
+                "loc": "23:3-23:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -536,16 +536,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "23:6-23:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "23:6-23:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "23:3-23:5",
               "attrs": [],
               "doc": ""
             }
@@ -566,7 +566,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": null
+              "loc": "24:10-24:10"
             },
             "args": [
               {
@@ -577,14 +577,14 @@
                     "type": "Constant::String",
                     "0": "complex"
                   },
-                  "loc": null
+                  "loc": "24:24-24:33"
                 },
                 "kind": {
                   "type": "ArgumentKind::Labelled",
                   "0": {
                     "type": "Label",
                     "name": "i_am",
-                    "loc": null
+                    "loc": "24:19-24:23"
                   }
                 }
               },
@@ -600,9 +600,9 @@
                         "type": "LongIdent::Ident",
                         "0": "but"
                       },
-                      "loc": null
+                      "loc": "24:35-24:34"
                     },
-                    "loc": null
+                    "loc": "24:35-24:34"
                   },
                   "args": [
                     {
@@ -615,9 +615,9 @@
                             "type": "LongIdent::Ident",
                             "0": "this"
                           },
-                          "loc": null
+                          "loc": "24:39-24:39"
                         },
-                        "loc": null
+                        "loc": "24:39-24:39"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -631,7 +631,7 @@
                           "type": "Constant::String",
                           "0": "should"
                         },
-                        "loc": null
+                        "loc": "24:45-24:53"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -647,7 +647,7 @@
                             "type": "LongIdent::Ident",
                             "0": "=="
                           },
-                          "loc": null
+                          "loc": "24:61-24:63"
                         },
                         "lhs": {
                           "type": "Expr::Ident",
@@ -657,9 +657,9 @@
                               "type": "LongIdent::Ident",
                               "0": "parse"
                             },
-                            "loc": null
+                            "loc": "24:55-24:54"
                           },
-                          "loc": null
+                          "loc": "24:55-24:54"
                         },
                         "rhs": {
                           "type": "Expr::Constant",
@@ -667,9 +667,9 @@
                             "type": "Constant::Bool",
                             "0": true
                           },
-                          "loc": null
+                          "loc": "24:64-24:68"
                         },
-                        "loc": null
+                        "loc": "24:55-24:63"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -679,17 +679,17 @@
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": null
+                  "loc": "24:35-24:68"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
                 }
               }
             ],
-            "loc": null
+            "loc": "24:10-24:69"
           }
         ],
-        "loc": null
+        "loc": "21:1-24:70"
       }
     },
     {
@@ -697,7 +697,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "TThatFailsParsing",
-        "tycon_loc": null,
+        "tycon_loc": "26:8-26:25",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -707,7 +707,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "27:3-27:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -717,16 +717,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "27:6-27:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "27:6-27:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "27:3-27:5",
               "attrs": [],
               "doc": ""
             },
@@ -735,7 +735,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "y",
-                "loc": null
+                "loc": "28:3-28:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -745,16 +745,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "28:6-28:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "28:6-28:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "28:3-28:5",
               "attrs": [],
               "doc": ""
             }
@@ -775,7 +775,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": null
+              "loc": "29:10-29:10"
             },
             "args": [
               {
@@ -786,17 +786,17 @@
                     "type": "Constant::Int",
                     "0": "00000"
                   },
-                  "loc": null
+                  "loc": "29:19-29:24"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
                 }
               }
             ],
-            "loc": null
+            "loc": "29:10-29:41"
           }
         ],
-        "loc": null
+        "loc": "26:1-29:42"
       }
     },
     {
@@ -804,7 +804,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "TExotic",
-        "tycon_loc": null,
+        "tycon_loc": "31:8-31:15",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -814,7 +814,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "32:3-32:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -824,16 +824,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "32:6-32:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "32:6-32:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "32:3-32:5",
               "attrs": [],
               "doc": ""
             },
@@ -842,7 +842,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "y",
-                "loc": null
+                "loc": "33:3-33:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -852,16 +852,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "33:6-33:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "33:6-33:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "33:3-33:5",
               "attrs": [],
               "doc": ""
             }
@@ -882,7 +882,7 @@
                 "0": "FromJson"
               },
               "is_object": false,
-              "loc": null
+              "loc": "34:10-34:10"
             },
             "args": [
               {
@@ -894,14 +894,14 @@
                     "func": {
                       "type": "Func::Lambda",
                       "parameters": [],
-                      "params_loc": null,
+                      "params_loc": "34:22-34:23",
                       "body": {
                         "type": "Expr::Constant",
                         "c": {
                           "type": "Constant::String",
                           "0": "Technically you can do this, it's just not very recommended :/"
                         },
-                        "loc": null
+                        "loc": "34:26-34:90"
                       },
                       "return_type": null,
                       "error_type": {
@@ -912,41 +912,31 @@
                       },
                       "has_error": null,
                       "is_async": false,
-                      "loc": null
+                      "loc": "-1:1--1:1"
                     },
-                    "loc": null
+                    "loc": "34:20-34:90"
                   },
                   "group": {
                     "type": "Group::Paren"
                   },
-                  "loc": null
+                  "loc": "34:19-34:91"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
                 }
               }
             ],
-            "loc": null
+            "loc": "34:10-34:92"
           }
         ],
-        "loc": null
+        "loc": "31:1-34:93"
       }
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/derive_arguments.mbt",
-        "start": {
-          "line": 29,
-          "column": 24
-        },
-        "end": {
-          "line": 29,
-          "column": 41
-        }
-      },
+      "loc": "29:24-29:41",
       "msg": "Unexpected token id (lowercase start), you may expect `,`, `)`."
     }
   ]

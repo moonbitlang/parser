@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "test_op",
-          "loc": null
+          "loc": "21:4-21:11"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "21:11-21:12",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -40,7 +40,7 @@
                   "type": "LongIdent::Ident",
                   "0": "&&"
                 },
-                "loc": null
+                "loc": "22:11-22:13"
               },
               "lhs": {
                 "type": "Expr::Infix",
@@ -50,7 +50,7 @@
                     "type": "LongIdent::Ident",
                     "0": "|"
                   },
-                  "loc": null
+                  "loc": "22:7-22:8"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -60,9 +60,9 @@
                       "type": "LongIdent::Ident",
                       "0": "a"
                     },
-                    "loc": null
+                    "loc": "22:5-21:15"
                   },
-                  "loc": null
+                  "loc": "22:5-21:15"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -72,11 +72,11 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "22:9-22:8"
                   },
-                  "loc": null
+                  "loc": "22:9-22:8"
                 },
-                "loc": null
+                "loc": "22:5-22:8"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -86,11 +86,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "22:14-22:13"
                 },
-                "loc": null
+                "loc": "22:14-22:13"
               },
-              "loc": null
+              "loc": "22:5-22:13"
             },
             {
               "type": "Expr::Infix",
@@ -100,7 +100,7 @@
                   "type": "LongIdent::Ident",
                   "0": "||"
                 },
-                "loc": null
+                "loc": "23:11-23:13"
               },
               "lhs": {
                 "type": "Expr::Infix",
@@ -110,7 +110,7 @@
                     "type": "LongIdent::Ident",
                     "0": "|"
                   },
-                  "loc": null
+                  "loc": "23:7-23:8"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -120,9 +120,9 @@
                       "type": "LongIdent::Ident",
                       "0": "a"
                     },
-                    "loc": null
+                    "loc": "23:5-22:16"
                   },
-                  "loc": null
+                  "loc": "23:5-22:16"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -132,11 +132,11 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "23:9-23:8"
                   },
-                  "loc": null
+                  "loc": "23:9-23:8"
                 },
-                "loc": null
+                "loc": "23:5-23:8"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -146,11 +146,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "23:14-23:13"
                 },
-                "loc": null
+                "loc": "23:14-23:13"
               },
-              "loc": null
+              "loc": "23:5-23:13"
             },
             {
               "type": "Expr::Infix",
@@ -160,7 +160,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "24:7-24:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -170,9 +170,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "24:5-23:16"
                 },
-                "loc": null
+                "loc": "24:5-23:16"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -182,7 +182,7 @@
                     "type": "LongIdent::Ident",
                     "0": ">"
                   },
-                  "loc": null
+                  "loc": "24:11-24:12"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -192,9 +192,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "24:9-24:8"
                   },
-                  "loc": null
+                  "loc": "24:9-24:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -204,13 +204,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "24:13-24:12"
                   },
-                  "loc": null
+                  "loc": "24:13-24:12"
                 },
-                "loc": null
+                "loc": "24:9-24:12"
               },
-              "loc": null
+              "loc": "24:5-24:12"
             },
             {
               "type": "Expr::Infix",
@@ -220,7 +220,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "25:7-25:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -230,9 +230,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "25:5-24:15"
                 },
-                "loc": null
+                "loc": "25:5-24:15"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -242,7 +242,7 @@
                     "type": "LongIdent::Ident",
                     "0": "<"
                   },
-                  "loc": null
+                  "loc": "25:11-25:12"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -252,9 +252,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "25:9-25:8"
                   },
-                  "loc": null
+                  "loc": "25:9-25:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -264,13 +264,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "25:13-25:12"
                   },
-                  "loc": null
+                  "loc": "25:13-25:12"
                 },
-                "loc": null
+                "loc": "25:9-25:12"
               },
-              "loc": null
+              "loc": "25:5-25:12"
             },
             {
               "type": "Expr::Infix",
@@ -280,7 +280,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "26:7-26:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -290,9 +290,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "26:5-25:15"
                 },
-                "loc": null
+                "loc": "26:5-25:15"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -302,7 +302,7 @@
                     "type": "LongIdent::Ident",
                     "0": "=="
                   },
-                  "loc": null
+                  "loc": "26:11-26:13"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -312,9 +312,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "26:9-26:8"
                   },
-                  "loc": null
+                  "loc": "26:9-26:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -324,13 +324,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "26:14-26:13"
                   },
-                  "loc": null
+                  "loc": "26:14-26:13"
                 },
-                "loc": null
+                "loc": "26:9-26:13"
               },
-              "loc": null
+              "loc": "26:5-26:13"
             },
             {
               "type": "Expr::Infix",
@@ -340,7 +340,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "27:7-27:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -350,9 +350,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "27:5-26:16"
                 },
-                "loc": null
+                "loc": "27:5-26:16"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -362,7 +362,7 @@
                     "type": "LongIdent::Ident",
                     "0": "!="
                   },
-                  "loc": null
+                  "loc": "27:11-27:13"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -372,9 +372,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "27:9-27:8"
                   },
-                  "loc": null
+                  "loc": "27:9-27:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -384,13 +384,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "27:14-27:13"
                   },
-                  "loc": null
+                  "loc": "27:14-27:13"
                 },
-                "loc": null
+                "loc": "27:9-27:13"
               },
-              "loc": null
+              "loc": "27:5-27:13"
             },
             {
               "type": "Expr::Infix",
@@ -400,7 +400,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "28:7-28:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -410,9 +410,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "28:5-27:16"
                 },
-                "loc": null
+                "loc": "28:5-27:16"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -422,7 +422,7 @@
                     "type": "LongIdent::Ident",
                     "0": "<="
                   },
-                  "loc": null
+                  "loc": "28:11-28:13"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -432,9 +432,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "28:9-28:8"
                   },
-                  "loc": null
+                  "loc": "28:9-28:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -444,13 +444,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "28:14-28:13"
                   },
-                  "loc": null
+                  "loc": "28:14-28:13"
                 },
-                "loc": null
+                "loc": "28:9-28:13"
               },
-              "loc": null
+              "loc": "28:5-28:13"
             },
             {
               "type": "Expr::Infix",
@@ -460,7 +460,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "29:7-29:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -470,9 +470,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "29:5-28:16"
                 },
-                "loc": null
+                "loc": "29:5-28:16"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -482,7 +482,7 @@
                     "type": "LongIdent::Ident",
                     "0": ">="
                   },
-                  "loc": null
+                  "loc": "29:11-29:13"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -492,9 +492,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "29:9-29:8"
                   },
-                  "loc": null
+                  "loc": "29:9-29:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -504,13 +504,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "29:14-29:13"
                   },
-                  "loc": null
+                  "loc": "29:14-29:13"
                 },
-                "loc": null
+                "loc": "29:9-29:13"
               },
-              "loc": null
+              "loc": "29:5-29:13"
             },
             {
               "type": "Expr::Infix",
@@ -520,7 +520,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "30:7-30:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -530,9 +530,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "30:5-29:16"
                 },
-                "loc": null
+                "loc": "30:5-29:16"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -542,7 +542,7 @@
                     "type": "LongIdent::Ident",
                     "0": "+"
                   },
-                  "loc": null
+                  "loc": "30:11-30:12"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -552,9 +552,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "30:9-30:8"
                   },
-                  "loc": null
+                  "loc": "30:9-30:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -564,13 +564,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "30:13-30:12"
                   },
-                  "loc": null
+                  "loc": "30:13-30:12"
                 },
-                "loc": null
+                "loc": "30:9-30:12"
               },
-              "loc": null
+              "loc": "30:5-30:12"
             },
             {
               "type": "Expr::Infix",
@@ -580,7 +580,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "31:7-31:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -590,9 +590,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "31:5-30:15"
                 },
-                "loc": null
+                "loc": "31:5-30:15"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -602,7 +602,7 @@
                     "type": "LongIdent::Ident",
                     "0": "-"
                   },
-                  "loc": null
+                  "loc": "31:11-31:12"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -612,9 +612,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "31:9-31:8"
                   },
-                  "loc": null
+                  "loc": "31:9-31:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -624,13 +624,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "31:13-31:12"
                   },
-                  "loc": null
+                  "loc": "31:13-31:12"
                 },
-                "loc": null
+                "loc": "31:9-31:12"
               },
-              "loc": null
+              "loc": "31:5-31:12"
             },
             {
               "type": "Expr::Infix",
@@ -640,7 +640,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "32:7-32:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -650,9 +650,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "32:5-31:15"
                 },
-                "loc": null
+                "loc": "32:5-31:15"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -662,7 +662,7 @@
                     "type": "LongIdent::Ident",
                     "0": "*"
                   },
-                  "loc": null
+                  "loc": "32:11-32:12"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -672,9 +672,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "32:9-32:8"
                   },
-                  "loc": null
+                  "loc": "32:9-32:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -684,13 +684,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "32:13-32:12"
                   },
-                  "loc": null
+                  "loc": "32:13-32:12"
                 },
-                "loc": null
+                "loc": "32:9-32:12"
               },
-              "loc": null
+              "loc": "32:5-32:12"
             },
             {
               "type": "Expr::Infix",
@@ -700,7 +700,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "33:7-33:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -710,9 +710,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "33:5-32:15"
                 },
-                "loc": null
+                "loc": "33:5-32:15"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -722,7 +722,7 @@
                     "type": "LongIdent::Ident",
                     "0": "/"
                   },
-                  "loc": null
+                  "loc": "33:11-33:12"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -732,9 +732,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "33:9-33:8"
                   },
-                  "loc": null
+                  "loc": "33:9-33:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -744,13 +744,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "33:13-33:12"
                   },
-                  "loc": null
+                  "loc": "33:13-33:12"
                 },
-                "loc": null
+                "loc": "33:9-33:12"
               },
-              "loc": null
+              "loc": "33:5-33:12"
             },
             {
               "type": "Expr::Infix",
@@ -760,7 +760,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "34:7-34:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -770,9 +770,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "34:5-33:15"
                 },
-                "loc": null
+                "loc": "34:5-33:15"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -782,7 +782,7 @@
                     "type": "LongIdent::Ident",
                     "0": "%"
                   },
-                  "loc": null
+                  "loc": "34:11-34:12"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -792,9 +792,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "34:9-34:8"
                   },
-                  "loc": null
+                  "loc": "34:9-34:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -804,13 +804,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "34:13-34:12"
                   },
-                  "loc": null
+                  "loc": "34:13-34:12"
                 },
-                "loc": null
+                "loc": "34:9-34:12"
               },
-              "loc": null
+              "loc": "34:5-34:12"
             },
             {
               "type": "Expr::Infix",
@@ -820,7 +820,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "35:7-35:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -830,9 +830,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "35:5-34:15"
                 },
-                "loc": null
+                "loc": "35:5-34:15"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -842,7 +842,7 @@
                     "type": "LongIdent::Ident",
                     "0": "^"
                   },
-                  "loc": null
+                  "loc": "35:11-35:12"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -852,9 +852,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "35:9-35:8"
                   },
-                  "loc": null
+                  "loc": "35:9-35:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -864,13 +864,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "35:13-35:12"
                   },
-                  "loc": null
+                  "loc": "35:13-35:12"
                 },
-                "loc": null
+                "loc": "35:9-35:12"
               },
-              "loc": null
+              "loc": "35:5-35:12"
             },
             {
               "type": "Expr::Infix",
@@ -880,7 +880,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "36:7-36:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -890,9 +890,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "36:5-35:15"
                 },
-                "loc": null
+                "loc": "36:5-35:15"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -902,7 +902,7 @@
                     "type": "LongIdent::Ident",
                     "0": "&"
                   },
-                  "loc": null
+                  "loc": "36:11-36:12"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -912,9 +912,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "36:9-36:8"
                   },
-                  "loc": null
+                  "loc": "36:9-36:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -924,13 +924,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "36:13-36:12"
                   },
-                  "loc": null
+                  "loc": "36:13-36:12"
                 },
-                "loc": null
+                "loc": "36:9-36:12"
               },
-              "loc": null
+              "loc": "36:5-36:12"
             },
             {
               "type": "Expr::Infix",
@@ -940,7 +940,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "37:7-37:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -950,9 +950,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "37:5-36:15"
                 },
-                "loc": null
+                "loc": "37:5-36:15"
               },
               "rhs": {
                 "type": "Expr::Infix",
@@ -962,7 +962,7 @@
                     "type": "LongIdent::Ident",
                     "0": "<<"
                   },
-                  "loc": null
+                  "loc": "37:11-37:13"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -972,9 +972,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "37:9-37:8"
                   },
-                  "loc": null
+                  "loc": "37:9-37:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -984,13 +984,13 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "37:14-37:13"
                   },
-                  "loc": null
+                  "loc": "37:14-37:13"
                 },
-                "loc": null
+                "loc": "37:9-37:13"
               },
-              "loc": null
+              "loc": "37:5-37:13"
             }
           ],
           "last_expr": {
@@ -1001,7 +1001,7 @@
                 "type": "LongIdent::Ident",
                 "0": "|"
               },
-              "loc": null
+              "loc": "38:7-38:8"
             },
             "lhs": {
               "type": "Expr::Ident",
@@ -1011,9 +1011,9 @@
                   "type": "LongIdent::Ident",
                   "0": "a"
                 },
-                "loc": null
+                "loc": "38:5-37:16"
               },
-              "loc": null
+              "loc": "38:5-37:16"
             },
             "rhs": {
               "type": "Expr::Infix",
@@ -1023,7 +1023,7 @@
                   "type": "LongIdent::Ident",
                   "0": ">>"
                 },
-                "loc": null
+                "loc": "38:11-38:13"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1033,9 +1033,9 @@
                     "type": "LongIdent::Ident",
                     "0": "b"
                   },
-                  "loc": null
+                  "loc": "38:9-38:8"
                 },
-                "loc": null
+                "loc": "38:9-38:8"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -1045,18 +1045,18 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "38:14-38:13"
                 },
-                "loc": null
+                "loc": "38:14-38:13"
               },
-              "loc": null
+              "loc": "38:9-38:13"
             },
-            "loc": null
+            "loc": "38:5-38:13"
           },
-          "loc": null
+          "loc": "22:5-38:13"
         }
       },
-      "loc": null
+      "loc": "21:1-38:16"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -1066,12 +1066,12 @@
         "name": {
           "type": "Binder",
           "name": "test_op",
-          "loc": null
+          "loc": "42:4-42:11"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "42:11-42:12",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -1097,7 +1097,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "43:7-43:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1107,9 +1107,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "43:5-42:15"
                 },
-                "loc": null
+                "loc": "43:5-42:15"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1121,7 +1121,7 @@
                       "type": "LongIdent::Ident",
                       "0": "&&"
                     },
-                    "loc": null
+                    "loc": "43:12-43:14"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1131,9 +1131,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "43:10-43:10"
                     },
-                    "loc": null
+                    "loc": "43:10-43:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1143,18 +1143,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "43:15-43:14"
                     },
-                    "loc": null
+                    "loc": "43:15-43:14"
                   },
-                  "loc": null
+                  "loc": "43:10-43:14"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "43:9-43:14"
               },
-              "loc": null
+              "loc": "43:5-43:16"
             },
             {
               "type": "Expr::Infix",
@@ -1164,7 +1164,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "44:7-44:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1174,9 +1174,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "44:5-43:18"
                 },
-                "loc": null
+                "loc": "44:5-43:18"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1188,7 +1188,7 @@
                       "type": "LongIdent::Ident",
                       "0": "||"
                     },
-                    "loc": null
+                    "loc": "44:12-44:14"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1198,9 +1198,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "44:10-44:10"
                     },
-                    "loc": null
+                    "loc": "44:10-44:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1210,18 +1210,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "44:15-44:14"
                     },
-                    "loc": null
+                    "loc": "44:15-44:14"
                   },
-                  "loc": null
+                  "loc": "44:10-44:14"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "44:9-44:14"
               },
-              "loc": null
+              "loc": "44:5-44:16"
             },
             {
               "type": "Expr::Infix",
@@ -1231,7 +1231,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "45:7-45:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1241,9 +1241,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "45:5-44:18"
                 },
-                "loc": null
+                "loc": "45:5-44:18"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1255,7 +1255,7 @@
                       "type": "LongIdent::Ident",
                       "0": ">"
                     },
-                    "loc": null
+                    "loc": "45:12-45:13"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1265,9 +1265,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "45:10-45:10"
                     },
-                    "loc": null
+                    "loc": "45:10-45:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1277,18 +1277,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "45:14-45:13"
                     },
-                    "loc": null
+                    "loc": "45:14-45:13"
                   },
-                  "loc": null
+                  "loc": "45:10-45:13"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "45:9-45:13"
               },
-              "loc": null
+              "loc": "45:5-45:15"
             },
             {
               "type": "Expr::Infix",
@@ -1298,7 +1298,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "46:7-46:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1308,9 +1308,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "46:5-45:17"
                 },
-                "loc": null
+                "loc": "46:5-45:17"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1322,7 +1322,7 @@
                       "type": "LongIdent::Ident",
                       "0": "<"
                     },
-                    "loc": null
+                    "loc": "46:12-46:13"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1332,9 +1332,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "46:10-46:10"
                     },
-                    "loc": null
+                    "loc": "46:10-46:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1344,18 +1344,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "46:14-46:13"
                     },
-                    "loc": null
+                    "loc": "46:14-46:13"
                   },
-                  "loc": null
+                  "loc": "46:10-46:13"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "46:9-46:13"
               },
-              "loc": null
+              "loc": "46:5-46:15"
             },
             {
               "type": "Expr::Infix",
@@ -1365,7 +1365,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "47:7-47:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1375,9 +1375,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "47:5-46:17"
                 },
-                "loc": null
+                "loc": "47:5-46:17"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1389,7 +1389,7 @@
                       "type": "LongIdent::Ident",
                       "0": "=="
                     },
-                    "loc": null
+                    "loc": "47:12-47:14"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1399,9 +1399,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "47:10-47:10"
                     },
-                    "loc": null
+                    "loc": "47:10-47:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1411,18 +1411,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "47:15-47:14"
                     },
-                    "loc": null
+                    "loc": "47:15-47:14"
                   },
-                  "loc": null
+                  "loc": "47:10-47:14"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "47:9-47:14"
               },
-              "loc": null
+              "loc": "47:5-47:16"
             },
             {
               "type": "Expr::Infix",
@@ -1432,7 +1432,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "48:7-48:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1442,9 +1442,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "48:5-47:18"
                 },
-                "loc": null
+                "loc": "48:5-47:18"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1456,7 +1456,7 @@
                       "type": "LongIdent::Ident",
                       "0": "!="
                     },
-                    "loc": null
+                    "loc": "48:12-48:14"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1466,9 +1466,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "48:10-48:10"
                     },
-                    "loc": null
+                    "loc": "48:10-48:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1478,18 +1478,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "48:15-48:14"
                     },
-                    "loc": null
+                    "loc": "48:15-48:14"
                   },
-                  "loc": null
+                  "loc": "48:10-48:14"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "48:9-48:14"
               },
-              "loc": null
+              "loc": "48:5-48:16"
             },
             {
               "type": "Expr::Infix",
@@ -1499,7 +1499,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "49:7-49:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1509,9 +1509,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "49:5-48:18"
                 },
-                "loc": null
+                "loc": "49:5-48:18"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1523,7 +1523,7 @@
                       "type": "LongIdent::Ident",
                       "0": "<="
                     },
-                    "loc": null
+                    "loc": "49:12-49:14"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1533,9 +1533,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "49:10-49:10"
                     },
-                    "loc": null
+                    "loc": "49:10-49:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1545,18 +1545,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "49:15-49:14"
                     },
-                    "loc": null
+                    "loc": "49:15-49:14"
                   },
-                  "loc": null
+                  "loc": "49:10-49:14"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "49:9-49:14"
               },
-              "loc": null
+              "loc": "49:5-49:16"
             },
             {
               "type": "Expr::Infix",
@@ -1566,7 +1566,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "50:7-50:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1576,9 +1576,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "50:5-49:18"
                 },
-                "loc": null
+                "loc": "50:5-49:18"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1590,7 +1590,7 @@
                       "type": "LongIdent::Ident",
                       "0": ">="
                     },
-                    "loc": null
+                    "loc": "50:12-50:14"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1600,9 +1600,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "50:10-50:10"
                     },
-                    "loc": null
+                    "loc": "50:10-50:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1612,18 +1612,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "50:15-50:14"
                     },
-                    "loc": null
+                    "loc": "50:15-50:14"
                   },
-                  "loc": null
+                  "loc": "50:10-50:14"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "50:9-50:14"
               },
-              "loc": null
+              "loc": "50:5-50:16"
             },
             {
               "type": "Expr::Infix",
@@ -1633,7 +1633,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "51:7-51:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1643,9 +1643,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "51:5-50:18"
                 },
-                "loc": null
+                "loc": "51:5-50:18"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1657,7 +1657,7 @@
                       "type": "LongIdent::Ident",
                       "0": "+"
                     },
-                    "loc": null
+                    "loc": "51:12-51:13"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1667,9 +1667,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "51:10-51:10"
                     },
-                    "loc": null
+                    "loc": "51:10-51:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1679,18 +1679,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "51:14-51:13"
                     },
-                    "loc": null
+                    "loc": "51:14-51:13"
                   },
-                  "loc": null
+                  "loc": "51:10-51:13"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "51:9-51:13"
               },
-              "loc": null
+              "loc": "51:5-51:15"
             },
             {
               "type": "Expr::Infix",
@@ -1700,7 +1700,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "52:7-52:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1710,9 +1710,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "52:5-51:17"
                 },
-                "loc": null
+                "loc": "52:5-51:17"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1724,7 +1724,7 @@
                       "type": "LongIdent::Ident",
                       "0": "-"
                     },
-                    "loc": null
+                    "loc": "52:12-52:13"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1734,9 +1734,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "52:10-52:10"
                     },
-                    "loc": null
+                    "loc": "52:10-52:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1746,18 +1746,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "52:14-52:13"
                     },
-                    "loc": null
+                    "loc": "52:14-52:13"
                   },
-                  "loc": null
+                  "loc": "52:10-52:13"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "52:9-52:13"
               },
-              "loc": null
+              "loc": "52:5-52:15"
             },
             {
               "type": "Expr::Infix",
@@ -1767,7 +1767,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "53:7-53:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1777,9 +1777,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "53:5-52:17"
                 },
-                "loc": null
+                "loc": "53:5-52:17"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1791,7 +1791,7 @@
                       "type": "LongIdent::Ident",
                       "0": "*"
                     },
-                    "loc": null
+                    "loc": "53:12-53:13"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1801,9 +1801,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "53:10-53:10"
                     },
-                    "loc": null
+                    "loc": "53:10-53:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1813,18 +1813,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "53:14-53:13"
                     },
-                    "loc": null
+                    "loc": "53:14-53:13"
                   },
-                  "loc": null
+                  "loc": "53:10-53:13"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "53:9-53:13"
               },
-              "loc": null
+              "loc": "53:5-53:15"
             },
             {
               "type": "Expr::Infix",
@@ -1834,7 +1834,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "54:7-54:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1844,9 +1844,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "54:5-53:17"
                 },
-                "loc": null
+                "loc": "54:5-53:17"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1858,7 +1858,7 @@
                       "type": "LongIdent::Ident",
                       "0": "/"
                     },
-                    "loc": null
+                    "loc": "54:12-54:13"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1868,9 +1868,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "54:10-54:10"
                     },
-                    "loc": null
+                    "loc": "54:10-54:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1880,18 +1880,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "54:14-54:13"
                     },
-                    "loc": null
+                    "loc": "54:14-54:13"
                   },
-                  "loc": null
+                  "loc": "54:10-54:13"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "54:9-54:13"
               },
-              "loc": null
+              "loc": "54:5-54:15"
             },
             {
               "type": "Expr::Infix",
@@ -1901,7 +1901,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "55:7-55:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1911,9 +1911,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "55:5-54:17"
                 },
-                "loc": null
+                "loc": "55:5-54:17"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1925,7 +1925,7 @@
                       "type": "LongIdent::Ident",
                       "0": "%"
                     },
-                    "loc": null
+                    "loc": "55:12-55:13"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -1935,9 +1935,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "55:10-55:10"
                     },
-                    "loc": null
+                    "loc": "55:10-55:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -1947,18 +1947,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "55:14-55:13"
                     },
-                    "loc": null
+                    "loc": "55:14-55:13"
                   },
-                  "loc": null
+                  "loc": "55:10-55:13"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "55:9-55:13"
               },
-              "loc": null
+              "loc": "55:5-55:15"
             },
             {
               "type": "Expr::Infix",
@@ -1968,7 +1968,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "56:7-56:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -1978,9 +1978,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "56:5-55:17"
                 },
-                "loc": null
+                "loc": "56:5-55:17"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -1992,7 +1992,7 @@
                       "type": "LongIdent::Ident",
                       "0": "^"
                     },
-                    "loc": null
+                    "loc": "56:12-56:13"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2002,9 +2002,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "56:10-56:10"
                     },
-                    "loc": null
+                    "loc": "56:10-56:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2014,18 +2014,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "56:14-56:13"
                     },
-                    "loc": null
+                    "loc": "56:14-56:13"
                   },
-                  "loc": null
+                  "loc": "56:10-56:13"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "56:9-56:13"
               },
-              "loc": null
+              "loc": "56:5-56:15"
             },
             {
               "type": "Expr::Infix",
@@ -2035,7 +2035,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "57:7-57:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -2045,9 +2045,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "57:5-56:17"
                 },
-                "loc": null
+                "loc": "57:5-56:17"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -2059,7 +2059,7 @@
                       "type": "LongIdent::Ident",
                       "0": "&"
                     },
-                    "loc": null
+                    "loc": "57:12-57:13"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2069,9 +2069,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "57:10-57:10"
                     },
-                    "loc": null
+                    "loc": "57:10-57:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2081,18 +2081,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "57:14-57:13"
                     },
-                    "loc": null
+                    "loc": "57:14-57:13"
                   },
-                  "loc": null
+                  "loc": "57:10-57:13"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "57:9-57:13"
               },
-              "loc": null
+              "loc": "57:5-57:15"
             },
             {
               "type": "Expr::Infix",
@@ -2102,7 +2102,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "58:7-58:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -2112,9 +2112,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "58:5-57:17"
                 },
-                "loc": null
+                "loc": "58:5-57:17"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -2126,7 +2126,7 @@
                       "type": "LongIdent::Ident",
                       "0": "<<"
                     },
-                    "loc": null
+                    "loc": "58:12-58:14"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2136,9 +2136,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "58:10-58:10"
                     },
-                    "loc": null
+                    "loc": "58:10-58:10"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2148,18 +2148,18 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "58:15-58:14"
                     },
-                    "loc": null
+                    "loc": "58:15-58:14"
                   },
-                  "loc": null
+                  "loc": "58:10-58:14"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "58:9-58:14"
               },
-              "loc": null
+              "loc": "58:5-58:16"
             }
           ],
           "last_expr": {
@@ -2170,7 +2170,7 @@
                 "type": "LongIdent::Ident",
                 "0": "|"
               },
-              "loc": null
+              "loc": "59:7-59:8"
             },
             "lhs": {
               "type": "Expr::Ident",
@@ -2180,9 +2180,9 @@
                   "type": "LongIdent::Ident",
                   "0": "a"
                 },
-                "loc": null
+                "loc": "59:5-58:18"
               },
-              "loc": null
+              "loc": "59:5-58:18"
             },
             "rhs": {
               "type": "Expr::Group",
@@ -2194,7 +2194,7 @@
                     "type": "LongIdent::Ident",
                     "0": ">>"
                   },
-                  "loc": null
+                  "loc": "59:12-59:14"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -2204,9 +2204,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "59:10-59:10"
                   },
-                  "loc": null
+                  "loc": "59:10-59:10"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -2216,23 +2216,23 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "59:15-59:14"
                   },
-                  "loc": null
+                  "loc": "59:15-59:14"
                 },
-                "loc": null
+                "loc": "59:10-59:14"
               },
               "group": {
                 "type": "Group::Paren"
               },
-              "loc": null
+              "loc": "59:9-59:14"
             },
-            "loc": null
+            "loc": "59:5-59:16"
           },
-          "loc": null
+          "loc": "43:5-59:16"
         }
       },
-      "loc": null
+      "loc": "42:1-59:18"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -2242,12 +2242,12 @@
         "name": {
           "type": "Binder",
           "name": "test_op",
-          "loc": null
+          "loc": "63:4-63:11"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "63:11-63:12",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -2273,7 +2273,7 @@
                   "type": "LongIdent::Ident",
                   "0": "&&"
                 },
-                "loc": null
+                "loc": "64:13-64:15"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -2285,7 +2285,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "64:8-64:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2295,9 +2295,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "64:6-64:6"
                     },
-                    "loc": null
+                    "loc": "64:6-64:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2307,16 +2307,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "64:10-64:9"
                     },
-                    "loc": null
+                    "loc": "64:10-64:9"
                   },
-                  "loc": null
+                  "loc": "64:6-64:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "64:5-64:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -2326,11 +2326,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "64:16-64:15"
                 },
-                "loc": null
+                "loc": "64:16-64:15"
               },
-              "loc": null
+              "loc": "64:5-64:15"
             },
             {
               "type": "Expr::Infix",
@@ -2340,7 +2340,7 @@
                   "type": "LongIdent::Ident",
                   "0": "||"
                 },
-                "loc": null
+                "loc": "65:13-65:15"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -2352,7 +2352,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "65:8-65:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2362,9 +2362,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "65:6-65:6"
                     },
-                    "loc": null
+                    "loc": "65:6-65:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2374,16 +2374,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "65:10-65:9"
                     },
-                    "loc": null
+                    "loc": "65:10-65:9"
                   },
-                  "loc": null
+                  "loc": "65:6-65:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "65:5-65:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -2393,11 +2393,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "65:16-65:15"
                 },
-                "loc": null
+                "loc": "65:16-65:15"
               },
-              "loc": null
+              "loc": "65:5-65:15"
             },
             {
               "type": "Expr::Infix",
@@ -2407,7 +2407,7 @@
                   "type": "LongIdent::Ident",
                   "0": ">"
                 },
-                "loc": null
+                "loc": "66:13-66:14"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -2419,7 +2419,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "66:8-66:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2429,9 +2429,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "66:6-66:6"
                     },
-                    "loc": null
+                    "loc": "66:6-66:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2441,16 +2441,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "66:10-66:9"
                     },
-                    "loc": null
+                    "loc": "66:10-66:9"
                   },
-                  "loc": null
+                  "loc": "66:6-66:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "66:5-66:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -2460,11 +2460,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "66:15-66:14"
                 },
-                "loc": null
+                "loc": "66:15-66:14"
               },
-              "loc": null
+              "loc": "66:5-66:14"
             },
             {
               "type": "Expr::Infix",
@@ -2474,7 +2474,7 @@
                   "type": "LongIdent::Ident",
                   "0": "<"
                 },
-                "loc": null
+                "loc": "67:13-67:14"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -2486,7 +2486,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "67:8-67:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2496,9 +2496,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "67:6-67:6"
                     },
-                    "loc": null
+                    "loc": "67:6-67:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2508,16 +2508,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "67:10-67:9"
                     },
-                    "loc": null
+                    "loc": "67:10-67:9"
                   },
-                  "loc": null
+                  "loc": "67:6-67:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "67:5-67:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -2527,11 +2527,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "67:15-67:14"
                 },
-                "loc": null
+                "loc": "67:15-67:14"
               },
-              "loc": null
+              "loc": "67:5-67:14"
             },
             {
               "type": "Expr::Infix",
@@ -2541,7 +2541,7 @@
                   "type": "LongIdent::Ident",
                   "0": "=="
                 },
-                "loc": null
+                "loc": "68:13-68:15"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -2553,7 +2553,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "68:8-68:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2563,9 +2563,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "68:6-68:6"
                     },
-                    "loc": null
+                    "loc": "68:6-68:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2575,16 +2575,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "68:10-68:9"
                     },
-                    "loc": null
+                    "loc": "68:10-68:9"
                   },
-                  "loc": null
+                  "loc": "68:6-68:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "68:5-68:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -2594,11 +2594,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "68:16-68:15"
                 },
-                "loc": null
+                "loc": "68:16-68:15"
               },
-              "loc": null
+              "loc": "68:5-68:15"
             },
             {
               "type": "Expr::Infix",
@@ -2608,7 +2608,7 @@
                   "type": "LongIdent::Ident",
                   "0": "!="
                 },
-                "loc": null
+                "loc": "69:13-69:15"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -2620,7 +2620,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "69:8-69:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2630,9 +2630,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "69:6-69:6"
                     },
-                    "loc": null
+                    "loc": "69:6-69:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2642,16 +2642,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "69:10-69:9"
                     },
-                    "loc": null
+                    "loc": "69:10-69:9"
                   },
-                  "loc": null
+                  "loc": "69:6-69:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "69:5-69:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -2661,11 +2661,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "69:16-69:15"
                 },
-                "loc": null
+                "loc": "69:16-69:15"
               },
-              "loc": null
+              "loc": "69:5-69:15"
             },
             {
               "type": "Expr::Infix",
@@ -2675,7 +2675,7 @@
                   "type": "LongIdent::Ident",
                   "0": "<="
                 },
-                "loc": null
+                "loc": "70:13-70:15"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -2687,7 +2687,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "70:8-70:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2697,9 +2697,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "70:6-70:6"
                     },
-                    "loc": null
+                    "loc": "70:6-70:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2709,16 +2709,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "70:10-70:9"
                     },
-                    "loc": null
+                    "loc": "70:10-70:9"
                   },
-                  "loc": null
+                  "loc": "70:6-70:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "70:5-70:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -2728,11 +2728,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "70:16-70:15"
                 },
-                "loc": null
+                "loc": "70:16-70:15"
               },
-              "loc": null
+              "loc": "70:5-70:15"
             },
             {
               "type": "Expr::Infix",
@@ -2742,7 +2742,7 @@
                   "type": "LongIdent::Ident",
                   "0": ">="
                 },
-                "loc": null
+                "loc": "71:13-71:15"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -2754,7 +2754,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "71:8-71:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2764,9 +2764,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "71:6-71:6"
                     },
-                    "loc": null
+                    "loc": "71:6-71:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2776,16 +2776,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "71:10-71:9"
                     },
-                    "loc": null
+                    "loc": "71:10-71:9"
                   },
-                  "loc": null
+                  "loc": "71:6-71:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "71:5-71:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -2795,11 +2795,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "71:16-71:15"
                 },
-                "loc": null
+                "loc": "71:16-71:15"
               },
-              "loc": null
+              "loc": "71:5-71:15"
             },
             {
               "type": "Expr::Infix",
@@ -2809,7 +2809,7 @@
                   "type": "LongIdent::Ident",
                   "0": "+"
                 },
-                "loc": null
+                "loc": "72:13-72:14"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -2821,7 +2821,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "72:8-72:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2831,9 +2831,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "72:6-72:6"
                     },
-                    "loc": null
+                    "loc": "72:6-72:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2843,16 +2843,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "72:10-72:9"
                     },
-                    "loc": null
+                    "loc": "72:10-72:9"
                   },
-                  "loc": null
+                  "loc": "72:6-72:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "72:5-72:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -2862,11 +2862,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "72:15-72:14"
                 },
-                "loc": null
+                "loc": "72:15-72:14"
               },
-              "loc": null
+              "loc": "72:5-72:14"
             },
             {
               "type": "Expr::Infix",
@@ -2876,7 +2876,7 @@
                   "type": "LongIdent::Ident",
                   "0": "-"
                 },
-                "loc": null
+                "loc": "73:13-73:14"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -2888,7 +2888,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "73:8-73:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2898,9 +2898,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "73:6-73:6"
                     },
-                    "loc": null
+                    "loc": "73:6-73:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2910,16 +2910,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "73:10-73:9"
                     },
-                    "loc": null
+                    "loc": "73:10-73:9"
                   },
-                  "loc": null
+                  "loc": "73:6-73:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "73:5-73:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -2929,11 +2929,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "73:15-73:14"
                 },
-                "loc": null
+                "loc": "73:15-73:14"
               },
-              "loc": null
+              "loc": "73:5-73:14"
             },
             {
               "type": "Expr::Infix",
@@ -2943,7 +2943,7 @@
                   "type": "LongIdent::Ident",
                   "0": "*"
                 },
-                "loc": null
+                "loc": "74:13-74:14"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -2955,7 +2955,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "74:8-74:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -2965,9 +2965,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "74:6-74:6"
                     },
-                    "loc": null
+                    "loc": "74:6-74:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -2977,16 +2977,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "74:10-74:9"
                     },
-                    "loc": null
+                    "loc": "74:10-74:9"
                   },
-                  "loc": null
+                  "loc": "74:6-74:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "74:5-74:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -2996,11 +2996,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "74:15-74:14"
                 },
-                "loc": null
+                "loc": "74:15-74:14"
               },
-              "loc": null
+              "loc": "74:5-74:14"
             },
             {
               "type": "Expr::Infix",
@@ -3010,7 +3010,7 @@
                   "type": "LongIdent::Ident",
                   "0": "/"
                 },
-                "loc": null
+                "loc": "75:13-75:14"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -3022,7 +3022,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "75:8-75:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -3032,9 +3032,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "75:6-75:6"
                     },
-                    "loc": null
+                    "loc": "75:6-75:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -3044,16 +3044,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "75:10-75:9"
                     },
-                    "loc": null
+                    "loc": "75:10-75:9"
                   },
-                  "loc": null
+                  "loc": "75:6-75:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "75:5-75:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -3063,11 +3063,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "75:15-75:14"
                 },
-                "loc": null
+                "loc": "75:15-75:14"
               },
-              "loc": null
+              "loc": "75:5-75:14"
             },
             {
               "type": "Expr::Infix",
@@ -3077,7 +3077,7 @@
                   "type": "LongIdent::Ident",
                   "0": "%"
                 },
-                "loc": null
+                "loc": "76:13-76:14"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -3089,7 +3089,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "76:8-76:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -3099,9 +3099,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "76:6-76:6"
                     },
-                    "loc": null
+                    "loc": "76:6-76:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -3111,16 +3111,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "76:10-76:9"
                     },
-                    "loc": null
+                    "loc": "76:10-76:9"
                   },
-                  "loc": null
+                  "loc": "76:6-76:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "76:5-76:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -3130,11 +3130,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "76:15-76:14"
                 },
-                "loc": null
+                "loc": "76:15-76:14"
               },
-              "loc": null
+              "loc": "76:5-76:14"
             },
             {
               "type": "Expr::Infix",
@@ -3144,7 +3144,7 @@
                   "type": "LongIdent::Ident",
                   "0": "^"
                 },
-                "loc": null
+                "loc": "77:13-77:14"
               },
               "lhs": {
                 "type": "Expr::Group",
@@ -3156,7 +3156,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "77:8-77:9"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -3166,9 +3166,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "77:6-77:6"
                     },
-                    "loc": null
+                    "loc": "77:6-77:6"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -3178,16 +3178,16 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "77:10-77:9"
                     },
-                    "loc": null
+                    "loc": "77:10-77:9"
                   },
-                  "loc": null
+                  "loc": "77:6-77:9"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "77:5-77:11"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -3197,11 +3197,11 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "77:15-77:14"
                 },
-                "loc": null
+                "loc": "77:15-77:14"
               },
-              "loc": null
+              "loc": "77:5-77:14"
             }
           ],
           "last_expr": {
@@ -3212,7 +3212,7 @@
                 "type": "LongIdent::Ident",
                 "0": "&"
               },
-              "loc": null
+              "loc": "78:13-78:14"
             },
             "lhs": {
               "type": "Expr::Group",
@@ -3224,7 +3224,7 @@
                     "type": "LongIdent::Ident",
                     "0": "|"
                   },
-                  "loc": null
+                  "loc": "78:8-78:9"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -3234,9 +3234,9 @@
                       "type": "LongIdent::Ident",
                       "0": "a"
                     },
-                    "loc": null
+                    "loc": "78:6-78:6"
                   },
-                  "loc": null
+                  "loc": "78:6-78:6"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -3246,16 +3246,16 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "78:10-78:9"
                   },
-                  "loc": null
+                  "loc": "78:10-78:9"
                 },
-                "loc": null
+                "loc": "78:6-78:9"
               },
               "group": {
                 "type": "Group::Paren"
               },
-              "loc": null
+              "loc": "78:5-78:11"
             },
             "rhs": {
               "type": "Expr::Ident",
@@ -3265,16 +3265,16 @@
                   "type": "LongIdent::Ident",
                   "0": "c"
                 },
-                "loc": null
+                "loc": "78:15-78:14"
               },
-              "loc": null
+              "loc": "78:15-78:14"
             },
-            "loc": null
+            "loc": "78:5-78:14"
           },
-          "loc": null
+          "loc": "64:5-78:14"
         }
       },
-      "loc": null
+      "loc": "63:1-78:17"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -3284,12 +3284,12 @@
         "name": {
           "type": "Binder",
           "name": "test_op",
-          "loc": null
+          "loc": "81:4-81:11"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "81:11-81:12",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -3315,7 +3315,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "82:7-82:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -3325,9 +3325,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "82:5-81:15"
                 },
-                "loc": null
+                "loc": "82:5-81:15"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -3339,7 +3339,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "82:12-82:13"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -3349,9 +3349,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "82:10-82:10"
                     },
-                    "loc": null
+                    "loc": "82:10-82:10"
                   },
                   "rhs": {
                     "type": "Expr::Group",
@@ -3363,7 +3363,7 @@
                           "type": "LongIdent::Ident",
                           "0": "|"
                         },
-                        "loc": null
+                        "loc": "82:17-82:18"
                       },
                       "lhs": {
                         "type": "Expr::Ident",
@@ -3373,9 +3373,9 @@
                             "type": "LongIdent::Ident",
                             "0": "c"
                           },
-                          "loc": null
+                          "loc": "82:15-82:15"
                         },
-                        "loc": null
+                        "loc": "82:15-82:15"
                       },
                       "rhs": {
                         "type": "Expr::Group",
@@ -3387,7 +3387,7 @@
                               "type": "LongIdent::Ident",
                               "0": "|"
                             },
-                            "loc": null
+                            "loc": "82:22-82:23"
                           },
                           "lhs": {
                             "type": "Expr::Ident",
@@ -3397,9 +3397,9 @@
                                 "type": "LongIdent::Ident",
                                 "0": "d"
                               },
-                              "loc": null
+                              "loc": "82:20-82:20"
                             },
-                            "loc": null
+                            "loc": "82:20-82:20"
                           },
                           "rhs": {
                             "type": "Expr::Group",
@@ -3411,7 +3411,7 @@
                                   "type": "LongIdent::Ident",
                                   "0": "|"
                                 },
-                                "loc": null
+                                "loc": "82:27-82:28"
                               },
                               "lhs": {
                                 "type": "Expr::Ident",
@@ -3421,9 +3421,9 @@
                                     "type": "LongIdent::Ident",
                                     "0": "e"
                                   },
-                                  "loc": null
+                                  "loc": "82:25-82:25"
                                 },
-                                "loc": null
+                                "loc": "82:25-82:25"
                               },
                               "rhs": {
                                 "type": "Expr::Ident",
@@ -3433,39 +3433,39 @@
                                     "type": "LongIdent::Ident",
                                     "0": "f"
                                   },
-                                  "loc": null
+                                  "loc": "82:29-82:28"
                                 },
-                                "loc": null
+                                "loc": "82:29-82:28"
                               },
-                              "loc": null
+                              "loc": "82:25-82:28"
                             },
                             "group": {
                               "type": "Group::Paren"
                             },
-                            "loc": null
+                            "loc": "82:24-82:28"
                           },
-                          "loc": null
+                          "loc": "82:20-82:30"
                         },
                         "group": {
                           "type": "Group::Paren"
                         },
-                        "loc": null
+                        "loc": "82:19-82:30"
                       },
-                      "loc": null
+                      "loc": "82:15-82:31"
                     },
                     "group": {
                       "type": "Group::Paren"
                     },
-                    "loc": null
+                    "loc": "82:14-82:31"
                   },
-                  "loc": null
+                  "loc": "82:10-82:32"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "82:9-82:32"
               },
-              "loc": null
+              "loc": "82:5-82:33"
             },
             {
               "type": "Expr::Infix",
@@ -3475,7 +3475,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "83:7-83:8"
               },
               "lhs": {
                 "type": "Expr::Ident",
@@ -3485,9 +3485,9 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "83:5-82:35"
                 },
-                "loc": null
+                "loc": "83:5-82:35"
               },
               "rhs": {
                 "type": "Expr::Group",
@@ -3499,7 +3499,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "83:16-83:17"
                   },
                   "lhs": {
                     "type": "Expr::Infix",
@@ -3509,7 +3509,7 @@
                         "type": "LongIdent::Ident",
                         "0": "|"
                       },
-                      "loc": null
+                      "loc": "83:12-83:13"
                     },
                     "lhs": {
                       "type": "Expr::Ident",
@@ -3519,9 +3519,9 @@
                           "type": "LongIdent::Ident",
                           "0": "b"
                         },
-                        "loc": null
+                        "loc": "83:10-83:10"
                       },
-                      "loc": null
+                      "loc": "83:10-83:10"
                     },
                     "rhs": {
                       "type": "Expr::Ident",
@@ -3531,11 +3531,11 @@
                           "type": "LongIdent::Ident",
                           "0": "c"
                         },
-                        "loc": null
+                        "loc": "83:14-83:13"
                       },
-                      "loc": null
+                      "loc": "83:14-83:13"
                     },
-                    "loc": null
+                    "loc": "83:10-83:13"
                   },
                   "rhs": {
                     "type": "Expr::Group",
@@ -3547,7 +3547,7 @@
                           "type": "LongIdent::Ident",
                           "0": "|"
                         },
-                        "loc": null
+                        "loc": "83:25-83:26"
                       },
                       "lhs": {
                         "type": "Expr::Infix",
@@ -3557,7 +3557,7 @@
                             "type": "LongIdent::Ident",
                             "0": "|"
                           },
-                          "loc": null
+                          "loc": "83:21-83:22"
                         },
                         "lhs": {
                           "type": "Expr::Ident",
@@ -3567,9 +3567,9 @@
                               "type": "LongIdent::Ident",
                               "0": "d"
                             },
-                            "loc": null
+                            "loc": "83:19-83:19"
                           },
-                          "loc": null
+                          "loc": "83:19-83:19"
                         },
                         "rhs": {
                           "type": "Expr::Ident",
@@ -3579,11 +3579,11 @@
                               "type": "LongIdent::Ident",
                               "0": "e"
                             },
-                            "loc": null
+                            "loc": "83:23-83:22"
                           },
-                          "loc": null
+                          "loc": "83:23-83:22"
                         },
-                        "loc": null
+                        "loc": "83:19-83:22"
                       },
                       "rhs": {
                         "type": "Expr::Ident",
@@ -3593,25 +3593,25 @@
                             "type": "LongIdent::Ident",
                             "0": "f"
                           },
-                          "loc": null
+                          "loc": "83:27-83:26"
                         },
-                        "loc": null
+                        "loc": "83:27-83:26"
                       },
-                      "loc": null
+                      "loc": "83:19-83:26"
                     },
                     "group": {
                       "type": "Group::Paren"
                     },
-                    "loc": null
+                    "loc": "83:18-83:26"
                   },
-                  "loc": null
+                  "loc": "83:10-83:28"
                 },
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": null
+                "loc": "83:9-83:28"
               },
-              "loc": null
+              "loc": "83:5-83:29"
             }
           ],
           "last_expr": {
@@ -3622,7 +3622,7 @@
                 "type": "LongIdent::Ident",
                 "0": "|"
               },
-              "loc": null
+              "loc": "84:19-84:20"
             },
             "lhs": {
               "type": "Expr::Infix",
@@ -3632,7 +3632,7 @@
                   "type": "LongIdent::Ident",
                   "0": "|"
                 },
-                "loc": null
+                "loc": "84:15-84:16"
               },
               "lhs": {
                 "type": "Expr::Infix",
@@ -3642,7 +3642,7 @@
                     "type": "LongIdent::Ident",
                     "0": "|"
                   },
-                  "loc": null
+                  "loc": "84:11-84:12"
                 },
                 "lhs": {
                   "type": "Expr::Infix",
@@ -3652,7 +3652,7 @@
                       "type": "LongIdent::Ident",
                       "0": "|"
                     },
-                    "loc": null
+                    "loc": "84:7-84:8"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -3662,9 +3662,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "84:5-83:31"
                     },
-                    "loc": null
+                    "loc": "84:5-83:31"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -3674,11 +3674,11 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "84:9-84:8"
                     },
-                    "loc": null
+                    "loc": "84:9-84:8"
                   },
-                  "loc": null
+                  "loc": "84:5-84:8"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -3688,11 +3688,11 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "84:13-84:12"
                   },
-                  "loc": null
+                  "loc": "84:13-84:12"
                 },
-                "loc": null
+                "loc": "84:5-84:12"
               },
               "rhs": {
                 "type": "Expr::Ident",
@@ -3702,11 +3702,11 @@
                     "type": "LongIdent::Ident",
                     "0": "d"
                   },
-                  "loc": null
+                  "loc": "84:17-84:16"
                 },
-                "loc": null
+                "loc": "84:17-84:16"
               },
-              "loc": null
+              "loc": "84:5-84:16"
             },
             "rhs": {
               "type": "Expr::Ident",
@@ -3716,16 +3716,16 @@
                   "type": "LongIdent::Ident",
                   "0": "f"
                 },
-                "loc": null
+                "loc": "84:21-84:20"
               },
-              "loc": null
+              "loc": "84:21-84:20"
             },
-            "loc": null
+            "loc": "84:5-84:20"
           },
-          "loc": null
+          "loc": "82:5-84:20"
         }
       },
-      "loc": null
+      "loc": "81:1-84:23"
     }
   ]
 }

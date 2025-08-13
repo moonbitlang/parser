@@ -8,7 +8,7 @@
         "name": {
           "type": "Binder",
           "name": "Debug",
-          "loc": null
+          "loc": "1:7-1:12"
         },
         "supers": [],
         "methods": [
@@ -17,7 +17,7 @@
             "name": {
               "type": "Binder",
               "name": "show",
-              "loc": null
+              "loc": "2:3-2:7"
             },
             "has_error": null,
             "is_async": false,
@@ -33,12 +33,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Self"
                     },
-                    "loc": null
+                    "loc": "2:8-2:12"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "2:8-2:8"
                 },
-                "loc": null
+                "loc": "2:8-2:8"
               },
               {
                 "type": "Parameter::DiscardPositional",
@@ -50,12 +50,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Int"
                     },
-                    "loc": null
+                    "loc": "2:13-2:16"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "2:13-2:13"
                 },
-                "loc": null
+                "loc": "2:13-2:13"
               },
               {
                 "type": "Parameter::DiscardPositional",
@@ -67,12 +67,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Int"
                     },
-                    "loc": null
+                    "loc": "2:17-2:20"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "2:17-2:17"
                 },
-                "loc": null
+                "loc": "2:17-2:17"
               }
             ],
             "return_type": {
@@ -83,24 +83,24 @@
                   "type": "LongIdent::Ident",
                   "0": "Double"
                 },
-                "loc": null
+                "loc": "2:25-2:31"
               },
               "tys": [],
-              "loc": null
+              "loc": "2:25-2:24"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": null
+            "loc": "2:3-2:24"
           },
           {
             "type": "TraitMethodDecl",
             "name": {
               "type": "Binder",
               "name": "",
-              "loc": null
+              "loc": "3:3-3:4"
             },
             "has_error": null,
             "is_async": false,
@@ -116,12 +116,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Self"
                     },
-                    "loc": null
+                    "loc": "3:4-3:8"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "3:4-3:4"
                 },
-                "loc": null
+                "loc": "3:4-3:4"
               },
               {
                 "type": "Parameter::DiscardPositional",
@@ -133,12 +133,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Int"
                     },
-                    "loc": null
+                    "loc": "3:9-3:12"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "3:9-3:9"
                 },
-                "loc": null
+                "loc": "3:9-3:9"
               },
               {
                 "type": "Parameter::DiscardPositional",
@@ -150,12 +150,12 @@
                       "type": "LongIdent::Ident",
                       "0": "UndefinedType"
                     },
-                    "loc": null
+                    "loc": "3:13-3:26"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "3:13-3:13"
                 },
-                "loc": null
+                "loc": "3:13-3:13"
               }
             ],
             "return_type": {
@@ -166,23 +166,23 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": null
+                "loc": "3:31-3:34"
               },
               "tys": [],
-              "loc": null
+              "loc": "3:31-3:30"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": null
+            "loc": "3:3-3:30"
           }
         ],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": null,
+        "loc": "1:1-3:70",
         "attrs": [],
         "doc": ""
       }
@@ -191,17 +191,7 @@
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/invalid_trait_def.mbt",
-        "start": {
-          "line": 3,
-          "column": 3
-        },
-        "end": {
-          "line": 3,
-          "column": 4
-        }
-      },
+      "loc": "3:3-3:4",
       "msg": "Unexpected token `(`, you may expect id (lowercase start)."
     }
   ]

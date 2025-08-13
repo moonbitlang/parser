@@ -9,7 +9,7 @@
         "name": {
           "type": "Binder",
           "name": "f",
-          "loc": null
+          "loc": "1:4-1:5"
         },
         "has_error": null,
         "is_async": false,
@@ -19,7 +19,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "1:6-1:7"
             },
             "ty": {
               "type": "Type::Name",
@@ -29,14 +29,14 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": null
+                "loc": "1:9-1:12"
               },
               "tys": [],
-              "loc": null
+              "loc": "1:9-1:8"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "1:5-1:12",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -46,10 +46,10 @@
               "type": "LongIdent::Ident",
               "0": "Int"
             },
-            "loc": null
+            "loc": "1:17-1:20"
           },
           "tys": [],
-          "loc": null
+          "loc": "1:17-1:16"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -77,9 +77,9 @@
                     "type": "LongIdent::Ident",
                     "0": "x"
                   },
-                  "loc": null
+                  "loc": "2:12-2:11"
                 },
-                "loc": null
+                "loc": "2:12-2:11"
               },
               "pat": {
                 "type": "Pattern::Constant",
@@ -87,24 +87,24 @@
                   "type": "Constant::Int",
                   "0": "42"
                 },
-                "loc": null
+                "loc": "2:17-2:19"
               },
-              "loc": null
+              "loc": "2:12-2:16"
             },
             "ifso": {
               "type": "Expr::Unit",
-              "loc": null,
+              "loc": "2:22-2:23",
               "faked": false
             },
             "ifnot": null,
-            "loc": null
+            "loc": "2:9-2:24"
           },
           "cases": [
             {
               "type": "Case",
               "pattern": {
                 "type": "Pattern::Any",
-                "loc": null
+                "loc": "3:5-3:6"
               },
               "guard": null,
               "body": {
@@ -113,16 +113,16 @@
                   "type": "Constant::Int",
                   "0": "0"
                 },
-                "loc": null
+                "loc": "3:10-3:11"
               }
             }
           ],
-          "match_loc": null,
+          "match_loc": "2:3-2:28",
           "using": null,
-          "loc": null
+          "loc": "2:3-3:12"
         }
       },
-      "loc": null
+      "loc": "1:1-4:5"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -132,7 +132,7 @@
         "name": {
           "type": "Binder",
           "name": "g",
-          "loc": null
+          "loc": "7:4-7:5"
         },
         "has_error": null,
         "is_async": false,
@@ -142,7 +142,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "7:6-7:7"
             },
             "ty": {
               "type": "Type::Name",
@@ -152,14 +152,14 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": null
+                "loc": "7:9-7:12"
               },
               "tys": [],
-              "loc": null
+              "loc": "7:9-7:8"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "7:5-7:12",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -169,10 +169,10 @@
               "type": "LongIdent::Ident",
               "0": "Int"
             },
-            "loc": null
+            "loc": "7:17-7:20"
           },
           "tys": [],
-          "loc": null
+          "loc": "7:17-7:16"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -198,16 +198,16 @@
                   "type": "LongIdent::Ident",
                   "0": "x"
                 },
-                "loc": null
+                "loc": "8:12-8:11"
               },
-              "loc": null
+              "loc": "8:12-8:11"
             },
             "cases": [
               {
                 "type": "Case",
                 "pattern": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "8:16-8:17"
                 },
                 "guard": null,
                 "body": {
@@ -216,13 +216,13 @@
                     "type": "Constant::Bool",
                     "0": true
                   },
-                  "loc": null
+                  "loc": "8:21-8:25"
                 }
               }
             ],
-            "match_loc": null,
+            "match_loc": "8:6-8:15",
             "using": null,
-            "loc": null
+            "loc": "8:6-8:25"
           },
           "ifso": {
             "type": "Expr::Constant",
@@ -230,7 +230,7 @@
               "type": "Constant::Int",
               "0": "42"
             },
-            "loc": null
+            "loc": "9:5-9:7"
           },
           "ifnot": {
             "type": "Expr::Constant",
@@ -238,43 +238,23 @@
               "type": "Constant::Int",
               "0": "0"
             },
-            "loc": null
+            "loc": "11:5-11:6"
           },
-          "loc": null
+          "loc": "8:3-11:7"
         }
       },
-      "loc": null
+      "loc": "7:1-12:5"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/match_match.mbt",
-        "start": {
-          "line": 2,
-          "column": 9
-        },
-        "end": {
-          "line": 2,
-          "column": 24
-        }
-      },
+      "loc": "2:9-2:24",
       "msg": "Unexpected if expression in condition"
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/match_match.mbt",
-        "start": {
-          "line": 8,
-          "column": 6
-        },
-        "end": {
-          "line": 8,
-          "column": 25
-        }
-      },
+      "loc": "8:6-8:25",
       "msg": "Unexpected match expression in condition"
     }
   ]

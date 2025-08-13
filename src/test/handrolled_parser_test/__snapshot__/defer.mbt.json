@@ -13,9 +13,9 @@
               "type": "LongIdent::Ident",
               "0": "x"
             },
-            "loc": null
+            "loc": "2:9-2:8"
           },
-          "loc": null
+          "loc": "2:9-2:8"
         },
         "body": {
           "type": "Expr::Defer",
@@ -29,15 +29,15 @@
                   "type": "LongIdent::Ident",
                   "0": "simple"
                 },
-                "loc": null
+                "loc": "3:9-3:8"
               },
-              "loc": null
+              "loc": "3:9-3:8"
             },
             "args": [],
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": null
+            "loc": "3:9-3:16"
           },
           "body": {
             "type": "Expr::Defer",
@@ -51,21 +51,21 @@
                     "type": "LongIdent::Ident",
                     "0": "socket"
                   },
-                  "loc": null
+                  "loc": "4:9-4:8"
                 },
-                "loc": null
+                "loc": "4:9-4:8"
               },
               "method_name": {
                 "type": "Label",
                 "name": "close",
-                "loc": null
+                "loc": "4:16-4:21"
               },
               "args": [],
               "return_self": false,
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": null
+              "loc": "4:9-4:22"
             },
             "body": {
               "type": "Expr::Defer",
@@ -81,33 +81,33 @@
                         "type": "LongIdent::Ident",
                         "0": "conn"
                       },
-                      "loc": null
+                      "loc": "5:9-5:8"
                     },
-                    "loc": null
+                    "loc": "5:9-5:8"
                   },
                   "method_name": {
                     "type": "Label",
                     "name": "send_farewell",
-                    "loc": null
+                    "loc": "5:15-5:28"
                   },
                   "args": [],
                   "return_self": true,
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": null
+                  "loc": "5:9-5:29"
                 },
                 "method_name": {
                   "type": "Label",
                   "name": "close",
-                  "loc": null
+                  "loc": "5:31-5:36"
                 },
                 "args": [],
                 "return_self": false,
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "5:9-5:37"
               },
               "body": {
                 "type": "Expr::Defer",
@@ -121,9 +121,9 @@
                         "type": "LongIdent::Ident",
                         "0": "x"
                       },
-                      "loc": null
+                      "loc": "6:9-6:8"
                     },
-                    "loc": null
+                    "loc": "6:9-6:8"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -133,11 +133,11 @@
                         "type": "LongIdent::Ident",
                         "0": "f"
                       },
-                      "loc": null
+                      "loc": "6:14-6:13"
                     },
-                    "loc": null
+                    "loc": "6:14-6:13"
                   },
-                  "loc": null
+                  "loc": "6:9-6:13"
                 },
                 "body": {
                   "type": "Expr::Defer",
@@ -156,15 +156,15 @@
                                 "type": "LongIdent::Ident",
                                 "0": "block"
                               },
-                              "loc": null
+                              "loc": "8:5-7:11"
                             },
-                            "loc": null
+                            "loc": "8:5-7:11"
                           },
                           "args": [],
                           "attr": {
                             "type": "ApplyAttr::NoAttr"
                           },
-                          "loc": null
+                          "loc": "8:5-8:11"
                         }
                       ],
                       "last_expr": {
@@ -177,44 +177,44 @@
                               "type": "LongIdent::Ident",
                               "0": "block"
                             },
-                            "loc": null
+                            "loc": "9:5-8:13"
                           },
-                          "loc": null
+                          "loc": "9:5-8:13"
                         },
                         "args": [],
                         "attr": {
                           "type": "ApplyAttr::NoAttr"
                         },
-                        "loc": null
+                        "loc": "9:5-9:11"
                       },
-                      "loc": null
+                      "loc": "8:5-9:11"
                     },
                     "group": {
                       "type": "Group::Brace"
                     },
-                    "loc": null
+                    "loc": "7:9-6:16"
                   },
                   "body": {
                     "type": "Expr::Unit",
-                    "loc": null,
+                    "loc": "7:3-9:13",
                     "faked": true
                   },
-                  "loc": null
+                  "loc": "7:9-9:13"
                 },
-                "loc": null
+                "loc": "6:9-6:13"
               },
-              "loc": null
+              "loc": "5:9-5:37"
             },
-            "loc": null
+            "loc": "4:9-4:22"
           },
-          "loc": null
+          "loc": "3:9-3:16"
         },
-        "loc": null
+        "loc": "2:9-2:8"
       },
       "name": null,
       "params": null,
       "local_types": [],
-      "loc": null,
+      "loc": "1:1-10:5",
       "attrs": [],
       "doc": ""
     }

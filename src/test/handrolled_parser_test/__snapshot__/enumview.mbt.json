@@ -14,10 +14,10 @@
                 "type": "LongIdent::Ident",
                 "0": "Show"
               },
-              "loc": null
+              "loc": "1:13-1:17"
             }
           ],
-          "loc": null
+          "loc": "1:10-1:10"
         }
       ],
       "source_ty": {
@@ -28,7 +28,7 @@
             "type": "LongIdent::Ident",
             "0": "List"
           },
-          "loc": null
+          "loc": "4:7-4:11"
         },
         "tys": [
           {
@@ -39,13 +39,13 @@
                 "type": "LongIdent::Ident",
                 "0": "A"
               },
-              "loc": null
+              "loc": "4:12-4:13"
             },
             "tys": [],
-            "loc": null
+            "loc": "4:12-4:12"
           }
         ],
-        "loc": null
+        "loc": "4:7-4:13"
       },
       "view_constrs": [
         {
@@ -53,12 +53,12 @@
           "name": {
             "type": "ConstrName",
             "name": "SNil",
-            "loc": null
+            "loc": "2:3-2:7"
           },
           "args": null,
           "tag": null,
           "attrs": [],
-          "loc": null,
+          "loc": "2:3-1:23",
           "doc": ""
         },
         {
@@ -66,7 +66,7 @@
           "name": {
             "type": "ConstrName",
             "name": "SCons",
-            "loc": null
+            "loc": "3:3-3:8"
           },
           "args": [
             {
@@ -79,10 +79,10 @@
                     "type": "LongIdent::Ident",
                     "0": "String"
                   },
-                  "loc": null
+                  "loc": "3:9-3:15"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "3:9-3:9"
               },
               "mut": false,
               "label": null
@@ -97,7 +97,7 @@
                     "type": "LongIdent::Ident",
                     "0": "List"
                   },
-                  "loc": null
+                  "loc": "3:17-3:21"
                 },
                 "tys": [
                   {
@@ -108,13 +108,13 @@
                         "type": "LongIdent::Ident",
                         "0": "A"
                       },
-                      "loc": null
+                      "loc": "3:22-3:23"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "3:22-3:22"
                   }
                 ],
-                "loc": null
+                "loc": "3:17-3:23"
               },
               "mut": false,
               "label": null
@@ -122,7 +122,7 @@
           ],
           "tag": null,
           "attrs": [],
-          "loc": null,
+          "loc": "3:3-3:24",
           "doc": ""
         }
       ],
@@ -136,9 +136,9 @@
               "type": "LongIdent::Ident",
               "0": "x"
             },
-            "loc": null
+            "loc": "5:9-5:8"
           },
-          "loc": null
+          "loc": "5:9-5:8"
         },
         "cases": [
           {
@@ -150,16 +150,16 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "Nil",
-                  "loc": null
+                  "loc": "6:5-6:8"
                 },
                 "extra_info": {
                   "type": "ConstructorExtraInfo::NoExtraInfo"
                 },
-                "loc": null
+                "loc": "6:5-5:13"
               },
               "args": null,
               "is_open": false,
-              "loc": null
+              "loc": "6:5-5:13"
             },
             "guard": null,
             "body": {
@@ -169,14 +169,14 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "SNil",
-                  "loc": null
+                  "loc": "6:12-6:11"
                 },
                 "extra_info": {
                   "type": "ConstructorExtraInfo::NoExtraInfo"
                 },
-                "loc": null
+                "loc": "6:12-6:11"
               },
-              "loc": null
+              "loc": "6:12-6:11"
             }
           },
           {
@@ -188,12 +188,12 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "Cons",
-                  "loc": null
+                  "loc": "7:5-7:9"
                 },
                 "extra_info": {
                   "type": "ConstructorExtraInfo::NoExtraInfo"
                 },
-                "loc": null
+                "loc": "7:5-6:17"
               },
               "args": [
                 {
@@ -203,7 +203,7 @@
                     "0": {
                       "type": "Binder",
                       "name": "x",
-                      "loc": null
+                      "loc": "7:10-7:11"
                     }
                   },
                   "kind": {
@@ -217,7 +217,7 @@
                     "0": {
                       "type": "Binder",
                       "name": "xs",
-                      "loc": null
+                      "loc": "7:13-7:15"
                     }
                   },
                   "kind": {
@@ -226,7 +226,7 @@
                 }
               ],
               "is_open": false,
-              "loc": null
+              "loc": "7:5-7:15"
             },
             "guard": null,
             "body": {
@@ -238,14 +238,14 @@
                   "name": {
                     "type": "ConstrName",
                     "name": "SCons",
-                    "loc": null
+                    "loc": "7:20-7:19"
                   },
                   "extra_info": {
                     "type": "ConstructorExtraInfo::NoExtraInfo"
                   },
-                  "loc": null
+                  "loc": "7:20-7:19"
                 },
-                "loc": null
+                "loc": "7:20-7:19"
               },
               "args": [
                 {
@@ -260,21 +260,21 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": null
+                        "loc": "7:26-7:26"
                       },
-                      "loc": null
+                      "loc": "7:26-7:26"
                     },
                     "method_name": {
                       "type": "Label",
                       "name": "to_string",
-                      "loc": null
+                      "loc": "7:28-7:37"
                     },
                     "args": [],
                     "return_self": false,
                     "attr": {
                       "type": "ApplyAttr::NoAttr"
                     },
-                    "loc": null
+                    "loc": "7:26-7:38"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -290,9 +290,9 @@
                         "type": "LongIdent::Ident",
                         "0": "xs"
                       },
-                      "loc": null
+                      "loc": "7:41-7:40"
                     },
-                    "loc": null
+                    "loc": "7:41-7:40"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -302,13 +302,13 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": null
+              "loc": "7:20-7:43"
             }
           }
         ],
-        "match_loc": null,
+        "match_loc": "5:3-5:12",
         "using": null,
-        "loc": null
+        "loc": "5:3-7:45"
       },
       "ty_name": "V",
       "parameters": [
@@ -317,7 +317,7 @@
           "binder": {
             "type": "Binder",
             "name": "x",
-            "loc": null
+            "loc": "4:25-4:26"
           },
           "ty": {
             "type": "Type::Name",
@@ -327,7 +327,7 @@
                 "type": "LongIdent::Ident",
                 "0": "List"
               },
-              "loc": null
+              "loc": "4:28-4:32"
             },
             "tys": [
               {
@@ -338,27 +338,27 @@
                     "type": "LongIdent::Ident",
                     "0": "A"
                   },
-                  "loc": null
+                  "loc": "4:33-4:34"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "4:33-4:33"
               }
             ],
-            "loc": null
+            "loc": "4:28-4:34"
           }
         }
       ],
       "func_name": {
         "type": "Binder",
         "name": "view",
-        "loc": null
+        "loc": "4:20-4:24"
       },
-      "ty_loc": null,
-      "params_loc": null,
+      "ty_loc": "1:19-1:20",
+      "params_loc": "4:24-4:35",
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "1:1-8:5",
       "attrs": [],
       "doc": ""
     },
@@ -373,10 +373,10 @@
             "type": "LongIdent::Ident",
             "0": "A"
           },
-          "loc": null
+          "loc": "14:7-14:8"
         },
         "tys": [],
-        "loc": null
+        "loc": "14:7-14:6"
       },
       "view_constrs": [
         {
@@ -384,12 +384,12 @@
           "name": {
             "type": "ConstrName",
             "name": "C",
-            "loc": null
+            "loc": "12:3-12:4"
           },
           "args": null,
           "tag": null,
           "attrs": [],
-          "loc": null,
+          "loc": "12:3-11:14",
           "doc": ""
         },
         {
@@ -397,12 +397,12 @@
           "name": {
             "type": "ConstrName",
             "name": "D",
-            "loc": null
+            "loc": "13:3-13:4"
           },
           "args": null,
           "tag": null,
           "attrs": [],
-          "loc": null,
+          "loc": "13:3-12:5",
           "doc": ""
         }
       ],
@@ -413,14 +413,14 @@
           "name": {
             "type": "ConstrName",
             "name": "C",
-            "loc": null
+            "loc": "15:3-14:24"
           },
           "extra_info": {
             "type": "ConstructorExtraInfo::NoExtraInfo"
           },
-          "loc": null
+          "loc": "15:3-14:24"
         },
-        "loc": null
+        "loc": "15:3-14:24"
       },
       "ty_name": "V",
       "parameters": [
@@ -429,7 +429,7 @@
           "binder": {
             "type": "Binder",
             "name": "x",
-            "loc": null
+            "loc": "14:19-14:20"
           },
           "ty": null
         }
@@ -437,14 +437,14 @@
       "func_name": {
         "type": "Binder",
         "name": "view",
-        "loc": null
+        "loc": "14:14-14:18"
       },
-      "ty_loc": null,
-      "params_loc": null,
+      "ty_loc": "11:10-11:11",
+      "params_loc": "14:18-14:20",
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "11:1-15:5",
       "attrs": [],
       "doc": ""
     }

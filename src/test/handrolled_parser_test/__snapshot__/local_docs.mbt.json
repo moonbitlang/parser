@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "Variant",
-        "tycon_loc": null,
+        "tycon_loc": "3:6-3:13",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -16,7 +16,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "String",
-                "loc": null
+                "loc": "6:4-6:10"
               },
               "args": [
                 {
@@ -29,10 +29,10 @@
                         "type": "LongIdent::Ident",
                         "0": "String"
                       },
-                      "loc": null
+                      "loc": "6:11-6:17"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "6:11-6:11"
                   },
                   "mut": false,
                   "label": null
@@ -40,7 +40,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "6:4-6:17",
               "doc": " Stirng constructor\n String doc"
             },
             {
@@ -48,7 +48,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Number",
-                "loc": null
+                "loc": "9:4-9:10"
               },
               "args": [
                 {
@@ -61,10 +61,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Double"
                       },
-                      "loc": null
+                      "loc": "9:11-9:17"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "9:11-9:11"
                   },
                   "mut": false,
                   "label": null
@@ -72,7 +72,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "9:4-9:17",
               "doc": " Number constructor\n Number doc"
             },
             {
@@ -80,7 +80,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Boolean",
-                "loc": null
+                "loc": "12:4-12:11"
               },
               "args": [
                 {
@@ -93,10 +93,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Bool"
                       },
-                      "loc": null
+                      "loc": "12:12-12:16"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "12:12-12:12"
                   },
                   "mut": false,
                   "label": null
@@ -104,7 +104,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "12:4-12:16",
               "doc": " Boolean constructor\n Boolean doc"
             },
             {
@@ -112,7 +112,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Sequence",
-                "loc": null
+                "loc": "14:4-14:12"
               },
               "args": [
                 {
@@ -125,7 +125,7 @@
                         "type": "LongIdent::Ident",
                         "0": "Array"
                       },
-                      "loc": null
+                      "loc": "14:13-14:18"
                     },
                     "tys": [
                       {
@@ -136,13 +136,13 @@
                             "type": "LongIdent::Ident",
                             "0": "Variant"
                           },
-                          "loc": null
+                          "loc": "14:19-14:26"
                         },
                         "tys": [],
-                        "loc": null
+                        "loc": "14:19-14:19"
                       }
                     ],
-                    "loc": null
+                    "loc": "14:13-14:26"
                   },
                   "mut": false,
                   "label": null
@@ -150,7 +150,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "14:4-14:27",
               "doc": " Array constructor"
             }
           ]
@@ -161,7 +161,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "3:1-14:29"
       }
     },
     {
@@ -169,7 +169,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "Location",
-        "tycon_loc": null,
+        "tycon_loc": "19:8-19:16",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -179,7 +179,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "21:3-21:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -189,16 +189,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "21:7-21:10"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "21:7-21:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "21:3-21:6",
               "attrs": [],
               "doc": " X coordinate"
             },
@@ -207,7 +207,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "y",
-                "loc": null
+                "loc": "23:3-23:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -217,16 +217,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "23:7-23:10"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "23:7-23:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "23:3-23:6",
               "attrs": [],
               "doc": " Y coordinate"
             },
@@ -235,7 +235,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "z",
-                "loc": null
+                "loc": "26:3-26:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -245,16 +245,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Double"
                   },
-                  "loc": null
+                  "loc": "26:7-26:13"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "26:7-26:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "26:3-26:6",
               "attrs": [],
               "doc": " Z coordinate\n The type is Double"
             }
@@ -266,7 +266,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "19:1-26:14"
       }
     }
   ]

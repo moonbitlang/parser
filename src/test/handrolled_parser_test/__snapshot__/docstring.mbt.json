@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "K",
-        "tycon_loc": null,
+        "tycon_loc": "2:6-2:7",
         "params": [],
         "components": {
           "type": "TypeDesc::Abstract"
@@ -17,7 +17,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "2:1-2:5"
       }
     },
     {
@@ -28,12 +28,12 @@
         "name": {
           "type": "Binder",
           "name": "foo",
-          "loc": null
+          "loc": "5:8-5:11"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "5:11-5:12",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -42,7 +42,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": null
+          "loc": "5:1-4:21"
         },
         "attrs": [],
         "doc": " docs for fn foo"
@@ -52,11 +52,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "6:3-6:4",
           "faked": false
         }
       },
-      "loc": null
+      "loc": "5:1-6:6"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -66,12 +66,12 @@
         "name": {
           "type": "Binder",
           "name": "bar",
-          "loc": null
+          "loc": "11:4-11:7"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "11:7-11:8",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -88,18 +88,18 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "12:3-12:4",
           "faked": false
         }
       },
-      "loc": null
+      "loc": "11:1-12:6"
     },
     {
       "type": "Impl::TopLetDef",
       "binder": {
         "type": "Binder",
         "name": "x",
-        "loc": null
+        "loc": "16:5-16:6"
       },
       "ty": {
         "type": "Type::Name",
@@ -109,10 +109,10 @@
             "type": "LongIdent::Ident",
             "0": "Int"
           },
-          "loc": null
+          "loc": "16:9-16:12"
         },
         "tys": [],
-        "loc": null
+        "loc": "16:9-16:8"
       },
       "expr": {
         "type": "Expr::Constant",
@@ -120,13 +120,13 @@
           "type": "Constant::Int",
           "0": "2"
         },
-        "loc": null
+        "loc": "16:15-16:16"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": null,
+      "loc": "16:1-16:14",
       "attrs": [],
       "doc": " docs for let"
     },
@@ -135,7 +135,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "T",
-        "tycon_loc": null,
+        "tycon_loc": "21:6-21:7",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -145,12 +145,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "A",
-                "loc": null
+                "loc": "22:3-22:4"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "22:3-21:10",
               "doc": ""
             },
             {
@@ -158,7 +158,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "B",
-                "loc": null
+                "loc": "23:3-23:4"
               },
               "args": [
                 {
@@ -171,10 +171,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "23:5-23:8"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "23:5-23:5"
                   },
                   "mut": false,
                   "label": null
@@ -182,7 +182,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "23:3-23:8",
               "doc": ""
             }
           ]
@@ -193,7 +193,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "21:1-23:10"
       }
     },
     {
@@ -201,7 +201,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "U",
-        "tycon_loc": null,
+        "tycon_loc": "27:8-27:9",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -211,7 +211,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "a",
-                "loc": null
+                "loc": "29:3-29:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -221,16 +221,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "29:7-29:10"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "29:7-29:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "29:3-29:6",
               "attrs": [],
               "doc": ""
             },
@@ -239,7 +239,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "b",
-                "loc": null
+                "loc": "31:3-31:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -249,16 +249,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "31:7-31:10"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "31:7-31:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "31:3-31:6",
               "attrs": [],
               "doc": " useless comment\n useless comment\n useless comment"
             }
@@ -270,7 +270,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "27:1-32:23"
       }
     },
     {
@@ -281,12 +281,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "36:4-36:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "36:9-36:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -303,11 +303,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "37:3-37:4",
           "faked": false
         }
       },
-      "loc": null
+      "loc": "36:1-37:6"
     }
   ]
 }

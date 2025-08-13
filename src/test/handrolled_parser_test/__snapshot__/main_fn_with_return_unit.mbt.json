@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "main",
-          "loc": null
+          "loc": "3:4-3:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "3:8-3:9",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -24,10 +24,10 @@
               "type": "LongIdent::Ident",
               "0": "Unit"
             },
-            "loc": null
+            "loc": "3:14-3:18"
           },
           "tys": [],
-          "loc": null
+          "loc": "3:14-3:13"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -51,9 +51,9 @@
                 "type": "LongIdent::Ident",
                 "0": "println"
               },
-              "loc": null
+              "loc": "4:3-3:21"
             },
-            "loc": null
+            "loc": "4:3-3:21"
           },
           "args": [
             {
@@ -64,7 +64,7 @@
                   "type": "Constant::String",
                   "0": "Hello, world!"
                 },
-                "loc": null
+                "loc": "4:11-4:26"
               },
               "kind": {
                 "type": "ArgumentKind::Positional"
@@ -74,10 +74,10 @@
           "attr": {
             "type": "ApplyAttr::NoAttr"
           },
-          "loc": null
+          "loc": "4:3-4:26"
         }
       },
-      "loc": null
+      "loc": "3:1-4:28"
     }
   ]
 }

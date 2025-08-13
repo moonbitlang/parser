@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -33,7 +33,7 @@
           "type": "Expr::Let",
           "pattern": {
             "type": "Pattern::Any",
-            "loc": null
+            "loc": "2:7-2:8"
           },
           "expr": {
             "type": "Expr::Infix",
@@ -43,7 +43,7 @@
                 "type": "LongIdent::Ident",
                 "0": "+"
               },
-              "loc": null
+              "loc": "2:13-2:14"
             },
             "lhs": {
               "type": "Expr::Constant",
@@ -51,26 +51,26 @@
                 "type": "Constant::Int",
                 "0": "1"
               },
-              "loc": null
+              "loc": "2:11-2:12"
             },
             "rhs": {
               "type": "Expr::Hole",
-              "loc": null,
+              "loc": "2:14-3:1",
               "kind": {
                 "type": "Hole::Synthesized"
               }
             },
-            "loc": null
+            "loc": "2:11-3:1"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": null,
+            "loc": "2:3-2:6",
             "faked": true
           },
-          "loc": null
+          "loc": "2:11-3:1"
         }
       },
-      "loc": null
+      "loc": "1:1-2:15"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -80,12 +80,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "5:4-5:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "5:9-5:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -104,7 +104,7 @@
           "type": "Expr::Let",
           "pattern": {
             "type": "Pattern::Any",
-            "loc": null
+            "loc": "6:7-6:8"
           },
           "expr": {
             "type": "Expr::Pipe",
@@ -114,26 +114,26 @@
                 "type": "Constant::Int",
                 "0": "1"
               },
-              "loc": null
+              "loc": "6:11-6:12"
             },
             "rhs": {
               "type": "Expr::Hole",
-              "loc": null,
+              "loc": "6:15-7:1",
               "kind": {
                 "type": "Hole::Synthesized"
               }
             },
-            "loc": null
+            "loc": "6:11-7:1"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": null,
+            "loc": "6:3-6:6",
             "faked": true
           },
-          "loc": null
+          "loc": "6:11-7:1"
         }
       },
-      "loc": null
+      "loc": "5:1-6:16"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -143,12 +143,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "9:4-9:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "9:9-9:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -167,7 +167,7 @@
           "type": "Expr::Let",
           "pattern": {
             "type": "Pattern::Any",
-            "loc": null
+            "loc": "10:7-10:8"
           },
           "expr": {
             "type": "Expr::Apply",
@@ -179,9 +179,9 @@
                   "type": "LongIdent::Ident",
                   "0": "f"
                 },
-                "loc": null
+                "loc": "10:11-10:10"
               },
-              "loc": null
+              "loc": "10:11-10:10"
             },
             "args": [
               {
@@ -192,7 +192,7 @@
                     "type": "Constant::Int",
                     "0": "1"
                   },
-                  "loc": null
+                  "loc": "10:13-10:14"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
@@ -206,7 +206,7 @@
                     "type": "Constant::Int",
                     "0": "2"
                   },
-                  "loc": null
+                  "loc": "10:16-10:17"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
@@ -216,17 +216,17 @@
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": null
+            "loc": "10:11-11:1"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": null,
+            "loc": "10:3-10:6",
             "faked": true
           },
-          "loc": null
+          "loc": "10:11-11:1"
         }
       },
-      "loc": null
+      "loc": "9:1-10:18"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -236,12 +236,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "13:4-13:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "13:9-13:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -267,85 +267,45 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "Failure",
-                  "loc": null
+                  "loc": "14:10-14:10"
                 },
                 "extra_info": {
                   "type": "ConstructorExtraInfo::NoExtraInfo"
                 },
-                "loc": null
+                "loc": "14:10-14:10"
               },
-              "loc": null
+              "loc": "14:10-14:10"
             },
             "group": {
               "type": "Group::Paren"
             },
-            "loc": null
+            "loc": "14:9-14:21"
           },
-          "loc": null
+          "loc": "14:3-14:21"
         }
       },
-      "loc": null
+      "loc": "13:1-14:23"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/error_recovery.mbt",
-        "start": {
-          "line": 3,
-          "column": 1
-        },
-        "end": {
-          "line": 3,
-          "column": 2
-        }
-      },
+      "loc": "3:1-3:2",
       "msg": "Unexpected token `}`, you may expect simple expression."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/error_recovery.mbt",
-        "start": {
-          "line": 7,
-          "column": 1
-        },
-        "end": {
-          "line": 7,
-          "column": 2
-        }
-      },
+      "loc": "7:1-7:2",
       "msg": "Unexpected token `}`, you may expect simple expression."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/error_recovery.mbt",
-        "start": {
-          "line": 11,
-          "column": 1
-        },
-        "end": {
-          "line": 11,
-          "column": 2
-        }
-      },
+      "loc": "11:1-11:2",
       "msg": "Unexpected token `}`, you may expect `,`, `)`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/error_recovery.mbt",
-        "start": {
-          "line": 14,
-          "column": 18
-        },
-        "end": {
-          "line": 14,
-          "column": 21
-        }
-      },
+      "loc": "14:18-14:21",
       "msg": "Unexpected token string, you may expect `,`, `)`."
     }
   ]

@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "2:4-2:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "2:9-2:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -33,7 +33,7 @@
           "type": "Expr::Let",
           "pattern": {
             "type": "Pattern::Any",
-            "loc": null
+            "loc": "3:7-3:8"
           },
           "expr": {
             "type": "Expr::As",
@@ -43,7 +43,7 @@
                 "type": "Constant::Int",
                 "0": "1"
               },
-              "loc": null
+              "loc": "3:11-3:12"
             },
             "trait": {
               "type": "TypeName",
@@ -52,15 +52,15 @@
                 "0": "Show"
               },
               "is_object": false,
-              "loc": null
+              "loc": "3:16-3:15"
             },
-            "loc": null
+            "loc": "3:11-3:15"
           },
           "body": {
             "type": "Expr::Let",
             "pattern": {
               "type": "Pattern::Any",
-              "loc": null
+              "loc": "4:7-4:8"
             },
             "expr": {
               "type": "Expr::Infix",
@@ -70,7 +70,7 @@
                   "type": "LongIdent::Ident",
                   "0": "+"
                 },
-                "loc": null
+                "loc": "4:13-4:14"
               },
               "lhs": {
                 "type": "Expr::Constant",
@@ -78,7 +78,7 @@
                   "type": "Constant::Int",
                   "0": "1"
                 },
-                "loc": null
+                "loc": "4:11-4:12"
               },
               "rhs": {
                 "type": "Expr::As",
@@ -94,33 +94,33 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": null
+                        "loc": "4:15-4:14"
                       },
-                      "loc": null
+                      "loc": "4:15-4:14"
                     },
                     "method_name": {
                       "type": "Label",
                       "name": "f",
-                      "loc": null
+                      "loc": "4:17-4:18"
                     },
                     "args": [],
                     "return_self": false,
                     "attr": {
                       "type": "ApplyAttr::NoAttr"
                     },
-                    "loc": null
+                    "loc": "4:15-4:19"
                   },
                   "method_name": {
                     "type": "Label",
                     "name": "g",
-                    "loc": null
+                    "loc": "4:21-4:22"
                   },
                   "args": [],
                   "return_self": false,
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": null
+                  "loc": "4:15-4:23"
                 },
                 "trait": {
                   "type": "TypeName",
@@ -130,17 +130,17 @@
                     "id": "Trait"
                   },
                   "is_object": false,
-                  "loc": null
+                  "loc": "4:28-4:32"
                 },
-                "loc": null
+                "loc": "4:15-4:32"
               },
-              "loc": null
+              "loc": "4:11-4:32"
             },
             "body": {
               "type": "Expr::Let",
               "pattern": {
                 "type": "Pattern::Any",
-                "loc": null
+                "loc": "5:7-5:8"
               },
               "expr": {
                 "type": "Expr::Infix",
@@ -150,7 +150,7 @@
                     "type": "LongIdent::Ident",
                     "0": "*"
                   },
-                  "loc": null
+                  "loc": "5:21-5:22"
                 },
                 "lhs": {
                   "type": "Expr::As",
@@ -164,9 +164,9 @@
                           "type": "LongIdent::Ident",
                           "0": "f"
                         },
-                        "loc": null
+                        "loc": "5:11-5:10"
                       },
-                      "loc": null
+                      "loc": "5:11-5:10"
                     },
                     "args": [
                       {
@@ -179,9 +179,9 @@
                               "type": "LongIdent::Ident",
                               "0": "x"
                             },
-                            "loc": null
+                            "loc": "5:13-5:13"
                           },
-                          "loc": null
+                          "loc": "5:13-5:13"
                         },
                         "kind": {
                           "type": "ArgumentKind::Positional"
@@ -191,7 +191,7 @@
                     "attr": {
                       "type": "ApplyAttr::NoAttr"
                     },
-                    "loc": null
+                    "loc": "5:11-5:14"
                   },
                   "trait": {
                     "type": "TypeName",
@@ -200,9 +200,9 @@
                       "0": "I"
                     },
                     "is_object": false,
-                    "loc": null
+                    "loc": "5:19-5:18"
                   },
-                  "loc": null
+                  "loc": "5:11-5:18"
                 },
                 "rhs": {
                   "type": "Expr::Constant",
@@ -210,15 +210,15 @@
                     "type": "Constant::Int",
                     "0": "3"
                   },
-                  "loc": null
+                  "loc": "5:23-5:24"
                 },
-                "loc": null
+                "loc": "5:11-5:22"
               },
               "body": {
                 "type": "Expr::Let",
                 "pattern": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "6:7-6:8"
                 },
                 "expr": {
                   "type": "Expr::Apply",
@@ -230,9 +230,9 @@
                         "type": "LongIdent::Ident",
                         "0": "f"
                       },
-                      "loc": null
+                      "loc": "6:11-6:10"
                     },
-                    "loc": null
+                    "loc": "6:11-6:10"
                   },
                   "args": [
                     {
@@ -245,7 +245,7 @@
                             "type": "Constant::Int",
                             "0": "1"
                           },
-                          "loc": null
+                          "loc": "6:13-6:14"
                         },
                         "trait": {
                           "type": "TypeName",
@@ -254,9 +254,9 @@
                             "0": "Show"
                           },
                           "is_object": false,
-                          "loc": null
+                          "loc": "6:18-6:17"
                         },
-                        "loc": null
+                        "loc": "6:13-6:17"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -272,7 +272,7 @@
                             "type": "Constant::Int",
                             "0": "2"
                           },
-                          "loc": null
+                          "loc": "6:24-6:25"
                         },
                         "trait": {
                           "type": "TypeName",
@@ -281,9 +281,9 @@
                             "0": "Hash"
                           },
                           "is_object": false,
-                          "loc": null
+                          "loc": "6:29-6:28"
                         },
-                        "loc": null
+                        "loc": "6:24-6:28"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -293,13 +293,13 @@
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": null
+                  "loc": "6:11-6:33"
                 },
                 "body": {
                   "type": "Expr::Let",
                   "pattern": {
                     "type": "Pattern::Any",
-                    "loc": null
+                    "loc": "8:7-8:8"
                   },
                   "expr": {
                     "type": "Expr::As",
@@ -309,7 +309,7 @@
                         "type": "Constant::Int",
                         "0": "1"
                       },
-                      "loc": null
+                      "loc": "8:11-8:12"
                     },
                     "trait": {
                       "type": "TypeName",
@@ -318,15 +318,15 @@
                         "0": "Show"
                       },
                       "is_object": false,
-                      "loc": null
+                      "loc": "8:16-8:15"
                     },
-                    "loc": null
+                    "loc": "8:11-8:15"
                   },
                   "body": {
                     "type": "Expr::Let",
                     "pattern": {
                       "type": "Pattern::Any",
-                      "loc": null
+                      "loc": "9:7-9:8"
                     },
                     "expr": {
                       "type": "Expr::As",
@@ -336,7 +336,7 @@
                           "type": "Constant::Int",
                           "0": "1"
                         },
-                        "loc": null
+                        "loc": "9:11-9:12"
                       },
                       "trait": {
                         "type": "TypeName",
@@ -345,15 +345,15 @@
                           "0": "Show"
                         },
                         "is_object": false,
-                        "loc": null
+                        "loc": "9:16-9:15"
                       },
-                      "loc": null
+                      "loc": "9:11-9:15"
                     },
                     "body": {
                       "type": "Expr::Let",
                       "pattern": {
                         "type": "Pattern::Any",
-                        "loc": null
+                        "loc": "10:7-10:8"
                       },
                       "expr": {
                         "type": "Expr::As",
@@ -363,7 +363,7 @@
                             "type": "Constant::Int",
                             "0": "1"
                           },
-                          "loc": null
+                          "loc": "10:11-10:12"
                         },
                         "trait": {
                           "type": "TypeName",
@@ -372,15 +372,15 @@
                             "0": "Show"
                           },
                           "is_object": false,
-                          "loc": null
+                          "loc": "10:16-10:15"
                         },
-                        "loc": null
+                        "loc": "10:11-10:15"
                       },
                       "body": {
                         "type": "Expr::Let",
                         "pattern": {
                           "type": "Pattern::Any",
-                          "loc": null
+                          "loc": "11:7-11:8"
                         },
                         "expr": {
                           "type": "Expr::As",
@@ -390,7 +390,7 @@
                               "type": "Constant::Int",
                               "0": "1"
                             },
-                            "loc": null
+                            "loc": "11:11-11:12"
                           },
                           "trait": {
                             "type": "TypeName",
@@ -399,15 +399,15 @@
                               "0": "Show"
                             },
                             "is_object": false,
-                            "loc": null
+                            "loc": "11:16-11:15"
                           },
-                          "loc": null
+                          "loc": "11:11-11:15"
                         },
                         "body": {
                           "type": "Expr::Let",
                           "pattern": {
                             "type": "Pattern::Any",
-                            "loc": null
+                            "loc": "13:7-13:8"
                           },
                           "expr": {
                             "type": "Expr::DotApply",
@@ -421,7 +421,7 @@
                                     "type": "Constant::Int",
                                     "0": "1"
                                   },
-                                  "loc": null
+                                  "loc": "13:12-13:13"
                                 },
                                 "trait": {
                                   "type": "TypeName",
@@ -430,32 +430,32 @@
                                     "0": "Show"
                                   },
                                   "is_object": false,
-                                  "loc": null
+                                  "loc": "13:17-13:16"
                                 },
-                                "loc": null
+                                "loc": "13:12-13:16"
                               },
                               "group": {
                                 "type": "Group::Paren"
                               },
-                              "loc": null
+                              "loc": "13:11-13:21"
                             },
                             "method_name": {
                               "type": "Label",
                               "name": "f",
-                              "loc": null
+                              "loc": "13:23-13:24"
                             },
                             "args": [],
                             "return_self": false,
                             "attr": {
                               "type": "ApplyAttr::NoAttr"
                             },
-                            "loc": null
+                            "loc": "13:23-13:25"
                           },
                           "body": {
                             "type": "Expr::Let",
                             "pattern": {
                               "type": "Pattern::Any",
-                              "loc": null
+                              "loc": "14:7-14:8"
                             },
                             "expr": {
                               "type": "Expr::As",
@@ -469,7 +469,7 @@
                                       "type": "Constant::Int",
                                       "0": "1"
                                     },
-                                    "loc": null
+                                    "loc": "14:12-14:13"
                                   },
                                   "trait": {
                                     "type": "TypeName",
@@ -478,14 +478,14 @@
                                       "0": "Show"
                                     },
                                     "is_object": false,
-                                    "loc": null
+                                    "loc": "14:17-14:16"
                                   },
-                                  "loc": null
+                                  "loc": "14:12-14:16"
                                 },
                                 "group": {
                                   "type": "Group::Paren"
                                 },
-                                "loc": null
+                                "loc": "14:11-14:21"
                               },
                               "trait": {
                                 "type": "TypeName",
@@ -494,15 +494,15 @@
                                   "0": "Show"
                                 },
                                 "is_object": false,
-                                "loc": null
+                                "loc": "14:26-14:25"
                               },
-                              "loc": null
+                              "loc": "14:11-14:25"
                             },
                             "body": {
                               "type": "Expr::Let",
                               "pattern": {
                                 "type": "Pattern::Any",
-                                "loc": null
+                                "loc": "15:7-15:8"
                               },
                               "expr": {
                                 "type": "Expr::Apply",
@@ -516,7 +516,7 @@
                                         "type": "Constant::Int",
                                         "0": "1"
                                       },
-                                      "loc": null
+                                      "loc": "15:12-15:13"
                                     },
                                     "trait": {
                                       "type": "TypeName",
@@ -525,14 +525,14 @@
                                         "0": "Show"
                                       },
                                       "is_object": false,
-                                      "loc": null
+                                      "loc": "15:17-15:16"
                                     },
-                                    "loc": null
+                                    "loc": "15:12-15:16"
                                   },
                                   "group": {
                                     "type": "Group::Paren"
                                   },
-                                  "loc": null
+                                  "loc": "15:11-15:21"
                                 },
                                 "args": [
                                   {
@@ -545,9 +545,9 @@
                                           "type": "LongIdent::Ident",
                                           "0": "x"
                                         },
-                                        "loc": null
+                                        "loc": "15:23-15:23"
                                       },
-                                      "loc": null
+                                      "loc": "15:23-15:23"
                                     },
                                     "kind": {
                                       "type": "ArgumentKind::Positional"
@@ -557,13 +557,13 @@
                                 "attr": {
                                   "type": "ApplyAttr::NoAttr"
                                 },
-                                "loc": null
+                                "loc": "15:22-15:24"
                               },
                               "body": {
                                 "type": "Expr::Let",
                                 "pattern": {
                                   "type": "Pattern::Any",
-                                  "loc": null
+                                  "loc": "16:7-16:8"
                                 },
                                 "expr": {
                                   "type": "Expr::Apply",
@@ -577,7 +577,7 @@
                                           "type": "Constant::Int",
                                           "0": "1"
                                         },
-                                        "loc": null
+                                        "loc": "16:12-16:13"
                                       },
                                       "trait": {
                                         "type": "TypeName",
@@ -586,26 +586,26 @@
                                           "0": "Show"
                                         },
                                         "is_object": false,
-                                        "loc": null
+                                        "loc": "16:17-16:16"
                                       },
-                                      "loc": null
+                                      "loc": "16:12-16:16"
                                     },
                                     "group": {
                                       "type": "Group::Paren"
                                     },
-                                    "loc": null
+                                    "loc": "16:11-16:21"
                                   },
                                   "args": [],
                                   "attr": {
                                     "type": "ApplyAttr::Question"
                                   },
-                                  "loc": null
+                                  "loc": "16:22-16:23"
                                 },
                                 "body": {
                                   "type": "Expr::Let",
                                   "pattern": {
                                     "type": "Pattern::Any",
-                                    "loc": null
+                                    "loc": "18:7-18:8"
                                   },
                                   "expr": {
                                     "type": "Expr::Infix",
@@ -615,7 +615,7 @@
                                         "type": "LongIdent::Ident",
                                         "0": "+"
                                       },
-                                      "loc": null
+                                      "loc": "18:21-18:22"
                                     },
                                     "lhs": {
                                       "type": "Expr::As",
@@ -625,7 +625,7 @@
                                           "type": "Constant::Int",
                                           "0": "1"
                                         },
-                                        "loc": null
+                                        "loc": "18:11-18:12"
                                       },
                                       "trait": {
                                         "type": "TypeName",
@@ -634,9 +634,9 @@
                                           "0": "Show"
                                         },
                                         "is_object": false,
-                                        "loc": null
+                                        "loc": "18:16-18:15"
                                       },
-                                      "loc": null
+                                      "loc": "18:11-18:15"
                                     },
                                     "rhs": {
                                       "type": "Expr::Constr",
@@ -645,22 +645,22 @@
                                         "name": {
                                           "type": "ConstrName",
                                           "name": "Debug",
-                                          "loc": null
+                                          "loc": "18:23-18:22"
                                         },
                                         "extra_info": {
                                           "type": "ConstructorExtraInfo::NoExtraInfo"
                                         },
-                                        "loc": null
+                                        "loc": "18:23-18:22"
                                       },
-                                      "loc": null
+                                      "loc": "18:23-18:22"
                                     },
-                                    "loc": null
+                                    "loc": "18:11-18:22"
                                   },
                                   "body": {
                                     "type": "Expr::Let",
                                     "pattern": {
                                       "type": "Pattern::Any",
-                                      "loc": null
+                                      "loc": "19:7-19:8"
                                     },
                                     "expr": {
                                       "type": "Expr::Infix",
@@ -670,7 +670,7 @@
                                           "type": "LongIdent::Ident",
                                           "0": "+"
                                         },
-                                        "loc": null
+                                        "loc": "19:21-19:22"
                                       },
                                       "lhs": {
                                         "type": "Expr::As",
@@ -680,7 +680,7 @@
                                             "type": "Constant::Int",
                                             "0": "1"
                                           },
-                                          "loc": null
+                                          "loc": "19:11-19:12"
                                         },
                                         "trait": {
                                           "type": "TypeName",
@@ -689,9 +689,9 @@
                                             "0": "Show"
                                           },
                                           "is_object": false,
-                                          "loc": null
+                                          "loc": "19:16-19:15"
                                         },
-                                        "loc": null
+                                        "loc": "19:11-19:15"
                                       },
                                       "rhs": {
                                         "type": "Expr::Constant",
@@ -699,15 +699,15 @@
                                           "type": "Constant::Int",
                                           "0": "1"
                                         },
-                                        "loc": null
+                                        "loc": "19:23-19:24"
                                       },
-                                      "loc": null
+                                      "loc": "19:11-19:22"
                                     },
                                     "body": {
                                       "type": "Expr::Let",
                                       "pattern": {
                                         "type": "Pattern::Any",
-                                        "loc": null
+                                        "loc": "20:7-20:8"
                                       },
                                       "expr": {
                                         "type": "Expr::Infix",
@@ -717,7 +717,7 @@
                                             "type": "LongIdent::Ident",
                                             "0": "+"
                                           },
-                                          "loc": null
+                                          "loc": "20:23-20:24"
                                         },
                                         "lhs": {
                                           "type": "Expr::Group",
@@ -729,7 +729,7 @@
                                                 "type": "Constant::Int",
                                                 "0": "1"
                                               },
-                                              "loc": null
+                                              "loc": "20:12-20:13"
                                             },
                                             "trait": {
                                               "type": "TypeName",
@@ -738,14 +738,14 @@
                                                 "0": "Show"
                                               },
                                               "is_object": false,
-                                              "loc": null
+                                              "loc": "20:17-20:16"
                                             },
-                                            "loc": null
+                                            "loc": "20:12-20:16"
                                           },
                                           "group": {
                                             "type": "Group::Paren"
                                           },
-                                          "loc": null
+                                          "loc": "20:11-20:21"
                                         },
                                         "rhs": {
                                           "type": "Expr::Constant",
@@ -753,47 +753,47 @@
                                             "type": "Constant::Int",
                                             "0": "1"
                                           },
-                                          "loc": null
+                                          "loc": "20:25-20:26"
                                         },
-                                        "loc": null
+                                        "loc": "20:11-20:24"
                                       },
                                       "body": {
                                         "type": "Expr::Unit",
-                                        "loc": null,
+                                        "loc": "20:3-20:6",
                                         "faked": true
                                       },
-                                      "loc": null
+                                      "loc": "20:11-20:24"
                                     },
-                                    "loc": null
+                                    "loc": "19:11-19:22"
                                   },
-                                  "loc": null
+                                  "loc": "18:11-18:22"
                                 },
-                                "loc": null
+                                "loc": "16:22-16:23"
                               },
-                              "loc": null
+                              "loc": "15:22-15:24"
                             },
-                            "loc": null
+                            "loc": "14:11-14:25"
                           },
-                          "loc": null
+                          "loc": "13:23-13:25"
                         },
-                        "loc": null
+                        "loc": "11:11-11:15"
                       },
-                      "loc": null
+                      "loc": "10:11-10:15"
                     },
-                    "loc": null
+                    "loc": "9:11-9:15"
                   },
-                  "loc": null
+                  "loc": "8:11-8:15"
                 },
-                "loc": null
+                "loc": "6:11-6:33"
               },
-              "loc": null
+              "loc": "5:11-5:22"
             },
-            "loc": null
+            "loc": "4:11-4:32"
           },
-          "loc": null
+          "loc": "3:11-3:15"
         }
       },
-      "loc": null
+      "loc": "2:1-20:35"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -803,7 +803,7 @@
         "name": {
           "type": "Binder",
           "name": "use_object",
-          "loc": null
+          "loc": "23:4-23:14"
         },
         "has_error": null,
         "is_async": false,
@@ -813,7 +813,7 @@
             "binder": {
               "type": "Binder",
               "name": "obj",
-              "loc": null
+              "loc": "23:15-23:18"
             },
             "ty": {
               "type": "Type::Object",
@@ -824,12 +824,12 @@
                   "pkg": "builtin",
                   "id": "Show"
                 },
-                "loc": null
+                "loc": "23:22-23:30"
               }
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "23:14-23:35",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Object",
@@ -839,7 +839,7 @@
               "type": "LongIdent::Ident",
               "0": "Show"
             },
-            "loc": null
+            "loc": "23:41-23:41"
           }
         },
         "error_type": {
@@ -862,12 +862,12 @@
               "type": "LongIdent::Ident",
               "0": "obj"
             },
-            "loc": null
+            "loc": "23:48-23:47"
           },
-          "loc": null
+          "loc": "23:48-23:47"
         }
       },
-      "loc": null
+      "loc": "23:1-23:51"
     },
     {
       "type": "Impl::TopTrait",
@@ -876,14 +876,14 @@
         "name": {
           "type": "Binder",
           "name": "I",
-          "loc": null
+          "loc": "25:7-25:8"
         },
         "supers": [],
         "methods": [],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": null,
+        "loc": "25:1-25:10",
         "attrs": [],
         "doc": ""
       }
@@ -899,17 +899,17 @@
             "0": "I"
           },
           "is_object": true,
-          "loc": null
+          "loc": "27:4-27:5"
         },
         "name": {
           "type": "Binder",
           "name": "meth",
-          "loc": null
+          "loc": "27:8-27:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "27:12-27:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -919,10 +919,10 @@
               "type": "LongIdent::Ident",
               "0": "Unit"
             },
-            "loc": null
+            "loc": "27:18-27:22"
           },
           "tys": [],
-          "loc": null
+          "loc": "27:18-27:17"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -938,11 +938,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "27:23-27:24",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "27:1-27:24"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -952,12 +952,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "29:4-29:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "29:9-29:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -983,99 +983,49 @@
                 "0": "I"
               },
               "is_object": true,
-              "loc": null
+              "loc": "30:3-30:4"
             },
             "method_name": {
               "type": "Label",
               "name": "meth",
-              "loc": null
+              "loc": "30:7-30:11"
             },
-            "loc": null
+            "loc": "30:3-30:7"
           },
           "args": [],
           "attr": {
             "type": "ApplyAttr::NoAttr"
           },
-          "loc": null
+          "loc": "30:3-30:12"
         }
       },
-      "loc": null
+      "loc": "29:1-30:14"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/trait_object.mbt",
-        "start": {
-          "line": 8,
-          "column": 21
-        },
-        "end": {
-          "line": 8,
-          "column": 22
-        }
-      },
+      "loc": "8:21-8:22",
       "msg": "Unexpected token `.id` (lowercase start), you may expect `;`, `}`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/trait_object.mbt",
-        "start": {
-          "line": 9,
-          "column": 21
-        },
-        "end": {
-          "line": 9,
-          "column": 23
-        }
-      },
+      "loc": "9:21-9:23",
       "msg": "Unexpected token `as`, you may expect `;`, `}`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/trait_object.mbt",
-        "start": {
-          "line": 10,
-          "column": 20
-        },
-        "end": {
-          "line": 10,
-          "column": 21
-        }
-      },
+      "loc": "10:20-10:21",
       "msg": "Unexpected token `(`, you may expect `;`, `}`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/trait_object.mbt",
-        "start": {
-          "line": 11,
-          "column": 20
-        },
-        "end": {
-          "line": 11,
-          "column": 21
-        }
-      },
+      "loc": "11:20-11:21",
       "msg": "Unexpected token `?`, you may expect `;`, `}`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/trait_object.mbt",
-        "start": {
-          "line": 16,
-          "column": 23
-        },
-        "end": {
-          "line": 16,
-          "column": 23
-        }
-      },
+      "loc": "16:23-16:23",
       "msg": "Unexpected line break here, missing `(` at the end of this line."
     }
   ]

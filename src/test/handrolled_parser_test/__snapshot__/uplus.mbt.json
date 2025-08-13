@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -36,7 +36,7 @@
             "0": {
               "type": "Binder",
               "name": "a",
-              "loc": null
+              "loc": "2:7-2:8"
             }
           },
           "expr": {
@@ -45,7 +45,7 @@
               "type": "Constant::Int",
               "0": "100"
             },
-            "loc": null
+            "loc": "2:13-2:16"
           },
           "body": {
             "type": "Expr::Let",
@@ -54,7 +54,7 @@
               "0": {
                 "type": "Binder",
                 "name": "b",
-                "loc": null
+                "loc": "3:7-3:8"
               }
             },
             "expr": {
@@ -63,7 +63,7 @@
                 "type": "Constant::Double",
                 "0": "3.14"
               },
-              "loc": null
+              "loc": "3:13-3:17"
             },
             "body": {
               "type": "Expr::Let",
@@ -72,7 +72,7 @@
                 "0": {
                   "type": "Binder",
                   "name": "c",
-                  "loc": null
+                  "loc": "4:7-4:8"
                 }
               },
               "expr": {
@@ -85,9 +85,9 @@
                       "type": "LongIdent::Ident",
                       "0": "~+"
                     },
-                    "loc": null
+                    "loc": "4:11-4:12"
                   },
-                  "loc": null
+                  "loc": "4:11-4:12"
                 },
                 "args": [
                   {
@@ -100,9 +100,9 @@
                           "type": "LongIdent::Ident",
                           "0": "a"
                         },
-                        "loc": null
+                        "loc": "4:13-4:12"
                       },
-                      "loc": null
+                      "loc": "4:13-4:12"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -112,21 +112,21 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "4:11-4:12"
               },
               "body": {
                 "type": "Expr::Unit",
-                "loc": null,
+                "loc": "4:3-4:6",
                 "faked": true
               },
-              "loc": null
+              "loc": "4:11-4:12"
             },
-            "loc": null
+            "loc": "3:13-3:17"
           },
-          "loc": null
+          "loc": "2:13-2:16"
         }
       },
-      "loc": null
+      "loc": "1:1-4:15"
     }
   ]
 }

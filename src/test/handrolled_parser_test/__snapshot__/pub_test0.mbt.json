@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "hello",
-          "loc": null
+          "loc": "1:8-1:13"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "1:13-1:14",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -23,7 +23,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": null
+          "loc": "1:1-1:4"
         },
         "attrs": [],
         "doc": ""
@@ -41,9 +41,9 @@
                 "type": "LongIdent::Ident",
                 "0": "println"
               },
-              "loc": null
+              "loc": "2:3-1:18"
             },
-            "loc": null
+            "loc": "2:3-1:18"
           },
           "args": [
             {
@@ -54,7 +54,7 @@
                   "type": "Constant::String",
                   "0": "Hello, World!"
                 },
-                "loc": null
+                "loc": "2:11-2:26"
               },
               "kind": {
                 "type": "ArgumentKind::Positional"
@@ -64,10 +64,10 @@
           "attr": {
             "type": "ApplyAttr::NoAttr"
           },
-          "loc": null
+          "loc": "2:3-2:26"
         }
       },
-      "loc": null
+      "loc": "1:1-2:28"
     }
   ]
 }

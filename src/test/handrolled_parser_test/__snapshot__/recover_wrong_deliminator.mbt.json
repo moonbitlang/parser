@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "SyntaxErrorEnum",
-        "tycon_loc": null,
+        "tycon_loc": "5:6-5:21",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -16,7 +16,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Constr1",
-                "loc": null
+                "loc": "6:3-6:10"
               },
               "args": [
                 {
@@ -29,10 +29,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "6:11-6:14"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "6:11-6:11"
                   },
                   "mut": false,
                   "label": null
@@ -47,10 +47,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Bool"
                       },
-                      "loc": null
+                      "loc": "6:16-6:20"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "6:16-6:15"
                   },
                   "mut": false,
                   "label": null
@@ -58,7 +58,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "6:3-6:20",
               "doc": ""
             },
             {
@@ -66,12 +66,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Constr2",
-                "loc": null
+                "loc": "7:3-7:10"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "7:3-6:23",
               "doc": ""
             },
             {
@@ -79,12 +79,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Constr3",
-                "loc": null
+                "loc": "8:3-8:10"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "8:3-7:12",
               "doc": ""
             }
           ]
@@ -95,7 +95,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "5:1-8:11"
       }
     },
     {
@@ -103,7 +103,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "SyntaxErrorEnum2",
-        "tycon_loc": null,
+        "tycon_loc": "11:6-11:22",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -113,7 +113,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Constr1",
-                "loc": null
+                "loc": "12:3-12:10"
               },
               "args": [
                 {
@@ -126,10 +126,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "12:11-12:14"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "12:11-12:11"
                   },
                   "mut": false,
                   "label": null
@@ -144,10 +144,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Bool"
                       },
-                      "loc": null
+                      "loc": "12:16-12:20"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "12:16-12:15"
                   },
                   "mut": false,
                   "label": null
@@ -155,7 +155,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "12:3-12:20",
               "doc": ""
             },
             {
@@ -163,12 +163,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Constr2",
-                "loc": null
+                "loc": "13:3-13:10"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "13:3-12:23",
               "doc": ""
             },
             {
@@ -176,12 +176,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Constr3",
-                "loc": null
+                "loc": "14:3-14:10"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "14:3-13:12",
               "doc": ""
             }
           ]
@@ -192,7 +192,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "11:1-14:12"
       }
     },
     {
@@ -200,7 +200,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "SyntaxErrorStruct",
-        "tycon_loc": null,
+        "tycon_loc": "17:8-17:25",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -210,7 +210,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "field1",
-                "loc": null
+                "loc": "18:3-18:9"
               },
               "ty": {
                 "type": "Type::Name",
@@ -220,16 +220,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "18:12-18:15"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "18:12-18:11"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "18:3-18:11",
               "attrs": [],
               "doc": ""
             },
@@ -238,7 +238,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "field2",
-                "loc": null
+                "loc": "19:3-19:9"
               },
               "ty": {
                 "type": "Type::Name",
@@ -248,16 +248,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Bool"
                   },
-                  "loc": null
+                  "loc": "19:12-19:16"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "19:12-19:11"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "19:3-19:11",
               "attrs": [],
               "doc": ""
             },
@@ -266,7 +266,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "field3",
-                "loc": null
+                "loc": "20:3-20:9"
               },
               "ty": {
                 "type": "Type::Tuple",
@@ -279,10 +279,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "20:13-20:16"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "20:13-20:13"
                   },
                   {
                     "type": "Type::Name",
@@ -292,19 +292,19 @@
                         "type": "LongIdent::Ident",
                         "0": "Bool"
                       },
-                      "loc": null
+                      "loc": "20:18-20:22"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "20:18-20:17"
                   }
                 ],
-                "loc": null
+                "loc": "20:12-20:22"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "20:3-20:22",
               "attrs": [],
               "doc": ""
             }
@@ -316,7 +316,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "17:1-20:26"
       }
     },
     {
@@ -324,7 +324,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "SyntaxErrorStruct2",
-        "tycon_loc": null,
+        "tycon_loc": "23:8-23:26",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -334,7 +334,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "field1",
-                "loc": null
+                "loc": "24:3-24:9"
               },
               "ty": {
                 "type": "Type::Name",
@@ -344,16 +344,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "24:12-24:15"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "24:12-24:11"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "24:3-24:11",
               "attrs": [],
               "doc": ""
             },
@@ -362,7 +362,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "field2",
-                "loc": null
+                "loc": "25:3-25:9"
               },
               "ty": {
                 "type": "Type::Name",
@@ -372,16 +372,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Bool"
                   },
-                  "loc": null
+                  "loc": "25:12-25:16"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "25:12-25:11"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "25:3-25:11",
               "attrs": [],
               "doc": ""
             },
@@ -390,7 +390,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "field3",
-                "loc": null
+                "loc": "26:3-26:9"
               },
               "ty": {
                 "type": "Type::Tuple",
@@ -403,10 +403,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "26:13-26:16"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "26:13-26:13"
                   },
                   {
                     "type": "Type::Name",
@@ -416,19 +416,19 @@
                         "type": "LongIdent::Ident",
                         "0": "Bool"
                       },
-                      "loc": null
+                      "loc": "26:18-26:22"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "26:18-26:17"
                   }
                 ],
-                "loc": null
+                "loc": "26:12-26:22"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "26:3-26:22",
               "attrs": [],
               "doc": ""
             }
@@ -440,7 +440,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "23:1-26:26"
       }
     },
     {
@@ -448,7 +448,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "SyntaxErrorErr",
-        "tycon_loc": null,
+        "tycon_loc": "29:10-29:24",
         "params": [],
         "components": {
           "type": "TypeDesc::Error",
@@ -460,12 +460,12 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "Error1",
-                  "loc": null
+                  "loc": "30:3-30:9"
                 },
                 "args": null,
                 "tag": null,
                 "attrs": [],
-                "loc": null,
+                "loc": "30:3-29:27",
                 "doc": ""
               },
               {
@@ -473,7 +473,7 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "Error2",
-                  "loc": null
+                  "loc": "31:3-31:9"
                 },
                 "args": [
                   {
@@ -486,10 +486,10 @@
                           "type": "LongIdent::Ident",
                           "0": "Int"
                         },
-                        "loc": null
+                        "loc": "31:10-31:13"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "31:10-31:10"
                     },
                     "mut": false,
                     "label": null
@@ -504,10 +504,10 @@
                           "type": "LongIdent::Ident",
                           "0": "Bool"
                         },
-                        "loc": null
+                        "loc": "31:15-31:19"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "31:15-31:14"
                     },
                     "mut": false,
                     "label": null
@@ -515,7 +515,7 @@
                 ],
                 "tag": null,
                 "attrs": [],
-                "loc": null,
+                "loc": "31:3-31:19",
                 "doc": ""
               }
             ]
@@ -527,7 +527,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "29:1-31:21"
       }
     },
     {
@@ -535,7 +535,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "SyntaxErrorErr",
-        "tycon_loc": null,
+        "tycon_loc": "34:10-34:24",
         "params": [],
         "components": {
           "type": "TypeDesc::Error",
@@ -547,12 +547,12 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "Error1",
-                  "loc": null
+                  "loc": "35:3-35:9"
                 },
                 "args": null,
                 "tag": null,
                 "attrs": [],
-                "loc": null,
+                "loc": "35:3-34:27",
                 "doc": ""
               },
               {
@@ -560,7 +560,7 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "Error2",
-                  "loc": null
+                  "loc": "36:3-36:9"
                 },
                 "args": [
                   {
@@ -573,10 +573,10 @@
                           "type": "LongIdent::Ident",
                           "0": "Int"
                         },
-                        "loc": null
+                        "loc": "36:10-36:13"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "36:10-36:10"
                     },
                     "mut": false,
                     "label": null
@@ -591,10 +591,10 @@
                           "type": "LongIdent::Ident",
                           "0": "Bool"
                         },
-                        "loc": null
+                        "loc": "36:15-36:19"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "36:15-36:14"
                     },
                     "mut": false,
                     "label": null
@@ -602,7 +602,7 @@
                 ],
                 "tag": null,
                 "attrs": [],
-                "loc": null,
+                "loc": "36:3-36:19",
                 "doc": ""
               }
             ]
@@ -614,7 +614,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "34:1-36:22"
       }
     },
     {
@@ -625,12 +625,12 @@
         "name": {
           "type": "Binder",
           "name": "main",
-          "loc": null
+          "loc": "39:4-39:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "39:9-39:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -656,7 +656,7 @@
                   "type": "Constant::Int",
                   "0": "5"
                 },
-                "loc": null
+                "loc": "40:9-40:10"
               },
               "cases": [
                 {
@@ -667,7 +667,7 @@
                       "type": "Constant::Int",
                       "0": "1"
                     },
-                    "loc": null
+                    "loc": "41:5-41:6"
                   },
                   "guard": null,
                   "body": {
@@ -680,9 +680,9 @@
                           "type": "LongIdent::Ident",
                           "0": "println"
                         },
-                        "loc": null
+                        "loc": "41:10-41:9"
                       },
-                      "loc": null
+                      "loc": "41:10-41:9"
                     },
                     "args": [
                       {
@@ -693,7 +693,7 @@
                             "type": "Constant::String",
                             "0": "1"
                           },
-                          "loc": null
+                          "loc": "41:18-41:21"
                         },
                         "kind": {
                           "type": "ArgumentKind::Positional"
@@ -703,7 +703,7 @@
                     "attr": {
                       "type": "ApplyAttr::NoAttr"
                     },
-                    "loc": null
+                    "loc": "41:10-41:21"
                   }
                 },
                 {
@@ -714,7 +714,7 @@
                       "type": "Constant::Int",
                       "0": "2"
                     },
-                    "loc": null
+                    "loc": "42:5-42:6"
                   },
                   "guard": null,
                   "body": {
@@ -727,9 +727,9 @@
                           "type": "LongIdent::Ident",
                           "0": "println"
                         },
-                        "loc": null
+                        "loc": "42:10-42:9"
                       },
-                      "loc": null
+                      "loc": "42:10-42:9"
                     },
                     "args": [
                       {
@@ -740,7 +740,7 @@
                             "type": "Constant::String",
                             "0": "2"
                           },
-                          "loc": null
+                          "loc": "42:18-42:21"
                         },
                         "kind": {
                           "type": "ArgumentKind::Positional"
@@ -750,7 +750,7 @@
                     "attr": {
                       "type": "ApplyAttr::NoAttr"
                     },
-                    "loc": null
+                    "loc": "42:10-42:21"
                   }
                 },
                 {
@@ -761,7 +761,7 @@
                       "type": "Constant::Int",
                       "0": "3"
                     },
-                    "loc": null
+                    "loc": "43:5-43:6"
                   },
                   "guard": null,
                   "body": {
@@ -774,9 +774,9 @@
                           "type": "LongIdent::Ident",
                           "0": "println"
                         },
-                        "loc": null
+                        "loc": "43:10-43:9"
                       },
-                      "loc": null
+                      "loc": "43:10-43:9"
                     },
                     "args": [
                       {
@@ -787,7 +787,7 @@
                             "type": "Constant::String",
                             "0": "3"
                           },
-                          "loc": null
+                          "loc": "43:18-43:21"
                         },
                         "kind": {
                           "type": "ArgumentKind::Positional"
@@ -797,13 +797,13 @@
                     "attr": {
                       "type": "ApplyAttr::NoAttr"
                     },
-                    "loc": null
+                    "loc": "43:10-43:21"
                   }
                 }
               ],
-              "match_loc": null,
+              "match_loc": "40:3-40:12",
               "using": null,
-              "loc": null
+              "loc": "40:3-43:23"
             }
           ],
           "last_expr": {
@@ -814,7 +814,7 @@
                 "type": "Constant::Int",
                 "0": "6"
               },
-              "loc": null
+              "loc": "45:9-45:10"
             },
             "cases": [
               {
@@ -825,7 +825,7 @@
                     "type": "Constant::Int",
                     "0": "1"
                   },
-                  "loc": null
+                  "loc": "46:5-46:6"
                 },
                 "guard": null,
                 "body": {
@@ -838,9 +838,9 @@
                         "type": "LongIdent::Ident",
                         "0": "println"
                       },
-                      "loc": null
+                      "loc": "46:10-46:9"
                     },
-                    "loc": null
+                    "loc": "46:10-46:9"
                   },
                   "args": [
                     {
@@ -851,7 +851,7 @@
                           "type": "Constant::String",
                           "0": "1"
                         },
-                        "loc": null
+                        "loc": "46:18-46:21"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -861,7 +861,7 @@
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": null
+                  "loc": "46:10-46:21"
                 }
               },
               {
@@ -872,7 +872,7 @@
                     "type": "Constant::Int",
                     "0": "2"
                   },
-                  "loc": null
+                  "loc": "47:5-47:6"
                 },
                 "guard": null,
                 "body": {
@@ -885,9 +885,9 @@
                         "type": "LongIdent::Ident",
                         "0": "println"
                       },
-                      "loc": null
+                      "loc": "47:10-47:9"
                     },
-                    "loc": null
+                    "loc": "47:10-47:9"
                   },
                   "args": [
                     {
@@ -898,7 +898,7 @@
                           "type": "Constant::String",
                           "0": "2"
                         },
-                        "loc": null
+                        "loc": "47:18-47:21"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -908,7 +908,7 @@
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": null
+                  "loc": "47:10-47:21"
                 }
               },
               {
@@ -919,7 +919,7 @@
                     "type": "Constant::Int",
                     "0": "3"
                   },
-                  "loc": null
+                  "loc": "48:5-48:6"
                 },
                 "guard": null,
                 "body": {
@@ -932,9 +932,9 @@
                         "type": "LongIdent::Ident",
                         "0": "println"
                       },
-                      "loc": null
+                      "loc": "48:10-48:9"
                     },
-                    "loc": null
+                    "loc": "48:10-48:9"
                   },
                   "args": [
                     {
@@ -945,7 +945,7 @@
                           "type": "Constant::String",
                           "0": "3"
                         },
-                        "loc": null
+                        "loc": "48:18-48:21"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -955,274 +955,104 @@
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": null
+                  "loc": "48:10-48:21"
                 }
               }
             ],
-            "match_loc": null,
+            "match_loc": "45:3-45:12",
             "using": null,
-            "loc": null
+            "loc": "45:3-48:24"
           },
-          "loc": null
+          "loc": "40:3-48:24"
         }
       },
-      "loc": null
+      "loc": "39:1-49:5"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 6,
-          "column": 21
-        },
-        "end": {
-          "line": 6,
-          "column": 22
-        }
-      },
+      "loc": "6:21-6:22",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 7,
-          "column": 10
-        },
-        "end": {
-          "line": 7,
-          "column": 11
-        }
-      },
+      "loc": "7:10-7:11",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 12,
-          "column": 21
-        },
-        "end": {
-          "line": 12,
-          "column": 22
-        }
-      },
+      "loc": "12:21-12:22",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 13,
-          "column": 10
-        },
-        "end": {
-          "line": 13,
-          "column": 11
-        }
-      },
+      "loc": "13:10-13:11",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 14,
-          "column": 10
-        },
-        "end": {
-          "line": 14,
-          "column": 11
-        }
-      },
+      "loc": "14:10-14:11",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 18,
-          "column": 15
-        },
-        "end": {
-          "line": 18,
-          "column": 16
-        }
-      },
+      "loc": "18:15-18:16",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 19,
-          "column": 16
-        },
-        "end": {
-          "line": 19,
-          "column": 17
-        }
-      },
+      "loc": "19:16-19:17",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 24,
-          "column": 15
-        },
-        "end": {
-          "line": 24,
-          "column": 16
-        }
-      },
+      "loc": "24:15-24:16",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 25,
-          "column": 16
-        },
-        "end": {
-          "line": 25,
-          "column": 17
-        }
-      },
+      "loc": "25:16-25:17",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 30,
-          "column": 9
-        },
-        "end": {
-          "line": 30,
-          "column": 10
-        }
-      },
+      "loc": "30:9-30:10",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 35,
-          "column": 9
-        },
-        "end": {
-          "line": 35,
-          "column": 10
-        }
-      },
+      "loc": "35:9-35:10",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 36,
-          "column": 20
-        },
-        "end": {
-          "line": 36,
-          "column": 21
-        }
-      },
+      "loc": "36:20-36:21",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 41,
-          "column": 22
-        },
-        "end": {
-          "line": 41,
-          "column": 23
-        }
-      },
+      "loc": "41:22-41:23",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 42,
-          "column": 22
-        },
-        "end": {
-          "line": 42,
-          "column": 23
-        }
-      },
+      "loc": "42:22-42:23",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 46,
-          "column": 22
-        },
-        "end": {
-          "line": 46,
-          "column": 23
-        }
-      },
+      "loc": "46:22-46:23",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 47,
-          "column": 22
-        },
-        "end": {
-          "line": 47,
-          "column": 23
-        }
-      },
+      "loc": "47:22-47:23",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/recover_wrong_deliminator.mbt",
-        "start": {
-          "line": 48,
-          "column": 22
-        },
-        "end": {
-          "line": 48,
-          "column": 23
-        }
-      },
+      "loc": "48:22-48:23",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     }
   ]

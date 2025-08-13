@@ -9,7 +9,7 @@
         "name": {
           "type": "Binder",
           "name": "add",
-          "loc": null
+          "loc": "1:4-1:7"
         },
         "has_error": null,
         "is_async": false,
@@ -19,7 +19,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "1:8-1:9"
             },
             "ty": {
               "type": "Type::Name",
@@ -29,10 +29,10 @@
                   "type": "LongIdent::Ident",
                   "0": "int"
                 },
-                "loc": null
+                "loc": "1:11-1:14"
               },
               "tys": [],
-              "loc": null
+              "loc": "1:11-1:10"
             }
           },
           {
@@ -40,7 +40,7 @@
             "binder": {
               "type": "Binder",
               "name": "y",
-              "loc": null
+              "loc": "1:16-1:17"
             },
             "ty": {
               "type": "Type::Name",
@@ -50,14 +50,14 @@
                   "type": "LongIdent::Ident",
                   "0": "int"
                 },
-                "loc": null
+                "loc": "1:19-1:22"
               },
               "tys": [],
-              "loc": null
+              "loc": "1:19-1:18"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "1:7-1:22",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -67,10 +67,10 @@
               "type": "LongIdent::Ident",
               "0": "int"
             },
-            "loc": null
+            "loc": "1:27-1:30"
           },
           "tys": [],
-          "loc": null
+          "loc": "1:27-1:26"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -92,7 +92,7 @@
               "type": "LongIdent::Ident",
               "0": "+"
             },
-            "loc": null
+            "loc": "2:5-2:6"
           },
           "lhs": {
             "type": "Expr::Ident",
@@ -102,9 +102,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": null
+              "loc": "2:3-1:33"
             },
-            "loc": null
+            "loc": "2:3-1:33"
           },
           "rhs": {
             "type": "Expr::Ident",
@@ -114,14 +114,14 @@
                 "type": "LongIdent::Ident",
                 "0": "y"
               },
-              "loc": null
+              "loc": "2:7-2:6"
             },
-            "loc": null
+            "loc": "2:7-2:6"
           },
-          "loc": null
+          "loc": "2:3-2:6"
         }
       },
-      "loc": null
+      "loc": "1:1-2:9"
     }
   ]
 }

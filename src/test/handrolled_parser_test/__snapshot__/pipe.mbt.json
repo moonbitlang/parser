@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -39,9 +39,9 @@
                 "type": "LongIdent::Ident",
                 "0": "a"
               },
-              "loc": null
+              "loc": "2:2-1:11"
             },
-            "loc": null
+            "loc": "2:2-1:11"
           },
           "rhs": {
             "type": "Expr::Ident",
@@ -51,14 +51,14 @@
                 "type": "LongIdent::Ident",
                 "0": "f"
               },
-              "loc": null
+              "loc": "2:7-2:6"
             },
-            "loc": null
+            "loc": "2:7-2:6"
           },
-          "loc": null
+          "loc": "2:2-2:6"
         }
       },
-      "loc": null
+      "loc": "1:1-2:10"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -68,12 +68,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "5:4-5:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "5:9-5:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -98,9 +98,9 @@
                 "type": "LongIdent::Ident",
                 "0": "a"
               },
-              "loc": null
+              "loc": "6:2-5:11"
             },
-            "loc": null
+            "loc": "6:2-5:11"
           },
           "rhs": {
             "type": "Expr::Apply",
@@ -112,9 +112,9 @@
                   "type": "LongIdent::Ident",
                   "0": "f"
                 },
-                "loc": null
+                "loc": "6:7-6:6"
               },
-              "loc": null
+              "loc": "6:7-6:6"
             },
             "args": [
               {
@@ -127,9 +127,9 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "6:9-6:9"
                   },
-                  "loc": null
+                  "loc": "6:9-6:9"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
@@ -145,9 +145,9 @@
                       "type": "LongIdent::Ident",
                       "0": "c"
                     },
-                    "loc": null
+                    "loc": "6:11-6:11"
                   },
-                  "loc": null
+                  "loc": "6:11-6:11"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
@@ -157,12 +157,12 @@
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": null
+            "loc": "6:7-6:12"
           },
-          "loc": null
+          "loc": "6:2-6:12"
         }
       },
-      "loc": null
+      "loc": "5:1-6:15"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -172,12 +172,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "9:4-9:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "9:9-9:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -204,9 +204,9 @@
                   "type": "LongIdent::Ident",
                   "0": "a"
                 },
-                "loc": null
+                "loc": "10:2-9:11"
               },
-              "loc": null
+              "loc": "10:2-9:11"
             },
             "rhs": {
               "type": "Expr::Apply",
@@ -218,9 +218,9 @@
                     "type": "LongIdent::Ident",
                     "0": "f1"
                   },
-                  "loc": null
+                  "loc": "10:7-10:6"
                 },
-                "loc": null
+                "loc": "10:7-10:6"
               },
               "args": [
                 {
@@ -233,9 +233,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "10:10-10:10"
                     },
-                    "loc": null
+                    "loc": "10:10-10:10"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -251,9 +251,9 @@
                         "type": "LongIdent::Ident",
                         "0": "c"
                       },
-                      "loc": null
+                      "loc": "10:12-10:12"
                     },
-                    "loc": null
+                    "loc": "10:12-10:12"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -263,9 +263,9 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": null
+              "loc": "10:7-10:13"
             },
-            "loc": null
+            "loc": "10:2-10:13"
           },
           "rhs": {
             "type": "Expr::Apply",
@@ -277,9 +277,9 @@
                   "type": "LongIdent::Ident",
                   "0": "f2"
                 },
-                "loc": null
+                "loc": "10:18-10:17"
               },
-              "loc": null
+              "loc": "10:18-10:17"
             },
             "args": [
               {
@@ -292,9 +292,9 @@
                       "type": "LongIdent::Ident",
                       "0": "d"
                     },
-                    "loc": null
+                    "loc": "10:21-10:21"
                   },
-                  "loc": null
+                  "loc": "10:21-10:21"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
@@ -310,9 +310,9 @@
                       "type": "LongIdent::Ident",
                       "0": "e"
                     },
-                    "loc": null
+                    "loc": "10:23-10:23"
                   },
-                  "loc": null
+                  "loc": "10:23-10:23"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
@@ -322,12 +322,12 @@
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": null
+            "loc": "10:18-10:24"
           },
-          "loc": null
+          "loc": "10:2-10:24"
         }
       },
-      "loc": null
+      "loc": "9:1-10:26"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -337,12 +337,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "13:4-13:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "13:9-13:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -372,9 +372,9 @@
                       "type": "LongIdent::Ident",
                       "0": "a"
                     },
-                    "loc": null
+                    "loc": "14:2-13:11"
                   },
-                  "loc": null
+                  "loc": "14:2-13:11"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -384,20 +384,20 @@
                       "type": "LongIdent::Ident",
                       "0": "f1"
                     },
-                    "loc": null
+                    "loc": "14:7-14:6"
                   },
-                  "loc": null
+                  "loc": "14:7-14:6"
                 },
-                "loc": null
+                "loc": "14:2-14:6"
               },
               "rhs": {
                 "type": "Expr::Hole",
-                "loc": null,
+                "loc": "14:12-14:12",
                 "kind": {
                   "type": "Hole::Synthesized"
                 }
               },
-              "loc": null
+              "loc": "14:2-14:12"
             }
           ],
           "last_expr": {
@@ -410,20 +410,20 @@
                   "type": "LongIdent::Ident",
                   "0": "action2"
                 },
-                "loc": null
+                "loc": "15:2-14:37"
               },
-              "loc": null
+              "loc": "15:2-14:37"
             },
             "args": [],
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": null
+            "loc": "15:2-15:10"
           },
-          "loc": null
+          "loc": "14:2-15:10"
         }
       },
-      "loc": null
+      "loc": "13:1-15:32"
     },
     {
       "type": "Impl::TopTest",
@@ -440,18 +440,18 @@
                   "type": "LongIdent::Ident",
                   "0": "a"
                 },
-                "loc": null
+                "loc": "19:2-18:8"
               },
-              "loc": null
+              "loc": "19:2-18:8"
             },
             "rhs": {
               "type": "Expr::Hole",
-              "loc": null,
+              "loc": "19:6-19:6",
               "kind": {
                 "type": "Hole::Synthesized"
               }
             },
-            "loc": null
+            "loc": "19:2-19:6"
           }
         ],
         "last_expr": {
@@ -462,16 +462,16 @@
               "type": "LongIdent::Ident",
               "0": "next"
             },
-            "loc": null
+            "loc": "20:2-19:7"
           },
-          "loc": null
+          "loc": "20:2-19:7"
         },
-        "loc": null
+        "loc": "19:2-19:7"
       },
       "name": null,
       "params": null,
       "local_types": [],
-      "loc": null,
+      "loc": "18:1-20:8",
       "attrs": [],
       "doc": ""
     },
@@ -490,18 +490,18 @@
                   "type": "LongIdent::Ident",
                   "0": "a"
                 },
-                "loc": null
+                "loc": "24:2-23:8"
               },
-              "loc": null
+              "loc": "24:2-23:8"
             },
             "rhs": {
               "type": "Expr::Hole",
-              "loc": null,
+              "loc": "24:6-24:6",
               "kind": {
                 "type": "Hole::Synthesized"
               }
             },
-            "loc": null
+            "loc": "24:2-24:6"
           }
         ],
         "last_expr": {
@@ -512,16 +512,16 @@
               "type": "LongIdent::Ident",
               "0": "next2"
             },
-            "loc": null
+            "loc": "26:2-25:2"
           },
-          "loc": null
+          "loc": "26:2-25:2"
         },
-        "loc": null
+        "loc": "24:2-25:2"
       },
       "name": null,
       "params": null,
       "local_types": [],
-      "loc": null,
+      "loc": "23:1-26:9",
       "attrs": [],
       "doc": ""
     },
@@ -540,18 +540,18 @@
                   "type": "LongIdent::Ident",
                   "0": "a"
                 },
-                "loc": null
+                "loc": "30:2-29:8"
               },
-              "loc": null
+              "loc": "30:2-29:8"
             },
             "rhs": {
               "type": "Expr::Hole",
-              "loc": null,
+              "loc": "30:7-30:8",
               "kind": {
                 "type": "Hole::Incomplete"
               }
             },
-            "loc": null
+            "loc": "30:2-30:6"
           }
         ],
         "last_expr": {
@@ -562,16 +562,16 @@
               "type": "LongIdent::Ident",
               "0": "b"
             },
-            "loc": null
+            "loc": "31:2-30:9"
           },
-          "loc": null
+          "loc": "31:2-30:9"
         },
-        "loc": null
+        "loc": "30:2-30:9"
       },
       "name": null,
       "params": null,
       "local_types": [],
-      "loc": null,
+      "loc": "29:1-31:6",
       "attrs": [],
       "doc": ""
     }
@@ -579,47 +579,17 @@
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/pipe.mbt",
-        "start": {
-          "line": 14,
-          "column": 12
-        },
-        "end": {
-          "line": 14,
-          "column": 12
-        }
-      },
+      "loc": "14:12-14:12",
       "msg": "Unexpected line break here, missing simple expression at the end of this line."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/pipe.mbt",
-        "start": {
-          "line": 19,
-          "column": 6
-        },
-        "end": {
-          "line": 19,
-          "column": 6
-        }
-      },
+      "loc": "19:6-19:6",
       "msg": "Unexpected line break here, missing simple expression at the end of this line."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/pipe.mbt",
-        "start": {
-          "line": 24,
-          "column": 6
-        },
-        "end": {
-          "line": 24,
-          "column": 6
-        }
-      },
+      "loc": "24:6-24:6",
       "msg": "Unexpected line break here, missing simple expression at the end of this line."
     }
   ]

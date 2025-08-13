@@ -9,7 +9,7 @@
         "name": {
           "type": "Binder",
           "name": "testX",
-          "loc": null
+          "loc": "1:4-1:9"
         },
         "has_error": null,
         "is_async": false,
@@ -19,7 +19,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "1:10-1:11"
             },
             "ty": {
               "type": "Type::Name",
@@ -29,14 +29,14 @@
                   "type": "LongIdent::Ident",
                   "0": "t"
                 },
-                "loc": null
+                "loc": "1:13-1:14"
               },
               "tys": [],
-              "loc": null
+              "loc": "1:13-1:12"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "1:9-1:14",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -61,9 +61,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": null
+              "loc": "2:9-2:8"
             },
-            "loc": null
+            "loc": "2:9-2:8"
           },
           "cases": [
             {
@@ -75,7 +75,7 @@
                   "name": {
                     "type": "ConstrName",
                     "name": "Aa",
-                    "loc": null
+                    "loc": "3:13-3:15"
                   },
                   "extra_info": {
                     "type": "ConstructorExtraInfo::TypeName",
@@ -87,14 +87,14 @@
                         "id": "T"
                       },
                       "is_object": false,
-                      "loc": null
+                      "loc": "3:5-3:9"
                     }
                   },
-                  "loc": null
+                  "loc": "3:5-3:13"
                 },
                 "args": null,
                 "is_open": false,
-                "loc": null
+                "loc": "3:5-3:13"
               },
               "guard": null,
               "body": {
@@ -107,9 +107,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": null
+                    "loc": "3:19-3:18"
                   },
-                  "loc": null
+                  "loc": "3:19-3:18"
                 },
                 "args": [
                   {
@@ -120,7 +120,7 @@
                         "type": "Constant::String",
                         "0": "A"
                       },
-                      "loc": null
+                      "loc": "3:27-3:30"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -130,7 +130,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "3:19-3:30"
               }
             },
             {
@@ -142,7 +142,7 @@
                   "name": {
                     "type": "ConstrName",
                     "name": "",
-                    "loc": null
+                    "loc": "4:8-4:9"
                   },
                   "extra_info": {
                     "type": "ConstructorExtraInfo::TypeName",
@@ -153,14 +153,14 @@
                         "0": "t"
                       },
                       "is_object": false,
-                      "loc": null
+                      "loc": "4:5-3:32"
                     }
                   },
-                  "loc": null
+                  "loc": "4:5-4:8"
                 },
                 "args": null,
                 "is_open": false,
-                "loc": null
+                "loc": "4:5-4:8"
               },
               "guard": null,
               "body": {
@@ -173,9 +173,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": null
+                    "loc": "4:13-4:12"
                   },
-                  "loc": null
+                  "loc": "4:13-4:12"
                 },
                 "args": [
                   {
@@ -186,7 +186,7 @@
                         "type": "Constant::String",
                         "0": "X"
                       },
-                      "loc": null
+                      "loc": "4:21-4:24"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -196,7 +196,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "4:13-4:24"
               }
             },
             {
@@ -208,7 +208,7 @@
                   "name": {
                     "type": "ConstrName",
                     "name": "Bbb",
-                    "loc": null
+                    "loc": "5:8-5:11"
                   },
                   "extra_info": {
                     "type": "ConstructorExtraInfo::TypeName",
@@ -219,14 +219,14 @@
                         "0": "T"
                       },
                       "is_object": false,
-                      "loc": null
+                      "loc": "5:5-4:26"
                     }
                   },
-                  "loc": null
+                  "loc": "5:5-5:8"
                 },
                 "args": null,
                 "is_open": false,
-                "loc": null
+                "loc": "5:5-5:8"
               },
               "guard": null,
               "body": {
@@ -239,9 +239,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": null
+                    "loc": "5:15-5:14"
                   },
-                  "loc": null
+                  "loc": "5:15-5:14"
                 },
                 "args": [
                   {
@@ -252,7 +252,7 @@
                         "type": "Constant::String",
                         "0": "B"
                       },
-                      "loc": null
+                      "loc": "5:23-5:26"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -262,7 +262,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "5:15-5:26"
               }
             },
             {
@@ -274,7 +274,7 @@
                   "name": {
                     "type": "ConstrName",
                     "name": "Cccc",
-                    "loc": null
+                    "loc": "6:13-6:17"
                   },
                   "extra_info": {
                     "type": "ConstructorExtraInfo::TypeName",
@@ -286,14 +286,14 @@
                         "id": "t"
                       },
                       "is_object": false,
-                      "loc": null
+                      "loc": "6:5-6:9"
                     }
                   },
-                  "loc": null
+                  "loc": "6:5-6:13"
                 },
                 "args": null,
                 "is_open": false,
-                "loc": null
+                "loc": "6:5-6:13"
               },
               "guard": null,
               "body": {
@@ -306,9 +306,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": null
+                    "loc": "6:21-6:20"
                   },
-                  "loc": null
+                  "loc": "6:21-6:20"
                 },
                 "args": [
                   {
@@ -319,7 +319,7 @@
                         "type": "Constant::String",
                         "0": "C"
                       },
-                      "loc": null
+                      "loc": "6:29-6:32"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -329,32 +329,22 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "6:21-6:32"
               }
             }
           ],
-          "match_loc": null,
+          "match_loc": "2:3-2:12",
           "using": null,
-          "loc": null
+          "loc": "2:3-6:34"
         }
       },
-      "loc": null
+      "loc": "1:1-7:5"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/path_pattern_test.mbt",
-        "start": {
-          "line": 4,
-          "column": 8
-        },
-        "end": {
-          "line": 4,
-          "column": 9
-        }
-      },
+      "loc": "4:8-4:9",
       "msg": "Unexpected lowercase identifier x, expected uppercase identifier in constructor name."
     }
   ]

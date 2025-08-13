@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "E",
-        "tycon_loc": null,
+        "tycon_loc": "1:6-1:7",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -16,7 +16,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "C1",
-                "loc": null
+                "loc": "2:3-2:5"
               },
               "args": [
                 {
@@ -29,10 +29,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "2:10-2:13"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "2:10-2:9"
                   },
                   "mut": true,
                   "label": null
@@ -47,22 +47,22 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "2:24-2:27"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "2:24-2:23"
                   },
                   "mut": true,
                   "label": {
                     "type": "Label",
                     "name": "x",
-                    "loc": null
+                    "loc": "2:19-2:20"
                   }
                 }
               ],
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "2:3-2:27",
               "doc": ""
             },
             {
@@ -70,7 +70,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "C2",
-                "loc": null
+                "loc": "3:3-3:5"
               },
               "args": [
                 {
@@ -83,10 +83,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "3:6-3:9"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "3:6-3:6"
                   },
                   "mut": false,
                   "label": null
@@ -101,16 +101,16 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "3:20-3:23"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "3:20-3:19"
                   },
                   "mut": true,
                   "label": {
                     "type": "Label",
                     "name": "x",
-                    "loc": null
+                    "loc": "3:15-3:16"
                   }
                 },
                 {
@@ -123,10 +123,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "3:29-3:32"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "3:29-3:28"
                   },
                   "mut": true,
                   "label": null
@@ -141,22 +141,22 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "3:39-3:42"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "3:39-3:38"
                   },
                   "mut": false,
                   "label": {
                     "type": "Label",
                     "name": "y",
-                    "loc": null
+                    "loc": "3:34-3:35"
                   }
                 }
               ],
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "3:3-3:42",
               "doc": ""
             }
           ]
@@ -167,7 +167,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "1:1-3:44"
       }
     }
   ]

@@ -9,7 +9,7 @@
         "name": {
           "type": "Binder",
           "name": "a",
-          "loc": null
+          "loc": "1:4-1:5"
         },
         "has_error": null,
         "is_async": false,
@@ -19,7 +19,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "1:6-1:7"
             },
             "ty": {
               "type": "Type::Name",
@@ -29,14 +29,14 @@
                   "type": "LongIdent::Ident",
                   "0": "int"
                 },
-                "loc": null
+                "loc": "1:9-1:12"
               },
               "tys": [],
-              "loc": null
+              "loc": "1:9-1:8"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "1:5-1:12",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -46,10 +46,10 @@
               "type": "LongIdent::Ident",
               "0": "int"
             },
-            "loc": null
+            "loc": "1:17-1:20"
           },
           "tys": [],
-          "loc": null
+          "loc": "1:17-1:16"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -71,7 +71,7 @@
               "type": "LongIdent::Ident",
               "0": "+"
             },
-            "loc": null
+            "loc": "2:7-2:8"
           },
           "lhs": {
             "type": "Expr::Ident",
@@ -81,9 +81,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": null
+              "loc": "2:5-1:23"
             },
-            "loc": null
+            "loc": "2:5-1:23"
           },
           "rhs": {
             "type": "Expr::Constant",
@@ -91,12 +91,12 @@
               "type": "Constant::Int",
               "0": "1"
             },
-            "loc": null
+            "loc": "2:9-2:10"
           },
-          "loc": null
+          "loc": "2:5-2:8"
         }
       },
-      "loc": null
+      "loc": "1:1-2:11"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -106,12 +106,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "5:4-5:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "5:9-5:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -133,7 +133,7 @@
             "0": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "6:9-6:10"
             }
           },
           "expr": {
@@ -142,33 +142,23 @@
               "type": "Constant::String",
               "0": ""
             },
-            "loc": null
+            "loc": "6:13-6:14"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": null,
+            "loc": "6:5-6:8",
             "faked": true
           },
-          "loc": null
+          "loc": "6:13-6:14"
         }
       },
-      "loc": null
+      "loc": "5:1-6:14"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/unfinished_string.mbt",
-        "start": {
-          "line": 6,
-          "column": 14
-        },
-        "end": {
-          "line": 6,
-          "column": 14
-        }
-      },
+      "loc": "6:14-6:14",
       "msg": "Unexpected end of file, missing `;`, `}` here."
     }
   ]

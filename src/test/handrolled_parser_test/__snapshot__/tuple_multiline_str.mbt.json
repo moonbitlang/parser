@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "f",
-          "loc": null
+          "loc": "2:4-2:5"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "2:5-2:6",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -24,10 +24,10 @@
               "type": "LongIdent::Ident",
               "0": "Unit"
             },
-            "loc": null
+            "loc": "2:11-2:15"
           },
           "tys": [],
-          "loc": null
+          "loc": "2:11-2:10"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -50,7 +50,7 @@
               "0": {
                 "type": "Binder",
                 "name": "body",
-                "loc": null
+                "loc": "3:7-3:11"
               }
             },
             "ty": {
@@ -61,7 +61,7 @@
                   "type": "LongIdent::Ident",
                   "0": "Array"
                 },
-                "loc": null
+                "loc": "3:14-3:19"
               },
               "tys": [
                 {
@@ -75,10 +75,10 @@
                           "type": "LongIdent::Ident",
                           "0": "String"
                         },
-                        "loc": null
+                        "loc": "3:21-3:27"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "3:21-3:21"
                     },
                     {
                       "type": "Type::Name",
@@ -88,23 +88,23 @@
                           "type": "LongIdent::Ident",
                           "0": "Int"
                         },
-                        "loc": null
+                        "loc": "3:29-3:32"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "3:29-3:28"
                     }
                   ],
-                  "loc": null
+                  "loc": "3:20-3:32"
                 }
               ],
-              "loc": null
+              "loc": "3:14-3:33"
             },
-            "loc": null
+            "loc": "3:3-3:33"
           },
           "expr": {
             "type": "Expr::Array",
             "exprs": [],
-            "loc": null
+            "loc": "3:37-3:38"
           },
           "body": {
             "type": "Expr::DotApply",
@@ -116,14 +116,14 @@
                   "type": "LongIdent::Ident",
                   "0": "body"
                 },
-                "loc": null
+                "loc": "4:3-3:40"
               },
-              "loc": null
+              "loc": "4:3-3:40"
             },
             "method_name": {
               "type": "Label",
               "name": "push",
-              "loc": null
+              "loc": "4:8-4:12"
             },
             "args": [
               {
@@ -139,7 +139,7 @@
                           "0": "x"
                         }
                       ],
-                      "loc": null
+                      "loc": "6:7-5:7"
                     },
                     {
                       "type": "Expr::Constant",
@@ -147,10 +147,10 @@
                         "type": "Constant::Int",
                         "0": "1"
                       },
-                      "loc": null
+                      "loc": "8:7-8:8"
                     }
                   ],
-                  "loc": null
+                  "loc": "5:5-8:10"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
@@ -161,12 +161,12 @@
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": null
+            "loc": "4:3-9:8"
           },
-          "loc": null
+          "loc": "3:37-3:38"
         }
       },
-      "loc": null
+      "loc": "2:1-10:5"
     }
   ]
 }

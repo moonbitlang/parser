@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -33,7 +33,7 @@
           "type": "Expr::Let",
           "pattern": {
             "type": "Pattern::Any",
-            "loc": null
+            "loc": "2:7-2:8"
           },
           "expr": {
             "type": "Expr::Function",
@@ -45,12 +45,12 @@
                   "binder": {
                     "type": "Binder",
                     "name": "a",
-                    "loc": null
+                    "loc": "2:11-2:12"
                   },
                   "ty": null
                 }
               ],
-              "params_loc": null,
+              "params_loc": "2:11-2:20",
               "body": {
                 "type": "Expr::Assign",
                 "var": {
@@ -59,7 +59,7 @@
                     "type": "LongIdent::Ident",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "2:16-2:15"
                 },
                 "expr": {
                   "type": "Expr::Constant",
@@ -67,7 +67,7 @@
                     "type": "Constant::Int",
                     "0": "1"
                   },
-                  "loc": null
+                  "loc": "2:21-2:22"
                 },
                 "augmented_by": {
                   "type": "Var",
@@ -75,9 +75,9 @@
                     "type": "LongIdent::Ident",
                     "0": "+"
                   },
-                  "loc": null
+                  "loc": "2:18-2:20"
                 },
-                "loc": null
+                "loc": "2:16-2:20"
               },
               "return_type": null,
               "error_type": {
@@ -88,15 +88,15 @@
               },
               "has_error": null,
               "is_async": false,
-              "loc": null
+              "loc": "2:11-2:20"
             },
-            "loc": null
+            "loc": "2:11-2:20"
           },
           "body": {
             "type": "Expr::Let",
             "pattern": {
               "type": "Pattern::Any",
-              "loc": null
+              "loc": "3:7-3:8"
             },
             "expr": {
               "type": "Expr::Function",
@@ -108,12 +108,12 @@
                     "binder": {
                       "type": "Binder",
                       "name": "a",
-                      "loc": null
+                      "loc": "3:11-3:12"
                     },
                     "ty": null
                   }
                 ],
-                "params_loc": null,
+                "params_loc": "3:11-3:22",
                 "body": {
                   "type": "Expr::ArraySet",
                   "array": {
@@ -124,9 +124,9 @@
                         "type": "LongIdent::Ident",
                         "0": "a"
                       },
-                      "loc": null
+                      "loc": "3:16-3:15"
                     },
-                    "loc": null
+                    "loc": "3:16-3:15"
                   },
                   "index": {
                     "type": "Expr::Constant",
@@ -134,7 +134,7 @@
                       "type": "Constant::Int",
                       "0": "0"
                     },
-                    "loc": null
+                    "loc": "3:18-3:19"
                   },
                   "value": {
                     "type": "Expr::Constant",
@@ -142,9 +142,9 @@
                       "type": "Constant::Int",
                       "0": "1"
                     },
-                    "loc": null
+                    "loc": "3:23-3:24"
                   },
-                  "loc": null
+                  "loc": "3:16-3:22"
                 },
                 "return_type": null,
                 "error_type": {
@@ -155,15 +155,15 @@
                 },
                 "has_error": null,
                 "is_async": false,
-                "loc": null
+                "loc": "3:11-3:22"
               },
-              "loc": null
+              "loc": "3:11-3:22"
             },
             "body": {
               "type": "Expr::Let",
               "pattern": {
                 "type": "Pattern::Any",
-                "loc": null
+                "loc": "4:7-4:8"
               },
               "expr": {
                 "type": "Expr::Function",
@@ -175,12 +175,12 @@
                       "binder": {
                         "type": "Binder",
                         "name": "a",
-                        "loc": null
+                        "loc": "4:11-4:12"
                       },
                       "ty": null
                     }
                   ],
-                  "params_loc": null,
+                  "params_loc": "4:11-4:21",
                   "body": {
                     "type": "Expr::Raise",
                     "err_value": {
@@ -191,11 +191,11 @@
                           "type": "LongIdent::Ident",
                           "0": "a"
                         },
-                        "loc": null
+                        "loc": "4:22-4:21"
                       },
-                      "loc": null
+                      "loc": "4:22-4:21"
                     },
-                    "loc": null
+                    "loc": "4:16-4:21"
                   },
                   "return_type": null,
                   "error_type": {
@@ -206,15 +206,15 @@
                   },
                   "has_error": null,
                   "is_async": false,
-                  "loc": null
+                  "loc": "4:11-4:21"
                 },
-                "loc": null
+                "loc": "4:11-4:21"
               },
               "body": {
                 "type": "Expr::Let",
                 "pattern": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "5:7-5:8"
                 },
                 "expr": {
                   "type": "Expr::Function",
@@ -226,15 +226,15 @@
                         "binder": {
                           "type": "Binder",
                           "name": "a",
-                          "loc": null
+                          "loc": "5:11-5:12"
                         },
                         "ty": null
                       }
                     ],
-                    "params_loc": null,
+                    "params_loc": "5:11-5:15",
                     "body": {
                       "type": "Expr::Hole",
-                      "loc": null,
+                      "loc": "5:16-5:19",
                       "kind": {
                         "type": "Hole::Todo"
                       }
@@ -248,15 +248,15 @@
                     },
                     "has_error": null,
                     "is_async": false,
-                    "loc": null
+                    "loc": "5:11-5:15"
                   },
-                  "loc": null
+                  "loc": "5:11-5:15"
                 },
                 "body": {
                   "type": "Expr::Let",
                   "pattern": {
                     "type": "Pattern::Any",
-                    "loc": null
+                    "loc": "6:7-6:8"
                   },
                   "expr": {
                     "type": "Expr::Function",
@@ -268,7 +268,7 @@
                           "binder": {
                             "type": "Binder",
                             "name": "a",
-                            "loc": null
+                            "loc": "6:12-6:12"
                           },
                           "ty": null
                         },
@@ -277,12 +277,12 @@
                           "binder": {
                             "type": "Binder",
                             "name": "b",
-                            "loc": null
+                            "loc": "6:15-6:14"
                           },
                           "ty": null
                         }
                       ],
-                      "params_loc": null,
+                      "params_loc": "6:11-6:25",
                       "body": {
                         "type": "Expr::Assign",
                         "var": {
@@ -291,7 +291,7 @@
                             "type": "LongIdent::Ident",
                             "0": "a"
                           },
-                          "loc": null
+                          "loc": "6:21-6:20"
                         },
                         "expr": {
                           "type": "Expr::Ident",
@@ -301,9 +301,9 @@
                               "type": "LongIdent::Ident",
                               "0": "b"
                             },
-                            "loc": null
+                            "loc": "6:26-6:25"
                           },
-                          "loc": null
+                          "loc": "6:26-6:25"
                         },
                         "augmented_by": {
                           "type": "Var",
@@ -311,9 +311,9 @@
                             "type": "LongIdent::Ident",
                             "0": "+"
                           },
-                          "loc": null
+                          "loc": "6:23-6:25"
                         },
-                        "loc": null
+                        "loc": "6:21-6:25"
                       },
                       "return_type": null,
                       "error_type": {
@@ -324,15 +324,15 @@
                       },
                       "has_error": null,
                       "is_async": false,
-                      "loc": null
+                      "loc": "6:11-6:25"
                     },
-                    "loc": null
+                    "loc": "6:11-6:25"
                   },
                   "body": {
                     "type": "Expr::Let",
                     "pattern": {
                       "type": "Pattern::Any",
-                      "loc": null
+                      "loc": "7:7-7:8"
                     },
                     "expr": {
                       "type": "Expr::Function",
@@ -344,7 +344,7 @@
                             "binder": {
                               "type": "Binder",
                               "name": "a",
-                              "loc": null
+                              "loc": "7:12-7:12"
                             },
                             "ty": null
                           },
@@ -353,12 +353,12 @@
                             "binder": {
                               "type": "Binder",
                               "name": "b",
-                              "loc": null
+                              "loc": "7:15-7:14"
                             },
                             "ty": null
                           }
                         ],
-                        "params_loc": null,
+                        "params_loc": "7:11-7:27",
                         "body": {
                           "type": "Expr::ArraySet",
                           "array": {
@@ -369,9 +369,9 @@
                                 "type": "LongIdent::Ident",
                                 "0": "a"
                               },
-                              "loc": null
+                              "loc": "7:21-7:20"
                             },
-                            "loc": null
+                            "loc": "7:21-7:20"
                           },
                           "index": {
                             "type": "Expr::Constant",
@@ -379,7 +379,7 @@
                               "type": "Constant::Int",
                               "0": "0"
                             },
-                            "loc": null
+                            "loc": "7:23-7:24"
                           },
                           "value": {
                             "type": "Expr::Ident",
@@ -389,11 +389,11 @@
                                 "type": "LongIdent::Ident",
                                 "0": "b"
                               },
-                              "loc": null
+                              "loc": "7:28-7:27"
                             },
-                            "loc": null
+                            "loc": "7:28-7:27"
                           },
-                          "loc": null
+                          "loc": "7:21-7:27"
                         },
                         "return_type": null,
                         "error_type": {
@@ -404,15 +404,15 @@
                         },
                         "has_error": null,
                         "is_async": false,
-                        "loc": null
+                        "loc": "7:11-7:27"
                       },
-                      "loc": null
+                      "loc": "7:11-7:27"
                     },
                     "body": {
                       "type": "Expr::Let",
                       "pattern": {
                         "type": "Pattern::Any",
-                        "loc": null
+                        "loc": "8:7-8:8"
                       },
                       "expr": {
                         "type": "Expr::Function",
@@ -424,7 +424,7 @@
                               "binder": {
                                 "type": "Binder",
                                 "name": "a",
-                                "loc": null
+                                "loc": "8:12-8:12"
                               },
                               "ty": null
                             },
@@ -433,12 +433,12 @@
                               "binder": {
                                 "type": "Binder",
                                 "name": "b",
-                                "loc": null
+                                "loc": "8:15-8:14"
                               },
                               "ty": null
                             }
                           ],
-                          "params_loc": null,
+                          "params_loc": "8:11-8:26",
                           "body": {
                             "type": "Expr::Raise",
                             "err_value": {
@@ -449,11 +449,11 @@
                                   "type": "LongIdent::Ident",
                                   "0": "a"
                                 },
-                                "loc": null
+                                "loc": "8:27-8:26"
                               },
-                              "loc": null
+                              "loc": "8:27-8:26"
                             },
-                            "loc": null
+                            "loc": "8:21-8:26"
                           },
                           "return_type": null,
                           "error_type": {
@@ -464,15 +464,15 @@
                           },
                           "has_error": null,
                           "is_async": false,
-                          "loc": null
+                          "loc": "8:11-8:26"
                         },
-                        "loc": null
+                        "loc": "8:11-8:26"
                       },
                       "body": {
                         "type": "Expr::Let",
                         "pattern": {
                           "type": "Pattern::Any",
-                          "loc": null
+                          "loc": "9:7-9:8"
                         },
                         "expr": {
                           "type": "Expr::Function",
@@ -484,7 +484,7 @@
                                 "binder": {
                                   "type": "Binder",
                                   "name": "a",
-                                  "loc": null
+                                  "loc": "9:12-9:12"
                                 },
                                 "ty": null
                               },
@@ -493,15 +493,15 @@
                                 "binder": {
                                   "type": "Binder",
                                   "name": "b",
-                                  "loc": null
+                                  "loc": "9:15-9:14"
                                 },
                                 "ty": null
                               }
                             ],
-                            "params_loc": null,
+                            "params_loc": "9:11-9:20",
                             "body": {
                               "type": "Expr::Hole",
-                              "loc": null,
+                              "loc": "9:21-9:24",
                               "kind": {
                                 "type": "Hole::Todo"
                               }
@@ -515,9 +515,9 @@
                             },
                             "has_error": null,
                             "is_async": false,
-                            "loc": null
+                            "loc": "9:11-9:20"
                           },
-                          "loc": null
+                          "loc": "9:11-9:20"
                         },
                         "body": {
                           "type": "Expr::LetAnd",
@@ -526,7 +526,7 @@
                               {
                                 "type": "Binder",
                                 "name": "f",
-                                "loc": null
+                                "loc": "10:10-10:11"
                               },
                               null,
                               {
@@ -537,12 +537,12 @@
                                     "binder": {
                                       "type": "Binder",
                                       "name": "a",
-                                      "loc": null
+                                      "loc": "10:14-10:15"
                                     },
                                     "ty": null
                                   }
                                 ],
-                                "params_loc": null,
+                                "params_loc": "10:14-10:24",
                                 "body": {
                                   "type": "Expr::Raise",
                                   "err_value": {
@@ -553,11 +553,11 @@
                                         "type": "LongIdent::Ident",
                                         "0": "a"
                                       },
-                                      "loc": null
+                                      "loc": "10:25-10:24"
                                     },
-                                    "loc": null
+                                    "loc": "10:25-10:24"
                                   },
-                                  "loc": null
+                                  "loc": "10:19-10:24"
                                 },
                                 "return_type": null,
                                 "error_type": {
@@ -568,35 +568,35 @@
                                 },
                                 "has_error": null,
                                 "is_async": false,
-                                "loc": null
+                                "loc": "10:14-10:24"
                               }
                             ]
                           ],
                           "body": {
                             "type": "Expr::Unit",
-                            "loc": null,
+                            "loc": "10:3-10:24",
                             "faked": true
                           },
-                          "loc": null
+                          "loc": "10:3-10:24"
                         },
-                        "loc": null
+                        "loc": "9:11-9:20"
                       },
-                      "loc": null
+                      "loc": "8:11-8:26"
                     },
-                    "loc": null
+                    "loc": "7:11-7:27"
                   },
-                  "loc": null
+                  "loc": "6:11-6:25"
                 },
-                "loc": null
+                "loc": "5:11-5:15"
               },
-              "loc": null
+              "loc": "4:11-4:21"
             },
-            "loc": null
+            "loc": "3:11-3:22"
           },
-          "loc": null
+          "loc": "2:11-2:20"
         }
       },
-      "loc": null
+      "loc": "1:1-10:27"
     }
   ]
 }

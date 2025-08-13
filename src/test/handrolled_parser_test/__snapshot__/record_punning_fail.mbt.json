@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "r",
-        "tycon_loc": null,
+        "tycon_loc": "1:8-1:9",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -16,7 +16,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "r1",
-                "loc": null
+                "loc": "1:11-1:13"
               },
               "ty": {
                 "type": "Type::Name",
@@ -26,16 +26,16 @@
                     "type": "LongIdent::Ident",
                     "0": "int"
                   },
-                  "loc": null
+                  "loc": "1:15-1:18"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "1:15-1:14"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "1:11-1:14",
               "attrs": [],
               "doc": ""
             },
@@ -44,7 +44,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "r2",
-                "loc": null
+                "loc": "1:20-1:22"
               },
               "ty": {
                 "type": "Type::Name",
@@ -54,16 +54,16 @@
                     "type": "LongIdent::Ident",
                     "0": "bool"
                   },
-                  "loc": null
+                  "loc": "1:24-1:28"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "1:24-1:23"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "1:20-1:23",
               "attrs": [],
               "doc": ""
             }
@@ -75,7 +75,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "1:1-1:28"
       }
     },
     {
@@ -86,12 +86,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "4:4-4:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "4:9-4:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -113,7 +113,7 @@
             "0": {
               "type": "Binder",
               "name": "r2",
-              "loc": null
+              "loc": "5:9-5:11"
             }
           },
           "expr": {
@@ -122,7 +122,7 @@
               "type": "Constant::Bool",
               "0": false
             },
-            "loc": null
+            "loc": "5:14-5:19"
           },
           "body": {
             "type": "Expr::Let",
@@ -131,7 +131,7 @@
               "0": {
                 "type": "Binder",
                 "name": "many",
-                "loc": null
+                "loc": "6:9-6:13"
               }
             },
             "expr": {
@@ -143,7 +143,7 @@
                   "label": {
                     "type": "Label",
                     "name": "r1",
-                    "loc": null
+                    "loc": "6:17-6:19"
                   },
                   "expr": {
                     "type": "Expr::Constant",
@@ -151,44 +151,34 @@
                       "type": "Constant::Int",
                       "0": "1"
                     },
-                    "loc": null
+                    "loc": "6:20-6:21"
                   },
                   "is_pun": false,
-                  "loc": null
+                  "loc": "6:17-6:20"
                 }
               ],
               "trailing": {
                 "type": "Trailing::None"
               },
-              "loc": null
+              "loc": "6:16-6:24"
             },
             "body": {
               "type": "Expr::Unit",
-              "loc": null,
+              "loc": "6:5-6:8",
               "faked": true
             },
-            "loc": null
+            "loc": "6:16-6:24"
           },
-          "loc": null
+          "loc": "5:14-5:19"
         }
       },
-      "loc": null
+      "loc": "4:1-6:26"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/record_punning_fail.mbt",
-        "start": {
-          "line": 6,
-          "column": 22
-        },
-        "end": {
-          "line": 6,
-          "column": 24
-        }
-      },
+      "loc": "6:22-6:24",
       "msg": "Unexpected token id (lowercase start), you may expect `,`, `}`."
     }
   ]

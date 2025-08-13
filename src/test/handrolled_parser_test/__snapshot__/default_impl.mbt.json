@@ -8,7 +8,7 @@
         "name": {
           "type": "Binder",
           "name": "I",
-          "loc": null
+          "loc": "1:7-1:8"
         },
         "supers": [],
         "methods": [
@@ -17,7 +17,7 @@
             "name": {
               "type": "Binder",
               "name": "f",
-              "loc": null
+              "loc": "2:3-2:4"
             },
             "has_error": null,
             "is_async": false,
@@ -33,12 +33,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Self"
                     },
-                    "loc": null
+                    "loc": "2:5-2:9"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "2:5-2:5"
                 },
-                "loc": null
+                "loc": "2:5-2:5"
               }
             ],
             "return_type": {
@@ -49,24 +49,24 @@
                   "type": "LongIdent::Ident",
                   "0": "Unit"
                 },
-                "loc": null
+                "loc": "2:14-2:18"
               },
               "tys": [],
-              "loc": null
+              "loc": "2:14-2:13"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
-            "has_default": null,
+            "has_default": "2:21-2:22",
             "attrs": [],
-            "loc": null
+            "loc": "2:3-2:20"
           },
           {
             "type": "TraitMethodDecl",
             "name": {
               "type": "Binder",
               "name": "g",
-              "loc": null
+              "loc": "3:3-3:4"
             },
             "has_error": null,
             "is_async": false,
@@ -82,12 +82,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Self"
                     },
-                    "loc": null
+                    "loc": "3:5-3:9"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "3:5-3:5"
                 },
-                "loc": null
+                "loc": "3:5-3:5"
               }
             ],
             "return_type": {
@@ -98,23 +98,23 @@
                   "type": "LongIdent::Ident",
                   "0": "Unit"
                 },
-                "loc": null
+                "loc": "3:14-3:18"
               },
               "tys": [],
-              "loc": null
+              "loc": "3:14-3:13"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": null
+            "loc": "3:3-3:13"
           }
         ],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": null,
+        "loc": "1:1-3:19",
         "attrs": [],
         "doc": ""
       }

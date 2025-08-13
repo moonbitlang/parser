@@ -10,7 +10,7 @@
           "0": {
             "type": "Binder",
             "name": "a",
-            "loc": null
+            "loc": "3:7-3:8"
           }
         },
         "expr": {
@@ -22,12 +22,12 @@
                 {
                   "type": "InterpElem::Source",
                   "source": "guard true is a a a a a a",
-                  "loc": null
+                  "loc": "4:9-4:34"
                 }
               ]
             }
           ],
-          "loc": null
+          "loc": "4:5-3:11"
         },
         "body": {
           "type": "Expr::Let",
@@ -36,7 +36,7 @@
             "0": {
               "type": "Binder",
               "name": "a",
-              "loc": null
+              "loc": "5:7-5:8"
             }
           },
           "expr": {
@@ -48,26 +48,26 @@
                   {
                     "type": "InterpElem::Source",
                     "source": "(a => a => a => a => a => )(5)",
-                    "loc": null
+                    "loc": "6:9-6:39"
                   }
                 ]
               }
             ],
-            "loc": null
+            "loc": "6:5-5:11"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": null,
+            "loc": "5:3-5:6",
             "faked": true
           },
-          "loc": null
+          "loc": "5:3-5:11"
         },
-        "loc": null
+        "loc": "3:3-3:11"
       },
       "name": null,
       "params": null,
       "local_types": [],
-      "loc": null,
+      "loc": "2:1-7:2",
       "attrs": [],
       "doc": ""
     }

@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "Foo",
-        "tycon_loc": null,
+        "tycon_loc": "6:6-6:9",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -16,12 +16,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Bar",
-                "loc": null
+                "loc": "7:3-7:6"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "7:3-6:13",
               "doc": ""
             }
           ]
@@ -32,7 +32,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "6:1-7:17"
       }
     },
     {
@@ -40,7 +40,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "Rcd",
-        "tycon_loc": null,
+        "tycon_loc": "11:8-11:11",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -50,7 +50,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "11:14-11:15"
               },
               "ty": {
                 "type": "Type::Name",
@@ -60,16 +60,16 @@
                     "type": "LongIdent::Ident",
                     "0": "int"
                   },
-                  "loc": null
+                  "loc": "11:17-11:20"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "11:17-11:16"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "11:14-11:16",
               "attrs": [],
               "doc": ""
             }
@@ -81,7 +81,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "11:1-11:20"
       }
     },
     {
@@ -89,7 +89,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "Rcd2",
-        "tycon_loc": null,
+        "tycon_loc": "13:8-13:12",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -99,7 +99,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "13:15-13:16"
               },
               "ty": {
                 "type": "Type::Name",
@@ -109,16 +109,16 @@
                     "type": "LongIdent::Ident",
                     "0": "int"
                   },
-                  "loc": null
+                  "loc": "13:18-13:21"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "13:18-13:17"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "13:15-13:17",
               "attrs": [],
               "doc": ""
             }
@@ -130,7 +130,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "13:1-13:21"
       }
     },
     {
@@ -138,7 +138,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "MyInt",
-        "tycon_loc": null,
+        "tycon_loc": "19:6-19:11",
         "params": [],
         "components": {
           "type": "TypeDesc::Newtype",
@@ -150,10 +150,10 @@
                 "type": "LongIdent::Ident",
                 "0": "Int"
               },
-              "loc": null
+              "loc": "19:12-19:15"
             },
             "tys": [],
-            "loc": null
+            "loc": "19:12-19:11"
           }
         },
         "attrs": [],
@@ -162,20 +162,20 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "19:1-19:11"
       }
     },
     {
       "type": "Impl::TopTest",
       "expr": {
         "type": "Expr::Unit",
-        "loc": null,
+        "loc": "23:6-23:7",
         "faked": true
       },
       "name": null,
       "params": null,
       "local_types": [],
-      "loc": null,
+      "loc": "23:1-23:7",
       "attrs": [],
       "doc": ""
     },
@@ -183,16 +183,16 @@
       "type": "Impl::TopTest",
       "expr": {
         "type": "Expr::Unit",
-        "loc": null,
+        "loc": "24:12-24:13",
         "faked": true
       },
       "name": {
         "v": "foo",
-        "loc": null
+        "loc": "24:6-24:11"
       },
       "params": null,
       "local_types": [],
-      "loc": null,
+      "loc": "24:1-24:13",
       "attrs": [],
       "doc": ""
     }

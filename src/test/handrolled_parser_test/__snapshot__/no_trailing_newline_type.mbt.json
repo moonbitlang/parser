@@ -6,17 +6,17 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "A",
-        "tycon_loc": null,
+        "tycon_loc": "1:6-1:7",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "T",
-            "loc": null
+            "loc": "1:8-1:8"
           },
           {
             "type": "TypeDeclBinder",
             "name": "E",
-            "loc": null
+            "loc": "1:10-1:10"
           }
         ],
         "components": {
@@ -28,7 +28,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "1:1-1:11"
       }
     }
   ]

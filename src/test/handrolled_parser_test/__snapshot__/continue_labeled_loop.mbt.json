@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "f",
-          "loc": null
+          "loc": "2:8-2:9"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "2:9-2:10",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -24,10 +24,10 @@
               "type": "LongIdent::Ident",
               "0": "Unit"
             },
-            "loc": null
+            "loc": "2:15-2:19"
           },
           "tys": [],
-          "loc": null
+          "loc": "2:15-2:14"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -35,7 +35,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": null
+          "loc": "2:1-1:6"
         },
         "attrs": [],
         "doc": ""
@@ -48,7 +48,7 @@
           "args": [
             {
               "type": "Expr::Unit",
-              "loc": null,
+              "loc": "3:8-3:9",
               "faked": false
             }
           ],
@@ -58,7 +58,7 @@
               "patterns": [
                 {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "4:5-4:6"
                 }
               ],
               "guard": null,
@@ -74,7 +74,7 @@
                           "type": "Constant::Int",
                           "0": "0"
                         },
-                        "loc": null
+                        "loc": "5:25-5:26"
                       }
                     ],
                     "body": [
@@ -83,13 +83,13 @@
                         "patterns": [
                           {
                             "type": "Pattern::Any",
-                            "loc": null
+                            "loc": "6:11-6:12"
                           }
                         ],
                         "guard": null,
                         "body": {
                           "type": "Expr::Hole",
-                          "loc": null,
+                          "loc": "6:16-6:19",
                           "kind": {
                             "type": "Hole::Todo"
                           }
@@ -99,23 +99,23 @@
                     "label": {
                       "type": "Label",
                       "name": "l",
-                      "loc": null
+                      "loc": "5:16-5:18"
                     },
-                    "loop_loc": null,
-                    "loc": null
+                    "loop_loc": "5:20-5:24",
+                    "loc": "5:20-6:20"
                   }
                 ],
                 "label": null,
-                "loc": null
+                "loc": "5:7-6:20"
               }
             }
           ],
           "label": null,
-          "loop_loc": null,
-          "loc": null
+          "loop_loc": "3:3-3:9",
+          "loc": "3:3-7:11"
         }
       },
-      "loc": null
+      "loc": "2:1-8:5"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -125,12 +125,12 @@
         "name": {
           "type": "Binder",
           "name": "g",
-          "loc": null
+          "loc": "11:8-11:9"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "11:9-11:10",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -140,10 +140,10 @@
               "type": "LongIdent::Ident",
               "0": "Unit"
             },
-            "loc": null
+            "loc": "11:15-11:19"
           },
           "tys": [],
-          "loc": null
+          "loc": "11:15-11:14"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -151,7 +151,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": null
+          "loc": "11:1-10:2"
         },
         "attrs": [],
         "doc": ""
@@ -164,7 +164,7 @@
           "args": [
             {
               "type": "Expr::Unit",
-              "loc": null,
+              "loc": "12:12-12:13",
               "faked": false
             }
           ],
@@ -174,7 +174,7 @@
               "patterns": [
                 {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "13:5-13:6"
                 }
               ],
               "guard": null,
@@ -190,7 +190,7 @@
                           "type": "Constant::Int",
                           "0": "0"
                         },
-                        "loc": null
+                        "loc": "14:28-14:29"
                       }
                     ],
                     "body": [
@@ -199,13 +199,13 @@
                         "patterns": [
                           {
                             "type": "Pattern::Any",
-                            "loc": null
+                            "loc": "15:11-15:12"
                           }
                         ],
                         "guard": null,
                         "body": {
                           "type": "Expr::Hole",
-                          "loc": null,
+                          "loc": "15:16-15:19",
                           "kind": {
                             "type": "Hole::Todo"
                           }
@@ -215,31 +215,31 @@
                     "label": {
                       "type": "Label",
                       "name": "l",
-                      "loc": null
+                      "loc": "14:19-14:21"
                     },
-                    "loop_loc": null,
-                    "loc": null
+                    "loop_loc": "14:23-14:27",
+                    "loc": "14:23-15:20"
                   }
                 ],
                 "label": {
                   "type": "Label",
                   "name": "l",
-                  "loc": null
+                  "loc": "14:19-14:21"
                 },
-                "loc": null
+                "loc": "14:7-15:20"
               }
             }
           ],
           "label": {
             "type": "Label",
             "name": "l",
-            "loc": null
+            "loc": "12:3-12:5"
           },
-          "loop_loc": null,
-          "loc": null
+          "loop_loc": "12:7-12:13",
+          "loc": "12:7-16:11"
         }
       },
-      "loc": null
+      "loc": "11:1-17:5"
     }
   ]
 }

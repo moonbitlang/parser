@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -36,13 +36,13 @@
             "0": {
               "type": "Binder",
               "name": "record",
-              "loc": null
+              "loc": "2:7-2:13"
             }
           },
           "expr": {
             "type": "Expr::Map",
             "elems": [],
-            "loc": null
+            "loc": "2:16-2:17"
           },
           "body": {
             "type": "Expr::Let",
@@ -51,7 +51,7 @@
               "0": {
                 "type": "Binder",
                 "name": "map",
-                "loc": null
+                "loc": "3:7-3:10"
               }
             },
             "expr": {
@@ -71,12 +71,12 @@
                         "type": "LongIdent::Ident",
                         "0": "x"
                       },
-                      "loc": null
+                      "loc": "3:20-3:19"
                     },
-                    "loc": null
+                    "loc": "3:20-3:19"
                   },
-                  "key_loc": null,
-                  "loc": null
+                  "key_loc": "3:15-3:14",
+                  "loc": "3:15-3:19"
                 },
                 {
                   "type": "MapExprElem",
@@ -92,7 +92,7 @@
                         "type": "LongIdent::Ident",
                         "0": "+"
                       },
-                      "loc": null
+                      "loc": "3:30-3:31"
                     },
                     "lhs": {
                       "type": "Expr::Constant",
@@ -100,7 +100,7 @@
                         "type": "Constant::Int",
                         "0": "3"
                       },
-                      "loc": null
+                      "loc": "3:28-3:29"
                     },
                     "rhs": {
                       "type": "Expr::Constant",
@@ -108,21 +108,21 @@
                         "type": "Constant::Int",
                         "0": "4"
                       },
-                      "loc": null
+                      "loc": "3:32-3:33"
                     },
-                    "loc": null
+                    "loc": "3:28-3:31"
                   },
-                  "key_loc": null,
-                  "loc": null
+                  "key_loc": "3:23-3:22",
+                  "loc": "3:23-3:31"
                 }
               ],
-              "loc": null
+              "loc": "3:13-3:33"
             },
             "body": {
               "type": "Expr::Let",
               "pattern": {
                 "type": "Pattern::Any",
-                "loc": null
+                "loc": "4:7-4:8"
               },
               "expr": {
                 "type": "Expr::Map",
@@ -141,12 +141,12 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": null
+                        "loc": "4:19-4:18"
                       },
-                      "loc": null
+                      "loc": "4:19-4:18"
                     },
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "4:13-4:12",
+                    "loc": "4:13-4:18"
                   },
                   {
                     "type": "MapExprElem",
@@ -162,12 +162,12 @@
                           "type": "LongIdent::Ident",
                           "0": "y"
                         },
-                        "loc": null
+                        "loc": "4:27-4:26"
                       },
-                      "loc": null
+                      "loc": "4:27-4:26"
                     },
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "4:22-4:21",
+                    "loc": "4:22-4:26"
                   },
                   {
                     "type": "MapExprElem",
@@ -183,12 +183,12 @@
                           "type": "LongIdent::Ident",
                           "0": "z"
                         },
-                        "loc": null
+                        "loc": "4:34-4:33"
                       },
-                      "loc": null
+                      "loc": "4:34-4:33"
                     },
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "4:30-4:29",
+                    "loc": "4:30-4:33"
                   },
                   {
                     "type": "MapExprElem",
@@ -204,12 +204,12 @@
                           "type": "LongIdent::Ident",
                           "0": "w"
                         },
-                        "loc": null
+                        "loc": "4:40-4:39"
                       },
-                      "loc": null
+                      "loc": "4:40-4:39"
                     },
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "4:37-4:36",
+                    "loc": "4:37-4:39"
                   },
                   {
                     "type": "MapExprElem",
@@ -225,12 +225,12 @@
                           "type": "LongIdent::Ident",
                           "0": "x"
                         },
-                        "loc": null
+                        "loc": "4:48-4:47"
                       },
-                      "loc": null
+                      "loc": "4:48-4:47"
                     },
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "4:43-4:42",
+                    "loc": "4:43-4:47"
                   },
                   {
                     "type": "MapExprElem",
@@ -246,29 +246,29 @@
                           "type": "LongIdent::Ident",
                           "0": "y"
                         },
-                        "loc": null
+                        "loc": "4:57-4:56"
                       },
-                      "loc": null
+                      "loc": "4:57-4:56"
                     },
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "4:51-4:52",
+                    "loc": "4:51-4:56"
                   }
                 ],
-                "loc": null
+                "loc": "4:11-4:58"
               },
               "body": {
                 "type": "Expr::Unit",
-                "loc": null,
+                "loc": "4:3-4:6",
                 "faked": true
               },
-              "loc": null
+              "loc": "4:11-4:58"
             },
-            "loc": null
+            "loc": "3:13-3:33"
           },
-          "loc": null
+          "loc": "2:16-2:17"
         }
       },
-      "loc": null
+      "loc": "1:1-4:61"
     }
   ]
 }

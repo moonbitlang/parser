@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "main",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -32,7 +32,7 @@
           {
             "type": "LocalTypeDecl",
             "tycon": "T1",
-            "tycon_loc": null,
+            "tycon_loc": "2:8-2:10",
             "components": {
               "type": "TypeDesc::Variant",
               "0": [
@@ -41,7 +41,7 @@
                   "name": {
                     "type": "ConstrName",
                     "name": "A",
-                    "loc": null
+                    "loc": "3:5-3:6"
                   },
                   "args": [
                     {
@@ -54,10 +54,10 @@
                             "type": "LongIdent::Ident",
                             "0": "Int"
                           },
-                          "loc": null
+                          "loc": "3:7-3:10"
                         },
                         "tys": [],
-                        "loc": null
+                        "loc": "3:7-3:7"
                       },
                       "mut": false,
                       "label": null
@@ -65,7 +65,7 @@
                   ],
                   "tag": null,
                   "attrs": [],
-                  "loc": null,
+                  "loc": "3:5-3:10",
                   "doc": ""
                 }
               ]
@@ -86,9 +86,9 @@
                     "type": "LongIdent::Ident",
                     "0": "println"
                   },
-                  "loc": null
+                  "loc": "5:3-4:5"
                 },
-                "loc": null
+                "loc": "5:3-4:5"
               },
               "args": [
                 {
@@ -99,7 +99,7 @@
                       "type": "Constant::Int",
                       "0": "42"
                     },
-                    "loc": null
+                    "loc": "5:11-5:13"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -109,27 +109,27 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": null
+              "loc": "5:3-5:13"
             }
           ],
           "last_expr": {
             "type": "Expr::Hole",
-            "loc": null,
+            "loc": "5:14-6:3",
             "kind": {
               "type": "Hole::Synthesized"
             }
           },
-          "loc": null
+          "loc": "5:14-6:3"
         }
       },
-      "loc": null
+      "loc": "1:1-6:3"
     },
     {
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
         "tycon": "T2",
-        "tycon_loc": null,
+        "tycon_loc": "6:8-6:10",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -139,7 +139,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "A",
-                "loc": null
+                "loc": "7:5-7:6"
               },
               "args": [
                 {
@@ -152,10 +152,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "7:7-7:10"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "7:7-7:7"
                   },
                   "mut": false,
                   "label": null
@@ -163,7 +163,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "7:5-7:10",
               "doc": ""
             }
           ]
@@ -174,7 +174,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "6:3-7:12"
       }
     },
     {
@@ -185,12 +185,12 @@
         "name": {
           "type": "Binder",
           "name": "main",
-          "loc": null
+          "loc": "11:4-11:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "11:9-11:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -208,7 +208,7 @@
           {
             "type": "LocalTypeDecl",
             "tycon": "T1",
-            "tycon_loc": null,
+            "tycon_loc": "12:8-12:10",
             "components": {
               "type": "TypeDesc::Variant",
               "0": []
@@ -218,24 +218,24 @@
         ],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "11:9-13:10",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "11:1-13:10"
     },
     {
       "type": "Impl::TopExpr",
       "expr": {
         "type": "Expr::Hole",
-        "loc": null,
+        "loc": "15:3-16:2",
         "kind": {
           "type": "Hole::Synthesized"
         }
       },
       "is_main": false,
       "local_types": [],
-      "loc": null
+      "loc": "15:3-16:2"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -245,12 +245,12 @@
         "name": {
           "type": "Binder",
           "name": "main",
-          "loc": null
+          "loc": "18:4-18:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "18:9-18:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -270,15 +270,15 @@
           "name": {
             "type": "Binder",
             "name": "f",
-            "loc": null
+            "loc": "19:6-19:7"
           },
           "func": {
             "type": "Func::Lambda",
             "parameters": [],
-            "params_loc": null,
+            "params_loc": "19:7-19:8",
             "body": {
               "type": "Expr::Hole",
-              "loc": null,
+              "loc": "19:11-20:5",
               "kind": {
                 "type": "Hole::Synthesized"
               }
@@ -292,24 +292,24 @@
             },
             "has_error": null,
             "is_async": false,
-            "loc": null
+            "loc": "-1:1--1:1"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": null,
+            "loc": "19:3-20:5",
             "faked": true
           },
-          "loc": null
+          "loc": "19:3-20:5"
         }
       },
-      "loc": null
+      "loc": "18:1-20:5"
     },
     {
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
         "tycon": "T1",
-        "tycon_loc": null,
+        "tycon_loc": "20:10-20:12",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -319,12 +319,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "A",
-                "loc": null
+                "loc": "21:7-21:8"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "21:7-20:15",
               "doc": ""
             }
           ]
@@ -335,112 +335,52 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "20:5-21:9"
       }
     },
     {
       "type": "Impl::TopExpr",
       "expr": {
         "type": "Expr::Hole",
-        "loc": null,
+        "loc": "23:5-26:2",
         "kind": {
           "type": "Hole::Synthesized"
         }
       },
       "is_main": false,
       "local_types": [],
-      "loc": null
+      "loc": "23:5-26:2"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/local_types_error.mbt",
-        "start": {
-          "line": 6,
-          "column": 3
-        },
-        "end": {
-          "line": 6,
-          "column": 7
-        }
-      },
+      "loc": "6:3-6:7",
       "msg": "Unexpected token `enum`, you may expect simple expression."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/local_types_error.mbt",
-        "start": {
-          "line": 11,
-          "column": 1
-        },
-        "end": {
-          "line": 11,
-          "column": 3
-        }
-      },
+      "loc": "11:1-11:3",
       "msg": "Unexpected token here."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/local_types_error.mbt",
-        "start": {
-          "line": 12,
-          "column": 10
-        },
-        "end": {
-          "line": 12,
-          "column": 11
-        }
-      },
+      "loc": "12:10-12:11",
       "msg": "Unexpected token `[`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/local_types_error.mbt",
-        "start": {
-          "line": 15,
-          "column": 3
-        },
-        "end": {
-          "line": 15,
-          "column": 10
-        }
-      },
+      "loc": "15:3-15:10",
       "msg": "Unexpected token id (lowercase start), you may expect `pub`, `priv`, `type`, `suberror`, `typealias`, `async`, `fn`, `fnalias`, `struct`, `enum`, `let`, `const`, `extern`, `test`, `impl`, `trait`, `traitalias`, `enumview`, `#attribute`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/local_types_error.mbt",
-        "start": {
-          "line": 20,
-          "column": 5
-        },
-        "end": {
-          "line": 20,
-          "column": 9
-        }
-      },
+      "loc": "20:5-20:9",
       "msg": "Unexpected token `enum`, you may expect simple expression."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/local_types_error.mbt",
-        "start": {
-          "line": 23,
-          "column": 5
-        },
-        "end": {
-          "line": 23,
-          "column": 12
-        }
-      },
+      "loc": "23:5-23:12",
       "msg": "Unexpected token id (lowercase start), you may expect `pub`, `priv`, `type`, `suberror`, `typealias`, `async`, `fn`, `fnalias`, `struct`, `enum`, `let`, `const`, `extern`, `test`, `impl`, `trait`, `traitalias`, `enumview`, `#attribute`."
     }
   ]

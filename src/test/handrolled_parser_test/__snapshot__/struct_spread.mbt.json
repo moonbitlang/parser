@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "Imag",
-        "tycon_loc": null,
+        "tycon_loc": "1:8-1:12",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -16,7 +16,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "real",
-                "loc": null
+                "loc": "2:3-2:7"
               },
               "ty": {
                 "type": "Type::Name",
@@ -26,16 +26,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "2:9-2:12"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "2:9-2:8"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "2:3-2:8",
               "attrs": [],
               "doc": ""
             },
@@ -44,7 +44,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "imag",
-                "loc": null
+                "loc": "3:3-3:7"
               },
               "ty": {
                 "type": "Type::Name",
@@ -54,16 +54,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "3:9-3:12"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "3:9-3:8"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "3:3-3:8",
               "attrs": [],
               "doc": ""
             }
@@ -75,7 +75,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "1:1-3:13"
       }
     },
     {
@@ -86,12 +86,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "6:4-6:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "6:9-6:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -113,7 +113,7 @@
             "0": {
               "type": "Binder",
               "name": "i",
-              "loc": null
+              "loc": "7:7-7:8"
             }
           },
           "expr": {
@@ -125,7 +125,7 @@
                 "label": {
                   "type": "Label",
                   "name": "real",
-                  "loc": null
+                  "loc": "7:12-7:16"
                 },
                 "expr": {
                   "type": "Expr::Constant",
@@ -133,17 +133,17 @@
                     "type": "Constant::Int",
                     "0": "1"
                   },
-                  "loc": null
+                  "loc": "7:18-7:19"
                 },
                 "is_pun": false,
-                "loc": null
+                "loc": "7:12-7:17"
               },
               {
                 "type": "FieldDef",
                 "label": {
                   "type": "Label",
                   "name": "imag",
-                  "loc": null
+                  "loc": "7:21-7:25"
                 },
                 "expr": {
                   "type": "Expr::Constant",
@@ -151,16 +151,16 @@
                     "type": "Constant::Int",
                     "0": "1"
                   },
-                  "loc": null
+                  "loc": "7:27-7:28"
                 },
                 "is_pun": false,
-                "loc": null
+                "loc": "7:21-7:26"
               }
             ],
             "trailing": {
               "type": "Trailing::Comma"
             },
-            "loc": null
+            "loc": "7:11-7:29"
           },
           "body": {
             "type": "Expr::Let",
@@ -169,7 +169,7 @@
               "0": {
                 "type": "Binder",
                 "name": "j",
-                "loc": null
+                "loc": "8:7-8:8"
               }
             },
             "expr": {
@@ -183,12 +183,12 @@
                     "type": "LongIdent::Ident",
                     "0": "i"
                   },
-                  "loc": null
+                  "loc": "8:14-8:14"
                 },
-                "loc": null
+                "loc": "8:14-8:14"
               },
               "fields": [],
-              "loc": null
+              "loc": "8:11-8:16"
             },
             "body": {
               "type": "Expr::Let",
@@ -197,7 +197,7 @@
                 "0": {
                   "type": "Binder",
                   "name": "k",
-                  "loc": null
+                  "loc": "9:7-9:8"
                 }
               },
               "expr": {
@@ -211,12 +211,12 @@
                       "type": "LongIdent::Ident",
                       "0": "i"
                     },
-                    "loc": null
+                    "loc": "9:14-9:14"
                   },
-                  "loc": null
+                  "loc": "9:14-9:14"
                 },
                 "fields": [],
-                "loc": null
+                "loc": "9:11-9:15"
               },
               "body": {
                 "type": "Expr::Let",
@@ -225,7 +225,7 @@
                   "0": {
                     "type": "Binder",
                     "name": "l",
-                    "loc": null
+                    "loc": "10:7-10:8"
                   }
                 },
                 "expr": {
@@ -239,9 +239,9 @@
                         "type": "LongIdent::Ident",
                         "0": "i"
                       },
-                      "loc": null
+                      "loc": "10:14-10:14"
                     },
-                    "loc": null
+                    "loc": "10:14-10:14"
                   },
                   "fields": [
                     {
@@ -249,7 +249,7 @@
                       "label": {
                         "type": "Label",
                         "name": "real",
-                        "loc": null
+                        "loc": "10:17-10:21"
                       },
                       "expr": {
                         "type": "Expr::Constant",
@@ -257,13 +257,13 @@
                           "type": "Constant::Int",
                           "0": "1"
                         },
-                        "loc": null
+                        "loc": "10:23-10:24"
                       },
                       "is_pun": false,
-                      "loc": null
+                      "loc": "10:17-10:22"
                     }
                   ],
-                  "loc": null
+                  "loc": "10:11-10:24"
                 },
                 "body": {
                   "type": "Expr::Let",
@@ -272,7 +272,7 @@
                     "0": {
                       "type": "Binder",
                       "name": "real",
-                      "loc": null
+                      "loc": "11:7-11:11"
                     }
                   },
                   "expr": {
@@ -281,7 +281,7 @@
                       "type": "Constant::Int",
                       "0": "1"
                     },
-                    "loc": null
+                    "loc": "11:14-11:15"
                   },
                   "body": {
                     "type": "Expr::Let",
@@ -290,7 +290,7 @@
                       "0": {
                         "type": "Binder",
                         "name": "m",
-                        "loc": null
+                        "loc": "12:7-12:8"
                       }
                     },
                     "expr": {
@@ -304,9 +304,9 @@
                             "type": "LongIdent::Ident",
                             "0": "i"
                           },
-                          "loc": null
+                          "loc": "12:14-12:14"
                         },
-                        "loc": null
+                        "loc": "12:14-12:14"
                       },
                       "fields": [
                         {
@@ -314,7 +314,7 @@
                           "label": {
                             "type": "Label",
                             "name": "real",
-                            "loc": null
+                            "loc": "12:17-12:21"
                           },
                           "expr": {
                             "type": "Expr::Ident",
@@ -324,35 +324,35 @@
                                 "type": "LongIdent::Ident",
                                 "0": "real"
                               },
-                              "loc": null
+                              "loc": "12:17-12:21"
                             },
-                            "loc": null
+                            "loc": "12:17-12:21"
                           },
                           "is_pun": true,
-                          "loc": null
+                          "loc": "12:17-12:16"
                         }
                       ],
-                      "loc": null
+                      "loc": "12:11-12:21"
                     },
                     "body": {
                       "type": "Expr::Unit",
-                      "loc": null,
+                      "loc": "12:3-12:6",
                       "faked": true
                     },
-                    "loc": null
+                    "loc": "12:11-12:21"
                   },
-                  "loc": null
+                  "loc": "11:14-11:15"
                 },
-                "loc": null
+                "loc": "10:11-10:24"
               },
-              "loc": null
+              "loc": "9:11-9:15"
             },
-            "loc": null
+            "loc": "8:11-8:16"
           },
-          "loc": null
+          "loc": "7:11-7:29"
         }
       },
-      "loc": null
+      "loc": "6:1-12:23"
     }
   ]
 }

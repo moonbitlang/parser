@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "2:4-2:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "2:9-2:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -42,19 +42,19 @@
                     "type": "LongIdent::Ident",
                     "0": "cond"
                   },
-                  "loc": null
+                  "loc": "3:6-3:5"
                 },
-                "loc": null
+                "loc": "3:6-3:5"
               },
               "ifso": {
                 "type": "Expr::Hole",
-                "loc": null,
+                "loc": "3:10-3:10",
                 "kind": {
                   "type": "Hole::Synthesized"
                 }
               },
               "ifnot": null,
-              "loc": null
+              "loc": "3:3-3:10"
             },
             {
               "type": "Expr::If",
@@ -66,19 +66,19 @@
                     "type": "LongIdent::Ident",
                     "0": "parse"
                   },
-                  "loc": null
+                  "loc": "4:6-4:5"
                 },
-                "loc": null
+                "loc": "4:6-4:5"
               },
               "ifso": {
                 "type": "Expr::Hole",
-                "loc": null,
+                "loc": "4:12-4:17",
                 "kind": {
                   "type": "Hole::Synthesized"
                 }
               },
               "ifnot": null,
-              "loc": null
+              "loc": "4:3-4:11"
             },
             {
               "type": "Expr::If",
@@ -90,17 +90,17 @@
                     "type": "LongIdent::Ident",
                     "0": "parse"
                   },
-                  "loc": null
+                  "loc": "5:6-5:5"
                 },
-                "loc": null
+                "loc": "5:6-5:5"
               },
               "ifso": {
                 "type": "Expr::Unit",
-                "loc": null,
+                "loc": "5:18-5:20",
                 "faked": true
               },
               "ifnot": null,
-              "loc": null
+              "loc": "5:3-5:20"
             },
             {
               "type": "Expr::Match",
@@ -112,14 +112,14 @@
                     "type": "LongIdent::Ident",
                     "0": "e"
                   },
-                  "loc": null
+                  "loc": "8:9-8:8"
                 },
-                "loc": null
+                "loc": "8:9-8:8"
               },
               "cases": [],
-              "match_loc": null,
+              "match_loc": "8:3-8:10",
               "using": null,
-              "loc": null
+              "loc": "8:3-8:10"
             },
             {
               "type": "Expr::Match",
@@ -131,14 +131,14 @@
                     "type": "LongIdent::Ident",
                     "0": "parse"
                   },
-                  "loc": null
+                  "loc": "9:9-9:8"
                 },
-                "loc": null
+                "loc": "9:9-9:8"
               },
               "cases": [],
-              "match_loc": null,
+              "match_loc": "9:3-9:20",
               "using": null,
-              "loc": null
+              "loc": "9:3-9:14"
             }
           ],
           "last_expr": {
@@ -151,110 +151,50 @@
                   "type": "LongIdent::Ident",
                   "0": "parse"
                 },
-                "loc": null
+                "loc": "10:9-10:8"
               },
-              "loc": null
+              "loc": "10:9-10:8"
             },
             "cases": [],
-            "match_loc": null,
+            "match_loc": "10:3-10:22",
             "using": null,
-            "loc": null
+            "loc": "10:3-10:23"
           },
-          "loc": null
+          "loc": "3:3-10:23"
         }
       },
-      "loc": null
+      "loc": "2:1-11:5"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/if_match_recovery.mbt",
-        "start": {
-          "line": 3,
-          "column": 10
-        },
-        "end": {
-          "line": 3,
-          "column": 10
-        }
-      },
+      "loc": "3:10-3:10",
       "msg": "Unexpected line break here, missing `{` at the end of this line."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/if_match_recovery.mbt",
-        "start": {
-          "line": 4,
-          "column": 12
-        },
-        "end": {
-          "line": 4,
-          "column": 17
-        }
-      },
+      "loc": "4:12-4:17",
       "msg": "Unexpected token id (lowercase start), you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/if_match_recovery.mbt",
-        "start": {
-          "line": 5,
-          "column": 12
-        },
-        "end": {
-          "line": 5,
-          "column": 17
-        }
-      },
+      "loc": "5:12-5:17",
       "msg": "Unexpected token id (lowercase start), you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/if_match_recovery.mbt",
-        "start": {
-          "line": 8,
-          "column": 10
-        },
-        "end": {
-          "line": 8,
-          "column": 10
-        }
-      },
+      "loc": "8:10-8:10",
       "msg": "Unexpected line break here, missing `{` at the end of this line."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/if_match_recovery.mbt",
-        "start": {
-          "line": 9,
-          "column": 15
-        },
-        "end": {
-          "line": 9,
-          "column": 20
-        }
-      },
+      "loc": "9:15-9:20",
       "msg": "Unexpected token id (lowercase start), you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/if_match_recovery.mbt",
-        "start": {
-          "line": 10,
-          "column": 15
-        },
-        "end": {
-          "line": 10,
-          "column": 20
-        }
-      },
+      "loc": "10:15-10:20",
       "msg": "Unexpected token id (lowercase start), you may expect `{`."
     }
   ]

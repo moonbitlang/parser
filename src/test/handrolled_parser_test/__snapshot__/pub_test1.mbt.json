@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "hello",
-          "loc": null
+          "loc": "1:8-1:13"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "1:14-1:15",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -23,7 +23,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": null
+          "loc": "1:1-1:4"
         },
         "attrs": [],
         "doc": ""
@@ -33,13 +33,13 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Hole",
-          "loc": null,
+          "loc": "1:18-3:1",
           "kind": {
             "type": "Hole::Synthesized"
           }
         }
       },
-      "loc": null
+      "loc": "1:1-3:1"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -49,12 +49,12 @@
         "name": {
           "type": "Binder",
           "name": "hello2",
-          "loc": null
+          "loc": "3:8-3:14"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "3:15-3:16",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -63,7 +63,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": null
+          "loc": "3:1-2:39"
         },
         "attrs": [],
         "doc": ""
@@ -76,15 +76,15 @@
           "name": {
             "type": "Binder",
             "name": "hello3",
-            "loc": null
+            "loc": "5:4-5:10"
           },
           "func": {
             "type": "Func::Lambda",
             "parameters": [],
-            "params_loc": null,
+            "params_loc": "5:11-5:12",
             "body": {
               "type": "Expr::Unit",
-              "loc": null,
+              "loc": "5:13-5:13",
               "faked": true
             },
             "return_type": null,
@@ -96,48 +96,28 @@
             },
             "has_error": null,
             "is_async": false,
-            "loc": null
+            "loc": "-1:1--1:1"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": null,
+            "loc": "5:1-5:13",
             "faked": true
           },
-          "loc": null
+          "loc": "5:1-5:13"
         }
       },
-      "loc": null
+      "loc": "3:1-5:13"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/pub_test1.mbt",
-        "start": {
-          "line": 3,
-          "column": 1
-        },
-        "end": {
-          "line": 3,
-          "column": 4
-        }
-      },
+      "loc": "3:1-3:4",
       "msg": "Unexpected token `pub`, you may expect simple expression."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/pub_test1.mbt",
-        "start": {
-          "line": 5,
-          "column": 13
-        },
-        "end": {
-          "line": 5,
-          "column": 13
-        }
-      },
+      "loc": "5:13-5:13",
       "msg": "Unexpected end of file, missing `{` here."
     }
   ]

@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "Foo",
-        "tycon_loc": null,
+        "tycon_loc": "1:6-1:9",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -16,12 +16,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Bar",
-                "loc": null
+                "loc": "1:10-1:13"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "1:10-1:10",
               "doc": ""
             },
             {
@@ -29,12 +29,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Baz",
-                "loc": null
+                "loc": "1:14-1:17"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "1:14-1:14",
               "doc": ""
             }
           ]
@@ -45,24 +45,14 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "1:1-1:17"
       }
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/no_trailing_newline_enum.mbt",
-        "start": {
-          "line": 1,
-          "column": 13
-        },
-        "end": {
-          "line": 1,
-          "column": 14
-        }
-      },
+      "loc": "1:13-1:14",
       "msg": "Expecting a newline or `;` here, but encountered `;`."
     }
   ]

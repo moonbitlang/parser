@@ -6,13 +6,13 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "AI",
-        "tycon_loc": null,
+        "tycon_loc": "2:6-2:8",
         "params": [],
         "components": {
           "type": "TypeDesc::Newtype",
           "0": {
             "type": "Type::Any",
-            "loc": null
+            "loc": "2:9-5:2"
           }
         },
         "attrs": [],
@@ -21,24 +21,14 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "2:1-5:2"
       }
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/invalid_type.mbt",
-        "start": {
-          "line": 2,
-          "column": 9
-        },
-        "end": {
-          "line": 2,
-          "column": 10
-        }
-      },
+      "loc": "2:9-2:10",
       "msg": "Unexpected token `=`, you may expect type."
     }
   ]

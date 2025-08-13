@@ -6,7 +6,7 @@
       "binder": {
         "type": "Binder",
         "name": "a",
-        "loc": null
+        "loc": "1:5-1:6"
       },
       "ty": null,
       "expr": {
@@ -15,13 +15,13 @@
           "type": "Constant::Int",
           "0": "10"
         },
-        "loc": null
+        "loc": "1:9-1:11"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": null,
+      "loc": "1:1-1:8",
       "attrs": [],
       "doc": ""
     }

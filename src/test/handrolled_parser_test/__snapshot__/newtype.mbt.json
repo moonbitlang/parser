@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "MyInt",
-        "tycon_loc": null,
+        "tycon_loc": "1:6-1:11",
         "params": [],
         "components": {
           "type": "TypeDesc::Newtype",
@@ -18,10 +18,10 @@
                 "type": "LongIdent::Ident",
                 "0": "Int"
               },
-              "loc": null
+              "loc": "1:12-1:15"
             },
             "tys": [],
-            "loc": null
+            "loc": "1:12-1:11"
           }
         },
         "attrs": [],
@@ -39,10 +39,10 @@
                 "0": "Eq"
               },
               "is_object": false,
-              "loc": null
+              "loc": "1:23-1:23"
             },
             "args": [],
-            "loc": null
+            "loc": "1:23-1:23"
           },
           {
             "type": "DerivingDirective",
@@ -53,13 +53,13 @@
                 "0": "Show"
               },
               "is_object": false,
-              "loc": null
+              "loc": "1:27-1:26"
             },
             "args": [],
-            "loc": null
+            "loc": "1:27-1:26"
           }
         ],
-        "loc": null
+        "loc": "1:1-1:31"
       }
     },
     {
@@ -67,12 +67,12 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "MyHashMap",
-        "tycon_loc": null,
+        "tycon_loc": "3:6-3:15",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "T",
-            "loc": null
+            "loc": "3:16-3:16"
           }
         ],
         "components": {
@@ -85,7 +85,7 @@
                 "type": "LongIdent::Ident",
                 "0": "HashMap"
               },
-              "loc": null
+              "loc": "3:19-3:26"
             },
             "tys": [
               {
@@ -96,10 +96,10 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "3:27-3:30"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "3:27-3:27"
               },
               {
                 "type": "Type::Name",
@@ -109,13 +109,13 @@
                     "type": "LongIdent::Ident",
                     "0": "T"
                   },
-                  "loc": null
+                  "loc": "3:31-3:32"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "3:31-3:31"
               }
             ],
-            "loc": null
+            "loc": "3:19-3:32"
           }
         },
         "attrs": [],
@@ -124,7 +124,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "3:1-3:32"
       }
     },
     {
@@ -132,17 +132,17 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "MyTuple",
-        "tycon_loc": null,
+        "tycon_loc": "5:6-5:13",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "A",
-            "loc": null
+            "loc": "5:14-5:14"
           },
           {
             "type": "TypeDeclBinder",
             "name": "B",
-            "loc": null
+            "loc": "5:17-5:16"
           }
         ],
         "components": {
@@ -158,10 +158,10 @@
                     "type": "LongIdent::Ident",
                     "0": "A"
                   },
-                  "loc": null
+                  "loc": "5:21-5:22"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "5:21-5:21"
               },
               {
                 "type": "Type::Name",
@@ -171,13 +171,13 @@
                     "type": "LongIdent::Ident",
                     "0": "B"
                   },
-                  "loc": null
+                  "loc": "5:24-5:25"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "5:24-5:23"
               }
             ],
-            "loc": null
+            "loc": "5:20-5:25"
           }
         },
         "attrs": [],
@@ -186,7 +186,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "5:1-5:25"
       }
     },
     {
@@ -194,22 +194,22 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "MyTriple",
-        "tycon_loc": null,
+        "tycon_loc": "7:6-7:14",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "A",
-            "loc": null
+            "loc": "7:15-7:15"
           },
           {
             "type": "TypeDeclBinder",
             "name": "B",
-            "loc": null
+            "loc": "7:18-7:17"
           },
           {
             "type": "TypeDeclBinder",
             "name": "C",
-            "loc": null
+            "loc": "7:21-7:20"
           }
         ],
         "components": {
@@ -225,10 +225,10 @@
                     "type": "LongIdent::Ident",
                     "0": "A"
                   },
-                  "loc": null
+                  "loc": "7:25-7:26"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "7:25-7:25"
               },
               {
                 "type": "Type::Name",
@@ -238,10 +238,10 @@
                     "type": "LongIdent::Ident",
                     "0": "B"
                   },
-                  "loc": null
+                  "loc": "7:28-7:29"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "7:28-7:27"
               },
               {
                 "type": "Type::Name",
@@ -251,13 +251,13 @@
                     "type": "LongIdent::Ident",
                     "0": "C"
                   },
-                  "loc": null
+                  "loc": "7:31-7:32"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "7:31-7:30"
               }
             ],
-            "loc": null
+            "loc": "7:24-7:32"
           }
         },
         "attrs": [],
@@ -266,7 +266,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "7:1-7:32"
       }
     },
     {
@@ -274,12 +274,12 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "X",
-        "tycon_loc": null,
+        "tycon_loc": "9:6-9:7",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "X",
-            "loc": null
+            "loc": "9:8-9:8"
           }
         ],
         "components": {
@@ -295,10 +295,10 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "9:12-9:15"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "9:12-9:12"
               },
               {
                 "type": "Type::Name",
@@ -308,10 +308,10 @@
                     "type": "LongIdent::Ident",
                     "0": "X"
                   },
-                  "loc": null
+                  "loc": "9:17-9:18"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "9:17-9:16"
               },
               {
                 "type": "Type::Name",
@@ -321,13 +321,13 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "9:20-9:23"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "9:20-9:19"
               }
             ],
-            "loc": null
+            "loc": "9:11-9:23"
           }
         },
         "attrs": [],
@@ -336,7 +336,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "9:1-9:23"
       }
     },
     {
@@ -344,12 +344,12 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "X",
-        "tycon_loc": null,
+        "tycon_loc": "11:6-11:7",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "X",
-            "loc": null
+            "loc": "11:8-11:8"
           }
         ],
         "components": {
@@ -365,10 +365,10 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "11:13-11:16"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "11:13-11:13"
               },
               {
                 "type": "Type::Name",
@@ -378,10 +378,10 @@
                     "type": "LongIdent::Ident",
                     "0": "X"
                   },
-                  "loc": null
+                  "loc": "11:18-11:19"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "11:18-11:17"
               },
               {
                 "type": "Type::Name",
@@ -391,13 +391,13 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "11:21-11:24"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "11:21-11:20"
               }
             ],
-            "loc": null
+            "loc": "11:12-11:24"
           }
         },
         "attrs": [],
@@ -406,7 +406,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "11:1-11:25"
       }
     },
     {
@@ -414,12 +414,12 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "Y",
-        "tycon_loc": null,
+        "tycon_loc": "13:6-13:7",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "Y",
-            "loc": null
+            "loc": "13:8-13:8"
           }
         ],
         "components": {
@@ -432,7 +432,7 @@
                 "type": "LongIdent::Ident",
                 "0": "Int"
               },
-              "loc": null
+              "loc": "13:11-13:14"
             },
             "tys": [
               {
@@ -443,7 +443,7 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "13:15-13:18"
                 },
                 "tys": [
                   {
@@ -454,16 +454,16 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "13:19-13:22"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "13:19-13:19"
                   }
                 ],
-                "loc": null
+                "loc": "13:15-13:22"
               }
             ],
-            "loc": null
+            "loc": "13:11-13:23"
           }
         },
         "attrs": [],
@@ -472,7 +472,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "13:1-13:23"
       }
     },
     {
@@ -480,7 +480,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "X",
-        "tycon_loc": null,
+        "tycon_loc": "15:6-15:7",
         "params": [],
         "components": {
           "type": "TypeDesc::Newtype",
@@ -492,10 +492,10 @@
                 "type": "LongIdent::Ident",
                 "0": "Y"
               },
-              "loc": null
+              "loc": "15:9-15:10"
             },
             "tys": [],
-            "loc": null
+            "loc": "15:9-15:9"
           }
         },
         "attrs": [],
@@ -504,7 +504,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "15:1-15:10"
       }
     },
     {
@@ -512,19 +512,19 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "Z",
-        "tycon_loc": null,
+        "tycon_loc": "17:6-17:7",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "X",
-            "loc": null
+            "loc": "17:8-17:8"
           }
         ],
         "components": {
           "type": "TypeDesc::Newtype",
           "0": {
             "type": "Type::Any",
-            "loc": null
+            "loc": "17:17-17:18"
           }
         },
         "attrs": [],
@@ -533,7 +533,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "17:1-17:18"
       }
     },
     {
@@ -541,19 +541,19 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "Z",
-        "tycon_loc": null,
+        "tycon_loc": "19:6-19:7",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "I",
-            "loc": null
+            "loc": "19:8-19:8"
           }
         ],
         "components": {
           "type": "TypeDesc::Newtype",
           "0": {
             "type": "Type::Any",
-            "loc": null
+            "loc": "19:12-19:19"
           }
         },
         "attrs": [],
@@ -562,84 +562,34 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "19:1-19:19"
       }
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/newtype.mbt",
-        "start": {
-          "line": 15,
-          "column": 10
-        },
-        "end": {
-          "line": 15,
-          "column": 10
-        }
-      },
+      "loc": "15:10-15:10",
       "msg": "Unexpected line break here, missing `,`, `)` at the end of this line."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/newtype.mbt",
-        "start": {
-          "line": 17,
-          "column": 10
-        },
-        "end": {
-          "line": 17,
-          "column": 11
-        }
-      },
+      "loc": "17:10-17:11",
       "msg": "Unexpected token `(`, you may expect `,`, `]`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/newtype.mbt",
-        "start": {
-          "line": 17,
-          "column": 17
-        },
-        "end": {
-          "line": 17,
-          "column": 18
-        }
-      },
+      "loc": "17:17-17:18",
       "msg": "Unexpected token `)`, you may expect type."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/newtype.mbt",
-        "start": {
-          "line": 19,
-          "column": 9
-        },
-        "end": {
-          "line": 19,
-          "column": 10
-        }
-      },
+      "loc": "19:9-19:10",
       "msg": "Unexpected token `[`, you may expect `,`, `]`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/newtype.mbt",
-        "start": {
-          "line": 19,
-          "column": 12
-        },
-        "end": {
-          "line": 19,
-          "column": 13
-        }
-      },
+      "loc": "19:12-19:13",
       "msg": "Unexpected token `]`, you may expect type."
     }
   ]

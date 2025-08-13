@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "MyEnum",
-        "tycon_loc": null,
+        "tycon_loc": "2:6-2:12",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -16,7 +16,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Bar1",
-                "loc": null
+                "loc": "4:3-4:7"
               },
               "args": null,
               "tag": null,
@@ -24,10 +24,10 @@
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag1",
-                  "loc": null
+                  "loc": "3:3-3:13"
                 }
               ],
-              "loc": null,
+              "loc": "3:3-3:14",
               "doc": ""
             },
             {
@@ -35,7 +35,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Bar2",
-                "loc": null
+                "loc": "7:3-7:7"
               },
               "args": [
                 {
@@ -48,10 +48,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "7:8-7:11"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "7:8-7:8"
                   },
                   "mut": false,
                   "label": null
@@ -66,10 +66,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Bool"
                       },
-                      "loc": null
+                      "loc": "7:12-7:16"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "7:12-7:12"
                   },
                   "mut": false,
                   "label": null
@@ -80,15 +80,15 @@
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag2",
-                  "loc": null
+                  "loc": "5:3-5:13"
                 },
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag3",
-                  "loc": null
+                  "loc": "6:3-6:13"
                 }
               ],
-              "loc": null,
+              "loc": "5:3-7:16",
               "doc": ""
             }
           ]
@@ -99,7 +99,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "2:1-7:18"
       }
     },
     {
@@ -107,7 +107,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "MyStruct",
-        "tycon_loc": null,
+        "tycon_loc": "11:8-11:16",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -117,7 +117,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "field1",
-                "loc": null
+                "loc": "13:3-13:9"
               },
               "ty": {
                 "type": "Type::Name",
@@ -127,21 +127,21 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "13:12-13:15"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "13:12-13:11"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "12:3-13:11",
               "attrs": [
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag1",
-                  "loc": null
+                  "loc": "12:3-12:13"
                 }
               ],
               "doc": ""
@@ -151,7 +151,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "field2",
-                "loc": null
+                "loc": "16:3-16:9"
               },
               "ty": {
                 "type": "Type::Name",
@@ -161,26 +161,26 @@
                     "type": "LongIdent::Ident",
                     "0": "Bool"
                   },
-                  "loc": null
+                  "loc": "16:12-16:16"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "16:12-16:11"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "14:3-16:11",
               "attrs": [
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag2",
-                  "loc": null
+                  "loc": "14:3-14:13"
                 },
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag3",
-                  "loc": null
+                  "loc": "15:3-15:13"
                 }
               ],
               "doc": ""
@@ -193,7 +193,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "11:1-16:17"
       }
     },
     {
@@ -201,7 +201,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "MyEnum2",
-        "tycon_loc": null,
+        "tycon_loc": "20:6-20:13",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -211,7 +211,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Bar1",
-                "loc": null
+                "loc": "23:3-23:7"
               },
               "args": null,
               "tag": null,
@@ -219,10 +219,10 @@
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag1",
-                  "loc": null
+                  "loc": "22:3-22:13"
                 }
               ],
-              "loc": null,
+              "loc": "22:3-22:14",
               "doc": " doc for bar1"
             },
             {
@@ -230,7 +230,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Bar2",
-                "loc": null
+                "loc": "27:3-27:7"
               },
               "args": [
                 {
@@ -243,10 +243,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "27:8-27:11"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "27:8-27:8"
                   },
                   "mut": false,
                   "label": null
@@ -261,10 +261,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Bool"
                       },
-                      "loc": null
+                      "loc": "27:12-27:16"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "27:12-27:12"
                   },
                   "mut": false,
                   "label": null
@@ -275,15 +275,15 @@
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag2",
-                  "loc": null
+                  "loc": "25:3-25:13"
                 },
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag3",
-                  "loc": null
+                  "loc": "26:3-26:13"
                 }
               ],
-              "loc": null,
+              "loc": "25:3-27:16",
               "doc": " doc for bar2"
             }
           ]
@@ -294,7 +294,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "20:1-27:18"
       }
     },
     {
@@ -302,7 +302,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "MyStruct2",
-        "tycon_loc": null,
+        "tycon_loc": "31:8-31:17",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -312,7 +312,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "field1",
-                "loc": null
+                "loc": "34:3-34:9"
               },
               "ty": {
                 "type": "Type::Name",
@@ -322,21 +322,21 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "34:12-34:15"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "34:12-34:11"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "33:3-34:11",
               "attrs": [
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag1",
-                  "loc": null
+                  "loc": "33:3-33:13"
                 }
               ],
               "doc": " doc for field1"
@@ -346,7 +346,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "field2",
-                "loc": null
+                "loc": "38:3-38:9"
               },
               "ty": {
                 "type": "Type::Name",
@@ -356,26 +356,26 @@
                     "type": "LongIdent::Ident",
                     "0": "Bool"
                   },
-                  "loc": null
+                  "loc": "38:12-38:16"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "38:12-38:11"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "36:3-38:11",
               "attrs": [
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag2",
-                  "loc": null
+                  "loc": "36:3-36:13"
                 },
                 {
                   "type": "Attribute",
                   "raw": "#attr.tag3",
-                  "loc": null
+                  "loc": "37:3-37:13"
                 }
               ],
               "doc": " doc for field2"
@@ -388,7 +388,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "31:1-38:17"
       }
     },
     {
@@ -398,7 +398,7 @@
         "name": {
           "type": "Binder",
           "name": "MyTrait",
-          "loc": null
+          "loc": "42:7-42:14"
         },
         "supers": [],
         "methods": [
@@ -407,7 +407,7 @@
             "name": {
               "type": "Binder",
               "name": "f",
-              "loc": null
+              "loc": "44:3-44:4"
             },
             "has_error": null,
             "is_async": false,
@@ -421,10 +421,10 @@
                   "type": "LongIdent::Ident",
                   "0": "Self"
                 },
-                "loc": null
+                "loc": "44:10-44:14"
               },
               "tys": [],
-              "loc": null
+              "loc": "44:10-44:9"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
@@ -434,17 +434,17 @@
               {
                 "type": "Attribute",
                 "raw": "#attr.tag1",
-                "loc": null
+                "loc": "43:3-43:13"
               }
             ],
-            "loc": null
+            "loc": "43:3-44:9"
           },
           {
             "type": "TraitMethodDecl",
             "name": {
               "type": "Binder",
               "name": "g",
-              "loc": null
+              "loc": "47:3-47:4"
             },
             "has_error": null,
             "is_async": false,
@@ -460,12 +460,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Self"
                     },
-                    "loc": null
+                    "loc": "47:5-47:9"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "47:5-47:5"
                 },
-                "loc": null
+                "loc": "47:5-47:5"
               },
               {
                 "type": "Parameter::DiscardPositional",
@@ -477,12 +477,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Self"
                     },
-                    "loc": null
+                    "loc": "47:11-47:15"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "47:11-47:10"
                 },
-                "loc": null
+                "loc": "47:11-47:10"
               }
             ],
             "return_type": {
@@ -493,10 +493,10 @@
                   "type": "LongIdent::Ident",
                   "0": "Unit"
                 },
-                "loc": null
+                "loc": "47:20-47:24"
               },
               "tys": [],
-              "loc": null
+              "loc": "47:20-47:19"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
@@ -506,21 +506,21 @@
               {
                 "type": "Attribute",
                 "raw": "#attr.tag2",
-                "loc": null
+                "loc": "45:3-45:13"
               },
               {
                 "type": "Attribute",
                 "raw": "#attr.tag3",
-                "loc": null
+                "loc": "46:3-46:13"
               }
             ],
-            "loc": null
+            "loc": "45:3-47:19"
           }
         ],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": null,
+        "loc": "42:1-47:25",
         "attrs": [],
         "doc": ""
       }

@@ -5,40 +5,40 @@
       "type": "Impl::TopExpr",
       "expr": {
         "type": "Expr::Hole",
-        "loc": null,
+        "loc": "1:14-1:19",
         "kind": {
           "type": "Hole::Synthesized"
         }
       },
       "is_main": false,
       "local_types": [],
-      "loc": null
+      "loc": "1:14-1:19"
     },
     {
       "type": "Impl::TopExpr",
       "expr": {
         "type": "Expr::Hole",
-        "loc": null,
+        "loc": "2:24-2:34",
         "kind": {
           "type": "Hole::Synthesized"
         }
       },
       "is_main": false,
       "local_types": [],
-      "loc": null
+      "loc": "2:24-2:34"
     },
     {
       "type": "Impl::TopExpr",
       "expr": {
         "type": "Expr::Hole",
-        "loc": null,
+        "loc": "5:14-5:38",
         "kind": {
           "type": "Hole::Synthesized"
         }
       },
       "is_main": false,
       "local_types": [],
-      "loc": null
+      "loc": "5:14-5:38"
     },
     {
       "type": "Impl::TopBatchTraitAlias",
@@ -49,19 +49,19 @@
           "binder": {
             "type": "Binder",
             "name": "I1",
-            "loc": null
+            "loc": "7:15-7:16"
           },
           "target": {
             "type": "Label",
             "name": "Show",
-            "loc": null
+            "loc": "7:17-7:16"
           }
         }
       ],
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "7:1-7:16",
       "attrs": [],
       "is_list": false,
       "doc": ""
@@ -75,21 +75,21 @@
           "binder": {
             "type": "Binder",
             "name": "I2",
-            "loc": null
+            "loc": "8:19-8:20"
           },
           "target": {
             "type": "Label",
             "name": "Eq",
-            "loc": null
+            "loc": "8:21-8:20"
           }
         }
       ],
       "vis": {
         "type": "Visibility::Pub",
         "attr": null,
-        "loc": null
+        "loc": "8:1-7:22"
       },
-      "loc": null,
+      "loc": "8:1-8:20",
       "attrs": [],
       "is_list": false,
       "doc": ""
@@ -103,19 +103,19 @@
           "binder": {
             "type": "Binder",
             "name": "I3",
-            "loc": null
+            "loc": "11:15-11:16"
           },
           "target": {
             "type": "Label",
             "name": "I1",
-            "loc": null
+            "loc": "11:17-11:16"
           }
         }
       ],
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "11:1-11:16",
       "attrs": [],
       "is_list": false,
       "doc": ""
@@ -124,21 +124,21 @@
       "type": "Impl::TopExpr",
       "expr": {
         "type": "Expr::Hole",
-        "loc": null,
+        "loc": "13:17-13:17",
         "kind": {
           "type": "Hole::Synthesized"
         }
       },
       "is_main": false,
       "local_types": [],
-      "loc": null
+      "loc": "13:17-13:17"
     },
     {
       "type": "Impl::TopBatchTypeAlias",
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "14:11-14:15"
       },
       "targets": [
         {
@@ -146,7 +146,7 @@
           "binder": {
             "type": "Binder",
             "name": "T",
-            "loc": null
+            "loc": "14:16-14:17"
           },
           "target": null
         }
@@ -154,7 +154,7 @@
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "14:1-14:15",
       "attrs": [],
       "is_list": false,
       "doc": ""
@@ -164,7 +164,7 @@
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "15:15-15:19"
       },
       "targets": [
         {
@@ -172,7 +172,7 @@
           "binder": {
             "type": "Binder",
             "name": "T1",
-            "loc": null
+            "loc": "15:21-15:23"
           },
           "target": null
         },
@@ -181,7 +181,7 @@
           "binder": {
             "type": "Binder",
             "name": "T2",
-            "loc": null
+            "loc": "15:25-15:27"
           },
           "target": null
         },
@@ -190,7 +190,7 @@
           "binder": {
             "type": "Binder",
             "name": "T3",
-            "loc": null
+            "loc": "15:29-15:31"
           },
           "target": null
         }
@@ -198,9 +198,9 @@
       "vis": {
         "type": "Visibility::Pub",
         "attr": null,
-        "loc": null
+        "loc": "15:1-14:37"
       },
-      "loc": null,
+      "loc": "15:1-15:32",
       "attrs": [],
       "is_list": true,
       "doc": ""
@@ -210,7 +210,7 @@
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "17:12-17:16"
       },
       "targets": [
         {
@@ -218,7 +218,7 @@
           "binder": {
             "type": "Binder",
             "name": "T",
-            "loc": null
+            "loc": "17:17-17:18"
           },
           "target": null
         }
@@ -226,7 +226,7 @@
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "17:1-17:16",
       "attrs": [],
       "is_list": false,
       "doc": ""
@@ -236,7 +236,7 @@
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "18:16-18:20"
       },
       "targets": [
         {
@@ -244,7 +244,7 @@
           "binder": {
             "type": "Binder",
             "name": "A",
-            "loc": null
+            "loc": "18:22-18:23"
           },
           "target": null
         },
@@ -253,7 +253,7 @@
           "binder": {
             "type": "Binder",
             "name": "B",
-            "loc": null
+            "loc": "18:25-18:26"
           },
           "target": null
         },
@@ -262,7 +262,7 @@
           "binder": {
             "type": "Binder",
             "name": "C",
-            "loc": null
+            "loc": "18:28-18:29"
           },
           "target": null
         }
@@ -270,9 +270,9 @@
       "vis": {
         "type": "Visibility::Pub",
         "attr": null,
-        "loc": null
+        "loc": "18:1-17:19"
       },
-      "loc": null,
+      "loc": "18:1-18:29",
       "attrs": [],
       "is_list": true,
       "doc": ""
@@ -282,7 +282,7 @@
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "19:12-19:16"
       },
       "targets": [
         {
@@ -290,7 +290,7 @@
           "binder": {
             "type": "Binder",
             "name": "T",
-            "loc": null
+            "loc": "19:17-19:18"
           },
           "target": null
         }
@@ -298,7 +298,7 @@
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "19:1-19:16",
       "attrs": [],
       "is_list": false,
       "doc": ""
@@ -308,7 +308,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "A",
-        "tycon_loc": null,
+        "tycon_loc": "21:21-21:22",
         "params": [],
         "components": {
           "type": "TypeDesc::Alias",
@@ -321,10 +321,10 @@
                 "pkg": "pkg",
                 "id": "T"
               },
-              "loc": null
+              "loc": "21:11-21:15"
             },
             "tys": [],
-            "loc": null
+            "loc": "21:11-21:15"
           }
         },
         "attrs": [],
@@ -333,7 +333,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "21:1-21:20"
       }
     },
     {
@@ -341,7 +341,7 @@
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "22:11-22:15"
       },
       "targets": [
         {
@@ -349,7 +349,7 @@
           "binder": {
             "type": "Binder",
             "name": "T1",
-            "loc": null
+            "loc": "23:3-23:5"
           },
           "target": null
         },
@@ -358,19 +358,19 @@
           "binder": {
             "type": "Binder",
             "name": "A",
-            "loc": null
+            "loc": "24:9-24:10"
           },
           "target": {
             "type": "Label",
             "name": "T2",
-            "loc": null
+            "loc": "24:3-24:5"
           }
         }
       ],
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "22:1-25:2",
       "attrs": [],
       "is_list": true,
       "doc": ""
@@ -380,7 +380,7 @@
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "27:12-27:16"
       },
       "targets": [
         {
@@ -388,19 +388,19 @@
           "binder": {
             "type": "Binder",
             "name": "A",
-            "loc": null
+            "loc": "27:22-27:23"
           },
           "target": {
             "type": "Label",
             "name": "T",
-            "loc": null
+            "loc": "27:17-27:18"
           }
         }
       ],
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "27:1-27:21",
       "attrs": [],
       "is_list": false,
       "doc": ""
@@ -410,7 +410,7 @@
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "28:12-28:16"
       },
       "targets": [
         {
@@ -418,7 +418,7 @@
           "binder": {
             "type": "Binder",
             "name": "T1",
-            "loc": null
+            "loc": "29:3-29:5"
           },
           "target": null
         },
@@ -427,19 +427,19 @@
           "binder": {
             "type": "Binder",
             "name": "A",
-            "loc": null
+            "loc": "30:9-30:10"
           },
           "target": {
             "type": "Label",
             "name": "T2",
-            "loc": null
+            "loc": "30:3-30:5"
           }
         }
       ],
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "28:1-30:11",
       "attrs": [],
       "is_list": true,
       "doc": ""
@@ -453,19 +453,19 @@
           "binder": {
             "type": "Binder",
             "name": "I",
-            "loc": null
+            "loc": "33:18-33:19"
           },
           "target": {
             "type": "Label",
             "name": "Int",
-            "loc": null
+            "loc": "33:11-33:14"
           }
         }
       ],
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "33:1-33:17",
       "attrs": [],
       "is_list": false,
       "doc": ""
@@ -479,19 +479,19 @@
           "binder": {
             "type": "Binder",
             "name": "E",
-            "loc": null
+            "loc": "34:18-34:19"
           },
           "target": {
             "type": "Label",
             "name": "Eq",
-            "loc": null
+            "loc": "34:12-34:14"
           }
         }
       ],
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "34:1-34:17",
       "attrs": [],
       "is_list": false,
       "doc": ""
@@ -501,7 +501,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "AAI",
-        "tycon_loc": null,
+        "tycon_loc": "36:32-36:35",
         "params": [],
         "components": {
           "type": "TypeDesc::Alias",
@@ -513,7 +513,7 @@
                 "type": "LongIdent::Ident",
                 "0": "Array"
               },
-              "loc": null
+              "loc": "36:11-36:16"
             },
             "tys": [
               {
@@ -524,7 +524,7 @@
                     "type": "LongIdent::Ident",
                     "0": "Array"
                   },
-                  "loc": null
+                  "loc": "36:17-36:22"
                 },
                 "tys": [
                   {
@@ -535,16 +535,16 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "36:23-36:26"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "36:23-36:23"
                   }
                 ],
-                "loc": null
+                "loc": "36:17-36:26"
               }
             ],
-            "loc": null
+            "loc": "36:11-36:27"
           }
         },
         "attrs": [],
@@ -553,7 +553,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "36:1-36:31"
       }
     },
     {
@@ -561,12 +561,12 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "AAX",
-        "tycon_loc": null,
+        "tycon_loc": "37:30-37:33",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "X",
-            "loc": null
+            "loc": "37:34-37:34"
           }
         ],
         "components": {
@@ -579,7 +579,7 @@
                 "type": "LongIdent::Ident",
                 "0": "Array"
               },
-              "loc": null
+              "loc": "37:11-37:16"
             },
             "tys": [
               {
@@ -590,7 +590,7 @@
                     "type": "LongIdent::Ident",
                     "0": "Array"
                   },
-                  "loc": null
+                  "loc": "37:17-37:22"
                 },
                 "tys": [
                   {
@@ -601,16 +601,16 @@
                         "type": "LongIdent::Ident",
                         "0": "X"
                       },
-                      "loc": null
+                      "loc": "37:23-37:24"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "37:23-37:23"
                   }
                 ],
-                "loc": null
+                "loc": "37:17-37:24"
               }
             ],
-            "loc": null
+            "loc": "37:11-37:25"
           }
         },
         "attrs": [],
@@ -619,7 +619,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "37:1-37:35"
       }
     },
     {
@@ -627,7 +627,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "MyTuple",
-        "tycon_loc": null,
+        "tycon_loc": "38:26-38:33",
         "params": [],
         "components": {
           "type": "TypeDesc::Alias",
@@ -642,10 +642,10 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "38:12-38:15"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "38:12-38:12"
               },
               {
                 "type": "Type::Name",
@@ -655,13 +655,13 @@
                     "type": "LongIdent::Ident",
                     "0": "Bool"
                   },
-                  "loc": null
+                  "loc": "38:17-38:21"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "38:17-38:16"
               }
             ],
-            "loc": null
+            "loc": "38:11-38:21"
           }
         },
         "attrs": [],
@@ -670,7 +670,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "38:1-38:25"
       }
     },
     {
@@ -678,7 +678,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "MyFunction",
-        "tycon_loc": null,
+        "tycon_loc": "39:34-39:44",
         "params": [],
         "components": {
           "type": "TypeDesc::Alias",
@@ -693,10 +693,10 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "39:12-39:15"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "39:12-39:12"
               },
               {
                 "type": "Type::Name",
@@ -706,10 +706,10 @@
                     "type": "LongIdent::Ident",
                     "0": "Bool"
                   },
-                  "loc": null
+                  "loc": "39:17-39:21"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "39:17-39:16"
               }
             ],
             "res": {
@@ -720,16 +720,16 @@
                   "type": "LongIdent::Ident",
                   "0": "Unit"
                 },
-                "loc": null
+                "loc": "39:26-39:30"
               },
               "tys": [],
-              "loc": null
+              "loc": "39:26-39:25"
             },
             "err": {
               "type": "ErrorType::NoErrorType"
             },
             "is_async": false,
-            "loc": null
+            "loc": "39:11-39:25"
           }
         },
         "attrs": [],
@@ -738,172 +738,72 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "39:1-39:33"
       }
     },
     {
       "type": "Impl::TopExpr",
       "expr": {
         "type": "Expr::Hole",
-        "loc": null,
+        "loc": "40:21-40:26",
         "kind": {
           "type": "Hole::Synthesized"
         }
       },
       "is_main": false,
       "local_types": [],
-      "loc": null
+      "loc": "40:21-40:26"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/type_alias.mbt",
-        "start": {
-          "line": 1,
-          "column": 14
-        },
-        "end": {
-          "line": 1,
-          "column": 15
-        }
-      },
+      "loc": "1:14-1:15",
       "msg": "Unexpected token `=`, you may expect `as`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/type_alias.mbt",
-        "start": {
-          "line": 2,
-          "column": 24
-        },
-        "end": {
-          "line": 2,
-          "column": 25
-        }
-      },
+      "loc": "2:24-2:25",
       "msg": "Unexpected token `=`, you may expect `as`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/type_alias.mbt",
-        "start": {
-          "line": 5,
-          "column": 14
-        },
-        "end": {
-          "line": 5,
-          "column": 15
-        }
-      },
+      "loc": "5:14-5:15",
       "msg": "Unexpected token `=`, you may expect `as`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/type_alias.mbt",
-        "start": {
-          "line": 13,
-          "column": 1
-        },
-        "end": {
-          "line": 13,
-          "column": 10
-        }
-      },
+      "loc": "13:1-13:10",
       "msg": "Unexpected token here."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/type_alias.mbt",
-        "start": {
-          "line": 13,
-          "column": 17
-        },
-        "end": {
-          "line": 13,
-          "column": 17
-        }
-      },
+      "loc": "13:17-13:17",
       "msg": "Unexpected line break here, missing `as` at the end of this line."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/type_alias.mbt",
-        "start": {
-          "line": 15,
-          "column": 1
-        },
-        "end": {
-          "line": 15,
-          "column": 4
-        }
-      },
+      "loc": "15:1-15:4",
       "msg": "Unexpected token here."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/type_alias.mbt",
-        "start": {
-          "line": 15,
-          "column": 31
-        },
-        "end": {
-          "line": 15,
-          "column": 32
-        }
-      },
+      "loc": "15:31-15:32",
       "msg": "Unexpected token `)`, you may expect `,`, `(`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/type_alias.mbt",
-        "start": {
-          "line": 21,
-          "column": 1
-        },
-        "end": {
-          "line": 21,
-          "column": 10
-        }
-      },
+      "loc": "21:1-21:10",
       "msg": "Unexpected token here."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/type_alias.mbt",
-        "start": {
-          "line": 25,
-          "column": 1
-        },
-        "end": {
-          "line": 25,
-          "column": 2
-        }
-      },
+      "loc": "25:1-25:2",
       "msg": "Unexpected token `)`, you may expect `,`, `(`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/type_alias.mbt",
-        "start": {
-          "line": 40,
-          "column": 21
-        },
-        "end": {
-          "line": 40,
-          "column": 22
-        }
-      },
+      "loc": "40:21-40:22",
       "msg": "Unexpected token `=`, you may expect `as`."
     }
   ]

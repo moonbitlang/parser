@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "main",
-          "loc": null
+          "loc": "4:4-4:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "4:9-4:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -42,9 +42,9 @@
                     "type": "LongIdent::Ident",
                     "0": "c"
                   },
-                  "loc": null
+                  "loc": "6:9-6:8"
                 },
-                "loc": null
+                "loc": "6:9-6:8"
               },
               "cases": [
                 {
@@ -55,7 +55,7 @@
                       "type": "Constant::Int",
                       "0": "1"
                     },
-                    "loc": null
+                    "loc": "7:5-7:6"
                   },
                   "guard": null,
                   "body": {
@@ -65,7 +65,7 @@
                       "0": {
                         "type": "Binder",
                         "name": "x",
-                        "loc": null
+                        "loc": "8:11-8:12"
                       }
                     },
                     "expr": {
@@ -74,20 +74,20 @@
                         "type": "Constant::Int",
                         "0": "3"
                       },
-                      "loc": null
+                      "loc": "8:15-8:16"
                     },
                     "body": {
                       "type": "Expr::Unit",
-                      "loc": null,
+                      "loc": "8:7-8:10",
                       "faked": true
                     },
-                    "loc": null
+                    "loc": "8:15-8:16"
                   }
                 }
               ],
-              "match_loc": null,
+              "match_loc": "6:3-6:12",
               "using": null,
-              "loc": null
+              "loc": "6:3-8:17"
             }
           ],
           "last_expr": {
@@ -97,7 +97,7 @@
               "0": {
                 "type": "Binder",
                 "name": "b",
-                "loc": null
+                "loc": "13:7-13:8"
               }
             },
             "expr": {
@@ -106,7 +106,7 @@
                 "type": "Constant::Bool",
                 "0": false
               },
-              "loc": null
+              "loc": "13:11-13:16"
             },
             "body": {
               "type": "Expr::Apply",
@@ -118,9 +118,9 @@
                     "type": "LongIdent::Ident",
                     "0": "println"
                   },
-                  "loc": null
+                  "loc": "14:3-13:17"
                 },
-                "loc": null
+                "loc": "14:3-13:17"
               },
               "args": [
                 {
@@ -133,9 +133,9 @@
                         "type": "LongIdent::Ident",
                         "0": "b"
                       },
-                      "loc": null
+                      "loc": "14:11-14:11"
                     },
-                    "loc": null
+                    "loc": "14:11-14:11"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -145,30 +145,20 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": null
+              "loc": "14:3-14:12"
             },
-            "loc": null
+            "loc": "13:11-13:16"
           },
-          "loc": null
+          "loc": "6:3-13:16"
         }
       },
-      "loc": null
+      "loc": "4:1-14:14"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/bad_recovery.mbt",
-        "start": {
-          "line": 8,
-          "column": 15
-        },
-        "end": {
-          "line": 8,
-          "column": 16
-        }
-      },
+      "loc": "8:15-8:16",
       "msg": "Unexpected let statement in the action part of a matching case"
     }
   ]

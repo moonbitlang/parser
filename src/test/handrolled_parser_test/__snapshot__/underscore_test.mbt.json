@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -36,12 +36,12 @@
             "0": {
               "type": "Binder",
               "name": "a",
-              "loc": null
+              "loc": "2:7-2:8"
             }
           },
           "expr": {
             "type": "Expr::Hole",
-            "loc": null,
+            "loc": "2:11-2:12",
             "kind": {
               "type": "Hole::Incomplete"
             }
@@ -53,7 +53,7 @@
               "0": {
                 "type": "Binder",
                 "name": "b",
-                "loc": null
+                "loc": "3:7-3:8"
               }
             },
             "expr": {
@@ -64,9 +64,9 @@
                   "type": "LongIdent::Ident",
                   "0": "__"
                 },
-                "loc": null
+                "loc": "3:11-3:10"
               },
-              "loc": null
+              "loc": "3:11-3:10"
             },
             "body": {
               "type": "Expr::Let",
@@ -75,7 +75,7 @@
                 "0": {
                   "type": "Binder",
                   "name": "c",
-                  "loc": null
+                  "loc": "4:7-4:8"
                 }
               },
               "expr": {
@@ -86,9 +86,9 @@
                     "type": "LongIdent::Ident",
                     "0": "_d"
                   },
-                  "loc": null
+                  "loc": "4:11-4:10"
                 },
-                "loc": null
+                "loc": "4:11-4:10"
               },
               "body": {
                 "type": "Expr::Let",
@@ -97,7 +97,7 @@
                   "0": {
                     "type": "Binder",
                     "name": "e",
-                    "loc": null
+                    "loc": "5:7-5:8"
                   }
                 },
                 "expr": {
@@ -108,25 +108,25 @@
                       "type": "LongIdent::Ident",
                       "0": "__e"
                     },
-                    "loc": null
+                    "loc": "5:11-5:10"
                   },
-                  "loc": null
+                  "loc": "5:11-5:10"
                 },
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": null,
+                  "loc": "6:3-6:4",
                   "faked": false
                 },
-                "loc": null
+                "loc": "5:11-5:10"
               },
-              "loc": null
+              "loc": "4:11-4:10"
             },
-            "loc": null
+            "loc": "3:11-3:10"
           },
-          "loc": null
+          "loc": "2:11-2:12"
         }
       },
-      "loc": null
+      "loc": "1:1-6:6"
     }
   ]
 }

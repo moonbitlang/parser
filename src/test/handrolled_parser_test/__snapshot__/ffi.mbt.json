@@ -9,7 +9,7 @@
         "name": {
           "type": "Binder",
           "name": "hello",
-          "loc": null
+          "loc": "1:4-1:9"
         },
         "has_error": null,
         "is_async": false,
@@ -19,7 +19,7 @@
             "binder": {
               "type": "Binder",
               "name": "self",
-              "loc": null
+              "loc": "1:10-1:14"
             },
             "ty": {
               "type": "Type::Name",
@@ -29,10 +29,10 @@
                   "type": "LongIdent::Ident",
                   "0": "int"
                 },
-                "loc": null
+                "loc": "1:16-1:19"
               },
               "tys": [],
-              "loc": null
+              "loc": "1:16-1:15"
             }
           },
           {
@@ -40,7 +40,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "1:21-1:22"
             },
             "ty": {
               "type": "Type::Name",
@@ -50,14 +50,14 @@
                   "type": "LongIdent::Ident",
                   "0": "int"
                 },
-                "loc": null
+                "loc": "1:24-1:27"
               },
               "tys": [],
-              "loc": null
+              "loc": "1:24-1:23"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "1:9-1:27",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -77,7 +77,7 @@
           "func_name": "funcname"
         }
       },
-      "loc": null
+      "loc": "1:1-1:43"
     }
   ]
 }

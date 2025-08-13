@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -39,9 +39,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": null
+              "loc": "2:9-2:8"
             },
-            "loc": null
+            "loc": "2:9-2:8"
           },
           "cases": [
             {
@@ -50,7 +50,7 @@
                 "type": "Pattern::Record",
                 "fields": [],
                 "is_closed": true,
-                "loc": null
+                "loc": "3:5-3:6"
               },
               "guard": null,
               "body": {
@@ -59,7 +59,7 @@
                   "type": "Constant::String",
                   "0": "record pattern"
                 },
-                "loc": null
+                "loc": "3:11-3:27"
               }
             },
             {
@@ -79,11 +79,11 @@
                         "type": "Constant::Int",
                         "0": "1"
                       },
-                      "loc": null
+                      "loc": "4:12-4:13"
                     },
                     "match_absent": false,
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "4:7-4:6",
+                    "loc": "4:7-4:11"
                   },
                   {
                     "type": "MapPatElem",
@@ -96,12 +96,12 @@
                       "0": {
                         "type": "Binder",
                         "name": "x",
-                        "loc": null
+                        "loc": "4:18-4:19"
                       }
                     },
                     "match_absent": false,
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "4:15-4:14",
+                    "loc": "4:15-4:17"
                   },
                   {
                     "type": "MapPatElem",
@@ -117,22 +117,22 @@
                           "type": "Constant::Int",
                           "0": "42"
                         },
-                        "loc": null
+                        "loc": "4:27-4:29"
                       },
                       "alias": {
                         "type": "Binder",
                         "name": "y",
-                        "loc": null
+                        "loc": "4:33-4:34"
                       },
-                      "loc": null
+                      "loc": "4:27-4:32"
                     },
                     "match_absent": false,
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "4:21-4:20",
+                    "loc": "4:21-4:32"
                   }
                 ],
                 "is_closed": true,
-                "loc": null
+                "loc": "4:5-4:34"
               },
               "guard": null,
               "body": {
@@ -141,7 +141,7 @@
                   "type": "Constant::String",
                   "0": "map pattern"
                 },
-                "loc": null
+                "loc": "4:40-4:53"
               }
             },
             {
@@ -154,18 +154,18 @@
                     "label": {
                       "type": "Label",
                       "name": "x",
-                      "loc": null
+                      "loc": "5:7-5:8"
                     },
                     "pattern": {
                       "type": "Pattern::Any",
-                      "loc": null
+                      "loc": "5:10-5:11"
                     },
                     "is_pun": false,
-                    "loc": null
+                    "loc": "5:7-5:9"
                   }
                 ],
                 "is_closed": true,
-                "loc": null
+                "loc": "5:5-5:19"
               },
               "guard": null,
               "body": {
@@ -174,7 +174,7 @@
                   "type": "Constant::String",
                   "0": "cannot mix"
                 },
-                "loc": null
+                "loc": "5:25-5:37"
               }
             },
             {
@@ -190,15 +190,15 @@
                     },
                     "pat": {
                       "type": "Pattern::Any",
-                      "loc": null
+                      "loc": "6:12-6:13"
                     },
                     "match_absent": false,
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "6:7-6:6",
+                    "loc": "6:7-6:11"
                   }
                 ],
                 "is_closed": true,
-                "loc": null
+                "loc": "6:5-6:19"
               },
               "guard": null,
               "body": {
@@ -207,7 +207,7 @@
                   "type": "Constant::String",
                   "0": "cannot mix"
                 },
-                "loc": null
+                "loc": "6:25-6:37"
               }
             },
             {
@@ -223,15 +223,15 @@
                     },
                     "pat": {
                       "type": "Pattern::Any",
-                      "loc": null
+                      "loc": "7:12-7:13"
                     },
                     "match_absent": false,
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "7:7-7:6",
+                    "loc": "7:7-7:11"
                   }
                 ],
                 "is_closed": false,
-                "loc": null
+                "loc": "7:5-7:17"
               },
               "guard": null,
               "body": {
@@ -240,7 +240,7 @@
                   "type": "Constant::String",
                   "0": "map always open"
                 },
-                "loc": null
+                "loc": "7:23-7:40"
               }
             },
             {
@@ -253,7 +253,7 @@
                     "label": {
                       "type": "Label",
                       "name": "x",
-                      "loc": null
+                      "loc": "8:11-8:12"
                     },
                     "pattern": {
                       "type": "Pattern::Constant",
@@ -261,14 +261,14 @@
                         "type": "Constant::Int",
                         "0": "1"
                       },
-                      "loc": null
+                      "loc": "8:14-8:15"
                     },
                     "is_pun": false,
-                    "loc": null
+                    "loc": "8:11-8:13"
                   }
                 ],
                 "is_closed": false,
-                "loc": null
+                "loc": "8:5-8:15"
               },
               "guard": null,
               "body": {
@@ -277,7 +277,7 @@
                   "type": "Constant::String",
                   "0": "record"
                 },
-                "loc": null
+                "loc": "8:21-8:29"
               }
             },
             {
@@ -297,15 +297,15 @@
                         "type": "Constant::Int",
                         "0": "1"
                       },
-                      "loc": null
+                      "loc": "9:16-9:17"
                     },
                     "match_absent": false,
-                    "key_loc": null,
-                    "loc": null
+                    "key_loc": "9:11-9:10",
+                    "loc": "9:11-9:15"
                   }
                 ],
                 "is_closed": false,
-                "loc": null
+                "loc": "9:5-9:17"
               },
               "guard": null,
               "body": {
@@ -314,7 +314,7 @@
                   "type": "Constant::String",
                   "0": "map"
                 },
-                "loc": null
+                "loc": "9:23-9:28"
               }
             },
             {
@@ -327,7 +327,7 @@
                     "label": {
                       "type": "Label",
                       "name": "x",
-                      "loc": null
+                      "loc": "10:17-10:18"
                     },
                     "pattern": {
                       "type": "Pattern::Constant",
@@ -335,14 +335,14 @@
                         "type": "Constant::Int",
                         "0": "1"
                       },
-                      "loc": null
+                      "loc": "10:20-10:21"
                     },
                     "is_pun": false,
-                    "loc": null
+                    "loc": "10:17-10:19"
                   }
                 ],
                 "is_closed": true,
-                "loc": null
+                "loc": "10:5-10:21"
               },
               "guard": null,
               "body": {
@@ -351,7 +351,7 @@
                   "type": "Constant::String",
                   "0": "map with error"
                 },
-                "loc": null
+                "loc": "10:27-10:43"
               }
             },
             {
@@ -360,7 +360,7 @@
                 "type": "Pattern::Record",
                 "fields": [],
                 "is_closed": false,
-                "loc": null
+                "loc": "11:5-11:9"
               },
               "guard": null,
               "body": {
@@ -369,92 +369,42 @@
                   "type": "Constant::String",
                   "0": "treated as record"
                 },
-                "loc": null
+                "loc": "11:15-11:34"
               }
             }
           ],
-          "match_loc": null,
+          "match_loc": "2:3-2:12",
           "using": null,
-          "loc": null
+          "loc": "2:3-11:35"
         }
       },
-      "loc": null
+      "loc": "1:1-12:5"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/map_pattern.mbt",
-        "start": {
-          "line": 5,
-          "column": 13
-        },
-        "end": {
-          "line": 5,
-          "column": 17
-        }
-      },
+      "loc": "5:13-5:17",
       "msg": "Record pattern and map pattern cannot be mixed"
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/map_pattern.mbt",
-        "start": {
-          "line": 6,
-          "column": 15
-        },
-        "end": {
-          "line": 6,
-          "column": 17
-        }
-      },
+      "loc": "6:15-6:17",
       "msg": "Unexpected `..` here"
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/map_pattern.mbt",
-        "start": {
-          "line": 9,
-          "column": 7
-        },
-        "end": {
-          "line": 9,
-          "column": 9
-        }
-      },
+      "loc": "9:7-9:9",
       "msg": "Unexpected `..` here"
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/map_pattern.mbt",
-        "start": {
-          "line": 10,
-          "column": 8
-        },
-        "end": {
-          "line": 10,
-          "column": 12
-        }
-      },
+      "loc": "10:8-10:12",
       "msg": "Unexpected token `true`, you may expect `-Int` or `-Float` in key of map pattern."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/map_pattern.mbt",
-        "start": {
-          "line": 11,
-          "column": 7
-        },
-        "end": {
-          "line": 11,
-          "column": 9
-        }
-      },
+      "loc": "11:7-11:9",
       "msg": "Unexpected `..` here, add `, ..` behind the last field to ignore the rest of record."
     }
   ]

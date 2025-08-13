@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "single",
-        "tycon_loc": null,
+        "tycon_loc": "1:8-1:14",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -16,7 +16,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "r1",
-                "loc": null
+                "loc": "2:3-2:5"
               },
               "ty": {
                 "type": "Type::Name",
@@ -26,16 +26,16 @@
                     "type": "LongIdent::Ident",
                     "0": "int"
                   },
-                  "loc": null
+                  "loc": "2:6-2:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "2:6-2:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "2:3-2:6",
               "attrs": [],
               "doc": ""
             }
@@ -47,7 +47,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "1:1-2:10"
       }
     },
     {
@@ -55,7 +55,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "multi",
-        "tycon_loc": null,
+        "tycon_loc": "5:8-5:13",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -65,7 +65,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "r1",
-                "loc": null
+                "loc": "6:3-6:5"
               },
               "ty": {
                 "type": "Type::Name",
@@ -75,16 +75,16 @@
                     "type": "LongIdent::Ident",
                     "0": "int"
                   },
-                  "loc": null
+                  "loc": "6:6-6:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "6:6-6:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "6:3-6:6",
               "attrs": [],
               "doc": ""
             },
@@ -93,7 +93,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "r2",
-                "loc": null
+                "loc": "7:3-7:5"
               },
               "ty": {
                 "type": "Type::Name",
@@ -103,16 +103,16 @@
                     "type": "LongIdent::Ident",
                     "0": "bool"
                   },
-                  "loc": null
+                  "loc": "7:6-7:10"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "7:6-7:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "7:3-7:6",
               "attrs": [],
               "doc": ""
             }
@@ -124,7 +124,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "5:1-7:11"
       }
     },
     {
@@ -132,7 +132,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "many",
-        "tycon_loc": null,
+        "tycon_loc": "10:8-10:12",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -142,7 +142,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "r1",
-                "loc": null
+                "loc": "11:3-11:5"
               },
               "ty": {
                 "type": "Type::Name",
@@ -152,16 +152,16 @@
                     "type": "LongIdent::Ident",
                     "0": "int"
                   },
-                  "loc": null
+                  "loc": "11:6-11:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "11:6-11:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "11:3-11:6",
               "attrs": [],
               "doc": ""
             },
@@ -170,7 +170,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "r2",
-                "loc": null
+                "loc": "12:3-12:5"
               },
               "ty": {
                 "type": "Type::Name",
@@ -180,16 +180,16 @@
                     "type": "LongIdent::Ident",
                     "0": "bool"
                   },
-                  "loc": null
+                  "loc": "12:6-12:10"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "12:6-12:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "12:3-12:6",
               "attrs": [],
               "doc": ""
             },
@@ -198,7 +198,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "r3",
-                "loc": null
+                "loc": "13:3-13:5"
               },
               "ty": {
                 "type": "Type::Name",
@@ -208,16 +208,16 @@
                     "type": "LongIdent::Ident",
                     "0": "int"
                   },
-                  "loc": null
+                  "loc": "13:6-13:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "13:6-13:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "13:3-13:6",
               "attrs": [],
               "doc": ""
             },
@@ -226,7 +226,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "r4",
-                "loc": null
+                "loc": "14:3-14:5"
               },
               "ty": {
                 "type": "Type::Name",
@@ -236,16 +236,16 @@
                     "type": "LongIdent::Ident",
                     "0": "bool"
                   },
-                  "loc": null
+                  "loc": "14:6-14:10"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "14:6-14:6"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "14:3-14:6",
               "attrs": [],
               "doc": ""
             }
@@ -257,7 +257,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "10:1-14:11"
       }
     },
     {
@@ -268,12 +268,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "17:4-17:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "17:9-17:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -295,7 +295,7 @@
             "0": {
               "type": "Binder",
               "name": "r1",
-              "loc": null
+              "loc": "18:7-18:9"
             }
           },
           "expr": {
@@ -304,7 +304,7 @@
               "type": "Constant::Int",
               "0": "1"
             },
-            "loc": null
+            "loc": "18:12-18:13"
           },
           "body": {
             "type": "Expr::Let",
@@ -313,7 +313,7 @@
               "0": {
                 "type": "Binder",
                 "name": "r2",
-                "loc": null
+                "loc": "19:7-19:9"
               }
             },
             "expr": {
@@ -322,7 +322,7 @@
                 "type": "Constant::Bool",
                 "0": true
               },
-              "loc": null
+              "loc": "19:12-19:16"
             },
             "body": {
               "type": "Expr::Let",
@@ -331,7 +331,7 @@
                 "0": {
                   "type": "Binder",
                   "name": "one",
-                  "loc": null
+                  "loc": "20:7-20:10"
                 }
               },
               "expr": {
@@ -340,7 +340,7 @@
                   "type": "Constant::Int",
                   "0": "1"
                 },
-                "loc": null
+                "loc": "20:13-20:14"
               },
               "body": {
                 "type": "Expr::Let",
@@ -349,7 +349,7 @@
                   "0": {
                     "type": "Binder",
                     "name": "r4",
-                    "loc": null
+                    "loc": "21:7-21:9"
                   }
                 },
                 "expr": {
@@ -358,7 +358,7 @@
                     "type": "Constant::Bool",
                     "0": false
                   },
-                  "loc": null
+                  "loc": "21:12-21:17"
                 },
                 "body": {
                   "type": "Expr::Let",
@@ -367,7 +367,7 @@
                     "0": {
                       "type": "Binder",
                       "name": "block",
-                      "loc": null
+                      "loc": "22:7-22:12"
                     }
                   },
                   "expr": {
@@ -378,9 +378,9 @@
                         "type": "LongIdent::Ident",
                         "0": "r1"
                       },
-                      "loc": null
+                      "loc": "22:15-22:14"
                     },
-                    "loc": null
+                    "loc": "22:15-22:14"
                   },
                   "body": {
                     "type": "Expr::Let",
@@ -389,7 +389,7 @@
                       "0": {
                         "type": "Binder",
                         "name": "single",
-                        "loc": null
+                        "loc": "23:7-23:13"
                       }
                     },
                     "expr": {
@@ -401,7 +401,7 @@
                           "label": {
                             "type": "Label",
                             "name": "r1",
-                            "loc": null
+                            "loc": "23:18-23:20"
                           },
                           "expr": {
                             "type": "Expr::Ident",
@@ -411,18 +411,18 @@
                                 "type": "LongIdent::Ident",
                                 "0": "r1"
                               },
-                              "loc": null
+                              "loc": "23:18-23:20"
                             },
-                            "loc": null
+                            "loc": "23:18-23:20"
                           },
                           "is_pun": true,
-                          "loc": null
+                          "loc": "23:18-23:17"
                         }
                       ],
                       "trailing": {
                         "type": "Trailing::Comma"
                       },
-                      "loc": null
+                      "loc": "23:16-23:21"
                     },
                     "body": {
                       "type": "Expr::Let",
@@ -431,7 +431,7 @@
                         "0": {
                           "type": "Binder",
                           "name": "multi",
-                          "loc": null
+                          "loc": "24:7-24:12"
                         }
                       },
                       "expr": {
@@ -443,7 +443,7 @@
                             "label": {
                               "type": "Label",
                               "name": "r1",
-                              "loc": null
+                              "loc": "24:17-24:19"
                             },
                             "expr": {
                               "type": "Expr::Ident",
@@ -453,19 +453,19 @@
                                   "type": "LongIdent::Ident",
                                   "0": "r1"
                                 },
-                                "loc": null
+                                "loc": "24:17-24:19"
                               },
-                              "loc": null
+                              "loc": "24:17-24:19"
                             },
                             "is_pun": true,
-                            "loc": null
+                            "loc": "24:17-24:16"
                           },
                           {
                             "type": "FieldDef",
                             "label": {
                               "type": "Label",
                               "name": "r2",
-                              "loc": null
+                              "loc": "24:21-24:23"
                             },
                             "expr": {
                               "type": "Expr::Ident",
@@ -475,18 +475,18 @@
                                   "type": "LongIdent::Ident",
                                   "0": "r2"
                                 },
-                                "loc": null
+                                "loc": "24:21-24:23"
                               },
-                              "loc": null
+                              "loc": "24:21-24:23"
                             },
                             "is_pun": true,
-                            "loc": null
+                            "loc": "24:21-24:20"
                           }
                         ],
                         "trailing": {
                           "type": "Trailing::None"
                         },
-                        "loc": null
+                        "loc": "24:15-24:23"
                       },
                       "body": {
                         "type": "Expr::Let",
@@ -495,7 +495,7 @@
                           "0": {
                             "type": "Binder",
                             "name": "multi_comma",
-                            "loc": null
+                            "loc": "25:7-25:18"
                           }
                         },
                         "expr": {
@@ -507,7 +507,7 @@
                               "label": {
                                 "type": "Label",
                                 "name": "r1",
-                                "loc": null
+                                "loc": "25:23-25:25"
                               },
                               "expr": {
                                 "type": "Expr::Ident",
@@ -517,19 +517,19 @@
                                     "type": "LongIdent::Ident",
                                     "0": "r1"
                                   },
-                                  "loc": null
+                                  "loc": "25:23-25:25"
                                 },
-                                "loc": null
+                                "loc": "25:23-25:25"
                               },
                               "is_pun": true,
-                              "loc": null
+                              "loc": "25:23-25:22"
                             },
                             {
                               "type": "FieldDef",
                               "label": {
                                 "type": "Label",
                                 "name": "r2",
-                                "loc": null
+                                "loc": "25:27-25:29"
                               },
                               "expr": {
                                 "type": "Expr::Ident",
@@ -539,18 +539,18 @@
                                     "type": "LongIdent::Ident",
                                     "0": "r2"
                                   },
-                                  "loc": null
+                                  "loc": "25:27-25:29"
                                 },
-                                "loc": null
+                                "loc": "25:27-25:29"
                               },
                               "is_pun": true,
-                              "loc": null
+                              "loc": "25:27-25:26"
                             }
                           ],
                           "trailing": {
                             "type": "Trailing::None"
                           },
-                          "loc": null
+                          "loc": "25:21-25:29"
                         },
                         "body": {
                           "type": "Expr::Let",
@@ -559,7 +559,7 @@
                             "0": {
                               "type": "Binder",
                               "name": "hybrid",
-                              "loc": null
+                              "loc": "26:7-26:13"
                             }
                           },
                           "expr": {
@@ -571,7 +571,7 @@
                                 "label": {
                                   "type": "Label",
                                   "name": "r1",
-                                  "loc": null
+                                  "loc": "26:18-26:20"
                                 },
                                 "expr": {
                                   "type": "Expr::Ident",
@@ -581,19 +581,19 @@
                                       "type": "LongIdent::Ident",
                                       "0": "one"
                                     },
-                                    "loc": null
+                                    "loc": "26:21-26:21"
                                   },
-                                  "loc": null
+                                  "loc": "26:21-26:21"
                                 },
                                 "is_pun": false,
-                                "loc": null
+                                "loc": "26:18-26:21"
                               },
                               {
                                 "type": "FieldDef",
                                 "label": {
                                   "type": "Label",
                                   "name": "r2",
-                                  "loc": null
+                                  "loc": "26:26-26:28"
                                 },
                                 "expr": {
                                   "type": "Expr::Ident",
@@ -603,18 +603,18 @@
                                       "type": "LongIdent::Ident",
                                       "0": "r2"
                                     },
-                                    "loc": null
+                                    "loc": "26:26-26:28"
                                   },
-                                  "loc": null
+                                  "loc": "26:26-26:28"
                                 },
                                 "is_pun": true,
-                                "loc": null
+                                "loc": "26:26-26:25"
                               }
                             ],
                             "trailing": {
                               "type": "Trailing::None"
                             },
-                            "loc": null
+                            "loc": "26:16-26:28"
                           },
                           "body": {
                             "type": "Expr::Let",
@@ -623,7 +623,7 @@
                               "0": {
                                 "type": "Binder",
                                 "name": "hybrid_comma",
-                                "loc": null
+                                "loc": "27:7-27:19"
                               }
                             },
                             "expr": {
@@ -635,7 +635,7 @@
                                   "label": {
                                     "type": "Label",
                                     "name": "r1",
-                                    "loc": null
+                                    "loc": "27:24-27:26"
                                   },
                                   "expr": {
                                     "type": "Expr::Ident",
@@ -645,19 +645,19 @@
                                         "type": "LongIdent::Ident",
                                         "0": "one"
                                       },
-                                      "loc": null
+                                      "loc": "27:27-27:27"
                                     },
-                                    "loc": null
+                                    "loc": "27:27-27:27"
                                   },
                                   "is_pun": false,
-                                  "loc": null
+                                  "loc": "27:24-27:27"
                                 },
                                 {
                                   "type": "FieldDef",
                                   "label": {
                                     "type": "Label",
                                     "name": "r2",
-                                    "loc": null
+                                    "loc": "27:32-27:34"
                                   },
                                   "expr": {
                                     "type": "Expr::Ident",
@@ -667,18 +667,18 @@
                                         "type": "LongIdent::Ident",
                                         "0": "r2"
                                       },
-                                      "loc": null
+                                      "loc": "27:32-27:34"
                                     },
-                                    "loc": null
+                                    "loc": "27:32-27:34"
                                   },
                                   "is_pun": true,
-                                  "loc": null
+                                  "loc": "27:32-27:31"
                                 }
                               ],
                               "trailing": {
                                 "type": "Trailing::None"
                               },
-                              "loc": null
+                              "loc": "27:22-27:34"
                             },
                             "body": {
                               "type": "Expr::Let",
@@ -687,7 +687,7 @@
                                 "0": {
                                   "type": "Binder",
                                   "name": "no_punning",
-                                  "loc": null
+                                  "loc": "28:7-28:17"
                                 }
                               },
                               "expr": {
@@ -699,7 +699,7 @@
                                     "label": {
                                       "type": "Label",
                                       "name": "r1",
-                                      "loc": null
+                                      "loc": "28:22-28:24"
                                     },
                                     "expr": {
                                       "type": "Expr::Ident",
@@ -709,19 +709,19 @@
                                           "type": "LongIdent::Ident",
                                           "0": "r1"
                                         },
-                                        "loc": null
+                                        "loc": "28:25-28:25"
                                       },
-                                      "loc": null
+                                      "loc": "28:25-28:25"
                                     },
                                     "is_pun": false,
-                                    "loc": null
+                                    "loc": "28:22-28:25"
                                   },
                                   {
                                     "type": "FieldDef",
                                     "label": {
                                       "type": "Label",
                                       "name": "r2",
-                                      "loc": null
+                                      "loc": "28:29-28:31"
                                     },
                                     "expr": {
                                       "type": "Expr::Ident",
@@ -731,18 +731,18 @@
                                           "type": "LongIdent::Ident",
                                           "0": "r2"
                                         },
-                                        "loc": null
+                                        "loc": "28:32-28:32"
                                       },
-                                      "loc": null
+                                      "loc": "28:32-28:32"
                                     },
                                     "is_pun": false,
-                                    "loc": null
+                                    "loc": "28:29-28:32"
                                   }
                                 ],
                                 "trailing": {
                                   "type": "Trailing::None"
                                 },
-                                "loc": null
+                                "loc": "28:20-28:34"
                               },
                               "body": {
                                 "type": "Expr::Let",
@@ -751,7 +751,7 @@
                                   "0": {
                                     "type": "Binder",
                                     "name": "no_punning_comma",
-                                    "loc": null
+                                    "loc": "29:7-29:23"
                                   }
                                 },
                                 "expr": {
@@ -763,7 +763,7 @@
                                       "label": {
                                         "type": "Label",
                                         "name": "r1",
-                                        "loc": null
+                                        "loc": "29:28-29:30"
                                       },
                                       "expr": {
                                         "type": "Expr::Ident",
@@ -773,19 +773,19 @@
                                             "type": "LongIdent::Ident",
                                             "0": "r1"
                                           },
-                                          "loc": null
+                                          "loc": "29:31-29:31"
                                         },
-                                        "loc": null
+                                        "loc": "29:31-29:31"
                                       },
                                       "is_pun": false,
-                                      "loc": null
+                                      "loc": "29:28-29:31"
                                     },
                                     {
                                       "type": "FieldDef",
                                       "label": {
                                         "type": "Label",
                                         "name": "r2",
-                                        "loc": null
+                                        "loc": "29:35-29:37"
                                       },
                                       "expr": {
                                         "type": "Expr::Ident",
@@ -795,18 +795,18 @@
                                             "type": "LongIdent::Ident",
                                             "0": "r2"
                                           },
-                                          "loc": null
+                                          "loc": "29:38-29:38"
                                         },
-                                        "loc": null
+                                        "loc": "29:38-29:38"
                                       },
                                       "is_pun": false,
-                                      "loc": null
+                                      "loc": "29:35-29:38"
                                     }
                                   ],
                                   "trailing": {
                                     "type": "Trailing::None"
                                   },
-                                  "loc": null
+                                  "loc": "29:26-29:40"
                                 },
                                 "body": {
                                   "type": "Expr::Let",
@@ -815,7 +815,7 @@
                                     "0": {
                                       "type": "Binder",
                                       "name": "many",
-                                      "loc": null
+                                      "loc": "30:7-30:11"
                                     }
                                   },
                                   "expr": {
@@ -827,7 +827,7 @@
                                         "label": {
                                           "type": "Label",
                                           "name": "r1",
-                                          "loc": null
+                                          "loc": "30:16-30:18"
                                         },
                                         "expr": {
                                           "type": "Expr::Ident",
@@ -837,19 +837,19 @@
                                               "type": "LongIdent::Ident",
                                               "0": "r1"
                                             },
-                                            "loc": null
+                                            "loc": "30:16-30:18"
                                           },
-                                          "loc": null
+                                          "loc": "30:16-30:18"
                                         },
                                         "is_pun": true,
-                                        "loc": null
+                                        "loc": "30:16-30:15"
                                       },
                                       {
                                         "type": "FieldDef",
                                         "label": {
                                           "type": "Label",
                                           "name": "r2",
-                                          "loc": null
+                                          "loc": "30:20-30:22"
                                         },
                                         "expr": {
                                           "type": "Expr::Ident",
@@ -859,19 +859,19 @@
                                               "type": "LongIdent::Ident",
                                               "0": "r2"
                                             },
-                                            "loc": null
+                                            "loc": "30:20-30:22"
                                           },
-                                          "loc": null
+                                          "loc": "30:20-30:22"
                                         },
                                         "is_pun": true,
-                                        "loc": null
+                                        "loc": "30:20-30:19"
                                       },
                                       {
                                         "type": "FieldDef",
                                         "label": {
                                           "type": "Label",
                                           "name": "r3",
-                                          "loc": null
+                                          "loc": "30:24-30:26"
                                         },
                                         "expr": {
                                           "type": "Expr::Ident",
@@ -881,19 +881,19 @@
                                               "type": "LongIdent::Ident",
                                               "0": "one"
                                             },
-                                            "loc": null
+                                            "loc": "30:27-30:27"
                                           },
-                                          "loc": null
+                                          "loc": "30:27-30:27"
                                         },
                                         "is_pun": false,
-                                        "loc": null
+                                        "loc": "30:24-30:27"
                                       },
                                       {
                                         "type": "FieldDef",
                                         "label": {
                                           "type": "Label",
                                           "name": "r4",
-                                          "loc": null
+                                          "loc": "30:32-30:34"
                                         },
                                         "expr": {
                                           "type": "Expr::Ident",
@@ -903,52 +903,52 @@
                                               "type": "LongIdent::Ident",
                                               "0": "r4"
                                             },
-                                            "loc": null
+                                            "loc": "30:32-30:34"
                                           },
-                                          "loc": null
+                                          "loc": "30:32-30:34"
                                         },
                                         "is_pun": true,
-                                        "loc": null
+                                        "loc": "30:32-30:31"
                                       }
                                     ],
                                     "trailing": {
                                       "type": "Trailing::None"
                                     },
-                                    "loc": null
+                                    "loc": "30:14-30:34"
                                   },
                                   "body": {
                                     "type": "Expr::Unit",
-                                    "loc": null,
+                                    "loc": "31:3-31:4",
                                     "faked": false
                                   },
-                                  "loc": null
+                                  "loc": "30:14-30:34"
                                 },
-                                "loc": null
+                                "loc": "29:26-29:40"
                               },
-                              "loc": null
+                              "loc": "28:20-28:34"
                             },
-                            "loc": null
+                            "loc": "27:22-27:34"
                           },
-                          "loc": null
+                          "loc": "26:16-26:28"
                         },
-                        "loc": null
+                        "loc": "25:21-25:29"
                       },
-                      "loc": null
+                      "loc": "24:15-24:23"
                     },
-                    "loc": null
+                    "loc": "23:16-23:21"
                   },
-                  "loc": null
+                  "loc": "22:15-22:14"
                 },
-                "loc": null
+                "loc": "21:12-21:17"
               },
-              "loc": null
+              "loc": "20:13-20:14"
             },
-            "loc": null
+            "loc": "19:12-19:16"
           },
-          "loc": null
+          "loc": "18:12-18:13"
         }
       },
-      "loc": null
+      "loc": "17:1-31:6"
     }
   ]
 }

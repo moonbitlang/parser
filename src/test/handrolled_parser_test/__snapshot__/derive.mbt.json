@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "T",
-        "tycon_loc": null,
+        "tycon_loc": "2:8-2:9",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -16,7 +16,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "x",
-                "loc": null
+                "loc": "3:3-3:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -26,16 +26,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "3:6-3:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "3:6-3:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "3:3-3:5",
               "attrs": [],
               "doc": ""
             },
@@ -44,7 +44,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "y",
-                "loc": null
+                "loc": "4:3-4:4"
               },
               "ty": {
                 "type": "Type::Name",
@@ -54,16 +54,16 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "4:6-4:9"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "4:6-4:5"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "4:3-4:5",
               "attrs": [],
               "doc": ""
             }
@@ -84,10 +84,10 @@
                 "0": "Eq"
               },
               "is_object": false,
-              "loc": null
+              "loc": "5:10-5:10"
             },
             "args": [],
-            "loc": null
+            "loc": "5:10-5:10"
           },
           {
             "type": "DerivingDirective",
@@ -98,13 +98,13 @@
                 "0": "Show"
               },
               "is_object": false,
-              "loc": null
+              "loc": "5:14-5:13"
             },
             "args": [],
-            "loc": null
+            "loc": "5:14-5:13"
           }
         ],
-        "loc": null
+        "loc": "2:1-5:18"
       }
     },
     {
@@ -112,7 +112,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "U",
-        "tycon_loc": null,
+        "tycon_loc": "7:6-7:7",
         "params": [],
         "components": {
           "type": "TypeDesc::Abstract"
@@ -133,13 +133,13 @@
                 "id": "Interface"
               },
               "is_object": false,
-              "loc": null
+              "loc": "7:15-7:19"
             },
             "args": [],
-            "loc": null
+            "loc": "7:15-7:19"
           }
         ],
-        "loc": null
+        "loc": "7:1-7:29"
       }
     },
     {
@@ -147,7 +147,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "R",
-        "tycon_loc": null,
+        "tycon_loc": "9:6-9:7",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -157,12 +157,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "A",
-                "loc": null
+                "loc": "10:3-10:4"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "10:3-9:10",
               "doc": ""
             },
             {
@@ -170,12 +170,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "B",
-                "loc": null
+                "loc": "11:3-11:4"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "11:3-10:5",
               "doc": ""
             }
           ]
@@ -195,13 +195,13 @@
                 "0": "Hash"
               },
               "is_object": false,
-              "loc": null
+              "loc": "12:10-12:10"
             },
             "args": [],
-            "loc": null
+            "loc": "12:10-12:10"
           }
         ],
-        "loc": null
+        "loc": "9:1-12:14"
       }
     },
     {
@@ -209,7 +209,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "S",
-        "tycon_loc": null,
+        "tycon_loc": "14:8-14:9",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -221,24 +221,14 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "14:1-15:1"
       }
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/derive.mbt",
-        "start": {
-          "line": 15,
-          "column": 1
-        },
-        "end": {
-          "line": 15,
-          "column": 1
-        }
-      },
+      "loc": "15:1-15:1",
       "msg": "Unexpected end of file, missing `(` here."
     }
   ]

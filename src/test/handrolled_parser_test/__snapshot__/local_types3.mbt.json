@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "main",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -32,7 +32,7 @@
           {
             "type": "LocalTypeDecl",
             "tycon": "T",
-            "tycon_loc": null,
+            "tycon_loc": "2:8-2:9",
             "components": {
               "type": "TypeDesc::Variant",
               "0": [
@@ -41,7 +41,7 @@
                   "name": {
                     "type": "ConstrName",
                     "name": "E",
-                    "loc": null
+                    "loc": "2:12-2:13"
                   },
                   "args": [
                     {
@@ -54,10 +54,10 @@
                             "type": "LongIdent::Ident",
                             "0": "Int"
                           },
-                          "loc": null
+                          "loc": "2:14-2:17"
                         },
                         "tys": [],
-                        "loc": null
+                        "loc": "2:14-2:14"
                       },
                       "mut": false,
                       "label": null
@@ -65,7 +65,7 @@
                   ],
                   "tag": null,
                   "attrs": [],
-                  "loc": null,
+                  "loc": "2:12-2:17",
                   "doc": ""
                 }
               ]
@@ -75,27 +75,17 @@
         ],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "1:9-2:37",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "1:1-2:37"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/local_types3.mbt",
-        "start": {
-          "line": 2,
-          "column": 20
-        },
-        "end": {
-          "line": 2,
-          "column": 21
-        }
-      },
+      "loc": "2:20-2:21",
       "msg": "Unexpected token `[`, you may expect `}`."
     }
   ]

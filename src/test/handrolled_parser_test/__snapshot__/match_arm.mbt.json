@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "f",
-          "loc": null
+          "loc": "2:4-2:5"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "2:5-2:6",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -37,7 +37,7 @@
               "type": "Constant::Bool",
               "0": true
             },
-            "loc": null
+            "loc": "3:9-3:13"
           },
           "loop_body": {
             "type": "Expr::Match",
@@ -49,9 +49,9 @@
                   "type": "LongIdent::Ident",
                   "0": "x"
                 },
-                "loc": null
+                "loc": "4:11-4:10"
               },
-              "loc": null
+              "loc": "4:11-4:10"
             },
             "cases": [
               {
@@ -63,16 +63,16 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "A",
-                      "loc": null
+                      "loc": "5:7-5:8"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "5:7-4:15"
                   },
                   "args": null,
                   "is_open": false,
-                  "loc": null
+                  "loc": "5:7-4:15"
                 },
                 "guard": null,
                 "body": {
@@ -83,7 +83,7 @@
                       "type": "LongIdent::Ident",
                       "0": "i"
                     },
-                    "loc": null
+                    "loc": "5:12-5:11"
                   },
                   "expr": {
                     "type": "Expr::Infix",
@@ -93,7 +93,7 @@
                         "type": "LongIdent::Ident",
                         "0": "+"
                       },
-                      "loc": null
+                      "loc": "5:18-5:19"
                     },
                     "lhs": {
                       "type": "Expr::Ident",
@@ -103,9 +103,9 @@
                           "type": "LongIdent::Ident",
                           "0": "i"
                         },
-                        "loc": null
+                        "loc": "5:16-5:15"
                       },
-                      "loc": null
+                      "loc": "5:16-5:15"
                     },
                     "rhs": {
                       "type": "Expr::Constant",
@@ -113,12 +113,12 @@
                         "type": "Constant::Int",
                         "0": "1"
                       },
-                      "loc": null
+                      "loc": "5:20-5:21"
                     },
-                    "loc": null
+                    "loc": "5:16-5:19"
                   },
                   "augmented_by": null,
-                  "loc": null
+                  "loc": "5:12-5:19"
                 }
               },
               {
@@ -130,16 +130,16 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "B",
-                      "loc": null
+                      "loc": "6:7-6:8"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "6:7-5:22"
                   },
                   "args": null,
                   "is_open": false,
-                  "loc": null
+                  "loc": "6:7-5:22"
                 },
                 "guard": null,
                 "body": {
@@ -150,9 +150,9 @@
                       "type": "Constant::Int",
                       "0": "1"
                     },
-                    "loc": null
+                    "loc": "6:19-6:20"
                   },
-                  "loc": null
+                  "loc": "6:12-6:18"
                 }
               },
               {
@@ -164,22 +164,22 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "C",
-                      "loc": null
+                      "loc": "7:7-7:8"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "7:7-6:21"
                   },
                   "args": null,
                   "is_open": false,
-                  "loc": null
+                  "loc": "7:7-6:21"
                 },
                 "guard": null,
                 "body": {
                   "type": "Expr::Return",
                   "return_value": null,
-                  "loc": null
+                  "loc": "7:12-7:11"
                 }
               },
               {
@@ -191,23 +191,23 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "D",
-                      "loc": null
+                      "loc": "8:7-8:8"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "8:7-7:19"
                   },
                   "args": null,
                   "is_open": false,
-                  "loc": null
+                  "loc": "8:7-7:19"
                 },
                 "guard": null,
                 "body": {
                   "type": "Expr::Break",
                   "arg": null,
                   "label": null,
-                  "loc": null
+                  "loc": "8:12-8:11"
                 }
               },
               {
@@ -219,23 +219,23 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "E",
-                      "loc": null
+                      "loc": "9:7-9:8"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "9:7-8:18"
                   },
                   "args": null,
                   "is_open": false,
-                  "loc": null
+                  "loc": "9:7-8:18"
                 },
                 "guard": null,
                 "body": {
                   "type": "Expr::Continue",
                   "args": [],
                   "label": null,
-                  "loc": null
+                  "loc": "9:12-9:11"
                 }
               },
               {
@@ -247,16 +247,16 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "F",
-                      "loc": null
+                      "loc": "10:7-10:8"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "10:7-9:21"
                   },
                   "args": null,
                   "is_open": false,
-                  "loc": null
+                  "loc": "10:7-9:21"
                 },
                 "guard": null,
                 "body": {
@@ -271,26 +271,26 @@
                           "type": "LongIdent::Ident",
                           "0": "l"
                         },
-                        "loc": null
+                        "loc": "10:12-10:11"
                       },
-                      "loc": null
+                      "loc": "10:12-10:11"
                     },
                     "accessor": {
                       "type": "Accessor::Label",
                       "0": {
                         "type": "Label",
                         "name": "f",
-                        "loc": null
+                        "loc": "10:14-10:15"
                       }
                     },
-                    "loc": null
+                    "loc": "10:12-10:13"
                   },
                   "accessor": {
                     "type": "Accessor::Label",
                     "0": {
                       "type": "Label",
                       "name": "g",
-                      "loc": null
+                      "loc": "10:16-10:17"
                     }
                   },
                   "field": {
@@ -299,10 +299,10 @@
                       "type": "Constant::Int",
                       "0": "345"
                     },
-                    "loc": null
+                    "loc": "10:20-10:23"
                   },
                   "augmented_by": null,
-                  "loc": null
+                  "loc": "10:12-10:19"
                 }
               },
               {
@@ -314,16 +314,16 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "G",
-                      "loc": null
+                      "loc": "11:7-11:8"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "11:7-10:24"
                   },
                   "args": null,
                   "is_open": false,
-                  "loc": null
+                  "loc": "11:7-10:24"
                 },
                 "guard": null,
                 "body": {
@@ -334,29 +334,29 @@
                       "type": "Constant::Bool",
                       "0": true
                     },
-                    "loc": null
+                    "loc": "11:18-11:22"
                   },
                   "loop_body": {
                     "type": "Expr::Unit",
-                    "loc": null,
+                    "loc": "11:23-11:24",
                     "faked": true
                   },
                   "while_else": null,
                   "label": null,
-                  "loc": null
+                  "loc": "11:12-11:24"
                 }
               }
             ],
-            "match_loc": null,
+            "match_loc": "4:5-4:14",
             "using": null,
-            "loc": null
+            "loc": "4:5-11:26"
           },
           "while_else": null,
           "label": null,
-          "loc": null
+          "loc": "3:3-12:7"
         }
       },
-      "loc": null
+      "loc": "2:1-13:5"
     }
   ]
 }

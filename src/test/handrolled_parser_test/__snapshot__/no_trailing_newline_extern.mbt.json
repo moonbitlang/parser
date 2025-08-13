@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "random",
-          "loc": null
+          "loc": "2:16-2:22"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "2:22-2:23",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -24,10 +24,10 @@
               "type": "LongIdent::Ident",
               "0": "Double"
             },
-            "loc": null
+            "loc": "2:28-2:34"
           },
           "tys": [],
-          "loc": null
+          "loc": "2:28-2:27"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -51,7 +51,7 @@
           }
         }
       },
-      "loc": null
+      "loc": "2:1-2:36"
     }
   ]
 }

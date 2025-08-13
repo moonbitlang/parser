@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "f1",
-          "loc": null
+          "loc": "1:4-1:6"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "1:6-1:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -24,10 +24,10 @@
               "type": "LongIdent::Ident",
               "0": "Int"
             },
-            "loc": null
+            "loc": "1:12-1:15"
           },
           "tys": [],
-          "loc": null
+          "loc": "1:12-1:11"
         },
         "error_type": {
           "type": "ErrorType::ErrorType",
@@ -39,10 +39,10 @@
                 "type": "LongIdent::Ident",
                 "0": "String"
               },
-              "loc": null
+              "loc": "1:22-1:21"
             },
             "tys": [],
-            "loc": null
+            "loc": "1:22-1:21"
           }
         },
         "vis": {
@@ -60,10 +60,10 @@
             "type": "Constant::Int",
             "0": "0"
           },
-          "loc": null
+          "loc": "2:3-2:4"
         }
       },
-      "loc": null
+      "loc": "1:1-2:5"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -73,12 +73,12 @@
         "name": {
           "type": "Binder",
           "name": "f2",
-          "loc": null
+          "loc": "5:4-5:6"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "5:6-5:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -88,10 +88,10 @@
               "type": "LongIdent::Ident",
               "0": "Int"
             },
-            "loc": null
+            "loc": "5:12-5:15"
           },
           "tys": [],
-          "loc": null
+          "loc": "5:12-5:11"
         },
         "error_type": {
           "type": "ErrorType::ErrorType",
@@ -103,10 +103,10 @@
                 "type": "LongIdent::Ident",
                 "0": "String"
               },
-              "loc": null
+              "loc": "5:22-5:21"
             },
             "tys": [],
-            "loc": null
+            "loc": "5:22-5:21"
           }
         },
         "vis": {
@@ -126,12 +126,12 @@
               "type": "Constant::String",
               "0": "xxx"
             },
-            "loc": null
+            "loc": "6:9-6:14"
           },
-          "loc": null
+          "loc": "6:3-6:8"
         }
       },
-      "loc": null
+      "loc": "5:1-6:15"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -141,7 +141,7 @@
         "name": {
           "type": "Binder",
           "name": "f3",
-          "loc": null
+          "loc": "9:10-9:12"
         },
         "has_error": null,
         "is_async": false,
@@ -151,7 +151,7 @@
             "binder": {
               "type": "Binder",
               "name": "a",
-              "loc": null
+              "loc": "9:13-9:14"
             },
             "ty": {
               "type": "Type::Arrow",
@@ -164,10 +164,10 @@
                       "type": "LongIdent::Ident",
                       "0": "Int"
                     },
-                    "loc": null
+                    "loc": "9:17-9:20"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "9:17-9:17"
                 }
               ],
               "res": {
@@ -178,10 +178,10 @@
                     "type": "LongIdent::Ident",
                     "0": "A"
                   },
-                  "loc": null
+                  "loc": "9:25-9:26"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "9:25-9:24"
               },
               "err": {
                 "type": "ErrorType::ErrorType",
@@ -193,30 +193,30 @@
                       "type": "LongIdent::Ident",
                       "0": "B"
                     },
-                    "loc": null
+                    "loc": "9:33-9:32"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "9:33-9:32"
                 }
               },
               "is_async": false,
-              "loc": null
+              "loc": "9:16-9:32"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "9:12-9:34",
         "quantifiers": [
           {
             "type": "TypeVarBinder",
             "name": "A",
             "constraints": [],
-            "loc": null
+            "loc": "9:4-9:4"
           },
           {
             "type": "TypeVarBinder",
             "name": "B",
             "constraints": [],
-            "loc": null
+            "loc": "9:7-9:6"
           }
         ],
         "return_type": {
@@ -227,10 +227,10 @@
               "type": "LongIdent::Ident",
               "0": "A"
             },
-            "loc": null
+            "loc": "9:39-9:40"
           },
           "tys": [],
-          "loc": null
+          "loc": "9:39-9:38"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -254,18 +254,18 @@
                 "type": "LongIdent::Ident",
                 "0": "a"
               },
-              "loc": null
+              "loc": "10:3-9:43"
             },
-            "loc": null
+            "loc": "10:3-9:43"
           },
           "args": [],
           "attr": {
             "type": "ApplyAttr::Exclamation"
           },
-          "loc": null
+          "loc": "10:3-10:5"
         }
       },
-      "loc": null
+      "loc": "9:1-10:7"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -275,7 +275,7 @@
         "name": {
           "type": "Binder",
           "name": "f4",
-          "loc": null
+          "loc": "13:10-13:12"
         },
         "has_error": null,
         "is_async": false,
@@ -285,7 +285,7 @@
             "binder": {
               "type": "Binder",
               "name": "a",
-              "loc": null
+              "loc": "13:13-13:14"
             },
             "ty": {
               "type": "Type::Arrow",
@@ -298,10 +298,10 @@
                       "type": "LongIdent::Ident",
                       "0": "Int"
                     },
-                    "loc": null
+                    "loc": "13:17-13:20"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "13:17-13:17"
                 }
               ],
               "res": {
@@ -312,10 +312,10 @@
                     "type": "LongIdent::Ident",
                     "0": "A"
                   },
-                  "loc": null
+                  "loc": "13:25-13:26"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "13:25-13:24"
               },
               "err": {
                 "type": "ErrorType::ErrorType",
@@ -327,30 +327,30 @@
                       "type": "LongIdent::Ident",
                       "0": "B"
                     },
-                    "loc": null
+                    "loc": "13:33-13:32"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "13:33-13:32"
                 }
               },
               "is_async": false,
-              "loc": null
+              "loc": "13:16-13:32"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "13:12-13:34",
         "quantifiers": [
           {
             "type": "TypeVarBinder",
             "name": "A",
             "constraints": [],
-            "loc": null
+            "loc": "13:4-13:4"
           },
           {
             "type": "TypeVarBinder",
             "name": "B",
             "constraints": [],
-            "loc": null
+            "loc": "13:7-13:6"
           }
         ],
         "return_type": {
@@ -361,10 +361,10 @@
               "type": "LongIdent::Ident",
               "0": "A"
             },
-            "loc": null
+            "loc": "13:39-13:40"
           },
           "tys": [],
-          "loc": null
+          "loc": "13:39-13:38"
         },
         "error_type": {
           "type": "ErrorType::ErrorType",
@@ -376,10 +376,10 @@
                 "type": "LongIdent::Ident",
                 "0": "B"
               },
-              "loc": null
+              "loc": "13:47-13:46"
             },
             "tys": [],
-            "loc": null
+            "loc": "13:47-13:46"
           }
         },
         "vis": {
@@ -401,18 +401,18 @@
                 "type": "LongIdent::Ident",
                 "0": "a"
               },
-              "loc": null
+              "loc": "14:3-13:51"
             },
-            "loc": null
+            "loc": "14:3-13:51"
           },
           "args": [],
           "attr": {
             "type": "ApplyAttr::Exclamation"
           },
-          "loc": null
+          "loc": "14:3-15:1"
         }
       },
-      "loc": null
+      "loc": "13:1-14:6"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -422,24 +422,24 @@
         "name": {
           "type": "Binder",
           "name": "f5",
-          "loc": null
+          "loc": "17:10-17:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "17:12-17:13",
         "quantifiers": [
           {
             "type": "TypeVarBinder",
             "name": "A",
             "constraints": [],
-            "loc": null
+            "loc": "17:4-17:4"
           },
           {
             "type": "TypeVarBinder",
             "name": "B",
             "constraints": [],
-            "loc": null
+            "loc": "17:7-17:6"
           }
         ],
         "return_type": {
@@ -450,10 +450,10 @@
               "type": "LongIdent::Ident",
               "0": "Unit"
             },
-            "loc": null
+            "loc": "17:18-17:22"
           },
           "tys": [],
-          "loc": null
+          "loc": "17:18-17:17"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -476,7 +476,7 @@
               "0": {
                 "type": "Binder",
                 "name": "x1",
-                "loc": null
+                "loc": "18:7-18:9"
               }
             },
             "ty": {
@@ -490,10 +490,10 @@
                       "type": "LongIdent::Ident",
                       "0": "Int"
                     },
-                    "loc": null
+                    "loc": "18:12-18:15"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "18:12-18:12"
                 }
               ],
               "res": {
@@ -506,13 +506,13 @@
                       "type": "LongIdent::Ident",
                       "0": "A"
                     },
-                    "loc": null
+                    "loc": "18:20-18:21"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "18:20-18:19"
                 },
-                "loc": null,
-                "question_loc": null
+                "loc": "18:20-18:21",
+                "question_loc": "18:21-18:22"
               },
               "err": {
                 "type": "ErrorType::ErrorType",
@@ -524,20 +524,20 @@
                       "type": "LongIdent::Ident",
                       "0": "B"
                     },
-                    "loc": null
+                    "loc": "18:29-18:28"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "18:29-18:28"
                 }
               },
               "is_async": false,
-              "loc": null
+              "loc": "18:11-18:28"
             },
-            "loc": null
+            "loc": "18:3-18:28"
           },
           "expr": {
             "type": "Expr::Hole",
-            "loc": null,
+            "loc": "18:33-18:34",
             "kind": {
               "type": "Hole::Incomplete"
             }
@@ -551,7 +551,7 @@
                 "0": {
                   "type": "Binder",
                   "name": "x2",
-                  "loc": null
+                  "loc": "19:7-19:9"
                 }
               },
               "ty": {
@@ -565,10 +565,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "19:12-19:15"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "19:12-19:12"
                   }
                 ],
                 "res": {
@@ -582,10 +582,10 @@
                           "type": "LongIdent::Ident",
                           "0": "Int"
                         },
-                        "loc": null
+                        "loc": "19:21-19:24"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "19:21-19:21"
                     }
                   ],
                   "res": {
@@ -596,10 +596,10 @@
                         "type": "LongIdent::Ident",
                         "0": "Int"
                       },
-                      "loc": null
+                      "loc": "19:29-19:32"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "19:29-19:28"
                   },
                   "err": {
                     "type": "ErrorType::ErrorType",
@@ -611,26 +611,26 @@
                           "type": "LongIdent::Ident",
                           "0": "String"
                         },
-                        "loc": null
+                        "loc": "19:39-19:38"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "19:39-19:38"
                     }
                   },
                   "is_async": false,
-                  "loc": null
+                  "loc": "19:20-19:38"
                 },
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
                 "is_async": false,
-                "loc": null
+                "loc": "19:11-19:38"
               },
-              "loc": null
+              "loc": "19:3-19:38"
             },
             "expr": {
               "type": "Expr::Hole",
-              "loc": null,
+              "loc": "19:48-19:49",
               "kind": {
                 "type": "Hole::Incomplete"
               }
@@ -644,7 +644,7 @@
                   "0": {
                     "type": "Binder",
                     "name": "x3",
-                    "loc": null
+                    "loc": "20:7-20:9"
                   }
                 },
                 "ty": {
@@ -658,10 +658,10 @@
                           "type": "LongIdent::Ident",
                           "0": "Int"
                         },
-                        "loc": null
+                        "loc": "20:12-20:15"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "20:12-20:12"
                     }
                   ],
                   "res": {
@@ -675,10 +675,10 @@
                             "type": "LongIdent::Ident",
                             "0": "Int"
                           },
-                          "loc": null
+                          "loc": "20:22-20:25"
                         },
                         "tys": [],
-                        "loc": null
+                        "loc": "20:22-20:22"
                       }
                     ],
                     "res": {
@@ -689,16 +689,16 @@
                           "type": "LongIdent::Ident",
                           "0": "Int"
                         },
-                        "loc": null
+                        "loc": "20:30-20:33"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "20:30-20:29"
                     },
                     "err": {
                       "type": "ErrorType::NoErrorType"
                     },
                     "is_async": false,
-                    "loc": null
+                    "loc": "20:21-20:29"
                   },
                   "err": {
                     "type": "ErrorType::ErrorType",
@@ -710,20 +710,20 @@
                           "type": "LongIdent::Ident",
                           "0": "String"
                         },
-                        "loc": null
+                        "loc": "20:41-20:40"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "20:41-20:40"
                     }
                   },
                   "is_async": false,
-                  "loc": null
+                  "loc": "20:11-20:40"
                 },
-                "loc": null
+                "loc": "20:3-20:40"
               },
               "expr": {
                 "type": "Expr::Hole",
-                "loc": null,
+                "loc": "20:50-20:51",
                 "kind": {
                   "type": "Hole::Incomplete"
                 }
@@ -737,7 +737,7 @@
                     "0": {
                       "type": "Binder",
                       "name": "x4",
-                      "loc": null
+                      "loc": "21:7-21:9"
                     }
                   },
                   "ty": {
@@ -751,10 +751,10 @@
                             "type": "LongIdent::Ident",
                             "0": "Int"
                           },
-                          "loc": null
+                          "loc": "21:12-21:15"
                         },
                         "tys": [],
-                        "loc": null
+                        "loc": "21:12-21:12"
                       }
                     ],
                     "res": {
@@ -765,23 +765,23 @@
                           "type": "LongIdent::Ident",
                           "0": "Int"
                         },
-                        "loc": null
+                        "loc": "21:20-21:23"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "21:20-21:19"
                     },
                     "err": {
                       "type": "ErrorType::DefaultErrorType",
-                      "loc": null
+                      "loc": "21:24-21:29"
                     },
                     "is_async": false,
-                    "loc": null
+                    "loc": "21:11-21:23"
                   },
-                  "loc": null
+                  "loc": "21:3-21:23"
                 },
                 "expr": {
                   "type": "Expr::Hole",
-                  "loc": null,
+                  "loc": "21:32-21:33",
                   "kind": {
                     "type": "Hole::Incomplete"
                   }
@@ -795,7 +795,7 @@
                       "0": {
                         "type": "Binder",
                         "name": "x5",
-                        "loc": null
+                        "loc": "22:7-22:9"
                       }
                     },
                     "ty": {
@@ -809,10 +809,10 @@
                               "type": "LongIdent::Ident",
                               "0": "Int"
                             },
-                            "loc": null
+                            "loc": "22:12-22:15"
                           },
                           "tys": [],
-                          "loc": null
+                          "loc": "22:12-22:12"
                         }
                       ],
                       "res": {
@@ -823,10 +823,10 @@
                             "type": "LongIdent::Ident",
                             "0": "Int"
                           },
-                          "loc": null
+                          "loc": "22:20-22:23"
                         },
                         "tys": [],
-                        "loc": null
+                        "loc": "22:20-22:19"
                       },
                       "err": {
                         "type": "ErrorType::MaybeError",
@@ -838,41 +838,41 @@
                               "type": "LongIdent::Ident",
                               "0": "Error"
                             },
-                            "loc": null
+                            "loc": "22:29-22:30"
                           },
                           "tys": [],
-                          "loc": null
+                          "loc": "22:29-22:30"
                         }
                       },
                       "is_async": false,
-                      "loc": null
+                      "loc": "22:11-22:29"
                     },
-                    "loc": null
+                    "loc": "22:3-22:29"
                   },
                   "expr": {
                     "type": "Expr::Hole",
-                    "loc": null,
+                    "loc": "22:33-22:34",
                     "kind": {
                       "type": "Hole::Incomplete"
                     }
                   },
                   "body": {
                     "type": "Expr::Unit",
-                    "loc": null,
+                    "loc": "22:3-22:29",
                     "faked": true
                   },
-                  "loc": null
+                  "loc": "22:33-22:34"
                 },
-                "loc": null
+                "loc": "21:32-21:33"
               },
-              "loc": null
+              "loc": "20:50-20:51"
             },
-            "loc": null
+            "loc": "19:48-19:49"
           },
-          "loc": null
+          "loc": "18:33-18:34"
         }
       },
-      "loc": null
+      "loc": "17:1-22:35"
     },
     {
       "type": "Impl::TopTrait",
@@ -881,7 +881,7 @@
         "name": {
           "type": "Binder",
           "name": "I",
-          "loc": null
+          "loc": "25:7-25:8"
         },
         "supers": [],
         "methods": [
@@ -890,7 +890,7 @@
             "name": {
               "type": "Binder",
               "name": "f",
-              "loc": null
+              "loc": "26:3-26:4"
             },
             "has_error": null,
             "is_async": false,
@@ -906,12 +906,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Self"
                     },
-                    "loc": null
+                    "loc": "26:5-26:9"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "26:5-26:5"
                 },
-                "loc": null
+                "loc": "26:5-26:5"
               }
             ],
             "return_type": {
@@ -922,10 +922,10 @@
                   "type": "LongIdent::Ident",
                   "0": "Self"
                 },
-                "loc": null
+                "loc": "26:14-26:18"
               },
               "tys": [],
-              "loc": null
+              "loc": "26:14-26:13"
             },
             "error_type": {
               "type": "ErrorType::ErrorType",
@@ -937,21 +937,21 @@
                     "type": "LongIdent::Ident",
                     "0": "Int"
                   },
-                  "loc": null
+                  "loc": "26:25-26:24"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "26:25-26:24"
               }
             },
             "has_default": null,
             "attrs": [],
-            "loc": null
+            "loc": "26:3-26:24"
           }
         ],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": null,
+        "loc": "25:1-26:29",
         "attrs": [],
         "doc": ""
       }
@@ -966,10 +966,10 @@
             "type": "LongIdent::Ident",
             "0": "Int"
           },
-          "loc": null
+          "loc": "29:16-29:19"
         },
         "tys": [],
-        "loc": null
+        "loc": "29:16-29:15"
       },
       "trait": {
         "type": "TypeName",
@@ -978,12 +978,12 @@
           "0": "Trait"
         },
         "is_object": false,
-        "loc": null
+        "loc": "29:6-29:5"
       },
       "method_name": {
         "type": "Binder",
         "name": "method",
-        "loc": null
+        "loc": "29:25-29:31"
       },
       "has_error": null,
       "quantifiers": [],
@@ -996,10 +996,10 @@
             "type": "LongIdent::Ident",
             "0": "Int"
           },
-          "loc": null
+          "loc": "29:37-29:40"
         },
         "tys": [],
-        "loc": null
+        "loc": "29:37-29:36"
       },
       "err_ty": {
         "type": "ErrorType::ErrorType",
@@ -1011,10 +1011,10 @@
               "type": "LongIdent::Ident",
               "0": "Bool"
             },
-            "loc": null
+            "loc": "29:47-29:46"
           },
           "tys": [],
-          "loc": null
+          "loc": "29:47-29:46"
         }
       },
       "body": {
@@ -1022,14 +1022,14 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "29:52-29:53",
           "faked": true
         }
       },
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "29:1-29:53",
       "attrs": [],
       "doc": ""
     },
@@ -1038,7 +1038,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "E1",
-        "tycon_loc": null,
+        "tycon_loc": "31:10-31:12",
         "params": [],
         "components": {
           "type": "TypeDesc::Error",
@@ -1052,10 +1052,10 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": null
+                "loc": "31:13-31:16"
               },
               "tys": [],
-              "loc": null
+              "loc": "31:13-31:12"
             }
           }
         },
@@ -1065,7 +1065,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "31:1-31:12"
       }
     },
     {
@@ -1073,7 +1073,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "E2",
-        "tycon_loc": null,
+        "tycon_loc": "32:10-32:12",
         "params": [],
         "components": {
           "type": "TypeDesc::Error",
@@ -1087,7 +1087,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "32:1-32:9"
       }
     },
     {
@@ -1095,7 +1095,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "E3",
-        "tycon_loc": null,
+        "tycon_loc": "33:10-33:12",
         "params": [],
         "components": {
           "type": "TypeDesc::Error",
@@ -1107,12 +1107,12 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "A",
-                  "loc": null
+                  "loc": "34:3-34:4"
                 },
                 "args": null,
                 "tag": null,
                 "attrs": [],
-                "loc": null,
+                "loc": "34:3-33:15",
                 "doc": ""
               },
               {
@@ -1120,7 +1120,7 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "B",
-                  "loc": null
+                  "loc": "35:3-35:4"
                 },
                 "args": [
                   {
@@ -1133,10 +1133,10 @@
                           "type": "LongIdent::Ident",
                           "0": "Int"
                         },
-                        "loc": null
+                        "loc": "35:5-35:8"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "35:5-35:5"
                     },
                     "mut": false,
                     "label": null
@@ -1151,22 +1151,22 @@
                           "type": "LongIdent::Ident",
                           "0": "String"
                         },
-                        "loc": null
+                        "loc": "35:15-35:21"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "35:15-35:14"
                     },
                     "mut": false,
                     "label": {
                       "type": "Label",
                       "name": "x",
-                      "loc": null
+                      "loc": "35:10-35:11"
                     }
                   }
                 ],
                 "tag": null,
                 "attrs": [],
-                "loc": null,
+                "loc": "35:3-35:21",
                 "doc": ""
               },
               {
@@ -1174,7 +1174,7 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "C",
-                  "loc": null
+                  "loc": "36:3-36:4"
                 },
                 "args": [
                   {
@@ -1187,16 +1187,16 @@
                           "type": "LongIdent::Ident",
                           "0": "Strint"
                         },
-                        "loc": null
+                        "loc": "36:10-36:16"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "36:10-36:9"
                     },
                     "mut": false,
                     "label": {
                       "type": "Label",
                       "name": "x",
-                      "loc": null
+                      "loc": "36:5-36:6"
                     }
                   },
                   {
@@ -1209,10 +1209,10 @@
                           "type": "LongIdent::Ident",
                           "0": "Char"
                         },
-                        "loc": null
+                        "loc": "36:18-36:22"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "36:18-36:17"
                     },
                     "mut": false,
                     "label": null
@@ -1227,22 +1227,22 @@
                           "type": "LongIdent::Ident",
                           "0": "Bool"
                         },
-                        "loc": null
+                        "loc": "36:29-36:33"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "36:29-36:28"
                     },
                     "mut": false,
                     "label": {
                       "type": "Label",
                       "name": "y",
-                      "loc": null
+                      "loc": "36:24-36:25"
                     }
                   }
                 ],
                 "tag": null,
                 "attrs": [],
-                "loc": null,
+                "loc": "36:3-36:33",
                 "doc": ""
               }
             ]
@@ -1254,7 +1254,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "33:1-36:35"
       }
     },
     {
@@ -1265,12 +1265,12 @@
         "name": {
           "type": "Binder",
           "name": "f7",
-          "loc": null
+          "loc": "39:4-39:6"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "39:6-39:7",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -1291,7 +1291,7 @@
             "type": "Pattern::Constraint",
             "pat": {
               "type": "Pattern::Any",
-              "loc": null
+              "loc": "40:7-40:8"
             },
             "ty": {
               "type": "Type::Arrow",
@@ -1307,29 +1307,29 @@
                       "type": "LongIdent::Ident",
                       "0": "Unit"
                     },
-                    "loc": null
+                    "loc": "40:23-40:27"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "40:23-40:22"
                 },
                 "err": {
                   "type": "ErrorType::DefaultErrorType",
-                  "loc": null
+                  "loc": "40:27-40:28"
                 },
                 "is_async": false,
-                "loc": null
+                "loc": "40:17-40:27"
               },
               "err": {
                 "type": "ErrorType::NoErrorType"
               },
               "is_async": false,
-              "loc": null
+              "loc": "40:11-40:27"
             },
-            "loc": null
+            "loc": "40:3-40:27"
           },
           "expr": {
             "type": "Expr::Hole",
-            "loc": null,
+            "loc": "40:28-40:33",
             "kind": {
               "type": "Hole::Synthesized"
             }
@@ -1340,7 +1340,7 @@
               "type": "Pattern::Constraint",
               "pat": {
                 "type": "Pattern::Any",
-                "loc": null
+                "loc": "41:7-41:8"
               },
               "ty": {
                 "type": "Type::Arrow",
@@ -1356,29 +1356,29 @@
                         "type": "LongIdent::Ident",
                         "0": "Unit"
                       },
-                      "loc": null
+                      "loc": "41:23-41:27"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "41:23-41:22"
                   },
                   "err": {
                     "type": "ErrorType::DefaultErrorType",
-                    "loc": null
+                    "loc": "41:27-41:28"
                   },
                   "is_async": false,
-                  "loc": null
+                  "loc": "41:17-41:27"
                 },
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
                 "is_async": false,
-                "loc": null
+                "loc": "41:11-41:27"
               },
-              "loc": null
+              "loc": "41:3-41:27"
             },
             "expr": {
               "type": "Expr::Hole",
-              "loc": null,
+              "loc": "41:31-41:32",
               "kind": {
                 "type": "Hole::Incomplete"
               }
@@ -1389,7 +1389,7 @@
                 "type": "Pattern::Constraint",
                 "pat": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "42:7-42:8"
                 },
                 "ty": {
                   "type": "Type::Arrow",
@@ -1405,30 +1405,30 @@
                           "type": "LongIdent::Ident",
                           "0": "Unit"
                         },
-                        "loc": null
+                        "loc": "42:24-42:28"
                       },
                       "tys": [],
-                      "loc": null
+                      "loc": "42:24-42:23"
                     },
                     "err": {
                       "type": "ErrorType::DefaultErrorType",
-                      "loc": null
+                      "loc": "42:28-42:29"
                     },
                     "is_async": false,
-                    "loc": null
+                    "loc": "42:18-42:28"
                   },
                   "err": {
                     "type": "ErrorType::DefaultErrorType",
-                    "loc": null
+                    "loc": "42:30-42:31"
                   },
                   "is_async": false,
-                  "loc": null
+                  "loc": "42:11-42:30"
                 },
-                "loc": null
+                "loc": "42:3-42:30"
               },
               "expr": {
                 "type": "Expr::Hole",
-                "loc": null,
+                "loc": "42:34-42:35",
                 "kind": {
                   "type": "Hole::Incomplete"
                 }
@@ -1439,7 +1439,7 @@
                   "type": "Pattern::Constraint",
                   "pat": {
                     "type": "Pattern::Any",
-                    "loc": null
+                    "loc": "43:7-43:8"
                   },
                   "ty": {
                     "type": "Type::Arrow",
@@ -1455,10 +1455,10 @@
                             "type": "LongIdent::Ident",
                             "0": "Unit"
                           },
-                          "loc": null
+                          "loc": "43:23-43:27"
                         },
                         "tys": [],
-                        "loc": null
+                        "loc": "43:23-43:22"
                       },
                       "err": {
                         "type": "ErrorType::ErrorType",
@@ -1470,26 +1470,26 @@
                               "type": "LongIdent::Ident",
                               "0": "Error"
                             },
-                            "loc": null
+                            "loc": "43:28-43:28"
                           },
                           "tys": [],
-                          "loc": null
+                          "loc": "43:28-43:28"
                         }
                       },
                       "is_async": false,
-                      "loc": null
+                      "loc": "43:17-43:28"
                     },
                     "err": {
                       "type": "ErrorType::NoErrorType"
                     },
                     "is_async": false,
-                    "loc": null
+                    "loc": "43:11-43:28"
                   },
-                  "loc": null
+                  "loc": "43:3-43:28"
                 },
                 "expr": {
                   "type": "Expr::Hole",
-                  "loc": null,
+                  "loc": "43:33-43:43",
                   "kind": {
                     "type": "Hole::Synthesized"
                   }
@@ -1500,7 +1500,7 @@
                     "type": "Pattern::Constraint",
                     "pat": {
                       "type": "Pattern::Any",
-                      "loc": null
+                      "loc": "44:7-44:8"
                     },
                     "ty": {
                       "type": "Type::Arrow",
@@ -1516,10 +1516,10 @@
                               "type": "LongIdent::Ident",
                               "0": "Unit"
                             },
-                            "loc": null
+                            "loc": "44:23-44:27"
                           },
                           "tys": [],
-                          "loc": null
+                          "loc": "44:23-44:22"
                         },
                         "err": {
                           "type": "ErrorType::ErrorType",
@@ -1531,26 +1531,26 @@
                                 "type": "LongIdent::Ident",
                                 "0": "Error"
                               },
-                              "loc": null
+                              "loc": "44:28-44:28"
                             },
                             "tys": [],
-                            "loc": null
+                            "loc": "44:28-44:28"
                           }
                         },
                         "is_async": false,
-                        "loc": null
+                        "loc": "44:17-44:28"
                       },
                       "err": {
                         "type": "ErrorType::NoErrorType"
                       },
                       "is_async": false,
-                      "loc": null
+                      "loc": "44:11-44:28"
                     },
-                    "loc": null
+                    "loc": "44:3-44:28"
                   },
                   "expr": {
                     "type": "Expr::Hole",
-                    "loc": null,
+                    "loc": "44:36-44:37",
                     "kind": {
                       "type": "Hole::Incomplete"
                     }
@@ -1561,7 +1561,7 @@
                       "type": "Pattern::Constraint",
                       "pat": {
                         "type": "Pattern::Any",
-                        "loc": null
+                        "loc": "45:7-45:8"
                       },
                       "ty": {
                         "type": "Type::Arrow",
@@ -1577,10 +1577,10 @@
                                 "type": "LongIdent::Ident",
                                 "0": "Unit"
                               },
-                              "loc": null
+                              "loc": "45:24-45:28"
                             },
                             "tys": [],
-                            "loc": null
+                            "loc": "45:24-45:23"
                           },
                           "err": {
                             "type": "ErrorType::ErrorType",
@@ -1592,14 +1592,14 @@
                                   "type": "LongIdent::Ident",
                                   "0": "Error"
                                 },
-                                "loc": null
+                                "loc": "45:29-45:29"
                               },
                               "tys": [],
-                              "loc": null
+                              "loc": "45:29-45:29"
                             }
                           },
                           "is_async": false,
-                          "loc": null
+                          "loc": "45:18-45:29"
                         },
                         "err": {
                           "type": "ErrorType::ErrorType",
@@ -1611,104 +1611,64 @@
                                 "type": "LongIdent::Ident",
                                 "0": "Error"
                               },
-                              "loc": null
+                              "loc": "45:36-45:36"
                             },
                             "tys": [],
-                            "loc": null
+                            "loc": "45:36-45:36"
                           }
                         },
                         "is_async": false,
-                        "loc": null
+                        "loc": "45:11-45:36"
                       },
-                      "loc": null
+                      "loc": "45:3-45:36"
                     },
                     "expr": {
                       "type": "Expr::Hole",
-                      "loc": null,
+                      "loc": "45:44-45:45",
                       "kind": {
                         "type": "Hole::Incomplete"
                       }
                     },
                     "body": {
                       "type": "Expr::Unit",
-                      "loc": null,
+                      "loc": "45:3-45:36",
                       "faked": true
                     },
-                    "loc": null
+                    "loc": "45:44-45:45"
                   },
-                  "loc": null
+                  "loc": "44:36-44:37"
                 },
-                "loc": null
+                "loc": "43:33-43:43"
               },
-              "loc": null
+              "loc": "42:34-42:35"
             },
-            "loc": null
+            "loc": "41:31-41:32"
           },
-          "loc": null
+          "loc": "40:28-40:33"
         }
       },
-      "loc": null
+      "loc": "39:1-45:52"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/error_type.mbt",
-        "start": {
-          "line": 10,
-          "column": 5
-        },
-        "end": {
-          "line": 10,
-          "column": 6
-        }
-      },
+      "loc": "10:5-10:6",
       "msg": "Unexpected token `!`, you may expect `(`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/error_type.mbt",
-        "start": {
-          "line": 15,
-          "column": 1
-        },
-        "end": {
-          "line": 15,
-          "column": 2
-        }
-      },
+      "loc": "15:1-15:2",
       "msg": "Unexpected token `}`, you may expect `(`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/error_type.mbt",
-        "start": {
-          "line": 40,
-          "column": 28
-        },
-        "end": {
-          "line": 40,
-          "column": 29
-        }
-      },
+      "loc": "40:28-40:29",
       "msg": "Unexpected token `!`, you may expect `=`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/error_type.mbt",
-        "start": {
-          "line": 43,
-          "column": 33
-        },
-        "end": {
-          "line": 43,
-          "column": 34
-        }
-      },
+      "loc": "43:33-43:34",
       "msg": "Unexpected token `!`, you may expect `=`."
     }
   ]

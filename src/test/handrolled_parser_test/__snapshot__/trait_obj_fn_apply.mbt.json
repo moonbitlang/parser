@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "main",
-          "loc": null
+          "loc": "2:4-2:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "2:9-2:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -39,9 +39,9 @@
                 "type": "LongIdent::Ident",
                 "0": "println"
               },
-              "loc": null
+              "loc": "3:3-2:11"
             },
-            "loc": null
+            "loc": "3:3-2:11"
           },
           "args": [
             {
@@ -57,14 +57,14 @@
                       "0": "Add"
                     },
                     "is_object": true,
-                    "loc": null
+                    "loc": "3:11-3:12"
                   },
                   "method_name": {
                     "type": "Label",
                     "name": "f",
-                    "loc": null
+                    "loc": "3:17-3:18"
                   },
-                  "loc": null
+                  "loc": "3:11-3:17"
                 },
                 "args": [
                   {
@@ -75,7 +75,7 @@
                         "type": "Constant::Int",
                         "0": "1"
                       },
-                      "loc": null
+                      "loc": "3:19-3:20"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -89,7 +89,7 @@
                         "type": "Constant::Int",
                         "0": "2"
                       },
-                      "loc": null
+                      "loc": "3:22-3:23"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -99,7 +99,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "3:11-3:23"
               },
               "kind": {
                 "type": "ArgumentKind::Positional"
@@ -109,10 +109,10 @@
           "attr": {
             "type": "ApplyAttr::NoAttr"
           },
-          "loc": null
+          "loc": "3:3-3:24"
         }
       },
-      "loc": null
+      "loc": "2:1-3:26"
     }
   ]
 }

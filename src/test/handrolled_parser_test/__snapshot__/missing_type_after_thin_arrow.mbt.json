@@ -8,7 +8,7 @@
         "name": {
           "type": "Binder",
           "name": "T",
-          "loc": null
+          "loc": "4:7-4:8"
         },
         "supers": [],
         "methods": [
@@ -17,7 +17,7 @@
             "name": {
               "type": "Binder",
               "name": "f",
-              "loc": null
+              "loc": "5:3-5:4"
             },
             "has_error": null,
             "is_async": false,
@@ -33,12 +33,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Self"
                     },
-                    "loc": null
+                    "loc": "5:5-5:9"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "5:5-5:5"
                 },
-                "loc": null
+                "loc": "5:5-5:5"
               }
             ],
             "return_type": {
@@ -49,23 +49,23 @@
                   "type": "LongIdent::Ident",
                   "0": "g"
                 },
-                "loc": null
+                "loc": "6:3-6:4"
               },
               "tys": [],
-              "loc": null
+              "loc": "6:3-5:15"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": null
+            "loc": "5:3-5:15"
           }
         ],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": null,
+        "loc": "4:1-6:18",
         "attrs": [],
         "doc": ""
       }
@@ -78,7 +78,7 @@
         "name": {
           "type": "Binder",
           "name": "f",
-          "loc": null
+          "loc": "9:4-9:5"
         },
         "has_error": null,
         "is_async": false,
@@ -88,7 +88,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "9:6-9:7"
             },
             "default": {
               "type": "Expr::Constant",
@@ -96,7 +96,7 @@
                 "type": "Constant::Int",
                 "0": "5"
               },
-              "loc": null
+              "loc": "9:17-9:18"
             },
             "ty": {
               "type": "Type::Name",
@@ -106,18 +106,18 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": null
+                "loc": "9:11-9:14"
               },
               "tys": [],
-              "loc": null
+              "loc": "9:11-9:10"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "9:5-9:18",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "9:23-9:24"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -136,7 +136,7 @@
           "func_name": "function"
         }
       },
-      "loc": null
+      "loc": "9:1-9:33"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -146,7 +146,7 @@
         "name": {
           "type": "Binder",
           "name": "g",
-          "loc": null
+          "loc": "10:4-10:5"
         },
         "has_error": null,
         "is_async": false,
@@ -156,7 +156,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "10:6-10:7"
             },
             "default": {
               "type": "Expr::Constant",
@@ -164,7 +164,7 @@
                 "type": "Constant::Int",
                 "0": "5"
               },
-              "loc": null
+              "loc": "10:17-10:18"
             },
             "ty": {
               "type": "Type::Name",
@@ -174,18 +174,18 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": null
+                "loc": "10:11-10:14"
               },
               "tys": [],
-              "loc": null
+              "loc": "10:11-10:10"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "10:5-10:18",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "10:23-10:24"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -201,11 +201,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "10:23-10:24",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "10:1-10:24"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -215,7 +215,7 @@
         "name": {
           "type": "Binder",
           "name": "h",
-          "loc": null
+          "loc": "11:16-11:17"
         },
         "has_error": null,
         "is_async": false,
@@ -225,7 +225,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "11:18-11:19"
             },
             "default": {
               "type": "Expr::Constant",
@@ -233,7 +233,7 @@
                 "type": "Constant::Int",
                 "0": "5"
               },
-              "loc": null
+              "loc": "11:29-11:30"
             },
             "ty": {
               "type": "Type::Name",
@@ -243,18 +243,18 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": null
+                "loc": "11:23-11:26"
               },
               "tys": [],
-              "loc": null
+              "loc": "11:23-11:22"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "11:17-11:30",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "11:35-11:36"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -276,7 +276,7 @@
           }
         }
       },
-      "loc": null
+      "loc": "11:1-11:36"
     },
     {
       "type": "Impl::TopImpl",
@@ -288,10 +288,10 @@
             "type": "LongIdent::Ident",
             "0": "T2"
           },
-          "loc": null
+          "loc": "13:13-13:15"
         },
         "tys": [],
-        "loc": null
+        "loc": "13:13-13:12"
       },
       "trait": {
         "type": "TypeName",
@@ -300,12 +300,12 @@
           "0": "T1"
         },
         "is_object": false,
-        "loc": null
+        "loc": "13:6-13:5"
       },
       "method_name": {
         "type": "Binder",
         "name": "f",
-        "loc": null
+        "loc": "13:21-13:22"
       },
       "has_error": null,
       "quantifiers": [],
@@ -315,7 +315,7 @@
           "binder": {
             "type": "Binder",
             "name": "self",
-            "loc": null
+            "loc": "13:23-13:27"
           },
           "ty": null
         },
@@ -324,7 +324,7 @@
           "binder": {
             "type": "Binder",
             "name": "a",
-            "loc": null
+            "loc": "13:28-13:29"
           },
           "ty": null
         },
@@ -333,14 +333,14 @@
           "binder": {
             "type": "Binder",
             "name": "b",
-            "loc": null
+            "loc": "13:30-13:31"
           },
           "ty": null
         }
       ],
       "ret_ty": {
         "type": "Type::Any",
-        "loc": null
+        "loc": "13:36-13:37"
       },
       "err_ty": {
         "type": "ErrorType::NoErrorType"
@@ -350,14 +350,14 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "13:36-13:37",
           "faked": true
         }
       },
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "13:1-13:37",
       "attrs": [],
       "doc": ""
     },
@@ -369,16 +369,16 @@
         "name": {
           "type": "Binder",
           "name": "f1",
-          "loc": null
+          "loc": "18:10-18:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "18:12-18:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "19:7-19:10"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -394,18 +394,18 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "19:7-19:7",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "18:7-19:7"
     },
     {
       "type": "Impl::TopLetDef",
       "binder": {
         "type": "Binder",
         "name": "a",
-        "loc": null
+        "loc": "19:11-19:12"
       },
       "ty": null,
       "expr": {
@@ -414,13 +414,13 @@
           "type": "Constant::Int",
           "0": "1"
         },
-        "loc": null
+        "loc": "19:15-19:16"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": null,
+      "loc": "19:7-19:14",
       "attrs": [],
       "doc": ""
     },
@@ -432,16 +432,16 @@
         "name": {
           "type": "Binder",
           "name": "f2",
-          "loc": null
+          "loc": "20:10-20:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "20:12-20:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "21:7-21:11"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -457,11 +457,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "21:7-21:7",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "20:7-21:7"
     },
     {
       "type": "Impl::TopImplRelation",
@@ -473,10 +473,10 @@
             "type": "LongIdent::Ident",
             "0": "T2"
           },
-          "loc": null
+          "loc": "21:19-21:21"
         },
         "tys": [],
-        "loc": null
+        "loc": "21:19-21:18"
       },
       "trait": {
         "type": "TypeName",
@@ -485,14 +485,14 @@
           "0": "T1"
         },
         "is_object": false,
-        "loc": null
+        "loc": "21:12-21:11"
       },
       "quantifiers": [],
       "vis": {
         "type": "Visibility::Default"
       },
       "attrs": [],
-      "loc": null,
+      "loc": "21:7-21:18",
       "doc": ""
     },
     {
@@ -503,16 +503,16 @@
         "name": {
           "type": "Binder",
           "name": "f3",
-          "loc": null
+          "loc": "22:10-22:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "22:12-22:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "23:7-23:9"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -528,11 +528,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "23:7-23:7",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "22:7-23:7"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -542,16 +542,16 @@
         "name": {
           "type": "Binder",
           "name": "f4",
-          "loc": null
+          "loc": "23:10-23:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "23:12-23:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "24:7-24:11"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -567,23 +567,23 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "24:7-24:7",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "23:7-24:7"
     },
     {
       "type": "Impl::TopTest",
       "expr": {
         "type": "Expr::Unit",
-        "loc": null,
+        "loc": "24:12-24:13",
         "faked": true
       },
       "name": null,
       "params": null,
       "local_types": [],
-      "loc": null,
+      "loc": "24:7-24:13",
       "attrs": [],
       "doc": ""
     },
@@ -595,16 +595,16 @@
         "name": {
           "type": "Binder",
           "name": "f5",
-          "loc": null
+          "loc": "25:10-25:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "25:12-25:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "26:7-26:16"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -620,11 +620,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "26:7-26:7",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "25:7-26:7"
     },
     {
       "type": "Impl::TopBatchTypeAlias",
@@ -635,19 +635,19 @@
           "binder": {
             "type": "Binder",
             "name": "T2",
-            "loc": null
+            "loc": "26:23-26:25"
           },
           "target": {
             "type": "Label",
             "name": "T1",
-            "loc": null
+            "loc": "26:17-26:19"
           }
         }
       ],
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "26:7-26:22",
       "attrs": [],
       "is_list": false,
       "doc": ""
@@ -660,25 +660,25 @@
         "name": {
           "type": "Binder",
           "name": "f6",
-          "loc": null
+          "loc": "27:10-27:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "27:12-27:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Arrow",
           "args": [],
           "res": {
             "type": "Type::Any",
-            "loc": null
+            "loc": "28:12-28:13"
           },
           "err": {
             "type": "ErrorType::NoErrorType"
           },
           "is_async": true,
-          "loc": null
+          "loc": "28:7-28:13"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -694,13 +694,13 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Hole",
-          "loc": null,
+          "loc": "28:12-28:13",
           "kind": {
             "type": "Hole::Synthesized"
           }
         }
       },
-      "loc": null
+      "loc": "27:7-28:13"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -710,16 +710,16 @@
         "name": {
           "type": "Binder",
           "name": "f7",
-          "loc": null
+          "loc": "28:16-28:18"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "28:18-28:19",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "29:7-29:12"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -735,18 +735,18 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "29:7-29:7",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "28:13-29:7"
     },
     {
       "type": "Impl::TopLetDef",
       "binder": {
         "type": "Binder",
         "name": "CONST",
-        "loc": null
+        "loc": "29:13-29:18"
       },
       "ty": null,
       "expr": {
@@ -755,13 +755,13 @@
           "type": "Constant::Int",
           "0": "5"
         },
-        "loc": null
+        "loc": "29:21-29:22"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": true,
-      "loc": null,
+      "loc": "29:7-29:20",
       "attrs": [],
       "doc": ""
     },
@@ -773,16 +773,16 @@
         "name": {
           "type": "Binder",
           "name": "f8",
-          "loc": null
+          "loc": "30:10-30:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "30:12-30:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "31:7-31:12"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -798,11 +798,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "31:7-31:7",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "30:7-31:7"
     },
     {
       "type": "Impl::TopTrait",
@@ -811,14 +811,14 @@
         "name": {
           "type": "Binder",
           "name": "AnotherTrait",
-          "loc": null
+          "loc": "31:13-31:25"
         },
         "supers": [],
         "methods": [],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": null,
+        "loc": "31:7-31:27",
         "attrs": [],
         "doc": ""
       }
@@ -831,16 +831,16 @@
         "name": {
           "type": "Binder",
           "name": "f9",
-          "loc": null
+          "loc": "32:10-32:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "32:12-32:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "33:7-33:13"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -856,18 +856,18 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "33:7-33:7",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "32:7-33:7"
     },
     {
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
         "tycon": "MyRcd",
-        "tycon_loc": null,
+        "tycon_loc": "33:14-33:19",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -879,7 +879,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "33:7-33:21"
       }
     },
     {
@@ -890,16 +890,16 @@
         "name": {
           "type": "Binder",
           "name": "f10",
-          "loc": null
+          "loc": "34:10-34:13"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "34:13-34:14",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "35:7-35:11"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -915,18 +915,18 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "35:7-35:7",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "34:7-35:7"
     },
     {
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
         "tycon": "MyEnum",
-        "tycon_loc": null,
+        "tycon_loc": "35:12-35:18",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -938,7 +938,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "35:7-35:20"
       }
     },
     {
@@ -949,16 +949,16 @@
         "name": {
           "type": "Binder",
           "name": "f1",
-          "loc": null
+          "loc": "40:4-40:6"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "40:6-40:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "41:1-41:4"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -974,18 +974,18 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "41:1-41:1",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "40:1-41:1"
     },
     {
       "type": "Impl::TopLetDef",
       "binder": {
         "type": "Binder",
         "name": "a",
-        "loc": null
+        "loc": "41:5-41:6"
       },
       "ty": null,
       "expr": {
@@ -994,13 +994,13 @@
           "type": "Constant::Int",
           "0": "1"
         },
-        "loc": null
+        "loc": "41:9-41:10"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": false,
-      "loc": null,
+      "loc": "41:1-41:8",
       "attrs": [],
       "doc": ""
     },
@@ -1012,16 +1012,16 @@
         "name": {
           "type": "Binder",
           "name": "f2",
-          "loc": null
+          "loc": "42:4-42:6"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "42:6-42:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "43:1-43:5"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -1037,11 +1037,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "43:1-43:1",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "42:1-43:1"
     },
     {
       "type": "Impl::TopImplRelation",
@@ -1053,10 +1053,10 @@
             "type": "LongIdent::Ident",
             "0": "T2"
           },
-          "loc": null
+          "loc": "43:13-43:15"
         },
         "tys": [],
-        "loc": null
+        "loc": "43:13-43:12"
       },
       "trait": {
         "type": "TypeName",
@@ -1065,14 +1065,14 @@
           "0": "T1"
         },
         "is_object": false,
-        "loc": null
+        "loc": "43:6-43:5"
       },
       "quantifiers": [],
       "vis": {
         "type": "Visibility::Default"
       },
       "attrs": [],
-      "loc": null,
+      "loc": "43:1-43:12",
       "doc": ""
     },
     {
@@ -1083,16 +1083,16 @@
         "name": {
           "type": "Binder",
           "name": "f3",
-          "loc": null
+          "loc": "44:4-44:6"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "44:6-44:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "45:1-45:3"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -1108,11 +1108,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "45:1-45:1",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "44:1-45:1"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -1122,16 +1122,16 @@
         "name": {
           "type": "Binder",
           "name": "f4",
-          "loc": null
+          "loc": "45:4-45:6"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "45:6-45:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "46:1-46:5"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -1147,23 +1147,23 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "46:1-46:1",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "45:1-46:1"
     },
     {
       "type": "Impl::TopTest",
       "expr": {
         "type": "Expr::Unit",
-        "loc": null,
+        "loc": "46:6-46:7",
         "faked": true
       },
       "name": null,
       "params": null,
       "local_types": [],
-      "loc": null,
+      "loc": "46:1-46:7",
       "attrs": [],
       "doc": ""
     },
@@ -1175,16 +1175,16 @@
         "name": {
           "type": "Binder",
           "name": "f5",
-          "loc": null
+          "loc": "47:4-47:6"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "47:6-47:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "48:1-48:10"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -1200,11 +1200,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "48:1-48:1",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "47:1-48:1"
     },
     {
       "type": "Impl::TopBatchTypeAlias",
@@ -1215,19 +1215,19 @@
           "binder": {
             "type": "Binder",
             "name": "T2",
-            "loc": null
+            "loc": "48:17-48:19"
           },
           "target": {
             "type": "Label",
             "name": "T1",
-            "loc": null
+            "loc": "48:11-48:13"
           }
         }
       ],
       "vis": {
         "type": "Visibility::Default"
       },
-      "loc": null,
+      "loc": "48:1-48:16",
       "attrs": [],
       "is_list": false,
       "doc": ""
@@ -1240,25 +1240,25 @@
         "name": {
           "type": "Binder",
           "name": "f6",
-          "loc": null
+          "loc": "49:4-49:6"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "49:6-49:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Arrow",
           "args": [],
           "res": {
             "type": "Type::Any",
-            "loc": null
+            "loc": "50:6-50:7"
           },
           "err": {
             "type": "ErrorType::NoErrorType"
           },
           "is_async": true,
-          "loc": null
+          "loc": "50:1-50:7"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -1274,13 +1274,13 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Hole",
-          "loc": null,
+          "loc": "50:6-50:7",
           "kind": {
             "type": "Hole::Synthesized"
           }
         }
       },
-      "loc": null
+      "loc": "49:1-50:7"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -1290,16 +1290,16 @@
         "name": {
           "type": "Binder",
           "name": "f7",
-          "loc": null
+          "loc": "50:10-50:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "50:12-50:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "51:1-51:6"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -1315,18 +1315,18 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "51:1-51:1",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "50:7-51:1"
     },
     {
       "type": "Impl::TopLetDef",
       "binder": {
         "type": "Binder",
         "name": "CONST",
-        "loc": null
+        "loc": "51:7-51:12"
       },
       "ty": null,
       "expr": {
@@ -1335,13 +1335,13 @@
           "type": "Constant::Int",
           "0": "5"
         },
-        "loc": null
+        "loc": "51:15-51:16"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": true,
-      "loc": null,
+      "loc": "51:1-51:14",
       "attrs": [],
       "doc": ""
     },
@@ -1353,16 +1353,16 @@
         "name": {
           "type": "Binder",
           "name": "f8",
-          "loc": null
+          "loc": "52:4-52:6"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "52:6-52:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "53:1-53:6"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -1378,11 +1378,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "53:1-53:1",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "52:1-53:1"
     },
     {
       "type": "Impl::TopTrait",
@@ -1391,14 +1391,14 @@
         "name": {
           "type": "Binder",
           "name": "AnotherTrait",
-          "loc": null
+          "loc": "53:7-53:19"
         },
         "supers": [],
         "methods": [],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": null,
+        "loc": "53:1-53:21",
         "attrs": [],
         "doc": ""
       }
@@ -1411,16 +1411,16 @@
         "name": {
           "type": "Binder",
           "name": "f9",
-          "loc": null
+          "loc": "54:4-54:6"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "54:6-54:7",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "55:1-55:7"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -1436,18 +1436,18 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "55:1-55:1",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "54:1-55:1"
     },
     {
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
         "tycon": "MyRcd",
-        "tycon_loc": null,
+        "tycon_loc": "55:8-55:13",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -1459,7 +1459,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "55:1-55:15"
       }
     },
     {
@@ -1470,16 +1470,16 @@
         "name": {
           "type": "Binder",
           "name": "f10",
-          "loc": null
+          "loc": "56:4-56:7"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "56:7-56:8",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Any",
-          "loc": null
+          "loc": "57:1-57:5"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -1495,18 +1495,18 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "57:1-57:1",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "56:1-57:1"
     },
     {
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
         "tycon": "MyEnum",
-        "tycon_loc": null,
+        "tycon_loc": "57:6-57:12",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -1518,7 +1518,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "57:1-57:14"
       }
     },
     {
@@ -1529,12 +1529,12 @@
         "name": {
           "type": "Binder",
           "name": "main",
-          "loc": null
+          "loc": "61:4-61:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "61:9-61:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -1554,20 +1554,20 @@
           "name": {
             "type": "Binder",
             "name": "f",
-            "loc": null
+            "loc": "62:6-62:7"
           },
           "func": {
             "type": "Func::Lambda",
             "parameters": [],
-            "params_loc": null,
+            "params_loc": "62:7-62:8",
             "body": {
               "type": "Expr::Unit",
-              "loc": null,
+              "loc": "62:13-63:6",
               "faked": true
             },
             "return_type": {
               "type": "Type::Any",
-              "loc": null
+              "loc": "62:13-62:14"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
@@ -1577,7 +1577,7 @@
             },
             "has_error": null,
             "is_async": false,
-            "loc": null
+            "loc": "-1:1--1:1"
           },
           "body": {
             "type": "Expr::Let",
@@ -1586,7 +1586,7 @@
               "0": {
                 "type": "Binder",
                 "name": "g",
-                "loc": null
+                "loc": "65:7-65:8"
               }
             },
             "expr": {
@@ -1594,15 +1594,15 @@
               "func": {
                 "type": "Func::Lambda",
                 "parameters": [],
-                "params_loc": null,
+                "params_loc": "65:13-65:14",
                 "body": {
                   "type": "Expr::Unit",
-                  "loc": null,
+                  "loc": "65:19-66:6",
                   "faked": true
                 },
                 "return_type": {
                   "type": "Type::Any",
-                  "loc": null
+                  "loc": "65:19-65:20"
                 },
                 "error_type": {
                   "type": "ErrorType::NoErrorType"
@@ -1612,697 +1612,247 @@
                 },
                 "has_error": null,
                 "is_async": false,
-                "loc": null
+                "loc": "-1:1--1:1"
               },
-              "loc": null
+              "loc": "65:11-66:6"
             },
             "body": {
               "type": "Expr::Unit",
-              "loc": null,
+              "loc": "65:3-65:6",
               "faked": true
             },
-            "loc": null
+            "loc": "65:11-66:6"
           },
-          "loc": null
+          "loc": "62:3-66:6"
         }
       },
-      "loc": null
+      "loc": "61:1-67:5"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 6,
-          "column": 4
-        },
-        "end": {
-          "line": 6,
-          "column": 5
-        }
-      },
+      "loc": "6:4-6:5",
       "msg": "Unexpected token `(`, you may expect `;`, `}`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 9,
-          "column": 23
-        },
-        "end": {
-          "line": 9,
-          "column": 24
-        }
-      },
+      "loc": "9:23-9:24",
       "msg": "Unexpected token `=`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 10,
-          "column": 23
-        },
-        "end": {
-          "line": 10,
-          "column": 24
-        }
-      },
+      "loc": "10:23-10:24",
       "msg": "Unexpected token `{`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 11,
-          "column": 35
-        },
-        "end": {
-          "line": 11,
-          "column": 36
-        }
-      },
+      "loc": "11:35-11:36",
       "msg": "Unexpected token `=`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 13,
-          "column": 36
-        },
-        "end": {
-          "line": 13,
-          "column": 37
-        }
-      },
+      "loc": "13:36-13:37",
       "msg": "Unexpected token `{`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 19,
-          "column": 7
-        },
-        "end": {
-          "line": 19,
-          "column": 10
-        }
-      },
+      "loc": "19:7-19:10",
       "msg": "Unexpected token `let`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 19,
-          "column": 7
-        },
-        "end": {
-          "line": 19,
-          "column": 10
-        }
-      },
+      "loc": "19:7-19:10",
       "msg": "Unexpected token `let`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 21,
-          "column": 7
-        },
-        "end": {
-          "line": 21,
-          "column": 11
-        }
-      },
+      "loc": "21:7-21:11",
       "msg": "Unexpected token `impl`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 21,
-          "column": 7
-        },
-        "end": {
-          "line": 21,
-          "column": 11
-        }
-      },
+      "loc": "21:7-21:11",
       "msg": "Unexpected token `impl`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 23,
-          "column": 7
-        },
-        "end": {
-          "line": 23,
-          "column": 9
-        }
-      },
+      "loc": "23:7-23:9",
       "msg": "Unexpected token `fn`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 23,
-          "column": 7
-        },
-        "end": {
-          "line": 23,
-          "column": 9
-        }
-      },
+      "loc": "23:7-23:9",
       "msg": "Unexpected token `fn`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 24,
-          "column": 7
-        },
-        "end": {
-          "line": 24,
-          "column": 11
-        }
-      },
+      "loc": "24:7-24:11",
       "msg": "Unexpected token `test`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 24,
-          "column": 7
-        },
-        "end": {
-          "line": 24,
-          "column": 11
-        }
-      },
+      "loc": "24:7-24:11",
       "msg": "Unexpected token `test`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 26,
-          "column": 7
-        },
-        "end": {
-          "line": 26,
-          "column": 16
-        }
-      },
+      "loc": "26:7-26:16",
       "msg": "Unexpected token `typealias`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 26,
-          "column": 7
-        },
-        "end": {
-          "line": 26,
-          "column": 16
-        }
-      },
+      "loc": "26:7-26:16",
       "msg": "Unexpected token `typealias`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 28,
-          "column": 13
-        },
-        "end": {
-          "line": 28,
-          "column": 15
-        }
-      },
+      "loc": "28:13-28:15",
       "msg": "Unexpected token `fn`, you may expect `(`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 29,
-          "column": 7
-        },
-        "end": {
-          "line": 29,
-          "column": 12
-        }
-      },
+      "loc": "29:7-29:12",
       "msg": "Unexpected token `const`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 29,
-          "column": 7
-        },
-        "end": {
-          "line": 29,
-          "column": 12
-        }
-      },
+      "loc": "29:7-29:12",
       "msg": "Unexpected token `const`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 31,
-          "column": 7
-        },
-        "end": {
-          "line": 31,
-          "column": 12
-        }
-      },
+      "loc": "31:7-31:12",
       "msg": "Unexpected token `trait`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 31,
-          "column": 7
-        },
-        "end": {
-          "line": 31,
-          "column": 12
-        }
-      },
+      "loc": "31:7-31:12",
       "msg": "Unexpected token `trait`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 33,
-          "column": 7
-        },
-        "end": {
-          "line": 33,
-          "column": 13
-        }
-      },
+      "loc": "33:7-33:13",
       "msg": "Unexpected token `struct`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 33,
-          "column": 7
-        },
-        "end": {
-          "line": 33,
-          "column": 13
-        }
-      },
+      "loc": "33:7-33:13",
       "msg": "Unexpected token `struct`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 35,
-          "column": 7
-        },
-        "end": {
-          "line": 35,
-          "column": 11
-        }
-      },
+      "loc": "35:7-35:11",
       "msg": "Unexpected token `enum`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 35,
-          "column": 7
-        },
-        "end": {
-          "line": 35,
-          "column": 11
-        }
-      },
+      "loc": "35:7-35:11",
       "msg": "Unexpected token `enum`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 41,
-          "column": 1
-        },
-        "end": {
-          "line": 41,
-          "column": 4
-        }
-      },
+      "loc": "41:1-41:4",
       "msg": "Unexpected token `let`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 41,
-          "column": 1
-        },
-        "end": {
-          "line": 41,
-          "column": 4
-        }
-      },
+      "loc": "41:1-41:4",
       "msg": "Unexpected token `let`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 43,
-          "column": 1
-        },
-        "end": {
-          "line": 43,
-          "column": 5
-        }
-      },
+      "loc": "43:1-43:5",
       "msg": "Unexpected token `impl`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 43,
-          "column": 1
-        },
-        "end": {
-          "line": 43,
-          "column": 5
-        }
-      },
+      "loc": "43:1-43:5",
       "msg": "Unexpected token `impl`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 45,
-          "column": 1
-        },
-        "end": {
-          "line": 45,
-          "column": 3
-        }
-      },
+      "loc": "45:1-45:3",
       "msg": "Unexpected token `fn`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 45,
-          "column": 1
-        },
-        "end": {
-          "line": 45,
-          "column": 3
-        }
-      },
+      "loc": "45:1-45:3",
       "msg": "Unexpected token `fn`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 46,
-          "column": 1
-        },
-        "end": {
-          "line": 46,
-          "column": 5
-        }
-      },
+      "loc": "46:1-46:5",
       "msg": "Unexpected token `test`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 46,
-          "column": 1
-        },
-        "end": {
-          "line": 46,
-          "column": 5
-        }
-      },
+      "loc": "46:1-46:5",
       "msg": "Unexpected token `test`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 48,
-          "column": 1
-        },
-        "end": {
-          "line": 48,
-          "column": 10
-        }
-      },
+      "loc": "48:1-48:10",
       "msg": "Unexpected token `typealias`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 48,
-          "column": 1
-        },
-        "end": {
-          "line": 48,
-          "column": 10
-        }
-      },
+      "loc": "48:1-48:10",
       "msg": "Unexpected token `typealias`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 50,
-          "column": 7
-        },
-        "end": {
-          "line": 50,
-          "column": 9
-        }
-      },
+      "loc": "50:7-50:9",
       "msg": "Unexpected token `fn`, you may expect `(`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 51,
-          "column": 1
-        },
-        "end": {
-          "line": 51,
-          "column": 6
-        }
-      },
+      "loc": "51:1-51:6",
       "msg": "Unexpected token `const`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 51,
-          "column": 1
-        },
-        "end": {
-          "line": 51,
-          "column": 6
-        }
-      },
+      "loc": "51:1-51:6",
       "msg": "Unexpected token `const`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 53,
-          "column": 1
-        },
-        "end": {
-          "line": 53,
-          "column": 6
-        }
-      },
+      "loc": "53:1-53:6",
       "msg": "Unexpected token `trait`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 53,
-          "column": 1
-        },
-        "end": {
-          "line": 53,
-          "column": 6
-        }
-      },
+      "loc": "53:1-53:6",
       "msg": "Unexpected token `trait`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 55,
-          "column": 1
-        },
-        "end": {
-          "line": 55,
-          "column": 7
-        }
-      },
+      "loc": "55:1-55:7",
       "msg": "Unexpected token `struct`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 55,
-          "column": 1
-        },
-        "end": {
-          "line": 55,
-          "column": 7
-        }
-      },
+      "loc": "55:1-55:7",
       "msg": "Unexpected token `struct`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 57,
-          "column": 1
-        },
-        "end": {
-          "line": 57,
-          "column": 5
-        }
-      },
+      "loc": "57:1-57:5",
       "msg": "Unexpected token `enum`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 57,
-          "column": 1
-        },
-        "end": {
-          "line": 57,
-          "column": 5
-        }
-      },
+      "loc": "57:1-57:5",
       "msg": "Unexpected token `enum`, you may expect `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 62,
-          "column": 13
-        },
-        "end": {
-          "line": 62,
-          "column": 14
-        }
-      },
+      "loc": "62:13-62:14",
       "msg": "Unexpected token `{`, you may expect return type annotation."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/missing_type_after_thin_arrow.mbt",
-        "start": {
-          "line": 65,
-          "column": 19
-        },
-        "end": {
-          "line": 65,
-          "column": 20
-        }
-      },
+      "loc": "65:19-65:20",
       "msg": "Unexpected token `{`, you may expect return type annotation."
     }
   ]

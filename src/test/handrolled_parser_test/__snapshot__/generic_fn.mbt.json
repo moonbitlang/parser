@@ -9,18 +9,18 @@
         "name": {
           "type": "Binder",
           "name": "f",
-          "loc": null
+          "loc": "1:17-1:18"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "1:18-1:19",
         "quantifiers": [
           {
             "type": "TypeVarBinder",
             "name": "X",
             "constraints": [],
-            "loc": null
+            "loc": "1:4-1:4"
           },
           {
             "type": "TypeVarBinder",
@@ -32,10 +32,10 @@
                   "type": "LongIdent::Ident",
                   "0": "Hash"
                 },
-                "loc": null
+                "loc": "1:11-1:15"
               }
             ],
-            "loc": null
+            "loc": "1:7-1:6"
           }
         ],
         "return_type": {
@@ -46,10 +46,10 @@
               "type": "LongIdent::Ident",
               "0": "Unit"
             },
-            "loc": null
+            "loc": "1:24-1:28"
           },
           "tys": [],
-          "loc": null
+          "loc": "1:24-1:23"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -65,11 +65,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "1:29-1:30",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "1:1-1:30"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -79,18 +79,18 @@
         "name": {
           "type": "Binder",
           "name": "f",
-          "loc": null
+          "loc": "4:7-4:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "4:8-4:6",
         "quantifiers": [
           {
             "type": "TypeVarBinder",
             "name": "X",
             "constraints": [],
-            "loc": null
+            "loc": "4:4-4:4"
           }
         ],
         "return_type": null,
@@ -108,27 +108,17 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "4:8-4:24",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "4:1-4:24"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/generic_fn.mbt",
-        "start": {
-          "line": 4,
-          "column": 8
-        },
-        "end": {
-          "line": 4,
-          "column": 9
-        }
-      },
+      "loc": "4:8-4:9",
       "msg": "Unexpected token `[`, you may expect `{`."
     }
   ]

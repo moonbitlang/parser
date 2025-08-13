@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "E1",
-        "tycon_loc": null,
+        "tycon_loc": "1:6-1:8",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -16,15 +16,15 @@
               "name": {
                 "type": "ConstrName",
                 "name": "A",
-                "loc": null
+                "loc": "2:3-2:4"
               },
               "args": null,
               "tag": [
                 "0",
-                null
+                "2:7-2:8"
               ],
               "attrs": [],
-              "loc": null,
+              "loc": "2:3-2:6",
               "doc": ""
             },
             {
@@ -32,12 +32,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "B",
-                "loc": null
+                "loc": "3:3-3:4"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "3:3-2:9",
               "doc": ""
             },
             {
@@ -45,12 +45,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "C",
-                "loc": null
+                "loc": "4:3-4:4"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "4:3-3:5",
               "doc": ""
             },
             {
@@ -58,15 +58,15 @@
               "name": {
                 "type": "ConstrName",
                 "name": "D",
-                "loc": null
+                "loc": "5:3-5:4"
               },
               "args": null,
               "tag": [
                 "42",
-                null
+                "5:7-5:9"
               ],
               "attrs": [],
-              "loc": null,
+              "loc": "5:3-5:6",
               "doc": ""
             },
             {
@@ -74,12 +74,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "E",
-                "loc": null
+                "loc": "6:3-6:4"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "6:3-5:10",
               "doc": ""
             }
           ]
@@ -90,7 +90,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "1:1-6:5"
       }
     },
     {
@@ -98,7 +98,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "E2",
-        "tycon_loc": null,
+        "tycon_loc": "9:6-9:8",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -108,15 +108,15 @@
               "name": {
                 "type": "ConstrName",
                 "name": "F1",
-                "loc": null
+                "loc": "10:3-10:5"
               },
               "args": null,
               "tag": [
                 "0x0001",
-                null
+                "10:8-10:14"
               ],
               "attrs": [],
-              "loc": null,
+              "loc": "10:3-10:7",
               "doc": ""
             },
             {
@@ -124,15 +124,15 @@
               "name": {
                 "type": "ConstrName",
                 "name": "F2",
-                "loc": null
+                "loc": "11:3-11:5"
               },
               "args": null,
               "tag": [
                 "0x0002",
-                null
+                "11:8-11:14"
               ],
               "attrs": [],
-              "loc": null,
+              "loc": "11:3-11:7",
               "doc": ""
             },
             {
@@ -140,15 +140,15 @@
               "name": {
                 "type": "ConstrName",
                 "name": "F3",
-                "loc": null
+                "loc": "12:3-12:5"
               },
               "args": null,
               "tag": [
                 "0x0004",
-                null
+                "12:8-12:14"
               ],
               "attrs": [],
-              "loc": null,
+              "loc": "12:3-12:7",
               "doc": ""
             },
             {
@@ -156,15 +156,15 @@
               "name": {
                 "type": "ConstrName",
                 "name": "F4",
-                "loc": null
+                "loc": "13:3-13:5"
               },
               "args": null,
               "tag": [
                 "0x0008",
-                null
+                "13:8-13:14"
               ],
               "attrs": [],
-              "loc": null,
+              "loc": "13:3-13:7",
               "doc": ""
             },
             {
@@ -172,15 +172,15 @@
               "name": {
                 "type": "ConstrName",
                 "name": "F5",
-                "loc": null
+                "loc": "14:3-14:5"
               },
               "args": null,
               "tag": [
                 "0x0010",
-                null
+                "14:8-14:14"
               ],
               "attrs": [],
-              "loc": null,
+              "loc": "14:3-14:7",
               "doc": ""
             },
             {
@@ -188,15 +188,15 @@
               "name": {
                 "type": "ConstrName",
                 "name": "F6",
-                "loc": null
+                "loc": "15:3-15:5"
               },
               "args": null,
               "tag": [
                 "0x0020",
-                null
+                "15:8-15:14"
               ],
               "attrs": [],
-              "loc": null,
+              "loc": "15:3-15:7",
               "doc": ""
             },
             {
@@ -204,15 +204,15 @@
               "name": {
                 "type": "ConstrName",
                 "name": "F7",
-                "loc": null
+                "loc": "16:3-16:5"
               },
               "args": null,
               "tag": [
                 "0x0040",
-                null
+                "16:8-16:14"
               ],
               "attrs": [],
-              "loc": null,
+              "loc": "16:3-16:7",
               "doc": ""
             },
             {
@@ -220,15 +220,15 @@
               "name": {
                 "type": "ConstrName",
                 "name": "F8",
-                "loc": null
+                "loc": "17:3-17:5"
               },
               "args": null,
               "tag": [
                 "0x0080",
-                null
+                "17:8-17:14"
               ],
               "attrs": [],
-              "loc": null,
+              "loc": "17:3-17:7",
               "doc": ""
             }
           ]
@@ -239,7 +239,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "9:1-17:15"
       }
     }
   ]

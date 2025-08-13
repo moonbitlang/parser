@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -38,18 +38,18 @@
               "0": {
                 "type": "Binder",
                 "name": "kkk",
-                "loc": null
+                "loc": "2:7-2:10"
               }
             },
             "pat2": {
               "type": "Pattern::Any",
-              "loc": null
+              "loc": "2:11-2:20"
             },
-            "loc": null
+            "loc": "2:7-2:18"
           },
           "expr": {
             "type": "Expr::Hole",
-            "loc": null,
+            "loc": "2:11-2:20",
             "kind": {
               "type": "Hole::Synthesized"
             }
@@ -62,11 +62,11 @@
                 "type": "Constant::Int",
                 "0": "1"
               },
-              "loc": null
+              "loc": "3:7-3:8"
             },
             "expr": {
               "type": "Expr::Hole",
-              "loc": null,
+              "loc": "3:8-3:13",
               "kind": {
                 "type": "Hole::Synthesized"
               }
@@ -78,75 +78,45 @@
                 "0": {
                   "type": "Binder",
                   "name": "bla",
-                  "loc": null
+                  "loc": "4:7-4:10"
                 }
               },
               "expr": {
                 "type": "Expr::Hole",
-                "loc": null,
+                "loc": "4:11-4:18",
                 "kind": {
                   "type": "Hole::Synthesized"
                 }
               },
               "body": {
                 "type": "Expr::Unit",
-                "loc": null,
+                "loc": "5:3-5:4",
                 "faked": false
               },
-              "loc": null
+              "loc": "4:11-4:18"
             },
-            "loc": null
+            "loc": "3:8-3:13"
           },
-          "loc": null
+          "loc": "2:11-2:20"
         }
       },
-      "loc": null
+      "loc": "1:1-5:6"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/invalid_unicode.mbt",
-        "start": {
-          "line": 2,
-          "column": 11
-        },
-        "end": {
-          "line": 2,
-          "column": 12
-        }
-      },
+      "loc": "2:11-2:12",
       "msg": "Unexpected token `+`, you may expect `true`, `false`, char, int, b'...', float, double, `-`, b\"...\", string, `_`, id (lowercase start), `@pkg.id`, id (uppercase start), `(`, `[`, `{`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/invalid_unicode.mbt",
-        "start": {
-          "line": 3,
-          "column": 8
-        },
-        "end": {
-          "line": 3,
-          "column": 9
-        }
-      },
+      "loc": "3:8-3:9",
       "msg": "Unexpected token id (lowercase start), you may expect `=`."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/invalid_unicode.mbt",
-        "start": {
-          "line": 4,
-          "column": 11
-        },
-        "end": {
-          "line": 4,
-          "column": 14
-        }
-      },
+      "loc": "4:11-4:14",
       "msg": "Unexpected token id (lowercase start), you may expect `=`."
     }
   ]

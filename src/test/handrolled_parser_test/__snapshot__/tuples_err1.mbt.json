@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -33,46 +33,36 @@
           "type": "Expr::Let",
           "pattern": {
             "type": "Pattern::Any",
-            "loc": null
+            "loc": "2:7-2:8"
           },
           "expr": {
             "type": "Expr::Tuple",
             "exprs": [
               {
                 "type": "Expr::Hole",
-                "loc": null,
+                "loc": "2:12-2:12",
                 "kind": {
                   "type": "Hole::Synthesized"
                 }
               }
             ],
-            "loc": null
+            "loc": "2:11-2:19"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": null,
+            "loc": "2:3-2:6",
             "faked": true
           },
-          "loc": null
+          "loc": "2:11-2:19"
         }
       },
-      "loc": null
+      "loc": "1:1-2:21"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/tuples_err1.mbt",
-        "start": {
-          "line": 2,
-          "column": 13
-        },
-        "end": {
-          "line": 2,
-          "column": 14
-        }
-      },
+      "loc": "2:13-2:14",
       "msg": "Unexpected token `:`, you may expect `,`, `)`."
     }
   ]

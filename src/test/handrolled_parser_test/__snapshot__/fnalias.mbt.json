@@ -6,7 +6,7 @@
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "1:9-1:13"
       },
       "type_name": null,
       "targets": [
@@ -15,7 +15,7 @@
           "binder": {
             "type": "Binder",
             "name": "f",
-            "loc": null
+            "loc": "1:14-1:15"
           },
           "target": null
         }
@@ -26,14 +26,14 @@
       "attrs": [],
       "is_list": false,
       "doc": "",
-      "loc": null
+      "loc": "1:1-1:13"
     },
     {
       "type": "Impl::TopFuncAlias",
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "2:13-2:17"
       },
       "type_name": null,
       "targets": [
@@ -42,7 +42,7 @@
           "binder": {
             "type": "Binder",
             "name": "f",
-            "loc": null
+            "loc": "2:19-2:20"
           },
           "target": null
         },
@@ -51,7 +51,7 @@
           "binder": {
             "type": "Binder",
             "name": "g",
-            "loc": null
+            "loc": "2:22-2:23"
           },
           "target": null
         },
@@ -60,7 +60,7 @@
           "binder": {
             "type": "Binder",
             "name": "h",
-            "loc": null
+            "loc": "2:25-2:26"
           },
           "target": null
         }
@@ -68,12 +68,12 @@
       "vis": {
         "type": "Visibility::Pub",
         "attr": null,
-        "loc": null
+        "loc": "2:1-1:16"
       },
       "attrs": [],
       "is_list": true,
       "doc": "",
-      "loc": null
+      "loc": "2:1-2:26"
     },
     {
       "type": "Impl::TopFuncAlias",
@@ -85,12 +85,12 @@
           "binder": {
             "type": "Binder",
             "name": "alias",
-            "loc": null
+            "loc": "4:18-4:23"
           },
           "target": {
             "type": "Label",
             "name": "local",
-            "loc": null
+            "loc": "4:9-4:14"
           }
         }
       ],
@@ -100,7 +100,7 @@
       "attrs": [],
       "is_list": false,
       "doc": "",
-      "loc": null
+      "loc": "4:1-4:17"
     },
     {
       "type": "Impl::TopFuncAlias",
@@ -112,12 +112,12 @@
           "binder": {
             "type": "Binder",
             "name": "alias1",
-            "loc": null
+            "loc": "6:13-6:19"
           },
           "target": {
             "type": "Label",
             "name": "local1",
-            "loc": null
+            "loc": "6:3-6:9"
           }
         },
         {
@@ -125,12 +125,12 @@
           "binder": {
             "type": "Binder",
             "name": "alias2",
-            "loc": null
+            "loc": "7:13-7:19"
           },
           "target": {
             "type": "Label",
             "name": "local2",
-            "loc": null
+            "loc": "7:3-7:9"
           }
         }
       ],
@@ -140,7 +140,7 @@
       "attrs": [],
       "is_list": true,
       "doc": "",
-      "loc": null
+      "loc": "5:1-7:20"
     },
     {
       "type": "Impl::TopFuncAlias",
@@ -148,7 +148,7 @@
       "type_name": {
         "type": "Label",
         "name": "LocalTypeName",
-        "loc": null
+        "loc": "10:9-10:22"
       },
       "targets": [
         {
@@ -156,7 +156,7 @@
           "binder": {
             "type": "Binder",
             "name": "meth1",
-            "loc": null
+            "loc": "10:24-10:29"
           },
           "target": null
         }
@@ -167,7 +167,7 @@
       "attrs": [],
       "is_list": false,
       "doc": "",
-      "loc": null
+      "loc": "10:1-10:24"
     },
     {
       "type": "Impl::TopFuncAlias",
@@ -175,7 +175,7 @@
       "type_name": {
         "type": "Label",
         "name": "LocalTypeName",
-        "loc": null
+        "loc": "11:9-11:22"
       },
       "targets": [
         {
@@ -183,12 +183,12 @@
           "binder": {
             "type": "Binder",
             "name": "meth_two",
-            "loc": null
+            "loc": "11:33-11:41"
           },
           "target": {
             "type": "Label",
             "name": "meth1",
-            "loc": null
+            "loc": "11:24-11:29"
           }
         }
       ],
@@ -198,7 +198,7 @@
       "attrs": [],
       "is_list": false,
       "doc": "",
-      "loc": null
+      "loc": "11:1-11:32"
     },
     {
       "type": "Impl::TopFuncAlias",
@@ -206,7 +206,7 @@
       "type_name": {
         "type": "Label",
         "name": "LocalTypeName",
-        "loc": null
+        "loc": "12:9-12:22"
       },
       "targets": [
         {
@@ -214,7 +214,7 @@
           "binder": {
             "type": "Binder",
             "name": "meth1",
-            "loc": null
+            "loc": "13:3-13:8"
           },
           "target": null
         },
@@ -223,12 +223,12 @@
           "binder": {
             "type": "Binder",
             "name": "meth_two",
-            "loc": null
+            "loc": "14:12-14:20"
           },
           "target": {
             "type": "Label",
             "name": "meth2",
-            "loc": null
+            "loc": "14:3-14:8"
           }
         }
       ],
@@ -238,19 +238,19 @@
       "attrs": [],
       "is_list": true,
       "doc": "",
-      "loc": null
+      "loc": "12:1-14:21"
     },
     {
       "type": "Impl::TopFuncAlias",
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "17:9-17:13"
       },
       "type_name": {
         "type": "Label",
         "name": "Type",
-        "loc": null
+        "loc": "17:14-17:18"
       },
       "targets": [
         {
@@ -258,7 +258,7 @@
           "binder": {
             "type": "Binder",
             "name": "meth1",
-            "loc": null
+            "loc": "17:20-17:25"
           },
           "target": null
         }
@@ -269,19 +269,19 @@
       "attrs": [],
       "is_list": false,
       "doc": "",
-      "loc": null
+      "loc": "17:1-17:20"
     },
     {
       "type": "Impl::TopFuncAlias",
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "18:9-18:13"
       },
       "type_name": {
         "type": "Label",
         "name": "Type",
-        "loc": null
+        "loc": "18:14-18:18"
       },
       "targets": [
         {
@@ -289,12 +289,12 @@
           "binder": {
             "type": "Binder",
             "name": "meth_two",
-            "loc": null
+            "loc": "18:29-18:37"
           },
           "target": {
             "type": "Label",
             "name": "meth2",
-            "loc": null
+            "loc": "18:20-18:25"
           }
         }
       ],
@@ -304,19 +304,19 @@
       "attrs": [],
       "is_list": false,
       "doc": "",
-      "loc": null
+      "loc": "18:1-18:28"
     },
     {
       "type": "Impl::TopFuncAlias",
       "pkg": {
         "type": "Label",
         "name": "pkg",
-        "loc": null
+        "loc": "19:9-19:13"
       },
       "type_name": {
         "type": "Label",
         "name": "Type",
-        "loc": null
+        "loc": "19:14-19:18"
       },
       "targets": [
         {
@@ -324,7 +324,7 @@
           "binder": {
             "type": "Binder",
             "name": "meth1",
-            "loc": null
+            "loc": "20:3-20:8"
           },
           "target": null
         },
@@ -333,12 +333,12 @@
           "binder": {
             "type": "Binder",
             "name": "meth_two",
-            "loc": null
+            "loc": "21:12-21:20"
           },
           "target": {
             "type": "Label",
             "name": "meth2",
-            "loc": null
+            "loc": "21:3-21:8"
           }
         }
       ],
@@ -348,7 +348,7 @@
       "attrs": [],
       "is_list": true,
       "doc": "",
-      "loc": null
+      "loc": "19:1-21:21"
     }
   ]
 }

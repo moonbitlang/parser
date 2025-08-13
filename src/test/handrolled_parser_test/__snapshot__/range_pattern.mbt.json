@@ -6,7 +6,7 @@
       "binder": {
         "type": "Binder",
         "name": "C1",
-        "loc": null
+        "loc": "1:7-1:9"
       },
       "ty": null,
       "expr": {
@@ -15,13 +15,13 @@
           "type": "Constant::Int",
           "0": "0"
         },
-        "loc": null
+        "loc": "1:12-1:13"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": true,
-      "loc": null,
+      "loc": "1:1-1:11",
       "attrs": [],
       "doc": ""
     },
@@ -30,7 +30,7 @@
       "binder": {
         "type": "Binder",
         "name": "C2",
-        "loc": null
+        "loc": "2:7-2:9"
       },
       "ty": null,
       "expr": {
@@ -39,13 +39,13 @@
           "type": "Constant::Int",
           "0": "42"
         },
-        "loc": null
+        "loc": "2:12-2:14"
       },
       "vis": {
         "type": "Visibility::Default"
       },
       "is_constant": true,
-      "loc": null,
+      "loc": "2:1-2:11",
       "attrs": [],
       "doc": ""
     },
@@ -57,7 +57,7 @@
         "name": {
           "type": "Binder",
           "name": "i",
-          "loc": null
+          "loc": "4:4-4:5"
         },
         "has_error": null,
         "is_async": false,
@@ -67,7 +67,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "4:6-4:7"
             },
             "ty": {
               "type": "Type::Name",
@@ -77,14 +77,14 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": null
+                "loc": "4:10-4:13"
               },
               "tys": [],
-              "loc": null
+              "loc": "4:10-4:9"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "4:5-4:13",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -94,10 +94,10 @@
               "type": "LongIdent::Ident",
               "0": "Unit"
             },
-            "loc": null
+            "loc": "4:18-4:22"
           },
           "tys": [],
-          "loc": null
+          "loc": "4:18-4:17"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -121,9 +121,9 @@
                 "type": "LongIdent::Ident",
                 "0": "x"
               },
-              "loc": null
+              "loc": "5:9-5:8"
             },
-            "loc": null
+            "loc": "5:9-5:8"
           },
           "cases": [
             {
@@ -137,16 +137,16 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "C1",
-                      "loc": null
+                      "loc": "6:5-6:7"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "6:5-5:13"
                   },
                   "args": null,
                   "is_open": false,
-                  "loc": null
+                  "loc": "6:5-5:13"
                 },
                 "rhs": {
                   "type": "Pattern::Constr",
@@ -155,24 +155,24 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "C2",
-                      "loc": null
+                      "loc": "6:10-6:12"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "6:10-6:10"
                   },
                   "args": null,
                   "is_open": false,
-                  "loc": null
+                  "loc": "6:10-6:10"
                 },
                 "inclusive": true,
-                "loc": null
+                "loc": "6:5-6:10"
               },
               "guard": null,
               "body": {
                 "type": "Expr::Unit",
-                "loc": null,
+                "loc": "6:16-6:17",
                 "faked": false
               }
             },
@@ -186,7 +186,7 @@
                     "type": "Constant::Int",
                     "0": "100"
                   },
-                  "loc": null
+                  "loc": "7:5-7:8"
                 },
                 "rhs": {
                   "type": "Pattern::Constant",
@@ -194,15 +194,15 @@
                     "type": "Constant::Int",
                     "0": "200"
                   },
-                  "loc": null
+                  "loc": "7:11-7:14"
                 },
                 "inclusive": false,
-                "loc": null
+                "loc": "7:5-7:11"
               },
               "guard": null,
               "body": {
                 "type": "Expr::Unit",
-                "loc": null,
+                "loc": "7:18-7:19",
                 "faked": false
               }
             },
@@ -212,7 +212,7 @@
                 "type": "Pattern::Range",
                 "lhs": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "8:5-8:6"
                 },
                 "rhs": {
                   "type": "Pattern::Constant",
@@ -220,15 +220,15 @@
                     "type": "Constant::Int",
                     "0": "0"
                   },
-                  "loc": null
+                  "loc": "8:9-8:10"
                 },
                 "inclusive": false,
-                "loc": null
+                "loc": "8:5-8:9"
               },
               "guard": null,
               "body": {
                 "type": "Expr::Unit",
-                "loc": null,
+                "loc": "8:14-8:15",
                 "faked": false
               }
             },
@@ -242,19 +242,19 @@
                     "type": "Constant::Int",
                     "0": "0"
                   },
-                  "loc": null
+                  "loc": "9:5-9:6"
                 },
                 "rhs": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "9:9-9:10"
                 },
                 "inclusive": false,
-                "loc": null
+                "loc": "9:5-9:9"
               },
               "guard": null,
               "body": {
                 "type": "Expr::Unit",
-                "loc": null,
+                "loc": "9:14-9:15",
                 "faked": false
               }
             },
@@ -267,7 +267,7 @@
                   "0": {
                     "type": "Binder",
                     "name": "x",
-                    "loc": null
+                    "loc": "10:5-10:6"
                   }
                 },
                 "rhs": {
@@ -277,19 +277,19 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "Some",
-                      "loc": null
+                      "loc": "10:9-10:13"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::NoExtraInfo"
                     },
-                    "loc": null
+                    "loc": "10:9-10:9"
                   },
                   "args": [
                     {
                       "type": "ConstrPatArg",
                       "pat": {
                         "type": "Pattern::Any",
-                        "loc": null
+                        "loc": "10:14-10:15"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -297,10 +297,10 @@
                     }
                   ],
                   "is_open": false,
-                  "loc": null
+                  "loc": "10:9-10:15"
                 },
                 "inclusive": false,
-                "loc": null
+                "loc": "10:5-10:15"
               },
               "guard": null,
               "body": {
@@ -313,9 +313,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": null
+                    "loc": "10:20-10:19"
                   },
-                  "loc": null
+                  "loc": "10:20-10:19"
                 },
                 "args": [
                   {
@@ -326,7 +326,7 @@
                         "type": "Constant::String",
                         "0": "invalid operand"
                       },
-                      "loc": null
+                      "loc": "10:28-10:45"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -336,7 +336,7 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "10:20-10:45"
               }
             },
             {
@@ -345,14 +345,14 @@
                 "type": "Pattern::Range",
                 "lhs": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "11:5-11:6"
                 },
                 "rhs": {
                   "type": "Pattern::Any",
-                  "loc": null
+                  "loc": "11:9-11:10"
                 },
                 "inclusive": true,
-                "loc": null
+                "loc": "11:5-11:9"
               },
               "guard": null,
               "body": {
@@ -365,9 +365,9 @@
                       "type": "LongIdent::Ident",
                       "0": "println"
                     },
-                    "loc": null
+                    "loc": "11:14-11:13"
                   },
-                  "loc": null
+                  "loc": "11:14-11:13"
                 },
                 "args": [
                   {
@@ -378,7 +378,7 @@
                         "type": "Constant::String",
                         "0": "inclusive no upper bound"
                       },
-                      "loc": null
+                      "loc": "11:22-11:48"
                     },
                     "kind": {
                       "type": "ArgumentKind::Positional"
@@ -388,16 +388,16 @@
                 "attr": {
                   "type": "ApplyAttr::NoAttr"
                 },
-                "loc": null
+                "loc": "11:14-11:48"
               }
             }
           ],
-          "match_loc": null,
+          "match_loc": "5:3-5:12",
           "using": null,
-          "loc": null
+          "loc": "5:3-11:50"
         }
       },
-      "loc": null
+      "loc": "4:1-12:5"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -407,7 +407,7 @@
         "name": {
           "type": "Binder",
           "name": "c",
-          "loc": null
+          "loc": "15:4-15:5"
         },
         "has_error": null,
         "is_async": false,
@@ -417,7 +417,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "15:6-15:7"
             },
             "ty": {
               "type": "Type::Name",
@@ -427,14 +427,14 @@
                   "type": "LongIdent::Ident",
                   "0": "Char"
                 },
-                "loc": null
+                "loc": "15:10-15:14"
               },
               "tys": [],
-              "loc": null
+              "loc": "15:10-15:9"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "15:5-15:14",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -444,10 +444,10 @@
               "type": "LongIdent::Ident",
               "0": "Unit"
             },
-            "loc": null
+            "loc": "15:19-15:23"
           },
           "tys": [],
-          "loc": null
+          "loc": "15:19-15:18"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -471,9 +471,9 @@
                 "type": "LongIdent::Ident",
                 "0": "c"
               },
-              "loc": null
+              "loc": "16:9-16:8"
             },
-            "loc": null
+            "loc": "16:9-16:8"
           },
           "cases": [
             {
@@ -486,7 +486,7 @@
                     "type": "Constant::Char",
                     "0": "a"
                   },
-                  "loc": null
+                  "loc": "17:5-17:8"
                 },
                 "rhs": {
                   "type": "Pattern::Constant",
@@ -494,15 +494,15 @@
                     "type": "Constant::Char",
                     "0": "z"
                   },
-                  "loc": null
+                  "loc": "17:11-17:14"
                 },
                 "inclusive": true,
-                "loc": null
+                "loc": "17:5-17:11"
               },
               "guard": null,
               "body": {
                 "type": "Expr::Unit",
-                "loc": null,
+                "loc": "17:18-17:19",
                 "faked": false
               }
             },
@@ -516,7 +516,7 @@
                     "type": "Constant::Char",
                     "0": "A"
                   },
-                  "loc": null
+                  "loc": "18:5-18:8"
                 },
                 "rhs": {
                   "type": "Pattern::Constant",
@@ -524,15 +524,15 @@
                     "type": "Constant::Char",
                     "0": "Z"
                   },
-                  "loc": null
+                  "loc": "18:11-18:14"
                 },
                 "inclusive": true,
-                "loc": null
+                "loc": "18:5-18:11"
               },
               "guard": null,
               "body": {
                 "type": "Expr::Unit",
-                "loc": null,
+                "loc": "18:18-18:19",
                 "faked": false
               }
             },
@@ -540,22 +540,22 @@
               "type": "Case",
               "pattern": {
                 "type": "Pattern::Any",
-                "loc": null
+                "loc": "19:5-19:6"
               },
               "guard": null,
               "body": {
                 "type": "Expr::Unit",
-                "loc": null,
+                "loc": "19:10-19:11",
                 "faked": false
               }
             }
           ],
-          "match_loc": null,
+          "match_loc": "16:3-16:12",
           "using": null,
-          "loc": null
+          "loc": "16:3-19:13"
         }
       },
-      "loc": null
+      "loc": "15:1-20:5"
     }
   ]
 }

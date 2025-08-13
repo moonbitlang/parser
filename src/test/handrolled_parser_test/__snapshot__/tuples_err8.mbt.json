@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "1:4-1:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "1:9-1:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -33,14 +33,14 @@
           "type": "Expr::Let",
           "pattern": {
             "type": "Pattern::Any",
-            "loc": null
+            "loc": "2:7-2:8"
           },
           "expr": {
             "type": "Expr::Tuple",
             "exprs": [
               {
                 "type": "Expr::Hole",
-                "loc": null,
+                "loc": "2:12-2:12",
                 "kind": {
                   "type": "Hole::Synthesized"
                 }
@@ -53,7 +53,7 @@
                     "type": "LongIdent::Ident",
                     "0": "+"
                   },
-                  "loc": null
+                  "loc": "2:22-2:23"
                 },
                 "lhs": {
                   "type": "Expr::Ident",
@@ -63,9 +63,9 @@
                       "type": "LongIdent::Ident",
                       "0": "a"
                     },
-                    "loc": null
+                    "loc": "2:21-2:20"
                   },
-                  "loc": null
+                  "loc": "2:21-2:20"
                 },
                 "rhs": {
                   "type": "Expr::Ident",
@@ -75,40 +75,30 @@
                       "type": "LongIdent::Ident",
                       "0": "b"
                     },
-                    "loc": null
+                    "loc": "2:23-2:23"
                   },
-                  "loc": null
+                  "loc": "2:23-2:23"
                 },
-                "loc": null
+                "loc": "2:21-2:23"
               }
             ],
-            "loc": null
+            "loc": "2:11-2:24"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": null,
+            "loc": "2:3-2:6",
             "faked": true
           },
-          "loc": null
+          "loc": "2:11-2:24"
         }
       },
-      "loc": null
+      "loc": "1:1-2:26"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/tuples_err8.mbt",
-        "start": {
-          "line": 2,
-          "column": 14
-        },
-        "end": {
-          "line": 2,
-          "column": 15
-        }
-      },
+      "loc": "2:14-2:15",
       "msg": "Unexpected token `:`, you may expect `,`, `)`."
     }
   ]

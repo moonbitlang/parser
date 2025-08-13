@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "stock",
-        "tycon_loc": null,
+        "tycon_loc": "1:8-1:13",
         "params": [],
         "components": {
           "type": "TypeDesc::Record",
@@ -16,7 +16,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "price",
-                "loc": null
+                "loc": "2:5-2:10"
               },
               "ty": {
                 "type": "Type::Name",
@@ -26,16 +26,16 @@
                     "type": "LongIdent::Ident",
                     "0": "int"
                   },
-                  "loc": null
+                  "loc": "2:13-2:16"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "2:13-2:12"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "2:5-2:12",
               "attrs": [],
               "doc": ""
             },
@@ -44,7 +44,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "name",
-                "loc": null
+                "loc": "3:5-3:9"
               },
               "ty": {
                 "type": "Type::Name",
@@ -54,16 +54,16 @@
                     "type": "LongIdent::Ident",
                     "0": "string"
                   },
-                  "loc": null
+                  "loc": "3:12-3:18"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "3:12-3:11"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "3:5-3:11",
               "attrs": [],
               "doc": ""
             }
@@ -75,7 +75,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "1:1-3:19"
       }
     },
     {
@@ -83,12 +83,12 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "lst",
-        "tycon_loc": null,
+        "tycon_loc": "6:6-6:9",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "T",
-            "loc": null
+            "loc": "6:10-6:10"
           }
         ],
         "components": {
@@ -99,12 +99,12 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Nil",
-                "loc": null
+                "loc": "7:5-7:8"
               },
               "args": null,
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "7:5-6:15",
               "doc": ""
             },
             {
@@ -112,7 +112,7 @@
               "name": {
                 "type": "ConstrName",
                 "name": "Cons",
-                "loc": null
+                "loc": "8:5-8:9"
               },
               "args": [
                 {
@@ -125,7 +125,7 @@
                         "type": "LongIdent::Ident",
                         "0": "cell"
                       },
-                      "loc": null
+                      "loc": "8:10-8:14"
                     },
                     "tys": [
                       {
@@ -136,13 +136,13 @@
                             "type": "LongIdent::Ident",
                             "0": "T"
                           },
-                          "loc": null
+                          "loc": "8:15-8:16"
                         },
                         "tys": [],
-                        "loc": null
+                        "loc": "8:15-8:15"
                       }
                     ],
-                    "loc": null
+                    "loc": "8:10-8:16"
                   },
                   "mut": false,
                   "label": null
@@ -150,7 +150,7 @@
               ],
               "tag": null,
               "attrs": [],
-              "loc": null,
+              "loc": "8:5-8:17",
               "doc": ""
             }
           ]
@@ -161,7 +161,7 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "6:1-8:19"
       }
     },
     {
@@ -169,12 +169,12 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "cell",
-        "tycon_loc": null,
+        "tycon_loc": "11:8-11:12",
         "params": [
           {
             "type": "TypeDeclBinder",
             "name": "T",
-            "loc": null
+            "loc": "11:13-11:13"
           }
         ],
         "components": {
@@ -185,7 +185,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "data",
-                "loc": null
+                "loc": "12:5-12:9"
               },
               "ty": {
                 "type": "Type::Name",
@@ -195,16 +195,16 @@
                     "type": "LongIdent::Ident",
                     "0": "T"
                   },
-                  "loc": null
+                  "loc": "12:12-12:13"
                 },
                 "tys": [],
-                "loc": null
+                "loc": "12:12-12:11"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "12:5-12:11",
               "attrs": [],
               "doc": ""
             },
@@ -213,7 +213,7 @@
               "name": {
                 "type": "FieldName",
                 "label": "next",
-                "loc": null
+                "loc": "13:5-13:9"
               },
               "ty": {
                 "type": "Type::Name",
@@ -223,7 +223,7 @@
                     "type": "LongIdent::Ident",
                     "0": "lst"
                   },
-                  "loc": null
+                  "loc": "13:12-13:15"
                 },
                 "tys": [
                   {
@@ -234,19 +234,19 @@
                         "type": "LongIdent::Ident",
                         "0": "T"
                       },
-                      "loc": null
+                      "loc": "13:17-13:18"
                     },
                     "tys": [],
-                    "loc": null
+                    "loc": "13:17-13:17"
                   }
                 ],
-                "loc": null
+                "loc": "13:12-13:18"
               },
               "mut": false,
               "vis": {
                 "type": "Visibility::Default"
               },
-              "loc": null,
+              "loc": "13:5-13:18",
               "attrs": [],
               "doc": ""
             }
@@ -258,37 +258,27 @@
           "type": "Visibility::Default"
         },
         "deriving": [],
-        "loc": null
+        "loc": "11:1-13:20"
       }
     },
     {
       "type": "Impl::TopExpr",
       "expr": {
         "type": "Expr::Hole",
-        "loc": null,
+        "loc": "16:1-16:3",
         "kind": {
           "type": "Hole::Synthesized"
         }
       },
       "is_main": false,
       "local_types": [],
-      "loc": null
+      "loc": "16:1-16:3"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/partial_type_error.mbt",
-        "start": {
-          "line": 16,
-          "column": 1
-        },
-        "end": {
-          "line": 16,
-          "column": 3
-        }
-      },
+      "loc": "16:1-16:3",
       "msg": "Unexpected token id (lowercase start), you may expect `pub`, `priv`, `type`, `suberror`, `typealias`, `async`, `fn`, `fnalias`, `struct`, `enum`, `let`, `const`, `extern`, `test`, `impl`, `trait`, `traitalias`, `enumview`, `#attribute`."
     }
   ]

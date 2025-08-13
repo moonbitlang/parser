@@ -9,7 +9,7 @@
         "name": {
           "type": "Binder",
           "name": "ffi",
-          "loc": null
+          "loc": "1:4-1:7"
         },
         "has_error": null,
         "is_async": false,
@@ -19,7 +19,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "1:8-1:9"
             },
             "ty": {
               "type": "Type::Name",
@@ -29,14 +29,14 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": null
+                "loc": "1:12-1:15"
               },
               "tys": [],
-              "loc": null
+              "loc": "1:12-1:11"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "1:7-1:15",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -46,10 +46,10 @@
               "type": "LongIdent::Ident",
               "0": "Int"
             },
-            "loc": null
+            "loc": "1:20-1:23"
           },
           "tys": [],
-          "loc": null
+          "loc": "1:20-1:19"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -71,7 +71,7 @@
           }
         }
       },
-      "loc": null
+      "loc": "1:1-1:25"
     }
   ]
 }

@@ -8,7 +8,7 @@
         "name": {
           "type": "Binder",
           "name": "I",
-          "loc": null
+          "loc": "3:7-3:8"
         },
         "supers": [],
         "methods": [
@@ -17,7 +17,7 @@
             "name": {
               "type": "Binder",
               "name": "f1",
-              "loc": null
+              "loc": "4:3-4:5"
             },
             "has_error": null,
             "is_async": false,
@@ -33,12 +33,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Self"
                     },
-                    "loc": null
+                    "loc": "4:6-4:10"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "4:6-4:6"
                 },
-                "loc": null
+                "loc": "4:6-4:6"
               }
             ],
             "return_type": {
@@ -49,24 +49,24 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": null
+                "loc": "4:15-4:18"
               },
               "tys": [],
-              "loc": null
+              "loc": "4:15-4:14"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": null
+            "loc": "4:3-4:14"
           },
           {
             "type": "TraitMethodDecl",
             "name": {
               "type": "Binder",
               "name": "f2",
-              "loc": null
+              "loc": "5:3-5:5"
             },
             "has_error": null,
             "is_async": false,
@@ -82,12 +82,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Self"
                     },
-                    "loc": null
+                    "loc": "5:6-5:10"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "5:6-5:6"
                 },
-                "loc": null
+                "loc": "5:6-5:6"
               },
               {
                 "type": "Parameter::DiscardPositional",
@@ -99,12 +99,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Int"
                     },
-                    "loc": null
+                    "loc": "5:12-5:15"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "5:12-5:11"
                 },
-                "loc": null
+                "loc": "5:12-5:11"
               },
               {
                 "type": "Parameter::DiscardPositional",
@@ -116,12 +116,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Double"
                     },
-                    "loc": null
+                    "loc": "5:17-5:23"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "5:17-5:16"
                 },
-                "loc": null
+                "loc": "5:17-5:16"
               }
             ],
             "return_type": {
@@ -132,24 +132,24 @@
                   "type": "LongIdent::Ident",
                   "0": "String"
                 },
-                "loc": null
+                "loc": "5:28-5:34"
               },
               "tys": [],
-              "loc": null
+              "loc": "5:28-5:27"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": null
+            "loc": "5:3-5:27"
           },
           {
             "type": "TraitMethodDecl",
             "name": {
               "type": "Binder",
               "name": "f3",
-              "loc": null
+              "loc": "6:3-6:5"
             },
             "has_error": null,
             "is_async": false,
@@ -163,23 +163,23 @@
                   "type": "LongIdent::Ident",
                   "0": "Self"
                 },
-                "loc": null
+                "loc": "6:11-6:15"
               },
               "tys": [],
-              "loc": null
+              "loc": "6:11-6:10"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": null
+            "loc": "6:3-6:10"
           }
         ],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": null,
+        "loc": "3:1-6:16",
         "attrs": [],
         "doc": " doc for I"
       }
@@ -191,7 +191,7 @@
         "name": {
           "type": "Binder",
           "name": "Functor",
-          "loc": null
+          "loc": "9:7-9:14"
         },
         "supers": [],
         "methods": [
@@ -200,7 +200,7 @@
             "name": {
               "type": "Binder",
               "name": "fmap",
-              "loc": null
+              "loc": "10:3-10:7"
             },
             "has_error": null,
             "is_async": false,
@@ -216,12 +216,12 @@
                       "type": "LongIdent::Ident",
                       "0": "Self"
                     },
-                    "loc": null
+                    "loc": "10:8-10:12"
                   },
                   "tys": [],
-                  "loc": null
+                  "loc": "10:8-10:8"
                 },
-                "loc": null
+                "loc": "10:8-10:8"
               }
             ],
             "return_type": {
@@ -232,23 +232,23 @@
                   "type": "LongIdent::Ident",
                   "0": "Self"
                 },
-                "loc": null
+                "loc": "10:17-10:21"
               },
               "tys": [],
-              "loc": null
+              "loc": "10:17-10:16"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": null
+            "loc": "10:3-10:16"
           }
         ],
         "vis": {
           "type": "Visibility::Default"
         },
-        "loc": null,
+        "loc": "9:1-10:22",
         "attrs": [],
         "doc": ""
       }

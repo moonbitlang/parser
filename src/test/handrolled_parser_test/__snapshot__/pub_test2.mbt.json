@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "hello",
-          "loc": null
+          "loc": "1:4-1:9"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "1:10-1:11",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -34,15 +34,15 @@
           "name": {
             "type": "Binder",
             "name": "hey",
-            "loc": null
+            "loc": "3:4-3:7"
           },
           "func": {
             "type": "Func::Lambda",
             "parameters": [],
-            "params_loc": null,
+            "params_loc": "3:8-3:9",
             "body": {
               "type": "Expr::Hole",
-              "loc": null,
+              "loc": "3:12-5:1",
               "kind": {
                 "type": "Hole::Synthesized"
               }
@@ -56,17 +56,17 @@
             },
             "has_error": null,
             "is_async": false,
-            "loc": null
+            "loc": "-1:1--1:1"
           },
           "body": {
             "type": "Expr::Unit",
-            "loc": null,
+            "loc": "3:1-5:1",
             "faked": true
           },
-          "loc": null
+          "loc": "3:1-5:1"
         }
       },
-      "loc": null
+      "loc": "1:1-5:1"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -76,12 +76,12 @@
         "name": {
           "type": "Binder",
           "name": "hell",
-          "loc": null
+          "loc": "5:8-5:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "5:12-5:7",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -90,7 +90,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": null
+          "loc": "5:1-4:2"
         },
         "attrs": [],
         "doc": ""
@@ -100,42 +100,22 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "5:12-5:12",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "5:1-5:12"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/pub_test2.mbt",
-        "start": {
-          "line": 5,
-          "column": 1
-        },
-        "end": {
-          "line": 5,
-          "column": 4
-        }
-      },
+      "loc": "5:1-5:4",
       "msg": "Unexpected token `pub`, you may expect simple expression."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/pub_test2.mbt",
-        "start": {
-          "line": 5,
-          "column": 12
-        },
-        "end": {
-          "line": 5,
-          "column": 12
-        }
-      },
+      "loc": "5:12-5:12",
       "msg": "Unexpected end of file, missing `{` here."
     }
   ]

@@ -12,12 +12,12 @@
             "0": "T"
           },
           "is_object": false,
-          "loc": null
+          "loc": "2:4-2:3"
         },
         "name": {
           "type": "Binder",
           "name": "method_name",
-          "loc": null
+          "loc": "2:7-2:18"
         },
         "has_error": null,
         "is_async": false,
@@ -27,7 +27,7 @@
             "binder": {
               "type": "Binder",
               "name": "x",
-              "loc": null
+              "loc": "2:19-2:20"
             },
             "ty": {
               "type": "Type::Name",
@@ -37,14 +37,14 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": null
+                "loc": "2:22-2:25"
               },
               "tys": [],
-              "loc": null
+              "loc": "2:22-2:21"
             }
           }
         ],
-        "params_loc": null,
+        "params_loc": "2:18-2:25",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -61,11 +61,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "2:27-2:28",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "2:1-2:28"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -79,17 +79,17 @@
             "id": "T"
           },
           "is_object": false,
-          "loc": null
+          "loc": "3:4-3:8"
         },
         "name": {
           "type": "Binder",
           "name": "method_name",
-          "loc": null
+          "loc": "3:12-3:23"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "3:23-3:24",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -106,11 +106,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "3:26-3:27",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "3:1-3:27"
     },
     {
       "type": "Impl::TopFuncDef",
@@ -120,12 +120,12 @@
         "name": {
           "type": "Binder",
           "name": "init",
-          "loc": null
+          "loc": "5:4-5:8"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": null,
-        "params_loc": null,
+        "params_loc": "5:9-5:3",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -154,14 +154,14 @@
                     "0": "T"
                   },
                   "is_object": false,
-                  "loc": null
+                  "loc": "6:3-5:11"
                 },
                 "method_name": {
                   "type": "Label",
                   "name": "method_name",
-                  "loc": null
+                  "loc": "6:6-6:17"
                 },
-                "loc": null
+                "loc": "6:3-6:6"
               },
               "args": [
                 {
@@ -172,7 +172,7 @@
                       "type": "Constant::Int",
                       "0": "1"
                     },
-                    "loc": null
+                    "loc": "6:18-6:19"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -182,7 +182,7 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": null
+              "loc": "6:3-6:19"
             }
           ],
           "last_expr": {
@@ -197,32 +197,32 @@
                   "id": "T"
                 },
                 "is_object": false,
-                "loc": null
+                "loc": "7:3-7:7"
               },
               "method_name": {
                 "type": "Label",
                 "name": "method_name",
-                "loc": null
+                "loc": "7:11-7:22"
               },
-              "loc": null
+              "loc": "7:3-7:11"
             },
             "args": [],
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": null
+            "loc": "7:3-7:23"
           },
-          "loc": null
+          "loc": "6:3-7:23"
         }
       },
-      "loc": null
+      "loc": "5:1-7:25"
     },
     {
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
         "tycon": "T",
-        "tycon_loc": null,
+        "tycon_loc": "10:11-10:12",
         "params": [],
         "components": {
           "type": "TypeDesc::Abstract"
@@ -231,10 +231,10 @@
         "doc": "",
         "type_vis": {
           "type": "Visibility::Priv",
-          "loc": null
+          "loc": "10:1-10:5"
         },
         "deriving": [],
-        "loc": null
+        "loc": "10:1-10:10"
       }
     },
     {
@@ -248,17 +248,17 @@
             "0": "T"
           },
           "is_object": false,
-          "loc": null
+          "loc": "11:8-11:7"
         },
         "name": {
           "type": "Binder",
           "name": "f",
-          "loc": null
+          "loc": "11:11-11:12"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "11:12-11:13",
         "quantifiers": [],
         "return_type": null,
         "error_type": {
@@ -267,7 +267,7 @@
         "vis": {
           "type": "Visibility::Pub",
           "attr": null,
-          "loc": null
+          "loc": "11:1-10:13"
         },
         "attrs": [],
         "doc": ""
@@ -277,11 +277,11 @@
         "local_types": [],
         "expr": {
           "type": "Expr::Unit",
-          "loc": null,
+          "loc": "11:15-11:16",
           "faked": true
         }
       },
-      "loc": null
+      "loc": "11:1-11:16"
     }
   ]
 }

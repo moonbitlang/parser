@@ -6,7 +6,7 @@
       "binder": {
         "type": "Binder",
         "name": "constant",
-        "loc": null
+        "loc": "1:9-1:17"
       },
       "ty": null,
       "expr": {
@@ -15,15 +15,15 @@
           "type": "Constant::Int",
           "0": "1"
         },
-        "loc": null
+        "loc": "1:20-1:21"
       },
       "vis": {
         "type": "Visibility::Pub",
         "attr": null,
-        "loc": null
+        "loc": "1:1-1:4"
       },
       "is_constant": false,
-      "loc": null,
+      "loc": "1:1-1:19",
       "attrs": [],
       "doc": ""
     },
@@ -32,7 +32,7 @@
       "binder": {
         "type": "Binder",
         "name": "variable",
-        "loc": null
+        "loc": "3:9-3:17"
       },
       "ty": null,
       "expr": {
@@ -41,15 +41,15 @@
           "type": "Constant::Int",
           "0": "2"
         },
-        "loc": null
+        "loc": "3:20-3:21"
       },
       "vis": {
         "type": "Visibility::Pub",
         "attr": null,
-        "loc": null
+        "loc": "3:1-2:2"
       },
       "is_constant": false,
-      "loc": null,
+      "loc": "3:1-3:19",
       "attrs": [],
       "doc": ""
     }

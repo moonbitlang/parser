@@ -9,12 +9,12 @@
         "name": {
           "type": "Binder",
           "name": "f",
-          "loc": null
+          "loc": "1:4-1:5"
         },
         "has_error": null,
         "is_async": false,
         "decl_params": [],
-        "params_loc": null,
+        "params_loc": "1:5-1:6",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -24,10 +24,10 @@
               "type": "LongIdent::Ident",
               "0": "Unit"
             },
-            "loc": null
+            "loc": "1:11-1:15"
           },
           "tys": [],
-          "loc": null
+          "loc": "1:11-1:10"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -45,7 +45,7 @@
           "type": "Expr::Guard",
           "cond": {
             "type": "Expr::Hole",
-            "loc": null,
+            "loc": "2:9-2:18",
             "kind": {
               "type": "Hole::Synthesized"
             }
@@ -53,13 +53,13 @@
           "otherwise": {
             "type": "Expr::Return",
             "return_value": null,
-            "loc": null
+            "loc": "2:26-2:25"
           },
           "body": {
             "type": "Expr::Guard",
             "cond": {
               "type": "Expr::Hole",
-              "loc": null,
+              "loc": "3:9-3:16",
               "kind": {
                 "type": "Hole::Synthesized"
               }
@@ -75,7 +75,7 @@
                     "type": "LongIdent::Ident",
                     "0": "+"
                   },
-                  "loc": null
+                  "loc": "4:12-4:13"
                 },
                 "lhs": {
                   "type": "Expr::Constant",
@@ -83,7 +83,7 @@
                     "type": "Constant::Int",
                     "0": "1"
                   },
-                  "loc": null
+                  "loc": "4:10-4:11"
                 },
                 "rhs": {
                   "type": "Expr::Constant",
@@ -91,49 +91,29 @@
                     "type": "Constant::Int",
                     "0": "2"
                   },
-                  "loc": null
+                  "loc": "4:14-4:15"
                 },
-                "loc": null
+                "loc": "4:10-4:13"
               },
-              "loc": null
+              "loc": "4:3-4:13"
             },
-            "loc": null
+            "loc": "3:9-3:16"
           },
-          "loc": null
+          "loc": "2:9-2:18"
         }
       },
-      "loc": null
+      "loc": "1:1-4:16"
     }
   ],
   "diagnostics": [
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/guard_error.mbt",
-        "start": {
-          "line": 2,
-          "column": 9
-        },
-        "end": {
-          "line": 2,
-          "column": 10
-        }
-      },
+      "loc": "2:9-2:10",
       "msg": "Unexpected token infix operator, you may expect simple expression."
     },
     {
       "type": "Error",
-      "loc": {
-        "file": "src/test/handrolled_parser_test/fixtures/guard_error.mbt",
-        "start": {
-          "line": 3,
-          "column": 9
-        },
-        "end": {
-          "line": 3,
-          "column": 10
-        }
-      },
+      "loc": "3:9-3:10",
       "msg": "Unexpected token infix operator, you may expect simple expression."
     }
   ]
