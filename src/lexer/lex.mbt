@@ -32,7 +32,7 @@ pub fn tokens_from_bytes(
     asi_context: ASIContext::new(),
     is_interpolation,
   }
-  lex_tokens(bytes, base=bytes, env~, preserve_comment=env.preserve_comment())
+  lex_tokens(bytes, current=0, env~, preserve_comment=env.preserve_comment())
   let docstrings = env.docstrings
   if not(docstrings.is_empty()) {
     let last_idx = docstrings.length() - 1
