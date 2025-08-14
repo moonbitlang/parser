@@ -27,17 +27,14 @@ fn char_for_hex_escape(hex : @bytes.View) -> UInt? {
 }
 
 ///|
-fn calc_offset(base~ : @bytes.View, view : @bytes.View) -> Int {
-  view.start_offset() - base.start_offset()
-}
-
-///|
-fn decode_utf8(bytes : @bytes.View) -> String {
+fn decode_utf8(bytes : @bytes.View) -> (Int, String) {
   let buf = StringBuilder::new()
+  let mut unicode_count = 0
   loop bytes[:] {
     // 1-byte sequence (ASCII): 0xxxxxxx
     [0x00..=0x7F as b, .. next] => {
       buf.write_char(b.to_char())
+      unicode_count += 1
       continue next
     }
 
@@ -45,6 +42,7 @@ fn decode_utf8(bytes : @bytes.View) -> String {
     [0xC0..=0xDF as b1, 0x80..=0xBF as b2, .. next] => {
       let code_point = ((b1.to_int() & 0x1F) << 6) | (b2.to_int() & 0x3F)
       buf.write_char(code_point.unsafe_to_char())
+      unicode_count += 1
       continue next
     }
 
@@ -54,6 +52,7 @@ fn decode_utf8(bytes : @bytes.View) -> String {
         ((b2.to_int() & 0x3F) << 6) |
         (b3.to_int() & 0x3F)
       buf.write_char(code_point.unsafe_to_char())
+      unicode_count += 1
       continue next
     }
 
@@ -73,6 +72,7 @@ fn decode_utf8(bytes : @bytes.View) -> String {
         abort("invalid UTF-8 sequence")
       }
       buf.write_char(code_point.unsafe_to_char())
+      unicode_count += 1
       continue next
     }
 
@@ -80,5 +80,5 @@ fn decode_utf8(bytes : @bytes.View) -> String {
     [_, ..] => panic()
     [] => ()
   }
-  buf.to_string()
+  (unicode_count, buf.to_string())
 }
