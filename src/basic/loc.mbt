@@ -82,14 +82,14 @@ pub fn Location::trim_last_char(self : Location) -> Location {
 pub impl Show for Location with output(self, buf) {
   buf
   ..write_string(self.start.fname)
-  ..write_string(":")
-  ..write_string(self.start.lnum.to_string())
   ..write_string("-")
-  ..write_string((self.start.cnum - self.start.bol).to_string())
+  ..write_string(self.start.lnum.to_string())
+  ..write_string(":")
+  ..write_string(self.start.column().to_string())
   ..write_string("-")
   ..write_string(self.end.lnum.to_string())
   ..write_string(":")
-  ..write_string((self.end.cnum - self.end.bol).to_string())
+  ..write_string(self.end.column().to_string())
 }
 
 ///|
