@@ -10,10 +10,10 @@ test "Location::merge - basic merge with different lines" {
     start: Position::{ fname: "test.mbt", lnum: 8, bol: 80, cnum: 85 },
     end: Position::{ fname: "test.mbt", lnum: 9, bol: 90, cnum: 95 },
   }
-  inspect(loc1, content="test.mbt:5-5-6:5")
-  inspect(loc2, content="test.mbt:8-5-9:5")
-  inspect(loc1.merge(loc2), content="test.mbt:5-5-9:5")
-  inspect(loc2.merge(loc1), content="test.mbt:5-5-9:5")
+  inspect(loc1, content="test.mbt-5:6-6:6")
+  inspect(loc2, content="test.mbt-8:6-9:6")
+  inspect(loc1.merge(loc2), content="test.mbt-5:6-9:6")
+  inspect(loc2.merge(loc1), content="test.mbt-5:6-9:6")
 }
 
 ///|
@@ -28,10 +28,10 @@ test "Location::merge - overlapping locations" {
     start: Position::{ fname: "test.mbt", lnum: 6, bol: 60, cnum: 65 },
     end: Position::{ fname: "test.mbt", lnum: 10, bol: 100, cnum: 105 },
   }
-  inspect(loc1, content="test.mbt:5-5-8:5")
-  inspect(loc2, content="test.mbt:6-5-10:5")
-  inspect(loc1.merge(loc2), content="test.mbt:5-5-10:5")
-  inspect(loc2.merge(loc1), content="test.mbt:5-5-10:5")
+  inspect(loc1, content="test.mbt-5:6-8:6")
+  inspect(loc2, content="test.mbt-6:6-10:6")
+  inspect(loc1.merge(loc2), content="test.mbt-5:6-10:6")
+  inspect(loc2.merge(loc1), content="test.mbt-5:6-10:6")
 }
 
 ///|
@@ -46,10 +46,10 @@ test "Location::merge - same line different bol for start positions" {
     start: Position::{ fname: "test.mbt", lnum: 5, bol: 50, cnum: 55 },
     end: Position::{ fname: "test.mbt", lnum: 7, bol: 80, cnum: 85 },
   }
-  inspect(loc1, content="test.mbt:5-5-6:5")
-  inspect(loc2, content="test.mbt:5-5-7:5")
-  inspect(loc1.merge(loc2), content="test.mbt:5-5-7:5")
-  inspect(loc2.merge(loc1), content="test.mbt:5-5-7:5")
+  inspect(loc1, content="test.mbt-5:6-6:6")
+  inspect(loc2, content="test.mbt-5:6-7:6")
+  inspect(loc1.merge(loc2), content="test.mbt-5:6-7:6")
+  inspect(loc2.merge(loc1), content="test.mbt-5:6-7:6")
 }
 
 ///|
@@ -64,10 +64,10 @@ test "Location::merge - same line different bol for end positions" {
     start: Position::{ fname: "test.mbt", lnum: 4, bol: 40, cnum: 45 },
     end: Position::{ fname: "test.mbt", lnum: 5, bol: 70, cnum: 75 },
   }
-  inspect(loc1, content="test.mbt:3-5-5:5")
-  inspect(loc2, content="test.mbt:4-5-5:5")
-  inspect(loc1.merge(loc2), content="test.mbt:3-5-5:5")
-  inspect(loc2.merge(loc1), content="test.mbt:3-5-5:5")
+  inspect(loc1, content="test.mbt-3:6-5:6")
+  inspect(loc2, content="test.mbt-4:6-5:6")
+  inspect(loc1.merge(loc2), content="test.mbt-3:6-5:6")
+  inspect(loc2.merge(loc1), content="test.mbt-3:6-5:6")
 }
 
 ///|
@@ -77,8 +77,8 @@ test "Location::merge - identical locations" {
     start: Position::{ fname: "test.mbt", lnum: 5, bol: 50, cnum: 55 },
     end: Position::{ fname: "test.mbt", lnum: 6, bol: 60, cnum: 65 },
   }
-  inspect(loc, content="test.mbt:5-5-6:5")
-  inspect(loc.merge(loc), content="test.mbt:5-5-6:5")
+  inspect(loc, content="test.mbt-5:6-6:6")
+  inspect(loc.merge(loc), content="test.mbt-5:6-6:6")
 }
 
 ///|
@@ -95,7 +95,7 @@ test "Location::merge - single character locations" {
   let merged = loc1.merge(loc2)
 
   // Should span from first character to second character
-  inspect(loc1, content="test.mbt:1-5-1:5")
-  inspect(loc2, content="test.mbt:1-10-1:10")
-  inspect(merged, content="test.mbt:1-10-1:10")
+  inspect(loc1, content="test.mbt-1:6-1:6")
+  inspect(loc2, content="test.mbt-1:11-1:11")
+  inspect(merged, content="test.mbt-1:11-1:11")
 }

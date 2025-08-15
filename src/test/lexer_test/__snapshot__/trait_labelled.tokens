@@ -89,7 +89,7 @@
 (NEWLINE 11:69-11:70)
 ((LIDENT println) 12:3-12:10)
 (LPAREN 12:10-12:11)
-((INTERP [InterpLit(repr="f(", loc=:12-10-12:15), InterpSource({source: "self", loc: :12-15-12:19}), InterpLit(repr=", x=", loc=:12-10-12:26), InterpSource({source: "x", loc: :12-26-12:27}), InterpLit(repr=", ", loc=:12-10-12:32), InterpSource({source: "w", loc: :12-32-12:33}), InterpLit(repr=", y=", loc=:12-10-12:40), InterpSource({source: "y", loc: :12-40-12:41}), InterpLit(repr=")", loc=:12-10-12:44)]) 12:11-12:45)
+((INTERP [InterpLit(repr="f(", loc=-12:11-12:16), InterpSource({source: "self", loc: -12:16-12:20}), InterpLit(repr=", x=", loc=-12:11-12:27), InterpSource({source: "x", loc: -12:27-12:28}), InterpLit(repr=", ", loc=-12:11-12:33), InterpSource({source: "w", loc: -12:33-12:34}), InterpLit(repr=", y=", loc=-12:11-12:41), InterpSource({source: "y", loc: -12:41-12:42}), InterpLit(repr=")", loc=-12:11-12:45)]) 12:11-12:45)
 (RPAREN 12:45-12:46)
 (NEWLINE 12:46-12:47)
 (RBRACE 13:1-13:2)
