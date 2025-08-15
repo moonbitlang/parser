@@ -64,13 +64,13 @@
                 "name": {
                   "type": "ConstrName",
                   "name": "Constr",
-                  "loc": "3:16-3:22"
+                  "loc": "3:15-3:22"
                 },
                 "extra_info": {
                   "type": "ConstructorExtraInfo::Package",
                   "0": "pkg"
                 },
-                "loc": "3:16-3:22"
+                "loc": "3:15-3:22"
               },
               "loc": "3:11-3:22"
             },

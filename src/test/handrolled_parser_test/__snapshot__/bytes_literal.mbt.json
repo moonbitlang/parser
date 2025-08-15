@@ -109,7 +109,7 @@
               "type": "Constant::Bytes",
               "0": "moonbit🐇rabbit🐰"
             },
-            "loc": "6:11-6:35"
+            "loc": "6:11-6:29"
           },
           "body": {
             "type": "Expr::Let",

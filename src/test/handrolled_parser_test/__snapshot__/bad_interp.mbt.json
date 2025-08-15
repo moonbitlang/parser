@@ -22,7 +22,7 @@
                 {
                   "type": "InterpElem::Source",
                   "source": "guard true is a a a a a a",
-                  "loc": "4:9-4:34"
+                  "loc": "4:9-4:35"
                 }
               ]
             }
@@ -48,7 +48,7 @@
                   {
                     "type": "InterpElem::Source",
                     "source": "(a => a => a => a => a => )(5)",
-                    "loc": "6:9-6:39"
+                    "loc": "6:9-6:40"
                   }
                 ]
               }

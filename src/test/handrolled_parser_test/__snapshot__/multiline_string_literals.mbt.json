@@ -382,12 +382,12 @@
                   {
                     "type": "InterpElem::Literal",
                     "repr": " Hello, ",
-                    "loc": "22:5-22:17"
+                    "loc": "22:7-22:17"
                   },
                   {
                     "type": "InterpElem::Source",
                     "source": "y",
-                    "loc": "22:17-22:18"
+                    "loc": "22:17-22:19"
                   }
                 ]
               },
@@ -405,12 +405,12 @@
                   {
                     "type": "InterpElem::Literal",
                     "repr": " \\t Goodbye, ",
-                    "loc": "25:5-25:22"
+                    "loc": "25:7-25:22"
                   },
                   {
                     "type": "InterpElem::Source",
                     "source": "f(x + 5)",
-                    "loc": "25:22-25:30"
+                    "loc": "25:22-25:31"
                   }
                 ]
               },
@@ -523,7 +523,7 @@
                   {
                     "type": "InterpElem::Literal",
                     "repr": " no interpolation",
-                    "loc": "32:5-32:25"
+                    "loc": "32:7-32:24"
                   }
                 ]
               },
@@ -533,12 +533,12 @@
                   {
                     "type": "InterpElem::Literal",
                     "repr": " Hello, ",
-                    "loc": "33:5-33:17"
+                    "loc": "33:7-33:17"
                   },
                   {
                     "type": "InterpElem::Source",
                     "source": "y",
-                    "loc": "33:17-33:18"
+                    "loc": "33:17-33:19"
                   }
                 ]
               },
@@ -548,12 +548,12 @@
                   {
                     "type": "InterpElem::Literal",
                     "repr": " \\t Goodbye, ",
-                    "loc": "34:5-34:22"
+                    "loc": "34:7-34:22"
                   },
                   {
                     "type": "InterpElem::Source",
                     "source": "f(x + 5)",
-                    "loc": "34:22-34:30"
+                    "loc": "34:22-34:31"
                   }
                 ]
               },
@@ -563,7 +563,7 @@
                   {
                     "type": "InterpElem::Literal",
                     "repr": "",
-                    "loc": "35:5-35:7"
+                    "loc": "35:7-35:7"
                   }
                 ]
               }

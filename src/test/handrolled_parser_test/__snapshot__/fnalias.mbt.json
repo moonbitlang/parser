@@ -250,7 +250,7 @@
       "type_name": {
         "type": "Label",
         "name": "Type",
-        "loc": "17:14-17:18"
+        "loc": "17:13-17:18"
       },
       "targets": [
         {
@@ -281,7 +281,7 @@
       "type_name": {
         "type": "Label",
         "name": "Type",
-        "loc": "18:14-18:18"
+        "loc": "18:13-18:18"
       },
       "targets": [
         {
@@ -316,7 +316,7 @@
       "type_name": {
         "type": "Label",
         "name": "Type",
-        "loc": "19:14-19:18"
+        "loc": "19:13-19:18"
       },
       "targets": [
         {

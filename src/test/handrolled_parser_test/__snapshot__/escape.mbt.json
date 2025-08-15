@@ -78,7 +78,7 @@
                           "type": "Constant::Char",
                           "0": "\\u5154"
                         },
-                        "loc": "3:24-3:32"
+                        "loc": "3:24-3:30"
                       },
                       {
                         "type": "Expr::Constant",
@@ -86,7 +86,7 @@
                           "type": "Constant::Char",
                           "0": "\\o115"
                         },
-                        "loc": "3:34-3:41"
+                        "loc": "3:32-3:37"
                       },
                       {
                         "type": "Expr::Constant",
@@ -94,7 +94,7 @@
                           "type": "Constant::Char",
                           "0": "\\x42"
                         },
-                        "loc": "3:43-3:49"
+                        "loc": "3:39-3:43"
                       },
                       {
                         "type": "Expr::Constant",
@@ -102,7 +102,7 @@
                           "type": "Constant::Char",
                           "0": "\\n"
                         },
-                        "loc": "3:51-3:55"
+                        "loc": "3:45-3:47"
                       },
                       {
                         "type": "Expr::Constant",
@@ -110,7 +110,7 @@
                           "type": "Constant::Char",
                           "0": "\\r"
                         },
-                        "loc": "3:57-3:61"
+                        "loc": "3:49-3:51"
                       },
                       {
                         "type": "Expr::Constant",
@@ -118,7 +118,7 @@
                           "type": "Constant::Char",
                           "0": "\\b"
                         },
-                        "loc": "3:63-3:67"
+                        "loc": "3:53-3:55"
                       },
                       {
                         "type": "Expr::Constant",
@@ -126,7 +126,7 @@
                           "type": "Constant::Char",
                           "0": "\\t"
                         },
-                        "loc": "3:69-3:73"
+                        "loc": "3:57-3:59"
                       },
                       {
                         "type": "Expr::Constant",
@@ -134,10 +134,10 @@
                           "type": "Constant::Char",
                           "0": "\\\\"
                         },
-                        "loc": "3:75-3:79"
+                        "loc": "3:61-3:63"
                       }
                     ],
-                    "loc": "3:11-3:80"
+                    "loc": "3:11-3:64"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -147,7 +147,7 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "3:3-3:81"
+              "loc": "3:3-3:65"
             }
           ],
           "last_expr": {
@@ -341,17 +341,17 @@
                     {
                       "type": "InterpElem::Literal",
                       "repr": "\\\\ \\u{5154} \\u5154 ",
-                      "loc": "9:11-9:33"
+                      "loc": "9:12-9:33"
                     },
                     {
                       "type": "InterpElem::Source",
                       "source": "a",
-                      "loc": "9:33-9:34"
+                      "loc": "9:33-9:35"
                     },
                     {
                       "type": "InterpElem::Literal",
                       "repr": " \\o115 \\x42 \\n",
-                      "loc": "9:11-9:50"
+                      "loc": "9:35-9:50"
                     }
                   ],
                   "loc": "9:11-9:50"

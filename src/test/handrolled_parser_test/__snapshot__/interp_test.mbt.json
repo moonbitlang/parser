@@ -45,7 +45,7 @@
               {
                 "type": "InterpElem::Literal",
                 "repr": "hello ",
-                "loc": "2:11-2:20"
+                "loc": "2:12-2:20"
               },
               {
                 "type": "InterpElem::Source",
@@ -147,12 +147,12 @@
                 {
                   "type": "InterpElem::Literal",
                   "repr": "hello ",
-                  "loc": "7:11-7:21"
+                  "loc": "7:12-7:21"
                 },
                 {
                   "type": "InterpElem::Source",
                   "source": "a",
-                  "loc": "7:21-7:22"
+                  "loc": "7:21-7:24"
                 }
               ],
               "loc": "7:11-7:25"
@@ -271,12 +271,12 @@
           {
             "type": "InterpElem::Literal",
             "repr": "abcd",
-            "loc": "13:19-13:28"
+            "loc": "13:20-13:28"
           },
           {
             "type": "InterpElem::Literal",
             "repr": "1234",
-            "loc": "13:19-13:34"
+            "loc": "13:29-13:34"
           }
         ],
         "loc": "13:19-13:34"
@@ -315,12 +315,12 @@
           {
             "type": "InterpElem::Literal",
             "repr": "abcd",
-            "loc": "14:19-14:28"
+            "loc": "14:20-14:28"
           },
           {
             "type": "InterpElem::Literal",
             "repr": "1234",
-            "loc": "14:19-14:35"
+            "loc": "14:29-14:35"
           }
         ],
         "loc": "14:19-14:37"
@@ -395,22 +395,22 @@
           {
             "type": "InterpElem::Literal",
             "repr": "hello ",
-            "loc": "16:19-16:28"
+            "loc": "16:20-16:28"
           },
           {
             "type": "InterpElem::Source",
             "source": "5",
-            "loc": "16:28-16:29"
+            "loc": "16:28-16:30"
           },
           {
             "type": "InterpElem::Literal",
             "repr": ", ",
-            "loc": "16:19-16:34"
+            "loc": "16:30-16:34"
           },
           {
             "type": "InterpElem::Source",
             "source": "1 + (2 * a)",
-            "loc": "16:34-16:45"
+            "loc": "16:34-16:46"
           }
         ],
         "loc": "16:19-16:47"
@@ -437,22 +437,22 @@
           {
             "type": "InterpElem::Literal",
             "repr": "gsghh ",
-            "loc": "17:10-17:20"
+            "loc": "17:11-17:20"
           },
           {
             "type": "InterpElem::Source",
             "source": "3 + 2 #|mulitline string",
-            "loc": "17:20-17:44"
+            "loc": "17:20-17:46"
           },
           {
             "type": "InterpElem::Literal",
             "repr": "1234",
-            "loc": "17:10-17:52"
+            "loc": "17:46-17:52"
           },
           {
             "type": "InterpElem::Source",
             "source": "s1",
-            "loc": "17:52-17:54"
+            "loc": "17:52-17:55"
           }
         ],
         "loc": "17:10-17:56"
@@ -479,22 +479,22 @@
           {
             "type": "InterpElem::Literal",
             "repr": "gsghh ",
-            "loc": "18:10-18:20"
+            "loc": "18:11-18:20"
           },
           {
             "type": "InterpElem::Source",
             "source": "3 + 2 //comment",
-            "loc": "18:20-18:35"
+            "loc": "18:20-18:37"
           },
           {
             "type": "InterpElem::Literal",
             "repr": "1234",
-            "loc": "18:10-18:43"
+            "loc": "18:37-18:43"
           },
           {
             "type": "InterpElem::Source",
             "source": "s1",
-            "loc": "18:43-18:45"
+            "loc": "18:43-18:46"
           }
         ],
         "loc": "18:10-18:47"
@@ -521,22 +521,22 @@
           {
             "type": "InterpElem::Literal",
             "repr": "gsghh ",
-            "loc": "19:10-19:20"
+            "loc": "19:11-19:20"
           },
           {
             "type": "InterpElem::Source",
             "source": "3 ggosgho",
-            "loc": "19:20-19:29"
+            "loc": "19:20-19:32"
           },
           {
             "type": "InterpElem::Literal",
             "repr": " gggxxxgg",
-            "loc": "19:10-19:43"
+            "loc": "19:32-19:43"
           },
           {
             "type": "InterpElem::Source",
             "source": "s1",
-            "loc": "19:43-19:45"
+            "loc": "19:43-19:46"
           }
         ],
         "loc": "19:10-19:47"
