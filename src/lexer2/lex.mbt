@@ -42,3 +42,23 @@ pub fn tokens_from_string(
   docstrings.rev_inplace()
   LexResult::{ tokens: env.tokens, errors: env.errors, docstrings }
 }
+
+///|
+pub fn tokens_from_string_with_utf16_location(
+  name~ : String = "",
+  start_pos~ : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
+  is_interpolation~ : Bool = false,
+  comment~ : Bool,
+  str : String,
+) -> LexResult {
+  use_utf16_location.val = true
+  let result = tokens_from_string(
+    name~,
+    start_pos~,
+    is_interpolation~,
+    comment~,
+    str,
+  )
+  use_utf16_location.val = false
+  return result
+}

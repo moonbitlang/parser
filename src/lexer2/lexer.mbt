@@ -48,6 +48,7 @@ fn lex_tokens(
     // Comments
     ["//[^\\r\\n]*" as raw, .. rest] => {
       let start_pos = env.calc_offset(input, base~)
+      env.register_surrogate_pair(raw)
       let end_pos = env.calc_offset(rest, base~)
       let comment_text = raw.to_string()
       if env.is_interpolation {
@@ -67,11 +68,10 @@ fn lex_tokens(
 
     // Character literals - basic cases
     ["'", "[^\\\\\\n\\r']" as raw, "'", .. rest] => {
-      env.add_token_with_loc(
-        CHAR([raw]),
-        start=env.calc_offset(input, base~),
-        end=env.calc_offset(rest, base~),
-      )
+      let start_pos = env.calc_offset(input, base~)
+      env.register_surrogate_pair_for_char(raw)
+      let end_pos = env.calc_offset(rest, base~)
+      env.add_token_with_loc(CHAR([raw]), start=start_pos, end=end_pos)
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
@@ -332,10 +332,13 @@ fn lex_tokens(
       "[A-Z][\\u{30}-\\u{39}\\u{41}-\\u{5a}\\u{5f}-\\u{5f}\\u{61}-\\u{7a}\\u{a1}-\\u{ac}\\u{ae}-\\u{2af}\\u{1100}-\\u{11ff}\\u{1e00}-\\u{1eff}\\u{2070}-\\u{209f}\\u{2150}-\\u{218f}\\u{2e80}-\\u{2eff}\\u{2ff0}-\\u{2fff}\\u{3001}-\\u{30ff}\\u{31c0}-\\u{9fff}\\u{ac00}-\\u{d7ff}\\u{f900}-\\u{faff}\\u{fe00}-\\u{fe0f}\\u{fe30}-\\u{fe4f}\\u{1f000}-\\u{1fbff}\\u{20000}-\\u{2a6df}\\u{2a700}-\\u{2ebef}\\u{2f800}-\\u{2fa1f}\\u{30000}-\\u{323af}\\u{e0100}-\\u{e01ef}]*" as raw,
       .. rest,
     ] => {
+      let start_pos = env.calc_offset(input, base~)
+      env.register_surrogate_pair(raw)
+      let end_pos = env.calc_offset(rest, base~)
       env.add_token_with_loc(
         @tokens.Token::UIDENT(raw.to_string()),
-        start=env.calc_offset(input, base~),
-        end=env.calc_offset(rest, base~),
+        start=start_pos,
+        end=end_pos,
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -358,22 +361,21 @@ fn lex_tokens(
       .. rest,
     ] => {
       let raw_str = raw.to_string()
+      let start_pos = env.calc_offset(input, base~)
+      env.register_surrogate_pair(raw)
+      let end_pos = env.calc_offset(rest, base~)
       if reserved_keyword_table.contains(raw_str) {
         env.add_lexing_error(
           Reserved_keyword(raw_str),
-          start=env.calc_offset(input, base~),
-          end=env.calc_offset(rest, base~),
+          start=start_pos,
+          end=end_pos,
         )
       }
       let token = match keyword_table.get(raw_str) {
         None => @tokens.Token::LIDENT(raw_str)
         Some(tok) => tok
       }
-      env.add_token_with_loc(
-        token,
-        start=env.calc_offset(input, base~),
-        end=env.calc_offset(rest, base~),
-      )
+      env.add_token_with_loc(token, start=start_pos, end=end_pos)
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
@@ -530,10 +532,13 @@ fn lex_tokens(
       .. rest,
     ] => {
       let name = ident.to_string()
+      let start_pos = env.calc_offset(input, base~) + 1
+      env.register_surrogate_pair(ident)
+      let end_pos = env.calc_offset(rest, base~)
       env.add_token_with_loc(
         @tokens.Token::DOT_UIDENT(name),
-        start=env.calc_offset(ident, base~),
-        end=env.calc_offset(rest, base~),
+        start=start_pos,
+        end=end_pos,
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -543,10 +548,13 @@ fn lex_tokens(
       .. rest,
     ] => {
       let name = ident.to_string()
+      let start_pos = env.calc_offset(input, base~) + 1
+      env.register_surrogate_pair(ident)
+      let end_pos = env.calc_offset(rest, base~)
       env.add_token_with_loc(
         @tokens.Token::DOT_LIDENT(name),
-        start=env.calc_offset(ident, base~),
-        end=env.calc_offset(rest, base~),
+        start=start_pos,
+        end=end_pos,
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -567,7 +575,7 @@ fn lex_tokens(
       }
       env.add_token_with_loc(
         @tokens.Token::DOT_INT(idx),
-        start=env.calc_offset(input, base~),
+        start=env.calc_offset(input, base~) + 1,
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
@@ -577,7 +585,7 @@ fn lex_tokens(
     ["\\.\\(", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::DOT_LPAREN,
-        start=env.calc_offset(input, base~),
+        start=env.calc_offset(input, base~) + 1,
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
@@ -845,10 +853,13 @@ fn lex_tokens(
 
     // Multiline string #|
     ["#\\|[^\\r\\n]*" as multiline_str, .. rest] => {
+      let start_pos = env.calc_offset(input, base~)
+      env.register_surrogate_pair(multiline_str)
+      let end_pos = env.calc_offset(rest, base~)
       if env.is_interpolation {
         env.add_lexing_error(
-          start=env.calc_offset(input, base~),
-          end=env.calc_offset(rest, base~),
+          start=start_pos,
+          end=end_pos,
           InterpInvalidMultilineString,
         )
       }
@@ -856,8 +867,8 @@ fn lex_tokens(
       let content = content_str.substring(start=2, end=content_str.length()) // Remove #|
       env.add_token_with_loc(
         @tokens.Token::MULTILINE_STRING(content),
-        start=env.calc_offset(input, base~),
-        end=env.calc_offset(rest, base~),
+        start=start_pos,
+        end=end_pos,
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -928,6 +939,7 @@ fn lex_invalid_byte(
         input
       }
       ["." as c, .. rest] => {
+        env.register_surrogate_pair_for_char(c)
         invalid_byte_repr_buf.write_char(c)
         process_invalid_byte(rest)
       }
@@ -960,6 +972,7 @@ fn lex_string(
 
   fn process_interpolation(input : @string.View) -> (@string.View, Int) {
     match input using regex {
+      // spaces + '}'
       [
         "[\\u0009\\u000B\\u000C\\u0020\\u00A0\\uFEFF\\u1680\\u2000-\\u200A\\u202F\\u205F\\u3000]*}",
         .. rest,
@@ -981,6 +994,7 @@ fn lex_string(
         (input, env.calc_offset(base~, input))
       }
       ["[^\\n\"{}]" as c, .. rest] => {
+        env.register_surrogate_pair_for_char(c)
         string_repr_buf.write_char(c)
         process_interpolation(rest)
       }
@@ -1151,6 +1165,7 @@ fn lex_string(
 
       // Any other character
       ["." as c, .. rest] => {
+        env.register_surrogate_pair_for_char(c)
         string_repr_buf.write_char(c)
         process_string(rest)
       }
