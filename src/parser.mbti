@@ -9,9 +9,9 @@ import(
 )
 
 // Values
-fn parse_bytes(Bytes, name? : String, parser? : Parser) -> (@list.List[@syntax.Impl], Array[@basic.Report])
-
 fn parse_file(String, parser? : Parser) -> (@list.List[@syntax.Impl], Array[@basic.Report]) raise @fs.IOError
+
+fn parse_string(String, name? : String, parser? : Parser) -> (@list.List[@syntax.Impl], Array[@basic.Report])
 
 // Errors
 

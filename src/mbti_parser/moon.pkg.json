@@ -12,9 +12,5 @@
     "moonbitlang/parser/mbti_ast",
     "moonbitlang/parser/syntax"
   ],
-  "warn-list": "-6",
-  "test-import": [
-    "moonbitlang/x/fs",
-    "moonbitlang/parser/lexer"
-  ]
+  "warn-list": "-6"
 }

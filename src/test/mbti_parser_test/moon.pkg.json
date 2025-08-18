@@ -5,7 +5,7 @@
     "moonbitlang/parser/basic",
     "moonbitlang/parser/mbti_ast",
     "moonbitlang/x/fs",
-    "moonbitlang/parser/lexer2",
+    "moonbitlang/parser/lexer",
     "moonbitlang/parser/mbti_parser"
   ]
 }

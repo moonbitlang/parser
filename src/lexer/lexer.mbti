@@ -8,7 +8,9 @@ import(
 )
 
 // Values
-fn tokens_from_bytes(name? : String, start_pos? : @basic.Position, is_interpolation? : Bool, comment~ : Bool, Bytes) -> LexResult
+fn tokens_from_string(name? : String, start_pos? : @basic.Position, is_interpolation? : Bool, comment~ : Bool, String) -> LexResult
+
+fn tokens_from_string_with_utf16_location(name? : String, start_pos? : @basic.Position, is_interpolation? : Bool, comment~ : Bool, String) -> LexResult
 
 // Errors
 

@@ -1,5 +1,8 @@
 ///|
-typealias @tokens.(Token, Comment, CommentKind, InterpElem, InterpSource)
+typealias @tokens.Token
 
 ///|
 typealias @basic.(Position, Location)
+
+///|
+typealias @tokens.(Comment, CommentKind, InterpElem, InterpSource)

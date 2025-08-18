@@ -3,7 +3,7 @@
         
     ],
     "test-import": [
-        "moonbitlang/parser/lexer2",
+        "moonbitlang/parser/lexer",
         "moonbitlang/parser/tokens",
         "moonbitlang/parser/yacc_parser",
         "moonbitlang/x/fs",

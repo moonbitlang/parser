@@ -6,12 +6,12 @@ pub struct LexResult {
 }
 
 ///|
-pub fn tokens_from_bytes(
+pub fn tokens_from_string(
   name~ : String = "",
   start_pos~ : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
   is_interpolation~ : Bool = false,
   comment~ : Bool,
-  bytes : Bytes,
+  str : String,
 ) -> LexResult {
   let arr = Array::new(capacity=100)
   let (start_lnum, start_bol, start_cnum) = (
@@ -31,8 +31,9 @@ pub fn tokens_from_bytes(
     last_unhandled_comment: @ref.new(None),
     asi_context: ASIContext::new(),
     is_interpolation,
+    surrogate_pair_count: 0,
   }
-  lex_tokens(bytes, base=bytes, env~, preserve_comment=env.preserve_comment())
+  lex_tokens(str, base=str, env~, preserve_comment=env.preserve_comment())
   let docstrings = env.docstrings
   if not(docstrings.is_empty()) {
     let last_idx = docstrings.length() - 1
@@ -40,4 +41,24 @@ pub fn tokens_from_bytes(
   }
   docstrings.rev_inplace()
   LexResult::{ tokens: env.tokens, errors: env.errors, docstrings }
+}
+
+///|
+pub fn tokens_from_string_with_utf16_location(
+  name~ : String = "",
+  start_pos~ : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
+  is_interpolation~ : Bool = false,
+  comment~ : Bool,
+  str : String,
+) -> LexResult {
+  use_utf16_location.val = true
+  let result = tokens_from_string(
+    name~,
+    start_pos~,
+    is_interpolation~,
+    comment~,
+    str,
+  )
+  use_utf16_location.val = false
+  return result
 }
