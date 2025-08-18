@@ -1037,11 +1037,7 @@ fn lex_string(
         let (offset, str) = decode_utf8(raw)
         if allow_interp {
           if not(string_repr_buf.is_empty()) {
-            add_literal(
-              string_repr_buf.to_string(),
-              start_pos,
-              current + offset,
-            )
+            add_literal(string_repr_buf.to_string(), start_pos, current)
           }
           string_repr_buf.reset()
           let interp_start_pos = env.make_pos(current + offset)
