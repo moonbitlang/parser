@@ -25,8 +25,3 @@ fn char_for_hex_escape(hex : @string.View) -> UInt? {
     return Some(codep)
   }
 }
-
-///|
-fn calc_offset(base~ : @string.View, view : @string.View) -> Int {
-  view.start_offset() - base.start_offset()
-}

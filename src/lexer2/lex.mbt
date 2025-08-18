@@ -31,6 +31,7 @@ pub fn tokens_from_string(
     last_unhandled_comment: @ref.new(None),
     asi_context: ASIContext::new(),
     is_interpolation,
+    surrogate_pair_count: 0,
   }
   lex_tokens(str, base=str, env~, preserve_comment=env.preserve_comment())
   let docstrings = env.docstrings

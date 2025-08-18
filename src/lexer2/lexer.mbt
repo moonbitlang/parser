@@ -1,4 +1,7 @@
 ///|
+let use_utf16_location : Ref[Bool] = Ref::new(false)
+
+///|
 fn lex_tokens(
   input : @string.View,
   base~ : @string.View,
@@ -8,8 +11,8 @@ fn lex_tokens(
   match input using regex {
     // Handle newlines
     ["\\n|\\r|\\r\\n|\\u2028|\\u2029", .. rest] => {
-      let start_pos = calc_offset(input, base~)
-      let end_pos = calc_offset(rest, base~)
+      let start_pos = env.calc_offset(input, base~)
+      let end_pos = env.calc_offset(rest, base~)
       env.add_token_with_loc(NEWLINE, start=start_pos, end=end_pos)
       env.current_bol = end_pos
       env.current_line += 1
@@ -26,8 +29,8 @@ fn lex_tokens(
     ["=>", .. rest] => {
       env.add_token_with_loc(
         FAT_ARROW,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -36,16 +39,16 @@ fn lex_tokens(
     ["->", .. rest] => {
       env.add_token_with_loc(
         THIN_ARROW,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
     // Comments
     ["//[^\\r\\n]*" as raw, .. rest] => {
-      let start_pos = calc_offset(input, base~)
-      let end_pos = calc_offset(rest, base~)
+      let start_pos = env.calc_offset(input, base~)
+      let end_pos = env.calc_offset(rest, base~)
       let comment_text = raw.to_string()
       if env.is_interpolation {
         env.add_lexing_error(start=start_pos, end=end_pos, InterpInvalidComment)
@@ -66,8 +69,8 @@ fn lex_tokens(
     ["'", "[^\\\\\\n\\r']" as raw, "'", .. rest] => {
       env.add_token_with_loc(
         CHAR([raw]),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -76,8 +79,8 @@ fn lex_tokens(
     ["'", "\\\\[\\\\'\"ntbr ]" as raw, "'", .. rest] => {
       env.add_token_with_loc(
         CHAR(raw.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -86,8 +89,8 @@ fn lex_tokens(
     ["'", "\\\\x[0-9a-fA-F]{2}" as raw, "'", .. rest] => {
       env.add_token_with_loc(
         CHAR(raw.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -96,8 +99,8 @@ fn lex_tokens(
     ["'", "\\\\o[0-3][0-7]{2}" as raw, "'", .. rest] => {
       env.add_token_with_loc(
         CHAR(raw.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -106,8 +109,8 @@ fn lex_tokens(
     ["'", "\\\\u[0-9a-fA-F]{4}" as raw, "'", .. rest] => {
       env.add_token_with_loc(
         CHAR(raw.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -118,22 +121,22 @@ fn lex_tokens(
       let hex = try! raw[2:-1] // Remove the 'u{' and '}'
       if char_for_hex_escape(hex) is None {
         env.add_lexing_error(
-          start=calc_offset(input, base~),
-          end=calc_offset(rest, base~),
+          start=env.calc_offset(input, base~),
+          end=env.calc_offset(rest, base~),
           InvalidEscapeSequence(char_text),
         )
       }
       env.add_token_with_loc(
         CHAR(char_text),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
     // String literals - basic double-quoted string
     ["\"", .. rest] => {
-      let start_pos = calc_offset(input, base~)
+      let start_pos = env.calc_offset(input, base~)
       let (rest, interps) = lex_string(
         rest,
         base~,
@@ -146,14 +149,14 @@ fn lex_tokens(
         [InterpLit(repr~, ..)] => STRING(repr)
         interps => INTERP(interps)
       }
-      let end_pos = calc_offset(rest, base~)
+      let end_pos = env.calc_offset(rest, base~)
       env.add_token_with_loc(tok, start=start_pos, end=end_pos)
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
     // Byte string literal
     ["b\"", .. rest] => {
-      let start_pos = calc_offset(input, base~)
+      let start_pos = env.calc_offset(input, base~)
       let (rest, interps) = lex_string(
         rest,
         base~,
@@ -166,7 +169,11 @@ fn lex_tokens(
         [InterpLit(repr~, ..)] => BYTES(repr)
         _interps => panic() // byte strings don't support interpolation
       }
-      env.add_token_with_loc(tok, start=start_pos, end=calc_offset(rest, base~))
+      env.add_token_with_loc(
+        tok,
+        start=start_pos,
+        end=env.calc_offset(rest, base~),
+      )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
@@ -176,8 +183,8 @@ fn lex_tokens(
       let literal = raw_str.substring(start=2, end=raw_str.length() - 1) // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -188,8 +195,8 @@ fn lex_tokens(
       let literal = raw_str.substring(start=2, end=raw_str.length() - 1) // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -200,8 +207,8 @@ fn lex_tokens(
       let ascii_char = raw_str.substring(start=2, end=raw_str.length() - 1) // Remove b' and '
       env.add_token_with_loc(
         BYTE(ascii_char),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -212,15 +219,15 @@ fn lex_tokens(
       let literal = raw_str.substring(start=2, end=raw_str.length() - 1) // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
     // Invalid byte literal
     ["b'", .. rest] => {
-      let start = calc_offset(base~, input)
+      let start = env.calc_offset(base~, input)
       let rest = lex_invalid_byte(rest, base~, env~, start~)
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -229,8 +236,8 @@ fn lex_tokens(
     ["[0-9](_|[0-9])*\\.[0-9_]*([eE][+-]?[0-9](_|[0-9])*)?F" as float, .. rest] => {
       env.add_token_with_loc(
         FLOAT(float.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -240,8 +247,8 @@ fn lex_tokens(
     ] => {
       env.add_token_with_loc(
         FLOAT(float.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -250,8 +257,8 @@ fn lex_tokens(
     ["[0-9](_|[0-9])*\\.[0-9_]*([eE][+-]?[0-9](_|[0-9])*)?" as double, .. rest] => {
       env.add_token_with_loc(
         DOUBLE(double.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -261,8 +268,8 @@ fn lex_tokens(
     ] => {
       env.add_token_with_loc(
         DOUBLE(double.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -278,8 +285,8 @@ fn lex_tokens(
       let integer = integer_str.substring(start=0, end=integer_end)
       env.add_token_with_loc(
         INT(integer),
-        start=calc_offset(input, base~),
-        end=calc_offset(input, base~) + integer_end,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(input, base~) + integer_end,
       )
       // Put back the ".." part
       let dotdot_input = try! input[integer_end:]
@@ -290,32 +297,32 @@ fn lex_tokens(
     ["[0-9](_|[0-9])*(UL|U|L|N)?" as integer, .. rest] => {
       env.add_token_with_loc(
         INT(integer.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["0[xX][0-9a-fA-F](_|[0-9a-fA-F])*(UL|U|L|N)?" as integer, .. rest] => {
       env.add_token_with_loc(
         INT(integer.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["0[Oo][0-7](_|[0-7])*(UL|U|L|N)?" as integer, .. rest] => {
       env.add_token_with_loc(
         INT(integer.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["0[Bb][01](_|[01])*(UL|U|L|N)?" as integer, .. rest] => {
       env.add_token_with_loc(
         INT(integer.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -327,8 +334,8 @@ fn lex_tokens(
     ] => {
       env.add_token_with_loc(
         @tokens.Token::UIDENT(raw.to_string()),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -339,8 +346,8 @@ fn lex_tokens(
       let ident = raw_str.substring(start=0, end=raw_str.length() - 1) // Remove ~
       env.add_token_with_loc(
         @tokens.Token::POST_LABEL(ident),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -354,8 +361,8 @@ fn lex_tokens(
       if reserved_keyword_table.contains(raw_str) {
         env.add_lexing_error(
           Reserved_keyword(raw_str),
-          start=calc_offset(input, base~),
-          end=calc_offset(rest, base~),
+          start=env.calc_offset(input, base~),
+          end=env.calc_offset(rest, base~),
         )
       }
       let token = match keyword_table.get(raw_str) {
@@ -364,8 +371,8 @@ fn lex_tokens(
       }
       env.add_token_with_loc(
         token,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -378,8 +385,8 @@ fn lex_tokens(
       let op_char = op_str.substring(start=0, end=1)
       env.add_token_with_loc(
         @tokens.Token::AUGMENTED_ASSIGNMENT(op_char),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -388,96 +395,96 @@ fn lex_tokens(
     ["&&", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::AMPERAMPER,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\|\\|", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::BARBAR,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\|>", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::PIPE,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["try\\?", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::TRY_QUESTION,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["try!", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::TRY_EXCLAMATION,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["==", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX1("=="),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["!=", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX1("!="),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["<=", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX1("<="),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     [">=", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX1(">="),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["<<", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX2("<<"),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     [">>", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX2(">>"),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["::", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::COLONCOLON,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -486,32 +493,32 @@ fn lex_tokens(
     ["\\.\\.\\.", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::ELLIPSIS,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\.\\.=", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::RANGE_INCLUSIVE,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\.\\.<", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::RANGE_EXCLUSIVE,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\.\\.", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::DOTDOT,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -525,8 +532,8 @@ fn lex_tokens(
       let name = ident.to_string()
       env.add_token_with_loc(
         @tokens.Token::DOT_UIDENT(name),
-        start=calc_offset(ident, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(ident, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -538,8 +545,8 @@ fn lex_tokens(
       let name = ident.to_string()
       env.add_token_with_loc(
         @tokens.Token::DOT_LIDENT(name),
-        start=calc_offset(ident, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(ident, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -552,16 +559,16 @@ fn lex_tokens(
         _ => {
           env.add_lexing_error(
             InvalidDotInt(full_str),
-            start=calc_offset(input, base~),
-            end=calc_offset(rest, base~),
+            start=env.calc_offset(input, base~),
+            end=env.calc_offset(rest, base~),
           )
           0
         }
       }
       env.add_token_with_loc(
         @tokens.Token::DOT_INT(idx),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -570,8 +577,8 @@ fn lex_tokens(
     ["\\.\\(", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::DOT_LPAREN,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -580,176 +587,176 @@ fn lex_tokens(
     ["&", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::AMPER,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\|", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::BAR,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\^", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::CARET,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\(", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::LPAREN,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\)", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::RPAREN,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\*", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX3("*"),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["/", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX3("/"),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["%", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX3("%"),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     [",", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::COMMA,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     [":", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::COLON,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     [";", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::SEMI(true),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["=", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::EQUAL,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["<", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX1("<"),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     [">", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::INFIX1(">"),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\[", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::LBRACKET,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\]", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::RBRACKET,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["{", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::LBRACE,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["}", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::RBRACE,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\+", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::PLUS,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["-", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::MINUS,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["\\?", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::QUESTION,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     ["!", .. rest] => {
       env.add_token_with_loc(
         @tokens.Token::EXCLAMATION,
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -767,8 +774,8 @@ fn lex_tokens(
     ] => {
       if env.is_interpolation {
         env.add_lexing_error(
-          start=calc_offset(input, base~),
-          end=calc_offset(rest, base~),
+          start=env.calc_offset(input, base~),
+          end=env.calc_offset(rest, base~),
           InterpInvalidAttribute,
         )
       } else {
@@ -777,8 +784,8 @@ fn lex_tokens(
         let raw_payload = raw_payload.to_string()
         env.add_token_with_loc(
           @tokens.Token::ATTRIBUTE((ident, Some(dot_ident), raw_payload)),
-          start=calc_offset(input, base~),
-          end=calc_offset(rest, base~),
+          start=env.calc_offset(input, base~),
+          end=env.calc_offset(rest, base~),
         )
       }
       lex_tokens(rest, base~, env~, preserve_comment~)
@@ -793,8 +800,8 @@ fn lex_tokens(
     ] => {
       if env.is_interpolation {
         env.add_lexing_error(
-          start=calc_offset(input, base~),
-          end=calc_offset(rest, base~),
+          start=env.calc_offset(input, base~),
+          end=env.calc_offset(rest, base~),
           InterpInvalidAttribute,
         )
       } else {
@@ -802,8 +809,8 @@ fn lex_tokens(
         let raw_payload = raw_payload.to_string()
         env.add_token_with_loc(
           @tokens.Token::ATTRIBUTE((ident, None, raw_payload)),
-          start=calc_offset(input, base~),
-          end=calc_offset(rest, base~),
+          start=env.calc_offset(input, base~),
+          end=env.calc_offset(rest, base~),
         )
       }
       lex_tokens(rest, base~, env~, preserve_comment~)
@@ -813,12 +820,12 @@ fn lex_tokens(
     ["\\$\\|", .. rest] => {
       if env.is_interpolation {
         env.add_lexing_error(
-          start=calc_offset(input, base~),
-          end=calc_offset(rest, base~),
+          start=env.calc_offset(input, base~),
+          end=env.calc_offset(rest, base~),
           InterpInvalidMultilineString,
         )
       }
-      let start_pos = calc_offset(input, base~)
+      let start_pos = env.calc_offset(input, base~)
       let (rest, interps) = lex_string(
         rest,
         base~,
@@ -828,7 +835,11 @@ fn lex_tokens(
         start_pos~,
       )
       let tok = @tokens.Token::MULTILINE_INTERP(interps)
-      env.add_token_with_loc(tok, start=start_pos, end=calc_offset(rest, base~))
+      env.add_token_with_loc(
+        tok,
+        start=start_pos,
+        end=env.calc_offset(rest, base~),
+      )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
@@ -836,8 +847,8 @@ fn lex_tokens(
     ["#\\|[^\\r\\n]*" as multiline_str, .. rest] => {
       if env.is_interpolation {
         env.add_lexing_error(
-          start=calc_offset(input, base~),
-          end=calc_offset(rest, base~),
+          start=env.calc_offset(input, base~),
+          end=env.calc_offset(rest, base~),
           InterpInvalidMultilineString,
         )
       }
@@ -845,8 +856,8 @@ fn lex_tokens(
       let content = content_str.substring(start=2, end=content_str.length()) // Remove #|
       env.add_token_with_loc(
         @tokens.Token::MULTILINE_STRING(content),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -857,15 +868,15 @@ fn lex_tokens(
       let pkg_name_without_at = pkg_str.substring(start=1, end=pkg_str.length()) // Remove @
       env.add_token_with_loc(
         @tokens.Token::PACKAGE_NAME(pkg_name_without_at),
-        start=calc_offset(input, base~),
-        end=calc_offset(rest, base~),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
     // EOF case
     [] => {
-      let end_pos = calc_offset(input, base~)
+      let end_pos = env.calc_offset(input, base~)
       env.add_token_with_loc(EOF, start=end_pos, end=end_pos)
     }
 
@@ -873,8 +884,8 @@ fn lex_tokens(
     ["." as c, .. rest] => {
       env.add_lexing_error(
         IllegalCharacter(c),
-        start=calc_offset(input, base~),
-        end=calc_offset(input, base~) + 1,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(input, base~) + 1,
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
@@ -896,14 +907,14 @@ fn lex_invalid_byte(
         env.add_lexing_error(
           InvalidByteLiteral(invalid_byte_repr_buf.to_string()),
           start~,
-          end=calc_offset(base~, rest),
+          end=env.calc_offset(base~, rest),
         )
         rest
       }
       ["\\r|\\n", .. _rest] => {
         env.add_lexing_error(
-          start=calc_offset(base~, input),
-          end=calc_offset(base~, input),
+          start=env.calc_offset(base~, input),
+          end=env.calc_offset(base~, input),
           UnterminatedStringInVariableInterploation,
         )
         input
@@ -912,7 +923,7 @@ fn lex_invalid_byte(
         env.add_lexing_error(
           InvalidByteLiteral(invalid_byte_repr_buf.to_string()),
           start~,
-          end=calc_offset(base~, input),
+          end=env.calc_offset(base~, input),
         )
         input
       }
@@ -952,22 +963,22 @@ fn lex_string(
       [
         "[\\u0009\\u000B\\u000C\\u0020\\u00A0\\uFEFF\\u1680\\u2000-\\u200A\\u202F\\u205F\\u3000]*}",
         .. rest,
-      ] => (rest, calc_offset(base~, input))
+      ] => (rest, env.calc_offset(base~, input))
       [] => {
         env.add_lexing_error(
-          start=calc_offset(base~, input),
-          end=calc_offset(base~, input),
+          start=env.calc_offset(base~, input),
+          end=env.calc_offset(base~, input),
           UnterminatedString,
         )
-        (input, calc_offset(base~, input))
+        (input, env.calc_offset(base~, input))
       }
       ["\\r|\\n", ..] => {
         env.add_lexing_error(
-          start=calc_offset(base~, input),
-          end=calc_offset(base~, input),
+          start=env.calc_offset(base~, input),
+          end=env.calc_offset(base~, input),
           UnterminatedStringInVariableInterploation,
         )
-        (input, calc_offset(base~, input))
+        (input, env.calc_offset(base~, input))
       }
       ["[^\\n\"{}]" as c, .. rest] => {
         string_repr_buf.write_char(c)
@@ -989,7 +1000,7 @@ fn lex_string(
             add_literal(
               string_repr_buf.to_string(),
               start_pos,
-              calc_offset(base~, rest),
+              env.calc_offset(base~, rest),
             )
           }
           rest
@@ -1010,8 +1021,8 @@ fn lex_string(
       // Invalid hex escape
       ["\\\\x.." as raw, .. rest] => {
         env.add_lexing_error(
-          start=calc_offset(base~, input),
-          end=calc_offset(base~, rest),
+          start=env.calc_offset(base~, input),
+          end=env.calc_offset(base~, rest),
           InvalidEscapeSequence(raw.to_string()),
         )
         process_string(rest)
@@ -1026,8 +1037,8 @@ fn lex_string(
       // Invalid octal escape
       ["\\\\o..." as raw, .. rest] => {
         env.add_lexing_error(
-          start=calc_offset(base~, input),
-          end=calc_offset(base~, rest),
+          start=env.calc_offset(base~, input),
+          end=env.calc_offset(base~, rest),
           InvalidEscapeSequence(raw.to_string()),
         )
         process_string(rest)
@@ -1048,8 +1059,8 @@ fn lex_string(
       // Invalid unicode escape with braces
       ["\\\\u{[^}\\r\\n]*}" as raw, .. rest] => {
         env.add_lexing_error(
-          start=calc_offset(base~, input),
-          end=calc_offset(base~, rest),
+          start=env.calc_offset(base~, input),
+          end=env.calc_offset(base~, rest),
           InvalidEscapeSequence(raw.to_string()),
         )
         process_string(rest)
@@ -1065,11 +1076,11 @@ fn lex_string(
             add_literal(
               string_repr_buf.to_string(),
               start_pos,
-              calc_offset(base~, rest),
+              env.calc_offset(base~, rest),
             )
           }
           string_repr_buf.reset()
-          let interp_start_pos = env.make_pos(calc_offset(base~, rest))
+          let interp_start_pos = env.make_pos(env.calc_offset(base~, rest))
           let (rest, interp_end) = process_interpolation(rest)
           let loc = Location::{
             start: interp_start_pos,
@@ -1077,8 +1088,8 @@ fn lex_string(
           }
           if string_repr_buf.is_empty() {
             env.add_lexing_error(
-              start=calc_offset(base~, input),
-              end=calc_offset(base~, rest),
+              start=env.calc_offset(base~, input),
+              end=env.calc_offset(base~, rest),
               InterpMissingExpression,
             )
           } else {
@@ -1091,8 +1102,8 @@ fn lex_string(
           process_string(rest)
         } else {
           env.add_lexing_error(
-            start=calc_offset(base~, input),
-            end=calc_offset(base~, rest),
+            start=env.calc_offset(base~, input),
+            end=env.calc_offset(base~, rest),
             InvalidEscapeSequence(raw.to_string()),
           )
           process_string(rest)
@@ -1101,8 +1112,8 @@ fn lex_string(
       // Invalid escape
       ["\\\\." as raw, .. rest] => {
         env.add_lexing_error(
-          start=calc_offset(base~, input),
-          end=calc_offset(base~, rest),
+          start=env.calc_offset(base~, input),
+          end=env.calc_offset(base~, rest),
           InvalidEscapeSequence(raw.to_string()),
         )
         process_string(rest)
@@ -1112,14 +1123,14 @@ fn lex_string(
       [] => {
         env.add_lexing_error(
           start=start_pos,
-          end=calc_offset(base~, input),
+          end=env.calc_offset(base~, input),
           UnterminatedString,
         )
         if not(string_repr_buf.is_empty()) {
           add_literal(
             string_repr_buf.to_string(),
             start_pos,
-            calc_offset(base~, input),
+            env.calc_offset(base~, input),
           )
         }
         input
@@ -1127,7 +1138,7 @@ fn lex_string(
 
       // CRLF
       ["[\\r\\n]", .. rest] => {
-        let end_pos = calc_offset(base~, rest)
+        let end_pos = env.calc_offset(base~, rest)
         if not(end_with_newline) {
           env.add_lexing_error(start=start_pos, end=end_pos, UnterminatedString)
         }
@@ -1152,7 +1163,7 @@ fn lex_string(
     let interps : Array[InterpElem] = [
       @tokens.InterpElem::InterpLit(repr="", loc=Location::{
         start: env.make_pos(start_pos),
-        end: env.make_pos(calc_offset(base~, rest)),
+        end: env.make_pos(env.calc_offset(base~, rest)),
       }),
     ]
     (rest, interps)

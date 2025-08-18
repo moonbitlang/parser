@@ -11,6 +11,7 @@ priv struct LexEnv {
   asi_context : ASIContext
   start_cnum : Int
   is_interpolation : Bool
+  mut surrogate_pair_count : Int
 }
 
 ///|
@@ -152,5 +153,41 @@ fn preserve_comment(self : LexEnv) -> (Comment, Int, Int) -> Unit {
     }
   } else {
     fn(_cmt, _start, _end) {  }
+  }
+}
+
+///|
+fn register_surrogate_pair(self : LexEnv, view : @string.View) -> Unit {
+  if !use_utf16_location.val {
+    let mut count = 0
+    for i = 0; i < view.length(); i = i + 1 {
+      let c1 = view.unsafe_charcode_at(i)
+      if c1.is_leading_surrogate() && i + 1 < view.length() {
+        let c2 = view.unsafe_charcode_at(i + 1)
+        if c2.is_trailing_surrogate() {
+          count += 1
+          continue i + 2
+        }
+      }
+    }
+    self.surrogate_pair_count += count
+  }
+}
+
+///|
+fn register_surrogate_pair_for_char(self : LexEnv, ch : Char) -> Unit {
+  if !use_utf16_location.val {
+    if ch.to_int() >= 0x10000 {
+      self.surrogate_pair_count += 1
+    }
+  }
+}
+
+///|
+fn calc_offset(self : LexEnv, base~ : @string.View, view : @string.View) -> Int {
+  if use_utf16_location.val {
+    view.start_offset() - base.start_offset()
+  } else {
+    view.start_offset() - base.start_offset() - self.surrogate_pair_count
   }
 }
