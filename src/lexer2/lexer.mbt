@@ -1002,13 +1002,13 @@ fn lex_string(
     }
   }
 
-  fn process_string(input : @string.View) -> @string.View {
+  fn process_string(input : @string.View, start_pos : Int) -> @string.View {
     match input using regex {
       // End of string
       ["\"", .. rest] =>
         if end_with_newline {
           string_repr_buf.write_char('"')
-          process_string(rest)
+          process_string(rest, start_pos)
         } else {
           if not(string_repr_buf.is_empty()) {
             add_literal(
@@ -1023,13 +1023,13 @@ fn lex_string(
       // Escape sequences
       ["\\\\[\\\\'\"`ntbr ]" as raw, .. rest] => {
         string_repr_buf.write_string(raw.to_string())
-        process_string(rest)
+        process_string(rest, start_pos)
       }
 
       // Hex escape
       ["\\\\x[0-9a-fA-F]{2}" as raw, .. rest] => {
         string_repr_buf.write_string(raw.to_string())
-        process_string(rest)
+        process_string(rest, start_pos)
       }
 
       // Invalid hex escape
@@ -1039,13 +1039,13 @@ fn lex_string(
           end=env.calc_offset(base~, rest),
           InvalidEscapeSequence(raw.to_string()),
         )
-        process_string(rest)
+        process_string(rest, start_pos)
       }
 
       // Octal escape
       ["\\\\o[0-3][0-7]{2}" as raw, .. rest] => {
         string_repr_buf.write_string(raw.to_string())
-        process_string(rest)
+        process_string(rest, start_pos)
       }
 
       // Invalid octal escape
@@ -1055,19 +1055,19 @@ fn lex_string(
           end=env.calc_offset(base~, rest),
           InvalidEscapeSequence(raw.to_string()),
         )
-        process_string(rest)
+        process_string(rest, start_pos)
       }
 
       // Unicode escape
       ["\\\\u[0-9a-fA-F]{4}" as raw, .. rest] => {
         string_repr_buf.write_string(raw.to_string())
-        process_string(rest)
+        process_string(rest, start_pos)
       }
 
       // Unicode escape with braces
       ["\\\\u{[0-9a-fA-F]+}" as raw, .. rest] => {
         string_repr_buf.write_string(raw.to_string())
-        process_string(rest)
+        process_string(rest, start_pos)
       }
 
       // Invalid unicode escape with braces
@@ -1077,7 +1077,7 @@ fn lex_string(
           end=env.calc_offset(base~, rest),
           InvalidEscapeSequence(raw.to_string()),
         )
-        process_string(rest)
+        process_string(rest, start_pos)
       }
 
       // String interpolation
@@ -1090,7 +1090,7 @@ fn lex_string(
             add_literal(
               string_repr_buf.to_string(),
               start_pos,
-              env.calc_offset(base~, rest),
+              env.calc_offset(base~, input),
             )
           }
           string_repr_buf.reset()
@@ -1113,14 +1113,14 @@ fn lex_string(
             )
           }
           string_repr_buf.reset()
-          process_string(rest)
+          process_string(rest, env.calc_offset(base~, rest))
         } else {
           env.add_lexing_error(
             start=env.calc_offset(base~, input),
             end=env.calc_offset(base~, rest),
             InvalidEscapeSequence(raw.to_string()),
           )
-          process_string(rest)
+          process_string(rest, env.calc_offset(base~, rest))
         }
 
       // Invalid escape
@@ -1130,7 +1130,7 @@ fn lex_string(
           end=env.calc_offset(base~, rest),
           InvalidEscapeSequence(raw.to_string()),
         )
-        process_string(rest)
+        process_string(rest, start_pos)
       }
 
       // EOF
@@ -1167,13 +1167,13 @@ fn lex_string(
       ["." as c, .. rest] => {
         env.register_surrogate_pair_for_char(c)
         string_repr_buf.write_char(c)
-        process_string(rest)
+        process_string(rest, start_pos)
       }
       _ => panic()
     }
   }
 
-  let rest = process_string(input)
+  let rest = process_string(input, start_pos)
   if interps.length() == 0 {
     let interps : Array[InterpElem] = [
       @tokens.InterpElem::InterpLit(repr="", loc=Location::{
