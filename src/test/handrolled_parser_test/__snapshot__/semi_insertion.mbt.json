@@ -131,7 +131,7 @@
                   {
                     "type": "InterpElem::Literal",
                     "repr": "abc",
-                    "loc": "7:3-7:9"
+                    "loc": "7:3-7:7"
                   },
                   {
                     "type": "InterpElem::Source",

@@ -341,7 +341,7 @@
                     {
                       "type": "InterpElem::Literal",
                       "repr": "\\\\ \\u{5154} \\u5154 ",
-                      "loc": "9:11-9:33"
+                      "loc": "9:11-9:31"
                     },
                     {
                       "type": "InterpElem::Source",
@@ -351,7 +351,7 @@
                     {
                       "type": "InterpElem::Literal",
                       "repr": " \\o115 \\x42 \\n",
-                      "loc": "9:11-9:50"
+                      "loc": "9:35-9:50"
                     }
                   ],
                   "loc": "9:11-9:50"

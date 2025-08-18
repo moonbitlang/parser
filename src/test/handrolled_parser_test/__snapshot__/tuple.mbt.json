@@ -134,7 +134,7 @@
                       "accessor": {
                         "type": "Accessor::Index",
                         "tuple_index": 0,
-                        "loc": "4:12-4:14"
+                        "loc": "4:13-4:14"
                       },
                       "loc": "4:11-4:14"
                     },
@@ -182,7 +182,7 @@
                       "accessor": {
                         "type": "Accessor::Index",
                         "tuple_index": 1,
-                        "loc": "5:12-5:14"
+                        "loc": "5:13-5:14"
                       },
                       "loc": "5:11-5:14"
                     },
@@ -232,14 +232,14 @@
                         "accessor": {
                           "type": "Accessor::Index",
                           "tuple_index": 2,
-                          "loc": "6:12-6:14"
+                          "loc": "6:13-6:14"
                         },
                         "loc": "6:11-6:14"
                       },
                       "accessor": {
                         "type": "Accessor::Index",
                         "tuple_index": 0,
-                        "loc": "6:14-6:16"
+                        "loc": "6:15-6:16"
                       },
                       "loc": "6:11-6:16"
                     },
@@ -291,21 +291,21 @@
                           "accessor": {
                             "type": "Accessor::Index",
                             "tuple_index": 2,
-                            "loc": "7:12-7:14"
+                            "loc": "7:13-7:14"
                           },
                           "loc": "7:11-7:14"
                         },
                         "accessor": {
                           "type": "Accessor::Index",
                           "tuple_index": 1,
-                          "loc": "7:14-7:16"
+                          "loc": "7:15-7:16"
                         },
                         "loc": "7:11-7:16"
                       },
                       "accessor": {
                         "type": "Accessor::Index",
                         "tuple_index": 0,
-                        "loc": "7:16-7:18"
+                        "loc": "7:17-7:18"
                       },
                       "loc": "7:11-7:18"
                     },
@@ -358,21 +358,21 @@
                         "accessor": {
                           "type": "Accessor::Index",
                           "tuple_index": 2,
-                          "loc": "8:12-8:14"
+                          "loc": "8:13-8:14"
                         },
                         "loc": "8:11-8:14"
                       },
                       "accessor": {
                         "type": "Accessor::Index",
                         "tuple_index": 1,
-                        "loc": "8:14-8:16"
+                        "loc": "8:15-8:16"
                       },
                       "loc": "8:11-8:16"
                     },
                     "accessor": {
                       "type": "Accessor::Index",
                       "tuple_index": 1,
-                      "loc": "8:16-8:18"
+                      "loc": "8:17-8:18"
                     },
                     "loc": "8:11-8:18"
                   },

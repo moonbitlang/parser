@@ -45,7 +45,7 @@
               {
                 "type": "InterpElem::Literal",
                 "repr": "hello ",
-                "loc": "2:11-2:20"
+                "loc": "2:11-2:18"
               },
               {
                 "type": "InterpElem::Source",
@@ -147,7 +147,7 @@
                 {
                   "type": "InterpElem::Literal",
                   "repr": "hello ",
-                  "loc": "7:11-7:21"
+                  "loc": "7:11-7:18"
                 },
                 {
                   "type": "InterpElem::Source",
@@ -271,12 +271,12 @@
           {
             "type": "InterpElem::Literal",
             "repr": "abcd",
-            "loc": "13:19-13:28"
+            "loc": "13:19-13:24"
           },
           {
             "type": "InterpElem::Literal",
             "repr": "1234",
-            "loc": "13:19-13:34"
+            "loc": "13:29-13:34"
           }
         ],
         "loc": "13:19-13:34"
@@ -315,12 +315,12 @@
           {
             "type": "InterpElem::Literal",
             "repr": "abcd",
-            "loc": "14:19-14:28"
+            "loc": "14:19-14:24"
           },
           {
             "type": "InterpElem::Literal",
             "repr": "1234",
-            "loc": "14:19-14:35"
+            "loc": "14:29-14:33"
           }
         ],
         "loc": "14:19-14:37"
@@ -395,7 +395,7 @@
           {
             "type": "InterpElem::Literal",
             "repr": "hello ",
-            "loc": "16:19-16:28"
+            "loc": "16:19-16:26"
           },
           {
             "type": "InterpElem::Source",
@@ -405,7 +405,7 @@
           {
             "type": "InterpElem::Literal",
             "repr": ", ",
-            "loc": "16:19-16:34"
+            "loc": "16:30-16:32"
           },
           {
             "type": "InterpElem::Source",
@@ -437,7 +437,7 @@
           {
             "type": "InterpElem::Literal",
             "repr": "gsghh ",
-            "loc": "17:10-17:20"
+            "loc": "17:10-17:17"
           },
           {
             "type": "InterpElem::Source",
@@ -447,7 +447,7 @@
           {
             "type": "InterpElem::Literal",
             "repr": "1234",
-            "loc": "17:10-17:52"
+            "loc": "17:46-17:50"
           },
           {
             "type": "InterpElem::Source",
@@ -479,7 +479,7 @@
           {
             "type": "InterpElem::Literal",
             "repr": "gsghh ",
-            "loc": "18:10-18:20"
+            "loc": "18:10-18:17"
           },
           {
             "type": "InterpElem::Source",
@@ -489,7 +489,7 @@
           {
             "type": "InterpElem::Literal",
             "repr": "1234",
-            "loc": "18:10-18:43"
+            "loc": "18:37-18:41"
           },
           {
             "type": "InterpElem::Source",
@@ -521,7 +521,7 @@
           {
             "type": "InterpElem::Literal",
             "repr": "gsghh ",
-            "loc": "19:10-19:20"
+            "loc": "19:10-19:17"
           },
           {
             "type": "InterpElem::Source",
@@ -531,7 +531,7 @@
           {
             "type": "InterpElem::Literal",
             "repr": " gggxxxgg",
-            "loc": "19:10-19:43"
+            "loc": "19:32-19:41"
           },
           {
             "type": "InterpElem::Source",

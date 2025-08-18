@@ -382,7 +382,7 @@
                   {
                     "type": "InterpElem::Literal",
                     "repr": " Hello, ",
-                    "loc": "22:5-22:17"
+                    "loc": "22:5-22:15"
                   },
                   {
                     "type": "InterpElem::Source",
@@ -405,7 +405,7 @@
                   {
                     "type": "InterpElem::Literal",
                     "repr": " \\t Goodbye, ",
-                    "loc": "25:5-25:22"
+                    "loc": "25:5-25:20"
                   },
                   {
                     "type": "InterpElem::Source",
@@ -533,7 +533,7 @@
                   {
                     "type": "InterpElem::Literal",
                     "repr": " Hello, ",
-                    "loc": "33:5-33:17"
+                    "loc": "33:5-33:15"
                   },
                   {
                     "type": "InterpElem::Source",
@@ -548,7 +548,7 @@
                   {
                     "type": "InterpElem::Literal",
                     "repr": " \\t Goodbye, ",
-                    "loc": "34:5-34:22"
+                    "loc": "34:5-34:20"
                   },
                   {
                     "type": "InterpElem::Source",

@@ -6,7 +6,7 @@
       "0": {
         "type": "TypeDecl",
         "tycon": "类型",
-        "tycon_loc": "2:6-2:12",
+        "tycon_loc": "2:6-2:8",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -62,7 +62,7 @@
         "name": {
           "type": "Binder",
           "name": "斐波那契数列",
-          "loc": "6:4-6:22"
+          "loc": "6:4-6:10"
         },
         "has_error": null,
         "is_async": false,
@@ -72,7 +72,7 @@
             "binder": {
               "type": "Binder",
               "name": "第几个数",
-              "loc": "6:23-6:35"
+              "loc": "6:11-6:15"
             },
             "ty": {
               "type": "Type::Name",
@@ -82,14 +82,14 @@
                   "type": "LongIdent::Ident",
                   "0": "Int"
                 },
-                "loc": "6:37-6:40"
+                "loc": "6:17-6:20"
               },
               "tys": [],
-              "loc": "6:37-6:40"
+              "loc": "6:17-6:20"
             }
           }
         ],
-        "params_loc": "6:22-6:41",
+        "params_loc": "6:10-6:21",
         "quantifiers": [],
         "return_type": {
           "type": "Type::Name",
@@ -99,10 +99,10 @@
               "type": "LongIdent::Ident",
               "0": "Int"
             },
-            "loc": "6:45-6:48"
+            "loc": "6:25-6:28"
           },
           "tys": [],
-          "loc": "6:45-6:48"
+          "loc": "6:25-6:28"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -123,7 +123,7 @@
             "0": {
               "type": "Binder",
               "name": "内部循环",
-              "loc": "7:9-7:21"
+              "loc": "7:9-7:13"
             }
           },
           "expr": {
@@ -136,7 +136,7 @@
                   "binder": {
                     "type": "Binder",
                     "name": "前一个",
-                    "loc": "7:27-7:36"
+                    "loc": "7:19-7:22"
                   },
                   "ty": null
                 },
@@ -145,7 +145,7 @@
                   "binder": {
                     "type": "Binder",
                     "name": "后一个",
-                    "loc": "7:38-7:47"
+                    "loc": "7:24-7:27"
                   },
                   "ty": null
                 },
@@ -154,12 +154,12 @@
                   "binder": {
                     "type": "Binder",
                     "name": "计数器",
-                    "loc": "7:49-7:58"
+                    "loc": "7:29-7:32"
                   },
                   "ty": null
                 }
               ],
-              "params_loc": "7:26-7:59",
+              "params_loc": "7:18-7:33",
               "body": {
                 "type": "Expr::If",
                 "cond": {
@@ -170,7 +170,7 @@
                       "type": "LongIdent::Ident",
                       "0": ">="
                     },
-                    "loc": "8:22-8:24"
+                    "loc": "8:16-8:18"
                   },
                   "lhs": {
                     "type": "Expr::Ident",
@@ -180,9 +180,9 @@
                         "type": "LongIdent::Ident",
                         "0": "计数器"
                       },
-                      "loc": "8:12-8:21"
+                      "loc": "8:12-8:15"
                     },
-                    "loc": "8:12-8:21"
+                    "loc": "8:12-8:15"
                   },
                   "rhs": {
                     "type": "Expr::Ident",
@@ -192,11 +192,11 @@
                         "type": "LongIdent::Ident",
                         "0": "第几个数"
                       },
-                      "loc": "8:25-8:37"
+                      "loc": "8:19-8:23"
                     },
-                    "loc": "8:25-8:37"
+                    "loc": "8:19-8:23"
                   },
-                  "loc": "8:12-8:37"
+                  "loc": "8:12-8:23"
                 },
                 "ifso": {
                   "type": "Expr::Ident",
@@ -206,9 +206,9 @@
                       "type": "LongIdent::Ident",
                       "0": "前一个"
                     },
-                    "loc": "9:13-9:22"
+                    "loc": "9:13-9:16"
                   },
-                  "loc": "9:13-9:22"
+                  "loc": "9:13-9:16"
                 },
                 "ifnot": {
                   "type": "Expr::Apply",
@@ -220,9 +220,9 @@
                         "type": "LongIdent::Ident",
                         "0": "内部循环"
                       },
-                      "loc": "11:13-11:25"
+                      "loc": "11:13-11:17"
                     },
-                    "loc": "11:13-11:25"
+                    "loc": "11:13-11:17"
                   },
                   "args": [
                     {
@@ -235,9 +235,9 @@
                             "type": "LongIdent::Ident",
                             "0": "后一个"
                           },
-                          "loc": "11:26-11:35"
+                          "loc": "11:18-11:21"
                         },
-                        "loc": "11:26-11:35"
+                        "loc": "11:18-11:21"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -253,7 +253,7 @@
                             "type": "LongIdent::Ident",
                             "0": "+"
                           },
-                          "loc": "11:47-11:48"
+                          "loc": "11:27-11:28"
                         },
                         "lhs": {
                           "type": "Expr::Ident",
@@ -263,9 +263,9 @@
                               "type": "LongIdent::Ident",
                               "0": "前一个"
                             },
-                            "loc": "11:37-11:46"
+                            "loc": "11:23-11:26"
                           },
-                          "loc": "11:37-11:46"
+                          "loc": "11:23-11:26"
                         },
                         "rhs": {
                           "type": "Expr::Ident",
@@ -275,11 +275,11 @@
                               "type": "LongIdent::Ident",
                               "0": "后一个"
                             },
-                            "loc": "11:49-11:58"
+                            "loc": "11:29-11:32"
                           },
-                          "loc": "11:49-11:58"
+                          "loc": "11:29-11:32"
                         },
-                        "loc": "11:37-11:58"
+                        "loc": "11:23-11:32"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -295,7 +295,7 @@
                             "type": "LongIdent::Ident",
                             "0": "+"
                           },
-                          "loc": "11:70-11:71"
+                          "loc": "11:38-11:39"
                         },
                         "lhs": {
                           "type": "Expr::Ident",
@@ -305,9 +305,9 @@
                               "type": "LongIdent::Ident",
                               "0": "计数器"
                             },
-                            "loc": "11:60-11:69"
+                            "loc": "11:34-11:37"
                           },
-                          "loc": "11:60-11:69"
+                          "loc": "11:34-11:37"
                         },
                         "rhs": {
                           "type": "Expr::Constant",
@@ -315,9 +315,9 @@
                             "type": "Constant::Int",
                             "0": "1"
                           },
-                          "loc": "11:72-11:73"
+                          "loc": "11:40-11:41"
                         },
-                        "loc": "11:60-11:73"
+                        "loc": "11:34-11:41"
                       },
                       "kind": {
                         "type": "ArgumentKind::Positional"
@@ -327,7 +327,7 @@
                   "attr": {
                     "type": "ApplyAttr::NoAttr"
                   },
-                  "loc": "11:13-11:74"
+                  "loc": "11:13-11:42"
                 },
                 "loc": "8:9-12:10"
               },
@@ -342,7 +342,7 @@
               "is_async": false,
               "loc": "-1:1--1:1"
             },
-            "loc": "7:24-13:6"
+            "loc": "7:16-13:6"
           },
           "body": {
             "type": "Expr::Unit",
@@ -362,7 +362,7 @@
         "name": {
           "type": "Binder",
           "name": "相加",
-          "loc": "16:18-16:24"
+          "loc": "16:10-16:12"
         },
         "has_error": null,
         "is_async": false,
@@ -372,7 +372,7 @@
             "binder": {
               "type": "Binder",
               "name": "左",
-              "loc": "16:25-16:28"
+              "loc": "16:13-16:14"
             },
             "ty": {
               "type": "Type::Name",
@@ -382,10 +382,10 @@
                   "type": "LongIdent::Ident",
                   "0": "数字类型"
                 },
-                "loc": "16:30-16:42"
+                "loc": "16:16-16:20"
               },
               "tys": [],
-              "loc": "16:30-16:42"
+              "loc": "16:16-16:20"
             }
           },
           {
@@ -393,7 +393,7 @@
             "binder": {
               "type": "Binder",
               "name": "右",
-              "loc": "16:44-16:47"
+              "loc": "16:22-16:23"
             },
             "ty": {
               "type": "Type::Name",
@@ -403,20 +403,20 @@
                   "type": "LongIdent::Ident",
                   "0": "数字类型"
                 },
-                "loc": "16:49-16:61"
+                "loc": "16:25-16:29"
               },
               "tys": [],
-              "loc": "16:49-16:61"
+              "loc": "16:25-16:29"
             }
           }
         ],
-        "params_loc": "16:24-16:62",
+        "params_loc": "16:12-16:30",
         "quantifiers": [
           {
             "type": "TypeVarBinder",
             "name": "数字类型",
             "constraints": [],
-            "loc": "16:4-16:16"
+            "loc": "16:4-16:8"
           }
         ],
         "return_type": {
@@ -427,10 +427,10 @@
               "type": "LongIdent::Ident",
               "0": "数字类型"
             },
-            "loc": "16:66-16:78"
+            "loc": "16:34-16:38"
           },
           "tys": [],
-          "loc": "16:66-16:78"
+          "loc": "16:34-16:38"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
@@ -452,7 +452,7 @@
               "type": "LongIdent::Ident",
               "0": "+"
             },
-            "loc": "17:9-17:10"
+            "loc": "17:7-17:8"
           },
           "lhs": {
             "type": "Expr::Ident",
@@ -462,9 +462,9 @@
                 "type": "LongIdent::Ident",
                 "0": "左"
               },
-              "loc": "17:5-17:8"
+              "loc": "17:5-17:6"
             },
-            "loc": "17:5-17:8"
+            "loc": "17:5-17:6"
           },
           "rhs": {
             "type": "Expr::Ident",
@@ -474,11 +474,11 @@
                 "type": "LongIdent::Ident",
                 "0": "右"
               },
-              "loc": "17:11-17:14"
+              "loc": "17:9-17:10"
             },
-            "loc": "17:11-17:14"
+            "loc": "17:9-17:10"
           },
-          "loc": "17:5-17:14"
+          "loc": "17:5-17:10"
         }
       },
       "loc": "16:1-18:2"
@@ -491,7 +491,7 @@
         "name": {
           "type": "Binder",
           "name": "打印",
-          "loc": "20:7-20:13"
+          "loc": "20:7-20:9"
         },
         "has_error": null,
         "is_async": false,
@@ -501,7 +501,7 @@
             "binder": {
               "type": "Binder",
               "name": "self",
-              "loc": "20:14-20:18"
+              "loc": "20:10-20:14"
             },
             "ty": {
               "type": "Type::Name",
@@ -511,14 +511,14 @@
                   "type": "LongIdent::Ident",
                   "0": "T"
                 },
-                "loc": "20:20-20:21"
+                "loc": "20:16-20:17"
               },
               "tys": [],
-              "loc": "20:20-20:21"
+              "loc": "20:16-20:17"
             }
           }
         ],
-        "params_loc": "20:13-20:22",
+        "params_loc": "20:9-20:18",
         "quantifiers": [
           {
             "type": "TypeVarBinder",
@@ -617,7 +617,7 @@
             "0": {
               "type": "Binder",
               "name": "答案",
-              "loc": "25:9-25:15"
+              "loc": "25:9-25:11"
             }
           },
           "expr": {
@@ -630,9 +630,9 @@
                   "type": "LongIdent::Ident",
                   "0": "斐波那契数列"
                 },
-                "loc": "25:18-25:36"
+                "loc": "25:14-25:20"
               },
-              "loc": "25:18-25:36"
+              "loc": "25:14-25:20"
             },
             "args": [
               {
@@ -643,7 +643,7 @@
                     "type": "Constant::Int",
                     "0": "20"
                   },
-                  "loc": "25:37-25:39"
+                  "loc": "25:21-25:23"
                 },
                 "kind": {
                   "type": "ArgumentKind::Positional"
@@ -653,7 +653,7 @@
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": "25:18-25:40"
+            "loc": "25:14-25:24"
           },
           "body": {
             "type": "Expr::DotApply",
@@ -667,9 +667,9 @@
                     "type": "LongIdent::Ident",
                     "0": "相加"
                   },
-                  "loc": "26:5-26:11"
+                  "loc": "26:5-26:7"
                 },
-                "loc": "26:5-26:11"
+                "loc": "26:5-26:7"
               },
               "args": [
                 {
@@ -682,9 +682,9 @@
                         "type": "LongIdent::Ident",
                         "0": "答案"
                       },
-                      "loc": "26:12-26:18"
+                      "loc": "26:8-26:10"
                     },
-                    "loc": "26:12-26:18"
+                    "loc": "26:8-26:10"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -698,7 +698,7 @@
                       "type": "Constant::Int",
                       "0": "42"
                     },
-                    "loc": "26:20-26:22"
+                    "loc": "26:12-26:14"
                   },
                   "kind": {
                     "type": "ArgumentKind::Positional"
@@ -708,21 +708,21 @@
               "attr": {
                 "type": "ApplyAttr::NoAttr"
               },
-              "loc": "26:5-26:23"
+              "loc": "26:5-26:15"
             },
             "method_name": {
               "type": "Label",
               "name": "打印",
-              "loc": "26:24-26:30"
+              "loc": "26:16-26:18"
             },
             "args": [],
             "return_self": false,
             "attr": {
               "type": "ApplyAttr::NoAttr"
             },
-            "loc": "26:5-26:32"
+            "loc": "26:5-26:20"
           },
-          "loc": "25:5-26:32"
+          "loc": "25:5-26:20"
         }
       },
       "loc": "24:1-27:2"
