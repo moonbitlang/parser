@@ -11,9 +11,6 @@ pub fn gen_test(name : String) -> String {
 let root = "src/test/mbti_parser_test"
 
 ///|
-let snapshot_path : String = root + "/__snapshot__"
-
-///|
 let fixtures_path : String = root + "/fixtures"
 
 ///|
@@ -28,9 +25,7 @@ fn main {
     let buf = StringBuilder::new()
     for name in tests {
       buf
-      ..write_string(
-        gen_test(name.split(".").head().unwrap().to_string()),
-      )
+      ..write_string(gen_test(name.split(".").head().unwrap().to_string()))
       ..write_string("\n\n")
     }
     @fs.write_string_to_file(output, buf.to_string())

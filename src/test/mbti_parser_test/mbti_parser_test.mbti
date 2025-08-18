@@ -1,8 +1,7 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "moonbitlang/parser/test/mbti_parser_test/gen_test"
+package "moonbitlang/parser/test/mbti_parser_test"
 
 // Values
-fn gen_test(String) -> String
 
 // Errors
 
