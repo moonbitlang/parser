@@ -1,0 +1,52 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/core/buffer"
+
+import(
+  "moonbitlang/core/bytes"
+  "moonbitlang/core/string"
+)
+
+// Values
+fn from_array(Array[Byte]) -> T
+
+fn from_bytes(Bytes) -> T
+
+fn from_iter(Iter[Byte]) -> T
+
+fn new(size_hint? : Int) -> T
+
+// Errors
+
+// Types and methods
+type T
+fn T::contents(Self) -> Bytes
+fn T::is_empty(Self) -> Bool
+fn T::length(Self) -> Int
+fn T::reset(Self) -> Unit
+fn T::to_bytes(Self) -> Bytes
+fn T::write_byte(Self, Byte) -> Unit
+fn T::write_bytes(Self, Bytes) -> Unit
+fn T::write_bytesview(Self, @bytes.View) -> Unit
+fn T::write_double_be(Self, Double) -> Unit
+fn T::write_double_le(Self, Double) -> Unit
+fn T::write_float_be(Self, Float) -> Unit
+fn T::write_float_le(Self, Float) -> Unit
+fn T::write_int64_be(Self, Int64) -> Unit
+fn T::write_int64_le(Self, Int64) -> Unit
+fn T::write_int_be(Self, Int) -> Unit
+fn T::write_int_le(Self, Int) -> Unit
+fn T::write_iter(Self, Iter[Byte]) -> Unit
+fn T::write_object(Self, &Show) -> Unit
+fn T::write_stringview(Self, @string.StringView) -> Unit
+fn T::write_uint64_be(Self, UInt64) -> Unit
+fn T::write_uint64_le(Self, UInt64) -> Unit
+fn T::write_uint_be(Self, UInt) -> Unit
+fn T::write_uint_le(Self, UInt) -> Unit
+impl Logger for T
+impl Show for T
+
+// Type aliases
+pub typealias T as Buffer
+
+// Traits
+

@@ -1,0 +1,18 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/core/unit"
+
+// Values
+fn default() -> Unit
+
+// Errors
+
+// Types and methods
+fn Unit::to_string(Unit) -> String
+impl Compare for Unit
+impl Default for Unit
+impl Hash for Unit
+
+// Type aliases
+
+// Traits
+

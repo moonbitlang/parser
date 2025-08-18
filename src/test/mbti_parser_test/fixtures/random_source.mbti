@@ -1,0 +1,17 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/core/random/internal/random_source"
+
+// Values
+
+// Errors
+
+// Types and methods
+type ChaCha8
+fn ChaCha8::new(Bytes) -> Self
+fn ChaCha8::next(Self) -> UInt64?
+fn ChaCha8::refill(Self) -> Unit
+
+// Type aliases
+
+// Traits
+

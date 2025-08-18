@@ -1,0 +1,2442 @@
+{
+  "package_name": "moonbitlang/core/prelude",
+  "imports": [
+    {
+      "name": "moonbitlang/core/builtin"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "abort",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "T"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "assert_eq",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "msg",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "SourceLoc"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::DefaultErrorType",
+              "loc": null
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "Eq"
+                  },
+                  "loc": null
+                },
+                {
+                  "name": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "Show"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "assert_false",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "msg",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "SourceLoc"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::DefaultErrorType",
+              "loc": null
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "assert_not_eq",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "msg",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "SourceLoc"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::DefaultErrorType",
+              "loc": null
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "Eq"
+                  },
+                  "loc": null
+                },
+                {
+                  "name": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "Show"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "assert_true",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "msg",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "SourceLoc"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::DefaultErrorType",
+              "loc": null
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [
+            [
+              "deprecated",
+              null,
+              ""
+            ]
+          ],
+          "name": {
+            "name": "dump",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "name",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "SourceLoc"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "T"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "fail",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "SourceLoc"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "T"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::ErrorType",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "Failure"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "ignore",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "inspect",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Object",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "Show"
+                  },
+                  "loc": null
+                }
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "content",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "SourceLoc"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "args_loc",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "ArgsLoc"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::ErrorType",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "InspectError"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "not",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "panic",
+            "loc": null
+          },
+          "params": [],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "T"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "physical_equal",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "println",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "Show"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "repr",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "String"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Dot",
+                    "pkg": "builtin",
+                    "id": "Show"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "tap",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Arrow",
+                "args": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "T"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "res": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Unit"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "err": {
+                  "type": "ErrorType::NoErrorType"
+                },
+                "is_async": false,
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "T"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "then",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Arrow",
+                "args": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "T"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "res": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "R"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "err": {
+                  "type": "ErrorType::NoErrorType"
+                },
+                "is_async": false,
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "R"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": []
+            },
+            {
+              "name": {
+                "name": "R",
+                "loc": null
+              },
+              "constraints": []
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "ArgsLoc",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "ArgsLoc"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Array",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "Array"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "ArrayView",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "ArrayView"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "BigInt",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "moonbitlang/core/bigint",
+                "id": "BigInt"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Failure",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "Failure"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Hasher",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "Hasher"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "InspectError",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "InspectError"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Iter",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "Iter"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Iter2",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "Iter2"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "IterResult",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "IterResult"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Json",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "Json"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Map",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "Map"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "Set",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "moonbitlang/core/set",
+                "id": "Set"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "SnapshotError",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "SnapshotError"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "SourceLoc",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "SourceLoc"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "StringBuilder",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "StringBuilder"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "UninitializedArray",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "builtin",
+                "id": "UninitializedArray"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Add",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Add"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "BitAnd",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "BitAnd"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "BitOr",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "BitOr"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "BitXOr",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "BitXOr"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Compare",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Compare"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Default",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Default"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Div",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Div"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Eq",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Eq"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Hash",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Hash"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Logger",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Logger"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Mod",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Mod"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Mul",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Mul"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Neg",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Neg"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Shl",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Shl"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Show",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Show"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Shr",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Shr"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "Sub",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "Sub"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TraitAlias",
+          "name": {
+            "name": "ToJson",
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Dot",
+              "pkg": "builtin",
+              "id": "ToJson"
+            },
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ]
+  ]
+}

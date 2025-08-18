@@ -1,0 +1,34 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/core/int16"
+
+// Values
+let max_value : Int16
+
+let min_value : Int16
+
+// Errors
+
+// Types and methods
+fn Int16::abs(Int16) -> Int16
+fn Int16::reinterpret_as_uint16(Int16) -> UInt16
+impl Add for Int16
+impl BitAnd for Int16
+impl BitOr for Int16
+impl BitXOr for Int16
+impl Compare for Int16
+impl Default for Int16
+impl Div for Int16
+impl Eq for Int16
+impl Hash for Int16
+impl Mod for Int16
+impl Mul for Int16
+impl Neg for Int16
+impl Shl for Int16
+impl Shr for Int16
+impl Sub for Int16
+impl ToJson for Int16
+
+// Type aliases
+
+// Traits
+

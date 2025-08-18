@@ -1,0 +1,6770 @@
+{
+  "package_name": "moonbitlang/core/json",
+  "imports": [
+    {
+      "name": "moonbitlang/core/string"
+    }
+  ],
+  "sigs": [
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "from_json",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Json"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "path",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "JsonPath"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "T"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::ErrorType",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "JsonDecodeError"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ]
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "inspect",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Object",
+                "0": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "ToJson"
+                  },
+                  "loc": null
+                }
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "content",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Json"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "loc",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "SourceLoc"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Autofill",
+              "0": {
+                "type": "Label",
+                "name": "args_loc",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "ArgsLoc"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::ErrorType",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "InspectError"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "parse",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Json"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::ErrorType",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "ParseError"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "name": {
+            "name": "valid",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Bool"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "JsonDecodeError",
+            "loc": null
+          },
+          "type_params": [],
+          "components": {
+            "type": "TypeDesc::Error",
+            "0": {
+              "type": "ExceptionDecl::SinglePayload",
+              "0": {
+                "type": "Type::Tuple",
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "JsonPath"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "String"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              }
+            }
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": "all",
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "JsonDecodeError"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Eq"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "JsonDecodeError"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Show"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "JsonDecodeError"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "ToJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "ParseError",
+            "loc": null
+          },
+          "type_params": [],
+          "components": {
+            "type": "TypeDesc::Error",
+            "0": {
+              "type": "ExceptionDecl::EnumPayload",
+              "0": [
+                {
+                  "type": "ConstrDecl",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "InvalidChar",
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "ConstrParam",
+                      "ty": {
+                        "type": "Type::Name",
+                        "constr_id": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "LongIdent::Ident",
+                            "0": "Position"
+                          },
+                          "loc": null
+                        },
+                        "tys": [],
+                        "loc": null
+                      },
+                      "mut": false,
+                      "label": null
+                    },
+                    {
+                      "type": "ConstrParam",
+                      "ty": {
+                        "type": "Type::Name",
+                        "constr_id": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "LongIdent::Ident",
+                            "0": "Char"
+                          },
+                          "loc": null
+                        },
+                        "tys": [],
+                        "loc": null
+                      },
+                      "mut": false,
+                      "label": null
+                    }
+                  ],
+                  "tag": null,
+                  "attrs": [],
+                  "loc": null,
+                  "doc": ""
+                },
+                {
+                  "type": "ConstrDecl",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "InvalidEof",
+                    "loc": null
+                  },
+                  "args": null,
+                  "tag": null,
+                  "attrs": [],
+                  "loc": null,
+                  "doc": ""
+                },
+                {
+                  "type": "ConstrDecl",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "InvalidNumber",
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "ConstrParam",
+                      "ty": {
+                        "type": "Type::Name",
+                        "constr_id": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "LongIdent::Ident",
+                            "0": "Position"
+                          },
+                          "loc": null
+                        },
+                        "tys": [],
+                        "loc": null
+                      },
+                      "mut": false,
+                      "label": null
+                    },
+                    {
+                      "type": "ConstrParam",
+                      "ty": {
+                        "type": "Type::Name",
+                        "constr_id": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "LongIdent::Ident",
+                            "0": "String"
+                          },
+                          "loc": null
+                        },
+                        "tys": [],
+                        "loc": null
+                      },
+                      "mut": false,
+                      "label": null
+                    }
+                  ],
+                  "tag": null,
+                  "attrs": [],
+                  "loc": null,
+                  "doc": ""
+                },
+                {
+                  "type": "ConstrDecl",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "InvalidIdentEscape",
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "ConstrParam",
+                      "ty": {
+                        "type": "Type::Name",
+                        "constr_id": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "LongIdent::Ident",
+                            "0": "Position"
+                          },
+                          "loc": null
+                        },
+                        "tys": [],
+                        "loc": null
+                      },
+                      "mut": false,
+                      "label": null
+                    }
+                  ],
+                  "tag": null,
+                  "attrs": [],
+                  "loc": null,
+                  "doc": ""
+                }
+              ]
+            }
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": "all",
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "ParseError"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Eq"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "ParseError"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Show"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "ParseError"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "ToJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "JsonPath",
+            "loc": null
+          },
+          "type_params": [],
+          "components": {
+            "type": "TypeDesc::Abstract"
+          },
+          "vis": {
+            "type": "Visibility::Default"
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "JsonPath",
+            "loc": null
+          },
+          "name": {
+            "name": "add_index",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Self"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "JsonPath",
+            "loc": null
+          },
+          "name": {
+            "name": "add_key",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Self"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "JsonPath"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Eq"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "JsonPath"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Show"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "JsonPath"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "ToJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Type",
+        "0": {
+          "name": {
+            "name": "Position",
+            "loc": null
+          },
+          "type_params": [],
+          "components": {
+            "type": "TypeDesc::Record",
+            "0": [
+              {
+                "type": "FieldDecl",
+                "name": {
+                  "type": "FieldName",
+                  "label": "line",
+                  "loc": null
+                },
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Int"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "mut": false,
+                "vis": {
+                  "type": "Visibility::Default"
+                },
+                "loc": null,
+                "attrs": [],
+                "doc": ""
+              },
+              {
+                "type": "FieldDecl",
+                "name": {
+                  "type": "FieldName",
+                  "label": "column",
+                  "loc": null
+                },
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Int"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "mut": false,
+                "vis": {
+                  "type": "Visibility::Default"
+                },
+                "loc": null,
+                "attrs": [],
+                "doc": ""
+              }
+            ]
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": "all",
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Position"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Eq"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Position"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "ToJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": null
+          },
+          "name": {
+            "name": "as_array",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Array"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Self"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": null
+          },
+          "name": {
+            "name": "as_bool",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": null
+          },
+          "name": {
+            "name": "as_null",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Unit"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": null
+          },
+          "name": {
+            "name": "as_number",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Double"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": null
+          },
+          "name": {
+            "name": "as_object",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Map"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "String"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Self"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": null
+          },
+          "name": {
+            "name": "as_string",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": null
+          },
+          "name": {
+            "name": "item",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": null
+          },
+          "name": {
+            "name": "stringify",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "escape_slash",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "OptionalOption",
+              "0": {
+                "type": "Label",
+                "name": "indent",
+                "loc": null
+              },
+              "1": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "String"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Func",
+        "0": {
+          "attr": [],
+          "type_name": {
+            "name": "Json",
+            "loc": null
+          },
+          "name": {
+            "name": "value",
+            "loc": null
+          },
+          "params": [
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            },
+            {
+              "$tag": "Positional",
+              "0": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            }
+          ],
+          "return_": [
+            {
+              "type": "Type::Option",
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Self"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "loc": null,
+              "question_loc": null
+            },
+            {
+              "type": "ErrorType::NoErrorType"
+            }
+          ],
+          "type_params": []
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Json"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Show"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Json"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "ToJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Alias",
+        "0": {
+          "$tag": "TypeAlias",
+          "name": {
+            "name": "JsonValue",
+            "loc": null
+          },
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Json"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": null,
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Trait",
+        "0": {
+          "name": {
+            "name": "FromJson",
+            "loc": null
+          },
+          "super_traits": [],
+          "methods": [
+            {
+              "name": {
+                "name": "from_json",
+                "loc": null
+              },
+              "params": [
+                {
+                  "$tag": "Positional",
+                  "0": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Json"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                },
+                {
+                  "$tag": "Positional",
+                  "0": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "JsonPath"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                }
+              ],
+              "has_default": false,
+              "return_": [
+                {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                {
+                  "type": "ErrorType::ErrorType",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "JsonDecodeError"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                }
+              ]
+            }
+          ],
+          "vis": {
+            "type": "Visibility::Pub",
+            "attr": "open",
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Unit"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Bool"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Char"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Int"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Int64"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "UInt"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "UInt64"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Double"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "String"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Option",
+            "ty": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "T"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "loc": null,
+            "question_loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "Ok",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "Err",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Result"
+              },
+              "loc": null
+            },
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Ok"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Err"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "FixedArray"
+              },
+              "loc": null
+            },
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "X"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "X",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Array"
+              },
+              "loc": null
+            },
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "X"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Json"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "V",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Map"
+              },
+              "loc": null
+            },
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "String"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "V"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [],
+          "type_": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "string",
+                "id": "StringView"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "A"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "B"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "A"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "B"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "C"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "A"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "B"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "C"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "D"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "E",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "A"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "B"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "C"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "D"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "E"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "E",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "F",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "A"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "B"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "C"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "D"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "E"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "F"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "A",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "B",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "C",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "D",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "E",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "F",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "G",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "A"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "B"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "C"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "D"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "E"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "F"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "G"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T0"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T1"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T2"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T3"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T4"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T5"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T6"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T7"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T0"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T1"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T2"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T3"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T4"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T5"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T6"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T7"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T8"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T0"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T1"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T2"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T3"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T4"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T5"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T6"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T7"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T8"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T9"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T0"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T1"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T2"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T3"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T4"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T5"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T6"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T7"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T8"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T9"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T10"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T11",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T0"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T1"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T2"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T3"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T4"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T5"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T6"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T7"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T8"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T9"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T10"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T11"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T11",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T12",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T0"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T1"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T2"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T3"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T4"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T5"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T6"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T7"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T8"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T9"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T10"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T11"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T12"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T11",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T12",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T13",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T0"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T1"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T2"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T3"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T4"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T5"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T6"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T7"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T8"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T9"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T10"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T11"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T12"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T13"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T11",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T12",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T13",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T14",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T0"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T1"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T2"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T3"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T4"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T5"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T6"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T7"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T8"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T9"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T10"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T11"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T12"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T13"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T14"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "$tag": "Impl",
+        "0": {
+          "$tag": "Trait",
+          "type_params": [
+            {
+              "name": {
+                "name": "T0",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T1",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T2",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T3",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T4",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T5",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T6",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T7",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T8",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T9",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T10",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T11",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T12",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T13",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T14",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            },
+            {
+              "name": {
+                "name": "T15",
+                "loc": null
+              },
+              "constraints": [
+                {
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "FromJson"
+                  },
+                  "loc": null
+                }
+              ]
+            }
+          ],
+          "type_": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T0"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T1"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T2"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T3"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T4"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T5"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T6"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T7"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T8"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T9"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T10"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T11"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T12"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T13"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T14"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T15"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          "trait_name": {
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "FromJson"
+            },
+            "loc": null
+          }
+        }
+      },
+      null
+    ]
+  ]
+}

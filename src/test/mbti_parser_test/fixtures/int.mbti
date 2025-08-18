@@ -1,0 +1,20 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/core/int"
+
+// Values
+let max_value : Int
+
+let min_value : Int
+
+// Errors
+
+// Types and methods
+fn Int::abs(Int) -> Int
+fnalias Int::abs
+fn Int::to_be_bytes(Int) -> Bytes
+fn Int::to_le_bytes(Int) -> Bytes
+
+// Type aliases
+
+// Traits
+

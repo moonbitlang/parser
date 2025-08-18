@@ -1,0 +1,41 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/core/test"
+
+// Values
+#deprecated
+fn[T : Show + Eq] eq(T, T, loc~ : SourceLoc = _) -> Unit raise
+
+fn[T] fail(String, loc~ : SourceLoc = _) -> T raise
+
+#deprecated
+fn is_false(Bool, loc~ : SourceLoc = _) -> Unit raise
+
+fn[T : Show] is_not(T, T, loc~ : SourceLoc = _) -> Unit raise
+
+#deprecated
+fn is_true(Bool, loc~ : SourceLoc = _) -> Unit raise
+
+#deprecated
+fn[T : Show + Eq] ne(T, T, loc~ : SourceLoc = _) -> Unit raise
+
+fn new(String) -> T
+
+fn[T : Show] same_object(T, T, loc~ : SourceLoc = _) -> Unit raise
+
+// Errors
+
+// Types and methods
+pub(all) struct T {
+  name : String
+  buffer : StringBuilder
+}
+#deprecated
+fn T::bench(Self, () -> Unit, count? : UInt) -> Unit raise BenchError
+fn T::snapshot(Self, filename~ : String, loc~ : SourceLoc = _, args_loc~ : ArgsLoc = _) -> Unit raise SnapshotError
+fn T::write(Self, &Show) -> Unit
+fn T::writeln(Self, &Show) -> Unit
+
+// Type aliases
+
+// Traits
+

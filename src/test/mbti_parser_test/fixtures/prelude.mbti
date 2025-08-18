@@ -1,0 +1,118 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/core/prelude"
+
+import(
+  "moonbitlang/core/builtin"
+)
+
+// Values
+fn[T] abort(String) -> T
+
+fn[T : @builtin.Eq + @builtin.Show] assert_eq(T, T, msg? : String, loc~ : @builtin.SourceLoc = _) -> Unit raise
+
+fn assert_false(Bool, msg? : String, loc~ : @builtin.SourceLoc = _) -> Unit raise
+
+fn[T : @builtin.Eq + @builtin.Show] assert_not_eq(T, T, msg? : String, loc~ : @builtin.SourceLoc = _) -> Unit raise
+
+fn assert_true(Bool, msg? : String, loc~ : @builtin.SourceLoc = _) -> Unit raise
+
+#deprecated
+fn[T] dump(T, name? : String, loc~ : @builtin.SourceLoc = _) -> T
+
+fn[T] fail(String, loc~ : @builtin.SourceLoc = _) -> T raise @builtin.Failure
+
+fn[T] ignore(T) -> Unit
+
+fn inspect(&@builtin.Show, content? : String, loc~ : @builtin.SourceLoc = _, args_loc~ : @builtin.ArgsLoc = _) -> Unit raise @builtin.InspectError
+
+fn not(Bool) -> Bool
+
+fn[T] panic() -> T
+
+fn[T] physical_equal(T, T) -> Bool
+
+fn[T : @builtin.Show] println(T) -> Unit
+
+fn[T : @builtin.Show] repr(T) -> String
+
+fn[T] tap(T, (T) -> Unit) -> T
+
+fn[T, R] then(T, (T) -> R) -> R
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub typealias @builtin.ArgsLoc as ArgsLoc
+
+pub typealias @builtin.Array as Array
+
+pub typealias @builtin.ArrayView as ArrayView
+
+pub typealias @moonbitlang/core/bigint.BigInt as BigInt
+
+pub typealias @builtin.Failure as Failure
+
+pub typealias @builtin.Hasher as Hasher
+
+pub typealias @builtin.InspectError as InspectError
+
+pub typealias @builtin.Iter as Iter
+
+pub typealias @builtin.Iter2 as Iter2
+
+pub typealias @builtin.IterResult as IterResult
+
+pub typealias @builtin.Json as Json
+
+pub typealias @builtin.Map as Map
+
+pub typealias @moonbitlang/core/set.Set as Set
+
+pub typealias @builtin.SnapshotError as SnapshotError
+
+pub typealias @builtin.SourceLoc as SourceLoc
+
+pub typealias @builtin.StringBuilder as StringBuilder
+
+pub typealias @builtin.UninitializedArray as UninitializedArray
+
+pub traitalias @builtin.Add as Add
+
+pub traitalias @builtin.BitAnd as BitAnd
+
+pub traitalias @builtin.BitOr as BitOr
+
+pub traitalias @builtin.BitXOr as BitXOr
+
+pub traitalias @builtin.Compare as Compare
+
+pub traitalias @builtin.Default as Default
+
+pub traitalias @builtin.Div as Div
+
+pub traitalias @builtin.Eq as Eq
+
+pub traitalias @builtin.Hash as Hash
+
+pub traitalias @builtin.Logger as Logger
+
+pub traitalias @builtin.Mod as Mod
+
+pub traitalias @builtin.Mul as Mul
+
+pub traitalias @builtin.Neg as Neg
+
+pub traitalias @builtin.Shl as Shl
+
+pub traitalias @builtin.Show as Show
+
+pub traitalias @builtin.Shr as Shr
+
+pub traitalias @builtin.Sub as Sub
+
+pub traitalias @builtin.ToJson as ToJson
+
+// Traits
+

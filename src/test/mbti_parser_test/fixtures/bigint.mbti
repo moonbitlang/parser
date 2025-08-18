@@ -1,0 +1,69 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/core/bigint"
+
+import(
+  "moonbitlang/core/json"
+)
+
+// Values
+
+// Errors
+
+// Types and methods
+type BigInt
+#deprecated
+fn BigInt::asr(Self, Int) -> Self
+fn BigInt::bit_length(Self) -> Int
+fn BigInt::compare_int(Self, Int) -> Int
+fn BigInt::compare_int64(Self, Int64) -> Int
+fn BigInt::ctz(Self) -> Int
+fn BigInt::equal_int(Self, Int) -> Bool
+fn BigInt::equal_int64(Self, Int64) -> Bool
+fn BigInt::from_hex(String) -> Self
+fn BigInt::from_int(Int) -> Self
+fn BigInt::from_int64(Int64) -> Self
+fn BigInt::from_octets(Bytes, signum? : Int) -> Self
+fn BigInt::from_string(String) -> Self
+fn BigInt::from_uint(UInt) -> Self
+fn BigInt::from_uint64(UInt64) -> Self
+fn BigInt::is_zero(Self) -> Bool
+#deprecated
+fn BigInt::lsl(Self, Int) -> Self
+fn BigInt::pow(Self, Self, modulus? : Self) -> Self
+#deprecated
+fn BigInt::shl(Self, Int) -> Self
+#deprecated
+fn BigInt::shr(Self, Int) -> Self
+fn BigInt::to_hex(Self, uppercase? : Bool) -> String
+fn BigInt::to_int(Self) -> Int
+fn BigInt::to_int16(Self) -> Int16
+fn BigInt::to_int64(Self) -> Int64
+fn BigInt::to_octets(Self, length? : Int) -> Bytes
+fn BigInt::to_string(Self) -> String
+fn BigInt::to_uint(Self) -> UInt
+fn BigInt::to_uint16(Self) -> UInt16
+fn BigInt::to_uint64(Self) -> UInt64
+impl Add for BigInt
+impl BitAnd for BigInt
+impl BitOr for BigInt
+impl BitXOr for BigInt
+impl Compare for BigInt
+impl Default for BigInt
+impl Div for BigInt
+impl Eq for BigInt
+impl Hash for BigInt
+impl Mod for BigInt
+impl Mul for BigInt
+impl Neg for BigInt
+impl Shl for BigInt
+impl Show for BigInt
+impl Shr for BigInt
+impl Sub for BigInt
+impl ToJson for BigInt
+impl @json.FromJson for BigInt
+impl @moonbitlang/core/quickcheck.Arbitrary for BigInt
+
+// Type aliases
+
+// Traits
+

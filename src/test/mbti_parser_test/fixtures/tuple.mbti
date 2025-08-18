@@ -1,0 +1,54 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/core/tuple"
+
+import(
+  "moonbitlang/core/quickcheck"
+)
+
+// Values
+#deprecated
+fn[T, U, V] curry((T, U) -> V) -> (T) -> (U) -> V
+
+#deprecated
+fn[T, U] fst((T, U)) -> T
+
+#deprecated
+fn[T, U, V, W] map_both((T) -> U, (V) -> W, (T, V)) -> (U, W)
+
+#deprecated
+fn[T, U, V] map_fst((T) -> U, (T, V)) -> (U, V)
+
+#deprecated
+fn[T, U, V] map_snd((T) -> U, (V, T)) -> (V, U)
+
+#deprecated
+fn[T, U] pair(T, U) -> (T, U)
+
+#deprecated
+fn[T, U] snd((T, U)) -> U
+
+#deprecated
+fn[T, U] swap((T, U)) -> (U, T)
+
+#deprecated
+fn[T, U, V] uncurry((T) -> (U) -> V) -> (T, U) -> V
+
+// Errors
+
+// Types and methods
+impl[A : @quickcheck.Arbitrary, B : @quickcheck.Arbitrary] @quickcheck.Arbitrary for (A, B)
+
+impl[A : @quickcheck.Arbitrary, B : @quickcheck.Arbitrary, C : @quickcheck.Arbitrary] @quickcheck.Arbitrary for (A, B, C)
+
+impl[A : @quickcheck.Arbitrary, B : @quickcheck.Arbitrary, C : @quickcheck.Arbitrary, D : @quickcheck.Arbitrary] @quickcheck.Arbitrary for (A, B, C, D)
+
+impl[A : @quickcheck.Arbitrary, B : @quickcheck.Arbitrary, C : @quickcheck.Arbitrary, D : @quickcheck.Arbitrary, E : @quickcheck.Arbitrary] @quickcheck.Arbitrary for (A, B, C, D, E)
+
+impl[A : @quickcheck.Arbitrary, B : @quickcheck.Arbitrary, C : @quickcheck.Arbitrary, D : @quickcheck.Arbitrary, E : @quickcheck.Arbitrary, F : @quickcheck.Arbitrary] @quickcheck.Arbitrary for (A, B, C, D, E, F)
+
+impl[A : @quickcheck.Arbitrary, B : @quickcheck.Arbitrary, C : @quickcheck.Arbitrary, D : @quickcheck.Arbitrary, E : @quickcheck.Arbitrary, F : @quickcheck.Arbitrary, G : @quickcheck.Arbitrary] @quickcheck.Arbitrary for (A, B, C, D, E, F, G)
+
+// Type aliases
+
+// Traits
+
