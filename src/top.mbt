@@ -5,7 +5,7 @@ typealias @basic.Location
 typealias @tokens.Comment
 
 ///|
-typealias @list.T as List
+typealias @list.List
 
 ///|
 typealias @basic.Position
