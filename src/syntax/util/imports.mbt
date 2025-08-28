@@ -1,7 +1,9 @@
-///| Import types from ast_types package
+///|
+/// Import types from ast_types package
 typealias @basic.Location
 
-///| Import AST types 
+///|
+/// Import AST types 
 typealias @syntax.(Binder, Expr, Func, Type, Pattern)
 
 ///|

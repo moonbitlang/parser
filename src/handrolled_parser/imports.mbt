@@ -1,7 +1,9 @@
-///| Import types from ast_types package
+///|
+/// Import types from ast_types package
 typealias @basic.(Location, Position, Report)
 
-///| Import AST types 
+///|
+/// Import AST types 
 typealias @syntax.(Impls, DocString)
 
 ///|

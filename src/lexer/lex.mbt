@@ -7,9 +7,9 @@ pub struct LexResult {
 
 ///|
 pub fn tokens_from_string(
-  name~ : String = "",
-  start_pos~ : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
-  is_interpolation~ : Bool = false,
+  name? : String = "",
+  start_pos? : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
+  is_interpolation? : Bool = false,
   comment~ : Bool,
   str : String,
 ) -> LexResult {
@@ -45,9 +45,9 @@ pub fn tokens_from_string(
 
 ///|
 pub fn tokens_from_string_with_utf16_location(
-  name~ : String = "",
-  start_pos~ : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
-  is_interpolation~ : Bool = false,
+  name? : String = "",
+  start_pos? : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
+  is_interpolation? : Bool = false,
   comment~ : Bool,
   str : String,
 ) -> LexResult {

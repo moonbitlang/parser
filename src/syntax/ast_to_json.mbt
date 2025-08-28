@@ -6,7 +6,7 @@ pub impl ToJson for Label with to_json(self) {
   { "type": "Label", "name": self.name, "loc": self.loc.to_json() }
 }
 
-///| 
+///|
 // Helper function to convert optional values to JSON
 fn[T : ToJson] option_to_json(opt : T?) -> Json {
   match opt {
@@ -23,7 +23,7 @@ fn[T : ToJson] list_to_json(list : @list.List[T]) -> Json {
   Json::array(array)
 }
 
-///| 
+///|
 // Helper function to convert tuples to JSON arrays
 fn[A : ToJson, B : ToJson] tuple_to_json(tuple : (A, B)) -> Json {
   let (a, b) = tuple

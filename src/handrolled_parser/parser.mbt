@@ -2316,7 +2316,8 @@ priv enum Assocativity {
   Right
 }
 
-///| suppress the `Right is never used` warning
+///|
+/// suppress the `Right is never used` warning
 test {
   let r = Right
   match r {
@@ -4716,7 +4717,8 @@ fn State::parse_type(self : Self) -> @syntax.Type {
   ty
 }
 
-///| The bool indicates whether the type is a simple type.
+///|
+/// The bool indicates whether the type is a simple type.
 fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
   if self.mode is Panic(loc~, ..) {
     return (false, @syntax.Type::Any(loc~))

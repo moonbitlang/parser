@@ -7,7 +7,8 @@ priv enum Mode {
 ///|
 let dummy_pos : Position = { fname: "", lnum: 0, bol: 0, cnum: 0 }
 
-///| suppress the `fail_at is unused` warning
+///|
+/// suppress the `fail_at is unused` warning
 test {
   match
     Panic(fail_at=TK_AMPER, sync_at=1, loc={ start: dummy_pos, end: dummy_pos }) {
@@ -52,11 +53,12 @@ fn inidex_of_token_kind(xs : Array[TokenKind], kind : TokenKind) -> Int? {
   None
 }
 
-///| Peek the nth token in the state.
+///|
+/// Peek the nth token in the state.
 /// 
 /// peek(nth=0) returns the next not consumed token
 /// peek(nth=1) returns the next token after the next not consumed token
-fn State::peek(state : Self, nth~ : Int = 0) -> Triple {
+fn State::peek(state : Self, nth? : Int = 0) -> Triple {
   let mut ofs = 0
   let mut step = 0
   while state.tokens.get(state.next + ofs) is Some((token, _, _) as triple) {
@@ -95,22 +97,22 @@ fn State::consume(state : Self) -> Triple {
 }
 
 ///|
-fn State::peek_token(state : Self, nth~ : Int = 0) -> Token {
+fn State::peek_token(state : Self, nth? : Int = 0) -> Token {
   state.peek(nth~).0
 }
 
 ///|
-fn State::peek_kind(state : Self, nth~ : Int = 0) -> TokenKind {
+fn State::peek_kind(state : Self, nth? : Int = 0) -> TokenKind {
   state.peek(nth~).0.kind()
 }
 
 ///|
-fn State::peek_spos(state : Self, nth~ : Int = 0) -> Position {
+fn State::peek_spos(state : Self, nth? : Int = 0) -> Position {
   state.peek(nth~).1
 }
 
 ///|
-fn State::peek_epos(state : Self, nth~ : Int = 0) -> Position {
+fn State::peek_epos(state : Self, nth? : Int = 0) -> Position {
   state.peek(nth~).2
 }
 
@@ -139,7 +141,8 @@ fn State::previous_triple(state : Self) -> Triple {
   }
 }
 
-///| Enter the panic mode. 
+///|
+/// Enter the panic mode. 
 /// This function will record the panic position and trying to find out 
 /// a reocver position and sync token immediately.
 fn State::panic(state : Self) -> Location {
@@ -174,7 +177,8 @@ fn State::panic(state : Self) -> Location {
   }
 }
 
-///| Set the state to normal mode.
+///|
+/// Set the state to normal mode.
 fn State::recover(state : Self) -> Unit {
   match state.mode {
     Normal => abort("Cannot recover from normal mode")
@@ -467,7 +471,8 @@ fn[A] State::optional(
   }
 }
 
-///| Parse a list of elements separated by a delimiter. 
+///|
+/// Parse a list of elements separated by a delimiter. 
 /// The trailing delimiter is optional.
 fn[A] State::delimited(
   self : Self,
@@ -495,7 +500,8 @@ fn[A] State::delimited(
   }
 }
 
-///| Parse a list of elements separated by a delimiter, with at least one element.
+///|
+/// Parse a list of elements separated by a delimiter, with at least one element.
 /// The trailing delimiter is optional.
 fn[A] State::delimited1(
   self : Self,
@@ -563,9 +569,9 @@ fn[A] State::with_follow(
 ///|
 fn[A] State::delimited_with_follow(
   self : Self,
-  invalid_delims~ : Array[TokenKind] = [],
+  invalid_delims? : Array[TokenKind] = [],
   delim~ : TokenKind,
-  follow_set~ : Array[TokenKind] = [],
+  follow_set? : Array[TokenKind] = [],
   f : (State) -> A,
 ) -> (Array[A], Bool) {
   fn try_recover_to_delim() {
@@ -628,7 +634,7 @@ fn[A] State::delimited_with_follow(
 ///|
 fn[A] State::surround_delimited(
   self : Self,
-  invalid_delims~ : Array[TokenKind] = [],
+  invalid_delims? : Array[TokenKind] = [],
   left~ : TokenKind,
   right~ : TokenKind,
   delim~ : TokenKind,

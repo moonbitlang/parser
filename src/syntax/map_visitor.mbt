@@ -1,6 +1,6 @@
 ///|
 pub(open) trait ImplMapVisitor {
-  base(Self) ->  MapVisitorBase[Self] = _
+  base(Self) -> MapVisitorBase[Self] = _
   visit_impl(Self, Impl) -> Impl = _
   visit_top_expr(
     Self,
@@ -338,9 +338,10 @@ pub(open) trait ImplMapVisitor {
   ) -> Expr = _
 }
 
+///|
 impl ImplMapVisitor with base(self) -> MapVisitorBase[Self] {
   MapVisitorBase::MapVisitorBase(self)
-} 
+}
 
 ///|
 impl ImplMapVisitor with visit_impl(env, impl_) {

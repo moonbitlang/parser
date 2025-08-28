@@ -7,7 +7,8 @@ typealias @tokens.(Comment, CharLiteral, StringLiteral, InterpLiteral)
 ///|
 typealias @tokens.(Token, TokenKind)
 
-///| Import AST types 
+///|
+/// Import AST types 
 typealias @syntax.(
   Constant,
   Case,

@@ -1,25 +1,30 @@
-///| MoonBit parsing utilities - translated from OCaml parsing_util.ml
+///|
+/// MoonBit parsing utilities - translated from OCaml parsing_util.ml
 // Translated from src/ast/parsing_util.ml
 
 // Global counter for generating unique variable names
 let counter : Ref[Int] = Ref::new(0)
 
-///| Create constant expression with location
+///|
+/// Create constant expression with location
 pub fn make_constant_expr(loc~ : Location, c : Constant) -> Expr {
   Constant(c~, loc~)
 }
 
-///| Create identifier expression
+///|
+/// Create identifier expression
 pub fn make_ident_expr(loc~ : Location, id : Var) -> Expr {
   Ident(id~, loc~)
 }
 
-///| Create tuple expression
+///|
+/// Create tuple expression
 pub fn make_tuple_expr(loc~ : Location, exprs : @list.List[Expr]) -> Expr {
   Tuple(exprs~, loc~)
 }
 
-///| Create array expression with possible spread elements
+///|
+/// Create array expression with possible spread elements
 pub fn make_array_expr(
   loc~ : Location,
   elems : @list.List[SpreadableElem],
@@ -37,7 +42,8 @@ pub fn make_array_expr(
   }
 }
 
-///| Create interpolation elements from literal components
+///|
+/// Create interpolation elements from literal components
 pub fn make_interps(c : @tokens.InterpLiteral) -> @list.List[InterpElem] {
   let result = c.map(fn(lit) {
     match lit {
@@ -48,13 +54,15 @@ pub fn make_interps(c : @tokens.InterpLiteral) -> @list.List[InterpElem] {
   @list.from_array(result)
 }
 
-///| Create interpolation expression
+///|
+/// Create interpolation expression
 pub fn make_interp_expr(loc~ : Location, c : @tokens.InterpLiteral) -> Expr {
   let elems = make_interps(c)
   Interp(elems~, loc~)
 }
 
-///| Create record expression
+///|
+/// Create record expression
 pub fn make_record_expr(
   loc~ : Location,
   trailing~ : TrailingMark,
@@ -64,7 +72,8 @@ pub fn make_record_expr(
   Record(type_name~, fields~, trailing~, loc~)
 }
 
-///| Create alias pattern
+///|
+/// Create alias pattern
 pub fn make_alias_pattern(
   loc~ : Location,
   pat : Pattern,
@@ -73,12 +82,14 @@ pub fn make_alias_pattern(
   Alias(pat~, alias_~, loc~)
 }
 
-///| Create constant pattern
+///|
+/// Create constant pattern
 pub fn make_constant_pattern(loc~ : Location, c : Constant) -> Pattern {
   Constant(c~, loc~)
 }
 
-///| Create tuple pattern
+///|
+/// Create tuple pattern
 pub fn make_tuple_pattern(
   loc~ : Location,
   pats : @list.List[Pattern],
@@ -86,7 +97,8 @@ pub fn make_tuple_pattern(
   Tuple(pats~, loc~)
 }
 
-///| Create constructor pattern
+///|
+/// Create constructor pattern
 pub fn make_constr_pattern(
   loc~ : Location,
   constr : Constructor,
@@ -96,12 +108,14 @@ pub fn make_constr_pattern(
   Constr(constr~, args~, is_open~, loc~)
 }
 
-///| Create tuple type
+///|
+/// Create tuple type
 pub fn make_tuple_type(loc~ : Location, tys : @list.List[Type]) -> Type {
   Tuple(tys~, loc~)
 }
 
-///| Create option type
+///|
+/// Create option type
 pub fn make_option_type(
   loc~ : Location,
   constr_loc~ : Location,
@@ -110,7 +124,8 @@ pub fn make_option_type(
   Option(ty~, loc~, question_loc=constr_loc)
 }
 
-///| Create field pattern
+///|
+/// Create field pattern
 pub fn make_field_pat(
   loc~ : Location,
   label : Label,
@@ -120,7 +135,8 @@ pub fn make_field_pat(
   FieldPat::{ label, pattern, is_pun, loc }
 }
 
-///| Create unary plus expression
+///|
+/// Create unary plus expression
 pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
   match (name, arg) {
     ("+", Constant(c=Constant::Int(_), loc=_)) => arg
@@ -140,7 +156,8 @@ pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
   }
 }
 
-///| Create unary minus expression
+///|
+/// Create unary minus expression
 pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
   match (name, arg) {
     ("-", Constant(c=Constant::Int(x), loc=_)) => {
@@ -174,7 +191,8 @@ pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
   }
 }
 
-///| Create logical not expression
+///|
+/// Create logical not expression
 pub fn make_unot(loc~ : Location, arg : Expr) -> Expr {
   let op = Var::{ name: Ident(name="!"), loc }
   Unary(op~, expr=arg, loc~)
@@ -188,7 +206,8 @@ pub fn bracket_loc(index : Expr) -> Location {
   Location::{ start, end }
 }
 
-///| Desugar array get operation to method call
+///|
+/// Desugar array get operation to method call
 pub fn desugar_array_get(loc~ : Location, obj : Expr, index : Expr) -> Expr {
   DotApply(
     self=obj,
@@ -205,7 +224,8 @@ pub fn desugar_array_get(loc~ : Location, obj : Expr, index : Expr) -> Expr {
   )
 }
 
-///| Desugar array set operation to method call
+///|
+/// Desugar array set operation to method call
 pub fn desugar_array_set(
   loc~ : Location,
   obj : Expr,
@@ -228,7 +248,8 @@ pub fn desugar_array_set(
   )
 }
 
-///| Desugar augmented array assignment
+///|
+/// Desugar augmented array assignment
 pub fn desugar_array_augmented_set(
   loc : Location,
   op : Var,
@@ -271,7 +292,8 @@ pub fn desugar_array_augmented_set(
   )
 }
 
-///| Try to create assignment expression
+///|
+/// Try to create assignment expression
 pub fn make_assign_opt(loc~ : Location, lhs : Expr, rhs : Expr) -> Expr? {
   match lhs {
     Ident(id~, loc=_) =>
@@ -284,7 +306,8 @@ pub fn make_assign_opt(loc~ : Location, lhs : Expr, rhs : Expr) -> Expr? {
   }
 }
 
-///| Try to create augmented assignment expression
+///|
+/// Try to create augmented assignment expression
 pub fn make_augmented_assign_opt(
   loc~ : Location,
   op : Var,
@@ -302,7 +325,8 @@ pub fn make_augmented_assign_opt(
   }
 }
 
-///| Create field definition
+///|
+/// Create field definition
 pub fn make_field_def(
   loc~ : Location,
   label : Label,
@@ -312,17 +336,20 @@ pub fn make_field_def(
   FieldDef::{ label, expr, is_pun, loc }
 }
 
-///| Convert label to expression
+///|
+/// Convert label to expression
 pub fn label_to_expr(loc~ : Location, label : Label) -> Expr {
   make_ident_expr(loc~, Var::{ name: Ident(name=label.name), loc })
 }
 
-///| Convert label to pattern
+///|
+/// Convert label to pattern
 pub fn label_to_pat(loc~ : Location, label : Label) -> Pattern {
   Pattern::Var(Binder::{ name: label.name, loc })
 }
 
-///| Parse integer literal with suffix
+///|
+/// Parse integer literal with suffix
 pub fn make_int(i : String) -> Constant {
   if i.has_suffix("L") {
     let base = i.substring(end=i.length() - 1)
@@ -343,12 +370,14 @@ pub fn make_int(i : String) -> Constant {
   }
 }
 
-///| Create double constant
+///|
+/// Create double constant
 pub fn make_double(f : String) -> Constant {
   Constant::Double(f)
 }
 
-///| Create float constant
+///|
+/// Create float constant
 pub fn make_float(f : String) -> Constant {
   if f.has_suffix("F") {
     let base = f.substring(end=f.length() - 1)
@@ -375,18 +404,21 @@ pub fn make_attribute(
   // let tokens = @lexer.tokens_from_bytes(is_interpolation = false, comment = false, raw_payload).tokens
 }
 
-///| Arrow function parameter type
+///|
+/// Arrow function parameter type
 pub(all) enum ArrowFnParam {
   Named(Binder)
   Unnamed(Location)
 }
 
-///| Convert binder to expression
+///|
+/// Convert binder to expression
 pub fn binder_to_expr(p : Binder) -> Expr {
   make_ident_expr(loc=p.loc, Var::{ name: Ident(name=p.name), loc: p.loc })
 }
 
-///| Convert arrow function parameter to expression
+///|
+/// Convert arrow function parameter to expression
 pub fn arrow_fn_param_to_expr(p : ArrowFnParam) -> Expr {
   match p {
     Named(b) => binder_to_expr(b)
@@ -394,7 +426,8 @@ pub fn arrow_fn_param_to_expr(p : ArrowFnParam) -> Expr {
   }
 }
 
-///| Create arrow function
+///|
+/// Create arrow function
 pub fn make_arrow_fn(
   params : @list.List[(ArrowFnParam, Type?)],
   body : Expr,

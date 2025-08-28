@@ -40,7 +40,8 @@ pub(all) enum LongIdent {
   Dot(pkg~ : String, id~ : String)
 }
 
-///| The dummy LongIdent is used in typer to represent an parsing error.
+///|
+/// The dummy LongIdent is used in typer to represent an parsing error.
 pub fn LongIdent::dummy() -> LongIdent {
   Ident(name="")
 }
