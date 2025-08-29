@@ -322,7 +322,7 @@ pub(all) enum TokenKind {
   TK_NORAISE
   TK_TRY_QUESTION
   TK_TRY_EXCLAMATION
-} derive(Eq)
+} derive(Eq, Hash, Compare)
 
 ///|
 pub impl Show for TokenKind with output(self, logger) {

@@ -832,7 +832,7 @@ fn yy_action_2(
 }
 
 // file:///./parser.mbty
-// 920|     { None }
+// 922|     { None }
 
 ///|
 fn yy_action_3(
@@ -848,7 +848,7 @@ fn yy_action_3(
 }
 
 // file:///./parser.mbty
-// 734|    ATTRIBUTE { make_attribute(loc=mk_loc($sloc), id = $1.0, dot_id = $1.1, raw_payload = $1.2) }
+// 736|    ATTRIBUTE { make_attribute(loc=mk_loc($sloc), id = $1.0, dot_id = $1.1, raw_payload = $1.2) }
 
 ///|
 fn yy_action_4(
@@ -892,23 +892,23 @@ fn yy_action_5(
 }
 
 // file:///./parser.mbty
-// 709|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
-// 710|    TopView(
-// 711|      quantifiers = $4,
-// 712|      source_ty = $10,
-// 713|      view_type_name = $5,
-// 714|      view_type_loc = mk_loc($loc($5)),
-// 715|      view_func_name = $12,
-// 716|      parameters = $13,
-// 717|      params_loc = mk_loc($loc($13)),
-// 718|      view_constrs = $7,
-// 719|      body = $14,
-// 720|      vis = $2,
-// 721|      loc = mk_loc($sloc),
-// 722|      attrs = $1,
-// 723|      doc = DocString::empty()
-// 724|    )
-// 725|  }
+// 711|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
+// 712|    TopView(
+// 713|      quantifiers = $4,
+// 714|      source_ty = $10,
+// 715|      view_type_name = $5,
+// 716|      view_type_loc = mk_loc($loc($5)),
+// 717|      view_func_name = $12,
+// 718|      parameters = $13,
+// 719|      params_loc = mk_loc($loc($13)),
+// 720|      view_constrs = $7,
+// 721|      body = $14,
+// 722|      vis = $2,
+// 723|      loc = mk_loc($sloc),
+// 724|      attrs = $1,
+// 725|      doc = DocString::empty()
+// 726|    )
+// 727|  }
 
 ///|
 fn yy_action_6(
@@ -960,7 +960,7 @@ fn yy_action_6(
 }
 
 // file:///./parser.mbty
-// 1277|    "_" "," arrow_fn_prefix_no_constraint { $3.add(Unnamed(mk_loc($loc($1)))) }
+// 1279|    "_" "," arrow_fn_prefix_no_constraint { $3.add(Unnamed(mk_loc($loc($1)))) }
 
 ///|
 fn yy_action_10(
@@ -979,7 +979,7 @@ fn yy_action_10(
 }
 
 // file:///./parser.mbty
-// 211|    { @list.empty() }
+// 213|    { @list.empty() }
 
 ///|
 fn yy_action_11(
@@ -995,17 +995,17 @@ fn yy_action_11(
 }
 
 // file:///./parser.mbty
-// 1840|    attributes visibility option("mut") LIDENT ":" type_ { 
-// 1841|    FieldDecl::{
-// 1842|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
-// 1843|      ty: $6,
-// 1844|      mut_: $3 is Some(_),
-// 1845|      vis: $2,
-// 1846|      loc: mk_loc($sloc),
-// 1847|      attrs: $1,
-// 1848|      doc: DocString::empty()
-// 1849|    }
-// 1850|  }
+// 1842|    attributes visibility option("mut") LIDENT ":" type_ { 
+// 1843|    FieldDecl::{
+// 1844|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
+// 1845|      ty: $6,
+// 1846|      mut_: $3 is Some(_),
+// 1847|      vis: $2,
+// 1848|      loc: mk_loc($sloc),
+// 1849|      attrs: $1,
+// 1850|      doc: DocString::empty()
+// 1851|    }
+// 1852|  }
 
 ///|
 fn yy_action_12(
@@ -1047,7 +1047,7 @@ fn yy_action_12(
 }
 
 // file:///./parser.mbty
-// 892|    LIDENT { Ident(name = $1) }
+// 894|    LIDENT { Ident(name = $1) }
 
 ///|
 fn yy_action_15(
@@ -1064,7 +1064,7 @@ fn yy_action_15(
 }
 
 // file:///./parser.mbty
-// 1558|    "_" { TypeDeclBinder::{ name: None, loc: mk_loc($sloc) } }
+// 1560|    "_" { TypeDeclBinder::{ name: None, loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_16(
@@ -1086,7 +1086,7 @@ fn yy_action_16(
 }
 
 // file:///./parser.mbty
-// 1925|   fpat_label_pun { $1 }
+// 1927|   fpat_label_pun { $1 }
 
 ///|
 fn yy_action_17(
@@ -1104,13 +1104,13 @@ fn yy_action_17(
 }
 
 // file:///./parser.mbty
-// 1808|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
-// 1809|    Name(
-// 1810|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 1811|      tys = $2,
-// 1812|      loc = mk_loc($sloc)
-// 1813|    )
-// 1814|  }
+// 1810|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
+// 1811|    Name(
+// 1812|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 1813|      tys = $2,
+// 1814|      loc = mk_loc($sloc)
+// 1815|    )
+// 1816|  }
 
 ///|
 fn yy_action_19(
@@ -1145,7 +1145,7 @@ fn yy_action_19(
 }
 
 // file:///./parser.mbty
-// 1381|    binder "," non_empty_tuple_elems_with_prefix { $3.add(@syntax.binder_to_expr($1)) }
+// 1383|    binder "," non_empty_tuple_elems_with_prefix { $3.add(@syntax.binder_to_expr($1)) }
 
 ///|
 fn yy_action_22(
@@ -1164,7 +1164,7 @@ fn yy_action_22(
 }
 
 // file:///./parser.mbty
-// 897|    LIDENT %prec prec_apply_non_ident_fn { Ident(name = $1) }
+// 899|    LIDENT %prec prec_apply_non_ident_fn { Ident(name = $1) }
 
 ///|
 fn yy_action_23(
@@ -1181,15 +1181,15 @@ fn yy_action_23(
 }
 
 // file:///./parser.mbty
-// 1426|    is_async fn_header_no_binder list_semis(multi_pattern_case) "}" { 
-// 1427|    Match(
-// 1428|      cases = $3,
-// 1429|      has_error = $2,
-// 1430|      is_async = $1,
-// 1431|      fn_loc = mk_loc($loc($2)),
-// 1432|      loc = mk_loc($sloc)
-// 1433|    )
-// 1434|  }
+// 1428|    is_async fn_header_no_binder list_semis(multi_pattern_case) "}" { 
+// 1429|    Match(
+// 1430|      cases = $3,
+// 1431|      has_error = $2,
+// 1432|      is_async = $1,
+// 1433|      fn_loc = mk_loc($loc($2)),
+// 1434|      loc = mk_loc($sloc)
+// 1435|    )
+// 1436|  }
 
 ///|
 fn yy_action_24(
@@ -1223,7 +1223,7 @@ fn yy_action_24(
 }
 
 // file:///./parser.mbty
-// 167|    { @list.empty() }
+// 169|    { @list.empty() }
 
 ///|
 fn yy_action_26(
@@ -1239,7 +1239,7 @@ fn yy_action_26(
 }
 
 // file:///./parser.mbty
-// 1915|    label { @syntax.make_field_def(loc = mk_loc($sloc), $1, @syntax.label_to_expr(loc = mk_loc($sloc), $1), true) }
+// 1917|    label { @syntax.make_field_def(loc = mk_loc($sloc), $1, @syntax.label_to_expr(loc = mk_loc($sloc), $1), true) }
 
 ///|
 fn yy_action_27(
@@ -1271,7 +1271,7 @@ fn yy_action_27(
 }
 
 // file:///./parser.mbty
-// 1383|    non_empty_tuple_elems { $1 }
+// 1385|    non_empty_tuple_elems { $1 }
 
 ///|
 fn yy_action_29(
@@ -1288,7 +1288,7 @@ fn yy_action_29(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_30(
@@ -1305,7 +1305,7 @@ fn yy_action_30(
 }
 
 // file:///./parser.mbty
-// 1750|    array_sub_pattern { Closed(@list.singleton($1)) }
+// 1752|    array_sub_pattern { Closed(@list.singleton($1)) }
 
 ///|
 fn yy_action_31(
@@ -1322,7 +1322,7 @@ fn yy_action_31(
 }
 
 // file:///./parser.mbty
-// 212|    non_empty_list_semis(X) { $1 }
+// 214|    non_empty_list_semis(X) { $1 }
 
 ///|
 fn yy_action_32(
@@ -1339,11 +1339,11 @@ fn yy_action_32(
 }
 
 // file:///./parser.mbty
-// 793|    LUIDENT_MAYBE_DOT "as" luident { 
-// 794|    let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 795|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
-// 796|    AliasTarget::{ binder, target: Some(target) }
-// 797|  }
+// 795|    LUIDENT_MAYBE_DOT "as" luident { 
+// 796|    let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 797|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
+// 798|    AliasTarget::{ binder, target: Some(target) }
+// 799|  }
 
 ///|
 fn yy_action_33(
@@ -1373,13 +1373,13 @@ fn yy_action_33(
 }
 
 // file:///./parser.mbty
-// 1808|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
-// 1809|    Name(
-// 1810|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 1811|      tys = $2,
-// 1812|      loc = mk_loc($sloc)
-// 1813|    )
-// 1814|  }
+// 1810|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
+// 1811|    Name(
+// 1812|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 1813|      tys = $2,
+// 1814|      loc = mk_loc($sloc)
+// 1815|    )
+// 1816|  }
 
 ///|
 fn yy_action_34(
@@ -1414,7 +1414,7 @@ fn yy_action_34(
 }
 
 // file:///./parser.mbty
-// 1223|    if_expr { $1 }
+// 1225|    if_expr { $1 }
 
 ///|
 fn yy_action_37(
@@ -1431,7 +1431,7 @@ fn yy_action_37(
 }
 
 // file:///./parser.mbty
-// 168|    non_empty_list_commas(X) { $1 }
+// 170|    non_empty_list_commas(X) { $1 }
 
 ///|
 fn yy_action_38(
@@ -1448,9 +1448,9 @@ fn yy_action_38(
 }
 
 // file:///./parser.mbty
-// 1480|    simple_expr apply_attr "(" list_commas(argument) ")" { 
-// 1481|    Apply(func = $1, args = $4, attr = $2, loc = mk_loc($sloc))
-// 1482|  }
+// 1482|    simple_expr apply_attr "(" list_commas(argument) ")" { 
+// 1483|    Apply(func = $1, args = $4, attr = $2, loc = mk_loc($sloc))
+// 1484|  }
 
 ///|
 fn yy_action_39(
@@ -1481,7 +1481,7 @@ fn yy_action_39(
 }
 
 // file:///./parser.mbty
-// 1078|    "catch" "!" "{" { (true, mk_loc($sloc)) }
+// 1080|    "catch" "!" "{" { (true, mk_loc($sloc)) }
 
 ///|
 fn yy_action_41(
@@ -1503,24 +1503,24 @@ fn yy_action_41(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_42(
@@ -1563,9 +1563,9 @@ fn yy_action_42(
 }
 
 // file:///./parser.mbty
-// 1447|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "}" { 
-// 1448|    RecordUpdate(type_name = $1, record = $4, fields = @list.empty(), loc = mk_loc($sloc))
-// 1449|  }
+// 1449|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "}" { 
+// 1450|    RecordUpdate(type_name = $1, record = $4, fields = @list.empty(), loc = mk_loc($sloc))
+// 1451|  }
 
 ///|
 fn yy_action_43(
@@ -1595,12 +1595,12 @@ fn yy_action_43(
 }
 
 // file:///./parser.mbty
-// 1963|    label "=" pattern { 
-// 1964|    ConstrPatArg::{
-// 1965|      pat: $3,
-// 1966|      kind: Labelled($1)
-// 1967|    }
-// 1968|  }
+// 1965|    label "=" pattern { 
+// 1966|    ConstrPatArg::{
+// 1967|      pat: $3,
+// 1968|      kind: Labelled($1)
+// 1969|    }
+// 1970|  }
 
 ///|
 fn yy_action_45(
@@ -1619,7 +1619,7 @@ fn yy_action_45(
 }
 
 // file:///./parser.mbty
-// 1469|    atomic_expr { $1 }
+// 1471|    atomic_expr { $1 }
 
 ///|
 fn yy_action_46(
@@ -1636,10 +1636,10 @@ fn yy_action_46(
 }
 
 // file:///./parser.mbty
-// 234|    POST_LABEL opt_annot "=" expr {
-// 235|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-// 236|      Optional(binder~, ty = $2, default = $4)
-// 237|    }
+// 236|    POST_LABEL opt_annot "=" expr {
+// 237|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
+// 238|      Optional(binder~, ty = $2, default = $4)
+// 239|    }
 
 ///|
 fn yy_action_47(
@@ -1665,24 +1665,24 @@ fn yy_action_47(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_49(
@@ -1725,17 +1725,17 @@ fn yy_action_49(
 }
 
 // file:///./parser.mbty
-// 970|    is_async fn_header list_semis(multi_pattern_case) "}" { 
-// 971|    let (binder, has_error) = $2
-// 972|    let func = Func::Match(
-// 973|      cases = $3,
-// 974|      has_error~,
-// 975|      is_async = $1,
-// 976|      fn_loc = mk_loc($loc($2)),
-// 977|      loc = mk_loc($sloc)
-// 978|    )
-// 979|    StmtFunc(binder~, func~, loc = mk_loc($sloc))
-// 980|  }
+// 972|    is_async fn_header list_semis(multi_pattern_case) "}" { 
+// 973|    let (binder, has_error) = $2
+// 974|    let func = Func::Match(
+// 975|      cases = $3,
+// 976|      has_error~,
+// 977|      is_async = $1,
+// 978|      fn_loc = mk_loc($loc($2)),
+// 979|      loc = mk_loc($sloc)
+// 980|    )
+// 981|    StmtFunc(binder~, func~, loc = mk_loc($sloc))
+// 982|  }
 
 ///|
 fn yy_action_51(
@@ -1771,7 +1771,7 @@ fn yy_action_51(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_52(
@@ -1789,7 +1789,7 @@ fn yy_action_52(
 }
 
 // file:///./parser.mbty
-// 388|    "=" STRING { DeclStubs(Embedded(language = None, code = CodeString($2))) }
+// 390|    "=" STRING { DeclStubs(Embedded(language = None, code = CodeString($2))) }
 
 ///|
 fn yy_action_53(
@@ -1806,7 +1806,7 @@ fn yy_action_53(
 }
 
 // file:///./parser.mbty
-// 1382|    "_" "," non_empty_tuple_elems_with_prefix { $3.add(Expr::Hole(loc = mk_loc($loc($1)), kind = Incomplete)) }
+// 1384|    "_" "," non_empty_tuple_elems_with_prefix { $3.add(Expr::Hole(loc = mk_loc($loc($1)), kind = Incomplete)) }
 
 ///|
 fn yy_action_54(
@@ -1830,21 +1830,21 @@ fn yy_action_54(
 }
 
 // file:///./parser.mbty
-// 421|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
-// 422|    TopTypeDef(
-// 423|      TypeDecl::{
-// 424|        tycon : $5,
-// 425|        tycon_loc : mk_loc($loc($5)),
-// 426|        params : $6,
-// 427|        components: Extern,
-// 428|        type_vis : $2,
-// 429|        doc : DocString::empty(),
-// 430|        deriving: $7,
-// 431|        loc : mk_loc($sloc),
-// 432|        attrs : $1
-// 433|      }
-// 434|    )
-// 435|  }
+// 423|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
+// 424|    TopTypeDef(
+// 425|      TypeDecl::{
+// 426|        tycon : $5,
+// 427|        tycon_loc : mk_loc($loc($5)),
+// 428|        params : $6,
+// 429|        components: Extern,
+// 430|        type_vis : $2,
+// 431|        doc : DocString::empty(),
+// 432|        deriving: $7,
+// 433|        loc : mk_loc($sloc),
+// 434|        attrs : $1
+// 435|      }
+// 436|    )
+// 437|  }
 
 ///|
 fn yy_action_55(
@@ -1885,7 +1885,7 @@ fn yy_action_55(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_57(
@@ -1902,21 +1902,21 @@ fn yy_action_57(
 }
 
 // file:///./parser.mbty
-// 856|    attributes is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) { 
-// 857|    let (return_type, error_type) = $9
-// 858|    TraitMethodDecl::{
-// 859|      name: $3,
-// 860|      has_error: $4,
-// 861|      is_async: $2,
-// 862|      quantifiers: $5,
-// 863|      params: $7,
-// 864|      return_type,
-// 865|      error_type,
-// 866|      has_default: $10,
-// 867|      attrs: $1,
-// 868|      loc: mk_loc($sloc)
-// 869|    }
-// 870|  }
+// 858|    attributes is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) { 
+// 859|    let (return_type, error_type) = $9
+// 860|    TraitMethodDecl::{
+// 861|      name: $3,
+// 862|      has_error: $4,
+// 863|      is_async: $2,
+// 864|      quantifiers: $5,
+// 865|      params: $7,
+// 866|      return_type,
+// 867|      error_type,
+// 868|      has_default: $10,
+// 869|      attrs: $1,
+// 870|      loc: mk_loc($sloc)
+// 871|    }
+// 872|  }
 
 ///|
 fn yy_action_58(
@@ -1978,10 +1978,10 @@ fn yy_action_59(
 }
 
 // file:///./parser.mbty
-// 1721|    "{" non_empty_map_elems_pat "}" { 
-// 1722|    let (elems, is_closed) = $2
-// 1723|    Map(elems~, is_closed~, loc = mk_loc($sloc))
-// 1724|  }
+// 1723|    "{" non_empty_map_elems_pat "}" { 
+// 1724|    let (elems, is_closed) = $2
+// 1725|    Map(elems~, is_closed~, loc = mk_loc($sloc))
+// 1726|  }
 
 ///|
 fn yy_action_60(
@@ -2005,18 +2005,18 @@ fn yy_action_60(
 }
 
 // file:///./parser.mbty
-// 611|    attributes visibility "typealias" batch_type_alias_targets {
-// 612|    let (is_list, pkg, targets) = $4
-// 613|    TopBatchTypeAlias(
-// 614|      pkg~,
-// 615|      targets~,
-// 616|      vis = $2,
-// 617|      attrs = $1,
-// 618|      is_list~,
-// 619|      doc = DocString::empty(),
-// 620|      loc = mk_loc($sloc)
-// 621|    )
-// 622|  }
+// 613|    attributes visibility "typealias" batch_type_alias_targets {
+// 614|    let (is_list, pkg, targets) = $4
+// 615|    TopBatchTypeAlias(
+// 616|      pkg~,
+// 617|      targets~,
+// 618|      vis = $2,
+// 619|      attrs = $1,
+// 620|      is_list~,
+// 621|      doc = DocString::empty(),
+// 622|      loc = mk_loc($sloc)
+// 623|    )
+// 624|  }
 
 ///|
 fn yy_action_61(
@@ -2052,7 +2052,7 @@ fn yy_action_61(
 }
 
 // file:///./parser.mbty
-// 1570|    qual_ident_ty { TypeName::{ name: $1, is_object: false, loc: mk_loc($sloc) } }
+// 1572|    qual_ident_ty { TypeName::{ name: $1, is_object: false, loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_62(
@@ -2079,7 +2079,7 @@ fn yy_action_62(
 }
 
 // file:///./parser.mbty
-// 1815|    "&" qual_ident_ty { Object(ConstrId::{ id: $2, loc: mk_loc($loc($2)) }) }
+// 1817|    "&" qual_ident_ty { Object(ConstrId::{ id: $2, loc: mk_loc($loc($2)) }) }
 
 ///|
 fn yy_action_63(
@@ -2101,7 +2101,7 @@ fn yy_action_63(
 }
 
 // file:///./parser.mbty
-// 1789|    error_annotation { (None, $1) }
+// 1791|    error_annotation { (None, $1) }
 
 ///|
 fn yy_action_64(
@@ -2136,23 +2136,23 @@ fn yy_action_65(
 }
 
 // file:///./parser.mbty
-// 709|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
-// 710|    TopView(
-// 711|      quantifiers = $4,
-// 712|      source_ty = $10,
-// 713|      view_type_name = $5,
-// 714|      view_type_loc = mk_loc($loc($5)),
-// 715|      view_func_name = $12,
-// 716|      parameters = $13,
-// 717|      params_loc = mk_loc($loc($13)),
-// 718|      view_constrs = $7,
-// 719|      body = $14,
-// 720|      vis = $2,
-// 721|      loc = mk_loc($sloc),
-// 722|      attrs = $1,
-// 723|      doc = DocString::empty()
-// 724|    )
-// 725|  }
+// 711|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
+// 712|    TopView(
+// 713|      quantifiers = $4,
+// 714|      source_ty = $10,
+// 715|      view_type_name = $5,
+// 716|      view_type_loc = mk_loc($loc($5)),
+// 717|      view_func_name = $12,
+// 718|      parameters = $13,
+// 719|      params_loc = mk_loc($loc($13)),
+// 720|      view_constrs = $7,
+// 721|      body = $14,
+// 722|      vis = $2,
+// 723|      loc = mk_loc($sloc),
+// 724|      attrs = $1,
+// 725|      doc = DocString::empty()
+// 726|    )
+// 727|  }
 
 ///|
 fn yy_action_66(
@@ -2204,7 +2204,7 @@ fn yy_action_66(
 }
 
 // file:///./parser.mbty
-// 928|    "fn" optional_bang "{" { $2 }
+// 930|    "fn" optional_bang "{" { $2 }
 
 ///|
 fn yy_action_67(
@@ -2221,7 +2221,7 @@ fn yy_action_67(
 }
 
 // file:///./parser.mbty
-// 1472|    constr { Constr(constr = $1, loc = mk_loc($sloc)) }
+// 1474|    constr { Constr(constr = $1, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_68(
@@ -2244,7 +2244,7 @@ fn yy_action_68(
 }
 
 // file:///./parser.mbty
-// 1919|    non_empty_list_commas(fields_pat_single) { ($1, true) }
+// 1921|    non_empty_list_commas(fields_pat_single) { ($1, true) }
 
 ///|
 fn yy_action_69(
@@ -2261,7 +2261,7 @@ fn yy_action_69(
 }
 
 // file:///./parser.mbty
-// 1703|    binder { Var($1) }
+// 1705|    binder { Var($1) }
 
 ///|
 fn yy_action_70(
@@ -2279,24 +2279,24 @@ fn yy_action_70(
 }
 
 // file:///./parser.mbty
-// 662|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
-// 663|    let (ret_ty, err_ty) = $12
-// 664|    TopImpl(
-// 665|      self_ty = Some($7),
-// 666|      trait_ = $5,
-// 667|      method_name = $9,
-// 668|      has_error = $10,
-// 669|      quantifiers = $4,
-// 670|      params = $11,
-// 671|      ret_ty~,
-// 672|      err_ty~,
-// 673|      body = $13,
-// 674|      vis = $2,
-// 675|      loc = mk_loc($sloc),
-// 676|      attrs = $1,
-// 677|      doc = DocString::empty()
-// 678|    )
-// 679|  }
+// 664|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
+// 665|    let (ret_ty, err_ty) = $12
+// 666|    TopImpl(
+// 667|      self_ty = Some($7),
+// 668|      trait_ = $5,
+// 669|      method_name = $9,
+// 670|      has_error = $10,
+// 671|      quantifiers = $4,
+// 672|      params = $11,
+// 673|      ret_ty~,
+// 674|      err_ty~,
+// 675|      body = $13,
+// 676|      vis = $2,
+// 677|      loc = mk_loc($sloc),
+// 678|      attrs = $1,
+// 679|      doc = DocString::empty()
+// 680|    )
+// 681|  }
 
 ///|
 fn yy_action_71(
@@ -2346,7 +2346,7 @@ fn yy_action_71(
 }
 
 // file:///./parser.mbty
-// 376|    local_type_decl SEMI local_types_and_stmts { ($3.0.add($1), $3.1) }
+// 378|    local_type_decl SEMI local_types_and_stmts { ($3.0.add($1), $3.1) }
 
 ///|
 fn yy_action_72(
@@ -2380,9 +2380,9 @@ fn yy_action_73(
 }
 
 // file:///./parser.mbty
-// 1288|    infix_expr infixop infix_expr { 
-// 1289|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1290|  }
+// 1290|    infix_expr infixop infix_expr { 
+// 1291|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1292|  }
 
 ///|
 fn yy_action_74(
@@ -2413,7 +2413,7 @@ fn yy_action_74(
 }
 
 // file:///./parser.mbty
-// 1471|    qual_ident_simple_expr { @syntax.make_ident_expr(loc = mk_loc($sloc), Var::{ name: $1, loc: mk_loc($sloc) }) }
+// 1473|    qual_ident_simple_expr { @syntax.make_ident_expr(loc = mk_loc($sloc), Var::{ name: $1, loc: mk_loc($sloc) }) }
 
 ///|
 fn yy_action_76(
@@ -2439,7 +2439,7 @@ fn yy_action_76(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_77(
@@ -2456,7 +2456,7 @@ fn yy_action_77(
 }
 
 // file:///./parser.mbty
-// 988|    "guard" infix_expr "else" block_expr { StmtGuard(cond = $2, otherwise = Some($4), loc = mk_loc($sloc)) }
+// 990|    "guard" infix_expr "else" block_expr { StmtGuard(cond = $2, otherwise = Some($4), loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_78(
@@ -2484,19 +2484,19 @@ fn yy_action_78(
 }
 
 // file:///./parser.mbty
-// 580|    attributes visibility "fnalias" func_alias_targets {
-// 581|    let (pkg, type_name, is_list, targets) = $4
-// 582|    TopFuncAlias(
-// 583|      pkg~,
-// 584|      type_name~,
-// 585|      targets~,
-// 586|      vis = $2,
-// 587|      attrs = $1,
-// 588|      is_list~,
-// 589|      doc = DocString::empty(),
-// 590|      loc = mk_loc($sloc)
-// 591|    )
-// 592|  }
+// 582|    attributes visibility "fnalias" func_alias_targets {
+// 583|    let (pkg, type_name, is_list, targets) = $4
+// 584|    TopFuncAlias(
+// 585|      pkg~,
+// 586|      type_name~,
+// 587|      targets~,
+// 588|      vis = $2,
+// 589|      attrs = $1,
+// 590|      is_list~,
+// 591|      doc = DocString::empty(),
+// 592|      loc = mk_loc($sloc)
+// 593|    )
+// 594|  }
 
 ///|
 fn yy_action_79(
@@ -2533,7 +2533,7 @@ fn yy_action_79(
 }
 
 // file:///./parser.mbty
-// 1326|    id(minus) prefix_expr { make_uminus(loc = mk_loc($sloc), $1, $2) }
+// 1328|    id(minus) prefix_expr { make_uminus(loc = mk_loc($sloc), $1, $2) }
 
 ///|
 fn yy_action_80(
@@ -2558,7 +2558,7 @@ fn yy_action_80(
 }
 
 // file:///./parser.mbty
-// 1341|    simple_expr accessor { Field($1, $2) }
+// 1343|    simple_expr accessor { Field($1, $2) }
 
 ///|
 fn yy_action_82(
@@ -2577,7 +2577,7 @@ fn yy_action_82(
 }
 
 // file:///./parser.mbty
-// 1697|    "-" INT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_int("-" + $2)) }
+// 1699|    "-" INT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_int("-" + $2)) }
 
 ///|
 fn yy_action_84(
@@ -2603,7 +2603,7 @@ fn yy_action_84(
 }
 
 // file:///./parser.mbty
-// 249|    delimited("[", non_empty_list_commas(id(tvar_binder)), "]") { $1 }
+// 251|    delimited("[", non_empty_list_commas(id(tvar_binder)), "]") { $1 }
 
 ///|
 fn yy_action_85(
@@ -2621,17 +2621,17 @@ fn yy_action_85(
 }
 
 // file:///./parser.mbty
-// 698|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
-// 699|    TopImplRelation(
-// 700|      self_ty = $7,
-// 701|      trait_ = $5,
-// 702|      quantifiers = $4,
-// 703|      vis = $2,
-// 704|      attrs = $1,
-// 705|      loc = mk_loc($sloc),
-// 706|      doc = DocString::empty()
-// 707|    )
-// 708|  }
+// 700|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
+// 701|    TopImplRelation(
+// 702|      self_ty = $7,
+// 703|      trait_ = $5,
+// 704|      quantifiers = $4,
+// 705|      vis = $2,
+// 706|      attrs = $1,
+// 707|      loc = mk_loc($sloc),
+// 708|      doc = DocString::empty()
+// 709|    )
+// 710|  }
 
 ///|
 fn yy_action_87(
@@ -2668,7 +2668,7 @@ fn yy_action_87(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_88(
@@ -2686,9 +2686,9 @@ fn yy_action_88(
 }
 
 // file:///./parser.mbty
-// 1447|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "}" { 
-// 1448|    RecordUpdate(type_name = $1, record = $4, fields = @list.empty(), loc = mk_loc($sloc))
-// 1449|  }
+// 1449|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "}" { 
+// 1450|    RecordUpdate(type_name = $1, record = $4, fields = @list.empty(), loc = mk_loc($sloc))
+// 1451|  }
 
 ///|
 fn yy_action_89(
@@ -2718,7 +2718,7 @@ fn yy_action_89(
 }
 
 // file:///./parser.mbty
-// 1715|    "{" "}" { Record(fields = @list.empty(), is_closed = true, loc = mk_loc($sloc)) }
+// 1717|    "{" "}" { Record(fields = @list.empty(), is_closed = true, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_91(
@@ -2744,21 +2744,21 @@ fn yy_action_91(
 }
 
 // file:///./parser.mbty
-// 623|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
-// 624|    TopTypeDef(
-// 625|      TypeDecl::{
-// 626|        tycon : $6,
-// 627|        tycon_loc : mk_loc($loc($6)),
-// 628|        params : $7,
-// 629|        components: Alias($4),
-// 630|        type_vis : $2,
-// 631|        doc : DocString::empty(),
-// 632|        deriving: @list.empty(),
-// 633|        loc : mk_loc($sloc),
-// 634|        attrs : $1
-// 635|      }
-// 636|    )
-// 637|  }
+// 625|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
+// 626|    TopTypeDef(
+// 627|      TypeDecl::{
+// 628|        tycon : $6,
+// 629|        tycon_loc : mk_loc($loc($6)),
+// 630|        params : $7,
+// 631|        components: Alias($4),
+// 632|        type_vis : $2,
+// 633|        doc : DocString::empty(),
+// 634|        deriving: @list.empty(),
+// 635|        loc : mk_loc($sloc),
+// 636|        attrs : $1
+// 637|      }
+// 638|    )
+// 639|  }
 
 ///|
 fn yy_action_92(
@@ -2799,7 +2799,7 @@ fn yy_action_92(
 }
 
 // file:///./parser.mbty
-// 1694|    BYTE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Byte($1)) }
+// 1696|    BYTE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Byte($1)) }
 
 ///|
 fn yy_action_93(
@@ -2825,19 +2825,19 @@ fn yy_action_93(
 }
 
 // file:///./parser.mbty
-// 580|    attributes visibility "fnalias" func_alias_targets {
-// 581|    let (pkg, type_name, is_list, targets) = $4
-// 582|    TopFuncAlias(
-// 583|      pkg~,
-// 584|      type_name~,
-// 585|      targets~,
-// 586|      vis = $2,
-// 587|      attrs = $1,
-// 588|      is_list~,
-// 589|      doc = DocString::empty(),
-// 590|      loc = mk_loc($sloc)
-// 591|    )
-// 592|  }
+// 582|    attributes visibility "fnalias" func_alias_targets {
+// 583|    let (pkg, type_name, is_list, targets) = $4
+// 584|    TopFuncAlias(
+// 585|      pkg~,
+// 586|      type_name~,
+// 587|      targets~,
+// 588|      vis = $2,
+// 589|      attrs = $1,
+// 590|      is_list~,
+// 591|      doc = DocString::empty(),
+// 592|      loc = mk_loc($sloc)
+// 593|    )
+// 594|  }
 
 ///|
 fn yy_action_94(
@@ -2874,14 +2874,14 @@ fn yy_action_94(
 }
 
 // file:///./parser.mbty
-// 1821|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type { 
-// 1822|    let (ty_res, ty_err) = $8
-// 1823|    let ts = match $5 { 
-// 1824|      None => @list.empty() 
-// 1825|      Some(ts) => ts 
-// 1826|    }
-// 1827|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
-// 1828|  }
+// 1823|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type { 
+// 1824|    let (ty_res, ty_err) = $8
+// 1825|    let ts = match $5 { 
+// 1826|      None => @list.empty() 
+// 1827|      Some(ts) => ts 
+// 1828|    }
+// 1829|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+// 1830|  }
 
 ///|
 fn yy_action_95(
@@ -2920,7 +2920,7 @@ fn yy_action_95(
 }
 
 // file:///./parser.mbty
-// 1911|    label ":" expr { @syntax.make_field_def(loc = mk_loc($sloc), $1, $3, false) }
+// 1913|    label ":" expr { @syntax.make_field_def(loc = mk_loc($sloc), $1, $3, false) }
 
 ///|
 fn yy_action_96(
@@ -2950,9 +2950,9 @@ fn yy_action_96(
 }
 
 // file:///./parser.mbty
-// 1288|    infix_expr infixop infix_expr { 
-// 1289|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1290|  }
+// 1290|    infix_expr infixop infix_expr { 
+// 1291|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1292|  }
 
 ///|
 fn yy_action_97(
@@ -2983,21 +2983,21 @@ fn yy_action_97(
 }
 
 // file:///./parser.mbty
-// 955|    is_async "fn" binder optional_bang parameters func_return_type block_expr { 
-// 956|    let (return_type, error_type) = $6
-// 957|    let func = Func::Lambda(
-// 958|      parameters = $5,
-// 959|      params_loc = mk_loc($loc($5)),
-// 960|      body = $7,
-// 961|      return_type~,
-// 962|      error_type~,
-// 963|      kind = Lambda,
-// 964|      has_error = $4,
-// 965|      is_async = $1,
-// 966|      loc = mk_loc($sloc)
-// 967|    )
-// 968|    StmtFunc(binder = $3, func~, loc = mk_loc($sloc))
-// 969|  }
+// 957|    is_async "fn" binder optional_bang parameters func_return_type block_expr { 
+// 958|    let (return_type, error_type) = $6
+// 959|    let func = Func::Lambda(
+// 960|      parameters = $5,
+// 961|      params_loc = mk_loc($loc($5)),
+// 962|      body = $7,
+// 963|      return_type~,
+// 964|      error_type~,
+// 965|      kind = Lambda,
+// 966|      has_error = $4,
+// 967|      is_async = $1,
+// 968|      loc = mk_loc($sloc)
+// 969|    )
+// 970|    StmtFunc(binder = $3, func~, loc = mk_loc($sloc))
+// 971|  }
 
 ///|
 fn yy_action_99(
@@ -3045,16 +3045,16 @@ fn yy_action_99(
 }
 
 // file:///./parser.mbty
-// 1872|    attributes UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) { 
-// 1873|    ConstrDecl::{
-// 1874|      name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
-// 1875|      args: $3,
-// 1876|      tag: $4,
-// 1877|      loc: mk_loc($sloc),
-// 1878|      attrs: $1,
-// 1879|      doc: DocString::empty()
-// 1880|    }
-// 1881|  }
+// 1874|    attributes UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) { 
+// 1875|    ConstrDecl::{
+// 1876|      name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
+// 1877|      args: $3,
+// 1878|      tag: $4,
+// 1879|      loc: mk_loc($sloc),
+// 1880|      attrs: $1,
+// 1881|      doc: DocString::empty()
+// 1882|    }
+// 1883|  }
 
 ///|
 fn yy_action_100(
@@ -3093,7 +3093,7 @@ fn yy_action_100(
 }
 
 // file:///./parser.mbty
-// 202|    X SEMI non_empty_list_semis(X) { $3.add($1) }
+// 204|    X SEMI non_empty_list_semis(X) { $3.add($1) }
 
 ///|
 fn yy_action_101(
@@ -3111,7 +3111,7 @@ fn yy_action_101(
 }
 
 // file:///./parser.mbty
-// 1806|    "(" type_ "," non_empty_list_commas(type_) ")" { @syntax.make_tuple_type(loc = mk_loc($sloc), $4.add($2)) }
+// 1808|    "(" type_ "," non_empty_list_commas(type_) ")" { @syntax.make_tuple_type(loc = mk_loc($sloc), $4.add($2)) }
 
 ///|
 fn yy_action_102(
@@ -3138,7 +3138,7 @@ fn yy_action_102(
 }
 
 // file:///./parser.mbty
-// 1924|    fpat_labeled_pattern { $1 }
+// 1926|    fpat_labeled_pattern { $1 }
 
 ///|
 fn yy_action_103(
@@ -3156,10 +3156,10 @@ fn yy_action_103(
 }
 
 // file:///./parser.mbty
-// 819|    PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
-// 820|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 821|    (Some(pkg), Some($2), true, $4)
-// 822|  }
+// 821|    PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
+// 822|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 823|    (Some(pkg), Some($2), true, $4)
+// 824|  }
 
 ///|
 fn yy_action_105(
@@ -3184,24 +3184,24 @@ fn yy_action_105(
 }
 
 // file:///./parser.mbty
-// 680|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
-// 681|    let (ret_ty, err_ty) = $10
-// 682|    TopImpl(
-// 683|      self_ty = None,
-// 684|      trait_ = $5,
-// 685|      method_name = $7,
-// 686|      has_error = $8,
-// 687|      quantifiers = $4,
-// 688|      params = $9,
-// 689|      ret_ty~,
-// 690|      err_ty~,
-// 691|      body = $11,
-// 692|      vis = $2,
-// 693|      loc = mk_loc($sloc),
-// 694|      attrs = $1,
-// 695|      doc = DocString::empty()
-// 696|    )
-// 697|  }
+// 682|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
+// 683|    let (ret_ty, err_ty) = $10
+// 684|    TopImpl(
+// 685|      self_ty = None,
+// 686|      trait_ = $5,
+// 687|      method_name = $7,
+// 688|      has_error = $8,
+// 689|      quantifiers = $4,
+// 690|      params = $9,
+// 691|      ret_ty~,
+// 692|      err_ty~,
+// 693|      body = $11,
+// 694|      vis = $2,
+// 695|      loc = mk_loc($sloc),
+// 696|      attrs = $1,
+// 697|      doc = DocString::empty()
+// 698|    )
+// 699|  }
 
 ///|
 fn yy_action_106(
@@ -3250,9 +3250,9 @@ fn yy_action_106(
 }
 
 // file:///./parser.mbty
-// 1110|    "if" infix_expr block_expr "else" block_expr { 
-// 1111|    If(cond = $2, ifso = $3, ifnot = Some($5), loc = mk_loc($sloc))
-// 1112|  }
+// 1112|    "if" infix_expr block_expr "else" block_expr { 
+// 1113|    If(cond = $2, ifso = $3, ifnot = Some($5), loc = mk_loc($sloc))
+// 1114|  }
 
 ///|
 fn yy_action_107(
@@ -3282,7 +3282,7 @@ fn yy_action_107(
 }
 
 // file:///./parser.mbty
-// 1780|    simple_type error_annotation { ($1, $2) }
+// 1782|    simple_type error_annotation { ($1, $2) }
 
 ///|
 fn yy_action_108(
@@ -3300,7 +3300,7 @@ fn yy_action_108(
 }
 
 // file:///./parser.mbty
-// 197|    non_empty_list_semi_rev_aux(X) option(SEMI) { ($1, $2 is Some(_)) }
+// 199|    non_empty_list_semi_rev_aux(X) option(SEMI) { ($1, $2 is Some(_)) }
 
 ///|
 fn yy_action_109(
@@ -3318,24 +3318,24 @@ fn yy_action_109(
 }
 
 // file:///./parser.mbty
-// 593|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 594|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
-// 595|    let supers = match $5 {
-// 596|      None => @list.empty()
-// 597|      Some(supers) => supers
-// 598|    }
-// 599|    TopTrait(
-// 600|      TraitDecl::{
-// 601|        name,
-// 602|        supers,
-// 603|        methods: $7,
-// 604|        vis: $2,
-// 605|        loc: mk_loc($sloc),
-// 606|        attrs: $1,
-// 607|        doc : DocString::empty()
-// 608|      }
-// 609|    )
-// 610|  }
+// 595|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
+// 596|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
+// 597|    let supers = match $5 {
+// 598|      None => @list.empty()
+// 599|      Some(supers) => supers
+// 600|    }
+// 601|    TopTrait(
+// 602|      TraitDecl::{
+// 603|        name,
+// 604|        supers,
+// 605|        methods: $7,
+// 606|        vis: $2,
+// 607|        loc: mk_loc($sloc),
+// 608|        attrs: $1,
+// 609|        doc : DocString::empty()
+// 610|      }
+// 611|    )
+// 612|  }
 
 ///|
 fn yy_action_110(
@@ -3382,10 +3382,10 @@ fn yy_action_110(
 }
 
 // file:///./parser.mbty
-// 1717|    "{" non_empty_fields_pat "}" { 
-// 1718|    let (fields, is_closed) = $2
-// 1719|    Record(fields~, is_closed~, loc = mk_loc($sloc))
-// 1720|  }
+// 1719|    "{" non_empty_fields_pat "}" { 
+// 1720|    let (fields, is_closed) = $2
+// 1721|    Record(fields~, is_closed~, loc = mk_loc($sloc))
+// 1722|  }
 
 ///|
 fn yy_action_111(
@@ -3409,7 +3409,7 @@ fn yy_action_111(
 }
 
 // file:///./parser.mbty
-// 1619|    INFIX2 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
+// 1621|    INFIX2 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_112(
@@ -3435,10 +3435,10 @@ fn yy_action_112(
 }
 
 // file:///./parser.mbty
-// 1829|    is_async "(" ")" "->" return_type { 
-// 1830|    let (ty_res, ty_err) = $5
-// 1831|    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
-// 1832|  }
+// 1831|    is_async "(" ")" "->" return_type { 
+// 1832|    let (ty_res, ty_err) = $5
+// 1833|    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+// 1834|  }
 
 ///|
 fn yy_action_113(
@@ -3470,7 +3470,7 @@ fn yy_action_113(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_114(
@@ -3494,21 +3494,21 @@ fn yy_action_114(
 }
 
 // file:///./parser.mbty
-// 856|    attributes is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) { 
-// 857|    let (return_type, error_type) = $9
-// 858|    TraitMethodDecl::{
-// 859|      name: $3,
-// 860|      has_error: $4,
-// 861|      is_async: $2,
-// 862|      quantifiers: $5,
-// 863|      params: $7,
-// 864|      return_type,
-// 865|      error_type,
-// 866|      has_default: $10,
-// 867|      attrs: $1,
-// 868|      loc: mk_loc($sloc)
-// 869|    }
-// 870|  }
+// 858|    attributes is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) { 
+// 859|    let (return_type, error_type) = $9
+// 860|    TraitMethodDecl::{
+// 861|      name: $3,
+// 862|      has_error: $4,
+// 863|      is_async: $2,
+// 864|      quantifiers: $5,
+// 865|      params: $7,
+// 866|      return_type,
+// 867|      error_type,
+// 868|      has_default: $10,
+// 869|      attrs: $1,
+// 870|      loc: mk_loc($sloc)
+// 871|    }
+// 872|  }
 
 ///|
 fn yy_action_116(
@@ -3553,15 +3553,15 @@ fn yy_action_116(
 }
 
 // file:///./parser.mbty
-// 1042|    loop_label_colon "while" infix_expr block_expr optional_else { 
-// 1043|    While(
-// 1044|      loop_cond = $3,
-// 1045|      loop_body = $4,
-// 1046|      while_else = $5,
-// 1047|      label = $1,
-// 1048|      loc = mk_loc($sloc)
-// 1049|    )
-// 1050|  }
+// 1044|    loop_label_colon "while" infix_expr block_expr optional_else { 
+// 1045|    While(
+// 1046|      loop_cond = $3,
+// 1047|      loop_body = $4,
+// 1048|      while_else = $5,
+// 1049|      label = $1,
+// 1050|      loc = mk_loc($sloc)
+// 1051|    )
+// 1052|  }
 
 ///|
 fn yy_action_117(
@@ -3593,7 +3593,7 @@ fn yy_action_117(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_118(
@@ -3617,14 +3617,14 @@ fn yy_action_118(
 }
 
 // file:///./parser.mbty
-// 1313|    prefix_expr "..=" prefix_expr { 
-// 1314|    Infix(
-// 1315|      op = Var::{ name: Ident(name = "..="), loc: mk_loc($loc($2)) }, 
-// 1316|      lhs = $1, 
-// 1317|      rhs = $3, 
-// 1318|      loc = mk_loc($sloc)
-// 1319|    )
-// 1320|  }
+// 1315|    prefix_expr "..=" prefix_expr { 
+// 1316|    Infix(
+// 1317|      op = Var::{ name: Ident(name = "..="), loc: mk_loc($loc($2)) }, 
+// 1318|      lhs = $1, 
+// 1319|      rhs = $3, 
+// 1320|      loc = mk_loc($sloc)
+// 1321|    )
+// 1322|  }
 
 ///|
 fn yy_action_119(
@@ -3658,7 +3658,7 @@ fn yy_action_119(
 }
 
 // file:///./parser.mbty
-// 1372|    "?" { Question }
+// 1374|    "?" { Question }
 
 ///|
 fn yy_action_120(
@@ -3674,7 +3674,7 @@ fn yy_action_120(
 }
 
 // file:///./parser.mbty
-// 220|    ":" type_ { $2 }
+// 222|    ":" type_ { $2 }
 
 ///|
 fn yy_action_121(
@@ -3691,7 +3691,7 @@ fn yy_action_121(
 }
 
 // file:///./parser.mbty
-// 1690|    TRUE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bool(true)) }
+// 1692|    TRUE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bool(true)) }
 
 ///|
 fn yy_action_122(
@@ -3716,7 +3716,7 @@ fn yy_action_122(
 }
 
 // file:///./parser.mbty
-// 1122|    "match" infix_expr "{" { ($2, None) }
+// 1124|    "match" infix_expr "{" { ($2, None) }
 
 ///|
 fn yy_action_123(
@@ -3733,24 +3733,24 @@ fn yy_action_123(
 }
 
 // file:///./parser.mbty
-// 680|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
-// 681|    let (ret_ty, err_ty) = $10
-// 682|    TopImpl(
-// 683|      self_ty = None,
-// 684|      trait_ = $5,
-// 685|      method_name = $7,
-// 686|      has_error = $8,
-// 687|      quantifiers = $4,
-// 688|      params = $9,
-// 689|      ret_ty~,
-// 690|      err_ty~,
-// 691|      body = $11,
-// 692|      vis = $2,
-// 693|      loc = mk_loc($sloc),
-// 694|      attrs = $1,
-// 695|      doc = DocString::empty()
-// 696|    )
-// 697|  }
+// 682|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
+// 683|    let (ret_ty, err_ty) = $10
+// 684|    TopImpl(
+// 685|      self_ty = None,
+// 686|      trait_ = $5,
+// 687|      method_name = $7,
+// 688|      has_error = $8,
+// 689|      quantifiers = $4,
+// 690|      params = $9,
+// 691|      ret_ty~,
+// 692|      err_ty~,
+// 693|      body = $11,
+// 694|      vis = $2,
+// 695|      loc = mk_loc($sloc),
+// 696|      attrs = $1,
+// 697|      doc = DocString::empty()
+// 698|    )
+// 699|  }
 
 ///|
 fn yy_action_124(
@@ -3816,9 +3816,9 @@ fn yy_action_125(
 }
 
 // file:///./parser.mbty
-// 1054|    pattern option(preceded("if", infix_expr)) "=>" expr_statement { 
-// 1055|    Case::{ pattern : $1, guard_ : $2, body : $4 }
-// 1056|  }
+// 1056|    pattern option(preceded("if", infix_expr)) "=>" expr_statement { 
+// 1057|    Case::{ pattern : $1, guard_ : $2, body : $4 }
+// 1058|  }
 
 ///|
 fn yy_action_126(
@@ -3837,7 +3837,7 @@ fn yy_action_126(
 }
 
 // file:///./parser.mbty
-// 1716|    "{" ".." option(",") "}" { Record(fields = @list.empty(), is_closed = false, loc = mk_loc($sloc)) }
+// 1718|    "{" ".." option(",") "}" { Record(fields = @list.empty(), is_closed = false, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_127(
@@ -3863,11 +3863,11 @@ fn yy_action_127(
 }
 
 // file:///./parser.mbty
-// 1889|    label_pun "," list_commas_with_trailing_info(record_defn_single) { 
-// 1890|    let (fs, trailing) = $3
-// 1891|    let trailing_mark = if fs.is_empty() || trailing { TrailingMark::Comma } else { TrailingMark::None }
-// 1892|    (fs.add($1), trailing_mark)
-// 1893|  }
+// 1891|    label_pun "," list_commas_with_trailing_info(record_defn_single) { 
+// 1892|    let (fs, trailing) = $3
+// 1893|    let trailing_mark = if fs.is_empty() || trailing { TrailingMark::Comma } else { TrailingMark::None }
+// 1894|    (fs.add($1), trailing_mark)
+// 1895|  }
 
 ///|
 fn yy_action_128(
@@ -3892,7 +3892,7 @@ fn yy_action_128(
 }
 
 // file:///./parser.mbty
-// 173|    non_empty_list_commas_no_trailing(X) { $1 }
+// 175|    non_empty_list_commas_no_trailing(X) { $1 }
 
 ///|
 fn yy_action_129(
@@ -3909,14 +3909,14 @@ fn yy_action_129(
 }
 
 // file:///./parser.mbty
-// 992|    left_value "=" expr { 
-// 993|    let loc = mk_loc($sloc)
-// 994|    match $1 {
-// 995|      Var(var_) => Assign(var_~, expr=$3, augmented_by=None, loc~)
-// 996|      Field(record, accessor) => Mutate(record~, accessor~, field=$3, augmented_by=None, loc~)
-// 997|      Array(array, index) => ArraySet(array~, index~, value=$3, loc~)
-// 998|    }
-// 999|  }
+//  994|    left_value "=" expr { 
+//  995|    let loc = mk_loc($sloc)
+//  996|    match $1 {
+//  997|      Var(var_) => Assign(var_~, expr=$3, augmented_by=None, loc~)
+//  998|      Field(record, accessor) => Mutate(record~, accessor~, field=$3, augmented_by=None, loc~)
+//  999|      Array(array, index) => ArraySet(array~, index~, value=$3, loc~)
+// 1000|    }
+// 1001|  }
 
 ///|
 fn yy_action_130(
@@ -3946,7 +3946,7 @@ fn yy_action_130(
 }
 
 // file:///./parser.mbty
-// 1685|    simple_pattern "..=" simple_pattern { Range(lhs = $1, rhs = $3, inclusive = true, loc = mk_loc($sloc)) }
+// 1687|    simple_pattern "..=" simple_pattern { Range(lhs = $1, rhs = $3, inclusive = true, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_131(
@@ -3975,7 +3975,7 @@ fn yy_action_131(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_132(
@@ -4009,24 +4009,24 @@ fn yy_action_134(
 }
 
 // file:///./parser.mbty
-// 662|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
-// 663|    let (ret_ty, err_ty) = $12
-// 664|    TopImpl(
-// 665|      self_ty = Some($7),
-// 666|      trait_ = $5,
-// 667|      method_name = $9,
-// 668|      has_error = $10,
-// 669|      quantifiers = $4,
-// 670|      params = $11,
-// 671|      ret_ty~,
-// 672|      err_ty~,
-// 673|      body = $13,
-// 674|      vis = $2,
-// 675|      loc = mk_loc($sloc),
-// 676|      attrs = $1,
-// 677|      doc = DocString::empty()
-// 678|    )
-// 679|  }
+// 664|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
+// 665|    let (ret_ty, err_ty) = $12
+// 666|    TopImpl(
+// 667|      self_ty = Some($7),
+// 668|      trait_ = $5,
+// 669|      method_name = $9,
+// 670|      has_error = $10,
+// 671|      quantifiers = $4,
+// 672|      params = $11,
+// 673|      ret_ty~,
+// 674|      err_ty~,
+// 675|      body = $13,
+// 676|      vis = $2,
+// 677|      loc = mk_loc($sloc),
+// 678|      attrs = $1,
+// 679|      doc = DocString::empty()
+// 680|    )
+// 681|  }
 
 ///|
 fn yy_action_135(
@@ -4076,7 +4076,7 @@ fn yy_action_135(
 }
 
 // file:///./parser.mbty
-// 1406|    "(" "_" ":" type_ ")" { Constraint(expr = Hole(loc = mk_loc($loc($2)), kind = Incomplete), ty = $4, loc = mk_loc($sloc)) }
+// 1408|    "(" "_" ":" type_ ")" { Constraint(expr = Hole(loc = mk_loc($loc($2)), kind = Incomplete), ty = $4, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_136(
@@ -4108,9 +4108,9 @@ fn yy_action_136(
 }
 
 // file:///./parser.mbty
-// 1548|    luident { 
-// 1549|    TypeVarBinder::{ name: $1, constraints: @list.empty(), loc: mk_loc($sloc) }
-// 1550|  }
+// 1550|    luident { 
+// 1551|    TypeVarBinder::{ name: $1, constraints: @list.empty(), loc: mk_loc($sloc) }
+// 1552|  }
 
 ///|
 fn yy_action_137(
@@ -4137,10 +4137,10 @@ fn yy_action_137(
 }
 
 // file:///./parser.mbty
-// 238|    LIDENT "?" opt_annot {
-// 239|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-// 240|      QuestionOptional(binder~, ty = $3)
-// 241|    }
+// 240|    LIDENT "?" opt_annot {
+// 241|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
+// 242|      QuestionOptional(binder~, ty = $3)
+// 243|    }
 
 ///|
 fn yy_action_138(
@@ -4165,7 +4165,7 @@ fn yy_action_138(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_139(
@@ -4183,9 +4183,9 @@ fn yy_action_139(
 }
 
 // file:///./parser.mbty
-// 1576|    MULTILINE_INTERP { 
-// 1577|    Interp(make_interps($1))
-// 1578|  }
+// 1578|    MULTILINE_INTERP { 
+// 1579|    Interp(make_interps($1))
+// 1580|  }
 
 ///|
 fn yy_action_140(
@@ -4202,7 +4202,7 @@ fn yy_action_140(
 }
 
 // file:///./parser.mbty
-// 730|    non_empty_list(attribute) { $1 }
+// 732|    non_empty_list(attribute) { $1 }
 
 ///|
 fn yy_action_13(
@@ -4219,11 +4219,11 @@ fn yy_action_13(
 }
 
 // file:///./parser.mbty
-// 1784|    "->" return_type { 
-// 1785|    match $2 {
-// 1786|      (ty, err) => (Some(ty), err)
-// 1787|    }
-// 1788|  }
+// 1786|    "->" return_type { 
+// 1787|    match $2 {
+// 1788|      (ty, err) => (Some(ty), err)
+// 1789|    }
+// 1790|  }
 
 ///|
 fn yy_action_141(
@@ -4242,7 +4242,7 @@ fn yy_action_141(
 }
 
 // file:///./parser.mbty
-// 1264|    "_" ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), None)) }
+// 1266|    "_" ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), None)) }
 
 ///|
 fn yy_action_142(
@@ -4263,7 +4263,7 @@ fn yy_action_142(
 }
 
 // file:///./parser.mbty
-// 1014|    "raise" expr { Raise(err_value = $2, loc = mk_loc($sloc)) }
+// 1016|    "raise" expr { Raise(err_value = $2, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_144(
@@ -4286,9 +4286,9 @@ fn yy_action_144(
 }
 
 // file:///./parser.mbty
-// 766|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
-// 767|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 768|  }
+// 768|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
+// 769|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 770|  }
 
 ///|
 fn yy_action_145(
@@ -4318,10 +4318,10 @@ fn yy_action_145(
 }
 
 // file:///./parser.mbty
-// 804|    PACKAGE_NAME func_alias_target(DOT_LIDENT) { 
-// 805|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 806|    (Some(pkg), None, false, @list.singleton($2))
-// 807|  }
+// 806|    PACKAGE_NAME func_alias_target(DOT_LIDENT) { 
+// 807|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 808|    (Some(pkg), None, false, @list.singleton($2))
+// 809|  }
 
 ///|
 fn yy_action_146(
@@ -4345,9 +4345,9 @@ fn yy_action_146(
 }
 
 // file:///./parser.mbty
-// 766|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
-// 767|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 768|  }
+// 768|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
+// 769|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 770|  }
 
 ///|
 fn yy_action_147(
@@ -4377,7 +4377,7 @@ fn yy_action_147(
 }
 
 // file:///./parser.mbty
-// 903|    PACKAGE_NAME DOT_LIDENT { LongIdent::Dot(pkg = $1, id = $2) }
+// 905|    PACKAGE_NAME DOT_LIDENT { LongIdent::Dot(pkg = $1, id = $2) }
 
 ///|
 fn yy_action_148(
@@ -4395,7 +4395,7 @@ fn yy_action_148(
 }
 
 // file:///./parser.mbty
-// 1820|    simple_type { $1 }
+// 1822|    simple_type { $1 }
 
 ///|
 fn yy_action_149(
@@ -4412,7 +4412,7 @@ fn yy_action_149(
 }
 
 // file:///./parser.mbty
-// 1026|    "break" option(expr) { Break(arg = $2, label = None, loc = mk_loc($sloc)) }
+// 1028|    "break" option(expr) { Break(arg = $2, label = None, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_150(
@@ -4435,11 +4435,11 @@ fn yy_action_150(
 }
 
 // file:///./parser.mbty
-// 793|    LUIDENT_MAYBE_DOT "as" luident { 
-// 794|    let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 795|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
-// 796|    AliasTarget::{ binder, target: Some(target) }
-// 797|  }
+// 795|    LUIDENT_MAYBE_DOT "as" luident { 
+// 796|    let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 797|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
+// 798|    AliasTarget::{ binder, target: Some(target) }
+// 799|  }
 
 ///|
 fn yy_action_151(
@@ -4487,7 +4487,7 @@ fn yy_action_153(
 }
 
 // file:///./parser.mbty
-// 746|    "(" LIDENT ")" { Some($2) }
+// 748|    "(" LIDENT ")" { Some($2) }
 
 ///|
 fn yy_action_154(
@@ -4504,21 +4504,21 @@ fn yy_action_154(
 }
 
 // file:///./parser.mbty
-// 623|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
-// 624|    TopTypeDef(
-// 625|      TypeDecl::{
-// 626|        tycon : $6,
-// 627|        tycon_loc : mk_loc($loc($6)),
-// 628|        params : $7,
-// 629|        components: Alias($4),
-// 630|        type_vis : $2,
-// 631|        doc : DocString::empty(),
-// 632|        deriving: @list.empty(),
-// 633|        loc : mk_loc($sloc),
-// 634|        attrs : $1
-// 635|      }
-// 636|    )
-// 637|  }
+// 625|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
+// 626|    TopTypeDef(
+// 627|      TypeDecl::{
+// 628|        tycon : $6,
+// 629|        tycon_loc : mk_loc($loc($6)),
+// 630|        params : $7,
+// 631|        components: Alias($4),
+// 632|        type_vis : $2,
+// 633|        doc : DocString::empty(),
+// 634|        deriving: @list.empty(),
+// 635|        loc : mk_loc($sloc),
+// 636|        attrs : $1
+// 637|      }
+// 638|    )
+// 639|  }
 
 ///|
 fn yy_action_155(
@@ -4577,17 +4577,17 @@ fn yy_action_156(
 }
 
 // file:///./parser.mbty
-// 1495|    simple_expr DOT_LIDENT apply_attr "(" list_commas(argument) ")" { 
-// 1496|    let method_name = Label::{ name: $2, loc: mk_loc($loc($2)) }
-// 1497|    DotApply(
-// 1498|      self = $1,
-// 1499|      method_name~,
-// 1500|      args = $5,
-// 1501|      return_self = false,
-// 1502|      attr = $3,
-// 1503|      loc = mk_loc($sloc)
-// 1504|    )
-// 1505|  }
+// 1497|    simple_expr DOT_LIDENT apply_attr "(" list_commas(argument) ")" { 
+// 1498|    let method_name = Label::{ name: $2, loc: mk_loc($loc($2)) }
+// 1499|    DotApply(
+// 1500|      self = $1,
+// 1501|      method_name~,
+// 1502|      args = $5,
+// 1503|      return_self = false,
+// 1504|      attr = $3,
+// 1505|      loc = mk_loc($sloc)
+// 1506|    )
+// 1507|  }
 
 ///|
 fn yy_action_158(
@@ -4627,7 +4627,7 @@ fn yy_action_158(
 }
 
 // file:///./parser.mbty
-// 1807|    "(" type_ ")" { $2 }
+// 1809|    "(" type_ ")" { $2 }
 
 ///|
 fn yy_action_160(
@@ -4644,10 +4644,10 @@ fn yy_action_160(
 }
 
 // file:///./parser.mbty
-// 1022|    "break" POST_LABEL option(expr) { 
-// 1023|    let label = Label::{ name: $2, loc: mk_loc($loc($2)) }
-// 1024|    Break(arg = $3, label = Some(label), loc = mk_loc($sloc))
-// 1025|  }
+// 1024|    "break" POST_LABEL option(expr) { 
+// 1025|    let label = Label::{ name: $2, loc: mk_loc($loc($2)) }
+// 1026|    Break(arg = $3, label = Some(label), loc = mk_loc($sloc))
+// 1027|  }
 
 ///|
 fn yy_action_161(
@@ -4681,10 +4681,10 @@ fn yy_action_161(
 }
 
 // file:///./parser.mbty
-// 1438|    "{" record_defn "}" { 
-// 1439|    let (fs, trailing) = $2
-// 1440|    @syntax.make_record_expr(loc = mk_loc($sloc), trailing~, None, fs)
-// 1441|  }
+// 1440|    "{" record_defn "}" { 
+// 1441|    let (fs, trailing) = $2
+// 1442|    @syntax.make_record_expr(loc = mk_loc($sloc), trailing~, None, fs)
+// 1443|  }
 
 ///|
 fn yy_action_162(
@@ -4713,7 +4713,7 @@ fn yy_action_162(
 }
 
 // file:///./parser.mbty
-// 1270|    "_" ":" type_ "," arrow_fn_prefix { $5.add((Unnamed(mk_loc($loc($1))), Some($3))) }
+// 1272|    "_" ":" type_ "," arrow_fn_prefix { $5.add((Unnamed(mk_loc($loc($1))), Some($3))) }
 
 ///|
 fn yy_action_163(
@@ -4738,23 +4738,23 @@ fn yy_action_163(
 }
 
 // file:///./parser.mbty
-// 473|    suberror_header "{" list_semis(enum_constructor) "}" deriving_directive_list {
-// 474|    let (attrs, type_vis, tycon, tycon_loc) = $1
-// 475|    let exception_decl : ExceptionDecl = EnumPayload($3)
-// 476|    TopTypeDef(
-// 477|      TypeDecl::{
-// 478|        tycon,
-// 479|        tycon_loc,
-// 480|        params: @list.empty(),
-// 481|        components: Error(exception_decl),
-// 482|        type_vis,
-// 483|        doc : DocString::empty(),
-// 484|        deriving: $5,
-// 485|        loc : mk_loc($sloc),
-// 486|        attrs
-// 487|      }
-// 488|    )
-// 489|  }
+// 475|    suberror_header "{" list_semis(enum_constructor) "}" deriving_directive_list {
+// 476|    let (attrs, type_vis, tycon, tycon_loc) = $1
+// 477|    let exception_decl : ExceptionDecl = EnumPayload($3)
+// 478|    TopTypeDef(
+// 479|      TypeDecl::{
+// 480|        tycon,
+// 481|        tycon_loc,
+// 482|        params: @list.empty(),
+// 483|        components: Error(exception_decl),
+// 484|        type_vis,
+// 485|        doc : DocString::empty(),
+// 486|        deriving: $5,
+// 487|        loc : mk_loc($sloc),
+// 488|        attrs
+// 489|      }
+// 490|    )
+// 491|  }
 
 ///|
 fn yy_action_164(
@@ -4792,9 +4792,9 @@ fn yy_action_164(
 }
 
 // file:///./parser.mbty
-// 760|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
-// 761|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 762|  }
+// 762|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
+// 763|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 764|  }
 
 ///|
 fn yy_action_165(
@@ -4824,9 +4824,9 @@ fn yy_action_165(
 }
 
 // file:///./parser.mbty
-// 1254|    binder "=>" expr_statement_no_break_continue_return { 
-// 1255|    make_arrow_fn(@list.singleton((Named($1), None)), $3, loc = mk_loc($sloc))
-// 1256|  }
+// 1256|    binder "=>" expr_statement_no_break_continue_return { 
+// 1257|    make_arrow_fn(@list.singleton((Named($1), None)), $3, loc = mk_loc($sloc))
+// 1258|  }
 
 ///|
 fn yy_action_166(
@@ -4855,14 +4855,14 @@ fn yy_action_166(
 }
 
 // file:///./parser.mbty
-// 1821|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type { 
-// 1822|    let (ty_res, ty_err) = $8
-// 1823|    let ts = match $5 { 
-// 1824|      None => @list.empty() 
-// 1825|      Some(ts) => ts 
-// 1826|    }
-// 1827|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
-// 1828|  }
+// 1823|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type { 
+// 1824|    let (ty_res, ty_err) = $8
+// 1825|    let ts = match $5 { 
+// 1826|      None => @list.empty() 
+// 1827|      Some(ts) => ts 
+// 1828|    }
+// 1829|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+// 1830|  }
 
 ///|
 fn yy_action_167(
@@ -4918,7 +4918,7 @@ fn yy_action_1(
 }
 
 // file:///./parser.mbty
-// 146|    X non_empty_list(X) { $2.add($1) }
+// 148|    X non_empty_list(X) { $2.add($1) }
 
 ///|
 fn yy_action_168(
@@ -4937,18 +4937,18 @@ fn yy_action_168(
 }
 
 // file:///./parser.mbty
-// 638|    attributes visibility "traitalias" batch_type_alias_targets {
-// 639|    let (is_list, pkg, targets) = $4
-// 640|    TopBatchTraitAlias(
-// 641|      pkg~,
-// 642|      targets~,
-// 643|      vis = $2,
-// 644|      attrs = $1,
-// 645|      is_list~,
-// 646|      doc = DocString::empty(),
-// 647|      loc = mk_loc($sloc)
-// 648|    )
-// 649|  }
+// 640|    attributes visibility "traitalias" batch_type_alias_targets {
+// 641|    let (is_list, pkg, targets) = $4
+// 642|    TopBatchTraitAlias(
+// 643|      pkg~,
+// 644|      targets~,
+// 645|      vis = $2,
+// 646|      attrs = $1,
+// 647|      is_list~,
+// 648|      doc = DocString::empty(),
+// 649|      loc = mk_loc($sloc)
+// 650|    )
+// 651|  }
 
 ///|
 fn yy_action_169(
@@ -4984,21 +4984,21 @@ fn yy_action_169(
 }
 
 // file:///./parser.mbty
-// 421|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
-// 422|    TopTypeDef(
-// 423|      TypeDecl::{
-// 424|        tycon : $5,
-// 425|        tycon_loc : mk_loc($loc($5)),
-// 426|        params : $6,
-// 427|        components: Extern,
-// 428|        type_vis : $2,
-// 429|        doc : DocString::empty(),
-// 430|        deriving: $7,
-// 431|        loc : mk_loc($sloc),
-// 432|        attrs : $1
-// 433|      }
-// 434|    )
-// 435|  }
+// 423|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
+// 424|    TopTypeDef(
+// 425|      TypeDecl::{
+// 426|        tycon : $5,
+// 427|        tycon_loc : mk_loc($loc($5)),
+// 428|        params : $6,
+// 429|        components: Extern,
+// 430|        type_vis : $2,
+// 431|        doc : DocString::empty(),
+// 432|        deriving: $7,
+// 433|        loc : mk_loc($sloc),
+// 434|        attrs : $1
+// 435|      }
+// 436|    )
+// 437|  }
 
 ///|
 fn yy_action_170(
@@ -5039,7 +5039,7 @@ fn yy_action_170(
 }
 
 // file:///./parser.mbty
-// 201|    X option(SEMI) { @list.singleton($1) }
+// 203|    X option(SEMI) { @list.singleton($1) }
 
 ///|
 fn yy_action_171(
@@ -5056,7 +5056,7 @@ fn yy_action_171(
 }
 
 // file:///./parser.mbty
-// 1696|    FLOAT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_float($1)) }
+// 1698|    FLOAT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_float($1)) }
 
 ///|
 fn yy_action_172(
@@ -5082,12 +5082,12 @@ fn yy_action_172(
 }
 
 // file:///./parser.mbty
-// 276|    ioption(delimited("[", non_empty_list_commas(type_), "]")) {
-// 277|    match $1 {
-// 278|      None => @list.empty()
-// 279|      Some(params) => params
-// 280|    }
-// 281|  }
+// 278|    ioption(delimited("[", non_empty_list_commas(type_), "]")) {
+// 279|    match $1 {
+// 280|      None => @list.empty()
+// 281|      Some(params) => params
+// 282|    }
+// 283|  }
 
 ///|
 fn yy_action_21(
@@ -5108,14 +5108,14 @@ fn yy_action_21(
 }
 
 // file:///./parser.mbty
-// 1765|    "raise" "?" { 
-// 1766|    let fake_error = Type::Name(
-// 1767|      constr_id = ConstrId::{ id: Ident(name = "Error"), loc: mk_loc($sloc) },
-// 1768|      tys = @list.empty(),
-// 1769|      loc = mk_loc($sloc)
-// 1770|    )
-// 1771|    MaybeError(ty = fake_error)
-// 1772|  }
+// 1767|    "raise" "?" { 
+// 1768|    let fake_error = Type::Name(
+// 1769|      constr_id = ConstrId::{ id: Ident(name = "Error"), loc: mk_loc($sloc) },
+// 1770|      tys = @list.empty(),
+// 1771|      loc = mk_loc($sloc)
+// 1772|    )
+// 1773|    MaybeError(ty = fake_error)
+// 1774|  }
 
 ///|
 fn yy_action_174(
@@ -5145,7 +5145,7 @@ fn yy_action_174(
 }
 
 // file:///./parser.mbty
-// 924|    "fn" binder optional_bang "{" { ($2, $3) }
+// 926|    "fn" binder optional_bang "{" { ($2, $3) }
 
 ///|
 fn yy_action_175(
@@ -5182,7 +5182,7 @@ fn yy_action_176(
 }
 
 // file:///./parser.mbty
-// 1679|    range_pattern "|" or_pattern { Or(pat1 = $1, pat2 = $3, loc = mk_loc($sloc)) }
+// 1681|    range_pattern "|" or_pattern { Or(pat1 = $1, pat2 = $3, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_178(
@@ -5226,7 +5226,7 @@ fn yy_action_179(
 }
 
 // file:///./parser.mbty
-// 1150|    "loop" non_empty_list_commas_no_trailing(expr) "{" { $2 }
+// 1152|    "loop" non_empty_list_commas_no_trailing(expr) "{" { $2 }
 
 ///|
 fn yy_action_180(
@@ -5243,9 +5243,9 @@ fn yy_action_180(
 }
 
 // file:///./parser.mbty
-// 766|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
-// 767|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 768|  }
+// 768|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
+// 769|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 770|  }
 
 ///|
 fn yy_action_181(
@@ -5275,7 +5275,7 @@ fn yy_action_181(
 }
 
 // file:///./parser.mbty
-// 1562|    qual_ident_ty { TypeVarConstraint::{ trait_: $1, loc: mk_loc($sloc) } }
+// 1564|    qual_ident_ty { TypeVarConstraint::{ trait_: $1, loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_182(
@@ -5301,14 +5301,14 @@ fn yy_action_182(
 }
 
 // file:///./parser.mbty
-// 1003|    left_value assignop expr { 
-// 1004|    let loc = mk_loc($sloc)
-// 1005|    match $1 {
-// 1006|      Var(var_) => Assign(var_~, expr=$3, augmented_by=Some($2), loc~)
-// 1007|      Field(record, accessor) => Mutate(record~, accessor~, field=$3, augmented_by=Some($2), loc~)
-// 1008|      Array(array, index) => ArrayAugmentedSet(op=$2, array~, index~, value=$3, loc~)
-// 1009|    }
-// 1010|  }
+// 1005|    left_value assignop expr { 
+// 1006|    let loc = mk_loc($sloc)
+// 1007|    match $1 {
+// 1008|      Var(var_) => Assign(var_~, expr=$3, augmented_by=Some($2), loc~)
+// 1009|      Field(record, accessor) => Mutate(record~, accessor~, field=$3, augmented_by=Some($2), loc~)
+// 1010|      Array(array, index) => ArrayAugmentedSet(op=$2, array~, index~, value=$3, loc~)
+// 1011|    }
+// 1012|  }
 
 ///|
 fn yy_action_183(
@@ -5348,7 +5348,7 @@ fn yy_action_183(
 }
 
 // file:///./parser.mbty
-// 1016|    augmented_assignment_expr { $1 }
+// 1018|    augmented_assignment_expr { $1 }
 
 ///|
 fn yy_action_185(
@@ -5366,18 +5366,18 @@ fn yy_action_185(
 }
 
 // file:///./parser.mbty
-// 831|    LIDENT_MAYBE_DOT option(preceded("as", binder)) { 
-// 832|    match $2 {
-// 833|      None => {
-// 834|        let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-// 835|        AliasTarget::{ binder, target: None }
-// 836|      }
-// 837|      Some(binder) => {
-// 838|        let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 839|        AliasTarget::{ binder, target: Some(target) }
-// 840|      }
-// 841|    }
-// 842|  }
+// 833|    LIDENT_MAYBE_DOT option(preceded("as", binder)) { 
+// 834|    match $2 {
+// 835|      None => {
+// 836|        let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
+// 837|        AliasTarget::{ binder, target: None }
+// 838|      }
+// 839|      Some(binder) => {
+// 840|        let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 841|        AliasTarget::{ binder, target: Some(target) }
+// 842|      }
+// 843|    }
+// 844|  }
 
 ///|
 fn yy_action_186(
@@ -5412,7 +5412,7 @@ fn yy_action_186(
 }
 
 // file:///./parser.mbty
-// 1336|    MINUS { "-" }
+// 1338|    MINUS { "-" }
 
 ///|
 fn yy_action_187(
@@ -5428,24 +5428,24 @@ fn yy_action_187(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_188(
@@ -5488,7 +5488,7 @@ fn yy_action_188(
 }
 
 // file:///./parser.mbty
-// 1954|    constr_pat_argument option(",") { (@list.singleton($1), false) }
+// 1956|    constr_pat_argument option(",") { (@list.singleton($1), false) }
 
 ///|
 fn yy_action_189(
@@ -5505,7 +5505,7 @@ fn yy_action_189(
 }
 
 // file:///./parser.mbty
-// 1266|    "_" ":" type_ ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), Some($3))) }
+// 1268|    "_" ":" type_ ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), Some($3))) }
 
 ///|
 fn yy_action_190(
@@ -5530,24 +5530,24 @@ fn yy_action_190(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_192(
@@ -5590,7 +5590,7 @@ fn yy_action_192(
 }
 
 // file:///./parser.mbty
-// 983|    expr_statement { StmtExpr($1) }
+// 985|    expr_statement { StmtExpr($1) }
 
 ///|
 fn yy_action_193(
@@ -5607,7 +5607,7 @@ fn yy_action_193(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_194(
@@ -5625,7 +5625,7 @@ fn yy_action_194(
 }
 
 // file:///./parser.mbty
-// 168|    non_empty_list_commas(X) { $1 }
+// 170|    non_empty_list_commas(X) { $1 }
 
 ///|
 fn yy_action_195(
@@ -5642,7 +5642,7 @@ fn yy_action_195(
 }
 
 // file:///./parser.mbty
-// 1591|    FALSE { Bool(false) }
+// 1593|    FALSE { Bool(false) }
 
 ///|
 fn yy_action_196(
@@ -5658,7 +5658,7 @@ fn yy_action_196(
 }
 
 // file:///./parser.mbty
-// 184|    non_empty_list_commas_with_trailing_info(X) { $1 }
+// 186|    non_empty_list_commas_with_trailing_info(X) { $1 }
 
 ///|
 fn yy_action_197(
@@ -5675,7 +5675,7 @@ fn yy_action_197(
 }
 
 // file:///./parser.mbty
-// 188|    X { @list.singleton($1) }
+// 190|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_198(
@@ -5692,14 +5692,14 @@ fn yy_action_198(
 }
 
 // file:///./parser.mbty
-// 556|    extern_fun_header "=" STRING {
-// 557|    let (language, decl) = $1
-// 558|    TopFuncDef(
-// 559|      loc = mk_loc($sloc),
-// 560|      fun_decl = decl,
-// 561|      decl_body = DeclStubs(Embedded(language = Some(language), code = CodeString($3)))
-// 562|    )
-// 563|  }
+// 558|    extern_fun_header "=" STRING {
+// 559|    let (language, decl) = $1
+// 560|    TopFuncDef(
+// 561|      loc = mk_loc($sloc),
+// 562|      fun_decl = decl,
+// 563|      decl_body = DeclStubs(Embedded(language = Some(language), code = CodeString($3)))
+// 564|    )
+// 565|  }
 
 ///|
 fn yy_action_199(
@@ -5730,21 +5730,21 @@ fn yy_action_199(
 }
 
 // file:///./parser.mbty
-// 421|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
-// 422|    TopTypeDef(
-// 423|      TypeDecl::{
-// 424|        tycon : $5,
-// 425|        tycon_loc : mk_loc($loc($5)),
-// 426|        params : $6,
-// 427|        components: Extern,
-// 428|        type_vis : $2,
-// 429|        doc : DocString::empty(),
-// 430|        deriving: $7,
-// 431|        loc : mk_loc($sloc),
-// 432|        attrs : $1
-// 433|      }
-// 434|    )
-// 435|  }
+// 423|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
+// 424|    TopTypeDef(
+// 425|      TypeDecl::{
+// 426|        tycon : $5,
+// 427|        tycon_loc : mk_loc($loc($5)),
+// 428|        params : $6,
+// 429|        components: Extern,
+// 430|        type_vis : $2,
+// 431|        doc : DocString::empty(),
+// 432|        deriving: $7,
+// 433|        loc : mk_loc($sloc),
+// 434|        attrs : $1
+// 435|      }
+// 436|    )
+// 437|  }
 
 ///|
 fn yy_action_200(
@@ -5785,7 +5785,7 @@ fn yy_action_200(
 }
 
 // file:///./parser.mbty
-// 1623|    AMPER { Var::{ name: Ident(name = "&"), loc: mk_loc($sloc) } }
+// 1625|    AMPER { Var::{ name: Ident(name = "&"), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_201(
@@ -5807,7 +5807,7 @@ fn yy_action_201(
 }
 
 // file:///./parser.mbty
-// 1631|    "?" { Some(mk_loc($sloc)) }
+// 1633|    "?" { Some(mk_loc($sloc)) }
 
 ///|
 fn yy_action_202(
@@ -5829,7 +5829,7 @@ fn yy_action_202(
 }
 
 // file:///./parser.mbty
-// 745|    "(" "readonly" ")" { Some("readonly") }
+// 747|    "(" "readonly" ")" { Some("readonly") }
 
 ///|
 fn yy_action_203(
@@ -5845,7 +5845,7 @@ fn yy_action_203(
 }
 
 // file:///./parser.mbty
-// 1342|    simple_expr "[" expr "]" { Array($1, $3) }
+// 1344|    simple_expr "[" expr "]" { Array($1, $3) }
 
 ///|
 fn yy_action_204(
@@ -5863,7 +5863,7 @@ fn yy_action_204(
 }
 
 // file:///./parser.mbty
-// 846|    type_name { DerivingDirective::{ type_name: $1, args: @list.empty(), loc: mk_loc($sloc) } }
+// 848|    type_name { DerivingDirective::{ type_name: $1, args: @list.empty(), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_205(
@@ -5890,10 +5890,10 @@ fn yy_action_205(
 }
 
 // file:///./parser.mbty
-// 776|    PACKAGE_NAME ".(" non_empty_list_commas(batch_type_alias_target(luident)) ")" { 
-// 777|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 778|    (true, Some(pkg), $3)
-// 779|  }
+// 778|    PACKAGE_NAME ".(" non_empty_list_commas(batch_type_alias_target(luident)) ")" { 
+// 779|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 780|    (true, Some(pkg), $3)
+// 781|  }
 
 ///|
 fn yy_action_206(
@@ -5917,7 +5917,7 @@ fn yy_action_206(
 }
 
 // file:///./parser.mbty
-// 1274|    binder ioption(",") ")" { @list.singleton(Named($1)) }
+// 1276|    binder ioption(",") ")" { @list.singleton(Named($1)) }
 
 ///|
 fn yy_action_207(
@@ -5936,9 +5936,9 @@ fn yy_action_207(
 }
 
 // file:///./parser.mbty
-// 760|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
-// 761|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 762|  }
+// 762|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
+// 763|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 764|  }
 
 ///|
 fn yy_action_208(
@@ -5968,7 +5968,7 @@ fn yy_action_208(
 }
 
 // file:///./parser.mbty
-// 163|    non_empty_list_commas_rev(X) "," { $1.rev() }
+// 165|    non_empty_list_commas_rev(X) "," { $1.rev() }
 
 ///|
 fn yy_action_209(
@@ -5985,7 +5985,7 @@ fn yy_action_209(
 }
 
 // file:///./parser.mbty
-// 167|    { @list.empty() }
+// 169|    { @list.empty() }
 
 ///|
 fn yy_action_210(
@@ -6001,7 +6001,7 @@ fn yy_action_210(
 }
 
 // file:///./parser.mbty
-// 1031|    "continue" list_commas_no_trailing(expr) { Continue(args = $2, label = None, loc = mk_loc($sloc)) }
+// 1033|    "continue" list_commas_no_trailing(expr) { Continue(args = $2, label = None, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_211(
@@ -6028,7 +6028,7 @@ fn yy_action_211(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_212(
@@ -6046,7 +6046,7 @@ fn yy_action_212(
 }
 
 // file:///./parser.mbty
-// 1032|    "return" option(expr) { Return(return_value = $2, loc = mk_loc($sloc)) }
+// 1034|    "return" option(expr) { Return(return_value = $2, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_214(
@@ -6069,7 +6069,7 @@ fn yy_action_214(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_215(
@@ -6086,9 +6086,9 @@ fn yy_action_215(
 }
 
 // file:///./parser.mbty
-// 750|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
-// 751|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 752|  }
+// 752|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
+// 753|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 754|  }
 
 ///|
 fn yy_action_216(
@@ -6118,7 +6118,7 @@ fn yy_action_216(
 }
 
 // file:///./parser.mbty
-// 202|    X SEMI non_empty_list_semis(X) { $3.add($1) }
+// 204|    X SEMI non_empty_list_semis(X) { $3.add($1) }
 
 ///|
 fn yy_action_217(
@@ -6136,7 +6136,7 @@ fn yy_action_217(
 }
 
 // file:///./parser.mbty
-// 314|    "fn" type_parameters fun_binder optional_bang { ($3, $4, $2) }
+// 316|    "fn" type_parameters fun_binder optional_bang { ($3, $4, $2) }
 
 ///|
 fn yy_action_218(
@@ -6155,7 +6155,7 @@ fn yy_action_218(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_219(
@@ -6189,22 +6189,22 @@ fn yy_action_219(
 }
 
 // file:///./parser.mbty
-// 436|    type_header type_ deriving_directive_list {
-// 437|    let (attrs, type_vis, tycon, tycon_loc, params) = $1
-// 438|    TopTypeDef(
-// 439|      TypeDecl::{
-// 440|        tycon,
-// 441|        tycon_loc,
-// 442|        params,
-// 443|        components: Newtype($2),
-// 444|        type_vis,
-// 445|        doc : DocString::empty(),
-// 446|        deriving: $3,
-// 447|        loc : mk_loc($sloc),
-// 448|        attrs
-// 449|      }
-// 450|    )
-// 451|  }
+// 438|    type_header type_ deriving_directive_list {
+// 439|    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+// 440|    TopTypeDef(
+// 441|      TypeDecl::{
+// 442|        tycon,
+// 443|        tycon_loc,
+// 444|        params,
+// 445|        components: Newtype($2),
+// 446|        type_vis,
+// 447|        doc : DocString::empty(),
+// 448|        deriving: $3,
+// 449|        loc : mk_loc($sloc),
+// 450|        attrs
+// 451|      }
+// 452|    )
+// 453|  }
 
 ///|
 fn yy_action_220(
@@ -6243,24 +6243,24 @@ fn yy_action_220(
 }
 
 // file:///./parser.mbty
-// 680|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
-// 681|    let (ret_ty, err_ty) = $10
-// 682|    TopImpl(
-// 683|      self_ty = None,
-// 684|      trait_ = $5,
-// 685|      method_name = $7,
-// 686|      has_error = $8,
-// 687|      quantifiers = $4,
-// 688|      params = $9,
-// 689|      ret_ty~,
-// 690|      err_ty~,
-// 691|      body = $11,
-// 692|      vis = $2,
-// 693|      loc = mk_loc($sloc),
-// 694|      attrs = $1,
-// 695|      doc = DocString::empty()
-// 696|    )
-// 697|  }
+// 682|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
+// 683|    let (ret_ty, err_ty) = $10
+// 684|    TopImpl(
+// 685|      self_ty = None,
+// 686|      trait_ = $5,
+// 687|      method_name = $7,
+// 688|      has_error = $8,
+// 689|      quantifiers = $4,
+// 690|      params = $9,
+// 691|      ret_ty~,
+// 692|      err_ty~,
+// 693|      body = $11,
+// 694|      vis = $2,
+// 695|      loc = mk_loc($sloc),
+// 696|      attrs = $1,
+// 697|      doc = DocString::empty()
+// 698|    )
+// 699|  }
 
 ///|
 fn yy_action_221(
@@ -6309,7 +6309,7 @@ fn yy_action_221(
 }
 
 // file:///./parser.mbty
-// 893|    PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
+// 895|    PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
 
 ///|
 fn yy_action_222(
@@ -6327,7 +6327,7 @@ fn yy_action_222(
 }
 
 // file:///./parser.mbty
-// 1695|    DOUBLE { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_double($1)) }
+// 1697|    DOUBLE { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_double($1)) }
 
 ///|
 fn yy_action_223(
@@ -6353,17 +6353,17 @@ fn yy_action_223(
 }
 
 // file:///./parser.mbty
-// 698|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
-// 699|    TopImplRelation(
-// 700|      self_ty = $7,
-// 701|      trait_ = $5,
-// 702|      quantifiers = $4,
-// 703|      vis = $2,
-// 704|      attrs = $1,
-// 705|      loc = mk_loc($sloc),
-// 706|      doc = DocString::empty()
-// 707|    )
-// 708|  }
+// 700|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
+// 701|    TopImplRelation(
+// 702|      self_ty = $7,
+// 703|      trait_ = $5,
+// 704|      quantifiers = $4,
+// 705|      vis = $2,
+// 706|      attrs = $1,
+// 707|      loc = mk_loc($sloc),
+// 708|      doc = DocString::empty()
+// 709|    )
+// 710|  }
 
 ///|
 fn yy_action_224(
@@ -6417,7 +6417,7 @@ fn yy_action_191(
 }
 
 // file:///./parser.mbty
-// 1816|    "_" { Any(loc = mk_loc($sloc)) }
+// 1818|    "_" { Any(loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_225(
@@ -6439,7 +6439,7 @@ fn yy_action_225(
 }
 
 // file:///./parser.mbty
-// 1332|    PLUS { "+" }
+// 1334|    PLUS { "+" }
 
 ///|
 fn yy_action_226(
@@ -6455,9 +6455,9 @@ fn yy_action_226(
 }
 
 // file:///./parser.mbty
-// 952|    "let" "mut" binder opt_annot "=" expr { 
-// 953|    StmtLetmut(binder = $3, ty_opt = $4, expr = $6, loc = mk_loc($sloc))
-// 954|  }
+// 954|    "let" "mut" binder opt_annot "=" expr { 
+// 955|    StmtLetmut(binder = $3, ty_opt = $4, expr = $6, loc = mk_loc($sloc))
+// 956|  }
 
 ///|
 fn yy_action_227(
@@ -6489,7 +6489,7 @@ fn yy_action_227(
 }
 
 // file:///./parser.mbty
-// 756|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
+// 758|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
 
 ///|
 fn yy_action_228(
@@ -6517,7 +6517,7 @@ fn yy_action_228(
 }
 
 // file:///./parser.mbty
-// 919|    "!" { Some(mk_loc($sloc)) }
+// 921|    "!" { Some(mk_loc($sloc)) }
 
 ///|
 fn yy_action_229(
@@ -6539,7 +6539,7 @@ fn yy_action_229(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_230(
@@ -6557,16 +6557,16 @@ fn yy_action_230(
 }
 
 // file:///./parser.mbty
-// 1127|    match_header non_empty_list_semis(single_pattern_case) "}" { 
-// 1128|    let (expr, using_label) = $1
-// 1129|    Match(
-// 1130|      expr~,
-// 1131|      cases = $2,
-// 1132|      match_loc = mk_loc($loc($1)),
-// 1133|      using_ = using_label,
-// 1134|      loc = mk_loc($sloc)
-// 1135|    )
-// 1136|  }
+// 1129|    match_header non_empty_list_semis(single_pattern_case) "}" { 
+// 1130|    let (expr, using_label) = $1
+// 1131|    Match(
+// 1132|      expr~,
+// 1133|      cases = $2,
+// 1134|      match_loc = mk_loc($loc($1)),
+// 1135|      using_ = using_label,
+// 1136|      loc = mk_loc($sloc)
+// 1137|    )
+// 1138|  }
 
 ///|
 fn yy_action_231(
@@ -6599,7 +6599,7 @@ fn yy_action_231(
 }
 
 // file:///./parser.mbty
-// 1778|    simple_type "!" error_type { ($1, ErrorType(ty = $3)) }
+// 1780|    simple_type "!" error_type { ($1, ErrorType(ty = $3)) }
 
 ///|
 fn yy_action_232(
@@ -6617,9 +6617,9 @@ fn yy_action_232(
 }
 
 // file:///./parser.mbty
-// 1288|    infix_expr infixop infix_expr { 
-// 1289|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1290|  }
+// 1290|    infix_expr infixop infix_expr { 
+// 1291|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1292|  }
 
 ///|
 fn yy_action_233(
@@ -6650,7 +6650,7 @@ fn yy_action_233(
 }
 
 // file:///./parser.mbty
-// 738|     { Default }
+// 740|     { Default }
 
 ///|
 fn yy_action_14(
@@ -6666,13 +6666,13 @@ fn yy_action_14(
 }
 
 // file:///./parser.mbty
-// 1794|    qual_ident_ty { 
-// 1795|    Name(
-// 1796|      constr_id = ConstrId::{ id: $1, loc: mk_loc($sloc) },
-// 1797|      tys = @list.empty(),
-// 1798|      loc = mk_loc($sloc)
-// 1799|    )
-// 1800|  }
+// 1796|    qual_ident_ty { 
+// 1797|    Name(
+// 1798|      constr_id = ConstrId::{ id: $1, loc: mk_loc($sloc) },
+// 1799|      tys = @list.empty(),
+// 1800|      loc = mk_loc($sloc)
+// 1801|    )
+// 1802|  }
 
 ///|
 fn yy_action_235(
@@ -6702,7 +6702,7 @@ fn yy_action_235(
 }
 
 // file:///./parser.mbty
-// 211|    { @list.empty() }
+// 213|    { @list.empty() }
 
 ///|
 fn yy_action_236(
@@ -6735,7 +6735,7 @@ fn yy_action_157(
 }
 
 // file:///./parser.mbty
-// 1790|     { (None, NoErrorType) }
+// 1792|     { (None, NoErrorType) }
 
 ///|
 fn yy_action_237(
@@ -6751,7 +6751,7 @@ fn yy_action_237(
 }
 
 // file:///./parser.mbty
-// 982|    "defer" pipe_expr { StmtDefer(expr = $2, loc = mk_loc($sloc)) }
+// 984|    "defer" pipe_expr { StmtDefer(expr = $2, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_238(
@@ -6774,7 +6774,7 @@ fn yy_action_238(
 }
 
 // file:///./parser.mbty
-// 1321|    prefix_expr { $1 }
+// 1323|    prefix_expr { $1 }
 
 ///|
 fn yy_action_239(
@@ -6791,9 +6791,9 @@ fn yy_action_239(
 }
 
 // file:///./parser.mbty
-// 368|    "{" list_semis_rev(statement) "}" {
-// 369|    Statement::compact_rev($2, loc = mk_loc($sloc))
-// 370|  }
+// 370|    "{" list_semis_rev(statement) "}" {
+// 371|    Statement::compact_rev($2, loc = mk_loc($sloc))
+// 372|  }
 
 ///|
 fn yy_action_240(
@@ -6836,12 +6836,12 @@ fn yy_action_241(
 }
 
 // file:///./parser.mbty
-// 1399|    "(" non_empty_tuple_elems_with_prefix { 
-// 1400|    match $2 {
-// 1401|      More(expr, tail=Empty) => Group(expr~, group = Paren, loc = mk_loc($sloc))
-// 1402|      exprs => @syntax.make_tuple_expr(loc = mk_loc($sloc), exprs)
-// 1403|    }
-// 1404|  }
+// 1401|    "(" non_empty_tuple_elems_with_prefix { 
+// 1402|    match $2 {
+// 1403|      More(expr, tail=Empty) => Group(expr~, group = Paren, loc = mk_loc($sloc))
+// 1404|      exprs => @syntax.make_tuple_expr(loc = mk_loc($sloc), exprs)
+// 1405|    }
+// 1406|  }
 
 ///|
 fn yy_action_242(
@@ -6905,7 +6905,7 @@ fn yy_action_244(
 }
 
 // file:///./parser.mbty
-// 1275|    "_" ioption(",") ")" { @list.singleton(Unnamed(mk_loc($loc($1)))) }
+// 1277|    "_" ioption(",") ")" { @list.singleton(Unnamed(mk_loc($loc($1)))) }
 
 ///|
 fn yy_action_245(
@@ -6924,7 +6924,7 @@ fn yy_action_245(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_246(
@@ -6975,7 +6975,7 @@ fn yy_action_248(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_250(
@@ -6992,7 +6992,7 @@ fn yy_action_250(
 }
 
 // file:///./parser.mbty
-// 167|    { @list.empty() }
+// 169|    { @list.empty() }
 
 ///|
 fn yy_action_251(
@@ -7008,7 +7008,7 @@ fn yy_action_251(
 }
 
 // file:///./parser.mbty
-// 216|    X { $1 }
+// 218|    X { $1 }
 
 ///|
 fn yy_action_252(
@@ -7026,7 +7026,7 @@ fn yy_action_252(
 }
 
 // file:///./parser.mbty
-// 229|    binder opt_annot { Positional(binder = $1, ty = $2) }
+// 231|    binder opt_annot { Positional(binder = $1, ty = $2) }
 
 ///|
 fn yy_action_253(
@@ -7046,7 +7046,7 @@ fn yy_action_253(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_254(
@@ -7080,13 +7080,13 @@ fn yy_action_254(
 }
 
 // file:///./parser.mbty
-// 1808|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
-// 1809|    Name(
-// 1810|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 1811|      tys = $2,
-// 1812|      loc = mk_loc($sloc)
-// 1813|    )
-// 1814|  }
+// 1810|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
+// 1811|    Name(
+// 1812|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 1813|      tys = $2,
+// 1814|      loc = mk_loc($sloc)
+// 1815|    )
+// 1816|  }
 
 ///|
 fn yy_action_255(
@@ -7121,7 +7121,7 @@ fn yy_action_255(
 }
 
 // file:///./parser.mbty
-// 1265|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
+// 1267|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
 
 ///|
 fn yy_action_256(
@@ -7141,25 +7141,25 @@ fn yy_action_256(
 }
 
 // file:///./parser.mbty
-// 346|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
-// 347|    let (type_name, f) = $6
-// 348|    let (return_type, error_type) = $10
-// 349|    let fn_decl = FunDecl::{
-// 350|      type_name,
-// 351|      name: f,
-// 352|      has_error : $7,
-// 353|      is_async : false,
-// 354|      quantifiers: $8,
-// 355|      decl_params: $9,
-// 356|      params_loc: mk_loc($loc($9)),
-// 357|      return_type,
-// 358|      error_type,
-// 359|      vis: $2,
-// 360|      doc: DocString::empty(),
-// 361|      attrs: $1,
-// 362|    }
-// 363|    ($4, fn_decl)
-// 364|  }
+// 348|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
+// 349|    let (type_name, f) = $6
+// 350|    let (return_type, error_type) = $10
+// 351|    let fn_decl = FunDecl::{
+// 352|      type_name,
+// 353|      name: f,
+// 354|      has_error : $7,
+// 355|      is_async : false,
+// 356|      quantifiers: $8,
+// 357|      decl_params: $9,
+// 358|      params_loc: mk_loc($loc($9)),
+// 359|      return_type,
+// 360|      error_type,
+// 361|      vis: $2,
+// 362|      doc: DocString::empty(),
+// 363|      attrs: $1,
+// 364|    }
+// 365|    ($4, fn_decl)
+// 366|  }
 
 ///|
 fn yy_action_257(
@@ -7203,7 +7203,7 @@ fn yy_action_257(
 }
 
 // file:///./parser.mbty
-// 756|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
+// 758|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
 
 ///|
 fn yy_action_258(
@@ -7231,7 +7231,7 @@ fn yy_action_258(
 }
 
 // file:///./parser.mbty
-// 375|    list_semis_rev(statement) { (@list.empty(), Statement::compact_rev($1, loc = mk_loc($sloc))) }
+// 377|    list_semis_rev(statement) { (@list.empty(), Statement::compact_rev($1, loc = mk_loc($sloc))) }
 
 ///|
 fn yy_action_259(
@@ -7260,7 +7260,7 @@ fn yy_action_259(
 }
 
 // file:///./parser.mbty
-// 1779|    simple_type "?" error_type { ($1, MaybeError(ty = $3)) }
+// 1781|    simple_type "?" error_type { ($1, MaybeError(ty = $3)) }
 
 ///|
 fn yy_action_260(
@@ -7278,9 +7278,9 @@ fn yy_action_260(
 }
 
 // file:///./parser.mbty
-// 1450|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "," list_commas(record_defn_single) "}" { 
-// 1451|    RecordUpdate(type_name = $1, record = $4, fields = $6, loc = mk_loc($sloc))
-// 1452|  }
+// 1452|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "," list_commas(record_defn_single) "}" { 
+// 1453|    RecordUpdate(type_name = $1, record = $4, fields = $6, loc = mk_loc($sloc))
+// 1454|  }
 
 ///|
 fn yy_action_261(
@@ -7327,7 +7327,7 @@ fn yy_action_262(
 }
 
 // file:///./parser.mbty
-// 1371|    "!" { Exclamation }
+// 1373|    "!" { Exclamation }
 
 ///|
 fn yy_action_40(
@@ -7343,9 +7343,9 @@ fn yy_action_40(
 }
 
 // file:///./parser.mbty
-// 1288|    infix_expr infixop infix_expr { 
-// 1289|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1290|  }
+// 1290|    infix_expr infixop infix_expr { 
+// 1291|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1292|  }
 
 ///|
 fn yy_action_263(
@@ -7376,13 +7376,13 @@ fn yy_action_263(
 }
 
 // file:///./parser.mbty
-// 549|    fun_header "=" non_empty_list(MULTILINE_STRING) {
-// 550|    TopFuncDef(
-// 551|      loc = mk_loc($sloc),
-// 552|      fun_decl = $1,
-// 553|      decl_body = DeclStubs(Embedded(language = None, code = CodeMultilineString($3)))
-// 554|    )
-// 555|  }
+// 551|    fun_header "=" non_empty_list(MULTILINE_STRING) {
+// 552|    TopFuncDef(
+// 553|      loc = mk_loc($sloc),
+// 554|      fun_decl = $1,
+// 555|      decl_body = DeclStubs(Embedded(language = None, code = CodeMultilineString($3)))
+// 556|    )
+// 557|  }
 
 ///|
 fn yy_action_264(
@@ -7412,21 +7412,21 @@ fn yy_action_264(
 }
 
 // file:///./parser.mbty
-// 856|    attributes is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) { 
-// 857|    let (return_type, error_type) = $9
-// 858|    TraitMethodDecl::{
-// 859|      name: $3,
-// 860|      has_error: $4,
-// 861|      is_async: $2,
-// 862|      quantifiers: $5,
-// 863|      params: $7,
-// 864|      return_type,
-// 865|      error_type,
-// 866|      has_default: $10,
-// 867|      attrs: $1,
-// 868|      loc: mk_loc($sloc)
-// 869|    }
-// 870|  }
+// 858|    attributes is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) { 
+// 859|    let (return_type, error_type) = $9
+// 860|    TraitMethodDecl::{
+// 861|      name: $3,
+// 862|      has_error: $4,
+// 863|      is_async: $2,
+// 864|      quantifiers: $5,
+// 865|      params: $7,
+// 866|      return_type,
+// 867|      error_type,
+// 868|      has_default: $10,
+// 869|      attrs: $1,
+// 870|      loc: mk_loc($sloc)
+// 871|    }
+// 872|  }
 
 ///|
 fn yy_action_265(
@@ -7471,15 +7471,15 @@ fn yy_action_265(
 }
 
 // file:///./parser.mbty
-// 1969|    POST_LABEL { 
-// 1970|    let loc = mk_loc($loc($1))
-// 1971|    let label = Label::{ name: $1, loc }
-// 1972|    let pat = @syntax.label_to_pat(loc = loc.trim_last_char(), label)
-// 1973|    ConstrPatArg::{
-// 1974|      pat,
-// 1975|      kind: LabelledPun(label)
-// 1976|    }
-// 1977|  }
+// 1971|    POST_LABEL { 
+// 1972|    let loc = mk_loc($loc($1))
+// 1973|    let label = Label::{ name: $1, loc }
+// 1974|    let pat = @syntax.label_to_pat(loc = loc.trim_last_char(), label)
+// 1975|    ConstrPatArg::{
+// 1976|      pat,
+// 1977|      kind: LabelledPun(label)
+// 1978|    }
+// 1979|  }
 
 ///|
 fn yy_action_266(
@@ -7501,7 +7501,7 @@ fn yy_action_266(
 }
 
 // file:///./parser.mbty
-// 847|    type_name "(" list_commas(argument) ")" { DerivingDirective::{ type_name: $1, args: $3, loc: mk_loc($sloc) } }
+// 849|    type_name "(" list_commas(argument) ")" { DerivingDirective::{ type_name: $1, args: $3, loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_267(
@@ -7529,10 +7529,10 @@ fn yy_action_267(
 }
 
 // file:///./parser.mbty
-// 789|    LUIDENT_MAYBE_DOT { 
-// 790|    let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-// 791|    AliasTarget::{ binder, target: None }
-// 792|  }
+// 791|    LUIDENT_MAYBE_DOT { 
+// 792|    let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
+// 793|    AliasTarget::{ binder, target: None }
+// 794|  }
 
 ///|
 fn yy_action_268(
@@ -7555,7 +7555,7 @@ fn yy_action_268(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_269(
@@ -7572,15 +7572,15 @@ fn yy_action_269(
 }
 
 // file:///./parser.mbty
-// 1486|    simple_expr "[" option(expr) ":" option(expr) "]" { 
-// 1487|    ArrayGetSlice(
-// 1488|      array = $1,
-// 1489|      start_index = $3,
-// 1490|      end_index = $5,
-// 1491|      index_loc = mk_loc(($loc($2).0, $loc($6).1)),
-// 1492|      loc = mk_loc($sloc)
-// 1493|    )
-// 1494|  }
+// 1488|    simple_expr "[" option(expr) ":" option(expr) "]" { 
+// 1489|    ArrayGetSlice(
+// 1490|      array = $1,
+// 1491|      start_index = $3,
+// 1492|      end_index = $5,
+// 1493|      index_loc = mk_loc(($loc($2).0, $loc($6).1)),
+// 1494|      loc = mk_loc($sloc)
+// 1495|    )
+// 1496|  }
 
 ///|
 fn yy_action_270(
@@ -7620,7 +7620,7 @@ fn yy_action_270(
 }
 
 // file:///./parser.mbty
-// 756|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
+// 758|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
 
 ///|
 fn yy_action_271(
@@ -7648,7 +7648,7 @@ fn yy_action_271(
 }
 
 // file:///./parser.mbty
-// 1729|    ".." STRING { StringSpread($2) }
+// 1731|    ".." STRING { StringSpread($2) }
 
 ///|
 fn yy_action_272(
@@ -7665,7 +7665,7 @@ fn yy_action_272(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_273(
@@ -7698,24 +7698,24 @@ fn yy_action_274(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_275(
@@ -7758,7 +7758,7 @@ fn yy_action_275(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_276(
@@ -7776,7 +7776,7 @@ fn yy_action_276(
 }
 
 // file:///./parser.mbty
-// 1276|    binder "," arrow_fn_prefix_no_constraint { $3.add(Named($1)) }
+// 1278|    binder "," arrow_fn_prefix_no_constraint { $3.add(Named($1)) }
 
 ///|
 fn yy_action_277(
@@ -7795,24 +7795,24 @@ fn yy_action_277(
 }
 
 // file:///./parser.mbty
-// 680|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
-// 681|    let (ret_ty, err_ty) = $10
-// 682|    TopImpl(
-// 683|      self_ty = None,
-// 684|      trait_ = $5,
-// 685|      method_name = $7,
-// 686|      has_error = $8,
-// 687|      quantifiers = $4,
-// 688|      params = $9,
-// 689|      ret_ty~,
-// 690|      err_ty~,
-// 691|      body = $11,
-// 692|      vis = $2,
-// 693|      loc = mk_loc($sloc),
-// 694|      attrs = $1,
-// 695|      doc = DocString::empty()
-// 696|    )
-// 697|  }
+// 682|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
+// 683|    let (ret_ty, err_ty) = $10
+// 684|    TopImpl(
+// 685|      self_ty = None,
+// 686|      trait_ = $5,
+// 687|      method_name = $7,
+// 688|      has_error = $8,
+// 689|      quantifiers = $4,
+// 690|      params = $9,
+// 691|      ret_ty~,
+// 692|      err_ty~,
+// 693|      body = $11,
+// 694|      vis = $2,
+// 695|      loc = mk_loc($sloc),
+// 696|      attrs = $1,
+// 697|      doc = DocString::empty()
+// 698|    )
+// 699|  }
 
 ///|
 fn yy_action_278(
@@ -7861,24 +7861,24 @@ fn yy_action_278(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_279(
@@ -7921,9 +7921,9 @@ fn yy_action_279(
 }
 
 // file:///./parser.mbty
-// 1113|    "if" infix_expr block_expr "else" if_expr { 
-// 1114|    If(cond = $2, ifso = $3, ifnot = Some($5), loc = mk_loc($sloc))
-// 1115|  }
+// 1115|    "if" infix_expr block_expr "else" if_expr { 
+// 1116|    If(cond = $2, ifso = $3, ifnot = Some($5), loc = mk_loc($sloc))
+// 1117|  }
 
 ///|
 fn yy_action_280(
@@ -7953,7 +7953,7 @@ fn yy_action_280(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_281(
@@ -7971,7 +7971,7 @@ fn yy_action_281(
 }
 
 // file:///./parser.mbty
-// 183|    { (@list.empty(), false) }
+// 185|    { (@list.empty(), false) }
 
 ///|
 fn yy_action_282(
@@ -7987,7 +7987,7 @@ fn yy_action_282(
 }
 
 // file:///./parser.mbty
-// 1224|    match_expr { $1 }
+// 1226|    match_expr { $1 }
 
 ///|
 fn yy_action_283(
@@ -8004,7 +8004,7 @@ fn yy_action_283(
 }
 
 // file:///./parser.mbty
-// 1376|    expr ioption(",") ")" { @list.singleton($1) }
+// 1378|    expr ioption(",") ")" { @list.singleton($1) }
 
 ///|
 fn yy_action_284(
@@ -8022,7 +8022,7 @@ fn yy_action_284(
 }
 
 // file:///./parser.mbty
-// 1920|    non_empty_list_commas_with_tail(fields_pat_single) ".." option(",") { ($1, false) }
+// 1922|    non_empty_list_commas_with_tail(fields_pat_single) ".." option(",") { ($1, false) }
 
 ///|
 fn yy_action_285(
@@ -8039,7 +8039,7 @@ fn yy_action_285(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_286(
@@ -8063,8 +8063,8 @@ fn yy_action_286(
 }
 
 // file:///./parser.mbty
-// 887|    LIDENT
-// 888|  | UIDENT { $1 }
+// 889|    LIDENT
+// 890|  | UIDENT { $1 }
 
 ///|
 fn yy_action_287(
@@ -8081,9 +8081,9 @@ fn yy_action_287(
 }
 
 // file:///./parser.mbty
-// 1288|    infix_expr infixop infix_expr { 
-// 1289|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1290|  }
+// 1290|    infix_expr infixop infix_expr { 
+// 1291|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1292|  }
 
 ///|
 fn yy_action_288(
@@ -8114,7 +8114,7 @@ fn yy_action_288(
 }
 
 // file:///./parser.mbty
-// 1566|    qual_ident { Var::{ name: $1, loc: mk_loc($sloc) } }
+// 1568|    qual_ident { Var::{ name: $1, loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_290(
@@ -8137,20 +8137,20 @@ fn yy_action_290(
 }
 
 // file:///./parser.mbty
-// 1412|    is_async "fn" optional_bang parameters func_return_type block_expr { 
-// 1413|    let (return_type, error_type) = $5
-// 1414|    Lambda(
-// 1415|      parameters = $4,
-// 1416|      params_loc = mk_loc($loc($4)),
-// 1417|      body = $6,
-// 1418|      return_type~,
-// 1419|      error_type~,
-// 1420|      kind = Lambda,
-// 1421|      has_error = $3,
-// 1422|      is_async = $1,
-// 1423|      loc = mk_loc($sloc)
-// 1424|    )
-// 1425|  }
+// 1414|    is_async "fn" optional_bang parameters func_return_type block_expr { 
+// 1415|    let (return_type, error_type) = $5
+// 1416|    Lambda(
+// 1417|      parameters = $4,
+// 1418|      params_loc = mk_loc($loc($4)),
+// 1419|      body = $6,
+// 1420|      return_type~,
+// 1421|      error_type~,
+// 1422|      kind = Lambda,
+// 1423|      has_error = $3,
+// 1424|      is_async = $1,
+// 1425|      loc = mk_loc($sloc)
+// 1426|    )
+// 1427|  }
 
 ///|
 fn yy_action_291(
@@ -8191,7 +8191,7 @@ fn yy_action_291(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_292(
@@ -8215,9 +8215,9 @@ fn yy_action_292(
 }
 
 // file:///./parser.mbty
-// 1071|    non_empty_list_commas(pattern) option(preceded("if", infix_expr)) "=>" expr_statement { 
-// 1072|    MultiArgCase::{ patterns : $1, guard_ : $2, body : $4 }
-// 1073|  }
+// 1073|    non_empty_list_commas(pattern) option(preceded("if", infix_expr)) "=>" expr_statement { 
+// 1074|    MultiArgCase::{ patterns : $1, guard_ : $2, body : $4 }
+// 1075|  }
 
 ///|
 fn yy_action_293(
@@ -8236,7 +8236,7 @@ fn yy_action_293(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_294(
@@ -8253,7 +8253,7 @@ fn yy_action_294(
 }
 
 // file:///./parser.mbty
-// 1376|    expr ioption(",") ")" { @list.singleton($1) }
+// 1378|    expr ioption(",") ")" { @list.singleton($1) }
 
 ///|
 fn yy_action_295(
@@ -8271,14 +8271,14 @@ fn yy_action_295(
 }
 
 // file:///./parser.mbty
-// 319|    "struct" luident "{" list_semis(record_decl_field) "}" deriving_directive_list {
-// 320|    LocalTypeDecl::{
-// 321|      tycon : $2,
-// 322|      tycon_loc : mk_loc($loc($2)),
-// 323|      components: Record($4),
-// 324|      deriving: $6
-// 325|    }
-// 326|  }
+// 321|    "struct" luident "{" list_semis(record_decl_field) "}" deriving_directive_list {
+// 322|    LocalTypeDecl::{
+// 323|      tycon : $2,
+// 324|      tycon_loc : mk_loc($loc($2)),
+// 325|      components: Record($4),
+// 326|      deriving: $6
+// 327|    }
+// 328|  }
 
 ///|
 fn yy_action_296(
@@ -8304,7 +8304,7 @@ fn yy_action_296(
 }
 
 // file:///./parser.mbty
-// 1693|    INT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_int($1)) }
+// 1695|    INT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_int($1)) }
 
 ///|
 fn yy_action_297(
@@ -8330,7 +8330,7 @@ fn yy_action_297(
 }
 
 // file:///./parser.mbty
-// 1593|    BYTES { Bytes($1) }
+// 1595|    BYTES { Bytes($1) }
 
 ///|
 fn yy_action_298(
@@ -8347,7 +8347,7 @@ fn yy_action_298(
 }
 
 // file:///./parser.mbty
-// 1571|    "&" qual_ident_ty { TypeName::{ name: $2, is_object: true, loc: mk_loc($sloc) } }
+// 1573|    "&" qual_ident_ty { TypeName::{ name: $2, is_object: true, loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_299(
@@ -8374,24 +8374,24 @@ fn yy_action_299(
 }
 
 // file:///./parser.mbty
-// 593|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 594|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
-// 595|    let supers = match $5 {
-// 596|      None => @list.empty()
-// 597|      Some(supers) => supers
-// 598|    }
-// 599|    TopTrait(
-// 600|      TraitDecl::{
-// 601|        name,
-// 602|        supers,
-// 603|        methods: $7,
-// 604|        vis: $2,
-// 605|        loc: mk_loc($sloc),
-// 606|        attrs: $1,
-// 607|        doc : DocString::empty()
-// 608|      }
-// 609|    )
-// 610|  }
+// 595|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
+// 596|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
+// 597|    let supers = match $5 {
+// 598|      None => @list.empty()
+// 599|      Some(supers) => supers
+// 600|    }
+// 601|    TopTrait(
+// 602|      TraitDecl::{
+// 603|        name,
+// 604|        supers,
+// 605|        methods: $7,
+// 606|        vis: $2,
+// 607|        loc: mk_loc($sloc),
+// 608|        attrs: $1,
+// 609|        doc : DocString::empty()
+// 610|      }
+// 611|    )
+// 612|  }
 
 ///|
 fn yy_action_300(
@@ -8438,7 +8438,7 @@ fn yy_action_300(
 }
 
 // file:///./parser.mbty
-// 1170|    "else" block_expr { Some($2) }
+// 1172|    "else" block_expr { Some($2) }
 
 ///|
 fn yy_action_301(
@@ -8455,7 +8455,7 @@ fn yy_action_301(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_302(
@@ -8489,7 +8489,7 @@ fn yy_action_302(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_303(
@@ -8513,7 +8513,7 @@ fn yy_action_303(
 }
 
 // file:///./parser.mbty
-// 1686|    simple_pattern { $1 }
+// 1688|    simple_pattern { $1 }
 
 ///|
 fn yy_action_304(
@@ -8530,14 +8530,14 @@ fn yy_action_304(
 }
 
 // file:///./parser.mbty
-// 564|    extern_fun_header "=" non_empty_list(MULTILINE_STRING) {
-// 565|    let (language, decl) = $1
-// 566|    TopFuncDef(
-// 567|      loc = mk_loc($sloc),
-// 568|      fun_decl = decl,
-// 569|      decl_body = DeclStubs(Embedded(language = Some(language), code = CodeMultilineString($3)))
-// 570|    )
-// 571|  }
+// 566|    extern_fun_header "=" non_empty_list(MULTILINE_STRING) {
+// 567|    let (language, decl) = $1
+// 568|    TopFuncDef(
+// 569|      loc = mk_loc($sloc),
+// 570|      fun_decl = decl,
+// 571|      decl_body = DeclStubs(Embedded(language = Some(language), code = CodeMultilineString($3)))
+// 572|    )
+// 573|  }
 
 ///|
 fn yy_action_305(
@@ -8568,7 +8568,7 @@ fn yy_action_305(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_306(
@@ -8602,7 +8602,7 @@ fn yy_action_306(
 }
 
 // file:///./parser.mbty
-// 224|    ioption(annot) { $1 }
+// 226|    ioption(annot) { $1 }
 
 ///|
 fn yy_action_115(
@@ -8620,7 +8620,7 @@ fn yy_action_115(
 }
 
 // file:///./parser.mbty
-// 826|    LIDENT_MAYBE_DOT "::" { Label::{ name: $1, loc: mk_loc($loc($1)) } }
+// 828|    LIDENT_MAYBE_DOT "::" { Label::{ name: $1, loc: mk_loc($loc($1)) } }
 
 ///|
 fn yy_action_307(
@@ -8642,7 +8642,7 @@ fn yy_action_307(
 }
 
 // file:///./parser.mbty
-// 1617|    INFIX4 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
+// 1619|    INFIX4 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_289(
@@ -8668,24 +8668,24 @@ fn yy_action_289(
 }
 
 // file:///./parser.mbty
-// 680|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
-// 681|    let (ret_ty, err_ty) = $10
-// 682|    TopImpl(
-// 683|      self_ty = None,
-// 684|      trait_ = $5,
-// 685|      method_name = $7,
-// 686|      has_error = $8,
-// 687|      quantifiers = $4,
-// 688|      params = $9,
-// 689|      ret_ty~,
-// 690|      err_ty~,
-// 691|      body = $11,
-// 692|      vis = $2,
-// 693|      loc = mk_loc($sloc),
-// 694|      attrs = $1,
-// 695|      doc = DocString::empty()
-// 696|    )
-// 697|  }
+// 682|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
+// 683|    let (ret_ty, err_ty) = $10
+// 684|    TopImpl(
+// 685|      self_ty = None,
+// 686|      trait_ = $5,
+// 687|      method_name = $7,
+// 688|      has_error = $8,
+// 689|      quantifiers = $4,
+// 690|      params = $9,
+// 691|      ret_ty~,
+// 692|      err_ty~,
+// 693|      body = $11,
+// 694|      vis = $2,
+// 695|      loc = mk_loc($sloc),
+// 696|      attrs = $1,
+// 697|      doc = DocString::empty()
+// 698|    )
+// 699|  }
 
 ///|
 fn yy_action_308(
@@ -8734,13 +8734,13 @@ fn yy_action_308(
 }
 
 // file:///./parser.mbty
-// 1808|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
-// 1809|    Name(
-// 1810|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 1811|      tys = $2,
-// 1812|      loc = mk_loc($sloc)
-// 1813|    )
-// 1814|  }
+// 1810|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
+// 1811|    Name(
+// 1812|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 1813|      tys = $2,
+// 1814|      loc = mk_loc($sloc)
+// 1815|    )
+// 1816|  }
 
 ///|
 fn yy_action_309(
@@ -8775,7 +8775,7 @@ fn yy_action_309(
 }
 
 // file:///./parser.mbty
-// 1540|    DOT_INT { Index(tuple_index = $1, loc = mk_loc($sloc)) }
+// 1542|    DOT_INT { Index(tuple_index = $1, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_310(
@@ -8798,7 +8798,7 @@ fn yy_action_310(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_311(
@@ -8815,9 +8815,9 @@ fn yy_action_311(
 }
 
 // file:///./parser.mbty
-// 750|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
-// 751|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 752|  }
+// 752|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
+// 753|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 754|  }
 
 ///|
 fn yy_action_312(
@@ -8847,7 +8847,7 @@ fn yy_action_312(
 }
 
 // file:///./parser.mbty
-// 1764|    "noraise" { Noraise(loc = mk_loc($sloc)) }
+// 1766|    "noraise" { Noraise(loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_313(
@@ -8869,7 +8869,7 @@ fn yy_action_313(
 }
 
 // file:///./parser.mbty
-// 1405|    "(" binder ":" type_ ")" { Constraint(expr = @syntax.binder_to_expr($2), ty = $4, loc = mk_loc($sloc)) }
+// 1407|    "(" binder ":" type_ ")" { Constraint(expr = @syntax.binder_to_expr($2), ty = $4, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_314(
@@ -8898,9 +8898,9 @@ fn yy_action_314(
 }
 
 // file:///./parser.mbty
-// 801|    ioption(func_alias_type_name(LIDENT, UIDENT)) func_alias_target(LIDENT) { 
-// 802|    (None, $1, false, @list.singleton($2))
-// 803|  }
+// 803|    ioption(func_alias_type_name(LIDENT, UIDENT)) func_alias_target(LIDENT) { 
+// 804|    (None, $1, false, @list.singleton($2))
+// 805|  }
 
 ///|
 fn yy_action_315(
@@ -8919,7 +8919,7 @@ fn yy_action_315(
 }
 
 // file:///./parser.mbty
-// 1590|    TRUE { Bool(true) }
+// 1592|    TRUE { Bool(true) }
 
 ///|
 fn yy_action_316(
@@ -8935,9 +8935,9 @@ fn yy_action_316(
 }
 
 // file:///./parser.mbty
-// 760|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
-// 761|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 762|  }
+// 762|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
+// 763|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 764|  }
 
 ///|
 fn yy_action_317(
@@ -8967,9 +8967,9 @@ fn yy_action_317(
 }
 
 // file:///./parser.mbty
-// 766|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
-// 767|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 768|  }
+// 768|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
+// 769|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 770|  }
 
 ///|
 fn yy_action_318(
@@ -8999,9 +8999,9 @@ fn yy_action_318(
 }
 
 // file:///./parser.mbty
-// 952|    "let" "mut" binder opt_annot "=" expr { 
-// 953|    StmtLetmut(binder = $3, ty_opt = $4, expr = $6, loc = mk_loc($sloc))
-// 954|  }
+// 954|    "let" "mut" binder opt_annot "=" expr { 
+// 955|    StmtLetmut(binder = $3, ty_opt = $4, expr = $6, loc = mk_loc($sloc))
+// 956|  }
 
 ///|
 fn yy_action_319(
@@ -9033,10 +9033,10 @@ fn yy_action_319(
 }
 
 // file:///./parser.mbty
-// 1956|    constr_pat_argument "," constr_pat_arguments { 
-// 1957|    let (args, is_open) = $3
-// 1958|    (args.add($1), is_open)
-// 1959|  }
+// 1958|    constr_pat_argument "," constr_pat_arguments { 
+// 1959|    let (args, is_open) = $3
+// 1960|    (args.add($1), is_open)
+// 1961|  }
 
 ///|
 fn yy_action_320(
@@ -9055,21 +9055,21 @@ fn yy_action_320(
 }
 
 // file:///./parser.mbty
-// 623|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
-// 624|    TopTypeDef(
-// 625|      TypeDecl::{
-// 626|        tycon : $6,
-// 627|        tycon_loc : mk_loc($loc($6)),
-// 628|        params : $7,
-// 629|        components: Alias($4),
-// 630|        type_vis : $2,
-// 631|        doc : DocString::empty(),
-// 632|        deriving: @list.empty(),
-// 633|        loc : mk_loc($sloc),
-// 634|        attrs : $1
-// 635|      }
-// 636|    )
-// 637|  }
+// 625|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
+// 626|    TopTypeDef(
+// 627|      TypeDecl::{
+// 628|        tycon : $6,
+// 629|        tycon_loc : mk_loc($loc($6)),
+// 630|        params : $7,
+// 631|        components: Alias($4),
+// 632|        type_vis : $2,
+// 633|        doc : DocString::empty(),
+// 634|        deriving: @list.empty(),
+// 635|        loc : mk_loc($sloc),
+// 636|        attrs : $1
+// 637|      }
+// 638|    )
+// 639|  }
 
 ///|
 fn yy_action_321(
@@ -9110,17 +9110,17 @@ fn yy_action_321(
 }
 
 // file:///./parser.mbty
-// 698|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
-// 699|    TopImplRelation(
-// 700|      self_ty = $7,
-// 701|      trait_ = $5,
-// 702|      quantifiers = $4,
-// 703|      vis = $2,
-// 704|      attrs = $1,
-// 705|      loc = mk_loc($sloc),
-// 706|      doc = DocString::empty()
-// 707|    )
-// 708|  }
+// 700|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
+// 701|    TopImplRelation(
+// 702|      self_ty = $7,
+// 703|      trait_ = $5,
+// 704|      quantifiers = $4,
+// 705|      vis = $2,
+// 706|      attrs = $1,
+// 707|      loc = mk_loc($sloc),
+// 708|      doc = DocString::empty()
+// 709|    )
+// 710|  }
 
 ///|
 fn yy_action_322(
@@ -9157,7 +9157,7 @@ fn yy_action_322(
 }
 
 // file:///./parser.mbty
-// 168|    non_empty_list_commas(X) { $1 }
+// 170|    non_empty_list_commas(X) { $1 }
 
 ///|
 fn yy_action_323(
@@ -9174,7 +9174,7 @@ fn yy_action_323(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_324(
@@ -9198,7 +9198,7 @@ fn yy_action_324(
 }
 
 // file:///./parser.mbty
-// 1291|    postfix_expr { $1 }
+// 1293|    postfix_expr { $1 }
 
 ///|
 fn yy_action_325(
@@ -9215,9 +9215,9 @@ fn yy_action_325(
 }
 
 // file:///./parser.mbty
-// 1288|    infix_expr infixop infix_expr { 
-// 1289|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1290|  }
+// 1290|    infix_expr infixop infix_expr { 
+// 1291|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1292|  }
 
 ///|
 fn yy_action_326(
@@ -9248,9 +9248,9 @@ fn yy_action_326(
 }
 
 // file:///./parser.mbty
-// 1104|    "try!" pipe_expr {
-// 1105|    TryOperator(body = $2, kind = Exclamation, try_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
-// 1106|  }
+// 1106|    "try!" pipe_expr {
+// 1107|    TryOperator(body = $2, kind = Exclamation, try_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+// 1108|  }
 
 ///|
 fn yy_action_328(
@@ -9280,7 +9280,7 @@ fn yy_action_328(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_329(
@@ -9297,7 +9297,7 @@ fn yy_action_329(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_330(
@@ -9315,10 +9315,10 @@ fn yy_action_330(
 }
 
 // file:///./parser.mbty
-// 234|    POST_LABEL opt_annot "=" expr {
-// 235|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-// 236|      Optional(binder~, ty = $2, default = $4)
-// 237|    }
+// 236|    POST_LABEL opt_annot "=" expr {
+// 237|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
+// 238|      Optional(binder~, ty = $2, default = $4)
+// 239|    }
 
 ///|
 fn yy_action_331(
@@ -9344,24 +9344,24 @@ fn yy_action_331(
 }
 
 // file:///./parser.mbty
-// 593|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 594|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
-// 595|    let supers = match $5 {
-// 596|      None => @list.empty()
-// 597|      Some(supers) => supers
-// 598|    }
-// 599|    TopTrait(
-// 600|      TraitDecl::{
-// 601|        name,
-// 602|        supers,
-// 603|        methods: $7,
-// 604|        vis: $2,
-// 605|        loc: mk_loc($sloc),
-// 606|        attrs: $1,
-// 607|        doc : DocString::empty()
-// 608|      }
-// 609|    )
-// 610|  }
+// 595|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
+// 596|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
+// 597|    let supers = match $5 {
+// 598|      None => @list.empty()
+// 599|      Some(supers) => supers
+// 600|    }
+// 601|    TopTrait(
+// 602|      TraitDecl::{
+// 603|        name,
+// 604|        supers,
+// 605|        methods: $7,
+// 606|        vis: $2,
+// 607|        loc: mk_loc($sloc),
+// 608|        attrs: $1,
+// 609|        doc : DocString::empty()
+// 610|      }
+// 611|    )
+// 612|  }
 
 ///|
 fn yy_action_332(
@@ -9408,7 +9408,7 @@ fn yy_action_332(
 }
 
 // file:///./parser.mbty
-// 229|    binder opt_annot { Positional(binder = $1, ty = $2) }
+// 231|    binder opt_annot { Positional(binder = $1, ty = $2) }
 
 ///|
 fn yy_action_333(
@@ -9428,7 +9428,7 @@ fn yy_action_333(
 }
 
 // file:///./parser.mbty
-// 1598|    STRING { String($1) }
+// 1600|    STRING { String($1) }
 
 ///|
 fn yy_action_334(
@@ -9445,7 +9445,7 @@ fn yy_action_334(
 }
 
 // file:///./parser.mbty
-// 1582|    simple_constant { make_constant_expr(loc = mk_loc($sloc), $1) }
+// 1584|    simple_constant { make_constant_expr(loc = mk_loc($sloc), $1) }
 
 ///|
 fn yy_action_335(
@@ -9468,7 +9468,7 @@ fn yy_action_335(
 }
 
 // file:///./parser.mbty
-// 1221|    while_expr { $1 }
+// 1223|    while_expr { $1 }
 
 ///|
 fn yy_action_336(
@@ -9485,7 +9485,7 @@ fn yy_action_336(
 }
 
 // file:///./parser.mbty
-// 172|    { @list.empty() }
+// 174|    { @list.empty() }
 
 ///|
 fn yy_action_337(
@@ -9501,7 +9501,7 @@ fn yy_action_337(
 }
 
 // file:///./parser.mbty
-// 1594|    CHAR { Char($1) }
+// 1596|    CHAR { Char($1) }
 
 ///|
 fn yy_action_338(
@@ -9534,10 +9534,10 @@ fn yy_action_339(
 }
 
 // file:///./parser.mbty
-// 1829|    is_async "(" ")" "->" return_type { 
-// 1830|    let (ty_res, ty_err) = $5
-// 1831|    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
-// 1832|  }
+// 1831|    is_async "(" ")" "->" return_type { 
+// 1832|    let (ty_res, ty_err) = $5
+// 1833|    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+// 1834|  }
 
 ///|
 fn yy_action_340(
@@ -9569,7 +9569,7 @@ fn yy_action_340(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_341(
@@ -9588,7 +9588,7 @@ fn yy_action_341(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_342(
@@ -9605,21 +9605,21 @@ fn yy_action_342(
 }
 
 // file:///./parser.mbty
-// 421|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
-// 422|    TopTypeDef(
-// 423|      TypeDecl::{
-// 424|        tycon : $5,
-// 425|        tycon_loc : mk_loc($loc($5)),
-// 426|        params : $6,
-// 427|        components: Extern,
-// 428|        type_vis : $2,
-// 429|        doc : DocString::empty(),
-// 430|        deriving: $7,
-// 431|        loc : mk_loc($sloc),
-// 432|        attrs : $1
-// 433|      }
-// 434|    )
-// 435|  }
+// 423|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
+// 424|    TopTypeDef(
+// 425|      TypeDecl::{
+// 426|        tycon : $5,
+// 427|        tycon_loc : mk_loc($loc($5)),
+// 428|        params : $6,
+// 429|        components: Extern,
+// 430|        type_vis : $2,
+// 431|        doc : DocString::empty(),
+// 432|        deriving: $7,
+// 433|        loc : mk_loc($sloc),
+// 434|        attrs : $1
+// 435|      }
+// 436|    )
+// 437|  }
 
 ///|
 fn yy_action_343(
@@ -9660,7 +9660,7 @@ fn yy_action_343(
 }
 
 // file:///./parser.mbty
-// 201|    X option(SEMI) { @list.singleton($1) }
+// 203|    X option(SEMI) { @list.singleton($1) }
 
 ///|
 fn yy_action_344(
@@ -9677,7 +9677,7 @@ fn yy_action_344(
 }
 
 // file:///./parser.mbty
-// 167|    { @list.empty() }
+// 169|    { @list.empty() }
 
 ///|
 fn yy_action_345(
@@ -9693,14 +9693,14 @@ fn yy_action_345(
 }
 
 // file:///./parser.mbty
-// 1821|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type { 
-// 1822|    let (ty_res, ty_err) = $8
-// 1823|    let ts = match $5 { 
-// 1824|      None => @list.empty() 
-// 1825|      Some(ts) => ts 
-// 1826|    }
-// 1827|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
-// 1828|  }
+// 1823|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type { 
+// 1824|    let (ty_res, ty_err) = $8
+// 1825|    let ts = match $5 { 
+// 1826|      None => @list.empty() 
+// 1827|      Some(ts) => ts 
+// 1828|    }
+// 1829|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+// 1830|  }
 
 ///|
 fn yy_action_346(
@@ -9739,7 +9739,7 @@ fn yy_action_346(
 }
 
 // file:///./parser.mbty
-// 1626|    AMPERAMPER { Var::{ name: Ident(name = "&&"), loc: mk_loc($sloc) } }
+// 1628|    AMPERAMPER { Var::{ name: Ident(name = "&&"), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_347(
@@ -9764,7 +9764,7 @@ fn yy_action_347(
 }
 
 // file:///./parser.mbty
-// 827|    UIDENT_MAYBE_DOT "::" { Label::{ name: $1, loc: mk_loc($loc($1)) } }
+// 829|    UIDENT_MAYBE_DOT "::" { Label::{ name: $1, loc: mk_loc($loc($1)) } }
 
 ///|
 fn yy_action_348(
@@ -9786,25 +9786,25 @@ fn yy_action_348(
 }
 
 // file:///./parser.mbty
-// 346|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
-// 347|    let (type_name, f) = $6
-// 348|    let (return_type, error_type) = $10
-// 349|    let fn_decl = FunDecl::{
-// 350|      type_name,
-// 351|      name: f,
-// 352|      has_error : $7,
-// 353|      is_async : false,
-// 354|      quantifiers: $8,
-// 355|      decl_params: $9,
-// 356|      params_loc: mk_loc($loc($9)),
-// 357|      return_type,
-// 358|      error_type,
-// 359|      vis: $2,
-// 360|      doc: DocString::empty(),
-// 361|      attrs: $1,
-// 362|    }
-// 363|    ($4, fn_decl)
-// 364|  }
+// 348|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
+// 349|    let (type_name, f) = $6
+// 350|    let (return_type, error_type) = $10
+// 351|    let fn_decl = FunDecl::{
+// 352|      type_name,
+// 353|      name: f,
+// 354|      has_error : $7,
+// 355|      is_async : false,
+// 356|      quantifiers: $8,
+// 357|      decl_params: $9,
+// 358|      params_loc: mk_loc($loc($9)),
+// 359|      return_type,
+// 360|      error_type,
+// 361|      vis: $2,
+// 362|      doc: DocString::empty(),
+// 363|      attrs: $1,
+// 364|    }
+// 365|    ($4, fn_decl)
+// 366|  }
 
 ///|
 fn yy_action_349(
@@ -9848,9 +9848,9 @@ fn yy_action_349(
 }
 
 // file:///./parser.mbty
-// 760|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
-// 761|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 762|  }
+// 762|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
+// 763|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 764|  }
 
 ///|
 fn yy_action_350(
@@ -9880,7 +9880,7 @@ fn yy_action_350(
 }
 
 // file:///./parser.mbty
-// 1264|    "_" ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), None)) }
+// 1266|    "_" ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), None)) }
 
 ///|
 fn yy_action_351(
@@ -9901,7 +9901,7 @@ fn yy_action_351(
 }
 
 // file:///./parser.mbty
-// 212|    non_empty_list_semis(X) { $1 }
+// 214|    non_empty_list_semis(X) { $1 }
 
 ///|
 fn yy_action_352(
@@ -9918,7 +9918,7 @@ fn yy_action_352(
 }
 
 // file:///./parser.mbty
-// 904|    PACKAGE_NAME DOT_UIDENT { LongIdent::Dot(pkg = $1, id = $2) }
+// 906|    PACKAGE_NAME DOT_UIDENT { LongIdent::Dot(pkg = $1, id = $2) }
 
 ///|
 fn yy_action_35(
@@ -9936,7 +9936,7 @@ fn yy_action_35(
 }
 
 // file:///./parser.mbty
-// 254|     { false }
+// 256|     { false }
 
 ///|
 fn yy_action_25(
@@ -9952,7 +9952,7 @@ fn yy_action_25(
 }
 
 // file:///./parser.mbty
-// 167|    { @list.empty() }
+// 169|    { @list.empty() }
 
 ///|
 fn yy_action_353(
@@ -9968,7 +9968,7 @@ fn yy_action_353(
 }
 
 // file:///./parser.mbty
-// 1714|    "[" array_sub_patterns "]" { Array(pats = $2, loc = mk_loc($sloc)) }
+// 1716|    "[" array_sub_patterns "]" { Array(pats = $2, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_354(
@@ -9991,18 +9991,18 @@ fn yy_action_354(
 }
 
 // file:///./parser.mbty
-// 1387|    "(" arrow_fn_prefix_no_constraint { 
-// 1388|    let es = $2.map(@syntax.arrow_fn_param_to_expr)
-// 1389|    match es {
-// 1390|      @list.More(expr, tail=Empty) => {
-// 1391|        match expr {
-// 1392|          Constraint(..) => expr
-// 1393|          _ => Group(expr~, group = Paren, loc = mk_loc($sloc))
-// 1394|        }
-// 1395|      }
-// 1396|      _ => @syntax.make_tuple_expr(loc = mk_loc($sloc), es)
-// 1397|    }
-// 1398|  }
+// 1389|    "(" arrow_fn_prefix_no_constraint { 
+// 1390|    let es = $2.map(@syntax.arrow_fn_param_to_expr)
+// 1391|    match es {
+// 1392|      @list.More(expr, tail=Empty) => {
+// 1393|        match expr {
+// 1394|          Constraint(..) => expr
+// 1395|          _ => Group(expr~, group = Paren, loc = mk_loc($sloc))
+// 1396|        }
+// 1397|      }
+// 1398|      _ => @syntax.make_tuple_expr(loc = mk_loc($sloc), es)
+// 1399|    }
+// 1400|  }
 
 ///|
 fn yy_action_355(
@@ -10039,7 +10039,7 @@ fn yy_action_355(
 }
 
 // file:///./parser.mbty
-// 1698|    "-" DOUBLE { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_double("-" + $2)) }
+// 1700|    "-" DOUBLE { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_double("-" + $2)) }
 
 ///|
 fn yy_action_356(
@@ -10065,20 +10065,20 @@ fn yy_action_356(
 }
 
 // file:///./parser.mbty
-// 1230|    pipe_expr catch_keyword single_pattern_cases "}" { 
-// 1231|    let (catch_all, catch_loc) = $2
-// 1232|    Try(
-// 1233|      body = $1,
-// 1234|      catch_ = $3,
-// 1235|      catch_all~,
-// 1236|      try_else = None,
-// 1237|      has_try = false,
-// 1238|      try_loc = mk_loc($loc($1)),
-// 1239|      catch_loc~,
-// 1240|      else_loc = Location::{ start: Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }, end: Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 } },
-// 1241|      loc = mk_loc($sloc)
-// 1242|    )
-// 1243|  }
+// 1232|    pipe_expr catch_keyword single_pattern_cases "}" { 
+// 1233|    let (catch_all, catch_loc) = $2
+// 1234|    Try(
+// 1235|      body = $1,
+// 1236|      catch_ = $3,
+// 1237|      catch_all~,
+// 1238|      try_else = None,
+// 1239|      has_try = false,
+// 1240|      try_loc = mk_loc($loc($1)),
+// 1241|      catch_loc~,
+// 1242|      else_loc = Location::{ start: Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }, end: Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 } },
+// 1243|      loc = mk_loc($sloc)
+// 1244|    )
+// 1245|  }
 
 ///|
 fn yy_action_357(
@@ -10136,24 +10136,24 @@ fn yy_action_358(
 }
 
 // file:///./parser.mbty
-// 662|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
-// 663|    let (ret_ty, err_ty) = $12
-// 664|    TopImpl(
-// 665|      self_ty = Some($7),
-// 666|      trait_ = $5,
-// 667|      method_name = $9,
-// 668|      has_error = $10,
-// 669|      quantifiers = $4,
-// 670|      params = $11,
-// 671|      ret_ty~,
-// 672|      err_ty~,
-// 673|      body = $13,
-// 674|      vis = $2,
-// 675|      loc = mk_loc($sloc),
-// 676|      attrs = $1,
-// 677|      doc = DocString::empty()
-// 678|    )
-// 679|  }
+// 664|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
+// 665|    let (ret_ty, err_ty) = $12
+// 666|    TopImpl(
+// 667|      self_ty = Some($7),
+// 668|      trait_ = $5,
+// 669|      method_name = $9,
+// 670|      has_error = $10,
+// 671|      quantifiers = $4,
+// 672|      params = $11,
+// 673|      ret_ty~,
+// 674|      err_ty~,
+// 675|      body = $13,
+// 676|      vis = $2,
+// 677|      loc = mk_loc($sloc),
+// 678|      attrs = $1,
+// 679|      doc = DocString::empty()
+// 680|    )
+// 681|  }
 
 ///|
 fn yy_action_359(
@@ -10203,7 +10203,7 @@ fn yy_action_359(
 }
 
 // file:///./parser.mbty
-// 207|    non_empty_list_semis_rev(X) { $1 }
+// 209|    non_empty_list_semis_rev(X) { $1 }
 
 ///|
 fn yy_action_360(
@@ -10220,22 +10220,22 @@ fn yy_action_360(
 }
 
 // file:///./parser.mbty
-// 506|    enum_header "{" list_semis(enum_constructor) "}" deriving_directive_list {
-// 507|    let (attrs, type_vis, tycon, tycon_loc, params) = $1
-// 508|    TopTypeDef(
-// 509|      TypeDecl::{
-// 510|        tycon,
-// 511|        tycon_loc,
-// 512|        params,
-// 513|        components: Variant($3),
-// 514|        type_vis,
-// 515|        doc : DocString::empty(),
-// 516|        deriving: $5,
-// 517|        loc : mk_loc($sloc),
-// 518|        attrs
-// 519|      }
-// 520|    )
-// 521|  }
+// 508|    enum_header "{" list_semis(enum_constructor) "}" deriving_directive_list {
+// 509|    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+// 510|    TopTypeDef(
+// 511|      TypeDecl::{
+// 512|        tycon,
+// 513|        tycon_loc,
+// 514|        params,
+// 515|        components: Variant($3),
+// 516|        type_vis,
+// 517|        doc : DocString::empty(),
+// 518|        deriving: $5,
+// 519|        loc : mk_loc($sloc),
+// 520|        attrs
+// 521|      }
+// 522|    )
+// 523|  }
 
 ///|
 fn yy_action_361(
@@ -10274,7 +10274,7 @@ fn yy_action_361(
 }
 
 // file:///./parser.mbty
-// 1218|    loop_expr { $1 }
+// 1220|    loop_expr { $1 }
 
 ///|
 fn yy_action_362(
@@ -10291,7 +10291,7 @@ fn yy_action_362(
 }
 
 // file:///./parser.mbty
-// 1301|    range_expr { $1 }
+// 1303|    range_expr { $1 }
 
 ///|
 fn yy_action_363(
@@ -10308,7 +10308,7 @@ fn yy_action_363(
 }
 
 // file:///./parser.mbty
-// 201|    X option(SEMI) { @list.singleton($1) }
+// 203|    X option(SEMI) { @list.singleton($1) }
 
 ///|
 fn yy_action_364(
@@ -10325,7 +10325,7 @@ fn yy_action_364(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_365(
@@ -10342,17 +10342,17 @@ fn yy_action_365(
 }
 
 // file:///./parser.mbty
-// 1840|    attributes visibility option("mut") LIDENT ":" type_ { 
-// 1841|    FieldDecl::{
-// 1842|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
-// 1843|      ty: $6,
-// 1844|      mut_: $3 is Some(_),
-// 1845|      vis: $2,
-// 1846|      loc: mk_loc($sloc),
-// 1847|      attrs: $1,
-// 1848|      doc: DocString::empty()
-// 1849|    }
-// 1850|  }
+// 1842|    attributes visibility option("mut") LIDENT ":" type_ { 
+// 1843|    FieldDecl::{
+// 1844|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
+// 1845|      ty: $6,
+// 1846|      mut_: $3 is Some(_),
+// 1847|      vis: $2,
+// 1848|      loc: mk_loc($sloc),
+// 1849|      attrs: $1,
+// 1850|      doc: DocString::empty()
+// 1851|    }
+// 1852|  }
 
 ///|
 fn yy_action_366(
@@ -10394,7 +10394,7 @@ fn yy_action_366(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_367(
@@ -10411,18 +10411,18 @@ fn yy_action_367(
 }
 
 // file:///./parser.mbty
-// 650|    attributes "test" option(loced_string) option(parameters) block_expr_with_local_types {
-// 651|    let (local_types, expr) = $5
-// 652|    TopTest(
-// 653|      expr~,
-// 654|      name = $3,
-// 655|      params = $4,
-// 656|      local_types~,
-// 657|      loc = mk_loc($sloc),
-// 658|      attrs = $1,
-// 659|      doc = DocString::empty()
-// 660|    )
-// 661|  }
+// 652|    attributes "test" option(loced_string) option(parameters) block_expr_with_local_types {
+// 653|    let (local_types, expr) = $5
+// 654|    TopTest(
+// 655|      expr~,
+// 656|      name = $3,
+// 657|      params = $4,
+// 658|      local_types~,
+// 659|      loc = mk_loc($sloc),
+// 660|      attrs = $1,
+// 661|      doc = DocString::empty()
+// 662|    )
+// 663|  }
 
 ///|
 fn yy_action_368(
@@ -10458,9 +10458,9 @@ fn yy_action_368(
 }
 
 // file:///./parser.mbty
-// 750|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
-// 751|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 752|  }
+// 752|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
+// 753|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 754|  }
 
 ///|
 fn yy_action_369(
@@ -10490,7 +10490,7 @@ fn yy_action_369(
 }
 
 // file:///./parser.mbty
-// 1166|    list_commas_no_trailing(separated_pair(binder, "=", expr)) { $1 }
+// 1168|    list_commas_no_trailing(separated_pair(binder, "=", expr)) { $1 }
 
 ///|
 fn yy_action_370(
@@ -10507,7 +10507,7 @@ fn yy_action_370(
 }
 
 // file:///./parser.mbty
-// 981|    guard_statement { $1 }
+// 983|    guard_statement { $1 }
 
 ///|
 fn yy_action_371(
@@ -10524,21 +10524,21 @@ fn yy_action_371(
 }
 
 // file:///./parser.mbty
-// 955|    is_async "fn" binder optional_bang parameters func_return_type block_expr { 
-// 956|    let (return_type, error_type) = $6
-// 957|    let func = Func::Lambda(
-// 958|      parameters = $5,
-// 959|      params_loc = mk_loc($loc($5)),
-// 960|      body = $7,
-// 961|      return_type~,
-// 962|      error_type~,
-// 963|      kind = Lambda,
-// 964|      has_error = $4,
-// 965|      is_async = $1,
-// 966|      loc = mk_loc($sloc)
-// 967|    )
-// 968|    StmtFunc(binder = $3, func~, loc = mk_loc($sloc))
-// 969|  }
+// 957|    is_async "fn" binder optional_bang parameters func_return_type block_expr { 
+// 958|    let (return_type, error_type) = $6
+// 959|    let func = Func::Lambda(
+// 960|      parameters = $5,
+// 961|      params_loc = mk_loc($loc($5)),
+// 962|      body = $7,
+// 963|      return_type~,
+// 964|      error_type~,
+// 965|      kind = Lambda,
+// 966|      has_error = $4,
+// 967|      is_async = $1,
+// 968|      loc = mk_loc($sloc)
+// 969|    )
+// 970|    StmtFunc(binder = $3, func~, loc = mk_loc($sloc))
+// 971|  }
 
 ///|
 fn yy_action_372(
@@ -10586,13 +10586,13 @@ fn yy_action_372(
 }
 
 // file:///./parser.mbty
-// 941|    "let" pattern opt_annot "=" expr { 
-// 942|    let pat = match $3 {
-// 943|      None => $2
-// 944|      Some(ty) => Pattern::Constraint(pat = $2, ty~, loc = mk_loc($sloc))
-// 945|    }
-// 946|    StmtLet(pat~, expr = $5, loc = mk_loc($sloc))
-// 947|  }
+// 943|    "let" pattern opt_annot "=" expr { 
+// 944|    let pat = match $3 {
+// 945|      None => $2
+// 946|      Some(ty) => Pattern::Constraint(pat = $2, ty~, loc = mk_loc($sloc))
+// 947|    }
+// 948|    StmtLet(pat~, expr = $5, loc = mk_loc($sloc))
+// 949|  }
 
 ///|
 fn yy_action_373(
@@ -10627,13 +10627,13 @@ fn yy_action_373(
 }
 
 // file:///./parser.mbty
-// 1533|    DOT_LIDENT { 
-// 1534|    if $1 == "_" {
-// 1535|      Newtype(loc = mk_loc($loc($1)))
-// 1536|    } else {
-// 1537|      Label(Label::{ name: $1, loc: mk_loc($sloc) })
-// 1538|    }
-// 1539|  }
+// 1535|    DOT_LIDENT { 
+// 1536|    if $1 == "_" {
+// 1537|      Newtype(loc = mk_loc($loc($1)))
+// 1538|    } else {
+// 1539|      Label(Label::{ name: $1, loc: mk_loc($sloc) })
+// 1540|    }
+// 1541|  }
 
 ///|
 fn yy_action_83(
@@ -10665,9 +10665,9 @@ fn yy_action_83(
 }
 
 // file:///./parser.mbty
-// 177|    non_empty_list_commas_rev(X) option(",") { 
-// 178|    ($1.rev(), $2 is Some(_)) 
-// 179|  }
+// 179|    non_empty_list_commas_rev(X) option(",") { 
+// 180|    ($1.rev(), $2 is Some(_)) 
+// 181|  }
 
 ///|
 fn yy_action_374(
@@ -10685,7 +10685,7 @@ fn yy_action_374(
 }
 
 // file:///./parser.mbty
-// 1742|    ".." binder { Binder($2) }
+// 1744|    ".." binder { Binder($2) }
 
 ///|
 fn yy_action_375(
@@ -10719,7 +10719,7 @@ fn yy_action_376(
 }
 
 // file:///./parser.mbty
-// 155|    non_empty_list_commas_rev(X) { $1.rev() }
+// 157|    non_empty_list_commas_rev(X) { $1.rev() }
 
 ///|
 fn yy_action_377(
@@ -10736,7 +10736,7 @@ fn yy_action_377(
 }
 
 // file:///./parser.mbty
-// 167|    { @list.empty() }
+// 169|    { @list.empty() }
 
 ///|
 fn yy_action_378(
@@ -10768,7 +10768,7 @@ fn yy_action_143(
 }
 
 // file:///./parser.mbty
-// 202|    X SEMI non_empty_list_semis(X) { $3.add($1) }
+// 204|    X SEMI non_empty_list_semis(X) { $3.add($1) }
 
 ///|
 fn yy_action_379(
@@ -10786,7 +10786,7 @@ fn yy_action_379(
 }
 
 // file:///./parser.mbty
-// 1067|    list_semis(single_pattern_case) { $1 }
+// 1069|    list_semis(single_pattern_case) { $1 }
 
 ///|
 fn yy_action_380(
@@ -10803,11 +10803,11 @@ fn yy_action_380(
 }
 
 // file:///./parser.mbty
-// 793|    LUIDENT_MAYBE_DOT "as" luident { 
-// 794|    let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 795|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
-// 796|    AliasTarget::{ binder, target: Some(target) }
-// 797|  }
+// 795|    LUIDENT_MAYBE_DOT "as" luident { 
+// 796|    let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 797|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
+// 798|    AliasTarget::{ binder, target: Some(target) }
+// 799|  }
 
 ///|
 fn yy_action_381(
@@ -10838,7 +10838,7 @@ fn yy_action_381(
 }
 
 // file:///./parser.mbty
-// 1627|    BARBAR { Var::{ name: Ident(name = "||"), loc: mk_loc($sloc) } }
+// 1629|    BARBAR { Var::{ name: Ident(name = "||"), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_383(
@@ -10863,21 +10863,21 @@ fn yy_action_383(
 }
 
 // file:///./parser.mbty
-// 421|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
-// 422|    TopTypeDef(
-// 423|      TypeDecl::{
-// 424|        tycon : $5,
-// 425|        tycon_loc : mk_loc($loc($5)),
-// 426|        params : $6,
-// 427|        components: Extern,
-// 428|        type_vis : $2,
-// 429|        doc : DocString::empty(),
-// 430|        deriving: $7,
-// 431|        loc : mk_loc($sloc),
-// 432|        attrs : $1
-// 433|      }
-// 434|    )
-// 435|  }
+// 423|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
+// 424|    TopTypeDef(
+// 425|      TypeDecl::{
+// 426|        tycon : $5,
+// 427|        tycon_loc : mk_loc($loc($5)),
+// 428|        params : $6,
+// 429|        components: Extern,
+// 430|        type_vis : $2,
+// 431|        doc : DocString::empty(),
+// 432|        deriving: $7,
+// 433|        loc : mk_loc($sloc),
+// 434|        attrs : $1
+// 435|      }
+// 436|    )
+// 437|  }
 
 ///|
 fn yy_action_384(
@@ -10918,7 +10918,7 @@ fn yy_action_384(
 }
 
 // file:///./parser.mbty
-// 1632|     { None }
+// 1634|     { None }
 
 ///|
 fn yy_action_385(
@@ -10934,7 +10934,7 @@ fn yy_action_385(
 }
 
 // file:///./parser.mbty
-// 1730|    ".." BYTES { BytesSpread($2) }
+// 1732|    ".." BYTES { BytesSpread($2) }
 
 ///|
 fn yy_action_386(
@@ -10951,12 +10951,12 @@ fn yy_action_386(
 }
 
 // file:///./parser.mbty
-// 267|    option(delimited("[", non_empty_list_commas(id(type_decl_binder)), "]")) {
-// 268|    match $1 {
-// 269|      None => @list.empty()
-// 270|      Some(params) => params
-// 271|    }
-// 272|  }
+// 269|    option(delimited("[", non_empty_list_commas(id(type_decl_binder)), "]")) {
+// 270|    match $1 {
+// 271|      None => @list.empty()
+// 272|      Some(params) => params
+// 273|    }
+// 274|  }
 
 ///|
 fn yy_action_387(
@@ -10976,10 +10976,10 @@ fn yy_action_387(
 }
 
 // file:///./parser.mbty
-// 789|    LUIDENT_MAYBE_DOT { 
-// 790|    let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-// 791|    AliasTarget::{ binder, target: None }
-// 792|  }
+// 791|    LUIDENT_MAYBE_DOT { 
+// 792|    let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
+// 793|    AliasTarget::{ binder, target: None }
+// 794|  }
 
 ///|
 fn yy_action_388(
@@ -11003,9 +11003,9 @@ fn yy_action_388(
 }
 
 // file:///./parser.mbty
-// 760|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
-// 761|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 762|  }
+// 762|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
+// 763|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 764|  }
 
 ///|
 fn yy_action_389(
@@ -11035,7 +11035,7 @@ fn yy_action_389(
 }
 
 // file:///./parser.mbty
-// 163|    non_empty_list_commas_rev(X) "," { $1.rev() }
+// 165|    non_empty_list_commas_rev(X) "," { $1.rev() }
 
 ///|
 fn yy_action_390(
@@ -11068,14 +11068,14 @@ fn yy_action_391(
 }
 
 // file:///./parser.mbty
-// 572|    fun_header block_expr_with_local_types {
-// 573|    let (local_types, expr) = $2
-// 574|    TopFuncDef(
-// 575|      loc = mk_loc($sloc),
-// 576|      fun_decl = $1,
-// 577|      decl_body = DeclBody(local_types~, expr~)
-// 578|    )
-// 579|  }
+// 574|    fun_header block_expr_with_local_types {
+// 575|    let (local_types, expr) = $2
+// 576|    TopFuncDef(
+// 577|      loc = mk_loc($sloc),
+// 578|      fun_decl = $1,
+// 579|      decl_body = DeclBody(local_types~, expr~)
+// 580|    )
+// 581|  }
 
 ///|
 fn yy_action_392(
@@ -11104,9 +11104,9 @@ fn yy_action_392(
 }
 
 // file:///./parser.mbty
-// 1295|    range_expr "as" type_name { 
-// 1296|    As(expr = $1, trait_ = $3, loc = mk_loc($sloc))
-// 1297|  }
+// 1297|    range_expr "as" type_name { 
+// 1298|    As(expr = $1, trait_ = $3, loc = mk_loc($sloc))
+// 1299|  }
 
 ///|
 fn yy_action_393(
@@ -11134,7 +11134,7 @@ fn yy_action_393(
 }
 
 // file:///./parser.mbty
-// 1219|    for_expr { $1 }
+// 1221|    for_expr { $1 }
 
 ///|
 fn yy_action_394(
@@ -11151,18 +11151,18 @@ fn yy_action_394(
 }
 
 // file:///./parser.mbty
-// 831|    LIDENT_MAYBE_DOT option(preceded("as", binder)) { 
-// 832|    match $2 {
-// 833|      None => {
-// 834|        let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-// 835|        AliasTarget::{ binder, target: None }
-// 836|      }
-// 837|      Some(binder) => {
-// 838|        let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 839|        AliasTarget::{ binder, target: Some(target) }
-// 840|      }
-// 841|    }
-// 842|  }
+// 833|    LIDENT_MAYBE_DOT option(preceded("as", binder)) { 
+// 834|    match $2 {
+// 835|      None => {
+// 836|        let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
+// 837|        AliasTarget::{ binder, target: None }
+// 838|      }
+// 839|      Some(binder) => {
+// 840|        let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 841|        AliasTarget::{ binder, target: Some(target) }
+// 842|      }
+// 843|    }
+// 844|  }
 
 ///|
 fn yy_action_395(
@@ -11197,13 +11197,13 @@ fn yy_action_395(
 }
 
 // file:///./parser.mbty
-// 1704|    constr option(delimited("(", constr_pat_arguments, ")")) { 
-// 1705|    let (args, is_open) = match $2 {
-// 1706|      None => (None, false)
-// 1707|      Some((args, is_open)) => (Some(args), is_open)
-// 1708|    }
-// 1709|    @syntax.make_constr_pattern(loc = mk_loc($sloc), $1, args, is_open)
-// 1710|  }
+// 1706|    constr option(delimited("(", constr_pat_arguments, ")")) { 
+// 1707|    let (args, is_open) = match $2 {
+// 1708|      None => (None, false)
+// 1709|      Some((args, is_open)) => (Some(args), is_open)
+// 1710|    }
+// 1711|    @syntax.make_constr_pattern(loc = mk_loc($sloc), $1, args, is_open)
+// 1712|  }
 
 ///|
 fn yy_action_396(
@@ -11252,7 +11252,7 @@ fn yy_action_397(
 }
 
 // file:///./parser.mbty
-// 1263|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
+// 1265|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
 
 ///|
 fn yy_action_398(
@@ -11271,24 +11271,24 @@ fn yy_action_398(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_399(
@@ -11331,7 +11331,7 @@ fn yy_action_399(
 }
 
 // file:///./parser.mbty
-// 1605|    MINUS FLOAT { make_float("-" + $2) }
+// 1607|    MINUS FLOAT { make_float("-" + $2) }
 
 ///|
 fn yy_action_400(
@@ -11348,7 +11348,7 @@ fn yy_action_400(
 }
 
 // file:///./parser.mbty
-// 1408|    "(" ")" { Unit(loc = mk_loc($sloc), faked = false) }
+// 1410|    "(" ")" { Unit(loc = mk_loc($sloc), faked = false) }
 
 ///|
 fn yy_action_401(
@@ -11370,7 +11370,7 @@ fn yy_action_401(
 }
 
 // file:///./parser.mbty
-// 1265|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
+// 1267|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
 
 ///|
 fn yy_action_402(
@@ -11390,7 +11390,7 @@ fn yy_action_402(
 }
 
 // file:///./parser.mbty
-// 168|    non_empty_list_commas(X) { $1 }
+// 170|    non_empty_list_commas(X) { $1 }
 
 ///|
 fn yy_action_403(
@@ -11407,7 +11407,7 @@ fn yy_action_403(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_404(
@@ -11424,20 +11424,20 @@ fn yy_action_404(
 }
 
 // file:///./parser.mbty
-// 1087|    "try" pipe_expr catch_keyword single_pattern_cases "}" { 
-// 1088|    let (catch_all, catch_loc) = $3
-// 1089|    Try(
-// 1090|      body = $2,
-// 1091|      catch_ = $4,
-// 1092|      catch_all~,
-// 1093|      try_else = None,
-// 1094|      has_try = true,
-// 1095|      try_loc = mk_loc($loc($1)),
-// 1096|      catch_loc~,
-// 1097|      else_loc = @basic.Location::{ start: @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }, end: @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 } },
-// 1098|      loc = mk_loc($sloc)
-// 1099|    )
-// 1100|  }
+// 1089|    "try" pipe_expr catch_keyword single_pattern_cases "}" { 
+// 1090|    let (catch_all, catch_loc) = $3
+// 1091|    Try(
+// 1092|      body = $2,
+// 1093|      catch_ = $4,
+// 1094|      catch_all~,
+// 1095|      try_else = None,
+// 1096|      has_try = true,
+// 1097|      try_loc = mk_loc($loc($1)),
+// 1098|      catch_loc~,
+// 1099|      else_loc = @basic.Location::{ start: @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }, end: @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 } },
+// 1100|      loc = mk_loc($sloc)
+// 1101|    )
+// 1102|  }
 
 ///|
 fn yy_action_405(
@@ -11478,7 +11478,7 @@ fn yy_action_405(
 }
 
 // file:///./parser.mbty
-// 216|    X { $1 }
+// 218|    X { $1 }
 
 ///|
 fn yy_action_213(
@@ -11513,7 +11513,7 @@ fn yy_action_406(
 }
 
 // file:///./parser.mbty
-// 1929|    label ":" pattern { @syntax.make_field_pat(loc = mk_loc($sloc), $1, $3, false) }
+// 1931|    label ":" pattern { @syntax.make_field_pat(loc = mk_loc($sloc), $1, $3, false) }
 
 ///|
 fn yy_action_104(
@@ -11543,7 +11543,7 @@ fn yy_action_104(
 }
 
 // file:///./parser.mbty
-// 1225|    simple_try_expr { $1 }
+// 1227|    simple_try_expr { $1 }
 
 ///|
 fn yy_action_408(
@@ -11560,7 +11560,7 @@ fn yy_action_408(
 }
 
 // file:///./parser.mbty
-// 878|    type_ { DiscardPositional(ty = Some($1), loc = mk_loc($sloc)) }
+// 880|    type_ { DiscardPositional(ty = Some($1), loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_409(
@@ -11603,12 +11603,12 @@ fn yy_action_410(
 }
 
 // file:///./parser.mbty
-// 258|    option(type_parameters) {
-// 259|    match $1 {
-// 260|      None => @list.empty()
-// 261|      Some(params) => params
-// 262|    }
-// 263|  }
+// 260|    option(type_parameters) {
+// 261|    match $1 {
+// 262|      None => @list.empty()
+// 263|      Some(params) => params
+// 264|    }
+// 265|  }
 
 ///|
 fn yy_action_411(
@@ -11628,19 +11628,19 @@ fn yy_action_411(
 }
 
 // file:///./parser.mbty
-// 580|    attributes visibility "fnalias" func_alias_targets {
-// 581|    let (pkg, type_name, is_list, targets) = $4
-// 582|    TopFuncAlias(
-// 583|      pkg~,
-// 584|      type_name~,
-// 585|      targets~,
-// 586|      vis = $2,
-// 587|      attrs = $1,
-// 588|      is_list~,
-// 589|      doc = DocString::empty(),
-// 590|      loc = mk_loc($sloc)
-// 591|    )
-// 592|  }
+// 582|    attributes visibility "fnalias" func_alias_targets {
+// 583|    let (pkg, type_name, is_list, targets) = $4
+// 584|    TopFuncAlias(
+// 585|      pkg~,
+// 586|      type_name~,
+// 587|      targets~,
+// 588|      vis = $2,
+// 589|      attrs = $1,
+// 590|      is_list~,
+// 591|      doc = DocString::empty(),
+// 592|      loc = mk_loc($sloc)
+// 593|    )
+// 594|  }
 
 ///|
 fn yy_action_412(
@@ -11677,9 +11677,9 @@ fn yy_action_412(
 }
 
 // file:///./parser.mbty
-// 1483|    simple_expr "[" expr "]" { 
-// 1484|    ArrayGet(array = $1, index = $3, loc = mk_loc($sloc))
-// 1485|  }
+// 1485|    simple_expr "[" expr "]" { 
+// 1486|    ArrayGet(array = $1, index = $3, loc = mk_loc($sloc))
+// 1487|  }
 
 ///|
 fn yy_action_413(
@@ -11707,7 +11707,7 @@ fn yy_action_413(
 }
 
 // file:///./parser.mbty
-// 1777|    simple_type "!" { ($1, DefaultErrorType(loc = mk_loc($loc($2)))) }
+// 1779|    simple_type "!" { ($1, DefaultErrorType(loc = mk_loc($loc($2)))) }
 
 ///|
 fn yy_action_414(
@@ -11729,7 +11729,7 @@ fn yy_action_414(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_415(
@@ -11763,13 +11763,13 @@ fn yy_action_415(
 }
 
 // file:///./parser.mbty
-// 1473|    LIDENT "?" "(" list_commas(argument) ")" { 
-// 1474|    let func = @syntax.make_ident_expr(
-// 1475|      loc = mk_loc($loc($1)), 
-// 1476|      Var::{ name: Ident(name = $1), loc: mk_loc($loc($1)) }
-// 1477|    )
-// 1478|    Apply(func~, args = $4, attr = Question, loc = mk_loc($sloc))
-// 1479|  }
+// 1475|    LIDENT "?" "(" list_commas(argument) ")" { 
+// 1476|    let func = @syntax.make_ident_expr(
+// 1477|      loc = mk_loc($loc($1)), 
+// 1478|      Var::{ name: Ident(name = $1), loc: mk_loc($loc($1)) }
+// 1479|    )
+// 1480|    Apply(func~, args = $4, attr = Question, loc = mk_loc($sloc))
+// 1481|  }
 
 ///|
 fn yy_action_416(
@@ -11807,7 +11807,7 @@ fn yy_action_416(
 }
 
 // file:///./parser.mbty
-// 1613|    AUGMENTED_ASSIGNMENT { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
+// 1615|    AUGMENTED_ASSIGNMENT { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_184(
@@ -11833,7 +11833,7 @@ fn yy_action_184(
 }
 
 // file:///./parser.mbty
-// 1712|    "(" pattern "," non_empty_list_commas(pattern) ")" { @syntax.make_tuple_pattern(loc = mk_loc($sloc), $4.add($2)) }
+// 1714|    "(" pattern "," non_empty_list_commas(pattern) ")" { @syntax.make_tuple_pattern(loc = mk_loc($sloc), $4.add($2)) }
 
 ///|
 fn yy_action_417(
@@ -11860,7 +11860,7 @@ fn yy_action_417(
 }
 
 // file:///./parser.mbty
-// 1244|    pipe_expr { $1 }
+// 1246|    pipe_expr { $1 }
 
 ///|
 fn yy_action_418(
@@ -11877,10 +11877,10 @@ fn yy_action_418(
 }
 
 // file:///./parser.mbty
-// 948|    "letrec" binder opt_annot "=" letand_func list(and_func) {
-// 949|    let bindings = $6.add(($2, $3, $5))
-// 950|    StmtLetand(bindings~, loc = mk_loc($sloc))
-// 951|  }
+// 950|    "letrec" binder opt_annot "=" letand_func list(and_func) {
+// 951|    let bindings = $6.add(($2, $3, $5))
+// 952|    StmtLetand(bindings~, loc = mk_loc($sloc))
+// 953|  }
 
 ///|
 fn yy_action_419(
@@ -11909,7 +11909,7 @@ fn yy_action_419(
 }
 
 // file:///./parser.mbty
-// 211|    { @list.empty() }
+// 213|    { @list.empty() }
 
 ///|
 fn yy_action_420(
@@ -11925,7 +11925,7 @@ fn yy_action_420(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_421(
@@ -11977,9 +11977,9 @@ fn yy_action_422(
 }
 
 // file:///./parser.mbty
-// 1101|    "try?" pipe_expr { 
-// 1102|    TryOperator(body = $2, kind = Question, try_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
-// 1103|  }
+// 1103|    "try?" pipe_expr { 
+// 1104|    TryOperator(body = $2, kind = Question, try_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+// 1105|  }
 
 ///|
 fn yy_action_423(
@@ -12009,7 +12009,7 @@ fn yy_action_423(
 }
 
 // file:///./parser.mbty
-// 202|    X SEMI non_empty_list_semis(X) { $3.add($1) }
+// 204|    X SEMI non_empty_list_semis(X) { $3.add($1) }
 
 ///|
 fn yy_action_424(
@@ -12027,18 +12027,18 @@ fn yy_action_424(
 }
 
 // file:///./parser.mbty
-// 638|    attributes visibility "traitalias" batch_type_alias_targets {
-// 639|    let (is_list, pkg, targets) = $4
-// 640|    TopBatchTraitAlias(
-// 641|      pkg~,
-// 642|      targets~,
-// 643|      vis = $2,
-// 644|      attrs = $1,
-// 645|      is_list~,
-// 646|      doc = DocString::empty(),
-// 647|      loc = mk_loc($sloc)
-// 648|    )
-// 649|  }
+// 640|    attributes visibility "traitalias" batch_type_alias_targets {
+// 641|    let (is_list, pkg, targets) = $4
+// 642|    TopBatchTraitAlias(
+// 643|      pkg~,
+// 644|      targets~,
+// 645|      vis = $2,
+// 646|      attrs = $1,
+// 647|      is_list~,
+// 648|      doc = DocString::empty(),
+// 649|      loc = mk_loc($sloc)
+// 650|    )
+// 651|  }
 
 ///|
 fn yy_action_425(
@@ -12074,7 +12074,7 @@ fn yy_action_425(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_426(
@@ -12108,20 +12108,20 @@ fn yy_action_249(
 }
 
 // file:///./parser.mbty
-// 1412|    is_async "fn" optional_bang parameters func_return_type block_expr { 
-// 1413|    let (return_type, error_type) = $5
-// 1414|    Lambda(
-// 1415|      parameters = $4,
-// 1416|      params_loc = mk_loc($loc($4)),
-// 1417|      body = $6,
-// 1418|      return_type~,
-// 1419|      error_type~,
-// 1420|      kind = Lambda,
-// 1421|      has_error = $3,
-// 1422|      is_async = $1,
-// 1423|      loc = mk_loc($sloc)
-// 1424|    )
-// 1425|  }
+// 1414|    is_async "fn" optional_bang parameters func_return_type block_expr { 
+// 1415|    let (return_type, error_type) = $5
+// 1416|    Lambda(
+// 1417|      parameters = $4,
+// 1418|      params_loc = mk_loc($loc($4)),
+// 1419|      body = $6,
+// 1420|      return_type~,
+// 1421|      error_type~,
+// 1422|      kind = Lambda,
+// 1423|      has_error = $3,
+// 1424|      is_async = $1,
+// 1425|      loc = mk_loc($sloc)
+// 1426|    )
+// 1427|  }
 
 ///|
 fn yy_action_427(
@@ -12162,7 +12162,7 @@ fn yy_action_427(
 }
 
 // file:///./parser.mbty
-// 1801|    "_" { Any(loc = mk_loc($sloc)) }
+// 1803|    "_" { Any(loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_428(
@@ -12202,7 +12202,7 @@ fn yy_action_429(
 }
 
 // file:///./parser.mbty
-// 380|    "{" local_types_and_stmts "}" { $2 }
+// 382|    "{" local_types_and_stmts "}" { $2 }
 
 ///|
 fn yy_action_431(
@@ -12219,11 +12219,11 @@ fn yy_action_431(
 }
 
 // file:///./parser.mbty
-// 1644|    POST_LABEL { 
-// 1645|    let label = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 1646|    let arg_value = @syntax.make_ident_expr(loc = mk_loc($loc($1)), Var::{ name: Ident(name = $1), loc: mk_loc($loc($1)) })
-// 1647|    Argument::{ value: arg_value, kind: LabelledPun(label) }
-// 1648|  }
+// 1646|    POST_LABEL { 
+// 1647|    let label = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 1648|    let arg_value = @syntax.make_ident_expr(loc = mk_loc($loc($1)), Var::{ name: Ident(name = $1), loc: mk_loc($loc($1)) })
+// 1649|    Argument::{ value: arg_value, kind: LabelledPun(label) }
+// 1650|  }
 
 ///|
 fn yy_action_432(
@@ -12253,7 +12253,7 @@ fn yy_action_432(
 }
 
 // file:///./parser.mbty
-// 212|    non_empty_list_semis(X) { $1 }
+// 214|    non_empty_list_semis(X) { $1 }
 
 ///|
 fn yy_action_433(
@@ -12270,7 +12270,7 @@ fn yy_action_433(
 }
 
 // file:///./parser.mbty
-// 1680|    range_pattern { $1 }
+// 1682|    range_pattern { $1 }
 
 ///|
 fn yy_action_434(
@@ -12287,24 +12287,24 @@ fn yy_action_434(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_435(
@@ -12347,7 +12347,7 @@ fn yy_action_435(
 }
 
 // file:///./parser.mbty
-// 211|    { @list.empty() }
+// 213|    { @list.empty() }
 
 ///|
 fn yy_action_436(
@@ -12363,7 +12363,7 @@ fn yy_action_436(
 }
 
 // file:///./parser.mbty
-// 1700|    STRING { @syntax.make_constant_pattern(loc = mk_loc($sloc), String($1)) }
+// 1702|    STRING { @syntax.make_constant_pattern(loc = mk_loc($sloc), String($1)) }
 
 ///|
 fn yy_action_437(
@@ -12389,21 +12389,21 @@ fn yy_action_437(
 }
 
 // file:///./parser.mbty
-// 421|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
-// 422|    TopTypeDef(
-// 423|      TypeDecl::{
-// 424|        tycon : $5,
-// 425|        tycon_loc : mk_loc($loc($5)),
-// 426|        params : $6,
-// 427|        components: Extern,
-// 428|        type_vis : $2,
-// 429|        doc : DocString::empty(),
-// 430|        deriving: $7,
-// 431|        loc : mk_loc($sloc),
-// 432|        attrs : $1
-// 433|      }
-// 434|    )
-// 435|  }
+// 423|    attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
+// 424|    TopTypeDef(
+// 425|      TypeDecl::{
+// 426|        tycon : $5,
+// 427|        tycon_loc : mk_loc($loc($5)),
+// 428|        params : $6,
+// 429|        components: Extern,
+// 430|        type_vis : $2,
+// 431|        doc : DocString::empty(),
+// 432|        deriving: $7,
+// 433|        loc : mk_loc($sloc),
+// 434|        attrs : $1
+// 435|      }
+// 436|    )
+// 437|  }
 
 ///|
 fn yy_action_438(
@@ -12444,7 +12444,7 @@ fn yy_action_438(
 }
 
 // file:///./parser.mbty
-// 211|    { @list.empty() }
+// 213|    { @list.empty() }
 
 ///|
 fn yy_action_439(
@@ -12478,7 +12478,7 @@ fn yy_action_440(
 }
 
 // file:///./parser.mbty
-// 1038|     { None}
+// 1040|     { None}
 
 ///|
 fn yy_action_441(
@@ -12494,7 +12494,7 @@ fn yy_action_441(
 }
 
 // file:///./parser.mbty
-// 172|    { @list.empty() }
+// 174|    { @list.empty() }
 
 ///|
 fn yy_action_442(
@@ -12510,7 +12510,7 @@ fn yy_action_442(
 }
 
 // file:///./parser.mbty
-// 1018|    expr { $1 }
+// 1020|    expr { $1 }
 
 ///|
 fn yy_action_443(
@@ -12527,7 +12527,7 @@ fn yy_action_443(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_444(
@@ -12544,7 +12544,7 @@ fn yy_action_444(
 }
 
 // file:///./parser.mbty
-// 1037|    POST_LABEL ":" { Some(Label::{ name : $1, loc : mk_loc($sloc) }) }
+// 1039|    POST_LABEL ":" { Some(Label::{ name : $1, loc : mk_loc($sloc) }) }
 
 ///|
 fn yy_action_445(
@@ -12567,13 +12567,13 @@ fn yy_action_445(
 }
 
 // file:///./parser.mbty
-// 1346|    UIDENT { 
-// 1347|    Constructor::{
-// 1348|      name: ConstrName::{ name: $1, loc: mk_loc($loc($1)) },
-// 1349|      extra_info: NoExtraInfo,
-// 1350|      loc: mk_loc($sloc)
-// 1351|    }
-// 1352|  }
+// 1348|    UIDENT { 
+// 1349|    Constructor::{
+// 1350|      name: ConstrName::{ name: $1, loc: mk_loc($loc($1)) },
+// 1351|      extra_info: NoExtraInfo,
+// 1352|      loc: mk_loc($sloc)
+// 1353|    }
+// 1354|  }
 
 ///|
 fn yy_action_446(
@@ -12605,7 +12605,7 @@ fn yy_action_446(
 }
 
 // file:///./parser.mbty
-// 245|    delimited("(", list_commas(parameter), ")") { $1 }
+// 247|    delimited("(", list_commas(parameter), ")") { $1 }
 
 ///|
 fn yy_action_447(
@@ -12623,7 +12623,7 @@ fn yy_action_447(
 }
 
 // file:///./parser.mbty
-// 216|    X { $1 }
+// 218|    X { $1 }
 
 ///|
 fn yy_action_448(
@@ -12640,17 +12640,17 @@ fn yy_action_448(
 }
 
 // file:///./parser.mbty
-// 1840|    attributes visibility option("mut") LIDENT ":" type_ { 
-// 1841|    FieldDecl::{
-// 1842|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
-// 1843|      ty: $6,
-// 1844|      mut_: $3 is Some(_),
-// 1845|      vis: $2,
-// 1846|      loc: mk_loc($sloc),
-// 1847|      attrs: $1,
-// 1848|      doc: DocString::empty()
-// 1849|    }
-// 1850|  }
+// 1842|    attributes visibility option("mut") LIDENT ":" type_ { 
+// 1843|    FieldDecl::{
+// 1844|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
+// 1845|      ty: $6,
+// 1846|      mut_: $3 is Some(_),
+// 1847|      vis: $2,
+// 1848|      loc: mk_loc($sloc),
+// 1849|      attrs: $1,
+// 1850|      doc: DocString::empty()
+// 1851|    }
+// 1852|  }
 
 ///|
 fn yy_action_449(
@@ -12692,7 +12692,7 @@ fn yy_action_449(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_450(
@@ -12726,13 +12726,13 @@ fn yy_action_451(
 }
 
 // file:///./parser.mbty
-// 941|    "let" pattern opt_annot "=" expr { 
-// 942|    let pat = match $3 {
-// 943|      None => $2
-// 944|      Some(ty) => Pattern::Constraint(pat = $2, ty~, loc = mk_loc($sloc))
-// 945|    }
-// 946|    StmtLet(pat~, expr = $5, loc = mk_loc($sloc))
-// 947|  }
+// 943|    "let" pattern opt_annot "=" expr { 
+// 944|    let pat = match $3 {
+// 945|      None => $2
+// 946|      Some(ty) => Pattern::Constraint(pat = $2, ty~, loc = mk_loc($sloc))
+// 947|    }
+// 948|    StmtLet(pat~, expr = $5, loc = mk_loc($sloc))
+// 949|  }
 
 ///|
 fn yy_action_452(
@@ -12767,9 +12767,9 @@ fn yy_action_452(
 }
 
 // file:///./parser.mbty
-// 750|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
-// 751|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 752|  }
+// 752|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
+// 753|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 754|  }
 
 ///|
 fn yy_action_453(
@@ -12799,19 +12799,19 @@ fn yy_action_453(
 }
 
 // file:///./parser.mbty
-// 580|    attributes visibility "fnalias" func_alias_targets {
-// 581|    let (pkg, type_name, is_list, targets) = $4
-// 582|    TopFuncAlias(
-// 583|      pkg~,
-// 584|      type_name~,
-// 585|      targets~,
-// 586|      vis = $2,
-// 587|      attrs = $1,
-// 588|      is_list~,
-// 589|      doc = DocString::empty(),
-// 590|      loc = mk_loc($sloc)
-// 591|    )
-// 592|  }
+// 582|    attributes visibility "fnalias" func_alias_targets {
+// 583|    let (pkg, type_name, is_list, targets) = $4
+// 584|    TopFuncAlias(
+// 585|      pkg~,
+// 586|      type_name~,
+// 587|      targets~,
+// 588|      vis = $2,
+// 589|      attrs = $1,
+// 590|      is_list~,
+// 591|      doc = DocString::empty(),
+// 592|      loc = mk_loc($sloc)
+// 593|    )
+// 594|  }
 
 ///|
 fn yy_action_454(
@@ -12848,7 +12848,7 @@ fn yy_action_454(
 }
 
 // file:///./parser.mbty
-// 1470|    "_" %prec prec_lower_than_arrow_fn { Hole(loc = mk_loc($sloc), kind = Incomplete) }
+// 1472|    "_" %prec prec_lower_than_arrow_fn { Hole(loc = mk_loc($sloc), kind = Incomplete) }
 
 ///|
 fn yy_action_455(
@@ -12870,7 +12870,7 @@ fn yy_action_455(
 }
 
 // file:///./parser.mbty
-// 756|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
+// 758|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
 
 ///|
 fn yy_action_456(
@@ -12933,7 +12933,7 @@ fn yy_action_458(
 }
 
 // file:///./parser.mbty
-// 1938|    non_empty_list_commas_with_tail(map_elem_pat) ".." option(",") { ($1, false) }
+// 1940|    non_empty_list_commas_with_tail(map_elem_pat) ".." option(",") { ($1, false) }
 
 ///|
 fn yy_action_459(
@@ -12950,7 +12950,7 @@ fn yy_action_459(
 }
 
 // file:///./parser.mbty
-// 1222|    try_expr { $1 }
+// 1224|    try_expr { $1 }
 
 ///|
 fn yy_action_460(
@@ -12967,7 +12967,7 @@ fn yy_action_460(
 }
 
 // file:///./parser.mbty
-// 1691|    FALSE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bool(false)) }
+// 1693|    FALSE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bool(false)) }
 
 ///|
 fn yy_action_461(
@@ -12992,18 +12992,18 @@ fn yy_action_461(
 }
 
 // file:///./parser.mbty
-// 638|    attributes visibility "traitalias" batch_type_alias_targets {
-// 639|    let (is_list, pkg, targets) = $4
-// 640|    TopBatchTraitAlias(
-// 641|      pkg~,
-// 642|      targets~,
-// 643|      vis = $2,
-// 644|      attrs = $1,
-// 645|      is_list~,
-// 646|      doc = DocString::empty(),
-// 647|      loc = mk_loc($sloc)
-// 648|    )
-// 649|  }
+// 640|    attributes visibility "traitalias" batch_type_alias_targets {
+// 641|    let (is_list, pkg, targets) = $4
+// 642|    TopBatchTraitAlias(
+// 643|      pkg~,
+// 644|      targets~,
+// 645|      vis = $2,
+// 646|      attrs = $1,
+// 647|      is_list~,
+// 648|      doc = DocString::empty(),
+// 649|      loc = mk_loc($sloc)
+// 650|    )
+// 651|  }
 
 ///|
 fn yy_action_462(
@@ -13039,14 +13039,14 @@ fn yy_action_462(
 }
 
 // file:///./parser.mbty
-// 1305|    prefix_expr "..<" prefix_expr { 
-// 1306|    Infix(
-// 1307|      op = Var::{ name: Ident(name = "..<"), loc: mk_loc($loc($2)) }, 
-// 1308|      lhs = $1, 
-// 1309|      rhs = $3, 
-// 1310|      loc = mk_loc($sloc)
-// 1311|    )
-// 1312|  }
+// 1307|    prefix_expr "..<" prefix_expr { 
+// 1308|    Infix(
+// 1309|      op = Var::{ name: Ident(name = "..<"), loc: mk_loc($loc($2)) }, 
+// 1310|      lhs = $1, 
+// 1311|      rhs = $3, 
+// 1312|      loc = mk_loc($sloc)
+// 1313|    )
+// 1314|  }
 
 ///|
 fn yy_action_463(
@@ -13097,25 +13097,25 @@ fn yy_action_464(
 }
 
 // file:///./parser.mbty
-// 346|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
-// 347|    let (type_name, f) = $6
-// 348|    let (return_type, error_type) = $10
-// 349|    let fn_decl = FunDecl::{
-// 350|      type_name,
-// 351|      name: f,
-// 352|      has_error : $7,
-// 353|      is_async : false,
-// 354|      quantifiers: $8,
-// 355|      decl_params: $9,
-// 356|      params_loc: mk_loc($loc($9)),
-// 357|      return_type,
-// 358|      error_type,
-// 359|      vis: $2,
-// 360|      doc: DocString::empty(),
-// 361|      attrs: $1,
-// 362|    }
-// 363|    ($4, fn_decl)
-// 364|  }
+// 348|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
+// 349|    let (type_name, f) = $6
+// 350|    let (return_type, error_type) = $10
+// 351|    let fn_decl = FunDecl::{
+// 352|      type_name,
+// 353|      name: f,
+// 354|      has_error : $7,
+// 355|      is_async : false,
+// 356|      quantifiers: $8,
+// 357|      decl_params: $9,
+// 358|      params_loc: mk_loc($loc($9)),
+// 359|      return_type,
+// 360|      error_type,
+// 361|      vis: $2,
+// 362|      doc: DocString::empty(),
+// 363|      attrs: $1,
+// 364|    }
+// 365|    ($4, fn_decl)
+// 366|  }
 
 ///|
 fn yy_action_465(
@@ -13159,18 +13159,18 @@ fn yy_action_465(
 }
 
 // file:///./parser.mbty
-// 611|    attributes visibility "typealias" batch_type_alias_targets {
-// 612|    let (is_list, pkg, targets) = $4
-// 613|    TopBatchTypeAlias(
-// 614|      pkg~,
-// 615|      targets~,
-// 616|      vis = $2,
-// 617|      attrs = $1,
-// 618|      is_list~,
-// 619|      doc = DocString::empty(),
-// 620|      loc = mk_loc($sloc)
-// 621|    )
-// 622|  }
+// 613|    attributes visibility "typealias" batch_type_alias_targets {
+// 614|    let (is_list, pkg, targets) = $4
+// 615|    TopBatchTypeAlias(
+// 616|      pkg~,
+// 617|      targets~,
+// 618|      vis = $2,
+// 619|      attrs = $1,
+// 620|      is_list~,
+// 621|      doc = DocString::empty(),
+// 622|      loc = mk_loc($sloc)
+// 623|    )
+// 624|  }
 
 ///|
 fn yy_action_466(
@@ -13206,7 +13206,7 @@ fn yy_action_466(
 }
 
 // file:///./parser.mbty
-// 933|    anony_fn { $1 }
+// 935|    anony_fn { $1 }
 
 ///|
 fn yy_action_467(
@@ -13223,10 +13223,10 @@ fn yy_action_467(
 }
 
 // file:///./parser.mbty
-// 230|    POST_LABEL opt_annot {
-// 231|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-// 232|      Labelled(binder~, ty = $2)
-// 233|    }
+// 232|    POST_LABEL opt_annot {
+// 233|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
+// 234|      Labelled(binder~, ty = $2)
+// 235|    }
 
 ///|
 fn yy_action_468(
@@ -13251,7 +13251,7 @@ fn yy_action_468(
 }
 
 // file:///./parser.mbty
-// 1077|    "catch" "{" { (false, mk_loc($sloc)) }
+// 1079|    "catch" "{" { (false, mk_loc($sloc)) }
 
 ///|
 fn yy_action_469(
@@ -13273,7 +13273,7 @@ fn yy_action_469(
 }
 
 // file:///./parser.mbty
-// 1643|    expr { Argument::{ value: $1, kind: Positional } }
+// 1645|    expr { Argument::{ value: $1, kind: Positional } }
 
 ///|
 fn yy_action_470(
@@ -13290,23 +13290,23 @@ fn yy_action_470(
 }
 
 // file:///./parser.mbty
-// 709|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
-// 710|    TopView(
-// 711|      quantifiers = $4,
-// 712|      source_ty = $10,
-// 713|      view_type_name = $5,
-// 714|      view_type_loc = mk_loc($loc($5)),
-// 715|      view_func_name = $12,
-// 716|      parameters = $13,
-// 717|      params_loc = mk_loc($loc($13)),
-// 718|      view_constrs = $7,
-// 719|      body = $14,
-// 720|      vis = $2,
-// 721|      loc = mk_loc($sloc),
-// 722|      attrs = $1,
-// 723|      doc = DocString::empty()
-// 724|    )
-// 725|  }
+// 711|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
+// 712|    TopView(
+// 713|      quantifiers = $4,
+// 714|      source_ty = $10,
+// 715|      view_type_name = $5,
+// 716|      view_type_loc = mk_loc($loc($5)),
+// 717|      view_func_name = $12,
+// 718|      parameters = $13,
+// 719|      params_loc = mk_loc($loc($13)),
+// 720|      view_constrs = $7,
+// 721|      body = $14,
+// 722|      vis = $2,
+// 723|      loc = mk_loc($sloc),
+// 724|      attrs = $1,
+// 725|      doc = DocString::empty()
+// 726|    )
+// 727|  }
 
 ///|
 fn yy_action_471(
@@ -13374,7 +13374,7 @@ fn yy_action_472(
 }
 
 // file:///./parser.mbty
-// 1327|    "!" prefix_expr { make_unot(loc = mk_loc($sloc), $2) }
+// 1329|    "!" prefix_expr { make_unot(loc = mk_loc($sloc), $2) }
 
 ///|
 fn yy_action_473(
@@ -13397,18 +13397,18 @@ fn yy_action_473(
 }
 
 // file:///./parser.mbty
-// 638|    attributes visibility "traitalias" batch_type_alias_targets {
-// 639|    let (is_list, pkg, targets) = $4
-// 640|    TopBatchTraitAlias(
-// 641|      pkg~,
-// 642|      targets~,
-// 643|      vis = $2,
-// 644|      attrs = $1,
-// 645|      is_list~,
-// 646|      doc = DocString::empty(),
-// 647|      loc = mk_loc($sloc)
-// 648|    )
-// 649|  }
+// 640|    attributes visibility "traitalias" batch_type_alias_targets {
+// 641|    let (is_list, pkg, targets) = $4
+// 642|    TopBatchTraitAlias(
+// 643|      pkg~,
+// 644|      targets~,
+// 645|      vis = $2,
+// 646|      attrs = $1,
+// 647|      is_list~,
+// 648|      doc = DocString::empty(),
+// 649|      loc = mk_loc($sloc)
+// 650|    )
+// 651|  }
 
 ///|
 fn yy_action_474(
@@ -13444,7 +13444,7 @@ fn yy_action_474(
 }
 
 // file:///./parser.mbty
-// 1597|    FLOAT { make_float($1) }
+// 1599|    FLOAT { make_float($1) }
 
 ///|
 fn yy_action_475(
@@ -13461,7 +13461,7 @@ fn yy_action_475(
 }
 
 // file:///./parser.mbty
-// 1701|    BYTES { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bytes($1)) }
+// 1703|    BYTES { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bytes($1)) }
 
 ///|
 fn yy_action_476(
@@ -13487,7 +13487,7 @@ fn yy_action_476(
 }
 
 // file:///./parser.mbty
-// 937|    "and" binder opt_annot "=" letand_func { ($2, $3, $5) }
+// 939|    "and" binder opt_annot "=" letand_func { ($2, $3, $5) }
 
 ///|
 fn yy_action_477(
@@ -13508,17 +13508,17 @@ fn yy_action_477(
 }
 
 // file:///./parser.mbty
-// 1840|    attributes visibility option("mut") LIDENT ":" type_ { 
-// 1841|    FieldDecl::{
-// 1842|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
-// 1843|      ty: $6,
-// 1844|      mut_: $3 is Some(_),
-// 1845|      vis: $2,
-// 1846|      loc: mk_loc($sloc),
-// 1847|      attrs: $1,
-// 1848|      doc: DocString::empty()
-// 1849|    }
-// 1850|  }
+// 1842|    attributes visibility option("mut") LIDENT ":" type_ { 
+// 1843|    FieldDecl::{
+// 1844|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
+// 1845|      ty: $6,
+// 1846|      mut_: $3 is Some(_),
+// 1847|      vis: $2,
+// 1848|      loc: mk_loc($sloc),
+// 1849|      attrs: $1,
+// 1850|      doc: DocString::empty()
+// 1851|    }
+// 1852|  }
 
 ///|
 fn yy_action_478(
@@ -13560,18 +13560,18 @@ fn yy_action_478(
 }
 
 // file:///./parser.mbty
-// 611|    attributes visibility "typealias" batch_type_alias_targets {
-// 612|    let (is_list, pkg, targets) = $4
-// 613|    TopBatchTypeAlias(
-// 614|      pkg~,
-// 615|      targets~,
-// 616|      vis = $2,
-// 617|      attrs = $1,
-// 618|      is_list~,
-// 619|      doc = DocString::empty(),
-// 620|      loc = mk_loc($sloc)
-// 621|    )
-// 622|  }
+// 613|    attributes visibility "typealias" batch_type_alias_targets {
+// 614|    let (is_list, pkg, targets) = $4
+// 615|    TopBatchTypeAlias(
+// 616|      pkg~,
+// 617|      targets~,
+// 618|      vis = $2,
+// 619|      attrs = $1,
+// 620|      is_list~,
+// 621|      doc = DocString::empty(),
+// 622|      loc = mk_loc($sloc)
+// 623|    )
+// 624|  }
 
 ///|
 fn yy_action_479(
@@ -13607,7 +13607,7 @@ fn yy_action_479(
 }
 
 // file:///./parser.mbty
-// 1620|    INFIX1 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
+// 1622|    INFIX1 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_327(
@@ -13633,18 +13633,18 @@ fn yy_action_327(
 }
 
 // file:///./parser.mbty
-// 611|    attributes visibility "typealias" batch_type_alias_targets {
-// 612|    let (is_list, pkg, targets) = $4
-// 613|    TopBatchTypeAlias(
-// 614|      pkg~,
-// 615|      targets~,
-// 616|      vis = $2,
-// 617|      attrs = $1,
-// 618|      is_list~,
-// 619|      doc = DocString::empty(),
-// 620|      loc = mk_loc($sloc)
-// 621|    )
-// 622|  }
+// 613|    attributes visibility "typealias" batch_type_alias_targets {
+// 614|    let (is_list, pkg, targets) = $4
+// 615|    TopBatchTypeAlias(
+// 616|      pkg~,
+// 617|      targets~,
+// 618|      vis = $2,
+// 619|      attrs = $1,
+// 620|      is_list~,
+// 621|      doc = DocString::empty(),
+// 622|      loc = mk_loc($sloc)
+// 623|    )
+// 624|  }
 
 ///|
 fn yy_action_480(
@@ -13680,7 +13680,7 @@ fn yy_action_480(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_481(
@@ -13714,7 +13714,7 @@ fn yy_action_177(
 }
 
 // file:///./parser.mbty
-// 1907|   label_pun { $1 }
+// 1909|   label_pun { $1 }
 
 ///|
 fn yy_action_482(
@@ -13732,17 +13732,17 @@ fn yy_action_482(
 }
 
 // file:///./parser.mbty
-// 698|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
-// 699|    TopImplRelation(
-// 700|      self_ty = $7,
-// 701|      trait_ = $5,
-// 702|      quantifiers = $4,
-// 703|      vis = $2,
-// 704|      attrs = $1,
-// 705|      loc = mk_loc($sloc),
-// 706|      doc = DocString::empty()
-// 707|    )
-// 708|  }
+// 700|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
+// 701|    TopImplRelation(
+// 702|      self_ty = $7,
+// 703|      trait_ = $5,
+// 704|      quantifiers = $4,
+// 705|      vis = $2,
+// 706|      attrs = $1,
+// 707|      loc = mk_loc($sloc),
+// 708|      doc = DocString::empty()
+// 709|    )
+// 710|  }
 
 ///|
 fn yy_action_483(
@@ -13779,21 +13779,21 @@ fn yy_action_483(
 }
 
 // file:///./parser.mbty
-// 623|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
-// 624|    TopTypeDef(
-// 625|      TypeDecl::{
-// 626|        tycon : $6,
-// 627|        tycon_loc : mk_loc($loc($6)),
-// 628|        params : $7,
-// 629|        components: Alias($4),
-// 630|        type_vis : $2,
-// 631|        doc : DocString::empty(),
-// 632|        deriving: @list.empty(),
-// 633|        loc : mk_loc($sloc),
-// 634|        attrs : $1
-// 635|      }
-// 636|    )
-// 637|  }
+// 625|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
+// 626|    TopTypeDef(
+// 627|      TypeDecl::{
+// 628|        tycon : $6,
+// 629|        tycon_loc : mk_loc($loc($6)),
+// 630|        params : $7,
+// 631|        components: Alias($4),
+// 632|        type_vis : $2,
+// 633|        doc : DocString::empty(),
+// 634|        deriving: @list.empty(),
+// 635|        loc : mk_loc($sloc),
+// 636|        attrs : $1
+// 637|      }
+// 638|    )
+// 639|  }
 
 ///|
 fn yy_action_484(
@@ -13834,7 +13834,7 @@ fn yy_action_484(
 }
 
 // file:///./parser.mbty
-// 908|    qual_ident_ty_inline { $1 }
+// 910|    qual_ident_ty_inline { $1 }
 
 ///|
 fn yy_action_485(
@@ -13852,7 +13852,7 @@ fn yy_action_485(
 }
 
 // file:///./parser.mbty
-// 1263|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
+// 1265|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
 
 ///|
 fn yy_action_486(
@@ -13871,7 +13871,7 @@ fn yy_action_486(
 }
 
 // file:///./parser.mbty
-// 1525|    tuple_expr { $1 }
+// 1527|    tuple_expr { $1 }
 
 ///|
 fn yy_action_487(
@@ -13888,7 +13888,7 @@ fn yy_action_487(
 }
 
 // file:///./parser.mbty
-// 1226|    arrow_fn_expr { Function(func = $1, loc = mk_loc($sloc)) }
+// 1228|    arrow_fn_expr { Function(func = $1, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_488(
@@ -13911,7 +13911,7 @@ fn yy_action_488(
 }
 
 // file:///./parser.mbty
-// 206|    { @list.empty() }
+// 208|    { @list.empty() }
 
 ///|
 fn yy_action_489(
@@ -13927,9 +13927,9 @@ fn yy_action_489(
 }
 
 // file:///./parser.mbty
-// 760|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
-// 761|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 762|  }
+// 762|    attributes visibility "struct" luident optional_type_parameters_no_constraints { 
+// 763|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 764|  }
 
 ///|
 fn yy_action_490(
@@ -13959,7 +13959,7 @@ fn yy_action_490(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_491(
@@ -13977,25 +13977,25 @@ fn yy_action_491(
 }
 
 // file:///./parser.mbty
-// 346|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
-// 347|    let (type_name, f) = $6
-// 348|    let (return_type, error_type) = $10
-// 349|    let fn_decl = FunDecl::{
-// 350|      type_name,
-// 351|      name: f,
-// 352|      has_error : $7,
-// 353|      is_async : false,
-// 354|      quantifiers: $8,
-// 355|      decl_params: $9,
-// 356|      params_loc: mk_loc($loc($9)),
-// 357|      return_type,
-// 358|      error_type,
-// 359|      vis: $2,
-// 360|      doc: DocString::empty(),
-// 361|      attrs: $1,
-// 362|    }
-// 363|    ($4, fn_decl)
-// 364|  }
+// 348|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
+// 349|    let (type_name, f) = $6
+// 350|    let (return_type, error_type) = $10
+// 351|    let fn_decl = FunDecl::{
+// 352|      type_name,
+// 353|      name: f,
+// 354|      has_error : $7,
+// 355|      is_async : false,
+// 356|      quantifiers: $8,
+// 357|      decl_params: $9,
+// 358|      params_loc: mk_loc($loc($9)),
+// 359|      return_type,
+// 360|      error_type,
+// 361|      vis: $2,
+// 362|      doc: DocString::empty(),
+// 363|      attrs: $1,
+// 364|    }
+// 365|    ($4, fn_decl)
+// 366|  }
 
 ///|
 fn yy_action_492(
@@ -14039,7 +14039,7 @@ fn yy_action_492(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_493(
@@ -14105,10 +14105,10 @@ fn yy_action_495(
 }
 
 // file:///./parser.mbty
-// 1520|    type_name "::" LIDENT { 
-// 1521|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
-// 1522|    Method(type_name = $1, method_name~, loc = mk_loc($sloc))
-// 1523|  }
+// 1522|    type_name "::" LIDENT { 
+// 1523|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
+// 1524|    Method(type_name = $1, method_name~, loc = mk_loc($sloc))
+// 1525|  }
 
 ///|
 fn yy_action_496(
@@ -14142,9 +14142,9 @@ fn yy_action_496(
 }
 
 // file:///./parser.mbty
-// 1480|    simple_expr apply_attr "(" list_commas(argument) ")" { 
-// 1481|    Apply(func = $1, args = $4, attr = $2, loc = mk_loc($sloc))
-// 1482|  }
+// 1482|    simple_expr apply_attr "(" list_commas(argument) ")" { 
+// 1483|    Apply(func = $1, args = $4, attr = $2, loc = mk_loc($sloc))
+// 1484|  }
 
 ///|
 fn yy_action_497(
@@ -14175,7 +14175,7 @@ fn yy_action_497(
 }
 
 // file:///./parser.mbty
-// 202|    X SEMI non_empty_list_semis(X) { $3.add($1) }
+// 204|    X SEMI non_empty_list_semis(X) { $3.add($1) }
 
 ///|
 fn yy_action_498(
@@ -14193,7 +14193,7 @@ fn yy_action_498(
 }
 
 // file:///./parser.mbty
-// 1171|     { None }
+// 1173|     { None }
 
 ///|
 fn yy_action_499(
@@ -14209,7 +14209,7 @@ fn yy_action_499(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_500(
@@ -14227,7 +14227,7 @@ fn yy_action_500(
 }
 
 // file:///./parser.mbty
-// 1885|    "=" INT { ($2, mk_loc($loc($2))) }
+// 1887|    "=" INT { ($2, mk_loc($loc($2))) }
 
 ///|
 fn yy_action_430(
@@ -14246,7 +14246,7 @@ fn yy_action_430(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_502(
@@ -14264,25 +14264,25 @@ fn yy_action_502(
 }
 
 // file:///./parser.mbty
-// 346|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
-// 347|    let (type_name, f) = $6
-// 348|    let (return_type, error_type) = $10
-// 349|    let fn_decl = FunDecl::{
-// 350|      type_name,
-// 351|      name: f,
-// 352|      has_error : $7,
-// 353|      is_async : false,
-// 354|      quantifiers: $8,
-// 355|      decl_params: $9,
-// 356|      params_loc: mk_loc($loc($9)),
-// 357|      return_type,
-// 358|      error_type,
-// 359|      vis: $2,
-// 360|      doc: DocString::empty(),
-// 361|      attrs: $1,
-// 362|    }
-// 363|    ($4, fn_decl)
-// 364|  }
+// 348|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
+// 349|    let (type_name, f) = $6
+// 350|    let (return_type, error_type) = $10
+// 351|    let fn_decl = FunDecl::{
+// 352|      type_name,
+// 353|      name: f,
+// 354|      has_error : $7,
+// 355|      is_async : false,
+// 356|      quantifiers: $8,
+// 357|      decl_params: $9,
+// 358|      params_loc: mk_loc($loc($9)),
+// 359|      return_type,
+// 360|      error_type,
+// 361|      vis: $2,
+// 362|      doc: DocString::empty(),
+// 363|      attrs: $1,
+// 364|    }
+// 365|    ($4, fn_decl)
+// 366|  }
 
 ///|
 fn yy_action_503(
@@ -14326,7 +14326,7 @@ fn yy_action_503(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_504(
@@ -14344,7 +14344,7 @@ fn yy_action_504(
 }
 
 // file:///./parser.mbty
-// 1267|    binder "," arrow_fn_prefix { $3.add((Named($1), None)) }
+// 1269|    binder "," arrow_fn_prefix { $3.add((Named($1), None)) }
 
 ///|
 fn yy_action_505(
@@ -14363,12 +14363,12 @@ fn yy_action_505(
 }
 
 // file:///./parser.mbty
-// 1751|    array_sub_pattern "," array_sub_patterns { 
-// 1752|    match $3 {
-// 1753|      Closed(ps) => Closed(ps.add($1))
-// 1754|      Open(ps1, ps2, b) => Open(ps1.add($1), ps2, b)
-// 1755|    }
-// 1756|  }
+// 1753|    array_sub_pattern "," array_sub_patterns { 
+// 1754|    match $3 {
+// 1755|      Closed(ps) => Closed(ps.add($1))
+// 1756|      Open(ps1, ps2, b) => Open(ps1.add($1), ps2, b)
+// 1757|    }
+// 1758|  }
 
 ///|
 fn yy_action_506(
@@ -14389,10 +14389,10 @@ fn yy_action_506(
 }
 
 // file:///./parser.mbty
-// 789|    LUIDENT_MAYBE_DOT { 
-// 790|    let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-// 791|    AliasTarget::{ binder, target: None }
-// 792|  }
+// 791|    LUIDENT_MAYBE_DOT { 
+// 792|    let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
+// 793|    AliasTarget::{ binder, target: None }
+// 794|  }
 
 ///|
 fn yy_action_507(
@@ -14416,7 +14416,7 @@ fn yy_action_507(
 }
 
 // file:///./parser.mbty
-// 1609|    STRING { ($1, mk_loc($sloc)) }
+// 1611|    STRING { ($1, mk_loc($sloc)) }
 
 ///|
 fn yy_action_407(
@@ -14439,24 +14439,24 @@ fn yy_action_407(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_508(
@@ -14499,7 +14499,7 @@ fn yy_action_508(
 }
 
 // file:///./parser.mbty
-// 1622|    MINUS { Var::{ name: Ident(name = "-"), loc: mk_loc($sloc) } }
+// 1624|    MINUS { Var::{ name: Ident(name = "-"), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_509(
@@ -14521,11 +14521,11 @@ fn yy_action_509(
 }
 
 // file:///./parser.mbty
-// 1898|    labeled_expr "," non_empty_list_commas_with_trailing_info(record_defn_single) { 
-// 1899|    let (fs, trailing) = $3
-// 1900|    let trailing_mark = if trailing { TrailingMark::Comma } else { TrailingMark::None }
-// 1901|    (fs.add($1), trailing_mark)
-// 1902|  }
+// 1900|    labeled_expr "," non_empty_list_commas_with_trailing_info(record_defn_single) { 
+// 1901|    let (fs, trailing) = $3
+// 1902|    let trailing_mark = if trailing { TrailingMark::Comma } else { TrailingMark::None }
+// 1903|    (fs.add($1), trailing_mark)
+// 1904|  }
 
 ///|
 fn yy_action_510(
@@ -14550,18 +14550,18 @@ fn yy_action_510(
 }
 
 // file:///./parser.mbty
-// 611|    attributes visibility "typealias" batch_type_alias_targets {
-// 612|    let (is_list, pkg, targets) = $4
-// 613|    TopBatchTypeAlias(
-// 614|      pkg~,
-// 615|      targets~,
-// 616|      vis = $2,
-// 617|      attrs = $1,
-// 618|      is_list~,
-// 619|      doc = DocString::empty(),
-// 620|      loc = mk_loc($sloc)
-// 621|    )
-// 622|  }
+// 613|    attributes visibility "typealias" batch_type_alias_targets {
+// 614|    let (is_list, pkg, targets) = $4
+// 615|    TopBatchTypeAlias(
+// 616|      pkg~,
+// 617|      targets~,
+// 618|      vis = $2,
+// 619|      attrs = $1,
+// 620|      is_list~,
+// 621|      doc = DocString::empty(),
+// 622|      loc = mk_loc($sloc)
+// 623|    )
+// 624|  }
 
 ///|
 fn yy_action_511(
@@ -14597,24 +14597,24 @@ fn yy_action_511(
 }
 
 // file:///./parser.mbty
-// 662|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
-// 663|    let (ret_ty, err_ty) = $12
-// 664|    TopImpl(
-// 665|      self_ty = Some($7),
-// 666|      trait_ = $5,
-// 667|      method_name = $9,
-// 668|      has_error = $10,
-// 669|      quantifiers = $4,
-// 670|      params = $11,
-// 671|      ret_ty~,
-// 672|      err_ty~,
-// 673|      body = $13,
-// 674|      vis = $2,
-// 675|      loc = mk_loc($sloc),
-// 676|      attrs = $1,
-// 677|      doc = DocString::empty()
-// 678|    )
-// 679|  }
+// 664|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
+// 665|    let (ret_ty, err_ty) = $12
+// 666|    TopImpl(
+// 667|      self_ty = Some($7),
+// 668|      trait_ = $5,
+// 669|      method_name = $9,
+// 670|      has_error = $10,
+// 671|      quantifiers = $4,
+// 672|      params = $11,
+// 673|      ret_ty~,
+// 674|      err_ty~,
+// 675|      body = $13,
+// 676|      vis = $2,
+// 677|      loc = mk_loc($sloc),
+// 678|      attrs = $1,
+// 679|      doc = DocString::empty()
+// 680|    )
+// 681|  }
 
 ///|
 fn yy_action_512(
@@ -14664,7 +14664,7 @@ fn yy_action_512(
 }
 
 // file:///./parser.mbty
-// 852|    "derive" "(" list_commas(deriving_directive) ")" { $3 }
+// 854|    "derive" "(" list_commas(deriving_directive) ")" { $3 }
 
 ///|
 fn yy_action_513(
@@ -14681,17 +14681,17 @@ fn yy_action_513(
 }
 
 // file:///./parser.mbty
-// 698|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
-// 699|    TopImplRelation(
-// 700|      self_ty = $7,
-// 701|      trait_ = $5,
-// 702|      quantifiers = $4,
-// 703|      vis = $2,
-// 704|      attrs = $1,
-// 705|      loc = mk_loc($sloc),
-// 706|      doc = DocString::empty()
-// 707|    )
-// 708|  }
+// 700|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
+// 701|    TopImplRelation(
+// 702|      self_ty = $7,
+// 703|      trait_ = $5,
+// 704|      quantifiers = $4,
+// 705|      vis = $2,
+// 706|      attrs = $1,
+// 707|      loc = mk_loc($sloc),
+// 708|      doc = DocString::empty()
+// 709|    )
+// 710|  }
 
 ///|
 fn yy_action_514(
@@ -14728,7 +14728,7 @@ fn yy_action_514(
 }
 
 // file:///./parser.mbty
-// 212|    non_empty_list_semis(X) { $1 }
+// 214|    non_empty_list_semis(X) { $1 }
 
 ///|
 fn yy_action_515(
@@ -14745,7 +14745,7 @@ fn yy_action_515(
 }
 
 // file:///./parser.mbty
-// 1268|    "_" "," arrow_fn_prefix { $3.add((Unnamed(mk_loc($loc($1))), None)) }
+// 1270|    "_" "," arrow_fn_prefix { $3.add((Unnamed(mk_loc($loc($1))), None)) }
 
 ///|
 fn yy_action_516(
@@ -14766,7 +14766,7 @@ fn yy_action_516(
 }
 
 // file:///./parser.mbty
-// 1269|    binder ":" type_ "," arrow_fn_prefix { $5.add((Named($1), Some($3))) }
+// 1271|    binder ":" type_ "," arrow_fn_prefix { $5.add((Named($1), Some($3))) }
 
 ///|
 fn yy_action_517(
@@ -14786,7 +14786,7 @@ fn yy_action_517(
 }
 
 // file:///./parser.mbty
-// 1728|    pattern { Pattern($1) }
+// 1730|    pattern { Pattern($1) }
 
 ///|
 fn yy_action_518(
@@ -14803,11 +14803,11 @@ fn yy_action_518(
 }
 
 // file:///./parser.mbty
-// 1442|    type_name COLONCOLON "{" list_commas_with_trailing_info(record_defn_single) "}" { 
-// 1443|    let (fs, trailing) = $4  
-// 1444|    let trailing_mark = if trailing { TrailingMark::Comma } else { TrailingMark::None }
-// 1445|    @syntax.make_record_expr(loc = mk_loc($sloc), trailing = trailing_mark, Some($1), fs)
-// 1446|  }
+// 1444|    type_name COLONCOLON "{" list_commas_with_trailing_info(record_defn_single) "}" { 
+// 1445|    let (fs, trailing) = $4  
+// 1446|    let trailing_mark = if trailing { TrailingMark::Comma } else { TrailingMark::None }
+// 1447|    @syntax.make_record_expr(loc = mk_loc($sloc), trailing = trailing_mark, Some($1), fs)
+// 1448|  }
 
 ///|
 fn yy_action_519(
@@ -14842,10 +14842,10 @@ fn yy_action_519(
 }
 
 // file:///./parser.mbty
-// 230|    POST_LABEL opt_annot {
-// 231|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-// 232|      Labelled(binder~, ty = $2)
-// 233|    }
+// 232|    POST_LABEL opt_annot {
+// 233|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
+// 234|      Labelled(binder~, ty = $2)
+// 235|    }
 
 ///|
 fn yy_action_520(
@@ -14870,7 +14870,7 @@ fn yy_action_520(
 }
 
 // file:///./parser.mbty
-// 785|    DOT_UIDENT { $1 }
+// 787|    DOT_UIDENT { $1 }
 
 ///|
 fn yy_action_382(
@@ -14887,7 +14887,7 @@ fn yy_action_382(
 }
 
 // file:///./parser.mbty
-// 315|    "fn" fun_binder optional_bang optional_type_parameters { ($2, $3, $4) }
+// 317|    "fn" fun_binder optional_bang optional_type_parameters { ($2, $3, $4) }
 
 ///|
 fn yy_action_521(
@@ -14906,17 +14906,17 @@ fn yy_action_521(
 }
 
 // file:///./parser.mbty
-// 1186|    loop_label_colon "for" for_binders block_expr optional_else {
-// 1187|    For(
-// 1188|      binders = $3,
-// 1189|      condition = None,
-// 1190|      continue_block = @list.empty(),
-// 1191|      body = $4,
-// 1192|      for_else = $5,
-// 1193|      label = $1,
-// 1194|      loc = mk_loc($sloc)
-// 1195|    )
-// 1196|  }
+// 1188|    loop_label_colon "for" for_binders block_expr optional_else {
+// 1189|    For(
+// 1190|      binders = $3,
+// 1191|      condition = None,
+// 1192|      continue_block = @list.empty(),
+// 1193|      body = $4,
+// 1194|      for_else = $5,
+// 1195|      label = $1,
+// 1196|      loc = mk_loc($sloc)
+// 1197|    )
+// 1198|  }
 
 ///|
 fn yy_action_522(
@@ -14950,17 +14950,17 @@ fn yy_action_522(
 }
 
 // file:///./parser.mbty
-// 1506|    simple_expr ".." LIDENT apply_attr "(" list_commas(argument) ")" { 
-// 1507|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
-// 1508|    DotApply(
-// 1509|      self = $1,
-// 1510|      method_name~,
-// 1511|      args = $6,
-// 1512|      return_self = true,
-// 1513|      attr = $4,
-// 1514|      loc = mk_loc($sloc)
-// 1515|    )
-// 1516|  }
+// 1508|    simple_expr ".." LIDENT apply_attr "(" list_commas(argument) ")" { 
+// 1509|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
+// 1510|    DotApply(
+// 1511|      self = $1,
+// 1512|      method_name~,
+// 1513|      args = $6,
+// 1514|      return_self = true,
+// 1515|      attr = $4,
+// 1516|      loc = mk_loc($sloc)
+// 1517|    )
+// 1518|  }
 
 ///|
 fn yy_action_523(
@@ -15000,13 +15000,13 @@ fn yy_action_523(
 }
 
 // file:///./parser.mbty
-// 1057|    "..." { 
-// 1058|    Case::{ 
-// 1059|      pattern : Pattern::Any(loc = mk_loc($sloc)), 
-// 1060|      guard_ : None, 
-// 1061|      body : Hole(loc = mk_loc($sloc), kind = Todo) 
-// 1062|    }
-// 1063|  }
+// 1059|    "..." { 
+// 1060|    Case::{ 
+// 1061|      pattern : Pattern::Any(loc = mk_loc($sloc)), 
+// 1062|      guard_ : None, 
+// 1063|      body : Hole(loc = mk_loc($sloc), kind = Todo) 
+// 1064|    }
+// 1065|  }
 
 ///|
 fn yy_action_524(
@@ -15032,7 +15032,7 @@ fn yy_action_524(
 }
 
 // file:///./parser.mbty
-// 1015|    "..." { Hole(loc = mk_loc($sloc), kind = Todo) }
+// 1017|    "..." { Hole(loc = mk_loc($sloc), kind = Todo) }
 
 ///|
 fn yy_action_525(
@@ -15054,9 +15054,9 @@ fn yy_action_525(
 }
 
 // file:///./parser.mbty
-// 1288|    infix_expr infixop infix_expr { 
-// 1289|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1290|  }
+// 1290|    infix_expr infixop infix_expr { 
+// 1291|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1292|  }
 
 ///|
 fn yy_action_526(
@@ -15087,21 +15087,21 @@ fn yy_action_526(
 }
 
 // file:///./parser.mbty
-// 623|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
-// 624|    TopTypeDef(
-// 625|      TypeDecl::{
-// 626|        tycon : $6,
-// 627|        tycon_loc : mk_loc($loc($6)),
-// 628|        params : $7,
-// 629|        components: Alias($4),
-// 630|        type_vis : $2,
-// 631|        doc : DocString::empty(),
-// 632|        deriving: @list.empty(),
-// 633|        loc : mk_loc($sloc),
-// 634|        attrs : $1
-// 635|      }
-// 636|    )
-// 637|  }
+// 625|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
+// 626|    TopTypeDef(
+// 627|      TypeDecl::{
+// 628|        tycon : $6,
+// 629|        tycon_loc : mk_loc($loc($6)),
+// 630|        params : $7,
+// 631|        components: Alias($4),
+// 632|        type_vis : $2,
+// 633|        doc : DocString::empty(),
+// 634|        deriving: @list.empty(),
+// 635|        loc : mk_loc($sloc),
+// 636|        attrs : $1
+// 637|      }
+// 638|    )
+// 639|  }
 
 ///|
 fn yy_action_527(
@@ -15142,10 +15142,10 @@ fn yy_action_527(
 }
 
 // file:///./parser.mbty
-// 1735|    ".." PACKAGE_NAME DOT_UIDENT { 
-// 1736|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
-// 1737|    ConstSpread(binder~, pkg = Some($2), loc = mk_loc($sloc))
-// 1738|  }
+// 1737|    ".." PACKAGE_NAME DOT_UIDENT { 
+// 1738|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
+// 1739|    ConstSpread(binder~, pkg = Some($2), loc = mk_loc($sloc))
+// 1740|  }
 
 ///|
 fn yy_action_528(
@@ -15179,7 +15179,7 @@ fn yy_action_528(
 }
 
 // file:///./parser.mbty
-// 1743|    ".." "_" { Underscore }
+// 1745|    ".." "_" { Underscore }
 
 ///|
 fn yy_action_529(
@@ -15195,10 +15195,10 @@ fn yy_action_529(
 }
 
 // file:///./parser.mbty
-// 1894|    labeled_expr option(",") { 
-// 1895|    let trailing_mark = if $2 is Some(_) { TrailingMark::Comma } else { TrailingMark::None }
-// 1896|    (@list.singleton($1), trailing_mark)
-// 1897|  }
+// 1896|    labeled_expr option(",") { 
+// 1897|    let trailing_mark = if $2 is Some(_) { TrailingMark::Comma } else { TrailingMark::None }
+// 1898|    (@list.singleton($1), trailing_mark)
+// 1899|  }
 
 ///|
 fn yy_action_530(
@@ -15222,7 +15222,7 @@ fn yy_action_530(
 }
 
 // file:///./parser.mbty
-// 168|    non_empty_list_commas(X) { $1 }
+// 170|    non_empty_list_commas(X) { $1 }
 
 ///|
 fn yy_action_531(
@@ -15239,7 +15239,7 @@ fn yy_action_531(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_532(
@@ -15263,10 +15263,10 @@ fn yy_action_532(
 }
 
 // file:///./parser.mbty
-// 1833|    is_async "(" type_ ")" "->" return_type { 
-// 1834|    let (ty_res, ty_err) = $6
-// 1835|    Arrow(args = @list.singleton($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
-// 1836|  }
+// 1835|    is_async "(" type_ ")" "->" return_type { 
+// 1836|    let (ty_res, ty_err) = $6
+// 1837|    Arrow(args = @list.singleton($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+// 1838|  }
 
 ///|
 fn yy_action_533(
@@ -15299,7 +15299,7 @@ fn yy_action_533(
 }
 
 // file:///./parser.mbty
-// 1658|    expr { Regular($1) }
+// 1660|    expr { Regular($1) }
 
 ///|
 fn yy_action_534(
@@ -15316,7 +15316,7 @@ fn yy_action_534(
 }
 
 // file:///./parser.mbty
-// 1618|    INFIX3 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
+// 1620|    INFIX3 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_98(
@@ -15342,7 +15342,7 @@ fn yy_action_98(
 }
 
 // file:///./parser.mbty
-// 1274|    binder ioption(",") ")" { @list.singleton(Named($1)) }
+// 1276|    binder ioption(",") ")" { @list.singleton(Named($1)) }
 
 ///|
 fn yy_action_535(
@@ -15377,7 +15377,7 @@ fn yy_action_536(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_537(
@@ -15394,7 +15394,7 @@ fn yy_action_537(
 }
 
 // file:///./parser.mbty
-// 1625|    BAR { Var::{ name: Ident(name = "|"), loc: mk_loc($sloc) } }
+// 1627|    BAR { Var::{ name: Ident(name = "|"), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_75(
@@ -15416,7 +15416,7 @@ fn yy_action_75(
 }
 
 // file:///./parser.mbty
-// 827|    UIDENT_MAYBE_DOT "::" { Label::{ name: $1, loc: mk_loc($loc($1)) } }
+// 829|    UIDENT_MAYBE_DOT "::" { Label::{ name: $1, loc: mk_loc($loc($1)) } }
 
 ///|
 fn yy_action_538(
@@ -15438,16 +15438,16 @@ fn yy_action_538(
 }
 
 // file:///./parser.mbty
-// 1200|    loop_label_colon "for" non_empty_list_commas(foreach_binder) "in" expr block_expr optional_else { 
-// 1201|    ForEach(
-// 1202|      binders = $3,
-// 1203|      expr = $5,
-// 1204|      body = $6,
-// 1205|      else_block = $7,
-// 1206|      label = $1,
-// 1207|      loc = mk_loc($sloc)
-// 1208|    )
-// 1209|  }
+// 1202|    loop_label_colon "for" non_empty_list_commas(foreach_binder) "in" expr block_expr optional_else { 
+// 1203|    ForEach(
+// 1204|      binders = $3,
+// 1205|      expr = $5,
+// 1206|      body = $6,
+// 1207|      else_block = $7,
+// 1208|      label = $1,
+// 1209|      loc = mk_loc($sloc)
+// 1210|    )
+// 1211|  }
 
 ///|
 fn yy_action_539(
@@ -15481,7 +15481,7 @@ fn yy_action_539(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_540(
@@ -15515,24 +15515,24 @@ fn yy_action_540(
 }
 
 // file:///./parser.mbty
-// 593|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 594|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
-// 595|    let supers = match $5 {
-// 596|      None => @list.empty()
-// 597|      Some(supers) => supers
-// 598|    }
-// 599|    TopTrait(
-// 600|      TraitDecl::{
-// 601|        name,
-// 602|        supers,
-// 603|        methods: $7,
-// 604|        vis: $2,
-// 605|        loc: mk_loc($sloc),
-// 606|        attrs: $1,
-// 607|        doc : DocString::empty()
-// 608|      }
-// 609|    )
-// 610|  }
+// 595|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
+// 596|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
+// 597|    let supers = match $5 {
+// 598|      None => @list.empty()
+// 599|      Some(supers) => supers
+// 600|    }
+// 601|    TopTrait(
+// 602|      TraitDecl::{
+// 603|        name,
+// 604|        supers,
+// 605|        methods: $7,
+// 606|        vis: $2,
+// 607|        loc: mk_loc($sloc),
+// 608|        attrs: $1,
+// 609|        doc : DocString::empty()
+// 610|      }
+// 611|    )
+// 612|  }
 
 ///|
 fn yy_action_541(
@@ -15579,7 +15579,7 @@ fn yy_action_541(
 }
 
 // file:///./parser.mbty
-// 1575|    MULTILINE_STRING { String($1) }
+// 1577|    MULTILINE_STRING { String($1) }
 
 ///|
 fn yy_action_542(
@@ -15596,7 +15596,7 @@ fn yy_action_542(
 }
 
 // file:///./parser.mbty
-// 1603|    MINUS INT { make_int("-" + $2) }
+// 1605|    MINUS INT { make_int("-" + $2) }
 
 ///|
 fn yy_action_543(
@@ -15613,18 +15613,18 @@ fn yy_action_543(
 }
 
 // file:///./parser.mbty
-// 650|    attributes "test" option(loced_string) option(parameters) block_expr_with_local_types {
-// 651|    let (local_types, expr) = $5
-// 652|    TopTest(
-// 653|      expr~,
-// 654|      name = $3,
-// 655|      params = $4,
-// 656|      local_types~,
-// 657|      loc = mk_loc($sloc),
-// 658|      attrs = $1,
-// 659|      doc = DocString::empty()
-// 660|    )
-// 661|  }
+// 652|    attributes "test" option(loced_string) option(parameters) block_expr_with_local_types {
+// 653|    let (local_types, expr) = $5
+// 654|    TopTest(
+// 655|      expr~,
+// 656|      name = $3,
+// 657|      params = $4,
+// 658|      local_types~,
+// 659|      loc = mk_loc($sloc),
+// 660|      attrs = $1,
+// 661|      doc = DocString::empty()
+// 662|    )
+// 663|  }
 
 ///|
 fn yy_action_544(
@@ -15677,24 +15677,24 @@ fn yy_action_545(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_546(
@@ -15737,7 +15737,7 @@ fn yy_action_546(
 }
 
 // file:///./parser.mbty
-// 874|    "_" { mk_loc($sloc) }
+// 876|    "_" { mk_loc($sloc) }
 
 ///|
 fn yy_action_547(
@@ -15759,7 +15759,7 @@ fn yy_action_547(
 }
 
 // file:///./parser.mbty
-// 756|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
+// 758|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
 
 ///|
 fn yy_action_548(
@@ -15787,7 +15787,7 @@ fn yy_action_548(
 }
 
 // file:///./parser.mbty
-// 155|    non_empty_list_commas_rev(X) { $1.rev() }
+// 157|    non_empty_list_commas_rev(X) { $1.rev() }
 
 ///|
 fn yy_action_549(
@@ -15804,7 +15804,7 @@ fn yy_action_549(
 }
 
 // file:///./parser.mbty
-// 202|    X SEMI non_empty_list_semis(X) { $3.add($1) }
+// 204|    X SEMI non_empty_list_semis(X) { $3.add($1) }
 
 ///|
 fn yy_action_550(
@@ -15822,7 +15822,7 @@ fn yy_action_550(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_551(
@@ -15839,7 +15839,7 @@ fn yy_action_551(
 }
 
 // file:///./parser.mbty
-// 146|    X non_empty_list(X) { $2.add($1) }
+// 148|    X non_empty_list(X) { $2.add($1) }
 
 ///|
 fn yy_action_552(
@@ -15857,9 +15857,9 @@ fn yy_action_552(
 }
 
 // file:///./parser.mbty
-// 1251|    "(" ")" "=>" expr_statement_no_break_continue_return { 
-// 1252|    make_arrow_fn(@list.empty(), $4, loc = mk_loc($sloc))
-// 1253|  }
+// 1253|    "(" ")" "=>" expr_statement_no_break_continue_return { 
+// 1254|    make_arrow_fn(@list.empty(), $4, loc = mk_loc($sloc))
+// 1255|  }
 
 ///|
 fn yy_action_553(
@@ -15886,27 +15886,27 @@ fn yy_action_553(
 }
 
 // file:///./parser.mbty
-// 452|    suberror_header option(type_) deriving_directive_list {
-// 453|    let (attrs, type_vis, tycon, tycon_loc) = $1
-// 454|    let exception_decl : ExceptionDecl = match $2 {
-// 455|      None => NoPayload
-// 456|      Some(ty) => SinglePayload(ty)
-// 457|    }
-// 458|    TopTypeDef(
-// 459|      TypeDecl::{
-// 460|        tycon,
-// 461|        tycon_loc,
-// 462|        params: @list.empty(),
-// 463|        components: Error(exception_decl),
-// 464|        type_vis,
-// 465|        doc : DocString::empty(),
-// 466|        deriving: $3,
-// 467|        loc : mk_loc($sloc),
-// 468|        attrs
-// 469|      }
-// 470|    )
-// 471|
-// 472|  }
+// 454|    suberror_header option(type_) deriving_directive_list {
+// 455|    let (attrs, type_vis, tycon, tycon_loc) = $1
+// 456|    let exception_decl : ExceptionDecl = match $2 {
+// 457|      None => NoPayload
+// 458|      Some(ty) => SinglePayload(ty)
+// 459|    }
+// 460|    TopTypeDef(
+// 461|      TypeDecl::{
+// 462|        tycon,
+// 463|        tycon_loc,
+// 464|        params: @list.empty(),
+// 465|        components: Error(exception_decl),
+// 466|        type_vis,
+// 467|        doc : DocString::empty(),
+// 468|        deriving: $3,
+// 469|        loc : mk_loc($sloc),
+// 470|        attrs
+// 471|      }
+// 472|    )
+// 473|
+// 474|  }
 
 ///|
 fn yy_action_554(
@@ -15947,14 +15947,14 @@ fn yy_action_554(
 }
 
 // file:///./parser.mbty
-// 1663|    map_syntax_key ":" expr { 
-// 1664|    MapExprElem::{
-// 1665|      key: $1,
-// 1666|      expr: $3,
-// 1667|      key_loc: mk_loc($loc($1)),
-// 1668|      loc: mk_loc($sloc)
-// 1669|    }
-// 1670|  }
+// 1665|    map_syntax_key ":" expr { 
+// 1666|    MapExprElem::{
+// 1667|      key: $1,
+// 1668|      expr: $3,
+// 1669|      key_loc: mk_loc($loc($1)),
+// 1670|      loc: mk_loc($sloc)
+// 1671|    }
+// 1672|  }
 
 ///|
 fn yy_action_555(
@@ -15985,13 +15985,13 @@ fn yy_action_555(
 }
 
 // file:///./parser.mbty
-// 1808|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
-// 1809|    Name(
-// 1810|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 1811|      tys = $2,
-// 1812|      loc = mk_loc($sloc)
-// 1813|    )
-// 1814|  }
+// 1810|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
+// 1811|    Name(
+// 1812|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 1813|      tys = $2,
+// 1814|      loc = mk_loc($sloc)
+// 1815|    )
+// 1816|  }
 
 ///|
 fn yy_action_556(
@@ -16026,7 +16026,7 @@ fn yy_action_556(
 }
 
 // file:///./parser.mbty
-// 1592|    BYTE { Byte($1) }
+// 1594|    BYTE { Byte($1) }
 
 ///|
 fn yy_action_557(
@@ -16043,7 +16043,7 @@ fn yy_action_557(
 }
 
 // file:///./parser.mbty
-// 1266|    "_" ":" type_ ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), Some($3))) }
+// 1268|    "_" ":" type_ ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), Some($3))) }
 
 ///|
 fn yy_action_558(
@@ -16068,17 +16068,17 @@ fn yy_action_558(
 }
 
 // file:///./parser.mbty
-// 1840|    attributes visibility option("mut") LIDENT ":" type_ { 
-// 1841|    FieldDecl::{
-// 1842|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
-// 1843|      ty: $6,
-// 1844|      mut_: $3 is Some(_),
-// 1845|      vis: $2,
-// 1846|      loc: mk_loc($sloc),
-// 1847|      attrs: $1,
-// 1848|      doc: DocString::empty()
-// 1849|    }
-// 1850|  }
+// 1842|    attributes visibility option("mut") LIDENT ":" type_ { 
+// 1843|    FieldDecl::{
+// 1844|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
+// 1845|      ty: $6,
+// 1846|      mut_: $3 is Some(_),
+// 1847|      vis: $2,
+// 1848|      loc: mk_loc($sloc),
+// 1849|      attrs: $1,
+// 1850|      doc: DocString::empty()
+// 1851|    }
+// 1852|  }
 
 ///|
 fn yy_action_559(
@@ -16120,7 +16120,7 @@ fn yy_action_559(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_560(
@@ -16138,7 +16138,7 @@ fn yy_action_560(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_561(
@@ -16155,12 +16155,12 @@ fn yy_action_561(
 }
 
 // file:///./parser.mbty
-// 1978|    pattern { 
-// 1979|    ConstrPatArg::{
-// 1980|      pat: $1,
-// 1981|      kind: Positional
-// 1982|    }
-// 1983|  }
+// 1980|    pattern { 
+// 1981|    ConstrPatArg::{
+// 1982|      pat: $1,
+// 1983|      kind: Positional
+// 1984|    }
+// 1985|  }
 
 ///|
 fn yy_action_562(
@@ -16177,7 +16177,7 @@ fn yy_action_562(
 }
 
 // file:///./parser.mbty
-// 1602|    simple_constant { $1 }
+// 1604|    simple_constant { $1 }
 
 ///|
 fn yy_action_563(
@@ -16194,7 +16194,7 @@ fn yy_action_563(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_564(
@@ -16213,10 +16213,10 @@ fn yy_action_564(
 }
 
 // file:///./parser.mbty
-// 815|    PACKAGE_NAME ".(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
-// 816|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 817|    (Some(pkg), None, true, $3)
-// 818|  }
+// 817|    PACKAGE_NAME ".(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
+// 818|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 819|    (Some(pkg), None, true, $3)
+// 820|  }
 
 ///|
 fn yy_action_565(
@@ -16240,9 +16240,9 @@ fn yy_action_565(
 }
 
 // file:///./parser.mbty
-// 1288|    infix_expr infixop infix_expr { 
-// 1289|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1290|  }
+// 1290|    infix_expr infixop infix_expr { 
+// 1291|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1292|  }
 
 ///|
 fn yy_action_566(
@@ -16273,7 +16273,7 @@ fn yy_action_566(
 }
 
 // file:///./parser.mbty
-// 1955|    ".." option(",") { (@list.empty(), true) }
+// 1957|    ".." option(",") { (@list.empty(), true) }
 
 ///|
 fn yy_action_567(
@@ -16289,7 +16289,7 @@ fn yy_action_567(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_568(
@@ -16323,7 +16323,7 @@ fn yy_action_568(
 }
 
 // file:///./parser.mbty
-// 1745|    ".." { NoBinder }
+// 1747|    ".." { NoBinder }
 
 ///|
 fn yy_action_569(
@@ -16339,7 +16339,7 @@ fn yy_action_569(
 }
 
 // file:///./parser.mbty
-// 224|    ioption(annot) { $1 }
+// 226|    ioption(annot) { $1 }
 
 ///|
 fn yy_action_48(
@@ -16357,10 +16357,10 @@ fn yy_action_48(
 }
 
 // file:///./parser.mbty
-// 285|    type_name "::" LIDENT {
-// 286|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
-// 287|    (Some($1), binder)
-// 288|  }
+// 287|    type_name "::" LIDENT {
+// 288|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
+// 289|    (Some($1), binder)
+// 290|  }
 
 ///|
 fn yy_action_570(
@@ -16384,24 +16384,24 @@ fn yy_action_570(
 }
 
 // file:///./parser.mbty
-// 680|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
-// 681|    let (ret_ty, err_ty) = $10
-// 682|    TopImpl(
-// 683|      self_ty = None,
-// 684|      trait_ = $5,
-// 685|      method_name = $7,
-// 686|      has_error = $8,
-// 687|      quantifiers = $4,
-// 688|      params = $9,
-// 689|      ret_ty~,
-// 690|      err_ty~,
-// 691|      body = $11,
-// 692|      vis = $2,
-// 693|      loc = mk_loc($sloc),
-// 694|      attrs = $1,
-// 695|      doc = DocString::empty()
-// 696|    )
-// 697|  }
+// 682|    attributes visibility "impl" optional_type_parameters type_name "with" binder optional_bang parameters func_return_type impl_body {
+// 683|    let (ret_ty, err_ty) = $10
+// 684|    TopImpl(
+// 685|      self_ty = None,
+// 686|      trait_ = $5,
+// 687|      method_name = $7,
+// 688|      has_error = $8,
+// 689|      quantifiers = $4,
+// 690|      params = $9,
+// 691|      ret_ty~,
+// 692|      err_ty~,
+// 693|      body = $11,
+// 694|      vis = $2,
+// 695|      loc = mk_loc($sloc),
+// 696|      attrs = $1,
+// 697|      doc = DocString::empty()
+// 698|    )
+// 699|  }
 
 ///|
 fn yy_action_571(
@@ -16450,10 +16450,10 @@ fn yy_action_571(
 }
 
 // file:///./parser.mbty
-// 912|    none_empty_list_semis_rev_with_trailing_info(statement) { 
-// 913|    let (ls, trailing) = $1
-// 914|    (Statement::compact_rev(ls, loc = mk_loc($sloc)), trailing)
-// 915|  }
+// 914|    none_empty_list_semis_rev_with_trailing_info(statement) { 
+// 915|    let (ls, trailing) = $1
+// 916|    (Statement::compact_rev(ls, loc = mk_loc($sloc)), trailing)
+// 917|  }
 
 ///|
 fn yy_action_572(
@@ -16480,7 +16480,7 @@ fn yy_action_572(
 }
 
 // file:///./parser.mbty
-// 729|     { @list.empty() }
+// 731|     { @list.empty() }
 
 ///|
 fn yy_action_7(
@@ -16496,14 +16496,14 @@ fn yy_action_7(
 }
 
 // file:///./parser.mbty
-// 1821|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type { 
-// 1822|    let (ty_res, ty_err) = $8
-// 1823|    let ts = match $5 { 
-// 1824|      None => @list.empty() 
-// 1825|      Some(ts) => ts 
-// 1826|    }
-// 1827|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
-// 1828|  }
+// 1823|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type { 
+// 1824|    let (ty_res, ty_err) = $8
+// 1825|    let ts = match $5 { 
+// 1826|      None => @list.empty() 
+// 1827|      Some(ts) => ts 
+// 1828|    }
+// 1829|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+// 1830|  }
 
 ///|
 fn yy_action_573(
@@ -16542,15 +16542,15 @@ fn yy_action_573(
 }
 
 // file:///./parser.mbty
-// 1154|    loop_label_colon loop_header list_semis(multi_pattern_case) "}" { 
-// 1155|    Loop(
-// 1156|      args = $2,
-// 1157|      body = $3,
-// 1158|      label = $1,
-// 1159|      loop_loc = mk_loc($loc($2)),
-// 1160|      loc = mk_loc($sloc)
-// 1161|    )
-// 1162|  }
+// 1156|    loop_label_colon loop_header list_semis(multi_pattern_case) "}" { 
+// 1157|    Loop(
+// 1158|      args = $2,
+// 1159|      body = $3,
+// 1160|      label = $1,
+// 1161|      loop_loc = mk_loc($loc($2)),
+// 1162|      loc = mk_loc($sloc)
+// 1163|    )
+// 1164|  }
 
 ///|
 fn yy_action_574(
@@ -16584,17 +16584,17 @@ fn yy_action_574(
 }
 
 // file:///./parser.mbty
-// 970|    is_async fn_header list_semis(multi_pattern_case) "}" { 
-// 971|    let (binder, has_error) = $2
-// 972|    let func = Func::Match(
-// 973|      cases = $3,
-// 974|      has_error~,
-// 975|      is_async = $1,
-// 976|      fn_loc = mk_loc($loc($2)),
-// 977|      loc = mk_loc($sloc)
-// 978|    )
-// 979|    StmtFunc(binder~, func~, loc = mk_loc($sloc))
-// 980|  }
+// 972|    is_async fn_header list_semis(multi_pattern_case) "}" { 
+// 973|    let (binder, has_error) = $2
+// 974|    let func = Func::Match(
+// 975|      cases = $3,
+// 976|      has_error~,
+// 977|      is_async = $1,
+// 978|      fn_loc = mk_loc($loc($2)),
+// 979|      loc = mk_loc($sloc)
+// 980|    )
+// 981|    StmtFunc(binder~, func~, loc = mk_loc($sloc))
+// 982|  }
 
 ///|
 fn yy_action_575(
@@ -16665,12 +16665,12 @@ fn yy_action_577(
 }
 
 // file:///./parser.mbty
-// 1649|    LIDENT "?" { 
-// 1650|    let loc = mk_loc($loc($1))
-// 1651|    let label = Label::{ name: $1, loc }
-// 1652|    let arg_value = @syntax.make_ident_expr(loc~, Var::{ name: Ident(name = $1), loc })
-// 1653|    Argument::{ value: arg_value, kind: LabelledOptionPun(label~, question_loc = mk_loc($loc($2))) }
-// 1654|  }
+// 1651|    LIDENT "?" { 
+// 1652|    let loc = mk_loc($loc($1))
+// 1653|    let label = Label::{ name: $1, loc }
+// 1654|    let arg_value = @syntax.make_ident_expr(loc~, Var::{ name: Ident(name = $1), loc })
+// 1655|    Argument::{ value: arg_value, kind: LabelledOptionPun(label~, question_loc = mk_loc($loc($2))) }
+// 1656|  }
 
 ///|
 fn yy_action_578(
@@ -16703,9 +16703,9 @@ fn yy_action_578(
 }
 
 // file:///./parser.mbty
-// 812|    option(func_alias_type_name(LIDENT, UIDENT)) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
-// 813|    (None, $1, true, $3)
-// 814|  }
+// 814|    option(func_alias_type_name(LIDENT, UIDENT)) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
+// 815|    (None, $1, true, $3)
+// 816|  }
 
 ///|
 fn yy_action_579(
@@ -16723,14 +16723,14 @@ fn yy_action_579(
 }
 
 // file:///./parser.mbty
-// 335|    "type" luident type_ deriving_directive_list {
-// 336|    LocalTypeDecl::{
-// 337|      tycon : $2,
-// 338|      tycon_loc : mk_loc($loc($2)),
-// 339|      components: Newtype($3),
-// 340|      deriving: $4
-// 341|    }
-// 342|  }
+// 337|    "type" luident type_ deriving_directive_list {
+// 338|    LocalTypeDecl::{
+// 339|      tycon : $2,
+// 340|      tycon_loc : mk_loc($loc($2)),
+// 341|      components: Newtype($3),
+// 342|      deriving: $4
+// 343|    }
+// 344|  }
 
 ///|
 fn yy_action_580(
@@ -16772,10 +16772,10 @@ fn yy_action_581(
 }
 
 // file:///./parser.mbty
-// 384|    block_expr_with_local_types {
-// 385|    let (local_types, expr) = $1
-// 386|    DeclBody(local_types~, expr~)
-// 387|  }
+// 386|    block_expr_with_local_types {
+// 387|    let (local_types, expr) = $1
+// 388|    DeclBody(local_types~, expr~)
+// 389|  }
 
 ///|
 fn yy_action_582(
@@ -16809,9 +16809,9 @@ fn yy_action_583(
 }
 
 // file:///./parser.mbty
-// 1288|    infix_expr infixop infix_expr { 
-// 1289|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1290|  }
+// 1290|    infix_expr infixop infix_expr { 
+// 1291|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1292|  }
 
 ///|
 fn yy_action_584(
@@ -16842,22 +16842,22 @@ fn yy_action_584(
 }
 
 // file:///./parser.mbty
-// 405|    type_header deriving_directive_list {
-// 406|    let (attrs, type_vis, tycon, tycon_loc, params) = $1
-// 407|    TopTypeDef(
-// 408|      TypeDecl::{
-// 409|        tycon,
-// 410|        tycon_loc,
-// 411|        params,
-// 412|        components: Abstract,
-// 413|        type_vis,
-// 414|        doc : DocString::empty(),
-// 415|        deriving: $2,
-// 416|        loc : mk_loc($sloc),
-// 417|        attrs
-// 418|      }
-// 419|    )
-// 420|  }
+// 407|    type_header deriving_directive_list {
+// 408|    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+// 409|    TopTypeDef(
+// 410|      TypeDecl::{
+// 411|        tycon,
+// 412|        tycon_loc,
+// 413|        params,
+// 414|        components: Abstract,
+// 415|        type_vis,
+// 416|        doc : DocString::empty(),
+// 417|        deriving: $2,
+// 418|        loc : mk_loc($sloc),
+// 419|        attrs
+// 420|      }
+// 421|    )
+// 422|  }
 
 ///|
 fn yy_action_586(
@@ -16895,7 +16895,7 @@ fn yy_action_586(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_587(
@@ -16912,10 +16912,10 @@ fn yy_action_587(
 }
 
 // file:///./parser.mbty
-// 1027|    "continue" POST_LABEL list_commas_no_trailing(expr) { 
-// 1028|    let label = Label::{ name: $2, loc: mk_loc($loc($2)) }
-// 1029|    Continue(args = $3, label = Some(label), loc = mk_loc($sloc))
-// 1030|  }
+// 1029|    "continue" POST_LABEL list_commas_no_trailing(expr) { 
+// 1030|    let label = Label::{ name: $2, loc: mk_loc($loc($2)) }
+// 1031|    Continue(args = $3, label = Some(label), loc = mk_loc($sloc))
+// 1032|  }
 
 ///|
 fn yy_action_588(
@@ -16949,23 +16949,23 @@ fn yy_action_588(
 }
 
 // file:///./parser.mbty
-// 709|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
-// 710|    TopView(
-// 711|      quantifiers = $4,
-// 712|      source_ty = $10,
-// 713|      view_type_name = $5,
-// 714|      view_type_loc = mk_loc($loc($5)),
-// 715|      view_func_name = $12,
-// 716|      parameters = $13,
-// 717|      params_loc = mk_loc($loc($13)),
-// 718|      view_constrs = $7,
-// 719|      body = $14,
-// 720|      vis = $2,
-// 721|      loc = mk_loc($sloc),
-// 722|      attrs = $1,
-// 723|      doc = DocString::empty()
-// 724|    )
-// 725|  }
+// 711|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
+// 712|    TopView(
+// 713|      quantifiers = $4,
+// 714|      source_ty = $10,
+// 715|      view_type_name = $5,
+// 716|      view_type_loc = mk_loc($loc($5)),
+// 717|      view_func_name = $12,
+// 718|      parameters = $13,
+// 719|      params_loc = mk_loc($loc($13)),
+// 720|      view_constrs = $7,
+// 721|      body = $14,
+// 722|      vis = $2,
+// 723|      loc = mk_loc($sloc),
+// 724|      attrs = $1,
+// 725|      doc = DocString::empty()
+// 726|    )
+// 727|  }
 
 ///|
 fn yy_action_589(
@@ -17017,7 +17017,7 @@ fn yy_action_589(
 }
 
 // file:///./parser.mbty
-// 212|    non_empty_list_semis(X) { $1 }
+// 214|    non_empty_list_semis(X) { $1 }
 
 ///|
 fn yy_action_590(
@@ -17034,10 +17034,10 @@ fn yy_action_590(
 }
 
 // file:///./parser.mbty
-// 1833|    is_async "(" type_ ")" "->" return_type { 
-// 1834|    let (ty_res, ty_err) = $6
-// 1835|    Arrow(args = @list.singleton($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
-// 1836|  }
+// 1835|    is_async "(" type_ ")" "->" return_type { 
+// 1836|    let (ty_res, ty_err) = $6
+// 1837|    Arrow(args = @list.singleton($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+// 1838|  }
 
 ///|
 fn yy_action_591(
@@ -17070,7 +17070,7 @@ fn yy_action_591(
 }
 
 // file:///./parser.mbty
-// 1524|    "[" list_commas(spreadable_elem) "]" { @syntax.make_array_expr(loc = mk_loc($sloc), $2) }
+// 1526|    "[" list_commas(spreadable_elem) "]" { @syntax.make_array_expr(loc = mk_loc($sloc), $2) }
 
 ///|
 fn yy_action_592(
@@ -17096,7 +17096,7 @@ fn yy_action_592(
 }
 
 // file:///./parser.mbty
-// 1529|    LIDENT { Label::{ name: $1, loc: mk_loc($sloc) } }
+// 1531|    LIDENT { Label::{ name: $1, loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_28(
@@ -17119,7 +17119,7 @@ fn yy_action_28(
 }
 
 // file:///./parser.mbty
-// 744|     { None }
+// 746|     { None }
 
 ///|
 fn yy_action_593(
@@ -17135,9 +17135,9 @@ fn yy_action_593(
 }
 
 // file:///./parser.mbty
-// 766|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
-// 767|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 768|  }
+// 768|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
+// 769|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 770|  }
 
 ///|
 fn yy_action_594(
@@ -17167,19 +17167,19 @@ fn yy_action_594(
 }
 
 // file:///./parser.mbty
-// 580|    attributes visibility "fnalias" func_alias_targets {
-// 581|    let (pkg, type_name, is_list, targets) = $4
-// 582|    TopFuncAlias(
-// 583|      pkg~,
-// 584|      type_name~,
-// 585|      targets~,
-// 586|      vis = $2,
-// 587|      attrs = $1,
-// 588|      is_list~,
-// 589|      doc = DocString::empty(),
-// 590|      loc = mk_loc($sloc)
-// 591|    )
-// 592|  }
+// 582|    attributes visibility "fnalias" func_alias_targets {
+// 583|    let (pkg, type_name, is_list, targets) = $4
+// 584|    TopFuncAlias(
+// 585|      pkg~,
+// 586|      type_name~,
+// 587|      targets~,
+// 588|      vis = $2,
+// 589|      attrs = $1,
+// 590|      is_list~,
+// 591|      doc = DocString::empty(),
+// 592|      loc = mk_loc($sloc)
+// 593|    )
+// 594|  }
 
 ///|
 fn yy_action_595(
@@ -17216,10 +17216,10 @@ fn yy_action_595(
 }
 
 // file:///./parser.mbty
-// 1731|    ".." UIDENT { 
-// 1732|    let binder = Binder::{ name: $2, loc: mk_loc($loc($2)) }
-// 1733|    ConstSpread(binder~, pkg = None, loc = mk_loc($sloc))
-// 1734|  }
+// 1733|    ".." UIDENT { 
+// 1734|    let binder = Binder::{ name: $2, loc: mk_loc($loc($2)) }
+// 1735|    ConstSpread(binder~, pkg = None, loc = mk_loc($sloc))
+// 1736|  }
 
 ///|
 fn yy_action_596(
@@ -17248,7 +17248,7 @@ fn yy_action_596(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_597(
@@ -17265,7 +17265,7 @@ fn yy_action_597(
 }
 
 // file:///./parser.mbty
-// 1595|    INT { make_int($1) }
+// 1597|    INT { make_int($1) }
 
 ///|
 fn yy_action_598(
@@ -17282,9 +17282,9 @@ fn yy_action_598(
 }
 
 // file:///./parser.mbty
-// 801|    ioption(func_alias_type_name(LIDENT, UIDENT)) func_alias_target(LIDENT) { 
-// 802|    (None, $1, false, @list.singleton($2))
-// 803|  }
+// 803|    ioption(func_alias_type_name(LIDENT, UIDENT)) func_alias_target(LIDENT) { 
+// 804|    (None, $1, false, @list.singleton($2))
+// 805|  }
 
 ///|
 fn yy_action_599(
@@ -17303,7 +17303,7 @@ fn yy_action_599(
 }
 
 // file:///./parser.mbty
-// 1328|    simple_expr { $1 }
+// 1330|    simple_expr { $1 }
 
 ///|
 fn yy_action_600(
@@ -17320,18 +17320,18 @@ fn yy_action_600(
 }
 
 // file:///./parser.mbty
-// 638|    attributes visibility "traitalias" batch_type_alias_targets {
-// 639|    let (is_list, pkg, targets) = $4
-// 640|    TopBatchTraitAlias(
-// 641|      pkg~,
-// 642|      targets~,
-// 643|      vis = $2,
-// 644|      attrs = $1,
-// 645|      is_list~,
-// 646|      doc = DocString::empty(),
-// 647|      loc = mk_loc($sloc)
-// 648|    )
-// 649|  }
+// 640|    attributes visibility "traitalias" batch_type_alias_targets {
+// 641|    let (is_list, pkg, targets) = $4
+// 642|    TopBatchTraitAlias(
+// 643|      pkg~,
+// 644|      targets~,
+// 645|      vis = $2,
+// 646|      attrs = $1,
+// 647|      is_list~,
+// 648|      doc = DocString::empty(),
+// 649|      loc = mk_loc($sloc)
+// 650|    )
+// 651|  }
 
 ///|
 fn yy_action_601(
@@ -17367,19 +17367,19 @@ fn yy_action_601(
 }
 
 // file:///./parser.mbty
-// 522|    val_header "=" expr {
-// 523|    let (attrs, is_constant, vis, binder, ty) = $1
-// 524|    TopLetDef(
-// 525|      binder~,
-// 526|      ty~,
-// 527|      expr = $3,
-// 528|      vis~,
-// 529|      is_constant~,
-// 530|      loc = mk_loc($sloc),
-// 531|      attrs~,
-// 532|      doc = DocString::empty()
-// 533|    )
-// 534|  }
+// 524|    val_header "=" expr {
+// 525|    let (attrs, is_constant, vis, binder, ty) = $1
+// 526|    TopLetDef(
+// 527|      binder~,
+// 528|      ty~,
+// 529|      expr = $3,
+// 530|      vis~,
+// 531|      is_constant~,
+// 532|      loc = mk_loc($sloc),
+// 533|      attrs~,
+// 534|      doc = DocString::empty()
+// 535|    )
+// 536|  }
 
 ///|
 fn yy_action_602(
@@ -17414,7 +17414,7 @@ fn yy_action_602(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_603(
@@ -17431,16 +17431,16 @@ fn yy_action_603(
 }
 
 // file:///./parser.mbty
-// 1872|    attributes UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) { 
-// 1873|    ConstrDecl::{
-// 1874|      name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
-// 1875|      args: $3,
-// 1876|      tag: $4,
-// 1877|      loc: mk_loc($sloc),
-// 1878|      attrs: $1,
-// 1879|      doc: DocString::empty()
-// 1880|    }
-// 1881|  }
+// 1874|    attributes UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) { 
+// 1875|    ConstrDecl::{
+// 1876|      name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
+// 1877|      args: $3,
+// 1878|      tag: $4,
+// 1879|      loc: mk_loc($sloc),
+// 1880|      attrs: $1,
+// 1881|      doc: DocString::empty()
+// 1882|    }
+// 1883|  }
 
 ///|
 fn yy_action_604(
@@ -17495,24 +17495,24 @@ fn yy_action_605(
 }
 
 // file:///./parser.mbty
-// 593|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 594|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
-// 595|    let supers = match $5 {
-// 596|      None => @list.empty()
-// 597|      Some(supers) => supers
-// 598|    }
-// 599|    TopTrait(
-// 600|      TraitDecl::{
-// 601|        name,
-// 602|        supers,
-// 603|        methods: $7,
-// 604|        vis: $2,
-// 605|        loc: mk_loc($sloc),
-// 606|        attrs: $1,
-// 607|        doc : DocString::empty()
-// 608|      }
-// 609|    )
-// 610|  }
+// 595|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
+// 596|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
+// 597|    let supers = match $5 {
+// 598|      None => @list.empty()
+// 599|      Some(supers) => supers
+// 600|    }
+// 601|    TopTrait(
+// 602|      TraitDecl::{
+// 603|        name,
+// 604|        supers,
+// 605|        methods: $7,
+// 606|        vis: $2,
+// 607|        loc: mk_loc($sloc),
+// 608|        attrs: $1,
+// 609|        doc : DocString::empty()
+// 610|      }
+// 611|    )
+// 612|  }
 
 ///|
 fn yy_action_606(
@@ -17559,7 +17559,7 @@ fn yy_action_606(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_607(
@@ -17595,7 +17595,7 @@ fn yy_action_608(
 }
 
 // file:///./parser.mbty
-// 145|    X { @list.singleton($1) }
+// 147|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_609(
@@ -17612,7 +17612,7 @@ fn yy_action_609(
 }
 
 // file:///./parser.mbty
-// 888|    UIDENT { $1 }
+// 890|    UIDENT { $1 }
 
 ///|
 fn yy_action_610(
@@ -17629,7 +17629,7 @@ fn yy_action_610(
 }
 
 // file:///./parser.mbty
-// 193|    non_empty_list_semi_rev_aux(X) option(SEMI) { $1 }
+// 195|    non_empty_list_semi_rev_aux(X) option(SEMI) { $1 }
 
 ///|
 fn yy_action_611(
@@ -17646,13 +17646,13 @@ fn yy_action_611(
 }
 
 // file:///./parser.mbty
-// 542|    fun_header "=" STRING {
-// 543|    TopFuncDef(
-// 544|      loc = mk_loc($sloc),
-// 545|      fun_decl = $1,
-// 546|      decl_body = DeclStubs(Embedded(language = None, code = CodeString($3)))
-// 547|    )
-// 548|  }
+// 544|    fun_header "=" STRING {
+// 545|    TopFuncDef(
+// 546|      loc = mk_loc($sloc),
+// 547|      fun_decl = $1,
+// 548|      decl_body = DeclStubs(Embedded(language = None, code = CodeString($3)))
+// 549|    )
+// 550|  }
 
 ///|
 fn yy_action_612(
@@ -17680,7 +17680,7 @@ fn yy_action_612(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_613(
@@ -17704,17 +17704,17 @@ fn yy_action_613(
 }
 
 // file:///./parser.mbty
-// 1495|    simple_expr DOT_LIDENT apply_attr "(" list_commas(argument) ")" { 
-// 1496|    let method_name = Label::{ name: $2, loc: mk_loc($loc($2)) }
-// 1497|    DotApply(
-// 1498|      self = $1,
-// 1499|      method_name~,
-// 1500|      args = $5,
-// 1501|      return_self = false,
-// 1502|      attr = $3,
-// 1503|      loc = mk_loc($sloc)
-// 1504|    )
-// 1505|  }
+// 1497|    simple_expr DOT_LIDENT apply_attr "(" list_commas(argument) ")" { 
+// 1498|    let method_name = Label::{ name: $2, loc: mk_loc($loc($2)) }
+// 1499|    DotApply(
+// 1500|      self = $1,
+// 1501|      method_name~,
+// 1502|      args = $5,
+// 1503|      return_self = false,
+// 1504|      attr = $3,
+// 1505|      loc = mk_loc($sloc)
+// 1506|    )
+// 1507|  }
 
 ///|
 fn yy_action_614(
@@ -17754,7 +17754,7 @@ fn yy_action_614(
 }
 
 // file:///./parser.mbty
-// 167|    { @list.empty() }
+// 169|    { @list.empty() }
 
 ///|
 fn yy_action_615(
@@ -17786,7 +17786,7 @@ fn yy_action_616(
 }
 
 // file:///./parser.mbty
-// 212|    non_empty_list_semis(X) { $1 }
+// 214|    non_empty_list_semis(X) { $1 }
 
 ///|
 fn yy_action_617(
@@ -17819,7 +17819,7 @@ fn yy_action_618(
 }
 
 // file:///./parser.mbty
-// 228|    "_" opt_annot { DiscardPositional(ty = $2, loc = mk_loc($loc($1))) }
+// 230|    "_" opt_annot { DiscardPositional(ty = $2, loc = mk_loc($loc($1))) }
 
 ///|
 fn yy_action_619(
@@ -17842,7 +17842,7 @@ fn yy_action_619(
 }
 
 // file:///./parser.mbty
-// 1933|    label { @syntax.make_field_pat(loc = mk_loc($sloc), $1, @syntax.label_to_pat(loc = mk_loc($sloc), $1), true) }
+// 1935|    label { @syntax.make_field_pat(loc = mk_loc($sloc), $1, @syntax.label_to_pat(loc = mk_loc($sloc), $1), true) }
 
 ///|
 fn yy_action_18(
@@ -17874,7 +17874,7 @@ fn yy_action_18(
 }
 
 // file:///./parser.mbty
-// 201|    X option(SEMI) { @list.singleton($1) }
+// 203|    X option(SEMI) { @list.singleton($1) }
 
 ///|
 fn yy_action_620(
@@ -17891,25 +17891,25 @@ fn yy_action_620(
 }
 
 // file:///./parser.mbty
-// 346|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
-// 347|    let (type_name, f) = $6
-// 348|    let (return_type, error_type) = $10
-// 349|    let fn_decl = FunDecl::{
-// 350|      type_name,
-// 351|      name: f,
-// 352|      has_error : $7,
-// 353|      is_async : false,
-// 354|      quantifiers: $8,
-// 355|      decl_params: $9,
-// 356|      params_loc: mk_loc($loc($9)),
-// 357|      return_type,
-// 358|      error_type,
-// 359|      vis: $2,
-// 360|      doc: DocString::empty(),
-// 361|      attrs: $1,
-// 362|    }
-// 363|    ($4, fn_decl)
-// 364|  }
+// 348|    attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
+// 349|    let (type_name, f) = $6
+// 350|    let (return_type, error_type) = $10
+// 351|    let fn_decl = FunDecl::{
+// 352|      type_name,
+// 353|      name: f,
+// 354|      has_error : $7,
+// 355|      is_async : false,
+// 356|      quantifiers: $8,
+// 357|      decl_params: $9,
+// 358|      params_loc: mk_loc($loc($9)),
+// 359|      return_type,
+// 360|      error_type,
+// 361|      vis: $2,
+// 362|      doc: DocString::empty(),
+// 363|      attrs: $1,
+// 364|    }
+// 365|    ($4, fn_decl)
+// 366|  }
 
 ///|
 fn yy_action_621(
@@ -17953,21 +17953,21 @@ fn yy_action_621(
 }
 
 // file:///./parser.mbty
-// 623|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
-// 624|    TopTypeDef(
-// 625|      TypeDecl::{
-// 626|        tycon : $6,
-// 627|        tycon_loc : mk_loc($loc($6)),
-// 628|        params : $7,
-// 629|        components: Alias($4),
-// 630|        type_vis : $2,
-// 631|        doc : DocString::empty(),
-// 632|        deriving: @list.empty(),
-// 633|        loc : mk_loc($sloc),
-// 634|        attrs : $1
-// 635|      }
-// 636|    )
-// 637|  }
+// 625|    attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
+// 626|    TopTypeDef(
+// 627|      TypeDecl::{
+// 628|        tycon : $6,
+// 629|        tycon_loc : mk_loc($loc($6)),
+// 630|        params : $7,
+// 631|        components: Alias($4),
+// 632|        type_vis : $2,
+// 633|        doc : DocString::empty(),
+// 634|        deriving: @list.empty(),
+// 635|        loc : mk_loc($sloc),
+// 636|        attrs : $1
+// 637|      }
+// 638|    )
+// 639|  }
 
 ///|
 fn yy_action_622(
@@ -18008,7 +18008,7 @@ fn yy_action_622(
 }
 
 // file:///./parser.mbty
-// 374|    local_type_decl { (@list.singleton($1), Expr::Unit(loc = mk_loc($sloc), faked = true)) }
+// 376|    local_type_decl { (@list.singleton($1), Expr::Unit(loc = mk_loc($sloc), faked = true)) }
 
 ///|
 fn yy_action_623(
@@ -18034,7 +18034,7 @@ fn yy_action_623(
 }
 
 // file:///./parser.mbty
-// 1596|    DOUBLE { make_double($1) }
+// 1598|    DOUBLE { make_double($1) }
 
 ///|
 fn yy_action_624(
@@ -18051,9 +18051,9 @@ fn yy_action_624(
 }
 
 // file:///./parser.mbty
-// 1517|    simple_expr accessor %prec prec_field { 
-// 1518|    Field(record = $1, accessor = $2, loc = mk_loc($sloc))
-// 1519|  }
+// 1519|    simple_expr accessor %prec prec_field { 
+// 1520|    Field(record = $1, accessor = $2, loc = mk_loc($sloc))
+// 1521|  }
 
 ///|
 fn yy_action_625(
@@ -18082,9 +18082,9 @@ fn yy_action_625(
 }
 
 // file:///./parser.mbty
-// 750|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
-// 751|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 752|  }
+// 752|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
+// 753|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 754|  }
 
 ///|
 fn yy_action_626(
@@ -18114,24 +18114,24 @@ fn yy_action_626(
 }
 
 // file:///./parser.mbty
-// 662|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
-// 663|    let (ret_ty, err_ty) = $12
-// 664|    TopImpl(
-// 665|      self_ty = Some($7),
-// 666|      trait_ = $5,
-// 667|      method_name = $9,
-// 668|      has_error = $10,
-// 669|      quantifiers = $4,
-// 670|      params = $11,
-// 671|      ret_ty~,
-// 672|      err_ty~,
-// 673|      body = $13,
-// 674|      vis = $2,
-// 675|      loc = mk_loc($sloc),
-// 676|      attrs = $1,
-// 677|      doc = DocString::empty()
-// 678|    )
-// 679|  }
+// 664|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
+// 665|    let (ret_ty, err_ty) = $12
+// 666|    TopImpl(
+// 667|      self_ty = Some($7),
+// 668|      trait_ = $5,
+// 669|      method_name = $9,
+// 670|      has_error = $10,
+// 671|      quantifiers = $4,
+// 672|      params = $11,
+// 673|      ret_ty~,
+// 674|      err_ty~,
+// 675|      body = $13,
+// 676|      vis = $2,
+// 677|      loc = mk_loc($sloc),
+// 678|      attrs = $1,
+// 679|      doc = DocString::empty()
+// 680|    )
+// 681|  }
 
 ///|
 fn yy_action_627(
@@ -18181,7 +18181,7 @@ fn yy_action_627(
 }
 
 // file:///./parser.mbty
-// 1017|    assignment_expr { $1 }
+// 1019|    assignment_expr { $1 }
 
 ///|
 fn yy_action_628(
@@ -18199,7 +18199,7 @@ fn yy_action_628(
 }
 
 // file:///./parser.mbty
-// 289|    binder { (None, $1) }
+// 291|    binder { (None, $1) }
 
 ///|
 fn yy_action_629(
@@ -18217,9 +18217,9 @@ fn yy_action_629(
 }
 
 // file:///./parser.mbty
-// 766|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
-// 767|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 768|  }
+// 768|    attributes visibility "enum" luident optional_type_parameters_no_constraints { 
+// 769|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 770|  }
 
 ///|
 fn yy_action_630(
@@ -18249,7 +18249,7 @@ fn yy_action_630(
 }
 
 // file:///./parser.mbty
-// 1468|    anony_fn { Function(func = $1, loc = mk_loc($sloc)) }
+// 1470|    anony_fn { Function(func = $1, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_631(
@@ -18272,7 +18272,7 @@ fn yy_action_631(
 }
 
 // file:///./parser.mbty
-// 1744|    ".." "as" binder { BinderAs($3) }
+// 1746|    ".." "as" binder { BinderAs($3) }
 
 ///|
 fn yy_action_632(
@@ -18290,21 +18290,21 @@ fn yy_action_632(
 }
 
 // file:///./parser.mbty
-// 856|    attributes is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) { 
-// 857|    let (return_type, error_type) = $9
-// 858|    TraitMethodDecl::{
-// 859|      name: $3,
-// 860|      has_error: $4,
-// 861|      is_async: $2,
-// 862|      quantifiers: $5,
-// 863|      params: $7,
-// 864|      return_type,
-// 865|      error_type,
-// 866|      has_default: $10,
-// 867|      attrs: $1,
-// 868|      loc: mk_loc($sloc)
-// 869|    }
-// 870|  }
+// 858|    attributes is_async binder optional_bang optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) { 
+// 859|    let (return_type, error_type) = $9
+// 860|    TraitMethodDecl::{
+// 861|      name: $3,
+// 862|      has_error: $4,
+// 863|      is_async: $2,
+// 864|      quantifiers: $5,
+// 865|      params: $7,
+// 866|      return_type,
+// 867|      error_type,
+// 868|      has_default: $10,
+// 869|      attrs: $1,
+// 870|      loc: mk_loc($sloc)
+// 871|    }
+// 872|  }
 
 ///|
 fn yy_action_633(
@@ -18366,9 +18366,9 @@ fn yy_action_86(
 }
 
 // file:///./parser.mbty
-// 1257|    "_" "=>" expr_statement_no_break_continue_return { 
-// 1258|    make_arrow_fn(@list.singleton((Unnamed(mk_loc($loc($1))), None)), $3, loc = mk_loc($sloc))
-// 1259|  }
+// 1259|    "_" "=>" expr_statement_no_break_continue_return { 
+// 1260|    make_arrow_fn(@list.singleton((Unnamed(mk_loc($loc($1))), None)), $3, loc = mk_loc($sloc))
+// 1261|  }
 
 ///|
 fn yy_action_634(
@@ -18399,17 +18399,17 @@ fn yy_action_634(
 }
 
 // file:///./parser.mbty
-// 1495|    simple_expr DOT_LIDENT apply_attr "(" list_commas(argument) ")" { 
-// 1496|    let method_name = Label::{ name: $2, loc: mk_loc($loc($2)) }
-// 1497|    DotApply(
-// 1498|      self = $1,
-// 1499|      method_name~,
-// 1500|      args = $5,
-// 1501|      return_self = false,
-// 1502|      attr = $3,
-// 1503|      loc = mk_loc($sloc)
-// 1504|    )
-// 1505|  }
+// 1497|    simple_expr DOT_LIDENT apply_attr "(" list_commas(argument) ")" { 
+// 1498|    let method_name = Label::{ name: $2, loc: mk_loc($loc($2)) }
+// 1499|    DotApply(
+// 1500|      self = $1,
+// 1501|      method_name~,
+// 1502|      args = $5,
+// 1503|      return_self = false,
+// 1504|      attr = $3,
+// 1505|      loc = mk_loc($sloc)
+// 1506|    )
+// 1507|  }
 
 ///|
 fn yy_action_635(
@@ -18449,9 +18449,9 @@ fn yy_action_635(
 }
 
 // file:///./parser.mbty
-// 1288|    infix_expr infixop infix_expr { 
-// 1289|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1290|  }
+// 1290|    infix_expr infixop infix_expr { 
+// 1291|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1292|  }
 
 ///|
 fn yy_action_636(
@@ -18482,7 +18482,7 @@ fn yy_action_636(
 }
 
 // file:///./parser.mbty
-// 1340|    var { Var($1) }
+// 1342|    var { Var($1) }
 
 ///|
 fn yy_action_637(
@@ -18500,13 +18500,13 @@ fn yy_action_637(
 }
 
 // file:///./parser.mbty
-// 1360|    type_name "::" UIDENT { 
-// 1361|    Constructor::{
-// 1362|      name: ConstrName::{ name: $3, loc: mk_loc($loc($3)) },
-// 1363|      extra_info: TypeName($1),
-// 1364|      loc: mk_loc($sloc)
-// 1365|    }
-// 1366|  }
+// 1362|    type_name "::" UIDENT { 
+// 1363|    Constructor::{
+// 1364|      name: ConstrName::{ name: $3, loc: mk_loc($loc($3)) },
+// 1365|      extra_info: TypeName($1),
+// 1366|      loc: mk_loc($sloc)
+// 1367|    }
+// 1368|  }
 
 ///|
 fn yy_action_638(
@@ -18555,7 +18555,7 @@ fn yy_action_44(
 }
 
 // file:///./parser.mbty
-// 739|    "priv" { Priv(loc = mk_loc($sloc)) }
+// 741|    "priv" { Priv(loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_56(
@@ -18577,7 +18577,7 @@ fn yy_action_56(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_639(
@@ -18611,7 +18611,7 @@ fn yy_action_639(
 }
 
 // file:///./parser.mbty
-// 1758|    dotdot_binder ioption(",") { Open(@list.empty(), @list.empty(), $1) }
+// 1760|    dotdot_binder ioption(",") { Open(@list.empty(), @list.empty(), $1) }
 
 ///|
 fn yy_action_640(
@@ -18629,7 +18629,7 @@ fn yy_action_640(
 }
 
 // file:///./parser.mbty
-// 392|    expr EOF { $1 }
+// 394|    expr EOF { $1 }
 
 ///|
 fn yy_action_641(
@@ -18646,7 +18646,7 @@ fn yy_action_641(
 }
 
 // file:///./parser.mbty
-// 1711|    "(" pattern ")" { $2 }
+// 1713|    "(" pattern ")" { $2 }
 
 ///|
 fn yy_action_642(
@@ -18663,7 +18663,7 @@ fn yy_action_642(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_643(
@@ -18680,17 +18680,17 @@ fn yy_action_643(
 }
 
 // file:///./parser.mbty
-// 1175|    loop_label_colon "for" for_binders SEMI option(infix_expr) SEMI list_commas_no_trailing(separated_pair(binder, "=", expr)) block_expr optional_else {
-// 1176|    For(
-// 1177|      binders = $3,
-// 1178|      condition = $5,
-// 1179|      continue_block = $7,
-// 1180|      body = $8,
-// 1181|      for_else = $9,
-// 1182|      label = $1,
-// 1183|      loc = mk_loc($sloc)
-// 1184|    )
-// 1185|  }
+// 1177|    loop_label_colon "for" for_binders SEMI option(infix_expr) SEMI list_commas_no_trailing(separated_pair(binder, "=", expr)) block_expr optional_else {
+// 1178|    For(
+// 1179|      binders = $3,
+// 1180|      condition = $5,
+// 1181|      continue_block = $7,
+// 1182|      body = $8,
+// 1183|      for_else = $9,
+// 1184|      label = $1,
+// 1185|      loc = mk_loc($sloc)
+// 1186|    )
+// 1187|  }
 
 ///|
 fn yy_action_644(
@@ -18726,7 +18726,7 @@ fn yy_action_644(
 }
 
 // file:///./parser.mbty
-// 253|    "async" { true }
+// 255|    "async" { true }
 
 ///|
 fn yy_action_50(
@@ -18742,7 +18742,7 @@ fn yy_action_50(
 }
 
 // file:///./parser.mbty
-// 1275|    "_" ioption(",") ")" { @list.singleton(Unnamed(mk_loc($loc($1)))) }
+// 1277|    "_" ioption(",") ")" { @list.singleton(Unnamed(mk_loc($loc($1)))) }
 
 ///|
 fn yy_action_645(
@@ -18761,7 +18761,7 @@ fn yy_action_645(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_646(
@@ -18778,7 +18778,7 @@ fn yy_action_646(
 }
 
 // file:///./parser.mbty
-// 168|    non_empty_list_commas(X) { $1 }
+// 170|    non_empty_list_commas(X) { $1 }
 
 ///|
 fn yy_action_647(
@@ -18795,7 +18795,7 @@ fn yy_action_647(
 }
 
 // file:///./parser.mbty
-// 1749|     { Closed(@list.empty()) }
+// 1751|     { Closed(@list.empty()) }
 
 ///|
 fn yy_action_648(
@@ -18811,7 +18811,7 @@ fn yy_action_648(
 }
 
 // file:///./parser.mbty
-// 1214|    "_" { None }
+// 1216|    "_" { None }
 
 ///|
 fn yy_action_649(
@@ -18827,7 +18827,7 @@ fn yy_action_649(
 }
 
 // file:///./parser.mbty
-// 908|    qual_ident_ty_inline { $1 }
+// 910|    qual_ident_ty_inline { $1 }
 
 ///|
 fn yy_action_650(
@@ -18861,7 +18861,7 @@ fn yy_action_651(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_652(
@@ -18878,7 +18878,7 @@ fn yy_action_652(
 }
 
 // file:///./parser.mbty
-// 1675|    or_pattern { $1 }
+// 1677|    or_pattern { $1 }
 
 ///|
 fn yy_action_653(
@@ -18895,13 +18895,13 @@ fn yy_action_653(
 }
 
 // file:///./parser.mbty
-// 1854|    option("mut") type_ { 
-// 1855|    ConstrParam::{
-// 1856|      ty: $2,
-// 1857|      mut_: $1 is Some(_),
-// 1858|      label: None
-// 1859|    }
-// 1860|  }
+// 1856|    option("mut") type_ { 
+// 1857|    ConstrParam::{
+// 1858|      ty: $2,
+// 1859|      mut_: $1 is Some(_),
+// 1860|      label: None
+// 1861|    }
+// 1862|  }
 
 ///|
 fn yy_action_654(
@@ -18919,7 +18919,7 @@ fn yy_action_654(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_655(
@@ -18936,7 +18936,7 @@ fn yy_action_655(
 }
 
 // file:///./parser.mbty
-// 401|    list_semis(structure_item) EOF { $1 }
+// 403|    list_semis(structure_item) EOF { $1 }
 
 ///|
 fn yy_action_656(
@@ -18953,7 +18953,7 @@ fn yy_action_656(
 }
 
 // file:///./parser.mbty
-// 1684|    simple_pattern "..<" simple_pattern { Range(lhs = $1, rhs = $3, inclusive = false, loc = mk_loc($sloc)) }
+// 1686|    simple_pattern "..<" simple_pattern { Range(lhs = $1, rhs = $3, inclusive = false, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_657(
@@ -18982,7 +18982,7 @@ fn yy_action_657(
 }
 
 // file:///./parser.mbty
-// 1776|    type_ { ($1, NoErrorType) }
+// 1778|    type_ { ($1, NoErrorType) }
 
 ///|
 fn yy_action_658(
@@ -18999,7 +18999,7 @@ fn yy_action_658(
 }
 
 // file:///./parser.mbty
-// 201|    X option(SEMI) { @list.singleton($1) }
+// 203|    X option(SEMI) { @list.singleton($1) }
 
 ///|
 fn yy_action_659(
@@ -19016,7 +19016,7 @@ fn yy_action_659(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_660(
@@ -19050,7 +19050,7 @@ fn yy_action_660(
 }
 
 // file:///./parser.mbty
-// 879|    binder ":" type_ { Positional(binder = $1, ty = Some($3)) }
+// 881|    binder ":" type_ { Positional(binder = $1, ty = Some($3)) }
 
 ///|
 fn yy_action_661(
@@ -19069,7 +19069,7 @@ fn yy_action_661(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_662(
@@ -19110,7 +19110,7 @@ fn yy_action_663(
 }
 
 // file:///./parser.mbty
-// 987|    "guard" infix_expr { StmtGuard(cond = $2, otherwise = None, loc = mk_loc($sloc)) }
+// 989|    "guard" infix_expr { StmtGuard(cond = $2, otherwise = None, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_664(
@@ -19137,7 +19137,7 @@ fn yy_action_664(
 }
 
 // file:///./parser.mbty
-// 1805|    simple_type "?" { @syntax.make_option_type(loc = mk_loc($sloc), constr_loc = mk_loc($loc($2)), $1) }
+// 1807|    simple_type "?" { @syntax.make_option_type(loc = mk_loc($sloc), constr_loc = mk_loc($loc($2)), $1) }
 
 ///|
 fn yy_action_665(
@@ -19166,16 +19166,16 @@ fn yy_action_665(
 }
 
 // file:///./parser.mbty
-// 1137|    match_header "}" { 
-// 1138|    let (expr, using_label) = $1
-// 1139|    Match(
-// 1140|      expr~,
-// 1141|      cases = @list.empty(),
-// 1142|      match_loc = mk_loc($loc($1)),
-// 1143|      using_ = using_label,
-// 1144|      loc = mk_loc($sloc)
-// 1145|    )
-// 1146|  }
+// 1139|    match_header "}" { 
+// 1140|    let (expr, using_label) = $1
+// 1141|    Match(
+// 1142|      expr~,
+// 1143|      cases = @list.empty(),
+// 1144|      match_loc = mk_loc($loc($1)),
+// 1145|      using_ = using_label,
+// 1146|      loc = mk_loc($sloc)
+// 1147|    )
+// 1148|  }
 
 ///|
 fn yy_action_666(
@@ -19225,7 +19225,7 @@ fn yy_action_90(
 }
 
 // file:///./parser.mbty
-// 168|    non_empty_list_commas(X) { $1 }
+// 170|    non_empty_list_commas(X) { $1 }
 
 ///|
 fn yy_action_667(
@@ -19242,7 +19242,7 @@ fn yy_action_667(
 }
 
 // file:///./parser.mbty
-// 756|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
+// 758|    attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
 
 ///|
 fn yy_action_668(
@@ -19270,7 +19270,7 @@ fn yy_action_668(
 }
 
 // file:///./parser.mbty
-// 1123|    "match" infix_expr "using" label "{" { ($2, Some($4)) }
+// 1125|    "match" infix_expr "using" label "{" { ($2, Some($4)) }
 
 ///|
 fn yy_action_669(
@@ -19289,7 +19289,7 @@ fn yy_action_669(
 }
 
 // file:///./parser.mbty
-// 932|    arrow_fn_expr { $1 }
+// 934|    arrow_fn_expr { $1 }
 
 ///|
 fn yy_action_670(
@@ -19306,18 +19306,18 @@ fn yy_action_670(
 }
 
 // file:///./parser.mbty
-// 638|    attributes visibility "traitalias" batch_type_alias_targets {
-// 639|    let (is_list, pkg, targets) = $4
-// 640|    TopBatchTraitAlias(
-// 641|      pkg~,
-// 642|      targets~,
-// 643|      vis = $2,
-// 644|      attrs = $1,
-// 645|      is_list~,
-// 646|      doc = DocString::empty(),
-// 647|      loc = mk_loc($sloc)
-// 648|    )
-// 649|  }
+// 640|    attributes visibility "traitalias" batch_type_alias_targets {
+// 641|    let (is_list, pkg, targets) = $4
+// 642|    TopBatchTraitAlias(
+// 643|      pkg~,
+// 644|      targets~,
+// 645|      vis = $2,
+// 646|      attrs = $1,
+// 647|      is_list~,
+// 648|      doc = DocString::empty(),
+// 649|      loc = mk_loc($sloc)
+// 650|    )
+// 651|  }
 
 ///|
 fn yy_action_671(
@@ -19353,17 +19353,17 @@ fn yy_action_671(
 }
 
 // file:///./parser.mbty
-// 698|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
-// 699|    TopImplRelation(
-// 700|      self_ty = $7,
-// 701|      trait_ = $5,
-// 702|      quantifiers = $4,
-// 703|      vis = $2,
-// 704|      attrs = $1,
-// 705|      loc = mk_loc($sloc),
-// 706|      doc = DocString::empty()
-// 707|    )
-// 708|  }
+// 700|    attributes visibility "impl" optional_type_parameters type_name "for" type_ {
+// 701|    TopImplRelation(
+// 702|      self_ty = $7,
+// 703|      trait_ = $5,
+// 704|      quantifiers = $4,
+// 705|      vis = $2,
+// 706|      attrs = $1,
+// 707|      loc = mk_loc($sloc),
+// 708|      doc = DocString::empty()
+// 709|    )
+// 710|  }
 
 ///|
 fn yy_action_672(
@@ -19419,13 +19419,13 @@ fn yy_action_501(
 }
 
 // file:///./parser.mbty
-// 1636|    label optional_question "=" expr { 
-// 1637|    let arg_kind : ArgumentKind = match $2 {
-// 1638|      Some(question_loc) => LabelledOption(label = $1, question_loc~)
-// 1639|      None => Labelled($1)
-// 1640|    }
-// 1641|    Argument::{ value: $4, kind: arg_kind }
-// 1642|  }
+// 1638|    label optional_question "=" expr { 
+// 1639|    let arg_kind : ArgumentKind = match $2 {
+// 1640|      Some(question_loc) => LabelledOption(label = $1, question_loc~)
+// 1641|      None => Labelled($1)
+// 1642|    }
+// 1643|    Argument::{ value: $4, kind: arg_kind }
+// 1644|  }
 
 ///|
 fn yy_action_673(
@@ -19449,7 +19449,7 @@ fn yy_action_673(
 }
 
 // file:///./parser.mbty
-// 1407|    "(" expr ":" type_ ")" { Constraint(expr = $2, ty = $4, loc = mk_loc($sloc)) }
+// 1409|    "(" expr ":" type_ ")" { Constraint(expr = $2, ty = $4, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_674(
@@ -19477,7 +19477,7 @@ fn yy_action_674(
 }
 
 // file:///./parser.mbty
-// 1586|    INTERP { make_interp_expr(loc = mk_loc($sloc), $1) }
+// 1588|    INTERP { make_interp_expr(loc = mk_loc($sloc), $1) }
 
 ///|
 fn yy_action_675(
@@ -19500,7 +19500,7 @@ fn yy_action_675(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_676(
@@ -19534,7 +19534,7 @@ fn yy_action_676(
 }
 
 // file:///./parser.mbty
-// 826|    LIDENT_MAYBE_DOT "::" { Label::{ name: $1, loc: mk_loc($loc($1)) } }
+// 828|    LIDENT_MAYBE_DOT "::" { Label::{ name: $1, loc: mk_loc($loc($1)) } }
 
 ///|
 fn yy_action_677(
@@ -19574,14 +19574,14 @@ fn yy_action_678(
 }
 
 // file:///./parser.mbty
-// 1861|    option("mut") POST_LABEL ":" type_ { 
-// 1862|    let label = Label::{ name: $2, loc: mk_loc($loc($2)).trim_last_char() }
-// 1863|    ConstrParam::{
-// 1864|      ty: $4,
-// 1865|      mut_: $1 is Some(_),
-// 1866|      label: Some(label)
-// 1867|    }
-// 1868|  }
+// 1863|    option("mut") POST_LABEL ":" type_ { 
+// 1864|    let label = Label::{ name: $2, loc: mk_loc($loc($2)).trim_last_char() }
+// 1865|    ConstrParam::{
+// 1866|      ty: $4,
+// 1867|      mut_: $1 is Some(_),
+// 1868|      label: Some(label)
+// 1869|    }
+// 1870|  }
 
 ///|
 fn yy_action_679(
@@ -19610,7 +19610,7 @@ fn yy_action_679(
 }
 
 // file:///./parser.mbty
-// 1325|    id(plus) prefix_expr { make_uplus(loc = mk_loc($sloc), $1, $2) }
+// 1327|    id(plus) prefix_expr { make_uplus(loc = mk_loc($sloc), $1, $2) }
 
 ///|
 fn yy_action_680(
@@ -19635,17 +19635,17 @@ fn yy_action_680(
 }
 
 // file:///./parser.mbty
-// 1506|    simple_expr ".." LIDENT apply_attr "(" list_commas(argument) ")" { 
-// 1507|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
-// 1508|    DotApply(
-// 1509|      self = $1,
-// 1510|      method_name~,
-// 1511|      args = $6,
-// 1512|      return_self = true,
-// 1513|      attr = $4,
-// 1514|      loc = mk_loc($sloc)
-// 1515|    )
-// 1516|  }
+// 1508|    simple_expr ".." LIDENT apply_attr "(" list_commas(argument) ")" { 
+// 1509|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
+// 1510|    DotApply(
+// 1511|      self = $1,
+// 1512|      method_name~,
+// 1513|      args = $6,
+// 1514|      return_self = true,
+// 1515|      attr = $4,
+// 1516|      loc = mk_loc($sloc)
+// 1517|    )
+// 1518|  }
 
 ///|
 fn yy_action_681(
@@ -19685,12 +19685,12 @@ fn yy_action_681(
 }
 
 // file:///./parser.mbty
-// 276|    ioption(delimited("[", non_empty_list_commas(type_), "]")) {
-// 277|    match $1 {
-// 278|      None => @list.empty()
-// 279|      Some(params) => params
-// 280|    }
-// 281|  }
+// 278|    ioption(delimited("[", non_empty_list_commas(type_), "]")) {
+// 279|    match $1 {
+// 280|      None => @list.empty()
+// 281|      Some(params) => params
+// 282|    }
+// 283|  }
 
 ///|
 fn yy_action_36(
@@ -19711,7 +19711,7 @@ fn yy_action_36(
 }
 
 // file:///./parser.mbty
-// 1659|    ".." expr { Spread(expr = $2, loc = mk_loc($sloc)) }
+// 1661|    ".." expr { Spread(expr = $2, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_682(
@@ -19734,17 +19734,17 @@ fn yy_action_682(
 }
 
 // file:///./parser.mbty
-// 1506|    simple_expr ".." LIDENT apply_attr "(" list_commas(argument) ")" { 
-// 1507|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
-// 1508|    DotApply(
-// 1509|      self = $1,
-// 1510|      method_name~,
-// 1511|      args = $6,
-// 1512|      return_self = true,
-// 1513|      attr = $4,
-// 1514|      loc = mk_loc($sloc)
-// 1515|    )
-// 1516|  }
+// 1508|    simple_expr ".." LIDENT apply_attr "(" list_commas(argument) ")" { 
+// 1509|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
+// 1510|    DotApply(
+// 1511|      self = $1,
+// 1512|      method_name~,
+// 1513|      args = $6,
+// 1514|      return_self = true,
+// 1515|      attr = $4,
+// 1516|      loc = mk_loc($sloc)
+// 1517|    )
+// 1518|  }
 
 ///|
 fn yy_action_683(
@@ -19784,18 +19784,18 @@ fn yy_action_683(
 }
 
 // file:///./parser.mbty
-// 1453|    "{" semi_expr_semi_opt "}" { 
-// 1454|    let (expr, trailing) = $2
-// 1455|    match expr {
-// 1456|      Ident(id = { name: Ident(name~), loc }, ..) => {
-// 1457|        let label = Label::{ name, loc }
-// 1458|        let field = @syntax.make_field_def(loc = mk_loc($sloc), label, expr, true)
-// 1459|        let trailing_mark = if trailing { TrailingMark::Semi } else { TrailingMark::None }
-// 1460|        @syntax.make_record_expr(loc = mk_loc($sloc), trailing = trailing_mark, None, @list.singleton(field))
-// 1461|      }
-// 1462|      _ => Group(expr~, group = Brace, loc = mk_loc($sloc))
-// 1463|    }
-// 1464|  }
+// 1455|    "{" semi_expr_semi_opt "}" { 
+// 1456|    let (expr, trailing) = $2
+// 1457|    match expr {
+// 1458|      Ident(id = { name: Ident(name~), loc }, ..) => {
+// 1459|        let label = Label::{ name, loc }
+// 1460|        let field = @syntax.make_field_def(loc = mk_loc($sloc), label, expr, true)
+// 1461|        let trailing_mark = if trailing { TrailingMark::Semi } else { TrailingMark::None }
+// 1462|        @syntax.make_record_expr(loc = mk_loc($sloc), trailing = trailing_mark, None, @list.singleton(field))
+// 1463|      }
+// 1464|      _ => Group(expr~, group = Brace, loc = mk_loc($sloc))
+// 1465|    }
+// 1466|  }
 
 ///|
 fn yy_action_684(
@@ -19843,17 +19843,17 @@ fn yy_action_684(
 }
 
 // file:///./parser.mbty
-// 1840|    attributes visibility option("mut") LIDENT ":" type_ { 
-// 1841|    FieldDecl::{
-// 1842|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
-// 1843|      ty: $6,
-// 1844|      mut_: $3 is Some(_),
-// 1845|      vis: $2,
-// 1846|      loc: mk_loc($sloc),
-// 1847|      attrs: $1,
-// 1848|      doc: DocString::empty()
-// 1849|    }
-// 1850|  }
+// 1842|    attributes visibility option("mut") LIDENT ":" type_ { 
+// 1843|    FieldDecl::{
+// 1844|      name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
+// 1845|      ty: $6,
+// 1846|      mut_: $3 is Some(_),
+// 1847|      vis: $2,
+// 1848|      loc: mk_loc($sloc),
+// 1849|      attrs: $1,
+// 1850|      doc: DocString::empty()
+// 1851|    }
+// 1852|  }
 
 ///|
 fn yy_action_685(
@@ -19895,7 +19895,7 @@ fn yy_action_685(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_686(
@@ -19919,7 +19919,7 @@ fn yy_action_686(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_687(
@@ -19936,7 +19936,7 @@ fn yy_action_687(
 }
 
 // file:///./parser.mbty
-// 1213|    binder { Some($1)}
+// 1215|    binder { Some($1)}
 
 ///|
 fn yy_action_688(
@@ -19954,7 +19954,7 @@ fn yy_action_688(
 }
 
 // file:///./parser.mbty
-// 173|    non_empty_list_commas_no_trailing(X) { $1 }
+// 175|    non_empty_list_commas_no_trailing(X) { $1 }
 
 ///|
 fn yy_action_689(
@@ -19971,10 +19971,10 @@ fn yy_action_689(
 }
 
 // file:///./parser.mbty
-// 880|    POST_LABEL ":" type_ { 
-// 881|    let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-// 882|    Labelled(binder~, ty = Some($3))
-// 883|  }
+// 882|    POST_LABEL ":" type_ { 
+// 883|    let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
+// 884|    Labelled(binder~, ty = Some($3))
+// 885|  }
 
 ///|
 fn yy_action_690(
@@ -19998,7 +19998,7 @@ fn yy_action_690(
 }
 
 // file:///./parser.mbty
-// 937|    "and" binder opt_annot "=" letand_func { ($2, $3, $5) }
+// 939|    "and" binder opt_annot "=" letand_func { ($2, $3, $5) }
 
 ///|
 fn yy_action_691(
@@ -20019,7 +20019,7 @@ fn yy_action_691(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_692(
@@ -20037,7 +20037,7 @@ fn yy_action_692(
 }
 
 // file:///./parser.mbty
-// 1762|    "raise" { DefaultErrorType(loc = mk_loc($sloc)) }
+// 1764|    "raise" { DefaultErrorType(loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_693(
@@ -20059,9 +20059,9 @@ fn yy_action_693(
 }
 
 // file:///./parser.mbty
-// 1288|    infix_expr infixop infix_expr { 
-// 1289|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1290|  }
+// 1290|    infix_expr infixop infix_expr { 
+// 1291|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1292|  }
 
 ///|
 fn yy_action_694(
@@ -20092,7 +20092,7 @@ fn yy_action_694(
 }
 
 // file:///./parser.mbty
-// 1702|    UNDERSCORE { Any(loc = mk_loc($sloc)) }
+// 1704|    UNDERSCORE { Any(loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_695(
@@ -20114,7 +20114,7 @@ fn yy_action_695(
 }
 
 // file:///./parser.mbty
-// 1906|    labeled_expr { $1 }
+// 1908|    labeled_expr { $1 }
 
 ///|
 fn yy_action_696(
@@ -20132,9 +20132,9 @@ fn yy_action_696(
 }
 
 // file:///./parser.mbty
-// 1116|    "if" infix_expr block_expr { 
-// 1117|    If(cond = $2, ifso = $3, ifnot = None, loc = mk_loc($sloc))
-// 1118|  }
+// 1118|    "if" infix_expr block_expr { 
+// 1119|    If(cond = $2, ifso = $3, ifnot = None, loc = mk_loc($sloc))
+// 1120|  }
 
 ///|
 fn yy_action_697(
@@ -20163,19 +20163,19 @@ fn yy_action_697(
 }
 
 // file:///./parser.mbty
-// 580|    attributes visibility "fnalias" func_alias_targets {
-// 581|    let (pkg, type_name, is_list, targets) = $4
-// 582|    TopFuncAlias(
-// 583|      pkg~,
-// 584|      type_name~,
-// 585|      targets~,
-// 586|      vis = $2,
-// 587|      attrs = $1,
-// 588|      is_list~,
-// 589|      doc = DocString::empty(),
-// 590|      loc = mk_loc($sloc)
-// 591|    )
-// 592|  }
+// 582|    attributes visibility "fnalias" func_alias_targets {
+// 583|    let (pkg, type_name, is_list, targets) = $4
+// 584|    TopFuncAlias(
+// 585|      pkg~,
+// 586|      type_name~,
+// 587|      targets~,
+// 588|      vis = $2,
+// 589|      attrs = $1,
+// 590|      is_list~,
+// 591|      doc = DocString::empty(),
+// 592|      loc = mk_loc($sloc)
+// 593|    )
+// 594|  }
 
 ///|
 fn yy_action_698(
@@ -20212,7 +20212,7 @@ fn yy_action_698(
 }
 
 // file:///./parser.mbty
-// 1758|    dotdot_binder ioption(",") { Open(@list.empty(), @list.empty(), $1) }
+// 1760|    dotdot_binder ioption(",") { Open(@list.empty(), @list.empty(), $1) }
 
 ///|
 fn yy_action_699(
@@ -20230,15 +20230,15 @@ fn yy_action_699(
 }
 
 // file:///./parser.mbty
-// 1426|    is_async fn_header_no_binder list_semis(multi_pattern_case) "}" { 
-// 1427|    Match(
-// 1428|      cases = $3,
-// 1429|      has_error = $2,
-// 1430|      is_async = $1,
-// 1431|      fn_loc = mk_loc($loc($2)),
-// 1432|      loc = mk_loc($sloc)
-// 1433|    )
-// 1434|  }
+// 1428|    is_async fn_header_no_binder list_semis(multi_pattern_case) "}" { 
+// 1429|    Match(
+// 1430|      cases = $3,
+// 1431|      has_error = $2,
+// 1432|      is_async = $1,
+// 1433|      fn_loc = mk_loc($loc($2)),
+// 1434|      loc = mk_loc($sloc)
+// 1435|    )
+// 1436|  }
 
 ///|
 fn yy_action_700(
@@ -20272,9 +20272,9 @@ fn yy_action_700(
 }
 
 // file:///./parser.mbty
-// 1583|    non_empty_list(multiline_string) { 
-// 1584|    MultilineString(elems = $1, loc = mk_loc($sloc))
-// 1585|  }
+// 1585|    non_empty_list(multiline_string) { 
+// 1586|    MultilineString(elems = $1, loc = mk_loc($sloc))
+// 1587|  }
 
 ///|
 fn yy_action_701(
@@ -20297,7 +20297,7 @@ fn yy_action_701(
 }
 
 // file:///./parser.mbty
-// 1621|    PLUS { Var::{ name: Ident(name = "+"), loc: mk_loc($sloc) } }
+// 1623|    PLUS { Var::{ name: Ident(name = "+"), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_234(
@@ -20319,7 +20319,7 @@ fn yy_action_234(
 }
 
 // file:///./parser.mbty
-// 780|    batch_type_alias_target(luident) { (false, None, @list.singleton($1)) }
+// 782|    batch_type_alias_target(luident) { (false, None, @list.singleton($1)) }
 
 ///|
 fn yy_action_702(
@@ -20336,10 +20336,10 @@ fn yy_action_702(
 }
 
 // file:///./parser.mbty
-// 772|    PACKAGE_NAME batch_type_alias_target(dot_luident) { 
-// 773|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 774|    (false, Some(pkg), @list.singleton($2))
-// 775|  }
+// 774|    PACKAGE_NAME batch_type_alias_target(dot_luident) { 
+// 775|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 776|    (false, Some(pkg), @list.singleton($2))
+// 777|  }
 
 ///|
 fn yy_action_703(
@@ -20363,7 +20363,7 @@ fn yy_action_703(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_704(
@@ -20380,9 +20380,9 @@ fn yy_action_704(
 }
 
 // file:///./parser.mbty
-// 1281|    pipe_expr "|>" infix_expr { 
-// 1282|    Pipe(lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1283|  }
+// 1283|    pipe_expr "|>" infix_expr { 
+// 1284|    Pipe(lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1285|  }
 
 ///|
 fn yy_action_705(
@@ -20445,13 +20445,13 @@ fn yy_action_708(
 }
 
 // file:///./parser.mbty
-// 535|    fun_header "=" STRING STRING {
-// 536|    TopFuncDef(
-// 537|      loc = mk_loc($sloc),
-// 538|      fun_decl = $1,
-// 539|      decl_body = DeclStubs(Import(module_name = $3, func_name = $4))
-// 540|    )
-// 541|  }
+// 537|    fun_header "=" STRING STRING {
+// 538|    TopFuncDef(
+// 539|      loc = mk_loc($sloc),
+// 540|      fun_decl = $1,
+// 541|      decl_body = DeclStubs(Import(module_name = $3, func_name = $4))
+// 542|    )
+// 543|  }
 
 ///|
 fn yy_action_709(
@@ -20480,7 +20480,7 @@ fn yy_action_709(
 }
 
 // file:///./parser.mbty
-// 902|    luident { LongIdent::Ident(name = $1) }
+// 904|    luident { LongIdent::Ident(name = $1) }
 
 ///|
 fn yy_action_20(
@@ -20497,7 +20497,7 @@ fn yy_action_20(
 }
 
 // file:///./parser.mbty
-// 1033|    expr_statement_no_break_continue_return { $1 }
+// 1035|    expr_statement_no_break_continue_return { $1 }
 
 ///|
 fn yy_action_710(
@@ -20531,7 +20531,7 @@ fn yy_action_707(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_711(
@@ -20550,13 +20550,13 @@ fn yy_action_711(
 }
 
 // file:///./parser.mbty
-// 1353|    PACKAGE_NAME DOT_UIDENT { 
-// 1354|    Constructor::{
-// 1355|      name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
-// 1356|      extra_info: Package($1),
-// 1357|      loc: mk_loc($sloc)
-// 1358|    }
-// 1359|  }
+// 1355|    PACKAGE_NAME DOT_UIDENT { 
+// 1356|    Constructor::{
+// 1357|      name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
+// 1358|      extra_info: Package($1),
+// 1359|      loc: mk_loc($sloc)
+// 1360|    }
+// 1361|  }
 
 ///|
 fn yy_action_712(
@@ -20589,24 +20589,24 @@ fn yy_action_712(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_713(
@@ -20649,7 +20649,7 @@ fn yy_action_713(
 }
 
 // file:///./parser.mbty
-// 784|    DOT_LIDENT { $1 }
+// 786|    DOT_LIDENT { $1 }
 
 ///|
 fn yy_action_152(
@@ -20666,13 +20666,13 @@ fn yy_action_152(
 }
 
 // file:///./parser.mbty
-// 1808|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
-// 1809|    Name(
-// 1810|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 1811|      tys = $2,
-// 1812|      loc = mk_loc($sloc)
-// 1813|    )
-// 1814|  }
+// 1810|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
+// 1811|    Name(
+// 1812|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 1813|      tys = $2,
+// 1814|      loc = mk_loc($sloc)
+// 1815|    )
+// 1816|  }
 
 ///|
 fn yy_action_714(
@@ -20707,7 +20707,7 @@ fn yy_action_714(
 }
 
 // file:///./parser.mbty
-// 1713|    "(" pattern annot ")" { Constraint(pat = $2, ty = $3, loc = mk_loc($sloc)) }
+// 1715|    "(" pattern annot ")" { Constraint(pat = $2, ty = $3, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_715(
@@ -20736,7 +20736,7 @@ fn yy_action_715(
 }
 
 // file:///./parser.mbty
-// 1624|    CARET { Var::{ name: Ident(name = "^"), loc: mk_loc($sloc) } }
+// 1626|    CARET { Var::{ name: Ident(name = "^"), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_585(
@@ -20758,18 +20758,18 @@ fn yy_action_585(
 }
 
 // file:///./parser.mbty
-// 611|    attributes visibility "typealias" batch_type_alias_targets {
-// 612|    let (is_list, pkg, targets) = $4
-// 613|    TopBatchTypeAlias(
-// 614|      pkg~,
-// 615|      targets~,
-// 616|      vis = $2,
-// 617|      attrs = $1,
-// 618|      is_list~,
-// 619|      doc = DocString::empty(),
-// 620|      loc = mk_loc($sloc)
-// 621|    )
-// 622|  }
+// 613|    attributes visibility "typealias" batch_type_alias_targets {
+// 614|    let (is_list, pkg, targets) = $4
+// 615|    TopBatchTypeAlias(
+// 616|      pkg~,
+// 617|      targets~,
+// 618|      vis = $2,
+// 619|      attrs = $1,
+// 620|      is_list~,
+// 621|      doc = DocString::empty(),
+// 622|      loc = mk_loc($sloc)
+// 623|    )
+// 624|  }
 
 ///|
 fn yy_action_716(
@@ -20805,23 +20805,23 @@ fn yy_action_716(
 }
 
 // file:///./parser.mbty
-// 709|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
-// 710|    TopView(
-// 711|      quantifiers = $4,
-// 712|      source_ty = $10,
-// 713|      view_type_name = $5,
-// 714|      view_type_loc = mk_loc($loc($5)),
-// 715|      view_func_name = $12,
-// 716|      parameters = $13,
-// 717|      params_loc = mk_loc($loc($13)),
-// 718|      view_constrs = $7,
-// 719|      body = $14,
-// 720|      vis = $2,
-// 721|      loc = mk_loc($sloc),
-// 722|      attrs = $1,
-// 723|      doc = DocString::empty()
-// 724|    )
-// 725|  }
+// 711|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
+// 712|    TopView(
+// 713|      quantifiers = $4,
+// 714|      source_ty = $10,
+// 715|      view_type_name = $5,
+// 716|      view_type_loc = mk_loc($loc($5)),
+// 717|      view_func_name = $12,
+// 718|      parameters = $13,
+// 719|      params_loc = mk_loc($loc($13)),
+// 720|      view_constrs = $7,
+// 721|      body = $14,
+// 722|      vis = $2,
+// 723|      loc = mk_loc($sloc),
+// 724|      attrs = $1,
+// 725|      doc = DocString::empty()
+// 726|    )
+// 727|  }
 
 ///|
 fn yy_action_717(
@@ -20873,7 +20873,7 @@ fn yy_action_717(
 }
 
 // file:///./parser.mbty
-// 1674|    pattern "as" binder { @syntax.make_alias_pattern(loc = mk_loc($sloc), $1, $3) }
+// 1676|    pattern "as" binder { @syntax.make_alias_pattern(loc = mk_loc($sloc), $1, $3) }
 
 ///|
 fn yy_action_718(
@@ -20919,7 +20919,7 @@ fn yy_action_719(
 }
 
 // file:///./parser.mbty
-// 1544|    LIDENT { Binder::{ name: $1, loc: mk_loc($sloc) } }
+// 1546|    LIDENT { Binder::{ name: $1, loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_9(
@@ -20942,7 +20942,7 @@ fn yy_action_9(
 }
 
 // file:///./parser.mbty
-// 150|    X { @list.singleton($1) }
+// 152|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_720(
@@ -20959,9 +20959,9 @@ fn yy_action_720(
 }
 
 // file:///./parser.mbty
-// 1551|    luident COLON separated_nonempty_list(PLUS, tvar_constraint) { 
-// 1552|    TypeVarBinder::{ name: $1, constraints: $3, loc: mk_loc($sloc) }
-// 1553|  }
+// 1553|    luident COLON separated_nonempty_list(PLUS, tvar_constraint) { 
+// 1554|    TypeVarBinder::{ name: $1, constraints: $3, loc: mk_loc($sloc) }
+// 1555|  }
 
 ///|
 fn yy_action_721(
@@ -20989,7 +20989,7 @@ fn yy_action_721(
 }
 
 // file:///./parser.mbty
-// 201|    X option(SEMI) { @list.singleton($1) }
+// 203|    X option(SEMI) { @list.singleton($1) }
 
 ///|
 fn yy_action_722(
@@ -21006,7 +21006,7 @@ fn yy_action_722(
 }
 
 // file:///./parser.mbty
-// 1757|    dotdot_binder "," non_empty_list_commas(array_sub_pattern) { Open(@list.empty(), $3, $1) }
+// 1759|    dotdot_binder "," non_empty_list_commas(array_sub_pattern) { Open(@list.empty(), $3, $1) }
 
 ///|
 fn yy_action_723(
@@ -21024,24 +21024,24 @@ fn yy_action_723(
 }
 
 // file:///./parser.mbty
-// 662|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
-// 663|    let (ret_ty, err_ty) = $12
-// 664|    TopImpl(
-// 665|      self_ty = Some($7),
-// 666|      trait_ = $5,
-// 667|      method_name = $9,
-// 668|      has_error = $10,
-// 669|      quantifiers = $4,
-// 670|      params = $11,
-// 671|      ret_ty~,
-// 672|      err_ty~,
-// 673|      body = $13,
-// 674|      vis = $2,
-// 675|      loc = mk_loc($sloc),
-// 676|      attrs = $1,
-// 677|      doc = DocString::empty()
-// 678|    )
-// 679|  }
+// 664|    attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {
+// 665|    let (ret_ty, err_ty) = $12
+// 666|    TopImpl(
+// 667|      self_ty = Some($7),
+// 668|      trait_ = $5,
+// 669|      method_name = $9,
+// 670|      has_error = $10,
+// 671|      quantifiers = $4,
+// 672|      params = $11,
+// 673|      ret_ty~,
+// 674|      err_ty~,
+// 675|      body = $13,
+// 676|      vis = $2,
+// 677|      loc = mk_loc($sloc),
+// 678|      attrs = $1,
+// 679|      doc = DocString::empty()
+// 680|    )
+// 681|  }
 
 ///|
 fn yy_action_724(
@@ -21091,7 +21091,7 @@ fn yy_action_724(
 }
 
 // file:///./parser.mbty
-// 228|    "_" opt_annot { DiscardPositional(ty = $2, loc = mk_loc($loc($1))) }
+// 230|    "_" opt_annot { DiscardPositional(ty = $2, loc = mk_loc($loc($1))) }
 
 ///|
 fn yy_action_725(
@@ -21114,22 +21114,22 @@ fn yy_action_725(
 }
 
 // file:///./parser.mbty
-// 490|    struct_header "{" list_semis(record_decl_field) "}" deriving_directive_list {
-// 491|    let (attrs, type_vis, tycon, tycon_loc, params) = $1
-// 492|    TopTypeDef(
-// 493|      TypeDecl::{
-// 494|        tycon,
-// 495|        tycon_loc,
-// 496|        params,
-// 497|        components: Record($3),
-// 498|        type_vis,
-// 499|        doc : DocString::empty(),
-// 500|        deriving: $5,
-// 501|        loc : mk_loc($sloc),
-// 502|        attrs
-// 503|      }
-// 504|    )
-// 505|  }
+// 492|    struct_header "{" list_semis(record_decl_field) "}" deriving_directive_list {
+// 493|    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+// 494|    TopTypeDef(
+// 495|      TypeDecl::{
+// 496|        tycon,
+// 497|        tycon_loc,
+// 498|        params,
+// 499|        components: Record($3),
+// 500|        type_vis,
+// 501|        doc : DocString::empty(),
+// 502|        deriving: $5,
+// 503|        loc : mk_loc($sloc),
+// 504|        attrs
+// 505|      }
+// 506|    )
+// 507|  }
 
 ///|
 fn yy_action_726(
@@ -21168,7 +21168,7 @@ fn yy_action_726(
 }
 
 // file:///./parser.mbty
-// 216|    X { $1 }
+// 218|    X { $1 }
 
 ///|
 fn yy_action_81(
@@ -21186,7 +21186,7 @@ fn yy_action_81(
 }
 
 // file:///./parser.mbty
-// 908|    qual_ident_ty_inline { $1 }
+// 910|    qual_ident_ty_inline { $1 }
 
 ///|
 fn yy_action_727(
@@ -21204,23 +21204,23 @@ fn yy_action_727(
 }
 
 // file:///./parser.mbty
-// 709|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
-// 710|    TopView(
-// 711|      quantifiers = $4,
-// 712|      source_ty = $10,
-// 713|      view_type_name = $5,
-// 714|      view_type_loc = mk_loc($loc($5)),
-// 715|      view_func_name = $12,
-// 716|      parameters = $13,
-// 717|      params_loc = mk_loc($loc($13)),
-// 718|      view_constrs = $7,
-// 719|      body = $14,
-// 720|      vis = $2,
-// 721|      loc = mk_loc($sloc),
-// 722|      attrs = $1,
-// 723|      doc = DocString::empty()
-// 724|    )
-// 725|  }
+// 711|    attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
+// 712|    TopView(
+// 713|      quantifiers = $4,
+// 714|      source_ty = $10,
+// 715|      view_type_name = $5,
+// 716|      view_type_loc = mk_loc($loc($5)),
+// 717|      view_func_name = $12,
+// 718|      parameters = $13,
+// 719|      params_loc = mk_loc($loc($13)),
+// 720|      view_constrs = $7,
+// 721|      body = $14,
+// 722|      vis = $2,
+// 723|      loc = mk_loc($sloc),
+// 724|      attrs = $1,
+// 725|      doc = DocString::empty()
+// 726|    )
+// 727|  }
 
 ///|
 fn yy_action_728(
@@ -21272,7 +21272,7 @@ fn yy_action_728(
 }
 
 // file:///./parser.mbty
-// 898|    PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
+// 900|    PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
 
 ///|
 fn yy_action_729(
@@ -21290,14 +21290,14 @@ fn yy_action_729(
 }
 
 // file:///./parser.mbty
-// 327|    "enum" luident "{" list_semis(enum_constructor) "}" deriving_directive_list {
-// 328|    LocalTypeDecl::{
-// 329|      tycon : $2,
-// 330|      tycon_loc : mk_loc($loc($2)),
-// 331|      components: Variant($4),
-// 332|      deriving: $6
-// 333|    }
-// 334|  }
+// 329|    "enum" luident "{" list_semis(enum_constructor) "}" deriving_directive_list {
+// 330|    LocalTypeDecl::{
+// 331|      tycon : $2,
+// 332|      tycon_loc : mk_loc($loc($2)),
+// 333|      components: Variant($4),
+// 334|      deriving: $6
+// 335|    }
+// 336|  }
 
 ///|
 fn yy_action_730(
@@ -21323,7 +21323,7 @@ fn yy_action_730(
 }
 
 // file:///./parser.mbty
-// 1937|    non_empty_list_commas(map_elem_pat) { ($1, true) }
+// 1939|    non_empty_list_commas(map_elem_pat) { ($1, true) }
 
 ///|
 fn yy_action_731(
@@ -21340,9 +21340,9 @@ fn yy_action_731(
 }
 
 // file:///./parser.mbty
-// 1480|    simple_expr apply_attr "(" list_commas(argument) ")" { 
-// 1481|    Apply(func = $1, args = $4, attr = $2, loc = mk_loc($sloc))
-// 1482|  }
+// 1482|    simple_expr apply_attr "(" list_commas(argument) ")" { 
+// 1483|    Apply(func = $1, args = $4, attr = $2, loc = mk_loc($sloc))
+// 1484|  }
 
 ///|
 fn yy_action_732(
@@ -21373,7 +21373,7 @@ fn yy_action_732(
 }
 
 // file:///./parser.mbty
-// 1699|    "-" FLOAT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_float("-" + $2)) }
+// 1701|    "-" FLOAT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_float("-" + $2)) }
 
 ///|
 fn yy_action_733(
@@ -21399,24 +21399,24 @@ fn yy_action_733(
 }
 
 // file:///./parser.mbty
-// 593|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 594|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
-// 595|    let supers = match $5 {
-// 596|      None => @list.empty()
-// 597|      Some(supers) => supers
-// 598|    }
-// 599|    TopTrait(
-// 600|      TraitDecl::{
-// 601|        name,
-// 602|        supers,
-// 603|        methods: $7,
-// 604|        vis: $2,
-// 605|        loc: mk_loc($sloc),
-// 606|        attrs: $1,
-// 607|        doc : DocString::empty()
-// 608|      }
-// 609|    )
-// 610|  }
+// 595|    attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
+// 596|    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
+// 597|    let supers = match $5 {
+// 598|      None => @list.empty()
+// 599|      Some(supers) => supers
+// 600|    }
+// 601|    TopTrait(
+// 602|      TraitDecl::{
+// 603|        name,
+// 604|        supers,
+// 605|        methods: $7,
+// 606|        vis: $2,
+// 607|        loc: mk_loc($sloc),
+// 608|        attrs: $1,
+// 609|        doc : DocString::empty()
+// 610|      }
+// 611|    )
+// 612|  }
 
 ///|
 fn yy_action_734(
@@ -21463,7 +21463,7 @@ fn yy_action_734(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_735(
@@ -21481,7 +21481,7 @@ fn yy_action_735(
 }
 
 // file:///./parser.mbty
-// 740|    "pub" pub_attr { Pub(loc = mk_loc($sloc), attr = $2) }
+// 742|    "pub" pub_attr { Pub(loc = mk_loc($sloc), attr = $2) }
 
 ///|
 fn yy_action_8(
@@ -21504,7 +21504,7 @@ fn yy_action_8(
 }
 
 // file:///./parser.mbty
-// 1692|    CHAR { @syntax.make_constant_pattern(loc = mk_loc($sloc), Char($1)) }
+// 1694|    CHAR { @syntax.make_constant_pattern(loc = mk_loc($sloc), Char($1)) }
 
 ///|
 fn yy_action_736(
@@ -21530,7 +21530,7 @@ fn yy_action_736(
 }
 
 // file:///./parser.mbty
-// 1341|    simple_expr accessor { Field($1, $2) }
+// 1343|    simple_expr accessor { Field($1, $2) }
 
 ///|
 fn yy_action_737(
@@ -21549,7 +21549,7 @@ fn yy_action_737(
 }
 
 // file:///./parser.mbty
-// 1377|    expr "," non_empty_tuple_elems { $3.add($1) }
+// 1379|    expr "," non_empty_tuple_elems { $3.add($1) }
 
 ///|
 fn yy_action_738(
@@ -21567,7 +21567,7 @@ fn yy_action_738(
 }
 
 // file:///./parser.mbty
-// 159|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 161|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 
 ///|
 fn yy_action_739(
@@ -21584,7 +21584,7 @@ fn yy_action_739(
 }
 
 // file:///./parser.mbty
-// 145|    X { @list.singleton($1) }
+// 147|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_740(
@@ -21602,7 +21602,7 @@ fn yy_action_740(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_741(
@@ -21626,9 +21626,9 @@ fn yy_action_741(
 }
 
 // file:///./parser.mbty
-// 1517|    simple_expr accessor %prec prec_field { 
-// 1518|    Field(record = $1, accessor = $2, loc = mk_loc($sloc))
-// 1519|  }
+// 1519|    simple_expr accessor %prec prec_field { 
+// 1520|    Field(record = $1, accessor = $2, loc = mk_loc($sloc))
+// 1521|  }
 
 ///|
 fn yy_action_742(
@@ -21657,7 +21657,7 @@ fn yy_action_742(
 }
 
 // file:///./parser.mbty
-// 1220|    foreach_expr { $1 }
+// 1222|    foreach_expr { $1 }
 
 ///|
 fn yy_action_743(
@@ -21674,7 +21674,7 @@ fn yy_action_743(
 }
 
 // file:///./parser.mbty
-// 1763|    "raise" error_type { ErrorType(ty = $2) }
+// 1765|    "raise" error_type { ErrorType(ty = $2) }
 
 ///|
 fn yy_action_744(
@@ -21691,10 +21691,10 @@ fn yy_action_744(
 }
 
 // file:///./parser.mbty
-// 238|    LIDENT "?" opt_annot {
-// 239|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-// 240|      QuestionOptional(binder~, ty = $3)
-// 241|    }
+// 240|    LIDENT "?" opt_annot {
+// 241|      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
+// 242|      QuestionOptional(binder~, ty = $3)
+// 243|    }
 
 ///|
 fn yy_action_745(
@@ -21719,15 +21719,15 @@ fn yy_action_745(
 }
 
 // file:///./parser.mbty
-// 1942|    map_syntax_key option("?") ":" pattern { 
-// 1943|    MapPatElem::{
-// 1944|      key: $1,
-// 1945|      pat: $4,
-// 1946|      match_absent: $2 is Some(_),
-// 1947|      key_loc: mk_loc($loc($1)),
-// 1948|      loc: mk_loc($sloc)
-// 1949|    }
-// 1950|  }
+// 1944|    map_syntax_key option("?") ":" pattern { 
+// 1945|    MapPatElem::{
+// 1946|      key: $1,
+// 1947|      pat: $4,
+// 1948|      match_absent: $2 is Some(_),
+// 1949|      key_loc: mk_loc($loc($1)),
+// 1950|      loc: mk_loc($sloc)
+// 1951|    }
+// 1952|  }
 
 ///|
 fn yy_action_133(
@@ -21760,7 +21760,7 @@ fn yy_action_133(
 }
 
 // file:///./parser.mbty
-// 396|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
+// 398|    attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
 
 ///|
 fn yy_action_746(
@@ -21784,7 +21784,7 @@ fn yy_action_746(
 }
 
 // file:///./parser.mbty
-// 1604|    MINUS DOUBLE { make_double("-" + $2) }
+// 1606|    MINUS DOUBLE { make_double("-" + $2) }
 
 ///|
 fn yy_action_747(
@@ -21817,9 +21817,9 @@ fn yy_action_748(
 }
 
 // file:///./parser.mbty
-// 1450|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "," list_commas(record_defn_single) "}" { 
-// 1451|    RecordUpdate(type_name = $1, record = $4, fields = $6, loc = mk_loc($sloc))
-// 1452|  }
+// 1452|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "," list_commas(record_defn_single) "}" { 
+// 1453|    RecordUpdate(type_name = $1, record = $4, fields = $6, loc = mk_loc($sloc))
+// 1454|  }
 
 ///|
 fn yy_action_749(
@@ -21850,7 +21850,7 @@ fn yy_action_749(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_750(
@@ -21868,9 +21868,9 @@ fn yy_action_750(
 }
 
 // file:///./parser.mbty
-// 1248|    "(" arrow_fn_prefix "=>" expr_statement_no_break_continue_return { 
-// 1249|    make_arrow_fn($2, $4, loc = mk_loc($sloc))
-// 1250|  }
+// 1250|    "(" arrow_fn_prefix "=>" expr_statement_no_break_continue_return { 
+// 1251|    make_arrow_fn($2, $4, loc = mk_loc($sloc))
+// 1252|  }
 
 ///|
 fn yy_action_751(
@@ -21898,7 +21898,7 @@ fn yy_action_751(
 }
 
 // file:///./parser.mbty
-// 211|    { @list.empty() }
+// 213|    { @list.empty() }
 
 ///|
 fn yy_action_752(
@@ -21914,7 +21914,7 @@ fn yy_action_752(
 }
 
 // file:///./parser.mbty
-// 851|     { @list.empty() }
+// 853|     { @list.empty() }
 
 ///|
 fn yy_action_753(
@@ -21930,24 +21930,24 @@ fn yy_action_753(
 }
 
 // file:///./parser.mbty
-// 293|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-// 294|    let ((type_name, f), has_error, quants) = $4
-// 295|    let (return_type, error_type) = $6
-// 296|    FunDecl::{
-// 297|      type_name,
-// 298|      name: f,
-// 299|      has_error,
-// 300|      is_async : $3,
-// 301|      quantifiers: quants,
-// 302|      decl_params: $5,
-// 303|      params_loc: mk_loc($loc($5)),
-// 304|      return_type,
-// 305|      error_type,
-// 306|      vis: $2,
-// 307|      doc: DocString::empty(),
-// 308|      attrs: $1,
-// 309|    }
-// 310|  }
+// 295|    attributes visibility is_async fun_header_generic option(parameters) func_return_type {
+// 296|    let ((type_name, f), has_error, quants) = $4
+// 297|    let (return_type, error_type) = $6
+// 298|    FunDecl::{
+// 299|      type_name,
+// 300|      name: f,
+// 301|      has_error,
+// 302|      is_async : $3,
+// 303|      quantifiers: quants,
+// 304|      decl_params: $5,
+// 305|      params_loc: mk_loc($loc($5)),
+// 306|      return_type,
+// 307|      error_type,
+// 308|      vis: $2,
+// 309|      doc: DocString::empty(),
+// 310|      attrs: $1,
+// 311|    }
+// 312|  }
 
 ///|
 fn yy_action_754(
@@ -21990,7 +21990,7 @@ fn yy_action_754(
 }
 
 // file:///./parser.mbty
-// 1284|    infix_expr { $1 }
+// 1286|    infix_expr { $1 }
 
 ///|
 fn yy_action_755(
@@ -22007,7 +22007,7 @@ fn yy_action_755(
 }
 
 // file:///./parser.mbty
-// 189|    non_empty_list_semi_rev_aux(X) SEMI X { $1.add($3) }
+// 191|    non_empty_list_semi_rev_aux(X) SEMI X { $1.add($3) }
 
 ///|
 fn yy_action_756(
@@ -22025,7 +22025,7 @@ fn yy_action_756(
 }
 
 // file:///./parser.mbty
-// 146|    X non_empty_list(X) { $2.add($1) }
+// 148|    X non_empty_list(X) { $2.add($1) }
 
 ///|
 fn yy_action_757(
@@ -22043,10 +22043,10 @@ fn yy_action_757(
 }
 
 // file:///./parser.mbty
-// 808|    PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) func_alias_target(LIDENT) { 
-// 809|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-// 810|    (Some(pkg), Some($2), false, @list.singleton($3))
-// 811|  }
+// 810|    PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) func_alias_target(LIDENT) { 
+// 811|    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
+// 812|    (Some(pkg), Some($2), false, @list.singleton($3))
+// 813|  }
 
 ///|
 fn yy_action_758(
@@ -22071,7 +22071,7 @@ fn yy_action_758(
 }
 
 // file:///./parser.mbty
-// 1557|    luident { TypeDeclBinder::{ name: Some($1), loc: mk_loc($sloc) } }
+// 1559|    luident { TypeDeclBinder::{ name: Some($1), loc: mk_loc($sloc) } }
 
 ///|
 fn yy_action_759(
@@ -22097,9 +22097,9 @@ fn yy_action_759(
 }
 
 // file:///./parser.mbty
-// 1298|    range_expr "is" range_pattern { 
-// 1299|    Is(expr = $1, pat = $3, loc = mk_loc($sloc))
-// 1300|  }
+// 1300|    range_expr "is" range_pattern { 
+// 1301|    Is(expr = $1, pat = $3, loc = mk_loc($sloc))
+// 1302|  }
 
 ///|
 fn yy_action_760(
@@ -22123,7 +22123,7 @@ fn yy_action_760(
 }
 
 // file:///./parser.mbty
-// 145|    X { @list.singleton($1) }
+// 147|    X { @list.singleton($1) }
 
 ///|
 fn yy_action_761(
@@ -22156,7 +22156,7 @@ fn yy_action_762(
 }
 
 // file:///./parser.mbty
-// 397|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+// 399|    attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
 
 ///|
 fn yy_action_763(
@@ -22190,7 +22190,7 @@ fn yy_action_763(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_764(
@@ -22209,7 +22209,7 @@ fn yy_action_764(
 }
 
 // file:///./parser.mbty
-// 1370|     { NoAttr }
+// 1372|     { NoAttr }
 
 ///|
 fn yy_action_159(
@@ -22225,7 +22225,7 @@ fn yy_action_159(
 }
 
 // file:///./parser.mbty
-// 151|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 153|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
 
 ///|
 fn yy_action_765(
@@ -22243,10 +22243,10 @@ fn yy_action_765(
 }
 
 // file:///./parser.mbty
-// 948|    "letrec" binder opt_annot "=" letand_func list(and_func) {
-// 949|    let bindings = $6.add(($2, $3, $5))
-// 950|    StmtLetand(bindings~, loc = mk_loc($sloc))
-// 951|  }
+// 950|    "letrec" binder opt_annot "=" letand_func list(and_func) {
+// 951|    let bindings = $6.add(($2, $3, $5))
+// 952|    StmtLetand(bindings~, loc = mk_loc($sloc))
+// 953|  }
 
 ///|
 fn yy_action_766(
@@ -22275,9 +22275,9 @@ fn yy_action_766(
 }
 
 // file:///./parser.mbty
-// 750|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
-// 751|    ($1, $2, $4, mk_loc($loc($4)), $5) 
-// 752|  }
+// 752|    attributes visibility "type" luident optional_type_parameters_no_constraints { 
+// 753|    ($1, $2, $4, mk_loc($loc($4)), $5) 
+// 754|  }
 
 ///|
 fn yy_action_767(
@@ -22307,9 +22307,9 @@ fn yy_action_767(
 }
 
 // file:///./parser.mbty
-// 1465|    "{" list_commas(map_expr_elem) "}" { 
-// 1466|    Map(elems = $2, loc = mk_loc($sloc))
-// 1467|  }
+// 1467|    "{" list_commas(map_expr_elem) "}" { 
+// 1468|    Map(elems = $2, loc = mk_loc($sloc))
+// 1469|  }
 
 ///|
 fn yy_action_768(

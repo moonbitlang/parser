@@ -257,7 +257,9 @@ pub(all) enum TokenKind {
   TK_TRY_EXCLAMATION
 }
 fn TokenKind::to_expect_string(Self) -> String
+impl Compare for TokenKind
 impl Eq for TokenKind
+impl Hash for TokenKind
 impl Show for TokenKind
 
 // Type aliases
