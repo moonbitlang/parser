@@ -301,7 +301,7 @@
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "18:9-18:41"
+                "loc": "18:9-18:42"
               },
               "loop_body": {
                 "type": "Expr::Apply",
@@ -634,7 +634,7 @@
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "40:43-40:60"
+                "loc": "40:43-40:61"
               },
               "loc": "40:11-40:61"
             },

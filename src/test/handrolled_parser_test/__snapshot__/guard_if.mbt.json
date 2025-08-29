@@ -379,7 +379,7 @@
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "10:10-10:43"
+                "loc": "10:10-10:44"
               },
               "body": {
                 "type": "Expr::Apply",
@@ -822,7 +822,7 @@
                 "group": {
                   "type": "Group::Paren"
                 },
-                "loc": "24:11-24:32"
+                "loc": "24:11-24:33"
               },
               "body": {
                 "type": "Expr::Apply",

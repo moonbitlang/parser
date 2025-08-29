@@ -637,7 +637,7 @@
                       "group": {
                         "type": "Group::Paren"
                       },
-                      "loc": "21:6-21:16"
+                      "loc": "21:6-21:17"
                     },
                     "pat": {
                       "type": "Pattern::Any",
