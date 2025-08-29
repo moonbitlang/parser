@@ -1,15 +1,15 @@
 ///|
 pub(open) trait ImplMapVisitor {
   base(Self) -> MapVisitorBase[Self] = _
-  visit_impl(Self, Impl) -> Impl = _
-  visit_top_expr(
+  visit_Impl(Self, Impl) -> Impl = _
+  visit_Impl_TopExpr(
     Self,
     expr~ : Expr,
     is_main~ : Bool,
     local_types~ : @list.List[LocalTypeDecl],
     loc~ : Location,
   ) -> Impl = _
-  visit_top_test(
+  visit_Impl_TopTest(
     Self,
     expr~ : Expr,
     name~ : TestName,
@@ -19,14 +19,14 @@ pub(open) trait ImplMapVisitor {
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
   ) -> Impl = _
-  visit_top_type_def(Self, TypeDecl) -> Impl = _
-  visit_top_func_def(
+  visit_Impl_TopTypeDef(Self, TypeDecl) -> Impl = _
+  visit_Impl_TopFuncDef(
     Self,
     fun_decl~ : FunDecl,
     decl_body~ : DeclBody,
     loc~ : Location,
   ) -> Impl = _
-  visit_top_func_alias(
+  visit_Impl_TopFuncAlias(
     Self,
     pkg~ : Label?,
     type_name~ : Label?,
@@ -37,7 +37,7 @@ pub(open) trait ImplMapVisitor {
     doc~ : DocString,
     loc~ : Location,
   ) -> Impl = _
-  visit_top_let_def(
+  visit_Impl_TopLetDef(
     Self,
     binder~ : Binder,
     ty~ : Type?,
@@ -48,8 +48,8 @@ pub(open) trait ImplMapVisitor {
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
   ) -> Impl = _
-  visit_top_trait(Self, TraitDecl) -> Impl = _
-  visit_top_batch_type_alias(
+  visit_Impl_TopTrait(Self, TraitDecl) -> Impl = _
+  visit_Impl_TopBatchTypeAlias(
     Self,
     pkg~ : Label?,
     targets~ : @list.List[AliasTarget],
@@ -59,7 +59,7 @@ pub(open) trait ImplMapVisitor {
     is_list~ : Bool,
     doc~ : DocString,
   ) -> Impl = _
-  visit_top_batch_trait_alias(
+  visit_Impl_TopBatchTraitAlias(
     Self,
     pkg~ : Label?,
     targets~ : @list.List[AliasTarget],
@@ -69,7 +69,7 @@ pub(open) trait ImplMapVisitor {
     is_list~ : Bool,
     doc~ : DocString,
   ) -> Impl = _
-  visit_top_impl(
+  visit_Impl_TopImpl(
     Self,
     self_ty~ : Type?,
     trait_~ : TypeName,
@@ -85,7 +85,7 @@ pub(open) trait ImplMapVisitor {
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
   ) -> Impl = _
-  visit_top_view(
+  visit_Impl_TopView(
     Self,
     quantifiers~ : @list.List[TypeVarBinder],
     source_ty~ : Type,
@@ -101,7 +101,7 @@ pub(open) trait ImplMapVisitor {
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
   ) -> Impl = _
-  visit_top_impl_relation(
+  visit_Impl_TopImplRelation(
     Self,
     self_ty~ : Type,
     trait_~ : TypeName,
@@ -111,20 +111,24 @@ pub(open) trait ImplMapVisitor {
     loc~ : Location,
     doc~ : DocString,
   ) -> Impl = _
-  visit_expr(Self, Expr) -> Expr = _
-  visit_apply(
+  visit_Expr(Self, Expr) -> Expr = _
+  visit_Expr_Apply(
     Self,
     func~ : Expr,
     args~ : @list.List[Argument],
     attr~ : ApplyAttr,
     loc~ : Location,
   ) -> Expr = _
-  visit_infix(Self, op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : Location) -> Expr = _
-  visit_unary(Self, op~ : Var, expr~ : Expr, loc~ : Location) -> Expr = _
-  visit_array(Self, exprs~ : @list.List[Expr], loc~ : Location) -> Expr = _
-  visit_array_spread(Self, elems~ : @list.List[SpreadableElem], loc~ : Location) -> Expr = _
-  visit_array_get(Self, array~ : Expr, index~ : Expr, loc~ : Location) -> Expr = _
-  visit_array_get_slice(
+  visit_Expr_Infix(Self, op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : Location) -> Expr = _
+  visit_Expr_Unary(Self, op~ : Var, expr~ : Expr, loc~ : Location) -> Expr = _
+  visit_Expr_Array(Self, exprs~ : @list.List[Expr], loc~ : Location) -> Expr = _
+  visit_Expr_ArraySpread(
+    Self,
+    elems~ : @list.List[SpreadableElem],
+    loc~ : Location,
+  ) -> Expr = _
+  visit_Expr_ArrayGet(Self, array~ : Expr, index~ : Expr, loc~ : Location) -> Expr = _
+  visit_Expr_ArrayGetSlice(
     Self,
     array~ : Expr,
     start_index~ : Expr?,
@@ -132,14 +136,14 @@ pub(open) trait ImplMapVisitor {
     index_loc~ : Location,
     loc~ : Location,
   ) -> Expr = _
-  visit_array_set(
+  visit_Expr_ArraySet(
     Self,
     array~ : Expr,
     index~ : Expr,
     value~ : Expr,
     loc~ : Location,
   ) -> Expr = _
-  visit_array_augmented_set(
+  visit_Expr_ArrayAugmentedSet(
     Self,
     op~ : Var,
     array~ : Expr,
@@ -147,16 +151,16 @@ pub(open) trait ImplMapVisitor {
     value~ : Expr,
     loc~ : Location,
   ) -> Expr = _
-  visit_constant(Self, c~ : Constant, loc~ : Location) -> Expr = _
-  visit_multiline_string(
+  visit_Expr_Constant(Self, c~ : Constant, loc~ : Location) -> Expr = _
+  visit_Expr_MultilineString(
     Self,
     elems~ : @list.List[MultilineStringElem],
     loc~ : Location,
   ) -> Expr = _
-  visit_interp(Self, elems~ : @list.List[InterpElem], loc~ : Location) -> Expr = _
-  visit_constraint(Self, expr~ : Expr, ty~ : Type, loc~ : Location) -> Expr = _
-  visit_constr(Self, constr~ : Constructor, loc~ : Location) -> Expr = _
-  visit_while(
+  visit_Expr_Interp(Self, elems~ : @list.List[InterpElem], loc~ : Location) -> Expr = _
+  visit_Expr_Constraint(Self, expr~ : Expr, ty~ : Type, loc~ : Location) -> Expr = _
+  visit_Expr_Constr(Self, constr~ : Constructor, loc~ : Location) -> Expr = _
+  visit_Expr_While(
     Self,
     loop_cond~ : Expr,
     loop_body~ : Expr,
@@ -164,73 +168,79 @@ pub(open) trait ImplMapVisitor {
     label~ : Label?,
     loc~ : Location,
   ) -> Expr = _
-  visit_function(Self, func~ : Func, loc~ : Location) -> Expr = _
-  visit_ident(Self, id~ : Var, loc~ : Location) -> Expr = _
-  visit_if(Self, cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : Location) -> Expr = _
-  visit_guard(
+  visit_Expr_Function(Self, func~ : Func, loc~ : Location) -> Expr = _
+  visit_Expr_Ident(Self, id~ : Var, loc~ : Location) -> Expr = _
+  visit_Expr_If(
+    Self,
+    cond~ : Expr,
+    ifso~ : Expr,
+    ifnot~ : Expr?,
+    loc~ : Location,
+  ) -> Expr = _
+  visit_Expr_Guard(
     Self,
     cond~ : Expr,
     otherwise~ : Expr?,
     body~ : Expr,
     loc~ : Location,
   ) -> Expr = _
-  visit_is(Self, expr~ : Expr, pat~ : Pattern, loc~ : Location) -> Expr = _
-  visit_defer(Self, expr~ : Expr, body~ : Expr, loc~ : Location) -> Expr = _
-  visit_let_fn(
+  visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : Location) -> Expr = _
+  visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : Location) -> Expr = _
+  visit_Expr_LetFn(
     Self,
     name~ : Binder,
     func~ : Func,
     body~ : Expr,
     loc~ : Location,
   ) -> Expr = _
-  visit_let_rec(
+  visit_Expr_LetRec(
     Self,
     bindings~ : @list.List[(Binder, Func)],
     body~ : Expr,
     loc~ : Location,
   ) -> Expr = _
-  visit_let_and(
+  visit_Expr_LetAnd(
     Self,
     bindings~ : @list.List[(Binder, Type?, Func)],
     body~ : Expr,
     loc~ : Location,
   ) -> Expr = _
-  visit_let(
+  visit_Expr_Let(
     Self,
     pattern~ : Pattern,
     expr~ : Expr,
     body~ : Expr,
     loc~ : Location,
   ) -> Expr = _
-  visit_sequence(
+  visit_Expr_Sequence(
     Self,
     exprs~ : @list.List[Expr],
     last_expr~ : Expr,
     loc~ : Location,
   ) -> Expr = _
-  visit_tuple(Self, exprs~ : @list.List[Expr], loc~ : Location) -> Expr = _
-  visit_record(
+  visit_Expr_Tuple(Self, exprs~ : @list.List[Expr], loc~ : Location) -> Expr = _
+  visit_Expr_Record(
     Self,
     type_name~ : TypeName?,
     fields~ : @list.List[FieldDef],
     trailing~ : TrailingMark,
     loc~ : Location,
   ) -> Expr = _
-  visit_record_update(
+  visit_Expr_RecordUpdate(
     Self,
     type_name~ : TypeName?,
     record~ : Expr,
     fields~ : @list.List[FieldDef],
     loc~ : Location,
   ) -> Expr = _
-  visit_field(Self, record~ : Expr, accessor~ : Accessor, loc~ : Location) -> Expr = _
-  visit_method(
+  visit_Expr_Field(Self, record~ : Expr, accessor~ : Accessor, loc~ : Location) -> Expr = _
+  visit_Expr_Method(
     Self,
     type_name~ : TypeName,
     method_name~ : Label,
     loc~ : Location,
   ) -> Expr = _
-  visit_dot_apply(
+  visit_Expr_DotApply(
     Self,
     self~ : Expr,
     method_name~ : Label,
@@ -239,8 +249,8 @@ pub(open) trait ImplMapVisitor {
     attr~ : ApplyAttr,
     loc~ : Location,
   ) -> Expr = _
-  visit_as(Self, expr~ : Expr, trait_~ : TypeName, loc~ : Location) -> Expr = _
-  visit_mutate(
+  visit_Expr_As(Self, expr~ : Expr, trait_~ : TypeName, loc~ : Location) -> Expr = _
+  visit_Expr_Mutate(
     Self,
     record~ : Expr,
     accessor~ : Accessor,
@@ -248,7 +258,7 @@ pub(open) trait ImplMapVisitor {
     augmented_by~ : Var?,
     loc~ : Location,
   ) -> Expr = _
-  visit_match(
+  visit_Expr_Match(
     Self,
     expr~ : Expr,
     cases~ : @list.List[Case],
@@ -256,7 +266,7 @@ pub(open) trait ImplMapVisitor {
     using_~ : Label?,
     loc~ : Location,
   ) -> Expr = _
-  visit_let_mut(
+  visit_Expr_LetMut(
     Self,
     binder~ : Binder,
     ty~ : Type?,
@@ -264,26 +274,26 @@ pub(open) trait ImplMapVisitor {
     body~ : Expr,
     loc~ : Location,
   ) -> Expr = _
-  visit_pipe(Self, lhs~ : Expr, rhs~ : Expr, loc~ : Location) -> Expr = _
-  visit_assign(
+  visit_Expr_Pipe(Self, lhs~ : Expr, rhs~ : Expr, loc~ : Location) -> Expr = _
+  visit_Expr_Assign(
     Self,
     var_~ : Var,
     expr~ : Expr,
     augmented_by~ : Var?,
     loc~ : Location,
   ) -> Expr = _
-  visit_hole(Self, loc~ : Location, kind~ : Hole) -> Expr = _
-  visit_return(Self, return_value~ : Expr?, loc~ : Location) -> Expr = _
-  visit_raise(Self, err_value~ : Expr, loc~ : Location) -> Expr = _
-  visit_unit(Self, loc~ : Location, faked~ : Bool) -> Expr = _
-  visit_break(Self, arg~ : Expr?, label~ : Label?, loc~ : Location) -> Expr = _
-  visit_continue(
+  visit_Expr_Hole(Self, loc~ : Location, kind~ : Hole) -> Expr = _
+  visit_Expr_Return(Self, return_value~ : Expr?, loc~ : Location) -> Expr = _
+  visit_Expr_Raise(Self, err_value~ : Expr, loc~ : Location) -> Expr = _
+  visit_Expr_Unit(Self, loc~ : Location, faked~ : Bool) -> Expr = _
+  visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : Location) -> Expr = _
+  visit_Expr_Continue(
     Self,
     args~ : @list.List[Expr],
     label~ : Label?,
     loc~ : Location,
   ) -> Expr = _
-  visit_loop(
+  visit_Expr_Loop(
     Self,
     args~ : @list.List[Expr],
     body~ : @list.List[MultiArgCase],
@@ -291,7 +301,7 @@ pub(open) trait ImplMapVisitor {
     loop_loc~ : Location,
     loc~ : Location,
   ) -> Expr = _
-  visit_for(
+  visit_Expr_For(
     Self,
     binders~ : @list.List[(Binder, Expr)],
     condition~ : Expr?,
@@ -301,7 +311,7 @@ pub(open) trait ImplMapVisitor {
     label~ : Label?,
     loc~ : Location,
   ) -> Expr = _
-  visit_for_each(
+  visit_Expr_ForEach(
     Self,
     binders~ : @list.List[Binder?],
     expr~ : Expr,
@@ -310,7 +320,7 @@ pub(open) trait ImplMapVisitor {
     label~ : Label?,
     loc~ : Location,
   ) -> Expr = _
-  visit_try(
+  visit_Expr_Try(
     Self,
     body~ : Expr,
     catch_~ : @list.List[Case],
@@ -322,16 +332,16 @@ pub(open) trait ImplMapVisitor {
     else_loc~ : Location,
     loc~ : Location,
   ) -> Expr = _
-  visit_try_operator(
+  visit_Expr_TryOperator(
     Self,
     body~ : Expr,
     kind~ : TryOperatorKind,
     try_loc~ : Location,
     loc~ : Location,
   ) -> Expr = _
-  visit_map(Self, elems~ : @list.List[MapExprElem], loc~ : Location) -> Expr = _
-  visit_group(Self, expr~ : Expr, group~ : Group, loc~ : Location) -> Expr = _
-  visit_static_assert(
+  visit_Expr_Map(Self, elems~ : @list.List[MapExprElem], loc~ : Location) -> Expr = _
+  visit_Expr_Group(Self, expr~ : Expr, group~ : Group, loc~ : Location) -> Expr = _
+  visit_Expr_StaticAssert(
     Self,
     asserts~ : @list.List[StaticAssertion],
     body~ : Expr,
@@ -344,23 +354,23 @@ impl ImplMapVisitor with base(self) -> MapVisitorBase[Self] {
 }
 
 ///|
-impl ImplMapVisitor with visit_impl(env, impl_) {
-  MapVisitorBase::visit_impl(env, impl_)
+impl ImplMapVisitor with visit_Impl(env, impl_) {
+  MapVisitorBase::visit_Impl(env, impl_)
 }
 
 ///|
-impl ImplMapVisitor with visit_top_expr(
+impl ImplMapVisitor with visit_Impl_TopExpr(
   env,
   expr~,
   is_main~,
   local_types~,
   loc~,
 ) {
-  MapVisitorBase::visit_top_expr(env, expr~, is_main~, local_types~, loc~)
+  MapVisitorBase::visit_Impl_TopExpr(env, expr~, is_main~, local_types~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_top_test(
+impl ImplMapVisitor with visit_Impl_TopTest(
   env,
   expr~,
   name~,
@@ -370,7 +380,7 @@ impl ImplMapVisitor with visit_top_test(
   attrs~,
   doc~,
 ) {
-  MapVisitorBase::visit_top_test(
+  MapVisitorBase::visit_Impl_TopTest(
     env,
     expr~,
     name~,
@@ -383,17 +393,17 @@ impl ImplMapVisitor with visit_top_test(
 }
 
 ///|
-impl ImplMapVisitor with visit_top_type_def(env, type_decl) {
-  MapVisitorBase::visit_top_type_def(env, type_decl)
+impl ImplMapVisitor with visit_Impl_TopTypeDef(env, type_decl) {
+  MapVisitorBase::visit_Impl_TopTypeDef(env, type_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_top_func_def(env, fun_decl~, decl_body~, loc~) {
-  MapVisitorBase::visit_top_func_def(env, fun_decl~, decl_body~, loc~)
+impl ImplMapVisitor with visit_Impl_TopFuncDef(env, fun_decl~, decl_body~, loc~) {
+  MapVisitorBase::visit_Impl_TopFuncDef(env, fun_decl~, decl_body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_top_func_alias(
+impl ImplMapVisitor with visit_Impl_TopFuncAlias(
   env,
   pkg~,
   type_name~,
@@ -404,7 +414,7 @@ impl ImplMapVisitor with visit_top_func_alias(
   doc~,
   loc~,
 ) {
-  MapVisitorBase::visit_top_func_alias(
+  MapVisitorBase::visit_Impl_TopFuncAlias(
     env,
     pkg~,
     type_name~,
@@ -418,7 +428,7 @@ impl ImplMapVisitor with visit_top_func_alias(
 }
 
 ///|
-impl ImplMapVisitor with visit_top_let_def(
+impl ImplMapVisitor with visit_Impl_TopLetDef(
   env,
   binder~,
   ty~,
@@ -429,7 +439,7 @@ impl ImplMapVisitor with visit_top_let_def(
   attrs~,
   doc~,
 ) {
-  MapVisitorBase::visit_top_let_def(
+  MapVisitorBase::visit_Impl_TopLetDef(
     env,
     binder~,
     ty~,
@@ -443,12 +453,12 @@ impl ImplMapVisitor with visit_top_let_def(
 }
 
 ///|
-impl ImplMapVisitor with visit_top_trait(env, trait_decl) {
-  MapVisitorBase::visit_top_trait(env, trait_decl)
+impl ImplMapVisitor with visit_Impl_TopTrait(env, trait_decl) {
+  MapVisitorBase::visit_Impl_TopTrait(env, trait_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_top_batch_type_alias(
+impl ImplMapVisitor with visit_Impl_TopBatchTypeAlias(
   env,
   pkg~,
   targets~,
@@ -458,7 +468,7 @@ impl ImplMapVisitor with visit_top_batch_type_alias(
   is_list~,
   doc~,
 ) {
-  MapVisitorBase::visit_top_batch_type_alias(
+  MapVisitorBase::visit_Impl_TopBatchTypeAlias(
     env,
     pkg~,
     targets~,
@@ -471,7 +481,7 @@ impl ImplMapVisitor with visit_top_batch_type_alias(
 }
 
 ///|
-impl ImplMapVisitor with visit_top_batch_trait_alias(
+impl ImplMapVisitor with visit_Impl_TopBatchTraitAlias(
   env,
   pkg~,
   targets~,
@@ -481,7 +491,7 @@ impl ImplMapVisitor with visit_top_batch_trait_alias(
   is_list~,
   doc~,
 ) {
-  MapVisitorBase::visit_top_batch_trait_alias(
+  MapVisitorBase::visit_Impl_TopBatchTraitAlias(
     env,
     pkg~,
     targets~,
@@ -494,7 +504,7 @@ impl ImplMapVisitor with visit_top_batch_trait_alias(
 }
 
 ///|
-impl ImplMapVisitor with visit_top_impl(
+impl ImplMapVisitor with visit_Impl_TopImpl(
   env,
   self_ty~,
   trait_~,
@@ -510,7 +520,7 @@ impl ImplMapVisitor with visit_top_impl(
   attrs~,
   doc~,
 ) {
-  MapVisitorBase::visit_top_impl(
+  MapVisitorBase::visit_Impl_TopImpl(
     env,
     self_ty~,
     trait_~,
@@ -529,7 +539,7 @@ impl ImplMapVisitor with visit_top_impl(
 }
 
 ///|
-impl ImplMapVisitor with visit_top_view(
+impl ImplMapVisitor with visit_Impl_TopView(
   env,
   quantifiers~,
   source_ty~,
@@ -545,7 +555,7 @@ impl ImplMapVisitor with visit_top_view(
   attrs~,
   doc~,
 ) {
-  MapVisitorBase::visit_top_view(
+  MapVisitorBase::visit_Impl_TopView(
     env,
     quantifiers~,
     source_ty~,
@@ -564,7 +574,7 @@ impl ImplMapVisitor with visit_top_view(
 }
 
 ///|
-impl ImplMapVisitor with visit_top_impl_relation(
+impl ImplMapVisitor with visit_Impl_TopImplRelation(
   env,
   self_ty~,
   trait_~,
@@ -574,7 +584,7 @@ impl ImplMapVisitor with visit_top_impl_relation(
   loc~,
   doc~,
 ) {
-  MapVisitorBase::visit_top_impl_relation(
+  MapVisitorBase::visit_Impl_TopImplRelation(
     env,
     self_ty~,
     trait_~,
@@ -587,42 +597,42 @@ impl ImplMapVisitor with visit_top_impl_relation(
 }
 
 ///|
-impl ImplMapVisitor with visit_expr(env, expr) {
-  MapVisitorBase::visit_expr(env, expr)
+impl ImplMapVisitor with visit_Expr(env, expr) {
+  MapVisitorBase::visit_Expr(env, expr)
 }
 
 ///|
-impl ImplMapVisitor with visit_apply(env, func~, args~, attr~, loc~) {
-  MapVisitorBase::visit_apply(env, func~, args~, attr~, loc~)
+impl ImplMapVisitor with visit_Expr_Apply(env, func~, args~, attr~, loc~) {
+  MapVisitorBase::visit_Expr_Apply(env, func~, args~, attr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_infix(env, op~, lhs~, rhs~, loc~) {
-  MapVisitorBase::visit_infix(env, op~, lhs~, rhs~, loc~)
+impl ImplMapVisitor with visit_Expr_Infix(env, op~, lhs~, rhs~, loc~) {
+  MapVisitorBase::visit_Expr_Infix(env, op~, lhs~, rhs~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_unary(env, op~, expr~, loc~) {
-  MapVisitorBase::visit_unary(env, op~, expr~, loc~)
+impl ImplMapVisitor with visit_Expr_Unary(env, op~, expr~, loc~) {
+  MapVisitorBase::visit_Expr_Unary(env, op~, expr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_array(env, exprs~, loc~) {
-  MapVisitorBase::visit_array(env, exprs~, loc~)
+impl ImplMapVisitor with visit_Expr_Array(env, exprs~, loc~) {
+  MapVisitorBase::visit_Expr_Array(env, exprs~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_array_spread(env, elems~, loc~) {
-  MapVisitorBase::visit_array_spread(env, elems~, loc~)
+impl ImplMapVisitor with visit_Expr_ArraySpread(env, elems~, loc~) {
+  MapVisitorBase::visit_Expr_ArraySpread(env, elems~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_array_get(env, array~, index~, loc~) {
-  MapVisitorBase::visit_array_get(env, array~, index~, loc~)
+impl ImplMapVisitor with visit_Expr_ArrayGet(env, array~, index~, loc~) {
+  MapVisitorBase::visit_Expr_ArrayGet(env, array~, index~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_array_get_slice(
+impl ImplMapVisitor with visit_Expr_ArrayGetSlice(
   env,
   array~,
   start_index~,
@@ -630,7 +640,7 @@ impl ImplMapVisitor with visit_array_get_slice(
   index_loc~,
   loc~,
 ) {
-  MapVisitorBase::visit_array_get_slice(
+  MapVisitorBase::visit_Expr_ArrayGetSlice(
     env,
     array~,
     start_index~,
@@ -641,12 +651,12 @@ impl ImplMapVisitor with visit_array_get_slice(
 }
 
 ///|
-impl ImplMapVisitor with visit_array_set(env, array~, index~, value~, loc~) {
-  MapVisitorBase::visit_array_set(env, array~, index~, value~, loc~)
+impl ImplMapVisitor with visit_Expr_ArraySet(env, array~, index~, value~, loc~) {
+  MapVisitorBase::visit_Expr_ArraySet(env, array~, index~, value~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_array_augmented_set(
+impl ImplMapVisitor with visit_Expr_ArrayAugmentedSet(
   env,
   op~,
   array~,
@@ -654,7 +664,7 @@ impl ImplMapVisitor with visit_array_augmented_set(
   value~,
   loc~,
 ) {
-  MapVisitorBase::visit_array_augmented_set(
+  MapVisitorBase::visit_Expr_ArrayAugmentedSet(
     env,
     op~,
     array~,
@@ -665,32 +675,32 @@ impl ImplMapVisitor with visit_array_augmented_set(
 }
 
 ///|
-impl ImplMapVisitor with visit_constant(env, c~, loc~) {
-  MapVisitorBase::visit_constant(env, c~, loc~)
+impl ImplMapVisitor with visit_Expr_Constant(env, c~, loc~) {
+  MapVisitorBase::visit_Expr_Constant(env, c~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_multiline_string(env, elems~, loc~) {
-  MapVisitorBase::visit_multiline_string(env, elems~, loc~)
+impl ImplMapVisitor with visit_Expr_MultilineString(env, elems~, loc~) {
+  MapVisitorBase::visit_Expr_MultilineString(env, elems~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_interp(env, elems~, loc~) {
-  MapVisitorBase::visit_interp(env, elems~, loc~)
+impl ImplMapVisitor with visit_Expr_Interp(env, elems~, loc~) {
+  MapVisitorBase::visit_Expr_Interp(env, elems~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_constraint(env, expr~, ty~, loc~) {
-  MapVisitorBase::visit_constraint(env, expr~, ty~, loc~)
+impl ImplMapVisitor with visit_Expr_Constraint(env, expr~, ty~, loc~) {
+  MapVisitorBase::visit_Expr_Constraint(env, expr~, ty~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_constr(env, constr~, loc~) {
-  MapVisitorBase::visit_constr(env, constr~, loc~)
+impl ImplMapVisitor with visit_Expr_Constr(env, constr~, loc~) {
+  MapVisitorBase::visit_Expr_Constr(env, constr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_while(
+impl ImplMapVisitor with visit_Expr_While(
   env,
   loop_cond~,
   loop_body~,
@@ -698,7 +708,7 @@ impl ImplMapVisitor with visit_while(
   label~,
   loc~,
 ) {
-  MapVisitorBase::visit_while(
+  MapVisitorBase::visit_Expr_While(
     env,
     loop_cond~,
     loop_body~,
@@ -709,93 +719,105 @@ impl ImplMapVisitor with visit_while(
 }
 
 ///|
-impl ImplMapVisitor with visit_function(env, func~, loc~) {
-  MapVisitorBase::visit_function(env, func~, loc~)
+impl ImplMapVisitor with visit_Expr_Function(env, func~, loc~) {
+  MapVisitorBase::visit_Expr_Function(env, func~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_ident(env, id~, loc~) {
-  MapVisitorBase::visit_ident(env, id~, loc~)
+impl ImplMapVisitor with visit_Expr_Ident(env, id~, loc~) {
+  MapVisitorBase::visit_Expr_Ident(env, id~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_if(env, cond~, ifso~, ifnot~, loc~) {
-  MapVisitorBase::visit_if(env, cond~, ifso~, ifnot~, loc~)
+impl ImplMapVisitor with visit_Expr_If(env, cond~, ifso~, ifnot~, loc~) {
+  MapVisitorBase::visit_Expr_If(env, cond~, ifso~, ifnot~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_guard(env, cond~, otherwise~, body~, loc~) {
-  MapVisitorBase::visit_guard(env, cond~, otherwise~, body~, loc~)
+impl ImplMapVisitor with visit_Expr_Guard(env, cond~, otherwise~, body~, loc~) {
+  MapVisitorBase::visit_Expr_Guard(env, cond~, otherwise~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_is(env, expr~, pat~, loc~) {
-  MapVisitorBase::visit_is(env, expr~, pat~, loc~)
+impl ImplMapVisitor with visit_Expr_Is(env, expr~, pat~, loc~) {
+  MapVisitorBase::visit_Expr_Is(env, expr~, pat~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_defer(env, expr~, body~, loc~) {
-  MapVisitorBase::visit_defer(env, expr~, body~, loc~)
+impl ImplMapVisitor with visit_Expr_Defer(env, expr~, body~, loc~) {
+  MapVisitorBase::visit_Expr_Defer(env, expr~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_let_fn(env, name~, func~, body~, loc~) {
-  MapVisitorBase::visit_let_fn(env, name~, func~, body~, loc~)
+impl ImplMapVisitor with visit_Expr_LetFn(env, name~, func~, body~, loc~) {
+  MapVisitorBase::visit_Expr_LetFn(env, name~, func~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_let_rec(env, bindings~, body~, loc~) {
-  MapVisitorBase::visit_let_rec(env, bindings~, body~, loc~)
+impl ImplMapVisitor with visit_Expr_LetRec(env, bindings~, body~, loc~) {
+  MapVisitorBase::visit_Expr_LetRec(env, bindings~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_let_and(env, bindings~, body~, loc~) {
-  MapVisitorBase::visit_let_and(env, bindings~, body~, loc~)
+impl ImplMapVisitor with visit_Expr_LetAnd(env, bindings~, body~, loc~) {
+  MapVisitorBase::visit_Expr_LetAnd(env, bindings~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_let(env, pattern~, expr~, body~, loc~) {
-  MapVisitorBase::visit_let(env, pattern~, expr~, body~, loc~)
+impl ImplMapVisitor with visit_Expr_Let(env, pattern~, expr~, body~, loc~) {
+  MapVisitorBase::visit_Expr_Let(env, pattern~, expr~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_sequence(env, exprs~, last_expr~, loc~) {
-  MapVisitorBase::visit_sequence(env, exprs~, last_expr~, loc~)
+impl ImplMapVisitor with visit_Expr_Sequence(env, exprs~, last_expr~, loc~) {
+  MapVisitorBase::visit_Expr_Sequence(env, exprs~, last_expr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_tuple(env, exprs~, loc~) {
-  MapVisitorBase::visit_tuple(env, exprs~, loc~)
+impl ImplMapVisitor with visit_Expr_Tuple(env, exprs~, loc~) {
+  MapVisitorBase::visit_Expr_Tuple(env, exprs~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_record(env, type_name~, fields~, trailing~, loc~) {
-  MapVisitorBase::visit_record(env, type_name~, fields~, trailing~, loc~)
+impl ImplMapVisitor with visit_Expr_Record(
+  env,
+  type_name~,
+  fields~,
+  trailing~,
+  loc~,
+) {
+  MapVisitorBase::visit_Expr_Record(env, type_name~, fields~, trailing~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_record_update(
+impl ImplMapVisitor with visit_Expr_RecordUpdate(
   env,
   type_name~,
   record~,
   fields~,
   loc~,
 ) {
-  MapVisitorBase::visit_record_update(env, type_name~, record~, fields~, loc~)
+  MapVisitorBase::visit_Expr_RecordUpdate(
+    env,
+    type_name~,
+    record~,
+    fields~,
+    loc~,
+  )
 }
 
 ///|
-impl ImplMapVisitor with visit_field(env, record~, accessor~, loc~) {
-  MapVisitorBase::visit_field(env, record~, accessor~, loc~)
+impl ImplMapVisitor with visit_Expr_Field(env, record~, accessor~, loc~) {
+  MapVisitorBase::visit_Expr_Field(env, record~, accessor~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_method(env, type_name~, method_name~, loc~) {
-  MapVisitorBase::visit_method(env, type_name~, method_name~, loc~)
+impl ImplMapVisitor with visit_Expr_Method(env, type_name~, method_name~, loc~) {
+  MapVisitorBase::visit_Expr_Method(env, type_name~, method_name~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_dot_apply(
+impl ImplMapVisitor with visit_Expr_DotApply(
   env,
   self~,
   method_name~,
@@ -804,7 +826,7 @@ impl ImplMapVisitor with visit_dot_apply(
   attr~,
   loc~,
 ) {
-  MapVisitorBase::visit_dot_apply(
+  MapVisitorBase::visit_Expr_DotApply(
     env,
     self~,
     method_name~,
@@ -816,12 +838,12 @@ impl ImplMapVisitor with visit_dot_apply(
 }
 
 ///|
-impl ImplMapVisitor with visit_as(env, expr~, trait_~, loc~) {
-  MapVisitorBase::visit_as(env, expr~, trait_~, loc~)
+impl ImplMapVisitor with visit_Expr_As(env, expr~, trait_~, loc~) {
+  MapVisitorBase::visit_Expr_As(env, expr~, trait_~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_mutate(
+impl ImplMapVisitor with visit_Expr_Mutate(
   env,
   record~,
   accessor~,
@@ -829,7 +851,7 @@ impl ImplMapVisitor with visit_mutate(
   augmented_by~,
   loc~,
 ) {
-  MapVisitorBase::visit_mutate(
+  MapVisitorBase::visit_Expr_Mutate(
     env,
     record~,
     accessor~,
@@ -840,7 +862,7 @@ impl ImplMapVisitor with visit_mutate(
 }
 
 ///|
-impl ImplMapVisitor with visit_match(
+impl ImplMapVisitor with visit_Expr_Match(
   env,
   expr~,
   cases~,
@@ -848,61 +870,88 @@ impl ImplMapVisitor with visit_match(
   using_~,
   loc~,
 ) {
-  MapVisitorBase::visit_match(env, expr~, cases~, match_loc~, using_~, loc~)
+  MapVisitorBase::visit_Expr_Match(
+    env,
+    expr~,
+    cases~,
+    match_loc~,
+    using_~,
+    loc~,
+  )
 }
 
 ///|
-impl ImplMapVisitor with visit_let_mut(env, binder~, ty~, expr~, body~, loc~) {
-  MapVisitorBase::visit_let_mut(env, binder~, ty~, expr~, body~, loc~)
+impl ImplMapVisitor with visit_Expr_LetMut(
+  env,
+  binder~,
+  ty~,
+  expr~,
+  body~,
+  loc~,
+) {
+  MapVisitorBase::visit_Expr_LetMut(env, binder~, ty~, expr~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_pipe(env, lhs~, rhs~, loc~) {
-  MapVisitorBase::visit_pipe(env, lhs~, rhs~, loc~)
+impl ImplMapVisitor with visit_Expr_Pipe(env, lhs~, rhs~, loc~) {
+  MapVisitorBase::visit_Expr_Pipe(env, lhs~, rhs~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_assign(env, var_~, expr~, augmented_by~, loc~) {
-  MapVisitorBase::visit_assign(env, var_~, expr~, augmented_by~, loc~)
+impl ImplMapVisitor with visit_Expr_Assign(
+  env,
+  var_~,
+  expr~,
+  augmented_by~,
+  loc~,
+) {
+  MapVisitorBase::visit_Expr_Assign(env, var_~, expr~, augmented_by~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_hole(env, loc~, kind~) {
-  MapVisitorBase::visit_hole(env, loc~, kind~)
+impl ImplMapVisitor with visit_Expr_Hole(env, loc~, kind~) {
+  MapVisitorBase::visit_Expr_Hole(env, loc~, kind~)
 }
 
 ///|
-impl ImplMapVisitor with visit_return(env, return_value~, loc~) {
-  MapVisitorBase::visit_return(env, return_value~, loc~)
+impl ImplMapVisitor with visit_Expr_Return(env, return_value~, loc~) {
+  MapVisitorBase::visit_Expr_Return(env, return_value~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_raise(env, err_value~, loc~) {
-  MapVisitorBase::visit_raise(env, err_value~, loc~)
+impl ImplMapVisitor with visit_Expr_Raise(env, err_value~, loc~) {
+  MapVisitorBase::visit_Expr_Raise(env, err_value~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_unit(env, loc~, faked~) {
-  MapVisitorBase::visit_unit(env, loc~, faked~)
+impl ImplMapVisitor with visit_Expr_Unit(env, loc~, faked~) {
+  MapVisitorBase::visit_Expr_Unit(env, loc~, faked~)
 }
 
 ///|
-impl ImplMapVisitor with visit_break(env, arg~, label~, loc~) {
-  MapVisitorBase::visit_break(env, arg~, label~, loc~)
+impl ImplMapVisitor with visit_Expr_Break(env, arg~, label~, loc~) {
+  MapVisitorBase::visit_Expr_Break(env, arg~, label~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_continue(env, args~, label~, loc~) {
-  MapVisitorBase::visit_continue(env, args~, label~, loc~)
+impl ImplMapVisitor with visit_Expr_Continue(env, args~, label~, loc~) {
+  MapVisitorBase::visit_Expr_Continue(env, args~, label~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_loop(env, args~, body~, label~, loop_loc~, loc~) {
-  MapVisitorBase::visit_loop(env, args~, body~, label~, loop_loc~, loc~)
+impl ImplMapVisitor with visit_Expr_Loop(
+  env,
+  args~,
+  body~,
+  label~,
+  loop_loc~,
+  loc~,
+) {
+  MapVisitorBase::visit_Expr_Loop(env, args~, body~, label~, loop_loc~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_for(
+impl ImplMapVisitor with visit_Expr_For(
   env,
   binders~,
   condition~,
@@ -912,7 +961,7 @@ impl ImplMapVisitor with visit_for(
   label~,
   loc~,
 ) {
-  MapVisitorBase::visit_for(
+  MapVisitorBase::visit_Expr_For(
     env,
     binders~,
     condition~,
@@ -925,7 +974,7 @@ impl ImplMapVisitor with visit_for(
 }
 
 ///|
-impl ImplMapVisitor with visit_for_each(
+impl ImplMapVisitor with visit_Expr_ForEach(
   env,
   binders~,
   expr~,
@@ -934,7 +983,7 @@ impl ImplMapVisitor with visit_for_each(
   label~,
   loc~,
 ) {
-  MapVisitorBase::visit_for_each(
+  MapVisitorBase::visit_Expr_ForEach(
     env,
     binders~,
     expr~,
@@ -946,7 +995,7 @@ impl ImplMapVisitor with visit_for_each(
 }
 
 ///|
-impl ImplMapVisitor with visit_try(
+impl ImplMapVisitor with visit_Expr_Try(
   env,
   body~,
   catch_~,
@@ -958,7 +1007,7 @@ impl ImplMapVisitor with visit_try(
   else_loc~,
   loc~,
 ) {
-  MapVisitorBase::visit_try(
+  MapVisitorBase::visit_Expr_Try(
     env,
     body~,
     catch_~,
@@ -973,30 +1022,36 @@ impl ImplMapVisitor with visit_try(
 }
 
 ///|
-impl ImplMapVisitor with visit_try_operator(env, body~, kind~, try_loc~, loc~) {
-  MapVisitorBase::visit_try_operator(env, body~, kind~, try_loc~, loc~)
+impl ImplMapVisitor with visit_Expr_TryOperator(
+  env,
+  body~,
+  kind~,
+  try_loc~,
+  loc~,
+) {
+  MapVisitorBase::visit_Expr_TryOperator(env, body~, kind~, try_loc~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_map(env, elems~, loc~) {
-  MapVisitorBase::visit_map(env, elems~, loc~)
+impl ImplMapVisitor with visit_Expr_Map(env, elems~, loc~) {
+  MapVisitorBase::visit_Expr_Map(env, elems~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_group(env, expr~, group~, loc~) {
-  MapVisitorBase::visit_group(env, expr~, group~, loc~)
+impl ImplMapVisitor with visit_Expr_Group(env, expr~, group~, loc~) {
+  MapVisitorBase::visit_Expr_Group(env, expr~, group~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_static_assert(env, asserts~, body~) {
-  MapVisitorBase::visit_static_assert(env, asserts~, body~)
+impl ImplMapVisitor with visit_Expr_StaticAssert(env, asserts~, body~) {
+  MapVisitorBase::visit_Expr_StaticAssert(env, asserts~, body~)
 }
 
 ///|
 pub(all) struct MapVisitorBase[T](T)
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_impl(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl(
   env,
   impl_,
 ) {
@@ -1018,7 +1073,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_imp
     ) =>
       env
       .inner()
-      .visit_top_view(
+      .visit_Impl_TopView(
         quantifiers~,
         source_ty~,
         view_type_name~,
@@ -1050,7 +1105,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_imp
     ) =>
       env
       .inner()
-      .visit_top_impl(
+      .visit_Impl_TopImpl(
         self_ty~,
         trait_~,
         method_name~,
@@ -1068,7 +1123,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_imp
     TopBatchTraitAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
       env
       .inner()
-      .visit_top_batch_trait_alias(
+      .visit_Impl_TopBatchTraitAlias(
         pkg~,
         targets~,
         vis~,
@@ -1080,7 +1135,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_imp
     TopBatchTypeAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
       env
       .inner()
-      .visit_top_batch_type_alias(
+      .visit_Impl_TopBatchTypeAlias(
         pkg~,
         targets~,
         vis~,
@@ -1089,11 +1144,11 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_imp
         is_list~,
         doc~,
       )
-    TopTrait(trait_decl) => env.inner().visit_top_trait(trait_decl)
+    TopTrait(trait_decl) => env.inner().visit_Impl_TopTrait(trait_decl)
     TopLetDef(binder~, ty~, expr~, vis~, is_constant~, loc~, attrs~, doc~) =>
       env
       .inner()
-      .visit_top_let_def(
+      .visit_Impl_TopLetDef(
         binder~,
         ty~,
         expr~,
@@ -1106,7 +1161,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_imp
     TopFuncAlias(pkg~, type_name~, targets~, vis~, attrs~, is_list~, doc~, loc~) =>
       env
       .inner()
-      .visit_top_func_alias(
+      .visit_Impl_TopFuncAlias(
         pkg~,
         type_name~,
         targets~,
@@ -1117,18 +1172,26 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_imp
         loc~,
       )
     TopFuncDef(fun_decl~, decl_body~, loc~) =>
-      env.inner().visit_top_func_def(fun_decl~, decl_body~, loc~)
-    TopTypeDef(type_decl) => env.inner().visit_top_type_def(type_decl)
+      env.inner().visit_Impl_TopFuncDef(fun_decl~, decl_body~, loc~)
+    TopTypeDef(type_decl) => env.inner().visit_Impl_TopTypeDef(type_decl)
     TopTest(expr~, name~, params~, local_types~, loc~, attrs~, doc~) =>
       env
       .inner()
-      .visit_top_test(expr~, name~, params~, local_types~, loc~, attrs~, doc~)
+      .visit_Impl_TopTest(
+        expr~,
+        name~,
+        params~,
+        local_types~,
+        loc~,
+        attrs~,
+        doc~,
+      )
     TopExpr(expr~, is_main~, local_types~, loc~) =>
-      env.inner().visit_top_expr(expr~, is_main~, local_types~, loc~)
+      env.inner().visit_Impl_TopExpr(expr~, is_main~, local_types~, loc~)
     TopImplRelation(self_ty~, trait_~, quantifiers~, vis~, attrs~, loc~, doc~) =>
       env
       .inner()
-      .visit_top_impl_relation(
+      .visit_Impl_TopImplRelation(
         self_ty~,
         trait_~,
         quantifiers~,
@@ -1141,7 +1204,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_expr(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopExpr(
   env,
   expr~,
   is_main~,
@@ -1150,8 +1213,8 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 ) {
   env
   .inner()
-  .visit_top_expr(
-    expr=env.inner().visit_expr(expr),
+  .visit_Impl_TopExpr(
+    expr=env.inner().visit_Expr(expr),
     is_main~,
     local_types~,
     loc~,
@@ -1159,7 +1222,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_test(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopTest(
   env,
   expr~,
   name~,
@@ -1171,8 +1234,8 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 ) {
   env
   .inner()
-  .visit_top_test(
-    expr=env.inner().visit_expr(expr),
+  .visit_Impl_TopTest(
+    expr=env.inner().visit_Expr(expr),
     name~,
     params~,
     local_types~,
@@ -1183,7 +1246,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_type_def(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopTypeDef(
   env,
   type_decl,
 ) {
@@ -1192,7 +1255,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_func_def(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopFuncDef(
   env,
   fun_decl~,
   decl_body~,
@@ -1202,7 +1265,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
     fun_decl~,
     decl_body=match decl_body {
       DeclBody(local_types~, expr~) =>
-        DeclBody(local_types~, expr=env.inner().visit_expr(expr))
+        DeclBody(local_types~, expr=env.inner().visit_Expr(expr))
       DeclStubs(_) => decl_body
     },
     loc~,
@@ -1210,7 +1273,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_func_alias(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopFuncAlias(
   env,
   pkg~,
   type_name~,
@@ -1226,7 +1289,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_let_def(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopLetDef(
   env,
   binder~,
   ty~,
@@ -1240,7 +1303,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
   TopLetDef(
     binder~,
     ty~,
-    expr=env.inner().visit_expr(expr),
+    expr=env.inner().visit_Expr(expr),
     vis~,
     is_constant~,
     loc~,
@@ -1250,7 +1313,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_trait(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopTrait(
   env,
   trait_decl,
 ) {
@@ -1259,7 +1322,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_batch_type_alias(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopBatchTypeAlias(
   env,
   pkg~,
   targets~,
@@ -1274,7 +1337,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_batch_trait_alias(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopBatchTraitAlias(
   env,
   pkg~,
   targets~,
@@ -1289,7 +1352,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_impl(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopImpl(
   env,
   self_ty~,
   trait_~,
@@ -1316,7 +1379,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
     err_ty~,
     body=match body {
       DeclBody(local_types~, expr~) =>
-        DeclBody(local_types~, expr=env.inner().visit_expr(expr))
+        DeclBody(local_types~, expr=env.inner().visit_Expr(expr))
       DeclStubs(_) => body
     },
     vis~,
@@ -1327,7 +1390,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_view(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopView(
   env,
   quantifiers~,
   source_ty~,
@@ -1352,7 +1415,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
     view_func_name~,
     parameters~,
     params_loc~,
-    body=env.inner().visit_expr(body),
+    body=env.inner().visit_Expr(body),
     vis~,
     loc~,
     attrs~,
@@ -1361,7 +1424,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top_impl_relation(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopImplRelation(
   env,
   self_ty~,
   trait_~,
@@ -1376,7 +1439,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_top
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_apply(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Apply(
   env,
   func~,
   args~,
@@ -1384,10 +1447,10 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_app
   loc~,
 ) {
   Expr::Apply(
-    func=env.inner().visit_expr(func),
+    func=env.inner().visit_Expr(func),
     args=args.map(arg => Argument::{
       ..arg,
-      value: env.inner().visit_expr(arg.value),
+      value: env.inner().visit_Expr(arg.value),
     }),
     attr~,
     loc~,
@@ -1395,7 +1458,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_app
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_infix(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Infix(
   env,
   op~,
   lhs~,
@@ -1404,33 +1467,33 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_inf
 ) {
   Expr::Infix(
     op~,
-    lhs=env.inner().visit_expr(lhs),
-    rhs=env.inner().visit_expr(rhs),
+    lhs=env.inner().visit_Expr(lhs),
+    rhs=env.inner().visit_Expr(rhs),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_unary(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Unary(
   env,
   op~,
   expr~,
   loc~,
 ) {
-  Expr::Unary(op~, expr=env.inner().visit_expr(expr), loc~)
+  Expr::Unary(op~, expr=env.inner().visit_Expr(expr), loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_array(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Array(
   env,
   exprs~,
   loc~,
 ) {
-  Expr::Array(exprs=exprs.map(expr => env.inner().visit_expr(expr)), loc~)
+  Expr::Array(exprs=exprs.map(expr => env.inner().visit_Expr(expr)), loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_array_spread(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ArraySpread(
   env,
   elems~,
   loc~,
@@ -1438,8 +1501,8 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_arr
   Expr::ArraySpread(
     elems=elems.map(fn(elem) {
       match elem {
-        Regular(expr) => Regular(env.inner().visit_expr(expr))
-        Spread(expr~, loc~) => Spread(expr=env.inner().visit_expr(expr), loc~)
+        Regular(expr) => Regular(env.inner().visit_Expr(expr))
+        Spread(expr~, loc~) => Spread(expr=env.inner().visit_Expr(expr), loc~)
       }
     }),
     loc~,
@@ -1447,21 +1510,21 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_arr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_array_get(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ArrayGet(
   env,
   array~,
   index~,
   loc~,
 ) {
   Expr::ArrayGet(
-    array=env.inner().visit_expr(array),
-    index=env.inner().visit_expr(index),
+    array=env.inner().visit_Expr(array),
+    index=env.inner().visit_Expr(index),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_array_get_slice(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ArrayGetSlice(
   env,
   array~,
   start_index~,
@@ -1470,16 +1533,16 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_arr
   loc~,
 ) {
   Expr::ArrayGetSlice(
-    array=env.inner().visit_expr(array),
-    start_index=start_index.map(e => env.inner().visit_expr(e)),
-    end_index=end_index.map(e => env.inner().visit_expr(e)),
+    array=env.inner().visit_Expr(array),
+    start_index=start_index.map(e => env.inner().visit_Expr(e)),
+    end_index=end_index.map(e => env.inner().visit_Expr(e)),
     index_loc~,
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_array_set(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ArraySet(
   env,
   array~,
   index~,
@@ -1487,15 +1550,15 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_arr
   loc~,
 ) {
   Expr::ArraySet(
-    array=env.inner().visit_expr(array),
-    index=env.inner().visit_expr(index),
-    value=env.inner().visit_expr(value),
+    array=env.inner().visit_Expr(array),
+    index=env.inner().visit_Expr(index),
+    value=env.inner().visit_Expr(value),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_array_augmented_set(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ArrayAugmentedSet(
   env,
   op~,
   array~,
@@ -1505,15 +1568,15 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_arr
 ) {
   Expr::ArrayAugmentedSet(
     op~,
-    array=env.inner().visit_expr(array),
-    index=env.inner().visit_expr(index),
-    value=env.inner().visit_expr(value),
+    array=env.inner().visit_Expr(array),
+    index=env.inner().visit_Expr(index),
+    value=env.inner().visit_Expr(value),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_constant(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Constant(
   env,
   c~,
   loc~,
@@ -1523,7 +1586,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_multiline_string(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_MultilineString(
   env,
   elems~,
   loc~,
@@ -1533,7 +1596,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_mul
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_interp(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Interp(
   env,
   elems~,
   loc~,
@@ -1543,18 +1606,18 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_int
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_constraint(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Constraint(
   env,
   expr~,
   ty~,
   loc~,
 ) {
   ignore(env)
-  Expr::Constraint(expr=env.inner().visit_expr(expr), ty~, loc~)
+  Expr::Constraint(expr=env.inner().visit_Expr(expr), ty~, loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_constr(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Constr(
   env,
   constr~,
   loc~,
@@ -1564,7 +1627,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_while(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_While(
   env,
   loop_cond~,
   loop_body~,
@@ -1573,16 +1636,16 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_whi
   loc~,
 ) {
   Expr::While(
-    loop_cond=env.inner().visit_expr(loop_cond),
-    loop_body=env.inner().visit_expr(loop_body),
-    while_else=while_else.map(else_block => env.inner().visit_expr(else_block)),
+    loop_cond=env.inner().visit_Expr(loop_cond),
+    loop_body=env.inner().visit_Expr(loop_body),
+    while_else=while_else.map(else_block => env.inner().visit_Expr(else_block)),
     label~,
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_function(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Function(
   env,
   func~,
   loc~,
@@ -1602,7 +1665,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_fun
       Func::Lambda(
         parameters~,
         params_loc~,
-        body=env.inner().visit_expr(body),
+        body=env.inner().visit_Expr(body),
         return_type~,
         error_type~,
         kind~,
@@ -1616,7 +1679,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_fun
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ident(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Ident(
   env,
   id~,
   loc~,
@@ -1626,7 +1689,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ide
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_if(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_If(
   env,
   cond~,
   ifso~,
@@ -1634,15 +1697,15 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_if(
   loc~,
 ) {
   Expr::If(
-    cond=env.inner().visit_expr(cond),
-    ifso=env.inner().visit_expr(ifso),
-    ifnot=ifnot.map(expr => env.inner().visit_expr(expr)),
+    cond=env.inner().visit_Expr(cond),
+    ifso=env.inner().visit_Expr(ifso),
+    ifnot=ifnot.map(expr => env.inner().visit_Expr(expr)),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_guard(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Guard(
   env,
   cond~,
   otherwise~,
@@ -1650,39 +1713,39 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_gua
   loc~,
 ) {
   Expr::Guard(
-    cond=env.inner().visit_expr(cond),
-    otherwise=otherwise.map(expr => env.inner().visit_expr(expr)),
-    body=env.inner().visit_expr(body),
+    cond=env.inner().visit_Expr(cond),
+    otherwise=otherwise.map(expr => env.inner().visit_Expr(expr)),
+    body=env.inner().visit_Expr(body),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_is(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Is(
   env,
   expr~,
   pat~,
   loc~,
 ) {
-  Expr::Is(expr=env.inner().visit_expr(expr), pat~, loc~)
+  Expr::Is(expr=env.inner().visit_Expr(expr), pat~, loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_defer(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Defer(
   env,
   expr~,
   body~,
   loc~,
 ) {
   Expr::Defer(
-    expr=env.inner().visit_expr(expr),
-    body=env.inner().visit_expr(body),
+    expr=env.inner().visit_Expr(expr),
+    body=env.inner().visit_Expr(body),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let_fn(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_LetFn(
   env,
   name~,
   func~,
@@ -1706,7 +1769,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let
         Func::Lambda(
           parameters~,
           params_loc~,
-          body=env.inner().visit_expr(body),
+          body=env.inner().visit_Expr(body),
           return_type~,
           error_type~,
           kind~,
@@ -1716,13 +1779,13 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let
         )
       Func::Match(_) => func
     },
-    body=env.inner().visit_expr(body),
+    body=env.inner().visit_Expr(body),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let_rec(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_LetRec(
   env,
   bindings~,
   body~,
@@ -1748,7 +1811,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let
               Func::Lambda(
                 parameters~,
                 params_loc~,
-                body=env.inner().visit_expr(body),
+                body=env.inner().visit_Expr(body),
                 return_type~,
                 error_type~,
                 kind~,
@@ -1760,13 +1823,13 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let
           },
         )
     }),
-    body=env.inner().visit_expr(body),
+    body=env.inner().visit_Expr(body),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let_and(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_LetAnd(
   env,
   bindings~,
   body~,
@@ -1793,7 +1856,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let
               Func::Lambda(
                 parameters~,
                 params_loc~,
-                body=env.inner().visit_expr(body),
+                body=env.inner().visit_Expr(body),
                 return_type~,
                 error_type~,
                 kind~,
@@ -1805,13 +1868,13 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let
           },
         )
     }),
-    body=env.inner().visit_expr(body),
+    body=env.inner().visit_Expr(body),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Let(
   env,
   pattern~,
   expr~,
@@ -1820,37 +1883,37 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let
 ) {
   Expr::Let(
     pattern~,
-    expr=env.inner().visit_expr(expr),
-    body=env.inner().visit_expr(body),
+    expr=env.inner().visit_Expr(expr),
+    body=env.inner().visit_Expr(body),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_sequence(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Sequence(
   env,
   exprs~,
   last_expr~,
   loc~,
 ) {
   Expr::Sequence(
-    exprs=exprs.map(expr => env.inner().visit_expr(expr)),
-    last_expr=env.inner().visit_expr(last_expr),
+    exprs=exprs.map(expr => env.inner().visit_Expr(expr)),
+    last_expr=env.inner().visit_Expr(last_expr),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_tuple(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Tuple(
   env,
   exprs~,
   loc~,
 ) {
-  Expr::Tuple(exprs=exprs.map(expr => env.inner().visit_expr(expr)), loc~)
+  Expr::Tuple(exprs=exprs.map(expr => env.inner().visit_Expr(expr)), loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_record(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Record(
   env,
   type_name~,
   fields~,
@@ -1861,7 +1924,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_rec
     type_name~,
     fields=fields.map(field => {
       ..field,
-      expr: env.inner().visit_expr(field.expr),
+      expr: env.inner().visit_Expr(field.expr),
     }),
     trailing~,
     loc~,
@@ -1869,7 +1932,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_rec
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_record_update(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_RecordUpdate(
   env,
   type_name~,
   record~,
@@ -1878,27 +1941,27 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_rec
 ) {
   Expr::RecordUpdate(
     type_name~,
-    record=env.inner().visit_expr(record),
+    record=env.inner().visit_Expr(record),
     fields=fields.map(field => {
       ..field,
-      expr: env.inner().visit_expr(field.expr),
+      expr: env.inner().visit_Expr(field.expr),
     }),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_field(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Field(
   env,
   record~,
   accessor~,
   loc~,
 ) {
-  Expr::Field(record=env.inner().visit_expr(record), accessor~, loc~)
+  Expr::Field(record=env.inner().visit_Expr(record), accessor~, loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_method(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Method(
   env,
   type_name~,
   method_name~,
@@ -1909,7 +1972,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_met
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_dot_apply(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_DotApply(
   env,
   self~,
   method_name~,
@@ -1919,11 +1982,11 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_dot
   loc~,
 ) {
   Expr::DotApply(
-    self=env.inner().visit_expr(self),
+    self=env.inner().visit_Expr(self),
     method_name~,
     args=args.map(arg => Argument::{
       ..arg,
-      value: env.inner().visit_expr(arg.value),
+      value: env.inner().visit_Expr(arg.value),
     }),
     return_self~,
     attr~,
@@ -1932,17 +1995,17 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_dot
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_as(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_As(
   env,
   expr~,
   trait_~,
   loc~,
 ) {
-  Expr::As(expr=env.inner().visit_expr(expr), trait_~, loc~)
+  Expr::As(expr=env.inner().visit_Expr(expr), trait_~, loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_mutate(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Mutate(
   env,
   record~,
   accessor~,
@@ -1951,7 +2014,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_mut
   loc~,
 ) {
   Expr::Mutate(
-    record=env.inner().visit_expr(record),
+    record=env.inner().visit_Expr(record),
     accessor~,
     field~,
     augmented_by~,
@@ -1960,7 +2023,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_mut
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_match(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Match(
   env,
   expr~,
   cases~,
@@ -1969,11 +2032,11 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_mat
   loc~,
 ) {
   Expr::Match(
-    expr=env.inner().visit_expr(expr),
+    expr=env.inner().visit_Expr(expr),
     cases=cases.map(case => {
       ..case,
-      body: env.inner().visit_expr(case.body),
-      guard_: case.guard_.map(guard_ => env.inner().visit_expr(guard_)),
+      body: env.inner().visit_Expr(case.body),
+      guard_: case.guard_.map(guard_ => env.inner().visit_Expr(guard_)),
     }),
     match_loc~,
     using_~,
@@ -1982,7 +2045,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_mat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let_mut(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_LetMut(
   env,
   binder~,
   ty~,
@@ -1993,39 +2056,39 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_let
   Expr::LetMut(
     binder~,
     ty~,
-    expr=env.inner().visit_expr(expr),
-    body=env.inner().visit_expr(body),
+    expr=env.inner().visit_Expr(expr),
+    body=env.inner().visit_Expr(body),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_pipe(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Pipe(
   env,
   lhs~,
   rhs~,
   loc~,
 ) {
   Expr::Pipe(
-    lhs=env.inner().visit_expr(lhs),
-    rhs=env.inner().visit_expr(rhs),
+    lhs=env.inner().visit_Expr(lhs),
+    rhs=env.inner().visit_Expr(rhs),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_assign(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Assign(
   env,
   var_~,
   expr~,
   augmented_by~,
   loc~,
 ) {
-  Expr::Assign(var_~, expr=env.inner().visit_expr(expr), augmented_by~, loc~)
+  Expr::Assign(var_~, expr=env.inner().visit_Expr(expr), augmented_by~, loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_hole(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Hole(
   env,
   loc~,
   kind~,
@@ -2035,28 +2098,28 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_hol
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_return(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Return(
   env,
   return_value~,
   loc~,
 ) {
   Expr::Return(
-    return_value=return_value.map(value => env.inner().visit_expr(value)),
+    return_value=return_value.map(value => env.inner().visit_Expr(value)),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_raise(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Raise(
   env,
   err_value~,
   loc~,
 ) {
-  Expr::Raise(err_value=env.inner().visit_expr(err_value), loc~)
+  Expr::Raise(err_value=env.inner().visit_Expr(err_value), loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_unit(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Unit(
   env,
   loc~,
   faked~,
@@ -2066,31 +2129,31 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_uni
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_break(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Break(
   env,
   arg~,
   label~,
   loc~,
 ) {
-  Expr::Break(arg=arg.map(value => env.inner().visit_expr(value)), label~, loc~)
+  Expr::Break(arg=arg.map(value => env.inner().visit_Expr(value)), label~, loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_continue(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Continue(
   env,
   args~,
   label~,
   loc~,
 ) {
   Expr::Continue(
-    args=args.map(arg => env.inner().visit_expr(arg)),
+    args=args.map(arg => env.inner().visit_Expr(arg)),
     label~,
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_loop(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Loop(
   env,
   args~,
   body~,
@@ -2099,11 +2162,11 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_loo
   loc~,
 ) {
   Expr::Loop(
-    args=args.map(arg => env.inner().visit_expr(arg)),
+    args=args.map(arg => env.inner().visit_Expr(arg)),
     body=body.map(multi_arg_case => {
       ..multi_arg_case,
-      body: env.inner().visit_expr(multi_arg_case.body),
-      guard_: multi_arg_case.guard_.map(guard_ => env.inner().visit_expr(guard_)),
+      body: env.inner().visit_Expr(multi_arg_case.body),
+      guard_: multi_arg_case.guard_.map(guard_ => env.inner().visit_Expr(guard_)),
     }),
     label~,
     loop_loc~,
@@ -2112,7 +2175,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_loo
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_for(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_For(
   env,
   binders~,
   condition~,
@@ -2123,18 +2186,18 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_for
   loc~,
 ) {
   Expr::For(
-    binders=binders.map(p => (p.0, env.inner().visit_expr(p.1))),
-    condition=condition.map(cond => env.inner().visit_expr(cond)),
-    continue_block=continue_block.map(p => (p.0, env.inner().visit_expr(p.1))),
-    body=env.inner().visit_expr(body),
-    for_else=for_else.map(else_block => env.inner().visit_expr(else_block)),
+    binders=binders.map(p => (p.0, env.inner().visit_Expr(p.1))),
+    condition=condition.map(cond => env.inner().visit_Expr(cond)),
+    continue_block=continue_block.map(p => (p.0, env.inner().visit_Expr(p.1))),
+    body=env.inner().visit_Expr(body),
+    for_else=for_else.map(else_block => env.inner().visit_Expr(else_block)),
     label~,
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_for_each(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ForEach(
   env,
   binders~,
   expr~,
@@ -2145,16 +2208,16 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_for
 ) {
   Expr::ForEach(
     binders~,
-    expr=env.inner().visit_expr(expr),
-    body=env.inner().visit_expr(body),
-    else_block=else_block.map(else_block => env.inner().visit_expr(else_block)),
+    expr=env.inner().visit_Expr(expr),
+    body=env.inner().visit_Expr(body),
+    else_block=else_block.map(else_block => env.inner().visit_Expr(else_block)),
     label~,
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_try(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Try(
   env,
   body~,
   catch_~,
@@ -2167,17 +2230,17 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_try
   loc~,
 ) {
   Expr::Try(
-    body=env.inner().visit_expr(body),
+    body=env.inner().visit_Expr(body),
     catch_=catch_.map(catch_case => {
       ..catch_case,
-      body: env.inner().visit_expr(catch_case.body),
-      guard_: catch_case.guard_.map(guard_ => env.inner().visit_expr(guard_)),
+      body: env.inner().visit_Expr(catch_case.body),
+      guard_: catch_case.guard_.map(guard_ => env.inner().visit_Expr(guard_)),
     }),
     catch_all~,
     try_else=try_else.map(else_block => else_block.map(case => {
       ..case,
-      body: env.inner().visit_expr(case.body),
-      guard_: case.guard_.map(guard_ => env.inner().visit_expr(guard_)),
+      body: env.inner().visit_Expr(case.body),
+      guard_: case.guard_.map(guard_ => env.inner().visit_Expr(guard_)),
     })),
     has_try~,
     try_loc~,
@@ -2188,133 +2251,156 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_try
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_try_operator(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_TryOperator(
   env,
   body~,
   kind~,
   try_loc~,
   loc~,
 ) {
-  Expr::TryOperator(body=env.inner().visit_expr(body), kind~, try_loc~, loc~)
+  Expr::TryOperator(body=env.inner().visit_Expr(body), kind~, try_loc~, loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_map(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Map(
   env,
   elems~,
   loc~,
 ) {
   Expr::Map(
-    elems=elems.map(elem => { ..elem, expr: env.inner().visit_expr(elem.expr) }),
+    elems=elems.map(elem => { ..elem, expr: env.inner().visit_Expr(elem.expr) }),
     loc~,
   )
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_group(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Group(
   env,
   expr~,
   group~,
   loc~,
 ) {
-  Expr::Group(expr=env.inner().visit_expr(expr), group~, loc~)
+  Expr::Group(expr=env.inner().visit_Expr(expr), group~, loc~)
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_static_assert(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_StaticAssert(
   env,
   asserts~,
   body~,
 ) {
-  Expr::StaticAssert(asserts~, body=env.inner().visit_expr(body))
+  Expr::StaticAssert(asserts~, body=env.inner().visit_Expr(body))
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_expr(
+pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr(
   env,
   expr,
 ) {
   match expr {
     Apply(func~, args~, attr~, loc~) =>
-      env.inner().visit_apply(func~, args~, attr~, loc~)
+      env.inner().visit_Expr_Apply(func~, args~, attr~, loc~)
     Infix(op~, lhs~, rhs~, loc~) =>
-      env.inner().visit_infix(op~, lhs~, rhs~, loc~)
-    Unary(op~, expr~, loc~) => env.inner().visit_unary(op~, expr~, loc~)
-    Array(exprs~, loc~) => env.inner().visit_array(exprs~, loc~)
-    ArraySpread(elems~, loc~) => env.inner().visit_array_spread(elems~, loc~)
+      env.inner().visit_Expr_Infix(op~, lhs~, rhs~, loc~)
+    Unary(op~, expr~, loc~) => env.inner().visit_Expr_Unary(op~, expr~, loc~)
+    Array(exprs~, loc~) => env.inner().visit_Expr_Array(exprs~, loc~)
+    ArraySpread(elems~, loc~) =>
+      env.inner().visit_Expr_ArraySpread(elems~, loc~)
     ArrayGet(array~, index~, loc~) =>
-      env.inner().visit_array_get(array~, index~, loc~)
+      env.inner().visit_Expr_ArrayGet(array~, index~, loc~)
     ArrayGetSlice(array~, start_index~, end_index~, index_loc~, loc~) =>
       env
       .inner()
-      .visit_array_get_slice(array~, start_index~, end_index~, index_loc~, loc~)
+      .visit_Expr_ArrayGetSlice(
+        array~,
+        start_index~,
+        end_index~,
+        index_loc~,
+        loc~,
+      )
     ArraySet(array~, index~, value~, loc~) =>
-      env.inner().visit_array_set(array~, index~, value~, loc~)
+      env.inner().visit_Expr_ArraySet(array~, index~, value~, loc~)
     ArrayAugmentedSet(op~, array~, index~, value~, loc~) =>
-      env.inner().visit_array_augmented_set(op~, array~, index~, value~, loc~)
-    Constant(c~, loc~) => env.inner().visit_constant(c~, loc~)
+      env
+      .inner()
+      .visit_Expr_ArrayAugmentedSet(op~, array~, index~, value~, loc~)
+    Constant(c~, loc~) => env.inner().visit_Expr_Constant(c~, loc~)
     MultilineString(elems~, loc~) =>
-      env.inner().visit_multiline_string(elems~, loc~)
-    Interp(elems~, loc~) => env.inner().visit_interp(elems~, loc~)
+      env.inner().visit_Expr_MultilineString(elems~, loc~)
+    Interp(elems~, loc~) => env.inner().visit_Expr_Interp(elems~, loc~)
     Constraint(expr~, ty~, loc~) =>
-      env.inner().visit_constraint(expr~, ty~, loc~)
-    Constr(constr~, loc~) => env.inner().visit_constr(constr~, loc~)
+      env.inner().visit_Expr_Constraint(expr~, ty~, loc~)
+    Constr(constr~, loc~) => env.inner().visit_Expr_Constr(constr~, loc~)
     While(loop_cond~, loop_body~, while_else~, label~, loc~) =>
-      env.inner().visit_while(loop_cond~, loop_body~, while_else~, label~, loc~)
-    Function(func~, loc~) => env.inner().visit_function(func~, loc~)
-    Ident(id~, loc~) => env.inner().visit_ident(id~, loc~)
+      env
+      .inner()
+      .visit_Expr_While(loop_cond~, loop_body~, while_else~, label~, loc~)
+    Function(func~, loc~) => env.inner().visit_Expr_Function(func~, loc~)
+    Ident(id~, loc~) => env.inner().visit_Expr_Ident(id~, loc~)
     If(cond~, ifso~, ifnot~, loc~) =>
-      env.inner().visit_if(cond~, ifso~, ifnot~, loc~)
+      env.inner().visit_Expr_If(cond~, ifso~, ifnot~, loc~)
     Guard(cond~, otherwise~, body~, loc~) =>
-      env.inner().visit_guard(cond~, otherwise~, body~, loc~)
-    Is(expr~, pat~, loc~) => env.inner().visit_is(expr~, pat~, loc~)
-    Defer(expr~, body~, loc~) => env.inner().visit_defer(expr~, body~, loc~)
+      env.inner().visit_Expr_Guard(cond~, otherwise~, body~, loc~)
+    Is(expr~, pat~, loc~) => env.inner().visit_Expr_Is(expr~, pat~, loc~)
+    Defer(expr~, body~, loc~) =>
+      env.inner().visit_Expr_Defer(expr~, body~, loc~)
     LetFn(name~, func~, body~, loc~) =>
-      env.inner().visit_let_fn(name~, func~, body~, loc~)
+      env.inner().visit_Expr_LetFn(name~, func~, body~, loc~)
     LetRec(bindings~, body~, loc~) =>
-      env.inner().visit_let_rec(bindings~, body~, loc~)
+      env.inner().visit_Expr_LetRec(bindings~, body~, loc~)
     LetAnd(bindings~, body~, loc~) =>
-      env.inner().visit_let_and(bindings~, body~, loc~)
+      env.inner().visit_Expr_LetAnd(bindings~, body~, loc~)
     Let(pattern~, expr~, body~, loc~) =>
-      env.inner().visit_let(pattern~, expr~, body~, loc~)
+      env.inner().visit_Expr_Let(pattern~, expr~, body~, loc~)
     Sequence(exprs~, last_expr~, loc~) =>
-      env.inner().visit_sequence(exprs~, last_expr~, loc~)
-    Tuple(exprs~, loc~) => env.inner().visit_tuple(exprs~, loc~)
+      env.inner().visit_Expr_Sequence(exprs~, last_expr~, loc~)
+    Tuple(exprs~, loc~) => env.inner().visit_Expr_Tuple(exprs~, loc~)
     Record(type_name~, fields~, trailing~, loc~) =>
-      env.inner().visit_record(type_name~, fields~, trailing~, loc~)
+      env.inner().visit_Expr_Record(type_name~, fields~, trailing~, loc~)
     RecordUpdate(type_name~, record~, fields~, loc~) =>
-      env.inner().visit_record_update(type_name~, record~, fields~, loc~)
+      env.inner().visit_Expr_RecordUpdate(type_name~, record~, fields~, loc~)
     Field(record~, accessor~, loc~) =>
-      env.inner().visit_field(record~, accessor~, loc~)
+      env.inner().visit_Expr_Field(record~, accessor~, loc~)
     Method(type_name~, method_name~, loc~) =>
-      env.inner().visit_method(type_name~, method_name~, loc~)
+      env.inner().visit_Expr_Method(type_name~, method_name~, loc~)
     DotApply(self~, method_name~, args~, return_self~, attr~, loc~) =>
       env
       .inner()
-      .visit_dot_apply(self~, method_name~, args~, return_self~, attr~, loc~)
-    As(expr~, trait_~, loc~) => env.inner().visit_as(expr~, trait_~, loc~)
+      .visit_Expr_DotApply(
+        self~,
+        method_name~,
+        args~,
+        return_self~,
+        attr~,
+        loc~,
+      )
+    As(expr~, trait_~, loc~) => env.inner().visit_Expr_As(expr~, trait_~, loc~)
     Mutate(record~, accessor~, field~, augmented_by~, loc~) =>
-      env.inner().visit_mutate(record~, accessor~, field~, augmented_by~, loc~)
+      env
+      .inner()
+      .visit_Expr_Mutate(record~, accessor~, field~, augmented_by~, loc~)
     Match(expr~, cases~, match_loc~, using_~, loc~) =>
-      env.inner().visit_match(expr~, cases~, match_loc~, using_~, loc~)
+      env.inner().visit_Expr_Match(expr~, cases~, match_loc~, using_~, loc~)
     LetMut(binder~, ty~, expr~, body~, loc~) =>
-      env.inner().visit_let_mut(binder~, ty~, expr~, body~, loc~)
-    Pipe(lhs~, rhs~, loc~) => env.inner().visit_pipe(lhs~, rhs~, loc~)
+      env.inner().visit_Expr_LetMut(binder~, ty~, expr~, body~, loc~)
+    Pipe(lhs~, rhs~, loc~) => env.inner().visit_Expr_Pipe(lhs~, rhs~, loc~)
     Assign(var_~, expr~, augmented_by~, loc~) =>
-      env.inner().visit_assign(var_~, expr~, augmented_by~, loc~)
-    Hole(loc~, kind~) => env.inner().visit_hole(loc~, kind~)
-    Return(return_value~, loc~) => env.inner().visit_return(return_value~, loc~)
-    Raise(err_value~, loc~) => env.inner().visit_raise(err_value~, loc~)
-    Unit(loc~, faked~) => env.inner().visit_unit(loc~, faked~)
-    Break(arg~, label~, loc~) => env.inner().visit_break(arg~, label~, loc~)
+      env.inner().visit_Expr_Assign(var_~, expr~, augmented_by~, loc~)
+    Hole(loc~, kind~) => env.inner().visit_Expr_Hole(loc~, kind~)
+    Return(return_value~, loc~) =>
+      env.inner().visit_Expr_Return(return_value~, loc~)
+    Raise(err_value~, loc~) => env.inner().visit_Expr_Raise(err_value~, loc~)
+    Unit(loc~, faked~) => env.inner().visit_Expr_Unit(loc~, faked~)
+    Break(arg~, label~, loc~) =>
+      env.inner().visit_Expr_Break(arg~, label~, loc~)
     Continue(args~, label~, loc~) =>
-      env.inner().visit_continue(args~, label~, loc~)
+      env.inner().visit_Expr_Continue(args~, label~, loc~)
     Loop(args~, body~, label~, loop_loc~, loc~) =>
-      env.inner().visit_loop(args~, body~, label~, loop_loc~, loc~)
+      env.inner().visit_Expr_Loop(args~, body~, label~, loop_loc~, loc~)
     For(binders~, condition~, continue_block~, body~, for_else~, label~, loc~) =>
       env
       .inner()
-      .visit_for(
+      .visit_Expr_For(
         binders~,
         condition~,
         continue_block~,
@@ -2326,7 +2412,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_exp
     ForEach(binders~, expr~, body~, else_block~, label~, loc~) =>
       env
       .inner()
-      .visit_for_each(binders~, expr~, body~, else_block~, label~, loc~)
+      .visit_Expr_ForEach(binders~, expr~, body~, else_block~, label~, loc~)
     Try(
       body~,
       catch_~,
@@ -2340,7 +2426,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_exp
     ) =>
       env
       .inner()
-      .visit_try(
+      .visit_Expr_Try(
         body~,
         catch_~,
         catch_all~,
@@ -2352,10 +2438,11 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_exp
         loc~,
       )
     TryOperator(body~, kind~, try_loc~, loc~) =>
-      env.inner().visit_try_operator(body~, kind~, try_loc~, loc~)
-    Map(elems~, loc~) => env.inner().visit_map(elems~, loc~)
-    Group(expr~, group~, loc~) => env.inner().visit_group(expr~, group~, loc~)
+      env.inner().visit_Expr_TryOperator(body~, kind~, try_loc~, loc~)
+    Map(elems~, loc~) => env.inner().visit_Expr_Map(elems~, loc~)
+    Group(expr~, group~, loc~) =>
+      env.inner().visit_Expr_Group(expr~, group~, loc~)
     StaticAssert(asserts~, body~) =>
-      env.inner().visit_static_assert(asserts~, body~)
+      env.inner().visit_Expr_StaticAssert(asserts~, body~)
   }
 }
