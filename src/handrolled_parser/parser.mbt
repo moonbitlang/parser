@@ -2937,44 +2937,53 @@ fn State::parse_tuple_or_constraint(self : Self) -> @syntax.Expr {
     return Hole(loc~, kind=Synthesized)
   }
   let spos = self.peek_spos()
-  self.surround(left=TK_LPAREN, right=TK_RPAREN, fn(state) {
-    let first = state.optional(first_expr, State::parse_expr)
-    match first {
-      None => {
-        let loc = state.loc_start_with(spos)
-        @syntax.Expr::Unit(loc~, faked=false)
-      }
-      Some(first) =>
-        match state.peek_token() {
-          COLON => {
-            state.expect_token(TK_COLON)
-            let ty = state.parse_type()
-            let loc = state.loc_start_with(spos)
-            Constraint(expr=first, ty~, loc~)
-          }
-          COMMA => {
-            state.expect_token(TK_COMMA)
-            let (rest, _) = state.delimited_with_follow(
-              delim=TK_COMMA,
-              follow_set=[TK_RPAREN],
-              State::parse_expr,
-            )
-            let loc = state.loc_start_with(spos)
-            if rest.length() == 0 {
-              Group(expr=first, group=Paren, loc~)
-            } else {
-              let rest = @list.from_array(rest)
-              Tuple(exprs=rest.add(first), loc~)
-            }
-          }
-          RPAREN => {
-            let loc = state.loc_start_with(spos)
-            Group(expr=first, group=Paren, loc~)
-          }
-          _ => first
-        }
+  self.expect_token(TK_LPAREN)
+  self.push_sync(TK_RPAREN)
+  let state = self
+  let first = state.optional(first_expr, State::parse_expr)
+  match first {
+    None => {
+      self.expect_token(TK_RPAREN)
+      self.pop_sync(TK_RPAREN)
+      let loc = state.loc_start_with(spos)
+      @syntax.Expr::Unit(loc~, faked=false)
     }
-  })
+    Some(first) =>
+      match state.peek_token() {
+        COLON => {
+          state.expect_token(TK_COLON)
+          let ty = state.parse_type()
+          self.expect_token(TK_RPAREN)
+          self.pop_sync(TK_RPAREN)
+          let loc = state.loc_start_with(spos)
+          Constraint(expr=first, ty~, loc~)
+        }
+        COMMA => {
+          state.expect_token(TK_COMMA)
+          let (rest, _) = state.delimited_with_follow(
+            delim=TK_COMMA,
+            follow_set=[TK_RPAREN],
+            State::parse_expr,
+          )
+          self.expect_token(TK_RPAREN)
+          self.pop_sync(TK_RPAREN)
+          let loc = state.loc_start_with(spos)
+          if rest.length() == 0 {
+            Group(expr=first, group=Paren, loc~)
+          } else {
+            let rest = @list.from_array(rest)
+            Tuple(exprs=rest.add(first), loc~)
+          }
+        }
+        RPAREN => {
+          self.expect_token(TK_RPAREN)
+          self.pop_sync(TK_RPAREN)
+          let loc = state.loc_start_with(spos)
+          Group(expr=first, group=Paren, loc~)
+        }
+        _ => first //TODO: error recovery and add group node
+      }
+  }
 }
 
 ///|
