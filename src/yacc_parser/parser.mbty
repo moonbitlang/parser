@@ -1,5 +1,7 @@
 %derive<Show> Token
 %derive<Eq> TokenKind
+%derive<Hash> TokenKind
+%derive<Compare> TokenKind
 %position<Position>
 %derive<Show> ParseError
 
