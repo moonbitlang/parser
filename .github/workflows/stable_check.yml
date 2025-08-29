@@ -51,7 +51,6 @@ jobs:
 
       - name: moon test
         run: |
-          moon test --target wasm
-          moon test --target wasm-gc
+          moon test --target all
           moon test --target native
 
