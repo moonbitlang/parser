@@ -7,7 +7,7 @@ pub(all) struct Position {
 } derive(Show, Hash, ToJson)
 
 ///|
-pub impl Eq for Position with op_equal(self, other) {
+pub impl Eq for Position with equal(self, other) {
   self.fname == other.fname && self.cnum == other.cnum
 }
 

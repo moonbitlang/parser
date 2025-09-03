@@ -1,5 +1,5 @@
 ///|
-let keyword_table : @hashmap.T[String, Token] = [
+let keyword_table : @hashmap.HashMap[String, Token] = [
     ("as", AS),
     ("else", ELSE),
     ("extern", EXTERN),
@@ -51,7 +51,7 @@ let keyword_table : @hashmap.T[String, Token] = [
   |> @hashmap.from_array()
 
 ///|
-let reserved_keyword_table : @hashset.T[String] = [
+let reserved_keyword_table : @hashset.HashSet[String] = [
     "module", "move", "ref", "static", "super", "unsafe", "use", "where", "await",
     "dyn", "abstract", "do", "final", "macro", "override", "typeof", "virtual", "yield",
     "local", "method", "alias", "assert",
