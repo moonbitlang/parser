@@ -4,7 +4,7 @@ target/
 .moonagent
 *.ml
 node_modules
-src/parsing/mbti_parser/mbti_parser.mbt.map.json
-src/parsing/mbti_parser/mbti_parser.mbt
-src/parsing/parser/parser.mbt.map.json
-src/parsing/parser/parser.mbt
+src/mbti_parser/mbti_parser.mbt.map.json
+src/mbti_parser/mbti_parser.mbt
+src/yacc_parser/parser.mbt.map.json
+src/yacc_parser/parser.mbt
