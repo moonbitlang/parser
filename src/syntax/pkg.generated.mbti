@@ -457,7 +457,7 @@ pub(all) enum InterpolationComponent {
 
 pub struct IterVisitorBase[T](T)
 fn[T] IterVisitorBase::inner(Self[T]) -> T
-impl[T : ImplIterVisitor] ImplIterVisitor for IterVisitorBase[T]
+impl[T : IterVisitor] IterVisitor for IterVisitorBase[T]
 
 pub(all) struct Label {
   name : String
@@ -499,7 +499,7 @@ impl ToJson for MapPatElem
 
 pub(all) struct MapVisitorBase[T](T)
 fn[T] MapVisitorBase::inner(Self[T]) -> T
-impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T]
+impl[T : MapVisitor] MapVisitor for MapVisitorBase[T]
 
 pub(all) struct MultiArgCase {
   patterns : @list.List[Pattern]
@@ -675,7 +675,7 @@ pub typealias @list.List[Parameter] as Parameters
 pub typealias (String, @basic.Location)? as TestName
 
 // Traits
-pub(open) trait ImplIterVisitor {
+pub(open) trait IterVisitor {
   base(Self) -> IterVisitorBase[Self] = _
   visit_Visibility(Self, Visibility) -> Unit = _
   visit_Visibility_Pub(Self, attr~ : String?, loc~ : @basic.Location) -> Unit = _
@@ -873,7 +873,7 @@ pub(open) trait ImplIterVisitor {
   visit_Expr_StaticAssert(Self, asserts~ : @list.List[StaticAssertion], body~ : Expr) -> Unit = _
 }
 
-pub(open) trait ImplMapVisitor {
+pub(open) trait MapVisitor {
   base(Self) -> MapVisitorBase[Self] = _
   visit_Visibility(Self, Visibility) -> Visibility = _
   visit_Visibility_Pub(Self, attr~ : String?, loc~ : @basic.Location) -> Visibility = _

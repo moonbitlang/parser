@@ -1,5 +1,5 @@
 ///|
-pub(open) trait ImplMapVisitor {
+pub(open) trait MapVisitor {
   base(Self) -> MapVisitorBase[Self] = _
 
   // Visibility
@@ -679,17 +679,17 @@ pub(open) trait ImplMapVisitor {
 }
 
 ///|
-impl ImplMapVisitor with base(self) -> MapVisitorBase[Self] {
+impl MapVisitor with base(self) -> MapVisitorBase[Self] {
   MapVisitorBase::MapVisitorBase(self)
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl(env, impl_) {
+impl MapVisitor with visit_Impl(env, impl_) {
   MapVisitorBase::visit_Impl(env, impl_)
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopExpr(
+impl MapVisitor with visit_Impl_TopExpr(
   env,
   expr~,
   is_main~,
@@ -700,7 +700,7 @@ impl ImplMapVisitor with visit_Impl_TopExpr(
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopTest(
+impl MapVisitor with visit_Impl_TopTest(
   env,
   expr~,
   name~,
@@ -723,17 +723,17 @@ impl ImplMapVisitor with visit_Impl_TopTest(
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopTypeDef(env, type_decl) {
+impl MapVisitor with visit_Impl_TopTypeDef(env, type_decl) {
   MapVisitorBase::visit_Impl_TopTypeDef(env, type_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopFuncDef(env, fun_decl~, decl_body~, loc~) {
+impl MapVisitor with visit_Impl_TopFuncDef(env, fun_decl~, decl_body~, loc~) {
   MapVisitorBase::visit_Impl_TopFuncDef(env, fun_decl~, decl_body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopFuncAlias(
+impl MapVisitor with visit_Impl_TopFuncAlias(
   env,
   pkg~,
   type_name~,
@@ -758,7 +758,7 @@ impl ImplMapVisitor with visit_Impl_TopFuncAlias(
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopLetDef(
+impl MapVisitor with visit_Impl_TopLetDef(
   env,
   binder~,
   ty~,
@@ -783,12 +783,12 @@ impl ImplMapVisitor with visit_Impl_TopLetDef(
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopTrait(env, trait_decl) {
+impl MapVisitor with visit_Impl_TopTrait(env, trait_decl) {
   MapVisitorBase::visit_Impl_TopTrait(env, trait_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopBatchTypeAlias(
+impl MapVisitor with visit_Impl_TopBatchTypeAlias(
   env,
   pkg~,
   targets~,
@@ -811,7 +811,7 @@ impl ImplMapVisitor with visit_Impl_TopBatchTypeAlias(
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopBatchTraitAlias(
+impl MapVisitor with visit_Impl_TopBatchTraitAlias(
   env,
   pkg~,
   targets~,
@@ -834,7 +834,7 @@ impl ImplMapVisitor with visit_Impl_TopBatchTraitAlias(
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopImpl(
+impl MapVisitor with visit_Impl_TopImpl(
   env,
   self_ty~,
   trait_~,
@@ -869,7 +869,7 @@ impl ImplMapVisitor with visit_Impl_TopImpl(
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopView(
+impl MapVisitor with visit_Impl_TopView(
   env,
   quantifiers~,
   source_ty~,
@@ -904,7 +904,7 @@ impl ImplMapVisitor with visit_Impl_TopView(
 }
 
 ///|
-impl ImplMapVisitor with visit_Impl_TopImplRelation(
+impl MapVisitor with visit_Impl_TopImplRelation(
   env,
   self_ty~,
   trait_~,
@@ -927,42 +927,42 @@ impl ImplMapVisitor with visit_Impl_TopImplRelation(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr(env, expr) {
+impl MapVisitor with visit_Expr(env, expr) {
   MapVisitorBase::visit_Expr(env, expr)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Apply(env, func~, args~, attr~, loc~) {
+impl MapVisitor with visit_Expr_Apply(env, func~, args~, attr~, loc~) {
   MapVisitorBase::visit_Expr_Apply(env, func~, args~, attr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Infix(env, op~, lhs~, rhs~, loc~) {
+impl MapVisitor with visit_Expr_Infix(env, op~, lhs~, rhs~, loc~) {
   MapVisitorBase::visit_Expr_Infix(env, op~, lhs~, rhs~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Unary(env, op~, expr~, loc~) {
+impl MapVisitor with visit_Expr_Unary(env, op~, expr~, loc~) {
   MapVisitorBase::visit_Expr_Unary(env, op~, expr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Array(env, exprs~, loc~) {
+impl MapVisitor with visit_Expr_Array(env, exprs~, loc~) {
   MapVisitorBase::visit_Expr_Array(env, exprs~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_ArraySpread(env, elems~, loc~) {
+impl MapVisitor with visit_Expr_ArraySpread(env, elems~, loc~) {
   MapVisitorBase::visit_Expr_ArraySpread(env, elems~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_ArrayGet(env, array~, index~, loc~) {
+impl MapVisitor with visit_Expr_ArrayGet(env, array~, index~, loc~) {
   MapVisitorBase::visit_Expr_ArrayGet(env, array~, index~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_ArrayGetSlice(
+impl MapVisitor with visit_Expr_ArrayGetSlice(
   env,
   array~,
   start_index~,
@@ -981,12 +981,12 @@ impl ImplMapVisitor with visit_Expr_ArrayGetSlice(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_ArraySet(env, array~, index~, value~, loc~) {
+impl MapVisitor with visit_Expr_ArraySet(env, array~, index~, value~, loc~) {
   MapVisitorBase::visit_Expr_ArraySet(env, array~, index~, value~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_ArrayAugmentedSet(
+impl MapVisitor with visit_Expr_ArrayAugmentedSet(
   env,
   op~,
   array~,
@@ -1005,32 +1005,32 @@ impl ImplMapVisitor with visit_Expr_ArrayAugmentedSet(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Constant(env, c~, loc~) {
+impl MapVisitor with visit_Expr_Constant(env, c~, loc~) {
   MapVisitorBase::visit_Expr_Constant(env, c~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_MultilineString(env, elems~, loc~) {
+impl MapVisitor with visit_Expr_MultilineString(env, elems~, loc~) {
   MapVisitorBase::visit_Expr_MultilineString(env, elems~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Interp(env, elems~, loc~) {
+impl MapVisitor with visit_Expr_Interp(env, elems~, loc~) {
   MapVisitorBase::visit_Expr_Interp(env, elems~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Constraint(env, expr~, ty~, loc~) {
+impl MapVisitor with visit_Expr_Constraint(env, expr~, ty~, loc~) {
   MapVisitorBase::visit_Expr_Constraint(env, expr~, ty~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Constr(env, constr~, loc~) {
+impl MapVisitor with visit_Expr_Constr(env, constr~, loc~) {
   MapVisitorBase::visit_Expr_Constr(env, constr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_While(
+impl MapVisitor with visit_Expr_While(
   env,
   loop_cond~,
   loop_body~,
@@ -1049,67 +1049,67 @@ impl ImplMapVisitor with visit_Expr_While(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Function(env, func~, loc~) {
+impl MapVisitor with visit_Expr_Function(env, func~, loc~) {
   MapVisitorBase::visit_Expr_Function(env, func~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Ident(env, id~, loc~) {
+impl MapVisitor with visit_Expr_Ident(env, id~, loc~) {
   MapVisitorBase::visit_Expr_Ident(env, id~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_If(env, cond~, ifso~, ifnot~, loc~) {
+impl MapVisitor with visit_Expr_If(env, cond~, ifso~, ifnot~, loc~) {
   MapVisitorBase::visit_Expr_If(env, cond~, ifso~, ifnot~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Guard(env, cond~, otherwise~, body~, loc~) {
+impl MapVisitor with visit_Expr_Guard(env, cond~, otherwise~, body~, loc~) {
   MapVisitorBase::visit_Expr_Guard(env, cond~, otherwise~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Is(env, expr~, pat~, loc~) {
+impl MapVisitor with visit_Expr_Is(env, expr~, pat~, loc~) {
   MapVisitorBase::visit_Expr_Is(env, expr~, pat~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Defer(env, expr~, body~, loc~) {
+impl MapVisitor with visit_Expr_Defer(env, expr~, body~, loc~) {
   MapVisitorBase::visit_Expr_Defer(env, expr~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_LetFn(env, name~, func~, body~, loc~) {
+impl MapVisitor with visit_Expr_LetFn(env, name~, func~, body~, loc~) {
   MapVisitorBase::visit_Expr_LetFn(env, name~, func~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_LetRec(env, bindings~, body~, loc~) {
+impl MapVisitor with visit_Expr_LetRec(env, bindings~, body~, loc~) {
   MapVisitorBase::visit_Expr_LetRec(env, bindings~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_LetAnd(env, bindings~, body~, loc~) {
+impl MapVisitor with visit_Expr_LetAnd(env, bindings~, body~, loc~) {
   MapVisitorBase::visit_Expr_LetAnd(env, bindings~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Let(env, pattern~, expr~, body~, loc~) {
+impl MapVisitor with visit_Expr_Let(env, pattern~, expr~, body~, loc~) {
   MapVisitorBase::visit_Expr_Let(env, pattern~, expr~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Sequence(env, exprs~, last_expr~, loc~) {
+impl MapVisitor with visit_Expr_Sequence(env, exprs~, last_expr~, loc~) {
   MapVisitorBase::visit_Expr_Sequence(env, exprs~, last_expr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Tuple(env, exprs~, loc~) {
+impl MapVisitor with visit_Expr_Tuple(env, exprs~, loc~) {
   MapVisitorBase::visit_Expr_Tuple(env, exprs~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Record(
+impl MapVisitor with visit_Expr_Record(
   env,
   type_name~,
   fields~,
@@ -1120,7 +1120,7 @@ impl ImplMapVisitor with visit_Expr_Record(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_RecordUpdate(
+impl MapVisitor with visit_Expr_RecordUpdate(
   env,
   type_name~,
   record~,
@@ -1137,17 +1137,17 @@ impl ImplMapVisitor with visit_Expr_RecordUpdate(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Field(env, record~, accessor~, loc~) {
+impl MapVisitor with visit_Expr_Field(env, record~, accessor~, loc~) {
   MapVisitorBase::visit_Expr_Field(env, record~, accessor~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Method(env, type_name~, method_name~, loc~) {
+impl MapVisitor with visit_Expr_Method(env, type_name~, method_name~, loc~) {
   MapVisitorBase::visit_Expr_Method(env, type_name~, method_name~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_DotApply(
+impl MapVisitor with visit_Expr_DotApply(
   env,
   self~,
   method_name~,
@@ -1168,12 +1168,12 @@ impl ImplMapVisitor with visit_Expr_DotApply(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_As(env, expr~, trait_~, loc~) {
+impl MapVisitor with visit_Expr_As(env, expr~, trait_~, loc~) {
   MapVisitorBase::visit_Expr_As(env, expr~, trait_~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Mutate(
+impl MapVisitor with visit_Expr_Mutate(
   env,
   record~,
   accessor~,
@@ -1192,7 +1192,7 @@ impl ImplMapVisitor with visit_Expr_Mutate(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Match(
+impl MapVisitor with visit_Expr_Match(
   env,
   expr~,
   cases~,
@@ -1211,77 +1211,57 @@ impl ImplMapVisitor with visit_Expr_Match(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_LetMut(
-  env,
-  binder~,
-  ty~,
-  expr~,
-  body~,
-  loc~,
-) {
+impl MapVisitor with visit_Expr_LetMut(env, binder~, ty~, expr~, body~, loc~) {
   MapVisitorBase::visit_Expr_LetMut(env, binder~, ty~, expr~, body~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Pipe(env, lhs~, rhs~, loc~) {
+impl MapVisitor with visit_Expr_Pipe(env, lhs~, rhs~, loc~) {
   MapVisitorBase::visit_Expr_Pipe(env, lhs~, rhs~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Assign(
-  env,
-  var_~,
-  expr~,
-  augmented_by~,
-  loc~,
-) {
+impl MapVisitor with visit_Expr_Assign(env, var_~, expr~, augmented_by~, loc~) {
   MapVisitorBase::visit_Expr_Assign(env, var_~, expr~, augmented_by~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Hole(env, loc~, kind~) {
+impl MapVisitor with visit_Expr_Hole(env, loc~, kind~) {
   MapVisitorBase::visit_Expr_Hole(env, loc~, kind~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Return(env, return_value~, loc~) {
+impl MapVisitor with visit_Expr_Return(env, return_value~, loc~) {
   MapVisitorBase::visit_Expr_Return(env, return_value~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Raise(env, err_value~, loc~) {
+impl MapVisitor with visit_Expr_Raise(env, err_value~, loc~) {
   MapVisitorBase::visit_Expr_Raise(env, err_value~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Unit(env, loc~, faked~) {
+impl MapVisitor with visit_Expr_Unit(env, loc~, faked~) {
   MapVisitorBase::visit_Expr_Unit(env, loc~, faked~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Break(env, arg~, label~, loc~) {
+impl MapVisitor with visit_Expr_Break(env, arg~, label~, loc~) {
   MapVisitorBase::visit_Expr_Break(env, arg~, label~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Continue(env, args~, label~, loc~) {
+impl MapVisitor with visit_Expr_Continue(env, args~, label~, loc~) {
   MapVisitorBase::visit_Expr_Continue(env, args~, label~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Loop(
-  env,
-  args~,
-  body~,
-  label~,
-  loop_loc~,
-  loc~,
-) {
+impl MapVisitor with visit_Expr_Loop(env, args~, body~, label~, loop_loc~, loc~) {
   MapVisitorBase::visit_Expr_Loop(env, args~, body~, label~, loop_loc~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_For(
+impl MapVisitor with visit_Expr_For(
   env,
   binders~,
   condition~,
@@ -1304,7 +1284,7 @@ impl ImplMapVisitor with visit_Expr_For(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_ForEach(
+impl MapVisitor with visit_Expr_ForEach(
   env,
   binders~,
   expr~,
@@ -1325,7 +1305,7 @@ impl ImplMapVisitor with visit_Expr_ForEach(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Try(
+impl MapVisitor with visit_Expr_Try(
   env,
   body~,
   catch_~,
@@ -1352,240 +1332,227 @@ impl ImplMapVisitor with visit_Expr_Try(
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_TryOperator(
-  env,
-  body~,
-  kind~,
-  try_loc~,
-  loc~,
-) {
+impl MapVisitor with visit_Expr_TryOperator(env, body~, kind~, try_loc~, loc~) {
   MapVisitorBase::visit_Expr_TryOperator(env, body~, kind~, try_loc~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Map(env, elems~, loc~) {
+impl MapVisitor with visit_Expr_Map(env, elems~, loc~) {
   MapVisitorBase::visit_Expr_Map(env, elems~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_Group(env, expr~, group~, loc~) {
+impl MapVisitor with visit_Expr_Group(env, expr~, group~, loc~) {
   MapVisitorBase::visit_Expr_Group(env, expr~, group~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Expr_StaticAssert(env, asserts~, body~) {
+impl MapVisitor with visit_Expr_StaticAssert(env, asserts~, body~) {
   MapVisitorBase::visit_Expr_StaticAssert(env, asserts~, body~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Visibility(env, visibility) {
+impl MapVisitor with visit_Visibility(env, visibility) {
   MapVisitorBase::visit_Visibility(env, visibility)
 }
 
 ///|
-impl ImplMapVisitor with visit_Visibility_Pub(env, attr~, loc~) {
+impl MapVisitor with visit_Visibility_Pub(env, attr~, loc~) {
   MapVisitorBase::visit_Visibility_Pub(env, attr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Visibility_Priv(env, loc~) {
+impl MapVisitor with visit_Visibility_Priv(env, loc~) {
   MapVisitorBase::visit_Visibility_Priv(env, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Constant(env, constant) {
+impl MapVisitor with visit_Constant(env, constant) {
   MapVisitorBase::visit_Constant(env, constant)
 }
 
 ///|
-impl ImplMapVisitor with visit_Label(env, label) {
+impl MapVisitor with visit_Label(env, label) {
   MapVisitorBase::visit_Label(env, label)
 }
 
 ///|
-impl ImplMapVisitor with visit_ConstrName(env, constr_name) {
+impl MapVisitor with visit_ConstrName(env, constr_name) {
   MapVisitorBase::visit_ConstrName(env, constr_name)
 }
 
 ///|
-impl ImplMapVisitor with visit_LongIdent(env, long_ident) {
+impl MapVisitor with visit_LongIdent(env, long_ident) {
   MapVisitorBase::visit_LongIdent(env, long_ident)
 }
 
 ///|
-impl ImplMapVisitor with visit_LongIdent_Ident(env, name~) {
+impl MapVisitor with visit_LongIdent_Ident(env, name~) {
   MapVisitorBase::visit_LongIdent_Ident(env, name~)
 }
 
 ///|
-impl ImplMapVisitor with visit_LongIdent_Dot(env, pkg~, id~) {
+impl MapVisitor with visit_LongIdent_Dot(env, pkg~, id~) {
   MapVisitorBase::visit_LongIdent_Dot(env, pkg~, id~)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeName(env, type_name) {
+impl MapVisitor with visit_TypeName(env, type_name) {
   MapVisitorBase::visit_TypeName(env, type_name)
 }
 
 ///|
-impl ImplMapVisitor with visit_ConstrId(env, constr_id) {
+impl MapVisitor with visit_ConstrId(env, constr_id) {
   MapVisitorBase::visit_ConstrId(env, constr_id)
 }
 
 ///|
-impl ImplMapVisitor with visit_Type(env, type_) {
+impl MapVisitor with visit_Type(env, type_) {
   MapVisitorBase::visit_Type(env, type_)
 }
 
 ///|
-impl ImplMapVisitor with visit_Type_Any(env, loc~) {
+impl MapVisitor with visit_Type_Any(env, loc~) {
   MapVisitorBase::visit_Type_Any(env, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Type_Arrow(
-  env,
-  args~,
-  res~,
-  err~,
-  is_async~,
-  loc~,
-) {
+impl MapVisitor with visit_Type_Arrow(env, args~, res~, err~, is_async~, loc~) {
   MapVisitorBase::visit_Type_Arrow(env, args~, res~, err~, is_async~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Type_Tuple(env, tys~, loc~) {
+impl MapVisitor with visit_Type_Tuple(env, tys~, loc~) {
   MapVisitorBase::visit_Type_Tuple(env, tys~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Type_Name(env, constr_id~, tys~, loc~) {
+impl MapVisitor with visit_Type_Name(env, constr_id~, tys~, loc~) {
   MapVisitorBase::visit_Type_Name(env, constr_id~, tys~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Type_Option(env, ty~, loc~, question_loc~) {
+impl MapVisitor with visit_Type_Option(env, ty~, loc~, question_loc~) {
   MapVisitorBase::visit_Type_Option(env, ty~, loc~, question_loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Type_Object(env, constr_id) {
+impl MapVisitor with visit_Type_Object(env, constr_id) {
   MapVisitorBase::visit_Type_Object(env, constr_id)
 }
 
 ///|
-impl ImplMapVisitor with visit_ErrorType(env, error_type) {
+impl MapVisitor with visit_ErrorType(env, error_type) {
   MapVisitorBase::visit_ErrorType(env, error_type)
 }
 
 ///|
-impl ImplMapVisitor with visit_ErrorType_ErrorType(env, ty~) {
+impl MapVisitor with visit_ErrorType_ErrorType(env, ty~) {
   MapVisitorBase::visit_ErrorType_ErrorType(env, ty~)
 }
 
 ///|
-impl ImplMapVisitor with visit_ErrorType_DefaultErrorType(env, loc~) {
+impl MapVisitor with visit_ErrorType_DefaultErrorType(env, loc~) {
   MapVisitorBase::visit_ErrorType_DefaultErrorType(env, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_ErrorType_MaybeError(env, ty~) {
+impl MapVisitor with visit_ErrorType_MaybeError(env, ty~) {
   MapVisitorBase::visit_ErrorType_MaybeError(env, ty~)
 }
 
 ///|
-impl ImplMapVisitor with visit_ConstrParam(env, constr_param) {
+impl MapVisitor with visit_ConstrParam(env, constr_param) {
   MapVisitorBase::visit_ConstrParam(env, constr_param)
 }
 
 ///|
-impl ImplMapVisitor with visit_ConstrDecl(env, constr_decl) {
+impl MapVisitor with visit_ConstrDecl(env, constr_decl) {
   MapVisitorBase::visit_ConstrDecl(env, constr_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_ExceptionDecl(env, exception_decl) {
+impl MapVisitor with visit_ExceptionDecl(env, exception_decl) {
   MapVisitorBase::visit_ExceptionDecl(env, exception_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_ExceptionDecl_SinglePayload(env, type_) {
+impl MapVisitor with visit_ExceptionDecl_SinglePayload(env, type_) {
   MapVisitorBase::visit_ExceptionDecl_SinglePayload(env, type_)
 }
 
 ///|
-impl ImplMapVisitor with visit_ExceptionDecl_EnumPayload(env, constr_decls) {
+impl MapVisitor with visit_ExceptionDecl_EnumPayload(env, constr_decls) {
   MapVisitorBase::visit_ExceptionDecl_EnumPayload(env, constr_decls)
 }
 
 ///|
-impl ImplMapVisitor with visit_FieldName(env, field_name) {
+impl MapVisitor with visit_FieldName(env, field_name) {
   MapVisitorBase::visit_FieldName(env, field_name)
 }
 
 ///|
-impl ImplMapVisitor with visit_FieldDecl(env, field_decl) {
+impl MapVisitor with visit_FieldDecl(env, field_decl) {
   MapVisitorBase::visit_FieldDecl(env, field_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeDesc(env, type_desc) {
+impl MapVisitor with visit_TypeDesc(env, type_desc) {
   MapVisitorBase::visit_TypeDesc(env, type_desc)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeDesc_Newtype(env, type_) {
+impl MapVisitor with visit_TypeDesc_Newtype(env, type_) {
   MapVisitorBase::visit_TypeDesc_Newtype(env, type_)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeDesc_Error(env, exception_decl) {
+impl MapVisitor with visit_TypeDesc_Error(env, exception_decl) {
   MapVisitorBase::visit_TypeDesc_Error(env, exception_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeDesc_Variant(env, constr_decls) {
+impl MapVisitor with visit_TypeDesc_Variant(env, constr_decls) {
   MapVisitorBase::visit_TypeDesc_Variant(env, constr_decls)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeDesc_Record(env, field_decls) {
+impl MapVisitor with visit_TypeDesc_Record(env, field_decls) {
   MapVisitorBase::visit_TypeDesc_Record(env, field_decls)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeDesc_TupleStruct(env, types) {
+impl MapVisitor with visit_TypeDesc_TupleStruct(env, types) {
   MapVisitorBase::visit_TypeDesc_TupleStruct(env, types)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeDesc_Alias(env, type_) {
+impl MapVisitor with visit_TypeDesc_Alias(env, type_) {
   MapVisitorBase::visit_TypeDesc_Alias(env, type_)
 }
 
 ///|
-impl ImplMapVisitor with visit_Hole(env, hole) {
+impl MapVisitor with visit_Hole(env, hole) {
   MapVisitorBase::visit_Hole(env, hole)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArgumentKind(env, argument_kind) {
+impl MapVisitor with visit_ArgumentKind(env, argument_kind) {
   MapVisitorBase::visit_ArgumentKind(env, argument_kind)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArgumentKind_Labelled(env, label) {
+impl MapVisitor with visit_ArgumentKind_Labelled(env, label) {
   MapVisitorBase::visit_ArgumentKind_Labelled(env, label)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArgumentKind_LabelledPun(env, label) {
+impl MapVisitor with visit_ArgumentKind_LabelledPun(env, label) {
   MapVisitorBase::visit_ArgumentKind_LabelledPun(env, label)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArgumentKind_LabelledOption(
+impl MapVisitor with visit_ArgumentKind_LabelledOption(
   env,
   label~,
   question_loc~,
@@ -1594,7 +1561,7 @@ impl ImplMapVisitor with visit_ArgumentKind_LabelledOption(
 }
 
 ///|
-impl ImplMapVisitor with visit_ArgumentKind_LabelledOptionPun(
+impl MapVisitor with visit_ArgumentKind_LabelledOptionPun(
   env,
   label~,
   question_loc~,
@@ -1607,172 +1574,172 @@ impl ImplMapVisitor with visit_ArgumentKind_LabelledOptionPun(
 }
 
 ///|
-impl ImplMapVisitor with visit_FnKind(env, fn_kind) {
+impl MapVisitor with visit_FnKind(env, fn_kind) {
   MapVisitorBase::visit_FnKind(env, fn_kind)
 }
 
 ///|
-impl ImplMapVisitor with visit_Group(env, group) {
+impl MapVisitor with visit_Group(env, group) {
   MapVisitorBase::visit_Group(env, group)
 }
 
 ///|
-impl ImplMapVisitor with visit_TrailingMark(env, trailing_mark) {
+impl MapVisitor with visit_TrailingMark(env, trailing_mark) {
   MapVisitorBase::visit_TrailingMark(env, trailing_mark)
 }
 
 ///|
-impl ImplMapVisitor with visit_ApplyAttr(env, apply_attr) {
+impl MapVisitor with visit_ApplyAttr(env, apply_attr) {
   MapVisitorBase::visit_ApplyAttr(env, apply_attr)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeVarConstraint(env, type_var_constraint) {
+impl MapVisitor with visit_TypeVarConstraint(env, type_var_constraint) {
   MapVisitorBase::visit_TypeVarConstraint(env, type_var_constraint)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeVarBinder(env, type_var_binder) {
+impl MapVisitor with visit_TypeVarBinder(env, type_var_binder) {
   MapVisitorBase::visit_TypeVarBinder(env, type_var_binder)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeDeclBinder(env, type_decl_binder) {
+impl MapVisitor with visit_TypeDeclBinder(env, type_decl_binder) {
   MapVisitorBase::visit_TypeDeclBinder(env, type_decl_binder)
 }
 
 ///|
-impl ImplMapVisitor with visit_Binder(env, binder) {
+impl MapVisitor with visit_Binder(env, binder) {
   MapVisitorBase::visit_Binder(env, binder)
 }
 
 ///|
-impl ImplMapVisitor with visit_Var(env, var_) {
+impl MapVisitor with visit_Var(env, var_) {
   MapVisitorBase::visit_Var(env, var_)
 }
 
 ///|
-impl ImplMapVisitor with visit_ConstructorExtraInfo(env, constructor_extra_info) {
+impl MapVisitor with visit_ConstructorExtraInfo(env, constructor_extra_info) {
   MapVisitorBase::visit_ConstructorExtraInfo(env, constructor_extra_info)
 }
 
 ///|
-impl ImplMapVisitor with visit_ConstructorExtraInfo_TypeName(env, type_name) {
+impl MapVisitor with visit_ConstructorExtraInfo_TypeName(env, type_name) {
   MapVisitorBase::visit_ConstructorExtraInfo_TypeName(env, type_name)
 }
 
 ///|
-impl ImplMapVisitor with visit_ConstructorExtraInfo_Package(env, package_) {
+impl MapVisitor with visit_ConstructorExtraInfo_Package(env, package_) {
   MapVisitorBase::visit_ConstructorExtraInfo_Package(env, package_)
 }
 
 ///|
-impl ImplMapVisitor with visit_Constructor(env, constructor_) {
+impl MapVisitor with visit_Constructor(env, constructor_) {
   MapVisitorBase::visit_Constructor(env, constructor_)
 }
 
 ///|
-impl ImplMapVisitor with visit_Accessor(env, accessor) {
+impl MapVisitor with visit_Accessor(env, accessor) {
   MapVisitorBase::visit_Accessor(env, accessor)
 }
 
 ///|
-impl ImplMapVisitor with visit_Accessor_Label(env, label) {
+impl MapVisitor with visit_Accessor_Label(env, label) {
   MapVisitorBase::visit_Accessor_Label(env, label)
 }
 
 ///|
-impl ImplMapVisitor with visit_Accessor_Index(env, tuple_index~, loc~) {
+impl MapVisitor with visit_Accessor_Index(env, tuple_index~, loc~) {
   MapVisitorBase::visit_Accessor_Index(env, tuple_index~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Accessor_Newtype(env, loc~) {
+impl MapVisitor with visit_Accessor_Newtype(env, loc~) {
   MapVisitorBase::visit_Accessor_Newtype(env, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_AliasTarget(env, alias_target) {
+impl MapVisitor with visit_AliasTarget(env, alias_target) {
   MapVisitorBase::visit_AliasTarget(env, alias_target)
 }
 
 ///|
-impl ImplMapVisitor with visit_Argument(env, argument) {
+impl MapVisitor with visit_Argument(env, argument) {
   MapVisitorBase::visit_Argument(env, argument)
 }
 
 ///|
-impl ImplMapVisitor with visit_Parameter(env, parameter) {
+impl MapVisitor with visit_Parameter(env, parameter) {
   MapVisitorBase::visit_Parameter(env, parameter)
 }
 
 ///|
-impl ImplMapVisitor with visit_Parameter_DiscardPositional(env, ty~, loc~) {
+impl MapVisitor with visit_Parameter_DiscardPositional(env, ty~, loc~) {
   MapVisitorBase::visit_Parameter_DiscardPositional(env, ty~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Parameter_Positional(env, binder~, ty~) {
+impl MapVisitor with visit_Parameter_Positional(env, binder~, ty~) {
   MapVisitorBase::visit_Parameter_Positional(env, binder~, ty~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Parameter_Labelled(env, binder~, ty~) {
+impl MapVisitor with visit_Parameter_Labelled(env, binder~, ty~) {
   MapVisitorBase::visit_Parameter_Labelled(env, binder~, ty~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Parameter_Optional(env, binder~, default~, ty~) {
+impl MapVisitor with visit_Parameter_Optional(env, binder~, default~, ty~) {
   MapVisitorBase::visit_Parameter_Optional(env, binder~, default~, ty~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Parameter_QuestionOptional(env, binder~, ty~) {
+impl MapVisitor with visit_Parameter_QuestionOptional(env, binder~, ty~) {
   MapVisitorBase::visit_Parameter_QuestionOptional(env, binder~, ty~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Case(env, case) {
+impl MapVisitor with visit_Case(env, case) {
   MapVisitorBase::visit_Case(env, case)
 }
 
 ///|
-impl ImplMapVisitor with visit_MultiArgCase(env, multi_arg_case) {
+impl MapVisitor with visit_MultiArgCase(env, multi_arg_case) {
   MapVisitorBase::visit_MultiArgCase(env, multi_arg_case)
 }
 
 ///|
-impl ImplMapVisitor with visit_SpreadableElem(env, spreadable_elem) {
+impl MapVisitor with visit_SpreadableElem(env, spreadable_elem) {
   MapVisitorBase::visit_SpreadableElem(env, spreadable_elem)
 }
 
 ///|
-impl ImplMapVisitor with visit_SpreadableElem_Regular(env, expr) {
+impl MapVisitor with visit_SpreadableElem_Regular(env, expr) {
   MapVisitorBase::visit_SpreadableElem_Regular(env, expr)
 }
 
 ///|
-impl ImplMapVisitor with visit_SpreadableElem_Spread(env, expr~, loc~) {
+impl MapVisitor with visit_SpreadableElem_Spread(env, expr~, loc~) {
   MapVisitorBase::visit_SpreadableElem_Spread(env, expr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_MapExprElem(env, map_expr_elem) {
+impl MapVisitor with visit_MapExprElem(env, map_expr_elem) {
   MapVisitorBase::visit_MapExprElem(env, map_expr_elem)
 }
 
 ///|
-impl ImplMapVisitor with visit_StaticAssertion(env, static_assertion) {
+impl MapVisitor with visit_StaticAssertion(env, static_assertion) {
   MapVisitorBase::visit_StaticAssertion(env, static_assertion)
 }
 
 ///|
-impl ImplMapVisitor with visit_Func(env, func) {
+impl MapVisitor with visit_Func(env, func) {
   MapVisitorBase::visit_Func(env, func)
 }
 
 ///|
-impl ImplMapVisitor with visit_Func_Lambda(
+impl MapVisitor with visit_Func_Lambda(
   env,
   parameters~,
   params_loc~,
@@ -1799,7 +1766,7 @@ impl ImplMapVisitor with visit_Func_Lambda(
 }
 
 ///|
-impl ImplMapVisitor with visit_Func_Match(
+impl MapVisitor with visit_Func_Match(
   env,
   cases~,
   has_error~,
@@ -1818,107 +1785,102 @@ impl ImplMapVisitor with visit_Func_Match(
 }
 
 ///|
-impl ImplMapVisitor with visit_FieldDef(env, field_def) {
+impl MapVisitor with visit_FieldDef(env, field_def) {
   MapVisitorBase::visit_FieldDef(env, field_def)
 }
 
 ///|
-impl ImplMapVisitor with visit_InterpElem(env, interp_elem) {
+impl MapVisitor with visit_InterpElem(env, interp_elem) {
   MapVisitorBase::visit_InterpElem(env, interp_elem)
 }
 
 ///|
-impl ImplMapVisitor with visit_InterpElem_Literal(env, repr~, loc~) {
+impl MapVisitor with visit_InterpElem_Literal(env, repr~, loc~) {
   MapVisitorBase::visit_InterpElem_Literal(env, repr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_InterpElem_Expr(env, expr~, loc~) {
+impl MapVisitor with visit_InterpElem_Expr(env, expr~, loc~) {
   MapVisitorBase::visit_InterpElem_Expr(env, expr~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_InterpElem_Source(env, interp_source) {
+impl MapVisitor with visit_InterpElem_Source(env, interp_source) {
   MapVisitorBase::visit_InterpElem_Source(env, interp_source)
 }
 
 ///|
-impl ImplMapVisitor with visit_MultilineStringElem(env, multiline_string_elem) {
+impl MapVisitor with visit_MultilineStringElem(env, multiline_string_elem) {
   MapVisitorBase::visit_MultilineStringElem(env, multiline_string_elem)
 }
 
 ///|
-impl ImplMapVisitor with visit_MultilineStringElem_String(env, string_val) {
+impl MapVisitor with visit_MultilineStringElem_String(env, string_val) {
   MapVisitorBase::visit_MultilineStringElem_String(env, string_val)
 }
 
 ///|
-impl ImplMapVisitor with visit_MultilineStringElem_Interp(env, interp_elems) {
+impl MapVisitor with visit_MultilineStringElem_Interp(env, interp_elems) {
   MapVisitorBase::visit_MultilineStringElem_Interp(env, interp_elems)
 }
 
 ///|
-impl ImplMapVisitor with visit_TryOperatorKind(env, try_operator_kind) {
+impl MapVisitor with visit_TryOperatorKind(env, try_operator_kind) {
   MapVisitorBase::visit_TryOperatorKind(env, try_operator_kind)
 }
 
 ///|
-impl ImplMapVisitor with visit_DotDotBinder(env, dot_dot_binder) {
+impl MapVisitor with visit_DotDotBinder(env, dot_dot_binder) {
   MapVisitorBase::visit_DotDotBinder(env, dot_dot_binder)
 }
 
 ///|
-impl ImplMapVisitor with visit_DotDotBinder_BinderAs(env, binder) {
+impl MapVisitor with visit_DotDotBinder_BinderAs(env, binder) {
   MapVisitorBase::visit_DotDotBinder_BinderAs(env, binder)
 }
 
 ///|
-impl ImplMapVisitor with visit_DotDotBinder_Binder(env, binder) {
+impl MapVisitor with visit_DotDotBinder_Binder(env, binder) {
   MapVisitorBase::visit_DotDotBinder_Binder(env, binder)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArrayPattern(env, array_pattern) {
+impl MapVisitor with visit_ArrayPattern(env, array_pattern) {
   MapVisitorBase::visit_ArrayPattern(env, array_pattern)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArrayPattern_Pattern(env, pattern) {
+impl MapVisitor with visit_ArrayPattern_Pattern(env, pattern) {
   MapVisitorBase::visit_ArrayPattern_Pattern(env, pattern)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArrayPattern_StringSpread(env, string_literal) {
+impl MapVisitor with visit_ArrayPattern_StringSpread(env, string_literal) {
   MapVisitorBase::visit_ArrayPattern_StringSpread(env, string_literal)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArrayPattern_BytesSpread(env, bytes_literal) {
+impl MapVisitor with visit_ArrayPattern_BytesSpread(env, bytes_literal) {
   MapVisitorBase::visit_ArrayPattern_BytesSpread(env, bytes_literal)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArrayPattern_ConstSpread(
-  env,
-  binder~,
-  pkg~,
-  loc~,
-) {
+impl MapVisitor with visit_ArrayPattern_ConstSpread(env, binder~, pkg~, loc~) {
   MapVisitorBase::visit_ArrayPattern_ConstSpread(env, binder~, pkg~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArrayPatterns(env, array_patterns) {
+impl MapVisitor with visit_ArrayPatterns(env, array_patterns) {
   MapVisitorBase::visit_ArrayPatterns(env, array_patterns)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArrayPatterns_Closed(env, array_patterns) {
+impl MapVisitor with visit_ArrayPatterns_Closed(env, array_patterns) {
   MapVisitorBase::visit_ArrayPatterns_Closed(env, array_patterns)
 }
 
 ///|
-impl ImplMapVisitor with visit_ArrayPatterns_Open(
+impl MapVisitor with visit_ArrayPatterns_Open(
   env,
   prefix_patterns,
   suffix_patterns,
@@ -1930,163 +1892,157 @@ impl ImplMapVisitor with visit_ArrayPatterns_Open(
 }
 
 ///|
-impl ImplMapVisitor with visit_FieldPat(env, field_pat) {
+impl MapVisitor with visit_FieldPat(env, field_pat) {
   MapVisitorBase::visit_FieldPat(env, field_pat)
 }
 
 ///|
-impl ImplMapVisitor with visit_ConstrPatArg(env, const_pat_arg) {
+impl MapVisitor with visit_ConstrPatArg(env, const_pat_arg) {
   MapVisitorBase::visit_ConstrPatArg(env, const_pat_arg)
 }
 
 ///|
-impl ImplMapVisitor with visit_MapPatElem(env, map_pat_elem) {
+impl MapVisitor with visit_MapPatElem(env, map_pat_elem) {
   MapVisitorBase::visit_MapPatElem(env, map_pat_elem)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern(env, pattern) {
+impl MapVisitor with visit_Pattern(env, pattern) {
   MapVisitorBase::visit_Pattern(env, pattern)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Alias(env, pat~, alias_~, loc~) {
+impl MapVisitor with visit_Pattern_Alias(env, pat~, alias_~, loc~) {
   MapVisitorBase::visit_Pattern_Alias(env, pat~, alias_~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Any(env, loc~) {
+impl MapVisitor with visit_Pattern_Any(env, loc~) {
   MapVisitorBase::visit_Pattern_Any(env, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Array(env, pats~, loc~) {
+impl MapVisitor with visit_Pattern_Array(env, pats~, loc~) {
   MapVisitorBase::visit_Pattern_Array(env, pats~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Constant(env, c~, loc~) {
+impl MapVisitor with visit_Pattern_Constant(env, c~, loc~) {
   MapVisitorBase::visit_Pattern_Constant(env, c~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Constraint(env, pat~, ty~, loc~) {
+impl MapVisitor with visit_Pattern_Constraint(env, pat~, ty~, loc~) {
   MapVisitorBase::visit_Pattern_Constraint(env, pat~, ty~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Constr(
-  env,
-  constr~,
-  args~,
-  is_open~,
-  loc~,
-) {
+impl MapVisitor with visit_Pattern_Constr(env, constr~, args~, is_open~, loc~) {
   MapVisitorBase::visit_Pattern_Constr(env, constr~, args~, is_open~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Or(env, pat1~, pat2~, loc~) {
+impl MapVisitor with visit_Pattern_Or(env, pat1~, pat2~, loc~) {
   MapVisitorBase::visit_Pattern_Or(env, pat1~, pat2~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Tuple(env, pats~, loc~) {
+impl MapVisitor with visit_Pattern_Tuple(env, pats~, loc~) {
   MapVisitorBase::visit_Pattern_Tuple(env, pats~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Var(env, binder) {
+impl MapVisitor with visit_Pattern_Var(env, binder) {
   MapVisitorBase::visit_Pattern_Var(env, binder)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Record(env, fields~, is_closed~, loc~) {
+impl MapVisitor with visit_Pattern_Record(env, fields~, is_closed~, loc~) {
   MapVisitorBase::visit_Pattern_Record(env, fields~, is_closed~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Map(env, elems~, is_closed~, loc~) {
+impl MapVisitor with visit_Pattern_Map(env, elems~, is_closed~, loc~) {
   MapVisitorBase::visit_Pattern_Map(env, elems~, is_closed~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_Pattern_Range(env, lhs~, rhs~, inclusive~, loc~) {
+impl MapVisitor with visit_Pattern_Range(env, lhs~, rhs~, inclusive~, loc~) {
   MapVisitorBase::visit_Pattern_Range(env, lhs~, rhs~, inclusive~, loc~)
 }
 
 ///|
-impl ImplMapVisitor with visit_LocalTypeDecl(env, localtype_decl) {
+impl MapVisitor with visit_LocalTypeDecl(env, localtype_decl) {
   MapVisitorBase::visit_LocalTypeDecl(env, localtype_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_DerivingDirective(env, deriving_directive) {
+impl MapVisitor with visit_DerivingDirective(env, deriving_directive) {
   MapVisitorBase::visit_DerivingDirective(env, deriving_directive)
 }
 
 ///|
-impl ImplMapVisitor with visit_TypeDecl(env, type_decl) {
+impl MapVisitor with visit_TypeDecl(env, type_decl) {
   MapVisitorBase::visit_TypeDecl(env, type_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_FuncStubs(env, func_stubs) {
+impl MapVisitor with visit_FuncStubs(env, func_stubs) {
   MapVisitorBase::visit_FuncStubs(env, func_stubs)
 }
 
 ///|
-impl ImplMapVisitor with visit_FuncStubs_Import(env, module_name~, func_name~) {
+impl MapVisitor with visit_FuncStubs_Import(env, module_name~, func_name~) {
   MapVisitorBase::visit_FuncStubs_Import(env, module_name~, func_name~)
 }
 
 ///|
-impl ImplMapVisitor with visit_FuncStubs_Embedded(env, language~, code~) {
+impl MapVisitor with visit_FuncStubs_Embedded(env, language~, code~) {
   MapVisitorBase::visit_FuncStubs_Embedded(env, language~, code~)
 }
 
 ///|
-impl ImplMapVisitor with visit_EmbeddedCode(env, embedded_code) {
+impl MapVisitor with visit_EmbeddedCode(env, embedded_code) {
   MapVisitorBase::visit_EmbeddedCode(env, embedded_code)
 }
 
 ///|
-impl ImplMapVisitor with visit_EmbeddedCode_CodeString(env, string_literal) {
+impl MapVisitor with visit_EmbeddedCode_CodeString(env, string_literal) {
   MapVisitorBase::visit_EmbeddedCode_CodeString(env, string_literal)
 }
 
 ///|
-impl ImplMapVisitor with visit_EmbeddedCode_CodeMultilineString(env, strings) {
+impl MapVisitor with visit_EmbeddedCode_CodeMultilineString(env, strings) {
   MapVisitorBase::visit_EmbeddedCode_CodeMultilineString(env, strings)
 }
 
 ///|
-impl ImplMapVisitor with visit_DeclBody(env, decl_body) {
+impl MapVisitor with visit_DeclBody(env, decl_body) {
   MapVisitorBase::visit_DeclBody(env, decl_body)
 }
 
 ///|
-impl ImplMapVisitor with visit_DeclBody_DeclBody(env, local_types~, expr~) {
+impl MapVisitor with visit_DeclBody_DeclBody(env, local_types~, expr~) {
   MapVisitorBase::visit_DeclBody_DeclBody(env, local_types~, expr~)
 }
 
 ///|
-impl ImplMapVisitor with visit_DeclBody_DeclStubs(env, func_stubs) {
+impl MapVisitor with visit_DeclBody_DeclStubs(env, func_stubs) {
   MapVisitorBase::visit_DeclBody_DeclStubs(env, func_stubs)
 }
 
 ///|
-impl ImplMapVisitor with visit_FunDecl(env, fun_decl) {
+impl MapVisitor with visit_FunDecl(env, fun_decl) {
   MapVisitorBase::visit_FunDecl(env, fun_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_TraitMethodDecl(env, trait_method_decl) {
+impl MapVisitor with visit_TraitMethodDecl(env, trait_method_decl) {
   MapVisitorBase::visit_TraitMethodDecl(env, trait_method_decl)
 }
 
 ///|
-impl ImplMapVisitor with visit_TraitDecl(env, trait_decl) {
+impl MapVisitor with visit_TraitDecl(env, trait_decl) {
   MapVisitorBase::visit_TraitDecl(env, trait_decl)
 }
 
@@ -2094,7 +2050,7 @@ impl ImplMapVisitor with visit_TraitDecl(env, trait_decl) {
 pub(all) struct MapVisitorBase[T](T)
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
   env,
   impl_,
 ) {
@@ -2247,7 +2203,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Visibility(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Visibility(
   env,
   visibility,
 ) {
@@ -2259,7 +2215,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Vis
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Visibility_Pub(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Visibility_Pub(
   _,
   attr~,
   loc~,
@@ -2268,7 +2224,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Vis
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Visibility_Priv(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Visibility_Priv(
   _,
   loc~,
 ) {
@@ -2276,7 +2232,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Vis
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Constant(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Constant(
   _,
   constant,
 ) {
@@ -2284,7 +2240,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Label(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Label(
   _,
   label,
 ) {
@@ -2292,7 +2248,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Lab
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ConstrName(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstrName(
   _,
   constr_name,
 ) {
@@ -2300,7 +2256,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_LongIdent(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LongIdent(
   env,
   long_ident,
 ) {
@@ -2311,7 +2267,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Lon
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_LongIdent_Ident(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LongIdent_Ident(
   _,
   name~,
 ) {
@@ -2319,7 +2275,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Lon
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_LongIdent_Dot(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LongIdent_Dot(
   _,
   pkg~,
   id~,
@@ -2328,7 +2284,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Lon
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeName(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeName(
   env,
   type_name,
 ) {
@@ -2339,7 +2295,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ConstrId(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstrId(
   env,
   constr_id,
 ) {
@@ -2349,7 +2305,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Type(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type(
   env,
   type_,
 ) {
@@ -2367,7 +2323,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Type_Any(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type_Any(
   _,
   loc~,
 ) {
@@ -2375,7 +2331,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Type_Arrow(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type_Arrow(
   env,
   args~,
   res~,
@@ -2390,7 +2346,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Type_Tuple(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type_Tuple(
   env,
   tys~,
   loc~,
@@ -2400,7 +2356,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Type_Name(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type_Name(
   env,
   constr_id~,
   tys~,
@@ -2412,7 +2368,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Type_Option(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type_Option(
   env,
   ty~,
   loc~,
@@ -2423,7 +2379,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Type_Object(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type_Object(
   env,
   constr_id,
 ) {
@@ -2432,7 +2388,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ErrorType(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ErrorType(
   env,
   error_type,
 ) {
@@ -2446,7 +2402,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Err
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ErrorType_ErrorType(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ErrorType_ErrorType(
   env,
   ty~,
 ) {
@@ -2455,7 +2411,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Err
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ErrorType_DefaultErrorType(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ErrorType_DefaultErrorType(
   _,
   loc~,
 ) {
@@ -2463,7 +2419,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Err
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ErrorType_MaybeError(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ErrorType_MaybeError(
   env,
   ty~,
 ) {
@@ -2472,7 +2428,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Err
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ConstrParam(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstrParam(
   env,
   constr_param,
 ) {
@@ -2483,7 +2439,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ConstrDecl(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstrDecl(
   env,
   constr_decl,
 ) {
@@ -2499,7 +2455,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ExceptionDecl(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ExceptionDecl(
   env,
   exception_decl,
 ) {
@@ -2512,7 +2468,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exc
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ExceptionDecl_SinglePayload(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ExceptionDecl_SinglePayload(
   env,
   type_,
 ) {
@@ -2521,7 +2477,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exc
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ExceptionDecl_EnumPayload(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ExceptionDecl_EnumPayload(
   env,
   constr_decls,
 ) {
@@ -2530,7 +2486,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exc
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_FieldName(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FieldName(
   _,
   fieldname,
 ) {
@@ -2538,7 +2494,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Fie
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_FieldDecl(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FieldDecl(
   env,
   field_decl,
 ) {
@@ -2553,7 +2509,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Fie
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeDesc(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc(
   env,
   type_desc,
 ) {
@@ -2570,7 +2526,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeDesc_Newtype(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Newtype(
   env,
   type_,
 ) {
@@ -2579,7 +2535,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeDesc_Error(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Error(
   env,
   exception_decl,
 ) {
@@ -2588,7 +2544,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeDesc_Variant(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Variant(
   env,
   constr_decls,
 ) {
@@ -2597,7 +2553,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeDesc_Record(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Record(
   env,
   field_decls,
 ) {
@@ -2606,7 +2562,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeDesc_TupleStruct(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_TupleStruct(
   env,
   types,
 ) {
@@ -2615,7 +2571,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeDesc_Alias(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Alias(
   env,
   type_,
 ) {
@@ -2624,7 +2580,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Hole(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Hole(
   _,
   hole,
 ) {
@@ -2632,7 +2588,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Hol
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArgumentKind(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArgumentKind(
   env,
   argument_kind,
 ) {
@@ -2648,7 +2604,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arg
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArgumentKind_Labelled(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArgumentKind_Labelled(
   _,
   label,
 ) {
@@ -2656,7 +2612,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arg
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArgumentKind_LabelledPun(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArgumentKind_LabelledPun(
   _,
   label,
 ) {
@@ -2664,7 +2620,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arg
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArgumentKind_LabelledOption(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArgumentKind_LabelledOption(
   _,
   label~,
   question_loc~,
@@ -2673,7 +2629,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arg
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArgumentKind_LabelledOptionPun(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArgumentKind_LabelledOptionPun(
   _,
   label~,
   question_loc~,
@@ -2682,7 +2638,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arg
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_FnKind(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FnKind(
   _,
   fn_kind,
 ) {
@@ -2690,7 +2646,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_FnK
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Group(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Group(
   _,
   group,
 ) {
@@ -2698,7 +2654,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Gro
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TrailingMark(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TrailingMark(
   _,
   trailing_mark,
 ) {
@@ -2706,7 +2662,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Tra
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ApplyAttr(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ApplyAttr(
   _,
   apply_attr,
 ) {
@@ -2716,7 +2672,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_App
 // Continue with remaining MapVisitorBase implementations that are missing
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeVarConstraint(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeVarConstraint(
   env,
   type_var_constraint,
 ) {
@@ -2726,7 +2682,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeVarBinder(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeVarBinder(
   env,
   type_var_binder,
 ) {
@@ -2739,7 +2695,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeDeclBinder(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDeclBinder(
   _,
   type_decl_binder,
 ) {
@@ -2747,7 +2703,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Binder(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Binder(
   _,
   binder,
 ) {
@@ -2755,7 +2711,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Bin
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Var(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Var(
   env,
   var_,
 ) {
@@ -2765,7 +2721,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Var
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ConstructorExtraInfo(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstructorExtraInfo(
   env,
   constructor_extra_info,
 ) {
@@ -2779,7 +2735,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ConstructorExtraInfo_TypeName(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstructorExtraInfo_TypeName(
   env,
   type_name,
 ) {
@@ -2788,7 +2744,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ConstructorExtraInfo_Package(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstructorExtraInfo_Package(
   _,
   package_,
 ) {
@@ -2796,7 +2752,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Constructor(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Constructor(
   env,
   constructor_,
 ) {
@@ -2809,7 +2765,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Accessor(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Accessor(
   env,
   accessor,
 ) {
@@ -2822,7 +2778,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Acc
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Accessor_Label(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Accessor_Label(
   env,
   label,
 ) {
@@ -2831,7 +2787,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Acc
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Accessor_Index(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Accessor_Index(
   _,
   tuple_index~,
   loc~,
@@ -2840,7 +2796,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Acc
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Accessor_Newtype(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Accessor_Newtype(
   _,
   loc~,
 ) {
@@ -2848,7 +2804,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Acc
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_AliasTarget(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_AliasTarget(
   env,
   alias_target,
 ) {
@@ -2858,7 +2814,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Ali
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Argument(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Argument(
   env,
   argument,
 ) {
@@ -2868,7 +2824,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arg
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Parameter(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter(
   env,
   parameter,
 ) {
@@ -2886,7 +2842,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Par
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Parameter_DiscardPositional(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter_DiscardPositional(
   env,
   ty~,
   loc~,
@@ -2896,7 +2852,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Par
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Parameter_Positional(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter_Positional(
   env,
   binder~,
   ty~,
@@ -2907,7 +2863,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Par
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Parameter_Labelled(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter_Labelled(
   env,
   binder~,
   ty~,
@@ -2917,7 +2873,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Par
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Parameter_Optional(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter_Optional(
   env,
   binder~,
   default~,
@@ -2930,7 +2886,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Par
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Parameter_QuestionOptional(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter_QuestionOptional(
   env,
   binder~,
   ty~,
@@ -2941,7 +2897,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Par
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Case(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Case(
   env,
   case,
 ) {
@@ -2952,7 +2908,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Cas
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_MultiArgCase(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MultiArgCase(
   env,
   multi_arg_case,
 ) {
@@ -2963,7 +2919,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Mul
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_SpreadableElem(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_SpreadableElem(
   env,
   spreadable_elem,
 ) {
@@ -2974,7 +2930,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Spr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_SpreadableElem_Regular(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_SpreadableElem_Regular(
   env,
   expr,
 ) {
@@ -2983,7 +2939,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Spr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_SpreadableElem_Spread(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_SpreadableElem_Spread(
   env,
   expr~,
   loc~,
@@ -2993,7 +2949,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Spr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_MapExprElem(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MapExprElem(
   env,
   mapexpr_elem,
 ) {
@@ -3005,7 +2961,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Map
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_StaticAssertion(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_StaticAssertion(
   env,
   static_assertion,
 ) {
@@ -3017,7 +2973,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Sta
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Func(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Func(
   env,
   func,
 ) {
@@ -3052,7 +3008,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Fun
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Func_Lambda(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Func_Lambda(
   env,
   parameters~,
   params_loc~,
@@ -3083,7 +3039,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Fun
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Func_Match(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Func_Match(
   env,
   cases~,
   has_error~,
@@ -3096,7 +3052,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Fun
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_FieldDef(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FieldDef(
   env,
   field_def,
 ) {
@@ -3108,7 +3064,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Fie
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_InterpElem(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_InterpElem(
   env,
   interp_elem,
 ) {
@@ -3120,7 +3076,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Int
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_InterpElem_Literal(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_InterpElem_Literal(
   _,
   repr~,
   loc~,
@@ -3129,7 +3085,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Int
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_InterpElem_Expr(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_InterpElem_Expr(
   env,
   expr~,
   loc~,
@@ -3139,7 +3095,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Int
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_InterpElem_Source(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_InterpElem_Source(
   _,
   interp_source,
 ) {
@@ -3147,7 +3103,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Int
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_MultilineStringElem(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MultilineStringElem(
   env,
   multiline_string_elem,
 ) {
@@ -3160,7 +3116,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Mul
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_MultilineStringElem_String(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MultilineStringElem_String(
   _,
   string_val,
 ) {
@@ -3168,7 +3124,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Mul
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_MultilineStringElem_Interp(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MultilineStringElem_Interp(
   _,
   interp_elems,
 ) {
@@ -3176,7 +3132,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Mul
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TryOperatorKind(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TryOperatorKind(
   _,
   try_operator_kind,
 ) {
@@ -3184,7 +3140,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Try
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_DotDotBinder(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DotDotBinder(
   env,
   dot_dot_binder,
 ) {
@@ -3197,7 +3153,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Dot
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_DotDotBinder_BinderAs(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DotDotBinder_BinderAs(
   env,
   binder,
 ) {
@@ -3206,7 +3162,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Dot
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_DotDotBinder_Binder(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DotDotBinder_Binder(
   env,
   binder,
 ) {
@@ -3215,7 +3171,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Dot
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArrayPattern(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPattern(
   env,
   array_pattern,
 ) {
@@ -3231,7 +3187,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArrayPattern_Pattern(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPattern_Pattern(
   env,
   pattern,
 ) {
@@ -3240,7 +3196,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArrayPattern_StringSpread(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPattern_StringSpread(
   _,
   string_literal,
 ) {
@@ -3248,7 +3204,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArrayPattern_BytesSpread(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPattern_BytesSpread(
   _,
   bytes_literal,
 ) {
@@ -3256,7 +3212,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArrayPattern_ConstSpread(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPattern_ConstSpread(
   env,
   binder~,
   pkg~,
@@ -3267,7 +3223,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArrayPatterns(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatterns(
   env,
   array_patterns,
 ) {
@@ -3283,7 +3239,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArrayPatterns_Closed(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatterns_Closed(
   env,
   array_patterns,
 ) {
@@ -3292,7 +3248,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ArrayPatterns_Open(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatterns_Open(
   env,
   prefix_patterns,
   suffix_patterns,
@@ -3305,7 +3261,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Arr
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_FieldPat(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FieldPat(
   env,
   field_pat,
 ) {
@@ -3317,7 +3273,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Fie
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_ConstrPatArg(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstrPatArg(
   env,
   constr_pat_arg,
 ) {
@@ -3327,7 +3283,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Con
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_MapPatElem(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MapPatElem(
   env,
   mappat_elem,
 ) {
@@ -3340,7 +3296,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Map
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern(
   env,
   pattern,
 ) {
@@ -3367,7 +3323,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Alias(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Alias(
   env,
   pat~,
   alias_~,
@@ -3379,7 +3335,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Any(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Any(
   _,
   loc~,
 ) {
@@ -3387,7 +3343,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Array(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Array(
   env,
   pats~,
   loc~,
@@ -3397,7 +3353,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Constant(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Constant(
   env,
   c~,
   loc~,
@@ -3407,7 +3363,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Constraint(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Constraint(
   env,
   pat~,
   ty~,
@@ -3419,7 +3375,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Constr(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Constr(
   env,
   constr~,
   args~,
@@ -3432,7 +3388,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Or(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Or(
   env,
   pat1~,
   pat2~,
@@ -3444,7 +3400,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Tuple(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Tuple(
   env,
   pats~,
   loc~,
@@ -3454,7 +3410,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Var(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Var(
   env,
   binder,
 ) {
@@ -3463,7 +3419,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Record(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Record(
   env,
   fields~,
   is_closed~,
@@ -3474,7 +3430,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Map(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Map(
   env,
   elems~,
   is_closed~,
@@ -3485,7 +3441,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pattern_Range(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Range(
   env,
   lhs~,
   rhs~,
@@ -3498,7 +3454,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Pat
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_LocalTypeDecl(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LocalTypeDecl(
   env,
   localtype_decl,
 ) {
@@ -3512,7 +3468,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Loc
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_DerivingDirective(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DerivingDirective(
   env,
   deriving_directive,
 ) {
@@ -3523,7 +3479,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Der
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TypeDecl(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDecl(
   env,
   type_decl,
 ) {
@@ -3550,7 +3506,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Typ
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_FuncStubs(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FuncStubs(
   env,
   func_stubs,
 ) {
@@ -3563,7 +3519,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Fun
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_FuncStubs_Import(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FuncStubs_Import(
   _,
   module_name~,
   func_name~,
@@ -3572,7 +3528,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Fun
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_FuncStubs_Embedded(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FuncStubs_Embedded(
   env,
   language~,
   code~,
@@ -3582,7 +3538,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Fun
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_EmbeddedCode(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_EmbeddedCode(
   env,
   embedded_code,
 ) {
@@ -3595,7 +3551,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Emb
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_EmbeddedCode_CodeString(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_EmbeddedCode_CodeString(
   _,
   string_literal,
 ) {
@@ -3603,7 +3559,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Emb
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_EmbeddedCode_CodeMultilineString(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_EmbeddedCode_CodeMultilineString(
   _,
   strings,
 ) {
@@ -3611,7 +3567,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Emb
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_DeclBody(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DeclBody(
   env,
   decl_body,
 ) {
@@ -3623,7 +3579,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Dec
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_DeclBody_DeclBody(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DeclBody_DeclBody(
   env,
   local_types~,
   expr~,
@@ -3634,7 +3590,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Dec
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_DeclBody_DeclStubs(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DeclBody_DeclStubs(
   env,
   func_stubs,
 ) {
@@ -3643,7 +3599,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Dec
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_FunDecl(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FunDecl(
   env,
   fun_decl,
 ) {
@@ -3678,7 +3634,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Fun
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TraitMethodDecl(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TraitMethodDecl(
   env,
   method_decl,
 ) {
@@ -3711,7 +3667,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Tra
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_TraitDecl(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TraitDecl(
   env,
   trait_decl,
 ) {
@@ -3726,7 +3682,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Tra
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopExpr(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopExpr(
   env,
   expr~,
   is_main~,
@@ -3739,7 +3695,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopTest(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopTest(
   env,
   expr~,
   name~,
@@ -3758,7 +3714,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopTypeDef(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopTypeDef(
   env,
   type_decl,
 ) {
@@ -3767,7 +3723,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopFuncDef(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopFuncDef(
   env,
   fun_decl~,
   decl_body~,
@@ -3779,7 +3735,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopFuncAlias(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopFuncAlias(
   env,
   pkg~,
   type_name~,
@@ -3798,7 +3754,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopLetDef(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopLetDef(
   env,
   binder~,
   ty~,
@@ -3817,7 +3773,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopTrait(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopTrait(
   env,
   trait_decl,
 ) {
@@ -3826,7 +3782,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopBatchTypeAlias(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopBatchTypeAlias(
   env,
   pkg~,
   targets~,
@@ -3843,7 +3799,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopBatchTraitAlias(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopBatchTraitAlias(
   env,
   pkg~,
   targets~,
@@ -3860,7 +3816,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopImpl(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopImpl(
   env,
   self_ty~,
   trait_~,
@@ -3903,7 +3859,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopView(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopView(
   env,
   quantifiers~,
   source_ty~,
@@ -3944,7 +3900,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Impl_TopImplRelation(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopImplRelation(
   env,
   self_ty~,
   trait_~,
@@ -3962,7 +3918,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Imp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Apply(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Apply(
   env,
   func~,
   args~,
@@ -3975,7 +3931,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Infix(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Infix(
   env,
   op~,
   lhs~,
@@ -3989,7 +3945,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Unary(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Unary(
   env,
   op~,
   expr~,
@@ -4001,7 +3957,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Array(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Array(
   env,
   exprs~,
   loc~,
@@ -4011,7 +3967,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ArraySpread(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ArraySpread(
   env,
   elems~,
   loc~,
@@ -4026,7 +3982,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ArrayGet(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ArrayGet(
   env,
   array~,
   index~,
@@ -4038,7 +3994,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ArrayGetSlice(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ArrayGetSlice(
   env,
   array~,
   start_index~,
@@ -4053,7 +4009,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ArraySet(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ArraySet(
   env,
   array~,
   index~,
@@ -4067,7 +4023,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ArrayAugmentedSet(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ArrayAugmentedSet(
   env,
   op~,
   array~,
@@ -4083,7 +4039,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Constant(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Constant(
   env,
   c~,
   loc~,
@@ -4093,7 +4049,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_MultilineString(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_MultilineString(
   env,
   elems~,
   loc~,
@@ -4103,7 +4059,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Interp(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Interp(
   env,
   elems~,
   loc~,
@@ -4113,7 +4069,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Constraint(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Constraint(
   env,
   expr~,
   ty~,
@@ -4125,7 +4081,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Constr(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Constr(
   env,
   constr~,
   loc~,
@@ -4135,7 +4091,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_While(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_While(
   env,
   loop_cond~,
   loop_body~,
@@ -4153,7 +4109,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Function(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Function(
   env,
   func~,
   loc~,
@@ -4163,7 +4119,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Ident(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Ident(
   env,
   id~,
   loc~,
@@ -4173,7 +4129,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_If(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_If(
   env,
   cond~,
   ifso~,
@@ -4187,7 +4143,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Guard(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Guard(
   env,
   cond~,
   otherwise~,
@@ -4201,7 +4157,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Is(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Is(
   env,
   expr~,
   pat~,
@@ -4213,7 +4169,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Defer(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Defer(
   env,
   expr~,
   body~,
@@ -4225,7 +4181,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_LetFn(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_LetFn(
   env,
   name~,
   func~,
@@ -4239,7 +4195,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_LetRec(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_LetRec(
   env,
   bindings~,
   body~,
@@ -4254,7 +4210,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_LetAnd(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_LetAnd(
   env,
   bindings~,
   body~,
@@ -4273,7 +4229,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Let(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Let(
   env,
   pattern~,
   expr~,
@@ -4287,7 +4243,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Sequence(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Sequence(
   env,
   exprs~,
   last_expr~,
@@ -4299,7 +4255,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Tuple(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Tuple(
   env,
   exprs~,
   loc~,
@@ -4309,7 +4265,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Record(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Record(
   env,
   type_name~,
   fields~,
@@ -4323,7 +4279,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_RecordUpdate(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_RecordUpdate(
   env,
   type_name~,
   record~,
@@ -4337,7 +4293,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Field(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Field(
   env,
   record~,
   accessor~,
@@ -4349,7 +4305,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Method(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Method(
   env,
   type_name~,
   method_name~,
@@ -4361,7 +4317,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_DotApply(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_DotApply(
   env,
   self~,
   method_name~,
@@ -4377,7 +4333,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_As(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_As(
   env,
   expr~,
   trait_~,
@@ -4389,7 +4345,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Mutate(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Mutate(
   env,
   record~,
   accessor~,
@@ -4405,7 +4361,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Match(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Match(
   env,
   expr~,
   cases~,
@@ -4420,7 +4376,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_LetMut(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_LetMut(
   env,
   binder~,
   ty~,
@@ -4436,7 +4392,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Pipe(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Pipe(
   env,
   lhs~,
   rhs~,
@@ -4448,7 +4404,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Assign(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Assign(
   env,
   var_~,
   expr~,
@@ -4462,7 +4418,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Hole(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Hole(
   env,
   loc~,
   kind~,
@@ -4472,7 +4428,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Return(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Return(
   env,
   return_value~,
   loc~,
@@ -4482,7 +4438,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Raise(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Raise(
   env,
   err_value~,
   loc~,
@@ -4492,7 +4448,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Unit(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Unit(
   _,
   loc~,
   faked~,
@@ -4501,7 +4457,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Break(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Break(
   env,
   arg~,
   label~,
@@ -4513,7 +4469,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Continue(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Continue(
   env,
   args~,
   label~,
@@ -4525,7 +4481,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Loop(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Loop(
   env,
   args~,
   body~,
@@ -4540,7 +4496,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_For(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_For(
   env,
   binders~,
   condition~,
@@ -4574,7 +4530,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_ForEach(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ForEach(
   env,
   binders~,
   expr~,
@@ -4594,7 +4550,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Try(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Try(
   env,
   body~,
   catch_~,
@@ -4625,7 +4581,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_TryOperator(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_TryOperator(
   env,
   body~,
   kind~,
@@ -4638,7 +4594,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Map(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Map(
   env,
   elems~,
   loc~,
@@ -4648,7 +4604,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_Group(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Group(
   env,
   expr~,
   group~,
@@ -4660,7 +4616,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr_StaticAssert(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_StaticAssert(
   env,
   asserts~,
   body~,
@@ -4671,7 +4627,7 @@ pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Exp
 }
 
 ///|
-pub impl[T : ImplMapVisitor] ImplMapVisitor for MapVisitorBase[T] with visit_Expr(
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
   env,
   expr,
 ) {

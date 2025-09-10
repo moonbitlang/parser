@@ -2,7 +2,7 @@
 struct Identity(Unit)
 
 ///|
-impl ImplMapVisitor for Identity
+impl MapVisitor for Identity
 
 ///|
 test "Pattern" {
