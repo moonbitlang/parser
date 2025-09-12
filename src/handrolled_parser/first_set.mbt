@@ -70,7 +70,10 @@ let first_expr : Array[TokenKind] = [
     TK_FOR,
     TK_POST_LABEL,
     TK_GUARD,
-    TK_TRY, // TK_DEFER, TK_TRY_QUESTION, TK_TRY_EXCLAMATION
+    TK_TRY,
+    TK_DEFER,
+    TK_TRY_QUESTION,
+    TK_TRY_EXCLAMATION,
     TK_UNDERSCORE,
     TK_LPAREN,
     TK_LIDENT,
