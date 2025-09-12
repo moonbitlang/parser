@@ -1911,7 +1911,7 @@ test "type_var_binder to_json" {
         "loc": null,
       },
     ],
-    "loc": null,
+    "name_loc": null,
   })
 }
 
@@ -2239,7 +2239,7 @@ test "fun_decl to_json" {
             "loc": null,
           },
         ],
-        "loc": null,
+        "name_loc": null,
       },
     ],
     "return_type": {
@@ -2294,7 +2294,12 @@ test "trait_method_decl to_json" {
     "has_error": null,
     "is_async": false,
     "quantifiers": [
-      { "type": "TypeVarBinder", "name": "T", "constraints": [], "loc": null },
+      {
+        "type": "TypeVarBinder",
+        "name": "T",
+        "constraints": [],
+        "name_loc": null,
+      },
     ],
     "params": [
       {

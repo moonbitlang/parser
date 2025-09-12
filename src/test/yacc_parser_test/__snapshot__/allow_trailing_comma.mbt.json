@@ -195,13 +195,13 @@
             "type": "TypeVarBinder",
             "name": "T",
             "constraints": [],
-            "loc": null
+            "name_loc": null
           },
           {
             "type": "TypeVarBinder",
             "name": "U",
             "constraints": [],
-            "loc": null
+            "name_loc": null
           }
         ],
         "return_type": null,

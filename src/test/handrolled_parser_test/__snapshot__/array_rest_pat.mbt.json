@@ -288,7 +288,7 @@
             "type": "TypeVarBinder",
             "name": "T",
             "constraints": [],
-            "loc": "15:4-15:5"
+            "name_loc": "15:4-15:5"
           }
         ],
         "return_type": null,

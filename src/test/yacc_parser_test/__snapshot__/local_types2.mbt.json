@@ -612,7 +612,7 @@
                 "loc": null
               }
             ],
-            "loc": null
+            "name_loc": null
           },
           {
             "type": "TypeVarBinder",
@@ -635,7 +635,7 @@
                 "loc": null
               }
             ],
-            "loc": null
+            "name_loc": null
           },
           {
             "type": "TypeVarBinder",
@@ -650,7 +650,7 @@
                 "loc": null
               }
             ],
-            "loc": null
+            "name_loc": null
           }
         ],
         "return_type": {
@@ -2366,7 +2366,7 @@
                 "loc": null
               }
             ],
-            "loc": null
+            "name_loc": null
           }
         ],
         "return_type": {
@@ -2483,7 +2483,7 @@
                 "loc": null
               }
             ],
-            "loc": null
+            "name_loc": null
           }
         ],
         "return_type": {

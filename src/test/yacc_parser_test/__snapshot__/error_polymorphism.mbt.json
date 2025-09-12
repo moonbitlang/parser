@@ -113,7 +113,7 @@
             "type": "TypeVarBinder",
             "name": "X",
             "constraints": [],
-            "loc": null
+            "name_loc": null
           }
         ],
         "return_type": {

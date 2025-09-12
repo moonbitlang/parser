@@ -1128,13 +1128,13 @@
             "type": "TypeVarBinder",
             "name": "A",
             "constraints": [],
-            "loc": "24:4-24:5"
+            "name_loc": "24:4-24:5"
           },
           {
             "type": "TypeVarBinder",
             "name": "B",
             "constraints": [],
-            "loc": "24:6-24:7"
+            "name_loc": "24:6-24:7"
           }
         ],
         "return_type": {

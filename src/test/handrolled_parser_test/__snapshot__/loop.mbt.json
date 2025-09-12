@@ -576,7 +576,7 @@
             "type": "TypeVarBinder",
             "name": "X",
             "constraints": [],
-            "loc": "25:4-25:5"
+            "name_loc": "25:4-25:5"
           }
         ],
         "return_type": {

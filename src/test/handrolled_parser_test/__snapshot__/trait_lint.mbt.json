@@ -82,7 +82,7 @@
             "type": "TypeVarBinder",
             "name": "Self",
             "constraints": [],
-            "loc": "5:4-5:8"
+            "name_loc": "5:4-5:8"
           }
         ],
         "return_type": {
@@ -220,7 +220,7 @@
                 "type": "TypeVarBinder",
                 "name": "X",
                 "constraints": [],
-                "loc": "11:5-11:6"
+                "name_loc": "11:5-11:6"
               }
             ],
             "params": [
@@ -380,7 +380,7 @@
                 "loc": "16:11-16:20"
               }
             ],
-            "loc": "16:8-16:9"
+            "name_loc": "16:8-16:9"
           }
         ],
         "return_type": null,

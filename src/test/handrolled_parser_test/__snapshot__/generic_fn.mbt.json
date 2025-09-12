@@ -20,7 +20,7 @@
             "type": "TypeVarBinder",
             "name": "X",
             "constraints": [],
-            "loc": "1:4-1:5"
+            "name_loc": "1:4-1:5"
           },
           {
             "type": "TypeVarBinder",
@@ -35,7 +35,7 @@
                 "loc": "1:11-1:15"
               }
             ],
-            "loc": "1:7-1:8"
+            "name_loc": "1:7-1:8"
           }
         ],
         "return_type": {
@@ -90,7 +90,7 @@
             "type": "TypeVarBinder",
             "name": "X",
             "constraints": [],
-            "loc": "4:4-4:5"
+            "name_loc": "4:4-4:5"
           }
         ],
         "return_type": null,

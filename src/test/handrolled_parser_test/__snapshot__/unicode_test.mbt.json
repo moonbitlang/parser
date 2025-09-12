@@ -416,7 +416,7 @@
             "type": "TypeVarBinder",
             "name": "数字类型",
             "constraints": [],
-            "loc": "16:4-16:8"
+            "name_loc": "16:4-16:8"
           }
         ],
         "return_type": {
@@ -524,7 +524,7 @@
             "type": "TypeVarBinder",
             "name": "T",
             "constraints": [],
-            "loc": "20:4-20:5"
+            "name_loc": "20:4-20:5"
           }
         ],
         "return_type": null,
