@@ -937,3 +937,8 @@ test "invalid_type" (t : @test.T) {
 test "let_mut" (t : @test.T) {
   t.run("let_mut")
 }
+
+///|
+test "try_exclamation" (t : @test.T) {
+  t.run("try_exclamation")
+}

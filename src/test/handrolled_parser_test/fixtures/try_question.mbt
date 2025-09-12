@@ -6,4 +6,5 @@ fn init {
     f()
     g()
   }
+  (try? f())
 }

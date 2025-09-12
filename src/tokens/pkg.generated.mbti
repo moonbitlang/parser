@@ -273,5 +273,9 @@ pub typealias Array[InterpElem] as InterpLiteral
 
 pub typealias String as StringLiteral
 
+pub typealias (Token, @basic.Position, @basic.Position) as Triple
+
+pub typealias Array[(Token, @basic.Position, @basic.Position)] as Triples
+
 // Traits
 
