@@ -317,7 +317,7 @@ pub impl ToJson for TypeVarBinder with to_json(self) {
     "type": "TypeVarBinder",
     "name": name,
     "constraints": list_to_json(constraints),
-    "loc": loc,
+    "name_loc": loc,
   }
 }
 
