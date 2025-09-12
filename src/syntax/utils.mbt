@@ -585,6 +585,21 @@ pub fn Impl::loc(self : Self) -> Location {
 }
 
 ///|
+pub fn Parameter::loc(self : Self) -> Location {
+  match self {
+    Optional(binder~, ty=_, default~) => binder.loc.merge(default.loc())
+    Labelled(binder~, ty~)
+    | Positional(binder~, ty~)
+    | QuestionOptional(binder~, ty~) =>
+      match ty {
+        None => binder.loc
+        Some(ty) => binder.loc.merge(ty.loc())
+      }
+    DiscardPositional(ty=_, loc~) => loc
+  }
+}
+
+///|
 fn shift_col(pos : Position, offset : Int) -> Position {
   Position::{
     lnum: pos.lnum,
