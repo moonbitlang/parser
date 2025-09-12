@@ -2690,8 +2690,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeVarBind
     env.inner().visit_TypeVarConstraint(_),
   )
   let name = type_var_binder.name
-  let loc = type_var_binder.loc
-  TypeVarBinder::{ name, constraints, loc }
+  let loc = type_var_binder.name_loc
+  TypeVarBinder::{ name, constraints, name_loc: loc }
 }
 
 ///|

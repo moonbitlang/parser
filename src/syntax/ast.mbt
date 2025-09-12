@@ -195,10 +195,21 @@ pub(all) struct TypeVarConstraint {
 }
 
 ///|
+/// Represent type variable and optional constraints.
+/// 
+/// ```skip
+/// fn [T] f() -> Unit {...}
+///  // ^---- TypeVarBinder
+/// fn [T : TraitA + TraitB] f() -> Unit {...}
+///  // ^^^^^^^^^^^^^^^^^^^----- TypeVarBinder
+/// ```
 pub(all) struct TypeVarBinder {
+  /// name of type variable
   name : String
+  /// location of type variable
+  name_loc : Location
+  /// type constraints for type variable, e.g. `Show + Compare`
   constraints : @list.List[TypeVarConstraint]
-  loc : Location
 }
 
 ///|

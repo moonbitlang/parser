@@ -312,7 +312,7 @@ pub impl ToJson for TypeVarConstraint with to_json(self) {
 
 ///|
 pub impl ToJson for TypeVarBinder with to_json(self) {
-  let { name, constraints, loc } = self
+  let { name, constraints, name_loc: loc } = self
   {
     "type": "TypeVarBinder",
     "name": name,

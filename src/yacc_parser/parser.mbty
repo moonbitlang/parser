@@ -1548,10 +1548,10 @@ simple_expr -> Expr
 
 tvar_binder -> TypeVarBinder
   : luident { 
-    TypeVarBinder::{ name: $1, constraints: @list.empty(), loc: mk_loc($sloc) }
+    TypeVarBinder::{ name: $1, constraints: @list.empty(), name_loc: mk_loc($loc($1)) }
   }
   | luident COLON separated_nonempty_list(PLUS, tvar_constraint) { 
-    TypeVarBinder::{ name: $1, constraints: $3, loc: mk_loc($sloc) }
+    TypeVarBinder::{ name: $1, constraints: $3, name_loc: mk_loc($loc($1)) }
   }
   ;
 

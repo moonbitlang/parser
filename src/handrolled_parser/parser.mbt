@@ -220,7 +220,7 @@ fn State::parse_var(self : Self) -> @syntax.Var {
 ///|
 fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
   if self.mode is Panic(loc~, ..) {
-    return { name: "?tvar_name", loc, constraints: @list.of([]) }
+    return { name: "?tvar_name", name_loc: loc, constraints: @list.of([]) }
   }
   let spos = self.peek_spos()
   let name = self.parse_luident()
@@ -241,7 +241,7 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
     None => @list.new()
     Some(xs) => xs
   }
-  { name, loc, constraints }
+  { name, name_loc: loc, constraints }
 }
 
 ///|

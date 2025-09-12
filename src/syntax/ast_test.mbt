@@ -1899,7 +1899,7 @@ test "type_var_binder to_json" {
   let type_var_binder = @syntax.TypeVarBinder::{
     name: "T",
     constraints: @list.of([constraint]),
-    loc: dummy_loc,
+    name_loc: dummy_loc,
   }
   @json.inspect(type_var_binder, content={
     "type": "TypeVarBinder",
@@ -2184,7 +2184,7 @@ test "fun_decl to_json" {
   let type_var_binder = @syntax.TypeVarBinder::{
     name: "T",
     constraints: @list.of([type_var_constraint]),
-    loc: dummy_loc,
+    name_loc: dummy_loc,
   }
   let fun_decl = @syntax.FunDecl::{
     type_name: Some(type_name),
@@ -2274,7 +2274,7 @@ test "trait_method_decl to_json" {
   let type_var_binder = @syntax.TypeVarBinder::{
     name: "T",
     constraints: @list.of([]),
-    loc: dummy_loc,
+    name_loc: dummy_loc,
   }
   let trait_method = @syntax.TraitMethodDecl::{
     name: binder,
