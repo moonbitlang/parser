@@ -888,7 +888,7 @@
               "is_async": false,
               "loc": "72:11-75:11"
             },
-            "loc": "72:11-75:11"
+            "loc": "72:7-75:11"
           },
           "expr": {
             "type": "Expr::Function",

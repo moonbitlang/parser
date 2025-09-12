@@ -97,5 +97,5 @@ test "Location::merge - single character locations" {
   // Should span from first character to second character
   inspect(loc1, content="test.mbt-1:6-1:6")
   inspect(loc2, content="test.mbt-1:11-1:11")
-  inspect(merged, content="test.mbt-1:11-1:11")
+  inspect(merged, content="test.mbt-1:6-1:11")
 }

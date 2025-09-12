@@ -521,6 +521,7 @@ pub(all) enum Parameter {
   Optional(binder~ : Binder, default~ : Expr, ty~ : Type?)
   QuestionOptional(binder~ : Binder, ty~ : Type?)
 }
+fn Parameter::loc(Self) -> @basic.Location
 impl ToJson for Parameter
 
 pub(all) enum Pattern {
