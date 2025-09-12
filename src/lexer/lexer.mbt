@@ -179,8 +179,7 @@ fn lex_tokens(
 
     // Byte literals - hex escape
     ["b'\\\\x[0-9a-fA-F]{2}'" as raw, .. rest] => {
-      let raw_str = raw.to_string()
-      let literal = raw_str.substring(start=2, end=raw_str.length() - 1) // Remove b' and '
+      let literal = try! raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
         start=env.calc_offset(input, base~),
@@ -191,8 +190,7 @@ fn lex_tokens(
 
     // Byte literals - octal escape
     ["b'\\\\o[0-3][0-7]{2}'" as raw, .. rest] => {
-      let raw_str = raw.to_string()
-      let literal = raw_str.substring(start=2, end=raw_str.length() - 1) // Remove b' and '
+      let literal = try! raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
         start=env.calc_offset(input, base~),
@@ -203,8 +201,7 @@ fn lex_tokens(
 
     // Byte literals - ASCII character
     ["b'[\\x00-\\x7F]'" as raw, .. rest] => {
-      let raw_str = raw.to_string()
-      let ascii_char = raw_str.substring(start=2, end=raw_str.length() - 1) // Remove b' and '
+      let ascii_char = try! raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
       env.add_token_with_loc(
         BYTE(ascii_char),
         start=env.calc_offset(input, base~),
@@ -215,8 +212,7 @@ fn lex_tokens(
 
     // Byte literals - escape sequences
     ["b'\\\\[\\\\'\"`ntbr ]'" as raw, .. rest] => {
-      let raw_str = raw.to_string()
-      let literal = raw_str.substring(start=2, end=raw_str.length() - 1) // Remove b' and '
+      let literal = try! raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
         start=env.calc_offset(input, base~),
@@ -280,9 +276,10 @@ fn lex_tokens(
       .. _rest,
     ] => {
       // Need to handle integer..range specially
-      let integer_str = integer_with_range.to_string()
-      let integer_end = integer_str.length() - 2 // Remove ".."
-      let integer = integer_str.substring(start=0, end=integer_end)
+      let integer_end = integer_with_range.length() - 2 // Remove ".."
+      let integer = try! integer_with_range
+        .sub(start=0, end=integer_end)
+        .to_string()
       env.add_token_with_loc(
         INT(integer),
         start=env.calc_offset(input, base~),
@@ -345,8 +342,7 @@ fn lex_tokens(
 
     // Post label identifiers (name~) - simplified pattern
     ["[a-z_][a-zA-Z0-9_]*~" as raw, .. rest] => {
-      let raw_str = raw.to_string()
-      let ident = raw_str.substring(start=0, end=raw_str.length() - 1) // Remove ~
+      let ident = try! raw.sub(start=0, end=raw.length() - 1).to_string() // Remove ~
       env.add_token_with_loc(
         @tokens.Token::POST_LABEL(ident),
         start=env.calc_offset(input, base~),
@@ -383,8 +379,7 @@ fn lex_tokens(
 
     // Augmented assignment operators
     ["[+\\-*/%]=" as op, .. rest] => {
-      let op_str = op.to_string()
-      let op_char = op_str.substring(start=0, end=1)
+      let op_char = try! op.sub(start=0, end=1).to_string()
       env.add_token_with_loc(
         @tokens.Token::AUGMENTED_ASSIGNMENT(op_char),
         start=env.calc_offset(input, base~),
@@ -561,10 +556,10 @@ fn lex_tokens(
 
     // Dot with number
     ["\\.[0-9]+" as dot_int, .. rest] => {
-      let full_str = dot_int.to_string()
-      let digits_str = full_str.substring(start=1, end=full_str.length()) // Remove the '.'
+      let digits_str = try! dot_int.sub(start=1, end=dot_int.length()) // Remove the '.'
       let idx = @strconv.parse_int(digits_str) catch {
         _ => {
+          let full_str = dot_int.to_string()
           env.add_lexing_error(
             InvalidDotInt(full_str),
             start=env.calc_offset(input, base~),
@@ -864,9 +859,9 @@ fn lex_tokens(
         )
       }
       let content_str = multiline_str.to_string()
-      let content = content_str.substring(start=2, end=content_str.length()) // Remove #|
+      let content = try! content_str.sub(start=2, end=content_str.length()) // Remove #|
       env.add_token_with_loc(
-        @tokens.Token::MULTILINE_STRING(content),
+        @tokens.Token::MULTILINE_STRING(content.to_string()),
         start=start_pos,
         end=end_pos,
       )
@@ -874,11 +869,9 @@ fn lex_tokens(
     }
 
     // Package name @package/name - simplified pattern
-    ["@[a-zA-Z_][a-zA-Z0-9_/]*" as pkg_name, .. rest] => {
-      let pkg_str = pkg_name.to_string()
-      let pkg_name_without_at = pkg_str.substring(start=1, end=pkg_str.length()) // Remove @
+    ["@", "[a-zA-Z_][a-zA-Z0-9_/]*" as pkg_name_without_at, .. rest] => {
       env.add_token_with_loc(
-        @tokens.Token::PACKAGE_NAME(pkg_name_without_at),
+        @tokens.Token::PACKAGE_NAME(pkg_name_without_at.to_string()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )

@@ -10690,10 +10690,7 @@ fn[T] yy_parse(
   initial_pos? : @basic.Position,
 ) -> T raise ParseError {
   let mut cursor = 0
-  let mut state_stack : @list.List[YYState] = @list.construct(
-    start,
-    @list.empty(),
-  )
+  let mut state_stack : @list.List[YYState] = @list.cons(start, @list.empty())
   let data_stack : Array[(YYObj, @basic.Position, @basic.Position)] = []
   let mut last_pos = initial_pos.unwrap_or(tokens[0].1)
   let mut state = start
@@ -10729,7 +10726,7 @@ fn[T] yy_parse(
       Shift(next_state) => {
         guard lookahead is Some(la)
         data_stack.push(la.1)
-        state_stack = @list.construct(next_state, state_stack)
+        state_stack = @list.cons(next_state, state_stack)
         last_shifted_state_stack = state_stack
         state = next_state
         last_pos = la.1.2
@@ -10755,7 +10752,7 @@ fn[T] yy_parse(
             match state(symbol) {
               Accept => return return_(data_stack.unsafe_pop().0)
               Shift(next_state) => {
-                state_stack = @list.construct(next_state, state_stack)
+                state_stack = @list.cons(next_state, state_stack)
                 state = next_state
               }
               Reduce(count, symbol, action)
@@ -10793,7 +10790,7 @@ fn error(
                 let stack = stack.drop(count)
                 guard stack is More(state, ..)
                 match state(symbol) {
-                  Shift(state) => go(@list.construct(state, stack))
+                  Shift(state) => go(@list.cons(state, stack))
                   Reduce(count, symbol, _)
                   | ReduceNoLookahead(count, symbol, _) =>
                     inner_go(stack, count, symbol)

@@ -161,26 +161,23 @@ pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
 pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
   match (name, arg) {
     ("-", Constant(c=Constant::Int(x), loc=_)) => {
-      let new_val = if x.length() > 0 && x[0] == '-' {
-        x.substring(start=1)
-      } else {
-        "-" + x
+      let new_val = match x {
+        ['-', .. num] => num.to_string()
+        _ => "-" + x
       }
       make_constant_expr(loc~, Constant::Int(new_val))
     }
     ("-", Constant(c=Constant::Int64(x), loc=_)) => {
-      let new_val = if x.length() > 0 && x[0] == '-' {
-        x.substring(start=1)
-      } else {
-        "-" + x
+      let new_val = match x {
+        ['-', .. num] => num.to_string()
+        _ => "-" + x
       }
       make_constant_expr(loc~, Constant::Int64(new_val))
     }
     ("-", Constant(c=Constant::Double(x), loc=_)) => {
-      let new_val = if x.length() > 0 && x[0] == '-' {
-        x.substring(start=1)
-      } else {
-        "-" + x
+      let new_val = match x {
+        ['-', .. num] => num.to_string()
+        _ => "-" + x
       }
       make_constant_expr(loc~, Constant::Double(new_val))
     }
@@ -352,21 +349,21 @@ pub fn label_to_pat(loc~ : Location, label : Label) -> Pattern {
 /// Parse integer literal with suffix
 pub fn make_int(i : String) -> Constant {
   if i.has_suffix("L") {
-    let base = i.substring(end=i.length() - 1)
+    let base = try! i.sub(end=i.length() - 1)
     if base.has_suffix("U") {
-      let u64 = base.substring(end=base.length() - 1)
-      Constant::UInt64(u64)
+      let u64 = try! base.sub(end=base.length() - 1)
+      UInt64(u64.to_string())
     } else {
-      Constant::Int64(base)
+      Int64(base.to_string())
     }
   } else if i.has_suffix("U") {
-    let u32 = i.substring(end=i.length() - 1)
-    Constant::UInt(u32)
+    let u32 = try! i.sub(end=i.length() - 1)
+    UInt(u32.to_string())
   } else if i.has_suffix("N") {
-    let bigint = i.substring(end=i.length() - 1)
-    Constant::BigInt(bigint)
+    let bigint = try! i.sub(end=i.length() - 1)
+    BigInt(bigint.to_string())
   } else {
-    Constant::Int(i)
+    Int(i)
   }
 }
 
@@ -380,8 +377,8 @@ pub fn make_double(f : String) -> Constant {
 /// Create float constant
 pub fn make_float(f : String) -> Constant {
   if f.has_suffix("F") {
-    let base = f.substring(end=f.length() - 1)
-    Constant::Float(base)
+    let base = try! f.sub(end=f.length() - 1)
+    Float(base.to_string())
   } else {
     abort("make_float: string must end with F")
   }
