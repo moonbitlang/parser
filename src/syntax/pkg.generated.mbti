@@ -644,8 +644,8 @@ impl ToJson for TypeName
 
 pub(all) struct TypeVarBinder {
   name : String
+  name_loc : @basic.Location
   constraints : @list.List[TypeVarConstraint]
-  loc : @basic.Location
 }
 impl ToJson for TypeVarBinder
 

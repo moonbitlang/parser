@@ -9882,7 +9882,7 @@ fn yy_action_255(
 
 // file:///./parser.mbty
 // 1553|    luident COLON separated_nonempty_list(PLUS, tvar_constraint) { 
-// 1554|    TypeVarBinder::{ name: $1, constraints: $3, loc: mk_loc($sloc) }
+// 1554|    TypeVarBinder::{ name: $1, constraints: $3, name_loc: mk_loc($loc($1)) }
 // 1555|  }
 
 ///|
@@ -9892,19 +9892,15 @@ fn yy_action_256(
 ) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   guard _args[2].0 is YYObj__list_List_TypeVarConstraint_(_dollar3)
-  let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 {
-    _last_pos
-  } else {
-    _args[_args.length() - 1].2
-  }
+  let _start_pos_of_item0 = _args[0].1
+  let _end_pos_of_item0 = _args[0].2
   YYObj_TypeVarBinder(
     {
       ()
       TypeVarBinder::{
         name: _dollar1,
         constraints: _dollar3,
-        loc: mk_loc((_symbol_start_pos, _end_pos)),
+        name_loc: mk_loc((_start_pos_of_item0, _end_pos_of_item0)),
       }
     },
   )
@@ -9973,7 +9969,7 @@ fn yy_action_259(
 
 // file:///./parser.mbty
 // 1550|    luident { 
-// 1551|    TypeVarBinder::{ name: $1, constraints: @list.empty(), loc: mk_loc($sloc) }
+// 1551|    TypeVarBinder::{ name: $1, constraints: @list.empty(), name_loc: mk_loc($loc($1)) }
 // 1552|  }
 
 ///|
@@ -9982,19 +9978,15 @@ fn yy_action_260(
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
-  let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 {
-    _last_pos
-  } else {
-    _args[_args.length() - 1].2
-  }
+  let _start_pos_of_item0 = _args[0].1
+  let _end_pos_of_item0 = _args[0].2
   YYObj_TypeVarBinder(
     {
       ()
       TypeVarBinder::{
         name: _dollar1,
         constraints: @list.empty(),
-        loc: mk_loc((_symbol_start_pos, _end_pos)),
+        name_loc: mk_loc((_start_pos_of_item0, _end_pos_of_item0)),
       }
     },
   )
