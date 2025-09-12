@@ -4,7 +4,20 @@ pub(all) struct Position {
   lnum : Int
   bol : Int
   cnum : Int
-} derive(Show, Hash, ToJson)
+} derive(Hash, ToJson)
+
+///|
+pub impl Show for Position with output(self, logger) {
+  logger.write_char('"')
+  if self.fname != "" {
+    logger..write_string(self.fname)..write_char(':')
+  }
+  logger
+  ..write_string(self.lnum.to_string())
+  ..write_char(':')
+  ..write_string(self.column().to_string())
+  ..write_char('"')
+}
 
 ///|
 pub impl Eq for Position with equal(self, other) {
