@@ -109,7 +109,11 @@ pub fn parse_string(
     comment=true,
     name~,
   )
-  fn parse_by_moonyacc(tokens) {
+  fn parse_by_moonyacc(tokens : @tokens.Triples) {
+    let tokens = tokens.filter(fn(triple) {
+      !(triple.0 is @tokens.Token::NEWLINE ||
+      triple.0 is @tokens.Token::COMMENT(_))
+    })
     (@yacc_parser.structure(tokens), []) catch {
       UnexpectedEndOfInput(pos, _) =>
         (
