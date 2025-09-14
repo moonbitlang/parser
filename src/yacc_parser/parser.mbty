@@ -237,8 +237,12 @@ parameter -> Parameter
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
       Optional(binder~, ty = $2, default = $4)
     }
+  | LIDENT "?" opt_annot "=" expr {
+      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
+      Optional(binder~, ty = $3, default = $5)
+    }
   | LIDENT "?" opt_annot {
-      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
+      let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
       QuestionOptional(binder~, ty = $3)
     }
   ;
@@ -318,7 +322,7 @@ fun_header_generic -> ((TypeName?, Binder), Location?, List[TypeVarBinder])
   ;
 
 local_type_decl -> LocalTypeDecl
-  : "struct" luident "{" list_semis(record_decl_field) "}" deriving_directive_list {
+  : "struct" UIDENT "{" list_semis(record_decl_field) "}" deriving_directive_list {
     LocalTypeDecl::{
       tycon : $2,
       tycon_loc : mk_loc($loc($2)),
@@ -326,7 +330,15 @@ local_type_decl -> LocalTypeDecl
       deriving: $6
     }
   }
-  | "enum" luident "{" list_semis(enum_constructor) "}" deriving_directive_list {
+  | "struct" UIDENT "(" non_empty_list_commas(type_) ")" deriving_directive_list {
+    LocalTypeDecl::{
+      tycon : $2,
+      tycon_loc : mk_loc($loc($2)),
+      components: TupleStruct($4),
+      deriving: $6
+    }
+  }
+  | "enum" UIDENT "{" list_semis(enum_constructor) "}" deriving_directive_list {
     LocalTypeDecl::{
       tycon : $2,
       tycon_loc : mk_loc($loc($2)),
@@ -334,7 +346,7 @@ local_type_decl -> LocalTypeDecl
       deriving: $6
     }
   }
-  | "type" luident type_ deriving_directive_list {
+  | "type" UIDENT type_ deriving_directive_list {
     LocalTypeDecl::{
       tycon : $2,
       tycon_loc : mk_loc($loc($2)),
@@ -420,7 +432,7 @@ structure_item -> Impl
       }
     )
   }
-  | attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {
+  | attributes visibility "extern" "type" UIDENT optional_type_parameters_no_constraints deriving_directive_list {
     TopTypeDef(
       TypeDecl::{
         tycon : $5,
@@ -497,6 +509,22 @@ structure_item -> Impl
         tycon_loc,
         params,
         components: Record($3),
+        type_vis,
+        doc : DocString::empty(),
+        deriving: $5,
+        loc : mk_loc($sloc),
+        attrs
+      }
+    )
+  }
+  | struct_header "(" non_empty_list_commas(type_) ")" deriving_directive_list {
+    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+    TopTypeDef(
+      TypeDecl::{
+        tycon,
+        tycon_loc,
+        params,
+        components: TupleStruct($3),
         type_vis,
         doc : DocString::empty(),
         deriving: $5,
@@ -592,7 +620,7 @@ structure_item -> Impl
       loc = mk_loc($sloc)
     )
   }
-  | attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
+  | attributes visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
     let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
     let supers = match $5 {
       None => @list.empty()
@@ -622,7 +650,7 @@ structure_item -> Impl
       loc = mk_loc($sloc)
     )
   }
-  | attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {
+  | attributes visibility "typealias" type_ "as" UIDENT optional_type_parameters_no_constraints {
     TopTypeDef(
       TypeDecl::{
         tycon : $6,
@@ -749,50 +777,45 @@ pub_attr -> String?
   ;
 
 type_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
-  : attributes visibility "type" luident optional_type_parameters_no_constraints { 
+  : attributes visibility "type" UIDENT optional_type_parameters_no_constraints { 
     ($1, $2, $4, mk_loc($loc($4)), $5) 
   }
   ;
 
 suberror_header -> (List[Attribute], Visibility, String, Location)
-  : attributes visibility "suberror" luident { ($1, $2, $4, mk_loc($loc($4))) }
+  : attributes visibility "suberror" UIDENT { ($1, $2, $4, mk_loc($loc($4))) }
   ;
 
 struct_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
-  : attributes visibility "struct" luident optional_type_parameters_no_constraints { 
+  : attributes visibility "struct" UIDENT optional_type_parameters_no_constraints { 
     ($1, $2, $4, mk_loc($loc($4)), $5) 
   }
   ;
 
 enum_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
-  : attributes visibility "enum" luident optional_type_parameters_no_constraints { 
+  : attributes visibility "enum" UIDENT optional_type_parameters_no_constraints { 
     ($1, $2, $4, mk_loc($loc($4)), $5) 
   }
   ;
 
 batch_type_alias_targets -> (Bool, Label?, List[AliasTarget])
-  : PACKAGE_NAME batch_type_alias_target(dot_luident) { 
+  : PACKAGE_NAME batch_type_alias_target(DOT_UIDENT) { 
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (false, Some(pkg), @list.singleton($2))
   }
-  | PACKAGE_NAME ".(" non_empty_list_commas(batch_type_alias_target(luident)) ")" { 
+  | PACKAGE_NAME ".(" non_empty_list_commas(batch_type_alias_target(UIDENT)) ")" { 
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (true, Some(pkg), $3)
   }
-  | batch_type_alias_target(luident) { (false, None, @list.singleton($1)) }
+  | batch_type_alias_target(UIDENT) { (false, None, @list.singleton($1)) }
   ;
 
-%inline dot_luident -> String
-  : DOT_LIDENT { $1 }
-  | DOT_UIDENT { $1 }
-  ;
-
-batch_type_alias_target(LUIDENT_MAYBE_DOT) -> AliasTarget
-  : LUIDENT_MAYBE_DOT { 
+batch_type_alias_target(UIDENT_MAYBE_DOT) -> AliasTarget
+  : UIDENT_MAYBE_DOT { 
     let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
     AliasTarget::{ binder, target: None }
   }
-  | LUIDENT_MAYBE_DOT "as" luident { 
+  | UIDENT_MAYBE_DOT "as" UIDENT { 
     let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
     let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
     AliasTarget::{ binder, target: Some(target) }
@@ -885,11 +908,6 @@ trait_method_param -> Parameter
   }
   ;
 
-luident -> String
-  : LIDENT
-  | UIDENT { $1 }
-  ;
-
 qual_ident -> LongIdent
   : LIDENT { Ident(name = $1) }
   | PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
@@ -901,7 +919,7 @@ qual_ident_simple_expr -> LongIdent
   ;
 
 %inline qual_ident_ty_inline -> LongIdent
-  : luident { LongIdent::Ident(name = $1) }
+  : UIDENT { LongIdent::Ident(name = $1) }
   | PACKAGE_NAME DOT_LIDENT { LongIdent::Dot(pkg = $1, id = $2) }
   | PACKAGE_NAME DOT_UIDENT { LongIdent::Dot(pkg = $1, id = $2) }
   ;
@@ -1080,9 +1098,8 @@ catch_keyword -> (Bool, Location)
   | "catch" "!" "{" { (true, mk_loc($sloc)) }
   ;
 
-%inline else_keyword -> (Bool, Location)
-  : "else" "{" { (true, mk_loc($sloc)) }
-  | "noraise" "{" { (false, mk_loc($sloc)) }
+%inline else_keyword -> Location
+  : "noraise" "{" { mk_loc($sloc) }
   ;
 
 try_expr -> Expr
@@ -1097,6 +1114,21 @@ try_expr -> Expr
       try_loc = mk_loc($loc($1)),
       catch_loc~,
       else_loc = @basic.Location::{ start: @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }, end: @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 } },
+      loc = mk_loc($sloc)
+    )
+  }
+  | "try" pipe_expr catch_keyword single_pattern_cases "}" else_keyword single_pattern_cases "}" { 
+    let (catch_all, catch_loc) = $3
+    let else_loc = $6
+    Try(
+      body = $2,
+      catch_ = $4,
+      catch_all~,
+      try_else = Some($7),
+      has_try = true,
+      try_loc = mk_loc($loc($1)),
+      catch_loc~,
+      else_loc~,
       loc = mk_loc($sloc)
     )
   }
@@ -1547,16 +1579,16 @@ simple_expr -> Expr
   ;
 
 tvar_binder -> TypeVarBinder
-  : luident { 
+  : UIDENT { 
     TypeVarBinder::{ name: $1, constraints: @list.empty(), name_loc: mk_loc($loc($1)) }
   }
-  | luident COLON separated_nonempty_list(PLUS, tvar_constraint) { 
+  | UIDENT COLON separated_nonempty_list(PLUS, tvar_constraint) { 
     TypeVarBinder::{ name: $1, constraints: $3, name_loc: mk_loc($loc($1)) }
   }
   ;
 
 type_decl_binder -> TypeDeclBinder
-  : luident { TypeDeclBinder::{ name: Some($1), loc: mk_loc($sloc) } }
+  : UIDENT { TypeDeclBinder::{ name: Some($1), loc: mk_loc($sloc) } }
   | "_" { TypeDeclBinder::{ name: None, loc: mk_loc($sloc) } }
   ;
 
@@ -1647,6 +1679,11 @@ argument -> Argument
     let label = Label::{ name: $1, loc: mk_loc($loc($1)) }
     let arg_value = @syntax.make_ident_expr(loc = mk_loc($loc($1)), Var::{ name: Ident(name = $1), loc: mk_loc($loc($1)) })
     Argument::{ value: arg_value, kind: LabelledPun(label) }
+  }
+  | POST_LABEL "=" expr {
+    let label = Label::{ name: $1, loc: mk_loc($loc($1)) }
+    let arg_value = $3
+    Argument::{ value: arg_value, kind: Labelled(label) }
   }
   | LIDENT "?" { 
     let loc = mk_loc($loc($1))
