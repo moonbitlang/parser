@@ -36,6 +36,8 @@ Parsing_util.(
 %token <string> MULTILINE_STRING
 %token <Lex_literal.interp_literal> MULTILINE_INTERP
 %token <Lex_literal.interp_literal> INTERP
+%token <string> REGEX_LITERAL
+%token <Lex_literal.interp_literal> REGEX_INTERP
 %token <(string * string option * string)> ATTRIBUTE
 %token <string> LIDENT
 %token <string> UIDENT
@@ -141,6 +143,7 @@ Parsing_util.(
 %token NORAISE         "noraise"
 %token TRY_QUESTION    "try?"
 %token TRY_EXCLAMATION "try!"
+%token LEXMATCH        "lexmatch"
 
 %right BARBAR
 %right AMPERAMPER
@@ -162,7 +165,6 @@ Parsing_util.(
 %nonassoc "as"
 %nonassoc prec_apply_non_ident_fn
 %nonassoc "!"
-%nonassoc "?"
 
 /* the precedence of "," and ")" are used to compare with prec_apply_non_ident_fn
    to make sure when parsing (a, b) => ...
@@ -349,13 +351,13 @@ fun_header_generic:
   }
 
 local_type_decl:
-  | "struct" tycon=luident "{" fs=list_semis(record_decl_field) "}" deriving_=deriving_directive_list {
+  | "struct" tycon=UIDENT "{" fs=list_semis(record_decl_field) "}" deriving_=deriving_directive_list {
     ({ local_tycon = tycon; local_tycon_loc_ = i $loc(tycon); local_components = Ptd_record fs; deriving_ = deriving_ }: Parsing_syntax.local_type_decl) }
-  | "struct" tycon=luident "(" ts=non_empty_list_commas(type_) ")" deriving_=deriving_directive_list {
+  | "struct" tycon=UIDENT "(" ts=non_empty_list_commas(type_) ")" deriving_=deriving_directive_list {
     ({ local_tycon = tycon; local_tycon_loc_ = i $loc(tycon); local_components = Ptd_tuple_struct ts; deriving_ = deriving_ }: Parsing_syntax.local_type_decl) }
-  | "enum" tycon=luident "{" cs=list_semis(enum_constructor) "}" deriving_=deriving_directive_list {
+  | "enum" tycon=UIDENT "{" cs=list_semis(enum_constructor) "}" deriving_=deriving_directive_list {
     ({ local_tycon = tycon; local_tycon_loc_ = i $loc(tycon); local_components = Ptd_variant cs; deriving_ = deriving_ }: Parsing_syntax.local_type_decl) }
-  | "type" tycon=luident ty=type_ deriving_=deriving_directive_list {
+  | "type" tycon=UIDENT ty=type_ deriving_=deriving_directive_list {
     ({ local_tycon = tycon; local_tycon_loc_ = i $loc(tycon); local_components = Ptd_newtype ty; deriving_ = deriving_ }: Parsing_syntax.local_type_decl) }
 
 extern_fun_header:
@@ -419,7 +421,7 @@ structure_item:
       Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_abstract; type_vis; doc_ = Docstring.empty; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ = false }
     }
   | attrs=attributes type_vis=visibility
-    "extern" "type" tycon=luident params=optional_type_parameters_no_constraints
+    "extern" "type" tycon=UIDENT params=optional_type_parameters_no_constraints
     deriving_=deriving_directive_list {
       let tycon_loc_ = i $loc(tycon) in
       Ptop_typedef
@@ -525,7 +527,7 @@ structure_item:
       ; loc_ = i $sloc
       }
   }
-  | attrs=attributes vis=visibility "trait" name=luident
+  | attrs=attributes vis=visibility "trait" name=UIDENT
     supers=option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint)))
     "{" methods=list_semis(trait_method_decl) "}" {
       let trait_name : Parsing_syntax.binder = { binder_name = name; loc_ = i ($loc(name)) } in
@@ -542,7 +544,7 @@ structure_item:
         trait_attrs = attrs;
       }
     }
-  | attrs=attributes vis=visibility "traitalias" name=luident "=" target=type_name {
+  | attrs=attributes vis=visibility "traitalias" name=UIDENT "=" target=type_name {
     let binder : Parsing_syntax.binder = { binder_name = name; loc_ = i $loc(name) } in
     let (pkg : Parsing_syntax.label option), (target : Parsing_syntax.label) =
       let loc_ = (target : Parsing_syntax.type_name).loc_ in
@@ -582,7 +584,7 @@ structure_item:
     }
   | attrs=attributes type_vis=visibility "typealias"
     target=type_
-    "as" tycon=luident params=optional_type_parameters_no_constraints {
+    "as" tycon=UIDENT params=optional_type_parameters_no_constraints {
       Ptop_typedef
         { tycon
         ; tycon_loc_ = i $loc(tycon)
@@ -633,6 +635,7 @@ structure_item:
       ; has_error
       ; quantifiers
       ; params
+      ; params_loc_ = i $loc(params)
       ; ret_ty
       ; err_ty
       ; body
@@ -661,6 +664,7 @@ structure_item:
       ; has_error
       ; quantifiers
       ; params
+      ; params_loc_ = i $loc(params)
       ; ret_ty
       ; err_ty
       ; body
@@ -725,47 +729,43 @@ pub_attr:
   | /* empty */ { None }
   | "(" "readonly" ")" { Some "readonly" }
   | "(" attr=LIDENT ")" { Some attr }
-type_header: attrs=attributes vis=visibility "type" tycon=luident params=optional_type_parameters_no_constraints {
+type_header: attrs=attributes vis=visibility "type" tycon=UIDENT params=optional_type_parameters_no_constraints {
   attrs, vis, tycon, i $loc(tycon), params
 }
-suberror_header: attrs=attributes vis=visibility "type" "!" tycon=luident {
+suberror_header: attrs=attributes vis=visibility "type" "!" tycon=UIDENT {
   attrs, vis, tycon, i $loc(tycon), true
 }
-| attrs=attributes vis=visibility "suberror" tycon=luident {
+| attrs=attributes vis=visibility "suberror" tycon=UIDENT {
   attrs, vis, tycon, i $loc(tycon), false
 } 
-struct_header: attrs=attributes vis=visibility "struct" tycon=luident params=optional_type_parameters_no_constraints {
+struct_header: attrs=attributes vis=visibility "struct" tycon=UIDENT params=optional_type_parameters_no_constraints {
   attrs, vis, tycon, i $loc(tycon), params
 }
-enum_header: attrs=attributes vis=visibility "enum" tycon=luident params=optional_type_parameters_no_constraints {
+enum_header: attrs=attributes vis=visibility "enum" tycon=UIDENT params=optional_type_parameters_no_constraints {
   attrs, vis, tycon, i $loc(tycon), params
 }
 
 batch_type_alias_targets:
-  | pkg=PACKAGE_NAME target=batch_type_alias_target(dot_luident) {
+  | pkg=PACKAGE_NAME target=batch_type_alias_target(DOT_UIDENT) {
     let pkg : Parsing_syntax.label = { label_name = pkg; loc_ = i $loc(pkg) } in
     false, Some pkg, [ target ]
   }
   | pkg=PACKAGE_NAME
-    ".(" targets=non_empty_list_commas(batch_type_alias_target(luident)) ")" {
+    ".(" targets=non_empty_list_commas(batch_type_alias_target(UIDENT)) ")" {
     let pkg : Parsing_syntax.label = { label_name = pkg; loc_ = i $loc(pkg) } in
     true, Some pkg, targets
   }
-  | target=batch_type_alias_target(luident) {
+  | target=batch_type_alias_target(UIDENT) {
     false, None, [ target ]
   }
 
-%inline dot_luident:
-  | DOT_LIDENT { $1 }
-  | DOT_UIDENT { $1 }
-
-batch_type_alias_target(LUIDENT_MAYBE_DOT):
-  | binder_name=LUIDENT_MAYBE_DOT
+batch_type_alias_target(UIDENT_MAYBE_DOT):
+  | binder_name=UIDENT_MAYBE_DOT
   {
     let binder : Parsing_syntax.binder = { binder_name; loc_ = i $loc(binder_name) } in
     ({ binder; target = None } : Parsing_syntax.alias_target)
   }
-  | target_name=LUIDENT_MAYBE_DOT "as" binder_name=luident
+  | target_name=UIDENT_MAYBE_DOT "as" binder_name=UIDENT
     {
       let binder : Parsing_syntax.binder = { binder_name; loc_ = i $loc(binder_name) } in
       let target : Parsing_syntax.label = { label_name = target_name; loc_ = i $loc(target_name) } in
@@ -773,7 +773,7 @@ batch_type_alias_target(LUIDENT_MAYBE_DOT):
     }
 
 func_alias_targets:
-  | type_name=ioption(func_alias_type_name(LIDENT, UIDENT))
+  | type_name=ioption(func_alias_type_name(UIDENT))
     target=func_alias_target(LIDENT) {
     None, type_name, false, [ target ]
   }
@@ -784,14 +784,14 @@ func_alias_targets:
     Some pkg, None, false, [ target ]
   }
   | pkg=PACKAGE_NAME
-    type_name=func_alias_type_name(DOT_LIDENT, DOT_UIDENT)
+    type_name=func_alias_type_name(DOT_UIDENT)
     target=func_alias_target(LIDENT) {
     let pkg : Parsing_syntax.label =
       { label_name = pkg; loc_ = i $loc(pkg) }
     in
     Some pkg, Some type_name, false, [ target ]
   }
-  | type_name=option(func_alias_type_name(LIDENT, UIDENT))
+  | type_name=option(func_alias_type_name(UIDENT))
     "(" targets=non_empty_list_commas(func_alias_target(LIDENT)) ")" {
     None, type_name, true, targets
   }
@@ -803,7 +803,7 @@ func_alias_targets:
     Some pkg, None, true, targets
   }
   | pkg=PACKAGE_NAME
-    type_name=func_alias_type_name(DOT_LIDENT, DOT_UIDENT)
+    type_name=func_alias_type_name(DOT_UIDENT)
     "(" targets=non_empty_list_commas(func_alias_target(LIDENT)) ")" {
     let pkg : Parsing_syntax.label =
       { label_name = pkg; loc_ = i $loc(pkg) }
@@ -811,8 +811,7 @@ func_alias_targets:
     Some pkg, Some type_name, true, targets
   }
 
-func_alias_type_name(LIDENT_MAYBE_DOT, UIDENT_MAYBE_DOT):
-  | name=LIDENT_MAYBE_DOT "::"
+func_alias_type_name(UIDENT_MAYBE_DOT):
   | name=UIDENT_MAYBE_DOT "::" {
     ({ label_name = name; loc_ = i $loc(name) } : Parsing_syntax.label)
   }
@@ -887,10 +886,12 @@ trait_method_param:
     in
     Parsing_syntax.Labelled { binder; ty = Some typ }
   }
-
-luident:
-  | i=LIDENT
-  | i=UIDENT { i }
+  | binder_name=LIDENT "?" ":" typ=type_ {
+    let binder : Parsing_syntax.binder =
+      { binder_name; loc_ = i $loc(binder_name) }
+    in
+    Parsing_syntax.Question_optional { binder; ty = Some typ }
+  }
 
 qual_ident:
   | i=LIDENT { Lident(i) }
@@ -918,8 +919,7 @@ qual_ident_simple_expr:
   | ps=PACKAGE_NAME id=DOT_LIDENT { Ldot({ pkg = ps; id}) }
 
 %inline qual_ident_ty_inline:
-  | id=luident { Basic_longident.Lident(id) }
-  | ps=PACKAGE_NAME id=DOT_LIDENT
+  | id=UIDENT { Basic_longident.Lident(id) }
   | ps=PACKAGE_NAME id=DOT_UIDENT { Basic_longident.Ldot({ pkg = ps; id}) }
 
 qual_ident_ty:
@@ -1129,6 +1129,49 @@ match_expr:
     Pexpr_match {loc_=(i $sloc);  expr = fst h; cases =  mat; match_loc_ = i $loc(h); using = snd h} }
   | h=match_header "}" { Parsing_syntax.Pexpr_match {loc_ = (i $sloc) ; expr = fst h; cases =  []; match_loc_ = i $loc(h); using = snd h}}
 
+lex_expr:
+  | lex_header lex_cases "}" { (Pexpr_lex {strategy = snd $1; expr = fst $1; match_loc_ = i $loc($1); cases = fst $2; catchall_case = snd $2; loc_ = i $loc} : Parsing_syntax.expr) }
+
+lex_header:
+  | "lexmatch" infix_expr "{" { ($2, None) }
+  | "lexmatch" infix_expr "using" label "{" { ($2, Some $4) }
+
+lex_cases:
+  | { ([], None) }
+  | SEMI { ([], None) }
+  | lex_catchall_case { ([], Some $1) }
+  | lex_catchall_case SEMI { ([], Some $1) }
+  | lex_case SEMI lex_cases { ($1 :: fst $3, snd $3) }
+
+lex_catchall_case:
+  | "_" "=>" expr_statement { ({binder = None; body = $3} : Parsing_syntax.lex_catchall_case) }
+  | binder "=>" expr_statement { ({binder = Some $1; body = $3} : Parsing_syntax.lex_catchall_case) }
+  | "..." { ({binder = None; body = Pexpr_hole {loc_ = i $sloc; kind = Todo}} : Parsing_syntax.lex_catchall_case) }
+
+lex_case:
+  | lex_sequence_pattern "=>" expr_statement { ({pat = $1; rest = None; body = $3} : Parsing_syntax.lex_case) }
+  | lex_sequence_pattern "," lext_case_rest_binder "=>" expr_statement { ({pat = $1; rest = Some($3); body = $5} : Parsing_syntax.lex_case) }
+
+lext_case_rest_binder:
+  | "_" { None }
+  | binder { Some $1 }
+  ;
+
+lex_sequence_pattern:
+  | lex_pattern_sequence { match $1 with [pat] -> pat | _ -> (Plpat_sequence {pats = $1; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
+  | lex_atom_pattern "as" binder { (Plpat_alias {pat = $1; binder = $3; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
+
+lex_pattern_sequence:
+  | lex_atom_pattern { [$1] }
+  | lex_atom_pattern option(SEMI) lex_pattern_sequence { $1 :: $3 }
+
+lex_atom_pattern:
+  | REGEX_LITERAL { (Plpat_regex {lit = $1; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
+  | REGEX_INTERP { (Plpat_regex_interp {elems = Parsing_util.make_interps $1; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
+  | STRING { (Plpat_regex {lit = Lex_literal.to_string_repr $1; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
+  | INTERP { (Plpat_regex_interp {elems = Parsing_util.make_interps $1; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
+  | "(" lex_sequence_pattern ")" { $2 }
+
 %inline loop_header:
   | "loop" args=non_empty_list_commas_no_trailing(expr) "{" { args }
 
@@ -1173,7 +1216,8 @@ expr:
   | while_expr
   | try_expr 
   | if_expr 
-  | match_expr 
+  | match_expr
+  | lex_expr
   | simple_try_expr {$1}
   | func=arrow_fn_expr { Pexpr_function { loc_ = i $sloc; func } }
 
@@ -1279,10 +1323,10 @@ constr:
       }
     }
 
+
 %inline apply_attr:
   | { Parsing_syntax.No_attr }
   | "!" { Parsing_syntax.Exclamation }
-  | "?" { Parsing_syntax.Question }
 
 non_empty_tuple_elems:
   | e=expr ioption(",") ")" { [e] }
@@ -1365,13 +1409,6 @@ simple_expr:
   | "_" %prec prec_lower_than_arrow_fn { Pexpr_hole { loc_ = (i $sloc) ; kind = Incomplete } }
   | var_name=qual_ident_simple_expr { make_Pexpr_ident ~loc_:(i $sloc) { var_name; loc_ = i $sloc } }
   | c=constr { Parsing_syntax.Pexpr_constr {loc_ = (i $sloc); constr = c} }
-  | func=LIDENT "?" "(" args=list_commas(argument) ")" {
-    let func : Parsing_syntax.expr =
-      let loc_ = i $loc(func) in
-      Pexpr_ident { id = { var_name = Lident func; loc_ }; loc_ }
-    in
-    Pexpr_apply { func; args; loc_ = i $sloc; attr = Question }
-  }
   | func=simple_expr attr=apply_attr "(" args=list_commas(argument) ")" {
     Pexpr_apply { func; args; loc_ = i $sloc; attr }
   }
@@ -1415,14 +1452,14 @@ simple_expr:
 %inline binder:
   name = LIDENT { { Parsing_syntax.binder_name = name; loc_=(i $loc) } }
 tvar_binder:
-  | name = luident {
+  | name = UIDENT {
       { Parsing_syntax.tvar_name = name; tvar_constraints = []; loc_=(i $loc) }
   }
-  | name = luident COLON constraints = separated_nonempty_list(PLUS, tvar_constraint) {
+  | name = UIDENT COLON constraints = separated_nonempty_list(PLUS, tvar_constraint) {
       { Parsing_syntax.tvar_name = name; tvar_constraints = constraints; loc_ = (i $loc(name)) }
   }
 type_decl_binder:
-  | name = luident { { Parsing_syntax.tvar_name = Some name; loc_=(i $loc) } }
+  | name = UIDENT { { Parsing_syntax.tvar_name = Some name; loc_=(i $loc) } }
   | "_" { { Parsing_syntax.tvar_name = None; loc_ = (i $loc) } }
 tvar_constraint:
   | qual_ident_ty { { Parsing_syntax.tvc_trait = $1; loc_ = i $sloc } }
@@ -1564,6 +1601,7 @@ simple_pattern:
   | "-" FLOAT { (make_Ppat_constant ~loc_:(i $sloc) (Parsing_util.make_float ("-" ^ $2))) }
   | STRING { (make_Ppat_constant ~loc_:(i $sloc) (Const_string $1)) }
   | BYTES { (make_Ppat_constant ~loc_:(i $sloc) (Const_bytes $1)) }
+  | REGEX_LITERAL { Parsing_syntax.Ppat_regex { lit = $1; loc_ = i $sloc } }
   | UNDERSCORE { Ppat_any {loc_ = i $sloc } }
   | b=binder  { Ppat_var b }
   | constr=constr ps=option(delimited("(", constr_pat_arguments, ")")){
@@ -1573,6 +1611,12 @@ simple_pattern:
       | Some (args, is_open) -> (Some args, is_open)
     in
     make_Ppat_constr ~loc_:(i $sloc) (constr, args, is_open)
+  }
+  (* bits constr pattern `i4(args)` 
+     To disambiguate with pattern variable, the args list must be present.
+  *)
+  | name=binder ps=delimited("(", constr_pat_arguments_no_open, ")"){
+    Ppat_special_constr { binder = name; args = ps; loc_ = i $sloc }
   }
   | "(" pattern ")" { $2 }
   | "(" p = pattern "," ps=non_empty_list_commas(pattern) ")"  {make_Ppat_tuple ~loc_:(i $sloc) (p::ps)}
@@ -1588,8 +1632,8 @@ simple_pattern:
 
 array_sub_pattern:
   | pattern { Parsing_syntax.Pattern($1) }
-  | ".." STRING { Parsing_syntax.String_spread($2) }
-  | ".." BYTES { Bytes_spread($2) }
+  | ".." s=STRING { Parsing_syntax.String_spread { str=s; loc_=i ($loc(s)) } }
+  | ".." b=BYTES { Parsing_syntax.Bytes_spread { bytes=b; loc_=i ($loc(b)) } }
   | ".." b=UIDENT { Const_spread { binder = { binder_name = b; loc_=(i $loc(b)) }; pkg = None; loc_ = i $sloc } }
   | ".." pkg=PACKAGE_NAME b=DOT_UIDENT 
     { Const_spread { binder = { binder_name = b; loc_=(i $loc(b)) }; pkg = Some pkg; loc_ = i $sloc } }
@@ -1786,9 +1830,22 @@ constr_pat_arguments:
     (arg :: args, is_open)
   }
 
+constr_pat_arguments_no_open:
+  | constr_pat_argument option(",") { ([ $1 ]) }
+  | arg=constr_pat_argument "," rest=constr_pat_arguments_no_open {
+    (arg :: rest)
+  }
+
 constr_pat_argument:
   (* label=pattern *)
   | label=label "=" pat=pattern {
+    Parsing_syntax.Constr_pat_arg { pat; kind = Labelled label }
+  }
+  (* label~=expr. this is not recommended *)
+  | label_name=POST_LABEL "=" pat=pattern {
+    let label : Parsing_syntax.label =
+      { label_name; loc_ = i $loc(label_name) }
+    in
     Parsing_syntax.Constr_pat_arg { pat; kind = Labelled label }
   }
   (* label~ *)

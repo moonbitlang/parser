@@ -11,6 +11,8 @@
 %token MULTILINE_STRING
 %token MULTILINE_INTERP
 %token INTERP
+%token REGEX_LITERAL
+%token REGEX_INTERP
 %token ATTRIBUTE
 %token LIDENT
 %token UIDENT
@@ -105,6 +107,7 @@
 %token NORAISE "noraise"
 %token TRY_QUESTION "try?"
 %token TRY_EXCLAMATION "try!"
+%token LEXMATCH "lexmatch"
 
 %right BARBAR
 %right AMPERAMPER
@@ -122,7 +125,6 @@
 %nonassoc "as"
 %nonassoc prec_apply_non_ident_fn
 %nonassoc "!"
-%nonassoc "?"
 %nonassoc prec_lower_than_arrow_fn
 %nonassoc ","
 %nonassoc ")"
@@ -263,10 +265,10 @@ fun_header_generic
   ;
 
 local_type_decl
-  : "struct" luident "{" list_semis(record_decl_field) "}" deriving_directive_list {}
-  | "struct" luident "(" non_empty_list_commas(type_) ")" deriving_directive_list {}
-  | "enum" luident "{" list_semis(enum_constructor) "}" deriving_directive_list {}
-  | "type" luident type_ deriving_directive_list {}
+  : "struct" UIDENT "{" list_semis(record_decl_field) "}" deriving_directive_list {}
+  | "struct" UIDENT "(" non_empty_list_commas(type_) ")" deriving_directive_list {}
+  | "enum" UIDENT "{" list_semis(enum_constructor) "}" deriving_directive_list {}
+  | "type" UIDENT type_ deriving_directive_list {}
   ;
 
 extern_fun_header
@@ -307,7 +309,7 @@ structure
 
 structure_item
   : type_header deriving_directive_list {}
-  | attributes visibility "extern" "type" luident optional_type_parameters_no_constraints deriving_directive_list {}
+  | attributes visibility "extern" "type" UIDENT optional_type_parameters_no_constraints deriving_directive_list {}
   | type_header type_ deriving_directive_list {}
   | suberror_header option(type_) deriving_directive_list {}
   | suberror_header "{" list_semis(enum_constructor) "}" deriving_directive_list {}
@@ -322,11 +324,11 @@ structure_item
   | extern_fun_header "=" non_empty_list(MULTILINE_STRING) {}
   | fun_header block_expr_with_local_types {}
   | attributes visibility "fnalias" func_alias_targets {}
-  | attributes visibility "trait" luident option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {}
-  | attributes visibility "traitalias" luident "=" type_name {}
+  | attributes visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {}
+  | attributes visibility "traitalias" UIDENT "=" type_name {}
   | attributes visibility "typealias" batch_type_alias_targets {}
   | attributes visibility "typealias" type_ "=" type_ deriving_directive_list {}
-  | attributes visibility "typealias" type_ "as" luident optional_type_parameters_no_constraints {}
+  | attributes visibility "typealias" type_ "as" UIDENT optional_type_parameters_no_constraints {}
   | attributes visibility "traitalias" batch_type_alias_targets {}
   | attributes "test" option(loced_string) option(parameters) block_expr_with_local_types {}
   | attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder optional_bang parameters func_return_type impl_body {}
@@ -357,50 +359,44 @@ pub_attr
   ;
 
 type_header
-  : attributes visibility "type" luident optional_type_parameters_no_constraints {}
+  : attributes visibility "type" UIDENT optional_type_parameters_no_constraints {}
   ;
 
 suberror_header
-  : attributes visibility "type" "!" luident {}
-  | attributes visibility "suberror" luident {}
+  : attributes visibility "type" "!" UIDENT {}
+  | attributes visibility "suberror" UIDENT {}
   ;
 
 struct_header
-  : attributes visibility "struct" luident optional_type_parameters_no_constraints {}
+  : attributes visibility "struct" UIDENT optional_type_parameters_no_constraints {}
   ;
 
 enum_header
-  : attributes visibility "enum" luident optional_type_parameters_no_constraints {}
+  : attributes visibility "enum" UIDENT optional_type_parameters_no_constraints {}
   ;
 
 batch_type_alias_targets
-  : PACKAGE_NAME batch_type_alias_target(dot_luident) {}
-  | PACKAGE_NAME ".(" non_empty_list_commas(batch_type_alias_target(luident)) ")" {}
-  | batch_type_alias_target(luident) {}
+  : PACKAGE_NAME batch_type_alias_target(DOT_UIDENT) {}
+  | PACKAGE_NAME ".(" non_empty_list_commas(batch_type_alias_target(UIDENT)) ")" {}
+  | batch_type_alias_target(UIDENT) {}
   ;
 
-%inline dot_luident
-  : DOT_LIDENT {}
-  | DOT_UIDENT {}
-  ;
-
-batch_type_alias_target(LUIDENT_MAYBE_DOT)
-  : LUIDENT_MAYBE_DOT {}
-  | LUIDENT_MAYBE_DOT "as" luident {}
+batch_type_alias_target(UIDENT_MAYBE_DOT)
+  : UIDENT_MAYBE_DOT {}
+  | UIDENT_MAYBE_DOT "as" UIDENT {}
   ;
 
 func_alias_targets
-  : ioption(func_alias_type_name(LIDENT, UIDENT)) func_alias_target(LIDENT) {}
+  : ioption(func_alias_type_name(UIDENT)) func_alias_target(LIDENT) {}
   | PACKAGE_NAME func_alias_target(DOT_LIDENT) {}
-  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) func_alias_target(LIDENT) {}
-  | option(func_alias_type_name(LIDENT, UIDENT)) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" {}
+  | PACKAGE_NAME func_alias_type_name(DOT_UIDENT) func_alias_target(LIDENT) {}
+  | option(func_alias_type_name(UIDENT)) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" {}
   | PACKAGE_NAME ".(" non_empty_list_commas(func_alias_target(LIDENT)) ")" {}
-  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" {}
+  | PACKAGE_NAME func_alias_type_name(DOT_UIDENT) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" {}
   ;
 
-func_alias_type_name(LIDENT_MAYBE_DOT, UIDENT_MAYBE_DOT)
-  : LIDENT_MAYBE_DOT "::" {}
- | UIDENT_MAYBE_DOT "::" {}
+func_alias_type_name(UIDENT_MAYBE_DOT)
+  : UIDENT_MAYBE_DOT "::" {}
   ;
 
 func_alias_target(LIDENT_MAYBE_DOT)
@@ -429,11 +425,7 @@ trait_method_param
   : type_ {}
   | binder ":" type_ {}
   | POST_LABEL ":" type_ {}
-  ;
-
-luident
-  : LIDENT {}
- | UIDENT {}
+  | LIDENT "?" ":" type_ {}
   ;
 
 qual_ident
@@ -447,9 +439,8 @@ qual_ident_simple_expr
   ;
 
 %inline qual_ident_ty_inline
-  : luident {}
-  | PACKAGE_NAME DOT_LIDENT {}
- | PACKAGE_NAME DOT_UIDENT {}
+  : UIDENT {}
+  | PACKAGE_NAME DOT_UIDENT {}
   ;
 
 qual_ident_ty
@@ -578,6 +569,57 @@ match_expr
   | match_header "}" {}
   ;
 
+lex_expr
+  : lex_header lex_cases "}" {}
+  ;
+
+lex_header
+  : "lexmatch" infix_expr "{" {}
+  | "lexmatch" infix_expr "using" label "{" {}
+  ;
+
+lex_cases
+  :  {}
+  | SEMI {}
+  | lex_catchall_case {}
+  | lex_catchall_case SEMI {}
+  | lex_case SEMI lex_cases {}
+  ;
+
+lex_catchall_case
+  : "_" "=>" expr_statement {}
+  | binder "=>" expr_statement {}
+  | "..." {}
+  ;
+
+lex_case
+  : lex_sequence_pattern "=>" expr_statement {}
+  | lex_sequence_pattern "," lext_case_rest_binder "=>" expr_statement {}
+  ;
+
+lext_case_rest_binder
+  : "_" {}
+  | binder {}
+  ;
+
+lex_sequence_pattern
+  : lex_pattern_sequence {}
+  | lex_atom_pattern "as" binder {}
+  ;
+
+lex_pattern_sequence
+  : lex_atom_pattern {}
+  | lex_atom_pattern option(SEMI) lex_pattern_sequence {}
+  ;
+
+lex_atom_pattern
+  : REGEX_LITERAL {}
+  | REGEX_INTERP {}
+  | STRING {}
+  | INTERP {}
+  | "(" lex_sequence_pattern ")" {}
+  ;
+
 %inline loop_header
   : "loop" non_empty_list_commas_no_trailing(expr) "{" {}
   ;
@@ -617,6 +659,7 @@ expr
  | try_expr {}
  | if_expr {}
  | match_expr {}
+ | lex_expr {}
  | simple_try_expr {}
   | arrow_fn_expr {}
   ;
@@ -703,7 +746,6 @@ constr
 %inline apply_attr
   :  {}
   | "!" {}
-  | "?" {}
   ;
 
 non_empty_tuple_elems
@@ -743,7 +785,6 @@ simple_expr
   | "_" %prec prec_lower_than_arrow_fn {}
   | qual_ident_simple_expr {}
   | constr {}
-  | LIDENT "?" "(" list_commas(argument) ")" {}
   | simple_expr apply_attr "(" list_commas(argument) ")" {}
   | simple_expr "[" expr "]" {}
   | simple_expr "[" option(expr) ":" option(expr) "]" {}
@@ -769,12 +810,12 @@ simple_expr
   ;
 
 tvar_binder
-  : luident {}
-  | luident COLON separated_nonempty_list(PLUS, tvar_constraint) {}
+  : UIDENT {}
+  | UIDENT COLON separated_nonempty_list(PLUS, tvar_constraint) {}
   ;
 
 type_decl_binder
-  : luident {}
+  : UIDENT {}
   | "_" {}
   ;
 
@@ -894,9 +935,11 @@ simple_pattern
   | "-" FLOAT {}
   | STRING {}
   | BYTES {}
+  | REGEX_LITERAL {}
   | UNDERSCORE {}
   | binder {}
   | constr option(delimited("(", constr_pat_arguments, ")")) {}
+  | binder delimited("(", constr_pat_arguments_no_open, ")") {}
   | "(" pattern ")" {}
   | "(" pattern "," non_empty_list_commas(pattern) ")" {}
   | "(" pattern annot ")" {}
@@ -1041,8 +1084,14 @@ constr_pat_arguments
   | constr_pat_argument "," constr_pat_arguments {}
   ;
 
+constr_pat_arguments_no_open
+  : constr_pat_argument option(",") {}
+  | constr_pat_argument "," constr_pat_arguments_no_open {}
+  ;
+
 constr_pat_argument
   : label "=" pattern {}
+  | POST_LABEL "=" pattern {}
   | POST_LABEL {}
   | pattern {}
   ;
