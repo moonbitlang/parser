@@ -162,16 +162,36 @@
               },
               "try_loc": null,
               "loc": null
-            }
-          ],
-          "last_expr": {
-            "type": "Expr::TryOperator",
-            "body": {
-              "type": "Expr::Group",
-              "expr": {
-                "type": "Expr::Sequence",
-                "exprs": [
-                  {
+            },
+            {
+              "type": "Expr::TryOperator",
+              "body": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Sequence",
+                  "exprs": [
+                    {
+                      "type": "Expr::Apply",
+                      "func": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "f"
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "args": [],
+                      "attr": {
+                        "type": "ApplyAttr::NoAttr"
+                      },
+                      "loc": null
+                    }
+                  ],
+                  "last_expr": {
                     "type": "Expr::Apply",
                     "func": {
                       "type": "Expr::Ident",
@@ -179,7 +199,7 @@
                         "type": "Var",
                         "name": {
                           "type": "LongIdent::Ident",
-                          "0": "f"
+                          "0": "g"
                         },
                         "loc": null
                       },
@@ -190,39 +210,54 @@
                       "type": "ApplyAttr::NoAttr"
                     },
                     "loc": null
-                  }
-                ],
-                "last_expr": {
-                  "type": "Expr::Apply",
-                  "func": {
-                    "type": "Expr::Ident",
-                    "id": {
-                      "type": "Var",
-                      "name": {
-                        "type": "LongIdent::Ident",
-                        "0": "g"
-                      },
-                      "loc": null
-                    },
-                    "loc": null
-                  },
-                  "args": [],
-                  "attr": {
-                    "type": "ApplyAttr::NoAttr"
                   },
                   "loc": null
                 },
+                "group": {
+                  "type": "Group::Brace"
+                },
                 "loc": null
               },
-              "group": {
-                "type": "Group::Brace"
+              "kind": {
+                "type": "TryOperatorKind::Question"
               },
+              "try_loc": null,
+              "loc": null
+            }
+          ],
+          "last_expr": {
+            "type": "Expr::Group",
+            "expr": {
+              "type": "Expr::TryOperator",
+              "body": {
+                "type": "Expr::Apply",
+                "func": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "f"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "args": [],
+                "attr": {
+                  "type": "ApplyAttr::NoAttr"
+                },
+                "loc": null
+              },
+              "kind": {
+                "type": "TryOperatorKind::Question"
+              },
+              "try_loc": null,
               "loc": null
             },
-            "kind": {
-              "type": "TryOperatorKind::Question"
+            "group": {
+              "type": "Group::Paren"
             },
-            "try_loc": null,
             "loc": null
           },
           "loc": null
