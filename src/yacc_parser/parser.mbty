@@ -1747,6 +1747,9 @@ simple_pattern -> Pattern
     }
     @syntax.make_constr_pattern(loc = mk_loc($sloc), $1, args, is_open)
   }
+  | binder delimited("(", constr_pat_arguments_no_open, ")") {
+    Pattern::SpecialConstr(binder = $1, args = $2, loc = mk_loc($sloc))
+  }
   | "(" pattern ")" { $2 }
   | "(" pattern "," non_empty_list_commas(pattern) ")" { @syntax.make_tuple_pattern(loc = mk_loc($sloc), $4.add($2)) }
   | "(" pattern annot ")" { Constraint(pat = $2, ty = $3, loc = mk_loc($sloc)) }
@@ -1996,6 +1999,11 @@ constr_pat_arguments -> (List[ConstrPatArg], Bool)
     let (args, is_open) = $3
     (args.add($1), is_open)
   }
+  ;
+
+constr_pat_arguments_no_open -> List[ConstrPatArg]
+  : constr_pat_argument option(",") { @list.singleton($1) }
+  | constr_pat_argument "," constr_pat_arguments_no_open { $3.add($1) }
   ;
 
 constr_pat_argument -> ConstrPatArg
