@@ -1,17 +1,17 @@
-struct single {
-  r1:int
+struct Single {
+  r1:Int
 }
 
-struct multi {
-  r1:int
-  r2:bool
+struct Multi {
+  r1:Int
+  r2:Bool
 }
 
-struct many {
-  r1:int
-  r2:bool
-  r3:int
-  r4:bool
+struct Many {
+  r1:Int
+  r2:Bool
+  r3:Int
+  r4:Bool
 }
 
 fn init {

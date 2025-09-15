@@ -1,12 +1,12 @@
-struct h {
-  mut x:u
+struct H {
+  mut x:U
 }
 
-struct u {
-  mut x:int
+struct U {
+  mut x:Int
 }
 
-fn hello(x: h) {
+fn hello(x: H) {
   x.x.x = 3
 }
 

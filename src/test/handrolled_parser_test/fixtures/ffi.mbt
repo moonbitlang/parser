@@ -1,2 +1,2 @@
-fn hello(self: int, x: int) = "modulename" "funcname"
+fn hello(self: Int, x: Int) = "modulename" "funcname"
 

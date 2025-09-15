@@ -1,4 +1,4 @@
-fn add(x: int, y: int) -> int {
+fn add(x: Int, y: Int) -> Int {
   x + y
 }
 

@@ -1,7 +1,7 @@
-struct r {
-  r1:string
-  r2:int
-  r3:bool
+struct R {
+  r1:String
+  r2:Int
+  r3:Bool
 }
 
 fn init {

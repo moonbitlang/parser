@@ -1,16 +1,16 @@
-fn ignore(a: int) {
+fn ignore(a: Int) {
   return
 }
 
-fn k(a: int, b: int) {
+fn k(a: Int, b: Int) {
   return a
 }
 
-fn xtest_eq(a: int, b: int) -> bool {
+fn xtest_eq(a: Int, b: Int) -> Bool {
   if a == b { return true } else { return false }
 }
 
-fn ret_in_while() -> int {
+fn ret_in_while() -> Int {
   while true {
     return 0
   }
