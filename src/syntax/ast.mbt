@@ -650,6 +650,11 @@ pub(all) enum Pattern {
   Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : Location)
   /// `p1..=p2` or `p1..<p2` if inclusive is false.
   Range(lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : Location)
+  SpecialConstr(
+    binder~ : Binder,
+    args~ : @list.List[ConstrPatArg],
+    loc~ : Location
+  )
 }
 
 ///|

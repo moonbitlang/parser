@@ -282,6 +282,12 @@ pub(open) trait IterVisitor {
     inclusive~ : Bool,
     loc~ : Location,
   ) -> Unit = _
+  visit_Pattern_SpecialConstr(
+    Self,
+    binder~ : Binder,
+    args~ : @list.List[ConstrPatArg],
+    loc~ : Location,
+  ) -> Unit = _
 
   // LocalTypeDecl
   visit_LocalTypeDecl(Self, LocalTypeDecl) -> Unit = _
@@ -1979,6 +1985,11 @@ impl IterVisitor with visit_Pattern_Range(env, lhs~, rhs~, inclusive~, loc~) {
 }
 
 ///|
+impl IterVisitor with visit_Pattern_SpecialConstr(env, binder~, args~, loc~) {
+  IterVisitorBase::visit_Pattern_SpecialConstr(env, binder~, args~, loc~)
+}
+
+///|
 impl IterVisitor with visit_LocalTypeDecl(env, local_type_decl) {
   IterVisitorBase::visit_LocalTypeDecl(env, local_type_decl)
 }
@@ -3255,6 +3266,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Pattern(
       env.inner().visit_Pattern_Map(elems~, is_closed~, loc~)
     Range(lhs~, rhs~, inclusive~, loc~) =>
       env.inner().visit_Pattern_Range(lhs~, rhs~, inclusive~, loc~)
+    SpecialConstr(binder~, args~, loc~) =>
+      env.inner().visit_Pattern_SpecialConstr(binder~, args~, loc~)
   }
 }
 
@@ -3390,6 +3403,18 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Pattern_
   ignore(loc)
   env.inner().visit_Pattern(lhs)
   env.inner().visit_Pattern(rhs)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Pattern_SpecialConstr(
+  env,
+  binder~,
+  args~,
+  loc~,
+) {
+  ignore(loc)
+  env.inner().visit_Binder(binder)
+  args.each(env.inner().visit_ConstrPatArg(_))
 }
 
 ///|

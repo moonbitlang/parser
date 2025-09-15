@@ -559,7 +559,8 @@ pub fn Pattern::loc(self : Self) -> Location {
     | Array(loc~, ..)
     | Any(loc~)
     | Alias(loc~, ..)
-    | Range(loc~, ..) => loc
+    | Range(loc~, ..)
+    | SpecialConstr(loc~, ..) => loc
   }
 }
 

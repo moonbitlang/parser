@@ -665,6 +665,13 @@ pub impl ToJson for Pattern with to_json(self) {
         "inclusive": inclusive,
         "loc": loc,
       }
+    SpecialConstr(binder~, args~, loc~) =>
+      {
+        "type": "Pattern::SpecialConstr",
+        "binder": binder,
+        "args": list_to_json(args),
+        "loc": loc,
+      }
   }
 }
 
