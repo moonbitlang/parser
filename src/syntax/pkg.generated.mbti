@@ -537,6 +537,7 @@ pub(all) enum Pattern {
   Record(fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : @basic.Location)
   Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : @basic.Location)
   Range(lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : @basic.Location)
+  SpecialConstr(binder~ : Binder, args~ : @list.List[ConstrPatArg], loc~ : @basic.Location)
 }
 fn Pattern::loc(Self) -> @basic.Location
 impl ToJson for Pattern
@@ -791,6 +792,7 @@ pub(open) trait IterVisitor {
   visit_Pattern_Record(Self, fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : @basic.Location) -> Unit = _
   visit_Pattern_Map(Self, elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : @basic.Location) -> Unit = _
   visit_Pattern_Range(Self, lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : @basic.Location) -> Unit = _
+  visit_Pattern_SpecialConstr(Self, binder~ : Binder, args~ : @list.List[ConstrPatArg], loc~ : @basic.Location) -> Unit = _
   visit_LocalTypeDecl(Self, LocalTypeDecl) -> Unit = _
   visit_DerivingDirective(Self, DerivingDirective) -> Unit = _
   visit_TypeDecl(Self, TypeDecl) -> Unit = _
@@ -989,6 +991,7 @@ pub(open) trait MapVisitor {
   visit_Pattern_Record(Self, fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : @basic.Location) -> Pattern = _
   visit_Pattern_Map(Self, elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : @basic.Location) -> Pattern = _
   visit_Pattern_Range(Self, lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : @basic.Location) -> Pattern = _
+  visit_Pattern_SpecialConstr(Self, binder~ : Binder, args~ : @list.List[ConstrPatArg], loc~ : @basic.Location) -> Pattern = _
   visit_LocalTypeDecl(Self, LocalTypeDecl) -> LocalTypeDecl = _
   visit_DerivingDirective(Self, DerivingDirective) -> DerivingDirective = _
   visit_TypeDecl(Self, TypeDecl) -> TypeDecl = _
