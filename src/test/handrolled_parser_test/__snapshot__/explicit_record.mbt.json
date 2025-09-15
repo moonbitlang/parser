@@ -147,7 +147,7 @@
                   "type": "TypeName",
                   "name": {
                     "type": "LongIdent::Ident",
-                    "0": "t"
+                    "0": "T"
                   },
                   "is_object": false,
                   "loc": "5:11-5:12"
@@ -263,7 +263,7 @@
                       "name": {
                         "type": "LongIdent::Dot",
                         "pkg": "pkg",
-                        "id": "t"
+                        "id": "T"
                       },
                       "is_object": false,
                       "loc": "7:11-7:17"
@@ -319,7 +319,7 @@
                         "name": {
                           "type": "LongIdent::Dot",
                           "pkg": "pkg",
-                          "id": "t"
+                          "id": "T"
                         },
                         "is_object": false,
                         "loc": "8:11-8:17"

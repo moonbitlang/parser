@@ -126,9 +126,8 @@
                       "0": {
                         "type": "TypeName",
                         "name": {
-                          "type": "LongIdent::Dot",
-                          "pkg": "pkg",
-                          "id": "ty"
+                          "type": "LongIdent::Ident",
+                          "0": "Ty"
                         },
                         "is_object": false,
                         "loc": null
@@ -145,88 +144,22 @@
                     "loc": null
                   },
                   "expr": {
-                    "type": "Expr::Constr",
-                    "constr": {
-                      "type": "Constructor",
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
                       "name": {
-                        "type": "ConstrName",
-                        "name": "Constr",
-                        "loc": null
-                      },
-                      "extra_info": {
-                        "type": "ConstructorExtraInfo::TypeName",
-                        "0": {
-                          "type": "TypeName",
-                          "name": {
-                            "type": "LongIdent::Ident",
-                            "0": "Ty"
-                          },
-                          "is_object": false,
-                          "loc": null
-                        }
+                        "type": "LongIdent::Dot",
+                        "pkg": "pkg",
+                        "id": "f"
                       },
                       "loc": null
                     },
                     "loc": null
                   },
                   "body": {
-                    "type": "Expr::Let",
-                    "pattern": {
-                      "type": "Pattern::Any",
-                      "loc": null
-                    },
-                    "expr": {
-                      "type": "Expr::Constr",
-                      "constr": {
-                        "type": "Constructor",
-                        "name": {
-                          "type": "ConstrName",
-                          "name": "Constr",
-                          "loc": null
-                        },
-                        "extra_info": {
-                          "type": "ConstructorExtraInfo::TypeName",
-                          "0": {
-                            "type": "TypeName",
-                            "name": {
-                              "type": "LongIdent::Ident",
-                              "0": "ty"
-                            },
-                            "is_object": false,
-                            "loc": null
-                          }
-                        },
-                        "loc": null
-                      },
-                      "loc": null
-                    },
-                    "body": {
-                      "type": "Expr::Let",
-                      "pattern": {
-                        "type": "Pattern::Any",
-                        "loc": null
-                      },
-                      "expr": {
-                        "type": "Expr::Ident",
-                        "id": {
-                          "type": "Var",
-                          "name": {
-                            "type": "LongIdent::Dot",
-                            "pkg": "pkg",
-                            "id": "f"
-                          },
-                          "loc": null
-                        },
-                        "loc": null
-                      },
-                      "body": {
-                        "type": "Expr::Unit",
-                        "loc": null,
-                        "faked": true
-                      },
-                      "loc": null
-                    },
-                    "loc": null
+                    "type": "Expr::Unit",
+                    "loc": null,
+                    "faked": true
                   },
                   "loc": null
                 },

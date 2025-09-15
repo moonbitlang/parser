@@ -5,7 +5,7 @@
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
-        "tycon": "r",
+        "tycon": "R",
         "tycon_loc": "1:8-1:9",
         "params": [],
         "components": {
@@ -24,7 +24,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "string"
+                    "0": "String"
                   },
                   "loc": "2:6-2:12"
                 },
@@ -52,7 +52,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "int"
+                    "0": "Int"
                   },
                   "loc": "3:6-3:9"
                 },
@@ -80,7 +80,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "bool"
+                    "0": "Bool"
                   },
                   "loc": "4:6-4:10"
                 },

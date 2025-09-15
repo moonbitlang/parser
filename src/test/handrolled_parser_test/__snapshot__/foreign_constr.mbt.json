@@ -119,24 +119,23 @@
                     "name": {
                       "type": "ConstrName",
                       "name": "Constr",
-                      "loc": "5:20-5:26"
+                      "loc": "5:15-5:21"
                     },
                     "extra_info": {
                       "type": "ConstructorExtraInfo::TypeName",
                       "0": {
                         "type": "TypeName",
                         "name": {
-                          "type": "LongIdent::Dot",
-                          "pkg": "pkg",
-                          "id": "ty"
+                          "type": "LongIdent::Ident",
+                          "0": "Ty"
                         },
                         "is_object": false,
-                        "loc": "5:11-5:18"
+                        "loc": "5:11-5:13"
                       }
                     },
-                    "loc": "5:20-5:26"
+                    "loc": "5:15-5:21"
                   },
-                  "loc": "5:11-5:26"
+                  "loc": "5:11-5:21"
                 },
                 "body": {
                   "type": "Expr::Let",
@@ -145,101 +144,35 @@
                     "loc": "6:7-6:8"
                   },
                   "expr": {
-                    "type": "Expr::Constr",
-                    "constr": {
-                      "type": "Constructor",
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
                       "name": {
-                        "type": "ConstrName",
-                        "name": "Constr",
-                        "loc": "6:15-6:21"
+                        "type": "LongIdent::Dot",
+                        "pkg": "pkg",
+                        "id": "f"
                       },
-                      "extra_info": {
-                        "type": "ConstructorExtraInfo::TypeName",
-                        "0": {
-                          "type": "TypeName",
-                          "name": {
-                            "type": "LongIdent::Ident",
-                            "0": "Ty"
-                          },
-                          "is_object": false,
-                          "loc": "6:11-6:13"
-                        }
-                      },
-                      "loc": "6:15-6:21"
+                      "loc": "6:11-6:17"
                     },
-                    "loc": "6:11-6:21"
+                    "loc": "6:11-6:17"
                   },
                   "body": {
-                    "type": "Expr::Let",
-                    "pattern": {
-                      "type": "Pattern::Any",
-                      "loc": "7:7-7:8"
-                    },
-                    "expr": {
-                      "type": "Expr::Constr",
-                      "constr": {
-                        "type": "Constructor",
-                        "name": {
-                          "type": "ConstrName",
-                          "name": "Constr",
-                          "loc": "7:15-7:21"
-                        },
-                        "extra_info": {
-                          "type": "ConstructorExtraInfo::TypeName",
-                          "0": {
-                            "type": "TypeName",
-                            "name": {
-                              "type": "LongIdent::Ident",
-                              "0": "ty"
-                            },
-                            "is_object": false,
-                            "loc": "7:11-7:13"
-                          }
-                        },
-                        "loc": "7:15-7:21"
-                      },
-                      "loc": "7:11-7:21"
-                    },
-                    "body": {
-                      "type": "Expr::Let",
-                      "pattern": {
-                        "type": "Pattern::Any",
-                        "loc": "8:7-8:8"
-                      },
-                      "expr": {
-                        "type": "Expr::Ident",
-                        "id": {
-                          "type": "Var",
-                          "name": {
-                            "type": "LongIdent::Dot",
-                            "pkg": "pkg",
-                            "id": "f"
-                          },
-                          "loc": "8:11-8:17"
-                        },
-                        "loc": "8:11-8:17"
-                      },
-                      "body": {
-                        "type": "Expr::Unit",
-                        "loc": "8:3-8:17",
-                        "faked": true
-                      },
-                      "loc": "8:3-8:17"
-                    },
-                    "loc": "7:3-8:17"
+                    "type": "Expr::Unit",
+                    "loc": "6:3-6:17",
+                    "faked": true
                   },
-                  "loc": "6:3-8:17"
+                  "loc": "6:3-6:17"
                 },
-                "loc": "5:3-8:17"
+                "loc": "5:3-6:17"
               },
-              "loc": "4:3-8:17"
+              "loc": "4:3-6:17"
             },
-            "loc": "3:3-8:17"
+            "loc": "3:3-6:17"
           },
-          "loc": "2:3-8:17"
+          "loc": "2:3-6:17"
         }
       },
-      "loc": "1:1-9:2"
+      "loc": "1:1-7:2"
     }
   ]
 }

@@ -24,23 +24,6 @@
             "quantifiers": [],
             "params": [
               {
-                "type": "Parameter::DiscardPositional",
-                "ty": {
-                  "type": "Type::Name",
-                  "constr_id": {
-                    "type": "ConstrId",
-                    "id": {
-                      "type": "LongIdent::Ident",
-                      "0": "lowercase_type"
-                    },
-                    "loc": null
-                  },
-                  "tys": [],
-                  "loc": null
-                },
-                "loc": null
-              },
-              {
                 "type": "Parameter::Positional",
                 "binder": {
                   "type": "Binder",

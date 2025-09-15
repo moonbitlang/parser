@@ -24,28 +24,11 @@
             "quantifiers": [],
             "params": [
               {
-                "type": "Parameter::DiscardPositional",
-                "ty": {
-                  "type": "Type::Name",
-                  "constr_id": {
-                    "type": "ConstrId",
-                    "id": {
-                      "type": "LongIdent::Ident",
-                      "0": "lowercase_type"
-                    },
-                    "loc": "2:5-2:19"
-                  },
-                  "tys": [],
-                  "loc": "2:5-2:19"
-                },
-                "loc": "2:5-2:19"
-              },
-              {
                 "type": "Parameter::Positional",
                 "binder": {
                   "type": "Binder",
                   "name": "x",
-                  "loc": "2:21-2:22"
+                  "loc": "2:5-2:6"
                 },
                 "ty": {
                   "type": "Type::Name",
@@ -55,10 +38,10 @@
                       "type": "LongIdent::Ident",
                       "0": "Type"
                     },
-                    "loc": "2:25-2:29"
+                    "loc": "2:9-2:13"
                   },
                   "tys": [],
-                  "loc": "2:25-2:29"
+                  "loc": "2:9-2:13"
                 }
               },
               {
@@ -71,19 +54,19 @@
                       "type": "LongIdent::Ident",
                       "0": "Type"
                     },
-                    "loc": "2:31-2:35"
+                    "loc": "2:15-2:19"
                   },
                   "tys": [],
-                  "loc": "2:31-2:35"
+                  "loc": "2:15-2:19"
                 },
-                "loc": "2:31-2:35"
+                "loc": "2:15-2:19"
               },
               {
                 "type": "Parameter::Labelled",
                 "binder": {
                   "type": "Binder",
                   "name": "label",
-                  "loc": "2:37-2:42"
+                  "loc": "2:21-2:26"
                 },
                 "ty": {
                   "type": "Type::Name",
@@ -93,10 +76,10 @@
                       "type": "LongIdent::Ident",
                       "0": "Type"
                     },
-                    "loc": "2:46-2:50"
+                    "loc": "2:30-2:34"
                   },
                   "tys": [],
-                  "loc": "2:46-2:50"
+                  "loc": "2:30-2:34"
                 }
               }
             ],
@@ -108,17 +91,17 @@
                   "type": "LongIdent::Ident",
                   "0": "Unit"
                 },
-                "loc": "2:55-2:59"
+                "loc": "2:39-2:43"
               },
               "tys": [],
-              "loc": "2:55-2:59"
+              "loc": "2:39-2:43"
             },
             "error_type": {
               "type": "ErrorType::NoErrorType"
             },
             "has_default": null,
             "attrs": [],
-            "loc": "2:3-2:59"
+            "loc": "2:3-2:43"
           },
           {
             "type": "TraitMethodDecl",

@@ -5,7 +5,7 @@
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
-        "tycon": "h",
+        "tycon": "H",
         "tycon_loc": null,
         "params": [],
         "components": {
@@ -24,7 +24,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "u"
+                    "0": "U"
                   },
                   "loc": null
                 },
@@ -54,7 +54,7 @@
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
-        "tycon": "u",
+        "tycon": "U",
         "tycon_loc": null,
         "params": [],
         "components": {
@@ -73,7 +73,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "int"
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -125,7 +125,7 @@
                 "type": "ConstrId",
                 "id": {
                   "type": "LongIdent::Ident",
-                  "0": "h"
+                  "0": "H"
                 },
                 "loc": null
               },

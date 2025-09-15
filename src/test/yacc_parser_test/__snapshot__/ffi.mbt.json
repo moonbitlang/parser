@@ -27,7 +27,7 @@
                 "type": "ConstrId",
                 "id": {
                   "type": "LongIdent::Ident",
-                  "0": "int"
+                  "0": "Int"
                 },
                 "loc": null
               },
@@ -48,7 +48,7 @@
                 "type": "ConstrId",
                 "id": {
                   "type": "LongIdent::Ident",
-                  "0": "int"
+                  "0": "Int"
                 },
                 "loc": null
               },

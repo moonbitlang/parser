@@ -5,7 +5,7 @@
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
-        "tycon": "single",
+        "tycon": "Single",
         "tycon_loc": null,
         "params": [],
         "components": {
@@ -24,7 +24,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "int"
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -54,7 +54,7 @@
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
-        "tycon": "multi",
+        "tycon": "Multi",
         "tycon_loc": null,
         "params": [],
         "components": {
@@ -73,7 +73,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "int"
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -101,7 +101,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "bool"
+                    "0": "Bool"
                   },
                   "loc": null
                 },
@@ -131,7 +131,7 @@
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
-        "tycon": "many",
+        "tycon": "Many",
         "tycon_loc": null,
         "params": [],
         "components": {
@@ -150,7 +150,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "int"
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -178,7 +178,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "bool"
+                    "0": "Bool"
                   },
                   "loc": null
                 },
@@ -206,7 +206,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "int"
+                    "0": "Int"
                   },
                   "loc": null
                 },
@@ -234,7 +234,7 @@
                   "type": "ConstrId",
                   "id": {
                     "type": "LongIdent::Ident",
-                    "0": "bool"
+                    "0": "Bool"
                   },
                   "loc": null
                 },

@@ -5,7 +5,7 @@
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
-        "tycon": "t",
+        "tycon": "T",
         "tycon_loc": "1:6-1:7",
         "params": [],
         "components": {
@@ -87,7 +87,7 @@
                 "type": "ConstrId",
                 "id": {
                   "type": "LongIdent::Ident",
-                  "0": "t"
+                  "0": "T"
                 },
                 "loc": "7:13-7:14"
               },

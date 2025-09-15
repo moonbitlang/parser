@@ -5,7 +5,7 @@
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
-        "tycon": "类型",
+        "tycon": "T_类型",
         "tycon_loc": null,
         "params": [],
         "components": {
@@ -380,7 +380,7 @@
                 "type": "ConstrId",
                 "id": {
                   "type": "LongIdent::Ident",
-                  "0": "数字类型"
+                  "0": "T_数字类型"
                 },
                 "loc": null
               },
@@ -401,7 +401,7 @@
                 "type": "ConstrId",
                 "id": {
                   "type": "LongIdent::Ident",
-                  "0": "数字类型"
+                  "0": "T_数字类型"
                 },
                 "loc": null
               },
@@ -414,7 +414,7 @@
         "quantifiers": [
           {
             "type": "TypeVarBinder",
-            "name": "数字类型",
+            "name": "T_数字类型",
             "constraints": [],
             "name_loc": null
           }
@@ -425,7 +425,7 @@
             "type": "ConstrId",
             "id": {
               "type": "LongIdent::Ident",
-              "0": "数字类型"
+              "0": "T_数字类型"
             },
             "loc": null
           },

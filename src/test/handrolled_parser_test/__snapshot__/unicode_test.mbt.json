@@ -5,8 +5,8 @@
       "type": "Impl::TopTypeDef",
       "0": {
         "type": "TypeDecl",
-        "tycon": "类型",
-        "tycon_loc": "2:6-2:8",
+        "tycon": "T_类型",
+        "tycon_loc": "2:6-2:10",
         "params": [],
         "components": {
           "type": "TypeDesc::Variant",
@@ -362,7 +362,7 @@
         "name": {
           "type": "Binder",
           "name": "相加",
-          "loc": "16:10-16:12"
+          "loc": "16:12-16:14"
         },
         "has_error": null,
         "is_async": false,
@@ -372,7 +372,7 @@
             "binder": {
               "type": "Binder",
               "name": "左",
-              "loc": "16:13-16:14"
+              "loc": "16:15-16:16"
             },
             "ty": {
               "type": "Type::Name",
@@ -380,12 +380,12 @@
                 "type": "ConstrId",
                 "id": {
                   "type": "LongIdent::Ident",
-                  "0": "数字类型"
+                  "0": "T_数字类型"
                 },
-                "loc": "16:16-16:20"
+                "loc": "16:18-16:24"
               },
               "tys": [],
-              "loc": "16:16-16:20"
+              "loc": "16:18-16:24"
             }
           },
           {
@@ -393,7 +393,7 @@
             "binder": {
               "type": "Binder",
               "name": "右",
-              "loc": "16:22-16:23"
+              "loc": "16:26-16:27"
             },
             "ty": {
               "type": "Type::Name",
@@ -401,22 +401,22 @@
                 "type": "ConstrId",
                 "id": {
                   "type": "LongIdent::Ident",
-                  "0": "数字类型"
+                  "0": "T_数字类型"
                 },
-                "loc": "16:25-16:29"
+                "loc": "16:29-16:35"
               },
               "tys": [],
-              "loc": "16:25-16:29"
+              "loc": "16:29-16:35"
             }
           }
         ],
-        "params_loc": "16:12-16:30",
+        "params_loc": "16:14-16:36",
         "quantifiers": [
           {
             "type": "TypeVarBinder",
-            "name": "数字类型",
+            "name": "T_数字类型",
             "constraints": [],
-            "name_loc": "16:4-16:8"
+            "name_loc": "16:4-16:10"
           }
         ],
         "return_type": {
@@ -425,12 +425,12 @@
             "type": "ConstrId",
             "id": {
               "type": "LongIdent::Ident",
-              "0": "数字类型"
+              "0": "T_数字类型"
             },
-            "loc": "16:34-16:38"
+            "loc": "16:40-16:46"
           },
           "tys": [],
-          "loc": "16:34-16:38"
+          "loc": "16:40-16:46"
         },
         "error_type": {
           "type": "ErrorType::NoErrorType"
