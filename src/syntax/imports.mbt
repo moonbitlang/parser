@@ -9,3 +9,6 @@ typealias @tokens.(
 
 ///|
 typealias @basic.(Position, Location)
+
+///|
+typealias @attribute.Attribute

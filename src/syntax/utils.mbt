@@ -254,6 +254,7 @@ pub fn desugar_array_augmented_set(
   index : Expr,
   value : Expr,
 ) -> Expr {
+
   // Generate unique variable names for array and index
   // Use a simple counter instead of random for reproducibility
   let arr_name = "*array_" + counter.val.to_string()
@@ -382,23 +383,6 @@ pub fn make_float(f : String) -> Constant {
   } else {
     abort("make_float: string must end with F")
   }
-}
-
-///|
-pub fn make_attribute(
-  loc~ : Location,
-  id~ : String,
-  dot_id~ : String?,
-  raw_payload~ : String,
-) -> Attribute {
-  let raw = match dot_id {
-    None => "#" + id + raw_payload
-    Some(dot_id) => "#" + id + "." + dot_id
-  }
-  Attribute::{ loc, raw, parsed: None }
-  // TODO: Attribute Parser
-  // let raw_payload = @encoding.encode(UTF8, raw_payload)
-  // let tokens = @lexer.tokens_from_bytes(is_interpolation = false, comment = false, raw_payload).tokens
 }
 
 ///|

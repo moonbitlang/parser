@@ -53,7 +53,6 @@ typealias @syntax.(
   ArrowFnParam,
   LocalTypeDecl,
   DeclBody,
-  Attribute,
   AliasTarget,
   TraitMethodDecl,
   MultiArgCase,
@@ -66,12 +65,14 @@ typealias @syntax.(
 )
 
 ///|
+typealias @attribute.Attribute
+
+///|
 fnalias @syntax.(
   make_interps,
   make_int,
   make_double,
   make_float,
-  make_attribute,
   make_arrow_fn,
   make_constant_expr,
   make_interp_expr,

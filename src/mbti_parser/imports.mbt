@@ -8,7 +8,10 @@ typealias @basic.(Location, Position)
 typealias @tokens.(Comment, CharLiteral, StringLiteral, InterpLiteral)
 
 ///|
-typealias @syntax.(DocString, Attribute)
+typealias @syntax.DocString
+
+///|
+typealias @attribute.Attribute
 
 ///|
 typealias @mbti_ast.(
@@ -42,6 +45,3 @@ typealias @mbti_ast.(
   PackageImport,
   Mbti
 )
-
-///|
-fnalias @syntax.make_attribute

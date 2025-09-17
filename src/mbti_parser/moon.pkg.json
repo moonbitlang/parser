@@ -10,7 +10,8 @@
     "moonbitlang/parser/tokens",
     "moonbitlang/parser/basic",
     "moonbitlang/parser/mbti_ast",
-    "moonbitlang/parser/syntax"
+    "moonbitlang/parser/syntax",
+    "moonbitlang/parser/attribute"
   ],
   "warn-list": "-6"
 }

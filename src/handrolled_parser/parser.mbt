@@ -28,11 +28,11 @@ fn State::parse_optional_bang(self : Self) -> Location? {
 }
 
 ///|
-fn State::parse_attributes(self : Self) -> List[@syntax.Attribute] {
+fn State::parse_attributes(self : Self) -> List[Attribute] {
   let result = []
-  while self.peek_token() is ATTRIBUTE((id, dot_id, raw_payload)) {
+  while self.peek_token() is ATTRIBUTE(content) {
     let loc = self.peek_location()
-    result.push(@syntax.make_attribute(loc~, id~, dot_id~, raw_payload~))
+    result.push(Attribute::new(loc~, content))
     self.skip()
   }
   @list.from_array(result)
@@ -397,7 +397,7 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
 ///|
 fn State::parse_fun_decl(
   self : Self,
-  attrs~ : @list.List[@syntax.Attribute],
+  attrs~ : @list.List[@attribute.Attribute],
 ) -> @syntax.FunDecl {
   if self.mode is Panic(loc~, ..) {
     return {
@@ -557,7 +557,7 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
 fn State::parse_trait_decl(
   self : Self,
   vis~ : @syntax.Visibility,
-  attrs~ : List[@syntax.Attribute],
+  attrs~ : List[@attribute.Attribute],
 ) -> @syntax.TraitDecl {
   if self.mode is Panic(loc~, ..) {
     return {
@@ -653,7 +653,7 @@ fn State::parse_visibility(self : Self) -> @syntax.Visibility {
 fn State::parse_typealias(
   self : Self,
   spos~ : Position,
-  attrs~ : List[@syntax.Attribute],
+  attrs~ : List[@attribute.Attribute],
   vis~ : @syntax.Visibility,
 ) -> @syntax.Impl {
   self.expect_token(TK_TYPEALIAS)

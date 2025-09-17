@@ -368,5 +368,5 @@ post_label -> Label
   ;
 
 %inline attribute -> Attribute
-  : ATTRIBUTE { make_attribute(loc=mk_loc($sloc), id = $1.0, dot_id = $1.1, raw_payload = $1.2) }
+  : ATTRIBUTE { Attribute::new(loc=mk_loc($sloc), $1) }
   ;

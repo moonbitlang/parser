@@ -17,3 +17,6 @@ typealias @util.Statement
 
 ///|
 typealias @list.List
+
+///|
+typealias @attribute.Attribute

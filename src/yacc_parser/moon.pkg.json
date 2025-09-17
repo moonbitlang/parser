@@ -3,7 +3,8 @@
     "moonbitlang/parser/syntax",
     "moonbitlang/parser/syntax/util",
     "moonbitlang/parser/tokens",
-    "moonbitlang/parser/basic"
+    "moonbitlang/parser/basic",
+    "moonbitlang/parser/attribute"
   ],
   "pre-build": [
     {

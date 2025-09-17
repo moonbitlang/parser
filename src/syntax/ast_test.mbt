@@ -26,7 +26,7 @@ let dummy_docstring : @syntax.DocString = {
 }
 
 ///|
-let dummy_attribute : @syntax.Attribute = {
+let dummy_attribute : @attribute.Attribute = {
   loc: dummy_loc,
   raw: "test_attr",
   parsed: None,

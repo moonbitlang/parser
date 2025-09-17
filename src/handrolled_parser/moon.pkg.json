@@ -3,6 +3,7 @@
     "moonbitlang/parser/syntax",
     "moonbitlang/parser/tokens",
     "moonbitlang/parser/syntax/util",
-    "moonbitlang/parser/basic"
+    "moonbitlang/parser/basic",
+    "moonbitlang/parser/attribute"
   ]
 }
