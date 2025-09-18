@@ -1,0 +1,130 @@
+{
+  "mappings": [
+    {
+      "source": "parser.mbty",
+      "original_offset": 2812,
+      "generated_offset": 2524,
+      "length": 15
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 2845,
+      "generated_offset": 2768,
+      "length": 1
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 2848,
+      "generated_offset": 2777,
+      "length": 1
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3570,
+      "generated_offset": 2987,
+      "length": 15
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3621,
+      "generated_offset": 3249,
+      "length": 1
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3624,
+      "generated_offset": 3258,
+      "length": 1
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 2898,
+      "generated_offset": 3544,
+      "length": 15
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 2915,
+      "generated_offset": 3567,
+      "length": 2
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3274,
+      "generated_offset": 3941,
+      "length": 40
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3103,
+      "generated_offset": 4300,
+      "length": 33
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3188,
+      "generated_offset": 4658,
+      "length": 34
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3024,
+      "generated_offset": 4964,
+      "length": 27
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 2947,
+      "generated_offset": 5226,
+      "length": 6
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 2955,
+      "generated_offset": 5240,
+      "length": 2
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3366,
+      "generated_offset": 5511,
+      "length": 8
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3376,
+      "generated_offset": 5527,
+      "length": 2
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3430,
+      "generated_offset": 5746,
+      "length": 12
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3494,
+      "generated_offset": 5976,
+      "length": 13
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3739,
+      "generated_offset": 6283,
+      "length": 11
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3678,
+      "generated_offset": 6528,
+      "length": 11
+    },
+    {
+      "source": "parser.mbty",
+      "original_offset": 3691,
+      "generated_offset": 6547,
+      "length": 3
+    }
+  ]
+}

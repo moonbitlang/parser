@@ -3,6 +3,7 @@ package "moonbitlang/parser/syntax"
 
 import(
   "moonbitlang/core/list"
+  "moonbitlang/parser/attribute"
   "moonbitlang/parser/basic"
   "moonbitlang/parser/tokens"
 )
@@ -35,8 +36,6 @@ fn make_array_expr(loc~ : @basic.Location, @list.List[SpreadableElem]) -> Expr
 fn make_arrow_fn(@list.List[(ArrowFnParam, Type?)], Expr, loc~ : @basic.Location) -> Func
 
 fn make_assign_opt(loc~ : @basic.Location, Expr, Expr) -> Expr?
-
-fn make_attribute(loc~ : @basic.Location, id~ : String, dot_id~ : String?, raw_payload~ : String) -> Attribute
 
 fn make_augmented_assign_opt(loc~ : @basic.Location, Var, Expr, Expr) -> Expr?
 
@@ -137,29 +136,6 @@ pub(all) enum ArrowFnParam {
   Unnamed(@basic.Location)
 }
 
-pub(all) struct Attribute {
-  loc : @basic.Location
-  raw : String
-  parsed : AttributeExpr?
-}
-impl ToJson for Attribute
-
-pub(all) enum AttributeExpr {
-  Ident(AttributeId)
-  Str(String)
-  Apply(AttributeId, @list.List[AttributeProp])
-}
-
-pub(all) struct AttributeId {
-  qual : String?
-  name : String
-}
-
-pub(all) enum AttributeProp {
-  Labeled(String, AttributeExpr)
-  Expr(AttributeExpr)
-}
-
 pub(all) struct Binder {
   name : String
   loc : @basic.Location
@@ -194,7 +170,7 @@ pub(all) struct ConstrDecl {
   args : @list.List[ConstrParam]?
   tag : (String, @basic.Location)?
   loc : @basic.Location
-  attrs : @list.List[Attribute]
+  attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
 impl ToJson for ConstrDecl
@@ -351,7 +327,7 @@ pub(all) struct FieldDecl {
   mut_ : Bool
   vis : Visibility
   loc : @basic.Location
-  attrs : @list.List[Attribute]
+  attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
 impl ToJson for FieldDecl
@@ -396,7 +372,7 @@ pub(all) struct FunDecl {
   return_type : Type?
   error_type : ErrorType
   vis : Visibility
-  attrs : @list.List[Attribute]
+  attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
 impl ToJson for FunDecl
@@ -428,17 +404,17 @@ impl ToJson for Hole
 
 pub(all) enum Impl {
   TopExpr(expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location)
-  TopTest(expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location, attrs~ : @list.List[Attribute], mut doc~ : DocString)
+  TopTest(expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopTypeDef(TypeDecl)
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location)
-  TopFuncAlias(pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[Attribute], is_list~ : Bool, mut doc~ : DocString, loc~ : @basic.Location)
-  TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[Attribute], mut doc~ : DocString)
+  TopFuncAlias(pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, mut doc~ : DocString, loc~ : @basic.Location)
+  TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopTrait(TraitDecl)
-  TopBatchTypeAlias(pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], is_list~ : Bool, mut doc~ : DocString)
-  TopBatchTraitAlias(pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], is_list~ : Bool, mut doc~ : DocString)
-  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], mut doc~ : DocString)
-  TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], mut doc~ : DocString)
-  TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[Attribute], loc~ : @basic.Location, mut doc~ : DocString)
+  TopBatchTypeAlias(pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, mut doc~ : DocString)
+  TopBatchTraitAlias(pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, mut doc~ : DocString)
+  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
+  TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
+  TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString)
 }
 fn Impl::loc(Self) -> @basic.Location
 impl ToJson for Impl
@@ -569,7 +545,7 @@ pub(all) struct TraitDecl {
   methods : @list.List[TraitMethodDecl]
   vis : Visibility
   loc : @basic.Location
-  attrs : @list.List[Attribute]
+  attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
 impl ToJson for TraitDecl
@@ -583,7 +559,7 @@ pub(all) struct TraitMethodDecl {
   return_type : Type?
   error_type : ErrorType
   has_default : @basic.Location?
-  attrs : @list.List[Attribute]
+  attrs : @list.List[@attribute.Attribute]
   loc : @basic.Location
 }
 impl ToJson for TraitMethodDecl
@@ -610,7 +586,7 @@ pub(all) struct TypeDecl {
   tycon_loc : @basic.Location
   params : @list.List[TypeDeclBinder]
   components : TypeDesc
-  attrs : @list.List[Attribute]
+  attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
   type_vis : Visibility
   deriving : @list.List[DerivingDirective]
@@ -810,17 +786,17 @@ pub(open) trait IterVisitor {
   visit_TraitDecl(Self, TraitDecl) -> Unit = _
   visit_Impl(Self, Impl) -> Unit = _
   visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location) -> Unit = _
-  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location, attrs~ : @list.List[Attribute], doc~ : DocString) -> Unit = _
+  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Unit = _
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Unit = _
-  visit_Impl_TopFuncAlias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Unit = _
-  visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[Attribute], doc~ : DocString) -> Unit = _
+  visit_Impl_TopFuncAlias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Unit = _
+  visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
   visit_Impl_TopTrait(Self, TraitDecl) -> Unit = _
-  visit_Impl_TopBatchTypeAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], is_list~ : Bool, doc~ : DocString) -> Unit = _
-  visit_Impl_TopBatchTraitAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], is_list~ : Bool, doc~ : DocString) -> Unit = _
-  visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], doc~ : DocString) -> Unit = _
-  visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], doc~ : DocString) -> Unit = _
-  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[Attribute], loc~ : @basic.Location, doc~ : DocString) -> Unit = _
+  visit_Impl_TopBatchTypeAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Unit = _
+  visit_Impl_TopBatchTraitAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Unit = _
+  visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
+  visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
+  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Unit = _
   visit_Expr(Self, Expr) -> Unit = _
   visit_Expr_Apply(Self, func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Infix(Self, op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Unit = _
@@ -1009,17 +985,17 @@ pub(open) trait MapVisitor {
   visit_TraitDecl(Self, TraitDecl) -> TraitDecl = _
   visit_Impl(Self, Impl) -> Impl = _
   visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location) -> Impl = _
-  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location, attrs~ : @list.List[Attribute], doc~ : DocString) -> Impl = _
+  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Impl = _
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Impl = _
-  visit_Impl_TopFuncAlias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Impl = _
-  visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[Attribute], doc~ : DocString) -> Impl = _
+  visit_Impl_TopFuncAlias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Impl = _
+  visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
   visit_Impl_TopTrait(Self, TraitDecl) -> Impl = _
-  visit_Impl_TopBatchTypeAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], is_list~ : Bool, doc~ : DocString) -> Impl = _
-  visit_Impl_TopBatchTraitAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], is_list~ : Bool, doc~ : DocString) -> Impl = _
-  visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], doc~ : DocString) -> Impl = _
-  visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[Attribute], doc~ : DocString) -> Impl = _
-  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[Attribute], loc~ : @basic.Location, doc~ : DocString) -> Impl = _
+  visit_Impl_TopBatchTypeAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Impl = _
+  visit_Impl_TopBatchTraitAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Impl = _
+  visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
+  visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
+  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Impl = _
   visit_Expr(Self, Expr) -> Expr = _
   visit_Expr_Apply(Self, func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Infix(Self, op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Expr = _

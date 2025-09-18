@@ -1,0 +1,54 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/attribute"
+
+import(
+  "moonbitlang/core/list"
+  "moonbitlang/parser/basic"
+  "moonbitlang/parser/tokens"
+)
+
+// Values
+fn payloads(Array[(@tokens.Token, @basic.Position, @basic.Position)], initial_pos? : @basic.Position) -> @list.List[Prop] raise ParseError
+
+// Errors
+pub suberror ParseError {
+  UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
+  UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
+}
+impl Show for ParseError
+
+// Types and methods
+pub(all) struct Attribute {
+  loc : @basic.Location
+  raw : String
+  parsed : Expr?
+}
+fn Attribute::name(Self) -> String?
+fn Attribute::new(loc~ : @basic.Location, (String, String?, String)) -> Self
+impl Show for Attribute
+impl ToJson for Attribute
+
+pub(all) enum Expr {
+  Ident(Id)
+  String(String)
+  Apply(Id, @list.List[Prop])
+  Bool(Bool)
+}
+impl Show for Expr
+
+pub(all) struct Id {
+  qual : String?
+  name : String
+}
+impl Show for Id
+
+pub(all) enum Prop {
+  Labeled(String, Expr)
+  Expr(Expr)
+}
+impl Show for Prop
+
+// Type aliases
+
+// Traits
+

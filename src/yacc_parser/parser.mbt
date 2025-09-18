@@ -10983,7 +10983,7 @@ fn yy_action_301(
 }
 
 // file:///./parser.mbty
-// 764|    ATTRIBUTE { make_attribute(loc=mk_loc($sloc), id = $1.0, dot_id = $1.1, raw_payload = $1.2) }
+// 764|    ATTRIBUTE { Attribute::new(loc=mk_loc($sloc), $1) }
 
 ///|
 fn yy_action_300(
@@ -11000,12 +11000,7 @@ fn yy_action_300(
   YYObj_Attribute(
     {
       ()
-      make_attribute(
-        loc=mk_loc((_symbol_start_pos, _end_pos)),
-        id=_dollar1.0,
-        dot_id=_dollar1.1,
-        raw_payload=_dollar1.2,
-      )
+      Attribute::new(loc=mk_loc((_symbol_start_pos, _end_pos)), _dollar1)
     },
   )
 }
