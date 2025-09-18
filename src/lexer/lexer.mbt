@@ -886,8 +886,8 @@ fn lex_invalid_byte(
 ) -> @string.View {
   let invalid_byte_repr_buf = StringBuilder::new()
   fn process_invalid_byte(input : @string.View) -> @string.View {
-    match input using regex {
-      ["'", .. rest] => {
+    lexmatch input using longest {
+      "'", rest => {
         env.add_lexing_error(
           InvalidByteLiteral(invalid_byte_repr_buf.to_string()),
           start~,
@@ -895,7 +895,7 @@ fn lex_invalid_byte(
         )
         rest
       }
-      ["\\r|\\n", .. _rest] => {
+      "\\r|\\n", _ => {
         env.add_lexing_error(
           start=env.calc_offset(base~, input),
           end=env.calc_offset(base~, input),
@@ -903,7 +903,7 @@ fn lex_invalid_byte(
         )
         input
       }
-      [] => {
+      "$", _ => {
         env.add_lexing_error(
           InvalidByteLiteral(invalid_byte_repr_buf.to_string()),
           start~,
@@ -911,7 +911,7 @@ fn lex_invalid_byte(
         )
         input
       }
-      ["." as c, .. rest] => {
+      "." as c, rest => {
         env.register_surrogate_pair_for_char(c)
         invalid_byte_repr_buf.write_char(c)
         process_invalid_byte(rest)
