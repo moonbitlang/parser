@@ -432,6 +432,7 @@ pub(all) enum InterpolationComponent {
 }
 
 pub struct IterVisitorBase[T](T)
+#deprecated
 fn[T] IterVisitorBase::inner(Self[T]) -> T
 impl[T : IterVisitor] IterVisitor for IterVisitorBase[T]
 
@@ -474,6 +475,7 @@ pub(all) struct MapPatElem {
 impl ToJson for MapPatElem
 
 pub(all) struct MapVisitorBase[T](T)
+#deprecated
 fn[T] MapVisitorBase::inner(Self[T]) -> T
 impl[T : MapVisitor] MapVisitor for MapVisitorBase[T]
 
