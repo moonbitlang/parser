@@ -895,7 +895,7 @@ fn lex_invalid_byte(
         )
         rest
       }
-      "\\r|\\n", _ => {
+      "\r|\n", _ => {
         env.add_lexing_error(
           start=env.calc_offset(base~, input),
           end=env.calc_offset(base~, input),
