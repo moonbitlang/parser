@@ -867,7 +867,7 @@ fn lex_tokens(
     }
 
     // EOF case
-    "$", _ => {
+    ("$", _) => {
       let end_pos = env.calc_offset(input, base~)
       env.add_token_with_loc(EOF, start=end_pos, end=end_pos)
     }
