@@ -838,12 +838,12 @@
       "attrs": [
         {
           "type": "Attribute",
-          "raw": "#coverage.skip",
+          "raw": "#coverage.skip(\"string\")",
           "loc": "67:1-67:25"
         },
         {
           "type": "Attribute",
-          "raw": "#custom1.name",
+          "raw": "#custom1.name(custom1.name, key=custom1.name2, \"reason\")",
           "loc": "68:1-68:57"
         }
       ],

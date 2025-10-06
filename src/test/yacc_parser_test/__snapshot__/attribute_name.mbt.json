@@ -146,7 +146,7 @@
         "attrs": [
           {
             "type": "Attribute",
-            "raw": "#test.bench",
+            "raw": "#test.bench(\"abc\", ident)",
             "loc": null
           }
         ],
