@@ -8,7 +8,8 @@ pub(all) struct Id {
 pub impl Show for Id with output(self, logger) {
   match self.qual {
     None => logger.write_string(self.name)
-    Some(x) => logger..write_string(x)..write_string(self.name)
+    Some(x) =>
+      logger..write_string(x)..write_string(".")..write_string(self.name)
   }
 }
 
@@ -54,9 +55,11 @@ pub fn Attribute::new(
 ) -> Attribute {
   //TODO: report better syntax error for attribute 
   let (id, dot_id, raw_payload) = content
+  let raw_payload = raw_payload.trim(" ").to_string()
   let (raw, attr_id) = match dot_id {
     None => ("#\{id}\{raw_payload}", { qual: None, name: id })
-    Some(dot_id) => ("#\{id}.\{dot_id}", { qual: None, name: id })
+    Some(dot_id) =>
+      ("#\{id}.\{dot_id}\{raw_payload}", { qual: Some(id), name: dot_id })
   }
   let { errors, docstrings: _, tokens } = @lexer.tokens_from_string(
     raw_payload,
