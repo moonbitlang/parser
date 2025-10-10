@@ -157,7 +157,7 @@ fn preserve_comment(self : LexEnv) -> (Comment, Int, Int) -> Unit {
 }
 
 ///|
-fn register_surrogate_pair(self : LexEnv, view : @string.View) -> Unit {
+fn register_surrogate_pair(self : LexEnv, view : StringView) -> Unit {
   if !use_utf16_location.val {
     let mut count = 0
     for i = 0; i < view.length(); i = i + 1 {
@@ -184,7 +184,7 @@ fn register_surrogate_pair_for_char(self : LexEnv, ch : Char) -> Unit {
 }
 
 ///|
-fn calc_offset(self : LexEnv, base~ : @string.View, view : @string.View) -> Int {
+fn calc_offset(self : LexEnv, base~ : StringView, view : StringView) -> Int {
   if use_utf16_location.val {
     view.start_offset() - base.start_offset()
   } else {

@@ -9,7 +9,7 @@ fn digit_value(c : Char) -> UInt? {
 }
 
 ///|
-fn char_for_hex_escape(hex : @string.View) -> UInt? {
+fn char_for_hex_escape(hex : StringView) -> UInt? {
   let mut codep = 0U
   for c in hex {
     match digit_value(c) {

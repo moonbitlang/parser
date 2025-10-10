@@ -26,7 +26,7 @@ fn T::reset(Self) -> Unit
 fn T::to_bytes(Self) -> Bytes
 fn T::write_byte(Self, Byte) -> Unit
 fn T::write_bytes(Self, Bytes) -> Unit
-fn T::write_bytesview(Self, @bytes.View) -> Unit
+fn T::write_bytesview(Self, BytesView) -> Unit
 fn T::write_double_be(Self, Double) -> Unit
 fn T::write_double_le(Self, Double) -> Unit
 fn T::write_float_be(Self, Float) -> Unit

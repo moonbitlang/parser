@@ -3,8 +3,8 @@ let use_utf16_location : Ref[Bool] = Ref::new(false)
 
 ///|
 fn lex_tokens(
-  input : @string.View,
-  base~ : @string.View,
+  input : StringView,
+  base~ : StringView,
   env~ : LexEnv,
   preserve_comment~ : (Comment, Int, Int) -> Unit,
 ) -> Unit {
@@ -879,13 +879,13 @@ fn lex_tokens(
 
 ///|
 fn lex_invalid_byte(
-  input : @string.View,
-  base~ : @string.View,
+  input : StringView,
+  base~ : StringView,
   env~ : LexEnv,
   start~ : Int,
-) -> @string.View {
+) -> StringView {
   let invalid_byte_repr_buf = StringBuilder::new()
-  fn process_invalid_byte(input : @string.View) -> @string.View {
+  fn process_invalid_byte(input : StringView) -> StringView {
     lexmatch input using longest {
       "'", rest => {
         env.add_lexing_error(
@@ -925,13 +925,13 @@ fn lex_invalid_byte(
 
 ///|
 fn lex_string(
-  input : @string.View,
-  base~ : @string.View,
+  input : StringView,
+  base~ : StringView,
   env~ : LexEnv,
   end_with_newline~ : Bool,
   allow_interp~ : Bool,
   start_pos~ : Int,
-) -> (@string.View, Array[InterpElem]) {
+) -> (StringView, Array[InterpElem]) {
   let string_repr_buf = StringBuilder::new()
   let interps = []
   fn add_literal(repr : String, start : Int, end : Int) -> Unit {
@@ -943,7 +943,7 @@ fn lex_string(
     )
   }
 
-  fn process_interpolation(input : @string.View) -> (@string.View, Int) {
+  fn process_interpolation(input : StringView) -> (StringView, Int) {
     lexmatch input using longest {
       // spaces + '}'
       "[\u0009\u000B\u000C\u0020\u00A0\uFEFF\u1680\u2000-\u200A\u202F\u205F\u3000]*\}", rest =>
@@ -973,7 +973,7 @@ fn lex_string(
     }
   }
 
-  fn process_string(input : @string.View, start_pos : Int) -> @string.View {
+  fn process_string(input : StringView, start_pos : Int) -> StringView {
     lexmatch input using longest {
       // End of string
       "\"", rest =>
