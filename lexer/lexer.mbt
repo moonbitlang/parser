@@ -514,7 +514,7 @@ fn lex_tokens(
       "[A-Z][\u{30}-\u{39}\u{41}-\u{5a}\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}]*" as ident
     ), rest => {
       let name = ident.to_string()
-      let start_pos = env.calc_offset(input, base~) + 1
+      let start_pos = env.calc_offset(input, base~)
       env.register_surrogate_pair(ident)
       let end_pos = env.calc_offset(rest, base~)
       env.add_token_with_loc(
@@ -529,7 +529,7 @@ fn lex_tokens(
       "([\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}][\u{30}-\u{39}\u{41}-\u{5a}\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}]*)?" as ident
     ), rest => {
       let name = ident.to_string()
-      let start_pos = env.calc_offset(input, base~) + 1
+      let start_pos = env.calc_offset(input, base~)
       env.register_surrogate_pair(ident)
       let end_pos = env.calc_offset(rest, base~)
       env.add_token_with_loc(
@@ -556,7 +556,7 @@ fn lex_tokens(
       }
       env.add_token_with_loc(
         @tokens.Token::DOT_INT(idx),
-        start=env.calc_offset(input, base~) + 1,
+        start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
