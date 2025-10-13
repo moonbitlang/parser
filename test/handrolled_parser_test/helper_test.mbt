@@ -1,6 +1,6 @@
 ///|
 fn @test.T::run(t : Self, name : String) -> Unit raise Error {
-  let source_file = "src/test/handrolled_parser_test/fixtures/\{name}.mbt"
+  let source_file = "test/handrolled_parser_test/fixtures/\{name}.mbt"
   let (impls, diag) = @parser.parse_file(source_file, parser=Handrolled) catch {
     err => fail("failed to read file \{name}.mbt: \{err}")
   }

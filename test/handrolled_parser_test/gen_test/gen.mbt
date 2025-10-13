@@ -19,7 +19,7 @@ pub fn gen_test(name : String) -> String {
 }
 
 ///|
-let root = "src/test/handrolled_parser_test"
+let root = "test/handrolled_parser_test"
 
 ///|
 let snapshot_path : String = root + "/__snapshot__"

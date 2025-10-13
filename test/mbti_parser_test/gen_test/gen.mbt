@@ -8,7 +8,7 @@ pub fn gen_test(name : String) -> String {
 }
 
 ///|
-let root = "src/test/mbti_parser_test"
+let root = "test/mbti_parser_test"
 
 ///|
 let fixtures_path : String = root + "/fixtures"

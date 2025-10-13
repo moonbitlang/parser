@@ -1,8 +1,6 @@
 ///|
 fn test_tokens(t : @test.T, label : String) -> Unit raise Error {
-  let source = @fs.read_file_to_string(
-    "src/test/lexer_test/fixtures/\{label}.mbt_",
-  )
+  let source = @fs.read_file_to_string("test/lexer_test/fixtures/\{label}.mbt_")
   let result = @lexer.tokens_from_string(comment=true, source)
   let buf = StringBuilder::new()
   for triple in result.tokens {

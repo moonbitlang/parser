@@ -1,5 +1,5 @@
 ///|
-let fixtures_path = "src/test/mbti_parser_test/fixtures"
+let fixtures_path = "test/mbti_parser_test/fixtures"
 
 ///|
 fn @test.T::run(t : Self, filename : String) -> Unit raise {
