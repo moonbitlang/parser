@@ -16,6 +16,5 @@
     "AST",
     "MoonBit"
   ],
-  "description": "AST and parsers for the MoonBit programming language",
-  "source": "src"
+  "description": "AST and parsers for the MoonBit programming language"
 }

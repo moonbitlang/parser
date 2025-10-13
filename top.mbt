@@ -1,17 +1,11 @@
 ///|
-typealias @basic.Location
-
-///|
 typealias @tokens.Comment
 
 ///|
 typealias @list.List
 
 ///|
-typealias @basic.Position
-
-///|
-typealias @basic.Report
+typealias @basic.(Position, Report, Location)
 
 ///|
 pub(all) enum Parser {
