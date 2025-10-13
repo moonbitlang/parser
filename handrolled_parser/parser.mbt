@@ -346,16 +346,28 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
       self.expect_token(TK_STRUCT)
       let tycon_loc = self.peek_location()
       let tycon = self.parse_luident()
-      let fields = self.surround_delimited(
-          invalid_delims=[TK_COMMA],
-          left=TK_LBRACE,
-          right=TK_RBRACE,
-          delim=TK_SEMI,
-          State::parse_field_decl,
-        )
-        |> @list.from_array
+      let components : @syntax.TypeDesc = match self.peek_token() {
+        LPAREN => {
+          self.skip() // consume '('
+          let ts = self.with_follow(follow_set=[TK_RPAREN], fn(_) {
+            self.delimited1(delim=TK_COMMA, fn(_) { self.parse_type() })
+          })
+          self.expect_token(TK_RPAREN)
+          TupleStruct(@list.from_array(ts))
+        }
+        _ => {
+          let fields = self.surround_delimited(
+            invalid_delims=[TK_COMMA],
+            left=TK_LBRACE,
+            right=TK_RBRACE,
+            delim=TK_SEMI,
+            State::parse_field_decl,
+          )
+          Record(@list.from_array(fields))
+        }
+      }
       let deriving = self.parse_deriving_directive_list()
-      { tycon, tycon_loc, components: Record(fields), deriving }
+      { tycon, tycon_loc, components, deriving }
     }
     ENUM => {
       self.expect_token(TK_ENUM)
@@ -926,21 +938,34 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       let tycon_loc = self.peek_location()
       let tycon = self.parse_luident()
       let params = self.parse_opt_type_params_no_constraints()
-      let fields = self.surround_delimited(
-          invalid_delims=[TK_COMMA],
-          left=TK_LBRACE,
-          right=TK_RBRACE,
-          delim=TK_SEMI,
-          State::parse_field_decl,
-        )
-        |> @list.from_array
+      let components : @syntax.TypeDesc = match self.peek_token() {
+        LPAREN => {
+          // tuple struct
+          self.skip() // consume '('
+          let ts = self.with_follow(follow_set=[TK_RPAREN], fn(_) {
+            self.delimited1(delim=TK_COMMA, State::parse_type)
+          })
+          self.expect_token(TK_RPAREN)
+          TupleStruct(@list.from_array(ts))
+        }
+        _ => {
+          let fields = self.surround_delimited(
+            invalid_delims=[TK_COMMA],
+            left=TK_LBRACE,
+            right=TK_RBRACE,
+            delim=TK_SEMI,
+            State::parse_field_decl,
+          )
+          Record(@list.from_array(fields))
+        }
+      }
       let deriving = self.parse_deriving_directive_list()
       let loc = self.loc_start_with(spos)
       TopTypeDef({
         tycon,
         tycon_loc,
         params,
-        components: Record(fields),
+        components,
         type_vis: vis,
         doc: DocString::empty(),
         deriving,
