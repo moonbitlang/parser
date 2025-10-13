@@ -1,0 +1,434 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "H",
+        "tycon_loc": null,
+        "params": [
+          {
+            "type": "TypeDeclBinder",
+            "name": "X",
+            "loc": null
+          },
+          {
+            "type": "TypeDeclBinder",
+            "name": "Y",
+            "loc": null
+          }
+        ],
+        "components": {
+          "type": "TypeDesc::Variant",
+          "0": [
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "A",
+                "loc": null
+              },
+              "args": null,
+              "tag": null,
+              "attrs": [],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "D",
+                "loc": null
+              },
+              "args": null,
+              "tag": null,
+              "attrs": [],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "E",
+                "loc": null
+              },
+              "args": [
+                {
+                  "type": "ConstrParam",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "X"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  "mut": false,
+                  "label": null
+                }
+              ],
+              "tag": null,
+              "attrs": [],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "F",
+                "loc": null
+              },
+              "args": [
+                {
+                  "type": "ConstrParam",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Y"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  "mut": false,
+                  "label": null
+                }
+              ],
+              "tag": null,
+              "attrs": [],
+              "loc": null,
+              "doc": ""
+            }
+          ]
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "h",
+        "loc": null
+      },
+      "ty": {
+        "type": "Type::Arrow",
+        "args": [
+          {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "H"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Bool"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Bool"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        ],
+        "res": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Bool"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "err": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "is_async": false,
+        "loc": null
+      },
+      "expr": {
+        "type": "Expr::Function",
+        "func": {
+          "type": "Func::Lambda",
+          "parameters": [
+            {
+              "type": "Parameter::Positional",
+              "binder": {
+                "type": "Binder",
+                "name": "a",
+                "loc": null
+              },
+              "ty": null
+            }
+          ],
+          "params_loc": null,
+          "body": {
+            "type": "Expr::Match",
+            "expr": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "a"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "cases": [
+              {
+                "type": "Case",
+                "pattern": {
+                  "type": "Pattern::Tuple",
+                  "pats": [
+                    {
+                      "type": "Pattern::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "1"
+                      },
+                      "loc": null
+                    },
+                    {
+                      "type": "Pattern::Constr",
+                      "constr": {
+                        "type": "Constructor",
+                        "name": {
+                          "type": "ConstrName",
+                          "name": "D",
+                          "loc": null
+                        },
+                        "extra_info": {
+                          "type": "ConstructorExtraInfo::NoExtraInfo"
+                        },
+                        "loc": null
+                      },
+                      "args": null,
+                      "is_open": false,
+                      "loc": null
+                    }
+                  ],
+                  "loc": null
+                },
+                "guard": null,
+                "body": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Bool",
+                    "0": true
+                  },
+                  "loc": null
+                }
+              },
+              {
+                "type": "Case",
+                "pattern": {
+                  "type": "Pattern::Tuple",
+                  "pats": [
+                    {
+                      "type": "Pattern::Any",
+                      "loc": null
+                    },
+                    {
+                      "type": "Pattern::Constr",
+                      "constr": {
+                        "type": "Constructor",
+                        "name": {
+                          "type": "ConstrName",
+                          "name": "E",
+                          "loc": null
+                        },
+                        "extra_info": {
+                          "type": "ConstructorExtraInfo::NoExtraInfo"
+                        },
+                        "loc": null
+                      },
+                      "args": [
+                        {
+                          "type": "ConstrPatArg",
+                          "pat": {
+                            "type": "Pattern::Var",
+                            "0": {
+                              "type": "Binder",
+                              "name": "x",
+                              "loc": null
+                            }
+                          },
+                          "kind": {
+                            "type": "ArgumentKind::Positional"
+                          }
+                        }
+                      ],
+                      "is_open": false,
+                      "loc": null
+                    }
+                  ],
+                  "loc": null
+                },
+                "guard": null,
+                "body": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "x"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                }
+              },
+              {
+                "type": "Case",
+                "pattern": {
+                  "type": "Pattern::Tuple",
+                  "pats": [
+                    {
+                      "type": "Pattern::Any",
+                      "loc": null
+                    },
+                    {
+                      "type": "Pattern::Constr",
+                      "constr": {
+                        "type": "Constructor",
+                        "name": {
+                          "type": "ConstrName",
+                          "name": "F",
+                          "loc": null
+                        },
+                        "extra_info": {
+                          "type": "ConstructorExtraInfo::NoExtraInfo"
+                        },
+                        "loc": null
+                      },
+                      "args": [
+                        {
+                          "type": "ConstrPatArg",
+                          "pat": {
+                            "type": "Pattern::Var",
+                            "0": {
+                              "type": "Binder",
+                              "name": "c",
+                              "loc": null
+                            }
+                          },
+                          "kind": {
+                            "type": "ArgumentKind::Positional"
+                          }
+                        }
+                      ],
+                      "is_open": false,
+                      "loc": null
+                    }
+                  ],
+                  "loc": null
+                },
+                "guard": null,
+                "body": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "c"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                }
+              }
+            ],
+            "match_loc": null,
+            "loc": null
+          },
+          "return_type": null,
+          "error_type": {
+            "type": "ErrorType::NoErrorType"
+          },
+          "kind": {
+            "type": "FnKind::Lambda"
+          },
+          "has_error": null,
+          "is_async": false,
+          "loc": null
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    }
+  ]
+}

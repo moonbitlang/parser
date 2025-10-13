@@ -1,0 +1,950 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "sum",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [
+          {
+            "type": "Parameter::Positional",
+            "binder": {
+              "type": "Binder",
+              "name": "n",
+              "loc": null
+            },
+            "ty": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            }
+          }
+        ],
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Int"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Pub",
+          "attr": null,
+          "loc": null
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::LetFn",
+          "name": {
+            "type": "Binder",
+            "name": "taill_call_sum",
+            "loc": null
+          },
+          "func": {
+            "type": "Func::Lambda",
+            "parameters": [
+              {
+                "type": "Parameter::Positional",
+                "binder": {
+                  "type": "Binder",
+                  "name": "n",
+                  "loc": null
+                },
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Int"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                }
+              },
+              {
+                "type": "Parameter::Positional",
+                "binder": {
+                  "type": "Binder",
+                  "name": "acc",
+                  "loc": null
+                },
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Int"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                }
+              }
+            ],
+            "params_loc": null,
+            "body": {
+              "type": "Expr::If",
+              "cond": {
+                "type": "Expr::Infix",
+                "op": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "=="
+                  },
+                  "loc": null
+                },
+                "lhs": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "n"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "rhs": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "0"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "ifso": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "acc"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "ifnot": {
+                "type": "Expr::Apply",
+                "func": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "taill_call_sum"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "args": [
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Infix",
+                      "op": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "-"
+                        },
+                        "loc": null
+                      },
+                      "lhs": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "n"
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "rhs": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::Int",
+                          "0": "1"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  },
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Infix",
+                      "op": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "+"
+                        },
+                        "loc": null
+                      },
+                      "lhs": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "acc"
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "rhs": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "n"
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  }
+                ],
+                "attr": {
+                  "type": "ApplyAttr::NoAttr"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "return_type": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "kind": {
+              "type": "FnKind::Lambda"
+            },
+            "has_error": null,
+            "is_async": false,
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Apply",
+            "func": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "taill_call_sum"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "args": [
+              {
+                "type": "Argument",
+                "value": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "n"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "kind": {
+                  "type": "ArgumentKind::Positional"
+                }
+              },
+              {
+                "type": "Argument",
+                "value": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "0"
+                  },
+                  "loc": null
+                },
+                "kind": {
+                  "type": "ArgumentKind::Positional"
+                }
+              }
+            ],
+            "attr": {
+              "type": "ApplyAttr::NoAttr"
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "sum2",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [
+          {
+            "type": "Parameter::Positional",
+            "binder": {
+              "type": "Binder",
+              "name": "n",
+              "loc": null
+            },
+            "ty": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            }
+          }
+        ],
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Int"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Pub",
+          "attr": null,
+          "loc": null
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::LetFn",
+          "name": {
+            "type": "Binder",
+            "name": "taill_call_sum",
+            "loc": null
+          },
+          "func": {
+            "type": "Func::Lambda",
+            "parameters": [
+              {
+                "type": "Parameter::Positional",
+                "binder": {
+                  "type": "Binder",
+                  "name": "n",
+                  "loc": null
+                },
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Int"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                }
+              },
+              {
+                "type": "Parameter::Positional",
+                "binder": {
+                  "type": "Binder",
+                  "name": "acc",
+                  "loc": null
+                },
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Int"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                }
+              }
+            ],
+            "params_loc": null,
+            "body": {
+              "type": "Expr::If",
+              "cond": {
+                "type": "Expr::Infix",
+                "op": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "=="
+                  },
+                  "loc": null
+                },
+                "lhs": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "n"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "rhs": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "0"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "ifso": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "acc"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "ifnot": {
+                "type": "Expr::Apply",
+                "func": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "taill_call_sum"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "args": [
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Infix",
+                      "op": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "-"
+                        },
+                        "loc": null
+                      },
+                      "lhs": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "n"
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "rhs": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::Int",
+                          "0": "1"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  },
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Infix",
+                      "op": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "+"
+                        },
+                        "loc": null
+                      },
+                      "lhs": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "acc"
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "rhs": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "n"
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  }
+                ],
+                "attr": {
+                  "type": "ApplyAttr::NoAttr"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "return_type": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "error_type": {
+              "type": "ErrorType::DefaultErrorType",
+              "loc": null
+            },
+            "kind": {
+              "type": "FnKind::Lambda"
+            },
+            "has_error": null,
+            "is_async": false,
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Try",
+            "body": {
+              "type": "Expr::Group",
+              "expr": {
+                "type": "Expr::Apply",
+                "func": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "taill_call_sum"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "args": [
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "n"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  },
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "0"
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  }
+                ],
+                "attr": {
+                  "type": "ApplyAttr::NoAttr"
+                },
+                "loc": null
+              },
+              "group": {
+                "type": "Group::Brace"
+              },
+              "loc": null
+            },
+            "catch": [
+              {
+                "type": "Case",
+                "pattern": {
+                  "type": "Pattern::Any",
+                  "loc": null
+                },
+                "guard": null,
+                "body": {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "abort"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::String",
+                          "0": "error"
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                }
+              }
+            ],
+            "catch_all": false,
+            "try_else": [
+              {
+                "type": "Case",
+                "pattern": {
+                  "type": "Pattern::Var",
+                  "0": {
+                    "type": "Binder",
+                    "name": "x",
+                    "loc": null
+                  }
+                },
+                "guard": null,
+                "body": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "x"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                }
+              }
+            ],
+            "has_try": true,
+            "try_loc": null,
+            "catch_loc": null,
+            "else_loc": null,
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "main",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Sequence",
+          "exprs": [
+            {
+              "type": "Expr::Apply",
+              "func": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "println"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "args": [
+                {
+                  "type": "Argument",
+                  "value": {
+                    "type": "Expr::Apply",
+                    "func": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "sum"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "args": [
+                      {
+                        "type": "Argument",
+                        "value": {
+                          "type": "Expr::Constant",
+                          "c": {
+                            "type": "Constant::Int",
+                            "0": "10"
+                          },
+                          "loc": null
+                        },
+                        "kind": {
+                          "type": "ArgumentKind::Positional"
+                        }
+                      }
+                    ],
+                    "attr": {
+                      "type": "ApplyAttr::NoAttr"
+                    },
+                    "loc": null
+                  },
+                  "kind": {
+                    "type": "ArgumentKind::Positional"
+                  }
+                }
+              ],
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            }
+          ],
+          "last_expr": {
+            "type": "Expr::Apply",
+            "func": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "println"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "args": [
+              {
+                "type": "Argument",
+                "value": {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "sum2"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::Int",
+                          "0": "10"
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                "kind": {
+                  "type": "ArgumentKind::Positional"
+                }
+              }
+            ],
+            "attr": {
+              "type": "ApplyAttr::NoAttr"
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    }
+  ]
+}

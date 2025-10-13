@@ -1,0 +1,105 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Apply",
+        "func": {
+          "type": "Expr::Ident",
+          "id": {
+            "type": "Var",
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "assert_eq"
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "args": [
+          {
+            "type": "Argument",
+            "value": {
+              "type": "Expr::DotApply",
+              "self": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Infix",
+                  "op": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "<<"
+                    },
+                    "loc": null
+                  },
+                  "lhs": {
+                    "type": "Expr::Constant",
+                    "c": {
+                      "type": "Constant::Byte",
+                      "0": "\\xFF"
+                    },
+                    "loc": null
+                  },
+                  "rhs": {
+                    "type": "Expr::Constant",
+                    "c": {
+                      "type": "Constant::Int",
+                      "0": "8"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "group": {
+                  "type": "Group::Paren"
+                },
+                "loc": null
+              },
+              "method_name": {
+                "type": "Label",
+                "name": "to_int",
+                "loc": null
+              },
+              "args": [],
+              "return_self": false,
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            },
+            "kind": {
+              "type": "ArgumentKind::Positional"
+            }
+          },
+          {
+            "type": "Argument",
+            "value": {
+              "type": "Expr::Constant",
+              "c": {
+                "type": "Constant::Int",
+                "0": "0"
+              },
+              "loc": null
+            },
+            "kind": {
+              "type": "ArgumentKind::Positional"
+            }
+          }
+        ],
+        "attr": {
+          "type": "ApplyAttr::NoAttr"
+        },
+        "loc": null
+      },
+      "name": null,
+      "params": null,
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    }
+  ]
+}

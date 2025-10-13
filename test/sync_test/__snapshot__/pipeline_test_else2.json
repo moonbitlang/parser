@@ -1,0 +1,479 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "init",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "a",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::While",
+            "loop_cond": {
+              "type": "Expr::Constant",
+              "c": {
+                "type": "Constant::Bool",
+                "0": false
+              },
+              "loc": null
+            },
+            "loop_body": {
+              "type": "Expr::Unit",
+              "loc": null,
+              "faked": true
+            },
+            "while_else": {
+              "type": "Expr::Constant",
+              "c": {
+                "type": "Constant::Int",
+                "0": "42"
+              },
+              "loc": null
+            },
+            "label": null,
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Sequence",
+            "exprs": [
+              {
+                "type": "Expr::Apply",
+                "func": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "println"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "args": [
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "a"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  }
+                ],
+                "attr": {
+                  "type": "ApplyAttr::NoAttr"
+                },
+                "loc": null
+              }
+            ],
+            "last_expr": {
+              "type": "Expr::Let",
+              "pattern": {
+                "type": "Pattern::Var",
+                "0": {
+                  "type": "Binder",
+                  "name": "b",
+                  "loc": null
+                }
+              },
+              "expr": {
+                "type": "Expr::For",
+                "binders": [],
+                "condition": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Bool",
+                    "0": false
+                  },
+                  "loc": null
+                },
+                "continue_block": [],
+                "body": {
+                  "type": "Expr::Unit",
+                  "loc": null,
+                  "faked": true
+                },
+                "for_else": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "42"
+                  },
+                  "loc": null
+                },
+                "label": null,
+                "loc": null
+              },
+              "body": {
+                "type": "Expr::Sequence",
+                "exprs": [
+                  {
+                    "type": "Expr::Apply",
+                    "func": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "println"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "args": [
+                      {
+                        "type": "Argument",
+                        "value": {
+                          "type": "Expr::Ident",
+                          "id": {
+                            "type": "Var",
+                            "name": {
+                              "type": "LongIdent::Ident",
+                              "0": "b"
+                            },
+                            "loc": null
+                          },
+                          "loc": null
+                        },
+                        "kind": {
+                          "type": "ArgumentKind::Positional"
+                        }
+                      }
+                    ],
+                    "attr": {
+                      "type": "ApplyAttr::NoAttr"
+                    },
+                    "loc": null
+                  }
+                ],
+                "last_expr": {
+                  "type": "Expr::Let",
+                  "pattern": {
+                    "type": "Pattern::Var",
+                    "0": {
+                      "type": "Binder",
+                      "name": "c",
+                      "loc": null
+                    }
+                  },
+                  "expr": {
+                    "type": "Expr::For",
+                    "binders": [],
+                    "condition": null,
+                    "continue_block": [],
+                    "body": {
+                      "type": "Expr::Break",
+                      "arg": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::Int",
+                          "0": "42"
+                        },
+                        "loc": null
+                      },
+                      "label": null,
+                      "loc": null
+                    },
+                    "for_else": {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "0"
+                      },
+                      "loc": null
+                    },
+                    "label": null,
+                    "loc": null
+                  },
+                  "body": {
+                    "type": "Expr::Sequence",
+                    "exprs": [
+                      {
+                        "type": "Expr::Apply",
+                        "func": {
+                          "type": "Expr::Ident",
+                          "id": {
+                            "type": "Var",
+                            "name": {
+                              "type": "LongIdent::Ident",
+                              "0": "println"
+                            },
+                            "loc": null
+                          },
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "Argument",
+                            "value": {
+                              "type": "Expr::Ident",
+                              "id": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "c"
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "attr": {
+                          "type": "ApplyAttr::NoAttr"
+                        },
+                        "loc": null
+                      }
+                    ],
+                    "last_expr": {
+                      "type": "Expr::Let",
+                      "pattern": {
+                        "type": "Pattern::Var",
+                        "0": {
+                          "type": "Binder",
+                          "name": "d",
+                          "loc": null
+                        }
+                      },
+                      "expr": {
+                        "type": "Expr::While",
+                        "loop_cond": {
+                          "type": "Expr::Constant",
+                          "c": {
+                            "type": "Constant::Bool",
+                            "0": true
+                          },
+                          "loc": null
+                        },
+                        "loop_body": {
+                          "type": "Expr::Break",
+                          "arg": {
+                            "type": "Expr::Constant",
+                            "c": {
+                              "type": "Constant::Int",
+                              "0": "42"
+                            },
+                            "loc": null
+                          },
+                          "label": null,
+                          "loc": null
+                        },
+                        "while_else": {
+                          "type": "Expr::Constant",
+                          "c": {
+                            "type": "Constant::Int",
+                            "0": "0"
+                          },
+                          "loc": null
+                        },
+                        "label": null,
+                        "loc": null
+                      },
+                      "body": {
+                        "type": "Expr::Sequence",
+                        "exprs": [
+                          {
+                            "type": "Expr::Apply",
+                            "func": {
+                              "type": "Expr::Ident",
+                              "id": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "println"
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            },
+                            "args": [
+                              {
+                                "type": "Argument",
+                                "value": {
+                                  "type": "Expr::Ident",
+                                  "id": {
+                                    "type": "Var",
+                                    "name": {
+                                      "type": "LongIdent::Ident",
+                                      "0": "d"
+                                    },
+                                    "loc": null
+                                  },
+                                  "loc": null
+                                },
+                                "kind": {
+                                  "type": "ArgumentKind::Positional"
+                                }
+                              }
+                            ],
+                            "attr": {
+                              "type": "ApplyAttr::NoAttr"
+                            },
+                            "loc": null
+                          }
+                        ],
+                        "last_expr": {
+                          "type": "Expr::Let",
+                          "pattern": {
+                            "type": "Pattern::Var",
+                            "0": {
+                              "type": "Binder",
+                              "name": "e",
+                              "loc": null
+                            }
+                          },
+                          "expr": {
+                            "type": "Expr::While",
+                            "loop_cond": {
+                              "type": "Expr::Constant",
+                              "c": {
+                                "type": "Constant::Bool",
+                                "0": false
+                              },
+                              "loc": null
+                            },
+                            "loop_body": {
+                              "type": "Expr::Unit",
+                              "loc": null,
+                              "faked": true
+                            },
+                            "while_else": {
+                              "type": "Expr::For",
+                              "binders": [],
+                              "condition": null,
+                              "continue_block": [],
+                              "body": {
+                                "type": "Expr::Break",
+                                "arg": {
+                                  "type": "Expr::Constant",
+                                  "c": {
+                                    "type": "Constant::Int",
+                                    "0": "42"
+                                  },
+                                  "loc": null
+                                },
+                                "label": null,
+                                "loc": null
+                              },
+                              "for_else": {
+                                "type": "Expr::Constant",
+                                "c": {
+                                  "type": "Constant::Int",
+                                  "0": "0"
+                                },
+                                "loc": null
+                              },
+                              "label": null,
+                              "loc": null
+                            },
+                            "label": null,
+                            "loc": null
+                          },
+                          "body": {
+                            "type": "Expr::Apply",
+                            "func": {
+                              "type": "Expr::Ident",
+                              "id": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "println"
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            },
+                            "args": [
+                              {
+                                "type": "Argument",
+                                "value": {
+                                  "type": "Expr::Ident",
+                                  "id": {
+                                    "type": "Var",
+                                    "name": {
+                                      "type": "LongIdent::Ident",
+                                      "0": "e"
+                                    },
+                                    "loc": null
+                                  },
+                                  "loc": null
+                                },
+                                "kind": {
+                                  "type": "ArgumentKind::Positional"
+                                }
+                              }
+                            ],
+                            "attr": {
+                              "type": "ApplyAttr::NoAttr"
+                            },
+                            "loc": null
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    }
+  ]
+}

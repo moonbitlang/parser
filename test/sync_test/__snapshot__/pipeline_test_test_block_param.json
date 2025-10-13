@@ -1,0 +1,245 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Pipe",
+        "lhs": {
+          "type": "Expr::Constraint",
+          "expr": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "x"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "ty": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "test",
+                "id": "T"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "loc": null
+        },
+        "rhs": {
+          "type": "Expr::Ident",
+          "id": {
+            "type": "Var",
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "ignore"
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": null,
+      "params": [
+        {
+          "type": "Parameter::Positional",
+          "binder": {
+            "type": "Binder",
+            "name": "x",
+            "loc": null
+          },
+          "ty": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "test",
+                "id": "T"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          }
+        }
+      ],
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Pipe",
+        "lhs": {
+          "type": "Expr::Constraint",
+          "expr": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "x"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "ty": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "test",
+                "id": "T"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "loc": null
+        },
+        "rhs": {
+          "type": "Expr::Ident",
+          "id": {
+            "type": "Var",
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "ignore"
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": null,
+      "params": [
+        {
+          "type": "Parameter::Positional",
+          "binder": {
+            "type": "Binder",
+            "name": "x",
+            "loc": null
+          },
+          "ty": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "moonbitlang/core/test",
+                "id": "T"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          }
+        }
+      ],
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Pipe",
+        "lhs": {
+          "type": "Expr::Constraint",
+          "expr": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "x"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "ty": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "test",
+                "id": "T"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          },
+          "loc": null
+        },
+        "rhs": {
+          "type": "Expr::Ident",
+          "id": {
+            "type": "Var",
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "ignore"
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": {
+        "v": "a test with parameter",
+        "loc": null
+      },
+      "params": [
+        {
+          "type": "Parameter::Positional",
+          "binder": {
+            "type": "Binder",
+            "name": "x",
+            "loc": null
+          },
+          "ty": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Dot",
+                "pkg": "test",
+                "id": "T"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          }
+        }
+      ],
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    }
+  ]
+}

@@ -1,0 +1,529 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "MyEnum",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Variant",
+          "0": [
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "Bar1",
+                "loc": null
+              },
+              "args": null,
+              "tag": null,
+              "attrs": [
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag1",
+                  "loc": null
+                }
+              ],
+              "loc": null,
+              "doc": ""
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "Bar2",
+                "loc": null
+              },
+              "args": [
+                {
+                  "type": "ConstrParam",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Int"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  "mut": false,
+                  "label": null
+                },
+                {
+                  "type": "ConstrParam",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Bool"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  "mut": false,
+                  "label": null
+                }
+              ],
+              "tag": null,
+              "attrs": [
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag2",
+                  "loc": null
+                },
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag3",
+                  "loc": null
+                }
+              ],
+              "loc": null,
+              "doc": ""
+            }
+          ]
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "MyStruct",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Record",
+          "0": [
+            {
+              "type": "FieldDecl",
+              "name": {
+                "type": "FieldName",
+                "label": "field1",
+                "loc": null
+              },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "mut": false,
+              "vis": {
+                "type": "Visibility::Default"
+              },
+              "loc": null,
+              "attrs": [
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag1",
+                  "loc": null
+                }
+              ],
+              "doc": ""
+            },
+            {
+              "type": "FieldDecl",
+              "name": {
+                "type": "FieldName",
+                "label": "field2",
+                "loc": null
+              },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "mut": false,
+              "vis": {
+                "type": "Visibility::Default"
+              },
+              "loc": null,
+              "attrs": [
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag2",
+                  "loc": null
+                },
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag3",
+                  "loc": null
+                }
+              ],
+              "doc": ""
+            }
+          ]
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "MyEnum2",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Variant",
+          "0": [
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "Bar1",
+                "loc": null
+              },
+              "args": null,
+              "tag": null,
+              "attrs": [
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag1",
+                  "loc": null
+                }
+              ],
+              "loc": null,
+              "doc": " doc for bar1"
+            },
+            {
+              "type": "ConstrDecl",
+              "name": {
+                "type": "ConstrName",
+                "name": "Bar2",
+                "loc": null
+              },
+              "args": [
+                {
+                  "type": "ConstrParam",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Int"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  "mut": false,
+                  "label": null
+                },
+                {
+                  "type": "ConstrParam",
+                  "ty": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Bool"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  "mut": false,
+                  "label": null
+                }
+              ],
+              "tag": null,
+              "attrs": [
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag2",
+                  "loc": null
+                },
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag3",
+                  "loc": null
+                }
+              ],
+              "loc": null,
+              "doc": " doc for bar2"
+            }
+          ]
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "MyStruct2",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Record",
+          "0": [
+            {
+              "type": "FieldDecl",
+              "name": {
+                "type": "FieldName",
+                "label": "field1",
+                "loc": null
+              },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "mut": false,
+              "vis": {
+                "type": "Visibility::Default"
+              },
+              "loc": null,
+              "attrs": [
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag1",
+                  "loc": null
+                }
+              ],
+              "doc": " doc for field1"
+            },
+            {
+              "type": "FieldDecl",
+              "name": {
+                "type": "FieldName",
+                "label": "field2",
+                "loc": null
+              },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Bool"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "mut": false,
+              "vis": {
+                "type": "Visibility::Default"
+              },
+              "loc": null,
+              "attrs": [
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag2",
+                  "loc": null
+                },
+                {
+                  "type": "Attribute",
+                  "raw": "#attr.tag3",
+                  "loc": null
+                }
+              ],
+              "doc": " doc for field2"
+            }
+          ]
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTrait",
+      "0": {
+        "type": "TraitDecl",
+        "name": {
+          "type": "Binder",
+          "name": "MyTrait",
+          "loc": null
+        },
+        "supers": [],
+        "methods": [
+          {
+            "type": "TraitMethodDecl",
+            "name": {
+              "type": "Binder",
+              "name": "f",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [],
+            "params": [],
+            "return_type": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Self"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "attrs": [
+              {
+                "type": "Attribute",
+                "raw": "#attr.tag1",
+                "loc": null
+              }
+            ],
+            "loc": null
+          },
+          {
+            "type": "TraitMethodDecl",
+            "name": {
+              "type": "Binder",
+              "name": "g",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [],
+            "params": [
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              },
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              }
+            ],
+            "return_type": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "attrs": [
+              {
+                "type": "Attribute",
+                "raw": "#attr.tag2",
+                "loc": null
+              },
+              {
+                "type": "Attribute",
+                "raw": "#attr.tag3",
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        ],
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "loc": null,
+        "attrs": [],
+        "doc": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Defer",
+        "expr": {
+          "type": "Expr::Ident",
+          "id": {
+            "type": "Var",
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "x"
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "body": {
+          "type": "Expr::Defer",
+          "expr": {
+            "type": "Expr::Apply",
+            "func": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "simple"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "args": [],
+            "attr": {
+              "type": "ApplyAttr::NoAttr"
+            },
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Defer",
+            "expr": {
+              "type": "Expr::DotApply",
+              "self": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "socket"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "method_name": {
+                "type": "Label",
+                "name": "close",
+                "loc": null
+              },
+              "args": [],
+              "return_self": false,
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Defer",
+              "expr": {
+                "type": "Expr::DotApply",
+                "self": {
+                  "type": "Expr::DotApply",
+                  "self": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "conn"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "method_name": {
+                    "type": "Label",
+                    "name": "send_farewell",
+                    "loc": null
+                  },
+                  "args": [],
+                  "return_self": true,
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                "method_name": {
+                  "type": "Label",
+                  "name": "close",
+                  "loc": null
+                },
+                "args": [],
+                "return_self": false,
+                "attr": {
+                  "type": "ApplyAttr::NoAttr"
+                },
+                "loc": null
+              },
+              "body": {
+                "type": "Expr::Defer",
+                "expr": {
+                  "type": "Expr::Pipe",
+                  "lhs": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "x"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "rhs": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "f"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "body": {
+                  "type": "Expr::Defer",
+                  "expr": {
+                    "type": "Expr::Group",
+                    "expr": {
+                      "type": "Expr::Sequence",
+                      "exprs": [
+                        {
+                          "type": "Expr::Apply",
+                          "func": {
+                            "type": "Expr::Ident",
+                            "id": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "block"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "args": [],
+                          "attr": {
+                            "type": "ApplyAttr::NoAttr"
+                          },
+                          "loc": null
+                        }
+                      ],
+                      "last_expr": {
+                        "type": "Expr::Apply",
+                        "func": {
+                          "type": "Expr::Ident",
+                          "id": {
+                            "type": "Var",
+                            "name": {
+                              "type": "LongIdent::Ident",
+                              "0": "block"
+                            },
+                            "loc": null
+                          },
+                          "loc": null
+                        },
+                        "args": [],
+                        "attr": {
+                          "type": "ApplyAttr::NoAttr"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "group": {
+                      "type": "Group::Brace"
+                    },
+                    "loc": null
+                  },
+                  "body": {
+                    "type": "Expr::Unit",
+                    "loc": null,
+                    "faked": true
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": null,
+      "params": null,
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    }
+  ]
+}

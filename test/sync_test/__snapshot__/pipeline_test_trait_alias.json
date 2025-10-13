@@ -1,0 +1,926 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTrait",
+      "0": {
+        "type": "TraitDecl",
+        "name": {
+          "type": "Binder",
+          "name": "I",
+          "loc": null
+        },
+        "supers": [],
+        "methods": [
+          {
+            "type": "TraitMethodDecl",
+            "name": {
+              "type": "Binder",
+              "name": "f",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [],
+            "params": [
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              }
+            ],
+            "return_type": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "attrs": [],
+            "loc": null
+          }
+        ],
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "loc": null,
+        "attrs": [],
+        "doc": ""
+      }
+    },
+    {
+      "type": "Impl::TopBatchTraitAlias",
+      "pkg": null,
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "A",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "I",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "is_list": false,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopImpl",
+      "self_ty": null,
+      "trait": {
+        "type": "TypeName",
+        "name": {
+          "type": "LongIdent::Ident",
+          "0": "A"
+        },
+        "is_object": false,
+        "loc": null
+      },
+      "method_name": {
+        "type": "Binder",
+        "name": "f",
+        "loc": null
+      },
+      "has_error": null,
+      "quantifiers": [],
+      "params": [
+        {
+          "type": "Parameter::Positional",
+          "binder": {
+            "type": "Binder",
+            "name": "self",
+            "loc": null
+          },
+          "ty": null
+        }
+      ],
+      "ret_ty": null,
+      "err_ty": {
+        "type": "ErrorType::NoErrorType"
+      },
+      "body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Apply",
+          "func": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "println"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "args": [
+            {
+              "type": "Argument",
+              "value": {
+                "type": "Expr::Constant",
+                "c": {
+                  "type": "Constant::String",
+                  "0": "I::f default impl"
+                },
+                "loc": null
+              },
+              "kind": {
+                "type": "ArgumentKind::Positional"
+              }
+            }
+          ],
+          "attr": {
+            "type": "ApplyAttr::NoAttr"
+          },
+          "loc": null
+        }
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopImpl",
+      "self_ty": {
+        "type": "Type::Name",
+        "constr_id": {
+          "type": "ConstrId",
+          "id": {
+            "type": "LongIdent::Ident",
+            "0": "Int"
+          },
+          "loc": null
+        },
+        "tys": [],
+        "loc": null
+      },
+      "trait": {
+        "type": "TypeName",
+        "name": {
+          "type": "LongIdent::Ident",
+          "0": "A"
+        },
+        "is_object": false,
+        "loc": null
+      },
+      "method_name": {
+        "type": "Binder",
+        "name": "f",
+        "loc": null
+      },
+      "has_error": null,
+      "quantifiers": [],
+      "params": [
+        {
+          "type": "Parameter::Positional",
+          "binder": {
+            "type": "Binder",
+            "name": "self",
+            "loc": null
+          },
+          "ty": null
+        }
+      ],
+      "ret_ty": null,
+      "err_ty": {
+        "type": "ErrorType::NoErrorType"
+      },
+      "body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Apply",
+          "func": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "println"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "args": [
+            {
+              "type": "Argument",
+              "value": {
+                "type": "Expr::Constant",
+                "c": {
+                  "type": "Constant::String",
+                  "0": "I::f for Int"
+                },
+                "loc": null
+              },
+              "kind": {
+                "type": "ArgumentKind::Positional"
+              }
+            }
+          ],
+          "attr": {
+            "type": "ApplyAttr::NoAttr"
+          },
+          "loc": null
+        }
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopImplRelation",
+      "self_ty": {
+        "type": "Type::Name",
+        "constr_id": {
+          "type": "ConstrId",
+          "id": {
+            "type": "LongIdent::Ident",
+            "0": "String"
+          },
+          "loc": null
+        },
+        "tys": [],
+        "loc": null
+      },
+      "trait": {
+        "type": "TypeName",
+        "name": {
+          "type": "LongIdent::Ident",
+          "0": "A"
+        },
+        "is_object": false,
+        "loc": null
+      },
+      "quantifiers": [],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "loc": null,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "A"
+          },
+          "is_object": true,
+          "loc": null
+        },
+        "name": {
+          "type": "Binder",
+          "name": "g",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [
+          {
+            "type": "Parameter::Positional",
+            "binder": {
+              "type": "Binder",
+              "name": "self",
+              "loc": null
+            },
+            "ty": {
+              "type": "Type::Object",
+              "0": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "A"
+                },
+                "loc": null
+              }
+            }
+          }
+        ],
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Unit"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::DotApply",
+          "self": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "self"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "method_name": {
+            "type": "Label",
+            "name": "f",
+            "loc": null
+          },
+          "args": [],
+          "return_self": false,
+          "attr": {
+            "type": "ApplyAttr::NoAttr"
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "use_A",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [
+          {
+            "type": "Parameter::Positional",
+            "binder": {
+              "type": "Binder",
+              "name": "x",
+              "loc": null
+            },
+            "ty": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "X"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            }
+          }
+        ],
+        "params_loc": null,
+        "quantifiers": [
+          {
+            "type": "TypeVarBinder",
+            "name": "X",
+            "constraints": [
+              {
+                "type": "TypeVarConstraint",
+                "trait": {
+                  "type": "LongIdent::Ident",
+                  "0": "A"
+                },
+                "loc": null
+              }
+            ],
+            "name_loc": null
+          }
+        ],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Unit"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::DotApply",
+          "self": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "x"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "method_name": {
+            "type": "Label",
+            "name": "f",
+            "loc": null
+          },
+          "args": [],
+          "return_self": false,
+          "attr": {
+            "type": "ApplyAttr::NoAttr"
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopTrait",
+      "0": {
+        "type": "TraitDecl",
+        "name": {
+          "type": "Binder",
+          "name": "Derived",
+          "loc": null
+        },
+        "supers": [
+          {
+            "type": "TypeVarConstraint",
+            "trait": {
+              "type": "LongIdent::Ident",
+              "0": "A"
+            },
+            "loc": null
+          }
+        ],
+        "methods": [
+          {
+            "type": "TraitMethodDecl",
+            "name": {
+              "type": "Binder",
+              "name": "g",
+              "loc": null
+            },
+            "has_error": null,
+            "is_async": false,
+            "quantifiers": [],
+            "params": [
+              {
+                "type": "Parameter::DiscardPositional",
+                "ty": {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "Self"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                "loc": null
+              }
+            ],
+            "return_type": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Unit"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            },
+            "error_type": {
+              "type": "ErrorType::NoErrorType"
+            },
+            "has_default": null,
+            "attrs": [],
+            "loc": null
+          }
+        ],
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "loc": null,
+        "attrs": [],
+        "doc": ""
+      }
+    },
+    {
+      "type": "Impl::TopImpl",
+      "self_ty": {
+        "type": "Type::Name",
+        "constr_id": {
+          "type": "ConstrId",
+          "id": {
+            "type": "LongIdent::Ident",
+            "0": "Int"
+          },
+          "loc": null
+        },
+        "tys": [],
+        "loc": null
+      },
+      "trait": {
+        "type": "TypeName",
+        "name": {
+          "type": "LongIdent::Ident",
+          "0": "Derived"
+        },
+        "is_object": false,
+        "loc": null
+      },
+      "method_name": {
+        "type": "Binder",
+        "name": "g",
+        "loc": null
+      },
+      "has_error": null,
+      "quantifiers": [],
+      "params": [
+        {
+          "type": "Parameter::Positional",
+          "binder": {
+            "type": "Binder",
+            "name": "self",
+            "loc": null
+          },
+          "ty": null
+        }
+      ],
+      "ret_ty": null,
+      "err_ty": {
+        "type": "ErrorType::NoErrorType"
+      },
+      "body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Apply",
+          "func": {
+            "type": "Expr::Method",
+            "type_name": {
+              "type": "TypeName",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "A"
+              },
+              "is_object": false,
+              "loc": null
+            },
+            "method_name": {
+              "type": "Label",
+              "name": "f",
+              "loc": null
+            },
+            "loc": null
+          },
+          "args": [
+            {
+              "type": "Argument",
+              "value": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "self"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "kind": {
+                "type": "ArgumentKind::Positional"
+              }
+            }
+          ],
+          "attr": {
+            "type": "ApplyAttr::NoAttr"
+          },
+          "loc": null
+        }
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "init",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Sequence",
+          "exprs": [
+            {
+              "type": "Expr::Apply",
+              "func": {
+                "type": "Expr::Method",
+                "type_name": {
+                  "type": "TypeName",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "A"
+                  },
+                  "is_object": false,
+                  "loc": null
+                },
+                "method_name": {
+                  "type": "Label",
+                  "name": "f",
+                  "loc": null
+                },
+                "loc": null
+              },
+              "args": [
+                {
+                  "type": "Argument",
+                  "value": {
+                    "type": "Expr::Constant",
+                    "c": {
+                      "type": "Constant::Int",
+                      "0": "42"
+                    },
+                    "loc": null
+                  },
+                  "kind": {
+                    "type": "ArgumentKind::Positional"
+                  }
+                }
+              ],
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            },
+            {
+              "type": "Expr::Apply",
+              "func": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "use_A"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "args": [
+                {
+                  "type": "Argument",
+                  "value": {
+                    "type": "Expr::Constant",
+                    "c": {
+                      "type": "Constant::String",
+                      "0": "abc"
+                    },
+                    "loc": null
+                  },
+                  "kind": {
+                    "type": "ArgumentKind::Positional"
+                  }
+                }
+              ],
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            }
+          ],
+          "last_expr": {
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Var",
+              "0": {
+                "type": "Binder",
+                "name": "obj",
+                "loc": null
+              }
+            },
+            "expr": {
+              "type": "Expr::As",
+              "expr": {
+                "type": "Expr::Constant",
+                "c": {
+                  "type": "Constant::Int",
+                  "0": "42"
+                },
+                "loc": null
+              },
+              "trait": {
+                "type": "TypeName",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "A"
+                },
+                "is_object": true,
+                "loc": null
+              },
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Sequence",
+              "exprs": [
+                {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Method",
+                    "type_name": {
+                      "type": "TypeName",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "A"
+                      },
+                      "is_object": true,
+                      "loc": null
+                    },
+                    "method_name": {
+                      "type": "Label",
+                      "name": "g",
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "obj"
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                }
+              ],
+              "last_expr": {
+                "type": "Expr::Apply",
+                "func": {
+                  "type": "Expr::Method",
+                  "type_name": {
+                    "type": "TypeName",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "Derived"
+                    },
+                    "is_object": false,
+                    "loc": null
+                  },
+                  "method_name": {
+                    "type": "Label",
+                    "name": "g",
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "args": [
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "42"
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  }
+                ],
+                "attr": {
+                  "type": "ApplyAttr::NoAttr"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    }
+  ]
+}

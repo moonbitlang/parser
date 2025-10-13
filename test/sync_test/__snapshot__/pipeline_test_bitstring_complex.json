@@ -1,0 +1,2955 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "data1",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Constant",
+        "c": {
+          "type": "Constant::Bytes",
+          "0": "\\xD3\\x6B\\x4B\\x54\\xB4\\xB4\\xB4\\xB9\\x9B\\xBD\\xDD\\xDB\\xB9\\x9B\\xB9\\x97\\x75\\x55\\x57\\x79\\x9B\\xBF\\xFD\\xDB\\xB9\\x97\\x75\\x55\\x57\\x79\\x9B\\xBD\\xDF\\xFF\\xFD\\xDB\\xB9\\x97\\x75\\x42\\x20\\x00\\x02\\x35\\x57\\x79\\x9B\\xBD\\xDF\\xE0"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "data2",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Constant",
+        "c": {
+          "type": "Constant::Bytes",
+          "0": "\\x69\\xB5\\xA5\\xAA\\x5A\\x5A\\x5A\\x5C\\xCD\\xDE\\xEE\\xED\\xDC\\xCD\\xDC\\xCB\\xBA\\xAA\\xAB\\xBC\\xCD\\xDF\\xFE\\xED\\xDC\\xCB\\xBA\\xAA\\xAB\\xBC\\xCD\\xDE\\xEF\\xFF\\xFE\\xED\\xDC\\xCB\\xBA\\xA1\\x10\\x00\\x01\\x1A\\xAB\\xBC\\xCD\\xDE\\xEF\\xF0"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "data3",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Constant",
+        "c": {
+          "type": "Constant::Bytes",
+          "0": "\\x34\\xDA\\xD2\\xD5\\x2D\\x2D\\x2D\\x2E\\x66\\xEF\\x77\\x76\\xEE\\x66\\xEE\\x65\\xDD\\x55\\x55\\xDE\\x66\\xEF\\xFF\\x76\\xEE\\x65\\xDD\\x55\\x55\\xDE\\x66\\xEF\\x77\\xFF\\xFF\\x76\\xEE\\x65\\xDD\\x50\\x88\\x00\\x00\\x8D\\x55\\xDE\\x66\\xEF\\x77\\xF8"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "data4",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Constant",
+        "c": {
+          "type": "Constant::Bytes",
+          "0": "\\x1A\\x6D\\x69\\x6A\\x96\\x96\\x96\\x97\\x33\\x77\\xBB\\xBB\\x77\\x33\\x77\\x32\\xEE\\xAA\\xAA\\xEF\\x33\\x77\\xFF\\xBB\\x77\\x32\\xEE\\xAA\\xAA\\xEF\\x33\\x77\\xBB\\xFF\\xFF\\xBB\\x77\\x32\\xEE\\xA8\\x44\\x00\\x00\\x46\\xAA\\xEF\\x33\\x77\\xBB\\xFC"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "f1",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [],
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Unit"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Match",
+          "expr": {
+            "type": "Expr::ArrayGetSlice",
+            "array": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "data1"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "start_index": null,
+            "end_index": null,
+            "index_loc": null,
+            "loc": null
+          },
+          "cases": [
+            {
+              "type": "Case",
+              "pattern": {
+                "type": "Pattern::Array",
+                "pats": {
+                  "type": "ArrayPatterns::Closed",
+                  "0": [
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u1",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "1"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u2le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "2"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u2be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "2"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u3le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "3"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u3be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "3"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u8le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x5a"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u8be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x5a"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u16le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xa5a5"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u16be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xa5a5"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u24le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xeeddcc"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u24be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xeeddcc"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u32le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccdd"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u32be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccdd"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u48le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u48be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u64le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x0011aabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u64be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x0011aabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    }
+                  ]
+                },
+                "loc": null
+              },
+              "guard": null,
+              "body": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "println"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::String",
+                          "0": "ok"
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                "group": {
+                  "type": "Group::Brace"
+                },
+                "loc": null
+              }
+            },
+            {
+              "type": "Case",
+              "pattern": {
+                "type": "Pattern::Any",
+                "loc": null
+              },
+              "guard": null,
+              "body": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "println"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::String",
+                          "0": "not ok"
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                "group": {
+                  "type": "Group::Brace"
+                },
+                "loc": null
+              }
+            }
+          ],
+          "match_loc": null,
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "f2",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [],
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Unit"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Match",
+          "expr": {
+            "type": "Expr::ArrayGetSlice",
+            "array": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "data2"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "start_index": null,
+            "end_index": null,
+            "index_loc": null,
+            "loc": null
+          },
+          "cases": [
+            {
+              "type": "Case",
+              "pattern": {
+                "type": "Pattern::Array",
+                "pats": {
+                  "type": "ArrayPatterns::Closed",
+                  "0": [
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u1",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u1",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "1"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u2",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "2"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u2",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "2"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u3",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "3"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u3",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "3"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u8le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x5a"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u8be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x5a"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u16le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xa5a5"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u16be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xa5a5"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u24le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xeeddcc"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u24be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xeeddcc"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u32le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccdd"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u32be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccdd"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u48le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u48be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u64le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x0011aabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u64be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x0011aabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    }
+                  ]
+                },
+                "loc": null
+              },
+              "guard": null,
+              "body": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "println"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::String",
+                          "0": "ok"
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                "group": {
+                  "type": "Group::Brace"
+                },
+                "loc": null
+              }
+            },
+            {
+              "type": "Case",
+              "pattern": {
+                "type": "Pattern::Any",
+                "loc": null
+              },
+              "guard": null,
+              "body": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "println"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::String",
+                          "0": "not ok"
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                "group": {
+                  "type": "Group::Brace"
+                },
+                "loc": null
+              }
+            }
+          ],
+          "match_loc": null,
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "f3",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [],
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Unit"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Match",
+          "expr": {
+            "type": "Expr::ArrayGetSlice",
+            "array": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "data3"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "start_index": null,
+            "end_index": null,
+            "index_loc": null,
+            "loc": null
+          },
+          "cases": [
+            {
+              "type": "Case",
+              "pattern": {
+                "type": "Pattern::Array",
+                "pats": {
+                  "type": "ArrayPatterns::Closed",
+                  "0": [
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u2",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u1",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "1"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u2",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "2"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u2",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "2"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u3",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "3"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u3",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "3"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u8le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x5a"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u8be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x5a"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u16le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xa5a5"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u16be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xa5a5"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u24le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xeeddcc"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u24be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xeeddcc"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u32le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccdd"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u32be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccdd"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u48le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u48be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u64le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x0011aabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u64be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x0011aabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    }
+                  ]
+                },
+                "loc": null
+              },
+              "guard": null,
+              "body": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "println"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::String",
+                          "0": "ok"
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                "group": {
+                  "type": "Group::Brace"
+                },
+                "loc": null
+              }
+            },
+            {
+              "type": "Case",
+              "pattern": {
+                "type": "Pattern::Any",
+                "loc": null
+              },
+              "guard": null,
+              "body": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "println"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::String",
+                          "0": "not ok"
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                "group": {
+                  "type": "Group::Brace"
+                },
+                "loc": null
+              }
+            }
+          ],
+          "match_loc": null,
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "f4",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [],
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Unit"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Match",
+          "expr": {
+            "type": "Expr::ArrayGetSlice",
+            "array": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "data4"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "start_index": null,
+            "end_index": null,
+            "index_loc": null,
+            "loc": null
+          },
+          "cases": [
+            {
+              "type": "Case",
+              "pattern": {
+                "type": "Pattern::Array",
+                "pats": {
+                  "type": "ArrayPatterns::Closed",
+                  "0": [
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u3",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u1",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "1"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u2",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "2"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u2",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "2"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u3",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "3"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u3",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "3"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u8le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x5a"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u8be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x5a"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u16le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xa5a5"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u16be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xa5a5"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u24le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xeeddcc"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u24be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xeeddcc"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u32le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccdd"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u32be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccdd"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u48le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u48be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0xaabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u64le",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x0011aabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    },
+                    {
+                      "type": "ArrayPattern::Pattern",
+                      "0": {
+                        "type": "Pattern::SpecialConstr",
+                        "binder": {
+                          "type": "Binder",
+                          "name": "u64be",
+                          "loc": null
+                        },
+                        "args": [
+                          {
+                            "type": "ConstrPatArg",
+                            "pat": {
+                              "type": "Pattern::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "0x0011aabbccddeeff"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "loc": null
+                      }
+                    }
+                  ]
+                },
+                "loc": null
+              },
+              "guard": null,
+              "body": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "println"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::String",
+                          "0": "ok"
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                "group": {
+                  "type": "Group::Brace"
+                },
+                "loc": null
+              }
+            },
+            {
+              "type": "Case",
+              "pattern": {
+                "type": "Pattern::Any",
+                "loc": null
+              },
+              "guard": null,
+              "body": {
+                "type": "Expr::Group",
+                "expr": {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "println"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::String",
+                          "0": "not ok"
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                "group": {
+                  "type": "Group::Brace"
+                },
+                "loc": null
+              }
+            }
+          ],
+          "match_loc": null,
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "main",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Sequence",
+          "exprs": [
+            {
+              "type": "Expr::Apply",
+              "func": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "f1"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "args": [],
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            },
+            {
+              "type": "Expr::Apply",
+              "func": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "f2"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "args": [],
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            },
+            {
+              "type": "Expr::Apply",
+              "func": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "f3"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "args": [],
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            },
+            {
+              "type": "Expr::Apply",
+              "func": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "f4"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "args": [],
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            }
+          ],
+          "last_expr": {
+            "type": "Expr::Apply",
+            "func": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "println"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "args": [
+              {
+                "type": "Argument",
+                "value": {
+                  "type": "Expr::DotApply",
+                  "self": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "data1"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "method_name": {
+                    "type": "Label",
+                    "name": "length",
+                    "loc": null
+                  },
+                  "args": [],
+                  "return_self": false,
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                "kind": {
+                  "type": "ArgumentKind::Positional"
+                }
+              }
+            ],
+            "attr": {
+              "type": "ApplyAttr::NoAttr"
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    }
+  ]
+}

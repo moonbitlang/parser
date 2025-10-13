@@ -1,0 +1,178 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "init",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Any",
+            "loc": null
+          },
+          "expr": {
+            "type": "Expr::Constr",
+            "constr": {
+              "type": "Constructor",
+              "name": {
+                "type": "ConstrName",
+                "name": "Constr",
+                "loc": null
+              },
+              "extra_info": {
+                "type": "ConstructorExtraInfo::NoExtraInfo"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Any",
+              "loc": null
+            },
+            "expr": {
+              "type": "Expr::Constr",
+              "constr": {
+                "type": "Constructor",
+                "name": {
+                  "type": "ConstrName",
+                  "name": "Constr",
+                  "loc": null
+                },
+                "extra_info": {
+                  "type": "ConstructorExtraInfo::Package",
+                  "0": "pkg"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Let",
+              "pattern": {
+                "type": "Pattern::Any",
+                "loc": null
+              },
+              "expr": {
+                "type": "Expr::Constr",
+                "constr": {
+                  "type": "Constructor",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "Constr",
+                    "loc": null
+                  },
+                  "extra_info": {
+                    "type": "ConstructorExtraInfo::TypeName",
+                    "0": {
+                      "type": "TypeName",
+                      "name": {
+                        "type": "LongIdent::Dot",
+                        "pkg": "pkg",
+                        "id": "Ty"
+                      },
+                      "is_object": false,
+                      "loc": null
+                    }
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "body": {
+                "type": "Expr::Let",
+                "pattern": {
+                  "type": "Pattern::Any",
+                  "loc": null
+                },
+                "expr": {
+                  "type": "Expr::Constr",
+                  "constr": {
+                    "type": "Constructor",
+                    "name": {
+                      "type": "ConstrName",
+                      "name": "Constr",
+                      "loc": null
+                    },
+                    "extra_info": {
+                      "type": "ConstructorExtraInfo::TypeName",
+                      "0": {
+                        "type": "TypeName",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "Ty"
+                        },
+                        "is_object": false,
+                        "loc": null
+                      }
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "body": {
+                  "type": "Expr::Let",
+                  "pattern": {
+                    "type": "Pattern::Any",
+                    "loc": null
+                  },
+                  "expr": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Dot",
+                        "pkg": "pkg",
+                        "id": "f"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "body": {
+                    "type": "Expr::Unit",
+                    "loc": null,
+                    "faked": true
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    }
+  ]
+}
