@@ -6,7 +6,7 @@ pub fn normalize(json : String) -> String {
       abort(err.to_string())
     }
   }
-  json.stringify(indent=2).trim_end(" ").to_string()
+  json.stringify(indent=2).trim_end(char_set=" ").to_string()
 }
 
 ///|

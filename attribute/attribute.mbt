@@ -55,7 +55,7 @@ pub fn Attribute::new(
 ) -> Attribute {
   //TODO: report better syntax error for attribute 
   let (id, dot_id, raw_payload) = content
-  let raw_payload = raw_payload.trim(" ").to_string()
+  let raw_payload = raw_payload.trim(char_set=" ").to_string()
   let (raw, attr_id) = match dot_id {
     None => ("#\{id}\{raw_payload}", { qual: None, name: id })
     Some(dot_id) =>

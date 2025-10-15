@@ -2178,7 +2178,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
           fn collect_fields(
             has_dotdot,
             acc : List[@syntax.FieldPat],
-            field_or_dotdots : @array.View[MapPatternFragment],
+            field_or_dotdots : ArrayView[MapPatternFragment],
           ) -> @syntax.Pattern {
             match field_or_dotdots {
               [] => Record(fields=acc.rev(), is_closed=!has_dotdot, loc~)
@@ -2212,7 +2212,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
           fn collect_elems(
             has_dotdot,
             acc : List[_],
-            field_pat_or_dotdots : @array.View[MapPatternFragment],
+            field_pat_or_dotdots : ArrayView[MapPatternFragment],
           ) -> @syntax.Pattern {
             match field_pat_or_dotdots {
               [] => Map(elems=acc.rev(), is_closed=!has_dotdot, loc~)
