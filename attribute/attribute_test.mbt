@@ -43,4 +43,11 @@ test "attribute" {
       #|{loc: -0:1-0:1, raw: "#qual.name(\"abcdef\", g(true))", parsed: Some(Apply(qual.name, @list.of([Expr(String("abcdef")), Expr(Apply(g, @list.of([Expr(Bool(true))])))])))}
     ),
   )
+  let attr = Attribute::new(loc=dummy_loc, ("qual", Some("name"), ""))
+  inspect(
+    attr,
+    content=(
+      #|{loc: -0:1-0:1, raw: "#qual.name", parsed: Some(Ident(qual.name))}
+    ),
+  )
 }

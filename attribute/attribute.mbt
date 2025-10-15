@@ -68,8 +68,11 @@ pub fn Attribute::new(
   )
   let parsed = match errors {
     [] =>
-      Some(Apply(attr_id, payloads(tokens, initial_pos=loc.start))) catch {
+      try payloads(tokens, initial_pos=loc.start) catch {
         UnexpectedEndOfInput(_) | UnexpectedToken(_) => Some(Ident(attr_id))
+      } noraise {
+        Empty => Some(Ident(attr_id))
+        props => Some(Apply(attr_id, props))
       }
     _ => None
   }
