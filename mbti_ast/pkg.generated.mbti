@@ -17,6 +17,7 @@ pub(all) enum AliasSig {
   TraitAlias(name~ : Name, trait_name~ : QualifiedName, vis~ : @syntax.Visibility)
   FnAlias(name~ : Name, type_name~ : QualifiedName, loc~ : @basic.Location)
 }
+fn AliasSig::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for AliasSig
 
 pub(all) struct ConstSig {
@@ -24,6 +25,7 @@ pub(all) struct ConstSig {
   type_ : @syntax.Type
   value : @syntax.Constant
 }
+fn ConstSig::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ConstSig
 
 pub(all) struct FuncSig {
@@ -34,12 +36,14 @@ pub(all) struct FuncSig {
   return_ : (@syntax.Type, @syntax.ErrorType)
   type_params : @list.List[TypeParamWithConstraints]
 }
+fn FuncSig::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for FuncSig
 
 pub(all) enum ImplSig {
   Trait(type_params~ : @list.List[TypeParamWithConstraints], type_~ : @syntax.Type, trait_name~ : QualifiedName)
   DefaultImpl(trait_name~ : Name, method_name~ : Name)
 }
+fn ImplSig::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ImplSig
 
 pub(all) struct Mbti {
@@ -47,18 +51,21 @@ pub(all) struct Mbti {
   imports : @list.List[PackageImport]
   sigs : @list.List[(Sig, @basic.Location)]
 }
+fn Mbti::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Mbti
 
 pub(all) struct Name {
   name : String
   loc : @basic.Location
 }
+fn Name::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Name
 
 pub(all) struct PackageImport {
   name : String
   alias_ : String?
 }
+fn PackageImport::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for PackageImport
 
 pub(all) enum Parameter {
@@ -68,12 +75,14 @@ pub(all) enum Parameter {
   OptionalDefault(@syntax.Label, @syntax.Type)
   OptionalOption(@syntax.Label, @syntax.Type)
 }
+fn Parameter::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Parameter
 
 pub(all) struct QualifiedName {
   name : @syntax.LongIdent
   loc : @basic.Location
 }
+fn QualifiedName::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for QualifiedName
 
 pub(all) enum Sig {
@@ -85,12 +94,14 @@ pub(all) enum Sig {
   Const(ConstSig)
   Value(ValueSig)
 }
+fn Sig::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Sig
 
 pub(all) enum TraitMethodParameter {
   Positional(@syntax.Type)
   Labelled(@syntax.Label, @syntax.Type)
 }
+fn TraitMethodParameter::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TraitMethodParameter
 
 pub(all) struct TraitMethodSig {
@@ -99,6 +110,7 @@ pub(all) struct TraitMethodSig {
   has_default : Bool
   return_ : (@syntax.Type, @syntax.ErrorType)
 }
+fn TraitMethodSig::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TraitMethodSig
 
 pub(all) struct TraitSig {
@@ -107,18 +119,21 @@ pub(all) struct TraitSig {
   methods : @list.List[TraitMethodSig]
   vis : @syntax.Visibility
 }
+fn TraitSig::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TraitSig
 
 pub(all) enum TypeParamNoConstraints {
   Name(Name)
   Underscore(@basic.Location)
 }
+fn TypeParamNoConstraints::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TypeParamNoConstraints
 
 pub(all) struct TypeParamWithConstraints {
   name : Name
   constraints : @list.List[QualifiedName]
 }
+fn TypeParamWithConstraints::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TypeParamWithConstraints
 
 pub(all) struct TypeSig {
@@ -127,12 +142,14 @@ pub(all) struct TypeSig {
   components : @syntax.TypeDesc
   vis : @syntax.Visibility
 }
+fn TypeSig::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TypeSig
 
 pub(all) struct ValueSig {
   name : Name
   type_ : @syntax.Type
 }
+fn ValueSig::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ValueSig
 
 // Type aliases

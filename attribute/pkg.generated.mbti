@@ -15,6 +15,8 @@ pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
   UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
 }
+fn ParseError::output(Self, &Logger) -> Unit // from trait `Show`
+fn ParseError::to_string(Self) -> String // from trait `Show`
 impl Show for ParseError
 
 // Types and methods
@@ -25,6 +27,9 @@ pub(all) struct Attribute {
 }
 fn Attribute::name(Self) -> String?
 fn Attribute::new(loc~ : @basic.Location, (String, String?, String)) -> Self
+fn Attribute::output(Self, &Logger) -> Unit // from trait `Show`
+fn Attribute::to_json(Self) -> Json // from trait `ToJson`
+fn Attribute::to_string(Self) -> String // from trait `Show`
 impl Show for Attribute
 impl ToJson for Attribute
 
@@ -34,18 +39,24 @@ pub(all) enum Expr {
   Apply(Id, @list.List[Prop])
   Bool(Bool)
 }
+fn Expr::output(Self, &Logger) -> Unit // from trait `Show`
+fn Expr::to_string(Self) -> String // from trait `Show`
 impl Show for Expr
 
 pub(all) struct Id {
   qual : String?
   name : String
 }
+fn Id::output(Self, &Logger) -> Unit // from trait `Show`
+fn Id::to_string(Self) -> String // from trait `Show`
 impl Show for Id
 
 pub(all) enum Prop {
   Labeled(String, Expr)
   Expr(Expr)
 }
+fn Prop::output(Self, &Logger) -> Unit // from trait `Show`
+fn Prop::to_string(Self) -> String // from trait `Show`
 impl Show for Prop
 
 // Type aliases
