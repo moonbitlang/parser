@@ -299,6 +299,11 @@ test "array2" (t : @test.T) {
 }
 
 ///|
+test "try_exclamation" (t : @test.T) {
+  t.run("try_exclamation")
+}
+
+///|
 test "arrow_fn" (t : @test.T) {
   t.run("arrow_fn")
 }
@@ -939,6 +944,6 @@ test "let_mut" (t : @test.T) {
 }
 
 ///|
-test "try_exclamation" (t : @test.T) {
-  t.run("try_exclamation")
+test "tuplestruct" (t : @test.T) {
+  t.run("tuplestruct")
 }
