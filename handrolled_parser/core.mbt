@@ -571,6 +571,77 @@ fn[A] State::with_follow(
 ///|
 /// Parse a sequence of elements separated by a delimiter, possibly ending 
 /// with a trailing delimiter, and followed by a set of tokens (not consumed).
+/// 
+/// This version requires at least one element.
+fn[A] State::series1_with_follow(
+  self : Self,
+  invalid_delims? : Array[TokenKind] = [],
+  delim~ : TokenKind,
+  follow_set~ : Array[TokenKind],
+  f : (State) -> A,
+) -> (Array[A], Bool) {
+  guard self.mode is Normal else { ([], false) }
+  fn expect_element() -> A {
+    self.push_sync(delim)
+    let elem = f(self)
+    // if error occurs in f, pop_sync will recover to the next delimiter position
+    self.pop_sync(delim)
+    elem
+  }
+
+  self.push_syncs(follow_set)
+  let acc = [expect_element()]
+  for {
+    match self.mode {
+      Panic(_) => break
+      Normal =>
+        // end of the series
+        if follow_set.contains(self.peek_kind()) {
+          break
+        } else if self.peek_kind() == delim {
+          // consume the delimiter
+          self.expect_token(delim)
+          // if the next token is not in the follow set, consume an element
+          if !follow_set.contains(self.peek_kind()) {
+            acc.push(expect_element())
+            continue
+          } else {
+            break
+          }
+        } else if invalid_delims.contains(self.peek_kind()) {
+          // error recovery: consume the wrong delimiter and element
+          self.report_error({
+            loc: self.peek_location(),
+            msg: "Expecting a newline or `;` here, but encountered \{delim.to_expect_string()}.",
+          })
+          self.skip()
+          // if the next token is not in the follow set, consume an element
+          if !follow_set.contains(self.peek_kind()) {
+            acc.push(expect_element())
+            continue
+          } else {
+            break
+          }
+        } else {
+          // Error recovery: try to skip until the next delimiter.
+          // This branch should be unreachable if the sync tokens are work correctly.
+          let tok = self.peek_token()
+          self.push_sync(delim)
+          let loc = self.panic()
+          self.report_unexpected(tok, [delim, ..follow_set], loc)
+          self.pop_sync(delim)
+          continue
+        }
+    }
+  }
+  self.pop_syncs(follow_set)
+  let has_trailing_delim = self.previous_triple().0.kind() == delim
+  (acc, has_trailing_delim)
+}
+
+///|
+/// Parse a sequence of elements separated by a delimiter, possibly ending 
+/// with a trailing delimiter, and followed by a set of tokens (not consumed).
 fn[A] State::series_with_follow(
   self : Self,
   invalid_delims? : Array[TokenKind] = [],

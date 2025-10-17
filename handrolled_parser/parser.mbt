@@ -349,9 +349,11 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
       let components : @syntax.TypeDesc = match self.peek_token() {
         LPAREN => {
           self.skip() // consume '('
-          let ts = self.with_follow(follow_set=[TK_RPAREN], fn(_) {
-            self.sepby1(delim=TK_COMMA, fn(_) { self.parse_type() })
-          })
+          let (ts, _) = self.series1_with_follow(
+            follow_set=[TK_RPAREN],
+            delim=TK_COMMA,
+            State::parse_type,
+          )
           self.expect_token(TK_RPAREN)
           TupleStruct(@list.from_array(ts))
         }
@@ -942,9 +944,11 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         LPAREN => {
           // tuple struct
           self.skip() // consume '('
-          let ts = self.with_follow(follow_set=[TK_RPAREN], fn(_) {
-            self.sepby1(delim=TK_COMMA, State::parse_type)
-          })
+          let (ts, _) = self.series1_with_follow(
+            delim=TK_COMMA,
+            follow_set=[TK_RPAREN],
+            State::parse_type,
+          )
           self.expect_token(TK_RPAREN)
           TupleStruct(@list.from_array(ts))
         }
