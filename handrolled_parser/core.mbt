@@ -472,9 +472,10 @@ fn[A] State::optional(
 }
 
 ///|
-/// Parse a list of elements separated by a delimiter. 
-/// The trailing delimiter is optional.
-fn[A] State::delimited(
+/// Parse a list of elements separated by a delimiter, the list can be empty.
+/// 
+/// Note: The trailing delimiter is not allowed.
+fn[A] State::sepby(
   self : Self,
   first_set~ : Array[TokenKind],
   delim~ : TokenKind,
@@ -490,7 +491,7 @@ fn[A] State::delimited(
           self..pop_sync(delim)..expect_token(delim)..push_sync(delim)
           result.push(f(self))
         }
-        self.pop_sync(delim) // FIXME: expect_token(delim) is missing here?
+        self.pop_sync(delim)
         result
       } else {
         self.pop_sync(delim)
@@ -502,8 +503,9 @@ fn[A] State::delimited(
 
 ///|
 /// Parse a list of elements separated by a delimiter, with at least one element.
-/// The trailing delimiter is optional.
-fn[A] State::delimited1(
+/// 
+/// Note: The trailing delimiter is not allowed.
+fn[A] State::sepby1(
   self : Self,
   delim~ : TokenKind,
   f : (State) -> A,
@@ -517,7 +519,7 @@ fn[A] State::delimited1(
         self..pop_sync(delim)..expect_token(delim)..push_sync(delim)
         result.push(f(self))
       }
-      self.pop_sync(delim) // FIXME: expect_token(delim) is missing here?
+      self.pop_sync(delim)
       result
     }
   }
@@ -567,7 +569,9 @@ fn[A] State::with_follow(
 }
 
 ///|
-fn[A] State::delimited_with_follow(
+/// Parse a sequence of elements separated by a delimiter, possibly ending 
+/// with a trailing delimiter, and followed by a set of tokens (not consumed).
+fn[A] State::series_with_follow(
   self : Self,
   invalid_delims? : Array[TokenKind] = [],
   delim~ : TokenKind,
@@ -632,7 +636,10 @@ fn[A] State::delimited_with_follow(
 }
 
 ///|
-fn[A] State::surround_delimited(
+/// Parse a sequence of elements separated by a delimiter, possibly ending 
+/// with a trailing delimiter, and surrounded by `left` and `right` tokens 
+/// (which are not consumed).
+fn[A] State::surround_series(
   self : Self,
   invalid_delims? : Array[TokenKind] = [],
   left~ : TokenKind,
@@ -643,7 +650,7 @@ fn[A] State::surround_delimited(
   match self.mode {
     Panic(_) => []
     Normal =>
-      self.surround(left~, right~, state => state.delimited_with_follow(
+      self.surround(left~, right~, state => state.series_with_follow(
           invalid_delims~,
           delim~,
           follow_set=[right],

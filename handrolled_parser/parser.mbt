@@ -229,7 +229,7 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
     [TK_COLON],
     fn(state) {
       state.expect_token(TK_COLON)
-      state.delimited1(delim=TK_PLUS, fn(state) {
+      state.sepby1(delim=TK_PLUS, fn(state) {
         let loc = state.peek_location()
         let trait_ = state.parse_qual_luident()
         { trait_, loc }
@@ -320,7 +320,7 @@ fn State::parse_opt_type_params_no_constraints(
   }
   self
   .optional([TK_LBRACKET], fn(state) {
-    state.surround_delimited(
+    state.surround_series(
       left=TK_LBRACKET,
       right=TK_RBRACKET,
       delim=TK_COMMA,
@@ -350,13 +350,13 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
         LPAREN => {
           self.skip() // consume '('
           let ts = self.with_follow(follow_set=[TK_RPAREN], fn(_) {
-            self.delimited1(delim=TK_COMMA, fn(_) { self.parse_type() })
+            self.sepby1(delim=TK_COMMA, fn(_) { self.parse_type() })
           })
           self.expect_token(TK_RPAREN)
           TupleStruct(@list.from_array(ts))
         }
         _ => {
-          let fields = self.surround_delimited(
+          let fields = self.surround_series(
             invalid_delims=[TK_COMMA],
             left=TK_LBRACE,
             right=TK_RBRACE,
@@ -373,7 +373,7 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
       self.expect_token(TK_ENUM)
       let tycon_loc = self.peek_location()
       let tycon = self.parse_luident()
-      let constrs = self.surround_delimited(
+      let constrs = self.surround_series(
           invalid_delims=[TK_COMMA],
           left=TK_LBRACE,
           right=TK_RBRACE,
@@ -443,7 +443,7 @@ fn State::parse_fun_decl(
   }
   let param_loc_start = self.peek_spos()
   let decl_params = self.optional([TK_LPAREN], fn(state) {
-    state.surround_delimited(
+    state.surround_series(
       left=TK_LPAREN,
       right=TK_RPAREN,
       delim=TK_COMMA,
@@ -499,7 +499,7 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
   let quantifiers = self.parse_opt_typ_params()
   self.pop_sync(TK_LPAREN)
   self.expect_token(TK_LPAREN)
-  let (params, _) = self.delimited_with_follow(
+  let (params, _) = self.series_with_follow(
     delim=TK_COMMA,
     follow_set=[TK_RPAREN],
     fn(state) -> @syntax.Parameter {
@@ -590,7 +590,7 @@ fn State::parse_trait_decl(
   let supers = if self.peek_token() is COLON {
     self.skip()
     self.with_follow(follow_set=[TK_LBRACE], fn(state) {
-      state.delimited1(delim=TK_PLUS, fn(state) {
+      state.sepby1(delim=TK_PLUS, fn(state) {
         let loc = state.peek_location()
         let trait_ = state.parse_qual_luident()
         @syntax.TypeVarConstraint::{ trait_, loc }
@@ -601,7 +601,7 @@ fn State::parse_trait_decl(
     @list.new()
   }
   self.expect_token(TK_LBRACE)
-  let (methods, _) = self.delimited_with_follow(
+  let (methods, _) = self.series_with_follow(
     delim=TK_SEMI,
     follow_set=[TK_RBRACE],
     State::parse_trait_method_decl,
@@ -702,7 +702,7 @@ fn State::parse_typealias(
       self.skip()
       let (is_list, targets) = match self.peek_token() {
         DOT_LPAREN => {
-          let targets = self.surround_delimited(
+          let targets = self.surround_series(
             left=TK_DOT_LPAREN,
             right=TK_LPAREN,
             delim=TK_COMMA,
@@ -834,7 +834,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       let tycon = self.parse_luident()
       let components : @syntax.TypeDesc = match self.peek_token() {
         LBRACE => {
-          let cs = self.surround_delimited(
+          let cs = self.surround_series(
               invalid_delims=[TK_COMMA],
               left=TK_LBRACE,
               right=TK_RBRACE,
@@ -873,7 +873,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       let tycon = self.parse_luident()
       let components : @syntax.TypeDesc = match self.peek_token() {
         LBRACE => {
-          let cs = self.surround_delimited(
+          let cs = self.surround_series(
               invalid_delims=[TK_COMMA],
               left=TK_LBRACE,
               right=TK_RBRACE,
@@ -943,13 +943,13 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           // tuple struct
           self.skip() // consume '('
           let ts = self.with_follow(follow_set=[TK_RPAREN], fn(_) {
-            self.delimited1(delim=TK_COMMA, State::parse_type)
+            self.sepby1(delim=TK_COMMA, State::parse_type)
           })
           self.expect_token(TK_RPAREN)
           TupleStruct(@list.from_array(ts))
         }
         _ => {
-          let fields = self.surround_delimited(
+          let fields = self.surround_series(
             invalid_delims=[TK_COMMA],
             left=TK_LBRACE,
             right=TK_RBRACE,
@@ -978,7 +978,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       let tycon_loc = self.peek_location()
       let tycon = self.parse_luident()
       let params = self.parse_opt_type_params_no_constraints()
-      let constrs = self.surround_delimited(
+      let constrs = self.surround_series(
           invalid_delims=[TK_COMMA],
           left=TK_LBRACE,
           right=TK_RBRACE,
@@ -1166,7 +1166,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       ) -> (List[@syntax.AliasTarget], Bool) {
         match self.peek_token() {
           DOT_LPAREN if need_dot => {
-            let xs = self.surround_delimited(
+            let xs = self.surround_series(
                 left=TK_DOT_LPAREN,
                 right=TK_RPAREN,
                 delim=TK_COMMA,
@@ -1176,7 +1176,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             (xs, true)
           }
           LPAREN if !need_dot => {
-            let xs = self.surround_delimited(
+            let xs = self.surround_series(
                 left=TK_LPAREN,
                 right=TK_RPAREN,
                 delim=TK_COMMA,
@@ -1270,7 +1270,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           self.skip()
           let (is_list, targets) = match self.peek_token() {
             DOT_LPAREN => {
-              let xs = self.surround_delimited(
+              let xs = self.surround_series(
                 left=TK_DOT_LPAREN,
                 right=TK_RPAREN,
                 delim=TK_COMMA,
@@ -1350,7 +1350,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           )
         }
         LPAREN => {
-          let targets = self.surround_delimited(
+          let targets = self.surround_series(
               left=TK_LPAREN,
               right=TK_RPAREN,
               delim=TK_COMMA,
@@ -1399,7 +1399,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         None
       }
       let params = if self.peek_token() is LPAREN {
-        let params = self.surround_delimited(
+        let params = self.surround_series(
           left=TK_LPAREN,
           right=TK_RPAREN,
           delim=TK_COMMA,
@@ -1447,7 +1447,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             self.push_sync(TK_LBRACE)
             let method_name = self.parse_binder(context="name of method")
             let has_error = self.parse_optional_bang()
-            let params = self.surround_delimited(
+            let params = self.surround_series(
                 left=TK_LPAREN,
                 right=TK_RPAREN,
                 delim=TK_COMMA,
@@ -1497,7 +1497,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           self.push_sync(TK_LBRACE)
           let method_name = self.parse_binder(context="name of method")
           let has_error = self.parse_optional_bang()
-          let params = self.surround_delimited(
+          let params = self.surround_series(
               left=TK_LPAREN,
               right=TK_RPAREN,
               delim=TK_COMMA,
@@ -1562,7 +1562,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       let quantifiers = self.parse_opt_typ_params()
       let view_type_loc = self.peek_location()
       let view_type_name = self.expect_uident(context="view type name")
-      let view_constrs = self.surround_delimited(
+      let view_constrs = self.surround_series(
           invalid_delims=[TK_COMMA],
           left=TK_LBRACE,
           right=TK_RBRACE,
@@ -1575,7 +1575,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       self.expect_token(TK_WITH)
       let view_func_name = self.parse_binder(context="name of view function")
       let params_spos = self.peek_spos()
-      let parameters = self.surround_delimited(
+      let parameters = self.surround_series(
           left=TK_LPAREN,
           right=TK_RPAREN,
           delim=TK_COMMA,
@@ -1624,7 +1624,7 @@ fn State::parse_deriving_directive_list(
   }
   if self.peek_token() is DERIVE {
     self.skip()
-    let directives = self.surround_delimited(
+    let directives = self.surround_series(
       left=TK_LPAREN,
       right=TK_RPAREN,
       delim=TK_COMMA,
@@ -1648,7 +1648,7 @@ fn State::parse_deriving_directive(self : Self) -> @syntax.DerivingDirective {
   let spos = self.peek_spos()
   let type_name = self.parse_type_name()
   let args = if self.peek_token() is LPAREN {
-    self.surround_delimited(
+    self.surround_series(
       left=TK_LPAREN,
       right=TK_RPAREN,
       delim=TK_COMMA,
@@ -1726,7 +1726,7 @@ fn State::parse_constr_decl(self : Self) -> @syntax.ConstrDecl {
   let name = self.expect_uident(context="constructor name")
   let constr_name : @syntax.ConstrName = { name, loc: constr_name_loc }
   let args = if self.peek_token() is LPAREN {
-    let xs = self.surround_delimited(
+    let xs = self.surround_series(
       left=TK_LPAREN,
       right=TK_RPAREN,
       delim=TK_COMMA,
@@ -1920,20 +1920,17 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
       let spos = self.peek_spos()
       let constr = self.parse_constr()
       let maybe_args = self.optional([TK_LPAREN], fn(state) {
-        state.surround_delimited(
-          left=TK_LPAREN,
-          right=TK_RPAREN,
-          delim=TK_COMMA,
-          fn(state) {
-            if state.peek_token() is DOTDOT {
-              let loc = state.peek_location()
-              state.skip()
-              ConstrArgRelatedness::Dotdot(loc)
-            } else {
-              Arg(state.parse_constr_pat_argument())
-            }
-          },
-        )
+        state.surround_series(left=TK_LPAREN, right=TK_RPAREN, delim=TK_COMMA, fn(
+          state,
+        ) {
+          if state.peek_token() is DOTDOT {
+            let loc = state.peek_location()
+            state.skip()
+            ConstrArgRelatedness::Dotdot(loc)
+          } else {
+            Arg(state.parse_constr_pat_argument())
+          }
+        })
         |> @list.from_array
       })
       let mut is_open = false
@@ -1967,7 +1964,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
         match state.peek_token() {
           COMMA => {
             state.skip()
-            let (pats, _) = state.delimited_with_follow(
+            let (pats, _) = state.series_with_follow(
               delim=TK_COMMA,
               follow_set=[TK_RPAREN],
               State::parse_pattern,
@@ -2018,7 +2015,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
         }
       }
 
-      let _ = self.surround_delimited(
+      let _ = self.surround_series(
         left=TK_LBRACKET,
         right=TK_RBRACKET,
         delim=TK_COMMA,
@@ -2098,7 +2095,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
       let mut kind : BraceLikeSyntaxKind = Unknown
       self.expect_token(TK_LBRACE)
       self.push_sync(TK_RBRACE)
-      let (field_pat_or_dotdots, _) = self.delimited_with_follow(
+      let (field_pat_or_dotdots, _) = self.series_with_follow(
         delim=TK_COMMA,
         follow_set=[TK_RBRACE],
         fn(self) {
@@ -2487,7 +2484,7 @@ fn State::parse_loop_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr 
   let spos = self.peek_spos()
   self.skip() // skip LOOP token
   let args = self.with_follow(follow_set=[TK_LBRACE], fn(state) {
-      state.delimited1(delim=TK_COMMA, State::parse_expr)
+      state.sepby1(delim=TK_COMMA, State::parse_expr)
     })
     |> @list.from_array
   let loop_loc = self.loc_start_with(spos)
@@ -2565,7 +2562,7 @@ fn State::parse_foreach_loop(
     return Hole(loc~, kind=Synthesized)
   }
   let binders = self.with_follow(follow_set=[TK_IN], fn(state) {
-    state.delimited1(delim=TK_COMMA, fn(state) -> @syntax.Binder? {
+    state.sepby1(delim=TK_COMMA, fn(state) -> @syntax.Binder? {
       match state.peek_token() {
         UNDERSCORE => {
           state.skip()
@@ -2615,7 +2612,7 @@ fn State::parse_for_loop(
     (binder, value)
   }
 
-  let (binders, _) = self.delimited_with_follow(
+  let (binders, _) = self.series_with_follow(
     delim=TK_COMMA,
     follow_set=[TK_SEMI, TK_LBRACE],
     parse_binder_with_value,
@@ -2628,7 +2625,7 @@ fn State::parse_for_loop(
       self.expect_token(TK_SEMI)
       let condition = self.optional(first_expr, State::try_parse_condition_expr)
       self.expect_token(TK_SEMI)
-      let (continue_block, _) = self.delimited_with_follow(
+      let (continue_block, _) = self.series_with_follow(
         delim=TK_COMMA,
         follow_set=[TK_LBRACE],
         parse_binder_with_value,
@@ -2726,7 +2723,7 @@ fn State::parse_try_expr(self : Self) -> @syntax.Expr {
   let lbrace_epos = self.peek_epos()
   // the catch_loc is the location of `catch {` or `catch! {`
   let catch_loc : Location = { start: catch_start, end: lbrace_epos }
-  let catch_cases = self.surround_delimited(
+  let catch_cases = self.surround_series(
       invalid_delims=[TK_COMMA],
       left=TK_LBRACE,
       right=TK_RBRACE,
@@ -2740,7 +2737,7 @@ fn State::parse_try_expr(self : Self) -> @syntax.Expr {
     let lbrace_epos = self.peek_epos()
     // the else_loc is the location of `else {` or `noraise {`
     let else_loc : Location = { start: else_spos, end: lbrace_epos }
-    let try_else_cases = self.surround_delimited(
+    let try_else_cases = self.surround_series(
         invalid_delims=[TK_COMMA],
         left=TK_LBRACE,
         right=TK_RBRACE,
@@ -2835,7 +2832,7 @@ fn State::parse_match_expr(self : Self) -> @syntax.Expr {
   let lbrace_epos = self.peek_epos()
   // The main_loc is the location of `match expr {`
   let match_loc : Location = { start: spos, end: lbrace_epos }
-  let cases = self.surround_delimited(
+  let cases = self.surround_series(
       invalid_delims=[TK_COMMA],
       left=TK_LBRACE,
       right=TK_RBRACE,
@@ -2922,7 +2919,7 @@ fn State::parse_multi_pattern_case(self : Self) -> @syntax.MultiArgCase {
   }
   fn parse_patterns(state : State) -> Array[@syntax.Pattern] {
     state.with_follow(follow_set=[TK_FAT_ARROW, TK_IF], fn(state) {
-      state.delimited1(delim=TK_COMMA, State::parse_pattern)
+      state.sepby1(delim=TK_COMMA, State::parse_pattern)
     })
   }
 
@@ -2985,7 +2982,7 @@ fn State::parse_tuple_or_constraint(self : Self) -> @syntax.Expr {
         }
         COMMA => {
           state.expect_token(TK_COMMA)
-          let (rest, _) = state.delimited_with_follow(
+          let (rest, _) = state.series_with_follow(
             delim=TK_COMMA,
             follow_set=[TK_RPAREN],
             State::parse_expr,
@@ -3015,7 +3012,7 @@ fn State::parse_tuple_or_constraint(self : Self) -> @syntax.Expr {
 fn State::handle_lparen(self : Self) -> @syntax.Expr {
   let spos = self.peek_spos()
   self.expect_token(TK_LPAREN)
-  let (expr_or_binders, has_trailing) = self.delimited_with_follow(
+  let (expr_or_binders, has_trailing) = self.series_with_follow(
     delim=TK_COMMA,
     follow_set=[TK_RPAREN],
     State::parse_expr_or_binder,
@@ -3173,7 +3170,7 @@ fn State::parse_simple_try_expr(
         false
       }
       let catch_loc = self.loc_start_with(catch_start)
-      let catch_cases = self.surround_delimited(
+      let catch_cases = self.surround_series(
           left=TK_LBRACE,
           right=TK_RBRACE,
           delim=TK_SEMI,
@@ -3379,7 +3376,7 @@ fn State::parse_prefix_expr(
         match self.peek_token() {
           EXCLAMATION | QUESTION | LPAREN => {
             let attr = self.parse_apply_attr()
-            let args = self.surround_delimited(
+            let args = self.surround_series(
                 left=TK_LPAREN,
                 right=TK_RPAREN,
                 delim=TK_COMMA,
@@ -3438,7 +3435,7 @@ fn State::parse_prefix_expr(
             let attr = self.parse_apply_attr()
             match self.peek_token() {
               LPAREN => {
-                let args = self.surround_delimited(
+                let args = self.surround_series(
                     left=TK_LPAREN,
                     right=TK_RPAREN,
                     delim=TK_COMMA,
@@ -3471,7 +3468,7 @@ fn State::parse_prefix_expr(
             self.skip()
             let label = self.parse_label(context="method name")
             let attr = self.parse_apply_attr()
-            let args = self.surround_delimited(
+            let args = self.surround_series(
                 left=TK_LPAREN,
                 right=TK_RPAREN,
                 delim=TK_COMMA,
@@ -3635,7 +3632,7 @@ fn State::parse_func(
     LPAREN => {
       let param_loc_start = self.peek_spos()
       self.push_sync(TK_LBRACE)
-      let params = self.surround_delimited(
+      let params = self.surround_series(
         left=TK_LPAREN,
         right=TK_RPAREN,
         delim=TK_COMMA,
@@ -3929,7 +3926,7 @@ fn State::parse_simple_expr(
     LBRACKET => {
       let spos = self.peek_spos()
       let mut to_spread = false
-      let elems = self.surround_delimited(
+      let elems = self.surround_series(
           left=TK_LBRACKET,
           right=TK_RBRACKET,
           delim=TK_COMMA,
@@ -4112,7 +4109,7 @@ fn State::parse_record_expr(
     let spread_record = self.parse_expr()
     let (fields, trailing) = if self.peek_token() is COMMA {
       self.expect_token(TK_COMMA)
-      let (fields, trailing) = self.delimited_with_follow(
+      let (fields, trailing) = self.series_with_follow(
         delim=TK_COMMA,
         follow_set=[TK_RBRACE],
         State::parse_field_def,
@@ -4123,7 +4120,7 @@ fn State::parse_record_expr(
     }
     (Some(spread_record), fields, trailing)
   } else {
-    let (fields, trailing_semi) = self.delimited_with_follow(
+    let (fields, trailing_semi) = self.series_with_follow(
       delim=TK_COMMA,
       follow_set=[TK_RBRACE],
       State::parse_field_def,
@@ -4195,7 +4192,7 @@ fn State::parse_map_expr(self : Self) -> @syntax.Expr {
   }
 
   let spos = self.peek_spos()
-  let elems = self.surround_delimited(
+  let elems = self.surround_series(
     left=TK_LBRACE,
     right=TK_RBRACE,
     delim=TK_COMMA,
@@ -4245,7 +4242,7 @@ fn State::parse_block_expr_with_local_types(
       }
     }
     let stmts = if allow_following_stmt {
-      self.delimited_with_follow(
+      self.series_with_follow(
         delim=TK_SEMI,
         follow_set=[TK_RBRACE],
         State::parse_stmt,
@@ -4266,7 +4263,7 @@ fn State::parse_block_expr(self : Self) -> @syntax.Expr {
     return @syntax.Hole(loc~, kind=Synthesized)
   }
   let loc_start = self.peek_spos()
-  let stmts = self.surround_delimited(
+  let stmts = self.surround_series(
     left=TK_LBRACE,
     right=TK_RBRACE,
     delim=TK_SEMI,
@@ -4305,7 +4302,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
   let spos = self.peek_spos()
   match self.peek_token() {
     LPAREN => {
-      let parameters = self.surround_delimited(
+      let parameters = self.surround_series(
         left=TK_LPAREN,
         right=TK_RPAREN,
         delim=TK_COMMA,
@@ -4374,7 +4371,7 @@ fn State::parse_stmt(self : Self) -> Statement {
     LETREC => {
       let spos = self.peek_spos()
       self.expect_token(TK_LETREC)
-      let bindings = self.delimited1(delim=TK_AND, fn(self) {
+      let bindings = self.sepby1(delim=TK_AND, fn(self) {
         let binder = self.parse_binder(context="variable name")
         let ty_opt = self.parse_opt_annot()
         self.expect_token(TK_EQUAL)
@@ -4586,7 +4583,7 @@ fn State::parse_expr_stmt(self : Self) -> @syntax.Expr {
         }
         _ => None
       }
-      let args = self.delimited(
+      let args = self.sepby(
           delim=TK_COMMA,
           first_set=first_expr,
           State::parse_expr,
@@ -4607,7 +4604,7 @@ fn State::parse_expr_stmt(self : Self) -> @syntax.Expr {
 
 ///|
 fn State::parse_match_fn_body(self : Self) -> @list.List[@syntax.MultiArgCase] {
-  self.surround_delimited(
+  self.surround_series(
     left=TK_LBRACE,
     right=TK_RBRACE,
     delim=TK_SEMI,
@@ -4776,7 +4773,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
       let name_loc = self.peek_location()
       let name = self.parse_qual_luident()
       let args = self.optional([TK_LBRACKET], fn(self) {
-        self.surround_delimited(
+        self.surround_series(
           left=TK_LBRACKET,
           right=TK_RBRACKET,
           delim=TK_COMMA,
@@ -4794,7 +4791,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
     }
     ASYNC => {
       self.skip()
-      let tys = self.surround_delimited(
+      let tys = self.surround_series(
           left=TK_LPAREN,
           right=TK_RPAREN,
           delim=TK_COMMA,
@@ -4807,7 +4804,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
       (false, Arrow(args=tys, res=ty_res, err=ty_err, is_async=true, loc~))
     }
     LPAREN => {
-      let tys = self.surround_delimited(
+      let tys = self.surround_series(
           left=TK_LPAREN,
           right=TK_RPAREN,
           delim=TK_COMMA,
@@ -4880,7 +4877,7 @@ fn State::parse_opt_typ_params(
   }
   self
   .optional([TK_LBRACKET], fn(state) {
-    state.surround_delimited(
+    state.surround_series(
       left=TK_LBRACKET,
       right=TK_RBRACKET,
       delim=TK_COMMA,
