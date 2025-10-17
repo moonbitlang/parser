@@ -624,7 +624,12 @@ fn[A] State::series1_with_follow(
           }
         } else {
           // Error recovery: try to skip until the next delimiter.
-          // This branch should be unreachable if the sync tokens are work correctly.
+          //
+          // This branch is taken when the previous loop iteration already consumed
+          // an element, and the next token is neither a delimiter nor in the follow set.
+          // 
+          // For example, in `(A, B C D, E)`, after consuming `A,` and `B`, we see `C` which is
+          // neither a `,` nor a `)`, so we skip until the next `,` or `)` and continue parsing.
           let tok = self.peek_token()
           self.push_sync(delim)
           let loc = self.panic()
