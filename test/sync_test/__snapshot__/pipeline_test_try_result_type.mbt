@@ -11,7 +11,7 @@ fn g(c : Bool) -> Unit raise {
     f(c)
   } catch {
     _ => ()
-  } else {
+  } noraise {
     _ => fail("!")
   }
 }

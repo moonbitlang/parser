@@ -439,7 +439,7 @@ impl ToJson for Hole
 
 pub(all) enum Impl {
   TopExpr(expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location)
-  TopTest(expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
+  TopTest(expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopTypeDef(TypeDecl)
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location)
   TopFuncAlias(pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, mut doc~ : DocString, loc~ : @basic.Location)
@@ -597,7 +597,7 @@ fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopFuncDef(Self[T], fun_decl~ : 
 fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopImpl(Self[T], self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopImplRelation(Self[T], self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopLetDef(Self[T], binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopTest(Self[T], expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit // from trait `IterVisitor`
+fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopTest(Self[T], expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopTrait(Self[T], TraitDecl) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopTypeDef(Self[T], TypeDecl) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopView(Self[T], quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit // from trait `IterVisitor`
@@ -841,7 +841,7 @@ fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopFuncDef(Self[T], fun_decl~ : Fu
 fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopImpl(Self[T], self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopImplRelation(Self[T], self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Impl // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopLetDef(Self[T], binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopTest(Self[T], expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl // from trait `MapVisitor`
+fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopTest(Self[T], expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopTrait(Self[T], TraitDecl) -> Impl // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopTypeDef(Self[T], TypeDecl) -> Impl // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopView(Self[T], quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl // from trait `MapVisitor`
@@ -1241,7 +1241,7 @@ pub(open) trait IterVisitor {
   visit_TraitDecl(Self, TraitDecl) -> Unit = _
   visit_Impl(Self, Impl) -> Unit = _
   visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location) -> Unit = _
-  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
+  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Unit = _
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Unit = _
   visit_Impl_TopFuncAlias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Unit = _
@@ -1440,7 +1440,7 @@ pub(open) trait MapVisitor {
   visit_TraitDecl(Self, TraitDecl) -> TraitDecl = _
   visit_Impl(Self, Impl) -> Impl = _
   visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location) -> Impl = _
-  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
+  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Impl = _
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Impl = _
   visit_Impl_TopFuncAlias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Impl = _
