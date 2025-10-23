@@ -485,7 +485,6 @@ pub(all) enum Expr {
     expr~ : Expr,
     cases~ : @list.List[Case],
     match_loc~ : Location,
-    using_~ : Label?,
     loc~ : Location
   )
   /// `let mut binder : Type = expr`

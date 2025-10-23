@@ -490,7 +490,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     DotApply(self=_, method_name=_, args=_, return_self=_, attr=_, loc~) => loc
     As(expr=_, trait_=_, loc~) => loc
     Mutate(record=_, accessor=_, field=_, augmented_by=_, loc~) => loc
-    Match(expr=_, cases=_, match_loc=_, using_=_, loc~) => loc
+    Match(expr=_, cases=_, match_loc=_, loc~) => loc
     LetMut(binder=_, ty=_, expr=_, body=_, loc~) => loc
     Pipe(lhs=_, rhs=_, loc~) => loc
     Assign(var_=_, expr=_, augmented_by=_, loc~) => loc

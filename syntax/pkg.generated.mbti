@@ -323,7 +323,7 @@ pub(all) enum Expr {
   DotApply(self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @basic.Location)
   As(expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location)
   Mutate(record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location)
-  Match(expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, using_~ : Label?, loc~ : @basic.Location)
+  Match(expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location)
   LetMut(binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
   Pipe(lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
   Assign(var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location)
@@ -557,7 +557,7 @@ fn[T : IterVisitor] IterVisitorBase::visit_Expr_LetMut(Self[T], binder~ : Binder
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_LetRec(Self[T], bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_Loop(Self[T], args~ : @list.List[Expr], body~ : @list.List[MultiArgCase], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_Map(Self[T], elems~ : @list.List[MapExprElem], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Match(Self[T], expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, using_~ : Label?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
+fn[T : IterVisitor] IterVisitorBase::visit_Expr_Match(Self[T], expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_Method(Self[T], type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_MultilineString(Self[T], elems~ : @list.List[MultilineStringElem], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_Mutate(Self[T], record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
@@ -801,7 +801,7 @@ fn[T : MapVisitor] MapVisitorBase::visit_Expr_LetMut(Self[T], binder~ : Binder, 
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_LetRec(Self[T], bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_Loop(Self[T], args~ : @list.List[Expr], body~ : @list.List[MultiArgCase], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_Map(Self[T], elems~ : @list.List[MapExprElem], loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Match(Self[T], expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, using_~ : Label?, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
+fn[T : MapVisitor] MapVisitorBase::visit_Expr_Match(Self[T], expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_Method(Self[T], type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_MultilineString(Self[T], elems~ : @list.List[MultilineStringElem], loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_Mutate(Self[T], record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
@@ -1287,7 +1287,7 @@ pub(open) trait IterVisitor {
   visit_Expr_DotApply(Self, self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @basic.Location) -> Unit = _
   visit_Expr_As(Self, expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, using_~ : Label?, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   visit_Expr_LetMut(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Pipe(Self, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Assign(Self, var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Unit = _
@@ -1486,7 +1486,7 @@ pub(open) trait MapVisitor {
   visit_Expr_DotApply(Self, self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @basic.Location) -> Expr = _
   visit_Expr_As(Self, expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, using_~ : Label?, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   visit_Expr_LetMut(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Pipe(Self, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Assign(Self, var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Expr = _

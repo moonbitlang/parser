@@ -599,7 +599,6 @@ pub(open) trait MapVisitor {
     expr~ : Expr,
     cases~ : @list.List[Case],
     match_loc~ : Location,
-    using_~ : Label?,
     loc~ : Location,
   ) -> Expr = _
   visit_Expr_LetMut(
@@ -1198,22 +1197,8 @@ impl MapVisitor with visit_Expr_Mutate(
 }
 
 ///|
-impl MapVisitor with visit_Expr_Match(
-  env,
-  expr~,
-  cases~,
-  match_loc~,
-  using_~,
-  loc~,
-) {
-  MapVisitorBase::visit_Expr_Match(
-    env,
-    expr~,
-    cases~,
-    match_loc~,
-    using_~,
-    loc~,
-  )
+impl MapVisitor with visit_Expr_Match(env, expr~, cases~, match_loc~, loc~) {
+  MapVisitorBase::visit_Expr_Match(env, expr~, cases~, match_loc~, loc~)
 }
 
 ///|
@@ -4391,13 +4376,11 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Match(
   expr~,
   cases~,
   match_loc~,
-  using_~,
   loc~,
 ) {
   let expr = env.inner().visit_Expr(expr)
   let cases = cases.map(env.inner().visit_Case(_))
-  let using_ = using_.map(env.inner().visit_Label(_))
-  Expr::Match(expr~, cases~, match_loc~, using_~, loc~)
+  Expr::Match(expr~, cases~, match_loc~, loc~)
 }
 
 ///|
@@ -4738,8 +4721,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
       env
       .inner()
       .visit_Expr_Mutate(record~, accessor~, field~, augmented_by~, loc~)
-    Match(expr~, cases~, match_loc~, using_~, loc~) =>
-      env.inner().visit_Expr_Match(expr~, cases~, match_loc~, using_~, loc~)
+    Match(expr~, cases~, match_loc~, loc~) =>
+      env.inner().visit_Expr_Match(expr~, cases~, match_loc~, loc~)
     LetMut(binder~, ty~, expr~, body~, loc~) =>
       env.inner().visit_Expr_LetMut(binder~, ty~, expr~, body~, loc~)
     Pipe(lhs~, rhs~, loc~) => env.inner().visit_Expr_Pipe(lhs~, rhs~, loc~)

@@ -599,7 +599,6 @@ pub(open) trait IterVisitor {
     expr~ : Expr,
     cases~ : @list.List[Case],
     match_loc~ : Location,
-    using_~ : Label?,
     loc~ : Location,
   ) -> Unit = _
   visit_Expr_LetMut(
@@ -1198,22 +1197,8 @@ impl IterVisitor with visit_Expr_Mutate(
 }
 
 ///|
-impl IterVisitor with visit_Expr_Match(
-  env,
-  expr~,
-  cases~,
-  match_loc~,
-  using_~,
-  loc~,
-) {
-  IterVisitorBase::visit_Expr_Match(
-    env,
-    expr~,
-    cases~,
-    match_loc~,
-    using_~,
-    loc~,
-  )
+impl IterVisitor with visit_Expr_Match(env, expr~, cases~, match_loc~, loc~) {
+  IterVisitorBase::visit_Expr_Match(env, expr~, cases~, match_loc~, loc~)
 }
 
 ///|
@@ -4262,14 +4247,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr_Mat
   expr~,
   cases~,
   match_loc~,
-  using_~,
   loc~,
 ) {
   ignore(match_loc)
   ignore(loc)
   env.inner().visit_Expr(expr)
   cases.each(env.inner().visit_Case(_))
-  using_.each(env.inner().visit_Label(_))
 }
 
 ///|
@@ -4595,8 +4578,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr(
       env
       .inner()
       .visit_Expr_Mutate(record~, accessor~, field~, augmented_by~, loc~)
-    Match(expr~, cases~, match_loc~, using_~, loc~) =>
-      env.inner().visit_Expr_Match(expr~, cases~, match_loc~, using_~, loc~)
+    Match(expr~, cases~, match_loc~, loc~) =>
+      env.inner().visit_Expr_Match(expr~, cases~, match_loc~, loc~)
     LetMut(binder~, ty~, expr~, body~, loc~) =>
       env.inner().visit_Expr_LetMut(binder~, ty~, expr~, body~, loc~)
     Pipe(lhs~, rhs~, loc~) => env.inner().visit_Expr_Pipe(lhs~, rhs~, loc~)

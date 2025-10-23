@@ -1152,29 +1152,26 @@ if_expr -> Expr
   }
   ;
 
-match_header -> (Expr, Label?)
-  : "match" infix_expr "{" { ($2, None) }
-  | "match" infix_expr "using" label "{" { ($2, Some($4)) }
+match_header -> Expr
+  : "match" infix_expr "{" { $2 }
   ;
 
 match_expr -> Expr
   : match_header non_empty_list_semis(single_pattern_case) "}" { 
-    let (expr, using_label) = $1
+    let expr = $1
     Match(
       expr~,
       cases = $2,
       match_loc = mk_loc($loc($1)),
-      using_ = using_label,
       loc = mk_loc($sloc)
     )
   }
   | match_header "}" { 
-    let (expr, using_label) = $1
+    let expr = $1
     Match(
       expr~,
       cases = @list.empty(),
       match_loc = mk_loc($loc($1)),
-      using_ = using_label,
       loc = mk_loc($sloc)
     )
   }

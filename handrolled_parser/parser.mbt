@@ -2828,10 +2828,8 @@ fn State::parse_match_expr(self : Self) -> @syntax.Expr {
   }
   let spos = self.peek_spos()
   self.expect_token(TK_MATCH)
-  let (expr, using_) = self.with_follow(follow_set=[TK_LBRACE], fn(self) {
-    let expr = self.try_parse_condition_expr()
-    let using_ = self.parse_match_expr_opt_using_part()
-    (expr, using_)
+  let expr = self.with_follow(follow_set=[TK_LBRACE], fn(_) {
+    self.try_parse_condition_expr()
   })
   let lbrace_epos = self.peek_epos()
   // The main_loc is the location of `match expr {`
@@ -2845,21 +2843,7 @@ fn State::parse_match_expr(self : Self) -> @syntax.Expr {
     )
     |> @list.from_array
   let loc = self.loc_start_with(spos)
-  Match(expr~, cases~, match_loc~, using_~, loc~)
-}
-
-///|
-fn State::parse_match_expr_opt_using_part(self : Self) -> @syntax.Label? {
-  if self.mode is Panic(..) {
-    return None
-  }
-  if self.peek_token() is USING {
-    self.skip()
-    let label = self.parse_label(context="argument of `using`")
-    Some(label)
-  } else {
-    None
-  }
+  Match(expr~, cases~, match_loc~, loc~)
 }
 
 ///|

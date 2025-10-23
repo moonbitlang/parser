@@ -1433,7 +1433,6 @@ test "expr complex types to_json" {
       expr=unit_expr,
       cases=@list.of([case]),
       match_loc=dummy_loc,
-      using_=Some(label),
       loc=dummy_loc,
     ),
     content={
