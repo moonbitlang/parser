@@ -1831,6 +1831,72 @@ fn State::parse_range_pattern(self : Self) -> @syntax.Pattern {
 }
 
 ///|
+fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
+  let spos = self.peek_spos()
+  fn parse_constr_args() {
+    self.surround_series(left=TK_LPAREN, right=TK_RPAREN, delim=TK_COMMA, fn(
+      _,
+    ) {
+      if self.peek_token() is DOTDOT {
+        let loc = self.peek_location()
+        self.skip()
+        ConstrArgRelatedness::Dotdot(loc)
+      } else {
+        let args = self.parse_constr_pat_argument()
+        ConstrArgRelatedness::Arg(args)
+      }
+    })
+    |> @list.from_array
+  }
+
+  fn parse_constr_args_no_open() {
+    self.surround_series(left=TK_LPAREN, right=TK_RPAREN, delim=TK_COMMA, _ => self.parse_constr_pat_argument())
+    |> @list.from_array
+  }
+
+  match self.peek_token() {
+    // bitstring constr pattern `i32(args)`
+    // To disambiguate with pattern variable, the args list must be present.
+    LIDENT(name) if self.peek_token(nth=1) is LPAREN => {
+      self.skip() // skip lident
+      let name_loc = self.peek_location()
+      let binder : @syntax.Binder = { name, loc: name_loc }
+      let args = parse_constr_args_no_open()
+      let loc = self.loc_start_with(spos)
+      @syntax.Pattern::SpecialConstr(binder~, args~, loc~)
+    }
+    PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) => {
+      let constr = self.parse_constr()
+      let maybe_args = self.optional([TK_LPAREN], _ => parse_constr_args())
+      let mut is_open = false
+      fn check_args(args : List[ConstrArgRelatedness]) {
+        match args {
+          Empty => @list.empty()
+          More(Dotdot(_), tail=Empty) => {
+            is_open = true
+            @list.empty()
+          }
+          More(Dotdot(loc), tail~) => {
+            is_open = true
+            self.report_error({
+              loc,
+              msg: "Unexpected `..` here, add `, ..` behind the last argument to ignore the rest arguments.",
+            })
+            check_args(tail)
+          }
+          More(Arg(arg), tail~) => check_args(tail).add(arg)
+        }
+      }
+
+      let args = maybe_args.map(check_args)
+      let loc = self.loc_start_with(spos)
+      Constr(constr~, args~, is_open~, loc~)
+    }
+    _ => panic()
+  }
+}
+
+///|
 fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
   if self.mode is Panic(loc~, ..) {
     return Any(loc~)
@@ -1916,51 +1982,11 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
       self.expect_token(TK_UNDERSCORE)
       Any(loc~)
     }
-    LIDENT(_) if !(self.peek_token(nth=1) is COLONCOLON) => {
+    LIDENT(_) if !(self.peek_token(nth=1) is (COLONCOLON | LPAREN)) => {
       let binder = self.parse_binder(context="")
       Var(binder)
     }
-    PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) => {
-      let spos = self.peek_spos()
-      let constr = self.parse_constr()
-      let maybe_args = self.optional([TK_LPAREN], fn(state) {
-        state.surround_series(left=TK_LPAREN, right=TK_RPAREN, delim=TK_COMMA, fn(
-          state,
-        ) {
-          if state.peek_token() is DOTDOT {
-            let loc = state.peek_location()
-            state.skip()
-            ConstrArgRelatedness::Dotdot(loc)
-          } else {
-            Arg(state.parse_constr_pat_argument())
-          }
-        })
-        |> @list.from_array
-      })
-      let mut is_open = false
-      fn check_args(args : List[ConstrArgRelatedness]) {
-        match args {
-          Empty => @list.empty()
-          More(Dotdot(_), tail=Empty) => {
-            is_open = true
-            @list.empty()
-          }
-          More(Dotdot(loc), tail~) => {
-            is_open = true
-            self.report_error({
-              loc,
-              msg: "Unexpected `..` here, add `, ..` behind the last argument to ignore the rest arguments.",
-            })
-            check_args(tail)
-          }
-          More(Arg(arg), tail~) => check_args(tail).add(arg)
-        }
-      }
-
-      let args = maybe_args.map(check_args)
-      let loc = self.loc_start_with(spos)
-      Constr(constr~, args~, is_open~, loc~)
-    }
+    PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) => self.parse_constr_pattern()
     LPAREN => {
       let spos = self.peek_spos()
       let result = self.surround(left=TK_LPAREN, right=TK_RPAREN, fn(state) {

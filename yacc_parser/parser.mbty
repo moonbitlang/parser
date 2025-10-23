@@ -1744,6 +1744,8 @@ simple_pattern -> Pattern
     }
     @syntax.make_constr_pattern(loc = mk_loc($sloc), $1, args, is_open)
   }
+  // bits constr pattern `i32(args)` 
+  // To disambiguate with pattern variable, the args list must be present.
   | binder delimited("(", constr_pat_arguments_no_open, ")") {
     Pattern::SpecialConstr(binder = $1, args = $2, loc = mk_loc($sloc))
   }
