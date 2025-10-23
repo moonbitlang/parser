@@ -677,13 +677,14 @@ structure_item -> Impl
       loc = mk_loc($sloc)
     )
   }
-  | attributes "test" option(loced_string) option(parameters) block_expr_with_local_types {
-    let (local_types, expr) = $5
+  | attributes is_async "test" option(loced_string) option(parameters) block_expr_with_local_types {
+    let (local_types, expr) = $6
     TopTest(
       expr~,
-      name = $3,
-      params = $4,
+      name = $4,
+      params = $5,
       local_types~,
+      is_async = $2,
       loc = mk_loc($sloc),
       attrs = $1,
       doc = DocString::empty()

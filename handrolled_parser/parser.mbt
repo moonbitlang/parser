@@ -1419,6 +1419,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         name~,
         params~,
         expr~,
+        is_async=true,
         local_types~,
         loc~,
         doc=DocString::empty(),

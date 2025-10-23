@@ -349,6 +349,7 @@ pub(open) trait MapVisitor {
     name~ : TestName,
     params~ : Parameters?,
     local_types~ : @list.List[LocalTypeDecl],
+    is_async~ : Bool,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
@@ -711,6 +712,7 @@ impl MapVisitor with visit_Impl_TopTest(
   name~,
   params~,
   local_types~,
+  is_async~,
   loc~,
   attrs~,
   doc~,
@@ -721,6 +723,7 @@ impl MapVisitor with visit_Impl_TopTest(
     name~,
     params~,
     local_types~,
+    is_async~,
     loc~,
     attrs~,
     doc~,
@@ -2169,7 +2172,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
     TopFuncDef(fun_decl~, decl_body~, loc~) =>
       env.inner().visit_Impl_TopFuncDef(fun_decl~, decl_body~, loc~)
     TopTypeDef(type_decl) => env.inner().visit_Impl_TopTypeDef(type_decl)
-    TopTest(expr~, name~, params~, local_types~, loc~, attrs~, doc~) =>
+    TopTest(expr~, name~, params~, local_types~, is_async~, loc~, attrs~, doc~) =>
       env
       .inner()
       .visit_Impl_TopTest(
@@ -2177,6 +2180,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         name~,
         params~,
         local_types~,
+        is_async~,
         loc~,
         attrs~,
         doc~,
@@ -3713,6 +3717,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopTes
   name~,
   params~,
   local_types~,
+  is_async~,
   loc~,
   attrs~,
   doc~,
@@ -3722,7 +3727,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopTes
     .inner()
     .visit_Parameter(param)))
   let local_types = local_types.map(env.inner().visit_LocalTypeDecl(_))
-  TopTest(expr~, name~, params~, local_types~, loc~, attrs~, doc~)
+  TopTest(expr~, name~, params~, local_types~, is_async~, loc~, attrs~, doc~)
 }
 
 ///|

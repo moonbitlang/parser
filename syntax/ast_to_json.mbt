@@ -1168,7 +1168,7 @@ pub impl ToJson for Impl with to_json(self) {
         "local_types": list_to_json(local_types),
         "loc": loc,
       }
-    TopTest(expr~, name~, params~, local_types~, loc~, attrs~, doc~) =>
+    TopTest(expr~, name~, params~, local_types~, is_async~, loc~, attrs~, doc~) =>
       {
         "type": "Impl::TopTest",
         "expr": expr,
@@ -1180,6 +1180,7 @@ pub impl ToJson for Impl with to_json(self) {
         ),
         "params": option_to_json(params.map(list_to_json)),
         "local_types": list_to_json(local_types),
+        "is_async": is_async,
         "loc": loc,
         "attrs": list_to_json(attrs),
         "doc": doc,

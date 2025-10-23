@@ -349,6 +349,7 @@ pub(open) trait IterVisitor {
     name~ : TestName,
     params~ : Parameters?,
     local_types~ : @list.List[LocalTypeDecl],
+    is_async~ : Bool,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
@@ -711,6 +712,7 @@ impl IterVisitor with visit_Impl_TopTest(
   name~,
   params~,
   local_types~,
+  is_async~,
   loc~,
   attrs~,
   doc~,
@@ -721,6 +723,7 @@ impl IterVisitor with visit_Impl_TopTest(
     name~,
     params~,
     local_types~,
+    is_async~,
     loc~,
     attrs~,
     doc~,
@@ -2169,7 +2172,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl(
     TopFuncDef(fun_decl~, decl_body~, loc~) =>
       env.inner().visit_Impl_TopFuncDef(fun_decl~, decl_body~, loc~)
     TopTypeDef(type_decl) => env.inner().visit_Impl_TopTypeDef(type_decl)
-    TopTest(expr~, name~, params~, local_types~, loc~, attrs~, doc~) =>
+    TopTest(expr~, name~, params~, local_types~, is_async~, loc~, attrs~, doc~) =>
       env
       .inner()
       .visit_Impl_TopTest(
@@ -2177,6 +2180,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl(
         name~,
         params~,
         local_types~,
+        is_async~,
         loc~,
         attrs~,
         doc~,
@@ -3578,6 +3582,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl_Top
   name~,
   params~,
   local_types~,
+  is_async~,
   loc~,
   attrs~,
   doc~,
@@ -3586,6 +3591,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl_Top
   ignore(loc)
   ignore(attrs)
   ignore(doc)
+  ignore(is_async)
   env.inner().visit_Expr(expr)
   params.each(params => params.each(param => env.inner().visit_Parameter(param)))
   local_types.each(env.inner().visit_LocalTypeDecl(_))

@@ -765,6 +765,7 @@ pub(all) enum Impl {
     name~ : TestName,
     params~ : Parameters?,
     local_types~ : @list.List[LocalTypeDecl],
+    is_async~ : Bool,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     mut doc~ : DocString
