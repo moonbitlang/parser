@@ -516,8 +516,8 @@ pub(all) enum Expr {
   Continue(args~ : @list.List[Expr], label~ : Label?, loc~ : Location)
   /// `loop args { ps1 => e1; ps2 => e2 }`
   Loop(
-    args~ : @list.List[Expr],
-    body~ : @list.List[MultiArgCase],
+    arg~ : Expr,
+    body~ : @list.List[Case],
     label~ : Label?,
     loop_loc~ : Location,
     loc~ : Location

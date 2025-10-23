@@ -500,7 +500,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     Unit(loc~, faked=_) => loc
     Break(arg=_, label=_, loc~) => loc
     Continue(args=_, label=_, loc~) => loc
-    Loop(args=_, body=_, label=_, loop_loc=_, loc~) => loc
+    Loop(arg=_, body=_, label=_, loop_loc=_, loc~) => loc
     For(
       binders=_,
       condition=_,

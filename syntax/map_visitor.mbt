@@ -630,8 +630,8 @@ pub(open) trait MapVisitor {
   ) -> Expr = _
   visit_Expr_Loop(
     Self,
-    args~ : @list.List[Expr],
-    body~ : @list.List[MultiArgCase],
+    arg~ : Expr,
+    body~ : @list.List[Case],
     label~ : Label?,
     loop_loc~ : Location,
     loc~ : Location,
@@ -1247,8 +1247,8 @@ impl MapVisitor with visit_Expr_Continue(env, args~, label~, loc~) {
 }
 
 ///|
-impl MapVisitor with visit_Expr_Loop(env, args~, body~, label~, loop_loc~, loc~) {
-  MapVisitorBase::visit_Expr_Loop(env, args~, body~, label~, loop_loc~, loc~)
+impl MapVisitor with visit_Expr_Loop(env, arg~, body~, label~, loop_loc~, loc~) {
+  MapVisitorBase::visit_Expr_Loop(env, arg~, body~, label~, loop_loc~, loc~)
 }
 
 ///|
@@ -4491,16 +4491,16 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Contin
 ///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Loop(
   env,
-  args~,
+  arg~,
   body~,
   label~,
   loop_loc~,
   loc~,
 ) {
-  let args = args.map(env.inner().visit_Expr(_))
-  let body = body.map(env.inner().visit_MultiArgCase(_))
+  let arg = env.inner().visit_Expr(arg)
+  let body = body.map(env.inner().visit_Case(_))
   let label = label.map(env.inner().visit_Label(_))
-  Expr::Loop(args~, body~, label~, loop_loc~, loc~)
+  Expr::Loop(arg~, body~, label~, loop_loc~, loc~)
 }
 
 ///|
@@ -4737,8 +4737,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
       env.inner().visit_Expr_Break(arg~, label~, loc~)
     Continue(args~, label~, loc~) =>
       env.inner().visit_Expr_Continue(args~, label~, loc~)
-    Loop(args~, body~, label~, loop_loc~, loc~) =>
-      env.inner().visit_Expr_Loop(args~, body~, label~, loop_loc~, loc~)
+    Loop(arg~, body~, label~, loop_loc~, loc~) =>
+      env.inner().visit_Expr_Loop(arg~, body~, label~, loop_loc~, loc~)
     For(binders~, condition~, continue_block~, body~, for_else~, label~, loc~) =>
       env
       .inner()

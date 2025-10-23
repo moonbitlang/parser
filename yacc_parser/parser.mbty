@@ -1177,14 +1177,14 @@ match_expr -> Expr
   }
   ;
 
-%inline loop_header -> List[Expr]
-  : "loop" non_empty_list_commas_no_trailing(expr) "{" { $2 }
+%inline loop_header -> Expr
+  : "loop" infix_expr "{" { $2 }
   ;
 
 loop_expr -> Expr
-  : loop_label_colon loop_header list_semis(multi_pattern_case) "}" { 
+  : loop_label_colon loop_header list_semis(single_pattern_case) "}" { 
     Loop(
-      args = $2,
+      arg = $2,
       body = $3,
       label = $1,
       loop_loc = mk_loc($loc($2)),

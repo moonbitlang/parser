@@ -2487,17 +2487,22 @@ fn State::parse_loop_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr 
   }
   let spos = self.peek_spos()
   self.skip() // skip LOOP token
-  let args = self.with_follow(follow_set=[TK_LBRACE], fn(state) {
-      state.sepby1(delim=TK_COMMA, State::parse_expr)
-    })
-    |> @list.from_array
+  let arg = self.with_follow(follow_set=[TK_LBRACE], fn(_) { self.parse_expr() })
   let loop_loc = self.loc_start_with(spos)
   let body = match self.mode {
-    Normal => self.parse_match_fn_body()
+    Normal =>
+      self.surround_series(
+        invalid_delims=[TK_COMMA],
+        left=TK_LBRACE,
+        right=TK_RBRACE,
+        delim=TK_SEMI,
+        fn(_) { self.parse_case() },
+      )
+      |> @list.from_array
     Panic(_) => @list.new()
   }
   let loc = self.loc_start_with(spos)
-  Loop(args~, body~, label~, loop_loc~, loc~)
+  Loop(arg~, body~, label~, loop_loc~, loc~)
 }
 
 ///|

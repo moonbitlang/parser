@@ -630,8 +630,8 @@ pub(open) trait IterVisitor {
   ) -> Unit = _
   visit_Expr_Loop(
     Self,
-    args~ : @list.List[Expr],
-    body~ : @list.List[MultiArgCase],
+    arg~ : Expr,
+    body~ : @list.List[Case],
     label~ : Label?,
     loop_loc~ : Location,
     loc~ : Location,
@@ -1247,15 +1247,8 @@ impl IterVisitor with visit_Expr_Continue(env, args~, label~, loc~) {
 }
 
 ///|
-impl IterVisitor with visit_Expr_Loop(
-  env,
-  args~,
-  body~,
-  label~,
-  loop_loc~,
-  loc~,
-) {
-  IterVisitorBase::visit_Expr_Loop(env, args~, body~, label~, loop_loc~, loc~)
+impl IterVisitor with visit_Expr_Loop(env, arg~, body~, label~, loop_loc~, loc~) {
+  IterVisitorBase::visit_Expr_Loop(env, arg~, body~, label~, loop_loc~, loc~)
 }
 
 ///|
@@ -4364,7 +4357,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr_Con
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr_Loop(
   env,
-  args~,
+  arg~,
   body~,
   label~,
   loop_loc~,
@@ -4372,8 +4365,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr_Loo
 ) {
   ignore(loop_loc)
   ignore(loc)
-  args.each(arg => env.inner().visit_Expr(arg))
-  body.each(env.inner().visit_MultiArgCase(_))
+  env.inner().visit_Expr(arg)
+  body.each(env.inner().visit_Case(_))
   label.each(env.inner().visit_Label(_))
 }
 
@@ -4594,8 +4587,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr(
       env.inner().visit_Expr_Break(arg~, label~, loc~)
     Continue(args~, label~, loc~) =>
       env.inner().visit_Expr_Continue(args~, label~, loc~)
-    Loop(args~, body~, label~, loop_loc~, loc~) =>
-      env.inner().visit_Expr_Loop(args~, body~, label~, loop_loc~, loc~)
+    Loop(arg~, body~, label~, loop_loc~, loc~) =>
+      env.inner().visit_Expr_Loop(arg~, body~, label~, loop_loc~, loc~)
     For(binders~, condition~, continue_block~, body~, for_else~, label~, loc~) =>
       env
       .inner()

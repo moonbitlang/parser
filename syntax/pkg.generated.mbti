@@ -333,7 +333,7 @@ pub(all) enum Expr {
   Unit(loc~ : @basic.Location, faked~ : Bool)
   Break(arg~ : Expr?, label~ : Label?, loc~ : @basic.Location)
   Continue(args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location)
-  Loop(args~ : @list.List[Expr], body~ : @list.List[MultiArgCase], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location)
+  Loop(arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location)
   For(binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location)
   ForEach(binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location)
   Try(body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location)
@@ -555,7 +555,7 @@ fn[T : IterVisitor] IterVisitorBase::visit_Expr_LetAnd(Self[T], bindings~ : @lis
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_LetFn(Self[T], name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_LetMut(Self[T], binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_LetRec(Self[T], bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Loop(Self[T], args~ : @list.List[Expr], body~ : @list.List[MultiArgCase], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
+fn[T : IterVisitor] IterVisitorBase::visit_Expr_Loop(Self[T], arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_Map(Self[T], elems~ : @list.List[MapExprElem], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_Match(Self[T], expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_Expr_Method(Self[T], type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
@@ -799,7 +799,7 @@ fn[T : MapVisitor] MapVisitorBase::visit_Expr_LetAnd(Self[T], bindings~ : @list.
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_LetFn(Self[T], name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_LetMut(Self[T], binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_LetRec(Self[T], bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Loop(Self[T], args~ : @list.List[Expr], body~ : @list.List[MultiArgCase], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
+fn[T : MapVisitor] MapVisitorBase::visit_Expr_Loop(Self[T], arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_Map(Self[T], elems~ : @list.List[MapExprElem], loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_Match(Self[T], expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_Expr_Method(Self[T], type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
@@ -1297,7 +1297,7 @@ pub(open) trait IterVisitor {
   visit_Expr_Unit(Self, loc~ : @basic.Location, faked~ : Bool) -> Unit = _
   visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Continue(Self, args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Loop(Self, args~ : @list.List[Expr], body~ : @list.List[MultiArgCase], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
   visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Try(Self, body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
@@ -1496,7 +1496,7 @@ pub(open) trait MapVisitor {
   visit_Expr_Unit(Self, loc~ : @basic.Location, faked~ : Bool) -> Expr = _
   visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Continue(Self, args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Loop(Self, args~ : @list.List[Expr], body~ : @list.List[MultiArgCase], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
   visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Try(Self, body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _

@@ -1076,10 +1076,10 @@ pub impl ToJson for Expr with to_json(self) {
         "label": option_to_json(label),
         "loc": loc,
       }
-    Loop(args~, body~, label~, loop_loc~, loc~) =>
+    Loop(arg~, body~, label~, loop_loc~, loc~) =>
       {
         "type": "Expr::Loop",
-        "args": list_to_json(args),
+        "arg": arg,
         "body": list_to_json(body),
         "label": option_to_json(label),
         "loop_loc": loop_loc,
