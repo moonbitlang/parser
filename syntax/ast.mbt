@@ -265,10 +265,15 @@ pub(all) struct Argument {
 
 ///|
 pub(all) enum Parameter {
+  /// `_ : Int`
   DiscardPositional(ty~ : Type?, loc~ : Location)
+  /// `param : Int`
   Positional(binder~ : Binder, ty~ : Type?)
+  /// `label~ : Int`
   Labelled(binder~ : Binder, ty~ : Type?)
+  /// `label? : Int = default`
   Optional(binder~ : Binder, default~ : Expr, ty~ : Type?)
+  /// `label? : Int`
   QuestionOptional(binder~ : Binder, ty~ : Type?)
 }
 

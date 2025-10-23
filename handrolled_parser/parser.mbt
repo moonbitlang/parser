@@ -3716,7 +3716,8 @@ fn State::parse_parameter(self : Self) -> @syntax.Parameter {
       let param_annot = self.parse_opt_annot()
       @syntax.DiscardPositional(ty=param_annot, loc~)
     }
-    // `label~ : Type` or `label~ : Type = expr`
+    // `label~ : Type` 
+    // or `label~ : Type = expr` (same as `label? : Type = expr`, deprecated syntax)
     POST_LABEL(label_name) => {
       let param_binder : @syntax.Binder = {
         name: label_name,
@@ -3733,7 +3734,7 @@ fn State::parse_parameter(self : Self) -> @syntax.Parameter {
         _ => Labelled(binder=param_binder, ty=param_annot)
       }
     }
-    // `label? : Type`
+    // `label? : Type` or `label? : Type = default`
     LIDENT(label_name) if self.peek_token(nth=1) is QUESTION => {
       let param_binder : @syntax.Binder = {
         name: label_name,
@@ -3743,14 +3744,10 @@ fn State::parse_parameter(self : Self) -> @syntax.Parameter {
       self.skip() // skip QUESTION
       let param_annot = self.parse_opt_annot()
       match self.peek_token() {
+        // default value
         EQUAL if self.mode is Normal => {
-          // error recovery for `label? : Type = expr`
           self.skip()
           let default = self.parse_expr()
-          self.report_error({
-            loc: default.loc(),
-            msg: "The parameter \{label_name} already has default value `None`.",
-          })
           Optional(default~, binder=param_binder, ty=param_annot)
         }
         _ => QuestionOptional(binder=param_binder, ty=param_annot)
