@@ -605,11 +605,13 @@ test "array_pattern to_json" {
   })
   @json.inspect(@syntax.StringSpread(str=dummy_string_literal, loc=dummy_loc), content={
     "type": "ArrayPattern::StringSpread",
-    "0": "test_string",
+    "str": "test_string",
+    "loc": null,
   })
   @json.inspect(@syntax.BytesSpread(bytes=dummy_bytes_literal, loc=dummy_loc), content={
     "type": "ArrayPattern::BytesSpread",
-    "0": "b\"ABC\"",
+    "bytes": "b\"ABC\"",
+    "loc": null,
   })
   let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
   @json.inspect(
@@ -1447,7 +1449,6 @@ test "expr complex types to_json" {
         },
       ],
       "match_loc": null,
-      "using": { "type": "Label", "name": "test_label", "loc": null },
       "loc": null,
     },
   )
@@ -2449,6 +2450,7 @@ test "impl variants to_json" {
       "name": { "v": "test_string", "loc": null },
       "params": null,
       "local_types": [],
+      "is_async": true,
       "loc": null,
       "attrs": [],
       "doc": "Test documentation",
