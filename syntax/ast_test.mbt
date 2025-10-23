@@ -2438,6 +2438,7 @@ test "impl variants to_json" {
       name=Some((dummy_string_literal, dummy_loc)),
       params=None,
       local_types=@list.of([]),
+      is_async=true,
       loc=dummy_loc,
       attrs=@list.of([]),
       doc=dummy_docstring,
