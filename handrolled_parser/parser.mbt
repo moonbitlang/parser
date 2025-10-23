@@ -2184,7 +2184,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             match field_or_dotdots {
               [] => Record(fields=acc.rev(), is_closed=!has_dotdot, loc~)
               [Dotdot(loc), .. rest] => {
-                if rest is [] {
+                if !(rest is []) {
                   self.report_error({
                     loc,
                     msg: "Unexpected `..` here, add `, ..` behind the last field to ignore the rest of record.",
