@@ -2028,13 +2028,15 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             let pat_spos = self.peek_spos()
             self.skip()
             match self.peek_token() {
-              STRING(s) => {
+              STRING(str) => {
+                let loc = self.peek_location()
                 self.skip()
-                push_pat(StringSpread(s))
+                push_pat(StringSpread(str~, loc~))
               }
-              BYTES(s) => {
+              BYTES(bytes) => {
+                let loc = self.peek_location()
                 self.skip()
-                push_pat(BytesSpread(s))
+                push_pat(BytesSpread(bytes~, loc~))
               }
               UIDENT(name) => {
                 let id_loc = self.peek_location()

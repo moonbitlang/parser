@@ -218,8 +218,8 @@ pub(open) trait IterVisitor {
   // ArrayPattern
   visit_ArrayPattern(Self, ArrayPattern) -> Unit = _
   visit_ArrayPattern_Pattern(Self, Pattern) -> Unit = _
-  visit_ArrayPattern_StringSpread(Self, StringLiteral) -> Unit = _
-  visit_ArrayPattern_BytesSpread(Self, BytesLiteral) -> Unit = _
+  visit_ArrayPattern_StringSpread(Self, str~ : StringLiteral, loc~ : Location) -> Unit = _
+  visit_ArrayPattern_BytesSpread(Self, bytes~ : BytesLiteral, loc~ : Location) -> Unit = _
   visit_ArrayPattern_ConstSpread(
     Self,
     binder~ : Binder,
@@ -1846,13 +1846,13 @@ impl IterVisitor with visit_ArrayPattern_Pattern(env, pattern) {
 }
 
 ///|
-impl IterVisitor with visit_ArrayPattern_StringSpread(env, string_literal) {
-  IterVisitorBase::visit_ArrayPattern_StringSpread(env, string_literal)
+impl IterVisitor with visit_ArrayPattern_StringSpread(env, str~, loc~) {
+  IterVisitorBase::visit_ArrayPattern_StringSpread(env, str~, loc~)
 }
 
 ///|
-impl IterVisitor with visit_ArrayPattern_BytesSpread(env, bytes_literal) {
-  IterVisitorBase::visit_ArrayPattern_BytesSpread(env, bytes_literal)
+impl IterVisitor with visit_ArrayPattern_BytesSpread(env, bytes~, loc~) {
+  IterVisitorBase::visit_ArrayPattern_BytesSpread(env, bytes~, loc~)
 }
 
 ///|
@@ -3112,10 +3112,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ArrayPat
 ) {
   match array_pattern {
     Pattern(pattern) => env.inner().visit_ArrayPattern_Pattern(pattern)
-    StringSpread(string_literal) =>
-      env.inner().visit_ArrayPattern_StringSpread(string_literal)
-    BytesSpread(bytes_literal) =>
-      env.inner().visit_ArrayPattern_BytesSpread(bytes_literal)
+    StringSpread(str~, loc~) =>
+      env.inner().visit_ArrayPattern_StringSpread(str~, loc~)
+    BytesSpread(bytes~, loc~) =>
+      env.inner().visit_ArrayPattern_BytesSpread(bytes~, loc~)
     ConstSpread(binder~, pkg~, loc~) =>
       env.inner().visit_ArrayPattern_ConstSpread(binder~, pkg~, loc~)
   }
@@ -3132,17 +3132,19 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ArrayPat
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ArrayPattern_StringSpread(
   _,
-  string_literal,
+  str~,
+  loc~,
 ) {
-  ignore(string_literal)
+  ignore((str, loc))
 }
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ArrayPattern_BytesSpread(
   _,
-  bytes_literal,
+  bytes~,
+  loc~,
 ) {
-  ignore(bytes_literal)
+  ignore((bytes, loc))
 }
 
 ///|

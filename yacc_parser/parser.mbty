@@ -1765,8 +1765,8 @@ simple_pattern -> Pattern
 
 array_sub_pattern -> ArrayPattern
   : pattern { Pattern($1) }
-  | ".." STRING { StringSpread($2) }
-  | ".." BYTES { BytesSpread($2) }
+  | ".." STRING { StringSpread(str = $2, loc = mk_loc($loc($2))) }
+  | ".." BYTES { BytesSpread(bytes = $2, loc = mk_loc($loc($2))) }
   | ".." UIDENT { 
     let binder = Binder::{ name: $2, loc: mk_loc($loc($2)) }
     ConstSpread(binder~, pkg = None, loc = mk_loc($sloc))

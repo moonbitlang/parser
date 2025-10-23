@@ -603,11 +603,11 @@ test "array_pattern to_json" {
     "type": "ArrayPattern::Pattern",
     "0": { "type": "Pattern::Any", "loc": null },
   })
-  @json.inspect(@syntax.StringSpread(dummy_string_literal), content={
+  @json.inspect(@syntax.StringSpread(str=dummy_string_literal, loc=dummy_loc), content={
     "type": "ArrayPattern::StringSpread",
     "0": "test_string",
   })
-  @json.inspect(@syntax.BytesSpread(dummy_bytes_literal), content={
+  @json.inspect(@syntax.BytesSpread(bytes=dummy_bytes_literal, loc=dummy_loc), content={
     "type": "ArrayPattern::BytesSpread",
     "0": "b\"ABC\"",
   })

@@ -562,8 +562,14 @@ pub impl ToJson for DotDotBinder with to_json(self) {
 pub impl ToJson for ArrayPattern with to_json(self) {
   match self {
     Pattern(pattern) => { "type": "ArrayPattern::Pattern", "0": pattern }
-    StringSpread(s) => { "type": "ArrayPattern::StringSpread", "0": s }
-    BytesSpread(s) => { "type": "ArrayPattern::BytesSpread", "0": s }
+    StringSpread(str~, loc~) =>
+      { "type": "ArrayPattern::StringSpread", "str": str, "loc": loc.to_json() }
+    BytesSpread(bytes~, loc~) =>
+      {
+        "type": "ArrayPattern::BytesSpread",
+        "bytes": bytes,
+        "loc": loc.to_json(),
+      }
     ConstSpread(binder~, pkg~, loc~) =>
       {
         "type": "ArrayPattern::ConstSpread",

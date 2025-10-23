@@ -218,8 +218,8 @@ pub(open) trait MapVisitor {
   // ArrayPattern
   visit_ArrayPattern(Self, ArrayPattern) -> ArrayPattern = _
   visit_ArrayPattern_Pattern(Self, Pattern) -> ArrayPattern = _
-  visit_ArrayPattern_StringSpread(Self, StringLiteral) -> ArrayPattern = _
-  visit_ArrayPattern_BytesSpread(Self, BytesLiteral) -> ArrayPattern = _
+  visit_ArrayPattern_StringSpread(Self, str~ : StringLiteral, loc~ : Location) -> ArrayPattern = _
+  visit_ArrayPattern_BytesSpread(Self, bytes~ : BytesLiteral, loc~ : Location) -> ArrayPattern = _
   visit_ArrayPattern_ConstSpread(
     Self,
     binder~ : Binder,
@@ -1846,13 +1846,13 @@ impl MapVisitor with visit_ArrayPattern_Pattern(env, pattern) {
 }
 
 ///|
-impl MapVisitor with visit_ArrayPattern_StringSpread(env, string_literal) {
-  MapVisitorBase::visit_ArrayPattern_StringSpread(env, string_literal)
+impl MapVisitor with visit_ArrayPattern_StringSpread(env, str~, loc~) {
+  MapVisitorBase::visit_ArrayPattern_StringSpread(env, str~, loc~)
 }
 
 ///|
-impl MapVisitor with visit_ArrayPattern_BytesSpread(env, bytes_literal) {
-  MapVisitorBase::visit_ArrayPattern_BytesSpread(env, bytes_literal)
+impl MapVisitor with visit_ArrayPattern_BytesSpread(env, bytes~, loc~) {
+  MapVisitorBase::visit_ArrayPattern_BytesSpread(env, bytes~, loc~)
 }
 
 ///|
@@ -3173,10 +3173,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatter
 ) {
   match array_pattern {
     Pattern(pattern) => env.inner().visit_ArrayPattern_Pattern(pattern)
-    StringSpread(string_literal) =>
-      env.inner().visit_ArrayPattern_StringSpread(string_literal)
-    BytesSpread(bytes_literal) =>
-      env.inner().visit_ArrayPattern_BytesSpread(bytes_literal)
+    StringSpread(str~, loc~) =>
+      env.inner().visit_ArrayPattern_StringSpread(str~, loc~)
+    BytesSpread(bytes~, loc~) =>
+      env.inner().visit_ArrayPattern_BytesSpread(bytes~, loc~)
     ConstSpread(binder~, pkg~, loc~) =>
       env.inner().visit_ArrayPattern_ConstSpread(binder~, pkg~, loc~)
   }
@@ -3194,17 +3194,19 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatter
 ///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPattern_StringSpread(
   _,
-  string_literal,
+  str~,
+  loc~,
 ) {
-  StringSpread(string_literal)
+  StringSpread(str~, loc~)
 }
 
 ///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPattern_BytesSpread(
   _,
-  bytes_literal,
+  bytes~,
+  loc~,
 ) {
-  BytesSpread(bytes_literal)
+  BytesSpread(bytes~, loc~)
 }
 
 ///|

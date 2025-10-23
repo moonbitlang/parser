@@ -124,8 +124,8 @@ impl ToJson for ArgumentKind
 
 pub(all) enum ArrayPattern {
   Pattern(Pattern)
-  StringSpread(String)
-  BytesSpread(String)
+  StringSpread(str~ : String, loc~ : @basic.Location)
+  BytesSpread(bytes~ : String, loc~ : @basic.Location)
   ConstSpread(binder~ : Binder, pkg~ : String?, loc~ : @basic.Location)
 }
 fn ArrayPattern::to_json(Self) -> Json // from trait `ToJson`
@@ -485,10 +485,10 @@ fn[T : IterVisitor] IterVisitorBase::visit_ArgumentKind_LabelledOption(Self[T], 
 fn[T : IterVisitor] IterVisitorBase::visit_ArgumentKind_LabelledOptionPun(Self[T], label~ : Label, question_loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_ArgumentKind_LabelledPun(Self[T], Label) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern(Self[T], ArrayPattern) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern_BytesSpread(Self[T], String) -> Unit // from trait `IterVisitor`
+fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern_BytesSpread(Self[T], bytes~ : String, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern_ConstSpread(Self[T], binder~ : Binder, pkg~ : String?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern_Pattern(Self[T], Pattern) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern_StringSpread(Self[T], String) -> Unit // from trait `IterVisitor`
+fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern_StringSpread(Self[T], str~ : String, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_ArrayPatterns(Self[T], ArrayPatterns) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_ArrayPatterns_Closed(Self[T], @list.List[ArrayPattern]) -> Unit // from trait `IterVisitor`
 fn[T : IterVisitor] IterVisitorBase::visit_ArrayPatterns_Open(Self[T], @list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder) -> Unit // from trait `IterVisitor`
@@ -729,10 +729,10 @@ fn[T : MapVisitor] MapVisitorBase::visit_ArgumentKind_LabelledOption(Self[T], la
 fn[T : MapVisitor] MapVisitorBase::visit_ArgumentKind_LabelledOptionPun(Self[T], label~ : Label, question_loc~ : @basic.Location) -> ArgumentKind // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_ArgumentKind_LabelledPun(Self[T], Label) -> ArgumentKind // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern(Self[T], ArrayPattern) -> ArrayPattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern_BytesSpread(Self[T], String) -> ArrayPattern // from trait `MapVisitor`
+fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern_BytesSpread(Self[T], bytes~ : String, loc~ : @basic.Location) -> ArrayPattern // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern_ConstSpread(Self[T], binder~ : Binder, pkg~ : String?, loc~ : @basic.Location) -> ArrayPattern // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern_Pattern(Self[T], Pattern) -> ArrayPattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern_StringSpread(Self[T], String) -> ArrayPattern // from trait `MapVisitor`
+fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern_StringSpread(Self[T], str~ : String, loc~ : @basic.Location) -> ArrayPattern // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_ArrayPatterns(Self[T], ArrayPatterns) -> ArrayPatterns // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_ArrayPatterns_Closed(Self[T], @list.List[ArrayPattern]) -> ArrayPatterns // from trait `MapVisitor`
 fn[T : MapVisitor] MapVisitorBase::visit_ArrayPatterns_Open(Self[T], @list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder) -> ArrayPatterns // from trait `MapVisitor`
@@ -1201,8 +1201,8 @@ pub(open) trait IterVisitor {
   visit_DotDotBinder_Binder(Self, Binder) -> Unit = _
   visit_ArrayPattern(Self, ArrayPattern) -> Unit = _
   visit_ArrayPattern_Pattern(Self, Pattern) -> Unit = _
-  visit_ArrayPattern_StringSpread(Self, String) -> Unit = _
-  visit_ArrayPattern_BytesSpread(Self, String) -> Unit = _
+  visit_ArrayPattern_StringSpread(Self, str~ : String, loc~ : @basic.Location) -> Unit = _
+  visit_ArrayPattern_BytesSpread(Self, bytes~ : String, loc~ : @basic.Location) -> Unit = _
   visit_ArrayPattern_ConstSpread(Self, binder~ : Binder, pkg~ : String?, loc~ : @basic.Location) -> Unit = _
   visit_ArrayPatterns(Self, ArrayPatterns) -> Unit = _
   visit_ArrayPatterns_Closed(Self, @list.List[ArrayPattern]) -> Unit = _
@@ -1400,8 +1400,8 @@ pub(open) trait MapVisitor {
   visit_DotDotBinder_Binder(Self, Binder) -> DotDotBinder = _
   visit_ArrayPattern(Self, ArrayPattern) -> ArrayPattern = _
   visit_ArrayPattern_Pattern(Self, Pattern) -> ArrayPattern = _
-  visit_ArrayPattern_StringSpread(Self, String) -> ArrayPattern = _
-  visit_ArrayPattern_BytesSpread(Self, String) -> ArrayPattern = _
+  visit_ArrayPattern_StringSpread(Self, str~ : String, loc~ : @basic.Location) -> ArrayPattern = _
+  visit_ArrayPattern_BytesSpread(Self, bytes~ : String, loc~ : @basic.Location) -> ArrayPattern = _
   visit_ArrayPattern_ConstSpread(Self, binder~ : Binder, pkg~ : String?, loc~ : @basic.Location) -> ArrayPattern = _
   visit_ArrayPatterns(Self, ArrayPatterns) -> ArrayPatterns = _
   visit_ArrayPatterns_Closed(Self, @list.List[ArrayPattern]) -> ArrayPatterns = _

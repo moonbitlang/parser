@@ -585,8 +585,8 @@ pub(all) enum DotDotBinder {
 ///|
 pub(all) enum ArrayPattern {
   Pattern(Pattern)
-  StringSpread(StringLiteral)
-  BytesSpread(BytesLiteral)
+  StringSpread(str~ : StringLiteral, loc~ : Location)
+  BytesSpread(bytes~ : BytesLiteral, loc~ : Location)
   ConstSpread(binder~ : Binder, pkg~ : String?, loc~ : Location)
 }
 
