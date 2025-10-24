@@ -816,6 +816,81 @@ fn State::parse_typealias(
 }
 
 ///|
+fn State::parse_test_block(
+  self : Self,
+  attrs~ : List[Attribute],
+  spos~ : Position,
+) -> @syntax.Impl {
+  self.skip()
+  let name : @syntax.TestName = if self.peek_token() is STRING(_) {
+    let name_loc = self.peek_location()
+    let v = self.expect_string()
+    Some((v, name_loc))
+  } else {
+    None
+  }
+  let params = if self.peek_token() is LPAREN {
+    let params = self.surround_series(
+      left=TK_LPAREN,
+      right=TK_RPAREN,
+      delim=TK_COMMA,
+      State::parse_parameter,
+    )
+    Some(@list.from_array(params))
+  } else {
+    None
+  }
+  let (local_types, expr) = self.parse_block_expr_with_local_types()
+  let loc = self.loc_start_with(spos)
+  TopTest(
+    name~,
+    params~,
+    expr~,
+    is_async=false,
+    local_types~,
+    loc~,
+    doc=DocString::empty(),
+    attrs~,
+  )
+}
+
+///|
+fn State::parse_top_func(
+  self : Self,
+  attrs~ : List[Attribute],
+  vis~ : @syntax.Visibility,
+  spos~ : Position,
+) -> @syntax.Impl {
+  let fun_decl = self.parse_fun_decl(attrs~)
+  let fun_decl = { ..fun_decl, vis, }
+  let decl_body : @syntax.DeclBody = if self.peek_token() is EQUAL {
+    self.skip()
+    if self.peek_token() is MULTILINE_STRING(_) {
+      let xs = []
+      while self.peek_token() is MULTILINE_STRING(x) {
+        xs.push(x)
+      }
+      DeclStubs(
+        Embedded(language=None, code=CodeMultilineString(@list.from_array(xs))),
+      )
+    } else {
+      let name1 = self.expect_string()
+      if self.peek_token() is STRING(name2) {
+        self.skip()
+        DeclStubs(Import(module_name=name1, func_name=name2))
+      } else {
+        DeclStubs(Embedded(language=None, code=CodeString(name1)))
+      }
+    }
+  } else {
+    let (local_types, body) = self.parse_block_expr_with_local_types()
+    DeclBody(expr=body, local_types~)
+  }
+  let loc = self.loc_start_with(spos)
+  TopFuncDef(fun_decl~, decl_body~, loc~)
+}
+
+///|
 fn State::parse_top(self : Self) -> @syntax.Impl {
   if self.mode is Panic(loc~, ..) {
     return @syntax.TopExpr(
@@ -1087,38 +1162,12 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         )
       }
     }
-    ASYNC | FN => {
-      let fun_decl = self.parse_fun_decl(attrs~)
-      let fun_decl = { ..fun_decl, vis, }
-      let decl_body : @syntax.DeclBody = if self.peek_token() is EQUAL {
-        self.skip()
-        if self.peek_token() is MULTILINE_STRING(_) {
-          let xs = []
-          while self.peek_token() is MULTILINE_STRING(x) {
-            xs.push(x)
-          }
-          DeclStubs(
-            Embedded(
-              language=None,
-              code=CodeMultilineString(@list.from_array(xs)),
-            ),
-          )
-        } else {
-          let name1 = self.expect_string()
-          if self.peek_token() is STRING(name2) {
-            self.skip()
-            DeclStubs(Import(module_name=name1, func_name=name2))
-          } else {
-            DeclStubs(Embedded(language=None, code=CodeString(name1)))
-          }
-        }
-      } else {
-        let (local_types, body) = self.parse_block_expr_with_local_types()
-        DeclBody(expr=body, local_types~)
+    ASYNC =>
+      match self.peek_token(nth=1) {
+        TEST => self.parse_test_block(attrs~, spos~)
+        _ => self.parse_top_func(attrs~, vis~, spos~)
       }
-      let loc = self.loc_start_with(spos)
-      TopFuncDef(fun_decl~, decl_body~, loc~)
-    }
+    FN => self.parse_top_func(attrs~, vis~, spos~)
     FNALIAS => {
       self.skip()
       fn parse_type_name_opt(self : State, need_dot) -> @syntax.Label? {
@@ -1393,39 +1442,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         }
       }
     }
-    TEST => {
-      self.skip()
-      let name : @syntax.TestName = if self.peek_token() is STRING(_) {
-        let name_loc = self.peek_location()
-        let v = self.expect_string()
-        Some((v, name_loc))
-      } else {
-        None
-      }
-      let params = if self.peek_token() is LPAREN {
-        let params = self.surround_series(
-          left=TK_LPAREN,
-          right=TK_RPAREN,
-          delim=TK_COMMA,
-          State::parse_parameter,
-        )
-        Some(@list.from_array(params))
-      } else {
-        None
-      }
-      let (local_types, expr) = self.parse_block_expr_with_local_types()
-      let loc = self.loc_start_with(spos)
-      TopTest(
-        name~,
-        params~,
-        expr~,
-        is_async=true,
-        local_types~,
-        loc~,
-        doc=DocString::empty(),
-        attrs~,
-      )
-    }
+    TEST => self.parse_test_block(attrs~, spos~)
     IMPL => {
       self.skip()
       self.push_sync(TK_WITH)
