@@ -235,10 +235,10 @@ test "pipeline_test_functional_loop3" (t : @test.T) {
   t.run()
 }
 
-// FIXME
-// test "parse_test_docstring2" (t : @test.T) {
-//   t.run()
-// }
+///|
+test "parse_test_docstring2" (t : @test.T) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_global_in_object" (t : @test.T) {

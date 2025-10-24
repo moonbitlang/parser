@@ -25,6 +25,16 @@ fn @test.T::run(t : Self) -> Unit raise Error {
   let hand_json = hand_result.0.to_json()
   let yacc_json = yacc_result.0.to_json()
   if hand_json != yacc_json {
+    @fs.create_dir(debug_dir)
+    @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
+    @fs.write_string_to_file(
+      "\{debug_dir}/\{name}_hand.json",
+      hand_json.stringify(indent=2),
+    )
+    @fs.write_string_to_file(
+      "\{debug_dir}/\{name}_yacc.json",
+      yacc_json.stringify(indent=2),
+    )
     fail(
       "parsing \{name}.mbt produced different ASTs between moonyacc and handrolled parsers.",
     )
@@ -32,4 +42,18 @@ fn @test.T::run(t : Self) -> Unit raise Error {
   let json : Json = { "type": "Program", "body": hand_json }
   t.write(json.stringify(indent=2))
   t.snapshot(filename="\{name}.json")
+}
+
+///|
+let debug_dir = "test/sync_test/debug"
+
+///|
+fn init {
+  try {
+    if @fs.path_exists(debug_dir) {
+      @fs.remove_dir(debug_dir)
+    }
+  } catch {
+    e => println(e)
+  }
 }

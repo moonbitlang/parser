@@ -4,3 +4,4 @@ target/
 .moonagent
 *.ml
 node_modules
+test/sync_test/debug
