@@ -24,3 +24,22 @@ pub(all) enum InterpElem {
 
 ///|
 pub typealias Array[InterpElem] as InterpLiteral
+
+///|
+fn InterpLiteral::to_string_repr(self : InterpLiteral) -> String {
+  let buf = StringBuilder::new()
+  buf.write_char('"')
+  for elem in self {
+    match elem {
+      InterpLit(repr~, ..) => buf.write_string(repr)
+      InterpSource(source) => {
+        buf.write_string("\\{")
+        buf.write_string(source.source)
+        buf.write_char('}')
+      }
+    }
+  } else {
+    buf.write_char('"')
+    buf.to_string()
+  }
+}

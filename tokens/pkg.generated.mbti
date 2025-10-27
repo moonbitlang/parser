@@ -19,9 +19,11 @@ fn Comment::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn Comment::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn Comment::output(Self, &Logger) -> Unit // from trait `Show`
+fn Comment::to_json(Self) -> Json // from trait `ToJson`
 fn Comment::to_string(Self) -> String // from trait `Show`
 impl Eq for Comment
 impl Show for Comment
+impl ToJson for Comment
 
 pub(all) enum CommentKind {
   InlineTrailing
@@ -31,9 +33,11 @@ fn CommentKind::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn CommentKind::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn CommentKind::output(Self, &Logger) -> Unit // from trait `Show`
+fn CommentKind::to_json(Self) -> Json // from trait `ToJson`
 fn CommentKind::to_string(Self) -> String // from trait `Show`
 impl Eq for CommentKind
 impl Show for CommentKind
+impl ToJson for CommentKind
 
 pub(all) enum InterpElem {
   InterpLit(repr~ : String, loc~ : @basic.Location)
@@ -170,8 +174,10 @@ pub(all) enum Token {
 fn Token::kind(Self) -> TokenKind
 fn Token::output(Self, &Logger) -> Unit // from trait `Show`
 fn Token::to_expect_string(Self) -> String
+fn Token::to_json(Self) -> Json // from trait `ToJson`
 fn Token::to_string(Self) -> String // from trait `Show`
 impl Show for Token
+impl ToJson for Token
 
 pub(all) enum TokenKind {
   TK_CHAR
