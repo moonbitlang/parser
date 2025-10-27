@@ -45,6 +45,36 @@ fn @test.T::run(t : Self) -> Unit raise Error {
 }
 
 ///|
+fn lexer_test(t : @test.Test) -> Unit raise Error {
+  let name = match t.name() {
+    ['l', 'e', 'x', 'i', 'n', 'g', ' ', .. rest] => rest
+    otherwise => fail("wrong test label: \{otherwise}")
+  }
+  @basic.show_loc.val = String
+  let source_file = "test/sync_test/__snapshot__/\{name}.mbt"
+  let source = @fs.read_file_to_string(source_file) catch {
+    err => fail("failed to read file \{name}.mbt: \{err}")
+  }
+  let lex_result = @lexer.tokens_from_string(source, comment=true)
+  if lex_result.errors.length() > 0 {
+    let errors = lex_result.errors.map(triple => (
+      triple.0,
+      triple.1,
+      triple.2.to_string(),
+    ))
+    fail(
+      "lexing \{name}.mbt failed due to errors: \{errors.to_json().stringify(indent=2)}",
+    )
+  }
+  let tokens : Array[Json] = lex_result.tokens.map(triple => {
+    "token": triple.0,
+    "loc": @basic.Location::{ start: triple.1, end: triple.2 }.to_json(),
+  })
+  t.write(tokens.to_json().stringify(indent=2))
+  t.snapshot(filename="\{name}.mbt.tokens.json")
+}
+
+///|
 let debug_dir = "test/sync_test/debug"
 
 ///|

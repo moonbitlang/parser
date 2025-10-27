@@ -10,10 +10,19 @@ pub fn normalize(json : String) -> String {
 }
 
 ///|
-pub fn gen_test(name : String) -> String {
+pub fn gen_test_for_parser(name : String) -> String {
   (
     $|test "\{name}" (t : @test.T) {
     $|  t.run()
+    $|}
+  )
+}
+
+///|
+pub fn gen_test_for_lexer(name : String) -> String {
+  (
+    $|test "lexing \{name}" (t : @test.T) {
+    $|  lexer_test(t)
     $|}
   )
 }
@@ -25,14 +34,31 @@ let root = "test/sync_test"
 let snapshot_path : String = root + "/__snapshot__"
 
 ///|
-let output : String = root + "/entries.mbt"
+let output_for_parser : String = root + "/parser.mbt"
 
 ///|
-fn main {
+let output_for_lexer : String = root + "/lexer.mbt"
+
+///|
+enum Mode {
+  Parser
+  Lexer
+}
+
+///|
+fn generate(mode~ : Mode) -> Unit {
   try {
-    let tests = @fs.read_dir(snapshot_path).filter(name => name.has_suffix(
-      ".json",
-    ))
+    let tests = match mode {
+      Parser =>
+        @fs.read_dir(snapshot_path).filter(name => !name.has_suffix(
+            ".tokens.json",
+          ) &&
+          name.has_suffix(".json"))
+      Lexer =>
+        @fs.read_dir(snapshot_path).filter(name => name.has_suffix(
+          ".tokens.json",
+        ))
+    }
     tests.each(name => {
       let target = snapshot_path + "/" + name
       let content = @fs.read_file_to_string(target) |> normalize
@@ -44,11 +70,28 @@ fn main {
     )
     for name in tests {
       buf
-      ..write_string(gen_test(name.split(".").head().unwrap().to_string()))
+      ..write_string(
+        match mode {
+          Parser =>
+            gen_test_for_parser(name.split(".").head().unwrap().to_string())
+          Lexer =>
+            gen_test_for_lexer(name.split(".").head().unwrap().to_string())
+        },
+      )
       ..write_string("\n\n")
+    }
+    let output = match mode {
+      Parser => output_for_parser
+      Lexer => output_for_lexer
     }
     @fs.write_string_to_file(output, buf.to_string())
   } catch {
     err => println(err)
   }
+}
+
+///|
+fn main {
+  generate(mode=Parser)
+  generate(mode=Lexer)
 }

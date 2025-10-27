@@ -2,13 +2,16 @@
 package "moonbitlang/parser/test/sync_test/generator"
 
 // Values
-fn gen_test(String) -> String
+fn gen_test_for_lexer(String) -> String
+
+fn gen_test_for_parser(String) -> String
 
 fn normalize(String) -> String
 
 // Errors
 
 // Types and methods
+type Mode
 
 // Type aliases
 
