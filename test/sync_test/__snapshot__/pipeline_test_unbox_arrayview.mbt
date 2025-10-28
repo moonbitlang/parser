@@ -5,7 +5,7 @@ pub struct T {
 }
 
 ///|
-fn f(x : @array.View[T]) -> Unit {
+fn f(x : ArrayView[T]) -> Unit {
   loop x {
     [{ y: "x", .. }, .. rest] => continue rest
     [{ y: "y", .. }, ..] => println("y")

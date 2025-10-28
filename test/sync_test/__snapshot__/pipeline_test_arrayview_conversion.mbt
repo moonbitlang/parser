@@ -1,5 +1,5 @@
 ///|
-fn[T] f(xs : @array.View[T]) -> T {
+fn[T] f(xs : ArrayView[T]) -> T {
   xs[0]
 }
 

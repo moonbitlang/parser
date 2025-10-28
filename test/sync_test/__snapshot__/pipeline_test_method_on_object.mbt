@@ -10,11 +10,11 @@ trait Loggable {
   log(Self, &Logger) -> Unit
 }
 
-fn[X : Loggable] write_obj(self : &Logger, x : X) -> Unit {
+fn[X : Loggable] &Logger::write_obj(self : &Logger, x : X) -> Unit {
   x.log(self)
 }
 
-fn[X : Loggable] write_obj_ln(self : &Logger, x : X) -> Unit {
+fn[X : Loggable] &Logger::write_obj_ln(self : &Logger, x : X) -> Unit {
   x.log(self)
   self.write_string("\n")
 }

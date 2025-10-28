@@ -1,3 +1,5 @@
+//!build: -w -27
+
 fn check_int(x: UInt, expected: UInt) -> Unit {
   if x == expected {
     println(".")

@@ -19,7 +19,7 @@ fn Scheduler::new() -> Scheduler {
   { next_id: 0, curr_id: 0, err: None, coros: @queue.new() }
 }
 
-fn run_all(self : Scheduler) -> Unit raise {
+fn Scheduler::run_all(self : Scheduler) -> Unit raise {
   loop self.coros.pop() {
     None => ()
     Some (coro) => {
@@ -39,7 +39,7 @@ fn run_all(self : Scheduler) -> Unit raise {
 }
 
 
-fn spawn(self : Scheduler, f : async (Int) -> Unit raise) -> Unit {
+fn Scheduler::spawn(self : Scheduler, f : async (Int) -> Unit raise) -> Unit {
   let id = self.next_id
   self.next_id += 1
   fn ok() {
@@ -53,7 +53,7 @@ fn spawn(self : Scheduler, f : async (Int) -> Unit raise) -> Unit {
   self.coros.push({ ok, err })
 }
 
-async fn suspend(self : Scheduler) -> Unit raise CancellationError {
+async fn Scheduler::suspend(self : Scheduler) -> Unit raise CancellationError {
   suspend_with_error(fn (ok, err) {
     self.coros.push({ ok: fn () { ok(()) }, err })
   })

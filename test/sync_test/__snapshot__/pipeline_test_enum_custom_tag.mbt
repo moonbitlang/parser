@@ -8,9 +8,9 @@ enum E {
   G = 0xff
 }
 
-fn unsafe_as_int(self : E) -> Int = "%identity"
+fn E::unsafe_as_int(self : E) -> Int = "%identity"
 
-fn as_int(self : E) -> Int {
+fn E::as_int(self : E) -> Int {
   match self {
     A => 10
     B => 11

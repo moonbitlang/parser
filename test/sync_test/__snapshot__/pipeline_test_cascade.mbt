@@ -52,11 +52,11 @@ fn init {
 
 struct MyBuf (@buffer.Buffer)
 
-fn write_string(self : MyBuf, s : String) -> Unit {
+fn MyBuf::write_string(self : MyBuf, s : String) -> Unit {
   self.0.write_string(s)
 }
 
-fn expect(self : MyBuf, content~ : String = "") -> Unit raise {
+fn MyBuf::expect(self : MyBuf, content~ : String = "") -> Unit raise {
   inspect(self.inner(), content~)
   self.0.reset()
 }

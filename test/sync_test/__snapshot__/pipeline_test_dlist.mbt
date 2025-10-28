@@ -21,14 +21,14 @@ enum Node[X] {
   )
 }
 
-fn[X] set_next(self : Node[X], next : Node[X]) -> Unit {
+fn[X] Node::set_next(self : Node[X], next : Node[X]) -> Unit {
   match self {
     Node::Nil => ()
     Link(_) as node => node.next = next
   }
 }
 
-fn[X] set_prev(self : Node[X], prev : Node[X]) -> Unit {
+fn[X] Node::set_prev(self : Node[X], prev : Node[X]) -> Unit {
   match self {
     Node::Nil => ()
     Link(_) as node => node.prev = prev
@@ -47,7 +47,7 @@ fn[X] singleton(elem : X) -> DList[X] {
   { head: Link(elem~, prev=Node::Nil, next=Node::Nil) }
 }
 
-fn[X] push(self : DList[X], elem : X) -> Unit {
+fn[X] DList::push(self : DList[X], elem : X) -> Unit {
   match self.head {
     Node::Nil => self.head = Link(elem~, prev=Node::Nil, next=Node::Nil)
     Link(_) as prev_head => {
@@ -59,7 +59,7 @@ fn[X] push(self : DList[X], elem : X) -> Unit {
   }
 }
 
-fn[X] pop(self : DList[X]) -> X? {
+fn[X] DList::pop(self : DList[X]) -> X? {
   match self.head {
     Node::Nil => None
     Link(_) as head => {
@@ -73,7 +73,7 @@ fn[X] pop(self : DList[X]) -> X? {
   }
 }
 
-fn[X] next(self : DList[X]) -> Bool {
+fn[X] DList::next(self : DList[X]) -> Bool {
   match self.head {
     Node::Nil | Link(next=Node::Nil, ..) => false
     Link(_) as head => {
@@ -83,7 +83,7 @@ fn[X] next(self : DList[X]) -> Bool {
   }
 }
 
-fn[X] prev(self : DList[X]) -> Bool {
+fn[X] DList::prev(self : DList[X]) -> Bool {
   match self.head {
     Node::Nil | Link(prev=Node::Nil, ..) => false
     Link(_) as head => {
@@ -93,7 +93,7 @@ fn[X] prev(self : DList[X]) -> Bool {
   }
 }
 
-fn[X] iter(self : DList[X], f : (X) -> Unit) -> Unit {
+fn[X] DList::iter(self : DList[X], f : (X) -> Unit) -> Unit {
   let mut i = 10
   loop self.head {
     Node::Nil => ()

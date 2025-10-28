@@ -20,19 +20,22 @@ fn[Elem] Generator::spawn(f : async (Generator[Elem]) -> Unit noraise) -> Genera
   gen
 }
 
-async fn[Elem] produce_value(self : Generator[Elem], value : Elem) -> Unit noraise {
+async fn[Elem] Generator::produce_value(
+  self : Generator[Elem],
+  value : Elem,
+) -> Unit noraise {
   callcc(fn (k) {
     self.value = Some(value)
     self.next = fn () { k(()) }
   })
 }
 
-fn[Elem] next(self : Generator[Elem]) -> Elem? {
+fn[Elem] Generator::next(self : Generator[Elem]) -> Elem? {
   (self.next)()
   self.value
 }
 
-fn[Elem] iter(self : Generator[Elem]) -> Iter[Elem] {
+fn[Elem] Generator::iter(self : Generator[Elem]) -> Iter[Elem] {
   Iter::new(fn (yield_) {
     loop self.next() {
       None => IterContinue

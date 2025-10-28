@@ -3,7 +3,7 @@ enum Tree[T] {
   Br(T, Tree[T], Tree[T])
 }
 
-fn[T : Compare + Eq] insert(self : Tree[T], v : T) -> Tree[T] {
+fn[T : Compare + Eq] Tree::insert(self : Tree[T], v : T) -> Tree[T] {
   match self {
     Empty => Br(v, Empty, Empty)
     Br(label, left, right) => {
@@ -26,7 +26,7 @@ fn[T : Compare] Tree::from_array(arr : Array[T]) -> Tree[T] {
   return tree
 }
 
-fn[T] to_array(self : Tree[T]) -> Array[T] {
+fn[T] Tree::to_array(self : Tree[T]) -> Array[T] {
   let arr = []
   fn go(tree : Tree[T]) -> Unit {
     match tree {
@@ -42,28 +42,28 @@ fn[T] to_array(self : Tree[T]) -> Array[T] {
   return arr
 }
 
-fn[I, R] cata_empty(self : Tree[I], on_empty : () -> R, on_br : (I, R, R) -> R) -> R {
+fn[I, R] Tree::cata_empty(self : Tree[I], on_empty : () -> R, on_br : (I, R, R) -> R) -> R {
   match self {
     Empty => on_empty()
     _ => self.cata(on_empty, on_br)
   }
 }
 
-fn[I, R] cata_br(self : Tree[I], on_empty : () -> R, on_br : (I, R, R) -> R) -> R {
+fn[I, R] Tree::cata_br(self : Tree[I], on_empty : () -> R, on_br : (I, R, R) -> R) -> R {
   match self {
     Br(label, left, right) => on_br(label, left.cata(on_empty, on_br), right.cata(on_empty, on_br))
     _ => self.cata(on_empty, on_br)
   }
 }
 
-fn[I, R] cata(self : Tree[I], on_empty : () -> R, on_br : (I, R, R) -> R) -> R {
+fn[I, R] Tree::cata(self : Tree[I], on_empty : () -> R, on_br : (I, R, R) -> R) -> R {
   match self {
     Empty => self.cata_empty(on_empty, on_br)
     Br(_) => self.cata_br(on_empty, on_br)
   }
 }
 
-fn[I, R] map(self : Tree[I], f : (I) -> R) -> Tree[R] {
+fn[I, R] Tree::map(self : Tree[I], f : (I) -> R) -> Tree[R] {
   fn on_empty() -> Tree[R] {
     Empty
   }

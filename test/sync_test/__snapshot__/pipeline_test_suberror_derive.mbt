@@ -9,6 +9,12 @@ fn f2() -> Unit raise MyError2 {
   raise MyError2
 }
 
+fn[T : Hash] stable_hash(value : T) -> Int {
+  let hasher = Hasher::new(seed = 42)
+  hasher.combine(value)
+  hasher.finalize()
+}
+
 fn[X : Show + Eq + Compare + Hash] use_derived(e0 : X, e : X) -> Unit {
   println(e)
   println(e0 == e)
@@ -16,8 +22,8 @@ fn[X : Show + Eq + Compare + Hash] use_derived(e0 : X, e : X) -> Unit {
   println(e0.compare(e))
   println(e.compare(e0))
   println(e.compare(e))
-  println(Hash::hash(e))
-  println(Hash::hash(e0))
+  println(stable_hash(e))
+  println(stable_hash(e0))
 }
 
 fn init {

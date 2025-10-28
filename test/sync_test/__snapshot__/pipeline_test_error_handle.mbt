@@ -44,7 +44,7 @@ enum T {
   B(Int)
 }
 
-fn get_a(self: T) -> Int raise {
+fn T::get_a(self: T) -> Int raise {
   match self {
     A(i) => i
     B(i) => raise StringError("not a")
@@ -57,7 +57,7 @@ fn get_aa(x: T, y: T) -> Int raise {
   a1 + a2
 }
 
-fn add(self: T, other: T) -> Int raise {
+fn T::add(self: T, other: T) -> Int raise {
   match (self, other) {
     (A(i), A(j)) => i + j
     _ => raise StringError("not all a")

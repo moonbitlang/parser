@@ -1,6 +1,13 @@
 //!build: -w -27
+
+fn[T : Hash] stable_hash(value : T) -> Int {
+  let hasher = Hasher::new(seed = 42)
+  hasher.combine(value)
+  hasher.finalize()
+}
+
 fn[X : Show + Hash] show_hash(x : X) -> Unit {
-  let h = x.hash()
+  let h = stable_hash(x)
   println("hash(\{x}) => \{h}")
 }
 

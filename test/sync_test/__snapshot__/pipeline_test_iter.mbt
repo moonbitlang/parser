@@ -1,5 +1,5 @@
 
-fn[T] iter(self: List[T], f: (T) -> Unit) -> Unit {
+fn[T] List::iter(self: List[T], f: (T) -> Unit) -> Unit {
   fn go(l: List[T]) {
     match l {
       Nil => ()

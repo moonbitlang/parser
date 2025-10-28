@@ -2,7 +2,7 @@ test {
   inspect(1, content="1")
 }
 
-fn len(self : String) -> Int {
+fn String::len(self : String) -> Int {
   self.length()
 }
 

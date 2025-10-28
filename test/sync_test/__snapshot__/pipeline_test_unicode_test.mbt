@@ -20,7 +20,7 @@ fn 相加(左: Int, 右: Int) -> Int {
     左 + 右
 }
 
-fn 打印(self: T_类型) -> Unit {
+fn T_类型::打印(self: T_类型) -> Unit {
     let T(x) = self
     println(x)
 }
@@ -46,7 +46,7 @@ enum T_测试枚举 {
   E有(String)
 }
 
-fn to_string(self: T_测试枚举) -> String {
+fn T_测试枚举::to_string(self: T_测试枚举) -> String {
   match self {
     T_测试枚举::E无 => "None"
     T_测试枚举::E有(t) => "Some(\{t})"

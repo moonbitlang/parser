@@ -3,12 +3,12 @@ enum MyPair[T, U] {
   MyPair(T, U)
 }
 
-fn[T, U] fst(self: MyPair[T, U]) -> T {
+fn[T, U] MyPair::fst(self: MyPair[T, U]) -> T {
   let (MyPair(t, _)) = self
   t
 }
 
-fn[T, U] snd(self: MyPair[T, U]) -> U {
+fn[T, U] MyPair::snd(self: MyPair[T, U]) -> U {
   let (MyPair(_, u)) = self
   u
 }

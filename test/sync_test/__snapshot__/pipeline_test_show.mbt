@@ -23,7 +23,7 @@ pub(all) enum Opt[T] {
   Just(T)
 }
 
-pub fn[T: Show] to_string(self: Opt[T]) -> String {
+pub fn[T: Show] Opt::to_string(self: Opt[T]) -> String {
   match self {
     Nothing => "nothing"
     Just(x) => x.to_string()

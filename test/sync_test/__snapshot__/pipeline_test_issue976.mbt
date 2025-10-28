@@ -16,15 +16,15 @@ struct Mapper {
   idx_set: (Mapper, Int64, Int) -> Unit
 }
 
-fn step_(self: Mapper) -> Unit {
+fn Mapper::step_(self: Mapper) -> Unit {
   (self.step)(self)
 }
 
-fn op_get(self: Mapper, adr: Int64) -> Int {
+fn Mapper::op_get(self: Mapper, adr: Int64) -> Int {
   (self.idx)(self, adr)
 }
 
-fn op_set(self: Mapper, adr: Int64, val: Int) -> Unit {
+fn Mapper::op_set(self: Mapper, adr: Int64, val: Int) -> Unit {
   (self.idx_set)(self, adr, val)
 }
 

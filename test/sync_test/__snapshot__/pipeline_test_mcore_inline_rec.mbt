@@ -1,6 +1,6 @@
 ///|
 #locals(f)
-fn[T, U] map(arr : @array.View[T], f : (T) -> U) -> @array.View[U] {
+fn[T, U] map(arr : ArrayView[T], f : (T) -> U) -> ArrayView[U] {
   let result = []
   for a in arr {
     result.push(f(a))
@@ -10,7 +10,7 @@ fn[T, U] map(arr : @array.View[T], f : (T) -> U) -> @array.View[U] {
 
 ///|
 #locals(f)
-fn[T : Show] iter(arr : @array.View[T], f : (T) -> Unit) -> Unit {
+fn[T : Show] iter(arr : ArrayView[T], f : (T) -> Unit) -> Unit {
   let n = arr.length()
   if arr is [] {
     return

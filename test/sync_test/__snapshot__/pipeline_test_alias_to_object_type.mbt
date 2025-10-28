@@ -6,7 +6,7 @@ impl I for Int with f(self) {
   println(self)
 }
 
-typealias &I as Obj
+type Obj = &I
 
 fn init {
   let obj = 42 as Obj

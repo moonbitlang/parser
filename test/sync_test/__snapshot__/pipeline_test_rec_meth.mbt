@@ -3,7 +3,7 @@ enum Lst[X] {
   MCons (X, Lst[X])
 }
 
-fn[X] length (self: Lst[X]) -> Int {
+fn[X] Lst::length(self: Lst[X]) -> Int {
   match self {
     MNil => 0
     MCons(_, xs) => 1 + xs.length()
@@ -17,14 +17,14 @@ fn[X] to_lst (xs: @list.List[X]) -> Lst[X] {
   }
 }
 
-fn[X] iter (self: Lst[X], f: (X) -> Unit) -> Unit {
+fn[X] Lst::iter(self: Lst[X], f: (X) -> Unit) -> Unit {
   match self {
     MNil => ()
     MCons(x, xs) => { f(x); xs.iter(f) }
   }
 }
 
-fn[X, Y] map (self: Lst[X], f: (X) -> Y) -> Lst[Y] {
+fn[X, Y] Lst::map(self: Lst[X], f: (X) -> Y) -> Lst[Y] {
   match self {
     MNil => MNil
     MCons(x, xs) => MCons(f(x), xs.map(f))

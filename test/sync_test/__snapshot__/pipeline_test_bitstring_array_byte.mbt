@@ -1,3 +1,5 @@
+//!build: -w -27
+
 ///|
 fn f(x : Array[Byte]) -> Unit {
   match x {

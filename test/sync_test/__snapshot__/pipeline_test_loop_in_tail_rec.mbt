@@ -4,7 +4,7 @@ struct Matrix {
   h : Int
 }
 
-fn sum_from(self : Matrix, i : Int, acc~ : Int = 0) -> Int {
+fn Matrix::sum_from(self : Matrix, i : Int, acc~ : Int = 0) -> Int {
   if i >= self.h { return acc }
   for
     j = 0, sum = acc

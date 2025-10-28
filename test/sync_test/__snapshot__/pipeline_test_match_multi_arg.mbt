@@ -4,14 +4,14 @@ enum Tree {
   Branch(Int, left~ : Tree, right~ : Tree)
 }
 
-fn top(self : Tree) -> Int? {
+fn Tree::top(self : Tree) -> Int? {
   match self {
     Nil => None
     Branch(top, left=_, right=_) => Some(top)
   }
 }
 
-fn iter(self : Tree, f : (Int) -> Unit) -> Unit {
+fn Tree::iter(self : Tree, f : (Int) -> Unit) -> Unit {
   match self {
     Nil => ()
     Branch(top, left~, right~) => {
@@ -22,7 +22,7 @@ fn iter(self : Tree, f : (Int) -> Unit) -> Unit {
   }
 }
 
-fn is_nil(self : Tree) -> Bool {
+fn Tree::is_nil(self : Tree) -> Bool {
   match self {
     Branch(_) => false
     Nil => true

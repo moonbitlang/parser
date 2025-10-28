@@ -5,7 +5,7 @@ trait Obj {
 impl Obj for Int with f(self) { println(self) }
 
 // ok
-fn g(self : &Obj) -> Unit {
+fn &Obj::g(self : &Obj) -> Unit {
   println("=== g ===")
   self.f()
   self.f()

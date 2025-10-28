@@ -7,7 +7,7 @@ fn print() -> Unit {
 
 }
 
-fn[T, B] map(self: Opt[T], f: (T) -> B) -> Opt[B] {
+fn[T, B] Opt::map(self: Opt[T], f: (T) -> B) -> Opt[B] {
   match self {
     Some(x) => Opt::Some(f(x))
     _ => Opt::None

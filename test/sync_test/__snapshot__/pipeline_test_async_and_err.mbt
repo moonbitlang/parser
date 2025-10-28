@@ -93,3 +93,19 @@ fn init {
     }
   })
 }
+
+async fn raise_in_sync_with_async_catch(input : String?) -> Unit {
+  try {
+    let result = match input {
+      None => raise Err
+      Some(input) => input
+    }
+    println(result)
+  } catch {
+    _ => async_with_err()
+  }
+}
+
+fn init {
+  run_async(fn() { try! raise_in_sync_with_async_catch(Some("msg")) })
+}

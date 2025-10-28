@@ -395,16 +395,18 @@ fn test_utf8_decoding() -> Unit raise {
   // Test handling of invalid UTF-8 sequences
   // \uD800
   assert_true(
-    match (try? f("\xED\xA0\x80")) {
-      Ok(_) => false
-      Err(_) => true
+    try f("\xED\xA0\x80") catch {
+      _ => true
+    } noraise {
+      _ => false
     },
   )
   // \u{110000}
   assert_true(
-    match (try? f("\xF4\x90\x80\x80")) {
-      Ok(_) => false
-      Err(_) => true
+    try f("\xF4\x90\x80\x80") catch {
+      _ => true
+    } noraise {
+      _ => false
     },
   )
 }

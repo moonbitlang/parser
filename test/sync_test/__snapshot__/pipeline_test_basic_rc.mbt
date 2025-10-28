@@ -7,7 +7,7 @@ struct R[X] {
 // toplevel should not be RC'ed
 let top_r : R[Int] = { x: 1, y: 2 }
 
-fn[X, Y] combine(self : R[X], other : R[Y]) -> R[(X, Y)] {
+fn[X, Y] R::combine(self : R[X], other : R[Y]) -> R[(X, Y)] {
   { x: (self.x, other.x), y: (self.y, other.y) }
 }
 

@@ -1,3 +1,5 @@
+//!build: -w -27
+
 fn f1(x: Bytes) -> Unit {
   match x {
     [ u3(a), .. ] => println(a)

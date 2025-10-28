@@ -1,3 +1,5 @@
+//!build: -w -27
+
 ///|
 const B : Byte = 0x10
 

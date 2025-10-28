@@ -4,7 +4,7 @@ struct P {
 }
 
 ///|
-fn read(self : P) -> Char? {
+fn P::read(self : P) -> Char? {
   match self.s {
     [] => None
     [c, .. cs] => {

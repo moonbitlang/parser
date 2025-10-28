@@ -1,3 +1,5 @@
+//!build: -w -27
+
 ///|
 pub fn decode_uint64(bs : Bytes) -> UInt64 {
   let shift = 0

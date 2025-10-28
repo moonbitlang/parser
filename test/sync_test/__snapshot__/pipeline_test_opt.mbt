@@ -4,7 +4,7 @@ enum O {
 }
 
 
-pub fn bind(self : O , f : (Int)->Int) -> O{
+pub fn O::bind(self : O , f : (Int)->Int) -> O{
   match self {
     N => N 
     S(i) => S(f(i))

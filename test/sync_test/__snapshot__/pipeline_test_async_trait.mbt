@@ -21,7 +21,7 @@ impl Stream for Input with next(self) {
 
 suberror NoConsumer derive(Show)
 
-fn feed_char(self : Input, chr : Char) -> Unit raise {
+fn Input::feed_char(self : Input, chr : Char) -> Unit raise {
   match self.consumer {
     None => raise NoConsumer
     Some(consumer) => {
@@ -31,7 +31,7 @@ fn feed_char(self : Input, chr : Char) -> Unit raise {
   }
 }
 
-fn terminate(self : Input) -> Unit {
+fn Input::terminate(self : Input) -> Unit {
   match self.consumer {
     None => ()
     Some(consumer) => {
@@ -41,7 +41,7 @@ fn terminate(self : Input) -> Unit {
   }
 }
 
-fn feed_data(self : Input, data : String) -> Unit raise {
+fn Input::feed_data(self : Input, data : String) -> Unit raise {
   for c in data {
     self.feed_char(c)
   }

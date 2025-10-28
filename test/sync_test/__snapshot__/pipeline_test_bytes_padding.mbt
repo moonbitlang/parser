@@ -18,4 +18,5 @@ fn main {
   println(strlen(b"ab\x00cd"))
   println(strlen(Bytes::make(4, b'a')))
   println(strlen(Bytes::make(4, 0)))
+  println(strlen([ 'a', 'a' + 1, 'a' + 2, 'a' + 3 ]))
 }

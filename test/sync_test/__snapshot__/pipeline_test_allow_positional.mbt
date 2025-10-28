@@ -1,7 +1,8 @@
 //!build: -alert -deprecated
 
 ///|
-#callsite(migration(a, allow_positional=true), migration(d, allow_positional=true))
+#label_migration(a, allow_positional=true)
+#label_migration(d, allow_positional=true)
 pub fn allow_positional(a~ : Int, b : Int, c? : Int = a, d~ : Int) -> Unit {
   println("a=\{a}, b=\{b}, c=\{c}, d=\{d}")
 }

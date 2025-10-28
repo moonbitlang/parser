@@ -1,3 +1,5 @@
+//!build: -w -27
+
 fn f(bs: BytesView) -> Unit {
   match bs {
     [ (0x00 ..= 0x7F) as b, _ ] => println(b)

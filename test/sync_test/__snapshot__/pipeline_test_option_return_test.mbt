@@ -6,14 +6,14 @@ struct Vector[X] {
 /// `length[X](self : Vector[X])`
 ///
 /// Get length of a vector
-fn[X] length(self : Vector[X]) -> Int {
+fn[X] Vector::length(self : Vector[X]) -> Int {
   self.len
 }
 
 /// `op_get[X](self : Vector[X], i : Int)`
 ///
 /// Get the ith element of vector
-fn[X] op_get(self : Vector[X], i : Int) -> X? {
+fn[X] Vector::op_get(self : Vector[X], i : Int) -> X? {
   if i < self.len {
     Some(self.data[i])
   } else {

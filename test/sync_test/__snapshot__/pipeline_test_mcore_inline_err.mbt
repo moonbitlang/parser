@@ -1,6 +1,6 @@
 ///|
 #locals(f)
-fn[T, U] map_err(arr : @array.View[T], f : (T) -> U raise Err) -> @array.View[U] raise Err {
+fn[T, U] map_err(arr : ArrayView[T], f : (T) -> U raise Err) -> ArrayView[U] raise Err {
   let result = []
   for a in arr {
     result.push(f(a))

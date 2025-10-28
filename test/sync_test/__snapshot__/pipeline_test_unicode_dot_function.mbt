@@ -1,4 +1,4 @@
-fn 😀(self : T_😆😆) -> Unit {
+fn T_😆😆::😀(self : T_😆😆) -> Unit {
   match self {
     A => println("A")
     B => println("B")

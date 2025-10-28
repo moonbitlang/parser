@@ -10,6 +10,6 @@ fn f(xs : Array[BytesView]) -> Array[BytesView] {
 }
 
 ///|
-fn g(xs : Array[@array.View[Int]]) -> Array[@array.View[Int]] {
+fn g(xs : Array[ArrayView[Int]]) -> Array[ArrayView[Int]] {
   xs.map(i => i)
 }

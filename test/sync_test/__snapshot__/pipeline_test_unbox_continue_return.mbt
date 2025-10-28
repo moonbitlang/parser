@@ -1,5 +1,5 @@
 ///|
-fn f(chars : @array.View[Char]) -> Char {
+fn f(chars : ArrayView[Char]) -> Char {
   loop chars {
     [.. chars] =>
       continue {

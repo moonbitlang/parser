@@ -10,18 +10,18 @@ fn Scheduler::new() -> Scheduler {
   { next_id: 0, coros: @queue.new() }
 }
 
-fn step(self : Scheduler) -> Unit {
+fn Scheduler::step(self : Scheduler) -> Unit {
   match self.coros.pop() {
     None => ()
     Some(coro) => coro()
   }
 }
 
-async fn suspend(self : Scheduler) -> Unit noraise {
+async fn Scheduler::suspend(self : Scheduler) -> Unit noraise {
   callcc(fn (k) { self.coros.push(fn () { k(()) }) })
 }
 
-fn run_all(self : Scheduler) -> Unit {
+fn Scheduler::run_all(self : Scheduler) -> Unit {
   loop self.coros.pop() {
     None => ()
     Some(coro) => {
@@ -31,7 +31,7 @@ fn run_all(self : Scheduler) -> Unit {
   }
 }
 
-fn spawn_lazy(self : Scheduler, f : async (Int) -> Unit noraise) -> Unit {
+fn Scheduler::spawn_lazy(self : Scheduler, f : async (Int) -> Unit noraise) -> Unit {
   let id = self.next_id
   self.next_id += 1
   self.coros.push(fn () {
@@ -39,7 +39,7 @@ fn spawn_lazy(self : Scheduler, f : async (Int) -> Unit noraise) -> Unit {
   })
 }
 
-fn spawn(self : Scheduler, f : async (Int) -> Unit noraise) -> Unit {
+fn Scheduler::spawn(self : Scheduler, f : async (Int) -> Unit noraise) -> Unit {
   let id = self.next_id
   self.next_id += 1
   run_async(fn () { f(id) })
@@ -77,17 +77,17 @@ struct Channel[T] {
   mut value : ChannelState[T]
 }
 
-fn[T] make_channel(self : Scheduler) -> Channel[T] {
+fn[T] Scheduler::make_channel(self : Scheduler) -> Channel[T] {
   { ctx: self, value: No_value }
 }
 
 suberror ChannelTerminated
 
-fn[T] terminate(self : Channel[T]) -> Unit {
+fn[T] Channel::terminate(self : Channel[T]) -> Unit {
   self.value = Terminated
 }
 
-async fn[T] send(self : Channel[T], value : T) -> Unit raise ChannelTerminated {
+async fn[T] Channel::send(self : Channel[T], value : T) -> Unit raise ChannelTerminated {
   match self.value {
     Terminated => raise ChannelTerminated
     Has_value(_) => abort("multiple sender detected")
@@ -104,7 +104,7 @@ async fn[T] send(self : Channel[T], value : T) -> Unit raise ChannelTerminated {
   }
 }
 
-async fn[T] recv(self : Channel[T]) -> T raise ChannelTerminated {
+async fn[T] Channel::recv(self : Channel[T]) -> T raise ChannelTerminated {
   loop self.value {
     Has_value(value) => {
       self.value = No_value
