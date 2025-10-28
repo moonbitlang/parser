@@ -714,7 +714,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "Scheduler"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "run_all",
@@ -1243,7 +1251,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "Scheduler"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "spawn",
@@ -1776,7 +1792,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "Scheduler"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "suspend",

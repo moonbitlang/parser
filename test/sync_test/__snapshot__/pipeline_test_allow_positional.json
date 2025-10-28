@@ -137,7 +137,12 @@
         "attrs": [
           {
             "type": "Attribute",
-            "raw": "#callsite(migration(a, allow_positional=true), migration(d, allow_positional=true))",
+            "raw": "#label_migration(a, allow_positional=true)",
+            "loc": null
+          },
+          {
+            "type": "Attribute",
+            "raw": "#label_migration(d, allow_positional=true)",
             "loc": null
           }
         ],

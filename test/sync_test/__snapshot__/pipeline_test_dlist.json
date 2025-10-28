@@ -632,7 +632,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "Node"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "set_next",
@@ -887,7 +895,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "Node"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "set_prev",
@@ -1546,7 +1562,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "DList"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "push",
@@ -2195,7 +2219,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "DList"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "pop",
@@ -2880,7 +2912,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "DList"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "next",
@@ -3209,7 +3249,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "DList"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "prev",
@@ -3538,7 +3586,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "DList"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "iter",

@@ -572,6 +572,115 @@
                 "type": "ApplyAttr::NoAttr"
               },
               "loc": null
+            },
+            {
+              "type": "Expr::Apply",
+              "func": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "println"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "args": [
+                {
+                  "type": "Argument",
+                  "value": {
+                    "type": "Expr::Apply",
+                    "func": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "strlen"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "args": [
+                      {
+                        "type": "Argument",
+                        "value": {
+                          "type": "Expr::Apply",
+                          "func": {
+                            "type": "Expr::Method",
+                            "type_name": {
+                              "type": "TypeName",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "Bytes"
+                              },
+                              "is_object": false,
+                              "loc": null
+                            },
+                            "method_name": {
+                              "type": "Label",
+                              "name": "make",
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "args": [
+                            {
+                              "type": "Argument",
+                              "value": {
+                                "type": "Expr::Constant",
+                                "c": {
+                                  "type": "Constant::Int",
+                                  "0": "4"
+                                },
+                                "loc": null
+                              },
+                              "kind": {
+                                "type": "ArgumentKind::Positional"
+                              }
+                            },
+                            {
+                              "type": "Argument",
+                              "value": {
+                                "type": "Expr::Constant",
+                                "c": {
+                                  "type": "Constant::Int",
+                                  "0": "0"
+                                },
+                                "loc": null
+                              },
+                              "kind": {
+                                "type": "ArgumentKind::Positional"
+                              }
+                            }
+                          ],
+                          "attr": {
+                            "type": "ApplyAttr::NoAttr"
+                          },
+                          "loc": null
+                        },
+                        "kind": {
+                          "type": "ArgumentKind::Positional"
+                        }
+                      }
+                    ],
+                    "attr": {
+                      "type": "ApplyAttr::NoAttr"
+                    },
+                    "loc": null
+                  },
+                  "kind": {
+                    "type": "ArgumentKind::Positional"
+                  }
+                }
+              ],
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
             }
           ],
           "last_expr": {
@@ -609,58 +718,101 @@
                     {
                       "type": "Argument",
                       "value": {
-                        "type": "Expr::Apply",
-                        "func": {
-                          "type": "Expr::Method",
-                          "type_name": {
-                            "type": "TypeName",
-                            "name": {
-                              "type": "LongIdent::Ident",
-                              "0": "Bytes"
-                            },
-                            "is_object": false,
-                            "loc": null
-                          },
-                          "method_name": {
-                            "type": "Label",
-                            "name": "make",
-                            "loc": null
-                          },
-                          "loc": null
-                        },
-                        "args": [
+                        "type": "Expr::Array",
+                        "exprs": [
                           {
-                            "type": "Argument",
-                            "value": {
-                              "type": "Expr::Constant",
-                              "c": {
-                                "type": "Constant::Int",
-                                "0": "4"
+                            "type": "Expr::Constant",
+                            "c": {
+                              "type": "Constant::Char",
+                              "0": "a"
+                            },
+                            "loc": null
+                          },
+                          {
+                            "type": "Expr::Infix",
+                            "op": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "+"
                               },
                               "loc": null
                             },
-                            "kind": {
-                              "type": "ArgumentKind::Positional"
-                            }
-                          },
-                          {
-                            "type": "Argument",
-                            "value": {
+                            "lhs": {
                               "type": "Expr::Constant",
                               "c": {
-                                "type": "Constant::Int",
-                                "0": "0"
+                                "type": "Constant::Char",
+                                "0": "a"
                               },
                               "loc": null
                             },
-                            "kind": {
-                              "type": "ArgumentKind::Positional"
-                            }
+                            "rhs": {
+                              "type": "Expr::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "1"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          {
+                            "type": "Expr::Infix",
+                            "op": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "+"
+                              },
+                              "loc": null
+                            },
+                            "lhs": {
+                              "type": "Expr::Constant",
+                              "c": {
+                                "type": "Constant::Char",
+                                "0": "a"
+                              },
+                              "loc": null
+                            },
+                            "rhs": {
+                              "type": "Expr::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "2"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          {
+                            "type": "Expr::Infix",
+                            "op": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "+"
+                              },
+                              "loc": null
+                            },
+                            "lhs": {
+                              "type": "Expr::Constant",
+                              "c": {
+                                "type": "Constant::Char",
+                                "0": "a"
+                              },
+                              "loc": null
+                            },
+                            "rhs": {
+                              "type": "Expr::Constant",
+                              "c": {
+                                "type": "Constant::Int",
+                                "0": "3"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
                           }
                         ],
-                        "attr": {
-                          "type": "ApplyAttr::NoAttr"
-                        },
                         "loc": null
                       },
                       "kind": {

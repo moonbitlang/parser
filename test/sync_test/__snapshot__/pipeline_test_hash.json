@@ -8,6 +8,222 @@
         "type_name": null,
         "name": {
           "type": "Binder",
+          "name": "stable_hash",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [
+          {
+            "type": "Parameter::Positional",
+            "binder": {
+              "type": "Binder",
+              "name": "value",
+              "loc": null
+            },
+            "ty": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "T"
+                },
+                "loc": null
+              },
+              "tys": [],
+              "loc": null
+            }
+          }
+        ],
+        "params_loc": null,
+        "quantifiers": [
+          {
+            "type": "TypeVarBinder",
+            "name": "T",
+            "constraints": [
+              {
+                "type": "TypeVarConstraint",
+                "trait": {
+                  "type": "LongIdent::Ident",
+                  "0": "Hash"
+                },
+                "loc": null
+              }
+            ],
+            "name_loc": null
+          }
+        ],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": {
+              "type": "LongIdent::Ident",
+              "0": "Int"
+            },
+            "loc": null
+          },
+          "tys": [],
+          "loc": null
+        },
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "hasher",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::Apply",
+            "func": {
+              "type": "Expr::Method",
+              "type_name": {
+                "type": "TypeName",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "Hasher"
+                },
+                "is_object": false,
+                "loc": null
+              },
+              "method_name": {
+                "type": "Label",
+                "name": "new",
+                "loc": null
+              },
+              "loc": null
+            },
+            "args": [
+              {
+                "type": "Argument",
+                "value": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "42"
+                  },
+                  "loc": null
+                },
+                "kind": {
+                  "type": "ArgumentKind::Labelled",
+                  "0": {
+                    "type": "Label",
+                    "name": "seed",
+                    "loc": null
+                  }
+                }
+              }
+            ],
+            "attr": {
+              "type": "ApplyAttr::NoAttr"
+            },
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Sequence",
+            "exprs": [
+              {
+                "type": "Expr::DotApply",
+                "self": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "hasher"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "method_name": {
+                  "type": "Label",
+                  "name": "combine",
+                  "loc": null
+                },
+                "args": [
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "value"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  }
+                ],
+                "return_self": false,
+                "attr": {
+                  "type": "ApplyAttr::NoAttr"
+                },
+                "loc": null
+              }
+            ],
+            "last_expr": {
+              "type": "Expr::DotApply",
+              "self": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "hasher"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "method_name": {
+                "type": "Label",
+                "name": "finalize",
+                "loc": null
+              },
+              "args": [],
+              "return_self": false,
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
           "name": "init",
           "loc": null
         },
@@ -52,19 +268,13 @@
                   "value": {
                     "type": "Expr::Apply",
                     "func": {
-                      "type": "Expr::Method",
-                      "type_name": {
-                        "type": "TypeName",
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
                         "name": {
                           "type": "LongIdent::Ident",
-                          "0": "Hash"
+                          "0": "stable_hash"
                         },
-                        "is_object": false,
-                        "loc": null
-                      },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "hash",
                         "loc": null
                       },
                       "loc": null
@@ -120,19 +330,13 @@
                   "value": {
                     "type": "Expr::Apply",
                     "func": {
-                      "type": "Expr::Method",
-                      "type_name": {
-                        "type": "TypeName",
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
                         "name": {
                           "type": "LongIdent::Ident",
-                          "0": "Hash"
+                          "0": "stable_hash"
                         },
-                        "is_object": false,
-                        "loc": null
-                      },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "hash",
                         "loc": null
                       },
                       "loc": null
@@ -188,19 +392,13 @@
                   "value": {
                     "type": "Expr::Apply",
                     "func": {
-                      "type": "Expr::Method",
-                      "type_name": {
-                        "type": "TypeName",
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
                         "name": {
                           "type": "LongIdent::Ident",
-                          "0": "Hash"
+                          "0": "stable_hash"
                         },
-                        "is_object": false,
-                        "loc": null
-                      },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "hash",
                         "loc": null
                       },
                       "loc": null
@@ -256,19 +454,13 @@
                   "value": {
                     "type": "Expr::Apply",
                     "func": {
-                      "type": "Expr::Method",
-                      "type_name": {
-                        "type": "TypeName",
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
                         "name": {
                           "type": "LongIdent::Ident",
-                          "0": "Hash"
+                          "0": "stable_hash"
                         },
-                        "is_object": false,
-                        "loc": null
-                      },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "hash",
                         "loc": null
                       },
                       "loc": null
@@ -324,19 +516,13 @@
                   "value": {
                     "type": "Expr::Apply",
                     "func": {
-                      "type": "Expr::Method",
-                      "type_name": {
-                        "type": "TypeName",
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
                         "name": {
                           "type": "LongIdent::Ident",
-                          "0": "Hash"
+                          "0": "stable_hash"
                         },
-                        "is_object": false,
-                        "loc": null
-                      },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "hash",
                         "loc": null
                       },
                       "loc": null
@@ -392,19 +578,13 @@
                   "value": {
                     "type": "Expr::Apply",
                     "func": {
-                      "type": "Expr::Method",
-                      "type_name": {
-                        "type": "TypeName",
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
                         "name": {
                           "type": "LongIdent::Ident",
-                          "0": "Hash"
+                          "0": "stable_hash"
                         },
-                        "is_object": false,
-                        "loc": null
-                      },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "hash",
                         "loc": null
                       },
                       "loc": null
@@ -460,19 +640,13 @@
                   "value": {
                     "type": "Expr::Apply",
                     "func": {
-                      "type": "Expr::Method",
-                      "type_name": {
-                        "type": "TypeName",
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
                         "name": {
                           "type": "LongIdent::Ident",
-                          "0": "Hash"
+                          "0": "stable_hash"
                         },
-                        "is_object": false,
-                        "loc": null
-                      },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "hash",
                         "loc": null
                       },
                       "loc": null
@@ -528,19 +702,13 @@
                   "value": {
                     "type": "Expr::Apply",
                     "func": {
-                      "type": "Expr::Method",
-                      "type_name": {
-                        "type": "TypeName",
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
                         "name": {
                           "type": "LongIdent::Ident",
-                          "0": "Hash"
+                          "0": "stable_hash"
                         },
-                        "is_object": false,
-                        "loc": null
-                      },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "hash",
                         "loc": null
                       },
                       "loc": null
@@ -596,19 +764,13 @@
                   "value": {
                     "type": "Expr::Apply",
                     "func": {
-                      "type": "Expr::Method",
-                      "type_name": {
-                        "type": "TypeName",
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
                         "name": {
                           "type": "LongIdent::Ident",
-                          "0": "Hash"
+                          "0": "stable_hash"
                         },
-                        "is_object": false,
-                        "loc": null
-                      },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "hash",
                         "loc": null
                       },
                       "loc": null
@@ -671,19 +833,13 @@
                   "value": {
                     "type": "Expr::Apply",
                     "func": {
-                      "type": "Expr::Method",
-                      "type_name": {
-                        "type": "TypeName",
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
                         "name": {
                           "type": "LongIdent::Ident",
-                          "0": "Hash"
+                          "0": "stable_hash"
                         },
-                        "is_object": false,
-                        "loc": null
-                      },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "hash",
                         "loc": null
                       },
                       "loc": null
@@ -740,19 +896,13 @@
                 "value": {
                   "type": "Expr::Apply",
                   "func": {
-                    "type": "Expr::Method",
-                    "type_name": {
-                      "type": "TypeName",
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
                       "name": {
                         "type": "LongIdent::Ident",
-                        "0": "Hash"
+                        "0": "stable_hash"
                       },
-                      "is_object": false,
-                      "loc": null
-                    },
-                    "method_name": {
-                      "type": "Label",
-                      "name": "hash",
                       "loc": null
                     },
                     "loc": null

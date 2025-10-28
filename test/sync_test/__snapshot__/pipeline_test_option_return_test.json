@@ -102,7 +102,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "Vector"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "length",
@@ -212,7 +220,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "Vector"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "op_get",

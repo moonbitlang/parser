@@ -508,7 +508,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "T_类型"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "打印",
@@ -1174,7 +1182,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "T_测试枚举"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "to_string",

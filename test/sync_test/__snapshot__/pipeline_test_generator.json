@@ -743,7 +743,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "Generator"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "produce_value",
@@ -1057,7 +1065,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "Generator"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "next",
@@ -1217,7 +1233,15 @@
       "type": "Impl::TopFuncDef",
       "fun_decl": {
         "type": "FunDecl",
-        "type_name": null,
+        "type_name": {
+          "type": "TypeName",
+          "name": {
+            "type": "LongIdent::Ident",
+            "0": "Generator"
+          },
+          "is_object": false,
+          "loc": null
+        },
         "name": {
           "type": "Binder",
           "name": "iter",

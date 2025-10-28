@@ -105,9 +105,8 @@
               "constr_id": {
                 "type": "ConstrId",
                 "id": {
-                  "type": "LongIdent::Dot",
-                  "pkg": "array",
-                  "id": "View"
+                  "type": "LongIdent::Ident",
+                  "0": "ArrayView"
                 },
                 "loc": null
               },
