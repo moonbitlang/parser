@@ -10,7 +10,7 @@ test "attribute" {
   inspect(
     attr,
     content=(
-      #|{loc: -0:1-0:1, raw: "#qual.name(a,b,c)", parsed: Some(Apply(qual.name, @list.of([Expr(Ident(a)), Expr(Ident(b)), Expr(Ident(c))])))}
+      #|{loc: -0:1-0:1, raw: "#qual.name(a,b,c)", parsed: Some(Apply(qual.name, @list.from_array([Expr(Ident(a)), Expr(Ident(b)), Expr(Ident(c))])))}
     ),
   )
   let attr = Attribute::new(
@@ -20,7 +20,7 @@ test "attribute" {
   inspect(
     attr,
     content=(
-      #|{loc: -0:1-0:1, raw: "#qual.name(label1=abc, label2=cde)", parsed: Some(Apply(qual.name, @list.of([Labeled("label1", Ident(abc)), Labeled("label2", Ident(cde))])))}
+      #|{loc: -0:1-0:1, raw: "#qual.name(label1=abc, label2=cde)", parsed: Some(Apply(qual.name, @list.from_array([Labeled("label1", Ident(abc)), Labeled("label2", Ident(cde))])))}
     ),
   )
   let attr = Attribute::new(
@@ -30,7 +30,7 @@ test "attribute" {
   inspect(
     attr,
     content=(
-      #|{loc: -0:1-0:1, raw: "#qual.name(f(false), g(true))", parsed: Some(Apply(qual.name, @list.of([Expr(Apply(f, @list.of([Expr(Bool(false))]))), Expr(Apply(g, @list.of([Expr(Bool(true))])))])))}
+      #|{loc: -0:1-0:1, raw: "#qual.name(f(false), g(true))", parsed: Some(Apply(qual.name, @list.from_array([Expr(Apply(f, @list.from_array([Expr(Bool(false))]))), Expr(Apply(g, @list.from_array([Expr(Bool(true))])))])))}
     ),
   )
   let attr = Attribute::new(
@@ -40,7 +40,7 @@ test "attribute" {
   inspect(
     attr,
     content=(
-      #|{loc: -0:1-0:1, raw: "#qual.name(\"abcdef\", g(true))", parsed: Some(Apply(qual.name, @list.of([Expr(String("abcdef")), Expr(Apply(g, @list.of([Expr(Bool(true))])))])))}
+      #|{loc: -0:1-0:1, raw: "#qual.name(\"abcdef\", g(true))", parsed: Some(Apply(qual.name, @list.from_array([Expr(String("abcdef")), Expr(Apply(g, @list.from_array([Expr(Bool(true))])))])))}
     ),
   )
   let attr = Attribute::new(loc=dummy_loc, ("qual", Some("name"), ""))

@@ -232,7 +232,7 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
       state.sepby1(delim=TK_PLUS, fn(state) {
         let loc = state.peek_location()
         let trait_ = state.parse_qual_luident()
-        { trait_, loc }
+        @syntax.TypeVarConstraint::{ trait_, loc }
       })
       |> @list.from_array
     },

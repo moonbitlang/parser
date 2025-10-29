@@ -44,10 +44,10 @@ priv suberror YYObj_StringLiteral StringLiteral
 priv suberror YYObj__String__String___String_ (String, String?, String)
 
 ///|
-typealias (YYSymbol) -> YYDecision as YYState
+type YYState = (YYSymbol) -> YYDecision
 
 ///|
-typealias (Position, ArrayView[(YYObj, Position, Position)]) -> YYObj as YYAction
+type YYAction = (Position, ArrayView[(YYObj, Position, Position)]) -> YYObj
 
 ///|
 priv enum YYDecision {

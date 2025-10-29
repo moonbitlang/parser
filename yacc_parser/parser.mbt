@@ -453,10 +453,10 @@ priv suberror YYObj__List_Attribute___Visibility__String__Location__List_TypeDec
 )
 
 ///|
-typealias (YYSymbol) -> YYDecision as YYState
+type YYState = (YYSymbol) -> YYDecision
 
 ///|
-typealias (Position, ArrayView[(YYObj, Position, Position)]) -> YYObj as YYAction
+type YYAction = (Position, ArrayView[(YYObj, Position, Position)]) -> YYObj
 
 ///|
 priv enum YYDecision {

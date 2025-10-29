@@ -196,13 +196,13 @@ priv suberror YYObj__String__Location_ (String, Location)
 priv suberror YYObj__String__Option_String___String_ (String, String?, String)
 
 ///|
-typealias (YYSymbol) -> YYDecision as YYState
+type YYState = (YYSymbol) -> YYDecision
 
 ///|
-typealias (
+type YYAction = (
   @basic.Position,
   ArrayView[(YYObj, @basic.Position, @basic.Position)],
-) -> YYObj as YYAction
+) -> YYObj
 
 ///|
 priv enum YYDecision {
