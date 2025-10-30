@@ -118,7 +118,10 @@ pub impl ToJson for Token with to_json(self) {
     UIDENT(str) => ["UIDENT", str]
     LIDENT(str) => ["LIDENT", str]
     ATTRIBUTE((id, dot_id, raw_payload)) =>
-      ["ATTRIBUTE", { "id": id, "dot_id": dot_id, "raw_payload": raw_payload }]
+      [
+        "ATTRIBUTE",
+        { "id": id, "dot_id": dot_id.unwrap_or(""), "raw_payload": raw_payload },
+      ]
     INTERP(interp) => ["INTERP", interp.to_string_repr()]
     MULTILINE_INTERP(interp) => ["MULTILINE_INTERP", interp.to_string_repr()]
     MULTILINE_STRING(str) => ["MULTILINE_STRING", str]
