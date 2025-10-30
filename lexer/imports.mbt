@@ -1,8 +1,13 @@
 ///|
-typealias @tokens.Token
+using @tokens {type Token}
 
 ///|
-typealias @basic.(Position, Location)
+using @basic {type Position, type Location}
 
 ///|
-typealias @tokens.(Comment, CommentKind, InterpElem, InterpSource)
+using @tokens {
+  type Comment,
+  type CommentKind,
+  type InterpElem,
+  type InterpSource
+}

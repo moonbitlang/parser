@@ -1,18 +1,18 @@
 ///|
-typealias @list.List
+using @list {type List}
 
 ///|
-typealias @basic.(Location, Position)
+using @basic {type Location, type Position}
 
 ///|
-typealias @tokens.(Token, TokenKind)
+using @tokens {type Token, type TokenKind}
 
 ///|
-typealias @tokens.(
-  StringLiteral,
-  InterpLiteral,
-  ByteLiteral,
-  BytesLiteral,
-  CharLiteral,
-  Comment
-)
+using @tokens {
+  type StringLiteral,
+  type InterpLiteral,
+  type ByteLiteral,
+  type BytesLiteral,
+  type CharLiteral,
+  type Comment
+}

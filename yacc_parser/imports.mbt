@@ -1,74 +1,79 @@
 ///|
-typealias @basic.(Position, Location)
+using @basic {type Position, type Location}
 
 ///|
-typealias @tokens.(Comment, CharLiteral, StringLiteral, InterpLiteral)
+using @tokens {
+  type Comment,
+  type CharLiteral,
+  type StringLiteral,
+  type InterpLiteral
+}
 
 ///|
-typealias @tokens.(Token, TokenKind)
+using @tokens {type Token, type TokenKind}
 
 ///|
 /// Import AST types 
-typealias @syntax.(
-  Constant,
-  Case,
-  Func,
-  Type,
-  ErrorType,
-  ArrayPattern,
-  ArrayPatterns,
-  Label,
-  Binder,
-  ConstrPatArg,
-  Pattern,
-  FieldDef,
-  FieldDecl,
-  FieldPat,
-  Parameter,
-  ConstrParam,
-  ConstrDecl,
-  TypeName,
-  TrailingMark,
-  MapPatElem,
-  DotDotBinder,
-  SpreadableElem,
-  MapExprElem,
-  MultilineStringElem,
-  TypeVarConstraint,
-  ApplyAttr,
-  Constructor,
-  ConstrName,
-  Visibility,
-  Impl,
-  TypeVarBinder,
-  TypeDecl,
-  TypeDeclBinder,
-  DerivingDirective,
-  LongIdent,
-  Argument,
-  Expr,
-  ArgumentKind,
-  Var,
-  Accessor,
-  ArrowFnParam,
-  LocalTypeDecl,
-  DeclBody,
-  AliasTarget,
-  TraitMethodDecl,
-  MultiArgCase,
-  DocString,
-  FunDecl,
-  ExceptionDecl,
-  TraitDecl,
-  FieldName,
-  ConstrId
-)
+using @syntax {
+  type Constant,
+  type Case,
+  type Func,
+  type Type,
+  type ErrorType,
+  type ArrayPattern,
+  type ArrayPatterns,
+  type Label,
+  type Binder,
+  type ConstrPatArg,
+  type Pattern,
+  type FieldDef,
+  type FieldDecl,
+  type FieldPat,
+  type Parameter,
+  type ConstrParam,
+  type ConstrDecl,
+  type TypeName,
+  type TrailingMark,
+  type MapPatElem,
+  type DotDotBinder,
+  type SpreadableElem,
+  type MapExprElem,
+  type MultilineStringElem,
+  type TypeVarConstraint,
+  type ApplyAttr,
+  type Constructor,
+  type ConstrName,
+  type Visibility,
+  type Impl,
+  type TypeVarBinder,
+  type TypeDecl,
+  type TypeDeclBinder,
+  type DerivingDirective,
+  type LongIdent,
+  type Argument,
+  type Expr,
+  type ArgumentKind,
+  type Var,
+  type Accessor,
+  type ArrowFnParam,
+  type LocalTypeDecl,
+  type DeclBody,
+  type AliasTarget,
+  type TraitMethodDecl,
+  type MultiArgCase,
+  type DocString,
+  type FunDecl,
+  type ExceptionDecl,
+  type TraitDecl,
+  type FieldName,
+  type ConstrId
+}
 
 ///|
-typealias @attribute.Attribute
+using @attribute {type Attribute}
 
 ///|
-fnalias @syntax.(
+using @syntax {
   make_interps,
   make_int,
   make_double,
@@ -79,10 +84,10 @@ fnalias @syntax.(
   make_uplus,
   make_uminus,
   make_unot
-)
+}
 
 ///|
-typealias @util.Statement
+using @util {type Statement}
 
 ///|
-typealias @list.List
+using @list {type List}

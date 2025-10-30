@@ -1,14 +1,14 @@
 ///|
-typealias @tokens.(
-  ByteLiteral,
-  BytesLiteral,
-  CharLiteral,
-  StringLiteral,
-  InterpSource
-)
+using @tokens {
+  type ByteLiteral,
+  type BytesLiteral,
+  type CharLiteral,
+  type StringLiteral,
+  type InterpSource
+}
 
 ///|
-typealias @basic.(Position, Location)
+using @basic {type Position, type Location}
 
 ///|
-typealias @attribute.Attribute
+using @attribute {type Attribute}

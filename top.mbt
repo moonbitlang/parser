@@ -1,11 +1,11 @@
 ///|
-typealias @tokens.Comment
+using @tokens {type Comment}
 
 ///|
-typealias @list.List
+using @list {type List}
 
 ///|
-typealias @basic.(Position, Report, Location)
+using @basic {type Position, type Report, type Location}
 
 ///|
 pub(all) enum Parser {

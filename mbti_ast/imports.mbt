@@ -1,19 +1,19 @@
 ///|
-typealias @basic.Location
+using @basic {type Location}
 
 ///|
-pub typealias @syntax.(
-  Visibility,
-  Constant,
-  Type,
-  ErrorType,
-  TypeDesc,
-  FieldDecl,
-  FieldName,
-  ConstrDecl,
-  ConstrId,
-  ConstrName,
-  ConstrParam,
-  LongIdent as QualifiedIdent,
-  Label
-)
+pub using @syntax {
+  type Visibility,
+  type Constant,
+  type Type,
+  type ErrorType,
+  type TypeDesc,
+  type FieldDecl,
+  type FieldName,
+  type ConstrDecl,
+  type ConstrId,
+  type ConstrName,
+  type ConstrParam,
+  type LongIdent as QualifiedIdent,
+  type Label
+}

@@ -4648,7 +4648,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr(
 }
 
 ///|
-fn[T] each(self : T?, f : (T) -> Unit raise?) -> Unit raise? {
+fn[T] Option::each(self : T?, f : (T) -> Unit raise?) -> Unit raise? {
   match self {
     Some(t) => f(t)
     None => ()

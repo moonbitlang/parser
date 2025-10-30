@@ -1,5 +1,5 @@
 ///|
-pub typealias (Token, @basic.Position, @basic.Position) as Triple
+pub type Triple = (Token, @basic.Position, @basic.Position)
 
 ///|
-pub typealias Array[Triple] as Triples
+pub type Triples = Array[Triple]
