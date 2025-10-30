@@ -122,14 +122,6 @@ fn lex_tokens(
     // Character literals - unicode escape with braces
     ("'" ("\\u[{][0-9a-fA-F]+[}]" as raw) "'", rest) => {
       let char_text = raw.to_string()
-      let hex = try! raw[2:-1] // Remove the 'u{' and '}'
-      if char_for_hex_escape(hex) is None {
-        env.add_lexing_error(
-          start=env.calc_offset(input, base~),
-          end=env.calc_offset(rest, base~),
-          InvalidEscapeSequence(char_text),
-        )
-      }
       env.add_token_with_loc(
         CHAR(char_text),
         start=env.calc_offset(input, base~),
@@ -592,7 +584,7 @@ fn lex_tokens(
     ("\.\(", rest) => {
       env.add_token_with_loc(
         @tokens.Token::DOT_LPAREN,
-        start=env.calc_offset(input, base~) + 1,
+        start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
@@ -1037,29 +1029,9 @@ fn lex_string(
         process_string(rest, start_pos)
       }
 
-      // Invalid hex escape
-      ("\\x.." as raw, rest) => {
-        env.add_lexing_error(
-          start=env.calc_offset(base~, input),
-          end=env.calc_offset(base~, rest),
-          InvalidEscapeSequence(raw.to_string()),
-        )
-        process_string(rest, start_pos)
-      }
-
       // Octal escape
       ("\\o[0-3][0-7]{2}" as raw, rest) => {
         string_repr_buf.write_string(raw.to_string())
-        process_string(rest, start_pos)
-      }
-
-      // Invalid octal escape
-      ("\\o..." as raw, rest) => {
-        env.add_lexing_error(
-          start=env.calc_offset(base~, input),
-          end=env.calc_offset(base~, rest),
-          InvalidEscapeSequence(raw.to_string()),
-        )
         process_string(rest, start_pos)
       }
 
@@ -1072,16 +1044,6 @@ fn lex_string(
       // Unicode escape with braces
       ("\\u[{][0-9a-fA-F]+[}]" as raw, rest) => {
         string_repr_buf.write_string(raw.to_string())
-        process_string(rest, start_pos)
-      }
-
-      // Invalid unicode escape with braces
-      ("\\u[{][^}\r\n]*[}]" as raw, rest) => {
-        env.add_lexing_error(
-          start=env.calc_offset(base~, input),
-          end=env.calc_offset(base~, rest),
-          InvalidEscapeSequence(raw.to_string()),
-        )
         process_string(rest, start_pos)
       }
 
@@ -1121,23 +1083,9 @@ fn lex_string(
           string_repr_buf.reset()
           process_string(rest, env.calc_offset(base~, rest))
         } else {
-          env.add_lexing_error(
-            start=env.calc_offset(base~, input),
-            end=env.calc_offset(base~, rest),
-            InvalidEscapeSequence(raw.to_string()),
-          )
+          string_repr_buf.write_string(raw.to_string())
           process_string(rest, env.calc_offset(base~, rest))
         }
-
-      // Invalid escape
-      ("\\." as raw, rest) => {
-        env.add_lexing_error(
-          start=env.calc_offset(base~, input),
-          end=env.calc_offset(base~, rest),
-          InvalidEscapeSequence(raw.to_string()),
-        )
-        process_string(rest, start_pos)
-      }
 
       // EOF
       "" => {

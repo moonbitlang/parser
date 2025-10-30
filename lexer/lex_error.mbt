@@ -7,7 +7,6 @@ pub enum LexicalError {
   InterpInvalidComment
   InterpInvalidAttribute
   InterpMissingExpression
-  InvalidEscapeSequence(String)
   InvalidDotInt(String)
   InvalidByteLiteral(String)
   Reserved_keyword(String)
@@ -18,7 +17,6 @@ pub impl Show for LexicalError with output(self, logger) {
   logger.write_string(
     match self {
       InvalidDotInt(s) => "invalid byte literal: \{s}"
-      InvalidEscapeSequence(seq) => "invalid escape sequence: \{seq}"
       InterpMissingExpression => "missing expression in string interpolation"
       InterpInvalidAttribute => "invalid attribute in string interpolation"
       InterpInvalidComment => "invalid comment in string interpolation"
