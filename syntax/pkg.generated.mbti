@@ -87,14 +87,12 @@ pub(all) enum Accessor {
   Index(tuple_index~ : Int, loc~ : @basic.Location)
   Newtype(loc~ : @basic.Location)
 }
-fn Accessor::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Accessor
 
 pub(all) struct AliasTarget {
   binder : Binder
   target : Label?
 }
-fn AliasTarget::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for AliasTarget
 
 pub(all) enum ApplyAttr {
@@ -102,14 +100,12 @@ pub(all) enum ApplyAttr {
   Exclamation
   Question
 }
-fn ApplyAttr::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ApplyAttr
 
 pub(all) struct Argument {
   value : Expr
   kind : ArgumentKind
 }
-fn Argument::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Argument
 
 pub(all) enum ArgumentKind {
@@ -119,7 +115,6 @@ pub(all) enum ArgumentKind {
   LabelledOption(label~ : Label, question_loc~ : @basic.Location)
   LabelledOptionPun(label~ : Label, question_loc~ : @basic.Location)
 }
-fn ArgumentKind::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ArgumentKind
 
 pub(all) enum ArrayPattern {
@@ -128,14 +123,12 @@ pub(all) enum ArrayPattern {
   BytesSpread(bytes~ : String, loc~ : @basic.Location)
   ConstSpread(binder~ : Binder, pkg~ : String?, loc~ : @basic.Location)
 }
-fn ArrayPattern::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ArrayPattern
 
 pub(all) enum ArrayPatterns {
   Closed(@list.List[ArrayPattern])
   Open(@list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder)
 }
-fn ArrayPatterns::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ArrayPatterns
 
 pub(all) enum ArrowFnParam {
@@ -147,7 +140,6 @@ pub(all) struct Binder {
   name : String
   loc : @basic.Location
 }
-fn Binder::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Binder
 
 pub(all) struct Case {
@@ -155,7 +147,6 @@ pub(all) struct Case {
   guard_ : Expr?
   body : Expr
 }
-fn Case::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Case
 
 pub(all) enum Constant {
@@ -172,7 +163,6 @@ pub(all) enum Constant {
   String(String)
   BigInt(String)
 }
-fn Constant::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Constant
 
 pub(all) struct ConstrDecl {
@@ -183,21 +173,18 @@ pub(all) struct ConstrDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
-fn ConstrDecl::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ConstrDecl
 
 pub(all) struct ConstrId {
   id : LongIdent
   loc : @basic.Location
 }
-fn ConstrId::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ConstrId
 
 pub(all) struct ConstrName {
   name : String
   loc : @basic.Location
 }
-fn ConstrName::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ConstrName
 
 pub(all) struct ConstrParam {
@@ -205,14 +192,12 @@ pub(all) struct ConstrParam {
   mut_ : Bool
   label : Label?
 }
-fn ConstrParam::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ConstrParam
 
 pub(all) struct ConstrPatArg {
   pat : Pattern
   kind : ArgumentKind
 }
-fn ConstrPatArg::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ConstrPatArg
 
 pub(all) struct Constructor {
@@ -220,7 +205,6 @@ pub(all) struct Constructor {
   extra_info : ConstructorExtraInfo
   loc : @basic.Location
 }
-fn Constructor::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Constructor
 
 pub(all) enum ConstructorExtraInfo {
@@ -228,14 +212,12 @@ pub(all) enum ConstructorExtraInfo {
   Package(String)
   NoExtraInfo
 }
-fn ConstructorExtraInfo::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ConstructorExtraInfo
 
 pub(all) enum DeclBody {
   DeclBody(local_types~ : @list.List[LocalTypeDecl], expr~ : Expr)
   DeclStubs(FuncStubs)
 }
-fn DeclBody::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for DeclBody
 
 pub(all) struct DerivingDirective {
@@ -243,7 +225,6 @@ pub(all) struct DerivingDirective {
   args : @list.List[Argument]
   loc : @basic.Location
 }
-fn DerivingDirective::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for DerivingDirective
 
 pub(all) struct DocString {
@@ -251,7 +232,6 @@ pub(all) struct DocString {
   loc : @basic.Location
 }
 fn DocString::empty() -> Self
-fn DocString::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for DocString
 
 pub(all) enum DotDotBinder {
@@ -260,14 +240,12 @@ pub(all) enum DotDotBinder {
   BinderAs(Binder)
   Binder(Binder)
 }
-fn DotDotBinder::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for DotDotBinder
 
 pub(all) enum EmbeddedCode {
   CodeString(String)
   CodeMultilineString(@list.List[String])
 }
-fn EmbeddedCode::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for EmbeddedCode
 
 pub(all) enum ErrorType {
@@ -277,7 +255,6 @@ pub(all) enum ErrorType {
   Noraise(loc~ : @basic.Location)
   MaybeError(ty~ : Type)
 }
-fn ErrorType::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ErrorType
 
 pub(all) enum ExceptionDecl {
@@ -285,7 +262,6 @@ pub(all) enum ExceptionDecl {
   SinglePayload(Type)
   EnumPayload(@list.List[ConstrDecl])
 }
-fn ExceptionDecl::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for ExceptionDecl
 
 pub(all) enum Expr {
@@ -343,7 +319,6 @@ pub(all) enum Expr {
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
 }
 fn Expr::loc(Self) -> @basic.Location
-fn Expr::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Expr
 
 pub(all) struct FieldDecl {
@@ -355,7 +330,6 @@ pub(all) struct FieldDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
-fn FieldDecl::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for FieldDecl
 
 pub(all) struct FieldDef {
@@ -364,14 +338,12 @@ pub(all) struct FieldDef {
   is_pun : Bool
   loc : @basic.Location
 }
-fn FieldDef::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for FieldDef
 
 pub(all) struct FieldName {
   label : String
   loc : @basic.Location
 }
-fn FieldName::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for FieldName
 
 pub(all) struct FieldPat {
@@ -380,7 +352,6 @@ pub(all) struct FieldPat {
   is_pun : Bool
   loc : @basic.Location
 }
-fn FieldPat::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for FieldPat
 
 pub(all) enum FnKind {
@@ -388,7 +359,6 @@ pub(all) enum FnKind {
   Matrix
   Arrow
 }
-fn FnKind::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for FnKind
 
 pub(all) struct FunDecl {
@@ -405,28 +375,24 @@ pub(all) struct FunDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
-fn FunDecl::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for FunDecl
 
 pub(all) enum Func {
   Lambda(parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : Bool, loc~ : @basic.Location)
   Match(cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : Bool, fn_loc~ : @basic.Location, loc~ : @basic.Location)
 }
-fn Func::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Func
 
 pub(all) enum FuncStubs {
   Import(module_name~ : String, func_name~ : String)
   Embedded(language~ : String?, code~ : EmbeddedCode)
 }
-fn FuncStubs::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for FuncStubs
 
 pub(all) enum Group {
   Brace
   Paren
 }
-fn Group::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Group
 
 pub(all) enum Hole {
@@ -434,7 +400,6 @@ pub(all) enum Hole {
   Incomplete
   Todo
 }
-fn Hole::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Hole
 
 pub(all) enum Impl {
@@ -452,7 +417,6 @@ pub(all) enum Impl {
   TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString)
 }
 fn Impl::loc(Self) -> @basic.Location
-fn Impl::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Impl
 
 pub(all) enum InterpElem {
@@ -460,7 +424,6 @@ pub(all) enum InterpElem {
   Expr(expr~ : Expr, loc~ : @basic.Location)
   Source(@tokens.InterpSource)
 }
-fn InterpElem::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for InterpElem
 
 pub(all) enum InterpolationComponent {
@@ -469,211 +432,14 @@ pub(all) enum InterpolationComponent {
 }
 
 pub struct IterVisitorBase[T](T)
-fn[T : IterVisitor] IterVisitorBase::base(Self[T]) -> Self[Self[T]] // from trait `IterVisitor`
 #deprecated
 fn[T] IterVisitorBase::inner(Self[T]) -> T
-fn[T : IterVisitor] IterVisitorBase::visit_Accessor(Self[T], Accessor) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Accessor_Index(Self[T], tuple_index~ : Int, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Accessor_Label(Self[T], Label) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Accessor_Newtype(Self[T], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_AliasTarget(Self[T], AliasTarget) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ApplyAttr(Self[T], ApplyAttr) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Argument(Self[T], Argument) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArgumentKind(Self[T], ArgumentKind) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArgumentKind_Labelled(Self[T], Label) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArgumentKind_LabelledOption(Self[T], label~ : Label, question_loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArgumentKind_LabelledOptionPun(Self[T], label~ : Label, question_loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArgumentKind_LabelledPun(Self[T], Label) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern(Self[T], ArrayPattern) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern_BytesSpread(Self[T], bytes~ : String, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern_ConstSpread(Self[T], binder~ : Binder, pkg~ : String?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern_Pattern(Self[T], Pattern) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArrayPattern_StringSpread(Self[T], str~ : String, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArrayPatterns(Self[T], ArrayPatterns) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArrayPatterns_Closed(Self[T], @list.List[ArrayPattern]) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ArrayPatterns_Open(Self[T], @list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Binder(Self[T], Binder) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Case(Self[T], Case) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Constant(Self[T], Constant) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ConstrDecl(Self[T], ConstrDecl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ConstrId(Self[T], ConstrId) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ConstrName(Self[T], ConstrName) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ConstrParam(Self[T], ConstrParam) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ConstrPatArg(Self[T], ConstrPatArg) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Constructor(Self[T], Constructor) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ConstructorExtraInfo(Self[T], ConstructorExtraInfo) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ConstructorExtraInfo_Package(Self[T], String) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ConstructorExtraInfo_TypeName(Self[T], TypeName) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_DeclBody(Self[T], DeclBody) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_DeclBody_DeclBody(Self[T], local_types~ : @list.List[LocalTypeDecl], expr~ : Expr) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_DeclBody_DeclStubs(Self[T], FuncStubs) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_DerivingDirective(Self[T], DerivingDirective) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_DotDotBinder(Self[T], DotDotBinder) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_DotDotBinder_Binder(Self[T], Binder) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_DotDotBinder_BinderAs(Self[T], Binder) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_EmbeddedCode(Self[T], EmbeddedCode) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_EmbeddedCode_CodeMultilineString(Self[T], @list.List[String]) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_EmbeddedCode_CodeString(Self[T], String) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ErrorType(Self[T], ErrorType) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ErrorType_DefaultErrorType(Self[T], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ErrorType_ErrorType(Self[T], ty~ : Type) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ErrorType_MaybeError(Self[T], ty~ : Type) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ExceptionDecl(Self[T], ExceptionDecl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ExceptionDecl_EnumPayload(Self[T], @list.List[ConstrDecl]) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_ExceptionDecl_SinglePayload(Self[T], Type) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr(Self[T], Expr) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Apply(Self[T], func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Array(Self[T], exprs~ : @list.List[Expr], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_ArrayAugmentedSet(Self[T], op~ : Var, array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_ArrayGet(Self[T], array~ : Expr, index~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_ArrayGetSlice(Self[T], array~ : Expr, start_index~ : Expr?, end_index~ : Expr?, index_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_ArraySet(Self[T], array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_ArraySpread(Self[T], elems~ : @list.List[SpreadableElem], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_As(Self[T], expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Assign(Self[T], var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Break(Self[T], arg~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Constant(Self[T], c~ : Constant, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Constr(Self[T], constr~ : Constructor, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Constraint(Self[T], expr~ : Expr, ty~ : Type, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Continue(Self[T], args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Defer(Self[T], expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_DotApply(Self[T], self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Field(Self[T], record~ : Expr, accessor~ : Accessor, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_For(Self[T], binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_ForEach(Self[T], binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Function(Self[T], func~ : Func, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Group(Self[T], expr~ : Expr, group~ : Group, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Guard(Self[T], cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Hole(Self[T], loc~ : @basic.Location, kind~ : Hole) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Ident(Self[T], id~ : Var, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_If(Self[T], cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Infix(Self[T], op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Interp(Self[T], elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Is(Self[T], expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Let(Self[T], pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_LetAnd(Self[T], bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_LetFn(Self[T], name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_LetMut(Self[T], binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_LetRec(Self[T], bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Loop(Self[T], arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Map(Self[T], elems~ : @list.List[MapExprElem], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Match(Self[T], expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Method(Self[T], type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_MultilineString(Self[T], elems~ : @list.List[MultilineStringElem], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Mutate(Self[T], record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Pipe(Self[T], lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Raise(Self[T], err_value~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Record(Self[T], type_name~ : TypeName?, fields~ : @list.List[FieldDef], trailing~ : TrailingMark, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_RecordUpdate(Self[T], type_name~ : TypeName?, record~ : Expr, fields~ : @list.List[FieldDef], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Return(Self[T], return_value~ : Expr?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Sequence(Self[T], exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_StaticAssert(Self[T], asserts~ : @list.List[StaticAssertion], body~ : Expr) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Try(Self[T], body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_TryOperator(Self[T], body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Tuple(Self[T], exprs~ : @list.List[Expr], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Unary(Self[T], op~ : Var, expr~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_Unit(Self[T], loc~ : @basic.Location, faked~ : Bool) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Expr_While(Self[T], loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_FieldDecl(Self[T], FieldDecl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_FieldDef(Self[T], FieldDef) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_FieldName(Self[T], FieldName) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_FieldPat(Self[T], FieldPat) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_FnKind(Self[T], FnKind) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_FunDecl(Self[T], FunDecl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Func(Self[T], Func) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_FuncStubs(Self[T], FuncStubs) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_FuncStubs_Embedded(Self[T], language~ : String?, code~ : EmbeddedCode) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_FuncStubs_Import(Self[T], module_name~ : String, func_name~ : String) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Func_Lambda(Self[T], parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : Bool, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Func_Match(Self[T], cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : Bool, fn_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Group(Self[T], Group) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Hole(Self[T], Hole) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl(Self[T], Impl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopBatchTraitAlias(Self[T], pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopBatchTypeAlias(Self[T], pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopExpr(Self[T], expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopFuncAlias(Self[T], pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopFuncDef(Self[T], fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopImpl(Self[T], self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopImplRelation(Self[T], self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopLetDef(Self[T], binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopTest(Self[T], expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopTrait(Self[T], TraitDecl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopTypeDef(Self[T], TypeDecl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Impl_TopView(Self[T], quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_InterpElem(Self[T], InterpElem) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_InterpElem_Expr(Self[T], expr~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_InterpElem_Literal(Self[T], repr~ : String, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_InterpElem_Source(Self[T], @tokens.InterpSource) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Label(Self[T], Label) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_LocalTypeDecl(Self[T], LocalTypeDecl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_LongIdent(Self[T], LongIdent) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_LongIdent_Dot(Self[T], pkg~ : String, id~ : String) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_LongIdent_Ident(Self[T], name~ : String) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_MapExprElem(Self[T], MapExprElem) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_MapPatElem(Self[T], MapPatElem) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_MultiArgCase(Self[T], MultiArgCase) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_MultilineStringElem(Self[T], MultilineStringElem) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_MultilineStringElem_Interp(Self[T], @list.List[InterpElem]) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_MultilineStringElem_String(Self[T], String) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Parameter(Self[T], Parameter) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Parameter_DiscardPositional(Self[T], ty~ : Type?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Parameter_Labelled(Self[T], binder~ : Binder, ty~ : Type?) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Parameter_Optional(Self[T], binder~ : Binder, default~ : Expr, ty~ : Type?) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Parameter_Positional(Self[T], binder~ : Binder, ty~ : Type?) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Parameter_QuestionOptional(Self[T], binder~ : Binder, ty~ : Type?) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern(Self[T], Pattern) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Alias(Self[T], pat~ : Pattern, alias_~ : Binder, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Any(Self[T], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Array(Self[T], pats~ : ArrayPatterns, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Constant(Self[T], c~ : Constant, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Constr(Self[T], constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Constraint(Self[T], pat~ : Pattern, ty~ : Type, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Map(Self[T], elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Or(Self[T], pat1~ : Pattern, pat2~ : Pattern, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Range(Self[T], lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Record(Self[T], fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_SpecialConstr(Self[T], binder~ : Binder, args~ : @list.List[ConstrPatArg], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Tuple(Self[T], pats~ : @list.List[Pattern], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Pattern_Var(Self[T], Binder) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_SpreadableElem(Self[T], SpreadableElem) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_SpreadableElem_Regular(Self[T], Expr) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_SpreadableElem_Spread(Self[T], expr~ : Expr, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_StaticAssertion(Self[T], StaticAssertion) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TrailingMark(Self[T], TrailingMark) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TraitDecl(Self[T], TraitDecl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TraitMethodDecl(Self[T], TraitMethodDecl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TryOperatorKind(Self[T], TryOperatorKind) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Type(Self[T], Type) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeDecl(Self[T], TypeDecl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeDeclBinder(Self[T], TypeDeclBinder) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeDesc(Self[T], TypeDesc) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeDesc_Alias(Self[T], Type) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeDesc_Error(Self[T], ExceptionDecl) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeDesc_Newtype(Self[T], Type) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeDesc_Record(Self[T], @list.List[FieldDecl]) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeDesc_TupleStruct(Self[T], @list.List[Type]) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeDesc_Variant(Self[T], @list.List[ConstrDecl]) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeName(Self[T], TypeName) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeVarBinder(Self[T], TypeVarBinder) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_TypeVarConstraint(Self[T], TypeVarConstraint) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Type_Any(Self[T], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Type_Arrow(Self[T], args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : Bool, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Type_Name(Self[T], constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Type_Object(Self[T], ConstrId) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Type_Option(Self[T], ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Type_Tuple(Self[T], tys~ : @list.List[Type], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Var(Self[T], Var) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Visibility(Self[T], Visibility) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Visibility_Priv(Self[T], loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
-fn[T : IterVisitor] IterVisitorBase::visit_Visibility_Pub(Self[T], attr~ : String?, loc~ : @basic.Location) -> Unit // from trait `IterVisitor`
 impl[T : IterVisitor] IterVisitor for IterVisitorBase[T]
 
 pub(all) struct Label {
   name : String
   loc : @basic.Location
 }
-fn Label::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Label
 
 pub(all) struct LocalTypeDecl {
@@ -682,7 +448,6 @@ pub(all) struct LocalTypeDecl {
   components : TypeDesc
   deriving : @list.List[DerivingDirective]
 }
-fn LocalTypeDecl::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for LocalTypeDecl
 
 pub(all) enum LongIdent {
@@ -690,7 +455,6 @@ pub(all) enum LongIdent {
   Dot(pkg~ : String, id~ : String)
 }
 fn LongIdent::dummy() -> Self
-fn LongIdent::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for LongIdent
 
 pub(all) struct MapExprElem {
@@ -699,7 +463,6 @@ pub(all) struct MapExprElem {
   key_loc : @basic.Location
   loc : @basic.Location
 }
-fn MapExprElem::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for MapExprElem
 
 pub(all) struct MapPatElem {
@@ -709,208 +472,11 @@ pub(all) struct MapPatElem {
   key_loc : @basic.Location
   loc : @basic.Location
 }
-fn MapPatElem::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for MapPatElem
 
 pub(all) struct MapVisitorBase[T](T)
-fn[T : MapVisitor] MapVisitorBase::base(Self[T]) -> Self[Self[T]] // from trait `MapVisitor`
 #deprecated
 fn[T] MapVisitorBase::inner(Self[T]) -> T
-fn[T : MapVisitor] MapVisitorBase::visit_Accessor(Self[T], Accessor) -> Accessor // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Accessor_Index(Self[T], tuple_index~ : Int, loc~ : @basic.Location) -> Accessor // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Accessor_Label(Self[T], Label) -> Accessor // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Accessor_Newtype(Self[T], loc~ : @basic.Location) -> Accessor // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_AliasTarget(Self[T], AliasTarget) -> AliasTarget // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ApplyAttr(Self[T], ApplyAttr) -> ApplyAttr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Argument(Self[T], Argument) -> Argument // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArgumentKind(Self[T], ArgumentKind) -> ArgumentKind // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArgumentKind_Labelled(Self[T], Label) -> ArgumentKind // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArgumentKind_LabelledOption(Self[T], label~ : Label, question_loc~ : @basic.Location) -> ArgumentKind // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArgumentKind_LabelledOptionPun(Self[T], label~ : Label, question_loc~ : @basic.Location) -> ArgumentKind // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArgumentKind_LabelledPun(Self[T], Label) -> ArgumentKind // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern(Self[T], ArrayPattern) -> ArrayPattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern_BytesSpread(Self[T], bytes~ : String, loc~ : @basic.Location) -> ArrayPattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern_ConstSpread(Self[T], binder~ : Binder, pkg~ : String?, loc~ : @basic.Location) -> ArrayPattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern_Pattern(Self[T], Pattern) -> ArrayPattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArrayPattern_StringSpread(Self[T], str~ : String, loc~ : @basic.Location) -> ArrayPattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArrayPatterns(Self[T], ArrayPatterns) -> ArrayPatterns // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArrayPatterns_Closed(Self[T], @list.List[ArrayPattern]) -> ArrayPatterns // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ArrayPatterns_Open(Self[T], @list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder) -> ArrayPatterns // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Binder(Self[T], Binder) -> Binder // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Case(Self[T], Case) -> Case // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Constant(Self[T], Constant) -> Constant // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ConstrDecl(Self[T], ConstrDecl) -> ConstrDecl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ConstrId(Self[T], ConstrId) -> ConstrId // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ConstrName(Self[T], ConstrName) -> ConstrName // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ConstrParam(Self[T], ConstrParam) -> ConstrParam // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ConstrPatArg(Self[T], ConstrPatArg) -> ConstrPatArg // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Constructor(Self[T], Constructor) -> Constructor // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ConstructorExtraInfo(Self[T], ConstructorExtraInfo) -> ConstructorExtraInfo // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ConstructorExtraInfo_Package(Self[T], String) -> ConstructorExtraInfo // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ConstructorExtraInfo_TypeName(Self[T], TypeName) -> ConstructorExtraInfo // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_DeclBody(Self[T], DeclBody) -> DeclBody // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_DeclBody_DeclBody(Self[T], local_types~ : @list.List[LocalTypeDecl], expr~ : Expr) -> DeclBody // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_DeclBody_DeclStubs(Self[T], FuncStubs) -> DeclBody // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_DerivingDirective(Self[T], DerivingDirective) -> DerivingDirective // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_DotDotBinder(Self[T], DotDotBinder) -> DotDotBinder // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_DotDotBinder_Binder(Self[T], Binder) -> DotDotBinder // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_DotDotBinder_BinderAs(Self[T], Binder) -> DotDotBinder // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_EmbeddedCode(Self[T], EmbeddedCode) -> EmbeddedCode // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_EmbeddedCode_CodeMultilineString(Self[T], @list.List[String]) -> EmbeddedCode // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_EmbeddedCode_CodeString(Self[T], String) -> EmbeddedCode // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ErrorType(Self[T], ErrorType) -> ErrorType // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ErrorType_DefaultErrorType(Self[T], loc~ : @basic.Location) -> ErrorType // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ErrorType_ErrorType(Self[T], ty~ : Type) -> ErrorType // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ErrorType_MaybeError(Self[T], ty~ : Type) -> ErrorType // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ExceptionDecl(Self[T], ExceptionDecl) -> ExceptionDecl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ExceptionDecl_EnumPayload(Self[T], @list.List[ConstrDecl]) -> ExceptionDecl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_ExceptionDecl_SinglePayload(Self[T], Type) -> ExceptionDecl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr(Self[T], Expr) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Apply(Self[T], func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Array(Self[T], exprs~ : @list.List[Expr], loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_ArrayAugmentedSet(Self[T], op~ : Var, array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_ArrayGet(Self[T], array~ : Expr, index~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_ArrayGetSlice(Self[T], array~ : Expr, start_index~ : Expr?, end_index~ : Expr?, index_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_ArraySet(Self[T], array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_ArraySpread(Self[T], elems~ : @list.List[SpreadableElem], loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_As(Self[T], expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Assign(Self[T], var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Break(Self[T], arg~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Constant(Self[T], c~ : Constant, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Constr(Self[T], constr~ : Constructor, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Constraint(Self[T], expr~ : Expr, ty~ : Type, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Continue(Self[T], args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Defer(Self[T], expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_DotApply(Self[T], self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Field(Self[T], record~ : Expr, accessor~ : Accessor, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_For(Self[T], binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_ForEach(Self[T], binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Function(Self[T], func~ : Func, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Group(Self[T], expr~ : Expr, group~ : Group, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Guard(Self[T], cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Hole(Self[T], loc~ : @basic.Location, kind~ : Hole) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Ident(Self[T], id~ : Var, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_If(Self[T], cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Infix(Self[T], op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Interp(Self[T], elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Is(Self[T], expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Let(Self[T], pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_LetAnd(Self[T], bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_LetFn(Self[T], name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_LetMut(Self[T], binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_LetRec(Self[T], bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Loop(Self[T], arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Map(Self[T], elems~ : @list.List[MapExprElem], loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Match(Self[T], expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Method(Self[T], type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_MultilineString(Self[T], elems~ : @list.List[MultilineStringElem], loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Mutate(Self[T], record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Pipe(Self[T], lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Raise(Self[T], err_value~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Record(Self[T], type_name~ : TypeName?, fields~ : @list.List[FieldDef], trailing~ : TrailingMark, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_RecordUpdate(Self[T], type_name~ : TypeName?, record~ : Expr, fields~ : @list.List[FieldDef], loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Return(Self[T], return_value~ : Expr?, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Sequence(Self[T], exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_StaticAssert(Self[T], asserts~ : @list.List[StaticAssertion], body~ : Expr) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Try(Self[T], body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_TryOperator(Self[T], body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Tuple(Self[T], exprs~ : @list.List[Expr], loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Unary(Self[T], op~ : Var, expr~ : Expr, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_Unit(Self[T], loc~ : @basic.Location, faked~ : Bool) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Expr_While(Self[T], loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_FieldDecl(Self[T], FieldDecl) -> FieldDecl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_FieldDef(Self[T], FieldDef) -> FieldDef // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_FieldName(Self[T], FieldName) -> FieldName // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_FieldPat(Self[T], FieldPat) -> FieldPat // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_FnKind(Self[T], FnKind) -> FnKind // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_FunDecl(Self[T], FunDecl) -> FunDecl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Func(Self[T], Func) -> Func // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_FuncStubs(Self[T], FuncStubs) -> FuncStubs // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_FuncStubs_Embedded(Self[T], language~ : String?, code~ : EmbeddedCode) -> FuncStubs // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_FuncStubs_Import(Self[T], module_name~ : String, func_name~ : String) -> FuncStubs // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Func_Lambda(Self[T], parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : Bool, loc~ : @basic.Location) -> Func // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Func_Match(Self[T], cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : Bool, fn_loc~ : @basic.Location, loc~ : @basic.Location) -> Func // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Group(Self[T], Group) -> Group // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Hole(Self[T], Hole) -> Hole // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl(Self[T], Impl) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopBatchTraitAlias(Self[T], pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopBatchTypeAlias(Self[T], pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopExpr(Self[T], expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopFuncAlias(Self[T], pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopFuncDef(Self[T], fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopImpl(Self[T], self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopImplRelation(Self[T], self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopLetDef(Self[T], binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopTest(Self[T], expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopTrait(Self[T], TraitDecl) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopTypeDef(Self[T], TypeDecl) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Impl_TopView(Self[T], quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_InterpElem(Self[T], InterpElem) -> InterpElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_InterpElem_Expr(Self[T], expr~ : Expr, loc~ : @basic.Location) -> InterpElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_InterpElem_Literal(Self[T], repr~ : String, loc~ : @basic.Location) -> InterpElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_InterpElem_Source(Self[T], @tokens.InterpSource) -> InterpElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Label(Self[T], Label) -> Label // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_LocalTypeDecl(Self[T], LocalTypeDecl) -> LocalTypeDecl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_LongIdent(Self[T], LongIdent) -> LongIdent // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_LongIdent_Dot(Self[T], pkg~ : String, id~ : String) -> LongIdent // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_LongIdent_Ident(Self[T], name~ : String) -> LongIdent // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_MapExprElem(Self[T], MapExprElem) -> MapExprElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_MapPatElem(Self[T], MapPatElem) -> MapPatElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_MultiArgCase(Self[T], MultiArgCase) -> MultiArgCase // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_MultilineStringElem(Self[T], MultilineStringElem) -> MultilineStringElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_MultilineStringElem_Interp(Self[T], @list.List[InterpElem]) -> MultilineStringElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_MultilineStringElem_String(Self[T], String) -> MultilineStringElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Parameter(Self[T], Parameter) -> Parameter // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Parameter_DiscardPositional(Self[T], ty~ : Type?, loc~ : @basic.Location) -> Parameter // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Parameter_Labelled(Self[T], binder~ : Binder, ty~ : Type?) -> Parameter // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Parameter_Optional(Self[T], binder~ : Binder, default~ : Expr, ty~ : Type?) -> Parameter // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Parameter_Positional(Self[T], binder~ : Binder, ty~ : Type?) -> Parameter // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Parameter_QuestionOptional(Self[T], binder~ : Binder, ty~ : Type?) -> Parameter // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern(Self[T], Pattern) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Alias(Self[T], pat~ : Pattern, alias_~ : Binder, loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Any(Self[T], loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Array(Self[T], pats~ : ArrayPatterns, loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Constant(Self[T], c~ : Constant, loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Constr(Self[T], constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Constraint(Self[T], pat~ : Pattern, ty~ : Type, loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Map(Self[T], elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Or(Self[T], pat1~ : Pattern, pat2~ : Pattern, loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Range(Self[T], lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Record(Self[T], fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_SpecialConstr(Self[T], binder~ : Binder, args~ : @list.List[ConstrPatArg], loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Tuple(Self[T], pats~ : @list.List[Pattern], loc~ : @basic.Location) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Pattern_Var(Self[T], Binder) -> Pattern // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_SpreadableElem(Self[T], SpreadableElem) -> SpreadableElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_SpreadableElem_Regular(Self[T], Expr) -> SpreadableElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_SpreadableElem_Spread(Self[T], expr~ : Expr, loc~ : @basic.Location) -> SpreadableElem // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_StaticAssertion(Self[T], StaticAssertion) -> StaticAssertion // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TrailingMark(Self[T], TrailingMark) -> TrailingMark // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TraitDecl(Self[T], TraitDecl) -> TraitDecl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TraitMethodDecl(Self[T], TraitMethodDecl) -> TraitMethodDecl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TryOperatorKind(Self[T], TryOperatorKind) -> TryOperatorKind // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Type(Self[T], Type) -> Type // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeDecl(Self[T], TypeDecl) -> TypeDecl // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeDeclBinder(Self[T], TypeDeclBinder) -> TypeDeclBinder // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeDesc(Self[T], TypeDesc) -> TypeDesc // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeDesc_Alias(Self[T], Type) -> TypeDesc // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeDesc_Error(Self[T], ExceptionDecl) -> TypeDesc // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeDesc_Newtype(Self[T], Type) -> TypeDesc // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeDesc_Record(Self[T], @list.List[FieldDecl]) -> TypeDesc // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeDesc_TupleStruct(Self[T], @list.List[Type]) -> TypeDesc // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeDesc_Variant(Self[T], @list.List[ConstrDecl]) -> TypeDesc // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeName(Self[T], TypeName) -> TypeName // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeVarBinder(Self[T], TypeVarBinder) -> TypeVarBinder // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_TypeVarConstraint(Self[T], TypeVarConstraint) -> TypeVarConstraint // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Type_Any(Self[T], loc~ : @basic.Location) -> Type // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Type_Arrow(Self[T], args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : Bool, loc~ : @basic.Location) -> Type // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Type_Name(Self[T], constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @basic.Location) -> Type // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Type_Object(Self[T], ConstrId) -> Type // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Type_Option(Self[T], ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location) -> Type // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Type_Tuple(Self[T], tys~ : @list.List[Type], loc~ : @basic.Location) -> Type // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Var(Self[T], Var) -> Var // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Visibility(Self[T], Visibility) -> Visibility // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Visibility_Priv(Self[T], loc~ : @basic.Location) -> Visibility // from trait `MapVisitor`
-fn[T : MapVisitor] MapVisitorBase::visit_Visibility_Pub(Self[T], attr~ : String?, loc~ : @basic.Location) -> Visibility // from trait `MapVisitor`
 impl[T : MapVisitor] MapVisitor for MapVisitorBase[T]
 
 pub(all) struct MultiArgCase {
@@ -918,14 +484,12 @@ pub(all) struct MultiArgCase {
   guard_ : Expr?
   body : Expr
 }
-fn MultiArgCase::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for MultiArgCase
 
 pub(all) enum MultilineStringElem {
   String(String)
   Interp(@list.List[InterpElem])
 }
-fn MultilineStringElem::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for MultilineStringElem
 
 pub(all) enum Parameter {
@@ -936,7 +500,6 @@ pub(all) enum Parameter {
   QuestionOptional(binder~ : Binder, ty~ : Type?)
 }
 fn Parameter::loc(Self) -> @basic.Location
-fn Parameter::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Parameter
 
 pub(all) enum Pattern {
@@ -955,14 +518,12 @@ pub(all) enum Pattern {
   SpecialConstr(binder~ : Binder, args~ : @list.List[ConstrPatArg], loc~ : @basic.Location)
 }
 fn Pattern::loc(Self) -> @basic.Location
-fn Pattern::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Pattern
 
 pub(all) enum SpreadableElem {
   Regular(Expr)
   Spread(expr~ : Expr, loc~ : @basic.Location)
 }
-fn SpreadableElem::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for SpreadableElem
 
 pub(all) struct StaticAssertion {
@@ -971,7 +532,6 @@ pub(all) struct StaticAssertion {
   loc : @basic.Location
   msg : String
 }
-fn StaticAssertion::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for StaticAssertion
 
 pub(all) enum TrailingMark {
@@ -979,7 +539,6 @@ pub(all) enum TrailingMark {
   Semi
   None
 }
-fn TrailingMark::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TrailingMark
 
 pub(all) struct TraitDecl {
@@ -991,7 +550,6 @@ pub(all) struct TraitDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
-fn TraitDecl::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TraitDecl
 
 pub(all) struct TraitMethodDecl {
@@ -1006,14 +564,12 @@ pub(all) struct TraitMethodDecl {
   attrs : @list.List[@attribute.Attribute]
   loc : @basic.Location
 }
-fn TraitMethodDecl::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TraitMethodDecl
 
 pub(all) enum TryOperatorKind {
   Question
   Exclamation
 }
-fn TryOperatorKind::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TryOperatorKind
 
 pub(all) enum Type {
@@ -1025,7 +581,6 @@ pub(all) enum Type {
   Object(ConstrId)
 }
 fn Type::loc(Self) -> @basic.Location
-fn Type::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Type
 
 pub(all) struct TypeDecl {
@@ -1039,14 +594,12 @@ pub(all) struct TypeDecl {
   deriving : @list.List[DerivingDirective]
   loc : @basic.Location
 }
-fn TypeDecl::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TypeDecl
 
 pub(all) struct TypeDeclBinder {
   name : String?
   loc : @basic.Location
 }
-fn TypeDeclBinder::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TypeDeclBinder
 
 pub(all) enum TypeDesc {
@@ -1059,7 +612,6 @@ pub(all) enum TypeDesc {
   TupleStruct(@list.List[Type])
   Alias(Type)
 }
-fn TypeDesc::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TypeDesc
 
 pub(all) struct TypeName {
@@ -1067,7 +619,6 @@ pub(all) struct TypeName {
   is_object : Bool
   loc : @basic.Location
 }
-fn TypeName::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TypeName
 
 pub(all) struct TypeVarBinder {
@@ -1075,21 +626,18 @@ pub(all) struct TypeVarBinder {
   name_loc : @basic.Location
   constraints : @list.List[TypeVarConstraint]
 }
-fn TypeVarBinder::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TypeVarBinder
 
 pub(all) struct TypeVarConstraint {
   trait_ : LongIdent
   loc : @basic.Location
 }
-fn TypeVarConstraint::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for TypeVarConstraint
 
 pub(all) struct Var {
   name : LongIdent
   loc : @basic.Location
 }
-fn Var::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Var
 
 pub(all) enum Visibility {
@@ -1097,7 +645,6 @@ pub(all) enum Visibility {
   Pub(attr~ : String?, loc~ : @basic.Location)
   Priv(loc~ : @basic.Location)
 }
-fn Visibility::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Visibility
 
 // Type aliases

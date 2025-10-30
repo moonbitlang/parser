@@ -34,8 +34,6 @@ pub enum LexicalError {
   InvalidByteLiteral(String)
   Reserved_keyword(String)
 }
-fn LexicalError::output(Self, &Logger) -> Unit // from trait `Show`
-fn LexicalError::to_string(Self) -> String // from trait `Show`
 impl Show for LexicalError
 
 // Type aliases
