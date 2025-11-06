@@ -220,7 +220,11 @@ fn State::parse_var(self : Self) -> @syntax.Var {
 ///|
 fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
   if self.mode is Panic(loc~, ..) {
-    return { name: "?tvar_name", name_loc: loc, constraints: @list.of([]) }
+    return {
+      name: "?tvar_name",
+      name_loc: loc,
+      constraints: @list.from_array([]),
+    }
   }
   let spos = self.peek_spos()
   let name = self.parse_luident()
@@ -754,7 +758,7 @@ fn State::parse_typealias(
       let loc = self.loc_start_with(spos)
       TopBatchTypeAlias(
         pkg=None,
-        targets=@list.of([target]),
+        targets=@list.from_array([target]),
         vis~,
         attrs~,
         loc~,
@@ -1239,11 +1243,11 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             (xs, true)
           }
           DOT_LIDENT(_) if need_dot => {
-            let xs = @list.of([parse_target(self, need_dot)])
+            let xs = @list.from_array([parse_target(self, need_dot)])
             (xs, false)
           }
           LIDENT(_) if !need_dot => {
-            let xs = @list.of([parse_target(self, need_dot)])
+            let xs = @list.from_array([parse_target(self, need_dot)])
             (xs, false)
           }
           other => {
@@ -1339,7 +1343,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
               let target_loc = self.peek_location()
               self.skip()
               let target = parse_target(self, target_name, target_loc)
-              (false, @list.of([target]))
+              (false, @list.from_array([target]))
             }
             other => {
               let other_loc = self.peek_location()
@@ -1379,7 +1383,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           }
           TopBatchTraitAlias(
             pkg~,
-            targets=@list.of([{ binder, target: Some(target) }]),
+            targets=@list.from_array([{ binder, target: Some(target) }]),
             vis~,
             loc~,
             attrs~,
@@ -1394,7 +1398,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           let loc = self.loc_start_with(spos)
           TopBatchTraitAlias(
             pkg=None,
-            targets=@list.of([target]),
+            targets=@list.from_array([target]),
             vis~,
             is_list=false,
             loc~,
@@ -3181,7 +3185,11 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
       self.expect_token(TK_FAT_ARROW)
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
-      let func = @syntax.make_arrow_fn(@list.of([(p, None)]), body, loc~)
+      let func = @syntax.make_arrow_fn(
+        @list.from_array([(p, None)]),
+        body,
+        loc~,
+      )
       Function(loc~, func~)
     }
     _ => self.parse_simple_try_expr(parsed=None)
@@ -3319,7 +3327,7 @@ fn State::parse_infix_expr(
 
   let first_spos = self.peek_spos_with_parsed(parsed~)
   let first_expr = self.parse_postfix_expr(parsed~)
-  let (_, expr) = go(@list.of([(first_spos, first_expr)]), @list.new())
+  let (_, expr) = go(@list.from_array([(first_spos, first_expr)]), @list.new())
   expr
 }
 
@@ -4127,7 +4135,7 @@ fn State::parse_semi_trailing_record(self : Self) -> @syntax.Expr {
   self.expect_token(TK_SEMI)
   self.expect_token(TK_RBRACE)
   let loc = self.loc_start_with(spos)
-  Record(type_name=None, fields=@list.of([field]), trailing=Semi, loc~)
+  Record(type_name=None, fields=@list.from_array([field]), trailing=Semi, loc~)
 }
 
 ///|
@@ -4358,7 +4366,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
       self.expect_token(TK_FAT_ARROW)
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
-      @syntax.make_arrow_fn(@list.of([(param, None)]), body, loc~)
+      @syntax.make_arrow_fn(@list.from_array([(param, None)]), body, loc~)
     }
     _ => {
       let is_async = if self.peek_token() is ASYNC {
@@ -4478,7 +4486,7 @@ fn State::handle_unexpected_expr_or_statement(
       | StmtDefer(loc~, ..)
       | StmtGuard(loc~, ..) => loc
     }
-    Statement::compact_rev(@list.of([stmt]), loc~)
+    Statement::compact_rev(@list.from_array([stmt]), loc~)
   }
 
   let (actual, expr) = match token {

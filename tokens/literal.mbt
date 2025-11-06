@@ -23,7 +23,7 @@ pub(all) enum InterpElem {
 } derive(Show, Eq)
 
 ///|
-pub typealias Array[InterpElem] as InterpLiteral
+pub type InterpLiteral = Array[InterpElem]
 
 ///|
 fn InterpLiteral::to_string_repr(self : InterpLiteral) -> String {

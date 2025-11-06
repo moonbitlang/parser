@@ -1,22 +1,22 @@
 ///|
 /// Import types from ast_types package
-typealias @basic.(Location, Position, Report)
+using @basic {type Location, type Position, type Report}
 
 ///|
 /// Import AST types 
-typealias @syntax.(Impls, DocString)
+using @syntax {type Impls, type DocString}
 
 ///|
-typealias @tokens.(Token, TokenKind)
+using @tokens {type Token, type TokenKind}
 
 ///|
-typealias (Token, Position, Position) as Triple
+type Triple = (Token, Position, Position)
 
 ///|
-typealias @util.Statement
+using @util {type Statement}
 
 ///|
-typealias @list.List
+using @list {type List}
 
 ///|
-typealias @attribute.Attribute
+using @attribute {type Attribute}

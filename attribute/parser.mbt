@@ -44,10 +44,10 @@ priv suberror YYObj_StringLiteral StringLiteral
 priv suberror YYObj__String__String___String_ (String, String?, String)
 
 ///|
-typealias (YYSymbol) -> YYDecision as YYState
+type YYState = (YYSymbol) -> YYDecision
 
 ///|
-typealias (Position, ArrayView[(YYObj, Position, Position)]) -> YYObj as YYAction
+type YYAction = (Position, ArrayView[(YYObj, Position, Position)]) -> YYObj
 
 ///|
 priv enum YYDecision {
@@ -423,7 +423,7 @@ fn yy_action_13(
 }
 
 // file:///./parser.mbty
-// 161|    property { @list.of([$1]) }
+// 161|    property { @list.from_array([$1]) }
 
 ///|
 fn yy_action_14(
@@ -434,7 +434,7 @@ fn yy_action_14(
   YYObj_List_Prop_(
     {
       ()
-      @list.of([_dollar1])
+      @list.from_array([_dollar1])
     },
   )
 }

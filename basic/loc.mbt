@@ -55,7 +55,7 @@ test "compre position" {
 }
 
 ///|
-pub fn column(self : Position) -> Int {
+pub fn Position::column(self : Position) -> Int {
   self.cnum - self.bol + 1
 }
 

@@ -1,10 +1,10 @@
 ///|
 /// Import types from ast_types package
-typealias @basic.Location
+using @basic {type Location}
 
 ///|
 /// Import AST types 
-typealias @syntax.(Binder, Expr, Func, Type, Pattern)
+using @syntax {type Binder, type Expr, type Func, type Type, type Pattern}
 
 ///|
-fnalias @syntax.loc_of_expression
+using @syntax {loc_of_expression}

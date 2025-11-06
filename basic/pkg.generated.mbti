@@ -21,16 +21,7 @@ pub(all) struct Location {
   start : Position
   end : Position
 }
-fn Location::compare(Self, Self) -> Int // from trait `Compare`
-fn Location::equal(Self, Self) -> Bool // from trait `Eq`
-fn Location::hash(Self) -> Int // from trait `Hash`
-fn Location::hash_combine(Self, Hasher) -> Unit // from trait `Hash`
 fn Location::merge(Self, Self) -> Self
-#deprecated
-fn Location::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Location::output(Self, &Logger) -> Unit // from trait `Show`
-fn Location::to_json(Self) -> Json // from trait `ToJson`
-fn Location::to_string(Self) -> String // from trait `Show`
 fn Location::trim_first_char(Self) -> Self
 fn Location::trim_last_char(Self) -> Self
 impl Compare for Location
@@ -46,15 +37,6 @@ pub(all) struct Position {
   cnum : Int
 }
 fn Position::column(Self) -> Int
-fn Position::compare(Self, Self) -> Int // from trait `Compare`
-fn Position::equal(Self, Self) -> Bool // from trait `Eq`
-fn Position::hash(Self) -> Int // from trait `Hash`
-fn Position::hash_combine(Self, Hasher) -> Unit // from trait `Hash`
-#deprecated
-fn Position::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Position::output(Self, &Logger) -> Unit // from trait `Show`
-fn Position::to_json(Self) -> Json // from trait `ToJson`
-fn Position::to_string(Self) -> String // from trait `Show`
 impl Compare for Position
 impl Eq for Position
 impl Hash for Position
@@ -65,9 +47,6 @@ pub(all) struct Report {
   loc : Location
   msg : String
 }
-fn Report::output(Self, &Logger) -> Unit // from trait `Show`
-fn Report::to_json(Self) -> Json // from trait `ToJson`
-fn Report::to_string(Self) -> String // from trait `Show`
 impl Show for Report
 impl ToJson for Report
 

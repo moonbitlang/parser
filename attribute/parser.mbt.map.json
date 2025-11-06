@@ -110,20 +110,20 @@
     },
     {
       "source": "parser.mbty",
-      "original_offset": 3739,
+      "original_offset": 3747,
       "generated_offset": 6283,
       "length": 11
     },
     {
       "source": "parser.mbty",
       "original_offset": 3678,
-      "generated_offset": 6528,
-      "length": 11
+      "generated_offset": 6536,
+      "length": 19
     },
     {
       "source": "parser.mbty",
-      "original_offset": 3691,
-      "generated_offset": 6547,
+      "original_offset": 3699,
+      "generated_offset": 6563,
       "length": 3
     }
   ]

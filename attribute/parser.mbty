@@ -158,6 +158,6 @@ properties -> List[Prop]:
   | "(" non_empty_properties ")" { $2 }
 
 non_empty_properties -> List[Prop]:
-  | property { @list.of([$1]) }
+  | property { @list.from_array([$1]) }
   | x=property "," xs=non_empty_properties{ xs.add(x) }
 
