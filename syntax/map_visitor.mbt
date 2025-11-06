@@ -2069,9 +2069,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
       loc~,
       doc~
     ) =>
-      env
-      .inner()
-      .visit_Impl_TopView(
+      env.0.visit_Impl_TopView(
         quantifiers~,
         source_ty~,
         view_type_name~,
@@ -2101,9 +2099,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
       attrs~,
       doc~
     ) =>
-      env
-      .inner()
-      .visit_Impl_TopImpl(
+      env.0.visit_Impl_TopImpl(
         self_ty~,
         trait_~,
         method_name~,
@@ -2119,9 +2115,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         doc~,
       )
     TopBatchTraitAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
-      env
-      .inner()
-      .visit_Impl_TopBatchTraitAlias(
+      env.0.visit_Impl_TopBatchTraitAlias(
         pkg~,
         targets~,
         vis~,
@@ -2131,9 +2125,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         doc~,
       )
     TopBatchTypeAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
-      env
-      .inner()
-      .visit_Impl_TopBatchTypeAlias(
+      env.0.visit_Impl_TopBatchTypeAlias(
         pkg~,
         targets~,
         vis~,
@@ -2142,11 +2134,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         is_list~,
         doc~,
       )
-    TopTrait(trait_decl) => env.inner().visit_Impl_TopTrait(trait_decl)
+    TopTrait(trait_decl) => env.0.visit_Impl_TopTrait(trait_decl)
     TopLetDef(binder~, ty~, expr~, vis~, is_constant~, loc~, attrs~, doc~) =>
-      env
-      .inner()
-      .visit_Impl_TopLetDef(
+      env.0.visit_Impl_TopLetDef(
         binder~,
         ty~,
         expr~,
@@ -2157,9 +2147,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         doc~,
       )
     TopFuncAlias(pkg~, type_name~, targets~, vis~, attrs~, is_list~, doc~, loc~) =>
-      env
-      .inner()
-      .visit_Impl_TopFuncAlias(
+      env.0.visit_Impl_TopFuncAlias(
         pkg~,
         type_name~,
         targets~,
@@ -2170,12 +2158,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         loc~,
       )
     TopFuncDef(fun_decl~, decl_body~, loc~) =>
-      env.inner().visit_Impl_TopFuncDef(fun_decl~, decl_body~, loc~)
-    TopTypeDef(type_decl) => env.inner().visit_Impl_TopTypeDef(type_decl)
+      env.0.visit_Impl_TopFuncDef(fun_decl~, decl_body~, loc~)
+    TopTypeDef(type_decl) => env.0.visit_Impl_TopTypeDef(type_decl)
     TopTest(expr~, name~, params~, local_types~, is_async~, loc~, attrs~, doc~) =>
-      env
-      .inner()
-      .visit_Impl_TopTest(
+      env.0.visit_Impl_TopTest(
         expr~,
         name~,
         params~,
@@ -2186,11 +2172,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         doc~,
       )
     TopExpr(expr~, is_main~, local_types~, loc~) =>
-      env.inner().visit_Impl_TopExpr(expr~, is_main~, local_types~, loc~)
+      env.0.visit_Impl_TopExpr(expr~, is_main~, local_types~, loc~)
     TopImplRelation(self_ty~, trait_~, quantifiers~, vis~, attrs~, loc~, doc~) =>
-      env
-      .inner()
-      .visit_Impl_TopImplRelation(
+      env.0.visit_Impl_TopImplRelation(
         self_ty~,
         trait_~,
         quantifiers~,
@@ -2209,8 +2193,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Visibility(
 ) {
   match visibility {
     Default => Default
-    Pub(attr~, loc~) => env.inner().visit_Visibility_Pub(attr~, loc~)
-    Priv(loc~) => env.inner().visit_Visibility_Priv(loc~)
+    Pub(attr~, loc~) => env.0.visit_Visibility_Pub(attr~, loc~)
+    Priv(loc~) => env.0.visit_Visibility_Priv(loc~)
   }
 }
 
@@ -2261,8 +2245,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LongIdent(
   long_ident,
 ) {
   match long_ident {
-    Ident(name~) => env.inner().visit_LongIdent_Ident(name~)
-    Dot(pkg~, id~) => env.inner().visit_LongIdent_Dot(pkg~, id~)
+    Ident(name~) => env.0.visit_LongIdent_Ident(name~)
+    Dot(pkg~, id~) => env.0.visit_LongIdent_Dot(pkg~, id~)
   }
 }
 
@@ -2288,7 +2272,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeName(
   env,
   type_name,
 ) {
-  let name = env.inner().visit_LongIdent(type_name.name)
+  let name = env.0.visit_LongIdent(type_name.name)
   let is_object = type_name.is_object
   let loc = type_name.loc
   TypeName::{ name, is_object, loc }
@@ -2299,7 +2283,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstrId(
   env,
   constr_id,
 ) {
-  let id = env.inner().visit_LongIdent(constr_id.id)
+  let id = env.0.visit_LongIdent(constr_id.id)
   let loc = constr_id.loc
   ConstrId::{ id, loc }
 }
@@ -2310,15 +2294,15 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type(
   type_,
 ) {
   match type_ {
-    Any(loc~) => env.inner().visit_Type_Any(loc~)
+    Any(loc~) => env.0.visit_Type_Any(loc~)
     Arrow(args~, res~, err~, is_async~, loc~) =>
-      env.inner().visit_Type_Arrow(args~, res~, err~, is_async~, loc~)
-    Tuple(tys~, loc~) => env.inner().visit_Type_Tuple(tys~, loc~)
+      env.0.visit_Type_Arrow(args~, res~, err~, is_async~, loc~)
+    Tuple(tys~, loc~) => env.0.visit_Type_Tuple(tys~, loc~)
     Name(constr_id~, tys~, loc~) =>
-      env.inner().visit_Type_Name(constr_id~, tys~, loc~)
+      env.0.visit_Type_Name(constr_id~, tys~, loc~)
     Option(ty~, loc~, question_loc~) =>
-      env.inner().visit_Type_Option(ty~, loc~, question_loc~)
-    Object(constr_id) => env.inner().visit_Type_Object(constr_id)
+      env.0.visit_Type_Option(ty~, loc~, question_loc~)
+    Object(constr_id) => env.0.visit_Type_Object(constr_id)
   }
 }
 
@@ -2339,9 +2323,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type_Arrow(
   is_async~,
   loc~,
 ) {
-  let args = args.map(env.inner().visit_Type(_))
-  let res = env.inner().visit_Type(res)
-  let err = env.inner().visit_ErrorType(err)
+  let args = args.map(env.0.visit_Type(_))
+  let res = env.0.visit_Type(res)
+  let err = env.0.visit_ErrorType(err)
   Arrow(args~, res~, err~, is_async~, loc~)
 }
 
@@ -2351,7 +2335,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type_Tuple(
   tys~,
   loc~,
 ) {
-  let tys = tys.map(env.inner().visit_Type(_))
+  let tys = tys.map(env.0.visit_Type(_))
   Tuple(tys~, loc~)
 }
 
@@ -2362,8 +2346,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type_Name(
   tys~,
   loc~,
 ) {
-  let constr_id = env.inner().visit_ConstrId(constr_id)
-  let tys = tys.map(env.inner().visit_Type(_))
+  let constr_id = env.0.visit_ConstrId(constr_id)
+  let tys = tys.map(env.0.visit_Type(_))
   Name(constr_id~, tys~, loc~)
 }
 
@@ -2374,7 +2358,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type_Option
   loc~,
   question_loc~,
 ) {
-  let ty = env.inner().visit_Type(ty)
+  let ty = env.0.visit_Type(ty)
   Option(ty~, loc~, question_loc~)
 }
 
@@ -2383,7 +2367,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Type_Object
   env,
   constr_id,
 ) {
-  let constr_id = env.inner().visit_ConstrId(constr_id)
+  let constr_id = env.0.visit_ConstrId(constr_id)
   Object(constr_id)
 }
 
@@ -2393,11 +2377,11 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ErrorType(
   error_type,
 ) {
   match error_type {
-    ErrorType(ty~) => env.inner().visit_ErrorType_ErrorType(ty~)
-    DefaultErrorType(loc~) => env.inner().visit_ErrorType_DefaultErrorType(loc~)
+    ErrorType(ty~) => env.0.visit_ErrorType_ErrorType(ty~)
+    DefaultErrorType(loc~) => env.0.visit_ErrorType_DefaultErrorType(loc~)
     NoErrorType => NoErrorType
     Noraise(loc~) => Noraise(loc~)
-    MaybeError(ty~) => env.inner().visit_ErrorType_MaybeError(ty~)
+    MaybeError(ty~) => env.0.visit_ErrorType_MaybeError(ty~)
   }
 }
 
@@ -2406,7 +2390,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ErrorType_E
   env,
   ty~,
 ) {
-  let ty = env.inner().visit_Type(ty)
+  let ty = env.0.visit_Type(ty)
   ErrorType(ty~)
 }
 
@@ -2423,7 +2407,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ErrorType_M
   env,
   ty~,
 ) {
-  let ty = env.inner().visit_Type(ty)
+  let ty = env.0.visit_Type(ty)
   MaybeError(ty~)
 }
 
@@ -2432,8 +2416,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstrParam
   env,
   constr_param,
 ) {
-  let ty = env.inner().visit_Type(constr_param.ty)
-  let label = constr_param.label.map(env.inner().visit_Label(_))
+  let ty = env.0.visit_Type(constr_param.ty)
+  let label = constr_param.label.map(env.0.visit_Label(_))
   let mut_ = constr_param.mut_
   ConstrParam::{ ty, mut_, label }
 }
@@ -2443,10 +2427,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstrDecl(
   env,
   constr_decl,
 ) {
-  let name = env.inner().visit_ConstrName(constr_decl.name)
-  let args = constr_decl.args.map(args => args.map(
-    env.inner().visit_ConstrParam(_),
-  ))
+  let name = env.0.visit_ConstrName(constr_decl.name)
+  let args = constr_decl.args.map(args => args.map(env.0.visit_ConstrParam(_)))
   let tag = constr_decl.tag
   let loc = constr_decl.loc
   let attrs = constr_decl.attrs
@@ -2461,9 +2443,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ExceptionDe
 ) {
   match exception_decl {
     NoPayload => NoPayload
-    SinglePayload(type_) => env.inner().visit_ExceptionDecl_SinglePayload(type_)
+    SinglePayload(type_) => env.0.visit_ExceptionDecl_SinglePayload(type_)
     EnumPayload(constr_decls) =>
-      env.inner().visit_ExceptionDecl_EnumPayload(constr_decls)
+      env.0.visit_ExceptionDecl_EnumPayload(constr_decls)
   }
 }
 
@@ -2472,7 +2454,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ExceptionDe
   env,
   type_,
 ) {
-  let type_ = env.inner().visit_Type(type_)
+  let type_ = env.0.visit_Type(type_)
   SinglePayload(type_)
 }
 
@@ -2481,7 +2463,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ExceptionDe
   env,
   constr_decls,
 ) {
-  let constr_decls = constr_decls.map(env.inner().visit_ConstrDecl(_))
+  let constr_decls = constr_decls.map(env.0.visit_ConstrDecl(_))
   EnumPayload(constr_decls)
 }
 
@@ -2498,9 +2480,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FieldDecl(
   env,
   field_decl,
 ) {
-  let name = env.inner().visit_FieldName(field_decl.name)
-  let ty = env.inner().visit_Type(field_decl.ty)
-  let vis = env.inner().visit_Visibility(field_decl.vis)
+  let name = env.0.visit_FieldName(field_decl.name)
+  let ty = env.0.visit_Type(field_decl.ty)
+  let vis = env.0.visit_Visibility(field_decl.vis)
   let mut_ = field_decl.mut_
   let loc = field_decl.loc
   let attrs = field_decl.attrs
@@ -2516,12 +2498,12 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc(
   match type_desc {
     Abstract => Abstract
     Extern => Extern
-    Newtype(type_) => env.inner().visit_TypeDesc_Newtype(type_)
-    Error(exception_decl) => env.inner().visit_TypeDesc_Error(exception_decl)
-    Variant(constr_decls) => env.inner().visit_TypeDesc_Variant(constr_decls)
-    Record(field_decls) => env.inner().visit_TypeDesc_Record(field_decls)
-    TupleStruct(types) => env.inner().visit_TypeDesc_TupleStruct(types)
-    Alias(type_) => env.inner().visit_TypeDesc_Alias(type_)
+    Newtype(type_) => env.0.visit_TypeDesc_Newtype(type_)
+    Error(exception_decl) => env.0.visit_TypeDesc_Error(exception_decl)
+    Variant(constr_decls) => env.0.visit_TypeDesc_Variant(constr_decls)
+    Record(field_decls) => env.0.visit_TypeDesc_Record(field_decls)
+    TupleStruct(types) => env.0.visit_TypeDesc_TupleStruct(types)
+    Alias(type_) => env.0.visit_TypeDesc_Alias(type_)
   }
 }
 
@@ -2530,7 +2512,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Ne
   env,
   type_,
 ) {
-  let type_ = env.inner().visit_Type(type_)
+  let type_ = env.0.visit_Type(type_)
   Newtype(type_)
 }
 
@@ -2539,7 +2521,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Er
   env,
   exception_decl,
 ) {
-  let exception_decl = env.inner().visit_ExceptionDecl(exception_decl)
+  let exception_decl = env.0.visit_ExceptionDecl(exception_decl)
   Error(exception_decl)
 }
 
@@ -2548,7 +2530,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Va
   env,
   constr_decls,
 ) {
-  let constr_decls = constr_decls.map(env.inner().visit_ConstrDecl(_))
+  let constr_decls = constr_decls.map(env.0.visit_ConstrDecl(_))
   Variant(constr_decls)
 }
 
@@ -2557,7 +2539,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Re
   env,
   field_decls,
 ) {
-  let field_decls = field_decls.map(env.inner().visit_FieldDecl(_))
+  let field_decls = field_decls.map(env.0.visit_FieldDecl(_))
   Record(field_decls)
 }
 
@@ -2566,7 +2548,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Tu
   env,
   types,
 ) {
-  let types = types.map(env.inner().visit_Type(_))
+  let types = types.map(env.0.visit_Type(_))
   TupleStruct(types)
 }
 
@@ -2575,7 +2557,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Al
   env,
   type_,
 ) {
-  let type_ = env.inner().visit_Type(type_)
+  let type_ = env.0.visit_Type(type_)
   Alias(type_)
 }
 
@@ -2594,12 +2576,12 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArgumentKin
 ) {
   match argument_kind {
     Positional => Positional
-    Labelled(label) => env.inner().visit_ArgumentKind_Labelled(label)
-    LabelledPun(label) => env.inner().visit_ArgumentKind_LabelledPun(label)
+    Labelled(label) => env.0.visit_ArgumentKind_Labelled(label)
+    LabelledPun(label) => env.0.visit_ArgumentKind_LabelledPun(label)
     LabelledOption(label~, question_loc~) =>
-      env.inner().visit_ArgumentKind_LabelledOption(label~, question_loc~)
+      env.0.visit_ArgumentKind_LabelledOption(label~, question_loc~)
     LabelledOptionPun(label~, question_loc~) =>
-      env.inner().visit_ArgumentKind_LabelledOptionPun(label~, question_loc~)
+      env.0.visit_ArgumentKind_LabelledOptionPun(label~, question_loc~)
   }
 }
 
@@ -2676,7 +2658,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeVarCons
   env,
   type_var_constraint,
 ) {
-  let trait_ = env.inner().visit_LongIdent(type_var_constraint.trait_)
+  let trait_ = env.0.visit_LongIdent(type_var_constraint.trait_)
   let loc = type_var_constraint.loc
   TypeVarConstraint::{ trait_, loc }
 }
@@ -2687,7 +2669,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeVarBind
   type_var_binder,
 ) {
   let constraints = type_var_binder.constraints.map(
-    env.inner().visit_TypeVarConstraint(_),
+    env.0.visit_TypeVarConstraint(_),
   )
   let name = type_var_binder.name
   let loc = type_var_binder.name_loc
@@ -2715,7 +2697,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Var(
   env,
   var_,
 ) {
-  let name = env.inner().visit_LongIdent(var_.name)
+  let name = env.0.visit_LongIdent(var_.name)
   let loc = var_.loc
   Var::{ name, loc }
 }
@@ -2726,10 +2708,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Constructor
   constructor_extra_info,
 ) {
   match constructor_extra_info {
-    TypeName(type_name) =>
-      env.inner().visit_ConstructorExtraInfo_TypeName(type_name)
-    Package(package_) =>
-      env.inner().visit_ConstructorExtraInfo_Package(package_)
+    TypeName(type_name) => env.0.visit_ConstructorExtraInfo_TypeName(type_name)
+    Package(package_) => env.0.visit_ConstructorExtraInfo_Package(package_)
     NoExtraInfo => NoExtraInfo
   }
 }
@@ -2739,7 +2719,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Constructor
   env,
   type_name,
 ) {
-  let type_name = env.inner().visit_TypeName(type_name)
+  let type_name = env.0.visit_TypeName(type_name)
   TypeName(type_name)
 }
 
@@ -2756,10 +2736,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Constructor
   env,
   constructor_,
 ) {
-  let name = env.inner().visit_ConstrName(constructor_.name)
-  let extra_info = env
-    .inner()
-    .visit_ConstructorExtraInfo(constructor_.extra_info)
+  let name = env.0.visit_ConstrName(constructor_.name)
+  let extra_info = env.0.visit_ConstructorExtraInfo(constructor_.extra_info)
   let loc = constructor_.loc
   Constructor::{ name, extra_info, loc }
 }
@@ -2770,10 +2748,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Accessor(
   accessor,
 ) {
   match accessor {
-    Label(label) => env.inner().visit_Accessor_Label(label)
-    Index(tuple_index~, loc~) =>
-      env.inner().visit_Accessor_Index(tuple_index~, loc~)
-    Newtype(loc~) => env.inner().visit_Accessor_Newtype(loc~)
+    Label(label) => env.0.visit_Accessor_Label(label)
+    Index(tuple_index~, loc~) => env.0.visit_Accessor_Index(tuple_index~, loc~)
+    Newtype(loc~) => env.0.visit_Accessor_Newtype(loc~)
   }
 }
 
@@ -2782,7 +2759,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Accessor_La
   env,
   label,
 ) {
-  let label = env.inner().visit_Label(label)
+  let label = env.0.visit_Label(label)
   Label(label)
 }
 
@@ -2808,7 +2785,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_AliasTarget
   env,
   alias_target,
 ) {
-  let binder = env.inner().visit_Binder(alias_target.binder)
+  let binder = env.0.visit_Binder(alias_target.binder)
   let target = alias_target.target
   AliasTarget::{ binder, target }
 }
@@ -2818,8 +2795,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Argument(
   env,
   argument,
 ) {
-  let value = env.inner().visit_Expr(argument.value)
-  let kind = env.inner().visit_ArgumentKind(argument.kind)
+  let value = env.0.visit_Expr(argument.value)
+  let kind = env.0.visit_ArgumentKind(argument.kind)
   Argument::{ value, kind }
 }
 
@@ -2830,14 +2807,13 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter(
 ) {
   match parameter {
     DiscardPositional(ty~, loc~) =>
-      env.inner().visit_Parameter_DiscardPositional(ty~, loc~)
-    Positional(binder~, ty~) =>
-      env.inner().visit_Parameter_Positional(binder~, ty~)
-    Labelled(binder~, ty~) => env.inner().visit_Parameter_Labelled(binder~, ty~)
+      env.0.visit_Parameter_DiscardPositional(ty~, loc~)
+    Positional(binder~, ty~) => env.0.visit_Parameter_Positional(binder~, ty~)
+    Labelled(binder~, ty~) => env.0.visit_Parameter_Labelled(binder~, ty~)
     Optional(binder~, default~, ty~) =>
-      env.inner().visit_Parameter_Optional(binder~, default~, ty~)
+      env.0.visit_Parameter_Optional(binder~, default~, ty~)
     QuestionOptional(binder~, ty~) =>
-      env.inner().visit_Parameter_QuestionOptional(binder~, ty~)
+      env.0.visit_Parameter_QuestionOptional(binder~, ty~)
   }
 }
 
@@ -2847,7 +2823,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter_D
   ty~,
   loc~,
 ) {
-  let ty = ty.map(env.inner().visit_Type(_))
+  let ty = ty.map(env.0.visit_Type(_))
   DiscardPositional(ty~, loc~)
 }
 
@@ -2857,8 +2833,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter_P
   binder~,
   ty~,
 ) {
-  let binder = env.inner().visit_Binder(binder)
-  let ty = ty.map(env.inner().visit_Type(_))
+  let binder = env.0.visit_Binder(binder)
+  let ty = ty.map(env.0.visit_Type(_))
   Positional(binder~, ty~)
 }
 
@@ -2868,7 +2844,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter_L
   binder~,
   ty~,
 ) {
-  let binder = env.inner().visit_Binder(binder)
+  let binder = env.0.visit_Binder(binder)
   Labelled(binder~, ty~)
 }
 
@@ -2879,9 +2855,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter_O
   default~,
   ty~,
 ) {
-  let binder = env.inner().visit_Binder(binder)
-  let default = env.inner().visit_Expr(default)
-  let ty = ty.map(env.inner().visit_Type(_))
+  let binder = env.0.visit_Binder(binder)
+  let default = env.0.visit_Expr(default)
+  let ty = ty.map(env.0.visit_Type(_))
   Optional(binder~, default~, ty~)
 }
 
@@ -2891,8 +2867,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Parameter_Q
   binder~,
   ty~,
 ) {
-  let binder = env.inner().visit_Binder(binder)
-  let ty = ty.map(env.inner().visit_Type(_))
+  let binder = env.0.visit_Binder(binder)
+  let ty = ty.map(env.0.visit_Type(_))
   QuestionOptional(binder~, ty~)
 }
 
@@ -2901,9 +2877,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Case(
   env,
   case,
 ) {
-  let pattern = env.inner().visit_Pattern(case.pattern)
-  let guard_ = case.guard_.map(env.inner().visit_Expr(_))
-  let body = env.inner().visit_Expr(case.body)
+  let pattern = env.0.visit_Pattern(case.pattern)
+  let guard_ = case.guard_.map(env.0.visit_Expr(_))
+  let body = env.0.visit_Expr(case.body)
   Case::{ pattern, guard_, body }
 }
 
@@ -2912,9 +2888,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MultiArgCas
   env,
   multi_arg_case,
 ) {
-  let patterns = multi_arg_case.patterns.map(env.inner().visit_Pattern(_))
-  let guard_ = multi_arg_case.guard_.map(env.inner().visit_Expr(_))
-  let body = env.inner().visit_Expr(multi_arg_case.body)
+  let patterns = multi_arg_case.patterns.map(env.0.visit_Pattern(_))
+  let guard_ = multi_arg_case.guard_.map(env.0.visit_Expr(_))
+  let body = env.0.visit_Expr(multi_arg_case.body)
   MultiArgCase::{ patterns, guard_, body }
 }
 
@@ -2924,8 +2900,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_SpreadableE
   spreadable_elem,
 ) {
   match spreadable_elem {
-    Regular(expr) => env.inner().visit_SpreadableElem_Regular(expr)
-    Spread(expr~, loc~) => env.inner().visit_SpreadableElem_Spread(expr~, loc~)
+    Regular(expr) => env.0.visit_SpreadableElem_Regular(expr)
+    Spread(expr~, loc~) => env.0.visit_SpreadableElem_Spread(expr~, loc~)
   }
 }
 
@@ -2934,7 +2910,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_SpreadableE
   env,
   expr,
 ) {
-  let expr = env.inner().visit_Expr(expr)
+  let expr = env.0.visit_Expr(expr)
   Regular(expr)
 }
 
@@ -2944,7 +2920,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_SpreadableE
   expr~,
   loc~,
 ) {
-  let expr = env.inner().visit_Expr(expr)
+  let expr = env.0.visit_Expr(expr)
   Spread(expr~, loc~)
 }
 
@@ -2953,8 +2929,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MapExprElem
   env,
   mapexpr_elem,
 ) {
-  let key = env.inner().visit_Constant(mapexpr_elem.key)
-  let expr = env.inner().visit_Expr(mapexpr_elem.expr)
+  let key = env.0.visit_Constant(mapexpr_elem.key)
+  let expr = env.0.visit_Expr(mapexpr_elem.expr)
   let key_loc = mapexpr_elem.key_loc
   let loc = mapexpr_elem.loc
   MapExprElem::{ key, expr, key_loc, loc }
@@ -2965,8 +2941,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_StaticAsser
   env,
   static_assertion,
 ) {
-  let ty = env.inner().visit_Type(static_assertion.ty)
-  let trait_ = env.inner().visit_LongIdent(static_assertion.trait_)
+  let ty = env.0.visit_Type(static_assertion.ty)
+  let trait_ = env.0.visit_LongIdent(static_assertion.trait_)
   let loc = static_assertion.loc
   let msg = static_assertion.msg
   StaticAssertion::{ ty, trait_, loc, msg }
@@ -2989,9 +2965,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Func(
       is_async~,
       loc~
     ) =>
-      env
-      .inner()
-      .visit_Func_Lambda(
+      env.0.visit_Func_Lambda(
         parameters~,
         params_loc~,
         body~,
@@ -3003,7 +2977,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Func(
         loc~,
       )
     Match(cases~, has_error~, is_async~, fn_loc~, loc~) =>
-      env.inner().visit_Func_Match(cases~, has_error~, is_async~, fn_loc~, loc~)
+      env.0.visit_Func_Match(cases~, has_error~, is_async~, fn_loc~, loc~)
   }
 }
 
@@ -3020,11 +2994,11 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Func_Lambda
   is_async~,
   loc~,
 ) {
-  let parameters = parameters.map(env.inner().visit_Parameter(_))
-  let body = env.inner().visit_Expr(body)
-  let return_type = return_type.map(env.inner().visit_Type(_))
-  let error_type = env.inner().visit_ErrorType(error_type)
-  let kind = env.inner().visit_FnKind(kind)
+  let parameters = parameters.map(env.0.visit_Parameter(_))
+  let body = env.0.visit_Expr(body)
+  let return_type = return_type.map(env.0.visit_Type(_))
+  let error_type = env.0.visit_ErrorType(error_type)
+  let kind = env.0.visit_FnKind(kind)
   Lambda(
     parameters~,
     params_loc~,
@@ -3047,7 +3021,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Func_Match(
   fn_loc~,
   loc~,
 ) {
-  let cases = cases.map(env.inner().visit_MultiArgCase(_))
+  let cases = cases.map(env.0.visit_MultiArgCase(_))
   Match(cases~, has_error~, is_async~, fn_loc~, loc~)
 }
 
@@ -3056,8 +3030,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FieldDef(
   env,
   field_def,
 ) {
-  let label = env.inner().visit_Label(field_def.label)
-  let expr = env.inner().visit_Expr(field_def.expr)
+  let label = env.0.visit_Label(field_def.label)
+  let expr = env.0.visit_Expr(field_def.expr)
   let is_pun = field_def.is_pun
   let loc = field_def.loc
   FieldDef::{ label, expr, is_pun, loc }
@@ -3069,9 +3043,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_InterpElem(
   interp_elem,
 ) {
   match interp_elem {
-    Literal(repr~, loc~) => env.inner().visit_InterpElem_Literal(repr~, loc~)
-    Expr(expr~, loc~) => env.inner().visit_InterpElem_Expr(expr~, loc~)
-    Source(interp_source) => env.inner().visit_InterpElem_Source(interp_source)
+    Literal(repr~, loc~) => env.0.visit_InterpElem_Literal(repr~, loc~)
+    Expr(expr~, loc~) => env.0.visit_InterpElem_Expr(expr~, loc~)
+    Source(interp_source) => env.0.visit_InterpElem_Source(interp_source)
   }
 }
 
@@ -3090,7 +3064,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_InterpElem_
   expr~,
   loc~,
 ) {
-  let expr = env.inner().visit_Expr(expr)
+  let expr = env.0.visit_Expr(expr)
   Expr(expr~, loc~)
 }
 
@@ -3108,10 +3082,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MultilineSt
   multiline_string_elem,
 ) {
   match multiline_string_elem {
-    String(string_val) =>
-      env.inner().visit_MultilineStringElem_String(string_val)
-    Interp(interp_elems) =>
-      env.inner().visit_MultilineStringElem_Interp(interp_elems)
+    String(string_val) => env.0.visit_MultilineStringElem_String(string_val)
+    Interp(interp_elems) => env.0.visit_MultilineStringElem_Interp(interp_elems)
   }
 }
 
@@ -3147,8 +3119,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DotDotBinde
   match dot_dot_binder {
     Underscore => Underscore
     NoBinder => NoBinder
-    BinderAs(binder) => env.inner().visit_DotDotBinder_BinderAs(binder)
-    Binder(binder) => env.inner().visit_DotDotBinder_Binder(binder)
+    BinderAs(binder) => env.0.visit_DotDotBinder_BinderAs(binder)
+    Binder(binder) => env.0.visit_DotDotBinder_Binder(binder)
   }
 }
 
@@ -3157,7 +3129,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DotDotBinde
   env,
   binder,
 ) {
-  let binder = env.inner().visit_Binder(binder)
+  let binder = env.0.visit_Binder(binder)
   BinderAs(binder)
 }
 
@@ -3166,7 +3138,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DotDotBinde
   env,
   binder,
 ) {
-  let binder = env.inner().visit_Binder(binder)
+  let binder = env.0.visit_Binder(binder)
   Binder(binder)
 }
 
@@ -3176,13 +3148,13 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatter
   array_pattern,
 ) {
   match array_pattern {
-    Pattern(pattern) => env.inner().visit_ArrayPattern_Pattern(pattern)
+    Pattern(pattern) => env.0.visit_ArrayPattern_Pattern(pattern)
     StringSpread(str~, loc~) =>
-      env.inner().visit_ArrayPattern_StringSpread(str~, loc~)
+      env.0.visit_ArrayPattern_StringSpread(str~, loc~)
     BytesSpread(bytes~, loc~) =>
-      env.inner().visit_ArrayPattern_BytesSpread(bytes~, loc~)
+      env.0.visit_ArrayPattern_BytesSpread(bytes~, loc~)
     ConstSpread(binder~, pkg~, loc~) =>
-      env.inner().visit_ArrayPattern_ConstSpread(binder~, pkg~, loc~)
+      env.0.visit_ArrayPattern_ConstSpread(binder~, pkg~, loc~)
   }
 }
 
@@ -3191,7 +3163,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatter
   env,
   pattern,
 ) {
-  let pattern = env.inner().visit_Pattern(pattern)
+  let pattern = env.0.visit_Pattern(pattern)
   Pattern(pattern)
 }
 
@@ -3220,7 +3192,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatter
   pkg~,
   loc~,
 ) {
-  let binder = env.inner().visit_Binder(binder)
+  let binder = env.0.visit_Binder(binder)
   ConstSpread(binder~, pkg~, loc~)
 }
 
@@ -3230,11 +3202,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatter
   array_patterns,
 ) {
   match array_patterns {
-    Closed(patterns) => env.inner().visit_ArrayPatterns_Closed(patterns)
+    Closed(patterns) => env.0.visit_ArrayPatterns_Closed(patterns)
     Open(prefix_patterns, suffix_patterns, dot_dot_binder) =>
-      env
-      .inner()
-      .visit_ArrayPatterns_Open(
+      env.0.visit_ArrayPatterns_Open(
         prefix_patterns, suffix_patterns, dot_dot_binder,
       )
   }
@@ -3245,7 +3215,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatter
   env,
   array_patterns,
 ) {
-  let array_patterns = array_patterns.map(env.inner().visit_ArrayPattern(_))
+  let array_patterns = array_patterns.map(env.0.visit_ArrayPattern(_))
   Closed(array_patterns)
 }
 
@@ -3256,9 +3226,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatter
   suffix_patterns,
   dot_dot_binder,
 ) {
-  let prefix_patterns = prefix_patterns.map(env.inner().visit_ArrayPattern(_))
-  let suffix_patterns = suffix_patterns.map(env.inner().visit_ArrayPattern(_))
-  let dot_dot_binder = env.inner().visit_DotDotBinder(dot_dot_binder)
+  let prefix_patterns = prefix_patterns.map(env.0.visit_ArrayPattern(_))
+  let suffix_patterns = suffix_patterns.map(env.0.visit_ArrayPattern(_))
+  let dot_dot_binder = env.0.visit_DotDotBinder(dot_dot_binder)
   Open(prefix_patterns, suffix_patterns, dot_dot_binder)
 }
 
@@ -3267,8 +3237,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FieldPat(
   env,
   field_pat,
 ) {
-  let label = env.inner().visit_Label(field_pat.label)
-  let pattern = env.inner().visit_Pattern(field_pat.pattern)
+  let label = env.0.visit_Label(field_pat.label)
+  let pattern = env.0.visit_Pattern(field_pat.pattern)
   let is_pun = field_pat.is_pun
   let loc = field_pat.loc
   FieldPat::{ label, pattern, is_pun, loc }
@@ -3279,8 +3249,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ConstrPatAr
   env,
   constr_pat_arg,
 ) {
-  let pat = env.inner().visit_Pattern(constr_pat_arg.pat)
-  let kind = env.inner().visit_ArgumentKind(constr_pat_arg.kind)
+  let pat = env.0.visit_Pattern(constr_pat_arg.pat)
+  let kind = env.0.visit_ArgumentKind(constr_pat_arg.kind)
   ConstrPatArg::{ pat, kind }
 }
 
@@ -3289,8 +3259,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MapPatElem(
   env,
   mappat_elem,
 ) {
-  let key = env.inner().visit_Constant(mappat_elem.key)
-  let pat = env.inner().visit_Pattern(mappat_elem.pat)
+  let key = env.0.visit_Constant(mappat_elem.key)
+  let pat = env.0.visit_Pattern(mappat_elem.pat)
   let match_absent = mappat_elem.match_absent
   let key_loc = mappat_elem.key_loc
   let loc = mappat_elem.loc
@@ -3303,26 +3273,25 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern(
   pattern,
 ) {
   match pattern {
-    Alias(pat~, alias_~, loc~) =>
-      env.inner().visit_Pattern_Alias(pat~, alias_~, loc~)
-    Any(loc~) => env.inner().visit_Pattern_Any(loc~)
-    Array(pats~, loc~) => env.inner().visit_Pattern_Array(pats~, loc~)
-    Constant(c~, loc~) => env.inner().visit_Pattern_Constant(c~, loc~)
+    Alias(pat~, alias_~, loc~) => env.0.visit_Pattern_Alias(pat~, alias_~, loc~)
+    Any(loc~) => env.0.visit_Pattern_Any(loc~)
+    Array(pats~, loc~) => env.0.visit_Pattern_Array(pats~, loc~)
+    Constant(c~, loc~) => env.0.visit_Pattern_Constant(c~, loc~)
     Constraint(pat~, ty~, loc~) =>
-      env.inner().visit_Pattern_Constraint(pat~, ty~, loc~)
+      env.0.visit_Pattern_Constraint(pat~, ty~, loc~)
     Constr(constr~, args~, is_open~, loc~) =>
-      env.inner().visit_Pattern_Constr(constr~, args~, is_open~, loc~)
-    Or(pat1~, pat2~, loc~) => env.inner().visit_Pattern_Or(pat1~, pat2~, loc~)
-    Tuple(pats~, loc~) => env.inner().visit_Pattern_Tuple(pats~, loc~)
-    Var(binder) => env.inner().visit_Pattern_Var(binder)
+      env.0.visit_Pattern_Constr(constr~, args~, is_open~, loc~)
+    Or(pat1~, pat2~, loc~) => env.0.visit_Pattern_Or(pat1~, pat2~, loc~)
+    Tuple(pats~, loc~) => env.0.visit_Pattern_Tuple(pats~, loc~)
+    Var(binder) => env.0.visit_Pattern_Var(binder)
     Record(fields~, is_closed~, loc~) =>
-      env.inner().visit_Pattern_Record(fields~, is_closed~, loc~)
+      env.0.visit_Pattern_Record(fields~, is_closed~, loc~)
     Map(elems~, is_closed~, loc~) =>
-      env.inner().visit_Pattern_Map(elems~, is_closed~, loc~)
+      env.0.visit_Pattern_Map(elems~, is_closed~, loc~)
     Range(lhs~, rhs~, inclusive~, loc~) =>
-      env.inner().visit_Pattern_Range(lhs~, rhs~, inclusive~, loc~)
+      env.0.visit_Pattern_Range(lhs~, rhs~, inclusive~, loc~)
     SpecialConstr(binder~, args~, loc~) =>
-      env.inner().visit_Pattern_SpecialConstr(binder~, args~, loc~)
+      env.0.visit_Pattern_SpecialConstr(binder~, args~, loc~)
   }
 }
 
@@ -3333,8 +3302,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Ali
   alias_~,
   loc~,
 ) {
-  let pat = env.inner().visit_Pattern(pat)
-  let alias_ = env.inner().visit_Binder(alias_)
+  let pat = env.0.visit_Pattern(pat)
+  let alias_ = env.0.visit_Binder(alias_)
   Alias(pat~, alias_~, loc~)
 }
 
@@ -3352,7 +3321,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Arr
   pats~,
   loc~,
 ) {
-  let pats = env.inner().visit_ArrayPatterns(pats)
+  let pats = env.0.visit_ArrayPatterns(pats)
   Array(pats~, loc~)
 }
 
@@ -3362,7 +3331,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Con
   c~,
   loc~,
 ) {
-  let c = env.inner().visit_Constant(c)
+  let c = env.0.visit_Constant(c)
   Constant(c~, loc~)
 }
 
@@ -3373,8 +3342,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Con
   ty~,
   loc~,
 ) {
-  let pat = env.inner().visit_Pattern(pat)
-  let ty = env.inner().visit_Type(ty)
+  let pat = env.0.visit_Pattern(pat)
+  let ty = env.0.visit_Type(ty)
   Constraint(pat~, ty~, loc~)
 }
 
@@ -3386,8 +3355,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Con
   is_open~,
   loc~,
 ) {
-  let constr = env.inner().visit_Constructor(constr)
-  let args = args.map(args => args.map(env.inner().visit_ConstrPatArg(_)))
+  let constr = env.0.visit_Constructor(constr)
+  let args = args.map(args => args.map(env.0.visit_ConstrPatArg(_)))
   Constr(constr~, args~, is_open~, loc~)
 }
 
@@ -3398,8 +3367,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Or(
   pat2~,
   loc~,
 ) {
-  let pat1 = env.inner().visit_Pattern(pat1)
-  let pat2 = env.inner().visit_Pattern(pat2)
+  let pat1 = env.0.visit_Pattern(pat1)
+  let pat2 = env.0.visit_Pattern(pat2)
   Or(pat1~, pat2~, loc~)
 }
 
@@ -3409,7 +3378,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Tup
   pats~,
   loc~,
 ) {
-  let pats = pats.map(env.inner().visit_Pattern(_))
+  let pats = pats.map(env.0.visit_Pattern(_))
   Tuple(pats~, loc~)
 }
 
@@ -3418,7 +3387,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Var
   env,
   binder,
 ) {
-  let binder = env.inner().visit_Binder(binder)
+  let binder = env.0.visit_Binder(binder)
   Var(binder)
 }
 
@@ -3429,7 +3398,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Rec
   is_closed~,
   loc~,
 ) {
-  let fields = fields.map(env.inner().visit_FieldPat(_))
+  let fields = fields.map(env.0.visit_FieldPat(_))
   Record(fields~, is_closed~, loc~)
 }
 
@@ -3440,7 +3409,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Map
   is_closed~,
   loc~,
 ) {
-  let elems = elems.map(env.inner().visit_MapPatElem(_))
+  let elems = elems.map(env.0.visit_MapPatElem(_))
   Map(elems~, is_closed~, loc~)
 }
 
@@ -3452,8 +3421,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Ran
   inclusive~,
   loc~,
 ) {
-  let lhs = env.inner().visit_Pattern(lhs)
-  let rhs = env.inner().visit_Pattern(rhs)
+  let lhs = env.0.visit_Pattern(lhs)
+  let rhs = env.0.visit_Pattern(rhs)
   Range(lhs~, rhs~, inclusive~, loc~)
 }
 
@@ -3464,8 +3433,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Spe
   args~,
   loc~,
 ) {
-  let binder = env.inner().visit_Binder(binder)
-  let args = args.map(env.inner().visit_ConstrPatArg(_))
+  let binder = env.0.visit_Binder(binder)
+  let args = args.map(env.0.visit_ConstrPatArg(_))
   SpecialConstr(binder~, args~, loc~)
 }
 
@@ -3474,10 +3443,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LocalTypeDe
   env,
   localtype_decl,
 ) {
-  let components = env.inner().visit_TypeDesc(localtype_decl.components)
-  let deriving = localtype_decl.deriving.map(
-    env.inner().visit_DerivingDirective(_),
-  )
+  let components = env.0.visit_TypeDesc(localtype_decl.components)
+  let deriving = localtype_decl.deriving.map(env.0.visit_DerivingDirective(_))
   let tycon = localtype_decl.tycon
   let tycon_loc = localtype_decl.tycon_loc
   LocalTypeDecl::{ tycon, tycon_loc, components, deriving }
@@ -3488,8 +3455,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DerivingDir
   env,
   deriving_directive,
 ) {
-  let type_name = env.inner().visit_TypeName(deriving_directive.type_name)
-  let args = deriving_directive.args.map(env.inner().visit_Argument(_))
+  let type_name = env.0.visit_TypeName(deriving_directive.type_name)
+  let args = deriving_directive.args.map(env.0.visit_Argument(_))
   let loc = deriving_directive.loc
   DerivingDirective::{ type_name, args, loc }
 }
@@ -3499,10 +3466,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDecl(
   env,
   type_decl,
 ) {
-  let params = type_decl.params.map(env.inner().visit_TypeDeclBinder(_))
-  let components = env.inner().visit_TypeDesc(type_decl.components)
-  let deriving = type_decl.deriving.map(env.inner().visit_DerivingDirective(_))
-  let type_vis = env.inner().visit_Visibility(type_decl.type_vis)
+  let params = type_decl.params.map(env.0.visit_TypeDeclBinder(_))
+  let components = env.0.visit_TypeDesc(type_decl.components)
+  let deriving = type_decl.deriving.map(env.0.visit_DerivingDirective(_))
+  let type_vis = env.0.visit_Visibility(type_decl.type_vis)
   let tycon = type_decl.tycon
   let tycon_loc = type_decl.tycon_loc
   let attrs = type_decl.attrs
@@ -3528,9 +3495,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FuncStubs(
 ) {
   match func_stubs {
     Import(module_name~, func_name~) =>
-      env.inner().visit_FuncStubs_Import(module_name~, func_name~)
+      env.0.visit_FuncStubs_Import(module_name~, func_name~)
     Embedded(language~, code~) =>
-      env.inner().visit_FuncStubs_Embedded(language~, code~)
+      env.0.visit_FuncStubs_Embedded(language~, code~)
   }
 }
 
@@ -3549,7 +3516,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FuncStubs_E
   language~,
   code~,
 ) {
-  let code = env.inner().visit_EmbeddedCode(code)
+  let code = env.0.visit_EmbeddedCode(code)
   Embedded(language~, code~)
 }
 
@@ -3560,9 +3527,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_EmbeddedCod
 ) {
   match embedded_code {
     CodeString(string_literal) =>
-      env.inner().visit_EmbeddedCode_CodeString(string_literal)
+      env.0.visit_EmbeddedCode_CodeString(string_literal)
     CodeMultilineString(strings) =>
-      env.inner().visit_EmbeddedCode_CodeMultilineString(strings)
+      env.0.visit_EmbeddedCode_CodeMultilineString(strings)
   }
 }
 
@@ -3589,8 +3556,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DeclBody(
 ) {
   match decl_body {
     DeclBody(local_types~, expr~) =>
-      env.inner().visit_DeclBody_DeclBody(local_types~, expr~)
-    DeclStubs(func_stubs) => env.inner().visit_DeclBody_DeclStubs(func_stubs)
+      env.0.visit_DeclBody_DeclBody(local_types~, expr~)
+    DeclStubs(func_stubs) => env.0.visit_DeclBody_DeclStubs(func_stubs)
   }
 }
 
@@ -3600,8 +3567,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DeclBody_De
   local_types~,
   expr~,
 ) {
-  let local_types = local_types.map(env.inner().visit_LocalTypeDecl(_))
-  let expr = env.inner().visit_Expr(expr)
+  let local_types = local_types.map(env.0.visit_LocalTypeDecl(_))
+  let expr = env.0.visit_Expr(expr)
   DeclBody(local_types~, expr~)
 }
 
@@ -3610,7 +3577,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DeclBody_De
   env,
   func_stubs,
 ) {
-  let func_stubs = env.inner().visit_FuncStubs(func_stubs)
+  let func_stubs = env.0.visit_FuncStubs(func_stubs)
   DeclStubs(func_stubs)
 }
 
@@ -3619,15 +3586,15 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FunDecl(
   env,
   fun_decl,
 ) {
-  let type_name = fun_decl.type_name.map(env.inner().visit_TypeName(_))
-  let name = env.inner().visit_Binder(fun_decl.name)
-  let decl_params = fun_decl.decl_params.map(decl_params => decl_params.map(param => env
-    .inner()
-    .visit_Parameter(param)))
-  let quantifiers = fun_decl.quantifiers.map(env.inner().visit_TypeVarBinder(_))
-  let return_type = fun_decl.return_type.map(env.inner().visit_Type(_))
-  let error_type = env.inner().visit_ErrorType(fun_decl.error_type)
-  let vis = env.inner().visit_Visibility(fun_decl.vis)
+  let type_name = fun_decl.type_name.map(env.0.visit_TypeName(_))
+  let name = env.0.visit_Binder(fun_decl.name)
+  let decl_params = fun_decl.decl_params.map(decl_params => decl_params.map(param => env.0.visit_Parameter(
+    param,
+  )))
+  let quantifiers = fun_decl.quantifiers.map(env.0.visit_TypeVarBinder(_))
+  let return_type = fun_decl.return_type.map(env.0.visit_Type(_))
+  let error_type = env.0.visit_ErrorType(fun_decl.error_type)
+  let vis = env.0.visit_Visibility(fun_decl.vis)
   let has_error = fun_decl.has_error
   let is_async = fun_decl.is_async
   let params_loc = fun_decl.params_loc
@@ -3654,15 +3621,11 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TraitMethod
   env,
   method_decl,
 ) {
-  let name = env.inner().visit_Binder(method_decl.name)
-  let quantifiers = method_decl.quantifiers.map(
-    env.inner().visit_TypeVarBinder(_),
-  )
-  let params = method_decl.params.map(param => env
-    .inner()
-    .visit_Parameter(param))
-  let return_type = method_decl.return_type.map(env.inner().visit_Type(_))
-  let error_type = env.inner().visit_ErrorType(method_decl.error_type)
+  let name = env.0.visit_Binder(method_decl.name)
+  let quantifiers = method_decl.quantifiers.map(env.0.visit_TypeVarBinder(_))
+  let params = method_decl.params.map(param => env.0.visit_Parameter(param))
+  let return_type = method_decl.return_type.map(env.0.visit_Type(_))
+  let error_type = env.0.visit_ErrorType(method_decl.error_type)
   let has_error = method_decl.has_error
   let is_async = method_decl.is_async
   let has_default = method_decl.has_default
@@ -3687,10 +3650,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TraitDecl(
   env,
   trait_decl,
 ) {
-  let name = env.inner().visit_Binder(trait_decl.name)
-  let supers = trait_decl.supers.map(env.inner().visit_TypeVarConstraint(_))
-  let methods = trait_decl.methods.map(env.inner().visit_TraitMethodDecl(_))
-  let vis = env.inner().visit_Visibility(trait_decl.vis)
+  let name = env.0.visit_Binder(trait_decl.name)
+  let supers = trait_decl.supers.map(env.0.visit_TypeVarConstraint(_))
+  let methods = trait_decl.methods.map(env.0.visit_TraitMethodDecl(_))
+  let vis = env.0.visit_Visibility(trait_decl.vis)
   let loc = trait_decl.loc
   let attrs = trait_decl.attrs
   let doc = trait_decl.doc
@@ -3705,8 +3668,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopExp
   local_types~,
   loc~,
 ) {
-  let expr = env.inner().visit_Expr(expr)
-  let local_types = local_types.map(env.inner().visit_LocalTypeDecl(_))
+  let expr = env.0.visit_Expr(expr)
+  let local_types = local_types.map(env.0.visit_LocalTypeDecl(_))
   TopExpr(expr~, is_main~, local_types~, loc~)
 }
 
@@ -3722,11 +3685,11 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopTes
   attrs~,
   doc~,
 ) {
-  let expr = env.inner().visit_Expr(expr)
-  let params = params.map(params => params.map(param => env
-    .inner()
-    .visit_Parameter(param)))
-  let local_types = local_types.map(env.inner().visit_LocalTypeDecl(_))
+  let expr = env.0.visit_Expr(expr)
+  let params = params.map(params => params.map(param => env.0.visit_Parameter(
+    param,
+  )))
+  let local_types = local_types.map(env.0.visit_LocalTypeDecl(_))
   TopTest(expr~, name~, params~, local_types~, is_async~, loc~, attrs~, doc~)
 }
 
@@ -3735,7 +3698,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopTyp
   env,
   type_decl,
 ) {
-  let type_decl = env.inner().visit_TypeDecl(type_decl)
+  let type_decl = env.0.visit_TypeDecl(type_decl)
   TopTypeDef(type_decl)
 }
 
@@ -3746,8 +3709,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopFun
   decl_body~,
   loc~,
 ) {
-  let fun_decl = env.inner().visit_FunDecl(fun_decl)
-  let decl_body = env.inner().visit_DeclBody(decl_body)
+  let fun_decl = env.0.visit_FunDecl(fun_decl)
+  let decl_body = env.0.visit_DeclBody(decl_body)
   TopFuncDef(fun_decl~, decl_body~, loc~)
 }
 
@@ -3763,10 +3726,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopFun
   doc~,
   loc~,
 ) {
-  let pkg = pkg.map(env.inner().visit_Label(_))
-  let type_name = type_name.map(env.inner().visit_Label(_))
-  let targets = targets.map(env.inner().visit_AliasTarget(_))
-  let vis = env.inner().visit_Visibility(vis)
+  let pkg = pkg.map(env.0.visit_Label(_))
+  let type_name = type_name.map(env.0.visit_Label(_))
+  let targets = targets.map(env.0.visit_AliasTarget(_))
+  let vis = env.0.visit_Visibility(vis)
   TopFuncAlias(pkg~, type_name~, targets~, vis~, attrs~, is_list~, doc~, loc~)
 }
 
@@ -3782,10 +3745,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopLet
   attrs~,
   doc~,
 ) {
-  let binder = env.inner().visit_Binder(binder)
-  let ty = ty.map(env.inner().visit_Type(_))
-  let expr = env.inner().visit_Expr(expr)
-  let vis = env.inner().visit_Visibility(vis)
+  let binder = env.0.visit_Binder(binder)
+  let ty = ty.map(env.0.visit_Type(_))
+  let expr = env.0.visit_Expr(expr)
+  let vis = env.0.visit_Visibility(vis)
   TopLetDef(binder~, ty~, expr~, vis~, is_constant~, loc~, attrs~, doc~)
 }
 
@@ -3794,7 +3757,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopTra
   env,
   trait_decl,
 ) {
-  let trait_decl = env.inner().visit_TraitDecl(trait_decl)
+  let trait_decl = env.0.visit_TraitDecl(trait_decl)
   TopTrait(trait_decl)
 }
 
@@ -3809,9 +3772,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopBat
   is_list~,
   doc~,
 ) {
-  let pkg = pkg.map(env.inner().visit_Label(_))
-  let targets = targets.map(env.inner().visit_AliasTarget(_))
-  let vis = env.inner().visit_Visibility(vis)
+  let pkg = pkg.map(env.0.visit_Label(_))
+  let targets = targets.map(env.0.visit_AliasTarget(_))
+  let vis = env.0.visit_Visibility(vis)
   TopBatchTypeAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~)
 }
 
@@ -3826,9 +3789,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopBat
   is_list~,
   doc~,
 ) {
-  let pkg = pkg.map(env.inner().visit_Label(_))
-  let targets = targets.map(env.inner().visit_AliasTarget(_))
-  let vis = env.inner().visit_Visibility(vis)
+  let pkg = pkg.map(env.0.visit_Label(_))
+  let targets = targets.map(env.0.visit_AliasTarget(_))
+  let vis = env.0.visit_Visibility(vis)
   TopBatchTraitAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~)
 }
 
@@ -3849,15 +3812,15 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopImp
   attrs~,
   doc~,
 ) {
-  let self_ty = self_ty.map(env.inner().visit_Type(_))
-  let trait_ = env.inner().visit_TypeName(trait_)
-  let method_name = env.inner().visit_Binder(method_name)
-  let quantifiers = quantifiers.map(env.inner().visit_TypeVarBinder(_))
-  let params = params.map(param => env.inner().visit_Parameter(param))
-  let ret_ty = ret_ty.map(env.inner().visit_Type(_))
-  let err_ty = env.inner().visit_ErrorType(err_ty)
-  let body = env.inner().visit_DeclBody(body)
-  let vis = env.inner().visit_Visibility(vis)
+  let self_ty = self_ty.map(env.0.visit_Type(_))
+  let trait_ = env.0.visit_TypeName(trait_)
+  let method_name = env.0.visit_Binder(method_name)
+  let quantifiers = quantifiers.map(env.0.visit_TypeVarBinder(_))
+  let params = params.map(param => env.0.visit_Parameter(param))
+  let ret_ty = ret_ty.map(env.0.visit_Type(_))
+  let err_ty = env.0.visit_ErrorType(err_ty)
+  let body = env.0.visit_DeclBody(body)
+  let vis = env.0.visit_Visibility(vis)
   TopImpl(
     self_ty~,
     trait_~,
@@ -3892,13 +3855,13 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopVie
   attrs~,
   doc~,
 ) {
-  let quantifiers = quantifiers.map(env.inner().visit_TypeVarBinder(_))
-  let source_ty = env.inner().visit_Type(source_ty)
-  let view_constrs = view_constrs.map(env.inner().visit_ConstrDecl(_))
-  let view_func_name = env.inner().visit_Binder(view_func_name)
-  let parameters = parameters.map(param => env.inner().visit_Parameter(param))
-  let body = env.inner().visit_Expr(body)
-  let vis = env.inner().visit_Visibility(vis)
+  let quantifiers = quantifiers.map(env.0.visit_TypeVarBinder(_))
+  let source_ty = env.0.visit_Type(source_ty)
+  let view_constrs = view_constrs.map(env.0.visit_ConstrDecl(_))
+  let view_func_name = env.0.visit_Binder(view_func_name)
+  let parameters = parameters.map(param => env.0.visit_Parameter(param))
+  let body = env.0.visit_Expr(body)
+  let vis = env.0.visit_Visibility(vis)
   TopView(
     quantifiers~,
     source_ty~,
@@ -3927,10 +3890,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopImp
   loc~,
   doc~,
 ) {
-  let self_ty = env.inner().visit_Type(self_ty)
-  let trait_ = env.inner().visit_TypeName(trait_)
-  let quantifiers = quantifiers.map(env.inner().visit_TypeVarBinder(_))
-  let vis = env.inner().visit_Visibility(vis)
+  let self_ty = env.0.visit_Type(self_ty)
+  let trait_ = env.0.visit_TypeName(trait_)
+  let quantifiers = quantifiers.map(env.0.visit_TypeVarBinder(_))
+  let vis = env.0.visit_Visibility(vis)
   TopImplRelation(self_ty~, trait_~, quantifiers~, vis~, attrs~, loc~, doc~)
 }
 
@@ -3942,8 +3905,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Apply(
   attr~,
   loc~,
 ) {
-  let func = env.inner().visit_Expr(func)
-  let args = args.map(env.inner().visit_Argument(_))
+  let func = env.0.visit_Expr(func)
+  let args = args.map(env.0.visit_Argument(_))
   Expr::Apply(func~, args~, attr~, loc~)
 }
 
@@ -3955,9 +3918,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Infix(
   rhs~,
   loc~,
 ) {
-  let op = env.inner().visit_Var(op)
-  let lhs = env.inner().visit_Expr(lhs)
-  let rhs = env.inner().visit_Expr(rhs)
+  let op = env.0.visit_Var(op)
+  let lhs = env.0.visit_Expr(lhs)
+  let rhs = env.0.visit_Expr(rhs)
   Expr::Infix(op~, lhs~, rhs~, loc~)
 }
 
@@ -3968,8 +3931,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Unary(
   expr~,
   loc~,
 ) {
-  let op = env.inner().visit_Var(op)
-  let expr = env.inner().visit_Expr(expr)
+  let op = env.0.visit_Var(op)
+  let expr = env.0.visit_Expr(expr)
   Expr::Unary(op~, expr~, loc~)
 }
 
@@ -3979,7 +3942,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Array(
   exprs~,
   loc~,
 ) {
-  let exprs = exprs.map(expr => env.inner().visit_Expr(expr))
+  let exprs = exprs.map(expr => env.0.visit_Expr(expr))
   Expr::Array(exprs~, loc~)
 }
 
@@ -3991,8 +3954,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ArrayS
 ) {
   let elems = elems.map(fn(elem) {
     match elem {
-      Regular(expr) => Regular(env.inner().visit_Expr(expr))
-      Spread(expr~, loc~) => Spread(expr=env.inner().visit_Expr(expr), loc~)
+      Regular(expr) => Regular(env.0.visit_Expr(expr))
+      Spread(expr~, loc~) => Spread(expr=env.0.visit_Expr(expr), loc~)
     }
   })
   Expr::ArraySpread(elems~, loc~)
@@ -4005,8 +3968,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ArrayG
   index~,
   loc~,
 ) {
-  let array = env.inner().visit_Expr(array)
-  let index = env.inner().visit_Expr(index)
+  let array = env.0.visit_Expr(array)
+  let index = env.0.visit_Expr(index)
   Expr::ArrayGet(array~, index~, loc~)
 }
 
@@ -4019,9 +3982,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ArrayG
   index_loc~,
   loc~,
 ) {
-  let array = env.inner().visit_Expr(array)
-  let start_index = start_index.map(e => env.inner().visit_Expr(e))
-  let end_index = end_index.map(e => env.inner().visit_Expr(e))
+  let array = env.0.visit_Expr(array)
+  let start_index = start_index.map(e => env.0.visit_Expr(e))
+  let end_index = end_index.map(e => env.0.visit_Expr(e))
   Expr::ArrayGetSlice(array~, start_index~, end_index~, index_loc~, loc~)
 }
 
@@ -4033,9 +3996,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ArrayS
   value~,
   loc~,
 ) {
-  let index = env.inner().visit_Expr(index)
-  let value = env.inner().visit_Expr(value)
-  let array = env.inner().visit_Expr(array)
+  let index = env.0.visit_Expr(index)
+  let value = env.0.visit_Expr(value)
+  let array = env.0.visit_Expr(array)
   Expr::ArraySet(array~, index~, value~, loc~)
 }
 
@@ -4048,10 +4011,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ArrayA
   value~,
   loc~,
 ) {
-  let op = env.inner().visit_Var(op)
-  let array = env.inner().visit_Expr(array)
-  let index = env.inner().visit_Expr(index)
-  let value = env.inner().visit_Expr(value)
+  let op = env.0.visit_Var(op)
+  let array = env.0.visit_Expr(array)
+  let index = env.0.visit_Expr(index)
+  let value = env.0.visit_Expr(value)
   Expr::ArrayAugmentedSet(op~, array~, index~, value~, loc~)
 }
 
@@ -4061,7 +4024,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Consta
   c~,
   loc~,
 ) {
-  let c = env.inner().visit_Constant(c)
+  let c = env.0.visit_Constant(c)
   Expr::Constant(c~, loc~)
 }
 
@@ -4071,7 +4034,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Multil
   elems~,
   loc~,
 ) {
-  let elems = elems.map(elem => env.inner().visit_MultilineStringElem(elem))
+  let elems = elems.map(elem => env.0.visit_MultilineStringElem(elem))
   Expr::MultilineString(elems~, loc~)
 }
 
@@ -4081,7 +4044,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Interp
   elems~,
   loc~,
 ) {
-  let elems = elems.map(elem => env.inner().visit_InterpElem(elem))
+  let elems = elems.map(elem => env.0.visit_InterpElem(elem))
   Expr::Interp(elems~, loc~)
 }
 
@@ -4092,8 +4055,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Constr
   ty~,
   loc~,
 ) {
-  let ty = env.inner().visit_Type(ty)
-  let expr = env.inner().visit_Expr(expr)
+  let ty = env.0.visit_Type(ty)
+  let expr = env.0.visit_Expr(expr)
   Expr::Constraint(expr~, ty~, loc~)
 }
 
@@ -4103,7 +4066,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Constr
   constr~,
   loc~,
 ) {
-  let constr = env.inner().visit_Constructor(constr)
+  let constr = env.0.visit_Constructor(constr)
   Expr::Constr(constr~, loc~)
 }
 
@@ -4116,12 +4079,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_While(
   label~,
   loc~,
 ) {
-  let loop_cond = env.inner().visit_Expr(loop_cond)
-  let loop_body = env.inner().visit_Expr(loop_body)
-  let while_else = while_else.map(else_block => env
-    .inner()
-    .visit_Expr(else_block))
-  let label = label.map(env.inner().visit_Label(_))
+  let loop_cond = env.0.visit_Expr(loop_cond)
+  let loop_body = env.0.visit_Expr(loop_body)
+  let while_else = while_else.map(else_block => env.0.visit_Expr(else_block))
+  let label = label.map(env.0.visit_Label(_))
   Expr::While(loop_cond~, loop_body~, while_else~, label~, loc~)
 }
 
@@ -4131,7 +4092,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Functi
   func~,
   loc~,
 ) {
-  let func = env.inner().visit_Func(func)
+  let func = env.0.visit_Func(func)
   Expr::Function(func~, loc~)
 }
 
@@ -4141,7 +4102,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Ident(
   id~,
   loc~,
 ) {
-  let id = env.inner().visit_Var(id)
+  let id = env.0.visit_Var(id)
   Expr::Ident(id~, loc~)
 }
 
@@ -4153,9 +4114,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_If(
   ifnot~,
   loc~,
 ) {
-  let cond = env.inner().visit_Expr(cond)
-  let ifso = env.inner().visit_Expr(ifso)
-  let ifnot = ifnot.map(expr => env.inner().visit_Expr(expr))
+  let cond = env.0.visit_Expr(cond)
+  let ifso = env.0.visit_Expr(ifso)
+  let ifnot = ifnot.map(expr => env.0.visit_Expr(expr))
   Expr::If(cond~, ifso~, ifnot~, loc~)
 }
 
@@ -4167,9 +4128,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Guard(
   body~,
   loc~,
 ) {
-  let cond = env.inner().visit_Expr(cond)
-  let body = env.inner().visit_Expr(body)
-  let otherwise = otherwise.map(expr => env.inner().visit_Expr(expr))
+  let cond = env.0.visit_Expr(cond)
+  let body = env.0.visit_Expr(body)
+  let otherwise = otherwise.map(expr => env.0.visit_Expr(expr))
   Expr::Guard(cond~, otherwise~, body~, loc~)
 }
 
@@ -4180,8 +4141,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Is(
   pat~,
   loc~,
 ) {
-  let expr = env.inner().visit_Expr(expr)
-  let pat = env.inner().visit_Pattern(pat)
+  let expr = env.0.visit_Expr(expr)
+  let pat = env.0.visit_Pattern(pat)
   Expr::Is(expr~, pat~, loc~)
 }
 
@@ -4192,8 +4153,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Defer(
   body~,
   loc~,
 ) {
-  let expr = env.inner().visit_Expr(expr)
-  let body = env.inner().visit_Expr(body)
+  let expr = env.0.visit_Expr(expr)
+  let body = env.0.visit_Expr(body)
   Expr::Defer(expr~, body~, loc~)
 }
 
@@ -4205,9 +4166,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_LetFn(
   body~,
   loc~,
 ) {
-  let name = env.inner().visit_Binder(name)
-  let func = env.inner().visit_Func(func)
-  let body = env.inner().visit_Expr(body)
+  let name = env.0.visit_Binder(name)
+  let func = env.0.visit_Func(func)
+  let body = env.0.visit_Expr(body)
   Expr::LetFn(name~, func~, body~, loc~)
 }
 
@@ -4219,10 +4180,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_LetRec
   loc~,
 ) {
   let bindings = bindings.map(binding => match binding {
-    (name, func) =>
-      (env.inner().visit_Binder(name), env.inner().visit_Func(func))
+    (name, func) => (env.0.visit_Binder(name), env.0.visit_Func(func))
   })
-  let body = env.inner().visit_Expr(body)
+  let body = env.0.visit_Expr(body)
   Expr::LetRec(bindings~, body~, loc~)
 }
 
@@ -4236,12 +4196,12 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_LetAnd
   let bindings = bindings.map(binding => match binding {
     (binder, ty, func) =>
       (
-        env.inner().visit_Binder(binder),
-        ty.map(env.inner().visit_Type(_)),
-        env.inner().visit_Func(func),
+        env.0.visit_Binder(binder),
+        ty.map(env.0.visit_Type(_)),
+        env.0.visit_Func(func),
       )
   })
-  let body = env.inner().visit_Expr(body)
+  let body = env.0.visit_Expr(body)
   Expr::LetAnd(bindings~, body~, loc~)
 }
 
@@ -4253,9 +4213,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Let(
   body~,
   loc~,
 ) {
-  let pattern = env.inner().visit_Pattern(pattern)
-  let expr = env.inner().visit_Expr(expr)
-  let body = env.inner().visit_Expr(body)
+  let pattern = env.0.visit_Pattern(pattern)
+  let expr = env.0.visit_Expr(expr)
+  let body = env.0.visit_Expr(body)
   Expr::Let(pattern~, expr~, body~, loc~)
 }
 
@@ -4266,8 +4226,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Sequen
   last_expr~,
   loc~,
 ) {
-  let exprs = exprs.map(expr => env.inner().visit_Expr(expr))
-  let last_expr = env.inner().visit_Expr(last_expr)
+  let exprs = exprs.map(expr => env.0.visit_Expr(expr))
+  let last_expr = env.0.visit_Expr(last_expr)
   Expr::Sequence(exprs~, last_expr~, loc~)
 }
 
@@ -4277,7 +4237,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Tuple(
   exprs~,
   loc~,
 ) {
-  let exprs = exprs.map(expr => env.inner().visit_Expr(expr))
+  let exprs = exprs.map(expr => env.0.visit_Expr(expr))
   Expr::Tuple(exprs~, loc~)
 }
 
@@ -4289,9 +4249,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Record
   trailing~,
   loc~,
 ) {
-  let type_name = type_name.map(env.inner().visit_TypeName(_))
-  let fields = fields.map(env.inner().visit_FieldDef(_))
-  let trailing = env.inner().visit_TrailingMark(trailing)
+  let type_name = type_name.map(env.0.visit_TypeName(_))
+  let fields = fields.map(env.0.visit_FieldDef(_))
+  let trailing = env.0.visit_TrailingMark(trailing)
   Expr::Record(type_name~, fields~, trailing~, loc~)
 }
 
@@ -4303,9 +4263,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Record
   fields~,
   loc~,
 ) {
-  let type_name = type_name.map(env.inner().visit_TypeName(_))
-  let fields = fields.map(env.inner().visit_FieldDef(_))
-  let record = env.inner().visit_Expr(record)
+  let type_name = type_name.map(env.0.visit_TypeName(_))
+  let fields = fields.map(env.0.visit_FieldDef(_))
+  let record = env.0.visit_Expr(record)
   Expr::RecordUpdate(type_name~, record~, fields~, loc~)
 }
 
@@ -4316,8 +4276,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Field(
   accessor~,
   loc~,
 ) {
-  let record = env.inner().visit_Expr(record)
-  let accessor = env.inner().visit_Accessor(accessor)
+  let record = env.0.visit_Expr(record)
+  let accessor = env.0.visit_Accessor(accessor)
   Expr::Field(record~, accessor~, loc~)
 }
 
@@ -4328,8 +4288,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Method
   method_name~,
   loc~,
 ) {
-  let type_name = env.inner().visit_TypeName(type_name)
-  let method_name = env.inner().visit_Label(method_name)
+  let type_name = env.0.visit_TypeName(type_name)
+  let method_name = env.0.visit_Label(method_name)
   Expr::Method(type_name~, method_name~, loc~)
 }
 
@@ -4343,9 +4303,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_DotApp
   attr~,
   loc~,
 ) {
-  let self = env.inner().visit_Expr(self)
-  let method_name = env.inner().visit_Label(method_name)
-  let args = args.map(env.inner().visit_Argument(_))
+  let self = env.0.visit_Expr(self)
+  let method_name = env.0.visit_Label(method_name)
+  let args = args.map(env.0.visit_Argument(_))
   Expr::DotApply(self~, method_name~, args~, return_self~, attr~, loc~)
 }
 
@@ -4356,8 +4316,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_As(
   trait_~,
   loc~,
 ) {
-  let trait_ = env.inner().visit_TypeName(trait_)
-  let expr = env.inner().visit_Expr(expr)
+  let trait_ = env.0.visit_TypeName(trait_)
+  let expr = env.0.visit_Expr(expr)
   Expr::As(expr~, trait_~, loc~)
 }
 
@@ -4370,10 +4330,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Mutate
   augmented_by~,
   loc~,
 ) {
-  let record = env.inner().visit_Expr(record)
-  let accessor = env.inner().visit_Accessor(accessor)
-  let field = env.inner().visit_Expr(field)
-  let augmented_by = augmented_by.map(env.inner().visit_Var(_))
+  let record = env.0.visit_Expr(record)
+  let accessor = env.0.visit_Accessor(accessor)
+  let field = env.0.visit_Expr(field)
+  let augmented_by = augmented_by.map(env.0.visit_Var(_))
   Expr::Mutate(record~, accessor~, field~, augmented_by~, loc~)
 }
 
@@ -4385,8 +4345,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Match(
   match_loc~,
   loc~,
 ) {
-  let expr = env.inner().visit_Expr(expr)
-  let cases = cases.map(env.inner().visit_Case(_))
+  let expr = env.0.visit_Expr(expr)
+  let cases = cases.map(env.0.visit_Case(_))
   Expr::Match(expr~, cases~, match_loc~, loc~)
 }
 
@@ -4399,10 +4359,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_LetMut
   body~,
   loc~,
 ) {
-  let binder = env.inner().visit_Binder(binder)
-  let ty = ty.map(env.inner().visit_Type(_))
-  let expr = env.inner().visit_Expr(expr)
-  let body = env.inner().visit_Expr(body)
+  let binder = env.0.visit_Binder(binder)
+  let ty = ty.map(env.0.visit_Type(_))
+  let expr = env.0.visit_Expr(expr)
+  let body = env.0.visit_Expr(body)
   Expr::LetMut(binder~, ty~, expr~, body~, loc~)
 }
 
@@ -4413,8 +4373,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Pipe(
   rhs~,
   loc~,
 ) {
-  let lhs = env.inner().visit_Expr(lhs)
-  let rhs = env.inner().visit_Expr(rhs)
+  let lhs = env.0.visit_Expr(lhs)
+  let rhs = env.0.visit_Expr(rhs)
   Expr::Pipe(lhs~, rhs~, loc~)
 }
 
@@ -4426,9 +4386,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Assign
   augmented_by~,
   loc~,
 ) {
-  let var_ = env.inner().visit_Var(var_)
-  let augmented_by = augmented_by.map(env.inner().visit_Var(_))
-  let expr = env.inner().visit_Expr(expr)
+  let var_ = env.0.visit_Var(var_)
+  let augmented_by = augmented_by.map(env.0.visit_Var(_))
+  let expr = env.0.visit_Expr(expr)
   Expr::Assign(var_~, expr~, augmented_by~, loc~)
 }
 
@@ -4438,7 +4398,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Hole(
   loc~,
   kind~,
 ) {
-  let kind = env.inner().visit_Hole(kind)
+  let kind = env.0.visit_Hole(kind)
   Expr::Hole(loc~, kind~)
 }
 
@@ -4448,7 +4408,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Return
   return_value~,
   loc~,
 ) {
-  let return_value = return_value.map(value => env.inner().visit_Expr(value))
+  let return_value = return_value.map(value => env.0.visit_Expr(value))
   Expr::Return(return_value~, loc~)
 }
 
@@ -4458,7 +4418,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Raise(
   err_value~,
   loc~,
 ) {
-  let err_value = env.inner().visit_Expr(err_value)
+  let err_value = env.0.visit_Expr(err_value)
   Expr::Raise(err_value~, loc~)
 }
 
@@ -4478,8 +4438,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Break(
   label~,
   loc~,
 ) {
-  let label = label.map(env.inner().visit_Label(_))
-  let arg = arg.map(env.inner().visit_Expr(_))
+  let label = label.map(env.0.visit_Label(_))
+  let arg = arg.map(env.0.visit_Expr(_))
   Expr::Break(arg~, label~, loc~)
 }
 
@@ -4490,8 +4450,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Contin
   label~,
   loc~,
 ) {
-  let args = args.map(arg => env.inner().visit_Expr(arg))
-  let label = label.map(env.inner().visit_Label(_))
+  let args = args.map(arg => env.0.visit_Expr(arg))
+  let label = label.map(env.0.visit_Label(_))
   Expr::Continue(args~, label~, loc~)
 }
 
@@ -4504,9 +4464,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Loop(
   loop_loc~,
   loc~,
 ) {
-  let arg = env.inner().visit_Expr(arg)
-  let body = body.map(env.inner().visit_Case(_))
-  let label = label.map(env.inner().visit_Label(_))
+  let arg = env.0.visit_Expr(arg)
+  let body = body.map(env.0.visit_Case(_))
+  let label = label.map(env.0.visit_Label(_))
   Expr::Loop(arg~, body~, label~, loop_loc~, loc~)
 }
 
@@ -4522,17 +4482,17 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_For(
   loc~,
 ) {
   let binders = binders.map(p => (
-    env.inner().visit_Binder(p.0),
-    env.inner().visit_Expr(p.1),
+    env.0.visit_Binder(p.0),
+    env.0.visit_Expr(p.1),
   ))
-  let condition = condition.map(cond => env.inner().visit_Expr(cond))
+  let condition = condition.map(cond => env.0.visit_Expr(cond))
   let continue_block = continue_block.map(p => (
-    env.inner().visit_Binder(p.0),
-    env.inner().visit_Expr(p.1),
+    env.0.visit_Binder(p.0),
+    env.0.visit_Expr(p.1),
   ))
-  let body = env.inner().visit_Expr(body)
-  let for_else = for_else.map(else_block => env.inner().visit_Expr(else_block))
-  let label = label.map(env.inner().visit_Label(_))
+  let body = env.0.visit_Expr(body)
+  let for_else = for_else.map(else_block => env.0.visit_Expr(else_block))
+  let label = label.map(env.0.visit_Label(_))
   Expr::For(
     binders~,
     condition~,
@@ -4554,13 +4514,11 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ForEac
   label~,
   loc~,
 ) {
-  let binders = binders.map(binder => binder.map(env.inner().visit_Binder(_)))
-  let expr = env.inner().visit_Expr(expr)
-  let body = env.inner().visit_Expr(body)
-  let else_block = else_block.map(else_block => env
-    .inner()
-    .visit_Expr(else_block))
-  let label = label.map(env.inner().visit_Label(_))
+  let binders = binders.map(binder => binder.map(env.0.visit_Binder(_)))
+  let expr = env.0.visit_Expr(expr)
+  let body = env.0.visit_Expr(body)
+  let else_block = else_block.map(else_block => env.0.visit_Expr(else_block))
+  let label = label.map(env.0.visit_Label(_))
   Expr::ForEach(binders~, expr~, body~, else_block~, label~, loc~)
 }
 
@@ -4577,11 +4535,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Try(
   else_loc~,
   loc~,
 ) {
-  let body = env.inner().visit_Expr(body)
-  let catch_ = catch_.map(env.inner().visit_Case(_))
-  let try_else = try_else.map(try_else => try_else.map(
-    env.inner().visit_Case(_),
-  ))
+  let body = env.0.visit_Expr(body)
+  let catch_ = catch_.map(env.0.visit_Case(_))
+  let try_else = try_else.map(try_else => try_else.map(env.0.visit_Case(_)))
   Expr::Try(
     body~,
     catch_~,
@@ -4603,8 +4559,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_TryOpe
   try_loc~,
   loc~,
 ) {
-  let body = env.inner().visit_Expr(body)
-  let kind = env.inner().visit_TryOperatorKind(kind)
+  let body = env.0.visit_Expr(body)
+  let kind = env.0.visit_TryOperatorKind(kind)
   Expr::TryOperator(body~, kind~, try_loc~, loc~)
 }
 
@@ -4614,7 +4570,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Map(
   elems~,
   loc~,
 ) {
-  let elems = elems.map(env.inner().visit_MapExprElem(_))
+  let elems = elems.map(env.0.visit_MapExprElem(_))
   Expr::Map(elems~, loc~)
 }
 
@@ -4625,8 +4581,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Group(
   group~,
   loc~,
 ) {
-  let expr = env.inner().visit_Expr(expr)
-  let group = env.inner().visit_Group(group)
+  let expr = env.0.visit_Expr(expr)
+  let group = env.0.visit_Group(group)
   Expr::Group(expr~, group~, loc~)
 }
 
@@ -4636,8 +4592,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Static
   asserts~,
   body~,
 ) {
-  let asserts = asserts.map(env.inner().visit_StaticAssertion(_))
-  let body = env.inner().visit_Expr(body)
+  let asserts = asserts.map(env.0.visit_StaticAssertion(_))
+  let body = env.0.visit_Expr(body)
   Expr::StaticAssert(asserts~, body~)
 }
 
@@ -4648,19 +4604,16 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
 ) {
   match expr {
     Apply(func~, args~, attr~, loc~) =>
-      env.inner().visit_Expr_Apply(func~, args~, attr~, loc~)
+      env.0.visit_Expr_Apply(func~, args~, attr~, loc~)
     Infix(op~, lhs~, rhs~, loc~) =>
-      env.inner().visit_Expr_Infix(op~, lhs~, rhs~, loc~)
-    Unary(op~, expr~, loc~) => env.inner().visit_Expr_Unary(op~, expr~, loc~)
-    Array(exprs~, loc~) => env.inner().visit_Expr_Array(exprs~, loc~)
-    ArraySpread(elems~, loc~) =>
-      env.inner().visit_Expr_ArraySpread(elems~, loc~)
+      env.0.visit_Expr_Infix(op~, lhs~, rhs~, loc~)
+    Unary(op~, expr~, loc~) => env.0.visit_Expr_Unary(op~, expr~, loc~)
+    Array(exprs~, loc~) => env.0.visit_Expr_Array(exprs~, loc~)
+    ArraySpread(elems~, loc~) => env.0.visit_Expr_ArraySpread(elems~, loc~)
     ArrayGet(array~, index~, loc~) =>
-      env.inner().visit_Expr_ArrayGet(array~, index~, loc~)
+      env.0.visit_Expr_ArrayGet(array~, index~, loc~)
     ArrayGetSlice(array~, start_index~, end_index~, index_loc~, loc~) =>
-      env
-      .inner()
-      .visit_Expr_ArrayGetSlice(
+      env.0.visit_Expr_ArrayGetSlice(
         array~,
         start_index~,
         end_index~,
@@ -4668,54 +4621,47 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
         loc~,
       )
     ArraySet(array~, index~, value~, loc~) =>
-      env.inner().visit_Expr_ArraySet(array~, index~, value~, loc~)
+      env.0.visit_Expr_ArraySet(array~, index~, value~, loc~)
     ArrayAugmentedSet(op~, array~, index~, value~, loc~) =>
-      env
-      .inner()
-      .visit_Expr_ArrayAugmentedSet(op~, array~, index~, value~, loc~)
-    Constant(c~, loc~) => env.inner().visit_Expr_Constant(c~, loc~)
+      env.0.visit_Expr_ArrayAugmentedSet(op~, array~, index~, value~, loc~)
+    Constant(c~, loc~) => env.0.visit_Expr_Constant(c~, loc~)
     MultilineString(elems~, loc~) =>
-      env.inner().visit_Expr_MultilineString(elems~, loc~)
-    Interp(elems~, loc~) => env.inner().visit_Expr_Interp(elems~, loc~)
+      env.0.visit_Expr_MultilineString(elems~, loc~)
+    Interp(elems~, loc~) => env.0.visit_Expr_Interp(elems~, loc~)
     Constraint(expr~, ty~, loc~) =>
-      env.inner().visit_Expr_Constraint(expr~, ty~, loc~)
-    Constr(constr~, loc~) => env.inner().visit_Expr_Constr(constr~, loc~)
+      env.0.visit_Expr_Constraint(expr~, ty~, loc~)
+    Constr(constr~, loc~) => env.0.visit_Expr_Constr(constr~, loc~)
     While(loop_cond~, loop_body~, while_else~, label~, loc~) =>
-      env
-      .inner()
-      .visit_Expr_While(loop_cond~, loop_body~, while_else~, label~, loc~)
-    Function(func~, loc~) => env.inner().visit_Expr_Function(func~, loc~)
-    Ident(id~, loc~) => env.inner().visit_Expr_Ident(id~, loc~)
+      env.0.visit_Expr_While(loop_cond~, loop_body~, while_else~, label~, loc~)
+    Function(func~, loc~) => env.0.visit_Expr_Function(func~, loc~)
+    Ident(id~, loc~) => env.0.visit_Expr_Ident(id~, loc~)
     If(cond~, ifso~, ifnot~, loc~) =>
-      env.inner().visit_Expr_If(cond~, ifso~, ifnot~, loc~)
+      env.0.visit_Expr_If(cond~, ifso~, ifnot~, loc~)
     Guard(cond~, otherwise~, body~, loc~) =>
-      env.inner().visit_Expr_Guard(cond~, otherwise~, body~, loc~)
-    Is(expr~, pat~, loc~) => env.inner().visit_Expr_Is(expr~, pat~, loc~)
-    Defer(expr~, body~, loc~) =>
-      env.inner().visit_Expr_Defer(expr~, body~, loc~)
+      env.0.visit_Expr_Guard(cond~, otherwise~, body~, loc~)
+    Is(expr~, pat~, loc~) => env.0.visit_Expr_Is(expr~, pat~, loc~)
+    Defer(expr~, body~, loc~) => env.0.visit_Expr_Defer(expr~, body~, loc~)
     LetFn(name~, func~, body~, loc~) =>
-      env.inner().visit_Expr_LetFn(name~, func~, body~, loc~)
+      env.0.visit_Expr_LetFn(name~, func~, body~, loc~)
     LetRec(bindings~, body~, loc~) =>
-      env.inner().visit_Expr_LetRec(bindings~, body~, loc~)
+      env.0.visit_Expr_LetRec(bindings~, body~, loc~)
     LetAnd(bindings~, body~, loc~) =>
-      env.inner().visit_Expr_LetAnd(bindings~, body~, loc~)
+      env.0.visit_Expr_LetAnd(bindings~, body~, loc~)
     Let(pattern~, expr~, body~, loc~) =>
-      env.inner().visit_Expr_Let(pattern~, expr~, body~, loc~)
+      env.0.visit_Expr_Let(pattern~, expr~, body~, loc~)
     Sequence(exprs~, last_expr~, loc~) =>
-      env.inner().visit_Expr_Sequence(exprs~, last_expr~, loc~)
-    Tuple(exprs~, loc~) => env.inner().visit_Expr_Tuple(exprs~, loc~)
+      env.0.visit_Expr_Sequence(exprs~, last_expr~, loc~)
+    Tuple(exprs~, loc~) => env.0.visit_Expr_Tuple(exprs~, loc~)
     Record(type_name~, fields~, trailing~, loc~) =>
-      env.inner().visit_Expr_Record(type_name~, fields~, trailing~, loc~)
+      env.0.visit_Expr_Record(type_name~, fields~, trailing~, loc~)
     RecordUpdate(type_name~, record~, fields~, loc~) =>
-      env.inner().visit_Expr_RecordUpdate(type_name~, record~, fields~, loc~)
+      env.0.visit_Expr_RecordUpdate(type_name~, record~, fields~, loc~)
     Field(record~, accessor~, loc~) =>
-      env.inner().visit_Expr_Field(record~, accessor~, loc~)
+      env.0.visit_Expr_Field(record~, accessor~, loc~)
     Method(type_name~, method_name~, loc~) =>
-      env.inner().visit_Expr_Method(type_name~, method_name~, loc~)
+      env.0.visit_Expr_Method(type_name~, method_name~, loc~)
     DotApply(self~, method_name~, args~, return_self~, attr~, loc~) =>
-      env
-      .inner()
-      .visit_Expr_DotApply(
+      env.0.visit_Expr_DotApply(
         self~,
         method_name~,
         args~,
@@ -4723,33 +4669,27 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
         attr~,
         loc~,
       )
-    As(expr~, trait_~, loc~) => env.inner().visit_Expr_As(expr~, trait_~, loc~)
+    As(expr~, trait_~, loc~) => env.0.visit_Expr_As(expr~, trait_~, loc~)
     Mutate(record~, accessor~, field~, augmented_by~, loc~) =>
-      env
-      .inner()
-      .visit_Expr_Mutate(record~, accessor~, field~, augmented_by~, loc~)
+      env.0.visit_Expr_Mutate(record~, accessor~, field~, augmented_by~, loc~)
     Match(expr~, cases~, match_loc~, loc~) =>
-      env.inner().visit_Expr_Match(expr~, cases~, match_loc~, loc~)
+      env.0.visit_Expr_Match(expr~, cases~, match_loc~, loc~)
     LetMut(binder~, ty~, expr~, body~, loc~) =>
-      env.inner().visit_Expr_LetMut(binder~, ty~, expr~, body~, loc~)
-    Pipe(lhs~, rhs~, loc~) => env.inner().visit_Expr_Pipe(lhs~, rhs~, loc~)
+      env.0.visit_Expr_LetMut(binder~, ty~, expr~, body~, loc~)
+    Pipe(lhs~, rhs~, loc~) => env.0.visit_Expr_Pipe(lhs~, rhs~, loc~)
     Assign(var_~, expr~, augmented_by~, loc~) =>
-      env.inner().visit_Expr_Assign(var_~, expr~, augmented_by~, loc~)
-    Hole(loc~, kind~) => env.inner().visit_Expr_Hole(loc~, kind~)
-    Return(return_value~, loc~) =>
-      env.inner().visit_Expr_Return(return_value~, loc~)
-    Raise(err_value~, loc~) => env.inner().visit_Expr_Raise(err_value~, loc~)
-    Unit(loc~, faked~) => env.inner().visit_Expr_Unit(loc~, faked~)
-    Break(arg~, label~, loc~) =>
-      env.inner().visit_Expr_Break(arg~, label~, loc~)
+      env.0.visit_Expr_Assign(var_~, expr~, augmented_by~, loc~)
+    Hole(loc~, kind~) => env.0.visit_Expr_Hole(loc~, kind~)
+    Return(return_value~, loc~) => env.0.visit_Expr_Return(return_value~, loc~)
+    Raise(err_value~, loc~) => env.0.visit_Expr_Raise(err_value~, loc~)
+    Unit(loc~, faked~) => env.0.visit_Expr_Unit(loc~, faked~)
+    Break(arg~, label~, loc~) => env.0.visit_Expr_Break(arg~, label~, loc~)
     Continue(args~, label~, loc~) =>
-      env.inner().visit_Expr_Continue(args~, label~, loc~)
+      env.0.visit_Expr_Continue(args~, label~, loc~)
     Loop(arg~, body~, label~, loop_loc~, loc~) =>
-      env.inner().visit_Expr_Loop(arg~, body~, label~, loop_loc~, loc~)
+      env.0.visit_Expr_Loop(arg~, body~, label~, loop_loc~, loc~)
     For(binders~, condition~, continue_block~, body~, for_else~, label~, loc~) =>
-      env
-      .inner()
-      .visit_Expr_For(
+      env.0.visit_Expr_For(
         binders~,
         condition~,
         continue_block~,
@@ -4759,9 +4699,14 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
         loc~,
       )
     ForEach(binders~, expr~, body~, else_block~, label~, loc~) =>
-      env
-      .inner()
-      .visit_Expr_ForEach(binders~, expr~, body~, else_block~, label~, loc~)
+      env.0.visit_Expr_ForEach(
+        binders~,
+        expr~,
+        body~,
+        else_block~,
+        label~,
+        loc~,
+      )
     Try(
       body~,
       catch_~,
@@ -4773,9 +4718,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
       else_loc~,
       loc~
     ) =>
-      env
-      .inner()
-      .visit_Expr_Try(
+      env.0.visit_Expr_Try(
         body~,
         catch_~,
         catch_all~,
@@ -4787,11 +4730,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
         loc~,
       )
     TryOperator(body~, kind~, try_loc~, loc~) =>
-      env.inner().visit_Expr_TryOperator(body~, kind~, try_loc~, loc~)
-    Map(elems~, loc~) => env.inner().visit_Expr_Map(elems~, loc~)
-    Group(expr~, group~, loc~) =>
-      env.inner().visit_Expr_Group(expr~, group~, loc~)
+      env.0.visit_Expr_TryOperator(body~, kind~, try_loc~, loc~)
+    Map(elems~, loc~) => env.0.visit_Expr_Map(elems~, loc~)
+    Group(expr~, group~, loc~) => env.0.visit_Expr_Group(expr~, group~, loc~)
     StaticAssert(asserts~, body~) =>
-      env.inner().visit_Expr_StaticAssert(asserts~, body~)
+      env.0.visit_Expr_StaticAssert(asserts~, body~)
   }
 }

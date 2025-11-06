@@ -15,12 +15,6 @@ pub(all) struct Comment {
   kind : CommentKind
   mut consumed_by_docstring : Bool
 }
-fn Comment::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Comment::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Comment::output(Self, &Logger) -> Unit // from trait `Show`
-fn Comment::to_json(Self) -> Json // from trait `ToJson`
-fn Comment::to_string(Self) -> String // from trait `Show`
 impl Eq for Comment
 impl Show for Comment
 impl ToJson for Comment
@@ -29,12 +23,6 @@ pub(all) enum CommentKind {
   InlineTrailing
   Ownline(leading_blank_line~ : Bool, trailing_blank_line~ : Bool)
 }
-fn CommentKind::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn CommentKind::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn CommentKind::output(Self, &Logger) -> Unit // from trait `Show`
-fn CommentKind::to_json(Self) -> Json // from trait `ToJson`
-fn CommentKind::to_string(Self) -> String // from trait `Show`
 impl Eq for CommentKind
 impl Show for CommentKind
 impl ToJson for CommentKind
@@ -43,11 +31,6 @@ pub(all) enum InterpElem {
   InterpLit(repr~ : String, loc~ : @basic.Location)
   InterpSource(InterpSource)
 }
-fn InterpElem::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn InterpElem::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn InterpElem::output(Self, &Logger) -> Unit // from trait `Show`
-fn InterpElem::to_string(Self) -> String // from trait `Show`
 impl Eq for InterpElem
 impl Show for InterpElem
 
@@ -55,12 +38,6 @@ pub(all) struct InterpSource {
   source : String
   loc : @basic.Location
 }
-fn InterpSource::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn InterpSource::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn InterpSource::output(Self, &Logger) -> Unit // from trait `Show`
-fn InterpSource::to_json(Self) -> Json // from trait `ToJson`
-fn InterpSource::to_string(Self) -> String // from trait `Show`
 impl Eq for InterpSource
 impl Show for InterpSource
 impl ToJson for InterpSource
@@ -172,10 +149,7 @@ pub(all) enum Token {
   TRY_EXCLAMATION
 }
 fn Token::kind(Self) -> TokenKind
-fn Token::output(Self, &Logger) -> Unit // from trait `Show`
 fn Token::to_expect_string(Self) -> String
-fn Token::to_json(Self) -> Json // from trait `ToJson`
-fn Token::to_string(Self) -> String // from trait `Show`
 impl Show for Token
 impl ToJson for Token
 
@@ -285,34 +259,26 @@ pub(all) enum TokenKind {
   TK_TRY_QUESTION
   TK_TRY_EXCLAMATION
 }
-fn TokenKind::compare(Self, Self) -> Int // from trait `Compare`
-fn TokenKind::equal(Self, Self) -> Bool // from trait `Eq`
-fn TokenKind::hash(Self) -> Int // from trait `Hash`
-fn TokenKind::hash_combine(Self, Hasher) -> Unit // from trait `Hash`
-#deprecated
-fn TokenKind::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn TokenKind::output(Self, &Logger) -> Unit // from trait `Show`
 fn TokenKind::to_expect_string(Self) -> String
-fn TokenKind::to_string(Self) -> String // from trait `Show`
 impl Compare for TokenKind
 impl Eq for TokenKind
 impl Hash for TokenKind
 impl Show for TokenKind
 
 // Type aliases
-pub typealias String as ByteLiteral
+pub type ByteLiteral = String
 
-pub typealias String as BytesLiteral
+pub type BytesLiteral = String
 
-pub typealias String as CharLiteral
+pub type CharLiteral = String
 
-pub typealias Array[InterpElem] as InterpLiteral
+pub type InterpLiteral = Array[InterpElem]
 
-pub typealias String as StringLiteral
+pub type StringLiteral = String
 
-pub typealias (Token, @basic.Position, @basic.Position) as Triple
+pub type Triple = (Token, @basic.Position, @basic.Position)
 
-pub typealias Array[(Token, @basic.Position, @basic.Position)] as Triples
+pub type Triples = Array[(Token, @basic.Position, @basic.Position)]
 
 // Traits
 

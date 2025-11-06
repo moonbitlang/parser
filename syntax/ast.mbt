@@ -278,7 +278,7 @@ pub(all) enum Parameter {
 }
 
 ///|
-pub typealias @list.List[Parameter] as Parameters
+pub type Parameters = @list.List[Parameter]
 
 ///|
 pub(all) struct Case {
@@ -662,7 +662,7 @@ pub(all) enum Pattern {
 }
 
 ///|
-pub typealias (StringLiteral, Location)? as TestName
+pub type TestName = (StringLiteral, Location)?
 
 ///|
 pub(all) struct LocalTypeDecl {
@@ -853,4 +853,4 @@ pub(all) enum Impl {
 }
 
 ///|
-pub typealias @list.List[Impl] as Impls
+pub type Impls = @list.List[Impl]

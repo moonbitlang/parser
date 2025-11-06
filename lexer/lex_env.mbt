@@ -15,7 +15,7 @@ priv struct LexEnv {
 }
 
 ///|
-fn add_lexing_error(
+fn LexEnv::add_lexing_error(
   self : LexEnv,
   start~ : Int,
   end~ : Int,
@@ -27,7 +27,7 @@ fn add_lexing_error(
 }
 
 ///|
-fn make_pos(self : LexEnv, cnum : Int) -> Position {
+fn LexEnv::make_pos(self : LexEnv, cnum : Int) -> Position {
   Position::{
     fname: self.file,
     lnum: self.current_line,
@@ -115,7 +115,7 @@ fn LexEnv::add_token(
 }
 
 ///|
-fn add_token_with_loc(
+fn LexEnv::add_token_with_loc(
   self : LexEnv,
   tok : Token,
   start~ : Int,
@@ -128,7 +128,7 @@ fn add_token_with_loc(
 }
 
 ///|
-fn preserve_comment(self : LexEnv) -> (Comment, Int, Int) -> Unit {
+fn LexEnv::preserve_comment(self : LexEnv) -> (Comment, Int, Int) -> Unit {
   if self.comment {
     fn(comment, start, end) {
       let docstrings = self.docstrings
@@ -157,7 +157,7 @@ fn preserve_comment(self : LexEnv) -> (Comment, Int, Int) -> Unit {
 }
 
 ///|
-fn register_surrogate_pair(self : LexEnv, view : StringView) -> Unit {
+fn LexEnv::register_surrogate_pair(self : LexEnv, view : StringView) -> Unit {
   if !use_utf16_location.val {
     let mut count = 0
     for i = 0; i < view.length(); i = i + 1 {
@@ -175,7 +175,7 @@ fn register_surrogate_pair(self : LexEnv, view : StringView) -> Unit {
 }
 
 ///|
-fn register_surrogate_pair_for_char(self : LexEnv, ch : Char) -> Unit {
+fn LexEnv::register_surrogate_pair_for_char(self : LexEnv, ch : Char) -> Unit {
   if !use_utf16_location.val {
     if ch.to_int() >= 0x10000 {
       self.surrogate_pair_count += 1
@@ -184,7 +184,11 @@ fn register_surrogate_pair_for_char(self : LexEnv, ch : Char) -> Unit {
 }
 
 ///|
-fn calc_offset(self : LexEnv, base~ : StringView, view : StringView) -> Int {
+fn LexEnv::calc_offset(
+  self : LexEnv,
+  base~ : StringView,
+  view : StringView,
+) -> Int {
   if use_utf16_location.val {
     view.start_offset() - base.start_offset()
   } else {

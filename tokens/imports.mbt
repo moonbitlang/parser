@@ -1,2 +1,2 @@
 ///|
-typealias @basic.Location
+using @basic {type Location}

@@ -18,8 +18,6 @@ pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
   UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
 }
-fn ParseError::output(Self, &Logger) -> Unit // from trait `Show`
-fn ParseError::to_string(Self) -> String // from trait `Show`
 impl Show for ParseError
 
 // Types and methods

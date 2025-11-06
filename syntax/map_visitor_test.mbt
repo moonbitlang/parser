@@ -19,7 +19,7 @@ test "Pattern" {
       id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
-    tys=@list.of([]),
+    tys=@list.from_array([]),
     loc=dummy_loc,
   )
   let constr_name = @syntax.ConstrName::{
@@ -49,9 +49,9 @@ test "Pattern" {
     pat: any_pattern,
     kind: @syntax.ArgumentKind::Positional,
   }
-  let array_patterns = @syntax.ArrayPatterns::Closed(@list.of([]))
+  let array_patterns = @syntax.ArrayPatterns::Closed(@list.from_array([]))
   let tuple_pattern = @syntax.Pattern::Tuple(
-    pats=@list.of([any_pattern, constant_pattern]),
+    pats=@list.from_array([any_pattern, constant_pattern]),
     loc=dummy_loc,
   )
   let any_with_alias = @syntax.Pattern::Alias(
@@ -82,17 +82,17 @@ test "Pattern" {
   )
   let constr_pattern = @syntax.Pattern::Constr(
     constr~,
-    args=Some(@list.of([constr_pat_arg])),
+    args=Some(@list.from_array([constr_pat_arg])),
     is_open=false,
     loc=dummy_loc,
   )
   let record_pattern = @syntax.Pattern::Record(
-    fields=@list.of([field_pat]),
+    fields=@list.from_array([field_pat]),
     is_closed=true,
     loc=dummy_loc,
   )
   let map_pattern = @syntax.Pattern::Map(
-    elems=@list.of([map_elem]),
+    elems=@list.from_array([map_elem]),
     is_closed=false,
     loc=dummy_loc,
   )
