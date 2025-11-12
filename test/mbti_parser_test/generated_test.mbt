@@ -1,249 +1,249 @@
 ///|
-test "list" (t : @test.T) {
+test "list" (t : @test.Test) {
   t.run("list")
 }
 
 ///|
-test "bytes" (t : @test.T) {
+test "bytes" (t : @test.Test) {
   t.run("bytes")
 }
 
 ///|
-test "byte" (t : @test.T) {
+test "byte" (t : @test.Test) {
   t.run("byte")
 }
 
 ///|
-test "sorted_set" (t : @test.T) {
+test "sorted_set" (t : @test.Test) {
   t.run("sorted_set")
 }
 
 ///|
-test "abort" (t : @test.T) {
+test "abort" (t : @test.Test) {
   t.run("abort")
 }
 
 ///|
-test "coverage" (t : @test.T) {
+test "coverage" (t : @test.Test) {
   t.run("coverage")
 }
 
 ///|
-test "json" (t : @test.T) {
+test "json" (t : @test.Test) {
   t.run("json")
 }
 
 ///|
-test "option" (t : @test.T) {
+test "option" (t : @test.Test) {
   t.run("option")
 }
 
 ///|
-test "int" (t : @test.T) {
+test "int" (t : @test.Test) {
   t.run("int")
 }
 
 ///|
-test "priority_queue" (t : @test.T) {
+test "priority_queue" (t : @test.Test) {
   t.run("priority_queue")
 }
 
 ///|
-test "float" (t : @test.T) {
+test "float" (t : @test.Test) {
   t.run("float")
 }
 
 ///|
-test "random_source" (t : @test.T) {
+test "random_source" (t : @test.Test) {
   t.run("random_source")
 }
 
 ///|
-test "queue" (t : @test.T) {
+test "queue" (t : @test.Test) {
   t.run("queue")
 }
 
 ///|
-test "string" (t : @test.T) {
+test "string" (t : @test.Test) {
   t.run("string")
 }
 
 ///|
-test "int64" (t : @test.T) {
+test "int64" (t : @test.Test) {
   t.run("int64")
 }
 
 ///|
-test "uint16" (t : @test.T) {
+test "uint16" (t : @test.Test) {
   t.run("uint16")
 }
 
 ///|
-test "bigint" (t : @test.T) {
+test "bigint" (t : @test.Test) {
   t.run("bigint")
 }
 
 ///|
-test "ref" (t : @test.T) {
+test "ref" (t : @test.Test) {
   t.run("ref")
 }
 
 ///|
-test "quickcheck" (t : @test.T) {
+test "quickcheck" (t : @test.Test) {
   t.run("quickcheck")
 }
 
 ///|
-test "builtin" (t : @test.T) {
+test "builtin" (t : @test.Test) {
   t.run("builtin")
 }
 
 ///|
-test "tuple" (t : @test.T) {
+test "tuple" (t : @test.Test) {
   t.run("tuple")
 }
 
 ///|
-test "unit" (t : @test.T) {
+test "unit" (t : @test.Test) {
   t.run("unit")
 }
 
 ///|
-test "hashmap" (t : @test.T) {
+test "hashmap" (t : @test.Test) {
   t.run("hashmap")
 }
 
 ///|
-test "ryu" (t : @test.T) {
+test "ryu" (t : @test.Test) {
   t.run("ryu")
 }
 
 ///|
-test "uint64" (t : @test.T) {
+test "uint64" (t : @test.Test) {
   t.run("uint64")
 }
 
 ///|
-test "buffer" (t : @test.T) {
+test "buffer" (t : @test.Test) {
   t.run("buffer")
 }
 
 ///|
-test "bool" (t : @test.T) {
+test "bool" (t : @test.Test) {
   t.run("bool")
 }
 
 ///|
-test "int16" (t : @test.T) {
+test "int16" (t : @test.Test) {
   t.run("int16")
 }
 
 ///|
-test "hashset" (t : @test.T) {
+test "hashset" (t : @test.Test) {
   t.run("hashset")
 }
 
 ///|
-test "math" (t : @test.T) {
+test "math" (t : @test.Test) {
   t.run("math")
 }
 
 ///|
-test "cmp" (t : @test.T) {
+test "cmp" (t : @test.Test) {
   t.run("cmp")
 }
 
 ///|
-test "result" (t : @test.T) {
+test "result" (t : @test.Test) {
   t.run("result")
 }
 
 ///|
-test "error" (t : @test.T) {
+test "error" (t : @test.Test) {
   t.run("error")
 }
 
 ///|
-test "set" (t : @test.T) {
+test "set" (t : @test.Test) {
   t.run("set")
 }
 
 ///|
-test "path" (t : @test.T) {
+test "path" (t : @test.Test) {
   t.run("path")
 }
 
 ///|
-test "prelude" (t : @test.T) {
+test "prelude" (t : @test.Test) {
   t.run("prelude")
 }
 
 ///|
-test "random" (t : @test.T) {
+test "random" (t : @test.Test) {
   t.run("random")
 }
 
 ///|
-test "sparse_array" (t : @test.T) {
+test "sparse_array" (t : @test.Test) {
   t.run("sparse_array")
 }
 
 ///|
-test "uint" (t : @test.T) {
+test "uint" (t : @test.Test) {
   t.run("uint")
 }
 
 ///|
-test "double" (t : @test.T) {
+test "double" (t : @test.Test) {
   t.run("double")
 }
 
 ///|
-test "env" (t : @test.T) {
+test "env" (t : @test.Test) {
   t.run("env")
 }
 
 ///|
-test "test" (t : @test.T) {
+test "test" (t : @test.Test) {
   t.run("test")
 }
 
 ///|
-test "splitmix" (t : @test.T) {
+test "splitmix" (t : @test.Test) {
   t.run("splitmix")
 }
 
 ///|
-test "bench" (t : @test.T) {
+test "bench" (t : @test.Test) {
   t.run("bench")
 }
 
 ///|
-test "array" (t : @test.T) {
+test "array" (t : @test.Test) {
   t.run("array")
 }
 
 ///|
-test "char" (t : @test.T) {
+test "char" (t : @test.Test) {
   t.run("char")
 }
 
 ///|
-test "strconv" (t : @test.T) {
+test "strconv" (t : @test.Test) {
   t.run("strconv")
 }
 
 ///|
-test "deque" (t : @test.T) {
+test "deque" (t : @test.Test) {
   t.run("deque")
 }
 
 ///|
-test "sorted_map" (t : @test.T) {
+test "sorted_map" (t : @test.Test) {
   t.run("sorted_map")
 }
 
 ///|
-test "rational" (t : @test.T) {
+test "rational" (t : @test.Test) {
   t.run("rational")
 }

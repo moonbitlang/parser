@@ -1,7 +1,7 @@
 ///|
 /// Verifies that both the hand-rolled parser and the moonyacc parser produce identical ASTs,
 /// and that no diagnostics are generated for all test cases in `__snapshot__`.
-fn @test.T::run(t : Self) -> Unit raise Error {
+fn @test.Test::run(t : Self) -> Unit raise Error {
   let name = t.name()
   let source_file = "test/sync_test/__snapshot__/\{name}.mbt"
   let source = @fs.read_file_to_string(source_file) catch {
