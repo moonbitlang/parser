@@ -60,25 +60,25 @@ let first_simple_expr : Array[TokenKind] = [
 
 ///|
 let first_expr : Array[TokenKind] = [
-    ..first_simple_expr,
-    TK_IF,
-    TK_MATCH,
-    TK_PLUS,
-    TK_MINUS,
-    TK_LOOP,
-    TK_WHILE,
-    TK_FOR,
-    TK_POST_LABEL,
-    TK_GUARD,
-    TK_TRY,
-    TK_DEFER,
-    TK_TRY_QUESTION,
-    TK_TRY_EXCLAMATION,
-    TK_UNDERSCORE,
-    TK_LPAREN,
-    TK_LIDENT,
-    TK_EXCLAMATION,
-  ]
+  ..first_simple_expr,
+  TK_IF,
+  TK_MATCH,
+  TK_PLUS,
+  TK_MINUS,
+  TK_LOOP,
+  TK_WHILE,
+  TK_FOR,
+  TK_POST_LABEL,
+  TK_GUARD,
+  TK_TRY,
+  TK_DEFER,
+  TK_TRY_QUESTION,
+  TK_TRY_EXCLAMATION,
+  TK_UNDERSCORE,
+  TK_LPAREN,
+  TK_LIDENT,
+  TK_EXCLAMATION,
+]
 
 ///|
 let first_map_pattern_key : Array[TokenKind] = [
