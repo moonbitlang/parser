@@ -5,7 +5,7 @@ pub suberror ParseError {
 } derive(Show)
 
 ///|
-typealias Error as YYObj
+type YYObj = Error
 
 ///|
 priv suberror YYObj_Void

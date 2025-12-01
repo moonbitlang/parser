@@ -2,10 +2,10 @@
   "name": "moonbitlang/parser",
   "version": "0.1.11",
   "deps": {
-    "moonbitlang/x": "0.4.30"
+    "moonbitlang/x": "0.4.37"
   },
   "bin-deps": {
-    "moonbitlang/yacc": "0.7.2"
+    "moonbitlang/yacc": "0.7.5"
   },
   "readme": "README.md",
   "repository": "https://github.com/moonbitlang/parser",
