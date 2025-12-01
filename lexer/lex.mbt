@@ -39,7 +39,7 @@ pub fn tokens_from_string(
     let last_idx = docstrings.length() - 1
     docstrings[last_idx] = docstrings[last_idx].rev()
   }
-  docstrings.rev_inplace()
+  docstrings.rev_in_place()
   LexResult::{ tokens: env.tokens, errors: env.errors, docstrings }
 }
 
