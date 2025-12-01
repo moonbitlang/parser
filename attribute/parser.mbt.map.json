@@ -3,127 +3,127 @@
     {
       "source": "parser.mbty",
       "original_offset": 2812,
-      "generated_offset": 2524,
+      "generated_offset": 2506,
       "length": 15
     },
     {
       "source": "parser.mbty",
       "original_offset": 2845,
-      "generated_offset": 2768,
+      "generated_offset": 2750,
       "length": 1
     },
     {
       "source": "parser.mbty",
       "original_offset": 2848,
-      "generated_offset": 2777,
+      "generated_offset": 2759,
       "length": 1
     },
     {
       "source": "parser.mbty",
       "original_offset": 3570,
-      "generated_offset": 2987,
+      "generated_offset": 2969,
       "length": 15
     },
     {
       "source": "parser.mbty",
       "original_offset": 3621,
-      "generated_offset": 3249,
+      "generated_offset": 3231,
       "length": 1
     },
     {
       "source": "parser.mbty",
       "original_offset": 3624,
-      "generated_offset": 3258,
+      "generated_offset": 3240,
       "length": 1
     },
     {
       "source": "parser.mbty",
       "original_offset": 2898,
-      "generated_offset": 3544,
+      "generated_offset": 3526,
       "length": 15
     },
     {
       "source": "parser.mbty",
       "original_offset": 2915,
-      "generated_offset": 3567,
+      "generated_offset": 3549,
       "length": 2
     },
     {
       "source": "parser.mbty",
       "original_offset": 3274,
-      "generated_offset": 3941,
+      "generated_offset": 3923,
       "length": 40
     },
     {
       "source": "parser.mbty",
       "original_offset": 3103,
-      "generated_offset": 4300,
+      "generated_offset": 4282,
       "length": 33
     },
     {
       "source": "parser.mbty",
       "original_offset": 3188,
-      "generated_offset": 4658,
+      "generated_offset": 4640,
       "length": 34
     },
     {
       "source": "parser.mbty",
       "original_offset": 3024,
-      "generated_offset": 4964,
+      "generated_offset": 4946,
       "length": 27
     },
     {
       "source": "parser.mbty",
       "original_offset": 2947,
-      "generated_offset": 5226,
+      "generated_offset": 5208,
       "length": 6
     },
     {
       "source": "parser.mbty",
       "original_offset": 2955,
-      "generated_offset": 5240,
+      "generated_offset": 5222,
       "length": 2
     },
     {
       "source": "parser.mbty",
       "original_offset": 3366,
-      "generated_offset": 5511,
+      "generated_offset": 5493,
       "length": 8
     },
     {
       "source": "parser.mbty",
       "original_offset": 3376,
-      "generated_offset": 5527,
+      "generated_offset": 5509,
       "length": 2
     },
     {
       "source": "parser.mbty",
       "original_offset": 3430,
-      "generated_offset": 5746,
+      "generated_offset": 5728,
       "length": 12
     },
     {
       "source": "parser.mbty",
       "original_offset": 3494,
-      "generated_offset": 5976,
+      "generated_offset": 5958,
       "length": 13
     },
     {
       "source": "parser.mbty",
       "original_offset": 3747,
-      "generated_offset": 6283,
+      "generated_offset": 6265,
       "length": 11
     },
     {
       "source": "parser.mbty",
       "original_offset": 3678,
-      "generated_offset": 6536,
+      "generated_offset": 6518,
       "length": 19
     },
     {
       "source": "parser.mbty",
       "original_offset": 3699,
-      "generated_offset": 6563,
+      "generated_offset": 6545,
       "length": 3
     }
   ]
