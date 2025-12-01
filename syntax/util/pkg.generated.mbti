@@ -21,9 +21,9 @@ pub(all) enum Statement {
   StmtLetand(bindings~ : @list.List[(@syntax.Binder, @syntax.Type?, @syntax.Func)], loc~ : @basic.Location)
   StmtDefer(expr~ : @syntax.Expr, loc~ : @basic.Location)
 }
-fn Statement::collect_letrec(loc~ : @basic.Location, @list.List[(@syntax.Binder, @syntax.Func)], @list.List[Self], @syntax.Expr) -> @syntax.Expr
-fn Statement::collect_rev(@list.List[Self], @syntax.Expr) -> @syntax.Expr
-fn Statement::compact_rev(@list.List[Self], loc~ : @basic.Location) -> @syntax.Expr
+pub fn Statement::collect_letrec(loc~ : @basic.Location, @list.List[(@syntax.Binder, @syntax.Func)], @list.List[Self], @syntax.Expr) -> @syntax.Expr
+pub fn Statement::collect_rev(@list.List[Self], @syntax.Expr) -> @syntax.Expr
+pub fn Statement::compact_rev(@list.List[Self], loc~ : @basic.Location) -> @syntax.Expr
 
 // Type aliases
 

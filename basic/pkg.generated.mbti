@@ -2,11 +2,11 @@
 package "moonbitlang/parser/basic"
 
 // Values
-let builtin_package : String
+pub let builtin_package : String
 
-let current_package : Ref[String]
+pub let current_package : Ref[String]
 
-let show_loc : Ref[LocStyle]
+pub let show_loc : Ref[LocStyle]
 
 // Errors
 
@@ -21,14 +21,14 @@ pub(all) struct Location {
   start : Position
   end : Position
 }
-fn Location::merge(Self, Self) -> Self
-fn Location::trim_first_char(Self) -> Self
-fn Location::trim_last_char(Self) -> Self
-impl Compare for Location
-impl Eq for Location
-impl Hash for Location
-impl Show for Location
-impl ToJson for Location
+pub fn Location::merge(Self, Self) -> Self
+pub fn Location::trim_first_char(Self) -> Self
+pub fn Location::trim_last_char(Self) -> Self
+pub impl Compare for Location
+pub impl Eq for Location
+pub impl Hash for Location
+pub impl Show for Location
+pub impl ToJson for Location
 
 pub(all) struct Position {
   fname : String
@@ -36,19 +36,19 @@ pub(all) struct Position {
   bol : Int
   cnum : Int
 }
-fn Position::column(Self) -> Int
-impl Compare for Position
-impl Eq for Position
-impl Hash for Position
-impl Show for Position
-impl ToJson for Position
+pub fn Position::column(Self) -> Int
+pub impl Compare for Position
+pub impl Eq for Position
+pub impl Hash for Position
+pub impl Show for Position
+pub impl ToJson for Position
 
 pub(all) struct Report {
   loc : Location
   msg : String
 }
-impl Show for Report
-impl ToJson for Report
+pub impl Show for Report
+pub impl ToJson for Report
 
 // Type aliases
 
