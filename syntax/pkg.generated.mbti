@@ -9,75 +9,75 @@ import(
 )
 
 // Values
-fn arrow_fn_param_to_expr(ArrowFnParam) -> Expr
+pub fn arrow_fn_param_to_expr(ArrowFnParam) -> Expr
 
-fn binder_to_expr(Binder) -> Expr
+pub fn binder_to_expr(Binder) -> Expr
 
-fn bracket_loc(Expr) -> @basic.Location
+pub fn bracket_loc(Expr) -> @basic.Location
 
-fn desugar_array_augmented_set(@basic.Location, Var, Expr, Expr, Expr) -> Expr
+pub fn desugar_array_augmented_set(@basic.Location, Var, Expr, Expr, Expr) -> Expr
 
-fn desugar_array_get(loc~ : @basic.Location, Expr, Expr) -> Expr
+pub fn desugar_array_get(loc~ : @basic.Location, Expr, Expr) -> Expr
 
-fn desugar_array_set(loc~ : @basic.Location, Expr, Expr, Expr) -> Expr
+pub fn desugar_array_set(loc~ : @basic.Location, Expr, Expr, Expr) -> Expr
 
-fn impls_to_json(@list.List[Impl]) -> Json
+pub fn impls_to_json(@list.List[Impl]) -> Json
 
-fn label_to_expr(loc~ : @basic.Location, Label) -> Expr
+pub fn label_to_expr(loc~ : @basic.Location, Label) -> Expr
 
-fn label_to_pat(loc~ : @basic.Location, Label) -> Pattern
+pub fn label_to_pat(loc~ : @basic.Location, Label) -> Pattern
 
-fn loc_of_expression(Expr) -> @basic.Location
+pub fn loc_of_expression(Expr) -> @basic.Location
 
-fn make_alias_pattern(loc~ : @basic.Location, Pattern, Binder) -> Pattern
+pub fn make_alias_pattern(loc~ : @basic.Location, Pattern, Binder) -> Pattern
 
-fn make_array_expr(loc~ : @basic.Location, @list.List[SpreadableElem]) -> Expr
+pub fn make_array_expr(loc~ : @basic.Location, @list.List[SpreadableElem]) -> Expr
 
-fn make_arrow_fn(@list.List[(ArrowFnParam, Type?)], Expr, loc~ : @basic.Location) -> Func
+pub fn make_arrow_fn(@list.List[(ArrowFnParam, Type?)], Expr, loc~ : @basic.Location) -> Func
 
-fn make_assign_opt(loc~ : @basic.Location, Expr, Expr) -> Expr?
+pub fn make_assign_opt(loc~ : @basic.Location, Expr, Expr) -> Expr?
 
-fn make_augmented_assign_opt(loc~ : @basic.Location, Var, Expr, Expr) -> Expr?
+pub fn make_augmented_assign_opt(loc~ : @basic.Location, Var, Expr, Expr) -> Expr?
 
-fn make_constant_expr(loc~ : @basic.Location, Constant) -> Expr
+pub fn make_constant_expr(loc~ : @basic.Location, Constant) -> Expr
 
-fn make_constant_pattern(loc~ : @basic.Location, Constant) -> Pattern
+pub fn make_constant_pattern(loc~ : @basic.Location, Constant) -> Pattern
 
-fn make_constr_pattern(loc~ : @basic.Location, Constructor, @list.List[ConstrPatArg]?, Bool) -> Pattern
+pub fn make_constr_pattern(loc~ : @basic.Location, Constructor, @list.List[ConstrPatArg]?, Bool) -> Pattern
 
-fn make_double(String) -> Constant
+pub fn make_double(String) -> Constant
 
-fn make_field_def(loc~ : @basic.Location, Label, Expr, Bool) -> FieldDef
+pub fn make_field_def(loc~ : @basic.Location, Label, Expr, Bool) -> FieldDef
 
-fn make_field_pat(loc~ : @basic.Location, Label, Pattern, Bool) -> FieldPat
+pub fn make_field_pat(loc~ : @basic.Location, Label, Pattern, Bool) -> FieldPat
 
-fn make_float(String) -> Constant
+pub fn make_float(String) -> Constant
 
-fn make_ident_expr(loc~ : @basic.Location, Var) -> Expr
+pub fn make_ident_expr(loc~ : @basic.Location, Var) -> Expr
 
-fn make_int(String) -> Constant
+pub fn make_int(String) -> Constant
 
-fn make_interp_expr(loc~ : @basic.Location, Array[@tokens.InterpElem]) -> Expr
+pub fn make_interp_expr(loc~ : @basic.Location, Array[@tokens.InterpElem]) -> Expr
 
-fn make_interps(Array[@tokens.InterpElem]) -> @list.List[InterpElem]
+pub fn make_interps(Array[@tokens.InterpElem]) -> @list.List[InterpElem]
 
-fn make_option_type(loc~ : @basic.Location, constr_loc~ : @basic.Location, Type) -> Type
+pub fn make_option_type(loc~ : @basic.Location, constr_loc~ : @basic.Location, Type) -> Type
 
-fn make_record_expr(loc~ : @basic.Location, trailing~ : TrailingMark, TypeName?, @list.List[FieldDef]) -> Expr
+pub fn make_record_expr(loc~ : @basic.Location, trailing~ : TrailingMark, TypeName?, @list.List[FieldDef]) -> Expr
 
-fn make_tuple_expr(loc~ : @basic.Location, @list.List[Expr]) -> Expr
+pub fn make_tuple_expr(loc~ : @basic.Location, @list.List[Expr]) -> Expr
 
-fn make_tuple_pattern(loc~ : @basic.Location, @list.List[Pattern]) -> Pattern
+pub fn make_tuple_pattern(loc~ : @basic.Location, @list.List[Pattern]) -> Pattern
 
-fn make_tuple_type(loc~ : @basic.Location, @list.List[Type]) -> Type
+pub fn make_tuple_type(loc~ : @basic.Location, @list.List[Type]) -> Type
 
-fn make_uminus(loc~ : @basic.Location, String, Expr) -> Expr
+pub fn make_uminus(loc~ : @basic.Location, String, Expr) -> Expr
 
-fn make_unot(loc~ : @basic.Location, Expr) -> Expr
+pub fn make_unot(loc~ : @basic.Location, Expr) -> Expr
 
-fn make_uplus(loc~ : @basic.Location, String, Expr) -> Expr
+pub fn make_uplus(loc~ : @basic.Location, String, Expr) -> Expr
 
-let no_location : @basic.Location
+pub let no_location : @basic.Location
 
 // Errors
 
@@ -87,26 +87,26 @@ pub(all) enum Accessor {
   Index(tuple_index~ : Int, loc~ : @basic.Location)
   Newtype(loc~ : @basic.Location)
 }
-impl ToJson for Accessor
+pub impl ToJson for Accessor
 
 pub(all) struct AliasTarget {
   binder : Binder
   target : Label?
 }
-impl ToJson for AliasTarget
+pub impl ToJson for AliasTarget
 
 pub(all) enum ApplyAttr {
   NoAttr
   Exclamation
   Question
 }
-impl ToJson for ApplyAttr
+pub impl ToJson for ApplyAttr
 
 pub(all) struct Argument {
   value : Expr
   kind : ArgumentKind
 }
-impl ToJson for Argument
+pub impl ToJson for Argument
 
 pub(all) enum ArgumentKind {
   Positional
@@ -115,7 +115,7 @@ pub(all) enum ArgumentKind {
   LabelledOption(label~ : Label, question_loc~ : @basic.Location)
   LabelledOptionPun(label~ : Label, question_loc~ : @basic.Location)
 }
-impl ToJson for ArgumentKind
+pub impl ToJson for ArgumentKind
 
 pub(all) enum ArrayPattern {
   Pattern(Pattern)
@@ -123,13 +123,13 @@ pub(all) enum ArrayPattern {
   BytesSpread(bytes~ : String, loc~ : @basic.Location)
   ConstSpread(binder~ : Binder, pkg~ : String?, loc~ : @basic.Location)
 }
-impl ToJson for ArrayPattern
+pub impl ToJson for ArrayPattern
 
 pub(all) enum ArrayPatterns {
   Closed(@list.List[ArrayPattern])
   Open(@list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder)
 }
-impl ToJson for ArrayPatterns
+pub impl ToJson for ArrayPatterns
 
 pub(all) enum ArrowFnParam {
   Named(Binder)
@@ -140,14 +140,14 @@ pub(all) struct Binder {
   name : String
   loc : @basic.Location
 }
-impl ToJson for Binder
+pub impl ToJson for Binder
 
 pub(all) struct Case {
   pattern : Pattern
   guard_ : Expr?
   body : Expr
 }
-impl ToJson for Case
+pub impl ToJson for Case
 
 pub(all) enum Constant {
   Bool(Bool)
@@ -163,7 +163,7 @@ pub(all) enum Constant {
   String(String)
   BigInt(String)
 }
-impl ToJson for Constant
+pub impl ToJson for Constant
 
 pub(all) struct ConstrDecl {
   name : ConstrName
@@ -173,66 +173,66 @@ pub(all) struct ConstrDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
-impl ToJson for ConstrDecl
+pub impl ToJson for ConstrDecl
 
 pub(all) struct ConstrId {
   id : LongIdent
   loc : @basic.Location
 }
-impl ToJson for ConstrId
+pub impl ToJson for ConstrId
 
 pub(all) struct ConstrName {
   name : String
   loc : @basic.Location
 }
-impl ToJson for ConstrName
+pub impl ToJson for ConstrName
 
 pub(all) struct ConstrParam {
   ty : Type
   mut_ : Bool
   label : Label?
 }
-impl ToJson for ConstrParam
+pub impl ToJson for ConstrParam
 
 pub(all) struct ConstrPatArg {
   pat : Pattern
   kind : ArgumentKind
 }
-impl ToJson for ConstrPatArg
+pub impl ToJson for ConstrPatArg
 
 pub(all) struct Constructor {
   name : ConstrName
   extra_info : ConstructorExtraInfo
   loc : @basic.Location
 }
-impl ToJson for Constructor
+pub impl ToJson for Constructor
 
 pub(all) enum ConstructorExtraInfo {
   TypeName(TypeName)
   Package(String)
   NoExtraInfo
 }
-impl ToJson for ConstructorExtraInfo
+pub impl ToJson for ConstructorExtraInfo
 
 pub(all) enum DeclBody {
   DeclBody(local_types~ : @list.List[LocalTypeDecl], expr~ : Expr)
   DeclStubs(FuncStubs)
 }
-impl ToJson for DeclBody
+pub impl ToJson for DeclBody
 
 pub(all) struct DerivingDirective {
   type_name : TypeName
   args : @list.List[Argument]
   loc : @basic.Location
 }
-impl ToJson for DerivingDirective
+pub impl ToJson for DerivingDirective
 
 pub(all) struct DocString {
   content : @list.List[String]
   loc : @basic.Location
 }
-fn DocString::empty() -> Self
-impl ToJson for DocString
+pub fn DocString::empty() -> Self
+pub impl ToJson for DocString
 
 pub(all) enum DotDotBinder {
   Underscore
@@ -240,13 +240,13 @@ pub(all) enum DotDotBinder {
   BinderAs(Binder)
   Binder(Binder)
 }
-impl ToJson for DotDotBinder
+pub impl ToJson for DotDotBinder
 
 pub(all) enum EmbeddedCode {
   CodeString(String)
   CodeMultilineString(@list.List[String])
 }
-impl ToJson for EmbeddedCode
+pub impl ToJson for EmbeddedCode
 
 pub(all) enum ErrorType {
   ErrorType(ty~ : Type)
@@ -255,14 +255,14 @@ pub(all) enum ErrorType {
   Noraise(loc~ : @basic.Location)
   MaybeError(ty~ : Type)
 }
-impl ToJson for ErrorType
+pub impl ToJson for ErrorType
 
 pub(all) enum ExceptionDecl {
   NoPayload
   SinglePayload(Type)
   EnumPayload(@list.List[ConstrDecl])
 }
-impl ToJson for ExceptionDecl
+pub impl ToJson for ExceptionDecl
 
 pub(all) enum Expr {
   Apply(func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location)
@@ -318,8 +318,8 @@ pub(all) enum Expr {
   Group(expr~ : Expr, group~ : Group, loc~ : @basic.Location)
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
 }
-fn Expr::loc(Self) -> @basic.Location
-impl ToJson for Expr
+pub fn Expr::loc(Self) -> @basic.Location
+pub impl ToJson for Expr
 
 pub(all) struct FieldDecl {
   name : FieldName
@@ -330,7 +330,7 @@ pub(all) struct FieldDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
-impl ToJson for FieldDecl
+pub impl ToJson for FieldDecl
 
 pub(all) struct FieldDef {
   label : Label
@@ -338,13 +338,13 @@ pub(all) struct FieldDef {
   is_pun : Bool
   loc : @basic.Location
 }
-impl ToJson for FieldDef
+pub impl ToJson for FieldDef
 
 pub(all) struct FieldName {
   label : String
   loc : @basic.Location
 }
-impl ToJson for FieldName
+pub impl ToJson for FieldName
 
 pub(all) struct FieldPat {
   label : Label
@@ -352,14 +352,14 @@ pub(all) struct FieldPat {
   is_pun : Bool
   loc : @basic.Location
 }
-impl ToJson for FieldPat
+pub impl ToJson for FieldPat
 
 pub(all) enum FnKind {
   Lambda
   Matrix
   Arrow
 }
-impl ToJson for FnKind
+pub impl ToJson for FnKind
 
 pub(all) struct FunDecl {
   type_name : TypeName?
@@ -375,32 +375,32 @@ pub(all) struct FunDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
-impl ToJson for FunDecl
+pub impl ToJson for FunDecl
 
 pub(all) enum Func {
   Lambda(parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : Bool, loc~ : @basic.Location)
   Match(cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : Bool, fn_loc~ : @basic.Location, loc~ : @basic.Location)
 }
-impl ToJson for Func
+pub impl ToJson for Func
 
 pub(all) enum FuncStubs {
   Import(module_name~ : String, func_name~ : String)
   Embedded(language~ : String?, code~ : EmbeddedCode)
 }
-impl ToJson for FuncStubs
+pub impl ToJson for FuncStubs
 
 pub(all) enum Group {
   Brace
   Paren
 }
-impl ToJson for Group
+pub impl ToJson for Group
 
 pub(all) enum Hole {
   Synthesized
   Incomplete
   Todo
 }
-impl ToJson for Hole
+pub impl ToJson for Hole
 
 pub(all) enum Impl {
   TopExpr(expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location)
@@ -416,15 +416,15 @@ pub(all) enum Impl {
   TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString)
 }
-fn Impl::loc(Self) -> @basic.Location
-impl ToJson for Impl
+pub fn Impl::loc(Self) -> @basic.Location
+pub impl ToJson for Impl
 
 pub(all) enum InterpElem {
   Literal(repr~ : String, loc~ : @basic.Location)
   Expr(expr~ : Expr, loc~ : @basic.Location)
   Source(@tokens.InterpSource)
 }
-impl ToJson for InterpElem
+pub impl ToJson for InterpElem
 
 pub(all) enum InterpolationComponent {
   InterpLit(String, @basic.Location)
@@ -433,14 +433,14 @@ pub(all) enum InterpolationComponent {
 
 pub struct IterVisitorBase[T](T)
 #deprecated
-fn[T] IterVisitorBase::inner(Self[T]) -> T
-impl[T : IterVisitor] IterVisitor for IterVisitorBase[T]
+pub fn[T] IterVisitorBase::inner(Self[T]) -> T
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T]
 
 pub(all) struct Label {
   name : String
   loc : @basic.Location
 }
-impl ToJson for Label
+pub impl ToJson for Label
 
 pub(all) struct LocalTypeDecl {
   tycon : String
@@ -448,14 +448,14 @@ pub(all) struct LocalTypeDecl {
   components : TypeDesc
   deriving : @list.List[DerivingDirective]
 }
-impl ToJson for LocalTypeDecl
+pub impl ToJson for LocalTypeDecl
 
 pub(all) enum LongIdent {
   Ident(name~ : String)
   Dot(pkg~ : String, id~ : String)
 }
-fn LongIdent::dummy() -> Self
-impl ToJson for LongIdent
+pub fn LongIdent::dummy() -> Self
+pub impl ToJson for LongIdent
 
 pub(all) struct MapExprElem {
   key : Constant
@@ -463,7 +463,7 @@ pub(all) struct MapExprElem {
   key_loc : @basic.Location
   loc : @basic.Location
 }
-impl ToJson for MapExprElem
+pub impl ToJson for MapExprElem
 
 pub(all) struct MapPatElem {
   key : Constant
@@ -472,25 +472,25 @@ pub(all) struct MapPatElem {
   key_loc : @basic.Location
   loc : @basic.Location
 }
-impl ToJson for MapPatElem
+pub impl ToJson for MapPatElem
 
 pub(all) struct MapVisitorBase[T](T)
 #deprecated
-fn[T] MapVisitorBase::inner(Self[T]) -> T
-impl[T : MapVisitor] MapVisitor for MapVisitorBase[T]
+pub fn[T] MapVisitorBase::inner(Self[T]) -> T
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T]
 
 pub(all) struct MultiArgCase {
   patterns : @list.List[Pattern]
   guard_ : Expr?
   body : Expr
 }
-impl ToJson for MultiArgCase
+pub impl ToJson for MultiArgCase
 
 pub(all) enum MultilineStringElem {
   String(String)
   Interp(@list.List[InterpElem])
 }
-impl ToJson for MultilineStringElem
+pub impl ToJson for MultilineStringElem
 
 pub(all) enum Parameter {
   DiscardPositional(ty~ : Type?, loc~ : @basic.Location)
@@ -499,8 +499,8 @@ pub(all) enum Parameter {
   Optional(binder~ : Binder, default~ : Expr, ty~ : Type?)
   QuestionOptional(binder~ : Binder, ty~ : Type?)
 }
-fn Parameter::loc(Self) -> @basic.Location
-impl ToJson for Parameter
+pub fn Parameter::loc(Self) -> @basic.Location
+pub impl ToJson for Parameter
 
 pub(all) enum Pattern {
   Alias(pat~ : Pattern, alias_~ : Binder, loc~ : @basic.Location)
@@ -517,14 +517,14 @@ pub(all) enum Pattern {
   Range(lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : @basic.Location)
   SpecialConstr(binder~ : Binder, args~ : @list.List[ConstrPatArg], loc~ : @basic.Location)
 }
-fn Pattern::loc(Self) -> @basic.Location
-impl ToJson for Pattern
+pub fn Pattern::loc(Self) -> @basic.Location
+pub impl ToJson for Pattern
 
 pub(all) enum SpreadableElem {
   Regular(Expr)
   Spread(expr~ : Expr, loc~ : @basic.Location)
 }
-impl ToJson for SpreadableElem
+pub impl ToJson for SpreadableElem
 
 pub(all) struct StaticAssertion {
   ty : Type
@@ -532,14 +532,14 @@ pub(all) struct StaticAssertion {
   loc : @basic.Location
   msg : String
 }
-impl ToJson for StaticAssertion
+pub impl ToJson for StaticAssertion
 
 pub(all) enum TrailingMark {
   Comma
   Semi
   None
 }
-impl ToJson for TrailingMark
+pub impl ToJson for TrailingMark
 
 pub(all) struct TraitDecl {
   name : Binder
@@ -550,7 +550,7 @@ pub(all) struct TraitDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
-impl ToJson for TraitDecl
+pub impl ToJson for TraitDecl
 
 pub(all) struct TraitMethodDecl {
   name : Binder
@@ -564,13 +564,13 @@ pub(all) struct TraitMethodDecl {
   attrs : @list.List[@attribute.Attribute]
   loc : @basic.Location
 }
-impl ToJson for TraitMethodDecl
+pub impl ToJson for TraitMethodDecl
 
 pub(all) enum TryOperatorKind {
   Question
   Exclamation
 }
-impl ToJson for TryOperatorKind
+pub impl ToJson for TryOperatorKind
 
 pub(all) enum Type {
   Any(loc~ : @basic.Location)
@@ -580,8 +580,8 @@ pub(all) enum Type {
   Option(ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location)
   Object(ConstrId)
 }
-fn Type::loc(Self) -> @basic.Location
-impl ToJson for Type
+pub fn Type::loc(Self) -> @basic.Location
+pub impl ToJson for Type
 
 pub(all) struct TypeDecl {
   tycon : String
@@ -594,13 +594,13 @@ pub(all) struct TypeDecl {
   deriving : @list.List[DerivingDirective]
   loc : @basic.Location
 }
-impl ToJson for TypeDecl
+pub impl ToJson for TypeDecl
 
 pub(all) struct TypeDeclBinder {
   name : String?
   loc : @basic.Location
 }
-impl ToJson for TypeDeclBinder
+pub impl ToJson for TypeDeclBinder
 
 pub(all) enum TypeDesc {
   Abstract
@@ -612,40 +612,40 @@ pub(all) enum TypeDesc {
   TupleStruct(@list.List[Type])
   Alias(Type)
 }
-impl ToJson for TypeDesc
+pub impl ToJson for TypeDesc
 
 pub(all) struct TypeName {
   name : LongIdent
   is_object : Bool
   loc : @basic.Location
 }
-impl ToJson for TypeName
+pub impl ToJson for TypeName
 
 pub(all) struct TypeVarBinder {
   name : String
   name_loc : @basic.Location
   constraints : @list.List[TypeVarConstraint]
 }
-impl ToJson for TypeVarBinder
+pub impl ToJson for TypeVarBinder
 
 pub(all) struct TypeVarConstraint {
   trait_ : LongIdent
   loc : @basic.Location
 }
-impl ToJson for TypeVarConstraint
+pub impl ToJson for TypeVarConstraint
 
 pub(all) struct Var {
   name : LongIdent
   loc : @basic.Location
 }
-impl ToJson for Var
+pub impl ToJson for Var
 
 pub(all) enum Visibility {
   Default
   Pub(attr~ : String?, loc~ : @basic.Location)
   Priv(loc~ : @basic.Location)
 }
-impl ToJson for Visibility
+pub impl ToJson for Visibility
 
 // Type aliases
 pub type Impls = @list.List[Impl]

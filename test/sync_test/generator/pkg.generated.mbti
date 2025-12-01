@@ -2,11 +2,11 @@
 package "moonbitlang/parser/test/sync_test/generator"
 
 // Values
-fn gen_test_for_lexer(String) -> String
+pub fn gen_test_for_lexer(String) -> String
 
-fn gen_test_for_parser(String) -> String
+pub fn gen_test_for_parser(String) -> String
 
-fn normalize(String) -> String
+pub fn normalize(String) -> String
 
 // Errors
 

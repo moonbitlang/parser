@@ -9,7 +9,7 @@ import(
 )
 
 // Values
-fn parse(Array[(@tokens.Token, @basic.Position, @basic.Position)]) -> (@list.List[@syntax.Impl], Array[@basic.Report])
+pub fn parse(Array[(@tokens.Token, @basic.Position, @basic.Position)]) -> (@list.List[@syntax.Impl], Array[@basic.Report])
 
 // Errors
 

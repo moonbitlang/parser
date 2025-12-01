@@ -2,7 +2,7 @@
 package "moonbitlang/parser/test/mbti_parser_test/gen_test"
 
 // Values
-fn gen_test(String) -> String
+pub fn gen_test(String) -> String
 
 // Errors
 

@@ -15,32 +15,32 @@ pub(all) struct Comment {
   kind : CommentKind
   mut consumed_by_docstring : Bool
 }
-impl Eq for Comment
-impl Show for Comment
-impl ToJson for Comment
+pub impl Eq for Comment
+pub impl Show for Comment
+pub impl ToJson for Comment
 
 pub(all) enum CommentKind {
   InlineTrailing
   Ownline(leading_blank_line~ : Bool, trailing_blank_line~ : Bool)
 }
-impl Eq for CommentKind
-impl Show for CommentKind
-impl ToJson for CommentKind
+pub impl Eq for CommentKind
+pub impl Show for CommentKind
+pub impl ToJson for CommentKind
 
 pub(all) enum InterpElem {
   InterpLit(repr~ : String, loc~ : @basic.Location)
   InterpSource(InterpSource)
 }
-impl Eq for InterpElem
-impl Show for InterpElem
+pub impl Eq for InterpElem
+pub impl Show for InterpElem
 
 pub(all) struct InterpSource {
   source : String
   loc : @basic.Location
 }
-impl Eq for InterpSource
-impl Show for InterpSource
-impl ToJson for InterpSource
+pub impl Eq for InterpSource
+pub impl Show for InterpSource
+pub impl ToJson for InterpSource
 
 pub(all) enum Token {
   CHAR(String)
@@ -148,10 +148,10 @@ pub(all) enum Token {
   TRY_QUESTION
   TRY_EXCLAMATION
 }
-fn Token::kind(Self) -> TokenKind
-fn Token::to_expect_string(Self) -> String
-impl Show for Token
-impl ToJson for Token
+pub fn Token::kind(Self) -> TokenKind
+pub fn Token::to_expect_string(Self) -> String
+pub impl Show for Token
+pub impl ToJson for Token
 
 pub(all) enum TokenKind {
   TK_CHAR
@@ -259,11 +259,11 @@ pub(all) enum TokenKind {
   TK_TRY_QUESTION
   TK_TRY_EXCLAMATION
 }
-fn TokenKind::to_expect_string(Self) -> String
-impl Compare for TokenKind
-impl Eq for TokenKind
-impl Hash for TokenKind
-impl Show for TokenKind
+pub fn TokenKind::to_expect_string(Self) -> String
+pub impl Compare for TokenKind
+pub impl Eq for TokenKind
+pub impl Hash for TokenKind
+pub impl Show for TokenKind
 
 // Type aliases
 pub type ByteLiteral = String
