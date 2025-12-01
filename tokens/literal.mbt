@@ -1,14 +1,14 @@
 ///|
-pub typealias String as CharLiteral
+pub type CharLiteral = String
 
 ///|
-pub typealias String as StringLiteral
+pub type StringLiteral = String
 
 ///|
-pub typealias String as ByteLiteral
+pub type ByteLiteral = String
 
 ///|
-pub typealias String as BytesLiteral
+pub type BytesLiteral = String
 
 ///|
 pub(all) struct InterpSource {
