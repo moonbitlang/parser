@@ -59,3 +59,8 @@ moon update
 moon check
 moon test
 ```
+
+## Contributing
+
+We welcome contrainutions to this project! Please see [CONTRIBUTING.md](CONTRIBUTING.md) 
+for guidelines on how to contribute and report bugs.
