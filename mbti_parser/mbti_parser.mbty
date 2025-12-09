@@ -12,6 +12,8 @@
 %token<String> MULTILINE_STRING
 %token<InterpLiteral> MULTILINE_INTERP
 %token<InterpLiteral> INTERP
+%token<String> REGEX_LITERAL
+%token<InterpLiteral> REGEX_INTERP
 %token<(String, Option[String], String)> ATTRIBUTE
 %token<String> LIDENT
 %token<String> UIDENT
@@ -106,7 +108,8 @@
 %token ENUMVIEW "enumview"
 %token TRY_QUESTION    "try?"
 %token TRY_EXCLAMATION "try!"
-
+%token LEXMATCH        "lexmatch"
+%token LEXMATCH_QUESTION "lexmatch?"
 
 %%
 
