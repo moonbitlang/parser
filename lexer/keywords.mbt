@@ -9,6 +9,7 @@ let keyword_table : @hashmap.HashMap[String, Token] = [
     ("let", LET),
     ("const", CONST),
     ("match", MATCH),
+    ("using", USING),
     ("mut", MUTABLE),
     ("type", TYPE),
     ("typealias", TYPEALIAS),
@@ -47,6 +48,7 @@ let keyword_table : @hashmap.HashMap[String, Token] = [
     ("enumview", ENUMVIEW),
     ("noraise", NORAISE),
     ("defer", DEFER),
+    ("lexmatch", LEXMATCH),
   ]
   |> @hashmap.from_array()
 
