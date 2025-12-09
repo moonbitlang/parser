@@ -1,4 +1,5 @@
 %{
+[@@@coverage off]
 (* Copyright International Digital Economy Academy, all rights reserved *)
 [%%use
 Parsing_util.(
@@ -144,6 +145,7 @@ Parsing_util.(
 %token TRY_QUESTION    "try?"
 %token TRY_EXCLAMATION "try!"
 %token LEXMATCH        "lexmatch"
+%token LEXMATCH_QUESTION "lexmatch?"
 
 %right BARBAR
 %right AMPERAMPER
@@ -173,6 +175,11 @@ Parsing_util.(
 %nonassoc ","
 %nonassoc ")"
 %nonassoc ":"
+
+/* to resolve ambiguities with the "with" keyword.
+  E.g. `lexmatch a lexmatch? "" with longest {}` */
+%nonassoc prec_LEXMATCH_QUESTION
+%nonassoc WITH 
 
 %start    structure
 %start    expression
@@ -339,6 +346,7 @@ fun_header:
       ; vis
       ; doc_ = Docstring.empty
       ; attrs
+      ; is_test_ = false
       }
     }
 
@@ -385,6 +393,7 @@ extern_fun_header:
       ; vis
       ; doc_ = Docstring.empty
       ; attrs
+      ; is_test_ = false
       }
     }
 
@@ -418,7 +427,19 @@ structure : list_semis(structure_item) EOF {$1}
 structure_item:
   | type_header=type_header deriving_=deriving_directive_list {
       let attrs, type_vis, tycon, tycon_loc_, params = type_header in
-      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_abstract; type_vis; doc_ = Docstring.empty; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ = false }
+      Ptop_typedef
+        { tycon
+        ; tycon_loc_
+        ; params
+        ; components = Ptd_abstract
+        ; type_vis
+        ; doc_ = Docstring.empty
+        ; deriving_
+        ; loc_ = i $sloc
+        ; attrs
+        ; deprecated_type_bang_ = false
+        ; deprecated_type_alias_syntax_ = false
+        }
     }
   | attrs=attributes type_vis=visibility
     "extern" "type" tycon=UIDENT params=optional_type_parameters_no_constraints
@@ -435,45 +456,126 @@ structure_item:
         ; loc_ = i $sloc
         ; attrs
         ; deprecated_type_bang_ = false
+        ; deprecated_type_alias_syntax_ = false
         }
     }
   | type_header=type_header ty=type_ deriving_=deriving_directive_list {
       let attrs, type_vis, tycon, tycon_loc_, params = type_header in
-      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_newtype ty; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ =false }
+      Ptop_typedef
+        { tycon
+        ; tycon_loc_
+        ; params
+        ; components = Ptd_newtype ty
+        ; type_vis
+        ; doc_ = Docstring.empty
+        ; deriving_
+        ; loc_ = i $sloc
+        ; attrs
+        ; deprecated_type_bang_ =false
+        ; deprecated_type_alias_syntax_ = false
+        }
     }
   | type_header=suberror_header ty=option(type_) deriving_=deriving_directive_list {
       let attrs, type_vis, tycon, tycon_loc_, deprecated_type_bang_ = type_header in
       let exception_decl: Parsing_syntax.exception_decl =
         match ty with | None -> No_payload | Some ty -> Single_payload ty
       in
-      Ptop_typedef { tycon; tycon_loc_; params = []; components = Ptd_error exception_decl; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ }
+      Ptop_typedef
+        { tycon
+        ; tycon_loc_
+        ; params = []
+        ; components = Ptd_error exception_decl
+        ; type_vis
+        ; doc_ = Docstring.empty
+        ; deriving_
+        ; loc_ = i $sloc
+        ; attrs
+        ; deprecated_type_bang_
+        ; deprecated_type_alias_syntax_ = false
+        }
     }
   | type_header=suberror_header "{" cs=list_semis(enum_constructor) "}" deriving_=deriving_directive_list {
       let attrs, type_vis, tycon, tycon_loc_, deprecated_type_bang_ = type_header in
       let exception_decl: Parsing_syntax.exception_decl = Enum_payload cs in
-      Ptop_typedef { tycon; tycon_loc_; params = []; components = Ptd_error exception_decl; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ }
+      Ptop_typedef
+        { tycon
+        ; tycon_loc_
+        ; params = []
+        ; components = Ptd_error exception_decl
+        ; type_vis
+        ; doc_ = Docstring.empty
+        ; deriving_
+        ; loc_ = i $sloc
+        ; attrs
+        ; deprecated_type_bang_
+        ; deprecated_type_alias_syntax_ = false
+        }
     }
   | struct_header=struct_header "{" fs=list_semis(record_decl_field) "}" deriving_=deriving_directive_list {
       let attrs, type_vis, tycon, tycon_loc_, params = struct_header in
-      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_record fs; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ = false }
+      Ptop_typedef
+        { tycon
+        ; tycon_loc_
+        ; params
+        ; components = Ptd_record fs
+        ; type_vis
+        ; doc_ = Docstring.empty
+        ; deriving_
+        ; loc_ = i $sloc
+        ; attrs
+        ; deprecated_type_bang_ = false
+        ; deprecated_type_alias_syntax_ = false
+        }
     }
   | struct_header=struct_header "(" ts=non_empty_list_commas(type_) ")" deriving_=deriving_directive_list {
       let attrs, type_vis, tycon, tycon_loc_, params = struct_header in
-      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_tuple_struct ts; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ = false }
+      Ptop_typedef
+        { tycon
+        ; tycon_loc_
+        ; params
+        ; components = Ptd_tuple_struct ts
+        ; type_vis
+        ; doc_ = Docstring.empty
+        ; deriving_
+        ; loc_ = i $sloc
+        ; attrs
+        ; deprecated_type_bang_ = false
+        ; deprecated_type_alias_syntax_ = false
+        }
     }
   | enum_header=enum_header "{" cs=list_semis(enum_constructor) "}" deriving_=deriving_directive_list {
       let attrs, type_vis, tycon, tycon_loc_, params = enum_header in
-      Ptop_typedef { tycon; tycon_loc_; params; components = Ptd_variant cs; type_vis; doc_ = Docstring.empty ; deriving_; loc_ = i $sloc; attrs; deprecated_type_bang_ = false }
+      Ptop_typedef
+        { tycon
+        ; tycon_loc_
+        ; params
+        ; components = Ptd_variant cs
+        ; type_vis
+        ; doc_ = Docstring.empty
+        ; deriving_
+        ; loc_ = i $sloc
+        ; attrs
+        ; deprecated_type_bang_ = false
+        ; deprecated_type_alias_syntax_ = false
+        }
     }
   | val_header=val_header "=" expr = expr {
     let attrs, is_constant, vis, binder, ty = val_header in
     Ptop_letdef { binder; ty; expr; vis; is_constant; loc_ = i $sloc; doc_ = Docstring.empty; attrs }
   }
+  | t=extern_fun_header "=" mname=STRING fname=STRING {
+      let lang, decl = t in
+      Parsing_syntax.Ptop_funcdef {
+        loc_ = (i $sloc);
+        fun_decl = decl ;
+        decl_body = Decl_stubs (Import {module_name = mname; func_name = fname; language = Some lang});
+      }
+    }
   | t=fun_header "=" mname=STRING fname=STRING {
       Parsing_syntax.Ptop_funcdef {
         loc_ = (i $sloc);
         fun_decl = t ;
-        decl_body = Decl_stubs (Import {module_name = mname; func_name = fname });
+        decl_body = Decl_stubs (Import {module_name = mname; func_name = fname; language = None });
       }
     }
   | t=fun_header "=" s=STRING {
@@ -570,16 +672,21 @@ structure_item:
       Parsing_syntax.Ptop_batch_type_alias
         { pkg; targets; vis; attrs; loc_ = i $sloc; is_list_; doc_ = Docstring.empty }
     }
-  | attrs=attributes vis=visibility "typealias"
-    binder=type_ "=" target=type_ deriving_=deriving_directive_list {
-    Ptop_legacy_type_alias
-      { vis
-      ; binder
-      ; target
-      ; deriving_
+  | attrs=attributes type_vis=visibility
+    "type" tycon=UIDENT params=optional_type_parameters_no_constraints
+    "=" target=type_ deriving_=deriving_directive_list {
+    Ptop_typedef
+      { tycon
+      ; tycon_loc_ = i $loc(tycon)
+      ; type_vis
+      ; params
+      ; components = Ptd_alias target
       ; attrs
+      ; deriving_
       ; doc_ = Docstring.empty
       ; loc_ = i $sloc
+      ; deprecated_type_bang_ = false
+      ; deprecated_type_alias_syntax_ = false
       }
     }
   | attrs=attributes type_vis=visibility "typealias"
@@ -596,6 +703,7 @@ structure_item:
         ; doc_ = Docstring.empty
         ; loc_ = i $sloc
         ; deprecated_type_bang_ = false
+        ; deprecated_type_alias_syntax_ = true
         }
     }
   | attrs=attributes vis=visibility "traitalias" targets=batch_type_alias_targets {
@@ -603,17 +711,20 @@ structure_item:
       Parsing_syntax.Ptop_batch_trait_alias
         { pkg; targets; vis; attrs; loc_ = i $sloc; is_list_; is_old_syntax_ = false; doc_ = Docstring.empty }
     }
-  | attrs=attributes "test" name=option(loced_string) params=option(parameters) body=block_expr_with_local_types {
+  | attrs=attributes
+    is_async=is_async "test" name=option(loced_string) params=option(parameters)
+    body=block_expr_with_local_types {
       let local_types, body = body in
-      Parsing_syntax.Ptop_test {
-        expr = body;
-        name;
-        params;
-        local_types;
-        loc_ = (i $sloc);
-        doc_ = Docstring.empty;
-        attrs;
-      }
+      Parsing_syntax.Ptop_test
+        { expr = body
+        ; name
+        ; params
+        ; local_types
+        ; is_async
+        ; loc_ = (i $sloc)
+        ; doc_ = Docstring.empty
+        ; attrs
+        }
   }
   | attrs=attributes
     vis=visibility
@@ -712,6 +823,23 @@ structure_item:
       attrs;
       doc_ = Docstring.empty;
     }
+  }
+  | attrs=attributes
+    vis=visibility
+    "using"
+    pkg_name=PACKAGE_NAME
+    "{"
+    names=list_commas(using_binder)
+    "}"
+  {
+    Parsing_syntax.Ptop_using
+      { pkg = { label_name = pkg_name; loc_ = i $loc(pkg_name) }
+      ; names
+      ; vis
+      ; attrs
+      ; loc_ = i $sloc
+      ; doc_ = Docstring.empty
+      }
   }
 
 %inline attributes: 
@@ -831,6 +959,67 @@ func_alias_target(LIDENT_MAYBE_DOT):
       ({ binder; target = Some target } : Parsing_syntax.alias_target)
   }
 
+using_binder:
+  | name=LIDENT
+  | name=UIDENT {
+    let binder : Parsing_syntax.binder =
+      { binder_name = name; loc_ = i $sloc }
+    in
+    ( ({ binder; target = None } : Parsing_syntax.alias_target)
+    , Parsing_syntax.Using_value
+    )
+  }
+  | target=LIDENT "as" name=LIDENT
+  | target=UIDENT "as" name=UIDENT {
+    let binder : Parsing_syntax.binder =
+      { binder_name = name; loc_ = i $loc(name) }
+    in
+    let target : Parsing_syntax.label =
+      { label_name = target; loc_ = i $loc(target) }
+    in
+    ( ({ binder; target = Some target } : Parsing_syntax.alias_target)
+    , Parsing_syntax.Using_value
+    )
+  }
+  | "type" name=UIDENT {
+    let binder : Parsing_syntax.binder =
+      { binder_name = name; loc_ = i $loc(name) }
+    in
+    ( ({ binder; target = None } : Parsing_syntax.alias_target)
+    , Parsing_syntax.Using_type
+    )
+  }
+  | "type" target=UIDENT "as" name=UIDENT {
+    let binder : Parsing_syntax.binder =
+      { binder_name = name; loc_ = i $loc(name) }
+    in
+    let target : Parsing_syntax.label =
+      { label_name = target; loc_ = i $loc(target) }
+    in
+    ( ({ binder; target = Some target } : Parsing_syntax.alias_target)
+    , Parsing_syntax.Using_type
+    )
+  }
+  | "trait" name=UIDENT {
+    let binder : Parsing_syntax.binder =
+      { binder_name = name; loc_ = i $loc(name) }
+    in
+    ( ({ binder; target = None } : Parsing_syntax.alias_target)
+    , Parsing_syntax.Using_trait
+    )
+  }
+  | "trait" target=UIDENT "as" name=UIDENT {
+    let binder : Parsing_syntax.binder =
+      { binder_name = name; loc_ = i $loc(name) }
+    in
+    let target : Parsing_syntax.label =
+      { label_name = target; loc_ = i $loc(target) }
+    in
+    ( ({ binder; target = Some target } : Parsing_syntax.alias_target)
+    , Parsing_syntax.Using_trait
+    )
+  }
+
 deriving_directive: 
   | type_name=type_name { 
       ({ type_name_ = type_name; loc_ = i $sloc; args = [] } : Parsing_syntax.deriving_directive)
@@ -934,12 +1123,6 @@ optional_bang:
   | "!" { Some(i $sloc) }
   | { None }
 
-fn_header:
-  | "fn" binder=binder has_error=optional_bang "{" { (binder, has_error) }
-
-fn_header_no_binder:
-  | "fn" has_error=optional_bang "{" { has_error }
-
 // the func that appears on the rhs of letand
 letand_func:
   | arrow_fn_expr { $1 }
@@ -976,7 +1159,6 @@ statement:
       let locb = i $sloc in
       let return_type, error_type = ty_opt in
       let func : Parsing_syntax.func =
-        Lambda
           { parameters = params
           ; params_loc_ = (i $loc(params))
           ; body = block
@@ -989,19 +1171,6 @@ statement:
           }
       in
       Parsing_compact.Stmt_func {binder; func; loc=locb}
-    }
-  | is_async=is_async binder=fn_header cases=list_semis( multi_pattern_case ) "}"
-    { let (binder, has_error) = binder in
-      Parsing_compact.Stmt_func
-        { binder
-        ; func =
-            Match
-              { cases; has_error
-              ; is_async
-              ; loc_ = i $sloc
-              ; fn_loc_ = i $loc(binder)
-              }
-        ; loc=i $sloc}
     }
   | guard_statement { $1 }
   | "defer" expr=pipe_expr {
@@ -1085,10 +1254,6 @@ single_pattern_case:
 single_pattern_cases:
 | cases=list_semis(single_pattern_case) { cases }
 
-multi_pattern_case:
-  | pats=non_empty_list_commas(pattern) guard=option(preceded("if", infix_expr)) "=>" body=expr_statement
-   { ({ patterns = pats; guard; body }: Parsing_syntax.multi_arg_case) }
-
 catch_keyword:
   | "catch" "{"  { false, i $sloc }
   | "catch" "!" "{" { true, i $sloc }
@@ -1120,44 +1285,38 @@ if_expr:
   | "if"  b=infix_expr ifso=block_expr "else" ifnot=if_expr { Pexpr_if {loc_=(i $sloc);  cond=b; ifso; ifnot =  Some ifnot} } 
   | "if"  b=infix_expr ifso=block_expr {Parsing_syntax.Pexpr_if {loc_=(i $sloc); cond = b; ifso; ifnot =None}}  
 
-match_header:
-  | "match" e=infix_expr "{" { (e, None) }
-  | "match" e=infix_expr "using" label=label "{" { (e, Some label) }
+%inline match_header:
+  | "match" e=infix_expr "{" { e }
 
 match_expr:
-  | h=match_header mat=non_empty_list_semis( single_pattern_case )  "}"  {
-    Pexpr_match {loc_=(i $sloc);  expr = fst h; cases =  mat; match_loc_ = i $loc(h); using = snd h} }
-  | h=match_header "}" { Parsing_syntax.Pexpr_match {loc_ = (i $sloc) ; expr = fst h; cases =  []; match_loc_ = i $loc(h); using = snd h}}
+  | e=match_header mat=non_empty_list_semis( single_pattern_case )  "}"  {
+    Pexpr_match {loc_=(i $sloc);  expr = e ; cases =  mat; match_loc_ = i $loc(e)} }
+  | e=match_header "}" { Parsing_syntax.Pexpr_match {loc_ = (i $sloc) ; expr = e ; cases =  []; match_loc_ = i $loc(e)}}
 
-lex_expr:
-  | lex_header lex_cases "}" { (Pexpr_lex {strategy = snd $1; expr = fst $1; match_loc_ = i $loc($1); cases = fst $2; catchall_case = snd $2; loc_ = i $loc} : Parsing_syntax.expr) }
+lexmatch_expr:
+  | lexmatch_header list_semis(lex_case) "}" { (Pexpr_lexmatch {strategy = snd $1; expr = fst $1; match_loc_ = i $loc($1); cases = $2; loc_ = i $loc} : Parsing_syntax.expr) }
 
-lex_header:
+lexmatch_header:
   | "lexmatch" infix_expr "{" { ($2, None) }
-  | "lexmatch" infix_expr "using" label "{" { ($2, Some $4) }
-
-lex_cases:
-  | { ([], None) }
-  | SEMI { ([], None) }
-  | lex_catchall_case { ([], Some $1) }
-  | lex_catchall_case SEMI { ([], Some $1) }
-  | lex_case SEMI lex_cases { ($1 :: fst $3, snd $3) }
-
-lex_catchall_case:
-  | "_" "=>" expr_statement { ({binder = None; body = $3} : Parsing_syntax.lex_catchall_case) }
-  | binder "=>" expr_statement { ({binder = Some $1; body = $3} : Parsing_syntax.lex_catchall_case) }
-  | "..." { ({binder = None; body = Pexpr_hole {loc_ = i $sloc; kind = Todo}} : Parsing_syntax.lex_catchall_case) }
+  | "lexmatch" infix_expr "with" label "{" { ($2, Some $4) }
 
 lex_case:
-  | lex_sequence_pattern "=>" expr_statement { ({pat = $1; rest = None; body = $3} : Parsing_syntax.lex_case) }
-  | lex_sequence_pattern "," lext_case_rest_binder "=>" expr_statement { ({pat = $1; rest = Some($3); body = $5} : Parsing_syntax.lex_case) }
+  | lex_pattern "=>" expr_statement { ({pat = $1; pat_loc_ = i $loc($1); body = $3} : Parsing_syntax.lex_case) }
+  | "..." { {pat = [Pltop_wildcard { loc_ = i $loc }]; pat_loc_ = i $sloc; body = Pexpr_hole { loc_ = i $sloc; kind = Todo }} }
 
-lext_case_rest_binder:
-  | "_" { None }
-  | binder { Some $1 }
+lex_pattern:
+  | "(" separated_nonempty_list(",", lex_top_pattern) ")" { $2 }
+  | "_" { [Pltop_wildcard { loc_ = i $loc }] }
+  | binder { [Pltop_binder $1] }
+  | lex_simple_atom_pattern { [(Pltop_pattern $1 : Parsing_syntax.lex_top_pattern)] }
+
+lex_top_pattern:
+  | lex_as_pattern { Pltop_pattern $1 }
+  | "_" { Pltop_wildcard { loc_ = i $loc } }
+  | binder { (Pltop_binder $1 : Parsing_syntax.lex_top_pattern) }
   ;
 
-lex_sequence_pattern:
+lex_as_pattern:
   | lex_pattern_sequence { match $1 with [pat] -> pat | _ -> (Plpat_sequence {pats = $1; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
   | lex_atom_pattern "as" binder { (Plpat_alias {pat = $1; binder = $3; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
 
@@ -1166,19 +1325,22 @@ lex_pattern_sequence:
   | lex_atom_pattern option(SEMI) lex_pattern_sequence { $1 :: $3 }
 
 lex_atom_pattern:
+  | lex_simple_atom_pattern { $1 }
+  | "(" lex_as_pattern ")" { $2 }
+
+lex_simple_atom_pattern:
   | REGEX_LITERAL { (Plpat_regex {lit = $1; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
   | REGEX_INTERP { (Plpat_regex_interp {elems = Parsing_util.make_interps $1; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
   | STRING { (Plpat_regex {lit = Lex_literal.to_string_repr $1; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
   | INTERP { (Plpat_regex_interp {elems = Parsing_util.make_interps $1; loc_ = i $loc} : Parsing_syntax.lex_pattern) }
-  | "(" lex_sequence_pattern ")" { $2 }
 
 %inline loop_header:
-  | "loop" args=non_empty_list_commas_no_trailing(expr) "{" { args }
+  | "loop" arg=infix_expr "{" { arg }
 
 loop_expr:
-  | label=loop_label_colon args=loop_header
-      body=list_semis( multi_pattern_case )
-    "}" { Parsing_syntax.Pexpr_loop { args; body; label; loc_ = i $sloc; loop_loc_ = i $loc(args) } }
+  | label=loop_label_colon arg=loop_header
+      body=list_semis( single_pattern_case )
+    "}" { Parsing_syntax.Pexpr_loop { arg; body; label; loc_ = i $sloc; loop_loc_ = i $loc(arg) } }
 
 for_binders:
   | binders=list_commas_no_trailing(separated_pair(binder, "=", expr)) { binders }
@@ -1217,7 +1379,7 @@ expr:
   | try_expr 
   | if_expr 
   | match_expr
-  | lex_expr
+  | lexmatch_expr
   | simple_try_expr {$1}
   | func=arrow_fn_expr { Pexpr_function { loc_ = i $sloc; func } }
 
@@ -1272,6 +1434,12 @@ postfix_expr:
   | expr=range_expr "is" pat=range_pattern {
       Pexpr_is { expr; pat; loc_ = i $sloc }
     }
+  | expr=range_expr "lexmatch?" pat=lex_pattern %prec prec_LEXMATCH_QUESTION {
+    Pexpr_is_lexmatch { expr; pat = pat; pat_loc_ = i $loc(pat); strategy = None; loc_ = i $sloc }
+  }
+  | expr=range_expr "lexmatch?" pat=lex_pattern "with" label=label {
+    Pexpr_is_lexmatch { expr; pat = pat; pat_loc_ = i $loc(pat); strategy = Some(label); loc_ = i $sloc }
+  }
   | range_expr { $1 }
 
 range_expr:
@@ -1363,7 +1531,7 @@ tuple_expr:
 anony_fn:
   | is_async=is_async "fn" has_error=optional_bang ps=parameters ty_opt=func_return_type f=block_expr
     { let return_type, error_type = ty_opt in
-      Lambda { parameters = ps
+       { parameters = ps
               ; has_error
               ; is_async
               ; params_loc_ = (i $loc(ps))
@@ -1373,8 +1541,6 @@ anony_fn:
               ; kind_ = Lambda
               ; loc_ = i $sloc
               }}
-  | is_async=is_async has_error=fn_header_no_binder cases=list_semis( multi_pattern_case ) "}"
-    { Match { cases; has_error; is_async; loc_ = i $sloc; fn_loc_ = i $loc(has_error) } }
 
 simple_expr:
   | "{" x=record_defn "}" {
@@ -1453,10 +1619,10 @@ simple_expr:
   name = LIDENT { { Parsing_syntax.binder_name = name; loc_=(i $loc) } }
 tvar_binder:
   | name = UIDENT {
-      { Parsing_syntax.tvar_name = name; tvar_constraints = []; loc_=(i $loc) }
+      { Parsing_syntax.tvar_name = name; tvar_constraints = []; name_loc_=(i $loc) }
   }
   | name = UIDENT COLON constraints = separated_nonempty_list(PLUS, tvar_constraint) {
-      { Parsing_syntax.tvar_name = name; tvar_constraints = constraints; loc_ = (i $loc(name)) }
+      { Parsing_syntax.tvar_name = name; tvar_constraints = constraints; name_loc_ = (i $loc(name)) }
   }
 type_decl_binder:
   | name = UIDENT { { Parsing_syntax.tvar_name = Some name; loc_=(i $loc) } }
@@ -1531,7 +1697,7 @@ argument:
     let arg_kind = 
       match is_question with
       | Some question_loc -> Parsing_syntax.Labelled_option { label; question_loc }
-      | None -> Labelled label
+      | None -> Labelled {label}
     in
     { Parsing_syntax.arg_value; arg_kind }
   }
@@ -1541,12 +1707,12 @@ argument:
   | label=POST_LABEL {
     let label = { Parsing_syntax.label_name = label; loc_ = i $loc(label) } in
     let arg_value = Parsing_util.label_to_expr ~loc_:(Rloc.trim_last_char (i $loc(label))) label in
-    { Parsing_syntax.arg_value; arg_kind = Labelled_pun label }
+    { Parsing_syntax.arg_value; arg_kind = Labelled_pun {label} }
   }
   (* label~=expr. this is not recommended *)
   | label=POST_LABEL "=" arg_value=expr {
     let label = { Parsing_syntax.label_name = label; loc_ = i $loc(label) } in
-    { Parsing_syntax.arg_value; arg_kind = Labelled label }
+    { Parsing_syntax.arg_value; arg_kind = Labelled {label} }
   }
   (* label? *)
   | id=LIDENT "?" {
@@ -1581,10 +1747,14 @@ or_pattern:
 
 range_pattern:
   | lhs=simple_pattern "..<" rhs=simple_pattern {
-      Parsing_syntax.Ppat_range { lhs; rhs; inclusive = false; loc_ = i $sloc }
+      Parsing_syntax.Ppat_range { lhs; rhs; kind = Range_exclusive; loc_ = i $sloc }
     }
   | lhs=simple_pattern "..=" rhs=simple_pattern {
-      Parsing_syntax.Ppat_range { lhs; rhs; inclusive = true; loc_ = i $sloc }
+      Parsing_syntax.Ppat_range { lhs; rhs; kind = Range_inclusive; loc_ = i $sloc }
+    }
+  (* error recovery. The semantics are the same as `..<` *)
+  | lhs=simple_pattern ".." rhs=simple_pattern {
+      Parsing_syntax.Ppat_range { lhs; rhs; kind = Range_inclusive_missing_equal; loc_ = i $sloc }
     }
   | simple_pattern { $1 }
 
@@ -1839,21 +2009,21 @@ constr_pat_arguments_no_open:
 constr_pat_argument:
   (* label=pattern *)
   | label=label "=" pat=pattern {
-    Parsing_syntax.Constr_pat_arg { pat; kind = Labelled label }
+    Parsing_syntax.Constr_pat_arg { pat; kind = Labelled {label} }
   }
   (* label~=expr. this is not recommended *)
   | label_name=POST_LABEL "=" pat=pattern {
     let label : Parsing_syntax.label =
       { label_name; loc_ = i $loc(label_name) }
     in
-    Parsing_syntax.Constr_pat_arg { pat; kind = Labelled label }
+    Parsing_syntax.Constr_pat_arg { pat; kind = Labelled {label} }
   }
   (* label~ *)
   | id=POST_LABEL {
     let loc_ = i $loc(id) in
     let label = { Parsing_syntax.label_name = id; loc_ } in
     let pat = Parsing_util.label_to_pat ~loc_:(Rloc.trim_last_char loc_) label in
-    Parsing_syntax.Constr_pat_arg { pat; kind = Labelled_pun label }
+    Parsing_syntax.Constr_pat_arg { pat; kind = Labelled_pun {label} }
   }
   (* pattern *)
   | pat=pattern { Parsing_syntax.Constr_pat_arg { pat; kind = Positional } }

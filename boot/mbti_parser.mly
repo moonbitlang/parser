@@ -1,8 +1,11 @@
 %{
 (* Copyright International Digital Economy Academy, all rights reserved *)
+[@@@coverage off]
 let base = Loc.to_base_pos ~pkg:"" { pos_fname = ""; pos_lnum = 0; pos_column = 0 }
 let i (start, end_) =
   Rloc.of_lex_pos ~base start end_
+
+module Syntax = Parsing_syntax
 %}
 
 %token <Lex_literal.char_literal> CHAR
@@ -15,6 +18,8 @@ let i (start, end_) =
 %token <string> MULTILINE_STRING
 %token <Lex_literal.interp_literal> MULTILINE_INTERP
 %token <Lex_literal.interp_literal> INTERP
+%token <string> REGEX_LITERAL
+%token <Lex_literal.interp_literal> REGEX_INTERP
 %token <string * string option * string> ATTRIBUTE
 %token <string> LIDENT
 %token <string> UIDENT
@@ -120,6 +125,8 @@ let i (start, end_) =
 %token LETREC          "letrec"
 %token ENUMVIEW        "enumview"
 %token NORAISE         "noraise"
+%token LEXMATCH        "lexmatch"
+%token LEXMATCH_QUESTION "lexmatch?"
 
 %start <Mbti.t> t
 
@@ -164,27 +171,25 @@ sig_:
   | value_sig { Mbti.Value $1 }
 
 const_sig:
-  | "const" name=uident ":" type_=type_ "=" value=constant {
-    ({ name; type_; value }: Mbti.const_sig)
+  | attrs=attributes vis "const" name=uident ":" type_=type_ "=" value=constant {
+    ({ name; type_; value; attrs }: Mbti.const_sig)
   }
 
 value_sig:
-  | "let" name=lident ":" type_=type_ { ({ name; type_ }: Mbti.value_sig) }
+  | attrs=attributes vis "let" name=lident ":" type_=type_ { ({ attrs; name; type_ }: Mbti.value_sig) }
 
-type_name_coloncolon:
-  | type_name=uident "::" { type_name }
+method_self_type_coloncolon:
+  | name=UIDENT "::" {
+    ({ name; is_object = false; loc_ = i $loc(name) } : Mbti.method_self_type)
+  }
+  | "&" name=UIDENT "::" {
+    ({ name; is_object = true; loc_ = i $loc(name) } : Mbti.method_self_type)
+  }
 
 func_sig:
   | attrs=attributes
-    is_async=is_async FN type_name=option(type_name_coloncolon) name=lident
-    type_params=loption(type_params_with_constraints)
-    params=delimited("(", separated_list(",", parameter), ")") 
-    "->" return_=return_type {
-    ({ name; type_name; params; return_; type_params; is_async; attrs }: Mbti.func_sig)
-  }
-  | attrs=attributes
-    is_async=is_async FN type_params=type_params_with_constraints
-    type_name=option(type_name_coloncolon) name=lident
+    vis is_async=is_async FN type_params=loption(type_params_with_constraints)
+    type_name=option(method_self_type_coloncolon) name=lident
     params=delimited("(", separated_list(",", parameter), ")") 
     "->" return_=return_type {
     ({ name; params; type_name; return_; type_params; is_async; attrs }: Mbti.func_sig)
@@ -193,7 +198,7 @@ func_sig:
 trait_method_sig:
   attrs=attributes
   name=lident
-  params=delimited("(", separated_list(",", trait_method_parameter), ")") 
+  params=delimited("(", separated_list(",", parameter), ")")
   "->" return_=return_type has_default=option(eq_underscore) {
     let has_default_ = [%p? Some _] has_default in
     ({ name; params; has_default_; return_; attrs }: Mbti.trait_method_sig)
@@ -202,30 +207,21 @@ trait_method_sig:
 %inline eq_underscore:
   | "=" "_" {}
 
-suberror_keyword:
-  | "suberror" {}
-  | "type" "!" {}
-
 type_sig:
-  | attrs=attributes
-    vis=vis "extern" "type" t=type_decl_name_with_params {
-      let name, type_params = t in
-      { name; type_params; components = Ptd_extern; vis; attrs }
-    }
   | attrs=attributes
     vis=vis "type" t=type_decl_name_with_params {
       let name, type_params = t in
       { name; type_params; components = Ptd_abstract; vis; attrs }
     }
   | attrs=attributes
-    vis=vis suberror_keyword type_name=UIDENT ty=option(type_) {
+    vis=vis "suberror" type_name=UIDENT ty=option(type_) {
       let exception_decl: Parsing_syntax.exception_decl =
         match ty with | None -> No_payload | Some ty -> Single_payload ty
       in
       { name = { name = type_name; loc_ = i $loc(type_name) }; type_params = []; components = Ptd_error exception_decl; vis; attrs }
     }
   | attrs=attributes
-    vis=vis suberror_keyword type_name=UIDENT "{" cs=separated_list(";", enum_constructor) "}" {
+    vis=vis "suberror" type_name=UIDENT "{" cs=separated_list(";", enum_constructor) "}" {
       let exception_decl: Parsing_syntax.exception_decl = Enum_payload cs in
       { name = { name = type_name; loc_ = i $loc(type_name) }; type_params = []; components = Ptd_error exception_decl; vis; attrs }
     }
@@ -246,32 +242,45 @@ type_sig:
     }
 
 impl_sig:
-   | attrs=attributes
+   | attrs=attributes vis
      "impl" type_params=type_params_with_constraints trait_name=qualified_uident "for" type_=type_
      { { type_params; type_; trait_name; attrs } }
-   | attrs=attributes
+   | attrs=attributes vis
      "impl" trait_name=qualified_uident "for" type_=type_
      { { type_params = []; type_; trait_name; attrs } }
 
 trait_sig:
-  | vis=vis "trait" name=uident 
+  | attrs=attributes vis=vis "trait" name=uident 
     super_traits=loption(preceded(":", separated_nonempty_list("+", qualified_uident)))
     "{" methods=separated_nonempty_list(";", trait_method_sig) "}" {
-    ({ name; methods; super_traits; vis } : Mbti.trait_sig)
+    ({ attrs; name; methods; super_traits; vis } : Mbti.trait_sig)
   }
-  | vis=vis "trait" name=uident { ({ name; methods = []; super_traits = []; vis } : Mbti.trait_sig) }
+  | attrs=attributes vis=vis "trait" name=uident { ({ attrs; name; methods = []; super_traits = []; vis } : Mbti.trait_sig) }
+
+using_binder:
+  | /* empty */      { None }
+  | "as" name=uident { Some name }
 
 alias_sig:
-  | vis=vis "typealias"  type_=type_ "as" t=type_decl_name_with_params {
+  | attrs=attributes vis=vis "type"  t=type_decl_name_with_params "=" type_=type_ {
     let name, type_params = t in
-    Mbti.Type_alias { name; type_params; type_; vis }
+    Mbti.Type_alias { name; type_params; type_; vis; attrs }
   }
-  | vis=vis "traitalias" trait_name=qualified_uident "as" name=uident {
-    Mbti.Trait_alias { name; trait_name; vis }
-  }
-  | "fnalias" type_name=uident "::" name=lident {
-    Mbti.Func_alias { type_name; name }
-  }
+  | attrs=attributes vis "fnalias" type_name=uident "::" name=lident {
+      Mbti.Func_alias { type_name; name; attrs }
+    }
+  | attrs=attributes vis "using" pkg=PACKAGE_NAME "{"
+      "type" target=uident name=using_binder
+    "}" {
+      let pkg : Mbti.name = { name = pkg; loc_ = i $loc(pkg) } in
+      Mbti.Using { pkg; target; name; kind = Using_type; attrs }
+    }
+  | attrs=attributes vis "using" pkg=PACKAGE_NAME "{"
+      "trait" target=uident name=using_binder
+    "}" {
+      let pkg : Mbti.name = { name = pkg; loc_ = i $loc(pkg) } in
+      Mbti.Using { pkg; target; name; kind = Using_trait; attrs }
+    }
 
 // --------------------------------------------
 
@@ -362,15 +371,7 @@ type_:
 
 return_type:
   | t=type_ { (t, No_error_typ) }
-  | t1=simple_type "!" {
-    (t1, Default_error_typ { loc_ = i $loc($2); is_old_syntax_ = true })
-  }
-  | t1=simple_type "!" ty=error_type {
-    (t1, Error_typ { ty; is_old_syntax_ = true })
-  }
-  | ret=simple_type "?" err=error_type {
-    (ret, Maybe_error { ty = err; is_old_syntax_ = true })
-  }
+  | t1=simple_type "noraise" { (t1, Noraise { loc_ = i $sloc }) }
   | t1=simple_type "raise" {
     (t1, Default_error_typ { loc_ = i $loc($2); is_old_syntax_ = false })
   }
@@ -398,15 +399,21 @@ optional_type_arguments:
   | /* empty */ { [] }
 
 parameter:
-  | t=type_ { Positional t }
-  | label=POST_LABEL ":" t=type_ { Labelled ({label_name=label; loc_=i $loc(label)}, t) }
-  | label=POST_LABEL ":" t=type_ "=" ".." { Mbti.Optional_default ({label_name=label; loc_=i $loc(label)}, t) }
-  | label=POST_LABEL ":" t=type_ "=" "_" { Mbti.Autofill ({label_name=label; loc_=i $loc(label)}, t) }
-  | label=label "?" ":" t=type_ { Mbti.Optional_option (label, t) }
-
-trait_method_parameter:
-  | t=type_ { (Positional t : Mbti.trait_method_parameter) }
-  | label=POST_LABEL ":" t=type_ { (Labelled ({label_name=label; loc_=i $loc(label)}, t) : Mbti.trait_method_parameter) }
+  | t=type_ {
+    Syntax.Discard_positional { ty = Some t; loc_ = Rloc.no_location}
+  }
+  | label=POST_LABEL ":" t=type_ {
+    Syntax.Labelled
+      { binder = { binder_name = label; loc_= i $loc(label) }
+      ; ty = Some t
+      }
+  }
+  | label=label "?" ":" t=type_ {
+    Syntax.Question_optional
+      { binder = { binder_name = label.Syntax.label_name; loc_ = label.loc_ }
+      ; ty = Some t
+      }
+  }
 
 constant:
   | TRUE { Parsing_syntax.Const_bool true }
