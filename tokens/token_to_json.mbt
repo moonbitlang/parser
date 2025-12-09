@@ -133,5 +133,9 @@ pub impl ToJson for Token with to_json(self) {
     INT(str) => ["INT", str]
     CHAR(str) => ["CHAR", str]
     TRY_EXCLAMATION => "TRY_EXCLAMATION"
+    LEXMATCH => "LEXMATCH"
+    LEXMATCH_QUESTION => "LEXMATCH_QUESTION"
+    REGEX_LITERAL(_) => "REGEX_LITERAL"
+    REGEX_INTERP(_) => "REGEX_INTERP"
   }
 }

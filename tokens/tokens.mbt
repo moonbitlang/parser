@@ -10,6 +10,8 @@ pub(all) enum Token {
   MULTILINE_STRING(String)
   MULTILINE_INTERP(InterpLiteral)
   INTERP(InterpLiteral)
+  REGEX_LITERAL(String)
+  REGEX_INTERP(InterpLiteral)
   ATTRIBUTE((String, String?, String))
   LIDENT(String)
   UIDENT(String)
@@ -104,6 +106,8 @@ pub(all) enum Token {
   NORAISE
   TRY_QUESTION
   TRY_EXCLAMATION
+  LEXMATCH
+  LEXMATCH_QUESTION
 } derive(Show)
 
 ///|
@@ -119,6 +123,8 @@ pub fn Token::kind(self : Token) -> TokenKind {
     MULTILINE_STRING(_) => TK_MULTILINE_STRING
     MULTILINE_INTERP(_) => TK_MULTILINE_INTERP
     INTERP(_) => TK_INTERP
+    REGEX_LITERAL(_) => TK_REGEX_LITERAL
+    REGEX_INTERP(_) => TK_REGEX_INTERP
     ATTRIBUTE(_) => TK_ATTRIBUTE
     LIDENT(_) => TK_LIDENT
     UIDENT(_) => TK_UIDENT
@@ -213,6 +219,8 @@ pub fn Token::kind(self : Token) -> TokenKind {
     NORAISE => TK_NORAISE
     TRY_QUESTION => TK_TRY_QUESTION
     TRY_EXCLAMATION => TK_TRY_EXCLAMATION
+    LEXMATCH => TK_LEXMATCH
+    LEXMATCH_QUESTION => TK_LEXMATCH_QUESTION
   }
 }
 
@@ -228,6 +236,8 @@ pub(all) enum TokenKind {
   TK_MULTILINE_STRING
   TK_MULTILINE_INTERP
   TK_INTERP
+  TK_REGEX_LITERAL
+  TK_REGEX_INTERP
   TK_ATTRIBUTE
   TK_LIDENT
   TK_UIDENT
@@ -322,6 +332,8 @@ pub(all) enum TokenKind {
   TK_NORAISE
   TK_TRY_QUESTION
   TK_TRY_EXCLAMATION
+  TK_LEXMATCH
+  TK_LEXMATCH_QUESTION
 } derive(Eq, Hash, Compare)
 
 ///|
@@ -338,6 +350,8 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_MULTILINE_STRING => "MULTILINE_STRING"
       TK_MULTILINE_INTERP => "MULTILINE_INTERP"
       TK_INTERP => "INTERP"
+      TK_REGEX_LITERAL => "REGEX_LITERAL"
+      TK_REGEX_INTERP => "REGEX_INTERP"
       TK_ATTRIBUTE => "ATTRIBUTE"
       TK_LIDENT => "LIDENT"
       TK_UIDENT => "UIDENT"
@@ -432,6 +446,8 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_NORAISE => "\"noraise\""
       TK_TRY_QUESTION => "\"try?\""
       TK_TRY_EXCLAMATION => "\"try!\""
+      TK_LEXMATCH => "\"lexmatch\""
+      TK_LEXMATCH_QUESTION => "\"lexmatch?\""
     },
   )
 }

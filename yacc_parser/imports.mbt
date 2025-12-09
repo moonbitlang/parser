@@ -67,6 +67,10 @@ using @syntax {
   type TraitDecl,
   type FieldName,
   type ConstrId,
+  type LexPattern,
+  type LexTopPattern,
+  type UsingKind,
+  type LexCase,
 }
 
 ///|

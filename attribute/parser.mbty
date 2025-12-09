@@ -17,6 +17,8 @@
 %token<String> MULTILINE_STRING
 %token<InterpLiteral> MULTILINE_INTERP
 %token<InterpLiteral> INTERP
+%token<String> REGEX_LITERAL
+%token<InterpLiteral> REGEX_INTERP
 %token<(String, String?, String)> ATTRIBUTE
 %token<String> LIDENT
 %token<String> UIDENT
@@ -111,6 +113,8 @@
 %token NORAISE "noraise"
 %token TRY_QUESTION    "try?"
 %token TRY_EXCLAMATION "try!"
+%token LEXMATCH        "lexmatch"
+%token LEXMATCH_QUESTION "lexmatch?"
 
 %right BARBAR
 %right AMPERAMPER
@@ -133,6 +137,7 @@
 %nonassoc ","
 %nonassoc ")"
 %nonassoc ":"
+
 
 %%
 

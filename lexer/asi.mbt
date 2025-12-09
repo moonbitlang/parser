@@ -18,6 +18,8 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | MULTILINE_INTERP(_)
     | INTERP(_)
     | CHAR(_)
+    | REGEX_LITERAL(_)
+    | REGEX_INTERP(_)
     | RBRACE
     | RPAREN
     | RBRACKET
@@ -106,7 +108,9 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | AMPER
     | CARET
     | ATTRIBUTE(_)
-    | USING => false
+    | USING
+    | LEXMATCH
+    | LEXMATCH_QUESTION => false
   }
 }
 
@@ -127,6 +131,8 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | MULTILINE_INTERP(_)
     | INTERP(_)
     | CHAR(_)
+    | REGEX_LITERAL(_)
+    | REGEX_INTERP(_)
     | LBRACE
     | LPAREN
     | LBRACKET
@@ -172,7 +178,8 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | FOR
     | ELLIPSIS
     | POST_LABEL(_)
-    | ATTRIBUTE(_) => true
+    | ATTRIBUTE(_)
+    | LEXMATCH => true
     // the lexer should skip these two tokens before trying to insert semi
     COMMENT(_) | NEWLINE => true
     // [MINUS] is both a binary operator and a unary operator.
@@ -250,7 +257,8 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | RANGE_INCLUSIVE
     | RANGE_EXCLUSIVE
     | USING
-    | AND => false
+    | AND
+    | LEXMATCH_QUESTION => false
   }
 }
 

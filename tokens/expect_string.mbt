@@ -107,5 +107,9 @@ pub fn TokenKind::to_expect_string(self : Self) -> String {
     TK_NORAISE => "`noraise`"
     TK_TRY_QUESTION => "`try?`"
     TK_TRY_EXCLAMATION => "`try!`"
+    TK_LEXMATCH => "lexmatch"
+    TK_LEXMATCH_QUESTION => "lexmatch?"
+    TK_REGEX_LITERAL => "regex"
+    TK_REGEX_INTERP => "regex interp"
   }
 }

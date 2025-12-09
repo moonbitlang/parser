@@ -18,6 +18,8 @@
 %token<String> MULTILINE_STRING
 %token<InterpLiteral> MULTILINE_INTERP
 %token<InterpLiteral> INTERP
+%token<String> REGEX_LITERAL
+%token<InterpLiteral> REGEX_INTERP
 %token<(String, String?, String)> ATTRIBUTE
 %token<String> LIDENT
 %token<String> UIDENT
@@ -112,6 +114,8 @@
 %token NORAISE "noraise"
 %token TRY_QUESTION    "try?"
 %token TRY_EXCLAMATION "try!"
+%token LEXMATCH        "lexmatch"
+%token LEXMATCH_QUESTION "lexmatch?"
 
 %right BARBAR
 %right AMPERAMPER
@@ -134,6 +138,11 @@
 %nonassoc ","
 %nonassoc ")"
 %nonassoc ":"
+
+// to resolve ambiguities with the "with" keyword.
+// E.g. `lexmatch a lexmatch? "" with longest {}` 
+%nonassoc prec_LEXMATCH_QUESTION
+%nonassoc WITH 
 
 %%
 
@@ -754,6 +763,19 @@ structure_item -> Impl
       doc = DocString::empty()
     )
   }
+  | attributes visibility "using" PACKAGE_NAME "{" list_commas(using_binder) "}" {
+    TopUsing(
+      pkg = {
+        name : $4,
+        loc : mk_loc($loc($4))
+      },
+      names = $6,
+      vis = $2,
+      attrs = $1,
+      loc = mk_loc($loc),
+      doc = DocString::empty()
+    )
+  }
   ;
 
 %inline attributes -> List[Attribute]
@@ -867,6 +889,57 @@ func_alias_target(LIDENT_MAYBE_DOT) -> AliasTarget
     }
   }
   ;
+
+using_binder -> (AliasTarget, UsingKind):
+  | LIDENT
+  | UIDENT {
+    let binder = Binder::{
+      name : $1,
+      loc : mk_loc($loc)
+    }
+    ({ binder, target : None }, UsingKind::Value)
+  }
+  | LIDENT "as" LIDENT
+  | UIDENT "as" UIDENT {
+    let binder = Binder::{
+      name : $3,
+      loc : mk_loc($loc($3))
+    }
+    let target = Label::{
+      name : $1,
+      loc : mk_loc($loc($1))
+    }
+    ({ binder, target : Some(target) }, UsingKind::Value)
+  }
+  | "type" UIDENT "as" UIDENT {
+    let binder = Binder::{
+      name : $4,
+      loc : mk_loc($loc($4))
+    }
+    let target = Label::{
+      name : $2,
+      loc : mk_loc($loc($2))
+    }
+    ({ binder, target : Some(target) }, UsingKind::Type)
+  }
+  | "trait" UIDENT {
+    let binder = Binder::{
+      name : $2,
+      loc : mk_loc($loc($2))
+    }
+    ({ binder, target : None }, UsingKind::Trait)
+  }
+  | "trait" UIDENT "as" UIDENT {
+    let binder = Binder::{
+      name : $4,
+      loc : mk_loc($loc($4))
+    }
+    let target = Label::{
+      name : $2,
+      loc : mk_loc($loc($2))
+    }
+    ({ binder, target : Some(target) }, UsingKind::Trait)
+  }
 
 deriving_directive -> DerivingDirective
   : type_name { DerivingDirective::{ type_name: $1, args: @list.empty(), loc: mk_loc($sloc) } }
@@ -1182,6 +1255,80 @@ match_expr -> Expr
   : "loop" infix_expr "{" { $2 }
   ;
 
+lexmatch_expr -> Expr:
+  | lexmatch_header list_semis(lex_case) "}" {
+    LexMatch(strategy=$1.1, expr=$1.0, match_loc=mk_loc($loc($1)), cases=$2, loc=mk_loc($sloc))
+  }
+
+lexmatch_header -> (Expr, Label?):
+  | "lexmatch" infix_expr "{" {
+    ($2, None)
+  }
+  | "lexmatch" infix_expr "with" label "{" {
+    ($2, Some($4))
+  }
+
+lex_case -> LexCase :
+  | lex_pattern "=>" expr_statement {
+    LexCase::{
+      pat : $1,
+      pat_loc : mk_loc($loc($1)),
+      body : $3
+    }
+  }
+  | "..." {
+    let pat = @list.singleton(LexTopPattern::Wildcard(loc = mk_loc($sloc)))
+    LexCase::{
+      pat,
+      pat_loc : mk_loc($sloc),
+      body : Hole(loc=mk_loc($sloc), kind=Todo)
+    }
+  }
+
+lex_pattern -> @list.List[LexTopPattern]:
+  | "(" separated_nonempty_list(",", lex_top_pattern) ")" { $2 }
+  | "_" { @list.singleton(Wildcard(loc = mk_loc($sloc))) }
+  | binder { @list.singleton(Binder($1)) }
+  | lex_simple_atom_pattern { @list.singleton(Pattern($1)) }
+
+lex_top_pattern -> LexTopPattern :
+  | lex_as_pattern { Pattern($1) }
+  | "_" { Wildcard(loc = mk_loc($sloc)) }
+  | binder { Binder($1) }
+
+lex_as_pattern -> LexPattern :
+  | lex_pattern_sequence {
+    match $1 {
+      More(pat, tail=Empty) => pat
+      _ => Sequence(pats=$1, loc=mk_loc($sloc))
+    }
+  }
+  | lex_atom_pattern "as" binder {
+    Alias(pat = $1, binder = $3, loc = mk_loc($sloc))
+  }
+
+lex_pattern_sequence -> @list.List[LexPattern] :
+  | lex_atom_pattern { @list.singleton($1) }
+  | lex_atom_pattern option(SEMI) lex_pattern_sequence { @list.cons($1, $3) }
+
+lex_atom_pattern -> LexPattern:
+  | lex_simple_atom_pattern { $1 }
+  | "(" lex_as_pattern ")" { $2 }
+
+lex_simple_atom_pattern -> LexPattern:
+  | REGEX_LITERAL {
+    Regex(lit=$1, loc=mk_loc($sloc))
+  }
+  | REGEX_INTERP {
+    RegexInterp(elems=make_interps($1), loc=mk_loc($sloc))
+  }
+  | STRING {
+    Regex(lit = $1, loc = mk_loc($sloc))
+  }
+  | INTERP {
+    RegexInterp(elems = make_interps($1), loc = mk_loc($sloc))
+  }
+
 loop_expr -> Expr
   : loop_label_colon loop_header list_semis(single_pattern_case) "}" { 
     Loop(
@@ -1254,6 +1401,7 @@ expr -> Expr
   | try_expr { $1 }
   | if_expr { $1 }
   | match_expr { $1 }
+  | lexmatch_expr { $1 }
   | simple_try_expr { $1 }
   | arrow_fn_expr { Function(func = $1, loc = mk_loc($sloc)) }
   ;
@@ -1329,6 +1477,12 @@ postfix_expr -> Expr
   }
   | range_expr "is" range_pattern { 
     Is(expr = $1, pat = $3, loc = mk_loc($sloc))
+  }
+  | range_expr "lexmatch?" lex_pattern %prec prec_LEXMATCH_QUESTION {
+    IsLexMatch(expr=$1, pat=$3, pat_loc=mk_loc($loc($3)), strategy = None, loc=mk_loc($sloc))
+  }
+  | range_expr "lexmatch?" lex_pattern "with" label {
+    IsLexMatch(expr=$1, pat=$3, pat_loc=mk_loc($loc($3)), strategy = Some($5), loc=mk_loc($sloc))
   }
   | range_expr { $1 }
   ;
