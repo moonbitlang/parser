@@ -156,6 +156,35 @@ pub(open) trait IterVisitor {
   // Case
   visit_Case(Self, Case) -> Unit = _
 
+  // LexCase
+  visit_LexCase(Self, LexCase) -> Unit = _
+
+  // LexTopPattern
+  visit_LexTopPattern(Self, LexTopPattern) -> Unit = _
+  visit_LexTopPattern_Pattern(Self, LexPattern) -> Unit = _
+  visit_LexTopPattern_Binder(Self, Binder) -> Unit = _
+  visit_LexTopPattern_Wildcard(Self, loc~ : Location) -> Unit = _
+
+  // LexPattern
+  visit_LexPattern(Self, LexPattern) -> Unit = _
+  visit_LexPattern_Regex(Self, lit~ : String, loc~ : Location) -> Unit = _
+  visit_LexPattern_RegexInterp(
+    Self,
+    elems~ : @list.List[InterpElem],
+    loc~ : Location,
+  ) -> Unit = _
+  visit_LexPattern_Alias(
+    Self,
+    pat~ : LexPattern,
+    binder~ : Binder,
+    loc~ : Location,
+  ) -> Unit = _
+  visit_LexPattern_Sequence(
+    Self,
+    pats~ : @list.List[LexPattern],
+    loc~ : Location,
+  ) -> Unit = _
+
   // MultiArgCase
   visit_MultiArgCase(Self, MultiArgCase) -> Unit = _
 
@@ -446,6 +475,18 @@ pub(open) trait IterVisitor {
     loc~ : Location,
     doc~ : DocString,
   ) -> Unit = _
+  visit_Impl_TopUsing(
+    Self,
+    pkg~ : Label,
+    names~ : @list.List[(AliasTarget, UsingKind)],
+    vis~ : Visibility,
+    attrs~ : @list.List[Attribute],
+    loc~ : Location,
+    doc~ : DocString,
+  ) -> Unit = _
+
+  // UsingKind
+  visit_UsingKind(Self, UsingKind) -> Unit = _
 
   // Expr
   visit_Expr(Self, Expr) -> Unit = _
@@ -522,6 +563,14 @@ pub(open) trait IterVisitor {
     loc~ : Location,
   ) -> Unit = _
   visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : Location) -> Unit = _
+  visit_Expr_IsLexMatch(
+    Self,
+    expr~ : Expr,
+    strategy~ : Label?,
+    pat~ : @list.List[LexTopPattern],
+    pat_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
   visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : Location) -> Unit = _
   visit_Expr_LetFn(
     Self,
@@ -600,6 +649,14 @@ pub(open) trait IterVisitor {
     expr~ : Expr,
     cases~ : @list.List[Case],
     match_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
+  visit_Expr_LexMatch(
+    Self,
+    strategy~ : Label?,
+    expr~ : Expr,
+    match_loc~ : Location,
+    cases~ : @list.List[LexCase],
     loc~ : Location,
   ) -> Unit = _
   visit_Expr_LetMut(
@@ -932,6 +989,32 @@ impl IterVisitor with visit_Impl_TopImplRelation(
     loc~,
     doc~,
   )
+}
+
+///|
+impl IterVisitor with visit_Impl_TopUsing(
+  env,
+  pkg~,
+  names~,
+  vis~,
+  attrs~,
+  loc~,
+  doc~,
+) {
+  IterVisitorBase::visit_Impl_TopUsing(
+    env,
+    pkg~,
+    names~,
+    vis~,
+    attrs~,
+    loc~,
+    doc~,
+  )
+}
+
+///|
+impl IterVisitor with visit_UsingKind(env, using_kind) {
+  IterVisitorBase::visit_UsingKind(env, using_kind)
 }
 
 ///|
@@ -2046,6 +2129,94 @@ impl IterVisitor with visit_TraitDecl(env, trait_decl) {
 }
 
 ///|
+impl IterVisitor with visit_Expr_IsLexMatch(
+  env,
+  expr~ : Expr,
+  strategy~,
+  pat~,
+  pat_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_IsLexMatch(
+    env,
+    expr~,
+    strategy~,
+    pat~,
+    pat_loc~,
+    loc~,
+  )
+}
+
+///|
+impl IterVisitor with visit_Expr_LexMatch(
+  env,
+  strategy~,
+  expr~,
+  match_loc~,
+  cases~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_LexMatch(
+    env,
+    strategy~,
+    expr~,
+    match_loc~,
+    cases~,
+    loc~,
+  )
+}
+
+///|
+impl IterVisitor with visit_LexCase(env, lex_case) {
+  IterVisitorBase::visit_LexCase(env, lex_case)
+}
+
+///|
+impl IterVisitor with visit_LexTopPattern(env, lex_top_pattern) {
+  IterVisitorBase::visit_LexTopPattern(env, lex_top_pattern)
+}
+
+///|
+impl IterVisitor with visit_LexTopPattern_Pattern(env, lex_pattern) {
+  IterVisitorBase::visit_LexTopPattern_Pattern(env, lex_pattern)
+}
+
+///|
+impl IterVisitor with visit_LexTopPattern_Binder(env, binder) {
+  IterVisitorBase::visit_LexTopPattern_Binder(env, binder)
+}
+
+///|
+impl IterVisitor with visit_LexTopPattern_Wildcard(env, loc~) {
+  IterVisitorBase::visit_LexTopPattern_Wildcard(env, loc~)
+}
+
+///|
+impl IterVisitor with visit_LexPattern(env, lex_pattern) {
+  IterVisitorBase::visit_LexPattern(env, lex_pattern)
+}
+
+///|
+impl IterVisitor with visit_LexPattern_Regex(env, lit~, loc~) {
+  IterVisitorBase::visit_LexPattern_Regex(env, lit~, loc~)
+}
+
+///|
+impl IterVisitor with visit_LexPattern_RegexInterp(env, elems~, loc~) {
+  IterVisitorBase::visit_LexPattern_RegexInterp(env, elems~, loc~)
+}
+
+///|
+impl IterVisitor with visit_LexPattern_Alias(env, pat~, binder~, loc~) {
+  IterVisitorBase::visit_LexPattern_Alias(env, pat~, binder~, loc~)
+}
+
+///|
+impl IterVisitor with visit_LexPattern_Sequence(env, pats~, loc~) {
+  IterVisitorBase::visit_LexPattern_Sequence(env, pats~, loc~)
+}
+
+///|
 pub struct IterVisitorBase[T](T)
 
 ///|
@@ -2183,6 +2354,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl(
         loc~,
         doc~,
       )
+    TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~) =>
+      env.0.visit_Impl_TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~)
   }
 }
 
@@ -3535,6 +3708,15 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_TraitDec
 }
 
 ///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_UsingKind(
+  env,
+  using_kind,
+) {
+  ignore(env)
+  ignore(using_kind)
+}
+
+///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl_TopExpr(
   env,
   expr~,
@@ -3763,6 +3945,27 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl_Top
   env.0.visit_Type(self_ty)
   env.0.visit_TypeName(trait_)
   quantifiers.each(env.0.visit_TypeVarBinder(_))
+  env.0.visit_Visibility(vis)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl_TopUsing(
+  env,
+  pkg~,
+  names~,
+  vis~,
+  attrs~,
+  loc~,
+  doc~,
+) {
+  ignore(loc)
+  ignore(attrs)
+  ignore(doc)
+  env.0.visit_Label(pkg)
+  names.each(name => {
+    env.0.visit_AliasTarget(name.0)
+    env.0.visit_UsingKind(name.1)
+  })
   env.0.visit_Visibility(vis)
 }
 
@@ -4508,6 +4711,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr(
     Guard(cond~, otherwise~, body~, loc~) =>
       env.0.visit_Expr_Guard(cond~, otherwise~, body~, loc~)
     Is(expr~, pat~, loc~) => env.0.visit_Expr_Is(expr~, pat~, loc~)
+    IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~) =>
+      env.0.visit_Expr_IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~)
     Defer(expr~, body~, loc~) => env.0.visit_Expr_Defer(expr~, body~, loc~)
     LetFn(name~, func~, body~, loc~) =>
       env.0.visit_Expr_LetFn(name~, func~, body~, loc~)
@@ -4542,6 +4747,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr(
       env.0.visit_Expr_Mutate(record~, accessor~, field~, augmented_by~, loc~)
     Match(expr~, cases~, match_loc~, loc~) =>
       env.0.visit_Expr_Match(expr~, cases~, match_loc~, loc~)
+    LexMatch(strategy~, expr~, match_loc~, cases~, loc~) =>
+      env.0.visit_Expr_LexMatch(strategy~, expr~, match_loc~, cases~, loc~)
     LetMut(binder~, ty~, expr~, body~, loc~) =>
       env.0.visit_Expr_LetMut(binder~, ty~, expr~, body~, loc~)
     Pipe(lhs~, rhs~, loc~) => env.0.visit_Expr_Pipe(lhs~, rhs~, loc~)
@@ -4604,6 +4811,142 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr(
     StaticAssert(asserts~, body~) =>
       env.0.visit_Expr_StaticAssert(asserts~, body~)
   }
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr_IsLexMatch(
+  env,
+  expr~,
+  strategy~,
+  pat~,
+  pat_loc~,
+  loc~,
+) {
+  ignore(pat_loc)
+  ignore(loc)
+  strategy.each(strategy => env.0.visit_Label(strategy))
+  pat.each(pat => env.0.visit_LexTopPattern(pat))
+  env.0.visit_Expr(expr)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr_LexMatch(
+  env,
+  strategy~,
+  expr~,
+  match_loc~,
+  cases~,
+  loc~,
+) {
+  ignore(match_loc)
+  ignore(loc)
+  strategy.each(strategy => env.0.visit_Label(strategy))
+  env.0.visit_Expr(expr)
+  cases.each(case => env.0.visit_LexCase(case))
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LexCase(
+  env,
+  lex_case,
+) {
+  lex_case.pat.each(pat => env.0.visit_LexTopPattern(pat))
+  env.0.visit_Expr(lex_case.body)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LexTopPattern(
+  env,
+  lex_top_pattern,
+) {
+  match lex_top_pattern {
+    Pattern(lex_pattern) => env.0.visit_LexTopPattern_Pattern(lex_pattern)
+    Binder(binder) => env.0.visit_LexTopPattern_Binder(binder)
+    Wildcard(loc~) => env.0.visit_LexTopPattern_Wildcard(loc~)
+  }
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LexTopPattern_Pattern(
+  env,
+  lex_pattern,
+) {
+  env.0.visit_LexPattern(lex_pattern)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LexTopPattern_Binder(
+  env,
+  binder,
+) {
+  env.0.visit_Binder(binder)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LexTopPattern_Wildcard(
+  env,
+  loc~,
+) {
+  ignore(env)
+  ignore(loc)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LexPattern(
+  env,
+  lex_pattern,
+) {
+  match lex_pattern {
+    Alias(pat~, binder~, loc~) =>
+      env.0.visit_LexPattern_Alias(pat~, binder~, loc~)
+    RegexInterp(elems~, loc~) =>
+      env.0.visit_LexPattern_RegexInterp(elems~, loc~)
+    Regex(lit~, loc~) => env.0.visit_LexPattern_Regex(lit~, loc~)
+    Sequence(pats~, loc~) => env.0.visit_LexPattern_Sequence(pats~, loc~)
+  }
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LexPattern_Regex(
+  env,
+  lit~,
+  loc~,
+) {
+  ignore(env)
+  ignore(lit)
+  ignore(loc)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LexPattern_RegexInterp(
+  env,
+  elems~,
+  loc~,
+) {
+  ignore(loc)
+  elems.each(elem => env.0.visit_InterpElem(elem))
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LexPattern_Alias(
+  env,
+  pat~,
+  binder~,
+  loc~,
+) {
+  ignore(loc)
+  env.0.visit_LexPattern(pat)
+  env.0.visit_Binder(binder)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LexPattern_Sequence(
+  env,
+  pats~,
+  loc~,
+) {
+  ignore(loc)
+  pats.each(pat => env.0.visit_LexPattern(pat))
 }
 
 ///|

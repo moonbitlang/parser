@@ -602,7 +602,7 @@ test "dot_dot_binder to_json" {
 ///|
 test "array_pattern to_json" {
   let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
-  @json.inspect(@syntax.Pattern(any_pattern), content={
+  @json.inspect(@syntax.ArrayPattern::Pattern(any_pattern), content={
     "type": "ArrayPattern::Pattern",
     "0": { "type": "Pattern::Any", "loc": null },
   })
@@ -636,7 +636,9 @@ test "array_pattern to_json" {
 
 ///|
 test "array_patterns to_json" {
-  let any_pattern = @syntax.Pattern(@syntax.Pattern::Any(loc=dummy_loc))
+  let any_pattern = @syntax.ArrayPattern::Pattern(
+    @syntax.Pattern::Any(loc=dummy_loc),
+  )
   @json.inspect(@syntax.Closed(@list.from_array([any_pattern])), content={
     "type": "ArrayPatterns::Closed",
     "0": [
@@ -1389,7 +1391,7 @@ test "expr complex types to_json" {
     },
   )
   @json.inspect(
-    @syntax.Sequence(
+    @syntax.Expr::Sequence(
       exprs=@list.from_array([unit_expr]),
       last_expr=unit_expr,
       loc=dummy_loc,

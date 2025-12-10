@@ -426,6 +426,38 @@ pub impl ToJson for Case with to_json(self) {
 }
 
 ///|
+pub impl ToJson for LexCase with to_json(self) {
+  {
+    "type": "LexCase",
+    "pat": self.pat,
+    "pat_loc": self.pat_loc,
+    "body": self.body,
+  }
+}
+
+///|
+pub impl ToJson for LexTopPattern with to_json(self) {
+  match self {
+    Binder(binder) => { "type": "LexTopPattern::Binder", "0": binder }
+    Pattern(pat) => { "type": "LexTopPattern::Pattern", "0": pat }
+    Wildcard(loc~) => { "type": "LexTopPattern::Wildcard", "loc": loc }
+  }
+}
+
+///|
+pub impl ToJson for LexPattern with to_json(self) {
+  match self {
+    Regex(lit~, loc~) => { "type": "LexPattern::Regex", "lit": lit, "loc": loc }
+    RegexInterp(elems~, loc~) =>
+      { "type": "LexPattern::RegexInterp", "elems": elems, "loc": loc }
+    Alias(pat~, binder~, loc~) =>
+      { "type": "LexPattern::Alias", "pat": pat, "binder": binder, "loc": loc }
+    Sequence(pats~, loc~) =>
+      { "type": "LexPattern::Sequence", "pats": pats, "loc": loc }
+  }
+}
+
+///|
 pub impl ToJson for MultiArgCase with to_json(self) {
   let { patterns, guard_, body } = self
   {
@@ -939,6 +971,18 @@ pub impl ToJson for Expr with to_json(self) {
       }
     Is(expr~, pat~, loc~) =>
       { "type": "Expr::Is", "expr": expr, "pat": pat, "loc": loc }
+    IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~) =>
+      {
+        "type": "Expr::IsLexmatch",
+        "expr": expr,
+        "strategy": match strategy {
+          None => null
+          Some(label) => label
+        },
+        "pat": list_to_json(pat),
+        "pat_loc": pat_loc,
+        "loc": loc,
+      }
     Defer(expr~, body~, loc~) =>
       { "type": "Expr::Defer", "expr": expr, "body": body, "loc": loc }
     LetFn(name~, func~, body~, loc~) =>
@@ -1037,6 +1081,18 @@ pub impl ToJson for Expr with to_json(self) {
         "expr": expr,
         "cases": list_to_json(cases),
         "match_loc": match_loc,
+        "loc": loc,
+      }
+    LexMatch(strategy~, expr~, match_loc~, cases~, loc~) =>
+      {
+        "type": "Expr::Lexmatch",
+        "strategy": match strategy {
+          None => null
+          Some(label) => label
+        },
+        "expr": expr,
+        "match_loc": match_loc,
+        "cases": list_to_json(cases),
         "loc": loc,
       }
     LetMut(binder~, ty~, expr~, body~, loc~) =>
@@ -1153,6 +1209,15 @@ pub impl ToJson for Expr with to_json(self) {
         "asserts": list_to_json(asserts),
         "body": body,
       }
+  }
+}
+
+///|
+pub impl ToJson for UsingKind with to_json(self) {
+  match self {
+    Type => "type"
+    Value => "value"
+    Trait => "trait"
   }
 }
 
@@ -1308,6 +1373,16 @@ pub impl ToJson for Impl with to_json(self) {
         "self_ty": self_ty,
         "trait": trait_,
         "quantifiers": list_to_json(quantifiers),
+        "vis": vis,
+        "attrs": list_to_json(attrs),
+        "loc": loc,
+        "doc": doc,
+      }
+    TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~) =>
+      {
+        "type": "Impl::TopUsing",
+        "pkg": pkg,
+        "names": list_tuple_to_json(names),
         "vis": vis,
         "attrs": list_to_json(attrs),
         "loc": loc,
