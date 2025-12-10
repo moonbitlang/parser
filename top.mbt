@@ -87,6 +87,7 @@ fn attach_docstrings(
       TopBatchTraitAlias(..) as decl => decl.doc = doc
       TopView(..) as view => view.doc = doc
       TopImpl(..) as imp => imp.doc = doc
+      TopUsing(..) as using_stmt => using_stmt.doc = doc
     }
     skip_docstrings_before(toplevel.loc().end) |> ignore
   }

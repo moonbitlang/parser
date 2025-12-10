@@ -476,6 +476,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     If(cond=_, ifso=_, ifnot=_, loc~) => loc
     Guard(cond=_, otherwise=_, body=_, loc~) => loc
     Is(expr=_, pat=_, loc~) => loc
+    IsLexMatch(expr=_, strategy=_, pat=_, pat_loc=_, loc~) => loc
     Defer(loc~, ..) => loc
     LetFn(name=_, func=_, body=_, loc~) => loc
     LetRec(bindings=_, body=_, loc~) => loc
@@ -491,6 +492,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     As(expr=_, trait_=_, loc~) => loc
     Mutate(record=_, accessor=_, field=_, augmented_by=_, loc~) => loc
     Match(expr=_, cases=_, match_loc=_, loc~) => loc
+    LexMatch(strategy=_, expr=_, match_loc=_, cases=_, loc~) => loc
     LetMut(binder=_, ty=_, expr=_, body=_, loc~) => loc
     Pipe(lhs=_, rhs=_, loc~) => loc
     Assign(var_=_, expr=_, augmented_by=_, loc~) => loc
@@ -562,7 +564,8 @@ pub fn Impl::loc(self : Self) -> Location {
     | TopBatchTypeAlias(loc~, ..)
     | TopBatchTraitAlias(loc~, ..)
     | TopView(loc~, ..)
-    | TopImpl(loc~, ..) => loc
+    | TopImpl(loc~, ..)
+    | TopUsing(loc~, ..) => loc
   }
 }
 

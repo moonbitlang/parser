@@ -156,6 +156,35 @@ pub(open) trait MapVisitor {
   // Case
   visit_Case(Self, Case) -> Case = _
 
+  // LexCase
+  visit_LexCase(Self, LexCase) -> LexCase = _
+
+  // LexTopPattern
+  visit_LexTopPattern(Self, LexTopPattern) -> LexTopPattern = _
+  visit_LexTopPattern_Pattern(Self, LexPattern) -> LexTopPattern = _
+  visit_LexTopPattern_Binder(Self, Binder) -> LexTopPattern = _
+  visit_LexTopPattern_Wildcard(Self, loc~ : Location) -> LexTopPattern = _
+
+  // LexPattern
+  visit_LexPattern(Self, LexPattern) -> LexPattern = _
+  visit_LexPattern_Regex(Self, lit~ : String, loc~ : Location) -> LexPattern = _
+  visit_LexPattern_RegexInterp(
+    Self,
+    elems~ : @list.List[InterpElem],
+    loc~ : Location,
+  ) -> LexPattern = _
+  visit_LexPattern_Alias(
+    Self,
+    pat~ : LexPattern,
+    binder~ : Binder,
+    loc~ : Location,
+  ) -> LexPattern = _
+  visit_LexPattern_Sequence(
+    Self,
+    pats~ : @list.List[LexPattern],
+    loc~ : Location,
+  ) -> LexPattern = _
+
   // MultiArgCase
   visit_MultiArgCase(Self, MultiArgCase) -> MultiArgCase = _
 
@@ -334,6 +363,9 @@ pub(open) trait MapVisitor {
   // TraitDecl
   visit_TraitDecl(Self, TraitDecl) -> TraitDecl = _
 
+  // UsingKind
+  visit_UsingKind(Self, UsingKind) -> UsingKind = _
+
   // Impl
   visit_Impl(Self, Impl) -> Impl = _
   visit_Impl_TopExpr(
@@ -446,6 +478,15 @@ pub(open) trait MapVisitor {
     loc~ : Location,
     doc~ : DocString,
   ) -> Impl = _
+  visit_Impl_TopUsing(
+    Self,
+    pkg~ : Label,
+    names~ : @list.List[(AliasTarget, UsingKind)],
+    vis~ : Visibility,
+    attrs~ : @list.List[Attribute],
+    loc~ : Location,
+    doc~ : DocString,
+  ) -> Impl = _
 
   // Expr
   visit_Expr(Self, Expr) -> Expr = _
@@ -522,6 +563,14 @@ pub(open) trait MapVisitor {
     loc~ : Location,
   ) -> Expr = _
   visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : Location) -> Expr = _
+  visit_Expr_IsLexMatch(
+    Self,
+    expr~ : Expr,
+    strategy~ : Label?,
+    pat~ : @list.List[LexTopPattern],
+    pat_loc~ : Location,
+    loc~ : Location,
+  ) -> Expr = _
   visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : Location) -> Expr = _
   visit_Expr_LetFn(
     Self,
@@ -600,6 +649,14 @@ pub(open) trait MapVisitor {
     expr~ : Expr,
     cases~ : @list.List[Case],
     match_loc~ : Location,
+    loc~ : Location,
+  ) -> Expr = _
+  visit_Expr_LexMatch(
+    Self,
+    strategy~ : Label?,
+    expr~ : Expr,
+    match_loc~ : Location,
+    cases~ : @list.List[LexCase],
     loc~ : Location,
   ) -> Expr = _
   visit_Expr_LetMut(
@@ -932,6 +989,32 @@ impl MapVisitor with visit_Impl_TopImplRelation(
     loc~,
     doc~,
   )
+}
+
+///|
+impl MapVisitor with visit_Impl_TopUsing(
+  env,
+  pkg~,
+  names~,
+  vis~,
+  attrs~,
+  loc~,
+  doc~,
+) {
+  MapVisitorBase::visit_Impl_TopUsing(
+    env,
+    pkg~,
+    names~,
+    vis~,
+    attrs~,
+    loc~,
+    doc~,
+  )
+}
+
+///|
+impl MapVisitor with visit_UsingKind(env, using_kind) {
+  MapVisitorBase::visit_UsingKind(env, using_kind)
 }
 
 ///|
@@ -2046,6 +2129,94 @@ impl MapVisitor with visit_TraitDecl(env, trait_decl) {
 }
 
 ///|
+impl MapVisitor with visit_Expr_IsLexMatch(
+  env,
+  expr~ : Expr,
+  strategy~,
+  pat~,
+  pat_loc~,
+  loc~,
+) {
+  MapVisitorBase::visit_Expr_IsLexMatch(
+    env,
+    expr~,
+    strategy~,
+    pat~,
+    pat_loc~,
+    loc~,
+  )
+}
+
+///|
+impl MapVisitor with visit_Expr_LexMatch(
+  env,
+  strategy~,
+  expr~,
+  match_loc~,
+  cases~,
+  loc~,
+) {
+  MapVisitorBase::visit_Expr_LexMatch(
+    env,
+    strategy~,
+    expr~,
+    match_loc~,
+    cases~,
+    loc~,
+  )
+}
+
+///|
+impl MapVisitor with visit_LexCase(env, lex_case) {
+  MapVisitorBase::visit_LexCase(env, lex_case)
+}
+
+///|
+impl MapVisitor with visit_LexTopPattern(env, lex_top_pattern) {
+  MapVisitorBase::visit_LexTopPattern(env, lex_top_pattern)
+}
+
+///|
+impl MapVisitor with visit_LexTopPattern_Pattern(env, lex_pattern) {
+  MapVisitorBase::visit_LexTopPattern_Pattern(env, lex_pattern)
+}
+
+///|
+impl MapVisitor with visit_LexTopPattern_Binder(env, binder) {
+  MapVisitorBase::visit_LexTopPattern_Binder(env, binder)
+}
+
+///|
+impl MapVisitor with visit_LexTopPattern_Wildcard(env, loc~) {
+  MapVisitorBase::visit_LexTopPattern_Wildcard(env, loc~)
+}
+
+///|
+impl MapVisitor with visit_LexPattern(env, lex_pattern) {
+  MapVisitorBase::visit_LexPattern(env, lex_pattern)
+}
+
+///|
+impl MapVisitor with visit_LexPattern_Regex(env, lit~, loc~) {
+  MapVisitorBase::visit_LexPattern_Regex(env, lit~, loc~)
+}
+
+///|
+impl MapVisitor with visit_LexPattern_RegexInterp(env, elems~, loc~) {
+  MapVisitorBase::visit_LexPattern_RegexInterp(env, elems~, loc~)
+}
+
+///|
+impl MapVisitor with visit_LexPattern_Alias(env, pat~, binder~, loc~) {
+  MapVisitorBase::visit_LexPattern_Alias(env, pat~, binder~, loc~)
+}
+
+///|
+impl MapVisitor with visit_LexPattern_Sequence(env, pats~, loc~) {
+  MapVisitorBase::visit_LexPattern_Sequence(env, pats~, loc~)
+}
+
+///|
 pub(all) struct MapVisitorBase[T](T)
 
 ///|
@@ -2183,6 +2354,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         loc~,
         doc~,
       )
+    TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~) =>
+      env.0.visit_Impl_TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~)
   }
 }
 
@@ -3898,6 +4071,25 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopImp
 }
 
 ///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopUsing(
+  env,
+  pkg~,
+  names~,
+  vis~,
+  attrs~,
+  loc~,
+  doc~,
+) {
+  let pkg = env.0.visit_Label(pkg)
+  let names = names.map(name => (
+    env.0.visit_AliasTarget(name.0),
+    env.0.visit_UsingKind(name.1),
+  ))
+  let vis = env.0.visit_Visibility(vis)
+  TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~)
+}
+
+///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_Apply(
   env,
   func~,
@@ -4640,6 +4832,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
     Guard(cond~, otherwise~, body~, loc~) =>
       env.0.visit_Expr_Guard(cond~, otherwise~, body~, loc~)
     Is(expr~, pat~, loc~) => env.0.visit_Expr_Is(expr~, pat~, loc~)
+    IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~) =>
+      env.0.visit_Expr_IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~)
     Defer(expr~, body~, loc~) => env.0.visit_Expr_Defer(expr~, body~, loc~)
     LetFn(name~, func~, body~, loc~) =>
       env.0.visit_Expr_LetFn(name~, func~, body~, loc~)
@@ -4674,6 +4868,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
       env.0.visit_Expr_Mutate(record~, accessor~, field~, augmented_by~, loc~)
     Match(expr~, cases~, match_loc~, loc~) =>
       env.0.visit_Expr_Match(expr~, cases~, match_loc~, loc~)
+    LexMatch(strategy~, expr~, match_loc~, cases~, loc~) =>
+      env.0.visit_Expr_LexMatch(strategy~, expr~, match_loc~, cases~, loc~)
     LetMut(binder~, ty~, expr~, body~, loc~) =>
       env.0.visit_Expr_LetMut(binder~, ty~, expr~, body~, loc~)
     Pipe(lhs~, rhs~, loc~) => env.0.visit_Expr_Pipe(lhs~, rhs~, loc~)
@@ -4736,4 +4932,150 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
     StaticAssert(asserts~, body~) =>
       env.0.visit_Expr_StaticAssert(asserts~, body~)
   }
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_UsingKind(
+  env,
+  using_kind,
+) {
+  ignore(env)
+  return using_kind
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_IsLexMatch(
+  env,
+  expr~,
+  strategy~,
+  pat~,
+  pat_loc~,
+  loc~,
+) {
+  let strategy = strategy.map(strategy => env.0.visit_Label(strategy))
+  let pat = pat.map(pat => env.0.visit_LexTopPattern(pat))
+  let expr = env.0.visit_Expr(expr)
+  IsLexMatch(strategy~, expr~, pat~, pat_loc~, loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_LexMatch(
+  env,
+  strategy~,
+  expr~,
+  match_loc~,
+  cases~,
+  loc~,
+) {
+  let strategy = strategy.map(strategy => env.0.visit_Label(strategy))
+  let expr = env.0.visit_Expr(expr)
+  let cases = cases.map(case => env.0.visit_LexCase(case))
+  Expr::LexMatch(strategy~, expr~, match_loc~, cases~, loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LexCase(
+  env,
+  lex_case,
+) {
+  let pat = lex_case.pat.map(pat => env.0.visit_LexTopPattern(pat))
+  let body = env.0.visit_Expr(lex_case.body)
+  let pat_loc = lex_case.pat_loc
+  { pat, body, pat_loc }
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LexTopPattern(
+  env,
+  lex_top_pattern,
+) {
+  match lex_top_pattern {
+    Pattern(lex_pattern) => env.0.visit_LexTopPattern_Pattern(lex_pattern)
+    Binder(binder) => env.0.visit_LexTopPattern_Binder(binder)
+    Wildcard(loc~) => env.0.visit_LexTopPattern_Wildcard(loc~)
+  }
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LexTopPattern_Pattern(
+  env,
+  lex_pattern,
+) {
+  let lex_pattern = env.0.visit_LexPattern(lex_pattern)
+  LexTopPattern::Pattern(lex_pattern)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LexTopPattern_Binder(
+  env,
+  binder,
+) {
+  let binder = env.0.visit_Binder(binder)
+  LexTopPattern::Binder(binder)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LexTopPattern_Wildcard(
+  env,
+  loc~,
+) {
+  ignore(env)
+  LexTopPattern::Wildcard(loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LexPattern(
+  env,
+  lex_pattern,
+) {
+  match lex_pattern {
+    Alias(pat~, binder~, loc~) =>
+      env.0.visit_LexPattern_Alias(pat~, binder~, loc~)
+    RegexInterp(elems~, loc~) =>
+      env.0.visit_LexPattern_RegexInterp(elems~, loc~)
+    Regex(lit~, loc~) => env.0.visit_LexPattern_Regex(lit~, loc~)
+    Sequence(pats~, loc~) => env.0.visit_LexPattern_Sequence(pats~, loc~)
+  }
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LexPattern_Regex(
+  env,
+  lit~,
+  loc~,
+) {
+  ignore(env)
+  LexPattern::Regex(lit~, loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LexPattern_RegexInterp(
+  env,
+  elems~,
+  loc~,
+) {
+  let elems = elems.map(elem => env.0.visit_InterpElem(elem))
+  LexPattern::RegexInterp(elems~, loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LexPattern_Alias(
+  env,
+  pat~,
+  binder~,
+  loc~,
+) {
+  let pat = env.0.visit_LexPattern(pat)
+  let binder = env.0.visit_Binder(binder)
+  LexPattern::Alias(pat~, binder~, loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LexPattern_Sequence(
+  env,
+  pats~,
+  loc~,
+) {
+  let pats = pats.map(pat => env.0.visit_LexPattern(pat))
+  LexPattern::Sequence(pats~, loc~)
 }

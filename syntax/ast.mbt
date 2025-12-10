@@ -362,6 +362,28 @@ pub(all) enum MultilineStringElem {
 }
 
 ///|
+pub(all) enum LexPattern {
+  Regex(lit~ : String, loc~ : Location)
+  RegexInterp(elems~ : @list.List[InterpElem], loc~ : Location)
+  Alias(pat~ : LexPattern, binder~ : Binder, loc~ : Location)
+  Sequence(pats~ : @list.List[LexPattern], loc~ : Location)
+}
+
+///|
+pub(all) enum LexTopPattern {
+  Pattern(LexPattern)
+  Binder(Binder)
+  Wildcard(loc~ : Location)
+}
+
+///|
+pub(all) struct LexCase {
+  pat : @list.List[LexTopPattern]
+  pat_loc : Location
+  body : Expr
+}
+
+///|
 pub(all) enum Expr {
   /// f(args)
   Apply(
@@ -428,6 +450,14 @@ pub(all) enum Expr {
   Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : Location)
   /// `expr is pattern`
   Is(expr~ : Expr, pat~ : Pattern, loc~ : Location)
+  /// `expr lexmatch? pattern with strategy`
+  IsLexMatch(
+    expr~ : Expr,
+    strategy~ : Label?,
+    pat~ : @list.List[LexTopPattern],
+    pat_loc~ : Location,
+    loc~ : Location
+  )
   /// `defer e1; e2`
   Defer(expr~ : Expr, body~ : Expr, loc~ : Location)
   /// `fn local(args){ e1 }; e2`
@@ -490,6 +520,14 @@ pub(all) enum Expr {
     expr~ : Expr,
     cases~ : @list.List[Case],
     match_loc~ : Location,
+    loc~ : Location
+  )
+  /// `lexmatch using strategy { c1 => e1; c2 => e2 }`
+  LexMatch(
+    strategy~ : Label?,
+    expr~ : Expr,
+    match_loc~ : Location,
+    cases~ : @list.List[LexCase],
     loc~ : Location
   )
   /// `let mut binder : Type = expr`
@@ -753,6 +791,13 @@ pub(all) struct TraitDecl {
 }
 
 ///|
+pub(all) enum UsingKind {
+  Value
+  Type
+  Trait
+}
+
+///|
 pub(all) enum Impl {
   TopExpr(
     expr~ : Expr,
@@ -845,6 +890,14 @@ pub(all) enum Impl {
     self_ty~ : Type,
     trait_~ : TypeName,
     quantifiers~ : @list.List[TypeVarBinder],
+    vis~ : Visibility,
+    attrs~ : @list.List[Attribute],
+    loc~ : Location,
+    mut doc~ : DocString
+  )
+  TopUsing(
+    pkg~ : Label,
+    names~ : @list.List[(AliasTarget, UsingKind)],
     vis~ : Visibility,
     attrs~ : @list.List[Attribute],
     loc~ : Location,
