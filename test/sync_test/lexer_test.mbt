@@ -215,10 +215,10 @@ test "lexing pipeline_test_functional_loop3" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related testcase
-// test "lexing pipeline_test_tokenize_suffix" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing pipeline_test_tokenize_suffix" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing pipeline_test_constant_folding" (t : @test.Test) {
@@ -830,10 +830,10 @@ test "lexing pipeline_test_reorder" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related test
-// test "lexing pipeline_test_match_using_regex_wordcount" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing pipeline_test_match_using_regex_wordcount" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing pipeline_test_deep_object" (t : @test.Test) {
@@ -1230,10 +1230,10 @@ test "lexing pipeline_test_tuple_struct_interface" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related testcase
-// test "lexing pipeline_test_lexmatch_rest_bug" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing pipeline_test_lexmatch_rest_bug" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing pipeline_test_let_unit" (t : @test.Test) {
@@ -1320,10 +1320,10 @@ test "lexing pipeline_test_error_handle2" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related test
-// test "lexing pipeline_test_match_using_regex" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing pipeline_test_match_using_regex" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing pipeline_test_as_view_wrap_ok" (t : @test.Test) {
@@ -1685,10 +1685,10 @@ test "lexing pipeline_test_block_type" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: using related test
-// test "lexing parse_test_using" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing parse_test_using" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing pipeline_test_specialize_local_fn" (t : @test.Test) {
@@ -2090,10 +2090,10 @@ test "lexing pipeline_test_unsigned_conversion" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related test
-// test "lexing pipeline_test_lisp_tokenizer" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing pipeline_test_lisp_tokenizer" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing parse_test_constrained_type_param" (t : @test.Test) {
@@ -3190,10 +3190,10 @@ test "lexing pipeline_test_match_string" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related test
-// test "lexing pipeline_test_match_using_regex_calc" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing pipeline_test_match_using_regex_calc" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing parse_test_uint_literal" (t : @test.Test) {
@@ -3650,10 +3650,10 @@ test "lexing pipeline_test_int_primitive" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related test
-// test "lexing parse_test_lexmatch" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing parse_test_lexmatch" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing pipeline_test_match_newtype" (t : @test.Test) {
@@ -3695,10 +3695,10 @@ test "lexing pipeline_test_int64_array" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related test
-// test "lexing pipeline_test_is_lexmatch" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing pipeline_test_is_lexmatch" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing pipeline_test_err_string" (t : @test.Test) {
@@ -3815,10 +3815,10 @@ test "lexing pipeline_test_make_string" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related test
-// test "lexing pipeline_test_lexmatch_first" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing pipeline_test_lexmatch_first" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing pipeline_test_predef_method" (t : @test.Test) {
@@ -4095,10 +4095,10 @@ test "lexing pipeline_test_static_toplevel_let" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related test
-// test "lexing pipeline_test_dfa_state_test" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing pipeline_test_dfa_state_test" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing parse_test_noraise_asi" (t : @test.Test) {
@@ -4480,10 +4480,10 @@ test "lexing pipeline_test_multiple_branch" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related test
-// test "lexing pipeline_test_match_stringview_using_regex" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing pipeline_test_match_stringview_using_regex" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing parse_test_map_literal_with_bytes" (t : @test.Test) {
@@ -4650,10 +4650,10 @@ test "lexing pipeline_test_is_expr" (t : @test.Test) {
   lexer_test(t)
 }
 
-// TODO: lexmatch related test
-// test "lexing pipeline_test_match_regex_utf8_bug" (t : @test.Test) {
-//   lexer_test(t)
-// }
+///|
+test "lexing pipeline_test_match_regex_utf8_bug" (t : @test.Test) {
+  lexer_test(t)
+}
 
 ///|
 test "lexing pipeline_test_lambad_annot" (t : @test.Test) {
