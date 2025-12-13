@@ -31,6 +31,7 @@ let first_impl_ : Array[TokenKind] = [
   TK_TRAITALIAS,
   TK_ENUMVIEW,
   TK_ATTRIBUTE,
+  TK_USING,
 ]
 
 ///|
