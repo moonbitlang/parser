@@ -1627,6 +1627,93 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         doc=DocString::empty(),
       )
     }
+    USING => {
+      self.skip()
+      let pkg = self.parse_label(context="package name")
+      fn parse_alias_target(
+        state : State,
+        lower : Bool,
+        context : String,
+      ) -> @syntax.AliasTarget {
+        let target_loc = state.peek_location()
+        let target = if lower {
+          state.expect_lident(context~)
+        } else {
+          state.expect_uident(context~)
+        }
+        match self.peek_token() {
+          AS => {
+            state.skip()
+            let binder_loc = state.peek_location()
+            let binder_name = if lower {
+              state.expect_lident(context~)
+            } else {
+              state.expect_uident(context~)
+            }
+            @syntax.AliasTarget::{
+              binder: { name: binder_name, loc: binder_loc },
+              target: Some({ name: target, loc: target_loc }),
+            }
+          }
+          _ =>
+            @syntax.AliasTarget::{
+              binder: { name: target, loc: target_loc },
+              target: None,
+            }
+        }
+      }
+
+      let names = self.surround_series(
+          left=TK_LBRACE,
+          right=TK_RBRACE,
+          delim=TK_COMMA,
+          fn(state) {
+            match state.peek_token() {
+              LIDENT(_) => {
+                let target = parse_alias_target(state, true, "value name")
+                (target, @syntax.UsingKind::Value)
+              }
+              UIDENT(_) => {
+                let target = parse_alias_target(state, false, "constant name")
+                (target, @syntax.UsingKind::Value)
+              }
+              TYPE => {
+                state.skip()
+                let target = parse_alias_target(state, false, "type name")
+                (target, @syntax.UsingKind::Type)
+              }
+              TRAIT => {
+                state.skip()
+                let target = parse_alias_target(state, false, "trait name")
+                (target, @syntax.UsingKind::Trait)
+              }
+              other => {
+                let other_loc = state.peek_location()
+                state.report_unexpected(
+                  other,
+                  [TK_LIDENT, TK_UIDENT, TK_TYPE, TK_TRAIT],
+                  other_loc,
+                )
+                let loc = state.panic()
+                (
+                  { binder: { name: "", loc }, target: None },
+                  @syntax.UsingKind::Value,
+                )
+              }
+            }
+          },
+        )
+        |> @list.from_array()
+      let loc = self.loc_start_with(spos)
+      @syntax.Impl::TopUsing(
+        pkg~,
+        names~,
+        vis~,
+        attrs~,
+        loc~,
+        doc=DocString::empty(),
+      )
+    }
     other => {
       let other_loc = self.peek_location()
       self.report_unexpected(other, first_impl_, other_loc)
@@ -2938,16 +3025,254 @@ fn State::parse_case(self : Self) -> @syntax.Case {
     } else {
       None
     }
-    self.expect_token(TK_FAT_ARROW)
-    let body = match self.peek_token() {
-      // an error production to handle `pattern => invalid-expr-statement`
-      LET | LETREC | GUARD | DEFER =>
-        self.handle_unexpected_expr_or_statement(
-          context="the action part of a matching case",
-        )
-      _ => self.parse_expr_stmt()
-    }
+    let body = self.parse_fat_arrow_action()
     { pattern: pat, guard_, body }
+  }
+}
+
+///|
+fn State::parse_fat_arrow_action(self : State) -> @syntax.Expr {
+  self.expect_token(TK_FAT_ARROW)
+  match self.peek_token() {
+    // an error production to handle `pattern => invalid-expr-statement`
+    LET | LETREC | GUARD | DEFER =>
+      self.handle_unexpected_expr_or_statement(
+        context="the action part of a matching case",
+      )
+    _ => self.parse_expr_stmt()
+  }
+}
+
+///|
+fn State::parse_opt_with_strategy(self : State) -> @syntax.Label? {
+  match self.peek_token() {
+    WITH => {
+      self.skip()
+      let label = self.parse_label(context="strategy of `lexmatch`")
+      Some(label)
+    }
+    _ => None
+  }
+}
+
+///|
+fn State::parse_lexmatch_expr(self : State) -> @syntax.Expr {
+  let spos = self.peek_spos()
+  self.expect_token(TK_LEXMATCH)
+  let (expr, strategy) = self.with_follow(follow_set=[TK_LBRACE], fn(state) {
+    let expr = state.try_parse_condition_expr()
+    let strategy = state.parse_opt_with_strategy()
+    (expr, strategy)
+  })
+  let match_loc = @basic.Location::{ start: spos, end: self.peek_epos() }
+  fn parse_body(state : State) -> @list.List[@syntax.LexCase] {
+    let (cases, _) = state.series_with_follow(
+      invalid_delims=[TK_COMMA],
+      delim=TK_SEMI,
+      follow_set=[TK_RBRACE],
+      State::parse_lexmatch_case,
+    )
+    @list.from_array(cases)
+  }
+
+  let cases = self.surround(left=TK_LBRACE, right=TK_RBRACE, parse_body)
+  let loc = self.loc_start_with(spos)
+  @syntax.Expr::LexMatch(strategy~, expr~, cases~, match_loc~, loc~)
+}
+
+///|
+fn State::parse_lexmatch_case(self : State) -> @syntax.LexCase {
+  match self.peek_token() {
+    ELLIPSIS => {
+      let loc = self.peek_location()
+      self.skip()
+      @syntax.LexCase::{
+        pat: @list.singleton(Wildcard(loc~)),
+        pat_loc: loc,
+        body: Hole(loc~, kind=Todo),
+      }
+    }
+    _ => {
+      let (pat, pat_loc) = self.with_syncs(
+        [TK_FAT_ARROW, TK_COMMA],
+        State::parse_lex_pattern,
+      )
+      let act = self.parse_fat_arrow_action()
+      { pat, pat_loc, body: act }
+    }
+  }
+}
+
+///|
+fn State::parse_lex_pattern(
+  self : State,
+) -> (@list.List[@syntax.LexTopPattern], @basic.Location) {
+  match self.peek_token() {
+    LPAREN => {
+      let spos = self.peek_spos()
+      self.skip()
+      let pats = self.with_follow(follow_set=[TK_RPAREN], state => state.sepby1(
+          delim=TK_COMMA,
+          State::parse_lex_top_pattern,
+        ))
+        |> @list.from_array
+      self.expect_token(TK_RPAREN)
+      let loc = self.loc_start_with(spos)
+      (pats, loc)
+    }
+    LIDENT(_) => {
+      let loc = self.peek_location()
+      let name = self.expect_lident(context="lex rest binder")
+      (@list.singleton(Binder({ name, loc })), loc)
+    }
+    UNDERSCORE => {
+      let loc = self.peek_location()
+      self.skip()
+      (@list.singleton(Wildcard(loc~)), loc)
+    }
+    REGEX_LITERAL(_) | REGEX_INTERP(_) | STRING(_) | INTERP(_) => {
+      let spos = self.peek_spos()
+      let pat = self.parse_lex_simple_atom_pattern()
+      (@list.singleton(Pattern(pat)), self.loc_start_with(spos))
+    }
+    other => {
+      let other_loc = self.peek_location()
+      self.report_failed_to_parse(other, "lex pattern", other_loc)
+      let loc = self.panic()
+      (@list.singleton(Wildcard(loc~)), loc)
+    }
+  }
+}
+
+///|
+fn State::parse_lex_top_pattern(self : State) -> @syntax.LexTopPattern {
+  match self.peek_token() {
+    LIDENT(_) => {
+      let loc = self.peek_location()
+      let name = self.expect_lident(context="lex rest binder")
+      Binder({ name, loc })
+    }
+    UNDERSCORE(_) => {
+      let loc = self.peek_location()
+      self.skip()
+      Wildcard(loc~)
+    }
+    _ => {
+      let pat = self.parse_lex_as_pattern()
+      Pattern(pat)
+    }
+  }
+}
+
+///|
+fn State::parse_lex_as_pattern(self : State) -> @syntax.LexPattern {
+  let spos = self.peek_spos()
+  let pats = self.parse_lex_pattern_sequence()
+  match pats {
+    More(pat, tail=Empty) if self.peek_token() is AS => {
+      self.skip()
+      let binder = self.parse_binder(context="binder in `as` pattern")
+      let loc = self.loc_start_with(spos)
+      Alias(pat~, binder~, loc~)
+    }
+    More(pat, tail=Empty) => return pat
+    _ => {
+      let loc = self.loc_start_with(spos)
+      Sequence(pats~, loc~)
+    }
+  }
+}
+
+///|
+fn State::parse_lex_pattern_sequence(
+  self : State,
+) -> @list.List[@syntax.LexPattern] {
+  let first = self.parse_lex_atom_pattern()
+  let pats = [first]
+  loop self.peek_token() {
+    SEMI(_)
+    | REGEX_LITERAL(_)
+    | REGEX_INTERP(_)
+    | STRING(_)
+    | INTERP(_)
+    | LPAREN as tok => {
+      if tok is SEMI(_) {
+        self.skip()
+      }
+      let pat = self.parse_lex_atom_pattern()
+      pats.push(pat)
+      continue self.peek_token()
+    }
+    _ => ()
+  }
+  @list.from_array(pats)
+}
+
+///|
+fn State::parse_lex_atom_pattern(self : State) -> @syntax.LexPattern {
+  match self.peek_token() {
+    REGEX_LITERAL(_) | REGEX_INTERP(_) | STRING(_) | INTERP(_) =>
+      self.parse_lex_simple_atom_pattern()
+    LPAREN => {
+      self.skip()
+      let alias_spos = self.peek_spos()
+      let pats = self.with_syncs([TK_RPAREN], State::parse_lex_pattern_sequence)
+      match pats {
+        More(pat, tail=Empty) =>
+          match self.peek_token() {
+            AS => {
+              self.skip()
+              let binder = self.parse_binder(context="binder in `as` pattern")
+              let loc = self.loc_start_with(alias_spos)
+              self.expect_token(TK_RPAREN)
+              Alias(pat~, binder~, loc~)
+            }
+            _ => {
+              self.expect_token(TK_RPAREN)
+              pat
+            }
+          }
+        _ => {
+          self.expect_token(TK_RPAREN)
+          Sequence(pats~, loc=self.peek_location())
+        }
+      }
+    }
+    other => {
+      let other_loc = self.peek_location()
+      self.report_failed_to_parse(other, "lex atom pattern", other_loc)
+      let loc = self.panic()
+      Sequence(pats=@list.empty(), loc~)
+    }
+  }
+}
+
+///|
+fn State::parse_lex_simple_atom_pattern(self : State) -> @syntax.LexPattern {
+  match self.peek_token() {
+    REGEX_LITERAL(lit) => {
+      let loc = self.peek_location()
+      self.skip()
+      Regex(lit~, loc~)
+    }
+    REGEX_INTERP(elems) => {
+      let loc = self.peek_location()
+      self.skip()
+      let elems = @syntax.make_interps(elems)
+      RegexInterp(elems~, loc~)
+    }
+    STRING(lit) => {
+      let loc = self.peek_location()
+      self.skip()
+      Regex(lit~, loc~)
+    }
+    INTERP(elems) => {
+      let loc = self.peek_location()
+      self.skip()
+      let elems = @syntax.make_interps(elems)
+      RegexInterp(elems~, loc~)
+    }
+    _ => panic()
   }
 }
 
@@ -3159,6 +3484,7 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
         }
       }
     }
+    LEXMATCH => self.parse_lexmatch_expr()
     LOOP => self.parse_loop_expr(label=None)
     FOR => self.parse_for_expr(label=None)
     WHILE => self.parse_while_loop(label=None)
@@ -3353,6 +3679,18 @@ fn State::parse_postfix_expr(
       let pat = self.parse_range_pattern()
       let loc = self.loc_start_with(spos)
       Is(expr~, pat~, loc~)
+    }
+    LEXMATCH_QUESTION => {
+      self.skip()
+      let (pat, pat_loc) = self.parse_lex_pattern()
+      let strategy = self.parse_opt_with_strategy()
+      IsLexMatch(
+        expr~,
+        pat~,
+        pat_loc~,
+        strategy~,
+        loc=self.loc_start_with(spos),
+      )
     }
     _ => expr
   }
