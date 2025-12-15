@@ -53,6 +53,8 @@ pub(all) enum Token {
   MULTILINE_STRING(String)
   MULTILINE_INTERP(Array[InterpElem])
   INTERP(Array[InterpElem])
+  REGEX_LITERAL(String)
+  REGEX_INTERP(Array[InterpElem])
   ATTRIBUTE((String, String?, String))
   LIDENT(String)
   UIDENT(String)
@@ -147,6 +149,8 @@ pub(all) enum Token {
   NORAISE
   TRY_QUESTION
   TRY_EXCLAMATION
+  LEXMATCH
+  LEXMATCH_QUESTION
 }
 pub fn Token::kind(Self) -> TokenKind
 pub fn Token::to_expect_string(Self) -> String
@@ -164,6 +168,8 @@ pub(all) enum TokenKind {
   TK_MULTILINE_STRING
   TK_MULTILINE_INTERP
   TK_INTERP
+  TK_REGEX_LITERAL
+  TK_REGEX_INTERP
   TK_ATTRIBUTE
   TK_LIDENT
   TK_UIDENT
@@ -258,6 +264,8 @@ pub(all) enum TokenKind {
   TK_NORAISE
   TK_TRY_QUESTION
   TK_TRY_EXCLAMATION
+  TK_LEXMATCH
+  TK_LEXMATCH_QUESTION
 }
 pub fn TokenKind::to_expect_string(Self) -> String
 pub impl Compare for TokenKind
