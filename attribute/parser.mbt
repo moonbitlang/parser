@@ -70,6 +70,8 @@ priv enum YYSymbol {
   T_MULTILINE_STRING
   T_MULTILINE_INTERP
   T_INTERP
+  T_REGEX_LITERAL
+  T_REGEX_INTERP
   T_ATTRIBUTE
   T_LIDENT
   T_UIDENT
@@ -164,6 +166,8 @@ priv enum YYSymbol {
   T_NORAISE
   T_TRY_QUESTION
   T_TRY_EXCLAMATION
+  T_LEXMATCH
+  T_LEXMATCH_QUESTION
   NT_payloads
   NT_property
   NT_expr
@@ -183,7 +187,7 @@ fn init {
 }
 
 // file:///./parser.mbty
-// 140|    EOF { @list.empty() }
+// 145|    EOF { @list.empty() }
 
 ///|
 fn yy_action_0(
@@ -199,7 +203,7 @@ fn yy_action_0(
 }
 
 // file:///./parser.mbty
-// 141|    properties { $1 }
+// 146|    properties { $1 }
 
 ///|
 fn yy_action_1(
@@ -216,7 +220,7 @@ fn yy_action_1(
 }
 
 // file:///./parser.mbty
-// 157|    "(" ")"                      { @list.empty() }
+// 162|    "(" ")"                      { @list.empty() }
 
 ///|
 fn yy_action_2(
@@ -232,7 +236,7 @@ fn yy_action_2(
 }
 
 // file:///./parser.mbty
-// 158|    "(" non_empty_properties ")" { $2 }
+// 163|    "(" non_empty_properties ")" { $2 }
 
 ///|
 fn yy_action_3(
@@ -249,7 +253,7 @@ fn yy_action_3(
 }
 
 // file:///./parser.mbty
-// 144|    name=LIDENT "=" expr   { Labeled(name, $3) }
+// 149|    name=LIDENT "=" expr   { Labeled(name, $3) }
 
 ///|
 fn yy_action_4(
@@ -267,7 +271,7 @@ fn yy_action_4(
 }
 
 // file:///./parser.mbty
-// 151|    qual=LIDENT name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
+// 156|    qual=LIDENT name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
 
 ///|
 fn yy_action_5(
@@ -286,7 +290,7 @@ fn yy_action_5(
 }
 
 // file:///./parser.mbty
-// 149|    qual=LIDENT name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
+// 154|    qual=LIDENT name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
 
 ///|
 fn yy_action_6(
@@ -304,7 +308,7 @@ fn yy_action_6(
 }
 
 // file:///./parser.mbty
-// 150|    name=LIDENT props=properties                 { Apply({qual: None, name}, props) }
+// 155|    name=LIDENT props=properties                 { Apply({qual: None, name}, props) }
 
 ///|
 fn yy_action_7(
@@ -322,7 +326,7 @@ fn yy_action_7(
 }
 
 // file:///./parser.mbty
-// 148|    name=LIDENT                                  { Ident({qual: None, name}) }
+// 153|    name=LIDENT                                  { Ident({qual: None, name}) }
 
 ///|
 fn yy_action_8(
@@ -339,7 +343,7 @@ fn yy_action_8(
 }
 
 // file:///./parser.mbty
-// 145|    expr                   { Expr($1) }
+// 150|    expr                   { Expr($1) }
 
 ///|
 fn yy_action_9(
@@ -356,7 +360,7 @@ fn yy_action_9(
 }
 
 // file:///./parser.mbty
-// 152|    STRING                                       { String($1) }
+// 157|    STRING                                       { String($1) }
 
 ///|
 fn yy_action_10(
@@ -373,7 +377,7 @@ fn yy_action_10(
 }
 
 // file:///./parser.mbty
-// 153|    TRUE                                         { Bool(true) }
+// 158|    TRUE                                         { Bool(true) }
 
 ///|
 fn yy_action_11(
@@ -389,7 +393,7 @@ fn yy_action_11(
 }
 
 // file:///./parser.mbty
-// 154|    FALSE                                        { Bool(false) }
+// 159|    FALSE                                        { Bool(false) }
 
 ///|
 fn yy_action_12(
@@ -405,7 +409,7 @@ fn yy_action_12(
 }
 
 // file:///./parser.mbty
-// 162|    x=property "," xs=non_empty_properties{ xs.add(x) }
+// 167|    x=property "," xs=non_empty_properties{ xs.add(x) }
 
 ///|
 fn yy_action_13(
@@ -423,7 +427,7 @@ fn yy_action_13(
 }
 
 // file:///./parser.mbty
-// 161|    property { @list.from_array([$1]) }
+// 166|    property { @list.from_array([$1]) }
 
 ///|
 fn yy_action_14(
@@ -456,6 +460,8 @@ fn yy_input(
     MULTILINE_STRING(data) => (T_MULTILINE_STRING, YYObj_String(data))
     MULTILINE_INTERP(data) => (T_MULTILINE_INTERP, YYObj_InterpLiteral(data))
     INTERP(data) => (T_INTERP, YYObj_InterpLiteral(data))
+    REGEX_LITERAL(data) => (T_REGEX_LITERAL, YYObj_String(data))
+    REGEX_INTERP(data) => (T_REGEX_INTERP, YYObj_InterpLiteral(data))
     ATTRIBUTE(data) => (T_ATTRIBUTE, YYObj__String__String___String_(data))
     LIDENT(data) => (T_LIDENT, YYObj_String(data))
     UIDENT(data) => (T_UIDENT, YYObj_String(data))
@@ -550,6 +556,8 @@ fn yy_input(
     NORAISE => (T_NORAISE, YYObj_Void)
     TRY_QUESTION => (T_TRY_QUESTION, YYObj_Void)
     TRY_EXCLAMATION => (T_TRY_EXCLAMATION, YYObj_Void)
+    LEXMATCH => (T_LEXMATCH, YYObj_Void)
+    LEXMATCH_QUESTION => (T_LEXMATCH_QUESTION, YYObj_Void)
   }
 }
 
@@ -948,6 +956,8 @@ fn error(
         (T_MULTILINE_STRING, TK_MULTILINE_STRING),
         (T_MULTILINE_INTERP, TK_MULTILINE_INTERP),
         (T_INTERP, TK_INTERP),
+        (T_REGEX_LITERAL, TK_REGEX_LITERAL),
+        (T_REGEX_INTERP, TK_REGEX_INTERP),
         (T_ATTRIBUTE, TK_ATTRIBUTE),
         (T_LIDENT, TK_LIDENT),
         (T_UIDENT, TK_UIDENT),
@@ -1042,6 +1052,8 @@ fn error(
         (T_NORAISE, TK_NORAISE),
         (T_TRY_QUESTION, TK_TRY_QUESTION),
         (T_TRY_EXCLAMATION, TK_TRY_EXCLAMATION),
+        (T_LEXMATCH, TK_LEXMATCH),
+        (T_LEXMATCH_QUESTION, TK_LEXMATCH_QUESTION),
       ] : Array[(YYSymbol, TokenKind)]) {
     try_add(term.0, term.1)
   }
