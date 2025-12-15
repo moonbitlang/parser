@@ -1,5 +1,3 @@
-//!build: -w -27
-
 fn[T : Hash] stable_hash(value : T) -> Int {
   let hasher = Hasher::new(seed = 42)
   hasher.combine(value)
@@ -42,7 +40,7 @@ fn init {
   show_hash(R2::{ x: 2, y: 1 })
 }
 
-type NT R2[E, E] derive(Show, Hash)
+struct NT(R2[E, E]) derive(Show, Hash)
 
 fn init {
   show_hash(R2::{ x: A, y: D(B(42)) })

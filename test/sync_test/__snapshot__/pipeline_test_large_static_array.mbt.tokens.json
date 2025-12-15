@@ -15,16 +15,42 @@
     "loc": "1:9-1:19"
   },
   {
-    "token": "EQUAL",
+    "token": "COLON",
     "loc": "1:20-1:21"
   },
   {
+    "token": [
+      "UIDENT",
+      "ReadOnlyArray"
+    ],
+    "loc": "1:22-1:35"
+  },
+  {
     "token": "LBRACKET",
-    "loc": "1:22-1:23"
+    "loc": "1:35-1:36"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "String"
+    ],
+    "loc": "1:36-1:42"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "1:42-1:43"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "1:44-1:45"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "1:46-1:47"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:23-1:24"
+    "loc": "1:47-1:48"
   },
   {
     "token": [

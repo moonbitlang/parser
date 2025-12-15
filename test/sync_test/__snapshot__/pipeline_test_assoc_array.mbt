@@ -1,10 +1,9 @@
-//!build: -w -27
-type Map[K, V] FixedArray[(K, V)]
+struct Map[K, V](FixedArray[(K, V)])
 
 pub fn[K : Eq, V] find(self: Map[K, V], key: K) -> V? {
   let mut i = 0
-  while i < self.inner().length() {
-    let (k, v) = self.inner()[i]
+  while i < self.0.length() {
+    let (k, v) = self.0[i]
     if (key == k) {
         return Some(v)
     } else {
@@ -20,7 +19,7 @@ pub(all) enum T {
   C
 } derive (Eq)
 
-type ST T derive (Eq)
+struct ST(T) derive (Eq)
 
 fn init {
     let map1: Map[T, _] = Map([(A, "ok\n"), (B, "not ok\n"), (C, "not ok\n")])

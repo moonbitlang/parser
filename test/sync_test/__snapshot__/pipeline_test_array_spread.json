@@ -8,7 +8,33 @@
         "name": "u1",
         "loc": null
       },
-      "ty": null,
+      "ty": {
+        "type": "Type::Name",
+        "constr_id": {
+          "type": "ConstrId",
+          "id": {
+            "type": "LongIdent::Ident",
+            "0": "ReadOnlyArray"
+          },
+          "loc": null
+        },
+        "tys": [
+          {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Int"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          }
+        ],
+        "loc": null
+      },
       "expr": {
         "type": "Expr::Array",
         "exprs": [
@@ -54,7 +80,33 @@
         "name": "u2",
         "loc": null
       },
-      "ty": null,
+      "ty": {
+        "type": "Type::Name",
+        "constr_id": {
+          "type": "ConstrId",
+          "id": {
+            "type": "LongIdent::Ident",
+            "0": "ReadOnlyArray"
+          },
+          "loc": null
+        },
+        "tys": [
+          {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Int"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          }
+        ],
+        "loc": null
+      },
       "expr": {
         "type": "Expr::Array",
         "exprs": [

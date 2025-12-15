@@ -1,0 +1,356 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Foo",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Record",
+          "0": [
+            {
+              "type": "FieldDecl",
+              "name": {
+                "type": "FieldName",
+                "label": "x",
+                "loc": null
+              },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "mut": false,
+              "vis": {
+                "type": "Visibility::Default"
+              },
+              "loc": null,
+              "attrs": [],
+              "doc": ""
+            }
+          ]
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "x",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Constant",
+        "c": {
+          "type": "Constant::Int",
+          "0": "2"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "x2",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Record",
+        "type_name": null,
+        "fields": [
+          {
+            "type": "FieldDef",
+            "label": {
+              "type": "Label",
+              "name": "x",
+              "loc": null
+            },
+            "expr": {
+              "type": "Expr::Constant",
+              "c": {
+                "type": "Constant::Int",
+                "0": "1"
+              },
+              "loc": null
+            },
+            "is_pun": false,
+            "loc": null
+          }
+        ],
+        "trailing": {
+          "type": "Trailing::None"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": " record"
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "x3",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Record",
+        "type_name": null,
+        "fields": [
+          {
+            "type": "FieldDef",
+            "label": {
+              "type": "Label",
+              "name": "x",
+              "loc": null
+            },
+            "expr": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "x"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "is_pun": true,
+            "loc": null
+          }
+        ],
+        "trailing": {
+          "type": "Trailing::Semi"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": " warning, should be record "
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "x4",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Record",
+        "type_name": null,
+        "fields": [
+          {
+            "type": "FieldDef",
+            "label": {
+              "type": "Label",
+              "name": "x",
+              "loc": null
+            },
+            "expr": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "x"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "is_pun": true,
+            "loc": null
+          }
+        ],
+        "trailing": {
+          "type": "Trailing::None"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": " warning, should be record"
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "x5",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Record",
+        "type_name": null,
+        "fields": [
+          {
+            "type": "FieldDef",
+            "label": {
+              "type": "Label",
+              "name": "x",
+              "loc": null
+            },
+            "expr": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "x"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "is_pun": true,
+            "loc": null
+          }
+        ],
+        "trailing": {
+          "type": "Trailing::None"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": " warning, should be record"
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "x6",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Record",
+        "type_name": null,
+        "fields": [
+          {
+            "type": "FieldDef",
+            "label": {
+              "type": "Label",
+              "name": "x",
+              "loc": null
+            },
+            "expr": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "x"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "is_pun": true,
+            "loc": null
+          }
+        ],
+        "trailing": {
+          "type": "Trailing::Comma"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": " record"
+    },
+    {
+      "type": "Impl::TopLetDef",
+      "binder": {
+        "type": "Binder",
+        "name": "x7",
+        "loc": null
+      },
+      "ty": null,
+      "expr": {
+        "type": "Expr::Group",
+        "expr": {
+          "type": "Expr::Group",
+          "expr": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "x"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "group": {
+            "type": "Group::Paren"
+          },
+          "loc": null
+        },
+        "group": {
+          "type": "Group::Brace"
+        },
+        "loc": null
+      },
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "is_constant": false,
+      "loc": null,
+      "attrs": [],
+      "doc": " expression x"
+    }
+  ]
+}

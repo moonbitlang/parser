@@ -1,6 +1,4 @@
 
-//!build: -w -27
-
 // count the number of "1"s in a 32-bit integer
 fn ctpop(n: Int) -> Int {
   // extract the lower bit of every 2-bit group
@@ -27,25 +25,25 @@ fn ctpop(n: Int) -> Int {
 
 
 // a simple bit set to store a set of integers less than 32
-type Bitset Int
+struct Bitset(Int)
 
 let empty_bitset: Bitset = Bitset(0)
 
 fn Bitset::has(self: Bitset, idx: Int) -> Bool {
-  self.inner().land((1 << idx)) != 0
+  self.0.land((1 << idx)) != 0
 }
 
 fn Bitset::index_of(self: Bitset, idx: Int) -> Int {
-  let items_below_idx = self.inner().land((1 << idx) - 1)
+  let items_below_idx = self.0.land((1 << idx) - 1)
   ctpop(items_below_idx)
 }
 
 fn Bitset::add(self: Bitset, idx: Int) -> Bitset {
-  Bitset(self.inner().lor((1 << idx)))
+  Bitset(self.0.lor((1 << idx)))
 }
 
 fn Bitset::remove(self: Bitset, idx: Int) -> Bitset {
-  Bitset(self.inner().lxor((1 << idx)))
+  Bitset(self.0.lxor((1 << idx)))
 }
 
 

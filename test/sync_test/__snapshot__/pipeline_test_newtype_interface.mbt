@@ -1,6 +1,5 @@
-//!build: -w -27
-type MyInt Int derive(Show)
-type MyPair (Int, MyInt) derive(Show)
+struct MyInt(Int) derive(Show)
+struct MyPair((Int, MyInt)) derive(Show)
 
 enum E {
   A

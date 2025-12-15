@@ -1,5 +1,5 @@
-let u1 = [1, 2, 3]
-let u2 = [5, 6, 7]
+let u1: ReadOnlyArray[Int] = [1, 2, 3]
+let u2: ReadOnlyArray[Int] = [5, 6, 7]
 
 fn init {
   let v = [..u1, 4, ..u2, 8]

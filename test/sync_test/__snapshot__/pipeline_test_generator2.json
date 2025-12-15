@@ -1434,8 +1434,8 @@
                                     "func": {
                                       "type": "Expr::Group",
                                       "expr": {
-                                        "type": "Expr::DotApply",
-                                        "self": {
+                                        "type": "Expr::Field",
+                                        "record": {
                                           "type": "Expr::Apply",
                                           "func": {
                                             "type": "Expr::Ident",
@@ -1474,15 +1474,10 @@
                                           },
                                           "loc": null
                                         },
-                                        "method_name": {
-                                          "type": "Label",
-                                          "name": "inner",
+                                        "accessor": {
+                                          "type": "Accessor::Index",
+                                          "tuple_index": 0,
                                           "loc": null
-                                        },
-                                        "args": [],
-                                        "return_self": false,
-                                        "attr": {
-                                          "type": "ApplyAttr::NoAttr"
                                         },
                                         "loc": null
                                       },
@@ -1666,8 +1661,8 @@
                                     "func": {
                                       "type": "Expr::Group",
                                       "expr": {
-                                        "type": "Expr::DotApply",
-                                        "self": {
+                                        "type": "Expr::Field",
+                                        "record": {
                                           "type": "Expr::Apply",
                                           "func": {
                                             "type": "Expr::Ident",
@@ -1706,15 +1701,10 @@
                                           },
                                           "loc": null
                                         },
-                                        "method_name": {
-                                          "type": "Label",
-                                          "name": "inner",
+                                        "accessor": {
+                                          "type": "Accessor::Index",
+                                          "tuple_index": 0,
                                           "loc": null
-                                        },
-                                        "args": [],
-                                        "return_self": false,
-                                        "attr": {
-                                          "type": "ApplyAttr::NoAttr"
                                         },
                                         "loc": null
                                       },
@@ -2613,68 +2603,70 @@
           }
         ],
         "components": {
-          "type": "TypeDesc::Newtype",
-          "0": {
-            "type": "Type::Arrow",
-            "args": [
-              {
-                "type": "Type::Arrow",
-                "args": [
-                  {
+          "type": "TypeDesc::TupleStruct",
+          "0": [
+            {
+              "type": "Type::Arrow",
+              "args": [
+                {
+                  "type": "Type::Arrow",
+                  "args": [
+                    {
+                      "type": "Type::Name",
+                      "constr_id": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "LongIdent::Ident",
+                          "0": "T"
+                        },
+                        "loc": null
+                      },
+                      "tys": [],
+                      "loc": null
+                    }
+                  ],
+                  "res": {
                     "type": "Type::Name",
                     "constr_id": {
                       "type": "ConstrId",
                       "id": {
                         "type": "LongIdent::Ident",
-                        "0": "T"
+                        "0": "IterResult"
                       },
                       "loc": null
                     },
                     "tys": [],
                     "loc": null
-                  }
-                ],
-                "res": {
-                  "type": "Type::Name",
-                  "constr_id": {
-                    "type": "ConstrId",
-                    "id": {
-                      "type": "LongIdent::Ident",
-                      "0": "IterResult"
-                    },
+                  },
+                  "err": {
+                    "type": "ErrorType::Noraise",
                     "loc": null
                   },
-                  "tys": [],
+                  "is_async": true,
+                  "loc": null
+                }
+              ],
+              "res": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "IterResult"
+                  },
                   "loc": null
                 },
-                "err": {
-                  "type": "ErrorType::Noraise",
-                  "loc": null
-                },
-                "is_async": true,
-                "loc": null
-              }
-            ],
-            "res": {
-              "type": "Type::Name",
-              "constr_id": {
-                "type": "ConstrId",
-                "id": {
-                  "type": "LongIdent::Ident",
-                  "0": "IterResult"
-                },
+                "tys": [],
                 "loc": null
               },
-              "tys": [],
+              "err": {
+                "type": "ErrorType::Noraise",
+                "loc": null
+              },
+              "is_async": true,
               "loc": null
-            },
-            "err": {
-              "type": "ErrorType::Noraise",
-              "loc": null
-            },
-            "is_async": true,
-            "loc": null
-          }
+            }
+          ]
         },
         "attrs": [],
         "doc": "",
@@ -2827,8 +2819,8 @@
           "func": {
             "type": "Expr::Group",
             "expr": {
-              "type": "Expr::DotApply",
-              "self": {
+              "type": "Expr::Field",
+              "record": {
                 "type": "Expr::Ident",
                 "id": {
                   "type": "Var",
@@ -2840,15 +2832,10 @@
                 },
                 "loc": null
               },
-              "method_name": {
-                "type": "Label",
-                "name": "inner",
+              "accessor": {
+                "type": "Accessor::Index",
+                "tuple_index": 0,
                 "loc": null
-              },
-              "args": [],
-              "return_self": false,
-              "attr": {
-                "type": "ApplyAttr::NoAttr"
               },
               "loc": null
             },

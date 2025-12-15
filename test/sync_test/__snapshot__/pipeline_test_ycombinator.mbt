@@ -1,11 +1,10 @@
-//!build: -w -27
-type R[X] (R[X]) -> X
+struct R[X]((R[X]) -> X)
 
 fn[X, Y] y(f : ((X) -> Y) -> (X) -> Y) -> (X) -> Y {
   fn ff (x: R[(X) -> Y]) -> (X) -> Y {
-    fn(a) { f((x.inner())(x))(a) }
+    fn(a) { f((x.0)(x))(a) }
   }
-  ff(R::R(fn(x) { fn (a) { f((x.inner())(x))(a) } }))
+  ff(R::R(fn(x) { fn (a) { f((x.0)(x))(a) } }))
 }
 
 fn factx(f: ((Int) -> Int)) -> (Int) -> Int {

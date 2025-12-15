@@ -97,6 +97,7 @@
                     }
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -141,6 +142,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {

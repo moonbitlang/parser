@@ -1,11 +1,10 @@
-//!build: -w -27
 ///|
 enum E {
   T1(Int, Int)
 } derive(Show)
 
 ///|
-type K1 E derive(Show)
+struct K1(E) derive(Show)
 
 ///|
 fn f(self : K1) -> Unit {

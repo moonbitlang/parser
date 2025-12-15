@@ -3,7 +3,7 @@
     "token": [
       "COMMENT",
       {
-        "content": "//!build: -w -27",
+        "content": "//!build: -alert -deprecated -w -27",
         "kind": [
           "Ownline",
           {
@@ -14,11 +14,11 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "1:1-1:17"
+    "loc": "1:1-1:36"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:17-1:18"
+    "loc": "1:36-1:37"
   },
   {
     "token": [
@@ -96,52 +96,60 @@
     "loc": "5:5-5:6"
   },
   {
-    "token": "TYPE",
-    "loc": "6:1-6:5"
+    "token": "STRUCT",
+    "loc": "6:1-6:7"
   },
   {
     "token": [
       "UIDENT",
       "X0"
     ],
-    "loc": "6:6-6:8"
+    "loc": "6:8-6:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "6:10-6:11"
   },
   {
     "token": [
       "UIDENT",
       "Int"
     ],
-    "loc": "6:9-6:12"
+    "loc": "6:11-6:14"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "6:14-6:15"
   },
   {
     "token": "DERIVE",
-    "loc": "6:13-6:19"
+    "loc": "6:16-6:22"
   },
   {
     "token": "LPAREN",
-    "loc": "6:19-6:20"
+    "loc": "6:22-6:23"
   },
   {
     "token": [
       "UIDENT",
       "Show"
     ],
-    "loc": "6:20-6:24"
+    "loc": "6:23-6:27"
   },
   {
     "token": "RPAREN",
-    "loc": "6:24-6:25"
+    "loc": "6:27-6:28"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "6:25-6:25"
+    "loc": "6:28-6:28"
   },
   {
     "token": "NEWLINE",
-    "loc": "6:25-6:26"
+    "loc": "6:28-6:29"
   },
   {
     "token": "NEWLINE",
@@ -1154,85 +1162,93 @@
     "loc": "31:70-31:71"
   },
   {
-    "token": "TYPE",
-    "loc": "32:3-32:7"
+    "token": "STRUCT",
+    "loc": "32:3-32:9"
   },
   {
     "token": [
       "UIDENT",
       "U"
     ],
-    "loc": "32:8-32:9"
+    "loc": "32:10-32:11"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "32:11-32:12"
   },
   {
     "token": [
       "UIDENT",
       "T"
     ],
-    "loc": "32:10-32:11"
+    "loc": "32:12-32:13"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "32:13-32:14"
   },
   {
     "token": "DERIVE",
-    "loc": "32:12-32:18"
+    "loc": "32:15-32:21"
   },
   {
     "token": "LPAREN",
-    "loc": "32:18-32:19"
+    "loc": "32:21-32:22"
   },
   {
     "token": [
       "UIDENT",
       "Show"
     ],
-    "loc": "32:19-32:23"
+    "loc": "32:22-32:26"
   },
   {
     "token": "COMMA",
-    "loc": "32:23-32:24"
+    "loc": "32:26-32:27"
   },
   {
     "token": [
       "UIDENT",
       "ToJson"
     ],
-    "loc": "32:25-32:31"
+    "loc": "32:28-32:34"
   },
   {
     "token": "COMMA",
-    "loc": "32:31-32:32"
+    "loc": "32:34-32:35"
   },
   {
     "token": [
       "UIDENT",
       "Default"
     ],
-    "loc": "32:33-32:40"
+    "loc": "32:36-32:43"
   },
   {
     "token": "COMMA",
-    "loc": "32:40-32:41"
+    "loc": "32:43-32:44"
   },
   {
     "token": [
       "UIDENT",
       "FromJson"
     ],
-    "loc": "32:42-32:50"
+    "loc": "32:45-32:53"
   },
   {
     "token": "RPAREN",
-    "loc": "32:50-32:51"
+    "loc": "32:53-32:54"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "32:51-32:51"
+    "loc": "32:54-32:54"
   },
   {
     "token": "NEWLINE",
-    "loc": "32:51-32:52"
+    "loc": "32:54-32:55"
   },
   {
     "token": "LET",

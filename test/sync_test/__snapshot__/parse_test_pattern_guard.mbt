@@ -12,17 +12,6 @@ fn g(f : (Int, Int) -> Int) -> Int {
   f(1, 2)
 }
 
-fn main {
-  let _ = g(fn {
-    1, 1 if true => 1
-    a, b if a + b == 3 && a > b => 2
-    a, b if {
-      f(a)
-      false
-    } => a + b
-  })
-}
-
 ///|
 suberror E Int
 

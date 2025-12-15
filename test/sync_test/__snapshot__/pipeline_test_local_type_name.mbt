@@ -1,6 +1,5 @@
-//!build: -w -27
 ///|
-pub(all) type T Int
+pub(all) struct T(Int)
 
 ///|
 pub(open) trait I {
@@ -12,15 +11,15 @@ pub fn T::g(self : T) -> Int {
   enum E {
     A(Int)
   } derive(Show)
-  println(A(self.inner()))
-  self.inner()
+  println(A(self.0))
+  self.0
 }
 
 ///|
 pub impl I for T with f(self) {
-  type N Int derive(Show)
-  println(N(self.inner()))
-  self.inner()
+  struct N(Int) derive(Show)
+  println(N(self.0))
+  self.0
 }
 
 ///|

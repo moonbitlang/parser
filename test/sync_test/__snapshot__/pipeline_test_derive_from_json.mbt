@@ -1,5 +1,3 @@
-//!build: -w -27
-
 ///|
 struct A(Int) derive(Show, ToJson, FromJson)
 

@@ -2,7 +2,7 @@ fn init {
   for x in [ 1, 2, 3, 4 ].iter() {
     println(x)
   }
-  for k, v in { "x": 1, "y": 2, "z": 3 } {
+  for k, v in { "x": 1, "y": 2, "z": 3 }.iter2() {
     println("\{k} => \{v}")
   }
 }

@@ -1,0 +1,2428 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Foo",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Record",
+          "0": [
+            {
+              "type": "FieldDecl",
+              "name": {
+                "type": "FieldName",
+                "label": "x",
+                "loc": null
+              },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "mut": false,
+              "vis": {
+                "type": "Visibility::Default"
+              },
+              "loc": null,
+              "attrs": [],
+              "doc": ""
+            },
+            {
+              "type": "FieldDecl",
+              "name": {
+                "type": "FieldName",
+                "label": "y",
+                "loc": null
+              },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "mut": false,
+              "vis": {
+                "type": "Visibility::Default"
+              },
+              "loc": null,
+              "attrs": [],
+              "doc": ""
+            }
+          ]
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Record",
+          "0": [
+            {
+              "type": "FieldDecl",
+              "name": {
+                "type": "FieldName",
+                "label": "x",
+                "loc": null
+              },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              "mut": false,
+              "vis": {
+                "type": "Visibility::Default"
+              },
+              "loc": null,
+              "attrs": [],
+              "doc": ""
+            }
+          ]
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Sequence",
+        "exprs": [
+          {
+            "type": "Expr::If",
+            "cond": {
+              "type": "Expr::Constr",
+              "constr": {
+                "type": "Constructor",
+                "name": {
+                  "type": "ConstrName",
+                  "name": "Foo",
+                  "loc": null
+                },
+                "extra_info": {
+                  "type": "ConstructorExtraInfo::NoExtraInfo"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "ifso": {
+              "type": "Expr::Hole",
+              "loc": null,
+              "kind": {
+                "type": "Hole::Todo"
+              }
+            },
+            "ifnot": null,
+            "loc": null
+          },
+          {
+            "type": "Expr::Match",
+            "expr": {
+              "type": "Expr::Constr",
+              "constr": {
+                "type": "Constructor",
+                "name": {
+                  "type": "ConstrName",
+                  "name": "Foo",
+                  "loc": null
+                },
+                "extra_info": {
+                  "type": "ConstructorExtraInfo::NoExtraInfo"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "cases": [
+              {
+                "type": "Case",
+                "pattern": {
+                  "type": "Pattern::Any",
+                  "loc": null
+                },
+                "guard": null,
+                "body": {
+                  "type": "Expr::Hole",
+                  "loc": null,
+                  "kind": {
+                    "type": "Hole::Todo"
+                  }
+                }
+              }
+            ],
+            "match_loc": null,
+            "loc": null
+          },
+          {
+            "type": "Expr::While",
+            "loop_cond": {
+              "type": "Expr::Constr",
+              "constr": {
+                "type": "Constructor",
+                "name": {
+                  "type": "ConstrName",
+                  "name": "Foo",
+                  "loc": null
+                },
+                "extra_info": {
+                  "type": "ConstructorExtraInfo::NoExtraInfo"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "loop_body": {
+              "type": "Expr::Hole",
+              "loc": null,
+              "kind": {
+                "type": "Hole::Todo"
+              }
+            },
+            "while_else": null,
+            "label": null,
+            "loc": null
+          },
+          {
+            "type": "Expr::For",
+            "binders": [],
+            "condition": null,
+            "continue_block": [
+              [
+                {
+                  "type": "Binder",
+                  "name": "",
+                  "loc": null
+                },
+                {
+                  "type": "Expr::Hole",
+                  "loc": null,
+                  "kind": {
+                    "type": "Hole::Synthesized"
+                  }
+                }
+              ]
+            ],
+            "body": {
+              "type": "Expr::Hole",
+              "loc": null,
+              "kind": {
+                "type": "Hole::Todo"
+              }
+            },
+            "for_else": null,
+            "label": null,
+            "loc": null
+          }
+        ],
+        "last_expr": {
+          "type": "Expr::Loop",
+          "arg": {
+            "type": "Expr::Constr",
+            "constr": {
+              "type": "Constructor",
+              "name": {
+                "type": "ConstrName",
+                "name": "Foo",
+                "loc": null
+              },
+              "extra_info": {
+                "type": "ConstructorExtraInfo::NoExtraInfo"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "body": [
+            {
+              "type": "Case",
+              "pattern": {
+                "type": "Pattern::Any",
+                "loc": null
+              },
+              "guard": null,
+              "body": {
+                "type": "Expr::Hole",
+                "loc": null,
+                "kind": {
+                  "type": "Hole::Todo"
+                }
+              }
+            }
+          ],
+          "label": null,
+          "loop_loc": null,
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": {
+        "v": "if bool {...}",
+        "loc": null
+      },
+      "params": null,
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Let",
+        "pattern": {
+          "type": "Pattern::Var",
+          "0": {
+            "type": "Binder",
+            "name": "foo",
+            "loc": null
+          }
+        },
+        "expr": {
+          "type": "Expr::Constant",
+          "c": {
+            "type": "Constant::Bool",
+            "0": false
+          },
+          "loc": null
+        },
+        "body": {
+          "type": "Expr::Sequence",
+          "exprs": [
+            {
+              "type": "Expr::If",
+              "cond": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "foo"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "ifso": {
+                "type": "Expr::Apply",
+                "func": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "f"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "args": [
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "x"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  }
+                ],
+                "attr": {
+                  "type": "ApplyAttr::NoAttr"
+                },
+                "loc": null
+              },
+              "ifnot": null,
+              "loc": null
+            },
+            {
+              "type": "Expr::If",
+              "cond": {
+                "type": "Expr::Constr",
+                "constr": {
+                  "type": "Constructor",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "Foo",
+                    "loc": null
+                  },
+                  "extra_info": {
+                    "type": "ConstructorExtraInfo::NoExtraInfo"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "ifso": {
+                "type": "Expr::Apply",
+                "func": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "f"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "args": [
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "x"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  }
+                ],
+                "attr": {
+                  "type": "ApplyAttr::NoAttr"
+                },
+                "loc": null
+              },
+              "ifnot": null,
+              "loc": null
+            },
+            {
+              "type": "Expr::While",
+              "loop_cond": {
+                "type": "Expr::Constr",
+                "constr": {
+                  "type": "Constructor",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "Foo",
+                    "loc": null
+                  },
+                  "extra_info": {
+                    "type": "ConstructorExtraInfo::NoExtraInfo"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "loop_body": {
+                "type": "Expr::Apply",
+                "func": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "f"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "args": [
+                  {
+                    "type": "Argument",
+                    "value": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "x"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "kind": {
+                      "type": "ArgumentKind::Positional"
+                    }
+                  }
+                ],
+                "attr": {
+                  "type": "ApplyAttr::NoAttr"
+                },
+                "loc": null
+              },
+              "while_else": null,
+              "label": null,
+              "loc": null
+            }
+          ],
+          "last_expr": {
+            "type": "Expr::For",
+            "binders": [
+              [
+                {
+                  "type": "Binder",
+                  "name": "x",
+                  "loc": null
+                },
+                {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "0"
+                  },
+                  "loc": null
+                }
+              ]
+            ],
+            "condition": {
+              "type": "Expr::Ident",
+              "id": {
+                "type": "Var",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "cond"
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "continue_block": [
+              [
+                {
+                  "type": "Binder",
+                  "name": "x",
+                  "loc": null
+                },
+                {
+                  "type": "Expr::Constr",
+                  "constr": {
+                    "type": "Constructor",
+                    "name": {
+                      "type": "ConstrName",
+                      "name": "Foo",
+                      "loc": null
+                    },
+                    "extra_info": {
+                      "type": "ConstructorExtraInfo::NoExtraInfo"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                }
+              ]
+            ],
+            "body": {
+              "type": "Expr::Apply",
+              "func": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "f"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "args": [
+                {
+                  "type": "Argument",
+                  "value": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "x"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "kind": {
+                    "type": "ArgumentKind::Positional"
+                  }
+                }
+              ],
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            },
+            "for_else": null,
+            "label": null,
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": {
+        "v": "if bool { f(x) }",
+        "loc": null
+      },
+      "params": null,
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Let",
+        "pattern": {
+          "type": "Pattern::Var",
+          "0": {
+            "type": "Binder",
+            "name": "foo",
+            "loc": null
+          }
+        },
+        "expr": {
+          "type": "Expr::Constant",
+          "c": {
+            "type": "Constant::Bool",
+            "0": false
+          },
+          "loc": null
+        },
+        "body": {
+          "type": "Expr::Sequence",
+          "exprs": [
+            {
+              "type": "Expr::If",
+              "cond": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "foo"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "ifso": {
+                "type": "Expr::Unit",
+                "loc": null,
+                "faked": true
+              },
+              "ifnot": null,
+              "loc": null
+            },
+            {
+              "type": "Expr::If",
+              "cond": {
+                "type": "Expr::Constr",
+                "constr": {
+                  "type": "Constructor",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "Foo",
+                    "loc": null
+                  },
+                  "extra_info": {
+                    "type": "ConstructorExtraInfo::NoExtraInfo"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "ifso": {
+                "type": "Expr::Unit",
+                "loc": null,
+                "faked": true
+              },
+              "ifnot": null,
+              "loc": null
+            },
+            {
+              "type": "Expr::While",
+              "loop_cond": {
+                "type": "Expr::Constr",
+                "constr": {
+                  "type": "Constructor",
+                  "name": {
+                    "type": "ConstrName",
+                    "name": "Foo",
+                    "loc": null
+                  },
+                  "extra_info": {
+                    "type": "ConstructorExtraInfo::NoExtraInfo"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "loop_body": {
+                "type": "Expr::Unit",
+                "loc": null,
+                "faked": true
+              },
+              "while_else": null,
+              "label": null,
+              "loc": null
+            }
+          ],
+          "last_expr": {
+            "type": "Expr::For",
+            "binders": [
+              [
+                {
+                  "type": "Binder",
+                  "name": "x",
+                  "loc": null
+                },
+                {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::Int",
+                    "0": "0"
+                  },
+                  "loc": null
+                }
+              ]
+            ],
+            "condition": null,
+            "continue_block": [
+              [
+                {
+                  "type": "Binder",
+                  "name": "x",
+                  "loc": null
+                },
+                {
+                  "type": "Expr::Constr",
+                  "constr": {
+                    "type": "Constructor",
+                    "name": {
+                      "type": "ConstrName",
+                      "name": "Foo",
+                      "loc": null
+                    },
+                    "extra_info": {
+                      "type": "ConstructorExtraInfo::NoExtraInfo"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                }
+              ]
+            ],
+            "body": {
+              "type": "Expr::Unit",
+              "loc": null,
+              "faked": true
+            },
+            "for_else": null,
+            "label": null,
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": {
+        "v": "if bool {}",
+        "loc": null
+      },
+      "params": null,
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Let",
+        "pattern": {
+          "type": "Pattern::Var",
+          "0": {
+            "type": "Binder",
+            "name": "foo",
+            "loc": null
+          }
+        },
+        "expr": {
+          "type": "Expr::Constant",
+          "c": {
+            "type": "Constant::Bool",
+            "0": false
+          },
+          "loc": null
+        },
+        "body": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "x",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::Constant",
+            "c": {
+              "type": "Constant::Int",
+              "0": "1"
+            },
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Any",
+              "loc": null
+            },
+            "expr": {
+              "type": "Expr::If",
+              "cond": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "foo"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "ifso": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "x"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "ifnot": null,
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Let",
+              "pattern": {
+                "type": "Pattern::Any",
+                "loc": null
+              },
+              "expr": {
+                "type": "Expr::If",
+                "cond": {
+                  "type": "Expr::Constr",
+                  "constr": {
+                    "type": "Constructor",
+                    "name": {
+                      "type": "ConstrName",
+                      "name": "Foo",
+                      "loc": null
+                    },
+                    "extra_info": {
+                      "type": "ConstructorExtraInfo::NoExtraInfo"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "ifso": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "x"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "ifnot": null,
+                "loc": null
+              },
+              "body": {
+                "type": "Expr::Let",
+                "pattern": {
+                  "type": "Pattern::Any",
+                  "loc": null
+                },
+                "expr": {
+                  "type": "Expr::While",
+                  "loop_cond": {
+                    "type": "Expr::Constr",
+                    "constr": {
+                      "type": "Constructor",
+                      "name": {
+                        "type": "ConstrName",
+                        "name": "Foo",
+                        "loc": null
+                      },
+                      "extra_info": {
+                        "type": "ConstructorExtraInfo::NoExtraInfo"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "loop_body": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "x"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "while_else": null,
+                  "label": null,
+                  "loc": null
+                },
+                "body": {
+                  "type": "Expr::Let",
+                  "pattern": {
+                    "type": "Pattern::Any",
+                    "loc": null
+                  },
+                  "expr": {
+                    "type": "Expr::For",
+                    "binders": [
+                      [
+                        {
+                          "type": "Binder",
+                          "name": "x",
+                          "loc": null
+                        },
+                        {
+                          "type": "Expr::Constant",
+                          "c": {
+                            "type": "Constant::Int",
+                            "0": "0"
+                          },
+                          "loc": null
+                        }
+                      ]
+                    ],
+                    "condition": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "cond"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "continue_block": [
+                      [
+                        {
+                          "type": "Binder",
+                          "name": "x",
+                          "loc": null
+                        },
+                        {
+                          "type": "Expr::Constr",
+                          "constr": {
+                            "type": "Constructor",
+                            "name": {
+                              "type": "ConstrName",
+                              "name": "Foo",
+                              "loc": null
+                            },
+                            "extra_info": {
+                              "type": "ConstructorExtraInfo::NoExtraInfo"
+                            },
+                            "loc": null
+                          },
+                          "loc": null
+                        }
+                      ]
+                    ],
+                    "body": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "x"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "for_else": null,
+                    "label": null,
+                    "loc": null
+                  },
+                  "body": {
+                    "type": "Expr::Unit",
+                    "loc": null,
+                    "faked": true
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": {
+        "v": "if bool {x}",
+        "loc": null
+      },
+      "params": null,
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Let",
+        "pattern": {
+          "type": "Pattern::Var",
+          "0": {
+            "type": "Binder",
+            "name": "a",
+            "loc": null
+          }
+        },
+        "expr": {
+          "type": "Expr::Record",
+          "type_name": {
+            "type": "TypeName",
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Foo"
+            },
+            "is_object": false,
+            "loc": null
+          },
+          "fields": [
+            {
+              "type": "FieldDef",
+              "label": {
+                "type": "Label",
+                "name": "x",
+                "loc": null
+              },
+              "expr": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "x"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "is_pun": true,
+              "loc": null
+            }
+          ],
+          "trailing": {
+            "type": "Trailing::Comma"
+          },
+          "loc": null
+        },
+        "body": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "b",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::Loop",
+            "arg": {
+              "type": "Expr::Record",
+              "type_name": {
+                "type": "TypeName",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "Foo"
+                },
+                "is_object": false,
+                "loc": null
+              },
+              "fields": [
+                {
+                  "type": "FieldDef",
+                  "label": {
+                    "type": "Label",
+                    "name": "x",
+                    "loc": null
+                  },
+                  "expr": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "x"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "is_pun": true,
+                  "loc": null
+                }
+              ],
+              "trailing": {
+                "type": "Trailing::Comma"
+              },
+              "loc": null
+            },
+            "body": [
+              {
+                "type": "Case",
+                "pattern": {
+                  "type": "Pattern::Any",
+                  "loc": null
+                },
+                "guard": null,
+                "body": {
+                  "type": "Expr::Hole",
+                  "loc": null,
+                  "kind": {
+                    "type": "Hole::Todo"
+                  }
+                }
+              }
+            ],
+            "label": null,
+            "loop_loc": null,
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Var",
+              "0": {
+                "type": "Binder",
+                "name": "c",
+                "loc": null
+              }
+            },
+            "expr": {
+              "type": "Expr::While",
+              "loop_cond": {
+                "type": "Expr::Record",
+                "type_name": {
+                  "type": "TypeName",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "Foo"
+                  },
+                  "is_object": false,
+                  "loc": null
+                },
+                "fields": [
+                  {
+                    "type": "FieldDef",
+                    "label": {
+                      "type": "Label",
+                      "name": "x",
+                      "loc": null
+                    },
+                    "expr": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "x"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "is_pun": true,
+                    "loc": null
+                  }
+                ],
+                "trailing": {
+                  "type": "Trailing::Comma"
+                },
+                "loc": null
+              },
+              "loop_body": {
+                "type": "Expr::Hole",
+                "loc": null,
+                "kind": {
+                  "type": "Hole::Todo"
+                }
+              },
+              "while_else": null,
+              "label": null,
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Let",
+              "pattern": {
+                "type": "Pattern::Var",
+                "0": {
+                  "type": "Binder",
+                  "name": "d",
+                  "loc": null
+                }
+              },
+              "expr": {
+                "type": "Expr::For",
+                "binders": [
+                  [
+                    {
+                      "type": "Binder",
+                      "name": "x",
+                      "loc": null
+                    },
+                    {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "0"
+                      },
+                      "loc": null
+                    }
+                  ]
+                ],
+                "condition": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "cond"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "continue_block": [
+                  [
+                    {
+                      "type": "Binder",
+                      "name": "x",
+                      "loc": null
+                    },
+                    {
+                      "type": "Expr::Record",
+                      "type_name": {
+                        "type": "TypeName",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "Foo"
+                        },
+                        "is_object": false,
+                        "loc": null
+                      },
+                      "fields": [
+                        {
+                          "type": "FieldDef",
+                          "label": {
+                            "type": "Label",
+                            "name": "x",
+                            "loc": null
+                          },
+                          "expr": {
+                            "type": "Expr::Ident",
+                            "id": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "x"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "is_pun": true,
+                          "loc": null
+                        }
+                      ],
+                      "trailing": {
+                        "type": "Trailing::Comma"
+                      },
+                      "loc": null
+                    }
+                  ]
+                ],
+                "body": {
+                  "type": "Expr::Hole",
+                  "loc": null,
+                  "kind": {
+                    "type": "Hole::Todo"
+                  }
+                },
+                "for_else": null,
+                "label": null,
+                "loc": null
+              },
+              "body": {
+                "type": "Expr::Unit",
+                "loc": null,
+                "faked": true
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": {
+        "v": "recovery: Foo {x, }",
+        "loc": null
+      },
+      "params": null,
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Let",
+        "pattern": {
+          "type": "Pattern::Var",
+          "0": {
+            "type": "Binder",
+            "name": "a2",
+            "loc": null
+          }
+        },
+        "expr": {
+          "type": "Expr::Record",
+          "type_name": {
+            "type": "TypeName",
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Foo"
+            },
+            "is_object": false,
+            "loc": null
+          },
+          "fields": [
+            {
+              "type": "FieldDef",
+              "label": {
+                "type": "Label",
+                "name": "x",
+                "loc": null
+              },
+              "expr": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "x"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "is_pun": true,
+              "loc": null
+            },
+            {
+              "type": "FieldDef",
+              "label": {
+                "type": "Label",
+                "name": "y",
+                "loc": null
+              },
+              "expr": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "y"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "is_pun": true,
+              "loc": null
+            }
+          ],
+          "trailing": {
+            "type": "Trailing::None"
+          },
+          "loc": null
+        },
+        "body": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "b2",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::Loop",
+            "arg": {
+              "type": "Expr::Record",
+              "type_name": {
+                "type": "TypeName",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "Foo"
+                },
+                "is_object": false,
+                "loc": null
+              },
+              "fields": [
+                {
+                  "type": "FieldDef",
+                  "label": {
+                    "type": "Label",
+                    "name": "x",
+                    "loc": null
+                  },
+                  "expr": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "x"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "is_pun": true,
+                  "loc": null
+                },
+                {
+                  "type": "FieldDef",
+                  "label": {
+                    "type": "Label",
+                    "name": "y",
+                    "loc": null
+                  },
+                  "expr": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "y"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "is_pun": true,
+                  "loc": null
+                }
+              ],
+              "trailing": {
+                "type": "Trailing::None"
+              },
+              "loc": null
+            },
+            "body": [
+              {
+                "type": "Case",
+                "pattern": {
+                  "type": "Pattern::Any",
+                  "loc": null
+                },
+                "guard": null,
+                "body": {
+                  "type": "Expr::Hole",
+                  "loc": null,
+                  "kind": {
+                    "type": "Hole::Todo"
+                  }
+                }
+              }
+            ],
+            "label": null,
+            "loop_loc": null,
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Var",
+              "0": {
+                "type": "Binder",
+                "name": "c2",
+                "loc": null
+              }
+            },
+            "expr": {
+              "type": "Expr::While",
+              "loop_cond": {
+                "type": "Expr::Record",
+                "type_name": {
+                  "type": "TypeName",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "Foo"
+                  },
+                  "is_object": false,
+                  "loc": null
+                },
+                "fields": [
+                  {
+                    "type": "FieldDef",
+                    "label": {
+                      "type": "Label",
+                      "name": "x",
+                      "loc": null
+                    },
+                    "expr": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "x"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "is_pun": true,
+                    "loc": null
+                  },
+                  {
+                    "type": "FieldDef",
+                    "label": {
+                      "type": "Label",
+                      "name": "y",
+                      "loc": null
+                    },
+                    "expr": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "y"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "is_pun": true,
+                    "loc": null
+                  }
+                ],
+                "trailing": {
+                  "type": "Trailing::None"
+                },
+                "loc": null
+              },
+              "loop_body": {
+                "type": "Expr::Hole",
+                "loc": null,
+                "kind": {
+                  "type": "Hole::Todo"
+                }
+              },
+              "while_else": null,
+              "label": null,
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Let",
+              "pattern": {
+                "type": "Pattern::Var",
+                "0": {
+                  "type": "Binder",
+                  "name": "d2",
+                  "loc": null
+                }
+              },
+              "expr": {
+                "type": "Expr::For",
+                "binders": [
+                  [
+                    {
+                      "type": "Binder",
+                      "name": "x",
+                      "loc": null
+                    },
+                    {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "0"
+                      },
+                      "loc": null
+                    }
+                  ]
+                ],
+                "condition": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "cond"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "continue_block": [
+                  [
+                    {
+                      "type": "Binder",
+                      "name": "x",
+                      "loc": null
+                    },
+                    {
+                      "type": "Expr::Record",
+                      "type_name": {
+                        "type": "TypeName",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "Foo"
+                        },
+                        "is_object": false,
+                        "loc": null
+                      },
+                      "fields": [
+                        {
+                          "type": "FieldDef",
+                          "label": {
+                            "type": "Label",
+                            "name": "x",
+                            "loc": null
+                          },
+                          "expr": {
+                            "type": "Expr::Ident",
+                            "id": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "x"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "is_pun": true,
+                          "loc": null
+                        },
+                        {
+                          "type": "FieldDef",
+                          "label": {
+                            "type": "Label",
+                            "name": "y",
+                            "loc": null
+                          },
+                          "expr": {
+                            "type": "Expr::Ident",
+                            "id": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "y"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "is_pun": true,
+                          "loc": null
+                        }
+                      ],
+                      "trailing": {
+                        "type": "Trailing::None"
+                      },
+                      "loc": null
+                    }
+                  ]
+                ],
+                "body": {
+                  "type": "Expr::Hole",
+                  "loc": null,
+                  "kind": {
+                    "type": "Hole::Todo"
+                  }
+                },
+                "for_else": null,
+                "label": null,
+                "loc": null
+              },
+              "body": {
+                "type": "Expr::Unit",
+                "loc": null,
+                "faked": true
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": {
+        "v": "recovery: Foo {x,y}",
+        "loc": null
+      },
+      "params": null,
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Let",
+        "pattern": {
+          "type": "Pattern::Var",
+          "0": {
+            "type": "Binder",
+            "name": "a2",
+            "loc": null
+          }
+        },
+        "expr": {
+          "type": "Expr::Record",
+          "type_name": {
+            "type": "TypeName",
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Foo"
+            },
+            "is_object": false,
+            "loc": null
+          },
+          "fields": [
+            {
+              "type": "FieldDef",
+              "label": {
+                "type": "Label",
+                "name": "x",
+                "loc": null
+              },
+              "expr": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "v"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "is_pun": false,
+              "loc": null
+            },
+            {
+              "type": "FieldDef",
+              "label": {
+                "type": "Label",
+                "name": "y",
+                "loc": null
+              },
+              "expr": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "v"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "is_pun": false,
+              "loc": null
+            }
+          ],
+          "trailing": {
+            "type": "Trailing::None"
+          },
+          "loc": null
+        },
+        "body": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "b2",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::Loop",
+            "arg": {
+              "type": "Expr::Record",
+              "type_name": {
+                "type": "TypeName",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "Foo"
+                },
+                "is_object": false,
+                "loc": null
+              },
+              "fields": [
+                {
+                  "type": "FieldDef",
+                  "label": {
+                    "type": "Label",
+                    "name": "x",
+                    "loc": null
+                  },
+                  "expr": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "v"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "is_pun": false,
+                  "loc": null
+                },
+                {
+                  "type": "FieldDef",
+                  "label": {
+                    "type": "Label",
+                    "name": "y",
+                    "loc": null
+                  },
+                  "expr": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "v"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "is_pun": false,
+                  "loc": null
+                }
+              ],
+              "trailing": {
+                "type": "Trailing::None"
+              },
+              "loc": null
+            },
+            "body": [
+              {
+                "type": "Case",
+                "pattern": {
+                  "type": "Pattern::Any",
+                  "loc": null
+                },
+                "guard": null,
+                "body": {
+                  "type": "Expr::Hole",
+                  "loc": null,
+                  "kind": {
+                    "type": "Hole::Todo"
+                  }
+                }
+              }
+            ],
+            "label": null,
+            "loop_loc": null,
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Var",
+              "0": {
+                "type": "Binder",
+                "name": "c2",
+                "loc": null
+              }
+            },
+            "expr": {
+              "type": "Expr::While",
+              "loop_cond": {
+                "type": "Expr::Record",
+                "type_name": {
+                  "type": "TypeName",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "Foo"
+                  },
+                  "is_object": false,
+                  "loc": null
+                },
+                "fields": [
+                  {
+                    "type": "FieldDef",
+                    "label": {
+                      "type": "Label",
+                      "name": "x",
+                      "loc": null
+                    },
+                    "expr": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "v"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "is_pun": false,
+                    "loc": null
+                  },
+                  {
+                    "type": "FieldDef",
+                    "label": {
+                      "type": "Label",
+                      "name": "y",
+                      "loc": null
+                    },
+                    "expr": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "v"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "is_pun": false,
+                    "loc": null
+                  }
+                ],
+                "trailing": {
+                  "type": "Trailing::None"
+                },
+                "loc": null
+              },
+              "loop_body": {
+                "type": "Expr::Hole",
+                "loc": null,
+                "kind": {
+                  "type": "Hole::Todo"
+                }
+              },
+              "while_else": null,
+              "label": null,
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Let",
+              "pattern": {
+                "type": "Pattern::Var",
+                "0": {
+                  "type": "Binder",
+                  "name": "d2",
+                  "loc": null
+                }
+              },
+              "expr": {
+                "type": "Expr::For",
+                "binders": [
+                  [
+                    {
+                      "type": "Binder",
+                      "name": "x",
+                      "loc": null
+                    },
+                    {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "0"
+                      },
+                      "loc": null
+                    }
+                  ]
+                ],
+                "condition": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "cond"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "continue_block": [
+                  [
+                    {
+                      "type": "Binder",
+                      "name": "x",
+                      "loc": null
+                    },
+                    {
+                      "type": "Expr::Record",
+                      "type_name": {
+                        "type": "TypeName",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "Foo"
+                        },
+                        "is_object": false,
+                        "loc": null
+                      },
+                      "fields": [
+                        {
+                          "type": "FieldDef",
+                          "label": {
+                            "type": "Label",
+                            "name": "x",
+                            "loc": null
+                          },
+                          "expr": {
+                            "type": "Expr::Ident",
+                            "id": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "v"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "is_pun": false,
+                          "loc": null
+                        },
+                        {
+                          "type": "FieldDef",
+                          "label": {
+                            "type": "Label",
+                            "name": "y",
+                            "loc": null
+                          },
+                          "expr": {
+                            "type": "Expr::Ident",
+                            "id": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "v"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "is_pun": false,
+                          "loc": null
+                        }
+                      ],
+                      "trailing": {
+                        "type": "Trailing::None"
+                      },
+                      "loc": null
+                    }
+                  ]
+                ],
+                "body": {
+                  "type": "Expr::Hole",
+                  "loc": null,
+                  "kind": {
+                    "type": "Hole::Todo"
+                  }
+                },
+                "for_else": null,
+                "label": null,
+                "loc": null
+              },
+              "body": {
+                "type": "Expr::Unit",
+                "loc": null,
+                "faked": true
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": {
+        "v": "recovery: Foo {x:v, y:v}",
+        "loc": null
+      },
+      "params": null,
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopTest",
+      "expr": {
+        "type": "Expr::Let",
+        "pattern": {
+          "type": "Pattern::Var",
+          "0": {
+            "type": "Binder",
+            "name": "a3",
+            "loc": null
+          }
+        },
+        "expr": {
+          "type": "Expr::RecordUpdate",
+          "type_name": {
+            "type": "TypeName",
+            "name": {
+              "type": "LongIdent::Ident",
+              "0": "Foo"
+            },
+            "is_object": false,
+            "loc": null
+          },
+          "record": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "rcd"
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "fields": [],
+          "loc": null
+        },
+        "body": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "b3",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::Loop",
+            "arg": {
+              "type": "Expr::RecordUpdate",
+              "type_name": {
+                "type": "TypeName",
+                "name": {
+                  "type": "LongIdent::Ident",
+                  "0": "Foo"
+                },
+                "is_object": false,
+                "loc": null
+              },
+              "record": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "rcd"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "fields": [],
+              "loc": null
+            },
+            "body": [
+              {
+                "type": "Case",
+                "pattern": {
+                  "type": "Pattern::Any",
+                  "loc": null
+                },
+                "guard": null,
+                "body": {
+                  "type": "Expr::Hole",
+                  "loc": null,
+                  "kind": {
+                    "type": "Hole::Todo"
+                  }
+                }
+              }
+            ],
+            "label": null,
+            "loop_loc": null,
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::Let",
+            "pattern": {
+              "type": "Pattern::Var",
+              "0": {
+                "type": "Binder",
+                "name": "c3",
+                "loc": null
+              }
+            },
+            "expr": {
+              "type": "Expr::While",
+              "loop_cond": {
+                "type": "Expr::RecordUpdate",
+                "type_name": {
+                  "type": "TypeName",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "Foo"
+                  },
+                  "is_object": false,
+                  "loc": null
+                },
+                "record": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "rcd"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "fields": [],
+                "loc": null
+              },
+              "loop_body": {
+                "type": "Expr::Hole",
+                "loc": null,
+                "kind": {
+                  "type": "Hole::Todo"
+                }
+              },
+              "while_else": null,
+              "label": null,
+              "loc": null
+            },
+            "body": {
+              "type": "Expr::Let",
+              "pattern": {
+                "type": "Pattern::Var",
+                "0": {
+                  "type": "Binder",
+                  "name": "d3",
+                  "loc": null
+                }
+              },
+              "expr": {
+                "type": "Expr::For",
+                "binders": [
+                  [
+                    {
+                      "type": "Binder",
+                      "name": "x",
+                      "loc": null
+                    },
+                    {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "0"
+                      },
+                      "loc": null
+                    }
+                  ]
+                ],
+                "condition": {
+                  "type": "Expr::Ident",
+                  "id": {
+                    "type": "Var",
+                    "name": {
+                      "type": "LongIdent::Ident",
+                      "0": "cond"
+                    },
+                    "loc": null
+                  },
+                  "loc": null
+                },
+                "continue_block": [
+                  [
+                    {
+                      "type": "Binder",
+                      "name": "x",
+                      "loc": null
+                    },
+                    {
+                      "type": "Expr::RecordUpdate",
+                      "type_name": {
+                        "type": "TypeName",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "Foo"
+                        },
+                        "is_object": false,
+                        "loc": null
+                      },
+                      "record": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "rcd"
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "fields": [],
+                      "loc": null
+                    }
+                  ]
+                ],
+                "body": {
+                  "type": "Expr::Hole",
+                  "loc": null,
+                  "kind": {
+                    "type": "Hole::Todo"
+                  }
+                },
+                "for_else": null,
+                "label": null,
+                "loc": null
+              },
+              "body": {
+                "type": "Expr::Unit",
+                "loc": null,
+                "faked": true
+              },
+              "loc": null
+            },
+            "loc": null
+          },
+          "loc": null
+        },
+        "loc": null
+      },
+      "name": {
+        "v": "recovery: Foo {..rcd}",
+        "loc": null
+      },
+      "params": null,
+      "local_types": [],
+      "is_async": false,
+      "loc": null,
+      "attrs": [],
+      "doc": ""
+    }
+  ]
+}

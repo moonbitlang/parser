@@ -1,5 +1,3 @@
-//!build: -w -27
-
 struct T(Int?) derive (Show)
 
 fn[X, Y] apply(f: (X) -> Y, x: X) -> Y {

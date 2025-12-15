@@ -1,6 +1,4 @@
 
-//!build: -w -27
-
 struct T {
   x: Int
   y: Int
@@ -20,7 +18,7 @@ struct Stock {
   tick : String
 } derive(Show)
 
-type MyStock String derive(Show)
+struct MyStock(String) derive(Show)
 
 fn init {
   println(Stock::{ tick: "MSFT" })

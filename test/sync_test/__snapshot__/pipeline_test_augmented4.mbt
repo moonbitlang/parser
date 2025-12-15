@@ -1,4 +1,3 @@
-//!build: -w -27
 fn init {
   let r1 = { val: 1 }
   let r2 = { val: 2 }
@@ -25,11 +24,11 @@ fn init {
 }
 
 
-type MyInt Int derive(Show)
+struct MyInt(Int) derive(Show)
 let bad_global : Ref[() -> Unit] = { val: fn () {} }
 impl Add for MyInt with add(self : MyInt, other : MyInt) -> MyInt {
   (bad_global.val)()
-  MyInt(self.inner() + other.inner())
+  MyInt(self.0 + other.0)
 }
 
 fn init {

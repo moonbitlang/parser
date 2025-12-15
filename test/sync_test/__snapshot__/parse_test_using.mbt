@@ -25,3 +25,6 @@ using @pkg {
   type Type as ty,
   trait Trait as tr,
 }
+
+// empty list, accept for completion
+using @pkg {}

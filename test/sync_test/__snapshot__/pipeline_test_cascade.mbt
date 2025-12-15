@@ -1,3 +1,4 @@
+//!build: -w -62
 
 fn init {
   let v = [ 1, 2, 3 ]
@@ -59,4 +60,11 @@ fn MyBuf::write_string(self : MyBuf, s : String) -> Unit {
 fn MyBuf::expect(self : MyBuf, content~ : String = "") -> Unit raise {
   inspect(self.inner(), content~)
   self.0.reset()
+}
+
+// non-unit return type
+fn init {
+  let dq = @deque.of([ @ref.new(1), @ref.new(2), @ref.new(3), @ref.new(4) ])
+  dq..pop_back()..pop_back()..pop_back()
+  println(dq.pop_back())
 }

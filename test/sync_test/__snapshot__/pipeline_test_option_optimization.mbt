@@ -1,4 +1,3 @@
-//!build: -w -27
 fn test_char(xs : Array[Char?]) -> Unit {
   println(xs)
 }
@@ -63,12 +62,12 @@ fn test_trait_obj(xs : Array[&Show?]) -> Unit {
   println(xs)
 }
 
-type A (A) -> Int
+struct A((A) -> Int)
 
 fn test_any(xs : Array[A?]) -> Unit {
   for a in xs {
     match a {
-      Some(a) => println((a.inner())(a))
+      Some(a) => println((a.0)(a))
       None => ()
     }
   }
@@ -76,7 +75,7 @@ fn test_any(xs : Array[A?]) -> Unit {
 
 fn test_any2(xs : Array[A]) -> Unit {
   for a in xs {
-    println((a.inner())(a))
+    println((a.0)(a))
   }
 }
 

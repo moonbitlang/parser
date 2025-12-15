@@ -1,4 +1,3 @@
-//!build: -w -27
 async fn[T] callcc(cb : ((T) -> Unit) -> Unit) -> T noraise = "%async.suspend"
 
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
@@ -50,13 +49,13 @@ async fn tree_to_iter(tree : Tree) -> AIter[Int] noraise {
     match tree {
       Leaf => IterContinue
       Node(left, value, right) => {
-        if (tree_to_iter(left).inner())(yield_) == IterEnd {
+        if (tree_to_iter(left).0)(yield_) == IterEnd {
           return IterEnd
         }
         if yield_(value) == IterEnd {
           return IterEnd
         }
-        if (tree_to_iter(right).inner())(yield_) == IterEnd {
+        if (tree_to_iter(right).0)(yield_) == IterEnd {
           return IterEnd
         }
         IterContinue
@@ -85,10 +84,10 @@ fn tree_generator(tree : Tree) -> Generator[Int] {
   })
 }
 
-type AIter[T] (async (async (T) -> IterResult noraise) -> IterResult noraise)
+struct AIter[T](async (async (T) -> IterResult noraise) -> IterResult noraise)
 
 async fn[T] AIter::run(self : AIter[T], f : async (T) -> IterResult noraise) -> IterResult noraise {
-  (self.inner())(f)
+  (self.0)(f)
 }
 
 fn[Elem] from_iter(iter: AIter[Elem]) -> Generator[Elem] {

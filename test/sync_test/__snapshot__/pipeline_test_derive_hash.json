@@ -1533,47 +1533,49 @@
         "tycon_loc": null,
         "params": [],
         "components": {
-          "type": "TypeDesc::Newtype",
-          "0": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "R2"
+          "type": "TypeDesc::TupleStruct",
+          "0": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "R2"
+                },
+                "loc": null
               },
+              "tys": [
+                {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "E"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                },
+                {
+                  "type": "Type::Name",
+                  "constr_id": {
+                    "type": "ConstrId",
+                    "id": {
+                      "type": "LongIdent::Ident",
+                      "0": "E"
+                    },
+                    "loc": null
+                  },
+                  "tys": [],
+                  "loc": null
+                }
+              ],
               "loc": null
-            },
-            "tys": [
-              {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "E"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              },
-              {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "E"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              }
-            ],
-            "loc": null
-          }
+            }
+          ]
         },
         "attrs": [],
         "doc": "",

@@ -100,6 +100,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -144,6 +145,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -310,6 +312,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -358,6 +361,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -546,6 +550,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -607,6 +612,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -655,6 +661,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -845,6 +852,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -897,6 +905,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -941,6 +950,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -1071,6 +1081,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -1163,6 +1174,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -1216,6 +1228,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -1308,6 +1321,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -1361,6 +1375,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -1453,6 +1468,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -1498,6 +1514,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::If",
                   "cond": {
@@ -1567,6 +1584,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Unit",
                   "loc": null,
@@ -1654,6 +1672,7 @@
                       }
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Unit",
                     "loc": null,
@@ -1668,6 +1687,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Apply",
                     "func": {
@@ -1706,38 +1726,390 @@
                 }
               ],
               "loc": null
+            },
+            {
+              "type": "Expr::Lexmatch",
+              "strategy": {
+                "type": "Label",
+                "name": "longest",
+                "loc": null
+              },
+              "expr": {
+                "type": "Expr::Constant",
+                "c": {
+                  "type": "Constant::Bytes",
+                  "0": "end_hello"
+                },
+                "loc": null
+              },
+              "match_loc": null,
+              "cases": [
+                {
+                  "type": "LexCase",
+                  "pat": [
+                    {
+                      "type": "LexTopPattern::Pattern",
+                      "0": {
+                        "type": "LexPattern::Regex",
+                        "lit": "(.*)end",
+                        "loc": null
+                      }
+                    }
+                  ],
+                  "pat_loc": null,
+                  "body": {
+                    "type": "Expr::Apply",
+                    "func": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "fail"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "args": [
+                      {
+                        "type": "Argument",
+                        "value": {
+                          "type": "Expr::Constant",
+                          "c": {
+                            "type": "Constant::String",
+                            "0": "test_anchors"
+                          },
+                          "loc": null
+                        },
+                        "kind": {
+                          "type": "ArgumentKind::Positional"
+                        }
+                      }
+                    ],
+                    "attr": {
+                      "type": "ApplyAttr::NoAttr"
+                    },
+                    "loc": null
+                  }
+                },
+                {
+                  "type": "LexCase",
+                  "pat": [
+                    {
+                      "type": "LexTopPattern::Wildcard",
+                      "loc": null
+                    }
+                  ],
+                  "pat_loc": null,
+                  "body": {
+                    "type": "Expr::Unit",
+                    "loc": null,
+                    "faked": false
+                  }
+                }
+              ],
+              "loc": null
             }
           ],
           "last_expr": {
-            "type": "Expr::Lexmatch",
-            "strategy": {
-              "type": "Label",
-              "name": "longest",
-              "loc": null
-            },
-            "expr": {
-              "type": "Expr::Constant",
-              "c": {
-                "type": "Constant::Bytes",
-                "0": "end_hello"
-              },
-              "loc": null
-            },
-            "match_loc": null,
-            "cases": [
-              {
-                "type": "LexCase",
-                "pat": [
-                  {
-                    "type": "LexTopPattern::Pattern",
-                    "0": {
-                      "type": "LexPattern::Regex",
-                      "lit": "(.*)end",
-                      "loc": null
+            "type": "Expr::LetRec",
+            "bindings": [
+              [
+                {
+                  "type": "Binder",
+                  "name": "f",
+                  "loc": null
+                },
+                {
+                  "type": "Func::Lambda",
+                  "parameters": [
+                    {
+                      "type": "Parameter::Positional",
+                      "binder": {
+                        "type": "Binder",
+                        "name": "input",
+                        "loc": null
+                      },
+                      "ty": {
+                        "type": "Type::Name",
+                        "constr_id": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "LongIdent::Ident",
+                            "0": "BytesView"
+                          },
+                          "loc": null
+                        },
+                        "tys": [],
+                        "loc": null
+                      }
                     }
-                  }
-                ],
-                "body": {
+                  ],
+                  "params_loc": null,
+                  "body": {
+                    "type": "Expr::Lexmatch",
+                    "strategy": {
+                      "type": "Label",
+                      "name": "longest",
+                      "loc": null
+                    },
+                    "expr": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "input"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "match_loc": null,
+                    "cases": [
+                      {
+                        "type": "LexCase",
+                        "pat": [
+                          {
+                            "type": "LexTopPattern::Pattern",
+                            "0": {
+                              "type": "LexPattern::Regex",
+                              "lit": "([ ]+|^he)llo",
+                              "loc": null
+                            }
+                          }
+                        ],
+                        "pat_loc": null,
+                        "body": {
+                          "type": "Expr::Unit",
+                          "loc": null,
+                          "faked": false
+                        }
+                      },
+                      {
+                        "type": "LexCase",
+                        "pat": [
+                          {
+                            "type": "LexTopPattern::Wildcard",
+                            "loc": null
+                          }
+                        ],
+                        "pat_loc": null,
+                        "body": {
+                          "type": "Expr::Apply",
+                          "func": {
+                            "type": "Expr::Ident",
+                            "id": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "fail"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "args": [
+                            {
+                              "type": "Argument",
+                              "value": {
+                                "type": "Expr::Constant",
+                                "c": {
+                                  "type": "Constant::String",
+                                  "0": "test_anchors"
+                                },
+                                "loc": null
+                              },
+                              "kind": {
+                                "type": "ArgumentKind::Positional"
+                              }
+                            }
+                          ],
+                          "attr": {
+                            "type": "ApplyAttr::NoAttr"
+                          },
+                          "loc": null
+                        }
+                      }
+                    ],
+                    "loc": null
+                  },
+                  "return_type": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Unit"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  "error_type": {
+                    "type": "ErrorType::DefaultErrorType",
+                    "loc": null
+                  },
+                  "kind": {
+                    "type": "FnKind::Lambda"
+                  },
+                  "has_error": null,
+                  "is_async": false,
+                  "loc": null
+                }
+              ],
+              [
+                {
+                  "type": "Binder",
+                  "name": "f2",
+                  "loc": null
+                },
+                {
+                  "type": "Func::Lambda",
+                  "parameters": [
+                    {
+                      "type": "Parameter::Positional",
+                      "binder": {
+                        "type": "Binder",
+                        "name": "input",
+                        "loc": null
+                      },
+                      "ty": {
+                        "type": "Type::Name",
+                        "constr_id": {
+                          "type": "ConstrId",
+                          "id": {
+                            "type": "LongIdent::Ident",
+                            "0": "BytesView"
+                          },
+                          "loc": null
+                        },
+                        "tys": [],
+                        "loc": null
+                      }
+                    }
+                  ],
+                  "params_loc": null,
+                  "body": {
+                    "type": "Expr::Lexmatch",
+                    "strategy": {
+                      "type": "Label",
+                      "name": "longest",
+                      "loc": null
+                    },
+                    "expr": {
+                      "type": "Expr::Ident",
+                      "id": {
+                        "type": "Var",
+                        "name": {
+                          "type": "LongIdent::Ident",
+                          "0": "input"
+                        },
+                        "loc": null
+                      },
+                      "loc": null
+                    },
+                    "match_loc": null,
+                    "cases": [
+                      {
+                        "type": "LexCase",
+                        "pat": [
+                          {
+                            "type": "LexTopPattern::Pattern",
+                            "0": {
+                              "type": "LexPattern::Regex",
+                              "lit": "a^",
+                              "loc": null
+                            }
+                          }
+                        ],
+                        "pat_loc": null,
+                        "body": {
+                          "type": "Expr::Apply",
+                          "func": {
+                            "type": "Expr::Ident",
+                            "id": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "fail"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "args": [
+                            {
+                              "type": "Argument",
+                              "value": {
+                                "type": "Expr::Constant",
+                                "c": {
+                                  "type": "Constant::String",
+                                  "0": "test_anchors"
+                                },
+                                "loc": null
+                              },
+                              "kind": {
+                                "type": "ArgumentKind::Positional"
+                              }
+                            }
+                          ],
+                          "attr": {
+                            "type": "ApplyAttr::NoAttr"
+                          },
+                          "loc": null
+                        }
+                      },
+                      {
+                        "type": "LexCase",
+                        "pat": [
+                          {
+                            "type": "LexTopPattern::Wildcard",
+                            "loc": null
+                          }
+                        ],
+                        "pat_loc": null,
+                        "body": {
+                          "type": "Expr::Unit",
+                          "loc": null,
+                          "faked": false
+                        }
+                      }
+                    ],
+                    "loc": null
+                  },
+                  "return_type": {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Unit"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  },
+                  "error_type": {
+                    "type": "ErrorType::DefaultErrorType",
+                    "loc": null
+                  },
+                  "kind": {
+                    "type": "FnKind::Lambda"
+                  },
+                  "has_error": null,
+                  "is_async": false,
+                  "loc": null
+                }
+              ]
+            ],
+            "body": {
+              "type": "Expr::Sequence",
+              "exprs": [
+                {
                   "type": "Expr::Apply",
                   "func": {
                     "type": "Expr::Ident",
@@ -1745,7 +2117,7 @@
                       "type": "Var",
                       "name": {
                         "type": "LongIdent::Ident",
-                        "0": "fail"
+                        "0": "f"
                       },
                       "loc": null
                     },
@@ -1757,8 +2129,43 @@
                       "value": {
                         "type": "Expr::Constant",
                         "c": {
-                          "type": "Constant::String",
-                          "0": "test_anchors"
+                          "type": "Constant::Bytes",
+                          "0": "hello"
+                        },
+                        "loc": null
+                      },
+                      "kind": {
+                        "type": "ArgumentKind::Positional"
+                      }
+                    }
+                  ],
+                  "attr": {
+                    "type": "ApplyAttr::NoAttr"
+                  },
+                  "loc": null
+                },
+                {
+                  "type": "Expr::Apply",
+                  "func": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "f"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "args": [
+                    {
+                      "type": "Argument",
+                      "value": {
+                        "type": "Expr::Constant",
+                        "c": {
+                          "type": "Constant::Bytes",
+                          "0": "   llo"
                         },
                         "loc": null
                       },
@@ -1772,22 +2179,93 @@
                   },
                   "loc": null
                 }
-              },
-              {
-                "type": "LexCase",
-                "pat": [
+              ],
+              "last_expr": {
+                "type": "Expr::Lexmatch",
+                "strategy": {
+                  "type": "Label",
+                  "name": "longest",
+                  "loc": null
+                },
+                "expr": {
+                  "type": "Expr::Constant",
+                  "c": {
+                    "type": "Constant::String",
+                    "0": "a"
+                  },
+                  "loc": null
+                },
+                "match_loc": null,
+                "cases": [
                   {
-                    "type": "LexTopPattern::Wildcard",
-                    "loc": null
+                    "type": "LexCase",
+                    "pat": [
+                      {
+                        "type": "LexTopPattern::Pattern",
+                        "0": {
+                          "type": "LexPattern::Regex",
+                          "lit": "a^",
+                          "loc": null
+                        }
+                      }
+                    ],
+                    "pat_loc": null,
+                    "body": {
+                      "type": "Expr::Apply",
+                      "func": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "fail"
+                          },
+                          "loc": null
+                        },
+                        "loc": null
+                      },
+                      "args": [
+                        {
+                          "type": "Argument",
+                          "value": {
+                            "type": "Expr::Constant",
+                            "c": {
+                              "type": "Constant::String",
+                              "0": "test_anchors"
+                            },
+                            "loc": null
+                          },
+                          "kind": {
+                            "type": "ArgumentKind::Positional"
+                          }
+                        }
+                      ],
+                      "attr": {
+                        "type": "ApplyAttr::NoAttr"
+                      },
+                      "loc": null
+                    }
+                  },
+                  {
+                    "type": "LexCase",
+                    "pat": [
+                      {
+                        "type": "LexTopPattern::Wildcard",
+                        "loc": null
+                      }
+                    ],
+                    "pat_loc": null,
+                    "body": {
+                      "type": "Expr::Unit",
+                      "loc": null,
+                      "faked": false
+                    }
                   }
                 ],
-                "body": {
-                  "type": "Expr::Unit",
-                  "loc": null,
-                  "faked": false
-                }
-              }
-            ],
+                "loc": null
+              },
+              "loc": null
+            },
             "loc": null
           },
           "loc": null
@@ -1898,6 +2376,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Group",
                 "expr": {
@@ -2086,6 +2565,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -2214,6 +2694,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -2306,6 +2787,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -2359,6 +2841,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -2451,6 +2934,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -2505,6 +2989,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::If",
                   "cond": {
@@ -2597,6 +3082,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Hole",
                   "loc": null,
@@ -2733,6 +3219,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Group",
                     "expr": {
@@ -3004,6 +3491,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Apply",
                     "func": {
@@ -3106,6 +3594,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Group",
                   "expr": {
@@ -3294,6 +3783,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -3424,6 +3914,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -3516,6 +4007,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -3569,6 +4061,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -3661,6 +4154,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -3715,6 +4209,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::If",
                   "cond": {
@@ -3807,6 +4302,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Hole",
                   "loc": null,
@@ -3909,6 +4405,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -4001,6 +4498,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -4054,6 +4552,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -4146,6 +4645,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -4191,6 +4691,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Unit",
                   "loc": null,
@@ -4205,6 +4706,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -4335,6 +4837,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -4427,6 +4930,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -4501,6 +5005,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Group",
                   "expr": {
@@ -4637,6 +5142,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -4808,6 +5314,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Group",
                 "expr": {
@@ -5079,6 +5586,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -5198,6 +5706,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Unit",
                     "loc": null,
@@ -5229,6 +5738,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Apply",
                     "func": {
@@ -5273,6 +5783,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Apply",
                     "func": {
@@ -5346,6 +5857,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -5407,6 +5919,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::If",
                   "cond": {
@@ -5499,6 +6012,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -5629,6 +6143,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -5721,6 +6236,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -5774,6 +6290,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::If",
                     "cond": {
@@ -5866,6 +6383,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Hole",
                     "loc": null,
@@ -5954,6 +6472,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Group",
                   "expr": {
@@ -6134,6 +6653,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Hole",
                   "loc": null,
@@ -6233,6 +6753,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::If",
                 "cond": {
@@ -6325,6 +6846,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Hole",
                 "loc": null,
@@ -6466,6 +6988,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Group",
                 "expr": {
@@ -6622,6 +7145,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -6775,6 +7299,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Constant",
                     "c": {
@@ -6800,6 +7325,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Constant",
                     "c": {
@@ -6817,6 +7343,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Constant",
                     "c": {
@@ -7278,6 +7805,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Constant",
                     "c": {
@@ -7295,6 +7823,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Constant",
                     "c": {
@@ -7909,6 +8438,7 @@
                               }
                             }
                           ],
+                          "pat_loc": null,
                           "body": {
                             "type": "Expr::Group",
                             "expr": {
@@ -8003,6 +8533,7 @@
                               "loc": null
                             }
                           ],
+                          "pat_loc": null,
                           "body": {
                             "type": "Expr::Raise",
                             "err_value": {
@@ -8059,6 +8590,7 @@
                               }
                             }
                           ],
+                          "pat_loc": null,
                           "body": {
                             "type": "Expr::Break",
                             "arg": null,
@@ -8074,6 +8606,7 @@
                               "loc": null
                             }
                           ],
+                          "pat_loc": null,
                           "body": {
                             "type": "Expr::Apply",
                             "func": {
@@ -8482,128 +9015,47 @@
                   {
                     "type": "Argument",
                     "value": {
-                      "type": "Expr::Match",
-                      "expr": {
-                        "type": "Expr::Group",
-                        "expr": {
-                          "type": "Expr::TryOperator",
-                          "body": {
-                            "type": "Expr::Apply",
-                            "func": {
-                              "type": "Expr::Ident",
-                              "id": {
-                                "type": "Var",
-                                "name": {
-                                  "type": "LongIdent::Ident",
-                                  "0": "f"
-                                },
-                                "loc": null
-                              },
-                              "loc": null
-                            },
-                            "args": [
-                              {
-                                "type": "Argument",
-                                "value": {
-                                  "type": "Expr::Constant",
-                                  "c": {
-                                    "type": "Constant::String",
-                                    "0": "\\xED\\xA0\\x80"
-                                  },
-                                  "loc": null
-                                },
-                                "kind": {
-                                  "type": "ArgumentKind::Positional"
-                                }
-                              }
-                            ],
-                            "attr": {
-                              "type": "ApplyAttr::NoAttr"
+                      "type": "Expr::Try",
+                      "body": {
+                        "type": "Expr::Apply",
+                        "func": {
+                          "type": "Expr::Ident",
+                          "id": {
+                            "type": "Var",
+                            "name": {
+                              "type": "LongIdent::Ident",
+                              "0": "f"
                             },
                             "loc": null
                           },
-                          "kind": {
-                            "type": "TryOperatorKind::Question"
-                          },
-                          "try_loc": null,
                           "loc": null
                         },
-                        "group": {
-                          "type": "Group::Paren"
+                        "args": [
+                          {
+                            "type": "Argument",
+                            "value": {
+                              "type": "Expr::Constant",
+                              "c": {
+                                "type": "Constant::String",
+                                "0": "\\xED\\xA0\\x80"
+                              },
+                              "loc": null
+                            },
+                            "kind": {
+                              "type": "ArgumentKind::Positional"
+                            }
+                          }
+                        ],
+                        "attr": {
+                          "type": "ApplyAttr::NoAttr"
                         },
                         "loc": null
                       },
-                      "cases": [
+                      "catch": [
                         {
                           "type": "Case",
                           "pattern": {
-                            "type": "Pattern::Constr",
-                            "constr": {
-                              "type": "Constructor",
-                              "name": {
-                                "type": "ConstrName",
-                                "name": "Ok",
-                                "loc": null
-                              },
-                              "extra_info": {
-                                "type": "ConstructorExtraInfo::NoExtraInfo"
-                              },
-                              "loc": null
-                            },
-                            "args": [
-                              {
-                                "type": "ConstrPatArg",
-                                "pat": {
-                                  "type": "Pattern::Any",
-                                  "loc": null
-                                },
-                                "kind": {
-                                  "type": "ArgumentKind::Positional"
-                                }
-                              }
-                            ],
-                            "is_open": false,
-                            "loc": null
-                          },
-                          "guard": null,
-                          "body": {
-                            "type": "Expr::Constant",
-                            "c": {
-                              "type": "Constant::Bool",
-                              "0": false
-                            },
-                            "loc": null
-                          }
-                        },
-                        {
-                          "type": "Case",
-                          "pattern": {
-                            "type": "Pattern::Constr",
-                            "constr": {
-                              "type": "Constructor",
-                              "name": {
-                                "type": "ConstrName",
-                                "name": "Err",
-                                "loc": null
-                              },
-                              "extra_info": {
-                                "type": "ConstructorExtraInfo::NoExtraInfo"
-                              },
-                              "loc": null
-                            },
-                            "args": [
-                              {
-                                "type": "ConstrPatArg",
-                                "pat": {
-                                  "type": "Pattern::Any",
-                                  "loc": null
-                                },
-                                "kind": {
-                                  "type": "ArgumentKind::Positional"
-                                }
-                              }
-                            ],
-                            "is_open": false,
+                            "type": "Pattern::Any",
                             "loc": null
                           },
                           "guard": null,
@@ -8617,7 +9069,29 @@
                           }
                         }
                       ],
-                      "match_loc": null,
+                      "catch_all": false,
+                      "try_else": [
+                        {
+                          "type": "Case",
+                          "pattern": {
+                            "type": "Pattern::Any",
+                            "loc": null
+                          },
+                          "guard": null,
+                          "body": {
+                            "type": "Expr::Constant",
+                            "c": {
+                              "type": "Constant::Bool",
+                              "0": false
+                            },
+                            "loc": null
+                          }
+                        }
+                      ],
+                      "has_try": true,
+                      "try_loc": null,
+                      "catch_loc": null,
+                      "else_loc": null,
                       "loc": null
                     },
                     "kind": {
@@ -8649,128 +9123,47 @@
                 {
                   "type": "Argument",
                   "value": {
-                    "type": "Expr::Match",
-                    "expr": {
-                      "type": "Expr::Group",
-                      "expr": {
-                        "type": "Expr::TryOperator",
-                        "body": {
-                          "type": "Expr::Apply",
-                          "func": {
-                            "type": "Expr::Ident",
-                            "id": {
-                              "type": "Var",
-                              "name": {
-                                "type": "LongIdent::Ident",
-                                "0": "f"
-                              },
-                              "loc": null
-                            },
-                            "loc": null
-                          },
-                          "args": [
-                            {
-                              "type": "Argument",
-                              "value": {
-                                "type": "Expr::Constant",
-                                "c": {
-                                  "type": "Constant::String",
-                                  "0": "\\xF4\\x90\\x80\\x80"
-                                },
-                                "loc": null
-                              },
-                              "kind": {
-                                "type": "ArgumentKind::Positional"
-                              }
-                            }
-                          ],
-                          "attr": {
-                            "type": "ApplyAttr::NoAttr"
+                    "type": "Expr::Try",
+                    "body": {
+                      "type": "Expr::Apply",
+                      "func": {
+                        "type": "Expr::Ident",
+                        "id": {
+                          "type": "Var",
+                          "name": {
+                            "type": "LongIdent::Ident",
+                            "0": "f"
                           },
                           "loc": null
                         },
-                        "kind": {
-                          "type": "TryOperatorKind::Question"
-                        },
-                        "try_loc": null,
                         "loc": null
                       },
-                      "group": {
-                        "type": "Group::Paren"
+                      "args": [
+                        {
+                          "type": "Argument",
+                          "value": {
+                            "type": "Expr::Constant",
+                            "c": {
+                              "type": "Constant::String",
+                              "0": "\\xF4\\x90\\x80\\x80"
+                            },
+                            "loc": null
+                          },
+                          "kind": {
+                            "type": "ArgumentKind::Positional"
+                          }
+                        }
+                      ],
+                      "attr": {
+                        "type": "ApplyAttr::NoAttr"
                       },
                       "loc": null
                     },
-                    "cases": [
+                    "catch": [
                       {
                         "type": "Case",
                         "pattern": {
-                          "type": "Pattern::Constr",
-                          "constr": {
-                            "type": "Constructor",
-                            "name": {
-                              "type": "ConstrName",
-                              "name": "Ok",
-                              "loc": null
-                            },
-                            "extra_info": {
-                              "type": "ConstructorExtraInfo::NoExtraInfo"
-                            },
-                            "loc": null
-                          },
-                          "args": [
-                            {
-                              "type": "ConstrPatArg",
-                              "pat": {
-                                "type": "Pattern::Any",
-                                "loc": null
-                              },
-                              "kind": {
-                                "type": "ArgumentKind::Positional"
-                              }
-                            }
-                          ],
-                          "is_open": false,
-                          "loc": null
-                        },
-                        "guard": null,
-                        "body": {
-                          "type": "Expr::Constant",
-                          "c": {
-                            "type": "Constant::Bool",
-                            "0": false
-                          },
-                          "loc": null
-                        }
-                      },
-                      {
-                        "type": "Case",
-                        "pattern": {
-                          "type": "Pattern::Constr",
-                          "constr": {
-                            "type": "Constructor",
-                            "name": {
-                              "type": "ConstrName",
-                              "name": "Err",
-                              "loc": null
-                            },
-                            "extra_info": {
-                              "type": "ConstructorExtraInfo::NoExtraInfo"
-                            },
-                            "loc": null
-                          },
-                          "args": [
-                            {
-                              "type": "ConstrPatArg",
-                              "pat": {
-                                "type": "Pattern::Any",
-                                "loc": null
-                              },
-                              "kind": {
-                                "type": "ArgumentKind::Positional"
-                              }
-                            }
-                          ],
-                          "is_open": false,
+                          "type": "Pattern::Any",
                           "loc": null
                         },
                         "guard": null,
@@ -8784,7 +9177,29 @@
                         }
                       }
                     ],
-                    "match_loc": null,
+                    "catch_all": false,
+                    "try_else": [
+                      {
+                        "type": "Case",
+                        "pattern": {
+                          "type": "Pattern::Any",
+                          "loc": null
+                        },
+                        "guard": null,
+                        "body": {
+                          "type": "Expr::Constant",
+                          "c": {
+                            "type": "Constant::Bool",
+                            "0": false
+                          },
+                          "loc": null
+                        }
+                      }
+                    ],
+                    "has_try": true,
+                    "try_loc": null,
+                    "catch_loc": null,
+                    "else_loc": null,
                     "loc": null
                   },
                   "kind": {
@@ -8941,6 +9356,7 @@
                     }
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Group",
                   "expr": {
@@ -9046,6 +9462,7 @@
                     }
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Group",
                   "expr": {
@@ -9134,6 +9551,7 @@
                     }
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Break",
                   "arg": null,
@@ -9149,6 +9567,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {
@@ -9291,6 +9710,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Constant",
                     "c": {
@@ -9316,6 +9736,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Constant",
                     "c": {
@@ -9333,6 +9754,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Constant",
                     "c": {
@@ -9927,6 +10349,7 @@
                               }
                             }
                           ],
+                          "pat_loc": null,
                           "body": {
                             "type": "Expr::Group",
                             "expr": {
@@ -10021,6 +10444,7 @@
                               "loc": null
                             }
                           ],
+                          "pat_loc": null,
                           "body": {
                             "type": "Expr::Raise",
                             "err_value": {
@@ -10077,6 +10501,7 @@
                               }
                             }
                           ],
+                          "pat_loc": null,
                           "body": {
                             "type": "Expr::Break",
                             "arg": null,
@@ -10092,6 +10517,7 @@
                               "loc": null
                             }
                           ],
+                          "pat_loc": null,
                           "body": {
                             "type": "Expr::Apply",
                             "func": {
@@ -10598,7 +11024,7 @@
             "type": "Expr::Constant",
             "c": {
               "type": "Constant::Bytes",
-              "0": "abbccc"
+              "0": "a-bb-ccc"
             },
             "loc": null
           },
@@ -10627,6 +11053,11 @@
                         "loc": null
                       },
                       {
+                        "type": "LexPattern::Regex",
+                        "lit": "-",
+                        "loc": null
+                      },
+                      {
                         "type": "LexPattern::Alias",
                         "pat": {
                           "type": "LexPattern::Regex",
@@ -10638,6 +11069,11 @@
                           "name": "b",
                           "loc": null
                         },
+                        "loc": null
+                      },
+                      {
+                        "type": "LexPattern::Regex",
+                        "lit": "-",
                         "loc": null
                       },
                       {
@@ -10663,6 +11099,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -10720,6 +11157,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -13762,6 +14200,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Unit",
                   "loc": null,
@@ -13784,6 +14223,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Unit",
                   "loc": null,
@@ -13798,6 +14238,7 @@
                     "loc": null
                   }
                 ],
+                "pat_loc": null,
                 "body": {
                   "type": "Expr::Apply",
                   "func": {

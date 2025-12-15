@@ -1,6 +1,4 @@
 
-//!build: -w -27
-
 trait Super {
   f(Self) -> Unit
 }
@@ -22,7 +20,7 @@ fn[X: Derived] useDerived(x: X) -> Unit {
 }
 
 
-type T1 Int
+struct T1(Int)
 let t1: T1 = T1(42)
 
 impl Super for T1 with f(_x: T1) -> Unit { println("T1::f") }
@@ -35,7 +33,7 @@ fn init {
 }
 
 
-type T2 Int
+struct T2(Int)
 let t2: T2 = T2(42)
 
 impl Super for T2 with f(_x) { println("Super::f[T2]") }

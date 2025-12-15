@@ -1,5 +1,3 @@
-//!build: -w -27
-
 ///|
 struct T1[X] {
   x : Int

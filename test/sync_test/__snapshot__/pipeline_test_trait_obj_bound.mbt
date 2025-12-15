@@ -1,4 +1,3 @@
-//!build: -w -27
 trait Name {
   name(Self)->String
 }
@@ -8,10 +7,10 @@ fn[N:Name] test_name(h:N)->String{
   h_t.name() // TODO: check this should auto-comlete
 }
 
-type X String
+struct X(String)
 
 impl Name for X with name(self) {
-  self.inner()
+  self.0
 }
 
 fn init {

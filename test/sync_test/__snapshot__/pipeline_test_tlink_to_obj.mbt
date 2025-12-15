@@ -1,5 +1,4 @@
-//!build: -w -27
-type E Int
+struct E(Int)
 
 trait T {
   f(Self) -> E

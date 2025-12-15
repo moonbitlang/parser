@@ -20,53 +20,55 @@
           }
         ],
         "components": {
-          "type": "TypeDesc::Newtype",
-          "0": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "FixedArray"
-              },
-              "loc": null
-            },
-            "tys": [
-              {
-                "type": "Type::Tuple",
-                "tys": [
-                  {
-                    "type": "Type::Name",
-                    "constr_id": {
-                      "type": "ConstrId",
-                      "id": {
-                        "type": "LongIdent::Ident",
-                        "0": "K"
-                      },
-                      "loc": null
-                    },
-                    "tys": [],
-                    "loc": null
-                  },
-                  {
-                    "type": "Type::Name",
-                    "constr_id": {
-                      "type": "ConstrId",
-                      "id": {
-                        "type": "LongIdent::Ident",
-                        "0": "V"
-                      },
-                      "loc": null
-                    },
-                    "tys": [],
-                    "loc": null
-                  }
-                ],
+          "type": "TypeDesc::TupleStruct",
+          "0": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "FixedArray"
+                },
                 "loc": null
-              }
-            ],
-            "loc": null
-          }
+              },
+              "tys": [
+                {
+                  "type": "Type::Tuple",
+                  "tys": [
+                    {
+                      "type": "Type::Name",
+                      "constr_id": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "LongIdent::Ident",
+                          "0": "K"
+                        },
+                        "loc": null
+                      },
+                      "tys": [],
+                      "loc": null
+                    },
+                    {
+                      "type": "Type::Name",
+                      "constr_id": {
+                        "type": "ConstrId",
+                        "id": {
+                          "type": "LongIdent::Ident",
+                          "0": "V"
+                        },
+                        "loc": null
+                      },
+                      "tys": [],
+                      "loc": null
+                    }
+                  ],
+                  "loc": null
+                }
+              ],
+              "loc": null
+            }
+          ]
         },
         "attrs": [],
         "doc": "",
@@ -262,8 +264,8 @@
                   "rhs": {
                     "type": "Expr::DotApply",
                     "self": {
-                      "type": "Expr::DotApply",
-                      "self": {
+                      "type": "Expr::Field",
+                      "record": {
                         "type": "Expr::Ident",
                         "id": {
                           "type": "Var",
@@ -275,15 +277,10 @@
                         },
                         "loc": null
                       },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "inner",
+                      "accessor": {
+                        "type": "Accessor::Index",
+                        "tuple_index": 0,
                         "loc": null
-                      },
-                      "args": [],
-                      "return_self": false,
-                      "attr": {
-                        "type": "ApplyAttr::NoAttr"
                       },
                       "loc": null
                     },
@@ -328,8 +325,8 @@
                   "expr": {
                     "type": "Expr::ArrayGet",
                     "array": {
-                      "type": "Expr::DotApply",
-                      "self": {
+                      "type": "Expr::Field",
+                      "record": {
                         "type": "Expr::Ident",
                         "id": {
                           "type": "Var",
@@ -341,15 +338,10 @@
                         },
                         "loc": null
                       },
-                      "method_name": {
-                        "type": "Label",
-                        "name": "inner",
+                      "accessor": {
+                        "type": "Accessor::Index",
+                        "tuple_index": 0,
                         "loc": null
-                      },
-                      "args": [],
-                      "return_self": false,
-                      "attr": {
-                        "type": "ApplyAttr::NoAttr"
                       },
                       "loc": null
                     },
@@ -625,20 +617,22 @@
         "tycon_loc": null,
         "params": [],
         "components": {
-          "type": "TypeDesc::Newtype",
-          "0": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "T"
+          "type": "TypeDesc::TupleStruct",
+          "0": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "T"
+                },
+                "loc": null
               },
+              "tys": [],
               "loc": null
-            },
-            "tys": [],
-            "loc": null
-          }
+            }
+          ]
         },
         "attrs": [],
         "doc": "",

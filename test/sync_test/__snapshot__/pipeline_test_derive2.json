@@ -9,20 +9,22 @@
         "tycon_loc": null,
         "params": [],
         "components": {
-          "type": "TypeDesc::Newtype",
-          "0": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "Int"
+          "type": "TypeDesc::TupleStruct",
+          "0": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
               },
+              "tys": [],
               "loc": null
-            },
-            "tys": [],
-            "loc": null
-          }
+            }
+          ]
         },
         "attrs": [],
         "doc": "",
@@ -138,8 +140,8 @@
             "loc": null
           },
           "lhs": {
-            "type": "Expr::DotApply",
-            "self": {
+            "type": "Expr::Field",
+            "record": {
               "type": "Expr::Ident",
               "id": {
                 "type": "Var",
@@ -151,21 +153,16 @@
               },
               "loc": null
             },
-            "method_name": {
-              "type": "Label",
-              "name": "inner",
+            "accessor": {
+              "type": "Accessor::Index",
+              "tuple_index": 0,
               "loc": null
-            },
-            "args": [],
-            "return_self": false,
-            "attr": {
-              "type": "ApplyAttr::NoAttr"
             },
             "loc": null
           },
           "rhs": {
-            "type": "Expr::DotApply",
-            "self": {
+            "type": "Expr::Field",
+            "record": {
               "type": "Expr::Ident",
               "id": {
                 "type": "Var",
@@ -177,15 +174,10 @@
               },
               "loc": null
             },
-            "method_name": {
-              "type": "Label",
-              "name": "inner",
+            "accessor": {
+              "type": "Accessor::Index",
+              "tuple_index": 0,
               "loc": null
-            },
-            "args": [],
-            "return_self": false,
-            "attr": {
-              "type": "ApplyAttr::NoAttr"
             },
             "loc": null
           },
@@ -207,20 +199,22 @@
         "tycon_loc": null,
         "params": [],
         "components": {
-          "type": "TypeDesc::Newtype",
-          "0": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "Int"
+          "type": "TypeDesc::TupleStruct",
+          "0": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
               },
+              "tys": [],
               "loc": null
-            },
-            "tys": [],
-            "loc": null
-          }
+            }
+          ]
         },
         "attrs": [],
         "doc": "",
@@ -333,8 +327,8 @@
             "loc": null
           },
           "lhs": {
-            "type": "Expr::DotApply",
-            "self": {
+            "type": "Expr::Field",
+            "record": {
               "type": "Expr::Ident",
               "id": {
                 "type": "Var",
@@ -346,21 +340,16 @@
               },
               "loc": null
             },
-            "method_name": {
-              "type": "Label",
-              "name": "inner",
+            "accessor": {
+              "type": "Accessor::Index",
+              "tuple_index": 0,
               "loc": null
-            },
-            "args": [],
-            "return_self": false,
-            "attr": {
-              "type": "ApplyAttr::NoAttr"
             },
             "loc": null
           },
           "rhs": {
-            "type": "Expr::DotApply",
-            "self": {
+            "type": "Expr::Field",
+            "record": {
               "type": "Expr::Ident",
               "id": {
                 "type": "Var",
@@ -372,15 +361,10 @@
               },
               "loc": null
             },
-            "method_name": {
-              "type": "Label",
-              "name": "inner",
+            "accessor": {
+              "type": "Accessor::Index",
+              "tuple_index": 0,
               "loc": null
-            },
-            "args": [],
-            "return_self": false,
-            "attr": {
-              "type": "ApplyAttr::NoAttr"
             },
             "loc": null
           },
@@ -471,20 +455,22 @@
         "tycon_loc": null,
         "params": [],
         "components": {
-          "type": "TypeDesc::Newtype",
-          "0": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "Int"
+          "type": "TypeDesc::TupleStruct",
+          "0": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
               },
+              "tys": [],
               "loc": null
-            },
-            "tys": [],
-            "loc": null
-          }
+            }
+          ]
         },
         "attrs": [],
         "doc": "",
@@ -600,8 +586,8 @@
             "loc": null
           },
           "lhs": {
-            "type": "Expr::DotApply",
-            "self": {
+            "type": "Expr::Field",
+            "record": {
               "type": "Expr::Ident",
               "id": {
                 "type": "Var",
@@ -613,21 +599,16 @@
               },
               "loc": null
             },
-            "method_name": {
-              "type": "Label",
-              "name": "inner",
+            "accessor": {
+              "type": "Accessor::Index",
+              "tuple_index": 0,
               "loc": null
-            },
-            "args": [],
-            "return_self": false,
-            "attr": {
-              "type": "ApplyAttr::NoAttr"
             },
             "loc": null
           },
           "rhs": {
-            "type": "Expr::DotApply",
-            "self": {
+            "type": "Expr::Field",
+            "record": {
               "type": "Expr::Ident",
               "id": {
                 "type": "Var",
@@ -639,15 +620,10 @@
               },
               "loc": null
             },
-            "method_name": {
-              "type": "Label",
-              "name": "inner",
+            "accessor": {
+              "type": "Accessor::Index",
+              "tuple_index": 0,
               "loc": null
-            },
-            "args": [],
-            "return_self": false,
-            "attr": {
-              "type": "ApplyAttr::NoAttr"
             },
             "loc": null
           },

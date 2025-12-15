@@ -1,4 +1,3 @@
-//!build: -w -27
 trait I {
   f(Self, x~ : Int, Int, y~ : Int) -> Unit
 }
@@ -8,7 +7,7 @@ fn[X : Show] tee(x : X) -> X {
   x
 }
 
-type T Int derive(Show)
+struct T(Int) derive(Show)
 impl I for T with f(self : T, x~ : Int, w : Int, y~ : Int) -> Unit {
   println("f(\{self}, x=\{x}, \{w}, y=\{y})")
 }
