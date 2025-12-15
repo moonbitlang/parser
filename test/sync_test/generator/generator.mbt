@@ -12,7 +12,7 @@ pub fn normalize(json : String) -> String {
 ///|
 pub fn gen_test_for_parser(name : String) -> String {
   (
-    $|test "\{name}" (t : @test.T) {
+    $|test "\{name}" (t : @test.Test) {
     $|  t.run()
     $|}
   )
@@ -21,7 +21,7 @@ pub fn gen_test_for_parser(name : String) -> String {
 ///|
 pub fn gen_test_for_lexer(name : String) -> String {
   (
-    $|test "lexing \{name}" (t : @test.T) {
+    $|test "lexing \{name}" (t : @test.Test) {
     $|  lexer_test(t)
     $|}
   )
