@@ -1,4 +1,3 @@
-//!build: -w -27
 trait ObjectImpl {
   to_string(Self) -> String
   copy(Self) -> Object
@@ -7,28 +6,28 @@ trait ObjectImpl {
 }
 
 
-type Object &ObjectImpl
+struct Object(&ObjectImpl)
 
 fn[X: ObjectImpl] Object::make(x: X) -> Object {
   Object(x as &ObjectImpl)
 }
 
 fn copy(self: Object) -> Object {
-  self.inner().copy()
+  self.0.copy()
 }
 
 impl Show for Object with output(self, logger) {
-  logger.write_string(self.inner().to_string())
+  logger.write_string(self.0.to_string())
 }
 
 fn to_string(self : Object) -> String { Show::to_string(self) }
 
 fn call_method(self : Object, meth : String) -> Object {
-  self.inner().call_method(self, meth)
+  self.0.call_method(self, meth)
 }
 
 fn set_method(self : Object, method_name : String, meth : (Object) -> Object) -> Unit {
-  self.inner().set_method(method_name, meth)
+  self.0.set_method(method_name, meth)
 }
 
 
@@ -104,7 +103,7 @@ fn speak_name(base: Object) -> Object {
   let obj = base.copy()
   obj.set_method("speak", fn (self) {
     let name = self.call_method("name").to_string()
-    let message = base.inner().call_method(self, "speak").to_string()
+    let message = base.0.call_method(self, "speak").to_string()
     Object::make("\{name}: \{message}")
   })
   obj

@@ -1,9 +1,9 @@
-//!build: -w -27
+//!build: -alert -deprecated -w -27
 ///|
 traitalias @json.FromJson
 
 ///|
-type X0 Int derive(Show)
+struct X0(Int) derive(Show)
 
 ///|
 impl Default for X0 with default() {
@@ -29,7 +29,7 @@ fn[T : Show + ToJson + Default + @json.FromJson] id(_x : T) -> Unit {
 
 ///|
 fn[T : Show + ToJson + Default + @json.FromJson] id2(x : T) -> Unit {
-  type U T derive(Show, ToJson, Default, FromJson)
+  struct U(T) derive(Show, ToJson, Default, FromJson)
   let _ = U::default() // currently it is U[_]
   let _ : U = Default::default() // currently it is U[_]
   let _ = U::to_string

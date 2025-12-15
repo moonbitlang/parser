@@ -1,8 +1,7 @@
-//!build: -w -27
-type T1 T2
-type T2 T1
+struct T1(T2)
+struct T2(T1)
 
-type T3 T4
+struct T3(T4)
 
 enum T4 {
   Nil
@@ -10,7 +9,7 @@ enum T4 {
 }
 
 fn length(x : T3) -> Int{
-  match x.inner() {
+  match x.0 {
     Nil => 0
     Cons(_,y)=>length(y)
   }

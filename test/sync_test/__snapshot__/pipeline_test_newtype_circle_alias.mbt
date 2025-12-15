@@ -11,7 +11,7 @@ pub fn f(x : T) -> Unit {
 //--------------------------------
 
 ///|
-typealias P[PA] as PB
+type PB = P[PA]
 
 ///|
 struct PA(P[PB])

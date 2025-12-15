@@ -1,4 +1,3 @@
-//!build: -w -27
 trait XShow {
   repr(Self)->String
   to_string(Self)->String = _ // to_string -> to_stringx works
@@ -21,9 +20,9 @@ fn init {
   use_xshow(3)
 }
 
-type MyInt Int
+struct MyInt(Int)
 impl XShow for MyInt with repr(self : MyInt) -> String {
-  self.inner().to_string()
+  self.0.to_string()
 }
 
 fn init {

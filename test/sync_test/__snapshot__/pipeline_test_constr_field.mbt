@@ -1,4 +1,3 @@
-//!build: -w -27
 enum E {
   C1
   C2(Int, x~ : Int, Int, y~ : Int)
@@ -27,19 +26,19 @@ fn init {
   f2(C2(1, x=2, 3, y=4))
 }
 
-type NonRec Int
-type Rec Rec?
+struct NonRec(Int)
+struct Rec(Rec?)
 
 fn f3(x : NonRec) -> Unit {
   match x {
-    NonRec(_) as n => println(n.inner())
+    NonRec(_) as n => println(n.0)
   }
 }
 
 fn f4(x : Rec) -> Unit {
   match x {
-    Rec(None) as r => println(r.inner().is_empty())
-    Rec(_) as r => println(r.inner().is_empty())
+    Rec(None) as r => println(r.0.is_empty())
+    Rec(_) as r => println(r.0.is_empty())
   }
 }
 

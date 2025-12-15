@@ -199,6 +199,7 @@
                   }
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -342,6 +343,7 @@
                   }
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -514,6 +516,7 @@
                   }
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {
@@ -640,6 +643,7 @@
                   }
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Tuple",
                 "exprs": [
@@ -691,6 +695,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {

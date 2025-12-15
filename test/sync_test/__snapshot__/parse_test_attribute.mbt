@@ -70,9 +70,16 @@ pub suberror MyErr2 {
    ...
  }
 
+trait I {
+  #deprecated
+  f(Self) -> Unit
 
+  // should not report duplicate here
+  #deprecated
+  g(Self) -> Unit
 
-
-
-
-
+  // should report duplicate here
+  #deprecated
+  #deprecated
+  h(Self) -> Unit
+}

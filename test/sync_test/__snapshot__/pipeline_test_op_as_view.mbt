@@ -1,4 +1,3 @@
-//!build: -w -27
 struct View[T] {
   start: Int
   len: Int
@@ -24,17 +23,17 @@ fn[T] op_get(self: View[T], index: Int) -> T {
   self.buf[self.start + index]
 }
 
-type MyFixedArray[T] FixedArray[T]
+struct MyFixedArray[T](FixedArray[T])
 
 // TODO: bound check
 // TODO: check op_as_view protocol
 fn[T] MyFixedArray::op_as_view(self: MyFixedArray[T], start~: Int = 0, end?: Int) -> View[T] {
   let end = end.unwrap_or(self.length())
-  View::{ start, len: end - start, buf: self.inner() }
+  View::{ start, len: end - start, buf: self.0 }
 }
 
 fn[T] MyFixedArray::length(self: MyFixedArray[T]) -> Int {
-  self.inner().length()
+  self.0.length()
 }
 
 fn[T] make_view(self: MyFixedArray[T], start: Int, len: Int) -> View[T] {

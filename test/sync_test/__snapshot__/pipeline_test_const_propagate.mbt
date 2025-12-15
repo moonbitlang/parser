@@ -1,16 +1,15 @@
-//!build: -w -27
 ///|
-type S String
+struct S(String)
 
 ///|
 fn main {
   let a = S("xxx")
-  println(a.inner())
-  println(a0.inner())
+  println(a.0)
+  println(a0.0)
 }
 
 ///|
-type MyInt Int
+struct MyInt(Int)
 
 ///|
 let a0 : MyInt = MyInt(1)

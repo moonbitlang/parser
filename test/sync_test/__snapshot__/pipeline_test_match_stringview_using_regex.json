@@ -108,6 +108,7 @@
                       }
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Constant",
                     "c": {
@@ -142,6 +143,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Group",
                     "expr": {
@@ -211,6 +213,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Constant",
                     "c": {
@@ -681,6 +684,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Ident",
                     "id": {
@@ -702,6 +706,7 @@
                       "loc": null
                     }
                   ],
+                  "pat_loc": null,
                   "body": {
                     "type": "Expr::Raise",
                     "err_value": {

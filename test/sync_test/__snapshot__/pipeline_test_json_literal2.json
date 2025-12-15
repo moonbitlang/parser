@@ -9,20 +9,22 @@
         "tycon_loc": null,
         "params": [],
         "components": {
-          "type": "TypeDesc::Newtype",
-          "0": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "Int"
+          "type": "TypeDesc::TupleStruct",
+          "0": [
+            {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": {
+                  "type": "LongIdent::Ident",
+                  "0": "Int"
+                },
+                "loc": null
               },
+              "tys": [],
               "loc": null
-            },
-            "tys": [],
-            "loc": null
-          }
+            }
+          ]
         },
         "attrs": [],
         "doc": "",
@@ -92,8 +94,8 @@
                 "0": "MyType"
               },
               "expr": {
-                "type": "Expr::DotApply",
-                "self": {
+                "type": "Expr::Field",
+                "record": {
                   "type": "Expr::Ident",
                   "id": {
                     "type": "Var",
@@ -105,15 +107,10 @@
                   },
                   "loc": null
                 },
-                "method_name": {
-                  "type": "Label",
-                  "name": "inner",
+                "accessor": {
+                  "type": "Accessor::Index",
+                  "tuple_index": 0,
                   "loc": null
-                },
-                "args": [],
-                "return_self": false,
-                "attr": {
-                  "type": "ApplyAttr::NoAttr"
                 },
                 "loc": null
               },
@@ -508,51 +505,395 @@
                             "type": "ApplyAttr::NoAttr"
                           },
                           "loc": null
+                        },
+                        {
+                          "type": "Expr::Apply",
+                          "func": {
+                            "type": "Expr::Ident",
+                            "id": {
+                              "type": "Var",
+                              "name": {
+                                "type": "LongIdent::Ident",
+                                "0": "println"
+                              },
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "args": [
+                            {
+                              "type": "Argument",
+                              "value": {
+                                "type": "Expr::DotApply",
+                                "self": {
+                                  "type": "Expr::DotApply",
+                                  "self": {
+                                    "type": "Expr::Apply",
+                                    "func": {
+                                      "type": "Expr::Constr",
+                                      "constr": {
+                                        "type": "Constructor",
+                                        "name": {
+                                          "type": "ConstrName",
+                                          "name": "B",
+                                          "loc": null
+                                        },
+                                        "extra_info": {
+                                          "type": "ConstructorExtraInfo::TypeName",
+                                          "0": {
+                                            "type": "TypeName",
+                                            "name": {
+                                              "type": "LongIdent::Ident",
+                                              "0": "H"
+                                            },
+                                            "is_object": false,
+                                            "loc": null
+                                          }
+                                        },
+                                        "loc": null
+                                      },
+                                      "loc": null
+                                    },
+                                    "args": [
+                                      {
+                                        "type": "Argument",
+                                        "value": {
+                                          "type": "Expr::Constant",
+                                          "c": {
+                                            "type": "Constant::String",
+                                            "0": "x"
+                                          },
+                                          "loc": null
+                                        },
+                                        "kind": {
+                                          "type": "ArgumentKind::Positional"
+                                        }
+                                      },
+                                      {
+                                        "type": "Argument",
+                                        "value": {
+                                          "type": "Expr::Constant",
+                                          "c": {
+                                            "type": "Constant::Int",
+                                            "0": "3"
+                                          },
+                                          "loc": null
+                                        },
+                                        "kind": {
+                                          "type": "ArgumentKind::Positional"
+                                        }
+                                      },
+                                      {
+                                        "type": "Argument",
+                                        "value": {
+                                          "type": "Expr::Apply",
+                                          "func": {
+                                            "type": "Expr::Constr",
+                                            "constr": {
+                                              "type": "Constructor",
+                                              "name": {
+                                                "type": "ConstrName",
+                                                "name": "A",
+                                                "loc": null
+                                              },
+                                              "extra_info": {
+                                                "type": "ConstructorExtraInfo::NoExtraInfo"
+                                              },
+                                              "loc": null
+                                            },
+                                            "loc": null
+                                          },
+                                          "args": [
+                                            {
+                                              "type": "Argument",
+                                              "value": {
+                                                "type": "Expr::Constant",
+                                                "c": {
+                                                  "type": "Constant::Int",
+                                                  "0": "2"
+                                                },
+                                                "loc": null
+                                              },
+                                              "kind": {
+                                                "type": "ArgumentKind::Positional"
+                                              }
+                                            }
+                                          ],
+                                          "attr": {
+                                            "type": "ApplyAttr::NoAttr"
+                                          },
+                                          "loc": null
+                                        },
+                                        "kind": {
+                                          "type": "ArgumentKind::Positional"
+                                        }
+                                      }
+                                    ],
+                                    "attr": {
+                                      "type": "ApplyAttr::NoAttr"
+                                    },
+                                    "loc": null
+                                  },
+                                  "method_name": {
+                                    "type": "Label",
+                                    "name": "to_json",
+                                    "loc": null
+                                  },
+                                  "args": [],
+                                  "return_self": false,
+                                  "attr": {
+                                    "type": "ApplyAttr::NoAttr"
+                                  },
+                                  "loc": null
+                                },
+                                "method_name": {
+                                  "type": "Label",
+                                  "name": "stringify",
+                                  "loc": null
+                                },
+                                "args": [],
+                                "return_self": false,
+                                "attr": {
+                                  "type": "ApplyAttr::NoAttr"
+                                },
+                                "loc": null
+                              },
+                              "kind": {
+                                "type": "ArgumentKind::Positional"
+                              }
+                            }
+                          ],
+                          "attr": {
+                            "type": "ApplyAttr::NoAttr"
+                          },
+                          "loc": null
                         }
                       ],
                       "last_expr": {
-                        "type": "Expr::Apply",
-                        "func": {
-                          "type": "Expr::Ident",
-                          "id": {
-                            "type": "Var",
-                            "name": {
-                              "type": "LongIdent::Ident",
-                              "0": "println"
+                        "type": "Expr::Let",
+                        "pattern": {
+                          "type": "Pattern::Constraint",
+                          "pat": {
+                            "type": "Pattern::Var",
+                            "0": {
+                              "type": "Binder",
+                              "name": "arr_of_json",
+                              "loc": null
+                            }
+                          },
+                          "ty": {
+                            "type": "Type::Name",
+                            "constr_id": {
+                              "type": "ConstrId",
+                              "id": {
+                                "type": "LongIdent::Ident",
+                                "0": "Array"
+                              },
+                              "loc": null
                             },
+                            "tys": [
+                              {
+                                "type": "Type::Name",
+                                "constr_id": {
+                                  "type": "ConstrId",
+                                  "id": {
+                                    "type": "LongIdent::Ident",
+                                    "0": "Json"
+                                  },
+                                  "loc": null
+                                },
+                                "tys": [],
+                                "loc": null
+                              }
+                            ],
                             "loc": null
                           },
                           "loc": null
                         },
-                        "args": [
-                          {
-                            "type": "Argument",
-                            "value": {
-                              "type": "Expr::DotApply",
-                              "self": {
-                                "type": "Expr::DotApply",
-                                "self": {
+                        "expr": {
+                          "type": "Expr::Array",
+                          "exprs": [
+                            {
+                              "type": "Expr::Ident",
+                              "id": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "x"
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            },
+                            {
+                              "type": "Expr::Ident",
+                              "id": {
+                                "type": "Var",
+                                "name": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "y"
+                                },
+                                "loc": null
+                              },
+                              "loc": null
+                            }
+                          ],
+                          "loc": null
+                        },
+                        "body": {
+                          "type": "Expr::Let",
+                          "pattern": {
+                            "type": "Pattern::Constraint",
+                            "pat": {
+                              "type": "Pattern::Var",
+                              "0": {
+                                "type": "Binder",
+                                "name": "arr_of_json2",
+                                "loc": null
+                              }
+                            },
+                            "ty": {
+                              "type": "Type::Name",
+                              "constr_id": {
+                                "type": "ConstrId",
+                                "id": {
+                                  "type": "LongIdent::Ident",
+                                  "0": "ArrayView"
+                                },
+                                "loc": null
+                              },
+                              "tys": [
+                                {
+                                  "type": "Type::Name",
+                                  "constr_id": {
+                                    "type": "ConstrId",
+                                    "id": {
+                                      "type": "LongIdent::Ident",
+                                      "0": "Json"
+                                    },
+                                    "loc": null
+                                  },
+                                  "tys": [],
+                                  "loc": null
+                                }
+                              ],
+                              "loc": null
+                            },
+                            "loc": null
+                          },
+                          "expr": {
+                            "type": "Expr::Array",
+                            "exprs": [
+                              {
+                                "type": "Expr::Ident",
+                                "id": {
+                                  "type": "Var",
+                                  "name": {
+                                    "type": "LongIdent::Ident",
+                                    "0": "x"
+                                  },
+                                  "loc": null
+                                },
+                                "loc": null
+                              },
+                              {
+                                "type": "Expr::Ident",
+                                "id": {
+                                  "type": "Var",
+                                  "name": {
+                                    "type": "LongIdent::Ident",
+                                    "0": "y"
+                                  },
+                                  "loc": null
+                                },
+                                "loc": null
+                              }
+                            ],
+                            "loc": null
+                          },
+                          "body": {
+                            "type": "Expr::Let",
+                            "pattern": {
+                              "type": "Pattern::Constraint",
+                              "pat": {
+                                "type": "Pattern::Var",
+                                "0": {
+                                  "type": "Binder",
+                                  "name": "arr_of_json3",
+                                  "loc": null
+                                }
+                              },
+                              "ty": {
+                                "type": "Type::Name",
+                                "constr_id": {
+                                  "type": "ConstrId",
+                                  "id": {
+                                    "type": "LongIdent::Ident",
+                                    "0": "FixedArray"
+                                  },
+                                  "loc": null
+                                },
+                                "tys": [
+                                  {
+                                    "type": "Type::Name",
+                                    "constr_id": {
+                                      "type": "ConstrId",
+                                      "id": {
+                                        "type": "LongIdent::Ident",
+                                        "0": "Json"
+                                      },
+                                      "loc": null
+                                    },
+                                    "tys": [],
+                                    "loc": null
+                                  }
+                                ],
+                                "loc": null
+                              },
+                              "loc": null
+                            },
+                            "expr": {
+                              "type": "Expr::Array",
+                              "exprs": [
+                                {
+                                  "type": "Expr::Ident",
+                                  "id": {
+                                    "type": "Var",
+                                    "name": {
+                                      "type": "LongIdent::Ident",
+                                      "0": "x"
+                                    },
+                                    "loc": null
+                                  },
+                                  "loc": null
+                                },
+                                {
+                                  "type": "Expr::Ident",
+                                  "id": {
+                                    "type": "Var",
+                                    "name": {
+                                      "type": "LongIdent::Ident",
+                                      "0": "y"
+                                    },
+                                    "loc": null
+                                  },
+                                  "loc": null
+                                }
+                              ],
+                              "loc": null
+                            },
+                            "body": {
+                              "type": "Expr::Sequence",
+                              "exprs": [
+                                {
                                   "type": "Expr::Apply",
                                   "func": {
-                                    "type": "Expr::Constr",
-                                    "constr": {
-                                      "type": "Constructor",
+                                    "type": "Expr::Ident",
+                                    "id": {
+                                      "type": "Var",
                                       "name": {
-                                        "type": "ConstrName",
-                                        "name": "B",
-                                        "loc": null
-                                      },
-                                      "extra_info": {
-                                        "type": "ConstructorExtraInfo::TypeName",
-                                        "0": {
-                                          "type": "TypeName",
-                                          "name": {
-                                            "type": "LongIdent::Ident",
-                                            "0": "H"
-                                          },
-                                          "is_object": false,
-                                          "loc": null
-                                        }
+                                        "type": "LongIdent::Ident",
+                                        "0": "println"
                                       },
                                       "loc": null
                                     },
@@ -562,67 +903,59 @@
                                     {
                                       "type": "Argument",
                                       "value": {
-                                        "type": "Expr::Constant",
-                                        "c": {
-                                          "type": "Constant::String",
-                                          "0": "x"
-                                        },
-                                        "loc": null
-                                      },
-                                      "kind": {
-                                        "type": "ArgumentKind::Positional"
-                                      }
-                                    },
-                                    {
-                                      "type": "Argument",
-                                      "value": {
-                                        "type": "Expr::Constant",
-                                        "c": {
-                                          "type": "Constant::Int",
-                                          "0": "3"
-                                        },
-                                        "loc": null
-                                      },
-                                      "kind": {
-                                        "type": "ArgumentKind::Positional"
-                                      }
-                                    },
-                                    {
-                                      "type": "Argument",
-                                      "value": {
-                                        "type": "Expr::Apply",
-                                        "func": {
-                                          "type": "Expr::Constr",
-                                          "constr": {
-                                            "type": "Constructor",
-                                            "name": {
-                                              "type": "ConstrName",
-                                              "name": "A",
+                                        "type": "Expr::DotApply",
+                                        "self": {
+                                          "type": "Expr::Apply",
+                                          "func": {
+                                            "type": "Expr::Method",
+                                            "type_name": {
+                                              "type": "TypeName",
+                                              "name": {
+                                                "type": "LongIdent::Ident",
+                                                "0": "Json"
+                                              },
+                                              "is_object": false,
                                               "loc": null
                                             },
-                                            "extra_info": {
-                                              "type": "ConstructorExtraInfo::NoExtraInfo"
+                                            "method_name": {
+                                              "type": "Label",
+                                              "name": "array",
+                                              "loc": null
                                             },
                                             "loc": null
                                           },
+                                          "args": [
+                                            {
+                                              "type": "Argument",
+                                              "value": {
+                                                "type": "Expr::Ident",
+                                                "id": {
+                                                  "type": "Var",
+                                                  "name": {
+                                                    "type": "LongIdent::Ident",
+                                                    "0": "arr_of_json"
+                                                  },
+                                                  "loc": null
+                                                },
+                                                "loc": null
+                                              },
+                                              "kind": {
+                                                "type": "ArgumentKind::Positional"
+                                              }
+                                            }
+                                          ],
+                                          "attr": {
+                                            "type": "ApplyAttr::NoAttr"
+                                          },
                                           "loc": null
                                         },
-                                        "args": [
-                                          {
-                                            "type": "Argument",
-                                            "value": {
-                                              "type": "Expr::Constant",
-                                              "c": {
-                                                "type": "Constant::Int",
-                                                "0": "2"
-                                              },
-                                              "loc": null
-                                            },
-                                            "kind": {
-                                              "type": "ArgumentKind::Positional"
-                                            }
-                                          }
-                                        ],
+                                        "method_name": {
+                                          "type": "Label",
+                                          "name": "stringify",
+                                          "loc": null
+                                        },
+                                        "args": [],
+                                        "return_self": false,
                                         "attr": {
                                           "type": "ApplyAttr::NoAttr"
                                         },
@@ -638,37 +971,409 @@
                                   },
                                   "loc": null
                                 },
-                                "method_name": {
-                                  "type": "Label",
-                                  "name": "to_json",
+                                {
+                                  "type": "Expr::Apply",
+                                  "func": {
+                                    "type": "Expr::Ident",
+                                    "id": {
+                                      "type": "Var",
+                                      "name": {
+                                        "type": "LongIdent::Ident",
+                                        "0": "println"
+                                      },
+                                      "loc": null
+                                    },
+                                    "loc": null
+                                  },
+                                  "args": [
+                                    {
+                                      "type": "Argument",
+                                      "value": {
+                                        "type": "Expr::DotApply",
+                                        "self": {
+                                          "type": "Expr::Apply",
+                                          "func": {
+                                            "type": "Expr::Method",
+                                            "type_name": {
+                                              "type": "TypeName",
+                                              "name": {
+                                                "type": "LongIdent::Ident",
+                                                "0": "Json"
+                                              },
+                                              "is_object": false,
+                                              "loc": null
+                                            },
+                                            "method_name": {
+                                              "type": "Label",
+                                              "name": "array",
+                                              "loc": null
+                                            },
+                                            "loc": null
+                                          },
+                                          "args": [
+                                            {
+                                              "type": "Argument",
+                                              "value": {
+                                                "type": "Expr::DotApply",
+                                                "self": {
+                                                  "type": "Expr::Ident",
+                                                  "id": {
+                                                    "type": "Var",
+                                                    "name": {
+                                                      "type": "LongIdent::Ident",
+                                                      "0": "arr_of_json2"
+                                                    },
+                                                    "loc": null
+                                                  },
+                                                  "loc": null
+                                                },
+                                                "method_name": {
+                                                  "type": "Label",
+                                                  "name": "to_array",
+                                                  "loc": null
+                                                },
+                                                "args": [],
+                                                "return_self": false,
+                                                "attr": {
+                                                  "type": "ApplyAttr::NoAttr"
+                                                },
+                                                "loc": null
+                                              },
+                                              "kind": {
+                                                "type": "ArgumentKind::Positional"
+                                              }
+                                            }
+                                          ],
+                                          "attr": {
+                                            "type": "ApplyAttr::NoAttr"
+                                          },
+                                          "loc": null
+                                        },
+                                        "method_name": {
+                                          "type": "Label",
+                                          "name": "stringify",
+                                          "loc": null
+                                        },
+                                        "args": [],
+                                        "return_self": false,
+                                        "attr": {
+                                          "type": "ApplyAttr::NoAttr"
+                                        },
+                                        "loc": null
+                                      },
+                                      "kind": {
+                                        "type": "ArgumentKind::Positional"
+                                      }
+                                    }
+                                  ],
+                                  "attr": {
+                                    "type": "ApplyAttr::NoAttr"
+                                  },
                                   "loc": null
                                 },
-                                "args": [],
-                                "return_self": false,
-                                "attr": {
-                                  "type": "ApplyAttr::NoAttr"
+                                {
+                                  "type": "Expr::Apply",
+                                  "func": {
+                                    "type": "Expr::Ident",
+                                    "id": {
+                                      "type": "Var",
+                                      "name": {
+                                        "type": "LongIdent::Ident",
+                                        "0": "println"
+                                      },
+                                      "loc": null
+                                    },
+                                    "loc": null
+                                  },
+                                  "args": [
+                                    {
+                                      "type": "Argument",
+                                      "value": {
+                                        "type": "Expr::DotApply",
+                                        "self": {
+                                          "type": "Expr::Apply",
+                                          "func": {
+                                            "type": "Expr::Method",
+                                            "type_name": {
+                                              "type": "TypeName",
+                                              "name": {
+                                                "type": "LongIdent::Ident",
+                                                "0": "Json"
+                                              },
+                                              "is_object": false,
+                                              "loc": null
+                                            },
+                                            "method_name": {
+                                              "type": "Label",
+                                              "name": "array",
+                                              "loc": null
+                                            },
+                                            "loc": null
+                                          },
+                                          "args": [
+                                            {
+                                              "type": "Argument",
+                                              "value": {
+                                                "type": "Expr::DotApply",
+                                                "self": {
+                                                  "type": "Expr::ArrayGetSlice",
+                                                  "array": {
+                                                    "type": "Expr::Ident",
+                                                    "id": {
+                                                      "type": "Var",
+                                                      "name": {
+                                                        "type": "LongIdent::Ident",
+                                                        "0": "arr_of_json3"
+                                                      },
+                                                      "loc": null
+                                                    },
+                                                    "loc": null
+                                                  },
+                                                  "start_index": null,
+                                                  "end_index": null,
+                                                  "index_loc": null,
+                                                  "loc": null
+                                                },
+                                                "method_name": {
+                                                  "type": "Label",
+                                                  "name": "to_array",
+                                                  "loc": null
+                                                },
+                                                "args": [],
+                                                "return_self": false,
+                                                "attr": {
+                                                  "type": "ApplyAttr::NoAttr"
+                                                },
+                                                "loc": null
+                                              },
+                                              "kind": {
+                                                "type": "ArgumentKind::Positional"
+                                              }
+                                            }
+                                          ],
+                                          "attr": {
+                                            "type": "ApplyAttr::NoAttr"
+                                          },
+                                          "loc": null
+                                        },
+                                        "method_name": {
+                                          "type": "Label",
+                                          "name": "stringify",
+                                          "loc": null
+                                        },
+                                        "args": [],
+                                        "return_self": false,
+                                        "attr": {
+                                          "type": "ApplyAttr::NoAttr"
+                                        },
+                                        "loc": null
+                                      },
+                                      "kind": {
+                                        "type": "ArgumentKind::Positional"
+                                      }
+                                    }
+                                  ],
+                                  "attr": {
+                                    "type": "ApplyAttr::NoAttr"
+                                  },
+                                  "loc": null
+                                }
+                              ],
+                              "last_expr": {
+                                "type": "Expr::Let",
+                                "pattern": {
+                                  "type": "Pattern::Constraint",
+                                  "pat": {
+                                    "type": "Pattern::Var",
+                                    "0": {
+                                      "type": "Binder",
+                                      "name": "map_of_json",
+                                      "loc": null
+                                    }
+                                  },
+                                  "ty": {
+                                    "type": "Type::Name",
+                                    "constr_id": {
+                                      "type": "ConstrId",
+                                      "id": {
+                                        "type": "LongIdent::Ident",
+                                        "0": "Map"
+                                      },
+                                      "loc": null
+                                    },
+                                    "tys": [
+                                      {
+                                        "type": "Type::Name",
+                                        "constr_id": {
+                                          "type": "ConstrId",
+                                          "id": {
+                                            "type": "LongIdent::Ident",
+                                            "0": "String"
+                                          },
+                                          "loc": null
+                                        },
+                                        "tys": [],
+                                        "loc": null
+                                      },
+                                      {
+                                        "type": "Type::Name",
+                                        "constr_id": {
+                                          "type": "ConstrId",
+                                          "id": {
+                                            "type": "LongIdent::Ident",
+                                            "0": "Json"
+                                          },
+                                          "loc": null
+                                        },
+                                        "tys": [],
+                                        "loc": null
+                                      }
+                                    ],
+                                    "loc": null
+                                  },
+                                  "loc": null
+                                },
+                                "expr": {
+                                  "type": "Expr::Map",
+                                  "elems": [
+                                    {
+                                      "type": "MapExprElem",
+                                      "key": {
+                                        "type": "Constant::String",
+                                        "0": "x"
+                                      },
+                                      "expr": {
+                                        "type": "Expr::Ident",
+                                        "id": {
+                                          "type": "Var",
+                                          "name": {
+                                            "type": "LongIdent::Ident",
+                                            "0": "x"
+                                          },
+                                          "loc": null
+                                        },
+                                        "loc": null
+                                      },
+                                      "key_loc": null,
+                                      "loc": null
+                                    },
+                                    {
+                                      "type": "MapExprElem",
+                                      "key": {
+                                        "type": "Constant::String",
+                                        "0": "y"
+                                      },
+                                      "expr": {
+                                        "type": "Expr::Ident",
+                                        "id": {
+                                          "type": "Var",
+                                          "name": {
+                                            "type": "LongIdent::Ident",
+                                            "0": "y"
+                                          },
+                                          "loc": null
+                                        },
+                                        "loc": null
+                                      },
+                                      "key_loc": null,
+                                      "loc": null
+                                    }
+                                  ],
+                                  "loc": null
+                                },
+                                "body": {
+                                  "type": "Expr::Apply",
+                                  "func": {
+                                    "type": "Expr::Ident",
+                                    "id": {
+                                      "type": "Var",
+                                      "name": {
+                                        "type": "LongIdent::Ident",
+                                        "0": "println"
+                                      },
+                                      "loc": null
+                                    },
+                                    "loc": null
+                                  },
+                                  "args": [
+                                    {
+                                      "type": "Argument",
+                                      "value": {
+                                        "type": "Expr::DotApply",
+                                        "self": {
+                                          "type": "Expr::Apply",
+                                          "func": {
+                                            "type": "Expr::Method",
+                                            "type_name": {
+                                              "type": "TypeName",
+                                              "name": {
+                                                "type": "LongIdent::Ident",
+                                                "0": "Json"
+                                              },
+                                              "is_object": false,
+                                              "loc": null
+                                            },
+                                            "method_name": {
+                                              "type": "Label",
+                                              "name": "object",
+                                              "loc": null
+                                            },
+                                            "loc": null
+                                          },
+                                          "args": [
+                                            {
+                                              "type": "Argument",
+                                              "value": {
+                                                "type": "Expr::Ident",
+                                                "id": {
+                                                  "type": "Var",
+                                                  "name": {
+                                                    "type": "LongIdent::Ident",
+                                                    "0": "map_of_json"
+                                                  },
+                                                  "loc": null
+                                                },
+                                                "loc": null
+                                              },
+                                              "kind": {
+                                                "type": "ArgumentKind::Positional"
+                                              }
+                                            }
+                                          ],
+                                          "attr": {
+                                            "type": "ApplyAttr::NoAttr"
+                                          },
+                                          "loc": null
+                                        },
+                                        "method_name": {
+                                          "type": "Label",
+                                          "name": "stringify",
+                                          "loc": null
+                                        },
+                                        "args": [],
+                                        "return_self": false,
+                                        "attr": {
+                                          "type": "ApplyAttr::NoAttr"
+                                        },
+                                        "loc": null
+                                      },
+                                      "kind": {
+                                        "type": "ArgumentKind::Positional"
+                                      }
+                                    }
+                                  ],
+                                  "attr": {
+                                    "type": "ApplyAttr::NoAttr"
+                                  },
+                                  "loc": null
                                 },
                                 "loc": null
-                              },
-                              "method_name": {
-                                "type": "Label",
-                                "name": "stringify",
-                                "loc": null
-                              },
-                              "args": [],
-                              "return_self": false,
-                              "attr": {
-                                "type": "ApplyAttr::NoAttr"
                               },
                               "loc": null
                             },
-                            "kind": {
-                              "type": "ArgumentKind::Positional"
-                            }
-                          }
-                        ],
-                        "attr": {
-                          "type": "ApplyAttr::NoAttr"
+                            "loc": null
+                          },
+                          "loc": null
                         },
                         "loc": null
                       },

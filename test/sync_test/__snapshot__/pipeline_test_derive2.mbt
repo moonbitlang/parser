@@ -1,13 +1,12 @@
-//!build: -w -27
-type T1 Int
-impl Eq for T1 with equal(l : T1, r : T1) -> Bool { l.inner() == r.inner() }
+struct T1(Int)
+impl Eq for T1 with equal(l : T1, r : T1) -> Bool { l.0 == r.0 }
 
-type T2 Int
-fn T2::equal(l : T2, r : T2) -> Bool { l.inner() == r.inner() }
+struct T2(Int)
+fn T2::equal(l : T2, r : T2) -> Bool { l.0 == r.0 }
 impl Eq for T2 with equal(_l, _r) { true }
 
-type T3 Int
-impl Eq for T3 with equal(l : T3, r : T3) -> Bool { l.inner() == r.inner() }
+struct T3(Int)
+impl Eq for T3 with equal(l : T3, r : T3) -> Bool { l.0 == r.0 }
 
 struct R {
   x1 : T1

@@ -1,8 +1,7 @@
-//!build: -w -27
-type Arrow[T, B] (T) -> B
+struct Arrow[T, B]((T) -> B)
 
 fn call(arr : Arrow[Int, Int]) -> Unit {
-  (arr.inner())(1) |> println
+  (arr.0)(1) |> println
 }
 
 fn increment(x : Int) -> Int {

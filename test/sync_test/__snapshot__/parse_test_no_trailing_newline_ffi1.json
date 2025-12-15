@@ -65,7 +65,8 @@
         "0": {
           "type": "FuncStubs::Import",
           "module_name": "module",
-          "func_name": "function"
+          "func_name": "function",
+          "language": null
         }
       },
       "loc": null

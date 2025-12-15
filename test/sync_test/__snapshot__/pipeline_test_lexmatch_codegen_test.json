@@ -1,0 +1,136 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": {
+          "type": "Binder",
+          "name": "main",
+          "loc": null
+        },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": null,
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": null,
+        "error_type": {
+          "type": "ErrorType::NoErrorType"
+        },
+        "vis": {
+          "type": "Visibility::Default"
+        },
+        "attrs": [],
+        "doc": ""
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Let",
+          "pattern": {
+            "type": "Pattern::Var",
+            "0": {
+              "type": "Binder",
+              "name": "f",
+              "loc": null
+            }
+          },
+          "expr": {
+            "type": "Expr::Constant",
+            "c": {
+              "type": "Constant::String",
+              "0": "helo"
+            },
+            "loc": null
+          },
+          "body": {
+            "type": "Expr::If",
+            "cond": {
+              "type": "Expr::IsLexmatch",
+              "expr": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "f"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "strategy": null,
+              "pat": [
+                {
+                  "type": "LexTopPattern::Pattern",
+                  "0": {
+                    "type": "LexPattern::Regex",
+                    "lit": "el",
+                    "loc": null
+                  }
+                },
+                {
+                  "type": "LexTopPattern::Binder",
+                  "0": {
+                    "type": "Binder",
+                    "name": "r",
+                    "loc": null
+                  }
+                }
+              ],
+              "pat_loc": null,
+              "loc": null
+            },
+            "ifso": {
+              "type": "Expr::Apply",
+              "func": {
+                "type": "Expr::Ident",
+                "id": {
+                  "type": "Var",
+                  "name": {
+                    "type": "LongIdent::Ident",
+                    "0": "println"
+                  },
+                  "loc": null
+                },
+                "loc": null
+              },
+              "args": [
+                {
+                  "type": "Argument",
+                  "value": {
+                    "type": "Expr::Ident",
+                    "id": {
+                      "type": "Var",
+                      "name": {
+                        "type": "LongIdent::Ident",
+                        "0": "r"
+                      },
+                      "loc": null
+                    },
+                    "loc": null
+                  },
+                  "kind": {
+                    "type": "ArgumentKind::Positional"
+                  }
+                }
+              ],
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
+              "loc": null
+            },
+            "ifnot": null,
+            "loc": null
+          },
+          "loc": null
+        }
+      },
+      "loc": null
+    }
+  ]
+}

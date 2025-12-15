@@ -1,0 +1,569 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "MyInt",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Int"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [
+          {
+            "type": "DerivingDirective",
+            "type_name": {
+              "type": "TypeName",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "Eq"
+              },
+              "is_object": false,
+              "loc": null
+            },
+            "args": [],
+            "loc": null
+          },
+          {
+            "type": "DerivingDirective",
+            "type_name": {
+              "type": "TypeName",
+              "name": {
+                "type": "LongIdent::Ident",
+                "0": "Show"
+              },
+              "is_object": false,
+              "loc": null
+            },
+            "args": [],
+            "loc": null
+          }
+        ],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "MyHashMap",
+        "tycon_loc": null,
+        "params": [
+          {
+            "type": "TypeDeclBinder",
+            "name": "T",
+            "loc": null
+          }
+        ],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "HashMap"
+              },
+              "loc": null
+            },
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "T"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "MyTuple",
+        "tycon_loc": null,
+        "params": [
+          {
+            "type": "TypeDeclBinder",
+            "name": "A",
+            "loc": null
+          },
+          {
+            "type": "TypeDeclBinder",
+            "name": "B",
+            "loc": null
+          }
+        ],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "A"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "B"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "MyTriple",
+        "tycon_loc": null,
+        "params": [
+          {
+            "type": "TypeDeclBinder",
+            "name": "A",
+            "loc": null
+          },
+          {
+            "type": "TypeDeclBinder",
+            "name": "B",
+            "loc": null
+          },
+          {
+            "type": "TypeDeclBinder",
+            "name": "C",
+            "loc": null
+          }
+        ],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "A"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "B"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "C"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "X",
+        "tycon_loc": null,
+        "params": [
+          {
+            "type": "TypeDeclBinder",
+            "name": "X",
+            "loc": null
+          }
+        ],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "X"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "X",
+        "tycon_loc": null,
+        "params": [
+          {
+            "type": "TypeDeclBinder",
+            "name": "X",
+            "loc": null
+          }
+        ],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Tuple",
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "X"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              },
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [],
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Y",
+        "tycon_loc": null,
+        "params": [
+          {
+            "type": "TypeDeclBinder",
+            "name": "Y",
+            "loc": null
+          }
+        ],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Int"
+              },
+              "loc": null
+            },
+            "tys": [
+              {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": {
+                    "type": "LongIdent::Ident",
+                    "0": "Int"
+                  },
+                  "loc": null
+                },
+                "tys": [
+                  {
+                    "type": "Type::Name",
+                    "constr_id": {
+                      "type": "ConstrId",
+                      "id": {
+                        "type": "LongIdent::Ident",
+                        "0": "Int"
+                      },
+                      "loc": null
+                    },
+                    "tys": [],
+                    "loc": null
+                  }
+                ],
+                "loc": null
+              }
+            ],
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "X",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Name",
+            "constr_id": {
+              "type": "ConstrId",
+              "id": {
+                "type": "LongIdent::Ident",
+                "0": "Y"
+              },
+              "loc": null
+            },
+            "tys": [],
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Z",
+        "tycon_loc": null,
+        "params": [
+          {
+            "type": "TypeDeclBinder",
+            "name": "X",
+            "loc": null
+          }
+        ],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Any",
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Z",
+        "tycon_loc": null,
+        "params": [
+          {
+            "type": "TypeDeclBinder",
+            "name": "I",
+            "loc": null
+          }
+        ],
+        "components": {
+          "type": "TypeDesc::Newtype",
+          "0": {
+            "type": "Type::Any",
+            "loc": null
+          }
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": {
+          "type": "Visibility::Default"
+        },
+        "deriving": [],
+        "loc": null
+      }
+    }
+  ]
+}

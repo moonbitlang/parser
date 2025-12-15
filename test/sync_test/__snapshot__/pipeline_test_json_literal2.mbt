@@ -1,8 +1,7 @@
-//!build: -w -27
-type MyType Int
+struct MyType(Int)
 
 impl ToJson for MyType with to_json(self) {
-  { "MyType": self.inner() }
+  { "MyType": self.0 }
 }
 
 fn init {
@@ -14,6 +13,14 @@ fn init {
   let json : Json = [ x, y, z, [ ..json_arr, w ] ]
   println(json.stringify())
   println(H::B("x",3, A(2)).to_json().stringify())
+  let arr_of_json : Array[Json] = [ x, y ]
+  let arr_of_json2 : ArrayView[Json] = [ x, y ]
+  let arr_of_json3 : FixedArray[Json] = [ x, y ]
+  println(Json::array(arr_of_json).stringify())
+  println(Json::array(arr_of_json2.to_array()).stringify())
+  println(Json::array(arr_of_json3[:].to_array()).stringify())
+  let map_of_json : Map[String, Json] = { "x": x, "y": y }
+  println(Json::object(map_of_json).stringify())
 }
 
 

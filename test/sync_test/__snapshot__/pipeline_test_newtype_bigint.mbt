@@ -1,7 +1,6 @@
-//!build: -w -27
-type MyBigInt BigInt
+struct MyBigInt(BigInt)
 fn f(x : MyBigInt) -> Unit {
-  match x.inner() {
+  match x.0 {
     0 => println("zero")
     _ => ()
   }

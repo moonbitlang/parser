@@ -1,5 +1,4 @@
-//!build: -w -27
-type MyInt Int
+struct MyInt(Int)
 
 impl Eq for MyInt with equal(x, y) = "%i32_eq"
 

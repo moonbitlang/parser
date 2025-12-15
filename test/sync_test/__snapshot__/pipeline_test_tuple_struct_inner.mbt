@@ -1,3 +1,4 @@
+//!build: -alert -deprecated
 struct MyInt(Int) derive(Show, Eq, Default, Compare)
 
 fn init {

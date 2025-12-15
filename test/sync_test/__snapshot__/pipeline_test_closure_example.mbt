@@ -1,9 +1,8 @@
-//!build: -w -27
 struct T {
     x : Int
 } 
 
-type U (Int) -> Int
+struct U((Int) -> Int)
 
 
 fn init {

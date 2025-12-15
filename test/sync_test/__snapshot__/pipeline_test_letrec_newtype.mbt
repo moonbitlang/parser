@@ -1,7 +1,6 @@
-//!build: -w -27
-type F1 (Int) -> Bool
-type F2 (Int) -> Int
-type F3[T] (T) -> Unit
+struct F1( (Int) -> Bool)
+struct F2( (Int) -> Int)
+struct F3[T]( (T) -> Unit)
 
 fn init {
   letrec even: F1 = x => if x == 0 { true } else { odd(x - 1) }
@@ -24,13 +23,13 @@ fn init {
   f1(10)
 }
 
-type R[X] (R[X]) -> X
+struct R[X]((R[X]) -> X)
 
 fn[X, Y] y(f : ((X) -> Y) -> (X) -> Y) -> (X) -> Y {
   letrec ff: R[(X) -> Y] = fn(x: R[(X) -> Y]) -> (X) -> Y {
-    fn(a) { f((x.inner())(x))(a) }
+    fn(a) { f((x.0)(x))(a) }
   }
-  ff(R::R(fn(x) { fn (a) { f((x.inner())(x))(a) } }))
+  ff(R::R(fn(x) { fn (a) { f((x.0)(x))(a) } }))
 }
 
 fn factx(f: ((Int) -> Int)) -> (Int) -> Int {

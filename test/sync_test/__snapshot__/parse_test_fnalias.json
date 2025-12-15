@@ -1,0 +1,354 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopFuncAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "type_name": null,
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "f",
+            "loc": null
+          },
+          "target": null
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "is_list": false,
+      "doc": "",
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "type_name": null,
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "f",
+            "loc": null
+          },
+          "target": null
+        },
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "g",
+            "loc": null
+          },
+          "target": null
+        },
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "h",
+            "loc": null
+          },
+          "target": null
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Pub",
+        "attr": null,
+        "loc": null
+      },
+      "attrs": [],
+      "is_list": true,
+      "doc": "",
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncAlias",
+      "pkg": null,
+      "type_name": null,
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "alias",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "local",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "is_list": false,
+      "doc": "",
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncAlias",
+      "pkg": null,
+      "type_name": null,
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "alias1",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "local1",
+            "loc": null
+          }
+        },
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "alias2",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "local2",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "is_list": true,
+      "doc": "",
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncAlias",
+      "pkg": null,
+      "type_name": {
+        "type": "Label",
+        "name": "LocalTypeName",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "meth1",
+            "loc": null
+          },
+          "target": null
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "is_list": false,
+      "doc": "",
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncAlias",
+      "pkg": null,
+      "type_name": {
+        "type": "Label",
+        "name": "LocalTypeName",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "meth_two",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "meth1",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "is_list": false,
+      "doc": "",
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncAlias",
+      "pkg": null,
+      "type_name": {
+        "type": "Label",
+        "name": "LocalTypeName",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "meth1",
+            "loc": null
+          },
+          "target": null
+        },
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "meth_two",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "meth2",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "is_list": true,
+      "doc": "",
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "type_name": {
+        "type": "Label",
+        "name": "Type",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "meth1",
+            "loc": null
+          },
+          "target": null
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "is_list": false,
+      "doc": "",
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "type_name": {
+        "type": "Label",
+        "name": "Type",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "meth_two",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "meth2",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "is_list": false,
+      "doc": "",
+      "loc": null
+    },
+    {
+      "type": "Impl::TopFuncAlias",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "type_name": {
+        "type": "Label",
+        "name": "Type",
+        "loc": null
+      },
+      "targets": [
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "meth1",
+            "loc": null
+          },
+          "target": null
+        },
+        {
+          "type": "AliasTarget",
+          "binder": {
+            "type": "Binder",
+            "name": "meth_two",
+            "loc": null
+          },
+          "target": {
+            "type": "Label",
+            "name": "meth2",
+            "loc": null
+          }
+        }
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "is_list": true,
+      "doc": "",
+      "loc": null
+    }
+  ]
+}

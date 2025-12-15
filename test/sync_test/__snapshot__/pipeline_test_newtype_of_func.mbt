@@ -1,11 +1,10 @@
-//!build: -w -27
-type F0 () -> Unit
+struct F0(() -> Unit)
 
 fn F0::apply(self : Self) -> Unit {
   self()
 }
 
-type F2[X, Y] (X, Y) -> Unit
+struct F2[X, Y]((X, Y) -> Unit)
 
 fn[X, Y] F2::apply(self : F2[X, Y], x : X, y : Y) -> Unit {
   self(x, y)

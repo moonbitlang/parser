@@ -1,14 +1,13 @@
-//!build: -w -27
 trait I {
   f(Self) -> Int
 }
 
-type T Int
+struct T(Int)
 
 let a: Int = g(T(1))
 
 pub impl I for T with f(self: T) -> Int {
-  self.inner() + b
+  self.0 + b
 }
 
 pub fn[X:I] g(x: X) -> Int {

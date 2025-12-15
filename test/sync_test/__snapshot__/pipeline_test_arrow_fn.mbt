@@ -1,4 +1,3 @@
-//!build: -w -27
 ///|
 fn init {
   let t = T(42)
@@ -12,7 +11,7 @@ fn init {
 }
 
 ///|
-type T Int
+struct T(Int)
 
 ///|
 fn T::f(self : T, cb : () -> Unit) -> Unit {
@@ -22,12 +21,12 @@ fn T::f(self : T, cb : () -> Unit) -> Unit {
 
 ///|
 fn T::g(self : T, cb : (Int) -> Unit) -> Unit {
-  cb(self.inner())
+  cb(self.0)
 }
 
 ///|
 fn T::h(self : T, cb : (Int, Int) -> Unit) -> Unit {
-  cb(self.inner(), self.inner())
+  cb(self.0, self.0)
 }
 
 fn init {

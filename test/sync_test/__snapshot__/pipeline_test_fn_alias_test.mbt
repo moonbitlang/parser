@@ -1,4 +1,3 @@
-//!build: -w -27
 ///|
 trait I {
   obj_meth(Self) -> Int
@@ -11,11 +10,11 @@ typealias &I as Obj
 fnalias Obj::obj_meth
 
 ///|
-type MyInt Int
+struct MyInt(Int)
 
 ///|
 impl I for MyInt with obj_meth(s) {
-  s.inner() * 1000
+  s.0 * 1000
 }
 
 ///|

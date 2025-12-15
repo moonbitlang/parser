@@ -76,61 +76,16 @@
     "loc": "2:18-2:19"
   },
   {
-    "token": "FN",
-    "loc": "3:3-3:5"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "f2"
-    ],
-    "loc": "3:6-3:8"
-  },
-  {
-    "token": "EXCLAMATION",
-    "loc": "3:8-3:9"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "3:10-3:11"
+    "token": "NEWLINE",
+    "loc": "3:1-3:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "3:11-3:12"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "4:5-4:6"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "4:7-4:9"
-  },
-  {
-    "token": [
-      "INT",
-      "42"
-    ],
-    "loc": "4:10-4:12"
+    "loc": "4:1-4:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:12-4:13"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "5:3-5:4"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "5:4-5:4"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "5:4-5:5"
+    "loc": "5:1-5:2"
   },
   {
     "token": [
@@ -208,90 +163,12 @@
     "loc": "6:30-6:31"
   },
   {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "6:31-6:31"
-  },
-  {
     "token": "NEWLINE",
     "loc": "6:31-6:32"
   },
   {
-    "token": [
-      "LIDENT",
-      "apply"
-    ],
-    "loc": "7:3-7:8"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "7:8-7:9"
-  },
-  {
-    "token": "FN",
-    "loc": "7:9-7:11"
-  },
-  {
-    "token": "EXCLAMATION",
-    "loc": "7:11-7:12"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "7:13-7:14"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "x"
-    ],
-    "loc": "7:15-7:16"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "7:17-7:19"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "x"
-    ],
-    "loc": "7:20-7:21"
-  },
-  {
-    "token": "PLUS",
-    "loc": "7:22-7:23"
-  },
-  {
-    "token": [
-      "INT",
-      "1"
-    ],
-    "loc": "7:24-7:25"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "7:25-7:26"
-  },
-  {
-    "token": "COMMA",
-    "loc": "7:26-7:27"
-  },
-  {
-    "token": [
-      "INT",
-      "42"
-    ],
-    "loc": "7:28-7:30"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "7:30-7:31"
-  },
-  {
     "token": "NEWLINE",
-    "loc": "7:31-7:32"
+    "loc": "7:1-7:2"
   },
   {
     "token": "RBRACE",

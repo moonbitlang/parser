@@ -1,41 +1,40 @@
-//!build: -w -27
 // derived Eq + Compare
-type T1 Int derive(Compare, Eq)
+struct T1(Int) derive(Compare, Eq)
 let t1: T1 = T1(1)
 
-type T2 Int derive(Eq, Compare)
+struct T2(Int) derive(Eq, Compare)
 let t2: T2 = T2(2)
 
 // manual Eq + derived Compare
-type T3 Int derive(Compare)
+struct T3(Int) derive(Compare)
 let t3: T3 = T3(3)
 
 impl Eq for T3 with equal(x: T3, y: T3) -> Bool {
   println("T3::op_equal")
-  x.inner() == y.inner()
+  x.0 == y.0
 }
 
 // derived Eq + manual Compare
-type T4 Int derive(Eq)
+struct T4(Int) derive(Eq)
 let t4: T4 = T4(4)
 
 impl Compare for T4 with compare(x: T4, y: T4) -> Int {
   println("T4::compare")
-  x.inner().compare(y.inner())
+  x.0.compare(y.0)
 }
 
 // manual Eq + Compare
-type T5 Int
+struct T5(Int)
 let t5: T5 = T5(5)
 
 impl Eq for T5 with equal(x: T5, y: T5) -> Bool {
   println("T5::op_equal")
-  x.inner() == y.inner()
+  x.0 == y.0
 }
 
 impl Compare for T5 with compare(x: T5, y: T5) -> Int {
   println("T5::compare")
-  x.inner().compare(y.inner())
+  x.0.compare(y.0)
 }
 
 

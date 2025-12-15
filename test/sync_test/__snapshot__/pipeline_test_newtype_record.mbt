@@ -1,10 +1,9 @@
-//!build: -w -27
 struct R {
   mut x : Int
   y : Int
 }
 
-type NTR R
+struct NTR(R)
 
 fn init {
   let ntr : NTR = { x: 1, y: 2 }

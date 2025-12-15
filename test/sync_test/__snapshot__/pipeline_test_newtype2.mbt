@@ -1,7 +1,5 @@
 
-//!build: -w -27
-
-type T T? derive (Show)
+struct T(T?) derive (Show)
 
 fn open(x: T) -> T {
   match x {

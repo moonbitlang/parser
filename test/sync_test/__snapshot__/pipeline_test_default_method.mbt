@@ -1,6 +1,4 @@
 
-//!build: -w -27
-
 trait I {
   f(Self) -> Unit
   g(Self) -> Unit = _
@@ -15,7 +13,7 @@ fn[X: I] useI(x: X) -> Unit {
   x.g()
 }
 
-type T1 Int
+struct T1(Int)
 let t1: T1 = T1(42)
 
 impl I for T1 with f(_self: T1) -> Unit {
@@ -30,7 +28,7 @@ fn init {
 }
 
 
-type T2 Int
+struct T2(Int)
 let t2: T2 = T2(42)
 
 impl I for T2 with f(_self: T2) -> Unit {
@@ -62,7 +60,7 @@ fn[X: Sub] use_Sub(x: X) -> Unit {
   x.h()
 }
 
-type T3 Int
+struct T3(Int)
 let t3: T3 = T3(42)
 
 impl I for T3 with f(_self: T3) -> Unit {}
@@ -91,7 +89,7 @@ fn init {
   (t3 as &Sub).h()
 }
 
-type T4 Int
+struct T4(Int)
 let t4: T4 = T4(42)
 
 impl I for T4 with f(_self: T4) -> Unit { println("T4::f()") }

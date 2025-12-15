@@ -1409,31 +1409,276 @@
     "loc": "72:1-72:2"
   },
   {
-    "token": "NEWLINE",
-    "loc": "73:1-73:2"
+    "token": "TRAIT",
+    "loc": "73:1-73:6"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "I"
+    ],
+    "loc": "73:7-73:8"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "73:9-73:10"
   },
   {
     "token": "NEWLINE",
-    "loc": "74:1-74:2"
+    "loc": "73:10-73:11"
+  },
+  {
+    "token": [
+      "ATTRIBUTE",
+      {
+        "id": "deprecated",
+        "dot_id": "",
+        "raw_payload": ""
+      }
+    ],
+    "loc": "74:3-74:14"
   },
   {
     "token": "NEWLINE",
-    "loc": "75:1-75:2"
+    "loc": "74:14-74:15"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "f"
+    ],
+    "loc": "75:3-75:4"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "75:4-75:5"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Self"
+    ],
+    "loc": "75:5-75:9"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "75:9-75:10"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "75:11-75:13"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Unit"
+    ],
+    "loc": "75:14-75:18"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "75:18-75:18"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "75:18-75:19"
   },
   {
     "token": "NEWLINE",
     "loc": "76:1-76:2"
   },
   {
-    "token": "NEWLINE",
-    "loc": "77:1-77:2"
+    "token": [
+      "COMMENT",
+      {
+        "content": "// should not report duplicate here",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": true,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "77:3-77:38"
   },
   {
     "token": "NEWLINE",
-    "loc": "78:1-78:2"
+    "loc": "77:38-77:39"
+  },
+  {
+    "token": [
+      "ATTRIBUTE",
+      {
+        "id": "deprecated",
+        "dot_id": "",
+        "raw_payload": ""
+      }
+    ],
+    "loc": "78:3-78:14"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "78:14-78:15"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "g"
+    ],
+    "loc": "79:3-79:4"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "79:4-79:5"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Self"
+    ],
+    "loc": "79:5-79:9"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "79:9-79:10"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "79:11-79:13"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Unit"
+    ],
+    "loc": "79:14-79:18"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "79:18-79:18"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "79:18-79:19"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "80:1-80:2"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "// should report duplicate here",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": true,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "81:3-81:34"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "81:34-81:35"
+  },
+  {
+    "token": [
+      "ATTRIBUTE",
+      {
+        "id": "deprecated",
+        "dot_id": "",
+        "raw_payload": ""
+      }
+    ],
+    "loc": "82:3-82:14"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "82:14-82:15"
+  },
+  {
+    "token": [
+      "ATTRIBUTE",
+      {
+        "id": "deprecated",
+        "dot_id": "",
+        "raw_payload": ""
+      }
+    ],
+    "loc": "83:3-83:14"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "83:14-83:15"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "h"
+    ],
+    "loc": "84:3-84:4"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "84:4-84:5"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Self"
+    ],
+    "loc": "84:5-84:9"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "84:9-84:10"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "84:11-84:13"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Unit"
+    ],
+    "loc": "84:14-84:18"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "84:18-84:19"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "85:1-85:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "85:2-85:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "85:2-85:3"
   },
   {
     "token": "EOF",
-    "loc": "79:1-79:1"
+    "loc": "86:1-86:1"
   }
 ]

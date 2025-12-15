@@ -1,4 +1,3 @@
-//!build: -w -27
 ///|
 suberror LE Int derive(Show)
 
@@ -18,16 +17,16 @@ fn main {
 
 // test recursive newtype
 fn init {
-  type T (S) -> Int
-  type S T
+  struct T((S) -> Int)
+  struct S(T)
   letrec f = fn(t: T) -> Int {
-    (t.inner())(S(t))
+    (t.0)(S(t))
   }
   and use_t = fn(t: T) -> Int {
     f(t)
   }
   and use_s = fn(s: S) -> Int {
-    f(s.inner())
+    f(s.0)
   }
   let t : T = T(fn (_x) { 42 })
   println(use_t(t))

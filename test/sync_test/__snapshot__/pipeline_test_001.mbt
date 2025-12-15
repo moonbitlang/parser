@@ -1,4 +1,3 @@
-//!build: -w -27
 fn init {
   printX()
   println(a)
@@ -22,7 +21,7 @@ fn nested () -> () -> Unit  {
   printY
 }
 
-type MyArray Array[Int] derive(Show)
+struct MyArray(Array[Int]) derive(Show)
 
 fn init {
   let v = [1,2,3]  

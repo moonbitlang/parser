@@ -141,7 +141,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": false,
+                "kind": {
+                  "type": "RangeKind::Exclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -201,7 +203,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": true,
+                "kind": {
+                  "type": "RangeKind::Inclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -257,7 +261,9 @@
                   "type": "Pattern::Any",
                   "loc": null
                 },
-                "inclusive": false,
+                "kind": {
+                  "type": "RangeKind::Exclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -487,7 +493,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": false,
+                "kind": {
+                  "type": "RangeKind::Exclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -547,7 +555,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": true,
+                "kind": {
+                  "type": "RangeKind::Inclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -603,7 +613,9 @@
                   "type": "Pattern::Any",
                   "loc": null
                 },
-                "inclusive": false,
+                "kind": {
+                  "type": "RangeKind::Exclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -837,7 +849,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": true,
+                "kind": {
+                  "type": "RangeKind::Inclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -897,7 +911,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": true,
+                "kind": {
+                  "type": "RangeKind::Inclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -957,7 +973,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": true,
+                "kind": {
+                  "type": "RangeKind::Inclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -1017,7 +1035,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": true,
+                "kind": {
+                  "type": "RangeKind::Inclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -1077,7 +1097,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": false,
+                "kind": {
+                  "type": "RangeKind::Exclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -1311,7 +1333,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": true,
+                "kind": {
+                  "type": "RangeKind::Inclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -1371,7 +1395,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": true,
+                "kind": {
+                  "type": "RangeKind::Inclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -1431,7 +1457,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": true,
+                "kind": {
+                  "type": "RangeKind::Inclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -1491,7 +1519,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": true,
+                "kind": {
+                  "type": "RangeKind::Inclusive"
+                },
                 "loc": null
               },
               "guard": null,
@@ -1551,7 +1581,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": false,
+                "kind": {
+                  "type": "RangeKind::Exclusive"
+                },
                 "loc": null
               },
               "guard": null,

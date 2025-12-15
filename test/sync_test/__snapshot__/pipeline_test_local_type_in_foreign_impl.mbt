@@ -1,5 +1,4 @@
-//!build: -w -27
-type T Int derive(Show)
+struct T(Int) derive(Show)
 
 // local type inside an `impl` for foreign trait
 impl @json.FromJson for T with from_json(json, _path) {

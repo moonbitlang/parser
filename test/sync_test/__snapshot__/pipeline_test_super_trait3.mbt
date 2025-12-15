@@ -1,5 +1,4 @@
-//!build: -w -27
-pub(all) type Requirement Int derive(Show)
+pub(all) struct Requirement(Int) derive(Show)
 
 pub(all) enum Doc {
   Empty

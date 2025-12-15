@@ -524,18 +524,66 @@
     "loc": "27:1-27:2"
   },
   {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "27:2-27:2"
-  },
-  {
     "token": "NEWLINE",
     "loc": "27:2-27:3"
   },
   {
+    "token": "NEWLINE",
+    "loc": "28:1-28:2"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "// empty list, accept for completion",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": true,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "29:1-29:37"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "29:37-29:38"
+  },
+  {
+    "token": "USING",
+    "loc": "30:1-30:6"
+  },
+  {
+    "token": [
+      "PACKAGE_NAME",
+      "pkg"
+    ],
+    "loc": "30:7-30:11"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "30:12-30:13"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "30:13-30:14"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "30:14-30:14"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "30:14-30:15"
+  },
+  {
     "token": "EOF",
-    "loc": "28:1-28:1"
+    "loc": "31:1-31:1"
   }
 ]

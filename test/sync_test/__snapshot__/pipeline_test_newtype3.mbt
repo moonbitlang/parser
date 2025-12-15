@@ -1,6 +1,6 @@
-//!build: -w -27
+//!build: -alert -deprecated
 
-type T Int? derive (Show)
+struct T(Int?) derive (Show)
 
 fn[X, Y] apply(f: (X) -> Y, x: X) -> Y {
   f(x)

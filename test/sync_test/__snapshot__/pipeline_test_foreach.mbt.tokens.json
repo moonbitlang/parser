@@ -242,12 +242,27 @@
     "loc": "5:40-5:41"
   },
   {
+    "token": [
+      "DOT_LIDENT",
+      "iter2"
+    ],
+    "loc": "5:42-5:47"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "5:47-5:48"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "5:48-5:49"
+  },
+  {
     "token": "LBRACE",
-    "loc": "5:42-5:43"
+    "loc": "5:50-5:51"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:43-5:44"
+    "loc": "5:51-5:52"
   },
   {
     "token": [

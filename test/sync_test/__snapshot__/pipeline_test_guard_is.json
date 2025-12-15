@@ -406,7 +406,9 @@
                           },
                           "loc": null
                         },
-                        "inclusive": true,
+                        "kind": {
+                          "type": "RangeKind::Inclusive"
+                        },
                         "loc": null
                       }
                     }

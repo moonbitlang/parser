@@ -26,9 +26,9 @@ fn init {
   let _ = { println(42) } catch { _ => 2 }
   let _ = try? { println(42) }
 
-  let _ = try fn { _ => 42 } catch { _ => 2 }
-  let _ = fn { _ => 42 } catch { _ => 2 }
-  let _ = try? fn { _ => 42 }
+  let _ = try (_ => 42) catch { _ => 2 }
+  let _ = (_ => 42) catch { _ => 2 }
+  let _ = try? (_ => 42)
   
 }
 

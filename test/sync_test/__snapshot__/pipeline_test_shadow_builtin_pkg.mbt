@@ -1,10 +1,9 @@
-//!build: -w -27
 trait Set {
   has(Self, Int) -> Bool
 }
 
-type FnSet (Int) -> Bool
-impl Set for FnSet with has(self, k) { (self.inner())(k) }
+struct FnSet((Int) -> Bool)
+impl Set for FnSet with has(self, k) { (self.0)(k) }
 
 fn &Set::empty() -> &Set {
   FnSet(_x => false)

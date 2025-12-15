@@ -1,4 +1,3 @@
-//!build: -w -27
 trait T {
   f(Self) -> Int
 }
@@ -7,15 +6,15 @@ trait S {
   g(Self) -> Int
 }
 
-type TT &T
+struct TT(&T)
 
 pub impl S for TT with g(self: TT) -> Int {
-  self.inner().f() + 1001
+  self.0.f() + 1001
 }
 
-type MyInt Int
+struct MyInt(Int)
 
-impl T for MyInt with f(self) -> Int { self.inner() + 999 }
+impl T for MyInt with f(self) -> Int { self.0 + 999 }
 
 fn init {
   let a = use_s(TT::TT(MyInt::MyInt(0)))

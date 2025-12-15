@@ -864,7 +864,9 @@
                   },
                   "loc": null
                 },
-                "inclusive": true,
+                "kind": {
+                  "type": "RangeKind::Inclusive"
+                },
                 "loc": null
               },
               "loc": null
@@ -1032,7 +1034,9 @@
                     },
                     "loc": null
                   },
-                  "inclusive": true,
+                  "kind": {
+                    "type": "RangeKind::Inclusive"
+                  },
                   "loc": null
                 },
                 "loc": null

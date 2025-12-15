@@ -1,9 +1,8 @@
-//!build: -w -27
 trait I {
   add(Self, Self) -> Self
 }
 
-type T Int derive(Show)
+struct T(Int) derive(Show)
 impl I for T with add(self : T, other : T) -> T = "%i32_add"
 
 fn init {

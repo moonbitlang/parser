@@ -126,6 +126,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Ident",
                 "id": {
@@ -147,6 +148,7 @@
                   "loc": null
                 }
               ],
+              "pat_loc": null,
               "body": {
                 "type": "Expr::Apply",
                 "func": {

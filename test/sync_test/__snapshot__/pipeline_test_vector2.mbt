@@ -1,8 +1,4 @@
 
-
-//!build: -w -27
-
-
 struct Vector[X] {
   mut data: UninitializedArray[X]
   mut len: Int
@@ -45,8 +41,8 @@ fn[X] push_back(self: Vector[X], elem: X) -> Unit {
 }
 
 
-type T Int derive (Default)
-type U Int
+struct T(Int) derive (Default)
+struct U(Int)
 
 fn init {
   let v1: Vector[T] = Vector::new(2)

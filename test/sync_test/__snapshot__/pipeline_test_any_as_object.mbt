@@ -1,12 +1,12 @@
-//!build: -w -27
+
 trait T {
   f(Self) -> Int
 }
 
-type F (F) -> Int
+struct F((F) -> Int)
 
 impl T for F with f(self: F) -> Int {
-  (self.inner())(self)
+  (self.0)(self)
 }
 
 fn use_t(t: &T) -> Int {

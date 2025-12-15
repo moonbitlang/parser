@@ -152,60 +152,74 @@
               }
             ],
             "expr": {
-              "type": "Expr::Map",
-              "elems": [
-                {
-                  "type": "MapExprElem",
-                  "key": {
-                    "type": "Constant::String",
-                    "0": "x"
-                  },
-                  "expr": {
-                    "type": "Expr::Constant",
-                    "c": {
-                      "type": "Constant::Int",
-                      "0": "1"
+              "type": "Expr::DotApply",
+              "self": {
+                "type": "Expr::Map",
+                "elems": [
+                  {
+                    "type": "MapExprElem",
+                    "key": {
+                      "type": "Constant::String",
+                      "0": "x"
                     },
+                    "expr": {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "1"
+                      },
+                      "loc": null
+                    },
+                    "key_loc": null,
                     "loc": null
                   },
-                  "key_loc": null,
-                  "loc": null
-                },
-                {
-                  "type": "MapExprElem",
-                  "key": {
-                    "type": "Constant::String",
-                    "0": "y"
-                  },
-                  "expr": {
-                    "type": "Expr::Constant",
-                    "c": {
-                      "type": "Constant::Int",
-                      "0": "2"
+                  {
+                    "type": "MapExprElem",
+                    "key": {
+                      "type": "Constant::String",
+                      "0": "y"
                     },
+                    "expr": {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "2"
+                      },
+                      "loc": null
+                    },
+                    "key_loc": null,
                     "loc": null
                   },
-                  "key_loc": null,
-                  "loc": null
-                },
-                {
-                  "type": "MapExprElem",
-                  "key": {
-                    "type": "Constant::String",
-                    "0": "z"
-                  },
-                  "expr": {
-                    "type": "Expr::Constant",
-                    "c": {
-                      "type": "Constant::Int",
-                      "0": "3"
+                  {
+                    "type": "MapExprElem",
+                    "key": {
+                      "type": "Constant::String",
+                      "0": "z"
                     },
+                    "expr": {
+                      "type": "Expr::Constant",
+                      "c": {
+                        "type": "Constant::Int",
+                        "0": "3"
+                      },
+                      "loc": null
+                    },
+                    "key_loc": null,
                     "loc": null
-                  },
-                  "key_loc": null,
-                  "loc": null
-                }
-              ],
+                  }
+                ],
+                "loc": null
+              },
+              "method_name": {
+                "type": "Label",
+                "name": "iter2",
+                "loc": null
+              },
+              "args": [],
+              "return_self": false,
+              "attr": {
+                "type": "ApplyAttr::NoAttr"
+              },
               "loc": null
             },
             "body": {

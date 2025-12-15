@@ -1,0 +1,308 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Impl::TopUsing",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "names": [
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "func",
+              "loc": null
+            },
+            "target": null
+          },
+          "value"
+        ]
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "loc": null,
+      "doc": " docstring"
+    },
+    {
+      "type": "Impl::TopUsing",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "names": [
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "Type",
+              "loc": null
+            },
+            "target": null
+          },
+          "type"
+        ]
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [
+        {
+          "type": "Attribute",
+          "raw": "#deprecated",
+          "loc": null
+        }
+      ],
+      "loc": null,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopUsing",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "names": [
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "func",
+              "loc": null
+            },
+            "target": null
+          },
+          "value"
+        ],
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "Const",
+              "loc": null
+            },
+            "target": null
+          },
+          "value"
+        ],
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "Type",
+              "loc": null
+            },
+            "target": null
+          },
+          "type"
+        ],
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "Trait",
+              "loc": null
+            },
+            "target": null
+          },
+          "trait"
+        ]
+      ],
+      "vis": {
+        "type": "Visibility::Pub",
+        "attr": null,
+        "loc": null
+      },
+      "attrs": [],
+      "loc": null,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopUsing",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "names": [
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "func2",
+              "loc": null
+            },
+            "target": {
+              "type": "Label",
+              "name": "func",
+              "loc": null
+            }
+          },
+          "value"
+        ],
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "Const2",
+              "loc": null
+            },
+            "target": {
+              "type": "Label",
+              "name": "Const",
+              "loc": null
+            }
+          },
+          "value"
+        ],
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "Type2",
+              "loc": null
+            },
+            "target": {
+              "type": "Label",
+              "name": "Type",
+              "loc": null
+            }
+          },
+          "type"
+        ],
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "Trait2",
+              "loc": null
+            },
+            "target": {
+              "type": "Label",
+              "name": "Trait",
+              "loc": null
+            }
+          },
+          "trait"
+        ]
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "loc": null,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopUsing",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "names": [
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "",
+              "loc": null
+            },
+            "target": {
+              "type": "Label",
+              "name": "func",
+              "loc": null
+            }
+          },
+          "value"
+        ],
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "",
+              "loc": null
+            },
+            "target": {
+              "type": "Label",
+              "name": "Const",
+              "loc": null
+            }
+          },
+          "value"
+        ],
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "",
+              "loc": null
+            },
+            "target": {
+              "type": "Label",
+              "name": "Type",
+              "loc": null
+            }
+          },
+          "type"
+        ],
+        [
+          {
+            "type": "AliasTarget",
+            "binder": {
+              "type": "Binder",
+              "name": "",
+              "loc": null
+            },
+            "target": {
+              "type": "Label",
+              "name": "Trait",
+              "loc": null
+            }
+          },
+          "trait"
+        ]
+      ],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "loc": null,
+      "doc": ""
+    },
+    {
+      "type": "Impl::TopUsing",
+      "pkg": {
+        "type": "Label",
+        "name": "pkg",
+        "loc": null
+      },
+      "names": [],
+      "vis": {
+        "type": "Visibility::Default"
+      },
+      "attrs": [],
+      "loc": null,
+      "doc": ""
+    }
+  ]
+}

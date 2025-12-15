@@ -1,6 +1,4 @@
 
-//!build: -w -27
-
 trait I {
   f(Self) -> Unit
 }
@@ -10,13 +8,13 @@ fn[X: I] use_I(x: X) -> Unit {
 }
 
 
-type T Int
+struct T(Int)
 
 // regular method
-fn f(self: T) -> Unit { println(self.inner()) }
+fn f(self: T) -> Unit { println(self.0) }
 
 // extension method
-impl I for T with f(x) { println(x.inner() + 1) }
+impl I for T with f(x) { println(x.0 + 1) }
 
 fn init {
   let t: T = T(42)

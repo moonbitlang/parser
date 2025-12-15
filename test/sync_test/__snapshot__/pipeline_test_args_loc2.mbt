@@ -1,6 +1,6 @@
 //!build: -w -27
 ///|
-type T Int derive(Show)
+struct T(Int) derive(Show)
 
 ///|
 let t : T = T(42)

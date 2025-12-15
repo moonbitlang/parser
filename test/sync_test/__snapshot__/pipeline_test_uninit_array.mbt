@@ -1,4 +1,3 @@
-//!build: -w -27
 // numeric type
 fn init {
   let xs: UninitializedArray[Int] = UninitializedArray::make(10)
@@ -44,7 +43,7 @@ fn init {
 }
 
 // recursive newtype, aka any ref
-type RecNewType RecNewType? derive(Show)
+struct RecNewType(RecNewType?) derive(Show)
 
 fn init {
   let xs : UninitializedArray[RecNewType] = UninitializedArray::make(10)

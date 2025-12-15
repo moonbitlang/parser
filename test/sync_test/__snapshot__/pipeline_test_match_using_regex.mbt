@@ -85,6 +85,29 @@ fn test_anchors() -> Unit raise {
     "(.*)end" => fail("test_anchors")
     _ => ()
   }
+
+  // Test start anchor
+  fn f(input : BytesView) -> Unit raise {
+    lexmatch input with longest {
+      "([ ]+|^he)llo" => ()
+      _ => fail("test_anchors")
+    }
+  }
+
+  fn f2(input : BytesView) -> Unit raise {
+    lexmatch input with longest {
+      "a^" => fail("test_anchors")
+      _ => ()
+    }
+  }
+
+  f(b"hello")
+  f(b"   llo")
+
+  lexmatch "a" with longest {
+    "a^" => fail("test_anchors")
+    _ => ()
+  }
 }
 
 ///|
@@ -475,8 +498,8 @@ fn test_utf16_decoding() -> Unit raise {
 ///|
 fn test_minimizable_tags() -> Unit raise {
   // Test minimizable tags
-    lexmatch b"abbccc" with longest {
-      (("a+" as a) ("b+" as b) ("c+" as c), _) => println("\{a}\{b}\{c}")
+    lexmatch b"a-bb-ccc" with longest {
+      (("a+" as a) "-" ("b+" as b) "-" ("c+" as c), _) => println("\{a}\{b}\{c}")
       _ => fail("test_minimizable_tags")
     }
 }

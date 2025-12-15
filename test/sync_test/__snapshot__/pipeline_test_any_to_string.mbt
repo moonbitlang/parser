@@ -1,4 +1,3 @@
-//!build: -w -27
 fn[T] any_to_string(obj : T) -> String = "%any.to_string"
 
 fn[T] any_print(obj : T) -> Unit {
@@ -11,11 +10,11 @@ fn[T] print_array(arr : Array[T]) -> Unit {
   }
 }
 
-type A[T] T derive(Show)
+struct A[T](T) derive(Show)
 
-type B[String] String derive(Show)
+struct B[String](String) derive(Show)
 
-type C Int
+struct C(Int)
 
 fn main {
   print_array([A(1), A(2), A(3)])

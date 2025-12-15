@@ -1,20 +1,21 @@
-//!build: -w -27
-type T1 Int
+//!build: -alert -deprecated -w -27
+
+struct T1(Int)
 
 fn f1(x: T1) -> Unit {
-  println(x.inner())
+  println(x.0)
 }
 
-type T2 Array[Int]
+struct T2(Array[Int])
 
 fn f2(x: T2) -> Unit {
-  println(x.inner())
+  println(x.0)
 }
 
-type T3[X] X?
+struct T3[X](X?)
 
 fn f3(x: T3[String]) -> Unit {
-  println(x.inner())
+  println(x.0)
 }
 
 fn f4(x: String) -> T3[String] {
@@ -53,7 +54,7 @@ enum E {
   NewE(Int)
 } derive(Show)
 
-type NewE E derive(Show)
+struct NewE(E) derive(Show)
 
 fn f7(x: NewE) -> Unit {
   println(x)
@@ -63,14 +64,14 @@ fn init {
   f7(NewE(NewE(42)))
 }
 
-type T5 () -> Unit
+struct T5(() -> Unit)
 fn f8(x : T5) -> Unit {
-  (x.inner())()
+  (x.0)()
 }
 
-type T6 S
+struct T6(S)
 fn f9(x : T6) -> Unit {
-  println(x.inner().v)
+  println(x.0.v)
 }
 
 fn init {
