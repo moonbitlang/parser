@@ -1,4 +1,11 @@
 ///|
+pub(all) enum RangeKind {
+  Inclusive
+  Exclusive
+  InclusiveMissingEqual
+}
+
+///|
 pub(all) enum Visibility {
   Default
   Pub(attr~ : String?, loc~ : Location)
@@ -690,8 +697,8 @@ pub(all) enum Pattern {
   Record(fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : Location)
   /// `{ "k1": e1, "k2": e2, .. }`
   Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : Location)
-  /// `p1..=p2` or `p1..<p2` if inclusive is false.
-  Range(lhs~ : Pattern, rhs~ : Pattern, inclusive~ : Bool, loc~ : Location)
+  /// `p1..=p2` or `p1..<p2` 
+  Range(lhs~ : Pattern, rhs~ : Pattern, kind~ : RangeKind, loc~ : Location)
   SpecialConstr(
     binder~ : Binder,
     args~ : @list.List[ConstrPatArg],

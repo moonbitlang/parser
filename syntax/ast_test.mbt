@@ -1701,7 +1701,7 @@ test "pattern to_json" {
     @syntax.Range(
       lhs=any_pattern,
       rhs=constant_pattern,
-      inclusive=true,
+      kind=Inclusive,
       loc=dummy_loc,
     ),
     content={
@@ -1712,7 +1712,7 @@ test "pattern to_json" {
         "c": { "type": "Constant::Int", "0": "42" },
         "loc": null,
       },
-      "inclusive": true,
+      "kind": { "type": "RangeKind::Inclusive" },
       "loc": null,
     },
   )

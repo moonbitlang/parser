@@ -2,6 +2,14 @@
 let null : Json = Json::null()
 
 ///|
+pub impl ToJson for RangeKind with to_json(self) -> Json {
+  match self {
+    Inclusive | InclusiveMissingEqual => { "type": "RangeKind::Inclusive" }
+    Exclusive => { "type": "RangeKind::Exclusive" }
+  }
+}
+
+///|
 pub impl ToJson for Label with to_json(self) {
   { "type": "Label", "name": self.name, "loc": self.loc.to_json() }
 }
@@ -695,12 +703,12 @@ pub impl ToJson for Pattern with to_json(self) {
         "is_closed": is_closed,
         "loc": loc,
       }
-    Range(lhs~, rhs~, inclusive~, loc~) =>
+    Range(lhs~, rhs~, kind~, loc~) =>
       {
         "type": "Pattern::Range",
         "lhs": lhs,
         "rhs": rhs,
-        "inclusive": inclusive,
+        "kind": kind,
         "loc": loc,
       }
     SpecialConstr(binder~, args~, loc~) =>

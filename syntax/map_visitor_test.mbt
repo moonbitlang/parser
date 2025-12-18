@@ -71,7 +71,7 @@ test "Pattern" {
   let range_pattern = @syntax.Range(
     lhs=any_pattern,
     rhs=constant_pattern,
-    inclusive=true,
+    kind=Inclusive,
     loc=dummy_loc,
   )
   let constant_pattern = @syntax.Expr::Constant(c=int_constant, loc=dummy_loc)
