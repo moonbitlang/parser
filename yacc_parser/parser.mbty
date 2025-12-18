@@ -1872,8 +1872,8 @@ or_pattern -> Pattern
   ;
 
 range_pattern -> Pattern
-  : simple_pattern "..<" simple_pattern { Range(lhs = $1, rhs = $3, inclusive = false, loc = mk_loc($sloc)) }
-  | simple_pattern "..=" simple_pattern { Range(lhs = $1, rhs = $3, inclusive = true, loc = mk_loc($sloc)) }
+  : simple_pattern "..<" simple_pattern { Range(lhs = $1, rhs = $3, kind=Exclusive, loc = mk_loc($sloc)) }
+  | simple_pattern "..=" simple_pattern { Range(lhs = $1, rhs = $3, kind=Inclusive, loc = mk_loc($sloc)) }
   | simple_pattern { $1 }
   ;
 

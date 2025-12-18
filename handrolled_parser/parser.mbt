@@ -1927,13 +1927,13 @@ fn State::parse_range_pattern(self : Self) -> @syntax.Pattern {
       self.skip()
       let rhs = self.parse_simple_pattern()
       let loc = self.loc_start_with(spos)
-      Range(lhs~, rhs~, inclusive=true, loc~)
+      Range(lhs~, rhs~, kind=Inclusive, loc~)
     }
     RANGE_EXCLUSIVE => {
       self.skip()
       let rhs = self.parse_simple_pattern()
       let loc = self.loc_start_with(spos)
-      Range(lhs~, rhs~, inclusive=false, loc~)
+      Range(lhs~, rhs~, kind=Exclusive, loc~)
     }
     _ => lhs
   }
