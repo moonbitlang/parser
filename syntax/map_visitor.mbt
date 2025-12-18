@@ -275,6 +275,9 @@ pub(open) trait MapVisitor {
   // MapPatElem
   visit_MapPatElem(Self, MapPatElem) -> MapPatElem = _
 
+  // RangeKind
+  visit_RangeKind(Self, RangeKind) -> RangeKind = _
+
   // Pattern
   visit_Pattern(Self, Pattern) -> Pattern = _
   visit_Pattern_Alias(Self, pat~ : Pattern, alias_~ : Binder, loc~ : Location) -> Pattern = _
@@ -308,7 +311,7 @@ pub(open) trait MapVisitor {
     Self,
     lhs~ : Pattern,
     rhs~ : Pattern,
-    inclusive~ : Bool,
+    kind~ : RangeKind,
     loc~ : Location,
   ) -> Pattern = _
   visit_Pattern_SpecialConstr(
@@ -1984,6 +1987,11 @@ impl MapVisitor with visit_MapPatElem(env, map_pat_elem) {
 }
 
 ///|
+impl MapVisitor with visit_RangeKind(env, kind) {
+  MapVisitorBase::visit_RangeKind(env, kind)
+}
+
+///|
 impl MapVisitor with visit_Pattern(env, pattern) {
   MapVisitorBase::visit_Pattern(env, pattern)
 }
@@ -2044,8 +2052,8 @@ impl MapVisitor with visit_Pattern_Map(env, elems~, is_closed~, loc~) {
 }
 
 ///|
-impl MapVisitor with visit_Pattern_Range(env, lhs~, rhs~, inclusive~, loc~) {
-  MapVisitorBase::visit_Pattern_Range(env, lhs~, rhs~, inclusive~, loc~)
+impl MapVisitor with visit_Pattern_Range(env, lhs~, rhs~, kind~, loc~) {
+  MapVisitorBase::visit_Pattern_Range(env, lhs~, rhs~, kind~, loc~)
 }
 
 ///|
@@ -3441,6 +3449,15 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MapPatElem(
 }
 
 ///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_RangeKind(
+  env,
+  kind,
+) {
+  ignore(env)
+  kind
+}
+
+///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern(
   env,
   pattern,
@@ -3461,8 +3478,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern(
       env.0.visit_Pattern_Record(fields~, is_closed~, loc~)
     Map(elems~, is_closed~, loc~) =>
       env.0.visit_Pattern_Map(elems~, is_closed~, loc~)
-    Range(lhs~, rhs~, inclusive~, loc~) =>
-      env.0.visit_Pattern_Range(lhs~, rhs~, inclusive~, loc~)
+    Range(lhs~, rhs~, kind~, loc~) =>
+      env.0.visit_Pattern_Range(lhs~, rhs~, kind~, loc~)
     SpecialConstr(binder~, args~, loc~) =>
       env.0.visit_Pattern_SpecialConstr(binder~, args~, loc~)
   }
@@ -3591,12 +3608,13 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Pattern_Ran
   env,
   lhs~,
   rhs~,
-  inclusive~,
+  kind~,
   loc~,
 ) {
   let lhs = env.0.visit_Pattern(lhs)
   let rhs = env.0.visit_Pattern(rhs)
-  Range(lhs~, rhs~, inclusive~, loc~)
+  let kind = env.0.visit_RangeKind(kind)
+  Range(lhs~, rhs~, kind~, loc~)
 }
 
 ///|
