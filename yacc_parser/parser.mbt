@@ -22163,7 +22163,7 @@ fn yy_action_741(
 }
 
 // file:///./parser.mbty
-// 1875|    simple_pattern "..<" simple_pattern { Range(lhs = $1, rhs = $3, inclusive = false, loc = mk_loc($sloc)) }
+// 1875|    simple_pattern "..<" simple_pattern { Range(lhs = $1, rhs = $3, kind=Exclusive, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_742(
@@ -22184,7 +22184,7 @@ fn yy_action_742(
       Range(
         lhs=_dollar1,
         rhs=_dollar3,
-        inclusive=false,
+        kind=Exclusive,
         loc=mk_loc((_symbol_start_pos, _end_pos)),
       )
     },
@@ -22308,7 +22308,7 @@ fn yy_action_745(
 }
 
 // file:///./parser.mbty
-// 1876|    simple_pattern "..=" simple_pattern { Range(lhs = $1, rhs = $3, inclusive = true, loc = mk_loc($sloc)) }
+// 1876|    simple_pattern "..=" simple_pattern { Range(lhs = $1, rhs = $3, kind=Inclusive, loc = mk_loc($sloc)) }
 
 ///|
 fn yy_action_746(
@@ -22329,7 +22329,7 @@ fn yy_action_746(
       Range(
         lhs=_dollar1,
         rhs=_dollar3,
-        inclusive=true,
+        kind=Inclusive,
         loc=mk_loc((_symbol_start_pos, _end_pos)),
       )
     },
