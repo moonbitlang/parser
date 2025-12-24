@@ -5283,3 +5283,17 @@ pub fn parse(tokens : Array[Triple]) -> (Impls, Array[Report]) {
   let impls = self.parse_toplevel()
   (impls, self.diagnostics)
 }
+
+///|
+pub fn parse_expr(tokens : Array[Triple]) -> (@syntax.Expr, Array[Report]) {
+  let self : State = {
+    tokens,
+    diagnostics: [],
+    next: 0,
+    syncs: [],
+    mode: Normal,
+    parsed_position: dummy_pos,
+  }
+  let expr = self.parse_expr()
+  (expr, self.diagnostics)
+}

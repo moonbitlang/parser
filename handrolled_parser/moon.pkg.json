@@ -5,5 +5,8 @@
     "moonbitlang/parser/syntax/util",
     "moonbitlang/parser/basic",
     "moonbitlang/parser/attribute"
+  ],
+  "test-import": [
+    "moonbitlang/parser/lexer"
   ]
 }
