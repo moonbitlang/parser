@@ -23,10 +23,23 @@ This module defines the Abstract Syntax Tree (AST) and provides parsers for Moon
 
 ## Usage
 
-```moonbit
+```mbt check
 ///|
 test {
-  let source = "let number = 123"
+  let source =
+    #| let number = 123
+    #| fn add(a: Int, b: Int) -> Int {
+    #|   a + b
+    #| }
+    #| enum Color {
+    #|   Red
+    #|   Green
+    #|   Blue
+    #| }
+    #| struct Point {
+    #|   x: Int
+    #|   y: Int
+    #| }
   let (impls, _) = parse_string(source)
   @json.inspect(impls, content=[
     {
@@ -43,6 +56,197 @@ test {
       "loc": null,
       "attrs": [],
       "doc": "",
+    },
+    {
+      "type": "Impl::TopFuncDef",
+      "fun_decl": {
+        "type": "FunDecl",
+        "type_name": null,
+        "name": { "type": "Binder", "name": "add", "loc": null },
+        "has_error": null,
+        "is_async": false,
+        "decl_params": [
+          {
+            "type": "Parameter::Positional",
+            "binder": { "type": "Binder", "name": "a", "loc": null },
+            "ty": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": { "type": "LongIdent::Ident", "0": "Int" },
+                "loc": null,
+              },
+              "tys": [],
+              "loc": null,
+            },
+          },
+          {
+            "type": "Parameter::Positional",
+            "binder": { "type": "Binder", "name": "b", "loc": null },
+            "ty": {
+              "type": "Type::Name",
+              "constr_id": {
+                "type": "ConstrId",
+                "id": { "type": "LongIdent::Ident", "0": "Int" },
+                "loc": null,
+              },
+              "tys": [],
+              "loc": null,
+            },
+          },
+        ],
+        "params_loc": null,
+        "quantifiers": [],
+        "return_type": {
+          "type": "Type::Name",
+          "constr_id": {
+            "type": "ConstrId",
+            "id": { "type": "LongIdent::Ident", "0": "Int" },
+            "loc": null,
+          },
+          "tys": [],
+          "loc": null,
+        },
+        "error_type": { "type": "ErrorType::NoErrorType" },
+        "vis": { "type": "Visibility::Default" },
+        "attrs": [],
+        "doc": "",
+      },
+      "decl_body": {
+        "type": "DeclBody::DeclBody",
+        "local_types": [],
+        "expr": {
+          "type": "Expr::Infix",
+          "op": {
+            "type": "Var",
+            "name": { "type": "LongIdent::Ident", "0": "+" },
+            "loc": null,
+          },
+          "lhs": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": { "type": "LongIdent::Ident", "0": "a" },
+              "loc": null,
+            },
+            "loc": null,
+          },
+          "rhs": {
+            "type": "Expr::Ident",
+            "id": {
+              "type": "Var",
+              "name": { "type": "LongIdent::Ident", "0": "b" },
+              "loc": null,
+            },
+            "loc": null,
+          },
+          "loc": null,
+        },
+      },
+      "loc": null,
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Color",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Variant",
+          "0": [
+            {
+              "type": "ConstrDecl",
+              "name": { "type": "ConstrName", "name": "Red", "loc": null },
+              "args": null,
+              "tag": null,
+              "attrs": [],
+              "loc": null,
+              "doc": "",
+            },
+            {
+              "type": "ConstrDecl",
+              "name": { "type": "ConstrName", "name": "Green", "loc": null },
+              "args": null,
+              "tag": null,
+              "attrs": [],
+              "loc": null,
+              "doc": "",
+            },
+            {
+              "type": "ConstrDecl",
+              "name": { "type": "ConstrName", "name": "Blue", "loc": null },
+              "args": null,
+              "tag": null,
+              "attrs": [],
+              "loc": null,
+              "doc": "",
+            },
+          ],
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": { "type": "Visibility::Default" },
+        "deriving": [],
+        "loc": null,
+      },
+    },
+    {
+      "type": "Impl::TopTypeDef",
+      "0": {
+        "type": "TypeDecl",
+        "tycon": "Point",
+        "tycon_loc": null,
+        "params": [],
+        "components": {
+          "type": "TypeDesc::Record",
+          "0": [
+            {
+              "type": "FieldDecl",
+              "name": { "type": "FieldName", "label": "x", "loc": null },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": { "type": "LongIdent::Ident", "0": "Int" },
+                  "loc": null,
+                },
+                "tys": [],
+                "loc": null,
+              },
+              "mut": false,
+              "vis": { "type": "Visibility::Default" },
+              "loc": null,
+              "attrs": [],
+              "doc": "",
+            },
+            {
+              "type": "FieldDecl",
+              "name": { "type": "FieldName", "label": "y", "loc": null },
+              "ty": {
+                "type": "Type::Name",
+                "constr_id": {
+                  "type": "ConstrId",
+                  "id": { "type": "LongIdent::Ident", "0": "Int" },
+                  "loc": null,
+                },
+                "tys": [],
+                "loc": null,
+              },
+              "mut": false,
+              "vis": { "type": "Visibility::Default" },
+              "loc": null,
+              "attrs": [],
+              "doc": "",
+            },
+          ],
+        },
+        "attrs": [],
+        "doc": "",
+        "type_vis": { "type": "Visibility::Default" },
+        "deriving": [],
+        "loc": null,
+      },
     },
   ])
 }
