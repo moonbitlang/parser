@@ -5,7 +5,7 @@
     "moonbitlang/x": "0.4.37"
   },
   "bin-deps": {
-    "moonbitlang/yacc": "0.7.5"
+    "moonbitlang/yacc": "0.7.7"
   },
   "readme": "README.md",
   "repository": "https://github.com/moonbitlang/parser",
