@@ -429,7 +429,7 @@ pub fn make_arrow_fn(
     error_type=ErrorType::NoErrorType,
     kind=FnKind::Arrow,
     has_error=None,
-    is_async=false,
+    is_async=None,
     loc~,
   )
 }
