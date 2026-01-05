@@ -20,7 +20,7 @@
               "loc": null
             },
             "has_error": null,
-            "is_async": false,
+            "is_async": null,
             "quantifiers": [],
             "params": [
               {
@@ -69,7 +69,7 @@
               "loc": null
             },
             "has_error": null,
-            "is_async": false,
+            "is_async": null,
             "quantifiers": [],
             "params": [
               {
@@ -118,7 +118,7 @@
               "loc": null
             },
             "has_error": null,
-            "is_async": false,
+            "is_async": null,
             "quantifiers": [],
             "params": [
               {
@@ -201,7 +201,7 @@
               "loc": null
             },
             "has_error": null,
-            "is_async": false,
+            "is_async": null,
             "quantifiers": [],
             "params": [
               {
@@ -273,7 +273,7 @@
                   "err": {
                     "type": "ErrorType::NoErrorType"
                   },
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 },
                 "loc": null
@@ -359,7 +359,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::Positional",
@@ -496,7 +496,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::Positional",
@@ -730,7 +730,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::Positional",
@@ -840,7 +840,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::Positional",
@@ -998,7 +998,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::Positional",
@@ -1082,7 +1082,7 @@
               "err": {
                 "type": "ErrorType::NoErrorType"
               },
-              "is_async": false,
+              "is_async": null,
               "loc": null
             }
           }
@@ -1684,7 +1684,7 @@
                       "err": {
                         "type": "ErrorType::NoErrorType"
                       },
-                      "is_async": false,
+                      "is_async": null,
                       "loc": null
                     }
                   ],
@@ -1693,7 +1693,7 @@
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               },
               "mut": true,
@@ -1734,7 +1734,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [],
         "params_loc": null,
         "quantifiers": [],
@@ -1837,7 +1837,7 @@
                           "type": "FnKind::Arrow"
                         },
                         "has_error": null,
-                        "is_async": false,
+                        "is_async": null,
                         "loc": null
                       },
                       "loc": null
@@ -2482,7 +2482,7 @@
             "err": {
               "type": "ErrorType::NoErrorType"
             },
-            "is_async": false,
+            "is_async": null,
             "loc": null
           }
         }
@@ -2708,7 +2708,7 @@
                   "type": "FnKind::Lambda"
                 },
                 "has_error": null,
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               },
               "loc": null
@@ -2791,7 +2791,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": null,
         "params_loc": null,
         "quantifiers": [],
@@ -2909,7 +2909,7 @@
                     "type": "FnKind::Arrow"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 },
                 "loc": null
@@ -2939,7 +2939,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::Positional",
@@ -3221,7 +3221,7 @@
                           "type": "FnKind::Lambda"
                         },
                         "has_error": null,
-                        "is_async": false,
+                        "is_async": null,
                         "loc": null
                       },
                       "loc": null
@@ -3268,7 +3268,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::Positional",
@@ -3633,7 +3633,7 @@
                           "type": "FnKind::Lambda"
                         },
                         "has_error": null,
-                        "is_async": false,
+                        "is_async": null,
                         "loc": null
                       },
                       "loc": null
@@ -3680,7 +3680,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": null,
         "params_loc": null,
         "quantifiers": [],
@@ -3850,7 +3850,7 @@
                           "type": "FnKind::Lambda"
                         },
                         "has_error": null,
-                        "is_async": false,
+                        "is_async": null,
                         "loc": null
                       },
                       "loc": null
@@ -4088,7 +4088,7 @@
                               "type": "FnKind::Lambda"
                             },
                             "has_error": null,
-                            "is_async": false,
+                            "is_async": null,
                             "loc": null
                           },
                           "loc": null
@@ -4515,7 +4515,7 @@
                                       "type": "FnKind::Lambda"
                                     },
                                     "has_error": null,
-                                    "is_async": false,
+                                    "is_async": null,
                                     "loc": null
                                   },
                                   "loc": null

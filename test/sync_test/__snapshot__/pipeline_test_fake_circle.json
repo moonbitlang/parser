@@ -61,7 +61,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": null,
         "params_loc": null,
         "quantifiers": [],
@@ -337,7 +337,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -380,7 +380,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -423,7 +423,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -466,7 +466,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -509,7 +509,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -552,7 +552,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -595,7 +595,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -638,7 +638,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -681,7 +681,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -724,7 +724,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -767,7 +767,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -810,7 +810,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -853,7 +853,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -896,7 +896,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -939,7 +939,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -982,7 +982,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -1025,7 +1025,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -1068,7 +1068,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -1111,7 +1111,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ],
@@ -1139,7 +1139,7 @@
                     "type": "FnKind::Lambda"
                   },
                   "has_error": null,
-                  "is_async": false,
+                  "is_async": null,
                   "loc": null
                 }
               ]

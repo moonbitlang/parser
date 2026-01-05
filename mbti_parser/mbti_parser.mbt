@@ -181,6 +181,9 @@ priv suberror YYObj__list_List__String__Option_String___String__ @list.List[
 priv suberror YYObj_String_ String?
 
 ///|
+priv suberror YYObj_Location_ Location?
+
+///|
 priv suberror YYObj__Name___list_List_TypeParamNoConstraints__ (
   Name,
   @list.List[TypeParamNoConstraints],
@@ -3538,7 +3541,7 @@ fn yy_action_157(
   guard _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[6].0 is YYObj__Type__ErrorType_(_dollar8)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -3572,7 +3575,7 @@ fn yy_action_160(
   guard _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[7].0 is YYObj__Type__ErrorType_(_dollar8)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -3604,7 +3607,7 @@ fn yy_action_162(
   let _sub_action_0_result = yy_action_158(_last_pos, _args[0:1])
   guard _args[2].0 is YYObj_Type(_dollar3)
   guard _args[5].0 is YYObj__Type__ErrorType_(_dollar6)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -3701,7 +3704,7 @@ fn yy_action_166(
   guard _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard _args[1].0 is YYObj_Type(_dollar3)
   guard _args[6].0 is YYObj__Type__ErrorType_(_dollar8)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -3779,7 +3782,7 @@ fn yy_action_169(
   guard _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard _args[1].0 is YYObj_Type(_dollar3)
   guard _args[5].0 is YYObj__Type__ErrorType_(_dollar8)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -3827,7 +3830,7 @@ fn yy_action_170(
   let _sub_action_0_result = yy_action_167(_last_pos, _args[0:0])
   guard _args[1].0 is YYObj_Type(_dollar3)
   guard _args[4].0 is YYObj__Type__ErrorType_(_dollar6)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -4016,7 +4019,7 @@ fn yy_action_178(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_167(_last_pos, _args[0:0])
   guard _args[3].0 is YYObj__Type__ErrorType_(_dollar5)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -4038,17 +4041,17 @@ fn yy_action_178(
 }
 
 // file:///./mbti_parser.mbty
-// 339|    { false }
+// 339|    { None }
 
 ///|
 fn yy_action_167(
   _last_pos : @basic.Position,
   _args : ArrayView[(YYObj, @basic.Position, @basic.Position)],
 ) -> YYObj {
-  YYObj_Bool(
+  YYObj_Location_(
     {
       ()
-      false
+      None
     },
   )
 }
@@ -4153,7 +4156,7 @@ fn yy_action_184(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_158(_last_pos, _args[0:1])
   guard _args[4].0 is YYObj__Type__ErrorType_(_dollar5)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -4175,17 +4178,19 @@ fn yy_action_184(
 }
 
 // file:///./mbti_parser.mbty
-// 338|    "async" { true }
+// 338|    "async" { Some(mk_loc($loc($1))) }
 
 ///|
 fn yy_action_158(
   _last_pos : @basic.Position,
   _args : ArrayView[(YYObj, @basic.Position, @basic.Position)],
 ) -> YYObj {
-  YYObj_Bool(
+  let _start_pos_of_item0 = _args[0].1
+  let _end_pos_of_item0 = _args[0].2
+  YYObj_Location_(
     {
       ()
-      true
+      Some(mk_loc((_start_pos_of_item0, _end_pos_of_item0)))
     },
   )
 }

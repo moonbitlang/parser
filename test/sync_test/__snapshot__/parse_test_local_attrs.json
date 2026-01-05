@@ -410,7 +410,7 @@
               "loc": null
             },
             "has_error": null,
-            "is_async": false,
+            "is_async": null,
             "quantifiers": [],
             "params": [],
             "return_type": {
@@ -447,7 +447,7 @@
               "loc": null
             },
             "has_error": null,
-            "is_async": false,
+            "is_async": null,
             "quantifiers": [],
             "params": [
               {

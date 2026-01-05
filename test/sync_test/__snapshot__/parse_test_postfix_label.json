@@ -277,7 +277,7 @@
       },
       "params": null,
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""
@@ -587,7 +587,7 @@
       },
       "params": null,
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""
@@ -832,7 +832,7 @@
       },
       "params": null,
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""
@@ -848,7 +848,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::Labelled",
@@ -1019,7 +1019,7 @@
       },
       "params": null,
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""
@@ -1035,7 +1035,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::QuestionOptional",
@@ -1287,7 +1287,7 @@
       },
       "params": null,
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""
@@ -1311,7 +1311,7 @@
               "loc": null
             },
             "has_error": null,
-            "is_async": false,
+            "is_async": null,
             "quantifiers": [],
             "params": [
               {
@@ -1794,7 +1794,7 @@
       },
       "params": null,
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""
