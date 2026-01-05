@@ -798,6 +798,7 @@ fn State::parse_typealias(
             expr=Hole(loc~, kind=Synthesized),
             is_main=false,
             local_types=@list.new(),
+            is_async=None,
             loc~,
           )
         }
@@ -815,6 +816,7 @@ fn State::parse_typealias(
         expr=Hole(loc~, kind=Synthesized),
         is_main=false,
         local_types=@list.new(),
+        is_async=None,
         loc~,
       )
     }
@@ -903,6 +905,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       expr=@syntax.Hole(loc~, kind=Synthesized),
       is_main=false,
       local_types=@list.new(),
+      is_async=None,
       loc~,
     )
   }
@@ -1443,6 +1446,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             expr=Hole(loc~, kind=Synthesized),
             is_main=false,
             local_types=@list.new(),
+            is_async=None,
             loc~,
           )
         }
@@ -1462,6 +1466,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           expr=Hole(loc~, kind=Synthesized),
           is_main=false,
           local_types=@list.new(),
+          is_async=None,
           loc~,
         )
       }
@@ -1724,6 +1729,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         expr=Hole(loc~, kind=Synthesized),
         is_main=false,
         local_types=@list.new(),
+        is_async=None,
         loc~,
       )
     }
