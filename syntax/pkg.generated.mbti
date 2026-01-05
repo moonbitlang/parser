@@ -405,7 +405,7 @@ pub(all) enum Hole {
 pub impl ToJson for Hole
 
 pub(all) enum Impl {
-  TopExpr(expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location)
+  TopExpr(expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location)
   TopTest(expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopTypeDef(TypeDecl)
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location)
@@ -837,7 +837,7 @@ pub(open) trait IterVisitor {
   visit_TraitMethodDecl(Self, TraitMethodDecl) -> Unit = _
   visit_TraitDecl(Self, TraitDecl) -> Unit = _
   visit_Impl(Self, Impl) -> Unit = _
-  visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location) -> Unit = _
+  visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location) -> Unit = _
   visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Unit = _
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Unit = _
@@ -1052,7 +1052,7 @@ pub(open) trait MapVisitor {
   visit_TraitDecl(Self, TraitDecl) -> TraitDecl = _
   visit_UsingKind(Self, UsingKind) -> UsingKind = _
   visit_Impl(Self, Impl) -> Impl = _
-  visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location) -> Impl = _
+  visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location) -> Impl = _
   visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Impl = _
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Impl = _
