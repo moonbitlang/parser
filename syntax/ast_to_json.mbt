@@ -1233,7 +1233,8 @@ pub impl ToJson for UsingKind with to_json(self) {
 // Impl - The top-level implementation/declaration type
 pub impl ToJson for Impl with to_json(self) {
   match self {
-    TopExpr(expr~, is_main~, local_types~, loc~) =>
+    TopExpr(expr~, is_main~, local_types~, is_async~, loc~) => {
+      ignore(is_async)
       {
         "type": "Impl::TopExpr",
         "expr": expr,
@@ -1241,6 +1242,7 @@ pub impl ToJson for Impl with to_json(self) {
         "local_types": list_to_json(local_types),
         "loc": loc,
       }
+    }
     TopTest(expr~, name~, params~, local_types~, is_async~, loc~, attrs~, doc~) =>
       {
         "type": "Impl::TopTest",

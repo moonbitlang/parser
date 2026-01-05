@@ -373,6 +373,7 @@ pub(open) trait IterVisitor {
     expr~ : Expr,
     is_main~ : Bool,
     local_types~ : @list.List[LocalTypeDecl],
+    is_async~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   visit_Impl_TopTest(
@@ -760,9 +761,17 @@ impl IterVisitor with visit_Impl_TopExpr(
   expr~,
   is_main~,
   local_types~,
+  is_async~,
   loc~,
 ) {
-  IterVisitorBase::visit_Impl_TopExpr(env, expr~, is_main~, local_types~, loc~)
+  IterVisitorBase::visit_Impl_TopExpr(
+    env,
+    expr~,
+    is_main~,
+    local_types~,
+    is_async~,
+    loc~,
+  )
 }
 
 ///|
@@ -2350,8 +2359,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl(
         attrs~,
         doc~,
       )
-    TopExpr(expr~, is_main~, local_types~, loc~) =>
-      env.0.visit_Impl_TopExpr(expr~, is_main~, local_types~, loc~)
+    TopExpr(expr~, is_main~, local_types~, is_async~, loc~) =>
+      env.0.visit_Impl_TopExpr(expr~, is_main~, local_types~, is_async~, loc~)
     TopImplRelation(self_ty~, trait_~, quantifiers~, vis~, attrs~, loc~, doc~) =>
       env.0.visit_Impl_TopImplRelation(
         self_ty~,
@@ -3739,10 +3748,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl_Top
   expr~,
   is_main~,
   local_types~,
+  is_async~,
   loc~,
 ) {
   ignore(is_main)
   ignore(loc)
+  ignore(is_async)
   env.0.visit_Expr(expr)
   local_types.each(env.0.visit_LocalTypeDecl(_))
 }

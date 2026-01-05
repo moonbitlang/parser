@@ -376,6 +376,7 @@ pub(open) trait MapVisitor {
     expr~ : Expr,
     is_main~ : Bool,
     local_types~ : @list.List[LocalTypeDecl],
+    is_async~ : Location?,
     loc~ : Location,
   ) -> Impl = _
   visit_Impl_TopTest(
@@ -760,9 +761,17 @@ impl MapVisitor with visit_Impl_TopExpr(
   expr~,
   is_main~,
   local_types~,
+  is_async~,
   loc~,
 ) {
-  MapVisitorBase::visit_Impl_TopExpr(env, expr~, is_main~, local_types~, loc~)
+  MapVisitorBase::visit_Impl_TopExpr(
+    env,
+    expr~,
+    is_main~,
+    local_types~,
+    is_async~,
+    loc~,
+  )
 }
 
 ///|
@@ -2350,8 +2359,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         attrs~,
         doc~,
       )
-    TopExpr(expr~, is_main~, local_types~, loc~) =>
-      env.0.visit_Impl_TopExpr(expr~, is_main~, local_types~, loc~)
+    TopExpr(expr~, is_main~, local_types~, is_async~, loc~) =>
+      env.0.visit_Impl_TopExpr(expr~, is_main~, local_types~, is_async~, loc~)
     TopImplRelation(self_ty~, trait_~, quantifiers~, vis~, attrs~, loc~, doc~) =>
       env.0.visit_Impl_TopImplRelation(
         self_ty~,
@@ -3857,11 +3866,12 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopExp
   expr~,
   is_main~,
   local_types~,
+  is_async~,
   loc~,
 ) {
   let expr = env.0.visit_Expr(expr)
   let local_types = local_types.map(env.0.visit_LocalTypeDecl(_))
-  TopExpr(expr~, is_main~, local_types~, loc~)
+  TopExpr(expr~, is_main~, local_types~, is_async~, loc~)
 }
 
 ///|
