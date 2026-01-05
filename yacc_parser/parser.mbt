@@ -910,7 +910,7 @@ fn yy_action_2(
   guard _args[1].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[3].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[2].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[2].1
   let _end_pos_of_item4 = _args[2].2
@@ -964,7 +964,7 @@ fn yy_action_6(
   guard _args[4].0 is YYObj__List_LocalTypeDecl___Expr_(_dollar6)
   guard _args[2].0 is YYObj_Option__StringLiteral__Location__(_dollar4)
   guard _args[3].0 is YYObj_Option_List_Parameter__(_dollar5)
-  guard _sub_action_1_result is YYObj_Bool(_dollar2)
+  guard _sub_action_1_result is YYObj_Location_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -1021,7 +1021,7 @@ fn yy_action_7(
   guard _args[0].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[2].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[1].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[1].1
   let _end_pos_of_item4 = _args[1].2
@@ -1081,7 +1081,7 @@ fn yy_action_9(
   guard _args[2].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[4].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[3].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[3].1
   let _end_pos_of_item4 = _args[3].2
@@ -1141,7 +1141,7 @@ fn yy_action_11(
   guard _args[1].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[3].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[2].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[2].1
   let _end_pos_of_item4 = _args[2].2
@@ -1178,7 +1178,7 @@ fn yy_action_11(
 // 373|      type_name,
 // 374|      name: f,
 // 375|      has_error : $7,
-// 376|      is_async : false,
+// 376|      is_async : None,
 // 377|      quantifiers: $8,
 // 378|      decl_params: $9,
 // 379|      params_loc: mk_loc($loc($9)),
@@ -1217,7 +1217,7 @@ fn yy_action_12(
         type_name,
         name: f,
         has_error: _dollar7,
-        is_async: false,
+        is_async: None,
         quantifiers: _dollar8,
         decl_params: _dollar9,
         params_loc: mk_loc((_start_pos_of_item8, _end_pos_of_item8)),
@@ -2120,7 +2120,7 @@ fn yy_action_35(
   guard _args[3].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[5].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[4].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[4].1
   let _end_pos_of_item4 = _args[4].2
@@ -2180,7 +2180,7 @@ fn yy_action_37(
   guard _args[2].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[4].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[3].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[3].1
   let _end_pos_of_item4 = _args[3].2
@@ -2217,7 +2217,7 @@ fn yy_action_37(
 // 373|      type_name,
 // 374|      name: f,
 // 375|      has_error : $7,
-// 376|      is_async : false,
+// 376|      is_async : None,
 // 377|      quantifiers: $8,
 // 378|      decl_params: $9,
 // 379|      params_loc: mk_loc($loc($9)),
@@ -2256,7 +2256,7 @@ fn yy_action_38(
         type_name,
         name: f,
         has_error: _dollar7,
-        is_async: false,
+        is_async: None,
         quantifiers: _dollar8,
         decl_params: _dollar9,
         params_loc: mk_loc((_start_pos_of_item8, _end_pos_of_item8)),
@@ -3159,7 +3159,7 @@ fn yy_action_58(
   guard _args[2].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[4].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[3].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[3].1
   let _end_pos_of_item4 = _args[3].2
@@ -3213,7 +3213,7 @@ fn yy_action_60(
   guard _args[5].0 is YYObj__List_LocalTypeDecl___Expr_(_dollar6)
   guard _args[3].0 is YYObj_Option__StringLiteral__Location__(_dollar4)
   guard _args[4].0 is YYObj_Option_List_Parameter__(_dollar5)
-  guard _sub_action_1_result is YYObj_Bool(_dollar2)
+  guard _sub_action_1_result is YYObj_Location_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -3270,7 +3270,7 @@ fn yy_action_61(
   guard _args[1].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[3].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[2].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[2].1
   let _end_pos_of_item4 = _args[2].2
@@ -3330,7 +3330,7 @@ fn yy_action_62(
   guard _args[3].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[5].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[4].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[4].1
   let _end_pos_of_item4 = _args[4].2
@@ -3390,7 +3390,7 @@ fn yy_action_63(
   guard _args[2].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[4].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[3].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[3].1
   let _end_pos_of_item4 = _args[3].2
@@ -3427,7 +3427,7 @@ fn yy_action_63(
 // 373|      type_name,
 // 374|      name: f,
 // 375|      has_error : $7,
-// 376|      is_async : false,
+// 376|      is_async : None,
 // 377|      quantifiers: $8,
 // 378|      decl_params: $9,
 // 379|      params_loc: mk_loc($loc($9)),
@@ -3466,7 +3466,7 @@ fn yy_action_64(
         type_name,
         name: f,
         has_error: _dollar7,
-        is_async: false,
+        is_async: None,
         quantifiers: _dollar8,
         decl_params: _dollar9,
         params_loc: mk_loc((_start_pos_of_item8, _end_pos_of_item8)),
@@ -4369,7 +4369,7 @@ fn yy_action_84(
   guard _args[4].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[6].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[5].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[5].1
   let _end_pos_of_item4 = _args[5].2
@@ -4429,7 +4429,7 @@ fn yy_action_85(
   guard _args[3].0
     is YYObj___TypeName___Binder___Location___List_TypeVarBinder__(_dollar4)
   guard _args[5].0 is YYObj__Type___ErrorType_(_dollar6)
-  guard _sub_action_2_result is YYObj_Bool(_dollar3)
+  guard _sub_action_2_result is YYObj_Location_(_dollar3)
   guard _args[4].0 is YYObj_Option_List_Parameter__(_dollar5)
   let _start_pos_of_item4 = _args[4].1
   let _end_pos_of_item4 = _args[4].2
@@ -4466,7 +4466,7 @@ fn yy_action_85(
 // 373|      type_name,
 // 374|      name: f,
 // 375|      has_error : $7,
-// 376|      is_async : false,
+// 376|      is_async : None,
 // 377|      quantifiers: $8,
 // 378|      decl_params: $9,
 // 379|      params_loc: mk_loc($loc($9)),
@@ -4505,7 +4505,7 @@ fn yy_action_86(
         type_name,
         name: f,
         has_error: _dollar7,
-        is_async: false,
+        is_async: None,
         quantifiers: _dollar8,
         decl_params: _dollar9,
         params_loc: mk_loc((_start_pos_of_item8, _end_pos_of_item8)),
@@ -5385,7 +5385,7 @@ fn yy_action_105(
 // 373|      type_name,
 // 374|      name: f,
 // 375|      has_error : $7,
-// 376|      is_async : false,
+// 376|      is_async : None,
 // 377|      quantifiers: $8,
 // 378|      decl_params: $9,
 // 379|      params_loc: mk_loc($loc($9)),
@@ -5424,7 +5424,7 @@ fn yy_action_106(
         type_name,
         name: f,
         has_error: _dollar7,
-        is_async: false,
+        is_async: None,
         quantifiers: _dollar8,
         decl_params: _dollar9,
         params_loc: mk_loc((_start_pos_of_item8, _end_pos_of_item8)),
@@ -5897,7 +5897,7 @@ fn yy_action_117(
   guard _args[4].0 is YYObj__List_LocalTypeDecl___Expr_(_dollar6)
   guard _args[2].0 is YYObj_Option__StringLiteral__Location__(_dollar4)
   guard _args[3].0 is YYObj_Option_List_Parameter__(_dollar5)
-  guard _sub_action_1_result is YYObj_Bool(_dollar2)
+  guard _sub_action_1_result is YYObj_Location_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -6438,7 +6438,7 @@ fn yy_action_130(
 // 373|      type_name,
 // 374|      name: f,
 // 375|      has_error : $7,
-// 376|      is_async : false,
+// 376|      is_async : None,
 // 377|      quantifiers: $8,
 // 378|      decl_params: $9,
 // 379|      params_loc: mk_loc($loc($9)),
@@ -6477,7 +6477,7 @@ fn yy_action_131(
         type_name,
         name: f,
         has_error: _dollar7,
-        is_async: false,
+        is_async: None,
         quantifiers: _dollar8,
         decl_params: _dollar9,
         params_loc: mk_loc((_start_pos_of_item8, _end_pos_of_item8)),
@@ -8059,7 +8059,7 @@ fn yy_action_181(
   guard _args[7].0 is YYObj__Type___ErrorType_(_dollar9)
   guard _sub_action_2_result is YYObj_Binder(_dollar3)
   guard _args[2].0 is YYObj_Location_(_dollar4)
-  guard _sub_action_1_result is YYObj_Bool(_dollar2)
+  guard _sub_action_1_result is YYObj_Location_(_dollar2)
   guard _args[3].0 is YYObj_List_TypeVarBinder_(_dollar5)
   guard _args[5].0 is YYObj_List_Parameter_(_dollar7)
   guard _args[8].0 is YYObj_Option_Location_(_dollar10)
@@ -8118,7 +8118,7 @@ fn yy_action_182(
   guard _args[6].0 is YYObj__Type___ErrorType_(_dollar9)
   guard _sub_action_2_result is YYObj_Binder(_dollar3)
   guard _args[1].0 is YYObj_Location_(_dollar4)
-  guard _sub_action_1_result is YYObj_Bool(_dollar2)
+  guard _sub_action_1_result is YYObj_Location_(_dollar2)
   guard _args[2].0 is YYObj_List_TypeVarBinder_(_dollar5)
   guard _args[4].0 is YYObj_List_Parameter_(_dollar7)
   guard _args[7].0 is YYObj_Option_Location_(_dollar10)
@@ -8177,7 +8177,7 @@ fn yy_action_183(
   guard _args[8].0 is YYObj__Type___ErrorType_(_dollar9)
   guard _sub_action_2_result is YYObj_Binder(_dollar3)
   guard _args[3].0 is YYObj_Location_(_dollar4)
-  guard _sub_action_1_result is YYObj_Bool(_dollar2)
+  guard _sub_action_1_result is YYObj_Location_(_dollar2)
   guard _args[4].0 is YYObj_List_TypeVarBinder_(_dollar5)
   guard _args[6].0 is YYObj_List_Parameter_(_dollar7)
   guard _args[9].0 is YYObj_Option_Location_(_dollar10)
@@ -8236,7 +8236,7 @@ fn yy_action_184(
   guard _args[7].0 is YYObj__Type___ErrorType_(_dollar9)
   guard _sub_action_2_result is YYObj_Binder(_dollar3)
   guard _args[2].0 is YYObj_Location_(_dollar4)
-  guard _sub_action_1_result is YYObj_Bool(_dollar2)
+  guard _sub_action_1_result is YYObj_Location_(_dollar2)
   guard _args[3].0 is YYObj_List_TypeVarBinder_(_dollar5)
   guard _args[5].0 is YYObj_List_Parameter_(_dollar7)
   guard _args[8].0 is YYObj_Option_Location_(_dollar10)
@@ -9016,7 +9016,7 @@ fn yy_action_216(
   guard _args[3].0 is YYObj__List_LocalTypeDecl___Expr_(_dollar6)
   guard _args[1].0 is YYObj_Option__StringLiteral__Location__(_dollar4)
   guard _args[2].0 is YYObj_Option_List_Parameter__(_dollar5)
-  guard _sub_action_1_result is YYObj_Bool(_dollar2)
+  guard _sub_action_1_result is YYObj_Location_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -12292,7 +12292,7 @@ fn yy_action_342(
   let _sub_action_0_result = yy_action_8(_last_pos, _args[0:0])
   guard _args[1].0 is YYObj_List_MultiArgCase_(_dollar3)
   guard _args[0].0 is YYObj_Location_(_dollar2)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _start_pos_of_item1 = _args[0].1
   let _end_pos_of_item1 = _args[0].2
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -12446,7 +12446,7 @@ fn yy_action_348(
   let _end_pos_of_item4 = _args[3].2
   guard _args[5].0 is YYObj_Expr(_dollar7)
   guard _args[2].0 is YYObj_Location_(_dollar4)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -12851,7 +12851,7 @@ fn yy_action_362(
   let _end_pos_of_item4 = _args[4].2
   guard _args[6].0 is YYObj_Expr(_dollar7)
   guard _args[3].0 is YYObj_Location_(_dollar4)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -12904,7 +12904,7 @@ fn yy_action_363(
   let _sub_action_0_result = yy_action_5(_last_pos, _args[0:1])
   guard _args[1].0 is YYObj__Binder__Location__(_dollar2)
   guard _args[2].0 is YYObj_List_MultiArgCase_(_dollar3)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -12950,7 +12950,7 @@ fn yy_action_364(
   let _sub_action_0_result = yy_action_8(_last_pos, _args[0:0])
   guard _args[0].0 is YYObj__Binder__Location__(_dollar2)
   guard _args[1].0 is YYObj_List_MultiArgCase_(_dollar3)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _start_pos_of_item1 = _args[0].1
   let _end_pos_of_item1 = _args[0].2
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -18854,7 +18854,7 @@ fn yy_action_604(
   let _end_pos_of_item3 = _args[2].2
   guard _args[4].0 is YYObj_Expr(_dollar6)
   guard _args[1].0 is YYObj_Location_(_dollar3)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -19661,7 +19661,7 @@ fn yy_action_637(
   let _end_pos_of_item3 = _args[3].2
   guard _args[5].0 is YYObj_Expr(_dollar6)
   guard _args[2].0 is YYObj_Location_(_dollar3)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -19778,7 +19778,7 @@ fn yy_action_642(
   let _sub_action_0_result = yy_action_5(_last_pos, _args[0:1])
   guard _args[2].0 is YYObj_List_MultiArgCase_(_dollar3)
   guard _args[1].0 is YYObj_Location_(_dollar2)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -20725,7 +20725,7 @@ fn yy_action_687(
   guard _args[6].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _sub_action_1_result is YYObj_Option_List_Type__(_dollar5)
   guard _args[2].0 is YYObj_Type(_dollar3)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -20771,7 +20771,7 @@ fn yy_action_689(
   guard _args[7].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _sub_action_1_result is YYObj_Option_List_Type__(_dollar5)
   guard _args[2].0 is YYObj_Type(_dollar3)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -20811,7 +20811,7 @@ fn yy_action_691(
   let _sub_action_0_result = yy_action_5(_last_pos, _args[0:1])
   guard _args[5].0 is YYObj__Type__ErrorType_(_dollar6)
   guard _args[2].0 is YYObj_Type(_dollar3)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -20993,7 +20993,7 @@ fn yy_action_700(
   guard _args[6].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _sub_action_1_result is YYObj_Option_List_Type__(_dollar5)
   guard _args[1].0 is YYObj_Type(_dollar3)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -21083,7 +21083,7 @@ fn yy_action_702(
   guard _args[5].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _sub_action_1_result is YYObj_Option_List_Type__(_dollar5)
   guard _args[1].0 is YYObj_Type(_dollar3)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -21139,7 +21139,7 @@ fn yy_action_703(
   let _sub_action_0_result = yy_action_8(_last_pos, _args[0:0])
   guard _args[4].0 is YYObj__Type__ErrorType_(_dollar6)
   guard _args[1].0 is YYObj_Type(_dollar3)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -21486,7 +21486,7 @@ fn yy_action_718(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_8(_last_pos, _args[0:0])
   guard _args[3].0 is YYObj__Type__ErrorType_(_dollar5)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -21509,17 +21509,17 @@ fn yy_action_718(
 }
 
 // file:///./parser.mbty
-// 269|     { false }
+// 269|    { None }
 
 ///|
 fn yy_action_8(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  YYObj_Bool(
+  YYObj_Location_(
     {
       ()
-      false
+      None
     },
   )
 }
@@ -21842,7 +21842,7 @@ fn yy_action_730(
 ) -> YYObj {
   let _sub_action_0_result = yy_action_5(_last_pos, _args[0:1])
   guard _args[4].0 is YYObj__Type__ErrorType_(_dollar5)
-  guard _sub_action_0_result is YYObj_Bool(_dollar1)
+  guard _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -21865,17 +21865,19 @@ fn yy_action_730(
 }
 
 // file:///./parser.mbty
-// 268|    "async" { true }
+// 268|    "async" { Some(mk_loc($loc($1))) }
 
 ///|
 fn yy_action_5(
   _last_pos : Position,
   _args : ArrayView[(YYObj, Position, Position)],
 ) -> YYObj {
-  YYObj_Bool(
+  let _start_pos_of_item0 = _args[0].1
+  let _end_pos_of_item0 = _args[0].2
+  YYObj_Location_(
     {
       ()
-      true
+      Some(mk_loc((_start_pos_of_item0, _end_pos_of_item0)))
     },
   )
 }

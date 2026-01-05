@@ -14,7 +14,7 @@
       },
       "params": null,
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""
@@ -30,7 +30,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::Positional",
@@ -241,7 +241,7 @@
       },
       "params": null,
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""
@@ -353,7 +353,7 @@
       },
       "params": null,
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""
@@ -438,7 +438,7 @@
       "name": null,
       "params": null,
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""

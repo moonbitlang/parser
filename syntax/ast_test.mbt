@@ -263,7 +263,7 @@ test "type to_json" {
         "loc": null,
       },
       "err": { "type": "ErrorType::NoErrorType" },
-      "is_async": false,
+      "is_async": null,
       "loc": null,
     },
   )
@@ -1077,7 +1077,7 @@ test "func to_json" {
       "error_type": { "type": "ErrorType::NoErrorType" },
       "kind": { "type": "FnKind::Lambda" },
       "has_error": null,
-      "is_async": false,
+      "is_async": null,
       "loc": null,
     },
   )
@@ -1100,7 +1100,7 @@ test "func to_json" {
         },
       ],
       "has_error": null,
-      "is_async": true,
+      "is_async": [null],
       "fn_loc": null,
       "loc": null,
     },
@@ -2230,7 +2230,7 @@ test "fun_decl to_json" {
     },
     "name": { "type": "Binder", "name": "test_func", "loc": null },
     "has_error": null,
-    "is_async": true,
+    "is_async": [null],
     "decl_params": [
       {
         "type": "Parameter::Positional",
@@ -2312,7 +2312,7 @@ test "trait_method_decl to_json" {
     "type": "TraitMethodDecl",
     "name": { "type": "Binder", "name": "trait_method", "loc": null },
     "has_error": null,
-    "is_async": false,
+    "is_async": null,
     "quantifiers": [
       {
         "type": "TypeVarBinder",
@@ -2398,7 +2398,7 @@ test "trait_decl to_json" {
         "type": "TraitMethodDecl",
         "name": { "type": "Binder", "name": "method", "loc": null },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "quantifiers": [],
         "params": [],
         "return_type": null,
@@ -2470,7 +2470,7 @@ test "impl variants to_json" {
       "name": { "v": "test_string", "loc": null },
       "params": null,
       "local_types": [],
-      "is_async": true,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": "Test documentation",
@@ -2516,7 +2516,7 @@ test "impl variants to_json" {
       "type_name": null,
       "name": { "type": "Binder", "name": "test", "loc": null },
       "has_error": null,
-      "is_async": false,
+      "is_async": null,
       "decl_params": null,
       "params_loc": null,
       "quantifiers": [],

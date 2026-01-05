@@ -12,7 +12,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::Positional",
@@ -148,7 +148,7 @@
         "err": {
           "type": "ErrorType::NoErrorType"
         },
-        "is_async": false,
+        "is_async": null,
         "loc": null
       },
       "expr": {
@@ -211,7 +211,7 @@
         "err": {
           "type": "ErrorType::NoErrorType"
         },
-        "is_async": false,
+        "is_async": null,
         "loc": null
       },
       "expr": {
@@ -245,7 +245,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": null,
         "params_loc": null,
         "quantifiers": [],

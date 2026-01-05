@@ -75,7 +75,7 @@
         }
       ],
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""
@@ -154,7 +154,7 @@
         }
       ],
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""
@@ -236,7 +236,7 @@
         }
       ],
       "local_types": [],
-      "is_async": false,
+      "is_async": null,
       "loc": null,
       "attrs": [],
       "doc": ""

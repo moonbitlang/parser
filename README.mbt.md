@@ -64,7 +64,7 @@ test {
         "type_name": null,
         "name": { "type": "Binder", "name": "add", "loc": null },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [
           {
             "type": "Parameter::Positional",

@@ -55,7 +55,7 @@
               "loc": null
             },
             "has_error": null,
-            "is_async": false,
+            "is_async": null,
             "quantifiers": [],
             "params": [
               {
@@ -105,7 +105,7 @@
               "loc": null
             },
             "has_error": null,
-            "is_async": false,
+            "is_async": null,
             "quantifiers": [],
             "params": [
               {
@@ -155,7 +155,7 @@
               "loc": null
             },
             "has_error": null,
-            "is_async": false,
+            "is_async": null,
             "quantifiers": [],
             "params": [
               {
@@ -204,7 +204,7 @@
               "loc": null
             },
             "has_error": null,
-            "is_async": false,
+            "is_async": null,
             "quantifiers": [],
             "params": [
               {
@@ -278,7 +278,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [],
         "params_loc": null,
         "quantifiers": [],
@@ -329,7 +329,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [],
         "params_loc": null,
         "quantifiers": [],
@@ -381,7 +381,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [],
         "params_loc": null,
         "quantifiers": [],
@@ -485,7 +485,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [],
         "params_loc": null,
         "quantifiers": [],
@@ -544,7 +544,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [],
         "params_loc": null,
         "quantifiers": [],
@@ -604,7 +604,7 @@
           "loc": null
         },
         "has_error": null,
-        "is_async": false,
+        "is_async": null,
         "decl_params": [],
         "params_loc": null,
         "quantifiers": [],

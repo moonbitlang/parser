@@ -52,7 +52,9 @@
                   "type": "ErrorType::Noraise",
                   "loc": null
                 },
-                "is_async": true,
+                "is_async": [
+                  null
+                ],
                 "loc": null
               },
               "mut": false,

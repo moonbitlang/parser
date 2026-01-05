@@ -180,7 +180,7 @@
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               }
             }
@@ -274,7 +274,7 @@
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               }
             }
@@ -390,7 +390,7 @@
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               }
             }
@@ -508,7 +508,7 @@
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               }
             }
@@ -990,7 +990,7 @@
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               }
             }
@@ -1124,7 +1124,7 @@
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               }
             }
@@ -1223,7 +1223,7 @@
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               }
             },
@@ -1262,7 +1262,7 @@
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               }
             }
@@ -1537,7 +1537,7 @@
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               }
             }
@@ -1898,7 +1898,7 @@
                 "err": {
                   "type": "ErrorType::NoErrorType"
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               }
             }

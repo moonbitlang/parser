@@ -367,7 +367,7 @@ pub(all) struct FunDecl {
   type_name : TypeName?
   name : Binder
   has_error : @basic.Location?
-  is_async : Bool
+  is_async : @basic.Location?
   decl_params : @list.List[Parameter]?
   params_loc : @basic.Location
   quantifiers : @list.List[TypeVarBinder]
@@ -380,8 +380,8 @@ pub(all) struct FunDecl {
 pub impl ToJson for FunDecl
 
 pub(all) enum Func {
-  Lambda(parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : Bool, loc~ : @basic.Location)
-  Match(cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : Bool, fn_loc~ : @basic.Location, loc~ : @basic.Location)
+  Lambda(parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : @basic.Location?, loc~ : @basic.Location)
+  Match(cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : @basic.Location?, fn_loc~ : @basic.Location, loc~ : @basic.Location)
 }
 pub impl ToJson for Func
 
@@ -406,7 +406,7 @@ pub impl ToJson for Hole
 
 pub(all) enum Impl {
   TopExpr(expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location)
-  TopTest(expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
+  TopTest(expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopTypeDef(TypeDecl)
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location)
   TopFuncAlias(pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, mut doc~ : DocString, loc~ : @basic.Location)
@@ -587,7 +587,7 @@ pub impl ToJson for TraitDecl
 pub(all) struct TraitMethodDecl {
   name : Binder
   has_error : @basic.Location?
-  is_async : Bool
+  is_async : @basic.Location?
   quantifiers : @list.List[TypeVarBinder]
   params : @list.List[Parameter]
   return_type : Type?
@@ -606,7 +606,7 @@ pub impl ToJson for TryOperatorKind
 
 pub(all) enum Type {
   Any(loc~ : @basic.Location)
-  Arrow(args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : Bool, loc~ : @basic.Location)
+  Arrow(args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : @basic.Location?, loc~ : @basic.Location)
   Tuple(tys~ : @list.List[Type], loc~ : @basic.Location)
   Name(constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @basic.Location)
   Option(ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location)
@@ -709,7 +709,7 @@ pub(open) trait IterVisitor {
   visit_ConstrId(Self, ConstrId) -> Unit = _
   visit_Type(Self, Type) -> Unit = _
   visit_Type_Any(Self, loc~ : @basic.Location) -> Unit = _
-  visit_Type_Arrow(Self, args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : Bool, loc~ : @basic.Location) -> Unit = _
+  visit_Type_Arrow(Self, args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : @basic.Location?, loc~ : @basic.Location) -> Unit = _
   visit_Type_Name(Self, constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @basic.Location) -> Unit = _
   visit_Type_Tuple(Self, tys~ : @list.List[Type], loc~ : @basic.Location) -> Unit = _
   visit_Type_Option(Self, ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location) -> Unit = _
@@ -781,8 +781,8 @@ pub(open) trait IterVisitor {
   visit_MapExprElem(Self, MapExprElem) -> Unit = _
   visit_StaticAssertion(Self, StaticAssertion) -> Unit = _
   visit_Func(Self, Func) -> Unit = _
-  visit_Func_Lambda(Self, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : Bool, loc~ : @basic.Location) -> Unit = _
-  visit_Func_Match(Self, cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : Bool, fn_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
+  visit_Func_Lambda(Self, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : @basic.Location?, loc~ : @basic.Location) -> Unit = _
+  visit_Func_Match(Self, cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : @basic.Location?, fn_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   visit_FieldDef(Self, FieldDef) -> Unit = _
   visit_InterpElem(Self, InterpElem) -> Unit = _
   visit_InterpElem_Literal(Self, repr~ : String, loc~ : @basic.Location) -> Unit = _
@@ -838,7 +838,7 @@ pub(open) trait IterVisitor {
   visit_TraitDecl(Self, TraitDecl) -> Unit = _
   visit_Impl(Self, Impl) -> Unit = _
   visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location) -> Unit = _
-  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
+  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Unit = _
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Unit = _
   visit_Impl_TopFuncAlias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Unit = _
@@ -923,7 +923,7 @@ pub(open) trait MapVisitor {
   visit_ConstrId(Self, ConstrId) -> ConstrId = _
   visit_Type(Self, Type) -> Type = _
   visit_Type_Any(Self, loc~ : @basic.Location) -> Type = _
-  visit_Type_Arrow(Self, args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : Bool, loc~ : @basic.Location) -> Type = _
+  visit_Type_Arrow(Self, args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : @basic.Location?, loc~ : @basic.Location) -> Type = _
   visit_Type_Tuple(Self, tys~ : @list.List[Type], loc~ : @basic.Location) -> Type = _
   visit_Type_Name(Self, constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @basic.Location) -> Type = _
   visit_Type_Option(Self, ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location) -> Type = _
@@ -995,8 +995,8 @@ pub(open) trait MapVisitor {
   visit_MapExprElem(Self, MapExprElem) -> MapExprElem = _
   visit_StaticAssertion(Self, StaticAssertion) -> StaticAssertion = _
   visit_Func(Self, Func) -> Func = _
-  visit_Func_Lambda(Self, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : Bool, loc~ : @basic.Location) -> Func = _
-  visit_Func_Match(Self, cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : Bool, fn_loc~ : @basic.Location, loc~ : @basic.Location) -> Func = _
+  visit_Func_Lambda(Self, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : @basic.Location?, loc~ : @basic.Location) -> Func = _
+  visit_Func_Match(Self, cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : @basic.Location?, fn_loc~ : @basic.Location, loc~ : @basic.Location) -> Func = _
   visit_FieldDef(Self, FieldDef) -> FieldDef = _
   visit_InterpElem(Self, InterpElem) -> InterpElem = _
   visit_InterpElem_Literal(Self, repr~ : String, loc~ : @basic.Location) -> InterpElem = _
@@ -1053,7 +1053,7 @@ pub(open) trait MapVisitor {
   visit_UsingKind(Self, UsingKind) -> UsingKind = _
   visit_Impl(Self, Impl) -> Impl = _
   visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], loc~ : @basic.Location) -> Impl = _
-  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
+  visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Impl = _
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Impl = _
   visit_Impl_TopFuncAlias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Impl = _

@@ -839,7 +839,7 @@
                     "loc": null
                   }
                 },
-                "is_async": false,
+                "is_async": null,
                 "loc": null
               }
             }
