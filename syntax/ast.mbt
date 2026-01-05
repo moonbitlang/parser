@@ -810,6 +810,7 @@ pub(all) enum Impl {
     expr~ : Expr,
     is_main~ : Bool,
     local_types~ : @list.List[LocalTypeDecl],
+    is_async~ : Location?,
     loc~ : Location
   )
   TopTest(

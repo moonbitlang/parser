@@ -2443,6 +2443,7 @@ test "impl variants to_json" {
       expr=unit_expr,
       is_main=true,
       local_types=@list.from_array([]),
+      is_async=None,
       loc=dummy_loc,
     ),
     content={
