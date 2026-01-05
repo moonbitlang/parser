@@ -586,6 +586,14 @@ pub fn Parameter::loc(self : Self) -> Location {
 }
 
 ///|
+pub fn AliasTarget::loc(self : AliasTarget) -> Location {
+  match self.target {
+    None => self.binder.loc
+    Some(target) => self.binder.loc.merge(target.loc)
+  }
+}
+
+///|
 fn shift_col(pos : Position, offset : Int) -> Position {
   Position::{
     lnum: pos.lnum,

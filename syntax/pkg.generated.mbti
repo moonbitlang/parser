@@ -21,6 +21,8 @@ pub fn desugar_array_get(loc~ : @basic.Location, Expr, Expr) -> Expr
 
 pub fn desugar_array_set(loc~ : @basic.Location, Expr, Expr, Expr) -> Expr
 
+pub fn impls_json_repr(@list.List[Impl]) -> Json
+
 pub fn impls_to_json(@list.List[Impl]) -> Json
 
 pub fn label_to_expr(loc~ : @basic.Location, Label) -> Expr
@@ -93,6 +95,7 @@ pub(all) struct AliasTarget {
   binder : Binder
   target : Label?
 }
+pub fn AliasTarget::loc(Self) -> @basic.Location
 pub impl ToJson for AliasTarget
 
 pub(all) enum ApplyAttr {
