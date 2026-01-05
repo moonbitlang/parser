@@ -35,7 +35,7 @@ pub(open) trait MapVisitor {
     args~ : @list.List[Type],
     res~ : Type,
     err~ : ErrorType,
-    is_async~ : Bool,
+    is_async~ : Location?,
     loc~ : Location,
   ) -> Type = _
   visit_Type_Tuple(Self, tys~ : @list.List[Type], loc~ : Location) -> Type = _
@@ -210,14 +210,14 @@ pub(open) trait MapVisitor {
     error_type~ : ErrorType,
     kind~ : FnKind,
     has_error~ : Location?,
-    is_async~ : Bool,
+    is_async~ : Location?,
     loc~ : Location,
   ) -> Func = _
   visit_Func_Match(
     Self,
     cases~ : @list.List[MultiArgCase],
     has_error~ : Location?,
-    is_async~ : Bool,
+    is_async~ : Location?,
     fn_loc~ : Location,
     loc~ : Location,
   ) -> Func = _
@@ -384,7 +384,7 @@ pub(open) trait MapVisitor {
     name~ : TestName,
     params~ : Parameters?,
     local_types~ : @list.List[LocalTypeDecl],
-    is_async~ : Bool,
+    is_async~ : Location?,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     doc~ : DocString,

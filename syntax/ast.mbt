@@ -73,7 +73,7 @@ pub(all) enum Type {
     args~ : @list.List[Type],
     res~ : Type,
     err~ : ErrorType,
-    is_async~ : Bool,
+    is_async~ : Location?,
     loc~ : Location
   )
   Tuple(tys~ : @list.List[Type], loc~ : Location)
@@ -335,13 +335,13 @@ pub(all) enum Func {
     error_type~ : ErrorType,
     kind~ : FnKind,
     has_error~ : Location?,
-    is_async~ : Bool,
+    is_async~ : Location?,
     loc~ : Location
   )
   Match(
     cases~ : @list.List[MultiArgCase],
     has_error~ : Location?,
-    is_async~ : Bool,
+    is_async~ : Location?,
     fn_loc~ : Location,
     loc~ : Location
   )
@@ -761,7 +761,7 @@ pub(all) struct FunDecl {
   type_name : TypeName?
   name : Binder
   has_error : Location?
-  is_async : Bool
+  is_async : Location?
   decl_params : Parameters?
   params_loc : Location
   quantifiers : @list.List[TypeVarBinder]
@@ -776,7 +776,7 @@ pub(all) struct FunDecl {
 pub(all) struct TraitMethodDecl {
   name : Binder
   has_error : Location?
-  is_async : Bool
+  is_async : Location?
   quantifiers : @list.List[TypeVarBinder]
   params : Parameters
   return_type : Type?
@@ -817,7 +817,7 @@ pub(all) enum Impl {
     name~ : TestName,
     params~ : Parameters?,
     local_types~ : @list.List[LocalTypeDecl],
-    is_async~ : Bool,
+    is_async~ : Location?,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     mut doc~ : DocString
