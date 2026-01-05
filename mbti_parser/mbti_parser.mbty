@@ -334,9 +334,9 @@ pub_attr -> String?
   | "(" LIDENT ")" { Some($2) }
   ;
 
-%inline is_async -> Bool
-  : "async" { true }
-  | { false }
+%inline is_async -> Location?
+  : "async" { Some(mk_loc($loc($1))) }
+  | { None }
   ;
 
 qualified_uident -> QualifiedName

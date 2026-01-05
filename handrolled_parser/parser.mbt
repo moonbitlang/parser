@@ -421,7 +421,7 @@ fn State::parse_fun_decl(
     return {
       name: @syntax.Binder::{ name: "", loc },
       has_error: None,
-      is_async: false,
+      is_async: None,
       type_name: None,
       decl_params: Some(@list.new()),
       params_loc: loc,
@@ -434,10 +434,11 @@ fn State::parse_fun_decl(
     }
   }
   let is_async = if self.peek_token() is ASYNC {
+    let loc = self.peek_location()
     self.skip()
-    true
+    Some(loc)
   } else {
-    false
+    None
   }
   self.expect_token(TK_FN)
   let quantifiers = self.parse_opt_typ_params()
@@ -481,7 +482,7 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
     return {
       name: { name: "", loc },
       has_error: None,
-      is_async: false,
+      is_async: None,
       quantifiers: @list.new(),
       params: @list.new(),
       return_type: None,
@@ -495,10 +496,11 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
   let attrs = self.parse_attributes()
   self.push_sync(TK_LPAREN)
   let is_async = if self.peek_token() is ASYNC {
+    let loc = self.peek_location()
     self.skip()
-    true
+    Some(loc)
   } else {
-    false
+    None
   }
   let func_name = self.parse_binder(context="trait method name")
   let has_error = self.parse_optional_bang()
@@ -850,7 +852,7 @@ fn State::parse_test_block(
     name~,
     params~,
     expr~,
-    is_async=false,
+    is_async=None,
     local_types~,
     loc~,
     doc=DocString::empty(),
@@ -3998,7 +4000,7 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
 fn State::parse_func(
   self : Self,
   has_error~ : Location?,
-  is_async~ : Bool,
+  is_async~ : Location?,
 ) -> @syntax.Func {
   if self.mode is Panic(loc~, ..) {
     return @syntax.Lambda(
@@ -4287,12 +4289,13 @@ fn State::parse_simple_expr(
       self.parse_constr_expr(spos~, extra_info=NoExtraInfo)
     }
     ASYNC => {
+      let is_async = Some(self.peek_location())
       let spos = self.peek_spos()
       self.expect_token(TK_ASYNC) // async
       // TODO: improve error recovery for case like `async \n trait`
       self.with_syncs([TK_LPAREN, TK_LBRACE], _.expect_token(TK_FN)) // fn
       let has_error = self.parse_optional_bang()
-      let func = self.parse_func(has_error~, is_async=true)
+      let func = self.parse_func(has_error~, is_async~)
       let loc = self.loc_start_with(spos)
       Function(func~, loc~)
     }
@@ -4300,7 +4303,7 @@ fn State::parse_simple_expr(
       let spos = self.peek_spos()
       self.expect_token(TK_FN)
       let has_error = self.parse_optional_bang()
-      let func = self.parse_func(has_error~, is_async=false)
+      let func = self.parse_func(has_error~, is_async=None)
       let loc = self.loc_start_with(spos)
       Function(func~, loc~)
     }
@@ -4666,7 +4669,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
       error_type=NoErrorType,
       kind=Lambda,
       has_error=None,
-      is_async=false,
+      is_async=None,
       loc~,
     )
   }
@@ -4708,10 +4711,11 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
     }
     _ => {
       let is_async = if self.peek_token() is ASYNC {
+        let loc = self.peek_location()
         self.expect_token(TK_ASYNC)
-        true
+        Some(loc)
       } else {
-        false
+        None
       }
       self.with_syncs([TK_LPAREN, TK_LBRACE], _.expect_token(TK_FN)) // fn
       let has_error = self.parse_optional_bang()
@@ -4764,12 +4768,13 @@ fn State::parse_stmt(self : Self) -> Statement {
       StmtLetand(bindings=@list.from_array(bindings), loc~)
     }
     ASYNC if self.peek_token(nth=1) is FN && self.peek_token(nth=2) is LIDENT(_) => {
+      let is_async = Some(self.peek_location())
       let spos = self.peek_spos()
       self.skip() // async
       self.expect_token(TK_FN)
       let binder = self.parse_binder(context="")
       let has_error = self.parse_optional_bang()
-      let func = self.parse_func(has_error~, is_async=true)
+      let func = self.parse_func(has_error~, is_async~)
       let loc = self.loc_start_with(spos)
       StmtFunc(binder~, func~, loc~)
     }
@@ -4778,7 +4783,7 @@ fn State::parse_stmt(self : Self) -> Statement {
       self.expect_token(TK_FN)
       let binder = self.parse_binder(context="")
       let has_error = self.parse_optional_bang()
-      let func = self.parse_func(has_error~, is_async=false)
+      let func = self.parse_func(has_error~, is_async=None)
       let loc = self.loc_start_with(spos)
       StmtFunc(binder~, func~, loc~)
     }
@@ -5172,6 +5177,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
       parse_question_mark(spos, ty)
     }
     ASYNC => {
+      let is_async = Some(self.peek_location())
       self.skip()
       let tys = self.surround_series(
           left=TK_LPAREN,
@@ -5183,7 +5189,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
       self.expect_token(TK_THIN_ARROW)
       let (ty_res, ty_err) = self.parse_return_type()
       let loc = self.loc_start_with(spos)
-      (false, Arrow(args=tys, res=ty_res, err=ty_err, is_async=true, loc~))
+      (false, Arrow(args=tys, res=ty_res, err=ty_err, is_async~, loc~))
     }
     LPAREN => {
       let tys = self.surround_series(
@@ -5199,7 +5205,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
         let loc = self.loc_start_with(spos)
         (
           false,
-          Arrow(args=@list.new(), res=ty_res, err=ty_err, is_async=false, loc~),
+          Arrow(args=@list.new(), res=ty_res, err=ty_err, is_async=None, loc~),
         )
       } else {
         match self.peek_token() {
@@ -5209,7 +5215,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
             let loc = self.loc_start_with(spos)
             (
               false,
-              Arrow(args=tys, res=ty_res, err=ty_err, is_async=false, loc~),
+              Arrow(args=tys, res=ty_res, err=ty_err, is_async=None, loc~),
             )
           }
           _ => {

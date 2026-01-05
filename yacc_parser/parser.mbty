@@ -264,9 +264,9 @@ type_parameters -> List[TypeVarBinder]
   : delimited("[", non_empty_list_commas(id(tvar_binder)), "]") { $1 }
   ;
 
-%inline is_async -> Bool
-  : "async" { true }
-  |  { false }
+%inline is_async -> Location?
+  : "async" { Some(mk_loc($loc($1))) }
+  | { None }
   ;
 
 optional_type_parameters -> List[TypeVarBinder]
@@ -373,7 +373,7 @@ extern_fun_header -> (StringLiteral, FunDecl)
       type_name,
       name: f,
       has_error : $7,
-      is_async : false,
+      is_async : None,
       quantifiers: $8,
       decl_params: $9,
       params_loc: mk_loc($loc($9)),
