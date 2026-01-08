@@ -3285,51 +3285,6 @@ fn State::parse_lex_simple_atom_pattern(self : State) -> @syntax.LexPattern {
 }
 
 ///|
-fn State::parse_multi_pattern_case(self : Self) -> @syntax.MultiArgCase {
-  if self.mode is Panic(loc~, ..) {
-    return {
-      patterns: @list.new(),
-      guard_: None,
-      body: Hole(loc~, kind=Synthesized),
-    }
-  }
-  fn parse_patterns(state : State) -> Array[@syntax.Pattern] {
-    state.with_follow(follow_set=[TK_FAT_ARROW, TK_IF], fn(state) {
-      state.sepby1(delim=TK_COMMA, State::parse_pattern)
-    })
-  }
-
-  let patterns = self.with_syncs([TK_FAT_ARROW, TK_IF], parse_patterns)
-    |> @list.from_array
-  let guard_ = match self.peek_token() {
-    IF => {
-      self.skip()
-      let expr = match self.peek_token() {
-        // an error production to handle: `pattern if invalid-infix-expr => action`
-        IF
-        | MATCH
-        | LOOP
-        | WHILE
-        | FOR
-        | TRY
-        | LET
-        | GUARD
-        | BREAK
-        | RETURN
-        | CONTINUE =>
-          self.handle_unexpected_expr_or_statement(context="pattern guard")
-        _ => self.parse_infix_expr(parsed=None)
-      }
-      Some(expr)
-    }
-    _ => None
-  }
-  self.expect_token(TK_FAT_ARROW)
-  let body = self.parse_expr_stmt()
-  { patterns, guard_, body }
-}
-
-///|
 fn State::parse_tuple_or_constraint(self : Self) -> @syntax.Expr {
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
@@ -3397,6 +3352,7 @@ fn State::handle_lparen(self : Self) -> @syntax.Expr {
   let handle_expr = fn(expr) { self.parse_simple_try_expr(parsed=Some(expr)) }
   match (self.peek_token(), expr_or_binders) {
     (FAT_ARROW, _) => {
+      let params_loc = self.loc_start_with(spos)
       self.skip()
       fn as_binder(expr : @syntax.Expr) -> @syntax.ArrowFnParam {
         match expr {
@@ -3422,7 +3378,10 @@ fn State::handle_lparen(self : Self) -> @syntax.Expr {
         |> @list.from_array
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
-      Function(loc~, func=@syntax.make_arrow_fn(loc~, parameters, body))
+      Function(
+        loc~,
+        func=@syntax.make_arrow_fn(params_loc~, loc~, parameters, body),
+      )
     }
     (_, []) => {
       let loc = self.loc_start_with(spos)
@@ -3516,12 +3475,14 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
         }
         _ => panic()
       }
+      let params_loc = self.loc_start_with(spos)
       self.expect_token(TK_FAT_ARROW)
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
       let func = @syntax.make_arrow_fn(
         @list.from_array([(p, None)]),
         body,
+        params_loc~,
         loc~,
       )
       Function(loc~, func~)
@@ -4009,17 +3970,17 @@ fn State::parse_func(
   is_async~ : Location?,
 ) -> @syntax.Func {
   if self.mode is Panic(loc~, ..) {
-    return @syntax.Lambda(
-      parameters=@list.new(),
-      params_loc=loc,
-      body=@syntax.Hole(loc~, kind=Synthesized),
-      return_type=None,
-      error_type=@syntax.NoErrorType,
-      kind=Lambda,
-      has_error~,
-      is_async~,
-      loc~,
-    )
+    return @syntax.Func::{
+      parameters: @list.new(),
+      params_loc: loc,
+      body: @syntax.Hole(loc~, kind=Synthesized),
+      return_type: None,
+      error_type: @syntax.NoErrorType,
+      kind: Lambda,
+      has_error,
+      is_async,
+      loc,
+    }
   }
   match self.peek_token() {
     LPAREN => {
@@ -4036,24 +3997,17 @@ fn State::parse_func(
       self.pop_sync(TK_LBRACE)
       let block = self.parse_block_expr()
       let func_loc = @syntax.no_location
-      @syntax.Lambda( // Will be set by caller
-        parameters=@list.from_array(params),
-        params_loc~,
-        body=block,
-        return_type~,
-        error_type~,
-        kind=Lambda,
-        has_error~,
-        is_async~,
-        loc=func_loc,
-      )
-    }
-    LBRACE => {
-      let loc_start = self.peek_spos()
-      let fn_loc = @syntax.no_location // Will be set by caller  
-      let cases = self.parse_match_fn_body()
-      let loc = self.loc_start_with(loc_start)
-      @syntax.Match(cases~, has_error~, is_async~, fn_loc~, loc~)
+      @syntax.Func::{ // Will be set by caller
+        parameters: @list.from_array(params),
+        params_loc,
+        body: block,
+        return_type,
+        error_type,
+        kind: Lambda,
+        has_error,
+        is_async,
+        loc: func_loc,
+      }
     }
     other => {
       self.report_error({
@@ -4061,17 +4015,17 @@ fn State::parse_func(
         msg: "Failed to parse func: expected '(' or '{', got \{other}",
       })
       let loc = self.panic()
-      @syntax.Lambda(
-        parameters=@list.new(),
-        params_loc=loc,
-        body=@syntax.Hole(loc~, kind=Synthesized),
-        return_type=None,
-        error_type=@syntax.NoErrorType,
-        kind=Lambda,
-        has_error~,
-        is_async~,
-        loc~,
-      )
+      @syntax.Func::{
+        parameters: @list.new(),
+        params_loc: loc,
+        body: @syntax.Hole(loc~, kind=Synthesized),
+        return_type: None,
+        error_type: @syntax.NoErrorType,
+        kind: Lambda,
+        has_error,
+        is_async,
+        loc,
+      }
     }
   }
 }
@@ -4667,17 +4621,17 @@ fn State::parse_block_expr(self : Self) -> @syntax.Expr {
 ///|
 fn State::parse_letand_func(self : Self) -> @syntax.Func {
   if self.mode is Panic(loc~, ..) {
-    return Lambda(
-      parameters=@list.new(),
-      params_loc=loc,
-      body=Hole(loc~, kind=Synthesized),
-      return_type=None,
-      error_type=NoErrorType,
-      kind=Lambda,
-      has_error=None,
-      is_async=None,
-      loc~,
-    )
+    return @syntax.Func::{
+      parameters: @list.new(),
+      params_loc: loc,
+      body: Hole(loc~, kind=Synthesized),
+      return_type: None,
+      error_type: NoErrorType,
+      kind: Lambda,
+      has_error: None,
+      is_async: None,
+      loc,
+    }
   }
   fn parse_arrow_fn_param() -> @syntax.ArrowFnParam {
     if self.peek_token() is UNDERSCORE {
@@ -4703,17 +4657,29 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
           (param, ty_opt)
         },
       )
+      let params_loc = self.loc_start_with(spos)
       self.expect_token(TK_FAT_ARROW)
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
-      @syntax.make_arrow_fn(@list.from_array(parameters), body, loc~)
+      @syntax.make_arrow_fn(
+        @list.from_array(parameters),
+        body,
+        params_loc~,
+        loc~,
+      )
     }
     LIDENT(_) | UNDERSCORE => {
       let param = parse_arrow_fn_param()
+      let params_loc = self.loc_start_with(spos)
       self.expect_token(TK_FAT_ARROW)
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
-      @syntax.make_arrow_fn(@list.from_array([(param, None)]), body, loc~)
+      @syntax.make_arrow_fn(
+        @list.from_array([(param, None)]),
+        body,
+        params_loc~,
+        loc~,
+      )
     }
     _ => {
       let is_async = if self.peek_token() is ASYNC {
@@ -4993,17 +4959,6 @@ fn State::parse_expr_stmt(self : Self) -> @syntax.Expr {
     }
     _ => self.parse_expr_stmt_no_break_continue_return()
   }
-}
-
-///|
-fn State::parse_match_fn_body(self : Self) -> @list.List[@syntax.MultiArgCase] {
-  self.surround_series(
-    left=TK_LBRACE,
-    right=TK_RBRACE,
-    delim=TK_SEMI,
-    State::parse_multi_pattern_case,
-  )
-  |> @list.from_array
 }
 
 ///|

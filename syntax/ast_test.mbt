@@ -362,7 +362,6 @@ test "argument_kind to_json" {
 ///|
 test "fn_kind to_json" {
   @json.inspect(@syntax.FnKind::Lambda, content={ "type": "FnKind::Lambda" })
-  @json.inspect(@syntax.FnKind::Matrix, content={ "type": "FnKind::Matrix" })
   @json.inspect(@syntax.FnKind::Arrow, content={ "type": "FnKind::Arrow" })
 }
 
@@ -963,23 +962,6 @@ test "case to_json" {
 }
 
 ///|
-test "multi_arg_case to_json" {
-  let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
-  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
-  let multi_case = @syntax.MultiArgCase::{
-    patterns: @list.from_array([any_pattern]),
-    guard_: Some(unit_expr),
-    body: unit_expr,
-  }
-  @json.inspect(multi_case, content={
-    "type": "MultiArgCase",
-    "patterns": [{ "type": "Pattern::Any", "loc": null }],
-    "guard": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "body": { "type": "Expr::Unit", "loc": null, "faked": false },
-  })
-}
-
-///|
 test "static_assertion to_json" {
   let int_type = @syntax.Name(
     constr_id=@syntax.ConstrId::{
@@ -1026,24 +1008,19 @@ test "func to_json" {
     loc=dummy_loc,
   )
   let param = @syntax.Parameter::Positional(binder~, ty=Some(int_type))
-  let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
-  let multi_case = @syntax.MultiArgCase::{
-    patterns: @list.from_array([any_pattern]),
-    guard_: None,
-    body: unit_expr,
-  }
+  // let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
   @json.inspect(
-    @syntax.Func::Lambda(
-      parameters=@list.from_array([param]),
-      params_loc=dummy_loc,
-      body=unit_expr,
-      return_type=Some(int_type),
-      error_type=@syntax.NoErrorType,
-      kind=@syntax.FnKind::Lambda,
-      has_error=Some(dummy_loc),
-      is_async=None,
-      loc=dummy_loc,
-    ),
+    @syntax.Func::{
+      parameters: @list.from_array([param]),
+      params_loc: dummy_loc,
+      body: unit_expr,
+      return_type: Some(int_type),
+      error_type: @syntax.NoErrorType,
+      kind: @syntax.FnKind::Lambda,
+      has_error: Some(dummy_loc),
+      is_async: None,
+      loc: dummy_loc,
+    },
     content={
       "type": "Func::Lambda",
       "parameters": [
@@ -1078,30 +1055,6 @@ test "func to_json" {
       "kind": { "type": "FnKind::Lambda" },
       "has_error": null,
       "is_async": null,
-      "loc": null,
-    },
-  )
-  @json.inspect(
-    @syntax.Func::Match(
-      cases=@list.from_array([multi_case]),
-      has_error=None,
-      is_async=Some(dummy_loc),
-      fn_loc=dummy_loc,
-      loc=dummy_loc,
-    ),
-    content={
-      "type": "Func::Match",
-      "cases": [
-        {
-          "type": "MultiArgCase",
-          "patterns": [{ "type": "Pattern::Any", "loc": null }],
-          "guard": null,
-          "body": { "type": "Expr::Unit", "loc": null, "faked": false },
-        },
-      ],
-      "has_error": null,
-      "is_async": [null],
-      "fn_loc": null,
       "loc": null,
     },
   )

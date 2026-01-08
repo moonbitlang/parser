@@ -1048,29 +1048,18 @@ statement -> Statement
   }
   | is_async "fn" binder optional_bang parameters func_return_type block_expr { 
     let (return_type, error_type) = $6
-    let func = Func::Lambda(
-      parameters = $5,
-      params_loc = mk_loc($loc($5)),
-      body = $7,
-      return_type~,
-      error_type~,
-      kind = Lambda,
-      has_error = $4,
-      is_async = $1,
-      loc = mk_loc($sloc)
-    )
+    let func = Func::{
+      parameters : $5,
+      params_loc : mk_loc($loc($5)),
+      body : $7,
+      return_type,
+      error_type,
+      kind : Lambda,
+      has_error : $4,
+      is_async : $1,
+      loc : mk_loc($sloc)
+    }
     StmtFunc(binder = $3, func~, loc = mk_loc($sloc))
-  }
-  | is_async fn_header list_semis(multi_pattern_case) "}" { 
-    let (binder, has_error) = $2
-    let func = Func::Match(
-      cases = $3,
-      has_error~,
-      is_async = $1,
-      fn_loc = mk_loc($loc($2)),
-      loc = mk_loc($sloc)
-    )
-    StmtFunc(binder~, func~, loc = mk_loc($sloc))
   }
   | guard_statement { $1 }
   | "defer" pipe_expr { StmtDefer(expr = $2, loc = mk_loc($sloc)) }
@@ -1426,16 +1415,16 @@ simple_try_expr -> Expr
 
 arrow_fn_expr -> Func
   : "(" arrow_fn_prefix "=>" expr_statement_no_break_continue_return { 
-    make_arrow_fn($2, $4, loc = mk_loc($sloc))
+    make_arrow_fn($2, $4, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))), loc = mk_loc($sloc))
   }
   | "(" ")" "=>" expr_statement_no_break_continue_return { 
-    make_arrow_fn(@list.empty(), $4, loc = mk_loc($sloc))
+    make_arrow_fn(@list.empty(), $4, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),loc = mk_loc($sloc))
   }
   | binder "=>" expr_statement_no_break_continue_return { 
-    make_arrow_fn(@list.singleton((Named($1), None)), $3, loc = mk_loc($sloc))
+    make_arrow_fn(@list.singleton((Named($1), None)), $3, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
   }
   | "_" "=>" expr_statement_no_break_continue_return { 
-    make_arrow_fn(@list.singleton((Unnamed(mk_loc($loc($1))), None)), $3, loc = mk_loc($sloc))
+    make_arrow_fn(@list.singleton((Unnamed(mk_loc($loc($1))), None)), $3, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
   }
   ;
 
@@ -1597,26 +1586,17 @@ tuple_expr -> Expr
 anony_fn -> Func
   : is_async "fn" optional_bang parameters func_return_type block_expr { 
     let (return_type, error_type) = $5
-    Lambda(
-      parameters = $4,
-      params_loc = mk_loc($loc($4)),
-      body = $6,
-      return_type~,
-      error_type~,
-      kind = Lambda,
-      has_error = $3,
-      is_async = $1,
-      loc = mk_loc($sloc)
-    )
-  }
-  | is_async fn_header_no_binder list_semis(multi_pattern_case) "}" { 
-    Match(
-      cases = $3,
-      has_error = $2,
-      is_async = $1,
-      fn_loc = mk_loc($loc($2)),
-      loc = mk_loc($sloc)
-    )
+    Func::{
+      parameters : $4,
+      params_loc : mk_loc($loc($4)),
+      body : $6,
+      return_type,
+      error_type,
+      kind : Lambda,
+      has_error : $3,
+      is_async : $1,
+      loc : mk_loc($sloc)
+    }
   }
   ;
 

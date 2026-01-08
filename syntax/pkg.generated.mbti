@@ -33,7 +33,7 @@ pub fn make_alias_pattern(loc~ : @basic.Location, Pattern, Binder) -> Pattern
 
 pub fn make_array_expr(loc~ : @basic.Location, @list.List[SpreadableElem]) -> Expr
 
-pub fn make_arrow_fn(@list.List[(ArrowFnParam, Type?)], Expr, loc~ : @basic.Location) -> Func
+pub fn make_arrow_fn(@list.List[(ArrowFnParam, Type?)], Expr, params_loc~ : @basic.Location, loc~ : @basic.Location) -> Func
 
 pub fn make_assign_opt(loc~ : @basic.Location, Expr, Expr) -> Expr?
 
@@ -358,7 +358,6 @@ pub impl ToJson for FieldPat
 
 pub(all) enum FnKind {
   Lambda
-  Matrix
   Arrow
 }
 pub impl ToJson for FnKind
@@ -379,9 +378,16 @@ pub(all) struct FunDecl {
 }
 pub impl ToJson for FunDecl
 
-pub(all) enum Func {
-  Lambda(parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : @basic.Location?, loc~ : @basic.Location)
-  Match(cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : @basic.Location?, fn_loc~ : @basic.Location, loc~ : @basic.Location)
+pub(all) struct Func {
+  parameters : @list.List[Parameter]
+  params_loc : @basic.Location
+  body : Expr
+  return_type : Type?
+  error_type : ErrorType
+  kind : FnKind
+  has_error : @basic.Location?
+  is_async : @basic.Location?
+  loc : @basic.Location
 }
 pub impl ToJson for Func
 
@@ -503,13 +509,6 @@ pub(all) struct MapVisitorBase[T](T)
 #deprecated
 pub fn[T] MapVisitorBase::inner(Self[T]) -> T
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T]
-
-pub(all) struct MultiArgCase {
-  patterns : @list.List[Pattern]
-  guard_ : Expr?
-  body : Expr
-}
-pub impl ToJson for MultiArgCase
 
 pub(all) enum MultilineStringElem {
   String(String)
@@ -774,15 +773,12 @@ pub(open) trait IterVisitor {
   visit_LexPattern_RegexInterp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> Unit = _
   visit_LexPattern_Alias(Self, pat~ : LexPattern, binder~ : Binder, loc~ : @basic.Location) -> Unit = _
   visit_LexPattern_Sequence(Self, pats~ : @list.List[LexPattern], loc~ : @basic.Location) -> Unit = _
-  visit_MultiArgCase(Self, MultiArgCase) -> Unit = _
   visit_SpreadableElem(Self, SpreadableElem) -> Unit = _
   visit_SpreadableElem_Regular(Self, Expr) -> Unit = _
   visit_SpreadableElem_Spread(Self, expr~ : Expr, loc~ : @basic.Location) -> Unit = _
   visit_MapExprElem(Self, MapExprElem) -> Unit = _
   visit_StaticAssertion(Self, StaticAssertion) -> Unit = _
   visit_Func(Self, Func) -> Unit = _
-  visit_Func_Lambda(Self, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : @basic.Location?, loc~ : @basic.Location) -> Unit = _
-  visit_Func_Match(Self, cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : @basic.Location?, fn_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   visit_FieldDef(Self, FieldDef) -> Unit = _
   visit_InterpElem(Self, InterpElem) -> Unit = _
   visit_InterpElem_Literal(Self, repr~ : String, loc~ : @basic.Location) -> Unit = _
@@ -988,15 +984,12 @@ pub(open) trait MapVisitor {
   visit_LexPattern_RegexInterp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> LexPattern = _
   visit_LexPattern_Alias(Self, pat~ : LexPattern, binder~ : Binder, loc~ : @basic.Location) -> LexPattern = _
   visit_LexPattern_Sequence(Self, pats~ : @list.List[LexPattern], loc~ : @basic.Location) -> LexPattern = _
-  visit_MultiArgCase(Self, MultiArgCase) -> MultiArgCase = _
   visit_SpreadableElem(Self, SpreadableElem) -> SpreadableElem = _
   visit_SpreadableElem_Regular(Self, Expr) -> SpreadableElem = _
   visit_SpreadableElem_Spread(Self, expr~ : Expr, loc~ : @basic.Location) -> SpreadableElem = _
   visit_MapExprElem(Self, MapExprElem) -> MapExprElem = _
   visit_StaticAssertion(Self, StaticAssertion) -> StaticAssertion = _
   visit_Func(Self, Func) -> Func = _
-  visit_Func_Lambda(Self, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, return_type~ : Type?, error_type~ : ErrorType, kind~ : FnKind, has_error~ : @basic.Location?, is_async~ : @basic.Location?, loc~ : @basic.Location) -> Func = _
-  visit_Func_Match(Self, cases~ : @list.List[MultiArgCase], has_error~ : @basic.Location?, is_async~ : @basic.Location?, fn_loc~ : @basic.Location, loc~ : @basic.Location) -> Func = _
   visit_FieldDef(Self, FieldDef) -> FieldDef = _
   visit_InterpElem(Self, InterpElem) -> InterpElem = _
   visit_InterpElem_Literal(Self, repr~ : String, loc~ : @basic.Location) -> InterpElem = _
