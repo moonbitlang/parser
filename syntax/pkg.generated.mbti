@@ -392,7 +392,7 @@ pub(all) struct Func {
 pub impl ToJson for Func
 
 pub(all) enum FuncStubs {
-  Import(module_name~ : String, func_name~ : String)
+  Import(module_name~ : String, func_name~ : String, language~ : String?)
   Embedded(language~ : String?, code~ : EmbeddedCode)
 }
 pub impl ToJson for FuncStubs
@@ -821,7 +821,7 @@ pub(open) trait IterVisitor {
   visit_DerivingDirective(Self, DerivingDirective) -> Unit = _
   visit_TypeDecl(Self, TypeDecl) -> Unit = _
   visit_FuncStubs(Self, FuncStubs) -> Unit = _
-  visit_FuncStubs_Import(Self, module_name~ : String, func_name~ : String) -> Unit = _
+  visit_FuncStubs_Import(Self, module_name~ : String, func_name~ : String, language~ : String?) -> Unit = _
   visit_FuncStubs_Embedded(Self, language~ : String?, code~ : EmbeddedCode) -> Unit = _
   visit_EmbeddedCode(Self, EmbeddedCode) -> Unit = _
   visit_EmbeddedCode_CodeString(Self, String) -> Unit = _
@@ -1032,7 +1032,7 @@ pub(open) trait MapVisitor {
   visit_DerivingDirective(Self, DerivingDirective) -> DerivingDirective = _
   visit_TypeDecl(Self, TypeDecl) -> TypeDecl = _
   visit_FuncStubs(Self, FuncStubs) -> FuncStubs = _
-  visit_FuncStubs_Import(Self, module_name~ : String, func_name~ : String) -> FuncStubs = _
+  visit_FuncStubs_Import(Self, module_name~ : String, func_name~ : String, language~ : String?) -> FuncStubs = _
   visit_FuncStubs_Embedded(Self, language~ : String?, code~ : EmbeddedCode) -> FuncStubs = _
   visit_EmbeddedCode(Self, EmbeddedCode) -> EmbeddedCode = _
   visit_EmbeddedCode_CodeString(Self, String) -> EmbeddedCode = _

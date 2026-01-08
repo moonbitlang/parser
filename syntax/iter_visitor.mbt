@@ -313,6 +313,7 @@ pub(open) trait IterVisitor {
     Self,
     module_name~ : StringLiteral,
     func_name~ : StringLiteral,
+    language~ : StringLiteral?,
   ) -> Unit = _
   visit_FuncStubs_Embedded(
     Self,
@@ -2017,8 +2018,18 @@ impl IterVisitor with visit_FuncStubs(env, func_stubs) {
 }
 
 ///|
-impl IterVisitor with visit_FuncStubs_Import(env, module_name~, func_name~) {
-  IterVisitorBase::visit_FuncStubs_Import(env, module_name~, func_name~)
+impl IterVisitor with visit_FuncStubs_Import(
+  env,
+  module_name~,
+  func_name~,
+  language~,
+) {
+  IterVisitorBase::visit_FuncStubs_Import(
+    env,
+    module_name~,
+    func_name~,
+    language~,
+  )
 }
 
 ///|
@@ -3478,8 +3489,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_FuncStub
   func_stubs,
 ) {
   match func_stubs {
-    Import(module_name~, func_name~) =>
-      env.0.visit_FuncStubs_Import(module_name~, func_name~)
+    Import(module_name~, func_name~, language~) =>
+      env.0.visit_FuncStubs_Import(module_name~, func_name~, language~)
     Embedded(language~, code~) =>
       env.0.visit_FuncStubs_Embedded(language~, code~)
   }
@@ -3490,9 +3501,11 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_FuncStub
   _,
   module_name~,
   func_name~,
+  language~,
 ) {
   ignore(module_name)
   ignore(func_name)
+  ignore(language)
 }
 
 ///|

@@ -571,11 +571,20 @@ structure_item -> Impl
       doc = DocString::empty()
     )
   }
+  | extern_fun_header "=" STRING STRING {
+    let (language, fun_decl) = $1
+    TopFuncDef(
+      loc = mk_loc($sloc),
+      fun_decl~,
+      decl_body = DeclStubs(Import(module_name = $3, func_name = $4, language = Some(language)))
+    )
+  }
+    
   | fun_header "=" STRING STRING {
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = $1,
-      decl_body = DeclStubs(Import(module_name = $3, func_name = $4))
+      decl_body = DeclStubs(Import(module_name = $3, func_name = $4, language = None))
     )
   }
   | fun_header "=" STRING {
