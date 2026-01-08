@@ -313,6 +313,7 @@ pub(open) trait MapVisitor {
     Self,
     module_name~ : StringLiteral,
     func_name~ : StringLiteral,
+    language~ : StringLiteral?,
   ) -> FuncStubs = _
   visit_FuncStubs_Embedded(
     Self,
@@ -2017,8 +2018,18 @@ impl MapVisitor with visit_FuncStubs(env, func_stubs) {
 }
 
 ///|
-impl MapVisitor with visit_FuncStubs_Import(env, module_name~, func_name~) {
-  MapVisitorBase::visit_FuncStubs_Import(env, module_name~, func_name~)
+impl MapVisitor with visit_FuncStubs_Import(
+  env,
+  module_name~,
+  func_name~,
+  language~,
+) {
+  MapVisitorBase::visit_FuncStubs_Import(
+    env,
+    module_name~,
+    func_name~,
+    language~,
+  )
 }
 
 ///|
@@ -3566,8 +3577,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FuncStubs(
   func_stubs,
 ) {
   match func_stubs {
-    Import(module_name~, func_name~) =>
-      env.0.visit_FuncStubs_Import(module_name~, func_name~)
+    Import(module_name~, func_name~, language~) =>
+      env.0.visit_FuncStubs_Import(module_name~, func_name~, language~)
     Embedded(language~, code~) =>
       env.0.visit_FuncStubs_Embedded(language~, code~)
   }
@@ -3578,8 +3589,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FuncStubs_I
   _,
   module_name~,
   func_name~,
+  language~,
 ) {
-  Import(module_name~, func_name~)
+  Import(module_name~, func_name~, language~)
 }
 
 ///|

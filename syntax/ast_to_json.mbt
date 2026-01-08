@@ -740,12 +740,14 @@ pub impl ToJson for TypeDecl with to_json(self) {
 ///|
 pub impl ToJson for FuncStubs with to_json(self) {
   match self {
-    Import(module_name~, func_name~) =>
+    Import(module_name~, func_name~, language~) => {
+      ignore(language)
       {
         "type": "FuncStubs::Import",
         "module_name": module_name,
         "func_name": func_name,
       }
+    }
     Embedded(language~, code~) =>
       {
         "type": "FuncStubs::Embedded",

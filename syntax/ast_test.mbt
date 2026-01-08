@@ -693,6 +693,7 @@ test "func_stubs to_json" {
     @syntax.Import(
       module_name=dummy_string_literal,
       func_name=dummy_string_literal,
+      language=None,
     ),
     content={
       "type": "FuncStubs::Import",
@@ -2120,6 +2121,7 @@ test "decl_body to_json" {
       @syntax.Import(
         module_name=dummy_string_literal,
         func_name=dummy_string_literal,
+        language=None,
       ),
     ),
     content={

@@ -723,7 +723,11 @@ pub(all) struct TypeDecl {
 
 ///|
 pub(all) enum FuncStubs {
-  Import(module_name~ : StringLiteral, func_name~ : StringLiteral)
+  Import(
+    module_name~ : StringLiteral,
+    func_name~ : StringLiteral,
+    language~ : StringLiteral?
+  )
   Embedded(language~ : StringLiteral?, code~ : EmbeddedCode)
 }
 

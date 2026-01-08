@@ -885,7 +885,7 @@ fn State::parse_top_func(
       let name1 = self.expect_string()
       if self.peek_token() is STRING(name2) {
         self.skip()
-        DeclStubs(Import(module_name=name1, func_name=name2))
+        DeclStubs(Import(module_name=name1, func_name=name2, language=None))
       } else {
         DeclStubs(Embedded(language=None, code=CodeString(name1)))
       }
@@ -1161,14 +1161,26 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         )
       } else {
         let body = self.expect_string()
-        let loc = self.loc_start_with(spos)
-        TopFuncDef(
-          fun_decl~,
-          decl_body=DeclStubs(
-            Embedded(language=Some(language), code=CodeString(body)),
-          ),
-          loc~,
-        )
+        if self.peek_token() is STRING(_) {
+          let fname = self.expect_string()
+          let loc = self.loc_start_with(spos)
+          TopFuncDef(
+            fun_decl~,
+            decl_body=DeclStubs(
+              Import(module_name=body, func_name=fname, language=Some(language)),
+            ),
+            loc~,
+          )
+        } else {
+          let loc = self.loc_start_with(spos)
+          TopFuncDef(
+            fun_decl~,
+            decl_body=DeclStubs(
+              Embedded(language=Some(language), code=CodeString(body)),
+            ),
+            loc~,
+          )
+        }
       }
     }
     ASYNC =>
