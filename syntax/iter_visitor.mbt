@@ -185,9 +185,6 @@ pub(open) trait IterVisitor {
     loc~ : Location,
   ) -> Unit = _
 
-  // MultiArgCase
-  visit_MultiArgCase(Self, MultiArgCase) -> Unit = _
-
   // SpreadableElem
   visit_SpreadableElem(Self, SpreadableElem) -> Unit = _
   visit_SpreadableElem_Regular(Self, Expr) -> Unit = _
@@ -201,26 +198,6 @@ pub(open) trait IterVisitor {
 
   // Func
   visit_Func(Self, Func) -> Unit = _
-  visit_Func_Lambda(
-    Self,
-    parameters~ : Parameters,
-    params_loc~ : Location,
-    body~ : Expr,
-    return_type~ : Type?,
-    error_type~ : ErrorType,
-    kind~ : FnKind,
-    has_error~ : Location?,
-    is_async~ : Location?,
-    loc~ : Location,
-  ) -> Unit = _
-  visit_Func_Match(
-    Self,
-    cases~ : @list.List[MultiArgCase],
-    has_error~ : Location?,
-    is_async~ : Location?,
-    fn_loc~ : Location,
-    loc~ : Location,
-  ) -> Unit = _
 
   // FieldDef
   visit_FieldDef(Self, FieldDef) -> Unit = _
@@ -1793,11 +1770,6 @@ impl IterVisitor with visit_Case(env, case) {
 }
 
 ///|
-impl IterVisitor with visit_MultiArgCase(env, multi_arg_case) {
-  IterVisitorBase::visit_MultiArgCase(env, multi_arg_case)
-}
-
-///|
 impl IterVisitor with visit_SpreadableElem(env, spreadable_elem) {
   IterVisitorBase::visit_SpreadableElem(env, spreadable_elem)
 }
@@ -1825,52 +1797,6 @@ impl IterVisitor with visit_StaticAssertion(env, static_assertion) {
 ///|
 impl IterVisitor with visit_Func(env, func) {
   IterVisitorBase::visit_Func(env, func)
-}
-
-///|
-impl IterVisitor with visit_Func_Lambda(
-  env,
-  parameters~,
-  params_loc~,
-  body~,
-  return_type~,
-  error_type~,
-  kind~,
-  has_error~,
-  is_async~,
-  loc~,
-) {
-  IterVisitorBase::visit_Func_Lambda(
-    env,
-    parameters~,
-    params_loc~,
-    body~,
-    return_type~,
-    error_type~,
-    kind~,
-    has_error~,
-    is_async~,
-    loc~,
-  )
-}
-
-///|
-impl IterVisitor with visit_Func_Match(
-  env,
-  cases~,
-  has_error~,
-  is_async~,
-  fn_loc~,
-  loc~,
-) {
-  IterVisitorBase::visit_Func_Match(
-    env,
-    cases~,
-    has_error~,
-    is_async~,
-    fn_loc~,
-    loc~,
-  )
 }
 
 ///|
@@ -3033,16 +2959,6 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Case(
 }
 
 ///|
-pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_MultiArgCase(
-  env,
-  multi_arg_case,
-) {
-  multi_arg_case.patterns.each(env.0.visit_Pattern(_))
-  multi_arg_case.guard_.each(env.0.visit_Expr(_))
-  env.0.visit_Expr(multi_arg_case.body)
-}
-
-///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_SpreadableElem(
   env,
   spreadable_elem,
@@ -3094,72 +3010,26 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Func(
   env,
   func,
 ) {
-  match func {
-    Lambda(
-      parameters~,
-      params_loc~,
-      body~,
-      return_type~,
-      error_type~,
-      kind~,
-      has_error~,
-      is_async~,
-      loc~
-    ) =>
-      env.0.visit_Func_Lambda(
-        parameters~,
-        params_loc~,
-        body~,
-        return_type~,
-        error_type~,
-        kind~,
-        has_error~,
-        is_async~,
-        loc~,
-      )
-    Match(cases~, has_error~, is_async~, fn_loc~, loc~) =>
-      env.0.visit_Func_Match(cases~, has_error~, is_async~, fn_loc~, loc~)
-  }
-}
-
-///|
-pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Func_Lambda(
-  env,
-  parameters~,
-  params_loc~,
-  body~,
-  return_type~,
-  error_type~,
-  kind~,
-  has_error~,
-  is_async~,
-  loc~,
-) {
-  ignore(params_loc)
-  ignore(has_error)
+  let {
+    is_async,
+    parameters,
+    params_loc,
+    body,
+    return_type,
+    error_type,
+    kind,
+    has_error,
+    loc,
+  } = func
   ignore(is_async)
+  ignore(params_loc)
   ignore(loc)
-  parameters.each(env.0.visit_Parameter(_))
+  ignore(has_error)
+  parameters.each(p => env.0.visit_Parameter(p))
   env.0.visit_Expr(body)
-  return_type.each(env.0.visit_Type(_))
+  return_type.each(t => env.0.visit_Type(t))
   env.0.visit_ErrorType(error_type)
   env.0.visit_FnKind(kind)
-}
-
-///|
-pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Func_Match(
-  env,
-  cases~,
-  has_error~,
-  is_async~,
-  fn_loc~,
-  loc~,
-) {
-  ignore(has_error)
-  ignore(is_async)
-  ignore(fn_loc)
-  ignore(loc)
-  cases.each(env.0.visit_MultiArgCase(_))
 }
 
 ///|

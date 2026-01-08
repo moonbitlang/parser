@@ -185,9 +185,6 @@ pub(open) trait MapVisitor {
     loc~ : Location,
   ) -> LexPattern = _
 
-  // MultiArgCase
-  visit_MultiArgCase(Self, MultiArgCase) -> MultiArgCase = _
-
   // SpreadableElem
   visit_SpreadableElem(Self, SpreadableElem) -> SpreadableElem = _
   visit_SpreadableElem_Regular(Self, Expr) -> SpreadableElem = _
@@ -201,26 +198,6 @@ pub(open) trait MapVisitor {
 
   // Func
   visit_Func(Self, Func) -> Func = _
-  visit_Func_Lambda(
-    Self,
-    parameters~ : Parameters,
-    params_loc~ : Location,
-    body~ : Expr,
-    return_type~ : Type?,
-    error_type~ : ErrorType,
-    kind~ : FnKind,
-    has_error~ : Location?,
-    is_async~ : Location?,
-    loc~ : Location,
-  ) -> Func = _
-  visit_Func_Match(
-    Self,
-    cases~ : @list.List[MultiArgCase],
-    has_error~ : Location?,
-    is_async~ : Location?,
-    fn_loc~ : Location,
-    loc~ : Location,
-  ) -> Func = _
 
   // FieldDef
   visit_FieldDef(Self, FieldDef) -> FieldDef = _
@@ -1793,11 +1770,6 @@ impl MapVisitor with visit_Case(env, case) {
 }
 
 ///|
-impl MapVisitor with visit_MultiArgCase(env, multi_arg_case) {
-  MapVisitorBase::visit_MultiArgCase(env, multi_arg_case)
-}
-
-///|
 impl MapVisitor with visit_SpreadableElem(env, spreadable_elem) {
   MapVisitorBase::visit_SpreadableElem(env, spreadable_elem)
 }
@@ -1825,52 +1797,6 @@ impl MapVisitor with visit_StaticAssertion(env, static_assertion) {
 ///|
 impl MapVisitor with visit_Func(env, func) {
   MapVisitorBase::visit_Func(env, func)
-}
-
-///|
-impl MapVisitor with visit_Func_Lambda(
-  env,
-  parameters~,
-  params_loc~,
-  body~,
-  return_type~,
-  error_type~,
-  kind~,
-  has_error~,
-  is_async~,
-  loc~,
-) {
-  MapVisitorBase::visit_Func_Lambda(
-    env,
-    parameters~,
-    params_loc~,
-    body~,
-    return_type~,
-    error_type~,
-    kind~,
-    has_error~,
-    is_async~,
-    loc~,
-  )
-}
-
-///|
-impl MapVisitor with visit_Func_Match(
-  env,
-  cases~,
-  has_error~,
-  is_async~,
-  fn_loc~,
-  loc~,
-) {
-  MapVisitorBase::visit_Func_Match(
-    env,
-    cases~,
-    has_error~,
-    is_async~,
-    fn_loc~,
-    loc~,
-  )
 }
 
 ///|
@@ -3074,17 +3000,6 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Case(
 }
 
 ///|
-pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_MultiArgCase(
-  env,
-  multi_arg_case,
-) {
-  let patterns = multi_arg_case.patterns.map(env.0.visit_Pattern(_))
-  let guard_ = multi_arg_case.guard_.map(env.0.visit_Expr(_))
-  let body = env.0.visit_Expr(multi_arg_case.body)
-  MultiArgCase::{ patterns, guard_, body }
-}
-
-///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_SpreadableElem(
   env,
   spreadable_elem,
@@ -3143,76 +3058,33 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Func(
   env,
   func,
 ) {
-  match func {
-    Lambda(
-      parameters~,
-      params_loc~,
-      body~,
-      return_type~,
-      error_type~,
-      kind~,
-      has_error~,
-      is_async~,
-      loc~
-    ) =>
-      env.0.visit_Func_Lambda(
-        parameters~,
-        params_loc~,
-        body~,
-        return_type~,
-        error_type~,
-        kind~,
-        has_error~,
-        is_async~,
-        loc~,
-      )
-    Match(cases~, has_error~, is_async~, fn_loc~, loc~) =>
-      env.0.visit_Func_Match(cases~, has_error~, is_async~, fn_loc~, loc~)
-  }
-}
-
-///|
-pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Func_Lambda(
-  env,
-  parameters~,
-  params_loc~,
-  body~,
-  return_type~,
-  error_type~,
-  kind~,
-  has_error~,
-  is_async~,
-  loc~,
-) {
-  let parameters = parameters.map(env.0.visit_Parameter(_))
+  let {
+    is_async,
+    parameters,
+    params_loc,
+    body,
+    return_type,
+    error_type,
+    kind,
+    has_error,
+    loc,
+  } = func
+  let parameters = parameters.map(p => env.0.visit_Parameter(p))
   let body = env.0.visit_Expr(body)
-  let return_type = return_type.map(env.0.visit_Type(_))
+  let return_type = return_type.map(t => env.0.visit_Type(t))
   let error_type = env.0.visit_ErrorType(error_type)
   let kind = env.0.visit_FnKind(kind)
-  Lambda(
-    parameters~,
-    params_loc~,
-    body~,
-    return_type~,
-    error_type~,
-    kind~,
-    has_error~,
-    is_async~,
-    loc~,
-  )
-}
-
-///|
-pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Func_Match(
-  env,
-  cases~,
-  has_error~,
-  is_async~,
-  fn_loc~,
-  loc~,
-) {
-  let cases = cases.map(env.0.visit_MultiArgCase(_))
-  Match(cases~, has_error~, is_async~, fn_loc~, loc~)
+  {
+    is_async,
+    parameters,
+    params_loc,
+    body,
+    return_type,
+    error_type,
+    kind,
+    has_error,
+    loc,
+  }
 }
 
 ///|

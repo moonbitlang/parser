@@ -412,6 +412,7 @@ pub fn arrow_fn_param_to_expr(p : ArrowFnParam) -> Expr {
 pub fn make_arrow_fn(
   params : @list.List[(ArrowFnParam, Type?)],
   body : Expr,
+  params_loc~ : Location,
   loc~ : Location,
 ) -> Func {
   let parameters = params.map(fn(p) {
@@ -421,17 +422,17 @@ pub fn make_arrow_fn(
       Unnamed(loc) => Parameter::DiscardPositional(ty~, loc~)
     }
   })
-  Func::Lambda(
-    parameters~,
-    params_loc=loc,
-    body~,
-    return_type=None,
-    error_type=ErrorType::NoErrorType,
-    kind=FnKind::Arrow,
-    has_error=None,
-    is_async=None,
-    loc~,
-  )
+  Func::{
+    parameters,
+    params_loc,
+    body,
+    return_type: None,
+    error_type: ErrorType::NoErrorType,
+    kind: FnKind::Arrow,
+    has_error: None,
+    is_async: None,
+    loc,
+  }
 }
 
 ///|

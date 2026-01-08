@@ -60,7 +60,6 @@ using @syntax {
   type DeclBody,
   type AliasTarget,
   type TraitMethodDecl,
-  type MultiArgCase,
   type DocString,
   type FunDecl,
   type ExceptionDecl,

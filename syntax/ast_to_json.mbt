@@ -281,7 +281,6 @@ pub impl ToJson for ArgumentKind with to_json(self) {
 pub impl ToJson for FnKind with to_json(self) {
   match self {
     Lambda => { "type": "FnKind::Lambda" }
-    Matrix => { "type": "FnKind::Matrix" }
     Arrow => { "type": "FnKind::Arrow" }
   }
 }
@@ -466,17 +465,6 @@ pub impl ToJson for LexPattern with to_json(self) {
 }
 
 ///|
-pub impl ToJson for MultiArgCase with to_json(self) {
-  let { patterns, guard_, body } = self
-  {
-    "type": "MultiArgCase",
-    "patterns": list_to_json(patterns),
-    "guard": option_to_json(guard_),
-    "body": body,
-  }
-}
-
-///|
 pub impl ToJson for SpreadableElem with to_json(self) {
   match self {
     Regular(expr) => { "type": "SpreadableElem::Regular", "0": expr }
@@ -511,39 +499,17 @@ pub impl ToJson for StaticAssertion with to_json(self) {
 
 ///|
 pub impl ToJson for Func with to_json(self) {
-  match self {
-    Lambda(
-      parameters~,
-      params_loc~,
-      body~,
-      return_type~,
-      error_type~,
-      kind~,
-      has_error~,
-      is_async~,
-      loc~
-    ) =>
-      {
-        "type": "Func::Lambda",
-        "parameters": list_to_json(parameters),
-        "params_loc": params_loc,
-        "body": body,
-        "return_type": option_to_json(return_type),
-        "error_type": error_type,
-        "kind": kind,
-        "has_error": option_to_json(has_error),
-        "is_async": is_async,
-        "loc": loc,
-      }
-    Match(cases~, has_error~, is_async~, fn_loc~, loc~) =>
-      {
-        "type": "Func::Match",
-        "cases": list_to_json(cases),
-        "has_error": option_to_json(has_error),
-        "is_async": is_async,
-        "fn_loc": fn_loc,
-        "loc": loc,
-      }
+  {
+    "type": "Func::Lambda",
+    "parameters": list_to_json(self.parameters),
+    "params_loc": self.params_loc,
+    "body": self.body,
+    "return_type": option_to_json(self.return_type),
+    "error_type": self.error_type,
+    "kind": self.kind,
+    "has_error": option_to_json(self.has_error),
+    "is_async": self.is_async,
+    "loc": self.loc,
   }
 }
 

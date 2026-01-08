@@ -170,7 +170,6 @@ pub(all) enum ArgumentKind {
 ///|
 pub(all) enum FnKind {
   Lambda
-  Matrix
   Arrow
 }
 
@@ -295,13 +294,6 @@ pub(all) struct Case {
 }
 
 ///|
-pub(all) struct MultiArgCase {
-  patterns : @list.List[Pattern]
-  guard_ : Expr?
-  body : Expr
-}
-
-///|
 pub(all) enum SpreadableElem {
   /// `expr`
   Regular(Expr)
@@ -326,25 +318,16 @@ pub(all) struct StaticAssertion {
 }
 
 ///|
-pub(all) enum Func {
-  Lambda(
-    parameters~ : Parameters,
-    params_loc~ : Location,
-    body~ : Expr,
-    return_type~ : Type?,
-    error_type~ : ErrorType,
-    kind~ : FnKind,
-    has_error~ : Location?,
-    is_async~ : Location?,
-    loc~ : Location
-  )
-  Match(
-    cases~ : @list.List[MultiArgCase],
-    has_error~ : Location?,
-    is_async~ : Location?,
-    fn_loc~ : Location,
-    loc~ : Location
-  )
+pub(all) struct Func {
+  parameters : Parameters
+  params_loc : Location
+  body : Expr
+  return_type : Type?
+  error_type : ErrorType
+  kind : FnKind
+  has_error : Location?
+  is_async : Location?
+  loc : Location
 }
 
 ///|
