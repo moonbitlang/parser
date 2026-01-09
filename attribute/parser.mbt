@@ -11,37 +11,59 @@ type YYObj = Error
 priv suberror YYObj_Void
 
 ///|
-priv suberror YYObj_Int Int
+priv suberror YYObj_Int {
+  YYObj_Int(Int)
+}
 
 ///|
-priv suberror YYObj_Bool Bool
+priv suberror YYObj_Bool {
+  YYObj_Bool(Bool)
+}
 
 ///|
-priv suberror YYObj_Expr Expr
+priv suberror YYObj_Expr {
+  YYObj_Expr(Expr)
+}
 
 ///|
-priv suberror YYObj_List_Prop_ List[Prop]
+priv suberror YYObj_List_Prop_ {
+  YYObj_List_Prop_(List[Prop])
+}
 
 ///|
-priv suberror YYObj_Prop Prop
+priv suberror YYObj_Prop {
+  YYObj_Prop(Prop)
+}
 
 ///|
-priv suberror YYObj_String String
+priv suberror YYObj_String {
+  YYObj_String(String)
+}
 
 ///|
-priv suberror YYObj_Comment Comment
+priv suberror YYObj_Comment {
+  YYObj_Comment(Comment)
+}
 
 ///|
-priv suberror YYObj_CharLiteral CharLiteral
+priv suberror YYObj_CharLiteral {
+  YYObj_CharLiteral(CharLiteral)
+}
 
 ///|
-priv suberror YYObj_InterpLiteral InterpLiteral
+priv suberror YYObj_InterpLiteral {
+  YYObj_InterpLiteral(InterpLiteral)
+}
 
 ///|
-priv suberror YYObj_StringLiteral StringLiteral
+priv suberror YYObj_StringLiteral {
+  YYObj_StringLiteral(StringLiteral)
+}
 
 ///|
-priv suberror YYObj__String__String___String_ (String, String?, String)
+priv suberror YYObj__String__String___String_ {
+  YYObj__String__String___String_((String, String?, String))
+}
 
 ///|
 type YYState = (YYSymbol) -> YYDecision

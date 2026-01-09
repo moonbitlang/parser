@@ -1,0 +1,8 @@
+import { "moonbitlang/parser/syntax", "moonbitlang/parser/basic" }
+
+import "test" { }
+
+options(
+  "pre-build": [ ],
+  "warn-list": "-1-6",
+)

@@ -11,466 +11,714 @@ type YYObj = Error
 priv suberror YYObj_Void
 
 ///|
-priv suberror YYObj_Int Int
+priv suberror YYObj_Int {
+  YYObj_Int(Int)
+}
 
 ///|
-priv suberror YYObj_Var Var
+priv suberror YYObj_Var {
+  YYObj_Var(Var)
+}
 
 ///|
-priv suberror YYObj_Bool Bool
+priv suberror YYObj_Bool {
+  YYObj_Bool(Bool)
+}
 
 ///|
-priv suberror YYObj_Case Case
+priv suberror YYObj_Case {
+  YYObj_Case(Case)
+}
 
 ///|
-priv suberror YYObj_Expr Expr
+priv suberror YYObj_Expr {
+  YYObj_Expr(Expr)
+}
 
 ///|
-priv suberror YYObj_Func Func
+priv suberror YYObj_Func {
+  YYObj_Func(Func)
+}
 
 ///|
-priv suberror YYObj_Impl Impl
+priv suberror YYObj_Impl {
+  YYObj_Impl(Impl)
+}
 
 ///|
-priv suberror YYObj_List_Case_ List[Case]
+priv suberror YYObj_List_Case_ {
+  YYObj_List_Case_(List[Case])
+}
 
 ///|
-priv suberror YYObj_List_Expr_ List[Expr]
+priv suberror YYObj_List_Expr_ {
+  YYObj_List_Expr_(List[Expr])
+}
 
 ///|
-priv suberror YYObj_List_Impl_ List[Impl]
+priv suberror YYObj_List_Impl_ {
+  YYObj_List_Impl_(List[Impl])
+}
 
 ///|
-priv suberror YYObj_List_Type_ List[Type]
+priv suberror YYObj_List_Type_ {
+  YYObj_List_Type_(List[Type])
+}
 
 ///|
-priv suberror YYObj_List_String_ List[String]
+priv suberror YYObj_List_String_ {
+  YYObj_List_String_(List[String])
+}
 
 ///|
-priv suberror YYObj_List_LexCase_ List[LexCase]
+priv suberror YYObj_List_LexCase_ {
+  YYObj_List_LexCase_(List[LexCase])
+}
 
 ///|
-priv suberror YYObj_List_Pattern_ List[Pattern]
+priv suberror YYObj_List_Pattern_ {
+  YYObj_List_Pattern_(List[Pattern])
+}
 
 ///|
-priv suberror YYObj_List_Argument_ List[Argument]
+priv suberror YYObj_List_Argument_ {
+  YYObj_List_Argument_(List[Argument])
+}
 
 ///|
-priv suberror YYObj_List_FieldDef_ List[FieldDef]
+priv suberror YYObj_List_FieldDef_ {
+  YYObj_List_FieldDef_(List[FieldDef])
+}
 
 ///|
-priv suberror YYObj_List_FieldPat_ List[FieldPat]
+priv suberror YYObj_List_FieldPat_ {
+  YYObj_List_FieldPat_(List[FieldPat])
+}
 
 ///|
-priv suberror YYObj_List_Attribute_ List[Attribute]
+priv suberror YYObj_List_Attribute_ {
+  YYObj_List_Attribute_(List[Attribute])
+}
 
 ///|
-priv suberror YYObj_List_FieldDecl_ List[FieldDecl]
+priv suberror YYObj_List_FieldDecl_ {
+  YYObj_List_FieldDecl_(List[FieldDecl])
+}
 
 ///|
-priv suberror YYObj_List_Parameter_ List[Parameter]
+priv suberror YYObj_List_Parameter_ {
+  YYObj_List_Parameter_(List[Parameter])
+}
 
 ///|
-priv suberror YYObj_List_Statement_ List[Statement]
+priv suberror YYObj_List_Statement_ {
+  YYObj_List_Statement_(List[Statement])
+}
 
 ///|
-priv suberror YYObj_List_ConstrDecl_ List[ConstrDecl]
+priv suberror YYObj_List_ConstrDecl_ {
+  YYObj_List_ConstrDecl_(List[ConstrDecl])
+}
 
 ///|
-priv suberror YYObj_List_MapPatElem_ List[MapPatElem]
+priv suberror YYObj_List_MapPatElem_ {
+  YYObj_List_MapPatElem_(List[MapPatElem])
+}
 
 ///|
-priv suberror YYObj_List_AliasTarget_ List[AliasTarget]
+priv suberror YYObj_List_AliasTarget_ {
+  YYObj_List_AliasTarget_(List[AliasTarget])
+}
 
 ///|
-priv suberror YYObj_List_ConstrParam_ List[ConstrParam]
+priv suberror YYObj_List_ConstrParam_ {
+  YYObj_List_ConstrParam_(List[ConstrParam])
+}
 
 ///|
-priv suberror YYObj_List_MapExprElem_ List[MapExprElem]
+priv suberror YYObj_List_MapExprElem_ {
+  YYObj_List_MapExprElem_(List[MapExprElem])
+}
 
 ///|
-priv suberror YYObj_List_ArrayPattern_ List[ArrayPattern]
+priv suberror YYObj_List_ArrayPattern_ {
+  YYObj_List_ArrayPattern_(List[ArrayPattern])
+}
 
 ///|
-priv suberror YYObj_List_ArrowFnParam_ List[ArrowFnParam]
+priv suberror YYObj_List_ArrowFnParam_ {
+  YYObj_List_ArrowFnParam_(List[ArrowFnParam])
+}
 
 ///|
-priv suberror YYObj_List_ConstrPatArg_ List[ConstrPatArg]
+priv suberror YYObj_List_ConstrPatArg_ {
+  YYObj_List_ConstrPatArg_(List[ConstrPatArg])
+}
 
 ///|
-priv suberror YYObj_List_TypeVarBinder_ List[TypeVarBinder]
+priv suberror YYObj_List_TypeVarBinder_ {
+  YYObj_List_TypeVarBinder_(List[TypeVarBinder])
+}
 
 ///|
-priv suberror YYObj_List_SpreadableElem_ List[SpreadableElem]
+priv suberror YYObj_List_SpreadableElem_ {
+  YYObj_List_SpreadableElem_(List[SpreadableElem])
+}
 
 ///|
-priv suberror YYObj_List_TypeDeclBinder_ List[TypeDeclBinder]
+priv suberror YYObj_List_TypeDeclBinder_ {
+  YYObj_List_TypeDeclBinder_(List[TypeDeclBinder])
+}
 
 ///|
-priv suberror YYObj_List_TraitMethodDecl_ List[TraitMethodDecl]
+priv suberror YYObj_List_TraitMethodDecl_ {
+  YYObj_List_TraitMethodDecl_(List[TraitMethodDecl])
+}
 
 ///|
-priv suberror YYObj_List_DerivingDirective_ List[DerivingDirective]
+priv suberror YYObj_List_DerivingDirective_ {
+  YYObj_List_DerivingDirective_(List[DerivingDirective])
+}
 
 ///|
-priv suberror YYObj_List_MultilineStringElem_ List[MultilineStringElem]
+priv suberror YYObj_List_MultilineStringElem_ {
+  YYObj_List_MultilineStringElem_(List[MultilineStringElem])
+}
 
 ///|
-priv suberror YYObj_List_Binder__ List[Binder?]
+priv suberror YYObj_List_Binder__ {
+  YYObj_List_Binder__(List[Binder?])
+}
 
 ///|
-priv suberror YYObj_List__Binder__Expr__ List[(Binder, Expr)]
+priv suberror YYObj_List__Binder__Expr__ {
+  YYObj_List__Binder__Expr__(List[(Binder, Expr)])
+}
 
 ///|
-priv suberror YYObj_List__AliasTarget__UsingKind__ List[
-  (AliasTarget, UsingKind),
-]
+priv suberror YYObj_List__AliasTarget__UsingKind__ {
+  YYObj_List__AliasTarget__UsingKind__(List[(AliasTarget, UsingKind)])
+}
 
 ///|
-priv suberror YYObj_List__ArrowFnParam__Type___ List[(ArrowFnParam, Type?)]
+priv suberror YYObj_List__ArrowFnParam__Type___ {
+  YYObj_List__ArrowFnParam__Type___(List[(ArrowFnParam, Type?)])
+}
 
 ///|
-priv suberror YYObj_Type Type
+priv suberror YYObj_Type {
+  YYObj_Type(Type)
+}
 
 ///|
-priv suberror YYObj_Label Label
+priv suberror YYObj_Label {
+  YYObj_Label(Label)
+}
 
 ///|
-priv suberror YYObj_Binder Binder
+priv suberror YYObj_Binder {
+  YYObj_Binder(Binder)
+}
 
 ///|
-priv suberror YYObj_Option_Bool_ Bool?
+priv suberror YYObj_Option_Bool_ {
+  YYObj_Option_Bool_(Bool?)
+}
 
 ///|
-priv suberror YYObj_Option_Expr_ Expr?
+priv suberror YYObj_Option_Expr_ {
+  YYObj_Option_Expr_(Expr?)
+}
 
 ///|
-priv suberror YYObj_Option_List_Type__ List[Type]?
+priv suberror YYObj_Option_List_Type__ {
+  YYObj_Option_List_Type__(List[Type]?)
+}
 
 ///|
-priv suberror YYObj_Option_List_Parameter__ List[Parameter]?
+priv suberror YYObj_Option_List_Parameter__ {
+  YYObj_Option_List_Parameter__(List[Parameter]?)
+}
 
 ///|
-priv suberror YYObj_Option_List_ConstrParam__ List[ConstrParam]?
+priv suberror YYObj_Option_List_ConstrParam__ {
+  YYObj_Option_List_ConstrParam__(List[ConstrParam]?)
+}
 
 ///|
-priv suberror YYObj_Option_List_TypeVarBinder__ List[TypeVarBinder]?
+priv suberror YYObj_Option_List_TypeVarBinder__ {
+  YYObj_Option_List_TypeVarBinder__(List[TypeVarBinder]?)
+}
 
 ///|
-priv suberror YYObj_Option_List_TypeDeclBinder__ List[TypeDeclBinder]?
+priv suberror YYObj_Option_List_TypeDeclBinder__ {
+  YYObj_Option_List_TypeDeclBinder__(List[TypeDeclBinder]?)
+}
 
 ///|
-priv suberror YYObj_Option_Type_ Type?
+priv suberror YYObj_Option_Type_ {
+  YYObj_Option_Type_(Type?)
+}
 
 ///|
-priv suberror YYObj_Option_Unit_ Unit?
+priv suberror YYObj_Option_Unit_ {
+  YYObj_Option_Unit_(Unit?)
+}
 
 ///|
-priv suberror YYObj_Option_Label_ Label?
+priv suberror YYObj_Option_Label_ {
+  YYObj_Option_Label_(Label?)
+}
 
 ///|
-priv suberror YYObj_Option_Binder_ Binder?
+priv suberror YYObj_Option_Binder_ {
+  YYObj_Option_Binder_(Binder?)
+}
 
 ///|
-priv suberror YYObj_Option_Location_ Location?
+priv suberror YYObj_Option_Location_ {
+  YYObj_Option_Location_(Location?)
+}
 
 ///|
-priv suberror YYObj_Option_TypeName_ TypeName?
+priv suberror YYObj_Option_TypeName_ {
+  YYObj_Option_TypeName_(TypeName?)
+}
 
 ///|
-priv suberror YYObj_Option__list_List_TypeVarConstraint__ @list.List[
-  TypeVarConstraint,
-]?
+priv suberror YYObj_Option__list_List_TypeVarConstraint__ {
+  YYObj_Option__list_List_TypeVarConstraint__(@list.List[TypeVarConstraint]?)
+}
 
 ///|
-priv suberror YYObj_Option__List_ConstrPatArg___Bool__ (
-  List[ConstrPatArg],
-  Bool,
-)?
+priv suberror YYObj_Option__List_ConstrPatArg___Bool__ {
+  YYObj_Option__List_ConstrPatArg___Bool__((List[ConstrPatArg], Bool)?)
+}
 
 ///|
-priv suberror YYObj_Option__String__Location__ (String, Location)?
+priv suberror YYObj_Option__String__Location__ {
+  YYObj_Option__String__Location__((String, Location)?)
+}
 
 ///|
-priv suberror YYObj_Option__StringLiteral__Location__ (StringLiteral, Location)?
+priv suberror YYObj_Option__StringLiteral__Location__ {
+  YYObj_Option__StringLiteral__Location__((StringLiteral, Location)?)
+}
 
 ///|
-priv suberror YYObj_String String
+priv suberror YYObj_String {
+  YYObj_String(String)
+}
 
 ///|
-priv suberror YYObj_Comment Comment
+priv suberror YYObj_Comment {
+  YYObj_Comment(Comment)
+}
 
 ///|
-priv suberror YYObj_FunDecl FunDecl
+priv suberror YYObj_FunDecl {
+  YYObj_FunDecl(FunDecl)
+}
 
 ///|
-priv suberror YYObj_LexCase LexCase
+priv suberror YYObj_LexCase {
+  YYObj_LexCase(LexCase)
+}
 
 ///|
-priv suberror YYObj_Pattern Pattern
+priv suberror YYObj_Pattern {
+  YYObj_Pattern(Pattern)
+}
 
 ///|
-priv suberror YYObj_Accessor Accessor
+priv suberror YYObj_Accessor {
+  YYObj_Accessor(Accessor)
+}
 
 ///|
-priv suberror YYObj_Argument Argument
+priv suberror YYObj_Argument {
+  YYObj_Argument(Argument)
+}
 
 ///|
-priv suberror YYObj_Constant Constant
+priv suberror YYObj_Constant {
+  YYObj_Constant(Constant)
+}
 
 ///|
-priv suberror YYObj_DeclBody DeclBody
+priv suberror YYObj_DeclBody {
+  YYObj_DeclBody(DeclBody)
+}
 
 ///|
-priv suberror YYObj_FieldDef FieldDef
+priv suberror YYObj_FieldDef {
+  YYObj_FieldDef(FieldDef)
+}
 
 ///|
-priv suberror YYObj_FieldPat FieldPat
+priv suberror YYObj_FieldPat {
+  YYObj_FieldPat(FieldPat)
+}
 
 ///|
-priv suberror YYObj_Location Location
+priv suberror YYObj_Location {
+  YYObj_Location(Location)
+}
 
 ///|
-priv suberror YYObj_TypeName TypeName
+priv suberror YYObj_TypeName {
+  YYObj_TypeName(TypeName)
+}
 
 ///|
-priv suberror YYObj_ApplyAttr ApplyAttr
+priv suberror YYObj_ApplyAttr {
+  YYObj_ApplyAttr(ApplyAttr)
+}
 
 ///|
-priv suberror YYObj_Attribute Attribute
+priv suberror YYObj_Attribute {
+  YYObj_Attribute(Attribute)
+}
 
 ///|
-priv suberror YYObj_ErrorType ErrorType
+priv suberror YYObj_ErrorType {
+  YYObj_ErrorType(ErrorType)
+}
 
 ///|
-priv suberror YYObj_FieldDecl FieldDecl
+priv suberror YYObj_FieldDecl {
+  YYObj_FieldDecl(FieldDecl)
+}
 
 ///|
-priv suberror YYObj_LeftValue LeftValue
+priv suberror YYObj_LeftValue {
+  YYObj_LeftValue(LeftValue)
+}
 
 ///|
-priv suberror YYObj_LongIdent LongIdent
+priv suberror YYObj_LongIdent {
+  YYObj_LongIdent(LongIdent)
+}
 
 ///|
-priv suberror YYObj_Parameter Parameter
+priv suberror YYObj_Parameter {
+  YYObj_Parameter(Parameter)
+}
 
 ///|
-priv suberror YYObj_Statement Statement
+priv suberror YYObj_Statement {
+  YYObj_Statement(Statement)
+}
 
 ///|
-priv suberror YYObj_ConstrDecl ConstrDecl
+priv suberror YYObj_ConstrDecl {
+  YYObj_ConstrDecl(ConstrDecl)
+}
 
 ///|
-priv suberror YYObj_LexPattern LexPattern
+priv suberror YYObj_LexPattern {
+  YYObj_LexPattern(LexPattern)
+}
 
 ///|
-priv suberror YYObj_MapPatElem MapPatElem
+priv suberror YYObj_MapPatElem {
+  YYObj_MapPatElem(MapPatElem)
+}
 
 ///|
-priv suberror YYObj_Visibility Visibility
+priv suberror YYObj_Visibility {
+  YYObj_Visibility(Visibility)
+}
 
 ///|
-priv suberror YYObj_AliasTarget AliasTarget
+priv suberror YYObj_AliasTarget {
+  YYObj_AliasTarget(AliasTarget)
+}
 
 ///|
-priv suberror YYObj_CharLiteral CharLiteral
+priv suberror YYObj_CharLiteral {
+  YYObj_CharLiteral(CharLiteral)
+}
 
 ///|
-priv suberror YYObj_ConstrParam ConstrParam
+priv suberror YYObj_ConstrParam {
+  YYObj_ConstrParam(ConstrParam)
+}
 
 ///|
-priv suberror YYObj_Constructor Constructor
+priv suberror YYObj_Constructor {
+  YYObj_Constructor(Constructor)
+}
 
 ///|
-priv suberror YYObj_MapExprElem MapExprElem
+priv suberror YYObj_MapExprElem {
+  YYObj_MapExprElem(MapExprElem)
+}
 
 ///|
-priv suberror YYObj_ArrayPattern ArrayPattern
+priv suberror YYObj_ArrayPattern {
+  YYObj_ArrayPattern(ArrayPattern)
+}
 
 ///|
-priv suberror YYObj_ConstrPatArg ConstrPatArg
+priv suberror YYObj_ConstrPatArg {
+  YYObj_ConstrPatArg(ConstrPatArg)
+}
 
 ///|
-priv suberror YYObj_DotDotBinder DotDotBinder
+priv suberror YYObj_DotDotBinder {
+  YYObj_DotDotBinder(DotDotBinder)
+}
 
 ///|
-priv suberror YYObj_ArrayPatterns ArrayPatterns
+priv suberror YYObj_ArrayPatterns {
+  YYObj_ArrayPatterns(ArrayPatterns)
+}
 
 ///|
-priv suberror YYObj_InterpLiteral InterpLiteral
+priv suberror YYObj_InterpLiteral {
+  YYObj_InterpLiteral(InterpLiteral)
+}
 
 ///|
-priv suberror YYObj_LexTopPattern LexTopPattern
+priv suberror YYObj_LexTopPattern {
+  YYObj_LexTopPattern(LexTopPattern)
+}
 
 ///|
-priv suberror YYObj_LocalTypeDecl LocalTypeDecl
+priv suberror YYObj_LocalTypeDecl {
+  YYObj_LocalTypeDecl(LocalTypeDecl)
+}
 
 ///|
-priv suberror YYObj_StringLiteral StringLiteral
+priv suberror YYObj_StringLiteral {
+  YYObj_StringLiteral(StringLiteral)
+}
 
 ///|
-priv suberror YYObj_TypeVarBinder TypeVarBinder
+priv suberror YYObj_TypeVarBinder {
+  YYObj_TypeVarBinder(TypeVarBinder)
+}
 
 ///|
-priv suberror YYObj_SpreadableElem SpreadableElem
+priv suberror YYObj_SpreadableElem {
+  YYObj_SpreadableElem(SpreadableElem)
+}
 
 ///|
-priv suberror YYObj_TypeDeclBinder TypeDeclBinder
+priv suberror YYObj_TypeDeclBinder {
+  YYObj_TypeDeclBinder(TypeDeclBinder)
+}
 
 ///|
-priv suberror YYObj_TraitMethodDecl TraitMethodDecl
+priv suberror YYObj_TraitMethodDecl {
+  YYObj_TraitMethodDecl(TraitMethodDecl)
+}
 
 ///|
-priv suberror YYObj_DerivingDirective DerivingDirective
+priv suberror YYObj_DerivingDirective {
+  YYObj_DerivingDirective(DerivingDirective)
+}
 
 ///|
-priv suberror YYObj_TypeVarConstraint TypeVarConstraint
+priv suberror YYObj_TypeVarConstraint {
+  YYObj_TypeVarConstraint(TypeVarConstraint)
+}
 
 ///|
-priv suberror YYObj_MultilineStringElem MultilineStringElem
+priv suberror YYObj_MultilineStringElem {
+  YYObj_MultilineStringElem(MultilineStringElem)
+}
 
 ///|
-priv suberror YYObj__list_List_LexPattern_ @list.List[LexPattern]
+priv suberror YYObj__list_List_LexPattern_ {
+  YYObj__list_List_LexPattern_(@list.List[LexPattern])
+}
 
 ///|
-priv suberror YYObj__list_List_LexTopPattern_ @list.List[LexTopPattern]
+priv suberror YYObj__list_List_LexTopPattern_ {
+  YYObj__list_List_LexTopPattern_(@list.List[LexTopPattern])
+}
 
 ///|
-priv suberror YYObj__list_List_TypeVarConstraint_ @list.List[TypeVarConstraint]
+priv suberror YYObj__list_List_TypeVarConstraint_ {
+  YYObj__list_List_TypeVarConstraint_(@list.List[TypeVarConstraint])
+}
 
 ///|
-priv suberror YYObj__list_List__Binder__Type___Func__ @list.List[
-  (Binder, Type?, Func),
-]
+priv suberror YYObj__list_List__Binder__Type___Func__ {
+  YYObj__list_List__Binder__Type___Func__(@list.List[(Binder, Type?, Func)])
+}
 
 ///|
-priv suberror YYObj_Expr_ Expr?
+priv suberror YYObj_Expr_ {
+  YYObj_Expr_(Expr?)
+}
 
 ///|
-priv suberror YYObj_Type_ Type?
+priv suberror YYObj_Type_ {
+  YYObj_Type_(Type?)
+}
 
 ///|
-priv suberror YYObj_Label_ Label?
+priv suberror YYObj_Label_ {
+  YYObj_Label_(Label?)
+}
 
 ///|
-priv suberror YYObj_Binder_ Binder?
+priv suberror YYObj_Binder_ {
+  YYObj_Binder_(Binder?)
+}
 
 ///|
-priv suberror YYObj_String_ String?
+priv suberror YYObj_String_ {
+  YYObj_String_(String?)
+}
 
 ///|
-priv suberror YYObj_Location_ Location?
+priv suberror YYObj_Location_ {
+  YYObj_Location_(Location?)
+}
 
 ///|
-priv suberror YYObj__Bool__Location_ (Bool, Location)
+priv suberror YYObj__Bool__Location_ {
+  YYObj__Bool__Location_((Bool, Location))
+}
 
 ///|
-priv suberror YYObj__Expr__Bool_ (Expr, Bool)
+priv suberror YYObj__Expr__Bool_ {
+  YYObj__Expr__Bool_((Expr, Bool))
+}
 
 ///|
-priv suberror YYObj__Expr__Label__ (Expr, Label?)
+priv suberror YYObj__Expr__Label__ {
+  YYObj__Expr__Label__((Expr, Label?))
+}
 
 ///|
-priv suberror YYObj__List_FieldDef___Bool_ (List[FieldDef], Bool)
+priv suberror YYObj__List_FieldDef___Bool_ {
+  YYObj__List_FieldDef___Bool_((List[FieldDef], Bool))
+}
 
 ///|
-priv suberror YYObj__List_FieldDef___TrailingMark_ (
-  List[FieldDef],
-  TrailingMark,
-)
+priv suberror YYObj__List_FieldDef___TrailingMark_ {
+  YYObj__List_FieldDef___TrailingMark_((List[FieldDef], TrailingMark))
+}
 
 ///|
-priv suberror YYObj__List_FieldPat___Bool_ (List[FieldPat], Bool)
+priv suberror YYObj__List_FieldPat___Bool_ {
+  YYObj__List_FieldPat___Bool_((List[FieldPat], Bool))
+}
 
 ///|
-priv suberror YYObj__List_Statement___Bool_ (List[Statement], Bool)
+priv suberror YYObj__List_Statement___Bool_ {
+  YYObj__List_Statement___Bool_((List[Statement], Bool))
+}
 
 ///|
-priv suberror YYObj__List_MapPatElem___Bool_ (List[MapPatElem], Bool)
+priv suberror YYObj__List_MapPatElem___Bool_ {
+  YYObj__List_MapPatElem___Bool_((List[MapPatElem], Bool))
+}
 
 ///|
-priv suberror YYObj__List_ConstrPatArg___Bool_ (List[ConstrPatArg], Bool)
+priv suberror YYObj__List_ConstrPatArg___Bool_ {
+  YYObj__List_ConstrPatArg___Bool_((List[ConstrPatArg], Bool))
+}
 
 ///|
-priv suberror YYObj__List_LocalTypeDecl___Expr_ (List[LocalTypeDecl], Expr)
+priv suberror YYObj__List_LocalTypeDecl___Expr_ {
+  YYObj__List_LocalTypeDecl___Expr_((List[LocalTypeDecl], Expr))
+}
 
 ///|
-priv suberror YYObj__Type__ErrorType_ (Type, ErrorType)
+priv suberror YYObj__Type__ErrorType_ {
+  YYObj__Type__ErrorType_((Type, ErrorType))
+}
 
 ///|
-priv suberror YYObj__Binder__Expr_ (Binder, Expr)
+priv suberror YYObj__Binder__Expr_ {
+  YYObj__Binder__Expr_((Binder, Expr))
+}
 
 ///|
-priv suberror YYObj__String__Location_ (String, Location)
+priv suberror YYObj__String__Location_ {
+  YYObj__String__Location_((String, Location))
+}
 
 ///|
-priv suberror YYObj__AliasTarget__UsingKind_ (AliasTarget, UsingKind)
+priv suberror YYObj__AliasTarget__UsingKind_ {
+  YYObj__AliasTarget__UsingKind_((AliasTarget, UsingKind))
+}
 
 ///|
-priv suberror YYObj__StringLiteral__FunDecl_ (StringLiteral, FunDecl)
+priv suberror YYObj__StringLiteral__FunDecl_ {
+  YYObj__StringLiteral__FunDecl_((StringLiteral, FunDecl))
+}
 
 ///|
-priv suberror YYObj__StringLiteral__Location_ (StringLiteral, Location)
+priv suberror YYObj__StringLiteral__Location_ {
+  YYObj__StringLiteral__Location_((StringLiteral, Location))
+}
 
 ///|
-priv suberror YYObj__Type___ErrorType_ (Type?, ErrorType)
+priv suberror YYObj__Type___ErrorType_ {
+  YYObj__Type___ErrorType_((Type?, ErrorType))
+}
 
 ///|
-priv suberror YYObj__TypeName___Binder_ (TypeName?, Binder)
+priv suberror YYObj__TypeName___Binder_ {
+  YYObj__TypeName___Binder_((TypeName?, Binder))
+}
 
 ///|
-priv suberror YYObj__Bool__Label___List_AliasTarget__ (
-  Bool,
-  Label?,
-  List[AliasTarget],
-)
+priv suberror YYObj__Bool__Label___List_AliasTarget__ {
+  YYObj__Bool__Label___List_AliasTarget__((Bool, Label?, List[AliasTarget]))
+}
 
 ///|
-priv suberror YYObj__Binder__Type___Func_ (Binder, Type?, Func)
+priv suberror YYObj__Binder__Type___Func_ {
+  YYObj__Binder__Type___Func_((Binder, Type?, Func))
+}
 
 ///|
-priv suberror YYObj__String__String___String_ (String, String?, String)
+priv suberror YYObj__String__String___String_ {
+  YYObj__String__String___String_((String, String?, String))
+}
 
 ///|
-priv suberror YYObj___TypeName___Binder___Location___List_TypeVarBinder__ (
-  (TypeName?, Binder),
-  Location?,
-  List[TypeVarBinder],
-)
+priv suberror YYObj___TypeName___Binder___Location___List_TypeVarBinder__ {
+  YYObj___TypeName___Binder___Location___List_TypeVarBinder__(
+    ((TypeName?, Binder), Location?, List[TypeVarBinder])
+  )
+}
 
 ///|
-priv suberror YYObj__List_Attribute___Visibility__String__Location_ (
-  List[Attribute],
-  Visibility,
-  String,
-  Location,
-)
+priv suberror YYObj__List_Attribute___Visibility__String__Location_ {
+  YYObj__List_Attribute___Visibility__String__Location_(
+    (List[Attribute], Visibility, String, Location)
+  )
+}
 
 ///|
-priv suberror YYObj__Label___Label___Bool__List_AliasTarget__ (
-  Label?,
-  Label?,
-  Bool,
-  List[AliasTarget],
-)
+priv suberror YYObj__Label___Label___Bool__List_AliasTarget__ {
+  YYObj__Label___Label___Bool__List_AliasTarget__(
+    (Label?, Label?, Bool, List[AliasTarget])
+  )
+}
 
 ///|
-priv suberror YYObj__List_Attribute___Bool__Visibility__Binder__Type__ (
-  List[Attribute],
-  Bool,
-  Visibility,
-  Binder,
-  Type?,
-)
+priv suberror YYObj__List_Attribute___Bool__Visibility__Binder__Type__ {
+  YYObj__List_Attribute___Bool__Visibility__Binder__Type__(
+    (List[Attribute], Bool, Visibility, Binder, Type?)
+  )
+}
 
 ///|
-priv suberror YYObj__List_Attribute___Visibility__String__Location__List_TypeDeclBinder__ (
-  List[Attribute],
-  Visibility,
-  String,
-  Location,
-  List[TypeDeclBinder],
-)
+priv suberror YYObj__List_Attribute___Visibility__String__Location__List_TypeDeclBinder__ {
+  YYObj__List_Attribute___Visibility__String__Location__List_TypeDeclBinder__(
+    (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
+  )
+}
 
 ///|
 type YYState = (YYSymbol) -> YYDecision

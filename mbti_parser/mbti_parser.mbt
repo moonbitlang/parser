@@ -11,192 +11,305 @@ type YYObj = Error
 priv suberror YYObj_Void
 
 ///|
-priv suberror YYObj_Int Int
+priv suberror YYObj_Int {
+  YYObj_Int(Int)
+}
 
 ///|
-priv suberror YYObj_Sig Sig
+priv suberror YYObj_Sig {
+  YYObj_Sig(Sig)
+}
 
 ///|
-priv suberror YYObj_Bool Bool
+priv suberror YYObj_Bool {
+  YYObj_Bool(Bool)
+}
 
 ///|
-priv suberror YYObj_Mbti Mbti
+priv suberror YYObj_Mbti {
+  YYObj_Mbti(Mbti)
+}
 
 ///|
-priv suberror YYObj_Name Name
+priv suberror YYObj_Name {
+  YYObj_Name(Name)
+}
 
 ///|
-priv suberror YYObj_Type Type
+priv suberror YYObj_Type {
+  YYObj_Type(Type)
+}
 
 ///|
-priv suberror YYObj_Unit Unit
+priv suberror YYObj_Unit {
+  YYObj_Unit(Unit)
+}
 
 ///|
-priv suberror YYObj_Label Label
+priv suberror YYObj_Label {
+  YYObj_Label(Label)
+}
 
 ///|
-priv suberror YYObj_Option_Bool_ Bool?
+priv suberror YYObj_Option_Bool_ {
+  YYObj_Option_Bool_(Bool?)
+}
 
 ///|
-priv suberror YYObj_Option_Name_ Name?
+priv suberror YYObj_Option_Name_ {
+  YYObj_Option_Name_(Name?)
+}
 
 ///|
-priv suberror YYObj_Option__list_List_Type__ @list.List[Type]?
+priv suberror YYObj_Option__list_List_Type__ {
+  YYObj_Option__list_List_Type__(@list.List[Type]?)
+}
 
 ///|
-priv suberror YYObj_Option__list_List_ConstrParam__ @list.List[ConstrParam]?
+priv suberror YYObj_Option__list_List_ConstrParam__ {
+  YYObj_Option__list_List_ConstrParam__(@list.List[ConstrParam]?)
+}
 
 ///|
-priv suberror YYObj_Option__String__Location__ (String, Location)?
+priv suberror YYObj_Option__String__Location__ {
+  YYObj_Option__String__Location__((String, Location)?)
+}
 
 ///|
-priv suberror YYObj_String String
+priv suberror YYObj_String {
+  YYObj_String(String)
+}
 
 ///|
-priv suberror YYObj_Comment Comment
+priv suberror YYObj_Comment {
+  YYObj_Comment(Comment)
+}
 
 ///|
-priv suberror YYObj_FuncSig FuncSig
+priv suberror YYObj_FuncSig {
+  YYObj_FuncSig(FuncSig)
+}
 
 ///|
-priv suberror YYObj_ImplSig ImplSig
+priv suberror YYObj_ImplSig {
+  YYObj_ImplSig(ImplSig)
+}
 
 ///|
-priv suberror YYObj_TypeSig TypeSig
+priv suberror YYObj_TypeSig {
+  YYObj_TypeSig(TypeSig)
+}
 
 ///|
-priv suberror YYObj_AliasSig AliasSig
+priv suberror YYObj_AliasSig {
+  YYObj_AliasSig(AliasSig)
+}
 
 ///|
-priv suberror YYObj_ConstSig ConstSig
+priv suberror YYObj_ConstSig {
+  YYObj_ConstSig(ConstSig)
+}
 
 ///|
-priv suberror YYObj_Constant Constant
+priv suberror YYObj_Constant {
+  YYObj_Constant(Constant)
+}
 
 ///|
-priv suberror YYObj_ConstrId ConstrId
+priv suberror YYObj_ConstrId {
+  YYObj_ConstrId(ConstrId)
+}
 
 ///|
-priv suberror YYObj_TraitSig TraitSig
+priv suberror YYObj_TraitSig {
+  YYObj_TraitSig(TraitSig)
+}
 
 ///|
-priv suberror YYObj_ValueSig ValueSig
+priv suberror YYObj_ValueSig {
+  YYObj_ValueSig(ValueSig)
+}
 
 ///|
-priv suberror YYObj_Attribute Attribute
+priv suberror YYObj_Attribute {
+  YYObj_Attribute(Attribute)
+}
 
 ///|
-priv suberror YYObj_FieldDecl FieldDecl
+priv suberror YYObj_FieldDecl {
+  YYObj_FieldDecl(FieldDecl)
+}
 
 ///|
-priv suberror YYObj_Parameter Parameter
+priv suberror YYObj_Parameter {
+  YYObj_Parameter(Parameter)
+}
 
 ///|
-priv suberror YYObj_ConstrDecl ConstrDecl
+priv suberror YYObj_ConstrDecl {
+  YYObj_ConstrDecl(ConstrDecl)
+}
 
 ///|
-priv suberror YYObj_Visibility Visibility
+priv suberror YYObj_Visibility {
+  YYObj_Visibility(Visibility)
+}
 
 ///|
-priv suberror YYObj_CharLiteral CharLiteral
+priv suberror YYObj_CharLiteral {
+  YYObj_CharLiteral(CharLiteral)
+}
 
 ///|
-priv suberror YYObj_ConstrParam ConstrParam
+priv suberror YYObj_ConstrParam {
+  YYObj_ConstrParam(ConstrParam)
+}
 
 ///|
-priv suberror YYObj_InterpLiteral InterpLiteral
+priv suberror YYObj_InterpLiteral {
+  YYObj_InterpLiteral(InterpLiteral)
+}
 
 ///|
-priv suberror YYObj_PackageImport PackageImport
+priv suberror YYObj_PackageImport {
+  YYObj_PackageImport(PackageImport)
+}
 
 ///|
-priv suberror YYObj_QualifiedName QualifiedName
+priv suberror YYObj_QualifiedName {
+  YYObj_QualifiedName(QualifiedName)
+}
 
 ///|
-priv suberror YYObj_StringLiteral StringLiteral
+priv suberror YYObj_StringLiteral {
+  YYObj_StringLiteral(StringLiteral)
+}
 
 ///|
-priv suberror YYObj_TraitMethodSig TraitMethodSig
+priv suberror YYObj_TraitMethodSig {
+  YYObj_TraitMethodSig(TraitMethodSig)
+}
 
 ///|
-priv suberror YYObj_TraitMethodParameter TraitMethodParameter
+priv suberror YYObj_TraitMethodParameter {
+  YYObj_TraitMethodParameter(TraitMethodParameter)
+}
 
 ///|
-priv suberror YYObj_TypeParamNoConstraints TypeParamNoConstraints
+priv suberror YYObj_TypeParamNoConstraints {
+  YYObj_TypeParamNoConstraints(TypeParamNoConstraints)
+}
 
 ///|
-priv suberror YYObj_TypeParamWithConstraints TypeParamWithConstraints
+priv suberror YYObj_TypeParamWithConstraints {
+  YYObj_TypeParamWithConstraints(TypeParamWithConstraints)
+}
 
 ///|
-priv suberror YYObj__list_List_Type_ @list.List[Type]
+priv suberror YYObj__list_List_Type_ {
+  YYObj__list_List_Type_(@list.List[Type])
+}
 
 ///|
-priv suberror YYObj__list_List_Attribute_ @list.List[Attribute]
+priv suberror YYObj__list_List_Attribute_ {
+  YYObj__list_List_Attribute_(@list.List[Attribute])
+}
 
 ///|
-priv suberror YYObj__list_List_FieldDecl_ @list.List[FieldDecl]
+priv suberror YYObj__list_List_FieldDecl_ {
+  YYObj__list_List_FieldDecl_(@list.List[FieldDecl])
+}
 
 ///|
-priv suberror YYObj__list_List_Parameter_ @list.List[Parameter]
+priv suberror YYObj__list_List_Parameter_ {
+  YYObj__list_List_Parameter_(@list.List[Parameter])
+}
 
 ///|
-priv suberror YYObj__list_List_ConstrDecl_ @list.List[ConstrDecl]
+priv suberror YYObj__list_List_ConstrDecl_ {
+  YYObj__list_List_ConstrDecl_(@list.List[ConstrDecl])
+}
 
 ///|
-priv suberror YYObj__list_List_ConstrParam_ @list.List[ConstrParam]
+priv suberror YYObj__list_List_ConstrParam_ {
+  YYObj__list_List_ConstrParam_(@list.List[ConstrParam])
+}
 
 ///|
-priv suberror YYObj__list_List_PackageImport_ @list.List[PackageImport]
+priv suberror YYObj__list_List_PackageImport_ {
+  YYObj__list_List_PackageImport_(@list.List[PackageImport])
+}
 
 ///|
-priv suberror YYObj__list_List_QualifiedName_ @list.List[QualifiedName]
+priv suberror YYObj__list_List_QualifiedName_ {
+  YYObj__list_List_QualifiedName_(@list.List[QualifiedName])
+}
 
 ///|
-priv suberror YYObj__list_List_TraitMethodSig_ @list.List[TraitMethodSig]
+priv suberror YYObj__list_List_TraitMethodSig_ {
+  YYObj__list_List_TraitMethodSig_(@list.List[TraitMethodSig])
+}
 
 ///|
-priv suberror YYObj__list_List_TraitMethodParameter_ @list.List[
-  TraitMethodParameter,
-]
+priv suberror YYObj__list_List_TraitMethodParameter_ {
+  YYObj__list_List_TraitMethodParameter_(@list.List[TraitMethodParameter])
+}
 
 ///|
-priv suberror YYObj__list_List_TypeParamNoConstraints_ @list.List[
-  TypeParamNoConstraints,
-]
+priv suberror YYObj__list_List_TypeParamNoConstraints_ {
+  YYObj__list_List_TypeParamNoConstraints_(@list.List[TypeParamNoConstraints])
+}
 
 ///|
-priv suberror YYObj__list_List_TypeParamWithConstraints_ @list.List[
-  TypeParamWithConstraints,
-]
+priv suberror YYObj__list_List_TypeParamWithConstraints_ {
+  YYObj__list_List_TypeParamWithConstraints_(
+    @list.List[TypeParamWithConstraints]
+  )
+}
 
 ///|
-priv suberror YYObj__list_List__Sig__Location__ @list.List[(Sig, Location)]
+priv suberror YYObj__list_List__Sig__Location__ {
+  YYObj__list_List__Sig__Location__(@list.List[(Sig, Location)])
+}
 
 ///|
-priv suberror YYObj__list_List__String__Option_String___String__ @list.List[
-  (String, String?, String),
-]
+priv suberror YYObj__list_List__String__Option_String___String__ {
+  YYObj__list_List__String__Option_String___String__(
+    @list.List[(String, String?, String)]
+  )
+}
 
 ///|
-priv suberror YYObj_String_ String?
+priv suberror YYObj_String_ {
+  YYObj_String_(String?)
+}
 
 ///|
-priv suberror YYObj_Location_ Location?
+priv suberror YYObj_Location_ {
+  YYObj_Location_(Location?)
+}
 
 ///|
-priv suberror YYObj__Name___list_List_TypeParamNoConstraints__ (
-  Name,
-  @list.List[TypeParamNoConstraints],
-)
+priv suberror YYObj__Name___list_List_TypeParamNoConstraints__ {
+  YYObj__Name___list_List_TypeParamNoConstraints__(
+    (Name, @list.List[TypeParamNoConstraints])
+  )
+}
 
 ///|
-priv suberror YYObj__Type__ErrorType_ (Type, ErrorType)
+priv suberror YYObj__Type__ErrorType_ {
+  YYObj__Type__ErrorType_((Type, ErrorType))
+}
 
 ///|
-priv suberror YYObj__String__Location_ (String, Location)
+priv suberror YYObj__String__Location_ {
+  YYObj__String__Location_((String, Location))
+}
 
 ///|
-priv suberror YYObj__String__Option_String___String_ (String, String?, String)
+priv suberror YYObj__String__Option_String___String_ {
+  YYObj__String__Option_String___String_((String, String?, String))
+}
 
 ///|
 type YYState = (YYSymbol) -> YYDecision
