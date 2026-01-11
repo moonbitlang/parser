@@ -21,8 +21,6 @@ pub fn desugar_array_get(loc~ : @basic.Location, Expr, Expr) -> Expr
 
 pub fn desugar_array_set(loc~ : @basic.Location, Expr, Expr, Expr) -> Expr
 
-pub fn impls_json_repr(@list.List[Impl]) -> Json
-
 pub fn impls_to_json(@list.List[Impl]) -> Json
 
 pub fn label_to_expr(loc~ : @basic.Location, Label) -> Expr
@@ -323,6 +321,7 @@ pub(all) enum Expr {
   Group(expr~ : Expr, group~ : Group, loc~ : @basic.Location)
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
 }
+pub fn Expr::json_repr(Self) -> Json
 pub fn Expr::loc(Self) -> @basic.Location
 pub impl ToJson for Expr
 
@@ -428,6 +427,7 @@ pub(all) enum Impl {
   TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString)
   TopUsing(pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString)
 }
+pub fn Impl::json_repr(Self) -> Json
 pub fn Impl::loc(Self) -> @basic.Location
 pub impl ToJson for Impl
 

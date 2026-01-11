@@ -314,7 +314,7 @@ fn FieldName::json_repr(self : FieldName) -> Json {
 }
 
 ///|
-fn Expr::json_repr(self : Expr) -> Json {
+pub fn Expr::json_repr(self : Expr) -> Json {
   match self {
     Apply(func~, args~, attr~, loc~) => {
       let args_list = list_json_repr(
@@ -1552,7 +1552,7 @@ fn raise_json_repr(loc : Location) -> Json {
 }
 
 ///|
-fn Impl::json_repr(self : Impl) -> Json {
+pub fn Impl::json_repr(self : Impl) -> Json {
   match self {
     TopExpr(expr~, is_main~, local_types~, is_async~, loc~) =>
       tagged_node("Impl::TopExpr", loc, {
@@ -1801,12 +1801,4 @@ fn Impl::json_repr(self : Impl) -> Json {
         "doc": doc,
       })
   }
-}
-
-///|
-///
-pub fn impls_json_repr(lst : Impls) -> Json {
-  let impls = []
-  lst.each(impl_ => impls.push(impl_.json_repr()))
-  Json::array(impls)
 }
