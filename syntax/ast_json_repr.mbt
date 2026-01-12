@@ -11,9 +11,9 @@ fn[T] list_json_repr(
 }
 
 ///|
-fn[T] option_json_repr(opt : T?, f : (T) -> Json, unbox? : Bool = true) -> Json {
+fn[T] option_json_repr(opt : T?, f : (T) -> Json) -> Json {
   match opt {
-    Some(value) => if unbox { f(value) } else { [f(value)] }
+    Some(value) => f(value)
     None => Json::null()
   }
 }
@@ -464,8 +464,11 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "bindings": list_json_repr("Expr::LetRec::BindingList", loc, bindings, fn(
           binding,
         ) {
-          let (b, f) = binding
-          Json::array([b.json_repr(), f.json_repr()])
+          let (binder, func) = binding
+          tagged_node("LetRec::Binding", loc, {
+            "binder": binder.json_repr(),
+            "func": func.json_repr(),
+          })
         }),
         "body": body.json_repr(),
       })
@@ -474,12 +477,12 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "bindings": list_json_repr("Expr::LetAnd::BindingList", loc, bindings, fn(
           binding,
         ) {
-          let (b, t, f) = binding
-          Json::array([
-            b.json_repr(),
-            option_json_repr(t, Type::json_repr),
-            f.json_repr(),
-          ])
+          let (binder, ty, func) = binding
+          tagged_node("LetAnd::Binding", loc, {
+            "binder": binder.json_repr(),
+            "type": option_json_repr(ty, Type::json_repr),
+            "func": func.json_repr(),
+          })
         }),
         "body": body.json_repr(),
       })
@@ -649,20 +652,26 @@ pub fn Expr::json_repr(self : Expr) -> Json {
     }
     For(binders~, condition~, continue_block~, body~, for_else~, label~, loc~) =>
       tagged_node("Expr::For", loc, {
-        "binders": list_json_repr("Expr::For::BinderExprList", loc, binders, fn(
+        "binders": list_json_repr("Expr::For::BindingList", loc, binders, fn(
           binding,
         ) {
-          let (b, e) = binding
-          Json::array([b.json_repr(), e.json_repr()])
+          let (binder, expr) = binding
+          tagged_node("For::Binding", loc, {
+            "binder": binder.json_repr(),
+            "expr": expr.json_repr(),
+          })
         }),
         "condition": option_json_repr(condition, Expr::json_repr),
         "continue_block": list_json_repr(
-          "Expr::For::BinderExprList",
+          "Expr::For::ContBindingList",
           loc,
           continue_block,
           fn(binding) {
-            let (b, e) = binding
-            Json::array([b.json_repr(), e.json_repr()])
+            let (binder, expr) = binding
+            tagged_node("For::ContBinding", loc, {
+              "binder": binder.json_repr(),
+              "expr": expr.json_repr(),
+            })
           },
         ),
         "body": body.json_repr(),
