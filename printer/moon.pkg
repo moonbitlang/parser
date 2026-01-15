@@ -1,0 +1,6 @@
+import {
+  "moonbitlang/parser/syntax",
+  "moonbitlang/parser/tokens",
+  "moonbitlang/parser",
+  "moonbitlang/parser/attribute",
+}
