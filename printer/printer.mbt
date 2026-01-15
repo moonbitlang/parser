@@ -3,6 +3,18 @@
 /// This module provides functions to convert AST nodes back to MoonBit source code.
 
 ///|
+/// Print parsed code back to a string.
+/// This is a convenience function that takes the result of parse_string directly.
+/// Returns None if there are parse errors.
+pub fn print_code(parsed : (@syntax.Impls, Array[@basic.Report])) -> String? {
+  let (impls, errors) = parsed
+  if errors.length() > 0 {
+    return None
+  }
+  Some(print_impls(impls))
+}
+
+///|
 /// Print a list of top-level implementations to a string.
 pub fn print_impls(impls : @syntax.Impls) -> String {
   let buf = StringBuilder::new()

@@ -3,10 +3,13 @@ package "moonbitlang/parser/printer"
 
 import(
   "moonbitlang/core/list"
+  "moonbitlang/parser/basic"
   "moonbitlang/parser/syntax"
 )
 
 // Values
+pub fn print_code((@list.List[@syntax.Impl], Array[@basic.Report])) -> String?
+
 pub fn print_constant(StringBuilder, @syntax.Constant) -> Unit
 
 pub fn print_expr(StringBuilder, @syntax.Expr, indent? : Int) -> Unit

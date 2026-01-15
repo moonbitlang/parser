@@ -12,6 +12,23 @@ fn assert_roundtrip(source : String) -> Unit raise {
 }
 
 ///|
+test "print_code with valid source" {
+  let source =
+    #|fn hello() -> String {
+    #|  "hello"
+    #|}
+  let result = print_code(@moonbitlang/parser.parse_string(source))
+  assert_true(result is Some(_))
+}
+
+///|
+test "print_code with parse error" {
+  let source = "fn invalid { {"
+  let result = print_code(@moonbitlang/parser.parse_string(source))
+  assert_true(result is None)
+}
+
+///|
 test "print simple function" {
   let source =
     #|fn add(a : Int, b : Int) -> Int {
