@@ -1,14 +1,14 @@
 ///|
 /// Round-trip test helper: parse → print → parse → print
 /// The two print results should be identical.
-fn assert_roundtrip(source : String) -> Unit! {
+fn assert_roundtrip(source : String) -> Unit raise {
   let (impls1, errors1) = @moonbitlang/parser.parse_string(source)
-  assert_eq!(errors1.length(), 0)
+  assert_eq(errors1.length(), 0)
   let printed1 = print_impls(impls1)
   let (impls2, errors2) = @moonbitlang/parser.parse_string(printed1)
-  assert_eq!(errors2.length(), 0)
+  assert_eq(errors2.length(), 0)
   let printed2 = print_impls(impls2)
-  assert_eq!(printed1, printed2)
+  assert_eq(printed1, printed2)
 }
 
 ///|
@@ -20,10 +20,7 @@ test "print simple function" {
   let (impls, errors) = @moonbitlang/parser.parse_string(source)
   assert_eq(errors.length(), 0)
   let result = print_impls(impls)
-  inspect(
-    result,
-    content="fn add(a : Int, b : Int) -> Int {\n\ta + b\n}\n",
-  )
+  inspect(result, content="fn add(a : Int, b : Int) -> Int {\n\ta + b\n}\n")
 }
 
 ///|
@@ -36,10 +33,7 @@ test "print struct" {
   let (impls, errors) = @moonbitlang/parser.parse_string(source)
   assert_eq(errors.length(), 0)
   let result = print_impls(impls)
-  inspect(
-    result,
-    content="struct Point {\n  x : Int\n  y : Int\n}\n",
-  )
+  inspect(result, content="struct Point {\n  x : Int\n  y : Int\n}\n")
 }
 
 ///|
@@ -53,10 +47,7 @@ test "print enum" {
   let (impls, errors) = @moonbitlang/parser.parse_string(source)
   assert_eq(errors.length(), 0)
   let result = print_impls(impls)
-  inspect(
-    result,
-    content="enum Color {\n  Red\n  Green\n  Blue\n}\n",
-  )
+  inspect(result, content="enum Color {\n  Red\n  Green\n  Blue\n}\n")
 }
 
 ///|
@@ -96,10 +87,7 @@ test "print operator precedence" {
   let (impls, errors) = @moonbitlang/parser.parse_string(source)
   assert_eq(errors.length(), 0)
   let result = print_impls(impls)
-  inspect(
-    result,
-    content="fn calc() -> Int {\n\t1 + 2 * 3\n}\n",
-  )
+  inspect(result, content="fn calc() -> Int {\n\t1 + 2 * 3\n}\n")
 }
 
 ///|
@@ -136,150 +124,180 @@ test "print doc comment" {
 
 ///|
 test "roundtrip: simple function" {
-  assert_roundtrip!(
-    #|fn add(a : Int, b : Int) -> Int {
-    #|  a + b
-    #|}
+  assert_roundtrip(
+    (
+      #|fn add(a : Int, b : Int) -> Int {
+      #|  a + b
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: struct" {
-  assert_roundtrip!(
-    #|struct Point {
-    #|  x : Int
-    #|  y : Int
-    #|}
+  assert_roundtrip(
+    (
+      #|struct Point {
+      #|  x : Int
+      #|  y : Int
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: enum" {
-  assert_roundtrip!(
-    #|enum Color {
-    #|  Red
-    #|  Green
-    #|  Blue(Int)
-    #|}
+  assert_roundtrip(
+    (
+      #|enum Color {
+      #|  Red
+      #|  Green
+      #|  Blue(Int)
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: match expression" {
-  assert_roundtrip!(
-    #|fn describe(n : Int) -> String {
-    #|  match n {
-    #|    0 => "zero"
-    #|    1 | 2 => "small"
-    #|    _ => "other"
-    #|  }
-    #|}
+  assert_roundtrip(
+    (
+      #|fn describe(n : Int) -> String {
+      #|  match n {
+      #|    0 => "zero"
+      #|    1 | 2 => "small"
+      #|    _ => "other"
+      #|  }
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: if expression" {
-  assert_roundtrip!(
-    #|fn max(a : Int, b : Int) -> Int {
-    #|  if a > b { a } else { b }
-    #|}
+  assert_roundtrip(
+    (
+      #|fn max(a : Int, b : Int) -> Int {
+      #|  if a > b { a } else { b }
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: while loop" {
-  assert_roundtrip!(
-    #|fn count() -> Unit {
-    #|  let mut i = 0
-    #|  while i < 10 {
-    #|    i = i + 1
-    #|  }
-    #|}
+  assert_roundtrip(
+    (
+      #|fn count() -> Unit {
+      #|  let mut i = 0
+      #|  while i < 10 {
+      #|    i = i + 1
+      #|  }
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: for loop" {
-  assert_roundtrip!(
-    #|fn sum(arr : Array[Int]) -> Int {
-    #|  let mut total = 0
-    #|  for i in arr {
-    #|    total = total + i
-    #|  }
-    #|  total
-    #|}
+  assert_roundtrip(
+    (
+      #|fn sum(arr : Array[Int]) -> Int {
+      #|  let mut total = 0
+      #|  for i in arr {
+      #|    total = total + i
+      #|  }
+      #|  total
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: trait" {
-  assert_roundtrip!(
-    #|trait Show {
-    #|  show(Self) -> String
-    #|}
+  assert_roundtrip(
+    (
+      #|trait Show {
+      #|  show(Self) -> String
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: method call" {
-  assert_roundtrip!(
-    #|fn process(s : String) -> Int {
-    #|  s.length()
-    #|}
+  assert_roundtrip(
+    (
+      #|fn process(s : String) -> Int {
+      #|  s.length()
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: array and tuple" {
-  assert_roundtrip!(
-    #|fn make_pair() -> (Int, String) {
-    #|  (1, "hello")
-    #|}
+  assert_roundtrip(
+    (
+      #|fn make_pair() -> (Int, String) {
+      #|  (1, "hello")
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: record pattern" {
-  assert_roundtrip!(
-    #|fn get_x(p : Point) -> Int {
-    #|  match p {
-    #|    { x, .. } => x
-    #|  }
-    #|}
+  assert_roundtrip(
+    (
+      #|fn get_x(p : Point) -> Int {
+      #|  match p {
+      #|    { x, .. } => x
+      #|  }
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: generic function" {
-  assert_roundtrip!(
-    #|fn identity[T](x : T) -> T {
-    #|  x
-    #|}
+  assert_roundtrip(
+    (
+      #|fn identity[T](x : T) -> T {
+      #|  x
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: impl trait" {
-  assert_roundtrip!(
-    #|impl Show for Point with output(self, logger) {
-    #|  logger.write_string("Point")
-    #|}
+  assert_roundtrip(
+    (
+      #|impl Show for Point with output(self, logger) {
+      #|  logger.write_string("Point")
+      #|}
+    ),
   )
 }
 
 ///|
 test "roundtrip: type alias" {
-  assert_roundtrip!(
-    #|typealias Point as P
+  assert_roundtrip(
+    (
+      #|typealias Point as P
+    ),
   )
 }
 
 ///|
 test "roundtrip: attribute" {
-  assert_roundtrip!(
-    #|#deprecated("Use bar instead")
-    #|fn foo() -> Unit {
-    #|  ()
-    #|}
+  assert_roundtrip(
+    (
+      #|#deprecated("Use bar instead")
+      #|fn foo() -> Unit {
+      #|  ()
+      #|}
+    ),
   )
 }

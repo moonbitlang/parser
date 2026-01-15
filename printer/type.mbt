@@ -51,10 +51,7 @@ pub fn print_type(buf : StringBuilder, ty : @syntax.Type) -> Unit {
 }
 
 ///|
-fn print_type_list(
-  buf : StringBuilder,
-  tys : @list.List[@syntax.Type]
-) -> Unit {
+fn print_type_list(buf : StringBuilder, tys : @list.List[@syntax.Type]) -> Unit {
   let mut first = true
   for ty in tys {
     if not(first) {

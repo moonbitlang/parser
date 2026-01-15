@@ -80,7 +80,8 @@ fn print_impl(buf : StringBuilder, impl_ : @syntax.Impl) -> Unit {
       body~,
       attrs~,
       doc~,
-      ..) => {
+      ..
+    ) => {
       print_doc_string(buf, doc)
       print_attributes(buf, attrs)
       buf.write_string("impl ")
@@ -129,10 +130,7 @@ fn print_impl(buf : StringBuilder, impl_ : @syntax.Impl) -> Unit {
           buf.write_string(tn.name)
           buf.write_string("::")
         }
-        None =>
-          if pkg is Some(_) {
-            buf.write_char('.')
-          }
+        None => if pkg is Some(_) { buf.write_char('.') }
       }
       print_alias_targets(buf, targets, is_list)
     }
@@ -177,7 +175,8 @@ fn print_impl(buf : StringBuilder, impl_ : @syntax.Impl) -> Unit {
       vis~,
       attrs~,
       doc~,
-      ..) => {
+      ..
+    ) => {
       print_doc_string(buf, doc)
       print_attributes(buf, attrs)
       print_visibility(buf, vis)
@@ -252,7 +251,7 @@ fn print_impl(buf : StringBuilder, impl_ : @syntax.Impl) -> Unit {
 fn print_alias_targets(
   buf : StringBuilder,
   targets : @list.List[@syntax.AliasTarget],
-  is_list : Bool
+  is_list : Bool,
 ) -> Unit {
   if is_list {
     buf.write_char('(')
@@ -271,10 +270,9 @@ fn print_alias_targets(
         buf.write_string(" as ")
         buf.write_string(target.binder.name)
       }
-      None => {
+      None =>
         // No alias, just the name
         buf.write_string(target.binder.name)
-      }
     }
   }
   if is_list {
@@ -315,7 +313,11 @@ fn print_fun_decl(buf : StringBuilder, decl : @syntax.FunDecl) -> Unit {
 }
 
 ///|
-fn print_decl_body(buf : StringBuilder, body : @syntax.DeclBody, indent~ : Int = 0) -> Unit {
+fn print_decl_body(
+  buf : StringBuilder,
+  body : @syntax.DeclBody,
+  indent? : Int = 0,
+) -> Unit {
   match body {
     DeclBody(expr~, ..) => {
       buf.write_string("{\n")
@@ -325,7 +327,7 @@ fn print_decl_body(buf : StringBuilder, body : @syntax.DeclBody, indent~ : Int =
       print_indent(buf, indent)
       buf.write_char('}')
     }
-    DeclStubs(stubs) => {
+    DeclStubs(stubs) =>
       match stubs {
         Import(module_name~, func_name~, language~) => {
           buf.write_string("= \"")
@@ -357,17 +359,15 @@ fn print_decl_body(buf : StringBuilder, body : @syntax.DeclBody, indent~ : Int =
               buf.write_string(s)
               buf.write_char('"')
             }
-            CodeMultilineString(lines) => {
+            CodeMultilineString(lines) =>
               for line in lines {
                 buf.write_string("#| ")
                 buf.write_string(line)
                 buf.write_char('\n')
               }
-            }
           }
         }
       }
-    }
   }
 }
 
@@ -546,7 +546,7 @@ fn print_visibility(buf : StringBuilder, vis : @syntax.Visibility) -> Unit {
 ///|
 fn print_quantifiers(
   buf : StringBuilder,
-  quantifiers : @list.List[@syntax.TypeVarBinder]
+  quantifiers : @list.List[@syntax.TypeVarBinder],
 ) -> Unit {
   if not(quantifiers.is_empty()) {
     buf.write_char('[')
@@ -576,7 +576,7 @@ fn print_quantifiers(
 ///|
 fn print_type_params(
   buf : StringBuilder,
-  params : @list.List[@syntax.TypeDeclBinder]
+  params : @list.List[@syntax.TypeDeclBinder],
 ) -> Unit {
   if not(params.is_empty()) {
     buf.write_char('[')
@@ -598,7 +598,7 @@ fn print_type_params(
 ///|
 fn print_constr_params(
   buf : StringBuilder,
-  params : @list.List[@syntax.ConstrParam]
+  params : @list.List[@syntax.ConstrParam],
 ) -> Unit {
   let mut first = true
   for p in params {
@@ -625,7 +625,7 @@ fn print_constr_params(
 /// In trait methods, DiscardPositional outputs just the type (e.g., Self)
 fn print_trait_method_params(
   buf : StringBuilder,
-  params : @list.List[@syntax.Parameter]
+  params : @list.List[@syntax.Parameter],
 ) -> Unit {
   let mut first = true
   for p in params {
@@ -644,13 +644,12 @@ fn print_trait_method_params(
           None => ()
         }
       }
-      DiscardPositional(ty~, ..) => {
+      DiscardPositional(ty~, ..) =>
         // In trait methods, output just the type (e.g., Self)
         match ty {
           Some(t) => print_type(buf, t)
           None => buf.write_char('_')
         }
-      }
       Labelled(binder~, ty~) | Optional(binder~, ty~, ..) => {
         buf.write_string(binder.name)
         match ty {
@@ -669,7 +668,7 @@ fn print_trait_method_params(
 ///|
 fn print_parameters(
   buf : StringBuilder,
-  params : @list.List[@syntax.Parameter]
+  params : @list.List[@syntax.Parameter],
 ) -> Unit {
   let mut first = true
   for p in params {
@@ -768,7 +767,7 @@ fn print_doc_string(buf : StringBuilder, doc : @syntax.DocString) -> Unit {
 /// Print attributes (#name or #name(...))
 fn print_attributes(
   buf : StringBuilder,
-  attrs : @list.List[@attribute.Attribute]
+  attrs : @list.List[@attribute.Attribute],
 ) -> Unit {
   for attr in attrs {
     buf.write_string(attr.raw)

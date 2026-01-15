@@ -37,7 +37,8 @@ fn get_precedence(op : String) -> Int {
 /// Check if expression needs parentheses in a binary context
 fn needs_parens(expr : @syntax.Expr, parent_prec : Int) -> Bool {
   match expr {
-    Infix(op~, ..) => get_precedence(long_ident_to_string(op.name)) < parent_prec
+    Infix(op~, ..) =>
+      get_precedence(long_ident_to_string(op.name)) < parent_prec
     _ => false
   }
 }
@@ -48,7 +49,7 @@ fn print_expr_with_prec(
   buf : StringBuilder,
   expr : @syntax.Expr,
   parent_prec : Int,
-  indent : Int
+  indent : Int,
 ) -> Unit {
   if needs_parens(expr, parent_prec) {
     buf.write_char('(')
@@ -61,7 +62,11 @@ fn print_expr_with_prec(
 
 ///|
 /// Print an expression.
-pub fn print_expr(buf : StringBuilder, expr : @syntax.Expr, indent~ : Int = 0) -> Unit {
+pub fn print_expr(
+  buf : StringBuilder,
+  expr : @syntax.Expr,
+  indent? : Int = 0,
+) -> Unit {
   match expr {
     // Literals
     Constant(c~, ..) => print_constant(buf, c)
@@ -375,7 +380,7 @@ pub fn print_expr(buf : StringBuilder, expr : @syntax.Expr, indent~ : Int = 0) -
     }
 
     // Functions
-    Function(func~, ..) => {
+    Function(func~, ..) =>
       match func.kind {
         Lambda => {
           buf.write_string("fn(")
@@ -402,7 +407,6 @@ pub fn print_expr(buf : StringBuilder, expr : @syntax.Expr, indent~ : Int = 0) -
           print_expr(buf, func.body, indent~)
         }
       }
-    }
 
     // Let bindings
     Let(pattern~, expr~, body~, ..) => {
@@ -754,13 +758,12 @@ pub fn print_expr(buf : StringBuilder, expr : @syntax.Expr, indent~ : Int = 0) -
     }
 
     // Hole
-    Hole(kind~, ..) => {
+    Hole(kind~, ..) =>
       match kind {
         Synthesized => buf.write_char('_')
         Incomplete => buf.write_string("...")
         Todo => buf.write_string("todo")
       }
-    }
 
     // Map
     Map(elems~, ..) => {
@@ -779,7 +782,7 @@ pub fn print_expr(buf : StringBuilder, expr : @syntax.Expr, indent~ : Int = 0) -
     }
 
     // Group
-    Group(expr~, group~, ..) => {
+    Group(expr~, group~, ..) =>
       match group {
         Paren => {
           buf.write_char('(')
@@ -792,7 +795,6 @@ pub fn print_expr(buf : StringBuilder, expr : @syntax.Expr, indent~ : Int = 0) -
           buf.write_string("\n}")
         }
       }
-    }
 
     // String interpolation
     Interp(elems~, ..) => {
@@ -810,7 +812,7 @@ pub fn print_expr(buf : StringBuilder, expr : @syntax.Expr, indent~ : Int = 0) -
       }
       buf.write_char('"')
     }
-    MultilineString(elems~, ..) => {
+    MultilineString(elems~, ..) =>
       for e in elems {
         match e {
           String(s) => {
@@ -835,7 +837,6 @@ pub fn print_expr(buf : StringBuilder, expr : @syntax.Expr, indent~ : Int = 0) -
           }
         }
       }
-    }
 
     // LexMatch
     LexMatch(strategy~, expr~, cases~, ..) => {
@@ -886,7 +887,7 @@ fn print_var(buf : StringBuilder, v : @syntax.Var) -> Unit {
 ///|
 fn print_arguments(
   buf : StringBuilder,
-  args : @list.List[@syntax.Argument]
+  args : @list.List[@syntax.Argument],
 ) -> Unit {
   let mut first = true
   for arg in args {
@@ -922,7 +923,7 @@ fn print_arguments(
 ///|
 fn print_lex_top_patterns(
   buf : StringBuilder,
-  pats : @list.List[@syntax.LexTopPattern]
+  pats : @list.List[@syntax.LexTopPattern],
 ) -> Unit {
   let mut first = true
   for p in pats {
@@ -935,7 +936,10 @@ fn print_lex_top_patterns(
 }
 
 ///|
-fn print_lex_top_pattern(buf : StringBuilder, pat : @syntax.LexTopPattern) -> Unit {
+fn print_lex_top_pattern(
+  buf : StringBuilder,
+  pat : @syntax.LexTopPattern,
+) -> Unit {
   match pat {
     Pattern(lex_pat) => print_lex_pattern(buf, lex_pat)
     Binder(b) => buf.write_string(b.name)

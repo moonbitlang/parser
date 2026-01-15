@@ -32,10 +32,7 @@ pub fn print_pattern(buf : StringBuilder, pat : @syntax.Pattern) -> Unit {
           }
           buf.write_char(')')
         }
-        _ =>
-          if is_open {
-            buf.write_string("(..)")
-          }
+        _ => if is_open { buf.write_string("(..)") }
       }
     }
     Or(pat1~, pat2~, ..) => {
@@ -123,7 +120,7 @@ pub fn print_pattern(buf : StringBuilder, pat : @syntax.Pattern) -> Unit {
 ///|
 fn print_array_patterns(
   buf : StringBuilder,
-  pats : @syntax.ArrayPatterns
+  pats : @syntax.ArrayPatterns,
 ) -> Unit {
   match pats {
     Closed(pats) => {
@@ -200,7 +197,7 @@ fn print_array_pattern(buf : StringBuilder, p : @syntax.ArrayPattern) -> Unit {
 ///|
 fn print_constr_pat_args(
   buf : StringBuilder,
-  args : @list.List[@syntax.ConstrPatArg]
+  args : @list.List[@syntax.ConstrPatArg],
 ) -> Unit {
   let mut first = true
   for arg in args {
