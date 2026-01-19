@@ -5,9 +5,9 @@ fn[T] list_json_repr(
   list : @list.List[T],
   f : (T) -> Json,
 ) -> Json {
-  let childs = []
-  list.each(fn(item) { childs.push(f(item)) })
-  { "kind": kind, "loc": loc, "childs": childs }
+  let children = []
+  list.each(fn(item) { children.push(f(item)) })
+  { "kind": kind, "loc": loc, "children": children }
 }
 
 ///|
@@ -22,9 +22,9 @@ fn[T] option_json_repr(opt : T?, f : (T) -> Json) -> Json {
 fn tagged_node(
   kind : String,
   loc : Location,
-  childs : Map[String, Json],
+  children : Map[String, Json],
 ) -> Json {
-  { "kind": kind, "loc": loc, "childs": childs }
+  { "kind": kind, "loc": loc, "children": children }
 }
 
 ///|
