@@ -14,7 +14,7 @@ test {
   @basic.show_loc.val = @basic.LocStyle::Json
   let add : String =
     #| 1 + 2
-  @json.inspect(simple_parse_expr(add), content={
+  json_inspect(simple_parse_expr(add), content={
     "type": "Expr::Infix",
     "op": {
       "type": "Var",
@@ -55,7 +55,7 @@ test {
     #|     print(e)
     #|   }
     #| }
-  @json.inspect(simple_parse_expr(try_catch), content={
+  json_inspect(simple_parse_expr(try_catch), content={
     "type": "Expr::Try",
     "body": {
       "type": "Expr::Apply",

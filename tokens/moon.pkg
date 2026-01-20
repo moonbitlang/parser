@@ -1,4 +1,6 @@
-import { "moonbitlang/parser/basic" }
+import {
+  "moonbitlang/parser/basic",
+}
 
 options(
   "pre-build": [

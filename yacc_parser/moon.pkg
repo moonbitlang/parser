@@ -4,6 +4,7 @@ import {
   "moonbitlang/parser/tokens",
   "moonbitlang/parser/basic",
   "moonbitlang/parser/attribute",
+  "moonbitlang/core/list",
 }
 
 options(

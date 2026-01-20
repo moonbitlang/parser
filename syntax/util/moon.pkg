@@ -1,6 +1,11 @@
-import { "moonbitlang/parser/syntax", "moonbitlang/parser/basic" }
+import {
+  "moonbitlang/parser/syntax",
+  "moonbitlang/parser/basic",
+  "moonbitlang/core/list",
+}
 
-import "test" { }
+import "test" {
+}
 
 options(
   "pre-build": [ ],

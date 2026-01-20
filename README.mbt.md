@@ -41,7 +41,7 @@ test {
     #|   y: Int
     #| }
   let (impls, _) = parse_string(source)
-  @json.inspect(impls, content=[
+  json_inspect(impls, content=[
     {
       "type": "Impl::TopLetDef",
       "binder": { "type": "Binder", "name": "number", "loc": null },
