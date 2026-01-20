@@ -28,8 +28,8 @@ fn tagged_node(
 }
 
 ///|
-fn tagged_node1(kind : String, loc : Location, child_value : Json) -> Json {
-  tagged_node(kind, loc, { "0": child_value })
+fn tagged_node1(kind : String, loc : Location, value : Json) -> Json {
+  tagged_node(kind, loc, { "value": value })
 }
 
 ///|
