@@ -161,9 +161,9 @@ fn LexEnv::register_surrogate_pair(self : LexEnv, view : StringView) -> Unit {
   if !use_utf16_location.val {
     let mut count = 0
     for i = 0; i < view.length(); i = i + 1 {
-      let c1 = view.unsafe_charcode_at(i)
+      let c1 = view[i]
       if c1.is_leading_surrogate() && i + 1 < view.length() {
-        let c2 = view.unsafe_charcode_at(i + 1)
+        let c2 = view[i + 1]
         if c2.is_trailing_surrogate() {
           count += 1
           continue i + 2

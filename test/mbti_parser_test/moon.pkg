@@ -5,6 +5,7 @@ import "test" {
   "moonbitlang/x/fs",
   "moonbitlang/parser/lexer",
   "moonbitlang/parser/mbti_parser",
+  "moonbitlang/core/test",
 }
 
 options(

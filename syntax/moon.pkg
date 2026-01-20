@@ -2,6 +2,13 @@ import {
   "moonbitlang/parser/tokens",
   "moonbitlang/parser/basic",
   "moonbitlang/parser/attribute",
+  "moonbitlang/core/list",
+  "moonbitlang/core/hashmap",
+}
+
+import "test" {
+  "moonbitlang/core/test",
+  "moonbitlang/core/json",
 }
 
 options(

@@ -4,6 +4,10 @@ import {
   "moonbitlang/parser/syntax/util",
   "moonbitlang/parser/basic",
   "moonbitlang/parser/attribute",
+  "moonbitlang/core/list",
 }
 
-import "test" { "moonbitlang/parser/lexer" }
+import "test" {
+  "moonbitlang/parser/lexer",
+  "moonbitlang/core/json",
+}

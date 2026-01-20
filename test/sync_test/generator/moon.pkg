@@ -1,4 +1,11 @@
-import { "moonbitlang/x/fs" }
+import {
+  "moonbitlang/x/fs",
+  "moonbitlang/core/json",
+}
+
+import "test" {
+  "moonbitlang/core/test",
+}
 
 options(
   "is-main": true,

@@ -6,4 +6,10 @@ import {
   "moonbitlang/x/fs",
   "moonbitlang/parser/basic",
   "moonbitlang/parser/yacc_parser",
+  "moonbitlang/core/list",
+}
+
+import "test" {
+  "moonbitlang/core/test",
+  "moonbitlang/core/json",
 }
