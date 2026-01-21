@@ -1,11 +1,11 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/parser/attribute"
 
-import(
-  "moonbitlang/core/list"
-  "moonbitlang/parser/basic"
-  "moonbitlang/parser/tokens"
-)
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/parser/basic",
+  "moonbitlang/parser/tokens",
+}
 
 // Values
 pub fn payloads(Array[(@tokens.Token, @basic.Position, @basic.Position)], initial_pos? : @basic.Position) -> @list.List[Prop] raise ParseError

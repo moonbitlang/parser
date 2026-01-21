@@ -1,12 +1,12 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/parser/syntax"
 
-import(
-  "moonbitlang/core/list"
-  "moonbitlang/parser/attribute"
-  "moonbitlang/parser/basic"
-  "moonbitlang/parser/tokens"
-)
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/parser/attribute",
+  "moonbitlang/parser/basic",
+  "moonbitlang/parser/tokens",
+}
 
 // Values
 pub fn arrow_fn_param_to_expr(ArrowFnParam) -> Expr
