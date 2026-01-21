@@ -1,12 +1,12 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/parser"
 
-import(
-  "moonbitlang/core/list"
-  "moonbitlang/parser/basic"
-  "moonbitlang/parser/syntax"
-  "moonbitlang/x/fs"
-)
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/parser/basic",
+  "moonbitlang/parser/syntax",
+  "moonbitlang/x/fs",
+}
 
 // Values
 pub fn parse_file(String, parser? : Parser) -> (@list.List[@syntax.Impl], Array[@basic.Report]) raise @fs.IOError

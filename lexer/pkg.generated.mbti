@@ -1,11 +1,11 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/parser/lexer"
 
-import(
-  "moonbitlang/core/list"
-  "moonbitlang/parser/basic"
-  "moonbitlang/parser/tokens"
-)
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/parser/basic",
+  "moonbitlang/parser/tokens",
+}
 
 // Values
 pub fn tokens_from_string(name? : String, start_pos? : @basic.Position, is_interpolation? : Bool, comment~ : Bool, String) -> LexResult

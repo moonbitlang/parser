@@ -1,12 +1,12 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/parser/yacc_parser"
 
-import(
-  "moonbitlang/core/list"
-  "moonbitlang/parser/basic"
-  "moonbitlang/parser/syntax"
-  "moonbitlang/parser/tokens"
-)
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/parser/basic",
+  "moonbitlang/parser/syntax",
+  "moonbitlang/parser/tokens",
+}
 
 // Values
 pub fn expression(Array[(@tokens.Token, @basic.Position, @basic.Position)], initial_pos? : @basic.Position) -> @syntax.Expr raise ParseError
