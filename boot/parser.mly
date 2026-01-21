@@ -126,8 +126,11 @@ Parsing_util.(
 %token WHILE           "while"
 %token RETURN          "return"
 %token DOTDOT          ".."
-%token RANGE_INCLUSIVE "..="
-%token RANGE_EXCLUSIVE "..<"
+%token RANGE_INCLUSIVE     "..="
+%token RANGE_LT_INCLUSIVE  "..<="
+%token RANGE_EXCLUSIVE     "..<"
+%token RANGE_INCLUSIVE_REV ">=.."
+%token RANGE_EXCLUSIVE_REV ">.."
 %token ELLIPSIS        "..."
 %token TEST            "test"
 %token LOOP            "loop"
@@ -141,11 +144,16 @@ Parsing_util.(
 %token AND             "and"
 %token LETREC          "letrec"
 %token ENUMVIEW        "enumview"
+%token DECLARE         "declare"
 %token NORAISE         "noraise"
+%token WHERE           "where"
 %token TRY_QUESTION    "try?"
 %token TRY_EXCLAMATION "try!"
 %token LEXMATCH        "lexmatch"
 %token LEXMATCH_QUESTION "lexmatch?"
+
+// Note: this token is only used by `.mbti` parser
+%token PACKAGE         "package"
 
 %right BARBAR
 %right AMPERAMPER
@@ -295,8 +303,8 @@ type_parameters:
   | delimited("[",non_empty_list_commas(id(tvar_binder)), "]") { $1 }
 
 %inline is_async:
-  | "async"     { true }
-  | /* empty */ { false }
+  | "async"     { Some(i $loc($1)) }
+  | /* empty */ { None }
 
 optional_type_parameters:
   | params = option(type_parameters) {
@@ -326,6 +334,33 @@ fun_binder:
   | binder { (None, $1) }
 fun_header:
   attrs=attributes
+  vis=visibility
+  is_async=is_async
+    header=fun_header_generic
+    ps=option(parameters)
+    ts=func_return_type
+    {
+      let (type_name, f), has_error, quants = header in
+      let return_type, error_type = ts in
+      { Parsing_syntax.type_name
+      ; name = f
+      ; has_error
+      ; is_async
+      ; quantifiers = quants
+      ; decl_params = ps
+      ; params_loc_=(i $loc(ps))
+      ; return_type
+      ; error_type
+      ; vis
+      ; doc_ = Docstring.empty
+      ; attrs
+      ; is_test_ = false
+      }
+    }
+
+declare_fun_header:
+  attrs=attributes
+  "declare"
   vis=visibility
   is_async=is_async
     header=fun_header_generic
@@ -384,7 +419,7 @@ extern_fun_header:
       { Parsing_syntax.type_name
       ; name = f
       ; has_error
-      ; is_async = false
+      ; is_async = None
       ; quantifiers = quants
       ; decl_params = ps
       ; params_loc_=(i $loc(ps))
@@ -426,7 +461,7 @@ val_header :
 structure : list_semis(structure_item) EOF {$1}
 structure_item:
   | type_header=type_header deriving_=deriving_directive_list {
-      let attrs, type_vis, tycon, tycon_loc_, params = type_header in
+      let attrs, type_vis, is_declare, tycon, tycon_loc_, params = type_header in
       Ptop_typedef
         { tycon
         ; tycon_loc_
@@ -439,6 +474,7 @@ structure_item:
         ; attrs
         ; deprecated_type_bang_ = false
         ; deprecated_type_alias_syntax_ = false
+        ; is_declare
         }
     }
   | attrs=attributes type_vis=visibility
@@ -457,10 +493,11 @@ structure_item:
         ; attrs
         ; deprecated_type_bang_ = false
         ; deprecated_type_alias_syntax_ = false
+        ; is_declare = false
         }
     }
   | type_header=type_header ty=type_ deriving_=deriving_directive_list {
-      let attrs, type_vis, tycon, tycon_loc_, params = type_header in
+      let attrs, type_vis, is_declare, tycon, tycon_loc_, params = type_header in
       Ptop_typedef
         { tycon
         ; tycon_loc_
@@ -473,10 +510,11 @@ structure_item:
         ; attrs
         ; deprecated_type_bang_ =false
         ; deprecated_type_alias_syntax_ = false
+        ; is_declare
         }
     }
   | type_header=suberror_header ty=option(type_) deriving_=deriving_directive_list {
-      let attrs, type_vis, tycon, tycon_loc_, deprecated_type_bang_ = type_header in
+      let attrs, type_vis, is_declare, tycon, tycon_loc_, deprecated_type_bang_ = type_header in
       let exception_decl: Parsing_syntax.exception_decl =
         match ty with | None -> No_payload | Some ty -> Single_payload ty
       in
@@ -492,10 +530,11 @@ structure_item:
         ; attrs
         ; deprecated_type_bang_
         ; deprecated_type_alias_syntax_ = false
+        ; is_declare
         }
     }
   | type_header=suberror_header "{" cs=list_semis(enum_constructor) "}" deriving_=deriving_directive_list {
-      let attrs, type_vis, tycon, tycon_loc_, deprecated_type_bang_ = type_header in
+      let attrs, type_vis, is_declare, tycon, tycon_loc_, deprecated_type_bang_ = type_header in
       let exception_decl: Parsing_syntax.exception_decl = Enum_payload cs in
       Ptop_typedef
         { tycon
@@ -509,6 +548,7 @@ structure_item:
         ; attrs
         ; deprecated_type_bang_
         ; deprecated_type_alias_syntax_ = false
+        ; is_declare
         }
     }
   | struct_header=struct_header "{" fs=list_semis(record_decl_field) "}" deriving_=deriving_directive_list {
@@ -525,6 +565,7 @@ structure_item:
         ; attrs
         ; deprecated_type_bang_ = false
         ; deprecated_type_alias_syntax_ = false
+        ; is_declare = false
         }
     }
   | struct_header=struct_header "(" ts=non_empty_list_commas(type_) ")" deriving_=deriving_directive_list {
@@ -541,6 +582,7 @@ structure_item:
         ; attrs
         ; deprecated_type_bang_ = false
         ; deprecated_type_alias_syntax_ = false
+        ; is_declare = false
         }
     }
   | enum_header=enum_header "{" cs=list_semis(enum_constructor) "}" deriving_=deriving_directive_list {
@@ -557,6 +599,7 @@ structure_item:
         ; attrs
         ; deprecated_type_bang_ = false
         ; deprecated_type_alias_syntax_ = false
+        ; is_declare = false
         }
     }
   | val_header=val_header "=" expr = expr {
@@ -616,6 +659,13 @@ structure_item:
         decl_body = Decl_body { expr=body; local_types };
       }
     }
+  | t=declare_fun_header {
+      Parsing_syntax.Ptop_funcdef {
+        loc_ = (i $sloc);
+        fun_decl = t;
+        decl_body = Decl_none;
+      }
+    }
   | attrs=attributes vis=visibility "fnalias" target=func_alias_targets {
     let pkg, type_name, is_list_, targets = target in
     Parsing_syntax.Ptop_func_alias
@@ -672,22 +722,22 @@ structure_item:
       Parsing_syntax.Ptop_batch_type_alias
         { pkg; targets; vis; attrs; loc_ = i $sloc; is_list_; doc_ = Docstring.empty }
     }
-  | attrs=attributes type_vis=visibility
-    "type" tycon=UIDENT params=optional_type_parameters_no_constraints
-    "=" target=type_ deriving_=deriving_directive_list {
-    Ptop_typedef
-      { tycon
-      ; tycon_loc_ = i $loc(tycon)
-      ; type_vis
-      ; params
-      ; components = Ptd_alias target
-      ; attrs
-      ; deriving_
-      ; doc_ = Docstring.empty
-      ; loc_ = i $sloc
-      ; deprecated_type_bang_ = false
-      ; deprecated_type_alias_syntax_ = false
-      }
+  | type_header=type_header "=" ty=type_ deriving_=deriving_directive_list {
+      let attrs, type_vis, is_declare, tycon, tycon_loc_, params = type_header in
+      Ptop_typedef
+        { tycon
+        ; tycon_loc_
+        ; params
+        ; components = Ptd_alias ty
+        ; type_vis
+        ; doc_ = Docstring.empty
+        ; deriving_
+        ; loc_ = i $sloc
+        ; attrs
+        ; deprecated_type_bang_ = false
+        ; deprecated_type_alias_syntax_ = false
+        ; is_declare
+        }
     }
   | attrs=attributes type_vis=visibility "typealias"
     target=type_
@@ -704,6 +754,7 @@ structure_item:
         ; loc_ = i $sloc
         ; deprecated_type_bang_ = false
         ; deprecated_type_alias_syntax_ = true
+        ; is_declare = false
         }
     }
   | attrs=attributes vis=visibility "traitalias" targets=batch_type_alias_targets {
@@ -786,6 +837,7 @@ structure_item:
       }
   }
   | attrs=attributes
+    is_declare=is_declare
     vis=visibility
     "impl"
        quantifiers=optional_type_parameters
@@ -793,7 +845,7 @@ structure_item:
     "for" self_ty=type_
   {
     Parsing_syntax.Ptop_impl_relation
-      { self_ty; trait; quantifiers; vis; attrs; loc_ = i $sloc; doc_ = Docstring.empty }
+      { self_ty; trait; quantifiers; vis; attrs; loc_ = i $sloc; doc_ = Docstring.empty; is_declare }
   }
   | attrs=attributes
     vis=visibility
@@ -857,15 +909,19 @@ pub_attr:
   | /* empty */ { None }
   | "(" "readonly" ")" { Some "readonly" }
   | "(" attr=LIDENT ")" { Some attr }
-type_header: attrs=attributes vis=visibility "type" tycon=UIDENT params=optional_type_parameters_no_constraints {
-  attrs, vis, tycon, i $loc(tycon), params
+%inline is_declare:
+  | /* empty */ { false }
+  | "declare" { true }
+
+type_header: attrs=attributes is_declare=is_declare vis=visibility "type" tycon=UIDENT params=optional_type_parameters_no_constraints {
+  attrs, vis, is_declare, tycon, i $loc(tycon), params
 }
-suberror_header: attrs=attributes vis=visibility "type" "!" tycon=UIDENT {
-  attrs, vis, tycon, i $loc(tycon), true
+suberror_header: attrs=attributes is_declare=is_declare vis=visibility "type" "!" tycon=UIDENT {
+  attrs, vis, is_declare, tycon, i $loc(tycon), true
 }
-| attrs=attributes vis=visibility "suberror" tycon=UIDENT {
-  attrs, vis, tycon, i $loc(tycon), false
-} 
+| attrs=attributes is_declare=is_declare vis=visibility "suberror" tycon=UIDENT {
+  attrs, vis, is_declare, tycon, i $loc(tycon), false
+}
 struct_header: attrs=attributes vis=visibility "struct" tycon=UIDENT params=optional_type_parameters_no_constraints {
   attrs, vis, tycon, i $loc(tycon), params
 }
@@ -1340,7 +1396,8 @@ lex_simple_atom_pattern:
 loop_expr:
   | label=loop_label_colon arg=loop_header
       body=list_semis( single_pattern_case )
-    "}" { Parsing_syntax.Pexpr_loop { arg; body; label; loc_ = i $sloc; loop_loc_ = i $loc(arg) } }
+    "}"
+    { Parsing_syntax.Pexpr_loop { arg; body; label; loc_ = i $sloc; loop_loc_ = i $loc(arg) } }
 
 for_binders:
   | binders=list_commas_no_trailing(separated_pair(binder, "=", expr)) { binders }
@@ -1349,15 +1406,25 @@ optional_else:
   | "else" else_=block_expr { Some else_ }
   | { None }
 
+where_clause_field:
+  | l=label ":" e=expr { make_field_def ~loc_:(i $sloc) l e false }
+
+optional_where_clause:
+  | "where" "{" fields=list_commas(where_clause_field) "}"
+    { Some ({ Parsing_syntax.fields; loc_ = i $sloc } : Parsing_syntax.where_clause) }
+  | { None }
+
 for_expr:
-  | label=loop_label_colon "for" binders = for_binders SEMI
-          condition = option(infix_expr) SEMI
+  | label=loop_label_colon _for_kw="for" binders = for_binders SEMI
+          condition = option(infix_expr) _continue_semi=SEMI
           continue_block = list_commas_no_trailing(separated_pair(binder, "=", expr))
           body = block_expr
           for_else = optional_else
-    { Parsing_syntax.Pexpr_for {loc_ = i $sloc; binders; condition; continue_block; body; for_else; label } }
-  | label=loop_label_colon "for" binders = for_binders body = block_expr for_else=optional_else
-    { Parsing_syntax.Pexpr_for {loc_ = i $sloc; binders; condition = None; continue_block = []; body; for_else; label } }
+          where_clause = optional_where_clause
+    { let for_loc_end = match continue_block with [] -> $endpos(_continue_semi) | _ -> $endpos(continue_block) in
+      Parsing_syntax.Pexpr_for {loc_ = i $sloc; binders; condition; continue_block; body; for_else; where_clause; label; for_loc_ = i ($startpos(_for_kw), for_loc_end) } }
+  | label=loop_label_colon _for_kw="for" binders = for_binders body = block_expr for_else=optional_else where_clause=optional_where_clause
+    { Parsing_syntax.Pexpr_for {loc_ = i $sloc; binders; condition = None; continue_block = []; body; for_else; where_clause; label; for_loc_ = i ($startpos(_for_kw), $endpos(binders)) } }
 
 foreach_expr:
   | label=loop_label_colon "for" binders=non_empty_list_commas(foreach_binder) "in" expr=expr
@@ -1389,13 +1456,19 @@ simple_try_expr:
     { let catch_all, catch_loc_ = catch_keyword in
       Parsing_syntax.Pexpr_try { loc_=(i $sloc); body; catch; catch_all; try_else = None; has_try_ = false;
                                  else_loc_ = Rloc.no_location; legacy_else_ = false; try_loc_ = i $loc(body); catch_loc_ } }
-  | pipe_expr { $1 }
-
+  | pipe_expr {$1}
+  
 arrow_fn_expr:
-  | "(" bs=arrow_fn_prefix "=>" body=expr_statement_no_break_continue_return { Parsing_util.make_arrow_fn ~loc_:(i $sloc) bs body }
-  | "(" ")" "=>" body=expr_statement_no_break_continue_return { Parsing_util.make_arrow_fn ~loc_:(i $sloc) [] body }
-  | b=binder "=>" body=expr_statement_no_break_continue_return { Parsing_util.make_arrow_fn ~loc_:(i $sloc) [Parsing_util.Named b, None] body }
-  | _l="_" "=>" body=expr_statement_no_break_continue_return { Parsing_util.make_arrow_fn ~loc_:(i $sloc) [Parsing_util.Unnamed(i $loc(_l)), None] body }
+  | "(" bs=arrow_fn_prefix "=>" body=expr_statement_no_break_continue_return {
+    let params_loc_ = Rloc.merge (i $loc($1)) (i $loc(bs)) in
+    Parsing_util.make_arrow_fn ~params_loc_ ~loc_:(i $sloc) bs body 
+  }
+  | "(" ")" "=>" body=expr_statement_no_break_continue_return {
+    let params_loc_ = Rloc.merge (i $loc($1)) (i $loc($2)) in
+    Parsing_util.make_arrow_fn ~params_loc_ ~loc_:(i $sloc) [] body 
+  }
+  | b=binder "=>" body=expr_statement_no_break_continue_return { Parsing_util.make_arrow_fn ~params_loc_:(i $loc(b)) ~loc_:(i $sloc) [Parsing_util.Named b, None] body }
+  | _l="_" "=>" body=expr_statement_no_break_continue_return { Parsing_util.make_arrow_fn ~params_loc_:(i $loc(_l)) ~loc_:(i $sloc) [Parsing_util.Unnamed(i $loc(_l)), None] body }
 
 
 arrow_fn_prefix:
@@ -1416,6 +1489,13 @@ arrow_fn_prefix_no_constraint:
 
 pipe_expr: 
   | lhs=pipe_expr "|>" rhs=infix_expr {
+    Parsing_syntax.Pexpr_pipe { lhs; rhs; loc_ = i $sloc }
+  }
+  | lhs=pipe_expr "|>" binder=binder "=>" body=block_expr {
+    let params_loc_ = i $loc(binder) in
+    let fn_loc = i ($startpos(binder), $endpos(body)) in
+    let func = Parsing_util.make_arrow_fn ~params_loc_ ~loc_:fn_loc [Parsing_util.Named binder, None] body in
+    let rhs = Parsing_syntax.Pexpr_function { loc_ = fn_loc; func } in
     Parsing_syntax.Pexpr_pipe { lhs; rhs; loc_ = i $sloc }
   }
   | infix_expr { $1 }
@@ -1447,7 +1527,13 @@ range_expr:
    { Parsing_syntax.Pexpr_infix { op = {var_name = Lident "..<"; loc_ =  i $loc(_op)}; lhs; rhs; loc_ = i $sloc } }
   | lhs=prefix_expr _op="..=" rhs=prefix_expr
    { Parsing_syntax.Pexpr_infix { op = {var_name = Lident "..="; loc_ =  i $loc(_op)}; lhs; rhs; loc_ = i $sloc } }
-  | prefix_expr { $1}
+  | lhs=prefix_expr _op="..<=" rhs=prefix_expr
+   { Parsing_syntax.Pexpr_infix { op = {var_name = Lident "..<="; loc_ =  i $loc(_op)}; lhs; rhs; loc_ = i $sloc } }
+  | lhs=prefix_expr _op=">.." rhs=prefix_expr
+   { Parsing_syntax.Pexpr_infix { op = {var_name = Lident ">.."; loc_ =  i $loc(_op)}; lhs; rhs; loc_ = i $sloc } }
+  | lhs=prefix_expr _op=">=.." rhs=prefix_expr
+   { Parsing_syntax.Pexpr_infix { op = {var_name = Lident ">=.."; loc_ =  i $loc(_op)}; lhs; rhs; loc_ = i $sloc } }
+  | prefix_expr { $1 }
 
 prefix_expr:
   | op=id(plus) e=prefix_expr { make_uplus ~loc_:(i $sloc) op e }
