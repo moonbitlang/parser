@@ -32,7 +32,10 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | QUESTION
     | EXCLAMATION
     | RANGE_INCLUSIVE
+    | RANGE_LT_INCLUSIVE
     | RANGE_EXCLUSIVE
+    | RANGE_INCLUSIVE_REV
+    | RANGE_EXCLUSIVE_REV
     | PIPE
     | ELLIPSIS
     | POST_LABEL(_) => true
@@ -70,6 +73,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | IMPORT
     | IF
     | GUARD
+    | DECLARE
     | DEFER
     | WHILE
     | ASYNC
@@ -110,7 +114,8 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | ATTRIBUTE(_)
     | USING
     | LEXMATCH
-    | LEXMATCH_QUESTION => false
+    | LEXMATCH_QUESTION
+    | WHERE => false
   }
 }
 
@@ -163,6 +168,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | IF
     | GUARD
     | DEFER
+    | DECLARE
     | WHILE
     | ASYNC
     | FN
@@ -255,10 +261,14 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | WITH
     | QUESTION
     | RANGE_INCLUSIVE
+    | RANGE_LT_INCLUSIVE
     | RANGE_EXCLUSIVE
+    | RANGE_INCLUSIVE_REV
+    | RANGE_EXCLUSIVE_REV
     | USING
     | AND
-    | LEXMATCH_QUESTION => false
+    | LEXMATCH_QUESTION
+    | WHERE => false
   }
 }
 

@@ -111,5 +111,10 @@ pub fn TokenKind::to_expect_string(self : Self) -> String {
     TK_LEXMATCH_QUESTION => "lexmatch?"
     TK_REGEX_LITERAL => "regex"
     TK_REGEX_INTERP => "regex interp"
+    TK_DECLARE => "declare"
+    TK_RANGE_EXCLUSIVE_REV => ">.."
+    TK_RANGE_INCLUSIVE_REV => ">=.."
+    TK_RANGE_LT_INCLUSIVE => "..<="
+    TK_WHERE => "where"
   }
 }
