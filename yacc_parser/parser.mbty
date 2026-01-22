@@ -1023,14 +1023,6 @@ optional_bang -> Location?
   |  { None }
   ;
 
-fn_header -> (Binder, Location?)
-  : "fn" binder optional_bang "{" { ($2, $3) }
-  ;
-
-fn_header_no_binder -> Location?
-  : "fn" optional_bang "{" { $2 }
-  ;
-
 letand_func -> Func
   : arrow_fn_expr { $1 }
   | anony_fn { $1 }
@@ -1157,12 +1149,6 @@ single_pattern_case -> Case
 
 single_pattern_cases -> List[Case]
   : list_semis(single_pattern_case) { $1 }
-  ;
-
-multi_pattern_case -> MultiArgCase
-  : non_empty_list_commas(pattern) option(preceded("if", infix_expr)) "=>" expr_statement { 
-    MultiArgCase::{ patterns : $1, guard_ : $2, body : $4 }
-  }
   ;
 
 catch_keyword -> (Bool, Location)
