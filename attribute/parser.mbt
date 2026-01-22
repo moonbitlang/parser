@@ -172,7 +172,10 @@ priv enum YYSymbol {
   T_RETURN
   T_DOTDOT
   T_RANGE_INCLUSIVE
+  T_RANGE_LT_INCLUSIVE
   T_RANGE_EXCLUSIVE
+  T_RANGE_INCLUSIVE_REV
+  T_RANGE_EXCLUSIVE_REV
   T_ELLIPSIS
   T_TEST
   T_LOOP
@@ -185,7 +188,9 @@ priv enum YYSymbol {
   T_AND
   T_LETREC
   T_ENUMVIEW
+  T_DECLARE
   T_NORAISE
+  T_WHERE
   T_TRY_QUESTION
   T_TRY_EXCLAMATION
   T_LEXMATCH
@@ -209,7 +214,7 @@ fn init {
 }
 
 // file:///./parser.mbty
-// 145|    EOF { @list.empty() }
+// 150|    EOF { @list.empty() }
 
 ///|
 fn yy_action_0(
@@ -225,7 +230,7 @@ fn yy_action_0(
 }
 
 // file:///./parser.mbty
-// 146|    properties { $1 }
+// 151|    properties { $1 }
 
 ///|
 fn yy_action_1(
@@ -242,7 +247,7 @@ fn yy_action_1(
 }
 
 // file:///./parser.mbty
-// 162|    "(" ")"                      { @list.empty() }
+// 167|    "(" ")"                      { @list.empty() }
 
 ///|
 fn yy_action_2(
@@ -258,7 +263,7 @@ fn yy_action_2(
 }
 
 // file:///./parser.mbty
-// 163|    "(" non_empty_properties ")" { $2 }
+// 168|    "(" non_empty_properties ")" { $2 }
 
 ///|
 fn yy_action_3(
@@ -275,7 +280,7 @@ fn yy_action_3(
 }
 
 // file:///./parser.mbty
-// 149|    name=LIDENT "=" expr   { Labeled(name, $3) }
+// 154|    name=LIDENT "=" expr   { Labeled(name, $3) }
 
 ///|
 fn yy_action_4(
@@ -293,7 +298,7 @@ fn yy_action_4(
 }
 
 // file:///./parser.mbty
-// 156|    qual=LIDENT name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
+// 161|    qual=LIDENT name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
 
 ///|
 fn yy_action_5(
@@ -312,7 +317,7 @@ fn yy_action_5(
 }
 
 // file:///./parser.mbty
-// 154|    qual=LIDENT name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
+// 159|    qual=LIDENT name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
 
 ///|
 fn yy_action_6(
@@ -330,7 +335,7 @@ fn yy_action_6(
 }
 
 // file:///./parser.mbty
-// 155|    name=LIDENT props=properties                 { Apply({qual: None, name}, props) }
+// 160|    name=LIDENT props=properties                 { Apply({qual: None, name}, props) }
 
 ///|
 fn yy_action_7(
@@ -348,7 +353,7 @@ fn yy_action_7(
 }
 
 // file:///./parser.mbty
-// 153|    name=LIDENT                                  { Ident({qual: None, name}) }
+// 158|    name=LIDENT                                  { Ident({qual: None, name}) }
 
 ///|
 fn yy_action_8(
@@ -365,7 +370,7 @@ fn yy_action_8(
 }
 
 // file:///./parser.mbty
-// 150|    expr                   { Expr($1) }
+// 155|    expr                   { Expr($1) }
 
 ///|
 fn yy_action_9(
@@ -382,7 +387,7 @@ fn yy_action_9(
 }
 
 // file:///./parser.mbty
-// 157|    STRING                                       { String($1) }
+// 162|    STRING                                       { String($1) }
 
 ///|
 fn yy_action_10(
@@ -399,7 +404,7 @@ fn yy_action_10(
 }
 
 // file:///./parser.mbty
-// 158|    TRUE                                         { Bool(true) }
+// 163|    TRUE                                         { Bool(true) }
 
 ///|
 fn yy_action_11(
@@ -415,7 +420,7 @@ fn yy_action_11(
 }
 
 // file:///./parser.mbty
-// 159|    FALSE                                        { Bool(false) }
+// 164|    FALSE                                        { Bool(false) }
 
 ///|
 fn yy_action_12(
@@ -431,7 +436,7 @@ fn yy_action_12(
 }
 
 // file:///./parser.mbty
-// 167|    x=property "," xs=non_empty_properties{ xs.add(x) }
+// 172|    x=property "," xs=non_empty_properties{ xs.add(x) }
 
 ///|
 fn yy_action_13(
@@ -449,7 +454,7 @@ fn yy_action_13(
 }
 
 // file:///./parser.mbty
-// 166|    property { @list.from_array([$1]) }
+// 171|    property { @list.from_array([$1]) }
 
 ///|
 fn yy_action_14(
@@ -562,7 +567,10 @@ fn yy_input(
     RETURN => (T_RETURN, YYObj_Void)
     DOTDOT => (T_DOTDOT, YYObj_Void)
     RANGE_INCLUSIVE => (T_RANGE_INCLUSIVE, YYObj_Void)
+    RANGE_LT_INCLUSIVE => (T_RANGE_LT_INCLUSIVE, YYObj_Void)
     RANGE_EXCLUSIVE => (T_RANGE_EXCLUSIVE, YYObj_Void)
+    RANGE_INCLUSIVE_REV => (T_RANGE_INCLUSIVE_REV, YYObj_Void)
+    RANGE_EXCLUSIVE_REV => (T_RANGE_EXCLUSIVE_REV, YYObj_Void)
     ELLIPSIS => (T_ELLIPSIS, YYObj_Void)
     TEST => (T_TEST, YYObj_Void)
     LOOP => (T_LOOP, YYObj_Void)
@@ -575,7 +583,9 @@ fn yy_input(
     AND => (T_AND, YYObj_Void)
     LETREC => (T_LETREC, YYObj_Void)
     ENUMVIEW => (T_ENUMVIEW, YYObj_Void)
+    DECLARE => (T_DECLARE, YYObj_Void)
     NORAISE => (T_NORAISE, YYObj_Void)
+    WHERE => (T_WHERE, YYObj_Void)
     TRY_QUESTION => (T_TRY_QUESTION, YYObj_Void)
     TRY_EXCLAMATION => (T_TRY_EXCLAMATION, YYObj_Void)
     LEXMATCH => (T_LEXMATCH, YYObj_Void)
@@ -1058,7 +1068,10 @@ fn error(
         (T_RETURN, TK_RETURN),
         (T_DOTDOT, TK_DOTDOT),
         (T_RANGE_INCLUSIVE, TK_RANGE_INCLUSIVE),
+        (T_RANGE_LT_INCLUSIVE, TK_RANGE_LT_INCLUSIVE),
         (T_RANGE_EXCLUSIVE, TK_RANGE_EXCLUSIVE),
+        (T_RANGE_INCLUSIVE_REV, TK_RANGE_INCLUSIVE_REV),
+        (T_RANGE_EXCLUSIVE_REV, TK_RANGE_EXCLUSIVE_REV),
         (T_ELLIPSIS, TK_ELLIPSIS),
         (T_TEST, TK_TEST),
         (T_LOOP, TK_LOOP),
@@ -1071,7 +1084,9 @@ fn error(
         (T_AND, TK_AND),
         (T_LETREC, TK_LETREC),
         (T_ENUMVIEW, TK_ENUMVIEW),
+        (T_DECLARE, TK_DECLARE),
         (T_NORAISE, TK_NORAISE),
+        (T_WHERE, TK_WHERE),
         (T_TRY_QUESTION, TK_TRY_QUESTION),
         (T_TRY_EXCLAMATION, TK_TRY_EXCLAMATION),
         (T_LEXMATCH, TK_LEXMATCH),
