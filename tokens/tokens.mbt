@@ -90,7 +90,10 @@ pub(all) enum Token {
   RETURN
   DOTDOT
   RANGE_INCLUSIVE
+  RANGE_LT_INCLUSIVE
   RANGE_EXCLUSIVE
+  RANGE_INCLUSIVE_REV
+  RANGE_EXCLUSIVE_REV
   ELLIPSIS
   TEST
   LOOP
@@ -103,7 +106,9 @@ pub(all) enum Token {
   AND
   LETREC
   ENUMVIEW
+  DECLARE
   NORAISE
+  WHERE
   TRY_QUESTION
   TRY_EXCLAMATION
   LEXMATCH
@@ -203,7 +208,10 @@ pub fn Token::kind(self : Token) -> TokenKind {
     RETURN => TK_RETURN
     DOTDOT => TK_DOTDOT
     RANGE_INCLUSIVE => TK_RANGE_INCLUSIVE
+    RANGE_LT_INCLUSIVE => TK_RANGE_LT_INCLUSIVE
     RANGE_EXCLUSIVE => TK_RANGE_EXCLUSIVE
+    RANGE_INCLUSIVE_REV => TK_RANGE_INCLUSIVE_REV
+    RANGE_EXCLUSIVE_REV => TK_RANGE_EXCLUSIVE_REV
     ELLIPSIS => TK_ELLIPSIS
     TEST => TK_TEST
     LOOP => TK_LOOP
@@ -216,7 +224,9 @@ pub fn Token::kind(self : Token) -> TokenKind {
     AND => TK_AND
     LETREC => TK_LETREC
     ENUMVIEW => TK_ENUMVIEW
+    DECLARE => TK_DECLARE
     NORAISE => TK_NORAISE
+    WHERE => TK_WHERE
     TRY_QUESTION => TK_TRY_QUESTION
     TRY_EXCLAMATION => TK_TRY_EXCLAMATION
     LEXMATCH => TK_LEXMATCH
@@ -316,7 +326,10 @@ pub(all) enum TokenKind {
   TK_RETURN
   TK_DOTDOT
   TK_RANGE_INCLUSIVE
+  TK_RANGE_LT_INCLUSIVE
   TK_RANGE_EXCLUSIVE
+  TK_RANGE_INCLUSIVE_REV
+  TK_RANGE_EXCLUSIVE_REV
   TK_ELLIPSIS
   TK_TEST
   TK_LOOP
@@ -329,7 +342,9 @@ pub(all) enum TokenKind {
   TK_AND
   TK_LETREC
   TK_ENUMVIEW
+  TK_DECLARE
   TK_NORAISE
+  TK_WHERE
   TK_TRY_QUESTION
   TK_TRY_EXCLAMATION
   TK_LEXMATCH
@@ -430,7 +445,10 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_RETURN => "\"return\""
       TK_DOTDOT => "\"..\""
       TK_RANGE_INCLUSIVE => "\"..=\""
+      TK_RANGE_LT_INCLUSIVE => "\"..<=\""
       TK_RANGE_EXCLUSIVE => "\"..<\""
+      TK_RANGE_INCLUSIVE_REV => "\">=..\""
+      TK_RANGE_EXCLUSIVE_REV => "\">..\""
       TK_ELLIPSIS => "\"...\""
       TK_TEST => "\"test\""
       TK_LOOP => "\"loop\""
@@ -443,7 +461,9 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_AND => "\"and\""
       TK_LETREC => "\"letrec\""
       TK_ENUMVIEW => "\"enumview\""
+      TK_DECLARE => "\"declare\""
       TK_NORAISE => "\"noraise\""
+      TK_WHERE => "\"where\""
       TK_TRY_QUESTION => "\"try?\""
       TK_TRY_EXCLAMATION => "\"try!\""
       TK_LEXMATCH => "\"lexmatch\""
