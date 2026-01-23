@@ -127,6 +127,9 @@
 %left BAR
 %left CARET
 %left AMPER
+
+// x.f(...) should be [Pexpr_dot_apply], not [Pexpr_apply(Pexpr_field, ...)]
+// these two precedences are used to resolve this.
 %nonassoc prec_field
 %nonassoc LPAREN
 %left INFIX1
@@ -139,6 +142,10 @@
 %nonassoc prec_apply_non_ident_fn
 %nonassoc "!"
 %nonassoc "?"
+
+// the precedence of "," and ")" are used to compare with prec_apply_non_ident_fn
+// to make sure when parsing (a, b) => ...
+// the comma and rparen are always shifted
 %nonassoc prec_lower_than_arrow_fn
 %nonassoc ","
 %nonassoc ")"
