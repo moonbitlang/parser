@@ -41,57 +41,64 @@
     "loc": "2:15-2:16"
   },
   {
+    "token": [
+      "UIDENT",
+      "Ref"
+    ],
+    "loc": "2:16-2:19"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "2:19-2:21"
+  },
+  {
     "token": "LBRACE",
-    "loc": "2:16-2:17"
+    "loc": "2:21-2:22"
   },
   {
     "token": [
       "LIDENT",
       "val"
     ],
-    "loc": "2:18-2:21"
+    "loc": "2:23-2:26"
   },
   {
     "token": "COLON",
-    "loc": "2:21-2:22"
+    "loc": "2:26-2:27"
   },
   {
     "token": [
       "INT",
       "1"
     ],
-    "loc": "2:23-2:24"
+    "loc": "2:28-2:29"
   },
   {
     "token": "RBRACE",
-    "loc": "2:25-2:26"
+    "loc": "2:30-2:31"
   },
   {
     "token": "RPAREN",
-    "loc": "2:26-2:27"
+    "loc": "2:31-2:32"
+  },
+  {
+    "token": "IS",
+    "loc": "2:33-2:35"
   },
   {
     "token": [
-      "DOT_LIDENT",
-      "is_empty"
+      "UIDENT",
+      "None"
     ],
-    "loc": "2:28-2:36"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "2:36-2:37"
+    "loc": "2:36-2:40"
   },
   {
     "token": "RPAREN",
-    "loc": "2:37-2:38"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "2:38-2:39"
+    "loc": "2:40-2:41"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:39-2:40"
+    "loc": "2:41-2:42"
   },
   {
     "token": "RBRACE",

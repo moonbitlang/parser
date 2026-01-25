@@ -1,3 +1,3 @@
 fn init {
-  println(Some({ val: 1 }).is_empty())
+  println(Some(Ref::{ val: 1 }) is None)
 }

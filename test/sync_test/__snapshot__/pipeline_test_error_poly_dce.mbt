@@ -12,7 +12,9 @@ fn h(f : (Int) -> Unit raise?) -> Unit raise? {
 }
 
 ///|
-suberror E Int derive(Show)
+suberror E {
+  E(Int)
+} derive(Show)
 
 ///|
 fn main {

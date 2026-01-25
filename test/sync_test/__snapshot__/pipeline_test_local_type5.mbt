@@ -1,9 +1,11 @@
 ///|
-suberror LE Int derive(Show)
+suberror LE {
+  LE(Int)
+} derive(Show)
 
 ///| basic test
 fn main {
-  type LT Int derive(Show)
+  struct LT(Int) derive(Show)
   fn f1(x : Int) -> LT raise LE {
     if x > 0 {
       LT(x)
@@ -37,7 +39,7 @@ fn init {
 }
 
 fn[A: Show, B: Show] f(a: A, b: B) -> Unit {
-  type A (B, Int) derive(Show)
+  struct A(B, Int) derive(Show)
   struct B {
     f1: Array[C]
     f2: String
@@ -49,7 +51,7 @@ fn[A: Show, B: Show] f(a: A, b: B) -> Unit {
   let c1 = C1
   let b1 = { f1: [c1], f2: "b1"}
   let a1 = (b1, 43)
-  let c2 = C2(a1)
+  let c2 = C2(A(b1, 43))
   let b2 = { f1: [c1, c2], f2: "b2"}
   let a2 = (b2, 44)
   

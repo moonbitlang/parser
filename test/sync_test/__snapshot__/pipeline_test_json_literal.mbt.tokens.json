@@ -1390,12 +1390,12 @@
   },
   {
     "token": "NEWLINE",
-    "loc": "43:22-43:23"
+    "loc": "43:21-43:22"
   },
   {
     "token": [
-      "MULTILINE_STRING",
-      " {"
+      "MULTILINE_INTERP",
+      "\" {\""
     ],
     "loc": "44:5-44:9"
   },
@@ -1427,8 +1427,8 @@
   },
   {
     "token": [
-      "MULTILINE_STRING",
-      " }"
+      "MULTILINE_INTERP",
+      "\" }\""
     ],
     "loc": "47:5-47:9"
   },
@@ -1438,8 +1438,8 @@
   },
   {
     "token": [
-      "MULTILINE_STRING",
-      ""
+      "MULTILINE_INTERP",
+      "\"\""
     ],
     "loc": "48:5-48:7"
   },

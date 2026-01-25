@@ -1,358 +1,594 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopTypeDef",
-      "0": {
-        "type": "TypeDecl",
-        "tycon": "Imag",
-        "tycon_loc": null,
-        "params": [],
-        "components": {
-          "type": "TypeDesc::Record",
-          "0": [
-            {
-              "type": "FieldDecl",
-              "name": {
-                "type": "FieldName",
-                "label": "real",
-                "loc": null
-              },
-              "ty": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "Int"
+[
+  {
+    "kind": "Impl::TopTypeDef",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "TypeDecl",
+        "loc": null,
+        "children": {
+          "tycon": "Imag",
+          "params": {
+            "kind": "TypeDecl::ParamList",
+            "loc": null,
+            "children": []
+          },
+          "components": {
+            "kind": "TypeDesc::Record",
+            "loc": null,
+            "children": {
+              "value": {
+                "kind": "TypeDesc::Record::FieldList",
+                "loc": null,
+                "children": [
+                  {
+                    "kind": "FieldDecl",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "FieldName",
+                        "loc": null,
+                        "children": {
+                          "label": "real"
+                        }
+                      },
+                      "ty": {
+                        "kind": "Type::Name",
+                        "loc": null,
+                        "children": {
+                          "constr_id": {
+                            "kind": "ConstrId",
+                            "loc": null,
+                            "children": {
+                              "id": {
+                                "kind": "LongIdent::Ident",
+                                "loc": null,
+                                "children": {
+                                  "value": "Int"
+                                }
+                              }
+                            }
+                          },
+                          "tys": {
+                            "kind": "Type::Name::TypeList",
+                            "loc": null,
+                            "children": []
+                          }
+                        }
+                      },
+                      "mut": false,
+                      "vis": {
+                        "kind": "Visibility::Default",
+                        "loc": null,
+                        "children": {}
+                      },
+                      "attrs": {
+                        "kind": "FieldDecl::AttrList",
+                        "loc": null,
+                        "children": []
+                      },
+                      "doc": ""
+                    }
                   },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              },
-              "mut": false,
-              "vis": {
-                "type": "Visibility::Default"
-              },
-              "loc": null,
-              "attrs": [],
-              "doc": ""
-            },
-            {
-              "type": "FieldDecl",
-              "name": {
-                "type": "FieldName",
-                "label": "imag",
-                "loc": null
-              },
-              "ty": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": {
-                    "type": "LongIdent::Ident",
-                    "0": "Int"
-                  },
-                  "loc": null
-                },
-                "tys": [],
-                "loc": null
-              },
-              "mut": false,
-              "vis": {
-                "type": "Visibility::Default"
-              },
-              "loc": null,
-              "attrs": [],
-              "doc": ""
+                  {
+                    "kind": "FieldDecl",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "FieldName",
+                        "loc": null,
+                        "children": {
+                          "label": "imag"
+                        }
+                      },
+                      "ty": {
+                        "kind": "Type::Name",
+                        "loc": null,
+                        "children": {
+                          "constr_id": {
+                            "kind": "ConstrId",
+                            "loc": null,
+                            "children": {
+                              "id": {
+                                "kind": "LongIdent::Ident",
+                                "loc": null,
+                                "children": {
+                                  "value": "Int"
+                                }
+                              }
+                            }
+                          },
+                          "tys": {
+                            "kind": "Type::Name::TypeList",
+                            "loc": null,
+                            "children": []
+                          }
+                        }
+                      },
+                      "mut": false,
+                      "vis": {
+                        "kind": "Visibility::Default",
+                        "loc": null,
+                        "children": {}
+                      },
+                      "attrs": {
+                        "kind": "FieldDecl::AttrList",
+                        "loc": null,
+                        "children": []
+                      },
+                      "doc": ""
+                    }
+                  }
+                ]
+              }
             }
-          ]
-        },
-        "attrs": [],
-        "doc": "",
-        "type_vis": {
-          "type": "Visibility::Default"
-        },
-        "deriving": [],
-        "loc": null
+          },
+          "attrs": {
+            "kind": "TypeDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": "",
+          "type_vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "deriving": {
+            "kind": "TypeDecl::DerivingList",
+            "loc": null,
+            "children": []
+          }
+        }
       }
-    },
-    {
-      "type": "Impl::TopFuncDef",
+    }
+  },
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
       "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "init",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": null,
-        "decl_params": null,
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "init"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
+        }
       },
       "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::Let",
-          "pattern": {
-            "type": "Pattern::Var",
-            "0": {
-              "type": "Binder",
-              "name": "i",
-              "loc": null
-            }
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
           },
           "expr": {
-            "type": "Expr::Record",
-            "type_name": null,
-            "fields": [
-              {
-                "type": "FieldDef",
-                "label": {
-                  "type": "Label",
-                  "name": "real",
-                  "loc": null
-                },
-                "expr": {
-                  "type": "Expr::Constant",
-                  "c": {
-                    "type": "Constant::Int",
-                    "0": "1"
-                  },
-                  "loc": null
-                },
-                "is_pun": false,
-                "loc": null
-              },
-              {
-                "type": "FieldDef",
-                "label": {
-                  "type": "Label",
-                  "name": "imag",
-                  "loc": null
-                },
-                "expr": {
-                  "type": "Expr::Constant",
-                  "c": {
-                    "type": "Constant::Int",
-                    "0": "1"
-                  },
-                  "loc": null
-                },
-                "is_pun": false,
-                "loc": null
-              }
-            ],
-            "trailing": {
-              "type": "Trailing::Comma"
-            },
-            "loc": null
-          },
-          "body": {
-            "type": "Expr::Let",
-            "pattern": {
-              "type": "Pattern::Var",
-              "0": {
-                "type": "Binder",
-                "name": "j",
-                "loc": null
-              }
-            },
-            "expr": {
-              "type": "Expr::RecordUpdate",
-              "type_name": null,
-              "record": {
-                "type": "Expr::Ident",
-                "id": {
-                  "type": "Var",
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "i"
-                  },
-                  "loc": null
-                },
-                "loc": null
-              },
-              "fields": [],
-              "loc": null
-            },
-            "body": {
-              "type": "Expr::Let",
+            "kind": "Expr::Let",
+            "loc": null,
+            "children": {
               "pattern": {
-                "type": "Pattern::Var",
-                "0": {
-                  "type": "Binder",
-                  "name": "k",
-                  "loc": null
+                "kind": "Pattern::Var",
+                "loc": null,
+                "children": {
+                  "value": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "i"
+                    }
+                  }
                 }
               },
               "expr": {
-                "type": "Expr::RecordUpdate",
-                "type_name": null,
-                "record": {
-                  "type": "Expr::Ident",
-                  "id": {
-                    "type": "Var",
-                    "name": {
-                      "type": "LongIdent::Ident",
-                      "0": "i"
-                    },
-                    "loc": null
+                "kind": "Expr::Record",
+                "loc": null,
+                "children": {
+                  "type_name": null,
+                  "fields": {
+                    "kind": "Expr::Record::FieldList",
+                    "loc": null,
+                    "children": [
+                      {
+                        "kind": "FieldDef",
+                        "loc": null,
+                        "children": {
+                          "label": {
+                            "kind": "Label",
+                            "loc": null,
+                            "children": {
+                              "name": "real"
+                            }
+                          },
+                          "expr": {
+                            "kind": "Expr::Constant",
+                            "loc": null,
+                            "children": {
+                              "constant": {
+                                "kind": "Constant::Int",
+                                "loc": null,
+                                "children": {
+                                  "value": "1"
+                                }
+                              }
+                            }
+                          },
+                          "is_pun": false
+                        }
+                      },
+                      {
+                        "kind": "FieldDef",
+                        "loc": null,
+                        "children": {
+                          "label": {
+                            "kind": "Label",
+                            "loc": null,
+                            "children": {
+                              "name": "imag"
+                            }
+                          },
+                          "expr": {
+                            "kind": "Expr::Constant",
+                            "loc": null,
+                            "children": {
+                              "constant": {
+                                "kind": "Constant::Int",
+                                "loc": null,
+                                "children": {
+                                  "value": "1"
+                                }
+                              }
+                            }
+                          },
+                          "is_pun": false
+                        }
+                      }
+                    ]
                   },
-                  "loc": null
-                },
-                "fields": [],
-                "loc": null
+                  "trailing": {
+                    "kind": "Trailing::Comma",
+                    "loc": null,
+                    "children": {}
+                  }
+                }
               },
               "body": {
-                "type": "Expr::Let",
-                "pattern": {
-                  "type": "Pattern::Var",
-                  "0": {
-                    "type": "Binder",
-                    "name": "l",
-                    "loc": null
-                  }
-                },
-                "expr": {
-                  "type": "Expr::RecordUpdate",
-                  "type_name": null,
-                  "record": {
-                    "type": "Expr::Ident",
-                    "id": {
-                      "type": "Var",
-                      "name": {
-                        "type": "LongIdent::Ident",
-                        "0": "i"
-                      },
-                      "loc": null
-                    },
-                    "loc": null
-                  },
-                  "fields": [
-                    {
-                      "type": "FieldDef",
-                      "label": {
-                        "type": "Label",
-                        "name": "real",
-                        "loc": null
-                      },
-                      "expr": {
-                        "type": "Expr::Constant",
-                        "c": {
-                          "type": "Constant::Int",
-                          "0": "1"
-                        },
-                        "loc": null
-                      },
-                      "is_pun": false,
-                      "loc": null
-                    }
-                  ],
-                  "loc": null
-                },
-                "body": {
-                  "type": "Expr::Let",
+                "kind": "Expr::Let",
+                "loc": null,
+                "children": {
                   "pattern": {
-                    "type": "Pattern::Var",
-                    "0": {
-                      "type": "Binder",
-                      "name": "real",
-                      "loc": null
+                    "kind": "Pattern::Var",
+                    "loc": null,
+                    "children": {
+                      "value": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "j"
+                        }
+                      }
                     }
                   },
                   "expr": {
-                    "type": "Expr::Constant",
-                    "c": {
-                      "type": "Constant::Int",
-                      "0": "1"
-                    },
-                    "loc": null
-                  },
-                  "body": {
-                    "type": "Expr::Let",
-                    "pattern": {
-                      "type": "Pattern::Var",
-                      "0": {
-                        "type": "Binder",
-                        "name": "m",
-                        "loc": null
-                      }
-                    },
-                    "expr": {
-                      "type": "Expr::RecordUpdate",
+                    "kind": "Expr::RecordUpdate",
+                    "loc": null,
+                    "children": {
                       "type_name": null,
                       "record": {
-                        "type": "Expr::Ident",
-                        "id": {
-                          "type": "Var",
-                          "name": {
-                            "type": "LongIdent::Ident",
-                            "0": "i"
-                          },
-                          "loc": null
-                        },
-                        "loc": null
+                        "kind": "Expr::Ident",
+                        "loc": null,
+                        "children": {
+                          "id": {
+                            "kind": "Var",
+                            "loc": null,
+                            "children": {
+                              "name": {
+                                "kind": "LongIdent::Ident",
+                                "loc": null,
+                                "children": {
+                                  "value": "i"
+                                }
+                              }
+                            }
+                          }
+                        }
                       },
-                      "fields": [
-                        {
-                          "type": "FieldDef",
-                          "label": {
-                            "type": "Label",
-                            "name": "real",
-                            "loc": null
+                      "fields": {
+                        "kind": "Expr::RecordUpdate::FieldList",
+                        "loc": null,
+                        "children": []
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "Expr::Let",
+                    "loc": null,
+                    "children": {
+                      "pattern": {
+                        "kind": "Pattern::Var",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "Binder",
+                            "loc": null,
+                            "children": {
+                              "name": "k"
+                            }
+                          }
+                        }
+                      },
+                      "expr": {
+                        "kind": "Expr::RecordUpdate",
+                        "loc": null,
+                        "children": {
+                          "type_name": null,
+                          "record": {
+                            "kind": "Expr::Ident",
+                            "loc": null,
+                            "children": {
+                              "id": {
+                                "kind": "Var",
+                                "loc": null,
+                                "children": {
+                                  "name": {
+                                    "kind": "LongIdent::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "i"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "fields": {
+                            "kind": "Expr::RecordUpdate::FieldList",
+                            "loc": null,
+                            "children": []
+                          }
+                        }
+                      },
+                      "body": {
+                        "kind": "Expr::Let",
+                        "loc": null,
+                        "children": {
+                          "pattern": {
+                            "kind": "Pattern::Var",
+                            "loc": null,
+                            "children": {
+                              "value": {
+                                "kind": "Binder",
+                                "loc": null,
+                                "children": {
+                                  "name": "l"
+                                }
+                              }
+                            }
                           },
                           "expr": {
-                            "type": "Expr::Ident",
-                            "id": {
-                              "type": "Var",
-                              "name": {
-                                "type": "LongIdent::Ident",
-                                "0": "real"
+                            "kind": "Expr::RecordUpdate",
+                            "loc": null,
+                            "children": {
+                              "type_name": null,
+                              "record": {
+                                "kind": "Expr::Ident",
+                                "loc": null,
+                                "children": {
+                                  "id": {
+                                    "kind": "Var",
+                                    "loc": null,
+                                    "children": {
+                                      "name": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "i"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
                               },
-                              "loc": null
-                            },
-                            "loc": null
+                              "fields": {
+                                "kind": "Expr::RecordUpdate::FieldList",
+                                "loc": null,
+                                "children": [
+                                  {
+                                    "kind": "FieldDef",
+                                    "loc": null,
+                                    "children": {
+                                      "label": {
+                                        "kind": "Label",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "real"
+                                        }
+                                      },
+                                      "expr": {
+                                        "kind": "Expr::Constant",
+                                        "loc": null,
+                                        "children": {
+                                          "constant": {
+                                            "kind": "Constant::Int",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "1"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "is_pun": false
+                                    }
+                                  }
+                                ]
+                              }
+                            }
                           },
-                          "is_pun": true,
-                          "loc": null
+                          "body": {
+                            "kind": "Expr::Let",
+                            "loc": null,
+                            "children": {
+                              "pattern": {
+                                "kind": "Pattern::Var",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "Binder",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "real"
+                                    }
+                                  }
+                                }
+                              },
+                              "expr": {
+                                "kind": "Expr::Constant",
+                                "loc": null,
+                                "children": {
+                                  "constant": {
+                                    "kind": "Constant::Int",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "1"
+                                    }
+                                  }
+                                }
+                              },
+                              "body": {
+                                "kind": "Expr::Let",
+                                "loc": null,
+                                "children": {
+                                  "pattern": {
+                                    "kind": "Pattern::Var",
+                                    "loc": null,
+                                    "children": {
+                                      "value": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "m"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "expr": {
+                                    "kind": "Expr::RecordUpdate",
+                                    "loc": null,
+                                    "children": {
+                                      "type_name": null,
+                                      "record": {
+                                        "kind": "Expr::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "id": {
+                                            "kind": "Var",
+                                            "loc": null,
+                                            "children": {
+                                              "name": {
+                                                "kind": "LongIdent::Ident",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": "i"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "fields": {
+                                        "kind": "Expr::RecordUpdate::FieldList",
+                                        "loc": null,
+                                        "children": [
+                                          {
+                                            "kind": "FieldDef",
+                                            "loc": null,
+                                            "children": {
+                                              "label": {
+                                                "kind": "Label",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "real"
+                                                }
+                                              },
+                                              "expr": {
+                                                "kind": "Expr::Ident",
+                                                "loc": null,
+                                                "children": {
+                                                  "id": {
+                                                    "kind": "Var",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": {
+                                                        "kind": "LongIdent::Ident",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "value": "real"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "is_pun": true
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "body": {
+                                    "kind": "Expr::Unit",
+                                    "loc": null,
+                                    "children": {
+                                      "faked": true
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
-                      ],
-                      "loc": null
-                    },
-                    "body": {
-                      "type": "Expr::Unit",
-                      "loc": null,
-                      "faked": true
-                    },
-                    "loc": null
-                  },
-                  "loc": null
-                },
-                "loc": null
-              },
-              "loc": null
-            },
-            "loc": null
-          },
-          "loc": null
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-      },
-      "loc": null
+      }
     }
-  ]
-}
+  }
+]

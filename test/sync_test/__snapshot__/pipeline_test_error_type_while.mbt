@@ -1,5 +1,7 @@
 ///|
-suberror E String
+suberror E {
+  E(String)
+}
 
 ///|
 pub fn woo() -> Int raise E {

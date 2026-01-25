@@ -1,71 +1,111 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopLetDef",
+[
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
       "binder": {
-        "type": "Binder",
-        "name": "x0",
-        "loc": null
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "x0"
+        }
       },
       "ty": null,
       "expr": {
-        "type": "Expr::Constant",
-        "c": {
-          "type": "Constant::Int",
-          "0": "42"
-        },
-        "loc": null
+        "kind": "Expr::Constant",
+        "loc": null,
+        "children": {
+          "constant": {
+            "kind": "Constant::Int",
+            "loc": null,
+            "children": {
+              "value": "42"
+            }
+          }
+        }
       },
       "vis": {
-        "type": "Visibility::Default"
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
       },
       "is_constant": false,
-      "loc": null,
-      "attrs": [],
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopLetDef",
-      "binder": {
-        "type": "Binder",
-        "name": "x1",
-        "loc": null
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
       },
-      "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": {
-            "type": "LongIdent::Ident",
-            "0": "Int"
-          },
-          "loc": null
-        },
-        "tys": [],
-        "loc": null
-      },
-      "expr": {
-        "type": "Expr::Ident",
-        "id": {
-          "type": "Var",
-          "name": {
-            "type": "LongIdent::Ident",
-            "0": "x0"
-          },
-          "loc": null
-        },
-        "loc": null
-      },
-      "vis": {
-        "type": "Visibility::Pub",
-        "attr": null,
-        "loc": null
-      },
-      "is_constant": false,
-      "loc": null,
-      "attrs": [],
       "doc": ""
     }
-  ]
-}
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "x1"
+        }
+      },
+      "ty": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": {
+                  "value": "Int"
+                }
+              }
+            }
+          },
+          "tys": {
+            "kind": "Type::Name::TypeList",
+            "loc": null,
+            "children": []
+          }
+        }
+      },
+      "expr": {
+        "kind": "Expr::Ident",
+        "loc": null,
+        "children": {
+          "id": {
+            "kind": "Var",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": {
+                  "value": "x0"
+                }
+              }
+            }
+          }
+        }
+      },
+      "vis": {
+        "kind": "Visibility::Pub",
+        "loc": null,
+        "children": {
+          "attr": null
+        }
+      },
+      "is_constant": false,
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  }
+]

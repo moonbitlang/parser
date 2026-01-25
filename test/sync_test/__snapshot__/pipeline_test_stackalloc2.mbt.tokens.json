@@ -213,45 +213,68 @@
     "loc": "8:7-8:8"
   },
   {
-    "token": "EQUAL",
+    "token": "COLON",
     "loc": "8:9-8:10"
   },
   {
+    "token": [
+      "UIDENT",
+      "Ref"
+    ],
+    "loc": "8:11-8:14"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "8:14-8:15"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "8:15-8:16"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "8:16-8:17"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "8:18-8:19"
+  },
+  {
     "token": "LBRACE",
-    "loc": "8:11-8:12"
+    "loc": "8:20-8:21"
   },
   {
     "token": [
       "LIDENT",
       "val"
     ],
-    "loc": "8:13-8:16"
+    "loc": "8:22-8:25"
   },
   {
     "token": "COLON",
-    "loc": "8:16-8:17"
+    "loc": "8:25-8:26"
   },
   {
     "token": [
       "INT",
       "1"
     ],
-    "loc": "8:18-8:19"
+    "loc": "8:27-8:28"
   },
   {
     "token": "RBRACE",
-    "loc": "8:20-8:21"
+    "loc": "8:29-8:30"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "8:21-8:21"
+    "loc": "8:30-8:30"
   },
   {
     "token": "NEWLINE",
-    "loc": "8:21-8:22"
+    "loc": "8:30-8:31"
   },
   {
     "token": "LET",

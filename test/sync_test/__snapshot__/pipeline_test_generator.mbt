@@ -1,3 +1,5 @@
+//!build: -w -20
+
 async fn[T] callcc(cb : ((T) -> Unit) -> Unit) -> T noraise = "%async.suspend"
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
 
@@ -36,15 +38,7 @@ fn[Elem] Generator::next(self : Generator[Elem]) -> Elem? {
 }
 
 fn[Elem] Generator::iter(self : Generator[Elem]) -> Iter[Elem] {
-  Iter::new(fn (yield_) {
-    loop self.next() {
-      None => IterContinue
-      Some(v) => {
-        if yield_(v) == IterEnd { return IterEnd }
-        continue self.next()
-      }
-    }
-  })
+  Iter::new(() => self.next())
 }
 
 fn init {

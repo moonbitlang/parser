@@ -1,25 +1,15 @@
 //!build: -w -27
-fn template(x : Int, y : Bool, z : String) -> String {
-  $| Hello, \{z}
-  #| String 1
-  #| String 2
-  $| \t Goodbye, \{x + 5}
-  #| String 3
-  $| bool: \{y}
-  #| \{not a interpolation}
-  #|
-}
 
 fn template2() -> String {
-  #| line1
-  #| line2
-  #| line3
+  $| line1
+  $| line2
+  $| line3
   $| interp1 \{'a'} interp2 \{'b'} interp3
-  #| line4
-  #| line5
-  $| interp4 \{'c'} interp5 \{'d'} 
+  $| line4
+  $| line5
+  $| interp4 \{'c'} interp5 \{'d'}
   $| interp6 \{'e'} interp7 \{'f'} interp8
-  $| 
+  $|
 }
 
 fn all_raw_string() -> String {
@@ -68,9 +58,9 @@ let str1 =
   #| Hello, 
   #| World.
 
-let str2 = 
-  $| Hello \{str1}, 
-  #| World.
+let str2 =
+  $| Hello \{str1},
+  $| World.
 
 fn interp_with_dict() -> String {
   let dict = {
@@ -85,8 +75,6 @@ fn interp_with_dict() -> String {
 }
 
 fn main {
-  println(template(1, true, "world"))
-  println("---------------------------------------")
   println(template2())
   println("---------------------------------------")
   println(all_raw_string())

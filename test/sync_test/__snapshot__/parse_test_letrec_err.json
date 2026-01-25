@@ -1,77 +1,126 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopFuncDef",
+[
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
       "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "main",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": false,
-        "decl_params": null,
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::LetAnd",
-          "bindings": [
-            [
-              {
-                "type": "Binder",
-                "name": "even",
-                "loc": null
-              },
-              null,
-              {
-                "type": "Func::Lambda",
-                "parameters": [],
-                "params_loc": null,
-                "body": {
-                  "type": "Expr::Hole",
-                  "loc": null,
-                  "kind": {
-                    "type": "Hole::Synthesized"
-                  }
-                },
-                "return_type": null,
-                "error_type": {
-                  "type": "ErrorType::NoErrorType"
-                },
-                "kind": {
-                  "type": "FnKind::Lambda"
-                },
-                "has_error": null,
-                "is_async": false,
-                "loc": null
-              }
-            ]
-          ],
-          "body": {
-            "type": "Expr::Unit",
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
             "loc": null,
-            "faked": true
+            "children": {
+              "name": "main"
+            }
           },
-          "loc": null
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
         }
       },
-      "loc": null
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::LetAnd",
+            "loc": null,
+            "children": {
+              "bindings": {
+                "kind": "Expr::LetAnd::BindingList",
+                "loc": null,
+                "children": [
+                  {
+                    "kind": "LetAnd::Binding",
+                    "loc": null,
+                    "children": {
+                      "binder": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "even"
+                        }
+                      },
+                      "type": null,
+                      "func": {
+                        "kind": "Func::Lambda",
+                        "loc": null,
+                        "children": {
+                          "parameters": {
+                            "kind": "Func::Lambda::ParameterList",
+                            "loc": null,
+                            "children": []
+                          },
+                          "body": {
+                            "kind": "Expr::Hole",
+                            "loc": null,
+                            "children": {
+                              "kind": {
+                                "kind": "Hole::Synthesized",
+                                "loc": null,
+                                "children": {}
+                              }
+                            }
+                          },
+                          "return_type": null,
+                          "error_type": {
+                            "kind": "ErrorType::NoErrorType",
+                            "loc": null,
+                            "children": {}
+                          },
+                          "kind": {
+                            "kind": "FnKind::Lambda",
+                            "loc": null,
+                            "children": {}
+                          },
+                          "has_error": null,
+                          "is_async": null
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "body": {
+                "kind": "Expr::Unit",
+                "loc": null,
+                "children": {
+                  "faked": true
+                }
+              }
+            }
+          }
+        }
+      }
     }
-  ]
-}
+  }
+]

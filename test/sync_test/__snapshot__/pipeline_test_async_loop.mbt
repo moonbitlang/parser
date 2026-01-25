@@ -1,3 +1,5 @@
+//!build: -w -67
+
 async fn[T] suspend(f : ((T) -> Unit) -> Unit) -> T noraise = "%async.suspend"
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
 

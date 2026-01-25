@@ -1,108 +1,178 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopFuncDef",
+[
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
       "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "f",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": false,
-        "decl_params": [],
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": {
-          "type": "Type::Name",
-          "constr_id": {
-            "type": "ConstrId",
-            "id": {
-              "type": "LongIdent::Ident",
-              "0": "Unit"
-            },
-            "loc": null
-          },
-          "tys": [],
-          "loc": null
-        },
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::Guard",
-          "cond": {
-            "type": "Expr::Hole",
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
             "loc": null,
-            "kind": {
-              "type": "Hole::Synthesized"
+            "children": {
+              "name": "f"
             }
           },
-          "otherwise": {
-            "type": "Expr::Return",
-            "return_value": null,
-            "loc": null
+          "has_error": null,
+          "is_async": null,
+          "decl_params": {
+            "kind": "FunDecl::ParameterList",
+            "loc": null,
+            "children": []
           },
-          "body": {
-            "type": "Expr::Guard",
-            "cond": {
-              "type": "Expr::Hole",
-              "loc": null,
-              "kind": {
-                "type": "Hole::Synthesized"
-              }
-            },
-            "otherwise": null,
-            "body": {
-              "type": "Expr::Return",
-              "return_value": {
-                "type": "Expr::Infix",
-                "op": {
-                  "type": "Var",
-                  "name": {
-                    "type": "LongIdent::Ident",
-                    "0": "+"
-                  },
-                  "loc": null
-                },
-                "lhs": {
-                  "type": "Expr::Constant",
-                  "c": {
-                    "type": "Constant::Int",
-                    "0": "1"
-                  },
-                  "loc": null
-                },
-                "rhs": {
-                  "type": "Expr::Constant",
-                  "c": {
-                    "type": "Constant::Int",
-                    "0": "2"
-                  },
-                  "loc": null
-                },
-                "loc": null
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": {
+            "kind": "Type::Name",
+            "loc": null,
+            "children": {
+              "constr_id": {
+                "kind": "ConstrId",
+                "loc": null,
+                "children": {
+                  "id": {
+                    "kind": "LongIdent::Ident",
+                    "loc": null,
+                    "children": {
+                      "value": "Unit"
+                    }
+                  }
+                }
               },
-              "loc": null
-            },
-            "loc": null
+              "tys": {
+                "kind": "Type::Name::TypeList",
+                "loc": null,
+                "children": []
+              }
+            }
           },
-          "loc": null
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
         }
       },
-      "loc": null
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::Guard",
+            "loc": null,
+            "children": {
+              "cond": {
+                "kind": "Expr::Hole",
+                "loc": null,
+                "children": {
+                  "kind": {
+                    "kind": "Hole::Synthesized",
+                    "loc": null,
+                    "children": {}
+                  }
+                }
+              },
+              "otherwise": {
+                "kind": "Expr::Return",
+                "loc": null,
+                "children": {
+                  "return_value": null
+                }
+              },
+              "body": {
+                "kind": "Expr::Guard",
+                "loc": null,
+                "children": {
+                  "cond": {
+                    "kind": "Expr::Hole",
+                    "loc": null,
+                    "children": {
+                      "kind": {
+                        "kind": "Hole::Synthesized",
+                        "loc": null,
+                        "children": {}
+                      }
+                    }
+                  },
+                  "otherwise": null,
+                  "body": {
+                    "kind": "Expr::Return",
+                    "loc": null,
+                    "children": {
+                      "return_value": {
+                        "kind": "Expr::Infix",
+                        "loc": null,
+                        "children": {
+                          "op": {
+                            "kind": "Var",
+                            "loc": null,
+                            "children": {
+                              "name": {
+                                "kind": "LongIdent::Ident",
+                                "loc": null,
+                                "children": {
+                                  "value": "+"
+                                }
+                              }
+                            }
+                          },
+                          "lhs": {
+                            "kind": "Expr::Constant",
+                            "loc": null,
+                            "children": {
+                              "constant": {
+                                "kind": "Constant::Int",
+                                "loc": null,
+                                "children": {
+                                  "value": "1"
+                                }
+                              }
+                            }
+                          },
+                          "rhs": {
+                            "kind": "Expr::Constant",
+                            "loc": null,
+                            "children": {
+                              "constant": {
+                                "kind": "Constant::Int",
+                                "loc": null,
+                                "children": {
+                                  "value": "2"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
-  ]
-}
+  }
+]

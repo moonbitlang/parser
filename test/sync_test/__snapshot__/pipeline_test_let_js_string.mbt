@@ -1,4 +1,4 @@
-typealias String as S
+type S = String
 
 let c1 : S = "hello"
 

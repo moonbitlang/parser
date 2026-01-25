@@ -15,7 +15,9 @@ impl[A : F] F for A? with f(self) {
 }
 
 ///|
-suberror T Int
+suberror T {
+  T(Int)
+}
 
 ///|
 fn main {

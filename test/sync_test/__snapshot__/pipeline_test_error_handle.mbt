@@ -1,4 +1,6 @@
-suberror StringError String
+suberror StringError {
+  StringError(String)
+}
 
 fn test_int(x: Int, y: Int) -> Unit raise {
   if x == y {
@@ -23,8 +25,8 @@ fn g(x: Int) -> Int raise StringError {
 }
 
 fn init {
-  (try? test_int((try? f(42)).unwrap(), 42)).unwrap()
-  (try? test_int((try? g(42)).unwrap(), 52)).unwrap()
+  try! test_int(try! f(42), 42)
+  try! test_int(try! g(42), 52)
 }
 
 fn init {
@@ -36,7 +38,7 @@ fn init {
       }
     }
   }
-  (try? test_int((try? f(Some(42))).unwrap(), 42)).unwrap()
+  try! test_int(try! f(Some(42)), 42)
 }
 
 enum T {
@@ -72,15 +74,15 @@ fn add_twice(x: T, y: T) -> Int raise {
 
 fn init {
   let t = T::A(42)
-  (try? test_int((try? t.get_a()).unwrap(), 42)).unwrap()
-  let r = (try? t |> get_aa(t)).unwrap()
-  (try? test_int(r, 84)).unwrap()
+  try! test_int(try! t.get_a(), 42)
+  let r = try! t |> get_aa(t)
+  try! test_int(r, 84)
   let t1 = T::A(20)
   let t2 = T::A(22)
-  let r = (try? t1.add(t2)).unwrap()
-  (try? test_int(r, 42)).unwrap()
-  let r = (try? add_twice(t1, t2)).unwrap()
-  (try? test_int(r, 84)).unwrap()
+  let r = try! t1.add(t2)
+  try! test_int(r, 42)
+  let r = try! add_twice(t1, t2)
+  try! test_int(r, 84)
 }
 
 fn infer_raise(x: Int) -> Int raise {
@@ -89,6 +91,6 @@ fn infer_raise(x: Int) -> Int raise {
 }
 
 fn init {
-  let x = (try? infer_raise(32)).unwrap()
-  (try? test_int(x, 42)).unwrap()
+  let x = try! infer_raise(32)
+  try! test_int(x, 42)
 }

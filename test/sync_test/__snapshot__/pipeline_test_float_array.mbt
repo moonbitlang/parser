@@ -15,7 +15,7 @@ struct T {
   mut c: Int
 }
 
-fn print_t(self: T) -> Unit {
+fn T::print_t(self: T) -> Unit {
   println("\na: ")
   println(self.a)
   println("b: ")

@@ -8,10 +8,12 @@ suberror E1 {
 } derive(ToJson(style="legacy"))
 
 ///|
-suberror E2  derive(ToJson(style="legacy"))
+suberror E2 derive(ToJson(style="legacy"))
 
 ///|
-suberror E3 Double? derive(ToJson(style="legacy"))
+suberror E3 {
+  E3(Double?)
+} derive(ToJson(style="legacy"))
 
 ///|
 suberror E4 {

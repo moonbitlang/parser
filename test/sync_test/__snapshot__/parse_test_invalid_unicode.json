@@ -1,106 +1,166 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopFuncDef",
+[
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
       "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "init",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": false,
-        "decl_params": null,
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::Let",
-          "pattern": {
-            "type": "Pattern::Or",
-            "pat1": {
-              "type": "Pattern::Var",
-              "0": {
-                "type": "Binder",
-                "name": "kkk",
-                "loc": null
-              }
-            },
-            "pat2": {
-              "type": "Pattern::Any",
-              "loc": null
-            },
-            "loc": null
-          },
-          "expr": {
-            "type": "Expr::Hole",
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
             "loc": null,
-            "kind": {
-              "type": "Hole::Synthesized"
+            "children": {
+              "name": "init"
             }
           },
-          "body": {
-            "type": "Expr::Let",
-            "pattern": {
-              "type": "Pattern::Constant",
-              "c": {
-                "type": "Constant::Int",
-                "0": "1"
-              },
-              "loc": null
-            },
-            "expr": {
-              "type": "Expr::Hole",
-              "loc": null,
-              "kind": {
-                "type": "Hole::Synthesized"
-              }
-            },
-            "body": {
-              "type": "Expr::Let",
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
+        }
+      },
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::Let",
+            "loc": null,
+            "children": {
               "pattern": {
-                "type": "Pattern::Var",
-                "0": {
-                  "type": "Binder",
-                  "name": "bla",
-                  "loc": null
+                "kind": "Pattern::Or",
+                "loc": null,
+                "children": {
+                  "pat1": {
+                    "kind": "Pattern::Var",
+                    "loc": null,
+                    "children": {
+                      "value": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "kkk"
+                        }
+                      }
+                    }
+                  },
+                  "pat2": {
+                    "kind": "Pattern::Any",
+                    "loc": null,
+                    "children": {}
+                  }
                 }
               },
               "expr": {
-                "type": "Expr::Hole",
+                "kind": "Expr::Hole",
                 "loc": null,
-                "kind": {
-                  "type": "Hole::Synthesized"
+                "children": {
+                  "kind": {
+                    "kind": "Hole::Synthesized",
+                    "loc": null,
+                    "children": {}
+                  }
                 }
               },
               "body": {
-                "type": "Expr::Unit",
+                "kind": "Expr::Let",
                 "loc": null,
-                "faked": false
-              },
-              "loc": null
-            },
-            "loc": null
-          },
-          "loc": null
+                "children": {
+                  "pattern": {
+                    "kind": "Pattern::Constant",
+                    "loc": null,
+                    "children": {
+                      "constant": {
+                        "kind": "Constant::Int",
+                        "loc": null,
+                        "children": {
+                          "value": "1"
+                        }
+                      }
+                    }
+                  },
+                  "expr": {
+                    "kind": "Expr::Hole",
+                    "loc": null,
+                    "children": {
+                      "kind": {
+                        "kind": "Hole::Synthesized",
+                        "loc": null,
+                        "children": {}
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "Expr::Let",
+                    "loc": null,
+                    "children": {
+                      "pattern": {
+                        "kind": "Pattern::Var",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "Binder",
+                            "loc": null,
+                            "children": {
+                              "name": "bla"
+                            }
+                          }
+                        }
+                      },
+                      "expr": {
+                        "kind": "Expr::Hole",
+                        "loc": null,
+                        "children": {
+                          "kind": {
+                            "kind": "Hole::Synthesized",
+                            "loc": null,
+                            "children": {}
+                          }
+                        }
+                      },
+                      "body": {
+                        "kind": "Expr::Unit",
+                        "loc": null,
+                        "children": {
+                          "faked": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-      },
-      "loc": null
+      }
     }
-  ]
-}
+  }
+]

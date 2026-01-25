@@ -1,6 +1,15 @@
-suberror Error1 String
-suberror Error2 String derive(Show)
-priv suberror Error3 Int derive(Show)
+suberror Error1 {
+  Error1(String)
+}
+
+suberror Error2 {
+  Error2(String)
+} derive(Show)
+
+priv suberror Error3 {
+  Error3(Int)
+} derive(Show)
+
 suberror Error4 {
   A
   B

@@ -1,7 +1,7 @@
 ///|
 fn main {
   let val = Some("a")
-  fn b() {
+  fn b() -> Ref[_] {
     { val, }
   }
 

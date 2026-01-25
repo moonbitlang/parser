@@ -1,12 +1,12 @@
 ///|
-fn f(xs : Array[Int], ys : Array[String], zs : Iter[Int]) -> Unit {
+fn f(xs : Array[Int], ys : Array[String], zs : Array[Int]) -> Unit {
   println("-----")
   let mut sum1 = 0
   let n = l1~: for x in xs {
     let mut sum2 = ""
     let s = l2~: for y in ys {
       sum2 = sum2 + y
-      l3~: for z in zs {
+      l3~: for z in zs.iter() {
         match z {
           0 => { break l1~ 42 }
           1 => { continue l1~ }
@@ -35,11 +35,11 @@ fn f(xs : Array[Int], ys : Array[String], zs : Iter[Int]) -> Unit {
 }
 
 fn main {
-  f([1, 2], ["x", "xx"], [-1, -1].iter())
-  f([1, 2], ["x", "xx"], [0].iter())
-  f([1, 2], ["x", "xx"], [1].iter())
-  f([1, 2], ["x", "xx"], [2].iter())
-  f([1, 2], ["x", "xx"], [3].iter())
-  f([1, 2], ["x", "xx"], [4, 4].iter())
-  f([1, 2], ["x", "xx"], [5, 5].iter())
+  f([1, 2], ["x", "xx"], [-1, -1])
+  f([1, 2], ["x", "xx"], [0])
+  f([1, 2], ["x", "xx"], [1])
+  f([1, 2], ["x", "xx"], [2])
+  f([1, 2], ["x", "xx"], [3])
+  f([1, 2], ["x", "xx"], [4, 4])
+  f([1, 2], ["x", "xx"], [5, 5])
 }

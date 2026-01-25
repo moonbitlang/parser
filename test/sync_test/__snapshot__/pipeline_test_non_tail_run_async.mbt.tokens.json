@@ -400,14 +400,18 @@
   },
   {
     "token": [
-      "PACKAGE_NAME",
-      "ref"
+      "UIDENT",
+      "Ref"
     ],
-    "loc": "11:24-11:28"
+    "loc": "11:24-11:27"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "11:27-11:29"
   },
   {
     "token": [
-      "DOT_LIDENT",
+      "LIDENT",
       "new"
     ],
     "loc": "11:29-11:32"

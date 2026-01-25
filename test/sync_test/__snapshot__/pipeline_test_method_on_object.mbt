@@ -2,7 +2,7 @@ trait Logger {
   write_string(Self, String) -> Unit
 }
 
-impl Logger for @buffer.Buffer with write_string(self, str) {
+impl Logger for StringBuilder with write_string(self, str) {
   self.write_string(str)
 }
 
@@ -31,12 +31,12 @@ impl[X : Loggable, Y : Loggable] Loggable for (X, Y) with log(self, logger) {
 }
 
 fn init {
-  let buf = @buffer.new()
+  let buf = StringBuilder::new()
   (buf as &Logger)
   ..write_string("=== start logging ===\n")
   ..write_obj_ln(42)
   ..write_obj_ln((1, (2, (3, 4))))
   &Logger::write_obj_ln(buf, 0)
   &Logger::write_string(buf, "=== end logging ===")
-  println(buf.contents().to_unchecked_string())
+  println(buf.to_string())
 }

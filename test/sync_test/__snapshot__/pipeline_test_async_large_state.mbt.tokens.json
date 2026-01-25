@@ -63,14 +63,18 @@
   },
   {
     "token": [
-      "PACKAGE_NAME",
-      "ref"
+      "UIDENT",
+      "Ref"
     ],
-    "loc": "2:26-2:30"
+    "loc": "2:26-2:29"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "2:29-2:31"
   },
   {
     "token": [
-      "DOT_LIDENT",
+      "LIDENT",
       "new"
     ],
     "loc": "2:31-2:34"
@@ -471,14 +475,18 @@
   },
   {
     "token": [
-      "PACKAGE_NAME",
-      "ref"
+      "UIDENT",
+      "Ref"
     ],
-    "loc": "11:37-11:41"
+    "loc": "11:37-11:40"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "11:40-11:42"
   },
   {
     "token": [
-      "DOT_LIDENT",
+      "LIDENT",
       "new"
     ],
     "loc": "11:42-11:45"

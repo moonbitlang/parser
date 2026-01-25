@@ -1,89 +1,147 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopFuncDef",
+[
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
       "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "init",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": null,
-        "decl_params": null,
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::Let",
-          "pattern": {
-            "type": "Pattern::Tuple",
-            "pats": [
-              {
-                "type": "Pattern::Var",
-                "0": {
-                  "type": "Binder",
-                  "name": "a",
-                  "loc": null
-                }
-              },
-              {
-                "type": "Pattern::Var",
-                "0": {
-                  "type": "Binder",
-                  "name": "b",
-                  "loc": null
-                }
-              }
-            ],
-            "loc": null
-          },
-          "expr": {
-            "type": "Expr::Tuple",
-            "exprs": [
-              {
-                "type": "Expr::Constant",
-                "c": {
-                  "type": "Constant::Int",
-                  "0": "1"
-                },
-                "loc": null
-              },
-              {
-                "type": "Expr::Constant",
-                "c": {
-                  "type": "Constant::Int",
-                  "0": "2"
-                },
-                "loc": null
-              }
-            ],
-            "loc": null
-          },
-          "body": {
-            "type": "Expr::Unit",
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
             "loc": null,
-            "faked": false
+            "children": {
+              "name": "init"
+            }
           },
-          "loc": null
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
         }
       },
-      "loc": null
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::Let",
+            "loc": null,
+            "children": {
+              "pattern": {
+                "kind": "Pattern::Tuple",
+                "loc": null,
+                "children": {
+                  "pats": {
+                    "kind": "Pattern::Tuple::PatternList",
+                    "loc": null,
+                    "children": [
+                      {
+                        "kind": "Pattern::Var",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "Binder",
+                            "loc": null,
+                            "children": {
+                              "name": "a"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Pattern::Var",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "Binder",
+                            "loc": null,
+                            "children": {
+                              "name": "b"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "expr": {
+                "kind": "Expr::Tuple",
+                "loc": null,
+                "children": {
+                  "exprs": {
+                    "kind": "Expr::Tuple::ExprList",
+                    "loc": null,
+                    "children": [
+                      {
+                        "kind": "Expr::Constant",
+                        "loc": null,
+                        "children": {
+                          "constant": {
+                            "kind": "Constant::Int",
+                            "loc": null,
+                            "children": {
+                              "value": "1"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Expr::Constant",
+                        "loc": null,
+                        "children": {
+                          "constant": {
+                            "kind": "Constant::Int",
+                            "loc": null,
+                            "children": {
+                              "value": "2"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "body": {
+                "kind": "Expr::Unit",
+                "loc": null,
+                "children": {
+                  "faked": false
+                }
+              }
+            }
+          }
+        }
+      }
     }
-  ]
-}
+  }
+]

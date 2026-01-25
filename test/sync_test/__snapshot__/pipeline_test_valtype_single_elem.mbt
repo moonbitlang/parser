@@ -15,7 +15,9 @@ fn n(r : R) -> R {
 }
 
 ///|
-suberror E R derive(Show)
+suberror E {
+  E(R)
+} derive(Show)
 
 ///|
 fn o(i : Int) -> R raise E {

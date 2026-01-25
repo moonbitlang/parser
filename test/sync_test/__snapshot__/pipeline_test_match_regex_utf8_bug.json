@@ -1,191 +1,320 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopFuncDef",
+[
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
       "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "main",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": null,
-        "decl_params": null,
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::Let",
-          "pattern": {
-            "type": "Pattern::Constraint",
-            "pat": {
-              "type": "Pattern::Var",
-              "0": {
-                "type": "Binder",
-                "name": "bytes",
-                "loc": null
-              }
-            },
-            "ty": {
-              "type": "Type::Name",
-              "constr_id": {
-                "type": "ConstrId",
-                "id": {
-                  "type": "LongIdent::Ident",
-                  "0": "Bytes"
-                },
-                "loc": null
-              },
-              "tys": [],
-              "loc": null
-            },
-            "loc": null
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "main"
+            }
           },
-          "expr": {
-            "type": "Expr::Constant",
-            "c": {
-              "type": "Constant::String",
-              "0": "\\xE0\\xA1\\x80"
-            },
-            "loc": null
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
           },
-          "body": {
-            "type": "Expr::Lexmatch",
-            "strategy": {
-              "type": "Label",
-              "name": "longest",
-              "loc": null
-            },
-            "expr": {
-              "type": "Expr::Ident",
-              "id": {
-                "type": "Var",
-                "name": {
-                  "type": "LongIdent::Ident",
-                  "0": "bytes"
-                },
-                "loc": null
-              },
-              "loc": null
-            },
-            "match_loc": null,
-            "cases": [
-              {
-                "type": "LexCase",
-                "pat": [
-                  {
-                    "type": "LexTopPattern::Pattern",
-                    "0": {
-                      "type": "LexPattern::Regex",
-                      "lit": "(?utf8:[\\u0800-\\u0fff])",
-                      "loc": null
-                    }
-                  }
-                ],
-                "pat_loc": null,
-                "body": {
-                  "type": "Expr::Apply",
-                  "func": {
-                    "type": "Expr::Ident",
-                    "id": {
-                      "type": "Var",
-                      "name": {
-                        "type": "LongIdent::Ident",
-                        "0": "println"
-                      },
-                      "loc": null
-                    },
-                    "loc": null
-                  },
-                  "args": [
-                    {
-                      "type": "Argument",
-                      "value": {
-                        "type": "Expr::Constant",
-                        "c": {
-                          "type": "Constant::String",
-                          "0": "pass"
-                        },
-                        "loc": null
-                      },
-                      "kind": {
-                        "type": "ArgumentKind::Positional"
-                      }
-                    }
-                  ],
-                  "attr": {
-                    "type": "ApplyAttr::NoAttr"
-                  },
-                  "loc": null
-                }
-              },
-              {
-                "type": "LexCase",
-                "pat": [
-                  {
-                    "type": "LexTopPattern::Wildcard",
-                    "loc": null
-                  }
-                ],
-                "pat_loc": null,
-                "body": {
-                  "type": "Expr::Apply",
-                  "func": {
-                    "type": "Expr::Ident",
-                    "id": {
-                      "type": "Var",
-                      "name": {
-                        "type": "LongIdent::Ident",
-                        "0": "println"
-                      },
-                      "loc": null
-                    },
-                    "loc": null
-                  },
-                  "args": [
-                    {
-                      "type": "Argument",
-                      "value": {
-                        "type": "Expr::Constant",
-                        "c": {
-                          "type": "Constant::String",
-                          "0": "fail"
-                        },
-                        "loc": null
-                      },
-                      "kind": {
-                        "type": "ArgumentKind::Positional"
-                      }
-                    }
-                  ],
-                  "attr": {
-                    "type": "ApplyAttr::NoAttr"
-                  },
-                  "loc": null
-                }
-              }
-            ],
-            "loc": null
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
           },
-          "loc": null
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
         }
       },
-      "loc": null
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::Let",
+            "loc": null,
+            "children": {
+              "pattern": {
+                "kind": "Pattern::Constraint",
+                "loc": null,
+                "children": {
+                  "pat": {
+                    "kind": "Pattern::Var",
+                    "loc": null,
+                    "children": {
+                      "value": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "bytes"
+                        }
+                      }
+                    }
+                  },
+                  "ty": {
+                    "kind": "Type::Name",
+                    "loc": null,
+                    "children": {
+                      "constr_id": {
+                        "kind": "ConstrId",
+                        "loc": null,
+                        "children": {
+                          "id": {
+                            "kind": "LongIdent::Ident",
+                            "loc": null,
+                            "children": {
+                              "value": "Bytes"
+                            }
+                          }
+                        }
+                      },
+                      "tys": {
+                        "kind": "Type::Name::TypeList",
+                        "loc": null,
+                        "children": []
+                      }
+                    }
+                  }
+                }
+              },
+              "expr": {
+                "kind": "Expr::Constant",
+                "loc": null,
+                "children": {
+                  "constant": {
+                    "kind": "Constant::String",
+                    "loc": null,
+                    "children": {
+                      "value": "\\xE0\\xA1\\x80"
+                    }
+                  }
+                }
+              },
+              "body": {
+                "kind": "Expr::Lexmatch",
+                "loc": null,
+                "children": {
+                  "strategy": {
+                    "kind": "Label",
+                    "loc": null,
+                    "children": {
+                      "name": "longest"
+                    }
+                  },
+                  "expr": {
+                    "kind": "Expr::Ident",
+                    "loc": null,
+                    "children": {
+                      "id": {
+                        "kind": "Var",
+                        "loc": null,
+                        "children": {
+                          "name": {
+                            "kind": "LongIdent::Ident",
+                            "loc": null,
+                            "children": {
+                              "value": "bytes"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "cases": {
+                    "kind": "Expr::Lexmatch::CaseList",
+                    "loc": null,
+                    "children": [
+                      {
+                        "kind": "LexCase",
+                        "loc": null,
+                        "children": {
+                          "pat": {
+                            "kind": "LexCase::PatternList",
+                            "loc": null,
+                            "children": [
+                              {
+                                "kind": "LexTopPattern::Pattern",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "LexPattern::Regex",
+                                    "loc": null,
+                                    "children": {
+                                      "lit": "(?utf8:[\\u0800-\\u0fff])"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "body": {
+                            "kind": "Expr::Apply",
+                            "loc": null,
+                            "children": {
+                              "func": {
+                                "kind": "Expr::Ident",
+                                "loc": null,
+                                "children": {
+                                  "id": {
+                                    "kind": "Var",
+                                    "loc": null,
+                                    "children": {
+                                      "name": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "println"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "args": {
+                                "kind": "Expr::Apply::ArgumentList",
+                                "loc": null,
+                                "children": [
+                                  {
+                                    "kind": "Argument",
+                                    "loc": null,
+                                    "children": {
+                                      "value": {
+                                        "kind": "Expr::Constant",
+                                        "loc": null,
+                                        "children": {
+                                          "constant": {
+                                            "kind": "Constant::String",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "pass"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "kind": {
+                                        "kind": "ArgumentKind::Positional",
+                                        "loc": null,
+                                        "children": {}
+                                      }
+                                    }
+                                  }
+                                ]
+                              },
+                              "attr": {
+                                "kind": "ApplyAttr::NoAttr",
+                                "loc": null,
+                                "children": {}
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "kind": "LexCase",
+                        "loc": null,
+                        "children": {
+                          "pat": {
+                            "kind": "LexCase::PatternList",
+                            "loc": null,
+                            "children": [
+                              {
+                                "kind": "LexTopPattern::Wildcard",
+                                "loc": null,
+                                "children": {}
+                              }
+                            ]
+                          },
+                          "body": {
+                            "kind": "Expr::Apply",
+                            "loc": null,
+                            "children": {
+                              "func": {
+                                "kind": "Expr::Ident",
+                                "loc": null,
+                                "children": {
+                                  "id": {
+                                    "kind": "Var",
+                                    "loc": null,
+                                    "children": {
+                                      "name": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "println"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "args": {
+                                "kind": "Expr::Apply::ArgumentList",
+                                "loc": null,
+                                "children": [
+                                  {
+                                    "kind": "Argument",
+                                    "loc": null,
+                                    "children": {
+                                      "value": {
+                                        "kind": "Expr::Constant",
+                                        "loc": null,
+                                        "children": {
+                                          "constant": {
+                                            "kind": "Constant::String",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "fail"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "kind": {
+                                        "kind": "ArgumentKind::Positional",
+                                        "loc": null,
+                                        "children": {}
+                                      }
+                                    }
+                                  }
+                                ]
+                              },
+                              "attr": {
+                                "kind": "ApplyAttr::NoAttr",
+                                "loc": null,
+                                "children": {}
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
-  ]
-}
+  }
+]

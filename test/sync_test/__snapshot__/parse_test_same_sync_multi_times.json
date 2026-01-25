@@ -1,225 +1,375 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopFuncDef",
+[
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
       "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "init",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": false,
-        "decl_params": null,
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::Match",
-          "expr": {
-            "type": "Expr::Ident",
-            "id": {
-              "type": "Var",
-              "name": {
-                "type": "LongIdent::Ident",
-                "0": "e"
-              },
-              "loc": null
-            },
-            "loc": null
-          },
-          "cases": [],
-          "match_loc": null,
-          "loc": null
-        }
-      },
-      "loc": null
-    },
-    {
-      "type": "Impl::TopFuncDef",
-      "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "init",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": false,
-        "decl_params": null,
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::If",
-          "cond": {
-            "type": "Expr::Ident",
-            "id": {
-              "type": "Var",
-              "name": {
-                "type": "LongIdent::Ident",
-                "0": "e"
-              },
-              "loc": null
-            },
-            "loc": null
-          },
-          "ifso": {
-            "type": "Expr::Hole",
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
             "loc": null,
-            "kind": {
-              "type": "Hole::Synthesized"
+            "children": {
+              "name": "init"
             }
           },
-          "ifnot": null,
-          "loc": null
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
         }
-      },
-      "loc": null
-    },
-    {
-      "type": "Impl::TopFuncDef",
-      "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "init",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": false,
-        "decl_params": null,
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
       },
       "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::LetRec",
-          "bindings": [
-            [
-              {
-                "type": "Binder",
-                "name": "f1",
-                "loc": null
-              },
-              {
-                "type": "Func::Lambda",
-                "parameters": [],
-                "params_loc": null,
-                "body": {
-                  "type": "Expr::While",
-                  "loop_cond": {
-                    "type": "Expr::Ident",
-                    "id": {
-                      "type": "Var",
-                      "name": {
-                        "type": "LongIdent::Ident",
-                        "0": "cond"
-                      },
-                      "loc": null
-                    },
-                    "loc": null
-                  },
-                  "loop_body": {
-                    "type": "Expr::Hole",
-                    "loc": null,
-                    "kind": {
-                      "type": "Hole::Synthesized"
-                    }
-                  },
-                  "while_else": null,
-                  "label": null,
-                  "loc": null
-                },
-                "return_type": null,
-                "error_type": {
-                  "type": "ErrorType::NoErrorType"
-                },
-                "kind": {
-                  "type": "FnKind::Lambda"
-                },
-                "has_error": null,
-                "is_async": false,
-                "loc": null
-              }
-            ],
-            [
-              {
-                "type": "Binder",
-                "name": "f2",
-                "loc": null
-              },
-              {
-                "type": "Func::Lambda",
-                "parameters": [],
-                "params_loc": null,
-                "body": {
-                  "type": "Expr::Unit",
-                  "loc": null,
-                  "faked": true
-                },
-                "return_type": null,
-                "error_type": {
-                  "type": "ErrorType::NoErrorType"
-                },
-                "kind": {
-                  "type": "FnKind::Lambda"
-                },
-                "has_error": null,
-                "is_async": false,
-                "loc": null
-              }
-            ]
-          ],
-          "body": {
-            "type": "Expr::Unit",
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
             "loc": null,
-            "faked": true
+            "children": []
           },
-          "loc": null
+          "expr": {
+            "kind": "Expr::Match",
+            "loc": null,
+            "children": {
+              "expr": {
+                "kind": "Expr::Ident",
+                "loc": null,
+                "children": {
+                  "id": {
+                    "kind": "Var",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": {
+                          "value": "e"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "cases": {
+                "kind": "Expr::Match::CaseList",
+                "loc": null,
+                "children": []
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
+      "fun_decl": {
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "init"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
         }
       },
-      "loc": null
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::If",
+            "loc": null,
+            "children": {
+              "cond": {
+                "kind": "Expr::Ident",
+                "loc": null,
+                "children": {
+                  "id": {
+                    "kind": "Var",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": {
+                          "value": "e"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "ifso": {
+                "kind": "Expr::Hole",
+                "loc": null,
+                "children": {
+                  "kind": {
+                    "kind": "Hole::Synthesized",
+                    "loc": null,
+                    "children": {}
+                  }
+                }
+              },
+              "ifnot": null
+            }
+          }
+        }
+      }
     }
-  ]
-}
+  },
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
+      "fun_decl": {
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "init"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
+        }
+      },
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::LetRec",
+            "loc": null,
+            "children": {
+              "bindings": {
+                "kind": "Expr::LetRec::BindingList",
+                "loc": null,
+                "children": [
+                  {
+                    "kind": "LetRec::Binding",
+                    "loc": null,
+                    "children": {
+                      "binder": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "f1"
+                        }
+                      },
+                      "func": {
+                        "kind": "Func::Lambda",
+                        "loc": null,
+                        "children": {
+                          "parameters": {
+                            "kind": "Func::Lambda::ParameterList",
+                            "loc": null,
+                            "children": []
+                          },
+                          "body": {
+                            "kind": "Expr::While",
+                            "loc": null,
+                            "children": {
+                              "loop_cond": {
+                                "kind": "Expr::Ident",
+                                "loc": null,
+                                "children": {
+                                  "id": {
+                                    "kind": "Var",
+                                    "loc": null,
+                                    "children": {
+                                      "name": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "cond"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "loop_body": {
+                                "kind": "Expr::Hole",
+                                "loc": null,
+                                "children": {
+                                  "kind": {
+                                    "kind": "Hole::Synthesized",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              },
+                              "while_else": null,
+                              "label": null
+                            }
+                          },
+                          "return_type": null,
+                          "error_type": {
+                            "kind": "ErrorType::NoErrorType",
+                            "loc": null,
+                            "children": {}
+                          },
+                          "kind": {
+                            "kind": "FnKind::Lambda",
+                            "loc": null,
+                            "children": {}
+                          },
+                          "has_error": null,
+                          "is_async": null
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "kind": "LetRec::Binding",
+                    "loc": null,
+                    "children": {
+                      "binder": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "f2"
+                        }
+                      },
+                      "func": {
+                        "kind": "Func::Lambda",
+                        "loc": null,
+                        "children": {
+                          "parameters": {
+                            "kind": "Func::Lambda::ParameterList",
+                            "loc": null,
+                            "children": []
+                          },
+                          "body": {
+                            "kind": "Expr::Unit",
+                            "loc": null,
+                            "children": {
+                              "faked": true
+                            }
+                          },
+                          "return_type": null,
+                          "error_type": {
+                            "kind": "ErrorType::NoErrorType",
+                            "loc": null,
+                            "children": {}
+                          },
+                          "kind": {
+                            "kind": "FnKind::Lambda",
+                            "loc": null,
+                            "children": {}
+                          },
+                          "has_error": null,
+                          "is_async": null
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "body": {
+                "kind": "Expr::Unit",
+                "loc": null,
+                "children": {
+                  "faked": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

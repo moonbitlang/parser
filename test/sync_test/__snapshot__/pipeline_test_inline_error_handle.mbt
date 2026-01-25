@@ -1,4 +1,6 @@
-suberror E Int
+suberror E {
+  E(Int)
+}
 
 pub fn f(x: Int) -> Unit raise {
   fn f1(x: Int) -> _ raise {

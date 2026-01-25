@@ -24,7 +24,7 @@ fn test_unicode_support2() -> Unit raise {
   fn f(str : String) -> Char raise {
     lexmatch str with longest {
       ("." as c, _) => c
-      _ => raise Failure("No match")
+      _ => raise Failure::Failure("No match")
     }
   }
 

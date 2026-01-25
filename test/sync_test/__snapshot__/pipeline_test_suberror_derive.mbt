@@ -1,4 +1,7 @@
-suberror MyError Int derive(Show, Eq, Compare, Hash)
+suberror MyError {
+  MyError(Int)
+} derive(Show, Eq, Compare, Hash)
+
 suberror MyError2 derive(Show, Eq, Compare, Hash)
 
 fn f() -> Unit raise MyError {

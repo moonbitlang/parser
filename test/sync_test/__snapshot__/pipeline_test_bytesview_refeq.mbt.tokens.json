@@ -421,58 +421,51 @@
   },
   {
     "token": [
-      "PACKAGE_NAME",
-      "builtin"
-    ],
-    "loc": "8:11-8:19"
-  },
-  {
-    "token": [
-      "DOT_LIDENT",
+      "LIDENT",
       "physical_equal"
     ],
-    "loc": "8:20-8:34"
+    "loc": "8:11-8:25"
   },
   {
     "token": "LPAREN",
-    "loc": "8:34-8:35"
+    "loc": "8:25-8:26"
   },
   {
     "token": [
       "LIDENT",
       "bv1"
     ],
-    "loc": "8:35-8:38"
+    "loc": "8:26-8:29"
   },
   {
     "token": "COMMA",
-    "loc": "8:38-8:39"
+    "loc": "8:29-8:30"
   },
   {
     "token": [
       "LIDENT",
       "bv2"
     ],
-    "loc": "8:40-8:43"
+    "loc": "8:31-8:34"
   },
   {
     "token": "RPAREN",
-    "loc": "8:43-8:44"
+    "loc": "8:34-8:35"
   },
   {
     "token": "RPAREN",
-    "loc": "8:44-8:45"
+    "loc": "8:35-8:36"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "8:45-8:45"
+    "loc": "8:36-8:36"
   },
   {
     "token": "NEWLINE",
-    "loc": "8:45-8:46"
+    "loc": "8:36-8:37"
   },
   {
     "token": "IF",
@@ -480,47 +473,40 @@
   },
   {
     "token": [
-      "PACKAGE_NAME",
-      "builtin"
-    ],
-    "loc": "9:6-9:14"
-  },
-  {
-    "token": [
-      "DOT_LIDENT",
+      "LIDENT",
       "physical_equal"
     ],
-    "loc": "9:15-9:29"
+    "loc": "9:6-9:20"
   },
   {
     "token": "LPAREN",
-    "loc": "9:29-9:30"
+    "loc": "9:20-9:21"
   },
   {
     "token": [
       "LIDENT",
       "bv1"
     ],
-    "loc": "9:30-9:33"
+    "loc": "9:21-9:24"
   },
   {
     "token": "COMMA",
-    "loc": "9:33-9:34"
+    "loc": "9:24-9:25"
   },
   {
     "token": [
       "LIDENT",
       "bv3"
     ],
-    "loc": "9:35-9:38"
+    "loc": "9:26-9:29"
   },
   {
     "token": "RPAREN",
-    "loc": "9:38-9:39"
+    "loc": "9:29-9:30"
   },
   {
     "token": "LBRACE",
-    "loc": "9:40-9:41"
+    "loc": "9:31-9:32"
   },
   {
     "token": [
@@ -531,11 +517,11 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "9:42-9:81"
+    "loc": "9:33-9:72"
   },
   {
     "token": "NEWLINE",
-    "loc": "9:81-9:82"
+    "loc": "9:72-9:73"
   },
   {
     "token": [

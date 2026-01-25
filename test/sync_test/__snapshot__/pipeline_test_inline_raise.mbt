@@ -1,5 +1,7 @@
 ///|
-suberror E Int derive(Show)
+suberror E {
+  E(Int)
+} derive(Show)
 
 ///|
 fn g(x : Int, b : Bool) -> Int raise E {

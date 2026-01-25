@@ -1,4 +1,6 @@
-suberror StringError String derive(Show)
+suberror StringError {
+  StringError(String)
+} derive(Show)
 
 fn f(x: Int) -> Int raise {
   return g(x)
@@ -9,5 +11,5 @@ fn g(x: Int) -> Int raise {
 }
 
 fn init {
-  println((try? f(42)).unwrap())
+  println((try! f(42)))
 }

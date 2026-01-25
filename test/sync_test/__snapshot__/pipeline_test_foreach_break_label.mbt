@@ -13,6 +13,6 @@ fn f(xs : @list.List[Int]) -> Unit {
 
 ///|
 fn init {
-  f(@list.of([1, 2, 3]))
-  f(@list.of([0]))
+  f(@list.from_array([1, 2, 3]))
+  f(@list.from_array([0]))
 }

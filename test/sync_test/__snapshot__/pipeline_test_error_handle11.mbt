@@ -1,4 +1,6 @@
-suberror XXError Int
+suberror XXError {
+  XXError(Int)
+}
 
 pub fn f() -> Unit raise {
   raise fail("xxx")

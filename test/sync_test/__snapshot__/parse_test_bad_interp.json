@@ -1,76 +1,129 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopTest",
+[
+  {
+    "kind": "Impl::TopTest",
+    "loc": null,
+    "children": {
       "expr": {
-        "type": "Expr::Let",
-        "pattern": {
-          "type": "Pattern::Var",
-          "0": {
-            "type": "Binder",
-            "name": "a",
-            "loc": null
-          }
-        },
-        "expr": {
-          "type": "Expr::MultilineString",
-          "elems": [
-            {
-              "type": "MultilineString::Interp",
-              "0": [
-                {
-                  "type": "InterpElem::Source",
-                  "source": "guard true is a a a a a a",
-                  "loc": null
-                }
-              ]
-            }
-          ],
-          "loc": null
-        },
-        "body": {
-          "type": "Expr::Let",
+        "kind": "Expr::Let",
+        "loc": null,
+        "children": {
           "pattern": {
-            "type": "Pattern::Var",
-            "0": {
-              "type": "Binder",
-              "name": "a",
-              "loc": null
+            "kind": "Pattern::Var",
+            "loc": null,
+            "children": {
+              "value": {
+                "kind": "Binder",
+                "loc": null,
+                "children": {
+                  "name": "a"
+                }
+              }
             }
           },
           "expr": {
-            "type": "Expr::MultilineString",
-            "elems": [
-              {
-                "type": "MultilineString::Interp",
-                "0": [
+            "kind": "Expr::MultilineString",
+            "loc": null,
+            "children": {
+              "elems": {
+                "kind": "Expr::MultilineString::ElemList",
+                "loc": null,
+                "children": [
                   {
-                    "type": "InterpElem::Source",
-                    "source": "(a => a => a => a => a => )(5)",
-                    "loc": null
+                    "kind": "MultilineString::Interp",
+                    "loc": null,
+                    "children": {
+                      "value": {
+                        "kind": "MultilineString::Interp::ElemList",
+                        "loc": null,
+                        "children": [
+                          {
+                            "kind": "InterpElem::Source",
+                            "loc": null,
+                            "children": {
+                              "source": "guard true is a a a a a a"
+                            }
+                          }
+                        ]
+                      }
+                    }
                   }
                 ]
               }
-            ],
-            "loc": null
+            }
           },
           "body": {
-            "type": "Expr::Unit",
+            "kind": "Expr::Let",
             "loc": null,
-            "faked": true
-          },
-          "loc": null
-        },
-        "loc": null
+            "children": {
+              "pattern": {
+                "kind": "Pattern::Var",
+                "loc": null,
+                "children": {
+                  "value": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "a"
+                    }
+                  }
+                }
+              },
+              "expr": {
+                "kind": "Expr::MultilineString",
+                "loc": null,
+                "children": {
+                  "elems": {
+                    "kind": "Expr::MultilineString::ElemList",
+                    "loc": null,
+                    "children": [
+                      {
+                        "kind": "MultilineString::Interp",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "MultilineString::Interp::ElemList",
+                            "loc": null,
+                            "children": [
+                              {
+                                "kind": "InterpElem::Source",
+                                "loc": null,
+                                "children": {
+                                  "source": "(a => a => a => a => a => )(5)"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "body": {
+                "kind": "Expr::Unit",
+                "loc": null,
+                "children": {
+                  "faked": true
+                }
+              }
+            }
+          }
+        }
       },
       "name": null,
       "params": null,
-      "local_types": [],
+      "local_types": {
+        "kind": "Impl::TopTest::LocalTypeList",
+        "loc": null,
+        "children": []
+      },
       "is_async": null,
-      "loc": null,
-      "attrs": [],
+      "attrs": {
+        "kind": "Impl::TopTest::AttrList",
+        "loc": null,
+        "children": []
+      },
       "doc": ""
     }
-  ]
-}
+  }
+]

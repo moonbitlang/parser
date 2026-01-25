@@ -11,7 +11,7 @@ fn[X: I] use_I(x: X) -> Unit {
 struct T(Int)
 
 // regular method
-fn f(self: T) -> Unit { println(self.0) }
+fn T::f(self: T) -> Unit { println(self.0) }
 
 // extension method
 impl I for T with f(x) { println(x.0 + 1) }

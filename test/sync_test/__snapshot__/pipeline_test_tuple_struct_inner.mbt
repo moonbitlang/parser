@@ -6,7 +6,7 @@ fn init {
     println(x)
     let y = MyInt::MyInt(6)
     println(y)
-    let z = x.inner() + (match y {
+    let z = x.0 + (match y {
         MyInt(i) => i
     })
     println(z)
@@ -31,15 +31,15 @@ fn init {
     let y0 = (2, 2.0)
     let y = WithInt::WithInt(y0)
     println(y)
-    let z1 = 
-      x.inner().0 +
+    let z1 =
+      x.0.0 +
       (match y {
         WithInt((i, _)) => i
       })
       
     println(z1)
-    let z2 = 
-      x.inner().1 +
+    let z2 =
+      x.0.1 +
       (match y {
         WithInt((_, i)) => i.to_string()
       })

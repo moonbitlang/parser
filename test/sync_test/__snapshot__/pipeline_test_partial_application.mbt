@@ -14,7 +14,7 @@ fn f_err(a : Int, b : Bool, c : String, d : Double) -> Int raise Error {
 }
 
 ///|
-async fn f_async(a : Int, b : Bool, c : String, d : Double) -> Int raise {
+fn f_async(a : Int, b : Bool, c : String, d : Double) -> Int raise {
   println("f(\{a}, \{b}, \{c}, \{d})")
   if false {
     fail("")

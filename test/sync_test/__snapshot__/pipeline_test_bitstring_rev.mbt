@@ -1,6 +1,16 @@
 //!build: -w -27
 
 ///|
+fn to_be_bytes(n : UInt) -> Bytes {
+  [
+    (n >> 24).to_byte(),
+    (n >> 16).to_byte(),
+    (n >> 8).to_byte(),
+    n.to_byte(),
+  ]
+}
+
+///|
 fn f(bs : BytesView) -> Unit {
   match bs {
     [.. rest, u4(a), u2(b), u1(c), u1(d)] => {
@@ -18,8 +28,8 @@ fn f(bs : BytesView) -> Unit {
 fn g(bs : BytesView) -> Unit {
   match bs {
     [u32(a), .. rest, u32le(b)] => {
-      println(a.to_be_bytes())
-      println(b.to_be_bytes())
+      println(to_be_bytes(a))
+      println(to_be_bytes(b))
       println(rest)
     }
     _ => println("other")
@@ -32,14 +42,14 @@ fn h(bs : BytesView) -> Unit {
     [a, .. rest, '\x00', u32be(b), c] => {
       println("first")
       println(a)
-      println(b.to_be_bytes())
+      println(to_be_bytes(b))
       println(c)
       println(rest)
     }
     [a, .. rest, '\x0A', u32be(b), c] => {
       println("second")
       println(a)
-      println(b.to_be_bytes())
+      println(to_be_bytes(b))
       println(c)
       println(rest)
     }
@@ -53,13 +63,13 @@ fn h1(bs : BytesView) -> Unit {
     [a, .. rest, u32be(b), .. b"\x0F\x0E"] => {
       println("first")
       println(a)
-      println(b.to_be_bytes())
+      println(to_be_bytes(b))
       println(rest)
     }
     [a, .. rest, u32be(b), .. b"\x0E\x0F"] => {
       println("second")
       println(a)
-      println(b.to_be_bytes())
+      println(to_be_bytes(b))
       println(rest)
     }
     _ => println("other")

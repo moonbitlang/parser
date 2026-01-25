@@ -86,7 +86,9 @@ fn init {
   println(f32_to_u32(3.14))
 }
 
-suberror FloatErr Int
+suberror FloatErr {
+  FloatErr(Int)
+}
 
 fn ret_float_with_err(b : Bool) -> Float raise Error {
   if b { raise FloatErr(0) }

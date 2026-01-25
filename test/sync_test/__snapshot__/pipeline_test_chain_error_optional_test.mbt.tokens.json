@@ -316,34 +316,45 @@
     "loc": "9:27-9:34"
   },
   {
+    "token": "COLONCOLON",
+    "loc": "9:34-9:36"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Failure"
+    ],
+    "loc": "9:36-9:43"
+  },
+  {
     "token": "LPAREN",
-    "loc": "9:34-9:35"
+    "loc": "9:43-9:44"
   },
   {
     "token": [
       "STRING",
       "error"
     ],
-    "loc": "9:35-9:42"
+    "loc": "9:44-9:51"
   },
   {
     "token": "RPAREN",
-    "loc": "9:42-9:43"
+    "loc": "9:51-9:52"
   },
   {
     "token": "RBRACE",
-    "loc": "9:44-9:45"
+    "loc": "9:53-9:54"
   },
   {
     "token": "RPAREN",
-    "loc": "9:45-9:46"
+    "loc": "9:54-9:55"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "9:46-9:46"
+    "loc": "9:55-9:55"
   },
   {
     "token": [
@@ -354,11 +365,11 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "9:47-9:63"
+    "loc": "9:56-9:72"
   },
   {
     "token": "NEWLINE",
-    "loc": "9:63-9:64"
+    "loc": "9:72-9:73"
   },
   {
     "token": [

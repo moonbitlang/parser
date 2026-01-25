@@ -10,7 +10,7 @@ fn main {
       if true {
         resolve(42)
       } else {
-        reject(Failure("a"))
+        reject(Failure::Failure("a"))
       }
     })
   }

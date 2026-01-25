@@ -117,25 +117,25 @@
   {
     "token": [
       "DOT_LIDENT",
-      "iterator"
+      "iter"
     ],
-    "loc": "3:27-3:35"
+    "loc": "3:27-3:31"
   },
   {
     "token": "LPAREN",
-    "loc": "3:35-3:36"
+    "loc": "3:31-3:32"
   },
   {
     "token": "RPAREN",
-    "loc": "3:36-3:37"
+    "loc": "3:32-3:33"
   },
   {
     "token": "LBRACE",
-    "loc": "3:38-3:39"
+    "loc": "3:34-3:35"
   },
   {
     "token": "NEWLINE",
-    "loc": "3:39-3:40"
+    "loc": "3:35-3:36"
   },
   {
     "token": [
@@ -255,25 +255,25 @@
   {
     "token": [
       "DOT_LIDENT",
-      "iterator2"
+      "iter2"
     ],
-    "loc": "6:30-6:39"
+    "loc": "6:30-6:35"
   },
   {
     "token": "LPAREN",
-    "loc": "6:39-6:40"
+    "loc": "6:35-6:36"
   },
   {
     "token": "RPAREN",
-    "loc": "6:40-6:41"
+    "loc": "6:36-6:37"
   },
   {
     "token": "LBRACE",
-    "loc": "6:42-6:43"
+    "loc": "6:38-6:39"
   },
   {
     "token": "NEWLINE",
-    "loc": "6:43-6:44"
+    "loc": "6:39-6:40"
   },
   {
     "token": [
@@ -468,25 +468,25 @@
   {
     "token": [
       "DOT_LIDENT",
-      "iterator"
+      "iter"
     ],
-    "loc": "13:42-13:50"
+    "loc": "13:42-13:46"
   },
   {
     "token": "LPAREN",
-    "loc": "13:50-13:51"
+    "loc": "13:46-13:47"
   },
   {
     "token": "RPAREN",
-    "loc": "13:51-13:52"
+    "loc": "13:47-13:48"
   },
   {
     "token": "LBRACE",
-    "loc": "13:53-13:54"
+    "loc": "13:49-13:50"
   },
   {
     "token": "NEWLINE",
-    "loc": "13:54-13:55"
+    "loc": "13:50-13:51"
   },
   {
     "token": [
@@ -628,25 +628,25 @@
   {
     "token": [
       "DOT_LIDENT",
-      "iterator2"
+      "iter2"
     ],
-    "loc": "16:42-16:51"
+    "loc": "16:42-16:47"
   },
   {
     "token": "LPAREN",
-    "loc": "16:51-16:52"
+    "loc": "16:47-16:48"
   },
   {
     "token": "RPAREN",
-    "loc": "16:52-16:53"
+    "loc": "16:48-16:49"
   },
   {
     "token": "LBRACE",
-    "loc": "16:54-16:55"
+    "loc": "16:50-16:51"
   },
   {
     "token": "NEWLINE",
-    "loc": "16:55-16:56"
+    "loc": "16:51-16:52"
   },
   {
     "token": [

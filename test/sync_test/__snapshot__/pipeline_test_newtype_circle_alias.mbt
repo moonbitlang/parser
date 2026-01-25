@@ -1,8 +1,6 @@
 ///|
+#alias(VT)
 struct T(VT)
-
-///|
-typealias T as VT
 
 ///|
 pub fn f(x : T) -> Unit {
@@ -28,10 +26,8 @@ pub fn g(x : PA) -> Unit {
 //--------------------------------
 
 ///|
+#alias(FA)
 struct F((Int) -> FA)
-
-///|
-typealias F as FA
 
 ///|
 pub fn h(x : F) -> Unit {
@@ -41,13 +37,11 @@ pub fn h(x : F) -> Unit {
 //--------------------------------
 
 ///|
+#alias(GG2)
 struct G2((G1, Int))
 
 ///|
 struct G1((GG2, Int))
-
-///|
-typealias G2 as GG2
 
 ///|
 pub fn p(x : G2) -> Unit {

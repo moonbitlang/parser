@@ -1,4 +1,6 @@
-suberror StringError String derive(Show)
+suberror StringError {
+  StringError(String)
+} derive(Show)
 
 fn f() -> Unit raise StringError {
   raise StringError("xxx")

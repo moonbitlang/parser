@@ -59,11 +59,11 @@ fn[X] make_sparse_array(idx: Int, value: X) -> Sparse_Array[X] {
   { elem_info: empty_bitset.add(idx), data: [ value ] }
 }
 
-fn[X] has(self: Sparse_Array[X], idx: Int) -> Bool {
+fn[X] Sparse_Array::has(self: Sparse_Array[X], idx: Int) -> Bool {
   self.elem_info.has(idx)
 }
 
-fn[X] op_get(self: Sparse_Array[X], idx: Int) -> X? {
+fn[X] Sparse_Array::op_get(self: Sparse_Array[X], idx: Int) -> X? {
   if self.elem_info.has(idx) {
     Some (self.data[self.elem_info.index_of(idx)])
   } else {
@@ -92,7 +92,7 @@ fn[X] Sparse_Array::add(self: Sparse_Array[X], idx: Int, value: X) -> Sparse_Arr
 }
 
 // replace an existing element in the sparse array.
-fn[X] replace(self: Sparse_Array[X], idx: Int, value: X) -> Sparse_Array[X] {
+fn[X] Sparse_Array::replace(self: Sparse_Array[X], idx: Int, value: X) -> Sparse_Array[X] {
   let len = self.data.length()
   let pos_of_new_item = self.elem_info.index_of(idx)
   let new_data = FixedArray::make(len, value)
@@ -130,7 +130,7 @@ fn[K, V] make() -> HAMT[K, V] {
   Empty
 }
 
-fn[K: Eq, V] find_with_hash(self: HAMT[K, V], key: K, hash: Int) -> V? {
+fn[K: Eq, V] HAMT::find_with_hash(self: HAMT[K, V], key: K, hash: Int) -> V? {
   match self {
     Empty => None
     Leaf(key1, value) => {
@@ -150,11 +150,11 @@ fn[K: Eq, V] find_with_hash(self: HAMT[K, V], key: K, hash: Int) -> V? {
   }
 }
 
-fn[K: Eq + Hash, V] find(self: HAMT[K, V], key: K) -> V? {
+fn[K: Eq + Hash, V] HAMT::find(self: HAMT[K, V], key: K) -> V? {
   self.find_with_hash(key, key.hash())
 }
 
-fn[K: Eq, V] add_with_hash(
+fn[K: Eq, V] HAMT::add_with_hash(
   self: HAMT[K, V],
   key: K,
   depth: Int,
@@ -198,12 +198,12 @@ fn[K: Eq, V] add_with_hash(
   }
 }
 
-fn[K: Eq + Hash, V] add(self: HAMT[K, V], key: K, value: V) -> HAMT[K, V] {
+fn[K: Eq + Hash, V] HAMT::add(self: HAMT[K, V], key: K, value: V) -> HAMT[K, V] {
   self.add_with_hash(key, 0, key.hash(), value)
 }
 
 
-fn[K, V] size(self: HAMT[K, V]) -> Int {
+fn[K, V] HAMT::size(self: HAMT[K, V]) -> Int {
   match self {
     Empty => 0
     Leaf(_) => 1
@@ -218,7 +218,7 @@ fn[K, V] size(self: HAMT[K, V]) -> Int {
   }
 }
 
-fn[K, V] count_collision(self: HAMT[K, V]) -> Int {
+fn[K, V] HAMT::count_collision(self: HAMT[K, V]) -> Int {
   match self {
     Empty | Leaf(_) => 0
     Collision(bucket) => bucket.size()

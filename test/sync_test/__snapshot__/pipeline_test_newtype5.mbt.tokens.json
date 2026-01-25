@@ -978,26 +978,18 @@
   },
   {
     "token": [
-      "DOT_LIDENT",
-      "inner"
+      "DOT_INT",
+      0
     ],
-    "loc": "36:13-36:18"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "36:18-36:19"
+    "loc": "36:13-36:14"
   },
   {
     "token": "RPAREN",
-    "loc": "36:19-36:20"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "36:20-36:21"
+    "loc": "36:14-36:15"
   },
   {
     "token": "NEWLINE",
-    "loc": "36:21-36:22"
+    "loc": "36:15-36:16"
   },
   {
     "token": "RBRACE",

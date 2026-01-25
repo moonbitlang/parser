@@ -12,12 +12,20 @@ fn init {
   for _ in 1..<3 {
     println("loop")
   }
-}
-
-
-fn init {
   let arr = [1,2,3]
   for i in 0..<arr.length(){
     println(arr[i])
   }
+  reversed_iter_range()
 }
+
+fn reversed_iter_range() -> Unit {
+  let arr = [1,2,3]
+  for i in 3>..0 {
+    println(arr[i])
+  }
+  for i in 2>=..0 {
+    println(arr[i])
+  }
+}
+

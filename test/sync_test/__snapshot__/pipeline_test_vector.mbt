@@ -4,11 +4,11 @@ struct Vector[X] {
   mut len: Int
 }
 
-fn[X] length(self: Vector[X]) -> Int {
+fn[X] Vector::length(self: Vector[X]) -> Int {
   self.len
 }
 
-fn[X] capacity(self: Vector[X]) -> Int {
+fn[X] Vector::capacity(self: Vector[X]) -> Int {
   self.data.length()
 }
 
@@ -22,12 +22,12 @@ fn[X: Default] Vector::new(cap: Int) -> Vector[X] {
 }
 
 
-fn[X] op_get(self: Vector[X], i: Int) -> X? {
+fn[X] Vector::op_get(self: Vector[X], i: Int) -> X? {
   if i < self.len { Some(self.data[i]) } else { None }
 }
 
 
-fn[X] push_back_with_default(self: Vector[X], elem: X, default: X) -> Unit {
+fn[X] Vector::push_back_with_default(self: Vector[X], elem: X, default: X) -> Unit {
   if self.len < self.data.length() {
     self.data[self.len] = elem
     self.len = self.len + 1
@@ -44,7 +44,7 @@ fn[X] push_back_with_default(self: Vector[X], elem: X, default: X) -> Unit {
   }
 }
 
-fn[X: Default] push_back(self: Vector[X], elem: X) -> Unit {
+fn[X: Default] Vector::push_back(self: Vector[X], elem: X) -> Unit {
   self.push_back_with_default(elem, X::default())
 }
 

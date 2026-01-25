@@ -1,32 +1,62 @@
 [
   {
-    "token": "TYPEALIAS",
-    "loc": "1:1-1:10"
-  },
-  {
-    "token": [
-      "PACKAGE_NAME",
-      "list"
-    ],
-    "loc": "1:11-1:16"
-  },
-  {
-    "token": [
-      "DOT_UIDENT",
-      "List"
-    ],
-    "loc": "1:17-1:21"
-  },
-  {
-    "token": "AS",
-    "loc": "1:22-1:24"
+    "token": "TYPE",
+    "loc": "1:1-1:5"
   },
   {
     "token": [
       "UIDENT",
       "List"
     ],
-    "loc": "1:25-1:29"
+    "loc": "1:6-1:10"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "1:10-1:11"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "T"
+    ],
+    "loc": "1:11-1:12"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "1:12-1:13"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "1:14-1:15"
+  },
+  {
+    "token": [
+      "PACKAGE_NAME",
+      "list"
+    ],
+    "loc": "1:16-1:21"
+  },
+  {
+    "token": [
+      "DOT_UIDENT",
+      "List"
+    ],
+    "loc": "1:22-1:26"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "1:26-1:27"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "T"
+    ],
+    "loc": "1:27-1:28"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "1:28-1:29"
   },
   {
     "token": [

@@ -46,50 +46,46 @@
     "loc": "3:5-3:6"
   },
   {
-    "token": "ASYNC",
-    "loc": "4:1-4:6"
-  },
-  {
     "token": "FN",
-    "loc": "4:7-4:9"
+    "loc": "4:1-4:3"
   },
   {
     "token": [
       "LIDENT",
       "err"
     ],
-    "loc": "4:10-4:13"
+    "loc": "4:4-4:7"
   },
   {
     "token": "LPAREN",
-    "loc": "4:13-4:14"
+    "loc": "4:7-4:8"
   },
   {
     "token": "RPAREN",
-    "loc": "4:14-4:15"
+    "loc": "4:8-4:9"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "4:16-4:18"
+    "loc": "4:10-4:12"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "4:19-4:23"
+    "loc": "4:13-4:17"
   },
   {
     "token": "RAISE",
-    "loc": "4:24-4:29"
+    "loc": "4:18-4:23"
   },
   {
     "token": "LBRACE",
-    "loc": "4:30-4:31"
+    "loc": "4:24-4:25"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:31-4:32"
+    "loc": "4:25-4:26"
   },
   {
     "token": "LET",

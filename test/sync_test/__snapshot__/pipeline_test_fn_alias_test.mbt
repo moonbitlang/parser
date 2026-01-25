@@ -1,13 +1,11 @@
 ///|
 trait I {
+  #as_free_fn(obj_meth)
   obj_meth(Self) -> Int
 }
 
 ///|
-typealias &I as Obj
-
-///|
-fnalias Obj::obj_meth
+type Obj = &I
 
 ///|
 struct MyInt(Int)

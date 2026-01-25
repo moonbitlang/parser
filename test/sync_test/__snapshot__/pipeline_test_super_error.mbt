@@ -1,5 +1,10 @@
-suberror Error1 String
-suberror Error2 String
+suberror Error1 {
+  Error1(String)
+}
+
+suberror Error2 {
+  Error2(String)
+}
 
 fn f1() -> Unit raise Error1 {
   raise Error1("xxx")

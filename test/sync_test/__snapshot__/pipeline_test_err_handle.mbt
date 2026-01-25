@@ -1,4 +1,6 @@
-suberror StringError String
+suberror StringError {
+  StringError(String)
+}
 
 // basic usage
 fn f(x: Int) -> Int raise StringError {
@@ -15,6 +17,6 @@ fn g(x: Int) -> Int raise StringError {
 }
 
 fn init {
-  println((try? f(42)).unwrap())
-  println((try? g(2)).unwrap())
+  println(try! f(42))
+  println(try! g(2))
 }

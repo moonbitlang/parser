@@ -1,0 +1,31 @@
+[
+  {
+    "kind": "Impl::TopExpr",
+    "loc": null,
+    "children": {
+      "expr": {
+        "kind": "Expr::Hole",
+        "loc": null,
+        "children": {
+          "kind": {
+            "kind": "Hole::Synthesized",
+            "loc": null,
+            "children": {}
+          }
+        }
+      },
+      "is_main": false,
+      "local_types": {
+        "kind": "Impl::TopExpr::LocalTypeList",
+        "loc": null,
+        "children": []
+      },
+      "is_async": null,
+      "attrs": {
+        "kind": "Impl::TopExpr::AttrList",
+        "loc": null,
+        "children": []
+      }
+    }
+  }
+]

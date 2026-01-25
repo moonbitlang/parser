@@ -1,6 +1,6 @@
 struct Map[K, V](FixedArray[(K, V)])
 
-pub fn[K : Eq, V] find(self: Map[K, V], key: K) -> V? {
+pub fn[K : Eq, V] Map::find(self: Map[K, V], key: K) -> V? {
   let mut i = 0
   while i < self.0.length() {
     let (k, v) = self.0[i]

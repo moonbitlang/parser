@@ -1,4 +1,6 @@
-suberror StringError String
+suberror StringError {
+  StringError(String)
+}
 
 trait FromString {
   from_string(String) -> Self raise StringError
@@ -11,6 +13,6 @@ fn[X : FromString] parse(s : String) -> X raise StringError {
 }
 
 fn init {
-  let b : Bool = (try? parse("true")).unwrap()
+  let b : Bool = try! parse("true")
   println(b)
 }
