@@ -511,7 +511,8 @@ pub fn loc_of_expression(expr : Expr) -> Location {
       body=_,
       for_else=_,
       label=_,
-      loc~
+      loc~,
+      where_clause=_
     ) => loc
     ForEach(binders=_, expr=_, body=_, else_block=_, label=_, loc~) => loc
     Try(

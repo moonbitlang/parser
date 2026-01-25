@@ -70,6 +70,7 @@ using @syntax {
   type LexTopPattern,
   type UsingKind,
   type LexCase,
+  type WhereClause,
 }
 
 ///|

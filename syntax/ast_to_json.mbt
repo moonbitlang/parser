@@ -722,7 +722,9 @@ pub impl ToJson for TypeDecl with to_json(self) {
     type_vis,
     deriving,
     loc,
+    is_declare,
   } = self
+  ignore(is_declare)
   {
     "type": "TypeDecl",
     "tycon": tycon,
@@ -776,6 +778,7 @@ pub impl ToJson for DeclBody with to_json(self) {
         "expr": expr,
       }
     DeclStubs(stubs) => { "type": "DeclBody::DeclStubs", "0": stubs }
+    DeclNone => {}
   }
 }
 

@@ -675,6 +675,7 @@ fn State::parse_typealias(
   spos~ : Position,
   attrs~ : List[@attribute.Attribute],
   vis~ : @syntax.Visibility,
+  is_declare~ : Bool,
 ) -> @syntax.Impl {
   self.expect_token(TK_TYPEALIAS)
   fn parse_target(
@@ -788,6 +789,7 @@ fn State::parse_typealias(
             attrs,
             doc: DocString::empty(),
             loc,
+            is_declare,
           })
         }
         other => {
@@ -911,6 +913,12 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
   }
   let spos = self.peek_spos()
   let attrs = self.parse_attributes()
+  let is_declare = if self.peek_token() is DECLARE {
+    self.skip()
+    true
+  } else {
+    false
+  }
   let vis = self.parse_visibility()
   match self.peek_token() {
     TYPE if self.peek_token(nth=1) is EXCLAMATION => {
@@ -951,6 +959,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         deriving,
         loc,
         attrs,
+        is_declare,
       })
     }
     SUBERROR => {
@@ -990,6 +999,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         deriving,
         loc,
         attrs,
+        is_declare,
       })
     }
     TYPE => {
@@ -1016,9 +1026,10 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         deriving,
         loc,
         attrs,
+        is_declare,
       })
     }
-    TYPEALIAS => self.parse_typealias(spos~, attrs~, vis~)
+    TYPEALIAS => self.parse_typealias(spos~, attrs~, vis~, is_declare~)
     STRUCT => {
       self.expect_token(TK_STRUCT)
       let tycon_loc = self.peek_location()
@@ -1059,6 +1070,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         deriving,
         loc,
         attrs,
+        is_declare,
       })
     }
     ENUM => {
@@ -1086,6 +1098,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         deriving,
         loc,
         attrs,
+        is_declare,
       })
     }
     LET | CONST => {
@@ -1134,6 +1147,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         deriving,
         loc,
         attrs,
+        is_declare,
       })
     }
     EXTERN => {
@@ -1533,6 +1547,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
               loc=self.loc_start_with(spos),
               attrs~,
               doc=DocString::empty(),
+              is_declare~,
             )
           }
         }
@@ -2663,6 +2678,26 @@ fn State::parse_loop_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr 
 }
 
 ///|
+fn State::parse_where_clause(self : State) -> @syntax.WhereClause? {
+  if self.peek_token() is WHERE {
+    let spos = self.peek_spos()
+    self.skip()
+    self.expect_token(TK_LBRACE)
+    let (fields, _) = self.series_with_follow(
+      delim=TK_COMMA,
+      follow_set=[TK_RBRACE],
+      State::parse_field_def,
+    )
+    let fields = @list.from_array(fields)
+    self.expect_token(TK_RBRACE)
+    let loc = self.loc_start_with(spos)
+    Some({ fields, loc })
+  } else {
+    None
+  }
+}
+
+///|
 fn State::parse_for_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr {
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
@@ -2695,6 +2730,7 @@ fn State::parse_for_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr {
       for_else=None,
       label~,
       loc~,
+      where_clause=None,
     )
   }
 
@@ -2815,8 +2851,18 @@ fn State::parse_for_loop(
   } else {
     None
   }
+  let where_clause = self.parse_where_clause()
   let loc = self.loc_start_with(spos)
-  For(binders~, condition~, continue_block~, body~, for_else~, label~, loc~)
+  For(
+    binders~,
+    condition~,
+    continue_block~,
+    body~,
+    for_else~,
+    label~,
+    loc~,
+    where_clause~,
+  )
 }
 
 ///|
