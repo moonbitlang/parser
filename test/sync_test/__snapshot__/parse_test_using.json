@@ -1,308 +1,533 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopUsing",
+[
+  {
+    "kind": "Impl::TopUsing",
+    "loc": null,
+    "children": {
       "pkg": {
-        "type": "Label",
-        "name": "pkg",
-        "loc": null
-      },
-      "names": [
-        [
-          {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "func",
-              "loc": null
-            },
-            "target": null
-          },
-          "value"
-        ]
-      ],
-      "vis": {
-        "type": "Visibility::Default"
-      },
-      "attrs": [],
-      "loc": null,
-      "doc": " docstring"
-    },
-    {
-      "type": "Impl::TopUsing",
-      "pkg": {
-        "type": "Label",
-        "name": "pkg",
-        "loc": null
-      },
-      "names": [
-        [
-          {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "Type",
-              "loc": null
-            },
-            "target": null
-          },
-          "type"
-        ]
-      ],
-      "vis": {
-        "type": "Visibility::Default"
-      },
-      "attrs": [
-        {
-          "type": "Attribute",
-          "raw": "#deprecated",
-          "loc": null
+        "kind": "Label",
+        "loc": null,
+        "children": {
+          "name": "pkg"
         }
-      ],
-      "loc": null,
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopUsing",
-      "pkg": {
-        "type": "Label",
-        "name": "pkg",
-        "loc": null
       },
-      "names": [
-        [
+      "names": {
+        "kind": "Impl::TopUsing::NameList",
+        "loc": null,
+        "children": [
           {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "func",
-              "loc": null
-            },
-            "target": null
-          },
-          "value"
-        ],
-        [
-          {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "Const",
-              "loc": null
-            },
-            "target": null
-          },
-          "value"
-        ],
-        [
-          {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "Type",
-              "loc": null
-            },
-            "target": null
-          },
-          "type"
-        ],
-        [
-          {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "Trait",
-              "loc": null
-            },
-            "target": null
-          },
-          "trait"
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "func"
+                    }
+                  },
+                  "target": null
+                }
+              },
+              "kind": "value"
+            }
+          }
         ]
-      ],
+      },
       "vis": {
-        "type": "Visibility::Pub",
-        "attr": null,
-        "loc": null
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
       },
-      "attrs": [],
-      "loc": null,
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopUsing",
+      "attrs": {
+        "kind": "Impl::TopUsing::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": " docstring"
+    }
+  },
+  {
+    "kind": "Impl::TopUsing",
+    "loc": null,
+    "children": {
       "pkg": {
-        "type": "Label",
-        "name": "pkg",
-        "loc": null
+        "kind": "Label",
+        "loc": null,
+        "children": {
+          "name": "pkg"
+        }
       },
-      "names": [
-        [
+      "names": {
+        "kind": "Impl::TopUsing::NameList",
+        "loc": null,
+        "children": [
           {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "func2",
-              "loc": null
-            },
-            "target": {
-              "type": "Label",
-              "name": "func",
-              "loc": null
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "Type"
+                    }
+                  },
+                  "target": null
+                }
+              },
+              "kind": "type"
             }
-          },
-          "value"
-        ],
-        [
-          {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "Const2",
-              "loc": null
-            },
-            "target": {
-              "type": "Label",
-              "name": "Const",
-              "loc": null
-            }
-          },
-          "value"
-        ],
-        [
-          {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "Type2",
-              "loc": null
-            },
-            "target": {
-              "type": "Label",
-              "name": "Type",
-              "loc": null
-            }
-          },
-          "type"
-        ],
-        [
-          {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "Trait2",
-              "loc": null
-            },
-            "target": {
-              "type": "Label",
-              "name": "Trait",
-              "loc": null
-            }
-          },
-          "trait"
+          }
         ]
-      ],
+      },
       "vis": {
-        "type": "Visibility::Default"
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
       },
-      "attrs": [],
-      "loc": null,
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopUsing",
-      "pkg": {
-        "type": "Label",
-        "name": "pkg",
-        "loc": null
-      },
-      "names": [
-        [
+      "attrs": {
+        "kind": "Impl::TopUsing::AttrList",
+        "loc": null,
+        "children": [
           {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "",
-              "loc": null
-            },
-            "target": {
-              "type": "Label",
-              "name": "func",
-              "loc": null
+            "kind": "Attribute",
+            "loc": null,
+            "children": {
+              "raw": "#deprecated"
             }
-          },
-          "value"
-        ],
-        [
-          {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "",
-              "loc": null
-            },
-            "target": {
-              "type": "Label",
-              "name": "Const",
-              "loc": null
-            }
-          },
-          "value"
-        ],
-        [
-          {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "",
-              "loc": null
-            },
-            "target": {
-              "type": "Label",
-              "name": "Type",
-              "loc": null
-            }
-          },
-          "type"
-        ],
-        [
-          {
-            "type": "AliasTarget",
-            "binder": {
-              "type": "Binder",
-              "name": "",
-              "loc": null
-            },
-            "target": {
-              "type": "Label",
-              "name": "Trait",
-              "loc": null
-            }
-          },
-          "trait"
+          }
         ]
-      ],
-      "vis": {
-        "type": "Visibility::Default"
       },
-      "attrs": [],
-      "loc": null,
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopUsing",
-      "pkg": {
-        "type": "Label",
-        "name": "pkg",
-        "loc": null
-      },
-      "names": [],
-      "vis": {
-        "type": "Visibility::Default"
-      },
-      "attrs": [],
-      "loc": null,
       "doc": ""
     }
-  ]
-}
+  },
+  {
+    "kind": "Impl::TopUsing",
+    "loc": null,
+    "children": {
+      "pkg": {
+        "kind": "Label",
+        "loc": null,
+        "children": {
+          "name": "pkg"
+        }
+      },
+      "names": {
+        "kind": "Impl::TopUsing::NameList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "func"
+                    }
+                  },
+                  "target": null
+                }
+              },
+              "kind": "value"
+            }
+          },
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "Const"
+                    }
+                  },
+                  "target": null
+                }
+              },
+              "kind": "value"
+            }
+          },
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "Type"
+                    }
+                  },
+                  "target": null
+                }
+              },
+              "kind": "type"
+            }
+          },
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "Trait"
+                    }
+                  },
+                  "target": null
+                }
+              },
+              "kind": "trait"
+            }
+          }
+        ]
+      },
+      "vis": {
+        "kind": "Visibility::Pub",
+        "loc": null,
+        "children": {
+          "attr": null
+        }
+      },
+      "attrs": {
+        "kind": "Impl::TopUsing::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopUsing",
+    "loc": null,
+    "children": {
+      "pkg": {
+        "kind": "Label",
+        "loc": null,
+        "children": {
+          "name": "pkg"
+        }
+      },
+      "names": {
+        "kind": "Impl::TopUsing::NameList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "func2"
+                    }
+                  },
+                  "target": {
+                    "kind": "Label",
+                    "loc": null,
+                    "children": {
+                      "name": "func"
+                    }
+                  }
+                }
+              },
+              "kind": "value"
+            }
+          },
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "Const2"
+                    }
+                  },
+                  "target": {
+                    "kind": "Label",
+                    "loc": null,
+                    "children": {
+                      "name": "Const"
+                    }
+                  }
+                }
+              },
+              "kind": "value"
+            }
+          },
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "Type2"
+                    }
+                  },
+                  "target": {
+                    "kind": "Label",
+                    "loc": null,
+                    "children": {
+                      "name": "Type"
+                    }
+                  }
+                }
+              },
+              "kind": "type"
+            }
+          },
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "Trait2"
+                    }
+                  },
+                  "target": {
+                    "kind": "Label",
+                    "loc": null,
+                    "children": {
+                      "name": "Trait"
+                    }
+                  }
+                }
+              },
+              "kind": "trait"
+            }
+          }
+        ]
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "attrs": {
+        "kind": "Impl::TopUsing::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopUsing",
+    "loc": null,
+    "children": {
+      "pkg": {
+        "kind": "Label",
+        "loc": null,
+        "children": {
+          "name": "pkg"
+        }
+      },
+      "names": {
+        "kind": "Impl::TopUsing::NameList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": ""
+                    }
+                  },
+                  "target": {
+                    "kind": "Label",
+                    "loc": null,
+                    "children": {
+                      "name": "func"
+                    }
+                  }
+                }
+              },
+              "kind": "value"
+            }
+          },
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": ""
+                    }
+                  },
+                  "target": {
+                    "kind": "Label",
+                    "loc": null,
+                    "children": {
+                      "name": "Const"
+                    }
+                  }
+                }
+              },
+              "kind": "value"
+            }
+          },
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": ""
+                    }
+                  },
+                  "target": {
+                    "kind": "Label",
+                    "loc": null,
+                    "children": {
+                      "name": "Type"
+                    }
+                  }
+                }
+              },
+              "kind": "type"
+            }
+          },
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": ""
+                    }
+                  },
+                  "target": {
+                    "kind": "Label",
+                    "loc": null,
+                    "children": {
+                      "name": "Trait"
+                    }
+                  }
+                }
+              },
+              "kind": "trait"
+            }
+          }
+        ]
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "attrs": {
+        "kind": "Impl::TopUsing::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopUsing",
+    "loc": null,
+    "children": {
+      "pkg": {
+        "kind": "Label",
+        "loc": null,
+        "children": {
+          "name": "pkg"
+        }
+      },
+      "names": {
+        "kind": "Impl::TopUsing::NameList",
+        "loc": null,
+        "children": []
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "attrs": {
+        "kind": "Impl::TopUsing::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  }
+]

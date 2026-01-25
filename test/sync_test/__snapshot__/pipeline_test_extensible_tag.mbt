@@ -7,7 +7,7 @@ fn f1() -> Unit raise Error {
 fn main {
   try f1() catch {
     E1 => println("a")
-    InspectError(s) => println(s)
+    InspectError::InspectError(s) => println(s)
     _ => println("b")
   }
 }

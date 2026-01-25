@@ -1,4 +1,6 @@
-suberror OError Option[Int] derive(Show)
+suberror OError {
+  OError(Option[Int])
+} derive(Show)
 
 fn f(x: Int) -> Option[Int] raise OError {
   if x == 0 {

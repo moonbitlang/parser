@@ -1,0 +1,33 @@
+[
+  {
+    "kind": "Impl::TopFuncAlias",
+    "loc": null,
+    "children": {
+      "pkg": {
+        "kind": "Label",
+        "loc": null,
+        "children": {
+          "name": "pkg"
+        }
+      },
+      "type_name": null,
+      "targets": {
+        "kind": "Impl::TopFuncAlias::TargetList",
+        "loc": null,
+        "children": []
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "attrs": {
+        "kind": "Impl::TopFuncAlias::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "is_list": false,
+      "doc": ""
+    }
+  }
+]

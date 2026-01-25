@@ -1,413 +1,694 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopTypeDef",
-      "0": {
-        "type": "TypeDecl",
-        "tycon": "T",
-        "tycon_loc": null,
-        "params": [],
-        "components": {
-          "type": "TypeDesc::Variant",
-          "0": [
-            {
-              "type": "ConstrDecl",
-              "name": {
-                "type": "ConstrName",
-                "name": "A",
-                "loc": null
-              },
-              "args": null,
-              "tag": null,
-              "attrs": [],
-              "loc": null,
-              "doc": ""
-            },
-            {
-              "type": "ConstrDecl",
-              "name": {
-                "type": "ConstrName",
-                "name": "B",
-                "loc": null
-              },
-              "args": [
-                {
-                  "type": "ConstrParam",
-                  "ty": {
-                    "type": "Type::Name",
-                    "constr_id": {
-                      "type": "ConstrId",
-                      "id": {
-                        "type": "LongIdent::Ident",
-                        "0": "Int"
+[
+  {
+    "kind": "Impl::TopTypeDef",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "TypeDecl",
+        "loc": null,
+        "children": {
+          "tycon": "T",
+          "params": {
+            "kind": "TypeDecl::ParamList",
+            "loc": null,
+            "children": []
+          },
+          "components": {
+            "kind": "TypeDesc::Variant",
+            "loc": null,
+            "children": {
+              "value": {
+                "kind": "TypeDesc::Variant::ConstrList",
+                "loc": null,
+                "children": [
+                  {
+                    "kind": "ConstrDecl",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "ConstrName",
+                        "loc": null,
+                        "children": {
+                          "name": "A"
+                        }
                       },
-                      "loc": null
-                    },
-                    "tys": [],
-                    "loc": null
-                  },
-                  "mut": false,
-                  "label": null
-                },
-                {
-                  "type": "ConstrParam",
-                  "ty": {
-                    "type": "Type::Name",
-                    "constr_id": {
-                      "type": "ConstrId",
-                      "id": {
-                        "type": "LongIdent::Ident",
-                        "0": "Int"
+                      "args": null,
+                      "tag": null,
+                      "attrs": {
+                        "kind": "ConstrDecl::AttrList",
+                        "loc": null,
+                        "children": []
                       },
-                      "loc": null
-                    },
-                    "tys": [],
-                    "loc": null
+                      "doc": ""
+                    }
                   },
-                  "mut": false,
-                  "label": null
-                }
-              ],
-              "tag": null,
-              "attrs": [],
-              "loc": null,
-              "doc": ""
-            },
-            {
-              "type": "ConstrDecl",
-              "name": {
-                "type": "ConstrName",
-                "name": "C",
-                "loc": null
-              },
-              "args": null,
-              "tag": null,
-              "attrs": [],
-              "loc": null,
-              "doc": ""
+                  {
+                    "kind": "ConstrDecl",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "ConstrName",
+                        "loc": null,
+                        "children": {
+                          "name": "B"
+                        }
+                      },
+                      "args": {
+                        "kind": "ConstrDecl::ArgList",
+                        "loc": null,
+                        "children": [
+                          {
+                            "kind": "ConstrParam",
+                            "loc": null,
+                            "children": {
+                              "ty": {
+                                "kind": "Type::Name",
+                                "loc": null,
+                                "children": {
+                                  "constr_id": {
+                                    "kind": "ConstrId",
+                                    "loc": null,
+                                    "children": {
+                                      "id": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "Int"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "tys": {
+                                    "kind": "Type::Name::TypeList",
+                                    "loc": null,
+                                    "children": []
+                                  }
+                                }
+                              },
+                              "mut": false,
+                              "label": null
+                            }
+                          },
+                          {
+                            "kind": "ConstrParam",
+                            "loc": null,
+                            "children": {
+                              "ty": {
+                                "kind": "Type::Name",
+                                "loc": null,
+                                "children": {
+                                  "constr_id": {
+                                    "kind": "ConstrId",
+                                    "loc": null,
+                                    "children": {
+                                      "id": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "Int"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "tys": {
+                                    "kind": "Type::Name::TypeList",
+                                    "loc": null,
+                                    "children": []
+                                  }
+                                }
+                              },
+                              "mut": false,
+                              "label": null
+                            }
+                          }
+                        ]
+                      },
+                      "tag": null,
+                      "attrs": {
+                        "kind": "ConstrDecl::AttrList",
+                        "loc": null,
+                        "children": []
+                      },
+                      "doc": ""
+                    }
+                  },
+                  {
+                    "kind": "ConstrDecl",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "ConstrName",
+                        "loc": null,
+                        "children": {
+                          "name": "C"
+                        }
+                      },
+                      "args": null,
+                      "tag": null,
+                      "attrs": {
+                        "kind": "ConstrDecl::AttrList",
+                        "loc": null,
+                        "children": []
+                      },
+                      "doc": ""
+                    }
+                  }
+                ]
+              }
             }
-          ]
-        },
-        "attrs": [],
-        "doc": "",
-        "type_vis": {
-          "type": "Visibility::Default"
-        },
-        "deriving": [],
-        "loc": null
+          },
+          "attrs": {
+            "kind": "TypeDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": "",
+          "type_vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "deriving": {
+            "kind": "TypeDecl::DerivingList",
+            "loc": null,
+            "children": []
+          }
+        }
       }
-    },
-    {
-      "type": "Impl::TopLetDef",
+    }
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
       "binder": {
-        "type": "Binder",
-        "name": "f",
-        "loc": null
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "f"
+        }
       },
       "ty": {
-        "type": "Type::Arrow",
-        "args": [
-          {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": {
-                "type": "LongIdent::Ident",
-                "0": "T"
-              },
-              "loc": null
-            },
-            "tys": [],
-            "loc": null
-          }
-        ],
-        "res": {
-          "type": "Type::Name",
-          "constr_id": {
-            "type": "ConstrId",
-            "id": {
-              "type": "LongIdent::Ident",
-              "0": "Int"
-            },
-            "loc": null
-          },
-          "tys": [],
-          "loc": null
-        },
-        "err": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "is_async": null,
-        "loc": null
-      },
-      "expr": {
-        "type": "Expr::Function",
-        "func": {
-          "type": "Func::Lambda",
-          "parameters": [
-            {
-              "type": "Parameter::Positional",
-              "binder": {
-                "type": "Binder",
-                "name": "f",
-                "loc": null
-              },
-              "ty": null
-            }
-          ],
-          "params_loc": null,
-          "body": {
-            "type": "Expr::Match",
-            "expr": {
-              "type": "Expr::Ident",
-              "id": {
-                "type": "Var",
-                "name": {
-                  "type": "LongIdent::Ident",
-                  "0": "f"
-                },
-                "loc": null
-              },
-              "loc": null
-            },
-            "cases": [
+        "kind": "Type::Arrow",
+        "loc": null,
+        "children": {
+          "args": {
+            "kind": "Type::Arrow::ArgList",
+            "loc": null,
+            "children": [
               {
-                "type": "Case",
-                "pattern": {
-                  "type": "Pattern::Constr",
-                  "constr": {
-                    "type": "Constructor",
-                    "name": {
-                      "type": "ConstrName",
-                      "name": "B",
-                      "loc": null
-                    },
-                    "extra_info": {
-                      "type": "ConstructorExtraInfo::NoExtraInfo"
-                    },
-                    "loc": null
-                  },
-                  "args": [
-                    {
-                      "type": "ConstrPatArg",
-                      "pat": {
-                        "type": "Pattern::Var",
-                        "0": {
-                          "type": "Binder",
-                          "name": "x",
-                          "loc": null
+                "kind": "Type::Name",
+                "loc": null,
+                "children": {
+                  "constr_id": {
+                    "kind": "ConstrId",
+                    "loc": null,
+                    "children": {
+                      "id": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": {
+                          "value": "T"
                         }
-                      },
-                      "kind": {
-                        "type": "ArgumentKind::Positional"
-                      }
-                    },
-                    {
-                      "type": "ConstrPatArg",
-                      "pat": {
-                        "type": "Pattern::Var",
-                        "0": {
-                          "type": "Binder",
-                          "name": "y",
-                          "loc": null
-                        }
-                      },
-                      "kind": {
-                        "type": "ArgumentKind::Positional"
                       }
                     }
-                  ],
-                  "is_open": false,
-                  "loc": null
-                },
-                "guard": null,
-                "body": {
-                  "type": "Expr::Infix",
-                  "op": {
-                    "type": "Var",
-                    "name": {
-                      "type": "LongIdent::Ident",
-                      "0": "+"
-                    },
-                    "loc": null
                   },
-                  "lhs": {
-                    "type": "Expr::Ident",
-                    "id": {
-                      "type": "Var",
-                      "name": {
-                        "type": "LongIdent::Ident",
-                        "0": "x"
-                      },
-                      "loc": null
-                    },
-                    "loc": null
-                  },
-                  "rhs": {
-                    "type": "Expr::Apply",
-                    "func": {
-                      "type": "Expr::Group",
-                      "expr": {
-                        "type": "Expr::Function",
-                        "func": {
-                          "type": "Func::Lambda",
-                          "parameters": [
-                            {
-                              "type": "Parameter::Positional",
-                              "binder": {
-                                "type": "Binder",
-                                "name": "z",
-                                "loc": null
-                              },
-                              "ty": {
-                                "type": "Type::Name",
-                                "constr_id": {
-                                  "type": "ConstrId",
-                                  "id": {
-                                    "type": "LongIdent::Ident",
-                                    "0": "Int"
-                                  },
-                                  "loc": null
-                                },
-                                "tys": [],
-                                "loc": null
-                              }
-                            }
-                          ],
-                          "params_loc": null,
-                          "body": {
-                            "type": "Expr::Infix",
-                            "op": {
-                              "type": "Var",
-                              "name": {
-                                "type": "LongIdent::Ident",
-                                "0": "+"
-                              },
-                              "loc": null
-                            },
-                            "lhs": {
-                              "type": "Expr::Ident",
-                              "id": {
-                                "type": "Var",
-                                "name": {
-                                  "type": "LongIdent::Ident",
-                                  "0": "z"
-                                },
-                                "loc": null
-                              },
-                              "loc": null
-                            },
-                            "rhs": {
-                              "type": "Expr::Ident",
-                              "id": {
-                                "type": "Var",
-                                "name": {
-                                  "type": "LongIdent::Ident",
-                                  "0": "x"
-                                },
-                                "loc": null
-                              },
-                              "loc": null
-                            },
-                            "loc": null
-                          },
-                          "return_type": null,
-                          "error_type": {
-                            "type": "ErrorType::NoErrorType"
-                          },
-                          "kind": {
-                            "type": "FnKind::Lambda"
-                          },
-                          "has_error": null,
-                          "is_async": null,
-                          "loc": null
-                        },
-                        "loc": null
-                      },
-                      "group": {
-                        "type": "Group::Paren"
-                      },
-                      "loc": null
-                    },
-                    "args": [
-                      {
-                        "type": "Argument",
-                        "value": {
-                          "type": "Expr::Constant",
-                          "c": {
-                            "type": "Constant::Int",
-                            "0": "2"
-                          },
-                          "loc": null
-                        },
-                        "kind": {
-                          "type": "ArgumentKind::Positional"
-                        }
-                      }
-                    ],
-                    "attr": {
-                      "type": "ApplyAttr::NoAttr"
-                    },
-                    "loc": null
-                  },
-                  "loc": null
-                }
-              },
-              {
-                "type": "Case",
-                "pattern": {
-                  "type": "Pattern::Constr",
-                  "constr": {
-                    "type": "Constructor",
-                    "name": {
-                      "type": "ConstrName",
-                      "name": "C",
-                      "loc": null
-                    },
-                    "extra_info": {
-                      "type": "ConstructorExtraInfo::NoExtraInfo"
-                    },
-                    "loc": null
-                  },
-                  "args": null,
-                  "is_open": false,
-                  "loc": null
-                },
-                "guard": null,
-                "body": {
-                  "type": "Expr::Constant",
-                  "c": {
-                    "type": "Constant::Int",
-                    "0": "3333"
-                  },
-                  "loc": null
+                  "tys": {
+                    "kind": "Type::Name::TypeList",
+                    "loc": null,
+                    "children": []
+                  }
                 }
               }
-            ],
-            "match_loc": null,
-            "loc": null
+            ]
           },
-          "return_type": null,
-          "error_type": {
-            "type": "ErrorType::NoErrorType"
+          "res": {
+            "kind": "Type::Name",
+            "loc": null,
+            "children": {
+              "constr_id": {
+                "kind": "ConstrId",
+                "loc": null,
+                "children": {
+                  "id": {
+                    "kind": "LongIdent::Ident",
+                    "loc": null,
+                    "children": {
+                      "value": "Int"
+                    }
+                  }
+                }
+              },
+              "tys": {
+                "kind": "Type::Name::TypeList",
+                "loc": null,
+                "children": []
+              }
+            }
           },
-          "kind": {
-            "type": "FnKind::Lambda"
+          "err": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
           },
-          "has_error": null,
-          "is_async": null,
-          "loc": null
-        },
-        "loc": null
+          "is_async": null
+        }
+      },
+      "expr": {
+        "kind": "Expr::Function",
+        "loc": null,
+        "children": {
+          "func": {
+            "kind": "Func::Lambda",
+            "loc": null,
+            "children": {
+              "parameters": {
+                "kind": "Func::Lambda::ParameterList",
+                "loc": null,
+                "children": [
+                  {
+                    "kind": "Parameter::Positional",
+                    "loc": null,
+                    "children": {
+                      "binder": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "f"
+                        }
+                      },
+                      "ty": null
+                    }
+                  }
+                ]
+              },
+              "body": {
+                "kind": "Expr::Match",
+                "loc": null,
+                "children": {
+                  "expr": {
+                    "kind": "Expr::Ident",
+                    "loc": null,
+                    "children": {
+                      "id": {
+                        "kind": "Var",
+                        "loc": null,
+                        "children": {
+                          "name": {
+                            "kind": "LongIdent::Ident",
+                            "loc": null,
+                            "children": {
+                              "value": "f"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "cases": {
+                    "kind": "Expr::Match::CaseList",
+                    "loc": null,
+                    "children": [
+                      {
+                        "kind": "Case",
+                        "loc": null,
+                        "children": {
+                          "pattern": {
+                            "kind": "Pattern::Constr",
+                            "loc": null,
+                            "children": {
+                              "constr": {
+                                "kind": "Constructor",
+                                "loc": null,
+                                "children": {
+                                  "name": {
+                                    "kind": "ConstrName",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "B"
+                                    }
+                                  },
+                                  "extra_info": {
+                                    "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              },
+                              "args": {
+                                "kind": "Pattern::Constr::ArgList",
+                                "loc": null,
+                                "children": [
+                                  {
+                                    "kind": "ConstrPatArg",
+                                    "loc": null,
+                                    "children": {
+                                      "pat": {
+                                        "kind": "Pattern::Var",
+                                        "loc": null,
+                                        "children": {
+                                          "value": {
+                                            "kind": "Binder",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "x"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "kind": {
+                                        "kind": "ArgumentKind::Positional",
+                                        "loc": null,
+                                        "children": {}
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "kind": "ConstrPatArg",
+                                    "loc": null,
+                                    "children": {
+                                      "pat": {
+                                        "kind": "Pattern::Var",
+                                        "loc": null,
+                                        "children": {
+                                          "value": {
+                                            "kind": "Binder",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "y"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "kind": {
+                                        "kind": "ArgumentKind::Positional",
+                                        "loc": null,
+                                        "children": {}
+                                      }
+                                    }
+                                  }
+                                ]
+                              },
+                              "is_open": false
+                            }
+                          },
+                          "guard": null,
+                          "body": {
+                            "kind": "Expr::Infix",
+                            "loc": null,
+                            "children": {
+                              "op": {
+                                "kind": "Var",
+                                "loc": null,
+                                "children": {
+                                  "name": {
+                                    "kind": "LongIdent::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "+"
+                                    }
+                                  }
+                                }
+                              },
+                              "lhs": {
+                                "kind": "Expr::Ident",
+                                "loc": null,
+                                "children": {
+                                  "id": {
+                                    "kind": "Var",
+                                    "loc": null,
+                                    "children": {
+                                      "name": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "x"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "kind": "Expr::Apply",
+                                "loc": null,
+                                "children": {
+                                  "func": {
+                                    "kind": "Expr::Group",
+                                    "loc": null,
+                                    "children": {
+                                      "expr": {
+                                        "kind": "Expr::Function",
+                                        "loc": null,
+                                        "children": {
+                                          "func": {
+                                            "kind": "Func::Lambda",
+                                            "loc": null,
+                                            "children": {
+                                              "parameters": {
+                                                "kind": "Func::Lambda::ParameterList",
+                                                "loc": null,
+                                                "children": [
+                                                  {
+                                                    "kind": "Parameter::Positional",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "binder": {
+                                                        "kind": "Binder",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "name": "z"
+                                                        }
+                                                      },
+                                                      "ty": {
+                                                        "kind": "Type::Name",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "constr_id": {
+                                                            "kind": "ConstrId",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "id": {
+                                                                "kind": "LongIdent::Ident",
+                                                                "loc": null,
+                                                                "children": {
+                                                                  "value": "Int"
+                                                                }
+                                                              }
+                                                            }
+                                                          },
+                                                          "tys": {
+                                                            "kind": "Type::Name::TypeList",
+                                                            "loc": null,
+                                                            "children": []
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                ]
+                                              },
+                                              "body": {
+                                                "kind": "Expr::Infix",
+                                                "loc": null,
+                                                "children": {
+                                                  "op": {
+                                                    "kind": "Var",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": {
+                                                        "kind": "LongIdent::Ident",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "value": "+"
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "lhs": {
+                                                    "kind": "Expr::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "id": {
+                                                        "kind": "Var",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "name": {
+                                                            "kind": "LongIdent::Ident",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "value": "z"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "rhs": {
+                                                    "kind": "Expr::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "id": {
+                                                        "kind": "Var",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "name": {
+                                                            "kind": "LongIdent::Ident",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "value": "x"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "return_type": null,
+                                              "error_type": {
+                                                "kind": "ErrorType::NoErrorType",
+                                                "loc": null,
+                                                "children": {}
+                                              },
+                                              "kind": {
+                                                "kind": "FnKind::Lambda",
+                                                "loc": null,
+                                                "children": {}
+                                              },
+                                              "has_error": null,
+                                              "is_async": null
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "group": {
+                                        "kind": "Group::Paren",
+                                        "loc": null,
+                                        "children": {}
+                                      }
+                                    }
+                                  },
+                                  "args": {
+                                    "kind": "Expr::Apply::ArgumentList",
+                                    "loc": null,
+                                    "children": [
+                                      {
+                                        "kind": "Argument",
+                                        "loc": null,
+                                        "children": {
+                                          "value": {
+                                            "kind": "Expr::Constant",
+                                            "loc": null,
+                                            "children": {
+                                              "constant": {
+                                                "kind": "Constant::Int",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": "2"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "kind": {
+                                            "kind": "ArgumentKind::Positional",
+                                            "loc": null,
+                                            "children": {}
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "attr": {
+                                    "kind": "ApplyAttr::NoAttr",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Case",
+                        "loc": null,
+                        "children": {
+                          "pattern": {
+                            "kind": "Pattern::Constr",
+                            "loc": null,
+                            "children": {
+                              "constr": {
+                                "kind": "Constructor",
+                                "loc": null,
+                                "children": {
+                                  "name": {
+                                    "kind": "ConstrName",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "C"
+                                    }
+                                  },
+                                  "extra_info": {
+                                    "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              },
+                              "args": null,
+                              "is_open": false
+                            }
+                          },
+                          "guard": null,
+                          "body": {
+                            "kind": "Expr::Constant",
+                            "loc": null,
+                            "children": {
+                              "constant": {
+                                "kind": "Constant::Int",
+                                "loc": null,
+                                "children": {
+                                  "value": "3333"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "return_type": null,
+              "error_type": {
+                "kind": "ErrorType::NoErrorType",
+                "loc": null,
+                "children": {}
+              },
+              "kind": {
+                "kind": "FnKind::Lambda",
+                "loc": null,
+                "children": {}
+              },
+              "has_error": null,
+              "is_async": null
+            }
+          }
+        }
       },
       "vis": {
-        "type": "Visibility::Default"
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
       },
       "is_constant": false,
-      "loc": null,
-      "attrs": [],
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
       "doc": ""
     }
-  ]
-}
+  }
+]

@@ -1,4 +1,6 @@
-suberror Exception String derive(Show)
+suberror Exception {
+  Exception(String)
+} derive(Show)
 
 fn div(x : Int?, y : Int?) -> Int raise Exception {
   guard x is Some(x) else { raise Exception("x is none") }
@@ -29,7 +31,9 @@ fn local_control_flow(lbound : Int, ubound : Int, xs : Array[Int]) -> Int {
   sum / count
 }
 
-suberror InvalidJson String derive (Show)
+suberror InvalidJson {
+  InvalidJson(String)
+} derive (Show)
 
 fn get_data(x : Json) -> String raise InvalidJson {
   match x {

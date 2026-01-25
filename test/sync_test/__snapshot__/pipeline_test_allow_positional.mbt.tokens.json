@@ -3,7 +3,7 @@
     "token": [
       "COMMENT",
       {
-        "content": "//!build: -alert -deprecated",
+        "content": "//!build: -w -20",
         "kind": [
           "Ownline",
           {
@@ -14,11 +14,11 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "1:1-1:29"
+    "loc": "1:1-1:17"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:29-1:30"
+    "loc": "1:17-1:18"
   },
   {
     "token": "NEWLINE",

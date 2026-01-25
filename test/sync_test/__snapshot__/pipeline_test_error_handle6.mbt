@@ -1,8 +1,22 @@
-suberror DoubleError Double derive(Show)
-suberror Int64Error Int64 derive(Show)
-suberror RBError Ref[Bool] derive(Show)
-suberror BytesError Bytes derive(Show)
-suberror StringError String derive(Show)
+suberror DoubleError {
+  DoubleError(Double)
+} derive(Show)
+
+suberror Int64Error {
+  Int64Error(Int64)
+} derive(Show)
+
+suberror RBError {
+  RBError(Ref[Bool])
+} derive(Show)
+
+suberror BytesError {
+  BytesError(Bytes)
+} derive(Show)
+
+suberror StringError {
+  StringError(String)
+} derive(Show)
 
 fn f1(b: Bool) -> Double raise DoubleError {
   if b { 1.0 } else { raise DoubleError(2.0) }

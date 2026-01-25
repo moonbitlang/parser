@@ -1,35 +1,56 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopTypeDef",
-      "0": {
-        "type": "TypeDecl",
-        "tycon": "A",
-        "tycon_loc": null,
-        "params": [
-          {
-            "type": "TypeDeclBinder",
-            "name": "T",
-            "loc": null
+[
+  {
+    "kind": "Impl::TopTypeDef",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "TypeDecl",
+        "loc": null,
+        "children": {
+          "tycon": "A",
+          "params": {
+            "kind": "TypeDecl::ParamList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "TypeDeclBinder",
+                "loc": null,
+                "children": {
+                  "name": "T"
+                }
+              },
+              {
+                "kind": "TypeDeclBinder",
+                "loc": null,
+                "children": {
+                  "name": "E"
+                }
+              }
+            ]
           },
-          {
-            "type": "TypeDeclBinder",
-            "name": "E",
-            "loc": null
+          "components": {
+            "kind": "TypeDesc::Abstract",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "TypeDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": "",
+          "type_vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "deriving": {
+            "kind": "TypeDecl::DerivingList",
+            "loc": null,
+            "children": []
           }
-        ],
-        "components": {
-          "type": "TypeDesc::Abstract"
-        },
-        "attrs": [],
-        "doc": "",
-        "type_vis": {
-          "type": "Visibility::Default"
-        },
-        "deriving": [],
-        "loc": null
+        }
       }
     }
-  ]
-}
+  }
+]

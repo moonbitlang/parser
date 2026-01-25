@@ -102,62 +102,55 @@
   },
   {
     "token": [
-      "PACKAGE_NAME",
-      "buffer"
+      "UIDENT",
+      "StringBuilder"
     ],
-    "loc": "5:17-5:24"
-  },
-  {
-    "token": [
-      "DOT_UIDENT",
-      "Buffer"
-    ],
-    "loc": "5:25-5:31"
+    "loc": "5:17-5:30"
   },
   {
     "token": "WITH",
-    "loc": "5:32-5:36"
+    "loc": "5:31-5:35"
   },
   {
     "token": [
       "LIDENT",
       "write_string"
     ],
-    "loc": "5:37-5:49"
+    "loc": "5:36-5:48"
   },
   {
     "token": "LPAREN",
-    "loc": "5:49-5:50"
+    "loc": "5:48-5:49"
   },
   {
     "token": [
       "LIDENT",
       "self"
     ],
-    "loc": "5:50-5:54"
+    "loc": "5:49-5:53"
   },
   {
     "token": "COMMA",
-    "loc": "5:54-5:55"
+    "loc": "5:53-5:54"
   },
   {
     "token": [
       "LIDENT",
       "str"
     ],
-    "loc": "5:56-5:59"
+    "loc": "5:55-5:58"
   },
   {
     "token": "RPAREN",
-    "loc": "5:59-5:60"
+    "loc": "5:58-5:59"
   },
   {
     "token": "LBRACE",
-    "loc": "5:61-5:62"
+    "loc": "5:60-5:61"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:62-5:63"
+    "loc": "5:61-5:62"
   },
   {
     "token": [
@@ -1181,36 +1174,40 @@
   },
   {
     "token": [
-      "PACKAGE_NAME",
-      "buffer"
+      "UIDENT",
+      "StringBuilder"
     ],
-    "loc": "34:13-34:20"
+    "loc": "34:13-34:26"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "34:26-34:28"
   },
   {
     "token": [
-      "DOT_LIDENT",
+      "LIDENT",
       "new"
     ],
-    "loc": "34:21-34:24"
+    "loc": "34:28-34:31"
   },
   {
     "token": "LPAREN",
-    "loc": "34:24-34:25"
+    "loc": "34:31-34:32"
   },
   {
     "token": "RPAREN",
-    "loc": "34:25-34:26"
+    "loc": "34:32-34:33"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "34:26-34:26"
+    "loc": "34:33-34:33"
   },
   {
     "token": "NEWLINE",
-    "loc": "34:26-34:27"
+    "loc": "34:33-34:34"
   },
   {
     "token": "LPAREN",
@@ -1539,40 +1536,25 @@
   {
     "token": [
       "DOT_LIDENT",
-      "contents"
+      "to_string"
     ],
-    "loc": "41:15-41:23"
+    "loc": "41:15-41:24"
   },
   {
     "token": "LPAREN",
-    "loc": "41:23-41:24"
-  },
-  {
-    "token": "RPAREN",
     "loc": "41:24-41:25"
   },
   {
-    "token": [
-      "DOT_LIDENT",
-      "to_unchecked_string"
-    ],
-    "loc": "41:26-41:45"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "41:45-41:46"
+    "token": "RPAREN",
+    "loc": "41:25-41:26"
   },
   {
     "token": "RPAREN",
-    "loc": "41:46-41:47"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "41:47-41:48"
+    "loc": "41:26-41:27"
   },
   {
     "token": "NEWLINE",
-    "loc": "41:48-41:49"
+    "loc": "41:27-41:28"
   },
   {
     "token": "RBRACE",

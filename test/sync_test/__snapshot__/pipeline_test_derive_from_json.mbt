@@ -2,63 +2,65 @@
 struct A(Int) derive(Show, ToJson, FromJson)
 
 ///|
-suberror E derive(Show, ToJson, @json.FromJson)
+suberror E derive(Show, ToJson, FromJson)
 
 ///|
-suberror EI Int derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+suberror EI {
+  EI(Int)
+} derive(Show, ToJson, FromJson)
 
 ///|
 suberror ConnectionError {
   BrokenPipe(Int, String)
   ConnectionReset
-} derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+} derive(Show, ToJson, FromJson)
 
 ///|
 struct S {
   x : Int
   y : (Int, Bool)
   z : String
-} derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+} derive(Show, ToJson, FromJson)
 
 ///|
 struct Nested1 {
   x : Int
   y : Int
-} derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+} derive(Show, ToJson, FromJson)
 
 ///|
 struct Nested2 {
   x : Nested1
   y : Int
-} derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+} derive(Show, ToJson, FromJson)
 
 ///|
 struct Nested3 {
   x : Nested2
   y : Int
-} derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+} derive(Show, ToJson, FromJson)
 
 ///|
 enum ESmall {
   C1
-} derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+} derive(Show, ToJson, FromJson)
 
 ///|
 enum ESmall2 {
   C1(Int, Bool)
-} derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+} derive(Show, ToJson, FromJson)
 
 ///|
 enum EE {
   C1
   C2
-} derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+} derive(Show, ToJson, FromJson)
 
 ///|
 enum EEE {
   C1(Int, Bool)
   C2(S)
-} derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+} derive(Show, ToJson, FromJson)
 
 ///|
 struct T1[X] {
@@ -68,10 +70,10 @@ struct T1[X] {
   w : X
   q : E
   c : ConnectionError
-} derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+} derive(Show, ToJson, FromJson)
 
 ///|
-struct NT[X](Array[X]) derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+struct NT[X](Array[X]) derive(Show, ToJson, FromJson)
 
 ///|
 enum E0 {
@@ -81,7 +83,7 @@ enum E0 {
   C4(a~ : Bool, (Double, String))
   C3((Int, Int))
   C5(((Int, Int), Int), Int)
-} derive(Show, ToJson, @moonbitlang/core/json.FromJson)
+} derive(Show, ToJson, FromJson)
 
 ///|
 fn testErrEnum(j : Json) -> Result[ConnectionError, @json.JsonDecodeError] {

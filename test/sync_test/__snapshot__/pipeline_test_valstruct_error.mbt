@@ -13,7 +13,9 @@ enum F {
 } derive(Show)
 
 ///|
-suberror X Int derive(Show)
+suberror X {
+  X(Int)
+} derive(Show)
 
 ///|
 fn f(a : Int, b : Int64, c : Double) -> F raise X {

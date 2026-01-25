@@ -1,71 +1,118 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopFuncDef",
+[
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
       "fun_decl": {
-        "type": "FunDecl",
-        "type_name": {
-          "type": "TypeName",
-          "name": {
-            "type": "LongIdent::Ident",
-            "0": "Int"
-          },
-          "is_object": false,
-          "loc": null
-        },
-        "name": {
-          "type": "Binder",
-          "name": "method",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": false,
-        "decl_params": [],
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::Infix",
-          "op": {
-            "type": "Var",
-            "name": {
-              "type": "LongIdent::Ident",
-              "0": "+"
-            },
-            "loc": null
-          },
-          "lhs": {
-            "type": "Expr::Constant",
-            "c": {
-              "type": "Constant::Int",
-              "0": "1"
-            },
-            "loc": null
-          },
-          "rhs": {
-            "type": "Expr::Hole",
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": {
+            "kind": "TypeName",
             "loc": null,
-            "kind": {
-              "type": "Hole::Synthesized"
+            "children": {
+              "name": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": {
+                  "value": "Int"
+                }
+              },
+              "is_object": false
             }
           },
-          "loc": null
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "method"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": {
+            "kind": "FunDecl::ParameterList",
+            "loc": null,
+            "children": []
+          },
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
         }
       },
-      "loc": null
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::Infix",
+            "loc": null,
+            "children": {
+              "op": {
+                "kind": "Var",
+                "loc": null,
+                "children": {
+                  "name": {
+                    "kind": "LongIdent::Ident",
+                    "loc": null,
+                    "children": {
+                      "value": "+"
+                    }
+                  }
+                }
+              },
+              "lhs": {
+                "kind": "Expr::Constant",
+                "loc": null,
+                "children": {
+                  "constant": {
+                    "kind": "Constant::Int",
+                    "loc": null,
+                    "children": {
+                      "value": "1"
+                    }
+                  }
+                }
+              },
+              "rhs": {
+                "kind": "Expr::Hole",
+                "loc": null,
+                "children": {
+                  "kind": {
+                    "kind": "Hole::Synthesized",
+                    "loc": null,
+                    "children": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
-  ]
-}
+  }
+]

@@ -246,50 +246,46 @@
     "loc": "7:1-7:2"
   },
   {
-    "token": "ASYNC",
-    "loc": "8:1-8:6"
-  },
-  {
     "token": "FN",
-    "loc": "8:7-8:9"
+    "loc": "8:1-8:3"
   },
   {
     "token": [
       "LIDENT",
       "f"
     ],
-    "loc": "8:10-8:11"
+    "loc": "8:4-8:5"
   },
   {
     "token": "LPAREN",
-    "loc": "8:11-8:12"
+    "loc": "8:5-8:6"
   },
   {
     "token": "RPAREN",
-    "loc": "8:12-8:13"
+    "loc": "8:6-8:7"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "8:14-8:16"
+    "loc": "8:8-8:10"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "8:17-8:21"
+    "loc": "8:11-8:15"
   },
   {
     "token": "RAISE",
-    "loc": "8:22-8:27"
+    "loc": "8:16-8:21"
   },
   {
     "token": "LBRACE",
-    "loc": "8:28-8:29"
+    "loc": "8:22-8:23"
   },
   {
     "token": "NEWLINE",
-    "loc": "8:29-8:30"
+    "loc": "8:23-8:24"
   },
   {
     "token": "MATCH",
@@ -573,76 +569,72 @@
     "loc": "20:1-20:2"
   },
   {
-    "token": "ASYNC",
-    "loc": "21:1-21:6"
-  },
-  {
     "token": "FN",
-    "loc": "21:7-21:9"
+    "loc": "21:1-21:3"
   },
   {
     "token": [
       "LIDENT",
       "join_with_non_unit_type"
     ],
-    "loc": "21:10-21:33"
+    "loc": "21:4-21:27"
   },
   {
     "token": "LPAREN",
-    "loc": "21:33-21:34"
+    "loc": "21:27-21:28"
   },
   {
     "token": [
       "LIDENT",
       "opt"
     ],
-    "loc": "21:34-21:37"
+    "loc": "21:28-21:31"
   },
   {
     "token": "COLON",
-    "loc": "21:38-21:39"
+    "loc": "21:32-21:33"
   },
   {
     "token": [
       "UIDENT",
       "Int"
     ],
-    "loc": "21:40-21:43"
+    "loc": "21:34-21:37"
   },
   {
     "token": "QUESTION",
-    "loc": "21:43-21:44"
+    "loc": "21:37-21:38"
   },
   {
     "token": "QUESTION",
-    "loc": "21:44-21:45"
+    "loc": "21:38-21:39"
   },
   {
     "token": "RPAREN",
-    "loc": "21:45-21:46"
+    "loc": "21:39-21:40"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "21:47-21:49"
+    "loc": "21:41-21:43"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "21:50-21:54"
+    "loc": "21:44-21:48"
   },
   {
     "token": "NORAISE",
-    "loc": "21:55-21:62"
+    "loc": "21:49-21:56"
   },
   {
     "token": "LBRACE",
-    "loc": "21:63-21:64"
+    "loc": "21:57-21:58"
   },
   {
     "token": "NEWLINE",
-    "loc": "21:64-21:65"
+    "loc": "21:58-21:59"
   },
   {
     "token": "LET",

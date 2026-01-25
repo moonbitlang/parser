@@ -33,7 +33,7 @@ struct S {
 type T4[X] (Int, X)
 
 fn f6(x: T4[Int]) -> Unit {
-  println(x.inner())
+  println(x.0)
 }
 
 fn init {

@@ -1,5 +1,5 @@
 ///|
-let counter : Ref[Int] = @ref.new(0)
+let counter : Ref[Int] = Ref::new(0)
 
 ///|
 async fn[X] suspend(f : ((X) -> Unit) -> Unit) -> X noraise = "%async.suspend"
@@ -8,7 +8,7 @@ async fn[X] suspend(f : ((X) -> Unit) -> Unit) -> X noraise = "%async.suspend"
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
 
 ///|
-let cont : Ref[((Unit) -> Unit)?] = @ref.new(None)
+let cont : Ref[((Unit) -> Unit)?] = Ref::new(None)
 
 ///|
 async fn async_incr(index : Int) -> Unit noraise {

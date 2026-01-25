@@ -177,25 +177,56 @@
     "loc": "6:10-6:18"
   },
   {
+    "token": "LBRACE",
+    "loc": "6:19-6:20"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "6:20-6:21"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "IntError"
+    ],
+    "loc": "7:3-7:11"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "7:11-7:12"
+  },
+  {
     "token": [
       "UIDENT",
       "Int"
     ],
-    "loc": "6:19-6:22"
+    "loc": "7:12-7:15"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "7:15-7:16"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "7:16-7:17"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "8:1-8:2"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "6:22-6:22"
+    "loc": "8:2-8:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "6:22-6:23"
+    "loc": "8:2-8:3"
   },
   {
     "token": "EOF",
-    "loc": "7:1-7:1"
+    "loc": "9:1-9:1"
   }
 ]

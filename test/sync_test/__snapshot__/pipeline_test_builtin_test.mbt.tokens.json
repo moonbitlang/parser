@@ -138,99 +138,110 @@
     "loc": "5:10-5:11"
   },
   {
+    "token": [
+      "UIDENT",
+      "Ref"
+    ],
+    "loc": "5:11-5:14"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "5:14-5:16"
+  },
+  {
     "token": "LBRACE",
-    "loc": "5:11-5:12"
+    "loc": "5:16-5:17"
   },
   {
     "token": [
       "LIDENT",
       "val"
     ],
-    "loc": "5:13-5:16"
+    "loc": "5:18-5:21"
   },
   {
     "token": "COLON",
-    "loc": "5:16-5:17"
+    "loc": "5:21-5:22"
   },
   {
     "token": "LPAREN",
-    "loc": "5:18-5:19"
+    "loc": "5:23-5:24"
   },
   {
     "token": "LBRACKET",
-    "loc": "5:19-5:20"
+    "loc": "5:24-5:25"
   },
   {
     "token": [
       "INT",
       "1"
     ],
-    "loc": "5:20-5:21"
+    "loc": "5:25-5:26"
   },
   {
     "token": "COMMA",
-    "loc": "5:21-5:22"
+    "loc": "5:26-5:27"
   },
   {
     "token": [
       "INT",
       "2"
     ],
-    "loc": "5:23-5:24"
+    "loc": "5:28-5:29"
   },
   {
     "token": "COMMA",
-    "loc": "5:24-5:25"
+    "loc": "5:29-5:30"
   },
   {
     "token": [
       "INT",
       "3"
     ],
-    "loc": "5:26-5:27"
+    "loc": "5:31-5:32"
   },
   {
     "token": "RBRACKET",
-    "loc": "5:27-5:28"
+    "loc": "5:32-5:33"
   },
   {
     "token": "COLON",
-    "loc": "5:28-5:29"
+    "loc": "5:33-5:34"
   },
   {
     "token": [
       "UIDENT",
       "FixedArray"
     ],
-    "loc": "5:30-5:40"
+    "loc": "5:35-5:45"
   },
   {
     "token": "LBRACKET",
-    "loc": "5:40-5:41"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "5:41-5:42"
-  },
-  {
-    "token": "RBRACKET",
-    "loc": "5:42-5:43"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "5:43-5:44"
-  },
-  {
-    "token": "RBRACE",
     "loc": "5:45-5:46"
   },
   {
-    "token": "RPAREN",
+    "token": "UNDERSCORE",
     "loc": "5:46-5:47"
   },
   {
-    "token": "NEWLINE",
+    "token": "RBRACKET",
     "loc": "5:47-5:48"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "5:48-5:49"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "5:50-5:51"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "5:51-5:52"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "5:52-5:53"
   },
   {
     "token": "RBRACE",

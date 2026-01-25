@@ -407,7 +407,7 @@
   },
   {
     "token": "NEWLINE",
-    "loc": "11:21-11:22"
+    "loc": "11:18-11:19"
   },
   {
     "token": [
@@ -1240,60 +1240,48 @@
     "loc": "36:27-36:28"
   },
   {
+    "token": [
+      "PACKAGE_NAME",
+      "encoding/utf16"
+    ],
+    "loc": "37:3-37:18"
+  },
+  {
+    "token": [
+      "DOT_LIDENT",
+      "encode"
+    ],
+    "loc": "37:19-37:25"
+  },
+  {
     "token": "LPAREN",
-    "loc": "37:3-37:4"
+    "loc": "37:25-37:26"
   },
   {
     "token": [
       "STRING",
       "\\n\\r\\t\\\\\\\""
     ],
-    "loc": "37:4-37:16"
-  },
-  {
-    "token": "COLON",
-    "loc": "37:17-37:18"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "String"
-    ],
-    "loc": "37:19-37:25"
+    "loc": "37:26-37:38"
   },
   {
     "token": "RPAREN",
-    "loc": "37:25-37:26"
-  },
-  {
-    "token": [
-      "DOT_LIDENT",
-      "to_bytes"
-    ],
-    "loc": "37:27-37:35"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "37:35-37:36"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "37:36-37:37"
+    "loc": "37:38-37:39"
   },
   {
     "token": "PIPE",
-    "loc": "37:38-37:40"
+    "loc": "37:40-37:42"
   },
   {
     "token": [
       "LIDENT",
       "println"
     ],
-    "loc": "37:41-37:48"
+    "loc": "37:43-37:50"
   },
   {
     "token": "NEWLINE",
-    "loc": "37:48-37:49"
+    "loc": "37:50-37:51"
   },
   {
     "token": "RBRACE",

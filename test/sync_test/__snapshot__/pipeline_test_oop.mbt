@@ -12,7 +12,7 @@ fn[X: ObjectImpl] Object::make(x: X) -> Object {
   Object(x as &ObjectImpl)
 }
 
-fn copy(self: Object) -> Object {
+fn Object::copy(self: Object) -> Object {
   self.0.copy()
 }
 
@@ -20,13 +20,13 @@ impl Show for Object with output(self, logger) {
   logger.write_string(self.0.to_string())
 }
 
-fn to_string(self : Object) -> String { Show::to_string(self) }
+fn Object::to_string(self : Object) -> String { Show::to_string(self) }
 
-fn call_method(self : Object, meth : String) -> Object {
+fn Object::call_method(self : Object, meth : String) -> Object {
   self.0.call_method(self, meth)
 }
 
-fn set_method(self : Object, method_name : String, meth : (Object) -> Object) -> Unit {
+fn Object::set_method(self : Object, method_name : String, meth : (Object) -> Object) -> Unit {
   self.0.set_method(method_name, meth)
 }
 

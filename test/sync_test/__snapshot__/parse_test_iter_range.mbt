@@ -25,4 +25,13 @@ fn init {
   for i in 1.0..=2 {
     println(i)
   }
+  for i in a..<=b {
+    println(i)
+  }
+  for i in a>..b {
+    println(i)
+  }
+  for i in a>=..b {
+    println(i)
+  }
 }

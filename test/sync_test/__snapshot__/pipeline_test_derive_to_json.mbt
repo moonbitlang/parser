@@ -20,7 +20,9 @@ enum E1[X, Y] {
 suberror ErrNoPayload derive(ToJson)
 
 ///|
-suberror ErrNewType Int derive(ToJson)
+suberror ErrNewType {
+  ErrNewType(Int)
+} derive(ToJson)
 
 ///|
 fn init {

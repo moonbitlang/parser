@@ -1,4 +1,4 @@
-typealias @list.List as List
+type List[T] = @list.List[T]
 
 fn[T] keep_alternates(lst : List[T]) -> List[T] {
   match lst {

@@ -1,4 +1,6 @@
-suberror StringError String derive(Show)
+suberror StringError {
+  StringError(String)
+} derive(Show)
 
 fn f(x: Int) -> Int raise StringError {
   if x >= 0 {
@@ -39,7 +41,9 @@ enum T {
   C
 }
 
-suberror TError T
+suberror TError {
+  TError(T)
+}
 
 fn f1(x: T) -> Int raise {
   let a =

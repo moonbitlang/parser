@@ -58,10 +58,9 @@ fn init {
   2 |> g |> test_show // upcast lhs of pipe
   test_show(S::{ s: 3 }) // upcast qualified struct
   test_show({ s: 4 }) // upcast unqualified struct
-  let s0 = { s: 0 }
-  test_show(S::{ ..s0, s: 5 }) // upcast record update
-  test_show({ ..s0, s: 6 }) // upcast record update
-  test_show({ ..{ s: 0 }, s: 7 }) // upcast record update
+  test_show(S::{ s: 5 }) // upcast struct
+  test_show({ s: 6 }) // upcast struct
+  test_show({ s: 7 }) // upcast struct
   test_show(8) // upcast constant
   test_show((4 + 5: Int)) // upcast constraint
   let ten = 10

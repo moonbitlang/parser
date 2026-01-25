@@ -5,12 +5,12 @@ fn[X, Y] apply(f: (X) -> Y, x: X) -> Y {
 }
 
 fn init {
-  let a = apply(T::T, Option::Some(1))
+  let a = apply(T::T(_), Option::Some(1))
   println(a)
 }
 
 fn init {
-  let a = apply(Some, 1)
+  let a = apply(Some(_), 1)
   println(a)
 }
 

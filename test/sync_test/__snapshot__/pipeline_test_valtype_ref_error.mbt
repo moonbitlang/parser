@@ -8,7 +8,9 @@ struct S {
 } derive(Show)
 
 ///|
-suberror E Int derive(Show)
+suberror E {
+  E(Int)
+} derive(Show)
 
 ///|
 fn make_s(i : Int) -> S raise E {

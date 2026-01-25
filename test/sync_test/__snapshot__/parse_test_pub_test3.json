@@ -1,57 +1,84 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopLetDef",
+[
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
       "binder": {
-        "type": "Binder",
-        "name": "constant",
-        "loc": null
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "constant"
+        }
       },
       "ty": null,
       "expr": {
-        "type": "Expr::Constant",
-        "c": {
-          "type": "Constant::Int",
-          "0": "1"
-        },
-        "loc": null
+        "kind": "Expr::Constant",
+        "loc": null,
+        "children": {
+          "constant": {
+            "kind": "Constant::Int",
+            "loc": null,
+            "children": {
+              "value": "1"
+            }
+          }
+        }
       },
       "vis": {
-        "type": "Visibility::Pub",
-        "attr": null,
-        "loc": null
+        "kind": "Visibility::Pub",
+        "loc": null,
+        "children": {
+          "attr": null
+        }
       },
       "is_constant": false,
-      "loc": null,
-      "attrs": [],
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopLetDef",
-      "binder": {
-        "type": "Binder",
-        "name": "variable",
-        "loc": null
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
       },
-      "ty": null,
-      "expr": {
-        "type": "Expr::Constant",
-        "c": {
-          "type": "Constant::Int",
-          "0": "2"
-        },
-        "loc": null
-      },
-      "vis": {
-        "type": "Visibility::Pub",
-        "attr": null,
-        "loc": null
-      },
-      "is_constant": false,
-      "loc": null,
-      "attrs": [],
       "doc": ""
     }
-  ]
-}
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "variable"
+        }
+      },
+      "ty": null,
+      "expr": {
+        "kind": "Expr::Constant",
+        "loc": null,
+        "children": {
+          "constant": {
+            "kind": "Constant::Int",
+            "loc": null,
+            "children": {
+              "value": "2"
+            }
+          }
+        }
+      },
+      "vis": {
+        "kind": "Visibility::Pub",
+        "loc": null,
+        "children": {
+          "attr": null
+        }
+      },
+      "is_constant": false,
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  }
+]

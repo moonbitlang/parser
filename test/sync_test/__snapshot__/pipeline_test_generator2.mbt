@@ -44,7 +44,7 @@ enum Tree {
 }
 
 ///|
-async fn tree_to_iter(tree : Tree) -> AIter[Int] noraise {
+fn tree_to_iter(tree : Tree) -> AIter[Int] noraise {
   AIter(async fn(yield_)noraise {
     match tree {
       Leaf => IterContinue

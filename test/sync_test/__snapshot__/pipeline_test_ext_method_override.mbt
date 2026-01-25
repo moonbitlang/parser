@@ -9,7 +9,7 @@ fn[X: I] use_I(x: X) -> Unit {
 
 struct T(Int)
 
-fn f(self: T) -> Unit { println(self.0) }
+fn T::f(self: T) -> Unit { println(self.0) }
 impl I for T with f(x) { println(x.0 + 1) }
 
 fn init {

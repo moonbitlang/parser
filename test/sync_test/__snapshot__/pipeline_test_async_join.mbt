@@ -5,7 +5,7 @@ let state : Ref[Int?] = { val: None }
 
 suberror FailAsExpected derive(Show)
 
-async fn f() -> Unit raise {
+fn f() -> Unit raise {
   match state.val {
     Some(1 | 2) => ()
     _ => raise FailAsExpected
@@ -18,7 +18,7 @@ fn init {
   })
 }
 
-async fn join_with_non_unit_type(opt : Int??) -> Unit noraise {
+fn join_with_non_unit_type(opt : Int??) -> Unit noraise {
   let x = {
     match opt {
       Some((None | Some(42)) as x) => x

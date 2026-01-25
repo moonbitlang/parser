@@ -147,107 +147,118 @@
   },
   {
     "token": [
+      "UIDENT",
+      "Map"
+    ],
+    "loc": "3:19-3:22"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "3:22-3:24"
+  },
+  {
+    "token": [
       "LIDENT",
       "find"
     ],
-    "loc": "3:19-3:23"
+    "loc": "3:24-3:28"
   },
   {
     "token": "LPAREN",
-    "loc": "3:23-3:24"
+    "loc": "3:28-3:29"
   },
   {
     "token": [
       "LIDENT",
       "self"
     ],
-    "loc": "3:24-3:28"
+    "loc": "3:29-3:33"
   },
   {
     "token": "COLON",
-    "loc": "3:28-3:29"
+    "loc": "3:33-3:34"
   },
   {
     "token": [
       "UIDENT",
       "Map"
     ],
-    "loc": "3:30-3:33"
+    "loc": "3:35-3:38"
   },
   {
     "token": "LBRACKET",
-    "loc": "3:33-3:34"
+    "loc": "3:38-3:39"
   },
   {
     "token": [
       "UIDENT",
       "K"
     ],
-    "loc": "3:34-3:35"
+    "loc": "3:39-3:40"
   },
   {
     "token": "COMMA",
-    "loc": "3:35-3:36"
+    "loc": "3:40-3:41"
   },
   {
     "token": [
       "UIDENT",
       "V"
     ],
-    "loc": "3:37-3:38"
+    "loc": "3:42-3:43"
   },
   {
     "token": "RBRACKET",
-    "loc": "3:38-3:39"
+    "loc": "3:43-3:44"
   },
   {
     "token": "COMMA",
-    "loc": "3:39-3:40"
+    "loc": "3:44-3:45"
   },
   {
     "token": [
       "LIDENT",
       "key"
     ],
-    "loc": "3:41-3:44"
+    "loc": "3:46-3:49"
   },
   {
     "token": "COLON",
-    "loc": "3:44-3:45"
+    "loc": "3:49-3:50"
   },
   {
     "token": [
       "UIDENT",
       "K"
     ],
-    "loc": "3:46-3:47"
+    "loc": "3:51-3:52"
   },
   {
     "token": "RPAREN",
-    "loc": "3:47-3:48"
+    "loc": "3:52-3:53"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "3:49-3:51"
+    "loc": "3:54-3:56"
   },
   {
     "token": [
       "UIDENT",
       "V"
     ],
-    "loc": "3:52-3:53"
+    "loc": "3:57-3:58"
   },
   {
     "token": "QUESTION",
-    "loc": "3:53-3:54"
+    "loc": "3:58-3:59"
   },
   {
     "token": "LBRACE",
-    "loc": "3:55-3:56"
+    "loc": "3:60-3:61"
   },
   {
     "token": "NEWLINE",
-    "loc": "3:56-3:57"
+    "loc": "3:61-3:62"
   },
   {
     "token": "LET",

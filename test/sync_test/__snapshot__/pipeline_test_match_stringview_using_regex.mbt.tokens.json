@@ -847,23 +847,34 @@
     "loc": "27:18-27:25"
   },
   {
+    "token": "COLONCOLON",
+    "loc": "27:25-27:27"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Failure"
+    ],
+    "loc": "27:27-27:34"
+  },
+  {
     "token": "LPAREN",
-    "loc": "27:25-27:26"
+    "loc": "27:34-27:35"
   },
   {
     "token": [
       "STRING",
       "No match"
     ],
-    "loc": "27:26-27:36"
+    "loc": "27:35-27:45"
   },
   {
     "token": "RPAREN",
-    "loc": "27:36-27:37"
+    "loc": "27:45-27:46"
   },
   {
     "token": "NEWLINE",
-    "loc": "27:37-27:38"
+    "loc": "27:46-27:47"
   },
   {
     "token": "RBRACE",

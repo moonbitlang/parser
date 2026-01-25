@@ -1,4 +1,4 @@
-//!build: -alert -deprecated
+//!build: -w -20
 
 ///|
 #label_migration(a, allow_positional=true)

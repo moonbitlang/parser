@@ -8,7 +8,7 @@ fn main {
   //
   println("----- bytes ------")
   b"abcd" |> println // utf8("abcd") = [0x61, 0x62, 0x63, 0x64]
-  b"测" |> println   
+  b"测" |> println
   b"\xFF" |> println
   b"\o377" |> println
   //
@@ -34,5 +34,5 @@ fn main {
   println("--------test special escape sequence--------")
   ("\n\r\t\\\"" : Bytes) |> println
   b"\n\r\t\\\"" |> println
-  ("\n\r\t\\\"" : String).to_bytes() |> println
+  @encoding/utf16.encode("\n\r\t\\\"") |> println
 }

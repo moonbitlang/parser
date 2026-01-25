@@ -7,7 +7,9 @@ enum E {
 } derive(Show)
 
 ///|
-suberror X Int derive(Show)
+suberror X {
+  X(Int)
+} derive(Show)
 
 ///|
 fn f(i : Int) -> E raise X {

@@ -4,7 +4,9 @@ fn f(x : &ToJson) -> Unit {
 }
 
 ///|
-suberror E Int
+suberror E {
+  E(Int)
+}
 
 ///|
 fn main {

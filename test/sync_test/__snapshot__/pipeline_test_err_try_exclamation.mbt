@@ -1,5 +1,7 @@
 ///|
-suberror E Int
+suberror E {
+  E(Int)
+}
 
 ///|
 fn f(x : Int) -> Int raise E {

@@ -1,6 +1,16 @@
 //!build: -w -27
 
 ///|
+fn to_be_bytes(n : UInt) -> Bytes {
+  [
+    (n >> 24).to_byte(),
+    (n >> 16).to_byte(),
+    (n >> 8).to_byte(),
+    n.to_byte(),
+  ]
+}
+
+///|
 const B : Byte = 0x10
 
 ///|
@@ -15,7 +25,7 @@ fn f(bs : Bytes) -> Unit {
     [B | C, u1(a), u7(b), .. Bs, u32(c), .. Bs, 0xa0..=0xb0, .. rest] => {
       println(a)
       println(b)
-      println(c.to_be_bytes())
+      println(to_be_bytes(c))
       println(rest)
     }
     _ => println("other")
@@ -26,8 +36,8 @@ fn f(bs : Bytes) -> Unit {
 fn g(bs : Bytes) -> Unit {
   match bs {
     [.. "hello", .. b"world", u16(c), u32(d), ..] => {
-      println(c.to_be_bytes())
-      println(d.to_be_bytes())
+      println(to_be_bytes(c))
+      println(to_be_bytes(d))
     }
     _ => println("other")
   }

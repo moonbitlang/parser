@@ -1,3 +1,5 @@
+//!build: -w -67
+
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
 
 async fn tuple() -> (Int, String) noraise {

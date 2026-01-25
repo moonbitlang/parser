@@ -1,5 +1,7 @@
 suberror ConstantError
-suberror PayloadError Int
+suberror PayloadError {
+  PayloadError(Int)
+}
 
 fn f1() -> Unit raise ConstantError {
   raise ConstantError

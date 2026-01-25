@@ -7,9 +7,9 @@ fn init {
 }
 
 fn init {
-  let v = [Bytes::of([b'\x41', b'\x00']), Bytes::of([b'\x42', b'\x00'])]
-  v.push(Bytes::of([b'\x43', b'\x00']))
-  v.push(Bytes::of([b'\x44', b'\x00']))
+  let v = [Bytes::from_array([b'\x41', b'\x00']), Bytes::from_array([b'\x42', b'\x00'])]
+  v.push(Bytes::from_array([b'\x43', b'\x00']))
+  v.push(Bytes::from_array([b'\x44', b'\x00']))
   println(v)
   println(v[0][0])
   println(v[3][0])

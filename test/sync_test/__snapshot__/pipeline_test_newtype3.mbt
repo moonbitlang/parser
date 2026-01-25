@@ -7,6 +7,6 @@ fn[X, Y] apply(f: (X) -> Y, x: X) -> Y {
 }
 
 fn init {
-  let a = apply(T::T, Option::Some(1))
+  let a = apply(a => T::T(a), Option::Some(1))
   println(a)
 }

@@ -1,8 +1,7 @@
+#alias(A)
 trait I {
   f(Self) -> Unit = _
 }
-
-traitalias I as A
 
 impl A with f(self) {
   println("I::f default impl")

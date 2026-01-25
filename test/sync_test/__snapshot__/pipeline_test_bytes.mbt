@@ -1,4 +1,14 @@
 ///|
+fn to_be_bytes(n : Int) -> Bytes {
+  [
+    (n >> 24).to_byte(),
+    (n >> 16).to_byte(),
+    (n >> 8).to_byte(),
+    n.to_byte(),
+  ]
+}
+
+///|
 fn test_get_item1(x : Bytes) -> Unit {
   println(x[0])
   println(x[1])
@@ -76,7 +86,7 @@ fn test_make3(b1 : Byte, b2 : Byte, b3 : Byte) -> Unit {
 fn test_array_of_bytes() -> Unit {
   let x = []
   for i in 0..<10 {
-    x.push(i.to_be_bytes())
+    x.push(to_be_bytes(i))
   }
   println(x)
   for i in 0..<5 {

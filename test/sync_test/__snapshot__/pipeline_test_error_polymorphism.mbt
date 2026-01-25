@@ -1,4 +1,6 @@
-suberror MyErr Int derive(Show)
+suberror MyErr {
+  MyErr(Int)
+} derive(Show)
 
 fn[X] each(arr : Array[X], f : (X) -> Unit raise?) -> Unit raise? {
   for x in arr {

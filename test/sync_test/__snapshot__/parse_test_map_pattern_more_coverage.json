@@ -1,0 +1,442 @@
+[
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
+      "fun_decl": {
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "main"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
+        }
+      },
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::Match",
+            "loc": null,
+            "children": {
+              "expr": {
+                "kind": "Expr::Map",
+                "loc": null,
+                "children": {
+                  "elems": {
+                    "kind": "Expr::Map::ElemList",
+                    "loc": null,
+                    "children": [
+                      {
+                        "kind": "MapExprElem",
+                        "loc": null,
+                        "children": {
+                          "key": {
+                            "kind": "Constant::Bool",
+                            "loc": null,
+                            "children": {
+                              "value": true
+                            }
+                          },
+                          "expr": {
+                            "kind": "Expr::Constant",
+                            "loc": null,
+                            "children": {
+                              "constant": {
+                                "kind": "Constant::Int",
+                                "loc": null,
+                                "children": {
+                                  "value": "0"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "kind": "MapExprElem",
+                        "loc": null,
+                        "children": {
+                          "key": {
+                            "kind": "Constant::Int",
+                            "loc": null,
+                            "children": {
+                              "value": "0"
+                            }
+                          },
+                          "expr": {
+                            "kind": "Expr::Constant",
+                            "loc": null,
+                            "children": {
+                              "constant": {
+                                "kind": "Constant::Int",
+                                "loc": null,
+                                "children": {
+                                  "value": "0"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "kind": "MapExprElem",
+                        "loc": null,
+                        "children": {
+                          "key": {
+                            "kind": "Constant::Int",
+                            "loc": null,
+                            "children": {
+                              "value": "2"
+                            }
+                          },
+                          "expr": {
+                            "kind": "Expr::Constant",
+                            "loc": null,
+                            "children": {
+                              "constant": {
+                                "kind": "Constant::Int",
+                                "loc": null,
+                                "children": {
+                                  "value": "0"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "cases": {
+                "kind": "Expr::Match::CaseList",
+                "loc": null,
+                "children": [
+                  {
+                    "kind": "Case",
+                    "loc": null,
+                    "children": {
+                      "pattern": {
+                        "kind": "Pattern::Map",
+                        "loc": null,
+                        "children": {
+                          "elems": {
+                            "kind": "Pattern::Map::ElemList",
+                            "loc": null,
+                            "children": [
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::Bool",
+                                    "loc": null,
+                                    "children": {
+                                      "value": true
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": false
+                                }
+                              },
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::Bool",
+                                    "loc": null,
+                                    "children": {
+                                      "value": false
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": false
+                                }
+                              },
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::Int",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "0"
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": false
+                                }
+                              },
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::Char",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "a"
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": false
+                                }
+                              },
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::String",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "a"
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": false
+                                }
+                              },
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::Bytes",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "a"
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": false
+                                }
+                              },
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::Float",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "3.14"
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": false
+                                }
+                              },
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::Double",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "1.0"
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": false
+                                }
+                              },
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::Int",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "-1"
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": false
+                                }
+                              },
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::Float",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "-3.14"
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": false
+                                }
+                              },
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::Double",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "-1.0"
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": false
+                                }
+                              },
+                              {
+                                "kind": "MapPatElem",
+                                "loc": null,
+                                "children": {
+                                  "key": {
+                                    "kind": "Constant::Int",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "2"
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "match_absent": true
+                                }
+                              }
+                            ]
+                          },
+                          "is_closed": true
+                        }
+                      },
+                      "guard": null,
+                      "body": {
+                        "kind": "Expr::Hole",
+                        "loc": null,
+                        "children": {
+                          "kind": {
+                            "kind": "Hole::Todo",
+                            "loc": null,
+                            "children": {}
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "kind": "Case",
+                    "loc": null,
+                    "children": {
+                      "pattern": {
+                        "kind": "Pattern::Any",
+                        "loc": null,
+                        "children": {}
+                      },
+                      "guard": null,
+                      "body": {
+                        "kind": "Expr::Hole",
+                        "loc": null,
+                        "children": {
+                          "kind": {
+                            "kind": "Hole::Todo",
+                            "loc": null,
+                            "children": {}
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

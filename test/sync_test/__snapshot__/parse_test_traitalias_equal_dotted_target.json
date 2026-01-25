@@ -1,0 +1,53 @@
+[
+  {
+    "kind": "Impl::TopBatchTraitAlias",
+    "loc": null,
+    "children": {
+      "pkg": {
+        "kind": "Label",
+        "loc": null,
+        "children": {
+          "name": "pkg"
+        }
+      },
+      "targets": {
+        "kind": "Impl::TopBatchTraitAlias::TargetList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "AliasTarget",
+            "loc": null,
+            "children": {
+              "binder": {
+                "kind": "Binder",
+                "loc": null,
+                "children": {
+                  "name": "I"
+                }
+              },
+              "target": {
+                "kind": "Label",
+                "loc": null,
+                "children": {
+                  "name": "Show"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "attrs": {
+        "kind": "Impl::TopBatchTraitAlias::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "is_list": false,
+      "doc": ""
+    }
+  }
+]

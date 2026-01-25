@@ -1,16 +1,16 @@
 ///|
 #intrinsic ("%string.codepoint_at")
 fn codepoint_at(s : String, i : Int) -> Int {
-  let code = s[i]
+  let code = s.code_unit_at(i)
   if code >= 0xD800 && code <= 0xDBFF {
-    let next = s[i + 1]
+    let next = s.code_unit_at(i + 1)
     if next >= 0xDC00 && next <= 0xDFFF {
-      return ((code - 0xD800) << 10) + (next - 0xDC00) + 0x10000
+      return ((code - 0xD800) << 10).to_int() + (next - 0xDC00).to_int() + 0x10000
     } else {
       abort("invalid string")
     }
   } else {
-    code
+    code.to_int()
   }
 }
 

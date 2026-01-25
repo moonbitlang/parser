@@ -1,553 +1,908 @@
-{
-  "type": "Program",
-  "body": [
-    {
-      "type": "Impl::TopFuncDef",
+[
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
       "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "init",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": null,
-        "decl_params": null,
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::Let",
-          "pattern": {
-            "type": "Pattern::Var",
-            "0": {
-              "type": "Binder",
-              "name": "s",
-              "loc": null
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "init"
             }
           },
-          "expr": {
-            "type": "Expr::Interp",
-            "elems": [
-              {
-                "type": "InterpElem::Literal",
-                "repr": "hello ",
-                "loc": null
-              },
-              {
-                "type": "InterpElem::Source",
-                "source": "untermin",
-                "loc": null
-              }
-            ],
-            "loc": null
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
           },
-          "body": {
-            "type": "Expr::Let",
-            "pattern": {
-              "type": "Pattern::Var",
-              "0": {
-                "type": "Binder",
-                "name": "h",
-                "loc": null
-              }
-            },
-            "expr": {
-              "type": "Expr::Constant",
-              "c": {
-                "type": "Constant::String",
-                "0": "hello"
-              },
-              "loc": null
-            },
-            "body": {
-              "type": "Expr::Unit",
-              "loc": null,
-              "faked": true
-            },
-            "loc": null
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
           },
-          "loc": null
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
         }
       },
-      "loc": null
-    },
-    {
-      "type": "Impl::TopFuncDef",
-      "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "init",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": null,
-        "decl_params": null,
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
       "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::Let",
-          "pattern": {
-            "type": "Pattern::Var",
-            "0": {
-              "type": "Binder",
-              "name": "a",
-              "loc": null
-            }
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
           },
           "expr": {
-            "type": "Expr::Constant",
-            "c": {
-              "type": "Constant::Int",
-              "0": "3"
-            },
-            "loc": null
-          },
-          "body": {
-            "type": "Expr::Let",
-            "pattern": {
-              "type": "Pattern::Var",
-              "0": {
-                "type": "Binder",
-                "name": "s",
-                "loc": null
-              }
-            },
-            "expr": {
-              "type": "Expr::Interp",
-              "elems": [
-                {
-                  "type": "InterpElem::Literal",
-                  "repr": "hello ",
-                  "loc": null
-                },
-                {
-                  "type": "InterpElem::Source",
-                  "source": "a",
-                  "loc": null
+            "kind": "Expr::Let",
+            "loc": null,
+            "children": {
+              "pattern": {
+                "kind": "Pattern::Var",
+                "loc": null,
+                "children": {
+                  "value": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "s"
+                    }
+                  }
                 }
-              ],
-              "loc": null
-            },
-            "body": {
-              "type": "Expr::Unit",
-              "loc": null,
-              "faked": true
-            },
-            "loc": null
-          },
-          "loc": null
+              },
+              "expr": {
+                "kind": "Expr::Interp",
+                "loc": null,
+                "children": {
+                  "elems": {
+                    "kind": "Expr::Interp::ElemList",
+                    "loc": null,
+                    "children": [
+                      {
+                        "kind": "InterpElem::Literal",
+                        "loc": null,
+                        "children": {
+                          "repr": "hello "
+                        }
+                      },
+                      {
+                        "kind": "InterpElem::Source",
+                        "loc": null,
+                        "children": {
+                          "source": "untermin"
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "body": {
+                "kind": "Expr::Let",
+                "loc": null,
+                "children": {
+                  "pattern": {
+                    "kind": "Pattern::Var",
+                    "loc": null,
+                    "children": {
+                      "value": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "h"
+                        }
+                      }
+                    }
+                  },
+                  "expr": {
+                    "kind": "Expr::Constant",
+                    "loc": null,
+                    "children": {
+                      "constant": {
+                        "kind": "Constant::String",
+                        "loc": null,
+                        "children": {
+                          "value": "hello"
+                        }
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "Expr::Unit",
+                    "loc": null,
+                    "children": {
+                      "faked": true
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-      },
-      "loc": null
-    },
-    {
-      "type": "Impl::TopFuncDef",
+      }
+    }
+  },
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
       "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": {
-          "type": "Binder",
-          "name": "init",
-          "loc": null
-        },
-        "has_error": null,
-        "is_async": null,
-        "decl_params": null,
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": null,
-        "error_type": {
-          "type": "ErrorType::NoErrorType"
-        },
-        "vis": {
-          "type": "Visibility::Default"
-        },
-        "attrs": [],
-        "doc": ""
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
-        "expr": {
-          "type": "Expr::Let",
-          "pattern": {
-            "type": "Pattern::Var",
-            "0": {
-              "type": "Binder",
-              "name": "s",
-              "loc": null
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "init"
             }
           },
-          "expr": {
-            "type": "Expr::Constant",
-            "c": {
-              "type": "Constant::String",
-              "0": "hello"
-            },
-            "loc": null
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
           },
-          "body": {
-            "type": "Expr::Let",
-            "pattern": {
-              "type": "Pattern::Var",
-              "0": {
-                "type": "Binder",
-                "name": "h",
-                "loc": null
-              }
-            },
-            "expr": {
-              "type": "Expr::Constant",
-              "c": {
-                "type": "Constant::String",
-                "0": "x"
-              },
-              "loc": null
-            },
-            "body": {
-              "type": "Expr::Unit",
-              "loc": null,
-              "faked": true
-            },
-            "loc": null
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
           },
-          "loc": null
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
         }
       },
-      "loc": null
-    },
-    {
-      "type": "Impl::TopLetDef",
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::Let",
+            "loc": null,
+            "children": {
+              "pattern": {
+                "kind": "Pattern::Var",
+                "loc": null,
+                "children": {
+                  "value": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "a"
+                    }
+                  }
+                }
+              },
+              "expr": {
+                "kind": "Expr::Constant",
+                "loc": null,
+                "children": {
+                  "constant": {
+                    "kind": "Constant::Int",
+                    "loc": null,
+                    "children": {
+                      "value": "3"
+                    }
+                  }
+                }
+              },
+              "body": {
+                "kind": "Expr::Let",
+                "loc": null,
+                "children": {
+                  "pattern": {
+                    "kind": "Pattern::Var",
+                    "loc": null,
+                    "children": {
+                      "value": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "s"
+                        }
+                      }
+                    }
+                  },
+                  "expr": {
+                    "kind": "Expr::Interp",
+                    "loc": null,
+                    "children": {
+                      "elems": {
+                        "kind": "Expr::Interp::ElemList",
+                        "loc": null,
+                        "children": [
+                          {
+                            "kind": "InterpElem::Literal",
+                            "loc": null,
+                            "children": {
+                              "repr": "hello "
+                            }
+                          },
+                          {
+                            "kind": "InterpElem::Source",
+                            "loc": null,
+                            "children": {
+                              "source": "a"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "Expr::Unit",
+                    "loc": null,
+                    "children": {
+                      "faked": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
+      "fun_decl": {
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "init"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
+        }
+      },
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::Let",
+            "loc": null,
+            "children": {
+              "pattern": {
+                "kind": "Pattern::Var",
+                "loc": null,
+                "children": {
+                  "value": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "s"
+                    }
+                  }
+                }
+              },
+              "expr": {
+                "kind": "Expr::Constant",
+                "loc": null,
+                "children": {
+                  "constant": {
+                    "kind": "Constant::String",
+                    "loc": null,
+                    "children": {
+                      "value": "hello"
+                    }
+                  }
+                }
+              },
+              "body": {
+                "kind": "Expr::Let",
+                "loc": null,
+                "children": {
+                  "pattern": {
+                    "kind": "Pattern::Var",
+                    "loc": null,
+                    "children": {
+                      "value": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "h"
+                        }
+                      }
+                    }
+                  },
+                  "expr": {
+                    "kind": "Expr::Constant",
+                    "loc": null,
+                    "children": {
+                      "constant": {
+                        "kind": "Constant::String",
+                        "loc": null,
+                        "children": {
+                          "value": "x"
+                        }
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "Expr::Unit",
+                    "loc": null,
+                    "children": {
+                      "faked": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
       "binder": {
-        "type": "Binder",
-        "name": "s1",
-        "loc": null
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "s1"
+        }
       },
       "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": {
-            "type": "LongIdent::Ident",
-            "0": "String"
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": {
+                  "value": "String"
+                }
+              }
+            }
           },
-          "loc": null
-        },
-        "tys": [],
-        "loc": null
-      },
-      "expr": {
-        "type": "Expr::Interp",
-        "elems": [
-          {
-            "type": "InterpElem::Literal",
-            "repr": "abcd",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Literal",
-            "repr": "1234",
-            "loc": null
+          "tys": {
+            "kind": "Type::Name::TypeList",
+            "loc": null,
+            "children": []
           }
-        ],
-        "loc": null
-      },
-      "vis": {
-        "type": "Visibility::Default"
-      },
-      "is_constant": false,
-      "loc": null,
-      "attrs": [],
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopLetDef",
-      "binder": {
-        "type": "Binder",
-        "name": "s2",
-        "loc": null
-      },
-      "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": {
-            "type": "LongIdent::Ident",
-            "0": "String"
-          },
-          "loc": null
-        },
-        "tys": [],
-        "loc": null
+        }
       },
       "expr": {
-        "type": "Expr::Interp",
-        "elems": [
-          {
-            "type": "InterpElem::Literal",
-            "repr": "abcd",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Literal",
-            "repr": "1234",
-            "loc": null
+        "kind": "Expr::Interp",
+        "loc": null,
+        "children": {
+          "elems": {
+            "kind": "Expr::Interp::ElemList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": "abcd"
+                }
+              },
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": "1234"
+                }
+              }
+            ]
           }
-        ],
-        "loc": null
+        }
       },
       "vis": {
-        "type": "Visibility::Default"
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
       },
       "is_constant": false,
-      "loc": null,
-      "attrs": [],
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopLetDef",
-      "binder": {
-        "type": "Binder",
-        "name": "s3",
-        "loc": null
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
       },
-      "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": {
-            "type": "LongIdent::Ident",
-            "0": "String"
-          },
-          "loc": null
-        },
-        "tys": [],
-        "loc": null
-      },
-      "expr": {
-        "type": "Expr::Constant",
-        "c": {
-          "type": "Constant::String",
-          "0": "abcd"
-        },
-        "loc": null
-      },
-      "vis": {
-        "type": "Visibility::Default"
-      },
-      "is_constant": false,
-      "loc": null,
-      "attrs": [],
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopLetDef",
-      "binder": {
-        "type": "Binder",
-        "name": "s4",
-        "loc": null
-      },
-      "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": {
-            "type": "LongIdent::Ident",
-            "0": "String"
-          },
-          "loc": null
-        },
-        "tys": [],
-        "loc": null
-      },
-      "expr": {
-        "type": "Expr::Interp",
-        "elems": [
-          {
-            "type": "InterpElem::Literal",
-            "repr": "hello ",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Source",
-            "source": "5",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Literal",
-            "repr": ", ",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Source",
-            "source": "1 + (2 * a)",
-            "loc": null
-          }
-        ],
-        "loc": null
-      },
-      "vis": {
-        "type": "Visibility::Default"
-      },
-      "is_constant": false,
-      "loc": null,
-      "attrs": [],
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopLetDef",
-      "binder": {
-        "type": "Binder",
-        "name": "s5",
-        "loc": null
-      },
-      "ty": null,
-      "expr": {
-        "type": "Expr::Interp",
-        "elems": [
-          {
-            "type": "InterpElem::Literal",
-            "repr": "gsghh ",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Source",
-            "source": "3 + 2 #|mulitline string",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Literal",
-            "repr": "1234",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Source",
-            "source": "s1",
-            "loc": null
-          }
-        ],
-        "loc": null
-      },
-      "vis": {
-        "type": "Visibility::Default"
-      },
-      "is_constant": false,
-      "loc": null,
-      "attrs": [],
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopLetDef",
-      "binder": {
-        "type": "Binder",
-        "name": "s6",
-        "loc": null
-      },
-      "ty": null,
-      "expr": {
-        "type": "Expr::Interp",
-        "elems": [
-          {
-            "type": "InterpElem::Literal",
-            "repr": "gsghh ",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Source",
-            "source": "3 + 2 //comment",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Literal",
-            "repr": "1234",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Source",
-            "source": "s1",
-            "loc": null
-          }
-        ],
-        "loc": null
-      },
-      "vis": {
-        "type": "Visibility::Default"
-      },
-      "is_constant": false,
-      "loc": null,
-      "attrs": [],
-      "doc": ""
-    },
-    {
-      "type": "Impl::TopLetDef",
-      "binder": {
-        "type": "Binder",
-        "name": "s7",
-        "loc": null
-      },
-      "ty": null,
-      "expr": {
-        "type": "Expr::Interp",
-        "elems": [
-          {
-            "type": "InterpElem::Literal",
-            "repr": "gsghh ",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Source",
-            "source": "3 ggosgho",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Literal",
-            "repr": " gggxxxgg",
-            "loc": null
-          },
-          {
-            "type": "InterpElem::Source",
-            "source": "s1",
-            "loc": null
-          }
-        ],
-        "loc": null
-      },
-      "vis": {
-        "type": "Visibility::Default"
-      },
-      "is_constant": false,
-      "loc": null,
-      "attrs": [],
       "doc": ""
     }
-  ]
-}
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "s2"
+        }
+      },
+      "ty": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": {
+                  "value": "String"
+                }
+              }
+            }
+          },
+          "tys": {
+            "kind": "Type::Name::TypeList",
+            "loc": null,
+            "children": []
+          }
+        }
+      },
+      "expr": {
+        "kind": "Expr::Interp",
+        "loc": null,
+        "children": {
+          "elems": {
+            "kind": "Expr::Interp::ElemList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": "abcd"
+                }
+              },
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": "1234"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "is_constant": false,
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "s3"
+        }
+      },
+      "ty": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": {
+                  "value": "String"
+                }
+              }
+            }
+          },
+          "tys": {
+            "kind": "Type::Name::TypeList",
+            "loc": null,
+            "children": []
+          }
+        }
+      },
+      "expr": {
+        "kind": "Expr::Constant",
+        "loc": null,
+        "children": {
+          "constant": {
+            "kind": "Constant::String",
+            "loc": null,
+            "children": {
+              "value": "abcd"
+            }
+          }
+        }
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "is_constant": false,
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "s4"
+        }
+      },
+      "ty": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": {
+                  "value": "String"
+                }
+              }
+            }
+          },
+          "tys": {
+            "kind": "Type::Name::TypeList",
+            "loc": null,
+            "children": []
+          }
+        }
+      },
+      "expr": {
+        "kind": "Expr::Interp",
+        "loc": null,
+        "children": {
+          "elems": {
+            "kind": "Expr::Interp::ElemList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": "hello "
+                }
+              },
+              {
+                "kind": "InterpElem::Source",
+                "loc": null,
+                "children": {
+                  "source": "5"
+                }
+              },
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": ", "
+                }
+              },
+              {
+                "kind": "InterpElem::Source",
+                "loc": null,
+                "children": {
+                  "source": "1 + (2 * a)"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "is_constant": false,
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "s5"
+        }
+      },
+      "ty": null,
+      "expr": {
+        "kind": "Expr::Interp",
+        "loc": null,
+        "children": {
+          "elems": {
+            "kind": "Expr::Interp::ElemList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": "gsghh "
+                }
+              },
+              {
+                "kind": "InterpElem::Source",
+                "loc": null,
+                "children": {
+                  "source": "3 + 2 #|mulitline string"
+                }
+              },
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": "1234"
+                }
+              },
+              {
+                "kind": "InterpElem::Source",
+                "loc": null,
+                "children": {
+                  "source": "s1"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "is_constant": false,
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "s6"
+        }
+      },
+      "ty": null,
+      "expr": {
+        "kind": "Expr::Interp",
+        "loc": null,
+        "children": {
+          "elems": {
+            "kind": "Expr::Interp::ElemList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": "gsghh "
+                }
+              },
+              {
+                "kind": "InterpElem::Source",
+                "loc": null,
+                "children": {
+                  "source": "3 + 2 //comment"
+                }
+              },
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": "1234"
+                }
+              },
+              {
+                "kind": "InterpElem::Source",
+                "loc": null,
+                "children": {
+                  "source": "s1"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "is_constant": false,
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "s7"
+        }
+      },
+      "ty": null,
+      "expr": {
+        "kind": "Expr::Interp",
+        "loc": null,
+        "children": {
+          "elems": {
+            "kind": "Expr::Interp::ElemList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": "gsghh "
+                }
+              },
+              {
+                "kind": "InterpElem::Source",
+                "loc": null,
+                "children": {
+                  "source": "3 ggosgho"
+                }
+              },
+              {
+                "kind": "InterpElem::Literal",
+                "loc": null,
+                "children": {
+                  "repr": " gggxxxgg"
+                }
+              },
+              {
+                "kind": "InterpElem::Source",
+                "loc": null,
+                "children": {
+                  "source": "s1"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "is_constant": false,
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  }
+]

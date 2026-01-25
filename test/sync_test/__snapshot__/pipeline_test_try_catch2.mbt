@@ -1,4 +1,6 @@
-suberror IntError Int
+suberror IntError {
+  IntError(Int)
+}
 
 fn find_index(x : Array[Int], y : Int) -> Int? {
   try {

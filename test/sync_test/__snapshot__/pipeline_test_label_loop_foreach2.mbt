@@ -1,21 +1,23 @@
-suberror Err Char
+suberror Err {
+  Err(Char)
+}
 
 ///|
 fn[A : Show, B : Show] f(
   xs : Array[A],
-  ys : Iter[Int],
+  ys : Array[Int],
   zs : Array[B],
-  ws : Iter[Char]
+  ws : Array[Char]
 ) -> Unit raise Err {
   let buf = @moonbitlang/core/buffer.new()
   let mut first = true
   l1~: for i = 0; i < xs.length(); i = i + 1 {
     buf.write_string(xs[i].to_string())
-    l2~: for y in ys {
+    l2~: for y in ys.iter() {
       buf.write_string(y.to_string())
       l3~: for j = 0; j < zs.length(); j = j + 1 {
         buf.write_string(zs[j].to_string())
-        l4~:for w in ws {
+        l4~:for w in ws.iter() {
           match w {
             '!' => { continue l4~ }
             '@' => { break l1~ }
@@ -58,15 +60,15 @@ fn[A : Show, B : Show] f(
 
 fn main {
   try {
-    f(["x", "y"], [1, 2].iter(), ['a', 'b'], ['!'].iter())
-    f(["x", "y"], [1, 2].iter(), ['a', 'b'], ['@'].iter())
-    f(["x", "y"], [1, 2].iter(), ['a', 'b'], ['#'].iter())
-    f(["x", "y"], [1, 2].iter(), ['a', 'b'], ['$'].iter())
-    f(["x", "y", "z"], [1, 2].iter(), ['a', 'b'], ['%'].iter())
-    f(["x", "y"], [1, 2].iter(), ['a', 'b'], ['^'].iter())
-    f(["x", "y"], [1, 2].iter(), ['a', 'b', 'c'], ['&'].iter())
-    f(["x"], [1].iter(), ['a'], ['*', '1', '2'].iter())
-    f(["x"], [1].iter(), ['a'], ['('].iter())
+    f(["x", "y"], [1, 2], ['a', 'b'], ['!'])
+    f(["x", "y"], [1, 2], ['a', 'b'], ['@'])
+    f(["x", "y"], [1, 2], ['a', 'b'], ['#'])
+    f(["x", "y"], [1, 2], ['a', 'b'], ['$'])
+    f(["x", "y", "z"], [1, 2], ['a', 'b'], ['%'])
+    f(["x", "y"], [1, 2], ['a', 'b'], ['^'])
+    f(["x", "y"], [1, 2], ['a', 'b', 'c'], ['&'])
+    f(["x"], [1], ['a'], ['*', '1', '2'])
+    f(["x"], [1], ['a'], ['('])
   } catch {
     Err(c) => { 
       println("unknown character: ")

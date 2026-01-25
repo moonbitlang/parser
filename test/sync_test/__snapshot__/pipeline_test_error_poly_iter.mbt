@@ -178,9 +178,9 @@ fn bytes_to_utf16(b : Bytes) -> Array[Char] raise {
 }
 
 fn init {
-  println(try? bytes_to_utf16("abc".to_bytes()))
-  println(try? bytes_to_utf16("中文".to_bytes()))
-  println(try? bytes_to_utf16("🤣".to_bytes()))
+  println(try? bytes_to_utf16(@encoding/utf16.encode("abc")))
+  println(try? bytes_to_utf16(@encoding/utf16.encode("中文")))
+  println(try? bytes_to_utf16(@encoding/utf16.encode("🤣")))
   println(try? bytes_to_utf16([ 0x00, 0xD8, 0x00, 0x61 ]))
   println(try? bytes_to_utf16([ 0x00, 0xDC ]))
 }
@@ -207,6 +207,6 @@ fn init {
     |> decode_utf16
     take(it, n) |> collect
   }
-  println(try? run([ "一二", "三四", "五六", "七八", "九十" ].map(_.to_bytes()), 7))
-  println(try? run([ "abcdefghij", "klmnopqrst", "uvwxyz" ].map(_.to_bytes()), 10))
+  println(try? run([ "一二", "三四", "五六", "七八", "九十" ].map(@encoding/utf16.encode(_)), 7))
+  println(try? run([ "abcdefghij", "klmnopqrst", "uvwxyz" ].map(@encoding/utf16.encode(_)), 10))
 }

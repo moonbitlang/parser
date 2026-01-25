@@ -3,4 +3,6 @@ fn init {
   println(v)
 }
 
-suberror IntError Int
+suberror IntError {
+  IntError(Int)
+}

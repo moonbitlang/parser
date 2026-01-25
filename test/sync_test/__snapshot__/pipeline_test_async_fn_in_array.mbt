@@ -1,5 +1,5 @@
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
-fn[T] suspend(cb : ((T) -> Unit) -> Unit) -> T = "%async.suspend"
+async fn[T] suspend(cb : ((T) -> Unit) -> Unit) -> T noraise = "%async.suspend"
 
 async fn async_id(x : Int) -> Int noraise {
   suspend(f => f(x))

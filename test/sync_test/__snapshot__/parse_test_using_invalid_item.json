@@ -1,0 +1,53 @@
+[
+  {
+    "kind": "Impl::TopUsing",
+    "loc": null,
+    "children": {
+      "pkg": {
+        "kind": "Label",
+        "loc": null,
+        "children": {
+          "name": "pkg"
+        }
+      },
+      "names": {
+        "kind": "Impl::TopUsing::NameList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "UsingName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "AliasTarget",
+                "loc": null,
+                "children": {
+                  "binder": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": ""
+                    }
+                  },
+                  "target": null
+                }
+              },
+              "kind": "value"
+            }
+          }
+        ]
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "attrs": {
+        "kind": "Impl::TopUsing::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  }
+]

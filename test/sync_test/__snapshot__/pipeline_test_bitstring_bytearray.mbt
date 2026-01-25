@@ -1,4 +1,14 @@
 ///|
+fn to_be_bytes(n : UInt) -> Bytes {
+  [
+    (n >> 24).to_byte(),
+    (n >> 16).to_byte(),
+    (n >> 8).to_byte(),
+    n.to_byte(),
+  ]
+}
+
+///|
 enum E {
   A(FixedArray[Byte])
   B(ReadOnlyArray[Byte])
@@ -13,37 +23,37 @@ fn f(e : E) -> Unit {
   match e {
     A([u8be(a), .. rest, u16le(b)] as c) => {
       println(a)
-      println(b.to_be_bytes())
+      println(to_be_bytes(b))
       println(rest)
       println(c)
     }
     B([u8be(a), .. rest, u16le(b)] as c) => {
       println(a)
-      println(b.to_be_bytes())
+      println(to_be_bytes(b))
       println(rest)
       println(c)
     }
     C([u8be(a), .. rest, u16le(b)] as c) => {
       println(a)
-      println(b.to_be_bytes())
+      println(to_be_bytes(b))
       println(rest)
       println(c)
     }
     D([u8be(a), .. rest, u16le(b)] as c) => {
       println(a)
-      println(b.to_be_bytes())
+      println(to_be_bytes(b))
       println(rest)
       println(c)
     }
     E([u8be(a), .. rest, u16le(b)] as c) => {
       println(a)
-      println(b.to_be_bytes())
+      println(to_be_bytes(b))
       println(rest)
       println(c)
     }
     F([u8be(a), .. rest, u16le(b)] as c) => {
       println(a)
-      println(b.to_be_bytes())
+      println(to_be_bytes(b))
       println(rest)
       println(c)
     }

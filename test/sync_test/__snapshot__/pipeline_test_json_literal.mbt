@@ -40,11 +40,11 @@ fn init {
 fn f(x : Int, y : String) -> Unit {
   let json1 : Json = "Hello, \{x} \{y}"
   println(json1)
-  let json2 : Json = 
-    #| {
+  let json2 : Json =
+    $| {
     $| "x": \{x},
     $| "y": \{y}
-    #| }
-    #|
+    $| }
+    $|
   println(json2)
 }

@@ -8,7 +8,7 @@ fn init {
 
 // interaction with `!`
 fn init {
-  let buf : MyBuf = @buffer.new()
+  let buf : MyBuf = StringBuilder::new()
   try {
     buf
     ..write_string("a")
@@ -17,12 +17,12 @@ fn init {
     ..expect(content="b")
     println("ok")
   } catch {
-    InspectError(err) => println(err)
+    InspectError::InspectError(err) => println(err)
   }
 }
 
 fn init {
-  let buf : MyBuf = @buffer.new()
+  let buf : MyBuf = StringBuilder::new()
   try {
     buf
     ..write_string("a")
@@ -51,20 +51,20 @@ fn init {
   println((arr1, arr2))
 }
 
-struct MyBuf (@buffer.Buffer)
+struct MyBuf (StringBuilder)
 
 fn MyBuf::write_string(self : MyBuf, s : String) -> Unit {
   self.0.write_string(s)
 }
 
 fn MyBuf::expect(self : MyBuf, content~ : String = "") -> Unit raise {
-  inspect(self.inner(), content~)
+  inspect(self.0, content~)
   self.0.reset()
 }
 
 // non-unit return type
 fn init {
-  let dq = @deque.of([ @ref.new(1), @ref.new(2), @ref.new(3), @ref.new(4) ])
+  let dq = @deque.from_array([ Ref::new(1), Ref::new(2), Ref::new(3), Ref::new(4) ])
   dq..pop_back()..pop_back()..pop_back()
   println(dq.pop_back())
 }

@@ -26,7 +26,7 @@ fn main {
   any_print(D(1))
 }
 
-type D Int 
-fn to_string(self : D) -> String {
+struct D(Int)
+fn D::to_string(self : D) -> String {
   "Dxx"
 }

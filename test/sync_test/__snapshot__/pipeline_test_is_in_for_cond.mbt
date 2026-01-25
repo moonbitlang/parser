@@ -1,7 +1,15 @@
+fn String::local_get(s: String, i: Int) -> Int? {
+  if i >= 0 && i < s.length() {
+    Some(s.code_unit_at(i).to_int())
+  } else {
+    None
+  }
+}
+
 ///|
 fn main {
   let a = "hello"
-  for i = 0; a.get(i) is Some(x); i = i + 1 {
+  for i = 0; a.local_get(i) is Some(x); i = i + 1 {
     println(x)
   }
 }
@@ -17,7 +25,7 @@ fn test_is_in_for_cond_with_array() -> Unit {
 ///|
 fn test_is_in_for_cond_with_empty_string() -> Unit {
   let s = ""
-  for i = 0; s.get(i) is Some(x); i = i + 1 {
+  for i = 0; s.local_get(i) is Some(x); i = i + 1 {
     println(x)
   }
   println("done")
@@ -47,7 +55,7 @@ fn test_is_in_for_cond_nested() -> Unit {
 ///|
 fn test_is_in_for_cond_with_break() -> Unit {
   let s = "hello world"
-  for i = 0; s.get(i) is Some(x); i = i + 1 {
+  for i = 0; s.local_get(i) is Some(x); i = i + 1 {
     if x == ' ' {
       break
     }
@@ -58,7 +66,7 @@ fn test_is_in_for_cond_with_break() -> Unit {
 ///|
 fn test_is_in_for_cond_with_continue() -> Unit {
   let s = "hello"
-  for i = 0; s.get(i) is Some(x); i = i + 1 {
+  for i = 0; s.local_get(i) is Some(x); i = i + 1 {
     if x == 'l' {
       continue
     }
@@ -120,7 +128,7 @@ fn test_is_in_for_cond_with_multiple_bindings() -> Unit {
 fn test_is_in_for_cond_with_accumulator() -> Unit {
   let s = "12345"
   let mut sum = 0
-  for i = 0; s.get(i) is Some(x); i = i + 1 {
+  for i = 0; s.local_get(i) is Some(x); i = i + 1 {
     let digit = x - '0'.to_int()
     sum = sum + digit
   }
@@ -130,7 +138,7 @@ fn test_is_in_for_cond_with_accumulator() -> Unit {
 ///|
 fn test_is_in_for_cond_with_unicode() -> Unit {
   let s = "你好世界"
-  for i = 0; s.get(i) is Some(x); i = i + 1 {
+  for i = 0; s.local_get(i) is Some(x); i = i + 1 {
     println(x)
   }
 }

@@ -37,8 +37,8 @@ fn f3(x : NonRec) -> Unit {
 
 fn f4(x : Rec) -> Unit {
   match x {
-    Rec(None) as r => println(r.0.is_empty())
-    Rec(_) as r => println(r.0.is_empty())
+    Rec(None) as r => println(r.0 is None)
+    Rec(_) as r => println(r.0 is None)
   }
 }
 

@@ -1,4 +1,6 @@
-suberror StringError String derive(Show)
+suberror StringError {
+  StringError(String)
+} derive(Show)
 
 fn f(x: Int) -> Int raise StringError {
   if x < 0 {

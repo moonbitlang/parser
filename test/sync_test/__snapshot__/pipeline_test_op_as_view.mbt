@@ -19,7 +19,7 @@ fn[T] View::length(self: View[T]) -> Int {
   self.len
 }
 
-fn[T] op_get(self: View[T], index: Int) -> T {
+fn[T] View::op_get(self: View[T], index: Int) -> T {
   self.buf[self.start + index]
 }
 
@@ -36,7 +36,7 @@ fn[T] MyFixedArray::length(self: MyFixedArray[T]) -> Int {
   self.0.length()
 }
 
-fn[T] make_view(self: MyFixedArray[T], start: Int, len: Int) -> View[T] {
+fn[T] MyFixedArray::make_view(self: MyFixedArray[T], start: Int, len: Int) -> View[T] {
   self[start:if start + len >= self.length() { self.length() } else { start + len }]
 }
 

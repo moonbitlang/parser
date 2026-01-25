@@ -90,127 +90,135 @@
     "loc": "1:66-1:67"
   },
   {
+    "token": "ASYNC",
+    "loc": "2:1-2:6"
+  },
+  {
     "token": "FN",
-    "loc": "2:1-2:3"
+    "loc": "2:7-2:9"
   },
   {
     "token": "LBRACKET",
-    "loc": "2:3-2:4"
+    "loc": "2:9-2:10"
   },
   {
     "token": [
       "UIDENT",
       "T"
     ],
-    "loc": "2:4-2:5"
+    "loc": "2:10-2:11"
   },
   {
     "token": "RBRACKET",
-    "loc": "2:5-2:6"
+    "loc": "2:11-2:12"
   },
   {
     "token": [
       "LIDENT",
       "suspend"
     ],
-    "loc": "2:7-2:14"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "2:14-2:15"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "cb"
-    ],
-    "loc": "2:15-2:17"
-  },
-  {
-    "token": "COLON",
-    "loc": "2:18-2:19"
+    "loc": "2:13-2:20"
   },
   {
     "token": "LPAREN",
     "loc": "2:20-2:21"
   },
   {
+    "token": [
+      "LIDENT",
+      "cb"
+    ],
+    "loc": "2:21-2:23"
+  },
+  {
+    "token": "COLON",
+    "loc": "2:24-2:25"
+  },
+  {
     "token": "LPAREN",
-    "loc": "2:21-2:22"
+    "loc": "2:26-2:27"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "2:27-2:28"
   },
   {
     "token": [
       "UIDENT",
       "T"
     ],
-    "loc": "2:22-2:23"
+    "loc": "2:28-2:29"
   },
   {
     "token": "RPAREN",
-    "loc": "2:23-2:24"
+    "loc": "2:29-2:30"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "2:25-2:27"
+    "loc": "2:31-2:33"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "2:28-2:32"
+    "loc": "2:34-2:38"
   },
   {
     "token": "RPAREN",
-    "loc": "2:32-2:33"
+    "loc": "2:38-2:39"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "2:34-2:36"
+    "loc": "2:40-2:42"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "2:37-2:41"
+    "loc": "2:43-2:47"
   },
   {
     "token": "RPAREN",
-    "loc": "2:41-2:42"
+    "loc": "2:47-2:48"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "2:43-2:45"
+    "loc": "2:49-2:51"
   },
   {
     "token": [
       "UIDENT",
       "T"
     ],
-    "loc": "2:46-2:47"
+    "loc": "2:52-2:53"
+  },
+  {
+    "token": "NORAISE",
+    "loc": "2:54-2:61"
   },
   {
     "token": "EQUAL",
-    "loc": "2:48-2:49"
+    "loc": "2:62-2:63"
   },
   {
     "token": [
       "STRING",
       "%async.suspend"
     ],
-    "loc": "2:50-2:66"
+    "loc": "2:64-2:80"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "2:66-2:66"
+    "loc": "2:80-2:80"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:66-2:67"
+    "loc": "2:80-2:81"
   },
   {
     "token": "NEWLINE",

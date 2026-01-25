@@ -28,21 +28,21 @@
   {
     "token": [
       "DOT_UIDENT",
-      "T"
+      "Test"
     ],
-    "loc": "1:17-1:18"
+    "loc": "1:17-1:21"
   },
   {
     "token": "RPAREN",
-    "loc": "1:18-1:19"
+    "loc": "1:21-1:22"
   },
   {
     "token": "LBRACE",
-    "loc": "1:20-1:21"
+    "loc": "1:23-1:24"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:21-1:22"
+    "loc": "1:24-1:25"
   },
   {
     "token": "LPAREN",
@@ -69,28 +69,28 @@
   {
     "token": [
       "DOT_UIDENT",
-      "T"
+      "Test"
     ],
-    "loc": "2:14-2:15"
+    "loc": "2:14-2:18"
   },
   {
     "token": "RPAREN",
-    "loc": "2:15-2:16"
+    "loc": "2:18-2:19"
   },
   {
     "token": "PIPE",
-    "loc": "2:17-2:19"
+    "loc": "2:20-2:22"
   },
   {
     "token": [
       "LIDENT",
       "ignore"
     ],
-    "loc": "2:20-2:26"
+    "loc": "2:23-2:29"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:26-2:27"
+    "loc": "2:29-2:30"
   },
   {
     "token": "RBRACE",
@@ -140,21 +140,21 @@
   {
     "token": [
       "DOT_UIDENT",
-      "T"
+      "Test"
     ],
-    "loc": "5:34-5:35"
+    "loc": "5:34-5:38"
   },
   {
     "token": "RPAREN",
-    "loc": "5:35-5:36"
+    "loc": "5:38-5:39"
   },
   {
     "token": "LBRACE",
-    "loc": "5:37-5:38"
+    "loc": "5:40-5:41"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:38-5:39"
+    "loc": "5:41-5:42"
   },
   {
     "token": "LPAREN",
@@ -181,28 +181,28 @@
   {
     "token": [
       "DOT_UIDENT",
-      "T"
+      "Test"
     ],
-    "loc": "6:14-6:15"
+    "loc": "6:14-6:18"
   },
   {
     "token": "RPAREN",
-    "loc": "6:15-6:16"
+    "loc": "6:18-6:19"
   },
   {
     "token": "PIPE",
-    "loc": "6:17-6:19"
+    "loc": "6:20-6:22"
   },
   {
     "token": [
       "LIDENT",
       "ignore"
     ],
-    "loc": "6:20-6:26"
+    "loc": "6:23-6:29"
   },
   {
     "token": "NEWLINE",
-    "loc": "6:26-6:27"
+    "loc": "6:29-6:30"
   },
   {
     "token": "RBRACE",
@@ -259,21 +259,21 @@
   {
     "token": [
       "DOT_UIDENT",
-      "T"
+      "Test"
     ],
-    "loc": "9:41-9:42"
+    "loc": "9:41-9:45"
   },
   {
     "token": "RPAREN",
-    "loc": "9:42-9:43"
+    "loc": "9:45-9:46"
   },
   {
     "token": "LBRACE",
-    "loc": "9:44-9:45"
+    "loc": "9:47-9:48"
   },
   {
     "token": "NEWLINE",
-    "loc": "9:45-9:46"
+    "loc": "9:48-9:49"
   },
   {
     "token": "LPAREN",
@@ -300,28 +300,28 @@
   {
     "token": [
       "DOT_UIDENT",
-      "T"
+      "Test"
     ],
-    "loc": "10:14-10:15"
+    "loc": "10:14-10:18"
   },
   {
     "token": "RPAREN",
-    "loc": "10:15-10:16"
+    "loc": "10:18-10:19"
   },
   {
     "token": "PIPE",
-    "loc": "10:17-10:19"
+    "loc": "10:20-10:22"
   },
   {
     "token": [
       "LIDENT",
       "ignore"
     ],
-    "loc": "10:20-10:26"
+    "loc": "10:23-10:29"
   },
   {
     "token": "NEWLINE",
-    "loc": "10:28-10:29"
+    "loc": "10:29-10:30"
   },
   {
     "token": "RBRACE",
