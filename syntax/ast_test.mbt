@@ -2066,6 +2066,7 @@ test "type_decl to_json" {
     type_vis: @syntax.Default,
     deriving: @list.from_array([]),
     loc: dummy_loc,
+    is_declare: false,
   }
   json_inspect(type_decl, content={
     "type": "TypeDecl",
@@ -2376,6 +2377,7 @@ test "impl variants to_json" {
     type_vis: @syntax.Default,
     deriving: @list.from_array([]),
     loc: dummy_loc,
+    is_declare: false,
   }
   let binder = @syntax.Binder::{ name: "test", loc: dummy_loc }
   let int_type = @syntax.Name(

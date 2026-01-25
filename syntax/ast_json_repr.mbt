@@ -314,6 +314,19 @@ fn FieldName::json_repr(self : FieldName) -> Json {
 }
 
 ///|
+fn WhereClause::json_repr(self : WhereClause) -> Json {
+  let { fields, loc } = self
+  tagged_node("WhereClause", loc, {
+    "fields": list_json_repr(
+      "WhereClause::FieldList",
+      loc,
+      fields,
+      FieldDef::json_repr,
+    ),
+  })
+}
+
+///|
 pub fn Expr::json_repr(self : Expr) -> Json {
   match self {
     Apply(func~, args~, attr~, loc~) => {
@@ -650,7 +663,16 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "label": option_json_repr(label, Label::json_repr),
       })
     }
-    For(binders~, condition~, continue_block~, body~, for_else~, label~, loc~) =>
+    For(
+      binders~,
+      condition~,
+      continue_block~,
+      body~,
+      for_else~,
+      label~,
+      loc~,
+      where_clause~
+    ) =>
       tagged_node("Expr::For", loc, {
         "binders": list_json_repr("Expr::For::BindingList", loc, binders, fn(
           binding,
@@ -676,6 +698,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         ),
         "body": body.json_repr(),
         "for_else": option_json_repr(for_else, Expr::json_repr),
+        "where_clause": option_json_repr(where_clause, WhereClause::json_repr),
         "label": option_json_repr(label, Label::json_repr),
       })
     ForEach(binders~, expr~, body~, else_block~, label~, loc~) =>
@@ -911,6 +934,7 @@ fn DeclBody::json_repr(self : DeclBody, loc : Location) -> Json {
       })
     DeclStubs(stubs) =>
       tagged_node1("DeclBody::DeclStubs", loc, stubs.json_repr(loc))
+    DeclNone => tagged_node0("DeclBody::DeclNone", loc)
   }
 }
 
@@ -1775,7 +1799,16 @@ pub fn Impl::json_repr(self : Impl) -> Json {
         "doc": doc,
       })
     }
-    TopImplRelation(self_ty~, trait_~, quantifiers~, vis~, attrs~, doc~, loc~) =>
+    TopImplRelation(
+      self_ty~,
+      trait_~,
+      quantifiers~,
+      vis~,
+      attrs~,
+      doc~,
+      loc~,
+      is_declare~
+    ) =>
       tagged_node("Impl::TopImplRelation", loc, {
         "self_ty": self_ty.json_repr(),
         "trait": trait_.json_repr(),

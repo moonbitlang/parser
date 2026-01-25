@@ -562,6 +562,7 @@ pub(all) enum Expr {
     continue_block~ : @list.List[(Binder, Expr)],
     body~ : Expr,
     for_else~ : Expr?,
+    where_clause~ : WhereClause?,
     label~ : Label?,
     loc~ : Location
   )
@@ -627,6 +628,12 @@ pub(all) enum ArrayPattern {
 pub(all) enum ArrayPatterns {
   Closed(@list.List[ArrayPattern])
   Open(@list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder)
+}
+
+///|
+pub(all) struct WhereClause {
+  fields : @list.List[FieldDef]
+  loc : Location
 }
 
 ///|
@@ -719,6 +726,7 @@ pub(all) struct TypeDecl {
   type_vis : Visibility
   deriving : @list.List[DerivingDirective]
   loc : Location
+  is_declare : Bool
 }
 
 ///|
@@ -741,6 +749,7 @@ pub(all) enum EmbeddedCode {
 pub(all) enum DeclBody {
   DeclBody(local_types~ : @list.List[LocalTypeDecl], expr~ : Expr)
   DeclStubs(FuncStubs)
+  DeclNone
 }
 
 ///|
@@ -888,7 +897,8 @@ pub(all) enum Impl {
     vis~ : Visibility,
     attrs~ : @list.List[Attribute],
     loc~ : Location,
-    mut doc~ : DocString
+    mut doc~ : DocString,
+    is_declare~ : Bool
   )
   TopUsing(
     pkg~ : Label,

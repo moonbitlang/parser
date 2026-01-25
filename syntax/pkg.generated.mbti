@@ -218,6 +218,7 @@ pub impl ToJson for ConstructorExtraInfo
 pub(all) enum DeclBody {
   DeclBody(local_types~ : @list.List[LocalTypeDecl], expr~ : Expr)
   DeclStubs(FuncStubs)
+  DeclNone
 }
 pub impl ToJson for DeclBody
 
@@ -313,7 +314,7 @@ pub(all) enum Expr {
   Break(arg~ : Expr?, label~ : Label?, loc~ : @basic.Location)
   Continue(args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location)
   Loop(arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location)
-  For(binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location)
+  For(binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, where_clause~ : WhereClause?, label~ : Label?, loc~ : @basic.Location)
   ForEach(binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location)
   Try(body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location)
   TryOperator(body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location)
@@ -424,7 +425,7 @@ pub(all) enum Impl {
   TopBatchTraitAlias(pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, mut doc~ : DocString)
   TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
-  TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString)
+  TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString, is_declare~ : Bool)
   TopUsing(pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString)
 }
 pub fn Impl::json_repr(Self) -> Json
@@ -627,6 +628,7 @@ pub(all) struct TypeDecl {
   type_vis : Visibility
   deriving : @list.List[DerivingDirective]
   loc : @basic.Location
+  is_declare : Bool
 }
 pub impl ToJson for TypeDecl
 
@@ -688,6 +690,11 @@ pub(all) enum Visibility {
 }
 pub impl ToJson for Visibility
 
+pub(all) struct WhereClause {
+  fields : @list.List[FieldDef]
+  loc : @basic.Location
+}
+
 // Type aliases
 pub type Impls = @list.List[Impl]
 
@@ -719,6 +726,7 @@ pub(open) trait IterVisitor {
   visit_ErrorType(Self, ErrorType) -> Unit = _
   visit_ErrorType_ErrorType(Self, ty~ : Type) -> Unit = _
   visit_ErrorType_DefaultErrorType(Self, loc~ : @basic.Location) -> Unit = _
+  visit_ErrorType_Noraise(Self, loc~ : @basic.Location) -> Unit = _
   visit_ErrorType_MaybeError(Self, ty~ : Type) -> Unit = _
   visit_ConstrParam(Self, ConstrParam) -> Unit = _
   visit_ConstrDecl(Self, ConstrDecl) -> Unit = _
@@ -802,6 +810,7 @@ pub(open) trait IterVisitor {
   visit_ArrayPatterns(Self, ArrayPatterns) -> Unit = _
   visit_ArrayPatterns_Closed(Self, @list.List[ArrayPattern]) -> Unit = _
   visit_ArrayPatterns_Open(Self, @list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder) -> Unit = _
+  visit_WhereClause(Self, WhereClause) -> Unit = _
   visit_FieldPat(Self, FieldPat) -> Unit = _
   visit_ConstrPatArg(Self, ConstrPatArg) -> Unit = _
   visit_MapPatElem(Self, MapPatElem) -> Unit = _
@@ -847,7 +856,7 @@ pub(open) trait IterVisitor {
   visit_Impl_TopBatchTraitAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Unit = _
   visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
   visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
-  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Unit = _
+  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, is_declare~ : Bool) -> Unit = _
   visit_Impl_TopUsing(Self, pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Unit = _
   visit_UsingKind(Self, UsingKind) -> Unit = _
   visit_Expr(Self, Expr) -> Unit = _
@@ -898,7 +907,7 @@ pub(open) trait IterVisitor {
   visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Continue(Self, args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location, where_clause~ : WhereClause?) -> Unit = _
   visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Try(Self, body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   visit_Expr_TryOperator(Self, body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
@@ -930,6 +939,7 @@ pub(open) trait MapVisitor {
   visit_ErrorType(Self, ErrorType) -> ErrorType = _
   visit_ErrorType_ErrorType(Self, ty~ : Type) -> ErrorType = _
   visit_ErrorType_DefaultErrorType(Self, loc~ : @basic.Location) -> ErrorType = _
+  visit_ErrorType_Noraise(Self, loc~ : @basic.Location) -> ErrorType = _
   visit_ErrorType_MaybeError(Self, ty~ : Type) -> ErrorType = _
   visit_ConstrParam(Self, ConstrParam) -> ConstrParam = _
   visit_ConstrDecl(Self, ConstrDecl) -> ConstrDecl = _
@@ -1013,6 +1023,7 @@ pub(open) trait MapVisitor {
   visit_ArrayPatterns(Self, ArrayPatterns) -> ArrayPatterns = _
   visit_ArrayPatterns_Closed(Self, @list.List[ArrayPattern]) -> ArrayPatterns = _
   visit_ArrayPatterns_Open(Self, @list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder) -> ArrayPatterns = _
+  visit_WhereClause(Self, WhereClause) -> WhereClause = _
   visit_FieldPat(Self, FieldPat) -> FieldPat = _
   visit_ConstrPatArg(Self, ConstrPatArg) -> ConstrPatArg = _
   visit_MapPatElem(Self, MapPatElem) -> MapPatElem = _
@@ -1059,7 +1070,7 @@ pub(open) trait MapVisitor {
   visit_Impl_TopBatchTraitAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Impl = _
   visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
   visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
-  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Impl = _
+  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, is_declare~ : Bool) -> Impl = _
   visit_Impl_TopUsing(Self, pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Impl = _
   visit_Expr(Self, Expr) -> Expr = _
   visit_Expr_Apply(Self, func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location) -> Expr = _
@@ -1109,7 +1120,7 @@ pub(open) trait MapVisitor {
   visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Continue(Self, args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location, where_clause~ : WhereClause?) -> Expr = _
   visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Try(Self, body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   visit_Expr_TryOperator(Self, body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _

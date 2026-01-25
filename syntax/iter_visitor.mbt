@@ -52,6 +52,7 @@ pub(open) trait IterVisitor {
   visit_ErrorType(Self, ErrorType) -> Unit = _
   visit_ErrorType_ErrorType(Self, ty~ : Type) -> Unit = _
   visit_ErrorType_DefaultErrorType(Self, loc~ : Location) -> Unit = _
+  visit_ErrorType_Noraise(Self, loc~ : Location) -> Unit = _
   visit_ErrorType_MaybeError(Self, ty~ : Type) -> Unit = _
 
   // ConstrParam
@@ -242,6 +243,9 @@ pub(open) trait IterVisitor {
     @list.List[ArrayPattern],
     DotDotBinder,
   ) -> Unit = _
+
+  // WhereClause
+  visit_WhereClause(Self, WhereClause) -> Unit = _
 
   // FieldPat
   visit_FieldPat(Self, FieldPat) -> Unit = _
@@ -456,6 +460,7 @@ pub(open) trait IterVisitor {
     attrs~ : @list.List[Attribute],
     loc~ : Location,
     doc~ : DocString,
+    is_declare~ : Bool,
   ) -> Unit = _
   visit_Impl_TopUsing(
     Self,
@@ -685,6 +690,7 @@ pub(open) trait IterVisitor {
     for_else~ : Expr?,
     label~ : Label?,
     loc~ : Location,
+    where_clause~ : WhereClause?,
   ) -> Unit = _
   visit_Expr_ForEach(
     Self,
@@ -968,6 +974,7 @@ impl IterVisitor with visit_Impl_TopImplRelation(
   attrs~,
   loc~,
   doc~,
+  is_declare~,
 ) {
   IterVisitorBase::visit_Impl_TopImplRelation(
     env,
@@ -978,6 +985,7 @@ impl IterVisitor with visit_Impl_TopImplRelation(
     attrs~,
     loc~,
     doc~,
+    is_declare~,
   )
 }
 
@@ -1337,6 +1345,7 @@ impl IterVisitor with visit_Expr_For(
   for_else~,
   label~,
   loc~,
+  where_clause~,
 ) {
   IterVisitorBase::visit_Expr_For(
     env,
@@ -1347,6 +1356,7 @@ impl IterVisitor with visit_Expr_For(
     for_else~,
     label~,
     loc~,
+    where_clause~,
   )
 }
 
@@ -1521,6 +1531,11 @@ impl IterVisitor with visit_ErrorType_ErrorType(env, ty~) {
 ///|
 impl IterVisitor with visit_ErrorType_DefaultErrorType(env, loc~) {
   IterVisitorBase::visit_ErrorType_DefaultErrorType(env, loc~)
+}
+
+///|
+impl IterVisitor with visit_ErrorType_Noraise(env, loc~) {
+  IterVisitorBase::visit_ErrorType_Noraise(env, loc~)
 }
 
 ///|
@@ -1905,6 +1920,11 @@ impl IterVisitor with visit_ArrayPatterns_Open(
   IterVisitorBase::visit_ArrayPatterns_Open(
     env, prefix_patterns, suffix_patterns, dot_dot_binder,
   )
+}
+
+///|
+impl IterVisitor with visit_WhereClause(env, where_clause) {
+  IterVisitorBase::visit_WhereClause(env, where_clause)
 }
 
 ///|
@@ -2298,7 +2318,16 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl(
       )
     TopExpr(expr~, is_main~, local_types~, is_async~, loc~) =>
       env.0.visit_Impl_TopExpr(expr~, is_main~, local_types~, is_async~, loc~)
-    TopImplRelation(self_ty~, trait_~, quantifiers~, vis~, attrs~, loc~, doc~) =>
+    TopImplRelation(
+      self_ty~,
+      trait_~,
+      quantifiers~,
+      vis~,
+      attrs~,
+      loc~,
+      doc~,
+      is_declare~
+    ) =>
       env.0.visit_Impl_TopImplRelation(
         self_ty~,
         trait_~,
@@ -2307,6 +2336,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl(
         attrs~,
         loc~,
         doc~,
+        is_declare~,
       )
     TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~) =>
       env.0.visit_Impl_TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~)
@@ -2505,7 +2535,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ErrorTyp
     ErrorType(ty~) => env.0.visit_ErrorType_ErrorType(ty~)
     DefaultErrorType(loc~) => env.0.visit_ErrorType_DefaultErrorType(loc~)
     NoErrorType => ()
-    Noraise(loc~) => ignore(loc)
+    Noraise(loc~) => env.0.visit_ErrorType_Noraise(loc~)
     MaybeError(ty~) => env.0.visit_ErrorType_MaybeError(ty~)
   }
 }
@@ -2520,6 +2550,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ErrorTyp
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ErrorType_DefaultErrorType(
+  _,
+  loc~,
+) {
+  ignore(loc)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ErrorType_Noraise(
   _,
   loc~,
 ) {
@@ -3245,6 +3283,15 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ArrayPat
 }
 
 ///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_WhereClause(
+  env,
+  where_clause,
+) {
+  where_clause.fields.each(env.0.visit_FieldDef(_))
+  ignore(where_clause.loc)
+}
+
+///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_FieldPat(
   env,
   field_pat,
@@ -3556,6 +3603,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_DeclBody
     DeclBody(local_types~, expr~) =>
       env.0.visit_DeclBody_DeclBody(local_types~, expr~)
     DeclStubs(func_stubs) => env.0.visit_DeclBody_DeclStubs(func_stubs)
+    DeclNone => ()
   }
 }
 
@@ -3849,7 +3897,9 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl_Top
   attrs~,
   loc~,
   doc~,
+  is_declare~,
 ) {
+  ignore(is_declare)
   ignore(attrs)
   ignore(loc)
   ignore(doc)
@@ -4475,6 +4525,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr_For
   for_else~,
   label~,
   loc~,
+  where_clause~,
 ) {
   ignore(loc)
   binders.each(p => {
@@ -4489,6 +4540,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr_For
   env.0.visit_Expr(body)
   for_else.each(else_block => env.0.visit_Expr(else_block))
   label.each(env.0.visit_Label(_))
+  where_clause.each(env.0.visit_WhereClause(_))
 }
 
 ///|
@@ -4674,7 +4726,16 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr(
       env.0.visit_Expr_Continue(args~, label~, loc~)
     Loop(arg~, body~, label~, loop_loc~, loc~) =>
       env.0.visit_Expr_Loop(arg~, body~, label~, loop_loc~, loc~)
-    For(binders~, condition~, continue_block~, body~, for_else~, label~, loc~) =>
+    For(
+      binders~,
+      condition~,
+      continue_block~,
+      body~,
+      for_else~,
+      label~,
+      loc~,
+      where_clause~
+    ) =>
       env.0.visit_Expr_For(
         binders~,
         condition~,
@@ -4683,6 +4744,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr(
         for_else~,
         label~,
         loc~,
+        where_clause~,
       )
     ForEach(binders~, expr~, body~, else_block~, label~, loc~) =>
       env.0.visit_Expr_ForEach(

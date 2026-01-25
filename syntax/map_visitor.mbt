@@ -52,6 +52,7 @@ pub(open) trait MapVisitor {
   visit_ErrorType(Self, ErrorType) -> ErrorType = _
   visit_ErrorType_ErrorType(Self, ty~ : Type) -> ErrorType = _
   visit_ErrorType_DefaultErrorType(Self, loc~ : Location) -> ErrorType = _
+  visit_ErrorType_Noraise(Self, loc~ : Location) -> ErrorType = _
   visit_ErrorType_MaybeError(Self, ty~ : Type) -> ErrorType = _
 
   // ConstrParam
@@ -242,6 +243,9 @@ pub(open) trait MapVisitor {
     @list.List[ArrayPattern],
     DotDotBinder,
   ) -> ArrayPatterns = _
+
+  // WhereClause
+  visit_WhereClause(Self, WhereClause) -> WhereClause = _
 
   // FieldPat
   visit_FieldPat(Self, FieldPat) -> FieldPat = _
@@ -459,6 +463,7 @@ pub(open) trait MapVisitor {
     attrs~ : @list.List[Attribute],
     loc~ : Location,
     doc~ : DocString,
+    is_declare~ : Bool,
   ) -> Impl = _
   visit_Impl_TopUsing(
     Self,
@@ -685,6 +690,7 @@ pub(open) trait MapVisitor {
     for_else~ : Expr?,
     label~ : Label?,
     loc~ : Location,
+    where_clause~ : WhereClause?,
   ) -> Expr = _
   visit_Expr_ForEach(
     Self,
@@ -968,6 +974,7 @@ impl MapVisitor with visit_Impl_TopImplRelation(
   attrs~,
   loc~,
   doc~,
+  is_declare~,
 ) {
   MapVisitorBase::visit_Impl_TopImplRelation(
     env,
@@ -978,6 +985,7 @@ impl MapVisitor with visit_Impl_TopImplRelation(
     attrs~,
     loc~,
     doc~,
+    is_declare~,
   )
 }
 
@@ -1337,6 +1345,7 @@ impl MapVisitor with visit_Expr_For(
   for_else~,
   label~,
   loc~,
+  where_clause~,
 ) {
   MapVisitorBase::visit_Expr_For(
     env,
@@ -1347,6 +1356,7 @@ impl MapVisitor with visit_Expr_For(
     for_else~,
     label~,
     loc~,
+    where_clause~,
   )
 }
 
@@ -1521,6 +1531,11 @@ impl MapVisitor with visit_ErrorType_ErrorType(env, ty~) {
 ///|
 impl MapVisitor with visit_ErrorType_DefaultErrorType(env, loc~) {
   MapVisitorBase::visit_ErrorType_DefaultErrorType(env, loc~)
+}
+
+///|
+impl MapVisitor with visit_ErrorType_Noraise(env, loc~) {
+  MapVisitorBase::visit_ErrorType_Noraise(env, loc~)
 }
 
 ///|
@@ -1905,6 +1920,11 @@ impl MapVisitor with visit_ArrayPatterns_Open(
   MapVisitorBase::visit_ArrayPatterns_Open(
     env, prefix_patterns, suffix_patterns, dot_dot_binder,
   )
+}
+
+///|
+impl MapVisitor with visit_WhereClause(env, where_clause) {
+  MapVisitorBase::visit_WhereClause(env, where_clause)
 }
 
 ///|
@@ -2298,7 +2318,16 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
       )
     TopExpr(expr~, is_main~, local_types~, is_async~, loc~) =>
       env.0.visit_Impl_TopExpr(expr~, is_main~, local_types~, is_async~, loc~)
-    TopImplRelation(self_ty~, trait_~, quantifiers~, vis~, attrs~, loc~, doc~) =>
+    TopImplRelation(
+      self_ty~,
+      trait_~,
+      quantifiers~,
+      vis~,
+      attrs~,
+      loc~,
+      doc~,
+      is_declare~
+    ) =>
       env.0.visit_Impl_TopImplRelation(
         self_ty~,
         trait_~,
@@ -2307,6 +2336,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         attrs~,
         loc~,
         doc~,
+        is_declare~,
       )
     TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~) =>
       env.0.visit_Impl_TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~)
@@ -2507,7 +2537,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ErrorType(
     ErrorType(ty~) => env.0.visit_ErrorType_ErrorType(ty~)
     DefaultErrorType(loc~) => env.0.visit_ErrorType_DefaultErrorType(loc~)
     NoErrorType => NoErrorType
-    Noraise(loc~) => Noraise(loc~)
+    Noraise(loc~) => env.0.visit_ErrorType_Noraise(loc~)
     MaybeError(ty~) => env.0.visit_ErrorType_MaybeError(ty~)
   }
 }
@@ -2527,6 +2557,14 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ErrorType_D
   loc~,
 ) {
   DefaultErrorType(loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ErrorType_Noraise(
+  _,
+  loc~,
+) {
+  Noraise(loc~)
 }
 
 ///|
@@ -3306,6 +3344,16 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_ArrayPatter
 }
 
 ///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_WhereClause(
+  env,
+  where_clause,
+) {
+  let fields = where_clause.fields.map(env.0.visit_FieldDef(_))
+  let loc = where_clause.loc
+  WhereClause::{ fields, loc }
+}
+
+///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FieldPat(
   env,
   field_pat,
@@ -3558,6 +3606,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDecl(
   let attrs = type_decl.attrs
   let doc = type_decl.doc
   let loc = type_decl.loc
+  let is_declare = type_decl.is_declare
   TypeDecl::{
     tycon,
     tycon_loc,
@@ -3568,6 +3617,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDecl(
     type_vis,
     deriving,
     loc,
+    is_declare,
   }
 }
 
@@ -3642,6 +3692,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_DeclBody(
     DeclBody(local_types~, expr~) =>
       env.0.visit_DeclBody_DeclBody(local_types~, expr~)
     DeclStubs(func_stubs) => env.0.visit_DeclBody_DeclStubs(func_stubs)
+    DeclNone => DeclNone
   }
 }
 
@@ -3974,12 +4025,23 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopImp
   attrs~,
   loc~,
   doc~,
+  is_declare~,
 ) {
   let self_ty = env.0.visit_Type(self_ty)
   let trait_ = env.0.visit_TypeName(trait_)
   let quantifiers = quantifiers.map(env.0.visit_TypeVarBinder(_))
   let vis = env.0.visit_Visibility(vis)
-  TopImplRelation(self_ty~, trait_~, quantifiers~, vis~, attrs~, loc~, doc~)
+  let is_declare = is_declare
+  TopImplRelation(
+    self_ty~,
+    trait_~,
+    quantifiers~,
+    vis~,
+    attrs~,
+    loc~,
+    doc~,
+    is_declare~,
+  )
 }
 
 ///|
@@ -4584,6 +4646,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_For(
   for_else~,
   label~,
   loc~,
+  where_clause~,
 ) {
   let binders = binders.map(p => (
     env.0.visit_Binder(p.0),
@@ -4597,6 +4660,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_For(
   let body = env.0.visit_Expr(body)
   let for_else = for_else.map(else_block => env.0.visit_Expr(else_block))
   let label = label.map(env.0.visit_Label(_))
+  let where_clause = where_clause.map(env.0.visit_WhereClause(_))
   Expr::For(
     binders~,
     condition~,
@@ -4605,6 +4669,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_For(
     for_else~,
     label~,
     loc~,
+    where_clause~,
   )
 }
 
@@ -4796,7 +4861,16 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
       env.0.visit_Expr_Continue(args~, label~, loc~)
     Loop(arg~, body~, label~, loop_loc~, loc~) =>
       env.0.visit_Expr_Loop(arg~, body~, label~, loop_loc~, loc~)
-    For(binders~, condition~, continue_block~, body~, for_else~, label~, loc~) =>
+    For(
+      binders~,
+      condition~,
+      continue_block~,
+      body~,
+      for_else~,
+      label~,
+      loc~,
+      where_clause~
+    ) =>
       env.0.visit_Expr_For(
         binders~,
         condition~,
@@ -4805,6 +4879,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
         for_else~,
         label~,
         loc~,
+        where_clause~,
       )
     ForEach(binders~, expr~, body~, else_block~, label~, loc~) =>
       env.0.visit_Expr_ForEach(

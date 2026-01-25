@@ -337,6 +337,26 @@ fun_header -> FunDecl
   }
   ;
 
+declare_fun_header -> FunDecl
+  : attributes "declare" visibility is_async fun_header_generic option(parameters) func_return_type {
+    let ((type_name, f), has_error, quants) = $5
+    let (return_type, error_type) = $7
+    FunDecl::{
+      type_name,
+      name: f,
+      has_error,
+      is_async : $4,
+      quantifiers: quants,
+      decl_params: $6,
+      params_loc: mk_loc($loc($6)),
+      return_type,
+      error_type,
+      vis: $3,
+      doc: DocString::empty(),
+      attrs: $1,
+    }
+  }
+
 fun_header_generic -> ((TypeName?, Binder), Location?, List[TypeVarBinder])
   : "fn" type_parameters fun_binder optional_bang { ($3, $4, $2) }
   | "fn" fun_binder optional_bang optional_type_parameters { ($2, $3, $4) }
@@ -438,7 +458,7 @@ structure -> List[Impl]
 
 structure_item -> Impl
   : type_header deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
     TopTypeDef(
       TypeDecl::{
         tycon,
@@ -449,7 +469,8 @@ structure_item -> Impl
         doc : DocString::empty(),
         deriving: $2,
         loc : mk_loc($sloc),
-        attrs
+        attrs,
+        is_declare
       }
     )
   }
@@ -464,12 +485,13 @@ structure_item -> Impl
         doc : DocString::empty(),
         deriving: $7,
         loc : mk_loc($sloc),
-        attrs : $1
+        attrs : $1,
+        is_declare : false
       }
     )
   }
   | type_header type_ deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
     TopTypeDef(
       TypeDecl::{
         tycon,
@@ -480,12 +502,13 @@ structure_item -> Impl
         doc : DocString::empty(),
         deriving: $3,
         loc : mk_loc($sloc),
-        attrs
+        attrs,
+        is_declare
       }
     )
   }
   | suberror_header option(type_) deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc) = $1
+    let (attrs, type_vis, is_declare, tycon, tycon_loc) = $1
     let exception_decl : ExceptionDecl = match $2 {
       None => NoPayload
       Some(ty) => SinglePayload(ty)
@@ -500,13 +523,14 @@ structure_item -> Impl
         doc : DocString::empty(),
         deriving: $3,
         loc : mk_loc($sloc),
-        attrs
+        attrs,
+        is_declare
       }
     )
 
   }
   | suberror_header "{" list_semis(enum_constructor) "}" deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc) = $1
+    let (attrs, type_vis, is_declare, tycon, tycon_loc) = $1
     let exception_decl : ExceptionDecl = EnumPayload($3)
     TopTypeDef(
       TypeDecl::{
@@ -518,7 +542,8 @@ structure_item -> Impl
         doc : DocString::empty(),
         deriving: $5,
         loc : mk_loc($sloc),
-        attrs
+        attrs,
+        is_declare
       }
     )
   }
@@ -534,7 +559,8 @@ structure_item -> Impl
         doc : DocString::empty(),
         deriving: $5,
         loc : mk_loc($sloc),
-        attrs
+        attrs,
+        is_declare : false
       }
     )
   }
@@ -550,7 +576,8 @@ structure_item -> Impl
         doc : DocString::empty(),
         deriving: $5,
         loc : mk_loc($sloc),
-        attrs
+        attrs,
+        is_declare : false
       }
     )
   }
@@ -566,7 +593,8 @@ structure_item -> Impl
         doc : DocString::empty(),
         deriving: $5,
         loc : mk_loc($sloc),
-        attrs
+        attrs,
+        is_declare : false
       }
     )
   }
@@ -637,6 +665,13 @@ structure_item -> Impl
       decl_body = DeclBody(local_types~, expr~)
     )
   }
+  | declare_fun_header {
+    TopFuncDef(
+      loc = mk_loc($sloc),
+      fun_decl = $1,
+      decl_body = DeclNone
+    )
+  }
   | attributes visibility "fnalias" func_alias_targets {
     let (pkg, type_name, is_list, targets) = $4
     TopFuncAlias(
@@ -691,7 +726,8 @@ structure_item -> Impl
         doc : DocString::empty(),
         deriving: @list.empty(),
         loc : mk_loc($sloc),
-        attrs : $1
+        attrs : $1,
+        is_declare : false
       }
     )
   }
@@ -756,15 +792,16 @@ structure_item -> Impl
       doc = DocString::empty()
     )
   }
-  | attributes visibility "impl" optional_type_parameters type_name "for" type_ {
+  | attributes is_declare visibility "impl" optional_type_parameters type_name "for" type_ {
     TopImplRelation(
-      self_ty = $7,
-      trait_ = $5,
-      quantifiers = $4,
-      vis = $2,
+      self_ty = $8,
+      trait_ = $6,
+      quantifiers = $5,
+      vis = $3,
       attrs = $1,
       loc = mk_loc($sloc),
-      doc = DocString::empty()
+      doc = DocString::empty(),
+      is_declare = $2
     )
   }
   | attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
@@ -820,14 +857,18 @@ pub_attr -> String?
   | "(" LIDENT ")" { Some($2) }
   ;
 
-type_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
-  : attributes visibility "type" UIDENT optional_type_parameters_no_constraints { 
-    ($1, $2, $4, mk_loc($loc($4)), $5) 
+%inline is_declare -> Bool
+  : "declare" { true }
+  | { false }
+
+type_header -> (List[Attribute], Visibility, Bool, String, Location, List[TypeDeclBinder])
+  : attributes is_declare visibility "type" UIDENT optional_type_parameters_no_constraints { 
+    ($1, $3, $2, $5, mk_loc($loc($5)), $6) 
   }
   ;
 
-suberror_header -> (List[Attribute], Visibility, String, Location)
-  : attributes visibility "suberror" UIDENT { ($1, $2, $4, mk_loc($loc($4))) }
+suberror_header -> (List[Attribute], Visibility, Bool, String, Location)
+  : attributes is_declare visibility "suberror" UIDENT { ($1, $3, $2, $5, mk_loc($loc($5))) }
   ;
 
 struct_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
@@ -1346,8 +1387,14 @@ optional_else -> Expr?
   |  { None }
   ;
 
+optional_where_clause -> WhereClause? 
+  : "where" "{" list_commas(labeled_expr) "}" {
+    Some({ fields : $3, loc : mk_loc($sloc) })
+  }
+  | { None }
+
 for_expr -> Expr
-  : loop_label_colon "for" for_binders SEMI option(infix_expr) SEMI list_commas_no_trailing(separated_pair(binder, "=", expr)) block_expr optional_else {
+  : loop_label_colon "for" for_binders SEMI option(infix_expr) SEMI list_commas_no_trailing(separated_pair(binder, "=", expr)) block_expr optional_else optional_where_clause {
     For(
       binders = $3,
       condition = $5,
@@ -1355,10 +1402,11 @@ for_expr -> Expr
       body = $8,
       for_else = $9,
       label = $1,
-      loc = mk_loc($sloc)
+      loc = mk_loc($sloc),
+      where_clause = $10
     )
   }
-  | loop_label_colon "for" for_binders block_expr optional_else {
+  | loop_label_colon "for" for_binders block_expr optional_else optional_where_clause {
     For(
       binders = $3,
       condition = None,
@@ -1366,7 +1414,8 @@ for_expr -> Expr
       body = $4,
       for_else = $5,
       label = $1,
-      loc = mk_loc($sloc)
+      loc = mk_loc($sloc),
+      where_clause = $6
     )
   }
   ;
