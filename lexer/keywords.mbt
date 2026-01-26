@@ -49,6 +49,8 @@ let keyword_table : @hashmap.HashMap[String, Token] = [
     ("noraise", NORAISE),
     ("defer", DEFER),
     ("lexmatch", LEXMATCH),
+    ("where", WHERE),
+    ("declare", DECLARE),
   ]
   |> @hashmap.from_array()
 
