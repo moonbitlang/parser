@@ -1126,7 +1126,16 @@ pub impl ToJson for Expr with to_json(self) {
         "loop_loc": loop_loc,
         "loc": loc,
       }
-    For(binders~, condition~, continue_block~, body~, for_else~, label~, loc~) =>
+    For(
+      binders~,
+      condition~,
+      continue_block~,
+      body~,
+      for_else~,
+      label~,
+      loc~,
+      ..
+    ) =>
       {
         "type": "Expr::For",
         "binders": list_tuple_to_json(binders),
@@ -1348,7 +1357,16 @@ pub impl ToJson for Impl with to_json(self) {
         "attrs": list_to_json(attrs),
         "doc": doc,
       }
-    TopImplRelation(self_ty~, trait_~, quantifiers~, vis~, attrs~, doc~, loc~) =>
+    TopImplRelation(
+      self_ty~,
+      trait_~,
+      quantifiers~,
+      vis~,
+      attrs~,
+      doc~,
+      loc~,
+      ..
+    ) =>
       {
         "type": "Impl::TopImplRelation",
         "self_ty": self_ty,
