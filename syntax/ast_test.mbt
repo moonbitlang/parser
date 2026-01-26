@@ -34,79 +34,108 @@ let dummy_attribute : @attribute.Attribute = {
 
 ///|
 test "visibility to_json" {
-  json_inspect(@syntax.Default, content={ "type": "Visibility::Default" })
-  json_inspect(@syntax.Priv(loc=dummy_loc), content={
-    "type": "Visibility::Priv",
+  json_inspect(@syntax.Default.json_repr(dummy_loc), content={
+    "kind": "Visibility::Default",
     "loc": null,
+    "children": {},
   })
-  json_inspect(@syntax.Pub(attr=Some("readonly"), loc=dummy_loc), content={
-    "type": "Visibility::Pub",
-    "attr": "readonly",
+  json_inspect(@syntax.Priv(loc=dummy_loc).json_repr(dummy_loc), content={
+    "kind": "Visibility::Priv",
     "loc": null,
+    "children": {},
   })
-  json_inspect(@syntax.Pub(attr=None, loc=dummy_loc), content={
-    "type": "Visibility::Pub",
-    "attr": null,
+  json_inspect(
+    @syntax.Pub(attr=Some("readonly"), loc=dummy_loc).json_repr(dummy_loc),
+    content={
+      "kind": "Visibility::Pub",
+      "loc": null,
+      "children": { "attr": "readonly" },
+    },
+  )
+  json_inspect(@syntax.Pub(attr=None, loc=dummy_loc).json_repr(dummy_loc), content={
+    "kind": "Visibility::Pub",
     "loc": null,
+    "children": { "attr": null },
   })
 }
 
 ///|
 test "constant to_json" {
-  json_inspect(@syntax.Bool(true), content={
-    "type": "Constant::Bool",
-    "0": true,
+  json_inspect(@syntax.Bool(true).json_repr(dummy_loc), content={
+    "kind": "Constant::Bool",
+    "loc": null,
+    "children": { "value": true },
   })
-  json_inspect(@syntax.Byte(dummy_byte_literal), content={
-    "type": "Constant::Byte",
-    "0": "b'A'",
+  json_inspect(@syntax.Byte(dummy_byte_literal).json_repr(dummy_loc), content={
+    "kind": "Constant::Byte",
+    "loc": null,
+    "children": { "value": "b'A'" },
   })
-  json_inspect(@syntax.Bytes(dummy_bytes_literal), content={
-    "type": "Constant::Bytes",
-    "0": "b\"ABC\"",
+  json_inspect(@syntax.Bytes(dummy_bytes_literal).json_repr(dummy_loc), content={
+    "kind": "Constant::Bytes",
+    "loc": null,
+    "children": { "value": "b\"ABC\"" },
   })
-  json_inspect(@syntax.Char(dummy_char_literal), content={
-    "type": "Constant::Char",
-    "0": "'A'",
+  json_inspect(@syntax.Char(dummy_char_literal).json_repr(dummy_loc), content={
+    "kind": "Constant::Char",
+    "loc": null,
+    "children": { "value": "'A'" },
   })
-  json_inspect(@syntax.Int("42"), content={ "type": "Constant::Int", "0": "42" })
-  json_inspect(@syntax.Int64("42L"), content={
-    "type": "Constant::Int64",
-    "0": "42L",
+  json_inspect(@syntax.Int("42").json_repr(dummy_loc), content={
+    "kind": "Constant::Int",
+    "loc": null,
+    "children": { "value": "42" },
   })
-  json_inspect(@syntax.UInt("42U"), content={
-    "type": "Constant::UInt",
-    "0": "42U",
+  json_inspect(@syntax.Int64("42L").json_repr(dummy_loc), content={
+    "kind": "Constant::Int64",
+    "loc": null,
+    "children": { "value": "42L" },
   })
-  json_inspect(@syntax.UInt64("42UL"), content={
-    "type": "Constant::UInt64",
-    "0": "42UL",
+  json_inspect(@syntax.UInt("42U").json_repr(dummy_loc), content={
+    "kind": "Constant::UInt",
+    "loc": null,
+    "children": { "value": "42U" },
   })
-  json_inspect(@syntax.Float("3.14"), content={
-    "type": "Constant::Float",
-    "0": "3.14",
+  json_inspect(@syntax.UInt64("42UL").json_repr(dummy_loc), content={
+    "kind": "Constant::UInt64",
+    "loc": null,
+    "children": { "value": "42UL" },
   })
-  json_inspect(@syntax.Double("3.14159"), content={
-    "type": "Constant::Double",
-    "0": "3.14159",
+  json_inspect(@syntax.Float("3.14").json_repr(dummy_loc), content={
+    "kind": "Constant::Float",
+    "loc": null,
+    "children": { "value": "3.14" },
   })
-  json_inspect(@syntax.Constant::String(dummy_string_literal), content={
-    "type": "Constant::String",
-    "0": "test_string",
+  json_inspect(@syntax.Double("3.14159").json_repr(dummy_loc), content={
+    "kind": "Constant::Double",
+    "loc": null,
+    "children": { "value": "3.14159" },
   })
-  json_inspect(@syntax.BigInt("123456789012345678901234567890"), content={
-    "type": "Constant::BigInt",
-    "0": "123456789012345678901234567890",
-  })
+  json_inspect(
+    @syntax.Constant::String(dummy_string_literal).json_repr(dummy_loc),
+    content={
+      "kind": "Constant::String",
+      "loc": null,
+      "children": { "value": "test_string" },
+    },
+  )
+  json_inspect(
+    @syntax.BigInt("123456789012345678901234567890").json_repr(dummy_loc),
+    content={
+      "kind": "Constant::BigInt",
+      "loc": null,
+      "children": { "value": "123456789012345678901234567890" },
+    },
+  )
 }
 
 ///|
 test "label to_json" {
   let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
-  json_inspect(label, content={
-    "type": "Label",
-    "name": "test_label",
+  json_inspect(label.json_repr(), content={
+    "kind": "Label",
     "loc": null,
+    "children": { "name": "test_label" },
   })
 }
 
@@ -116,24 +145,31 @@ test "constr_name to_json" {
     name: "TestConstructor",
     loc: dummy_loc,
   }
-  json_inspect(constr_name, content={
-    "type": "ConstrName",
-    "name": "TestConstructor",
+  json_inspect(constr_name.json_repr(), content={
+    "kind": "ConstrName",
     "loc": null,
+    "children": { "name": "TestConstructor" },
   })
 }
 
 ///|
 test "long_ident to_json" {
-  json_inspect(@syntax.LongIdent::Ident(name="test_ident"), content={
-    "type": "LongIdent::Ident",
-    "0": "test_ident",
-  })
-  json_inspect(@syntax.LongIdent::Dot(pkg="test_pkg", id="test_name"), content={
-    "type": "LongIdent::Dot",
-    "pkg": "test_pkg",
-    "id": "test_name",
-  })
+  json_inspect(
+    @syntax.LongIdent::Ident(name="test_ident").json_repr(dummy_loc),
+    content={
+      "kind": "LongIdent::Ident",
+      "loc": null,
+      "children": { "value": "test_ident" },
+    },
+  )
+  json_inspect(
+    @syntax.LongIdent::Dot(pkg="test_pkg", id="test_name").json_repr(dummy_loc),
+    content={
+      "kind": "LongIdent::Dot",
+      "loc": null,
+      "children": { "pkg": "test_pkg", "id": "test_name" },
+    },
+  )
 }
 
 ///|
@@ -143,11 +179,17 @@ test "type_name to_json" {
     is_object: false,
     loc: dummy_loc,
   }
-  json_inspect(type_name, content={
-    "type": "TypeName",
-    "name": { "type": "LongIdent::Ident", "0": "TestType" },
-    "is_object": false,
+  json_inspect(type_name.json_repr(), content={
+    "kind": "TypeName",
     "loc": null,
+    "children": {
+      "name": {
+        "kind": "LongIdent::Ident",
+        "loc": null,
+        "children": { "value": "TestType" },
+      },
+      "is_object": false,
+    },
   })
 }
 
@@ -157,24 +199,34 @@ test "constr_id to_json" {
     id: @syntax.Dot(pkg="test_pkg", id="TestConstructor"),
     loc: dummy_loc,
   }
-  json_inspect(constr_id, content={
-    "type": "ConstrId",
-    "id": {
-      "type": "LongIdent::Dot",
-      "pkg": "test_pkg",
-      "id": "TestConstructor",
-    },
+  json_inspect(constr_id.json_repr(), content={
+    "kind": "ConstrId",
     "loc": null,
+    "children": {
+      "id": {
+        "kind": "LongIdent::Dot",
+        "loc": null,
+        "children": { "pkg": "test_pkg", "id": "TestConstructor" },
+      },
+    },
   })
 }
 
 ///|
 test "error_type to_json" {
-  json_inspect(@syntax.NoErrorType, content={ "type": "ErrorType::NoErrorType" })
-  json_inspect(@syntax.ErrorType::DefaultErrorType(loc=dummy_loc), content={
-    "type": "ErrorType::DefaultErrorType",
+  json_inspect(@syntax.NoErrorType.json_repr(dummy_loc), content={
+    "kind": "ErrorType::NoErrorType",
     "loc": null,
+    "children": {},
   })
+  json_inspect(
+    @syntax.ErrorType::DefaultErrorType(loc=dummy_loc).json_repr(dummy_loc),
+    content={
+      "kind": "ErrorType::DefaultErrorType",
+      "loc": null,
+      "children": {},
+    },
+  )
   let int_type = @syntax.Name(
     constr_id=@syntax.ConstrId::{
       id: @syntax.LongIdent::Ident(name="Int"),
@@ -183,30 +235,52 @@ test "error_type to_json" {
     tys=@list.from_array([]),
     loc=dummy_loc,
   )
-  json_inspect(@syntax.ErrorType(ty=int_type), content={
-    "type": "ErrorType::ErrorType",
-    "ty": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
+  json_inspect(@syntax.ErrorType(ty=int_type).json_repr(dummy_loc), content={
+    "kind": "ErrorType::ErrorType",
+    "loc": null,
+    "children": {
+      "ty": {
+        "kind": "Type::Name",
         "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
+        },
       },
-      "tys": [],
-      "loc": null,
     },
   })
-  json_inspect(@syntax.MaybeError(ty=int_type), content={
-    "type": "ErrorType::MaybeError",
-    "ty": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
+  json_inspect(@syntax.MaybeError(ty=int_type).json_repr(dummy_loc), content={
+    "kind": "ErrorType::MaybeError",
+    "loc": null,
+    "children": {
+      "ty": {
+        "kind": "Type::Name",
         "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
+        },
       },
-      "tys": [],
-      "loc": null,
     },
   })
 }
@@ -221,9 +295,10 @@ test "type to_json" {
     tys=@list.from_array([]),
     loc=dummy_loc,
   )
-  json_inspect(@syntax.Type::Any(loc=dummy_loc), content={
-    "type": "Type::Any",
+  json_inspect(@syntax.Type::Any(loc=dummy_loc).json_repr(), content={
+    "kind": "Type::Any",
     "loc": null,
+    "children": {},
   })
   json_inspect(
     @syntax.Type::Arrow(
@@ -232,84 +307,154 @@ test "type to_json" {
       err=@syntax.NoErrorType,
       is_async=None,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Type::Arrow",
-      "args": [
-        {
-          "type": "Type::Name",
-          "constr_id": {
-            "type": "ConstrId",
-            "id": { "type": "LongIdent::Ident", "0": "Int" },
-            "loc": null,
-          },
-          "tys": [],
-          "loc": null,
-        },
-      ],
-      "res": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": { "type": "LongIdent::Ident", "0": "Int" },
-          "loc": null,
-        },
-        "tys": [],
-        "loc": null,
-      },
-      "err": { "type": "ErrorType::NoErrorType" },
-      "is_async": null,
+      "kind": "Type::Arrow",
       "loc": null,
+      "children": {
+        "args": {
+          "kind": "Type::Arrow::ArgList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "Type::Name",
+              "loc": null,
+              "children": {
+                "constr_id": {
+                  "kind": "ConstrId",
+                  "loc": null,
+                  "children": {
+                    "id": {
+                      "kind": "LongIdent::Ident",
+                      "loc": null,
+                      "children": { "value": "Int" },
+                    },
+                  },
+                },
+                "tys": {
+                  "kind": "Type::Name::TypeList",
+                  "loc": null,
+                  "children": [],
+                },
+              },
+            },
+          ],
+        },
+        "res": {
+          "kind": "Type::Name",
+          "loc": null,
+          "children": {
+            "constr_id": {
+              "kind": "ConstrId",
+              "loc": null,
+              "children": {
+                "id": {
+                  "kind": "LongIdent::Ident",
+                  "loc": null,
+                  "children": { "value": "Int" },
+                },
+              },
+            },
+            "tys": {
+              "kind": "Type::Name::TypeList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
+        "err": { "kind": "ErrorType::NoErrorType", "loc": null, "children": {} },
+        "is_async": null,
+      },
     },
   )
   json_inspect(
-    @syntax.Type::Tuple(tys=@list.from_array([int_type]), loc=dummy_loc),
+    @syntax.Type::Tuple(tys=@list.from_array([int_type]), loc=dummy_loc).json_repr(),
     content={
-      "type": "Type::Tuple",
-      "tys": [
-        {
-          "type": "Type::Name",
-          "constr_id": {
-            "type": "ConstrId",
-            "id": { "type": "LongIdent::Ident", "0": "Int" },
-            "loc": null,
-          },
-          "tys": [],
-          "loc": null,
-        },
-      ],
+      "kind": "Type::Tuple",
       "loc": null,
+      "children": {
+        "tys": {
+          "kind": "Type::Tuple::TypeList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "Type::Name",
+              "loc": null,
+              "children": {
+                "constr_id": {
+                  "kind": "ConstrId",
+                  "loc": null,
+                  "children": {
+                    "id": {
+                      "kind": "LongIdent::Ident",
+                      "loc": null,
+                      "children": { "value": "Int" },
+                    },
+                  },
+                },
+                "tys": {
+                  "kind": "Type::Name::TypeList",
+                  "loc": null,
+                  "children": [],
+                },
+              },
+            },
+          ],
+        },
+      },
     },
   )
   json_inspect(
-    @syntax.Type::Option(ty=int_type, loc=dummy_loc, question_loc=dummy_loc),
+    @syntax.Type::Option(ty=int_type, loc=dummy_loc, question_loc=dummy_loc).json_repr(),
     content={
-      "type": "Type::Option",
-      "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": { "type": "LongIdent::Ident", "0": "Int" },
-          "loc": null,
-        },
-        "tys": [],
-        "loc": null,
-      },
+      "kind": "Type::Option",
       "loc": null,
-      "question_loc": null,
+      "children": {
+        "ty": {
+          "kind": "Type::Name",
+          "loc": null,
+          "children": {
+            "constr_id": {
+              "kind": "ConstrId",
+              "loc": null,
+              "children": {
+                "id": {
+                  "kind": "LongIdent::Ident",
+                  "loc": null,
+                  "children": { "value": "Int" },
+                },
+              },
+            },
+            "tys": {
+              "kind": "Type::Name::TypeList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
+      },
     },
   )
   json_inspect(
     @syntax.Type::Object(@syntax.ConstrId::{
       id: @syntax.LongIdent::Ident(name="TestObject"),
       loc: dummy_loc,
-    }),
+    }).json_repr(),
     content={
-      "type": "Type::Object",
-      "0": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "TestObject" },
-        "loc": null,
+      "kind": "Type::Object",
+      "loc": null,
+      "children": {
+        "value": {
+          "kind": "ConstrId",
+          "loc": null,
+          "children": {
+            "id": {
+              "kind": "LongIdent::Ident",
+              "loc": null,
+              "children": { "value": "TestObject" },
+            },
+          },
+        },
       },
     },
   )
@@ -317,92 +462,174 @@ test "type to_json" {
 
 ///|
 test "hole to_json" {
-  json_inspect(@syntax.Synthesized, content={ "type": "Hole::Synthesized" })
-  json_inspect(@syntax.Incomplete, content={ "type": "Hole::Incomplete" })
-  json_inspect(@syntax.Todo, content={ "type": "Hole::Todo" })
+  json_inspect(@syntax.Synthesized.json_repr(dummy_loc), content={
+    "kind": "Hole::Synthesized",
+    "loc": null,
+    "children": {},
+  })
+  json_inspect(@syntax.Incomplete.json_repr(dummy_loc), content={
+    "kind": "Hole::Incomplete",
+    "loc": null,
+    "children": {},
+  })
+  json_inspect(@syntax.Todo.json_repr(dummy_loc), content={
+    "kind": "Hole::Todo",
+    "loc": null,
+    "children": {},
+  })
 }
 
 ///|
 test "argument_kind to_json" {
   let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
-  json_inspect(@syntax.ArgumentKind::Positional, content={
-    "type": "ArgumentKind::Positional",
+  json_inspect(@syntax.ArgumentKind::Positional.json_repr(dummy_loc), content={
+    "kind": "ArgumentKind::Positional",
+    "loc": null,
+    "children": {},
   })
-  json_inspect(@syntax.ArgumentKind::Labelled(label), content={
-    "type": "ArgumentKind::Labelled",
-    "0": { "type": "Label", "name": "test_label", "loc": null },
+  json_inspect(@syntax.ArgumentKind::Labelled(label).json_repr(dummy_loc), content={
+    "kind": "ArgumentKind::Labelled",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "Label",
+        "loc": null,
+        "children": { "name": "test_label" },
+      },
+    },
   })
-  json_inspect(@syntax.ArgumentKind::LabelledPun(label), content={
-    "type": "ArgumentKind::LabelledPun",
-    "0": { "type": "Label", "name": "test_label", "loc": null },
+  json_inspect(@syntax.ArgumentKind::LabelledPun(label).json_repr(dummy_loc), content={
+    "kind": "ArgumentKind::LabelledPun",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "Label",
+        "loc": null,
+        "children": { "name": "test_label" },
+      },
+    },
   })
   json_inspect(
-    @syntax.ArgumentKind::LabelledOption(label~, question_loc=dummy_loc),
+    @syntax.ArgumentKind::LabelledOption(label~, question_loc=dummy_loc).json_repr(
+      dummy_loc,
+    ),
     content={
-      "type": "ArgumentKind::LabelledOption",
-      "label": { "type": "Label", "name": "test_label", "loc": null },
-      "question_loc": null,
+      "kind": "ArgumentKind::LabelledOption",
+      "loc": null,
+      "children": {
+        "label": {
+          "kind": "Label",
+          "loc": null,
+          "children": { "name": "test_label" },
+        },
+      },
     },
   )
   json_inspect(
-    @syntax.ArgumentKind::LabelledOptionPun(label~, question_loc=dummy_loc),
+    @syntax.ArgumentKind::LabelledOptionPun(label~, question_loc=dummy_loc).json_repr(
+      dummy_loc,
+    ),
     content={
-      "type": "ArgumentKind::LabelledOptionPun",
-      "label": { "type": "Label", "name": "test_label", "loc": null },
-      "question_loc": null,
+      "kind": "ArgumentKind::LabelledOptionPun",
+      "loc": null,
+      "children": {
+        "label": {
+          "kind": "Label",
+          "loc": null,
+          "children": { "name": "test_label" },
+        },
+      },
     },
   )
 }
 
 ///|
 test "fn_kind to_json" {
-  json_inspect(@syntax.FnKind::Lambda, content={ "type": "FnKind::Lambda" })
-  json_inspect(@syntax.FnKind::Arrow, content={ "type": "FnKind::Arrow" })
+  json_inspect(@syntax.FnKind::Lambda.json_repr(dummy_loc), content={
+    "kind": "FnKind::Lambda",
+    "loc": null,
+    "children": {},
+  })
+  json_inspect(@syntax.FnKind::Arrow.json_repr(dummy_loc), content={
+    "kind": "FnKind::Arrow",
+    "loc": null,
+    "children": {},
+  })
 }
 
 ///|
 test "group to_json" {
-  json_inspect(@syntax.Group::Brace, content={ "type": "Group::Brace" })
-  json_inspect(@syntax.Group::Paren, content={ "type": "Group::Paren" })
+  json_inspect(@syntax.Group::Brace.json_repr(dummy_loc), content={
+    "kind": "Group::Brace",
+    "loc": null,
+    "children": {},
+  })
+  json_inspect(@syntax.Group::Paren.json_repr(dummy_loc), content={
+    "kind": "Group::Paren",
+    "loc": null,
+    "children": {},
+  })
 }
 
 ///|
 test "trailing_mark to_json" {
-  json_inspect(@syntax.TrailingMark::Comma, content={
-    "type": "Trailing::Comma",
+  json_inspect(@syntax.TrailingMark::Comma.json_repr(dummy_loc), content={
+    "kind": "Trailing::Comma",
+    "loc": null,
+    "children": {},
   })
-  json_inspect(@syntax.TrailingMark::Semi, content={ "type": "Trailing::Semi" })
-  json_inspect(@syntax.TrailingMark::None, content={ "type": "Trailing::None" })
+  json_inspect(@syntax.TrailingMark::Semi.json_repr(dummy_loc), content={
+    "kind": "Trailing::Semi",
+    "loc": null,
+    "children": {},
+  })
+  json_inspect(@syntax.TrailingMark::None.json_repr(dummy_loc), content={
+    "kind": "Trailing::None",
+    "loc": null,
+    "children": {},
+  })
 }
 
 ///|
 test "apply_attr to_json" {
-  json_inspect(@syntax.NoAttr, content={ "type": "ApplyAttr::NoAttr" })
-  json_inspect(@syntax.ApplyAttr::Exclamation, content={
-    "type": "ApplyAttr::Exclamation",
+  json_inspect(@syntax.NoAttr.json_repr(dummy_loc), content={
+    "kind": "ApplyAttr::NoAttr",
+    "loc": null,
+    "children": {},
   })
-  json_inspect(@syntax.ApplyAttr::Question, content={
-    "type": "ApplyAttr::Question",
+  json_inspect(@syntax.ApplyAttr::Exclamation.json_repr(dummy_loc), content={
+    "kind": "ApplyAttr::Exclamation",
+    "loc": null,
+    "children": {},
+  })
+  json_inspect(@syntax.ApplyAttr::Question.json_repr(dummy_loc), content={
+    "kind": "ApplyAttr::Question",
+    "loc": null,
+    "children": {},
   })
 }
 
 ///|
 test "TryOperatorKind to_json" {
-  json_inspect(@syntax.TryOperatorKind::Question, content={
-    "type": "TryOperatorKind::Question",
+  json_inspect(@syntax.TryOperatorKind::Question.json_repr(dummy_loc), content={
+    "kind": "TryOperatorKind::Question",
+    "loc": null,
+    "children": {},
   })
-  json_inspect(@syntax.TryOperatorKind::Exclamation, content={
-    "type": "TryOperatorKind::Exclamation",
+  json_inspect(@syntax.TryOperatorKind::Exclamation.json_repr(dummy_loc), content={
+    "kind": "TryOperatorKind::Exclamation",
+    "loc": null,
+    "children": {},
   })
 }
 
 ///|
 test "binder to_json" {
   let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
-  json_inspect(binder, content={
-    "type": "Binder",
-    "name": "test_binder",
+  json_inspect(binder.json_repr(), content={
+    "kind": "Binder",
     "loc": null,
+    "children": { "name": "test_binder" },
   })
 }
 
@@ -412,10 +639,16 @@ test "var to_json" {
     name: @syntax.LongIdent::Ident(name="test_var"),
     loc: dummy_loc,
   }
-  json_inspect(variable, content={
-    "type": "Var",
-    "name": { "type": "LongIdent::Ident", "0": "test_var" },
+  json_inspect(variable.json_repr(), content={
+    "kind": "Var",
     "loc": null,
+    "children": {
+      "name": {
+        "kind": "LongIdent::Ident",
+        "loc": null,
+        "children": { "value": "test_var" },
+      },
+    },
   })
 }
 
@@ -426,21 +659,33 @@ test "constructor_extra_info to_json" {
     is_object: false,
     loc: dummy_loc,
   }
-  json_inspect(@syntax.NoExtraInfo, content={
-    "type": "ConstructorExtraInfo::NoExtraInfo",
+  json_inspect(@syntax.NoExtraInfo.json_repr(dummy_loc), content={
+    "kind": "ConstructorExtraInfo::NoExtraInfo",
+    "loc": null,
+    "children": {},
   })
-  json_inspect(@syntax.TypeName(type_name), content={
-    "type": "ConstructorExtraInfo::TypeName",
-    "0": {
-      "type": "TypeName",
-      "name": { "type": "LongIdent::Ident", "0": "TestType" },
-      "is_object": false,
-      "loc": null,
+  json_inspect(@syntax.TypeName(type_name).json_repr(dummy_loc), content={
+    "kind": "ConstructorExtraInfo::TypeName",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "TypeName",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "LongIdent::Ident",
+            "loc": null,
+            "children": { "value": "TestType" },
+          },
+          "is_object": false,
+        },
+      },
     },
   })
-  json_inspect(@syntax.Package("test_package"), content={
-    "type": "ConstructorExtraInfo::Package",
-    "0": "test_package",
+  json_inspect(@syntax.Package("test_package").json_repr(dummy_loc), content={
+    "kind": "ConstructorExtraInfo::Package",
+    "loc": null,
+    "children": { "value": "test_package" },
   })
 }
 
@@ -455,35 +700,60 @@ test "constructor to_json" {
     extra_info: @syntax.NoExtraInfo,
     loc: dummy_loc,
   }
-  json_inspect(constr, content={
-    "type": "Constructor",
-    "name": { "type": "ConstrName", "name": "TestConstructor", "loc": null },
-    "extra_info": { "type": "ConstructorExtraInfo::NoExtraInfo" },
+  json_inspect(constr.json_repr(), content={
+    "kind": "Constructor",
     "loc": null,
+    "children": {
+      "name": {
+        "kind": "ConstrName",
+        "loc": null,
+        "children": { "name": "TestConstructor" },
+      },
+      "extra_info": {
+        "kind": "ConstructorExtraInfo::NoExtraInfo",
+        "loc": null,
+        "children": {},
+      },
+    },
   })
 }
 
 ///|
 test "accessor to_json" {
   let label = @syntax.Label::{ name: "test_field", loc: dummy_loc }
-  json_inspect(@syntax.Accessor::Label(label), content={
-    "type": "Accessor::Label",
-    "0": { "type": "Label", "name": "test_field", "loc": null },
-  })
-  json_inspect(@syntax.Accessor::Index(tuple_index=0, loc=dummy_loc), content={
-    "type": "Accessor::Index",
-    "tuple_index": 0,
+  json_inspect(@syntax.Accessor::Label(label).json_repr(), content={
+    "kind": "Accessor::Label",
     "loc": null,
+    "children": {
+      "value": {
+        "kind": "Label",
+        "loc": null,
+        "children": { "name": "test_field" },
+      },
+    },
   })
-  json_inspect(@syntax.Accessor::Newtype(loc=dummy_loc), content={
-    "type": "Accessor::Newtype",
+  json_inspect(
+    @syntax.Accessor::Index(tuple_index=0, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Accessor::Index",
+      "loc": null,
+      "children": { "tuple_index": 0 },
+    },
+  )
+  json_inspect(@syntax.Accessor::Newtype(loc=dummy_loc).json_repr(), content={
+    "kind": "Accessor::Newtype",
     "loc": null,
+    "children": {},
   })
 }
 
 ///|
 test "exception_decl to_json" {
-  json_inspect(@syntax.NoPayload, content={ "type": "ExceptionDecl::NoPayload" })
+  json_inspect(@syntax.NoPayload.json_repr(dummy_loc), content={
+    "kind": "ExceptionDecl::NoPayload",
+    "loc": null,
+    "children": {},
+  })
   let int_type = @syntax.Name(
     constr_id=@syntax.ConstrId::{
       id: @syntax.LongIdent::Ident(name="Int"),
@@ -492,17 +762,28 @@ test "exception_decl to_json" {
     tys=@list.from_array([]),
     loc=dummy_loc,
   )
-  json_inspect(@syntax.SinglePayload(int_type), content={
-    "type": "ExceptionDecl::SinglePayload",
-    "0": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
+  json_inspect(@syntax.SinglePayload(int_type).json_repr(dummy_loc), content={
+    "kind": "ExceptionDecl::SinglePayload",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "Type::Name",
         "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
+        },
       },
-      "tys": [],
-      "loc": null,
     },
   })
   let constr_name = @syntax.ConstrName::{ name: "TestConstr", loc: dummy_loc }
@@ -514,26 +795,54 @@ test "exception_decl to_json" {
     attrs: @list.empty(),
     doc: dummy_docstring,
   }
-  json_inspect(@syntax.EnumPayload(@list.from_array([constr_decl])), content={
-    "type": "ExceptionDecl::EnumPayload",
-    "0": [
-      {
-        "type": "ConstrDecl",
-        "name": { "type": "ConstrName", "name": "TestConstr", "loc": null },
-        "args": null,
-        "tag": null,
-        "attrs": [],
-        "loc": null,
-        "doc": "Test documentation",
+  json_inspect(
+    @syntax.EnumPayload(@list.from_array([constr_decl])).json_repr(dummy_loc),
+    content={
+      "kind": "ExceptionDecl::EnumPayload",
+      "loc": null,
+      "children": {
+        "value": {
+          "kind": "ExceptionDecl::EnumPayload::ConstrList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "ConstrDecl",
+              "loc": null,
+              "children": {
+                "name": {
+                  "kind": "ConstrName",
+                  "loc": null,
+                  "children": { "name": "TestConstr" },
+                },
+                "args": null,
+                "tag": null,
+                "attrs": {
+                  "kind": "ConstrDecl::AttrList",
+                  "loc": null,
+                  "children": [],
+                },
+                "doc": "Test documentation",
+              },
+            },
+          ],
+        },
       },
-    ],
-  })
+    },
+  )
 }
 
 ///|
 test "type_desc to_json" {
-  json_inspect(@syntax.Abstract, content={ "type": "TypeDesc::Abstract" })
-  json_inspect(@syntax.Extern, content={ "type": "TypeDesc::Extern" })
+  json_inspect(@syntax.Abstract.json_repr(dummy_loc), content={
+    "kind": "TypeDesc::Abstract",
+    "loc": null,
+    "children": {},
+  })
+  json_inspect(@syntax.Extern.json_repr(dummy_loc), content={
+    "kind": "TypeDesc::Extern",
+    "loc": null,
+    "children": {},
+  })
   let int_type = @syntax.Name(
     constr_id=@syntax.ConstrId::{
       id: @syntax.LongIdent::Ident(name="Int"),
@@ -542,88 +851,161 @@ test "type_desc to_json" {
     tys=@list.from_array([]),
     loc=dummy_loc,
   )
-  json_inspect(@syntax.SinglePayload(int_type), content={
-    "type": "ExceptionDecl::SinglePayload",
-    "0": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
+  json_inspect(@syntax.SinglePayload(int_type).json_repr(dummy_loc), content={
+    "kind": "ExceptionDecl::SinglePayload",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "Type::Name",
         "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
+        },
       },
-      "tys": [],
-      "loc": null,
     },
   })
-  json_inspect(@syntax.Error(@syntax.NoPayload), content={
-    "type": "TypeDesc::Error",
-    "0": { "type": "ExceptionDecl::NoPayload" },
-  })
-  json_inspect(@syntax.TypeDesc::Alias(int_type), content={
-    "type": "TypeDesc::Alias",
-    "0": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
+  json_inspect(@syntax.Error(@syntax.NoPayload).json_repr(dummy_loc), content={
+    "kind": "TypeDesc::Error",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "ExceptionDecl::NoPayload",
         "loc": null,
+        "children": {},
       },
-      "tys": [],
-      "loc": null,
+    },
+  })
+  json_inspect(@syntax.TypeDesc::Alias(int_type).json_repr(dummy_loc), content={
+    "kind": "TypeDesc::Alias",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
+        },
+      },
     },
   })
 }
 
 ///|
 test "dot_dot_binder to_json" {
-  json_inspect(@syntax.Underscore, content={
-    "type": "DotDotBinder::Underscore",
+  json_inspect(@syntax.Underscore.json_repr(dummy_loc), content={
+    "kind": "DotDotBinder::Underscore",
+    "loc": null,
+    "children": {},
   })
-  json_inspect(@syntax.NoBinder, content={ "type": "DotDotBinder::NoBinder" })
+  json_inspect(@syntax.NoBinder.json_repr(dummy_loc), content={
+    "kind": "DotDotBinder::NoBinder",
+    "loc": null,
+    "children": {},
+  })
   let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
-  json_inspect(@syntax.BinderAs(binder), content={
-    "type": "DotDotBinder::BinderAs",
-    "0": { "type": "Binder", "name": "test_binder", "loc": null },
+  json_inspect(@syntax.BinderAs(binder).json_repr(dummy_loc), content={
+    "kind": "DotDotBinder::BinderAs",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "Binder",
+        "loc": null,
+        "children": { "name": "test_binder" },
+      },
+    },
   })
-  json_inspect(@syntax.DotDotBinder::Binder(binder), content={
-    "type": "DotDotBinder::Binder",
-    "0": { "type": "Binder", "name": "test_binder", "loc": null },
+  json_inspect(@syntax.DotDotBinder::Binder(binder).json_repr(dummy_loc), content={
+    "kind": "DotDotBinder::Binder",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "Binder",
+        "loc": null,
+        "children": { "name": "test_binder" },
+      },
+    },
   })
 }
 
 ///|
 test "array_pattern to_json" {
   let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
-  json_inspect(@syntax.ArrayPattern::Pattern(any_pattern), content={
-    "type": "ArrayPattern::Pattern",
-    "0": { "type": "Pattern::Any", "loc": null },
-  })
-  json_inspect(@syntax.StringSpread(str=dummy_string_literal, loc=dummy_loc), content={
-    "type": "ArrayPattern::StringSpread",
-    "str": "test_string",
+  json_inspect(@syntax.ArrayPattern::Pattern(any_pattern).json_repr(), content={
+    "kind": "ArrayPattern::Pattern",
     "loc": null,
+    "children": {
+      "value": { "kind": "Pattern::Any", "loc": null, "children": {} },
+    },
   })
-  json_inspect(@syntax.BytesSpread(bytes=dummy_bytes_literal, loc=dummy_loc), content={
-    "type": "ArrayPattern::BytesSpread",
-    "bytes": "b\"ABC\"",
-    "loc": null,
-  })
-  let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
   json_inspect(
-    @syntax.ConstSpread(binder~, pkg=Some("test_pkg"), loc=dummy_loc),
+    @syntax.StringSpread(str=dummy_string_literal, loc=dummy_loc).json_repr(),
     content={
-      "type": "ArrayPattern::ConstSpread",
-      "binder": { "type": "Binder", "name": "test_binder", "loc": null },
-      "pkg": "test_pkg",
+      "kind": "ArrayPattern::StringSpread",
       "loc": null,
+      "children": { "str": "test_string" },
     },
   )
-  json_inspect(@syntax.ConstSpread(binder~, pkg=None, loc=dummy_loc), content={
-    "type": "ArrayPattern::ConstSpread",
-    "binder": { "type": "Binder", "name": "test_binder", "loc": null },
-    "pkg": null,
-    "loc": null,
-  })
+  json_inspect(
+    @syntax.BytesSpread(bytes=dummy_bytes_literal, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "ArrayPattern::BytesSpread",
+      "loc": null,
+      "children": { "bytes": "b\"ABC\"" },
+    },
+  )
+  let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
+  json_inspect(
+    @syntax.ConstSpread(binder~, pkg=Some("test_pkg"), loc=dummy_loc).json_repr(),
+    content={
+      "kind": "ArrayPattern::ConstSpread",
+      "loc": null,
+      "children": {
+        "binder": {
+          "kind": "Binder",
+          "loc": null,
+          "children": { "name": "test_binder" },
+        },
+        "pkg": "test_pkg",
+      },
+    },
+  )
+  json_inspect(
+    @syntax.ConstSpread(binder~, pkg=None, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "ArrayPattern::ConstSpread",
+      "loc": null,
+      "children": {
+        "binder": {
+          "kind": "Binder",
+          "loc": null,
+          "children": { "name": "test_binder" },
+        },
+        "pkg": null,
+      },
+    },
+  )
 }
 
 ///|
@@ -631,51 +1013,91 @@ test "array_patterns to_json" {
   let any_pattern = @syntax.ArrayPattern::Pattern(
     @syntax.Pattern::Any(loc=dummy_loc),
   )
-  json_inspect(@syntax.Closed(@list.from_array([any_pattern])), content={
-    "type": "ArrayPatterns::Closed",
-    "0": [
-      {
-        "type": "ArrayPattern::Pattern",
-        "0": { "type": "Pattern::Any", "loc": null },
+  json_inspect(
+    @syntax.Closed(@list.from_array([any_pattern])).json_repr(dummy_loc),
+    content={
+      "kind": "ArrayPatterns::Closed",
+      "loc": null,
+      "children": {
+        "value": {
+          "kind": "ArrayPatterns::Closed::PatternList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "ArrayPattern::Pattern",
+              "loc": null,
+              "children": {
+                "value": { "kind": "Pattern::Any", "loc": null, "children": {} },
+              },
+            },
+          ],
+        },
       },
-    ],
-  })
+    },
+  )
   json_inspect(
     @syntax.Open(
       @list.from_array([any_pattern]),
       @list.from_array([any_pattern]),
       @syntax.Underscore,
-    ),
+    ).json_repr(dummy_loc),
     content={
-      "type": "ArrayPatterns::Open",
-      "0": [
-        {
-          "type": "ArrayPattern::Pattern",
-          "0": { "type": "Pattern::Any", "loc": null },
+      "kind": "ArrayPatterns::Open",
+      "loc": null,
+      "children": {
+        "0": {
+          "kind": "ArrayPatterns::Open::LPatternList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "ArrayPattern::Pattern",
+              "loc": null,
+              "children": {
+                "value": { "kind": "Pattern::Any", "loc": null, "children": {} },
+              },
+            },
+          ],
         },
-      ],
-      "1": [
-        {
-          "type": "ArrayPattern::Pattern",
-          "0": { "type": "Pattern::Any", "loc": null },
+        "1": {
+          "kind": "ArrayPatterns::Open::RPatternList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "ArrayPattern::Pattern",
+              "loc": null,
+              "children": {
+                "value": { "kind": "Pattern::Any", "loc": null, "children": {} },
+              },
+            },
+          ],
         },
-      ],
-      "2": { "type": "DotDotBinder::Underscore" },
+        "2": { "kind": "DotDotBinder::Underscore", "loc": null, "children": {} },
+      },
     },
   )
 }
 
 ///|
 test "embedded_code to_json" {
-  json_inspect(@syntax.CodeString(dummy_string_literal), content={
-    "type": "EmbeddedCode::CodeString",
-    "0": "test_string",
+  json_inspect(@syntax.CodeString(dummy_string_literal).json_repr(dummy_loc), content={
+    "kind": "EmbeddedCode::CodeString",
+    "loc": null,
+    "children": { "value": "test_string" },
   })
   json_inspect(
-    @syntax.CodeMultilineString(@list.from_array(["line1", "line2", "line3"])),
+    @syntax.CodeMultilineString(@list.from_array(["line1", "line2", "line3"])).json_repr(
+      dummy_loc,
+    ),
     content={
-      "type": "EmbeddedCode::CodeMultilineString",
-      "0": ["line1", "line2", "line3"],
+      "kind": "EmbeddedCode::CodeMultilineString",
+      "loc": null,
+      "children": {
+        "value": {
+          "kind": "EmbeddedCode::CodeMultilineString::LiteralList",
+          "loc": null,
+          "children": ["line1", "line2", "line3"],
+        },
+      },
     },
   )
 }
@@ -687,33 +1109,51 @@ test "func_stubs to_json" {
       module_name=dummy_string_literal,
       func_name=dummy_string_literal,
       language=None,
-    ),
+    ).json_repr(dummy_loc),
     content={
-      "type": "FuncStubs::Import",
-      "module_name": "test_string",
-      "func_name": "test_string",
+      "kind": "FuncStubs::Import",
+      "loc": null,
+      "children": {
+        "module_name": "test_string",
+        "func_name": "test_string",
+        "language": null,
+      },
     },
   )
   json_inspect(
     @syntax.Embedded(
       language=Some(dummy_string_literal),
       code=@syntax.CodeString(dummy_string_literal),
-    ),
+    ).json_repr(dummy_loc),
     content={
-      "type": "FuncStubs::Embedded",
-      "language": "test_string",
-      "code": { "type": "EmbeddedCode::CodeString", "0": "test_string" },
+      "kind": "FuncStubs::Embedded",
+      "loc": null,
+      "children": {
+        "language": "test_string",
+        "code": {
+          "kind": "EmbeddedCode::CodeString",
+          "loc": null,
+          "children": { "value": "test_string" },
+        },
+      },
     },
   )
   json_inspect(
     @syntax.Embedded(
       language=None,
       code=@syntax.CodeString(dummy_string_literal),
-    ),
+    ).json_repr(dummy_loc),
     content={
-      "type": "FuncStubs::Embedded",
-      "language": null,
-      "code": { "type": "EmbeddedCode::CodeString", "0": "test_string" },
+      "kind": "FuncStubs::Embedded",
+      "loc": null,
+      "children": {
+        "language": null,
+        "code": {
+          "kind": "EmbeddedCode::CodeString",
+          "loc": null,
+          "children": { "value": "test_string" },
+        },
+      },
     },
   )
 }
@@ -731,92 +1171,202 @@ test "parameter to_json" {
   )
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   json_inspect(
-    @syntax.Parameter::DiscardPositional(ty=Some(int_type), loc=dummy_loc),
+    @syntax.Parameter::DiscardPositional(ty=Some(int_type), loc=dummy_loc).json_repr(),
     content={
-      "type": "Parameter::DiscardPositional",
-      "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": { "type": "LongIdent::Ident", "0": "Int" },
-          "loc": null,
-        },
-        "tys": [],
-        "loc": null,
-      },
+      "kind": "Parameter::DiscardPositional",
       "loc": null,
+      "children": {
+        "ty": {
+          "kind": "Type::Name",
+          "loc": null,
+          "children": {
+            "constr_id": {
+              "kind": "ConstrId",
+              "loc": null,
+              "children": {
+                "id": {
+                  "kind": "LongIdent::Ident",
+                  "loc": null,
+                  "children": { "value": "Int" },
+                },
+              },
+            },
+            "tys": {
+              "kind": "Type::Name::TypeList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
+      },
     },
   )
-  json_inspect(@syntax.Parameter::DiscardPositional(ty=None, loc=dummy_loc), content={
-    "type": "Parameter::DiscardPositional",
-    "ty": null,
+  json_inspect(
+    @syntax.Parameter::DiscardPositional(ty=None, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Parameter::DiscardPositional",
+      "loc": null,
+      "children": { "ty": null },
+    },
+  )
+  json_inspect(
+    @syntax.Parameter::Positional(binder~, ty=Some(int_type)).json_repr(),
+    content={
+      "kind": "Parameter::Positional",
+      "loc": null,
+      "children": {
+        "binder": {
+          "kind": "Binder",
+          "loc": null,
+          "children": { "name": "param" },
+        },
+        "ty": {
+          "kind": "Type::Name",
+          "loc": null,
+          "children": {
+            "constr_id": {
+              "kind": "ConstrId",
+              "loc": null,
+              "children": {
+                "id": {
+                  "kind": "LongIdent::Ident",
+                  "loc": null,
+                  "children": { "value": "Int" },
+                },
+              },
+            },
+            "tys": {
+              "kind": "Type::Name::TypeList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
+      },
+    },
+  )
+  json_inspect(@syntax.Parameter::Positional(binder~, ty=None).json_repr(), content={
+    "kind": "Parameter::Positional",
     "loc": null,
-  })
-  json_inspect(@syntax.Parameter::Positional(binder~, ty=Some(int_type)), content={
-    "type": "Parameter::Positional",
-    "binder": { "type": "Binder", "name": "param", "loc": null },
-    "ty": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
+    "children": {
+      "binder": {
+        "kind": "Binder",
         "loc": null,
+        "children": { "name": "param" },
       },
-      "tys": [],
-      "loc": null,
-    },
-  })
-  json_inspect(@syntax.Parameter::Positional(binder~, ty=None), content={
-    "type": "Parameter::Positional",
-    "binder": { "type": "Binder", "name": "param", "loc": null },
-    "ty": null,
-  })
-  json_inspect(@syntax.Parameter::Labelled(binder~, ty=Some(int_type)), content={
-    "type": "Parameter::Labelled",
-    "binder": { "type": "Binder", "name": "param", "loc": null },
-    "ty": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
-        "loc": null,
-      },
-      "tys": [],
-      "loc": null,
+      "ty": null,
     },
   })
   json_inspect(
-    @syntax.Parameter::Optional(binder~, default=unit_expr, ty=Some(int_type)),
+    @syntax.Parameter::Labelled(binder~, ty=Some(int_type)).json_repr(),
     content={
-      "type": "Parameter::Optional",
-      "binder": { "type": "Binder", "name": "param", "loc": null },
-      "default": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": { "type": "LongIdent::Ident", "0": "Int" },
+      "kind": "Parameter::Labelled",
+      "loc": null,
+      "children": {
+        "binder": {
+          "kind": "Binder",
           "loc": null,
+          "children": { "name": "param" },
         },
-        "tys": [],
-        "loc": null,
+        "ty": {
+          "kind": "Type::Name",
+          "loc": null,
+          "children": {
+            "constr_id": {
+              "kind": "ConstrId",
+              "loc": null,
+              "children": {
+                "id": {
+                  "kind": "LongIdent::Ident",
+                  "loc": null,
+                  "children": { "value": "Int" },
+                },
+              },
+            },
+            "tys": {
+              "kind": "Type::Name::TypeList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
       },
     },
   )
   json_inspect(
-    @syntax.Parameter::QuestionOptional(binder~, ty=Some(int_type)),
+    @syntax.Parameter::Optional(binder~, default=unit_expr, ty=Some(int_type)).json_repr(),
     content={
-      "type": "Parameter::QuestionOptional",
-      "binder": { "type": "Binder", "name": "param", "loc": null },
-      "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": { "type": "LongIdent::Ident", "0": "Int" },
+      "kind": "Parameter::Optional",
+      "loc": null,
+      "children": {
+        "binder": {
+          "kind": "Binder",
           "loc": null,
+          "children": { "name": "param" },
         },
-        "tys": [],
-        "loc": null,
+        "default": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "ty": {
+          "kind": "Type::Name",
+          "loc": null,
+          "children": {
+            "constr_id": {
+              "kind": "ConstrId",
+              "loc": null,
+              "children": {
+                "id": {
+                  "kind": "LongIdent::Ident",
+                  "loc": null,
+                  "children": { "value": "Int" },
+                },
+              },
+            },
+            "tys": {
+              "kind": "Type::Name::TypeList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
+      },
+    },
+  )
+  json_inspect(
+    @syntax.Parameter::QuestionOptional(binder~, ty=Some(int_type)).json_repr(),
+    content={
+      "kind": "Parameter::QuestionOptional",
+      "loc": null,
+      "children": {
+        "binder": {
+          "kind": "Binder",
+          "loc": null,
+          "children": { "name": "param" },
+        },
+        "ty": {
+          "kind": "Type::Name",
+          "loc": null,
+          "children": {
+            "constr_id": {
+              "kind": "ConstrId",
+              "loc": null,
+              "children": {
+                "id": {
+                  "kind": "LongIdent::Ident",
+                  "loc": null,
+                  "children": { "value": "Int" },
+                },
+              },
+            },
+            "tys": {
+              "kind": "Type::Name::TypeList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
       },
     },
   )
@@ -826,18 +1376,27 @@ test "parameter to_json" {
 test "interp_elem to_json" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   json_inspect(
-    @syntax.InterpElem::Literal(repr=dummy_string_literal, loc=dummy_loc),
+    @syntax.InterpElem::Literal(repr=dummy_string_literal, loc=dummy_loc).json_repr(),
     content={
-      "type": "InterpElem::Literal",
-      "repr": "test_string",
+      "kind": "InterpElem::Literal",
       "loc": null,
+      "children": { "repr": "test_string" },
     },
   )
-  json_inspect(@syntax.InterpElem::Expr(expr=unit_expr, loc=dummy_loc), content={
-    "type": "InterpElem::Expr",
-    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "loc": null,
-  })
+  json_inspect(
+    @syntax.InterpElem::Expr(expr=unit_expr, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "InterpElem::Expr",
+      "loc": null,
+      "children": {
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
+    },
+  )
 }
 
 ///|
@@ -846,17 +1405,34 @@ test "multiline_string_elem to_json" {
     repr=dummy_string_literal,
     loc=dummy_loc,
   )
-  json_inspect(@syntax.MultilineStringElem::String("test string"), content={
-    "type": "MultilineString::String",
-    "0": "test string",
-  })
   json_inspect(
-    @syntax.MultilineStringElem::Interp(@list.from_array([interp_elem])),
+    @syntax.MultilineStringElem::String("test string").json_repr(dummy_loc),
     content={
-      "type": "MultilineString::Interp",
-      "0": [
-        { "type": "InterpElem::Literal", "repr": "test_string", "loc": null },
-      ],
+      "kind": "MultilineString::String",
+      "loc": null,
+      "children": { "value": "test string" },
+    },
+  )
+  json_inspect(
+    @syntax.MultilineStringElem::Interp(@list.from_array([interp_elem])).json_repr(
+      dummy_loc,
+    ),
+    content={
+      "kind": "MultilineString::Interp",
+      "loc": null,
+      "children": {
+        "value": {
+          "kind": "MultilineString::Interp::ElemList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "InterpElem::Literal",
+              "loc": null,
+              "children": { "repr": "test_string" },
+            },
+          ],
+        },
+      },
     },
   )
 }
@@ -864,15 +1440,31 @@ test "multiline_string_elem to_json" {
 ///|
 test "spreadable_elem to_json" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
-  json_inspect(@syntax.SpreadableElem::Regular(unit_expr), content={
-    "type": "SpreadableElem::Regular",
-    "0": { "type": "Expr::Unit", "loc": null, "faked": false },
-  })
-  json_inspect(@syntax.SpreadableElem::Spread(expr=unit_expr, loc=dummy_loc), content={
-    "type": "SpreadableElem::Spread",
-    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
+  json_inspect(@syntax.SpreadableElem::Regular(unit_expr).json_repr(), content={
+    "kind": "SpreadableElem::Regular",
     "loc": null,
+    "children": {
+      "value": {
+        "kind": "Expr::Unit",
+        "loc": null,
+        "children": { "faked": false },
+      },
+    },
   })
+  json_inspect(
+    @syntax.SpreadableElem::Spread(expr=unit_expr, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "SpreadableElem::Spread",
+      "loc": null,
+      "children": {
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
+    },
+  )
 }
 
 ///|
@@ -885,12 +1477,21 @@ test "map_expr_elem to_json" {
     key_loc: dummy_loc,
     loc: dummy_loc,
   }
-  json_inspect(map_elem, content={
-    "type": "MapExprElem",
-    "key": { "type": "Constant::Int", "0": "42" },
-    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "key_loc": null,
+  json_inspect(map_elem.json_repr(), content={
+    "kind": "MapExprElem",
     "loc": null,
+    "children": {
+      "key": {
+        "kind": "Constant::Int",
+        "loc": null,
+        "children": { "value": "42" },
+      },
+      "expr": {
+        "kind": "Expr::Unit",
+        "loc": null,
+        "children": { "faked": false },
+      },
+    },
   })
 }
 
@@ -904,12 +1505,22 @@ test "field_def to_json" {
     is_pun: false,
     loc: dummy_loc,
   }
-  json_inspect(field_def, content={
-    "type": "FieldDef",
-    "label": { "type": "Label", "name": "field_name", "loc": null },
-    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "is_pun": false,
+  json_inspect(field_def.json_repr(), content={
+    "kind": "FieldDef",
     "loc": null,
+    "children": {
+      "label": {
+        "kind": "Label",
+        "loc": null,
+        "children": { "name": "field_name" },
+      },
+      "expr": {
+        "kind": "Expr::Unit",
+        "loc": null,
+        "children": { "faked": false },
+      },
+      "is_pun": false,
+    },
   })
 }
 
@@ -920,10 +1531,21 @@ test "argument to_json" {
     value: unit_expr,
     kind: @syntax.ArgumentKind::Positional,
   }
-  json_inspect(argument, content={
-    "type": "Argument",
-    "value": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "kind": { "type": "ArgumentKind::Positional" },
+  json_inspect(argument.json_repr(), content={
+    "kind": "Argument",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "Expr::Unit",
+        "loc": null,
+        "children": { "faked": false },
+      },
+      "kind": {
+        "kind": "ArgumentKind::Positional",
+        "loc": null,
+        "children": {},
+      },
+    },
   })
 }
 
@@ -941,17 +1563,35 @@ test "case to_json" {
     guard_: None,
     body: unit_expr,
   }
-  json_inspect(case_with_guard, content={
-    "type": "Case",
-    "pattern": { "type": "Pattern::Any", "loc": null },
-    "guard": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "body": { "type": "Expr::Unit", "loc": null, "faked": false },
+  json_inspect(case_with_guard.json_repr(), content={
+    "kind": "Case",
+    "loc": null,
+    "children": {
+      "pattern": { "kind": "Pattern::Any", "loc": null, "children": {} },
+      "guard": {
+        "kind": "Expr::Unit",
+        "loc": null,
+        "children": { "faked": false },
+      },
+      "body": {
+        "kind": "Expr::Unit",
+        "loc": null,
+        "children": { "faked": false },
+      },
+    },
   })
-  json_inspect(case_without_guard, content={
-    "type": "Case",
-    "pattern": { "type": "Pattern::Any", "loc": null },
-    "guard": null,
-    "body": { "type": "Expr::Unit", "loc": null, "faked": false },
+  json_inspect(case_without_guard.json_repr(), content={
+    "kind": "Case",
+    "loc": null,
+    "children": {
+      "pattern": { "kind": "Pattern::Any", "loc": null, "children": {} },
+      "guard": null,
+      "body": {
+        "kind": "Expr::Unit",
+        "loc": null,
+        "children": { "faked": false },
+      },
+    },
   })
 }
 
@@ -971,21 +1611,35 @@ test "static_assertion to_json" {
     loc: dummy_loc,
     msg: "Test assertion message",
   }
-  json_inspect(assertion, content={
-    "type": "StaticAssertion",
-    "ty": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
-        "loc": null,
-      },
-      "tys": [],
-      "loc": null,
-    },
-    "trait": { "type": "LongIdent::Ident", "0": "Show" },
+  json_inspect(assertion.json_repr(), content={
+    "kind": "StaticAssertion",
     "loc": null,
-    "msg": "Test assertion message",
+    "children": {
+      "ty": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
+        },
+      },
+      "trait": {
+        "kind": "LongIdent::Ident",
+        "loc": null,
+        "children": { "value": "Show" },
+      },
+      "msg": "Test assertion message",
+    },
   })
 }
 
@@ -1014,42 +1668,86 @@ test "func to_json" {
       has_error: Some(dummy_loc),
       is_async: None,
       loc: dummy_loc,
-    },
+    }.json_repr(),
     content={
-      "type": "Func::Lambda",
-      "parameters": [
-        {
-          "type": "Parameter::Positional",
-          "binder": { "type": "Binder", "name": "param", "loc": null },
-          "ty": {
-            "type": "Type::Name",
-            "constr_id": {
-              "type": "ConstrId",
-              "id": { "type": "LongIdent::Ident", "0": "Int" },
+      "kind": "Func::Lambda",
+      "loc": null,
+      "children": {
+        "parameters": {
+          "kind": "Func::Lambda::ParameterList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "Parameter::Positional",
               "loc": null,
+              "children": {
+                "binder": {
+                  "kind": "Binder",
+                  "loc": null,
+                  "children": { "name": "param" },
+                },
+                "ty": {
+                  "kind": "Type::Name",
+                  "loc": null,
+                  "children": {
+                    "constr_id": {
+                      "kind": "ConstrId",
+                      "loc": null,
+                      "children": {
+                        "id": {
+                          "kind": "LongIdent::Ident",
+                          "loc": null,
+                          "children": { "value": "Int" },
+                        },
+                      },
+                    },
+                    "tys": {
+                      "kind": "Type::Name::TypeList",
+                      "loc": null,
+                      "children": [],
+                    },
+                  },
+                },
+              },
             },
-            "tys": [],
-            "loc": null,
+          ],
+        },
+        "body": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "return_type": {
+          "kind": "Type::Name",
+          "loc": null,
+          "children": {
+            "constr_id": {
+              "kind": "ConstrId",
+              "loc": null,
+              "children": {
+                "id": {
+                  "kind": "LongIdent::Ident",
+                  "loc": null,
+                  "children": { "value": "Int" },
+                },
+              },
+            },
+            "tys": {
+              "kind": "Type::Name::TypeList",
+              "loc": null,
+              "children": [],
+            },
           },
         },
-      ],
-      "params_loc": null,
-      "body": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "return_type": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": { "type": "LongIdent::Ident", "0": "Int" },
+        "error_type": {
+          "kind": "ErrorType::NoErrorType",
           "loc": null,
+          "children": {},
         },
-        "tys": [],
-        "loc": null,
+        "kind": { "kind": "FnKind::Lambda", "loc": null, "children": {} },
+        "has_error": { "kind": "Raise", "loc": null, "children": {} },
+        "is_async": null,
       },
-      "error_type": { "type": "ErrorType::NoErrorType" },
-      "kind": { "type": "FnKind::Lambda" },
-      "has_error": null,
-      "is_async": null,
-      "loc": null,
     },
   )
 }
@@ -1067,24 +1765,41 @@ test "expr basic types to_json" {
     value: unit_expr,
     kind: @syntax.Positional,
   }
-  json_inspect(@syntax.Expr::Unit(loc=dummy_loc, faked=false), content={
-    "type": "Expr::Unit",
+  json_inspect(@syntax.Expr::Unit(loc=dummy_loc, faked=false).json_repr(), content={
+    "kind": "Expr::Unit",
     "loc": null,
-    "faked": false,
+    "children": { "faked": false },
   })
-  json_inspect(@syntax.Expr::Constant(c=int_constant, loc=dummy_loc), content={
-    "type": "Expr::Constant",
-    "c": { "type": "Constant::Int", "0": "42" },
-    "loc": null,
-  })
-  json_inspect(@syntax.Expr::Ident(id=variable, loc=dummy_loc), content={
-    "type": "Expr::Ident",
-    "id": {
-      "type": "Var",
-      "name": { "type": "LongIdent::Ident", "0": "test_var" },
+  json_inspect(
+    @syntax.Expr::Constant(c=int_constant, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Expr::Constant",
       "loc": null,
+      "children": {
+        "constant": {
+          "kind": "Constant::Int",
+          "loc": null,
+          "children": { "value": "42" },
+        },
+      },
     },
+  )
+  json_inspect(@syntax.Expr::Ident(id=variable, loc=dummy_loc).json_repr(), content={
+    "kind": "Expr::Ident",
     "loc": null,
+    "children": {
+      "id": {
+        "kind": "Var",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "LongIdent::Ident",
+            "loc": null,
+            "children": { "value": "test_var" },
+          },
+        },
+      },
+    },
   })
   json_inspect(
     @syntax.Expr::Apply(
@@ -1092,117 +1807,248 @@ test "expr basic types to_json" {
       args=@list.from_array([argument]),
       attr=@syntax.NoAttr,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::Apply",
-      "func": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "args": [
-        {
-          "type": "Argument",
-          "value": { "type": "Expr::Unit", "loc": null, "faked": false },
-          "kind": { "type": "ArgumentKind::Positional" },
+      "kind": "Expr::Apply",
+      "loc": null,
+      "children": {
+        "func": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
         },
-      ],
-      "attr": { "type": "ApplyAttr::NoAttr" },
-      "loc": null,
-    },
-  )
-  json_inspect(
-    @syntax.Infix(op=variable, lhs=unit_expr, rhs=unit_expr, loc=dummy_loc),
-    content={
-      "type": "Expr::Infix",
-      "op": {
-        "type": "Var",
-        "name": { "type": "LongIdent::Ident", "0": "test_var" },
-        "loc": null,
+        "args": {
+          "kind": "Expr::Apply::ArgumentList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "Argument",
+              "loc": null,
+              "children": {
+                "value": {
+                  "kind": "Expr::Unit",
+                  "loc": null,
+                  "children": { "faked": false },
+                },
+                "kind": {
+                  "kind": "ArgumentKind::Positional",
+                  "loc": null,
+                  "children": {},
+                },
+              },
+            },
+          ],
+        },
+        "attr": { "kind": "ApplyAttr::NoAttr", "loc": null, "children": {} },
       },
-      "lhs": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "rhs": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "loc": null,
     },
   )
-  json_inspect(@syntax.Unary(op=variable, expr=unit_expr, loc=dummy_loc), content={
-    "type": "Expr::Unary",
-    "op": {
-      "type": "Var",
-      "name": { "type": "LongIdent::Ident", "0": "test_var" },
-      "loc": null,
-    },
-    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "loc": null,
-  })
   json_inspect(
-    @syntax.Expr::Array(exprs=@list.from_array([unit_expr]), loc=dummy_loc),
+    @syntax.Infix(op=variable, lhs=unit_expr, rhs=unit_expr, loc=dummy_loc).json_repr(),
     content={
-      "type": "Expr::Array",
-      "exprs": [{ "type": "Expr::Unit", "loc": null, "faked": false }],
+      "kind": "Expr::Infix",
       "loc": null,
+      "children": {
+        "op": {
+          "kind": "Var",
+          "loc": null,
+          "children": {
+            "name": {
+              "kind": "LongIdent::Ident",
+              "loc": null,
+              "children": { "value": "test_var" },
+            },
+          },
+        },
+        "lhs": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "rhs": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
+    },
+  )
+  json_inspect(
+    @syntax.Unary(op=variable, expr=unit_expr, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Expr::Unary",
+      "loc": null,
+      "children": {
+        "op": {
+          "kind": "Var",
+          "loc": null,
+          "children": {
+            "name": {
+              "kind": "LongIdent::Ident",
+              "loc": null,
+              "children": { "value": "test_var" },
+            },
+          },
+        },
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
+    },
+  )
+  json_inspect(
+    @syntax.Expr::Array(exprs=@list.from_array([unit_expr]), loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Expr::Array",
+      "loc": null,
+      "children": {
+        "exprs": {
+          "kind": "Expr::Array::ExprList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "Expr::Unit",
+              "loc": null,
+              "children": { "faked": false },
+            },
+          ],
+        },
+      },
     },
   )
   let spread_elem = @syntax.SpreadableElem::Regular(unit_expr)
   json_inspect(
-    @syntax.ArraySpread(elems=@list.from_array([spread_elem]), loc=dummy_loc),
+    @syntax.ArraySpread(elems=@list.from_array([spread_elem]), loc=dummy_loc).json_repr(),
     content={
-      "type": "Expr::ArraySpread",
-      "elems": [
-        {
-          "type": "SpreadableElem::Regular",
-          "0": { "type": "Expr::Unit", "loc": null, "faked": false },
-        },
-      ],
+      "kind": "Expr::ArraySpread",
       "loc": null,
+      "children": {
+        "elems": {
+          "kind": "Expr::ArraySpread::ElemList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "SpreadableElem::Regular",
+              "loc": null,
+              "children": {
+                "value": {
+                  "kind": "Expr::Unit",
+                  "loc": null,
+                  "children": { "faked": false },
+                },
+              },
+            },
+          ],
+        },
+      },
     },
   )
   json_inspect(
-    @syntax.ArrayGet(array=unit_expr, index=unit_expr, loc=dummy_loc),
+    @syntax.ArrayGet(array=unit_expr, index=unit_expr, loc=dummy_loc).json_repr(),
     content={
-      "type": "Expr::ArrayGet",
-      "array": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "index": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "kind": "Expr::ArrayGet",
       "loc": null,
+      "children": {
+        "array": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "index": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
     },
   )
   json_inspect(
     @syntax.Expr::Tuple(
       exprs=@list.from_array([unit_expr, unit_expr]),
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::Tuple",
-      "exprs": [
-        { "type": "Expr::Unit", "loc": null, "faked": false },
-        { "type": "Expr::Unit", "loc": null, "faked": false },
-      ],
+      "kind": "Expr::Tuple",
       "loc": null,
+      "children": {
+        "exprs": {
+          "kind": "Expr::Tuple::ExprList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "Expr::Unit",
+              "loc": null,
+              "children": { "faked": false },
+            },
+            {
+              "kind": "Expr::Unit",
+              "loc": null,
+              "children": { "faked": false },
+            },
+          ],
+        },
+      },
     },
   )
-  json_inspect(@syntax.Expr::Hole(loc=dummy_loc, kind=@syntax.Todo), content={
-    "type": "Expr::Hole",
+  json_inspect(
+    @syntax.Expr::Hole(loc=dummy_loc, kind=@syntax.Todo).json_repr(),
+    content={
+      "kind": "Expr::Hole",
+      "loc": null,
+      "children": {
+        "kind": { "kind": "Hole::Todo", "loc": null, "children": {} },
+      },
+    },
+  )
+  json_inspect(
+    @syntax.Return(return_value=Some(unit_expr), loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Expr::Return",
+      "loc": null,
+      "children": {
+        "return_value": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
+    },
+  )
+  json_inspect(@syntax.Return(return_value=None, loc=dummy_loc).json_repr(), content={
+    "kind": "Expr::Return",
     "loc": null,
-    "kind": { "type": "Hole::Todo" },
+    "children": { "return_value": null },
   })
-  json_inspect(@syntax.Return(return_value=Some(unit_expr), loc=dummy_loc), content={
-    "type": "Expr::Return",
-    "return_value": { "type": "Expr::Unit", "loc": null, "faked": false },
+  json_inspect(@syntax.Raise(err_value=unit_expr, loc=dummy_loc).json_repr(), content={
+    "kind": "Expr::Raise",
     "loc": null,
-  })
-  json_inspect(@syntax.Return(return_value=None, loc=dummy_loc), content={
-    "type": "Expr::Return",
-    "return_value": null,
-    "loc": null,
-  })
-  json_inspect(@syntax.Raise(err_value=unit_expr, loc=dummy_loc), content={
-    "type": "Expr::Raise",
-    "err_value": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "loc": null,
+    "children": {
+      "err_value": {
+        "kind": "Expr::Unit",
+        "loc": null,
+        "children": { "faked": false },
+      },
+    },
   })
   json_inspect(
-    @syntax.Break(arg=Some(unit_expr), label=Some(label), loc=dummy_loc),
+    @syntax.Break(arg=Some(unit_expr), label=Some(label), loc=dummy_loc).json_repr(),
     content={
-      "type": "Expr::Break",
-      "arg": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "label": { "type": "Label", "name": "test_label", "loc": null },
+      "kind": "Expr::Break",
       "loc": null,
+      "children": {
+        "arg": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "label": {
+          "kind": "Label",
+          "loc": null,
+          "children": { "name": "test_label" },
+        },
+      },
     },
   )
   json_inspect(
@@ -1210,12 +2056,24 @@ test "expr basic types to_json" {
       args=@list.from_array([unit_expr]),
       label=None,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::Continue",
-      "args": [{ "type": "Expr::Unit", "loc": null, "faked": false }],
-      "label": null,
+      "kind": "Expr::Continue",
       "loc": null,
+      "children": {
+        "args": {
+          "kind": "Expr::Continue::ExprList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "Expr::Unit",
+              "loc": null,
+              "children": { "faked": false },
+            },
+          ],
+        },
+        "label": null,
+      },
     },
   )
 }
@@ -1260,13 +2118,27 @@ test "expr complex types to_json" {
       ifso=unit_expr,
       ifnot=Some(unit_expr),
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::If",
-      "cond": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "ifso": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "ifnot": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "kind": "Expr::If",
       "loc": null,
+      "children": {
+        "cond": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "ifso": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "ifnot": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
     },
   )
   json_inspect(
@@ -1275,40 +2147,86 @@ test "expr complex types to_json" {
       otherwise=Some(unit_expr),
       body=unit_expr,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::Guard",
-      "cond": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "otherwise": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "body": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "kind": "Expr::Guard",
       "loc": null,
+      "children": {
+        "cond": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "otherwise": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "body": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
     },
   )
-  json_inspect(@syntax.Defer(expr=unit_expr, body=unit_expr, loc=dummy_loc), content={
-    "type": "Expr::Defer",
-    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "body": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "loc": null,
-  })
-  json_inspect(@syntax.Is(expr=unit_expr, pat=any_pattern, loc=dummy_loc), content={
-    "type": "Expr::Is",
-    "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "pat": { "type": "Pattern::Any", "loc": null },
-    "loc": null,
-  })
+  json_inspect(
+    @syntax.Defer(expr=unit_expr, body=unit_expr, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Expr::Defer",
+      "loc": null,
+      "children": {
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "body": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
+    },
+  )
+  json_inspect(
+    @syntax.Is(expr=unit_expr, pat=any_pattern, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Expr::Is",
+      "loc": null,
+      "children": {
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "pat": { "kind": "Pattern::Any", "loc": null, "children": {} },
+      },
+    },
+  )
   json_inspect(
     @syntax.Let(
       pattern=any_pattern,
       expr=unit_expr,
       body=unit_expr,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::Let",
-      "pattern": { "type": "Pattern::Any", "loc": null },
-      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "body": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "kind": "Expr::Let",
       "loc": null,
+      "children": {
+        "pattern": { "kind": "Pattern::Any", "loc": null, "children": {} },
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "body": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
     },
   )
   json_inspect(
@@ -1318,23 +2236,49 @@ test "expr complex types to_json" {
       expr=unit_expr,
       body=unit_expr,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::LetMut",
-      "binder": { "type": "Binder", "name": "test_binder", "loc": null },
-      "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": { "type": "LongIdent::Ident", "0": "Int" },
-          "loc": null,
-        },
-        "tys": [],
-        "loc": null,
-      },
-      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "body": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "kind": "Expr::LetMut",
       "loc": null,
+      "children": {
+        "binder": {
+          "kind": "Binder",
+          "loc": null,
+          "children": { "name": "test_binder" },
+        },
+        "ty": {
+          "kind": "Type::Name",
+          "loc": null,
+          "children": {
+            "constr_id": {
+              "kind": "ConstrId",
+              "loc": null,
+              "children": {
+                "id": {
+                  "kind": "LongIdent::Ident",
+                  "loc": null,
+                  "children": { "value": "Int" },
+                },
+              },
+            },
+            "tys": {
+              "kind": "Type::Name::TypeList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "body": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
     },
   )
   json_inspect(
@@ -1342,12 +2286,28 @@ test "expr complex types to_json" {
       exprs=@list.from_array([unit_expr]),
       last_expr=unit_expr,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::Sequence",
-      "exprs": [{ "type": "Expr::Unit", "loc": null, "faked": false }],
-      "last_expr": { "type": "Expr::Unit", "loc": null, "faked": false },
+      "kind": "Expr::Sequence",
       "loc": null,
+      "children": {
+        "exprs": {
+          "kind": "Expr::Sequence::ExprList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "Expr::Unit",
+              "loc": null,
+              "children": { "faked": false },
+            },
+          ],
+        },
+        "last_expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
     },
   )
   json_inspect(
@@ -1356,26 +2316,48 @@ test "expr complex types to_json" {
       fields=@list.from_array([field_def]),
       trailing=@syntax.TrailingMark::Comma,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::Record",
-      "type_name": {
-        "type": "TypeName",
-        "name": { "type": "LongIdent::Ident", "0": "TestType" },
-        "is_object": false,
-        "loc": null,
-      },
-      "fields": [
-        {
-          "type": "FieldDef",
-          "label": { "type": "Label", "name": "test_label", "loc": null },
-          "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-          "is_pun": false,
-          "loc": null,
-        },
-      ],
-      "trailing": { "type": "Trailing::Comma" },
+      "kind": "Expr::Record",
       "loc": null,
+      "children": {
+        "type_name": {
+          "kind": "TypeName",
+          "loc": null,
+          "children": {
+            "name": {
+              "kind": "LongIdent::Ident",
+              "loc": null,
+              "children": { "value": "TestType" },
+            },
+            "is_object": false,
+          },
+        },
+        "fields": {
+          "kind": "Expr::Record::FieldList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "FieldDef",
+              "loc": null,
+              "children": {
+                "label": {
+                  "kind": "Label",
+                  "loc": null,
+                  "children": { "name": "test_label" },
+                },
+                "expr": {
+                  "kind": "Expr::Unit",
+                  "loc": null,
+                  "children": { "faked": false },
+                },
+                "is_pun": false,
+              },
+            },
+          ],
+        },
+        "trailing": { "kind": "Trailing::Comma", "loc": null, "children": {} },
+      },
     },
   )
   json_inspect(
@@ -1383,15 +2365,28 @@ test "expr complex types to_json" {
       record=unit_expr,
       accessor=@syntax.Accessor::Label(label),
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::Field",
-      "record": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "accessor": {
-        "type": "Accessor::Label",
-        "0": { "type": "Label", "name": "test_label", "loc": null },
-      },
+      "kind": "Expr::Field",
       "loc": null,
+      "children": {
+        "record": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "accessor": {
+          "kind": "Accessor::Label",
+          "loc": null,
+          "children": {
+            "value": {
+              "kind": "Label",
+              "loc": null,
+              "children": { "name": "test_label" },
+            },
+          },
+        },
+      },
     },
   )
   json_inspect(
@@ -1400,49 +2395,100 @@ test "expr complex types to_json" {
       cases=@list.from_array([case]),
       match_loc=dummy_loc,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::Match",
-      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "cases": [
-        {
-          "type": "Case",
-          "pattern": { "type": "Pattern::Any", "loc": null },
-          "guard": null,
-          "body": { "type": "Expr::Unit", "loc": null, "faked": false },
-        },
-      ],
-      "match_loc": null,
+      "kind": "Expr::Match",
       "loc": null,
+      "children": {
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "cases": {
+          "kind": "Expr::Match::CaseList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "Case",
+              "loc": null,
+              "children": {
+                "pattern": {
+                  "kind": "Pattern::Any",
+                  "loc": null,
+                  "children": {},
+                },
+                "guard": null,
+                "body": {
+                  "kind": "Expr::Unit",
+                  "loc": null,
+                  "children": { "faked": false },
+                },
+              },
+            },
+          ],
+        },
+      },
     },
   )
-  json_inspect(@syntax.Pipe(lhs=unit_expr, rhs=unit_expr, loc=dummy_loc), content={
-    "type": "Expr::Pipe",
-    "lhs": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "rhs": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "loc": null,
-  })
+  json_inspect(
+    @syntax.Pipe(lhs=unit_expr, rhs=unit_expr, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Expr::Pipe",
+      "loc": null,
+      "children": {
+        "lhs": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "rhs": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
+    },
+  )
   json_inspect(
     @syntax.Assign(
       var_=variable,
       expr=unit_expr,
       augmented_by=Some(variable),
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Expr::Assign",
-      "var": {
-        "type": "Var",
-        "name": { "type": "LongIdent::Ident", "0": "test_var" },
-        "loc": null,
-      },
-      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "augmented_by": {
-        "type": "Var",
-        "name": { "type": "LongIdent::Ident", "0": "test_var" },
-        "loc": null,
-      },
+      "kind": "Expr::Assign",
       "loc": null,
+      "children": {
+        "var": {
+          "kind": "Var",
+          "loc": null,
+          "children": {
+            "name": {
+              "kind": "LongIdent::Ident",
+              "loc": null,
+              "children": { "value": "test_var" },
+            },
+          },
+        },
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "augmented_by": {
+          "kind": "Var",
+          "loc": null,
+          "children": {
+            "name": {
+              "kind": "LongIdent::Ident",
+              "loc": null,
+              "children": { "value": "test_var" },
+            },
+          },
+        },
+      },
     },
   )
 }
@@ -1493,40 +2539,84 @@ test "pattern to_json" {
   }
   let array_patterns = @syntax.ArrayPatterns::Closed(@list.from_array([]))
   json_inspect(
-    @syntax.Pattern::Alias(pat=any_pattern, alias_=binder, loc=dummy_loc),
+    @syntax.Pattern::Alias(pat=any_pattern, alias_=binder, loc=dummy_loc).json_repr(),
     content={
-      "type": "Pattern::Alias",
-      "pat": { "type": "Pattern::Any", "loc": null },
-      "alias": { "type": "Binder", "name": "test_binder", "loc": null },
+      "kind": "Pattern::Alias",
       "loc": null,
+      "children": {
+        "pat": { "kind": "Pattern::Any", "loc": null, "children": {} },
+        "alias": {
+          "kind": "Binder",
+          "loc": null,
+          "children": { "name": "test_binder" },
+        },
+      },
     },
   )
-  json_inspect(@syntax.Pattern::Array(pats=array_patterns, loc=dummy_loc), content={
-    "type": "Pattern::Array",
-    "pats": { "type": "ArrayPatterns::Closed", "0": [] },
-    "loc": null,
-  })
-  json_inspect(@syntax.Expr::Constant(c=int_constant, loc=dummy_loc), content={
-    "type": "Expr::Constant",
-    "c": { "type": "Constant::Int", "0": "42" },
-    "loc": null,
-  })
   json_inspect(
-    @syntax.Pattern::Constraint(pat=any_pattern, ty=int_type, loc=dummy_loc),
+    @syntax.Pattern::Array(pats=array_patterns, loc=dummy_loc).json_repr(),
     content={
-      "type": "Pattern::Constraint",
-      "pat": { "type": "Pattern::Any", "loc": null },
-      "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": { "type": "LongIdent::Ident", "0": "Int" },
-          "loc": null,
-        },
-        "tys": [],
-        "loc": null,
-      },
+      "kind": "Pattern::Array",
       "loc": null,
+      "children": {
+        "pats": {
+          "kind": "ArrayPatterns::Closed",
+          "loc": null,
+          "children": {
+            "value": {
+              "kind": "ArrayPatterns::Closed::PatternList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
+      },
+    },
+  )
+  json_inspect(
+    @syntax.Expr::Constant(c=int_constant, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Expr::Constant",
+      "loc": null,
+      "children": {
+        "constant": {
+          "kind": "Constant::Int",
+          "loc": null,
+          "children": { "value": "42" },
+        },
+      },
+    },
+  )
+  json_inspect(
+    @syntax.Pattern::Constraint(pat=any_pattern, ty=int_type, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Pattern::Constraint",
+      "loc": null,
+      "children": {
+        "pat": { "kind": "Pattern::Any", "loc": null, "children": {} },
+        "ty": {
+          "kind": "Type::Name",
+          "loc": null,
+          "children": {
+            "constr_id": {
+              "kind": "ConstrId",
+              "loc": null,
+              "children": {
+                "id": {
+                  "kind": "LongIdent::Ident",
+                  "loc": null,
+                  "children": { "value": "Int" },
+                },
+              },
+            },
+            "tys": {
+              "kind": "Type::Name::TypeList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
+      },
     },
   )
   json_inspect(
@@ -1535,70 +2625,125 @@ test "pattern to_json" {
       args=Some(@list.from_array([constr_pat_arg])),
       is_open=false,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Pattern::Constr",
-      "constr": {
-        "type": "Constructor",
-        "name": { "type": "ConstrName", "name": "TestConstructor", "loc": null },
-        "extra_info": { "type": "ConstructorExtraInfo::NoExtraInfo" },
-        "loc": null,
-      },
-      "args": [
-        {
-          "type": "ConstrPatArg",
-          "pat": { "type": "Pattern::Any", "loc": null },
-          "kind": { "type": "ArgumentKind::Positional" },
+      "kind": "Pattern::Constr",
+      "loc": null,
+      "children": {
+        "constr": {
+          "kind": "Constructor",
+          "loc": null,
+          "children": {
+            "name": {
+              "kind": "ConstrName",
+              "loc": null,
+              "children": { "name": "TestConstructor" },
+            },
+            "extra_info": {
+              "kind": "ConstructorExtraInfo::NoExtraInfo",
+              "loc": null,
+              "children": {},
+            },
+          },
         },
-      ],
-      "is_open": false,
-      "loc": null,
+        "args": {
+          "kind": "Pattern::Constr::ArgList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "ConstrPatArg",
+              "loc": null,
+              "children": {
+                "pat": { "kind": "Pattern::Any", "loc": null, "children": {} },
+                "kind": {
+                  "kind": "ArgumentKind::Positional",
+                  "loc": null,
+                  "children": {},
+                },
+              },
+            },
+          ],
+        },
+        "is_open": false,
+      },
     },
   )
   json_inspect(
-    @syntax.Pattern::Constr(constr~, args=None, is_open=true, loc=dummy_loc),
+    @syntax.Pattern::Constr(constr~, args=None, is_open=true, loc=dummy_loc).json_repr(),
     content={
-      "type": "Pattern::Constr",
-      "constr": {
-        "type": "Constructor",
-        "name": { "type": "ConstrName", "name": "TestConstructor", "loc": null },
-        "extra_info": { "type": "ConstructorExtraInfo::NoExtraInfo" },
-        "loc": null,
-      },
-      "args": null,
-      "is_open": true,
+      "kind": "Pattern::Constr",
       "loc": null,
+      "children": {
+        "constr": {
+          "kind": "Constructor",
+          "loc": null,
+          "children": {
+            "name": {
+              "kind": "ConstrName",
+              "loc": null,
+              "children": { "name": "TestConstructor" },
+            },
+            "extra_info": {
+              "kind": "ConstructorExtraInfo::NoExtraInfo",
+              "loc": null,
+              "children": {},
+            },
+          },
+        },
+        "args": null,
+        "is_open": true,
+      },
     },
   )
   json_inspect(
-    @syntax.Or(pat1=any_pattern, pat2=constant_pattern, loc=dummy_loc),
+    @syntax.Or(pat1=any_pattern, pat2=constant_pattern, loc=dummy_loc).json_repr(),
     content={
-      "type": "Pattern::Or",
-      "pat1": { "type": "Pattern::Any", "loc": null },
-      "pat2": {
-        "type": "Pattern::Constant",
-        "c": { "type": "Constant::Int", "0": "42" },
-        "loc": null,
-      },
+      "kind": "Pattern::Or",
       "loc": null,
+      "children": {
+        "pat1": { "kind": "Pattern::Any", "loc": null, "children": {} },
+        "pat2": {
+          "kind": "Pattern::Constant",
+          "loc": null,
+          "children": {
+            "constant": {
+              "kind": "Constant::Int",
+              "loc": null,
+              "children": { "value": "42" },
+            },
+          },
+        },
+      },
     },
   )
   json_inspect(
     @syntax.Pattern::Tuple(
       pats=@list.from_array([any_pattern, constant_pattern]),
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Pattern::Tuple",
-      "pats": [
-        { "type": "Pattern::Any", "loc": null },
-        {
-          "type": "Pattern::Constant",
-          "c": { "type": "Constant::Int", "0": "42" },
-          "loc": null,
-        },
-      ],
+      "kind": "Pattern::Tuple",
       "loc": null,
+      "children": {
+        "pats": {
+          "kind": "Pattern::Tuple::PatternList",
+          "loc": null,
+          "children": [
+            { "kind": "Pattern::Any", "loc": null, "children": {} },
+            {
+              "kind": "Pattern::Constant",
+              "loc": null,
+              "children": {
+                "constant": {
+                  "kind": "Constant::Int",
+                  "loc": null,
+                  "children": { "value": "42" },
+                },
+              },
+            },
+          ],
+        },
+      },
     },
   )
   json_inspect(
@@ -1606,20 +2751,36 @@ test "pattern to_json" {
       fields=@list.from_array([field_pat]),
       is_closed=true,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Pattern::Record",
-      "fields": [
-        {
-          "type": "FieldPat",
-          "label": { "type": "Label", "name": "test_field", "loc": null },
-          "pattern": { "type": "Pattern::Any", "loc": null },
-          "is_pun": false,
-          "loc": null,
-        },
-      ],
-      "is_closed": true,
+      "kind": "Pattern::Record",
       "loc": null,
+      "children": {
+        "fields": {
+          "kind": "Pattern::Record::FieldList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "FieldPat",
+              "loc": null,
+              "children": {
+                "label": {
+                  "kind": "Label",
+                  "loc": null,
+                  "children": { "name": "test_field" },
+                },
+                "pattern": {
+                  "kind": "Pattern::Any",
+                  "loc": null,
+                  "children": {},
+                },
+                "is_pun": false,
+              },
+            },
+          ],
+        },
+        "is_closed": true,
+      },
     },
   )
   json_inspect(
@@ -1627,21 +2788,32 @@ test "pattern to_json" {
       elems=@list.from_array([map_elem]),
       is_closed=false,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Pattern::Map",
-      "elems": [
-        {
-          "type": "MapPatElem",
-          "key": { "type": "Constant::Int", "0": "42" },
-          "pat": { "type": "Pattern::Any", "loc": null },
-          "match_absent": false,
-          "key_loc": null,
-          "loc": null,
-        },
-      ],
-      "is_closed": false,
+      "kind": "Pattern::Map",
       "loc": null,
+      "children": {
+        "elems": {
+          "kind": "Pattern::Map::ElemList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "MapPatElem",
+              "loc": null,
+              "children": {
+                "key": {
+                  "kind": "Constant::Int",
+                  "loc": null,
+                  "children": { "value": "42" },
+                },
+                "pat": { "kind": "Pattern::Any", "loc": null, "children": {} },
+                "match_absent": false,
+              },
+            },
+          ],
+        },
+        "is_closed": false,
+      },
     },
   )
   json_inspect(
@@ -1650,17 +2822,25 @@ test "pattern to_json" {
       rhs=constant_pattern,
       kind=Inclusive,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Pattern::Range",
-      "lhs": { "type": "Pattern::Any", "loc": null },
-      "rhs": {
-        "type": "Pattern::Constant",
-        "c": { "type": "Constant::Int", "0": "42" },
-        "loc": null,
-      },
-      "kind": { "type": "RangeKind::Inclusive" },
+      "kind": "Pattern::Range",
       "loc": null,
+      "children": {
+        "lhs": { "kind": "Pattern::Any", "loc": null, "children": {} },
+        "rhs": {
+          "kind": "Pattern::Constant",
+          "loc": null,
+          "children": {
+            "constant": {
+              "kind": "Constant::Int",
+              "loc": null,
+              "children": { "value": "42" },
+            },
+          },
+        },
+        "kind": { "kind": "RangeKind::Inclusive", "loc": null, "children": {} },
+      },
     },
   )
 }
@@ -1668,10 +2848,10 @@ test "pattern to_json" {
 ///|
 test "field_name to_json" {
   let field_name = @syntax.FieldName::{ label: "test_field", loc: dummy_loc }
-  json_inspect(field_name, content={
-    "type": "FieldName",
-    "label": "test_field",
+  json_inspect(field_name.json_repr(), content={
+    "kind": "FieldName",
     "loc": null,
+    "children": { "label": "test_field" },
   })
 }
 
@@ -1695,24 +2875,38 @@ test "field_decl to_json" {
     attrs: @list.empty(),
     doc: dummy_docstring,
   }
-  json_inspect(field_decl, content={
-    "type": "FieldDecl",
-    "name": { "type": "FieldName", "label": "test_field", "loc": null },
-    "ty": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
-        "loc": null,
-      },
-      "tys": [],
-      "loc": null,
-    },
-    "mut": false,
-    "vis": { "type": "Visibility::Default" },
+  json_inspect(field_decl.json_repr(), content={
+    "kind": "FieldDecl",
     "loc": null,
-    "attrs": [],
-    "doc": "Test documentation",
+    "children": {
+      "name": {
+        "kind": "FieldName",
+        "loc": null,
+        "children": { "label": "test_field" },
+      },
+      "ty": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
+        },
+      },
+      "mut": false,
+      "vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
+      "attrs": { "kind": "FieldDecl::AttrList", "loc": null, "children": [] },
+      "doc": "Test documentation",
+    },
   })
 }
 
@@ -1737,35 +2931,61 @@ test "constr_param to_json" {
     mut_: true,
     label: None,
   }
-  json_inspect(param_with_label, content={
-    "type": "ConstrParam",
-    "ty": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
+  json_inspect(param_with_label.json_repr(), content={
+    "kind": "ConstrParam",
+    "loc": null,
+    "children": {
+      "ty": {
+        "kind": "Type::Name",
         "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
+        },
       },
-      "tys": [],
-      "loc": null,
+      "mut": false,
+      "label": {
+        "kind": "Label",
+        "loc": null,
+        "children": { "name": "test_label" },
+      },
     },
-    "mut": false,
-    "label": { "type": "Label", "name": "test_label", "loc": null },
   })
-  json_inspect(param_without_label, content={
-    "type": "ConstrParam",
-    "ty": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
+  json_inspect(param_without_label.json_repr(), content={
+    "kind": "ConstrParam",
+    "loc": null,
+    "children": {
+      "ty": {
+        "kind": "Type::Name",
         "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
+        },
       },
-      "tys": [],
-      "loc": null,
+      "mut": true,
+      "label": null,
     },
-    "mut": true,
-    "label": null,
   })
 }
 
@@ -1805,39 +3025,78 @@ test "constr_decl to_json" {
     attrs: @list.empty(),
     doc: dummy_docstring,
   }
-  json_inspect(constr_with_args, content={
-    "type": "ConstrDecl",
-    "name": { "type": "ConstrName", "name": "TestConstructor", "loc": null },
-    "args": [
-      {
-        "type": "ConstrParam",
-        "ty": {
-          "type": "Type::Name",
-          "constr_id": {
-            "type": "ConstrId",
-            "id": { "type": "LongIdent::Ident", "0": "Int" },
-            "loc": null,
-          },
-          "tys": [],
-          "loc": null,
-        },
-        "mut": false,
-        "label": { "type": "Label", "name": "test_label", "loc": null },
+  json_inspect(constr_with_args.json_repr(), content={
+    "kind": "ConstrDecl",
+    "loc": null,
+    "children": {
+      "name": {
+        "kind": "ConstrName",
+        "loc": null,
+        "children": { "name": "TestConstructor" },
       },
-    ],
-    "tag": ["tag_value", null],
-    "attrs": [],
-    "loc": null,
-    "doc": "Test documentation",
+      "args": {
+        "kind": "ConstrDecl::ArgList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "ConstrParam",
+            "loc": null,
+            "children": {
+              "ty": {
+                "kind": "Type::Name",
+                "loc": null,
+                "children": {
+                  "constr_id": {
+                    "kind": "ConstrId",
+                    "loc": null,
+                    "children": {
+                      "id": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": { "value": "Int" },
+                      },
+                    },
+                  },
+                  "tys": {
+                    "kind": "Type::Name::TypeList",
+                    "loc": null,
+                    "children": [],
+                  },
+                },
+              },
+              "mut": false,
+              "label": {
+                "kind": "Label",
+                "loc": null,
+                "children": { "name": "test_label" },
+              },
+            },
+          },
+        ],
+      },
+      "tag": {
+        "kind": "ConstrDecl::Tag",
+        "loc": null,
+        "children": { "value": "tag_value" },
+      },
+      "attrs": { "kind": "ConstrDecl::AttrList", "loc": null, "children": [] },
+      "doc": "Test documentation",
+    },
   })
-  json_inspect(constr_without_args, content={
-    "type": "ConstrDecl",
-    "name": { "type": "ConstrName", "name": "TestConstructor", "loc": null },
-    "args": null,
-    "tag": null,
-    "attrs": [],
+  json_inspect(constr_without_args.json_repr(), content={
+    "kind": "ConstrDecl",
     "loc": null,
-    "doc": "Test documentation",
+    "children": {
+      "name": {
+        "kind": "ConstrName",
+        "loc": null,
+        "children": { "name": "TestConstructor" },
+      },
+      "args": null,
+      "tag": null,
+      "attrs": { "kind": "ConstrDecl::AttrList", "loc": null, "children": [] },
+      "doc": "Test documentation",
+    },
   })
 }
 
@@ -1847,10 +3106,16 @@ test "type_var_constraint to_json" {
     trait_: @syntax.LongIdent::Ident(name="Show"),
     loc: dummy_loc,
   }
-  json_inspect(constraint, content={
-    "type": "TypeVarConstraint",
-    "trait": { "type": "LongIdent::Ident", "0": "Show" },
+  json_inspect(constraint.json_repr(), content={
+    "kind": "TypeVarConstraint",
     "loc": null,
+    "children": {
+      "trait": {
+        "kind": "LongIdent::Ident",
+        "loc": null,
+        "children": { "value": "Show" },
+      },
+    },
   })
 }
 
@@ -1865,17 +3130,29 @@ test "type_var_binder to_json" {
     constraints: @list.from_array([constraint]),
     name_loc: dummy_loc,
   }
-  json_inspect(type_var_binder, content={
-    "type": "TypeVarBinder",
-    "name": "T",
-    "constraints": [
-      {
-        "type": "TypeVarConstraint",
-        "trait": { "type": "LongIdent::Ident", "0": "Show" },
+  json_inspect(type_var_binder.json_repr(), content={
+    "kind": "TypeVarBinder",
+    "loc": null,
+    "children": {
+      "name": "T",
+      "constraints": {
+        "kind": "TypeVarBinder::TypeVarConstraintList",
         "loc": null,
+        "children": [
+          {
+            "kind": "TypeVarConstraint",
+            "loc": null,
+            "children": {
+              "trait": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Show" },
+              },
+            },
+          },
+        ],
       },
-    ],
-    "name_loc": null,
+    },
   })
 }
 
@@ -1889,15 +3166,15 @@ test "type_decl_binder to_json" {
     name: None,
     loc: dummy_loc,
   }
-  json_inspect(binder_with_name, content={
-    "type": "TypeDeclBinder",
-    "name": "TypeVar",
+  json_inspect(binder_with_name.json_repr(), content={
+    "kind": "TypeDeclBinder",
     "loc": null,
+    "children": { "name": "TypeVar" },
   })
-  json_inspect(binder_without_name, content={
-    "type": "TypeDeclBinder",
-    "name": null,
+  json_inspect(binder_without_name.json_repr(), content={
+    "kind": "TypeDeclBinder",
     "loc": null,
+    "children": { "name": null },
   })
 }
 
@@ -1907,15 +3184,33 @@ test "alias_target to_json" {
   let label = @syntax.Label::{ name: "target_label", loc: dummy_loc }
   let alias_with_target = @syntax.AliasTarget::{ binder, target: Some(label) }
   let alias_without_target = @syntax.AliasTarget::{ binder, target: None }
-  json_inspect(alias_with_target, content={
-    "type": "AliasTarget",
-    "binder": { "type": "Binder", "name": "test_binder", "loc": null },
-    "target": { "type": "Label", "name": "target_label", "loc": null },
+  json_inspect(alias_with_target.json_repr(), content={
+    "kind": "AliasTarget",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": { "name": "test_binder" },
+      },
+      "target": {
+        "kind": "Label",
+        "loc": null,
+        "children": { "name": "target_label" },
+      },
+    },
   })
-  json_inspect(alias_without_target, content={
-    "type": "AliasTarget",
-    "binder": { "type": "Binder", "name": "test_binder", "loc": null },
-    "target": null,
+  json_inspect(alias_without_target.json_repr(), content={
+    "kind": "AliasTarget",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": { "name": "test_binder" },
+      },
+      "target": null,
+    },
   })
 }
 
@@ -1929,12 +3224,18 @@ test "field_pat to_json" {
     is_pun: true,
     loc: dummy_loc,
   }
-  json_inspect(field_pat, content={
-    "type": "FieldPat",
-    "label": { "type": "Label", "name": "field_label", "loc": null },
-    "pattern": { "type": "Pattern::Any", "loc": null },
-    "is_pun": true,
+  json_inspect(field_pat.json_repr(), content={
+    "kind": "FieldPat",
     "loc": null,
+    "children": {
+      "label": {
+        "kind": "Label",
+        "loc": null,
+        "children": { "name": "field_label" },
+      },
+      "pattern": { "kind": "Pattern::Any", "loc": null, "children": {} },
+      "is_pun": true,
+    },
   })
 }
 
@@ -1946,12 +3247,22 @@ test "constr_pat_arg to_json" {
     pat: any_pattern,
     kind: @syntax.ArgumentKind::Labelled(label),
   }
-  json_inspect(arg, content={
-    "type": "ConstrPatArg",
-    "pat": { "type": "Pattern::Any", "loc": null },
-    "kind": {
-      "type": "ArgumentKind::Labelled",
-      "0": { "type": "Label", "name": "arg_label", "loc": null },
+  json_inspect(arg.json_repr(), content={
+    "kind": "ConstrPatArg",
+    "loc": null,
+    "children": {
+      "pat": { "kind": "Pattern::Any", "loc": null, "children": {} },
+      "kind": {
+        "kind": "ArgumentKind::Labelled",
+        "loc": null,
+        "children": {
+          "value": {
+            "kind": "Label",
+            "loc": null,
+            "children": { "name": "arg_label" },
+          },
+        },
+      },
     },
   })
 }
@@ -1967,13 +3278,18 @@ test "map_pat_elem to_json" {
     key_loc: dummy_loc,
     loc: dummy_loc,
   }
-  json_inspect(map_elem, content={
-    "type": "MapPatElem",
-    "key": { "type": "Constant::Int", "0": "42" },
-    "pat": { "type": "Pattern::Any", "loc": null },
-    "match_absent": true,
-    "key_loc": null,
+  json_inspect(map_elem.json_repr(), content={
+    "kind": "MapPatElem",
     "loc": null,
+    "children": {
+      "key": {
+        "kind": "Constant::Int",
+        "loc": null,
+        "children": { "value": "42" },
+      },
+      "pat": { "kind": "Pattern::Any", "loc": null, "children": {} },
+      "match_absent": true,
+    },
   })
 }
 
@@ -1994,24 +3310,46 @@ test "local_type_decl to_json" {
     components: @syntax.Abstract,
     deriving: @list.from_array([deriving_directive]),
   }
-  json_inspect(local_type_decl, content={
-    "type": "LocalTypeDecl",
-    "tycon": "TestType",
-    "tycon_loc": null,
-    "components": { "type": "TypeDesc::Abstract" },
-    "deriving": [
-      {
-        "type": "DerivingDirective",
-        "type_name": {
-          "type": "TypeName",
-          "name": { "type": "LongIdent::Ident", "0": "Show" },
-          "is_object": false,
-          "loc": null,
-        },
-        "args": [],
+  json_inspect(local_type_decl.json_repr(), content={
+    "kind": "LocalTypeDecl",
+    "loc": null,
+    "children": {
+      "tycon": "TestType",
+      "components": {
+        "kind": "TypeDesc::Abstract",
         "loc": null,
+        "children": {},
       },
-    ],
+      "deriving": {
+        "kind": "LocalTypeDecl::DerivingList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "DerivingDirective",
+            "loc": null,
+            "children": {
+              "type_name": {
+                "kind": "TypeName",
+                "loc": null,
+                "children": {
+                  "name": {
+                    "kind": "LongIdent::Ident",
+                    "loc": null,
+                    "children": { "value": "Show" },
+                  },
+                  "is_object": false,
+                },
+              },
+              "args": {
+                "kind": "DerivingDirective::ArgList",
+                "loc": null,
+                "children": [],
+              },
+            },
+          },
+        ],
+      },
+    },
   })
 }
 
@@ -2031,22 +3369,45 @@ test "deriving_directive to_json" {
     args: @list.from_array([argument]),
     loc: dummy_loc,
   }
-  json_inspect(deriving_directive, content={
-    "type": "DerivingDirective",
-    "type_name": {
-      "type": "TypeName",
-      "name": { "type": "LongIdent::Dot", "pkg": "std", "id": "Show" },
-      "is_object": true,
-      "loc": null,
-    },
-    "args": [
-      {
-        "type": "Argument",
-        "value": { "type": "Expr::Unit", "loc": null, "faked": false },
-        "kind": { "type": "ArgumentKind::Positional" },
-      },
-    ],
+  json_inspect(deriving_directive.json_repr(), content={
+    "kind": "DerivingDirective",
     "loc": null,
+    "children": {
+      "type_name": {
+        "kind": "TypeName",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "LongIdent::Dot",
+            "loc": null,
+            "children": { "pkg": "std", "id": "Show" },
+          },
+          "is_object": true,
+        },
+      },
+      "args": {
+        "kind": "DerivingDirective::ArgList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "Argument",
+            "loc": null,
+            "children": {
+              "value": {
+                "kind": "Expr::Unit",
+                "loc": null,
+                "children": { "faked": false },
+              },
+              "kind": {
+                "kind": "ArgumentKind::Positional",
+                "loc": null,
+                "children": {},
+              },
+            },
+          },
+        ],
+      },
+    },
   })
 }
 
@@ -2068,17 +3429,38 @@ test "type_decl to_json" {
     loc: dummy_loc,
     is_declare: false,
   }
-  json_inspect(type_decl, content={
-    "type": "TypeDecl",
-    "tycon": "TestType",
-    "tycon_loc": null,
-    "params": [{ "type": "TypeDeclBinder", "name": "T", "loc": null }],
-    "components": { "type": "TypeDesc::Extern" },
-    "attrs": [{ "type": "Attribute", "raw": "test_attr", "loc": null }],
-    "doc": "Test documentation",
-    "type_vis": { "type": "Visibility::Default" },
-    "deriving": [],
+  json_inspect(type_decl.json_repr(), content={
+    "kind": "TypeDecl",
     "loc": null,
+    "children": {
+      "tycon": "TestType",
+      "params": {
+        "kind": "TypeDecl::ParamList",
+        "loc": null,
+        "children": [
+          { "kind": "TypeDeclBinder", "loc": null, "children": { "name": "T" } },
+        ],
+      },
+      "components": { "kind": "TypeDesc::Extern", "loc": null, "children": {} },
+      "attrs": {
+        "kind": "TypeDecl::AttrList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "Attribute",
+            "loc": null,
+            "children": { "raw": "test_attr" },
+          },
+        ],
+      },
+      "doc": "Test documentation",
+      "type_vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
+      "deriving": {
+        "kind": "TypeDecl::DerivingList",
+        "loc": null,
+        "children": [],
+      },
+    },
   })
 }
 
@@ -2095,19 +3477,40 @@ test "decl_body to_json" {
     @syntax.DeclBody(
       local_types=@list.from_array([local_type_decl]),
       expr=unit_expr,
-    ),
+    ).json_repr(dummy_loc),
     content={
-      "type": "DeclBody::DeclBody",
-      "local_types": [
-        {
-          "type": "LocalTypeDecl",
-          "tycon": "LocalType",
-          "tycon_loc": null,
-          "components": { "type": "TypeDesc::Abstract" },
-          "deriving": [],
+      "kind": "DeclBody::DeclBody",
+      "loc": null,
+      "children": {
+        "local_types": {
+          "kind": "DeclBody::DeclBody::LocalTypeList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "LocalTypeDecl",
+              "loc": null,
+              "children": {
+                "tycon": "LocalType",
+                "components": {
+                  "kind": "TypeDesc::Abstract",
+                  "loc": null,
+                  "children": {},
+                },
+                "deriving": {
+                  "kind": "LocalTypeDecl::DerivingList",
+                  "loc": null,
+                  "children": [],
+                },
+              },
+            },
+          ],
         },
-      ],
-      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+      },
     },
   )
   json_inspect(
@@ -2117,13 +3520,20 @@ test "decl_body to_json" {
         func_name=dummy_string_literal,
         language=None,
       ),
-    ),
+    ).json_repr(dummy_loc),
     content={
-      "type": "DeclBody::DeclStubs",
-      "0": {
-        "type": "FuncStubs::Import",
-        "module_name": "test_string",
-        "func_name": "test_string",
+      "kind": "DeclBody::DeclStubs",
+      "loc": null,
+      "children": {
+        "value": {
+          "kind": "FuncStubs::Import",
+          "loc": null,
+          "children": {
+            "module_name": "test_string",
+            "func_name": "test_string",
+            "language": null,
+          },
+        },
       },
     },
   )
@@ -2169,62 +3579,135 @@ test "fun_decl to_json" {
     attrs: @list.from_array([dummy_attribute]),
     doc: dummy_docstring,
   }
-  json_inspect(fun_decl, content={
-    "type": "FunDecl",
-    "type_name": {
-      "type": "TypeName",
-      "name": { "type": "LongIdent::Ident", "0": "TestType" },
-      "is_object": false,
-      "loc": null,
-    },
-    "name": { "type": "Binder", "name": "test_func", "loc": null },
-    "has_error": null,
-    "is_async": [null],
-    "decl_params": [
-      {
-        "type": "Parameter::Positional",
-        "binder": { "type": "Binder", "name": "test_func", "loc": null },
-        "ty": {
-          "type": "Type::Name",
-          "constr_id": {
-            "type": "ConstrId",
-            "id": { "type": "LongIdent::Ident", "0": "Int" },
+  json_inspect(fun_decl.json_repr(dummy_loc), content={
+    "kind": "FunDecl",
+    "loc": null,
+    "children": {
+      "type_name": {
+        "kind": "TypeName",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "LongIdent::Ident",
             "loc": null,
+            "children": { "value": "TestType" },
           },
-          "tys": [],
-          "loc": null,
+          "is_object": false,
         },
       },
-    ],
-    "params_loc": null,
-    "quantifiers": [
-      {
-        "type": "TypeVarBinder",
-        "name": "T",
-        "constraints": [
+      "name": {
+        "kind": "Binder",
+        "loc": null,
+        "children": { "name": "test_func" },
+      },
+      "has_error": { "kind": "Raise", "loc": null, "children": {} },
+      "is_async": { "kind": "Async", "loc": null, "children": {} },
+      "decl_params": {
+        "kind": "FunDecl::ParameterList",
+        "loc": null,
+        "children": [
           {
-            "type": "TypeVarConstraint",
-            "trait": { "type": "LongIdent::Ident", "0": "Show" },
+            "kind": "Parameter::Positional",
             "loc": null,
+            "children": {
+              "binder": {
+                "kind": "Binder",
+                "loc": null,
+                "children": { "name": "test_func" },
+              },
+              "ty": {
+                "kind": "Type::Name",
+                "loc": null,
+                "children": {
+                  "constr_id": {
+                    "kind": "ConstrId",
+                    "loc": null,
+                    "children": {
+                      "id": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": { "value": "Int" },
+                      },
+                    },
+                  },
+                  "tys": {
+                    "kind": "Type::Name::TypeList",
+                    "loc": null,
+                    "children": [],
+                  },
+                },
+              },
+            },
           },
         ],
-        "name_loc": null,
       },
-    ],
-    "return_type": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
+      "quantifiers": {
+        "kind": "FunDecl::QuantifierList",
         "loc": null,
+        "children": [
+          {
+            "kind": "TypeVarBinder",
+            "loc": null,
+            "children": {
+              "name": "T",
+              "constraints": {
+                "kind": "TypeVarBinder::TypeVarConstraintList",
+                "loc": null,
+                "children": [
+                  {
+                    "kind": "TypeVarConstraint",
+                    "loc": null,
+                    "children": {
+                      "trait": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": { "value": "Show" },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ],
       },
-      "tys": [],
-      "loc": null,
+      "return_type": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
+        },
+      },
+      "error_type": {
+        "kind": "ErrorType::NoErrorType",
+        "loc": null,
+        "children": {},
+      },
+      "vis": { "kind": "Visibility::Priv", "loc": null, "children": {} },
+      "attrs": {
+        "kind": "FunDecl::AttrList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "Attribute",
+            "loc": null,
+            "children": { "raw": "test_attr" },
+          },
+        ],
+      },
+      "doc": "Test documentation",
     },
-    "error_type": { "type": "ErrorType::NoErrorType" },
-    "vis": { "type": "Visibility::Priv", "loc": null },
-    "attrs": [{ "type": "Attribute", "raw": "test_attr", "loc": null }],
-    "doc": "Test documentation",
   })
 }
 
@@ -2257,49 +3740,108 @@ test "trait_method_decl to_json" {
     attrs: @list.empty(),
     loc: dummy_loc,
   }
-  json_inspect(trait_method, content={
-    "type": "TraitMethodDecl",
-    "name": { "type": "Binder", "name": "trait_method", "loc": null },
-    "has_error": null,
-    "is_async": null,
-    "quantifiers": [
-      {
-        "type": "TypeVarBinder",
-        "name": "T",
-        "constraints": [],
-        "name_loc": null,
+  json_inspect(trait_method.json_repr(), content={
+    "kind": "TraitMethodDecl",
+    "loc": null,
+    "children": {
+      "name": {
+        "kind": "Binder",
+        "loc": null,
+        "children": { "name": "trait_method" },
       },
-    ],
-    "params": [
-      {
-        "type": "Parameter::Positional",
-        "binder": { "type": "Binder", "name": "trait_method", "loc": null },
-        "ty": {
-          "type": "Type::Name",
-          "constr_id": {
-            "type": "ConstrId",
-            "id": { "type": "LongIdent::Ident", "0": "Int" },
+      "has_error": null,
+      "is_async": null,
+      "quantifiers": {
+        "kind": "TraitMethodDecl::QuantifierList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "TypeVarBinder",
             "loc": null,
+            "children": {
+              "name": "T",
+              "constraints": {
+                "kind": "TypeVarBinder::TypeVarConstraintList",
+                "loc": null,
+                "children": [],
+              },
+            },
           },
-          "tys": [],
-          "loc": null,
+        ],
+      },
+      "params": {
+        "kind": "TraitMethodDecl::ParamList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "Parameter::Positional",
+            "loc": null,
+            "children": {
+              "binder": {
+                "kind": "Binder",
+                "loc": null,
+                "children": { "name": "trait_method" },
+              },
+              "ty": {
+                "kind": "Type::Name",
+                "loc": null,
+                "children": {
+                  "constr_id": {
+                    "kind": "ConstrId",
+                    "loc": null,
+                    "children": {
+                      "id": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": { "value": "Int" },
+                      },
+                    },
+                  },
+                  "tys": {
+                    "kind": "Type::Name::TypeList",
+                    "loc": null,
+                    "children": [],
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+      "return_type": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
         },
       },
-    ],
-    "return_type": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
+      "error_type": {
+        "kind": "ErrorType::DefaultErrorType",
         "loc": null,
+        "children": {},
       },
-      "tys": [],
-      "loc": null,
+      "has_default": {
+        "kind": "TraitMethodDecl::HasDefault",
+        "loc": null,
+        "children": {},
+      },
+      "attrs": {
+        "kind": "TraitMethodDecl::AttrList",
+        "loc": null,
+        "children": [],
+      },
     },
-    "error_type": { "type": "ErrorType::DefaultErrorType", "loc": null },
-    "has_default": null,
-    "attrs": [],
-    "loc": null,
   })
 }
 
@@ -2332,35 +3874,91 @@ test "trait_decl to_json" {
     attrs: @list.from_array([dummy_attribute]),
     doc: dummy_docstring,
   }
-  json_inspect(trait_decl, content={
-    "type": "TraitDecl",
-    "name": { "type": "Binder", "name": "TestTrait", "loc": null },
-    "supers": [
-      {
-        "type": "TypeVarConstraint",
-        "trait": { "type": "LongIdent::Ident", "0": "SuperTrait" },
-        "loc": null,
-      },
-    ],
-    "methods": [
-      {
-        "type": "TraitMethodDecl",
-        "name": { "type": "Binder", "name": "method", "loc": null },
-        "has_error": null,
-        "is_async": null,
-        "quantifiers": [],
-        "params": [],
-        "return_type": null,
-        "error_type": { "type": "ErrorType::NoErrorType" },
-        "has_default": null,
-        "attrs": [],
-        "loc": null,
-      },
-    ],
-    "vis": { "type": "Visibility::Pub", "attr": null, "loc": null },
+  json_inspect(trait_decl.json_repr(), content={
+    "kind": "TraitDecl",
     "loc": null,
-    "attrs": [{ "type": "Attribute", "raw": "test_attr", "loc": null }],
-    "doc": "Test documentation",
+    "children": {
+      "name": {
+        "kind": "Binder",
+        "loc": null,
+        "children": { "name": "TestTrait" },
+      },
+      "supers": {
+        "kind": "TraitDecl::SuperList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "TypeVarConstraint",
+            "loc": null,
+            "children": {
+              "trait": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "SuperTrait" },
+              },
+            },
+          },
+        ],
+      },
+      "methods": {
+        "kind": "TraitDecl::MethodList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "TraitMethodDecl",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "Binder",
+                "loc": null,
+                "children": { "name": "method" },
+              },
+              "has_error": null,
+              "is_async": null,
+              "quantifiers": {
+                "kind": "TraitMethodDecl::QuantifierList",
+                "loc": null,
+                "children": [],
+              },
+              "params": {
+                "kind": "TraitMethodDecl::ParamList",
+                "loc": null,
+                "children": [],
+              },
+              "return_type": null,
+              "error_type": {
+                "kind": "ErrorType::NoErrorType",
+                "loc": null,
+                "children": {},
+              },
+              "has_default": null,
+              "attrs": {
+                "kind": "TraitMethodDecl::AttrList",
+                "loc": null,
+                "children": [],
+              },
+            },
+          },
+        ],
+      },
+      "vis": {
+        "kind": "Visibility::Pub",
+        "loc": null,
+        "children": { "attr": null },
+      },
+      "attrs": {
+        "kind": "TraitDecl::AttrList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "Attribute",
+            "loc": null,
+            "children": { "raw": "test_attr" },
+          },
+        ],
+      },
+      "doc": "Test documentation",
+    },
   })
 }
 
@@ -2395,13 +3993,24 @@ test "impl variants to_json" {
       local_types=@list.from_array([]),
       is_async=None,
       loc=dummy_loc,
-    ),
+    ).json_repr(),
     content={
-      "type": "Impl::TopExpr",
-      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "is_main": true,
-      "local_types": [],
+      "kind": "Impl::TopExpr",
       "loc": null,
+      "children": {
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "is_main": true,
+        "local_types": {
+          "kind": "Impl::TopExpr::LocalTypeList",
+          "loc": null,
+          "children": [],
+        },
+        "is_async": null,
+      },
     },
   )
   json_inspect(
@@ -2414,32 +4023,70 @@ test "impl variants to_json" {
       loc=dummy_loc,
       attrs=@list.from_array([]),
       doc=dummy_docstring,
-    ),
+    ).json_repr(),
     content={
-      "type": "Impl::TopTest",
-      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "name": { "v": "test_string", "loc": null },
-      "params": null,
-      "local_types": [],
-      "is_async": null,
+      "kind": "Impl::TopTest",
       "loc": null,
-      "attrs": [],
-      "doc": "Test documentation",
+      "children": {
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "name": {
+          "kind": "TestName",
+          "loc": null,
+          "children": { "value": "test_string" },
+        },
+        "params": null,
+        "local_types": {
+          "kind": "Impl::TopTest::LocalTypeList",
+          "loc": null,
+          "children": [],
+        },
+        "is_async": null,
+        "attrs": {
+          "kind": "Impl::TopTest::AttrList",
+          "loc": null,
+          "children": [],
+        },
+        "doc": "Test documentation",
+      },
     },
   )
-  json_inspect(@syntax.TopTypeDef(type_decl), content={
-    "type": "Impl::TopTypeDef",
-    "0": {
-      "type": "TypeDecl",
-      "tycon": "TestType",
-      "tycon_loc": null,
-      "params": [],
-      "components": { "type": "TypeDesc::Abstract" },
-      "attrs": [],
-      "doc": "Test documentation",
-      "type_vis": { "type": "Visibility::Default" },
-      "deriving": [],
-      "loc": null,
+  json_inspect(@syntax.TopTypeDef(type_decl).json_repr(), content={
+    "kind": "Impl::TopTypeDef",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "TypeDecl",
+        "loc": null,
+        "children": {
+          "tycon": "TestType",
+          "params": {
+            "kind": "TypeDecl::ParamList",
+            "loc": null,
+            "children": [],
+          },
+          "components": {
+            "kind": "TypeDesc::Abstract",
+            "loc": null,
+            "children": {},
+          },
+          "attrs": { "kind": "TypeDecl::AttrList", "loc": null, "children": [] },
+          "doc": "Test documentation",
+          "type_vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {},
+          },
+          "deriving": {
+            "kind": "TypeDecl::DerivingList",
+            "loc": null,
+            "children": [],
+          },
+        },
+      },
     },
   })
   let fun_decl = @syntax.FunDecl::{
@@ -2460,30 +4107,68 @@ test "impl variants to_json" {
     local_types=@list.from_array([]),
     expr=unit_expr,
   )
-  json_inspect(@syntax.TopFuncDef(fun_decl~, decl_body~, loc=dummy_loc), content={
-    "type": "Impl::TopFuncDef",
-    "fun_decl": {
-      "type": "FunDecl",
-      "type_name": null,
-      "name": { "type": "Binder", "name": "test", "loc": null },
-      "has_error": null,
-      "is_async": null,
-      "decl_params": null,
-      "params_loc": null,
-      "quantifiers": [],
-      "return_type": null,
-      "error_type": { "type": "ErrorType::NoErrorType" },
-      "vis": { "type": "Visibility::Default" },
-      "attrs": [],
-      "doc": "Test documentation",
+  json_inspect(
+    @syntax.TopFuncDef(fun_decl~, decl_body~, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Impl::TopFuncDef",
+      "loc": null,
+      "children": {
+        "fun_decl": {
+          "kind": "FunDecl",
+          "loc": null,
+          "children": {
+            "type_name": null,
+            "name": {
+              "kind": "Binder",
+              "loc": null,
+              "children": { "name": "test" },
+            },
+            "has_error": null,
+            "is_async": null,
+            "decl_params": null,
+            "quantifiers": {
+              "kind": "FunDecl::QuantifierList",
+              "loc": null,
+              "children": [],
+            },
+            "return_type": null,
+            "error_type": {
+              "kind": "ErrorType::NoErrorType",
+              "loc": null,
+              "children": {},
+            },
+            "vis": {
+              "kind": "Visibility::Default",
+              "loc": null,
+              "children": {},
+            },
+            "attrs": {
+              "kind": "FunDecl::AttrList",
+              "loc": null,
+              "children": [],
+            },
+            "doc": "Test documentation",
+          },
+        },
+        "decl_body": {
+          "kind": "DeclBody::DeclBody",
+          "loc": null,
+          "children": {
+            "local_types": {
+              "kind": "DeclBody::DeclBody::LocalTypeList",
+              "loc": null,
+              "children": [],
+            },
+            "expr": {
+              "kind": "Expr::Unit",
+              "loc": null,
+              "children": { "faked": false },
+            },
+          },
+        },
+      },
     },
-    "decl_body": {
-      "type": "DeclBody::DeclBody",
-      "local_types": [],
-      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-    },
-    "loc": null,
-  })
+  )
   json_inspect(
     @syntax.TopLetDef(
       binder~,
@@ -2494,26 +4179,52 @@ test "impl variants to_json" {
       loc=dummy_loc,
       attrs=@list.from_array([]),
       doc=dummy_docstring,
-    ),
+    ).json_repr(),
     content={
-      "type": "Impl::TopLetDef",
-      "binder": { "type": "Binder", "name": "test", "loc": null },
-      "ty": {
-        "type": "Type::Name",
-        "constr_id": {
-          "type": "ConstrId",
-          "id": { "type": "LongIdent::Ident", "0": "Int" },
-          "loc": null,
-        },
-        "tys": [],
-        "loc": null,
-      },
-      "expr": { "type": "Expr::Unit", "loc": null, "faked": false },
-      "vis": { "type": "Visibility::Default" },
-      "is_constant": true,
+      "kind": "Impl::TopLetDef",
       "loc": null,
-      "attrs": [],
-      "doc": "Test documentation",
+      "children": {
+        "binder": {
+          "kind": "Binder",
+          "loc": null,
+          "children": { "name": "test" },
+        },
+        "ty": {
+          "kind": "Type::Name",
+          "loc": null,
+          "children": {
+            "constr_id": {
+              "kind": "ConstrId",
+              "loc": null,
+              "children": {
+                "id": {
+                  "kind": "LongIdent::Ident",
+                  "loc": null,
+                  "children": { "value": "Int" },
+                },
+              },
+            },
+            "tys": {
+              "kind": "Type::Name::TypeList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
+        "is_constant": true,
+        "attrs": {
+          "kind": "Impl::TopLetDef::AttrList",
+          "loc": null,
+          "children": [],
+        },
+        "doc": "Test documentation",
+      },
     },
   )
   let view = @syntax.TopView(
@@ -2531,29 +4242,61 @@ test "impl variants to_json" {
     doc=dummy_docstring,
     loc=dummy_loc,
   )
-  json_inspect(view, content={
-    "type": "Impl::TopView",
-    "quantifiers": [],
-    "source_ty": {
-      "type": "Type::Name",
-      "constr_id": {
-        "type": "ConstrId",
-        "id": { "type": "LongIdent::Ident", "0": "Int" },
-        "loc": null,
-      },
-      "tys": [],
-      "loc": null,
-    },
-    "view_constrs": [],
-    "body": { "type": "Expr::Unit", "loc": null, "faked": false },
-    "ty_name": "TestViewType",
-    "parameters": [],
-    "func_name": { "type": "Binder", "name": "test", "loc": null },
-    "ty_loc": null,
-    "params_loc": null,
-    "vis": { "type": "Visibility::Default" },
+  json_inspect(view.json_repr(), content={
+    "kind": "Impl::TopView",
     "loc": null,
-    "attrs": [],
-    "doc": "Test documentation",
+    "children": {
+      "quantifiers": {
+        "kind": "Impl::TopView::QuantifierList",
+        "loc": null,
+        "children": [],
+      },
+      "source_ty": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
+              },
+            },
+          },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
+        },
+      },
+      "view_constrs": {
+        "kind": "Impl::TopView::ConstrList",
+        "loc": null,
+        "children": [],
+      },
+      "body": {
+        "kind": "Expr::Unit",
+        "loc": null,
+        "children": { "faked": false },
+      },
+      "ty_name": "TestViewType",
+      "parameters": {
+        "kind": "Impl::TopView::ParameterList",
+        "loc": null,
+        "children": [],
+      },
+      "func_name": {
+        "kind": "Binder",
+        "loc": null,
+        "children": { "name": "test" },
+      },
+      "vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
+      "attrs": {
+        "kind": "Impl::TopView::AttrList",
+        "loc": null,
+        "children": [],
+      },
+      "doc": "Test documentation",
+    },
   })
 }
