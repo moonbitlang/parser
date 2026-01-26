@@ -9,5 +9,5 @@ import "test" {
 }
 
 options(
-  "warn-list": "-6",
+  "warn-list": "-1-6",
 )

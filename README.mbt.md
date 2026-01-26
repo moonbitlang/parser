@@ -41,211 +41,472 @@ test {
     #|   y: Int
     #| }
   let (impls, _) = parse_string(source)
-  json_inspect(impls, content=[
+  json_inspect(impls.map(impl_ => impl_.json_repr()), content=[
     {
-      "type": "Impl::TopLetDef",
-      "binder": { "type": "Binder", "name": "number", "loc": null },
-      "ty": null,
-      "expr": {
-        "type": "Expr::Constant",
-        "c": { "type": "Constant::Int", "0": "123" },
-        "loc": null,
-      },
-      "vis": { "type": "Visibility::Default" },
-      "is_constant": false,
+      "kind": "Impl::TopLetDef",
       "loc": null,
-      "attrs": [],
-      "doc": "",
-    },
-    {
-      "type": "Impl::TopFuncDef",
-      "fun_decl": {
-        "type": "FunDecl",
-        "type_name": null,
-        "name": { "type": "Binder", "name": "add", "loc": null },
-        "has_error": null,
-        "is_async": null,
-        "decl_params": [
-          {
-            "type": "Parameter::Positional",
-            "binder": { "type": "Binder", "name": "a", "loc": null },
-            "ty": {
-              "type": "Type::Name",
-              "constr_id": {
-                "type": "ConstrId",
-                "id": { "type": "LongIdent::Ident", "0": "Int" },
-                "loc": null,
-              },
-              "tys": [],
-              "loc": null,
-            },
-          },
-          {
-            "type": "Parameter::Positional",
-            "binder": { "type": "Binder", "name": "b", "loc": null },
-            "ty": {
-              "type": "Type::Name",
-              "constr_id": {
-                "type": "ConstrId",
-                "id": { "type": "LongIdent::Ident", "0": "Int" },
-                "loc": null,
-              },
-              "tys": [],
-              "loc": null,
-            },
-          },
-        ],
-        "params_loc": null,
-        "quantifiers": [],
-        "return_type": {
-          "type": "Type::Name",
-          "constr_id": {
-            "type": "ConstrId",
-            "id": { "type": "LongIdent::Ident", "0": "Int" },
-            "loc": null,
-          },
-          "tys": [],
+      "children": {
+        "binder": {
+          "kind": "Binder",
           "loc": null,
+          "children": { "name": "number" },
         },
-        "error_type": { "type": "ErrorType::NoErrorType" },
-        "vis": { "type": "Visibility::Default" },
-        "attrs": [],
-        "doc": "",
-      },
-      "decl_body": {
-        "type": "DeclBody::DeclBody",
-        "local_types": [],
+        "ty": null,
         "expr": {
-          "type": "Expr::Infix",
-          "op": {
-            "type": "Var",
-            "name": { "type": "LongIdent::Ident", "0": "+" },
-            "loc": null,
-          },
-          "lhs": {
-            "type": "Expr::Ident",
-            "id": {
-              "type": "Var",
-              "name": { "type": "LongIdent::Ident", "0": "a" },
-              "loc": null,
-            },
-            "loc": null,
-          },
-          "rhs": {
-            "type": "Expr::Ident",
-            "id": {
-              "type": "Var",
-              "name": { "type": "LongIdent::Ident", "0": "b" },
-              "loc": null,
-            },
-            "loc": null,
-          },
+          "kind": "Expr::Constant",
           "loc": null,
+          "children": {
+            "constant": {
+              "kind": "Constant::Int",
+              "loc": null,
+              "children": { "value": "123" },
+            },
+          },
         },
+        "vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
+        "is_constant": false,
+        "attrs": {
+          "kind": "Impl::TopLetDef::AttrList",
+          "loc": null,
+          "children": [],
+        },
+        "doc": "",
       },
+    },
+    {
+      "kind": "Impl::TopFuncDef",
       "loc": null,
-    },
-    {
-      "type": "Impl::TopTypeDef",
-      "0": {
-        "type": "TypeDecl",
-        "tycon": "Color",
-        "tycon_loc": null,
-        "params": [],
-        "components": {
-          "type": "TypeDesc::Variant",
-          "0": [
-            {
-              "type": "ConstrDecl",
-              "name": { "type": "ConstrName", "name": "Red", "loc": null },
-              "args": null,
-              "tag": null,
-              "attrs": [],
+      "children": {
+        "fun_decl": {
+          "kind": "FunDecl",
+          "loc": null,
+          "children": {
+            "type_name": null,
+            "name": {
+              "kind": "Binder",
               "loc": null,
-              "doc": "",
+              "children": { "name": "add" },
             },
-            {
-              "type": "ConstrDecl",
-              "name": { "type": "ConstrName", "name": "Green", "loc": null },
-              "args": null,
-              "tag": null,
-              "attrs": [],
+            "has_error": null,
+            "is_async": null,
+            "decl_params": {
+              "kind": "FunDecl::ParameterList",
               "loc": null,
-              "doc": "",
+              "children": [
+                {
+                  "kind": "Parameter::Positional",
+                  "loc": null,
+                  "children": {
+                    "binder": {
+                      "kind": "Binder",
+                      "loc": null,
+                      "children": { "name": "a" },
+                    },
+                    "ty": {
+                      "kind": "Type::Name",
+                      "loc": null,
+                      "children": {
+                        "constr_id": {
+                          "kind": "ConstrId",
+                          "loc": null,
+                          "children": {
+                            "id": {
+                              "kind": "LongIdent::Ident",
+                              "loc": null,
+                              "children": { "value": "Int" },
+                            },
+                          },
+                        },
+                        "tys": {
+                          "kind": "Type::Name::TypeList",
+                          "loc": null,
+                          "children": [],
+                        },
+                      },
+                    },
+                  },
+                },
+                {
+                  "kind": "Parameter::Positional",
+                  "loc": null,
+                  "children": {
+                    "binder": {
+                      "kind": "Binder",
+                      "loc": null,
+                      "children": { "name": "b" },
+                    },
+                    "ty": {
+                      "kind": "Type::Name",
+                      "loc": null,
+                      "children": {
+                        "constr_id": {
+                          "kind": "ConstrId",
+                          "loc": null,
+                          "children": {
+                            "id": {
+                              "kind": "LongIdent::Ident",
+                              "loc": null,
+                              "children": { "value": "Int" },
+                            },
+                          },
+                        },
+                        "tys": {
+                          "kind": "Type::Name::TypeList",
+                          "loc": null,
+                          "children": [],
+                        },
+                      },
+                    },
+                  },
+                },
+              ],
             },
-            {
-              "type": "ConstrDecl",
-              "name": { "type": "ConstrName", "name": "Blue", "loc": null },
-              "args": null,
-              "tag": null,
-              "attrs": [],
+            "quantifiers": {
+              "kind": "FunDecl::QuantifierList",
               "loc": null,
-              "doc": "",
+              "children": [],
             },
-          ],
+            "return_type": {
+              "kind": "Type::Name",
+              "loc": null,
+              "children": {
+                "constr_id": {
+                  "kind": "ConstrId",
+                  "loc": null,
+                  "children": {
+                    "id": {
+                      "kind": "LongIdent::Ident",
+                      "loc": null,
+                      "children": { "value": "Int" },
+                    },
+                  },
+                },
+                "tys": {
+                  "kind": "Type::Name::TypeList",
+                  "loc": null,
+                  "children": [],
+                },
+              },
+            },
+            "error_type": {
+              "kind": "ErrorType::NoErrorType",
+              "loc": null,
+              "children": {},
+            },
+            "vis": {
+              "kind": "Visibility::Default",
+              "loc": null,
+              "children": {},
+            },
+            "attrs": {
+              "kind": "FunDecl::AttrList",
+              "loc": null,
+              "children": [],
+            },
+            "doc": "",
+          },
         },
-        "attrs": [],
-        "doc": "",
-        "type_vis": { "type": "Visibility::Default" },
-        "deriving": [],
-        "loc": null,
+        "decl_body": {
+          "kind": "DeclBody::DeclBody",
+          "loc": null,
+          "children": {
+            "local_types": {
+              "kind": "DeclBody::DeclBody::LocalTypeList",
+              "loc": null,
+              "children": [],
+            },
+            "expr": {
+              "kind": "Expr::Infix",
+              "loc": null,
+              "children": {
+                "op": {
+                  "kind": "Var",
+                  "loc": null,
+                  "children": {
+                    "name": {
+                      "kind": "LongIdent::Ident",
+                      "loc": null,
+                      "children": { "value": "+" },
+                    },
+                  },
+                },
+                "lhs": {
+                  "kind": "Expr::Ident",
+                  "loc": null,
+                  "children": {
+                    "id": {
+                      "kind": "Var",
+                      "loc": null,
+                      "children": {
+                        "name": {
+                          "kind": "LongIdent::Ident",
+                          "loc": null,
+                          "children": { "value": "a" },
+                        },
+                      },
+                    },
+                  },
+                },
+                "rhs": {
+                  "kind": "Expr::Ident",
+                  "loc": null,
+                  "children": {
+                    "id": {
+                      "kind": "Var",
+                      "loc": null,
+                      "children": {
+                        "name": {
+                          "kind": "LongIdent::Ident",
+                          "loc": null,
+                          "children": { "value": "b" },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     },
     {
-      "type": "Impl::TopTypeDef",
-      "0": {
-        "type": "TypeDecl",
-        "tycon": "Point",
-        "tycon_loc": null,
-        "params": [],
-        "components": {
-          "type": "TypeDesc::Record",
-          "0": [
-            {
-              "type": "FieldDecl",
-              "name": { "type": "FieldName", "label": "x", "loc": null },
-              "ty": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": { "type": "LongIdent::Ident", "0": "Int" },
-                  "loc": null,
-                },
-                "tys": [],
-                "loc": null,
-              },
-              "mut": false,
-              "vis": { "type": "Visibility::Default" },
+      "kind": "Impl::TopTypeDef",
+      "loc": null,
+      "children": {
+        "value": {
+          "kind": "TypeDecl",
+          "loc": null,
+          "children": {
+            "tycon": "Color",
+            "params": {
+              "kind": "TypeDecl::ParamList",
               "loc": null,
-              "attrs": [],
-              "doc": "",
+              "children": [],
             },
-            {
-              "type": "FieldDecl",
-              "name": { "type": "FieldName", "label": "y", "loc": null },
-              "ty": {
-                "type": "Type::Name",
-                "constr_id": {
-                  "type": "ConstrId",
-                  "id": { "type": "LongIdent::Ident", "0": "Int" },
-                  "loc": null,
-                },
-                "tys": [],
-                "loc": null,
-              },
-              "mut": false,
-              "vis": { "type": "Visibility::Default" },
+            "components": {
+              "kind": "TypeDesc::Variant",
               "loc": null,
-              "attrs": [],
-              "doc": "",
+              "children": {
+                "value": {
+                  "kind": "TypeDesc::Variant::ConstrList",
+                  "loc": null,
+                  "children": [
+                    {
+                      "kind": "ConstrDecl",
+                      "loc": null,
+                      "children": {
+                        "name": {
+                          "kind": "ConstrName",
+                          "loc": null,
+                          "children": { "name": "Red" },
+                        },
+                        "args": null,
+                        "tag": null,
+                        "attrs": {
+                          "kind": "ConstrDecl::AttrList",
+                          "loc": null,
+                          "children": [],
+                        },
+                        "doc": "",
+                      },
+                    },
+                    {
+                      "kind": "ConstrDecl",
+                      "loc": null,
+                      "children": {
+                        "name": {
+                          "kind": "ConstrName",
+                          "loc": null,
+                          "children": { "name": "Green" },
+                        },
+                        "args": null,
+                        "tag": null,
+                        "attrs": {
+                          "kind": "ConstrDecl::AttrList",
+                          "loc": null,
+                          "children": [],
+                        },
+                        "doc": "",
+                      },
+                    },
+                    {
+                      "kind": "ConstrDecl",
+                      "loc": null,
+                      "children": {
+                        "name": {
+                          "kind": "ConstrName",
+                          "loc": null,
+                          "children": { "name": "Blue" },
+                        },
+                        "args": null,
+                        "tag": null,
+                        "attrs": {
+                          "kind": "ConstrDecl::AttrList",
+                          "loc": null,
+                          "children": [],
+                        },
+                        "doc": "",
+                      },
+                    },
+                  ],
+                },
+              },
             },
-          ],
+            "attrs": {
+              "kind": "TypeDecl::AttrList",
+              "loc": null,
+              "children": [],
+            },
+            "doc": "",
+            "type_vis": {
+              "kind": "Visibility::Default",
+              "loc": null,
+              "children": {},
+            },
+            "deriving": {
+              "kind": "TypeDecl::DerivingList",
+              "loc": null,
+              "children": [],
+            },
+          },
         },
-        "attrs": [],
-        "doc": "",
-        "type_vis": { "type": "Visibility::Default" },
-        "deriving": [],
-        "loc": null,
+      },
+    },
+    {
+      "kind": "Impl::TopTypeDef",
+      "loc": null,
+      "children": {
+        "value": {
+          "kind": "TypeDecl",
+          "loc": null,
+          "children": {
+            "tycon": "Point",
+            "params": {
+              "kind": "TypeDecl::ParamList",
+              "loc": null,
+              "children": [],
+            },
+            "components": {
+              "kind": "TypeDesc::Record",
+              "loc": null,
+              "children": {
+                "value": {
+                  "kind": "TypeDesc::Record::FieldList",
+                  "loc": null,
+                  "children": [
+                    {
+                      "kind": "FieldDecl",
+                      "loc": null,
+                      "children": {
+                        "name": {
+                          "kind": "FieldName",
+                          "loc": null,
+                          "children": { "label": "x" },
+                        },
+                        "ty": {
+                          "kind": "Type::Name",
+                          "loc": null,
+                          "children": {
+                            "constr_id": {
+                              "kind": "ConstrId",
+                              "loc": null,
+                              "children": {
+                                "id": {
+                                  "kind": "LongIdent::Ident",
+                                  "loc": null,
+                                  "children": { "value": "Int" },
+                                },
+                              },
+                            },
+                            "tys": {
+                              "kind": "Type::Name::TypeList",
+                              "loc": null,
+                              "children": [],
+                            },
+                          },
+                        },
+                        "mut": false,
+                        "vis": {
+                          "kind": "Visibility::Default",
+                          "loc": null,
+                          "children": {},
+                        },
+                        "attrs": {
+                          "kind": "FieldDecl::AttrList",
+                          "loc": null,
+                          "children": [],
+                        },
+                        "doc": "",
+                      },
+                    },
+                    {
+                      "kind": "FieldDecl",
+                      "loc": null,
+                      "children": {
+                        "name": {
+                          "kind": "FieldName",
+                          "loc": null,
+                          "children": { "label": "y" },
+                        },
+                        "ty": {
+                          "kind": "Type::Name",
+                          "loc": null,
+                          "children": {
+                            "constr_id": {
+                              "kind": "ConstrId",
+                              "loc": null,
+                              "children": {
+                                "id": {
+                                  "kind": "LongIdent::Ident",
+                                  "loc": null,
+                                  "children": { "value": "Int" },
+                                },
+                              },
+                            },
+                            "tys": {
+                              "kind": "Type::Name::TypeList",
+                              "loc": null,
+                              "children": [],
+                            },
+                          },
+                        },
+                        "mut": false,
+                        "vis": {
+                          "kind": "Visibility::Default",
+                          "loc": null,
+                          "children": {},
+                        },
+                        "attrs": {
+                          "kind": "FieldDecl::AttrList",
+                          "loc": null,
+                          "children": [],
+                        },
+                        "doc": "",
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+            "attrs": {
+              "kind": "TypeDecl::AttrList",
+              "loc": null,
+              "children": [],
+            },
+            "doc": "",
+            "type_vis": {
+              "kind": "Visibility::Default",
+              "loc": null,
+              "children": {},
+            },
+            "deriving": {
+              "kind": "TypeDecl::DerivingList",
+              "loc": null,
+              "children": [],
+            },
+          },
+        },
       },
     },
   ])
