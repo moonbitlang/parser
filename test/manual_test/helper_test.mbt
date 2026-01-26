@@ -22,8 +22,8 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
     })
     fail(buf.to_string())
   }
-  let hand_json = hand_result.0.to_json()
-  let yacc_json = yacc_result.0.to_json()
+  let hand_json = hand_result.0.map(impl_ => impl_.json_repr()).to_json()
+  let yacc_json = yacc_result.0.map(impl_ => impl_.json_repr()).to_json()
   if hand_json != yacc_json {
     @fs.create_dir(debug_dir)
     @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
