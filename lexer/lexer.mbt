@@ -80,7 +80,7 @@ fn lex_tokens(
     }
 
     // Character literals - escape sequences
-    ("'" ("\\[\\'\"ntbr ]" as raw) "'", rest) => {
+    ("'" ("\\[\\'\"ntbrf/ ]" as raw) "'", rest) => {
       env.add_token_with_loc(
         CHAR(raw.to_string()),
         start=env.calc_offset(input, base~),
@@ -207,7 +207,7 @@ fn lex_tokens(
     }
 
     // Byte literals - escape sequences
-    ("b'\\[\\'\"`ntbr ]'" as raw, rest) => {
+    ("b'\\[\\'\"`ntbrf/ ]'" as raw, rest) => {
       let literal = try! raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
@@ -1019,7 +1019,7 @@ fn lex_string(
         )
         (input, env.calc_offset(base~, input))
       }
-      ("[^\n\"{}]" as c, rest) => {
+      ("[^\n{}]" as c, rest) => {
         env.register_surrogate_pair_for_char(c)
         string_repr_buf.write_char(c)
         process_interpolation(rest)
@@ -1050,7 +1050,7 @@ fn lex_string(
         }
 
       // Escape sequences
-      ("\\[\\'\"`ntbr ]" as raw, rest) => {
+      ("\\[\\'\"`ntbrf/ ]" as raw, rest) => {
         string_repr_buf.write_string(raw.to_string())
         process_string(rest, start_pos)
       }
