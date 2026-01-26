@@ -460,6 +460,22 @@ fn lex_tokens(
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
+    (">\.\.", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::RANGE_EXCLUSIVE_REV,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+    (">=\.\.", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::RANGE_INCLUSIVE_REV,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
     (">=", rest) => {
       env.add_token_with_loc(
         @tokens.Token::INFIX1(">="),
@@ -497,6 +513,14 @@ fn lex_tokens(
     ("\.\.\.", rest) => {
       env.add_token_with_loc(
         @tokens.Token::ELLIPSIS,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+    ("\.\.<=", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::RANGE_LT_INCLUSIVE,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
