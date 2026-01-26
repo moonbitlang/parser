@@ -8,19 +8,19 @@ pub(all) struct Name {
 pub(all) struct QualifiedName {
   name : QualifiedIdent
   loc : Location
-} derive(ToJson)
+}
 
 ///|
 pub(all) struct TypeParamWithConstraints {
   name : Name
   constraints : @list.List[QualifiedName]
-} derive(ToJson)
+}
 
 ///|
 pub(all) enum TypeParamNoConstraints {
   Name(Name)
   Underscore(Location)
-} derive(ToJson(style="legacy"))
+}
 
 ///|
 pub(all) enum Parameter {
@@ -29,13 +29,13 @@ pub(all) enum Parameter {
   Autofill(Label, Type)
   OptionalDefault(Label, Type)
   OptionalOption(Label, Type)
-} derive(ToJson(style="legacy"))
+}
 
 ///|
 pub(all) enum TraitMethodParameter {
   Positional(Type)
   Labelled(Label, Type)
-} derive(ToJson(style="legacy"))
+}
 
 ///|
 pub(all) struct FuncSig {
@@ -45,7 +45,7 @@ pub(all) struct FuncSig {
   params : @list.List[Parameter]
   return_ : (Type, ErrorType)
   type_params : @list.List[TypeParamWithConstraints]
-} derive(ToJson)
+}
 
 ///|
 pub(all) struct TypeSig {
@@ -53,7 +53,7 @@ pub(all) struct TypeSig {
   type_params : @list.List[TypeParamNoConstraints]
   components : TypeDesc
   vis : Visibility
-} derive(ToJson)
+}
 
 ///|
 pub(all) enum AliasSig {
@@ -65,7 +65,7 @@ pub(all) enum AliasSig {
   )
   TraitAlias(name~ : Name, trait_name~ : QualifiedName, vis~ : Visibility)
   FnAlias(name~ : Name, type_name~ : QualifiedName, loc~ : Location)
-} derive(ToJson(style="legacy"))
+}
 
 ///|
 pub(all) struct TraitMethodSig {
@@ -73,7 +73,7 @@ pub(all) struct TraitMethodSig {
   params : @list.List[TraitMethodParameter]
   has_default : Bool
   return_ : (Type, ErrorType)
-} derive(ToJson)
+}
 
 ///|
 pub(all) struct TraitSig {
@@ -81,7 +81,7 @@ pub(all) struct TraitSig {
   super_traits : @list.List[QualifiedName]
   methods : @list.List[TraitMethodSig]
   vis : Visibility
-} derive(ToJson)
+}
 
 ///|
 pub(all) enum ImplSig {
@@ -91,26 +91,26 @@ pub(all) enum ImplSig {
     trait_name~ : QualifiedName
   )
   DefaultImpl(trait_name~ : Name, method_name~ : Name)
-} derive(ToJson(style="legacy"))
+}
 
 ///|
 pub(all) struct ConstSig {
   name : Name
   type_ : Type
   value : Constant
-} derive(ToJson)
+}
 
 ///|
 pub(all) struct ValueSig {
   name : Name
   type_ : Type
-} derive(ToJson)
+}
 
 ///|
 pub(all) struct PackageImport {
   name : String
   alias_ : String?
-} derive(ToJson)
+}
 
 ///|
 pub(all) enum Sig {
@@ -121,11 +121,11 @@ pub(all) enum Sig {
   Impl(ImplSig)
   Const(ConstSig)
   Value(ValueSig)
-} derive(ToJson(style="legacy"))
+}
 
 ///|
 pub(all) struct Mbti {
   package_name : String
   imports : @list.List[PackageImport]
   sigs : @list.List[(Sig, Location)]
-} derive(ToJson)
+}

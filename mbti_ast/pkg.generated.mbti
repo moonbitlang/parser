@@ -17,14 +17,12 @@ pub(all) enum AliasSig {
   TraitAlias(name~ : Name, trait_name~ : QualifiedName, vis~ : @syntax.Visibility)
   FnAlias(name~ : Name, type_name~ : QualifiedName, loc~ : @basic.Location)
 }
-pub impl ToJson for AliasSig
 
 pub(all) struct ConstSig {
   name : Name
   type_ : @syntax.Type
   value : @syntax.Constant
 }
-pub impl ToJson for ConstSig
 
 pub(all) struct FuncSig {
   attr : @list.List[(String, String?, String)]
@@ -34,20 +32,17 @@ pub(all) struct FuncSig {
   return_ : (@syntax.Type, @syntax.ErrorType)
   type_params : @list.List[TypeParamWithConstraints]
 }
-pub impl ToJson for FuncSig
 
 pub(all) enum ImplSig {
   Trait(type_params~ : @list.List[TypeParamWithConstraints], type_~ : @syntax.Type, trait_name~ : QualifiedName)
   DefaultImpl(trait_name~ : Name, method_name~ : Name)
 }
-pub impl ToJson for ImplSig
 
 pub(all) struct Mbti {
   package_name : String
   imports : @list.List[PackageImport]
   sigs : @list.List[(Sig, @basic.Location)]
 }
-pub impl ToJson for Mbti
 
 pub(all) struct Name {
   name : String
@@ -59,7 +54,6 @@ pub(all) struct PackageImport {
   name : String
   alias_ : String?
 }
-pub impl ToJson for PackageImport
 
 pub(all) enum Parameter {
   Positional(@syntax.Type)
@@ -68,13 +62,11 @@ pub(all) enum Parameter {
   OptionalDefault(@syntax.Label, @syntax.Type)
   OptionalOption(@syntax.Label, @syntax.Type)
 }
-pub impl ToJson for Parameter
 
 pub(all) struct QualifiedName {
   name : @syntax.LongIdent
   loc : @basic.Location
 }
-pub impl ToJson for QualifiedName
 
 pub(all) enum Sig {
   Func(FuncSig)
@@ -85,13 +77,11 @@ pub(all) enum Sig {
   Const(ConstSig)
   Value(ValueSig)
 }
-pub impl ToJson for Sig
 
 pub(all) enum TraitMethodParameter {
   Positional(@syntax.Type)
   Labelled(@syntax.Label, @syntax.Type)
 }
-pub impl ToJson for TraitMethodParameter
 
 pub(all) struct TraitMethodSig {
   name : Name
@@ -99,7 +89,6 @@ pub(all) struct TraitMethodSig {
   has_default : Bool
   return_ : (@syntax.Type, @syntax.ErrorType)
 }
-pub impl ToJson for TraitMethodSig
 
 pub(all) struct TraitSig {
   name : Name
@@ -107,19 +96,16 @@ pub(all) struct TraitSig {
   methods : @list.List[TraitMethodSig]
   vis : @syntax.Visibility
 }
-pub impl ToJson for TraitSig
 
 pub(all) enum TypeParamNoConstraints {
   Name(Name)
   Underscore(@basic.Location)
 }
-pub impl ToJson for TypeParamNoConstraints
 
 pub(all) struct TypeParamWithConstraints {
   name : Name
   constraints : @list.List[QualifiedName]
 }
-pub impl ToJson for TypeParamWithConstraints
 
 pub(all) struct TypeSig {
   name : Name
@@ -127,13 +113,11 @@ pub(all) struct TypeSig {
   components : @syntax.TypeDesc
   vis : @syntax.Visibility
 }
-pub impl ToJson for TypeSig
 
 pub(all) struct ValueSig {
   name : Name
   type_ : @syntax.Type
 }
-pub impl ToJson for ValueSig
 
 // Type aliases
 pub using @syntax {type Constant}

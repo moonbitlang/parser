@@ -17,6 +17,7 @@ fn @test.Test::run(t : Self, filename : String) -> Unit raise {
     }),
     initial_pos=@basic.Position::{ fname: filename, lnum: 1, bol: 0, cnum: 0 },
   )
-  t.write(mbti.to_json().stringify(indent=2))
+  ignore(mbti)
+  // t.write(mbti.to_json().stringify(indent=2))
   t.snapshot(filename=filename + ".json")
 }
