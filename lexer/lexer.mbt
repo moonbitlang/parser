@@ -130,6 +130,26 @@ fn lex_tokens(
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
+    // Regex literals - re"..."
+    ("re\"", rest) => {
+      let start_pos = env.calc_offset(input, base~)
+      let (rest, interps) = lex_string(
+        rest,
+        base~,
+        env~,
+        end_with_newline=false,
+        allow_interp=true,
+        start_pos~,
+      )
+      let tok : @tokens.Token = match interps {
+        [InterpLit(repr~, ..)] => REGEX_LITERAL(repr)
+        interps => REGEX_INTERP(interps)
+      }
+      let end_pos = env.calc_offset(rest, base~)
+      env.add_token_with_loc(tok, start=start_pos, end=end_pos)
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+
     // String literals - basic double-quoted string
     ("\"", rest) => {
       let start_pos = env.calc_offset(input, base~)
