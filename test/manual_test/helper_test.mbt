@@ -39,7 +39,7 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
       "parsing \{name}.mbt produced different ASTs between moonyacc and handrolled parsers.",
     )
   }
-  let json : Json = { "type": "Program", "body": hand_json }
+  let json : Json = hand_json
   t.write(json.stringify(indent=2))
   t.snapshot(filename="\{name}.json")
 }
