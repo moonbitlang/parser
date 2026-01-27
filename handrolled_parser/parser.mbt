@@ -1009,6 +1009,11 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       let params = self.parse_opt_type_params_no_constraints()
       let components : @syntax.TypeDesc = match self.peek_token() {
         SEMI(_) | EOF | DERIVE => Abstract
+        EQUAL => {
+          self.expect_token(TK_EQUAL)
+          let typ = self.parse_type()
+          Alias(typ)
+        }
         _ => {
           let typ = self.parse_type()
           Newtype(typ)

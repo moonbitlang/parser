@@ -731,6 +731,23 @@ structure_item -> Impl
       }
     )
   }
+  | type_header "=" type_ deriving_directive_list {
+    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
+    TopTypeDef(
+      TypeDecl::{
+        tycon,
+        tycon_loc,
+        params,
+        components: Alias($3),
+        type_vis,
+        doc : DocString::empty(),
+        deriving: $4,
+        loc : mk_loc($sloc),
+        attrs,
+        is_declare
+      }
+    )
+  }
   | attributes visibility "traitalias" batch_type_alias_targets {
     let (is_list, pkg, targets) = $4
     TopBatchTraitAlias(
