@@ -578,6 +578,7 @@ fn State::parse_trait_decl(
   self : Self,
   vis~ : @syntax.Visibility,
   attrs~ : List[@attribute.Attribute],
+  is_declare~ : Bool,
 ) -> @syntax.TraitDecl {
   if self.mode is Panic(loc~, ..) {
     return {
@@ -588,6 +589,7 @@ fn State::parse_trait_decl(
       loc,
       attrs,
       doc: @syntax.DocString::empty(),
+      is_declare,
     }
   }
   let spos = self.peek_spos()
@@ -625,6 +627,7 @@ fn State::parse_trait_decl(
     loc,
     attrs,
     doc: @syntax.DocString::empty(),
+    is_declare,
   }
 }
 
@@ -1133,6 +1136,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         loc~,
         doc=DocString::empty(),
         attrs~,
+        is_declare~,
       )
     }
     EXTERN if self.peek_token(nth=1) is TYPE => {
@@ -1332,7 +1336,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       )
     }
     TRAIT => {
-      let trait_decl = self.parse_trait_decl(attrs~, vis~)
+      let trait_decl = self.parse_trait_decl(attrs~, vis~, is_declare~)
       let trait_decl = { ..trait_decl, vis, }
       @syntax.TopTrait(trait_decl)
     }
