@@ -2268,6 +2268,7 @@
               "attr": "all"
             }
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -4833,6 +4834,7 @@
               "attr": "all"
             }
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -5266,6 +5268,7 @@
               "attr": "open"
             }
           },
+          "is_declare": false,
           "attrs": {
             "kind": "TraitDecl::AttrList",
             "loc": null,
@@ -5379,6 +5382,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,

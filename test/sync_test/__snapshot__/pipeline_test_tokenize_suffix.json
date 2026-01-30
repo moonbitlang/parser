@@ -217,6 +217,7 @@
                           }
                         ]
                       },
+                      "guard": null,
                       "body": {
                         "kind": "Expr::Ident",
                         "loc": null,
@@ -253,6 +254,7 @@
                           }
                         ]
                       },
+                      "guard": null,
                       "body": {
                         "kind": "Expr::Apply",
                         "loc": null,

@@ -194,6 +194,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -580,6 +581,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::Group",
                                         "loc": null,
@@ -752,6 +754,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::Group",
                                         "loc": null,
@@ -937,6 +940,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::Group",
                                         "loc": null,
@@ -1232,6 +1236,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::Group",
                                         "loc": null,
@@ -1490,6 +1495,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::Continue",
                                         "loc": null,
@@ -1547,6 +1553,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::Break",
                                         "loc": null,
@@ -1572,6 +1579,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::Apply",
                                         "loc": null,

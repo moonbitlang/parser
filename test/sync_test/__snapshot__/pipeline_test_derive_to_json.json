@@ -325,6 +325,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -454,6 +455,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -744,6 +746,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -815,6 +818,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -951,6 +955,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -2775,6 +2780,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -5447,6 +5453,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -5787,6 +5794,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -6065,6 +6073,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -6244,6 +6253,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -6432,6 +6442,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -8017,6 +8028,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -8316,6 +8328,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -10130,6 +10143,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -10251,6 +10265,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -10463,6 +10478,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -11017,6 +11033,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -11230,6 +11247,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -11443,6 +11461,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -11702,6 +11721,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -11882,6 +11902,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -12205,6 +12226,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -12483,6 +12505,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -13031,6 +13054,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -19835,6 +19859,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -20076,6 +20101,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,

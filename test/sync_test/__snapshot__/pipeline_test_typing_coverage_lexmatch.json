@@ -224,6 +224,7 @@
                           }
                         ]
                       },
+                      "guard": null,
                       "body": {
                         "kind": "Expr::ArraySpread",
                         "loc": null,
@@ -384,6 +385,7 @@
                           }
                         ]
                       },
+                      "guard": null,
                       "body": {
                         "kind": "Expr::ArraySpread",
                         "loc": null,
@@ -531,6 +533,7 @@
                           }
                         ]
                       },
+                      "guard": null,
                       "body": {
                         "kind": "Expr::Apply",
                         "loc": null,
@@ -622,6 +625,7 @@
                           }
                         ]
                       },
+                      "guard": null,
                       "body": {
                         "kind": "Expr::Array",
                         "loc": null,
@@ -650,6 +654,7 @@
                           }
                         ]
                       },
+                      "guard": null,
                       "body": {
                         "kind": "Expr::Array",
                         "loc": null,

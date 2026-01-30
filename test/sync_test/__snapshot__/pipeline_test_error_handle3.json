@@ -100,6 +100,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -236,6 +237,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -517,6 +519,7 @@
             "loc": null,
             "children": {}
           },
+          "is_declare": false,
           "attrs": {
             "kind": "TraitDecl::AttrList",
             "loc": null,
@@ -3615,6 +3618,7 @@
         "loc": null,
         "children": {}
       },
+      "is_declare": false,
       "attrs": {
         "kind": "Impl::TopImplRelation::AttrList",
         "loc": null,
@@ -4028,6 +4032,7 @@
         "children": {}
       },
       "is_constant": false,
+      "is_declare": false,
       "attrs": {
         "kind": "Impl::TopLetDef::AttrList",
         "loc": null,

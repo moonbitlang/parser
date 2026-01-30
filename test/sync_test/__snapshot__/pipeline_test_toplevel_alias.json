@@ -292,6 +292,7 @@
         "children": {}
       },
       "is_constant": false,
+      "is_declare": false,
       "attrs": {
         "kind": "Impl::TopLetDef::AttrList",
         "loc": null,
@@ -402,6 +403,7 @@
         "children": {}
       },
       "is_constant": false,
+      "is_declare": false,
       "attrs": {
         "kind": "Impl::TopLetDef::AttrList",
         "loc": null,

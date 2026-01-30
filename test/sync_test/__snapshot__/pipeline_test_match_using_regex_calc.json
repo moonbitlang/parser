@@ -952,6 +952,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::Break",
                                         "loc": null,
@@ -998,6 +999,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::Continue",
                                         "loc": null,
@@ -1081,6 +1083,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::Group",
                                         "loc": null,
@@ -1333,6 +1336,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::If",
                                         "loc": null,
@@ -1790,6 +1794,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::If",
                                         "loc": null,
@@ -2226,6 +2231,7 @@
                                           }
                                         ]
                                       },
+                                      "guard": null,
                                       "body": {
                                         "kind": "Expr::Return",
                                         "loc": null,

@@ -1,5 +1,7 @@
 // Test: declare keyword parsing
 
+// Valid uses of declare
+
 ///|
 declare fn f1() -> Int
 
@@ -18,6 +20,37 @@ declare impl Show for T1
 ///|
 declare pub impl Eq for T2
 
-// This should NOT be allowed - suberror is not a valid target for declare
+// Invalid uses - these should be rejected by both parsers
+
 ///|
-declare suberror T23
+declare suberror E1
+
+///|
+declare type! E2
+
+///|
+declare struct S1 {}
+
+///|
+declare enum En1 {}
+
+///|
+declare let x : Int = 1
+
+///|
+declare impl Show with to_string(self : Int) -> String { "" }
+
+///|
+declare impl Show for Int with to_string(self : Int) -> String { "" }
+
+///|
+declare type Alias = Int
+
+///|
+declare type Newtype Int
+
+///|
+declare impl Show with to_string(self : Int) -> String = "stub"
+
+///|
+declare impl Show for Int with to_string(self : Int) -> String = "stub"

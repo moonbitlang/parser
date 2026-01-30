@@ -238,6 +238,7 @@
               "attr": "readonly"
             }
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
@@ -307,6 +308,7 @@
               "attr": "readonly"
             }
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
