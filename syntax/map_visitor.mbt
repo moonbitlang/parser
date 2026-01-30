@@ -400,6 +400,7 @@ pub(open) trait MapVisitor {
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
+    is_declare~ : Bool,
   ) -> Impl = _
   visit_Impl_TopTrait(Self, TraitDecl) -> Impl = _
   visit_Impl_TopBatchTypeAlias(
@@ -829,6 +830,7 @@ impl MapVisitor with visit_Impl_TopLetDef(
   loc~,
   attrs~,
   doc~,
+  is_declare~,
 ) {
   MapVisitorBase::visit_Impl_TopLetDef(
     env,
@@ -840,6 +842,7 @@ impl MapVisitor with visit_Impl_TopLetDef(
     loc~,
     attrs~,
     doc~,
+    is_declare~,
   )
 }
 
@@ -2280,7 +2283,17 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         doc~,
       )
     TopTrait(trait_decl) => env.0.visit_Impl_TopTrait(trait_decl)
-    TopLetDef(binder~, ty~, expr~, vis~, is_constant~, loc~, attrs~, doc~) =>
+    TopLetDef(
+      binder~,
+      ty~,
+      expr~,
+      vis~,
+      is_constant~,
+      loc~,
+      attrs~,
+      doc~,
+      is_declare~
+    ) =>
       env.0.visit_Impl_TopLetDef(
         binder~,
         ty~,
@@ -2290,6 +2303,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         loc~,
         attrs~,
         doc~,
+        is_declare~,
       )
     TopFuncAlias(pkg~, type_name~, targets~, vis~, attrs~, is_list~, doc~, loc~) =>
       env.0.visit_Impl_TopFuncAlias(
@@ -3792,7 +3806,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TraitDecl(
   let loc = trait_decl.loc
   let attrs = trait_decl.attrs
   let doc = trait_decl.doc
-  TraitDecl::{ name, supers, methods, vis, loc, attrs, doc }
+  let is_declare = trait_decl.is_declare
+  TraitDecl::{ name, supers, methods, vis, loc, attrs, doc, is_declare }
 }
 
 ///|
@@ -3880,12 +3895,23 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopLet
   loc~,
   attrs~,
   doc~,
+  is_declare~,
 ) {
   let binder = env.0.visit_Binder(binder)
   let ty = ty.map(env.0.visit_Type(_))
   let expr = env.0.visit_Expr(expr)
   let vis = env.0.visit_Visibility(vis)
-  TopLetDef(binder~, ty~, expr~, vis~, is_constant~, loc~, attrs~, doc~)
+  TopLetDef(
+    binder~,
+    ty~,
+    expr~,
+    vis~,
+    is_constant~,
+    loc~,
+    attrs~,
+    doc~,
+    is_declare~,
+  )
 }
 
 ///|
