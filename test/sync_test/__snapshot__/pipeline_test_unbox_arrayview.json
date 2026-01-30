@@ -136,6 +136,7 @@
               "attr": null
             }
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,

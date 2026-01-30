@@ -241,6 +241,7 @@
                           }
                         ]
                       },
+                      "guard": null,
                       "body": {
                         "kind": "Expr::Group",
                         "loc": null,
@@ -430,6 +431,7 @@
                           }
                         ]
                       },
+                      "guard": null,
                       "body": {
                         "kind": "Expr::Tuple",
                         "loc": null,
