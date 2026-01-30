@@ -447,9 +447,9 @@ expression -> Expr
   : expr EOF { $1 }
   ;
 
-val_header -> (List[Attribute], Bool, Visibility, Binder, Type?)
-  : attributes visibility "let" binder opt_annot { ($1, false, $2, $4, $5) }
-  | attributes visibility "const" UIDENT opt_annot { ($1, true, $2, Binder::{ name : $4, loc : mk_loc($loc($4)) }, $5) }
+val_header -> (List[Attribute], Bool, Bool, Visibility, Binder, Type?)
+  : attributes is_declare visibility "let" binder opt_annot { ($1, false, $2, $3, $5, $6) }
+  | attributes is_declare visibility "const" UIDENT opt_annot { ($1, true, $2, $3, Binder::{ name : $5, loc : mk_loc($loc($5)) }, $6) }
   ;
 
 structure -> List[Impl]
@@ -599,7 +599,7 @@ structure_item -> Impl
     )
   }
   | val_header "=" expr {
-    let (attrs, is_constant, vis, binder, ty) = $1
+    let (attrs, is_declare, is_constant, vis, binder, ty) = $1
     TopLetDef(
       binder~,
       ty~,
@@ -608,7 +608,8 @@ structure_item -> Impl
       is_constant~,
       loc = mk_loc($sloc),
       attrs~,
-      doc = DocString::empty()
+      doc = DocString::empty(),
+      is_declare~
     )
   }
   | extern_fun_header "=" STRING STRING {
@@ -685,9 +686,9 @@ structure_item -> Impl
       loc = mk_loc($sloc)
     )
   }
-  | attributes visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-    let name = Binder::{ name: $4, loc: mk_loc($loc($4)) }
-    let supers = match $5 {
+  | attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
+    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+    let supers = match $6 {
       None => @list.empty()
       Some(supers) => supers
     }
@@ -695,11 +696,12 @@ structure_item -> Impl
       TraitDecl::{
         name,
         supers,
-        methods: $7,
-        vis: $2,
+        methods: $8,
+        vis: $3,
         loc: mk_loc($sloc),
         attrs: $1,
-        doc : DocString::empty()
+        doc : DocString::empty(),
+        is_declare : $2
       }
     )
   }
