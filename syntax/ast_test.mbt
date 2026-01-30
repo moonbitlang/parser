@@ -3455,6 +3455,7 @@ test "type_decl to_json" {
       },
       "doc": "Test documentation",
       "type_vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
+      "is_declare": false,
       "deriving": {
         "kind": "TypeDecl::DerivingList",
         "loc": null,
@@ -4082,6 +4083,7 @@ test "impl variants to_json" {
             "loc": null,
             "children": {},
           },
+          "is_declare": false,
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,

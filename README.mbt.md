@@ -65,6 +65,7 @@ test {
         },
         "vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
         "is_constant": false,
+        "is_declare": false,
         "attrs": {
           "kind": "Impl::TopLetDef::AttrList",
           "loc": null,
@@ -364,6 +365,7 @@ test {
               "loc": null,
               "children": {},
             },
+            "is_declare": false,
             "deriving": {
               "kind": "TypeDecl::DerivingList",
               "loc": null,
@@ -500,6 +502,7 @@ test {
               "loc": null,
               "children": {},
             },
+            "is_declare": false,
             "deriving": {
               "kind": "TypeDecl::DerivingList",
               "loc": null,
