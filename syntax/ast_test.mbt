@@ -3873,6 +3873,7 @@ test "trait_decl to_json" {
     loc: dummy_loc,
     attrs: @list.from_array([dummy_attribute]),
     doc: dummy_docstring,
+    is_declare: false,
   }
   json_inspect(trait_decl.json_repr(), content={
     "kind": "TraitDecl",
@@ -3946,6 +3947,7 @@ test "trait_decl to_json" {
         "loc": null,
         "children": { "attr": null },
       },
+      "is_declare": false,
       "attrs": {
         "kind": "TraitDecl::AttrList",
         "loc": null,
@@ -4179,6 +4181,7 @@ test "impl variants to_json" {
       loc=dummy_loc,
       attrs=@list.from_array([]),
       doc=dummy_docstring,
+      is_declare=false,
     ).json_repr(),
     content={
       "kind": "Impl::TopLetDef",
@@ -4218,6 +4221,7 @@ test "impl variants to_json" {
         },
         "vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
         "is_constant": true,
+        "is_declare": false,
         "attrs": {
           "kind": "Impl::TopLetDef::AttrList",
           "loc": null,

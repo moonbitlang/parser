@@ -876,6 +876,7 @@ pub fn TypeDecl::json_repr(self : TypeDecl) -> Json {
     ),
     "doc": self.doc,
     "type_vis": self.type_vis.json_repr(self.loc),
+    "is_declare": self.is_declare,
     "deriving": list_json_repr(
       "TypeDecl::DerivingList",
       self.loc,
@@ -1024,6 +1025,7 @@ pub fn TraitDecl::json_repr(self : TraitDecl) -> Json {
       TraitMethodDecl::json_repr,
     ),
     "vis": self.vis.json_repr(self.loc),
+    "is_declare": self.is_declare,
     "attrs": list_json_repr(
       "TraitDecl::AttrList",
       self.loc,
@@ -1654,13 +1656,24 @@ pub fn Impl::json_repr(self : Impl) -> Json {
         "is_list": is_list,
         "doc": doc,
       })
-    TopLetDef(binder~, ty~, expr~, vis~, is_constant~, loc~, attrs~, doc~) =>
+    TopLetDef(
+      binder~,
+      ty~,
+      expr~,
+      vis~,
+      is_constant~,
+      loc~,
+      attrs~,
+      doc~,
+      is_declare~
+    ) =>
       tagged_node("Impl::TopLetDef", loc, {
         "binder": binder.json_repr(),
         "ty": option_json_repr(ty, Type::json_repr),
         "expr": expr.json_repr(),
         "vis": vis.json_repr(loc),
         "is_constant": is_constant,
+        "is_declare": is_declare,
         "attrs": list_json_repr(
           "Impl::TopLetDef::AttrList",
           loc,
@@ -1811,8 +1824,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       doc~,
       loc~,
       is_declare~
-    ) => {
-      ignore(is_declare)
+    ) =>
       tagged_node("Impl::TopImplRelation", loc, {
         "self_ty": self_ty.json_repr(),
         "trait": trait_.json_repr(),
@@ -1823,6 +1835,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
           TypeVarBinder::json_repr,
         ),
         "vis": vis.json_repr(loc),
+        "is_declare": is_declare,
         "attrs": list_json_repr(
           "Impl::TopImplRelation::AttrList",
           loc,
@@ -1831,7 +1844,6 @@ pub fn Impl::json_repr(self : Impl) -> Json {
         ),
         "doc": doc,
       })
-    }
     TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~) =>
       tagged_node("Impl::TopUsing", loc, {
         "pkg": pkg.json_repr(),

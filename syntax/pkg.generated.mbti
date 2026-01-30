@@ -416,7 +416,7 @@ pub(all) enum Impl {
   TopTypeDef(TypeDecl)
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location)
   TopFuncAlias(pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, mut doc~ : DocString, loc~ : @basic.Location)
-  TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
+  TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, is_declare~ : Bool)
   TopTrait(TraitDecl)
   TopBatchTypeAlias(pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, mut doc~ : DocString)
   TopBatchTraitAlias(pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, mut doc~ : DocString)
@@ -580,6 +580,7 @@ pub(all) struct TraitDecl {
   loc : @basic.Location
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
+  is_declare : Bool
 }
 pub fn TraitDecl::json_repr(Self) -> Json
 
@@ -846,7 +847,7 @@ pub(open) trait IterVisitor {
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Unit = _
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Unit = _
   visit_Impl_TopFuncAlias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Unit = _
-  visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
+  visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, is_declare~ : Bool) -> Unit = _
   visit_Impl_TopTrait(Self, TraitDecl) -> Unit = _
   visit_Impl_TopBatchTypeAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Unit = _
   visit_Impl_TopBatchTraitAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Unit = _
@@ -1060,7 +1061,7 @@ pub(open) trait MapVisitor {
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Impl = _
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Impl = _
   visit_Impl_TopFuncAlias(Self, pkg~ : Label?, type_name~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString, loc~ : @basic.Location) -> Impl = _
-  visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
+  visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, is_declare~ : Bool) -> Impl = _
   visit_Impl_TopTrait(Self, TraitDecl) -> Impl = _
   visit_Impl_TopBatchTypeAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Impl = _
   visit_Impl_TopBatchTraitAlias(Self, pkg~ : Label?, targets~ : @list.List[AliasTarget], vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], is_list~ : Bool, doc~ : DocString) -> Impl = _

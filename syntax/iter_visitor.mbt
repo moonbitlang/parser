@@ -397,6 +397,7 @@ pub(open) trait IterVisitor {
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
+    is_declare~ : Bool,
   ) -> Unit = _
   visit_Impl_TopTrait(Self, TraitDecl) -> Unit = _
   visit_Impl_TopBatchTypeAlias(
@@ -829,6 +830,7 @@ impl IterVisitor with visit_Impl_TopLetDef(
   loc~,
   attrs~,
   doc~,
+  is_declare~,
 ) {
   IterVisitorBase::visit_Impl_TopLetDef(
     env,
@@ -840,6 +842,7 @@ impl IterVisitor with visit_Impl_TopLetDef(
     loc~,
     attrs~,
     doc~,
+    is_declare~,
   )
 }
 
@@ -2280,7 +2283,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl(
         doc~,
       )
     TopTrait(trait_decl) => env.0.visit_Impl_TopTrait(trait_decl)
-    TopLetDef(binder~, ty~, expr~, vis~, is_constant~, loc~, attrs~, doc~) =>
+    TopLetDef(
+      binder~,
+      ty~,
+      expr~,
+      vis~,
+      is_constant~,
+      loc~,
+      attrs~,
+      doc~,
+      is_declare~
+    ) =>
       env.0.visit_Impl_TopLetDef(
         binder~,
         ty~,
@@ -2290,6 +2303,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl(
         loc~,
         attrs~,
         doc~,
+        is_declare~,
       )
     TopFuncAlias(pkg~, type_name~, targets~, vis~, attrs~, is_list~, doc~, loc~) =>
       env.0.visit_Impl_TopFuncAlias(
@@ -3764,11 +3778,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Impl_Top
   loc~,
   attrs~,
   doc~,
+  is_declare~,
 ) {
   ignore(is_constant)
   ignore(loc)
   ignore(attrs)
   ignore(doc)
+  ignore(is_declare)
   env.0.visit_Binder(binder)
   ty.each(env.0.visit_Type(_))
   env.0.visit_Expr(expr)

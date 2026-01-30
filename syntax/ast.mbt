@@ -791,6 +791,7 @@ pub(all) struct TraitDecl {
   loc : Location
   attrs : @list.List[Attribute]
   mut doc : DocString
+  is_declare : Bool
 }
 
 ///|
@@ -839,7 +840,8 @@ pub(all) enum Impl {
     is_constant~ : Bool,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
-    mut doc~ : DocString
+    mut doc~ : DocString,
+    is_declare~ : Bool
   )
   TopTrait(TraitDecl)
   TopBatchTypeAlias(
