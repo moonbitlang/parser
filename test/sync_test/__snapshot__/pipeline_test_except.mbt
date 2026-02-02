@@ -21,7 +21,7 @@ fn f1(x: Int) -> Unit {
     OError(Some(y)) => {
       println("err \{y}")
     }
-  } else {
+  } noraise {
     None => println("ok none")
     Some(y) => {
       println("ok \{y}")
@@ -40,7 +40,7 @@ fn[X, V, E : Error] as_result(f: (X) -> V raise E) -> (X) -> Result[V, E] {
   x => {
      try f(x) catch {
        e => Err(e)
-     } else {
+     } noraise {
        v => Ok(v)
      }
     }
