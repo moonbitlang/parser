@@ -16,9 +16,9 @@ test "pipeline_test_capture_js_builtin_string" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_except" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_except" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_array_byte_set_null" (t : @test.Test) {
