@@ -101,9 +101,9 @@ test "pipeline_test_only_tag_enum_as" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_constant_2" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_constant_2" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_string_unsafe_get" (t : @test.Test) {
