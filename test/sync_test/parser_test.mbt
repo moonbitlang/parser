@@ -241,7 +241,8 @@ test "pipeline_test_guard1" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_typealias_lident_target_as" (t : @test.Test) {
+// WONTFIX(deprecated syntax)
+// test "parse_test_typealias_lident_target_as" (t : @test.Test) {
 // t.run()
 // }
 
