@@ -590,11 +590,6 @@ test "pipeline_test_signed_bitstring" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_bad_recovery" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_intrinsic_call_back" (t : @test.Test) {
   t.run()
 }
