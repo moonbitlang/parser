@@ -252,7 +252,8 @@ test "pipeline_test_functional_loop3" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_struct_constructor" (t : @test.Test) {
+// NEED_UPDATE:
+// test "parse_test_struct_constructor" (t : @test.Test) {
 // t.run()
 // }
 
