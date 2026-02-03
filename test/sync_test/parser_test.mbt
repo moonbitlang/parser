@@ -524,8 +524,9 @@ test "pipeline_test_bitstring_rev" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_typing_coverage_lexmatch" (t : @test.Test) {
-// t.run()
+// NEED_UPDATE:
+// test "pipeline_test_typing_coverage_lexmatch" (t : @test.Test) {
+//   t.run()
 // }
 
 ///|
