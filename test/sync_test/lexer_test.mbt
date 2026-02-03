@@ -4082,11 +4082,6 @@ test "lexing parse_test_map_literal_invalid_key" (t : @test.Test) {
 }
 
 ///|
-test "lexing parse_test_regex_literal_match_pattern" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing parse_test_lexmatch" (t : @test.Test) {
   lexer_test(t)
 }
