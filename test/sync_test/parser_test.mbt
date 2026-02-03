@@ -328,8 +328,9 @@ test "pipeline_test_err_panic" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_traitalias_list_no_pkg" (t : @test.Test) {
-// t.run()
+// WONTFIX(deprecated syntax)
+// test "parse_test_traitalias_list_no_pkg" (t : @test.Test) {
+//  t.run()
 // }
 
 ///|
