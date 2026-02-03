@@ -746,9 +746,9 @@ test "pipeline_test_deep_object" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_local_method" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_local_method" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_vector2" (t : @test.Test) {
