@@ -10162,7 +10162,7 @@ fn yy_action_208(
 
 // file:///./parser.mbty
 // 601|    val_header "=" expr {
-// 602|    let (attrs, is_declare, is_constant, vis, binder, ty) = $1
+// 602|    let (attrs, is_constant, is_declare, vis, binder, ty) = $1
 // 603|    TopLetDef(
 // 604|      binder~,
 // 605|      ty~,
@@ -10193,7 +10193,7 @@ fn yy_action_209(
   YYObj_Impl(
     {
       ()
-      let (attrs, is_declare, is_constant, vis, binder, ty) = _dollar1
+      let (attrs, is_constant, is_declare, vis, binder, ty) = _dollar1
       TopLetDef(
         binder~,
         ty~,
