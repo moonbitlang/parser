@@ -126,11 +126,6 @@ test "pipeline_test_bytesview_in_loop" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_record_field_equal_after_pun" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "parse_test_no_trailing_newline_ffi2" (t : @test.Test) {
   t.run()
 }
