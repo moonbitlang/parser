@@ -389,9 +389,9 @@ test "pipeline_test_pattern_test" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_run_with_declaration3" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_run_with_declaration3" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_builtin_test" (t : @test.Test) {

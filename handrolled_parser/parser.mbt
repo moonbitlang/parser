@@ -873,10 +873,13 @@ fn State::parse_top_func(
   attrs~ : List[Attribute],
   vis~ : @syntax.Visibility,
   spos~ : Position,
+  is_declare~ : Bool,
 ) -> @syntax.Impl {
   let fun_decl = self.parse_fun_decl(attrs~)
   let fun_decl = { ..fun_decl, vis, }
-  let decl_body : @syntax.DeclBody = if self.peek_token() is EQUAL {
+  let decl_body : @syntax.DeclBody = if is_declare {
+    DeclNone
+  } else if self.peek_token() is EQUAL {
     self.skip()
     if self.peek_token() is MULTILINE_STRING(_) {
       let xs = []
@@ -1209,9 +1212,9 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
     ASYNC =>
       match self.peek_token(nth=1) {
         TEST => self.parse_test_block(attrs~, spos~)
-        _ => self.parse_top_func(attrs~, vis~, spos~)
+        _ => self.parse_top_func(attrs~, vis~, spos~, is_declare~)
       }
-    FN => self.parse_top_func(attrs~, vis~, spos~)
+    FN => self.parse_top_func(attrs~, vis~, spos~, is_declare~)
     FNALIAS => {
       self.skip()
       fn parse_type_name_opt(self : State, need_dot) -> @syntax.Label? {
@@ -3665,7 +3668,7 @@ fn State::try_parse_arrow_fn_expr(
           let loc = self.loc_start_with(spos)
           Err(Some(@syntax.Expr::Unit(loc~, faked=false)))
         }
-        (_, [Binder(expr, ty~, colon_loc=_)]) => {
+        (_, [Binder(expr, ty~, colon_loc=_)]) if !has_trailing => {
           let loc = self.loc_start_with(spos)
           Err(Some(@syntax.Expr::Constraint(expr~, ty~, loc~)))
         }
@@ -3740,7 +3743,7 @@ fn State::parse_pipe_expr(self : Self, parsed~ : @syntax.Expr?) -> @syntax.Expr 
         self.report_failed_to_parse(self.peek_token(), "`{ ... }`", loc)
         self.parse_infix_expr(parsed=None)
       }
-      let loc = self.peek_location()
+      let loc = self.loc_start_with(spos)
       let binder = @syntax.Binder::{ name: binder, loc: binder_loc }
       let func = @syntax.make_arrow_fn(
         params_loc=binder_loc,
