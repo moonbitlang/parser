@@ -599,7 +599,7 @@ structure_item -> Impl
     )
   }
   | val_header "=" expr {
-    let (attrs, is_declare, is_constant, vis, binder, ty) = $1
+    let (attrs, is_constant, is_declare, vis, binder, ty) = $1
     TopLetDef(
       binder~,
       ty~,
