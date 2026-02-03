@@ -640,11 +640,6 @@ test "pipeline_test_fnmatch" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_enum_constructor_visibility_error" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_async_question" (t : @test.Test) {
   t.run()
 }
