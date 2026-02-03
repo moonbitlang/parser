@@ -1525,6 +1525,13 @@ pipe_expr -> Expr
   : pipe_expr "|>" infix_expr { 
     Pipe(lhs = $1, rhs = $3, loc = mk_loc($sloc))
   }
+  | pipe_expr "|>" binder "=>" block_expr {
+    let params_loc = mk_loc($loc($3))
+    let fn_loc = mk_loc($loc($3)).merge(mk_loc($loc($5)))
+    let func = make_arrow_fn(@list.singleton((Named($3), None)), $5, params_loc~, loc = fn_loc)
+    let rhs = Expr::Function(func~, loc = fn_loc)
+    Pipe(lhs = $1, rhs~, loc = mk_loc($sloc))
+  }
   | infix_expr { $1 }
   ;
 

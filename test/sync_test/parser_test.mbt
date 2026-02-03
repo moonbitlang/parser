@@ -76,9 +76,9 @@ test "pipeline_test_func_as_object" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_pipe_arrow_parse" (t : @test.Test) {
-// t.run()
-// }
+test "parse_test_pipe_arrow_parse" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_nested_inline" (t : @test.Test) {

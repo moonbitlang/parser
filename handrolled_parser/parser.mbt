@@ -3554,7 +3554,11 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
       )
       Function(loc~, func~)
     }
-    _ => self.parse_simple_try_expr(parsed=None)
+    _ =>
+      match self.try_parse_arrow_fn_expr() {
+        Err(parsed) => self.parse_simple_try_expr(parsed~)
+        Ok(expr) => expr
+      }
   }
 }
 
@@ -3604,6 +3608,117 @@ fn State::parse_simple_try_expr(
 }
 
 ///|
+fn State::try_parse_arrow_fn_expr(
+  self : State,
+) -> Result[@syntax.Expr, @syntax.Expr?] {
+  match self.peek_token() {
+    LPAREN => {
+      let spos = self.peek_spos()
+      self.skip()
+      let (expr_or_binders, has_trailing) = self.series_with_follow(
+        delim=TK_COMMA,
+        follow_set=[TK_RPAREN],
+        State::parse_expr_or_binder,
+      )
+      self.expect_token(TK_RPAREN)
+      let params_loc = self.loc_start_with(spos)
+      match (self.peek_token(), expr_or_binders) {
+        (FAT_ARROW, _) => {
+          self.skip()
+          let parameters = expr_or_binders.map(fn(expr_or_binder) {
+            let as_binder = fn(expr : @syntax.Expr) -> @syntax.ArrowFnParam {
+              match expr {
+                Ident(id={ name: Ident(name~), .. }, loc~) =>
+                  Named({ name, loc })
+                Hole(kind=Incomplete, loc~) => Unnamed(loc)
+                Hole(kind=Synthesized, loc~) => Unnamed(loc)
+                expr => {
+                  let loc = expr.loc()
+                  self.report_error({
+                    loc,
+                    msg: "Parse error, unexpected expression, you may expect parameter",
+                  })
+                  Unnamed(loc)
+                }
+              }
+            }
+            match expr_or_binder {
+              Binder(expr, ty~, colon_loc=_) => (as_binder(expr), Some(ty))
+              Expr(expr) => (as_binder(expr), None)
+            }
+          })
+          let body = self.parse_expr_stmt_no_break_continue_return()
+          let loc = self.loc_start_with(spos)
+          Ok(
+            @syntax.Expr::Function(
+              func=@syntax.make_arrow_fn(
+                params_loc~,
+                loc~,
+                @list.from_array(parameters),
+                body,
+              ),
+              loc~,
+            ),
+          )
+        }
+        (_, []) => {
+          let loc = self.loc_start_with(spos)
+          Err(Some(@syntax.Expr::Unit(loc~, faked=false)))
+        }
+        (_, [Binder(expr, ty~, colon_loc=_)]) => {
+          let loc = self.loc_start_with(spos)
+          Err(Some(@syntax.Expr::Constraint(expr~, ty~, loc~)))
+        }
+        (_, [Expr(expr)]) => {
+          let loc = self.loc_start_with(spos)
+          Err(Some(@syntax.Group(expr~, group=Paren, loc~)))
+        }
+        (_, _) => {
+          let exprs = expr_or_binders.map(fn(expr_or_binder) {
+            match expr_or_binder {
+              Binder(expr, colon_loc~, ty=_) => {
+                self.report_unexpected(COLON, [TK_COMMA, TK_RPAREN], colon_loc)
+                @syntax.Expr::Hole(kind=Synthesized, loc=expr.loc())
+              }
+              Expr(expr) => expr
+            }
+          })
+          let loc = self.loc_start_with(spos)
+          Err(Some(@syntax.Expr::Tuple(exprs=@list.from_array(exprs), loc~)))
+        }
+      }
+    }
+    LIDENT(_) | UNDERSCORE if self.peek_token(nth=1) is FAT_ARROW => {
+      let spos = self.peek_spos()
+      let p : @syntax.ArrowFnParam = match self.peek_token() {
+        LIDENT(_) => Named(self.parse_binder(context=""))
+        UNDERSCORE => {
+          self.expect_token(TK_UNDERSCORE)
+          Unnamed(self.peek_location())
+        }
+        _ => panic()
+      }
+      let params_loc = self.loc_start_with(spos)
+      self.expect_token(TK_FAT_ARROW)
+      let body = self.parse_expr_stmt_no_break_continue_return()
+      let loc = self.loc_start_with(spos)
+      Ok(
+        @syntax.Expr::Function(
+          loc~,
+          func=@syntax.make_arrow_fn(
+            params_loc~,
+            loc~,
+            @list.singleton((p, None)),
+            body,
+          ),
+        ),
+      )
+    }
+    _ => Err(None)
+  }
+}
+
+///|
 fn State::parse_pipe_expr(self : Self, parsed~ : @syntax.Expr?) -> @syntax.Expr {
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
@@ -3612,7 +3727,42 @@ fn State::parse_pipe_expr(self : Self, parsed~ : @syntax.Expr?) -> @syntax.Expr 
   let mut lhs = self.parse_infix_expr(parsed~)
   while self.peek_token() is PIPE {
     self.skip()
-    let rhs = self.parse_infix_expr(parsed=None)
+    let rhs = if self.peek_token() is LIDENT(binder) &&
+      self.peek_token(nth=1) is FAT_ARROW {
+      let binder_loc = self.peek_location()
+      let spos = self.peek_spos()
+      self.skip()
+      self.skip()
+      let body = if self.peek_token() is LBRACE {
+        self.parse_block_expr()
+      } else {
+        let loc = self.peek_location()
+        self.report_failed_to_parse(self.peek_token(), "`{ ... }`", loc)
+        self.parse_infix_expr(parsed=None)
+      }
+      let loc = self.peek_location()
+      let binder = @syntax.Binder::{ name: binder, loc: binder_loc }
+      let func = @syntax.make_arrow_fn(
+        params_loc=binder_loc,
+        loc~,
+        @list.singleton((Named(binder), None)),
+        body,
+      )
+      @syntax.Expr::Function(func~, loc~)
+    } else {
+      match self.try_parse_arrow_fn_expr() {
+        Ok(fn_expr) => {
+          // error recover: `(x) => e`, `e1 |> (x,y) => e2` or `e1 |> (x : Int) => e2`
+          let loc = fn_expr.loc()
+          ignore(loc)
+          // self.report_unexpected_structure(found="form of anonymous function", expected="`x => { ... }`", loc~)
+          fn_expr
+        }
+        Err(parsed) =>
+          // allow `lhs |> infix_expr`, the typer will check infix_expr in a later stage.
+          self.parse_infix_expr(parsed~)
+      }
+    }
     let loc = self.loc_start_with(spos)
     lhs = Pipe(lhs~, rhs~, loc~)
   }
