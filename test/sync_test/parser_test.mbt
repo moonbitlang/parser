@@ -111,11 +111,6 @@ test "pipeline_test_string_unsafe_get" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_regex_literal_match_pattern" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_derive" (t : @test.Test) {
   t.run()
 }
