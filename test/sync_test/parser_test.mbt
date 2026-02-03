@@ -726,11 +726,6 @@ test "pipeline_test_ext_method_override" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_invalid_expr_in_condition_letrec" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_relaxed_for" (t : @test.Test) {
   t.run()
 }
