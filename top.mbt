@@ -35,7 +35,13 @@ fn attach_docstrings(
   ) -> @syntax.DocString {
     {
       content: comments.map(p => match p.1.content {
-        [.. "///|", .. remain] | [.. "///", .. remain] => remain.to_string()
+        [.. "///|", .. remain] =>
+          if remain.is_blank() {
+            ""
+          } else {
+            remain.to_string()
+          }
+        [.. "///", .. remain] => remain.to_string()
         _ => panic()
       }),
       loc: {
