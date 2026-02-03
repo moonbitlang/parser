@@ -885,6 +885,7 @@ fn State::parse_top_func(
       let xs = []
       while self.peek_token() is MULTILINE_STRING(x) {
         xs.push(x)
+        self.skip()
       }
       DeclStubs(
         Embedded(language=None, code=CodeMultilineString(@list.from_array(xs))),

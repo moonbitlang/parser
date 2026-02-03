@@ -675,9 +675,9 @@ test "pipeline_test_nested_type_instance" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_ffi_multiline_stub" (t : @test.Test) {
-// t.run()
-// }
+test "parse_test_ffi_multiline_stub" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 // FIXTHIS test "parse_test_type_bang_no_payload" (t : @test.Test) {
