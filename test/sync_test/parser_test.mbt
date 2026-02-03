@@ -344,9 +344,9 @@ test "pipeline_test_sum" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_match_string_const" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_match_string_const" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "parse_test_letrec_async_fn" (t : @test.Test) {
@@ -357,11 +357,6 @@ test "parse_test_letrec_async_fn" (t : @test.Test) {
 test "parse_test_explicit_method" (t : @test.Test) {
   t.run()
 }
-
-///|
-// FIXTHIS test "parse_test_recover_wrong_deliminator" (t : @test.Test) {
-// t.run()
-// }
 
 ///|
 test "pipeline_test_last_pat_constant" (t : @test.Test) {
