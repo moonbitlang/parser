@@ -136,11 +136,6 @@ test "parse_test_local_docs" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_match_case_start_augmented_assignment" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_closure2" (t : @test.Test) {
   t.run()
 }
