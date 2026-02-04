@@ -1223,9 +1223,9 @@ test "pipeline_test_error_poly_tail_rec" (t : @test.Test) {
 // }
 
 ///|
-// FIXTHIS test "pipeline_test_loop_label" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_loop_label" (t : @test.Test) {
+ t.run()
+}
 
 ///|
 test "parse_test_no_trailing_newline_extern" (t : @test.Test) {
