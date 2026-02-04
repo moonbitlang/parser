@@ -1368,11 +1368,6 @@ test "pipeline_test_letrec_normal_double" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_try_unexpected_body_tokens" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_option6" (t : @test.Test) {
   t.run()
 }
