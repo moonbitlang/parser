@@ -766,13 +766,6 @@ test "pipeline_test_closure" (t : @test.Test) {
 }
 
 ///|
-
-///|
-// FIXTHIS test "parse_test_path_pattern_test" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_match_string2" (t : @test.Test) {
   t.run()
 }
