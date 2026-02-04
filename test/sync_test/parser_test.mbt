@@ -1358,9 +1358,9 @@ test "pipeline_test_unicode_test" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_attribute" (t : @test.Test) {
-// t.run()
-// }
+test "parse_test_attribute" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_003" (t : @test.Test) {

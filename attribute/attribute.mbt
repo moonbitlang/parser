@@ -58,8 +58,7 @@ pub fn Attribute::new(
   let raw_payload = raw_payload.trim(char_set=" ").to_string()
   let (raw, attr_id) = match dot_id {
     None => ("#\{id}\{raw_payload}", { qual: None, name: id })
-    Some(dot_id) =>
-      ("#\{id}.\{dot_id}\{raw_payload}", { qual: Some(id), name: dot_id })
+    Some(dot_id) => ("#\{id}.\{dot_id}", { qual: Some(id), name: dot_id })
   }
   let { errors, docstrings: _, tokens } = @lexer.tokens_from_string(
     raw_payload,
