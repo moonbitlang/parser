@@ -786,11 +786,6 @@ test "pipeline_test_funcref_in_global" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_invalid_expr_in_condition_loop" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_break_in_switch" (t : @test.Test) {
   t.run()
 }
