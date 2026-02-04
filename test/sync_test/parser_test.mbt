@@ -1006,9 +1006,9 @@ test "pipeline_test_as_view_wrap_ok" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_range_pattern" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_range_pattern" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_derive_to_json" (t : @test.Test) {
@@ -1096,8 +1096,9 @@ test "pipeline_test_int64_range_pattern" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_tokenize_suffix" (t : @test.Test) {
-// t.run()
+// NEED_UPDATE
+// test "pipeline_test_tokenize_suffix" (t : @test.Test) {
+//   t.run()
 // }
 
 ///|
@@ -1216,8 +1217,9 @@ test "pipeline_test_error_poly_tail_rec" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_lexmatch_bug1" (t : @test.Test) {
-// t.run()
+// NEED_UPDATE
+// test "pipeline_test_lexmatch_bug1" (t : @test.Test) {
+//   t.run()
 // }
 
 ///|
