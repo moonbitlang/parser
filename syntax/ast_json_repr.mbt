@@ -1609,7 +1609,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
         "expr": expr.json_repr(),
         "name": name.json_repr(),
         "params": option_json_repr(params, params => list_json_repr(
-          "Impl::TopTest::ParamsList",
+          "Impl::TopTest::ParamList",
           loc,
           params,
           Parameter::json_repr,
