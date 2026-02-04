@@ -3513,7 +3513,7 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
       match self.peek_token() {
         LOOP => self.parse_loop_expr(label=Some(label))
         FOR => self.parse_for_expr(label=Some(label))
-        WHILE => self.parse_while_loop(label=None)
+        WHILE => self.parse_while_loop(label=Some(label))
         other => {
           let loc = self.peek_location()
           self.report_unexpected(other, [TK_LOOP, TK_FOR, TK_WHILE], loc)
