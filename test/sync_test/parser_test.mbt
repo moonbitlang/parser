@@ -241,12 +241,6 @@ test "pipeline_test_guard1" (t : @test.Test) {
 }
 
 ///|
-// WONTFIX(deprecated syntax)
-// test "parse_test_typealias_lident_target_as" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_functional_loop3" (t : @test.Test) {
   t.run()
 }
@@ -326,12 +320,6 @@ test "pipeline_test_call_func_ref" (t : @test.Test) {
 test "pipeline_test_err_panic" (t : @test.Test) {
   t.run()
 }
-
-///|
-// WONTFIX(deprecated syntax)
-// test "parse_test_traitalias_list_no_pkg" (t : @test.Test) {
-//  t.run()
-// }
 
 ///|
 test "pipeline_test_suberror_derive" (t : @test.Test) {
@@ -678,12 +666,6 @@ test "pipeline_test_nested_type_instance" (t : @test.Test) {
 test "parse_test_ffi_multiline_stub" (t : @test.Test) {
   t.run()
 }
-
-///|
-// WONTFIX(deprecated syntax)
-// test "parse_test_type_bang_no_payload" (t : @test.Test) {
-// t.run()
-// }
 
 ///|
 test "pipeline_test_if_if" (t : @test.Test) {
@@ -1398,9 +1380,9 @@ test "pipeline_test_method1" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_range_pattern" (t : @test.Test) {
-// t.run()
-// }
+test "parse_test_range_pattern" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_err_try_exclamation2" (t : @test.Test) {
@@ -1413,19 +1395,14 @@ test "parse_test_allow_trailing_comma" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_invalid_expr_in_condition_try_operators" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_int16_option_repr" (t : @test.Test) {
   t.run()
 }
 
 ///|
-// FIXTHIS test "pipeline_test_run_with_declaration2" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_run_with_declaration2" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_bytesview_prim" (t : @test.Test) {
@@ -1468,9 +1445,9 @@ test "pipeline_test_defer" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_run_with_declaration" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_run_with_declaration" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_id" (t : @test.Test) {
@@ -1508,9 +1485,9 @@ test "pipeline_test_static_toplevel_let_big_enum" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_bitstring_mixed2" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_bitstring_mixed2" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_tuple_struct_of_func" (t : @test.Test) {
@@ -1538,8 +1515,9 @@ test "pipeline_test_constr_pattern_no_payload" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_lisp_tokenizer" (t : @test.Test) {
-// t.run()
+// NEED_UPDATE
+// test "pipeline_test_lisp_tokenizer" (t : @test.Test) {
+//  t.run()
 // }
 
 ///|
@@ -1561,11 +1539,6 @@ test "pipeline_test_short_circuit_tail" (t : @test.Test) {
 test "pipeline_test_option_uint" (t : @test.Test) {
   t.run()
 }
-
-///|
-// FIXTHIS test "parse_test_missing_pattern_in_case_clause_error" (t : @test.Test) {
-// t.run()
-// }
 
 ///|
 test "pipeline_test_init_return" (t : @test.Test) {
@@ -1643,9 +1616,9 @@ test "pipeline_test_local_empty_struct" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_match_bytesview3" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_match_bytesview3" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_io_primitives" (t : @test.Test) {
