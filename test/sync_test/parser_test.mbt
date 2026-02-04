@@ -1253,11 +1253,6 @@ test "parse_test_list_example" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_old_syntax_error_type_variants" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_contify_return2" (t : @test.Test) {
   t.run()
 }
