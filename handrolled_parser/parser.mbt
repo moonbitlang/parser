@@ -1674,9 +1674,21 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         doc=DocString::empty(),
       )
     }
-    USING => {
+    USING if !is_declare => {
       self.skip()
-      let pkg = self.parse_label(context="package name")
+      let pkg : @syntax.Label = match self.peek_token() {
+        PACKAGE_NAME(name) => {
+          let loc = self.peek_location()
+          self.skip()
+          { name, loc }
+        }
+        otherwise => {
+          let loc = self.peek_location()
+          self.report_unexpected(otherwise, [TK_PACKAGE_NAME], loc)
+          self.panic() |> ignore
+          { name: "", loc }
+        }
+      }
       fn parse_alias_target(
         state : State,
         lower : Bool,

@@ -217,6 +217,13 @@
     "loc": "12:1-12:2"
   },
   {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "12:2-12:2"
+  },
+  {
     "token": "NEWLINE",
     "loc": "12:2-12:3"
   },
@@ -358,6 +365,13 @@
   {
     "token": "RBRACE",
     "loc": "19:1-19:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "19:2-19:2"
   },
   {
     "token": "NEWLINE",
@@ -522,6 +536,13 @@
   {
     "token": "RBRACE",
     "loc": "27:1-27:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "27:2-27:2"
   },
   {
     "token": "NEWLINE",

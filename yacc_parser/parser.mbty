@@ -992,6 +992,13 @@ using_binder -> (AliasTarget, UsingKind):
     }
     ({ binder, target : Some(target) }, UsingKind::Value)
   }
+  | "type" UIDENT {
+    let binder = Binder::{
+      name : $2,
+      loc : mk_loc($loc($2))
+    }
+    ({ binder, target : None }, UsingKind::Type)
+  }
   | "type" UIDENT "as" UIDENT {
     let binder = Binder::{
       name : $4,
