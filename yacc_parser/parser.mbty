@@ -1064,6 +1064,7 @@ wildcard -> Location
 trait_method_param -> Parameter
   : type_ { DiscardPositional(ty = Some($1), loc = mk_loc($sloc)) }
   | binder ":" type_ { Positional(binder = $1, ty = Some($3)) }
+  | binder "?" ":" type_ { QuestionOptional(binder = $1, ty = Some($4)) }
   | POST_LABEL ":" type_ { 
     let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
     Labelled(binder~, ty = Some($3))

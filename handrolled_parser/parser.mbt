@@ -521,13 +521,21 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
           let typ = state.parse_type()
           Labelled(binder~, ty=Some(typ))
         }
-        LIDENT(_) if state.peek_token(nth=1) is COLON => {
+        LIDENT(_) => {
           let binder_loc = state.peek_location()
           let binder_name = state.expect_lident(context="parameter name")
           let binder : @syntax.Binder = { name: binder_name, loc: binder_loc }
+          let has_question = state.peek_token() is QUESTION
+          if has_question {
+            state.skip()
+          }
           state.expect_token(TK_COLON)
           let typ = state.parse_type()
-          Positional(binder~, ty=Some(typ))
+          if has_question {
+            QuestionOptional(binder~, ty=Some(typ))
+          } else {
+            Positional(binder~, ty=Some(typ))
+          }
         }
         tok if first_type_.contains(tok.kind()) => {
           let typ = state.parse_type()

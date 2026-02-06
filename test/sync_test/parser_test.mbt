@@ -1640,11 +1640,6 @@ test "pipeline_test_trait_obj_bound" (t : @test.Test) {
   t.run()
 }
 
-// WONTFIX(deprecated_syntax)
-// test "pipeline_test_error_poly_iter" (t : @test.Test) {
-//  t.run()
-// }
-
 ///|
 test "pipeline_test_err_array_set" (t : @test.Test) {
   t.run()
@@ -2045,11 +2040,6 @@ test "pipeline_test_005" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_traitalias_equal_dotted_target" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_bitstring_array_byte" (t : @test.Test) {
   t.run()
 }
@@ -2070,11 +2060,6 @@ test "pipeline_test_promoted_default_impl" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_guard_if" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_disorder" (t : @test.Test) {
   t.run()
 }
@@ -2088,11 +2073,6 @@ test "pipeline_test_tuple_struct_match" (t : @test.Test) {
 test "parse_test_trait" (t : @test.Test) {
   t.run()
 }
-
-///|
-// FIXTHIS test "parse_test_impl_missing_for_or_with" (t : @test.Test) {
-// t.run()
-// }
 
 ///|
 test "pipeline_test_loop_in_tail_rec" (t : @test.Test) {
@@ -2225,11 +2205,6 @@ test "pipeline_test_empty_json" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_pub_test4" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_newtype5" (t : @test.Test) {
   t.run()
 }
@@ -2310,8 +2285,9 @@ test "pipeline_test_loop_arg_side_effect" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_lexmatch_pattern_sequence_semicolon_and_regex" (t : @test.Test) {
-// t.run()
+// NEED_UPDATE
+// test "parse_test_lexmatch_pattern_sequence_semicolon_and_regex" (t : @test.Test) {
+//   t.run()
 // }
 
 ///|
@@ -2355,9 +2331,9 @@ test "pipeline_test_return_in_join" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_pipe_arrow_fn" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_pipe_arrow_fn" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_constant_error_constructor" (t : @test.Test) {
@@ -2365,8 +2341,8 @@ test "pipeline_test_constant_error_constructor" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_traitalias_pkg_single_target" (t : @test.Test) {
-// t.run()
+// test "parse_test_traitalias_pkg_single_target" (t : @test.Test) {
+//  t.run()
 // }
 
 ///|
@@ -2410,9 +2386,9 @@ test "parse_test_try" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "pipeline_test_optional_in_trait" (t : @test.Test) {
-// t.run()
-// }
+test "pipeline_test_optional_in_trait" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_large_static_array" (t : @test.Test) {
