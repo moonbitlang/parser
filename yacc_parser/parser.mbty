@@ -1582,6 +1582,30 @@ range_expr -> Expr
       loc = mk_loc($sloc)
     )
   }
+  | prefix_expr "..<=" prefix_expr {
+    Infix(
+      op = Var::{ name: Ident(name = "..<="), loc: mk_loc($loc($2)) }, 
+      lhs = $1, 
+      rhs = $3, 
+      loc = mk_loc($sloc)
+    )
+  }
+  | prefix_expr ">=.." prefix_expr {
+    Infix(
+      op = Var::{ name: Ident(name = ">=.."), loc: mk_loc($loc($2)) }, 
+      lhs = $1, 
+      rhs = $3, 
+      loc = mk_loc($sloc)
+    )
+  }
+  | prefix_expr ">.." prefix_expr {
+    Infix(
+      op = Var::{ name: Ident(name = ">.."), loc: mk_loc($loc($2)) }, 
+      lhs = $1, 
+      rhs = $3, 
+      loc = mk_loc($sloc)
+    )
+  }
   | prefix_expr { $1 }
   ;
 

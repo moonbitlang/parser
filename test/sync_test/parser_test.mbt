@@ -1640,9 +1640,9 @@ test "pipeline_test_trait_obj_bound" (t : @test.Test) {
   t.run()
 }
 
-///|
-// FIXTHIS test "pipeline_test_error_poly_iter" (t : @test.Test) {
-// t.run()
+// WONTFIX(deprecated_syntax)
+// test "pipeline_test_error_poly_iter" (t : @test.Test) {
+//  t.run()
 // }
 
 ///|
@@ -2025,9 +2025,9 @@ test "pipeline_test_error_handle" (t : @test.Test) {
 }
 
 ///|
-// FIXTHIS test "parse_test_iter_range" (t : @test.Test) {
-// t.run()
-// }
+test "parse_test_iter_range" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_newtype4" (t : @test.Test) {
