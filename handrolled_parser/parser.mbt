@@ -3918,6 +3918,14 @@ fn State::parse_range_expr(
       let op : @syntax.Var = { name: Ident(name="..="), loc: op_loc }
       Infix(op~, lhs~, rhs~, loc~)
     }
+    RANGE_LT_INCLUSIVE => {
+      self.skip()
+      let op_loc = self.loc_start_with(op_start)
+      let rhs = self.parse_prefix_expr(parsed=None)
+      let loc = self.loc_start_with(spos)
+      let op : @syntax.Var = { name: Ident(name="..<="), loc: op_loc }
+      @syntax.Expr::Infix(op~, lhs~, rhs~, loc~)
+    }
     RANGE_EXCLUSIVE => {
       self.skip()
       let op_loc = self.loc_start_with(op_start)
@@ -3925,6 +3933,22 @@ fn State::parse_range_expr(
       let loc = self.loc_start_with(spos)
       let op : @syntax.Var = { name: Ident(name="..<"), loc: op_loc }
       Infix(op~, lhs~, rhs~, loc~)
+    }
+    RANGE_INCLUSIVE_REV => {
+      self.skip()
+      let op_loc = self.loc_start_with(op_start)
+      let rhs = self.parse_prefix_expr(parsed=None)
+      let loc = self.loc_start_with(spos)
+      let op : @syntax.Var = { name: Ident(name=">=.."), loc: op_loc }
+      @syntax.Expr::Infix(op~, lhs~, rhs~, loc~)
+    }
+    RANGE_EXCLUSIVE_REV => {
+      self.skip()
+      let op_loc = self.loc_start_with(op_start)
+      let rhs = self.parse_prefix_expr(parsed=None)
+      let loc = self.loc_start_with(spos)
+      let op : @syntax.Var = { name: Ident(name=">.."), loc: op_loc }
+      @syntax.Expr::Infix(op~, lhs~, rhs~, loc~)
     }
     _ => lhs
   }
@@ -4486,7 +4510,7 @@ fn State::parse_simple_expr(
       let spos = self.peek_spos()
       self.expect_token(TK_ASYNC) // async
       // TODO: improve error recovery for case like `async \n trait`
-      self.with_syncs([TK_LPAREN, TK_LBRACE], _.expect_token(TK_FN)) // fn
+      self.with_syncs([TK_LPAREN, TK_LBRACE], self => self.expect_token(TK_FN)) // fn
       let has_error = self.parse_optional_bang()
       let func = self.parse_func(has_error~, is_async~)
       let loc = self.loc_start_with(spos)
@@ -4922,7 +4946,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
       } else {
         None
       }
-      self.with_syncs([TK_LPAREN, TK_LBRACE], _.expect_token(TK_FN)) // fn
+      self.with_syncs([TK_LPAREN, TK_LBRACE], self => self.expect_token(TK_FN)) // fn
       let has_error = self.parse_optional_bang()
       self.parse_func(has_error~, is_async~)
     }
