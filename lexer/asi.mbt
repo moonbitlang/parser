@@ -185,6 +185,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | ELLIPSIS
     | POST_LABEL(_)
     | ATTRIBUTE(_)
+    | USING
     | LEXMATCH => true
     // the lexer should skip these two tokens before trying to insert semi
     COMMENT(_) | NEWLINE => true
@@ -265,7 +266,6 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | RANGE_EXCLUSIVE
     | RANGE_INCLUSIVE_REV
     | RANGE_EXCLUSIVE_REV
-    | USING
     | AND
     | LEXMATCH_QUESTION
     | WHERE => false
