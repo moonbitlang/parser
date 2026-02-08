@@ -841,8 +841,9 @@ fn State::parse_test_block(
   self : Self,
   attrs~ : List[Attribute],
   spos~ : Position,
+  is_async~ : Location?,
 ) -> @syntax.Impl {
-  self.skip()
+  self.expect_token(TK_TEST)
   let name : @syntax.TestName = if self.peek_token() is STRING(_) {
     let name_loc = self.peek_location()
     let v = self.expect_string()
@@ -867,7 +868,7 @@ fn State::parse_test_block(
     name~,
     params~,
     expr~,
-    is_async=None,
+    is_async~,
     local_types~,
     loc~,
     doc=DocString::empty(),
@@ -1220,7 +1221,11 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
     }
     ASYNC =>
       match self.peek_token(nth=1) {
-        TEST => self.parse_test_block(attrs~, spos~)
+        TEST => {
+          let is_async = Some(self.peek_location())
+          self.skip()
+          self.parse_test_block(attrs~, spos~, is_async~)
+        }
         _ => self.parse_top_func(attrs~, vis~, spos~, is_declare~)
       }
     FN => self.parse_top_func(attrs~, vis~, spos~, is_declare~)
@@ -1499,7 +1504,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         }
       }
     }
-    TEST => self.parse_test_block(attrs~, spos~)
+    TEST => self.parse_test_block(attrs~, spos~, is_async=None)
     IMPL => {
       self.skip()
       self.push_sync(TK_WITH)
@@ -2337,6 +2342,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             FALSE => parse_map_elem_pat(Bool(false))
             CHAR(x) => parse_map_elem_pat(Char(x))
             INT(x) => parse_map_elem_pat(@syntax.make_int(x))
+            BYTE(x) => parse_map_elem_pat(Byte(x))
             FLOAT(x) => parse_map_elem_pat(@syntax.make_float(x))
             DOUBLE(x) => parse_map_elem_pat(@syntax.make_double(x))
             MINUS => {
@@ -2355,6 +2361,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
                 }
               }
             }
+            BYTES(x) => parse_map_elem_pat(Bytes(x))
             STRING(x) => parse_map_elem_pat(String(x))
             LIDENT(_) => {
               if kind is Unknown {
@@ -4589,9 +4596,11 @@ fn State::parse_simple_expr(
         | FALSE
         | CHAR(_)
         | INT(_)
+        | BYTE(_)
         | DOUBLE(_)
         | FLOAT(_)
         | MINUS
+        | BYTES(_)
         | STRING(_) if self.peek_token(nth=2) is COLON => self.parse_map_expr()
         _ => {
           let loc = self.loc_start_with(spos)
@@ -4773,6 +4782,7 @@ fn State::parse_map_expr(self : Self) -> @syntax.Expr {
       FALSE => parse_map_expr_elem(Bool(false))
       CHAR(x) => parse_map_expr_elem(Char(x))
       INT(x) => parse_map_expr_elem(@syntax.make_int(x))
+      BYTE(x) => parse_map_expr_elem(Byte(x))
       FLOAT(x) => parse_map_expr_elem(@syntax.make_float(x))
       DOUBLE(x) => parse_map_expr_elem(@syntax.make_double(x))
       MINUS => {
@@ -4791,6 +4801,7 @@ fn State::parse_map_expr(self : Self) -> @syntax.Expr {
           }
         }
       }
+      BYTES(x) => parse_map_expr_elem(Bytes(x))
       STRING(x) => parse_map_expr_elem(String(x))
       other => {
         let other_loc = state.peek_location()
