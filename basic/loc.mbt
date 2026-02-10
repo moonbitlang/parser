@@ -10,13 +10,13 @@ pub(all) struct Position {
 pub impl Show for Position with output(self, logger) {
   logger.write_char('"')
   if self.fname != "" {
-    logger..write_string(self.fname)..write_char(':')
+    logger..write_string(self.fname).write_char(':')
   }
   logger
   ..write_string(self.lnum.to_string())
   ..write_char(':')
   ..write_string(self.column().to_string())
-  ..write_char('"')
+  .write_char('"')
 }
 
 ///|
@@ -102,7 +102,7 @@ pub impl Show for Location with output(self, buf) {
   ..write_string("-")
   ..write_string(self.end.lnum.to_string())
   ..write_string(":")
-  ..write_string(self.end.column().to_string())
+  .write_string(self.end.column().to_string())
 }
 
 ///|

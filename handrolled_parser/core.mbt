@@ -494,7 +494,7 @@ fn[A] State::sepby(
       if first_set.contains(self.peek_kind()) {
         let result = [f(self)]
         while self.peek_kind() == delim {
-          self..pop_sync(delim)..expect_token(delim)..push_sync(delim)
+          self..pop_sync(delim)..expect_token(delim).push_sync(delim)
           result.push(f(self))
         }
         self.pop_sync(delim)
@@ -522,7 +522,7 @@ fn[A] State::sepby1(
       self.push_sync(delim)
       let result = [f(self)]
       while self.peek_kind() == delim {
-        self..pop_sync(delim)..expect_token(delim)..push_sync(delim)
+        self..pop_sync(delim)..expect_token(delim).push_sync(delim)
         result.push(f(self))
       }
       self.pop_sync(delim)
@@ -541,9 +541,9 @@ fn[A] State::surround(
   match self.mode {
     Panic(_) => f(self)
     Normal => {
-      self..expect_token(left)..push_sync(right)
+      self..expect_token(left).push_sync(right)
       let result = f(self)
-      self..pop_sync(right)..expect_token(right)
+      self..pop_sync(right).expect_token(right)
       result
     }
   }
@@ -698,7 +698,7 @@ fn[A] State::series_with_follow(
                   loc: self.peek_location(),
                   msg: "Expecting a newline or `;` here, but encountered \{delim.to_expect_string()}.",
                 })
-                ..skip()
+                .skip()
                 continue
               }
               Normal => {

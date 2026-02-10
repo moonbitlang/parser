@@ -18,7 +18,7 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
       ..write_string(hand_result.1.to_json().stringify(indent=2))
       ..write_string("\nYacc parser diagnostics: ")
       ..write_string(yacc_result.1.to_json().stringify(indent=2))
-      ..write_string("\n")
+      .write_string("\n")
     })
     fail(buf.to_string())
   }

@@ -1153,7 +1153,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       )
     }
     EXTERN if self.peek_token(nth=1) is TYPE => {
-      self..skip()..skip()
+      self..skip().skip()
       let tycon_loc = self.peek_location()
       let tycon = self.parse_luident()
       let params = self.parse_opt_type_params_no_constraints()
