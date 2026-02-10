@@ -9,7 +9,7 @@ pub impl Show for Id with output(self, logger) {
   match self.qual {
     None => logger.write_string(self.name)
     Some(x) =>
-      logger..write_string(x)..write_string(".")..write_string(self.name)
+      logger..write_string(x)..write_string(".").write_string(self.name)
   }
 }
 

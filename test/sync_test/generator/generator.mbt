@@ -77,7 +77,7 @@ fn generate(mode~ : Mode) -> Unit {
             gen_test_for_lexer(name.split(".").head().unwrap().to_string())
         },
       )
-      ..write_string("\n\n")
+      .write_string("\n\n")
     }
     let output = match mode {
       Parser => output_for_parser
