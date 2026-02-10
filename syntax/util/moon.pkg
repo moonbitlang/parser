@@ -4,10 +4,11 @@ import {
   "moonbitlang/core/list",
 }
 
-import "test" {
-}
+import {
+} for "test"
+
+warnings = "-1-6"
 
 options(
   "pre-build": [ ],
-  "warn-list": "-1-6",
 )

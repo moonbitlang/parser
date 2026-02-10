@@ -19,9 +19,9 @@ let output : String = root + "/generated_test.mbt"
 ///|
 fn main {
   try {
-    let tests = @fs.read_dir(fixtures_path).filter(name => name.has_suffix(
-      ".mbti",
-    ))
+    let tests = @fs.read_dir(fixtures_path).filter(name => {
+      name.has_suffix(".mbti")
+    })
     let buf = StringBuilder::new()
     for name in tests {
       buf

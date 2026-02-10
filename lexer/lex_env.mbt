@@ -81,7 +81,7 @@ fn LexEnv::add_token(
             }
             Some(_) => return count
           }
-        } else {
+        } nobreak {
           panic() // impossible
         }
       }

@@ -21,7 +21,7 @@ pub impl ToJson for DocString with to_json(self) {
   for doc in docs {
     buf.write_string("\n")
     buf.write_string(doc)
-  } else {
+  } nobreak {
     Json::string(buf.to_string())
   }
 }

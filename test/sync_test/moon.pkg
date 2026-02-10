@@ -1,4 +1,4 @@
-import "test" {
+import {
   "moonbitlang/parser",
   "moonbitlang/parser/syntax",
   "moonbitlang/parser/basic",
@@ -6,4 +6,4 @@ import "test" {
   "moonbitlang/parser/tokens",
   "moonbitlang/x/fs",
   "moonbitlang/core/test",
-}
+} for "test"

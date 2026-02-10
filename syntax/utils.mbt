@@ -36,9 +36,12 @@ pub fn make_array_expr(
       Regular(e) => acc = acc.add(e)
       Spread(_) => return ArraySpread(elems~, loc~)
     }
-  } else {
-    // If we have only regular elements, create a simple array
-    return Array(exprs=acc.rev(), loc~)
+  } nobreak {
+    return Array(
+      // If we have only regular elements, create a simple array
+      exprs=acc.rev(),
+      loc~,
+    )
   }
 }
 

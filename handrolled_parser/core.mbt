@@ -371,9 +371,11 @@ fn[A] State::expect(
 
 ///|
 fn State::expect_string(self : Self) -> String {
-  self.expect(TK_STRING, default="", tok => match tok {
-    STRING(s) => Some(s)
-    _ => None
+  self.expect(TK_STRING, default="", tok => {
+    match tok {
+      STRING(s) => Some(s)
+      _ => None
+    }
   })
 }
 
@@ -445,17 +447,21 @@ fn State::expect_dot_uident(self : Self, context~ : String) -> String {
 
 ///|
 fn State::expect_dot_int(self : Self) -> Int {
-  self.expect(TK_PACKAGE_NAME, default=0, tok => match tok {
-    DOT_INT(s) => Some(s)
-    _ => None
+  self.expect(TK_PACKAGE_NAME, default=0, tok => {
+    match tok {
+      DOT_INT(s) => Some(s)
+      _ => None
+    }
   })
 }
 
 ///|
 fn State::expect_int(self : Self) -> String {
-  self.expect(TK_INT, default="", tok => match tok {
-    INT(s) => Some(s)
-    _ => None
+  self.expect(TK_INT, default="", tok => {
+    match tok {
+      INT(s) => Some(s)
+      _ => None
+    }
   })
 }
 
@@ -726,11 +732,8 @@ fn[A] State::surround_series(
   match self.mode {
     Panic(_) => []
     Normal =>
-      self.surround(left~, right~, state => state.series_with_follow(
-          invalid_delims~,
-          delim~,
-          follow_set=[right],
-          f,
-        ).0) // TODO(moonfmt): bad case
+      self.surround(left~, right~, state => {
+        state.series_with_follow(invalid_delims~, delim~, follow_set=[right], f).0
+      }) // TODO(moonfmt): bad case
   }
 }

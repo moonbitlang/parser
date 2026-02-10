@@ -6,11 +6,9 @@ import {
   "moonbitlang/core/hashmap",
 }
 
-import "test" {
+import {
   "moonbitlang/core/test",
   "moonbitlang/core/json",
-}
+} for "test"
 
-options(
-  "warn-list": "-28",
-)
+warnings = "-28"

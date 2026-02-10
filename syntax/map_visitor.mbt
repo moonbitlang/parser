@@ -3737,9 +3737,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FunDecl(
 ) {
   let type_name = fun_decl.type_name.map(env.0.visit_TypeName(_))
   let name = env.0.visit_Binder(fun_decl.name)
-  let decl_params = fun_decl.decl_params.map(decl_params => decl_params.map(param => env.0.visit_Parameter(
-    param,
-  )))
+  let decl_params = fun_decl.decl_params.map(decl_params => {
+    decl_params.map(param => env.0.visit_Parameter(param))
+  })
   let quantifiers = fun_decl.quantifiers.map(env.0.visit_TypeVarBinder(_))
   let return_type = fun_decl.return_type.map(env.0.visit_Type(_))
   let error_type = env.0.visit_ErrorType(fun_decl.error_type)
@@ -3837,9 +3837,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopTes
   doc~,
 ) {
   let expr = env.0.visit_Expr(expr)
-  let params = params.map(params => params.map(param => env.0.visit_Parameter(
-    param,
-  )))
+  let params = params.map(params => {
+    params.map(param => env.0.visit_Parameter(param))
+  })
   let local_types = local_types.map(env.0.visit_LocalTypeDecl(_))
   TopTest(expr~, name~, params~, local_types~, is_async~, loc~, attrs~, doc~)
 }
@@ -4081,10 +4081,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopUsi
   doc~,
 ) {
   let pkg = env.0.visit_Label(pkg)
-  let names = names.map(name => (
-    env.0.visit_AliasTarget(name.0),
-    env.0.visit_UsingKind(name.1),
-  ))
+  let names = names.map(name => {
+    (env.0.visit_AliasTarget(name.0), env.0.visit_UsingKind(name.1))
+  })
   let vis = env.0.visit_Visibility(vis)
   TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~)
 }
@@ -4371,8 +4370,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_LetRec
   body~,
   loc~,
 ) {
-  let bindings = bindings.map(binding => match binding {
-    (name, func) => (env.0.visit_Binder(name), env.0.visit_Func(func))
+  let bindings = bindings.map(binding => {
+    match binding {
+      (name, func) => (env.0.visit_Binder(name), env.0.visit_Func(func))
+    }
   })
   let body = env.0.visit_Expr(body)
   Expr::LetRec(bindings~, body~, loc~)
@@ -4385,13 +4386,15 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_LetAnd
   body~,
   loc~,
 ) {
-  let bindings = bindings.map(binding => match binding {
-    (binder, ty, func) =>
-      (
-        env.0.visit_Binder(binder),
-        ty.map(env.0.visit_Type(_)),
-        env.0.visit_Func(func),
-      )
+  let bindings = bindings.map(binding => {
+    match binding {
+      (binder, ty, func) =>
+        (
+          env.0.visit_Binder(binder),
+          ty.map(env.0.visit_Type(_)),
+          env.0.visit_Func(func),
+        )
+    }
   })
   let body = env.0.visit_Expr(body)
   Expr::LetAnd(bindings~, body~, loc~)
@@ -4674,15 +4677,13 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_For(
   loc~,
   where_clause~,
 ) {
-  let binders = binders.map(p => (
-    env.0.visit_Binder(p.0),
-    env.0.visit_Expr(p.1),
-  ))
+  let binders = binders.map(p => {
+    (env.0.visit_Binder(p.0), env.0.visit_Expr(p.1))
+  })
   let condition = condition.map(cond => env.0.visit_Expr(cond))
-  let continue_block = continue_block.map(p => (
-    env.0.visit_Binder(p.0),
-    env.0.visit_Expr(p.1),
-  ))
+  let continue_block = continue_block.map(p => {
+    (env.0.visit_Binder(p.0), env.0.visit_Expr(p.1))
+  })
   let body = env.0.visit_Expr(body)
   let for_else = for_else.map(else_block => env.0.visit_Expr(else_block))
   let label = label.map(env.0.visit_Label(_))

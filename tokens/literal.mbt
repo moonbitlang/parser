@@ -38,7 +38,7 @@ fn InterpLiteral::to_string_repr(self : InterpLiteral) -> String {
         buf.write_char('}')
       }
     }
-  } else {
+  } nobreak {
     buf.write_char('"')
     buf.to_string()
   }

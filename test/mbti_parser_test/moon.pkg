@@ -1,4 +1,4 @@
-import "test" {
+import {
   "moonbitlang/parser/tokens",
   "moonbitlang/parser/basic",
   "moonbitlang/parser/mbti_ast",
@@ -6,8 +6,6 @@ import "test" {
   "moonbitlang/parser/lexer",
   "moonbitlang/parser/mbti_parser",
   "moonbitlang/core/test",
-}
+} for "test"
 
-options(
-  "warn-list": "-1-6",
-)
+warnings = "-1-6"

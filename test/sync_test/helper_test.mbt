@@ -56,9 +56,11 @@ fn lexer_test(t : @test.Test) -> Unit raise Error {
     err => fail("failed to read file \{name}.mbt: \{err}")
   }
   let lex_result = @lexer.tokens_from_string(source, comment=true)
-  let errors = lex_result.errors.filter(triple => match triple.2 {
-    Reserved_keyword(_) => false // need to be a warning
-    _ => true
+  let errors = lex_result.errors.filter(triple => {
+    match triple.2 {
+      Reserved_keyword(_) => false // need to be a warning
+      _ => true
+    }
   })
   if errors.length() > 0 {
     let errors = errors.map(triple => (triple.0, triple.1, triple.2.to_string()))

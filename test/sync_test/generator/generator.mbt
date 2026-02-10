@@ -50,14 +50,13 @@ fn generate(mode~ : Mode) -> Unit {
   try {
     let tests = match mode {
       Parser =>
-        @fs.read_dir(snapshot_path).filter(name => !name.has_suffix(
-            ".tokens.json",
-          ) &&
-          name.has_suffix(".json"))
+        @fs.read_dir(snapshot_path).filter(name => {
+          !name.has_suffix(".tokens.json") && name.has_suffix(".json")
+        })
       Lexer =>
-        @fs.read_dir(snapshot_path).filter(name => name.has_suffix(
-          ".tokens.json",
-        ))
+        @fs.read_dir(snapshot_path).filter(name => {
+          name.has_suffix(".tokens.json")
+        })
     }
     tests.each(name => {
       let target = snapshot_path + "/" + name
