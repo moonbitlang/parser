@@ -3,9 +3,9 @@ import {
   "moonbitlang/core/json",
 }
 
-import "test" {
+import {
   "moonbitlang/core/test",
-}
+} for "test"
 
 options(
   "is-main": true,

@@ -3646,9 +3646,9 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_FunDecl(
 ) {
   fun_decl.type_name.each(env.0.visit_TypeName(_))
   env.0.visit_Binder(fun_decl.name)
-  fun_decl.decl_params.each(decl_params => decl_params.each(
-    env.0.visit_Parameter(_),
-  ))
+  fun_decl.decl_params.each(decl_params => {
+    decl_params.each(env.0.visit_Parameter(_))
+  })
   fun_decl.quantifiers.each(env.0.visit_TypeVarBinder(_))
   fun_decl.return_type.each(env.0.visit_Type(_))
   env.0.visit_ErrorType(fun_decl.error_type)
@@ -4234,10 +4234,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr_Let
   loc~,
 ) {
   ignore(loc)
-  bindings.each(binding => match binding {
-    (name, func) => {
-      env.0.visit_Binder(name)
-      env.0.visit_Func(func)
+  bindings.each(binding => {
+    match binding {
+      (name, func) => {
+        env.0.visit_Binder(name)
+        env.0.visit_Func(func)
+      }
     }
   })
   env.0.visit_Expr(body)
@@ -4251,11 +4253,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Expr_Let
   loc~,
 ) {
   ignore(loc)
-  bindings.each(binding => match binding {
-    (binder, ty, func) => {
-      env.0.visit_Binder(binder)
-      ty.each(env.0.visit_Type(_))
-      env.0.visit_Func(func)
+  bindings.each(binding => {
+    match binding {
+      (binder, ty, func) => {
+        env.0.visit_Binder(binder)
+        ty.each(env.0.visit_Type(_))
+        env.0.visit_Func(func)
+      }
     }
   })
   env.0.visit_Expr(body)

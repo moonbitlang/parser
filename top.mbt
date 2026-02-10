@@ -34,15 +34,17 @@ fn attach_docstrings(
     comments : List[(@basic.Location, @tokens.Comment)],
   ) -> @syntax.DocString {
     {
-      content: comments.map(p => match p.1.content {
-        [.. "///|", .. remain] =>
-          if remain.is_blank() {
-            ""
-          } else {
-            remain.to_string()
-          }
-        [.. "///", .. remain] => remain.to_string()
-        _ => panic()
+      content: comments.map(p => {
+        match p.1.content {
+          [.. "///|", .. remain] =>
+            if remain.is_blank() {
+              ""
+            } else {
+              remain.to_string()
+            }
+          [.. "///", .. remain] => remain.to_string()
+          _ => panic()
+        }
       }),
       loc: {
         start: comments.head().unwrap().0.start,

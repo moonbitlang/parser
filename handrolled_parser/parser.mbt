@@ -1965,7 +1965,7 @@ fn State::parse_pattern(self : Self) -> @syntax.Pattern {
     let alias_ = self.parse_binder(context="variable name")
     let loc = self.loc_start_with(spos)
     pat = Alias(pat~, alias_~, loc~)
-  } else {
+  } nobreak {
     pat
   }
 }
@@ -2032,7 +2032,9 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
   }
 
   fn parse_constr_args_no_open() {
-    self.surround_series(left=TK_LPAREN, right=TK_RPAREN, delim=TK_COMMA, _ => self.parse_constr_pat_argument())
+    self.surround_series(left=TK_LPAREN, right=TK_RPAREN, delim=TK_COMMA, _ => {
+      self.parse_constr_pat_argument()
+    })
     |> @list.from_array
   }
 
@@ -3217,10 +3219,9 @@ fn State::parse_lex_pattern(
     LPAREN => {
       let spos = self.peek_spos()
       self.skip()
-      let pats = self.with_follow(follow_set=[TK_RPAREN], state => state.sepby1(
-          delim=TK_COMMA,
-          State::parse_lex_top_pattern,
-        ))
+      let pats = self.with_follow(follow_set=[TK_RPAREN], state => {
+          state.sepby1(delim=TK_COMMA, State::parse_lex_top_pattern)
+        })
         |> @list.from_array
       self.expect_token(TK_RPAREN)
       let loc = self.loc_start_with(spos)
@@ -3469,9 +3470,11 @@ fn State::handle_lparen(self : Self) -> @syntax.Expr {
         }
       }
 
-      let parameters = expr_or_binders.map(x => match x {
-          Binder(expr, colon_loc=_, ty~) => (as_binder(expr), Some(ty))
-          Expr(expr) => (as_binder(expr), None)
+      let parameters = expr_or_binders.map(x => {
+          match x {
+            Binder(expr, colon_loc=_, ty~) => (as_binder(expr), Some(ty))
+            Expr(expr) => (as_binder(expr), None)
+          }
         })
         |> @list.from_array
       let body = self.parse_expr_stmt_no_break_continue_return()
@@ -3494,12 +3497,14 @@ fn State::handle_lparen(self : Self) -> @syntax.Expr {
       handle_expr(Group(expr~, group=Paren, loc~))
     }
     (_, _) => {
-      let exprs = expr_or_binders.map(x => match x {
-          Binder(expr, colon_loc~, ty=_) => {
-            self.report_unexpected(COLON, [TK_COMMA, TK_RPAREN], colon_loc)
-            @syntax.Hole(kind=Synthesized, loc=expr.loc())
+      let exprs = expr_or_binders.map(x => {
+          match x {
+            Binder(expr, colon_loc~, ty=_) => {
+              self.report_unexpected(COLON, [TK_COMMA, TK_RPAREN], colon_loc)
+              @syntax.Hole(kind=Synthesized, loc=expr.loc())
+            }
+            Expr(expr) => expr
           }
-          Expr(expr) => expr
         })
         |> @list.from_array
       let loc = self.loc_start_with(spos)
@@ -4038,7 +4043,9 @@ fn State::parse_prefix_expr(
             }
 
             let index_spos = self.peek_spos()
-            let index = self.surround(left=TK_LBRACKET, right=TK_RBRACKET, _ => parse_index())
+            let index = self.surround(left=TK_LBRACKET, right=TK_RBRACKET, _ => {
+              parse_index()
+            })
             let loc = self.loc_start_with(index_spos)
             let index_loc = self.loc_start_with(index_spos)
             let array_get_expr : @syntax.Expr = match index {
@@ -4566,9 +4573,11 @@ fn State::parse_simple_expr(
       if to_spread {
         ArraySpread(elems~, loc~)
       } else {
-        let exprs = elems.map(elem => match elem {
-          Regular(e) => e
-          Spread(_) => panic()
+        let exprs = elems.map(elem => {
+          match elem {
+            Regular(e) => e
+            Spread(_) => panic()
+          }
         })
         Array(exprs~, loc~)
       }

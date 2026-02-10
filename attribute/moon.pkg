@@ -5,6 +5,8 @@ import {
   "moonbitlang/core/list",
 }
 
+warnings = "-6-3"
+
 options(
   "pre-build": [
     {
@@ -13,5 +15,4 @@ options(
       "output": "parser.mbt",
     },
   ],
-  "warn-list": "-6-3",
 )

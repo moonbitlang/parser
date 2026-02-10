@@ -1608,12 +1608,14 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       tagged_node("Impl::TopTest", loc, {
         "expr": expr.json_repr(),
         "name": name.json_repr(),
-        "params": option_json_repr(params, params => list_json_repr(
-          "Impl::TopTest::ParamList",
-          loc,
-          params,
-          Parameter::json_repr,
-        )),
+        "params": option_json_repr(params, params => {
+          list_json_repr(
+            "Impl::TopTest::ParamList",
+            loc,
+            params,
+            Parameter::json_repr,
+          )
+        }),
         "local_types": list_json_repr(
           "Impl::TopTest::LocalTypeList",
           loc,

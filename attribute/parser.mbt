@@ -964,17 +964,14 @@ fn error(
                   _ => panic()
                 }
               }
-
               inner_go(stack, count, symbol)
             }
             Error => ()
           }
       }
     }
-
     go(stack)
   }
-
   for
     term in (
       [
