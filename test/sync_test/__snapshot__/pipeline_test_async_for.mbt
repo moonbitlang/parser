@@ -20,13 +20,13 @@ fn run_all() -> Unit {
 fn main {
   let map = { "x": 1, "y": 2, "z": 3 }
   let str = "字😅↑"
-  spawn(fn() {
+  spawn(() => {
     for k, v in map {
       println("from map: \{k} => \{v}")
       pause()
     }
   })
-  spawn(fn() {
+  spawn(() => {
     for c in str {
       println("from str: \{c}")
       pause()

@@ -43,7 +43,7 @@ fn Scheduler::spawn(self : Scheduler, f : async (Int) -> Unit raise) -> Unit {
   let id = self.next_id
   self.next_id += 1
   fn ok() {
-    run_async(fn () {
+    run_async(() => {
       try f(id) catch {
         err => self.err = Some(err)
       }

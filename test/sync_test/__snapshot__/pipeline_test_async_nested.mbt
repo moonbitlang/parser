@@ -41,7 +41,7 @@ async fn err_in_pipe_lhs() -> Int raise {
 }
 
 fn init {
-  run_async(fn () {
+  run_async(() => {
     try println(err_in_pipe_lhs()) catch { _ => panic() }
   })
 }

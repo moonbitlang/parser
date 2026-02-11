@@ -37,7 +37,7 @@ async fn async_with_err_non_tail() -> Unit raise {
 }
 
 fn init {
-  run_async(fn () {
+  run_async(() => {
     try {
       async_with_err_non_tail()
     } catch {
@@ -65,7 +65,7 @@ async fn async_with_tail_err_in_if(c : Bool) -> Unit raise Err {
 }
 
 fn init {
-  run_async(fn () {
+  run_async(() => {
     try {
       async_with_tail_err_in_if(true)
     } catch {
@@ -87,7 +87,7 @@ async fn async_with_tail_err_obj_method(obj : &Obj_with_err) -> Unit raise Err {
 }
 
 fn init {
-  run_async(fn () {
+  run_async(() => {
     try {
       async_with_tail_err_obj_method(42)
     } catch {
@@ -109,5 +109,21 @@ async fn raise_in_sync_with_async_catch(input : String?) -> Unit {
 }
 
 fn init {
-  run_async(fn() { try! raise_in_sync_with_async_catch(Some("msg")) })
+  run_async(() => try! raise_in_sync_with_async_catch(Some("msg")))
+}
+
+fn sync_with_err_and_arg(_ : Unit) -> Unit raise {
+  sync_with_err()
+}
+
+async fn raise_to_async_handler_in_arg() -> Unit {
+  try {
+    println(sync_with_err_and_arg(sync_with_err()))
+  } catch {
+    _ => async_with_err()
+  }
+}
+
+fn init {
+  run_async(() => println(try? raise_to_async_handler_in_arg()))
 }

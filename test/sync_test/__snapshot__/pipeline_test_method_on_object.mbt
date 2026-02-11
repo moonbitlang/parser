@@ -27,7 +27,7 @@ impl[X : Loggable, Y : Loggable] Loggable for (X, Y) with log(self, logger) {
   ..write_obj(self.0)
   ..write_string(", ")
   ..write_obj(self.1)
-  ..write_string(")")
+  .write_string(")")
 }
 
 fn init {
@@ -35,7 +35,7 @@ fn init {
   (buf as &Logger)
   ..write_string("=== start logging ===\n")
   ..write_obj_ln(42)
-  ..write_obj_ln((1, (2, (3, 4))))
+  .write_obj_ln((1, (2, (3, 4))))
   &Logger::write_obj_ln(buf, 0)
   &Logger::write_string(buf, "=== end logging ===")
   println(buf.to_string())

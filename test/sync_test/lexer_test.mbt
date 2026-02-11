@@ -641,6 +641,11 @@ test "lexing pipeline_test_valstruct_error" (t : @test.Test) {
 }
 
 ///|
+test "lexing parse_test_nobreak" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_trait" (t : @test.Test) {
   lexer_test(t)
 }
@@ -2205,6 +2210,11 @@ test "lexing pipeline_test_closure6" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_lexmatch_no_regex" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_call_trait_method" (t : @test.Test) {
   lexer_test(t)
 }
@@ -3017,6 +3027,11 @@ test "lexing pipeline_test_closure_example" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_loopify_corner_case" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_smart_switch_constant" (t : @test.Test) {
   lexer_test(t)
 }
@@ -3048,6 +3063,11 @@ test "lexing parse_test_not_syntax" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_guard" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing parse_test_catch_noraise" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -4677,6 +4697,11 @@ test "lexing pipeline_test_range_pattern" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_local_tuple_struct" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_contify_return2" (t : @test.Test) {
   lexer_test(t)
 }
@@ -5353,6 +5378,11 @@ test "lexing pipeline_test_inline_globals" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_recursive_ltype" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_lexmatch_fastpath" (t : @test.Test) {
   lexer_test(t)
 }
 

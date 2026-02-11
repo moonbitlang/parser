@@ -10,7 +10,7 @@ impl I for Int with f(self) {
 }
 
 fn main {
-  run_async(fn () {
+  run_async(() => {
     I::f(42) |> println
   })
 }

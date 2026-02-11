@@ -13,10 +13,6 @@ async fn f(c : Bool) -> Int raise Err {
 }
 
 fn main {
-  run_async(fn () {
-    println(try? f(true))
-  })
-  run_async(fn () {
-    println(try? f(false))
-  })
+  run_async(() => println(try? f(true)))
+  run_async(() => println(try? f(false)))
 }

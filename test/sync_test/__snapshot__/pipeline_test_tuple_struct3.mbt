@@ -1,16 +1,12 @@
 struct T(Int?) derive (Show)
 
-fn[X, Y] apply(f: (X) -> Y, x: X) -> Y {
-  f(x)
-}
-
 fn init {
-  let a = apply(T::T(_), Option::Some(1))
+  let a = T::T(Option::Some(1))
   println(a)
 }
 
 fn init {
-  let a = apply(Some(_), 1)
+  let a = Some(1)
   println(a)
 }
 

@@ -8,5 +8,5 @@ impl Obj for Unit with f(_self, x) {
 
 fn init {
   let obj = () as &Obj
-  obj..f(1)..f(2)..f(3)..f(4)
+  obj..f(1)..f(2)..f(3).f(4)
 }

@@ -12,12 +12,10 @@ async fn worker() -> Int noraise {
 }
 
 async fn f() -> Unit noraise {
-  spawn(fn () { println(worker()) })
+  spawn(() => println(worker()))
   println(worker() + 1)
 }
 
 fn init {
-  spawn(fn () {
-    f()
-  })
+  spawn(() => f())
 }

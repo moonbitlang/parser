@@ -15,7 +15,7 @@ fn init {
     DemoError::InvalidChar(pos, ch) =>
       println("invalid char at \{pos.x}: \{ch}")
     _ => println("unknown error")
-  } else {
+  } noraise {
     _ => println("ok")
   }
 }

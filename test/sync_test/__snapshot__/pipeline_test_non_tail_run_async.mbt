@@ -11,7 +11,7 @@ async fn answer() -> Int noraise {
 let flag : Ref[Bool] = Ref::new(true)
 
 fn main {
-  run_async(fn() {
+  run_async(() => {
     if flag.val {
       // the `return` here should be delimited by `run_async`
       return

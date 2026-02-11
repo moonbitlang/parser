@@ -289,72 +289,64 @@
     "loc": "9:13-9:14"
   },
   {
-    "token": "FN",
-    "loc": "9:14-9:16"
-  },
-  {
     "token": "LPAREN",
-    "loc": "9:16-9:17"
+    "loc": "9:14-9:15"
   },
   {
     "token": "RPAREN",
-    "loc": "9:17-9:18"
+    "loc": "9:15-9:16"
   },
   {
-    "token": "LBRACE",
-    "loc": "9:19-9:20"
+    "token": "FAT_ARROW",
+    "loc": "9:17-9:19"
   },
   {
     "token": "RAISE",
-    "loc": "9:21-9:26"
+    "loc": "9:20-9:25"
   },
   {
     "token": [
       "UIDENT",
       "Failure"
     ],
-    "loc": "9:27-9:34"
+    "loc": "9:26-9:33"
   },
   {
     "token": "COLONCOLON",
-    "loc": "9:34-9:36"
+    "loc": "9:33-9:35"
   },
   {
     "token": [
       "UIDENT",
       "Failure"
     ],
-    "loc": "9:36-9:43"
+    "loc": "9:35-9:42"
   },
   {
     "token": "LPAREN",
-    "loc": "9:43-9:44"
+    "loc": "9:42-9:43"
   },
   {
     "token": [
       "STRING",
       "error"
     ],
-    "loc": "9:44-9:51"
+    "loc": "9:43-9:50"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "9:50-9:51"
   },
   {
     "token": "RPAREN",
     "loc": "9:51-9:52"
   },
   {
-    "token": "RBRACE",
-    "loc": "9:53-9:54"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "9:54-9:55"
-  },
-  {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "9:55-9:55"
+    "loc": "9:52-9:52"
   },
   {
     "token": [
@@ -365,11 +357,11 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "9:56-9:72"
+    "loc": "9:53-9:69"
   },
   {
     "token": "NEWLINE",
-    "loc": "9:72-9:73"
+    "loc": "9:69-9:70"
   },
   {
     "token": [
@@ -568,65 +560,57 @@
     "loc": "17:40-17:41"
   },
   {
-    "token": "FN",
-    "loc": "17:41-17:43"
-  },
-  {
     "token": "LPAREN",
-    "loc": "17:43-17:44"
+    "loc": "17:41-17:42"
   },
   {
     "token": "RPAREN",
-    "loc": "17:44-17:45"
+    "loc": "17:42-17:43"
   },
   {
-    "token": "LBRACE",
-    "loc": "17:46-17:47"
+    "token": "FAT_ARROW",
+    "loc": "17:44-17:46"
   },
   {
     "token": "RAISE",
-    "loc": "17:48-17:53"
+    "loc": "17:47-17:52"
   },
   {
     "token": [
       "UIDENT",
       "Failure"
     ],
-    "loc": "17:54-17:61"
+    "loc": "17:53-17:60"
   },
   {
     "token": "LPAREN",
-    "loc": "17:61-17:62"
+    "loc": "17:60-17:61"
   },
   {
     "token": [
       "STRING",
       "error"
     ],
-    "loc": "17:62-17:69"
+    "loc": "17:61-17:68"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "17:68-17:69"
   },
   {
     "token": "RPAREN",
     "loc": "17:69-17:70"
   },
   {
-    "token": "RBRACE",
-    "loc": "17:71-17:72"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "17:72-17:73"
-  },
-  {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "17:73-17:73"
+    "loc": "17:70-17:70"
   },
   {
     "token": "NEWLINE",
-    "loc": "17:73-17:74"
+    "loc": "17:70-17:71"
   },
   {
     "token": "LPAREN",

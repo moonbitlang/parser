@@ -124,7 +124,7 @@ fn main {
     run_async(f)
   }
   and run_err = fn (f : async () -> Unit raise Err) {
-    run(fn () {
+    run(() => {
       try f() catch { err => println(err) }
     })
   }

@@ -18,6 +18,6 @@ suberror E {
 
 ///|
 fn main {
-  println(try? h(fn(x) { raise E(x) }))
+  println(try? h(x => raise E(x)))
   h(fn(x) { println(x) })
 }

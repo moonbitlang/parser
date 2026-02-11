@@ -11,7 +11,7 @@ struct Generator[Elem] {
 fn[Elem] Generator::spawn(f : async (Generator[Elem]) -> Unit noraise) -> Generator[Elem] {
   let gen = { value: None, next: panic }
   gen.next = fn () {
-    run_async(fn () {
+    run_async(() => {
       f(gen)
       gen.value = None
       // [code] will probably capture [coro] itself, forming a cycle,
@@ -42,7 +42,7 @@ fn[Elem] Generator::iter(self : Generator[Elem]) -> Iter[Elem] {
 }
 
 fn init {
-  let gen = Generator::spawn(fn (self) {
+  let gen = Generator::spawn(self => {
     for i = 0; i < 10; i = i + 1 {
       self.produce_value(i)
     }

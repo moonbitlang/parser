@@ -26,7 +26,7 @@ fn[Elem : Show] print_generator(gen : Generator[Elem]) -> Unit {
 fn[Elem] Generator::spawn(f : async (Generator[Elem]) -> Unit noraise) -> Generator[Elem] {
   let gen = { value: None, next: panic }
   gen.next = fn () {
-    run_async(fn () {
+    run_async(() => {
       f(gen)
       gen.value = None
       // [code] will probably capture [coro] itself, forming a cycle,
@@ -79,7 +79,7 @@ fn tree_generator(tree : Tree) -> Generator[Int] {
       }
     }
   }
-  Generator::spawn(fn (self) {
+  Generator::spawn(self => {
     walk(self, tree)
   })
 }
@@ -91,8 +91,8 @@ async fn[T] AIter::run(self : AIter[T], f : async (T) -> IterResult noraise) -> 
 }
 
 fn[Elem] from_iter(iter: AIter[Elem]) -> Generator[Elem] {
-  Generator::spawn(fn (self) {
-    iter.run(fn (v) {
+  Generator::spawn(self => {
+    iter.run(v => {
       callcc(fn (k) {
         self.value = Some(v)
         self.next = fn () { k(IterContinue) }

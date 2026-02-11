@@ -386,75 +386,89 @@
     "loc": "12:22-12:23"
   },
   {
-    "token": "UNDERSCORE",
+    "token": [
+      "LIDENT",
+      "n"
+    ],
     "loc": "12:23-12:24"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "12:25-12:27"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "n"
+    ],
+    "loc": "12:28-12:29"
   },
   {
     "token": [
       "DOT_LIDENT",
       "to_int"
     ],
-    "loc": "12:25-12:31"
+    "loc": "12:30-12:36"
   },
   {
     "token": "LPAREN",
-    "loc": "12:31-12:32"
+    "loc": "12:36-12:37"
   },
   {
     "token": "RPAREN",
-    "loc": "12:32-12:33"
+    "loc": "12:37-12:38"
   },
   {
     "token": "RPAREN",
-    "loc": "12:33-12:34"
+    "loc": "12:38-12:39"
   },
   {
     "token": [
       "DOT_LIDENT",
       "unwrap_or"
     ],
-    "loc": "12:35-12:44"
+    "loc": "12:40-12:49"
   },
   {
     "token": "LPAREN",
-    "loc": "12:44-12:45"
+    "loc": "12:49-12:50"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
-    "loc": "12:45-12:46"
+    "loc": "12:50-12:51"
   },
   {
     "token": "LBRACKET",
-    "loc": "12:46-12:47"
+    "loc": "12:51-12:52"
   },
   {
     "token": [
       "INT",
       "1"
     ],
-    "loc": "12:47-12:48"
+    "loc": "12:52-12:53"
   },
   {
     "token": "RBRACKET",
-    "loc": "12:48-12:49"
+    "loc": "12:53-12:54"
   },
   {
     "token": [
       "DOT_LIDENT",
       "a"
     ],
-    "loc": "12:50-12:51"
+    "loc": "12:55-12:56"
   },
   {
     "token": "RPAREN",
-    "loc": "12:51-12:52"
+    "loc": "12:56-12:57"
   },
   {
     "token": "NEWLINE",
-    "loc": "12:52-12:53"
+    "loc": "12:57-12:58"
   },
   {
     "token": "RBRACE",

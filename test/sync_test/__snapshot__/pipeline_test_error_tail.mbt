@@ -24,7 +24,7 @@ pub fn sum2(n : Int) -> Int {
     taill_call_sum(n, 0)
   } catch {
     _ => abort("error")
-  } else {
+  } noraise {
     x => x
   }
 }
