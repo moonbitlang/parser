@@ -190,6 +190,7 @@ priv enum YYSymbol {
   T_ENUMVIEW
   T_DECLARE
   T_NORAISE
+  T_NOBREAK
   T_WHERE
   T_TRY_QUESTION
   T_TRY_EXCLAMATION
@@ -214,7 +215,7 @@ fn init {
 }
 
 // file:///./parser.mbty
-// 150|    EOF { @list.empty() }
+// 151|    EOF { @list.empty() }
 
 ///|
 fn yy_action_0(
@@ -230,7 +231,7 @@ fn yy_action_0(
 }
 
 // file:///./parser.mbty
-// 151|    properties { $1 }
+// 152|    properties { $1 }
 
 ///|
 fn yy_action_1(
@@ -247,7 +248,7 @@ fn yy_action_1(
 }
 
 // file:///./parser.mbty
-// 167|    "(" ")"                      { @list.empty() }
+// 168|    "(" ")"                      { @list.empty() }
 
 ///|
 fn yy_action_2(
@@ -263,7 +264,7 @@ fn yy_action_2(
 }
 
 // file:///./parser.mbty
-// 168|    "(" non_empty_properties ")" { $2 }
+// 169|    "(" non_empty_properties ")" { $2 }
 
 ///|
 fn yy_action_3(
@@ -280,7 +281,7 @@ fn yy_action_3(
 }
 
 // file:///./parser.mbty
-// 154|    name=LIDENT "=" expr   { Labeled(name, $3) }
+// 155|    name=LIDENT "=" expr   { Labeled(name, $3) }
 
 ///|
 fn yy_action_4(
@@ -298,7 +299,7 @@ fn yy_action_4(
 }
 
 // file:///./parser.mbty
-// 161|    qual=LIDENT name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
+// 162|    qual=LIDENT name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
 
 ///|
 fn yy_action_5(
@@ -317,7 +318,7 @@ fn yy_action_5(
 }
 
 // file:///./parser.mbty
-// 159|    qual=LIDENT name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
+// 160|    qual=LIDENT name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
 
 ///|
 fn yy_action_6(
@@ -335,7 +336,7 @@ fn yy_action_6(
 }
 
 // file:///./parser.mbty
-// 160|    name=LIDENT props=properties                 { Apply({qual: None, name}, props) }
+// 161|    name=LIDENT props=properties                 { Apply({qual: None, name}, props) }
 
 ///|
 fn yy_action_7(
@@ -353,7 +354,7 @@ fn yy_action_7(
 }
 
 // file:///./parser.mbty
-// 158|    name=LIDENT                                  { Ident({qual: None, name}) }
+// 159|    name=LIDENT                                  { Ident({qual: None, name}) }
 
 ///|
 fn yy_action_8(
@@ -370,7 +371,7 @@ fn yy_action_8(
 }
 
 // file:///./parser.mbty
-// 155|    expr                   { Expr($1) }
+// 156|    expr                   { Expr($1) }
 
 ///|
 fn yy_action_9(
@@ -387,7 +388,7 @@ fn yy_action_9(
 }
 
 // file:///./parser.mbty
-// 162|    STRING                                       { String($1) }
+// 163|    STRING                                       { String($1) }
 
 ///|
 fn yy_action_10(
@@ -404,7 +405,7 @@ fn yy_action_10(
 }
 
 // file:///./parser.mbty
-// 163|    TRUE                                         { Bool(true) }
+// 164|    TRUE                                         { Bool(true) }
 
 ///|
 fn yy_action_11(
@@ -420,7 +421,7 @@ fn yy_action_11(
 }
 
 // file:///./parser.mbty
-// 164|    FALSE                                        { Bool(false) }
+// 165|    FALSE                                        { Bool(false) }
 
 ///|
 fn yy_action_12(
@@ -436,7 +437,7 @@ fn yy_action_12(
 }
 
 // file:///./parser.mbty
-// 172|    x=property "," xs=non_empty_properties{ xs.add(x) }
+// 173|    x=property "," xs=non_empty_properties{ xs.add(x) }
 
 ///|
 fn yy_action_13(
@@ -454,7 +455,7 @@ fn yy_action_13(
 }
 
 // file:///./parser.mbty
-// 171|    property { @list.from_array([$1]) }
+// 172|    property { @list.from_array([$1]) }
 
 ///|
 fn yy_action_14(
@@ -585,6 +586,7 @@ fn yy_input(
     ENUMVIEW => (T_ENUMVIEW, YYObj_Void)
     DECLARE => (T_DECLARE, YYObj_Void)
     NORAISE => (T_NORAISE, YYObj_Void)
+    NOBREAK => (T_NOBREAK, YYObj_Void)
     WHERE => (T_WHERE, YYObj_Void)
     TRY_QUESTION => (T_TRY_QUESTION, YYObj_Void)
     TRY_EXCLAMATION => (T_TRY_EXCLAMATION, YYObj_Void)
@@ -1083,6 +1085,7 @@ fn error(
         (T_ENUMVIEW, TK_ENUMVIEW),
         (T_DECLARE, TK_DECLARE),
         (T_NORAISE, TK_NORAISE),
+        (T_NOBREAK, TK_NOBREAK),
         (T_WHERE, TK_WHERE),
         (T_TRY_QUESTION, TK_TRY_QUESTION),
         (T_TRY_EXCLAMATION, TK_TRY_EXCLAMATION),
