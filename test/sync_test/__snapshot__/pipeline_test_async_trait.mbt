@@ -68,12 +68,12 @@ async fn[S : Stream] is_balanced_poly(s : S) -> Unit raise Err {
 
 fn run_poly(input_sequence : Array[String]) -> Unit {
   let input = Input::new()
-  run_async(fn () {
+  run_async(() => {
     try {
       is_balanced_poly(input)
     } catch {
       err => println(err)
-    } else {
+    } noraise {
       _ => println("is balanced")
     }
   })
@@ -85,7 +85,7 @@ fn run_poly(input_sequence : Array[String]) -> Unit {
     input.terminate()
   } catch {
     err => println("sender received error: \{err}")
-  } else {
+  } noraise {
     _ => println("input closed succesfully")
   }
 }
@@ -113,12 +113,12 @@ async fn is_balanced_obj(s : &Stream) -> Unit raise Err {
 
 fn run_obj(input_sequence : Array[String]) -> Unit {
   let input = Input::new()
-  run_async(fn () {
+  run_async(() => {
     try {
       is_balanced_obj(input)
     } catch {
       err => println(err)
-    } else {
+    } noraise {
       _ => println("is balanced")
     }
   })
@@ -130,7 +130,7 @@ fn run_obj(input_sequence : Array[String]) -> Unit {
     input.terminate()
   } catch {
     err => println("sender received error: \{err}")
-  } else {
+  } noraise {
     _ => println("input closed succesfully")
   }
 }

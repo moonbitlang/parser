@@ -297,16 +297,16 @@
     "loc": "14:3-14:4"
   },
   {
-    "token": "ELSE",
-    "loc": "14:5-14:9"
+    "token": "NORAISE",
+    "loc": "14:5-14:12"
   },
   {
     "token": "LBRACE",
-    "loc": "14:10-14:11"
+    "loc": "14:13-14:14"
   },
   {
     "token": "NEWLINE",
-    "loc": "14:11-14:12"
+    "loc": "14:14-14:15"
   },
   {
     "token": "UNDERSCORE",

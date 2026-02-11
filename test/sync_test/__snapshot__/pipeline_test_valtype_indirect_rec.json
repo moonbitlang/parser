@@ -604,37 +604,90 @@
                             "loc": null,
                             "children": {
                               "value": {
-                                "kind": "Expr::DotApply",
+                                "kind": "Expr::Function",
                                 "loc": null,
                                 "children": {
-                                  "self": {
-                                    "kind": "Expr::Hole",
+                                  "func": {
+                                    "kind": "Func::Lambda",
                                     "loc": null,
                                     "children": {
-                                      "kind": {
-                                        "kind": "Hole::Incomplete",
+                                      "parameters": {
+                                        "kind": "Func::Lambda::ParameterList",
+                                        "loc": null,
+                                        "children": [
+                                          {
+                                            "kind": "Parameter::Positional",
+                                            "loc": null,
+                                            "children": {
+                                              "binder": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "n"
+                                                }
+                                              },
+                                              "ty": null
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      "body": {
+                                        "kind": "Expr::DotApply",
+                                        "loc": null,
+                                        "children": {
+                                          "self": {
+                                            "kind": "Expr::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "id": {
+                                                "kind": "Var",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": {
+                                                    "kind": "LongIdent::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "value": "n"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "method_name": {
+                                            "kind": "Label",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "to_int"
+                                            }
+                                          },
+                                          "args": {
+                                            "kind": "Expr::DotApply::ArgList",
+                                            "loc": null,
+                                            "children": []
+                                          },
+                                          "return_self": false,
+                                          "attr": {
+                                            "kind": "ApplyAttr::NoAttr",
+                                            "loc": null,
+                                            "children": {}
+                                          }
+                                        }
+                                      },
+                                      "return_type": null,
+                                      "error_type": {
+                                        "kind": "ErrorType::NoErrorType",
                                         "loc": null,
                                         "children": {}
-                                      }
+                                      },
+                                      "kind": {
+                                        "kind": "FnKind::Arrow",
+                                        "loc": null,
+                                        "children": {}
+                                      },
+                                      "has_error": null,
+                                      "is_async": null
                                     }
-                                  },
-                                  "method_name": {
-                                    "kind": "Label",
-                                    "loc": null,
-                                    "children": {
-                                      "name": "to_int"
-                                    }
-                                  },
-                                  "args": {
-                                    "kind": "Expr::DotApply::ArgList",
-                                    "loc": null,
-                                    "children": []
-                                  },
-                                  "return_self": false,
-                                  "attr": {
-                                    "kind": "ApplyAttr::NoAttr",
-                                    "loc": null,
-                                    "children": {}
                                   }
                                 }
                               },

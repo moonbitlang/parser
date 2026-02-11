@@ -14,6 +14,6 @@ struct Test {
 }
 
 fn main {
-  let _ : Test = { f: fn() { T::new() } }
+  let _ : Test = { f: () => T::new() }
 
 }

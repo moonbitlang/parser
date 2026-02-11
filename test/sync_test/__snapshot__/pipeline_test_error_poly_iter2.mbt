@@ -8,7 +8,7 @@
 pub fn[X] from_array(arr : Array[X]) -> (
   (X) -> Unit raise?
 ) -> Unit raise? {
-  fn (yield_) {
+  yield_ => {
     for x in arr {
       yield_(x)
     }
@@ -26,7 +26,7 @@ pub fn[X] collect(
   it : ((X) -> Unit raise?) -> Unit raise?
 ) -> Array[X] raise? {
   let result = []
-  each(it, result.push(_))
+  each(it, elem => result.push(elem))
   result
 }
 
@@ -41,7 +41,7 @@ pub fn[X] filter(
   it : ((X) -> Unit raise?) -> Unit raise?,
   f : (X) -> Bool
 ) -> ((X) -> Unit raise?) -> Unit raise? {
-  yield_ => it(fn (x) {
+  yield_ => it(x => {
     if f(x) {
       yield_(x)
     }
@@ -54,10 +54,10 @@ pub fn[X] take(
   it : ((X) -> Unit raise) -> Unit raise,
   n : Int
 ) -> ((X) -> Unit raise?) -> Unit raise? {
-  fn (yield_) {
+  yield_ => {
     let mut err_from_yield = None
     let mut i = 0
-    it(fn (x) {
+    it(x => {
       if i > n { raise IterTake }
       try yield_(x) catch {
         err => {
@@ -91,7 +91,7 @@ pub fn[X] find(
 ) -> X? {
   let mut result = None
   try {
-    it(fn (x) {
+    it(x => {
       if f(x) {
         result = Some(x)
         raise IterFind

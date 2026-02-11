@@ -167,7 +167,7 @@
                 "kind": "Attribute",
                 "loc": null,
                 "children": {
-                  "raw": "#test.bench"
+                  "raw": "#test.bench "
                 }
               }
             ]
@@ -265,7 +265,7 @@
                 "kind": "Attribute",
                 "loc": null,
                 "children": {
-                  "raw": "#test.bench"
+                  "raw": "#test.bench(\"abc\", ident) "
                 }
               }
             ]

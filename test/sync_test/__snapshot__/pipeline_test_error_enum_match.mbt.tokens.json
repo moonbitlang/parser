@@ -440,16 +440,16 @@
     "loc": "18:3-18:4"
   },
   {
-    "token": "ELSE",
-    "loc": "18:5-18:9"
+    "token": "NORAISE",
+    "loc": "18:5-18:12"
   },
   {
     "token": "LBRACE",
-    "loc": "18:10-18:11"
+    "loc": "18:13-18:14"
   },
   {
     "token": "NEWLINE",
-    "loc": "18:11-18:12"
+    "loc": "18:14-18:15"
   },
   {
     "token": "UNDERSCORE",

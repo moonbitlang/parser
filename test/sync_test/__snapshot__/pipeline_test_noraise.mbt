@@ -6,6 +6,7 @@ fn ff(a : async () -> Int raise) -> Unit {
 }
 
 ///|
+#warnings("-unused_async") 
 fn main {
   ff(async fn() noraise { 42 })
 }

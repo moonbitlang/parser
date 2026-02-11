@@ -34,27 +34,25 @@ fn Scheduler::run_all(self : Scheduler) -> Unit {
 fn Scheduler::spawn_lazy(self : Scheduler, f : async (Int) -> Unit noraise) -> Unit {
   let id = self.next_id
   self.next_id += 1
-  self.coros.push(fn () {
-    run_async(fn () { f(id) })
-  })
+  self.coros.push(() => run_async(() => f(id)))
 }
 
 fn Scheduler::spawn(self : Scheduler, f : async (Int) -> Unit noraise) -> Unit {
   let id = self.next_id
   self.next_id += 1
-  run_async(fn () { f(id) })
+  run_async(() => f(id))
 }
 
 fn init {
   let ctx = Scheduler::new()
-  ctx.spawn_lazy(fn (id) {
+  ctx.spawn_lazy(id => {
     for i = 0; i < 10; i = i + 1 {
       println("thread \{id}: \{i}")
       ctx.suspend()
     }
     println("thread \{id}: done")
   })
-  ctx.spawn(fn (id) {
+  ctx.spawn(id => {
     for i = 0; i < 5; i = i + 1 {
       println("thread \{id}: \{i}")
       ctx.suspend()
@@ -122,7 +120,7 @@ fn init {
   let ctx = Scheduler::new()
   let c1 : Channel[Int] = ctx.make_channel()
   let c2 : Channel[Int] = ctx.make_channel()
-  ctx.spawn(fn (id) {
+  ctx.spawn(id => {
     try {
       for {
         println("thread \{id}: received \{c1.recv()} from channel 1")
@@ -131,7 +129,7 @@ fn init {
       ChannelTerminated => println("thread \{id}: received termination")
     }
   })
-  ctx.spawn(fn (id) {
+  ctx.spawn(id => {
     try {
       for {
         println("thread \{id}: received \{c2.recv()} from channel 2")
@@ -140,7 +138,7 @@ fn init {
       ChannelTerminated => println("thread \{id}: received termination")
     }
   })
-  ctx.spawn(fn (id) {
+  ctx.spawn(id => {
     try {
       println("thread \{id}: sending 1 to channel 1")
       c1.send(1)

@@ -1581,80 +1581,149 @@
                                                         "children": []
                                                       },
                                                       "body": {
-                                                        "kind": "Expr::Sequence",
+                                                        "kind": "Expr::Group",
                                                         "loc": null,
                                                         "children": {
-                                                          "exprs": {
-                                                            "kind": "Expr::Sequence::ExprList",
+                                                          "expr": {
+                                                            "kind": "Expr::Sequence",
                                                             "loc": null,
-                                                            "children": [
-                                                              {
-                                                                "kind": "Expr::Apply",
+                                                            "children": {
+                                                              "exprs": {
+                                                                "kind": "Expr::Sequence::ExprList",
                                                                 "loc": null,
-                                                                "children": {
-                                                                  "func": {
-                                                                    "kind": "Expr::Ident",
+                                                                "children": [
+                                                                  {
+                                                                    "kind": "Expr::Apply",
                                                                     "loc": null,
                                                                     "children": {
-                                                                      "id": {
-                                                                        "kind": "Var",
+                                                                      "func": {
+                                                                        "kind": "Expr::Ident",
                                                                         "loc": null,
                                                                         "children": {
-                                                                          "name": {
-                                                                            "kind": "LongIdent::Ident",
+                                                                          "id": {
+                                                                            "kind": "Var",
                                                                             "loc": null,
                                                                             "children": {
-                                                                              "value": "f"
-                                                                            }
-                                                                          }
-                                                                        }
-                                                                      }
-                                                                    }
-                                                                  },
-                                                                  "args": {
-                                                                    "kind": "Expr::Apply::ArgumentList",
-                                                                    "loc": null,
-                                                                    "children": [
-                                                                      {
-                                                                        "kind": "Argument",
-                                                                        "loc": null,
-                                                                        "children": {
-                                                                          "value": {
-                                                                            "kind": "Expr::Ident",
-                                                                            "loc": null,
-                                                                            "children": {
-                                                                              "id": {
-                                                                                "kind": "Var",
+                                                                              "name": {
+                                                                                "kind": "LongIdent::Ident",
                                                                                 "loc": null,
                                                                                 "children": {
-                                                                                  "name": {
-                                                                                    "kind": "LongIdent::Ident",
-                                                                                    "loc": null,
-                                                                                    "children": {
-                                                                                      "value": "gen"
-                                                                                    }
-                                                                                  }
+                                                                                  "value": "f"
                                                                                 }
                                                                               }
                                                                             }
-                                                                          },
-                                                                          "kind": {
-                                                                            "kind": "ArgumentKind::Positional",
-                                                                            "loc": null,
-                                                                            "children": {}
                                                                           }
                                                                         }
+                                                                      },
+                                                                      "args": {
+                                                                        "kind": "Expr::Apply::ArgumentList",
+                                                                        "loc": null,
+                                                                        "children": [
+                                                                          {
+                                                                            "kind": "Argument",
+                                                                            "loc": null,
+                                                                            "children": {
+                                                                              "value": {
+                                                                                "kind": "Expr::Ident",
+                                                                                "loc": null,
+                                                                                "children": {
+                                                                                  "id": {
+                                                                                    "kind": "Var",
+                                                                                    "loc": null,
+                                                                                    "children": {
+                                                                                      "name": {
+                                                                                        "kind": "LongIdent::Ident",
+                                                                                        "loc": null,
+                                                                                        "children": {
+                                                                                          "value": "gen"
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              },
+                                                                              "kind": {
+                                                                                "kind": "ArgumentKind::Positional",
+                                                                                "loc": null,
+                                                                                "children": {}
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        ]
+                                                                      },
+                                                                      "attr": {
+                                                                        "kind": "ApplyAttr::NoAttr",
+                                                                        "loc": null,
+                                                                        "children": {}
                                                                       }
-                                                                    ]
+                                                                    }
                                                                   },
-                                                                  "attr": {
-                                                                    "kind": "ApplyAttr::NoAttr",
+                                                                  {
+                                                                    "kind": "Expr::Mutate",
                                                                     "loc": null,
-                                                                    "children": {}
+                                                                    "children": {
+                                                                      "record": {
+                                                                        "kind": "Expr::Ident",
+                                                                        "loc": null,
+                                                                        "children": {
+                                                                          "id": {
+                                                                            "kind": "Var",
+                                                                            "loc": null,
+                                                                            "children": {
+                                                                              "name": {
+                                                                                "kind": "LongIdent::Ident",
+                                                                                "loc": null,
+                                                                                "children": {
+                                                                                  "value": "gen"
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      },
+                                                                      "accessor": {
+                                                                        "kind": "Accessor::Label",
+                                                                        "loc": null,
+                                                                        "children": {
+                                                                          "value": {
+                                                                            "kind": "Label",
+                                                                            "loc": null,
+                                                                            "children": {
+                                                                              "name": "value"
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      },
+                                                                      "field": {
+                                                                        "kind": "Expr::Constr",
+                                                                        "loc": null,
+                                                                        "children": {
+                                                                          "constr": {
+                                                                            "kind": "Constructor",
+                                                                            "loc": null,
+                                                                            "children": {
+                                                                              "name": {
+                                                                                "kind": "ConstrName",
+                                                                                "loc": null,
+                                                                                "children": {
+                                                                                  "name": "None"
+                                                                                }
+                                                                              },
+                                                                              "extra_info": {
+                                                                                "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                                                                "loc": null,
+                                                                                "children": {}
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      },
+                                                                      "augmented_by": null
+                                                                    }
                                                                   }
-                                                                }
+                                                                ]
                                                               },
-                                                              {
+                                                              "last_expr": {
                                                                 "kind": "Expr::Mutate",
                                                                 "loc": null,
                                                                 "children": {
@@ -1685,30 +1754,25 @@
                                                                         "kind": "Label",
                                                                         "loc": null,
                                                                         "children": {
-                                                                          "name": "value"
+                                                                          "name": "next"
                                                                         }
                                                                       }
                                                                     }
                                                                   },
                                                                   "field": {
-                                                                    "kind": "Expr::Constr",
+                                                                    "kind": "Expr::Ident",
                                                                     "loc": null,
                                                                     "children": {
-                                                                      "constr": {
-                                                                        "kind": "Constructor",
+                                                                      "id": {
+                                                                        "kind": "Var",
                                                                         "loc": null,
                                                                         "children": {
                                                                           "name": {
-                                                                            "kind": "ConstrName",
+                                                                            "kind": "LongIdent::Ident",
                                                                             "loc": null,
                                                                             "children": {
-                                                                              "name": "None"
+                                                                              "value": "panic"
                                                                             }
-                                                                          },
-                                                                          "extra_info": {
-                                                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
-                                                                            "loc": null,
-                                                                            "children": {}
                                                                           }
                                                                         }
                                                                       }
@@ -1717,65 +1781,12 @@
                                                                   "augmented_by": null
                                                                 }
                                                               }
-                                                            ]
-                                                          },
-                                                          "last_expr": {
-                                                            "kind": "Expr::Mutate",
-                                                            "loc": null,
-                                                            "children": {
-                                                              "record": {
-                                                                "kind": "Expr::Ident",
-                                                                "loc": null,
-                                                                "children": {
-                                                                  "id": {
-                                                                    "kind": "Var",
-                                                                    "loc": null,
-                                                                    "children": {
-                                                                      "name": {
-                                                                        "kind": "LongIdent::Ident",
-                                                                        "loc": null,
-                                                                        "children": {
-                                                                          "value": "gen"
-                                                                        }
-                                                                      }
-                                                                    }
-                                                                  }
-                                                                }
-                                                              },
-                                                              "accessor": {
-                                                                "kind": "Accessor::Label",
-                                                                "loc": null,
-                                                                "children": {
-                                                                  "value": {
-                                                                    "kind": "Label",
-                                                                    "loc": null,
-                                                                    "children": {
-                                                                      "name": "next"
-                                                                    }
-                                                                  }
-                                                                }
-                                                              },
-                                                              "field": {
-                                                                "kind": "Expr::Ident",
-                                                                "loc": null,
-                                                                "children": {
-                                                                  "id": {
-                                                                    "kind": "Var",
-                                                                    "loc": null,
-                                                                    "children": {
-                                                                      "name": {
-                                                                        "kind": "LongIdent::Ident",
-                                                                        "loc": null,
-                                                                        "children": {
-                                                                          "value": "panic"
-                                                                        }
-                                                                      }
-                                                                    }
-                                                                  }
-                                                                }
-                                                              },
-                                                              "augmented_by": null
                                                             }
+                                                          },
+                                                          "group": {
+                                                            "kind": "Group::Brace",
+                                                            "loc": null,
+                                                            "children": {}
                                                           }
                                                         }
                                                       },
@@ -1786,7 +1797,7 @@
                                                         "children": {}
                                                       },
                                                       "kind": {
-                                                        "kind": "FnKind::Lambda",
+                                                        "kind": "FnKind::Arrow",
                                                         "loc": null,
                                                         "children": {}
                                                       },
@@ -4258,96 +4269,107 @@
                                     ]
                                   },
                                   "body": {
-                                    "kind": "Expr::Apply",
+                                    "kind": "Expr::Group",
                                     "loc": null,
                                     "children": {
-                                      "func": {
-                                        "kind": "Expr::Ident",
+                                      "expr": {
+                                        "kind": "Expr::Apply",
                                         "loc": null,
                                         "children": {
-                                          "id": {
-                                            "kind": "Var",
+                                          "func": {
+                                            "kind": "Expr::Ident",
                                             "loc": null,
                                             "children": {
-                                              "name": {
-                                                "kind": "LongIdent::Ident",
+                                              "id": {
+                                                "kind": "Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "value": "walk"
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "args": {
-                                        "kind": "Expr::Apply::ArgumentList",
-                                        "loc": null,
-                                        "children": [
-                                          {
-                                            "kind": "Argument",
-                                            "loc": null,
-                                            "children": {
-                                              "value": {
-                                                "kind": "Expr::Ident",
-                                                "loc": null,
-                                                "children": {
-                                                  "id": {
-                                                    "kind": "Var",
+                                                  "name": {
+                                                    "kind": "LongIdent::Ident",
                                                     "loc": null,
                                                     "children": {
-                                                      "name": {
-                                                        "kind": "LongIdent::Ident",
-                                                        "loc": null,
-                                                        "children": {
-                                                          "value": "self"
-                                                        }
-                                                      }
+                                                      "value": "walk"
                                                     }
                                                   }
                                                 }
-                                              },
-                                              "kind": {
-                                                "kind": "ArgumentKind::Positional",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           },
-                                          {
-                                            "kind": "Argument",
+                                          "args": {
+                                            "kind": "Expr::Apply::ArgumentList",
                                             "loc": null,
-                                            "children": {
-                                              "value": {
-                                                "kind": "Expr::Ident",
+                                            "children": [
+                                              {
+                                                "kind": "Argument",
                                                 "loc": null,
                                                 "children": {
-                                                  "id": {
-                                                    "kind": "Var",
+                                                  "value": {
+                                                    "kind": "Expr::Ident",
                                                     "loc": null,
                                                     "children": {
-                                                      "name": {
-                                                        "kind": "LongIdent::Ident",
+                                                      "id": {
+                                                        "kind": "Var",
                                                         "loc": null,
                                                         "children": {
-                                                          "value": "tree"
+                                                          "name": {
+                                                            "kind": "LongIdent::Ident",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "value": "self"
+                                                            }
+                                                          }
                                                         }
                                                       }
                                                     }
+                                                  },
+                                                  "kind": {
+                                                    "kind": "ArgumentKind::Positional",
+                                                    "loc": null,
+                                                    "children": {}
                                                   }
                                                 }
                                               },
-                                              "kind": {
-                                                "kind": "ArgumentKind::Positional",
+                                              {
+                                                "kind": "Argument",
                                                 "loc": null,
-                                                "children": {}
+                                                "children": {
+                                                  "value": {
+                                                    "kind": "Expr::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "id": {
+                                                        "kind": "Var",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "name": {
+                                                            "kind": "LongIdent::Ident",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "value": "tree"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "kind": {
+                                                    "kind": "ArgumentKind::Positional",
+                                                    "loc": null,
+                                                    "children": {}
+                                                  }
+                                                }
                                               }
-                                            }
+                                            ]
+                                          },
+                                          "attr": {
+                                            "kind": "ApplyAttr::NoAttr",
+                                            "loc": null,
+                                            "children": {}
                                           }
-                                        ]
+                                        }
                                       },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
+                                      "group": {
+                                        "kind": "Group::Brace",
                                         "loc": null,
                                         "children": {}
                                       }
@@ -4360,7 +4382,7 @@
                                     "children": {}
                                   },
                                   "kind": {
-                                    "kind": "FnKind::Lambda",
+                                    "kind": "FnKind::Arrow",
                                     "loc": null,
                                     "children": {}
                                   },
@@ -5160,308 +5182,155 @@
                                 ]
                               },
                               "body": {
-                                "kind": "Expr::Pipe",
+                                "kind": "Expr::Group",
                                 "loc": null,
                                 "children": {
-                                  "lhs": {
-                                    "kind": "Expr::DotApply",
+                                  "expr": {
+                                    "kind": "Expr::Pipe",
                                     "loc": null,
                                     "children": {
-                                      "self": {
-                                        "kind": "Expr::Ident",
+                                      "lhs": {
+                                        "kind": "Expr::DotApply",
                                         "loc": null,
                                         "children": {
-                                          "id": {
-                                            "kind": "Var",
+                                          "self": {
+                                            "kind": "Expr::Ident",
                                             "loc": null,
                                             "children": {
-                                              "name": {
-                                                "kind": "LongIdent::Ident",
+                                              "id": {
+                                                "kind": "Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "value": "iter"
+                                                  "name": {
+                                                    "kind": "LongIdent::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "value": "iter"
+                                                    }
+                                                  }
                                                 }
                                               }
                                             }
-                                          }
-                                        }
-                                      },
-                                      "method_name": {
-                                        "kind": "Label",
-                                        "loc": null,
-                                        "children": {
-                                          "name": "run"
-                                        }
-                                      },
-                                      "args": {
-                                        "kind": "Expr::DotApply::ArgList",
-                                        "loc": null,
-                                        "children": [
-                                          {
-                                            "kind": "Argument",
+                                          },
+                                          "method_name": {
+                                            "kind": "Label",
                                             "loc": null,
                                             "children": {
-                                              "value": {
-                                                "kind": "Expr::Function",
+                                              "name": "run"
+                                            }
+                                          },
+                                          "args": {
+                                            "kind": "Expr::DotApply::ArgList",
+                                            "loc": null,
+                                            "children": [
+                                              {
+                                                "kind": "Argument",
                                                 "loc": null,
                                                 "children": {
-                                                  "func": {
-                                                    "kind": "Func::Lambda",
+                                                  "value": {
+                                                    "kind": "Expr::Function",
                                                     "loc": null,
                                                     "children": {
-                                                      "parameters": {
-                                                        "kind": "Func::Lambda::ParameterList",
-                                                        "loc": null,
-                                                        "children": [
-                                                          {
-                                                            "kind": "Parameter::Positional",
-                                                            "loc": null,
-                                                            "children": {
-                                                              "binder": {
-                                                                "kind": "Binder",
-                                                                "loc": null,
-                                                                "children": {
-                                                                  "name": "v"
-                                                                }
-                                                              },
-                                                              "ty": null
-                                                            }
-                                                          }
-                                                        ]
-                                                      },
-                                                      "body": {
-                                                        "kind": "Expr::Apply",
+                                                      "func": {
+                                                        "kind": "Func::Lambda",
                                                         "loc": null,
                                                         "children": {
-                                                          "func": {
-                                                            "kind": "Expr::Ident",
-                                                            "loc": null,
-                                                            "children": {
-                                                              "id": {
-                                                                "kind": "Var",
-                                                                "loc": null,
-                                                                "children": {
-                                                                  "name": {
-                                                                    "kind": "LongIdent::Ident",
-                                                                    "loc": null,
-                                                                    "children": {
-                                                                      "value": "callcc"
-                                                                    }
-                                                                  }
-                                                                }
-                                                              }
-                                                            }
-                                                          },
-                                                          "args": {
-                                                            "kind": "Expr::Apply::ArgumentList",
+                                                          "parameters": {
+                                                            "kind": "Func::Lambda::ParameterList",
                                                             "loc": null,
                                                             "children": [
                                                               {
-                                                                "kind": "Argument",
+                                                                "kind": "Parameter::Positional",
                                                                 "loc": null,
                                                                 "children": {
-                                                                  "value": {
-                                                                    "kind": "Expr::Function",
+                                                                  "binder": {
+                                                                    "kind": "Binder",
                                                                     "loc": null,
                                                                     "children": {
-                                                                      "func": {
-                                                                        "kind": "Func::Lambda",
+                                                                      "name": "v"
+                                                                    }
+                                                                  },
+                                                                  "ty": null
+                                                                }
+                                                              }
+                                                            ]
+                                                          },
+                                                          "body": {
+                                                            "kind": "Expr::Group",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "expr": {
+                                                                "kind": "Expr::Apply",
+                                                                "loc": null,
+                                                                "children": {
+                                                                  "func": {
+                                                                    "kind": "Expr::Ident",
+                                                                    "loc": null,
+                                                                    "children": {
+                                                                      "id": {
+                                                                        "kind": "Var",
                                                                         "loc": null,
                                                                         "children": {
-                                                                          "parameters": {
-                                                                            "kind": "Func::Lambda::ParameterList",
-                                                                            "loc": null,
-                                                                            "children": [
-                                                                              {
-                                                                                "kind": "Parameter::Positional",
-                                                                                "loc": null,
-                                                                                "children": {
-                                                                                  "binder": {
-                                                                                    "kind": "Binder",
-                                                                                    "loc": null,
-                                                                                    "children": {
-                                                                                      "name": "k"
-                                                                                    }
-                                                                                  },
-                                                                                  "ty": null
-                                                                                }
-                                                                              }
-                                                                            ]
-                                                                          },
-                                                                          "body": {
-                                                                            "kind": "Expr::Sequence",
+                                                                          "name": {
+                                                                            "kind": "LongIdent::Ident",
                                                                             "loc": null,
                                                                             "children": {
-                                                                              "exprs": {
-                                                                                "kind": "Expr::Sequence::ExprList",
-                                                                                "loc": null,
-                                                                                "children": [
-                                                                                  {
-                                                                                    "kind": "Expr::Mutate",
-                                                                                    "loc": null,
-                                                                                    "children": {
-                                                                                      "record": {
-                                                                                        "kind": "Expr::Ident",
-                                                                                        "loc": null,
-                                                                                        "children": {
-                                                                                          "id": {
-                                                                                            "kind": "Var",
-                                                                                            "loc": null,
-                                                                                            "children": {
-                                                                                              "name": {
-                                                                                                "kind": "LongIdent::Ident",
-                                                                                                "loc": null,
-                                                                                                "children": {
-                                                                                                  "value": "self"
-                                                                                                }
-                                                                                              }
-                                                                                            }
-                                                                                          }
-                                                                                        }
-                                                                                      },
-                                                                                      "accessor": {
-                                                                                        "kind": "Accessor::Label",
-                                                                                        "loc": null,
-                                                                                        "children": {
-                                                                                          "value": {
-                                                                                            "kind": "Label",
-                                                                                            "loc": null,
-                                                                                            "children": {
-                                                                                              "name": "value"
-                                                                                            }
-                                                                                          }
-                                                                                        }
-                                                                                      },
-                                                                                      "field": {
-                                                                                        "kind": "Expr::Apply",
-                                                                                        "loc": null,
-                                                                                        "children": {
-                                                                                          "func": {
-                                                                                            "kind": "Expr::Constr",
-                                                                                            "loc": null,
-                                                                                            "children": {
-                                                                                              "constr": {
-                                                                                                "kind": "Constructor",
-                                                                                                "loc": null,
-                                                                                                "children": {
-                                                                                                  "name": {
-                                                                                                    "kind": "ConstrName",
-                                                                                                    "loc": null,
-                                                                                                    "children": {
-                                                                                                      "name": "Some"
-                                                                                                    }
-                                                                                                  },
-                                                                                                  "extra_info": {
-                                                                                                    "kind": "ConstructorExtraInfo::NoExtraInfo",
-                                                                                                    "loc": null,
-                                                                                                    "children": {}
-                                                                                                  }
-                                                                                                }
-                                                                                              }
-                                                                                            }
-                                                                                          },
-                                                                                          "args": {
-                                                                                            "kind": "Expr::Apply::ArgumentList",
-                                                                                            "loc": null,
-                                                                                            "children": [
-                                                                                              {
-                                                                                                "kind": "Argument",
-                                                                                                "loc": null,
-                                                                                                "children": {
-                                                                                                  "value": {
-                                                                                                    "kind": "Expr::Ident",
-                                                                                                    "loc": null,
-                                                                                                    "children": {
-                                                                                                      "id": {
-                                                                                                        "kind": "Var",
-                                                                                                        "loc": null,
-                                                                                                        "children": {
-                                                                                                          "name": {
-                                                                                                            "kind": "LongIdent::Ident",
-                                                                                                            "loc": null,
-                                                                                                            "children": {
-                                                                                                              "value": "v"
-                                                                                                            }
-                                                                                                          }
-                                                                                                        }
-                                                                                                      }
-                                                                                                    }
-                                                                                                  },
-                                                                                                  "kind": {
-                                                                                                    "kind": "ArgumentKind::Positional",
-                                                                                                    "loc": null,
-                                                                                                    "children": {}
-                                                                                                  }
-                                                                                                }
-                                                                                              }
-                                                                                            ]
-                                                                                          },
-                                                                                          "attr": {
-                                                                                            "kind": "ApplyAttr::NoAttr",
-                                                                                            "loc": null,
-                                                                                            "children": {}
-                                                                                          }
-                                                                                        }
-                                                                                      },
-                                                                                      "augmented_by": null
-                                                                                    }
-                                                                                  }
-                                                                                ]
-                                                                              },
-                                                                              "last_expr": {
-                                                                                "kind": "Expr::Mutate",
+                                                                              "value": "callcc"
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  },
+                                                                  "args": {
+                                                                    "kind": "Expr::Apply::ArgumentList",
+                                                                    "loc": null,
+                                                                    "children": [
+                                                                      {
+                                                                        "kind": "Argument",
+                                                                        "loc": null,
+                                                                        "children": {
+                                                                          "value": {
+                                                                            "kind": "Expr::Function",
+                                                                            "loc": null,
+                                                                            "children": {
+                                                                              "func": {
+                                                                                "kind": "Func::Lambda",
                                                                                 "loc": null,
                                                                                 "children": {
-                                                                                  "record": {
-                                                                                    "kind": "Expr::Ident",
+                                                                                  "parameters": {
+                                                                                    "kind": "Func::Lambda::ParameterList",
                                                                                     "loc": null,
-                                                                                    "children": {
-                                                                                      "id": {
-                                                                                        "kind": "Var",
+                                                                                    "children": [
+                                                                                      {
+                                                                                        "kind": "Parameter::Positional",
                                                                                         "loc": null,
                                                                                         "children": {
-                                                                                          "name": {
-                                                                                            "kind": "LongIdent::Ident",
+                                                                                          "binder": {
+                                                                                            "kind": "Binder",
                                                                                             "loc": null,
                                                                                             "children": {
-                                                                                              "value": "self"
+                                                                                              "name": "k"
                                                                                             }
-                                                                                          }
-                                                                                        }
-                                                                                      }
-                                                                                    }
-                                                                                  },
-                                                                                  "accessor": {
-                                                                                    "kind": "Accessor::Label",
-                                                                                    "loc": null,
-                                                                                    "children": {
-                                                                                      "value": {
-                                                                                        "kind": "Label",
-                                                                                        "loc": null,
-                                                                                        "children": {
-                                                                                          "name": "next"
-                                                                                        }
-                                                                                      }
-                                                                                    }
-                                                                                  },
-                                                                                  "field": {
-                                                                                    "kind": "Expr::Function",
-                                                                                    "loc": null,
-                                                                                    "children": {
-                                                                                      "func": {
-                                                                                        "kind": "Func::Lambda",
-                                                                                        "loc": null,
-                                                                                        "children": {
-                                                                                          "parameters": {
-                                                                                            "kind": "Func::Lambda::ParameterList",
-                                                                                            "loc": null,
-                                                                                            "children": []
                                                                                           },
-                                                                                          "body": {
-                                                                                            "kind": "Expr::Apply",
+                                                                                          "ty": null
+                                                                                        }
+                                                                                      }
+                                                                                    ]
+                                                                                  },
+                                                                                  "body": {
+                                                                                    "kind": "Expr::Sequence",
+                                                                                    "loc": null,
+                                                                                    "children": {
+                                                                                      "exprs": {
+                                                                                        "kind": "Expr::Sequence::ExprList",
+                                                                                        "loc": null,
+                                                                                        "children": [
+                                                                                          {
+                                                                                            "kind": "Expr::Mutate",
                                                                                             "loc": null,
                                                                                             "children": {
-                                                                                              "func": {
+                                                                                              "record": {
                                                                                                 "kind": "Expr::Ident",
                                                                                                 "loc": null,
                                                                                                 "children": {
@@ -5473,168 +5342,343 @@
                                                                                                         "kind": "LongIdent::Ident",
                                                                                                         "loc": null,
                                                                                                         "children": {
-                                                                                                          "value": "k"
+                                                                                                          "value": "self"
                                                                                                         }
                                                                                                       }
                                                                                                     }
                                                                                                   }
                                                                                                 }
                                                                                               },
-                                                                                              "args": {
-                                                                                                "kind": "Expr::Apply::ArgumentList",
+                                                                                              "accessor": {
+                                                                                                "kind": "Accessor::Label",
                                                                                                 "loc": null,
-                                                                                                "children": [
-                                                                                                  {
-                                                                                                    "kind": "Argument",
+                                                                                                "children": {
+                                                                                                  "value": {
+                                                                                                    "kind": "Label",
                                                                                                     "loc": null,
                                                                                                     "children": {
-                                                                                                      "value": {
-                                                                                                        "kind": "Expr::Constr",
+                                                                                                      "name": "value"
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              },
+                                                                                              "field": {
+                                                                                                "kind": "Expr::Apply",
+                                                                                                "loc": null,
+                                                                                                "children": {
+                                                                                                  "func": {
+                                                                                                    "kind": "Expr::Constr",
+                                                                                                    "loc": null,
+                                                                                                    "children": {
+                                                                                                      "constr": {
+                                                                                                        "kind": "Constructor",
                                                                                                         "loc": null,
                                                                                                         "children": {
-                                                                                                          "constr": {
-                                                                                                            "kind": "Constructor",
+                                                                                                          "name": {
+                                                                                                            "kind": "ConstrName",
+                                                                                                            "loc": null,
+                                                                                                            "children": {
+                                                                                                              "name": "Some"
+                                                                                                            }
+                                                                                                          },
+                                                                                                          "extra_info": {
+                                                                                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                                                                                            "loc": null,
+                                                                                                            "children": {}
+                                                                                                          }
+                                                                                                        }
+                                                                                                      }
+                                                                                                    }
+                                                                                                  },
+                                                                                                  "args": {
+                                                                                                    "kind": "Expr::Apply::ArgumentList",
+                                                                                                    "loc": null,
+                                                                                                    "children": [
+                                                                                                      {
+                                                                                                        "kind": "Argument",
+                                                                                                        "loc": null,
+                                                                                                        "children": {
+                                                                                                          "value": {
+                                                                                                            "kind": "Expr::Ident",
+                                                                                                            "loc": null,
+                                                                                                            "children": {
+                                                                                                              "id": {
+                                                                                                                "kind": "Var",
+                                                                                                                "loc": null,
+                                                                                                                "children": {
+                                                                                                                  "name": {
+                                                                                                                    "kind": "LongIdent::Ident",
+                                                                                                                    "loc": null,
+                                                                                                                    "children": {
+                                                                                                                      "value": "v"
+                                                                                                                    }
+                                                                                                                  }
+                                                                                                                }
+                                                                                                              }
+                                                                                                            }
+                                                                                                          },
+                                                                                                          "kind": {
+                                                                                                            "kind": "ArgumentKind::Positional",
+                                                                                                            "loc": null,
+                                                                                                            "children": {}
+                                                                                                          }
+                                                                                                        }
+                                                                                                      }
+                                                                                                    ]
+                                                                                                  },
+                                                                                                  "attr": {
+                                                                                                    "kind": "ApplyAttr::NoAttr",
+                                                                                                    "loc": null,
+                                                                                                    "children": {}
+                                                                                                  }
+                                                                                                }
+                                                                                              },
+                                                                                              "augmented_by": null
+                                                                                            }
+                                                                                          }
+                                                                                        ]
+                                                                                      },
+                                                                                      "last_expr": {
+                                                                                        "kind": "Expr::Mutate",
+                                                                                        "loc": null,
+                                                                                        "children": {
+                                                                                          "record": {
+                                                                                            "kind": "Expr::Ident",
+                                                                                            "loc": null,
+                                                                                            "children": {
+                                                                                              "id": {
+                                                                                                "kind": "Var",
+                                                                                                "loc": null,
+                                                                                                "children": {
+                                                                                                  "name": {
+                                                                                                    "kind": "LongIdent::Ident",
+                                                                                                    "loc": null,
+                                                                                                    "children": {
+                                                                                                      "value": "self"
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          },
+                                                                                          "accessor": {
+                                                                                            "kind": "Accessor::Label",
+                                                                                            "loc": null,
+                                                                                            "children": {
+                                                                                              "value": {
+                                                                                                "kind": "Label",
+                                                                                                "loc": null,
+                                                                                                "children": {
+                                                                                                  "name": "next"
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          },
+                                                                                          "field": {
+                                                                                            "kind": "Expr::Function",
+                                                                                            "loc": null,
+                                                                                            "children": {
+                                                                                              "func": {
+                                                                                                "kind": "Func::Lambda",
+                                                                                                "loc": null,
+                                                                                                "children": {
+                                                                                                  "parameters": {
+                                                                                                    "kind": "Func::Lambda::ParameterList",
+                                                                                                    "loc": null,
+                                                                                                    "children": []
+                                                                                                  },
+                                                                                                  "body": {
+                                                                                                    "kind": "Expr::Apply",
+                                                                                                    "loc": null,
+                                                                                                    "children": {
+                                                                                                      "func": {
+                                                                                                        "kind": "Expr::Ident",
+                                                                                                        "loc": null,
+                                                                                                        "children": {
+                                                                                                          "id": {
+                                                                                                            "kind": "Var",
                                                                                                             "loc": null,
                                                                                                             "children": {
                                                                                                               "name": {
-                                                                                                                "kind": "ConstrName",
+                                                                                                                "kind": "LongIdent::Ident",
                                                                                                                 "loc": null,
                                                                                                                 "children": {
-                                                                                                                  "name": "IterContinue"
+                                                                                                                  "value": "k"
                                                                                                                 }
-                                                                                                              },
-                                                                                                              "extra_info": {
-                                                                                                                "kind": "ConstructorExtraInfo::NoExtraInfo",
-                                                                                                                "loc": null,
-                                                                                                                "children": {}
                                                                                                               }
                                                                                                             }
                                                                                                           }
                                                                                                         }
                                                                                                       },
-                                                                                                      "kind": {
-                                                                                                        "kind": "ArgumentKind::Positional",
+                                                                                                      "args": {
+                                                                                                        "kind": "Expr::Apply::ArgumentList",
+                                                                                                        "loc": null,
+                                                                                                        "children": [
+                                                                                                          {
+                                                                                                            "kind": "Argument",
+                                                                                                            "loc": null,
+                                                                                                            "children": {
+                                                                                                              "value": {
+                                                                                                                "kind": "Expr::Constr",
+                                                                                                                "loc": null,
+                                                                                                                "children": {
+                                                                                                                  "constr": {
+                                                                                                                    "kind": "Constructor",
+                                                                                                                    "loc": null,
+                                                                                                                    "children": {
+                                                                                                                      "name": {
+                                                                                                                        "kind": "ConstrName",
+                                                                                                                        "loc": null,
+                                                                                                                        "children": {
+                                                                                                                          "name": "IterContinue"
+                                                                                                                        }
+                                                                                                                      },
+                                                                                                                      "extra_info": {
+                                                                                                                        "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                                                                                                        "loc": null,
+                                                                                                                        "children": {}
+                                                                                                                      }
+                                                                                                                    }
+                                                                                                                  }
+                                                                                                                }
+                                                                                                              },
+                                                                                                              "kind": {
+                                                                                                                "kind": "ArgumentKind::Positional",
+                                                                                                                "loc": null,
+                                                                                                                "children": {}
+                                                                                                              }
+                                                                                                            }
+                                                                                                          }
+                                                                                                        ]
+                                                                                                      },
+                                                                                                      "attr": {
+                                                                                                        "kind": "ApplyAttr::NoAttr",
                                                                                                         "loc": null,
                                                                                                         "children": {}
                                                                                                       }
                                                                                                     }
-                                                                                                  }
-                                                                                                ]
-                                                                                              },
-                                                                                              "attr": {
-                                                                                                "kind": "ApplyAttr::NoAttr",
-                                                                                                "loc": null,
-                                                                                                "children": {}
+                                                                                                  },
+                                                                                                  "return_type": null,
+                                                                                                  "error_type": {
+                                                                                                    "kind": "ErrorType::NoErrorType",
+                                                                                                    "loc": null,
+                                                                                                    "children": {}
+                                                                                                  },
+                                                                                                  "kind": {
+                                                                                                    "kind": "FnKind::Lambda",
+                                                                                                    "loc": null,
+                                                                                                    "children": {}
+                                                                                                  },
+                                                                                                  "has_error": null,
+                                                                                                  "is_async": null
+                                                                                                }
                                                                                               }
                                                                                             }
                                                                                           },
-                                                                                          "return_type": null,
-                                                                                          "error_type": {
-                                                                                            "kind": "ErrorType::NoErrorType",
-                                                                                            "loc": null,
-                                                                                            "children": {}
-                                                                                          },
-                                                                                          "kind": {
-                                                                                            "kind": "FnKind::Lambda",
-                                                                                            "loc": null,
-                                                                                            "children": {}
-                                                                                          },
-                                                                                          "has_error": null,
-                                                                                          "is_async": null
+                                                                                          "augmented_by": null
                                                                                         }
                                                                                       }
                                                                                     }
                                                                                   },
-                                                                                  "augmented_by": null
+                                                                                  "return_type": null,
+                                                                                  "error_type": {
+                                                                                    "kind": "ErrorType::NoErrorType",
+                                                                                    "loc": null,
+                                                                                    "children": {}
+                                                                                  },
+                                                                                  "kind": {
+                                                                                    "kind": "FnKind::Lambda",
+                                                                                    "loc": null,
+                                                                                    "children": {}
+                                                                                  },
+                                                                                  "has_error": null,
+                                                                                  "is_async": null
                                                                                 }
                                                                               }
                                                                             }
                                                                           },
-                                                                          "return_type": null,
-                                                                          "error_type": {
-                                                                            "kind": "ErrorType::NoErrorType",
-                                                                            "loc": null,
-                                                                            "children": {}
-                                                                          },
                                                                           "kind": {
-                                                                            "kind": "FnKind::Lambda",
+                                                                            "kind": "ArgumentKind::Positional",
                                                                             "loc": null,
                                                                             "children": {}
-                                                                          },
-                                                                          "has_error": null,
-                                                                          "is_async": null
+                                                                          }
                                                                         }
                                                                       }
-                                                                    }
+                                                                    ]
                                                                   },
-                                                                  "kind": {
-                                                                    "kind": "ArgumentKind::Positional",
+                                                                  "attr": {
+                                                                    "kind": "ApplyAttr::NoAttr",
                                                                     "loc": null,
                                                                     "children": {}
                                                                   }
                                                                 }
+                                                              },
+                                                              "group": {
+                                                                "kind": "Group::Brace",
+                                                                "loc": null,
+                                                                "children": {}
                                                               }
-                                                            ]
+                                                            }
                                                           },
-                                                          "attr": {
-                                                            "kind": "ApplyAttr::NoAttr",
+                                                          "return_type": null,
+                                                          "error_type": {
+                                                            "kind": "ErrorType::NoErrorType",
                                                             "loc": null,
                                                             "children": {}
-                                                          }
+                                                          },
+                                                          "kind": {
+                                                            "kind": "FnKind::Arrow",
+                                                            "loc": null,
+                                                            "children": {}
+                                                          },
+                                                          "has_error": null,
+                                                          "is_async": null
                                                         }
-                                                      },
-                                                      "return_type": null,
-                                                      "error_type": {
-                                                        "kind": "ErrorType::NoErrorType",
-                                                        "loc": null,
-                                                        "children": {}
-                                                      },
-                                                      "kind": {
-                                                        "kind": "FnKind::Lambda",
-                                                        "loc": null,
-                                                        "children": {}
-                                                      },
-                                                      "has_error": null,
-                                                      "is_async": null
+                                                      }
                                                     }
+                                                  },
+                                                  "kind": {
+                                                    "kind": "ArgumentKind::Positional",
+                                                    "loc": null,
+                                                    "children": {}
                                                   }
                                                 }
-                                              },
-                                              "kind": {
-                                                "kind": "ArgumentKind::Positional",
-                                                "loc": null,
-                                                "children": {}
                                               }
-                                            }
+                                            ]
+                                          },
+                                          "return_self": false,
+                                          "attr": {
+                                            "kind": "ApplyAttr::NoAttr",
+                                            "loc": null,
+                                            "children": {}
                                           }
-                                        ]
+                                        }
                                       },
-                                      "return_self": false,
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
-                                      }
-                                    }
-                                  },
-                                  "rhs": {
-                                    "kind": "Expr::Ident",
-                                    "loc": null,
-                                    "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "rhs": {
+                                        "kind": "Expr::Ident",
                                         "loc": null,
                                         "children": {
-                                          "name": {
-                                            "kind": "LongIdent::Ident",
+                                          "id": {
+                                            "kind": "Var",
                                             "loc": null,
                                             "children": {
-                                              "value": "ignore"
+                                              "name": {
+                                                "kind": "LongIdent::Ident",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": "ignore"
+                                                }
+                                              }
                                             }
                                           }
                                         }
                                       }
                                     }
+                                  },
+                                  "group": {
+                                    "kind": "Group::Brace",
+                                    "loc": null,
+                                    "children": {}
                                   }
                                 }
                               },
@@ -5645,7 +5689,7 @@
                                 "children": {}
                               },
                               "kind": {
-                                "kind": "FnKind::Lambda",
+                                "kind": "FnKind::Arrow",
                                 "loc": null,
                                 "children": {}
                               },

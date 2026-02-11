@@ -28,7 +28,7 @@ fn[X] collect(
   it : ((X) -> IterResult) -> IterResult raise?,
 ) -> Array[X] raise? {
   let result = []
-  each(it, result.push(_))
+  each(it, elem => result.push(elem))
   result
 }
 
@@ -36,7 +36,7 @@ fn[X] take(
   it : ((X) -> IterResult) -> IterResult raise?,
   n : Int
 ) -> ((X) -> IterResult) -> IterResult raise? {
-  fn (yield_) {
+  yield_ => {
     let mut i = 0
     it(fn (x) {
       if i >= n {
@@ -52,7 +52,7 @@ fn[X, Y] map(
   it : ((X) -> IterResult) -> IterResult raise?,
   f : (X) -> Y raise?
 ) -> ((Y) -> IterResult) -> IterResult raise? {
-  fn (yield_) {
+  yield_ => {
     let mut err_from_f = None
     let result = it(fn (x) {
       try f(x) catch {
@@ -60,7 +60,7 @@ fn[X, Y] map(
           err_from_f = Some(err)
           IterEnd
         }
-      } else {
+      } noraise {
         fx => yield_(fx)
       }
     })
@@ -75,7 +75,7 @@ fn[X, Y] filter_map(
   it : ((X) -> IterResult) -> IterResult raise?,
   f : (X) -> Y? raise?
 ) -> ((Y) -> IterResult) -> IterResult raise? {
-  fn (yield_) {
+  yield_ => {
     let mut err_from_f = None
     let result = it(fn (x) {
       let fx = f(x) catch {
@@ -97,7 +97,7 @@ fn[X, Y] filter_map(
 fn[X] with_last(
   it : ((X) -> IterResult) -> IterResult raise?
 ) -> (((X?, X)) -> IterResult) -> IterResult raise? {
-  fn (yield_) {
+  yield_ => {
     let mut last = None
     it(fn (x) {
       let x0 = last
@@ -125,22 +125,23 @@ fn decode_utf16(
 ) -> ((Char) -> IterResult) -> IterResult raise {
   let it = it
     |> with_last
-    |> filter_map(_, fn (pair) raise {
-      let (last, c) = pair
-      if is_low_surrogate(c) {
-        guard last is Some(c0) && is_high_surrogate(c0) else {
-          raise UnexpectedLowSurrogate
+    |> fn (pairs) { filter_map(pairs, fn (pair) raise {
+        let (last, c) = pair
+        if is_low_surrogate(c) {
+          guard last is Some(c0) && is_high_surrogate(c0) else {
+            raise UnexpectedLowSurrogate
+          }
+          Some(((c0 - 0xD800) << 10) + c - 0xDC00 + 0x10000)
+        } else if last is Some(c0) && is_high_surrogate(c0) {
+          raise MissingLowSurrogate
+        } else if is_high_surrogate(c) {
+          None
+        } else {
+          Some(c)
         }
-        Some(((c0 - 0xD800) << 10) + c - 0xDC00 + 0x10000)
-      } else if last is Some(c0) && is_high_surrogate(c0) {
-        raise MissingLowSurrogate
-      } else if is_high_surrogate(c) {
-        None
-      } else {
-        Some(c)
-      }
-    })
-  map(it, _.unsafe_to_char())
+      })
+    }
+  map(it, it => it.unsafe_to_char())
 }
 
 suberror IncompleteUTF16CodePoint derive(Show)
@@ -148,7 +149,7 @@ suberror IncompleteUTF16CodePoint derive(Show)
 fn bytes_to_utf16_code_points(
   it : ((Byte) -> IterResult) -> IterResult raise
 ) -> ((Int) -> IterResult) -> IterResult raise {
-  fn (yield_) {
+  yield_ => {
     let mut last = None
     let result = it(fn (b) {
       match last {
@@ -207,6 +208,6 @@ fn init {
     |> decode_utf16
     take(it, n) |> collect
   }
-  println(try? run([ "一二", "三四", "五六", "七八", "九十" ].map(@encoding/utf16.encode(_)), 7))
-  println(try? run([ "abcdefghij", "klmnopqrst", "uvwxyz" ].map(@encoding/utf16.encode(_)), 10))
+  println(try? run([ "一二", "三四", "五六", "七八", "九十" ].map(s => @encoding/utf16.encode(s)), 7))
+  println(try? run([ "abcdefghij", "klmnopqrst", "uvwxyz" ].map(s => @encoding/utf16.encode(s)), 10))
 }

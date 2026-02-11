@@ -285,7 +285,7 @@
                               }
                             ]
                           },
-                          "return_self": true,
+                          "return_self": false,
                           "attr": {
                             "kind": "ApplyAttr::NoAttr",
                             "loc": null,
@@ -750,7 +750,7 @@
                                       }
                                     ]
                                   },
-                                  "return_self": true,
+                                  "return_self": false,
                                   "attr": {
                                     "kind": "ApplyAttr::NoAttr",
                                     "loc": null,
@@ -1370,7 +1370,7 @@
                                       }
                                     ]
                                   },
-                                  "return_self": true,
+                                  "return_self": false,
                                   "attr": {
                                     "kind": "ApplyAttr::NoAttr",
                                     "loc": null,
@@ -2319,7 +2319,7 @@
                                       }
                                     ]
                                   },
-                                  "return_self": true,
+                                  "return_self": false,
                                   "attr": {
                                     "kind": "ApplyAttr::NoAttr",
                                     "loc": null,
@@ -3538,14 +3538,19 @@
                 }
               },
               "body": {
-                "kind": "Expr::Sequence",
+                "kind": "Expr::Let",
                 "loc": null,
                 "children": {
-                  "exprs": {
-                    "kind": "Expr::Sequence::ExprList",
+                  "pattern": {
+                    "kind": "Pattern::Any",
                     "loc": null,
-                    "children": [
-                      {
+                    "children": {}
+                  },
+                  "expr": {
+                    "kind": "Expr::DotApply",
+                    "loc": null,
+                    "children": {
+                      "self": {
                         "kind": "Expr::DotApply",
                         "loc": null,
                         "children": {
@@ -3554,45 +3559,21 @@
                             "loc": null,
                             "children": {
                               "self": {
-                                "kind": "Expr::DotApply",
+                                "kind": "Expr::Ident",
                                 "loc": null,
                                 "children": {
-                                  "self": {
-                                    "kind": "Expr::Ident",
+                                  "id": {
+                                    "kind": "Var",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "name": {
+                                        "kind": "LongIdent::Ident",
                                         "loc": null,
                                         "children": {
-                                          "name": {
-                                            "kind": "LongIdent::Ident",
-                                            "loc": null,
-                                            "children": {
-                                              "value": "dq"
-                                            }
-                                          }
+                                          "value": "dq"
                                         }
                                       }
                                     }
-                                  },
-                                  "method_name": {
-                                    "kind": "Label",
-                                    "loc": null,
-                                    "children": {
-                                      "name": "pop_back"
-                                    }
-                                  },
-                                  "args": {
-                                    "kind": "Expr::DotApply::ArgList",
-                                    "loc": null,
-                                    "children": []
-                                  },
-                                  "return_self": true,
-                                  "attr": {
-                                    "kind": "ApplyAttr::NoAttr",
-                                    "loc": null,
-                                    "children": {}
                                   }
                                 }
                               },
@@ -3635,10 +3616,28 @@
                             "children": {}
                           }
                         }
+                      },
+                      "method_name": {
+                        "kind": "Label",
+                        "loc": null,
+                        "children": {
+                          "name": "pop_back"
+                        }
+                      },
+                      "args": {
+                        "kind": "Expr::DotApply::ArgList",
+                        "loc": null,
+                        "children": []
+                      },
+                      "return_self": false,
+                      "attr": {
+                        "kind": "ApplyAttr::NoAttr",
+                        "loc": null,
+                        "children": {}
                       }
-                    ]
+                    }
                   },
-                  "last_expr": {
+                  "body": {
                     "kind": "Expr::Apply",
                     "loc": null,
                     "children": {

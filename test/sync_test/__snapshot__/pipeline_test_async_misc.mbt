@@ -7,9 +7,7 @@ async fn tuple() -> (Int, String) noraise {
 }
 
 fn init {
-  run_async(fn () {
-    println(tuple())
-  })
+  run_async(() => println(tuple()))
 }
 
 async fn switch_constant(x : Int) -> Unit noraise {
@@ -21,7 +19,7 @@ async fn switch_constant(x : Int) -> Unit noraise {
 }
 
 fn init {
-  run_async(fn () { switch_constant(42) })
+  run_async(() => switch_constant(42))
 }
 
 suberror Err
@@ -49,5 +47,5 @@ async fn join_in_loop_without_async(input : Array[Int]) -> Unit noraise {
 }
 
 fn init {
-  run_async(fn () { join_in_loop_without_async([ 1, 2, 3 ]) })
+  run_async(() => join_in_loop_without_async([ 1, 2, 3 ]))
 }

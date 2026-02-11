@@ -85,7 +85,17 @@ fn test_simple_assertions() -> Unit raise {
 }
 
 ///|
-fn init {
+fn test_emoji() -> Unit raise {
+  lexmatch "😋😋" {
+    (("." as u) ("." as v)) => {
+      assert_eq(u, '😋')
+      assert_eq(v, '😋')
+    }
+    _ => fail("mismatch")
+  }
+}
+///|
+fn main {
   println("test_firstmatch: \{try? test_firstmatch()}")
   println("test_search: \{try? test_search()}")
   println("test_multicases_firstmatch: \{try? test_multicases_firstmatch()}")
@@ -93,4 +103,6 @@ fn init {
   println("test_quantifier: \{try? test_quantifier()}")
   println("test_non_greedy_quantifier: \{try? test_non_greedy_quantifier()}")
   println("test_simple_assertions: \{try? test_simple_assertions()}")
+  // non bmp lexmatch
+  println("testemoji:\{try? test_emoji()}")  
 }

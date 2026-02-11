@@ -1831,7 +1831,7 @@
                   }
                 ]
               },
-              "return_self": true,
+              "return_self": false,
               "attr": {
                 "kind": "ApplyAttr::NoAttr",
                 "loc": null,
@@ -2238,7 +2238,7 @@
                               }
                             ]
                           },
-                          "return_self": true,
+                          "return_self": false,
                           "attr": {
                             "kind": "ApplyAttr::NoAttr",
                             "loc": null,

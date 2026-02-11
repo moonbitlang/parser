@@ -19,7 +19,7 @@ fn &Obj::default() -> &Obj {
 fn init {
   println("==== dot syntax ====")
   let obj = &Obj::default()
-  obj..f()..g()
+  obj..f().g()
   println("==== qualified call ====")
   &Obj::f(obj)
   &Obj::g(obj)

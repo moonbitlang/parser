@@ -500,7 +500,15 @@
           "attrs": {
             "kind": "FunDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#warnings(\"-unused_async\") "
+                }
+              }
+            ]
           },
           "doc": ""
         }

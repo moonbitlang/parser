@@ -46,13 +46,13 @@ struct T {
 
 fn init {
   let xs = List::from_array([1, 2, 3, 4])
-  let ys = try! map_with_error(xs, fn (x) {
+  let ys = try! map_with_error(xs, x => {
     if x < 5 { x + 1 } else { fail("too big") }
   })
   println(ys)
   let t = T::{
     a: Failure::Failure("1"),
-    b: fn (x) { if x < 5 { x - 1 } else { fail("42") } },
+    b: x => if x < 5 { x - 1 } else { fail("42") },
   }
   let zs = try! map_with_error(xs, t.b)
   println(zs)

@@ -1,3 +1,5 @@
+//!build: -w -27
+
 ///|
 fn f(a : Int, b : Bool, c : String, d : Double) -> Int {
   println("f(\{a}, \{b}, \{c}, \{d})")

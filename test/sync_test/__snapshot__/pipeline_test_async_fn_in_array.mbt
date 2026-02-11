@@ -7,12 +7,12 @@ async fn async_id(x : Int) -> Int noraise {
 
 fn main {
   let arr1 : Array[() -> Unit] = []
-  arr1..push(() => println(1))..push(() => println(2))
+  arr1..push(() => println(1)).push(() => println(2))
   for f in arr1 {
     f()
   }
   let arr2 : Array[async () -> Unit noraise] = []
-  arr2..push(() => println(async_id(1)))..push(() => println(async_id(2)))
+  arr2..push(() => println(async_id(1))).push(() => println(async_id(2)))
   for f in arr2 {
     run_async(f)
   }

@@ -18,7 +18,7 @@ fn init {
 }
 
 fn has_error() -> Unit raise {
-  each([ 1, 2, 3 ], fn (x) {
+  each([ 1, 2, 3 ], x => {
     if x % 2 == 0 {
       raise MyErr(x)
     } else {
@@ -42,7 +42,7 @@ fn rethrow(f : () -> Int raise?) -> Int raise? {
 
 fn init {
   println("===")
-  println(try? rethrow(fn () { raise MyErr(42) }))
+  println(try? rethrow(() => raise MyErr(42)))
   println(rethrow(fn () { 42 }))
 }
 
@@ -60,7 +60,7 @@ fn no_error_in_array(arr : Array[Int], f : (Int) -> Unit raise?) -> Int {
 
 fn init {
   println("===")
-  no_error_in_array([ 1, 2, 3, 4 ], fn (x) {
+  no_error_in_array([ 1, 2, 3, 4 ], x => {
     if x % 2 == 0 {
       raise MyErr(x)
     }

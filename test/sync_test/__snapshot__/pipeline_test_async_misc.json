@@ -496,7 +496,7 @@
                                 "children": {}
                               },
                               "kind": {
-                                "kind": "FnKind::Lambda",
+                                "kind": "FnKind::Arrow",
                                 "loc": null,
                                 "children": {}
                               },
@@ -1016,7 +1016,7 @@
                                 "children": {}
                               },
                               "kind": {
-                                "kind": "FnKind::Lambda",
+                                "kind": "FnKind::Arrow",
                                 "loc": null,
                                 "children": {}
                               },
@@ -2062,7 +2062,7 @@
                                 "children": {}
                               },
                               "kind": {
-                                "kind": "FnKind::Lambda",
+                                "kind": "FnKind::Arrow",
                                 "loc": null,
                                 "children": {}
                               },

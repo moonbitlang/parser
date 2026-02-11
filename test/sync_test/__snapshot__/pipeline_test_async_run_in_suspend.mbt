@@ -7,7 +7,7 @@ async fn f() -> Int noraise {
 
 async fn run_in_suspend() -> Unit noraise {
   suspend(fn (k) {
-    run_async(fn () {
+    run_async(() => {
       println(f())
     })
     k(())

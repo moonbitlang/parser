@@ -9,7 +9,7 @@ struct S {
 
 ///|
 fn f(x : FixedArray[S]) -> Int {
-  x[0].a + x[0].b.map(_.to_int()).unwrap_or(x[1].a)
+  x[0].a + x[0].b.map(n => n.to_int()).unwrap_or(x[1].a)
 }
 
 ///|

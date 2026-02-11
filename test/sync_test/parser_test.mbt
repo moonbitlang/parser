@@ -46,6 +46,11 @@ test "pipeline_test_ycombinator" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_lexmatch_no_regex" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_009" (t : @test.Test) {
   t.run()
 }
@@ -246,12 +251,6 @@ test "pipeline_test_functional_loop3" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE:
-// test "parse_test_struct_constructor" (t : @test.Test) {
-// t.run()
-// }
-
-///|
 test "pipeline_test_string_from_uint16_array" (t : @test.Test) {
   t.run()
 }
@@ -392,11 +391,6 @@ test "pipeline_test_008" (t : @test.Test) {
 }
 
 ///|
-test "parse_test_tuple_multiline_str" (t : @test.Test) {
-  t.run()
-}
-
-///|
 test "pipeline_test_return_in_async_suspend" (t : @test.Test) {
   t.run()
 }
@@ -512,10 +506,9 @@ test "pipeline_test_bitstring_rev" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE:
-// test "pipeline_test_typing_coverage_lexmatch" (t : @test.Test) {
-//   t.run()
-// }
+test "pipeline_test_typing_coverage_lexmatch" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_option_test" (t : @test.Test) {
@@ -549,11 +542,6 @@ test "pipeline_test_bad_string" (t : @test.Test) {
 
 ///|
 test "pipeline_test_trait_obj3" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_old_maybe_error_return_syntax" (t : @test.Test) {
   t.run()
 }
 
@@ -599,6 +587,11 @@ test "pipeline_test_trait_obj" (t : @test.Test) {
 
 ///|
 test "pipeline_test_is_expr_complex_cond" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_loopify_corner_case" (t : @test.Test) {
   t.run()
 }
 
@@ -829,11 +822,6 @@ test "pipeline_test_error_enum" (t : @test.Test) {
 
 ///|
 test "pipeline_test_closure4" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_postfix_label" (t : @test.Test) {
   t.run()
 }
 
@@ -1078,10 +1066,9 @@ test "pipeline_test_int64_range_pattern" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_tokenize_suffix" (t : @test.Test) {
-//   t.run()
-// }
+test "pipeline_test_tokenize_suffix" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_local_type6" (t : @test.Test) {
@@ -1199,10 +1186,9 @@ test "pipeline_test_error_poly_tail_rec" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_lexmatch_bug1" (t : @test.Test) {
-//   t.run()
-// }
+test "pipeline_test_lexmatch_bug1" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_loop_label" (t : @test.Test) {
@@ -1335,11 +1321,6 @@ test "pipeline_test_unicode_test" (t : @test.Test) {
 }
 
 ///|
-test "parse_test_attribute" (t : @test.Test) {
-  t.run()
-}
-
-///|
 test "pipeline_test_003" (t : @test.Test) {
   t.run()
 }
@@ -1376,11 +1357,6 @@ test "parse_test_field_vs_method" (t : @test.Test) {
 
 ///|
 test "pipeline_test_method1" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_range_pattern" (t : @test.Test) {
   t.run()
 }
 
@@ -1515,10 +1491,9 @@ test "pipeline_test_constr_pattern_no_payload" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_lisp_tokenizer" (t : @test.Test) {
-//  t.run()
-// }
+test "pipeline_test_lisp_tokenizer" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_mcore_inline" (t : @test.Test) {
@@ -1596,6 +1571,11 @@ test "pipeline_test_empty_file" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_lexmatch_fastpath" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_readonlyarray_recgroup" (t : @test.Test) {
   t.run()
 }
@@ -1641,6 +1621,11 @@ test "pipeline_test_trait_obj_bound" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_error_poly_iter" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_err_array_set" (t : @test.Test) {
   t.run()
 }
@@ -1656,16 +1641,14 @@ test "pipeline_test_annotation_node" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_match_regex_utf8_bug" (t : @test.Test) {
-//  t.run()
-// }
+test "pipeline_test_match_regex_utf8_bug" (t : @test.Test) {
+  t.run()
+}
 
 ///|
-// EDGE CASE
-// test "parse_test_docstring" (t : @test.Test) {
-//   t.run()
-// }
+test "parse_test_docstring" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_contify_return3" (t : @test.Test) {
@@ -1701,12 +1684,6 @@ test "parse_test_no_trailing_newline_ffi1" (t : @test.Test) {
 test "pipeline_test_disambiguation" (t : @test.Test) {
   t.run()
 }
-
-///|
-// DELAY_TO_NEXT_SYNC(original test is broken)
-// test "parse_test_error_type_question" (t : @test.Test) {
-//   t.run()
-// }
 
 ///|
 test "pipeline_test_toplevel_alias" (t : @test.Test) {
@@ -1829,10 +1806,9 @@ test "pipeline_test_enum_repr" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_dfa_state_test" (t : @test.Test) {
-//  t.run()
-// }
+test "pipeline_test_dfa_state_test" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "parse_test_operator_bitwise_or" (t : @test.Test) {
@@ -2030,11 +2006,6 @@ test "pipeline_test_newtype4" (t : @test.Test) {
 }
 
 ///|
-test "parse_test_bytes_literal" (t : @test.Test) {
-  t.run()
-}
-
-///|
 test "pipeline_test_005" (t : @test.Test) {
   t.run()
 }
@@ -2160,11 +2131,6 @@ test "pipeline_test_error_handle10" (t : @test.Test) {
 }
 
 ///|
-test "parse_test_try_expr_catch_bang" (t : @test.Test) {
-  t.run()
-}
-
-///|
 test "pipeline_test_is_lexmatch" (t : @test.Test) {
   t.run()
 }
@@ -2285,10 +2251,9 @@ test "pipeline_test_loop_arg_side_effect" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "parse_test_lexmatch_pattern_sequence_semicolon_and_regex" (t : @test.Test) {
-//   t.run()
-// }
+test "parse_test_lexmatch_pattern_sequence_semicolon_and_regex" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_specialize_local_fn" (t : @test.Test) {
@@ -2321,11 +2286,6 @@ test "pipeline_test_match_tuple" (t : @test.Test) {
 }
 
 ///|
-test "parse_test_multiline_string_literals" (t : @test.Test) {
-  t.run()
-}
-
-///|
 test "pipeline_test_return_in_join" (t : @test.Test) {
   t.run()
 }
@@ -2341,17 +2301,7 @@ test "pipeline_test_constant_error_constructor" (t : @test.Test) {
 }
 
 ///|
-// test "parse_test_traitalias_pkg_single_target" (t : @test.Test) {
-//  t.run()
-// }
-
-///|
 test "pipeline_test_value_enum_array" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_postfix_catch_all" (t : @test.Test) {
   t.run()
 }
 
@@ -2511,6 +2461,11 @@ test "pipeline_test_trait_obj_simple" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_async_trait" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_float32" (t : @test.Test) {
   t.run()
 }
@@ -2576,10 +2531,9 @@ test "pipeline_test_012" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_struct_constructor" (t : @test.Test) {
-//  t.run()
-// }
+test "pipeline_test_struct_constructor" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_match_bytes_constant" (t : @test.Test) {
@@ -2712,10 +2666,9 @@ test "parse_test_paren_constraint_pattern" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_codepoint_at" (t : @test.Test) {
-//   t.run()
-// }
+test "pipeline_test_codepoint_at" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_neg" (t : @test.Test) {
@@ -2789,11 +2742,6 @@ test "pipeline_test_record_update_typing" (t : @test.Test) {
 
 ///|
 test "pipeline_test_labelled_prim" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_function_type_with_trailing_comma" (t : @test.Test) {
   t.run()
 }
 
@@ -2943,10 +2891,9 @@ test "pipeline_test_autoloc2" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_match_using_regex_calc" (t : @test.Test) {
-//  t.run()
-// }
+test "pipeline_test_match_using_regex_calc" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_labelled_arg" (t : @test.Test) {
@@ -2970,11 +2917,6 @@ test "pipeline_test_const_label" (t : @test.Test) {
 
 ///|
 test "pipeline_test_tuple_struct_array" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_fnalias" (t : @test.Test) {
   t.run()
 }
 
@@ -3234,6 +3176,11 @@ test "pipeline_test_toplevel_pat" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_local_tuple_struct" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "parse_test_cascade" (t : @test.Test) {
   t.run()
 }
@@ -3284,10 +3231,9 @@ test "pipeline_test_error_handle6" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "parse_test_lexmatch" (t : @test.Test) {
-//  t.run()
-// }
+test "parse_test_lexmatch" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_float_inf" (t : @test.Test) {
@@ -3375,6 +3321,11 @@ test "pipeline_test_trait_method_no_self" (t : @test.Test) {
 }
 
 ///|
+test "parse_test_catch_noraise" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_newtype3" (t : @test.Test) {
   t.run()
 }
@@ -3406,6 +3357,11 @@ test "pipeline_test_int_of_error_test1" (t : @test.Test) {
 
 ///|
 test "pipeline_test_multiline_string_literals" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_error_tail" (t : @test.Test) {
   t.run()
 }
 
@@ -3481,6 +3437,11 @@ test "pipeline_test_eval_order" (t : @test.Test) {
 
 ///|
 test "pipeline_test_const_propagate" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_error_enum_match" (t : @test.Test) {
   t.run()
 }
 
@@ -3665,11 +3626,6 @@ test "pipeline_test_let_func" (t : @test.Test) {
 }
 
 ///|
-test "parse_test_async_test" (t : @test.Test) {
-  t.run()
-}
-
-///|
 test "pipeline_test_array_intrinsic" (t : @test.Test) {
   t.run()
 }
@@ -3760,6 +3716,11 @@ test "pipeline_test_valtype_indirect_rec" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_try_result_type" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_print_float" (t : @test.Test) {
   t.run()
 }
@@ -3820,10 +3781,9 @@ test "pipeline_test_bytes_utils_wasm" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_match_using_regex_wordcount" (t : @test.Test) {
-//  t.run()
-// }
+test "pipeline_test_match_using_regex_wordcount" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "parse_test_no_trailing_newline_struct" (t : @test.Test) {
@@ -3841,11 +3801,6 @@ test "pipeline_test_label_loop_foreach2" (t : @test.Test) {
 }
 
 ///|
-test "parse_test_catch_all" (t : @test.Test) {
-  t.run()
-}
-
-///|
 test "pipeline_test_trait_upcast" (t : @test.Test) {
   t.run()
 }
@@ -3857,11 +3812,6 @@ test "pipeline_test_error_no_payload" (t : @test.Test) {
 
 ///|
 test "pipeline_test_error_poly_dce" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_fn_exclamation" (t : @test.Test) {
   t.run()
 }
 
@@ -3986,10 +3936,9 @@ test "parse_test_docstring2" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_match_stringview_using_regex" (t : @test.Test) {
-//   t.run()
-// }
+test "pipeline_test_match_stringview_using_regex" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_derive_debug" (t : @test.Test) {
@@ -4177,10 +4126,9 @@ test "pipeline_test_init_order" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_lexmatch_first_guard" (t : @test.Test) {
-//  t.run()
-// }
+test "pipeline_test_lexmatch_first_guard" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_default_method" (t : @test.Test) {
@@ -4309,11 +4257,6 @@ test "pipeline_test_recursive_capture" (t : @test.Test) {
 
 ///|
 test "pipeline_test_complex_pattern_guard2" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_extern_type" (t : @test.Test) {
   t.run()
 }
 
@@ -4488,10 +4431,9 @@ test "pipeline_test_poly_record" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_lexmatch_first" (t : @test.Test) {
-//  t.run()
-// }
+test "pipeline_test_lexmatch_first" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_string_repr" (t : @test.Test) {
@@ -4529,10 +4471,9 @@ test "pipeline_test_stringview_literal" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_lexmatch_rest_bug" (t : @test.Test) {
-//  t.run()
-// }
+test "pipeline_test_lexmatch_rest_bug" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_empty_record" (t : @test.Test) {
@@ -4550,10 +4491,9 @@ test "parse_test_try_with_parentheses" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_lexmatch_unix_path" (t : @test.Test) {
-//  t.run()
-// }
+test "pipeline_test_lexmatch_unix_path" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_local_newtype_derive" (t : @test.Test) {
@@ -4612,11 +4552,6 @@ test "pipeline_test_vec_literal" (t : @test.Test) {
 
 ///|
 test "pipeline_test_share_fnsig" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_async_fn" (t : @test.Test) {
   t.run()
 }
 
@@ -4826,12 +4761,6 @@ test "pipeline_test_noraise" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "parse_test_fnname_bang" (t : @test.Test) {
-//   t.run()
-// }
-
-///|
 test "pipeline_test_test_main" (t : @test.Test) {
   t.run()
 }
@@ -4842,10 +4771,9 @@ test "pipeline_test_contify_ty_args" (t : @test.Test) {
 }
 
 ///|
-// NEED_UPDATE
-// test "pipeline_test_match_using_regex" (t : @test.Test) {
-//  t.run()
-// }
+test "pipeline_test_match_using_regex" (t : @test.Test) {
+  t.run()
+}
 
 ///|
 test "pipeline_test_async_for" (t : @test.Test) {
@@ -4854,11 +4782,6 @@ test "pipeline_test_async_for" (t : @test.Test) {
 
 ///|
 test "pipeline_test_async_misc" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_text_segment_test" (t : @test.Test) {
   t.run()
 }
 
