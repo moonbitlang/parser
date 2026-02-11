@@ -109,6 +109,7 @@
 %token USING "using"
 %token DECLARE         "declare"
 %token NORAISE "noraise"
+%token NOBREAK         "nobreak"
 %token WHERE           "where"
 %token ENUMVIEW "enumview"
 %token TRY_QUESTION    "try?"

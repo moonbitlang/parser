@@ -142,5 +142,6 @@ pub impl ToJson for Token with to_json(self) {
     RANGE_INCLUSIVE_REV => "RANGE_INCLUSIVE_REV"
     RANGE_LT_INCLUSIVE => "RANGE_LT_INCLUSIVE"
     WHERE => "WHERE"
+    NOBREAK => "NOBREAK"
   }
 }

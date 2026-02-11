@@ -115,6 +115,7 @@
 %token ENUMVIEW "enumview"
 %token DECLARE         "declare"
 %token NORAISE "noraise"
+%token NOBREAK         "nobreak"
 %token WHERE           "where"
 %token TRY_QUESTION    "try?"
 %token TRY_EXCLAMATION "try!"
