@@ -115,7 +115,8 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | USING
     | LEXMATCH
     | LEXMATCH_QUESTION
-    | WHERE => false
+    | WHERE
+    | NOBREAK => false
   }
 }
 
@@ -268,7 +269,8 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | RANGE_EXCLUSIVE_REV
     | AND
     | LEXMATCH_QUESTION
-    | WHERE => false
+    | WHERE
+    | NOBREAK => false
   }
 }
 

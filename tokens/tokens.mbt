@@ -108,6 +108,7 @@ pub(all) enum Token {
   ENUMVIEW
   DECLARE
   NORAISE
+  NOBREAK
   WHERE
   TRY_QUESTION
   TRY_EXCLAMATION
@@ -226,6 +227,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     ENUMVIEW => TK_ENUMVIEW
     DECLARE => TK_DECLARE
     NORAISE => TK_NORAISE
+    NOBREAK => TK_NOBREAK
     WHERE => TK_WHERE
     TRY_QUESTION => TK_TRY_QUESTION
     TRY_EXCLAMATION => TK_TRY_EXCLAMATION
@@ -344,6 +346,7 @@ pub(all) enum TokenKind {
   TK_ENUMVIEW
   TK_DECLARE
   TK_NORAISE
+  TK_NOBREAK
   TK_WHERE
   TK_TRY_QUESTION
   TK_TRY_EXCLAMATION
@@ -463,6 +466,7 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_ENUMVIEW => "\"enumview\""
       TK_DECLARE => "\"declare\""
       TK_NORAISE => "\"noraise\""
+      TK_NOBREAK => "\"nobreak\""
       TK_WHERE => "\"where\""
       TK_TRY_QUESTION => "\"try?\""
       TK_TRY_EXCLAMATION => "\"try!\""
