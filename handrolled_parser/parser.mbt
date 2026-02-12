@@ -2985,11 +2985,11 @@ fn State::parse_try_expr(self : Self) -> @syntax.Expr {
       State::parse_case,
     )
     |> @list.from_array
-  let (try_else, else_loc) = if self.peek_token() is (ELSE | NORAISE) {
+  let (try_else, else_loc) = if self.peek_token() is NORAISE {
     let else_spos = self.peek_spos()
     self.skip()
     let lbrace_epos = self.peek_epos()
-    // the else_loc is the location of `else {` or `noraise {`
+    // the else_loc is the location of `noraise {`
     let else_loc : Location = { start: else_spos, end: lbrace_epos }
     let try_else_cases = self.surround_series(
         invalid_delims=[TK_COMMA],
@@ -3658,16 +3658,34 @@ fn State::parse_simple_try_expr(
           State::parse_case,
         )
         |> @list.from_array
+      let (try_else, else_loc) = if self.peek_token() is NORAISE {
+        let else_spos = self.peek_spos()
+        self.skip()
+        let lbrace_epos = self.peek_epos()
+        // the else_loc is the location of `else {` or `noraise {`
+        let else_loc : Location = { start: else_spos, end: lbrace_epos }
+        let try_else_cases = self.surround_series(
+            invalid_delims=[TK_COMMA],
+            left=TK_LBRACE,
+            right=TK_RBRACE,
+            delim=TK_SEMI,
+            State::parse_case,
+          )
+          |> @list.from_array
+        (Some(try_else_cases), else_loc)
+      } else {
+        (None, @syntax.no_location)
+      }
       let loc = self.loc_start_with(spos)
       Try(
         body=e,
         catch_=catch_cases,
         catch_all~,
-        try_else=None,
+        try_else~,
         has_try=false,
         try_loc=catch_loc,
         catch_loc~,
-        else_loc=@syntax.no_location,
+        else_loc~,
         loc~,
       )
     }

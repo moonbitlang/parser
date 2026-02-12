@@ -1504,6 +1504,21 @@ simple_try_expr -> Expr
       loc = mk_loc($sloc)
     )
   }
+  | pipe_expr catch_keyword single_pattern_cases "}" else_keyword single_pattern_cases "}" {
+    let (catch_all, catch_loc) = $2
+    let else_loc = $5
+    Try(
+      body = $1,
+      catch_ = $3,
+      catch_all~,
+      try_else = Some($6),
+      has_try = false,
+      try_loc = mk_loc($loc($1)),
+      catch_loc~,
+      else_loc~,
+      loc = mk_loc($sloc)
+    )
+  }
   | pipe_expr { $1 }
   ;
 
