@@ -1338,7 +1338,16 @@ lex_case -> LexCase :
     LexCase::{
       pat : $1,
       pat_loc : mk_loc($loc($1)),
+      guard_ : None,
       body : $3
+    }
+  }
+  | lex_pattern "if" infix_expr "=>" expr_statement {
+    LexCase::{
+      pat : $1,
+      pat_loc : mk_loc($loc($1)),
+      guard_ : Some($3),
+      body : $5
     }
   }
   | "..." {
@@ -1346,6 +1355,7 @@ lex_case -> LexCase :
     LexCase::{
       pat,
       pat_loc : mk_loc($sloc),
+      guard_ : None,
       body : Hole(loc=mk_loc($sloc), kind=Todo)
     }
   }

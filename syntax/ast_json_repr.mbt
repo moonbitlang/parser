@@ -1506,6 +1506,7 @@ pub fn LexCase::json_repr(self : LexCase, loc : Location) -> Json {
     ) {
       ltp.json_repr(self.pat_loc)
     }),
+    "guard": option_json_repr(self.guard_, Expr::json_repr),
     "body": self.body.json_repr(),
   })
 }
