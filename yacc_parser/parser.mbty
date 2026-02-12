@@ -334,6 +334,7 @@ fun_header -> FunDecl
       vis: $2,
       doc: DocString::empty(),
       attrs: $1,
+      loc : mk_loc($loc)
     }
   }
   ;
@@ -355,6 +356,7 @@ declare_fun_header -> FunDecl
       vis: $3,
       doc: DocString::empty(),
       attrs: $1,
+      loc : mk_loc($loc)
     }
   }
 
@@ -368,7 +370,7 @@ local_type_decl -> LocalTypeDecl
     LocalTypeDecl::{
       tycon : $2,
       tycon_loc : mk_loc($loc($2)),
-      components: Record($4),
+      components: Record(fields = $4, constr_decl = None),
       deriving: $6
     }
   }
@@ -415,6 +417,7 @@ extern_fun_header -> (StringLiteral, FunDecl)
       vis: $2,
       doc: DocString::empty(),
       attrs: $1,
+      loc : mk_loc($loc)
     }
     ($4, fn_decl)
   }
@@ -548,14 +551,15 @@ structure_item -> Impl
       }
     )
   }
-  | struct_header "{" list_semis(record_decl_field) "}" deriving_directive_list {
+  | struct_header "{" record_decl_body "}" deriving_directive_list {
     let (attrs, type_vis, tycon, tycon_loc, params) = $1
+    let (fields, constr_decl) = $3
     TopTypeDef(
       TypeDecl::{
         tycon,
         tycon_loc,
         params,
-        components: Record($3),
+        components: Record(fields~, constr_decl~),
         type_vis,
         doc : DocString::empty(),
         deriving: $5,
@@ -2165,6 +2169,40 @@ record_decl_field -> FieldDecl
     }
   }
   ;
+
+record_constr_decl -> FunDecl
+  : attributes is_async "fn" optional_type_parameters binder "(" list_commas(trait_method_param) ")" func_return_type {
+    let (return_type, error_type) = $9
+    FunDecl::{
+      type_name : None,
+      name : $5,
+      has_error : None,
+      is_async : $2,
+      quantifiers: $4,
+      decl_params: Some($7),
+      params_loc: mk_loc($loc($7)),
+      return_type,
+      error_type,
+      vis: Default,
+      doc: DocString::empty(),
+      attrs: $1,
+      loc : mk_loc($loc)
+    }
+  }
+
+record_decl_body -> (List[FieldDecl], FunDecl?)
+  : record_constr_decl option(SEMI) {
+    (@list.empty(), Some($1))
+  }
+  | {
+    (@list.empty(), None)
+  }
+  | non_empty_list_semi_rev_aux(record_decl_field) SEMI record_constr_decl option(SEMI) {
+    ($1.rev(), Some($3))
+  }
+  | non_empty_list_semi_rev_aux(record_decl_field) option(SEMI) {
+    ($1.rev(), None)
+  }
 
 constructor_param -> ConstrParam
   : option("mut") type_ { 

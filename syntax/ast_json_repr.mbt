@@ -181,16 +181,31 @@ pub fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
         ),
       )
     }
-    Record(fields) =>
-      tagged_node1(
+    Record(fields~, constr_decl~) =>
+      tagged_node(
         "TypeDesc::Record",
         loc,
-        list_json_repr(
-          "TypeDesc::Record::FieldList",
-          loc,
-          fields,
-          FieldDecl::json_repr,
-        ),
+        match constr_decl {
+          None =>
+            {
+              "value": list_json_repr(
+                "TypeDesc::Record::FieldList",
+                loc,
+                fields,
+                FieldDecl::json_repr,
+              ),
+            }
+          Some(constr_decl) =>
+            {
+              "value": list_json_repr(
+                "TypeDesc::Record::FieldList",
+                loc,
+                fields,
+                FieldDecl::json_repr,
+              ),
+              "constr_decl": constr_decl.json_repr(),
+            }
+        },
       )
     TupleStruct(tys) => {
       let tys_loc = match tys {
@@ -887,8 +902,8 @@ pub fn TypeDecl::json_repr(self : TypeDecl) -> Json {
 }
 
 ///|
-pub fn FunDecl::json_repr(self : FunDecl, loc : Location) -> Json {
-  tagged_node("FunDecl", loc, {
+pub fn FunDecl::json_repr(self : FunDecl) -> Json {
+  tagged_node("FunDecl", self.loc, {
     "type_name": option_json_repr(self.type_name, TypeName::json_repr),
     "name": self.name.json_repr(),
     "has_error": option_json_repr(self.has_error, raise_json_repr),
@@ -908,7 +923,7 @@ pub fn FunDecl::json_repr(self : FunDecl, loc : Location) -> Json {
       TypeVarBinder::json_repr,
     ),
     "return_type": option_json_repr(self.return_type, Type::json_repr),
-    "error_type": self.error_type.json_repr(loc),
+    "error_type": self.error_type.json_repr(self.loc),
     "vis": self.vis.json_repr(self.params_loc),
     "attrs": list_json_repr(
       "FunDecl::AttrList",
@@ -1636,7 +1651,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       tagged_node1("Impl::TopTypeDef", type_decl.loc, type_decl.json_repr())
     TopFuncDef(fun_decl~, decl_body~, loc~) =>
       tagged_node("Impl::TopFuncDef", loc, {
-        "fun_decl": fun_decl.json_repr(loc),
+        "fun_decl": fun_decl.json_repr(),
         "decl_body": decl_body.json_repr(loc),
       })
     TopFuncAlias(pkg~, type_name~, targets~, vis~, attrs~, is_list~, doc~, loc~) =>

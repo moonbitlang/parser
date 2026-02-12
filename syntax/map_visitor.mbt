@@ -77,7 +77,11 @@ pub(open) trait MapVisitor {
   visit_TypeDesc_Newtype(Self, Type) -> TypeDesc = _
   visit_TypeDesc_Error(Self, ExceptionDecl) -> TypeDesc = _
   visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> TypeDesc = _
-  visit_TypeDesc_Record(Self, @list.List[FieldDecl]) -> TypeDesc = _
+  visit_TypeDesc_Record(
+    Self,
+    fields~ : @list.List[FieldDecl],
+    constr_decl~ : FunDecl?,
+  ) -> TypeDesc = _
   visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> TypeDesc = _
   visit_TypeDesc_Alias(Self, Type) -> TypeDesc = _
 
@@ -1602,8 +1606,8 @@ impl MapVisitor with visit_TypeDesc_Variant(env, constr_decls) {
 }
 
 ///|
-impl MapVisitor with visit_TypeDesc_Record(env, field_decls) {
-  MapVisitorBase::visit_TypeDesc_Record(env, field_decls)
+impl MapVisitor with visit_TypeDesc_Record(env, fields~, constr_decl~) {
+  MapVisitorBase::visit_TypeDesc_Record(env, fields~, constr_decl~)
 }
 
 ///|
@@ -2682,7 +2686,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc(
     Newtype(type_) => env.0.visit_TypeDesc_Newtype(type_)
     Error(exception_decl) => env.0.visit_TypeDesc_Error(exception_decl)
     Variant(constr_decls) => env.0.visit_TypeDesc_Variant(constr_decls)
-    Record(field_decls) => env.0.visit_TypeDesc_Record(field_decls)
+    Record(fields~, constr_decl~) =>
+      env.0.visit_TypeDesc_Record(fields~, constr_decl~)
     TupleStruct(types) => env.0.visit_TypeDesc_TupleStruct(types)
     Alias(type_) => env.0.visit_TypeDesc_Alias(type_)
   }
@@ -2718,10 +2723,12 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Va
 ///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Record(
   env,
-  field_decls,
+  fields~,
+  constr_decl~,
 ) {
-  let field_decls = field_decls.map(x => env.0.visit_FieldDecl(x))
-  Record(field_decls)
+  let fields = fields.map(x => env.0.visit_FieldDecl(x))
+  let constr_decl = constr_decl.map(x => env.0.visit_FunDecl(x))
+  Record(fields~, constr_decl~)
 }
 
 ///|
@@ -3753,6 +3760,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FunDecl(
   let params_loc = fun_decl.params_loc
   let attrs = fun_decl.attrs
   let doc = fun_decl.doc
+  let loc = fun_decl.loc
   FunDecl::{
     type_name,
     name,
@@ -3766,6 +3774,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_FunDecl(
     vis,
     attrs,
     doc,
+    loc,
   }
 }
 
