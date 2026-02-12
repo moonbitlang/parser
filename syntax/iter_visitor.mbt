@@ -4844,6 +4844,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LexCase(
   lex_case,
 ) {
   lex_case.pat.each(pat => env.0.visit_LexTopPattern(pat))
+  lex_case.guard_.each(guard_ => env.0.visit_Expr(guard_))
   env.0.visit_Expr(lex_case.body)
 }
 

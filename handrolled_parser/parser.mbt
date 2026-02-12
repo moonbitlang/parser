@@ -3197,6 +3197,7 @@ fn State::parse_lexmatch_case(self : State) -> @syntax.LexCase {
       @syntax.LexCase::{
         pat: @list.singleton(Wildcard(loc~)),
         pat_loc: loc,
+        guard_: None,
         body: Hole(loc~, kind=Todo),
       }
     }
@@ -3205,9 +3206,40 @@ fn State::parse_lexmatch_case(self : State) -> @syntax.LexCase {
         [TK_FAT_ARROW, TK_COMMA],
         State::parse_lex_pattern,
       )
+      let guard_ = self.parse_lex_case_guard()
       let act = self.parse_fat_arrow_action()
-      { pat, pat_loc, body: act }
+      { pat, pat_loc, guard_, body: act }
     }
+  }
+}
+
+///|
+fn State::parse_lex_case_guard(self : State) -> @syntax.Expr? {
+  match self.peek_token() {
+    IF => {
+      self.skip()
+      // an error production to handle `lex pattern if invalid-infix-expr => action`
+      let expr = match self.peek_token() {
+        IF
+        | MATCH
+        | LOOP
+        | WHILE
+        | FOR
+        | TRY
+        | TRY_QUESTION
+        | TRY_EXCLAMATION
+        | LET
+        | LETREC
+        | GUARD
+        | BREAK
+        | RETURN
+        | CONTINUE =>
+          self.handle_unexpected_expr_or_statement(context="lex case guard")
+        _ => self.parse_infix_expr(parsed=None)
+      }
+      Some(expr)
+    }
+    _ => None
   }
 }
 

@@ -4999,9 +4999,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_LexCase(
   lex_case,
 ) {
   let pat = lex_case.pat.map(pat => env.0.visit_LexTopPattern(pat))
+  let guard_ = lex_case.guard_.map(guard_ => env.0.visit_Expr(guard_))
   let body = env.0.visit_Expr(lex_case.body)
   let pat_loc = lex_case.pat_loc
-  { pat, body, pat_loc }
+  { pat, pat_loc, guard_, body }
 }
 
 ///|

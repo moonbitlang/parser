@@ -370,6 +370,7 @@ pub(all) enum LexTopPattern {
 pub(all) struct LexCase {
   pat : @list.List[LexTopPattern]
   pat_loc : Location
+  guard_ : Expr?
   body : Expr
 }
 
