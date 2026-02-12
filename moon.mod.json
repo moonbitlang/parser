@@ -1,6 +1,6 @@
 {
   "name": "moonbitlang/parser",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "deps": {
     "moonbitlang/x": "0.4.39"
   },
