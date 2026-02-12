@@ -145,7 +145,7 @@ pub(all) enum TypeDesc {
   /// `enum T { C1; C2 }`
   Variant(@list.List[ConstrDecl])
   /// `struct T { field1: T1; field2: T2 }`
-  Record(@list.List[FieldDecl])
+  Record(fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?)
   /// `struct T (T1,T2)`
   TupleStruct(@list.List[Type])
   Alias(Type)
@@ -767,6 +767,7 @@ pub(all) struct FunDecl {
   vis : Visibility
   attrs : @list.List[Attribute]
   mut doc : DocString
+  loc : Location
 }
 
 ///|

@@ -3579,8 +3579,9 @@ test "fun_decl to_json" {
     vis: @syntax.Priv(loc=dummy_loc),
     attrs: @list.from_array([dummy_attribute]),
     doc: dummy_docstring,
+    loc: dummy_loc,
   }
-  json_inspect(fun_decl.json_repr(dummy_loc), content={
+  json_inspect(fun_decl.json_repr(), content={
     "kind": "FunDecl",
     "loc": null,
     "children": {
@@ -4106,6 +4107,7 @@ test "impl variants to_json" {
     vis: @syntax.Default,
     attrs: @list.from_array([]),
     doc: dummy_docstring,
+    loc: dummy_loc,
   }
   let decl_body = @syntax.DeclBody(
     local_types=@list.from_array([]),
