@@ -375,8 +375,9 @@ pub(all) struct FunDecl {
   vis : Visibility
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
+  loc : @basic.Location
 }
-pub fn FunDecl::json_repr(Self, @basic.Location) -> Json
+pub fn FunDecl::json_repr(Self) -> Json
 
 pub(all) struct Func {
   parameters : @list.List[Parameter]
@@ -454,6 +455,7 @@ pub fn Label::json_repr(Self) -> Json
 pub(all) struct LexCase {
   pat : @list.List[LexTopPattern]
   pat_loc : @basic.Location
+  guard_ : Expr?
   body : Expr
 }
 pub fn LexCase::json_repr(Self, @basic.Location) -> Json
@@ -641,7 +643,7 @@ pub(all) enum TypeDesc {
   Newtype(Type)
   Error(ExceptionDecl)
   Variant(@list.List[ConstrDecl])
-  Record(@list.List[FieldDecl])
+  Record(fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?)
   TupleStruct(@list.List[Type])
   Alias(Type)
 }
@@ -736,7 +738,7 @@ pub(open) trait IterVisitor {
   visit_TypeDesc_Newtype(Self, Type) -> Unit = _
   visit_TypeDesc_Error(Self, ExceptionDecl) -> Unit = _
   visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> Unit = _
-  visit_TypeDesc_Record(Self, @list.List[FieldDecl]) -> Unit = _
+  visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?) -> Unit = _
   visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> Unit = _
   visit_TypeDesc_Alias(Self, Type) -> Unit = _
   visit_Hole(Self, Hole) -> Unit = _
@@ -949,7 +951,7 @@ pub(open) trait MapVisitor {
   visit_TypeDesc_Newtype(Self, Type) -> TypeDesc = _
   visit_TypeDesc_Error(Self, ExceptionDecl) -> TypeDesc = _
   visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> TypeDesc = _
-  visit_TypeDesc_Record(Self, @list.List[FieldDecl]) -> TypeDesc = _
+  visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?) -> TypeDesc = _
   visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> TypeDesc = _
   visit_TypeDesc_Alias(Self, Type) -> TypeDesc = _
   visit_Hole(Self, Hole) -> Hole = _
