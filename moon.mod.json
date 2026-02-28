@@ -16,5 +16,6 @@
     "AST",
     "MoonBit"
   ],
-  "description": "AST and parsers for the MoonBit programming language"
+  "description": "AST and parsers for the MoonBit programming language",
+  "exclude" : ["test"]
 }
