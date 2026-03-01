@@ -123,6 +123,10 @@
 %token LEXMATCH        "lexmatch"
 %token LEXMATCH_QUESTION "lexmatch?"
 
+// Note: this token is only used by `.mbti` parser
+%token PACKAGE         "package"
+
+
 %right BARBAR
 %right AMPERAMPER
 %left BAR

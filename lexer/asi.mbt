@@ -48,6 +48,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | SEMI(_)
     | PLUS
     | PACKAGE_NAME(_)
+    | PACKAGE
     | NEWLINE
     | MUTABLE
     | MINUS
@@ -155,6 +156,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | TRAIT
     | TRAITALIAS
     | PACKAGE_NAME(_)
+    | PACKAGE
     | MUTABLE
     | MATCH
     | TRY

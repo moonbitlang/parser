@@ -31,7 +31,6 @@ using @mbti_ast {
   type Parameter,
   type TypeParamNoConstraints,
   type TypeParamWithConstraints,
-  type TraitMethodParameter,
   type FieldDecl,
   type FieldName,
   type ConstrDecl,
@@ -49,4 +48,6 @@ using @mbti_ast {
   type Sig,
   type PackageImport,
   type Mbti,
+  type MethodSelfType,
+  type TypeDefinition,
 }

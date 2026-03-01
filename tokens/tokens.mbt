@@ -114,6 +114,7 @@ pub(all) enum Token {
   TRY_EXCLAMATION
   LEXMATCH
   LEXMATCH_QUESTION
+  PACKAGE
 } derive(Show)
 
 ///|
@@ -233,6 +234,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     TRY_EXCLAMATION => TK_TRY_EXCLAMATION
     LEXMATCH => TK_LEXMATCH
     LEXMATCH_QUESTION => TK_LEXMATCH_QUESTION
+    PACKAGE => TK_PACKAGE
   }
 }
 
@@ -352,6 +354,7 @@ pub(all) enum TokenKind {
   TK_TRY_EXCLAMATION
   TK_LEXMATCH
   TK_LEXMATCH_QUESTION
+  TK_PACKAGE
 } derive(Eq, Hash, Compare)
 
 ///|
@@ -472,6 +475,7 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_TRY_EXCLAMATION => "\"try!\""
       TK_LEXMATCH => "\"lexmatch\""
       TK_LEXMATCH_QUESTION => "\"lexmatch?\""
+      TK_PACKAGE => "\"package\""
     },
   )
 }
