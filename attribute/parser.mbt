@@ -196,6 +196,7 @@ priv enum YYSymbol {
   T_TRY_EXCLAMATION
   T_LEXMATCH
   T_LEXMATCH_QUESTION
+  T_PACKAGE
   NT_payloads
   NT_property
   NT_expr
@@ -215,7 +216,7 @@ fn init {
 }
 
 // file:///./parser.mbty
-// 151|    EOF { @list.empty() }
+// 153|    EOF { @list.empty() }
 
 ///|
 fn yy_action_0(
@@ -231,7 +232,7 @@ fn yy_action_0(
 }
 
 // file:///./parser.mbty
-// 152|    properties { $1 }
+// 154|    properties { $1 }
 
 ///|
 fn yy_action_1(
@@ -248,7 +249,7 @@ fn yy_action_1(
 }
 
 // file:///./parser.mbty
-// 168|    "(" ")"                      { @list.empty() }
+// 170|    "(" ")"                      { @list.empty() }
 
 ///|
 fn yy_action_2(
@@ -264,7 +265,7 @@ fn yy_action_2(
 }
 
 // file:///./parser.mbty
-// 169|    "(" non_empty_properties ")" { $2 }
+// 171|    "(" non_empty_properties ")" { $2 }
 
 ///|
 fn yy_action_3(
@@ -281,7 +282,7 @@ fn yy_action_3(
 }
 
 // file:///./parser.mbty
-// 155|    name=LIDENT "=" expr   { Labeled(name, $3) }
+// 157|    name=LIDENT "=" expr   { Labeled(name, $3) }
 
 ///|
 fn yy_action_4(
@@ -299,7 +300,7 @@ fn yy_action_4(
 }
 
 // file:///./parser.mbty
-// 162|    qual=LIDENT name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
+// 164|    qual=LIDENT name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
 
 ///|
 fn yy_action_5(
@@ -318,7 +319,7 @@ fn yy_action_5(
 }
 
 // file:///./parser.mbty
-// 160|    qual=LIDENT name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
+// 162|    qual=LIDENT name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
 
 ///|
 fn yy_action_6(
@@ -336,7 +337,7 @@ fn yy_action_6(
 }
 
 // file:///./parser.mbty
-// 161|    name=LIDENT props=properties                 { Apply({qual: None, name}, props) }
+// 163|    name=LIDENT props=properties                 { Apply({qual: None, name}, props) }
 
 ///|
 fn yy_action_7(
@@ -354,7 +355,7 @@ fn yy_action_7(
 }
 
 // file:///./parser.mbty
-// 159|    name=LIDENT                                  { Ident({qual: None, name}) }
+// 161|    name=LIDENT                                  { Ident({qual: None, name}) }
 
 ///|
 fn yy_action_8(
@@ -371,7 +372,7 @@ fn yy_action_8(
 }
 
 // file:///./parser.mbty
-// 156|    expr                   { Expr($1) }
+// 158|    expr                   { Expr($1) }
 
 ///|
 fn yy_action_9(
@@ -388,7 +389,7 @@ fn yy_action_9(
 }
 
 // file:///./parser.mbty
-// 163|    STRING                                       { String($1) }
+// 165|    STRING                                       { String($1) }
 
 ///|
 fn yy_action_10(
@@ -405,7 +406,7 @@ fn yy_action_10(
 }
 
 // file:///./parser.mbty
-// 164|    TRUE                                         { Bool(true) }
+// 166|    TRUE                                         { Bool(true) }
 
 ///|
 fn yy_action_11(
@@ -421,7 +422,7 @@ fn yy_action_11(
 }
 
 // file:///./parser.mbty
-// 165|    FALSE                                        { Bool(false) }
+// 167|    FALSE                                        { Bool(false) }
 
 ///|
 fn yy_action_12(
@@ -437,7 +438,7 @@ fn yy_action_12(
 }
 
 // file:///./parser.mbty
-// 173|    x=property "," xs=non_empty_properties{ xs.add(x) }
+// 175|    x=property "," xs=non_empty_properties{ xs.add(x) }
 
 ///|
 fn yy_action_13(
@@ -455,7 +456,7 @@ fn yy_action_13(
 }
 
 // file:///./parser.mbty
-// 172|    property { @list.from_array([$1]) }
+// 174|    property { @list.from_array([$1]) }
 
 ///|
 fn yy_action_14(
@@ -592,6 +593,7 @@ fn yy_input(
     TRY_EXCLAMATION => (T_TRY_EXCLAMATION, YYObj_Void)
     LEXMATCH => (T_LEXMATCH, YYObj_Void)
     LEXMATCH_QUESTION => (T_LEXMATCH_QUESTION, YYObj_Void)
+    PACKAGE => (T_PACKAGE, YYObj_Void)
   }
 }
 
@@ -1091,6 +1093,7 @@ fn error(
         (T_TRY_EXCLAMATION, TK_TRY_EXCLAMATION),
         (T_LEXMATCH, TK_LEXMATCH),
         (T_LEXMATCH_QUESTION, TK_LEXMATCH_QUESTION),
+        (T_PACKAGE, TK_PACKAGE),
       ] : Array[(YYSymbol, TokenKind)]) {
     try_add(term.0, term.1)
   }
