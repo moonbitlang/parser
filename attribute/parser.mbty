@@ -121,6 +121,8 @@
 %token TRY_EXCLAMATION "try!"
 %token LEXMATCH        "lexmatch"
 %token LEXMATCH_QUESTION "lexmatch?"
+%token PACKAGE         "package"
+
 
 %right BARBAR
 %right AMPERAMPER

@@ -117,5 +117,6 @@ pub fn TokenKind::to_expect_string(self : Self) -> String {
     TK_RANGE_LT_INCLUSIVE => "..<="
     TK_WHERE => "where"
     TK_NOBREAK => "nobreak"
+    TK_PACKAGE => "package"
   }
 }

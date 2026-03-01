@@ -15,7 +15,11 @@ pub using @syntax {
   type ConstrName,
   type ConstrParam,
   type Label,
+  type Parameter,
 }
 
 ///|
 pub type QualifiedIdent = @syntax.LongIdent
+
+///|
+pub type Attributes = @list.List[@attribute.Attribute]

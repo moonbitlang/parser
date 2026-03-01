@@ -23,36 +23,41 @@ pub(all) enum TypeParamNoConstraints {
 }
 
 ///|
-pub(all) enum Parameter {
-  Positional(Type)
-  Labelled(Label, Type)
-  Autofill(Label, Type)
-  OptionalDefault(Label, Type)
-  OptionalOption(Label, Type)
-}
-
-///|
-pub(all) enum TraitMethodParameter {
-  Positional(Type)
-  Labelled(Label, Type)
+pub(all) struct MethodSelfType {
+  name : String
+  is_object : Bool
+  loc : Location
 }
 
 ///|
 pub(all) struct FuncSig {
-  attr : @list.List[(String, String?, String)]
-  type_name : Name?
+  attrs : Attributes
+  type_name : MethodSelfType?
   name : Name
   params : @list.List[Parameter]
   return_ : (Type, ErrorType)
   type_params : @list.List[TypeParamWithConstraints]
+  is_async : Location?
+}
+
+///|
+pub(all) enum TypeDefinition {
+  Abstract
+  Newtype(Type)
+  TupleStruct(@list.List[Type])
+  Error(@syntax.ExceptionDecl)
+  Variant(@list.List[ConstrDecl])
+  Record(fields~ : @list.List[FieldDecl], constr~ : FuncSig?)
+  Alias(Type)
 }
 
 ///|
 pub(all) struct TypeSig {
   name : Name
   type_params : @list.List[TypeParamNoConstraints]
-  components : TypeDesc
+  components : TypeDefinition
   vis : Visibility
+  attrs : Attributes
 }
 
 ///|
@@ -61,18 +66,26 @@ pub(all) enum AliasSig {
     name~ : Name,
     type_params~ : @list.List[TypeParamNoConstraints],
     type_~ : Type,
-    vis~ : Visibility
+    vis~ : Visibility,
+    attrs~ : Attributes
   )
-  TraitAlias(name~ : Name, trait_name~ : QualifiedName, vis~ : Visibility)
-  FnAlias(name~ : Name, type_name~ : QualifiedName, loc~ : Location)
+  Using(
+    pkg~ : Name,
+    target~ : Name,
+    name~ : Name?,
+    kind~ : @syntax.UsingKind,
+    attrs~ : Attributes
+  )
+  FuncAlias(name~ : Name, type_name~ : Name, attrs~ : Attributes)
 }
 
 ///|
 pub(all) struct TraitMethodSig {
   name : Name
-  params : @list.List[TraitMethodParameter]
+  params : @list.List[Parameter]
   has_default : Bool
   return_ : (Type, ErrorType)
+  attrs : Attributes
 }
 
 ///|
@@ -81,16 +94,15 @@ pub(all) struct TraitSig {
   super_traits : @list.List[QualifiedName]
   methods : @list.List[TraitMethodSig]
   vis : Visibility
+  attrs : Attributes
 }
 
 ///|
-pub(all) enum ImplSig {
-  Trait(
-    type_params~ : @list.List[TypeParamWithConstraints],
-    type_~ : Type,
-    trait_name~ : QualifiedName
-  )
-  DefaultImpl(trait_name~ : Name, method_name~ : Name)
+pub(all) struct ImplSig {
+  type_params : @list.List[TypeParamWithConstraints]
+  type_ : Type
+  trait_name : QualifiedName
+  attrs : Attributes
 }
 
 ///|
@@ -98,12 +110,14 @@ pub(all) struct ConstSig {
   name : Name
   type_ : Type
   value : Constant
+  attrs : Attributes
 }
 
 ///|
 pub(all) struct ValueSig {
   name : Name
   type_ : Type
+  attrs : Attributes
 }
 
 ///|
@@ -124,8 +138,24 @@ pub(all) enum Sig {
 }
 
 ///|
+pub fn Sig::attrs(self : Sig) -> Attributes {
+  match self {
+    Const({ attrs, .. })
+    | Impl({ attrs, .. })
+    | Trait({ attrs, .. })
+    | Alias(Using(attrs~, ..))
+    | Alias(TypeAlias(attrs~, ..))
+    | Alias(FuncAlias(attrs~, ..))
+    | Type({ attrs, .. })
+    | Func({ attrs, .. })
+    | Value({ attrs, .. }) => attrs
+  }
+}
+
+///|
 pub(all) struct Mbti {
   package_name : String
   imports : @list.List[PackageImport]
   sigs : @list.List[(Sig, Location)]
+  loc : Location
 }
