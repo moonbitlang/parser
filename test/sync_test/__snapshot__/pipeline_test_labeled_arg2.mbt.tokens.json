@@ -333,16 +333,16 @@
     "loc": "5:3-5:4"
   },
   {
-    "token": "ELSE",
-    "loc": "5:5-5:9"
+    "token": "NOBREAK",
+    "loc": "5:5-5:12"
   },
   {
     "token": "LBRACE",
-    "loc": "5:10-5:11"
+    "loc": "5:13-5:14"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:11-5:12"
+    "loc": "5:14-5:15"
   },
   {
     "token": [

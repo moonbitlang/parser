@@ -244,16 +244,16 @@
     "loc": "7:5-7:6"
   },
   {
-    "token": "ELSE",
-    "loc": "7:7-7:11"
+    "token": "NOBREAK",
+    "loc": "7:7-7:14"
   },
   {
     "token": "LBRACE",
-    "loc": "7:12-7:13"
+    "loc": "7:15-7:16"
   },
   {
     "token": "NEWLINE",
-    "loc": "7:13-7:14"
+    "loc": "7:16-7:17"
   },
   {
     "token": [
