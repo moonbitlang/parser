@@ -10,7 +10,7 @@ fn from_bytes(b : Bytes) -> ((Byte) -> IterResult) -> IterResult raise? {
         IterContinue => ()
         IterEnd => break IterEnd
       }
-    } else {
+    } nobreak {
       IterContinue
     }
   }
@@ -193,7 +193,7 @@ fn bytes_arary_to_iter(
     for i, segment in data {
       println("fetching data segment \{i + 1}")
       guard from_bytes(segment)(yield_) is IterContinue else { break IterEnd }
-    } else {
+    } nobreak {
       IterContinue
     }
   }

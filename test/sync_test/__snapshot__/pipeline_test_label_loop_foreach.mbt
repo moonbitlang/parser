@@ -10,7 +10,7 @@ fn[A] f(xs : ArrayView[A], ys : Array[Int]) -> @list.List[(Int, A)] {
         if j + i == 7 {
           break l1~ acc
         }
-      } else {
+      } nobreak {
         continue (i - 1, rest, acc)
       }
   }
@@ -28,7 +28,7 @@ fn[A] g(xs : ArrayView[A], ys : Array[Int]) -> @list.List[(Int, A)] {
         if j + i == 7 {
           break acc
         }
-      } else {
+      } nobreak {
         continue (i - 1, rest, acc)
       }
   }

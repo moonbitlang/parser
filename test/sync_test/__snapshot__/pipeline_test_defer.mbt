@@ -95,7 +95,7 @@ fn loop_control(cmd : String) -> Unit {
       }
       _ => panic()
     }
-  } else {
+  } nobreak {
     println("after loop")
   }
 }
@@ -120,13 +120,13 @@ fn labelled_loop_control(cmd : String) -> Unit {
           "break" => break l1~
           _ => panic()
         }
-      } else {
+      } nobreak {
         println("after loop 3")
       }
-    } else {
+    } nobreak {
       println("after loop 2")
     }
-  } else {
+  } nobreak {
     println("after loop 1")
   }
 }
@@ -176,10 +176,10 @@ fn basic_for_in(cmd : String, it : Iter[Int]) -> Unit raise {
         "return" => return
         _ => println("normal fallthrough")
       }
-    } else {
+    } nobreak {
       println("after `for .. in`")
     }
-  } else {
+  } nobreak {
     println("after outer loop")
   }
 }

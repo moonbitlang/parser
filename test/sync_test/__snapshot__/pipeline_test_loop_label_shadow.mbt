@@ -20,7 +20,7 @@ fn f(xs: Array[Int]) -> String {
       println("break2")
       break l~ "ok"
     }
-  } else {
+  } nobreak {
     "nothing"
   }
 }

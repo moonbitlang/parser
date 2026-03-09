@@ -1,6 +1,6 @@
 fn fib( n : Int ) -> Int {
     for i = 0, a = 1, b = 2 ; i < n ; i = i + 1, a = b, b = a + b {
-    } else { b }
+    } nobreak { b }
 }
 
 fn in_range(begin: Int, end: Int, number: Int) -> Bool {
@@ -10,7 +10,7 @@ fn in_range(begin: Int, end: Int, number: Int) -> Bool {
             break true;
         }
         i = i + 1
-    } else { false })
+    } nobreak { false })
 }
 
 fn[T] find_in_sorted(xs: FixedArray[(Int, T)], i: Int) -> T? {
@@ -24,7 +24,7 @@ fn[T] find_in_sorted(xs: FixedArray[(Int, T)], i: Int) -> T? {
     } else {
       continue mid + 1, r
     }
-  } else {
+  } nobreak {
     None
   }
 }

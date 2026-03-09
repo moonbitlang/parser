@@ -19,7 +19,7 @@ fn f1(mode : Int) -> String {
         break 42
       }
     }
-  } else {
+  } nobreak {
     0
   })
   |> Int::to_string
@@ -45,7 +45,7 @@ fn f2(mode : Int) -> String raise {
         continue
       }
     }
-  } else {
+  } nobreak {
     "continue"
   }
 }

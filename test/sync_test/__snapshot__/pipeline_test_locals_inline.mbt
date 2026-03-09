@@ -9,7 +9,7 @@ fn h(xs : Array[Int], f : (Int) -> Int) -> Int {
   let mut res = 0
   for x in xs {
     res = res + f(x) + f(x)
-  } else {
+  } nobreak {
     res = res + f(xs.length())
   }
   res
@@ -22,7 +22,7 @@ fn h_never(xs : Array[Int], f : (Int) -> Int) -> Int {
   let mut res = 0
   for x in xs {
     res = res + f(x) + f(x)
-  } else {
+  } nobreak {
     res = res + f(xs.length())
   }
   res

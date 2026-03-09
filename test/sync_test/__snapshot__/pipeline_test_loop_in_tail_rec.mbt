@@ -10,7 +10,7 @@ fn Matrix::sum_from(self : Matrix, i : Int, acc~ : Int = 0) -> Int {
     j = 0, sum = acc
     j < self.w
     j = j + 1, sum = sum + self.data[i * self.w + j] {
-  } else {
+  } nobreak {
     self.sum_from(i + 1, acc=sum)
   }
 }

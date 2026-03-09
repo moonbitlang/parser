@@ -8,7 +8,7 @@ fn f(xs : Array[Array[Int]], target : Int) -> (Int, Int) {
         break outer~ (i, j)
       }
     }
-  } else {
+  } nobreak {
     (-1, -1)
   }
   
@@ -25,7 +25,7 @@ fn g(x : Int?, y : Int?) -> (Int, Int) {
         } else {
           continue l2~ i+2, acc+i
         }
-      } else {
+      } nobreak {
         (-1, -1)
       }
     (None, Some(y)) => {
@@ -39,7 +39,7 @@ fn g(x : Int?, y : Int?) -> (Int, Int) {
           acc = acc + i
           continue l2~
         }
-      } else {
+      } nobreak {
         (-2, -2)
       }
     }
@@ -56,7 +56,7 @@ fn g(x : Int?, y : Int?) -> (Int, Int) {
             break l1~ (i, j)
           }
         }
-      } else {
+      } nobreak {
         (-1, -1)
       }
     }

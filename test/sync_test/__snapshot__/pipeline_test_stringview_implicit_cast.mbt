@@ -4,7 +4,7 @@ fn contains(s : StringView, c : Char) -> Bool {
     if a == c {
       return true
     }
-  } else {
+  } nobreak {
     false
   }
 }
