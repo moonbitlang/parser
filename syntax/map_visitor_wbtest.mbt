@@ -36,14 +36,10 @@ test "Pattern" {
     key_loc: dummy_loc,
     loc: dummy_loc,
   }
-  let constr_pat_arg = ConstrPatArg::{
-    pat: any_pattern,
-    kind: ArgumentKind::Positional,
-  }
-  let array_patterns = ArrayPatterns::Closed(@list.from_array([]))
-  let tuple_pattern = Pattern::Tuple(
-    pats=@list.from_array([any_pattern, constant_pattern]),
-    loc=dummy_loc,
+  let constr_pat_arg = mk_constr_pat_arg(any_pattern, ArgumentKind::Positional)
+  let array_patterns = mk_closed_array_patterns(@list.from_array([]))
+  let tuple_pattern = mk_tuple_pattern(
+    @list.from_array([any_pattern, constant_pattern]),
   )
   let any_with_alias = Pattern::Alias(
     pat=any_pattern,
@@ -52,34 +48,16 @@ test "Pattern" {
   )
   let array_patterns = Pattern::Array(pats=array_patterns, loc=dummy_loc)
   let or_pattern = Or(pat1=any_pattern, pat2=constant_pattern, loc=dummy_loc)
-  let range_pattern = Range(
-    lhs=any_pattern,
-    rhs=constant_pattern,
-    kind=Inclusive,
-    loc=dummy_loc,
-  )
+  let range_pattern = mk_range_pattern(any_pattern, constant_pattern, Inclusive)
   let constant_pattern = Expr::Constant(c=int_constant, loc=dummy_loc)
-  let constraint_pattern = Pattern::Constraint(
-    pat=any_pattern,
-    ty=int_type,
-    loc=dummy_loc,
+  let constraint_pattern = mk_constraint_pattern(any_pattern, int_type)
+  let constr_pattern = mk_constr_pattern(
+    constr,
+    Some(@list.from_array([constr_pat_arg])),
+    false,
   )
-  let constr_pattern = Pattern::Constr(
-    constr~,
-    args=Some(@list.from_array([constr_pat_arg])),
-    is_open=false,
-    loc=dummy_loc,
-  )
-  let record_pattern = Pattern::Record(
-    fields=@list.from_array([field_pat]),
-    is_closed=true,
-    loc=dummy_loc,
-  )
-  let map_pattern = Pattern::Map(
-    elems=@list.from_array([map_elem]),
-    is_closed=false,
-    loc=dummy_loc,
-  )
+  let record_pattern = mk_record_pattern(@list.from_array([field_pat]), true)
+  let map_pattern = mk_map_pattern(@list.from_array([map_elem]), false)
   assert_eq(
     any_with_alias.json_repr(),
     MapVisitorBase::visit_Pattern(MapVisitorBase(Identity(())), any_with_alias).json_repr(),

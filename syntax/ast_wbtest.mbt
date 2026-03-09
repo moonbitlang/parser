@@ -23,6 +23,7 @@ let dummy_char_literal : @tokens.CharLiteral = "'A'"
 let dummy_docstring : DocString = {
   content: @list.from_array(["Test documentation"]),
   loc: dummy_loc,
+  lines: @list.from_array([]),
 }
 
 ///|
@@ -30,6 +31,258 @@ let dummy_attribute : @attribute.Attribute = {
   loc: dummy_loc,
   raw: "test_attr",
   parsed: None,
+}
+
+///|
+fn mk_located_string(value : String) -> LocatedString {
+  { value, loc: dummy_loc }
+}
+
+///|
+fn mk_pub(attr : String?) -> Visibility {
+  Pub(attr~, attr_loc=None, loc=dummy_loc)
+}
+
+///|
+fn mk_dot(pkg : String, id : String) -> LongIdent {
+  Dot(pkg~, pkg_loc=dummy_loc, dot_loc=dummy_loc, id~, id_loc=dummy_loc)
+}
+
+///|
+fn mk_default_error_type() -> ErrorType {
+  DefaultErrorType(loc=dummy_loc, kind=DefaultErrorTypeKind::Raise)
+}
+
+///|
+fn mk_maybe_error(ty : Type) -> ErrorType {
+  MaybeError(ty~, question_loc=dummy_loc)
+}
+
+///|
+fn mk_dotdot_underscore() -> DotDotBinder {
+  DotDotBinder::Underscore(dotdot_loc=dummy_loc)
+}
+
+///|
+fn mk_dotdot_no_binder() -> DotDotBinder {
+  DotDotBinder::NoBinder(dotdot_loc=dummy_loc)
+}
+
+///|
+fn mk_dotdot_binder(binder : Binder) -> DotDotBinder {
+  DotDotBinder::Binder(binder, dotdot_loc=dummy_loc)
+}
+
+///|
+fn mk_dotdot_binder_as(binder : Binder) -> DotDotBinder {
+  DotDotBinder::BinderAs(binder, dotdot_loc=dummy_loc)
+}
+
+///|
+fn mk_closed_array_patterns(pats : @list.List[ArrayPattern]) -> ArrayPatterns {
+  ArrayPatterns::Closed(
+    pats,
+    loc=dummy_loc,
+    lbrack_loc=dummy_loc,
+    rbrack_loc=dummy_loc,
+  )
+}
+
+///|
+fn mk_open_array_patterns(
+  pats1 : @list.List[ArrayPattern],
+  pats2 : @list.List[ArrayPattern],
+  binder : DotDotBinder,
+) -> ArrayPatterns {
+  ArrayPatterns::Open(
+    pats1,
+    pats2,
+    binder,
+    loc=dummy_loc,
+    lbrack_loc=dummy_loc,
+    rbrack_loc=dummy_loc,
+  )
+}
+
+///|
+fn mk_code_string(value : String) -> EmbeddedCode {
+  CodeString(mk_located_string(value))
+}
+
+///|
+fn mk_code_multiline(values : Array[String]) -> EmbeddedCode {
+  let xs = []
+  for value in values {
+    xs.push(mk_located_string(value))
+  }
+  CodeMultilineString(@list.from_array(xs))
+}
+
+///|
+fn mk_import_stub(
+  module_name : String,
+  func_name : String,
+  language : String?,
+) -> FuncStubs {
+  let language = match language {
+    Some(language) => Some(mk_located_string(language))
+    None => None
+  }
+  Import(
+    module_name=mk_located_string(module_name),
+    func_name=mk_located_string(func_name),
+    language~,
+  )
+}
+
+///|
+fn mk_embedded_stub(language : String?, code : EmbeddedCode) -> FuncStubs {
+  let language = match language {
+    Some(language) => Some(mk_located_string(language))
+    None => None
+  }
+  Embedded(language~, code~)
+}
+
+///|
+fn mk_discard_param(ty : Type?) -> Parameter {
+  Parameter::DiscardPositional(ty~, loc=dummy_loc, colon_loc=None)
+}
+
+///|
+fn mk_positional_param(binder : Binder, ty : Type?) -> Parameter {
+  Parameter::Positional(binder~, ty~, loc=dummy_loc, colon_loc=None)
+}
+
+///|
+fn mk_labelled_param(binder : Binder, ty : Type?) -> Parameter {
+  Parameter::Labelled(
+    binder~,
+    ty~,
+    loc=dummy_loc,
+    label_mark_loc=None,
+    colon_loc=None,
+  )
+}
+
+///|
+fn mk_optional_param(binder : Binder, default : Expr, ty : Type?) -> Parameter {
+  Parameter::Optional(
+    binder~,
+    default~,
+    ty~,
+    loc=dummy_loc,
+    question_loc=None,
+    colon_loc=None,
+    equal_loc=None,
+  )
+}
+
+///|
+fn mk_question_optional_param(binder : Binder, ty : Type?) -> Parameter {
+  Parameter::QuestionOptional(
+    binder~,
+    ty~,
+    loc=dummy_loc,
+    question_loc=None,
+    colon_loc=None,
+  )
+}
+
+///|
+fn mk_argument(value : Expr, kind : ArgumentKind) -> Argument {
+  { value, kind, loc: dummy_loc }
+}
+
+///|
+fn mk_case(pattern : Pattern, guard_ : Expr?, body : Expr) -> Case {
+  let guard_loc = match guard_ {
+    Some(_) => Some(dummy_loc)
+    None => None
+  }
+  { pattern, guard_, body, loc: dummy_loc, arrow_loc: dummy_loc, guard_loc }
+}
+
+///|
+fn mk_constr_pat_arg(pat : Pattern, kind : ArgumentKind) -> ConstrPatArg {
+  { pat, kind, loc: dummy_loc }
+}
+
+///|
+fn mk_constraint_pattern(pat : Pattern, ty : Type) -> Pattern {
+  Pattern::Constraint(pat~, ty~, loc=dummy_loc, colon_loc=dummy_loc)
+}
+
+///|
+fn mk_constr_pattern(
+  constr : Constructor,
+  args : @list.List[ConstrPatArg]?,
+  is_open : Bool,
+) -> Pattern {
+  Pattern::Constr(
+    constr~,
+    args~,
+    is_open~,
+    loc=dummy_loc,
+    lparen_loc=None,
+    rparen_loc=None,
+  )
+}
+
+///|
+fn mk_tuple_pattern(pats : @list.List[Pattern]) -> Pattern {
+  Pattern::Tuple(
+    pats~,
+    loc=dummy_loc,
+    lparen_loc=dummy_loc,
+    rparen_loc=dummy_loc,
+  )
+}
+
+///|
+fn mk_record_pattern(
+  fields : @list.List[FieldPat],
+  is_closed : Bool,
+) -> Pattern {
+  Pattern::Record(
+    fields~,
+    is_closed~,
+    loc=dummy_loc,
+    lbrace_loc=dummy_loc,
+    rbrace_loc=dummy_loc,
+  )
+}
+
+///|
+fn mk_map_pattern(elems : @list.List[MapPatElem], is_closed : Bool) -> Pattern {
+  Pattern::Map(
+    elems~,
+    is_closed~,
+    loc=dummy_loc,
+    lbrace_loc=dummy_loc,
+    rbrace_loc=dummy_loc,
+  )
+}
+
+///|
+fn mk_range_pattern(lhs : Pattern, rhs : Pattern, kind : RangeKind) -> Pattern {
+  Pattern::Range(lhs~, rhs~, kind~, loc=dummy_loc, op_loc=dummy_loc)
+}
+
+///|
+fn mk_local_type_decl(
+  tycon : String,
+  components : TypeDesc,
+  deriving : @list.List[DerivingDirective],
+) -> LocalTypeDecl {
+  {
+    tycon,
+    tycon_loc: dummy_loc,
+    components,
+    deriving,
+    loc: dummy_loc,
+    type_loc: dummy_loc,
+  }
 }
 
 ///|
@@ -44,12 +297,12 @@ test "visibility to_json" {
     "loc": null,
     "children": {},
   })
-  json_inspect(Pub(attr=Some("readonly"), loc=dummy_loc).json_repr(dummy_loc), content={
+  json_inspect(mk_pub(Some("readonly")).json_repr(dummy_loc), content={
     "kind": "Visibility::Pub",
     "loc": null,
     "children": { "attr": "readonly" },
   })
-  json_inspect(Pub(attr=None, loc=dummy_loc).json_repr(dummy_loc), content={
+  json_inspect(mk_pub(None).json_repr(dummy_loc), content={
     "kind": "Visibility::Pub",
     "loc": null,
     "children": { "attr": null },
@@ -147,14 +400,11 @@ test "long_ident to_json" {
     "loc": null,
     "children": { "value": "test_ident" },
   })
-  json_inspect(
-    LongIdent::Dot(pkg="test_pkg", id="test_name").json_repr(dummy_loc),
-    content={
-      "kind": "LongIdent::Dot",
-      "loc": null,
-      "children": { "pkg": "test_pkg", "id": "test_name" },
-    },
-  )
+  json_inspect(mk_dot("test_pkg", "test_name").json_repr(dummy_loc), content={
+    "kind": "LongIdent::Dot",
+    "loc": null,
+    "children": { "pkg": "test_pkg", "id": "test_name" },
+  })
 }
 
 ///|
@@ -181,7 +431,7 @@ test "type_name to_json" {
 ///|
 test "constr_id to_json" {
   let constr_id = ConstrId::{
-    id: Dot(pkg="test_pkg", id="TestConstructor"),
+    id: mk_dot("test_pkg", "TestConstructor"),
     loc: dummy_loc,
   }
   json_inspect(constr_id.json_repr(), content={
@@ -204,14 +454,11 @@ test "error_type to_json" {
     "loc": null,
     "children": {},
   })
-  json_inspect(
-    ErrorType::DefaultErrorType(loc=dummy_loc).json_repr(dummy_loc),
-    content={
-      "kind": "ErrorType::DefaultErrorType",
-      "loc": null,
-      "children": {},
-    },
-  )
+  json_inspect(mk_default_error_type().json_repr(dummy_loc), content={
+    "kind": "ErrorType::DefaultErrorType",
+    "loc": null,
+    "children": {},
+  })
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
     tys=@list.from_array([]),
@@ -241,7 +488,7 @@ test "error_type to_json" {
       },
     },
   })
-  json_inspect(MaybeError(ty=int_type).json_repr(dummy_loc), content={
+  json_inspect(mk_maybe_error(int_type).json_repr(dummy_loc), content={
     "kind": "ErrorType::MaybeError",
     "loc": null,
     "children": {
@@ -881,18 +1128,18 @@ test "type_desc to_json" {
 
 ///|
 test "dot_dot_binder to_json" {
-  json_inspect(Underscore.json_repr(dummy_loc), content={
+  json_inspect(mk_dotdot_underscore().json_repr(dummy_loc), content={
     "kind": "DotDotBinder::Underscore",
     "loc": null,
     "children": {},
   })
-  json_inspect(NoBinder.json_repr(dummy_loc), content={
+  json_inspect(mk_dotdot_no_binder().json_repr(dummy_loc), content={
     "kind": "DotDotBinder::NoBinder",
     "loc": null,
     "children": {},
   })
   let binder = Binder::{ name: "test_binder", loc: dummy_loc }
-  json_inspect(BinderAs(binder).json_repr(dummy_loc), content={
+  json_inspect(mk_dotdot_binder_as(binder).json_repr(dummy_loc), content={
     "kind": "DotDotBinder::BinderAs",
     "loc": null,
     "children": {
@@ -903,7 +1150,7 @@ test "dot_dot_binder to_json" {
       },
     },
   })
-  json_inspect(DotDotBinder::Binder(binder).json_repr(dummy_loc), content={
+  json_inspect(mk_dotdot_binder(binder).json_repr(dummy_loc), content={
     "kind": "DotDotBinder::Binder",
     "loc": null,
     "children": {
@@ -975,30 +1222,35 @@ test "array_pattern to_json" {
 ///|
 test "array_patterns to_json" {
   let any_pattern = ArrayPattern::Pattern(Pattern::Any(loc=dummy_loc))
-  json_inspect(Closed(@list.from_array([any_pattern])).json_repr(dummy_loc), content={
-    "kind": "ArrayPatterns::Closed",
-    "loc": null,
-    "children": {
-      "value": {
-        "kind": "ArrayPatterns::Closed::PatternList",
-        "loc": null,
-        "children": [
-          {
-            "kind": "ArrayPattern::Pattern",
-            "loc": null,
-            "children": {
-              "value": { "kind": "Pattern::Any", "loc": null, "children": {} },
+  json_inspect(
+    mk_closed_array_patterns(@list.from_array([any_pattern])).json_repr(
+      dummy_loc,
+    ),
+    content={
+      "kind": "ArrayPatterns::Closed",
+      "loc": null,
+      "children": {
+        "value": {
+          "kind": "ArrayPatterns::Closed::PatternList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "ArrayPattern::Pattern",
+              "loc": null,
+              "children": {
+                "value": { "kind": "Pattern::Any", "loc": null, "children": {} },
+              },
             },
-          },
-        ],
+          ],
+        },
       },
     },
-  })
+  )
   json_inspect(
-    Open(
+    mk_open_array_patterns(
       @list.from_array([any_pattern]),
       @list.from_array([any_pattern]),
-      Underscore,
+      mk_dotdot_underscore(),
     ).json_repr(dummy_loc),
     content={
       "kind": "ArrayPatterns::Open",
@@ -1038,15 +1290,13 @@ test "array_patterns to_json" {
 
 ///|
 test "embedded_code to_json" {
-  json_inspect(CodeString(dummy_string_literal).json_repr(dummy_loc), content={
+  json_inspect(mk_code_string(dummy_string_literal).json_repr(dummy_loc), content={
     "kind": "EmbeddedCode::CodeString",
     "loc": null,
     "children": { "value": "test_string" },
   })
   json_inspect(
-    CodeMultilineString(@list.from_array(["line1", "line2", "line3"])).json_repr(
-      dummy_loc,
-    ),
+    mk_code_multiline(["line1", "line2", "line3"]).json_repr(dummy_loc),
     content={
       "kind": "EmbeddedCode::CodeMultilineString",
       "loc": null,
@@ -1064,11 +1314,9 @@ test "embedded_code to_json" {
 ///|
 test "func_stubs to_json" {
   json_inspect(
-    Import(
-      module_name=dummy_string_literal,
-      func_name=dummy_string_literal,
-      language=None,
-    ).json_repr(dummy_loc),
+    mk_import_stub(dummy_string_literal, dummy_string_literal, None).json_repr(
+      dummy_loc,
+    ),
     content={
       "kind": "FuncStubs::Import",
       "loc": null,
@@ -1080,9 +1328,9 @@ test "func_stubs to_json" {
     },
   )
   json_inspect(
-    Embedded(
-      language=Some(dummy_string_literal),
-      code=CodeString(dummy_string_literal),
+    mk_embedded_stub(
+      Some(dummy_string_literal),
+      mk_code_string(dummy_string_literal),
     ).json_repr(dummy_loc),
     content={
       "kind": "FuncStubs::Embedded",
@@ -1098,7 +1346,7 @@ test "func_stubs to_json" {
     },
   )
   json_inspect(
-    Embedded(language=None, code=CodeString(dummy_string_literal)).json_repr(
+    mk_embedded_stub(None, mk_code_string(dummy_string_literal)).json_repr(
       dummy_loc,
     ),
     content={
@@ -1125,46 +1373,36 @@ test "parameter to_json" {
     loc=dummy_loc,
   )
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
-  json_inspect(
-    Parameter::DiscardPositional(ty=Some(int_type), loc=dummy_loc).json_repr(),
-    content={
-      "kind": "Parameter::DiscardPositional",
-      "loc": null,
-      "children": {
-        "ty": {
-          "kind": "Type::Name",
-          "loc": null,
-          "children": {
-            "constr_id": {
-              "kind": "ConstrId",
-              "loc": null,
-              "children": {
-                "id": {
-                  "kind": "LongIdent::Ident",
-                  "loc": null,
-                  "children": { "value": "Int" },
-                },
+  json_inspect(mk_discard_param(Some(int_type)).json_repr(), content={
+    "kind": "Parameter::DiscardPositional",
+    "loc": null,
+    "children": {
+      "ty": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
               },
             },
-            "tys": {
-              "kind": "Type::Name::TypeList",
-              "loc": null,
-              "children": [],
-            },
           },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
         },
       },
     },
-  )
-  json_inspect(
-    Parameter::DiscardPositional(ty=None, loc=dummy_loc).json_repr(),
-    content={
-      "kind": "Parameter::DiscardPositional",
-      "loc": null,
-      "children": { "ty": null },
-    },
-  )
-  json_inspect(Parameter::Positional(binder~, ty=Some(int_type)).json_repr(), content={
+  })
+  json_inspect(mk_discard_param(None).json_repr(), content={
+    "kind": "Parameter::DiscardPositional",
+    "loc": null,
+    "children": { "ty": null },
+  })
+  json_inspect(mk_positional_param(binder, Some(int_type)).json_repr(), content={
     "kind": "Parameter::Positional",
     "loc": null,
     "children": {
@@ -1193,7 +1431,7 @@ test "parameter to_json" {
       },
     },
   })
-  json_inspect(Parameter::Positional(binder~, ty=None).json_repr(), content={
+  json_inspect(mk_positional_param(binder, None).json_repr(), content={
     "kind": "Parameter::Positional",
     "loc": null,
     "children": {
@@ -1205,7 +1443,7 @@ test "parameter to_json" {
       "ty": null,
     },
   })
-  json_inspect(Parameter::Labelled(binder~, ty=Some(int_type)).json_repr(), content={
+  json_inspect(mk_labelled_param(binder, Some(int_type)).json_repr(), content={
     "kind": "Parameter::Labelled",
     "loc": null,
     "children": {
@@ -1235,7 +1473,7 @@ test "parameter to_json" {
     },
   })
   json_inspect(
-    Parameter::Optional(binder~, default=unit_expr, ty=Some(int_type)).json_repr(),
+    mk_optional_param(binder, unit_expr, Some(int_type)).json_repr(),
     content={
       "kind": "Parameter::Optional",
       "loc": null,
@@ -1275,42 +1513,35 @@ test "parameter to_json" {
       },
     },
   )
-  json_inspect(
-    Parameter::QuestionOptional(binder~, ty=Some(int_type)).json_repr(),
-    content={
-      "kind": "Parameter::QuestionOptional",
-      "loc": null,
-      "children": {
-        "binder": {
-          "kind": "Binder",
-          "loc": null,
-          "children": { "name": "param" },
-        },
-        "ty": {
-          "kind": "Type::Name",
-          "loc": null,
-          "children": {
-            "constr_id": {
-              "kind": "ConstrId",
-              "loc": null,
-              "children": {
-                "id": {
-                  "kind": "LongIdent::Ident",
-                  "loc": null,
-                  "children": { "value": "Int" },
-                },
+  json_inspect(mk_question_optional_param(binder, Some(int_type)).json_repr(), content={
+    "kind": "Parameter::QuestionOptional",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": { "name": "param" },
+      },
+      "ty": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
               },
             },
-            "tys": {
-              "kind": "Type::Name::TypeList",
-              "loc": null,
-              "children": [],
-            },
           },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
         },
       },
     },
-  )
+  })
 }
 
 ///|
@@ -1465,7 +1696,7 @@ test "field_def to_json" {
 ///|
 test "argument to_json" {
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
-  let argument = Argument::{ value: unit_expr, kind: ArgumentKind::Positional }
+  let argument = mk_argument(unit_expr, ArgumentKind::Positional)
   json_inspect(argument.json_repr(), content={
     "kind": "Argument",
     "loc": null,
@@ -1488,16 +1719,8 @@ test "argument to_json" {
 test "case to_json" {
   let any_pattern = Pattern::Any(loc=dummy_loc)
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
-  let case_with_guard = Case::{
-    pattern: any_pattern,
-    guard_: Some(unit_expr),
-    body: unit_expr,
-  }
-  let case_without_guard = Case::{
-    pattern: any_pattern,
-    guard_: None,
-    body: unit_expr,
-  }
+  let case_with_guard = mk_case(any_pattern, Some(unit_expr), unit_expr)
+  let case_without_guard = mk_case(any_pattern, None, unit_expr)
   json_inspect(case_with_guard.json_repr(), content={
     "kind": "Case",
     "loc": null,
@@ -1584,7 +1807,7 @@ test "func to_json" {
     tys=@list.from_array([]),
     loc=dummy_loc,
   )
-  let param = Parameter::Positional(binder~, ty=Some(int_type))
+  let param = mk_positional_param(binder, Some(int_type))
   // let any_pattern = Pattern::Any(loc=dummy_loc)
   json_inspect(
     Func::{
@@ -1712,11 +1935,8 @@ test "pattern to_json" {
     key_loc: dummy_loc,
     loc: dummy_loc,
   }
-  let constr_pat_arg = ConstrPatArg::{
-    pat: any_pattern,
-    kind: ArgumentKind::Positional,
-  }
-  let array_patterns = ArrayPatterns::Closed(@list.from_array([]))
+  let constr_pat_arg = mk_constr_pat_arg(any_pattern, ArgumentKind::Positional)
+  let array_patterns = mk_closed_array_patterns(@list.from_array([]))
   json_inspect(
     Pattern::Alias(pat=any_pattern, alias_=binder, loc=dummy_loc).json_repr(),
     content={
@@ -1760,45 +1980,33 @@ test "pattern to_json" {
       },
     },
   })
-  json_inspect(
-    Pattern::Constraint(pat=any_pattern, ty=int_type, loc=dummy_loc).json_repr(),
-    content={
-      "kind": "Pattern::Constraint",
-      "loc": null,
-      "children": {
-        "pat": { "kind": "Pattern::Any", "loc": null, "children": {} },
-        "ty": {
-          "kind": "Type::Name",
-          "loc": null,
-          "children": {
-            "constr_id": {
-              "kind": "ConstrId",
-              "loc": null,
-              "children": {
-                "id": {
-                  "kind": "LongIdent::Ident",
-                  "loc": null,
-                  "children": { "value": "Int" },
-                },
+  json_inspect(mk_constraint_pattern(any_pattern, int_type).json_repr(), content={
+    "kind": "Pattern::Constraint",
+    "loc": null,
+    "children": {
+      "pat": { "kind": "Pattern::Any", "loc": null, "children": {} },
+      "ty": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": { "value": "Int" },
               },
             },
-            "tys": {
-              "kind": "Type::Name::TypeList",
-              "loc": null,
-              "children": [],
-            },
           },
+          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
         },
       },
     },
-  )
+  })
   json_inspect(
-    Pattern::Constr(
-      constr~,
-      args=Some(@list.from_array([constr_pat_arg])),
-      is_open=false,
-      loc=dummy_loc,
-    ).json_repr(),
+    mk_constr_pattern(constr, Some(@list.from_array([constr_pat_arg])), false).json_repr(),
     content={
       "kind": "Pattern::Constr",
       "loc": null,
@@ -1841,33 +2049,30 @@ test "pattern to_json" {
       },
     },
   )
-  json_inspect(
-    Pattern::Constr(constr~, args=None, is_open=true, loc=dummy_loc).json_repr(),
-    content={
-      "kind": "Pattern::Constr",
-      "loc": null,
-      "children": {
-        "constr": {
-          "kind": "Constructor",
-          "loc": null,
-          "children": {
-            "name": {
-              "kind": "ConstrName",
-              "loc": null,
-              "children": { "name": "TestConstructor" },
-            },
-            "extra_info": {
-              "kind": "ConstructorExtraInfo::NoExtraInfo",
-              "loc": null,
-              "children": {},
-            },
+  json_inspect(mk_constr_pattern(constr, None, true).json_repr(), content={
+    "kind": "Pattern::Constr",
+    "loc": null,
+    "children": {
+      "constr": {
+        "kind": "Constructor",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "ConstrName",
+            "loc": null,
+            "children": { "name": "TestConstructor" },
+          },
+          "extra_info": {
+            "kind": "ConstructorExtraInfo::NoExtraInfo",
+            "loc": null,
+            "children": {},
           },
         },
-        "args": null,
-        "is_open": true,
       },
+      "args": null,
+      "is_open": true,
     },
-  )
+  })
   json_inspect(
     Or(pat1=any_pattern, pat2=constant_pattern, loc=dummy_loc).json_repr(),
     content={
@@ -1890,10 +2095,7 @@ test "pattern to_json" {
     },
   )
   json_inspect(
-    Pattern::Tuple(
-      pats=@list.from_array([any_pattern, constant_pattern]),
-      loc=dummy_loc,
-    ).json_repr(),
+    mk_tuple_pattern(@list.from_array([any_pattern, constant_pattern])).json_repr(),
     content={
       "kind": "Pattern::Tuple",
       "loc": null,
@@ -1920,11 +2122,7 @@ test "pattern to_json" {
     },
   )
   json_inspect(
-    Pattern::Record(
-      fields=@list.from_array([field_pat]),
-      is_closed=true,
-      loc=dummy_loc,
-    ).json_repr(),
+    mk_record_pattern(@list.from_array([field_pat]), true).json_repr(),
     content={
       "kind": "Pattern::Record",
       "loc": null,
@@ -1957,11 +2155,7 @@ test "pattern to_json" {
     },
   )
   json_inspect(
-    Pattern::Map(
-      elems=@list.from_array([map_elem]),
-      is_closed=false,
-      loc=dummy_loc,
-    ).json_repr(),
+    mk_map_pattern(@list.from_array([map_elem]), false).json_repr(),
     content={
       "kind": "Pattern::Map",
       "loc": null,
@@ -1990,7 +2184,7 @@ test "pattern to_json" {
     },
   )
   json_inspect(
-    Range(lhs=any_pattern, rhs=constant_pattern, kind=Inclusive, loc=dummy_loc).json_repr(),
+    mk_range_pattern(any_pattern, constant_pattern, Inclusive).json_repr(),
     content={
       "kind": "Pattern::Range",
       "loc": null,
@@ -2392,10 +2586,7 @@ test "field_pat to_json" {
 test "constr_pat_arg to_json" {
   let any_pattern = Pattern::Any(loc=dummy_loc)
   let label = Label::{ name: "arg_label", loc: dummy_loc }
-  let arg = ConstrPatArg::{
-    pat: any_pattern,
-    kind: ArgumentKind::Labelled(label),
-  }
+  let arg = mk_constr_pat_arg(any_pattern, ArgumentKind::Labelled(label))
   json_inspect(arg.json_repr(), content={
     "kind": "ConstrPatArg",
     "loc": null,
@@ -2453,12 +2644,11 @@ test "local_type_decl to_json" {
     args: @list.from_array([]),
     loc: dummy_loc,
   }
-  let local_type_decl = LocalTypeDecl::{
-    tycon: "TestType",
-    tycon_loc: dummy_loc,
-    components: Abstract,
-    deriving: @list.from_array([deriving_directive]),
-  }
+  let local_type_decl = mk_local_type_decl(
+    "TestType",
+    Abstract,
+    @list.from_array([deriving_directive]),
+  )
   json_inspect(local_type_decl.json_repr(), content={
     "kind": "LocalTypeDecl",
     "loc": null,
@@ -2505,10 +2695,10 @@ test "local_type_decl to_json" {
 ///|
 test "deriving_directive to_json" {
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
-  let argument = Argument::{ value: unit_expr, kind: Positional }
+  let argument = mk_argument(unit_expr, Positional)
   let deriving_directive = DerivingDirective::{
     type_name: TypeName::{
-      name: Dot(pkg="std", id="Show"),
+      name: mk_dot("std", "Show"),
       is_object: true,
       loc: dummy_loc,
     },
@@ -2611,12 +2801,11 @@ test "type_decl to_json" {
 ///|
 test "decl_body to_json" {
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
-  let local_type_decl = LocalTypeDecl::{
-    tycon: "LocalType",
-    tycon_loc: dummy_loc,
-    components: Abstract,
-    deriving: @list.from_array([]),
-  }
+  let local_type_decl = mk_local_type_decl(
+    "LocalType",
+    Abstract,
+    @list.from_array([]),
+  )
   json_inspect(
     DeclBody(local_types=@list.from_array([local_type_decl]), expr=unit_expr).json_repr(
       dummy_loc,
@@ -2657,13 +2846,9 @@ test "decl_body to_json" {
     },
   )
   json_inspect(
-    DeclStubs(
-      Import(
-        module_name=dummy_string_literal,
-        func_name=dummy_string_literal,
-        language=None,
-      ),
-    ).json_repr(dummy_loc),
+    DeclStubs(mk_import_stub(dummy_string_literal, dummy_string_literal, None)).json_repr(
+      dummy_loc,
+    ),
     content={
       "kind": "DeclBody::DeclStubs",
       "loc": null,
@@ -2695,7 +2880,7 @@ test "fun_decl to_json" {
     tys=@list.from_array([]),
     loc=dummy_loc,
   )
-  let param = Parameter::Positional(binder~, ty=Some(int_type))
+  let param = mk_positional_param(binder, Some(int_type))
   let type_var_constraint = TypeVarConstraint::{
     trait_: LongIdent::Ident(name="Show"),
     loc: dummy_loc,
@@ -2860,7 +3045,7 @@ test "trait_method_decl to_json" {
     tys=@list.from_array([]),
     loc=dummy_loc,
   )
-  let param = Parameter::Positional(binder~, ty=Some(int_type))
+  let param = mk_positional_param(binder, Some(int_type))
   let type_var_binder = TypeVarBinder::{
     name: "T",
     constraints: @list.from_array([]),
@@ -2873,7 +3058,7 @@ test "trait_method_decl to_json" {
     quantifiers: @list.from_array([type_var_binder]),
     params: @list.from_array([param]),
     return_type: Some(int_type),
-    error_type: ErrorType::DefaultErrorType(loc=dummy_loc),
+    error_type: mk_default_error_type(),
     has_default: Some(dummy_loc),
     attrs: @list.empty(),
     loc: dummy_loc,
@@ -3007,7 +3192,7 @@ test "trait_decl to_json" {
     name: trait_binder,
     supers: @list.from_array([super_constraint]),
     methods: @list.from_array([trait_method]),
-    vis: Pub(attr=None, loc=dummy_loc),
+    vis: mk_pub(None),
     loc: dummy_loc,
     attrs: @list.from_array([dummy_attribute]),
     doc: dummy_docstring,

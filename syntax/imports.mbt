@@ -3,6 +3,7 @@ using @tokens {
   type ByteLiteral,
   type BytesLiteral,
   type CharLiteral,
+  type Comment,
   type StringLiteral,
   type InterpSource,
 }

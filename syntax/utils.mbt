@@ -97,7 +97,7 @@ pub fn make_tuple_pattern(
   loc~ : Location,
   pats : @list.List[Pattern],
 ) -> Pattern {
-  Tuple(pats~, loc~)
+  Tuple(pats~, loc~, lparen_loc=loc, rparen_loc=loc)
 }
 
 ///|
@@ -108,7 +108,7 @@ pub fn make_constr_pattern(
   args : @list.List[ConstrPatArg]?,
   is_open : Bool,
 ) -> Pattern {
-  Constr(constr~, args~, is_open~, loc~)
+  Constr(constr~, args~, is_open~, loc~, lparen_loc=None, rparen_loc=None)
 }
 
 ///|
@@ -151,6 +151,7 @@ pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
         args=@list.singleton(Argument::{
           value: arg,
           kind: ArgumentKind::Positional,
+          loc: arg.loc(),
         }),
         attr=ApplyAttr::NoAttr,
         loc~,
@@ -216,7 +217,11 @@ pub fn desugar_array_get(loc~ : Location, obj : Expr, index : Expr) -> Expr {
       loc: bracket_loc(index),
     },
     args=@list.from_array([
-      Argument::{ value: index, kind: ArgumentKind::Positional },
+      Argument::{
+        value: index,
+        kind: ArgumentKind::Positional,
+        loc: index.loc(),
+      },
     ]),
     return_self=false,
     attr=ApplyAttr::NoAttr,
@@ -239,8 +244,12 @@ pub fn desugar_array_set(
       loc: bracket_loc(index),
     },
     args=@list.from_array([
-      Argument::{ value: index, kind: ArgumentKind::Positional },
-      Argument::{ value, kind: ArgumentKind::Positional },
+      Argument::{
+        value: index,
+        kind: ArgumentKind::Positional,
+        loc: index.loc(),
+      },
+      Argument::{ value, kind: ArgumentKind::Positional, loc: value.loc() },
     ]),
     return_self=false,
     attr=ApplyAttr::NoAttr,
@@ -421,8 +430,14 @@ pub fn make_arrow_fn(
   let parameters = params.map(fn(p) {
     let (param, ty) = p
     match param {
-      Named(binder) => Parameter::Positional(binder~, ty~)
-      Unnamed(loc) => Parameter::DiscardPositional(ty~, loc~)
+      Named(binder) => {
+        let loc = match ty {
+          Some(ty) => binder.loc.merge(ty.loc())
+          None => binder.loc
+        }
+        Parameter::Positional(binder~, ty~, loc~, colon_loc=None)
+      }
+      Unnamed(loc) => Parameter::DiscardPositional(ty~, loc~, colon_loc=None)
     }
   })
   Func::{
@@ -577,15 +592,11 @@ pub fn Impl::loc(self : Self) -> Location {
 ///|
 pub fn Parameter::loc(self : Self) -> Location {
   match self {
-    Optional(binder~, ty=_, default~) => binder.loc.merge(default.loc())
-    Labelled(binder~, ty~)
-    | Positional(binder~, ty~)
-    | QuestionOptional(binder~, ty~) =>
-      match ty {
-        None => binder.loc
-        Some(ty) => binder.loc.merge(ty.loc())
-      }
-    DiscardPositional(ty=_, loc~) => loc
+    Optional(loc~, ..)
+    | Labelled(loc~, ..)
+    | Positional(loc~, ..)
+    | QuestionOptional(loc~, ..)
+    | DiscardPositional(loc~, ..) => loc
   }
 }
 

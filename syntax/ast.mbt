@@ -8,7 +8,7 @@ pub(all) enum RangeKind {
 ///|
 pub(all) enum Visibility {
   Default
-  Pub(attr~ : String?, loc~ : Location)
+  Pub(attr~ : String?, attr_loc~ : Location?, loc~ : Location)
   Priv(loc~ : Location)
 }
 
@@ -41,10 +41,22 @@ pub(all) struct ConstrName {
 }
 
 ///|
+pub(all) struct LocatedString {
+  value : StringLiteral
+  loc : Location
+}
+
+///|
 // checked!
 pub(all) enum LongIdent {
   Ident(name~ : String)
-  Dot(pkg~ : String, id~ : String)
+  Dot(
+    pkg~ : String,
+    pkg_loc~ : Location,
+    dot_loc~ : Location,
+    id~ : String,
+    id_loc~ : Location
+  )
 }
 
 ///|
@@ -83,12 +95,18 @@ pub(all) enum Type {
 }
 
 ///|
+pub(all) enum DefaultErrorTypeKind {
+  Raise
+  Bang
+}
+
+///|
 pub(all) enum ErrorType {
   ErrorType(ty~ : Type)
-  DefaultErrorType(loc~ : Location)
+  DefaultErrorType(loc~ : Location, kind~ : DefaultErrorTypeKind)
   NoErrorType
   Noraise(loc~ : Location)
-  MaybeError(ty~ : Type)
+  MaybeError(ty~ : Type, question_loc~ : Location)
 }
 
 ///|
@@ -267,20 +285,46 @@ pub(all) struct AliasTarget {
 pub(all) struct Argument {
   value : Expr
   kind : ArgumentKind
+  loc : Location
 }
 
 ///|
 pub(all) enum Parameter {
   /// `_ : Int`
-  DiscardPositional(ty~ : Type?, loc~ : Location)
+  DiscardPositional(ty~ : Type?, loc~ : Location, colon_loc~ : Location?)
   /// `param : Int`
-  Positional(binder~ : Binder, ty~ : Type?)
+  Positional(
+    binder~ : Binder,
+    ty~ : Type?,
+    loc~ : Location,
+    colon_loc~ : Location?
+  )
   /// `label~ : Int`
-  Labelled(binder~ : Binder, ty~ : Type?)
+  Labelled(
+    binder~ : Binder,
+    ty~ : Type?,
+    loc~ : Location,
+    label_mark_loc~ : Location?,
+    colon_loc~ : Location?
+  )
   /// `label? : Int = default`
-  Optional(binder~ : Binder, default~ : Expr, ty~ : Type?)
+  Optional(
+    binder~ : Binder,
+    default~ : Expr,
+    ty~ : Type?,
+    loc~ : Location,
+    question_loc~ : Location?,
+    colon_loc~ : Location?,
+    equal_loc~ : Location?
+  )
   /// `label? : Int`
-  QuestionOptional(binder~ : Binder, ty~ : Type?)
+  QuestionOptional(
+    binder~ : Binder,
+    ty~ : Type?,
+    loc~ : Location,
+    question_loc~ : Location?,
+    colon_loc~ : Location?
+  )
 }
 
 ///|
@@ -291,6 +335,9 @@ pub(all) struct Case {
   pattern : Pattern
   guard_ : Expr?
   body : Expr
+  loc : Location
+  arrow_loc : Location
+  guard_loc : Location?
 }
 
 ///|
@@ -611,10 +658,10 @@ pub(all) enum TryOperatorKind {
 
 ///|
 pub(all) enum DotDotBinder {
-  Underscore
-  NoBinder
-  BinderAs(Binder)
-  Binder(Binder)
+  Underscore(dotdot_loc~ : Location)
+  NoBinder(dotdot_loc~ : Location)
+  BinderAs(Binder, dotdot_loc~ : Location)
+  Binder(Binder, dotdot_loc~ : Location)
 }
 
 ///|
@@ -627,8 +674,20 @@ pub(all) enum ArrayPattern {
 
 ///|
 pub(all) enum ArrayPatterns {
-  Closed(@list.List[ArrayPattern])
-  Open(@list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder)
+  Closed(
+    @list.List[ArrayPattern],
+    loc~ : Location,
+    lbrack_loc~ : Location,
+    rbrack_loc~ : Location
+  )
+  Open(
+    @list.List[ArrayPattern],
+    @list.List[ArrayPattern],
+    DotDotBinder,
+    loc~ : Location,
+    lbrack_loc~ : Location,
+    rbrack_loc~ : Location
+  )
 }
 
 ///|
@@ -649,6 +708,7 @@ pub(all) struct FieldPat {
 pub(all) struct ConstrPatArg {
   pat : Pattern
   kind : ArgumentKind
+  loc : Location
 }
 
 ///|
@@ -670,30 +730,57 @@ pub(all) enum Pattern {
   Array(pats~ : ArrayPatterns, loc~ : Location)
   Constant(c~ : Constant, loc~ : Location)
   /// `(pattern : Type)`
-  Constraint(pat~ : Pattern, ty~ : Type, loc~ : Location)
+  Constraint(pat~ : Pattern, ty~ : Type, loc~ : Location, colon_loc~ : Location)
   /// `Constructor` or `Constructor(p1, p2, p3)`
   Constr(
     constr~ : Constructor,
     args~ : @list.List[ConstrPatArg]?,
     is_open~ : Bool,
-    loc~ : Location
+    loc~ : Location,
+    lparen_loc~ : Location?,
+    rparen_loc~ : Location?
   )
   /// `pat1 | pat2`
   Or(pat1~ : Pattern, pat2~ : Pattern, loc~ : Location)
   /// `(p1, p2, p3)`
-  Tuple(pats~ : @list.List[Pattern], loc~ : Location)
+  Tuple(
+    pats~ : @list.List[Pattern],
+    loc~ : Location,
+    lparen_loc~ : Location,
+    rparen_loc~ : Location
+  )
   /// `binder`
   Var(Binder)
   /// `{ field1, field2, .. }`
-  Record(fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : Location)
+  Record(
+    fields~ : @list.List[FieldPat],
+    is_closed~ : Bool,
+    loc~ : Location,
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location
+  )
   /// `{ "k1": e1, "k2": e2, .. }`
-  Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : Location)
+  Map(
+    elems~ : @list.List[MapPatElem],
+    is_closed~ : Bool,
+    loc~ : Location,
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location
+  )
   /// `p1..=p2` or `p1..<p2` 
-  Range(lhs~ : Pattern, rhs~ : Pattern, kind~ : RangeKind, loc~ : Location)
+  Range(
+    lhs~ : Pattern,
+    rhs~ : Pattern,
+    kind~ : RangeKind,
+    loc~ : Location,
+    op_loc~ : Location
+  )
   SpecialConstr(
     binder~ : Binder,
     args~ : @list.List[ConstrPatArg],
-    loc~ : Location
+    loc~ : Location,
+    lparen_loc~ : Location,
+    rparen_loc~ : Location
   )
 }
 
@@ -706,6 +793,8 @@ pub(all) struct LocalTypeDecl {
   tycon_loc : Location
   components : TypeDesc
   deriving : @list.List[DerivingDirective]
+  loc : Location
+  type_loc : Location
 }
 
 ///|
@@ -733,24 +822,24 @@ pub(all) struct TypeDecl {
 ///|
 pub(all) enum FuncStubs {
   Import(
-    module_name~ : StringLiteral,
-    func_name~ : StringLiteral,
-    language~ : StringLiteral?
+    module_name~ : LocatedString,
+    func_name~ : LocatedString,
+    language~ : LocatedString?
   )
-  Embedded(language~ : StringLiteral?, code~ : EmbeddedCode)
+  Embedded(language~ : LocatedString?, code~ : EmbeddedCode)
 }
 
 ///|
 pub(all) enum EmbeddedCode {
-  CodeString(StringLiteral)
-  CodeMultilineString(@list.List[String])
+  CodeString(LocatedString)
+  CodeMultilineString(@list.List[LocatedString])
 }
 
 ///|
 pub(all) enum DeclBody {
   DeclBody(local_types~ : @list.List[LocalTypeDecl], expr~ : Expr)
   DeclStubs(FuncStubs)
-  DeclNone
+  DeclNone(loc~ : Location?)
 }
 
 ///|
@@ -916,3 +1005,15 @@ pub(all) enum Impl {
 
 ///|
 pub type Impls = @list.List[Impl]
+
+///|
+pub(all) struct TopLevelTrivia {
+  comment : Comment
+  loc : Location
+}
+
+///|
+pub(all) struct ParsedImpls {
+  impls : Impls
+  trivia : @list.List[TopLevelTrivia]
+}

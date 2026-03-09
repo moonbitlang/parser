@@ -252,24 +252,75 @@ list_semis[T](X : T) -> List[T]
   : ioption(annot) { $1 }
   ;
 
+%inline annot_with_colon -> (Type, Location)
+  : ":" type_ { ($2, mk_loc($loc($1))) }
+  ;
+
+%inline opt_annot_with_colon -> (Type?, Location?)
+  : ioption(annot_with_colon) {
+    match $1 {
+      None => (None, None)
+      Some((ty, colon_loc)) => (Some(ty), Some(colon_loc))
+    }
+  }
+  ;
+
 parameter -> Parameter
-  : "_" opt_annot { DiscardPositional(ty = $2, loc = mk_loc($loc($1))) }
-  | binder opt_annot { Positional(binder = $1, ty = $2) }
-  | POST_LABEL opt_annot {
+  : "_" opt_annot_with_colon {
+      let (ty, colon_loc) = $2
+      mk_discard_parameter(ty, mk_loc($loc($1)), colon_loc)
+    }
+  | binder opt_annot_with_colon {
+      let (ty, colon_loc) = $2
+      mk_positional_parameter($1, ty, mk_loc($sloc), colon_loc)
+    }
+  | POST_LABEL opt_annot_with_colon {
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-      Labelled(binder~, ty = $2)
+      let (ty, colon_loc) = $2
+      mk_labelled_parameter(
+        binder,
+        ty,
+        mk_loc($sloc),
+        Some(last_char_loc(mk_loc($loc($1)))),
+        colon_loc,
+      )
     }
-  | POST_LABEL opt_annot "=" expr {
+  | POST_LABEL opt_annot_with_colon "=" expr {
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-      Optional(binder~, ty = $2, default = $4)
+      let (ty, colon_loc) = $2
+      mk_optional_parameter(
+        binder,
+        ty,
+        $4,
+        mk_loc($sloc),
+        None,
+        colon_loc,
+        Some(mk_loc($loc($3))),
+      )
     }
-  | LIDENT "?" opt_annot "=" expr {
+  | LIDENT "?" opt_annot_with_colon "=" expr {
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-      Optional(binder~, ty = $3, default = $5)
+      let (ty, colon_loc) = $3
+      mk_optional_parameter(
+        binder,
+        ty,
+        $5,
+        mk_loc($sloc),
+        Some(mk_loc($loc($2))),
+        colon_loc,
+        Some(mk_loc($loc($4))),
+      )
     }
-  | LIDENT "?" opt_annot {
+  | LIDENT "?" opt_annot_with_colon {
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-      QuestionOptional(binder~, ty = $3)
+      let (ty, colon_loc) = $3
+      mk_question_optional_parameter(
+        binder,
+        ty,
+        mk_loc($sloc),
+        Some(mk_loc($loc($2))),
+        colon_loc,
+      )
     }
   ;
 
@@ -371,40 +422,56 @@ fun_header_generic -> ((TypeName?, Binder), Location?, List[TypeVarBinder])
 
 local_type_decl -> LocalTypeDecl
   : "struct" UIDENT "{" list_semis(record_decl_field) "}" deriving_directive_list {
-    LocalTypeDecl::{
-      tycon : $2,
-      tycon_loc : mk_loc($loc($2)),
-      components: Record(fields = $4, constr_decl = None),
-      deriving: $6
-    }
+    mk_local_type_decl(
+      $2,
+      mk_loc($loc($2)),
+      Record(fields = $4, constr_decl = None),
+      $6,
+      mk_loc($sloc),
+      mk_loc($loc($1)),
+    )
   }
   | "struct" UIDENT "(" non_empty_list_commas(type_) ")" deriving_directive_list {
-    LocalTypeDecl::{
-      tycon : $2,
-      tycon_loc : mk_loc($loc($2)),
-      components: TupleStruct($4),
-      deriving: $6
-    }
+    mk_local_type_decl(
+      $2,
+      mk_loc($loc($2)),
+      TupleStruct($4),
+      $6,
+      mk_loc($sloc),
+      mk_loc($loc($1)),
+    )
   }
   | "enum" UIDENT "{" list_semis(enum_constructor) "}" deriving_directive_list {
-    LocalTypeDecl::{
-      tycon : $2,
-      tycon_loc : mk_loc($loc($2)),
-      components: Variant($4),
-      deriving: $6
-    }
+    mk_local_type_decl(
+      $2,
+      mk_loc($loc($2)),
+      Variant($4),
+      $6,
+      mk_loc($sloc),
+      mk_loc($loc($1)),
+    )
   }
   | "type" UIDENT type_ deriving_directive_list {
-    LocalTypeDecl::{
-      tycon : $2,
-      tycon_loc : mk_loc($loc($2)),
-      components: Newtype($3),
-      deriving: $4
-    }
+    mk_local_type_decl(
+      $2,
+      mk_loc($loc($2)),
+      Newtype($3),
+      $4,
+      mk_loc($sloc),
+      mk_loc($loc($1)),
+    )
   }
   ;
 
-extern_fun_header -> (StringLiteral, FunDecl)
+located_string -> LocatedString
+  : STRING { mk_located_string($1, $loc($1)) }
+  ;
+
+multiline_string_literal -> LocatedString
+  : MULTILINE_STRING { mk_located_string($1, $loc($1)) }
+  ;
+
+extern_fun_header -> (LocatedString, FunDecl)
   : attributes visibility "extern" STRING "fn" fun_binder optional_bang optional_type_parameters option(parameters) func_return_type {
     let (type_name, f) = $6
     let (return_type, error_type) = $10
@@ -423,7 +490,7 @@ extern_fun_header -> (StringLiteral, FunDecl)
       attrs: $1,
       loc : mk_loc($loc)
     }
-    ($4, fn_decl)
+    (mk_located_string($4, $loc($4)), fn_decl)
   }
   ;
 
@@ -448,7 +515,9 @@ impl_body -> DeclBody
     let (local_types, expr) = $1
     DeclBody(local_types~, expr~)
   }
-  | "=" STRING { DeclStubs(Embedded(language = None, code = CodeString($2))) }
+  | "=" located_string {
+    DeclStubs(Embedded(language = None, code = CodeString($2)))
+  }
   ;
 
 expression -> Expr
@@ -621,7 +690,7 @@ structure_item -> Impl
       is_declare~
     )
   }
-  | extern_fun_header "=" STRING STRING {
+  | extern_fun_header "=" located_string located_string {
     let (language, fun_decl) = $1
     TopFuncDef(
       loc = mk_loc($sloc),
@@ -630,28 +699,28 @@ structure_item -> Impl
     )
   }
     
-  | fun_header "=" STRING STRING {
+  | fun_header "=" located_string located_string {
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = $1,
       decl_body = DeclStubs(Import(module_name = $3, func_name = $4, language = None))
     )
   }
-  | fun_header "=" STRING {
+  | fun_header "=" located_string {
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = $1,
       decl_body = DeclStubs(Embedded(language = None, code = CodeString($3)))
     )
   }
-  | fun_header "=" non_empty_list(MULTILINE_STRING) {
+  | fun_header "=" non_empty_list(multiline_string_literal) {
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = $1,
       decl_body = DeclStubs(Embedded(language = None, code = CodeMultilineString($3)))
     )
   }
-  | extern_fun_header "=" STRING {
+  | extern_fun_header "=" located_string {
     let (language, decl) = $1
     TopFuncDef(
       loc = mk_loc($sloc),
@@ -659,7 +728,7 @@ structure_item -> Impl
       decl_body = DeclStubs(Embedded(language = Some(language), code = CodeString($3)))
     )
   }
-  | extern_fun_header "=" non_empty_list(MULTILINE_STRING) {
+  | extern_fun_header "=" non_empty_list(multiline_string_literal) {
     let (language, decl) = $1
     TopFuncDef(
       loc = mk_loc($sloc),
@@ -679,7 +748,7 @@ structure_item -> Impl
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = $1,
-      decl_body = DeclNone
+      decl_body = mk_decl_none(Some($1.loc))
     )
   }
   | attributes visibility "fnalias" func_alias_targets {
@@ -876,13 +945,16 @@ structure_item -> Impl
 %inline visibility -> Visibility
   :  { Default }
   | "priv" { Priv(loc = mk_loc($sloc)) }
-  | "pub" pub_attr { Pub(loc = mk_loc($sloc), attr = $2) }
+  | "pub" pub_attr {
+      let (attr, attr_loc) = $2
+      Pub(loc = mk_loc($sloc), attr~, attr_loc~)
+    }
   ;
 
-pub_attr -> String?
-  :  { None }
-  | "(" "readonly" ")" { Some("readonly") }
-  | "(" LIDENT ")" { Some($2) }
+pub_attr -> (String?, Location?)
+  :  { (None, None) }
+  | "(" "readonly" ")" { (Some("readonly"), Some(mk_loc($loc($2)))) }
+  | "(" LIDENT ")" { (Some($2), Some(mk_loc($loc($2)))) }
   ;
 
 %inline is_declare -> Bool
@@ -1071,29 +1143,45 @@ wildcard -> Location
   ;
 
 trait_method_param -> Parameter
-  : type_ { DiscardPositional(ty = Some($1), loc = mk_loc($sloc)) }
-  | binder ":" type_ { Positional(binder = $1, ty = Some($3)) }
-  | binder "?" ":" type_ { QuestionOptional(binder = $1, ty = Some($4)) }
+  : type_ { mk_discard_parameter(Some($1), mk_loc($sloc), None) }
+  | binder ":" type_ {
+      mk_positional_parameter($1, Some($3), mk_loc($sloc), Some(mk_loc($loc($2))))
+    }
+  | binder "?" ":" type_ {
+      mk_question_optional_parameter(
+        $1,
+        Some($4),
+        mk_loc($sloc),
+        Some(mk_loc($loc($2))),
+        Some(mk_loc($loc($3))),
+      )
+    }
   | POST_LABEL ":" type_ { 
     let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-    Labelled(binder~, ty = Some($3))
+    mk_labelled_parameter(
+      binder,
+      Some($3),
+      mk_loc($sloc),
+      Some(last_char_loc(mk_loc($loc($1)))),
+      Some(mk_loc($loc($2))),
+    )
   }
   ;
 
 qual_ident -> LongIdent
   : LIDENT { Ident(name = $1) }
-  | PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
+  | PACKAGE_NAME DOT_LIDENT { mk_dot_long_ident($1, $loc($1), $2, $loc($2)) }
   ;
 
 qual_ident_simple_expr -> LongIdent
   : LIDENT %prec prec_apply_non_ident_fn { Ident(name = $1) }
-  | PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
+  | PACKAGE_NAME DOT_LIDENT { mk_dot_long_ident($1, $loc($1), $2, $loc($2)) }
   ;
 
 %inline qual_ident_ty_inline -> LongIdent
   : UIDENT { LongIdent::Ident(name = $1) }
-  | PACKAGE_NAME DOT_LIDENT { LongIdent::Dot(pkg = $1, id = $2) }
-  | PACKAGE_NAME DOT_UIDENT { LongIdent::Dot(pkg = $1, id = $2) }
+  | PACKAGE_NAME DOT_LIDENT { mk_dot_long_ident($1, $loc($1), $2, $loc($2)) }
+  | PACKAGE_NAME DOT_UIDENT { mk_dot_long_ident($1, $loc($1), $2, $loc($2)) }
   ;
 
 qual_ident_ty -> LongIdent
@@ -1122,10 +1210,12 @@ and_func -> (Binder, Type?, Func)
   ;
 
 statement -> Statement
-  : "let" pattern opt_annot "=" expr { 
+  : "let" pattern opt_annot_with_colon "=" expr { 
     let pat = match $3 {
-      None => $2
-      Some(ty) => Pattern::Constraint(pat = $2, ty~, loc = mk_loc($sloc))
+      (None, _) => $2
+      (Some(ty), Some(colon_loc)) =>
+        mk_pattern_constraint($2, ty, mk_loc($sloc), colon_loc)
+      _ => $2
     }
     StmtLet(pat~, expr = $5, loc = mk_loc($sloc))
   }
@@ -1223,16 +1313,28 @@ while_expr -> Expr
   }
   ;
 
+guard_clause -> (Expr, Location)
+  : "if" infix_expr { ($2, mk_loc($loc($1))) }
+  ;
+
 single_pattern_case -> Case
-  : pattern option(preceded("if", infix_expr)) "=>" expr_statement { 
-    Case::{ pattern : $1, guard_ : $2, body : $4 }
+  : pattern option(guard_clause) "=>" expr_statement {
+    let (guard_, guard_loc) = match $2 {
+      Some((guard_, guard_loc)) => (Some(guard_), Some(guard_loc))
+      None => (None, None)
+    }
+    mk_case($1, guard_, $4, mk_loc($sloc), mk_loc($loc($3)), guard_loc)
   }
   | "..." { 
-    Case::{ 
-      pattern : Pattern::Any(loc = mk_loc($sloc)), 
-      guard_ : None, 
-      body : Hole(loc = mk_loc($sloc), kind = Todo) 
-    }
+    let loc = mk_loc($sloc)
+    mk_case(
+      Pattern::Any(loc~),
+      None,
+      Hole(loc~, kind = Todo),
+      loc,
+      loc,
+      None,
+    )
   }
   ;
 
@@ -1725,8 +1827,20 @@ tuple_expr -> Expr
       exprs => @syntax.make_tuple_expr(loc = mk_loc($sloc), exprs)
     }
   }
-  | "(" binder ":" type_ ")" { Constraint(expr = @syntax.binder_to_expr($2), ty = $4, loc = mk_loc($sloc)) }
-  | "(" "_" ":" type_ ")" { Constraint(expr = Hole(loc = mk_loc($loc($2)), kind = Incomplete), ty = $4, loc = mk_loc($sloc)) }
+  | "(" binder ":" type_ ")" {
+    Constraint(
+      expr = @syntax.binder_to_expr($2),
+      ty = $4,
+      loc = mk_loc($sloc),
+    )
+  }
+  | "(" "_" ":" type_ ")" {
+    Constraint(
+      expr = Hole(loc = mk_loc($loc($2)), kind = Incomplete),
+      ty = $4,
+      loc = mk_loc($sloc),
+    )
+  }
   | "(" expr ":" type_ ")" { Constraint(expr = $2, ty = $4, loc = mk_loc($sloc)) }
   | "(" ")" { Unit(loc = mk_loc($sloc), faked = false) }
   ;
@@ -1952,24 +2066,29 @@ argument -> Argument
       Some(question_loc) => LabelledOption(label = $1, question_loc~)
       None => Labelled($1)
     }
-    Argument::{ value: $4, kind: arg_kind }
+    mk_argument($4, arg_kind, mk_loc($sloc))
   }
-  | expr { Argument::{ value: $1, kind: Positional } }
+  | expr { mk_argument($1, Positional, mk_loc($sloc)) }
   | POST_LABEL { 
-    let label = Label::{ name: $1, loc: mk_loc($loc($1)) }
-    let arg_value = @syntax.make_ident_expr(loc = mk_loc($loc($1)), Var::{ name: Ident(name = $1), loc: mk_loc($loc($1)) })
-    Argument::{ value: arg_value, kind: LabelledPun(label) }
+    let loc = mk_loc($loc($1)).trim_last_char()
+    let label = Label::{ name: $1, loc }
+    let arg_value = @syntax.make_ident_expr(loc~, Var::{ name: Ident(name = $1), loc })
+    mk_argument(arg_value, LabelledPun(label), mk_loc($sloc))
   }
   | POST_LABEL "=" expr {
-    let label = Label::{ name: $1, loc: mk_loc($loc($1)) }
+    let label = Label::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
     let arg_value = $3
-    Argument::{ value: arg_value, kind: Labelled(label) }
+    mk_argument(arg_value, Labelled(label), mk_loc($sloc))
   }
   | LIDENT "?" { 
     let loc = mk_loc($loc($1))
     let label = Label::{ name: $1, loc }
     let arg_value = @syntax.make_ident_expr(loc~, Var::{ name: Ident(name = $1), loc })
-    Argument::{ value: arg_value, kind: LabelledOptionPun(label~, question_loc = mk_loc($loc($2))) }
+    mk_argument(
+      arg_value,
+      LabelledOptionPun(label~, question_loc = mk_loc($loc($2))),
+      mk_loc($sloc),
+    )
   }
   ;
 
@@ -2000,8 +2119,12 @@ or_pattern -> Pattern
   ;
 
 range_pattern -> Pattern
-  : simple_pattern "..<" simple_pattern { Range(lhs = $1, rhs = $3, kind=Exclusive, loc = mk_loc($sloc)) }
-  | simple_pattern "..=" simple_pattern { Range(lhs = $1, rhs = $3, kind=Inclusive, loc = mk_loc($sloc)) }
+  : simple_pattern "..<" simple_pattern {
+    mk_range_pattern($1, $3, Exclusive, mk_loc($sloc), mk_loc($loc($2)))
+  }
+  | simple_pattern "..=" simple_pattern {
+    mk_range_pattern($1, $3, Inclusive, mk_loc($sloc), mk_loc($loc($2)))
+  }
   | simple_pattern { $1 }
   ;
 
@@ -2029,22 +2152,61 @@ simple_pattern -> Pattern
   }
   // bits constr pattern `i32(args)` 
   // To disambiguate with pattern variable, the args list must be present.
-  | binder delimited("(", constr_pat_arguments_no_open, ")") {
-    Pattern::SpecialConstr(binder = $1, args = $2, loc = mk_loc($sloc))
+  | binder "(" constr_pat_arguments_no_open ")" {
+    mk_special_constr_pattern(
+      $1,
+      $3,
+      mk_loc($sloc),
+      mk_loc($loc($2)),
+      mk_loc($loc($4)),
+    )
   }
   | "(" pattern ")" { $2 }
   | "(" pattern "," non_empty_list_commas(pattern) ")" { @syntax.make_tuple_pattern(loc = mk_loc($sloc), $4.add($2)) }
-  | "(" pattern annot ")" { Constraint(pat = $2, ty = $3, loc = mk_loc($sloc)) }
-  | "[" array_sub_patterns "]" { Array(pats = $2, loc = mk_loc($sloc)) }
-  | "{" "}" { Record(fields = @list.empty(), is_closed = true, loc = mk_loc($sloc)) }
-  | "{" ".." option(",") "}" { Record(fields = @list.empty(), is_closed = false, loc = mk_loc($sloc)) }
+  | "(" pattern annot ")" {
+    mk_pattern_constraint($2, $3, mk_loc($sloc), mk_loc($loc($3)))
+  }
+  | "[" array_sub_patterns "]" {
+    let pats = match $2 {
+      Closed(ps, ..) =>
+        mk_closed_array_patterns(ps, mk_loc($sloc), mk_loc($loc($1)), mk_loc($loc($3)))
+      Open(ps1, ps2, b, ..) =>
+        mk_open_array_patterns(
+          ps1,
+          ps2,
+          b,
+          mk_loc($sloc),
+          mk_loc($loc($1)),
+          mk_loc($loc($3)),
+        )
+    }
+    Array(pats~, loc = mk_loc($sloc))
+  }
+  | "{" "}" {
+    mk_record_pattern(
+      @list.empty(),
+      true,
+      mk_loc($sloc),
+      mk_loc($loc($1)),
+      mk_loc($loc($2)),
+    )
+  }
+  | "{" ".." option(",") "}" {
+    mk_record_pattern(
+      @list.empty(),
+      false,
+      mk_loc($sloc),
+      mk_loc($loc($1)),
+      mk_loc($loc($4)),
+    )
+  }
   | "{" non_empty_fields_pat "}" { 
     let (fields, is_closed) = $2
-    Record(fields~, is_closed~, loc = mk_loc($sloc))
+    mk_record_pattern(fields, is_closed, mk_loc($sloc), mk_loc($loc($1)), mk_loc($loc($3)))
   }
   | "{" non_empty_map_elems_pat "}" { 
     let (elems, is_closed) = $2
-    Map(elems~, is_closed~, loc = mk_loc($sloc))
+    mk_map_pattern(elems, is_closed, mk_loc($sloc), mk_loc($loc($1)), mk_loc($loc($3)))
   }
   ;
 
@@ -2063,27 +2225,75 @@ array_sub_pattern -> ArrayPattern
   ;
 
 dotdot_binder -> DotDotBinder
-  : ".." binder { Binder($2) }
-  | ".." "_" { Underscore }
-  | ".." "as" binder { BinderAs($3) }
-  | ".." { NoBinder }
+  : ".." binder { mk_dotdot_binder($2, mk_loc($loc($1))) }
+  | ".." "_" { mk_dotdot_underscore(mk_loc($loc($1))) }
+  | ".." "as" binder { mk_dotdot_binder_as($3, mk_loc($loc($1))) }
+  | ".." { mk_dotdot_no_binder(mk_loc($loc($1))) }
   ;
 
 array_sub_patterns -> ArrayPatterns
-  :  { Closed(@list.empty()) }
-  | array_sub_pattern { Closed(@list.singleton($1)) }
+  :  {
+      mk_closed_array_patterns(
+        @list.empty(),
+        mk_loc($sloc),
+        mk_loc($sloc),
+        mk_loc($sloc),
+      )
+    }
+  | array_sub_pattern {
+      mk_closed_array_patterns(
+        @list.singleton($1),
+        mk_loc($sloc),
+        mk_loc($sloc),
+        mk_loc($sloc),
+      )
+    }
   | array_sub_pattern "," array_sub_patterns { 
     match $3 {
-      Closed(ps) => Closed(ps.add($1))
-      Open(ps1, ps2, b) => Open(ps1.add($1), ps2, b)
+      Closed(ps, ..) =>
+        mk_closed_array_patterns(
+          ps.add($1),
+          mk_loc($sloc),
+          mk_loc($sloc),
+          mk_loc($sloc),
+        )
+      Open(ps1, ps2, b, ..) =>
+        mk_open_array_patterns(
+          ps1.add($1),
+          ps2,
+          b,
+          mk_loc($sloc),
+          mk_loc($sloc),
+          mk_loc($sloc),
+        )
     }
   }
-  | dotdot_binder "," non_empty_list_commas(array_sub_pattern) { Open(@list.empty(), $3, $1) }
-  | dotdot_binder ioption(",") { Open(@list.empty(), @list.empty(), $1) }
+  | dotdot_binder "," non_empty_list_commas(array_sub_pattern) {
+      mk_open_array_patterns(
+        @list.empty(),
+        $3,
+        $1,
+        mk_loc($sloc),
+        mk_loc($sloc),
+        mk_loc($sloc),
+      )
+    }
+  | dotdot_binder ioption(",") {
+      mk_open_array_patterns(
+        @list.empty(),
+        @list.empty(),
+        $1,
+        mk_loc($sloc),
+        mk_loc($sloc),
+        mk_loc($sloc),
+      )
+    }
   ;
 
 error_annotation -> ErrorType
-  : "raise" { DefaultErrorType(loc = mk_loc($sloc)) }
+  : "raise" {
+      mk_default_error_type(mk_loc($sloc), DefaultErrorTypeKind::Raise)
+    }
   | "raise" error_type { ErrorType(ty = $2) }
   | "noraise" { Noraise(loc = mk_loc($sloc)) }
   | "raise" "?" { 
@@ -2092,15 +2302,17 @@ error_annotation -> ErrorType
       tys = @list.empty(),
       loc = mk_loc($sloc)
     )
-    MaybeError(ty = fake_error)
+    mk_maybe_error(fake_error, mk_loc($loc($2)))
   }
   ;
 
 return_type -> (Type, ErrorType)
   : type_ { ($1, NoErrorType) }
-  | simple_type "!" { ($1, DefaultErrorType(loc = mk_loc($loc($2)))) }
+  | simple_type "!" {
+      ($1, mk_default_error_type(mk_loc($loc($2)), DefaultErrorTypeKind::Bang))
+    }
   | simple_type "!" error_type { ($1, ErrorType(ty = $3)) }
-  | simple_type "?" error_type { ($1, MaybeError(ty = $3)) }
+  | simple_type "?" error_type { ($1, mk_maybe_error($3, mk_loc($loc($2)))) }
   | simple_type error_annotation { ($1, $2) }
   ;
 
@@ -2324,24 +2536,15 @@ constr_pat_arguments_no_open -> List[ConstrPatArg]
 
 constr_pat_argument -> ConstrPatArg
   : label "=" pattern { 
-    ConstrPatArg::{
-      pat: $3,
-      kind: Labelled($1)
-    }
+    mk_constr_pat_arg($3, Labelled($1), mk_loc($sloc))
   }
   | POST_LABEL { 
-    let loc = mk_loc($loc($1))
+    let loc = mk_loc($loc($1)).trim_last_char()
     let label = Label::{ name: $1, loc }
-    let pat = @syntax.label_to_pat(loc = loc.trim_last_char(), label)
-    ConstrPatArg::{
-      pat,
-      kind: LabelledPun(label)
-    }
+    let pat = @syntax.label_to_pat(loc~, label)
+    mk_constr_pat_arg(pat, LabelledPun(label), mk_loc($sloc))
   }
   | pattern { 
-    ConstrPatArg::{
-      pat: $1,
-      kind: Positional
-    }
+    mk_constr_pat_arg($1, Positional, mk_loc($sloc))
   }
   ;

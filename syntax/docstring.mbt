@@ -1,7 +1,17 @@
 ///|
+pub(all) struct DocStringLine {
+  text : String
+  text_loc : Location
+  prefix_loc : Location
+  loc : Location
+}
+
+///|
 pub(all) struct DocString {
   /// The docstring content.
   content : @list.List[String]
+  /// Per-line docstring source information.
+  lines : @list.List[DocStringLine]
   /// The location of the docstring in the source code.
   loc : Location
 }
@@ -29,5 +39,9 @@ pub impl ToJson for DocString with to_json(self) {
 ///|
 pub fn DocString::empty() -> DocString {
   let dummy_pos = Position::{ lnum: 0, cnum: 0, bol: 0, fname: "" }
-  { content: @list.empty(), loc: { start: dummy_pos, end: dummy_pos } }
+  {
+    content: @list.empty(),
+    lines: @list.empty(),
+    loc: { start: dummy_pos, end: dummy_pos },
+  }
 }

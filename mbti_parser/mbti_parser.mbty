@@ -353,11 +353,11 @@ type_ -> Type
 
 return_type -> (Type, ErrorType)
   : type_ { ($1, NoErrorType) }
-  | simple_type "raise" { ($1, DefaultErrorType(loc=mk_loc($loc($2)))) }
+  | simple_type "raise" { ($1, mk_default_error_type(mk_loc($loc($2)))) }
   | simple_type "raise" error_type { ($1, ErrorType(ty = $3)) }
   | simple_type "raise" "?" {
     let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
-    ($1, MaybeError(ty=fake_error)) 
+    ($1, mk_maybe_error(fake_error, mk_loc($loc($3)))) 
   }
   ;
 
@@ -371,9 +371,25 @@ optional_type_arguments -> @list.List[Type]
   ;
 
 parameter -> Parameter
-  : type_ { DiscardPositional(ty = Some($1), loc = mk_loc($loc($1))) }
-  | post_label ":" type_ { Labelled(binder = { name : $1.name, loc : $1.loc }, ty = Some($3)) }
-  | label "?" ":" type_ { QuestionOptional(binder = { name : $1.name, loc : $1.loc }, ty = Some($4)) }
+  : type_ { mk_discard_parameter(Some($1), mk_loc($loc($1)), None) }
+  | post_label ":" type_ {
+      mk_labelled_parameter(
+        $1,
+        Some($3),
+        mk_loc($sloc),
+        Some(last_char_loc($1.loc)),
+        Some(mk_loc($loc($2))),
+      )
+    }
+  | label "?" ":" type_ {
+      mk_question_optional_parameter(
+        $1,
+        Some($4),
+        mk_loc($sloc),
+        Some(mk_loc($loc($2))),
+        Some(mk_loc($loc($3))),
+      )
+    }
   ;
 
 constant -> Constant
@@ -399,13 +415,16 @@ constant -> Constant
 %inline vis -> Visibility
   : { Default }
   | "priv" { Priv(loc=mk_loc($sloc)) }
-  | "pub" pub_attr { Pub(attr=$2, loc=mk_loc($sloc)) }
+  | "pub" pub_attr {
+      let (attr, attr_loc) = $2
+      Pub(attr~, attr_loc~, loc=mk_loc($sloc))
+    }
   ;
 
-pub_attr -> String?
-  : { None }
-  | "(" "readonly" ")" { Some("readonly") }
-  | "(" LIDENT ")" { Some($2) }
+pub_attr -> (String?, Location?)
+  : { (None, None) }
+  | "(" "readonly" ")" { (Some("readonly"), Some(mk_loc($loc($2)))) }
+  | "(" LIDENT ")" { (Some($2), Some(mk_loc($loc($2)))) }
   ;
 
 %inline is_async -> Location?
@@ -415,12 +434,16 @@ pub_attr -> String?
 
 qualified_uident -> QualifiedName
   : UIDENT { QualifiedName::{ name: Ident(name=$1), loc: mk_loc($sloc)} }
-  | PACKAGE_NAME DOT_UIDENT { QualifiedName::{ name: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
+  | PACKAGE_NAME DOT_UIDENT {
+      QualifiedName::{ name: mk_dot_long_ident($1, $loc($1), $2, $loc($2)), loc: mk_loc($sloc)}
+    }
   ;
 
 qualified_uident_ -> ConstrId
   : UIDENT { ConstrId::{ id: Ident(name=$1), loc: mk_loc($sloc)} }
-  | PACKAGE_NAME DOT_UIDENT { ConstrId::{ id: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
+  | PACKAGE_NAME DOT_UIDENT {
+      ConstrId::{ id: mk_dot_long_ident($1, $loc($1), $2, $loc($2)), loc: mk_loc($sloc)}
+    }
   ;
 
 uident -> Name

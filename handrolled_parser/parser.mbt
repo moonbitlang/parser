@@ -5,6 +5,79 @@ priv enum ExprOrBinderFragment {
 }
 
 ///|
+fn triple_loc(triple : Triple) -> Location {
+  let (_, start, end) = triple
+  { start, end }
+}
+
+///|
+fn first_char_loc(loc : Location) -> Location {
+  {
+    start: loc.start,
+    end: Position::{
+      fname: loc.start.fname,
+      lnum: loc.start.lnum,
+      bol: loc.start.bol,
+      cnum: loc.start.cnum + 1,
+    },
+  }
+}
+
+///|
+fn last_char_loc(loc : Location) -> Location {
+  {
+    start: Position::{
+      fname: loc.end.fname,
+      lnum: loc.end.lnum,
+      bol: loc.end.bol,
+      cnum: loc.end.cnum - 1,
+    },
+    end: loc.end,
+  }
+}
+
+///|
+fn make_dot_long_ident(
+  pkg : String,
+  pkg_loc : Location,
+  id : String,
+  dot_id_loc : Location,
+) -> @syntax.LongIdent {
+  Dot(
+    pkg~,
+    pkg_loc~,
+    dot_loc=first_char_loc(dot_id_loc),
+    id~,
+    id_loc=Location::trim_first_char(dot_id_loc),
+  )
+}
+
+///|
+fn make_located_string(value : String, loc : Location) -> @syntax.LocatedString {
+  { value, loc }
+}
+
+///|
+fn State::expect_located_string(self : Self) -> @syntax.LocatedString {
+  let loc = self.peek_location()
+  let value = self.expect_string()
+  make_located_string(value, loc)
+}
+
+///|
+fn State::collect_multiline_string_literals(
+  self : Self,
+) -> @list.List[@syntax.LocatedString] {
+  let xs = []
+  while self.peek_token() is MULTILINE_STRING(x) {
+    let loc = self.peek_location()
+    xs.push(make_located_string(x, loc))
+    self.skip()
+  }
+  @list.from_array(xs)
+}
+
+///|
 fn State::peek_spos_with_parsed(
   self : Self,
   parsed~ : @syntax.Expr?,
@@ -39,11 +112,46 @@ fn State::parse_attributes(self : Self) -> List[Attribute] {
 }
 
 ///|
+fn State::parse_opt_annot_with_colon(self : Self) -> (@syntax.Type?, Location?) {
+  if self.mode is Panic(..) {
+    return (None, None)
+  }
+  if self.peek_token() is COLON {
+    let colon_loc = self.peek_location()
+    self.skip()
+    (Some(self.parse_type()), Some(colon_loc))
+  } else {
+    (None, None)
+  }
+}
+
+///|
 fn State::parse_toplevel(self : Self) -> Impls {
   guard self.mode is Normal else { @list.new() }
   let result = []
   self.push_sync(TK_EOF)
+  fn consume_toplevel_trivia() -> Unit {
+    while self.tokens.get(self.next) is Some((token, start, end)) {
+      match token {
+        NEWLINE => self.next += 1
+        COMMENT(comment) => {
+          if !(comment.content is [_, _, '/', ..]) {
+            self.top_level_trivia.push(TopLevelTrivia::{
+              comment,
+              loc: { start, end },
+            })
+          }
+          self.next += 1
+        }
+        _ => return
+      }
+    }
+  }
   while self.mode is Normal && !(self.peek_token() is EOF) {
+    consume_toplevel_trivia()
+    if self.peek_token() is EOF {
+      break
+    }
     self.push_syncs(first_impl_)
     result.push(self.parse_top())
     if self.mode is Normal {
@@ -87,9 +195,11 @@ fn State::parse_qual_lident(
       @syntax.LongIdent::dummy()
     }
     PACKAGE_NAME(pkg) => {
+      let pkg_loc = self.peek_location()
       self.skip()
+      let dot_id_loc = self.peek_location()
       let id = self.expect_dot_lident(context~)
-      Dot(pkg~, id~)
+      make_dot_long_ident(pkg, pkg_loc, id, dot_id_loc)
     }
     other => {
       let loc = self.peek_location()
@@ -109,11 +219,13 @@ fn State::parse_qual_luident(self : Self) -> @syntax.LongIdent {
       Ident(name=id)
     }
     PACKAGE_NAME(pkg) => {
+      let pkg_loc = self.peek_location()
       self.skip()
       match self.peek_token() {
         DOT_LIDENT(id) | DOT_UIDENT(id) => {
+          let dot_id_loc = self.peek_location()
           self.skip()
-          Dot(pkg~, id~)
+          make_dot_long_ident(pkg, pkg_loc, id, dot_id_loc)
         }
         other => {
           let loc = self.peek_location()
@@ -343,8 +455,12 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
       tycon_loc: loc,
       components: Variant(@list.new()),
       deriving: @list.new(),
+      loc,
+      type_loc: loc,
     }
   }
+  let spos = self.peek_spos()
+  let type_loc = self.peek_location()
   match self.peek_token() {
     STRUCT => {
       self.expect_token(TK_STRUCT)
@@ -364,7 +480,8 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
         _ => self.parse_struct_body(allow_constr=false)
       }
       let deriving = self.parse_deriving_directive_list()
-      { tycon, tycon_loc, components, deriving }
+      let loc = self.loc_start_with(spos)
+      { tycon, tycon_loc, components, deriving, loc, type_loc }
     }
     ENUM => {
       self.expect_token(TK_ENUM)
@@ -379,7 +496,15 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
         )
         |> @list.from_array
       let deriving = self.parse_deriving_directive_list()
-      { tycon, tycon_loc, components: Variant(constrs), deriving }
+      let loc = self.loc_start_with(spos)
+      {
+        tycon,
+        tycon_loc,
+        components: Variant(constrs),
+        deriving,
+        loc,
+        type_loc,
+      }
     }
     TYPE => {
       self.expect_token(TK_TYPE)
@@ -387,7 +512,8 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
       let tycon = self.parse_luident()
       let typ = self.parse_type()
       let deriving = self.parse_deriving_directive_list()
-      { tycon, tycon_loc, components: Newtype(typ), deriving }
+      let loc = self.loc_start_with(spos)
+      { tycon, tycon_loc, components: Newtype(typ), deriving, loc, type_loc }
     }
     other => {
       let other_loc = self.peek_location()
@@ -398,6 +524,8 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
         tycon_loc: loc,
         components: Variant(@list.new()),
         deriving: @list.new(),
+        loc,
+        type_loc,
       }
     }
   }
@@ -598,28 +726,31 @@ fn State::parse_visibility(self : Self) -> @syntax.Visibility {
     PUB => {
       let spos = self.peek_spos()
       self.expect_token(TK_PUB)
-      let pub_attr = self.optional([TK_LPAREN], fn(state) {
-        state.surround(left=TK_LPAREN, right=TK_RPAREN, fn(state) {
-          match state.peek_token() {
-            READONLY => {
-              state.skip()
-              "readonly"
+      let (pub_attr, attr_loc) = self
+        .optional([TK_LPAREN], fn(state) {
+          state.surround(left=TK_LPAREN, right=TK_RPAREN, fn(state) {
+            let attr_loc = state.peek_location()
+            match state.peek_token() {
+              READONLY => {
+                state.skip()
+                (Some("readonly"), Some(attr_loc))
+              }
+              LIDENT(attr) => {
+                state.skip()
+                (Some(attr), Some(attr_loc))
+              }
+              tok => {
+                let loc = state.peek_location()
+                state.panic() |> ignore
+                state.report_unexpected(tok, [TK_READONLY, TK_LIDENT], loc)
+                (Some(""), Some(attr_loc))
+              }
             }
-            LIDENT(attr) => {
-              state.skip()
-              attr
-            }
-            tok => {
-              let loc = state.peek_location()
-              state.panic() |> ignore
-              state.report_unexpected(tok, [TK_READONLY, TK_LIDENT], loc)
-              ""
-            }
-          }
+          })
         })
-      })
+        .unwrap_or((None, None))
       let loc = self.loc_start_with(spos)
-      Pub(attr=pub_attr, loc~)
+      Pub(attr=pub_attr, attr_loc~, loc~)
     }
     _ => Default
   }
@@ -832,22 +963,16 @@ fn State::parse_top_func(
   let fun_decl = self.parse_fun_decl(attrs~)
   let fun_decl = { ..fun_decl, vis, }
   let decl_body : @syntax.DeclBody = if is_declare {
-    DeclNone
+    DeclNone(loc=Some(fun_decl.loc))
   } else if self.peek_token() is EQUAL {
     self.skip()
     if self.peek_token() is MULTILINE_STRING(_) {
-      let xs = []
-      while self.peek_token() is MULTILINE_STRING(x) {
-        xs.push(x)
-        self.skip()
-      }
-      DeclStubs(
-        Embedded(language=None, code=CodeMultilineString(@list.from_array(xs))),
-      )
+      let xs = self.collect_multiline_string_literals()
+      DeclStubs(Embedded(language=None, code=CodeMultilineString(xs)))
     } else {
-      let name1 = self.expect_string()
-      if self.peek_token() is STRING(name2) {
-        self.skip()
+      let name1 = self.expect_located_string()
+      if self.peek_token() is STRING(_) {
+        let name2 = self.expect_located_string()
         DeclStubs(Import(module_name=name1, func_name=name2, language=None))
       } else {
         DeclStubs(Embedded(language=None, code=CodeString(name1)))
@@ -1110,31 +1235,24 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
     }
     EXTERN => {
       self.expect_token(TK_EXTERN)
-      let language = self.expect_string()
+      let language = self.expect_located_string()
       let fun_decl = self.parse_fun_decl(attrs~)
       let fun_decl = { ..fun_decl, vis, }
       self.expect_token(TK_EQUAL)
       if self.peek_token() is MULTILINE_STRING(_) {
-        let xs = []
-        while self.peek_token() is MULTILINE_STRING(x) {
-          self.skip()
-          xs.push(x)
-        }
+        let xs = self.collect_multiline_string_literals()
         let loc = self.loc_start_with(spos)
         TopFuncDef(
           fun_decl~,
           decl_body=DeclStubs(
-            Embedded(
-              language=Some(language),
-              code=CodeMultilineString(@list.from_array(xs)),
-            ),
+            Embedded(language=Some(language), code=CodeMultilineString(xs)),
           ),
           loc~,
         )
       } else {
-        let body = self.expect_string()
+        let body = self.expect_located_string()
         if self.peek_token() is STRING(_) {
-          let fname = self.expect_string()
+          let fname = self.expect_located_string()
           let loc = self.loc_start_with(spos)
           TopFuncDef(
             fun_decl~,
@@ -1370,7 +1488,8 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           let (pkg, target) : (@syntax.Label?, @syntax.Label) = {
             let loc = target.loc
             match target.name {
-              Dot(pkg~, id~) => (Some({ name: pkg, loc }), { name: id, loc })
+              Dot(pkg~, id~, ..) =>
+                (Some({ name: pkg, loc }), { name: id, loc })
               Ident(name=id) => (None, { name: id, loc })
             }
           }
@@ -1479,7 +1598,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             self.pop_sync(TK_LBRACE)
             let body : @syntax.DeclBody = if self.peek_token() is EQUAL {
               self.skip()
-              let code = self.expect_string()
+              let code = self.expect_located_string()
               DeclStubs(Embedded(language=None, code=CodeString(code)))
             } else {
               let (local_types, body) = self.parse_block_expr_with_local_types()
@@ -1530,7 +1649,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           self.pop_sync(TK_LBRACE)
           let body : @syntax.DeclBody = if self.peek_token() is EQUAL {
             self.skip()
-            let code = self.expect_string()
+            let code = self.expect_located_string()
             DeclStubs(Embedded(language=None, code=CodeString(code)))
           } else {
             let (local_types, body) = self.parse_block_expr_with_local_types()
@@ -1844,36 +1963,58 @@ fn State::parse_trait_method_params(self : State) -> @syntax.Parameters {
     left=TK_LPAREN,
     right=TK_RPAREN,
     fn(state) -> @syntax.Parameter {
+      let spos = state.peek_spos()
       match state.peek_token() {
         // `label~ : Type`
         POST_LABEL(binder_name) => {
-          let binder_loc = Location::trim_last_char(state.peek_location())
+          let post_label_loc = state.peek_location()
+          let binder_loc = Location::trim_last_char(post_label_loc)
           state.skip()
           let binder : @syntax.Binder = { name: binder_name, loc: binder_loc }
+          let colon_loc = state.peek_location()
           state.expect_token(TK_COLON)
           let typ = state.parse_type()
-          Labelled(binder~, ty=Some(typ))
+          let loc = state.loc_start_with(spos)
+          Labelled(
+            binder~,
+            ty=Some(typ),
+            loc~,
+            label_mark_loc=Some(last_char_loc(post_label_loc)),
+            colon_loc=Some(colon_loc),
+          )
         }
         LIDENT(_) => {
           let binder_loc = state.peek_location()
           let binder_name = state.expect_lident(context="parameter name")
           let binder : @syntax.Binder = { name: binder_name, loc: binder_loc }
-          let has_question = state.peek_token() is QUESTION
-          if has_question {
+          let question_loc = if state.peek_token() is QUESTION {
+            let loc = state.peek_location()
             state.skip()
+            Some(loc)
+          } else {
+            None
           }
+          let has_question = question_loc is Some(_)
+          let colon_loc = state.peek_location()
           state.expect_token(TK_COLON)
           let typ = state.parse_type()
+          let loc = state.loc_start_with(spos)
           if has_question {
-            QuestionOptional(binder~, ty=Some(typ))
+            QuestionOptional(
+              binder~,
+              ty=Some(typ),
+              loc~,
+              question_loc~,
+              colon_loc=Some(colon_loc),
+            )
           } else {
-            Positional(binder~, ty=Some(typ))
+            Positional(binder~, ty=Some(typ), loc~, colon_loc=Some(colon_loc))
           }
         }
         tok if first_type_.contains(tok.kind()) => {
           let typ = state.parse_type()
           let loc = typ.loc()
-          DiscardPositional(ty=Some(typ), loc~)
+          DiscardPositional(ty=Some(typ), loc~, colon_loc=None)
         }
         other => {
           let other_loc = state.peek_location()
@@ -1883,7 +2024,7 @@ fn State::parse_trait_method_params(self : State) -> @syntax.Parameters {
             other_loc,
           )
           let loc = state.panic()
-          DiscardPositional(ty=None, loc~)
+          DiscardPositional(ty=None, loc~, colon_loc=None)
         }
       }
     },
@@ -2075,16 +2216,18 @@ fn State::parse_range_pattern(self : Self) -> @syntax.Pattern {
   let lhs = self.parse_simple_pattern()
   match self.peek_token() {
     RANGE_INCLUSIVE => {
+      let op_loc = self.peek_location()
       self.skip()
       let rhs = self.parse_simple_pattern()
       let loc = self.loc_start_with(spos)
-      Range(lhs~, rhs~, kind=Inclusive, loc~)
+      Range(lhs~, rhs~, kind=Inclusive, loc~, op_loc~)
     }
     RANGE_EXCLUSIVE => {
+      let op_loc = self.peek_location()
       self.skip()
       let rhs = self.parse_simple_pattern()
       let loc = self.loc_start_with(spos)
-      Range(lhs~, rhs~, kind=Exclusive, loc~)
+      Range(lhs~, rhs~, kind=Exclusive, loc~, op_loc~)
     }
     _ => lhs
   }
@@ -2120,16 +2263,31 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
     // bitstring constr pattern `i32(args)`
     // To disambiguate with pattern variable, the args list must be present.
     LIDENT(name) if self.peek_token(nth=1) is LPAREN => {
-      self.skip() // skip lident
       let name_loc = self.peek_location()
+      self.skip() // skip lident
       let binder : @syntax.Binder = { name, loc: name_loc }
+      let lparen_loc = self.peek_location()
       let args = parse_constr_args_no_open()
+      let rparen_loc = triple_loc(self.previous_triple())
       let loc = self.loc_start_with(spos)
-      @syntax.Pattern::SpecialConstr(binder~, args~, loc~)
+      @syntax.Pattern::SpecialConstr(
+        binder~,
+        args~,
+        loc~,
+        lparen_loc~,
+        rparen_loc~,
+      )
     }
     PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) => {
       let constr = self.parse_constr()
-      let maybe_args = self.optional([TK_LPAREN], _ => parse_constr_args())
+      let (maybe_args, lparen_loc, rparen_loc) = if self.peek_token() is LPAREN {
+        let lparen_loc = self.peek_location()
+        let args = parse_constr_args()
+        let rparen_loc = triple_loc(self.previous_triple())
+        (Some(args), Some(lparen_loc), Some(rparen_loc))
+      } else {
+        (None, None, None)
+      }
       let mut is_open = false
       fn check_args(args : List[ConstrArgRelatedness]) {
         match args {
@@ -2152,7 +2310,7 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
 
       let args = maybe_args.map(check_args)
       let loc = self.loc_start_with(spos)
-      Constr(constr~, args~, is_open~, loc~)
+      Constr(constr~, args~, is_open~, loc~, lparen_loc~, rparen_loc~)
     }
     _ => panic()
   }
@@ -2251,51 +2409,57 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
     PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) => self.parse_constr_pattern()
     LPAREN => {
       let spos = self.peek_spos()
-      let result = self.surround(left=TK_LPAREN, right=TK_RPAREN, fn(state) {
-        let first = state.parse_pattern()
-        match state.peek_token() {
-          COMMA => {
-            state.skip()
-            let (pats, _) = state.series_with_follow(
-              delim=TK_COMMA,
-              follow_set=[TK_RPAREN],
-              State::parse_pattern,
-            )
-            if pats is [] {
-              first
-            } else {
-              Tuple(
-                pats=@list.from_array([first, ..pats]),
-                loc=state.loc_start_with(spos),
-              )
-            }
-          }
-          COLON => {
-            state.skip()
-            let ty = state.parse_type()
-            @syntax.Pattern::Constraint(
-              pat=first,
-              ty~,
-              loc=state.loc_start_with(spos),
-            )
-          }
-          RPAREN => first
-          other => {
-            let other_loc = state.peek_location()
-            state.report_unexpected(
-              other,
-              [TK_COMMA, TK_COLON, TK_RPAREN],
-              other_loc,
-            )
-            state.panic() |> ignore
-            first
+      let lparen_loc = self.peek_location()
+      self.expect_token(TK_LPAREN)
+      self.push_sync(TK_RPAREN)
+      let first = self.parse_pattern()
+      let mut tuple_pats : Array[@syntax.Pattern]? = None
+      let mut constraint_ty : @syntax.Type? = None
+      let mut colon_loc : Location? = None
+      match self.peek_token() {
+        COMMA => {
+          self.skip()
+          let (pats, _) = self.series_with_follow(
+            delim=TK_COMMA,
+            follow_set=[TK_RPAREN],
+            State::parse_pattern,
+          )
+          if !(pats is []) {
+            tuple_pats = Some([first, ..pats])
           }
         }
-      })
-      result
+        COLON => {
+          let loc = self.peek_location()
+          self.skip()
+          constraint_ty = Some(self.parse_type())
+          colon_loc = Some(loc)
+        }
+        RPAREN => ()
+        other => {
+          let other_loc = self.peek_location()
+          self.report_unexpected(
+            other,
+            [TK_COMMA, TK_COLON, TK_RPAREN],
+            other_loc,
+          )
+          self.panic() |> ignore
+        }
+      }
+      self.pop_sync(TK_RPAREN)
+      self.expect_token(TK_RPAREN)
+      let rparen_loc = triple_loc(self.previous_triple())
+      let loc = self.loc_start_with(spos)
+      match (tuple_pats, constraint_ty, colon_loc) {
+        (Some(pats), _, _) =>
+          Tuple(pats=@list.from_array(pats), loc~, lparen_loc~, rparen_loc~)
+        (None, Some(ty), Some(colon_loc)) =>
+          @syntax.Pattern::Constraint(pat=first, ty~, loc~, colon_loc~)
+        _ => first
+      }
     }
     LBRACKET => {
       let spos = self.peek_spos()
+      let lbrack_loc = self.peek_location()
       let pats1 = []
       let pats2 = []
       let mut dotdot = NoDotDot
@@ -2314,6 +2478,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
         fn(self) {
           if self.peek_token() is DOTDOT {
             let pat_spos = self.peek_spos()
+            let dotdot_loc = self.peek_location()
             self.skip()
             match self.peek_token() {
               STRING(str) => {
@@ -2343,7 +2508,10 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
               }
               _ =>
                 match dotdot {
-                  NoBinder | WithBinder(_) | Underscore | WithAsBinder(_) =>
+                  NoBinder(_)
+                  | WithBinder(_, _)
+                  | Underscore(_)
+                  | WithAsBinder(_, _) =>
                     self.report_error({
                       loc: self.peek_location(),
                       msg: "At most one `..` is allowed in array pattern.",
@@ -2352,18 +2520,18 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
                     dotdot = match self.peek_token() {
                       LIDENT(_) => {
                         let binder = self.parse_binder(context="")
-                        WithBinder(binder)
+                        WithBinder(binder, dotdot_loc)
                       }
                       AS(_) => {
                         self.skip()
                         let binder = self.parse_binder(context="variable name")
-                        WithAsBinder(binder)
+                        WithAsBinder(binder, dotdot_loc)
                       }
                       UNDERSCORE => {
                         self.skip()
-                        Underscore
+                        Underscore(dotdot_loc)
                       }
-                      _ => NoBinder
+                      _ => NoBinder(dotdot_loc)
                     }
                 }
             }
@@ -2374,18 +2542,52 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
       )
       let pats1 = @list.from_array(pats1)
       let pats2 = @list.from_array(pats2)
-      let pats : @syntax.ArrayPatterns = match dotdot {
-        NoDotDot => Closed(pats1)
-        NoBinder => Open(pats1, pats2, NoBinder)
-        WithBinder(b) => Open(pats1, pats2, Binder(b))
-        Underscore => Open(pats1, pats2, Underscore)
-        WithAsBinder(b) => Open(pats1, pats2, BinderAs(b))
-      }
+      let rbrack_loc = triple_loc(self.previous_triple())
       let loc = self.loc_start_with(spos)
+      let pats : @syntax.ArrayPatterns = match dotdot {
+        NoDotDot => Closed(pats1, loc~, lbrack_loc~, rbrack_loc~)
+        NoBinder(dotdot_loc) =>
+          Open(
+            pats1,
+            pats2,
+            @syntax.DotDotBinder::NoBinder(dotdot_loc~),
+            loc~,
+            lbrack_loc~,
+            rbrack_loc~,
+          )
+        WithBinder(b, dotdot_loc) =>
+          Open(
+            pats1,
+            pats2,
+            @syntax.DotDotBinder::Binder(b, dotdot_loc~),
+            loc~,
+            lbrack_loc~,
+            rbrack_loc~,
+          )
+        Underscore(dotdot_loc) =>
+          Open(
+            pats1,
+            pats2,
+            @syntax.DotDotBinder::Underscore(dotdot_loc~),
+            loc~,
+            lbrack_loc~,
+            rbrack_loc~,
+          )
+        WithAsBinder(b, dotdot_loc) =>
+          Open(
+            pats1,
+            pats2,
+            @syntax.DotDotBinder::BinderAs(b, dotdot_loc~),
+            loc~,
+            lbrack_loc~,
+            rbrack_loc~,
+          )
+      }
       Array(pats~, loc~)
     }
     LBRACE => {
       let spos = self.peek_spos()
+      let lbrace_loc = self.peek_location()
       let mut kind : BraceLikeSyntaxKind = Unknown
       self.expect_token(TK_LBRACE)
       self.push_sync(TK_RBRACE)
@@ -2464,6 +2666,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
       )
       self.pop_sync(TK_RBRACE)
       self.expect_token(TK_RBRACE)
+      let rbrace_loc = triple_loc(self.previous_triple())
       let loc = self.loc_start_with(spos)
       match kind {
         Unknown | Record => {
@@ -2474,7 +2677,14 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             field_or_dotdots : ArrayView[MapPatternFragment],
           ) -> @syntax.Pattern {
             match field_or_dotdots {
-              [] => Record(fields=acc.rev(), is_closed=!has_dotdot, loc~)
+              [] =>
+                Record(
+                  fields=acc.rev(),
+                  is_closed=!has_dotdot,
+                  loc~,
+                  lbrace_loc~,
+                  rbrace_loc~,
+                )
               [Dotdot(loc), .. rest] => {
                 if !(rest is []) {
                   self.report_error({
@@ -2508,7 +2718,14 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             field_pat_or_dotdots : ArrayView[MapPatternFragment],
           ) -> @syntax.Pattern {
             match field_pat_or_dotdots {
-              [] => Map(elems=acc.rev(), is_closed=!has_dotdot, loc~)
+              [] =>
+                Map(
+                  elems=acc.rev(),
+                  is_closed=!has_dotdot,
+                  loc~,
+                  lbrace_loc~,
+                  rbrace_loc~,
+                )
               [Dotdot(loc), .. rest] => {
                 if !(rest is []) {
                   self.report_error({ loc, msg: "Unexpected `..` here" })
@@ -2582,14 +2799,16 @@ fn State::parse_field_pat(self : Self) -> @syntax.FieldPat {
 ///|
 fn State::parse_constr_pat_argument(self : Self) -> @syntax.ConstrPatArg {
   if self.mode is Panic(loc~, ..) {
-    return { pat: Any(loc~), kind: Positional }
+    return { pat: Any(loc~), kind: Positional, loc }
   }
+  let spos = self.peek_spos()
   match self.peek_token() {
     // label~
     POST_LABEL(label_name) => {
+      let post_label_loc = self.peek_location()
       let label : @syntax.Label = {
         name: label_name,
-        loc: self.peek_location(),
+        loc: Location::trim_last_char(post_label_loc),
       }
       self.skip()
       let (pat, kind) : (_, @syntax.ArgumentKind) = match self.peek_token() {
@@ -2603,8 +2822,7 @@ fn State::parse_constr_pat_argument(self : Self) -> @syntax.ConstrPatArg {
           (pat, Labelled(label))
         }
         COMMA | RPAREN => {
-          let loc = Location::trim_last_char(label.loc)
-          let pat = @syntax.label_to_pat(loc~, label)
+          let pat = @syntax.label_to_pat(loc=label.loc, label)
           (pat, LabelledPun(label))
         }
         _ => {
@@ -2612,18 +2830,21 @@ fn State::parse_constr_pat_argument(self : Self) -> @syntax.ConstrPatArg {
           (Any(loc~), Labelled(label))
         }
       }
-      { pat, kind }
+      let loc = self.loc_start_with(spos)
+      { pat, kind, loc }
     }
     LIDENT(name) | UIDENT(name) if self.peek_token(nth=1) is EQUAL => {
       let label : @syntax.Label = { name, loc: self.peek_location() }
       self.skip() // luident
       self.expect_token(TK_EQUAL)
       let pat = self.parse_pattern()
-      { pat, kind: Labelled(label) }
+      let loc = self.loc_start_with(spos)
+      { pat, kind: Labelled(label), loc }
     }
     _ => {
       let pat = self.parse_pattern()
-      { pat, kind: Positional }
+      let loc = self.loc_start_with(spos)
+      { pat, kind: Positional, loc }
     }
   }
 }
@@ -2660,10 +2881,10 @@ priv enum MapPatternFragment {
 
 ///|
 priv enum ArrayPatternDotDot {
-  NoBinder
-  WithBinder(@syntax.Binder)
-  Underscore
-  WithAsBinder(@syntax.Binder)
+  NoBinder(Location)
+  WithBinder(@syntax.Binder, Location)
+  Underscore(Location)
+  WithAsBinder(@syntax.Binder, Location)
   NoDotDot
 }
 
@@ -3181,15 +3402,27 @@ fn State::parse_case(self : Self) -> @syntax.Case {
       pattern: Any(loc~),
       guard_: None,
       body: Hole(loc~, kind=Synthesized),
+      loc,
+      arrow_loc: loc,
+      guard_loc: None,
     }
   }
+  let spos = self.peek_spos()
   if self.peek_token() is ELLIPSIS {
     let loc = self.peek_location()
     self.skip()
-    { pattern: Any(loc~), guard_: None, body: Hole(loc~, kind=Todo) }
+    {
+      pattern: Any(loc~),
+      guard_: None,
+      body: Hole(loc~, kind=Todo),
+      loc: self.loc_start_with(spos),
+      arrow_loc: loc,
+      guard_loc: None,
+    }
   } else {
     let pat = self.with_syncs([TK_FAT_ARROW, TK_IF], State::parse_pattern)
-    let guard_ = if self.peek_token() is IF {
+    let (guard_, guard_loc) = if self.peek_token() is IF {
+      let guard_loc = self.peek_location()
       self.skip()
       let expr = match self.peek_token() {
         // an error production to handle `pattern if invalid-infix-expr => action`
@@ -3207,12 +3440,20 @@ fn State::parse_case(self : Self) -> @syntax.Case {
           self.handle_unexpected_expr_or_statement(context="pattern guard")
         _ => self.parse_infix_expr(parsed=None)
       }
-      Some(expr)
+      (Some(expr), Some(guard_loc))
     } else {
-      None
+      (None, None)
     }
+    let arrow_loc = self.peek_location()
     let body = self.parse_fat_arrow_action()
-    { pattern: pat, guard_, body }
+    {
+      pattern: pat,
+      guard_,
+      body,
+      loc: self.loc_start_with(spos),
+      arrow_loc,
+      guard_loc,
+    }
   }
 }
 
@@ -4301,8 +4542,13 @@ priv enum IndexingSyntaxFragment {
 ///|
 fn State::parse_argument(self : Self) -> @syntax.Argument {
   if self.mode is Panic(loc~, ..) {
-    return { value: Hole(loc~, kind=Synthesized), kind: @syntax.Positional }
+    return {
+      value: Hole(loc~, kind=Synthesized),
+      kind: @syntax.Positional,
+      loc,
+    }
   }
+  let spos = self.peek_spos()
   match self.peek_token() {
     // `label=expr` or `label?=expr`
     LIDENT(label_name) | UIDENT(label_name) if self.peek_token(nth=1) is EQUAL ||
@@ -4321,15 +4567,16 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
       }
       self.expect_token(TK_EQUAL) // `=`
       let value = self.parse_expr()
-      { value, kind }
+      let loc = self.loc_start_with(spos)
+      { value, kind, loc }
     }
     // label~
     POST_LABEL(label_name) => {
-      let spos = self.peek_spos()
+      let post_label_loc = self.peek_location()
       self.skip()
       let label : @syntax.Label = {
         name: label_name,
-        loc: self.peek_location(),
+        loc: Location::trim_last_char(post_label_loc),
       }
       // error recovery for `label~=value`
       if self.peek_token() is EQUAL {
@@ -4340,13 +4587,11 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
           loc,
           msg: "Invalid syntax `label~=value`. Do you mean `label=value`?",
         })
-        { value, kind: Labelled(label) }
+        { value, kind: Labelled(label), loc }
       } else {
-        let value = @syntax.label_to_expr(
-          loc=Location::trim_last_char(label.loc),
-          label,
-        )
-        { value, kind: LabelledPun(label) }
+        let value = @syntax.label_to_expr(loc=label.loc, label)
+        let loc = self.loc_start_with(spos)
+        { value, kind: LabelledPun(label), loc }
       }
     }
     // label?
@@ -4361,11 +4606,13 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
       self.expect_token(TK_QUESTION) // `?`
       let kind = @syntax.LabelledOptionPun(label~, question_loc~)
       let value = @syntax.label_to_expr(loc=label.loc, label)
-      { value, kind }
+      let loc = self.loc_start_with(spos)
+      { value, kind, loc }
     }
     _ => {
       let value = self.parse_expr()
-      { value, kind: Positional }
+      let loc = self.loc_start_with(spos)
+      { value, kind: Positional, loc }
     }
   }
 }
@@ -4440,60 +4687,109 @@ fn State::parse_func(
 ///|
 fn State::parse_parameter(self : Self) -> @syntax.Parameter {
   if self.mode is Panic(loc~, ..) {
-    return @syntax.Positional(binder={ name: "?binder", loc }, ty=None)
+    return @syntax.Positional(
+      binder={ name: "?binder", loc },
+      ty=None,
+      loc~,
+      colon_loc=None,
+    )
   }
   match self.peek_token() {
     UNDERSCORE => {
-      let loc = self.peek_location()
+      let spos = self.peek_spos()
       self.skip()
-      let param_annot = self.parse_opt_annot()
-      @syntax.DiscardPositional(ty=param_annot, loc~)
+      let (param_annot, colon_loc) = self.parse_opt_annot_with_colon()
+      let loc = self.loc_start_with(spos)
+      @syntax.DiscardPositional(ty=param_annot, loc~, colon_loc~)
     }
     // `label~ : Type` 
     // or `label~ : Type = expr` (same as `label? : Type = expr`, deprecated syntax)
     POST_LABEL(label_name) => {
+      let spos = self.peek_spos()
+      let post_label_loc = self.peek_location()
       let param_binder : @syntax.Binder = {
         name: label_name,
-        loc: Location::trim_last_char(self.peek_location()),
+        loc: Location::trim_last_char(post_label_loc),
       }
       self.skip() // skip POST_LABEL
-      let param_annot = self.parse_opt_annot()
+      let (param_annot, colon_loc) = self.parse_opt_annot_with_colon()
       match self.peek_token() {
         EQUAL if self.mode is Normal => {
+          let equal_loc = self.peek_location()
           self.skip()
           let default = self.parse_expr()
-          Optional(default~, binder=param_binder, ty=param_annot)
+          let loc = self.loc_start_with(spos)
+          Optional(
+            default~,
+            binder=param_binder,
+            ty=param_annot,
+            loc~,
+            question_loc=None,
+            colon_loc~,
+            equal_loc=Some(equal_loc),
+          )
         }
-        _ => Labelled(binder=param_binder, ty=param_annot)
+        _ => {
+          let loc = self.loc_start_with(spos)
+          Labelled(
+            binder=param_binder,
+            ty=param_annot,
+            loc~,
+            label_mark_loc=Some(last_char_loc(post_label_loc)),
+            colon_loc~,
+          )
+        }
       }
     }
     // `label? : Type` or `label? : Type = default`
     LIDENT(label_name) if self.peek_token(nth=1) is QUESTION => {
+      let spos = self.peek_spos()
       let param_binder : @syntax.Binder = {
         name: label_name,
         loc: self.peek_location(),
       }
       self.skip() // skip LIDENT
+      let question_loc = self.peek_location()
       self.skip() // skip QUESTION
-      let param_annot = self.parse_opt_annot()
+      let (param_annot, colon_loc) = self.parse_opt_annot_with_colon()
       match self.peek_token() {
         // default value
         EQUAL if self.mode is Normal => {
+          let equal_loc = self.peek_location()
           self.skip()
           let default = self.parse_expr()
-          Optional(default~, binder=param_binder, ty=param_annot)
+          let loc = self.loc_start_with(spos)
+          Optional(
+            default~,
+            binder=param_binder,
+            ty=param_annot,
+            loc~,
+            question_loc=Some(question_loc),
+            colon_loc~,
+            equal_loc=Some(equal_loc),
+          )
         }
-        _ => QuestionOptional(binder=param_binder, ty=param_annot)
+        _ => {
+          let loc = self.loc_start_with(spos)
+          QuestionOptional(
+            binder=param_binder,
+            ty=param_annot,
+            loc~,
+            question_loc=Some(question_loc),
+            colon_loc~,
+          )
+        }
       }
     }
     // `param : Type`
     LIDENT(param_name) => {
+      let spos = self.peek_spos()
       let param_binder : @syntax.Binder = {
         name: param_name,
         loc: self.peek_location(),
       }
       self.skip()
-      let param_annot = self.parse_opt_annot()
+      let (param_annot, colon_loc) = self.parse_opt_annot_with_colon()
       if self.peek_token() is EQUAL && self.mode is Normal {
         // error recovery for `param : Type = expr`
         let eq_loc = self.peek_location()
@@ -4503,16 +4799,26 @@ fn State::parse_parameter(self : Self) -> @syntax.Parameter {
           loc: eq_loc,
           msg: "Only labeled argument can have default value",
         })
-        Optional(default~, binder=param_binder, ty=param_annot)
+        let loc = self.loc_start_with(spos)
+        Optional(
+          default~,
+          binder=param_binder,
+          ty=param_annot,
+          loc~,
+          question_loc=None,
+          colon_loc~,
+          equal_loc=Some(eq_loc),
+        )
       } else {
-        Positional(binder=param_binder, ty=param_annot)
+        let loc = self.loc_start_with(spos)
+        Positional(binder=param_binder, ty=param_annot, loc~, colon_loc~)
       }
     }
     other => {
       let other_loc = self.peek_location()
       self.report_failed_to_parse(other, "parameter name or label", other_loc)
-      self.panic() |> ignore
-      Positional(binder={ name: "?binder", loc: @syntax.no_location }, ty=None)
+      let loc = self.panic()
+      Positional(binder={ name: "?binder", loc }, ty=None, loc~, colon_loc=None)
     }
   }
 }
@@ -4963,15 +5269,7 @@ fn State::parse_map_expr(self : Self) -> @syntax.Expr {
 
 ///|
 fn State::parse_opt_annot(self : Self) -> @syntax.Type? {
-  if self.mode is Panic(..) {
-    return None
-  }
-  if self.peek_token() is COLON {
-    self.skip()
-    Some(self.parse_type())
-  } else {
-    None
-  }
+  self.parse_opt_annot_with_colon().0
 }
 
 ///|
@@ -5128,10 +5426,11 @@ fn State::parse_stmt(self : Self) -> Statement {
         StmtLetmut(binder~, ty_opt~, expr~, loc~)
       } else {
         let pat = self.parse_pattern()
-        let ty_opt = self.parse_opt_annot()
-        let pat : @syntax.Pattern = match ty_opt {
-          Some(ty) => Constraint(pat~, ty~, loc=pat.loc().merge(ty.loc()))
-          None => pat
+        let (ty_opt, colon_loc) = self.parse_opt_annot_with_colon()
+        let pat : @syntax.Pattern = match (ty_opt, colon_loc) {
+          (Some(ty), Some(colon_loc)) =>
+            Constraint(pat~, ty~, loc=pat.loc().merge(ty.loc()), colon_loc~)
+          _ => pat
         }
         self.expect_token(TK_EQUAL)
         let expr = self.parse_expr()
@@ -5422,13 +5721,17 @@ fn State::parse_error_annotation(self : Self) -> @syntax.ErrorType {
             tys=@list.new(),
             loc~,
           )
-          MaybeError(ty=fake_error)
+          MaybeError(ty=fake_error, question_loc~)
         }
         PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) | UNDERSCORE => {
           let ty = self.parse_error_type()
           ErrorType(ty~)
         }
-        _ => DefaultErrorType(loc=raise_loc)
+        _ =>
+          DefaultErrorType(
+            loc=raise_loc,
+            kind=@syntax.DefaultErrorTypeKind::Raise,
+          )
       }
     }
     NORAISE => {
@@ -5469,13 +5772,18 @@ fn State::parse_return_type(self : Self) -> (@syntax.Type, @syntax.ErrorType) {
               let ty = self.parse_error_type()
               (ty_res, ErrorType(ty~))
             }
-            _ => (ty_res, DefaultErrorType(loc~))
+            _ =>
+              (
+                ty_res,
+                DefaultErrorType(loc~, kind=@syntax.DefaultErrorTypeKind::Bang),
+              )
           }
         }
         QUESTION => {
+          let question_loc = self.peek_location()
           self.skip()
           let ty = self.parse_error_type()
-          (ty_res, MaybeError(ty~))
+          (ty_res, MaybeError(ty~, question_loc~))
         }
         _ => {
           let err = self.parse_error_annotation()
@@ -5651,7 +5959,7 @@ fn State::parse_opt_typ_params(
 }
 
 ///|
-pub fn parse(tokens : Array[Triple]) -> (Impls, Array[Report]) {
+pub fn parse(tokens : Array[Triple]) -> (ParsedImpls, Array[Report]) {
   let self : State = {
     tokens,
     diagnostics: [],
@@ -5659,9 +5967,13 @@ pub fn parse(tokens : Array[Triple]) -> (Impls, Array[Report]) {
     syncs: [],
     mode: Normal,
     parsed_position: dummy_pos,
+    top_level_trivia: [],
   }
   let impls = self.parse_toplevel()
-  (impls, self.diagnostics)
+  (
+    ParsedImpls::{ impls, trivia: @list.from_array(self.top_level_trivia) },
+    self.diagnostics,
+  )
 }
 
 ///|
@@ -5673,6 +5985,7 @@ pub fn parse_expr(tokens : Array[Triple]) -> (@syntax.Expr, Array[Report]) {
     syncs: [],
     mode: Normal,
     parsed_position: dummy_pos,
+    top_level_trivia: [],
   }
   let expr = self.parse_expr()
   (expr, self.diagnostics)

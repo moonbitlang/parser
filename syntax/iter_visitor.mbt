@@ -4,7 +4,12 @@ pub(open) trait IterVisitor {
 
   // Visibility
   visit_Visibility(Self, Visibility) -> Unit = _
-  visit_Visibility_Pub(Self, attr~ : String?, loc~ : Location) -> Unit = _
+  visit_Visibility_Pub(
+    Self,
+    attr~ : String?,
+    attr_loc~ : Location?,
+    loc~ : Location,
+  ) -> Unit = _
   visit_Visibility_Priv(Self, loc~ : Location) -> Unit = _
 
   // Constant
@@ -19,7 +24,14 @@ pub(open) trait IterVisitor {
   // LongIdent
   visit_LongIdent(Self, LongIdent) -> Unit = _
   visit_LongIdent_Ident(Self, name~ : String) -> Unit = _
-  visit_LongIdent_Dot(Self, pkg~ : String, id~ : String) -> Unit = _
+  visit_LongIdent_Dot(
+    Self,
+    pkg~ : String,
+    pkg_loc~ : Location,
+    dot_loc~ : Location,
+    id~ : String,
+    id_loc~ : Location,
+  ) -> Unit = _
 
   // TypeName
   visit_TypeName(Self, TypeName) -> Unit = _
@@ -51,9 +63,13 @@ pub(open) trait IterVisitor {
   // ErrorType
   visit_ErrorType(Self, ErrorType) -> Unit = _
   visit_ErrorType_ErrorType(Self, ty~ : Type) -> Unit = _
-  visit_ErrorType_DefaultErrorType(Self, loc~ : Location) -> Unit = _
+  visit_ErrorType_DefaultErrorType(
+    Self,
+    loc~ : Location,
+    kind~ : DefaultErrorTypeKind,
+  ) -> Unit = _
   visit_ErrorType_Noraise(Self, loc~ : Location) -> Unit = _
-  visit_ErrorType_MaybeError(Self, ty~ : Type) -> Unit = _
+  visit_ErrorType_MaybeError(Self, ty~ : Type, question_loc~ : Location) -> Unit = _
 
   // ConstrParam
   visit_ConstrParam(Self, ConstrParam) -> Unit = _
@@ -152,11 +168,45 @@ pub(open) trait IterVisitor {
 
   // Parameter
   visit_Parameter(Self, Parameter) -> Unit = _
-  visit_Parameter_DiscardPositional(Self, ty~ : Type?, loc~ : Location) -> Unit = _
-  visit_Parameter_Positional(Self, binder~ : Binder, ty~ : Type?) -> Unit = _
-  visit_Parameter_Labelled(Self, binder~ : Binder, ty~ : Type?) -> Unit = _
-  visit_Parameter_Optional(Self, binder~ : Binder, default~ : Expr, ty~ : Type?) -> Unit = _
-  visit_Parameter_QuestionOptional(Self, binder~ : Binder, ty~ : Type?) -> Unit = _
+  visit_Parameter_DiscardPositional(
+    Self,
+    ty~ : Type?,
+    loc~ : Location,
+    colon_loc~ : Location?,
+  ) -> Unit = _
+  visit_Parameter_Positional(
+    Self,
+    binder~ : Binder,
+    ty~ : Type?,
+    loc~ : Location,
+    colon_loc~ : Location?,
+  ) -> Unit = _
+  visit_Parameter_Labelled(
+    Self,
+    binder~ : Binder,
+    ty~ : Type?,
+    loc~ : Location,
+    label_mark_loc~ : Location?,
+    colon_loc~ : Location?,
+  ) -> Unit = _
+  visit_Parameter_Optional(
+    Self,
+    binder~ : Binder,
+    default~ : Expr,
+    ty~ : Type?,
+    loc~ : Location,
+    question_loc~ : Location?,
+    colon_loc~ : Location?,
+    equal_loc~ : Location?,
+  ) -> Unit = _
+  visit_Parameter_QuestionOptional(
+    Self,
+    binder~ : Binder,
+    ty~ : Type?,
+    loc~ : Location,
+    question_loc~ : Location?,
+    colon_loc~ : Location?,
+  ) -> Unit = _
 
   // Case
   visit_Case(Self, Case) -> Unit = _
@@ -223,8 +273,8 @@ pub(open) trait IterVisitor {
 
   // DotDotBinder
   visit_DotDotBinder(Self, DotDotBinder) -> Unit = _
-  visit_DotDotBinder_BinderAs(Self, Binder) -> Unit = _
-  visit_DotDotBinder_Binder(Self, Binder) -> Unit = _
+  visit_DotDotBinder_BinderAs(Self, Binder, dotdot_loc~ : Location) -> Unit = _
+  visit_DotDotBinder_Binder(Self, Binder, dotdot_loc~ : Location) -> Unit = _
 
   // ArrayPattern
   visit_ArrayPattern(Self, ArrayPattern) -> Unit = _
@@ -240,12 +290,21 @@ pub(open) trait IterVisitor {
 
   // ArrayPatterns
   visit_ArrayPatterns(Self, ArrayPatterns) -> Unit = _
-  visit_ArrayPatterns_Closed(Self, @list.List[ArrayPattern]) -> Unit = _
+  visit_ArrayPatterns_Closed(
+    Self,
+    @list.List[ArrayPattern],
+    loc~ : Location,
+    lbrack_loc~ : Location,
+    rbrack_loc~ : Location,
+  ) -> Unit = _
   visit_ArrayPatterns_Open(
     Self,
     @list.List[ArrayPattern],
     @list.List[ArrayPattern],
     DotDotBinder,
+    loc~ : Location,
+    lbrack_loc~ : Location,
+    rbrack_loc~ : Location,
   ) -> Unit = _
 
   // WhereClause
@@ -269,28 +328,46 @@ pub(open) trait IterVisitor {
   visit_Pattern_Any(Self, loc~ : Location) -> Unit = _
   visit_Pattern_Array(Self, pats~ : ArrayPatterns, loc~ : Location) -> Unit = _
   visit_Pattern_Constant(Self, c~ : Constant, loc~ : Location) -> Unit = _
-  visit_Pattern_Constraint(Self, pat~ : Pattern, ty~ : Type, loc~ : Location) -> Unit = _
+  visit_Pattern_Constraint(
+    Self,
+    pat~ : Pattern,
+    ty~ : Type,
+    loc~ : Location,
+    colon_loc~ : Location,
+  ) -> Unit = _
   visit_Pattern_Constr(
     Self,
     constr~ : Constructor,
     args~ : @list.List[ConstrPatArg]?,
     is_open~ : Bool,
     loc~ : Location,
+    lparen_loc~ : Location?,
+    rparen_loc~ : Location?,
   ) -> Unit = _
   visit_Pattern_Or(Self, pat1~ : Pattern, pat2~ : Pattern, loc~ : Location) -> Unit = _
-  visit_Pattern_Tuple(Self, pats~ : @list.List[Pattern], loc~ : Location) -> Unit = _
+  visit_Pattern_Tuple(
+    Self,
+    pats~ : @list.List[Pattern],
+    loc~ : Location,
+    lparen_loc~ : Location,
+    rparen_loc~ : Location,
+  ) -> Unit = _
   visit_Pattern_Var(Self, Binder) -> Unit = _
   visit_Pattern_Record(
     Self,
     fields~ : @list.List[FieldPat],
     is_closed~ : Bool,
     loc~ : Location,
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
   ) -> Unit = _
   visit_Pattern_Map(
     Self,
     elems~ : @list.List[MapPatElem],
     is_closed~ : Bool,
     loc~ : Location,
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
   ) -> Unit = _
   visit_Pattern_Range(
     Self,
@@ -298,12 +375,15 @@ pub(open) trait IterVisitor {
     rhs~ : Pattern,
     kind~ : RangeKind,
     loc~ : Location,
+    op_loc~ : Location,
   ) -> Unit = _
   visit_Pattern_SpecialConstr(
     Self,
     binder~ : Binder,
     args~ : @list.List[ConstrPatArg],
     loc~ : Location,
+    lparen_loc~ : Location,
+    rparen_loc~ : Location,
   ) -> Unit = _
 
   // LocalTypeDecl
@@ -319,20 +399,20 @@ pub(open) trait IterVisitor {
   visit_FuncStubs(Self, FuncStubs) -> Unit = _
   visit_FuncStubs_Import(
     Self,
-    module_name~ : StringLiteral,
-    func_name~ : StringLiteral,
-    language~ : StringLiteral?,
+    module_name~ : LocatedString,
+    func_name~ : LocatedString,
+    language~ : LocatedString?,
   ) -> Unit = _
   visit_FuncStubs_Embedded(
     Self,
-    language~ : StringLiteral?,
+    language~ : LocatedString?,
     code~ : EmbeddedCode,
   ) -> Unit = _
 
   // EmbeddedCode
   visit_EmbeddedCode(Self, EmbeddedCode) -> Unit = _
-  visit_EmbeddedCode_CodeString(Self, StringLiteral) -> Unit = _
-  visit_EmbeddedCode_CodeMultilineString(Self, @list.List[String]) -> Unit = _
+  visit_EmbeddedCode_CodeString(Self, LocatedString) -> Unit = _
+  visit_EmbeddedCode_CodeMultilineString(Self, @list.List[LocatedString]) -> Unit = _
 
   // DeclBody
   visit_DeclBody(Self, DeclBody) -> Unit = _
@@ -1441,8 +1521,8 @@ impl IterVisitor with visit_Visibility(env, visibility) {
 }
 
 ///|
-impl IterVisitor with visit_Visibility_Pub(env, attr~, loc~) {
-  IterVisitorBase::visit_Visibility_Pub(env, attr~, loc~)
+impl IterVisitor with visit_Visibility_Pub(env, attr~, attr_loc~, loc~) {
+  IterVisitorBase::visit_Visibility_Pub(env, attr~, attr_loc~, loc~)
 }
 
 ///|
@@ -1476,8 +1556,22 @@ impl IterVisitor with visit_LongIdent_Ident(env, name~) {
 }
 
 ///|
-impl IterVisitor with visit_LongIdent_Dot(env, pkg~, id~) {
-  IterVisitorBase::visit_LongIdent_Dot(env, pkg~, id~)
+impl IterVisitor with visit_LongIdent_Dot(
+  env,
+  pkg~,
+  pkg_loc~,
+  dot_loc~,
+  id~,
+  id_loc~,
+) {
+  IterVisitorBase::visit_LongIdent_Dot(
+    env,
+    pkg~,
+    pkg_loc~,
+    dot_loc~,
+    id~,
+    id_loc~,
+  )
 }
 
 ///|
@@ -1536,8 +1630,8 @@ impl IterVisitor with visit_ErrorType_ErrorType(env, ty~) {
 }
 
 ///|
-impl IterVisitor with visit_ErrorType_DefaultErrorType(env, loc~) {
-  IterVisitorBase::visit_ErrorType_DefaultErrorType(env, loc~)
+impl IterVisitor with visit_ErrorType_DefaultErrorType(env, loc~, kind~) {
+  IterVisitorBase::visit_ErrorType_DefaultErrorType(env, loc~, kind~)
 }
 
 ///|
@@ -1546,8 +1640,8 @@ impl IterVisitor with visit_ErrorType_Noraise(env, loc~) {
 }
 
 ///|
-impl IterVisitor with visit_ErrorType_MaybeError(env, ty~) {
-  IterVisitorBase::visit_ErrorType_MaybeError(env, ty~)
+impl IterVisitor with visit_ErrorType_MaybeError(env, ty~, question_loc~) {
+  IterVisitorBase::visit_ErrorType_MaybeError(env, ty~, question_loc~)
 }
 
 ///|
@@ -1763,28 +1857,91 @@ impl IterVisitor with visit_Parameter(env, parameter) {
 }
 
 ///|
-impl IterVisitor with visit_Parameter_DiscardPositional(env, ty~, loc~) {
-  IterVisitorBase::visit_Parameter_DiscardPositional(env, ty~, loc~)
+impl IterVisitor with visit_Parameter_DiscardPositional(
+  env,
+  ty~,
+  loc~,
+  colon_loc~,
+) {
+  IterVisitorBase::visit_Parameter_DiscardPositional(env, ty~, loc~, colon_loc~)
 }
 
 ///|
-impl IterVisitor with visit_Parameter_Positional(env, binder~, ty~) {
-  IterVisitorBase::visit_Parameter_Positional(env, binder~, ty~)
+impl IterVisitor with visit_Parameter_Positional(
+  env,
+  binder~,
+  ty~,
+  loc~,
+  colon_loc~,
+) {
+  IterVisitorBase::visit_Parameter_Positional(
+    env,
+    binder~,
+    ty~,
+    loc~,
+    colon_loc~,
+  )
 }
 
 ///|
-impl IterVisitor with visit_Parameter_Labelled(env, binder~, ty~) {
-  IterVisitorBase::visit_Parameter_Labelled(env, binder~, ty~)
+impl IterVisitor with visit_Parameter_Labelled(
+  env,
+  binder~,
+  ty~,
+  loc~,
+  label_mark_loc~,
+  colon_loc~,
+) {
+  IterVisitorBase::visit_Parameter_Labelled(
+    env,
+    binder~,
+    ty~,
+    loc~,
+    label_mark_loc~,
+    colon_loc~,
+  )
 }
 
 ///|
-impl IterVisitor with visit_Parameter_Optional(env, binder~, default~, ty~) {
-  IterVisitorBase::visit_Parameter_Optional(env, binder~, default~, ty~)
+impl IterVisitor with visit_Parameter_Optional(
+  env,
+  binder~,
+  default~,
+  ty~,
+  loc~,
+  question_loc~,
+  colon_loc~,
+  equal_loc~,
+) {
+  IterVisitorBase::visit_Parameter_Optional(
+    env,
+    binder~,
+    default~,
+    ty~,
+    loc~,
+    question_loc~,
+    colon_loc~,
+    equal_loc~,
+  )
 }
 
 ///|
-impl IterVisitor with visit_Parameter_QuestionOptional(env, binder~, ty~) {
-  IterVisitorBase::visit_Parameter_QuestionOptional(env, binder~, ty~)
+impl IterVisitor with visit_Parameter_QuestionOptional(
+  env,
+  binder~,
+  ty~,
+  loc~,
+  question_loc~,
+  colon_loc~,
+) {
+  IterVisitorBase::visit_Parameter_QuestionOptional(
+    env,
+    binder~,
+    ty~,
+    loc~,
+    question_loc~,
+    colon_loc~,
+  )
 }
 
 ///|
@@ -1873,13 +2030,13 @@ impl IterVisitor with visit_DotDotBinder(env, dot_dot_binder) {
 }
 
 ///|
-impl IterVisitor with visit_DotDotBinder_BinderAs(env, binder) {
-  IterVisitorBase::visit_DotDotBinder_BinderAs(env, binder)
+impl IterVisitor with visit_DotDotBinder_BinderAs(env, binder, dotdot_loc~) {
+  IterVisitorBase::visit_DotDotBinder_BinderAs(env, binder, dotdot_loc~)
 }
 
 ///|
-impl IterVisitor with visit_DotDotBinder_Binder(env, binder) {
-  IterVisitorBase::visit_DotDotBinder_Binder(env, binder)
+impl IterVisitor with visit_DotDotBinder_Binder(env, binder, dotdot_loc~) {
+  IterVisitorBase::visit_DotDotBinder_Binder(env, binder, dotdot_loc~)
 }
 
 ///|
@@ -1913,8 +2070,20 @@ impl IterVisitor with visit_ArrayPatterns(env, array_patterns) {
 }
 
 ///|
-impl IterVisitor with visit_ArrayPatterns_Closed(env, array_patterns) {
-  IterVisitorBase::visit_ArrayPatterns_Closed(env, array_patterns)
+impl IterVisitor with visit_ArrayPatterns_Closed(
+  env,
+  array_patterns,
+  loc~,
+  lbrack_loc~,
+  rbrack_loc~,
+) {
+  IterVisitorBase::visit_ArrayPatterns_Closed(
+    env,
+    array_patterns,
+    loc~,
+    lbrack_loc~,
+    rbrack_loc~,
+  )
 }
 
 ///|
@@ -1923,9 +2092,18 @@ impl IterVisitor with visit_ArrayPatterns_Open(
   prefix_patterns,
   suffix_patterns,
   dot_dot_binder,
+  loc~,
+  lbrack_loc~,
+  rbrack_loc~,
 ) {
   IterVisitorBase::visit_ArrayPatterns_Open(
-    env, prefix_patterns, suffix_patterns, dot_dot_binder,
+    env,
+    prefix_patterns,
+    suffix_patterns,
+    dot_dot_binder,
+    loc~,
+    lbrack_loc~,
+    rbrack_loc~,
   )
 }
 
@@ -1980,13 +2158,29 @@ impl IterVisitor with visit_Pattern_Constant(env, c~, loc~) {
 }
 
 ///|
-impl IterVisitor with visit_Pattern_Constraint(env, pat~, ty~, loc~) {
-  IterVisitorBase::visit_Pattern_Constraint(env, pat~, ty~, loc~)
+impl IterVisitor with visit_Pattern_Constraint(env, pat~, ty~, loc~, colon_loc~) {
+  IterVisitorBase::visit_Pattern_Constraint(env, pat~, ty~, loc~, colon_loc~)
 }
 
 ///|
-impl IterVisitor with visit_Pattern_Constr(env, constr~, args~, is_open~, loc~) {
-  IterVisitorBase::visit_Pattern_Constr(env, constr~, args~, is_open~, loc~)
+impl IterVisitor with visit_Pattern_Constr(
+  env,
+  constr~,
+  args~,
+  is_open~,
+  loc~,
+  lparen_loc~,
+  rparen_loc~,
+) {
+  IterVisitorBase::visit_Pattern_Constr(
+    env,
+    constr~,
+    args~,
+    is_open~,
+    loc~,
+    lparen_loc~,
+    rparen_loc~,
+  )
 }
 
 ///|
@@ -1995,8 +2189,20 @@ impl IterVisitor with visit_Pattern_Or(env, pat1~, pat2~, loc~) {
 }
 
 ///|
-impl IterVisitor with visit_Pattern_Tuple(env, pats~, loc~) {
-  IterVisitorBase::visit_Pattern_Tuple(env, pats~, loc~)
+impl IterVisitor with visit_Pattern_Tuple(
+  env,
+  pats~,
+  loc~,
+  lparen_loc~,
+  rparen_loc~,
+) {
+  IterVisitorBase::visit_Pattern_Tuple(
+    env,
+    pats~,
+    loc~,
+    lparen_loc~,
+    rparen_loc~,
+  )
 }
 
 ///|
@@ -2005,23 +2211,65 @@ impl IterVisitor with visit_Pattern_Var(env, binder) {
 }
 
 ///|
-impl IterVisitor with visit_Pattern_Record(env, fields~, is_closed~, loc~) {
-  IterVisitorBase::visit_Pattern_Record(env, fields~, is_closed~, loc~)
+impl IterVisitor with visit_Pattern_Record(
+  env,
+  fields~,
+  is_closed~,
+  loc~,
+  lbrace_loc~,
+  rbrace_loc~,
+) {
+  IterVisitorBase::visit_Pattern_Record(
+    env,
+    fields~,
+    is_closed~,
+    loc~,
+    lbrace_loc~,
+    rbrace_loc~,
+  )
 }
 
 ///|
-impl IterVisitor with visit_Pattern_Map(env, elems~, is_closed~, loc~) {
-  IterVisitorBase::visit_Pattern_Map(env, elems~, is_closed~, loc~)
+impl IterVisitor with visit_Pattern_Map(
+  env,
+  elems~,
+  is_closed~,
+  loc~,
+  lbrace_loc~,
+  rbrace_loc~,
+) {
+  IterVisitorBase::visit_Pattern_Map(
+    env,
+    elems~,
+    is_closed~,
+    loc~,
+    lbrace_loc~,
+    rbrace_loc~,
+  )
 }
 
 ///|
-impl IterVisitor with visit_Pattern_Range(env, lhs~, rhs~, kind~, loc~) {
-  IterVisitorBase::visit_Pattern_Range(env, lhs~, rhs~, kind~, loc~)
+impl IterVisitor with visit_Pattern_Range(env, lhs~, rhs~, kind~, loc~, op_loc~) {
+  IterVisitorBase::visit_Pattern_Range(env, lhs~, rhs~, kind~, loc~, op_loc~)
 }
 
 ///|
-impl IterVisitor with visit_Pattern_SpecialConstr(env, binder~, args~, loc~) {
-  IterVisitorBase::visit_Pattern_SpecialConstr(env, binder~, args~, loc~)
+impl IterVisitor with visit_Pattern_SpecialConstr(
+  env,
+  binder~,
+  args~,
+  loc~,
+  lparen_loc~,
+  rparen_loc~,
+) {
+  IterVisitorBase::visit_Pattern_SpecialConstr(
+    env,
+    binder~,
+    args~,
+    loc~,
+    lparen_loc~,
+    rparen_loc~,
+  )
 }
 
 ///|
@@ -2368,7 +2616,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Visibili
 ) {
   match visibility {
     Default => ()
-    Pub(attr~, loc~) => env.0.visit_Visibility_Pub(attr~, loc~)
+    Pub(attr~, attr_loc~, loc~) =>
+      env.0.visit_Visibility_Pub(attr~, attr_loc~, loc~)
     Priv(loc~) => env.0.visit_Visibility_Priv(loc~)
   }
 }
@@ -2377,9 +2626,11 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Visibili
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Visibility_Pub(
   _,
   attr~,
+  attr_loc~,
   loc~,
 ) {
   ignore(attr)
+  ignore(attr_loc)
   ignore(loc)
 }
 
@@ -2422,7 +2673,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LongIden
 ) {
   match long_ident {
     Ident(name~) => env.0.visit_LongIdent_Ident(name~)
-    Dot(pkg~, id~) => env.0.visit_LongIdent_Dot(pkg~, id~)
+    Dot(pkg~, pkg_loc~, dot_loc~, id~, id_loc~) =>
+      env.0.visit_LongIdent_Dot(pkg~, pkg_loc~, dot_loc~, id~, id_loc~)
   }
 }
 
@@ -2438,10 +2690,16 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LongIden
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_LongIdent_Dot(
   _,
   pkg~,
+  pkg_loc~,
+  dot_loc~,
   id~,
+  id_loc~,
 ) {
   ignore(pkg)
+  ignore(pkg_loc)
+  ignore(dot_loc)
   ignore(id)
+  ignore(id_loc)
 }
 
 ///|
@@ -2551,10 +2809,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ErrorTyp
 ) {
   match error_type {
     ErrorType(ty~) => env.0.visit_ErrorType_ErrorType(ty~)
-    DefaultErrorType(loc~) => env.0.visit_ErrorType_DefaultErrorType(loc~)
+    DefaultErrorType(loc~, kind~) =>
+      env.0.visit_ErrorType_DefaultErrorType(loc~, kind~)
     NoErrorType => ()
     Noraise(loc~) => env.0.visit_ErrorType_Noraise(loc~)
-    MaybeError(ty~) => env.0.visit_ErrorType_MaybeError(ty~)
+    MaybeError(ty~, question_loc~) =>
+      env.0.visit_ErrorType_MaybeError(ty~, question_loc~)
   }
 }
 
@@ -2570,8 +2830,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ErrorTyp
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ErrorType_DefaultErrorType(
   _,
   loc~,
+  kind~,
 ) {
   ignore(loc)
+  ignore(kind)
 }
 
 ///|
@@ -2586,7 +2848,9 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ErrorTyp
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ErrorType_MaybeError(
   env,
   ty~,
+  question_loc~,
 ) {
+  ignore(question_loc)
   env.0.visit_Type(ty)
 }
 
@@ -2955,14 +3219,44 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Paramete
   parameter,
 ) {
   match parameter {
-    DiscardPositional(ty~, loc~) =>
-      env.0.visit_Parameter_DiscardPositional(ty~, loc~)
-    Positional(binder~, ty~) => env.0.visit_Parameter_Positional(binder~, ty~)
-    Labelled(binder~, ty~) => env.0.visit_Parameter_Labelled(binder~, ty~)
-    Optional(binder~, default~, ty~) =>
-      env.0.visit_Parameter_Optional(binder~, default~, ty~)
-    QuestionOptional(binder~, ty~) =>
-      env.0.visit_Parameter_QuestionOptional(binder~, ty~)
+    DiscardPositional(ty~, loc~, colon_loc~) =>
+      env.0.visit_Parameter_DiscardPositional(ty~, loc~, colon_loc~)
+    Positional(binder~, ty~, loc~, colon_loc~) =>
+      env.0.visit_Parameter_Positional(binder~, ty~, loc~, colon_loc~)
+    Labelled(binder~, ty~, loc~, label_mark_loc~, colon_loc~) =>
+      env.0.visit_Parameter_Labelled(
+        binder~,
+        ty~,
+        loc~,
+        label_mark_loc~,
+        colon_loc~,
+      )
+    Optional(
+      binder~,
+      default~,
+      ty~,
+      loc~,
+      question_loc~,
+      colon_loc~,
+      equal_loc~
+    ) =>
+      env.0.visit_Parameter_Optional(
+        binder~,
+        default~,
+        ty~,
+        loc~,
+        question_loc~,
+        colon_loc~,
+        equal_loc~,
+      )
+    QuestionOptional(binder~, ty~, loc~, question_loc~, colon_loc~) =>
+      env.0.visit_Parameter_QuestionOptional(
+        binder~,
+        ty~,
+        loc~,
+        question_loc~,
+        colon_loc~,
+      )
   }
 }
 
@@ -2971,8 +3265,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Paramete
   env,
   ty~,
   loc~,
+  colon_loc~,
 ) {
   ignore(loc)
+  ignore(colon_loc)
   ty.each(x => env.0.visit_Type(x))
 }
 
@@ -2981,7 +3277,11 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Paramete
   env,
   binder~,
   ty~,
+  loc~,
+  colon_loc~,
 ) {
+  ignore(loc)
+  ignore(colon_loc)
   env.0.visit_Binder(binder)
   ty.each(x => env.0.visit_Type(x))
 }
@@ -2991,9 +3291,15 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Paramete
   env,
   binder~,
   ty~,
+  loc~,
+  label_mark_loc~,
+  colon_loc~,
 ) {
-  ignore(ty)
+  ignore(loc)
+  ignore(label_mark_loc)
+  ignore(colon_loc)
   env.0.visit_Binder(binder)
+  ty.each(x => env.0.visit_Type(x))
 }
 
 ///|
@@ -3002,7 +3308,15 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Paramete
   binder~,
   default~,
   ty~,
+  loc~,
+  question_loc~,
+  colon_loc~,
+  equal_loc~,
 ) {
+  ignore(loc)
+  ignore(question_loc)
+  ignore(colon_loc)
+  ignore(equal_loc)
   env.0.visit_Binder(binder)
   env.0.visit_Expr(default)
   ty.each(x => env.0.visit_Type(x))
@@ -3013,7 +3327,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Paramete
   env,
   binder~,
   ty~,
+  loc~,
+  question_loc~,
+  colon_loc~,
 ) {
+  ignore(loc)
+  ignore(question_loc)
+  ignore(colon_loc)
   env.0.visit_Binder(binder)
   ty.each(x => env.0.visit_Type(x))
 }
@@ -3192,10 +3512,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_DotDotBi
   dot_dot_binder,
 ) {
   match dot_dot_binder {
-    Underscore => ()
-    NoBinder => ()
-    BinderAs(binder) => env.0.visit_DotDotBinder_BinderAs(binder)
-    Binder(binder) => env.0.visit_DotDotBinder_Binder(binder)
+    Underscore(dotdot_loc~) => ignore(dotdot_loc)
+    NoBinder(dotdot_loc~) => ignore(dotdot_loc)
+    BinderAs(binder, dotdot_loc~) =>
+      env.0.visit_DotDotBinder_BinderAs(binder, dotdot_loc~)
+    Binder(binder, dotdot_loc~) =>
+      env.0.visit_DotDotBinder_Binder(binder, dotdot_loc~)
   }
 }
 
@@ -3203,7 +3525,9 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_DotDotBi
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_DotDotBinder_BinderAs(
   env,
   binder,
+  dotdot_loc~,
 ) {
+  ignore(dotdot_loc)
   env.0.visit_Binder(binder)
 }
 
@@ -3211,7 +3535,9 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_DotDotBi
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_DotDotBinder_Binder(
   env,
   binder,
+  dotdot_loc~,
 ) {
+  ignore(dotdot_loc)
   env.0.visit_Binder(binder)
 }
 
@@ -3275,10 +3601,23 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ArrayPat
   array_patterns,
 ) {
   match array_patterns {
-    Closed(patterns) => env.0.visit_ArrayPatterns_Closed(patterns)
-    Open(prefix_patterns, suffix_patterns, dot_dot_binder) =>
+    Closed(patterns, loc~, lbrack_loc~, rbrack_loc~) =>
+      env.0.visit_ArrayPatterns_Closed(patterns, loc~, lbrack_loc~, rbrack_loc~)
+    Open(
+      prefix_patterns,
+      suffix_patterns,
+      dot_dot_binder,
+      loc~,
+      lbrack_loc~,
+      rbrack_loc~
+    ) =>
       env.0.visit_ArrayPatterns_Open(
-        prefix_patterns, suffix_patterns, dot_dot_binder,
+        prefix_patterns,
+        suffix_patterns,
+        dot_dot_binder,
+        loc~,
+        lbrack_loc~,
+        rbrack_loc~,
       )
   }
 }
@@ -3287,7 +3626,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ArrayPat
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ArrayPatterns_Closed(
   env,
   array_patterns,
+  loc~,
+  lbrack_loc~,
+  rbrack_loc~,
 ) {
+  ignore(loc)
+  ignore(lbrack_loc)
+  ignore(rbrack_loc)
   array_patterns.each(x => env.0.visit_ArrayPattern(x))
 }
 
@@ -3297,7 +3642,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_ArrayPat
   prefix_patterns,
   suffix_patterns,
   dot_dot_binder,
+  loc~,
+  lbrack_loc~,
+  rbrack_loc~,
 ) {
+  ignore(loc)
+  ignore(lbrack_loc)
+  ignore(rbrack_loc)
   prefix_patterns.each(x => env.0.visit_ArrayPattern(x))
   suffix_patterns.each(x => env.0.visit_ArrayPattern(x))
   env.0.visit_DotDotBinder(dot_dot_binder)
@@ -3358,21 +3709,47 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Pattern(
     Any(loc~) => env.0.visit_Pattern_Any(loc~)
     Array(pats~, loc~) => env.0.visit_Pattern_Array(pats~, loc~)
     Constant(c~, loc~) => env.0.visit_Pattern_Constant(c~, loc~)
-    Constraint(pat~, ty~, loc~) =>
-      env.0.visit_Pattern_Constraint(pat~, ty~, loc~)
-    Constr(constr~, args~, is_open~, loc~) =>
-      env.0.visit_Pattern_Constr(constr~, args~, is_open~, loc~)
+    Constraint(pat~, ty~, loc~, colon_loc~) =>
+      env.0.visit_Pattern_Constraint(pat~, ty~, loc~, colon_loc~)
+    Constr(constr~, args~, is_open~, loc~, lparen_loc~, rparen_loc~) =>
+      env.0.visit_Pattern_Constr(
+        constr~,
+        args~,
+        is_open~,
+        loc~,
+        lparen_loc~,
+        rparen_loc~,
+      )
     Or(pat1~, pat2~, loc~) => env.0.visit_Pattern_Or(pat1~, pat2~, loc~)
-    Tuple(pats~, loc~) => env.0.visit_Pattern_Tuple(pats~, loc~)
+    Tuple(pats~, loc~, lparen_loc~, rparen_loc~) =>
+      env.0.visit_Pattern_Tuple(pats~, loc~, lparen_loc~, rparen_loc~)
     Var(binder) => env.0.visit_Pattern_Var(binder)
-    Record(fields~, is_closed~, loc~) =>
-      env.0.visit_Pattern_Record(fields~, is_closed~, loc~)
-    Map(elems~, is_closed~, loc~) =>
-      env.0.visit_Pattern_Map(elems~, is_closed~, loc~)
-    Range(lhs~, rhs~, kind~, loc~) =>
-      env.0.visit_Pattern_Range(lhs~, rhs~, kind~, loc~)
-    SpecialConstr(binder~, args~, loc~) =>
-      env.0.visit_Pattern_SpecialConstr(binder~, args~, loc~)
+    Record(fields~, is_closed~, loc~, lbrace_loc~, rbrace_loc~) =>
+      env.0.visit_Pattern_Record(
+        fields~,
+        is_closed~,
+        loc~,
+        lbrace_loc~,
+        rbrace_loc~,
+      )
+    Map(elems~, is_closed~, loc~, lbrace_loc~, rbrace_loc~) =>
+      env.0.visit_Pattern_Map(
+        elems~,
+        is_closed~,
+        loc~,
+        lbrace_loc~,
+        rbrace_loc~,
+      )
+    Range(lhs~, rhs~, kind~, loc~, op_loc~) =>
+      env.0.visit_Pattern_Range(lhs~, rhs~, kind~, loc~, op_loc~)
+    SpecialConstr(binder~, args~, loc~, lparen_loc~, rparen_loc~) =>
+      env.0.visit_Pattern_SpecialConstr(
+        binder~,
+        args~,
+        loc~,
+        lparen_loc~,
+        rparen_loc~,
+      )
   }
 }
 
@@ -3422,8 +3799,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Pattern_
   pat~,
   ty~,
   loc~,
+  colon_loc~,
 ) {
   ignore(loc)
+  ignore(colon_loc)
   env.0.visit_Pattern(pat)
   env.0.visit_Type(ty)
 }
@@ -3435,9 +3814,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Pattern_
   args~,
   is_open~,
   loc~,
+  lparen_loc~,
+  rparen_loc~,
 ) {
   ignore(is_open)
   ignore(loc)
+  ignore(lparen_loc)
+  ignore(rparen_loc)
   env.0.visit_Constructor(constr)
   args.each(args => args.each(x => env.0.visit_ConstrPatArg(x)))
 }
@@ -3459,8 +3842,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Pattern_
   env,
   pats~,
   loc~,
+  lparen_loc~,
+  rparen_loc~,
 ) {
   ignore(loc)
+  ignore(lparen_loc)
+  ignore(rparen_loc)
   pats.each(x => env.0.visit_Pattern(x))
 }
 
@@ -3478,9 +3865,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Pattern_
   fields~,
   is_closed~,
   loc~,
+  lbrace_loc~,
+  rbrace_loc~,
 ) {
   ignore(is_closed)
   ignore(loc)
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
   fields.each(x => env.0.visit_FieldPat(x))
 }
 
@@ -3490,9 +3881,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Pattern_
   elems~,
   is_closed~,
   loc~,
+  lbrace_loc~,
+  rbrace_loc~,
 ) {
   ignore(is_closed)
   ignore(loc)
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
   elems.each(x => env.0.visit_MapPatElem(x))
 }
 
@@ -3503,8 +3898,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Pattern_
   rhs~,
   kind~,
   loc~,
+  op_loc~,
 ) {
   ignore(loc)
+  ignore(op_loc)
   env.0.visit_Pattern(lhs)
   env.0.visit_Pattern(rhs)
   env.0.visit_RangeKind(kind)
@@ -3516,8 +3913,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_Pattern_
   binder~,
   args~,
   loc~,
+  lparen_loc~,
+  rparen_loc~,
 ) {
   ignore(loc)
+  ignore(lparen_loc)
+  ignore(rparen_loc)
   env.0.visit_Binder(binder)
   args.each(x => env.0.visit_ConstrPatArg(x))
 }
@@ -3624,7 +4025,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with visit_DeclBody
     DeclBody(local_types~, expr~) =>
       env.0.visit_DeclBody_DeclBody(local_types~, expr~)
     DeclStubs(func_stubs) => env.0.visit_DeclBody_DeclStubs(func_stubs)
-    DeclNone => ()
+    DeclNone(loc~) => ignore(loc)
   }
 }
 

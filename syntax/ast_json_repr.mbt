@@ -58,10 +58,15 @@ fn bytes_literal_json_repr(b : BytesLiteral) -> Json {
 }
 
 ///|
+fn located_string_json_repr(s : LocatedString) -> Json {
+  string_literal_json_repr(s.value)
+}
+
+///|
 fn LongIdent::json_repr(self : LongIdent, loc : Location) -> Json {
   match self {
     Ident(name~) => tagged_node1("LongIdent::Ident", loc, Json::string(name))
-    Dot(pkg~, id~) =>
+    Dot(pkg~, id~, ..) =>
       tagged_node("LongIdent::Dot", loc, {
         "pkg": Json::string(pkg),
         "id": Json::string(id),
@@ -79,13 +84,13 @@ fn FuncStubs::json_repr(self : FuncStubs, loc : Location) -> Json {
   match self {
     Import(module_name~, func_name~, language~) =>
       tagged_node("FuncStubs::Import", loc, {
-        "module_name": string_literal_json_repr(module_name),
-        "func_name": string_literal_json_repr(func_name),
-        "language": option_json_repr(language, string_literal_json_repr),
+        "module_name": located_string_json_repr(module_name),
+        "func_name": located_string_json_repr(func_name),
+        "language": option_json_repr(language, located_string_json_repr),
       })
     Embedded(language~, code~) =>
       tagged_node("FuncStubs::Embedded", loc, {
-        "language": option_json_repr(language, string_literal_json_repr),
+        "language": option_json_repr(language, located_string_json_repr),
         "code": code.json_repr(loc),
       })
   }
@@ -95,16 +100,13 @@ fn FuncStubs::json_repr(self : FuncStubs, loc : Location) -> Json {
 fn EmbeddedCode::json_repr(self : EmbeddedCode, loc : Location) -> Json {
   match self {
     CodeString(s) =>
-      tagged_node1("EmbeddedCode::CodeString", loc, string_literal_json_repr(s))
+      tagged_node1("EmbeddedCode::CodeString", loc, located_string_json_repr(s))
     CodeMultilineString(strings) =>
       tagged_node1(
         "EmbeddedCode::CodeMultilineString",
         loc,
         list_json_repr(
-          "EmbeddedCode::CodeMultilineString::LiteralList",
-          loc,
-          strings,
-          Json::string,
+          "EmbeddedCode::CodeMultilineString::LiteralList", loc, strings, located_string_json_repr,
         ),
       )
   }
@@ -814,48 +816,31 @@ fn LocalTypeDecl::json_repr(self : LocalTypeDecl) -> Json {
 ///|
 fn Parameter::json_repr(self : Parameter) -> Json {
   match self {
-    DiscardPositional(ty~, loc~) =>
+    DiscardPositional(ty~, loc~, ..) =>
       tagged_node("Parameter::DiscardPositional", loc, {
         "ty": option_json_repr(ty, Type::json_repr),
       })
-    Positional(binder~, ty~) => {
-      let loc = match ty {
-        Some(ty) => binder.loc.merge(ty.loc())
-        None => binder.loc
-      }
+    Positional(binder~, ty~, loc~, ..) =>
       tagged_node("Parameter::Positional", loc, {
         "binder": binder.json_repr(),
         "ty": option_json_repr(ty, Type::json_repr),
       })
-    }
-    Labelled(binder~, ty~) => {
-      let loc = match ty {
-        Some(ty) => binder.loc.merge(ty.loc())
-        None => binder.loc
-      }
+    Labelled(binder~, ty~, loc~, ..) =>
       tagged_node("Parameter::Labelled", loc, {
         "binder": binder.json_repr(),
         "ty": option_json_repr(ty, Type::json_repr),
       })
-    }
-    Optional(binder~, default~, ty~) => {
-      let loc = binder.loc.merge(default.loc())
+    Optional(binder~, default~, ty~, loc~, ..) =>
       tagged_node("Parameter::Optional", loc, {
         "binder": binder.json_repr(),
         "default": default.json_repr(),
         "ty": option_json_repr(ty, Type::json_repr),
       })
-    }
-    QuestionOptional(binder~, ty~) => {
-      let loc = match ty {
-        Some(ty) => binder.loc.merge(ty.loc())
-        None => binder.loc
-      }
+    QuestionOptional(binder~, ty~, loc~, ..) =>
       tagged_node("Parameter::QuestionOptional", loc, {
         "binder": binder.json_repr(),
         "ty": option_json_repr(ty, Type::json_repr),
       })
-    }
   }
 }
 
@@ -950,7 +935,7 @@ fn DeclBody::json_repr(self : DeclBody, loc : Location) -> Json {
       })
     DeclStubs(stubs) =>
       tagged_node1("DeclBody::DeclStubs", loc, stubs.json_repr(loc))
-    DeclNone => tagged_node0("DeclBody::DeclNone", loc)
+    DeclNone(loc=_) => tagged_node0("DeclBody::DeclNone", loc)
   }
 }
 
@@ -1016,7 +1001,7 @@ fn Visibility::json_repr(self : Visibility, loc : Location) -> Json {
   match self {
     Default => tagged_node0("Visibility::Default", loc)
     Priv(loc~) => tagged_node0("Visibility::Priv", loc)
-    Pub(attr~, loc~) =>
+    Pub(attr~, ..) =>
       tagged_node("Visibility::Pub", loc, {
         "attr": option_json_repr(attr, Json::string),
       })
@@ -1083,10 +1068,11 @@ fn ErrorType::json_repr(self : ErrorType, loc : Location) -> Json {
   match self {
     ErrorType(ty~) =>
       tagged_node("ErrorType::ErrorType", ty.loc(), { "ty": ty.json_repr() })
-    DefaultErrorType(loc~) => tagged_node0("ErrorType::DefaultErrorType", loc)
+    DefaultErrorType(loc~, ..) =>
+      tagged_node0("ErrorType::DefaultErrorType", loc)
     NoErrorType => tagged_node0("ErrorType::NoErrorType", loc)
     Noraise(loc~) => tagged_node0("ErrorType::Noraise", loc)
-    MaybeError(ty~) =>
+    MaybeError(ty~, ..) =>
       tagged_node("ErrorType::MaybeError", ty.loc(), { "ty": ty.json_repr() })
   }
 }
@@ -1108,9 +1094,9 @@ fn using_name_json_repr(item : (AliasTarget, UsingKind)) -> Json {
 
 ///|
 fn Argument::json_repr(self : Argument) -> Json {
-  tagged_node("Argument", self.value.loc(), {
+  tagged_node("Argument", self.loc, {
     "value": self.value.json_repr(),
-    "kind": self.kind.json_repr(self.value.loc()),
+    "kind": self.kind.json_repr(self.loc),
   })
 }
 
@@ -1300,10 +1286,7 @@ fn Accessor::json_repr(self : Accessor) -> Json {
 
 ///|
 fn Case::json_repr(self : Case) -> Json {
-  let pattern_loc = self.pattern.loc()
-  let body_loc = self.body.loc()
-  let loc = pattern_loc.merge(body_loc)
-  tagged_node("Case", loc, {
+  tagged_node("Case", self.loc, {
     "pattern": self.pattern.json_repr(),
     "guard": option_json_repr(self.guard_, Expr::json_repr),
     "body": self.body.json_repr(),
@@ -1323,12 +1306,12 @@ fn Pattern::json_repr(self : Pattern) -> Json {
       tagged_node("Pattern::Array", loc, { "pats": pats.json_repr(loc) })
     Constant(c~, loc~) =>
       tagged_node("Pattern::Constant", loc, { "constant": c.json_repr(loc) })
-    Constraint(pat~, ty~, loc~) =>
+    Constraint(pat~, ty~, loc~, ..) =>
       tagged_node("Pattern::Constraint", loc, {
         "pat": pat.json_repr(),
         "ty": ty.json_repr(),
       })
-    Constr(constr~, args~, is_open~, loc~) =>
+    Constr(constr~, args~, is_open~, loc~, ..) =>
       tagged_node("Pattern::Constr", loc, {
         "constr": constr.json_repr(),
         "args": option_json_repr(args, fn(args) {
@@ -1346,7 +1329,7 @@ fn Pattern::json_repr(self : Pattern) -> Json {
         "pat1": pat1.json_repr(),
         "pat2": pat2.json_repr(),
       })
-    Tuple(pats~, loc~) =>
+    Tuple(pats~, loc~, ..) =>
       tagged_node("Pattern::Tuple", loc, {
         "pats": list_json_repr(
           "Pattern::Tuple::PatternList",
@@ -1356,7 +1339,7 @@ fn Pattern::json_repr(self : Pattern) -> Json {
         ),
       })
     Var(binder) => tagged_node1("Pattern::Var", binder.loc, binder.json_repr())
-    Record(fields~, is_closed~, loc~) =>
+    Record(fields~, is_closed~, loc~, ..) =>
       tagged_node("Pattern::Record", loc, {
         "fields": list_json_repr(
           "Pattern::Record::FieldList",
@@ -1366,7 +1349,7 @@ fn Pattern::json_repr(self : Pattern) -> Json {
         ),
         "is_closed": Json::boolean(is_closed),
       })
-    Map(elems~, is_closed~, loc~) =>
+    Map(elems~, is_closed~, loc~, ..) =>
       tagged_node("Pattern::Map", loc, {
         "elems": list_json_repr(
           "Pattern::Map::ElemList",
@@ -1376,13 +1359,13 @@ fn Pattern::json_repr(self : Pattern) -> Json {
         ),
         "is_closed": Json::boolean(is_closed),
       })
-    Range(lhs~, rhs~, kind~, loc~) =>
+    Range(lhs~, rhs~, kind~, loc~, ..) =>
       tagged_node("Pattern::Range", loc, {
         "lhs": lhs.json_repr(),
         "rhs": rhs.json_repr(),
         "kind": kind.json_repr(loc),
       })
-    SpecialConstr(binder~, args~, loc~) =>
+    SpecialConstr(binder~, args~, loc~, ..) =>
       tagged_node("Pattern::SpecialConstr", loc, {
         "binder": binder.json_repr(),
         "args": list_json_repr(
@@ -1407,7 +1390,7 @@ fn RangeKind::json_repr(self : RangeKind, loc : Location) -> Json {
 ///|
 fn ArrayPatterns::json_repr(self : ArrayPatterns, loc : Location) -> Json {
   match self {
-    Closed(pats) =>
+    Closed(pats, ..) =>
       tagged_node1(
         "ArrayPatterns::Closed",
         loc,
@@ -1418,7 +1401,7 @@ fn ArrayPatterns::json_repr(self : ArrayPatterns, loc : Location) -> Json {
           ArrayPattern::json_repr,
         ),
       )
-    Open(pats1, pats2, binder) =>
+    Open(pats1, pats2, binder, ..) =>
       tagged_node("ArrayPatterns::Open", loc, {
         "0": list_json_repr(
           "ArrayPatterns::Open::LPatternList",
@@ -1461,20 +1444,20 @@ fn ArrayPattern::json_repr(self : ArrayPattern) -> Json {
 ///|
 fn DotDotBinder::json_repr(self : DotDotBinder, loc : Location) -> Json {
   match self {
-    Underscore => tagged_node0("DotDotBinder::Underscore", loc)
-    NoBinder => tagged_node0("DotDotBinder::NoBinder", loc)
-    BinderAs(binder) =>
+    Underscore(_) => tagged_node0("DotDotBinder::Underscore", loc)
+    NoBinder(_) => tagged_node0("DotDotBinder::NoBinder", loc)
+    BinderAs(binder, ..) =>
       tagged_node1("DotDotBinder::BinderAs", binder.loc, binder.json_repr())
-    Binder(binder) =>
+    Binder(binder, ..) =>
       tagged_node1("DotDotBinder::Binder", binder.loc, binder.json_repr())
   }
 }
 
 ///|
 fn ConstrPatArg::json_repr(self : ConstrPatArg) -> Json {
-  tagged_node("ConstrPatArg", self.pat.loc(), {
+  tagged_node("ConstrPatArg", self.loc, {
     "pat": self.pat.json_repr(),
-    "kind": self.kind.json_repr(self.pat.loc()),
+    "kind": self.kind.json_repr(self.loc),
   })
 }
 

@@ -278,11 +278,6 @@ priv suberror YYObj_Name_ {
 }
 
 ///|
-priv suberror YYObj_String_ {
-  YYObj_String_(String?)
-}
-
-///|
 priv suberror YYObj_Location_ {
   YYObj_Location_(Location?)
 }
@@ -307,6 +302,11 @@ priv suberror YYObj__String__Location_ {
 ///|
 priv suberror YYObj___list_List_FieldDecl___FuncSig__ {
   YYObj___list_List_FieldDecl___FuncSig__((@list.List[FieldDecl], FuncSig?))
+}
+
+///|
+priv suberror YYObj__String___Location__ {
+  YYObj__String___Location__((String?, Location?))
 }
 
 ///|
@@ -2173,7 +2173,7 @@ fn yy_action_64(
 }
 
 // file:///./mbti_parser.mbty
-// 401|    "priv" { Priv(loc=mk_loc($sloc)) }
+// 417|    "priv" { Priv(loc=mk_loc($sloc)) }
 
 ///|
 fn yy_action_17(
@@ -2222,7 +2222,7 @@ fn yy_action_65(
 }
 
 // file:///./mbti_parser.mbty
-// 380|    TRUE { Bool(true) }
+// 396|    TRUE { Bool(true) }
 
 ///|
 fn yy_action_66(
@@ -2238,7 +2238,7 @@ fn yy_action_66(
 }
 
 // file:///./mbti_parser.mbty
-// 381|    FALSE { Bool(false) }
+// 397|    FALSE { Bool(false) }
 
 ///|
 fn yy_action_67(
@@ -2254,7 +2254,7 @@ fn yy_action_67(
 }
 
 // file:///./mbti_parser.mbty
-// 382|    BYTE { Byte($1) }
+// 398|    BYTE { Byte($1) }
 
 ///|
 fn yy_action_68(
@@ -2271,7 +2271,7 @@ fn yy_action_68(
 }
 
 // file:///./mbti_parser.mbty
-// 383|    BYTES { Bytes($1) }
+// 399|    BYTES { Bytes($1) }
 
 ///|
 fn yy_action_69(
@@ -2288,7 +2288,7 @@ fn yy_action_69(
 }
 
 // file:///./mbti_parser.mbty
-// 384|    CHAR { Char($1) }
+// 400|    CHAR { Char($1) }
 
 ///|
 fn yy_action_70(
@@ -2305,15 +2305,15 @@ fn yy_action_70(
 }
 
 // file:///./mbti_parser.mbty
-// 385|    INT {
-// 386|    match $1 {
-// 387|      [.. lit, .. "UL"] => UInt64(lit.to_string())
-// 388|      [.. lit, 'L'] => Int64(lit.to_string())
-// 389|      [.. lit, 'U'] => UInt(lit.to_string())
-// 390|      [.. lit, 'N'] => BigInt(lit.to_string())
-// 391|      lit => Int(lit)
-// 392|    }
-// 393|  }
+// 401|    INT {
+// 402|    match $1 {
+// 403|      [.. lit, .. "UL"] => UInt64(lit.to_string())
+// 404|      [.. lit, 'L'] => Int64(lit.to_string())
+// 405|      [.. lit, 'U'] => UInt(lit.to_string())
+// 406|      [.. lit, 'N'] => BigInt(lit.to_string())
+// 407|      lit => Int(lit)
+// 408|    }
+// 409|  }
 
 ///|
 fn yy_action_71(
@@ -2336,7 +2336,7 @@ fn yy_action_71(
 }
 
 // file:///./mbti_parser.mbty
-// 394|    FLOAT { Float($1) }
+// 410|    FLOAT { Float($1) }
 
 ///|
 fn yy_action_72(
@@ -2353,7 +2353,7 @@ fn yy_action_72(
 }
 
 // file:///./mbti_parser.mbty
-// 395|    DOUBLE { Double($1) }
+// 411|    DOUBLE { Double($1) }
 
 ///|
 fn yy_action_73(
@@ -2370,7 +2370,7 @@ fn yy_action_73(
 }
 
 // file:///./mbti_parser.mbty
-// 396|    STRING { String($1) }
+// 412|    STRING { String($1) }
 
 ///|
 fn yy_action_74(
@@ -2804,14 +2804,17 @@ fn yy_action_88(
 }
 
 // file:///./mbti_parser.mbty
-// 402|    "pub" pub_attr { Pub(attr=$2, loc=mk_loc($sloc)) }
+// 418|    "pub" pub_attr {
+// 419|      let (attr, attr_loc) = $2
+// 420|      Pub(attr~, attr_loc~, loc=mk_loc($sloc))
+// 421|    }
 
 ///|
 fn yy_action_33(
   _last_pos : @basic.Position,
   _args : ArrayView[(YYObj, @basic.Position, @basic.Position)],
 ) -> YYObj {
-  guard _args[1].0 is YYObj_String_(_dollar2)
+  guard _args[1].0 is YYObj__String___Location__(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -2821,29 +2824,32 @@ fn yy_action_33(
   YYObj_Visibility(
     {
       ()
-      Pub(attr=_dollar2, loc=mk_loc((_symbol_start_pos, _end_pos)))
+      let (attr, attr_loc) = _dollar2
+      Pub(attr~, attr_loc~, loc=mk_loc((_symbol_start_pos, _end_pos)))
     },
   )
 }
 
 // file:///./mbti_parser.mbty
-// 407|    "(" "readonly" ")" { Some("readonly") }
+// 426|    "(" "readonly" ")" { (Some("readonly"), Some(mk_loc($loc($2)))) }
 
 ///|
 fn yy_action_89(
   _last_pos : @basic.Position,
   _args : ArrayView[(YYObj, @basic.Position, @basic.Position)],
 ) -> YYObj {
-  YYObj_String_(
+  let _start_pos_of_item1 = _args[1].1
+  let _end_pos_of_item1 = _args[1].2
+  YYObj__String___Location__(
     {
       ()
-      Some("readonly")
+      (Some("readonly"), Some(mk_loc((_start_pos_of_item1, _end_pos_of_item1))))
     },
   )
 }
 
 // file:///./mbti_parser.mbty
-// 408|    "(" LIDENT ")" { Some($2) }
+// 427|    "(" LIDENT ")" { (Some($2), Some(mk_loc($loc($2)))) }
 
 ///|
 fn yy_action_90(
@@ -2851,26 +2857,28 @@ fn yy_action_90(
   _args : ArrayView[(YYObj, @basic.Position, @basic.Position)],
 ) -> YYObj {
   guard _args[1].0 is YYObj_String(_dollar2)
-  YYObj_String_(
+  let _start_pos_of_item1 = _args[1].1
+  let _end_pos_of_item1 = _args[1].2
+  YYObj__String___Location__(
     {
       ()
-      Some(_dollar2)
+      (Some(_dollar2), Some(mk_loc((_start_pos_of_item1, _end_pos_of_item1))))
     },
   )
 }
 
 // file:///./mbti_parser.mbty
-// 406|    { None }
+// 425|    { (None, None) }
 
 ///|
 fn yy_action_91(
   _last_pos : @basic.Position,
   _args : ArrayView[(YYObj, @basic.Position, @basic.Position)],
 ) -> YYObj {
-  YYObj_String_(
+  YYObj__String___Location__(
     {
       ()
-      None
+      (None, None)
     },
   )
 }
@@ -5106,7 +5114,7 @@ fn yy_action_95(
 }
 
 // file:///./mbti_parser.mbty
-// 444|    nonempty_list(attribute) { $1 }
+// 467|    nonempty_list(attribute) { $1 }
 
 ///|
 fn yy_action_49(
@@ -5184,7 +5192,7 @@ fn yy_action_190(
 }
 
 // file:///./mbti_parser.mbty
-// 374|    type_ { DiscardPositional(ty = Some($1), loc = mk_loc($loc($1))) }
+// 374|    type_ { mk_discard_parameter(Some($1), mk_loc($loc($1)), None) }
 
 ///|
 fn yy_action_191(
@@ -5197,16 +5205,25 @@ fn yy_action_191(
   YYObj_Parameter(
     {
       ()
-      DiscardPositional(
-        ty=Some(_dollar1),
-        loc=mk_loc((_start_pos_of_item0, _end_pos_of_item0)),
+      mk_discard_parameter(
+        Some(_dollar1),
+        mk_loc((_start_pos_of_item0, _end_pos_of_item0)),
+        None,
       )
     },
   )
 }
 
 // file:///./mbti_parser.mbty
-// 375|    post_label ":" type_ { Labelled(binder = { name : $1.name, loc : $1.loc }, ty = Some($3)) }
+// 375|    post_label ":" type_ {
+// 376|      mk_labelled_parameter(
+// 377|        $1,
+// 378|        Some($3),
+// 379|        mk_loc($sloc),
+// 380|        Some(last_char_loc($1.loc)),
+// 381|        Some(mk_loc($loc($2))),
+// 382|      )
+// 383|    }
 
 ///|
 fn yy_action_192(
@@ -5215,12 +5232,23 @@ fn yy_action_192(
 ) -> YYObj {
   guard _args[0].0 is YYObj_Label(_dollar1)
   guard _args[2].0 is YYObj_Type(_dollar3)
+  let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  let _start_pos_of_item1 = _args[1].1
+  let _end_pos_of_item1 = _args[1].2
   YYObj_Parameter(
     {
       ()
-      Labelled(
-        binder={ name: _dollar1.name, loc: _dollar1.loc },
-        ty=Some(_dollar3),
+      mk_labelled_parameter(
+        _dollar1,
+        Some(_dollar3),
+        mk_loc((_symbol_start_pos, _end_pos)),
+        Some(last_char_loc(_dollar1.loc)),
+        Some(mk_loc((_start_pos_of_item1, _end_pos_of_item1))),
       )
     },
   )
@@ -5616,7 +5644,7 @@ fn yy_action_207(
 // file:///./mbti_parser.mbty
 // 358|    simple_type "raise" "?" {
 // 359|    let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
-// 360|    ($1, MaybeError(ty=fake_error)) 
+// 360|    ($1, mk_maybe_error(fake_error, mk_loc($loc($3)))) 
 // 361|  }
 
 ///|
@@ -5625,6 +5653,8 @@ fn yy_action_208(
   _args : ArrayView[(YYObj, @basic.Position, @basic.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_Type(_dollar1)
+  let _start_pos_of_item2 = _args[2].1
+  let _end_pos_of_item2 = _args[2].2
   YYObj__Type__ErrorType_(
     {
       ()
@@ -5636,7 +5666,13 @@ fn yy_action_208(
         tys=@list.empty(),
         loc=@syntax.no_location,
       )
-      (_dollar1, MaybeError(ty=fake_error))
+      (
+        _dollar1,
+        mk_maybe_error(
+          fake_error,
+          mk_loc((_start_pos_of_item2, _end_pos_of_item2)),
+        ),
+      )
     },
   )
 }
@@ -5669,7 +5705,7 @@ fn yy_action_209(
 }
 
 // file:///./mbti_parser.mbty
-// 356|    simple_type "raise" { ($1, DefaultErrorType(loc=mk_loc($loc($2)))) }
+// 356|    simple_type "raise" { ($1, mk_default_error_type(mk_loc($loc($2)))) }
 
 ///|
 fn yy_action_210(
@@ -5684,7 +5720,7 @@ fn yy_action_210(
       ()
       (
         _dollar1,
-        DefaultErrorType(loc=mk_loc((_start_pos_of_item1, _end_pos_of_item1))),
+        mk_default_error_type(mk_loc((_start_pos_of_item1, _end_pos_of_item1))),
       )
     },
   )
@@ -5739,7 +5775,7 @@ fn yy_action_212(
 }
 
 // file:///./mbti_parser.mbty
-// 413|    { None }
+// 432|    { None }
 
 ///|
 fn yy_action_97(
@@ -5876,7 +5912,7 @@ fn yy_action_218(
 }
 
 // file:///./mbti_parser.mbty
-// 412|    "async" { Some(mk_loc($loc($1))) }
+// 431|    "async" { Some(mk_loc($loc($1))) }
 
 ///|
 fn yy_action_94(
@@ -5911,7 +5947,15 @@ fn yy_action_219(
 }
 
 // file:///./mbti_parser.mbty
-// 376|    label "?" ":" type_ { QuestionOptional(binder = { name : $1.name, loc : $1.loc }, ty = Some($4)) }
+// 384|    label "?" ":" type_ {
+// 385|      mk_question_optional_parameter(
+// 386|        $1,
+// 387|        Some($4),
+// 388|        mk_loc($sloc),
+// 389|        Some(mk_loc($loc($2))),
+// 390|        Some(mk_loc($loc($3))),
+// 391|      )
+// 392|    }
 
 ///|
 fn yy_action_220(
@@ -5920,19 +5964,32 @@ fn yy_action_220(
 ) -> YYObj {
   guard _args[0].0 is YYObj_Label(_dollar1)
   guard _args[3].0 is YYObj_Type(_dollar4)
+  let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  let _start_pos_of_item1 = _args[1].1
+  let _end_pos_of_item1 = _args[1].2
+  let _start_pos_of_item2 = _args[2].1
+  let _end_pos_of_item2 = _args[2].2
   YYObj_Parameter(
     {
       ()
-      QuestionOptional(
-        binder={ name: _dollar1.name, loc: _dollar1.loc },
-        ty=Some(_dollar4),
+      mk_question_optional_parameter(
+        _dollar1,
+        Some(_dollar4),
+        mk_loc((_symbol_start_pos, _end_pos)),
+        Some(mk_loc((_start_pos_of_item1, _end_pos_of_item1))),
+        Some(mk_loc((_start_pos_of_item2, _end_pos_of_item2))),
       )
     },
   )
 }
 
 // file:///./mbti_parser.mbty
-// 422|    UIDENT { ConstrId::{ id: Ident(name=$1), loc: mk_loc($sloc)} }
+// 443|    UIDENT { ConstrId::{ id: Ident(name=$1), loc: mk_loc($sloc)} }
 
 ///|
 fn yy_action_221(
@@ -5958,7 +6015,9 @@ fn yy_action_221(
 }
 
 // file:///./mbti_parser.mbty
-// 423|    PACKAGE_NAME DOT_UIDENT { ConstrId::{ id: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
+// 444|    PACKAGE_NAME DOT_UIDENT {
+// 445|      ConstrId::{ id: mk_dot_long_ident($1, $loc($1), $2, $loc($2)), loc: mk_loc($sloc)}
+// 446|    }
 
 ///|
 fn yy_action_222(
@@ -5966,7 +6025,11 @@ fn yy_action_222(
   _args : ArrayView[(YYObj, @basic.Position, @basic.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
+  let _start_pos_of_item0 = _args[0].1
+  let _end_pos_of_item0 = _args[0].2
   guard _args[1].0 is YYObj_String(_dollar2)
+  let _start_pos_of_item1 = _args[1].1
+  let _end_pos_of_item1 = _args[1].2
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -5977,7 +6040,12 @@ fn yy_action_222(
     {
       ()
       ConstrId::{
-        id: Dot(pkg=_dollar1, id=_dollar2),
+        id: mk_dot_long_ident(
+          _dollar1,
+          (_start_pos_of_item0, _end_pos_of_item0),
+          _dollar2,
+          (_start_pos_of_item1, _end_pos_of_item1),
+        ),
         loc: mk_loc((_symbol_start_pos, _end_pos)),
       }
     },
@@ -5985,7 +6053,7 @@ fn yy_action_222(
 }
 
 // file:///./mbti_parser.mbty
-// 435|    LIDENT { Label::{name: $1, loc: mk_loc($sloc)} }
+// 458|    LIDENT { Label::{name: $1, loc: mk_loc($sloc)} }
 
 ///|
 fn yy_action_223(
@@ -6008,7 +6076,7 @@ fn yy_action_223(
 }
 
 // file:///./mbti_parser.mbty
-// 439|    POST_LABEL { Label::{name: $1, loc: mk_loc($sloc)} }
+// 462|    POST_LABEL { Label::{name: $1, loc: mk_loc($sloc)} }
 
 ///|
 fn yy_action_224(
@@ -6117,7 +6185,7 @@ fn yy_action_229(
 }
 
 // file:///./mbti_parser.mbty
-// 417|    UIDENT { QualifiedName::{ name: Ident(name=$1), loc: mk_loc($sloc)} }
+// 436|    UIDENT { QualifiedName::{ name: Ident(name=$1), loc: mk_loc($sloc)} }
 
 ///|
 fn yy_action_230(
@@ -6143,7 +6211,9 @@ fn yy_action_230(
 }
 
 // file:///./mbti_parser.mbty
-// 418|    PACKAGE_NAME DOT_UIDENT { QualifiedName::{ name: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
+// 437|    PACKAGE_NAME DOT_UIDENT {
+// 438|      QualifiedName::{ name: mk_dot_long_ident($1, $loc($1), $2, $loc($2)), loc: mk_loc($sloc)}
+// 439|    }
 
 ///|
 fn yy_action_231(
@@ -6151,7 +6221,11 @@ fn yy_action_231(
   _args : ArrayView[(YYObj, @basic.Position, @basic.Position)],
 ) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
+  let _start_pos_of_item0 = _args[0].1
+  let _end_pos_of_item0 = _args[0].2
   guard _args[1].0 is YYObj_String(_dollar2)
+  let _start_pos_of_item1 = _args[1].1
+  let _end_pos_of_item1 = _args[1].2
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 {
     _last_pos
@@ -6162,7 +6236,12 @@ fn yy_action_231(
     {
       ()
       QualifiedName::{
-        name: Dot(pkg=_dollar1, id=_dollar2),
+        name: mk_dot_long_ident(
+          _dollar1,
+          (_start_pos_of_item0, _end_pos_of_item0),
+          _dollar2,
+          (_start_pos_of_item1, _end_pos_of_item1),
+        ),
         loc: mk_loc((_symbol_start_pos, _end_pos)),
       }
     },
@@ -6307,7 +6386,7 @@ fn yy_action_238(
 }
 
 // file:///./mbti_parser.mbty
-// 431|    LIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
+// 454|    LIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
 
 ///|
 fn yy_action_239(
@@ -6409,7 +6488,7 @@ fn yy_action_242(
 }
 
 // file:///./mbti_parser.mbty
-// 400|    { Default }
+// 416|    { Default }
 
 ///|
 fn yy_action_15(
@@ -6425,7 +6504,7 @@ fn yy_action_15(
 }
 
 // file:///./mbti_parser.mbty
-// 443|     {  @list.empty() }
+// 466|     {  @list.empty() }
 
 ///|
 fn yy_action_14(
@@ -6457,7 +6536,7 @@ fn yy_action_243(
 }
 
 // file:///./mbti_parser.mbty
-// 427|    UIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
+// 450|    UIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
 
 ///|
 fn yy_action_244(
@@ -6517,7 +6596,7 @@ fn yy_action_247(
 }
 
 // file:///./mbti_parser.mbty
-// 448|    ATTRIBUTE { Attribute::new(loc=mk_loc($sloc), $1) }
+// 471|    ATTRIBUTE { Attribute::new(loc=mk_loc($sloc), $1) }
 
 ///|
 fn yy_action_246(

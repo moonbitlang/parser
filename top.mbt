@@ -8,6 +8,21 @@ using @list {type List}
 using @basic {type Position, type Report, type Location}
 
 ///|
+fn shift_pos(pos : Position, offset : Int) -> Position {
+  Position::{
+    lnum: pos.lnum,
+    cnum: pos.cnum + offset,
+    bol: pos.bol,
+    fname: pos.fname,
+  }
+}
+
+///|
+fn loc_contains(outer : Location, inner : Location) -> Bool {
+  outer.start <= inner.start && inner.end <= outer.end
+}
+
+///|
 pub(all) enum Parser {
   MoonYacc
   Handrolled
@@ -33,19 +48,34 @@ fn attach_docstrings(
   fn make_doc(
     comments : List[(@basic.Location, @tokens.Comment)],
   ) -> @syntax.DocString {
+    let lines = comments.map(item => {
+      let (loc, comment) = item
+      let (prefix_len, text) = match comment.content {
+        [.. "///|", .. remain] =>
+          if remain.is_blank() {
+            (4, "")
+          } else {
+            (4, remain.to_string())
+          }
+        [.. "///", .. remain] => (3, remain.to_string())
+        _ => panic()
+      }
+      let text_start = shift_pos(loc.start, prefix_len)
+      let text_loc = if text.is_empty() {
+        Location::{ start: text_start, end: text_start }
+      } else {
+        Location::{ start: text_start, end: loc.end }
+      }
+      @syntax.DocStringLine::{
+        text,
+        text_loc,
+        prefix_loc: Location::{ start: loc.start, end: text_start },
+        loc,
+      }
+    })
     {
-      content: comments.map(p => {
-        match p.1.content {
-          [.. "///|", .. remain] =>
-            if remain.is_blank() {
-              ""
-            } else {
-              remain.to_string()
-            }
-          [.. "///", .. remain] => remain.to_string()
-          _ => panic()
-        }
-      }),
+      content: lines.map(line => line.text),
+      lines,
       loc: {
         start: comments.head().unwrap().0.start,
         end: comments.last().unwrap().0.end,
@@ -109,11 +139,32 @@ fn attach_docstrings(
 }
 
 ///|
+fn collect_top_level_trivia(
+  tokens : Array[(@tokens.Token, Position, Position)],
+  toplevels : @syntax.Impls,
+) -> @list.List[@syntax.TopLevelTrivia] {
+  let trivia = []
+  for triple in tokens {
+    let (token, start, end) = triple
+    match token {
+      COMMENT(comment) if !(comment.content is [_, _, '/', ..]) => {
+        let loc = Location::{ start, end }
+        if !toplevels.any(fn(toplevel) { loc_contains(toplevel.loc(), loc) }) {
+          trivia.push(@syntax.TopLevelTrivia::{ comment, loc })
+        }
+      }
+      _ => ()
+    }
+  }
+  @list.from_array(trivia)
+}
+
+///|
 pub fn parse_string(
   source : String,
   name? : String = "",
   parser? : Parser = Handrolled,
-) -> (@syntax.Impls, Array[Report]) {
+) -> (@syntax.ParsedImpls, Array[Report]) {
   let { tokens, docstrings, .. } = @lexer.tokens_from_string(
     source,
     comment=true,
@@ -124,10 +175,16 @@ pub fn parse_string(
       !(triple.0 is @tokens.Token::NEWLINE ||
       triple.0 is @tokens.Token::COMMENT(_))
     })
-    (@yacc_parser.structure(tokens), []) catch {
+    (
+      @syntax.ParsedImpls::{
+        impls: @yacc_parser.structure(tokens),
+        trivia: @list.empty(),
+      },
+      [],
+    ) catch {
       UnexpectedEndOfInput(pos, _) =>
         (
-          @list.empty(),
+          @syntax.ParsedImpls::{ impls: @list.empty(), trivia: @list.empty() },
           [
             Report::{
               loc: { start: pos, end: pos },
@@ -137,25 +194,30 @@ pub fn parse_string(
         )
       UnexpectedToken(token, (start, end), _) =>
         (
-          @list.empty(),
+          @syntax.ParsedImpls::{ impls: @list.empty(), trivia: @list.empty() },
           [Report::{ loc: { start, end }, msg: "Unexpected `\{token}`." }],
         )
     }
   }
 
-  let (impls, diagnostics) = match parser {
+  let (parsed, diagnostics) = match parser {
     MoonYacc => parse_by_moonyacc(tokens)
     Handrolled => @handrolled_parser.parse(tokens)
   }
-  attach_docstrings(docstrings, impls)
-  (impls, diagnostics)
+  attach_docstrings(docstrings, parsed.impls)
+  let parsed = match parser {
+    MoonYacc =>
+      { ..parsed, trivia: collect_top_level_trivia(tokens, parsed.impls) }
+    Handrolled => parsed
+  }
+  (parsed, diagnostics)
 }
 
 ///|
 pub fn parse_file(
   path : String,
   parser? : Parser = Handrolled,
-) -> (@syntax.Impls, Array[Report]) raise @fs.IOError {
+) -> (@syntax.ParsedImpls, Array[Report]) raise @fs.IOError {
   let source = @fs.read_file_to_string(path)
   parse_string(source, name=path, parser~)
 }

@@ -4,7 +4,12 @@ using @basic {type Location, type Position, type Report}
 
 ///|
 /// Import AST types 
-using @syntax {type Impls, type DocString}
+using @syntax {
+  type DocString,
+  type Impls,
+  type ParsedImpls,
+  type TopLevelTrivia,
+}
 
 ///|
 using @tokens {type Token, type TokenKind}

@@ -11,10 +11,32 @@ let null : Json = Json::null()
 let dummy_docstring : @syntax.DocString = {
   content: @list.from_array(["Test documentation"]),
   loc: dummy_loc,
+  lines: @list.from_array([]),
 }
 
 ///|
 let dummy_string_literal : @tokens.StringLiteral = "test_string"
+
+///|
+fn mk_argument(
+  value : @syntax.Expr,
+  kind : @syntax.ArgumentKind,
+) -> @syntax.Argument {
+  { value, kind, loc: dummy_loc }
+}
+
+///|
+fn mk_case(
+  pattern : @syntax.Pattern,
+  guard_ : @syntax.Expr?,
+  body : @syntax.Expr,
+) -> @syntax.Case {
+  let guard_loc = match guard_ {
+    Some(_) => Some(dummy_loc)
+    None => None
+  }
+  { pattern, guard_, body, loc: dummy_loc, arrow_loc: dummy_loc, guard_loc }
+}
 
 ///|
 test "impl variants to_json" {
@@ -368,10 +390,7 @@ test "expr basic types to_json" {
     loc: dummy_loc,
   }
   let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
-  let argument = @syntax.Argument::{
-    value: unit_expr,
-    kind: @syntax.Positional,
-  }
+  let argument = mk_argument(unit_expr, @syntax.Positional)
   json_inspect(@syntax.Expr::Unit(loc=dummy_loc, faked=false).json_repr(), content={
     "kind": "Expr::Unit",
     "loc": null,
@@ -628,17 +647,20 @@ test "expr basic types to_json" {
     "loc": null,
     "children": { "return_value": null },
   })
-  json_inspect(@syntax.Raise(err_value=unit_expr, loc=dummy_loc).json_repr(), content={
-    "kind": "Expr::Raise",
-    "loc": null,
-    "children": {
-      "err_value": {
-        "kind": "Expr::Unit",
-        "loc": null,
-        "children": { "faked": false },
+  json_inspect(
+    @syntax.Expr::Raise(err_value=unit_expr, loc=dummy_loc).json_repr(),
+    content={
+      "kind": "Expr::Raise",
+      "loc": null,
+      "children": {
+        "err_value": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
       },
     },
-  })
+  )
   json_inspect(
     @syntax.Break(arg=Some(unit_expr), label=Some(label), loc=dummy_loc).json_repr(),
     content={
@@ -699,11 +721,7 @@ test "expr complex types to_json" {
   let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
   let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
   let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
-  let case = @syntax.Case::{
-    pattern: any_pattern,
-    guard_: None,
-    body: unit_expr,
-  }
+  let case = mk_case(any_pattern, None, unit_expr)
   let type_name = @syntax.TypeName::{
     name: @syntax.LongIdent::Ident(name="TestType"),
     is_object: false,

@@ -2,14 +2,13 @@
 package "moonbitlang/parser/handrolled_parser"
 
 import {
-  "moonbitlang/core/list",
   "moonbitlang/parser/basic",
   "moonbitlang/parser/syntax",
   "moonbitlang/parser/tokens",
 }
 
 // Values
-pub fn parse(Array[(@tokens.Token, @basic.Position, @basic.Position)]) -> (@list.List[@syntax.Impl], Array[@basic.Report])
+pub fn parse(Array[(@tokens.Token, @basic.Position, @basic.Position)]) -> (@syntax.ParsedImpls, Array[@basic.Report])
 
 pub fn parse_expr(Array[(@tokens.Token, @basic.Position, @basic.Position)]) -> (@syntax.Expr, Array[@basic.Report])
 

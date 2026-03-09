@@ -1,12 +1,16 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/parser/basic"
 
+import {
+  "moonbitlang/core/ref",
+}
+
 // Values
 pub let builtin_package : String
 
-pub let current_package : Ref[String]
+pub let current_package : @ref.Ref[String]
 
-pub let show_loc : Ref[LocStyle]
+pub let show_loc : @ref.Ref[LocStyle]
 
 // Errors
 
