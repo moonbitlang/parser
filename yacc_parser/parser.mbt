@@ -931,7 +931,7 @@ priv enum YYSymbol {
   NT_lex_simple_atom_pattern
   NT_loop_expr
   NT_for_binders
-  NT_optional_else
+  NT_optional_nobreak
   NT_optional_where_clause
   NT_for_expr
   NT_foreach_expr
@@ -18862,7 +18862,7 @@ fn yy_action_523(
 }
 
 // file:///./parser.mbty
-// 1215|    loop_label_colon "while" infix_expr block_expr optional_else { 
+// 1215|    loop_label_colon "while" infix_expr block_expr optional_nobreak { 
 // 1216|    While(
 // 1217|      loop_cond = $3,
 // 1218|      loop_body = $4,
@@ -18978,7 +18978,7 @@ fn yy_action_527(
 }
 
 // file:///./parser.mbty
-// 1443|    loop_label_colon "for" for_binders SEMI option(infix_expr) SEMI list_commas_no_trailing(separated_pair(binder, "=", expr)) block_expr optional_else optional_where_clause {
+// 1443|    loop_label_colon "for" for_binders SEMI option(infix_expr) SEMI list_commas_no_trailing(separated_pair(binder, "=", expr)) block_expr optional_nobreak optional_where_clause {
 // 1444|    For(
 // 1445|      binders = $3,
 // 1446|      condition = $5,
@@ -19172,7 +19172,7 @@ fn yy_action_536(
 }
 
 // file:///./parser.mbty
-// 1455|    loop_label_colon "for" for_binders block_expr optional_else optional_where_clause {
+// 1455|    loop_label_colon "for" for_binders block_expr optional_nobreak optional_where_clause {
 // 1456|    For(
 // 1457|      binders = $3,
 // 1458|      condition = None,
@@ -19235,7 +19235,7 @@ fn yy_action_538(
 }
 
 // file:///./parser.mbty
-// 1432|    "else" block_expr { Some($2) }
+// 1432|    "nobreak" block_expr { Some($2) }
 
 ///|
 fn yy_action_539(
@@ -19252,7 +19252,7 @@ fn yy_action_539(
 }
 
 // file:///./parser.mbty
-// 1470|    loop_label_colon "for" non_empty_list_commas(foreach_binder) "in" expr block_expr optional_else { 
+// 1470|    loop_label_colon "for" non_empty_list_commas(foreach_binder) "in" expr block_expr optional_nobreak { 
 // 1471|    ForEach(
 // 1472|      binders = $3,
 // 1473|      expr = $5,
@@ -37446,8 +37446,8 @@ fn yy_state_559(_lookahead : YYSymbol) -> YYDecision {
 ///|
 fn yy_state_560(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
-    NT_optional_else => Shift(yy_state_561)
-    T_ELSE => Shift(yy_state_562)
+    NT_optional_nobreak => Shift(yy_state_561)
+    T_NOBREAK => Shift(yy_state_562)
     T_EOF
     | T_RPAREN
     | T_COMMA
@@ -37456,7 +37456,7 @@ fn yy_state_560(_lookahead : YYSymbol) -> YYDecision {
     | T_RBRACKET
     | T_LBRACE
     | T_RBRACE
-    | T_AND => Reduce(0, NT_optional_else, yy_action_541)
+    | T_AND => Reduce(0, NT_optional_nobreak, yy_action_541)
     _ => Error
   }
 }
@@ -37477,7 +37477,7 @@ fn yy_state_562(_lookahead : YYSymbol) -> YYDecision {
 
 ///|
 fn yy_state_563(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_optional_else, yy_action_539)
+  ReduceNoLookahead(2, NT_optional_nobreak, yy_action_539)
 }
 
 ///|
@@ -37493,8 +37493,8 @@ fn yy_state_564(_lookahead : YYSymbol) -> YYDecision {
 ///|
 fn yy_state_565(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
-    T_ELSE => Shift(yy_state_562)
-    NT_optional_else => Shift(yy_state_566)
+    T_NOBREAK => Shift(yy_state_562)
+    NT_optional_nobreak => Shift(yy_state_566)
     T_EOF
     | T_RPAREN
     | T_COMMA
@@ -37504,7 +37504,7 @@ fn yy_state_565(_lookahead : YYSymbol) -> YYDecision {
     | T_LBRACE
     | T_RBRACE
     | T_AND
-    | T_WHERE => Reduce(0, NT_optional_else, yy_action_541)
+    | T_WHERE => Reduce(0, NT_optional_nobreak, yy_action_541)
     _ => Error
   }
 }
@@ -37884,8 +37884,8 @@ fn yy_state_587(_lookahead : YYSymbol) -> YYDecision {
 ///|
 fn yy_state_588(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
-    T_ELSE => Shift(yy_state_562)
-    NT_optional_else => Shift(yy_state_589)
+    T_NOBREAK => Shift(yy_state_562)
+    NT_optional_nobreak => Shift(yy_state_589)
     T_EOF
     | T_RPAREN
     | T_COMMA
@@ -37895,7 +37895,7 @@ fn yy_state_588(_lookahead : YYSymbol) -> YYDecision {
     | T_LBRACE
     | T_RBRACE
     | T_AND
-    | T_WHERE => Reduce(0, NT_optional_else, yy_action_541)
+    | T_WHERE => Reduce(0, NT_optional_nobreak, yy_action_541)
     _ => Error
   }
 }
@@ -38114,8 +38114,8 @@ fn yy_state_598(_lookahead : YYSymbol) -> YYDecision {
 ///|
 fn yy_state_599(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
-    T_ELSE => Shift(yy_state_562)
-    NT_optional_else => Shift(yy_state_600)
+    T_NOBREAK => Shift(yy_state_562)
+    NT_optional_nobreak => Shift(yy_state_600)
     T_EOF
     | T_RPAREN
     | T_COMMA
@@ -38124,7 +38124,7 @@ fn yy_state_599(_lookahead : YYSymbol) -> YYDecision {
     | T_RBRACKET
     | T_LBRACE
     | T_RBRACE
-    | T_AND => Reduce(0, NT_optional_else, yy_action_541)
+    | T_AND => Reduce(0, NT_optional_nobreak, yy_action_541)
     _ => Error
   }
 }
