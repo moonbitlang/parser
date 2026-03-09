@@ -12,3 +12,8 @@ test "typealias_use_equal" (t : @test.Test) {
 test "using" (t : @test.Test) {
   t.run()
 }
+
+///|
+test "nobreak" (t : @test.Test) {
+  t.run()
+}
