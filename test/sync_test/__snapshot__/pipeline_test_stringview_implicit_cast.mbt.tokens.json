@@ -186,16 +186,16 @@
     "loc": "7:3-7:4"
   },
   {
-    "token": "ELSE",
-    "loc": "7:5-7:9"
+    "token": "NOBREAK",
+    "loc": "7:5-7:12"
   },
   {
     "token": "LBRACE",
-    "loc": "7:10-7:11"
+    "loc": "7:13-7:14"
   },
   {
     "token": "NEWLINE",
-    "loc": "7:11-7:12"
+    "loc": "7:14-7:15"
   },
   {
     "token": "FALSE",
