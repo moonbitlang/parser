@@ -58,7 +58,7 @@ fn bytes_literal_json_repr(b : BytesLiteral) -> Json {
 }
 
 ///|
-pub fn LongIdent::json_repr(self : LongIdent, loc : Location) -> Json {
+fn LongIdent::json_repr(self : LongIdent, loc : Location) -> Json {
   match self {
     Ident(name~) => tagged_node1("LongIdent::Ident", loc, Json::string(name))
     Dot(pkg~, id~) =>
@@ -70,12 +70,12 @@ pub fn LongIdent::json_repr(self : LongIdent, loc : Location) -> Json {
 }
 
 ///|
-pub fn ConstrId::json_repr(self : ConstrId) -> Json {
+fn ConstrId::json_repr(self : ConstrId) -> Json {
   tagged_node("ConstrId", self.loc, { "id": self.id.json_repr(self.loc) })
 }
 
 ///|
-pub fn FuncStubs::json_repr(self : FuncStubs, loc : Location) -> Json {
+fn FuncStubs::json_repr(self : FuncStubs, loc : Location) -> Json {
   match self {
     Import(module_name~, func_name~, language~) =>
       tagged_node("FuncStubs::Import", loc, {
@@ -92,7 +92,7 @@ pub fn FuncStubs::json_repr(self : FuncStubs, loc : Location) -> Json {
 }
 
 ///|
-pub fn EmbeddedCode::json_repr(self : EmbeddedCode, loc : Location) -> Json {
+fn EmbeddedCode::json_repr(self : EmbeddedCode, loc : Location) -> Json {
   match self {
     CodeString(s) =>
       tagged_node1("EmbeddedCode::CodeString", loc, string_literal_json_repr(s))
@@ -111,7 +111,7 @@ pub fn EmbeddedCode::json_repr(self : EmbeddedCode, loc : Location) -> Json {
 }
 
 ///|
-pub fn TraitMethodDecl::json_repr(self : TraitMethodDecl) -> Json {
+fn TraitMethodDecl::json_repr(self : TraitMethodDecl) -> Json {
   tagged_node("TraitMethodDecl", self.loc, {
     "name": self.name.json_repr(),
     "has_error": option_json_repr(self.has_error, raise_json_repr),
@@ -143,21 +143,21 @@ pub fn TraitMethodDecl::json_repr(self : TraitMethodDecl) -> Json {
 }
 
 ///|
-pub fn TypeVarConstraint::json_repr(self : TypeVarConstraint) -> Json {
+fn TypeVarConstraint::json_repr(self : TypeVarConstraint) -> Json {
   tagged_node("TypeVarConstraint", self.loc, {
     "trait": self.trait_.json_repr(self.loc),
   })
 }
 
 ///|
-pub fn TypeDeclBinder::json_repr(self : TypeDeclBinder) -> Json {
+fn TypeDeclBinder::json_repr(self : TypeDeclBinder) -> Json {
   tagged_node("TypeDeclBinder", self.loc, {
     "name": option_json_repr(self.name, Json::string),
   })
 }
 
 ///|
-pub fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
+fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
   match self {
     Abstract => tagged_node0("TypeDesc::Abstract", loc)
     Extern => tagged_node0("TypeDesc::Extern", loc)
@@ -230,7 +230,7 @@ pub fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
 }
 
 ///|
-pub fn DerivingDirective::json_repr(self : DerivingDirective) -> Json {
+fn DerivingDirective::json_repr(self : DerivingDirective) -> Json {
   tagged_node("DerivingDirective", self.loc, {
     "type_name": self.type_name.json_repr(),
     "args": list_json_repr(
@@ -243,7 +243,7 @@ pub fn DerivingDirective::json_repr(self : DerivingDirective) -> Json {
 }
 
 ///|
-pub fn ExceptionDecl::json_repr(self : ExceptionDecl, loc : Location) -> Json {
+fn ExceptionDecl::json_repr(self : ExceptionDecl, loc : Location) -> Json {
   match self {
     NoPayload => tagged_node0("ExceptionDecl::NoPayload", loc)
     SinglePayload(ty) =>
@@ -263,7 +263,7 @@ pub fn ExceptionDecl::json_repr(self : ExceptionDecl, loc : Location) -> Json {
 }
 
 ///|
-pub fn ConstrDecl::json_repr(self : ConstrDecl) -> Json {
+fn ConstrDecl::json_repr(self : ConstrDecl) -> Json {
   tagged_node("ConstrDecl", self.loc, {
     "name": self.name.json_repr(),
     "args": option_json_repr(self.args, fn(args) {
@@ -289,12 +289,12 @@ pub fn ConstrDecl::json_repr(self : ConstrDecl) -> Json {
 }
 
 ///|
-pub fn ConstrName::json_repr(self : ConstrName) -> Json {
+fn ConstrName::json_repr(self : ConstrName) -> Json {
   tagged_node("ConstrName", self.loc, { "name": Json::string(self.name) })
 }
 
 ///|
-pub fn ConstrParam::json_repr(self : ConstrParam) -> Json {
+fn ConstrParam::json_repr(self : ConstrParam) -> Json {
   let loc = match self.label {
     Some(label) => label.loc.merge(self.ty.loc())
     None => self.ty.loc()
@@ -307,7 +307,7 @@ pub fn ConstrParam::json_repr(self : ConstrParam) -> Json {
 }
 
 ///|
-pub fn FieldDecl::json_repr(self : FieldDecl) -> Json {
+fn FieldDecl::json_repr(self : FieldDecl) -> Json {
   tagged_node("FieldDecl", self.loc, {
     "name": self.name.json_repr(),
     "ty": self.ty.json_repr(),
@@ -324,12 +324,12 @@ pub fn FieldDecl::json_repr(self : FieldDecl) -> Json {
 }
 
 ///|
-pub fn FieldName::json_repr(self : FieldName) -> Json {
+fn FieldName::json_repr(self : FieldName) -> Json {
   tagged_node("FieldName", self.loc, { "label": Json::string(self.label) })
 }
 
 ///|
-pub fn WhereClause::json_repr(self : WhereClause) -> Json {
+fn WhereClause::json_repr(self : WhereClause) -> Json {
   let { fields, loc } = self
   tagged_node("WhereClause", loc, {
     "fields": list_json_repr(
@@ -798,7 +798,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
 }
 
 ///|
-pub fn LocalTypeDecl::json_repr(self : LocalTypeDecl) -> Json {
+fn LocalTypeDecl::json_repr(self : LocalTypeDecl) -> Json {
   tagged_node("LocalTypeDecl", self.tycon_loc, {
     "tycon": Json::string(self.tycon),
     "components": self.components.json_repr(self.tycon_loc),
@@ -812,7 +812,7 @@ pub fn LocalTypeDecl::json_repr(self : LocalTypeDecl) -> Json {
 }
 
 ///|
-pub fn Parameter::json_repr(self : Parameter) -> Json {
+fn Parameter::json_repr(self : Parameter) -> Json {
   match self {
     DiscardPositional(ty~, loc~) =>
       tagged_node("Parameter::DiscardPositional", loc, {
@@ -873,7 +873,7 @@ fn Attribute::json_repr(self : Attribute) -> Json {
 }
 
 ///|
-pub fn TypeDecl::json_repr(self : TypeDecl) -> Json {
+fn TypeDecl::json_repr(self : TypeDecl) -> Json {
   tagged_node("TypeDecl", self.loc, {
     "tycon": Json::string(self.tycon),
     "params": list_json_repr(
@@ -902,7 +902,7 @@ pub fn TypeDecl::json_repr(self : TypeDecl) -> Json {
 }
 
 ///|
-pub fn FunDecl::json_repr(self : FunDecl) -> Json {
+fn FunDecl::json_repr(self : FunDecl) -> Json {
   tagged_node("FunDecl", self.loc, {
     "type_name": option_json_repr(self.type_name, TypeName::json_repr),
     "name": self.name.json_repr(),
@@ -936,7 +936,7 @@ pub fn FunDecl::json_repr(self : FunDecl) -> Json {
 }
 
 ///|
-pub fn DeclBody::json_repr(self : DeclBody, loc : Location) -> Json {
+fn DeclBody::json_repr(self : DeclBody, loc : Location) -> Json {
   match self {
     DeclBody(local_types~, expr~) =>
       tagged_node("DeclBody::DeclBody", loc, {
@@ -955,12 +955,12 @@ pub fn DeclBody::json_repr(self : DeclBody, loc : Location) -> Json {
 }
 
 ///|
-pub fn Label::json_repr(self : Label) -> Json {
+fn Label::json_repr(self : Label) -> Json {
   tagged_node("Label", self.loc, { "name": Json::string(self.name) })
 }
 
 ///|
-pub fn AliasTarget::json_repr(self : AliasTarget) -> Json {
+fn AliasTarget::json_repr(self : AliasTarget) -> Json {
   tagged_node("AliasTarget", self.loc(), {
     "binder": self.binder.json_repr(),
     "target": option_json_repr(self.target, Label::json_repr),
@@ -968,12 +968,12 @@ pub fn AliasTarget::json_repr(self : AliasTarget) -> Json {
 }
 
 ///|
-pub fn Binder::json_repr(self : Binder) -> Json {
+fn Binder::json_repr(self : Binder) -> Json {
   tagged_node("Binder", self.loc, { "name": Json::string(self.name) })
 }
 
 ///|
-pub fn Type::json_repr(self : Type) -> Json {
+fn Type::json_repr(self : Type) -> Json {
   match self {
     Any(loc~) => tagged_node0("Type::Any", loc)
     Arrow(args~, res~, err~, is_async~, loc~) =>
@@ -1012,7 +1012,7 @@ pub fn Type::json_repr(self : Type) -> Json {
 }
 
 ///|
-pub fn Visibility::json_repr(self : Visibility, loc : Location) -> Json {
+fn Visibility::json_repr(self : Visibility, loc : Location) -> Json {
   match self {
     Default => tagged_node0("Visibility::Default", loc)
     Priv(loc~) => tagged_node0("Visibility::Priv", loc)
@@ -1024,7 +1024,7 @@ pub fn Visibility::json_repr(self : Visibility, loc : Location) -> Json {
 }
 
 ///|
-pub fn TraitDecl::json_repr(self : TraitDecl) -> Json {
+fn TraitDecl::json_repr(self : TraitDecl) -> Json {
   tagged_node("TraitDecl", self.loc, {
     "name": self.name.json_repr(),
     "supers": list_json_repr(
@@ -1052,7 +1052,7 @@ pub fn TraitDecl::json_repr(self : TraitDecl) -> Json {
 }
 
 ///|
-pub fn TypeName::json_repr(self : TypeName) -> Json {
+fn TypeName::json_repr(self : TypeName) -> Json {
   tagged_node("TypeName", self.loc, {
     "name": self.name.json_repr(self.loc),
     "is_object": Json::boolean(self.is_object),
@@ -1060,7 +1060,7 @@ pub fn TypeName::json_repr(self : TypeName) -> Json {
 }
 
 ///|
-pub fn TypeVarBinder::json_repr(self : TypeVarBinder) -> Json {
+fn TypeVarBinder::json_repr(self : TypeVarBinder) -> Json {
   let constraints_loc = match self.constraints {
     @list.Empty => self.name_loc
     @list.More(constraint_, tail=@list.Empty) => constraint_.loc
@@ -1079,7 +1079,7 @@ pub fn TypeVarBinder::json_repr(self : TypeVarBinder) -> Json {
 }
 
 ///|
-pub fn ErrorType::json_repr(self : ErrorType, loc : Location) -> Json {
+fn ErrorType::json_repr(self : ErrorType, loc : Location) -> Json {
   match self {
     ErrorType(ty~) =>
       tagged_node("ErrorType::ErrorType", ty.loc(), { "ty": ty.json_repr() })
@@ -1107,7 +1107,7 @@ fn using_name_json_repr(item : (AliasTarget, UsingKind)) -> Json {
 }
 
 ///|
-pub fn Argument::json_repr(self : Argument) -> Json {
+fn Argument::json_repr(self : Argument) -> Json {
   tagged_node("Argument", self.value.loc(), {
     "value": self.value.json_repr(),
     "kind": self.kind.json_repr(self.value.loc()),
@@ -1115,7 +1115,7 @@ pub fn Argument::json_repr(self : Argument) -> Json {
 }
 
 ///|
-pub fn ArgumentKind::json_repr(self : ArgumentKind, loc : Location) -> Json {
+fn ArgumentKind::json_repr(self : ArgumentKind, loc : Location) -> Json {
   match self {
     Positional => tagged_node0("ArgumentKind::Positional", loc)
     Labelled(label) =>
@@ -1138,7 +1138,7 @@ pub fn ArgumentKind::json_repr(self : ArgumentKind, loc : Location) -> Json {
 }
 
 ///|
-pub fn ApplyAttr::json_repr(self : ApplyAttr, loc : Location) -> Json {
+fn ApplyAttr::json_repr(self : ApplyAttr, loc : Location) -> Json {
   match self {
     NoAttr => tagged_node0("ApplyAttr::NoAttr", loc)
     Exclamation => tagged_node0("ApplyAttr::Exclamation", loc)
@@ -1147,12 +1147,12 @@ pub fn ApplyAttr::json_repr(self : ApplyAttr, loc : Location) -> Json {
 }
 
 ///|
-pub fn Var::json_repr(self : Var) -> Json {
+fn Var::json_repr(self : Var) -> Json {
   tagged_node("Var", self.loc, { "name": self.name.json_repr(self.loc) })
 }
 
 ///|
-pub fn Constant::json_repr(self : Constant, loc : Location) -> Json {
+fn Constant::json_repr(self : Constant, loc : Location) -> Json {
   match self {
     Bool(b) => tagged_node1("Constant::Bool", loc, Json::boolean(b))
     Byte(b) => tagged_node1("Constant::Byte", loc, byte_literal_json_repr(b))
@@ -1171,7 +1171,7 @@ pub fn Constant::json_repr(self : Constant, loc : Location) -> Json {
 }
 
 ///|
-pub fn SpreadableElem::json_repr(self : SpreadableElem) -> Json {
+fn SpreadableElem::json_repr(self : SpreadableElem) -> Json {
   match self {
     Regular(expr) =>
       tagged_node1("SpreadableElem::Regular", expr.loc(), expr.json_repr())
@@ -1181,7 +1181,7 @@ pub fn SpreadableElem::json_repr(self : SpreadableElem) -> Json {
 }
 
 ///|
-pub fn MultilineStringElem::json_repr(
+fn MultilineStringElem::json_repr(
   self : MultilineStringElem,
   loc : Location,
 ) -> Json {
@@ -1202,7 +1202,7 @@ pub fn MultilineStringElem::json_repr(
 }
 
 ///|
-pub fn InterpElem::json_repr(self : InterpElem) -> Json {
+fn InterpElem::json_repr(self : InterpElem) -> Json {
   match self {
     Literal(repr~, loc~) =>
       tagged_node("InterpElem::Literal", loc, {
@@ -1216,7 +1216,7 @@ pub fn InterpElem::json_repr(self : InterpElem) -> Json {
 }
 
 ///|
-pub fn Constructor::json_repr(self : Constructor) -> Json {
+fn Constructor::json_repr(self : Constructor) -> Json {
   tagged_node("Constructor", self.loc, {
     "name": self.name.json_repr(),
     "extra_info": self.extra_info.json_repr(self.loc),
@@ -1224,7 +1224,7 @@ pub fn Constructor::json_repr(self : Constructor) -> Json {
 }
 
 ///|
-pub fn ConstructorExtraInfo::json_repr(
+fn ConstructorExtraInfo::json_repr(
   self : ConstructorExtraInfo,
   loc : Location,
 ) -> Json {
@@ -1242,7 +1242,7 @@ pub fn ConstructorExtraInfo::json_repr(
 }
 
 ///|
-pub fn Func::json_repr(self : Func) -> Json {
+fn Func::json_repr(self : Func) -> Json {
   tagged_node("Func::Lambda", self.loc, {
     "parameters": list_json_repr(
       "Func::Lambda::ParameterList",
@@ -1260,7 +1260,7 @@ pub fn Func::json_repr(self : Func) -> Json {
 }
 
 ///|
-pub fn FnKind::json_repr(self : FnKind, loc : Location) -> Json {
+fn FnKind::json_repr(self : FnKind, loc : Location) -> Json {
   match self {
     Lambda => tagged_node0("FnKind::Lambda", loc)
     Arrow => tagged_node0("FnKind::Arrow", loc)
@@ -1268,7 +1268,7 @@ pub fn FnKind::json_repr(self : FnKind, loc : Location) -> Json {
 }
 
 ///|
-pub fn FieldDef::json_repr(self : FieldDef) -> Json {
+fn FieldDef::json_repr(self : FieldDef) -> Json {
   tagged_node("FieldDef", self.loc, {
     "label": self.label.json_repr(),
     "expr": self.expr.json_repr(),
@@ -1277,7 +1277,7 @@ pub fn FieldDef::json_repr(self : FieldDef) -> Json {
 }
 
 ///|
-pub fn TrailingMark::json_repr(self : TrailingMark, loc : Location) -> Json {
+fn TrailingMark::json_repr(self : TrailingMark, loc : Location) -> Json {
   match self {
     Comma => tagged_node0("Trailing::Comma", loc)
     Semi => tagged_node0("Trailing::Semi", loc)
@@ -1286,7 +1286,7 @@ pub fn TrailingMark::json_repr(self : TrailingMark, loc : Location) -> Json {
 }
 
 ///|
-pub fn Accessor::json_repr(self : Accessor) -> Json {
+fn Accessor::json_repr(self : Accessor) -> Json {
   match self {
     Label(label) =>
       tagged_node1("Accessor::Label", label.loc, label.json_repr())
@@ -1299,7 +1299,7 @@ pub fn Accessor::json_repr(self : Accessor) -> Json {
 }
 
 ///|
-pub fn Case::json_repr(self : Case) -> Json {
+fn Case::json_repr(self : Case) -> Json {
   let pattern_loc = self.pattern.loc()
   let body_loc = self.body.loc()
   let loc = pattern_loc.merge(body_loc)
@@ -1311,7 +1311,7 @@ pub fn Case::json_repr(self : Case) -> Json {
 }
 
 ///|
-pub fn Pattern::json_repr(self : Pattern) -> Json {
+fn Pattern::json_repr(self : Pattern) -> Json {
   match self {
     Alias(pat~, alias_~, loc~) =>
       tagged_node("Pattern::Alias", loc, {
@@ -1396,7 +1396,7 @@ pub fn Pattern::json_repr(self : Pattern) -> Json {
 }
 
 ///|
-pub fn RangeKind::json_repr(self : RangeKind, loc : Location) -> Json {
+fn RangeKind::json_repr(self : RangeKind, loc : Location) -> Json {
   match self {
     Inclusive | InclusiveMissingEqual =>
       tagged_node0("RangeKind::Inclusive", loc)
@@ -1405,7 +1405,7 @@ pub fn RangeKind::json_repr(self : RangeKind, loc : Location) -> Json {
 }
 
 ///|
-pub fn ArrayPatterns::json_repr(self : ArrayPatterns, loc : Location) -> Json {
+fn ArrayPatterns::json_repr(self : ArrayPatterns, loc : Location) -> Json {
   match self {
     Closed(pats) =>
       tagged_node1(
@@ -1438,7 +1438,7 @@ pub fn ArrayPatterns::json_repr(self : ArrayPatterns, loc : Location) -> Json {
 }
 
 ///|
-pub fn ArrayPattern::json_repr(self : ArrayPattern) -> Json {
+fn ArrayPattern::json_repr(self : ArrayPattern) -> Json {
   match self {
     Pattern(pattern) =>
       tagged_node1("ArrayPattern::Pattern", pattern.loc(), pattern.json_repr())
@@ -1459,7 +1459,7 @@ pub fn ArrayPattern::json_repr(self : ArrayPattern) -> Json {
 }
 
 ///|
-pub fn DotDotBinder::json_repr(self : DotDotBinder, loc : Location) -> Json {
+fn DotDotBinder::json_repr(self : DotDotBinder, loc : Location) -> Json {
   match self {
     Underscore => tagged_node0("DotDotBinder::Underscore", loc)
     NoBinder => tagged_node0("DotDotBinder::NoBinder", loc)
@@ -1471,7 +1471,7 @@ pub fn DotDotBinder::json_repr(self : DotDotBinder, loc : Location) -> Json {
 }
 
 ///|
-pub fn ConstrPatArg::json_repr(self : ConstrPatArg) -> Json {
+fn ConstrPatArg::json_repr(self : ConstrPatArg) -> Json {
   tagged_node("ConstrPatArg", self.pat.loc(), {
     "pat": self.pat.json_repr(),
     "kind": self.kind.json_repr(self.pat.loc()),
@@ -1479,7 +1479,7 @@ pub fn ConstrPatArg::json_repr(self : ConstrPatArg) -> Json {
 }
 
 ///|
-pub fn FieldPat::json_repr(self : FieldPat) -> Json {
+fn FieldPat::json_repr(self : FieldPat) -> Json {
   tagged_node("FieldPat", self.loc, {
     "label": self.label.json_repr(),
     "pattern": self.pattern.json_repr(),
@@ -1488,7 +1488,7 @@ pub fn FieldPat::json_repr(self : FieldPat) -> Json {
 }
 
 ///|
-pub fn MapPatElem::json_repr(self : MapPatElem) -> Json {
+fn MapPatElem::json_repr(self : MapPatElem) -> Json {
   tagged_node("MapPatElem", self.loc, {
     "key": self.key.json_repr(self.key_loc),
     "pat": self.pat.json_repr(),
@@ -1497,7 +1497,7 @@ pub fn MapPatElem::json_repr(self : MapPatElem) -> Json {
 }
 
 ///|
-pub fn MapExprElem::json_repr(self : MapExprElem) -> Json {
+fn MapExprElem::json_repr(self : MapExprElem) -> Json {
   tagged_node("MapExprElem", self.loc, {
     "key": self.key.json_repr(self.key_loc),
     "expr": self.expr.json_repr(),
@@ -1505,7 +1505,7 @@ pub fn MapExprElem::json_repr(self : MapExprElem) -> Json {
 }
 
 ///|
-pub fn StaticAssertion::json_repr(self : StaticAssertion) -> Json {
+fn StaticAssertion::json_repr(self : StaticAssertion) -> Json {
   tagged_node("StaticAssertion", self.loc, {
     "ty": self.ty.json_repr(),
     "trait": self.trait_.json_repr(self.loc),
@@ -1514,7 +1514,7 @@ pub fn StaticAssertion::json_repr(self : StaticAssertion) -> Json {
 }
 
 ///|
-pub fn LexCase::json_repr(self : LexCase, loc : Location) -> Json {
+fn LexCase::json_repr(self : LexCase, loc : Location) -> Json {
   tagged_node("LexCase", loc, {
     "pat": list_json_repr("LexCase::PatternList", self.pat_loc, self.pat, fn(
       ltp,
@@ -1527,7 +1527,7 @@ pub fn LexCase::json_repr(self : LexCase, loc : Location) -> Json {
 }
 
 ///|
-pub fn LexTopPattern::json_repr(self : LexTopPattern, loc : Location) -> Json {
+fn LexTopPattern::json_repr(self : LexTopPattern, loc : Location) -> Json {
   match self {
     Pattern(pat) => tagged_node1("LexTopPattern::Pattern", loc, pat.json_repr())
     Binder(binder) =>
@@ -1537,7 +1537,7 @@ pub fn LexTopPattern::json_repr(self : LexTopPattern, loc : Location) -> Json {
 }
 
 ///|
-pub fn LexPattern::json_repr(self : LexPattern) -> Json {
+fn LexPattern::json_repr(self : LexPattern) -> Json {
   match self {
     Regex(lit~, loc~) =>
       tagged_node("LexPattern::Regex", loc, { "lit": Json::string(lit) })
@@ -1568,10 +1568,7 @@ pub fn LexPattern::json_repr(self : LexPattern) -> Json {
 }
 
 ///|
-pub fn TryOperatorKind::json_repr(
-  self : TryOperatorKind,
-  loc : Location,
-) -> Json {
+fn TryOperatorKind::json_repr(self : TryOperatorKind, loc : Location) -> Json {
   match self {
     Question => tagged_node0("TryOperatorKind::Question", loc)
     Exclamation => tagged_node0("TryOperatorKind::Exclamation", loc)
@@ -1579,7 +1576,7 @@ pub fn TryOperatorKind::json_repr(
 }
 
 ///|
-pub fn Group::json_repr(self : Group, loc : Location) -> Json {
+fn Group::json_repr(self : Group, loc : Location) -> Json {
   match self {
     Brace => tagged_node0("Group::Brace", loc)
     Paren => tagged_node0("Group::Paren", loc)
@@ -1587,7 +1584,7 @@ pub fn Group::json_repr(self : Group, loc : Location) -> Json {
 }
 
 ///|
-pub fn Hole::json_repr(self : Hole, loc : Location) -> Json {
+fn Hole::json_repr(self : Hole, loc : Location) -> Json {
   match self {
     Synthesized => tagged_node0("Hole::Synthesized", loc)
     Incomplete => tagged_node0("Hole::Incomplete", loc)
