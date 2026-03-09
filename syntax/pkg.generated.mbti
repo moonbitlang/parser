@@ -85,13 +85,11 @@ pub(all) enum Accessor {
   Index(tuple_index~ : Int, loc~ : @basic.Location)
   Newtype(loc~ : @basic.Location)
 }
-pub fn Accessor::json_repr(Self) -> Json
 
 pub(all) struct AliasTarget {
   binder : Binder
   target : Label?
 }
-pub fn AliasTarget::json_repr(Self) -> Json
 pub fn AliasTarget::loc(Self) -> @basic.Location
 
 pub(all) enum ApplyAttr {
@@ -99,13 +97,11 @@ pub(all) enum ApplyAttr {
   Exclamation
   Question
 }
-pub fn ApplyAttr::json_repr(Self, @basic.Location) -> Json
 
 pub(all) struct Argument {
   value : Expr
   kind : ArgumentKind
 }
-pub fn Argument::json_repr(Self) -> Json
 
 pub(all) enum ArgumentKind {
   Positional
@@ -114,7 +110,6 @@ pub(all) enum ArgumentKind {
   LabelledOption(label~ : Label, question_loc~ : @basic.Location)
   LabelledOptionPun(label~ : Label, question_loc~ : @basic.Location)
 }
-pub fn ArgumentKind::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum ArrayPattern {
   Pattern(Pattern)
@@ -122,13 +117,11 @@ pub(all) enum ArrayPattern {
   BytesSpread(bytes~ : String, loc~ : @basic.Location)
   ConstSpread(binder~ : Binder, pkg~ : String?, loc~ : @basic.Location)
 }
-pub fn ArrayPattern::json_repr(Self) -> Json
 
 pub(all) enum ArrayPatterns {
   Closed(@list.List[ArrayPattern])
   Open(@list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder)
 }
-pub fn ArrayPatterns::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum ArrowFnParam {
   Named(Binder)
@@ -139,14 +132,12 @@ pub(all) struct Binder {
   name : String
   loc : @basic.Location
 }
-pub fn Binder::json_repr(Self) -> Json
 
 pub(all) struct Case {
   pattern : Pattern
   guard_ : Expr?
   body : Expr
 }
-pub fn Case::json_repr(Self) -> Json
 
 pub(all) enum Constant {
   Bool(Bool)
@@ -162,7 +153,6 @@ pub(all) enum Constant {
   String(String)
   BigInt(String)
 }
-pub fn Constant::json_repr(Self, @basic.Location) -> Json
 
 pub(all) struct ConstrDecl {
   name : ConstrName
@@ -172,60 +162,51 @@ pub(all) struct ConstrDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
-pub fn ConstrDecl::json_repr(Self) -> Json
 
 pub(all) struct ConstrId {
   id : LongIdent
   loc : @basic.Location
 }
-pub fn ConstrId::json_repr(Self) -> Json
 
 pub(all) struct ConstrName {
   name : String
   loc : @basic.Location
 }
-pub fn ConstrName::json_repr(Self) -> Json
 
 pub(all) struct ConstrParam {
   ty : Type
   mut_ : Bool
   label : Label?
 }
-pub fn ConstrParam::json_repr(Self) -> Json
 
 pub(all) struct ConstrPatArg {
   pat : Pattern
   kind : ArgumentKind
 }
-pub fn ConstrPatArg::json_repr(Self) -> Json
 
 pub(all) struct Constructor {
   name : ConstrName
   extra_info : ConstructorExtraInfo
   loc : @basic.Location
 }
-pub fn Constructor::json_repr(Self) -> Json
 
 pub(all) enum ConstructorExtraInfo {
   TypeName(TypeName)
   Package(String)
   NoExtraInfo
 }
-pub fn ConstructorExtraInfo::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum DeclBody {
   DeclBody(local_types~ : @list.List[LocalTypeDecl], expr~ : Expr)
   DeclStubs(FuncStubs)
   DeclNone
 }
-pub fn DeclBody::json_repr(Self, @basic.Location) -> Json
 
 pub(all) struct DerivingDirective {
   type_name : TypeName
   args : @list.List[Argument]
   loc : @basic.Location
 }
-pub fn DerivingDirective::json_repr(Self) -> Json
 
 pub(all) struct DocString {
   content : @list.List[String]
@@ -240,13 +221,11 @@ pub(all) enum DotDotBinder {
   BinderAs(Binder)
   Binder(Binder)
 }
-pub fn DotDotBinder::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum EmbeddedCode {
   CodeString(String)
   CodeMultilineString(@list.List[String])
 }
-pub fn EmbeddedCode::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum ErrorType {
   ErrorType(ty~ : Type)
@@ -255,14 +234,12 @@ pub(all) enum ErrorType {
   Noraise(loc~ : @basic.Location)
   MaybeError(ty~ : Type)
 }
-pub fn ErrorType::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum ExceptionDecl {
   NoPayload
   SinglePayload(Type)
   EnumPayload(@list.List[ConstrDecl])
 }
-pub fn ExceptionDecl::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum Expr {
   Apply(func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location)
@@ -322,6 +299,7 @@ pub(all) enum Expr {
 }
 pub fn Expr::json_repr(Self) -> Json
 pub fn Expr::loc(Self) -> @basic.Location
+pub impl ToJson for Expr
 
 pub(all) struct FieldDecl {
   name : FieldName
@@ -332,7 +310,6 @@ pub(all) struct FieldDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
 }
-pub fn FieldDecl::json_repr(Self) -> Json
 
 pub(all) struct FieldDef {
   label : Label
@@ -340,13 +317,11 @@ pub(all) struct FieldDef {
   is_pun : Bool
   loc : @basic.Location
 }
-pub fn FieldDef::json_repr(Self) -> Json
 
 pub(all) struct FieldName {
   label : String
   loc : @basic.Location
 }
-pub fn FieldName::json_repr(Self) -> Json
 
 pub(all) struct FieldPat {
   label : Label
@@ -354,13 +329,11 @@ pub(all) struct FieldPat {
   is_pun : Bool
   loc : @basic.Location
 }
-pub fn FieldPat::json_repr(Self) -> Json
 
 pub(all) enum FnKind {
   Lambda
   Arrow
 }
-pub fn FnKind::json_repr(Self, @basic.Location) -> Json
 
 pub(all) struct FunDecl {
   type_name : TypeName?
@@ -377,7 +350,6 @@ pub(all) struct FunDecl {
   mut doc : DocString
   loc : @basic.Location
 }
-pub fn FunDecl::json_repr(Self) -> Json
 
 pub(all) struct Func {
   parameters : @list.List[Parameter]
@@ -390,26 +362,22 @@ pub(all) struct Func {
   is_async : @basic.Location?
   loc : @basic.Location
 }
-pub fn Func::json_repr(Self) -> Json
 
 pub(all) enum FuncStubs {
   Import(module_name~ : String, func_name~ : String, language~ : String?)
   Embedded(language~ : String?, code~ : EmbeddedCode)
 }
-pub fn FuncStubs::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum Group {
   Brace
   Paren
 }
-pub fn Group::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum Hole {
   Synthesized
   Incomplete
   Todo
 }
-pub fn Hole::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum Impl {
   TopExpr(expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location)
@@ -428,13 +396,13 @@ pub(all) enum Impl {
 }
 pub fn Impl::json_repr(Self) -> Json
 pub fn Impl::loc(Self) -> @basic.Location
+pub impl ToJson for Impl
 
 pub(all) enum InterpElem {
   Literal(repr~ : String, loc~ : @basic.Location)
   Expr(expr~ : Expr, loc~ : @basic.Location)
   Source(@tokens.InterpSource)
 }
-pub fn InterpElem::json_repr(Self) -> Json
 
 pub(all) enum InterpolationComponent {
   InterpLit(String, @basic.Location)
@@ -450,7 +418,6 @@ pub(all) struct Label {
   name : String
   loc : @basic.Location
 }
-pub fn Label::json_repr(Self) -> Json
 
 pub(all) struct LexCase {
   pat : @list.List[LexTopPattern]
@@ -458,7 +425,6 @@ pub(all) struct LexCase {
   guard_ : Expr?
   body : Expr
 }
-pub fn LexCase::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum LexPattern {
   Regex(lit~ : String, loc~ : @basic.Location)
@@ -466,14 +432,12 @@ pub(all) enum LexPattern {
   Alias(pat~ : LexPattern, binder~ : Binder, loc~ : @basic.Location)
   Sequence(pats~ : @list.List[LexPattern], loc~ : @basic.Location)
 }
-pub fn LexPattern::json_repr(Self) -> Json
 
 pub(all) enum LexTopPattern {
   Pattern(LexPattern)
   Binder(Binder)
   Wildcard(loc~ : @basic.Location)
 }
-pub fn LexTopPattern::json_repr(Self, @basic.Location) -> Json
 
 pub(all) struct LocalTypeDecl {
   tycon : String
@@ -481,14 +445,12 @@ pub(all) struct LocalTypeDecl {
   components : TypeDesc
   deriving : @list.List[DerivingDirective]
 }
-pub fn LocalTypeDecl::json_repr(Self) -> Json
 
 pub(all) enum LongIdent {
   Ident(name~ : String)
   Dot(pkg~ : String, id~ : String)
 }
 pub fn LongIdent::dummy() -> Self
-pub fn LongIdent::json_repr(Self, @basic.Location) -> Json
 
 pub(all) struct MapExprElem {
   key : Constant
@@ -496,7 +458,6 @@ pub(all) struct MapExprElem {
   key_loc : @basic.Location
   loc : @basic.Location
 }
-pub fn MapExprElem::json_repr(Self) -> Json
 
 pub(all) struct MapPatElem {
   key : Constant
@@ -505,7 +466,6 @@ pub(all) struct MapPatElem {
   key_loc : @basic.Location
   loc : @basic.Location
 }
-pub fn MapPatElem::json_repr(Self) -> Json
 
 pub(all) struct MapVisitorBase[T](T)
 #deprecated
@@ -516,7 +476,6 @@ pub(all) enum MultilineStringElem {
   String(String)
   Interp(@list.List[InterpElem])
 }
-pub fn MultilineStringElem::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum Parameter {
   DiscardPositional(ty~ : Type?, loc~ : @basic.Location)
@@ -525,7 +484,6 @@ pub(all) enum Parameter {
   Optional(binder~ : Binder, default~ : Expr, ty~ : Type?)
   QuestionOptional(binder~ : Binder, ty~ : Type?)
 }
-pub fn Parameter::json_repr(Self) -> Json
 pub fn Parameter::loc(Self) -> @basic.Location
 
 pub(all) enum Pattern {
@@ -543,7 +501,6 @@ pub(all) enum Pattern {
   Range(lhs~ : Pattern, rhs~ : Pattern, kind~ : RangeKind, loc~ : @basic.Location)
   SpecialConstr(binder~ : Binder, args~ : @list.List[ConstrPatArg], loc~ : @basic.Location)
 }
-pub fn Pattern::json_repr(Self) -> Json
 pub fn Pattern::loc(Self) -> @basic.Location
 
 pub(all) enum RangeKind {
@@ -551,13 +508,11 @@ pub(all) enum RangeKind {
   Exclusive
   InclusiveMissingEqual
 }
-pub fn RangeKind::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum SpreadableElem {
   Regular(Expr)
   Spread(expr~ : Expr, loc~ : @basic.Location)
 }
-pub fn SpreadableElem::json_repr(Self) -> Json
 
 pub(all) struct StaticAssertion {
   ty : Type
@@ -565,14 +520,12 @@ pub(all) struct StaticAssertion {
   loc : @basic.Location
   msg : String
 }
-pub fn StaticAssertion::json_repr(Self) -> Json
 
 pub(all) enum TrailingMark {
   Comma
   Semi
   None
 }
-pub fn TrailingMark::json_repr(Self, @basic.Location) -> Json
 
 pub(all) struct TraitDecl {
   name : Binder
@@ -584,7 +537,6 @@ pub(all) struct TraitDecl {
   mut doc : DocString
   is_declare : Bool
 }
-pub fn TraitDecl::json_repr(Self) -> Json
 
 pub(all) struct TraitMethodDecl {
   name : Binder
@@ -598,13 +550,11 @@ pub(all) struct TraitMethodDecl {
   attrs : @list.List[@attribute.Attribute]
   loc : @basic.Location
 }
-pub fn TraitMethodDecl::json_repr(Self) -> Json
 
 pub(all) enum TryOperatorKind {
   Question
   Exclamation
 }
-pub fn TryOperatorKind::json_repr(Self, @basic.Location) -> Json
 
 pub(all) enum Type {
   Any(loc~ : @basic.Location)
@@ -614,7 +564,6 @@ pub(all) enum Type {
   Option(ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location)
   Object(ConstrId)
 }
-pub fn Type::json_repr(Self) -> Json
 pub fn Type::loc(Self) -> @basic.Location
 
 pub(all) struct TypeDecl {
@@ -629,13 +578,11 @@ pub(all) struct TypeDecl {
   loc : @basic.Location
   is_declare : Bool
 }
-pub fn TypeDecl::json_repr(Self) -> Json
 
 pub(all) struct TypeDeclBinder {
   name : String?
   loc : @basic.Location
 }
-pub fn TypeDeclBinder::json_repr(Self) -> Json
 
 pub(all) enum TypeDesc {
   Abstract
@@ -647,27 +594,23 @@ pub(all) enum TypeDesc {
   TupleStruct(@list.List[Type])
   Alias(Type)
 }
-pub fn TypeDesc::json_repr(Self, @basic.Location) -> Json
 
 pub(all) struct TypeName {
   name : LongIdent
   is_object : Bool
   loc : @basic.Location
 }
-pub fn TypeName::json_repr(Self) -> Json
 
 pub(all) struct TypeVarBinder {
   name : String
   name_loc : @basic.Location
   constraints : @list.List[TypeVarConstraint]
 }
-pub fn TypeVarBinder::json_repr(Self) -> Json
 
 pub(all) struct TypeVarConstraint {
   trait_ : LongIdent
   loc : @basic.Location
 }
-pub fn TypeVarConstraint::json_repr(Self) -> Json
 
 pub(all) enum UsingKind {
   Value
@@ -679,20 +622,17 @@ pub(all) struct Var {
   name : LongIdent
   loc : @basic.Location
 }
-pub fn Var::json_repr(Self) -> Json
 
 pub(all) enum Visibility {
   Default
   Pub(attr~ : String?, loc~ : @basic.Location)
   Priv(loc~ : @basic.Location)
 }
-pub fn Visibility::json_repr(Self, @basic.Location) -> Json
 
 pub(all) struct WhereClause {
   fields : @list.List[FieldDef]
   loc : @basic.Location
 }
-pub fn WhereClause::json_repr(Self) -> Json
 
 // Type aliases
 pub type Impls = @list.List[Impl]
