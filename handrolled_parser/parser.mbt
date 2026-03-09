@@ -2908,7 +2908,7 @@ fn State::parse_foreach_loop(
   self.expect_token(TK_IN)
   let expr = self.parse_expr()
   let body = self.parse_block_expr()
-  let else_block = if self.peek_token() is ELSE {
+  let else_block = if self.peek_token() is NOBREAK {
     self.skip()
     Some(self.parse_block_expr())
   } else {
@@ -2963,9 +2963,9 @@ fn State::parse_for_loop(
     }
   }
   let body = self.parse_block_expr()
-  let for_else = if self.peek_token() is ELSE {
+  let for_else = if self.peek_token() is NOBREAK {
     self.with_follow(follow_set=[TK_LBRACE], fn(state) {
-      state.expect_token(TK_ELSE)
+      state.expect_token(TK_NOBREAK)
     })
     Some(self.parse_block_expr())
   } else {
@@ -3000,9 +3000,9 @@ fn State::parse_while_loop(
     State::try_parse_condition_expr,
   )
   let loop_body = self.parse_block_expr()
-  let while_else = if self.peek_token() is ELSE {
+  let while_else = if self.peek_token() is NOBREAK {
     self.with_follow(follow_set=[TK_LBRACE], fn(state) {
-      state.expect_token(TK_ELSE)
+      state.expect_token(TK_NOBREAK)
     })
     Some(self.parse_block_expr())
   } else {
