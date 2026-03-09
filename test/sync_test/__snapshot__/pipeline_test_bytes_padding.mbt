@@ -8,7 +8,7 @@ fn strlen(bytes : Bytes) -> Int {
     if bytes[i] == 0 {
       break i
     }
-  } else {
+  } nobreak {
     bytes.length()
   }
 }

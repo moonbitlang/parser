@@ -21,7 +21,7 @@ fn f(s : String) -> Int {
   while i is (0..=10) && p.read() is Some(c) && c >= 'a' && c <= 'z' {
     i = i + 1
     println(c)
-  } else {
+  } nobreak {
     i
   }
 }

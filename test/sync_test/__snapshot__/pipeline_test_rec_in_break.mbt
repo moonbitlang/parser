@@ -4,7 +4,7 @@ fn main {
       if i > n {
         break rec_in_break(n + 1)
       }
-    } else {
+    } nobreak {
       42
     }
   }

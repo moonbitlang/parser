@@ -4,7 +4,7 @@ fn bytes_contains(s : BytesView, c : Byte) -> Bool {
     if a == c {
       return true
     }
-  } else {
+  } nobreak {
     false
   }
 }

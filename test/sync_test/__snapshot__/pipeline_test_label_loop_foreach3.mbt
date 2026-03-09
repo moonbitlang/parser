@@ -24,11 +24,11 @@ fn f(xs : Array[Int], ys : Array[String], zs : Array[Int]) -> Unit {
         }
         println("unrecognized int")
       }
-    } else {
+    } nobreak {
       sum2
     }
     sum1 = sum1 + x + s.length()
-  } else {
+  } nobreak {
     sum1
   }
   println(n)

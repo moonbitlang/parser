@@ -6,7 +6,7 @@ fn f(xs : @list.List[Int]) -> Unit {
         break l~
       }
     }
-  } else {
+  } nobreak {
     println("else")
   }
 }
