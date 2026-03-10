@@ -195,7 +195,7 @@ fn lex_tokens(
 
     // Byte literals - hex escape
     ("b'\\x[0-9a-fA-F]{2}'" as raw, rest) => {
-      let literal = try! raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
+      let literal = raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
         start=env.calc_offset(input, base~),
@@ -206,7 +206,7 @@ fn lex_tokens(
 
     // Byte literals - octal escape
     ("b'\\o[0-3][0-7]{2}'" as raw, rest) => {
-      let literal = try! raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
+      let literal = raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
         start=env.calc_offset(input, base~),
@@ -217,7 +217,7 @@ fn lex_tokens(
 
     // Byte literals - ASCII character
     ("b'[\x00-\x7F]'" as raw, rest) => {
-      let ascii_char = try! raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
+      let ascii_char = raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
       env.add_token_with_loc(
         BYTE(ascii_char),
         start=env.calc_offset(input, base~),
@@ -228,7 +228,7 @@ fn lex_tokens(
 
     // Byte literals - escape sequences
     ("b'\\[\\'\"`ntbrf/ ]'" as raw, rest) => {
-      let literal = try! raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
+      let literal = raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
         start=env.calc_offset(input, base~),
@@ -294,16 +294,14 @@ fn lex_tokens(
     ) => {
       // Need to handle integer..range specially
       let integer_end = integer_with_range.length() - 2 // Remove ".."
-      let integer = try! integer_with_range
-        .sub(start=0, end=integer_end)
-        .to_string()
+      let integer = integer_with_range.sub(start=0, end=integer_end).to_string()
       env.add_token_with_loc(
         INT(integer),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(input, base~) + integer_end,
       )
       // Put back the ".." part
-      let dotdot_input = try! input[integer_end:]
+      let dotdot_input = input[integer_end:]
       lex_tokens(dotdot_input, base~, env~, preserve_comment~)
     }
 
@@ -360,7 +358,7 @@ fn lex_tokens(
 
     // Post label identifiers (name~) - simplified pattern
     ("[a-z_][a-zA-Z0-9_]*~" as raw, rest) => {
-      let ident = try! raw.sub(start=0, end=raw.length() - 1).to_string() // Remove ~
+      let ident = raw.sub(start=0, end=raw.length() - 1).to_string() // Remove ~
       env.add_token_with_loc(
         @tokens.Token::POST_LABEL(ident),
         start=env.calc_offset(input, base~),
@@ -398,7 +396,7 @@ fn lex_tokens(
 
     // Augmented assignment operators
     ("[+\-*/%]=" as op, rest) => {
-      let op_char = try! op.sub(start=0, end=1).to_string()
+      let op_char = op.sub(start=0, end=1).to_string()
       env.add_token_with_loc(
         @tokens.Token::AUGMENTED_ASSIGNMENT(op_char),
         start=env.calc_offset(input, base~),
@@ -612,7 +610,7 @@ fn lex_tokens(
 
     // Dot with number
     ("\.[0-9]+" as dot_int, rest) => {
-      let digits_str = try! dot_int.sub(start=1, end=dot_int.length()) // Remove the '.'
+      let digits_str = dot_int.sub(start=1, end=dot_int.length()) // Remove the '.'
       let idx = @strconv.parse_int(digits_str) catch {
         _ => {
           let full_str = dot_int.to_string()
@@ -912,7 +910,7 @@ fn lex_tokens(
         )
       }
       let content_str = multiline_str.to_string()
-      let content = try! content_str.sub(start=2, end=content_str.length()) // Remove #|
+      let content = content_str.sub(start=2, end=content_str.length()) // Remove #|
       env.add_token_with_loc(
         @tokens.Token::MULTILINE_STRING(content.to_string()),
         start=start_pos,

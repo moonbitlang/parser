@@ -353,18 +353,18 @@ pub fn label_to_pat(loc~ : Location, label : Label) -> Pattern {
 /// Parse integer literal with suffix
 pub fn make_int(i : String) -> Constant {
   if i.has_suffix("L") {
-    let base = try! i.sub(end=i.length() - 1)
+    let base = i.sub(end=i.length() - 1)
     if base.has_suffix("U") {
-      let u64 = try! base.sub(end=base.length() - 1)
+      let u64 = base.sub(end=base.length() - 1)
       UInt64(u64.to_string())
     } else {
       Int64(base.to_string())
     }
   } else if i.has_suffix("U") {
-    let u32 = try! i.sub(end=i.length() - 1)
+    let u32 = i.sub(end=i.length() - 1)
     UInt(u32.to_string())
   } else if i.has_suffix("N") {
-    let bigint = try! i.sub(end=i.length() - 1)
+    let bigint = i.sub(end=i.length() - 1)
     BigInt(bigint.to_string())
   } else {
     Int(i)
@@ -381,7 +381,7 @@ pub fn make_double(f : String) -> Constant {
 /// Create float constant
 pub fn make_float(f : String) -> Constant {
   if f.has_suffix("F") {
-    let base = try! f.sub(end=f.length() - 1)
+    let base = f.sub(end=f.length() - 1)
     Float(base.to_string())
   } else {
     abort("make_float: string must end with F")

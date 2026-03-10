@@ -151,7 +151,7 @@ fn State::panic(state : Self) -> Location {
       let prev_end = state.previous_triple().2
       let (failed_at, first_start, _) = state.peek()
       let mut skipped = 0
-      for {
+      for ;; {
         let last_end = state.previous_triple().2
         let (next_token, next_start, _) = state.peek()
         match inidex_of_token_kind(state.syncs, next_token.kind()) {
@@ -597,7 +597,7 @@ fn[A] State::series1_with_follow(
 
   self.push_syncs(follow_set)
   let acc = [expect_element()]
-  for {
+  for ;; {
     match self.mode {
       Panic(_) => break
       Normal =>
@@ -677,7 +677,7 @@ fn[A] State::series_with_follow(
     Normal => {
       let result = []
       self.push_syncs(follow_set)
-      for {
+      for ;; {
         match self.mode {
           Panic(_) => ()
           Normal if follow_set.contains(self.peek_kind()) => ()
