@@ -914,7 +914,7 @@ fn[T] yy_parse(
             } else {
               (args[0].1, args[args.length() - 1].2)
             }
-            for i in 0..<count {
+            for _ in 0..<count {
               ignore(data_stack.unsafe_pop())
               state_stack = state_stack.unsafe_tail()
             }
