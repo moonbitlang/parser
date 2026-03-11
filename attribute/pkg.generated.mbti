@@ -2,6 +2,7 @@
 package "moonbitlang/parser/attribute"
 
 import {
+  "moonbitlang/core/debug",
   "moonbitlang/core/list",
   "moonbitlang/parser/basic",
   "moonbitlang/parser/tokens",
@@ -15,7 +16,7 @@ pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
   UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
 }
-pub impl Show for ParseError
+pub impl @debug.Debug for ParseError
 
 // Types and methods
 pub(all) struct Attribute {
@@ -25,8 +26,8 @@ pub(all) struct Attribute {
 }
 pub fn Attribute::name(Self) -> String?
 pub fn Attribute::new(loc~ : @basic.Location, (String, String?, String)) -> Self
-pub impl Show for Attribute
 pub impl ToJson for Attribute
+pub impl @debug.Debug for Attribute
 
 pub(all) enum Expr {
   Ident(Id)
@@ -34,19 +35,20 @@ pub(all) enum Expr {
   Apply(Id, @list.List[Prop])
   Bool(Bool)
 }
-pub impl Show for Expr
+pub impl @debug.Debug for Expr
 
 pub(all) struct Id {
   qual : String?
   name : String
 }
 pub impl Show for Id
+pub impl @debug.Debug for Id
 
 pub(all) enum Prop {
   Labeled(String, Expr)
   Expr(Expr)
 }
-pub impl Show for Prop
+pub impl @debug.Debug for Prop
 
 // Type aliases
 

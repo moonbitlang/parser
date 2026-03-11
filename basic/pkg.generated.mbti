@@ -2,6 +2,7 @@
 package "moonbitlang/parser/basic"
 
 import {
+  "moonbitlang/core/debug",
   "moonbitlang/core/ref",
 }
 
@@ -33,6 +34,7 @@ pub impl Eq for Location
 pub impl Hash for Location
 pub impl Show for Location
 pub impl ToJson for Location
+pub impl @debug.Debug for Location
 
 pub(all) struct Position {
   fname : String
@@ -46,6 +48,7 @@ pub impl Eq for Position
 pub impl Hash for Position
 pub impl Show for Position
 pub impl ToJson for Position
+pub impl @debug.Debug for Position
 
 pub(all) struct Report {
   loc : Location

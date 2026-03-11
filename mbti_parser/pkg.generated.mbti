@@ -2,6 +2,7 @@
 package "moonbitlang/parser/mbti_parser"
 
 import {
+  "moonbitlang/core/debug",
   "moonbitlang/parser/basic",
   "moonbitlang/parser/mbti_ast",
   "moonbitlang/parser/tokens",
@@ -15,7 +16,7 @@ pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
   UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
 }
-pub impl Show for ParseError
+pub impl @debug.Debug for ParseError
 
 // Types and methods
 

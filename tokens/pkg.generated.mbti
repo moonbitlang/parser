@@ -2,6 +2,7 @@
 package "moonbitlang/parser/tokens"
 
 import {
+  "moonbitlang/core/debug",
   "moonbitlang/parser/basic",
 }
 
@@ -16,31 +17,31 @@ pub(all) struct Comment {
   mut consumed_by_docstring : Bool
 }
 pub impl Eq for Comment
-pub impl Show for Comment
 pub impl ToJson for Comment
+pub impl @debug.Debug for Comment
 
 pub(all) enum CommentKind {
   InlineTrailing
   Ownline(leading_blank_line~ : Bool, trailing_blank_line~ : Bool)
 }
 pub impl Eq for CommentKind
-pub impl Show for CommentKind
 pub impl ToJson for CommentKind
+pub impl @debug.Debug for CommentKind
 
 pub(all) enum InterpElem {
   InterpLit(repr~ : String, loc~ : @basic.Location)
   InterpSource(InterpSource)
 }
 pub impl Eq for InterpElem
-pub impl Show for InterpElem
+pub impl @debug.Debug for InterpElem
 
 pub(all) struct InterpSource {
   source : String
   loc : @basic.Location
 }
 pub impl Eq for InterpSource
-pub impl Show for InterpSource
 pub impl ToJson for InterpSource
+pub impl @debug.Debug for InterpSource
 
 pub(all) enum Token {
   CHAR(String)
@@ -161,8 +162,8 @@ pub(all) enum Token {
 }
 pub fn Token::kind(Self) -> TokenKind
 pub fn Token::to_expect_string(Self) -> String
-pub impl Show for Token
 pub impl ToJson for Token
+pub impl @debug.Debug for Token
 
 pub(all) enum TokenKind {
   TK_CHAR
@@ -286,6 +287,7 @@ pub impl Compare for TokenKind
 pub impl Eq for TokenKind
 pub impl Hash for TokenKind
 pub impl Show for TokenKind
+pub impl @debug.Debug for TokenKind
 
 // Type aliases
 pub type ByteLiteral = String

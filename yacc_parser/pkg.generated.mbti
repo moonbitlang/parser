@@ -2,6 +2,7 @@
 package "moonbitlang/parser/yacc_parser"
 
 import {
+  "moonbitlang/core/debug",
   "moonbitlang/core/list",
   "moonbitlang/parser/basic",
   "moonbitlang/parser/syntax",
@@ -18,7 +19,7 @@ pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
   UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
 }
-pub impl Show for ParseError
+pub impl @debug.Debug for ParseError
 
 // Types and methods
 
