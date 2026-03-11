@@ -1,5 +1,5 @@
 %position<@basic.Position>
-%derive<Show> ParseError
+%derive<Debug> ParseError
 %start mbti
 
 %token<CharLiteral> CHAR

@@ -4,7 +4,7 @@ pub(all) struct Position {
   lnum : Int
   bol : Int
   cnum : Int
-} derive(Hash, ToJson)
+} derive(Debug, Hash, ToJson)
 
 ///|
 pub impl Show for Position with output(self, logger) {
@@ -63,7 +63,7 @@ pub fn Position::column(self : Position) -> Int {
 pub(all) struct Location {
   start : Position
   end : Position
-} derive(Eq, Compare, Hash)
+} derive(Eq, Compare, Hash, Debug)
 
 ///|
 pub fn Location::trim_first_char(self : Location) -> Location {

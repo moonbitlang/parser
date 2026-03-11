@@ -1,9 +1,10 @@
-%derive<Show> Token
+%derive<Debug> Token
 %derive<Eq> TokenKind
 %derive<Hash> TokenKind
 %derive<Compare> TokenKind
+%derive<Debug> TokenKind
 %position<Position>
-%derive<Show> ParseError
+%derive<Debug> ParseError
 
 %start structure
 %start expression
