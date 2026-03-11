@@ -115,7 +115,7 @@ pub(all) enum Token {
   LEXMATCH
   LEXMATCH_QUESTION
   PACKAGE
-} derive(Show)
+} derive(Debug)
 
 ///|
 pub fn Token::kind(self : Token) -> TokenKind {
@@ -355,7 +355,7 @@ pub(all) enum TokenKind {
   TK_LEXMATCH
   TK_LEXMATCH_QUESTION
   TK_PACKAGE
-} derive(Eq, Hash, Compare)
+} derive(Eq, Hash, Compare, Debug)
 
 ///|
 pub impl Show for TokenKind with output(self, logger) {

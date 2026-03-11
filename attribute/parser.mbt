@@ -2,7 +2,7 @@
 pub suberror ParseError {
   UnexpectedToken(Token, (Position, Position), Array[TokenKind])
   UnexpectedEndOfInput(Position, Array[TokenKind])
-} derive(Show)
+} derive(Debug)
 
 ///|
 type YYObj = Error
