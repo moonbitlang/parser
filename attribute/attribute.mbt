@@ -14,18 +14,23 @@ pub impl Show for Id with output(self, logger) {
 }
 
 ///|
+pub impl Debug for Id with to_repr(self) {
+  @debug.Repr::literal(self.to_string())
+}
+
+///|
 pub(all) enum Expr {
   Ident(Id)
   String(@tokens.StringLiteral)
   Apply(Id, List[Prop])
   Bool(Bool)
-} derive(Show)
+} derive(Debug)
 
 ///|
 pub(all) enum Prop {
   Labeled(String, Expr)
   Expr(Expr)
-} derive(Show)
+} derive(Debug)
 
 ///|
 pub(all) struct Attribute {
@@ -33,7 +38,7 @@ pub(all) struct Attribute {
   raw : String
   parsed : Expr?
   //mut used : Bool
-} derive(Show)
+} derive(Debug)
 
 ///|
 pub fn Attribute::name(self : Self) -> String? {

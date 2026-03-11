@@ -138,7 +138,12 @@ pub fn parse_string(
       UnexpectedToken(token, (start, end), _) =>
         (
           @list.empty(),
-          [Report::{ loc: { start, end }, msg: "Unexpected `\{token}`." }],
+          [
+            Report::{
+              loc: { start, end },
+              msg: "Unexpected `\{@debug.render(token.to_repr())}`.",
+            },
+          ],
         )
     }
   }

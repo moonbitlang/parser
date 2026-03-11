@@ -5,6 +5,7 @@ import {
   "moonbitlang/parser/basic",
   "moonbitlang/parser/attribute",
   "moonbitlang/core/list",
+  "moonbitlang/core/debug",
 }
 
 import {
