@@ -2,11 +2,15 @@
 pub(all) struct Report {
   loc : Location
   msg : String
-} derive(Show)
+}
 
 ///|
-pub impl Show for Report with to_string(self) {
-  "error (\{self.loc}): \{self.msg}"
+pub impl Show for Report with output(self, logger) {
+  logger.write_string("error (")
+  logger.write_string(self.loc.to_string())
+  logger.write_char(':')
+  logger.write_char(' ')
+  logger.write_string(self.msg.to_string())
 }
 
 ///|
