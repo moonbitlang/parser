@@ -716,7 +716,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "where_clause": option_json_repr(where_clause, WhereClause::json_repr),
         "label": option_json_repr(label, Label::json_repr),
       })
-    ForEach(binders~, expr~, body~, else_block~, label~, loc~) =>
+    ForEach(binders~, expr~, acc_binders~, body~, else_block~, label~, loc~) =>
       tagged_node("Expr::ForEach", loc, {
         "binders": list_json_repr("Expr::ForEach::BinderList", loc, binders, fn(
           b,
@@ -724,6 +724,18 @@ pub fn Expr::json_repr(self : Expr) -> Json {
           option_json_repr(b, Binder::json_repr)
         }),
         "expr": expr.json_repr(),
+        "acc_binders": list_json_repr(
+          "Expr::ForEach::AccBinderList",
+          loc,
+          acc_binders,
+          fn(b) {
+            let (binder, expr) = b
+            tagged_node("ForEach::AccBinder", loc, {
+              "binder": binder.json_repr(),
+              "expr": expr.json_repr(),
+            })
+          },
+        ),
         "body": body.json_repr(),
         "else_block": option_json_repr(else_block, Expr::json_repr),
         "label": option_json_repr(label, Label::json_repr),

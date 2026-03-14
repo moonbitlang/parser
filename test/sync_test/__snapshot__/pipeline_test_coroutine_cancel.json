@@ -1939,6 +1939,11 @@
                                                               }
                                                             }
                                                           },
+                                                          "acc_binders": {
+                                                            "kind": "Expr::ForEach::AccBinderList",
+                                                            "loc": null,
+                                                            "children": []
+                                                          },
                                                           "body": {
                                                             "kind": "Expr::Apply",
                                                             "loc": null,
@@ -3815,6 +3820,11 @@
                                       }
                                     }
                                   },
+                                  "acc_binders": {
+                                    "kind": "Expr::ForEach::AccBinderList",
+                                    "loc": null,
+                                    "children": []
+                                  },
                                   "body": {
                                     "kind": "Expr::Sequence",
                                     "loc": null,
@@ -4447,6 +4457,11 @@
                                     }
                                   }
                                 }
+                              },
+                              "acc_binders": {
+                                "kind": "Expr::ForEach::AccBinderList",
+                                "loc": null,
+                                "children": []
                               },
                               "body": {
                                 "kind": "Expr::DotApply",

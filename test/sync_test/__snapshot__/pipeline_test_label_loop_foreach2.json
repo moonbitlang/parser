@@ -982,6 +982,11 @@
                                           }
                                         }
                                       },
+                                      "acc_binders": {
+                                        "kind": "Expr::ForEach::AccBinderList",
+                                        "loc": null,
+                                        "children": []
+                                      },
                                       "body": {
                                         "kind": "Expr::Sequence",
                                         "loc": null,
@@ -1469,6 +1474,11 @@
                                                             "children": {}
                                                           }
                                                         }
+                                                      },
+                                                      "acc_binders": {
+                                                        "kind": "Expr::ForEach::AccBinderList",
+                                                        "loc": null,
+                                                        "children": []
                                                       },
                                                       "body": {
                                                         "kind": "Expr::Match",

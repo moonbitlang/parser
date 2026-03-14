@@ -279,6 +279,11 @@
                               }
                             }
                           },
+                          "acc_binders": {
+                            "kind": "Expr::ForEach::AccBinderList",
+                            "loc": null,
+                            "children": []
+                          },
                           "body": {
                             "kind": "Expr::Assign",
                             "loc": null,
@@ -847,6 +852,11 @@
                                 }
                               }
                             }
+                          },
+                          "acc_binders": {
+                            "kind": "Expr::ForEach::AccBinderList",
+                            "loc": null,
+                            "children": []
                           },
                           "body": {
                             "kind": "Expr::Assign",
@@ -1460,6 +1470,11 @@
                               }
                             }
                           },
+                          "acc_binders": {
+                            "kind": "Expr::ForEach::AccBinderList",
+                            "loc": null,
+                            "children": []
+                          },
                           "body": {
                             "kind": "Expr::Assign",
                             "loc": null,
@@ -2028,6 +2043,11 @@
                                 }
                               }
                             }
+                          },
+                          "acc_binders": {
+                            "kind": "Expr::ForEach::AccBinderList",
+                            "loc": null,
+                            "children": []
                           },
                           "body": {
                             "kind": "Expr::Assign",
@@ -2641,6 +2661,11 @@
                               }
                             }
                           },
+                          "acc_binders": {
+                            "kind": "Expr::ForEach::AccBinderList",
+                            "loc": null,
+                            "children": []
+                          },
                           "body": {
                             "kind": "Expr::Assign",
                             "loc": null,
@@ -3209,6 +3234,11 @@
                                 }
                               }
                             }
+                          },
+                          "acc_binders": {
+                            "kind": "Expr::ForEach::AccBinderList",
+                            "loc": null,
+                            "children": []
                           },
                           "body": {
                             "kind": "Expr::Assign",

@@ -125,6 +125,11 @@
                               }
                             }
                           },
+                          "acc_binders": {
+                            "kind": "Expr::ForEach::AccBinderList",
+                            "loc": null,
+                            "children": []
+                          },
                           "body": {
                             "kind": "Expr::Apply",
                             "loc": null,

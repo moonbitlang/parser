@@ -2907,6 +2907,24 @@ fn State::parse_foreach_loop(
   })
   self.expect_token(TK_IN)
   let expr = self.parse_expr()
+  let acc_binders = if self.peek_token() is SEMI(_) {
+    self.skip()
+    let (acc_binders, _) = self.series_with_follow(
+      delim=TK_COMMA,
+      follow_set=[TK_LBRACE],
+      fn(state) {
+        let binder = state.parse_binder(
+          context="accumulator variable name of `for`",
+        )
+        state.expect_token(TK_EQUAL)
+        let value = state.parse_expr()
+        (binder, value)
+      },
+    )
+    @list.from_array(acc_binders)
+  } else {
+    @list.new()
+  }
   let body = self.parse_block_expr()
   let else_block = if self.peek_token() is NOBREAK {
     self.skip()
@@ -2915,7 +2933,7 @@ fn State::parse_foreach_loop(
     None
   }
   let loc = self.loc_start_with(spos)
-  ForEach(binders~, expr~, body~, else_block~, loc~, label~)
+  ForEach(binders~, expr~, acc_binders~, body~, else_block~, loc~, label~)
 }
 
 ///|

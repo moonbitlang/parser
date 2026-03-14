@@ -545,6 +545,11 @@
                                   }
                                 }
                               },
+                              "acc_binders": {
+                                "kind": "Expr::ForEach::AccBinderList",
+                                "loc": null,
+                                "children": []
+                              },
                               "body": {
                                 "kind": "Expr::ArraySet",
                                 "loc": null,
@@ -988,6 +993,11 @@
                             }
                           }
                         }
+                      },
+                      "acc_binders": {
+                        "kind": "Expr::ForEach::AccBinderList",
+                        "loc": null,
+                        "children": []
                       },
                       "body": {
                         "kind": "Expr::If",

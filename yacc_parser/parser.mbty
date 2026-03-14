@@ -1467,13 +1467,18 @@ for_expr -> Expr
   }
   ;
 
+optional_foreach_acc_binders -> @list.List[(Binder, Expr)]
+  : SEMI for_binders { $2 }
+  | { @list.new() }
+
 foreach_expr -> Expr
-  : loop_label_colon "for" non_empty_list_commas(foreach_binder) "in" expr block_expr optional_nobreak { 
+  : loop_label_colon "for" non_empty_list_commas(foreach_binder) "in" expr optional_foreach_acc_binders block_expr optional_nobreak { 
     ForEach(
       binders = $3,
       expr = $5,
-      body = $6,
-      else_block = $7,
+      acc_binders = $6,
+      body = $7,
+      else_block = $8,
       label = $1,
       loc = mk_loc($sloc)
     )

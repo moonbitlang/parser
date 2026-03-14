@@ -701,6 +701,7 @@ pub(open) trait MapVisitor {
     Self,
     binders~ : @list.List[Binder?],
     expr~ : Expr,
+    acc_binders~ : @list.List[(Binder, Expr)],
     body~ : Expr,
     else_block~ : Expr?,
     label~ : Label?,
@@ -1372,6 +1373,7 @@ impl MapVisitor with visit_Expr_ForEach(
   env,
   binders~,
   expr~,
+  acc_binders~,
   body~,
   else_block~,
   label~,
@@ -1381,6 +1383,7 @@ impl MapVisitor with visit_Expr_ForEach(
     env,
     binders~,
     expr~,
+    acc_binders~,
     body~,
     else_block~,
     label~,
@@ -4720,6 +4723,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ForEac
   env,
   binders~,
   expr~,
+  acc_binders~,
   body~,
   else_block~,
   label~,
@@ -4730,7 +4734,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr_ForEac
   let body = env.0.visit_Expr(body)
   let else_block = else_block.map(else_block => env.0.visit_Expr(else_block))
   let label = label.map(x => env.0.visit_Label(x))
-  Expr::ForEach(binders~, expr~, body~, else_block~, label~, loc~)
+  Expr::ForEach(binders~, expr~, acc_binders~, body~, else_block~, label~, loc~)
 }
 
 ///|
@@ -4923,10 +4927,11 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Expr(
         loc~,
         where_clause~,
       )
-    ForEach(binders~, expr~, body~, else_block~, label~, loc~) =>
+    ForEach(binders~, expr~, acc_binders~, body~, else_block~, label~, loc~) =>
       env.0.visit_Expr_ForEach(
         binders~,
         expr~,
+        acc_binders~,
         body~,
         else_block~,
         label~,

@@ -3383,6 +3383,11 @@
                       }
                     }
                   },
+                  "acc_binders": {
+                    "kind": "Expr::ForEach::AccBinderList",
+                    "loc": null,
+                    "children": []
+                  },
                   "body": {
                     "kind": "Expr::Defer",
                     "loc": null,
@@ -3944,6 +3949,11 @@
                         }
                       }
                     }
+                  },
+                  "acc_binders": {
+                    "kind": "Expr::ForEach::AccBinderList",
+                    "loc": null,
+                    "children": []
                   },
                   "body": {
                     "kind": "Expr::Defer",
@@ -5073,6 +5083,11 @@
                       }
                     }
                   },
+                  "acc_binders": {
+                    "kind": "Expr::ForEach::AccBinderList",
+                    "loc": null,
+                    "children": []
+                  },
                   "body": {
                     "kind": "Expr::Defer",
                     "loc": null,
@@ -5193,6 +5208,11 @@
                               }
                             }
                           },
+                          "acc_binders": {
+                            "kind": "Expr::ForEach::AccBinderList",
+                            "loc": null,
+                            "children": []
+                          },
                           "body": {
                             "kind": "Expr::Defer",
                             "loc": null,
@@ -5312,6 +5332,11 @@
                                         }
                                       }
                                     }
+                                  },
+                                  "acc_binders": {
+                                    "kind": "Expr::ForEach::AccBinderList",
+                                    "loc": null,
+                                    "children": []
                                   },
                                   "body": {
                                     "kind": "Expr::Defer",
@@ -7298,6 +7323,11 @@
                       }
                     }
                   },
+                  "acc_binders": {
+                    "kind": "Expr::ForEach::AccBinderList",
+                    "loc": null,
+                    "children": []
+                  },
                   "body": {
                     "kind": "Expr::Defer",
                     "loc": null,
@@ -7391,6 +7421,11 @@
                                 }
                               }
                             }
+                          },
+                          "acc_binders": {
+                            "kind": "Expr::ForEach::AccBinderList",
+                            "loc": null,
+                            "children": []
                           },
                           "body": {
                             "kind": "Expr::Defer",

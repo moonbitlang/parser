@@ -571,6 +571,7 @@ pub(all) enum Expr {
   ForEach(
     binders~ : @list.List[Binder?],
     expr~ : Expr,
+    acc_binders~ : @list.List[(Binder, Expr)],
     body~ : Expr,
     else_block~ : Expr?,
     label~ : Label?,

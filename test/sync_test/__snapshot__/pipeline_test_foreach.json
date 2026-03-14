@@ -164,6 +164,11 @@
                           }
                         }
                       },
+                      "acc_binders": {
+                        "kind": "Expr::ForEach::AccBinderList",
+                        "loc": null,
+                        "children": []
+                      },
                       "body": {
                         "kind": "Expr::Apply",
                         "loc": null,
@@ -373,6 +378,11 @@
                         "children": {}
                       }
                     }
+                  },
+                  "acc_binders": {
+                    "kind": "Expr::ForEach::AccBinderList",
+                    "loc": null,
+                    "children": []
                   },
                   "body": {
                     "kind": "Expr::Apply",
@@ -693,6 +703,11 @@
                             "children": {}
                           }
                         }
+                      },
+                      "acc_binders": {
+                        "kind": "Expr::ForEach::AccBinderList",
+                        "loc": null,
+                        "children": []
                       },
                       "body": {
                         "kind": "Expr::If",
@@ -1106,6 +1121,11 @@
                   }
                 }
               },
+              "acc_binders": {
+                "kind": "Expr::ForEach::AccBinderList",
+                "loc": null,
+                "children": []
+              },
               "body": {
                 "kind": "Expr::Apply",
                 "loc": null,
@@ -1448,6 +1468,11 @@
                     "children": {}
                   }
                 }
+              },
+              "acc_binders": {
+                "kind": "Expr::ForEach::AccBinderList",
+                "loc": null,
+                "children": []
               },
               "body": {
                 "kind": "Expr::If",
@@ -1991,6 +2016,11 @@
                     "children": {}
                   }
                 }
+              },
+              "acc_binders": {
+                "kind": "Expr::ForEach::AccBinderList",
+                "loc": null,
+                "children": []
               },
               "body": {
                 "kind": "Expr::Apply",
@@ -3944,6 +3974,11 @@
                       }
                     }
                   },
+                  "acc_binders": {
+                    "kind": "Expr::ForEach::AccBinderList",
+                    "loc": null,
+                    "children": []
+                  },
                   "body": {
                     "kind": "Expr::Apply",
                     "loc": null,
@@ -4207,6 +4242,11 @@
                       }
                     }
                   },
+                  "acc_binders": {
+                    "kind": "Expr::ForEach::AccBinderList",
+                    "loc": null,
+                    "children": []
+                  },
                   "body": {
                     "kind": "Expr::Apply",
                     "loc": null,
@@ -4285,6 +4325,274 @@
                         "loc": null,
                         "children": {}
                       }
+                    }
+                  },
+                  "else_block": null,
+                  "label": null
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
+      "fun_decl": {
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "init"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
+        }
+      },
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::Let",
+            "loc": null,
+            "children": {
+              "pattern": {
+                "kind": "Pattern::Var",
+                "loc": null,
+                "children": {
+                  "value": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "arr"
+                    }
+                  }
+                }
+              },
+              "expr": {
+                "kind": "Expr::Array",
+                "loc": null,
+                "children": {
+                  "exprs": {
+                    "kind": "Expr::Array::ExprList",
+                    "loc": null,
+                    "children": [
+                      {
+                        "kind": "Expr::Constant",
+                        "loc": null,
+                        "children": {
+                          "constant": {
+                            "kind": "Constant::Int",
+                            "loc": null,
+                            "children": {
+                              "value": "1"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Expr::Constant",
+                        "loc": null,
+                        "children": {
+                          "constant": {
+                            "kind": "Constant::Int",
+                            "loc": null,
+                            "children": {
+                              "value": "2"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Expr::Constant",
+                        "loc": null,
+                        "children": {
+                          "constant": {
+                            "kind": "Constant::Int",
+                            "loc": null,
+                            "children": {
+                              "value": "3"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "body": {
+                "kind": "Expr::ForEach",
+                "loc": null,
+                "children": {
+                  "binders": {
+                    "kind": "Expr::ForEach::BinderList",
+                    "loc": null,
+                    "children": [
+                      {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "x"
+                        }
+                      }
+                    ]
+                  },
+                  "expr": {
+                    "kind": "Expr::Ident",
+                    "loc": null,
+                    "children": {
+                      "id": {
+                        "kind": "Var",
+                        "loc": null,
+                        "children": {
+                          "name": {
+                            "kind": "LongIdent::Ident",
+                            "loc": null,
+                            "children": {
+                              "value": "arr"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "acc_binders": {
+                    "kind": "Expr::ForEach::AccBinderList",
+                    "loc": null,
+                    "children": [
+                      {
+                        "kind": "ForEach::AccBinder",
+                        "loc": null,
+                        "children": {
+                          "binder": {
+                            "kind": "Binder",
+                            "loc": null,
+                            "children": {
+                              "name": "acc"
+                            }
+                          },
+                          "expr": {
+                            "kind": "Expr::Constant",
+                            "loc": null,
+                            "children": {
+                              "constant": {
+                                "kind": "Constant::Int",
+                                "loc": null,
+                                "children": {
+                                  "value": "0"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "body": {
+                    "kind": "Expr::Continue",
+                    "loc": null,
+                    "children": {
+                      "args": {
+                        "kind": "Expr::Continue::ExprList",
+                        "loc": null,
+                        "children": [
+                          {
+                            "kind": "Expr::Infix",
+                            "loc": null,
+                            "children": {
+                              "op": {
+                                "kind": "Var",
+                                "loc": null,
+                                "children": {
+                                  "name": {
+                                    "kind": "LongIdent::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "+"
+                                    }
+                                  }
+                                }
+                              },
+                              "lhs": {
+                                "kind": "Expr::Ident",
+                                "loc": null,
+                                "children": {
+                                  "id": {
+                                    "kind": "Var",
+                                    "loc": null,
+                                    "children": {
+                                      "name": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "acc"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "kind": "Expr::Ident",
+                                "loc": null,
+                                "children": {
+                                  "id": {
+                                    "kind": "Var",
+                                    "loc": null,
+                                    "children": {
+                                      "name": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "x"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "label": null
                     }
                   },
                   "else_block": null,

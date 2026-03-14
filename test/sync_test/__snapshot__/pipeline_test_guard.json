@@ -1447,6 +1447,11 @@
                                   }
                                 }
                               },
+                              "acc_binders": {
+                                "kind": "Expr::ForEach::AccBinderList",
+                                "loc": null,
+                                "children": []
+                              },
                               "body": {
                                 "kind": "Expr::Let",
                                 "loc": null,

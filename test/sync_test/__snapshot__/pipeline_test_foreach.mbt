@@ -98,3 +98,11 @@ fn init {
     println("\{i} => \{x}")
   }
 }
+
+fn init {
+  let arr = [ 1, 2, 3 ]
+  // accumulators
+  for x in arr; acc = 0 {
+    continue acc + x
+  }
+}
