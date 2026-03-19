@@ -395,14 +395,6 @@ local_type_decl -> LocalTypeDecl
       deriving: $6
     }
   }
-  | "type" UIDENT type_ deriving_directive_list {
-    LocalTypeDecl::{
-      tycon : $2,
-      tycon_loc : mk_loc($loc($2)),
-      components: Newtype($3),
-      deriving: $4
-    }
-  }
   ;
 
 extern_fun_header -> (StringLiteral, FunDecl)
@@ -496,23 +488,6 @@ structure_item -> Impl
         loc : mk_loc($sloc),
         attrs : $1,
         is_declare : false
-      }
-    )
-  }
-  | type_header type_ deriving_directive_list {
-    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
-    TopTypeDef(
-      TypeDecl::{
-        tycon,
-        tycon_loc,
-        params,
-        components: Newtype($2),
-        type_vis,
-        doc : DocString::empty(),
-        deriving: $3,
-        loc : mk_loc($sloc),
-        attrs,
-        is_declare
       }
     )
   }

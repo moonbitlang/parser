@@ -161,7 +161,6 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
   match self {
     Abstract => tagged_node0("TypeDesc::Abstract", loc)
     Extern => tagged_node0("TypeDesc::Extern", loc)
-    Newtype(ty) => tagged_node1("TypeDesc::Newtype", ty.loc(), ty.json_repr())
     Error(exception_decl) =>
       tagged_node1("TypeDesc::Error", loc, exception_decl.json_repr(loc))
     Variant(constrs) => {

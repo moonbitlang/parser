@@ -63,7 +63,6 @@ fn attach_docstrings(
           // there is no docstring inside the types
           Abstract
           | Extern
-          | Newtype(_)
           | Alias(_)
           | Error(NoPayload | SinglePayload(_))
           | TupleStruct(_) => ()

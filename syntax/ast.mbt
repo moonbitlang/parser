@@ -138,8 +138,6 @@ pub(all) enum TypeDesc {
   Abstract
   /// `extern type T`
   Extern
-  /// `type TypeName Type`
-  Newtype(Type)
   /// `suberror`
   Error(ExceptionDecl)
   /// `enum T { C1; C2 }`
