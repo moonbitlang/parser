@@ -383,17 +383,6 @@ pub(open) trait MapVisitor {
     decl_body~ : DeclBody,
     loc~ : Location,
   ) -> Impl = _
-  visit_Impl_TopFuncAlias(
-    Self,
-    pkg~ : Label?,
-    type_name~ : Label?,
-    targets~ : @list.List[AliasTarget],
-    vis~ : Visibility,
-    attrs~ : @list.List[Attribute],
-    is_list~ : Bool,
-    doc~ : DocString,
-    loc~ : Location,
-  ) -> Impl = _
   visit_Impl_TopLetDef(
     Self,
     binder~ : Binder,
@@ -407,26 +396,6 @@ pub(open) trait MapVisitor {
     is_declare~ : Bool,
   ) -> Impl = _
   visit_Impl_TopTrait(Self, TraitDecl) -> Impl = _
-  visit_Impl_TopBatchTypeAlias(
-    Self,
-    pkg~ : Label?,
-    targets~ : @list.List[AliasTarget],
-    vis~ : Visibility,
-    loc~ : Location,
-    attrs~ : @list.List[Attribute],
-    is_list~ : Bool,
-    doc~ : DocString,
-  ) -> Impl = _
-  visit_Impl_TopBatchTraitAlias(
-    Self,
-    pkg~ : Label?,
-    targets~ : @list.List[AliasTarget],
-    vis~ : Visibility,
-    loc~ : Location,
-    attrs~ : @list.List[Attribute],
-    is_list~ : Bool,
-    doc~ : DocString,
-  ) -> Impl = _
   visit_Impl_TopImpl(
     Self,
     self_ty~ : Type?,
@@ -799,31 +768,6 @@ impl MapVisitor with visit_Impl_TopFuncDef(env, fun_decl~, decl_body~, loc~) {
 }
 
 ///|
-impl MapVisitor with visit_Impl_TopFuncAlias(
-  env,
-  pkg~,
-  type_name~,
-  targets~,
-  vis~,
-  attrs~,
-  is_list~,
-  doc~,
-  loc~,
-) {
-  MapVisitorBase::visit_Impl_TopFuncAlias(
-    env,
-    pkg~,
-    type_name~,
-    targets~,
-    vis~,
-    attrs~,
-    is_list~,
-    doc~,
-    loc~,
-  )
-}
-
-///|
 impl MapVisitor with visit_Impl_TopLetDef(
   env,
   binder~,
@@ -853,52 +797,6 @@ impl MapVisitor with visit_Impl_TopLetDef(
 ///|
 impl MapVisitor with visit_Impl_TopTrait(env, trait_decl) {
   MapVisitorBase::visit_Impl_TopTrait(env, trait_decl)
-}
-
-///|
-impl MapVisitor with visit_Impl_TopBatchTypeAlias(
-  env,
-  pkg~,
-  targets~,
-  vis~,
-  loc~,
-  attrs~,
-  is_list~,
-  doc~,
-) {
-  MapVisitorBase::visit_Impl_TopBatchTypeAlias(
-    env,
-    pkg~,
-    targets~,
-    vis~,
-    loc~,
-    attrs~,
-    is_list~,
-    doc~,
-  )
-}
-
-///|
-impl MapVisitor with visit_Impl_TopBatchTraitAlias(
-  env,
-  pkg~,
-  targets~,
-  vis~,
-  loc~,
-  attrs~,
-  is_list~,
-  doc~,
-) {
-  MapVisitorBase::visit_Impl_TopBatchTraitAlias(
-    env,
-    pkg~,
-    targets~,
-    vis~,
-    loc~,
-    attrs~,
-    is_list~,
-    doc~,
-  )
 }
 
 ///|
@@ -2266,26 +2164,6 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         attrs~,
         doc~,
       )
-    TopBatchTraitAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
-      env.0.visit_Impl_TopBatchTraitAlias(
-        pkg~,
-        targets~,
-        vis~,
-        loc~,
-        attrs~,
-        is_list~,
-        doc~,
-      )
-    TopBatchTypeAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
-      env.0.visit_Impl_TopBatchTypeAlias(
-        pkg~,
-        targets~,
-        vis~,
-        loc~,
-        attrs~,
-        is_list~,
-        doc~,
-      )
     TopTrait(trait_decl) => env.0.visit_Impl_TopTrait(trait_decl)
     TopLetDef(
       binder~,
@@ -2308,17 +2186,6 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl(
         attrs~,
         doc~,
         is_declare~,
-      )
-    TopFuncAlias(pkg~, type_name~, targets~, vis~, attrs~, is_list~, doc~, loc~) =>
-      env.0.visit_Impl_TopFuncAlias(
-        pkg~,
-        type_name~,
-        targets~,
-        vis~,
-        attrs~,
-        is_list~,
-        doc~,
-        loc~,
       )
     TopFuncDef(fun_decl~, decl_body~, loc~) =>
       env.0.visit_Impl_TopFuncDef(fun_decl~, decl_body~, loc~)
@@ -3881,25 +3748,6 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopFun
 }
 
 ///|
-pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopFuncAlias(
-  env,
-  pkg~,
-  type_name~,
-  targets~,
-  vis~,
-  attrs~,
-  is_list~,
-  doc~,
-  loc~,
-) {
-  let pkg = pkg.map(x => env.0.visit_Label(x))
-  let type_name = type_name.map(x => env.0.visit_Label(x))
-  let targets = targets.map(x => env.0.visit_AliasTarget(x))
-  let vis = env.0.visit_Visibility(vis)
-  TopFuncAlias(pkg~, type_name~, targets~, vis~, attrs~, is_list~, doc~, loc~)
-}
-
-///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopLetDef(
   env,
   binder~,
@@ -3936,40 +3784,6 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopTra
 ) {
   let trait_decl = env.0.visit_TraitDecl(trait_decl)
   TopTrait(trait_decl)
-}
-
-///|
-pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopBatchTypeAlias(
-  env,
-  pkg~,
-  targets~,
-  vis~,
-  loc~,
-  attrs~,
-  is_list~,
-  doc~,
-) {
-  let pkg = pkg.map(x => env.0.visit_Label(x))
-  let targets = targets.map(x => env.0.visit_AliasTarget(x))
-  let vis = env.0.visit_Visibility(vis)
-  TopBatchTypeAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~)
-}
-
-///|
-pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_Impl_TopBatchTraitAlias(
-  env,
-  pkg~,
-  targets~,
-  vis~,
-  loc~,
-  attrs~,
-  is_list~,
-  doc~,
-) {
-  let pkg = pkg.map(x => env.0.visit_Label(x))
-  let targets = targets.map(x => env.0.visit_AliasTarget(x))
-  let vis = env.0.visit_Visibility(vis)
-  TopBatchTraitAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~)
 }
 
 ///|

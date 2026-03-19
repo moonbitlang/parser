@@ -824,16 +824,6 @@ pub(all) enum Impl {
   )
   TopTypeDef(TypeDecl)
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : Location)
-  TopFuncAlias(
-    pkg~ : Label?,
-    type_name~ : Label?,
-    targets~ : @list.List[AliasTarget],
-    vis~ : Visibility,
-    attrs~ : @list.List[Attribute],
-    is_list~ : Bool,
-    mut doc~ : DocString,
-    loc~ : Location
-  )
   TopLetDef(
     binder~ : Binder,
     ty~ : Type?,
@@ -846,24 +836,6 @@ pub(all) enum Impl {
     is_declare~ : Bool
   )
   TopTrait(TraitDecl)
-  TopBatchTypeAlias(
-    pkg~ : Label?,
-    targets~ : @list.List[AliasTarget],
-    vis~ : Visibility,
-    loc~ : Location,
-    attrs~ : @list.List[Attribute],
-    is_list~ : Bool,
-    mut doc~ : DocString
-  )
-  TopBatchTraitAlias(
-    pkg~ : Label?,
-    targets~ : @list.List[AliasTarget],
-    vis~ : Visibility,
-    loc~ : Location,
-    attrs~ : @list.List[Attribute],
-    is_list~ : Bool,
-    mut doc~ : DocString
-  )
   TopImpl(
     self_ty~ : Type?,
     trait_~ : TypeName,

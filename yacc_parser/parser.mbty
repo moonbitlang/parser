@@ -683,19 +683,6 @@ structure_item -> Impl
       decl_body = DeclNone
     )
   }
-  | attributes visibility "fnalias" func_alias_targets {
-    let (pkg, type_name, is_list, targets) = $4
-    TopFuncAlias(
-      pkg~,
-      type_name~,
-      targets~,
-      vis = $2,
-      attrs = $1,
-      is_list~,
-      doc = DocString::empty(),
-      loc = mk_loc($sloc)
-    )
-  }
   | attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
     let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
     let supers = match $6 {
@@ -715,34 +702,6 @@ structure_item -> Impl
       }
     )
   }
-  | attributes visibility "typealias" batch_type_alias_targets {
-    let (is_list, pkg, targets) = $4
-    TopBatchTypeAlias(
-      pkg~,
-      targets~,
-      vis = $2,
-      attrs = $1,
-      is_list~,
-      doc = DocString::empty(),
-      loc = mk_loc($sloc)
-    )
-  }
-  | attributes visibility "typealias" type_ "as" UIDENT optional_type_parameters_no_constraints {
-    TopTypeDef(
-      TypeDecl::{
-        tycon : $6,
-        tycon_loc : mk_loc($loc($6)),
-        params : $7,
-        components: Alias($4),
-        type_vis : $2,
-        doc : DocString::empty(),
-        deriving: @list.empty(),
-        loc : mk_loc($sloc),
-        attrs : $1,
-        is_declare : false
-      }
-    )
-  }
   | type_header "=" type_ deriving_directive_list {
     let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
     TopTypeDef(
@@ -758,18 +717,6 @@ structure_item -> Impl
         attrs,
         is_declare
       }
-    )
-  }
-  | attributes visibility "traitalias" batch_type_alias_targets {
-    let (is_list, pkg, targets) = $4
-    TopBatchTraitAlias(
-      pkg~,
-      targets~,
-      vis = $2,
-      attrs = $1,
-      is_list~,
-      doc = DocString::empty(),
-      loc = mk_loc($sloc)
     )
   }
   | attributes is_async "test" option(loced_string) option(parameters) block_expr_with_local_types {

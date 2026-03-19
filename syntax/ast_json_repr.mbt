@@ -1651,26 +1651,6 @@ pub fn Impl::json_repr(self : Impl) -> Json {
         "fun_decl": fun_decl.json_repr(),
         "decl_body": decl_body.json_repr(loc),
       })
-    TopFuncAlias(pkg~, type_name~, targets~, vis~, attrs~, is_list~, doc~, loc~) =>
-      tagged_node("Impl::TopFuncAlias", loc, {
-        "pkg": option_json_repr(pkg, Label::json_repr),
-        "type_name": option_json_repr(type_name, Label::json_repr),
-        "targets": list_json_repr(
-          "Impl::TopFuncAlias::TargetList",
-          loc,
-          targets,
-          AliasTarget::json_repr,
-        ),
-        "vis": vis.json_repr(loc),
-        "attrs": list_json_repr(
-          "Impl::TopFuncAlias::AttrList",
-          loc,
-          attrs,
-          Attribute::json_repr,
-        ),
-        "is_list": is_list,
-        "doc": doc,
-      })
     TopLetDef(
       binder~,
       ty~,
@@ -1699,44 +1679,6 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       })
     TopTrait(trait_decl) =>
       tagged_node1("Impl::TopTrait", trait_decl.loc, trait_decl.json_repr())
-    TopBatchTypeAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
-      tagged_node("Impl::TopBatchTypeAlias", loc, {
-        "pkg": option_json_repr(pkg, Label::json_repr),
-        "targets": list_json_repr(
-          "Impl::TopBatchTypeAlias::TargetList",
-          loc,
-          targets,
-          AliasTarget::json_repr,
-        ),
-        "vis": vis.json_repr(loc),
-        "attrs": list_json_repr(
-          "Impl::TopBatchTypeAlias::AttrList",
-          loc,
-          attrs,
-          Attribute::json_repr,
-        ),
-        "is_list": is_list,
-        "doc": doc,
-      })
-    TopBatchTraitAlias(pkg~, targets~, vis~, loc~, attrs~, is_list~, doc~) =>
-      tagged_node("Impl::TopBatchTraitAlias", loc, {
-        "pkg": option_json_repr(pkg, Label::json_repr),
-        "targets": list_json_repr(
-          "Impl::TopBatchTraitAlias::TargetList",
-          loc,
-          targets,
-          AliasTarget::json_repr,
-        ),
-        "vis": vis.json_repr(loc),
-        "attrs": list_json_repr(
-          "Impl::TopBatchTraitAlias::AttrList",
-          loc,
-          attrs,
-          Attribute::json_repr,
-        ),
-        "is_list": is_list,
-        "doc": doc,
-      })
     TopImpl(
       self_ty~,
       trait_~,
