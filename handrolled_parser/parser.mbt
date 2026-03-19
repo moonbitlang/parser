@@ -776,11 +776,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           Error(EnumPayload(cs))
         }
         _ => {
-          let typ = self.optional(first_type_, State::parse_type)
-          let exception_decl = match typ {
-            Some(ty) => @syntax.SinglePayload(ty)
-            None => NoPayload
-          }
+          let exception_decl = @syntax.ExceptionDecl::NoPayload
           Error(exception_decl)
         }
       }
