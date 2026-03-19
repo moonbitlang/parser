@@ -2018,9 +2018,6 @@ error_annotation -> ErrorType
 
 return_type -> (Type, ErrorType)
   : type_ { ($1, NoErrorType) }
-  | simple_type "!" { ($1, DefaultErrorType(loc = mk_loc($loc($2)))) }
-  | simple_type "!" error_type { ($1, ErrorType(ty = $3)) }
-  | simple_type "?" error_type { ($1, MaybeError(ty = $3)) }
   | simple_type error_annotation { ($1, $2) }
   ;
 

@@ -5036,28 +5036,11 @@ fn State::parse_return_type(self : Self) -> (@syntax.Type, @syntax.ErrorType) {
       report_missing_return_type(token)
     _ => {
       let (ty_res_is_simple, ty_res) = self.parse_type_aux()
-      match self.peek_token() {
-        _ if !ty_res_is_simple => (ty_res, NoErrorType)
-        EXCLAMATION => {
-          let loc = self.peek_location()
-          self.expect_token(TK_EXCLAMATION)
-          match self.peek_token() {
-            PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) | UNDERSCORE => {
-              let ty = self.parse_error_type()
-              (ty_res, ErrorType(ty~))
-            }
-            _ => (ty_res, DefaultErrorType(loc~))
-          }
-        }
-        QUESTION => {
-          self.skip()
-          let ty = self.parse_error_type()
-          (ty_res, MaybeError(ty~))
-        }
-        _ => {
-          let err = self.parse_error_annotation()
-          (ty_res, err)
-        }
+      if !ty_res_is_simple {
+        (ty_res, NoErrorType)
+      } else {
+        let err = self.parse_error_annotation()
+        (ty_res, err)
       }
     }
   }
