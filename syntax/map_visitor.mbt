@@ -74,7 +74,6 @@ pub(open) trait MapVisitor {
 
   // TypeDesc
   visit_TypeDesc(Self, TypeDesc) -> TypeDesc = _
-  visit_TypeDesc_Newtype(Self, Type) -> TypeDesc = _
   visit_TypeDesc_Error(Self, ExceptionDecl) -> TypeDesc = _
   visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> TypeDesc = _
   visit_TypeDesc_Record(
@@ -1489,11 +1488,6 @@ impl MapVisitor with visit_TypeDesc(env, type_desc) {
 }
 
 ///|
-impl MapVisitor with visit_TypeDesc_Newtype(env, type_) {
-  MapVisitorBase::visit_TypeDesc_Newtype(env, type_)
-}
-
-///|
 impl MapVisitor with visit_TypeDesc_Error(env, exception_decl) {
   MapVisitorBase::visit_TypeDesc_Error(env, exception_decl)
 }
@@ -2550,7 +2544,6 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc(
   match type_desc {
     Abstract => Abstract
     Extern => Extern
-    Newtype(type_) => env.0.visit_TypeDesc_Newtype(type_)
     Error(exception_decl) => env.0.visit_TypeDesc_Error(exception_decl)
     Variant(constr_decls) => env.0.visit_TypeDesc_Variant(constr_decls)
     Record(fields~, constr_decl~) =>
@@ -2558,15 +2551,6 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc(
     TupleStruct(types) => env.0.visit_TypeDesc_TupleStruct(types)
     Alias(type_) => env.0.visit_TypeDesc_Alias(type_)
   }
-}
-
-///|
-pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with visit_TypeDesc_Newtype(
-  env,
-  type_,
-) {
-  let type_ = env.0.visit_Type(type_)
-  Newtype(type_)
 }
 
 ///|

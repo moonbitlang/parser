@@ -381,14 +381,6 @@ fn State::parse_local_type_decl(self : Self) -> @syntax.LocalTypeDecl {
       let deriving = self.parse_deriving_directive_list()
       { tycon, tycon_loc, components: Variant(constrs), deriving }
     }
-    TYPE => {
-      self.expect_token(TK_TYPE)
-      let tycon_loc = self.peek_location()
-      let tycon = self.parse_luident()
-      let typ = self.parse_type()
-      let deriving = self.parse_deriving_directive_list()
-      { tycon, tycon_loc, components: Newtype(typ), deriving }
-    }
     other => {
       let other_loc = self.peek_location()
       self.report_unexpected(other, [TK_STRUCT, TK_ENUM, TK_TYPE], other_loc)
@@ -819,9 +811,25 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           let typ = self.parse_type()
           Alias(typ)
         }
-        _ => {
-          let typ = self.parse_type()
-          Newtype(typ)
+        other => {
+          self.report_unexpected(
+            other,
+            [TK_SEMI, TK_EOF, TK_DERIVE, TK_EQUAL],
+            self.peek_location(),
+          )
+          let loc = self.panic()
+          return TopTypeDef({
+            tycon,
+            tycon_loc,
+            params,
+            components: Abstract,
+            type_vis: vis,
+            doc: DocString::empty(),
+            deriving: @list.empty(),
+            loc,
+            attrs,
+            is_declare,
+          })
         }
       }
       let deriving = self.parse_deriving_directive_list()
@@ -4561,7 +4569,7 @@ fn State::parse_block_expr_with_local_types(
     let local_types = []
     // TODO: maybe use delimited_with_follow instead
     let mut allow_following_stmt = true
-    while self.mode is Normal && self.peek_token() is (STRUCT | ENUM | TYPE) {
+    while self.mode is Normal && self.peek_token() is (STRUCT | ENUM) {
       self.push_sync(TK_SEMI)
       local_types.push(self.parse_local_type_decl())
       self.pop_sync(TK_SEMI)
