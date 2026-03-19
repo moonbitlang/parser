@@ -1325,11 +1325,6 @@ test "lexing pipeline_test_arrayview_make_bind" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_local_type6" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing pipeline_test_value_enum_object" (t : @test.Test) {
   lexer_test(t)
 }
@@ -2793,11 +2788,6 @@ test "lexing pipeline_test_error_polymorphism" (t : @test.Test) {
 
 ///|
 test "lexing parse_test_async_test" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing pipeline_test_typing_coverage_fnalias" (t : @test.Test) {
   lexer_test(t)
 }
 

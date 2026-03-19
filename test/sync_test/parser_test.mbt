@@ -461,11 +461,6 @@ test "pipeline_test_smart_switch_constant" (t : @test.Test) {
 }
 
 ///|
-test "pipeline_test_typing_coverage_fnalias" (t : @test.Test) {
-  t.run()
-}
-
-///|
 test "pipeline_test_global_func" (t : @test.Test) {
   t.run()
 }
@@ -1067,11 +1062,6 @@ test "pipeline_test_int64_range_pattern" (t : @test.Test) {
 
 ///|
 test "pipeline_test_tokenize_suffix" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "pipeline_test_local_type6" (t : @test.Test) {
   t.run()
 }
 
