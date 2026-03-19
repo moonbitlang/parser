@@ -1880,11 +1880,6 @@ argument -> Argument
     let arg_value = @syntax.make_ident_expr(loc = mk_loc($loc($1)), Var::{ name: Ident(name = $1), loc: mk_loc($loc($1)) })
     Argument::{ value: arg_value, kind: LabelledPun(label) }
   }
-  | POST_LABEL "=" expr {
-    let label = Label::{ name: $1, loc: mk_loc($loc($1)) }
-    let arg_value = $3
-    Argument::{ value: arg_value, kind: Labelled(label) }
-  }
   | LIDENT "?" { 
     let loc = mk_loc($loc($1))
     let label = Label::{ name: $1, loc }
