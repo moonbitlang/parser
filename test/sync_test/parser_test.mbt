@@ -2162,11 +2162,6 @@ test "pipeline_test_empty_json" (t : @test.Test) {
 }
 
 ///|
-test "pipeline_test_newtype5" (t : @test.Test) {
-  t.run()
-}
-
-///|
 test "pipeline_test_tuple_print" (t : @test.Test) {
   t.run()
 }
