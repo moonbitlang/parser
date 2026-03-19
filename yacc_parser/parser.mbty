@@ -491,12 +491,9 @@ structure_item -> Impl
       }
     )
   }
-  | suberror_header option(type_) deriving_directive_list {
+  | suberror_header deriving_directive_list {
     let (attrs, type_vis, is_declare, tycon, tycon_loc) = $1
-    let exception_decl : ExceptionDecl = match $2 {
-      None => NoPayload
-      Some(ty) => SinglePayload(ty)
-    }
+    let exception_decl : ExceptionDecl = NoPayload
     TopTypeDef(
       TypeDecl::{
         tycon,
@@ -505,7 +502,7 @@ structure_item -> Impl
         components: Error(exception_decl),
         type_vis,
         doc : DocString::empty(),
-        deriving: $3,
+        deriving: $2,
         loc : mk_loc($sloc),
         attrs,
         is_declare
