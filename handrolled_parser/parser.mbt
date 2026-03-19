@@ -718,47 +718,6 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
   }
   let vis = self.parse_visibility()
   match self.peek_token() {
-    TYPE if self.peek_token(nth=1) is EXCLAMATION => {
-      self.expect_token(TK_TYPE)
-      self.expect_token(TK_EXCLAMATION)
-      let tycon_loc = self.peek_location()
-      let tycon = self.parse_luident()
-      let components : @syntax.TypeDesc = match self.peek_token() {
-        LBRACE => {
-          let cs = self.surround_series(
-              invalid_delims=[TK_COMMA],
-              left=TK_LBRACE,
-              right=TK_RBRACE,
-              delim=TK_SEMI,
-              State::parse_constr_decl,
-            )
-            |> @list.from_array
-          Error(EnumPayload(cs))
-        }
-        _ => {
-          let typ = self.optional(first_type_, State::parse_type)
-          let exception_decl = match typ {
-            Some(ty) => @syntax.SinglePayload(ty)
-            None => NoPayload
-          }
-          Error(exception_decl)
-        }
-      }
-      let deriving = self.parse_deriving_directive_list()
-      let loc = self.loc_start_with(spos)
-      @syntax.TopTypeDef({
-        tycon,
-        tycon_loc,
-        params: @list.new(),
-        components,
-        type_vis: vis,
-        doc: @syntax.DocString::empty(),
-        deriving,
-        loc,
-        attrs,
-        is_declare,
-      })
-    }
     SUBERROR => {
       self.expect_token(TK_SUBERROR)
       let tycon_loc = self.peek_location()
