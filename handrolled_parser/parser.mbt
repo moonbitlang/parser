@@ -443,7 +443,10 @@ fn State::parse_fun_decl(
     )
     |> @list.from_array
   })
-  let params_loc = self.loc_start_with(param_loc_start)
+  let params_loc = match decl_params {
+    Some(_) => self.loc_start_with(param_loc_start)
+    None => self.empty_loc()
+  }
   let (return_type, error_type) = self.parse_func_return_type()
   let loc = self.loc_start_with(spos)
   {
@@ -4259,8 +4262,8 @@ fn State::parse_simple_expr(
               self.parse_semi_trailing_record()
             COLON | COMMA | RBRACE => self.parse_record_expr(type_name=None)
             _ => {
-              let loc = self.loc_start_with(spos)
               let expr = self.parse_block_expr()
+              let loc = self.loc_start_with(spos)
               Group(expr~, group=Brace, loc~)
             }
           }
@@ -4276,8 +4279,8 @@ fn State::parse_simple_expr(
         | BYTES(_)
         | STRING(_) if self.peek_token(nth=2) is COLON => self.parse_map_expr()
         _ => {
-          let loc = self.loc_start_with(spos)
           let expr = self.parse_block_expr()
+          let loc = self.loc_start_with(spos)
           Group(expr~, group=Brace, loc~)
         }
       }
