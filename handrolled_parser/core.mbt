@@ -122,6 +122,11 @@ fn State::loc_start_with(state : Self, start : Position) -> Location {
 }
 
 ///|
+fn State::empty_loc(state : Self) -> Location {
+  { start: state.parsed_position, end: state.parsed_position }
+}
+
+///|
 fn State::peek_location(state : Self) -> Location {
   let (_, start, end) = state.peek()
   { start, end }
