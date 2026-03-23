@@ -290,7 +290,7 @@ test {
             "loc": {
               "file": "",
               "start": { "line": 2, "column": 4 },
-              "end": { "line": 2, "column": 8 },
+              "end": { "line": 4, "column": 5 },
             },
             "children": {
               "pattern": {
@@ -318,7 +318,7 @@ test {
                 "loc": {
                   "file": "",
                   "start": { "line": 2, "column": 9 },
-                  "end": { "line": 2, "column": 8 },
+                  "end": { "line": 4, "column": 5 },
                 },
                 "children": {
                   "expr": {
@@ -432,7 +432,7 @@ test {
                     "loc": {
                       "file": "",
                       "start": { "line": 2, "column": 9 },
-                      "end": { "line": 2, "column": 8 },
+                      "end": { "line": 4, "column": 5 },
                     },
                     "children": {},
                   },
