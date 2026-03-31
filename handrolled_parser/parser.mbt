@@ -5196,6 +5196,13 @@ pub fn parse_expr(tokens : Array[Triple]) -> (@syntax.Expr, Array[Report]) {
     mode: Normal,
     parsed_position: dummy_pos,
   }
-  let expr = self.parse_expr()
+  let loc_start = self.peek_spos()
+  let (stmts, _) = self.series_with_follow(delim=TK_SEMI, follow_set=[TK_EOF], fn(
+    s,
+  ) -> Statement {
+    s.parse_stmt()
+  })
+  let loc = self.loc_start_with(loc_start)
+  let expr = Statement::compact_rev(@list.from_array(stmts).rev(), loc~)
   (expr, self.diagnostics)
 }
