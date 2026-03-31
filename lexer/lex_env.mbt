@@ -90,11 +90,11 @@ fn LexEnv::add_token(
       // Make sure add trailing newline if the comment is at end of file
       let trailing_newlines = @cmp.minimum(2, count_newlines(i, 1))
       let (_, start, end) = self.tokens[i]
-      let kind = if leading_newlines == 0 && not(at_file_start) {
+      let kind = if leading_newlines == 0 && !at_file_start {
         CommentKind::InlineTrailing
       } else {
         Ownline(
-          leading_blank_line=leading_newlines == 2 && not(at_file_start),
+          leading_blank_line=leading_newlines == 2 && !at_file_start,
           trailing_blank_line=trailing_newlines == 2,
         )
       }

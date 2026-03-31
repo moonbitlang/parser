@@ -13,7 +13,7 @@ fn @test.Test::run(t : Self, filename : String) -> Unit raise {
   )
   let mbti = @mbti_parser.mbti(
     lex_result.tokens.filter(fn(triple) {
-      not(triple.0 is (NEWLINE | COMMENT(_)))
+      !(triple.0 is (NEWLINE | COMMENT(_)))
     }),
     initial_pos=@basic.Position::{ fname: filename, lnum: 1, bol: 0, cnum: 0 },
   )

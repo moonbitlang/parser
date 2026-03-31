@@ -611,7 +611,7 @@ fn lex_tokens(
     // Dot with number
     ("\.[0-9]+" as dot_int, rest) => {
       let digits_str = dot_int.sub(start=1, end=dot_int.length()) // Remove the '.'
-      let idx = @strconv.parse_int(digits_str) catch {
+      let idx = @string.parse_int(digits_str) catch {
         _ => {
           let full_str = dot_int.to_string()
           env.add_lexing_error(
@@ -1057,7 +1057,7 @@ fn lex_string(
           string_repr_buf.write_char('"')
           process_string(rest, start_pos)
         } else {
-          if not(string_repr_buf.is_empty()) {
+          if !string_repr_buf.is_empty() {
             add_literal(
               string_repr_buf.to_string(),
               start_pos,
@@ -1104,7 +1104,7 @@ fn lex_string(
         rest
       ) =>
         if allow_interp {
-          if not(string_repr_buf.is_empty()) {
+          if !string_repr_buf.is_empty() {
             add_literal(
               string_repr_buf.to_string(),
               start_pos,
@@ -1144,7 +1144,7 @@ fn lex_string(
           end=env.calc_offset(base~, input),
           UnterminatedString,
         )
-        if not(string_repr_buf.is_empty()) {
+        if !string_repr_buf.is_empty() {
           add_literal(
             string_repr_buf.to_string(),
             start_pos,
@@ -1157,10 +1157,10 @@ fn lex_string(
       // CRLF
       ("[\r\n]", rest) => {
         let end_pos = env.calc_offset(base~, rest)
-        if not(end_with_newline) {
+        if !end_with_newline {
           env.add_lexing_error(start=start_pos, end=end_pos, UnterminatedString)
         }
-        if not(string_repr_buf.is_empty()) {
+        if !string_repr_buf.is_empty() {
           add_literal(string_repr_buf.to_string(), start_pos, end_pos)
         }
         // Need to back off to handle NEWLINE token

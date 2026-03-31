@@ -18,8 +18,7 @@ pub fn structure(Array[(@tokens.Token, @basic.Position, @basic.Position)], initi
 pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
   UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
-}
-pub impl @debug.Debug for ParseError
+} derive(@debug.Debug)
 
 // Types and methods
 

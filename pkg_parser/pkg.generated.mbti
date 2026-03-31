@@ -26,16 +26,14 @@ pub(all) enum Ast {
   Float(float~ : String, loc~ : @basic.Location)
   Arr(content~ : Array[Ast], loc~ : @basic.Location)
   Obj(map~ : Map[String, Ast], loc~ : @basic.Location)
-}
+} derive(Eq, @debug.Debug)
 pub fn Ast::as_array(Self) -> Array[Self]?
 pub fn Ast::as_bool(Self) -> Bool?
 pub fn Ast::as_number(Self) -> String?
 pub fn Ast::as_object(Self) -> Map[String, Self]?
 pub fn Ast::as_string(Self) -> String?
 pub fn Ast::loc(Self) -> @basic.Location
-pub impl Eq for Ast
 pub impl ToJson for Ast
-pub impl @debug.Debug for Ast
 
 // Type aliases
 

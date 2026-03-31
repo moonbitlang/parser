@@ -15,8 +15,7 @@ pub fn mbti(Array[(@tokens.Token, @basic.Position, @basic.Position)], initial_po
 pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
   UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
-}
-pub impl @debug.Debug for ParseError
+} derive(@debug.Debug)
 
 // Types and methods
 

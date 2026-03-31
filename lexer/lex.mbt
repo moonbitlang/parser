@@ -35,7 +35,7 @@ pub fn tokens_from_string(
   }
   lex_tokens(str, base=str, env~, preserve_comment=env.preserve_comment())
   let docstrings = env.docstrings
-  if not(docstrings.is_empty()) {
+  if !docstrings.is_empty() {
     let last_idx = docstrings.length() - 1
     docstrings[last_idx] = docstrings[last_idx].rev()
   }
