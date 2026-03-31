@@ -25,30 +25,23 @@ pub(all) enum LocStyle {
 pub(all) struct Location {
   start : Position
   end : Position
-}
+} derive(Compare, Eq, Hash, @debug.Debug)
 pub fn Location::merge(Self, Self) -> Self
 pub fn Location::trim_first_char(Self) -> Self
 pub fn Location::trim_last_char(Self) -> Self
-pub impl Compare for Location
-pub impl Eq for Location
-pub impl Hash for Location
 pub impl Show for Location
 pub impl ToJson for Location
-pub impl @debug.Debug for Location
 
 pub(all) struct Position {
   fname : String
   lnum : Int
   bol : Int
   cnum : Int
-}
+} derive(Hash, ToJson, @debug.Debug)
 pub fn Position::column(Self) -> Int
 pub impl Compare for Position
 pub impl Eq for Position
-pub impl Hash for Position
 pub impl Show for Position
-pub impl ToJson for Position
-pub impl @debug.Debug for Position
 
 pub(all) struct Report {
   loc : Location

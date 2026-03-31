@@ -15,27 +15,24 @@ pub fn payloads(Array[(@tokens.Token, @basic.Position, @basic.Position)], initia
 pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
   UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
-}
-pub impl @debug.Debug for ParseError
+} derive(@debug.Debug)
 
 // Types and methods
 pub(all) struct Attribute {
   loc : @basic.Location
   raw : String
   parsed : Expr?
-}
+} derive(@debug.Debug)
 pub fn Attribute::name(Self) -> String?
 pub fn Attribute::new(loc~ : @basic.Location, (String, String?, String)) -> Self
 pub impl ToJson for Attribute
-pub impl @debug.Debug for Attribute
 
 pub(all) enum Expr {
   Ident(Id)
   String(String)
   Apply(Id, @list.List[Prop])
   Bool(Bool)
-}
-pub impl @debug.Debug for Expr
+} derive(@debug.Debug)
 
 pub(all) struct Id {
   qual : String?
@@ -47,8 +44,7 @@ pub impl @debug.Debug for Id
 pub(all) enum Prop {
   Labeled(String, Expr)
   Expr(Expr)
-}
-pub impl @debug.Debug for Prop
+} derive(@debug.Debug)
 
 // Type aliases
 

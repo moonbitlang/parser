@@ -59,8 +59,7 @@ pub(all) struct MethodSelfType {
 pub(all) struct Name {
   name : String
   loc : @basic.Location
-}
-pub impl ToJson for Name
+} derive(ToJson)
 
 pub(all) struct PackageImport {
   name : String

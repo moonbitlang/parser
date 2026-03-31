@@ -2,7 +2,7 @@ import {
   "moonbitlang/parser/tokens",
   "moonbitlang/parser/basic",
   "moonbitlang/core/list",
-  "moonbitlang/core/strconv",
+  "moonbitlang/core/string",
   "moonbitlang/core/cmp",
   "moonbitlang/core/ref",
   "moonbitlang/core/hashset",
