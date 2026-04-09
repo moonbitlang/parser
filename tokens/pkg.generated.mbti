@@ -271,9 +271,10 @@ pub(all) enum TokenKind {
   TK_LEXMATCH
   TK_LEXMATCH_QUESTION
   TK_PACKAGE
-} derive(Compare, Eq, Hash, @debug.Debug)
+} derive(Compare, Eq, Hash)
 pub fn TokenKind::to_expect_string(Self) -> String
 pub impl Show for TokenKind
+pub impl @debug.Debug for TokenKind
 
 // Type aliases
 pub type ByteLiteral = String
