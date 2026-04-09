@@ -2945,21 +2945,23 @@ fn State::parse_lex_pattern_sequence(
 ) -> @list.List[@syntax.LexPattern] {
   let first = self.parse_lex_atom_pattern()
   let pats = [first]
-  loop self.peek_token() {
-    SEMI(_)
-    | REGEX_LITERAL(_)
-    | REGEX_INTERP(_)
-    | STRING(_)
-    | INTERP(_)
-    | LPAREN as tok => {
-      if tok is SEMI(_) {
-        self.skip()
+  for tok = self.peek_token() {
+    match tok {
+      SEMI(_)
+      | REGEX_LITERAL(_)
+      | REGEX_INTERP(_)
+      | STRING(_)
+      | INTERP(_)
+      | LPAREN => {
+        if tok is SEMI(_) {
+          self.skip()
+        }
+        let pat = self.parse_lex_atom_pattern()
+        pats.push(pat)
+        continue self.peek_token()
       }
-      let pat = self.parse_lex_atom_pattern()
-      pats.push(pat)
-      continue self.peek_token()
+      _ => break ()
     }
-    _ => ()
   }
   @list.from_array(pats)
 }

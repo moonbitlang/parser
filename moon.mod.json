@@ -2,7 +2,8 @@
   "name": "moonbitlang/parser",
   "version": "0.2.5",
   "deps": {
-    "moonbitlang/x": "0.4.39"
+    "moonbitlang/x": "0.4.39",
+    "moonbitlang/yacc": "0.7.13"
   },
   "bin-deps": {
     "moonbitlang/yacc": "0.7.12"
@@ -17,5 +18,7 @@
     "MoonBit"
   ],
   "description": "AST and parsers for the MoonBit programming language",
-  "exclude" : ["test"]
+  "exclude": [
+    "test"
+  ]
 }

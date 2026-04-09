@@ -316,32 +316,36 @@ fn[C] ASIContext::add_token(
       }
     _ if self.last_unhandled_newline >= 0 => {
       // try insert
-      loop self.last_unhandled_newline - 1 {
-        0..<_ as top =>
-          match tokens[top] {
-            (COMMENT(_), _, _) => continue top - 1
-            (last_token, _, endp) =>
-              if can_occur_before_semicolon(last_token) &&
-                can_occur_after_semicolon(next_token) {
-                match (last_token, next_token) {
-                  (
-                    MULTILINE_STRING(_)
-                    | MULTILINE_INTERP(_),
-                    MULTILINE_STRING(_)
-                    | MULTILINE_INTERP(_),
-                  ) => ()
-                  _ => {
-                    tokens.insert(top + 1, (SEMI(false), endp, endp))
-                    match last_unhandled_comment.val {
-                      Some((c, i)) if i >= top + 1 =>
-                        last_unhandled_comment.val = Some((c, i + 1))
-                      _ => ()
+      for top = self.last_unhandled_newline - 1 {
+        match top {
+          0..<_ as top =>
+            match tokens[top] {
+              (COMMENT(_), _, _) => continue top - 1
+              (last_token, _, endp) => {
+                if can_occur_before_semicolon(last_token) &&
+                  can_occur_after_semicolon(next_token) {
+                  match (last_token, next_token) {
+                    (
+                      MULTILINE_STRING(_)
+                      | MULTILINE_INTERP(_),
+                      MULTILINE_STRING(_)
+                      | MULTILINE_INTERP(_),
+                    ) => ()
+                    _ => {
+                      tokens.insert(top + 1, (SEMI(false), endp, endp))
+                      match last_unhandled_comment.val {
+                        Some((c, i)) if i >= top + 1 =>
+                          last_unhandled_comment.val = Some((c, i + 1))
+                        _ => ()
+                      }
                     }
                   }
                 }
+                break ()
               }
-          }
-        _ => ()
+            }
+          _ => break ()
+        }
       }
       self.last_unhandled_newline = -1
     }

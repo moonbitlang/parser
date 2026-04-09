@@ -2,7 +2,6 @@
 %derive<Eq> TokenKind
 %derive<Hash> TokenKind
 %derive<Compare> TokenKind
-%derive<Debug> TokenKind
 %position<Position>
 %derive<Debug> ParseError
 
