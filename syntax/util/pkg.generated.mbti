@@ -13,17 +13,20 @@ import {
 
 // Types and methods
 pub(all) enum Statement {
-  StmtExpr(@syntax.Expr)
-  StmtLet(pat~ : @syntax.Pattern, expr~ : @syntax.Expr, loc~ : @basic.Location)
-  StmtGuard(cond~ : @syntax.Expr, otherwise~ : @syntax.Expr?, loc~ : @basic.Location)
-  StmtLetmut(binder~ : @syntax.Binder, ty_opt~ : @syntax.Type?, expr~ : @syntax.Expr, loc~ : @basic.Location)
-  StmtFunc(binder~ : @syntax.Binder, func~ : @syntax.Func, loc~ : @basic.Location)
-  StmtLetand(bindings~ : @list.List[(@syntax.Binder, @syntax.Type?, @syntax.Func)], loc~ : @basic.Location)
-  StmtDefer(expr~ : @syntax.Expr, loc~ : @basic.Location)
+  StmtExpr(expr~ : @syntax.Expr, semi_loc~ : @basic.Location?)
+  StmtLet(pat~ : @syntax.Pattern, expr~ : @syntax.Expr, loc~ : @basic.Location, let_loc~ : @basic.Location?, equal_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
+  StmtGuard(cond~ : @syntax.Expr, otherwise~ : @syntax.Expr?, loc~ : @basic.Location, guard_loc~ : @basic.Location?, else_loc~ : @basic.Location?, else_lbrace_loc~ : @basic.Location?, else_rbrace_loc~ : @basic.Location?, else_semi_locs~ : @list.List[@basic.Location], else_trailing_semi_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
+  StmtLetmut(binder~ : @syntax.Binder, ty_opt~ : @syntax.Type?, expr~ : @syntax.Expr, loc~ : @basic.Location, let_loc~ : @basic.Location?, mut_loc~ : @basic.Location?, equal_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
+  StmtFunc(binder~ : @syntax.Binder, func~ : @syntax.Func, loc~ : @basic.Location, fn_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
+  StmtLetand(bindings~ : @list.List[(@syntax.Binder, @syntax.Type?, @syntax.Func)], loc~ : @basic.Location, letrec_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
+  StmtDefer(expr~ : @syntax.Expr, loc~ : @basic.Location, defer_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
 }
-pub fn Statement::collect_letrec(loc~ : @basic.Location, @list.List[(@syntax.Binder, @syntax.Func)], @list.List[Self], @syntax.Expr) -> @syntax.Expr
+pub fn Statement::attach_semi_locs(@list.List[Self], @list.List[@basic.Location], @basic.Location?) -> @list.List[Self]
+pub fn Statement::collect_letrec(loc~ : @basic.Location, @list.List[(@syntax.Binder, @syntax.Func)], @list.List[@basic.Location], semi_loc~ : @basic.Location?, @list.List[Self], @syntax.Expr) -> @syntax.Expr
 pub fn Statement::collect_rev(@list.List[Self], @syntax.Expr) -> @syntax.Expr
 pub fn Statement::compact_rev(@list.List[Self], loc~ : @basic.Location) -> @syntax.Expr
+pub fn Statement::loc(Self) -> @basic.Location
+pub fn Statement::with_semi_loc(Self, @basic.Location?) -> Self
 
 // Type aliases
 

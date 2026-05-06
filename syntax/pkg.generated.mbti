@@ -116,9 +116,9 @@ pub(all) enum ArgumentKind {
 
 pub(all) enum ArrayPattern {
   Pattern(Pattern)
-  StringSpread(str~ : String, loc~ : @basic.Location)
-  BytesSpread(bytes~ : String, loc~ : @basic.Location)
-  ConstSpread(binder~ : Binder, pkg~ : String?, loc~ : @basic.Location)
+  StringSpread(str~ : String, loc~ : @basic.Location, dotdot_loc~ : @basic.Location?)
+  BytesSpread(bytes~ : String, loc~ : @basic.Location, dotdot_loc~ : @basic.Location?)
+  ConstSpread(binder~ : Binder, pkg~ : String?, loc~ : @basic.Location, dotdot_loc~ : @basic.Location?)
 }
 
 pub(all) enum ArrayPatterns {
@@ -139,7 +139,9 @@ pub(all) struct Binder {
 pub(all) struct Case {
   pattern : Pattern
   guard_ : Expr?
+  guard_keyword_loc : @basic.Location?
   body : Expr
+  fat_arrow_loc : @basic.Location?
 }
 
 pub(all) enum Constant {
@@ -177,9 +179,12 @@ pub(all) struct ConstrName {
 }
 
 pub(all) struct ConstrParam {
+  loc : @basic.Location
   ty : Type
   mut_ : Bool
   label : Label?
+  mut_loc : @basic.Location?
+  colon_loc : @basic.Location?
 }
 
 pub(all) struct ConstrPatArg {
@@ -201,7 +206,7 @@ pub(all) enum ConstructorExtraInfo {
 }
 
 pub(all) enum DeclBody {
-  DeclBody(local_types~ : @list.List[LocalTypeDecl], expr~ : Expr)
+  DeclBody(local_types~ : @list.List[LocalTypeDecl], expr~ : Expr, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, semi_locs~ : @list.List[@basic.Location], trailing_semi_loc~ : @basic.Location?)
   DeclStubs(FuncStubs)
   DeclNone
 }
@@ -236,7 +241,7 @@ pub(all) enum ErrorType {
   DefaultErrorType(loc~ : @basic.Location)
   NoErrorType
   Noraise(loc~ : @basic.Location)
-  MaybeError(ty~ : Type)
+  MaybeError(ty~ : Type, question_loc~ : @basic.Location?)
 }
 
 pub(all) enum ExceptionDecl {
@@ -246,7 +251,7 @@ pub(all) enum ExceptionDecl {
 }
 
 pub(all) enum Expr {
-  Apply(func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
+  Apply(func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location, bang_loc~ : @basic.Location?, question_loc~ : @basic.Location?, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
   Infix(op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
   Unary(op~ : Var, expr~ : Expr, loc~ : @basic.Location)
   Array(exprs~ : @list.List[Expr], loc~ : @basic.Location, lbracket_loc~ : @basic.Location?, rbracket_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
@@ -260,43 +265,43 @@ pub(all) enum Expr {
   Interp(elems~ : @list.List[InterpElem], loc~ : @basic.Location)
   Constraint(expr~ : Expr, ty~ : Type, loc~ : @basic.Location)
   Constr(constr~ : Constructor, loc~ : @basic.Location)
-  While(loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @basic.Location)
+  While(loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @basic.Location, while_loc~ : @basic.Location?, loop_lbrace_loc~ : @basic.Location?, loop_rbrace_loc~ : @basic.Location?, nobreak_loc~ : @basic.Location?, nobreak_lbrace_loc~ : @basic.Location?, nobreak_rbrace_loc~ : @basic.Location?)
   Function(func~ : Func, loc~ : @basic.Location)
   Ident(id~ : Var, loc~ : @basic.Location)
-  If(cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @basic.Location)
-  Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location)
-  Is(expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location)
-  IsLexMatch(expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location)
-  Defer(expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
-  LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location)
-  LetRec(bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location)
-  LetAnd(bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location)
-  Let(pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
-  Sequence(exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location)
+  If(cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @basic.Location, if_loc~ : @basic.Location?, else_loc~ : @basic.Location?, if_lbrace_loc~ : @basic.Location?, if_rbrace_loc~ : @basic.Location?, else_lbrace_loc~ : @basic.Location?, else_rbrace_loc~ : @basic.Location?)
+  Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location, guard_loc~ : @basic.Location?, else_loc~ : @basic.Location?, else_lbrace_loc~ : @basic.Location?, else_rbrace_loc~ : @basic.Location?, else_semi_locs~ : @list.List[@basic.Location], else_trailing_semi_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
+  Is(expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location, is_loc~ : @basic.Location?)
+  IsLexMatch(expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location, lexmatch_loc~ : @basic.Location?, question_loc~ : @basic.Location?, with_loc~ : @basic.Location?)
+  Defer(expr~ : Expr, body~ : Expr, loc~ : @basic.Location, defer_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
+  LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location, fn_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
+  LetRec(bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location, fn_locs~ : @list.List[@basic.Location], semi_loc~ : @basic.Location?)
+  LetAnd(bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location, letrec_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
+  Let(pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location, let_loc~ : @basic.Location?, equal_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
+  Sequence(exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location, semi_locs~ : @list.List[@basic.Location])
   Tuple(exprs~ : @list.List[Expr], loc~ : @basic.Location, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
   Record(type_name~ : TypeName?, fields~ : @list.List[FieldDef], trailing~ : TrailingMark, loc~ : @basic.Location, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
   RecordUpdate(type_name~ : TypeName?, record~ : Expr, fields~ : @list.List[FieldDef], loc~ : @basic.Location, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?, dotdot_loc~ : @basic.Location?)
   Field(record~ : Expr, accessor~ : Accessor, loc~ : @basic.Location)
-  Method(type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location)
-  DotApply(self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @basic.Location, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
+  Method(type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location, coloncolon_loc~ : @basic.Location?)
+  DotApply(self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @basic.Location, bang_loc~ : @basic.Location?, question_loc~ : @basic.Location?, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
   As(expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location)
   Mutate(record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location)
-  Match(expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location)
-  LexMatch(strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location)
-  LetMut(binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
+  Match(expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location, match_keyword_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?)
+  LexMatch(strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location, lexmatch_loc~ : @basic.Location?, with_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?)
+  LetMut(binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location, let_loc~ : @basic.Location?, mut_loc~ : @basic.Location?, equal_loc~ : @basic.Location?, semi_loc~ : @basic.Location?)
   Pipe(lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
   Assign(var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location)
   Hole(loc~ : @basic.Location, kind~ : Hole)
-  Return(return_value~ : Expr?, loc~ : @basic.Location)
-  Raise(err_value~ : Expr, loc~ : @basic.Location)
+  Return(return_value~ : Expr?, loc~ : @basic.Location, return_loc~ : @basic.Location?)
+  Raise(err_value~ : Expr, loc~ : @basic.Location, raise_loc~ : @basic.Location?)
   Unit(loc~ : @basic.Location, faked~ : Bool)
-  Break(arg~ : Expr?, label~ : Label?, loc~ : @basic.Location)
-  Continue(args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location)
-  Loop(arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location)
-  For(binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, where_clause~ : WhereClause?, label~ : Label?, loc~ : @basic.Location)
-  ForEach(binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location)
-  Try(body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location)
-  TryOperator(body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location)
+  Break(arg~ : Expr?, label~ : Label?, loc~ : @basic.Location, break_loc~ : @basic.Location?)
+  Continue(args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location, continue_loc~ : @basic.Location?)
+  Loop(arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location, loop_keyword_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?)
+  For(binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, where_clause~ : WhereClause?, label~ : Label?, loc~ : @basic.Location, for_loc~ : @basic.Location?, body_lbrace_loc~ : @basic.Location?, body_rbrace_loc~ : @basic.Location?, nobreak_loc~ : @basic.Location?, nobreak_lbrace_loc~ : @basic.Location?, nobreak_rbrace_loc~ : @basic.Location?, header_semi_locs~ : @list.List[@basic.Location])
+  ForEach(binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location, for_loc~ : @basic.Location?, in_loc~ : @basic.Location?, body_lbrace_loc~ : @basic.Location?, body_rbrace_loc~ : @basic.Location?, nobreak_loc~ : @basic.Location?, nobreak_lbrace_loc~ : @basic.Location?, nobreak_rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location])
+  Try(body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location, try_keyword_loc~ : @basic.Location?, catch_keyword_loc~ : @basic.Location?, catch_bang_loc~ : @basic.Location?, catch_lbrace_loc~ : @basic.Location?, catch_rbrace_loc~ : @basic.Location?, noraise_loc~ : @basic.Location?, else_lbrace_loc~ : @basic.Location?, else_rbrace_loc~ : @basic.Location?)
+  TryOperator(body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location, question_loc~ : @basic.Location?, bang_loc~ : @basic.Location?)
   Map(elems~ : @list.List[MapExprElem], loc~ : @basic.Location, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
   Group(expr~ : Expr, group~ : Group, loc~ : @basic.Location, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?)
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
@@ -355,6 +360,18 @@ pub(all) struct FunDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
   loc : @basic.Location
+  declare_loc : @basic.Location?
+  extern_loc : @basic.Location?
+  fn_loc : @basic.Location?
+  type_params_lbracket_loc : @basic.Location?
+  type_params_rbracket_loc : @basic.Location?
+  type_param_comma_locs : @list.List[@basic.Location]
+  type_param_trailing_comma_loc : @basic.Location?
+  params_lparen_loc : @basic.Location?
+  params_rparen_loc : @basic.Location?
+  param_comma_locs : @list.List[@basic.Location]
+  trailing_param_comma_loc : @basic.Location?
+  thin_arrow_loc : @basic.Location?
 }
 
 pub(all) struct Func {
@@ -367,6 +384,11 @@ pub(all) struct Func {
   has_error : @basic.Location?
   is_async : @basic.Location?
   loc : @basic.Location
+  fn_loc : @basic.Location?
+  body_lbrace_loc : @basic.Location?
+  body_rbrace_loc : @basic.Location?
+  body_semi_locs : @list.List[@basic.Location]
+  body_trailing_semi_loc : @basic.Location?
 }
 
 pub(all) enum FuncStubs {
@@ -392,10 +414,10 @@ pub(all) enum Impl {
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location, trailing_semi_loc~ : @basic.Location?)
   TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, is_declare~ : Bool, trailing_semi_loc~ : @basic.Location?)
   TopTrait(TraitDecl, trailing_semi_loc~ : @basic.Location?)
-  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, trailing_semi_loc~ : @basic.Location?)
-  TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, trailing_semi_loc~ : @basic.Location?)
-  TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString, is_declare~ : Bool, trailing_semi_loc~ : @basic.Location?)
-  TopUsing(pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString, trailing_semi_loc~ : @basic.Location?)
+  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, trailing_semi_loc~ : @basic.Location?, impl_loc~ : @basic.Location?, type_params_lbracket_loc~ : @basic.Location?, type_params_rbracket_loc~ : @basic.Location?, type_param_comma_locs~ : @list.List[@basic.Location], type_param_trailing_comma_loc~ : @basic.Location?, for_loc~ : @basic.Location?, with_loc~ : @basic.Location?, params_lparen_loc~ : @basic.Location?, params_rparen_loc~ : @basic.Location?, param_comma_locs~ : @list.List[@basic.Location], trailing_param_comma_loc~ : @basic.Location?, thin_arrow_loc~ : @basic.Location?)
+  TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, trailing_semi_loc~ : @basic.Location?, enumview_loc~ : @basic.Location?, type_params_lbracket_loc~ : @basic.Location?, type_params_rbracket_loc~ : @basic.Location?, type_param_comma_locs~ : @list.List[@basic.Location], type_param_trailing_comma_loc~ : @basic.Location?, constr_lbrace_loc~ : @basic.Location?, constr_rbrace_loc~ : @basic.Location?, for_loc~ : @basic.Location?, with_loc~ : @basic.Location?, params_lparen_loc~ : @basic.Location?, params_rparen_loc~ : @basic.Location?, param_comma_locs~ : @list.List[@basic.Location], trailing_param_comma_loc~ : @basic.Location?)
+  TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString, is_declare~ : Bool, trailing_semi_loc~ : @basic.Location?, declare_loc~ : @basic.Location?, impl_loc~ : @basic.Location?, type_params_lbracket_loc~ : @basic.Location?, type_params_rbracket_loc~ : @basic.Location?, type_param_comma_locs~ : @list.List[@basic.Location], type_param_trailing_comma_loc~ : @basic.Location?, for_loc~ : @basic.Location?)
+  TopUsing(pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString, trailing_semi_loc~ : @basic.Location?, using_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
 }
 pub fn Impl::json_repr(Self) -> Json
 pub fn Impl::loc(Self) -> @basic.Location
@@ -424,7 +446,9 @@ pub(all) struct LexCase {
   pat : @list.List[LexTopPattern]
   pat_loc : @basic.Location
   guard_ : Expr?
+  guard_keyword_loc : @basic.Location?
   body : Expr
+  fat_arrow_loc : @basic.Location?
 }
 
 pub(all) enum LexPattern {
@@ -445,6 +469,17 @@ pub(all) struct LocalTypeDecl {
   tycon_loc : @basic.Location
   components : TypeDesc
   deriving : @list.List[DerivingDirective]
+  keyword_loc : @basic.Location?
+  body_lbrace_loc : @basic.Location?
+  body_rbrace_loc : @basic.Location?
+  body_lparen_loc : @basic.Location?
+  body_rparen_loc : @basic.Location?
+  body_comma_locs : @list.List[@basic.Location]
+  body_trailing_comma_loc : @basic.Location?
+  derive_loc : @basic.Location?
+  derive_lparen_loc : @basic.Location?
+  derive_rparen_loc : @basic.Location?
+  derive_comma_locs : @list.List[@basic.Location]
 }
 
 pub(all) enum LongIdent {
@@ -491,7 +526,7 @@ pub fn Parameter::loc(Self) -> @basic.Location
 pub(all) enum Pattern {
   Alias(pat~ : Pattern, alias_~ : Binder, loc~ : @basic.Location)
   Any(loc~ : @basic.Location)
-  Array(pats~ : ArrayPatterns, loc~ : @basic.Location, lbracket_loc~ : @basic.Location?, rbracket_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
+  Array(pats~ : ArrayPatterns, loc~ : @basic.Location, lbracket_loc~ : @basic.Location?, rbracket_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?, dotdot_loc~ : @basic.Location?)
   Constant(c~ : Constant, loc~ : @basic.Location, uminus_loc~ : @basic.Location?)
   Constraint(pat~ : Pattern, ty~ : Type, loc~ : @basic.Location)
   Constr(constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?, dotdot_loc~ : @basic.Location?)
@@ -538,6 +573,12 @@ pub(all) struct TraitDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
   is_declare : Bool
+  declare_loc : @basic.Location?
+  trait_loc : @basic.Location?
+  colon_loc : @basic.Location?
+  plus_locs : @list.List[@basic.Location]
+  lbrace_loc : @basic.Location?
+  rbrace_loc : @basic.Location?
 }
 
 pub(all) struct TraitMethodDecl {
@@ -551,6 +592,16 @@ pub(all) struct TraitMethodDecl {
   has_default : @basic.Location?
   attrs : @list.List[@attribute.Attribute]
   loc : @basic.Location
+  type_params_lbracket_loc : @basic.Location?
+  type_params_rbracket_loc : @basic.Location?
+  type_param_comma_locs : @list.List[@basic.Location]
+  type_param_trailing_comma_loc : @basic.Location?
+  params_lparen_loc : @basic.Location?
+  params_rparen_loc : @basic.Location?
+  param_comma_locs : @list.List[@basic.Location]
+  trailing_param_comma_loc : @basic.Location?
+  thin_arrow_loc : @basic.Location?
+  equal_loc : @basic.Location?
 }
 
 pub(all) enum TryOperatorKind {
@@ -579,6 +630,24 @@ pub(all) struct TypeDecl {
   deriving : @list.List[DerivingDirective]
   loc : @basic.Location
   is_declare : Bool
+  declare_loc : @basic.Location?
+  extern_loc : @basic.Location?
+  keyword_loc : @basic.Location?
+  type_params_lbracket_loc : @basic.Location?
+  type_params_rbracket_loc : @basic.Location?
+  type_param_comma_locs : @list.List[@basic.Location]
+  type_param_trailing_comma_loc : @basic.Location?
+  equal_loc : @basic.Location?
+  body_lbrace_loc : @basic.Location?
+  body_rbrace_loc : @basic.Location?
+  body_lparen_loc : @basic.Location?
+  body_rparen_loc : @basic.Location?
+  body_comma_locs : @list.List[@basic.Location]
+  body_trailing_comma_loc : @basic.Location?
+  derive_loc : @basic.Location?
+  derive_lparen_loc : @basic.Location?
+  derive_rparen_loc : @basic.Location?
+  derive_comma_locs : @list.List[@basic.Location]
 }
 
 pub(all) struct TypeDeclBinder {
@@ -606,6 +675,8 @@ pub(all) struct TypeVarBinder {
   name : String
   name_loc : @basic.Location
   constraints : @list.List[TypeVarConstraint]
+  colon_loc : @basic.Location?
+  plus_locs : @list.List[@basic.Location]
 }
 
 pub(all) struct TypeVarConstraint {
@@ -633,6 +704,11 @@ pub(all) enum Visibility {
 pub(all) struct WhereClause {
   fields : @list.List[FieldDef]
   loc : @basic.Location
+  where_loc : @basic.Location?
+  lbrace_loc : @basic.Location?
+  rbrace_loc : @basic.Location?
+  comma_locs : @list.List[@basic.Location]
+  trailing_comma_loc : @basic.Location?
 }
 
 // Type aliases
@@ -667,7 +743,7 @@ pub(open) trait IterVisitor {
   visit_ErrorType_ErrorType(Self, ty~ : Type) -> Unit = _
   visit_ErrorType_DefaultErrorType(Self, loc~ : @basic.Location) -> Unit = _
   visit_ErrorType_Noraise(Self, loc~ : @basic.Location) -> Unit = _
-  visit_ErrorType_MaybeError(Self, ty~ : Type) -> Unit = _
+  visit_ErrorType_MaybeError(Self, ty~ : Type, question_loc~ : @basic.Location?) -> Unit = _
   visit_ConstrParam(Self, ConstrParam) -> Unit = _
   visit_ConstrDecl(Self, ConstrDecl) -> Unit = _
   visit_ExceptionDecl(Self, ExceptionDecl) -> Unit = _
@@ -743,9 +819,9 @@ pub(open) trait IterVisitor {
   visit_DotDotBinder_Binder(Self, Binder) -> Unit = _
   visit_ArrayPattern(Self, ArrayPattern) -> Unit = _
   visit_ArrayPattern_Pattern(Self, Pattern) -> Unit = _
-  visit_ArrayPattern_StringSpread(Self, str~ : String, loc~ : @basic.Location) -> Unit = _
-  visit_ArrayPattern_BytesSpread(Self, bytes~ : String, loc~ : @basic.Location) -> Unit = _
-  visit_ArrayPattern_ConstSpread(Self, binder~ : Binder, pkg~ : String?, loc~ : @basic.Location) -> Unit = _
+  visit_ArrayPattern_StringSpread(Self, str~ : String, loc~ : @basic.Location, dotdot_loc~ : @basic.Location?) -> Unit = _
+  visit_ArrayPattern_BytesSpread(Self, bytes~ : String, loc~ : @basic.Location, dotdot_loc~ : @basic.Location?) -> Unit = _
+  visit_ArrayPattern_ConstSpread(Self, binder~ : Binder, pkg~ : String?, loc~ : @basic.Location, dotdot_loc~ : @basic.Location?) -> Unit = _
   visit_ArrayPatterns(Self, ArrayPatterns) -> Unit = _
   visit_ArrayPatterns_Closed(Self, @list.List[ArrayPattern]) -> Unit = _
   visit_ArrayPatterns_Open(Self, @list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder) -> Unit = _
@@ -757,7 +833,7 @@ pub(open) trait IterVisitor {
   visit_Pattern(Self, Pattern) -> Unit = _
   visit_Pattern_Alias(Self, pat~ : Pattern, alias_~ : Binder, loc~ : @basic.Location) -> Unit = _
   visit_Pattern_Any(Self, loc~ : @basic.Location) -> Unit = _
-  visit_Pattern_Array(Self, pats~ : ArrayPatterns, loc~ : @basic.Location) -> Unit = _
+  visit_Pattern_Array(Self, pats~ : ArrayPatterns, loc~ : @basic.Location, dotdot_loc~ : @basic.Location?) -> Unit = _
   visit_Pattern_Constant(Self, c~ : Constant, loc~ : @basic.Location) -> Unit = _
   visit_Pattern_Constraint(Self, pat~ : Pattern, ty~ : Type, loc~ : @basic.Location) -> Unit = _
   visit_Pattern_Constr(Self, constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location) -> Unit = _
@@ -778,7 +854,7 @@ pub(open) trait IterVisitor {
   visit_EmbeddedCode_CodeString(Self, String) -> Unit = _
   visit_EmbeddedCode_CodeMultilineString(Self, @list.List[String]) -> Unit = _
   visit_DeclBody(Self, DeclBody) -> Unit = _
-  visit_DeclBody_DeclBody(Self, local_types~ : @list.List[LocalTypeDecl], expr~ : Expr) -> Unit = _
+  visit_DeclBody_DeclBody(Self, local_types~ : @list.List[LocalTypeDecl], expr~ : Expr, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, semi_locs~ : @list.List[@basic.Location], trailing_semi_loc~ : @basic.Location?) -> Unit = _
   visit_DeclBody_DeclStubs(Self, FuncStubs) -> Unit = _
   visit_FunDecl(Self, FunDecl) -> Unit = _
   visit_TraitMethodDecl(Self, TraitMethodDecl) -> Unit = _
@@ -790,13 +866,13 @@ pub(open) trait IterVisitor {
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Unit = _
   visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, is_declare~ : Bool) -> Unit = _
   visit_Impl_TopTrait(Self, TraitDecl) -> Unit = _
-  visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
-  visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
-  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, is_declare~ : Bool) -> Unit = _
-  visit_Impl_TopUsing(Self, pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Unit = _
+  visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, impl_loc~ : @basic.Location?, type_params_lbracket_loc~ : @basic.Location?, type_params_rbracket_loc~ : @basic.Location?, type_param_comma_locs~ : @list.List[@basic.Location], type_param_trailing_comma_loc~ : @basic.Location?, for_loc~ : @basic.Location?, with_loc~ : @basic.Location?, params_lparen_loc~ : @basic.Location?, params_rparen_loc~ : @basic.Location?, param_comma_locs~ : @list.List[@basic.Location], trailing_param_comma_loc~ : @basic.Location?, thin_arrow_loc~ : @basic.Location?) -> Unit = _
+  visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, enumview_loc~ : @basic.Location?, type_params_lbracket_loc~ : @basic.Location?, type_params_rbracket_loc~ : @basic.Location?, type_param_comma_locs~ : @list.List[@basic.Location], type_param_trailing_comma_loc~ : @basic.Location?, constr_lbrace_loc~ : @basic.Location?, constr_rbrace_loc~ : @basic.Location?, for_loc~ : @basic.Location?, with_loc~ : @basic.Location?, params_lparen_loc~ : @basic.Location?, params_rparen_loc~ : @basic.Location?, param_comma_locs~ : @list.List[@basic.Location], trailing_param_comma_loc~ : @basic.Location?) -> Unit = _
+  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, is_declare~ : Bool, declare_loc~ : @basic.Location?, impl_loc~ : @basic.Location?, type_params_lbracket_loc~ : @basic.Location?, type_params_rbracket_loc~ : @basic.Location?, type_param_comma_locs~ : @list.List[@basic.Location], type_param_trailing_comma_loc~ : @basic.Location?, for_loc~ : @basic.Location?) -> Unit = _
+  visit_Impl_TopUsing(Self, pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, using_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?) -> Unit = _
   visit_UsingKind(Self, UsingKind) -> Unit = _
   visit_Expr(Self, Expr) -> Unit = _
-  visit_Expr_Apply(Self, func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_Apply(Self, func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location, bang_loc~ : @basic.Location?, question_loc~ : @basic.Location?) -> Unit = _
   visit_Expr_Infix(Self, op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Unary(Self, op~ : Var, expr~ : Expr, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Array(Self, exprs~ : @list.List[Expr], loc~ : @basic.Location) -> Unit = _
@@ -810,43 +886,43 @@ pub(open) trait IterVisitor {
   visit_Expr_Interp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> Unit = _
   visit_Expr_Constraint(Self, expr~ : Expr, ty~ : Type, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Constr(Self, constr~ : Constructor, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_While(Self, loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_While(Self, loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @basic.Location, while_loc~ : @basic.Location?, loop_lbrace_loc~ : @basic.Location?, loop_rbrace_loc~ : @basic.Location?, nobreak_loc~ : @basic.Location?, nobreak_lbrace_loc~ : @basic.Location?, nobreak_rbrace_loc~ : @basic.Location?) -> Unit = _
   visit_Expr_Function(Self, func~ : Func, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Ident(Self, id~ : Var, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_If(Self, cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Guard(Self, cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_IsLexMatch(Self, expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_LetFn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_LetRec(Self, bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_LetAnd(Self, bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Let(Self, pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Sequence(Self, exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_If(Self, cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @basic.Location, if_loc~ : @basic.Location?, else_loc~ : @basic.Location?, if_lbrace_loc~ : @basic.Location?, if_rbrace_loc~ : @basic.Location?, else_lbrace_loc~ : @basic.Location?, else_rbrace_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_Guard(Self, cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location, guard_loc~ : @basic.Location?, else_loc~ : @basic.Location?, else_lbrace_loc~ : @basic.Location?, else_rbrace_loc~ : @basic.Location?, else_semi_locs~ : @list.List[@basic.Location], else_trailing_semi_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location, is_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_IsLexMatch(Self, expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location, lexmatch_loc~ : @basic.Location?, question_loc~ : @basic.Location?, with_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location, defer_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_LetFn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location, fn_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_LetRec(Self, bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location, fn_locs~ : @list.List[@basic.Location], semi_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_LetAnd(Self, bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location, letrec_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_Let(Self, pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location, let_loc~ : @basic.Location?, equal_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_Sequence(Self, exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location, semi_locs~ : @list.List[@basic.Location]) -> Unit = _
   visit_Expr_Tuple(Self, exprs~ : @list.List[Expr], loc~ : @basic.Location) -> Unit = _
   visit_Expr_Record(Self, type_name~ : TypeName?, fields~ : @list.List[FieldDef], trailing~ : TrailingMark, loc~ : @basic.Location) -> Unit = _
   visit_Expr_RecordUpdate(Self, type_name~ : TypeName?, record~ : Expr, fields~ : @list.List[FieldDef], loc~ : @basic.Location) -> Unit = _
   visit_Expr_Field(Self, record~ : Expr, accessor~ : Accessor, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Method(Self, type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_DotApply(Self, self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_Method(Self, type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location, coloncolon_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_DotApply(Self, self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @basic.Location, bang_loc~ : @basic.Location?, question_loc~ : @basic.Location?) -> Unit = _
   visit_Expr_As(Self, expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_LexMatch(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location) -> Unit = _
-  visit_Expr_LetMut(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location, match_keyword_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_LexMatch(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location, lexmatch_loc~ : @basic.Location?, with_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_LetMut(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location, let_loc~ : @basic.Location?, mut_loc~ : @basic.Location?, equal_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Unit = _
   visit_Expr_Pipe(Self, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Assign(Self, var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Hole(Self, loc~ : @basic.Location, kind~ : Hole) -> Unit = _
-  visit_Expr_Return(Self, return_value~ : Expr?, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Raise(Self, err_value~ : Expr, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_Return(Self, return_value~ : Expr?, loc~ : @basic.Location, return_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_Raise(Self, err_value~ : Expr, loc~ : @basic.Location, raise_loc~ : @basic.Location?) -> Unit = _
   visit_Expr_Unit(Self, loc~ : @basic.Location, faked~ : Bool) -> Unit = _
-  visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Continue(Self, args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location, where_clause~ : WhereClause?) -> Unit = _
-  visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Try(Self, body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_TryOperator(Self, body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : @basic.Location, break_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_Continue(Self, args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location, continue_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location, loop_keyword_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location, where_clause~ : WhereClause?, for_loc~ : @basic.Location?, body_lbrace_loc~ : @basic.Location?, body_rbrace_loc~ : @basic.Location?, nobreak_loc~ : @basic.Location?, nobreak_lbrace_loc~ : @basic.Location?, nobreak_rbrace_loc~ : @basic.Location?, header_semi_locs~ : @list.List[@basic.Location]) -> Unit = _
+  visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location, for_loc~ : @basic.Location?, in_loc~ : @basic.Location?, body_lbrace_loc~ : @basic.Location?, body_rbrace_loc~ : @basic.Location?, nobreak_loc~ : @basic.Location?, nobreak_lbrace_loc~ : @basic.Location?, nobreak_rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location]) -> Unit = _
+  visit_Expr_Try(Self, body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location, try_keyword_loc~ : @basic.Location?, catch_keyword_loc~ : @basic.Location?, catch_bang_loc~ : @basic.Location?, catch_lbrace_loc~ : @basic.Location?, catch_rbrace_loc~ : @basic.Location?, noraise_loc~ : @basic.Location?, else_lbrace_loc~ : @basic.Location?, else_rbrace_loc~ : @basic.Location?) -> Unit = _
+  visit_Expr_TryOperator(Self, body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location, question_loc~ : @basic.Location?, bang_loc~ : @basic.Location?) -> Unit = _
   visit_Expr_Map(Self, elems~ : @list.List[MapExprElem], loc~ : @basic.Location) -> Unit = _
   visit_Expr_Group(Self, expr~ : Expr, group~ : Group, loc~ : @basic.Location) -> Unit = _
   visit_Expr_StaticAssert(Self, asserts~ : @list.List[StaticAssertion], body~ : Expr) -> Unit = _
@@ -876,7 +952,7 @@ pub(open) trait MapVisitor {
   visit_ErrorType_ErrorType(Self, ty~ : Type) -> ErrorType = _
   visit_ErrorType_DefaultErrorType(Self, loc~ : @basic.Location) -> ErrorType = _
   visit_ErrorType_Noraise(Self, loc~ : @basic.Location) -> ErrorType = _
-  visit_ErrorType_MaybeError(Self, ty~ : Type) -> ErrorType = _
+  visit_ErrorType_MaybeError(Self, ty~ : Type, question_loc~ : @basic.Location?) -> ErrorType = _
   visit_ConstrParam(Self, ConstrParam) -> ConstrParam = _
   visit_ConstrDecl(Self, ConstrDecl) -> ConstrDecl = _
   visit_ExceptionDecl(Self, ExceptionDecl) -> ExceptionDecl = _
@@ -952,9 +1028,9 @@ pub(open) trait MapVisitor {
   visit_DotDotBinder_Binder(Self, Binder) -> DotDotBinder = _
   visit_ArrayPattern(Self, ArrayPattern) -> ArrayPattern = _
   visit_ArrayPattern_Pattern(Self, Pattern) -> ArrayPattern = _
-  visit_ArrayPattern_StringSpread(Self, str~ : String, loc~ : @basic.Location) -> ArrayPattern = _
-  visit_ArrayPattern_BytesSpread(Self, bytes~ : String, loc~ : @basic.Location) -> ArrayPattern = _
-  visit_ArrayPattern_ConstSpread(Self, binder~ : Binder, pkg~ : String?, loc~ : @basic.Location) -> ArrayPattern = _
+  visit_ArrayPattern_StringSpread(Self, str~ : String, loc~ : @basic.Location, dotdot_loc~ : @basic.Location?) -> ArrayPattern = _
+  visit_ArrayPattern_BytesSpread(Self, bytes~ : String, loc~ : @basic.Location, dotdot_loc~ : @basic.Location?) -> ArrayPattern = _
+  visit_ArrayPattern_ConstSpread(Self, binder~ : Binder, pkg~ : String?, loc~ : @basic.Location, dotdot_loc~ : @basic.Location?) -> ArrayPattern = _
   visit_ArrayPatterns(Self, ArrayPatterns) -> ArrayPatterns = _
   visit_ArrayPatterns_Closed(Self, @list.List[ArrayPattern]) -> ArrayPatterns = _
   visit_ArrayPatterns_Open(Self, @list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder) -> ArrayPatterns = _
@@ -966,7 +1042,7 @@ pub(open) trait MapVisitor {
   visit_Pattern(Self, Pattern) -> Pattern = _
   visit_Pattern_Alias(Self, pat~ : Pattern, alias_~ : Binder, loc~ : @basic.Location) -> Pattern = _
   visit_Pattern_Any(Self, loc~ : @basic.Location) -> Pattern = _
-  visit_Pattern_Array(Self, pats~ : ArrayPatterns, loc~ : @basic.Location) -> Pattern = _
+  visit_Pattern_Array(Self, pats~ : ArrayPatterns, loc~ : @basic.Location, dotdot_loc~ : @basic.Location?) -> Pattern = _
   visit_Pattern_Constant(Self, c~ : Constant, loc~ : @basic.Location) -> Pattern = _
   visit_Pattern_Constraint(Self, pat~ : Pattern, ty~ : Type, loc~ : @basic.Location) -> Pattern = _
   visit_Pattern_Constr(Self, constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location) -> Pattern = _
@@ -987,7 +1063,7 @@ pub(open) trait MapVisitor {
   visit_EmbeddedCode_CodeString(Self, String) -> EmbeddedCode = _
   visit_EmbeddedCode_CodeMultilineString(Self, @list.List[String]) -> EmbeddedCode = _
   visit_DeclBody(Self, DeclBody) -> DeclBody = _
-  visit_DeclBody_DeclBody(Self, local_types~ : @list.List[LocalTypeDecl], expr~ : Expr) -> DeclBody = _
+  visit_DeclBody_DeclBody(Self, local_types~ : @list.List[LocalTypeDecl], expr~ : Expr, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, semi_locs~ : @list.List[@basic.Location], trailing_semi_loc~ : @basic.Location?) -> DeclBody = _
   visit_DeclBody_DeclStubs(Self, FuncStubs) -> DeclBody = _
   visit_FunDecl(Self, FunDecl) -> FunDecl = _
   visit_TraitMethodDecl(Self, TraitMethodDecl) -> TraitMethodDecl = _
@@ -1000,12 +1076,12 @@ pub(open) trait MapVisitor {
   visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Impl = _
   visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, is_declare~ : Bool) -> Impl = _
   visit_Impl_TopTrait(Self, TraitDecl) -> Impl = _
-  visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
-  visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
-  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, is_declare~ : Bool) -> Impl = _
-  visit_Impl_TopUsing(Self, pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Impl = _
+  visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, impl_loc~ : @basic.Location?, type_params_lbracket_loc~ : @basic.Location?, type_params_rbracket_loc~ : @basic.Location?, type_param_comma_locs~ : @list.List[@basic.Location], type_param_trailing_comma_loc~ : @basic.Location?, for_loc~ : @basic.Location?, with_loc~ : @basic.Location?, params_lparen_loc~ : @basic.Location?, params_rparen_loc~ : @basic.Location?, param_comma_locs~ : @list.List[@basic.Location], trailing_param_comma_loc~ : @basic.Location?, thin_arrow_loc~ : @basic.Location?) -> Impl = _
+  visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, enumview_loc~ : @basic.Location?, type_params_lbracket_loc~ : @basic.Location?, type_params_rbracket_loc~ : @basic.Location?, type_param_comma_locs~ : @list.List[@basic.Location], type_param_trailing_comma_loc~ : @basic.Location?, constr_lbrace_loc~ : @basic.Location?, constr_rbrace_loc~ : @basic.Location?, for_loc~ : @basic.Location?, with_loc~ : @basic.Location?, params_lparen_loc~ : @basic.Location?, params_rparen_loc~ : @basic.Location?, param_comma_locs~ : @list.List[@basic.Location], trailing_param_comma_loc~ : @basic.Location?) -> Impl = _
+  visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, is_declare~ : Bool, declare_loc~ : @basic.Location?, impl_loc~ : @basic.Location?, type_params_lbracket_loc~ : @basic.Location?, type_params_rbracket_loc~ : @basic.Location?, type_param_comma_locs~ : @list.List[@basic.Location], type_param_trailing_comma_loc~ : @basic.Location?, for_loc~ : @basic.Location?) -> Impl = _
+  visit_Impl_TopUsing(Self, pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, using_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?) -> Impl = _
   visit_Expr(Self, Expr) -> Expr = _
-  visit_Expr_Apply(Self, func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_Apply(Self, func~ : Expr, args~ : @list.List[Argument], attr~ : ApplyAttr, loc~ : @basic.Location, bang_loc~ : @basic.Location?, question_loc~ : @basic.Location?) -> Expr = _
   visit_Expr_Infix(Self, op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Unary(Self, op~ : Var, expr~ : Expr, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Array(Self, exprs~ : @list.List[Expr], loc~ : @basic.Location) -> Expr = _
@@ -1019,43 +1095,43 @@ pub(open) trait MapVisitor {
   visit_Expr_Interp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> Expr = _
   visit_Expr_Constraint(Self, expr~ : Expr, ty~ : Type, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Constr(Self, constr~ : Constructor, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_While(Self, loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_While(Self, loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @basic.Location, while_loc~ : @basic.Location?, loop_lbrace_loc~ : @basic.Location?, loop_rbrace_loc~ : @basic.Location?, nobreak_loc~ : @basic.Location?, nobreak_lbrace_loc~ : @basic.Location?, nobreak_rbrace_loc~ : @basic.Location?) -> Expr = _
   visit_Expr_Function(Self, func~ : Func, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Ident(Self, id~ : Var, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_If(Self, cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Guard(Self, cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_IsLexMatch(Self, expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_LetFn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_LetRec(Self, bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_LetAnd(Self, bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Let(Self, pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Sequence(Self, exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_If(Self, cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @basic.Location, if_loc~ : @basic.Location?, else_loc~ : @basic.Location?, if_lbrace_loc~ : @basic.Location?, if_rbrace_loc~ : @basic.Location?, else_lbrace_loc~ : @basic.Location?, else_rbrace_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_Guard(Self, cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location, guard_loc~ : @basic.Location?, else_loc~ : @basic.Location?, else_lbrace_loc~ : @basic.Location?, else_rbrace_loc~ : @basic.Location?, else_semi_locs~ : @list.List[@basic.Location], else_trailing_semi_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location, is_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_IsLexMatch(Self, expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location, lexmatch_loc~ : @basic.Location?, question_loc~ : @basic.Location?, with_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location, defer_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_LetFn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location, fn_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_LetRec(Self, bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location, fn_locs~ : @list.List[@basic.Location], semi_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_LetAnd(Self, bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location, letrec_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_Let(Self, pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location, let_loc~ : @basic.Location?, equal_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_Sequence(Self, exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location, semi_locs~ : @list.List[@basic.Location]) -> Expr = _
   visit_Expr_Tuple(Self, exprs~ : @list.List[Expr], loc~ : @basic.Location) -> Expr = _
   visit_Expr_Record(Self, type_name~ : TypeName?, fields~ : @list.List[FieldDef], trailing~ : TrailingMark, loc~ : @basic.Location) -> Expr = _
   visit_Expr_RecordUpdate(Self, type_name~ : TypeName?, record~ : Expr, fields~ : @list.List[FieldDef], loc~ : @basic.Location) -> Expr = _
   visit_Expr_Field(Self, record~ : Expr, accessor~ : Accessor, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Method(Self, type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_DotApply(Self, self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_Method(Self, type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location, coloncolon_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_DotApply(Self, self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, attr~ : ApplyAttr, loc~ : @basic.Location, bang_loc~ : @basic.Location?, question_loc~ : @basic.Location?) -> Expr = _
   visit_Expr_As(Self, expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_LexMatch(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location) -> Expr = _
-  visit_Expr_LetMut(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location, match_keyword_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_LexMatch(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location, lexmatch_loc~ : @basic.Location?, with_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_LetMut(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location, let_loc~ : @basic.Location?, mut_loc~ : @basic.Location?, equal_loc~ : @basic.Location?, semi_loc~ : @basic.Location?) -> Expr = _
   visit_Expr_Pipe(Self, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Assign(Self, var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Hole(Self, loc~ : @basic.Location, kind~ : Hole) -> Expr = _
-  visit_Expr_Return(Self, return_value~ : Expr?, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Raise(Self, err_value~ : Expr, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_Return(Self, return_value~ : Expr?, loc~ : @basic.Location, return_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_Raise(Self, err_value~ : Expr, loc~ : @basic.Location, raise_loc~ : @basic.Location?) -> Expr = _
   visit_Expr_Unit(Self, loc~ : @basic.Location, faked~ : Bool) -> Expr = _
-  visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Continue(Self, args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location, where_clause~ : WhereClause?) -> Expr = _
-  visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Try(Self, body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_TryOperator(Self, body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : @basic.Location, break_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_Continue(Self, args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location, continue_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location, loop_keyword_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location, where_clause~ : WhereClause?, for_loc~ : @basic.Location?, body_lbrace_loc~ : @basic.Location?, body_rbrace_loc~ : @basic.Location?, nobreak_loc~ : @basic.Location?, nobreak_lbrace_loc~ : @basic.Location?, nobreak_rbrace_loc~ : @basic.Location?, header_semi_locs~ : @list.List[@basic.Location]) -> Expr = _
+  visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location, for_loc~ : @basic.Location?, in_loc~ : @basic.Location?, body_lbrace_loc~ : @basic.Location?, body_rbrace_loc~ : @basic.Location?, nobreak_loc~ : @basic.Location?, nobreak_lbrace_loc~ : @basic.Location?, nobreak_rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location]) -> Expr = _
+  visit_Expr_Try(Self, body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location, try_keyword_loc~ : @basic.Location?, catch_keyword_loc~ : @basic.Location?, catch_bang_loc~ : @basic.Location?, catch_lbrace_loc~ : @basic.Location?, catch_rbrace_loc~ : @basic.Location?, noraise_loc~ : @basic.Location?, else_lbrace_loc~ : @basic.Location?, else_rbrace_loc~ : @basic.Location?) -> Expr = _
+  visit_Expr_TryOperator(Self, body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location, question_loc~ : @basic.Location?, bang_loc~ : @basic.Location?) -> Expr = _
   visit_Expr_Map(Self, elems~ : @list.List[MapExprElem], loc~ : @basic.Location) -> Expr = _
   visit_Expr_Group(Self, expr~ : Expr, group~ : Group, loc~ : @basic.Location) -> Expr = _
   visit_Expr_StaticAssert(Self, asserts~ : @list.List[StaticAssertion], body~ : Expr) -> Expr = _
