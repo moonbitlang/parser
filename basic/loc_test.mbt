@@ -99,3 +99,16 @@ test "Location::merge - single character locations" {
   inspect(loc2, content="test.mbt-1:11-1:11")
   inspect(merged, content="test.mbt-1:6-1:11")
 }
+
+///|
+test "Location slicing helpers" {
+  let loc = @basic.Location::{
+    start: @basic.Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 4 },
+    end: @basic.Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 8 },
+  }
+  inspect(loc.first_char(), content="test.mbt-1:5-1:6")
+  inspect(loc.last_char(), content="test.mbt-1:8-1:9")
+  inspect(loc.trim_first_char(), content="test.mbt-1:6-1:9")
+  inspect(loc.trim_last_char(), content="test.mbt-1:5-1:8")
+  inspect(loc.trim_first_and_last_char(), content="test.mbt-1:6-1:8")
+}
