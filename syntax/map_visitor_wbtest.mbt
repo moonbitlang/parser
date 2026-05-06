@@ -10,11 +10,19 @@ test "Pattern" {
   let binder = Binder::{ name: "test_binder", loc: dummy_loc }
   let any_pattern = Pattern::Any(loc=dummy_loc)
   let int_constant = Int("42")
-  let constant_pattern = Pattern::Constant(c=int_constant, loc=dummy_loc)
+  let constant_pattern = Pattern::Constant(
+    c=int_constant,
+    loc=dummy_loc,
+    uminus_loc=None,
+  )
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
     tys=@list.from_array([]),
     loc=dummy_loc,
+    lbracket_loc=None,
+    rbracket_loc=None,
+    comma_locs=@list.empty(),
+    trailing_comma_loc=None,
   )
   let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc }
   let constr = Constructor::{
@@ -28,6 +36,7 @@ test "Pattern" {
     pattern: any_pattern,
     is_pun: false,
     loc: dummy_loc,
+    colon_loc: None,
   }
   let map_elem = MapPatElem::{
     key: int_constant,
@@ -35,30 +44,51 @@ test "Pattern" {
     match_absent: false,
     key_loc: dummy_loc,
     loc: dummy_loc,
+    question_loc: None,
+    colon_loc: None,
   }
   let constr_pat_arg = ConstrPatArg::{
     pat: any_pattern,
     kind: ArgumentKind::Positional,
+    equal_loc: None,
   }
   let array_patterns = ArrayPatterns::Closed(@list.from_array([]))
   let tuple_pattern = Pattern::Tuple(
     pats=@list.from_array([any_pattern, constant_pattern]),
     loc=dummy_loc,
+    lparen_loc=None,
+    rparen_loc=None,
+    comma_locs=@list.empty(),
+    trailing_comma_loc=None,
   )
   let any_with_alias = Pattern::Alias(
     pat=any_pattern,
     alias_=binder,
     loc=dummy_loc,
   )
-  let array_patterns = Pattern::Array(pats=array_patterns, loc=dummy_loc)
+  let array_patterns = Pattern::Array(
+    pats=array_patterns,
+    loc=dummy_loc,
+    lbracket_loc=None,
+    rbracket_loc=None,
+    comma_locs=@list.empty(),
+    trailing_comma_loc=None,
+    dotdot_loc=None,
+  )
   let or_pattern = Or(pat1=any_pattern, pat2=constant_pattern, loc=dummy_loc)
   let range_pattern = Range(
     lhs=any_pattern,
     rhs=constant_pattern,
     kind=Inclusive,
     loc=dummy_loc,
+    op_loc=None,
   )
-  let constant_pattern = Expr::Constant(c=int_constant, loc=dummy_loc)
+  let constant_pattern = Expr::Constant(
+    c=int_constant,
+    loc=dummy_loc,
+    uplus_loc=None,
+    uminus_loc=None,
+  )
   let constraint_pattern = Pattern::Constraint(
     pat=any_pattern,
     ty=int_type,
@@ -69,16 +99,31 @@ test "Pattern" {
     args=Some(@list.from_array([constr_pat_arg])),
     is_open=false,
     loc=dummy_loc,
+    lparen_loc=None,
+    rparen_loc=None,
+    comma_locs=@list.empty(),
+    trailing_comma_loc=None,
+    dotdot_loc=None,
   )
   let record_pattern = Pattern::Record(
     fields=@list.from_array([field_pat]),
     is_closed=true,
     loc=dummy_loc,
+    lbrace_loc=None,
+    rbrace_loc=None,
+    comma_locs=@list.empty(),
+    trailing_comma_loc=None,
+    dotdot_loc=None,
   )
   let map_pattern = Pattern::Map(
     elems=@list.from_array([map_elem]),
     is_closed=false,
     loc=dummy_loc,
+    lbrace_loc=None,
+    rbrace_loc=None,
+    comma_locs=@list.empty(),
+    trailing_comma_loc=None,
+    dotdot_loc=None,
   )
   @test.assert_eq(
     any_with_alias.json_repr(),
