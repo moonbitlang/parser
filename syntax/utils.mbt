@@ -8,7 +8,7 @@ let counter : Ref[Int] = Ref(0)
 ///|
 /// Create constant expression with location
 pub fn make_constant_expr(loc~ : Location, c : Constant) -> Expr {
-  Constant(c~, loc~)
+  Constant(c~, loc~, uplus_loc=None, uminus_loc=None)
 }
 
 ///|
@@ -19,8 +19,22 @@ pub fn make_ident_expr(loc~ : Location, id : Var) -> Expr {
 
 ///|
 /// Create tuple expression
-pub fn make_tuple_expr(loc~ : Location, exprs : @list.List[Expr]) -> Expr {
-  Tuple(exprs~, loc~)
+pub fn make_tuple_expr(
+  loc~ : Location,
+  exprs : @list.List[Expr],
+  lparen_loc? : Location? = None,
+  rparen_loc? : Location? = None,
+  comma_locs? : @list.List[Location] = @list.empty(),
+  trailing_comma_loc? : Location? = None,
+) -> Expr {
+  Tuple(
+    exprs~,
+    loc~,
+    lparen_loc~,
+    rparen_loc~,
+    comma_locs~,
+    trailing_comma_loc~,
+  )
 }
 
 ///|
@@ -28,19 +42,35 @@ pub fn make_tuple_expr(loc~ : Location, exprs : @list.List[Expr]) -> Expr {
 pub fn make_array_expr(
   loc~ : Location,
   elems : @list.List[SpreadableElem],
+  lbracket_loc? : Location? = None,
+  rbracket_loc? : Location? = None,
+  comma_locs? : @list.List[Location] = @list.empty(),
+  trailing_comma_loc? : Location? = None,
 ) -> Expr {
   // Try to convert to regular array if no spread elements
   let mut acc : @list.List[Expr] = @list.empty()
   for elem in elems {
     match elem {
       Regular(e) => acc = acc.add(e)
-      Spread(_) => return ArraySpread(elems~, loc~)
+      Spread(_) =>
+        return ArraySpread(
+          elems~,
+          loc~,
+          lbracket_loc~,
+          rbracket_loc~,
+          comma_locs~,
+          trailing_comma_loc~,
+        )
     }
   } nobreak {
     return Array(
       // If we have only regular elements, create a simple array
       exprs=acc.rev(),
       loc~,
+      lbracket_loc~,
+      rbracket_loc~,
+      comma_locs~,
+      trailing_comma_loc~,
     )
   }
 }
@@ -71,8 +101,21 @@ pub fn make_record_expr(
   trailing~ : TrailingMark,
   type_name : TypeName?,
   fields : @list.List[FieldDef],
+  lbrace_loc? : Location? = None,
+  rbrace_loc? : Location? = None,
+  comma_locs? : @list.List[Location] = @list.empty(),
+  trailing_comma_loc? : Location? = None,
 ) -> Expr {
-  Record(type_name~, fields~, trailing~, loc~)
+  Record(
+    type_name~,
+    fields~,
+    trailing~,
+    loc~,
+    lbrace_loc~,
+    rbrace_loc~,
+    comma_locs~,
+    trailing_comma_loc~,
+  )
 }
 
 ///|
@@ -88,7 +131,7 @@ pub fn make_alias_pattern(
 ///|
 /// Create constant pattern
 pub fn make_constant_pattern(loc~ : Location, c : Constant) -> Pattern {
-  Constant(c~, loc~)
+  Constant(c~, loc~, uminus_loc=None)
 }
 
 ///|
@@ -96,8 +139,12 @@ pub fn make_constant_pattern(loc~ : Location, c : Constant) -> Pattern {
 pub fn make_tuple_pattern(
   loc~ : Location,
   pats : @list.List[Pattern],
+  lparen_loc? : Location? = None,
+  rparen_loc? : Location? = None,
+  comma_locs? : @list.List[Location] = @list.empty(),
+  trailing_comma_loc? : Location? = None,
 ) -> Pattern {
-  Tuple(pats~, loc~)
+  Tuple(pats~, loc~, lparen_loc~, rparen_loc~, comma_locs~, trailing_comma_loc~)
 }
 
 ///|
@@ -107,14 +154,36 @@ pub fn make_constr_pattern(
   constr : Constructor,
   args : @list.List[ConstrPatArg]?,
   is_open : Bool,
+  lparen_loc? : Location? = None,
+  rparen_loc? : Location? = None,
+  comma_locs? : @list.List[Location] = @list.empty(),
+  trailing_comma_loc? : Location? = None,
+  dotdot_loc? : Location? = None,
 ) -> Pattern {
-  Constr(constr~, args~, is_open~, loc~)
+  Constr(
+    constr~,
+    args~,
+    is_open~,
+    loc~,
+    lparen_loc~,
+    rparen_loc~,
+    comma_locs~,
+    trailing_comma_loc~,
+    dotdot_loc~,
+  )
 }
 
 ///|
 /// Create tuple type
-pub fn make_tuple_type(loc~ : Location, tys : @list.List[Type]) -> Type {
-  Tuple(tys~, loc~)
+pub fn make_tuple_type(
+  loc~ : Location,
+  tys : @list.List[Type],
+  lparen_loc? : Location? = None,
+  rparen_loc? : Location? = None,
+  comma_locs? : @list.List[Location] = @list.empty(),
+  trailing_comma_loc? : Location? = None,
+) -> Type {
+  Tuple(tys~, loc~, lparen_loc~, rparen_loc~, comma_locs~, trailing_comma_loc~)
 }
 
 ///|
@@ -134,16 +203,272 @@ pub fn make_field_pat(
   label : Label,
   pattern : Pattern,
   is_pun : Bool,
+  colon_loc? : Location? = None,
 ) -> FieldPat {
-  FieldPat::{ label, pattern, is_pun, loc }
+  FieldPat::{ label, pattern, is_pun, loc, colon_loc }
+}
+
+///|
+pub fn set_impl_trailing_semi(
+  impl_ : Impl,
+  trailing_semi_loc : Location?,
+) -> Impl {
+  match impl_ {
+    TopExpr(expr~, is_main~, local_types~, is_async~, loc~, trailing_semi_loc=_) =>
+      TopExpr(
+        expr~,
+        is_main~,
+        local_types~,
+        is_async~,
+        loc~,
+        trailing_semi_loc~,
+      )
+    TopTest(
+      expr~,
+      name~,
+      params~,
+      local_types~,
+      is_async~,
+      loc~,
+      attrs~,
+      doc~,
+      trailing_semi_loc=_
+    ) =>
+      TopTest(
+        expr~,
+        name~,
+        params~,
+        local_types~,
+        is_async~,
+        loc~,
+        attrs~,
+        doc~,
+        trailing_semi_loc~,
+      )
+    TopTypeDef(type_decl, trailing_semi_loc=_) =>
+      TopTypeDef(type_decl, trailing_semi_loc~)
+    TopFuncDef(fun_decl~, decl_body~, where_clause~, loc~, trailing_semi_loc=_) =>
+      TopFuncDef(fun_decl~, decl_body~, where_clause~, loc~, trailing_semi_loc~)
+    TopLetDef(
+      binder~,
+      ty~,
+      expr~,
+      vis~,
+      is_constant~,
+      loc~,
+      attrs~,
+      doc~,
+      is_declare~,
+      trailing_semi_loc=_
+    ) =>
+      TopLetDef(
+        binder~,
+        ty~,
+        expr~,
+        vis~,
+        is_constant~,
+        loc~,
+        attrs~,
+        doc~,
+        is_declare~,
+        trailing_semi_loc~,
+      )
+    TopTrait(trait_decl, trailing_semi_loc=_) =>
+      TopTrait(trait_decl, trailing_semi_loc~)
+    TopImpl(
+      self_ty~,
+      trait_~,
+      method_name~,
+      has_error~,
+      quantifiers~,
+      params~,
+      ret_ty~,
+      err_ty~,
+      body~,
+      vis~,
+      loc~,
+      attrs~,
+      doc~,
+      trailing_semi_loc=_,
+      impl_loc~,
+      type_params_lbracket_loc~,
+      type_params_rbracket_loc~,
+      type_param_comma_locs~,
+      type_param_trailing_comma_loc~,
+      for_loc~,
+      with_loc~,
+      params_lparen_loc~,
+      params_rparen_loc~,
+      param_comma_locs~,
+      trailing_param_comma_loc~,
+      thin_arrow_loc~
+    ) =>
+      TopImpl(
+        self_ty~,
+        trait_~,
+        method_name~,
+        has_error~,
+        quantifiers~,
+        params~,
+        ret_ty~,
+        err_ty~,
+        body~,
+        vis~,
+        loc~,
+        attrs~,
+        doc~,
+        trailing_semi_loc~,
+        impl_loc~,
+        type_params_lbracket_loc~,
+        type_params_rbracket_loc~,
+        type_param_comma_locs~,
+        type_param_trailing_comma_loc~,
+        for_loc~,
+        with_loc~,
+        params_lparen_loc~,
+        params_rparen_loc~,
+        param_comma_locs~,
+        trailing_param_comma_loc~,
+        thin_arrow_loc~,
+      )
+    TopView(
+      quantifiers~,
+      source_ty~,
+      view_type_name~,
+      view_type_loc~,
+      view_func_name~,
+      parameters~,
+      params_loc~,
+      view_constrs~,
+      body~,
+      vis~,
+      loc~,
+      attrs~,
+      doc~,
+      trailing_semi_loc=_,
+      enumview_loc~,
+      type_params_lbracket_loc~,
+      type_params_rbracket_loc~,
+      type_param_comma_locs~,
+      type_param_trailing_comma_loc~,
+      constr_lbrace_loc~,
+      constr_rbrace_loc~,
+      for_loc~,
+      with_loc~,
+      params_lparen_loc~,
+      params_rparen_loc~,
+      param_comma_locs~,
+      trailing_param_comma_loc~
+    ) =>
+      TopView(
+        quantifiers~,
+        source_ty~,
+        view_type_name~,
+        view_type_loc~,
+        view_func_name~,
+        parameters~,
+        params_loc~,
+        view_constrs~,
+        body~,
+        vis~,
+        loc~,
+        attrs~,
+        doc~,
+        trailing_semi_loc~,
+        enumview_loc~,
+        type_params_lbracket_loc~,
+        type_params_rbracket_loc~,
+        type_param_comma_locs~,
+        type_param_trailing_comma_loc~,
+        constr_lbrace_loc~,
+        constr_rbrace_loc~,
+        for_loc~,
+        with_loc~,
+        params_lparen_loc~,
+        params_rparen_loc~,
+        param_comma_locs~,
+        trailing_param_comma_loc~,
+      )
+    TopImplRelation(
+      self_ty~,
+      trait_~,
+      quantifiers~,
+      vis~,
+      attrs~,
+      loc~,
+      doc~,
+      is_declare~,
+      trailing_semi_loc=_,
+      declare_loc~,
+      impl_loc~,
+      type_params_lbracket_loc~,
+      type_params_rbracket_loc~,
+      type_param_comma_locs~,
+      type_param_trailing_comma_loc~,
+      for_loc~
+    ) =>
+      TopImplRelation(
+        self_ty~,
+        trait_~,
+        quantifiers~,
+        vis~,
+        attrs~,
+        loc~,
+        doc~,
+        is_declare~,
+        trailing_semi_loc~,
+        declare_loc~,
+        impl_loc~,
+        type_params_lbracket_loc~,
+        type_params_rbracket_loc~,
+        type_param_comma_locs~,
+        type_param_trailing_comma_loc~,
+        for_loc~,
+      )
+    TopUsing(
+      pkg~,
+      names~,
+      vis~,
+      attrs~,
+      loc~,
+      doc~,
+      trailing_semi_loc=_,
+      using_loc~,
+      lbrace_loc~,
+      rbrace_loc~,
+      comma_locs~,
+      trailing_comma_loc~
+    ) =>
+      TopUsing(
+        pkg~,
+        names~,
+        vis~,
+        attrs~,
+        loc~,
+        doc~,
+        trailing_semi_loc~,
+        using_loc~,
+        lbrace_loc~,
+        rbrace_loc~,
+        comma_locs~,
+        trailing_comma_loc~,
+      )
+  }
 }
 
 ///|
 /// Create unary plus expression
-pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
+pub fn make_uplus(
+  loc~ : Location,
+  name : String,
+  arg : Expr,
+  op_loc? : Location? = None,
+) -> Expr {
   match (name, arg) {
-    ("+", Constant(c=Constant::Int(_), loc=_)) => arg
-    ("+", Constant(c=Constant::Double(_), loc=_)) => arg
+    ("+", Constant(c=Constant::Int(x), loc=_, uplus_loc=_, uminus_loc~)) =>
+      Constant(c=Constant::Int(x), loc~, uplus_loc=op_loc, uminus_loc~)
+    ("+", Constant(c=Constant::Double(x), loc=_, uplus_loc=_, uminus_loc~)) =>
+      Constant(c=Constant::Double(x), loc~, uplus_loc=op_loc, uminus_loc~)
     _ => {
       let op = Var::{ name: Ident(name="~+"), loc }
       Apply(
@@ -151,8 +476,16 @@ pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
         args=@list.singleton(Argument::{
           value: arg,
           kind: ArgumentKind::Positional,
+          equal_loc: None,
         }),
+        attr=NoAttr,
         loc~,
+        bang_loc=None,
+        question_loc=None,
+        lparen_loc=None,
+        rparen_loc=None,
+        comma_locs=@list.empty(),
+        trailing_comma_loc=None,
       )
     }
   }
@@ -160,28 +493,33 @@ pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
 
 ///|
 /// Create unary minus expression
-pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
+pub fn make_uminus(
+  loc~ : Location,
+  name : String,
+  arg : Expr,
+  op_loc? : Location? = None,
+) -> Expr {
   match (name, arg) {
-    ("-", Constant(c=Constant::Int(x), loc=_)) => {
+    ("-", Constant(c=Constant::Int(x), loc=_, uplus_loc~, uminus_loc=_)) => {
       let new_val = match x {
         ['-', .. num] => num.to_owned()
         _ => "-" + x
       }
-      make_constant_expr(loc~, Constant::Int(new_val))
+      Constant(c=Constant::Int(new_val), loc~, uplus_loc~, uminus_loc=op_loc)
     }
-    ("-", Constant(c=Constant::Int64(x), loc=_)) => {
+    ("-", Constant(c=Constant::Int64(x), loc=_, uplus_loc~, uminus_loc=_)) => {
       let new_val = match x {
         ['-', .. num] => num.to_owned()
         _ => "-" + x
       }
-      make_constant_expr(loc~, Constant::Int64(new_val))
+      Constant(c=Constant::Int64(new_val), loc~, uplus_loc~, uminus_loc=op_loc)
     }
-    ("-", Constant(c=Constant::Double(x), loc=_)) => {
+    ("-", Constant(c=Constant::Double(x), loc=_, uplus_loc~, uminus_loc=_)) => {
       let new_val = match x {
         ['-', .. num] => num.to_owned()
         _ => "-" + x
       }
-      make_constant_expr(loc~, Constant::Double(new_val))
+      Constant(c=Constant::Double(new_val), loc~, uplus_loc~, uminus_loc=op_loc)
     }
     _ => {
       let op = Var::{ name: Ident(name~), loc }
@@ -215,10 +553,21 @@ pub fn desugar_array_get(loc~ : Location, obj : Expr, index : Expr) -> Expr {
       loc: bracket_loc(index),
     },
     args=@list.from_array([
-      Argument::{ value: index, kind: ArgumentKind::Positional },
+      Argument::{
+        value: index,
+        kind: ArgumentKind::Positional,
+        equal_loc: None,
+      },
     ]),
     return_self=false,
+    attr=NoAttr,
     loc~,
+    bang_loc=None,
+    question_loc=None,
+    lparen_loc=None,
+    rparen_loc=None,
+    comma_locs=@list.empty(),
+    trailing_comma_loc=None,
   )
 }
 
@@ -237,11 +586,22 @@ pub fn desugar_array_set(
       loc: bracket_loc(index),
     },
     args=@list.from_array([
-      Argument::{ value: index, kind: ArgumentKind::Positional },
-      Argument::{ value, kind: ArgumentKind::Positional },
+      Argument::{
+        value: index,
+        kind: ArgumentKind::Positional,
+        equal_loc: None,
+      },
+      Argument::{ value, kind: ArgumentKind::Positional, equal_loc: None },
     ]),
     return_self=false,
+    attr=NoAttr,
     loc~,
+    bang_loc=None,
+    question_loc=None,
+    lparen_loc=None,
+    rparen_loc=None,
+    comma_locs=@list.empty(),
+    trailing_comma_loc=None,
   )
 }
 
@@ -285,8 +645,14 @@ pub fn desugar_array_augmented_set(
         ),
       ),
       loc~,
+      let_loc=None,
+      equal_loc=None,
+      semi_loc=None,
     ),
     loc~,
+    let_loc=None,
+    equal_loc=None,
+    semi_loc=None,
   )
 }
 
@@ -330,8 +696,9 @@ pub fn make_field_def(
   label : Label,
   expr : Expr,
   is_pun : Bool,
+  colon_loc? : Location? = None,
 ) -> FieldDef {
-  FieldDef::{ label, expr, is_pun, loc }
+  FieldDef::{ label, expr, is_pun, loc, colon_loc }
 }
 
 ///|
@@ -418,8 +785,8 @@ pub fn make_arrow_fn(
   let parameters = params.map(fn(p) {
     let (param, ty) = p
     match param {
-      Named(binder) => Parameter::Positional(binder~, ty~)
-      Unnamed(loc) => Parameter::DiscardPositional(ty~, loc~)
+      Named(binder) => Parameter::Positional(binder~, ty~, colon_loc=None)
+      Unnamed(loc) => Parameter::DiscardPositional(ty~, loc~, colon_loc=None)
     }
   })
   Func::{
@@ -429,8 +796,14 @@ pub fn make_arrow_fn(
     return_type: None,
     error_type: ErrorType::NoErrorType,
     kind: FnKind::Arrow,
+    has_error: None,
     is_async: None,
     loc,
+    fn_loc: None,
+    body_lbrace_loc: None,
+    body_rbrace_loc: None,
+    body_semi_locs: @list.empty(),
+    body_trailing_semi_loc: None,
   }
 }
 
@@ -447,7 +820,7 @@ pub fn Type::loc(self : Type) -> Location {
     | Tuple(loc~, ..)
     | Arrow(loc~, ..)
     | Any(loc~)
-    | Object({ loc, .. }) => loc
+    | Object(constr_id={ loc, .. }, ..) => loc
   }
 }
 
@@ -456,58 +829,60 @@ pub fn Type::loc(self : Type) -> Location {
 ///|
 pub fn loc_of_expression(expr : Expr) -> Location {
   match expr {
-    Apply(func=_, args=_, loc~) => loc
+    Apply(loc~, ..) => loc
     Infix(op=_, lhs=_, rhs=_, loc~) => loc
     Unary(op=_, expr=_, loc~) => loc
-    Array(exprs=_, loc~) => loc
-    ArraySpread(elems=_, loc~) => loc
+    Array(loc~, ..) => loc
+    ArraySpread(loc~, ..) => loc
     ListComprehension(kind=_, guard_=_, body=_, loc~) => loc
     ArrayGet(array=_, index=_, loc~) => loc
     ArrayGetSlice(array=_, start_index=_, end_index=_, index_loc=_, loc~) => loc
     ArraySet(array=_, index=_, value=_, loc~) => loc
     ArrayAugmentedSet(op=_, array=_, index=_, value=_, loc~) => loc
-    Constant(c=_, loc~) => loc
+    Constant(loc~, ..) => loc
     MultilineString(elems=_, loc~) => loc
     Interp(elems=_, loc~) => loc
     Constraint(expr=_, ty=_, loc~) => loc
     Constr(constr=_, loc~) => loc
-    While(loop_cond=_, loop_body=_, while_else=_, label=_, loc~) => loc
+    While(loop_cond=_, loop_body=_, while_else=_, label=_, loc~, ..) => loc
     Function(func=_, loc~) => loc
     Ident(id=_, loc~) => loc
-    If(cond=_, ifso=_, ifnot=_, loc~) => loc
-    Guard(cond=_, otherwise=_, body=_, loc~) => loc
-    Is(expr=_, pat=_, loc~) => loc
-    IsLexMatch(expr=_, strategy=_, pat=_, pat_loc=_, loc~) => loc
+    If(cond=_, ifso=_, ifnot=_, loc~, ..) => loc
+    Guard(loc~, ..) => loc
+    Is(expr=_, pat=_, loc~, ..) => loc
+    IsLexMatch(expr=_, strategy=_, pat=_, pat_loc=_, loc~, ..) => loc
     RegexMatch(expr=_, pat=_, bindings=_, loc~) => loc
     Defer(loc~, ..) => loc
-    LetFn(name=_, func=_, body=_, loc~) => loc
-    LetAnd(bindings=_, body=_, loc~) => loc
-    Let(pattern=_, expr=_, body=_, loc~) => loc
-    Sequence(exprs=_, last_expr=_, loc~) => loc
-    Tuple(exprs=_, loc~) => loc
-    Record(type_name=_, fields=_, trailing=_, loc~) => loc
-    RecordUpdate(type_name=_, record=_, fields=_, loc~) => loc
+    LetFn(loc~, ..) => loc
+    LetRec(loc~, ..) => loc
+    LetAnd(loc~, ..) => loc
+    Let(loc~, ..) => loc
+    Sequence(loc~, ..) => loc
+    Tuple(loc~, ..) => loc
+    Record(loc~, ..) => loc
+    RecordUpdate(loc~, ..) => loc
     Field(record=_, accessor=_, loc~) => loc
-    Method(type_name=_, method_name=_, loc~) => loc
-    DotApply(self=_, method_name=_, args=_, return_self=_, loc~) => loc
+    Method(type_name=_, method_name=_, loc~, ..) => loc
+    DotApply(loc~, ..) => loc
     As(expr=_, trait_=_, loc~) => loc
     Mutate(record=_, accessor=_, field=_, augmented_by=_, loc~) => loc
-    Match(expr=_, cases=_, match_loc=_, loc~) => loc
-    LexMatch(strategy=_, expr=_, match_loc=_, cases=_, loc~) => loc
-    LetMut(binder=_, ty=_, expr=_, body=_, loc~) => loc
+    Match(expr=_, cases=_, match_loc=_, loc~, ..) => loc
+    LexMatch(strategy=_, expr=_, match_loc=_, cases=_, loc~, ..) => loc
+    LetMut(loc~, ..) => loc
     Pipe(lhs=_, rhs=_, loc~) => loc
     RevPipe(lhs=_, rhs=_, loc~) => loc
     Assign(var_=_, expr=_, augmented_by=_, loc~) => loc
     Hole(loc~, kind=_) => loc
-    Return(return_value=_, loc~) => loc
-    Raise(err_value=_, loc~) => loc
+    Return(return_value=_, loc~, ..) => loc
+    Raise(err_value=_, loc~, ..) => loc
     Quantifier(kind=_, binder=_, binder_ty=_, body=_, loc~) => loc
     Implies(lhs=_, rhs=_, loc~) => loc
     ProofAssert(expr=_, loc~) => loc
     ProofLet(binder=_, expr=_, loc~) => loc
     Unit(loc~, faked=_) => loc
-    Break(arg=_, label=_, loc~) => loc
-    Continue(args=_, label=_, loc~) => loc
+    Break(arg=_, label=_, loc~, ..) => loc
+    Continue(args=_, label=_, loc~, ..) => loc
+    Loop(arg=_, body=_, label=_, loop_loc=_, loc~, ..) => loc
     For(
       binders=_,
       condition=_,
@@ -516,7 +891,8 @@ pub fn loc_of_expression(expr : Expr) -> Location {
       for_else=_,
       label=_,
       loc~,
-      where_clause=_
+      where_clause=_,
+      ..
     ) => loc
     ForEach(
       binders=_,
@@ -527,7 +903,8 @@ pub fn loc_of_expression(expr : Expr) -> Location {
       else_block=_,
       where_clause=_,
       label=_,
-      loc~
+      loc~,
+      ..
     ) => loc
     Try(
       body=_,
@@ -537,11 +914,12 @@ pub fn loc_of_expression(expr : Expr) -> Location {
       try_loc=_,
       catch_loc=_,
       else_loc=_,
-      loc~
+      loc~,
+      ..
     ) => loc
     TryOperator(loc~, ..) => loc
-    Map(elems=_, loc~) => loc
-    Group(expr=_, group=_, loc~) => loc
+    Map(loc~, ..) => loc
+    Group(loc~, ..) => loc
     TemplateWriting(expr=_, template=_, loc~) => loc
     StaticAssert(asserts=_, body=_) => no_location
   }
@@ -569,13 +947,13 @@ pub fn Pattern::loc(self : Self) -> Location {
 ///|
 pub fn Impl::loc(self : Self) -> Location {
   match self {
-    TopTypeDef({ loc, .. })
+    TopTypeDef({ loc, .. }, ..)
     | TopFuncDef(loc~, ..)
     | TopLetDef(loc~, ..)
     | TopExpr(loc~, ..)
     | TopImplRelation(loc~, ..)
     | TopTest(loc~, ..)
-    | TopTrait({ loc, .. })
+    | TopTrait({ loc, .. }, ..)
     | TopView(loc~, ..)
     | TopImpl(loc~, ..)
     | TopUsing(loc~, ..) => loc
@@ -585,15 +963,15 @@ pub fn Impl::loc(self : Self) -> Location {
 ///|
 pub fn Parameter::loc(self : Self) -> Location {
   match self {
-    Optional(binder~, ty=_, default~) => binder.loc.merge(default.loc())
-    Labelled(binder~, ty~)
-    | Positional(binder~, ty~)
-    | QuestionOptional(binder~, ty~) =>
+    Optional(binder~, ty=_, default~, ..) => binder.loc.merge(default.loc())
+    Labelled(binder~, ty~, ..)
+    | Positional(binder~, ty~, ..)
+    | QuestionOptional(binder~, ty~, ..) =>
       match ty {
         None => binder.loc
         Some(ty) => binder.loc.merge(ty.loc())
       }
-    DiscardPositional(ty=_, loc~) => loc
+    DiscardPositional(ty=_, loc~, ..) => loc
   }
 }
 

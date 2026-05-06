@@ -72,7 +72,7 @@ impl IterVisitor for Mapper with fn visit_Visibility(self, vis) {
 fn Mapper::fill_parameter(self : Self, param : @syntax.Parameter) -> NodeTable {
   self.attach_node(param.loc())
   match param {
-    DiscardPositional(ty~, loc~) => {
+    DiscardPositional(ty~, loc~, ..) => {
       self.cursor_advance(loc.start)
       let colon = self.cursor_find(TK_COLON)
       if ty is Some(ty) {
@@ -80,7 +80,7 @@ fn Mapper::fill_parameter(self : Self, param : @syntax.Parameter) -> NodeTable {
       }
       NodeTable::new({ "colon": Token(colon) })
     }
-    Labelled(ty~, binder~) | Positional(ty~, binder~) => {
+    Labelled(ty~, binder~, ..) | Positional(ty~, binder~, ..) => {
       self.cursor_advance(binder.loc.start)
       let colon = self.cursor_find(TK_COLON)
       if ty is Some(ty) {
@@ -88,7 +88,7 @@ fn Mapper::fill_parameter(self : Self, param : @syntax.Parameter) -> NodeTable {
       }
       NodeTable::new({ "colon": Token(colon) })
     }
-    QuestionOptional(ty~, binder~) => {
+    QuestionOptional(ty~, binder~, ..) => {
       self.cursor_advance(binder.loc.start)
       let question = self.cursor_find(TK_QUESTION)
       let colon = self.cursor_find(TK_COLON)
@@ -97,7 +97,7 @@ fn Mapper::fill_parameter(self : Self, param : @syntax.Parameter) -> NodeTable {
       }
       NodeTable::new({ "question": Token(question), "colon": Token(colon) })
     }
-    Optional(ty~, default~, binder~) => {
+    Optional(ty~, default~, binder~, ..) => {
       self.cursor_advance(binder.loc.start)
       let colon = self.cursor_find(TK_COLON)
       if ty is Some(ty) {
@@ -219,7 +219,7 @@ impl IterVisitor for Mapper with fn visit_Impl_TopFuncDef(
     }
   }
   let (lbrace, rbrace) = match decl_body {
-    DeclBody(expr~) => {
+    DeclBody(expr~, ..) => {
       let lb = s.cursor_find(TK_LBRACE, before_pos=loc.end)
       s.visit_Expr(expr)
       let rb = s.cursor_find(TK_RBRACE, before_pos=loc.end)

@@ -38,7 +38,7 @@ test "visibility token table records modifier and parentheses" {
     fail("expected pub(all) fixture to parse without diagnostics")
   }
   let vis_loc = match impls {
-    More(TopTypeDef({ type_vis: Pub(attr=Some(_), loc~), .. }), ..) => loc
+    More(TopTypeDef({ type_vis: Pub(attr=Some(_), loc~), .. }, ..), ..) => loc
     _ => fail("expected a public type declaration")
   }
   let table = @comment.Mapper::new(tokens, impls).get_table(vis_loc)

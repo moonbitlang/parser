@@ -65,12 +65,12 @@ fn attach_docstrings(
       .map(make_doc)
       .unwrap_or(@syntax.DocString::empty())
     match toplevel {
-      TopTypeDef(td) => {
+      TopTypeDef(td, ..) => {
         td.doc = doc
         last_pos = loc.start
         match td.components {
           // there is no docstring inside the types
-          Abstract | Alias(_) | Error(NoPayload) | TupleStruct(_) => ()
+          Abstract | Extern | Alias(_) | Error(NoPayload) | TupleStruct(_) => ()
           // handle docstring before the enum/suberror constructor and struct fields 
           Error(EnumPayload(constrs))
           | Variant(constrs)
@@ -113,7 +113,7 @@ fn attach_docstrings(
       TopExpr(..) => ()
       TopImplRelation(..) as imp => imp.doc = doc
       TopTest(..) as test_ => test_.doc = doc
-      TopTrait(decl) => decl.doc = doc
+      TopTrait(decl, ..) => decl.doc = doc
       TopView(..) as view => view.doc = doc
       TopImpl(..) as imp => imp.doc = doc
       TopUsing(..) as using_stmt => using_stmt.doc = doc

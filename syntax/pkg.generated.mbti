@@ -29,7 +29,7 @@ pub fn loc_of_expression(Expr) -> @basic.Location
 
 pub fn make_alias_pattern(loc~ : @basic.Location, Pattern, Binder) -> Pattern
 
-pub fn make_array_expr(loc~ : @basic.Location, @list.List[SpreadableElem]) -> Expr
+pub fn make_array_expr(loc~ : @basic.Location, @list.List[SpreadableElem], lbracket_loc? : @basic.Location?, rbracket_loc? : @basic.Location?, comma_locs? : @list.List[@basic.Location], trailing_comma_loc? : @basic.Location?) -> Expr
 
 pub fn make_arrow_fn(@list.List[(ArrowFnParam, Type?)], Expr, params_loc~ : @basic.Location, loc~ : @basic.Location) -> Func
 
@@ -41,13 +41,13 @@ pub fn make_constant_expr(loc~ : @basic.Location, Constant) -> Expr
 
 pub fn make_constant_pattern(loc~ : @basic.Location, Constant) -> Pattern
 
-pub fn make_constr_pattern(loc~ : @basic.Location, Constructor, @list.List[ConstrPatArg]?, Bool) -> Pattern
+pub fn make_constr_pattern(loc~ : @basic.Location, Constructor, @list.List[ConstrPatArg]?, Bool, lparen_loc? : @basic.Location?, rparen_loc? : @basic.Location?, comma_locs? : @list.List[@basic.Location], trailing_comma_loc? : @basic.Location?, dotdot_loc? : @basic.Location?) -> Pattern
 
 pub fn make_double(String) -> Constant
 
-pub fn make_field_def(loc~ : @basic.Location, Label, Expr, Bool) -> FieldDef
+pub fn make_field_def(loc~ : @basic.Location, Label, Expr, Bool, colon_loc? : @basic.Location?) -> FieldDef
 
-pub fn make_field_pat(loc~ : @basic.Location, Label, Pattern, Bool) -> FieldPat
+pub fn make_field_pat(loc~ : @basic.Location, Label, Pattern, Bool, colon_loc? : @basic.Location?) -> FieldPat
 
 pub fn make_float(String) -> Constant
 
@@ -61,21 +61,23 @@ pub fn make_interps(Array[@tokens.InterpElem]) -> @list.List[InterpElem]
 
 pub fn make_option_type(loc~ : @basic.Location, constr_loc~ : @basic.Location, Type) -> Type
 
-pub fn make_record_expr(loc~ : @basic.Location, trailing~ : TrailingMark, TypeName?, @list.List[FieldDef]) -> Expr
+pub fn make_record_expr(loc~ : @basic.Location, trailing~ : TrailingMark, TypeName?, @list.List[FieldDef], lbrace_loc? : @basic.Location?, rbrace_loc? : @basic.Location?, comma_locs? : @list.List[@basic.Location], trailing_comma_loc? : @basic.Location?) -> Expr
 
-pub fn make_tuple_expr(loc~ : @basic.Location, @list.List[Expr]) -> Expr
+pub fn make_tuple_expr(loc~ : @basic.Location, @list.List[Expr], lparen_loc? : @basic.Location?, rparen_loc? : @basic.Location?, comma_locs? : @list.List[@basic.Location], trailing_comma_loc? : @basic.Location?) -> Expr
 
-pub fn make_tuple_pattern(loc~ : @basic.Location, @list.List[Pattern]) -> Pattern
+pub fn make_tuple_pattern(loc~ : @basic.Location, @list.List[Pattern], lparen_loc? : @basic.Location?, rparen_loc? : @basic.Location?, comma_locs? : @list.List[@basic.Location], trailing_comma_loc? : @basic.Location?) -> Pattern
 
-pub fn make_tuple_type(loc~ : @basic.Location, @list.List[Type]) -> Type
+pub fn make_tuple_type(loc~ : @basic.Location, @list.List[Type], lparen_loc? : @basic.Location?, rparen_loc? : @basic.Location?, comma_locs? : @list.List[@basic.Location], trailing_comma_loc? : @basic.Location?) -> Type
 
-pub fn make_uminus(loc~ : @basic.Location, String, Expr) -> Expr
+pub fn make_uminus(loc~ : @basic.Location, String, Expr, op_loc? : @basic.Location?) -> Expr
 
 pub fn make_unot(loc~ : @basic.Location, Expr) -> Expr
 
-pub fn make_uplus(loc~ : @basic.Location, String, Expr) -> Expr
+pub fn make_uplus(loc~ : @basic.Location, String, Expr, op_loc? : @basic.Location?) -> Expr
 
 pub let no_location : @basic.Location
+
+pub fn set_impl_trailing_semi(Impl, @basic.Location?) -> Impl
 
 // Errors
 
@@ -95,6 +97,7 @@ pub fn AliasTarget::loc(Self) -> @basic.Location
 pub(all) struct Argument {
   value : Expr
   kind : ArgumentKind
+  equal_loc : @basic.Location?
 }
 
 pub(all) enum ArgumentKind {
@@ -177,6 +180,7 @@ pub(all) struct ConstrParam {
 pub(all) struct ConstrPatArg {
   pat : Pattern
   kind : ArgumentKind
+  equal_loc : @basic.Location?
 }
 
 pub(all) struct Constructor {
@@ -193,7 +197,7 @@ pub(all) enum ConstructorExtraInfo {
 }
 
 pub(all) enum DeclBody {
-  DeclBody(expr~ : Expr)
+  DeclBody(expr~ : Expr, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, semi_locs~ : @list.List[@basic.Location], trailing_semi_loc~ : @basic.Location?)
   DeclStubs(FuncStubs)
   DeclNone
 }
@@ -237,17 +241,17 @@ pub(all) enum ExceptionDecl {
 }
 
 pub(all) enum Expr {
-  Apply(func~ : Expr, args~ : @list.List[Argument], loc~ : @basic.Location)
+  Apply(func~ : Expr, args~ : @list.List[Argument], loc~ : @basic.Location, bang_loc~ : @basic.Location?, question_loc~ : @basic.Location?, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
   Infix(op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
   Unary(op~ : Var, expr~ : Expr, loc~ : @basic.Location)
-  Array(exprs~ : @list.List[Expr], loc~ : @basic.Location)
-  ArraySpread(elems~ : @list.List[SpreadableElem], loc~ : @basic.Location)
+  Array(exprs~ : @list.List[Expr], loc~ : @basic.Location, lbracket_loc~ : @basic.Location?, rbracket_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
+  ArraySpread(elems~ : @list.List[SpreadableElem], loc~ : @basic.Location, lbracket_loc~ : @basic.Location?, rbracket_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
   ListComprehension(kind~ : ListComprehensionKind, guard_~ : Expr?, body~ : Expr, loc~ : @basic.Location)
   ArrayGet(array~ : Expr, index~ : Expr, loc~ : @basic.Location)
   ArrayGetSlice(array~ : Expr, start_index~ : Expr?, end_index~ : Expr?, index_loc~ : @basic.Location, loc~ : @basic.Location)
   ArraySet(array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @basic.Location)
   ArrayAugmentedSet(op~ : Var, array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @basic.Location)
-  Constant(c~ : Constant, loc~ : @basic.Location)
+  Constant(c~ : Constant, loc~ : @basic.Location, uplus_loc~ : @basic.Location?, uminus_loc~ : @basic.Location?)
   MultilineString(elems~ : @list.List[MultilineStringElem], loc~ : @basic.Location)
   Interp(elems~ : @list.List[InterpElem], loc~ : @basic.Location)
   Constraint(expr~ : Expr, ty~ : Type, loc~ : @basic.Location)
@@ -265,12 +269,12 @@ pub(all) enum Expr {
   LetAnd(bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location)
   Let(pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
   Sequence(exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location)
-  Tuple(exprs~ : @list.List[Expr], loc~ : @basic.Location)
-  Record(type_name~ : TypeName?, fields~ : @list.List[FieldDef], trailing~ : TrailingMark, loc~ : @basic.Location)
-  RecordUpdate(type_name~ : TypeName?, record~ : Expr, fields~ : @list.List[FieldDef], loc~ : @basic.Location)
+  Tuple(exprs~ : @list.List[Expr], loc~ : @basic.Location, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
+  Record(type_name~ : TypeName?, fields~ : @list.List[FieldDef], trailing~ : TrailingMark, loc~ : @basic.Location, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
+  RecordUpdate(type_name~ : TypeName?, record~ : Expr, fields~ : @list.List[FieldDef], loc~ : @basic.Location, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?, dotdot_loc~ : @basic.Location?)
   Field(record~ : Expr, accessor~ : Accessor, loc~ : @basic.Location)
   Method(type_name~ : TypeName, method_name~ : Label, loc~ : @basic.Location)
-  DotApply(self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, loc~ : @basic.Location)
+  DotApply(self~ : Expr, method_name~ : Label, args~ : @list.List[Argument], return_self~ : Bool, loc~ : @basic.Location, bang_loc~ : @basic.Location?, question_loc~ : @basic.Location?, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
   As(expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location)
   Mutate(record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location)
   Match(expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location)
@@ -293,8 +297,8 @@ pub(all) enum Expr {
   ForEach(binders~ : @list.List[Binder?], expr~ : Expr, init~ : @list.List[(Binder, Expr)], continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, else_block~ : Expr?, where_clause~ : WhereClause?, label~ : Label?, loc~ : @basic.Location)
   Try(body~ : Expr, catch_~ : @list.List[Case], try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location)
   TryOperator(body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location)
-  Map(elems~ : @list.List[MapExprElem], loc~ : @basic.Location)
-  Group(expr~ : Expr, group~ : Group, loc~ : @basic.Location)
+  Map(elems~ : @list.List[MapExprElem], loc~ : @basic.Location, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
+  Group(expr~ : Expr, group~ : Group, loc~ : @basic.Location, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?)
   TemplateWriting(expr~ : Expr, template~ : Expr, loc~ : @basic.Location)
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
 }
@@ -317,6 +321,7 @@ pub(all) struct FieldDef {
   expr : Expr
   is_pun : Bool
   loc : @basic.Location
+  colon_loc : @basic.Location?
 }
 
 pub(all) struct FieldName {
@@ -329,6 +334,7 @@ pub(all) struct FieldPat {
   pattern : Pattern
   is_pun : Bool
   loc : @basic.Location
+  colon_loc : @basic.Location?
 }
 
 pub(all) enum FnKind {
@@ -379,16 +385,16 @@ pub(all) enum Hole {
 }
 
 pub(all) enum Impl {
-  TopExpr(expr~ : Expr, is_main~ : Bool, is_async~ : @basic.Location?, loc~ : @basic.Location)
-  TopTest(expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, is_async~ : @basic.Location?, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
-  TopTypeDef(TypeDecl)
-  TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, where_clause~ : WhereClause?, loc~ : @basic.Location)
-  TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, is_declare~ : Bool)
-  TopTrait(TraitDecl)
-  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
-  TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
-  TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString, is_declare~ : Bool)
-  TopUsing(pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString)
+  TopExpr(expr~ : Expr, is_main~ : Bool, is_async~ : @basic.Location?, loc~ : @basic.Location, trailing_semi_loc~ : @basic.Location?)
+  TopTest(expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, is_async~ : @basic.Location?, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, trailing_semi_loc~ : @basic.Location?)
+  TopTypeDef(TypeDecl, trailing_semi_loc~ : @basic.Location?)
+  TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, where_clause~ : WhereClause?, loc~ : @basic.Location, trailing_semi_loc~ : @basic.Location?)
+  TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, is_declare~ : Bool, trailing_semi_loc~ : @basic.Location?)
+  TopTrait(TraitDecl, trailing_semi_loc~ : @basic.Location?)
+  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, trailing_semi_loc~ : @basic.Location?)
+  TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, trailing_semi_loc~ : @basic.Location?)
+  TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString, is_declare~ : Bool, trailing_semi_loc~ : @basic.Location?)
+  TopUsing(pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString, trailing_semi_loc~ : @basic.Location?)
 }
 pub fn Impl::json_repr(Self) -> Json
 pub fn Impl::loc(Self) -> @basic.Location
@@ -445,6 +451,7 @@ pub(all) struct MapExprElem {
   expr : Expr
   key_loc : @basic.Location
   loc : @basic.Location
+  colon_loc : @basic.Location?
 }
 
 pub(all) struct MapPatElem {
@@ -453,6 +460,8 @@ pub(all) struct MapPatElem {
   match_absent : Bool
   key_loc : @basic.Location
   loc : @basic.Location
+  question_loc : @basic.Location?
+  colon_loc : @basic.Location?
 }
 
 pub(all) struct MapVisitorBase[T](T)
@@ -464,27 +473,27 @@ pub(all) enum MultilineStringElem {
 }
 
 pub(all) enum Parameter {
-  DiscardPositional(ty~ : Type?, loc~ : @basic.Location)
-  Positional(binder~ : Binder, ty~ : Type?)
-  Labelled(binder~ : Binder, ty~ : Type?)
-  Optional(binder~ : Binder, default~ : Expr, ty~ : Type?)
-  QuestionOptional(binder~ : Binder, ty~ : Type?)
+  DiscardPositional(ty~ : Type?, loc~ : @basic.Location, colon_loc~ : @basic.Location?)
+  Positional(binder~ : Binder, ty~ : Type?, colon_loc~ : @basic.Location?)
+  Labelled(binder~ : Binder, ty~ : Type?, colon_loc~ : @basic.Location?)
+  Optional(binder~ : Binder, default~ : Expr, ty~ : Type?, question_loc~ : @basic.Location?, colon_loc~ : @basic.Location?, equal_loc~ : @basic.Location?)
+  QuestionOptional(binder~ : Binder, ty~ : Type?, question_loc~ : @basic.Location?, colon_loc~ : @basic.Location?)
 }
 pub fn Parameter::loc(Self) -> @basic.Location
 
 pub(all) enum Pattern {
   Alias(pat~ : Pattern, alias_~ : Binder, loc~ : @basic.Location)
   Any(loc~ : @basic.Location)
-  Array(pats~ : ArrayPatterns, loc~ : @basic.Location)
-  Constant(c~ : Constant, loc~ : @basic.Location)
+  Array(pats~ : ArrayPatterns, loc~ : @basic.Location, lbracket_loc~ : @basic.Location?, rbracket_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
+  Constant(c~ : Constant, loc~ : @basic.Location, uminus_loc~ : @basic.Location?)
   Constraint(pat~ : Pattern, ty~ : Type, loc~ : @basic.Location)
-  Constr(constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location)
+  Constr(constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?, dotdot_loc~ : @basic.Location?)
   Or(pat1~ : Pattern, pat2~ : Pattern, loc~ : @basic.Location)
-  Tuple(pats~ : @list.List[Pattern], loc~ : @basic.Location)
+  Tuple(pats~ : @list.List[Pattern], loc~ : @basic.Location, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
   Var(Binder)
-  Record(fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : @basic.Location)
-  Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : @basic.Location)
-  Range(lhs~ : Pattern, rhs~ : Pattern, kind~ : RangeKind, loc~ : @basic.Location)
+  Record(fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : @basic.Location, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?, dotdot_loc~ : @basic.Location?)
+  Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : @basic.Location, lbrace_loc~ : @basic.Location?, rbrace_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?, dotdot_loc~ : @basic.Location?)
+  Range(lhs~ : Pattern, rhs~ : Pattern, kind~ : RangeKind, loc~ : @basic.Location, op_loc~ : @basic.Location?)
   SpecialConstr(binder~ : Binder, args~ : @list.List[ConstrPatArg], loc~ : @basic.Location)
 }
 pub fn Pattern::loc(Self) -> @basic.Location
@@ -556,11 +565,11 @@ pub(all) enum TryOperatorKind {
 
 pub(all) enum Type {
   Any(loc~ : @basic.Location)
-  Arrow(args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : @basic.Location?, loc~ : @basic.Location)
-  Tuple(tys~ : @list.List[Type], loc~ : @basic.Location)
-  Name(constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @basic.Location)
+  Arrow(args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : @basic.Location?, loc~ : @basic.Location, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?, thin_arrow_loc~ : @basic.Location?)
+  Tuple(tys~ : @list.List[Type], loc~ : @basic.Location, lparen_loc~ : @basic.Location?, rparen_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
+  Name(constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @basic.Location, lbracket_loc~ : @basic.Location?, rbracket_loc~ : @basic.Location?, comma_locs~ : @list.List[@basic.Location], trailing_comma_loc~ : @basic.Location?)
   Option(ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location)
-  Object(ConstrId)
+  Object(constr_id~ : ConstrId, amp_loc~ : @basic.Location?)
 }
 pub fn Type::loc(Self) -> @basic.Location
 
@@ -1049,4 +1058,3 @@ pub(open) trait MapVisitor {
   fn visit_Expr_Group(Self, expr~ : Expr, group~ : Group, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_StaticAssert(Self, asserts~ : @list.List[StaticAssertion], body~ : Expr) -> Expr = _
 }
-
