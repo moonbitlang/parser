@@ -407,8 +407,6 @@ pub(all) enum InterpolationComponent {
 }
 
 pub struct IterVisitorBase[T](T)
-#deprecated
-pub fn[T] IterVisitorBase::inner(Self[T]) -> T
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T]
 
 pub(all) struct Label {
@@ -465,8 +463,6 @@ pub(all) struct MapPatElem {
 }
 
 pub(all) struct MapVisitorBase[T](T)
-#deprecated
-pub fn[T] MapVisitorBase::inner(Self[T]) -> T
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T]
 
 pub(all) enum MultilineStringElem {

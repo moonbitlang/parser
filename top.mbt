@@ -40,9 +40,9 @@ fn attach_docstrings(
             if remain.is_blank() {
               ""
             } else {
-              remain.to_string()
+              remain.to_owned()
             }
-          [.. "///", .. remain] => remain.to_string()
+          [.. "///", .. remain] => remain.to_owned()
           _ => panic()
         }
       }),

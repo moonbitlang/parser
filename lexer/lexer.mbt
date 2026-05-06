@@ -54,7 +54,7 @@ fn lex_tokens(
       let start_pos = env.calc_offset(input, base~)
       env.register_surrogate_pair(raw)
       let end_pos = env.calc_offset(rest, base~)
-      let comment_text = raw.to_string()
+      let comment_text = raw.to_owned()
       if env.is_interpolation {
         env.add_lexing_error(start=start_pos, end=end_pos, InterpInvalidComment)
       }
@@ -82,7 +82,7 @@ fn lex_tokens(
     // Character literals - escape sequences
     ("'" ("\\[\\'\"ntbrf/ ]" as raw) "'", rest) => {
       env.add_token_with_loc(
-        CHAR(raw.to_string()),
+        CHAR(raw.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -92,7 +92,7 @@ fn lex_tokens(
     // Character literals - hex escape
     ("'" ("\\x[0-9a-fA-F]{2}" as raw) "'", rest) => {
       env.add_token_with_loc(
-        CHAR(raw.to_string()),
+        CHAR(raw.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -102,7 +102,7 @@ fn lex_tokens(
     // Character literals - octal escape
     ("'" ("\\o[0-3][0-7]{2}" as raw) "'", rest) => {
       env.add_token_with_loc(
-        CHAR(raw.to_string()),
+        CHAR(raw.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -112,7 +112,7 @@ fn lex_tokens(
     // Character literals - unicode escape
     ("'" ("\\u[0-9a-fA-F]{4}" as raw) "'", rest) => {
       env.add_token_with_loc(
-        CHAR(raw.to_string()),
+        CHAR(raw.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -121,7 +121,7 @@ fn lex_tokens(
 
     // Character literals - unicode escape with braces
     ("'" ("\\u[{][0-9a-fA-F]+[}]" as raw) "'", rest) => {
-      let char_text = raw.to_string()
+      let char_text = raw.to_owned()
       env.add_token_with_loc(
         CHAR(char_text),
         start=env.calc_offset(input, base~),
@@ -195,7 +195,7 @@ fn lex_tokens(
 
     // Byte literals - hex escape
     ("b'\\x[0-9a-fA-F]{2}'" as raw, rest) => {
-      let literal = raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
+      let literal = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
         start=env.calc_offset(input, base~),
@@ -206,7 +206,7 @@ fn lex_tokens(
 
     // Byte literals - octal escape
     ("b'\\o[0-3][0-7]{2}'" as raw, rest) => {
-      let literal = raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
+      let literal = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
         start=env.calc_offset(input, base~),
@@ -217,7 +217,7 @@ fn lex_tokens(
 
     // Byte literals - ASCII character
     ("b'[\x00-\x7F]'" as raw, rest) => {
-      let ascii_char = raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
+      let ascii_char = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
       env.add_token_with_loc(
         BYTE(ascii_char),
         start=env.calc_offset(input, base~),
@@ -228,7 +228,7 @@ fn lex_tokens(
 
     // Byte literals - escape sequences
     ("b'\\[\\'\"`ntbrf/ ]'" as raw, rest) => {
-      let literal = raw.sub(start=2, end=raw.length() - 1).to_string() // Remove b' and '
+      let literal = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
         start=env.calc_offset(input, base~),
@@ -247,7 +247,7 @@ fn lex_tokens(
     // Float literals
     ("[0-9](_|[0-9])*\.[0-9_]*([eE][+\-]?[0-9](_|[0-9])*)?F" as float, rest) => {
       env.add_token_with_loc(
-        FLOAT(float.to_string()),
+        FLOAT(float.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -258,7 +258,7 @@ fn lex_tokens(
       rest
     ) => {
       env.add_token_with_loc(
-        FLOAT(float.to_string()),
+        FLOAT(float.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -268,7 +268,7 @@ fn lex_tokens(
     // Double literals
     ("[0-9](_|[0-9])*\.[0-9_]*([eE][+\-]?[0-9](_|[0-9])*)?" as double, rest) => {
       env.add_token_with_loc(
-        DOUBLE(double.to_string()),
+        DOUBLE(double.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -279,7 +279,7 @@ fn lex_tokens(
       rest
     ) => {
       env.add_token_with_loc(
-        DOUBLE(double.to_string()),
+        DOUBLE(double.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -294,7 +294,7 @@ fn lex_tokens(
     ) => {
       // Need to handle integer..range specially
       let integer_end = integer_with_range.length() - 2 // Remove ".."
-      let integer = integer_with_range.sub(start=0, end=integer_end).to_string()
+      let integer = integer_with_range.sub(start=0, end=integer_end).to_owned()
       env.add_token_with_loc(
         INT(integer),
         start=env.calc_offset(input, base~),
@@ -308,7 +308,7 @@ fn lex_tokens(
     // Regular integer literals
     ("[0-9](_|[0-9])*(UL|U|L|N)?" as integer, rest) => {
       env.add_token_with_loc(
-        INT(integer.to_string()),
+        INT(integer.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -316,7 +316,7 @@ fn lex_tokens(
     }
     ("0[xX][0-9a-fA-F](_|[0-9a-fA-F])*(UL|U|L|N)?" as integer, rest) => {
       env.add_token_with_loc(
-        INT(integer.to_string()),
+        INT(integer.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -324,7 +324,7 @@ fn lex_tokens(
     }
     ("0[Oo][0-7](_|[0-7])*(UL|U|L|N)?" as integer, rest) => {
       env.add_token_with_loc(
-        INT(integer.to_string()),
+        INT(integer.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -332,7 +332,7 @@ fn lex_tokens(
     }
     ("0[Bb][01](_|[01])*(UL|U|L|N)?" as integer, rest) => {
       env.add_token_with_loc(
-        INT(integer.to_string()),
+        INT(integer.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -349,7 +349,7 @@ fn lex_tokens(
       env.register_surrogate_pair(raw)
       let end_pos = env.calc_offset(rest, base~)
       env.add_token_with_loc(
-        @tokens.Token::UIDENT(raw.to_string()),
+        @tokens.Token::UIDENT(raw.to_owned()),
         start=start_pos,
         end=end_pos,
       )
@@ -358,7 +358,7 @@ fn lex_tokens(
 
     // Post label identifiers (name~) - simplified pattern
     ("[a-z_][a-zA-Z0-9_]*~" as raw, rest) => {
-      let ident = raw.sub(start=0, end=raw.length() - 1).to_string() // Remove ~
+      let ident = raw.sub(start=0, end=raw.length() - 1).to_owned() // Remove ~
       env.add_token_with_loc(
         @tokens.Token::POST_LABEL(ident),
         start=env.calc_offset(input, base~),
@@ -373,7 +373,7 @@ fn lex_tokens(
       "[\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}][\u{30}-\u{39}\u{41}-\u{5a}\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}]*" as raw,
       rest
     ) => {
-      let raw_str = raw.to_string()
+      let raw_str = raw.to_owned()
       let start_pos = env.calc_offset(input, base~)
       env.register_surrogate_pair(raw)
       let end_pos = env.calc_offset(rest, base~)
@@ -396,7 +396,7 @@ fn lex_tokens(
 
     // Augmented assignment operators
     ("[+\-*/%]=" as op, rest) => {
-      let op_char = op.sub(start=0, end=1).to_string()
+      let op_char = op.sub(start=0, end=1).to_owned()
       env.add_token_with_loc(
         @tokens.Token::AUGMENTED_ASSIGNMENT(op_char),
         start=env.calc_offset(input, base~),
@@ -578,7 +578,7 @@ fn lex_tokens(
       ),
       rest
     ) => {
-      let name = ident.to_string()
+      let name = ident.to_owned()
       let start_pos = env.calc_offset(input, base~) + 1
       env.register_surrogate_pair(ident)
       let end_pos = env.calc_offset(rest, base~)
@@ -596,7 +596,7 @@ fn lex_tokens(
       ),
       rest
     ) => {
-      let name = ident.to_string()
+      let name = ident.to_owned()
       let start_pos = env.calc_offset(input, base~) + 1
       env.register_surrogate_pair(ident)
       let end_pos = env.calc_offset(rest, base~)
@@ -613,7 +613,7 @@ fn lex_tokens(
       let digits_str = dot_int.sub(start=1, end=dot_int.length()) // Remove the '.'
       let idx = @string.parse_int(digits_str) catch {
         _ => {
-          let full_str = dot_int.to_string()
+          let full_str = dot_int.to_owned()
           env.add_lexing_error(
             InvalidDotInt(full_str),
             start=env.calc_offset(input, base~),
@@ -837,9 +837,9 @@ fn lex_tokens(
           InterpInvalidAttribute,
         )
       } else {
-        let ident = ident.to_string()
-        let dot_ident = dot_ident.to_string()
-        let raw_payload = raw_payload.to_string()
+        let ident = ident.to_owned()
+        let dot_ident = dot_ident.to_owned()
+        let raw_payload = raw_payload.to_owned()
         env.add_token_with_loc(
           @tokens.Token::ATTRIBUTE((ident, Some(dot_ident), raw_payload)),
           start=env.calc_offset(input, base~),
@@ -859,8 +859,8 @@ fn lex_tokens(
           InterpInvalidAttribute,
         )
       } else {
-        let ident = ident.to_string()
-        let raw_payload = raw_payload.to_string()
+        let ident = ident.to_owned()
+        let raw_payload = raw_payload.to_owned()
         env.add_token_with_loc(
           @tokens.Token::ATTRIBUTE((ident, None, raw_payload)),
           start=env.calc_offset(input, base~),
@@ -909,10 +909,10 @@ fn lex_tokens(
           InterpInvalidMultilineString,
         )
       }
-      let content_str = multiline_str.to_string()
+      let content_str = multiline_str.to_owned()
       let content = content_str.sub(start=2, end=content_str.length()) // Remove #|
       env.add_token_with_loc(
-        @tokens.Token::MULTILINE_STRING(content.to_string()),
+        @tokens.Token::MULTILINE_STRING(content.to_owned()),
         start=start_pos,
         end=end_pos,
       )
@@ -922,7 +922,7 @@ fn lex_tokens(
     // Package name @package/name - simplified pattern
     ("@" ("[a-zA-Z_][a-zA-Z0-9_/]*" as pkg_name_without_at), rest) => {
       env.add_token_with_loc(
-        @tokens.Token::PACKAGE_NAME(pkg_name_without_at.to_string()),
+        @tokens.Token::PACKAGE_NAME(pkg_name_without_at.to_owned()),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -1069,31 +1069,31 @@ fn lex_string(
 
       // Escape sequences
       ("\\[\\'\"`ntbrf/ ]" as raw, rest) => {
-        string_repr_buf.write_string(raw.to_string())
+        string_repr_buf.write_string(raw.to_owned())
         process_string(rest, start_pos)
       }
 
       // Hex escape
       ("\\x[0-9a-fA-F]{2}" as raw, rest) => {
-        string_repr_buf.write_string(raw.to_string())
+        string_repr_buf.write_string(raw.to_owned())
         process_string(rest, start_pos)
       }
 
       // Octal escape
       ("\\o[0-3][0-7]{2}" as raw, rest) => {
-        string_repr_buf.write_string(raw.to_string())
+        string_repr_buf.write_string(raw.to_owned())
         process_string(rest, start_pos)
       }
 
       // Unicode escape
       ("\\u[0-9a-fA-F]{4}" as raw, rest) => {
-        string_repr_buf.write_string(raw.to_string())
+        string_repr_buf.write_string(raw.to_owned())
         process_string(rest, start_pos)
       }
 
       // Unicode escape with braces
       ("\\u[{][0-9a-fA-F]+[}]" as raw, rest) => {
-        string_repr_buf.write_string(raw.to_string())
+        string_repr_buf.write_string(raw.to_owned())
         process_string(rest, start_pos)
       }
 
@@ -1133,7 +1133,7 @@ fn lex_string(
           string_repr_buf.reset()
           process_string(rest, env.calc_offset(base~, rest))
         } else {
-          string_repr_buf.write_string(raw.to_string())
+          string_repr_buf.write_string(raw.to_owned())
           process_string(rest, env.calc_offset(base~, rest))
         }
 

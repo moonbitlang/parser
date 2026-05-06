@@ -384,10 +384,10 @@ constant -> Constant
   | CHAR { Char($1) }
   | INT {
     match $1 {
-      [.. lit, .. "UL"] => UInt64(lit.to_string())
-      [.. lit, 'L'] => Int64(lit.to_string())
-      [.. lit, 'U'] => UInt(lit.to_string())
-      [.. lit, 'N'] => BigInt(lit.to_string())
+      [.. lit, .. "UL"] => UInt64(lit.to_owned())
+      [.. lit, 'L'] => Int64(lit.to_owned())
+      [.. lit, 'U'] => UInt(lit.to_owned())
+      [.. lit, 'N'] => BigInt(lit.to_owned())
       lit => Int(lit)
     }
   }

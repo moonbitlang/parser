@@ -6,7 +6,7 @@ pub fn normalize(json : String) -> String {
       abort(err.to_string())
     }
   }
-  json.stringify(indent=2).trim_end(char_set=" ").to_string()
+  json.stringify(indent=2).trim_end(char_set=" ").to_owned()
 }
 
 ///|
@@ -72,9 +72,9 @@ fn generate(mode~ : Mode) -> Unit {
       ..write_string(
         match mode {
           Parser =>
-            gen_test_for_parser(name.split(".").head().unwrap().to_string())
+            gen_test_for_parser(name.split(".").head().unwrap().to_owned())
           Lexer =>
-            gen_test_for_lexer(name.split(".").head().unwrap().to_string())
+            gen_test_for_lexer(name.split(".").head().unwrap().to_owned())
         },
       )
       .write_string("\n\n")
