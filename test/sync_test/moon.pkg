@@ -5,5 +5,6 @@ import {
   "moonbitlang/parser/lexer",
   "moonbitlang/parser/tokens",
   "moonbitlang/x/fs",
+  "moonbitlang/core/list",
   "moonbitlang/core/test",
 } for "test"
