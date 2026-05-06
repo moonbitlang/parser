@@ -1129,25 +1129,49 @@ structure_item -> Impl
       trailing_semi_loc = None,
     )
   }
-  | attributes is_declare visibility "extenum" UIDENT optional_type_parameters_no_constraints "{" list_semis(enum_constructor) "}" deriving_directive_list {
+  | attributes declare_info visibility "extenum" UIDENT optional_type_parameters_no_constraints_info "{" list_semis(enum_constructor) "}" deriving_directive_list_info {
+    let (is_declare, declare_loc) = $2
     let tycon_loc = mk_loc($loc($5))
+    let (params, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs, type_param_trailing_comma_loc) = $6
+    let (deriving, derive_loc, derive_lparen_loc, derive_rparen_loc, derive_comma_locs) = $10
     TopTypeDef(
       TypeDecl::{
         tycon : $5,
         tycon_loc,
-        params : $6,
+        params,
         components : ExtensibleEnum($8),
         type_vis : $3,
         doc : DocString::empty(),
-        deriving : $10,
+        deriving,
         loc : mk_loc($sloc),
         attrs : $1,
-        is_declare : $2
-      }
+        is_declare,
+        declare_loc,
+        extern_loc: None,
+        keyword_loc: Some(mk_loc($loc($4))),
+        type_params_lbracket_loc,
+        type_params_rbracket_loc,
+        type_param_comma_locs,
+        type_param_trailing_comma_loc,
+        equal_loc: None,
+        body_lbrace_loc: Some(mk_loc($loc($7))),
+        body_rbrace_loc: Some(mk_loc($loc($9))),
+        body_lparen_loc: None,
+        body_rparen_loc: None,
+        body_comma_locs: @list.empty(),
+        body_trailing_comma_loc: None,
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
+      },
+      trailing_semi_loc = None,
     )
   }
-  | attributes is_declare visibility "extenum" extenum_extension_target "+=" "{" list_semis(enum_constructor) "}" deriving_directive_list {
-    let (tycon, tycon_loc, params, target) = $5
+  | attributes declare_info visibility "extenum" extenum_extension_target "+=" "{" list_semis(enum_constructor) "}" deriving_directive_list_info {
+    let (is_declare, declare_loc) = $2
+    let (tycon, tycon_loc, params, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs, type_param_trailing_comma_loc, target) = $5
+    let (deriving, derive_loc, derive_lparen_loc, derive_rparen_loc, derive_comma_locs) = $10
     TopTypeDef(
       TypeDecl::{
         tycon,
@@ -1156,11 +1180,30 @@ structure_item -> Impl
         components : ExtendEnum(target~, constructors = $8),
         type_vis : $3,
         doc : DocString::empty(),
-        deriving : $10,
+        deriving,
         loc : mk_loc($sloc),
         attrs : $1,
-        is_declare : $2
-      }
+        is_declare,
+        declare_loc,
+        extern_loc: None,
+        keyword_loc: Some(mk_loc($loc($4))),
+        type_params_lbracket_loc,
+        type_params_rbracket_loc,
+        type_param_comma_locs,
+        type_param_trailing_comma_loc,
+        equal_loc: Some(mk_loc($loc($6))),
+        body_lbrace_loc: Some(mk_loc($loc($7))),
+        body_rbrace_loc: Some(mk_loc($loc($9))),
+        body_lparen_loc: None,
+        body_rparen_loc: None,
+        body_comma_locs: @list.empty(),
+        body_trailing_comma_loc: None,
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
+      },
+      trailing_semi_loc = None,
     )
   }
   | val_header "=" expr {
@@ -1622,16 +1665,18 @@ enum_header -> (
   }
   ;
 
-extenum_extension_target -> (String, Location, List[TypeDeclBinder], TypeName)
-  : UIDENT optional_type_parameters_no_constraints {
+extenum_extension_target -> (String, Location, List[TypeDeclBinder], Location?, Location?, List[Location], Location?, TypeName)
+  : UIDENT optional_type_parameters_no_constraints_info {
     let loc = mk_loc($loc($1))
+    let (params, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs, type_param_trailing_comma_loc) = $2
     let target = TypeName::{ name: Ident(name = $1), is_object: false, loc }
-    ($1, loc, $2, target)
+    ($1, loc, params, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs, type_param_trailing_comma_loc, target)
   }
-  | PACKAGE_NAME DOT_UIDENT optional_type_parameters_no_constraints {
+  | PACKAGE_NAME DOT_UIDENT optional_type_parameters_no_constraints_info {
     let tycon_loc = mk_loc($loc($2))
+    let (params, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs, type_param_trailing_comma_loc) = $3
     let target = TypeName::{ name: Dot(pkg = $1, id = $2), is_object: false, loc: mk_loc($sloc) }
-    ($2, tycon_loc, $3, target)
+    ($2, tycon_loc, params, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs, type_param_trailing_comma_loc, target)
   }
   ;
 
@@ -2080,7 +2125,12 @@ template_writing_expr -> Expr
     }
   }
   | left_value "<+" STRING {
-    let template = Expr::Constant(c = @syntax.Constant::String($3), loc = mk_loc($loc($3)))
+    let template = Expr::Constant(
+      c = @syntax.Constant::String($3),
+      loc = mk_loc($loc($3)),
+      uplus_loc = None,
+      uminus_loc = None,
+    )
     match $1 {
       Var(var_) => {
         let expr = @syntax.make_ident_expr(loc = var_.loc, var_)

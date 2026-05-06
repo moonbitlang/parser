@@ -1373,49 +1373,80 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       )
     }
     EXTENUM => {
+      let keyword_loc = self.peek_location()
       self.expect_token(TK_EXTENUM)
       let target = self.parse_type_name()
       let (tycon, tycon_loc) = match target.name {
         Ident(name~) => (name, target.loc)
         Dot(id~, ..) => (id, target.loc)
       }
-      let params = self.parse_opt_type_params_no_constraints()
-      let components : @syntax.TypeDesc = if self.peek_token() is PLUS_EQUAL {
-        self.expect_token(TK_PLUS_EQUAL)
-        let constructors = self.surround_series(
-            invalid_delims=[TK_COMMA],
-            left=TK_LBRACE,
-            right=TK_RBRACE,
-            delim=TK_SEMI,
-            State::parse_constr_decl,
-          )
-          |> @list.from_array
-        ExtendEnum(target~, constructors~)
-      } else {
-        let constrs = self.surround_series(
-            invalid_delims=[TK_COMMA],
-            left=TK_LBRACE,
-            right=TK_RBRACE,
-            delim=TK_SEMI,
-            State::parse_constr_decl,
-          )
-          |> @list.from_array
-        ExtensibleEnum(constrs)
-      }
-      let deriving = self.parse_deriving_directive_list()
-      let loc = self.loc_start_with(spos)
-      TopTypeDef({
-        tycon,
-        tycon_loc,
+      let (
         params,
-        components,
-        type_vis: vis,
-        doc: DocString::empty(),
+        type_params_lbracket_loc,
+        type_params_rbracket_loc,
+        type_param_comma_locs,
+        type_param_trailing_comma_loc,
+      ) = self.parse_opt_type_params_no_constraints_info()
+      let (components, equal_loc, body_lbrace_loc, body_rbrace_loc) : (
+        @syntax.TypeDesc,
+        Location?,
+        Location?,
+        Location?,
+      ) = if self.peek_token() is PLUS_EQUAL {
+        let equal_loc = self.peek_location()
+        self.expect_token(TK_PLUS_EQUAL)
+        let (constructors, lbrace_loc, rbrace_loc) = self.parse_enum_constrs_info()
+        (
+          ExtendEnum(target~, constructors~),
+          Some(equal_loc),
+          Some(lbrace_loc),
+          Some(rbrace_loc),
+        )
+      } else {
+        let (constrs, lbrace_loc, rbrace_loc) = self.parse_enum_constrs_info()
+        (ExtensibleEnum(constrs), None, Some(lbrace_loc), Some(rbrace_loc))
+      }
+      let (
         deriving,
-        loc,
-        attrs,
-        is_declare,
-      })
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
+      ) = self.parse_deriving_directive_list_info()
+      let loc = self.loc_start_with(spos)
+      TopTypeDef(
+        {
+          tycon,
+          tycon_loc,
+          params,
+          components,
+          type_vis: vis,
+          doc: DocString::empty(),
+          deriving,
+          loc,
+          attrs,
+          is_declare,
+          declare_loc,
+          extern_loc: None,
+          keyword_loc: Some(keyword_loc),
+          type_params_lbracket_loc,
+          type_params_rbracket_loc,
+          type_param_comma_locs,
+          type_param_trailing_comma_loc,
+          equal_loc,
+          body_lbrace_loc,
+          body_rbrace_loc,
+          body_lparen_loc: None,
+          body_rparen_loc: None,
+          body_comma_locs: @list.empty(),
+          body_trailing_comma_loc: None,
+          derive_loc,
+          derive_lparen_loc,
+          derive_rparen_loc,
+          derive_comma_locs,
+        },
+        trailing_semi_loc=None,
+      )
     }
     LET | CONST => {
       let (is_constant, binder) = match self.peek_token() {
@@ -3315,6 +3346,47 @@ fn State::parse_loop_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr 
     lbrace_loc=Some(lbrace_loc),
     rbrace_loc=Some(rbrace_loc),
   )
+}
+
+///|
+fn State::parse_loop_binder_with_value(
+  self : State,
+) -> (@syntax.Binder, @syntax.Expr) {
+  let binder = self.parse_binder(context="loop variable name of `for`")
+  self.expect_token(TK_EQUAL)
+  let value = self.parse_expr()
+  (binder, value)
+}
+
+///|
+fn State::parse_loop_binder_with_infix_value(
+  self : State,
+) -> (@syntax.Binder, @syntax.Expr) {
+  let binder = self.parse_binder(context="loop variable name of `for`")
+  self.expect_token(TK_EQUAL)
+  let value = self.parse_infix_expr(parsed=None)
+  (binder, value)
+}
+
+///|
+fn State::parse_foreach_binder(self : State) -> @syntax.Binder? {
+  match self.peek_token() {
+    UNDERSCORE => {
+      self.skip()
+      None
+    }
+    LIDENT(name) => {
+      let loc = self.peek_location()
+      self.skip()
+      Some({ name, loc })
+    }
+    other => {
+      let loc = self.peek_location()
+      self.report_unexpected(other, [TK_LIDENT, TK_UNDERSCORE], loc)
+      self.panic() |> ignore
+      None
+    }
+  }
 }
 
 ///|
@@ -5812,7 +5884,7 @@ fn State::parse_simple_expr(
     REGEX_LITERAL(x) => {
       let loc = self.peek_location()
       self.expect_token(TK_REGEX_LITERAL)
-      Constant(c=Regex(x), loc~)
+      Constant(c=Regex(x), loc~, uplus_loc=None, uminus_loc=None)
     }
     BYTES(x) => {
       let loc = self.peek_location()
@@ -6087,7 +6159,7 @@ fn State::parse_template_literal_expr(self : Self) -> @syntax.Expr {
     STRING(x) => {
       let loc = self.peek_location()
       self.expect_token(TK_STRING)
-      Constant(c=String(x), loc~)
+      Constant(c=String(x), loc~, uplus_loc=None, uminus_loc=None)
     }
     INTERP(xs) => {
       let loc = self.peek_location()
