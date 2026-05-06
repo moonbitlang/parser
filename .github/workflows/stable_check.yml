@@ -27,10 +27,9 @@ jobs:
         run: |
           moon version --all
 
-      - name: install module dependencies
+      - name: moon update
         run: |
           moon update
-          moon install
 
       - name: moon check
         run: moon check --deny-warn
