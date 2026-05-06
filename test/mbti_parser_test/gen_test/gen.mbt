@@ -25,7 +25,7 @@ fn main {
     let buf = StringBuilder::new()
     for name in tests {
       buf
-      ..write_string(gen_test(name.split(".").head().unwrap().to_string()))
+      ..write_string(gen_test(name.split(".").head().unwrap().to_owned()))
       .write_string("\n\n")
     }
     @fs.write_string_to_file(output, buf.to_string())

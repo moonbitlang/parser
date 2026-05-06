@@ -165,21 +165,21 @@ pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
   match (name, arg) {
     ("-", Constant(c=Constant::Int(x), loc=_)) => {
       let new_val = match x {
-        ['-', .. num] => num.to_string()
+        ['-', .. num] => num.to_owned()
         _ => "-" + x
       }
       make_constant_expr(loc~, Constant::Int(new_val))
     }
     ("-", Constant(c=Constant::Int64(x), loc=_)) => {
       let new_val = match x {
-        ['-', .. num] => num.to_string()
+        ['-', .. num] => num.to_owned()
         _ => "-" + x
       }
       make_constant_expr(loc~, Constant::Int64(new_val))
     }
     ("-", Constant(c=Constant::Double(x), loc=_)) => {
       let new_val = match x {
-        ['-', .. num] => num.to_string()
+        ['-', .. num] => num.to_owned()
         _ => "-" + x
       }
       make_constant_expr(loc~, Constant::Double(new_val))
@@ -356,16 +356,16 @@ pub fn make_int(i : String) -> Constant {
     let base = i.sub(end=i.length() - 1)
     if base.has_suffix("U") {
       let u64 = base.sub(end=base.length() - 1)
-      UInt64(u64.to_string())
+      UInt64(u64.to_owned())
     } else {
-      Int64(base.to_string())
+      Int64(base.to_owned())
     }
   } else if i.has_suffix("U") {
     let u32 = i.sub(end=i.length() - 1)
-    UInt(u32.to_string())
+    UInt(u32.to_owned())
   } else if i.has_suffix("N") {
     let bigint = i.sub(end=i.length() - 1)
-    BigInt(bigint.to_string())
+    BigInt(bigint.to_owned())
   } else {
     Int(i)
   }
@@ -382,7 +382,7 @@ pub fn make_double(f : String) -> Constant {
 pub fn make_float(f : String) -> Constant {
   if f.has_suffix("F") {
     let base = f.sub(end=f.length() - 1)
-    Float(base.to_string())
+    Float(base.to_owned())
   } else {
     abort("make_float: string must end with F")
   }
