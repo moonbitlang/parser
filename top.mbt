@@ -57,7 +57,7 @@ fn attach_docstrings(
     let previous = skip_docstrings_before(toplevel.loc().start)
     let doc = previous.map(make_doc).unwrap_or(@syntax.DocString::empty())
     match toplevel {
-      TopTypeDef(td) => {
+      TopTypeDef(td, ..) => {
         td.doc = doc
         match td.components {
           // there is no docstring inside the types
@@ -95,7 +95,7 @@ fn attach_docstrings(
       TopExpr(..) => ()
       TopImplRelation(..) as imp => imp.doc = doc
       TopTest(..) as test_ => test_.doc = doc
-      TopTrait(decl) => decl.doc = doc
+      TopTrait(decl, ..) => decl.doc = doc
       TopView(..) as view => view.doc = doc
       TopImpl(..) as imp => imp.doc = doc
       TopUsing(..) as using_stmt => using_stmt.doc = doc

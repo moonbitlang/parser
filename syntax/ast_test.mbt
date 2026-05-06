@@ -17,6 +17,22 @@ let dummy_docstring : @syntax.DocString = {
 let dummy_string_literal : @tokens.StringLiteral = "test_string"
 
 ///|
+fn simple_name_type(name : String) -> @syntax.Type {
+  @syntax.Name(
+    constr_id=@syntax.ConstrId::{
+      id: @syntax.LongIdent::Ident(name~),
+      loc: dummy_loc,
+    },
+    tys=@list.from_array([]),
+    loc=dummy_loc,
+    lbracket_loc=None,
+    rbracket_loc=None,
+    comma_locs=@list.from_array([]),
+    trailing_comma_loc=None,
+  )
+}
+
+///|
 test "impl variants to_json" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   let type_decl = @syntax.TypeDecl::{
@@ -30,16 +46,27 @@ test "impl variants to_json" {
     deriving: @list.from_array([]),
     loc: dummy_loc,
     is_declare: false,
+    declare_loc: None,
+    extern_loc: None,
+    keyword_loc: None,
+    type_params_lbracket_loc: None,
+    type_params_rbracket_loc: None,
+    type_param_comma_locs: @list.empty(),
+    type_param_trailing_comma_loc: None,
+    equal_loc: None,
+    body_lbrace_loc: None,
+    body_rbrace_loc: None,
+    body_lparen_loc: None,
+    body_rparen_loc: None,
+    body_comma_locs: @list.empty(),
+    body_trailing_comma_loc: None,
+    derive_loc: None,
+    derive_lparen_loc: None,
+    derive_rparen_loc: None,
+    derive_comma_locs: @list.empty(),
   }
   let binder = @syntax.Binder::{ name: "test", loc: dummy_loc }
-  let int_type = @syntax.Name(
-    constr_id=@syntax.ConstrId::{
-      id: @syntax.LongIdent::Ident(name="Int"),
-      loc: dummy_loc,
-    },
-    tys=@list.from_array([]),
-    loc=dummy_loc,
-  )
+  let int_type = simple_name_type("Int")
   json_inspect(
     @syntax.TopExpr(
       expr=unit_expr,
@@ -47,6 +74,7 @@ test "impl variants to_json" {
       local_types=@list.from_array([]),
       is_async=None,
       loc=dummy_loc,
+      trailing_semi_loc=None,
     ).json_repr(),
     content={
       "kind": "Impl::TopExpr",
@@ -77,6 +105,7 @@ test "impl variants to_json" {
       loc=dummy_loc,
       attrs=@list.from_array([]),
       doc=dummy_docstring,
+      trailing_semi_loc=None,
     ).json_repr(),
     content={
       "kind": "Impl::TopTest",
@@ -108,42 +137,49 @@ test "impl variants to_json" {
       },
     },
   )
-  json_inspect(@syntax.TopTypeDef(type_decl).json_repr(), content={
-    "kind": "Impl::TopTypeDef",
-    "loc": null,
-    "children": {
-      "value": {
-        "kind": "TypeDecl",
-        "loc": null,
-        "children": {
-          "tycon": "TestType",
-          "params": {
-            "kind": "TypeDecl::ParamList",
-            "loc": null,
-            "children": [],
-          },
-          "components": {
-            "kind": "TypeDesc::Abstract",
-            "loc": null,
-            "children": {},
-          },
-          "attrs": { "kind": "TypeDecl::AttrList", "loc": null, "children": [] },
-          "doc": "Test documentation",
-          "type_vis": {
-            "kind": "Visibility::Default",
-            "loc": null,
-            "children": {},
-          },
-          "is_declare": false,
-          "deriving": {
-            "kind": "TypeDecl::DerivingList",
-            "loc": null,
-            "children": [],
+  json_inspect(
+    @syntax.TopTypeDef(type_decl, trailing_semi_loc=None).json_repr(),
+    content={
+      "kind": "Impl::TopTypeDef",
+      "loc": null,
+      "children": {
+        "value": {
+          "kind": "TypeDecl",
+          "loc": null,
+          "children": {
+            "tycon": "TestType",
+            "params": {
+              "kind": "TypeDecl::ParamList",
+              "loc": null,
+              "children": [],
+            },
+            "components": {
+              "kind": "TypeDesc::Abstract",
+              "loc": null,
+              "children": {},
+            },
+            "attrs": {
+              "kind": "TypeDecl::AttrList",
+              "loc": null,
+              "children": [],
+            },
+            "doc": "Test documentation",
+            "type_vis": {
+              "kind": "Visibility::Default",
+              "loc": null,
+              "children": {},
+            },
+            "is_declare": false,
+            "deriving": {
+              "kind": "TypeDecl::DerivingList",
+              "loc": null,
+              "children": [],
+            },
           },
         },
       },
     },
-  })
+  )
   let fun_decl = @syntax.FunDecl::{
     type_name: None,
     name: binder,
@@ -158,13 +194,34 @@ test "impl variants to_json" {
     attrs: @list.from_array([]),
     doc: dummy_docstring,
     loc: dummy_loc,
+    declare_loc: None,
+    extern_loc: None,
+    fn_loc: None,
+    type_params_lbracket_loc: None,
+    type_params_rbracket_loc: None,
+    type_param_comma_locs: @list.empty(),
+    type_param_trailing_comma_loc: None,
+    params_lparen_loc: None,
+    params_rparen_loc: None,
+    param_comma_locs: @list.empty(),
+    trailing_param_comma_loc: None,
+    thin_arrow_loc: None,
   }
   let decl_body = @syntax.DeclBody(
     local_types=@list.from_array([]),
     expr=unit_expr,
+    lbrace_loc=None,
+    rbrace_loc=None,
+    semi_locs=@list.empty(),
+    trailing_semi_loc=None,
   )
   json_inspect(
-    @syntax.TopFuncDef(fun_decl~, decl_body~, loc=dummy_loc).json_repr(),
+    @syntax.TopFuncDef(
+      fun_decl~,
+      decl_body~,
+      loc=dummy_loc,
+      trailing_semi_loc=None,
+    ).json_repr(),
     content={
       "kind": "Impl::TopFuncDef",
       "loc": null,
@@ -236,6 +293,7 @@ test "impl variants to_json" {
       attrs=@list.from_array([]),
       doc=dummy_docstring,
       is_declare=false,
+      trailing_semi_loc=None,
     ).json_repr(),
     content={
       "kind": "Impl::TopLetDef",
@@ -299,6 +357,20 @@ test "impl variants to_json" {
     attrs=@list.empty(),
     doc=dummy_docstring,
     loc=dummy_loc,
+    trailing_semi_loc=None,
+    enumview_loc=None,
+    type_params_lbracket_loc=None,
+    type_params_rbracket_loc=None,
+    type_param_comma_locs=@list.empty(),
+    type_param_trailing_comma_loc=None,
+    constr_lbrace_loc=None,
+    constr_rbrace_loc=None,
+    for_loc=None,
+    with_loc=None,
+    params_lparen_loc=None,
+    params_rparen_loc=None,
+    param_comma_locs=@list.empty(),
+    trailing_param_comma_loc=None,
   )
   json_inspect(view.json_repr(), content={
     "kind": "Impl::TopView",
@@ -371,6 +443,7 @@ test "expr basic types to_json" {
   let argument = @syntax.Argument::{
     value: unit_expr,
     kind: @syntax.Positional,
+    equal_loc: None,
   }
   json_inspect(@syntax.Expr::Unit(loc=dummy_loc, faked=false).json_repr(), content={
     "kind": "Expr::Unit",
@@ -378,7 +451,12 @@ test "expr basic types to_json" {
     "children": { "faked": false },
   })
   json_inspect(
-    @syntax.Expr::Constant(c=int_constant, loc=dummy_loc).json_repr(),
+    @syntax.Expr::Constant(
+      c=int_constant,
+      loc=dummy_loc,
+      uplus_loc=None,
+      uminus_loc=None,
+    ).json_repr(),
     content={
       "kind": "Expr::Constant",
       "loc": null,
@@ -414,6 +492,12 @@ test "expr basic types to_json" {
       args=@list.from_array([argument]),
       attr=@syntax.NoAttr,
       loc=dummy_loc,
+      bang_loc=None,
+      question_loc=None,
+      lparen_loc=None,
+      rparen_loc=None,
+      comma_locs=@list.from_array([]),
+      trailing_comma_loc=None,
     ).json_repr(),
     content={
       "kind": "Expr::Apply",
@@ -506,7 +590,14 @@ test "expr basic types to_json" {
     },
   )
   json_inspect(
-    @syntax.Expr::Array(exprs=@list.from_array([unit_expr]), loc=dummy_loc).json_repr(),
+    @syntax.Expr::Array(
+      exprs=@list.from_array([unit_expr]),
+      loc=dummy_loc,
+      lbracket_loc=None,
+      rbracket_loc=None,
+      comma_locs=@list.from_array([]),
+      trailing_comma_loc=None,
+    ).json_repr(),
     content={
       "kind": "Expr::Array",
       "loc": null,
@@ -527,7 +618,14 @@ test "expr basic types to_json" {
   )
   let spread_elem = @syntax.SpreadableElem::Regular(unit_expr)
   json_inspect(
-    @syntax.ArraySpread(elems=@list.from_array([spread_elem]), loc=dummy_loc).json_repr(),
+    @syntax.ArraySpread(
+      elems=@list.from_array([spread_elem]),
+      loc=dummy_loc,
+      lbracket_loc=None,
+      rbracket_loc=None,
+      comma_locs=@list.from_array([]),
+      trailing_comma_loc=None,
+    ).json_repr(),
     content={
       "kind": "Expr::ArraySpread",
       "loc": null,
@@ -575,6 +673,10 @@ test "expr basic types to_json" {
     @syntax.Expr::Tuple(
       exprs=@list.from_array([unit_expr, unit_expr]),
       loc=dummy_loc,
+      lparen_loc=None,
+      rparen_loc=None,
+      comma_locs=@list.from_array([]),
+      trailing_comma_loc=None,
     ).json_repr(),
     content={
       "kind": "Expr::Tuple",
@@ -610,7 +712,7 @@ test "expr basic types to_json" {
     },
   )
   json_inspect(
-    @syntax.Return(return_value=Some(unit_expr), loc=dummy_loc).json_repr(),
+    @syntax.Return(return_value=Some(unit_expr), loc=dummy_loc, return_loc=None).json_repr(),
     content={
       "kind": "Expr::Return",
       "loc": null,
@@ -623,24 +725,35 @@ test "expr basic types to_json" {
       },
     },
   )
-  json_inspect(@syntax.Return(return_value=None, loc=dummy_loc).json_repr(), content={
-    "kind": "Expr::Return",
-    "loc": null,
-    "children": { "return_value": null },
-  })
-  json_inspect(@syntax.Raise(err_value=unit_expr, loc=dummy_loc).json_repr(), content={
-    "kind": "Expr::Raise",
-    "loc": null,
-    "children": {
-      "err_value": {
-        "kind": "Expr::Unit",
-        "loc": null,
-        "children": { "faked": false },
+  json_inspect(
+    @syntax.Return(return_value=None, loc=dummy_loc, return_loc=None).json_repr(),
+    content={
+      "kind": "Expr::Return",
+      "loc": null,
+      "children": { "return_value": null },
+    },
+  )
+  json_inspect(
+    @syntax.Raise(err_value=unit_expr, loc=dummy_loc, raise_loc=None).json_repr(),
+    content={
+      "kind": "Expr::Raise",
+      "loc": null,
+      "children": {
+        "err_value": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
       },
     },
-  })
+  )
   json_inspect(
-    @syntax.Break(arg=Some(unit_expr), label=Some(label), loc=dummy_loc).json_repr(),
+    @syntax.Break(
+      arg=Some(unit_expr),
+      label=Some(label),
+      loc=dummy_loc,
+      break_loc=None,
+    ).json_repr(),
     content={
       "kind": "Expr::Break",
       "loc": null,
@@ -663,6 +776,7 @@ test "expr basic types to_json" {
       args=@list.from_array([unit_expr]),
       label=None,
       loc=dummy_loc,
+      continue_loc=None,
     ).json_repr(),
     content={
       "kind": "Expr::Continue",
@@ -688,21 +802,16 @@ test "expr basic types to_json" {
 ///|
 test "expr complex types to_json" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
-  let int_type = @syntax.Name(
-    constr_id=@syntax.ConstrId::{
-      id: @syntax.LongIdent::Ident(name="Int"),
-      loc: dummy_loc,
-    },
-    tys=@list.from_array([]),
-    loc=dummy_loc,
-  )
+  let int_type = simple_name_type("Int")
   let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
   let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
   let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
   let case = @syntax.Case::{
     pattern: any_pattern,
     guard_: None,
+    guard_keyword_loc: None,
     body: unit_expr,
+    fat_arrow_loc: None,
   }
   let type_name = @syntax.TypeName::{
     name: @syntax.LongIdent::Ident(name="TestType"),
@@ -714,6 +823,7 @@ test "expr complex types to_json" {
     expr: unit_expr,
     is_pun: false,
     loc: dummy_loc,
+    colon_loc: None,
   }
   let variable = @syntax.Var::{
     name: @syntax.LongIdent::Ident(name="test_var"),
@@ -725,6 +835,12 @@ test "expr complex types to_json" {
       ifso=unit_expr,
       ifnot=Some(unit_expr),
       loc=dummy_loc,
+      if_loc=None,
+      else_loc=None,
+      if_lbrace_loc=None,
+      if_rbrace_loc=None,
+      else_lbrace_loc=None,
+      else_rbrace_loc=None,
     ).json_repr(),
     content={
       "kind": "Expr::If",
@@ -754,6 +870,13 @@ test "expr complex types to_json" {
       otherwise=Some(unit_expr),
       body=unit_expr,
       loc=dummy_loc,
+      guard_loc=None,
+      else_loc=None,
+      else_lbrace_loc=None,
+      else_rbrace_loc=None,
+      else_semi_locs=@list.empty(),
+      else_trailing_semi_loc=None,
+      semi_loc=None,
     ).json_repr(),
     content={
       "kind": "Expr::Guard",
@@ -778,7 +901,13 @@ test "expr complex types to_json" {
     },
   )
   json_inspect(
-    @syntax.Defer(expr=unit_expr, body=unit_expr, loc=dummy_loc).json_repr(),
+    @syntax.Defer(
+      expr=unit_expr,
+      body=unit_expr,
+      loc=dummy_loc,
+      defer_loc=None,
+      semi_loc=None,
+    ).json_repr(),
     content={
       "kind": "Expr::Defer",
       "loc": null,
@@ -797,7 +926,7 @@ test "expr complex types to_json" {
     },
   )
   json_inspect(
-    @syntax.Is(expr=unit_expr, pat=any_pattern, loc=dummy_loc).json_repr(),
+    @syntax.Is(expr=unit_expr, pat=any_pattern, loc=dummy_loc, is_loc=None).json_repr(),
     content={
       "kind": "Expr::Is",
       "loc": null,
@@ -817,6 +946,9 @@ test "expr complex types to_json" {
       expr=unit_expr,
       body=unit_expr,
       loc=dummy_loc,
+      let_loc=None,
+      equal_loc=None,
+      semi_loc=None,
     ).json_repr(),
     content={
       "kind": "Expr::Let",
@@ -843,6 +975,10 @@ test "expr complex types to_json" {
       expr=unit_expr,
       body=unit_expr,
       loc=dummy_loc,
+      let_loc=None,
+      mut_loc=None,
+      equal_loc=None,
+      semi_loc=None,
     ).json_repr(),
     content={
       "kind": "Expr::LetMut",
@@ -893,6 +1029,7 @@ test "expr complex types to_json" {
       exprs=@list.from_array([unit_expr]),
       last_expr=unit_expr,
       loc=dummy_loc,
+      semi_locs=@list.empty(),
     ).json_repr(),
     content={
       "kind": "Expr::Sequence",
@@ -923,6 +1060,10 @@ test "expr complex types to_json" {
       fields=@list.from_array([field_def]),
       trailing=@syntax.TrailingMark::Comma,
       loc=dummy_loc,
+      lbrace_loc=None,
+      rbrace_loc=None,
+      comma_locs=@list.from_array([]),
+      trailing_comma_loc=None,
     ).json_repr(),
     content={
       "kind": "Expr::Record",
@@ -1002,6 +1143,9 @@ test "expr complex types to_json" {
       cases=@list.from_array([case]),
       match_loc=dummy_loc,
       loc=dummy_loc,
+      match_keyword_loc=None,
+      lbrace_loc=None,
+      rbrace_loc=None,
     ).json_repr(),
     content={
       "kind": "Expr::Match",

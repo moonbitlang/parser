@@ -74,12 +74,32 @@ pub(all) enum Type {
     res~ : Type,
     err~ : ErrorType,
     is_async~ : Location?,
-    loc~ : Location
+    loc~ : Location,
+    lparen_loc~ : Location?,
+    rparen_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?,
+    thin_arrow_loc~ : Location?
   )
-  Tuple(tys~ : @list.List[Type], loc~ : Location)
-  Name(constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : Location)
+  Tuple(
+    tys~ : @list.List[Type],
+    loc~ : Location,
+    lparen_loc~ : Location?,
+    rparen_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?
+  )
+  Name(
+    constr_id~ : ConstrId,
+    tys~ : @list.List[Type],
+    loc~ : Location,
+    lbracket_loc~ : Location?,
+    rbracket_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?
+  )
   Option(ty~ : Type, loc~ : Location, question_loc~ : Location)
-  Object(ConstrId)
+  Object(constr_id~ : ConstrId, amp_loc~ : Location?)
 }
 
 ///|
@@ -88,14 +108,17 @@ pub(all) enum ErrorType {
   DefaultErrorType(loc~ : Location)
   NoErrorType
   Noraise(loc~ : Location)
-  MaybeError(ty~ : Type)
+  MaybeError(ty~ : Type, question_loc~ : Location?)
 }
 
 ///|
 pub(all) struct ConstrParam {
+  loc : Location
   ty : Type
   mut_ : Bool
   label : Label?
+  mut_loc : Location?
+  colon_loc : Location?
 }
 
 ///|
@@ -214,6 +237,8 @@ pub(all) struct TypeVarBinder {
   name_loc : Location
   /// type constraints for type variable, e.g. `Show + Compare`
   constraints : @list.List[TypeVarConstraint]
+  colon_loc : Location?
+  plus_locs : @list.List[Location]
 }
 
 ///|
@@ -265,20 +290,33 @@ pub(all) struct AliasTarget {
 pub(all) struct Argument {
   value : Expr
   kind : ArgumentKind
+  equal_loc : Location?
 }
 
 ///|
 pub(all) enum Parameter {
   /// `_ : Int`
-  DiscardPositional(ty~ : Type?, loc~ : Location)
+  DiscardPositional(ty~ : Type?, loc~ : Location, colon_loc~ : Location?)
   /// `param : Int`
-  Positional(binder~ : Binder, ty~ : Type?)
+  Positional(binder~ : Binder, ty~ : Type?, colon_loc~ : Location?)
   /// `label~ : Int`
-  Labelled(binder~ : Binder, ty~ : Type?)
+  Labelled(binder~ : Binder, ty~ : Type?, colon_loc~ : Location?)
   /// `label? : Int = default`
-  Optional(binder~ : Binder, default~ : Expr, ty~ : Type?)
+  Optional(
+    binder~ : Binder,
+    default~ : Expr,
+    ty~ : Type?,
+    question_loc~ : Location?,
+    colon_loc~ : Location?,
+    equal_loc~ : Location?
+  )
   /// `label? : Int`
-  QuestionOptional(binder~ : Binder, ty~ : Type?)
+  QuestionOptional(
+    binder~ : Binder,
+    ty~ : Type?,
+    question_loc~ : Location?,
+    colon_loc~ : Location?
+  )
 }
 
 ///|
@@ -288,7 +326,9 @@ pub type Parameters = @list.List[Parameter]
 pub(all) struct Case {
   pattern : Pattern
   guard_ : Expr?
+  guard_keyword_loc : Location?
   body : Expr
+  fat_arrow_loc : Location?
 }
 
 ///|
@@ -305,6 +345,7 @@ pub(all) struct MapExprElem {
   expr : Expr
   key_loc : Location
   loc : Location
+  colon_loc : Location?
 }
 
 ///|
@@ -326,6 +367,11 @@ pub(all) struct Func {
   has_error : Location?
   is_async : Location?
   loc : Location
+  fn_loc : Location?
+  body_lbrace_loc : Location?
+  body_rbrace_loc : Location?
+  body_semi_locs : @list.List[Location]
+  body_trailing_semi_loc : Location?
 }
 
 ///|
@@ -334,6 +380,7 @@ pub(all) struct FieldDef {
   expr : Expr
   is_pun : Bool
   loc : Location
+  colon_loc : Location?
 }
 
 ///|
@@ -369,7 +416,9 @@ pub(all) struct LexCase {
   pat : @list.List[LexTopPattern]
   pat_loc : Location
   guard_ : Expr?
+  guard_keyword_loc : Location?
   body : Expr
+  fat_arrow_loc : Location?
 }
 
 ///|
@@ -379,16 +428,36 @@ pub(all) enum Expr {
     func~ : Expr,
     args~ : @list.List[Argument],
     attr~ : ApplyAttr,
-    loc~ : Location
+    loc~ : Location,
+    bang_loc~ : Location?,
+    question_loc~ : Location?,
+    lparen_loc~ : Location?,
+    rparen_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?
   )
   /// e1 + e2
   Infix(op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : Location)
   /// -e
   Unary(op~ : Var, expr~ : Expr, loc~ : Location)
   /// [e1, e2, e3]
-  Array(exprs~ : @list.List[Expr], loc~ : Location)
+  Array(
+    exprs~ : @list.List[Expr],
+    loc~ : Location,
+    lbracket_loc~ : Location?,
+    rbracket_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?
+  )
   /// [..arr1, e1, ..arr2, e2]
-  ArraySpread(elems~ : @list.List[SpreadableElem], loc~ : Location)
+  ArraySpread(
+    elems~ : @list.List[SpreadableElem],
+    loc~ : Location,
+    lbracket_loc~ : Location?,
+    rbracket_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?
+  )
   /// e1[e2]
   ArrayGet(array~ : Expr, index~ : Expr, loc~ : Location)
   /// e1[e2:e3]
@@ -409,7 +478,12 @@ pub(all) enum Expr {
     value~ : Expr,
     loc~ : Location
   )
-  Constant(c~ : Constant, loc~ : Location)
+  Constant(
+    c~ : Constant,
+    loc~ : Location,
+    uplus_loc~ : Location?,
+    uminus_loc~ : Location?
+  )
   /// ```skip
   /// #| multiline
   /// #| string
@@ -427,44 +501,117 @@ pub(all) enum Expr {
     loop_body~ : Expr,
     while_else~ : Expr?,
     label~ : Label?,
-    loc~ : Location
+    loc~ : Location,
+    while_loc~ : Location?,
+    loop_lbrace_loc~ : Location?,
+    loop_rbrace_loc~ : Location?,
+    nobreak_loc~ : Location?,
+    nobreak_lbrace_loc~ : Location?,
+    nobreak_rbrace_loc~ : Location?
   )
   /// `fn(args){ expr }` or `(args) => expr`
   Function(func~ : Func, loc~ : Location)
   /// `id`
   Ident(id~ : Var, loc~ : Location)
   /// `if e1 { e2 } else { e3 }`
-  If(cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : Location)
+  If(
+    cond~ : Expr,
+    ifso~ : Expr,
+    ifnot~ : Expr?,
+    loc~ : Location,
+    if_loc~ : Location?,
+    else_loc~ : Location?,
+    if_lbrace_loc~ : Location?,
+    if_rbrace_loc~ : Location?,
+    else_lbrace_loc~ : Location?,
+    else_rbrace_loc~ : Location?
+  )
   /// `guard e1 else {e2}; e3`
-  Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : Location)
+  Guard(
+    cond~ : Expr,
+    otherwise~ : Expr?,
+    body~ : Expr,
+    loc~ : Location,
+    guard_loc~ : Location?,
+    else_loc~ : Location?,
+    else_lbrace_loc~ : Location?,
+    else_rbrace_loc~ : Location?,
+    else_semi_locs~ : @list.List[Location],
+    else_trailing_semi_loc~ : Location?,
+    semi_loc~ : Location?
+  )
   /// `expr is pattern`
-  Is(expr~ : Expr, pat~ : Pattern, loc~ : Location)
+  Is(expr~ : Expr, pat~ : Pattern, loc~ : Location, is_loc~ : Location?)
   /// `expr lexmatch? pattern with strategy`
   IsLexMatch(
     expr~ : Expr,
     strategy~ : Label?,
     pat~ : @list.List[LexTopPattern],
     pat_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
+    lexmatch_loc~ : Location?,
+    question_loc~ : Location?,
+    with_loc~ : Location?
   )
   /// `defer e1; e2`
-  Defer(expr~ : Expr, body~ : Expr, loc~ : Location)
+  Defer(
+    expr~ : Expr,
+    body~ : Expr,
+    loc~ : Location,
+    defer_loc~ : Location?,
+    semi_loc~ : Location?
+  )
   /// `fn local(args){ e1 }; e2`
-  LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : Location)
+  LetFn(
+    name~ : Binder,
+    func~ : Func,
+    body~ : Expr,
+    loc~ : Location,
+    fn_loc~ : Location?,
+    semi_loc~ : Location?
+  )
   /// `fn f(args){ e1 }; fn g(args){ e2 }; e3`, 
   /// where `f` and `g` are mutually recursive functions.
-  LetRec(bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : Location)
+  LetRec(
+    bindings~ : @list.List[(Binder, Func)],
+    body~ : Expr,
+    loc~ : Location,
+    fn_locs~ : @list.List[Location],
+    semi_loc~ : Location?
+  )
   LetAnd(
     bindings~ : @list.List[(Binder, Type?, Func)],
     body~ : Expr,
-    loc~ : Location
+    loc~ : Location,
+    letrec_loc~ : Location?,
+    semi_loc~ : Location?
   )
   /// `let pattern = e1; e2`
-  Let(pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : Location)
+  Let(
+    pattern~ : Pattern,
+    expr~ : Expr,
+    body~ : Expr,
+    loc~ : Location,
+    let_loc~ : Location?,
+    equal_loc~ : Location?,
+    semi_loc~ : Location?
+  )
   /// `e1; e2`
-  Sequence(exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : Location)
+  Sequence(
+    exprs~ : @list.List[Expr],
+    last_expr~ : Expr,
+    loc~ : Location,
+    semi_locs~ : @list.List[Location]
+  )
   /// `(e1, e2, e3)`
-  Tuple(exprs~ : @list.List[Expr], loc~ : Location)
+  Tuple(
+    exprs~ : @list.List[Expr],
+    loc~ : Location,
+    lparen_loc~ : Location?,
+    rparen_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?
+  )
   /// `TypeName::{ field1: e1, field2: e2 }`
   /// The `trailing` field is used to determine whether the source has a trailing separator.
   /// If the trailing separator is SEMI, the AST is invalid.
@@ -472,19 +619,33 @@ pub(all) enum Expr {
     type_name~ : TypeName?,
     fields~ : @list.List[FieldDef],
     trailing~ : TrailingMark,
-    loc~ : Location
+    loc~ : Location,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?
   )
   /// `{ ..record, field1: expr, field2: expr }`
   RecordUpdate(
     type_name~ : TypeName?,
     record~ : Expr,
     fields~ : @list.List[FieldDef],
-    loc~ : Location
+    loc~ : Location,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?,
+    dotdot_loc~ : Location?
   )
   /// `record.field`
   Field(record~ : Expr, accessor~ : Accessor, loc~ : Location)
   /// `TypeName::method`
-  Method(type_name~ : TypeName, method_name~ : Label, loc~ : Location)
+  Method(
+    type_name~ : TypeName,
+    method_name~ : Label,
+    loc~ : Location,
+    coloncolon_loc~ : Location?
+  )
   /// `self.method(args)`
   DotApply(
     self~ : Expr,
@@ -492,7 +653,13 @@ pub(all) enum Expr {
     args~ : @list.List[Argument],
     return_self~ : Bool,
     attr~ : ApplyAttr,
-    loc~ : Location
+    loc~ : Location,
+    bang_loc~ : Location?,
+    question_loc~ : Location?,
+    lparen_loc~ : Location?,
+    rparen_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?
   )
   /// `expr as Trait`
   As(expr~ : Expr, trait_~ : TypeName, loc~ : Location)
@@ -509,7 +676,10 @@ pub(all) enum Expr {
     expr~ : Expr,
     cases~ : @list.List[Case],
     match_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
+    match_keyword_loc~ : Location?,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?
   )
   /// `lexmatch using strategy { c1 => e1; c2 => e2 }`
   LexMatch(
@@ -517,7 +687,11 @@ pub(all) enum Expr {
     expr~ : Expr,
     match_loc~ : Location,
     cases~ : @list.List[LexCase],
-    loc~ : Location
+    loc~ : Location,
+    lexmatch_loc~ : Location?,
+    with_loc~ : Location?,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?
   )
   /// `let mut binder : Type = expr`
   LetMut(
@@ -525,7 +699,11 @@ pub(all) enum Expr {
     ty~ : Type?,
     expr~ : Expr,
     body~ : Expr,
-    loc~ : Location
+    loc~ : Location,
+    let_loc~ : Location?,
+    mut_loc~ : Location?,
+    equal_loc~ : Location?,
+    semi_loc~ : Location?
   )
   /// `lhs |> rhs`
   /// The rhs is restricted to `f`, `f(args)`, `_.method(args)`, `Constructor`, or `Constructor(args)`.
@@ -536,23 +714,31 @@ pub(all) enum Expr {
   /// This expression is only allowed in partial application.
   Hole(loc~ : Location, kind~ : Hole)
   /// `return expr`
-  Return(return_value~ : Expr?, loc~ : Location)
+  Return(return_value~ : Expr?, loc~ : Location, return_loc~ : Location?)
   /// `raise expr`
-  Raise(err_value~ : Expr, loc~ : Location)
+  Raise(err_value~ : Expr, loc~ : Location, raise_loc~ : Location?)
   /// `()`
   /// If `faked` is true, it means it was inserted by the parser.
   Unit(loc~ : Location, faked~ : Bool)
   /// `break expr`
-  Break(arg~ : Expr?, label~ : Label?, loc~ : Location)
+  Break(arg~ : Expr?, label~ : Label?, loc~ : Location, break_loc~ : Location?)
   /// `continue e1, e2, e3`
-  Continue(args~ : @list.List[Expr], label~ : Label?, loc~ : Location)
+  Continue(
+    args~ : @list.List[Expr],
+    label~ : Label?,
+    loc~ : Location,
+    continue_loc~ : Location?
+  )
   /// `loop args { ps1 => e1; ps2 => e2 }`
   Loop(
     arg~ : Expr,
     body~ : @list.List[Case],
     label~ : Label?,
     loop_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
+    loop_keyword_loc~ : Location?,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?
   )
   /// `for binders; condition; continue_block { body } else { expr }`
   For(
@@ -563,7 +749,14 @@ pub(all) enum Expr {
     for_else~ : Expr?,
     where_clause~ : WhereClause?,
     label~ : Label?,
-    loc~ : Location
+    loc~ : Location,
+    for_loc~ : Location?,
+    body_lbrace_loc~ : Location?,
+    body_rbrace_loc~ : Location?,
+    nobreak_loc~ : Location?,
+    nobreak_lbrace_loc~ : Location?,
+    nobreak_rbrace_loc~ : Location?,
+    header_semi_locs~ : @list.List[Location]
   )
   /// `for b1,b2 in e1 { e2 }`
   ForEach(
@@ -572,7 +765,15 @@ pub(all) enum Expr {
     body~ : Expr,
     else_block~ : Expr?,
     label~ : Label?,
-    loc~ : Location
+    loc~ : Location,
+    for_loc~ : Location?,
+    in_loc~ : Location?,
+    body_lbrace_loc~ : Location?,
+    body_rbrace_loc~ : Location?,
+    nobreak_loc~ : Location?,
+    nobreak_lbrace_loc~ : Location?,
+    nobreak_rbrace_loc~ : Location?,
+    comma_locs~ : @list.List[Location]
   )
   /// `try e0 catch { p1 => e1 } noraise { p2 => e2 }` or `e0 catch { p1 => e1 }`
   Try(
@@ -584,19 +785,44 @@ pub(all) enum Expr {
     try_loc~ : Location,
     catch_loc~ : Location,
     else_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
+    try_keyword_loc~ : Location?,
+    catch_keyword_loc~ : Location?,
+    catch_bang_loc~ : Location?,
+    catch_lbrace_loc~ : Location?,
+    catch_rbrace_loc~ : Location?,
+    noraise_loc~ : Location?,
+    else_lbrace_loc~ : Location?,
+    else_rbrace_loc~ : Location?
   )
   /// `try! expr` or `try? expr`
   TryOperator(
     body~ : Expr,
     kind~ : TryOperatorKind,
     try_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
+    question_loc~ : Location?,
+    bang_loc~ : Location?
   )
   /// `{ k1: e1, k2: e2 }`
-  Map(elems~ : @list.List[MapExprElem], loc~ : Location)
+  Map(
+    elems~ : @list.List[MapExprElem],
+    loc~ : Location,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?
+  )
   /// `(expr)` or `{expr}`
-  Group(expr~ : Expr, group~ : Group, loc~ : Location)
+  Group(
+    expr~ : Expr,
+    group~ : Group,
+    loc~ : Location,
+    lparen_loc~ : Location?,
+    rparen_loc~ : Location?,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?
+  )
   /// generated by compiler
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
 }
@@ -618,9 +844,14 @@ pub(all) enum DotDotBinder {
 ///|
 pub(all) enum ArrayPattern {
   Pattern(Pattern)
-  StringSpread(str~ : StringLiteral, loc~ : Location)
-  BytesSpread(bytes~ : BytesLiteral, loc~ : Location)
-  ConstSpread(binder~ : Binder, pkg~ : String?, loc~ : Location)
+  StringSpread(str~ : StringLiteral, loc~ : Location, dotdot_loc~ : Location?)
+  BytesSpread(bytes~ : BytesLiteral, loc~ : Location, dotdot_loc~ : Location?)
+  ConstSpread(
+    binder~ : Binder,
+    pkg~ : String?,
+    loc~ : Location,
+    dotdot_loc~ : Location?
+  )
 }
 
 ///|
@@ -633,6 +864,11 @@ pub(all) enum ArrayPatterns {
 pub(all) struct WhereClause {
   fields : @list.List[FieldDef]
   loc : Location
+  where_loc : Location?
+  lbrace_loc : Location?
+  rbrace_loc : Location?
+  comma_locs : @list.List[Location]
+  trailing_comma_loc : Location?
 }
 
 ///|
@@ -641,12 +877,14 @@ pub(all) struct FieldPat {
   pattern : Pattern
   is_pun : Bool
   loc : Location
+  colon_loc : Location?
 }
 
 ///|
 pub(all) struct ConstrPatArg {
   pat : Pattern
   kind : ArgumentKind
+  equal_loc : Location?
 }
 
 ///|
@@ -656,6 +894,8 @@ pub(all) struct MapPatElem {
   match_absent : Bool
   key_loc : Location
   loc : Location
+  question_loc : Location?
+  colon_loc : Location?
 }
 
 ///|
@@ -665,8 +905,16 @@ pub(all) enum Pattern {
   /// `_`
   Any(loc~ : Location)
   /// `[p1, p2, p3]`
-  Array(pats~ : ArrayPatterns, loc~ : Location)
-  Constant(c~ : Constant, loc~ : Location)
+  Array(
+    pats~ : ArrayPatterns,
+    loc~ : Location,
+    lbracket_loc~ : Location?,
+    rbracket_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?,
+    dotdot_loc~ : Location?
+  )
+  Constant(c~ : Constant, loc~ : Location, uminus_loc~ : Location?)
   /// `(pattern : Type)`
   Constraint(pat~ : Pattern, ty~ : Type, loc~ : Location)
   /// `Constructor` or `Constructor(p1, p2, p3)`
@@ -674,20 +922,56 @@ pub(all) enum Pattern {
     constr~ : Constructor,
     args~ : @list.List[ConstrPatArg]?,
     is_open~ : Bool,
-    loc~ : Location
+    loc~ : Location,
+    lparen_loc~ : Location?,
+    rparen_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?,
+    dotdot_loc~ : Location?
   )
   /// `pat1 | pat2`
   Or(pat1~ : Pattern, pat2~ : Pattern, loc~ : Location)
   /// `(p1, p2, p3)`
-  Tuple(pats~ : @list.List[Pattern], loc~ : Location)
+  Tuple(
+    pats~ : @list.List[Pattern],
+    loc~ : Location,
+    lparen_loc~ : Location?,
+    rparen_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?
+  )
   /// `binder`
   Var(Binder)
   /// `{ field1, field2, .. }`
-  Record(fields~ : @list.List[FieldPat], is_closed~ : Bool, loc~ : Location)
+  Record(
+    fields~ : @list.List[FieldPat],
+    is_closed~ : Bool,
+    loc~ : Location,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?,
+    dotdot_loc~ : Location?
+  )
   /// `{ "k1": e1, "k2": e2, .. }`
-  Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : Location)
+  Map(
+    elems~ : @list.List[MapPatElem],
+    is_closed~ : Bool,
+    loc~ : Location,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?,
+    dotdot_loc~ : Location?
+  )
   /// `p1..=p2` or `p1..<p2` 
-  Range(lhs~ : Pattern, rhs~ : Pattern, kind~ : RangeKind, loc~ : Location)
+  Range(
+    lhs~ : Pattern,
+    rhs~ : Pattern,
+    kind~ : RangeKind,
+    loc~ : Location,
+    op_loc~ : Location?
+  )
   SpecialConstr(
     binder~ : Binder,
     args~ : @list.List[ConstrPatArg],
@@ -704,6 +988,17 @@ pub(all) struct LocalTypeDecl {
   tycon_loc : Location
   components : TypeDesc
   deriving : @list.List[DerivingDirective]
+  keyword_loc : Location?
+  body_lbrace_loc : Location?
+  body_rbrace_loc : Location?
+  body_lparen_loc : Location?
+  body_rparen_loc : Location?
+  body_comma_locs : @list.List[Location]
+  body_trailing_comma_loc : Location?
+  derive_loc : Location?
+  derive_lparen_loc : Location?
+  derive_rparen_loc : Location?
+  derive_comma_locs : @list.List[Location]
 }
 
 ///|
@@ -726,6 +1021,24 @@ pub(all) struct TypeDecl {
   deriving : @list.List[DerivingDirective]
   loc : Location
   is_declare : Bool
+  declare_loc : Location?
+  extern_loc : Location?
+  keyword_loc : Location?
+  type_params_lbracket_loc : Location?
+  type_params_rbracket_loc : Location?
+  type_param_comma_locs : @list.List[Location]
+  type_param_trailing_comma_loc : Location?
+  equal_loc : Location?
+  body_lbrace_loc : Location?
+  body_rbrace_loc : Location?
+  body_lparen_loc : Location?
+  body_rparen_loc : Location?
+  body_comma_locs : @list.List[Location]
+  body_trailing_comma_loc : Location?
+  derive_loc : Location?
+  derive_lparen_loc : Location?
+  derive_rparen_loc : Location?
+  derive_comma_locs : @list.List[Location]
 }
 
 ///|
@@ -746,7 +1059,14 @@ pub(all) enum EmbeddedCode {
 
 ///|
 pub(all) enum DeclBody {
-  DeclBody(local_types~ : @list.List[LocalTypeDecl], expr~ : Expr)
+  DeclBody(
+    local_types~ : @list.List[LocalTypeDecl],
+    expr~ : Expr,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?,
+    semi_locs~ : @list.List[Location],
+    trailing_semi_loc~ : Location?
+  )
   DeclStubs(FuncStubs)
   DeclNone
 }
@@ -766,6 +1086,18 @@ pub(all) struct FunDecl {
   attrs : @list.List[Attribute]
   mut doc : DocString
   loc : Location
+  declare_loc : Location?
+  extern_loc : Location?
+  fn_loc : Location?
+  type_params_lbracket_loc : Location?
+  type_params_rbracket_loc : Location?
+  type_param_comma_locs : @list.List[Location]
+  type_param_trailing_comma_loc : Location?
+  params_lparen_loc : Location?
+  params_rparen_loc : Location?
+  param_comma_locs : @list.List[Location]
+  trailing_param_comma_loc : Location?
+  thin_arrow_loc : Location?
 }
 
 ///|
@@ -780,6 +1112,16 @@ pub(all) struct TraitMethodDecl {
   has_default : Location?
   attrs : @list.List[Attribute]
   loc : Location
+  type_params_lbracket_loc : Location?
+  type_params_rbracket_loc : Location?
+  type_param_comma_locs : @list.List[Location]
+  type_param_trailing_comma_loc : Location?
+  params_lparen_loc : Location?
+  params_rparen_loc : Location?
+  param_comma_locs : @list.List[Location]
+  trailing_param_comma_loc : Location?
+  thin_arrow_loc : Location?
+  equal_loc : Location?
 }
 
 ///|
@@ -792,6 +1134,12 @@ pub(all) struct TraitDecl {
   attrs : @list.List[Attribute]
   mut doc : DocString
   is_declare : Bool
+  declare_loc : Location?
+  trait_loc : Location?
+  colon_loc : Location?
+  plus_locs : @list.List[Location]
+  lbrace_loc : Location?
+  rbrace_loc : Location?
 }
 
 ///|
@@ -808,7 +1156,8 @@ pub(all) enum Impl {
     is_main~ : Bool,
     local_types~ : @list.List[LocalTypeDecl],
     is_async~ : Location?,
-    loc~ : Location
+    loc~ : Location,
+    trailing_semi_loc~ : Location?
   )
   TopTest(
     expr~ : Expr,
@@ -818,10 +1167,16 @@ pub(all) enum Impl {
     is_async~ : Location?,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
-    mut doc~ : DocString
+    mut doc~ : DocString,
+    trailing_semi_loc~ : Location?
   )
-  TopTypeDef(TypeDecl)
-  TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : Location)
+  TopTypeDef(TypeDecl, trailing_semi_loc~ : Location?)
+  TopFuncDef(
+    fun_decl~ : FunDecl,
+    decl_body~ : DeclBody,
+    loc~ : Location,
+    trailing_semi_loc~ : Location?
+  )
   TopLetDef(
     binder~ : Binder,
     ty~ : Type?,
@@ -831,9 +1186,10 @@ pub(all) enum Impl {
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     mut doc~ : DocString,
-    is_declare~ : Bool
+    is_declare~ : Bool,
+    trailing_semi_loc~ : Location?
   )
-  TopTrait(TraitDecl)
+  TopTrait(TraitDecl, trailing_semi_loc~ : Location?)
   TopImpl(
     self_ty~ : Type?,
     trait_~ : TypeName,
@@ -847,7 +1203,20 @@ pub(all) enum Impl {
     vis~ : Visibility,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
-    mut doc~ : DocString
+    mut doc~ : DocString,
+    trailing_semi_loc~ : Location?,
+    impl_loc~ : Location?,
+    type_params_lbracket_loc~ : Location?,
+    type_params_rbracket_loc~ : Location?,
+    type_param_comma_locs~ : @list.List[Location],
+    type_param_trailing_comma_loc~ : Location?,
+    for_loc~ : Location?,
+    with_loc~ : Location?,
+    params_lparen_loc~ : Location?,
+    params_rparen_loc~ : Location?,
+    param_comma_locs~ : @list.List[Location],
+    trailing_param_comma_loc~ : Location?,
+    thin_arrow_loc~ : Location?
   )
   TopView(
     quantifiers~ : @list.List[TypeVarBinder],
@@ -862,7 +1231,21 @@ pub(all) enum Impl {
     vis~ : Visibility,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
-    mut doc~ : DocString
+    mut doc~ : DocString,
+    trailing_semi_loc~ : Location?,
+    enumview_loc~ : Location?,
+    type_params_lbracket_loc~ : Location?,
+    type_params_rbracket_loc~ : Location?,
+    type_param_comma_locs~ : @list.List[Location],
+    type_param_trailing_comma_loc~ : Location?,
+    constr_lbrace_loc~ : Location?,
+    constr_rbrace_loc~ : Location?,
+    for_loc~ : Location?,
+    with_loc~ : Location?,
+    params_lparen_loc~ : Location?,
+    params_rparen_loc~ : Location?,
+    param_comma_locs~ : @list.List[Location],
+    trailing_param_comma_loc~ : Location?
   )
   TopImplRelation(
     self_ty~ : Type,
@@ -872,7 +1255,15 @@ pub(all) enum Impl {
     attrs~ : @list.List[Attribute],
     loc~ : Location,
     mut doc~ : DocString,
-    is_declare~ : Bool
+    is_declare~ : Bool,
+    trailing_semi_loc~ : Location?,
+    declare_loc~ : Location?,
+    impl_loc~ : Location?,
+    type_params_lbracket_loc~ : Location?,
+    type_params_rbracket_loc~ : Location?,
+    type_param_comma_locs~ : @list.List[Location],
+    type_param_trailing_comma_loc~ : Location?,
+    for_loc~ : Location?
   )
   TopUsing(
     pkg~ : Label,
@@ -880,7 +1271,13 @@ pub(all) enum Impl {
     vis~ : Visibility,
     attrs~ : @list.List[Attribute],
     loc~ : Location,
-    mut doc~ : DocString
+    mut doc~ : DocString,
+    trailing_semi_loc~ : Location?,
+    using_loc~ : Location?,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
+    trailing_comma_loc~ : Location?
   )
 }
 
