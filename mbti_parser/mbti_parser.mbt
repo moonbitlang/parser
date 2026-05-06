@@ -2307,10 +2307,10 @@ fn yy_action_70(
 // file:///./mbti_parser.mbty
 // 385|    INT {
 // 386|    match $1 {
-// 387|      [.. lit, .. "UL"] => UInt64(lit.to_string())
-// 388|      [.. lit, 'L'] => Int64(lit.to_string())
-// 389|      [.. lit, 'U'] => UInt(lit.to_string())
-// 390|      [.. lit, 'N'] => BigInt(lit.to_string())
+// 387|      [.. lit, .. "UL"] => UInt64(lit.to_owned())
+// 388|      [.. lit, 'L'] => Int64(lit.to_owned())
+// 389|      [.. lit, 'U'] => UInt(lit.to_owned())
+// 390|      [.. lit, 'N'] => BigInt(lit.to_owned())
 // 391|      lit => Int(lit)
 // 392|    }
 // 393|  }
@@ -2325,10 +2325,10 @@ fn yy_action_71(
     {
       ()
       match _dollar1 {
-        [.. lit, .. "UL"] => UInt64(lit.to_string())
-        [.. lit, 'L'] => Int64(lit.to_string())
-        [.. lit, 'U'] => UInt(lit.to_string())
-        [.. lit, 'N'] => BigInt(lit.to_string())
+        [.. lit, .. "UL"] => UInt64(lit.to_owned())
+        [.. lit, 'L'] => Int64(lit.to_owned())
+        [.. lit, 'U'] => UInt(lit.to_owned())
+        [.. lit, 'N'] => BigInt(lit.to_owned())
         lit => Int(lit)
       }
     },
