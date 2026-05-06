@@ -109,6 +109,37 @@ pub fn Location::trim_last_char(self : Location) -> Location {
 }
 
 ///|
+pub fn Location::first_char(self : Location) -> Location {
+  Location::{
+    start: self.start,
+    end: Position::{
+      fname: self.start.fname,
+      lnum: self.start.lnum,
+      bol: self.start.bol,
+      cnum: self.start.cnum + 1,
+    },
+  }
+}
+
+///|
+pub fn Location::last_char(self : Location) -> Location {
+  Location::{
+    start: Position::{
+      fname: self.end.fname,
+      lnum: self.end.lnum,
+      bol: self.end.bol,
+      cnum: self.end.cnum - 1,
+    },
+    end: self.end,
+  }
+}
+
+///|
+pub fn Location::trim_first_and_last_char(self : Location) -> Location {
+  self.trim_first_char().trim_last_char()
+}
+
+///|
 pub impl Show for Location with fn output(self, buf) {
   buf
   ..write_string(self.start.fname)

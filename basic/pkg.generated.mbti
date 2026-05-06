@@ -34,7 +34,10 @@ pub(all) struct Location {
   start : Position
   end : Position
 } derive(Compare, Eq, Hash, @debug.Debug)
+pub fn Location::first_char(Self) -> Self
+pub fn Location::last_char(Self) -> Self
 pub fn Location::merge(Self, Self) -> Self
+pub fn Location::trim_first_and_last_char(Self) -> Self
 pub fn Location::trim_first_char(Self) -> Self
 pub fn Location::trim_last_char(Self) -> Self
 pub impl Show for Location
