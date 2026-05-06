@@ -177,7 +177,7 @@ value_sig -> ValueSig
   : attributes vis "let" lident ":" type_ { ValueSig::{ attrs: $1, name: $4, type_: $6 } }
   ;
 
-method_self_type_coloncolon -> MethodSelfType 
+method_self_type_coloncolon -> MethodSelfType
  : UIDENT "::" {
   MethodSelfType::{ name : $1, is_object : false, loc : mk_loc($loc($1)) }
  }
@@ -210,8 +210,8 @@ func_sig -> FuncSig
   ;
 
 trait_method_sig -> TraitMethodSig
-  : attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) { 
-    TraitMethodSig::{ attrs : $1, is_async: $2, name: $3, params: $4, return_: $6, has_default: $7} 
+  : attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
+    TraitMethodSig::{ attrs : $1, is_async: $2, name: $3, params: $4, return_: $6, has_default: $7}
   }
   ;
 
@@ -221,7 +221,7 @@ trait_method_sig -> TraitMethodSig
 
 type_sig -> TypeSig
   : attributes vis "type" type_decl_name_with_params optional_derive {
-    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5} 
+    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
   }
   | attributes vis "suberror" uident optional_derive {
     TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
@@ -256,14 +256,14 @@ impl_sig -> ImplSig
   : attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
     ImplSig::{type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
   }
-  | attributes vis "impl" qualified_uident "for" type_ { 
+  | attributes vis "impl" qualified_uident "for" type_ {
     ImplSig::{type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
   }
   ;
 
 trait_sig -> TraitSig
-  : attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body { 
-    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6} 
+  : attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
   }
   ;
 
@@ -279,7 +279,7 @@ using_binder -> Name?
 
 alias_sig -> AliasSig
   : attributes vis "type"  type_decl_name_with_params "=" type_ {
-    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6) 
+    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
   }
   | attributes vis "fnalias" uident "::" lident {
     FuncAlias(attrs = $1,name=$6, type_name=$4)
@@ -295,8 +295,8 @@ alias_sig -> AliasSig
   ;
 
 enum_constructor -> ConstrDecl
-  : attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { 
-    ConstrDecl::{name: ConstrName::{ name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()} 
+  : attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {
+    ConstrDecl::{name: ConstrName::{ name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()}
   }
   ;
 
@@ -304,14 +304,39 @@ enum_constructor -> ConstrDecl
   : "=" INT { ($2, mk_loc($loc($2))) }
   ;
 
+%inline constr_param_mut_info -> (Bool, Location?)
+  : "mut" { (true, Some(mk_loc($loc($1)))) }
+  | { (false, None) }
+  ;
+
 constructor_param -> ConstrParam
-  : boption("mut") type_ { ConstrParam::{mut_: $1, ty: $2, label: None} }
-  | boption("mut") post_label ":" type_ { ConstrParam::{mut_: $1, ty: $4, label: Some($2)} }
+  : constr_param_mut_info type_ {
+    let (mut_, mut_loc) = $1
+    ConstrParam::{
+      loc: mk_loc($sloc),
+      mut_,
+      ty: $2,
+      label: None,
+      mut_loc: mut_loc,
+      colon_loc: None,
+    }
+  }
+  | constr_param_mut_info post_label ":" type_ {
+    let (mut_, mut_loc) = $1
+    ConstrParam::{
+      loc: mk_loc($sloc),
+      mut_,
+      ty: $4,
+      label: Some($2),
+      mut_loc: mut_loc,
+      colon_loc: Some(mk_loc($loc($3))),
+    }
+  }
   ;
 
 record_decl_field -> FieldDecl
-  : attributes boption("mut") LIDENT ":" type_ { 
-    FieldDecl::{ name: FieldName::{ label: $3, loc : mk_loc($loc($3)) }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() } 
+  : attributes boption("mut") LIDENT ":" type_ {
+    FieldDecl::{ name: FieldName::{ label: $3, loc : mk_loc($loc($3)) }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
   }
   ;
 
@@ -366,18 +391,76 @@ extensible_enum_extension_target -> (Name, @list.List[TypeParamNoConstraints], Q
 
 simple_type -> Type
   : simple_type "?" { Option(ty=$1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
-  | "(" type_ "," separated_nonempty_list(",", type_) ")" { Tuple(tys=$4.add($2), loc=mk_loc($sloc)) }
+  | "(" type_ "," separated_nonempty_list(",", type_) ")" {
+    Tuple(
+      tys=$4.add($2),
+      loc=mk_loc($sloc),
+      lparen_loc=None,
+      rparen_loc=None,
+      comma_locs=@list.empty(),
+      trailing_comma_loc=None,
+    )
+  }
   | "(" type_ ")" { $2 }
-  | qualified_uident_ optional_type_arguments { Name(constr_id=$1, tys=$2, loc=mk_loc($sloc)) }
-  | "&" qualified_uident_ { Object($2) }
+  | qualified_uident_ optional_type_arguments {
+    Name(
+      constr_id=$1,
+      tys=$2,
+      loc=mk_loc($sloc),
+      lbracket_loc=None,
+      rbracket_loc=None,
+      comma_locs=@list.empty(),
+      trailing_comma_loc=None,
+    )
+  }
+  | "&" qualified_uident_ { Object(constr_id=$2, amp_loc=None) }
   | "_" { Any(loc=mk_loc($sloc)) }
-  
+
 
 type_ -> Type
   : simple_type { $1 }
-  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
-  | is_async "(" ")" "->" return_type { Arrow(args=@list.empty(), res=$5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
-  | is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type {
+    Arrow(
+      args=$5.unwrap_or(@list.empty()).add($3),
+      res=$8.0,
+      err=$8.1,
+      is_async=$1,
+      loc=mk_loc($sloc),
+      lparen_loc=None,
+      rparen_loc=None,
+      comma_locs=@list.empty(),
+      trailing_comma_loc=None,
+      thin_arrow_loc=None,
+    )
+  }
+  | is_async "(" ")" "->" return_type {
+    Arrow(
+      args=@list.empty(),
+      res=$5.0,
+      err=$5.1,
+      is_async=$1,
+      loc=mk_loc($sloc),
+      lparen_loc=None,
+      rparen_loc=None,
+      comma_locs=@list.empty(),
+      trailing_comma_loc=None,
+      thin_arrow_loc=None,
+    )
+  }
+  | is_async "(" type_ ")" "->" return_type {
+    Arrow(
+      args=@list.singleton($3),
+      res=$6.0,
+      err=$6.1,
+      is_async=$1,
+      loc=mk_loc($sloc),
+      lparen_loc=None,
+      rparen_loc=None,
+      comma_locs=@list.empty(),
+      trailing_comma_loc=None,
+      thin_arrow_loc=None,
+    )
+  }
   ;
 
 return_type -> (Type, ErrorType)
@@ -386,13 +469,31 @@ return_type -> (Type, ErrorType)
   | simple_type "raise" { ($1, DefaultErrorType(loc=mk_loc($loc($2)))) }
   | simple_type "raise" error_type { ($1, ErrorType(ty = $3)) }
   | simple_type "raise" "?" {
-    let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
-    ($1, MaybeError(ty=fake_error)) 
+    let fake_error : Type = Name(
+      constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@syntax.no_location },
+      tys=@list.empty(),
+      loc=@syntax.no_location,
+      lbracket_loc=None,
+      rbracket_loc=None,
+      comma_locs=@list.empty(),
+      trailing_comma_loc=None,
+    )
+    ($1, MaybeError(ty=fake_error, question_loc=Some(mk_loc($loc($2)))))
   }
   ;
 
 error_type -> Type
-  : qualified_uident_ { Name(constr_id=$1, tys=@list.empty(), loc=mk_loc($sloc)) }
+  : qualified_uident_ {
+    Name(
+      constr_id=$1,
+      tys=@list.empty(),
+      loc=mk_loc($sloc),
+      lbracket_loc=None,
+      rbracket_loc=None,
+      comma_locs=@list.empty(),
+      trailing_comma_loc=None,
+    )
+  }
   ;
 
 optional_type_arguments -> @list.List[Type]
@@ -401,9 +502,22 @@ optional_type_arguments -> @list.List[Type]
   ;
 
 parameter -> Parameter
-  : type_ { DiscardPositional(ty = Some($1), loc = @syntax.no_location) }
-  | POST_LABEL ":" type_ { Labelled(binder = { name : $1, loc : mk_loc($loc($1)) }, ty = Some($3)) }
-  | label "?" ":" type_ { QuestionOptional(binder = { name : $1.name, loc : $1.loc }, ty = Some($4)) }
+  : type_ { DiscardPositional(ty = Some($1), loc = mk_loc($loc($1)), colon_loc = None) }
+  | post_label ":" type_ {
+    Labelled(
+      binder = { name : $1.name, loc : $1.loc },
+      ty = Some($3),
+      colon_loc = Some(mk_loc($loc($2))),
+    )
+  }
+  | label "?" ":" type_ {
+    QuestionOptional(
+      binder = { name : $1.name, loc : $1.loc },
+      ty = Some($4),
+      question_loc = Some(mk_loc($loc($2))),
+      colon_loc = Some(mk_loc($loc($3))),
+    )
+  }
   ;
 
 constant -> Constant
