@@ -346,7 +346,7 @@ fn parse_apply(state : State) -> (String, Ast) {
     state.report_expected_here("\"(\"")
     state.skip_until_statement_end()
     let loc = Location::{ start: args_start, end: args_start }
-    return (name, Obj(map=Map::new(), loc~))
+    return (name, Obj(map=Map([]), loc~))
   }
   let args = parse_comma_separated(state, right=TK_RPAREN, parse_argument)
   (name, Obj(map=Map::from_array(args), loc=state.loc_start_with(args_start)))
@@ -612,7 +612,7 @@ fn parse_statements(state : State) -> Array[(String, Ast)] {
 pub fn moon_pkg_of_tokens(tokens : Triples) -> (Ast, Array[Report]) {
   if tokens.is_empty() {
     let loc = Location::{ start: dummy_pos, end: dummy_pos }
-    return (Obj(map=Map::new(), loc~), [])
+    return (Obj(map=Map([]), loc~), [])
   }
   let start = tokens[0].1
   let state = State::{
