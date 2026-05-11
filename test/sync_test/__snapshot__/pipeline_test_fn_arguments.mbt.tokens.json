@@ -1263,31 +1263,31 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "34:3-34:10"
+    "loc": "34:3-34:8"
   },
   {
     "token": "LPAREN",
-    "loc": "34:10-34:11"
+    "loc": "34:8-34:9"
   },
   {
     "token": [
       "LIDENT",
       "x4"
     ],
-    "loc": "34:11-34:13"
+    "loc": "34:9-34:11"
   },
   {
     "token": "RPAREN",
-    "loc": "34:13-34:14"
+    "loc": "34:11-34:12"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "34:14-34:14"
+    "loc": "34:12-34:12"
   },
   {
     "token": [
@@ -1298,11 +1298,11 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "34:15-34:25"
+    "loc": "34:13-34:23"
   },
   {
     "token": "NEWLINE",
-    "loc": "34:25-34:26"
+    "loc": "34:23-34:24"
   },
   {
     "token": "LET",

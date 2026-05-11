@@ -4,6 +4,6 @@ fn testX(x: T) {
     T::x => println("X")
     T::Bbb => println("B")
     @pkg.T::Cccc => println("C")
+    @pkg.T::@pkg.Dddd => println("D")
   }
 }
-

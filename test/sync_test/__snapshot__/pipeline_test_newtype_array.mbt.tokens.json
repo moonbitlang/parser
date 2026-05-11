@@ -361,28 +361,28 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "9:19-9:26"
+    "loc": "9:19-9:24"
   },
   {
     "token": "LPAREN",
-    "loc": "9:26-9:27"
+    "loc": "9:24-9:25"
   },
   {
     "token": [
       "LIDENT",
       "arr"
     ],
-    "loc": "9:27-9:30"
+    "loc": "9:25-9:28"
   },
   {
     "token": "RPAREN",
-    "loc": "9:30-9:31"
+    "loc": "9:28-9:29"
   },
   {
     "token": "NEWLINE",
-    "loc": "9:31-9:32"
+    "loc": "9:29-9:30"
   },
   {
     "token": "RBRACE",
@@ -739,65 +739,65 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "20:20-20:27"
+    "loc": "20:20-20:25"
   },
   {
     "token": "LPAREN",
-    "loc": "20:27-20:28"
+    "loc": "20:25-20:26"
   },
   {
     "token": "LBRACKET",
-    "loc": "20:28-20:29"
+    "loc": "20:26-20:27"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
-    "loc": "20:30-20:31"
+    "loc": "20:28-20:29"
   },
   {
     "token": "COMMA",
-    "loc": "20:31-20:32"
+    "loc": "20:29-20:30"
   },
   {
     "token": [
       "LIDENT",
       "y"
     ],
-    "loc": "20:33-20:34"
+    "loc": "20:31-20:32"
   },
   {
     "token": "COMMA",
-    "loc": "20:34-20:35"
+    "loc": "20:32-20:33"
   },
   {
     "token": [
       "LIDENT",
       "z"
     ],
-    "loc": "20:36-20:37"
+    "loc": "20:34-20:35"
   },
   {
     "token": "RBRACKET",
-    "loc": "20:38-20:39"
+    "loc": "20:36-20:37"
   },
   {
     "token": "RPAREN",
-    "loc": "20:39-20:40"
+    "loc": "20:37-20:38"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "20:40-20:40"
+    "loc": "20:38-20:38"
   },
   {
     "token": "NEWLINE",
-    "loc": "20:40-20:41"
+    "loc": "20:38-20:39"
   },
   {
     "token": "UNDERSCORE",

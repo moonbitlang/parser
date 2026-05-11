@@ -5,7 +5,7 @@ fn f(x: Int) -> Unit {
       None => break
       Some(i) => Option::Some(i)
     }
-    println(b)
+    debug(b)
     a = None
   }
 }
@@ -17,7 +17,7 @@ fn g(x: Int) -> Unit {
       None => continue
       Some(i) => Option::Some(i)
     }
-    println(b)
+    debug(b)
     break
   }
 }

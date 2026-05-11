@@ -1,4 +1,4 @@
-pub(all) suberror FooError derive(Show)
+pub(all) suberror FooError derive(Debug)
 
 fn foo(r : Ref[Int], err : Bool) -> Unit raise FooError {
   if err {
@@ -8,6 +8,6 @@ fn foo(r : Ref[Int], err : Bool) -> Unit raise FooError {
 }
 
 fn main {
-  let r = try? foo(Ref::new(0), false)
-  println(r)
+  let r = try? foo(Ref(0), false)
+  debug(r)
 }

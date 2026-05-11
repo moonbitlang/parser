@@ -273,35 +273,35 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "8:3-8:10"
+    "loc": "8:3-8:8"
   },
   {
     "token": "LPAREN",
-    "loc": "8:10-8:11"
+    "loc": "8:8-8:9"
   },
   {
     "token": [
       "LIDENT",
       "xs"
     ],
-    "loc": "8:11-8:13"
+    "loc": "8:9-8:11"
   },
   {
     "token": "RPAREN",
-    "loc": "8:13-8:14"
+    "loc": "8:11-8:12"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "8:14-8:14"
+    "loc": "8:12-8:12"
   },
   {
     "token": "NEWLINE",
-    "loc": "8:14-8:15"
+    "loc": "8:12-8:13"
   },
   {
     "token": "MATCH",

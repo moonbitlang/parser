@@ -1,13 +1,15 @@
 ///|
 pub fn palin(p : String) -> Bool {
-  loop p.view() {
-    [head,  .. middle,  tail] =>
-      if head == tail {
-        continue middle
-      } else {
-        return false
-      }
-    [_] | [] => true
+  for view = p.view() {
+    match view {
+      [head, .. middle, tail] =>
+        if head == tail {
+          continue middle
+        } else {
+          return false
+        }
+      [_] | [] => break true
+    }
   }
 }
 

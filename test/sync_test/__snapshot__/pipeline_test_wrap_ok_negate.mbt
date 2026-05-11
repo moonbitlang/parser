@@ -15,5 +15,5 @@ fn h(f : (String) -> Bool raise?, x : String) -> Bool raise? {
 ///|
 fn main {
   let x = try? h(x => !is_file(x), "cmp")
-  println(x)
+  debug(x)
 }

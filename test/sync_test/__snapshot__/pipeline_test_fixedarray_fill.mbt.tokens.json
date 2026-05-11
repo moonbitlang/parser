@@ -512,28 +512,28 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "11:3-11:10"
+    "loc": "11:3-11:8"
   },
   {
     "token": "LPAREN",
-    "loc": "11:10-11:11"
+    "loc": "11:8-11:9"
   },
   {
     "token": [
       "LIDENT",
       "a"
     ],
-    "loc": "11:11-11:12"
+    "loc": "11:9-11:10"
   },
   {
     "token": "RPAREN",
-    "loc": "11:12-11:13"
+    "loc": "11:10-11:11"
   },
   {
     "token": "NEWLINE",
-    "loc": "11:13-11:14"
+    "loc": "11:11-11:12"
   },
   {
     "token": "RBRACE",
@@ -822,28 +822,28 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "17:3-17:10"
+    "loc": "17:3-17:8"
   },
   {
     "token": "LPAREN",
-    "loc": "17:10-17:11"
+    "loc": "17:8-17:9"
   },
   {
     "token": [
       "LIDENT",
       "a"
     ],
-    "loc": "17:11-17:12"
+    "loc": "17:9-17:10"
   },
   {
     "token": "RPAREN",
-    "loc": "17:12-17:13"
+    "loc": "17:10-17:11"
   },
   {
     "token": "NEWLINE",
-    "loc": "17:13-17:14"
+    "loc": "17:11-17:12"
   },
   {
     "token": "RBRACE",

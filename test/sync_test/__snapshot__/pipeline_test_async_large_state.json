@@ -64,28 +64,25 @@
         "loc": null,
         "children": {
           "func": {
-            "kind": "Expr::Method",
+            "kind": "Expr::Constr",
             "loc": null,
             "children": {
-              "type_name": {
-                "kind": "TypeName",
+              "constr": {
+                "kind": "Constructor",
                 "loc": null,
                 "children": {
                   "name": {
-                    "kind": "LongIdent::Ident",
+                    "kind": "ConstrName",
                     "loc": null,
                     "children": {
-                      "value": "Ref"
+                      "name": "Ref"
                     }
                   },
-                  "is_object": false
-                }
-              },
-              "method_name": {
-                "kind": "Label",
-                "loc": null,
-                "children": {
-                  "name": "new"
+                  "extra_info": {
+                    "kind": "ConstructorExtraInfo::NoExtraInfo",
+                    "loc": null,
+                    "children": {}
+                  }
                 }
               }
             }
@@ -351,6 +348,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclStubs",
         "loc": null,
@@ -502,6 +500,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclStubs",
         "loc": null,
@@ -637,28 +636,25 @@
         "loc": null,
         "children": {
           "func": {
-            "kind": "Expr::Method",
+            "kind": "Expr::Constr",
             "loc": null,
             "children": {
-              "type_name": {
-                "kind": "TypeName",
+              "constr": {
+                "kind": "Constructor",
                 "loc": null,
                 "children": {
                   "name": {
-                    "kind": "LongIdent::Ident",
+                    "kind": "ConstrName",
                     "loc": null,
                     "children": {
-                      "value": "Ref"
+                      "name": "Ref"
                     }
                   },
-                  "is_object": false
-                }
-              },
-              "method_name": {
-                "kind": "Label",
-                "loc": null,
-                "children": {
-                  "name": "new"
+                  "extra_info": {
+                    "kind": "ConstructorExtraInfo::NoExtraInfo",
+                    "loc": null,
+                    "children": {}
+                  }
                 }
               }
             }
@@ -838,6 +834,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1238,6 +1235,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1724,6 +1722,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

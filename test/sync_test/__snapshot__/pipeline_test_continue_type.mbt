@@ -1,5 +1,5 @@
 fn f(i: Int) -> String {
-  for {
+  for ;; {
     if i == 0 {
       continue
     } else {

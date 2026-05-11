@@ -4,25 +4,25 @@ struct E {
   a : Int
   b : Int64
   c : Double
-} derive(Show)
+} derive(Debug)
 
 ///|
 enum F {
   A(E, String)
   B(Bytes, E)
-} derive(Show)
+} derive(Debug)
 
 ///|
 suberror X {
   X(Int)
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn f(a : Int, b : Int64, c : Double) -> F raise X {
   if a > 0 {
     F::A(E::{ a, b, c }, "string")
   } else if a < 0 {
-    F::B("bytes", E::{ a, b, c })
+    F::B(b"bytes", E::{ a, b, c })
   } else {
     raise X(a)
   }
@@ -30,7 +30,7 @@ fn f(a : Int, b : Int64, c : Double) -> F raise X {
 
 ///|
 fn main {
-  println(try? f(1, 2, 3.14))
-  println(try? f(-1, 2, 3.14))
-  println(try? f(0, 2, 3.14))
+  debug(try? f(1, 2, 3.14))
+  debug(try? f(-1, 2, 3.14))
+  debug(try? f(0, 2, 3.14))
 }

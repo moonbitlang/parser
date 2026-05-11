@@ -42,6 +42,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -124,44 +125,14 @@
                     "loc": null,
                     "children": {
                       "lhs": {
-                        "kind": "Expr::Constraint",
+                        "kind": "Expr::Constant",
                         "loc": null,
                         "children": {
-                          "expr": {
-                            "kind": "Expr::Constant",
+                          "constant": {
+                            "kind": "Constant::Byte",
                             "loc": null,
                             "children": {
-                              "constant": {
-                                "kind": "Constant::Char",
-                                "loc": null,
-                                "children": {
-                                  "value": "a"
-                                }
-                              }
-                            }
-                          },
-                          "ty": {
-                            "kind": "Type::Name",
-                            "loc": null,
-                            "children": {
-                              "constr_id": {
-                                "kind": "ConstrId",
-                                "loc": null,
-                                "children": {
-                                  "id": {
-                                    "kind": "LongIdent::Ident",
-                                    "loc": null,
-                                    "children": {
-                                      "value": "Byte"
-                                    }
-                                  }
-                                }
-                              },
-                              "tys": {
-                                "kind": "Type::Name::TypeList",
-                                "loc": null,
-                                "children": []
-                              }
+                              "value": "a"
                             }
                           }
                         }
@@ -192,44 +163,14 @@
                     "loc": null,
                     "children": {
                       "lhs": {
-                        "kind": "Expr::Constraint",
+                        "kind": "Expr::Constant",
                         "loc": null,
                         "children": {
-                          "expr": {
-                            "kind": "Expr::Constant",
+                          "constant": {
+                            "kind": "Constant::Byte",
                             "loc": null,
                             "children": {
-                              "constant": {
-                                "kind": "Constant::Char",
-                                "loc": null,
-                                "children": {
-                                  "value": "\\xFF"
-                                }
-                              }
-                            }
-                          },
-                          "ty": {
-                            "kind": "Type::Name",
-                            "loc": null,
-                            "children": {
-                              "constr_id": {
-                                "kind": "ConstrId",
-                                "loc": null,
-                                "children": {
-                                  "id": {
-                                    "kind": "LongIdent::Ident",
-                                    "loc": null,
-                                    "children": {
-                                      "value": "Byte"
-                                    }
-                                  }
-                                }
-                              },
-                              "tys": {
-                                "kind": "Type::Name::TypeList",
-                                "loc": null,
-                                "children": []
-                              }
+                              "value": "\\xFF"
                             }
                           }
                         }
@@ -260,44 +201,14 @@
                     "loc": null,
                     "children": {
                       "lhs": {
-                        "kind": "Expr::Constraint",
+                        "kind": "Expr::Constant",
                         "loc": null,
                         "children": {
-                          "expr": {
-                            "kind": "Expr::Constant",
+                          "constant": {
+                            "kind": "Constant::Byte",
                             "loc": null,
                             "children": {
-                              "constant": {
-                                "kind": "Constant::Char",
-                                "loc": null,
-                                "children": {
-                                  "value": "\\o377"
-                                }
-                              }
-                            }
-                          },
-                          "ty": {
-                            "kind": "Type::Name",
-                            "loc": null,
-                            "children": {
-                              "constr_id": {
-                                "kind": "ConstrId",
-                                "loc": null,
-                                "children": {
-                                  "id": {
-                                    "kind": "LongIdent::Ident",
-                                    "loc": null,
-                                    "children": {
-                                      "value": "Byte"
-                                    }
-                                  }
-                                }
-                              },
-                              "tys": {
-                                "kind": "Type::Name::TypeList",
-                                "loc": null,
-                                "children": []
-                              }
+                              "value": "\\o377"
                             }
                           }
                         }
@@ -328,44 +239,14 @@
                     "loc": null,
                     "children": {
                       "lhs": {
-                        "kind": "Expr::Constraint",
+                        "kind": "Expr::Constant",
                         "loc": null,
                         "children": {
-                          "expr": {
-                            "kind": "Expr::Constant",
+                          "constant": {
+                            "kind": "Constant::Byte",
                             "loc": null,
                             "children": {
-                              "constant": {
-                                "kind": "Constant::Char",
-                                "loc": null,
-                                "children": {
-                                  "value": "\\\\"
-                                }
-                              }
-                            }
-                          },
-                          "ty": {
-                            "kind": "Type::Name",
-                            "loc": null,
-                            "children": {
-                              "constr_id": {
-                                "kind": "ConstrId",
-                                "loc": null,
-                                "children": {
-                                  "id": {
-                                    "kind": "LongIdent::Ident",
-                                    "loc": null,
-                                    "children": {
-                                      "value": "Byte"
-                                    }
-                                  }
-                                }
-                              },
-                              "tys": {
-                                "kind": "Type::Name::TypeList",
-                                "loc": null,
-                                "children": []
-                              }
+                              "value": "\\\\"
                             }
                           }
                         }
@@ -763,7 +644,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::Char",
+                                                "kind": "Constant::Byte",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "a"
@@ -776,7 +657,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::Char",
+                                                "kind": "Constant::Byte",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "\\xFF"
@@ -789,7 +670,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::Char",
+                                                "kind": "Constant::Byte",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "\\o377"
@@ -802,7 +683,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::Char",
+                                                "kind": "Constant::Byte",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "\\\\"

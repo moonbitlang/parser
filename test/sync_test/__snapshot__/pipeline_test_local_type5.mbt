@@ -1,11 +1,12 @@
+//!build: -w -deprecated_syntax
 ///|
 suberror LE {
   LE(Int)
-} derive(Show)
+} derive(Debug)
 
 ///| basic test
 fn main {
-  struct LT(Int) derive(Show)
+  struct LT(Int) derive(Debug)
   fn f1(x : Int) -> LT raise LE {
     if x > 0 {
       LT(x)
@@ -13,8 +14,8 @@ fn main {
       raise LE(x)
     }
   }
-  println(try? f1(42))
-  println(try? f1(-1))
+  println(to_repr(try? f1(42)))
+  println(to_repr(try? f1(-1)))
 }
 
 // test recursive newtype
@@ -38,16 +39,16 @@ fn init {
   println(use_s(s))
 }
 
-fn[A: Show, B: Show] f(a: A, b: B) -> Unit {
-  struct A(B, Int) derive(Show)
+fn[X: Show, Y: Show] f(a: X, b: Y) -> Unit {
+  struct A(B, Int) derive(Debug)
   struct B {
     f1: Array[C]
     f2: String
-  } derive(Show)
+  } derive(Debug)
   enum C {
     C1
     C2(A)
-  } derive(Show)
+  } derive(Debug)
   let c1 = C1
   let b1 = { f1: [c1], f2: "b1"}
   let a1 = (b1, 43)
@@ -57,12 +58,12 @@ fn[A: Show, B: Show] f(a: A, b: B) -> Unit {
   
   println(a)
   println(b)
-  println(a1)
-  println(a2)
-  println(b1)
-  println(b2)
-  println(c1)
-  println(c2)
+  println(to_repr(a1))
+  println(to_repr(a2))
+  println(to_repr(b1))
+  println(to_repr(b2))
+  println(to_repr(c1))
+  println(to_repr(c2))
 }
 
 ///|

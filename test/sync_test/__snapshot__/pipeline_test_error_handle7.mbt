@@ -1,6 +1,6 @@
 suberror StringError {
   StringError(String)
-} derive(Show)
+} derive(Debug)
 
 fn f(x: Int) -> Int raise StringError {
   if x < 0 {
@@ -11,9 +11,9 @@ fn f(x: Int) -> Int raise StringError {
 
 fn init {
   let a = try? f(42)
-  println(a)
+  debug(a)
   let b = try? f(-42)
-  println(b)
+  debug(b)
 }
 
 fn g(x: Int) -> Option[Int] raise StringError {
@@ -22,4 +22,3 @@ fn g(x: Int) -> Option[Int] raise StringError {
   }
   Some(x)
 }
-

@@ -1,19 +1,19 @@
-
+//!build: -w -27-20
 struct T {
   x: Int
   y: Int
-} derive(Eq, Show, Compare, Default)
+} derive(Eq, Compare, Default, Show)
 
 struct P[X, Y] {
   a: (X, Y?, Int)
   b: T
-} derive(Eq, Show, Compare, Default)
+} derive(Eq, Compare, Default, Show)
 
 enum E[X] {
   A
   B(X)
   C(X, T)
-} derive (Eq, Show, Compare, Default)
+} derive (Eq, Compare, Default, Show)
 struct Stock {
   tick : String
 } derive(Show)

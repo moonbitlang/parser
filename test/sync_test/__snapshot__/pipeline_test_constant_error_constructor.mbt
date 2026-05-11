@@ -1,5 +1,5 @@
 ///|
-suberror E derive(Show)
+suberror E
 
 ///|
 pub fn f(a : Int, b : Int, e : Error) -> Unit {
@@ -13,4 +13,8 @@ pub fn f(a : Int, b : Int, e : Error) -> Unit {
 ///|
 fn main {
   f(0, 0, E)
+}
+
+impl Show for E with output(self, logger) {
+  logger.write_string("E")
 }

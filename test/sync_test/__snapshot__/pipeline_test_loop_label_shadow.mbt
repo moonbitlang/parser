@@ -1,4 +1,4 @@
-//!build: -w -36
+//!build: -w -36-27
 fn f(xs: Array[Int]) -> String {
   l~: for i in xs {
     let n =

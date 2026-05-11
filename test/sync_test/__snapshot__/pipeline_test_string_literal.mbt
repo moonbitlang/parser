@@ -3,8 +3,8 @@ fn init {
   // let y = b"你好"
 
   let y = b"\x01\x02\x03"
-  println(x.to_array())
-  println(y.to_array())
+  debug(x.to_array())
+  debug(y.to_array())
   // match y {
   //   [1,2,3, .. ] => println("Matched pattern!"),
   //   _ => println("Did not match.")

@@ -4,9 +4,11 @@ enum Deep {
 }
 
 fn make(depth : Int) -> Deep {
-  loop (depth, Done) {
-    (0, acc) => acc
-    (n, acc) => continue (n - 1, More(acc))
+  for curr_depth = depth, acc = Done {
+    match (curr_depth, acc) {
+      (0, acc) => break acc
+      (n, acc) => continue n - 1, More(acc)
+    }
   }
 }
 

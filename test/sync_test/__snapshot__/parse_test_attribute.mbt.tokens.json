@@ -877,67 +877,16 @@
     "loc": "41:1-41:2"
   },
   {
-    "token": [
-      "ATTRIBUTE",
-      {
-        "id": "alert",
-        "dot_id": "",
-        "raw_payload": "(category1,\"reason\")"
-      }
-    ],
-    "loc": "42:1-42:27"
+    "token": "NEWLINE",
+    "loc": "42:1-42:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "42:27-42:28"
-  },
-  {
-    "token": [
-      "ATTRIBUTE",
-      {
-        "id": "alert",
-        "dot_id": "",
-        "raw_payload": "(category2,\"reason\")"
-      }
-    ],
-    "loc": "43:1-43:27"
+    "loc": "43:1-43:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "43:27-43:28"
-  },
-  {
-    "token": "PUB",
-    "loc": "44:1-44:4"
-  },
-  {
-    "token": "TYPE",
-    "loc": "44:5-44:9"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "MyType"
-    ],
-    "loc": "44:10-44:16"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Int"
-    ],
-    "loc": "44:17-44:20"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "44:20-44:20"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "44:20-44:21"
+    "loc": "44:1-44:2"
   },
   {
     "token": "NEWLINE",

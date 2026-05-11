@@ -11,7 +11,7 @@ struct T2 (Int)
 
 impl I for T1 with f(_self, x~, opt?) {
   ignore(x)
-  println(opt)
+  debug(opt)
 }
 
 impl I for T2

@@ -208,6 +208,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclStubs",
         "loc": null,
@@ -359,6 +360,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclStubs",
         "loc": null,
@@ -717,6 +719,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1364,6 +1367,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2195,6 +2199,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -3267,6 +3272,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -4831,6 +4837,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -5105,6 +5112,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -5762,6 +5770,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -7221,6 +7230,121 @@
                 }
               }
             }
+          }
+        }
+      }
+    }
+  },
+  {
+    "kind": "Impl::TopTypeDef",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "TypeDecl",
+        "loc": null,
+        "children": {
+          "tycon": "IterResult",
+          "params": {
+            "kind": "TypeDecl::ParamList",
+            "loc": null,
+            "children": []
+          },
+          "components": {
+            "kind": "TypeDesc::Variant",
+            "loc": null,
+            "children": {
+              "value": {
+                "kind": "TypeDesc::Variant::ConstrList",
+                "loc": null,
+                "children": [
+                  {
+                    "kind": "ConstrDecl",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "ConstrName",
+                        "loc": null,
+                        "children": {
+                          "name": "IterContinue"
+                        }
+                      },
+                      "args": null,
+                      "tag": null,
+                      "attrs": {
+                        "kind": "ConstrDecl::AttrList",
+                        "loc": null,
+                        "children": []
+                      },
+                      "doc": ""
+                    }
+                  },
+                  {
+                    "kind": "ConstrDecl",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "ConstrName",
+                        "loc": null,
+                        "children": {
+                          "name": "IterEnd"
+                        }
+                      },
+                      "args": null,
+                      "tag": null,
+                      "attrs": {
+                        "kind": "ConstrDecl::AttrList",
+                        "loc": null,
+                        "children": []
+                      },
+                      "doc": ""
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "attrs": {
+            "kind": "TypeDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": "",
+          "type_vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "is_declare": false,
+          "deriving": {
+            "kind": "TypeDecl::DerivingList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "DerivingDirective",
+                "loc": null,
+                "children": {
+                  "type_name": {
+                    "kind": "TypeName",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": {
+                          "value": "Eq"
+                        }
+                      },
+                      "is_object": false
+                    }
+                  },
+                  "args": {
+                    "kind": "DerivingDirective::ArgList",
+                    "loc": null,
+                    "children": []
+                  }
+                }
+              }
+            ]
           }
         }
       }

@@ -269,144 +269,127 @@
             "children": []
           },
           "expr": {
-            "kind": "Expr::Apply",
+            "kind": "Expr::Unary",
             "loc": null,
             "children": {
-              "func": {
-                "kind": "Expr::Ident",
+              "op": {
+                "kind": "Var",
                 "loc": null,
                 "children": {
-                  "id": {
-                    "kind": "Var",
+                  "name": {
+                    "kind": "LongIdent::Ident",
                     "loc": null,
                     "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "not"
-                        }
-                      }
+                      "value": "!"
                     }
                   }
                 }
               },
-              "args": {
-                "kind": "Expr::Apply::ArgumentList",
+              "expr": {
+                "kind": "Expr::Group",
                 "loc": null,
-                "children": [
-                  {
-                    "kind": "Argument",
+                "children": {
+                  "expr": {
+                    "kind": "Expr::Infix",
                     "loc": null,
                     "children": {
-                      "value": {
-                        "kind": "Expr::Infix",
+                      "op": {
+                        "kind": "Var",
                         "loc": null,
                         "children": {
-                          "op": {
-                            "kind": "Var",
+                          "name": {
+                            "kind": "LongIdent::Ident",
                             "loc": null,
                             "children": {
-                              "name": {
-                                "kind": "LongIdent::Ident",
-                                "loc": null,
-                                "children": {
-                                  "value": "!="
-                                }
-                              }
+                              "value": "!="
                             }
-                          },
-                          "lhs": {
-                            "kind": "Expr::Field",
+                          }
+                        }
+                      },
+                      "lhs": {
+                        "kind": "Expr::Field",
+                        "loc": null,
+                        "children": {
+                          "record": {
+                            "kind": "Expr::Ident",
                             "loc": null,
                             "children": {
-                              "record": {
-                                "kind": "Expr::Ident",
+                              "id": {
+                                "kind": "Var",
                                 "loc": null,
                                 "children": {
-                                  "id": {
-                                    "kind": "Var",
+                                  "name": {
+                                    "kind": "LongIdent::Ident",
                                     "loc": null,
                                     "children": {
-                                      "name": {
-                                        "kind": "LongIdent::Ident",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "self"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "accessor": {
-                                "kind": "Accessor::Label",
-                                "loc": null,
-                                "children": {
-                                  "value": {
-                                    "kind": "Label",
-                                    "loc": null,
-                                    "children": {
-                                      "name": "x"
+                                      "value": "self"
                                     }
                                   }
                                 }
                               }
                             }
                           },
-                          "rhs": {
-                            "kind": "Expr::Field",
+                          "accessor": {
+                            "kind": "Accessor::Label",
                             "loc": null,
                             "children": {
-                              "record": {
-                                "kind": "Expr::Ident",
+                              "value": {
+                                "kind": "Label",
                                 "loc": null,
                                 "children": {
-                                  "id": {
-                                    "kind": "Var",
-                                    "loc": null,
-                                    "children": {
-                                      "name": {
-                                        "kind": "LongIdent::Ident",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "other"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "accessor": {
-                                "kind": "Accessor::Label",
-                                "loc": null,
-                                "children": {
-                                  "value": {
-                                    "kind": "Label",
-                                    "loc": null,
-                                    "children": {
-                                      "name": "x"
-                                    }
-                                  }
+                                  "name": "x"
                                 }
                               }
                             }
                           }
                         }
                       },
-                      "kind": {
-                        "kind": "ArgumentKind::Positional",
+                      "rhs": {
+                        "kind": "Expr::Field",
                         "loc": null,
-                        "children": {}
+                        "children": {
+                          "record": {
+                            "kind": "Expr::Ident",
+                            "loc": null,
+                            "children": {
+                              "id": {
+                                "kind": "Var",
+                                "loc": null,
+                                "children": {
+                                  "name": {
+                                    "kind": "LongIdent::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "other"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "accessor": {
+                            "kind": "Accessor::Label",
+                            "loc": null,
+                            "children": {
+                              "value": {
+                                "kind": "Label",
+                                "loc": null,
+                                "children": {
+                                  "name": "x"
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
                     }
+                  },
+                  "group": {
+                    "kind": "Group::Paren",
+                    "loc": null,
+                    "children": {}
                   }
-                ]
-              },
-              "attr": {
-                "kind": "ApplyAttr::NoAttr",
-                "loc": null,
-                "children": {}
+                }
               }
             }
           }
@@ -468,6 +451,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

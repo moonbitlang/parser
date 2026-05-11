@@ -3,257 +3,26 @@
     "token": [
       "COMMENT",
       {
-        "content": "///|",
+        "content": "//!build: -w -20-27",
         "kind": [
           "Ownline",
           {
             "leading_blank_line": false,
-            "trailing_blank_line": false
+            "trailing_blank_line": true
           }
         ],
         "consumed_by_docstring": false
       }
     ],
-    "loc": "1:1-1:5"
+    "loc": "1:1-1:20"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:5-1:6"
-  },
-  {
-    "token": "FN",
-    "loc": "2:1-2:3"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "test_firstmatch"
-    ],
-    "loc": "2:4-2:19"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "2:19-2:20"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "2:20-2:21"
-  },
-  {
-    "token": "THIN_ARROW",
-    "loc": "2:22-2:24"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Unit"
-    ],
-    "loc": "2:25-2:29"
-  },
-  {
-    "token": "RAISE",
-    "loc": "2:30-2:35"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "2:36-2:37"
+    "loc": "1:20-1:21"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:37-2:38"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "assert_eq"
-    ],
-    "loc": "3:3-3:12"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "3:12-3:13"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "3:13-3:14"
-  },
-  {
-    "token": "LEXMATCH",
-    "loc": "4:5-4:13"
-  },
-  {
-    "token": [
-      "STRING",
-      "ab"
-    ],
-    "loc": "4:14-4:18"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "4:19-4:20"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "4:20-4:21"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "5:7-5:8"
-  },
-  {
-    "token": [
-      "STRING",
-      "a|ab"
-    ],
-    "loc": "5:8-5:14"
-  },
-  {
-    "token": "AS",
-    "loc": "5:15-5:17"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "t"
-    ],
-    "loc": "5:18-5:19"
-  },
-  {
-    "token": "COMMA",
-    "loc": "5:19-5:20"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "5:21-5:22"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "5:22-5:23"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "5:24-5:26"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Some"
-    ],
-    "loc": "5:27-5:31"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "5:31-5:32"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "t"
-    ],
-    "loc": "5:32-5:33"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "5:33-5:34"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "5:34-5:34"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "5:34-5:35"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "6:7-6:8"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "6:9-6:11"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "None"
-    ],
-    "loc": "6:12-6:16"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "6:16-6:17"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "7:5-7:6"
-  },
-  {
-    "token": "COMMA",
-    "loc": "7:6-7:7"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "7:7-7:8"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Some"
-    ],
-    "loc": "8:5-8:9"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "8:9-8:10"
-  },
-  {
-    "token": [
-      "STRING",
-      "a"
-    ],
-    "loc": "8:10-8:13"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "8:13-8:14"
-  },
-  {
-    "token": "COMMA",
-    "loc": "8:14-8:15"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "8:15-8:16"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "9:3-9:4"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "9:4-9:5"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "10:1-10:2"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "10:2-10:2"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "10:2-10:3"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "11:1-11:2"
+    "loc": "2:1-2:2"
   },
   {
     "token": [
@@ -270,484 +39,634 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "12:1-12:5"
+    "loc": "3:1-3:5"
   },
   {
     "token": "NEWLINE",
-    "loc": "12:5-12:6"
+    "loc": "3:5-3:6"
   },
   {
     "token": "FN",
-    "loc": "13:1-13:3"
+    "loc": "4:1-4:3"
   },
   {
     "token": [
       "LIDENT",
-      "test_search"
+      "test_firstmatch"
     ],
-    "loc": "13:4-13:15"
+    "loc": "4:4-4:19"
   },
   {
     "token": "LPAREN",
-    "loc": "13:15-13:16"
+    "loc": "4:19-4:20"
   },
   {
     "token": "RPAREN",
-    "loc": "13:16-13:17"
+    "loc": "4:20-4:21"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "13:18-13:20"
+    "loc": "4:22-4:24"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "13:21-13:25"
+    "loc": "4:25-4:29"
   },
   {
     "token": "RAISE",
-    "loc": "13:26-13:31"
+    "loc": "4:30-4:35"
   },
   {
     "token": "LBRACE",
-    "loc": "13:32-13:33"
+    "loc": "4:36-4:37"
   },
   {
     "token": "NEWLINE",
-    "loc": "13:33-13:34"
+    "loc": "4:37-4:38"
   },
   {
     "token": [
       "LIDENT",
       "assert_eq"
     ],
-    "loc": "14:3-14:12"
+    "loc": "5:3-5:12"
   },
   {
     "token": "LPAREN",
-    "loc": "14:12-14:13"
+    "loc": "5:12-5:13"
   },
   {
     "token": "NEWLINE",
-    "loc": "14:13-14:14"
+    "loc": "5:13-5:14"
   },
   {
     "token": "LEXMATCH",
-    "loc": "15:5-15:13"
+    "loc": "6:5-6:13"
   },
   {
     "token": [
       "STRING",
-      "xxxxxyxxxx"
+      "ab"
     ],
-    "loc": "15:14-15:26"
+    "loc": "6:14-6:18"
   },
   {
     "token": "LBRACE",
-    "loc": "15:27-15:28"
+    "loc": "6:19-6:20"
   },
   {
     "token": "NEWLINE",
-    "loc": "15:28-15:29"
+    "loc": "6:20-6:21"
   },
   {
     "token": "LPAREN",
-    "loc": "16:7-16:8"
+    "loc": "7:7-7:8"
+  },
+  {
+    "token": [
+      "STRING",
+      "a|ab"
+    ],
+    "loc": "7:8-7:14"
+  },
+  {
+    "token": "AS",
+    "loc": "7:15-7:17"
   },
   {
     "token": [
       "LIDENT",
-      "before"
+      "t"
     ],
-    "loc": "16:8-16:14"
+    "loc": "7:18-7:19"
   },
   {
     "token": "COMMA",
-    "loc": "16:14-16:15"
-  },
-  {
-    "token": [
-      "STRING",
-      "y"
-    ],
-    "loc": "16:16-16:19"
-  },
-  {
-    "token": "COMMA",
-    "loc": "16:19-16:20"
+    "loc": "7:19-7:20"
   },
   {
     "token": "UNDERSCORE",
-    "loc": "16:21-16:22"
+    "loc": "7:21-7:22"
   },
   {
     "token": "RPAREN",
-    "loc": "16:22-16:23"
+    "loc": "7:22-7:23"
   },
   {
     "token": "FAT_ARROW",
-    "loc": "16:24-16:26"
+    "loc": "7:24-7:26"
   },
   {
     "token": [
       "UIDENT",
       "Some"
     ],
-    "loc": "16:27-16:31"
+    "loc": "7:27-7:31"
   },
   {
     "token": "LPAREN",
-    "loc": "16:31-16:32"
+    "loc": "7:31-7:32"
   },
   {
     "token": [
       "LIDENT",
-      "before"
+      "t"
     ],
-    "loc": "16:32-16:38"
-  },
-  {
-    "token": [
-      "DOT_LIDENT",
-      "length"
-    ],
-    "loc": "16:39-16:45"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "16:45-16:46"
+    "loc": "7:32-7:33"
   },
   {
     "token": "RPAREN",
-    "loc": "16:46-16:47"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "16:47-16:48"
+    "loc": "7:33-7:34"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "16:48-16:48"
+    "loc": "7:34-7:34"
   },
   {
     "token": "NEWLINE",
-    "loc": "16:48-16:49"
+    "loc": "7:34-7:35"
   },
   {
     "token": "UNDERSCORE",
-    "loc": "17:7-17:8"
+    "loc": "8:7-8:8"
   },
   {
     "token": "FAT_ARROW",
-    "loc": "17:9-17:11"
+    "loc": "8:9-8:11"
   },
   {
     "token": [
       "UIDENT",
       "None"
     ],
-    "loc": "17:12-17:16"
+    "loc": "8:12-8:16"
   },
   {
     "token": "NEWLINE",
-    "loc": "17:16-17:17"
+    "loc": "8:16-8:17"
   },
   {
     "token": "RBRACE",
-    "loc": "18:5-18:6"
+    "loc": "9:5-9:6"
   },
   {
     "token": "COMMA",
-    "loc": "18:6-18:7"
+    "loc": "9:6-9:7"
   },
   {
     "token": "NEWLINE",
-    "loc": "18:7-18:8"
+    "loc": "9:7-9:8"
   },
   {
     "token": [
       "UIDENT",
       "Some"
     ],
-    "loc": "19:5-19:9"
+    "loc": "10:5-10:9"
   },
   {
     "token": "LPAREN",
-    "loc": "19:9-19:10"
-  },
-  {
-    "token": [
-      "INT",
-      "5"
-    ],
-    "loc": "19:10-19:11"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "19:11-19:12"
-  },
-  {
-    "token": "COMMA",
-    "loc": "19:12-19:13"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "19:13-19:14"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "20:3-20:4"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "20:4-20:5"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "21:1-21:2"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "21:2-21:2"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "21:2-21:3"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "22:1-22:2"
-  },
-  {
-    "token": "FN",
-    "loc": "23:1-23:3"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "test_multicases_firstmatch"
-    ],
-    "loc": "23:4-23:30"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "23:30-23:31"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "23:31-23:32"
-  },
-  {
-    "token": "THIN_ARROW",
-    "loc": "23:33-23:35"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Unit"
-    ],
-    "loc": "23:36-23:40"
-  },
-  {
-    "token": "RAISE",
-    "loc": "23:41-23:46"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "23:47-23:48"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "23:48-23:49"
-  },
-  {
-    "token": "FN",
-    "loc": "24:3-24:5"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "f"
-    ],
-    "loc": "24:6-24:7"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "24:7-24:8"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "x"
-    ],
-    "loc": "24:8-24:9"
-  },
-  {
-    "token": "COLON",
-    "loc": "24:10-24:11"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "String"
-    ],
-    "loc": "24:12-24:18"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "24:18-24:19"
-  },
-  {
-    "token": "THIN_ARROW",
-    "loc": "24:20-24:22"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Int"
-    ],
-    "loc": "24:23-24:26"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "24:27-24:28"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "24:28-24:29"
-  },
-  {
-    "token": "LEXMATCH",
-    "loc": "25:5-25:13"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "x"
-    ],
-    "loc": "25:14-25:15"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "25:16-25:17"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "25:17-25:18"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "26:7-26:8"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "26:8-26:9"
-  },
-  {
-    "token": "COMMA",
-    "loc": "26:9-26:10"
+    "loc": "10:9-10:10"
   },
   {
     "token": [
       "STRING",
       "a"
     ],
-    "loc": "26:11-26:14"
-  },
-  {
-    "token": "COMMA",
-    "loc": "26:14-26:15"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "26:16-26:17"
+    "loc": "10:10-10:13"
   },
   {
     "token": "RPAREN",
-    "loc": "26:17-26:18"
+    "loc": "10:13-10:14"
   },
   {
-    "token": "FAT_ARROW",
-    "loc": "26:19-26:21"
+    "token": "COMMA",
+    "loc": "10:14-10:15"
   },
   {
-    "token": [
-      "INT",
-      "1"
-    ],
-    "loc": "26:22-26:23"
+    "token": "NEWLINE",
+    "loc": "10:15-10:16"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "11:3-11:4"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "11:4-11:5"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "12:1-12:2"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "26:23-26:23"
+    "loc": "12:2-12:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "26:23-26:24"
+    "loc": "12:2-12:3"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "13:1-13:2"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "///|",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": true,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "14:1-14:5"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "14:5-14:6"
+  },
+  {
+    "token": "FN",
+    "loc": "15:1-15:3"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "test_search"
+    ],
+    "loc": "15:4-15:15"
   },
   {
     "token": "LPAREN",
-    "loc": "27:7-27:8"
+    "loc": "15:15-15:16"
   },
   {
-    "token": "UNDERSCORE",
-    "loc": "27:8-27:9"
+    "token": "RPAREN",
+    "loc": "15:16-15:17"
   },
   {
-    "token": "COMMA",
-    "loc": "27:9-27:10"
+    "token": "THIN_ARROW",
+    "loc": "15:18-15:20"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Unit"
+    ],
+    "loc": "15:21-15:25"
+  },
+  {
+    "token": "RAISE",
+    "loc": "15:26-15:31"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "15:32-15:33"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "15:33-15:34"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "assert_eq"
+    ],
+    "loc": "16:3-16:12"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "16:12-16:13"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "16:13-16:14"
+  },
+  {
+    "token": "LEXMATCH",
+    "loc": "17:5-17:13"
   },
   {
     "token": [
       "STRING",
-      "b"
+      "xxxxxyxxxx"
     ],
-    "loc": "27:11-27:14"
+    "loc": "17:14-17:26"
   },
   {
-    "token": "COMMA",
-    "loc": "27:14-27:15"
+    "token": "LBRACE",
+    "loc": "17:27-17:28"
   },
   {
-    "token": "UNDERSCORE",
-    "loc": "27:16-27:17"
+    "token": "NEWLINE",
+    "loc": "17:28-17:29"
   },
   {
-    "token": "RPAREN",
-    "loc": "27:17-27:18"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "27:19-27:21"
+    "token": "LPAREN",
+    "loc": "18:7-18:8"
   },
   {
     "token": [
-      "INT",
-      "2"
+      "LIDENT",
+      "before"
     ],
-    "loc": "27:22-27:23"
+    "loc": "18:8-18:14"
+  },
+  {
+    "token": "COMMA",
+    "loc": "18:14-18:15"
+  },
+  {
+    "token": [
+      "STRING",
+      "y"
+    ],
+    "loc": "18:16-18:19"
+  },
+  {
+    "token": "COMMA",
+    "loc": "18:19-18:20"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "18:21-18:22"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "18:22-18:23"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "18:24-18:26"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Some"
+    ],
+    "loc": "18:27-18:31"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "18:31-18:32"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "before"
+    ],
+    "loc": "18:32-18:38"
+  },
+  {
+    "token": [
+      "DOT_LIDENT",
+      "length"
+    ],
+    "loc": "18:39-18:45"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "18:45-18:46"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "18:46-18:47"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "18:47-18:48"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "27:23-27:23"
+    "loc": "18:48-18:48"
   },
   {
     "token": "NEWLINE",
-    "loc": "27:23-27:24"
+    "loc": "18:48-18:49"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "19:7-19:8"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "19:9-19:11"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "None"
+    ],
+    "loc": "19:12-19:16"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "19:16-19:17"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "20:5-20:6"
+  },
+  {
+    "token": "COMMA",
+    "loc": "20:6-20:7"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "20:7-20:8"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Some"
+    ],
+    "loc": "21:5-21:9"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "21:9-21:10"
+  },
+  {
+    "token": [
+      "INT",
+      "5"
+    ],
+    "loc": "21:10-21:11"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "21:11-21:12"
+  },
+  {
+    "token": "COMMA",
+    "loc": "21:12-21:13"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "21:13-21:14"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "22:3-22:4"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "22:4-22:5"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "23:1-23:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "23:2-23:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "23:2-23:3"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "24:1-24:2"
+  },
+  {
+    "token": "FN",
+    "loc": "25:1-25:3"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "test_multicases_firstmatch"
+    ],
+    "loc": "25:4-25:30"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "25:30-25:31"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "25:31-25:32"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "25:33-25:35"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Unit"
+    ],
+    "loc": "25:36-25:40"
+  },
+  {
+    "token": "RAISE",
+    "loc": "25:41-25:46"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "25:47-25:48"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "25:48-25:49"
+  },
+  {
+    "token": "FN",
+    "loc": "26:3-26:5"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "f"
+    ],
+    "loc": "26:6-26:7"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "26:7-26:8"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "x"
+    ],
+    "loc": "26:8-26:9"
+  },
+  {
+    "token": "COLON",
+    "loc": "26:10-26:11"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "String"
+    ],
+    "loc": "26:12-26:18"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "26:18-26:19"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "26:20-26:22"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Int"
+    ],
+    "loc": "26:23-26:26"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "26:27-26:28"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "26:28-26:29"
+  },
+  {
+    "token": "LEXMATCH",
+    "loc": "27:5-27:13"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "x"
+    ],
+    "loc": "27:14-27:15"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "27:16-27:17"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "27:17-27:18"
   },
   {
     "token": "LPAREN",
@@ -764,7 +683,7 @@
   {
     "token": [
       "STRING",
-      "c"
+      "a"
     ],
     "loc": "28:11-28:14"
   },
@@ -787,7 +706,7 @@
   {
     "token": [
       "INT",
-      "3"
+      "1"
     ],
     "loc": "28:22-28:23"
   },
@@ -803,168 +722,156 @@
     "loc": "28:23-28:24"
   },
   {
-    "token": "UNDERSCORE",
+    "token": "LPAREN",
     "loc": "29:7-29:8"
   },
   {
-    "token": "FAT_ARROW",
-    "loc": "29:9-29:11"
+    "token": "UNDERSCORE",
+    "loc": "29:8-29:9"
   },
   {
-    "token": "MINUS",
-    "loc": "29:12-29:13"
+    "token": "COMMA",
+    "loc": "29:9-29:10"
   },
   {
     "token": [
-      "INT",
-      "1"
+      "STRING",
+      "b"
     ],
-    "loc": "29:13-29:14"
+    "loc": "29:11-29:14"
   },
   {
-    "token": "NEWLINE",
+    "token": "COMMA",
     "loc": "29:14-29:15"
   },
   {
-    "token": "RBRACE",
-    "loc": "30:5-30:6"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "30:6-30:7"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "31:3-31:4"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "31:4-31:4"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "31:4-31:5"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "assert_eq"
-    ],
-    "loc": "32:3-32:12"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "32:12-32:13"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "f"
-    ],
-    "loc": "32:13-32:14"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "32:14-32:15"
-  },
-  {
-    "token": [
-      "STRING",
-      "xxa"
-    ],
-    "loc": "32:15-32:20"
+    "token": "UNDERSCORE",
+    "loc": "29:16-29:17"
   },
   {
     "token": "RPAREN",
-    "loc": "32:20-32:21"
+    "loc": "29:17-29:18"
   },
   {
-    "token": "COMMA",
-    "loc": "32:21-32:22"
-  },
-  {
-    "token": [
-      "INT",
-      "1"
-    ],
-    "loc": "32:23-32:24"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "32:24-32:25"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "32:25-32:25"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "32:25-32:26"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "assert_eq"
-    ],
-    "loc": "33:3-33:12"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "33:12-33:13"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "f"
-    ],
-    "loc": "33:13-33:14"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "33:14-33:15"
-  },
-  {
-    "token": [
-      "STRING",
-      "xxb"
-    ],
-    "loc": "33:15-33:20"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "33:20-33:21"
-  },
-  {
-    "token": "COMMA",
-    "loc": "33:21-33:22"
+    "token": "FAT_ARROW",
+    "loc": "29:19-29:21"
   },
   {
     "token": [
       "INT",
       "2"
     ],
-    "loc": "33:23-33:24"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "33:24-33:25"
+    "loc": "29:22-29:23"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "33:25-33:25"
+    "loc": "29:23-29:23"
   },
   {
     "token": "NEWLINE",
-    "loc": "33:25-33:26"
+    "loc": "29:23-29:24"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "30:7-30:8"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "30:8-30:9"
+  },
+  {
+    "token": "COMMA",
+    "loc": "30:9-30:10"
+  },
+  {
+    "token": [
+      "STRING",
+      "c"
+    ],
+    "loc": "30:11-30:14"
+  },
+  {
+    "token": "COMMA",
+    "loc": "30:14-30:15"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "30:16-30:17"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "30:17-30:18"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "30:19-30:21"
+  },
+  {
+    "token": [
+      "INT",
+      "3"
+    ],
+    "loc": "30:22-30:23"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "30:23-30:23"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "30:23-30:24"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "31:7-31:8"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "31:9-31:11"
+  },
+  {
+    "token": "MINUS",
+    "loc": "31:12-31:13"
+  },
+  {
+    "token": [
+      "INT",
+      "1"
+    ],
+    "loc": "31:13-31:14"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "31:14-31:15"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "32:5-32:6"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "32:6-32:7"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "33:3-33:4"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "33:4-33:4"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "33:4-33:5"
   },
   {
     "token": [
@@ -991,7 +898,7 @@
   {
     "token": [
       "STRING",
-      "xxc"
+      "xxa"
     ],
     "loc": "34:15-34:20"
   },
@@ -1006,7 +913,7 @@
   {
     "token": [
       "INT",
-      "3"
+      "1"
     ],
     "loc": "34:23-34:24"
   },
@@ -1050,7 +957,7 @@
   {
     "token": [
       "STRING",
-      "xxd"
+      "xxb"
     ],
     "loc": "35:15-35:20"
   },
@@ -1063,782 +970,840 @@
     "loc": "35:21-35:22"
   },
   {
-    "token": "MINUS",
+    "token": [
+      "INT",
+      "2"
+    ],
     "loc": "35:23-35:24"
   },
   {
-    "token": [
-      "INT",
-      "1"
-    ],
+    "token": "RPAREN",
     "loc": "35:24-35:25"
   },
   {
-    "token": "RPAREN",
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "35:25-35:25"
+  },
+  {
+    "token": "NEWLINE",
     "loc": "35:25-35:26"
   },
   {
-    "token": "NEWLINE",
-    "loc": "35:26-35:27"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "36:1-36:2"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "36:2-36:2"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "36:2-36:3"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "37:1-37:2"
-  },
-  {
-    "token": "FN",
-    "loc": "38:1-38:3"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "test_nested_captures"
-    ],
-    "loc": "38:4-38:24"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "38:24-38:25"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "38:25-38:26"
-  },
-  {
-    "token": "THIN_ARROW",
-    "loc": "38:27-38:29"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Unit"
-    ],
-    "loc": "38:30-38:34"
-  },
-  {
-    "token": "RAISE",
-    "loc": "38:35-38:40"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "38:41-38:42"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "38:42-38:43"
-  },
-  {
     "token": [
       "LIDENT",
       "assert_eq"
     ],
-    "loc": "39:3-39:12"
+    "loc": "36:3-36:12"
   },
   {
     "token": "LPAREN",
-    "loc": "39:12-39:13"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "39:13-39:14"
-  },
-  {
-    "token": "LEXMATCH",
-    "loc": "40:5-40:13"
-  },
-  {
-    "token": [
-      "STRING",
-      "abcd"
-    ],
-    "loc": "40:14-40:20"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "40:21-40:22"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "40:22-40:23"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "41:7-41:8"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "before"
-    ],
-    "loc": "41:8-41:14"
-  },
-  {
-    "token": "COMMA",
-    "loc": "41:14-41:15"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "41:16-41:17"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "41:17-41:18"
-  },
-  {
-    "token": [
-      "STRING",
-      "b"
-    ],
-    "loc": "41:18-41:21"
-  },
-  {
-    "token": "AS",
-    "loc": "41:22-41:24"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "b"
-    ],
-    "loc": "41:25-41:26"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "41:26-41:27"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "41:28-41:29"
-  },
-  {
-    "token": [
-      "STRING",
-      "c"
-    ],
-    "loc": "41:29-41:32"
-  },
-  {
-    "token": "AS",
-    "loc": "41:33-41:35"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "c"
-    ],
-    "loc": "41:36-41:37"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "41:37-41:38"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "41:38-41:39"
-  },
-  {
-    "token": "AS",
-    "loc": "41:40-41:42"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "bc"
-    ],
-    "loc": "41:43-41:45"
-  },
-  {
-    "token": "COMMA",
-    "loc": "41:45-41:46"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "after"
-    ],
-    "loc": "41:47-41:52"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "41:52-41:53"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "41:54-41:56"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Some"
-    ],
-    "loc": "41:57-41:61"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "41:61-41:62"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "41:62-41:63"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "before"
-    ],
-    "loc": "41:63-41:69"
-  },
-  {
-    "token": "COMMA",
-    "loc": "41:69-41:70"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "b"
-    ],
-    "loc": "41:71-41:72"
-  },
-  {
-    "token": "COMMA",
-    "loc": "41:72-41:73"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "c"
-    ],
-    "loc": "41:74-41:75"
-  },
-  {
-    "token": "COMMA",
-    "loc": "41:75-41:76"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "bc"
-    ],
-    "loc": "41:77-41:79"
-  },
-  {
-    "token": "COMMA",
-    "loc": "41:79-41:80"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "after"
-    ],
-    "loc": "41:81-41:86"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "41:86-41:87"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "41:87-41:88"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "41:88-41:88"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "41:88-41:89"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "42:7-42:8"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "42:9-42:11"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "None"
-    ],
-    "loc": "42:12-42:16"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "42:16-42:17"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "43:5-43:6"
-  },
-  {
-    "token": "COMMA",
-    "loc": "43:6-43:7"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "43:7-43:8"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Some"
-    ],
-    "loc": "44:5-44:9"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "44:9-44:10"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "44:10-44:11"
-  },
-  {
-    "token": [
-      "STRING",
-      "a"
-    ],
-    "loc": "44:11-44:14"
-  },
-  {
-    "token": "COMMA",
-    "loc": "44:14-44:15"
-  },
-  {
-    "token": [
-      "CHAR",
-      "b"
-    ],
-    "loc": "44:16-44:19"
-  },
-  {
-    "token": "COMMA",
-    "loc": "44:19-44:20"
-  },
-  {
-    "token": [
-      "CHAR",
-      "c"
-    ],
-    "loc": "44:21-44:24"
-  },
-  {
-    "token": "COMMA",
-    "loc": "44:24-44:25"
-  },
-  {
-    "token": [
-      "STRING",
-      "bc"
-    ],
-    "loc": "44:26-44:30"
-  },
-  {
-    "token": "COMMA",
-    "loc": "44:30-44:31"
-  },
-  {
-    "token": [
-      "STRING",
-      "d"
-    ],
-    "loc": "44:32-44:35"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "44:35-44:36"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "44:36-44:37"
-  },
-  {
-    "token": "COMMA",
-    "loc": "44:37-44:38"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "44:38-44:39"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "45:3-45:4"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "45:4-45:5"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "46:1-46:2"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "46:2-46:2"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "46:2-46:3"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "47:1-47:2"
-  },
-  {
-    "token": "FN",
-    "loc": "48:1-48:3"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "test_quantifier"
-    ],
-    "loc": "48:4-48:19"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "48:19-48:20"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "48:20-48:21"
-  },
-  {
-    "token": "THIN_ARROW",
-    "loc": "48:22-48:24"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Unit"
-    ],
-    "loc": "48:25-48:29"
-  },
-  {
-    "token": "RAISE",
-    "loc": "48:30-48:35"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "48:36-48:37"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "48:37-48:38"
-  },
-  {
-    "token": "FN",
-    "loc": "49:3-49:5"
+    "loc": "36:12-36:13"
   },
   {
     "token": [
       "LIDENT",
       "f"
     ],
-    "loc": "49:6-49:7"
+    "loc": "36:13-36:14"
   },
   {
     "token": "LPAREN",
-    "loc": "49:7-49:8"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "x"
-    ],
-    "loc": "49:8-49:9"
-  },
-  {
-    "token": "COLON",
-    "loc": "49:10-49:11"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "String"
-    ],
-    "loc": "49:12-49:18"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "49:18-49:19"
-  },
-  {
-    "token": "THIN_ARROW",
-    "loc": "49:20-49:22"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Int"
-    ],
-    "loc": "49:23-49:26"
-  },
-  {
-    "token": "QUESTION",
-    "loc": "49:26-49:27"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "49:28-49:29"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "49:29-49:30"
-  },
-  {
-    "token": "LEXMATCH",
-    "loc": "50:5-50:13"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "x"
-    ],
-    "loc": "50:14-50:15"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "50:16-50:17"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "50:17-50:18"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "51:7-51:8"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "51:8-51:9"
+    "loc": "36:14-36:15"
   },
   {
     "token": [
       "STRING",
-      "a{2,4}"
+      "xxc"
     ],
-    "loc": "51:9-51:17"
-  },
-  {
-    "token": "AS",
-    "loc": "51:18-51:20"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "a"
-    ],
-    "loc": "51:21-51:22"
+    "loc": "36:15-36:20"
   },
   {
     "token": "RPAREN",
-    "loc": "51:22-51:23"
-  },
-  {
-    "token": [
-      "STRING",
-      "b"
-    ],
-    "loc": "51:24-51:27"
+    "loc": "36:20-36:21"
   },
   {
     "token": "COMMA",
-    "loc": "51:27-51:28"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "51:29-51:30"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "51:30-51:31"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "51:32-51:34"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Some"
-    ],
-    "loc": "51:35-51:39"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "51:39-51:40"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "a"
-    ],
-    "loc": "51:40-51:41"
-  },
-  {
-    "token": [
-      "DOT_LIDENT",
-      "length"
-    ],
-    "loc": "51:42-51:48"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "51:48-51:49"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "51:49-51:50"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "51:50-51:51"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "51:51-51:51"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "51:51-51:52"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "52:7-52:8"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "52:9-52:11"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "None"
-    ],
-    "loc": "52:12-52:16"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "52:16-52:17"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "53:5-53:6"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "53:6-53:7"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "54:3-54:4"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "54:4-54:4"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "54:4-54:5"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "assert_eq"
-    ],
-    "loc": "55:3-55:12"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "55:12-55:13"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "55:13-55:14"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "f"
-    ],
-    "loc": "56:5-56:6"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "56:6-56:7"
-  },
-  {
-    "token": [
-      "STRING",
-      "aaab"
-    ],
-    "loc": "56:7-56:13"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "56:13-56:14"
-  },
-  {
-    "token": "COMMA",
-    "loc": "56:14-56:15"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "56:15-56:16"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Some"
-    ],
-    "loc": "57:5-57:9"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "57:9-57:10"
+    "loc": "36:21-36:22"
   },
   {
     "token": [
       "INT",
       "3"
     ],
-    "loc": "57:10-57:11"
+    "loc": "36:23-36:24"
   },
   {
     "token": "RPAREN",
-    "loc": "57:11-57:12"
+    "loc": "36:24-36:25"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "36:25-36:25"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "36:25-36:26"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "assert_eq"
+    ],
+    "loc": "37:3-37:12"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "37:12-37:13"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "f"
+    ],
+    "loc": "37:13-37:14"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "37:14-37:15"
+  },
+  {
+    "token": [
+      "STRING",
+      "xxd"
+    ],
+    "loc": "37:15-37:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "37:20-37:21"
   },
   {
     "token": "COMMA",
+    "loc": "37:21-37:22"
+  },
+  {
+    "token": "MINUS",
+    "loc": "37:23-37:24"
+  },
+  {
+    "token": [
+      "INT",
+      "1"
+    ],
+    "loc": "37:24-37:25"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "37:25-37:26"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "37:26-37:27"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "38:1-38:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "38:2-38:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "38:2-38:3"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "39:1-39:2"
+  },
+  {
+    "token": "FN",
+    "loc": "40:1-40:3"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "test_nested_captures"
+    ],
+    "loc": "40:4-40:24"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "40:24-40:25"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "40:25-40:26"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "40:27-40:29"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Unit"
+    ],
+    "loc": "40:30-40:34"
+  },
+  {
+    "token": "RAISE",
+    "loc": "40:35-40:40"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "40:41-40:42"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "40:42-40:43"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "assert_eq"
+    ],
+    "loc": "41:3-41:12"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "41:12-41:13"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "41:13-41:14"
+  },
+  {
+    "token": "LEXMATCH",
+    "loc": "42:5-42:13"
+  },
+  {
+    "token": [
+      "STRING",
+      "abcd"
+    ],
+    "loc": "42:14-42:20"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "42:21-42:22"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "42:22-42:23"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "43:7-43:8"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "before"
+    ],
+    "loc": "43:8-43:14"
+  },
+  {
+    "token": "COMMA",
+    "loc": "43:14-43:15"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "43:16-43:17"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "43:17-43:18"
+  },
+  {
+    "token": [
+      "STRING",
+      "b"
+    ],
+    "loc": "43:18-43:21"
+  },
+  {
+    "token": "AS",
+    "loc": "43:22-43:24"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "b"
+    ],
+    "loc": "43:25-43:26"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "43:26-43:27"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "43:28-43:29"
+  },
+  {
+    "token": [
+      "STRING",
+      "c"
+    ],
+    "loc": "43:29-43:32"
+  },
+  {
+    "token": "AS",
+    "loc": "43:33-43:35"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "c"
+    ],
+    "loc": "43:36-43:37"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "43:37-43:38"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "43:38-43:39"
+  },
+  {
+    "token": "AS",
+    "loc": "43:40-43:42"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "bc"
+    ],
+    "loc": "43:43-43:45"
+  },
+  {
+    "token": "COMMA",
+    "loc": "43:45-43:46"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "after"
+    ],
+    "loc": "43:47-43:52"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "43:52-43:53"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "43:54-43:56"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Some"
+    ],
+    "loc": "43:57-43:61"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "43:61-43:62"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "43:62-43:63"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "before"
+    ],
+    "loc": "43:63-43:69"
+  },
+  {
+    "token": "COMMA",
+    "loc": "43:69-43:70"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "b"
+    ],
+    "loc": "43:71-43:72"
+  },
+  {
+    "token": "COMMA",
+    "loc": "43:72-43:73"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "c"
+    ],
+    "loc": "43:74-43:75"
+  },
+  {
+    "token": "COMMA",
+    "loc": "43:75-43:76"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "bc"
+    ],
+    "loc": "43:77-43:79"
+  },
+  {
+    "token": "COMMA",
+    "loc": "43:79-43:80"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "after"
+    ],
+    "loc": "43:81-43:86"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "43:86-43:87"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "43:87-43:88"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "43:88-43:88"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "43:88-43:89"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "44:7-44:8"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "44:9-44:11"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "None"
+    ],
+    "loc": "44:12-44:16"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "44:16-44:17"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "45:5-45:6"
+  },
+  {
+    "token": "COMMA",
+    "loc": "45:6-45:7"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "45:7-45:8"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Some"
+    ],
+    "loc": "46:5-46:9"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "46:9-46:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "46:10-46:11"
+  },
+  {
+    "token": [
+      "STRING",
+      "a"
+    ],
+    "loc": "46:11-46:14"
+  },
+  {
+    "token": "COMMA",
+    "loc": "46:14-46:15"
+  },
+  {
+    "token": [
+      "CHAR",
+      "b"
+    ],
+    "loc": "46:16-46:19"
+  },
+  {
+    "token": "COMMA",
+    "loc": "46:19-46:20"
+  },
+  {
+    "token": [
+      "CHAR",
+      "c"
+    ],
+    "loc": "46:21-46:24"
+  },
+  {
+    "token": "COMMA",
+    "loc": "46:24-46:25"
+  },
+  {
+    "token": [
+      "STRING",
+      "bc"
+    ],
+    "loc": "46:26-46:30"
+  },
+  {
+    "token": "COMMA",
+    "loc": "46:30-46:31"
+  },
+  {
+    "token": [
+      "STRING",
+      "d"
+    ],
+    "loc": "46:32-46:35"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "46:35-46:36"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "46:36-46:37"
+  },
+  {
+    "token": "COMMA",
+    "loc": "46:37-46:38"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "46:38-46:39"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "47:3-47:4"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "47:4-47:5"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "48:1-48:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "48:2-48:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "48:2-48:3"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "49:1-49:2"
+  },
+  {
+    "token": "FN",
+    "loc": "50:1-50:3"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "test_quantifier"
+    ],
+    "loc": "50:4-50:19"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "50:19-50:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "50:20-50:21"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "50:22-50:24"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Unit"
+    ],
+    "loc": "50:25-50:29"
+  },
+  {
+    "token": "RAISE",
+    "loc": "50:30-50:35"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "50:36-50:37"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "50:37-50:38"
+  },
+  {
+    "token": "FN",
+    "loc": "51:3-51:5"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "f"
+    ],
+    "loc": "51:6-51:7"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "51:7-51:8"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "x"
+    ],
+    "loc": "51:8-51:9"
+  },
+  {
+    "token": "COLON",
+    "loc": "51:10-51:11"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "String"
+    ],
+    "loc": "51:12-51:18"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "51:18-51:19"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "51:20-51:22"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Int"
+    ],
+    "loc": "51:23-51:26"
+  },
+  {
+    "token": "QUESTION",
+    "loc": "51:26-51:27"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "51:28-51:29"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "51:29-51:30"
+  },
+  {
+    "token": "LEXMATCH",
+    "loc": "52:5-52:13"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "x"
+    ],
+    "loc": "52:14-52:15"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "52:16-52:17"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "52:17-52:18"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "53:7-53:8"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "53:8-53:9"
+  },
+  {
+    "token": [
+      "STRING",
+      "a{2,4}"
+    ],
+    "loc": "53:9-53:17"
+  },
+  {
+    "token": "AS",
+    "loc": "53:18-53:20"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "a"
+    ],
+    "loc": "53:21-53:22"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "53:22-53:23"
+  },
+  {
+    "token": [
+      "STRING",
+      "b"
+    ],
+    "loc": "53:24-53:27"
+  },
+  {
+    "token": "COMMA",
+    "loc": "53:27-53:28"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "53:29-53:30"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "53:30-53:31"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "53:32-53:34"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Some"
+    ],
+    "loc": "53:35-53:39"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "53:39-53:40"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "a"
+    ],
+    "loc": "53:40-53:41"
+  },
+  {
+    "token": [
+      "DOT_LIDENT",
+      "length"
+    ],
+    "loc": "53:42-53:48"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "53:48-53:49"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "53:49-53:50"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "53:50-53:51"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "53:51-53:51"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "53:51-53:52"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "54:7-54:8"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "54:9-54:11"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "None"
+    ],
+    "loc": "54:12-54:16"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "54:16-54:17"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "55:5-55:6"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "55:6-55:7"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "56:3-56:4"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "56:4-56:4"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "56:4-56:5"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "assert_eq"
+    ],
+    "loc": "57:3-57:12"
+  },
+  {
+    "token": "LPAREN",
     "loc": "57:12-57:13"
   },
   {
@@ -1846,759 +1811,707 @@
     "loc": "57:13-57:14"
   },
   {
+    "token": [
+      "LIDENT",
+      "f"
+    ],
+    "loc": "58:5-58:6"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "58:6-58:7"
+  },
+  {
+    "token": [
+      "STRING",
+      "aaab"
+    ],
+    "loc": "58:7-58:13"
+  },
+  {
     "token": "RPAREN",
-    "loc": "58:3-58:4"
+    "loc": "58:13-58:14"
+  },
+  {
+    "token": "COMMA",
+    "loc": "58:14-58:15"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "58:15-58:16"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Some"
+    ],
+    "loc": "59:5-59:9"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "59:9-59:10"
+  },
+  {
+    "token": [
+      "INT",
+      "3"
+    ],
+    "loc": "59:10-59:11"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "59:11-59:12"
+  },
+  {
+    "token": "COMMA",
+    "loc": "59:12-59:13"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "59:13-59:14"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "60:3-60:4"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "58:4-58:4"
+    "loc": "60:4-60:4"
   },
   {
     "token": "NEWLINE",
-    "loc": "58:4-58:5"
+    "loc": "60:4-60:5"
   },
   {
     "token": [
       "LIDENT",
       "assert_eq"
     ],
-    "loc": "59:3-59:12"
+    "loc": "61:3-61:12"
   },
   {
     "token": "LPAREN",
-    "loc": "59:12-59:13"
+    "loc": "61:12-61:13"
   },
   {
     "token": [
       "LIDENT",
       "f"
     ],
-    "loc": "59:13-59:14"
+    "loc": "61:13-61:14"
   },
   {
     "token": "LPAREN",
-    "loc": "59:14-59:15"
+    "loc": "61:14-61:15"
   },
   {
     "token": [
       "STRING",
       "ab"
     ],
-    "loc": "59:15-59:19"
+    "loc": "61:15-61:19"
   },
   {
     "token": "RPAREN",
-    "loc": "59:19-59:20"
+    "loc": "61:19-61:20"
   },
   {
     "token": "COMMA",
-    "loc": "59:20-59:21"
+    "loc": "61:20-61:21"
   },
   {
     "token": [
       "UIDENT",
       "None"
     ],
-    "loc": "59:22-59:26"
+    "loc": "61:22-61:26"
   },
   {
     "token": "RPAREN",
-    "loc": "59:26-59:27"
+    "loc": "61:26-61:27"
   },
   {
     "token": "NEWLINE",
-    "loc": "59:27-59:28"
+    "loc": "61:27-61:28"
   },
   {
     "token": "RBRACE",
-    "loc": "60:1-60:2"
+    "loc": "62:1-62:2"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "60:2-60:2"
+    "loc": "62:2-62:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "60:2-60:3"
+    "loc": "62:2-62:3"
   },
   {
     "token": "NEWLINE",
-    "loc": "61:1-61:2"
+    "loc": "63:1-63:2"
   },
   {
     "token": "FN",
-    "loc": "62:1-62:3"
+    "loc": "64:1-64:3"
   },
   {
     "token": [
       "LIDENT",
       "test_non_greedy_quantifier"
     ],
-    "loc": "62:4-62:30"
+    "loc": "64:4-64:30"
   },
   {
     "token": "LPAREN",
-    "loc": "62:30-62:31"
+    "loc": "64:30-64:31"
   },
   {
     "token": "RPAREN",
-    "loc": "62:31-62:32"
+    "loc": "64:31-64:32"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "62:33-62:35"
+    "loc": "64:33-64:35"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "62:36-62:40"
+    "loc": "64:36-64:40"
   },
   {
     "token": "RAISE",
-    "loc": "62:41-62:46"
+    "loc": "64:41-64:46"
   },
   {
     "token": "LBRACE",
-    "loc": "62:47-62:48"
+    "loc": "64:47-64:48"
   },
   {
     "token": "NEWLINE",
-    "loc": "62:48-62:49"
+    "loc": "64:48-64:49"
   },
   {
     "token": "FN",
-    "loc": "63:3-63:5"
+    "loc": "65:3-65:5"
   },
   {
     "token": [
       "LIDENT",
       "f"
     ],
-    "loc": "63:6-63:7"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "63:7-63:8"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "x"
-    ],
-    "loc": "63:8-63:9"
-  },
-  {
-    "token": "COLON",
-    "loc": "63:10-63:11"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "String"
-    ],
-    "loc": "63:12-63:18"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "63:18-63:19"
-  },
-  {
-    "token": "THIN_ARROW",
-    "loc": "63:20-63:22"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "StringView"
-    ],
-    "loc": "63:23-63:33"
-  },
-  {
-    "token": "QUESTION",
-    "loc": "63:33-63:34"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "63:35-63:36"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "63:36-63:37"
-  },
-  {
-    "token": "LEXMATCH",
-    "loc": "64:5-64:13"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "x"
-    ],
-    "loc": "64:14-64:15"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "64:16-64:17"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "64:17-64:18"
+    "loc": "65:6-65:7"
   },
   {
     "token": "LPAREN",
     "loc": "65:7-65:8"
   },
   {
-    "token": "LPAREN",
+    "token": [
+      "LIDENT",
+      "x"
+    ],
     "loc": "65:8-65:9"
   },
   {
-    "token": [
-      "STRING",
-      "(a|b)*?"
-    ],
-    "loc": "65:9-65:18"
-  },
-  {
-    "token": "AS",
-    "loc": "65:19-65:21"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "x"
-    ],
-    "loc": "65:22-65:23"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "65:23-65:24"
-  },
-  {
-    "token": [
-      "STRING",
-      "b"
-    ],
-    "loc": "65:25-65:28"
-  },
-  {
-    "token": "COMMA",
-    "loc": "65:28-65:29"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "65:30-65:31"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "65:31-65:32"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "65:33-65:35"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Some"
-    ],
-    "loc": "65:36-65:40"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "65:40-65:41"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "x"
-    ],
-    "loc": "65:41-65:42"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "65:42-65:43"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "65:43-65:43"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "65:43-65:44"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "66:7-66:8"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "66:9-66:11"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "None"
-    ],
-    "loc": "66:12-66:16"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "66:16-66:17"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "67:5-67:6"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "67:6-67:7"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "68:3-68:4"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "68:4-68:4"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "68:4-68:5"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "assert_eq"
-    ],
-    "loc": "69:3-69:12"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "69:12-69:13"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "69:13-69:14"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "f"
-    ],
-    "loc": "70:5-70:6"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "70:6-70:7"
-  },
-  {
-    "token": [
-      "STRING",
-      "aaabbb"
-    ],
-    "loc": "70:7-70:15"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "70:15-70:16"
-  },
-  {
-    "token": "COMMA",
-    "loc": "70:16-70:17"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "70:17-70:18"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Some"
-    ],
-    "loc": "71:5-71:9"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "71:9-71:10"
-  },
-  {
-    "token": [
-      "STRING",
-      "aaa"
-    ],
-    "loc": "71:10-71:15"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "71:15-71:16"
-  },
-  {
-    "token": "COMMA",
-    "loc": "71:16-71:17"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "71:17-71:18"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "72:3-72:4"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "72:4-72:5"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "73:1-73:2"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "73:2-73:2"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "73:2-73:3"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "74:1-74:2"
-  },
-  {
-    "token": "FN",
-    "loc": "75:1-75:3"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "test_simple_assertions"
-    ],
-    "loc": "75:4-75:26"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "75:26-75:27"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "75:27-75:28"
-  },
-  {
-    "token": "THIN_ARROW",
-    "loc": "75:29-75:31"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Unit"
-    ],
-    "loc": "75:32-75:36"
-  },
-  {
-    "token": "RAISE",
-    "loc": "75:37-75:42"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "75:43-75:44"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "75:44-75:45"
-  },
-  {
-    "token": "FN",
-    "loc": "76:3-76:5"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "f"
-    ],
-    "loc": "76:6-76:7"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "76:7-76:8"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "x"
-    ],
-    "loc": "76:8-76:9"
-  },
-  {
     "token": "COLON",
-    "loc": "76:10-76:11"
+    "loc": "65:10-65:11"
   },
   {
     "token": [
       "UIDENT",
       "String"
     ],
-    "loc": "76:12-76:18"
+    "loc": "65:12-65:18"
   },
   {
     "token": "RPAREN",
-    "loc": "76:18-76:19"
+    "loc": "65:18-65:19"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "76:20-76:22"
+    "loc": "65:20-65:22"
   },
   {
     "token": [
       "UIDENT",
-      "Bool"
+      "StringView"
     ],
-    "loc": "76:23-76:27"
+    "loc": "65:23-65:33"
+  },
+  {
+    "token": "QUESTION",
+    "loc": "65:33-65:34"
   },
   {
     "token": "LBRACE",
-    "loc": "76:28-76:29"
+    "loc": "65:35-65:36"
   },
   {
     "token": "NEWLINE",
-    "loc": "76:29-76:30"
+    "loc": "65:36-65:37"
   },
   {
     "token": "LEXMATCH",
-    "loc": "77:5-77:13"
+    "loc": "66:5-66:13"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
-    "loc": "77:14-77:15"
+    "loc": "66:14-66:15"
   },
   {
     "token": "LBRACE",
-    "loc": "77:16-77:17"
+    "loc": "66:16-66:17"
   },
   {
     "token": "NEWLINE",
-    "loc": "77:17-77:18"
+    "loc": "66:17-66:18"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "67:7-67:8"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "67:8-67:9"
+  },
+  {
+    "token": [
+      "STRING",
+      "(a|b)*?"
+    ],
+    "loc": "67:9-67:18"
+  },
+  {
+    "token": "AS",
+    "loc": "67:19-67:21"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "x"
+    ],
+    "loc": "67:22-67:23"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "67:23-67:24"
+  },
+  {
+    "token": [
+      "STRING",
+      "b"
+    ],
+    "loc": "67:25-67:28"
+  },
+  {
+    "token": "COMMA",
+    "loc": "67:28-67:29"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "67:30-67:31"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "67:31-67:32"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "67:33-67:35"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Some"
+    ],
+    "loc": "67:36-67:40"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "67:40-67:41"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "x"
+    ],
+    "loc": "67:41-67:42"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "67:42-67:43"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "67:43-67:43"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "67:43-67:44"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "68:7-68:8"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "68:9-68:11"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "None"
+    ],
+    "loc": "68:12-68:16"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "68:16-68:17"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "69:5-69:6"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "69:6-69:7"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "70:3-70:4"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "70:4-70:4"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "70:4-70:5"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "assert_eq"
+    ],
+    "loc": "71:3-71:12"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "71:12-71:13"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "71:13-71:14"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "f"
+    ],
+    "loc": "72:5-72:6"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "72:6-72:7"
+  },
+  {
+    "token": [
+      "STRING",
+      "aaabbb"
+    ],
+    "loc": "72:7-72:15"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "72:15-72:16"
+  },
+  {
+    "token": "COMMA",
+    "loc": "72:16-72:17"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "72:17-72:18"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Some"
+    ],
+    "loc": "73:5-73:9"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "73:9-73:10"
+  },
+  {
+    "token": [
+      "STRING",
+      "aaa"
+    ],
+    "loc": "73:10-73:15"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "73:15-73:16"
+  },
+  {
+    "token": "COMMA",
+    "loc": "73:16-73:17"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "73:17-73:18"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "74:3-74:4"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "74:4-74:5"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "75:1-75:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "75:2-75:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "75:2-75:3"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "76:1-76:2"
+  },
+  {
+    "token": "FN",
+    "loc": "77:1-77:3"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "test_simple_assertions"
+    ],
+    "loc": "77:4-77:26"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "77:26-77:27"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "77:27-77:28"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "77:29-77:31"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Unit"
+    ],
+    "loc": "77:32-77:36"
+  },
+  {
+    "token": "RAISE",
+    "loc": "77:37-77:42"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "77:43-77:44"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "77:44-77:45"
+  },
+  {
+    "token": "FN",
+    "loc": "78:3-78:5"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "f"
+    ],
+    "loc": "78:6-78:7"
   },
   {
     "token": "LPAREN",
     "loc": "78:7-78:8"
   },
   {
-    "token": "UNDERSCORE",
+    "token": [
+      "LIDENT",
+      "x"
+    ],
     "loc": "78:8-78:9"
   },
   {
-    "token": "COMMA",
-    "loc": "78:9-78:10"
+    "token": "COLON",
+    "loc": "78:10-78:11"
   },
   {
     "token": [
-      "STRING",
-      "a|^b"
+      "UIDENT",
+      "String"
     ],
-    "loc": "78:11-78:17"
-  },
-  {
-    "token": "COMMA",
-    "loc": "78:17-78:18"
-  },
-  {
-    "token": "UNDERSCORE",
-    "loc": "78:19-78:20"
+    "loc": "78:12-78:18"
   },
   {
     "token": "RPAREN",
-    "loc": "78:20-78:21"
+    "loc": "78:18-78:19"
   },
   {
-    "token": "FAT_ARROW",
-    "loc": "78:22-78:24"
-  },
-  {
-    "token": "TRUE",
-    "loc": "78:25-78:29"
+    "token": "THIN_ARROW",
+    "loc": "78:20-78:22"
   },
   {
     "token": [
-      "SEMI",
-      false
+      "UIDENT",
+      "Bool"
     ],
-    "loc": "78:29-78:29"
+    "loc": "78:23-78:27"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "78:28-78:29"
   },
   {
     "token": "NEWLINE",
     "loc": "78:29-78:30"
   },
   {
-    "token": "UNDERSCORE",
-    "loc": "79:7-79:8"
+    "token": "LEXMATCH",
+    "loc": "79:5-79:13"
   },
   {
-    "token": "FAT_ARROW",
-    "loc": "79:9-79:11"
+    "token": [
+      "LIDENT",
+      "x"
+    ],
+    "loc": "79:14-79:15"
   },
   {
-    "token": "FALSE",
-    "loc": "79:12-79:17"
+    "token": "LBRACE",
+    "loc": "79:16-79:17"
   },
   {
     "token": "NEWLINE",
     "loc": "79:17-79:18"
   },
   {
-    "token": "RBRACE",
-    "loc": "80:5-80:6"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "80:6-80:7"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "81:3-81:4"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "81:4-81:4"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "81:4-81:5"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "assert_eq"
-    ],
-    "loc": "82:3-82:12"
-  },
-  {
     "token": "LPAREN",
-    "loc": "82:12-82:13"
+    "loc": "80:7-80:8"
   },
   {
-    "token": [
-      "LIDENT",
-      "f"
-    ],
-    "loc": "82:13-82:14"
+    "token": "UNDERSCORE",
+    "loc": "80:8-80:9"
   },
   {
-    "token": "LPAREN",
-    "loc": "82:14-82:15"
+    "token": "COMMA",
+    "loc": "80:9-80:10"
   },
   {
     "token": [
       "STRING",
-      "xxa"
+      "a|^b"
     ],
-    "loc": "82:15-82:20"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "82:20-82:21"
+    "loc": "80:11-80:17"
   },
   {
     "token": "COMMA",
-    "loc": "82:21-82:22"
+    "loc": "80:17-80:18"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "80:19-80:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "80:20-80:21"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "80:22-80:24"
   },
   {
     "token": "TRUE",
-    "loc": "82:23-82:27"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "82:27-82:28"
+    "loc": "80:25-80:29"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "82:28-82:28"
+    "loc": "80:29-80:29"
   },
   {
     "token": "NEWLINE",
-    "loc": "82:28-82:29"
+    "loc": "80:29-80:30"
   },
   {
-    "token": [
-      "LIDENT",
-      "assert_eq"
-    ],
-    "loc": "83:3-83:12"
+    "token": "UNDERSCORE",
+    "loc": "81:7-81:8"
   },
   {
-    "token": "LPAREN",
-    "loc": "83:12-83:13"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "f"
-    ],
-    "loc": "83:13-83:14"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "83:14-83:15"
-  },
-  {
-    "token": [
-      "STRING",
-      "xxb"
-    ],
-    "loc": "83:15-83:20"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "83:20-83:21"
-  },
-  {
-    "token": "COMMA",
-    "loc": "83:21-83:22"
+    "token": "FAT_ARROW",
+    "loc": "81:9-81:11"
   },
   {
     "token": "FALSE",
-    "loc": "83:23-83:28"
+    "loc": "81:12-81:17"
   },
   {
-    "token": "RPAREN",
-    "loc": "83:28-83:29"
+    "token": "NEWLINE",
+    "loc": "81:17-81:18"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "82:5-82:6"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "82:6-82:7"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "83:3-83:4"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "83:29-83:29"
+    "loc": "83:4-83:4"
   },
   {
     "token": "NEWLINE",
-    "loc": "83:29-83:30"
+    "loc": "83:4-83:5"
   },
   {
     "token": [
@@ -2625,7 +2538,7 @@
   {
     "token": [
       "STRING",
-      "bxx"
+      "xxa"
     ],
     "loc": "84:15-84:20"
   },
@@ -2646,27 +2559,139 @@
     "loc": "84:27-84:28"
   },
   {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "84:28-84:28"
+  },
+  {
     "token": "NEWLINE",
     "loc": "84:28-84:29"
   },
   {
-    "token": "RBRACE",
-    "loc": "85:1-85:2"
+    "token": [
+      "LIDENT",
+      "assert_eq"
+    ],
+    "loc": "85:3-85:12"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "85:12-85:13"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "f"
+    ],
+    "loc": "85:13-85:14"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "85:14-85:15"
+  },
+  {
+    "token": [
+      "STRING",
+      "xxb"
+    ],
+    "loc": "85:15-85:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "85:20-85:21"
+  },
+  {
+    "token": "COMMA",
+    "loc": "85:21-85:22"
+  },
+  {
+    "token": "FALSE",
+    "loc": "85:23-85:28"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "85:28-85:29"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "85:2-85:2"
+    "loc": "85:29-85:29"
   },
   {
     "token": "NEWLINE",
-    "loc": "85:2-85:3"
+    "loc": "85:29-85:30"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "assert_eq"
+    ],
+    "loc": "86:3-86:12"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "86:12-86:13"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "f"
+    ],
+    "loc": "86:13-86:14"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "86:14-86:15"
+  },
+  {
+    "token": [
+      "STRING",
+      "bxx"
+    ],
+    "loc": "86:15-86:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "86:20-86:21"
+  },
+  {
+    "token": "COMMA",
+    "loc": "86:21-86:22"
+  },
+  {
+    "token": "TRUE",
+    "loc": "86:23-86:27"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "86:27-86:28"
   },
   {
     "token": "NEWLINE",
-    "loc": "86:1-86:2"
+    "loc": "86:28-86:29"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "87:1-87:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "87:2-87:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "87:2-87:3"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "88:1-88:2"
   },
   {
     "token": [
@@ -2683,97 +2708,25 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "87:1-87:5"
+    "loc": "89:1-89:5"
   },
   {
     "token": "NEWLINE",
-    "loc": "87:5-87:6"
+    "loc": "89:5-89:6"
   },
   {
     "token": "FN",
-    "loc": "88:1-88:3"
+    "loc": "90:1-90:3"
   },
   {
     "token": [
       "LIDENT",
       "test_emoji"
     ],
-    "loc": "88:4-88:14"
+    "loc": "90:4-90:14"
   },
   {
     "token": "LPAREN",
-    "loc": "88:14-88:15"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "88:15-88:16"
-  },
-  {
-    "token": "THIN_ARROW",
-    "loc": "88:17-88:19"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Unit"
-    ],
-    "loc": "88:20-88:24"
-  },
-  {
-    "token": "RAISE",
-    "loc": "88:25-88:30"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "88:31-88:32"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "88:32-88:33"
-  },
-  {
-    "token": "LEXMATCH",
-    "loc": "89:3-89:11"
-  },
-  {
-    "token": [
-      "STRING",
-      "😋😋"
-    ],
-    "loc": "89:12-89:16"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "89:17-89:18"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "89:18-89:19"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "90:5-90:6"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "90:6-90:7"
-  },
-  {
-    "token": [
-      "STRING",
-      "."
-    ],
-    "loc": "90:7-90:10"
-  },
-  {
-    "token": "AS",
-    "loc": "90:11-90:13"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "u"
-    ],
     "loc": "90:14-90:15"
   },
   {
@@ -2781,199 +2734,271 @@
     "loc": "90:15-90:16"
   },
   {
+    "token": "THIN_ARROW",
+    "loc": "90:17-90:19"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Unit"
+    ],
+    "loc": "90:20-90:24"
+  },
+  {
+    "token": "RAISE",
+    "loc": "90:25-90:30"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "90:31-90:32"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "90:32-90:33"
+  },
+  {
+    "token": "LEXMATCH",
+    "loc": "91:3-91:11"
+  },
+  {
+    "token": [
+      "STRING",
+      "😋😋"
+    ],
+    "loc": "91:12-91:16"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "91:17-91:18"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "91:18-91:19"
+  },
+  {
     "token": "LPAREN",
-    "loc": "90:17-90:18"
+    "loc": "92:5-92:6"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "92:6-92:7"
   },
   {
     "token": [
       "STRING",
       "."
     ],
-    "loc": "90:18-90:21"
+    "loc": "92:7-92:10"
   },
   {
     "token": "AS",
-    "loc": "90:22-90:24"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "v"
-    ],
-    "loc": "90:25-90:26"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "90:26-90:27"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "90:27-90:28"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "90:29-90:31"
-  },
-  {
-    "token": "LBRACE",
-    "loc": "90:32-90:33"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "90:33-90:34"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "assert_eq"
-    ],
-    "loc": "91:7-91:16"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "91:16-91:17"
+    "loc": "92:11-92:13"
   },
   {
     "token": [
       "LIDENT",
       "u"
     ],
-    "loc": "91:17-91:18"
-  },
-  {
-    "token": "COMMA",
-    "loc": "91:18-91:19"
-  },
-  {
-    "token": [
-      "CHAR",
-      "😋"
-    ],
-    "loc": "91:20-91:23"
+    "loc": "92:14-92:15"
   },
   {
     "token": "RPAREN",
-    "loc": "91:23-91:24"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "91:24-91:24"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "91:24-91:25"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "assert_eq"
-    ],
-    "loc": "92:7-92:16"
+    "loc": "92:15-92:16"
   },
   {
     "token": "LPAREN",
-    "loc": "92:16-92:17"
+    "loc": "92:17-92:18"
+  },
+  {
+    "token": [
+      "STRING",
+      "."
+    ],
+    "loc": "92:18-92:21"
+  },
+  {
+    "token": "AS",
+    "loc": "92:22-92:24"
   },
   {
     "token": [
       "LIDENT",
       "v"
     ],
-    "loc": "92:17-92:18"
+    "loc": "92:25-92:26"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "92:26-92:27"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "92:27-92:28"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "92:29-92:31"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "92:32-92:33"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "92:33-92:34"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "assert_eq"
+    ],
+    "loc": "93:7-93:16"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "93:16-93:17"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "u"
+    ],
+    "loc": "93:17-93:18"
   },
   {
     "token": "COMMA",
-    "loc": "92:18-92:19"
+    "loc": "93:18-93:19"
   },
   {
     "token": [
       "CHAR",
       "😋"
     ],
-    "loc": "92:20-92:23"
+    "loc": "93:20-93:23"
   },
   {
     "token": "RPAREN",
-    "loc": "92:23-92:24"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "92:24-92:25"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "93:5-93:6"
+    "loc": "93:23-93:24"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "93:6-93:6"
+    "loc": "93:24-93:24"
   },
   {
     "token": "NEWLINE",
-    "loc": "93:6-93:7"
+    "loc": "93:24-93:25"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "assert_eq"
+    ],
+    "loc": "94:7-94:16"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "94:16-94:17"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "v"
+    ],
+    "loc": "94:17-94:18"
+  },
+  {
+    "token": "COMMA",
+    "loc": "94:18-94:19"
+  },
+  {
+    "token": [
+      "CHAR",
+      "😋"
+    ],
+    "loc": "94:20-94:23"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "94:23-94:24"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "94:24-94:25"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "95:5-95:6"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "95:6-95:6"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "95:6-95:7"
   },
   {
     "token": "UNDERSCORE",
-    "loc": "94:5-94:6"
+    "loc": "96:5-96:6"
   },
   {
     "token": "FAT_ARROW",
-    "loc": "94:7-94:9"
+    "loc": "96:7-96:9"
   },
   {
     "token": [
       "LIDENT",
       "fail"
     ],
-    "loc": "94:10-94:14"
+    "loc": "96:10-96:14"
   },
   {
     "token": "LPAREN",
-    "loc": "94:14-94:15"
+    "loc": "96:14-96:15"
   },
   {
     "token": [
       "STRING",
       "mismatch"
     ],
-    "loc": "94:15-94:25"
+    "loc": "96:15-96:25"
   },
   {
     "token": "RPAREN",
-    "loc": "94:25-94:26"
+    "loc": "96:25-96:26"
   },
   {
     "token": "NEWLINE",
-    "loc": "94:26-94:27"
+    "loc": "96:26-96:27"
   },
   {
     "token": "RBRACE",
-    "loc": "95:3-95:4"
+    "loc": "97:3-97:4"
   },
   {
     "token": "NEWLINE",
-    "loc": "95:4-95:5"
+    "loc": "97:4-97:5"
   },
   {
     "token": "RBRACE",
-    "loc": "96:1-96:2"
+    "loc": "98:1-98:2"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "96:2-96:2"
+    "loc": "98:2-98:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "96:2-96:3"
+    "loc": "98:2-98:3"
   },
   {
     "token": [
@@ -2990,96 +3015,30 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "97:1-97:5"
+    "loc": "99:1-99:5"
   },
   {
     "token": "NEWLINE",
-    "loc": "97:5-97:6"
+    "loc": "99:5-99:6"
   },
   {
     "token": "FN",
-    "loc": "98:1-98:3"
+    "loc": "100:1-100:3"
   },
   {
     "token": [
       "LIDENT",
       "main"
     ],
-    "loc": "98:4-98:8"
+    "loc": "100:4-100:8"
   },
   {
     "token": "LBRACE",
-    "loc": "98:9-98:10"
+    "loc": "100:9-100:10"
   },
   {
     "token": "NEWLINE",
-    "loc": "98:10-98:11"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "println"
-    ],
-    "loc": "99:3-99:10"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "99:10-99:11"
-  },
-  {
-    "token": [
-      "INTERP",
-      "\"test_firstmatch: \\{try? test_firstmatch()}\""
-    ],
-    "loc": "99:11-99:55"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "99:55-99:56"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "99:56-99:56"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "99:56-99:57"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "println"
-    ],
-    "loc": "100:3-100:10"
-  },
-  {
-    "token": "LPAREN",
     "loc": "100:10-100:11"
-  },
-  {
-    "token": [
-      "INTERP",
-      "\"test_search: \\{try? test_search()}\""
-    ],
-    "loc": "100:11-100:47"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "100:47-100:48"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "100:48-100:48"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "100:48-100:49"
   },
   {
     "token": [
@@ -3095,24 +3054,24 @@
   {
     "token": [
       "INTERP",
-      "\"test_multicases_firstmatch: \\{try? test_multicases_firstmatch()}\""
+      "\"test_firstmatch: \\{try? test_firstmatch()}\""
     ],
-    "loc": "101:11-101:77"
+    "loc": "101:11-101:55"
   },
   {
     "token": "RPAREN",
-    "loc": "101:77-101:78"
+    "loc": "101:55-101:56"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "101:78-101:78"
+    "loc": "101:56-101:56"
   },
   {
     "token": "NEWLINE",
-    "loc": "101:78-101:79"
+    "loc": "101:56-101:57"
   },
   {
     "token": [
@@ -3128,24 +3087,24 @@
   {
     "token": [
       "INTERP",
-      "\"test_nested_captures: \\{try? test_nested_captures()}\""
+      "\"test_search: \\{try? test_search()}\""
     ],
-    "loc": "102:11-102:65"
+    "loc": "102:11-102:47"
   },
   {
     "token": "RPAREN",
-    "loc": "102:65-102:66"
+    "loc": "102:47-102:48"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "102:66-102:66"
+    "loc": "102:48-102:48"
   },
   {
     "token": "NEWLINE",
-    "loc": "102:66-102:67"
+    "loc": "102:48-102:49"
   },
   {
     "token": [
@@ -3161,24 +3120,24 @@
   {
     "token": [
       "INTERP",
-      "\"test_quantifier: \\{try? test_quantifier()}\""
+      "\"test_multicases_firstmatch: \\{try? test_multicases_firstmatch()}\""
     ],
-    "loc": "103:11-103:55"
+    "loc": "103:11-103:77"
   },
   {
     "token": "RPAREN",
-    "loc": "103:55-103:56"
+    "loc": "103:77-103:78"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "103:56-103:56"
+    "loc": "103:78-103:78"
   },
   {
     "token": "NEWLINE",
-    "loc": "103:56-103:57"
+    "loc": "103:78-103:79"
   },
   {
     "token": [
@@ -3194,24 +3153,24 @@
   {
     "token": [
       "INTERP",
-      "\"test_non_greedy_quantifier: \\{try? test_non_greedy_quantifier()}\""
+      "\"test_nested_captures: \\{try? test_nested_captures()}\""
     ],
-    "loc": "104:11-104:77"
+    "loc": "104:11-104:65"
   },
   {
     "token": "RPAREN",
-    "loc": "104:77-104:78"
+    "loc": "104:65-104:66"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "104:78-104:78"
+    "loc": "104:66-104:66"
   },
   {
     "token": "NEWLINE",
-    "loc": "104:78-104:79"
+    "loc": "104:66-104:67"
   },
   {
     "token": [
@@ -3227,24 +3186,90 @@
   {
     "token": [
       "INTERP",
-      "\"test_simple_assertions: \\{try? test_simple_assertions()}\""
+      "\"test_quantifier: \\{try? test_quantifier()}\""
     ],
-    "loc": "105:11-105:69"
+    "loc": "105:11-105:55"
   },
   {
     "token": "RPAREN",
-    "loc": "105:69-105:70"
+    "loc": "105:55-105:56"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "105:70-105:70"
+    "loc": "105:56-105:56"
   },
   {
     "token": "NEWLINE",
-    "loc": "105:70-105:71"
+    "loc": "105:56-105:57"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "106:3-106:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "106:10-106:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"test_non_greedy_quantifier: \\{try? test_non_greedy_quantifier()}\""
+    ],
+    "loc": "106:11-106:77"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "106:77-106:78"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "106:78-106:78"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "106:78-106:79"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "107:3-107:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "107:10-107:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"test_simple_assertions: \\{try? test_simple_assertions()}\""
+    ],
+    "loc": "107:11-107:69"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "107:69-107:70"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "107:70-107:70"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "107:70-107:71"
   },
   {
     "token": [
@@ -3261,55 +3286,55 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "106:3-106:22"
+    "loc": "108:3-108:22"
   },
   {
     "token": "NEWLINE",
-    "loc": "106:22-106:23"
+    "loc": "108:22-108:23"
   },
   {
     "token": [
       "LIDENT",
       "println"
     ],
-    "loc": "107:3-107:10"
+    "loc": "109:3-109:10"
   },
   {
     "token": "LPAREN",
-    "loc": "107:10-107:11"
+    "loc": "109:10-109:11"
   },
   {
     "token": [
       "INTERP",
       "\"testemoji:\\{try? test_emoji()}\""
     ],
-    "loc": "107:11-107:43"
+    "loc": "109:11-109:43"
   },
   {
     "token": "RPAREN",
-    "loc": "107:43-107:44"
+    "loc": "109:43-109:44"
   },
   {
     "token": "NEWLINE",
-    "loc": "107:46-107:47"
+    "loc": "109:46-109:47"
   },
   {
     "token": "RBRACE",
-    "loc": "108:1-108:2"
+    "loc": "110:1-110:2"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "108:2-108:2"
+    "loc": "110:2-110:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "108:2-108:3"
+    "loc": "110:2-110:3"
   },
   {
     "token": "EOF",
-    "loc": "109:1-109:1"
+    "loc": "111:1-111:1"
   }
 ]

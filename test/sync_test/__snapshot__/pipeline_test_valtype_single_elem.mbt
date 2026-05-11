@@ -2,7 +2,7 @@
 #valtype
 struct R {
   p : Int
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn m(r : R) -> Int {
@@ -17,7 +17,7 @@ fn n(r : R) -> R {
 ///|
 suberror E {
   E(R)
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn o(i : Int) -> R raise E {
@@ -32,7 +32,7 @@ fn o(i : Int) -> R raise E {
 fn main {
   let r = R::{ p: 1 }
   println(r |> m)
-  println(n(r))
-  println(try? o(42))
-  println(try? o(-1))
+  debug(n(r))
+  debug(try? o(42))
+  debug(try? o(-1))
 }

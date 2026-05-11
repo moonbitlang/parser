@@ -128,6 +128,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -307,6 +308,67 @@
     }
   },
   {
+    "kind": "Impl::TopImplRelation",
+    "loc": null,
+    "children": {
+      "self_ty": {
+        "kind": "Type::Name",
+        "loc": null,
+        "children": {
+          "constr_id": {
+            "kind": "ConstrId",
+            "loc": null,
+            "children": {
+              "id": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": {
+                  "value": "T"
+                }
+              }
+            }
+          },
+          "tys": {
+            "kind": "Type::Name::TypeList",
+            "loc": null,
+            "children": []
+          }
+        }
+      },
+      "trait": {
+        "kind": "TypeName",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "LongIdent::Ident",
+            "loc": null,
+            "children": {
+              "value": "Any"
+            }
+          },
+          "is_object": false
+        }
+      },
+      "quantifiers": {
+        "kind": "Impl::TopImplRelation::QuantifierList",
+        "loc": null,
+        "children": []
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "is_declare": false,
+      "attrs": {
+        "kind": "Impl::TopImplRelation::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
     "kind": "Impl::TopTypeDef",
     "loc": null,
     "children": {
@@ -457,6 +519,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

@@ -4,15 +4,15 @@ enum E {
   A
   B(Int)
   C(Double, Double)
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn g(xs : FixedArray[E]) -> Unit {
-  println(xs)
+  debug(xs)
   match xs {
     [A, .., b] => { // unsafe_get and unsafe_get_rev
       println("case a")
-      println(b)
+      debug(b)
     }
     [B(x), .., B(y)] => {
       println("case b")
@@ -49,10 +49,10 @@ fn main {
       arr2.push(E::C(i.to_double(), i.to_double()))
     }
   }
-  println(arr2)
+  debug(arr2)
   for i in 0..<5 {
     let _ = arr2.pop()
 
   }
-  println(arr2)
+  debug(arr2)
 }

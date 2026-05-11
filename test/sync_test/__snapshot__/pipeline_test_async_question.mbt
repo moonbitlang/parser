@@ -4,7 +4,7 @@ async fn[T, E : Error] suspend(
 
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
 
-suberror Err derive(Show)
+suberror Err derive(Debug)
 
 async fn f(c : Bool) -> Int raise Err {
   suspend(fn (ok, err) {
@@ -13,6 +13,6 @@ async fn f(c : Bool) -> Int raise Err {
 }
 
 fn main {
-  run_async(() => println(try? f(true)))
-  run_async(() => println(try? f(false)))
+  run_async(() => debug(try? f(true)))
+  run_async(() => debug(try? f(false)))
 }

@@ -221,35 +221,35 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "4:40-4:47"
+    "loc": "4:40-4:45"
   },
   {
     "token": "LPAREN",
-    "loc": "4:47-4:48"
+    "loc": "4:45-4:46"
   },
   {
     "token": [
       "LIDENT",
       "v"
     ],
-    "loc": "4:48-4:49"
+    "loc": "4:46-4:47"
   },
   {
     "token": "RPAREN",
-    "loc": "4:49-4:50"
+    "loc": "4:47-4:48"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "4:50-4:50"
+    "loc": "4:48-4:48"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:50-4:51"
+    "loc": "4:48-4:49"
   },
   {
     "token": "UNDERSCORE",

@@ -41,13 +41,7 @@ test "impl variants to_json" {
     loc=dummy_loc,
   )
   json_inspect(
-    @syntax.TopExpr(
-      expr=unit_expr,
-      is_main=true,
-      local_types=@list.from_array([]),
-      is_async=None,
-      loc=dummy_loc,
-    ).json_repr(),
+    @syntax.TopExpr(expr=unit_expr, is_main=true, is_async=None, loc=dummy_loc).json_repr(),
     content={
       "kind": "Impl::TopExpr",
       "loc": null,
@@ -72,7 +66,6 @@ test "impl variants to_json" {
       expr=unit_expr,
       name=Some((dummy_string_literal, dummy_loc)),
       params=None,
-      local_types=@list.from_array([]),
       is_async=None,
       loc=dummy_loc,
       attrs=@list.from_array([]),
@@ -159,10 +152,7 @@ test "impl variants to_json" {
     doc: dummy_docstring,
     loc: dummy_loc,
   }
-  let decl_body = @syntax.DeclBody(
-    local_types=@list.from_array([]),
-    expr=unit_expr,
-  )
+  let decl_body = @syntax.DeclBody(expr=unit_expr)
   json_inspect(
     @syntax.TopFuncDef(fun_decl~, decl_body~, loc=dummy_loc).json_repr(),
     content={

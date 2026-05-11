@@ -1,11 +1,12 @@
-fn[T : Show] test_generic(x : T) -> Unit {
+//!build: -w -deprecated_syntax
+fn[T : Debug] test_generic(x : T) -> Unit {
   struct D {
     a : T
     b : Array[T]
     c : String
   }
   fn to_string(x : D) -> String {
-    x.a.to_string() + x.b.to_string() + x.c
+    Debug::to_repr(x.a).to_string() + Debug::to_repr(x.b).to_string() + x.c
   }
 
   let d1 = D::{ a: x, b: [x, x], c: "1" }
@@ -14,7 +15,7 @@ fn[T : Show] test_generic(x : T) -> Unit {
   println(to_string(d2))
 }
 
-fn[T : Show] test_generic2(x : T) -> Unit {
+fn[T : Debug] test_generic2(x : T) -> Unit {
   enum E {
     A(T)
     B(Array[T])
@@ -22,8 +23,8 @@ fn[T : Show] test_generic2(x : T) -> Unit {
   }
   fn to_string(x : E) -> String {
     match x {
-      A(a) => a.to_string()
-      B(b) => b.to_string()
+      A(a) => Debug::to_repr(a).to_string()
+      B(b) => Debug::to_repr(b).to_string()
       C(c) => c
     }
   }

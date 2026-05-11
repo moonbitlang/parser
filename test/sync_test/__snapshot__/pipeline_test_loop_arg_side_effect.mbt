@@ -1,3 +1,5 @@
+//!build: -w -27
+
 fn f(x: Int) -> Unit {
   loop ({println(1); x}, {println(2); x}) {
     (a, b) if a != b => continue (a + 1, b)

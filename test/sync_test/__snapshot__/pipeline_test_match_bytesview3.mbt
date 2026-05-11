@@ -24,10 +24,10 @@ fn g(x : StringView) -> Unit {
 
 ///|
 fn main {
-  f(b"abcxyz"[:])
+  f(b"abcxyz")
   f(b"abcxyz"[3:])
   f(b"abcxyz"[6:])
-  g("abcxyz"[:])
+  g("abcxyz")
   try! g("abcxyz"[3:])
   try! g("abcxyz"[6:])
 }

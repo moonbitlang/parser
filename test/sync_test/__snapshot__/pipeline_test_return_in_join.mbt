@@ -14,5 +14,5 @@ fn g(x : Int) -> String raise Error {
 }
 
 fn init {
-  println(try? g(42))
+  debug(try? g(42))
 }

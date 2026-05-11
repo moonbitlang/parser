@@ -1,3 +1,3 @@
 fn init {
-  println(Some(1U))
+  debug(Some(1U))
 }

@@ -52,7 +52,7 @@ trait Trait {
   h(Self, label12~ : Int, label13~ : Int) -> Unit
 }
 
-type MyType Int
+struct MyType(Int)
 
 impl Trait for MyType with h(self, label12~, label13~) {}
 

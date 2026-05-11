@@ -1,3 +1,5 @@
+//!build: -w -27
+
 ///|
 #locals(h)
 pub fn f(h : (Int) -> Unit) -> Unit {

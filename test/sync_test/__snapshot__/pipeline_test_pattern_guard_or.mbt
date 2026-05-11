@@ -3,7 +3,7 @@ enum E {
   A(Int)
   B(Int)
   C
-} derive(Show)
+}
 
 ///|
 fn f1(x : E, y : E) -> Unit {
@@ -44,4 +44,20 @@ fn main {
   f2(B(1), A(2))
   f2(A(1), A(2))
   f2(A(2), A(1))
+}
+
+impl Show for E with output(self, logger) {
+  match self {
+    A(v0) => {
+      logger.write_string("A(")
+      Show::output(v0, logger)
+      logger.write_string(")")
+    }
+    B(v0) => {
+      logger.write_string("B(")
+      Show::output(v0, logger)
+      logger.write_string(")")
+    }
+    C => logger.write_string("C")
+  }
 }

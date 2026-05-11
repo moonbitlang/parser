@@ -76,3 +76,22 @@ fn relaxed_for_with_else_part() {
     ignore(i)
   }
 }
+
+fn relaxed_for_with_condition() {
+  for i = 0 {}
+  for i = 0;; {}
+  for i = 0; i < 10 {}
+  for i = 0; i < 10; {}
+  for ; i < 10 {}
+  for ; i < 10; {}
+}
+
+///|
+fn relaxed_for_disallowed_1() {
+  for i = 0; {}
+}
+
+///|
+fn relaxed_for_disallowed_2() {
+  for ; {}
+}

@@ -1,7 +1,9 @@
+//!build: -w -27
+
 enum MList[T] {
   MNil
   MCons(T, MList[T])
-} derive(Show)
+}
 
 
 fn sieve_of_eratosthenes(limit: Int) -> MList[Int] {
@@ -34,4 +36,17 @@ fn sieve_of_eratosthenes(limit: Int) -> MList[Int] {
 
 fn init {
   println(sieve_of_eratosthenes(50))
+}
+
+impl[T : Show] Show for MList[T] with output(self, logger) {
+  match self {
+    MNil => logger.write_string("MNil")
+    MCons(v0, v1) => {
+      logger.write_string("MCons(")
+      Show::output(v0, logger)
+      logger.write_string(", ")
+      Show::output(v1, logger)
+      logger.write_string(")")
+    }
+  }
 }

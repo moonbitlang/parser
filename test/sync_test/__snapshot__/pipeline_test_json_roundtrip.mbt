@@ -9,7 +9,7 @@ struct BasicStruct {
   string_field : String
   bool_field : Bool
   double_field : Double
-} derive(ToJson, FromJson, Eq, Show)
+} derive(ToJson, FromJson, Eq, Debug)
 
 ///|
 // Option types at various nesting levels
@@ -19,7 +19,7 @@ struct OptionStruct {
   triple_option : Int???
   string_option : String?
   nested_string_option : String??
-} derive(ToJson, FromJson, Eq, Show)
+} derive(ToJson, FromJson, Eq, Debug)
 
 ///|
 // Enums with option payloads
@@ -29,23 +29,23 @@ enum OptionEnum {
   OptionPayload(Int?)
   NestedOptionPayload(String??)
   MixedPayload(Int, String?, Bool)
-} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Show)
+} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Debug)
 
 ///|
 // Tuple structs for edge case testing
-struct TupleStruct (Int, String, Bool) derive(ToJson, FromJson, Eq, Show)
+struct TupleStruct (Int, String, Bool) derive(ToJson, FromJson, Eq, Debug)
 
 ///|
-struct NestedTupleStruct (Int, TupleStruct, String?) derive(ToJson, FromJson, Eq, Show)
+struct NestedTupleStruct (Int, TupleStruct, String?) derive(ToJson, FromJson, Eq, Debug)
 
 ///|
-struct EmptyStruct {} derive(ToJson, FromJson, Eq, Show)
+struct EmptyStruct {} derive(ToJson, FromJson, Eq, Debug)
 
 ///|
 // Single variant enum - edge case
 enum SingleVariantEnum {
   OnlyVariant(Int, String)
-} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Show)
+} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Debug)
 
 ///|
 // Enums with named fields
@@ -54,52 +54,52 @@ enum NamedFieldEnum {
   NamedArgs(x~ : Int, y~ : String, z~ : Bool?)
   MixedArgs(Int, named~ : String?, Bool)
   OnlyNamed(a~ : Double, b~ : String, c~ : Int?)
-} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Show)
+} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Debug)
 
 ///|
 // Enum with different tagging styles
 enum InternallyTaggedEnum {
   Variant1(Int)
   Variant2(String, Bool?)
-} derive(ToJson(repr(tag="type")), FromJson(repr(tag="type")), Eq, Show)
+} derive(ToJson(repr(tag="type")), FromJson(repr(tag="type")), Eq, Debug)
 
 ///|
 enum ExternallyTaggedEnum {
   ExtVariant1(Int)
   ExtVariant2(String, Bool)
-} derive(ToJson(repr(ext_tagged)), FromJson(repr(ext_tagged)), Eq, Show)
+} derive(ToJson(repr(ext_tagged)), FromJson(repr(ext_tagged)), Eq, Debug)
 
 ///|
 enum AdjacentlyTaggedEnum {
   AdjVariant1(Int)
   AdjVariant2(String, Bool)
-} derive(ToJson(repr(tag="tag", contents="content")), FromJson(repr(tag="tag", contents="content")), Eq, Show)
+} derive(ToJson(repr(tag="tag", contents="content")), FromJson(repr(tag="tag", contents="content")), Eq, Debug)
 
 ///|
 // Deeply nested structures
 struct Level1 {
   value : Int
   level2 : Level2?
-} derive(ToJson, FromJson, Eq, Show)
+} derive(ToJson, FromJson, Eq, Debug)
 
 ///|
 struct Level2 {
   name : String
   level3 : Level3?
-} derive(ToJson, FromJson, Eq, Show)
+} derive(ToJson, FromJson, Eq, Debug)
 
 ///|
 struct Level3 {
   nested_enum : DeepEnum
   options : Array[Int?]
-} derive(ToJson, FromJson, Eq, Show)
+} derive(ToJson, FromJson, Eq, Debug)
 
 ///|
 enum DeepEnum {
   DeepVariant1
   DeepVariant2(Level1)
   DeepVariant3(x~ : Int, nested~ : Level2?)
-} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Show)
+} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Debug)
 
 ///|
 // Generic types for complex testing
@@ -108,7 +108,7 @@ struct GenericStruct[T, U] {
   second : U
   optional_first : T?
   optional_second : U?
-} derive(ToJson, FromJson, Eq, Show)
+} derive(ToJson, FromJson, Eq, Debug)
 
 ///|
 enum GenericEnum[T] {
@@ -116,7 +116,7 @@ enum GenericEnum[T] {
   Pair(T, T)
   OptionalPair(T?, T?)
   Named(value~ : T, backup~ : T?)
-} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Show)
+} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Debug)
 
 ///|
 // Nested generic structures
@@ -124,7 +124,7 @@ struct NestedGeneric[T] {
   container : GenericStruct[T, String]
   enum_value : GenericEnum[T]
   nested_array : Array[GenericEnum[T?]]
-} derive(ToJson, FromJson, Eq, Show)
+} derive(ToJson, FromJson, Eq, Debug)
 
 ///|
 // Collections with complex types
@@ -133,7 +133,7 @@ struct ComplexCollections {
   nested_options : Array[Array[Int?]?]
   enum_map : Array[(String, OptionEnum)]
   mixed_tuple : (OptionEnum, TupleStruct?, Int)
-} derive(ToJson, FromJson, Eq, Show)
+} derive(ToJson, FromJson, Eq, Debug)
 
 ///|
 // Edge case enums
@@ -144,11 +144,11 @@ enum EdgeCaseEnum {
   DoubleNested(Int??)
   TripleNested(String???)
   ComplexNested(x~ : Int?, y~ : String??, z~ : Bool)
-} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Show)
+} derive(ToJson(style="flat"), FromJson(style="flat"), Eq, Debug)
 
 ///|
 // Helper function to test roundtrip with detailed output
-fn[T : ToJson + FromJson + Eq + Show] test_roundtrip(value : T, test_name : String) -> Unit {
+fn[T : ToJson + FromJson + Eq + Debug] test_roundtrip(value : T, test_name : String) -> Unit {
   let json = value.to_json()
   let result : Result[T, @json.JsonDecodeError] = try? @json.from_json(json)
   match result {
@@ -158,19 +158,19 @@ fn[T : ToJson + FromJson + Eq + Show] test_roundtrip(value : T, test_name : Stri
       } else {
         println("FAILED: " + test_name)
         println("MISMATCH in " + test_name + ":")
-        println("  Original value: " + value.to_string())
-        println("  Serialized JSON: " + json.to_string())
+        println("  Original value: " + to_repr(value).to_string())
+        println("  Serialized JSON: " + to_repr(json).to_string())
         let decoded_json = decoded.to_json()
-        println("  Deserialized value: " + decoded.to_string())
-        println("  Re-serialized JSON: " + decoded_json.to_string())
+        println("  Deserialized value: " + to_repr(decoded).to_string())
+        println("  Re-serialized JSON: " + to_repr(decoded_json).to_string())
         println("")
       }
     }
     Err(error) => {
       println("FAILED: " + test_name)
       println("ERROR in " + test_name + ":")
-      println("  Original value: " + value.to_string())
-      println("  Serialized JSON: " + json.to_string())
+      println("  Original value: " + to_repr(value).to_string())
+      println("  Serialized JSON: " + to_repr(json).to_string())
       println("  Decode error: " + error.to_string())
       println("")
     }

@@ -213,17 +213,17 @@
   {
     "token": [
       "INTERP",
-      "\"x:\\{x}, y:\\{y}, z:\\{z}\""
+      "\"x:\\{x}, y:\\{y}, z:\\{Debug::to_repr(z)}\""
     ],
-    "loc": "7:11-7:35"
+    "loc": "7:11-7:51"
   },
   {
     "token": "RPAREN",
-    "loc": "7:35-7:36"
+    "loc": "7:51-7:52"
   },
   {
     "token": "NEWLINE",
-    "loc": "7:36-7:37"
+    "loc": "7:52-7:53"
   },
   {
     "token": "RBRACE",

@@ -2099,10 +2099,7 @@
     "loc": "73:9-73:10"
   },
   {
-    "token": [
-      "AUGMENTED_ASSIGNMENT",
-      "+"
-    ],
+    "token": "PLUS_EQUAL",
     "loc": "73:11-73:13"
   },
   {
@@ -2140,10 +2137,7 @@
     "loc": "75:9-75:10"
   },
   {
-    "token": [
-      "AUGMENTED_ASSIGNMENT",
-      "+"
-    ],
+    "token": "PLUS_EQUAL",
     "loc": "75:11-75:13"
   },
   {

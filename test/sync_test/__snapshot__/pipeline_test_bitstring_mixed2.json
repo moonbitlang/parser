@@ -107,6 +107,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -599,7 +600,7 @@
         "loc": null,
         "children": {
           "constant": {
-            "kind": "Constant::String",
+            "kind": "Constant::Bytes",
             "loc": null,
             "children": {
               "value": "\\x10\\x10\\x10\\x10"
@@ -730,6 +731,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1613,6 +1615,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1666,10 +1669,10 @@
                                 "loc": null,
                                 "children": [
                                   {
-                                    "kind": "ArrayPattern::StringSpread",
+                                    "kind": "ArrayPattern::BytesSpread",
                                     "loc": null,
                                     "children": {
-                                      "str": "hello"
+                                      "bytes": "hello"
                                     }
                                   },
                                   {
@@ -2168,6 +2171,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

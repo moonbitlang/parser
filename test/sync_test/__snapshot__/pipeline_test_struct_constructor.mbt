@@ -2,14 +2,11 @@
 struct S {
   x : Int
   y : Int
-
-  #callsite(autofill(loc))
-  fn new(x~ : Int, y? : Int, loc~ : SourceLoc) -> S raise
-} derive(Show)
+} derive(Debug)
 
 ///|
 #callsite(autofill(loc))
-fn S::new(x~ : Int, y? : Int = x, loc~ : SourceLoc) -> S raise {
+fn S::S(x~ : Int, y? : Int = x, loc~ : SourceLoc) -> S raise {
   if y == 42 {
     raise Failure::Failure("fourty-two")
   }
@@ -19,7 +16,7 @@ fn S::new(x~ : Int, y? : Int = x, loc~ : SourceLoc) -> S raise {
 
 ///|
 fn init {
-  println(try? S(x=1))
-  println(try? S::S(x=2, y=3))
-  println(try? (S(x=4, y=42) : S))
+  debug(try? S(x=1))
+  debug(try? S::S(x=2, y=3))
+  debug(try? (S(x=4, y=42) : S))
 }

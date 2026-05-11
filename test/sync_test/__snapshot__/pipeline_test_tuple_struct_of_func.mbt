@@ -14,7 +14,7 @@ fn main {
   let f0 : F0 = fn () { println("F0") }
   f0()
   f0.apply()
-  let f2 : F2[_] = fn (x, y) { println((x, y)) }
+  let f2 : F2[_] = fn (x, y) { debug((x, y)) }
   f2(4, "2")
   f2.apply(4, "2")
 }

@@ -509,21 +509,21 @@
   },
   {
     "token": [
-      "STRING",
+      "BYTES",
       "\\x10\\x10\\x10\\x10"
     ],
-    "loc": "20:20-20:38"
+    "loc": "20:20-20:39"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "20:38-20:38"
+    "loc": "20:39-20:39"
   },
   {
     "token": "NEWLINE",
-    "loc": "20:38-20:39"
+    "loc": "20:39-20:40"
   },
   {
     "token": "NEWLINE",
@@ -1130,101 +1130,101 @@
   },
   {
     "token": [
-      "STRING",
+      "BYTES",
       "hello"
     ],
-    "loc": "38:9-38:16"
+    "loc": "38:9-38:17"
   },
   {
     "token": "COMMA",
-    "loc": "38:16-38:17"
+    "loc": "38:17-38:18"
   },
   {
     "token": "DOTDOT",
-    "loc": "38:18-38:20"
+    "loc": "38:19-38:21"
   },
   {
     "token": [
       "BYTES",
       "world"
     ],
-    "loc": "38:21-38:29"
+    "loc": "38:22-38:30"
   },
   {
     "token": "COMMA",
-    "loc": "38:29-38:30"
+    "loc": "38:30-38:31"
   },
   {
     "token": [
       "LIDENT",
       "u16"
     ],
-    "loc": "38:31-38:34"
+    "loc": "38:32-38:35"
   },
   {
     "token": "LPAREN",
-    "loc": "38:34-38:35"
+    "loc": "38:35-38:36"
   },
   {
     "token": [
       "LIDENT",
       "c"
     ],
-    "loc": "38:35-38:36"
-  },
-  {
-    "token": "RPAREN",
     "loc": "38:36-38:37"
   },
   {
-    "token": "COMMA",
+    "token": "RPAREN",
     "loc": "38:37-38:38"
+  },
+  {
+    "token": "COMMA",
+    "loc": "38:38-38:39"
   },
   {
     "token": [
       "LIDENT",
       "u32"
     ],
-    "loc": "38:39-38:42"
+    "loc": "38:40-38:43"
   },
   {
     "token": "LPAREN",
-    "loc": "38:42-38:43"
+    "loc": "38:43-38:44"
   },
   {
     "token": [
       "LIDENT",
       "d"
     ],
-    "loc": "38:43-38:44"
-  },
-  {
-    "token": "RPAREN",
     "loc": "38:44-38:45"
   },
   {
-    "token": "COMMA",
+    "token": "RPAREN",
     "loc": "38:45-38:46"
   },
   {
+    "token": "COMMA",
+    "loc": "38:46-38:47"
+  },
+  {
     "token": "DOTDOT",
-    "loc": "38:47-38:49"
+    "loc": "38:48-38:50"
   },
   {
     "token": "RBRACKET",
-    "loc": "38:49-38:50"
+    "loc": "38:50-38:51"
   },
   {
     "token": "FAT_ARROW",
-    "loc": "38:51-38:53"
+    "loc": "38:52-38:54"
   },
   {
     "token": "LBRACE",
-    "loc": "38:54-38:55"
+    "loc": "38:55-38:56"
   },
   {
     "token": "NEWLINE",
-    "loc": "38:55-38:56"
+    "loc": "38:56-38:57"
   },
   {
     "token": [

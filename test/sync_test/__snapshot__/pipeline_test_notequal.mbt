@@ -4,7 +4,7 @@ struct T {
 }
 
 impl Eq for T with equal(self: T, other: T) -> Bool {
-  not(self.x != other.x)
+  !(self.x != other.x)
 }
 
 fn init {

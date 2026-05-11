@@ -135,35 +135,35 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Eq"
     ],
-    "loc": "6:29-6:33"
+    "loc": "6:29-6:31"
   },
   {
     "token": "COMMA",
-    "loc": "6:33-6:34"
+    "loc": "6:31-6:32"
   },
   {
     "token": [
       "UIDENT",
-      "Eq"
+      "Debug"
     ],
-    "loc": "6:35-6:37"
+    "loc": "6:33-6:38"
   },
   {
     "token": "RPAREN",
-    "loc": "6:37-6:38"
+    "loc": "6:38-6:39"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "6:38-6:38"
+    "loc": "6:39-6:39"
   },
   {
     "token": "NEWLINE",
-    "loc": "6:38-6:39"
+    "loc": "6:39-6:40"
   },
   {
     "token": "NEWLINE",
@@ -310,35 +310,35 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Eq"
     ],
-    "loc": "11:40-11:44"
+    "loc": "11:40-11:42"
   },
   {
     "token": "COMMA",
-    "loc": "11:44-11:45"
+    "loc": "11:42-11:43"
   },
   {
     "token": [
       "UIDENT",
-      "Eq"
+      "Debug"
     ],
-    "loc": "11:46-11:48"
+    "loc": "11:44-11:49"
   },
   {
     "token": "RPAREN",
-    "loc": "11:48-11:49"
+    "loc": "11:49-11:50"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "11:49-11:49"
+    "loc": "11:50-11:50"
   },
   {
     "token": "NEWLINE",
-    "loc": "11:49-11:50"
+    "loc": "11:50-11:51"
   },
   {
     "token": "NEWLINE",
@@ -496,35 +496,35 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Eq"
     ],
-    "loc": "16:46-16:50"
+    "loc": "16:46-16:48"
   },
   {
     "token": "COMMA",
-    "loc": "16:50-16:51"
+    "loc": "16:48-16:49"
   },
   {
     "token": [
       "UIDENT",
-      "Eq"
+      "Debug"
     ],
-    "loc": "16:52-16:54"
+    "loc": "16:50-16:55"
   },
   {
     "token": "RPAREN",
-    "loc": "16:54-16:55"
+    "loc": "16:55-16:56"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "16:55-16:55"
+    "loc": "16:56-16:56"
   },
   {
     "token": "NEWLINE",
-    "loc": "16:55-16:56"
+    "loc": "16:56-16:57"
   },
   {
     "token": "NEWLINE",
@@ -690,35 +690,35 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Eq"
     ],
-    "loc": "21:61-21:65"
+    "loc": "21:61-21:63"
   },
   {
     "token": "COMMA",
-    "loc": "21:65-21:66"
+    "loc": "21:63-21:64"
   },
   {
     "token": [
       "UIDENT",
-      "Eq"
+      "Debug"
     ],
-    "loc": "21:67-21:69"
+    "loc": "21:65-21:70"
   },
   {
     "token": "RPAREN",
-    "loc": "21:69-21:70"
+    "loc": "21:70-21:71"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "21:70-21:70"
+    "loc": "21:71-21:71"
   },
   {
     "token": "NEWLINE",
-    "loc": "21:70-21:71"
+    "loc": "21:71-21:72"
   },
   {
     "token": "NEWLINE",
@@ -773,41 +773,30 @@
     "loc": "23:33-23:36"
   },
   {
-    "token": "COLONCOLON",
-    "loc": "23:36-23:38"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "new"
-    ],
-    "loc": "23:38-23:41"
-  },
-  {
     "token": "LPAREN",
-    "loc": "23:41-23:42"
+    "loc": "23:36-23:37"
   },
   {
     "token": [
       "INT",
       "0"
     ],
-    "loc": "23:42-23:43"
+    "loc": "23:37-23:38"
   },
   {
     "token": "RPAREN",
-    "loc": "23:43-23:44"
+    "loc": "23:38-23:39"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "23:44-23:44"
+    "loc": "23:39-23:39"
   },
   {
     "token": "NEWLINE",
-    "loc": "23:44-23:45"
+    "loc": "23:39-23:40"
   },
   {
     "token": "NEWLINE",
@@ -1326,24 +1315,24 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "35:11-35:58"
+    "loc": "35:11-35:90"
   },
   {
     "token": "RPAREN",
-    "loc": "35:58-35:59"
+    "loc": "35:90-35:91"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "35:59-35:59"
+    "loc": "35:91-35:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "35:59-35:60"
+    "loc": "35:91-35:92"
   },
   {
     "token": [
@@ -1692,24 +1681,24 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "41:11-41:58"
+    "loc": "41:11-41:90"
   },
   {
     "token": "RPAREN",
-    "loc": "41:58-41:59"
+    "loc": "41:90-41:91"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "41:59-41:59"
+    "loc": "41:91-41:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "41:59-41:60"
+    "loc": "41:91-41:92"
   },
   {
     "token": [
@@ -2058,24 +2047,24 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "47:11-47:58"
+    "loc": "47:11-47:90"
   },
   {
     "token": "RPAREN",
-    "loc": "47:58-47:59"
+    "loc": "47:90-47:91"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "47:59-47:59"
+    "loc": "47:91-47:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "47:59-47:60"
+    "loc": "47:91-47:92"
   },
   {
     "token": [
@@ -2406,24 +2395,24 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "53:11-53:58"
+    "loc": "53:11-53:90"
   },
   {
     "token": "RPAREN",
-    "loc": "53:58-53:59"
+    "loc": "53:90-53:91"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "53:59-53:59"
+    "loc": "53:91-53:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "53:59-53:60"
+    "loc": "53:91-53:92"
   },
   {
     "token": [
@@ -2794,24 +2783,24 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "59:11-59:58"
+    "loc": "59:11-59:90"
   },
   {
     "token": "RPAREN",
-    "loc": "59:58-59:59"
+    "loc": "59:90-59:91"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "59:59-59:59"
+    "loc": "59:91-59:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "59:59-59:60"
+    "loc": "59:91-59:92"
   },
   {
     "token": [
@@ -3160,24 +3149,24 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "65:11-65:58"
+    "loc": "65:11-65:90"
   },
   {
     "token": "RPAREN",
-    "loc": "65:58-65:59"
+    "loc": "65:90-65:91"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "65:59-65:59"
+    "loc": "65:91-65:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "65:59-65:60"
+    "loc": "65:91-65:92"
   },
   {
     "token": [
@@ -3392,35 +3381,35 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "70:3-70:10"
+    "loc": "70:3-70:8"
   },
   {
     "token": "LPAREN",
-    "loc": "70:10-70:11"
+    "loc": "70:8-70:9"
   },
   {
     "token": [
-      "INTERP",
-      "\"\\{actual}\""
+      "LIDENT",
+      "actual"
     ],
-    "loc": "70:11-70:22"
+    "loc": "70:9-70:15"
   },
   {
     "token": "RPAREN",
-    "loc": "70:22-70:23"
+    "loc": "70:15-70:16"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "70:23-70:23"
+    "loc": "70:16-70:16"
   },
   {
     "token": "NEWLINE",
-    "loc": "70:23-70:24"
+    "loc": "70:16-70:17"
   },
   {
     "token": [
@@ -3791,24 +3780,24 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "76:11-76:58"
+    "loc": "76:11-76:90"
   },
   {
     "token": "RPAREN",
-    "loc": "76:58-76:59"
+    "loc": "76:90-76:91"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "76:59-76:59"
+    "loc": "76:91-76:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "76:59-76:60"
+    "loc": "76:91-76:92"
   },
   {
     "token": [
@@ -4157,24 +4146,24 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "82:11-82:58"
+    "loc": "82:11-82:90"
   },
   {
     "token": "RPAREN",
-    "loc": "82:58-82:59"
+    "loc": "82:90-82:91"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "82:59-82:59"
+    "loc": "82:91-82:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "82:59-82:60"
+    "loc": "82:91-82:92"
   },
   {
     "token": [
@@ -4585,24 +4574,24 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "89:11-89:58"
+    "loc": "89:11-89:90"
   },
   {
     "token": "RPAREN",
-    "loc": "89:58-89:59"
+    "loc": "89:90-89:91"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "89:59-89:59"
+    "loc": "89:91-89:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "89:59-89:60"
+    "loc": "89:91-89:92"
   },
   {
     "token": "LET",
@@ -5076,24 +5065,24 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "100:11-100:58"
+    "loc": "100:11-100:90"
   },
   {
     "token": "RPAREN",
-    "loc": "100:58-100:59"
+    "loc": "100:90-100:91"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "100:59-100:59"
+    "loc": "100:91-100:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "100:59-100:60"
+    "loc": "100:91-100:92"
   },
   {
     "token": "LET",
@@ -5300,35 +5289,35 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Eq"
     ],
-    "loc": "109:45-109:49"
+    "loc": "109:45-109:47"
   },
   {
     "token": "COMMA",
-    "loc": "109:49-109:50"
+    "loc": "109:47-109:48"
   },
   {
     "token": [
       "UIDENT",
-      "Eq"
+      "Debug"
     ],
-    "loc": "109:51-109:53"
+    "loc": "109:49-109:54"
   },
   {
     "token": "RPAREN",
-    "loc": "109:53-109:54"
+    "loc": "109:54-109:55"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "109:54-109:54"
+    "loc": "109:55-109:55"
   },
   {
     "token": "NEWLINE",
-    "loc": "109:54-109:55"
+    "loc": "109:55-109:56"
   },
   {
     "token": "NEWLINE",
@@ -5837,24 +5826,24 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "124:11-124:58"
+    "loc": "124:11-124:90"
   },
   {
     "token": "RPAREN",
-    "loc": "124:58-124:59"
+    "loc": "124:90-124:91"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "124:59-124:59"
+    "loc": "124:91-124:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "124:59-124:60"
+    "loc": "124:91-124:92"
   },
   {
     "token": [
@@ -6188,17 +6177,17 @@
   {
     "token": [
       "INTERP",
-      "\"\\{actual == expected}, \\{actual}, \\{expected}\""
+      "\"\\{actual == expected}, \\{Debug::to_repr(actual)}, \\{Debug::to_repr(expected)}\""
     ],
-    "loc": "130:11-130:58"
+    "loc": "130:11-130:90"
   },
   {
     "token": "RPAREN",
-    "loc": "130:58-130:59"
+    "loc": "130:90-130:91"
   },
   {
     "token": "NEWLINE",
-    "loc": "130:59-130:60"
+    "loc": "130:91-130:92"
   },
   {
     "token": [

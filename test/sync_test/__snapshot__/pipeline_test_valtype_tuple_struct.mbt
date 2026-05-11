@@ -1,16 +1,16 @@
 ///|
 #valtype
-struct T(Int,Int) derive(Show)
+struct T(Int,Int) derive(Debug)
 
 ///|
 #valtype
-struct S(String,String) derive(Show)
+struct S(String,String) derive(Debug)
 
 ///|
 enum E {
   A(T)
   B(S)
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn main {
@@ -18,22 +18,22 @@ fn main {
   for i in 0..=10 {
     a.push(T(i, i + 1))
   }
-  println(a)
+  debug(a)
   for i in 0..=5 {
     let _ = a.unsafe_pop()
 
   }
-  println(a)
+  debug(a)
   let b = []
   for i in 0..=10 {
     b.push(S(i.to_string(), (i + 1).to_string()))
   }
-  println(b)
+  debug(b)
   for i in 0..=5 {
     let _ = b.unsafe_pop()
 
   }
-  println(b)
+  debug(b)
   let c = []
   for i in 0..=10 {
     if i % 2 == 0 {
@@ -42,5 +42,5 @@ fn main {
       c.push(B(S(i.to_string(), (i + 1).to_string())))
     }
   }
-  println(c)
+  debug(c)
 }

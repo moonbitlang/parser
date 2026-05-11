@@ -2,8 +2,8 @@
 fn f1(b : Bytes, i : Int) -> Unit {
   match (b, i) {
     ([b'h',  .. rest,  b'o'], 42) => println(rest)
-    ("world", 24) => println("world")
-    ("hello", 24) => println("hello")
+    (b"world", 24) => println("world")
+    (b"hello", 24) => println("hello")
     _ => println("other")
   }
 }

@@ -9,13 +9,13 @@ fn f1(x: T1) -> Unit {
 struct T2(Array[Int])
 
 fn f2(x: T2) -> Unit {
-  println(x.0)
+  debug(x.0)
 }
 
 struct T3[X](X?)
 
 fn f3(x: T3[String]) -> Unit {
-  println(x.0)
+  debug(x.0)
 }
 
 fn f4(x: String) -> T3[String] {
@@ -30,7 +30,7 @@ struct S {
   v: (Int, Int)
 }
 
-type T4[X] (Int, X)
+struct T4[X](Int, X)
 
 fn f6(x: T4[Int]) -> Unit {
   println(x.0)
@@ -47,17 +47,17 @@ fn init {
   f3(f4("hello"))
   f3(f5("hello"))
   let s = S :: { v: (40, 2) }
-  f6(s.v)
+  f6(T4(s.v.0, s.v.1))
 }
 
 enum E {
   NewE(Int)
-} derive(Show)
+} derive(Debug)
 
-struct NewE(E) derive(Show)
+struct NewE(E) derive(Debug)
 
 fn f7(x: NewE) -> Unit {
-  println(x)
+  debug(x)
 }
 
 fn init {
@@ -71,7 +71,7 @@ fn f8(x : T5) -> Unit {
 
 struct T6(S)
 fn f9(x : T6) -> Unit {
-  println(x.0.v)
+  debug(x.0.v)
 }
 
 fn init {

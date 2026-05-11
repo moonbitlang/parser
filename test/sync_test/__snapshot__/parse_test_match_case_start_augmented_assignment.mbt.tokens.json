@@ -45,10 +45,7 @@
     "loc": "3:5-3:6"
   },
   {
-    "token": [
-      "AUGMENTED_ASSIGNMENT",
-      "+"
-    ],
+    "token": "PLUS_EQUAL",
     "loc": "3:7-3:9"
   },
   {

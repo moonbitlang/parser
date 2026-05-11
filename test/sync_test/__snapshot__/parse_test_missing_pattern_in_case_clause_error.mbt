@@ -32,7 +32,7 @@ test "expecting pattern match case but encountered statement" {
   f() catch { match 1 { ... } }
   f() catch { loop 1 { ... } }
   f() catch { while true { ... } }
-  f() catch { for {...} }
+  f() catch { for ;; {...} }
   f() catch { try 1 catch { ... } }
   f() catch { try? f() }
   f() catch { try! f() }
@@ -57,7 +57,7 @@ test "expecting pattern match case but encountered statement" {
     }
   }
   f() catch {
-    label~: for {...}
+    label~: for ;; {...}
   }
   f() catch { mutable = 1 }
   f() catch { @pkg.binder = 1 }

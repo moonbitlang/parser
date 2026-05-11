@@ -3,9 +3,11 @@ enum T {
 }
 
 pub fn f1(x: T?) -> Int {
-  loop (x, 0) {
-    (Some(Next(t)), acc) => continue (t, acc + 1)
-    (None, acc) => acc
+  for curr = x, acc = 0 {
+    match (curr, acc) {
+      (Some(Next(t)), acc) => continue t, acc + 1
+      (None, acc) => break acc
+    }
   }
 }
 

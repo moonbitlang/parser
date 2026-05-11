@@ -162,24 +162,24 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Debug"
     ],
-    "loc": "6:10-6:14"
+    "loc": "6:10-6:15"
   },
   {
     "token": "RPAREN",
-    "loc": "6:14-6:15"
+    "loc": "6:15-6:16"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "6:15-6:15"
+    "loc": "6:16-6:16"
   },
   {
     "token": "NEWLINE",
-    "loc": "6:15-6:16"
+    "loc": "6:16-6:17"
   },
   {
     "token": "NEWLINE",
@@ -756,127 +756,127 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "22:3-22:10"
+    "loc": "22:3-22:8"
   },
   {
     "token": "LPAREN",
-    "loc": "22:10-22:11"
+    "loc": "22:8-22:9"
   },
   {
     "token": [
       "LIDENT",
       "t1"
     ],
-    "loc": "22:11-22:13"
+    "loc": "22:9-22:11"
   },
   {
     "token": "PIPE",
-    "loc": "22:14-22:16"
+    "loc": "22:12-22:14"
   },
   {
     "token": [
       "LIDENT",
       "q"
     ],
-    "loc": "22:17-22:18"
+    "loc": "22:15-22:16"
   },
   {
     "token": "RPAREN",
-    "loc": "22:18-22:19"
+    "loc": "22:16-22:17"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "22:19-22:19"
+    "loc": "22:17-22:17"
   },
   {
     "token": "NEWLINE",
-    "loc": "22:19-22:20"
+    "loc": "22:17-22:18"
   },
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "23:3-23:10"
+    "loc": "23:3-23:8"
   },
   {
     "token": "LPAREN",
-    "loc": "23:10-23:11"
+    "loc": "23:8-23:9"
   },
   {
     "token": [
       "LIDENT",
       "t2"
     ],
-    "loc": "23:11-23:13"
+    "loc": "23:9-23:11"
   },
   {
     "token": "PIPE",
-    "loc": "23:14-23:16"
+    "loc": "23:12-23:14"
   },
   {
     "token": [
       "LIDENT",
       "q"
     ],
-    "loc": "23:17-23:18"
+    "loc": "23:15-23:16"
   },
   {
     "token": "RPAREN",
-    "loc": "23:18-23:19"
+    "loc": "23:16-23:17"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "23:19-23:19"
+    "loc": "23:17-23:17"
   },
   {
     "token": "NEWLINE",
-    "loc": "23:19-23:20"
+    "loc": "23:17-23:18"
   },
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "24:3-24:10"
+    "loc": "24:3-24:8"
   },
   {
     "token": "LPAREN",
-    "loc": "24:10-24:11"
+    "loc": "24:8-24:9"
   },
   {
     "token": [
       "LIDENT",
       "t3"
     ],
-    "loc": "24:11-24:13"
+    "loc": "24:9-24:11"
   },
   {
     "token": "PIPE",
-    "loc": "24:14-24:16"
+    "loc": "24:12-24:14"
   },
   {
     "token": [
       "LIDENT",
       "q"
     ],
-    "loc": "24:17-24:18"
+    "loc": "24:15-24:16"
   },
   {
     "token": "RPAREN",
-    "loc": "24:18-24:19"
+    "loc": "24:16-24:17"
   },
   {
     "token": "NEWLINE",
-    "loc": "24:19-24:20"
+    "loc": "24:17-24:18"
   },
   {
     "token": "RBRACE",

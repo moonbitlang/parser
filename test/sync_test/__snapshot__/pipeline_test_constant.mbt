@@ -46,3 +46,11 @@ fn init {
   g("42")
   g("24")
 }
+
+const HELLO : String = "hello"
+const HELLO_WORLD : String = HELLO + ", world"
+
+fn init {
+  println(HELLO_WORLD)
+  println(HELLO is HELLO_WORLD)
+}

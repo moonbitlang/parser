@@ -1,10 +1,11 @@
+//!build: -w -deprecated_syntax
 ///|
-fn[T : Default + Show] f(_a : T) -> Unit {
-  struct U(T) derive(Default, Show)
+fn[T : Default + Debug] f(_a : T) -> Unit {
+  struct U(T) derive(Default, Debug)
   let u1 = U::default()
-  println(u1)
+  println(to_repr(u1))
   let u2 : U = Default::default()
-  println(u2)
+  println(to_repr(u2))
 }
 
 ///|

@@ -1,5 +1,5 @@
 //!build: -w -27
-struct T(Int) derive(Show)
+struct T(Int)
 
 let t : T = T(42)
 
@@ -58,4 +58,10 @@ fn spread(_ : Array[Int], args_loc~ : ArgsLoc = _) -> Unit {
 fn init {
   let arr1 = [ 1, 2, 3 ]
   spread([ 0, ..arr1, 4 ])
+}
+
+impl Show for T with output(self, logger) {
+  logger.write_string("T(")
+  Show::output(self.0, logger)
+  logger.write_string(")")
 }

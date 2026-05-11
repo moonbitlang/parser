@@ -181,6 +181,7 @@
           "doc": " @intrinsic %string.substring"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -318,7 +319,7 @@
                 "kind": "Label",
                 "loc": null,
                 "children": {
-                  "name": "to_string"
+                  "name": "to_owned"
                 }
               },
               "args": {
@@ -647,6 +648,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -829,6 +831,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

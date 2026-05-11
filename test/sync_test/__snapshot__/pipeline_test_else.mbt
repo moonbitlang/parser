@@ -40,9 +40,9 @@ fn init {
   for i = 0, j = 1; i < xs.length(); i = i + 1, j = j + i {
     xs[i] = (j, j.to_string())
   }
-  println(xs)
-  println(find_in_sorted(xs, -1))
-  println(find_in_sorted(xs, 5))
-  println(find_in_sorted(xs, 16))
-  println(find_in_sorted(xs, 44))
+  debug(xs)
+  debug(find_in_sorted(xs, -1))
+  debug(find_in_sorted(xs, 5))
+  debug(find_in_sorted(xs, 16))
+  debug(find_in_sorted(xs, 44))
 }

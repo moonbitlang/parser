@@ -1,10 +1,12 @@
 
 
 fn pop_count(c : UInt64) -> Int { 
-   loop (0, c) { 
-     (x, 0) => x 
-     (c, w) => continue (c + 1, w & (w - 1)) 
-   } 
+   for count = 0, word = c {
+     match (count, word) {
+       (count, 0) => break count
+       (count, word) => continue count + 1, word & (word - 1)
+     }
+   }
  } 
 
 

@@ -1,10 +1,10 @@
 enum E1 {
   A
-} derive(Show)
+}
 
 enum E2 {
   B
-} derive(Show)
+}
 
 fn f(b : Bool) -> &Show {
   if b {
@@ -44,4 +44,16 @@ fn f2(b : Bool) -> Error {
   // in core IR, due to the semantics of 
   // extensible_tag equivalence
   // see MR:6464
+}
+
+impl Show for E1 with output(self, logger) {
+  match self {
+    A => logger.write_string("A")
+  }
+}
+
+impl Show for E2 with output(self, logger) {
+  match self {
+    B => logger.write_string("B")
+  }
 }

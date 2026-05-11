@@ -1,3 +1,5 @@
+//!build: -w -27
+
 fn init {
   let callbacks = loop (10, @list.empty()) {
     (0, acc) => acc

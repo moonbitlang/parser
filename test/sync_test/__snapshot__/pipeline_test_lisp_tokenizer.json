@@ -211,7 +211,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Debug"
                         }
                       },
                       "is_object": false
@@ -358,11 +358,20 @@
           "attrs": {
             "kind": "FunDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#warnings(\"-71\")"
+                }
+              }
+            ]
           },
           "doc": "\n issues: when regex has a syntax error,\n there is no error recovery even format can not work"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -561,7 +570,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "\\(|左括号"
+                                                  "lit": "\\(|左括号",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -734,7 +744,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "\\)|右括号"
+                                                  "lit": "\\)|右括号",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -911,7 +922,8 @@
                                                     "kind": "LexPattern::Regex",
                                                     "loc": null,
                                                     "children": {
-                                                      "lit": "[0-9]+"
+                                                      "lit": "[0-9]+",
+                                                      "offset": 1
                                                     }
                                                   },
                                                   "binder": {
@@ -1058,7 +1070,7 @@
                                                                                         "kind": "LongIdent::Dot",
                                                                                         "loc": null,
                                                                                         "children": {
-                                                                                          "pkg": "strconv",
+                                                                                          "pkg": "string",
                                                                                           "id": "parse_int"
                                                                                         }
                                                                                       }
@@ -1207,7 +1219,8 @@
                                                     "kind": "LexPattern::Regex",
                                                     "loc": null,
                                                     "children": {
-                                                      "lit": "[a-zA-Z0-9_]+"
+                                                      "lit": "[a-zA-Z0-9_]+",
+                                                      "offset": 1
                                                     }
                                                   },
                                                   "binder": {
@@ -1365,7 +1378,7 @@
                                                                                 "kind": "Label",
                                                                                 "loc": null,
                                                                                 "children": {
-                                                                                  "name": "to_string"
+                                                                                  "name": "to_owned"
                                                                                 }
                                                                               },
                                                                               "args": {
@@ -1475,7 +1488,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[ \\t\\n\\r]+"
+                                                  "lit": "[ \\t\\n\\r]+",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -1546,7 +1560,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": ""
+                                                  "lit": "",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -1736,6 +1751,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1769,7 +1785,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "println"
+                                  "value": "debug"
                                 }
                               }
                             }
@@ -1889,7 +1905,7 @@
                             "kind": "LongIdent::Ident",
                             "loc": null,
                             "children": {
-                              "value": "println"
+                              "value": "debug"
                             }
                           }
                         }

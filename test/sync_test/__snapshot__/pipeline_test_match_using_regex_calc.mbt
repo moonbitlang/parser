@@ -1,10 +1,12 @@
 ///|
 fn parse_integer(input : BytesView) -> Int {
-  loop (0, input) {
-    (acc, []) => acc
-    (acc, ['0'..='9' as c, .. rest]) =>
-      continue (acc * 10 + (c.to_int() - '0'), rest)
-    (_, _) => panic()
+  for acc = 0, rest = input {
+    match (acc, rest) {
+      (acc, []) => break acc
+      (acc, [b'0'..=b'9' as c, .. rest]) =>
+        continue acc * 10 + (c.to_int() - b'0'.to_int()), rest
+      (_, _) => panic()
+    }
   }
 }
 
@@ -42,8 +44,8 @@ fn eval(input : BytesView) -> Int? {
 
 ///|
 fn main {
-  println(eval("42"))
-  println(eval("3 2 +"))
-  println(eval("3 2 + 5 -"))
-  println(eval("5 3 2 + -"))
+  debug(eval(b"42"))
+  debug(eval(b"3 2 +"))
+  debug(eval(b"3 2 + 5 -"))
+  debug(eval(b"5 3 2 + -"))
 }

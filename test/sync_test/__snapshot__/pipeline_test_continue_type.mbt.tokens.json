@@ -60,12 +60,26 @@
     "loc": "2:3-2:6"
   },
   {
-    "token": "LBRACE",
+    "token": [
+      "SEMI",
+      true
+    ],
     "loc": "2:7-2:8"
   },
   {
-    "token": "NEWLINE",
+    "token": [
+      "SEMI",
+      true
+    ],
     "loc": "2:8-2:9"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "2:10-2:11"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "2:11-2:12"
   },
   {
     "token": "IF",

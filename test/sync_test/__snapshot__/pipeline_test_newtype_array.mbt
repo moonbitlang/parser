@@ -6,7 +6,7 @@ fn init {
   a.0.iter().each(println)
   match a.0 {
     [ x ] => println(x)
-    [ .. arr ] => println(arr)
+    [ .. arr ] => debug(arr)
   }
 }
 
@@ -17,7 +17,7 @@ fn init {
   a.0.each(println)
   a.0.iter().each(println)
   match a.0 {
-    [ x, y, z ] => println([ x, y, z ])
+    [ x, y, z ] => debug([ x, y, z ])
     _ => ()
   }
 }

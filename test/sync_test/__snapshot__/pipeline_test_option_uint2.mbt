@@ -1,5 +1,5 @@
 fn f(x : Array[UInt?]) -> Unit {
-  println(x[0])
+  debug(x[0])
 }
 
 fn main {

@@ -1,3 +1,5 @@
+//!build: -w -27
+
 ///|
 fn loop1(x : Int) -> Unit {
   loop x {

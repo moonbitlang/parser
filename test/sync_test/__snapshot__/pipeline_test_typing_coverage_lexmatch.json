@@ -132,6 +132,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -195,7 +196,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "[a-z]+"
+                                      "lit": "[a-z]+",
+                                      "offset": 1
                                     }
                                   },
                                   "binder": {
@@ -356,7 +358,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "[0-9]+"
+                                      "lit": "[0-9]+",
+                                      "offset": 1
                                     }
                                   },
                                   "binder": {
@@ -513,7 +516,8 @@
                                 "kind": "LexPattern::Regex",
                                 "loc": null,
                                 "children": {
-                                  "lit": "[ \\t\\n]+"
+                                  "lit": "[ \\t\\n]+",
+                                  "offset": 1
                                 }
                               }
                             }
@@ -618,7 +622,8 @@
                                 "kind": "LexPattern::Regex",
                                 "loc": null,
                                 "children": {
-                                  "lit": ""
+                                  "lit": "",
+                                  "offset": 1
                                 }
                               }
                             }
@@ -719,6 +724,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

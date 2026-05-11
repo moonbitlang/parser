@@ -7,7 +7,7 @@ async fn tuple() -> (Int, String) noraise {
 }
 
 fn init {
-  run_async(() => println(tuple()))
+  run_async(() => debug(tuple()))
 }
 
 async fn switch_constant(x : Int) -> Unit noraise {

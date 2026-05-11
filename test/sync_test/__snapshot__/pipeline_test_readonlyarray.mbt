@@ -1,7 +1,7 @@
 
 ///|
 fn f(xs : ArrayView[Int]) -> Unit {
-  println(xs[1:])
+  debug(xs[1:])
 }
 
 ///|

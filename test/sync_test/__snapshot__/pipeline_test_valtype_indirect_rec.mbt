@@ -5,7 +5,7 @@ struct S {
   b : Int64?
   c : FixedArray[S]
   d : Bool
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn f(x : FixedArray[S]) -> Int {
@@ -26,7 +26,7 @@ fn main {
     c: FixedArray::makei(2, i => S::{ a: i, b: Some(6), c: [], d: false }),
     d: false,
   }
-  println(f([s1, s2, s1]))
-  println(s1)
-  println(s2)
+  debug(f([s1, s2, s1]))
+  debug(s1)
+  debug(s2)
 }

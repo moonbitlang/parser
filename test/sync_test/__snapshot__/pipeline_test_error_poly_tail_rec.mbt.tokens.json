@@ -389,10 +389,7 @@
     "loc": "12:34-12:35"
   },
   {
-    "token": [
-      "AUGMENTED_ASSIGNMENT",
-      "+"
-    ],
+    "token": "PLUS_EQUAL",
     "loc": "12:36-12:38"
   },
   {
@@ -618,28 +615,28 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "20:3-20:10"
+    "loc": "20:3-20:8"
   },
   {
     "token": "LPAREN",
-    "loc": "20:10-20:11"
+    "loc": "20:8-20:9"
   },
   {
     "token": [
       "LIDENT",
       "result"
     ],
-    "loc": "20:11-20:17"
+    "loc": "20:9-20:15"
   },
   {
     "token": "RPAREN",
-    "loc": "20:17-20:18"
+    "loc": "20:15-20:16"
   },
   {
     "token": "NEWLINE",
-    "loc": "20:18-20:19"
+    "loc": "20:16-20:17"
   },
   {
     "token": "RBRACE",

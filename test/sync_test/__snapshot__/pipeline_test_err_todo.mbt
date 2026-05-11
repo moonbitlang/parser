@@ -9,5 +9,5 @@ fn g() -> Bool? {
 }
 
 fn init {
-  println(g())
+  debug(g())
 }

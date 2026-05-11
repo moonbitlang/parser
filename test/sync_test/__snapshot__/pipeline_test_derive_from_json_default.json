@@ -207,7 +207,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Eq"
                         }
                       },
                       "is_object": false
@@ -232,7 +232,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Eq"
+                          "value": "Debug"
                         }
                       },
                       "is_object": false
@@ -553,7 +553,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Eq"
                         }
                       },
                       "is_object": false
@@ -578,7 +578,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Eq"
+                          "value": "Debug"
                         }
                       },
                       "is_object": false
@@ -901,7 +901,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Eq"
                         }
                       },
                       "is_object": false
@@ -926,7 +926,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Eq"
+                          "value": "Debug"
                         }
                       },
                       "is_object": false
@@ -1271,7 +1271,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Eq"
                         }
                       },
                       "is_object": false
@@ -1296,7 +1296,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Eq"
+                          "value": "Debug"
                         }
                       },
                       "is_object": false
@@ -1380,28 +1380,25 @@
         "loc": null,
         "children": {
           "func": {
-            "kind": "Expr::Method",
+            "kind": "Expr::Constr",
             "loc": null,
             "children": {
-              "type_name": {
-                "kind": "TypeName",
+              "constr": {
+                "kind": "Constructor",
                 "loc": null,
                 "children": {
                   "name": {
-                    "kind": "LongIdent::Ident",
+                    "kind": "ConstrName",
                     "loc": null,
                     "children": {
-                      "value": "Ref"
+                      "name": "Ref"
                     }
                   },
-                  "is_object": false
-                }
-              },
-              "method_name": {
-                "kind": "Label",
-                "loc": null,
-                "children": {
-                  "name": "new"
+                  "extra_info": {
+                    "kind": "ConstructorExtraInfo::NoExtraInfo",
+                    "loc": null,
+                    "children": {}
+                  }
                 }
               }
             }
@@ -1528,6 +1525,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1760,6 +1758,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2371,7 +2370,7 @@
                                                         "kind": "InterpElem::Source",
                                                         "loc": null,
                                                         "children": {
-                                                          "source": "actual"
+                                                          "source": "Debug::to_repr(actual)"
                                                         }
                                                       },
                                                       {
@@ -2385,7 +2384,7 @@
                                                         "kind": "InterpElem::Source",
                                                         "loc": null,
                                                         "children": {
-                                                          "source": "expected"
+                                                          "source": "Debug::to_repr(expected)"
                                                         }
                                                       }
                                                     ]
@@ -2976,7 +2975,7 @@
                                                                         "kind": "InterpElem::Source",
                                                                         "loc": null,
                                                                         "children": {
-                                                                          "source": "actual"
+                                                                          "source": "Debug::to_repr(actual)"
                                                                         }
                                                                       },
                                                                       {
@@ -2990,7 +2989,7 @@
                                                                         "kind": "InterpElem::Source",
                                                                         "loc": null,
                                                                         "children": {
-                                                                          "source": "expected"
+                                                                          "source": "Debug::to_repr(expected)"
                                                                         }
                                                                       }
                                                                     ]
@@ -3581,7 +3580,7 @@
                                                                                         "kind": "InterpElem::Source",
                                                                                         "loc": null,
                                                                                         "children": {
-                                                                                          "source": "actual"
+                                                                                          "source": "Debug::to_repr(actual)"
                                                                                         }
                                                                                       },
                                                                                       {
@@ -3595,7 +3594,7 @@
                                                                                         "kind": "InterpElem::Source",
                                                                                         "loc": null,
                                                                                         "children": {
-                                                                                          "source": "expected"
+                                                                                          "source": "Debug::to_repr(expected)"
                                                                                         }
                                                                                       }
                                                                                     ]
@@ -4159,7 +4158,7 @@
                                                                                                         "kind": "InterpElem::Source",
                                                                                                         "loc": null,
                                                                                                         "children": {
-                                                                                                          "source": "actual"
+                                                                                                          "source": "Debug::to_repr(actual)"
                                                                                                         }
                                                                                                       },
                                                                                                       {
@@ -4173,7 +4172,7 @@
                                                                                                         "kind": "InterpElem::Source",
                                                                                                         "loc": null,
                                                                                                         "children": {
-                                                                                                          "source": "expected"
+                                                                                                          "source": "Debug::to_repr(expected)"
                                                                                                         }
                                                                                                       }
                                                                                                     ]
@@ -4790,7 +4789,7 @@
                                                                                                                         "kind": "InterpElem::Source",
                                                                                                                         "loc": null,
                                                                                                                         "children": {
-                                                                                                                          "source": "actual"
+                                                                                                                          "source": "Debug::to_repr(actual)"
                                                                                                                         }
                                                                                                                       },
                                                                                                                       {
@@ -4804,7 +4803,7 @@
                                                                                                                         "kind": "InterpElem::Source",
                                                                                                                         "loc": null,
                                                                                                                         "children": {
-                                                                                                                          "source": "expected"
+                                                                                                                          "source": "Debug::to_repr(expected)"
                                                                                                                         }
                                                                                                                       }
                                                                                                                     ]
@@ -5395,7 +5394,7 @@
                                                                                                                                         "kind": "InterpElem::Source",
                                                                                                                                         "loc": null,
                                                                                                                                         "children": {
-                                                                                                                                          "source": "actual"
+                                                                                                                                          "source": "Debug::to_repr(actual)"
                                                                                                                                         }
                                                                                                                                       },
                                                                                                                                       {
@@ -5409,7 +5408,7 @@
                                                                                                                                         "kind": "InterpElem::Source",
                                                                                                                                         "loc": null,
                                                                                                                                         "children": {
-                                                                                                                                          "source": "expected"
+                                                                                                                                          "source": "Debug::to_repr(expected)"
                                                                                                                                         }
                                                                                                                                       }
                                                                                                                                     ]
@@ -5758,7 +5757,7 @@
                                                                                                                                             "kind": "LongIdent::Ident",
                                                                                                                                             "loc": null,
                                                                                                                                             "children": {
-                                                                                                                                              "value": "println"
+                                                                                                                                              "value": "debug"
                                                                                                                                             }
                                                                                                                                           }
                                                                                                                                         }
@@ -5774,21 +5773,21 @@
                                                                                                                                         "loc": null,
                                                                                                                                         "children": {
                                                                                                                                           "value": {
-                                                                                                                                            "kind": "Expr::Interp",
+                                                                                                                                            "kind": "Expr::Ident",
                                                                                                                                             "loc": null,
                                                                                                                                             "children": {
-                                                                                                                                              "elems": {
-                                                                                                                                                "kind": "Expr::Interp::ElemList",
+                                                                                                                                              "id": {
+                                                                                                                                                "kind": "Var",
                                                                                                                                                 "loc": null,
-                                                                                                                                                "children": [
-                                                                                                                                                  {
-                                                                                                                                                    "kind": "InterpElem::Source",
+                                                                                                                                                "children": {
+                                                                                                                                                  "name": {
+                                                                                                                                                    "kind": "LongIdent::Ident",
                                                                                                                                                     "loc": null,
                                                                                                                                                     "children": {
-                                                                                                                                                      "source": "actual"
+                                                                                                                                                      "value": "actual"
                                                                                                                                                     }
                                                                                                                                                   }
-                                                                                                                                                ]
+                                                                                                                                                }
                                                                                                                                               }
                                                                                                                                             }
                                                                                                                                           },
@@ -6402,7 +6401,7 @@
                                                                                                                                                                     "kind": "InterpElem::Source",
                                                                                                                                                                     "loc": null,
                                                                                                                                                                     "children": {
-                                                                                                                                                                      "source": "actual"
+                                                                                                                                                                      "source": "Debug::to_repr(actual)"
                                                                                                                                                                     }
                                                                                                                                                                   },
                                                                                                                                                                   {
@@ -6416,7 +6415,7 @@
                                                                                                                                                                     "kind": "InterpElem::Source",
                                                                                                                                                                     "loc": null,
                                                                                                                                                                     "children": {
-                                                                                                                                                                      "source": "expected"
+                                                                                                                                                                      "source": "Debug::to_repr(expected)"
                                                                                                                                                                     }
                                                                                                                                                                   }
                                                                                                                                                                 ]
@@ -7007,7 +7006,7 @@
                                                                                                                                                                                     "kind": "InterpElem::Source",
                                                                                                                                                                                     "loc": null,
                                                                                                                                                                                     "children": {
-                                                                                                                                                                                      "source": "actual"
+                                                                                                                                                                                      "source": "Debug::to_repr(actual)"
                                                                                                                                                                                     }
                                                                                                                                                                                   },
                                                                                                                                                                                   {
@@ -7021,7 +7020,7 @@
                                                                                                                                                                                     "kind": "InterpElem::Source",
                                                                                                                                                                                     "loc": null,
                                                                                                                                                                                     "children": {
-                                                                                                                                                                                      "source": "expected"
+                                                                                                                                                                                      "source": "Debug::to_repr(expected)"
                                                                                                                                                                                     }
                                                                                                                                                                                   }
                                                                                                                                                                                 ]
@@ -7693,7 +7692,7 @@
                                                                                                                                                                                                         "kind": "InterpElem::Source",
                                                                                                                                                                                                         "loc": null,
                                                                                                                                                                                                         "children": {
-                                                                                                                                                                                                          "source": "actual"
+                                                                                                                                                                                                          "source": "Debug::to_repr(actual)"
                                                                                                                                                                                                         }
                                                                                                                                                                                                       },
                                                                                                                                                                                                       {
@@ -7707,7 +7706,7 @@
                                                                                                                                                                                                         "kind": "InterpElem::Source",
                                                                                                                                                                                                         "loc": null,
                                                                                                                                                                                                         "children": {
-                                                                                                                                                                                                          "source": "expected"
+                                                                                                                                                                                                          "source": "Debug::to_repr(expected)"
                                                                                                                                                                                                         }
                                                                                                                                                                                                       }
                                                                                                                                                                                                     ]
@@ -8505,7 +8504,7 @@
                                                                                                                                                                                                                                     "kind": "InterpElem::Source",
                                                                                                                                                                                                                                     "loc": null,
                                                                                                                                                                                                                                     "children": {
-                                                                                                                                                                                                                                      "source": "actual"
+                                                                                                                                                                                                                                      "source": "Debug::to_repr(actual)"
                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                   {
@@ -8519,7 +8518,7 @@
                                                                                                                                                                                                                                     "kind": "InterpElem::Source",
                                                                                                                                                                                                                                     "loc": null,
                                                                                                                                                                                                                                     "children": {
-                                                                                                                                                                                                                                      "source": "expected"
+                                                                                                                                                                                                                                      "source": "Debug::to_repr(expected)"
                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                   }
                                                                                                                                                                                                                                 ]
@@ -8988,7 +8987,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Eq"
                         }
                       },
                       "is_object": false
@@ -9013,7 +9012,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Eq"
+                          "value": "Debug"
                         }
                       },
                       "is_object": false
@@ -9075,6 +9074,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -9694,7 +9694,7 @@
                                                         "kind": "InterpElem::Source",
                                                         "loc": null,
                                                         "children": {
-                                                          "source": "actual"
+                                                          "source": "Debug::to_repr(actual)"
                                                         }
                                                       },
                                                       {
@@ -9708,7 +9708,7 @@
                                                         "kind": "InterpElem::Source",
                                                         "loc": null,
                                                         "children": {
-                                                          "source": "expected"
+                                                          "source": "Debug::to_repr(expected)"
                                                         }
                                                       }
                                                     ]
@@ -10299,7 +10299,7 @@
                                                                 "kind": "InterpElem::Source",
                                                                 "loc": null,
                                                                 "children": {
-                                                                  "source": "actual"
+                                                                  "source": "Debug::to_repr(actual)"
                                                                 }
                                                               },
                                                               {
@@ -10313,7 +10313,7 @@
                                                                 "kind": "InterpElem::Source",
                                                                 "loc": null,
                                                                 "children": {
-                                                                  "source": "expected"
+                                                                  "source": "Debug::to_repr(expected)"
                                                                 }
                                                               }
                                                             ]

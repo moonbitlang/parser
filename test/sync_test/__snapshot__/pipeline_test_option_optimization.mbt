@@ -1,65 +1,65 @@
 fn test_char(xs : Array[Char?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_bool(xs : Array[Bool?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_byte(xs : Array[Byte?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_byte2(xs : Array[Byte]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_unit(xs : Array[Unit?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_int(xs : Array[Int?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_uint(xs : Array[UInt?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_int64(xs : Array[Int64?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_uint64(xs : Array[UInt64?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_float(xs : Array[Float?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_double(xs : Array[Double?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_option(xs : Array[Int??]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_bytes(xs : Array[Bytes?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_tuple(xs : Array[(Int, Int)?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
 fn test_fixedarray(xs : Array[FixedArray[Int]?]) -> Unit {
-  println(xs)
+  debug(xs)
 }
 
-fn test_trait_obj(xs : Array[&Show?]) -> Unit {
-  println(xs)
+fn test_trait_obj(xs : Array[&Debug?]) -> Unit {
+  debug(xs)
 }
 
 struct A((A) -> Int)

@@ -1,4 +1,4 @@
-//!build: -w -37
+//!build: -w -37-27
 
 ///| basic usage
 fn f(xs : Array[Array[Int]], target : Int) -> (Int, Int) {
@@ -65,11 +65,11 @@ fn g(x : Int?, y : Int?) -> (Int, Int) {
 
 ///|
 fn main {
-  println(f([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 5))
-  println(f([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 10))
-  println(g(None, None))
-  println(g(Some(7), Some(11)))
-  println(g(Some(1), Some(1)))
-  println(g(None, Some(11)))
-  println(g(Some(11), None))
+  debug(f([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 5))
+  debug(f([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 10))
+  debug(g(None, None))
+  debug(g(Some(7), Some(11)))
+  debug(g(Some(1), Some(1)))
+  debug(g(None, Some(11)))
+  debug(g(Some(11), None))
 }

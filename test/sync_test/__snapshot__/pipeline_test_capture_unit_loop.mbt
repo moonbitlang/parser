@@ -1,3 +1,5 @@
+//!build: -w -27
+
 fn init {
   let x = loop 50 {
     0 => ()

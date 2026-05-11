@@ -807,47 +807,47 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "33:5-33:12"
+    "loc": "33:5-33:10"
   },
   {
     "token": "LPAREN",
-    "loc": "33:12-33:13"
+    "loc": "33:10-33:11"
   },
   {
     "token": "LPAREN",
-    "loc": "33:13-33:14"
+    "loc": "33:11-33:12"
   },
   {
     "token": [
       "LIDENT",
       "i"
     ],
-    "loc": "33:14-33:15"
+    "loc": "33:12-33:13"
   },
   {
     "token": "COMMA",
-    "loc": "33:15-33:16"
+    "loc": "33:13-33:14"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
+    "loc": "33:15-33:16"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "33:16-33:17"
+  },
+  {
+    "token": "RPAREN",
     "loc": "33:17-33:18"
   },
   {
-    "token": "RPAREN",
-    "loc": "33:18-33:19"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "33:19-33:20"
-  },
-  {
     "token": "NEWLINE",
-    "loc": "33:20-33:21"
+    "loc": "33:18-33:19"
   },
   {
     "token": "RBRACE",

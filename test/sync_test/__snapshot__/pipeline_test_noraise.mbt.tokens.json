@@ -216,27 +216,35 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "5:19-5:26"
+    "loc": "5:19-5:24"
   },
   {
     "token": "LPAREN",
-    "loc": "5:26-5:27"
+    "loc": "5:24-5:25"
   },
   {
     "token": "TRY_QUESTION",
-    "loc": "5:27-5:31"
+    "loc": "5:25-5:29"
   },
   {
     "token": [
       "LIDENT",
       "a"
     ],
-    "loc": "5:32-5:33"
+    "loc": "5:30-5:31"
   },
   {
     "token": "LPAREN",
+    "loc": "5:31-5:32"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "5:32-5:33"
+  },
+  {
+    "token": "RPAREN",
     "loc": "5:33-5:34"
   },
   {
@@ -244,16 +252,8 @@
     "loc": "5:34-5:35"
   },
   {
-    "token": "RPAREN",
-    "loc": "5:35-5:36"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "5:36-5:37"
-  },
-  {
     "token": "NEWLINE",
-    "loc": "5:37-5:38"
+    "loc": "5:35-5:36"
   },
   {
     "token": "RBRACE",

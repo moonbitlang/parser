@@ -112,91 +112,91 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "6:3-6:10"
+    "loc": "6:3-6:8"
   },
   {
     "token": "LPAREN",
-    "loc": "6:10-6:11"
+    "loc": "6:8-6:9"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
-    "loc": "6:11-6:12"
+    "loc": "6:9-6:10"
   },
   {
     "token": [
       "DOT_LIDENT",
       "to_array"
     ],
-    "loc": "6:13-6:21"
+    "loc": "6:11-6:19"
   },
   {
     "token": "LPAREN",
+    "loc": "6:19-6:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "6:20-6:21"
+  },
+  {
+    "token": "RPAREN",
     "loc": "6:21-6:22"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "6:22-6:23"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "6:23-6:24"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "6:24-6:24"
+    "loc": "6:22-6:22"
   },
   {
     "token": "NEWLINE",
-    "loc": "6:24-6:25"
+    "loc": "6:22-6:23"
   },
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "7:3-7:10"
+    "loc": "7:3-7:8"
   },
   {
     "token": "LPAREN",
-    "loc": "7:10-7:11"
+    "loc": "7:8-7:9"
   },
   {
     "token": [
       "LIDENT",
       "y"
     ],
-    "loc": "7:11-7:12"
+    "loc": "7:9-7:10"
   },
   {
     "token": [
       "DOT_LIDENT",
       "to_array"
     ],
-    "loc": "7:13-7:21"
+    "loc": "7:11-7:19"
   },
   {
     "token": "LPAREN",
+    "loc": "7:19-7:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "7:20-7:21"
+  },
+  {
+    "token": "RPAREN",
     "loc": "7:21-7:22"
   },
   {
-    "token": "RPAREN",
-    "loc": "7:22-7:23"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "7:23-7:24"
-  },
-  {
     "token": "NEWLINE",
-    "loc": "7:24-7:25"
+    "loc": "7:22-7:23"
   },
   {
     "token": [

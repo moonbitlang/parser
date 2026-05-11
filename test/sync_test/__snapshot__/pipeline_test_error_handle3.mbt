@@ -1,10 +1,10 @@
 suberror StringError {
   StringError(String)
-} derive(Show)
+}
 
 suberror FloatError {
   FloatError(Float)
-} derive(Show)
+}
 
 trait TF {
   f1(Self) -> Float raise = _
@@ -78,3 +78,23 @@ fn init {
 }
 
 let a = false
+
+impl Show for StringError with output(self, logger) {
+  match self {
+    StringError(v0) => {
+      logger.write_string("StringError(")
+      Show::output(v0, logger)
+      logger.write_string(")")
+    }
+  }
+}
+
+impl Show for FloatError with output(self, logger) {
+  match self {
+    FloatError(v0) => {
+      logger.write_string("FloatError(")
+      Show::output(v0, logger)
+      logger.write_string(")")
+    }
+  }
+}

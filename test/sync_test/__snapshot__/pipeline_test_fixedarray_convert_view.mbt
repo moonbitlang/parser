@@ -1,11 +1,11 @@
 ///|
 fn f(arr : ArrayView[Int]) -> Unit {
-  println(arr)
+  debug(arr)
 }
 
 ///|
 fn g(arr : ArrayView[(Int, Int)]) -> Unit {
-  println(arr)
+  debug(arr)
 }
 
 ///|

@@ -1,3 +1,5 @@
+//!build: -w -20-27
+
 ///|
 enum FizzBuzz {
   Fizz

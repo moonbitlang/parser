@@ -22,9 +22,16 @@ impl[T : Show] Show for List[T] with output(self, logger) {
 }
 
 fn[T] List::from_array(arr: Array[T]) -> List[T] {
-  loop (arr.length() - 1, List::Nil) {
-    (0, acc) => List::Cons(arr[0], acc)
-    (i, acc) => continue (i - 1, List::Cons(arr[i], acc))
+  if arr.length() == 0 {
+    List::Nil
+  } else {
+    for i = arr.length() - 1, acc = List::Nil {
+      if i == 0 {
+        break List::Cons(arr[0], acc)
+      } else {
+        continue i - 1, List::Cons(arr[i], acc)
+      }
+    }
   }
 }
 
