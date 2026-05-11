@@ -14,10 +14,10 @@ fn h(f : (Int) -> Unit raise?) -> Unit raise? {
 ///|
 suberror E {
   E(Int)
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn main {
-  println(try? h(x => raise E(x)))
+  debug(try? h(x => raise E(x)))
   h(fn(x) { println(x) })
 }

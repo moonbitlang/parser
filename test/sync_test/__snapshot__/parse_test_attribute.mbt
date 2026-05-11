@@ -39,9 +39,9 @@ pub enum MyEnum {}
 #alert(category2,"reason")
 pub struct MyStruct { x : Int }
 
-#alert(category1,"reason")
-#alert(category2,"reason")
-pub type MyType Int
+
+
+
 
 #alert(category1,"reason")
 #alert(category2,"reason")

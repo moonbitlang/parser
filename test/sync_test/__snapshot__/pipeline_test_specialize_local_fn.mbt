@@ -41,7 +41,7 @@ fn h(x : Int) -> String {
 ///|
 fn main {
   let arr = makei(100001, g)
-  println(find(arr, f))
+  debug(find(arr, f))
   let arr1 = makei(100001, h)
-  println(find(arr1, f))
+  debug(find(arr1, f))
 }

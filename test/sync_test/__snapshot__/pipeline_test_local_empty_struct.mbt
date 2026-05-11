@@ -1,3 +1,4 @@
+//!build: -w -deprecated_syntax
 ///|
 fn main {
   struct S {} derive(Eq)

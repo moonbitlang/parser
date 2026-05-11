@@ -1,4 +1,4 @@
-suberror MyErr derive(Show)
+suberror MyErr derive(Debug)
 
 fn f(coin : Bool) -> Int raise MyErr {
   if coin {
@@ -9,13 +9,13 @@ fn f(coin : Bool) -> Int raise MyErr {
 }
 
 fn main {
-  println(try? f(true))
-  println(try? f(false))
-  println(try? f(f(true) < 0))
+  debug(try? f(true))
+  debug(try? f(false))
+  debug(try? f(f(true) < 0))
   fn outside(coin) -> _ raise MyErr {
     let x = f(coin)
     try? f(x < 0)
   }
-  println(try? outside(true))
-  println(try? outside(false))
+  debug(try? outside(true))
+  debug(try? outside(false))
 }

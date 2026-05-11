@@ -1,5 +1,10 @@
 // type Iter[T] ((T) -> IterResult) -> IterResult raise?
 
+enum IterResult {
+  IterContinue
+  IterEnd
+}
+
 // In this setup, the iterator itself can raise error,
 // but early exit still need to be implemented via `IterResult`
 
@@ -110,7 +115,7 @@ fn[X] with_last(
 suberror UTF16DecodeError {
   MissingLowSurrogate
   UnexpectedLowSurrogate
-} derive(Show)
+} derive(Debug)
 
 fn is_high_surrogate(x : Int) -> Bool {
   x is 0xD800..=0xDBFF
@@ -144,7 +149,7 @@ fn decode_utf16(
   map(it, it => it.unsafe_to_char())
 }
 
-suberror IncompleteUTF16CodePoint derive(Show)
+suberror IncompleteUTF16CodePoint derive(Debug)
 
 fn bytes_to_utf16_code_points(
   it : ((Byte) -> IterResult) -> IterResult raise
@@ -179,11 +184,11 @@ fn bytes_to_utf16(b : Bytes) -> Array[Char] raise {
 }
 
 fn init {
-  println(try? bytes_to_utf16(@encoding/utf16.encode("abc")))
-  println(try? bytes_to_utf16(@encoding/utf16.encode("中文")))
-  println(try? bytes_to_utf16(@encoding/utf16.encode("🤣")))
-  println(try? bytes_to_utf16([ 0x00, 0xD8, 0x00, 0x61 ]))
-  println(try? bytes_to_utf16([ 0x00, 0xDC ]))
+  debug(try? bytes_to_utf16(@encoding/utf16.encode("abc")))
+  debug(try? bytes_to_utf16(@encoding/utf16.encode("中文")))
+  debug(try? bytes_to_utf16(@encoding/utf16.encode("🤣")))
+  debug(try? bytes_to_utf16([ 0x00, 0xD8, 0x00, 0x61 ]))
+  debug(try? bytes_to_utf16([ 0x00, 0xDC ]))
 }
 
 fn bytes_arary_to_iter(
@@ -208,6 +213,6 @@ fn init {
     |> decode_utf16
     take(it, n) |> collect
   }
-  println(try? run([ "一二", "三四", "五六", "七八", "九十" ].map(s => @encoding/utf16.encode(s)), 7))
-  println(try? run([ "abcdefghij", "klmnopqrst", "uvwxyz" ].map(s => @encoding/utf16.encode(s)), 10))
+  debug(try? run([ "一二", "三四", "五六", "七八", "九十" ].map(s => @encoding/utf16.encode(s)), 7))
+  debug(try? run([ "abcdefghij", "klmnopqrst", "uvwxyz" ].map(s => @encoding/utf16.encode(s)), 10))
 }

@@ -20,7 +20,7 @@ fn init {
 }
 
 fn init {
-  println("\{1}, \{true}, \{[1,2,3,4,5,6]}, \{'C'}, \{3.14}")
+  println("\{1}, \{true}, \{Debug::to_repr([1,2,3,4,5,6])}, \{'C'}, \{3.14}")
 }
 
 fn init {

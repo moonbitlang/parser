@@ -1,7 +1,7 @@
 enum MList[T]{
   MNil
   MCons(T, MList[T])
-} derive(Show)
+} derive(Debug)
 
 fn init {
   fn zip_add(x, y) {
@@ -19,7 +19,7 @@ fn init {
     }
   }
   let xs = zip_add(MCons(1, MCons(2, MNil)), (MCons(3, MCons(4, MNil))))
-  println(xs)
+  debug(xs)
   println("[")
   pr(xs)
   println("]")
@@ -35,7 +35,7 @@ fn[A, B, C] zip_with(xs: MList[A], ys: MList[B], f: (A, B) -> C) -> MList[C] {
 
 fn init {
   let zs = zip_with(MCons(1, MCons(2, MNil)), (MCons(3, MCons(4, MNil))), (x, y) => (x, y))
-  println(zs)
+  debug(zs)
   fn split (x) {
     match x {
       MList::MNil => (MList::MNil, MList::MNil)
@@ -46,6 +46,6 @@ fn init {
     }
   }
   let (xs, ys) = split(zs)
-  println(xs)
-  println(ys)
+  debug(xs)
+  debug(ys)
 }

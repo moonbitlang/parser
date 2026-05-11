@@ -128,28 +128,28 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "5:3-5:10"
+    "loc": "5:3-5:8"
   },
   {
     "token": "LPAREN",
-    "loc": "5:10-5:11"
+    "loc": "5:8-5:9"
   },
   {
     "token": [
       "LIDENT",
       "v"
     ],
-    "loc": "5:11-5:12"
+    "loc": "5:9-5:10"
   },
   {
     "token": "RPAREN",
-    "loc": "5:12-5:13"
+    "loc": "5:10-5:11"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:13-5:14"
+    "loc": "5:11-5:12"
   },
   {
     "token": "RBRACE",

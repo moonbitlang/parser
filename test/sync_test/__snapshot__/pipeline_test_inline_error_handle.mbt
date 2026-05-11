@@ -30,7 +30,7 @@ pub fn g(x: Int) -> Int raise {
 
 fn main {
   let a = try? f(42)
-  println(a)
+  debug(a)
   let b = try? g(0)
-  println(b)
+  debug(b)
 }

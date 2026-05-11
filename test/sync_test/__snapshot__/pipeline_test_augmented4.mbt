@@ -3,7 +3,7 @@ fn init {
   let r2 : Ref[_] = { val: 2 }
   let mut r = r1
   r.val += { r = r2; 1 }
-  println((r1, r2))
+  debug((r1, r2))
 }
 
 fn init {
@@ -11,7 +11,7 @@ fn init {
   let r2 : Ref[_] = { val: 2 }
   let mut r = r1
   r.val = r.val + { r = r2; 1 }
-  println((r1, r2))
+  debug((r1, r2))
 }
 
 fn init {
@@ -20,11 +20,11 @@ fn init {
   let mut r = r1
   let obj = r
   obj.val = obj.val + { r = r2; 1 }
-  println((r1, r2))
+  debug((r1, r2))
 }
 
 
-struct MyInt(Int) derive(Show)
+struct MyInt(Int) derive(Debug)
 let bad_global : Ref[() -> Unit] = { val: fn () {} }
 impl Add for MyInt with add(self : MyInt, other : MyInt) -> MyInt {
   (bad_global.val)()
@@ -37,11 +37,11 @@ fn init {
   let mut r = r1
   bad_global.val = fn () { r = r2 }
   r.val += MyInt::MyInt(1)
-  println((r1, r2))
+  debug((r1, r2))
 }
 
 fn init {
   let r : Ref[_] = { val: 1 }
   r.val += { r.val = 42; r.val }
-  println(r)
+  debug(r)
 }

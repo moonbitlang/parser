@@ -13,7 +13,7 @@ priv enum UnixPrefix {
   /// > although more than two leading <slash> characters shall be treated as a single <slash> character.
   SlashSlash
   None
-}
+} derive(Debug)
 
 ///|
 /// [Posix 4.13 Pathname Resolution](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_13)
@@ -22,32 +22,12 @@ priv enum UnixPrefix {
 priv struct UnixPath {
   prefix : UnixPrefix
   components : Array[StringView]
-}
-
-///|
-impl Show for UnixPath with output(self : UnixPath, logger : &Logger) -> Unit {
-  let { prefix, components } = self
-  match prefix {
-    Root => logger.write_char('/')
-    SlashSlash => logger.write_string("//")
-    None => ()
-  }
-  match components {
-    [] => ()
-    [x, .. xs] => {
-      logger.write_string(x.to_string())
-      for x in xs {
-        logger.write_char('/')
-        logger.write_string(x.to_string())
-      }
-    }
-  }
-}
+} derive(Debug)
 
 ///|
 priv suberror PathError {
   PathError(start~ : Int, message~ : String)
-}
+} derive(Debug)
 
 ///|
 fn parse_unix_relative_path(
@@ -58,7 +38,7 @@ fn parse_unix_relative_path(
   let mut rest = s
   let components : Array[StringView] = []
   let mut start = start
-  for {
+  for ;; {
     lexmatch rest with longest {
       // pattern: <path_component><slashes>
       // slashes elimination
@@ -166,9 +146,9 @@ fn UnixPath::parse(path : StringView) -> UnixPath raise PathError {
 ///|
 fn main {
   let path = try! UnixPath::parse("/../folder/file")
-  println(path)
+  debug(path)
   let path = try! UnixPath::parse("/folder/file")
-  println(path)
+  debug(path)
   let path = try! UnixPath::parse("/")
-  println(path)
+  debug(path)
 }

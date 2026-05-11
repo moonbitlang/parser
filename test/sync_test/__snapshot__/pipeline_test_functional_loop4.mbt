@@ -1,4 +1,4 @@
-//!build: -w -17-18
+//!build: -w -17-18-27
 
 fn train() -> Double {
   let (correct, wrong) = loop 0 {

@@ -105,66 +105,66 @@
   },
   {
     "token": [
-      "STRING",
+      "BYTES",
       "\\xff\\xff"
     ],
-    "loc": "4:9-4:19"
+    "loc": "4:9-4:20"
   },
   {
     "token": "COMMA",
-    "loc": "4:19-4:20"
+    "loc": "4:20-4:21"
   },
   {
     "token": "DOTDOT",
-    "loc": "4:21-4:23"
+    "loc": "4:22-4:24"
   },
   {
     "token": [
       "LIDENT",
       "rest"
     ],
-    "loc": "4:24-4:28"
+    "loc": "4:25-4:29"
   },
   {
     "token": "RBRACKET",
-    "loc": "4:28-4:29"
+    "loc": "4:29-4:30"
   },
   {
     "token": "FAT_ARROW",
-    "loc": "4:30-4:32"
+    "loc": "4:31-4:33"
   },
   {
     "token": [
       "LIDENT",
       "println"
     ],
-    "loc": "4:33-4:40"
+    "loc": "4:34-4:41"
   },
   {
     "token": "LPAREN",
-    "loc": "4:40-4:41"
+    "loc": "4:41-4:42"
   },
   {
     "token": [
       "LIDENT",
       "rest"
     ],
-    "loc": "4:41-4:45"
+    "loc": "4:42-4:46"
   },
   {
     "token": "RPAREN",
-    "loc": "4:45-4:46"
+    "loc": "4:46-4:47"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "4:46-4:46"
+    "loc": "4:47-4:47"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:46-4:47"
+    "loc": "4:47-4:48"
   },
   {
     "token": "UNDERSCORE",

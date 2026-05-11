@@ -1,9 +1,9 @@
-fn use_show(obj : &Show) -> Unit {
+fn use_debug(obj : &Debug) -> Unit {
   // use twice to trigger [incref]
-  println(obj)
-  println(obj)
+  debug(obj)
+  debug(obj)
 }
 
 fn init {
-  use_show((None : String?))
+  use_debug((None : String?))
 }

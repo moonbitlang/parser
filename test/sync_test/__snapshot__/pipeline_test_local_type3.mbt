@@ -1,3 +1,4 @@
+//!build: -w -deprecated_syntax
 fn f() -> Unit {
   enum T {
     A(Int)
@@ -12,7 +13,7 @@ fn f() -> Unit {
   println(t(B("xxx"), B("xxx")))
 }
 
-fn[A: Eq, B: Eq + Show, C: Show] g(x: A, y: B, z: C) -> &Show {
+fn[A: Eq, B: Eq + Debug, C: Debug] g(x: A, y: B, z: C) -> &Debug {
   enum T {
     A(A)
     B(B)
@@ -24,11 +25,11 @@ fn[A: Eq, B: Eq + Show, C: Show] g(x: A, y: B, z: C) -> &Show {
   enum U {
     B(B)
     C(C, Int)
-  } derive(Show)
+  } derive(Debug)
   struct W {
     u: U
     v: String
-  } derive(Show)
+  } derive(Debug)
 
   fn t(x: T, y: T) {
     x == y
@@ -48,8 +49,8 @@ fn[A: Eq, B: Eq + Show, C: Show] g(x: A, y: B, z: C) -> &Show {
   let u2 : U = B(y)
   let w1 : W = { u: u1, v: "v1" }
   let w2 : W = { u: u2, v: "v2" }
-  use_show(w1)
-  use_show(w2)
+  use_debug(w1)
+  use_debug(w2)
   w1
 }
 
@@ -57,16 +58,16 @@ fn[T : Eq] use_eq(x : T, y : T) -> Bool {
   x == y
 }
 
-fn[T: Show] use_show(x: T) -> Unit {
-  println(x.to_string())
+fn[T: Debug] use_debug(x: T) -> Unit {
+  println(to_repr(x))
 }
 
-fn use_show_obj(x: &Show) -> Unit {
-  println(x.to_string())
+fn use_debug_obj(x: &Debug) -> Unit {
+  println(to_repr(x))
 }
 
 fn main {
   f()
   let w = g(1, "xxx", 3.14)
-  use_show_obj(w)
+  use_debug_obj(w)
 }

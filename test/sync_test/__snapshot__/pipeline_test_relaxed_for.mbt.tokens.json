@@ -470,12 +470,26 @@
     "loc": "14:11-14:14"
   },
   {
-    "token": "LBRACE",
+    "token": [
+      "SEMI",
+      true
+    ],
     "loc": "14:15-14:16"
   },
   {
-    "token": "NEWLINE",
+    "token": [
+      "SEMI",
+      true
+    ],
     "loc": "14:16-14:17"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "14:18-14:19"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "14:19-14:20"
   },
   {
     "token": "IF",

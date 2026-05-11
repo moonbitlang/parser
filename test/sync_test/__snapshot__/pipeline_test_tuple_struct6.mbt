@@ -1,5 +1,5 @@
 ///|
-struct S(Int, S?) derive(Show, Eq, Hash, Default)
+struct S(Int, S?) derive( Eq, Hash, Default, Debug)
 
 fn[T : Hash] stable_hash(value : T) -> Int {
   let hasher = Hasher::new(seed = 42)
@@ -10,12 +10,12 @@ fn[T : Hash] stable_hash(value : T) -> Int {
 fn main {
   let s1 = S::default()
   let s2 = S::S(1, Some(s1))
-  println(s2)
+  debug(s2)
   println(s2 == s2)
   println(s1 == s2)
   println(stable_hash(s2))
-  println(f(s1))
-  println(f(s2))
+  debug(f(s1))
+  debug(f(s2))
 }
 
 fn f(s: S) -> S {

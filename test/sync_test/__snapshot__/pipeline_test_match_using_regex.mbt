@@ -1,4 +1,4 @@
-//!build: -w -28
+//!build: -w -20-27-28
 
 ///|
 fn simple(input : BytesView) -> Unit {
@@ -41,7 +41,7 @@ fn test_character_classes() -> Unit raise {
   // Test digit character class
   lexmatch b"123" with longest {
     ("[0-9]+" as digits, _) =>
-      if !(digits is "123") {
+      if !(digits is b"123") {
         fail("test_character_classes")
       }
     ...
@@ -50,7 +50,7 @@ fn test_character_classes() -> Unit raise {
   // Test identifier pattern
   lexmatch b"_variable123" with longest {
     ("[a-zA-Z_][a-zA-Z0-9_]*" as id, _) =>
-      if !(id is "_variable123") {
+      if !(id is b"_variable123") {
         fail("test_character_classes")
       }
     ...
@@ -59,7 +59,7 @@ fn test_character_classes() -> Unit raise {
   // Test negated character class
   lexmatch b"xyz" with longest {
     ("[^abc]+" as non_abc, _) =>
-      if !(non_abc is "xyz") {
+      if !(non_abc is b"xyz") {
         fail("test_character_classes")
       }
     ...
@@ -114,10 +114,10 @@ fn test_nested_groups() -> Unit raise {
   // Test nested captured groups
   lexmatch b"aaabbbccc" with longest {
     (("(a+)(b+)" as outer) ("c+" as rest), _) => {
-      if !(outer is "aaabbb") {
+      if !(outer is b"aaabbb") {
         fail("test_nested_groups")
       }
-      if !(rest is "ccc") {
+      if !(rest is b"ccc") {
         fail("test_nested_groups")
       }
     }
@@ -130,14 +130,14 @@ fn test_alternation() -> Unit raise {
   // Test simple alternation
   lexmatch b"cat" with longest {
     ("cat|dog" as animal, _) =>
-      if !(animal is "cat") {
+      if !(animal is b"cat") {
         fail("test_alternation")
       }
     ...
   }
   lexmatch b"dog" with longest {
     ("cat|dog" as animal, _) =>
-      if !(animal is "dog") {
+      if !(animal is b"dog") {
         fail("test_alternation")
       }
     ...
@@ -146,7 +146,7 @@ fn test_alternation() -> Unit raise {
   // Test alternation with different lengths (longest wins)
   lexmatch b"abc" with longest {
     ("a|ab|abc" as match_result, _) =>
-      if !(match_result is "abc") {
+      if !(match_result is b"abc") {
         fail("test_alternation")
       }
     ...
@@ -158,13 +158,13 @@ fn test_quantifiers() -> Unit raise {
   // Test optional, zero-or-more, one-or-more
   lexmatch b"abbbccc" with longest {
     (("a?" as optional) ("b*" as zero_or_more) ("c+" as one_or_more), _) => {
-      if !(optional is "a") {
+      if !(optional is b"a") {
         fail("test_quantifiers")
       }
-      if !(zero_or_more is "bbb") {
+      if !(zero_or_more is b"bbb") {
         fail("test_quantifiers")
       }
-      if !(one_or_more is "ccc") {
+      if !(one_or_more is b"ccc") {
         fail("test_quantifiers")
       }
     }
@@ -174,10 +174,10 @@ fn test_quantifiers() -> Unit raise {
   // Test zero-or-more with empty match
   lexmatch b"ccc" with longest {
     (("a*" as zero_match) ("c+" as one_or_more), _) => {
-      if !(zero_match is "") {
+      if !(zero_match is b"") {
         fail("test_quantifiers")
       }
-      if !(one_or_more is "ccc") {
+      if !(one_or_more is b"ccc") {
         fail("test_quantifiers")
       }
     }
@@ -190,7 +190,7 @@ fn test_wildcard_patterns() -> Unit raise {
   // Test dot matches any character
   lexmatch b"axb" with longest {
     ("a.b" as pattern, _) =>
-      if !(pattern is "axb") {
+      if !(pattern is b"axb") {
         fail("test_wildcard_patterns")
       }
     ...
@@ -199,7 +199,7 @@ fn test_wildcard_patterns() -> Unit raise {
   // Test .* matches everything
   lexmatch b"hello world 123" with longest {
     (".*" as everything, _) =>
-      if !(everything is "hello world 123") {
+      if !(everything is b"hello world 123") {
         fail("test_wildcard_patterns")
       }
     ...
@@ -208,7 +208,7 @@ fn test_wildcard_patterns() -> Unit raise {
   // Test .+ matches one or more
   lexmatch b"x" with longest {
     (".+" as one_or_more, _) =>
-      if !(one_or_more is "x") {
+      if !(one_or_more is b"x") {
         fail("test_wildcard_patterns")
       }
     ...
@@ -220,7 +220,7 @@ fn test_escaped_characters() -> Unit raise {
   // Test escaped dot
   lexmatch b"3.14" with longest {
     ("[0-9]+\.[0-9]+" as number, _) =>
-      if !(number is "3.14") {
+      if !(number is b"3.14") {
         fail("test_escaped_characters")
       }
     ...
@@ -229,7 +229,7 @@ fn test_escaped_characters() -> Unit raise {
   // Test escaped tab
   lexmatch b"hello\tworld" with longest {
     ("[a-zA-Z]+\t[a-zA-Z]+" as tab_separated, _) =>
-      if !(tab_separated is "hello\tworld") {
+      if !(tab_separated is b"hello\tworld") {
         fail("test_escaped_characters")
       }
     ...
@@ -245,7 +245,7 @@ fn test_edge_cases() -> Unit raise {
   // Test zero-or-more with empty string
   lexmatch b"" with longest {
     ("a*" as empty_match, _) =>
-      if !(empty_match is "") {
+      if !(empty_match is b"") {
         fail("test_edge_cases")
       }
     ...
@@ -254,7 +254,7 @@ fn test_edge_cases() -> Unit raise {
   // Test optional with no match
   lexmatch b"b" with longest {
     (("a?" as optional) ("b" as required), _) => {
-      guard optional == "" && required == 'b' else {
+      guard optional == b"" && required == b'b' else {
         // CR: required extracted as single byte?  
         fail("test_edge_cases")
       }
@@ -275,13 +275,13 @@ fn test_multiple_captures() -> Unit raise {
       ("[a-zA-Z]+" as third),
       _
     ) => {
-      if !(first is "first") {
+      if !(first is b"first") {
         fail("test_multiple_captures")
       }
-      if !(second is "second") {
+      if !(second is b"second") {
         fail("test_multiple_captures")
       }
-      if !(third is "third") {
+      if !(third is b"third") {
         fail("test_multiple_captures")
       }
     }
@@ -300,7 +300,7 @@ fn test_priority_matching() -> Unit raise {
   lexmatch b"identifier" with longest {
     ("if", _) => fail("test_priority_matching")
     ("[a-zA-Z_][a-zA-Z0-9_]*" as id, _) =>
-      if !(id is "identifier") {
+      if !(id is b"identifier") {
         fail("test_priority_matching")
       }
     _ => fail("test_priority_matching")
@@ -312,7 +312,7 @@ fn test_complex_char_classes() -> Unit raise {
   // Test alphanumeric with underscore
   lexmatch b"var_name123" with longest {
     ("[a-zA-Z0-9_]+" as alphanum, _) =>
-      if !(alphanum is "var_name123") {
+      if !(alphanum is b"var_name123") {
         fail("test_complex_char_classes")
       }
     ...
@@ -321,7 +321,7 @@ fn test_complex_char_classes() -> Unit raise {
   // Test non-digit pattern
   lexmatch b"abc" with longest {
     ("[^0-9]+" as non_digits, _) =>
-      if !(non_digits is "abc") {
+      if !(non_digits is b"abc") {
         fail("test_complex_char_classes")
       }
     ...
@@ -330,7 +330,7 @@ fn test_complex_char_classes() -> Unit raise {
   // Test mixed pattern
   lexmatch b"a1B2c3" with longest {
     (("[a-z]" as lower) ("[A-Z]*" as upper_star) ("[0-9]*" as digit_star), _) => {
-      guard lower == 'a' && upper_star == "" && digit_star == "1" else {
+      guard lower == b'a' && upper_star == b"" && digit_star == b"1" else {
         // CR: single char extracted as single byte
         fail("test_complex_char_classes")
       }
@@ -344,7 +344,7 @@ fn test_hex_escapes() -> Unit raise {
   // Test hex escape sequences
   lexmatch b"ABC" with longest {
     ("\x41\x42\x43" as hex_pattern, _) =>
-      if !(hex_pattern is "ABC") {
+      if !(hex_pattern is b"ABC") {
         fail("test_hex_escapes")
       }
     ...
@@ -363,7 +363,7 @@ fn test_email_pattern() -> Unit raise {
       ("[a-zA-Z]+" as tld),
       _
     ) => {
-      guard user is "user" && domain is "example" && tld is "com" else {
+      guard user is b"user" && domain is b"example" && tld is b"com" else {
         fail("test_email_pattern")
       }
     }
@@ -382,10 +382,10 @@ fn test_unicode_support() -> Unit raise {
     }
   }
 
-  assert_eq(f("我❤️中国"), 1)
-  assert_eq(f("𠮷"), 1)
-  assert_eq(f("あいうえお"), 2)
-  assert_eq(f("abc"), 3)
+  assert_eq(f(b"我❤️中国"), 1)
+  assert_eq(f(b"𠮷"), 1)
+  assert_eq(f(b"あいうえお"), 2)
+  assert_eq(f(b"abc"), 3)
 }
 
 ///|
@@ -398,11 +398,11 @@ fn test_reject_utf8_overlong_encoding() -> Unit raise {
     }
   }
 
-  assert_eq(f("a"), 1)
-  assert_eq(f("\xC1\xA1"), 2)
-  assert_eq(f("\xE0\x81\xA1"), 2)
-  assert_eq(f("\xC2\x99"), 1)
-  assert_eq(f("\xE0\x82\x99"), 2)
+  assert_eq(f(b"a"), 1)
+  assert_eq(f(b"\xC1\xA1"), 2)
+  assert_eq(f(b"\xE0\x81\xA1"), 2)
+  assert_eq(f(b"\xC2\x99"), 1)
+  assert_eq(f(b"\xE0\x82\x99"), 2)
 }
 
 ///|
@@ -424,14 +424,14 @@ fn test_utf8_decoding() -> Unit raise {
     buffer.to_string()
   }
 
-  assert_eq(f("我❤️中国"), "我❤️中国")
-  assert_eq(f("𠮷"), "𠮷")
-  assert_eq(f("あいうえお"), "あいうえお")
-  assert_eq(f("abc"), "abc")
+  assert_eq(f(b"我❤️中国"), "我❤️中国")
+  assert_eq(f(b"𠮷"), "𠮷")
+  assert_eq(f(b"あいうえお"), "あいうえお")
+  assert_eq(f(b"abc"), "abc")
   // Test handling of invalid UTF-8 sequences
   // \uD800
   assert_true(
-    try f("\xED\xA0\x80") catch {
+    try f(b"\xED\xA0\x80") catch {
       _ => true
     } noraise {
       _ => false
@@ -439,7 +439,7 @@ fn test_utf8_decoding() -> Unit raise {
   )
   // \u{110000}
   assert_true(
-    try f("\xF4\x90\x80\x80") catch {
+    try f(b"\xF4\x90\x80\x80") catch {
       _ => true
     } noraise {
       _ => false
@@ -522,42 +522,42 @@ fn test_posix_character_classes() -> Unit raise {
   let input = b"HELLO abc123_\r\n"
   lexmatch input {
     (_, "[[:lower:][:digit:]]+" as x, _) =>
-      if !(x is "abc123") {
+      if !(x is b"abc123") {
         fail("test_posix_character_classes")
       }
     _ => fail("test_posix_character_classes")
   }
   lexmatch input {
     (_, "[[:upper:]]+" as x, _) =>
-      if !(x is "HELLO") {
+      if !(x is b"HELLO") {
         fail("test_posix_character_classes")
       }
     _ => fail("test_posix_character_classes")
   }
   lexmatch input {
     (_, "[[:upper:][:blank:][:lower:]]+" as x, _) =>
-      if !(x is "HELLO abc") {
+      if !(x is b"HELLO abc") {
         fail("test_posix_character_classes")
       }
     _ => fail("test_posix_character_classes")
   }
   lexmatch input {
     (_, "[[:xdigit:]]{6}" as x, _) =>
-      if !(x is "abc123") {
+      if !(x is b"abc123") {
         fail("test_posix_character_classes")
       }
     _ => fail("test_posix_character_classes")
   }
   lexmatch input {
     (_, "[[:alnum:]\r\n]+[[:digit:]]" as x, _) =>
-      if !(x is "abc123") {
+      if !(x is b"abc123") {
         fail("test_posix_character_classes")
       }
     _ => fail("test_posix_character_classes")
   }
   lexmatch input {
     (_, "[[:word:]]+[[:blank:]][[:word:]]+" as x, _) =>
-      if !(x is "HELLO abc123_") {
+      if !(x is b"HELLO abc123_") {
         println("Got: \{x}")
         fail("test_posix_character_classes")
       }
@@ -603,13 +603,13 @@ fn main {
   println(try? test_utf16_support())
   println("test_utf16_decoding")
   println(try? test_utf16_decoding())
-  test_utf8_decoding2("我❤️中国")
-  test_utf8_decoding2("𠮷")
-  test_utf8_decoding2("あいうえお")
-  test_utf8_decoding2("abc")
-  test_utf8_decoding2("\xED\xA0\x80")
+  test_utf8_decoding2(b"我❤️中国")
+  test_utf8_decoding2(b"𠮷")
+  test_utf8_decoding2(b"あいうえお")
+  test_utf8_decoding2(b"abc")
+  test_utf8_decoding2(b"\xED\xA0\x80")
   // \u{110000}
-  test_utf8_decoding2("\xF4\x90\x80\x80")
+  test_utf8_decoding2(b"\xF4\x90\x80\x80")
   println("Testing UTF-8 decoding with various inputs")
   test_utf8_decoding2([0x61]) // valid
   test_utf8_decoding2([0xC1, 0xA1]) // Overlong encoding
@@ -626,22 +626,22 @@ fn main {
 
 ///|
 fn init {
-  simple("a")
-  simple("b")
-  simple("ab")
-  simple("abc")
-  simple("abcd")
-  a_star_capture("a")
-  a_star_capture("aa")
-  a_star_capture("aaa")
-  a_star_capture("aaaa")
-  longest_match("x")
-  longest_match("le")
-  longest_match("let")
-  longest_match("letx")
-  longest_match2("a")
-  longest_match2("ab")
-  longest_match2("abc")
+  simple(b"a")
+  simple(b"b")
+  simple(b"ab")
+  simple(b"abc")
+  simple(b"abcd")
+  a_star_capture(b"a")
+  a_star_capture(b"aa")
+  a_star_capture(b"aaa")
+  a_star_capture(b"aaaa")
+  longest_match(b"x")
+  longest_match(b"le")
+  longest_match(b"let")
+  longest_match(b"letx")
+  longest_match2(b"a")
+  longest_match2(b"ab")
+  longest_match2(b"abc")
 
   // Test for escaped characters
   lexmatch b"\"" with longest {

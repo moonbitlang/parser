@@ -4,7 +4,7 @@
 #label_migration(y, alias=yy)
 #label_migration(z, alias=zz)
 fn f(x~ : Int, y? : Int = 42, z? : Int) -> Unit {
-  println("x:\{x}, y:\{y}, z:\{z}")
+  println("x:\{x}, y:\{y}, z:\{Debug::to_repr(z)}")
 }
 
 ///|

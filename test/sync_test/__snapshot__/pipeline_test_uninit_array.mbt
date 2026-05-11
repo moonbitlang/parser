@@ -43,12 +43,12 @@ fn init {
 }
 
 // recursive newtype, aka any ref
-struct RecNewType(RecNewType?) derive(Show)
+struct RecNewType(RecNewType?) derive(Debug)
 
 fn init {
   let xs : UninitializedArray[RecNewType] = UninitializedArray::make(10)
   xs[0] = Some(Some(None))
-  println(xs[0])
+  debug(xs[0])
 }
 
 #external

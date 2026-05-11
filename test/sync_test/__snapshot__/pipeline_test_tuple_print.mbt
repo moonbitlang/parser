@@ -1,5 +1,5 @@
 
 
 fn init {
-  println((1,2))
+  debug((1,2))
 }

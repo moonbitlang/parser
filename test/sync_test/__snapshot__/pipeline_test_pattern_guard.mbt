@@ -1,8 +1,8 @@
 fn f1(x: Int??) -> Unit {
   match x {
     Some(y) if y is Some(z) && z >= 0 => {
-      println(y)
-      println(z)
+      debug(y)
+      debug(z)
     }
     Some(_) => println("some")
     None => println("none")

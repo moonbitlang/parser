@@ -5,7 +5,7 @@ fn[T, U] map(arr : ArrayView[T], f : (T) -> U) -> ArrayView[U] {
   for a in arr {
     result.push(f(a))
   }
-  result[:]
+  result
 }
 
 ///|
@@ -25,5 +25,5 @@ fn[T : Show] iter(arr : ArrayView[T], f : (T) -> Unit) -> Unit {
 ///|
 fn main {
   let arr = [1, 2, 3, 4, 5]
-  iter(arr[:], println)
+  iter(arr, println)
 }

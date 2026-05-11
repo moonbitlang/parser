@@ -17,8 +17,8 @@ fn f(b1 : Bool, b2 : Bool) -> Int raise {
 
 ///|
 fn main {
-  println(try? f(true, true))
-  println(try? f(false, false))
-  println(try? f(true, false))
-  println(try? f(false, true))
+  debug(try? f(true, true))
+  debug(try? f(false, false))
+  debug(try? f(true, false))
+  debug(try? f(false, true))
 }

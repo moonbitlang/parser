@@ -1,3 +1,5 @@
+//!build: -w -27
+
 ///|
 fn[T] each(data : Array[T], f : (T) -> Unit) -> Unit {
   loop data[:] {

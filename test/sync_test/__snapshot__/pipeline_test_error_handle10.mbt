@@ -7,6 +7,6 @@ fn f(x : UInt64) -> UInt64 raise {
 }
 
 fn main {
-  println(try? f(0))
-  println(try? f(1))
+  debug(try? f(0))
+  debug(try? f(1))
 }

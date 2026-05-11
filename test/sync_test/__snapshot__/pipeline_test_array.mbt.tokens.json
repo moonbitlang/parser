@@ -347,47 +347,47 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "8:3-8:10"
+    "loc": "8:3-8:8"
   },
   {
     "token": "LPAREN",
-    "loc": "8:10-8:11"
+    "loc": "8:8-8:9"
   },
   {
     "token": [
       "UIDENT",
       "FixedArray"
     ],
-    "loc": "8:11-8:21"
+    "loc": "8:9-8:19"
   },
   {
     "token": "COLONCOLON",
-    "loc": "8:21-8:23"
+    "loc": "8:19-8:21"
   },
   {
     "token": [
       "LIDENT",
       "default"
     ],
-    "loc": "8:23-8:30"
+    "loc": "8:21-8:28"
   },
   {
     "token": "LPAREN",
+    "loc": "8:28-8:29"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "8:29-8:30"
+  },
+  {
+    "token": "RPAREN",
     "loc": "8:30-8:31"
   },
   {
-    "token": "RPAREN",
-    "loc": "8:31-8:32"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "8:32-8:33"
-  },
-  {
     "token": "NEWLINE",
-    "loc": "8:33-8:34"
+    "loc": "8:31-8:32"
   },
   {
     "token": "RBRACE",

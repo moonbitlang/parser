@@ -1,6 +1,6 @@
 /// @intrinsic %string.substring
 fn substring(str : String, start : Int, end : Int) -> String {
-  str.view(start_offset=start, end_offset=end).to_string()
+  str.view(start_offset=start, end_offset=end).to_owned()
 }
 
 fn use_substring(substring : (String, Int, Int) -> String, str : String, start : Int, end : Int) -> String {

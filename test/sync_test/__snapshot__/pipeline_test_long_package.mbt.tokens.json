@@ -113,20 +113,20 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "3:61-3:68"
+    "loc": "3:61-3:66"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "3:68-3:68"
+    "loc": "3:66-3:66"
   },
   {
     "token": "NEWLINE",
-    "loc": "3:68-3:69"
+    "loc": "3:66-3:67"
   },
   {
     "token": "LBRACE",
@@ -161,13 +161,13 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "4:20-4:27"
+    "loc": "4:20-4:25"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:27-4:28"
+    "loc": "4:25-4:26"
   },
   {
     "token": "RBRACE",

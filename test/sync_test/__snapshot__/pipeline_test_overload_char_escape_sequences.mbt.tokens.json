@@ -73,196 +73,120 @@
     "loc": "3:54-3:55"
   },
   {
-    "token": "LPAREN",
-    "loc": "4:3-4:4"
-  },
-  {
     "token": [
-      "CHAR",
+      "BYTE",
       "a"
     ],
-    "loc": "4:4-4:7"
-  },
-  {
-    "token": "COLON",
-    "loc": "4:8-4:9"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Byte"
-    ],
-    "loc": "4:10-4:14"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "4:14-4:15"
+    "loc": "4:3-4:7"
   },
   {
     "token": "PIPE",
-    "loc": "4:16-4:18"
+    "loc": "4:8-4:10"
   },
   {
     "token": [
       "LIDENT",
       "println"
     ],
-    "loc": "4:19-4:26"
+    "loc": "4:11-4:18"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "4:26-4:26"
+    "loc": "4:18-4:18"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:26-4:27"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "5:3-5:4"
+    "loc": "4:18-4:19"
   },
   {
     "token": [
-      "CHAR",
+      "BYTE",
       "\\xFF"
     ],
-    "loc": "5:4-5:10"
-  },
-  {
-    "token": "COLON",
-    "loc": "5:11-5:12"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Byte"
-    ],
-    "loc": "5:13-5:17"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "5:17-5:18"
+    "loc": "5:3-5:10"
   },
   {
     "token": "PIPE",
-    "loc": "5:19-5:21"
+    "loc": "5:11-5:13"
   },
   {
     "token": [
       "LIDENT",
       "println"
     ],
-    "loc": "5:22-5:29"
+    "loc": "5:14-5:21"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "5:29-5:29"
+    "loc": "5:21-5:21"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:29-5:30"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "6:3-6:4"
+    "loc": "5:21-5:22"
   },
   {
     "token": [
-      "CHAR",
+      "BYTE",
       "\\o377"
     ],
-    "loc": "6:4-6:11"
-  },
-  {
-    "token": "COLON",
-    "loc": "6:12-6:13"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Byte"
-    ],
-    "loc": "6:14-6:18"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "6:18-6:19"
+    "loc": "6:3-6:11"
   },
   {
     "token": "PIPE",
-    "loc": "6:20-6:22"
+    "loc": "6:12-6:14"
   },
   {
     "token": [
       "LIDENT",
       "println"
     ],
-    "loc": "6:23-6:30"
+    "loc": "6:15-6:22"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "6:30-6:30"
+    "loc": "6:22-6:22"
   },
   {
     "token": "NEWLINE",
-    "loc": "6:30-6:31"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "7:3-7:4"
+    "loc": "6:22-6:23"
   },
   {
     "token": [
-      "CHAR",
+      "BYTE",
       "\\\\"
     ],
-    "loc": "7:4-7:8"
-  },
-  {
-    "token": "COLON",
-    "loc": "7:9-7:10"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Byte"
-    ],
-    "loc": "7:11-7:15"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "7:15-7:16"
+    "loc": "7:3-7:8"
   },
   {
     "token": "PIPE",
-    "loc": "7:17-7:19"
+    "loc": "7:9-7:11"
   },
   {
     "token": [
       "LIDENT",
       "println"
     ],
-    "loc": "7:20-7:27"
+    "loc": "7:12-7:19"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "7:27-7:27"
+    "loc": "7:19-7:19"
   },
   {
     "token": "NEWLINE",
-    "loc": "7:27-7:28"
+    "loc": "7:19-7:20"
   },
   {
     "token": [
@@ -495,77 +419,77 @@
   },
   {
     "token": [
-      "CHAR",
+      "BYTE",
       "a"
     ],
-    "loc": "13:13-13:16"
+    "loc": "13:13-13:17"
   },
   {
     "token": "COMMA",
-    "loc": "13:16-13:17"
+    "loc": "13:17-13:18"
   },
   {
     "token": [
-      "CHAR",
+      "BYTE",
       "\\xFF"
     ],
-    "loc": "13:18-13:24"
+    "loc": "13:19-13:26"
   },
   {
     "token": "COMMA",
-    "loc": "13:24-13:25"
+    "loc": "13:26-13:27"
   },
   {
     "token": [
-      "CHAR",
+      "BYTE",
       "\\o377"
     ],
-    "loc": "13:26-13:33"
+    "loc": "13:28-13:36"
   },
   {
     "token": "COMMA",
-    "loc": "13:33-13:34"
+    "loc": "13:36-13:37"
   },
   {
     "token": [
-      "CHAR",
+      "BYTE",
       "\\\\"
     ],
-    "loc": "13:35-13:39"
+    "loc": "13:38-13:43"
   },
   {
     "token": "RBRACKET",
-    "loc": "13:39-13:40"
+    "loc": "13:43-13:44"
   },
   {
     "token": "COLON",
-    "loc": "13:41-13:42"
+    "loc": "13:45-13:46"
   },
   {
     "token": [
       "UIDENT",
       "Bytes"
     ],
-    "loc": "13:43-13:48"
+    "loc": "13:47-13:52"
   },
   {
     "token": "RPAREN",
-    "loc": "13:48-13:49"
+    "loc": "13:52-13:53"
   },
   {
     "token": "RPAREN",
-    "loc": "13:49-13:50"
+    "loc": "13:53-13:54"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "13:50-13:50"
+    "loc": "13:54-13:54"
   },
   {
     "token": "NEWLINE",
-    "loc": "13:50-13:51"
+    "loc": "13:54-13:55"
   },
   {
     "token": [

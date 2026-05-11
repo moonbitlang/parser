@@ -24,7 +24,7 @@ fn fib2(n : Int)->Int{
 }
 
 fn max(i: Int, n : Int)->Int{
-  for {
+  for ;; {
     if i >= n {
       return i
     } else {

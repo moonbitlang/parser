@@ -1,3 +1,4 @@
+//!build: -w -deprecated_syntax
 ///|
 fn init {
   struct S(Int, String)

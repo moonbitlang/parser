@@ -1,7 +1,7 @@
 enum E {
   A
   B
-} derive(Show)
+}
 
 fn f(x : E) -> Unit {
   match x {
@@ -13,4 +13,11 @@ fn f(x : E) -> Unit {
 fn init {
   f(A)
   f(B)
+}
+
+impl Show for E with output(self, logger) {
+  match self {
+    A => logger.write_string("A")
+    B => logger.write_string("B")
+  }
 }

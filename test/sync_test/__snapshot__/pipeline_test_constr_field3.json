@@ -224,6 +224,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -249,7 +250,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "println"
+                          "value": "debug"
                         }
                       }
                     }
@@ -411,6 +412,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -673,6 +675,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

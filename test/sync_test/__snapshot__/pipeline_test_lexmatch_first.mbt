@@ -1,3 +1,5 @@
+//!build: -w -20-27
+
 ///|
 fn test_firstmatch() -> Unit raise {
   assert_eq(

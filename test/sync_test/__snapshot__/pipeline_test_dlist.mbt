@@ -95,11 +95,13 @@ fn[X] DList::prev(self : DList[X]) -> Bool {
 
 fn[X] DList::iter(self : DList[X], f : (X) -> Unit) -> Unit {
   let mut i = 10
-  loop self.head {
-    Node::Nil => ()
-    Link(elem~, next~, ..) => {
-      f(elem)
-      continue next
+  for curr = self.head {
+    match curr {
+      Node::Nil => break
+      Link(elem~, next~, ..) => {
+        f(elem)
+        continue next
+      }
     }
   }
 }

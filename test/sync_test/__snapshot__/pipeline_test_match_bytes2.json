@@ -107,6 +107,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -160,10 +161,10 @@
                                 "loc": null,
                                 "children": [
                                   {
-                                    "kind": "ArrayPattern::StringSpread",
+                                    "kind": "ArrayPattern::BytesSpread",
                                     "loc": null,
                                     "children": {
-                                      "str": "\\xff\\xff"
+                                      "bytes": "\\xff\\xff"
                                     }
                                   }
                                 ]
@@ -382,6 +383,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

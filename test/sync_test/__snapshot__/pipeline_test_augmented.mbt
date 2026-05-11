@@ -1,6 +1,6 @@
 struct T {
   mut x : Int
-} derive(Show)
+} derive(Debug)
 
 fn init {
   let mut a = 10
@@ -16,34 +16,34 @@ fn init {
   println(a)
   let a = { x: 10 }
   a.x += 2 * 5
-  println(a)
+  debug(a)
   a.x -= 2 + 3
-  println(a)
+  debug(a)
   a.x *= 5 - 2
-  println(a)
+  debug(a)
   a.x /= 5 % 9
-  println(a)
+  debug(a)
   a.x %= 10 / 2
-  println(a)
+  debug(a)
   let a: FixedArray[_] = [10]
   a[0]
   +=
   ((2 * 5))
-  println(a)
+  debug(a)
   a[0]
   -=
   ((2 + 3))
-  println(a)
+  debug(a)
   a[0]
   *=
   ((5 - 2))
-  println(a)
+  debug(a)
   a[0]
   /=
   ((5 % 9))
-  println(a)
+  debug(a)
   a[0]
   %=
   ((10 / 2))
-  println(a)
+  debug(a)
 }

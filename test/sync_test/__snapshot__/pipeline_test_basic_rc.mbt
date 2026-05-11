@@ -35,10 +35,15 @@ pub fn f_join2(r : R[Int], b : Bool) -> Unit {
 }
 
 pub fn f_loop1(r1 : R[Int], r2 : R[Int], r3 : R[Int], c : Int) -> Unit {
-  loop (c, r1) {
-    (0, _) => ignore(r2)
-    (1, _) => return
-    (n, r) => continue (n - 2, r)
+  for n = c, r = r1 {
+    match (n, r) {
+      (0, _) => {
+        ignore(r2)
+        break
+      }
+      (1, _) => return
+      (n, r) => continue n - 2, r
+    }
   }
   let _ = r3
 }

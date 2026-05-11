@@ -277,23 +277,31 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "10:19-10:26"
+    "loc": "10:19-10:24"
   },
   {
     "token": "LPAREN",
-    "loc": "10:26-10:27"
+    "loc": "10:24-10:25"
   },
   {
     "token": [
       "LIDENT",
       "tuple"
     ],
-    "loc": "10:27-10:32"
+    "loc": "10:25-10:30"
   },
   {
     "token": "LPAREN",
+    "loc": "10:30-10:31"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "10:31-10:32"
+  },
+  {
+    "token": "RPAREN",
     "loc": "10:32-10:33"
   },
   {
@@ -301,16 +309,8 @@
     "loc": "10:33-10:34"
   },
   {
-    "token": "RPAREN",
-    "loc": "10:34-10:35"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "10:35-10:36"
-  },
-  {
     "token": "NEWLINE",
-    "loc": "10:36-10:37"
+    "loc": "10:34-10:35"
   },
   {
     "token": "RBRACE",

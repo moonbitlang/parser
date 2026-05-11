@@ -1,3 +1,5 @@
+//!build: -w -27
+
 fn init {
   println(fib(10))
 }

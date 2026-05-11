@@ -1,5 +1,5 @@
 
-struct T(T?) derive (Show)
+struct T(T?) derive(Debug)
 
 fn open(x: T) -> T {
   match x {
@@ -17,12 +17,12 @@ fn init {
   let x2 = wrap(x1)
   let x3 = wrap(x2)
   let x4 = wrap(x3)
-  println(x4)
+  debug(x4)
   let y3 = open(x4)
   let y2 = open(y3)
   let y1 = open(y2)
-  println(y1)
+  debug(y1)
   let y0 = open(y1)
   let yy = open(y0)
-  println(yy)
+  debug(yy)
 }

@@ -727,35 +727,6 @@ test "exception_decl to_json" {
     "loc": null,
     "children": {},
   })
-  let int_type = Name(
-    constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
-    loc=dummy_loc,
-  )
-  json_inspect(SinglePayload(int_type).json_repr(dummy_loc), content={
-    "kind": "ExceptionDecl::SinglePayload",
-    "loc": null,
-    "children": {
-      "value": {
-        "kind": "Type::Name",
-        "loc": null,
-        "children": {
-          "constr_id": {
-            "kind": "ConstrId",
-            "loc": null,
-            "children": {
-              "id": {
-                "kind": "LongIdent::Ident",
-                "loc": null,
-                "children": { "value": "Int" },
-              },
-            },
-          },
-          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
-        },
-      },
-    },
-  })
   let constr_name = ConstrName::{ name: "TestConstr", loc: dummy_loc }
   let constr_decl = ConstrDecl::{
     name: constr_name,
@@ -808,40 +779,11 @@ test "type_desc to_json" {
     "loc": null,
     "children": {},
   })
-  json_inspect(Extern.json_repr(dummy_loc), content={
-    "kind": "TypeDesc::Extern",
-    "loc": null,
-    "children": {},
-  })
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
     tys=@list.from_array([]),
     loc=dummy_loc,
   )
-  json_inspect(SinglePayload(int_type).json_repr(dummy_loc), content={
-    "kind": "ExceptionDecl::SinglePayload",
-    "loc": null,
-    "children": {
-      "value": {
-        "kind": "Type::Name",
-        "loc": null,
-        "children": {
-          "constr_id": {
-            "kind": "ConstrId",
-            "loc": null,
-            "children": {
-              "id": {
-                "kind": "LongIdent::Ident",
-                "loc": null,
-                "children": { "value": "Int" },
-              },
-            },
-          },
-          "tys": { "kind": "Type::Name::TypeList", "loc": null, "children": [] },
-        },
-      },
-    },
-  })
   json_inspect(Error(NoPayload).json_repr(dummy_loc), content={
     "kind": "TypeDesc::Error",
     "loc": null,
@@ -2443,66 +2385,6 @@ test "map_pat_elem to_json" {
 }
 
 ///|
-test "local_type_decl to_json" {
-  let deriving_directive = DerivingDirective::{
-    type_name: TypeName::{
-      name: LongIdent::Ident(name="Show"),
-      is_object: false,
-      loc: dummy_loc,
-    },
-    args: @list.from_array([]),
-    loc: dummy_loc,
-  }
-  let local_type_decl = LocalTypeDecl::{
-    tycon: "TestType",
-    tycon_loc: dummy_loc,
-    components: Abstract,
-    deriving: @list.from_array([deriving_directive]),
-  }
-  json_inspect(local_type_decl.json_repr(), content={
-    "kind": "LocalTypeDecl",
-    "loc": null,
-    "children": {
-      "tycon": "TestType",
-      "components": {
-        "kind": "TypeDesc::Abstract",
-        "loc": null,
-        "children": {},
-      },
-      "deriving": {
-        "kind": "LocalTypeDecl::DerivingList",
-        "loc": null,
-        "children": [
-          {
-            "kind": "DerivingDirective",
-            "loc": null,
-            "children": {
-              "type_name": {
-                "kind": "TypeName",
-                "loc": null,
-                "children": {
-                  "name": {
-                    "kind": "LongIdent::Ident",
-                    "loc": null,
-                    "children": { "value": "Show" },
-                  },
-                  "is_object": false,
-                },
-              },
-              "args": {
-                "kind": "DerivingDirective::ArgList",
-                "loc": null,
-                "children": [],
-              },
-            },
-          },
-        ],
-      },
-    },
-  })
-}
-
-///|
 test "deriving_directive to_json" {
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
   let argument = Argument::{ value: unit_expr, kind: Positional }
@@ -2564,7 +2446,7 @@ test "type_decl to_json" {
     tycon: "TestType",
     tycon_loc: dummy_loc,
     params: @list.from_array([type_decl_binder]),
-    components: Extern,
+    components: Abstract,
     attrs: @list.from_array([dummy_attribute]),
     doc: dummy_docstring,
     type_vis: Default,
@@ -2584,7 +2466,11 @@ test "type_decl to_json" {
           { "kind": "TypeDeclBinder", "loc": null, "children": { "name": "T" } },
         ],
       },
-      "components": { "kind": "TypeDesc::Extern", "loc": null, "children": {} },
+      "components": {
+        "kind": "TypeDesc::Abstract",
+        "loc": null,
+        "children": {},
+      },
       "attrs": {
         "kind": "TypeDecl::AttrList",
         "loc": null,
@@ -2611,51 +2497,22 @@ test "type_decl to_json" {
 ///|
 test "decl_body to_json" {
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
-  let local_type_decl = LocalTypeDecl::{
-    tycon: "LocalType",
-    tycon_loc: dummy_loc,
-    components: Abstract,
-    deriving: @list.from_array([]),
-  }
-  json_inspect(
-    DeclBody(local_types=@list.from_array([local_type_decl]), expr=unit_expr).json_repr(
-      dummy_loc,
-    ),
-    content={
-      "kind": "DeclBody::DeclBody",
-      "loc": null,
-      "children": {
-        "local_types": {
-          "kind": "DeclBody::DeclBody::LocalTypeList",
-          "loc": null,
-          "children": [
-            {
-              "kind": "LocalTypeDecl",
-              "loc": null,
-              "children": {
-                "tycon": "LocalType",
-                "components": {
-                  "kind": "TypeDesc::Abstract",
-                  "loc": null,
-                  "children": {},
-                },
-                "deriving": {
-                  "kind": "LocalTypeDecl::DerivingList",
-                  "loc": null,
-                  "children": [],
-                },
-              },
-            },
-          ],
-        },
-        "expr": {
-          "kind": "Expr::Unit",
-          "loc": null,
-          "children": { "faked": false },
-        },
+  json_inspect(DeclBody(expr=unit_expr).json_repr(dummy_loc), content={
+    "kind": "DeclBody::DeclBody",
+    "loc": null,
+    "children": {
+      "local_types": {
+        "kind": "DeclBody::DeclBody::LocalTypeList",
+        "loc": null,
+        "children": [],
+      },
+      "expr": {
+        "kind": "Expr::Unit",
+        "loc": null,
+        "children": { "faked": false },
       },
     },
-  )
+  })
   json_inspect(
     DeclStubs(
       Import(

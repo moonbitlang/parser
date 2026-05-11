@@ -5,7 +5,7 @@ fn init {
   println("code finished")
 }
 
-suberror Err derive(Show)
+suberror Err
 
 fn function_with_error(coin : Bool) -> Unit raise Err {
   if coin {
@@ -82,7 +82,7 @@ fn init {
 
 fn loop_control(cmd : String) -> Unit {
   defer println("defer outside loop")
-  for _ in 0..<1 {
+  for i = 0; i < 1; i = i + 1 {
     defer println("defer inside loop")
     match cmd {
       "continue" => {
@@ -163,7 +163,7 @@ fn init {
 
 fn basic_for_in(cmd : String, it : Iter[Int]) -> Unit raise {
   defer println("outer-most defer")
-  l1~: for _ in 0..<1 {
+  l1~: for i = 0; i < 1; i = i + 1 {
     defer println("defer for outer loop")
     for _ in it {
       defer println("defer inside `for .. in`")
@@ -200,4 +200,8 @@ fn init {
   ignore(try? basic_for_in("raise", data.iter()))
   println("==== `for .. in`: return ====")
   ignore(try? basic_for_in("return", data.iter()))
+}
+
+impl Show for Err with output(self, logger) {
+  logger.write_string("Err")
 }

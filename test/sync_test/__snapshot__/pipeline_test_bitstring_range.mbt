@@ -15,11 +15,11 @@ fn f2(x: Bytes) -> Unit {
 }
 
 fn main {
-  f1("")
-  f2("")
-  f1("\xAA")
-  f2("\xAA")
-  f1("\xAA\xAA")
-  f2("\xAA\xAA")
+  f1(b"")
+  f2(b"")
+  f1(b"\xAA")
+  f2(b"\xAA")
+  f1(b"\xAA\xAA")
+  f2(b"\xAA\xAA")
 
 }

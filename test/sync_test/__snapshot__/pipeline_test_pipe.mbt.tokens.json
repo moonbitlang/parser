@@ -1218,20 +1218,20 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "37:25-37:32"
+    "loc": "37:25-37:30"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "37:32-37:32"
+    "loc": "37:30-37:30"
   },
   {
     "token": "NEWLINE",
-    "loc": "37:32-37:33"
+    "loc": "37:30-37:31"
   },
   {
     "token": "LET",
@@ -1295,28 +1295,28 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "39:3-39:10"
+    "loc": "39:3-39:8"
   },
   {
     "token": "LPAREN",
-    "loc": "39:10-39:11"
+    "loc": "39:8-39:9"
   },
   {
     "token": [
       "LIDENT",
       "opt"
     ],
-    "loc": "39:11-39:14"
+    "loc": "39:9-39:12"
   },
   {
     "token": "RPAREN",
-    "loc": "39:14-39:15"
+    "loc": "39:12-39:13"
   },
   {
     "token": "NEWLINE",
-    "loc": "39:15-39:16"
+    "loc": "39:13-39:14"
   },
   {
     "token": "RBRACE",
@@ -1400,28 +1400,28 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "43:3-43:10"
+    "loc": "43:3-43:8"
   },
   {
     "token": "LPAREN",
-    "loc": "43:10-43:11"
+    "loc": "43:8-43:9"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
-    "loc": "43:11-43:12"
+    "loc": "43:9-43:10"
   },
   {
     "token": "RPAREN",
-    "loc": "43:12-43:13"
+    "loc": "43:10-43:11"
   },
   {
     "token": "NEWLINE",
-    "loc": "43:13-43:14"
+    "loc": "43:11-43:12"
   },
   {
     "token": "RBRACE",
@@ -1672,28 +1672,28 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "51:3-51:10"
+    "loc": "51:3-51:8"
   },
   {
     "token": "LPAREN",
-    "loc": "51:10-51:11"
+    "loc": "51:8-51:9"
   },
   {
     "token": [
       "LIDENT",
       "opt"
     ],
-    "loc": "51:11-51:14"
+    "loc": "51:9-51:12"
   },
   {
     "token": "RPAREN",
-    "loc": "51:14-51:15"
+    "loc": "51:12-51:13"
   },
   {
     "token": "NEWLINE",
-    "loc": "51:15-51:16"
+    "loc": "51:13-51:14"
   },
   {
     "token": "RBRACE",

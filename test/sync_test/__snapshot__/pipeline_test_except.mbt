@@ -1,6 +1,6 @@
 suberror OError {
   OError(Option[Int])
-} derive(Show)
+} derive(Debug)
 
 fn f(x: Int) -> Option[Int] raise OError {
   if x == 0 {
@@ -47,8 +47,8 @@ fn[X, V, E : Error] as_result(f: (X) -> V raise E) -> (X) -> Result[V, E] {
 }
 
 fn init {
-  println(as_result(f)(0))
-  println(as_result(f)(1))
-  println(as_result(f)(-1))
-  println(as_result(f)(42))
+  debug(as_result(f)(0))
+  debug(as_result(f)(1))
+  debug(as_result(f)(-1))
+  debug(as_result(f)(42))
 }

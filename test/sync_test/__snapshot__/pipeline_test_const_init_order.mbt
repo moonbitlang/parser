@@ -2,12 +2,12 @@
 struct T {
   x : Int
   y : Int?
-} derive(Show)
+} derive(Debug)
 
 ///|
 pub let a : T = { x: 0, y: Some(1) }
 
 ///|
 fn main {
-  println(a)
+  debug(a)
 }

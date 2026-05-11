@@ -46,8 +46,8 @@ declare impl Show for Int with to_string(self : Int) -> String { "" }
 ///|
 declare type Alias = Int
 
-///|
-declare type Newtype Int
+
+
 
 ///|
 declare impl Show with to_string(self : Int) -> String = "stub"

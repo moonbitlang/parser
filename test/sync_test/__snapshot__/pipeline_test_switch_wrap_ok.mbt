@@ -6,5 +6,5 @@ pub fn f(x : Int?) -> Int raise {
 
 ///|
 fn main {
-  println(try? f(Some(42)))
+  debug(try? f(Some(42)))
 }

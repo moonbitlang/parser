@@ -144,6 +144,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -188,6 +189,16 @@
                     }
                   }
                 }
+              },
+              "init": {
+                "kind": "Expr::ForEach::Init",
+                "loc": null,
+                "children": []
+              },
+              "continue_block": {
+                "kind": "Expr::ForEach::ContinueBlock",
+                "loc": null,
+                "children": []
               },
               "body": {
                 "kind": "Expr::If",
@@ -285,6 +296,7 @@
                   }
                 }
               },
+              "where_clause": null,
               "label": null
             }
           }
@@ -332,7 +344,7 @@
         "loc": null,
         "children": {
           "constant": {
-            "kind": "Constant::String",
+            "kind": "Constant::Bytes",
             "loc": null,
             "children": {
               "value": "HELLO"
@@ -398,6 +410,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -482,7 +495,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::String",
+                                                "kind": "Constant::Bytes",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "中文"
@@ -506,7 +519,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::Char",
+                                                "kind": "Constant::Byte",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "\\xE4"
@@ -648,7 +661,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::Char",
+                                                "kind": "Constant::Byte",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "L"
@@ -818,7 +831,7 @@
                                                         "loc": null,
                                                         "children": {
                                                           "constant": {
-                                                            "kind": "Constant::Char",
+                                                            "kind": "Constant::Byte",
                                                             "loc": null,
                                                             "children": {
                                                               "value": "a"
@@ -858,7 +871,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::Char",
+                                                "kind": "Constant::Byte",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "e"
@@ -979,7 +992,7 @@
                                                     "loc": null,
                                                     "children": {
                                                       "constant": {
-                                                        "kind": "Constant::Char",
+                                                        "kind": "Constant::Byte",
                                                         "loc": null,
                                                         "children": {
                                                           "value": "A"
@@ -1039,7 +1052,7 @@
                                         "loc": null,
                                         "children": {
                                           "constant": {
-                                            "kind": "Constant::Char",
+                                            "kind": "Constant::Byte",
                                             "loc": null,
                                             "children": {
                                               "value": "e"

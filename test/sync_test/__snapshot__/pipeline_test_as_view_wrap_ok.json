@@ -52,7 +52,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Debug"
                         }
                       },
                       "is_object": false
@@ -291,6 +291,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -367,30 +368,22 @@
                 ]
               },
               "last_expr": {
-                "kind": "Expr::ArrayGetSlice",
+                "kind": "Expr::Ident",
                 "loc": null,
                 "children": {
-                  "array": {
-                    "kind": "Expr::Ident",
+                  "id": {
+                    "kind": "Var",
                     "loc": null,
                     "children": {
-                      "id": {
-                        "kind": "Var",
+                      "name": {
+                        "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "name": {
-                            "kind": "LongIdent::Ident",
-                            "loc": null,
-                            "children": {
-                              "value": "arr"
-                            }
-                          }
+                          "value": "arr"
                         }
                       }
                     }
-                  },
-                  "start_index": null,
-                  "end_index": null
+                  }
                 }
               }
             }
@@ -569,6 +562,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -645,30 +639,22 @@
                 ]
               },
               "last_expr": {
-                "kind": "Expr::ArrayGetSlice",
+                "kind": "Expr::Ident",
                 "loc": null,
                 "children": {
-                  "array": {
-                    "kind": "Expr::Ident",
+                  "id": {
+                    "kind": "Var",
                     "loc": null,
                     "children": {
-                      "id": {
-                        "kind": "Var",
+                      "name": {
+                        "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "name": {
-                            "kind": "LongIdent::Ident",
-                            "loc": null,
-                            "children": {
-                              "value": "bytes"
-                            }
-                          }
+                          "value": "bytes"
                         }
                       }
                     }
-                  },
-                  "start_index": null,
-                  "end_index": null
+                  }
                 }
               }
             }
@@ -847,6 +833,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -923,30 +910,22 @@
                 ]
               },
               "last_expr": {
-                "kind": "Expr::ArrayGetSlice",
+                "kind": "Expr::Ident",
                 "loc": null,
                 "children": {
-                  "array": {
-                    "kind": "Expr::Ident",
+                  "id": {
+                    "kind": "Var",
                     "loc": null,
                     "children": {
-                      "id": {
-                        "kind": "Var",
+                      "name": {
+                        "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "name": {
-                            "kind": "LongIdent::Ident",
-                            "loc": null,
-                            "children": {
-                              "value": "str"
-                            }
-                          }
+                          "value": "str"
                         }
                       }
                     }
-                  },
-                  "start_index": null,
-                  "end_index": null
+                  }
                 }
               }
             }
@@ -998,6 +977,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1175,7 +1155,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "println"
+                                  "value": "debug"
                                 }
                               }
                             }
@@ -1344,7 +1324,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "println"
+                                  "value": "debug"
                                 }
                               }
                             }
@@ -1401,7 +1381,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::String",
+                                                "kind": "Constant::Bytes",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "abc"
@@ -1475,7 +1455,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "println"
+                                  "value": "debug"
                                 }
                               }
                             }
@@ -1532,7 +1512,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::String",
+                                                "kind": "Constant::Bytes",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "abc"
@@ -1606,7 +1586,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "println"
+                                  "value": "debug"
                                 }
                               }
                             }
@@ -1737,7 +1717,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "println"
+                                  "value": "debug"
                                 }
                               }
                             }
@@ -1870,7 +1850,7 @@
                             "kind": "LongIdent::Ident",
                             "loc": null,
                             "children": {
-                              "value": "println"
+                              "value": "debug"
                             }
                           }
                         }

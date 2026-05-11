@@ -119,30 +119,19 @@
     "loc": "3:19-3:20"
   },
   {
-    "token": [
-      "LIDENT",
-      "not"
-    ],
-    "loc": "4:5-4:8"
-  },
-  {
-    "token": "LPAREN",
-    "loc": "4:8-4:9"
+    "token": "EXCLAMATION",
+    "loc": "4:5-4:6"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
-    "loc": "4:9-4:10"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "4:10-4:11"
+    "loc": "4:6-4:7"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:11-4:12"
+    "loc": "4:7-4:8"
   },
   {
     "token": "RBRACE",

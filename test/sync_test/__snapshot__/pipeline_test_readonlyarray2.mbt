@@ -5,21 +5,21 @@ let c : ReadOnlyArray[Int] = [1, 2, 3, 4, 5]
 let d : ReadOnlyArray[(Int, Int)] = [(1, 2), (3, 4), (5, 6), (7, 8), (9, 10)]
 
 ///|
-fn[T : Show] use_readonly_array(xs : ReadOnlyArray[T]) -> Unit {
-  println(xs[:])
+fn[T : Debug] use_readonly_array(xs : ReadOnlyArray[T]) -> Unit {
+  debug(xs[:])
 }
 
 ///|
-fn[T : Show] use_readonly_array2(xs : ReadOnlyArray[ReadOnlyArray[T]]) -> Unit {
+fn[T : Debug] use_readonly_array2(xs : ReadOnlyArray[ReadOnlyArray[T]]) -> Unit {
   for x in xs[:] {
-    println(x[:])
+    debug(x[:])
   }
 }
 
 ///|
 fn main {
-  println(c[:])
-  println(d[:])
+  debug(c[:])
+  debug(d[:])
   use_readonly_array([1.2, 2.3, 3.4, 4.5, 5.6])
   let x : ReadOnlyArray[ReadOnlyArray[_]] = [
     [1.2, 2.3, 3.4, 4.5, 5.6],

@@ -2696,28 +2696,28 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "82:3-82:10"
+    "loc": "82:3-82:8"
   },
   {
     "token": "LPAREN",
-    "loc": "82:10-82:11"
+    "loc": "82:8-82:9"
   },
   {
     "token": [
       "LIDENT",
       "bytes"
     ],
-    "loc": "82:11-82:16"
+    "loc": "82:9-82:14"
   },
   {
     "token": "RPAREN",
-    "loc": "82:16-82:17"
+    "loc": "82:14-82:15"
   },
   {
     "token": "NEWLINE",
-    "loc": "82:17-82:18"
+    "loc": "82:15-82:16"
   },
   {
     "token": "RBRACE",

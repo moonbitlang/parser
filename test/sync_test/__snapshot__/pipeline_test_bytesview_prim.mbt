@@ -12,7 +12,7 @@ fn make_bytesview(b : Bytes, start : Int, len : Int) -> BytesView = "%bytesview.
 
 ///|
 fn main {
-  let b : Bytes = "hello"
+  let b : Bytes = b"hello"
   let bv = b[1:4]
   println(get_bytes(bv))
   println(get_start(bv))

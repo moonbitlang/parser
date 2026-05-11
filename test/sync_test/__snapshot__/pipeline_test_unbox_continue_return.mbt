@@ -1,3 +1,5 @@
+//!build: -w -27
+
 ///|
 fn f(chars : ArrayView[Char]) -> Char {
   loop chars {

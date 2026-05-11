@@ -4,11 +4,12 @@ enum Token {
   RParen
   Number(Int)
   String(String)
-} derive(Show)
+} derive(Debug)
 
 ///|
 /// issues: when regex has a syntax error,
 /// there is no error recovery even format can not work
+#warnings("-71")
 fn lex_token(str : StringView) -> Array[Token] raise {
   let tokens : Array[Token] = []
   for str = str {
@@ -22,11 +23,11 @@ fn lex_token(str : StringView) -> Array[Token] raise {
         continue rest
       }
       ("[0-9]+" as s, rest) => {
-        tokens.push(Token::Number(@strconv.parse_int(s)))
+        tokens.push(Token::Number(@string.parse_int(s)))
         continue rest
       }
       ("[a-zA-Z0-9_]+" as s, rest) => {
-        tokens.push(Token::String(s.to_string()))
+        tokens.push(Token::String(s.to_owned()))
         continue rest
       }
       // skip whitespace
@@ -40,6 +41,6 @@ fn lex_token(str : StringView) -> Array[Token] raise {
 
 
 fn main {
-  println(try? lex_token("   (1 2 (a b) (2) 3)"))
-  println(try? lex_token("   (1 2 左括号a 右括号b) (2) 3)"))
+  debug(try? lex_token("   (1 2 (a b) (2) 3)"))
+  debug(try? lex_token("   (1 2 左括号a 右括号b) (2) 3)"))
 }

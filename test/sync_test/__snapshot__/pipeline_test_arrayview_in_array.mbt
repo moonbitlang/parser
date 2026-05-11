@@ -4,7 +4,7 @@ fn main {
     arr.push([ i ][:])
   }
   for _ in 0..<5 {
-    println(arr.pop())
+    debug(arr.pop())
   }
-  println(arr)
+  debug(arr)
 }

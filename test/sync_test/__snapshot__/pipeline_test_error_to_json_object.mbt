@@ -1,6 +1,6 @@
 ///|
 fn f(x : &ToJson) -> Unit {
-  println(x.to_json())
+  debug(x.to_json())
 }
 
 ///|

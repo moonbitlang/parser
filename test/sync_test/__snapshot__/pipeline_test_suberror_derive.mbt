@@ -1,8 +1,8 @@
 suberror MyError {
   MyError(Int)
-} derive(Show, Eq, Compare, Hash)
+} derive( Eq, Compare, Hash)
 
-suberror MyError2 derive(Show, Eq, Compare, Hash)
+suberror MyError2 derive( Eq, Compare, Hash)
 
 fn f() -> Unit raise MyError {
   raise MyError(42)
@@ -47,4 +47,18 @@ fn init {
   } catch {
     e => use_derived(e0, e)
   }
+}
+
+impl Show for MyError with output(self, logger) {
+  match self {
+    MyError(v0) => {
+      logger.write_string("MyError(")
+      Show::output(v0, logger)
+      logger.write_string(")")
+    }
+  }
+}
+
+impl Show for MyError2 with output(self, logger) {
+  logger.write_string("MyError2")
 }

@@ -1,7 +1,24 @@
 [
   {
+    "token": [
+      "COMMENT",
+      {
+        "content": "//!build: -w -27-20",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": false,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "1:1-1:20"
+  },
+  {
     "token": "NEWLINE",
-    "loc": "1:1-1:2"
+    "loc": "1:20-1:21"
   },
   {
     "token": "STRUCT",
@@ -99,31 +116,31 @@
   {
     "token": [
       "UIDENT",
-      "Show"
-    ],
-    "loc": "5:14-5:18"
-  },
-  {
-    "token": "COMMA",
-    "loc": "5:18-5:19"
-  },
-  {
-    "token": [
-      "UIDENT",
       "Compare"
     ],
-    "loc": "5:20-5:27"
+    "loc": "5:14-5:21"
   },
   {
     "token": "COMMA",
-    "loc": "5:27-5:28"
+    "loc": "5:21-5:22"
   },
   {
     "token": [
       "UIDENT",
       "Default"
     ],
-    "loc": "5:29-5:36"
+    "loc": "5:23-5:30"
+  },
+  {
+    "token": "COMMA",
+    "loc": "5:30-5:31"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Show"
+    ],
+    "loc": "5:32-5:36"
   },
   {
     "token": "RPAREN",
@@ -300,31 +317,31 @@
   {
     "token": [
       "UIDENT",
-      "Show"
-    ],
-    "loc": "10:14-10:18"
-  },
-  {
-    "token": "COMMA",
-    "loc": "10:18-10:19"
-  },
-  {
-    "token": [
-      "UIDENT",
       "Compare"
     ],
-    "loc": "10:20-10:27"
+    "loc": "10:14-10:21"
   },
   {
     "token": "COMMA",
-    "loc": "10:27-10:28"
+    "loc": "10:21-10:22"
   },
   {
     "token": [
       "UIDENT",
       "Default"
     ],
-    "loc": "10:29-10:36"
+    "loc": "10:23-10:30"
+  },
+  {
+    "token": "COMMA",
+    "loc": "10:30-10:31"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Show"
+    ],
+    "loc": "10:32-10:36"
   },
   {
     "token": "RPAREN",
@@ -493,31 +510,31 @@
   {
     "token": [
       "UIDENT",
-      "Show"
-    ],
-    "loc": "16:15-16:19"
-  },
-  {
-    "token": "COMMA",
-    "loc": "16:19-16:20"
-  },
-  {
-    "token": [
-      "UIDENT",
       "Compare"
     ],
-    "loc": "16:21-16:28"
+    "loc": "16:15-16:22"
   },
   {
     "token": "COMMA",
-    "loc": "16:28-16:29"
+    "loc": "16:22-16:23"
   },
   {
     "token": [
       "UIDENT",
       "Default"
     ],
-    "loc": "16:30-16:37"
+    "loc": "16:24-16:31"
+  },
+  {
+    "token": "COMMA",
+    "loc": "16:31-16:32"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Show"
+    ],
+    "loc": "16:33-16:37"
   },
   {
     "token": "RPAREN",

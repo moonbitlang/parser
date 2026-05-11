@@ -5,11 +5,13 @@ fn init {
       println(i)
     }, callbacks)
   }
-  loop callbacks {
-    @list.List::Empty => ()
-    @list.List::More(f, tail=fs) => {
-      f()
-      continue fs
+  for rest = callbacks {
+    match rest {
+      @list.List::Empty => break
+      @list.List::More(f, tail=fs) => {
+        f()
+        continue fs
+      }
     }
   }
 }

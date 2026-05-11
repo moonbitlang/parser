@@ -491,21 +491,21 @@
   },
   {
     "token": [
-      "STRING",
+      "BYTES",
       "hello"
     ],
-    "loc": "15:19-15:26"
+    "loc": "15:19-15:27"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "15:26-15:26"
+    "loc": "15:27-15:27"
   },
   {
     "token": "NEWLINE",
-    "loc": "15:26-15:27"
+    "loc": "15:27-15:28"
   },
   {
     "token": "LET",

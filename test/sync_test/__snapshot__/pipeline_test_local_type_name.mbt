@@ -1,3 +1,4 @@
+//!build: -w -deprecated_syntax
 ///|
 pub(all) struct T(Int)
 
@@ -10,15 +11,15 @@ pub(open) trait I {
 pub fn T::g(self : T) -> Int {
   enum E {
     A(Int)
-  } derive(Show)
-  println(A(self.0))
+  } derive(Debug)
+  println(to_repr(A(self.0)))
   self.0
 }
 
 ///|
 pub impl I for T with f(self) {
-  struct N(Int) derive(Show)
-  println(N(self.0))
+  struct N(Int) derive(Debug)
+  println(to_repr(N(self.0)))
   self.0
 }
 

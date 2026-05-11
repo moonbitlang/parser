@@ -1,10 +1,10 @@
-struct MyInt(Int) derive(Show, Eq, Default, Compare)
+struct MyInt(Int) derive( Eq, Default, Compare, Debug)
 
 fn init {
     let x = MyInt::MyInt(5)
-    println(x)
+    debug(x)
     let y = MyInt::MyInt(6)
-    println(y)
+    debug(y)
     let z = x.0 + (match y {
         MyInt(i) => i
     })
@@ -22,14 +22,14 @@ fn init {
     }
 }
 
-struct WithInt[T]((Int, T)) derive(Show, Eq, Default, Compare)
+struct WithInt[T]((Int, T)) derive( Eq, Default, Compare, Debug)
 
 fn init {
     let x = WithInt::WithInt((1, "one"))
-    println(x)
+    debug(x)
     let y0 = (2, 2.0)
     let y = WithInt::WithInt(y0)
-    println(y)
+    debug(y)
     let z1 = 
       x.0.0 +
       (match y {
@@ -62,28 +62,28 @@ fn init {
 enum MyEnum[T] {
     E1(WithInt[T])
     E2(MyInt)
-} derive(Show)
+} derive(Debug)
 
-struct E[T](MyEnum[T]) derive(Show)
+struct E[T](MyEnum[T]) derive(Debug)
 
 fn init {
   let e1 = E::E(MyEnum::E1(WithInt::WithInt((1, "one"))));
-  println(e1);
+  debug(e1);
   let e2: E[Char] = E::E(MyEnum::E2(MyInt::MyInt(2)));
-  println(e2);
+  debug(e2);
 }
 
 
 struct MyStruct[T] {
     x: T
     y: S[T]
-} derive(Show)
+} derive(Debug)
 
-struct S[T](MyEnum[MyStruct[T]]) derive(Show)
+struct S[T](MyEnum[MyStruct[T]]) derive(Debug)
 
 fn init {
   let s0 = S::S(MyEnum::E2(MyInt::MyInt(2)));
   let s1 = S::S(MyEnum::E1(WithInt::WithInt((1, { x: "xxx", y: s0}))));
-  println(s0)
-  println(s1)
+  debug(s0)
+  debug(s1)
 }

@@ -1,4 +1,4 @@
-//!build: -w -67
+//!build: -w -67-27
 
 async fn[T] suspend(f : ((T) -> Unit) -> Unit) -> T noraise = "%async.suspend"
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
@@ -7,7 +7,7 @@ async fn f() -> Int noraise {
   suspend(k => k(42))
 }
 
-suberror Err derive(Show)
+suberror Err
 
 // loop may transist to state after loop 
 async fn f1() -> Unit noraise {
@@ -118,6 +118,18 @@ async fn f9(x : Int, y : Int) -> Unit noraise {
   }
 }
 
+///|
+// tail position `break` inside no-async sub expression
+async fn f10() -> Int noraise {
+  for i = 0; ; i = i + 1 {
+    if i is 3 {
+      break 42
+    }
+    ignore(f())
+  }
+}
+
+///|
 fn main {
   letrec run = fn (f) {
     println("===")
@@ -137,4 +149,9 @@ fn main {
   run(f7)
   run(f8)
   run(() => f9(42, 42))
+  run(() => println(f10()))
+}
+
+impl Show for Err with output(self, logger) {
+  logger.write_string("Err")
 }

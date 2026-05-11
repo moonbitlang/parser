@@ -144,6 +144,7 @@
           "doc": " basic usage"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -785,6 +786,7 @@
           "doc": " the very rare case where we get for_sure_yes for string literal\n based on information from array patterns"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1631,6 +1633,7 @@
           "doc": " test unicode chars and pattern with all chars, which\n should be combined into a string pattern"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2330,6 +2333,7 @@
           "doc": " test optimization on array pattern"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2817,6 +2821,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

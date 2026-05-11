@@ -23,8 +23,12 @@ fn continue_in_for2(n: Int) -> Unit {
 fn continue_in_for3(n: Int) -> Unit {
   let mut res = 0
   for i = 0; i < n; i = i + 1 {
-    let sum = loop (0, 0) {
-      (j, acc) => if j >= i { break acc } else { continue (j + 2, acc + j) }
+    let sum = for j = 0, acc = 0 {
+      if j >= i {
+        break acc
+      } else {
+        continue j + 2, acc + j
+      }
     }
     if sum == res {
       continue i + 3

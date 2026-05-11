@@ -7,11 +7,11 @@ fn[X : Show] tee(x : X) -> X {
 struct R {
   x : Int
   y : Int
-} derive(Show)
+} derive(Debug)
 
 enum E {
   C(Int, Int)
-} derive(Show)
+} derive(Debug)
 
 fn f(x : Int, y : Int) -> Unit {
   println("f(\{x}, \{y})")
@@ -19,12 +19,12 @@ fn f(x : Int, y : Int) -> Unit {
 
 fn init {
   let r = R::{ x: tee(1), y: tee(2) }
-  println(r)
+  debug(r)
   let e = E::C(tee(1), tee(2))
-  println(e)
+  debug(e)
   let arr: FixedArray[_] = [ tee(1), tee(2) ]
-  println(arr)
+  debug(arr)
   f(tee(1), tee(2))
   let t = (tee(1), tee(2))
-  println(t)
+  debug(t)
 }

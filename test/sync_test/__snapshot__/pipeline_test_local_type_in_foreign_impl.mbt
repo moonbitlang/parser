@@ -1,4 +1,5 @@
-struct T(Int) derive(Show)
+//!build: -w -deprecated_syntax
+struct T(Int) derive(Debug)
 
 // local type inside an `impl` for foreign trait
 impl @json.FromJson for T with from_json(json, _path) {
@@ -13,5 +14,5 @@ impl @json.FromJson for T with from_json(json, _path) {
 }
 
 fn init {
-  println((try? @json.from_json(42) : Result[T, _]))
+  debug((try? @json.from_json(42) : Result[T, _]))
 }

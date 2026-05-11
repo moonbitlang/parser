@@ -4,7 +4,7 @@ enum T {
 }
 
 fn f(x: Int?) -> Unit {
-  println(x)
+  debug(x)
 }
 
 fn f1(x: T) -> Unit {

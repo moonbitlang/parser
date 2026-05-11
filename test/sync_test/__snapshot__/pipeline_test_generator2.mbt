@@ -117,3 +117,8 @@ fn init {
     Some(iter) => print_generator(from_iter(iter))
   }
 }
+
+enum IterResult {
+  IterContinue
+  IterEnd
+} derive(Eq)

@@ -3,18 +3,18 @@
 // Basic tuple lifting
 fn test_basic_tuple() -> Unit {
   let x = (1, 2, 3)
-  println(x)
+  debug(x)
 }
 
 // Inline tuple lifting
 fn test_inline_tuple() -> Unit {
-  println((4, 5, 6))
+  debug((4, 5, 6))
 }
 
 // Nested tuple lifting
 fn test_nested_tuple() -> Unit {
   let nested = ((1, 2), (3, 4))
-  println(nested)
+  debug(nested)
 }
 
 // String constant lifting
@@ -26,19 +26,19 @@ fn test_string_constant() -> Unit {
 // Mixed constant tuple
 fn test_mixed_tuple() -> Unit {
   let mixed = (42, "test", true)
-  println(mixed)
+  debug(mixed)
 }
 
 // Record lifting (immutable fields only)
 struct Point {
   x : Int
   y : Int
-} derive(Show)
+} derive(Debug)
 
 fn test_record_lifting() -> Unit {
   let p : Point = { x: 10, y: 20 }
   println("Point: \{p.x}, \{p.y}")
-  println(p)
+  debug(p)
 }
 
 // Constructor lifting
@@ -47,50 +47,50 @@ enum Color {
   Green  
   Blue
   RGB(Int, Int, Int)
-} derive(Show)
+} derive(Debug)
 
 fn test_constructor_lifting() -> Unit {
   let red = Red
   let green = Green
   let blue = Blue
   let custom = RGB(255, 128, 0)
-  println(red)
-  println(green)
-  println(blue)
-  println(custom)
+  debug(red)
+  debug(green)
+  debug(blue)
+  debug(custom)
 }
 
 // Complex nested structure
 struct ComplexStruct {
   x : (Int, Int)
   y : Color
-} derive(Show)
+} derive(Debug)
 
 fn test_complex_structure() -> Unit {
   let complex : ComplexStruct = {
     x: (1, 2),
     y: RGB(100, 200, 50)
   }
-  println(complex)
+  debug(complex)
 }
 
 // Test that should NOT be lifted - runtime dependency
 fn test_no_lift_runtime(n : Int) -> Unit {
   let runtime_tuple = (n, n + 1, n + 2)  // Should not lift
-  println(runtime_tuple)
+  debug(runtime_tuple)
 }
 
 // Test that should NOT be lifted - mutable struct
 struct MutablePoint {
   mut x : Int
   y : Int
-} derive(Show)
+} derive(Debug)
 
 fn test_no_lift_mutable() -> Unit {
   let mp : MutablePoint = { x: 1, y: 2 }  // Should not lift due to mutable field
   mp.x = 10  // Use the mutability
   println("Mutable point: \{mp.x}, \{mp.y}")
-  println(mp)
+  debug(mp)
 }
 
 // Test that should NOT be lifted - empty tuple
@@ -104,26 +104,26 @@ fn test_no_lift_empty() -> Unit {
 fn test_referencing_static() -> Unit {
   let base = (1, 2)
   let extended = (base, 3)  // Should lift since base is static
-  println(extended)
+  debug(extended)
 }
 
 // Test multiple references to same static data
 fn test_multiple_references() -> Unit {
   let data1 = (7, 8, 9)
   let data2 = (7, 8, 9)  // Same content, should create separate lifted bindings
-  println(data1)
-  println(data2)
+  debug(data1)
+  debug(data2)
 }
 
 // Test in different scopes
 fn test_different_scopes() -> Unit {
   {
     let local1 = (10, 11)
-    println(local1)
+    debug(local1)
   }
   {
     let local2 = (12, 13)  
-    println(local2)
+    debug(local2)
   }
 }
 
@@ -131,20 +131,20 @@ fn test_different_scopes() -> Unit {
 fn test_with_constants() -> Unit {
   let pi_approx = (3, 14, 159)
   let flags = (true, false, true)
-  println(pi_approx)
-  println(flags)
+  debug(pi_approx)
+  debug(flags)
 }
 
 // Test array literals (if they should be lifted)
 fn test_array_literals() -> Unit {
   let numbers = [1, 2, 3, 4, 5]
-  println(numbers)
+  debug(numbers)
 }
 
 // Test generic function context (should not lift due to type params)
-fn[T : Show] test_generic(value : T) -> T {
+fn[T : Debug] test_generic(value : T) -> T {
   let wrapper = (value, "wrapped")  // Should not lift due to generic context
-  println(wrapper)
+  debug(wrapper)
   value
 }
 
@@ -152,22 +152,22 @@ fn[T : Show] test_generic(value : T) -> T {
 fn test_option_lifting() -> Unit {
   let some_val = Some(42)
   let none_val : Option[Int] = None
-  println(some_val)
-  println(none_val)
+  debug(some_val)
+  debug(none_val)
 }
 
 // Test result lifting  
 fn test_result_lifting() -> Unit {
   let ok_val : Result[Int, String] = Ok(100)
   let err_val : Result[Int, String] = Err("failed")
-  println(ok_val)
-  println(err_val)
+  debug(ok_val)
+  debug(err_val)
 }
 
 // Test deeply nested structures
 fn test_deep_nesting() -> Unit {
   let deep = (((1, 2), (3, 4)), ((5, 6), (7, 8)))
-  println(deep)
+  debug(deep)
 }
 
 // Test with different numeric types
@@ -175,13 +175,13 @@ fn test_numeric_types() -> Unit {
   let ints = (1, 2, 3)
   let doubles = (1.0, 2.0, 3.0) 
   let bytes : (Byte, Byte) = (0x41, 0x42)
-  println(ints)
-  println(doubles)
-  println(bytes)
+  debug(ints)
+  debug(doubles)
+  debug(bytes)
 }
 
 fn test_nested_tuple_strings() -> Unit {
-  println(
+  debug(
     (("hello", "world"),
       ("foo", "bar"),
       ("baz", "qux"),

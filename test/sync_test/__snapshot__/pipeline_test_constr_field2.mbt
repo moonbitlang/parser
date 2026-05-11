@@ -18,7 +18,7 @@ fn init {
 // case 2: captured by closure
 enum E2 {
   C(mut x~ : Int)
-} derive(Show)
+} derive(Debug)
 
 fn f2(e : E2) -> Unit {
   let f =
@@ -32,7 +32,7 @@ fn f2(e : E2) -> Unit {
 fn init {
   let e : E2 = C(x=0)
   f2(e)
-  println(e)
+  debug(e)
 }
 
 // case 3: different value for same binding
@@ -46,7 +46,7 @@ fn init {
   let e1 : E2 = C(x=42)
   let e2 : E2 = C(x=0)
   f3(e1, e2)
-  println((e1, e2))
+  debug((e1, e2))
   f3(e2, e1)
-  println((e1, e2))
+  debug((e1, e2))
 }

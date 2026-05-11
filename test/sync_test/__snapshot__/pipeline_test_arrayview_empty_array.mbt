@@ -1,7 +1,7 @@
 ///|
 fn main {
-  println(f([]))
-  println(g([]))
+  debug(f([]))
+  debug(g([]))
 }
 
 ///|

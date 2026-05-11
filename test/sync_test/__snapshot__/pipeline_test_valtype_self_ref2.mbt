@@ -3,7 +3,7 @@
 pub(all) struct T {
   p : (T, T)?
   i : Int
-} derive(Show)
+} derive(Debug)
 
 ///|
 pub fn q(t : T) -> T {
@@ -19,7 +19,7 @@ fn main {
   let t1 = T::{ p: None, i: 1 }
   let t2 = T::{ p: Some((t1, t1)), i: 2 }
   let t3 = T::{ p: Some((t2, t2)), i: 3 }
-  println(t1 |> q)
-  println(t2 |> q)
-  println(t3 |> q)
+  debug(t1 |> q)
+  debug(t2 |> q)
+  debug(t3 |> q)
 }

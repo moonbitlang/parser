@@ -287,35 +287,100 @@
     "loc": "6:32-6:33"
   },
   {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "6:33-6:33"
+  },
+  {
     "token": "NEWLINE",
     "loc": "6:33-6:34"
   },
   {
-    "token": "RBRACE",
-    "loc": "7:3-7:4"
+    "token": [
+      "PACKAGE_NAME",
+      "pkg"
+    ],
+    "loc": "7:5-7:9"
+  },
+  {
+    "token": [
+      "DOT_UIDENT",
+      "T"
+    ],
+    "loc": "7:10-7:11"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "7:11-7:13"
+  },
+  {
+    "token": [
+      "PACKAGE_NAME",
+      "pkg"
+    ],
+    "loc": "7:13-7:17"
+  },
+  {
+    "token": [
+      "DOT_UIDENT",
+      "Dddd"
+    ],
+    "loc": "7:18-7:22"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "7:23-7:25"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "7:26-7:33"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "7:33-7:34"
+  },
+  {
+    "token": [
+      "STRING",
+      "D"
+    ],
+    "loc": "7:34-7:37"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "7:37-7:38"
   },
   {
     "token": "NEWLINE",
-    "loc": "7:4-7:5"
+    "loc": "7:38-7:39"
   },
   {
     "token": "RBRACE",
-    "loc": "8:1-8:2"
+    "loc": "8:3-8:4"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "8:4-8:5"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "9:1-9:2"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "8:2-8:2"
+    "loc": "9:2-9:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "8:2-8:3"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "9:1-9:2"
+    "loc": "9:2-9:3"
   },
   {
     "token": "EOF",

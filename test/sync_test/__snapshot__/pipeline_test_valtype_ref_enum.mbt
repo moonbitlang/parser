@@ -5,13 +5,13 @@ struct S {
   b : Bytes
   c : Int64?
   d : Bool
-} derive(Show)
+} derive(Debug)
 
 ///|
 enum E {
   A(mut a~ : S, Int)
   B(FixedArray[Int], S)
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn make_s(i : Int) -> S {
@@ -38,8 +38,8 @@ fn f1(e : E) -> E {
 ///|
 fn main {
   let e1 = E::A(a=make_s(1), 2)
-  println(e1)
+  debug(e1)
   let e2 = f1(e1)
-  println(e1)
-  println(e2)
+  debug(e1)
+  debug(e2)
 }

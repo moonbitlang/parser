@@ -336,6 +336,7 @@
           "doc": " `length[X](self : Vector[X])`\n\n Get length of a vector"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -589,6 +590,7 @@
           "doc": " `op_get[X](self : Vector[X], i : Int)`\n\n Get the ith element of vector"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1580,6 +1582,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

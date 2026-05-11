@@ -25,31 +25,31 @@ fn init {
   println(use_T(s))
 }
 
-fn test_show(x: &Show) -> Unit {
-  println(x.to_string())
+fn test_debug(x: &Debug) -> Unit {
+  println(x.to_repr())
 }
 fn init {
-  test_show(42 as &Show)
-  test_show("xxx" as &Show)
-  test_show(3.14 as &Show)
+  test_debug(42 as &Debug)
+  test_debug("xxx" as &Debug)
+  test_debug(3.14 as &Debug)
 }
 
-fn test_array_show(x: Array[&Show]) -> Unit {
-  x.each(println)
+fn test_array_debug(x: Array[&Debug]) -> Unit {
+  x.each(debug)
 }
 fn init {
-  let shows = [42 as &Show, "xxx" as &Show, 3.14 as &Show]
-  test_array_show(shows)
-  let debugs = shows as &Show
-  println(debugs)
+  let shows = [42 as &Debug, "xxx" as &Debug, 3.14 as &Debug]
+  test_array_debug(shows)
+  let debugs = shows as &Debug
+  debug(debugs)
 }
 
 fn init {
-  let x = Option::Some(Option::Some(Option::Some(42))) as &Show
-  test_show(x)
-  generic_show(x)
+  let x = Option::Some(Option::Some(Option::Some(42))) as &Debug
+  test_debug(x)
+  generic_debug(x)
 }
 
-fn[T: Show] generic_show(x: T) -> Unit {
-  println(x)
+fn[T: Debug] generic_debug(x: T) -> Unit {
+  debug(x)
 }

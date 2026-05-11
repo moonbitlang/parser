@@ -5,15 +5,15 @@ struct S {
   b : Int64?
   c : Int64?
   d : Bool
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn g(xs : FixedArray[S]) -> Unit {
-  println(xs)
+  debug(xs)
   match xs {
     [a, .., b] => { // unsafe_get and unsafe_get_rev
-      println(a)
-      println(b)
+      debug(a)
+      debug(b)
     }
     _ => ()
   }
@@ -33,5 +33,5 @@ fn main {
     let _ = arr2.pop()
 
   }
-  println(arr2)
+  debug(arr2)
 }

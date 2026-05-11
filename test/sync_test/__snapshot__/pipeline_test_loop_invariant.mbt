@@ -3,8 +3,8 @@ fn test_loop_invariant_basic() -> Unit {
   for i = 0; i < 10; i = i + 1 {
     println(i.to_string())
   } where {
-    invariant: i >= 0,
-    reasoning: "i starts at 0 and increments by 1 each iteration",
+    proof_invariant: i >= 0,
+    proof_reasoning: "i starts at 0 and increments by 1 each iteration",
   }
 }
 
@@ -13,9 +13,9 @@ fn test_loop_invariant_multiple() -> Unit {
   for i = 0, sum = 0; i < 5; i = i + 1, sum = sum + i {
     println(sum.to_string())
   } where {
-    invariant: i >= 0,
-    invariant: sum >= 0,
-    reasoning: "i and sum are always non-negative",
+    proof_invariant: i >= 0,
+    proof_invariant: sum >= 0,
+    proof_reasoning: "i and sum are always non-negative",
   }
 }
 
@@ -25,8 +25,8 @@ fn test_loop_invariant_bound() -> Unit {
   for i = 0; i < n; i = i + 1 {
     println(i.to_string())
   } where {
-    invariant: i <= n,
-    reasoning: "i is always less than or equal to n",
+    proof_invariant: i <= n,
+    proof_reasoning: "i is always less than or equal to n",
   }
 }
 
@@ -35,8 +35,8 @@ fn test_loop_invariant_decreasing() -> Unit {
   for i = 10; i > 0; i = i - 1 {
     println(i.to_string())
   } where {
-    invariant: i >= 0,
-    reasoning: "i is always non-negative and decreases towards 0",
+    proof_invariant: i >= 0,
+    proof_reasoning: "i is always non-negative and decreases towards 0",
   }
 }
 
@@ -46,9 +46,9 @@ fn test_loop_invariant_with_array() -> Unit {
   for i = 0; i < arr.length(); i = i + 1 {
     println(arr[i].to_string())
   } where {
-    invariant: i >= 0,
-    invariant: i <= arr.length(),
-    reasoning: "i is a valid index for the array",
+    proof_invariant: i >= 0,
+    proof_invariant: i <= arr.length(),
+    proof_reasoning: "i is a valid index for the array",
   }
 }
 

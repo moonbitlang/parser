@@ -323,20 +323,8 @@
     "loc": "8:3-8:9"
   },
   {
-    "token": "LBRACKET",
-    "loc": "8:9-8:10"
-  },
-  {
-    "token": "COLON",
-    "loc": "8:10-8:11"
-  },
-  {
-    "token": "RBRACKET",
-    "loc": "8:11-8:12"
-  },
-  {
     "token": "NEWLINE",
-    "loc": "8:12-8:13"
+    "loc": "8:9-8:10"
   },
   {
     "token": "RBRACE",
@@ -1075,35 +1063,23 @@
     "loc": "28:8-28:11"
   },
   {
-    "token": "LBRACKET",
-    "loc": "28:11-28:12"
-  },
-  {
-    "token": "COLON",
-    "loc": "28:12-28:13"
-  },
-  {
-    "token": "RBRACKET",
-    "loc": "28:13-28:14"
-  },
-  {
     "token": "COMMA",
-    "loc": "28:14-28:15"
+    "loc": "28:11-28:12"
   },
   {
     "token": [
       "LIDENT",
       "println"
     ],
-    "loc": "28:16-28:23"
+    "loc": "28:13-28:20"
   },
   {
     "token": "RPAREN",
-    "loc": "28:23-28:24"
+    "loc": "28:20-28:21"
   },
   {
     "token": "NEWLINE",
-    "loc": "28:24-28:25"
+    "loc": "28:21-28:22"
   },
   {
     "token": "RBRACE",

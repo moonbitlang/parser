@@ -17,8 +17,8 @@ fn init {
   let arr_of_json2 : ArrayView[Json] = [ x, y ]
   let arr_of_json3 : FixedArray[Json] = [ x, y ]
   println(Json::array(arr_of_json).stringify())
-  println(Json::array(arr_of_json2.to_array()).stringify())
-  println(Json::array(arr_of_json3[:].to_array()).stringify())
+  println(Json::array(arr_of_json2.to_owned()).stringify())
+  println(Json::array(arr_of_json3[:].to_owned()).stringify())
   let map_of_json : Map[String, Json] = { "x": x, "y": y }
   println(Json::object(map_of_json).stringify())
 }

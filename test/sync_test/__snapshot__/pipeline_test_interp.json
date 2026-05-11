@@ -42,6 +42,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -648,6 +649,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -847,6 +849,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -927,7 +930,7 @@
                                 "kind": "InterpElem::Source",
                                 "loc": null,
                                 "children": {
-                                  "source": "[1,2,3,4,5,6]"
+                                  "source": "Debug::to_repr([1,2,3,4,5,6])"
                                 }
                               },
                               {
@@ -1025,6 +1028,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1740,6 +1744,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

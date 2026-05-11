@@ -31,7 +31,7 @@ fn init {
   next()[a.add(4)] *= 6
   println(a.sum)
   println(a.num)
-  println(x)
-  println(y)
+  debug(x)
+  debug(y)
 }
 

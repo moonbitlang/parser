@@ -22,40 +22,40 @@ enum E {
 fn f(e : E) -> Unit {
   match e {
     A([u8be(a), .. rest, u16le(b)] as c) => {
-      println(a)
-      println(to_be_bytes(b))
-      println(rest)
-      println(c)
+      debug(a)
+      debug(to_be_bytes(b))
+      debug(rest)
+      debug(c)
     }
     B([u8be(a), .. rest, u16le(b)] as c) => {
-      println(a)
-      println(to_be_bytes(b))
-      println(rest)
-      println(c)
+      debug(a)
+      debug(to_be_bytes(b))
+      debug(rest)
+      debug(c)
     }
     C([u8be(a), .. rest, u16le(b)] as c) => {
-      println(a)
-      println(to_be_bytes(b))
-      println(rest)
-      println(c)
+      debug(a)
+      debug(to_be_bytes(b))
+      debug(rest)
+      debug(c)
     }
     D([u8be(a), .. rest, u16le(b)] as c) => {
-      println(a)
-      println(to_be_bytes(b))
-      println(rest)
-      println(c)
+      debug(a)
+      debug(to_be_bytes(b))
+      debug(rest)
+      debug(c)
     }
     E([u8be(a), .. rest, u16le(b)] as c) => {
-      println(a)
-      println(to_be_bytes(b))
-      println(rest)
-      println(c)
+      debug(a)
+      debug(to_be_bytes(b))
+      debug(rest)
+      debug(c)
     }
     F([u8be(a), .. rest, u16le(b)] as c) => {
-      println(a)
-      println(to_be_bytes(b))
-      println(rest)
-      println(c)
+      debug(a)
+      debug(to_be_bytes(b))
+      debug(rest)
+      debug(c)
     }
     _ => println("other")
   }

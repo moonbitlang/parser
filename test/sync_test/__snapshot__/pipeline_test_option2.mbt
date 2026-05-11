@@ -1,8 +1,8 @@
-fn use_show(x: &Show) -> String {
-  x.to_string()
+fn use_debug(x: &Debug) -> String {
+  to_repr(x).to_string()
 }
 
 fn init {
   let s: String? = Option::None
-  println(use_show(s))
+  println(use_debug(s))
 }

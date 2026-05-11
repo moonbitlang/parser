@@ -1,5 +1,5 @@
-fn[T: Show] print_vec(v: Array[T]) -> Unit {
-  println(v)
+fn[T: Debug] print_vec(v: Array[T]) -> Unit {
+  debug(v)
 }
 
 fn init {

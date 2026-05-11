@@ -30,12 +30,12 @@ fn init {
 fn init {
   let v = Array::new()
   [1, 2, 3].iter().flat_map(x => Iter::repeat(x).take(2)).each(x => v.push(x))
-  println(v)
+  debug(v)
 }
 
 fn init {
   let v= to_array([1, 2, 3].iter().flat_map(x => Iter::repeat(x).take(2)))
-  println(v)
+  debug(v)
 }
 
 fn run(x: FixedArray[String]) -> String {
@@ -54,7 +54,7 @@ fn init {
 fn init {
   println("== test find ==")
   let res = [1,2,3].iter().concat([4, 5, 6].iter()).find_first(x => x % 2 == 0)
-  println(res)
+  debug(res)
 }
 
 fn init {
@@ -65,11 +65,11 @@ fn init {
 fn init {
   println("== find should run once ==")
   let t = [1, 2, 3].iter().take(1).concat([1, 1, 1].iter()).find_first(x => {println("should print only once"); x == 1 })
-  println(t)
+  debug(t)
 }
 
 fn init {
   println("== test flat_map ==")
   let t = [1, 2, 3].iter().flat_map(x => Iter::repeat(x).take(x)).find_first(x => x > 1)
-  println(t)
+  debug(t)
 }

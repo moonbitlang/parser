@@ -3,7 +3,7 @@ fn use_unit(_x : Unit) -> Unit {
 
 struct S {
   u : Unit
-} derive(Show)
+}
 
 fn init {
   let r : Ref[_] = { val: 42 }
@@ -30,4 +30,10 @@ fn init {
   while mutate() is Some(_) {
   }
   println(counter.val)
+}
+
+impl Show for S with output(self, logger) {
+  logger.write_string("{u: ")
+  Show::output(self.u, logger)
+  logger.write_string("}")
 }

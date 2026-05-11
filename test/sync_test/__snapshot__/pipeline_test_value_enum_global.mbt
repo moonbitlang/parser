@@ -4,7 +4,7 @@ enum E {
   A
   B(Int)
   C(Double, Double)
-} derive(Show)
+} derive(Debug)
 
 ///|
 let e1 : E = E::A
@@ -20,12 +20,12 @@ let arr3 : FixedArray[E] = FixedArray::make(5, e3)
 
 ///|
 fn f(e : E) -> Unit {
-  println(e)
+  debug(e)
 }
 
 ///|
 fn main {
   arr3[1] = e2
   f(e1)
-  println(arr3)
+  debug(arr3)
 }

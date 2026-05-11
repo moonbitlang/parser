@@ -7,7 +7,7 @@ struct S {
   e : Int
   f : Int
   g : Int
-} derive(Show)
+}
 
 ///|
 fn main {
@@ -18,4 +18,22 @@ fn main {
   }
   f(1)
   f(1)
+}
+
+impl Show for S with output(self, logger) {
+  logger.write_string("{a: ")
+  Show::output(self.a, logger)
+  logger.write_string(", b: ")
+  Show::output(self.b, logger)
+  logger.write_string(", c: ")
+  Show::output(self.c, logger)
+  logger.write_string(", d: ")
+  Show::output(self.d, logger)
+  logger.write_string(", e: ")
+  Show::output(self.e, logger)
+  logger.write_string(", f: ")
+  Show::output(self.f, logger)
+  logger.write_string(", g: ")
+  Show::output(self.g, logger)
+  logger.write_string("}")
 }

@@ -145,6 +145,7 @@
           "doc": " @intrinsic %array.length"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -384,6 +385,7 @@
           "doc": " @intrinsic %array.unsafe_get"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -624,6 +626,7 @@
           "doc": " @intrinsic %array.get"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1181,6 +1184,7 @@
           "doc": " @intrinsic %array.unsafe_set"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1477,6 +1481,7 @@
           "doc": " @intrinsic %array.set"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1887,6 +1892,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

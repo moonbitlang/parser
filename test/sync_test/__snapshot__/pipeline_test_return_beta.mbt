@@ -33,9 +33,9 @@ fn h(x: Map[Int, Int], a: Option[Int]) -> Array[Int] {
 
 fn main {
     let res = f({ 0: { 0: 1, 1: 2}}, 0, 1)
-    println(res)
+    debug(res)
     let res = g({ 0: 1, 1: 2}, 1)
-    println(res)
+    debug(res)
     let res = h({ 0: 1, 1: 2}, Some(1))
-    println(res)
+    debug(res)
 }

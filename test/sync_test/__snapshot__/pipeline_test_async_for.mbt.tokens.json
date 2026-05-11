@@ -300,29 +300,37 @@
   },
   {
     "token": [
-      "DOT_LIDENT",
-      "new"
+      "DOT_UIDENT",
+      "Deque"
     ],
-    "loc": "4:51-4:54"
+    "loc": "4:51-4:56"
   },
   {
     "token": "LPAREN",
-    "loc": "4:54-4:55"
+    "loc": "4:56-4:57"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "4:57-4:58"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "4:58-4:59"
   },
   {
     "token": "RPAREN",
-    "loc": "4:55-4:56"
+    "loc": "4:59-4:60"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "4:56-4:56"
+    "loc": "4:60-4:60"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:56-4:57"
+    "loc": "4:60-4:61"
   },
   {
     "token": "NEWLINE",

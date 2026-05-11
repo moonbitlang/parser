@@ -16,9 +16,9 @@ fn find_index(x : Array[Int], y : Int) -> Int? {
 }
 
 fn init {
-  find_index([1,2,3], 2)|>println
-  find_index([1,2,3,4], 4)|>println
-  find_index([1,2,3,4], 0)|>println
+  find_index([1,2,3], 2)|> debug
+  find_index([1,2,3,4], 4)|> debug
+  find_index([1,2,3,4], 0)|> debug
 }
 
 fn find_index2(x : Array[Int], y : Int, z : Int) -> Unit {

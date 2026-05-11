@@ -1,13 +1,13 @@
-struct T(Int?) derive (Show)
+struct T(Int?) derive(Debug)
 
 fn init {
   let a = T::T(Option::Some(1))
-  println(a)
+  debug(a)
 }
 
 fn init {
   let a = Some(1)
-  println(a)
+  debug(a)
 }
 
 struct Point(Int,Int,Int) derive(ToJson)

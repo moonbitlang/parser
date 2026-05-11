@@ -1,8 +1,9 @@
+//!build: -w -deprecated_syntax
 //|
-pub fn[T : Show] f(x : T) -> Unit {
-  struct A(T) derive(Show)
+pub fn[T : Debug] f(x : T) -> Unit {
+  struct A(T) derive(Debug)
   let a = A(x)
-  println(a)
+  println(to_repr(a))
 }
 
 ///|

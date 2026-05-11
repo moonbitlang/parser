@@ -6,84 +6,99 @@
   {
     "token": [
       "LIDENT",
-      "use_show"
+      "use_debug"
     ],
-    "loc": "1:4-1:12"
+    "loc": "1:4-1:13"
   },
   {
     "token": "LPAREN",
-    "loc": "1:12-1:13"
+    "loc": "1:13-1:14"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
-    "loc": "1:13-1:14"
-  },
-  {
-    "token": "COLON",
     "loc": "1:14-1:15"
   },
   {
+    "token": "COLON",
+    "loc": "1:15-1:16"
+  },
+  {
     "token": "AMPER",
-    "loc": "1:16-1:17"
+    "loc": "1:17-1:18"
   },
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Debug"
     ],
-    "loc": "1:17-1:21"
+    "loc": "1:18-1:23"
   },
   {
     "token": "RPAREN",
-    "loc": "1:21-1:22"
+    "loc": "1:23-1:24"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "1:23-1:25"
+    "loc": "1:25-1:27"
   },
   {
     "token": [
       "UIDENT",
       "String"
     ],
-    "loc": "1:26-1:32"
+    "loc": "1:28-1:34"
   },
   {
     "token": "LBRACE",
-    "loc": "1:33-1:34"
+    "loc": "1:35-1:36"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:34-1:35"
+    "loc": "1:36-1:37"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "to_repr"
+    ],
+    "loc": "2:3-2:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "2:10-2:11"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
-    "loc": "2:3-2:4"
+    "loc": "2:11-2:12"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "2:12-2:13"
   },
   {
     "token": [
       "DOT_LIDENT",
       "to_string"
     ],
-    "loc": "2:5-2:14"
+    "loc": "2:14-2:23"
   },
   {
     "token": "LPAREN",
-    "loc": "2:14-2:15"
+    "loc": "2:23-2:24"
   },
   {
     "token": "RPAREN",
-    "loc": "2:15-2:16"
+    "loc": "2:24-2:25"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:16-2:17"
+    "loc": "2:25-2:26"
   },
   {
     "token": "RBRACE",
@@ -196,23 +211,19 @@
   {
     "token": [
       "LIDENT",
-      "use_show"
+      "use_debug"
     ],
-    "loc": "7:11-7:19"
+    "loc": "7:11-7:20"
   },
   {
     "token": "LPAREN",
-    "loc": "7:19-7:20"
+    "loc": "7:20-7:21"
   },
   {
     "token": [
       "LIDENT",
       "s"
     ],
-    "loc": "7:20-7:21"
-  },
-  {
-    "token": "RPAREN",
     "loc": "7:21-7:22"
   },
   {
@@ -220,8 +231,12 @@
     "loc": "7:22-7:23"
   },
   {
-    "token": "NEWLINE",
+    "token": "RPAREN",
     "loc": "7:23-7:24"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "7:24-7:25"
   },
   {
     "token": "RBRACE",

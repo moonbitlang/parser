@@ -21,106 +21,106 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Debug"
     ],
-    "loc": "1:7-1:11"
+    "loc": "1:7-1:12"
   },
   {
     "token": "RBRACKET",
-    "loc": "1:11-1:12"
+    "loc": "1:12-1:13"
   },
   {
     "token": [
       "LIDENT",
       "print_vec"
     ],
-    "loc": "1:13-1:22"
+    "loc": "1:14-1:23"
   },
   {
     "token": "LPAREN",
-    "loc": "1:22-1:23"
+    "loc": "1:23-1:24"
   },
   {
     "token": [
       "LIDENT",
       "v"
     ],
-    "loc": "1:23-1:24"
+    "loc": "1:24-1:25"
   },
   {
     "token": "COLON",
-    "loc": "1:24-1:25"
+    "loc": "1:25-1:26"
   },
   {
     "token": [
       "UIDENT",
       "Array"
     ],
-    "loc": "1:26-1:31"
+    "loc": "1:27-1:32"
   },
   {
     "token": "LBRACKET",
-    "loc": "1:31-1:32"
+    "loc": "1:32-1:33"
   },
   {
     "token": [
       "UIDENT",
       "T"
     ],
-    "loc": "1:32-1:33"
-  },
-  {
-    "token": "RBRACKET",
     "loc": "1:33-1:34"
   },
   {
-    "token": "RPAREN",
+    "token": "RBRACKET",
     "loc": "1:34-1:35"
   },
   {
+    "token": "RPAREN",
+    "loc": "1:35-1:36"
+  },
+  {
     "token": "THIN_ARROW",
-    "loc": "1:36-1:38"
+    "loc": "1:37-1:39"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "1:39-1:43"
+    "loc": "1:40-1:44"
   },
   {
     "token": "LBRACE",
-    "loc": "1:44-1:45"
+    "loc": "1:45-1:46"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:45-1:46"
+    "loc": "1:46-1:47"
   },
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "2:3-2:10"
+    "loc": "2:3-2:8"
   },
   {
     "token": "LPAREN",
-    "loc": "2:10-2:11"
+    "loc": "2:8-2:9"
   },
   {
     "token": [
       "LIDENT",
       "v"
     ],
-    "loc": "2:11-2:12"
+    "loc": "2:9-2:10"
   },
   {
     "token": "RPAREN",
-    "loc": "2:12-2:13"
+    "loc": "2:10-2:11"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:13-2:14"
+    "loc": "2:11-2:12"
   },
   {
     "token": "RBRACE",

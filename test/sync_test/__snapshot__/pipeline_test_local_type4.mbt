@@ -1,8 +1,9 @@
+//!build: -w -deprecated_syntax
 fn main {
   struct S {
     flag : Bool
     y : Int
-  } derive(Show)
+  } derive(Debug)
   let s = { y: 1, flag: true }
-  println(s)
+  println(to_repr(s))
 }

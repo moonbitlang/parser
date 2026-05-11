@@ -208,7 +208,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Debug"
                         }
                       },
                       "is_object": false
@@ -436,7 +436,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Debug"
                         }
                       },
                       "is_object": false
@@ -563,6 +563,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -782,6 +783,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1063,6 +1065,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1240,7 +1243,7 @@
                                             "kind": "InterpElem::Source",
                                             "loc": null,
                                             "children": {
-                                              "source": "a"
+                                              "source": "to_repr(a)"
                                             }
                                           },
                                           {
@@ -1254,7 +1257,7 @@
                                             "kind": "InterpElem::Source",
                                             "loc": null,
                                             "children": {
-                                              "source": "b"
+                                              "source": "to_repr(b)"
                                             }
                                           },
                                           {
@@ -1268,7 +1271,7 @@
                                             "kind": "InterpElem::Source",
                                             "loc": null,
                                             "children": {
-                                              "source": "c"
+                                              "source": "to_repr(c)"
                                             }
                                           }
                                         ]
@@ -1428,6 +1431,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1534,6 +1538,16 @@
                                 }
                               }
                             }
+                          },
+                          "init": {
+                            "kind": "Expr::ForEach::Init",
+                            "loc": null,
+                            "children": []
+                          },
+                          "continue_block": {
+                            "kind": "Expr::ForEach::ContinueBlock",
+                            "loc": null,
+                            "children": []
                           },
                           "body": {
                             "kind": "Expr::DotApply",
@@ -1656,6 +1670,7 @@
                             }
                           },
                           "else_block": null,
+                          "where_clause": null,
                           "label": null
                         }
                       },
@@ -1721,6 +1736,16 @@
                               }
                             }
                           },
+                          "init": {
+                            "kind": "Expr::ForEach::Init",
+                            "loc": null,
+                            "children": []
+                          },
+                          "continue_block": {
+                            "kind": "Expr::ForEach::ContinueBlock",
+                            "loc": null,
+                            "children": []
+                          },
                           "body": {
                             "kind": "Expr::Let",
                             "loc": null,
@@ -1783,6 +1808,7 @@
                             }
                           },
                           "else_block": null,
+                          "where_clause": null,
                           "label": null
                         }
                       },
@@ -1836,7 +1862,7 @@
                                             "kind": "InterpElem::Source",
                                             "loc": null,
                                             "children": {
-                                              "source": "arr[0]"
+                                              "source": "to_repr(arr[0])"
                                             }
                                           }
                                         ]
@@ -1911,7 +1937,7 @@
                                         "kind": "InterpElem::Source",
                                         "loc": null,
                                         "children": {
-                                          "source": "arr.unsafe_get(1)"
+                                          "source": "to_repr(arr.unsafe_get(1))"
                                         }
                                       }
                                     ]
@@ -1985,6 +2011,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2665,7 +2692,7 @@
                                             "kind": "LongIdent::Ident",
                                             "loc": null,
                                             "children": {
-                                              "value": "println"
+                                              "value": "debug"
                                             }
                                           }
                                         }
@@ -2967,7 +2994,7 @@
                                             "kind": "LongIdent::Ident",
                                             "loc": null,
                                             "children": {
-                                              "value": "println"
+                                              "value": "debug"
                                             }
                                           }
                                         }
@@ -3101,7 +3128,7 @@
                                         "kind": "LongIdent::Ident",
                                         "loc": null,
                                         "children": {
-                                          "value": "println"
+                                          "value": "debug"
                                         }
                                       }
                                     }
@@ -3461,7 +3488,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Debug"
                         }
                       },
                       "is_object": false
@@ -3632,7 +3659,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Debug"
                         }
                       },
                       "is_object": false

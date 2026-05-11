@@ -9,6 +9,8 @@ fn T::new() -> T raise {
 
 pub(open) trait Any {}
 
+impl Any for T
+
 struct Test {
   f : () -> &Any raise
 }

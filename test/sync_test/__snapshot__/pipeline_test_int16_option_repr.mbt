@@ -5,5 +5,5 @@ fn fxxx(x : FixedArray[Int16]) -> Int16? {
 
 ///|
 fn main {
-  println(fxxx([-32768]))
+  debug(fxxx([-32768]))
 }

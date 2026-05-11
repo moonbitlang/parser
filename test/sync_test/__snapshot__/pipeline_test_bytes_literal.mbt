@@ -16,11 +16,11 @@ fn check(b : Bytes, arr : FixedArray[Int]) -> Unit {
 
 let g = b"ab\xFF\o000\r\ncd"
 let g0 = b"\xff"
-let g1 : Bytes= "\xff"
+let g1 : Bytes= b"\xff"
 let g2 : Bytes= b"\x1f"
-let g3 : Bytes = "\x1f"
+let g3 : Bytes = b"\x1f"
 
-let g4 : Bytes = "你好"
+let g4 : Bytes = b"你好"
 fn init {
   println("g0 len is \{g0.length()}")  
   println("g1 len is \{g1.length()}")  
@@ -38,5 +38,5 @@ fn init {
   let b1 = b"\x00\x00\x00\x00".to_fixedarray()
   b1[0] = b'\x01'
   println(b"\x00\x00\x00\x00")
-  println(b1)
+  debug(b1)
 }

@@ -7,7 +7,7 @@ struct Scheduler {
 }
 
 fn Scheduler::new() -> Scheduler {
-  { next_id: 0, coros: @queue.new() }
+  { next_id: 0, coros: @queue.Queue([]) }
 }
 
 fn Scheduler::step(self : Scheduler) -> Unit {
@@ -22,11 +22,13 @@ async fn Scheduler::suspend(self : Scheduler) -> Unit noraise {
 }
 
 fn Scheduler::run_all(self : Scheduler) -> Unit {
-  loop self.coros.pop() {
-    None => ()
-    Some(coro) => {
-      coro()
-      continue self.coros.pop()
+  for next_coro = self.coros.pop() {
+    match next_coro {
+      None => break
+      Some(coro) => {
+        coro()
+        continue self.coros.pop()
+      }
     }
   }
 }
@@ -92,27 +94,31 @@ async fn[T] Channel::send(self : Channel[T], value : T) -> Unit raise ChannelTer
     No_value => self.value = Has_value(value)
   }
   // wait until the value is read
-  loop self.value {
-    Has_value(_) => {
-      self.ctx.suspend()
-      continue self.value
+  for state = self.value {
+    match state {
+      Has_value(_) => {
+        self.ctx.suspend()
+        continue self.value
+      }
+      No_value => break
+      Terminated => raise ChannelTerminated
     }
-    No_value => ()
-    Terminated => raise ChannelTerminated
   }
 }
 
 async fn[T] Channel::recv(self : Channel[T]) -> T raise ChannelTerminated {
-  loop self.value {
-    Has_value(value) => {
-      self.value = No_value
-      value
+  for state = self.value {
+    match state {
+      Has_value(value) => {
+        self.value = No_value
+        break value
+      }
+      No_value => {
+        self.ctx.suspend()
+        continue self.value
+      }
+      Terminated => raise ChannelTerminated
     }
-    No_value => {
-      self.ctx.suspend()
-      continue self.value
-    }
-    Terminated => raise ChannelTerminated
   }
 }
 
@@ -122,7 +128,7 @@ fn init {
   let c2 : Channel[Int] = ctx.make_channel()
   ctx.spawn(id => {
     try {
-      for {
+      for ;; {
         println("thread \{id}: received \{c1.recv()} from channel 1")
       }
     } catch {
@@ -131,7 +137,7 @@ fn init {
   })
   ctx.spawn(id => {
     try {
-      for {
+      for ;; {
         println("thread \{id}: received \{c2.recv()} from channel 2")
       }
     } catch {

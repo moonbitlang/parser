@@ -4,7 +4,7 @@ struct E {
   a : Int
   b : Int64
   c : Double
-} derive(Show)
+} derive(Debug)
 
 ///|
 #valtype
@@ -12,7 +12,7 @@ struct F {
   a : Double
   b : Int
   c : Int64
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn f(e : E) -> String {
@@ -27,7 +27,7 @@ fn g(e1 : E, e2 : E) -> Unit {
 ///|
 fn h(es : FixedArray[E]) -> Unit {
   match es {
-    [a, .., b, c] => println("h: \{a}, \{b}, \{c}")
+    [a, .., b, c] => println("h: \{to_repr(a)}, \{to_repr(b)}, \{to_repr(c)}")
     _ => ()
   }
 }
@@ -42,8 +42,8 @@ fn k(e : E) -> Unit {
     let _ = arr.pop()
 
   }
-  println("k: \{arr[0]}")
-  println("k: \{arr.unsafe_get(1)}")
+  println("k: \{to_repr(arr[0])}")
+  println("k: \{to_repr(arr.unsafe_get(1))}")
 }
 
 ///|
@@ -53,11 +53,11 @@ fn main {
   let f1 : F = { a: 1.1, b: 2, c: 3 }
   println(f(e1))
   g(e1, e2)
-  println(FixedArray::makei(5, i => { ..f1, b: i }))
+  debug(FixedArray::makei(5, i => { ..f1, b: i }))
   k(e2)
 
-  println(Point2::{ x: 1, y: 2 })  
-  println(RefPoint3::{ d2: Point2::{ x: 3, y: 4 }, z: 5 })
+  debug(Point2::{ x: 1, y: 2 })  
+  debug(RefPoint3::{ d2: Point2::{ x: 3, y: 4 }, z: 5 })
 
 }
 
@@ -66,10 +66,9 @@ fn main {
 struct Point2 {
   x : Int
   y : Int
-} derive(Show)
+} derive(Debug)
 
 struct RefPoint3 {
   d2 : Point2
   z : Int
-} derive(Show)
-
+} derive(Debug)

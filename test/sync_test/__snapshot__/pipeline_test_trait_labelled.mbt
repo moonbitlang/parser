@@ -7,7 +7,7 @@ fn[X : Show] tee(x : X) -> X {
   x
 }
 
-struct T(Int) derive(Show)
+struct T(Int)
 impl I for T with f(self : T, x~ : Int, w : Int, y~ : Int) -> Unit {
   println("f(\{self}, x=\{x}, \{w}, y=\{y})")
 }
@@ -18,4 +18,10 @@ fn init {
   I::f(tee(t), x=tee(1), tee(2), y=tee(3))
   println("===")
   I::f(tee(t), tee(2), y=tee(3), x=tee(1))
+}
+
+impl Show for T with output(self, logger) {
+  logger.write_string("T(")
+  Show::output(self.0, logger)
+  logger.write_string(")")
 }

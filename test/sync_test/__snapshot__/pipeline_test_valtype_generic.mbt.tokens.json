@@ -213,24 +213,24 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Debug"
     ],
-    "loc": "7:10-7:14"
+    "loc": "7:10-7:15"
   },
   {
     "token": "RPAREN",
-    "loc": "7:14-7:15"
+    "loc": "7:15-7:16"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "7:15-7:15"
+    "loc": "7:16-7:16"
   },
   {
     "token": "NEWLINE",
-    "loc": "7:15-7:16"
+    "loc": "7:16-7:17"
   },
   {
     "token": "NEWLINE",
@@ -771,35 +771,35 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "22:3-22:10"
+    "loc": "22:3-22:8"
   },
   {
     "token": "LPAREN",
-    "loc": "22:10-22:11"
+    "loc": "22:8-22:9"
   },
   {
     "token": [
       "LIDENT",
       "t"
     ],
-    "loc": "22:11-22:12"
+    "loc": "22:9-22:10"
   },
   {
     "token": "RPAREN",
-    "loc": "22:12-22:13"
+    "loc": "22:10-22:11"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "22:13-22:13"
+    "loc": "22:11-22:11"
   },
   {
     "token": "NEWLINE",
-    "loc": "22:13-22:14"
+    "loc": "22:11-22:12"
   },
   {
     "token": "LET",
@@ -942,35 +942,35 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "27:3-27:10"
+    "loc": "27:3-27:8"
   },
   {
     "token": "LPAREN",
-    "loc": "27:10-27:11"
+    "loc": "27:8-27:9"
   },
   {
     "token": [
       "LIDENT",
       "arr"
     ],
-    "loc": "27:11-27:14"
+    "loc": "27:9-27:12"
   },
   {
     "token": "RPAREN",
-    "loc": "27:14-27:15"
+    "loc": "27:12-27:13"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "27:15-27:15"
+    "loc": "27:13-27:13"
   },
   {
     "token": "NEWLINE",
-    "loc": "27:15-27:16"
+    "loc": "27:13-27:14"
   },
   {
     "token": "FOR",
@@ -1070,28 +1070,28 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "32:3-32:10"
+    "loc": "32:3-32:8"
   },
   {
     "token": "LPAREN",
-    "loc": "32:10-32:11"
+    "loc": "32:8-32:9"
   },
   {
     "token": [
       "LIDENT",
       "arr"
     ],
-    "loc": "32:11-32:14"
+    "loc": "32:9-32:12"
   },
   {
     "token": "RPAREN",
-    "loc": "32:14-32:15"
+    "loc": "32:12-32:13"
   },
   {
     "token": "NEWLINE",
-    "loc": "32:15-32:16"
+    "loc": "32:13-32:14"
   },
   {
     "token": "RBRACE",

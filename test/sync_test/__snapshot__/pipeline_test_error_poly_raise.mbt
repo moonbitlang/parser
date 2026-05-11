@@ -2,7 +2,7 @@
 suberror Err {
   Err1
   Err2
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn error_poly_but_may_raise(flag : Bool, f : () -> Unit raise?) -> Unit raise {
@@ -15,8 +15,8 @@ fn error_poly_but_may_raise(flag : Bool, f : () -> Unit raise?) -> Unit raise {
 
 ///|
 fn init {
-  println(try? error_poly_but_may_raise(true, () => println("callback")))
-  println(try? error_poly_but_may_raise(false, () => println("callback")))
-  println(try? error_poly_but_may_raise(true, () => raise Err2))
-  println(try? error_poly_but_may_raise(false, () => raise Err2))
+  debug(try? error_poly_but_may_raise(true, () => println("callback")))
+  debug(try? error_poly_but_may_raise(false, () => println("callback")))
+  debug(try? error_poly_but_may_raise(true, () => raise Err2))
+  debug(try? error_poly_but_may_raise(false, () => raise Err2))
 }

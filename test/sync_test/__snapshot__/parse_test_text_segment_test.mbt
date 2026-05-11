@@ -16,7 +16,7 @@ struct Rcd2 { x: Int }//comment
 
 ///|字符unicode测试🐰
 /// doc for ty
-type MyInt Int //comment
+struct MyInt(Int) //comment
 
 //comment
 

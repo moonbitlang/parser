@@ -69,6 +69,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -469,6 +470,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -742,7 +744,7 @@
                             "kind": "Label",
                             "loc": null,
                             "children": {
-                              "name": "invariant"
+                              "name": "proof_invariant"
                             }
                           },
                           "expr": {
@@ -880,6 +882,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

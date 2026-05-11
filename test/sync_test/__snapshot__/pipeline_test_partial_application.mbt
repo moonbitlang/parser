@@ -27,7 +27,7 @@ fn f_async(a : Int, b : Bool, c : String, d : Double) -> Int raise {
 ///|
 enum Foo {
   C(Int, Bool, String, Double)
-} derive(Show)
+}
 
 ///|
 let obj : Foo = C(1, false, "hello", 3.14)
@@ -105,4 +105,20 @@ fn main {
 
   // dot application x pipe
   obj |> _.g(true, "y")
+}
+
+impl Show for Foo with output(self, logger) {
+  match self {
+    C(v0, v1, v2, v3) => {
+      logger.write_string("C(")
+      Show::output(v0, logger)
+      logger.write_string(", ")
+      Show::output(v1, logger)
+      logger.write_string(", ")
+      Show::output(v2, logger)
+      logger.write_string(", ")
+      Show::output(v3, logger)
+      logger.write_string(")")
+    }
+  }
 }

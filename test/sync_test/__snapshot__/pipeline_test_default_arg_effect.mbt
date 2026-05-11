@@ -1,5 +1,5 @@
 ///|
-suberror Err derive(Show)
+suberror Err derive(Debug)
 
 ///|
 fn has_err(default? : Int = { raise Err }) -> Int raise {
@@ -8,8 +8,8 @@ fn has_err(default? : Int = { raise Err }) -> Int raise {
 
 ///|
 fn init {
-  println(try? has_err())
-  println(try? has_err(default=42))
+  debug(try? has_err())
+  debug(try? has_err(default=42))
 }
 
 ///|
@@ -34,19 +34,19 @@ async fn has_async(
 fn init {
   println("====")
   run_async(() => {
-    println(try? has_async())
+    debug(try? has_async())
   })
   println("====")
   run_async(() => {
-    println(try? has_async(default1=21))
+    debug(try? has_async(default1=21))
   })
   println("====")
   run_async(() => {
-    println(try? has_async(default2=42))
+    debug(try? has_async(default2=42))
   })
   println("====")
   run_async(() => {
-    println(try? has_async(default1=6, default2=7))
+    debug(try? has_async(default1=6, default2=7))
   })
 }
 

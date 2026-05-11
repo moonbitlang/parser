@@ -30,6 +30,6 @@ fn init {
 fn init {
   // array literal, two binders
   for i, x in [1, 2, 3] {
-    println((i, x))
+    debug((i, x))
   }
 }

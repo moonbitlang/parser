@@ -5,21 +5,21 @@ fn error_to_json(e : Error) -> Json = "%error.to_json"
 suberror E1 {
   A(Int)
   B(String)
-} derive(ToJson(style="legacy"))
+} derive(ToJson(style="legacy"), Debug)
 
 ///|
-suberror E2 derive(ToJson(style="legacy"))
+suberror E2 derive(ToJson(style="legacy"), Debug)
 
 ///|
 suberror E3 {
   E3(Double?)
-} derive(ToJson(style="legacy"))
+} derive(ToJson(style="legacy"), Debug)
 
 ///|
 suberror E4 {
   C(Int)
   D(E3)
-}
+} derive(Debug)
 
 ///|
 fn f(x : Int) -> Unit raise Error {
@@ -46,7 +46,7 @@ fn f(x : Int) -> Unit raise Error {
 fn main {
   for i in 1..=8 {
     try f(i) catch {
-      e => println(error_to_json(e))
+      e => debug(error_to_json(e))
     }
   }
 }

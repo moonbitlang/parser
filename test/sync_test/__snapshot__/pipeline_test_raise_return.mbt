@@ -3,5 +3,5 @@ fn f() -> Int raise {
 }
 
 fn main {
-    println(try? f())
+    debug(try? f())
 }

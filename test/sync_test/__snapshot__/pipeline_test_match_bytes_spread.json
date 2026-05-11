@@ -39,7 +39,7 @@
         "loc": null,
         "children": {
           "constant": {
-            "kind": "Constant::String",
+            "kind": "Constant::Bytes",
             "loc": null,
             "children": {
               "value": "中文"
@@ -170,6 +170,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -616,6 +617,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -729,7 +731,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "中文你好"
@@ -789,7 +791,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "你好xyz"
@@ -867,7 +869,7 @@
                     "loc": null,
                     "children": {
                       "constant": {
-                        "kind": "Constant::String",
+                        "kind": "Constant::Bytes",
                         "loc": null,
                         "children": {
                           "value": "你好,ok"
@@ -1057,6 +1059,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1110,10 +1113,10 @@
                                 "loc": null,
                                 "children": [
                                   {
-                                    "kind": "ArrayPattern::StringSpread",
+                                    "kind": "ArrayPattern::BytesSpread",
                                     "loc": null,
                                     "children": {
-                                      "str": "你好"
+                                      "bytes": "你好"
                                     }
                                   }
                                 ]

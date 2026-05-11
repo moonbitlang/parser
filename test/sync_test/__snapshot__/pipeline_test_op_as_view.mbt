@@ -2,18 +2,7 @@ struct View[T] {
   start: Int
   len: Int
   buf: FixedArray[T]
-}
-
-impl[X : Show] Show for View[X] with output(self, logger) {
-  logger.write_string("[")
-  for i = 0; i < self.len; i = i + 1 {
-    if i > 0 {
-      logger.write_string(", ")
-    }
-    self.buf[self.start + i].output(logger)
-  }
-  logger.write_char(']')
-}
+} derive(Debug)
 
 fn[T] View::length(self: View[T]) -> Int {
   self.len
@@ -49,25 +38,25 @@ fn[T] View::op_as_view(self: View[T], start~: Int = 0, end?: Int) -> View[T] {
 fn init {
   let arr = MyFixedArray::MyFixedArray([1, 2, 3, 4, 5])
   let s1 = arr[1:]
-  println(s1)
+  debug(s1)
   let s2 = arr[:3]
-  println(s2)
+  debug(s2)
   let s3 = arr[1:3]
-  println(s3)
+  debug(s3)
   let s4 = arr[:]
-  println(s4)
+  debug(s4)
   let s5 = arr.make_view(1, 3)
-  println(s5)
+  debug(s5)
   let s6 = arr.make_view(3, 6)
-  println(s6)
+  debug(s6)
 }
 
 fn init {
   let arr = MyFixedArray::MyFixedArray([(1, 2), (3, 4), (5, 6), (7, 8), (9, 10)])
   let s1 = arr[1:][1:]
-  println(s1)
+  debug(s1)
   let s2 = arr[:3][:3]
-  println(s2)
+  debug(s2)
   let s3 = arr[:][1:3]
-  println(s3)
+  debug(s3)
 }
