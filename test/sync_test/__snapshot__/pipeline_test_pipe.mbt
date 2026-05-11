@@ -34,13 +34,13 @@ fn g_str(x : String) -> String { x }
 fn init {
   5 |> f(mul2) |> println
   "str" |> f(g_str) |> println
-  42 |> Option::Some |> println
+  42 |> Option::Some |> debug
   let opt: String? = "x" |> Some
-  println(opt)
+  debug(opt)
 }
 
 fn want_option(x : Int?) -> Unit {
-  println(x)
+  debug(x)
 }
 
 fn[X] id(x : X) -> X { x }
@@ -48,5 +48,5 @@ fn[X] id(x : X) -> X { x }
 fn init {
   Some(42) |> want_option
   let opt : _? = Some(42) |> id
-  println(opt)
+  debug(opt)
 }

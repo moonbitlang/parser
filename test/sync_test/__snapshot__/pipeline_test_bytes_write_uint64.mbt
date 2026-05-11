@@ -79,5 +79,5 @@ fn main {
   unsafe_write_uint32_be(bytes, 20, 0x12345678)
   unsafe_write_uint16_le(bytes, 24, 0x1234)
   unsafe_write_uint16_be(bytes, 26, 0x1234)
-  println(bytes)
+  debug(bytes)
 }

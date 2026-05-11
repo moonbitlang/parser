@@ -1,3 +1,5 @@
+//!build: -w -20-27
+
 fn init {
   // Basic exact match tests
   println("abc" lexmatch? "abc")

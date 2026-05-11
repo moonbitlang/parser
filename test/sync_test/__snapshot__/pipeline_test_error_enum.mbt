@@ -2,13 +2,13 @@ suberror Error1 {
   A
   B(Int, x~: String)
   C(mut x~: String, Char, y~: Bool)
-} derive(Show)
+}
 
 suberror Error2 {
   A
   B(Int, x~: String)
   C(mut x~: String, Char, y~: Bool)
-} derive(Show)
+}
 
 fn f1() -> Unit raise Error1 {
   raise Error1::B(42, x="error1")
@@ -57,5 +57,55 @@ fn main {
   try t2() catch {
     Error2::C(_) as c => println(c)
     _ => println("unknown error")
+  }
+}
+
+impl Show for Error1 with output(self, logger) {
+  match self {
+    A => logger.write_string("A")
+    B(v0, x=v1) => {
+      logger.write_string("B(")
+      Show::output(v0, logger)
+      logger.write_string(", ")
+      logger.write_string("x=")
+      Show::output(v1, logger)
+      logger.write_string(")")
+    }
+    C(x=v0, v1, y=v2) => {
+      logger.write_string("C(")
+      logger.write_string("x=")
+      Show::output(v0, logger)
+      logger.write_string(", ")
+      Show::output(v1, logger)
+      logger.write_string(", ")
+      logger.write_string("y=")
+      Show::output(v2, logger)
+      logger.write_string(")")
+    }
+  }
+}
+
+impl Show for Error2 with output(self, logger) {
+  match self {
+    A => logger.write_string("A")
+    B(v0, x=v1) => {
+      logger.write_string("B(")
+      Show::output(v0, logger)
+      logger.write_string(", ")
+      logger.write_string("x=")
+      Show::output(v1, logger)
+      logger.write_string(")")
+    }
+    C(x=v0, v1, y=v2) => {
+      logger.write_string("C(")
+      logger.write_string("x=")
+      Show::output(v0, logger)
+      logger.write_string(", ")
+      Show::output(v1, logger)
+      logger.write_string(", ")
+      logger.write_string("y=")
+      Show::output(v2, logger)
+      logger.write_string(")")
+    }
   }
 }

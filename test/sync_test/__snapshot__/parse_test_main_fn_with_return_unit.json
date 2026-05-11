@@ -69,6 +69,7 @@
           "doc": " A main function with empty parameters and a return type of Unit is valid.\n This syntax is relaxed for LLMs. We still encourage users to use `fn main {...}`."
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

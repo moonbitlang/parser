@@ -144,6 +144,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -433,6 +434,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -526,37 +528,21 @@
                         }
                       },
                       "rhs": {
-                        "kind": "Expr::Apply",
+                        "kind": "Expr::Ident",
                         "loc": null,
                         "children": {
-                          "func": {
-                            "kind": "Expr::Ident",
+                          "id": {
+                            "kind": "Var",
                             "loc": null,
                             "children": {
-                              "id": {
-                                "kind": "Var",
+                              "name": {
+                                "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "name": {
-                                    "kind": "LongIdent::Ident",
-                                    "loc": null,
-                                    "children": {
-                                      "value": "println"
-                                    }
-                                  }
+                                  "value": "debug"
                                 }
                               }
                             }
-                          },
-                          "args": {
-                            "kind": "Expr::Apply::ArgumentList",
-                            "loc": null,
-                            "children": []
-                          },
-                          "attr": {
-                            "kind": "ApplyAttr::NoAttr",
-                            "loc": null,
-                            "children": {}
                           }
                         }
                       }
@@ -681,37 +667,21 @@
                     }
                   },
                   "rhs": {
-                    "kind": "Expr::Apply",
+                    "kind": "Expr::Ident",
                     "loc": null,
                     "children": {
-                      "func": {
-                        "kind": "Expr::Ident",
+                      "id": {
+                        "kind": "Var",
                         "loc": null,
                         "children": {
-                          "id": {
-                            "kind": "Var",
+                          "name": {
+                            "kind": "LongIdent::Ident",
                             "loc": null,
                             "children": {
-                              "name": {
-                                "kind": "LongIdent::Ident",
-                                "loc": null,
-                                "children": {
-                                  "value": "println"
-                                }
-                              }
+                              "value": "debug"
                             }
                           }
                         }
-                      },
-                      "args": {
-                        "kind": "Expr::Apply::ArgumentList",
-                        "loc": null,
-                        "children": []
-                      },
-                      "attr": {
-                        "kind": "ApplyAttr::NoAttr",
-                        "loc": null,
-                        "children": {}
                       }
                     }
                   }
@@ -766,6 +736,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1012,7 +983,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "println"
+                                  "value": "debug"
                                 }
                               }
                             }

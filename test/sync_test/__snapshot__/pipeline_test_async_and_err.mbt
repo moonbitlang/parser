@@ -3,14 +3,14 @@
 async fn[T, E : Error] suspend(f : ((T) -> Unit, (E) -> Unit) -> Unit) -> T raise E = "%async.suspend"
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
 
-suberror Err derive(Show)
+suberror Err derive(Debug)
 
 fn sync_with_err() -> Unit raise Err {
   raise Err
 }
 
 async fn async_to_result() -> Unit noraise {
-  println(try? sync_with_err())
+  debug(try? sync_with_err())
 }
 
 fn init {
@@ -26,7 +26,7 @@ fn init {
     try {
       async_with_err()
     } catch {
-      err => println("catched: \{err}")
+      err => println("catched: \{Debug::to_repr(err)}")
     }
   })
 }
@@ -41,7 +41,7 @@ fn init {
     try {
       async_with_err_non_tail()
     } catch {
-      err => println("catched: \{err}")
+      err => println("catched: \{Debug::to_repr(err)}")
     }
   })
 }
@@ -50,7 +50,7 @@ async fn async_with_try() -> Unit noraise {
   try {
     sync_with_err()
   } catch {
-    err => println("catched: \{err}")
+    err => println("catched: \{Debug::to_repr(err)}")
   }
 }
 
@@ -69,7 +69,7 @@ fn init {
     try {
       async_with_tail_err_in_if(true)
     } catch {
-      err => println("catched: \{err}")
+      err => println("catched: \{Debug::to_repr(err)}")
     }
   })
 }
@@ -91,7 +91,7 @@ fn init {
     try {
       async_with_tail_err_obj_method(42)
     } catch {
-      err => println("catched: \{err}")
+      err => println("catched: \{Debug::to_repr(err)}")
     }
   })
 }
@@ -125,5 +125,5 @@ async fn raise_to_async_handler_in_arg() -> Unit {
 }
 
 fn init {
-  run_async(() => println(try? raise_to_async_handler_in_arg()))
+  run_async(() => debug(try? raise_to_async_handler_in_arg()))
 }

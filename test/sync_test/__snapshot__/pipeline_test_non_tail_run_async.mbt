@@ -8,7 +8,7 @@ async fn answer() -> Int noraise {
   suspend(k => k(42))
 }
 
-let flag : Ref[Bool] = Ref::new(true)
+let flag : Ref[Bool] = Ref(true)
 
 fn main {
   run_async(() => {

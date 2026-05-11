@@ -42,6 +42,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -103,7 +104,7 @@
                 "loc": null,
                 "children": {
                   "constant": {
-                    "kind": "Constant::String",
+                    "kind": "Constant::Bytes",
                     "loc": null,
                     "children": {
                       "value": "\\xE0\\xA1\\x80"
@@ -161,7 +162,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "(?utf8:[\\u0800-\\u0fff])"
+                                      "lit": "(?utf8:[\\u0800-\\u0fff])",
+                                      "offset": 1
                                     }
                                   }
                                 }

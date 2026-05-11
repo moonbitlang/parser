@@ -1,3 +1,5 @@
+//!build: -w -20-27
+
 ///|
 fn test_exact() -> Unit raise {
   let str = "hello"

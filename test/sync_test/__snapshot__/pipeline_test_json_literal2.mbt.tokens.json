@@ -1059,7 +1059,7 @@
   {
     "token": [
       "DOT_LIDENT",
-      "to_array"
+      "to_owned"
     ],
     "loc": "20:36-20:44"
   },
@@ -1160,7 +1160,7 @@
   {
     "token": [
       "DOT_LIDENT",
-      "to_array"
+      "to_owned"
     ],
     "loc": "21:39-21:47"
   },

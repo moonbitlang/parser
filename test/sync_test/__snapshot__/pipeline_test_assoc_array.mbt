@@ -25,7 +25,7 @@ fn init {
     let map1: Map[T, _] = Map([(A, "ok\n"), (B, "not ok\n"), (C, "not ok\n")])
     let map2 = Map::Map([("a", 0), ("b", 1), ("c", 2)] )
     let map3: Map[ST, _] = Map([(ST(A), 1.28), (ST(B), 2.56), (ST(C), 3.14)])
-    println(map1.find(A))
-    println(map2.find("b"))
-    println(map3.find(ST(C)))
+    debug(map1.find(A))
+    debug(map2.find("b"))
+    debug(map3.find(ST(C)))
 }

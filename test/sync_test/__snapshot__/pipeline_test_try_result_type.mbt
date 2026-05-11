@@ -17,6 +17,6 @@ fn g(c : Bool) -> Unit raise {
 }
 
 fn init {
-  println(try? g(true))
-  println(try? g(false))
+  debug(try? g(true))
+  debug(try? g(false))
 }

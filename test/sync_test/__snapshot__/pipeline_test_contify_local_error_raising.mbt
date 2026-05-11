@@ -6,9 +6,9 @@ fn main {
 ///|
 suberror MyErr {
   MyErr(String)
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn pipe_failed() -> Unit {
-  println(try? (x => raise MyErr(x))("msg"))
+  debug(try? (x => raise MyErr(x))("msg"))
 }

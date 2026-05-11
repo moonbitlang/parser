@@ -107,6 +107,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclStubs",
         "loc": null,
@@ -350,6 +351,31 @@
                     ]
                   }
                 }
+              },
+              {
+                "kind": "DerivingDirective",
+                "loc": null,
+                "children": {
+                  "type_name": {
+                    "kind": "TypeName",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": {
+                          "value": "Debug"
+                        }
+                      },
+                      "is_object": false
+                    }
+                  },
+                  "args": {
+                    "kind": "DerivingDirective::ArgList",
+                    "loc": null,
+                    "children": []
+                  }
+                }
               }
             ]
           }
@@ -453,6 +479,31 @@
                         }
                       }
                     ]
+                  }
+                }
+              },
+              {
+                "kind": "DerivingDirective",
+                "loc": null,
+                "children": {
+                  "type_name": {
+                    "kind": "TypeName",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": {
+                          "value": "Debug"
+                        }
+                      },
+                      "is_object": false
+                    }
+                  },
+                  "args": {
+                    "kind": "DerivingDirective::ArgList",
+                    "loc": null,
+                    "children": []
                   }
                 }
               }
@@ -631,6 +682,31 @@
                     ]
                   }
                 }
+              },
+              {
+                "kind": "DerivingDirective",
+                "loc": null,
+                "children": {
+                  "type_name": {
+                    "kind": "TypeName",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": {
+                          "value": "Debug"
+                        }
+                      },
+                      "is_object": false
+                    }
+                  },
+                  "args": {
+                    "kind": "DerivingDirective::ArgList",
+                    "loc": null,
+                    "children": []
+                  }
+                }
               }
             ]
           }
@@ -801,7 +877,33 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "DerivingDirective",
+                "loc": null,
+                "children": {
+                  "type_name": {
+                    "kind": "TypeName",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "LongIdent::Ident",
+                        "loc": null,
+                        "children": {
+                          "value": "Debug"
+                        }
+                      },
+                      "is_object": false
+                    }
+                  },
+                  "args": {
+                    "kind": "DerivingDirective::ArgList",
+                    "loc": null,
+                    "children": []
+                  }
+                }
+              }
+            ]
           }
         }
       }
@@ -940,6 +1042,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2216,6 +2319,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2286,6 +2390,16 @@
                     }
                   }
                 }
+              },
+              "init": {
+                "kind": "Expr::ForEach::Init",
+                "loc": null,
+                "children": []
+              },
+              "continue_block": {
+                "kind": "Expr::ForEach::ContinueBlock",
+                "loc": null,
+                "children": []
               },
               "body": {
                 "kind": "Expr::Try",
@@ -2395,7 +2509,7 @@
                                         "kind": "LongIdent::Ident",
                                         "loc": null,
                                         "children": {
-                                          "value": "println"
+                                          "value": "debug"
                                         }
                                       }
                                     }
@@ -2502,6 +2616,7 @@
                 }
               },
               "else_block": null,
+              "where_clause": null,
               "label": null
             }
           }

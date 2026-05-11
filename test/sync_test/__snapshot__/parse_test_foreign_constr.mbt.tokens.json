@@ -147,32 +147,46 @@
   },
   {
     "token": [
-      "UIDENT",
-      "Ty"
+      "PACKAGE_NAME",
+      "pkg"
     ],
-    "loc": "5:11-5:13"
-  },
-  {
-    "token": "COLONCOLON",
-    "loc": "5:13-5:15"
+    "loc": "5:11-5:15"
   },
   {
     "token": [
-      "UIDENT",
+      "DOT_UIDENT",
+      "Ty"
+    ],
+    "loc": "5:16-5:18"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "5:18-5:20"
+  },
+  {
+    "token": [
+      "PACKAGE_NAME",
+      "pkg"
+    ],
+    "loc": "5:20-5:24"
+  },
+  {
+    "token": [
+      "DOT_UIDENT",
       "Constr"
     ],
-    "loc": "5:15-5:21"
+    "loc": "5:25-5:31"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "5:21-5:21"
+    "loc": "5:31-5:31"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:21-5:22"
+    "loc": "5:31-5:32"
   },
   {
     "token": "LET",
@@ -188,39 +202,128 @@
   },
   {
     "token": [
-      "PACKAGE_NAME",
-      "pkg"
+      "UIDENT",
+      "Ty"
     ],
-    "loc": "6:11-6:15"
+    "loc": "6:11-6:13"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "6:13-6:15"
   },
   {
     "token": [
-      "DOT_LIDENT",
-      "f"
+      "UIDENT",
+      "Constr"
     ],
-    "loc": "6:16-6:17"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "6:17-6:18"
-  },
-  {
-    "token": "RBRACE",
-    "loc": "7:1-7:2"
+    "loc": "6:15-6:21"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "7:2-7:2"
+    "loc": "6:21-6:21"
   },
   {
     "token": "NEWLINE",
-    "loc": "7:2-7:3"
+    "loc": "6:21-6:22"
+  },
+  {
+    "token": "LET",
+    "loc": "7:3-7:6"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "7:7-7:8"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "7:9-7:10"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Ty"
+    ],
+    "loc": "7:11-7:13"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "7:13-7:15"
+  },
+  {
+    "token": [
+      "PACKAGE_NAME",
+      "pkg"
+    ],
+    "loc": "7:15-7:19"
+  },
+  {
+    "token": [
+      "DOT_UIDENT",
+      "Constr"
+    ],
+    "loc": "7:20-7:26"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "7:26-7:26"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "7:26-7:27"
+  },
+  {
+    "token": "LET",
+    "loc": "8:3-8:6"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "8:7-8:8"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "8:9-8:10"
+  },
+  {
+    "token": [
+      "PACKAGE_NAME",
+      "pkg"
+    ],
+    "loc": "8:11-8:15"
+  },
+  {
+    "token": [
+      "DOT_LIDENT",
+      "f"
+    ],
+    "loc": "8:16-8:17"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "8:17-8:18"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "9:1-9:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "9:2-9:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "9:2-9:3"
   },
   {
     "token": "EOF",
-    "loc": "8:1-8:1"
+    "loc": "10:1-10:1"
   }
 ]

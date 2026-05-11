@@ -278,6 +278,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -337,7 +338,8 @@
                                 "kind": "LexPattern::Regex",
                                 "loc": null,
                                 "children": {
-                                  "lit": "\\n"
+                                  "lit": "\\n",
+                                  "offset": 1
                                 }
                               }
                             }
@@ -568,7 +570,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "[^ \\t\\r\\n]+"
+                                      "lit": "[^ \\t\\r\\n]+",
+                                      "offset": 1
                                     }
                                   },
                                   "binder": {
@@ -866,7 +869,8 @@
                                 "kind": "LexPattern::Regex",
                                 "loc": null,
                                 "children": {
-                                  "lit": "."
+                                  "lit": ".",
+                                  "offset": 1
                                 }
                               }
                             }
@@ -1093,7 +1097,8 @@
                                 "kind": "LexPattern::Regex",
                                 "loc": null,
                                 "children": {
-                                  "lit": ""
+                                  "lit": "",
+                                  "offset": 1
                                 }
                               }
                             }
@@ -1276,6 +1281,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1301,7 +1307,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "println"
+                          "value": "debug"
                         }
                       }
                     }

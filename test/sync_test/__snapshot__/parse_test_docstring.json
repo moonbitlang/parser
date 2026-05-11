@@ -88,6 +88,7 @@
           "doc": " docs for fn foo"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -155,6 +156,7 @@
           "doc": " multiline docs\n for bar"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -552,6 +554,7 @@
           "doc": " docs for init"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

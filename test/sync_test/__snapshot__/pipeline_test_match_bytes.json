@@ -144,6 +144,7 @@
           "doc": " basic usage"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -401,7 +402,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "world"
@@ -506,7 +507,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "hello"
@@ -819,6 +820,7 @@
           "doc": " the very rare case where we get for_sure_yes for string literal\n based on information from array patterns"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1542,6 +1544,7 @@
           "doc": " test all byte literal patterns"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2175,6 +2178,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2722,6 +2726,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

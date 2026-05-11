@@ -1,12 +1,12 @@
 ///|
-fn[T : Show] f(x : ReadOnlyArray[T]) -> Unit {
+fn[T : Debug] f(x : ReadOnlyArray[T]) -> Unit {
   match x {
     [a, .. rest, b] => {
-      println(a)
-      println(b)
-      println(rest)
+      debug(a)
+      debug(b)
+      debug(rest)
     }
-    [a] => println(a)
+    [a] => debug(a)
     [] => println("empty")
   }
 }
@@ -17,7 +17,7 @@ fn f1(x : ReadOnlyArray[(Int, Int)]) -> Unit {
     println(a)
     println(b)
   } else {
-    println(x)
+    debug(x)
   }
 }
 
@@ -32,5 +32,5 @@ fn main {
   f1([(9, 10)])
   f1([])
   let b = [..a, 4, 5]
-  println(b)
+  debug(b)
 }

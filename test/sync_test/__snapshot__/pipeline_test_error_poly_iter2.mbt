@@ -115,6 +115,6 @@ fn it() -> ((Int) -> Unit raise?) -> Unit raise? {
 
 fn main {
 
-  println(collect(it()))
-  println(find(it(), x => x > 42))
+  debug(collect(it()))
+  debug(find(it(), x => x > 42))
 }

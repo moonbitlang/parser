@@ -1,7 +1,7 @@
 ///|
 fn f(x : Bytes) -> Unit {
   match x {
-    [.. "\xff\xff", .. rest] => println(rest)
+    [.. b"\xff\xff", .. rest] => println(rest)
     _ => println("other")
   }
 }

@@ -107,6 +107,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -168,7 +169,7 @@
                                         "loc": null,
                                         "children": {
                                           "constant": {
-                                            "kind": "Constant::Char",
+                                            "kind": "Constant::Byte",
                                             "loc": null,
                                             "children": {
                                               "value": "a"
@@ -193,7 +194,7 @@
                                         "loc": null,
                                         "children": {
                                           "constant": {
-                                            "kind": "Constant::Char",
+                                            "kind": "Constant::Byte",
                                             "loc": null,
                                             "children": {
                                               "value": "z"
@@ -316,7 +317,7 @@
                                         "loc": null,
                                         "children": {
                                           "constant": {
-                                            "kind": "Constant::Char",
+                                            "kind": "Constant::Byte",
                                             "loc": null,
                                             "children": {
                                               "value": "b"
@@ -335,7 +336,7 @@
                                         "loc": null,
                                         "children": {
                                           "constant": {
-                                            "kind": "Constant::Char",
+                                            "kind": "Constant::Byte",
                                             "loc": null,
                                             "children": {
                                               "value": "c"
@@ -360,7 +361,7 @@
                                         "loc": null,
                                         "children": {
                                           "constant": {
-                                            "kind": "Constant::Char",
+                                            "kind": "Constant::Byte",
                                             "loc": null,
                                             "children": {
                                               "value": "x"
@@ -379,7 +380,7 @@
                                         "loc": null,
                                         "children": {
                                           "constant": {
-                                            "kind": "Constant::Char",
+                                            "kind": "Constant::Byte",
                                             "loc": null,
                                             "children": {
                                               "value": "y"
@@ -600,6 +601,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -649,24 +651,16 @@
                             "loc": null,
                             "children": {
                               "value": {
-                                "kind": "Expr::ArrayGetSlice",
+                                "kind": "Expr::Constant",
                                 "loc": null,
                                 "children": {
-                                  "array": {
-                                    "kind": "Expr::Constant",
+                                  "constant": {
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
-                                      "constant": {
-                                        "kind": "Constant::Bytes",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "abcxyz"
-                                        }
-                                      }
+                                      "value": "abcxyz"
                                     }
-                                  },
-                                  "start_index": null,
-                                  "end_index": null
+                                  }
                                 }
                               },
                               "kind": {
@@ -809,24 +803,16 @@
                             "loc": null,
                             "children": {
                               "value": {
-                                "kind": "Expr::ArrayGetSlice",
+                                "kind": "Expr::Constant",
                                 "loc": null,
                                 "children": {
-                                  "array": {
-                                    "kind": "Expr::Constant",
+                                  "constant": {
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
-                                      "constant": {
-                                        "kind": "Constant::Bytes",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "bcxyza"
-                                        }
-                                      }
+                                      "value": "bcxyza"
                                     }
-                                  },
-                                  "start_index": null,
-                                  "end_index": null
+                                  }
                                 }
                               },
                               "kind": {
@@ -879,24 +865,16 @@
                         "loc": null,
                         "children": {
                           "value": {
-                            "kind": "Expr::ArrayGetSlice",
+                            "kind": "Expr::Constant",
                             "loc": null,
                             "children": {
-                              "array": {
-                                "kind": "Expr::Constant",
+                              "constant": {
+                                "kind": "Constant::Bytes",
                                 "loc": null,
                                 "children": {
-                                  "constant": {
-                                    "kind": "Constant::Bytes",
-                                    "loc": null,
-                                    "children": {
-                                      "value": "bc123xy"
-                                    }
-                                  }
+                                  "value": "bc123xy"
                                 }
-                              },
-                              "start_index": null,
-                              "end_index": null
+                              }
                             }
                           },
                           "kind": {

@@ -5,24 +5,24 @@ struct T1[X] {
   z : Bool
   w : X
   m : (Int, Int)
-} derive(ToJson)
+} derive(ToJson, Debug)
 
 ///|
-struct NT[X](Array[X]) derive(ToJson)
+struct NT[X](Array[X]) derive(ToJson, Debug)
 
 ///|
 enum E1[X, Y] {
   C1
   C2(x~ : T1[X], (Double, NT[Y]))
-} derive(ToJson)
+} derive(ToJson, Debug)
 
 ///|
-suberror ErrNoPayload derive(ToJson)
+suberror ErrNoPayload derive(ToJson, Debug)
 
 ///|
 suberror ErrNewType {
   ErrNewType(Int)
-} derive(ToJson)
+} derive(ToJson, Debug)
 
 ///|
 fn init {
@@ -109,28 +109,28 @@ fn init {
 ///|
 struct FieldRename {
   a : Int
-} derive(ToJson(fields(a(rename="b"))), Show)
+} derive(ToJson(fields(a(rename="b"))))
 
 ///|
 enum VariantRename {
   RenameMeToD1(Int)
   C2(String)
-} derive(ToJson(cases(RenameMeToD1(rename="D1"))), Show)
+} derive(ToJson(cases(RenameMeToD1(rename="D1"))))
 
 ///|
 struct FieldRenameAllCamel {
   my_field : Int
-} derive(ToJson(rename_fields="camelCase"), Show)
+} derive(ToJson(rename_fields="camelCase"))
 
 ///|
 struct FieldRenameAllScreamingSnake {
   my_field : Int
-} derive(ToJson(rename_fields="SCREAMING_SNAKE_CASE"), Show)
+} derive(ToJson(rename_fields="SCREAMING_SNAKE_CASE"))
 
 ///|
 enum VariantRenameAllSnake {
   MyVariant(Int)
-} derive(ToJson(rename_cases="snake_case"), Show)
+} derive(ToJson(rename_cases="snake_case"))
 
 ///|
 fn init {
@@ -155,14 +155,14 @@ enum NewStyleLegacy {
   C1
   C2(String)
   C3(Int, Bool)
-} derive(ToJson(style="legacy"), Show)
+} derive(ToJson(style="legacy"))
 
 ///|
 enum NewStyleFlat {
   C1
   C2(String)
   C3(Int, Bool)
-} derive(ToJson(style="flat"), Show)
+} derive(ToJson(style="flat"))
 
 ///|
 fn init {
@@ -189,15 +189,15 @@ fn init {
 // ==== Additional comprehensive tests ====
 
 ///|
-struct TupleStruct(Int,String,Bool) derive(ToJson, Show, Eq)
+struct TupleStruct(Int,String,Bool) derive(ToJson, Eq, Debug)
 
 ///|
-struct EmptyStruct {} derive(ToJson, Show, Eq)
+struct EmptyStruct {} derive(ToJson, Eq, Debug)
 
 ///|
 enum SingleVariantEnum {
   OnlyVariant(Int, String)
-} derive(ToJson(style="flat"), Show, Eq)
+} derive(ToJson(style="flat"), Eq, Debug)
 
 ///|
 enum MixedEnum {
@@ -206,41 +206,41 @@ enum MixedEnum {
   TwoArgs(String, Bool)
   NamedArgs(x~ : Int, y~ : String)
   MixedArgs(Int, y~ : String, Bool)
-} derive(ToJson(style="flat"), Show, Eq)
+} derive(ToJson(style="flat"), Eq, Debug)
 
 ///|
 enum DeepNestedEnum {
   Level1(Level2)
-} derive(ToJson(style="flat"), Show, Eq)
+} derive(ToJson(style="flat"), Eq, Debug)
 
 ///|
 enum Level2 {
   Level2Variant(Level3)
-} derive(ToJson(style="flat"), Show, Eq)
+} derive(ToJson(style="flat"), Eq, Debug)
 
 ///|
 struct Level3 {
   value : Int
   nested : Level4?
-} derive(ToJson, Show, Eq)
+} derive(ToJson, Eq, Debug)
 
 ///|
 enum Level4 {
   FinalLevel(String)
-} derive(ToJson(style="flat"), Show, Eq)
+} derive(ToJson(style="flat"), Eq, Debug)
 
 ///|
 struct GenericStruct[T, U] {
   first : T
   second : U
   optional : T?
-} derive(ToJson, Show, Eq)
+} derive(ToJson, Eq, Debug)
 
 ///|
 enum GenericEnum[T] {
   Value(T)
   Pair(T, T)
-} derive(ToJson(style="flat"), Show, Eq)
+} derive(ToJson(style="flat"), Eq, Debug)
 
 ///|
 enum EdgeCaseEnum {
@@ -249,7 +249,7 @@ enum EdgeCaseEnum {
   MultipleFields(String, Bool, Double)
   NamedField(name~ : String)
   MixedFields(Int, named~ : String, Bool)
-} derive(ToJson(style="flat"), Show, Eq)
+} derive(ToJson(style="flat"), Eq, Debug)
 
 ///|
 fn init {
@@ -260,7 +260,7 @@ fn init {
   println("Tuple struct tests:")
   let ts = TupleStruct(42, "hello", true)
   let ts_json = ts.to_json()
-  println("Original: \{ts}")
+  println("Original: \{Debug::to_repr(ts)}")
   println("JSON: \{ts_json.stringify()}")
   println("Expected structure: [\"TupleStruct\", 42, \"hello\", true]")
 
@@ -268,7 +268,7 @@ fn init {
   println("Empty struct tests:")
   let es = EmptyStruct::{  }
   let es_json = es.to_json()
-  println("Original: \{es}")
+  println("Original: \{Debug::to_repr(es)}")
   println("JSON: \{es_json.stringify()}")
   println("Expected structure: {}")
 
@@ -276,7 +276,7 @@ fn init {
   println("Single variant enum tests (flat style):")
   let sve = SingleVariantEnum::OnlyVariant(123, "test")
   let sve_json = sve.to_json()
-  println("Original: \{sve}")
+  println("Original: \{Debug::to_repr(sve)}")
   println("JSON: \{sve_json.stringify()}")
   println("Expected structure: [\"OnlyVariant\", 123, \"test\"]")
 
@@ -291,7 +291,7 @@ fn init {
   ]
   for i, variant in variants {
     let json = variant.to_json()
-    println("Variant \{i}: \{variant}")
+    println("Variant \{i}: \{Debug::to_repr(variant)}")
     println("JSON: \{json.stringify()}")
     match variant {
       NoArgs => println("Expected: \"NoArgs\"")
@@ -313,7 +313,7 @@ fn init {
     }),
   )
   let deep_json = deep.to_json()
-  println("Original: \{deep}")
+  println("Original: \{Debug::to_repr(deep)}")
   println("JSON: \{deep_json.stringify()}")
   println("Expected nested structure with flat enum style")
 
@@ -325,11 +325,11 @@ fn init {
     optional: Some(24),
   }
   let gs_json = gs.to_json()
-  println("Original: \{gs}")
+  println("Original: \{Debug::to_repr(gs)}")
   println("JSON: \{gs_json.stringify()}")
   let ge : GenericEnum[String] = GenericEnum::Pair("first", "second")
   let ge_json = ge.to_json()
-  println("Original: \{ge}")
+  println("Original: \{Debug::to_repr(ge)}")
   println("JSON: \{ge_json.stringify()}")
   println("Expected: [\"Pair\", \"first\", \"second\"]")
 }
@@ -350,7 +350,7 @@ fn init {
   ]
   for i, case in edge_cases {
     let json = case.to_json()
-    println("Edge case \{i}: \{case}")
+    println("Edge case \{i}: \{Debug::to_repr(case)}")
     println("JSON: \{json.stringify()}")
     match case {
       ZeroFields => println("Expected: \"ZeroFields\" (string for zero fields)")
@@ -371,13 +371,13 @@ fn init {
 enum LegacyStyle {
   NoArgs
   WithArgs(Int, String)
-} derive(ToJson(style="legacy"), Show)
+} derive(ToJson(style="legacy"))
 
 ///|
 enum FlatStyle {
   NoArgs
   WithArgs(Int, String)
-} derive(ToJson(style="flat"), Show)
+} derive(ToJson(style="flat"))
 
 ///|
 fn init {

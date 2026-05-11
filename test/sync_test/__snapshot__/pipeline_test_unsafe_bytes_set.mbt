@@ -9,7 +9,7 @@ fn f(x : FixedArray[Byte]) -> Unit {
 ///|
 fn main {
   let x = ([1, 2, 3] : FixedArray[Byte])
-  println(x)
+  debug(x)
   f(x)
-  println(x)
+  debug(x)
 }

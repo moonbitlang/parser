@@ -14,7 +14,7 @@ fn f(x : Int) -> String raise {
 }
 
 fn init {
-  println(try? f(0))
-  println(try? f(1))
-  println(try? f(2))
+  debug(try? f(0))
+  debug(try? f(1))
+  debug(try? f(2))
 }

@@ -72,7 +72,7 @@ impl MyCompare for Double with le(x, y) = "%f64.le"
 impl MyCompare for Double with gt(x, y) = "%f64.gt"
 impl MyCompare for Double with ge(x, y) = "%f64.ge"
 
-struct CustomType (Int) derive(Show)
+struct CustomType (Int)
 
 impl MyCompare for CustomType with compare(x, y) {
   MyCompare::compare(x.0, y.0)
@@ -108,4 +108,10 @@ fn main {
   println("==== custom type ====")
   test_compare(CustomType(1), CustomType(2))
   test_compare(CustomType(1), CustomType(1))
+}
+
+impl Show for CustomType with output(self, logger) {
+  logger.write_string("CustomType(")
+  Show::output(self.0, logger)
+  logger.write_string(")")
 }

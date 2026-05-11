@@ -98,47 +98,47 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "4:3-4:10"
+    "loc": "4:3-4:8"
   },
   {
     "token": "LPAREN",
-    "loc": "4:10-4:11"
+    "loc": "4:8-4:9"
   },
   {
     "token": [
       "LIDENT",
       "xs"
     ],
-    "loc": "4:11-4:13"
+    "loc": "4:9-4:11"
   },
   {
     "token": "LBRACKET",
-    "loc": "4:13-4:14"
+    "loc": "4:11-4:12"
   },
   {
     "token": [
       "INT",
       "1"
     ],
-    "loc": "4:14-4:15"
+    "loc": "4:12-4:13"
   },
   {
     "token": "COLON",
-    "loc": "4:15-4:16"
+    "loc": "4:13-4:14"
   },
   {
     "token": "RBRACKET",
-    "loc": "4:16-4:17"
+    "loc": "4:14-4:15"
   },
   {
     "token": "RPAREN",
-    "loc": "4:17-4:18"
+    "loc": "4:15-4:16"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:18-4:19"
+    "loc": "4:16-4:17"
   },
   {
     "token": "RBRACE",

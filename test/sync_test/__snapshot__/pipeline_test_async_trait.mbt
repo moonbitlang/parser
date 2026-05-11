@@ -19,7 +19,7 @@ impl Stream for Input with next(self) {
   })
 }
 
-suberror NoConsumer derive(Show)
+suberror NoConsumer
 
 fn Input::feed_char(self : Input, chr : Char) -> Unit raise {
   match self.consumer {
@@ -53,16 +53,18 @@ suberror Err {
   Unmatched_Left
   Unexpected_Right
   Invalid_Char(Char)
-} derive(Show)
+}
 
 async fn[S : Stream] is_balanced_poly(s : S) -> Unit raise Err {
-  loop (0, s.next()) {
-    (0, None)      => ()
-    (n, None)      => raise Unmatched_Left
-    (n, Some('(')) => continue (n + 1, s.next())
-    (0, Some(')')) => raise Unexpected_Right
-    (n, Some(')')) => continue (n - 1, s.next())
-    (_, Some(c))   => raise Invalid_Char(c)
+  for n = 0, next = s.next() {
+    match (n, next) {
+      (0, None)      => break
+      (n, None)      => raise Unmatched_Left
+      (n, Some('(')) => continue n + 1, s.next()
+      (0, Some(')')) => raise Unexpected_Right
+      (n, Some(')')) => continue n - 1, s.next()
+      (_, Some(c))   => raise Invalid_Char(c)
+    }
   }
 }
 
@@ -101,13 +103,15 @@ fn init {
 
 // check if the parethesis in a stream is balanced
 async fn is_balanced_obj(s : &Stream) -> Unit raise Err {
-  loop (0, s.next()) {
-    (0, None     ) => ()
-    (n, None     ) => raise Unmatched_Left
-    (n, Some('(')) => continue (n + 1, s.next())
-    (0, Some(')')) => raise Unexpected_Right
-    (n, Some(')')) => continue (n - 1, s.next())
-    (_, Some(c)  ) => raise Invalid_Char(c)
+  for n = 0, next = s.next() {
+    match (n, next) {
+      (0, None     ) => break
+      (n, None     ) => raise Unmatched_Left
+      (n, Some('(')) => continue n + 1, s.next()
+      (0, Some(')')) => raise Unexpected_Right
+      (n, Some(')')) => continue n - 1, s.next()
+      (_, Some(c)  ) => raise Invalid_Char(c)
+    }
   }
 }
 
@@ -142,4 +146,20 @@ fn init {
   run_obj([ "(((", ")(()", "))" ])
   println("===")
   run_obj([ "(()", "))()", "()" ])
+}
+
+impl Show for NoConsumer with output(self, logger) {
+  logger.write_string("NoConsumer")
+}
+
+impl Show for Err with output(self, logger) {
+  match self {
+    Unmatched_Left => logger.write_string("Unmatched_Left")
+    Unexpected_Right => logger.write_string("Unexpected_Right")
+    Invalid_Char(v0) => {
+      logger.write_string("Invalid_Char(")
+      Show::output(v0, logger)
+      logger.write_string(")")
+    }
+  }
 }

@@ -11,7 +11,7 @@ fn init {
   println(sum)
 
   let i = 1001
-  let n = for {
+  let n = for ;; {
     if i >= 999 * 1000 { break "999k+" }
     if i >= 1000 { break "1k" }
     break "\{i}"

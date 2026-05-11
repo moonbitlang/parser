@@ -4099,7 +4099,93 @@
     "loc": "119:2-119:3"
   },
   {
+    "token": "NEWLINE",
+    "loc": "120:1-120:2"
+  },
+  {
+    "token": "ENUM",
+    "loc": "121:1-121:5"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "IterResult"
+    ],
+    "loc": "121:6-121:16"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "121:17-121:18"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "121:18-121:19"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "IterContinue"
+    ],
+    "loc": "122:3-122:15"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "122:15-122:15"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "122:15-122:16"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "IterEnd"
+    ],
+    "loc": "123:3-123:10"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "123:10-123:11"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "124:1-124:2"
+  },
+  {
+    "token": "DERIVE",
+    "loc": "124:3-124:9"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "124:9-124:10"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Eq"
+    ],
+    "loc": "124:10-124:12"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "124:12-124:13"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "124:13-124:13"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "124:13-124:14"
+  },
+  {
     "token": "EOF",
-    "loc": "120:1-120:1"
+    "loc": "125:1-125:1"
   }
 ]

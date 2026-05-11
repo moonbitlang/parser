@@ -64,33 +64,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Show"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -219,7 +193,20 @@
         "kind": "FunDecl",
         "loc": null,
         "children": {
-          "type_name": null,
+          "type_name": {
+            "kind": "TypeName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": {
+                  "value": "T"
+                }
+              },
+              "is_object": false
+            }
+          },
           "name": {
             "kind": "Binder",
             "loc": null,
@@ -519,12 +506,20 @@
                 "children": {
                   "raw": "#callsite(autofill(loc, args_loc, dup))"
                 }
+              },
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#warnings(\"-deprecated\")"
+                }
               }
             ]
           },
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -682,6 +677,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1266,7 +1262,20 @@
         "kind": "FunDecl",
         "loc": null,
         "children": {
-          "type_name": null,
+          "type_name": {
+            "kind": "TypeName",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "LongIdent::Ident",
+                "loc": null,
+                "children": {
+                  "value": "T"
+                }
+              },
+              "is_object": false
+            }
+          },
           "name": {
             "kind": "Binder",
             "loc": null,
@@ -1584,12 +1593,20 @@
                 "children": {
                   "raw": "#callsite(autofill(loc, args_loc, dup))"
                 }
+              },
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#warnings(\"-deprecated\")"
+                }
               }
             ]
           },
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1747,6 +1764,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

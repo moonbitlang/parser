@@ -2,7 +2,7 @@
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
 
 ///|
-let counter : Ref[Int] = Ref::new(0)
+let counter : Ref[Int] = Ref(0)
 
 ///|
 #warnings("-unused_async")

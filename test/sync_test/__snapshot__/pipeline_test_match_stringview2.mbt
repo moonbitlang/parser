@@ -9,6 +9,6 @@ pub fn f(x : StringView) -> Unit {
 
 ///|
 fn main {
-  f("hi"[:])
+  f("hi")
   f("if".view())
 }

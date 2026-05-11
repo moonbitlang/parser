@@ -1,5 +1,5 @@
-struct MyInt(Int) derive(Show)
-struct MyPair((Int, MyInt)) derive(Show)
+struct MyInt(Int) derive(Debug)
+struct MyPair((Int, MyInt)) derive(Debug)
 
 enum E {
   A
@@ -21,5 +21,5 @@ impl I for E with f(self: E, mi: MyInt) -> MyPair {
 
 fn init {
   let x = toMyInt(E::A)
-  println(x)
+  debug(x)
 }

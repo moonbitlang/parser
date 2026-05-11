@@ -9,7 +9,7 @@ fn show(x : Bool) -> Unit {
 fn init{
     let a = true
     show(a)
-    show(not(a))
-    show(not(not(a)))
-    show(not(not(not(a))))
+    show(!a)
+    show(!!a)
+    show(!!!a)
 }

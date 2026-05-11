@@ -8,5 +8,5 @@ let map : @sorted_map.SortedMap[Int, String] = @sorted_map.from_array([
 ///|
 fn init {
   let v = [..map, (4, "d")]
-  println(v)
+  debug(v)
 }

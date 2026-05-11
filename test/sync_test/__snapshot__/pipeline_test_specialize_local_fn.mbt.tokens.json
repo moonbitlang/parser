@@ -1302,61 +1302,61 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "44:3-44:10"
+    "loc": "44:3-44:8"
   },
   {
     "token": "LPAREN",
-    "loc": "44:10-44:11"
+    "loc": "44:8-44:9"
   },
   {
     "token": [
       "LIDENT",
       "find"
     ],
-    "loc": "44:11-44:15"
+    "loc": "44:9-44:13"
   },
   {
     "token": "LPAREN",
-    "loc": "44:15-44:16"
+    "loc": "44:13-44:14"
   },
   {
     "token": [
       "LIDENT",
       "arr"
     ],
-    "loc": "44:16-44:19"
+    "loc": "44:14-44:17"
   },
   {
     "token": "COMMA",
-    "loc": "44:19-44:20"
+    "loc": "44:17-44:18"
   },
   {
     "token": [
       "LIDENT",
       "f"
     ],
+    "loc": "44:19-44:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "44:20-44:21"
+  },
+  {
+    "token": "RPAREN",
     "loc": "44:21-44:22"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "44:22-44:23"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "44:23-44:24"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "44:24-44:24"
+    "loc": "44:22-44:22"
   },
   {
     "token": "NEWLINE",
-    "loc": "44:24-44:25"
+    "loc": "44:22-44:23"
   },
   {
     "token": "LET",
@@ -1420,54 +1420,54 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "46:3-46:10"
+    "loc": "46:3-46:8"
   },
   {
     "token": "LPAREN",
-    "loc": "46:10-46:11"
+    "loc": "46:8-46:9"
   },
   {
     "token": [
       "LIDENT",
       "find"
     ],
-    "loc": "46:11-46:15"
+    "loc": "46:9-46:13"
   },
   {
     "token": "LPAREN",
-    "loc": "46:15-46:16"
+    "loc": "46:13-46:14"
   },
   {
     "token": [
       "LIDENT",
       "arr1"
     ],
-    "loc": "46:16-46:20"
+    "loc": "46:14-46:18"
   },
   {
     "token": "COMMA",
-    "loc": "46:20-46:21"
+    "loc": "46:18-46:19"
   },
   {
     "token": [
       "LIDENT",
       "f"
     ],
+    "loc": "46:20-46:21"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "46:21-46:22"
+  },
+  {
+    "token": "RPAREN",
     "loc": "46:22-46:23"
   },
   {
-    "token": "RPAREN",
-    "loc": "46:23-46:24"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "46:24-46:25"
-  },
-  {
     "token": "NEWLINE",
-    "loc": "46:25-46:26"
+    "loc": "46:23-46:24"
   },
   {
     "token": "RBRACE",

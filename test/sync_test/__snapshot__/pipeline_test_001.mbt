@@ -21,10 +21,10 @@ fn nested () -> () -> Unit  {
   printY
 }
 
-struct MyArray(Array[Int]) derive(Show)
+struct MyArray(Array[Int]) derive(Debug)
 
 fn init {
   let v = [1,2,3]  
   let v : MyArray = [1,2, .. v]
-  println(v)
+  debug(v)
 }

@@ -26,7 +26,7 @@ fn test_get_item3(x : FixedArray[Byte]) -> Unit {
     [a0, .. rest, aN] => {
       println(a0)
       println(aN)
-      println(rest)
+      debug(rest)
     }
     [] => println("empty")
     [a] => println(a)
@@ -39,7 +39,7 @@ fn test_get_item4(x : Bytes) -> Unit {
     [a0, .. rest, aN] => {
       println(a0)
       println(aN)
-      println(rest)
+      debug(rest)
     }
     [] => println("empty")
     [a] => println(a)
@@ -59,13 +59,13 @@ fn test_length2(x : FixedArray[Byte]) -> Unit {
 ///|
 fn test_set_item(x : FixedArray[Byte]) -> Unit {
   x[0] = 0x34
-  println(x)
+  debug(x)
 }
 
 ///|
 fn test_make1(len : Int, init : Byte) -> Unit {
   let x = FixedArray::make(len, init)
-  println(x)
+  debug(x)
 }
 
 ///|
@@ -79,7 +79,7 @@ fn test_make3(b1 : Byte, b2 : Byte, b3 : Byte) -> Unit {
   let x : Bytes = [b1, b2, b3, 0x34, 0x35]
   println(x)
   let x : FixedArray[Byte] = [b1, b2, b3, 0x34, 0x35]
-  println(x)
+  debug(x)
 }
 
 ///|
@@ -88,19 +88,19 @@ fn test_array_of_bytes() -> Unit {
   for i in 0..<10 {
     x.push(to_be_bytes(i))
   }
-  println(x)
+  debug(x)
   for i in 0..<5 {
     let _ = x.pop()
 
   }
-  println(x)
+  debug(x)
 }
 
 ///|
 fn test_bytes_fill() -> Unit {
   let bytes : FixedArray[Byte] = FixedArray::make(10, 0x00)
   bytes.fill(0x31, start=2, end=5)
-  println(bytes)
+  debug(bytes)
 }
 
 ///|
@@ -109,10 +109,10 @@ fn test_bytes_copy() -> Unit {
     0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x3a,
   ]
   let bytes2 = bytes1.copy()
-  println(bytes2)
+  debug(bytes2)
   let bytes3 : FixedArray[Byte] = FixedArray::make(10, 0x00)
   bytes3.unsafe_blit(1, bytes1, 4, 3)
-  println(bytes3)
+  debug(bytes3)
 }
 
 ///|

@@ -1,7 +1,7 @@
 ///|
 suberror E {
   E(Int)
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn e(x : Int) -> Int raise E {
@@ -44,8 +44,8 @@ fn c(x : Int) -> Int raise {
 
 ///|
 fn main {
-  println(try? l(42))
-  println(try? l(0))
-  println(try? c(42))
-  println(try? c(0))
+  debug(try? l(42))
+  debug(try? l(0))
+  debug(try? c(42))
+  debug(try? c(0))
 }

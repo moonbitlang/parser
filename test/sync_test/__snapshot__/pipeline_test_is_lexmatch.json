@@ -42,6 +42,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -120,7 +121,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "abc"
+                                              "lit": "abc",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -206,7 +208,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "abc"
+                                              "lit": "abc",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -309,7 +312,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "abc"
+                                                  "lit": "abc",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -478,7 +482,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "abc"
+                                                  "lit": "abc",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -636,7 +641,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "abc"
+                                              "lit": "abc",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -728,7 +734,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "abc"
+                                              "lit": "abc",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -837,7 +844,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "abc"
+                                                  "lit": "abc",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -1012,7 +1020,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "abc"
+                                                  "lit": "abc",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -1164,7 +1173,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": ""
+                                              "lit": "",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -1267,7 +1277,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": ""
+                                                  "lit": "",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -1419,7 +1430,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": ""
+                                              "lit": "",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -1505,7 +1517,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "abc"
+                                              "lit": "abc",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -1591,7 +1604,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "abc"
+                                              "lit": "abc",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -1677,7 +1691,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "a"
+                                              "lit": "a",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -1780,7 +1795,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "a"
+                                                  "lit": "a",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -1932,7 +1948,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "hello"
+                                              "lit": "hello",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -2035,7 +2052,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "hello"
+                                                  "lit": "hello",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -2187,7 +2205,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "hello world"
+                                              "lit": "hello world",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -2273,7 +2292,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "123"
+                                              "lit": "123",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -2376,7 +2396,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "123"
+                                                  "lit": "123",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -2528,7 +2549,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "!@#"
+                                              "lit": "!@#",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -2631,7 +2653,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "!@#"
+                                                  "lit": "!@#",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -2783,7 +2806,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "你好"
+                                              "lit": "你好",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -2886,7 +2910,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "你好"
+                                                  "lit": "你好",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -3038,7 +3063,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "caf"
+                                              "lit": "caf",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -3141,7 +3167,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "caf"
+                                                  "lit": "caf",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -3293,7 +3320,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "abcde"
+                                              "lit": "abcde",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -3396,7 +3424,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "abcde"
+                                                  "lit": "abcde",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -3548,7 +3577,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "a"
+                                              "lit": "a",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -3651,7 +3681,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "a"
+                                                  "lit": "a",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -3820,7 +3851,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "a"
+                                                  "lit": "a",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -3972,7 +4004,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": " "
+                                              "lit": " ",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -4075,7 +4108,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": " "
+                                                  "lit": " ",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -4227,7 +4261,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "abc"
+                                              "lit": "abc",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -4330,7 +4365,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "abc"
+                                                  "lit": "abc",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -4482,7 +4518,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "\\t"
+                                              "lit": "\\t",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -4568,7 +4605,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "\\n"
+                                              "lit": "\\n",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -4654,7 +4692,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "012345"
+                                              "lit": "012345",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -4757,7 +4796,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "012345"
+                                                  "lit": "012345",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -4909,7 +4949,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "abc123"
+                                              "lit": "abc123",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -5012,7 +5053,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "abc123"
+                                                  "lit": "abc123",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -5164,7 +5206,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "ABC"
+                                              "lit": "ABC",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -5250,7 +5293,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "abc"
+                                              "lit": "abc",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -5336,7 +5380,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "ABC"
+                                              "lit": "ABC",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -5422,7 +5467,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "aa"
+                                              "lit": "aa",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -5525,7 +5571,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "aa"
+                                                  "lit": "aa",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -5677,7 +5724,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "aaa"
+                                              "lit": "aaa",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -5780,7 +5828,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "aaa"
+                                                  "lit": "aaa",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -5938,7 +5987,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "test"
+                                              "lit": "test",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -6030,7 +6080,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "test"
+                                              "lit": "test",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -6139,7 +6190,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "test"
+                                                  "lit": "test",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -6308,7 +6360,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "match"
+                                                  "lit": "match",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -6477,7 +6530,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "match"
+                                                  "lit": "match",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -6646,7 +6700,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "m"
+                                                  "lit": "m",
+                                                  "offset": 1
                                                 }
                                               }
                                             }
@@ -6798,7 +6853,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "(?i:ABC)"
+                                              "lit": "(?i:ABC)",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -6884,7 +6940,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "(?i:[a-f]+)"
+                                              "lit": "(?i:[a-f]+)",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -6976,7 +7033,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "(?i:ABC)"
+                                              "lit": "(?i:ABC)",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -7068,7 +7126,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "(?i:[a-f]+)"
+                                              "lit": "(?i:[a-f]+)",
+                                              "offset": 1
                                             }
                                           }
                                         }
@@ -7137,14 +7196,16 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "hello"
+                                          "lit": "hello",
+                                          "offset": 1
                                         }
                                       },
                                       {
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "[0-9]+"
+                                          "lit": "[0-9]+",
+                                          "offset": 1
                                         }
                                       }
                                     ]

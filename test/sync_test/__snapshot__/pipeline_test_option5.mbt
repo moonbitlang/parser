@@ -13,5 +13,5 @@ pub fn as_null(x : T) -> Unit? {
 
 fn init {
   let y = as_null(C)
-  println(y)
+  debug(y)
 }

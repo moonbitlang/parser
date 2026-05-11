@@ -1,3 +1,5 @@
+//!build: -w -27
+
 ///|
 fn[A] f(xs : ArrayView[A], ys : Array[Int]) -> @list.List[(Int, A)] {
   l1~: loop (0, xs, @list.empty()) {
@@ -35,12 +37,12 @@ fn[A] g(xs : ArrayView[A], ys : Array[Int]) -> @list.List[(Int, A)] {
 }
 
 fn main {
-  let r1 = f(["u", "v", "w", "x", "y", "z"][:], [0, 1, 2])
-  println(r1)
-  let r2 = f(["u", "v", "w", "x", "y", "z"][:], [0, 1, 2, 3, 4, 5])
-  println(r2)
-  let r3 = g(["u", "v", "w", "x", "y", "z"][:], [0, 1, 2])
-  println(r3)
-  let r4 = g(["u", "v", "w", "x", "y", "z"][:], [0, 1, 2, 3, 4, 5])
-  println(r4)
+  let r1 = f(["u", "v", "w", "x", "y", "z"], [0, 1, 2])
+  debug(r1)
+  let r2 = f(["u", "v", "w", "x", "y", "z"], [0, 1, 2, 3, 4, 5])
+  debug(r2)
+  let r3 = g(["u", "v", "w", "x", "y", "z"], [0, 1, 2])
+  debug(r3)
+  let r4 = g(["u", "v", "w", "x", "y", "z"], [0, 1, 2, 3, 4, 5])
+  debug(r4)
 }

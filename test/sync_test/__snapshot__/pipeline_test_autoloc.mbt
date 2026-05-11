@@ -1,7 +1,7 @@
 //!build: -w -27
 
 fn assirt(cond: Bool, msg: String, loc~ : SourceLoc = _) -> Result[Unit, String] {
-  if not(cond) {
+  if !cond {
     Err("(\{loc}) assertion failed: \{msg}")
   } else {
     Ok(())
@@ -18,5 +18,5 @@ fn f() -> Result[Unit, String] {
 }
 
 fn init {
-  println(f())
+  debug(f())
 }

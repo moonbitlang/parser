@@ -1,5 +1,5 @@
-suberror E1 derive(Show)
-suberror E2 derive(Show)
+suberror E1 derive(Debug)
+suberror E2 derive(Debug)
 
 fn f1() -> Unit raise E1 { raise E1 }
 fn f2() -> Unit raise E2 { raise E2 }
@@ -25,6 +25,6 @@ fn f4() -> Unit raise {
 }
 
 fn main {
-  println(try? f3())
-  println(try? f4())
+  debug(try? f3())
+  debug(try? f4())
 }

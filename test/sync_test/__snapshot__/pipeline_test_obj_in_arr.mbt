@@ -3,22 +3,22 @@
 enum E {
   A
   B(Int)
-} derive(Show)
+} derive(Debug)
 
 ///|
 #valtype
 struct S {
   a : Int
   b : (Int, Int)
-} derive(Show)
+} derive(Debug)
 
 ///|
-fn g(xs : FixedArray[&Show]) -> Unit {
-  println(xs)
+fn g(xs : FixedArray[&Debug]) -> Unit {
+  debug(xs)
   match xs {
     [a, .., b] => {
-      println(a)
-      println(b)
+      debug(a)
+      debug(b)
     }
     _ => println("other")
   }
@@ -26,8 +26,8 @@ fn g(xs : FixedArray[&Show]) -> Unit {
 
 ///|
 fn main {
-  let e = E::B(1) as &Show
-  let s = S::{ a: 1, b: (2, 3) } as &Show
+  let e = E::B(1) as &Debug
+  let s = S::{ a: 1, b: (2, 3) } as &Debug
   g([e, 42, s])
   g([(1, 2), s, e])
   let arr2 = []
@@ -40,14 +40,14 @@ fn main {
       arr2.push((i, i + 1))
     }
   }
-  println(arr2)
+  debug(arr2)
   for i in 0..<5 {
     let _ = arr2.pop()
 
   }
-  println(arr2)
-  let arr = FixedArray::make(5, (1, 2) as &Show)
+  debug(arr2)
+  let arr = FixedArray::make(5, (1, 2) as &Debug)
   arr[1] = e
   arr[2] = s
-  println(arr)
+  debug(arr)
 }

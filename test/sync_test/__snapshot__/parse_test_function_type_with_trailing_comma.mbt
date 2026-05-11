@@ -1,5 +1,5 @@
-type Callback1 (Bool,) -> Int
-type Callback2 (Bool,Int,) -> Int 
+struct Callback1((Bool,) -> Int)
+struct Callback2((Bool,Int,) -> Int) 
 
 pub(all) type ModalRenderer[T] (
   (@node.DispatchFn[T]) -> Unit raise @node.RespoCommonError,

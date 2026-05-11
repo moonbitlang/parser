@@ -1,6 +1,6 @@
 ///|
 fn f(x : ReadOnlyArray[(String, String)]) -> Unit {
-  println(x)
+  debug(x)
 }
 
 ///|

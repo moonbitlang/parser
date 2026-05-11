@@ -120,6 +120,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -435,33 +436,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Show"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -510,6 +485,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

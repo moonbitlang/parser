@@ -10,7 +10,7 @@ fn f(x : @hashmap.HashMap[String, Int]) -> Unit {
 }
 
 fn init {
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([])
   f(map)
   map.set("x", 2)
   f(map)

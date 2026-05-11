@@ -1,3 +1,5 @@
+//!build: -w -27
+
 fn nested(n: Int, s: String) -> Unit {
   loop 0 {
     i => if i < n {

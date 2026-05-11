@@ -64,30 +64,19 @@
     "loc": "4:10-4:12"
   },
   {
-    "token": "COMMA",
-    "loc": "4:12-4:13"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Show"
-    ],
-    "loc": "4:14-4:18"
-  },
-  {
     "token": "RPAREN",
-    "loc": "4:18-4:19"
+    "loc": "4:12-4:13"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "4:19-4:19"
+    "loc": "4:13-4:13"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:19-4:20"
+    "loc": "4:13-4:14"
   },
   {
     "token": "NEWLINE",
@@ -1862,7 +1851,228 @@
     "loc": "47:2-47:3"
   },
   {
+    "token": "NEWLINE",
+    "loc": "48:1-48:2"
+  },
+  {
+    "token": "IMPL",
+    "loc": "49:1-49:5"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Show"
+    ],
+    "loc": "49:6-49:10"
+  },
+  {
+    "token": "FOR",
+    "loc": "49:11-49:14"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "T"
+    ],
+    "loc": "49:15-49:16"
+  },
+  {
+    "token": "WITH",
+    "loc": "49:17-49:21"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "output"
+    ],
+    "loc": "49:22-49:28"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "49:28-49:29"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "self"
+    ],
+    "loc": "49:29-49:33"
+  },
+  {
+    "token": "COMMA",
+    "loc": "49:33-49:34"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "logger"
+    ],
+    "loc": "49:35-49:41"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "49:41-49:42"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "49:43-49:44"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "49:44-49:45"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "logger"
+    ],
+    "loc": "50:3-50:9"
+  },
+  {
+    "token": [
+      "DOT_LIDENT",
+      "write_string"
+    ],
+    "loc": "50:10-50:22"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "50:22-50:23"
+  },
+  {
+    "token": [
+      "STRING",
+      "{x: "
+    ],
+    "loc": "50:23-50:29"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "50:29-50:30"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "50:30-50:30"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "50:30-50:31"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Show"
+    ],
+    "loc": "51:3-51:7"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "51:7-51:9"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "output"
+    ],
+    "loc": "51:9-51:15"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "51:15-51:16"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "self"
+    ],
+    "loc": "51:16-51:20"
+  },
+  {
+    "token": [
+      "DOT_LIDENT",
+      "x"
+    ],
+    "loc": "51:21-51:22"
+  },
+  {
+    "token": "COMMA",
+    "loc": "51:22-51:23"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "logger"
+    ],
+    "loc": "51:24-51:30"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "51:30-51:31"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "51:31-51:31"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "51:31-51:32"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "logger"
+    ],
+    "loc": "52:3-52:9"
+  },
+  {
+    "token": [
+      "DOT_LIDENT",
+      "write_string"
+    ],
+    "loc": "52:10-52:22"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "52:22-52:23"
+  },
+  {
+    "token": [
+      "STRING",
+      "}"
+    ],
+    "loc": "52:23-52:26"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "52:26-52:27"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "52:27-52:28"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "53:1-53:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "53:2-53:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "53:2-53:3"
+  },
+  {
     "token": "EOF",
-    "loc": "48:1-48:1"
+    "loc": "54:1-54:1"
   }
 ]

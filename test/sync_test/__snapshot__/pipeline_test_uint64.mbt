@@ -65,8 +65,8 @@ fn test_eq_ne() -> Unit {
   check_true(UInt64::equal(0UL, 0UL))
   check_true(UInt64::equal(max, max))
   check_true(UInt64::equal(11UL, 11UL))
-  check_true(not(UInt64::equal(0UL, max)))
-  check_true(not(UInt64::equal(11UL, 5UL)))
+  check_true(!UInt64::equal(0UL, max))
+  check_true(!UInt64::equal(11UL, 5UL))
 }
 
 fn test_compare() -> Unit {

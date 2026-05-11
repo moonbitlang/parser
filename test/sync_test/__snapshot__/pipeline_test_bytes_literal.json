@@ -169,6 +169,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1239,7 +1240,7 @@
         "loc": null,
         "children": {
           "constant": {
-            "kind": "Constant::String",
+            "kind": "Constant::Bytes",
             "loc": null,
             "children": {
               "value": "\\xff"
@@ -1365,7 +1366,7 @@
         "loc": null,
         "children": {
           "constant": {
-            "kind": "Constant::String",
+            "kind": "Constant::Bytes",
             "loc": null,
             "children": {
               "value": "\\x1f"
@@ -1428,7 +1429,7 @@
         "loc": null,
         "children": {
           "constant": {
-            "kind": "Constant::String",
+            "kind": "Constant::Bytes",
             "loc": null,
             "children": {
               "value": "你好"
@@ -1494,6 +1495,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2478,6 +2480,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2678,7 +2681,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "println"
+                                  "value": "debug"
                                 }
                               }
                             }

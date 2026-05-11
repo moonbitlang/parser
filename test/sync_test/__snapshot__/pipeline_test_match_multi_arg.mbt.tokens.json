@@ -1073,50 +1073,50 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "34:3-34:10"
+    "loc": "34:3-34:8"
   },
   {
     "token": "LPAREN",
-    "loc": "34:10-34:11"
+    "loc": "34:8-34:9"
   },
   {
     "token": [
       "LIDENT",
       "tree"
     ],
-    "loc": "34:11-34:15"
+    "loc": "34:9-34:13"
   },
   {
     "token": [
       "DOT_LIDENT",
       "top"
     ],
-    "loc": "34:16-34:19"
+    "loc": "34:14-34:17"
   },
   {
     "token": "LPAREN",
+    "loc": "34:17-34:18"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "34:18-34:19"
+  },
+  {
+    "token": "RPAREN",
     "loc": "34:19-34:20"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "34:20-34:21"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "34:21-34:22"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "34:22-34:22"
+    "loc": "34:20-34:20"
   },
   {
     "token": "NEWLINE",
-    "loc": "34:22-34:23"
+    "loc": "34:20-34:21"
   },
   {
     "token": [

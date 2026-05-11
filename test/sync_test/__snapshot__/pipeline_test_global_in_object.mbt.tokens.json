@@ -122,64 +122,64 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Debug"
     ],
-    "loc": "4:14-4:18"
+    "loc": "4:14-4:19"
   },
   {
     "token": "EQUAL",
-    "loc": "4:19-4:20"
+    "loc": "4:20-4:21"
   },
   {
     "token": [
       "LIDENT",
       "global"
     ],
-    "loc": "4:21-4:27"
+    "loc": "4:22-4:28"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "4:27-4:27"
+    "loc": "4:28-4:28"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:27-4:28"
+    "loc": "4:28-4:29"
   },
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "5:3-5:10"
+    "loc": "5:3-5:8"
   },
   {
     "token": "LPAREN",
-    "loc": "5:10-5:11"
+    "loc": "5:8-5:9"
   },
   {
     "token": [
       "LIDENT",
       "obj"
     ],
-    "loc": "5:11-5:14"
+    "loc": "5:9-5:12"
   },
   {
     "token": "RPAREN",
-    "loc": "5:14-5:15"
+    "loc": "5:12-5:13"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "5:15-5:15"
+    "loc": "5:13-5:13"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:15-5:16"
+    "loc": "5:13-5:14"
   },
   {
     "token": [

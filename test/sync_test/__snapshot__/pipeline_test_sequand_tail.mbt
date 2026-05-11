@@ -1,7 +1,7 @@
 ///|
 pub fn f(x : Bool) -> Bool {
   fn g() -> Bool {
-    not(x)
+    !x
   }
 
   if x {

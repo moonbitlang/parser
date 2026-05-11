@@ -1,3 +1,4 @@
+//!build: -w -deprecated_syntax
 fn test_struct(x : Int) -> Unit {
   struct S {
     mut x : Int

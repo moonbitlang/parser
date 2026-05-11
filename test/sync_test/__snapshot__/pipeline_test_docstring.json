@@ -327,6 +327,7 @@
           "doc": " `foo(x: Int)`\n\n A simple function that takes an `Int` and returns a `String` representing\n the answer to life, the universe, and everything.\n\n # Examples\n ```moonbit\n let answer = foo(42)\n println(answer) // prints \"42\"\n ```"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -584,6 +585,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

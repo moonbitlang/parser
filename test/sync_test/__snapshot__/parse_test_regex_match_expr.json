@@ -1,0 +1,1109 @@
+[
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "PREFIX"
+        }
+      },
+      "ty": null,
+      "expr": {
+        "kind": "Expr::Constant",
+        "loc": null,
+        "children": {
+          "constant": {
+            "kind": "Constant::Regex",
+            "loc": null,
+            "children": {
+              "value": "a"
+            }
+          }
+        }
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "is_constant": true,
+      "is_declare": false,
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "ALT"
+        }
+      },
+      "ty": null,
+      "expr": {
+        "kind": "Expr::Constant",
+        "loc": null,
+        "children": {
+          "constant": {
+            "kind": "Constant::Regex",
+            "loc": null,
+            "children": {
+              "value": "b"
+            }
+          }
+        }
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "is_constant": true,
+      "is_declare": false,
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopLetDef",
+    "loc": null,
+    "children": {
+      "binder": {
+        "kind": "Binder",
+        "loc": null,
+        "children": {
+          "name": "SUFFIX"
+        }
+      },
+      "ty": null,
+      "expr": {
+        "kind": "Expr::Constant",
+        "loc": null,
+        "children": {
+          "constant": {
+            "kind": "Constant::Regex",
+            "loc": null,
+            "children": {
+              "value": "bc"
+            }
+          }
+        }
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "is_constant": true,
+      "is_declare": false,
+      "attrs": {
+        "kind": "Impl::TopLetDef::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
+      "fun_decl": {
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "main"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": null,
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": null,
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": []
+          },
+          "doc": ""
+        }
+      },
+      "where_clause": null,
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "local_types": {
+            "kind": "DeclBody::DeclBody::LocalTypeList",
+            "loc": null,
+            "children": []
+          },
+          "expr": {
+            "kind": "Expr::Let",
+            "loc": null,
+            "children": {
+              "pattern": {
+                "kind": "Pattern::Any",
+                "loc": null,
+                "children": {}
+              },
+              "expr": {
+                "kind": "Expr::RegexMatch",
+                "loc": null,
+                "children": {
+                  "expr": {
+                    "kind": "Expr::Ident",
+                    "loc": null,
+                    "children": {
+                      "id": {
+                        "kind": "Var",
+                        "loc": null,
+                        "children": {
+                          "name": {
+                            "kind": "LongIdent::Ident",
+                            "loc": null,
+                            "children": {
+                              "value": "s"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "pat": {
+                    "kind": "RegexPattern::Literal",
+                    "loc": null,
+                    "children": {
+                      "lit": "abc"
+                    }
+                  },
+                  "bindings": {
+                    "kind": "Expr::RegexMatch::BindingList",
+                    "loc": null,
+                    "children": []
+                  }
+                }
+              },
+              "body": {
+                "kind": "Expr::Let",
+                "loc": null,
+                "children": {
+                  "pattern": {
+                    "kind": "Pattern::Any",
+                    "loc": null,
+                    "children": {}
+                  },
+                  "expr": {
+                    "kind": "Expr::RegexMatch",
+                    "loc": null,
+                    "children": {
+                      "expr": {
+                        "kind": "Expr::Ident",
+                        "loc": null,
+                        "children": {
+                          "id": {
+                            "kind": "Var",
+                            "loc": null,
+                            "children": {
+                              "name": {
+                                "kind": "LongIdent::Ident",
+                                "loc": null,
+                                "children": {
+                                  "value": "s"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "pat": {
+                        "kind": "RegexPattern::Reference",
+                        "loc": null,
+                        "children": {
+                          "lid": {
+                            "kind": "LongIdent::Ident",
+                            "loc": null,
+                            "children": {
+                              "value": "PREFIX"
+                            }
+                          }
+                        }
+                      },
+                      "bindings": {
+                        "kind": "Expr::RegexMatch::BindingList",
+                        "loc": null,
+                        "children": []
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "Expr::Let",
+                    "loc": null,
+                    "children": {
+                      "pattern": {
+                        "kind": "Pattern::Any",
+                        "loc": null,
+                        "children": {}
+                      },
+                      "expr": {
+                        "kind": "Expr::RegexMatch",
+                        "loc": null,
+                        "children": {
+                          "expr": {
+                            "kind": "Expr::Ident",
+                            "loc": null,
+                            "children": {
+                              "id": {
+                                "kind": "Var",
+                                "loc": null,
+                                "children": {
+                                  "name": {
+                                    "kind": "LongIdent::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "s"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "pat": {
+                            "kind": "RegexPattern::Alias",
+                            "loc": null,
+                            "children": {
+                              "pat": {
+                                "kind": "RegexPattern::Sequence",
+                                "loc": null,
+                                "children": {
+                                  "pat1": {
+                                    "kind": "RegexPattern::Reference",
+                                    "loc": null,
+                                    "children": {
+                                      "lid": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "PREFIX"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "pat2": {
+                                    "kind": "RegexPattern::Reference",
+                                    "loc": null,
+                                    "children": {
+                                      "lid": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "SUFFIX"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "binder": {
+                                "kind": "Binder",
+                                "loc": null,
+                                "children": {
+                                  "name": "matched"
+                                }
+                              }
+                            }
+                          },
+                          "bindings": {
+                            "kind": "Expr::RegexMatch::BindingList",
+                            "loc": null,
+                            "children": [
+                              {
+                                "kind": "Expr::RegexMatch::Binding",
+                                "loc": null,
+                                "children": {
+                                  "label": {
+                                    "kind": "Label",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "before"
+                                    }
+                                  },
+                                  "binder": {
+                                    "kind": "Binder",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "before"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "kind": "Expr::RegexMatch::Binding",
+                                "loc": null,
+                                "children": {
+                                  "label": {
+                                    "kind": "Label",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "after"
+                                    }
+                                  },
+                                  "binder": {
+                                    "kind": "Binder",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "after"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "body": {
+                        "kind": "Expr::Let",
+                        "loc": null,
+                        "children": {
+                          "pattern": {
+                            "kind": "Pattern::Any",
+                            "loc": null,
+                            "children": {}
+                          },
+                          "expr": {
+                            "kind": "Expr::RegexMatch",
+                            "loc": null,
+                            "children": {
+                              "expr": {
+                                "kind": "Expr::Ident",
+                                "loc": null,
+                                "children": {
+                                  "id": {
+                                    "kind": "Var",
+                                    "loc": null,
+                                    "children": {
+                                      "name": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "s"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "pat": {
+                                "kind": "RegexPattern::Sequence",
+                                "loc": null,
+                                "children": {
+                                  "pat1": {
+                                    "kind": "RegexPattern::Alternation",
+                                    "loc": null,
+                                    "children": {
+                                      "pat1": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "x"
+                                        }
+                                      },
+                                      "pat2": {
+                                        "kind": "RegexPattern::Reference",
+                                        "loc": null,
+                                        "children": {
+                                          "lid": {
+                                            "kind": "LongIdent::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "ALT"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "pat2": {
+                                    "kind": "RegexPattern::Reference",
+                                    "loc": null,
+                                    "children": {
+                                      "lid": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "SUFFIX"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "bindings": {
+                                "kind": "Expr::RegexMatch::BindingList",
+                                "loc": null,
+                                "children": [
+                                  {
+                                    "kind": "Expr::RegexMatch::Binding",
+                                    "loc": null,
+                                    "children": {
+                                      "label": {
+                                        "kind": "Label",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "before"
+                                        }
+                                      },
+                                      "binder": null
+                                    }
+                                  },
+                                  {
+                                    "kind": "Expr::RegexMatch::Binding",
+                                    "loc": null,
+                                    "children": {
+                                      "label": {
+                                        "kind": "Label",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "after"
+                                        }
+                                      },
+                                      "binder": null
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "body": {
+                            "kind": "Expr::Let",
+                            "loc": null,
+                            "children": {
+                              "pattern": {
+                                "kind": "Pattern::Any",
+                                "loc": null,
+                                "children": {}
+                              },
+                              "expr": {
+                                "kind": "Expr::RegexMatch",
+                                "loc": null,
+                                "children": {
+                                  "expr": {
+                                    "kind": "Expr::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "id": {
+                                        "kind": "Var",
+                                        "loc": null,
+                                        "children": {
+                                          "name": {
+                                            "kind": "LongIdent::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "s"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "pat": {
+                                    "kind": "RegexPattern::Alias",
+                                    "loc": null,
+                                    "children": {
+                                      "pat": {
+                                        "kind": "RegexPattern::Alternation",
+                                        "loc": null,
+                                        "children": {
+                                          "pat1": {
+                                            "kind": "RegexPattern::Sequence",
+                                            "loc": null,
+                                            "children": {
+                                              "pat1": {
+                                                "kind": "RegexPattern::Literal",
+                                                "loc": null,
+                                                "children": {
+                                                  "lit": "l"
+                                                }
+                                              },
+                                              "pat2": {
+                                                "kind": "RegexPattern::Reference",
+                                                "loc": null,
+                                                "children": {
+                                                  "lid": {
+                                                    "kind": "LongIdent::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "value": "PREFIX"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "pat2": {
+                                            "kind": "RegexPattern::Sequence",
+                                            "loc": null,
+                                            "children": {
+                                              "pat1": {
+                                                "kind": "RegexPattern::Reference",
+                                                "loc": null,
+                                                "children": {
+                                                  "lid": {
+                                                    "kind": "LongIdent::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "value": "ALT"
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "pat2": {
+                                                "kind": "RegexPattern::Literal",
+                                                "loc": null,
+                                                "children": {
+                                                  "lit": "r"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "whole"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "bindings": {
+                                    "kind": "Expr::RegexMatch::BindingList",
+                                    "loc": null,
+                                    "children": [
+                                      {
+                                        "kind": "Expr::RegexMatch::Binding",
+                                        "loc": null,
+                                        "children": {
+                                          "label": {
+                                            "kind": "Label",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "before"
+                                            }
+                                          },
+                                          "binder": {
+                                            "kind": "Binder",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "head"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              "body": {
+                                "kind": "Expr::Let",
+                                "loc": null,
+                                "children": {
+                                  "pattern": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "expr": {
+                                    "kind": "Expr::RegexMatch",
+                                    "loc": null,
+                                    "children": {
+                                      "expr": {
+                                        "kind": "Expr::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "id": {
+                                            "kind": "Var",
+                                            "loc": null,
+                                            "children": {
+                                              "name": {
+                                                "kind": "LongIdent::Ident",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": "s"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "pat": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "z"
+                                        }
+                                      },
+                                      "bindings": {
+                                        "kind": "Expr::RegexMatch::BindingList",
+                                        "loc": null,
+                                        "children": [
+                                          {
+                                            "kind": "Expr::RegexMatch::Binding",
+                                            "loc": null,
+                                            "children": {
+                                              "label": {
+                                                "kind": "Label",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "after"
+                                                }
+                                              },
+                                              "binder": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "tail"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "body": {
+                                    "kind": "Expr::Let",
+                                    "loc": null,
+                                    "children": {
+                                      "pattern": {
+                                        "kind": "Pattern::Any",
+                                        "loc": null,
+                                        "children": {}
+                                      },
+                                      "expr": {
+                                        "kind": "Expr::RegexMatch",
+                                        "loc": null,
+                                        "children": {
+                                          "expr": {
+                                            "kind": "Expr::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "id": {
+                                                "kind": "Var",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": {
+                                                    "kind": "LongIdent::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "value": "s"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "pat": {
+                                            "kind": "RegexPattern::Reference",
+                                            "loc": null,
+                                            "children": {
+                                              "lid": {
+                                                "kind": "LongIdent::Ident",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": "PREFIX"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "bindings": {
+                                            "kind": "Expr::RegexMatch::BindingList",
+                                            "loc": null,
+                                            "children": [
+                                              {
+                                                "kind": "Expr::RegexMatch::Binding",
+                                                "loc": null,
+                                                "children": {
+                                                  "label": {
+                                                    "kind": "Label",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "before"
+                                                    }
+                                                  },
+                                                  "binder": null
+                                                }
+                                              },
+                                              {
+                                                "kind": "Expr::RegexMatch::Binding",
+                                                "loc": null,
+                                                "children": {
+                                                  "label": {
+                                                    "kind": "Label",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "after"
+                                                    }
+                                                  },
+                                                  "binder": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "tail2"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "body": {
+                                        "kind": "Expr::Let",
+                                        "loc": null,
+                                        "children": {
+                                          "pattern": {
+                                            "kind": "Pattern::Any",
+                                            "loc": null,
+                                            "children": {}
+                                          },
+                                          "expr": {
+                                            "kind": "Expr::RegexMatch",
+                                            "loc": null,
+                                            "children": {
+                                              "expr": {
+                                                "kind": "Expr::Ident",
+                                                "loc": null,
+                                                "children": {
+                                                  "id": {
+                                                    "kind": "Var",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": {
+                                                        "kind": "LongIdent::Ident",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "value": "s"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "pat": {
+                                                "kind": "RegexPattern::Sequence",
+                                                "loc": null,
+                                                "children": {
+                                                  "pat1": {
+                                                    "kind": "RegexPattern::Reference",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "lid": {
+                                                        "kind": "LongIdent::Ident",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "value": "PREFIX"
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "pat2": {
+                                                    "kind": "RegexPattern::Reference",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "lid": {
+                                                        "kind": "LongIdent::Ident",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "value": "SUFFIX"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "bindings": {
+                                                "kind": "Expr::RegexMatch::BindingList",
+                                                "loc": null,
+                                                "children": []
+                                              }
+                                            }
+                                          },
+                                          "body": {
+                                            "kind": "Expr::Let",
+                                            "loc": null,
+                                            "children": {
+                                              "pattern": {
+                                                "kind": "Pattern::Any",
+                                                "loc": null,
+                                                "children": {}
+                                              },
+                                              "expr": {
+                                                "kind": "Expr::RegexMatch",
+                                                "loc": null,
+                                                "children": {
+                                                  "expr": {
+                                                    "kind": "Expr::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "id": {
+                                                        "kind": "Var",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "name": {
+                                                            "kind": "LongIdent::Ident",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "value": "s"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "pat": {
+                                                    "kind": "RegexPattern::Sequence",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "pat1": {
+                                                        "kind": "RegexPattern::Reference",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "lid": {
+                                                            "kind": "LongIdent::Ident",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "value": "PREFIX"
+                                                            }
+                                                          }
+                                                        }
+                                                      },
+                                                      "pat2": {
+                                                        "kind": "RegexPattern::Reference",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "lid": {
+                                                            "kind": "LongIdent::Ident",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "value": "SUFFIX"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "bindings": {
+                                                    "kind": "Expr::RegexMatch::BindingList",
+                                                    "loc": null,
+                                                    "children": []
+                                                  }
+                                                }
+                                              },
+                                              "body": {
+                                                "kind": "Expr::Let",
+                                                "loc": null,
+                                                "children": {
+                                                  "pattern": {
+                                                    "kind": "Pattern::Any",
+                                                    "loc": null,
+                                                    "children": {}
+                                                  },
+                                                  "expr": {
+                                                    "kind": "Expr::RegexMatch",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "expr": {
+                                                        "kind": "Expr::Ident",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "id": {
+                                                            "kind": "Var",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "name": {
+                                                                "kind": "LongIdent::Ident",
+                                                                "loc": null,
+                                                                "children": {
+                                                                  "value": "s"
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      },
+                                                      "pat": {
+                                                        "kind": "RegexPattern::Sequence",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "pat1": {
+                                                            "kind": "RegexPattern::Reference",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "lid": {
+                                                                "kind": "LongIdent::Ident",
+                                                                "loc": null,
+                                                                "children": {
+                                                                  "value": "PREFIX"
+                                                                }
+                                                              }
+                                                            }
+                                                          },
+                                                          "pat2": {
+                                                            "kind": "RegexPattern::Reference",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "lid": {
+                                                                "kind": "LongIdent::Ident",
+                                                                "loc": null,
+                                                                "children": {
+                                                                  "value": "SUFFIX"
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      },
+                                                      "bindings": {
+                                                        "kind": "Expr::RegexMatch::BindingList",
+                                                        "loc": null,
+                                                        "children": []
+                                                      }
+                                                    }
+                                                  },
+                                                  "body": {
+                                                    "kind": "Expr::Let",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "pattern": {
+                                                        "kind": "Pattern::Any",
+                                                        "loc": null,
+                                                        "children": {}
+                                                      },
+                                                      "expr": {
+                                                        "kind": "Expr::RegexMatch",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "expr": {
+                                                            "kind": "Expr::Ident",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "id": {
+                                                                "kind": "Var",
+                                                                "loc": null,
+                                                                "children": {
+                                                                  "name": {
+                                                                    "kind": "LongIdent::Ident",
+                                                                    "loc": null,
+                                                                    "children": {
+                                                                      "value": "s"
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          },
+                                                          "pat": {
+                                                            "kind": "RegexPattern::Literal",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "lit": "k"
+                                                            }
+                                                          },
+                                                          "bindings": {
+                                                            "kind": "Expr::RegexMatch::BindingList",
+                                                            "loc": null,
+                                                            "children": [
+                                                              {
+                                                                "kind": "Expr::RegexMatch::Binding",
+                                                                "loc": null,
+                                                                "children": {
+                                                                  "label": {
+                                                                    "kind": "Label",
+                                                                    "loc": null,
+                                                                    "children": {
+                                                                      "name": "before"
+                                                                    }
+                                                                  },
+                                                                  "binder": {
+                                                                    "kind": "Binder",
+                                                                    "loc": null,
+                                                                    "children": {
+                                                                      "name": "lead"
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            ]
+                                                          }
+                                                        }
+                                                      },
+                                                      "body": {
+                                                        "kind": "Expr::Unit",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "faked": true
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

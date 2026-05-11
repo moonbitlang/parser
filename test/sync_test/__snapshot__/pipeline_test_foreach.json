@@ -42,6 +42,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -164,6 +165,16 @@
                           }
                         }
                       },
+                      "init": {
+                        "kind": "Expr::ForEach::Init",
+                        "loc": null,
+                        "children": []
+                      },
+                      "continue_block": {
+                        "kind": "Expr::ForEach::ContinueBlock",
+                        "loc": null,
+                        "children": []
+                      },
                       "body": {
                         "kind": "Expr::Apply",
                         "loc": null,
@@ -231,6 +242,7 @@
                         }
                       },
                       "else_block": null,
+                      "where_clause": null,
                       "label": null
                     }
                   }
@@ -374,6 +386,16 @@
                       }
                     }
                   },
+                  "init": {
+                    "kind": "Expr::ForEach::Init",
+                    "loc": null,
+                    "children": []
+                  },
+                  "continue_block": {
+                    "kind": "Expr::ForEach::ContinueBlock",
+                    "loc": null,
+                    "children": []
+                  },
                   "body": {
                     "kind": "Expr::Apply",
                     "loc": null,
@@ -455,6 +477,7 @@
                     }
                   },
                   "else_block": null,
+                  "where_clause": null,
                   "label": null
                 }
               }
@@ -572,6 +595,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -693,6 +717,16 @@
                             "children": {}
                           }
                         }
+                      },
+                      "init": {
+                        "kind": "Expr::ForEach::Init",
+                        "loc": null,
+                        "children": []
+                      },
+                      "continue_block": {
+                        "kind": "Expr::ForEach::ContinueBlock",
+                        "loc": null,
+                        "children": []
                       },
                       "body": {
                         "kind": "Expr::If",
@@ -919,6 +953,7 @@
                           }
                         }
                       },
+                      "where_clause": null,
                       "label": null
                     }
                   },
@@ -1005,6 +1040,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1105,6 +1141,16 @@
                     "children": {}
                   }
                 }
+              },
+              "init": {
+                "kind": "Expr::ForEach::Init",
+                "loc": null,
+                "children": []
+              },
+              "continue_block": {
+                "kind": "Expr::ForEach::ContinueBlock",
+                "loc": null,
+                "children": []
               },
               "body": {
                 "kind": "Expr::Apply",
@@ -1220,6 +1266,7 @@
                 }
               },
               "else_block": null,
+              "where_clause": null,
               "label": null
             }
           }
@@ -1335,6 +1382,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1448,6 +1496,16 @@
                     "children": {}
                   }
                 }
+              },
+              "init": {
+                "kind": "Expr::ForEach::Init",
+                "loc": null,
+                "children": []
+              },
+              "continue_block": {
+                "kind": "Expr::ForEach::ContinueBlock",
+                "loc": null,
+                "children": []
               },
               "body": {
                 "kind": "Expr::If",
@@ -1828,6 +1886,7 @@
                   }
                 }
               },
+              "where_clause": null,
               "label": null
             }
           }
@@ -1878,6 +1937,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1991,6 +2051,16 @@
                     "children": {}
                   }
                 }
+              },
+              "init": {
+                "kind": "Expr::ForEach::Init",
+                "loc": null,
+                "children": []
+              },
+              "continue_block": {
+                "kind": "Expr::ForEach::ContinueBlock",
+                "loc": null,
+                "children": []
               },
               "body": {
                 "kind": "Expr::Apply",
@@ -2117,6 +2187,7 @@
                 }
               },
               "else_block": null,
+              "where_clause": null,
               "label": null
             }
           }
@@ -2167,6 +2238,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -3807,6 +3879,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -3944,6 +4017,16 @@
                       }
                     }
                   },
+                  "init": {
+                    "kind": "Expr::ForEach::Init",
+                    "loc": null,
+                    "children": []
+                  },
+                  "continue_block": {
+                    "kind": "Expr::ForEach::ContinueBlock",
+                    "loc": null,
+                    "children": []
+                  },
                   "body": {
                     "kind": "Expr::Apply",
                     "loc": null,
@@ -4011,6 +4094,7 @@
                     }
                   },
                   "else_block": null,
+                  "where_clause": null,
                   "label": null
                 }
               }
@@ -4063,6 +4147,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -4207,6 +4292,16 @@
                       }
                     }
                   },
+                  "init": {
+                    "kind": "Expr::ForEach::Init",
+                    "loc": null,
+                    "children": []
+                  },
+                  "continue_block": {
+                    "kind": "Expr::ForEach::ContinueBlock",
+                    "loc": null,
+                    "children": []
+                  },
                   "body": {
                     "kind": "Expr::Apply",
                     "loc": null,
@@ -4288,6 +4383,7 @@
                     }
                   },
                   "else_block": null,
+                  "where_clause": null,
                   "label": null
                 }
               }

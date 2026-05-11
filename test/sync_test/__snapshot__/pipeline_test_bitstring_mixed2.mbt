@@ -17,7 +17,7 @@ const B : Byte = 0x10
 const C : Byte = 0xFF
 
 ///|
-const Bs : Bytes = "\x10\x10\x10\x10"
+const Bs : Bytes = b"\x10\x10\x10\x10"
 
 ///|
 fn f(bs : Bytes) -> Unit {
@@ -35,7 +35,7 @@ fn f(bs : Bytes) -> Unit {
 ///|
 fn g(bs : Bytes) -> Unit {
   match bs {
-    [.. "hello", .. b"world", u16(c), u32(d), ..] => {
+    [.. b"hello", .. b"world", u16(c), u32(d), ..] => {
       println(to_be_bytes(c))
       println(to_be_bytes(d))
     }

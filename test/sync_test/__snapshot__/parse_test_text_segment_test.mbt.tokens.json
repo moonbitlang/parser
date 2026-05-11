@@ -368,29 +368,37 @@
     "loc": "18:15-18:16"
   },
   {
-    "token": "TYPE",
-    "loc": "19:1-19:5"
+    "token": "STRUCT",
+    "loc": "19:1-19:7"
   },
   {
     "token": [
       "UIDENT",
       "MyInt"
     ],
-    "loc": "19:6-19:11"
+    "loc": "19:8-19:13"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "19:13-19:14"
   },
   {
     "token": [
       "UIDENT",
       "Int"
     ],
-    "loc": "19:12-19:15"
+    "loc": "19:14-19:17"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "19:17-19:18"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "19:15-19:15"
+    "loc": "19:18-19:18"
   },
   {
     "token": [
@@ -401,11 +409,11 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "19:16-19:25"
+    "loc": "19:19-19:28"
   },
   {
     "token": "NEWLINE",
-    "loc": "19:25-19:26"
+    "loc": "19:28-19:29"
   },
   {
     "token": "NEWLINE",

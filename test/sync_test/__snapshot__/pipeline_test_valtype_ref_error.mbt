@@ -5,12 +5,12 @@ struct S {
   b : Bytes
   c : Int64?
   d : Bool
-} derive(Show)
+} derive(Debug)
 
 ///|
 suberror E {
   E(Int)
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn make_s(i : Int) -> S raise E {
@@ -28,6 +28,6 @@ fn make_s(i : Int) -> S raise E {
 
 ///|
 fn main {
-  println(try? make_s(-1))
-  println(try? make_s(5))
+  debug(try? make_s(-1))
+  debug(try? make_s(5))
 }

@@ -16,9 +16,9 @@ fn from_bytes(xs : Bytes) -> FixedArray[Byte] = "%identity"
 
 fn main {
   let bs = make(b'\x40', b'\x41', b'\x42')
-  println(bs)
+  debug(bs)
   let bs2 = make2(b'\x40', b'\x41', b'\x42')
-  println(bs2)
+  debug(bs2)
   let b = bs[1]
   println(b)
   bs[2] = b'\x43'
@@ -26,13 +26,13 @@ fn main {
   let bs1 = FixedArray::make(5, b'\x01')
   println(to_bytes(bs1))
   let bs2 = from_bytes(b"xxx")
-  println(bs2)
+  debug(bs2)
   let ba = make_array(b'\x40', b'\x41', b'\x42')
   ba.push(b'\x43')
-  println(ba)
+  debug(ba)
   let big_bs : FixedArray[Byte] = [
     b'\x01', b'\x02', b'\x03', b'\x04', b'\x05', b'\x06', b'\x07', b'\x08', b'\x09',
     b'\x0a',
   ]
-  println(big_bs)
+  debug(big_bs)
 }

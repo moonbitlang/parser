@@ -4,12 +4,12 @@ enum E {
   A
   B(Int)
   C(Double, Double)
-} derive(Show)
+} derive(Debug)
 
 ///|
 suberror X {
   X(Int)
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn f(i : Int) -> E raise X {
@@ -26,8 +26,8 @@ fn f(i : Int) -> E raise X {
 
 ///|
 fn main {
-  println(try? f(5))
-  println(try? f(15))
-  println(try? f(25))
-  println(try? f(35))
+  debug(try? f(5))
+  debug(try? f(15))
+  debug(try? f(25))
+  debug(try? f(35))
 }

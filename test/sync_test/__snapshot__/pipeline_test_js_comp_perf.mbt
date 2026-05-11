@@ -359,5 +359,5 @@ fn main {
       "has_try": true,
     },
   }
-  println(json)
+  debug(json)
 }

@@ -16,22 +16,24 @@ struct Scheduler {
 }
 
 fn Scheduler::new() -> Scheduler {
-  { next_id: 0, curr_id: 0, err: None, coros: @queue.new() }
+  { next_id: 0, curr_id: 0, err: None, coros: @queue.Queue([]) }
 }
 
 fn Scheduler::run_all(self : Scheduler) -> Unit raise {
-  loop self.coros.pop() {
-    None => ()
-    Some (coro) => {
-      (coro.ok)()
-      match self.err {
-        None => continue self.coros.pop()
-        Some(err) => {
-          for coro in self.coros {
-            (coro.err)(CancellationError)
+  for next_coro = self.coros.pop() {
+    match next_coro {
+      None => break
+      Some(coro) => {
+        (coro.ok)()
+        match self.err {
+          None => continue self.coros.pop()
+          Some(err) => {
+            for coro in self.coros {
+              (coro.err)(CancellationError)
+            }
+            self.coros.clear()
+            raise err
           }
-          self.coros.clear()
-          raise err
         }
       }
     }
@@ -81,5 +83,5 @@ fn init {
   for _ in 0..<5 {
     ctx.spawn(worker)
   }
-  println(try? ctx.run_all())
+  debug(try? ctx.run_all())
 }

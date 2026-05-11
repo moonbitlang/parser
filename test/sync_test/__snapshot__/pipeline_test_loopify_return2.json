@@ -69,6 +69,7 @@
           "doc": " return in nested function. But g is inlined, so this is loopified."
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -809,6 +810,7 @@
           "doc": " return in nested function. Should not loopify"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1627,6 +1629,7 @@
           "doc": " return in nested function. Should not loopify"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2624,6 +2627,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

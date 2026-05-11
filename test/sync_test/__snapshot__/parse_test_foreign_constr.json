@@ -42,6 +42,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -193,23 +194,25 @@
                                     }
                                   },
                                   "extra_info": {
-                                    "kind": "ConstructorExtraInfo::TypeName",
+                                    "kind": "ConstructorExtraInfo::TypeNameWithConstrPackage",
                                     "loc": null,
                                     "children": {
-                                      "value": {
+                                      "type_name": {
                                         "kind": "TypeName",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "LongIdent::Dot",
                                             "loc": null,
                                             "children": {
-                                              "value": "Ty"
+                                              "pkg": "pkg",
+                                              "id": "Ty"
                                             }
                                           },
                                           "is_object": false
                                         }
-                                      }
+                                      },
+                                      "pkg": "pkg"
                                     }
                                   }
                                 }
@@ -226,19 +229,38 @@
                                 "children": {}
                               },
                               "expr": {
-                                "kind": "Expr::Ident",
+                                "kind": "Expr::Constr",
                                 "loc": null,
                                 "children": {
-                                  "id": {
-                                    "kind": "Var",
+                                  "constr": {
+                                    "kind": "Constructor",
                                     "loc": null,
                                     "children": {
                                       "name": {
-                                        "kind": "LongIdent::Dot",
+                                        "kind": "ConstrName",
                                         "loc": null,
                                         "children": {
-                                          "pkg": "pkg",
-                                          "id": "f"
+                                          "name": "Constr"
+                                        }
+                                      },
+                                      "extra_info": {
+                                        "kind": "ConstructorExtraInfo::TypeName",
+                                        "loc": null,
+                                        "children": {
+                                          "value": {
+                                            "kind": "TypeName",
+                                            "loc": null,
+                                            "children": {
+                                              "name": {
+                                                "kind": "LongIdent::Ident",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": "Ty"
+                                                }
+                                              },
+                                              "is_object": false
+                                            }
+                                          }
                                         }
                                       }
                                     }
@@ -246,10 +268,92 @@
                                 }
                               },
                               "body": {
-                                "kind": "Expr::Unit",
+                                "kind": "Expr::Let",
                                 "loc": null,
                                 "children": {
-                                  "faked": true
+                                  "pattern": {
+                                    "kind": "Pattern::Any",
+                                    "loc": null,
+                                    "children": {}
+                                  },
+                                  "expr": {
+                                    "kind": "Expr::Constr",
+                                    "loc": null,
+                                    "children": {
+                                      "constr": {
+                                        "kind": "Constructor",
+                                        "loc": null,
+                                        "children": {
+                                          "name": {
+                                            "kind": "ConstrName",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "Constr"
+                                            }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::TypeNameWithConstrPackage",
+                                            "loc": null,
+                                            "children": {
+                                              "type_name": {
+                                                "kind": "TypeName",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": {
+                                                    "kind": "LongIdent::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "value": "Ty"
+                                                    }
+                                                  },
+                                                  "is_object": false
+                                                }
+                                              },
+                                              "pkg": "pkg"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "body": {
+                                    "kind": "Expr::Let",
+                                    "loc": null,
+                                    "children": {
+                                      "pattern": {
+                                        "kind": "Pattern::Any",
+                                        "loc": null,
+                                        "children": {}
+                                      },
+                                      "expr": {
+                                        "kind": "Expr::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "id": {
+                                            "kind": "Var",
+                                            "loc": null,
+                                            "children": {
+                                              "name": {
+                                                "kind": "LongIdent::Dot",
+                                                "loc": null,
+                                                "children": {
+                                                  "pkg": "pkg",
+                                                  "id": "f"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "body": {
+                                        "kind": "Expr::Unit",
+                                        "loc": null,
+                                        "children": {
+                                          "faked": true
+                                        }
+                                      }
+                                    }
+                                  }
                                 }
                               }
                             }

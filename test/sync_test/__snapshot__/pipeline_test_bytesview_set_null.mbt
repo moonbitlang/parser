@@ -5,10 +5,10 @@ fn main {
   for i in 0..<10 {
     arr.push(bs[i:])
   }
-  println(arr)
+  debug(arr)
   for i in 0..<10 {
     let _ = arr.pop()
 
   }
-  println(arr)
+  debug(arr)
 }

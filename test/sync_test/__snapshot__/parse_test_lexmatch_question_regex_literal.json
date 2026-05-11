@@ -42,6 +42,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -96,7 +97,8 @@
                             "kind": "LexPattern::Regex",
                             "loc": null,
                             "children": {
-                              "lit": "ab$"
+                              "lit": "ab$",
+                              "offset": 3
                             }
                           }
                         }

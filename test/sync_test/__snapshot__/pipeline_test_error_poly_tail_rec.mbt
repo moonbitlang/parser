@@ -17,5 +17,5 @@ fn main {
       raise Failure::Failure("err")
     }
   })
-  println(result)
+  debug(result)
 }

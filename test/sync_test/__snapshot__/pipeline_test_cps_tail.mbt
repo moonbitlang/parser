@@ -12,10 +12,12 @@ fn cps_traversal(tree : Tree, k : (Int) -> Int) -> Int {
 }
 
 fn cps_traversal2(tree : Tree, k : (Int) -> Int) -> Int {
-  loop (tree, k) {
-    (Leaf, k) => k(0)
-    (Node(x, l, r), k) =>
-      continue (l, fn(l) { cps_traversal2(r, fn(r) { k(x + l + r) }) })
+  for curr_tree = tree, curr_k = k {
+    match (curr_tree, curr_k) {
+      (Leaf, curr_k) => break curr_k(0)
+      (Node(x, l, r), curr_k) =>
+        continue l, fn(l) { cps_traversal2(r, fn(r) { curr_k(x + l + r) }) }
+    }
   }
 }
 

@@ -76,6 +76,6 @@ fn[I, R] Tree::map(self : Tree[I], f : (I) -> R) -> Tree[R] {
 fn main {
   let tree1 : Tree[Int] = Tree::from_array([0, 1, 2, 3, 4, 5])
   let tree2 : Tree[Char] = Tree::from_array(['A', 'B', 'C', 'D', 'E'])
-  println(tree1.map(fn (x) {x + x}).to_array())
-  println(tree2.map(fn (c) { String::make(3, c) }).to_array())
+  debug(tree1.map(fn (x) {x + x}).to_array())
+  debug(tree2.map(fn (c) { String::make(3, c) }).to_array())
 }

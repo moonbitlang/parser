@@ -1571,33 +1571,41 @@
     "loc": "54:1-54:2"
   },
   {
-    "token": "TYPE",
-    "loc": "55:1-55:5"
+    "token": "STRUCT",
+    "loc": "55:1-55:7"
   },
   {
     "token": [
       "UIDENT",
       "MyType"
     ],
-    "loc": "55:6-55:12"
+    "loc": "55:8-55:14"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "55:14-55:15"
   },
   {
     "token": [
       "UIDENT",
       "Int"
     ],
-    "loc": "55:13-55:16"
+    "loc": "55:15-55:18"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "55:18-55:19"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "55:16-55:16"
+    "loc": "55:19-55:19"
   },
   {
     "token": "NEWLINE",
-    "loc": "55:16-55:17"
+    "loc": "55:19-55:20"
   },
   {
     "token": "NEWLINE",

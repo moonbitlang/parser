@@ -122,6 +122,19 @@
                             }
                           }
                         }
+                      },
+                      {
+                        "kind": "TypeVarConstraint",
+                        "loc": null,
+                        "children": {
+                          "trait": {
+                            "kind": "LongIdent::Ident",
+                            "loc": null,
+                            "children": {
+                              "value": "Debug"
+                            }
+                          }
+                        }
                       }
                     ]
                   }
@@ -197,6 +210,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -361,7 +375,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "Show"
+                                  "value": "Debug"
                                 }
                               },
                               "is_object": false
@@ -527,7 +541,7 @@
                         "kind": "InterpElem::Source",
                         "loc": null,
                         "children": {
-                          "source": "b1"
+                          "source": "to_repr(b1)"
                         }
                       }
                     ]
@@ -583,6 +597,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

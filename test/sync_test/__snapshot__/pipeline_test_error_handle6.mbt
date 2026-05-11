@@ -1,22 +1,22 @@
 suberror DoubleError {
   DoubleError(Double)
-} derive(Show)
+} derive(Debug)
 
 suberror Int64Error {
   Int64Error(Int64)
-} derive(Show)
+} derive(Debug)
 
 suberror RBError {
   RBError(Ref[Bool])
-} derive(Show)
+} derive(Debug)
 
 suberror BytesError {
   BytesError(Bytes)
-} derive(Show)
+} derive(Debug)
 
 suberror StringError {
   StringError(String)
-} derive(Show)
+} derive(Debug)
 
 fn f1(b: Bool) -> Double raise DoubleError {
   if b { 1.0 } else { raise DoubleError(2.0) }
@@ -46,11 +46,11 @@ fn f7(b: Bool) -> Double raise BytesError {
   if b { 1.0 } else { raise BytesError(b"a\x00b\x00") }
 }
 
-fn[V: Show] g(f: (Bool) -> V raise Error, b: Bool) -> Unit {
-  try { f(b) |> println } catch {
+fn[V: Debug] g(f: (Bool) -> V raise Error, b: Bool) -> Unit {
+  try { f(b) |> debug } catch {
     DoubleError(d) => println(d)
     Int64Error(d) => println(d)
-    RBError(d) => println(d)
+    RBError(d) => debug(d)
     BytesError(d) => println(d)
     _ => ()
   }
@@ -66,9 +66,11 @@ fn init {
   g(x => f4(x), true)
   g(x => f4(x), false)
   try {
-    println(f5(true)(true)) } catch { s => println(s) }
+    debug(f5(true)(true))
+  } catch { s => debug(s) }
   try {
-    println(f5(false)(true)) } catch { s => println(s) }
+    debug(f5(false)(true))
+  } catch { s => debug(s) }
   g(x => f6(x), true)
   g(x => f6(x), false)
   g(x => f7(x), true)

@@ -22,9 +22,9 @@ fn g(bs : BytesView) -> Unit {
 
 ///|
 fn main {
-  f(b"hello"[:])
-  g(b"hello"[:])
-  g(b"world"[:])
+  f(b"hello")
+  g(b"hello")
+  g(b"world")
   g(b"helloworld"[:5])
   g(b"helloworld"[5:])
   g(b"helloworld"[1:2])

@@ -32,58 +32,58 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Debug"
     ],
-    "loc": "1:10-1:14"
+    "loc": "1:10-1:15"
   },
   {
     "token": "RPAREN",
-    "loc": "1:14-1:15"
+    "loc": "1:15-1:16"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "1:16-1:18"
+    "loc": "1:17-1:19"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "1:19-1:23"
+    "loc": "1:20-1:24"
   },
   {
     "token": "LBRACE",
-    "loc": "1:24-1:25"
+    "loc": "1:25-1:26"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:25-1:26"
+    "loc": "1:26-1:27"
   },
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "2:3-2:10"
+    "loc": "2:3-2:8"
   },
   {
     "token": "LPAREN",
-    "loc": "2:10-2:11"
+    "loc": "2:8-2:9"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
-    "loc": "2:11-2:12"
+    "loc": "2:9-2:10"
   },
   {
     "token": "RPAREN",
-    "loc": "2:12-2:13"
+    "loc": "2:10-2:11"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:13-2:14"
+    "loc": "2:11-2:12"
   },
   {
     "token": "RBRACE",
@@ -126,65 +126,65 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Debug"
     ],
-    "loc": "5:7-5:11"
+    "loc": "5:7-5:12"
   },
   {
     "token": "RBRACKET",
-    "loc": "5:11-5:12"
+    "loc": "5:12-5:13"
   },
   {
     "token": [
       "LIDENT",
       "poly"
     ],
-    "loc": "5:13-5:17"
+    "loc": "5:14-5:18"
   },
   {
     "token": "LPAREN",
-    "loc": "5:17-5:18"
+    "loc": "5:18-5:19"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
-    "loc": "5:18-5:19"
+    "loc": "5:19-5:20"
   },
   {
     "token": "COLON",
-    "loc": "5:19-5:20"
+    "loc": "5:20-5:21"
   },
   {
     "token": [
       "UIDENT",
       "X"
     ],
-    "loc": "5:21-5:22"
-  },
-  {
-    "token": "RPAREN",
     "loc": "5:22-5:23"
   },
   {
+    "token": "RPAREN",
+    "loc": "5:23-5:24"
+  },
+  {
     "token": "THIN_ARROW",
-    "loc": "5:24-5:26"
+    "loc": "5:25-5:27"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "5:27-5:31"
+    "loc": "5:28-5:32"
   },
   {
     "token": "LBRACE",
-    "loc": "5:32-5:33"
+    "loc": "5:33-5:34"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:33-5:34"
+    "loc": "5:34-5:35"
   },
   {
     "token": [

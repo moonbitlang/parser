@@ -11,7 +11,7 @@ fn test_for_where_single_field() -> Unit {
   for i = 0; i < 5; i = i + 1 {
     println(i.to_string())
   } where {
-    invariant: i >= 0
+    proof_invariant: i >= 0
   }
 }
 

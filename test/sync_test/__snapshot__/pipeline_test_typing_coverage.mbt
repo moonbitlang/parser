@@ -1,7 +1,7 @@
 enum Tree[A] {
   Leaf(A)
   Node(Tree[A], Tree[A])
-} derive(Show)
+} derive(Debug)
 
 type Dup[A] = (A, A)
 
@@ -9,8 +9,8 @@ struct TBox[A] {
   mut value : A
 }
 
-fn[T : Show] render_tree(t : Tree[T]) -> String {
-  t.to_string()
+fn[T : Debug] render_tree(t : Tree[T]) -> String {
+  to_repr(t).to_string()
 }
 
 fn[T] flatten(t : Tree[T]) -> Array[T] {

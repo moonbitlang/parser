@@ -3,7 +3,7 @@
 enum E {
   A(Byte)
   B(Byte)
-} derive(Show)
+}
 
 ///|
 fn f(e : E) -> E {
@@ -19,4 +19,19 @@ fn main {
   let e2 = B(2)
   println(f(e1))
   println(f(e2))
+}
+
+impl Show for E with output(self, logger) {
+  match self {
+    A(v0) => {
+      logger.write_string("A(")
+      Show::output(v0, logger)
+      logger.write_string(")")
+    }
+    B(v0) => {
+      logger.write_string("B(")
+      Show::output(v0, logger)
+      logger.write_string(")")
+    }
+  }
 }

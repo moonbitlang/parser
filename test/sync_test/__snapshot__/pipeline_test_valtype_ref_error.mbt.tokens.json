@@ -182,24 +182,24 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Debug"
     ],
-    "loc": "8:10-8:14"
+    "loc": "8:10-8:15"
   },
   {
     "token": "RPAREN",
-    "loc": "8:14-8:15"
+    "loc": "8:15-8:16"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "8:15-8:15"
+    "loc": "8:16-8:16"
   },
   {
     "token": "NEWLINE",
-    "loc": "8:15-8:16"
+    "loc": "8:16-8:17"
   },
   {
     "token": "NEWLINE",
@@ -286,24 +286,24 @@
   {
     "token": [
       "UIDENT",
-      "Show"
+      "Debug"
     ],
-    "loc": "13:10-13:14"
+    "loc": "13:10-13:15"
   },
   {
     "token": "RPAREN",
-    "loc": "13:14-13:15"
+    "loc": "13:15-13:16"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "13:15-13:15"
+    "loc": "13:16-13:16"
   },
   {
     "token": "NEWLINE",
-    "loc": "13:15-13:16"
+    "loc": "13:16-13:17"
   },
   {
     "token": "NEWLINE",
@@ -767,103 +767,103 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "31:3-31:10"
+    "loc": "31:3-31:8"
   },
   {
     "token": "LPAREN",
-    "loc": "31:10-31:11"
+    "loc": "31:8-31:9"
   },
   {
     "token": "TRY_QUESTION",
-    "loc": "31:11-31:15"
+    "loc": "31:9-31:13"
   },
   {
     "token": [
       "LIDENT",
       "make_s"
     ],
-    "loc": "31:16-31:22"
+    "loc": "31:14-31:20"
   },
   {
     "token": "LPAREN",
-    "loc": "31:22-31:23"
+    "loc": "31:20-31:21"
   },
   {
     "token": "MINUS",
-    "loc": "31:23-31:24"
+    "loc": "31:21-31:22"
   },
   {
     "token": [
       "INT",
       "1"
     ],
+    "loc": "31:22-31:23"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "31:23-31:24"
+  },
+  {
+    "token": "RPAREN",
     "loc": "31:24-31:25"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "31:25-31:26"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "31:26-31:27"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "31:27-31:27"
+    "loc": "31:25-31:25"
   },
   {
     "token": "NEWLINE",
-    "loc": "31:27-31:28"
+    "loc": "31:25-31:26"
   },
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "32:3-32:10"
+    "loc": "32:3-32:8"
   },
   {
     "token": "LPAREN",
-    "loc": "32:10-32:11"
+    "loc": "32:8-32:9"
   },
   {
     "token": "TRY_QUESTION",
-    "loc": "32:11-32:15"
+    "loc": "32:9-32:13"
   },
   {
     "token": [
       "LIDENT",
       "make_s"
     ],
-    "loc": "32:16-32:22"
+    "loc": "32:14-32:20"
   },
   {
     "token": "LPAREN",
-    "loc": "32:22-32:23"
+    "loc": "32:20-32:21"
   },
   {
     "token": [
       "INT",
       "5"
     ],
+    "loc": "32:21-32:22"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "32:22-32:23"
+  },
+  {
+    "token": "RPAREN",
     "loc": "32:23-32:24"
   },
   {
-    "token": "RPAREN",
-    "loc": "32:24-32:25"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "32:25-32:26"
-  },
-  {
     "token": "NEWLINE",
-    "loc": "32:26-32:27"
+    "loc": "32:24-32:25"
   },
   {
     "token": "RBRACE",

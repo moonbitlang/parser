@@ -27,9 +27,9 @@ fn h(x : Array[Int?]) -> Unit {
 
 ///|
 fn main {
-  f(b"abc"[:])
-  f(b"bcd"[:])
-  f(b""[:])
+  f(b"abc")
+  f(b"bcd")
+  f(b"")
   g([Some(1), Some(2), None])
   g([Some(2), None, Some(100)])
   g([Some(2), Some(3), Some(4)])

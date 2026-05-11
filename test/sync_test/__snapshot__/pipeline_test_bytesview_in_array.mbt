@@ -5,7 +5,7 @@ fn f(xs : Array[BytesView]) -> BytesView {
 
 ///|
 fn g(xs : FixedArray[BytesView]) -> Unit {
-  println(xs)
+  debug(xs)
   match xs {
     [a,  ..,  b] => { // unsafe_get and unsafe_get_rev
       println(a)

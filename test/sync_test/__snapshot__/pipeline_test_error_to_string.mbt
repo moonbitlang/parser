@@ -4,11 +4,11 @@ suberror Error1 {
 
 suberror Error2 {
   Error2(String)
-} derive(Show)
+}
 
 priv suberror Error3 {
   Error3(Int)
-} derive(Show)
+}
 
 suberror Error4 {
   A
@@ -47,4 +47,24 @@ fn main {
   try f3() catch { e => println(error_to_string(e)) }
   try fail("xxx") catch { e => println(error_to_string(e)) }
   try f4() catch { e => println(error_to_string(e)) }
+}
+
+impl Show for Error2 with output(self, logger) {
+  match self {
+    Error2(v0) => {
+      logger.write_string("Error2(")
+      Show::output(v0, logger)
+      logger.write_string(")")
+    }
+  }
+}
+
+impl Show for Error3 with output(self, logger) {
+  match self {
+    Error3(v0) => {
+      logger.write_string("Error3(")
+      Show::output(v0, logger)
+      logger.write_string(")")
+    }
+  }
 }

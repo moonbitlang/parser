@@ -31,7 +31,7 @@ fn init {
   let x3 = labelled(a=1, b=2)
   println(x3) // 3
   let x4 = question(a=1, b=2)
-  println(x4) // Some(3)
+  debug(x4) // Some(3)
   let x5 = optional()
   println(x5) // 3
 }

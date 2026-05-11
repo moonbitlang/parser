@@ -38,7 +38,7 @@ fn test_unicode_support2() -> Unit raise {
 ///|
 fn main {
   println("test_unicode_support")
-  println(try? test_unicode_support())
+  debug(try? test_unicode_support())
   println("test_unicode_support2")
-  println(try? test_unicode_support2())
+  debug(try? test_unicode_support2())
 }

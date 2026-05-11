@@ -1051,58 +1051,12 @@
     "loc": "48:1-48:2"
   },
   {
-    "token": [
-      "COMMENT",
-      {
-        "content": "///|",
-        "kind": [
-          "Ownline",
-          {
-            "leading_blank_line": true,
-            "trailing_blank_line": false
-          }
-        ],
-        "consumed_by_docstring": false
-      }
-    ],
-    "loc": "49:1-49:5"
+    "token": "NEWLINE",
+    "loc": "49:1-49:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "49:5-49:6"
-  },
-  {
-    "token": "DECLARE",
-    "loc": "50:1-50:8"
-  },
-  {
-    "token": "TYPE",
-    "loc": "50:9-50:13"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Newtype"
-    ],
-    "loc": "50:14-50:21"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Int"
-    ],
-    "loc": "50:22-50:25"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "50:25-50:25"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "50:25-50:26"
+    "loc": "50:1-50:2"
   },
   {
     "token": "NEWLINE",

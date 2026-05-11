@@ -6,12 +6,12 @@ fn f(x : Int?) -> Array[Int]? {
 }
 
 fn init {
-  f(None) |> println()
-  f(Some(1)) |> println()
+  f(None) |> debug
+  f(Some(1)) |> debug
 }
 
 fn init {
   let mut x : (Double,Int)? = None
   x = Some((1.2, 5))
-  println(x)
+  debug(x)
 }

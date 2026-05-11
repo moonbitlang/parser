@@ -3,7 +3,7 @@
 fn init {
   let v = [ 1, 2, 3 ]
   v..push(4)..push(5).push(6)
-  println(v)
+  debug(v)
 }
 
 // interaction with `!`
@@ -40,7 +40,7 @@ fn init {
   { println("self"); [] }
   ..push({ println("arg1"); 1 })
   ..push({ println("arg2"); 2 })
-  .to_string() |> println
+  |> debug
 }
 
 fn init {
@@ -48,7 +48,7 @@ fn init {
   let arr2 = []
   let mut arr = arr1
   arr..push({ arr = arr2; 1 }).push(2)
-  println((arr1, arr2))
+  debug((arr1, arr2))
 }
 
 struct MyBuf (StringBuilder)
@@ -64,7 +64,7 @@ fn MyBuf::expect(self : MyBuf, content~ : String = "") -> Unit raise {
 
 // non-unit return type
 fn init {
-  let dq = @deque.from_array([ Ref::new(1), Ref::new(2), Ref::new(3), Ref::new(4) ])
+  let dq = @deque.from_array([ Ref(1), Ref(2), Ref(3), Ref(4) ])
   let _ = dq..pop_back()..pop_back().pop_back()
-  println(dq.pop_back())
+  debug(dq.pop_back())
 }

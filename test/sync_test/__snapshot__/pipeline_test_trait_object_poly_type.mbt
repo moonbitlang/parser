@@ -1,8 +1,8 @@
-fn f(x: &Show) -> Unit {
-  println(x)
+fn f(x: &Debug) -> Unit {
+  debug(x)
 }
 
-fn[X: Show] poly(x: X) -> Unit {
+fn[X: Debug] poly(x: X) -> Unit {
   f(Option::Some(x))
 }
 

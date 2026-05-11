@@ -7,7 +7,7 @@ fn f1(map : @hashmap.HashMap[Int, Bool]) -> Int {
 }
 
 fn init {
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([])
   println(f1(map))
   map.set(42, true)
   println(f1(map))
@@ -23,7 +23,7 @@ fn f2(map : @hashmap.HashMap[Int, Bool?]) -> Int {
 }
 
 fn init {
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([])
   println(f2(map))
   map.set(42, None)
   println(f2(map))
@@ -42,7 +42,7 @@ fn f3(map : @hashmap.HashMap[String, Bool]) -> Int {
 }
 
 fn init {
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([])
   println(f3(map))
   map.set("x", true)
   println(f3(map))
@@ -59,7 +59,7 @@ fn f4(map : @hashmap.HashMap[String, Bool]) -> Int {
 }
 
 fn init {
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([])
   map.set("x", true)
   map.set("y", true)
   println(f4(map))

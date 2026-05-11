@@ -513,29 +513,37 @@
   },
   {
     "token": [
-      "DOT_LIDENT",
-      "new"
+      "DOT_UIDENT",
+      "HashMap"
     ],
-    "loc": "13:22-13:25"
+    "loc": "13:22-13:29"
   },
   {
     "token": "LPAREN",
-    "loc": "13:25-13:26"
+    "loc": "13:29-13:30"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "13:30-13:31"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "13:31-13:32"
   },
   {
     "token": "RPAREN",
-    "loc": "13:26-13:27"
+    "loc": "13:32-13:33"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "13:27-13:27"
+    "loc": "13:33-13:33"
   },
   {
     "token": "NEWLINE",
-    "loc": "13:27-13:28"
+    "loc": "13:33-13:34"
   },
   {
     "token": [

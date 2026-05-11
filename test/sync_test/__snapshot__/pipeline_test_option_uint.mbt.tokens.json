@@ -21,43 +21,43 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "2:3-2:10"
+    "loc": "2:3-2:8"
   },
   {
     "token": "LPAREN",
-    "loc": "2:10-2:11"
+    "loc": "2:8-2:9"
   },
   {
     "token": [
       "UIDENT",
       "Some"
     ],
-    "loc": "2:11-2:15"
+    "loc": "2:9-2:13"
   },
   {
     "token": "LPAREN",
-    "loc": "2:15-2:16"
+    "loc": "2:13-2:14"
   },
   {
     "token": [
       "INT",
       "1U"
     ],
-    "loc": "2:16-2:18"
+    "loc": "2:14-2:16"
   },
   {
     "token": "RPAREN",
-    "loc": "2:18-2:19"
+    "loc": "2:16-2:17"
   },
   {
     "token": "RPAREN",
-    "loc": "2:19-2:20"
+    "loc": "2:17-2:18"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:20-2:21"
+    "loc": "2:18-2:19"
   },
   {
     "token": "RBRACE",

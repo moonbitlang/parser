@@ -39,14 +39,14 @@ fn g(bs : BytesView) -> Unit {
 ///|
 fn h(bs : BytesView) -> Unit {
   match bs {
-    [a, .. rest, '\x00', u32be(b), c] => {
+    [a, .. rest, b'\x00', u32be(b), c] => {
       println("first")
       println(a)
       println(to_be_bytes(b))
       println(c)
       println(rest)
     }
-    [a, .. rest, '\x0A', u32be(b), c] => {
+    [a, .. rest, b'\x0A', u32be(b), c] => {
       println("second")
       println(a)
       println(to_be_bytes(b))
@@ -79,13 +79,13 @@ fn h1(bs : BytesView) -> Unit {
 ///|
 fn main {
   let bs = b"\xFF\xAA"
-  f(bs[:])
-  f("")
+  f(bs)
+  f(b"")
   let bs = b"\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
-  g(bs[:])
-  g("")
-  h(bs[:])
-  h("")
-  h1(bs[:])
-  h1("")
+  g(bs)
+  g(b"")
+  h(bs)
+  h(b"")
+  h1(bs)
+  h1(b"")
 }

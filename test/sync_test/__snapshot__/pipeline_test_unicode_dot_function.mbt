@@ -8,7 +8,7 @@ fn T_😆😆::😀(self : T_😆😆) -> Unit {
 pub(all) enum T_😆😆 {
   A
   B
-} derive(Show)
+}
 
 fn init {
   let 🤣 = T_😆😆::B
@@ -19,4 +19,3 @@ fn init {
     B => println("B")
   }
 }
-

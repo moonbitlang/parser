@@ -185,21 +185,21 @@
   {
     "token": [
       "DOT_LIDENT",
-      "to_string"
+      "to_owned"
     ],
-    "loc": "3:48-3:57"
+    "loc": "3:48-3:56"
   },
   {
     "token": "LPAREN",
-    "loc": "3:57-3:58"
+    "loc": "3:56-3:57"
   },
   {
     "token": "RPAREN",
-    "loc": "3:58-3:59"
+    "loc": "3:57-3:58"
   },
   {
     "token": "NEWLINE",
-    "loc": "3:59-3:60"
+    "loc": "3:58-3:59"
   },
   {
     "token": "RBRACE",

@@ -240,62 +240,62 @@
   {
     "token": [
       "LIDENT",
-      "println"
+      "debug"
     ],
-    "loc": "9:3-9:10"
+    "loc": "9:3-9:8"
   },
   {
     "token": "LPAREN",
-    "loc": "9:10-9:11"
+    "loc": "9:8-9:9"
   },
   {
     "token": "TRY_QUESTION",
-    "loc": "9:11-9:15"
+    "loc": "9:9-9:13"
   },
   {
     "token": [
       "LIDENT",
       "f"
     ],
-    "loc": "9:16-9:17"
+    "loc": "9:14-9:15"
   },
   {
     "token": "LPAREN",
-    "loc": "9:17-9:18"
+    "loc": "9:15-9:16"
   },
   {
     "token": [
       "UIDENT",
       "Some"
     ],
-    "loc": "9:18-9:22"
+    "loc": "9:16-9:20"
   },
   {
     "token": "LPAREN",
-    "loc": "9:22-9:23"
+    "loc": "9:20-9:21"
   },
   {
     "token": [
       "INT",
       "42"
     ],
-    "loc": "9:23-9:25"
+    "loc": "9:21-9:23"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "9:23-9:24"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "9:24-9:25"
   },
   {
     "token": "RPAREN",
     "loc": "9:25-9:26"
   },
   {
-    "token": "RPAREN",
-    "loc": "9:26-9:27"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "9:27-9:28"
-  },
-  {
     "token": "NEWLINE",
-    "loc": "9:28-9:29"
+    "loc": "9:26-9:27"
   },
   {
     "token": "RBRACE",

@@ -1,6 +1,6 @@
 suberror MyErr {
   MyErr(Int)
-} derive(Show)
+} derive(Debug)
 
 fn[X] each(arr : Array[X], f : (X) -> Unit raise?) -> Unit raise? {
   for x in arr {
@@ -29,7 +29,7 @@ fn has_error() -> Unit raise {
 
 fn init {
   println("===")
-  (try? has_error()) |> println
+  (try? has_error()) |> debug
 }
 
 fn rethrow(f : () -> Int raise?) -> Int raise? {
@@ -42,7 +42,7 @@ fn rethrow(f : () -> Int raise?) -> Int raise? {
 
 fn init {
   println("===")
-  println(try? rethrow(() => raise MyErr(42)))
+  debug(try? rethrow(() => raise MyErr(42)))
   println(rethrow(fn () { 42 }))
 }
 

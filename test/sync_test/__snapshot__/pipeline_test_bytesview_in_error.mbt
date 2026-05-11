@@ -1,5 +1,5 @@
 ///|
-suberror Err  derive(Show)
+suberror Err derive(Debug)
 
 ///|
 fn f(a : BytesView, b : Bool) -> BytesView raise Err {
@@ -38,6 +38,6 @@ fn main {
   g2()
   let bs = Bytes::makei(10, i => i.to_byte())
   let v = bs[1:9]
-  (try? f(v[1:7], true)) |> println
-  (try? f(v[3:5], false)) |> println
+  (try? f(v[1:7], true)) |> debug
+  (try? f(v[3:5], false)) |> debug
 }

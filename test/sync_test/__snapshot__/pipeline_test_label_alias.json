@@ -223,6 +223,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -310,7 +311,7 @@
                                 "kind": "InterpElem::Source",
                                 "loc": null,
                                 "children": {
-                                  "source": "z"
+                                  "source": "Debug::to_repr(z)"
                                 }
                               }
                             ]
@@ -380,6 +381,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

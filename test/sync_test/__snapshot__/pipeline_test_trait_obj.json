@@ -1083,6 +1083,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1318,6 +1319,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1581,7 +1583,7 @@
             "kind": "Binder",
             "loc": null,
             "children": {
-              "name": "test_show"
+              "name": "test_debug"
             }
           },
           "has_error": null,
@@ -1613,7 +1615,7 @@
                             "kind": "LongIdent::Ident",
                             "loc": null,
                             "children": {
-                              "value": "Show"
+                              "value": "Debug"
                             }
                           }
                         }
@@ -1671,6 +1673,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1738,7 +1741,7 @@
                             "kind": "Label",
                             "loc": null,
                             "children": {
-                              "name": "to_string"
+                              "name": "to_repr"
                             }
                           },
                           "args": {
@@ -1817,6 +1820,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1850,7 +1854,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "test_show"
+                                  "value": "test_debug"
                                 }
                               }
                             }
@@ -1890,7 +1894,7 @@
                                         "kind": "LongIdent::Ident",
                                         "loc": null,
                                         "children": {
-                                          "value": "Show"
+                                          "value": "Debug"
                                         }
                                       },
                                       "is_object": true
@@ -1930,7 +1934,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "test_show"
+                                  "value": "test_debug"
                                 }
                               }
                             }
@@ -1970,7 +1974,7 @@
                                         "kind": "LongIdent::Ident",
                                         "loc": null,
                                         "children": {
-                                          "value": "Show"
+                                          "value": "Debug"
                                         }
                                       },
                                       "is_object": true
@@ -2012,7 +2016,7 @@
                             "kind": "LongIdent::Ident",
                             "loc": null,
                             "children": {
-                              "value": "test_show"
+                              "value": "test_debug"
                             }
                           }
                         }
@@ -2052,7 +2056,7 @@
                                     "kind": "LongIdent::Ident",
                                     "loc": null,
                                     "children": {
-                                      "value": "Show"
+                                      "value": "Debug"
                                     }
                                   },
                                   "is_object": true
@@ -2095,7 +2099,7 @@
             "kind": "Binder",
             "loc": null,
             "children": {
-              "name": "test_array_show"
+              "name": "test_array_debug"
             }
           },
           "has_error": null,
@@ -2148,7 +2152,7 @@
                                     "kind": "LongIdent::Ident",
                                     "loc": null,
                                     "children": {
-                                      "value": "Show"
+                                      "value": "Debug"
                                     }
                                   }
                                 }
@@ -2210,6 +2214,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2269,7 +2274,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "println"
+                                  "value": "debug"
                                 }
                               }
                             }
@@ -2340,6 +2345,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2399,7 +2405,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "Show"
+                                  "value": "Debug"
                                 }
                               },
                               "is_object": true
@@ -2432,7 +2438,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "Show"
+                                  "value": "Debug"
                                 }
                               },
                               "is_object": true
@@ -2465,7 +2471,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "Show"
+                                  "value": "Debug"
                                 }
                               },
                               "is_object": true
@@ -2501,7 +2507,7 @@
                                     "kind": "LongIdent::Ident",
                                     "loc": null,
                                     "children": {
-                                      "value": "test_array_show"
+                                      "value": "test_array_debug"
                                     }
                                   }
                                 }
@@ -2601,7 +2607,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "Show"
+                                  "value": "Debug"
                                 }
                               },
                               "is_object": true
@@ -2625,7 +2631,7 @@
                                     "kind": "LongIdent::Ident",
                                     "loc": null,
                                     "children": {
-                                      "value": "println"
+                                      "value": "debug"
                                     }
                                   }
                                 }
@@ -2728,6 +2734,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2980,7 +2987,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "Show"
+                          "value": "Debug"
                         }
                       },
                       "is_object": true
@@ -3012,7 +3019,7 @@
                                     "kind": "LongIdent::Ident",
                                     "loc": null,
                                     "children": {
-                                      "value": "test_show"
+                                      "value": "test_debug"
                                     }
                                   }
                                 }
@@ -3080,7 +3087,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "generic_show"
+                                  "value": "generic_debug"
                                 }
                               }
                             }
@@ -3151,7 +3158,7 @@
             "kind": "Binder",
             "loc": null,
             "children": {
-              "name": "generic_show"
+              "name": "generic_debug"
             }
           },
           "has_error": null,
@@ -3220,7 +3227,7 @@
                             "kind": "LongIdent::Ident",
                             "loc": null,
                             "children": {
-                              "value": "Show"
+                              "value": "Debug"
                             }
                           }
                         }
@@ -3273,6 +3280,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -3298,7 +3306,7 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "println"
+                          "value": "debug"
                         }
                       }
                     }

@@ -1,3 +1,5 @@
+//!build: -w -27
+
 ///|
 fn f1(x : BytesView) -> Int {
   loop (x, 0) {

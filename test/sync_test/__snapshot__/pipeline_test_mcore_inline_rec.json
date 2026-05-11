@@ -269,6 +269,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -349,6 +350,16 @@
                                 }
                               }
                             }
+                          },
+                          "init": {
+                            "kind": "Expr::ForEach::Init",
+                            "loc": null,
+                            "children": []
+                          },
+                          "continue_block": {
+                            "kind": "Expr::ForEach::ContinueBlock",
+                            "loc": null,
+                            "children": []
                           },
                           "body": {
                             "kind": "Expr::DotApply",
@@ -472,36 +483,29 @@
                             }
                           },
                           "else_block": null,
+                          "where_clause": null,
                           "label": null
                         }
                       }
                     ]
                   },
                   "last_expr": {
-                    "kind": "Expr::ArrayGetSlice",
+                    "kind": "Expr::Ident",
                     "loc": null,
                     "children": {
-                      "array": {
-                        "kind": "Expr::Ident",
+                      "id": {
+                        "kind": "Var",
                         "loc": null,
                         "children": {
-                          "id": {
-                            "kind": "Var",
+                          "name": {
+                            "kind": "LongIdent::Ident",
                             "loc": null,
                             "children": {
-                              "name": {
-                                "kind": "LongIdent::Ident",
-                                "loc": null,
-                                "children": {
-                                  "value": "result"
-                                }
-                              }
+                              "value": "result"
                             }
                           }
                         }
-                      },
-                      "start_index": null,
-                      "end_index": null
+                      }
                     }
                   }
                 }
@@ -759,6 +763,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -984,6 +989,16 @@
                               }
                             }
                           },
+                          "init": {
+                            "kind": "Expr::ForEach::Init",
+                            "loc": null,
+                            "children": []
+                          },
+                          "continue_block": {
+                            "kind": "Expr::ForEach::ContinueBlock",
+                            "loc": null,
+                            "children": []
+                          },
                           "body": {
                             "kind": "Expr::Apply",
                             "loc": null,
@@ -1076,6 +1091,7 @@
                             }
                           },
                           "else_block": null,
+                          "where_clause": null,
                           "label": null
                         }
                       },
@@ -1516,6 +1532,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1651,30 +1668,22 @@
                         "loc": null,
                         "children": {
                           "value": {
-                            "kind": "Expr::ArrayGetSlice",
+                            "kind": "Expr::Ident",
                             "loc": null,
                             "children": {
-                              "array": {
-                                "kind": "Expr::Ident",
+                              "id": {
+                                "kind": "Var",
                                 "loc": null,
                                 "children": {
-                                  "id": {
-                                    "kind": "Var",
+                                  "name": {
+                                    "kind": "LongIdent::Ident",
                                     "loc": null,
                                     "children": {
-                                      "name": {
-                                        "kind": "LongIdent::Ident",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "arr"
-                                        }
-                                      }
+                                      "value": "arr"
                                     }
                                   }
                                 }
-                              },
-                              "start_index": null,
-                              "end_index": null
+                              }
                             }
                           },
                           "kind": {

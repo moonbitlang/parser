@@ -107,6 +107,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -166,7 +167,8 @@
                                 "kind": "LexPattern::Regex",
                                 "loc": null,
                                 "children": {
-                                  "lit": "((a|b)(cd)?)+$"
+                                  "lit": "((a|b)(cd)?)+$",
+                                  "offset": 1
                                 }
                               }
                             }
@@ -435,6 +437,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -502,7 +505,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "a*"
+                                          "lit": "a*",
+                                          "offset": 1
                                         }
                                       },
                                       {
@@ -513,7 +517,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "a+"
+                                              "lit": "a+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -529,7 +534,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "a"
+                                          "lit": "a",
+                                          "offset": 1
                                         }
                                       }
                                     ]
@@ -808,6 +814,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -950,7 +957,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "let"
+                                      "lit": "let",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -1045,7 +1053,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "[A-Za-z_][A-Za-z0-9_]*"
+                                          "lit": "[A-Za-z_][A-Za-z0-9_]*",
+                                          "offset": 1
                                         }
                                       },
                                       "binder": {
@@ -1331,6 +1340,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1473,7 +1483,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "ab$"
+                                      "lit": "ab$",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -1564,7 +1575,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "a"
+                                      "lit": "a",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -1797,6 +1809,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1862,7 +1875,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[0-9]+"
+                                              "lit": "[0-9]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -1937,7 +1951,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "123"
@@ -2102,7 +2116,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[a-zA-Z_][a-zA-Z0-9_]*"
+                                              "lit": "[a-zA-Z_][a-zA-Z0-9_]*",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -2177,7 +2192,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "_variable123"
@@ -2342,7 +2357,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[^abc]+"
+                                              "lit": "[^abc]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -2417,7 +2433,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "xyz"
@@ -2580,7 +2596,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "[^abc]+"
+                                      "lit": "[^abc]+",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -2799,6 +2816,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2860,7 +2878,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "(.*)end"
+                                          "lit": "(.*)end",
+                                          "offset": 1
                                         }
                                       }
                                     }
@@ -3003,7 +3022,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "(.*)end"
+                                          "lit": "(.*)end",
+                                          "offset": 1
                                         }
                                       }
                                     }
@@ -3105,640 +3125,64 @@
                 ]
               },
               "last_expr": {
-                "kind": "Expr::LetRec",
+                "kind": "Expr::LetFn",
                 "loc": null,
                 "children": {
-                  "bindings": {
-                    "kind": "Expr::LetRec::BindingList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "LetRec::Binding",
-                        "loc": null,
-                        "children": {
-                          "binder": {
-                            "kind": "Binder",
-                            "loc": null,
-                            "children": {
-                              "name": "f"
-                            }
-                          },
-                          "func": {
-                            "kind": "Func::Lambda",
-                            "loc": null,
-                            "children": {
-                              "parameters": {
-                                "kind": "Func::Lambda::ParameterList",
-                                "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "Parameter::Positional",
-                                    "loc": null,
-                                    "children": {
-                                      "binder": {
-                                        "kind": "Binder",
-                                        "loc": null,
-                                        "children": {
-                                          "name": "input"
-                                        }
-                                      },
-                                      "ty": {
-                                        "kind": "Type::Name",
-                                        "loc": null,
-                                        "children": {
-                                          "constr_id": {
-                                            "kind": "ConstrId",
-                                            "loc": null,
-                                            "children": {
-                                              "id": {
-                                                "kind": "LongIdent::Ident",
-                                                "loc": null,
-                                                "children": {
-                                                  "value": "BytesView"
-                                                }
-                                              }
-                                            }
-                                          },
-                                          "tys": {
-                                            "kind": "Type::Name::TypeList",
-                                            "loc": null,
-                                            "children": []
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                ]
-                              },
-                              "body": {
-                                "kind": "Expr::Lexmatch",
-                                "loc": null,
-                                "children": {
-                                  "strategy": {
-                                    "kind": "Label",
-                                    "loc": null,
-                                    "children": {
-                                      "name": "longest"
-                                    }
-                                  },
-                                  "expr": {
-                                    "kind": "Expr::Ident",
-                                    "loc": null,
-                                    "children": {
-                                      "id": {
-                                        "kind": "Var",
-                                        "loc": null,
-                                        "children": {
-                                          "name": {
-                                            "kind": "LongIdent::Ident",
-                                            "loc": null,
-                                            "children": {
-                                              "value": "input"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "cases": {
-                                    "kind": "Expr::Lexmatch::CaseList",
-                                    "loc": null,
-                                    "children": [
-                                      {
-                                        "kind": "LexCase",
-                                        "loc": null,
-                                        "children": {
-                                          "pat": {
-                                            "kind": "LexCase::PatternList",
-                                            "loc": null,
-                                            "children": [
-                                              {
-                                                "kind": "LexTopPattern::Pattern",
-                                                "loc": null,
-                                                "children": {
-                                                  "value": {
-                                                    "kind": "LexPattern::Regex",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "lit": "([ ]+|^he)llo"
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            ]
-                                          },
-                                          "guard": null,
-                                          "body": {
-                                            "kind": "Expr::Unit",
-                                            "loc": null,
-                                            "children": {
-                                              "faked": false
-                                            }
-                                          }
-                                        }
-                                      },
-                                      {
-                                        "kind": "LexCase",
-                                        "loc": null,
-                                        "children": {
-                                          "pat": {
-                                            "kind": "LexCase::PatternList",
-                                            "loc": null,
-                                            "children": [
-                                              {
-                                                "kind": "LexTopPattern::Wildcard",
-                                                "loc": null,
-                                                "children": {}
-                                              }
-                                            ]
-                                          },
-                                          "guard": null,
-                                          "body": {
-                                            "kind": "Expr::Apply",
-                                            "loc": null,
-                                            "children": {
-                                              "func": {
-                                                "kind": "Expr::Ident",
-                                                "loc": null,
-                                                "children": {
-                                                  "id": {
-                                                    "kind": "Var",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "name": {
-                                                        "kind": "LongIdent::Ident",
-                                                        "loc": null,
-                                                        "children": {
-                                                          "value": "fail"
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              },
-                                              "args": {
-                                                "kind": "Expr::Apply::ArgumentList",
-                                                "loc": null,
-                                                "children": [
-                                                  {
-                                                    "kind": "Argument",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "value": {
-                                                        "kind": "Expr::Constant",
-                                                        "loc": null,
-                                                        "children": {
-                                                          "constant": {
-                                                            "kind": "Constant::String",
-                                                            "loc": null,
-                                                            "children": {
-                                                              "value": "test_anchors"
-                                                            }
-                                                          }
-                                                        }
-                                                      },
-                                                      "kind": {
-                                                        "kind": "ArgumentKind::Positional",
-                                                        "loc": null,
-                                                        "children": {}
-                                                      }
-                                                    }
-                                                  }
-                                                ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    ]
-                                  }
-                                }
-                              },
-                              "return_type": {
-                                "kind": "Type::Name",
-                                "loc": null,
-                                "children": {
-                                  "constr_id": {
-                                    "kind": "ConstrId",
-                                    "loc": null,
-                                    "children": {
-                                      "id": {
-                                        "kind": "LongIdent::Ident",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "Unit"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "tys": {
-                                    "kind": "Type::Name::TypeList",
-                                    "loc": null,
-                                    "children": []
-                                  }
-                                }
-                              },
-                              "error_type": {
-                                "kind": "ErrorType::DefaultErrorType",
-                                "loc": null,
-                                "children": {}
-                              },
-                              "kind": {
-                                "kind": "FnKind::Lambda",
-                                "loc": null,
-                                "children": {}
-                              },
-                              "has_error": null,
-                              "is_async": null
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "kind": "LetRec::Binding",
-                        "loc": null,
-                        "children": {
-                          "binder": {
-                            "kind": "Binder",
-                            "loc": null,
-                            "children": {
-                              "name": "f2"
-                            }
-                          },
-                          "func": {
-                            "kind": "Func::Lambda",
-                            "loc": null,
-                            "children": {
-                              "parameters": {
-                                "kind": "Func::Lambda::ParameterList",
-                                "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "Parameter::Positional",
-                                    "loc": null,
-                                    "children": {
-                                      "binder": {
-                                        "kind": "Binder",
-                                        "loc": null,
-                                        "children": {
-                                          "name": "input"
-                                        }
-                                      },
-                                      "ty": {
-                                        "kind": "Type::Name",
-                                        "loc": null,
-                                        "children": {
-                                          "constr_id": {
-                                            "kind": "ConstrId",
-                                            "loc": null,
-                                            "children": {
-                                              "id": {
-                                                "kind": "LongIdent::Ident",
-                                                "loc": null,
-                                                "children": {
-                                                  "value": "BytesView"
-                                                }
-                                              }
-                                            }
-                                          },
-                                          "tys": {
-                                            "kind": "Type::Name::TypeList",
-                                            "loc": null,
-                                            "children": []
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                ]
-                              },
-                              "body": {
-                                "kind": "Expr::Lexmatch",
-                                "loc": null,
-                                "children": {
-                                  "strategy": {
-                                    "kind": "Label",
-                                    "loc": null,
-                                    "children": {
-                                      "name": "longest"
-                                    }
-                                  },
-                                  "expr": {
-                                    "kind": "Expr::Ident",
-                                    "loc": null,
-                                    "children": {
-                                      "id": {
-                                        "kind": "Var",
-                                        "loc": null,
-                                        "children": {
-                                          "name": {
-                                            "kind": "LongIdent::Ident",
-                                            "loc": null,
-                                            "children": {
-                                              "value": "input"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "cases": {
-                                    "kind": "Expr::Lexmatch::CaseList",
-                                    "loc": null,
-                                    "children": [
-                                      {
-                                        "kind": "LexCase",
-                                        "loc": null,
-                                        "children": {
-                                          "pat": {
-                                            "kind": "LexCase::PatternList",
-                                            "loc": null,
-                                            "children": [
-                                              {
-                                                "kind": "LexTopPattern::Pattern",
-                                                "loc": null,
-                                                "children": {
-                                                  "value": {
-                                                    "kind": "LexPattern::Regex",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "lit": "a^"
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            ]
-                                          },
-                                          "guard": null,
-                                          "body": {
-                                            "kind": "Expr::Apply",
-                                            "loc": null,
-                                            "children": {
-                                              "func": {
-                                                "kind": "Expr::Ident",
-                                                "loc": null,
-                                                "children": {
-                                                  "id": {
-                                                    "kind": "Var",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "name": {
-                                                        "kind": "LongIdent::Ident",
-                                                        "loc": null,
-                                                        "children": {
-                                                          "value": "fail"
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              },
-                                              "args": {
-                                                "kind": "Expr::Apply::ArgumentList",
-                                                "loc": null,
-                                                "children": [
-                                                  {
-                                                    "kind": "Argument",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "value": {
-                                                        "kind": "Expr::Constant",
-                                                        "loc": null,
-                                                        "children": {
-                                                          "constant": {
-                                                            "kind": "Constant::String",
-                                                            "loc": null,
-                                                            "children": {
-                                                              "value": "test_anchors"
-                                                            }
-                                                          }
-                                                        }
-                                                      },
-                                                      "kind": {
-                                                        "kind": "ArgumentKind::Positional",
-                                                        "loc": null,
-                                                        "children": {}
-                                                      }
-                                                    }
-                                                  }
-                                                ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
-                                              }
-                                            }
-                                          }
-                                        }
-                                      },
-                                      {
-                                        "kind": "LexCase",
-                                        "loc": null,
-                                        "children": {
-                                          "pat": {
-                                            "kind": "LexCase::PatternList",
-                                            "loc": null,
-                                            "children": [
-                                              {
-                                                "kind": "LexTopPattern::Wildcard",
-                                                "loc": null,
-                                                "children": {}
-                                              }
-                                            ]
-                                          },
-                                          "guard": null,
-                                          "body": {
-                                            "kind": "Expr::Unit",
-                                            "loc": null,
-                                            "children": {
-                                              "faked": false
-                                            }
-                                          }
-                                        }
-                                      }
-                                    ]
-                                  }
-                                }
-                              },
-                              "return_type": {
-                                "kind": "Type::Name",
-                                "loc": null,
-                                "children": {
-                                  "constr_id": {
-                                    "kind": "ConstrId",
-                                    "loc": null,
-                                    "children": {
-                                      "id": {
-                                        "kind": "LongIdent::Ident",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "Unit"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "tys": {
-                                    "kind": "Type::Name::TypeList",
-                                    "loc": null,
-                                    "children": []
-                                  }
-                                }
-                              },
-                              "error_type": {
-                                "kind": "ErrorType::DefaultErrorType",
-                                "loc": null,
-                                "children": {}
-                              },
-                              "kind": {
-                                "kind": "FnKind::Lambda",
-                                "loc": null,
-                                "children": {}
-                              },
-                              "has_error": null,
-                              "is_async": null
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  },
-                  "body": {
-                    "kind": "Expr::Sequence",
+                  "name": {
+                    "kind": "Binder",
                     "loc": null,
                     "children": {
-                      "exprs": {
-                        "kind": "Expr::Sequence::ExprList",
+                      "name": "f"
+                    }
+                  },
+                  "func": {
+                    "kind": "Func::Lambda",
+                    "loc": null,
+                    "children": {
+                      "parameters": {
+                        "kind": "Func::Lambda::ParameterList",
                         "loc": null,
                         "children": [
                           {
-                            "kind": "Expr::Apply",
+                            "kind": "Parameter::Positional",
                             "loc": null,
                             "children": {
-                              "func": {
-                                "kind": "Expr::Ident",
+                              "binder": {
+                                "kind": "Binder",
                                 "loc": null,
                                 "children": {
-                                  "id": {
-                                    "kind": "Var",
+                                  "name": "input"
+                                }
+                              },
+                              "ty": {
+                                "kind": "Type::Name",
+                                "loc": null,
+                                "children": {
+                                  "constr_id": {
+                                    "kind": "ConstrId",
                                     "loc": null,
                                     "children": {
-                                      "name": {
+                                      "id": {
                                         "kind": "LongIdent::Ident",
                                         "loc": null,
                                         "children": {
-                                          "value": "f"
+                                          "value": "BytesView"
                                         }
                                       }
                                     }
+                                  },
+                                  "tys": {
+                                    "kind": "Type::Name::TypeList",
+                                    "loc": null,
+                                    "children": []
                                   }
                                 }
-                              },
-                              "args": {
-                                "kind": "Expr::Apply::ArgumentList",
-                                "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "Argument",
-                                    "loc": null,
-                                    "children": {
-                                      "value": {
-                                        "kind": "Expr::Constant",
-                                        "loc": null,
-                                        "children": {
-                                          "constant": {
-                                            "kind": "Constant::Bytes",
-                                            "loc": null,
-                                            "children": {
-                                              "value": "hello"
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "kind": {
-                                        "kind": "ArgumentKind::Positional",
-                                        "loc": null,
-                                        "children": {}
-                                      }
-                                    }
-                                  }
-                                ]
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
-                              }
-                            }
-                          },
-                          {
-                            "kind": "Expr::Apply",
-                            "loc": null,
-                            "children": {
-                              "func": {
-                                "kind": "Expr::Ident",
-                                "loc": null,
-                                "children": {
-                                  "id": {
-                                    "kind": "Var",
-                                    "loc": null,
-                                    "children": {
-                                      "name": {
-                                        "kind": "LongIdent::Ident",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "f"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "args": {
-                                "kind": "Expr::Apply::ArgumentList",
-                                "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "Argument",
-                                    "loc": null,
-                                    "children": {
-                                      "value": {
-                                        "kind": "Expr::Constant",
-                                        "loc": null,
-                                        "children": {
-                                          "constant": {
-                                            "kind": "Constant::Bytes",
-                                            "loc": null,
-                                            "children": {
-                                              "value": "   llo"
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "kind": {
-                                        "kind": "ArgumentKind::Positional",
-                                        "loc": null,
-                                        "children": {}
-                                      }
-                                    }
-                                  }
-                                ]
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
                               }
                             }
                           }
                         ]
                       },
-                      "last_expr": {
+                      "body": {
                         "kind": "Expr::Lexmatch",
                         "loc": null,
                         "children": {
@@ -3750,14 +3194,20 @@
                             }
                           },
                           "expr": {
-                            "kind": "Expr::Constant",
+                            "kind": "Expr::Ident",
                             "loc": null,
                             "children": {
-                              "constant": {
-                                "kind": "Constant::String",
+                              "id": {
+                                "kind": "Var",
                                 "loc": null,
                                 "children": {
-                                  "value": "a"
+                                  "name": {
+                                    "kind": "LongIdent::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "input"
+                                    }
+                                  }
                                 }
                               }
                             }
@@ -3782,10 +3232,36 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "a^"
+                                              "lit": "([ ]+|^he)llo",
+                                              "offset": 1
                                             }
                                           }
                                         }
+                                      }
+                                    ]
+                                  },
+                                  "guard": null,
+                                  "body": {
+                                    "kind": "Expr::Unit",
+                                    "loc": null,
+                                    "children": {
+                                      "faked": false
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "kind": "LexCase",
+                                "loc": null,
+                                "children": {
+                                  "pat": {
+                                    "kind": "LexCase::PatternList",
+                                    "loc": null,
+                                    "children": [
+                                      {
+                                        "kind": "LexTopPattern::Wildcard",
+                                        "loc": null,
+                                        "children": {}
                                       }
                                     ]
                                   },
@@ -3851,33 +3327,568 @@
                                     }
                                   }
                                 }
-                              },
-                              {
-                                "kind": "LexCase",
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "return_type": {
+                        "kind": "Type::Name",
+                        "loc": null,
+                        "children": {
+                          "constr_id": {
+                            "kind": "ConstrId",
+                            "loc": null,
+                            "children": {
+                              "id": {
+                                "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "pat": {
-                                    "kind": "LexCase::PatternList",
-                                    "loc": null,
-                                    "children": [
-                                      {
-                                        "kind": "LexTopPattern::Wildcard",
-                                        "loc": null,
-                                        "children": {}
-                                      }
-                                    ]
-                                  },
-                                  "guard": null,
-                                  "body": {
-                                    "kind": "Expr::Unit",
+                                  "value": "Unit"
+                                }
+                              }
+                            }
+                          },
+                          "tys": {
+                            "kind": "Type::Name::TypeList",
+                            "loc": null,
+                            "children": []
+                          }
+                        }
+                      },
+                      "error_type": {
+                        "kind": "ErrorType::DefaultErrorType",
+                        "loc": null,
+                        "children": {}
+                      },
+                      "kind": {
+                        "kind": "FnKind::Lambda",
+                        "loc": null,
+                        "children": {}
+                      },
+                      "has_error": null,
+                      "is_async": null
+                    }
+                  },
+                  "body": {
+                    "kind": "Expr::LetFn",
+                    "loc": null,
+                    "children": {
+                      "name": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "f2"
+                        }
+                      },
+                      "func": {
+                        "kind": "Func::Lambda",
+                        "loc": null,
+                        "children": {
+                          "parameters": {
+                            "kind": "Func::Lambda::ParameterList",
+                            "loc": null,
+                            "children": [
+                              {
+                                "kind": "Parameter::Positional",
+                                "loc": null,
+                                "children": {
+                                  "binder": {
+                                    "kind": "Binder",
                                     "loc": null,
                                     "children": {
-                                      "faked": false
+                                      "name": "input"
+                                    }
+                                  },
+                                  "ty": {
+                                    "kind": "Type::Name",
+                                    "loc": null,
+                                    "children": {
+                                      "constr_id": {
+                                        "kind": "ConstrId",
+                                        "loc": null,
+                                        "children": {
+                                          "id": {
+                                            "kind": "LongIdent::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "BytesView"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "tys": {
+                                        "kind": "Type::Name::TypeList",
+                                        "loc": null,
+                                        "children": []
+                                      }
                                     }
                                   }
                                 }
                               }
                             ]
+                          },
+                          "body": {
+                            "kind": "Expr::Lexmatch",
+                            "loc": null,
+                            "children": {
+                              "strategy": {
+                                "kind": "Label",
+                                "loc": null,
+                                "children": {
+                                  "name": "longest"
+                                }
+                              },
+                              "expr": {
+                                "kind": "Expr::Ident",
+                                "loc": null,
+                                "children": {
+                                  "id": {
+                                    "kind": "Var",
+                                    "loc": null,
+                                    "children": {
+                                      "name": {
+                                        "kind": "LongIdent::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "input"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "cases": {
+                                "kind": "Expr::Lexmatch::CaseList",
+                                "loc": null,
+                                "children": [
+                                  {
+                                    "kind": "LexCase",
+                                    "loc": null,
+                                    "children": {
+                                      "pat": {
+                                        "kind": "LexCase::PatternList",
+                                        "loc": null,
+                                        "children": [
+                                          {
+                                            "kind": "LexTopPattern::Pattern",
+                                            "loc": null,
+                                            "children": {
+                                              "value": {
+                                                "kind": "LexPattern::Regex",
+                                                "loc": null,
+                                                "children": {
+                                                  "lit": "a^",
+                                                  "offset": 1
+                                                }
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      "guard": null,
+                                      "body": {
+                                        "kind": "Expr::Apply",
+                                        "loc": null,
+                                        "children": {
+                                          "func": {
+                                            "kind": "Expr::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "id": {
+                                                "kind": "Var",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": {
+                                                    "kind": "LongIdent::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "value": "fail"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "args": {
+                                            "kind": "Expr::Apply::ArgumentList",
+                                            "loc": null,
+                                            "children": [
+                                              {
+                                                "kind": "Argument",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": {
+                                                    "kind": "Expr::Constant",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "constant": {
+                                                        "kind": "Constant::String",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "value": "test_anchors"
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "kind": {
+                                                    "kind": "ArgumentKind::Positional",
+                                                    "loc": null,
+                                                    "children": {}
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          "attr": {
+                                            "kind": "ApplyAttr::NoAttr",
+                                            "loc": null,
+                                            "children": {}
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "kind": "LexCase",
+                                    "loc": null,
+                                    "children": {
+                                      "pat": {
+                                        "kind": "LexCase::PatternList",
+                                        "loc": null,
+                                        "children": [
+                                          {
+                                            "kind": "LexTopPattern::Wildcard",
+                                            "loc": null,
+                                            "children": {}
+                                          }
+                                        ]
+                                      },
+                                      "guard": null,
+                                      "body": {
+                                        "kind": "Expr::Unit",
+                                        "loc": null,
+                                        "children": {
+                                          "faked": false
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "return_type": {
+                            "kind": "Type::Name",
+                            "loc": null,
+                            "children": {
+                              "constr_id": {
+                                "kind": "ConstrId",
+                                "loc": null,
+                                "children": {
+                                  "id": {
+                                    "kind": "LongIdent::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "Unit"
+                                    }
+                                  }
+                                }
+                              },
+                              "tys": {
+                                "kind": "Type::Name::TypeList",
+                                "loc": null,
+                                "children": []
+                              }
+                            }
+                          },
+                          "error_type": {
+                            "kind": "ErrorType::DefaultErrorType",
+                            "loc": null,
+                            "children": {}
+                          },
+                          "kind": {
+                            "kind": "FnKind::Lambda",
+                            "loc": null,
+                            "children": {}
+                          },
+                          "has_error": null,
+                          "is_async": null
+                        }
+                      },
+                      "body": {
+                        "kind": "Expr::Sequence",
+                        "loc": null,
+                        "children": {
+                          "exprs": {
+                            "kind": "Expr::Sequence::ExprList",
+                            "loc": null,
+                            "children": [
+                              {
+                                "kind": "Expr::Apply",
+                                "loc": null,
+                                "children": {
+                                  "func": {
+                                    "kind": "Expr::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "id": {
+                                        "kind": "Var",
+                                        "loc": null,
+                                        "children": {
+                                          "name": {
+                                            "kind": "LongIdent::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "f"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "args": {
+                                    "kind": "Expr::Apply::ArgumentList",
+                                    "loc": null,
+                                    "children": [
+                                      {
+                                        "kind": "Argument",
+                                        "loc": null,
+                                        "children": {
+                                          "value": {
+                                            "kind": "Expr::Constant",
+                                            "loc": null,
+                                            "children": {
+                                              "constant": {
+                                                "kind": "Constant::Bytes",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": "hello"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "kind": {
+                                            "kind": "ArgumentKind::Positional",
+                                            "loc": null,
+                                            "children": {}
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "attr": {
+                                    "kind": "ApplyAttr::NoAttr",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              },
+                              {
+                                "kind": "Expr::Apply",
+                                "loc": null,
+                                "children": {
+                                  "func": {
+                                    "kind": "Expr::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "id": {
+                                        "kind": "Var",
+                                        "loc": null,
+                                        "children": {
+                                          "name": {
+                                            "kind": "LongIdent::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "f"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "args": {
+                                    "kind": "Expr::Apply::ArgumentList",
+                                    "loc": null,
+                                    "children": [
+                                      {
+                                        "kind": "Argument",
+                                        "loc": null,
+                                        "children": {
+                                          "value": {
+                                            "kind": "Expr::Constant",
+                                            "loc": null,
+                                            "children": {
+                                              "constant": {
+                                                "kind": "Constant::Bytes",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": "   llo"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "kind": {
+                                            "kind": "ArgumentKind::Positional",
+                                            "loc": null,
+                                            "children": {}
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "attr": {
+                                    "kind": "ApplyAttr::NoAttr",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "last_expr": {
+                            "kind": "Expr::Lexmatch",
+                            "loc": null,
+                            "children": {
+                              "strategy": {
+                                "kind": "Label",
+                                "loc": null,
+                                "children": {
+                                  "name": "longest"
+                                }
+                              },
+                              "expr": {
+                                "kind": "Expr::Constant",
+                                "loc": null,
+                                "children": {
+                                  "constant": {
+                                    "kind": "Constant::String",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "a"
+                                    }
+                                  }
+                                }
+                              },
+                              "cases": {
+                                "kind": "Expr::Lexmatch::CaseList",
+                                "loc": null,
+                                "children": [
+                                  {
+                                    "kind": "LexCase",
+                                    "loc": null,
+                                    "children": {
+                                      "pat": {
+                                        "kind": "LexCase::PatternList",
+                                        "loc": null,
+                                        "children": [
+                                          {
+                                            "kind": "LexTopPattern::Pattern",
+                                            "loc": null,
+                                            "children": {
+                                              "value": {
+                                                "kind": "LexPattern::Regex",
+                                                "loc": null,
+                                                "children": {
+                                                  "lit": "a^",
+                                                  "offset": 1
+                                                }
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      "guard": null,
+                                      "body": {
+                                        "kind": "Expr::Apply",
+                                        "loc": null,
+                                        "children": {
+                                          "func": {
+                                            "kind": "Expr::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "id": {
+                                                "kind": "Var",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": {
+                                                    "kind": "LongIdent::Ident",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "value": "fail"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "args": {
+                                            "kind": "Expr::Apply::ArgumentList",
+                                            "loc": null,
+                                            "children": [
+                                              {
+                                                "kind": "Argument",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": {
+                                                    "kind": "Expr::Constant",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "constant": {
+                                                        "kind": "Constant::String",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "value": "test_anchors"
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "kind": {
+                                                    "kind": "ArgumentKind::Positional",
+                                                    "loc": null,
+                                                    "children": {}
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          "attr": {
+                                            "kind": "ApplyAttr::NoAttr",
+                                            "loc": null,
+                                            "children": {}
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "kind": "LexCase",
+                                    "loc": null,
+                                    "children": {
+                                      "pat": {
+                                        "kind": "LexCase::PatternList",
+                                        "loc": null,
+                                        "children": [
+                                          {
+                                            "kind": "LexTopPattern::Wildcard",
+                                            "loc": null,
+                                            "children": {}
+                                          }
+                                        ]
+                                      },
+                                      "guard": null,
+                                      "body": {
+                                        "kind": "Expr::Unit",
+                                        "loc": null,
+                                        "children": {
+                                          "faked": false
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
                           }
                         }
                       }
@@ -3961,6 +3972,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -4026,7 +4038,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "(a+)(b+)"
+                                              "lit": "(a+)(b+)",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -4046,7 +4059,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "c+"
+                                              "lit": "c+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -4137,7 +4151,7 @@
                                                     "loc": null,
                                                     "children": {
                                                       "constant": {
-                                                        "kind": "Constant::String",
+                                                        "kind": "Constant::Bytes",
                                                         "loc": null,
                                                         "children": {
                                                           "value": "aaabbb"
@@ -4274,7 +4288,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "ccc"
@@ -4523,6 +4537,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -4588,7 +4603,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "cat|dog"
+                                              "lit": "cat|dog",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -4663,7 +4679,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "cat"
@@ -4828,7 +4844,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "cat|dog"
+                                              "lit": "cat|dog",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -4903,7 +4920,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "dog"
@@ -5070,7 +5087,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "a|ab|abc"
+                                          "lit": "a|ab|abc",
+                                          "offset": 1
                                         }
                                       },
                                       "binder": {
@@ -5145,7 +5163,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::String",
+                                                "kind": "Constant::Bytes",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "abc"
@@ -5338,6 +5356,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -5411,7 +5430,8 @@
                                                     "kind": "LexPattern::Regex",
                                                     "loc": null,
                                                     "children": {
-                                                      "lit": "a?"
+                                                      "lit": "a?",
+                                                      "offset": 1
                                                     }
                                                   },
                                                   "binder": {
@@ -5431,7 +5451,8 @@
                                                     "kind": "LexPattern::Regex",
                                                     "loc": null,
                                                     "children": {
-                                                      "lit": "b*"
+                                                      "lit": "b*",
+                                                      "offset": 1
                                                     }
                                                   },
                                                   "binder": {
@@ -5451,7 +5472,8 @@
                                                     "kind": "LexPattern::Regex",
                                                     "loc": null,
                                                     "children": {
-                                                      "lit": "c+"
+                                                      "lit": "c+",
+                                                      "offset": 1
                                                     }
                                                   },
                                                   "binder": {
@@ -5542,7 +5564,7 @@
                                                             "loc": null,
                                                             "children": {
                                                               "constant": {
-                                                                "kind": "Constant::String",
+                                                                "kind": "Constant::Bytes",
                                                                 "loc": null,
                                                                 "children": {
                                                                   "value": "a"
@@ -5677,7 +5699,7 @@
                                                             "loc": null,
                                                             "children": {
                                                               "constant": {
-                                                                "kind": "Constant::String",
+                                                                "kind": "Constant::Bytes",
                                                                 "loc": null,
                                                                 "children": {
                                                                   "value": "bbb"
@@ -5814,7 +5836,7 @@
                                                         "loc": null,
                                                         "children": {
                                                           "constant": {
-                                                            "kind": "Constant::String",
+                                                            "kind": "Constant::Bytes",
                                                             "loc": null,
                                                             "children": {
                                                               "value": "ccc"
@@ -6047,7 +6069,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "a*"
+                                                  "lit": "a*",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -6067,7 +6090,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "c+"
+                                                  "lit": "c+",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -6158,7 +6182,7 @@
                                                         "loc": null,
                                                         "children": {
                                                           "constant": {
-                                                            "kind": "Constant::String",
+                                                            "kind": "Constant::Bytes",
                                                             "loc": null,
                                                             "children": {
                                                               "value": ""
@@ -6295,7 +6319,7 @@
                                                     "loc": null,
                                                     "children": {
                                                       "constant": {
-                                                        "kind": "Constant::String",
+                                                        "kind": "Constant::Bytes",
                                                         "loc": null,
                                                         "children": {
                                                           "value": "ccc"
@@ -6546,6 +6570,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -6611,7 +6636,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "a.b"
+                                              "lit": "a.b",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -6686,7 +6712,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "axb"
@@ -6851,7 +6877,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": ".*"
+                                              "lit": ".*",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -6926,7 +6953,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "hello world 123"
@@ -7093,7 +7120,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": ".+"
+                                          "lit": ".+",
+                                          "offset": 1
                                         }
                                       },
                                       "binder": {
@@ -7168,7 +7196,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::String",
+                                                "kind": "Constant::Bytes",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "x"
@@ -7361,6 +7389,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -7426,7 +7455,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[0-9]+\\.[0-9]+"
+                                              "lit": "[0-9]+\\.[0-9]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -7501,7 +7531,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "3.14"
@@ -7666,7 +7696,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[a-zA-Z]+\\t[a-zA-Z]+"
+                                              "lit": "[a-zA-Z]+\\t[a-zA-Z]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -7741,7 +7772,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "hello\\tworld"
@@ -7904,7 +7935,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "[{][}]"
+                                      "lit": "[{][}]",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -8084,6 +8116,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -8149,7 +8182,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "a*"
+                                              "lit": "a*",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -8224,7 +8258,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": ""
@@ -8399,7 +8433,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "a?"
+                                                  "lit": "a?",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -8419,7 +8454,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "b"
+                                                  "lit": "b",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -8511,7 +8547,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::String",
+                                                "kind": "Constant::Bytes",
                                                 "loc": null,
                                                 "children": {
                                                   "value": ""
@@ -8562,7 +8598,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::Char",
+                                                "kind": "Constant::Byte",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "b"
@@ -8810,6 +8846,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -8875,7 +8912,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[a-zA-Z]+"
+                                              "lit": "[a-zA-Z]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -8891,7 +8929,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "\\t"
+                                          "lit": "\\t",
+                                          "offset": 1
                                         }
                                       },
                                       {
@@ -8902,7 +8941,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[a-zA-Z]+"
+                                              "lit": "[a-zA-Z]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -8918,7 +8958,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "\\t"
+                                          "lit": "\\t",
+                                          "offset": 1
                                         }
                                       },
                                       {
@@ -8929,7 +8970,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[a-zA-Z]+"
+                                              "lit": "[a-zA-Z]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -9020,7 +9062,7 @@
                                                     "loc": null,
                                                     "children": {
                                                       "constant": {
-                                                        "kind": "Constant::String",
+                                                        "kind": "Constant::Bytes",
                                                         "loc": null,
                                                         "children": {
                                                           "value": "first"
@@ -9155,7 +9197,7 @@
                                                     "loc": null,
                                                     "children": {
                                                       "constant": {
-                                                        "kind": "Constant::String",
+                                                        "kind": "Constant::Bytes",
                                                         "loc": null,
                                                         "children": {
                                                           "value": "second"
@@ -9292,7 +9334,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "third"
@@ -9541,6 +9583,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -9602,7 +9645,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "if"
+                                          "lit": "if",
+                                          "offset": 1
                                         }
                                       }
                                     }
@@ -9644,7 +9688,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[a-zA-Z_][a-zA-Z0-9_]*"
+                                              "lit": "[a-zA-Z_][a-zA-Z0-9_]*",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -9856,7 +9901,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "if"
+                                      "lit": "if",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -9951,7 +9997,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "[a-zA-Z_][a-zA-Z0-9_]*"
+                                          "lit": "[a-zA-Z_][a-zA-Z0-9_]*",
+                                          "offset": 1
                                         }
                                       },
                                       "binder": {
@@ -10026,7 +10073,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::String",
+                                                "kind": "Constant::Bytes",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "identifier"
@@ -10268,6 +10315,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -10333,7 +10381,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[a-zA-Z0-9_]+"
+                                              "lit": "[a-zA-Z0-9_]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -10408,7 +10457,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "var_name123"
@@ -10573,7 +10622,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[^0-9]+"
+                                              "lit": "[^0-9]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -10648,7 +10698,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "abc"
@@ -10823,7 +10873,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[a-z]"
+                                                  "lit": "[a-z]",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -10843,7 +10894,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[A-Z]*"
+                                                  "lit": "[A-Z]*",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -10863,7 +10915,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[0-9]*"
+                                                  "lit": "[0-9]*",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -10955,7 +11008,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::Char",
+                                                "kind": "Constant::Byte",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "a"
@@ -11023,7 +11076,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": ""
@@ -11074,7 +11127,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "1"
@@ -11275,6 +11328,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -11332,7 +11386,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "\\x41\\x42\\x43"
+                                      "lit": "\\x41\\x42\\x43",
+                                      "offset": 1
                                     }
                                   },
                                   "binder": {
@@ -11407,7 +11462,7 @@
                                         "loc": null,
                                         "children": {
                                           "constant": {
-                                            "kind": "Constant::String",
+                                            "kind": "Constant::Bytes",
                                             "loc": null,
                                             "children": {
                                               "value": "ABC"
@@ -11598,6 +11653,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -11663,7 +11719,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[a-zA-Z0-9._+\\-]+"
+                                              "lit": "[a-zA-Z0-9._+\\-]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -11679,7 +11736,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "@"
+                                          "lit": "@",
+                                          "offset": 1
                                         }
                                       },
                                       {
@@ -11690,7 +11748,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[a-zA-Z0-9.\\-]+"
+                                              "lit": "[a-zA-Z0-9.\\-]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -11706,7 +11765,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "\\."
+                                          "lit": "\\.",
+                                          "offset": 1
                                         }
                                       },
                                       {
@@ -11717,7 +11777,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[a-zA-Z]+"
+                                              "lit": "[a-zA-Z]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -11796,7 +11857,7 @@
                                         "loc": null,
                                         "children": {
                                           "constant": {
-                                            "kind": "Constant::String",
+                                            "kind": "Constant::Bytes",
                                             "loc": null,
                                             "children": {
                                               "value": "user"
@@ -11851,7 +11912,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::String",
+                                                "kind": "Constant::Bytes",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "example"
@@ -11889,7 +11950,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::String",
+                                                "kind": "Constant::Bytes",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "com"
@@ -12137,6 +12198,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -12254,7 +12316,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "(?utf8:我❤️中国|𠮷)"
+                                          "lit": "(?utf8:我❤️中国|𠮷)",
+                                          "offset": 1
                                         }
                                       }
                                     }
@@ -12298,7 +12361,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "(?utf8:[\\u3041-\\u3096\\u3099-\\u309f]+)"
+                                          "lit": "(?utf8:[\\u3041-\\u3096\\u3099-\\u309f]+)",
+                                          "offset": 1
                                         }
                                       }
                                     }
@@ -12474,7 +12538,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "我❤️中国"
@@ -12605,7 +12669,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "𠮷"
@@ -12736,7 +12800,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "あいうえお"
@@ -12869,7 +12933,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::String",
+                                                "kind": "Constant::Bytes",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "abc"
@@ -13011,6 +13075,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -13128,7 +13193,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "(?utf8:.)+"
+                                          "lit": "(?utf8:.)+",
+                                          "offset": 1
                                         }
                                       }
                                     }
@@ -13304,7 +13370,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "a"
@@ -13435,7 +13501,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "\\xC1\\xA1"
@@ -13566,7 +13632,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "\\xE0\\x81\\xA1"
@@ -13697,7 +13763,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "\\xC2\\x99"
@@ -13830,7 +13896,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::String",
+                                                "kind": "Constant::Bytes",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "\\xE0\\x82\\x99"
@@ -13972,6 +14038,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -14209,7 +14276,8 @@
                                                             "kind": "LexPattern::Regex",
                                                             "loc": null,
                                                             "children": {
-                                                              "lit": "(?utf8:.)"
+                                                              "lit": "(?utf8:.)",
+                                                              "offset": 1
                                                             }
                                                           },
                                                           "binder": {
@@ -14386,7 +14454,8 @@
                                                         "kind": "LexPattern::Regex",
                                                         "loc": null,
                                                         "children": {
-                                                          "lit": "."
+                                                          "lit": ".",
+                                                          "offset": 1
                                                         }
                                                       }
                                                     }
@@ -14503,7 +14572,8 @@
                                                         "kind": "LexPattern::Regex",
                                                         "loc": null,
                                                         "children": {
-                                                          "lit": ""
+                                                          "lit": "",
+                                                          "offset": 1
                                                         }
                                                       }
                                                     }
@@ -14745,7 +14815,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "我❤️中国"
@@ -14876,7 +14946,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "𠮷"
@@ -15007,7 +15077,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "あいうえお"
@@ -15138,7 +15208,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "abc"
@@ -15273,7 +15343,7 @@
                                                     "loc": null,
                                                     "children": {
                                                       "constant": {
-                                                        "kind": "Constant::String",
+                                                        "kind": "Constant::Bytes",
                                                         "loc": null,
                                                         "children": {
                                                           "value": "\\xED\\xA0\\x80"
@@ -15452,7 +15522,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "\\xF4\\x90\\x80\\x80"
@@ -15674,6 +15744,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -15785,7 +15856,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "(?utf8:.)"
+                                          "lit": "(?utf8:.)",
+                                          "offset": 1
                                         }
                                       },
                                       "binder": {
@@ -15965,7 +16037,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "."
+                                          "lit": ".",
+                                          "offset": 1
                                         }
                                       },
                                       "binder": {
@@ -16141,7 +16214,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": ""
+                                      "lit": "",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -16295,6 +16369,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -16412,7 +16487,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "(?utf16le:我❤️中国|𠮷)"
+                                          "lit": "(?utf16le:我❤️中国|𠮷)",
+                                          "offset": 1
                                         }
                                       }
                                     }
@@ -16456,7 +16532,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "(?utf16le:[\\u3041-\\u3096\\u3099-\\u309f]+)"
+                                          "lit": "(?utf16le:[\\u3041-\\u3096\\u3099-\\u309f]+)",
+                                          "offset": 1
                                         }
                                       }
                                     }
@@ -17361,6 +17438,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -17598,7 +17676,8 @@
                                                             "kind": "LexPattern::Regex",
                                                             "loc": null,
                                                             "children": {
-                                                              "lit": "(?utf16le:.)"
+                                                              "lit": "(?utf16le:.)",
+                                                              "offset": 1
                                                             }
                                                           },
                                                           "binder": {
@@ -17775,7 +17854,8 @@
                                                         "kind": "LexPattern::Regex",
                                                         "loc": null,
                                                         "children": {
-                                                          "lit": "."
+                                                          "lit": ".",
+                                                          "offset": 1
                                                         }
                                                       }
                                                     }
@@ -17892,7 +17972,8 @@
                                                         "kind": "LexPattern::Regex",
                                                         "loc": null,
                                                         "children": {
-                                                          "lit": ""
+                                                          "lit": "",
+                                                          "offset": 1
                                                         }
                                                       }
                                                     }
@@ -18863,6 +18944,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -18928,7 +19010,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "a+"
+                                              "lit": "a+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -18944,7 +19027,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "-"
+                                          "lit": "-",
+                                          "offset": 1
                                         }
                                       },
                                       {
@@ -18955,7 +19039,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "b+"
+                                              "lit": "b+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -18971,7 +19056,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "-"
+                                          "lit": "-",
+                                          "offset": 1
                                         }
                                       },
                                       {
@@ -18982,7 +19068,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "c+"
+                                              "lit": "c+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -19246,6 +19333,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -19346,7 +19434,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[[:lower:][:digit:]]+"
+                                                  "lit": "[[:lower:][:digit:]]+",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -19421,7 +19510,7 @@
                                                     "loc": null,
                                                     "children": {
                                                       "constant": {
-                                                        "kind": "Constant::String",
+                                                        "kind": "Constant::Bytes",
                                                         "loc": null,
                                                         "children": {
                                                           "value": "abc123"
@@ -19640,7 +19729,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[[:upper:]]+"
+                                                  "lit": "[[:upper:]]+",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -19715,7 +19805,7 @@
                                                     "loc": null,
                                                     "children": {
                                                       "constant": {
-                                                        "kind": "Constant::String",
+                                                        "kind": "Constant::Bytes",
                                                         "loc": null,
                                                         "children": {
                                                           "value": "HELLO"
@@ -19934,7 +20024,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[[:upper:][:blank:][:lower:]]+"
+                                                  "lit": "[[:upper:][:blank:][:lower:]]+",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -20009,7 +20100,7 @@
                                                     "loc": null,
                                                     "children": {
                                                       "constant": {
-                                                        "kind": "Constant::String",
+                                                        "kind": "Constant::Bytes",
                                                         "loc": null,
                                                         "children": {
                                                           "value": "HELLO abc"
@@ -20228,7 +20319,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[[:xdigit:]]{6}"
+                                                  "lit": "[[:xdigit:]]{6}",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -20303,7 +20395,7 @@
                                                     "loc": null,
                                                     "children": {
                                                       "constant": {
-                                                        "kind": "Constant::String",
+                                                        "kind": "Constant::Bytes",
                                                         "loc": null,
                                                         "children": {
                                                           "value": "abc123"
@@ -20522,7 +20614,8 @@
                                                 "kind": "LexPattern::Regex",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[[:alnum:]\\r\\n]+[[:digit:]]"
+                                                  "lit": "[[:alnum:]\\r\\n]+[[:digit:]]",
+                                                  "offset": 1
                                                 }
                                               },
                                               "binder": {
@@ -20597,7 +20690,7 @@
                                                     "loc": null,
                                                     "children": {
                                                       "constant": {
-                                                        "kind": "Constant::String",
+                                                        "kind": "Constant::Bytes",
                                                         "loc": null,
                                                         "children": {
                                                           "value": "abc123"
@@ -20818,7 +20911,8 @@
                                             "kind": "LexPattern::Regex",
                                             "loc": null,
                                             "children": {
-                                              "lit": "[[:word:]]+[[:blank:]][[:word:]]+"
+                                              "lit": "[[:word:]]+[[:blank:]][[:word:]]+",
+                                              "offset": 1
                                             }
                                           },
                                           "binder": {
@@ -20893,7 +20987,7 @@
                                                 "loc": null,
                                                 "children": {
                                                   "constant": {
-                                                    "kind": "Constant::String",
+                                                    "kind": "Constant::Bytes",
                                                     "loc": null,
                                                     "children": {
                                                       "value": "HELLO abc123_"
@@ -21195,6 +21289,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -24002,7 +24097,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "我❤️中国"
@@ -24062,7 +24157,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "𠮷"
@@ -24122,7 +24217,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "あいうえお"
@@ -24182,7 +24277,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "abc"
@@ -24242,7 +24337,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "\\xED\\xA0\\x80"
@@ -24302,7 +24397,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "\\xF4\\x90\\x80\\x80"
@@ -25403,6 +25498,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -25456,7 +25552,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "a"
@@ -25516,7 +25612,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "b"
@@ -25576,7 +25672,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "ab"
@@ -25636,7 +25732,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "abc"
@@ -25696,7 +25792,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "abcd"
@@ -25756,7 +25852,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "a"
@@ -25816,7 +25912,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "aa"
@@ -25876,7 +25972,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "aaa"
@@ -25936,7 +26032,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "aaaa"
@@ -25996,7 +26092,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "x"
@@ -26056,7 +26152,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "le"
@@ -26116,7 +26212,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "let"
@@ -26176,7 +26272,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "letx"
@@ -26236,7 +26332,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "a"
@@ -26296,7 +26392,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "ab"
@@ -26356,7 +26452,7 @@
                                 "loc": null,
                                 "children": {
                                   "constant": {
-                                    "kind": "Constant::String",
+                                    "kind": "Constant::Bytes",
                                     "loc": null,
                                     "children": {
                                       "value": "abc"
@@ -26426,7 +26522,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "\\\""
+                                      "lit": "\\\"",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -26464,7 +26561,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "\\x22"
+                                      "lit": "\\x22",
+                                      "offset": 1
                                     }
                                   }
                                 }

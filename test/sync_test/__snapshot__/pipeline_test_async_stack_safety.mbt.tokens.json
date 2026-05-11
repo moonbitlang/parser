@@ -184,41 +184,30 @@
     "loc": "5:26-5:29"
   },
   {
-    "token": "COLONCOLON",
-    "loc": "5:29-5:31"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "new"
-    ],
-    "loc": "5:31-5:34"
-  },
-  {
     "token": "LPAREN",
-    "loc": "5:34-5:35"
+    "loc": "5:29-5:30"
   },
   {
     "token": [
       "INT",
       "0"
     ],
-    "loc": "5:35-5:36"
+    "loc": "5:30-5:31"
   },
   {
     "token": "RPAREN",
-    "loc": "5:36-5:37"
+    "loc": "5:31-5:32"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "5:37-5:37"
+    "loc": "5:32-5:32"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:37-5:38"
+    "loc": "5:32-5:33"
   },
   {
     "token": "NEWLINE",
@@ -321,10 +310,7 @@
     "loc": "10:11-10:14"
   },
   {
-    "token": [
-      "AUGMENTED_ASSIGNMENT",
-      "+"
-    ],
+    "token": "PLUS_EQUAL",
     "loc": "10:15-10:17"
   },
   {

@@ -4,108 +4,96 @@
     "loc": null,
     "children": {
       "expr": {
-        "kind": "Expr::LetRec",
+        "kind": "Expr::LetFn",
         "loc": null,
         "children": {
-          "bindings": {
-            "kind": "Expr::LetRec::BindingList",
-            "loc": null,
-            "children": [
-              {
-                "kind": "LetRec::Binding",
-                "loc": null,
-                "children": {
-                  "binder": {
-                    "kind": "Binder",
-                    "loc": null,
-                    "children": {
-                      "name": "f"
-                    }
-                  },
-                  "func": {
-                    "kind": "Func::Lambda",
-                    "loc": null,
-                    "children": {
-                      "parameters": {
-                        "kind": "Func::Lambda::ParameterList",
-                        "loc": null,
-                        "children": []
-                      },
-                      "body": {
-                        "kind": "Expr::Unit",
-                        "loc": null,
-                        "children": {
-                          "faked": true
-                        }
-                      },
-                      "return_type": null,
-                      "error_type": {
-                        "kind": "ErrorType::NoErrorType",
-                        "loc": null,
-                        "children": {}
-                      },
-                      "kind": {
-                        "kind": "FnKind::Lambda",
-                        "loc": null,
-                        "children": {}
-                      },
-                      "has_error": null,
-                      "is_async": null
-                    }
-                  }
-                }
-              },
-              {
-                "kind": "LetRec::Binding",
-                "loc": null,
-                "children": {
-                  "binder": {
-                    "kind": "Binder",
-                    "loc": null,
-                    "children": {
-                      "name": "g"
-                    }
-                  },
-                  "func": {
-                    "kind": "Func::Lambda",
-                    "loc": null,
-                    "children": {
-                      "parameters": {
-                        "kind": "Func::Lambda::ParameterList",
-                        "loc": null,
-                        "children": []
-                      },
-                      "body": {
-                        "kind": "Expr::Unit",
-                        "loc": null,
-                        "children": {
-                          "faked": true
-                        }
-                      },
-                      "return_type": null,
-                      "error_type": {
-                        "kind": "ErrorType::NoErrorType",
-                        "loc": null,
-                        "children": {}
-                      },
-                      "kind": {
-                        "kind": "FnKind::Lambda",
-                        "loc": null,
-                        "children": {}
-                      },
-                      "has_error": null,
-                      "is_async": null
-                    }
-                  }
-                }
-              }
-            ]
-          },
-          "body": {
-            "kind": "Expr::Unit",
+          "name": {
+            "kind": "Binder",
             "loc": null,
             "children": {
-              "faked": true
+              "name": "f"
+            }
+          },
+          "func": {
+            "kind": "Func::Lambda",
+            "loc": null,
+            "children": {
+              "parameters": {
+                "kind": "Func::Lambda::ParameterList",
+                "loc": null,
+                "children": []
+              },
+              "body": {
+                "kind": "Expr::Unit",
+                "loc": null,
+                "children": {
+                  "faked": true
+                }
+              },
+              "return_type": null,
+              "error_type": {
+                "kind": "ErrorType::NoErrorType",
+                "loc": null,
+                "children": {}
+              },
+              "kind": {
+                "kind": "FnKind::Lambda",
+                "loc": null,
+                "children": {}
+              },
+              "has_error": null,
+              "is_async": null
+            }
+          },
+          "body": {
+            "kind": "Expr::LetFn",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "Binder",
+                "loc": null,
+                "children": {
+                  "name": "g"
+                }
+              },
+              "func": {
+                "kind": "Func::Lambda",
+                "loc": null,
+                "children": {
+                  "parameters": {
+                    "kind": "Func::Lambda::ParameterList",
+                    "loc": null,
+                    "children": []
+                  },
+                  "body": {
+                    "kind": "Expr::Unit",
+                    "loc": null,
+                    "children": {
+                      "faked": true
+                    }
+                  },
+                  "return_type": null,
+                  "error_type": {
+                    "kind": "ErrorType::NoErrorType",
+                    "loc": null,
+                    "children": {}
+                  },
+                  "kind": {
+                    "kind": "FnKind::Lambda",
+                    "loc": null,
+                    "children": {}
+                  },
+                  "has_error": null,
+                  "is_async": null
+                }
+              },
+              "body": {
+                "kind": "Expr::Unit",
+                "loc": null,
+                "children": {
+                  "faked": true
+                }
+              }
             }
           }
         }
@@ -196,6 +184,7 @@
           "doc": " comment for h1"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -259,6 +248,7 @@
           "doc": " Useless doc comment, shouldn't appear in AST"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -269,108 +259,96 @@
             "children": []
           },
           "expr": {
-            "kind": "Expr::LetRec",
+            "kind": "Expr::LetFn",
             "loc": null,
             "children": {
-              "bindings": {
-                "kind": "Expr::LetRec::BindingList",
-                "loc": null,
-                "children": [
-                  {
-                    "kind": "LetRec::Binding",
-                    "loc": null,
-                    "children": {
-                      "binder": {
-                        "kind": "Binder",
-                        "loc": null,
-                        "children": {
-                          "name": "f"
-                        }
-                      },
-                      "func": {
-                        "kind": "Func::Lambda",
-                        "loc": null,
-                        "children": {
-                          "parameters": {
-                            "kind": "Func::Lambda::ParameterList",
-                            "loc": null,
-                            "children": []
-                          },
-                          "body": {
-                            "kind": "Expr::Unit",
-                            "loc": null,
-                            "children": {
-                              "faked": true
-                            }
-                          },
-                          "return_type": null,
-                          "error_type": {
-                            "kind": "ErrorType::NoErrorType",
-                            "loc": null,
-                            "children": {}
-                          },
-                          "kind": {
-                            "kind": "FnKind::Lambda",
-                            "loc": null,
-                            "children": {}
-                          },
-                          "has_error": null,
-                          "is_async": null
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "kind": "LetRec::Binding",
-                    "loc": null,
-                    "children": {
-                      "binder": {
-                        "kind": "Binder",
-                        "loc": null,
-                        "children": {
-                          "name": "g"
-                        }
-                      },
-                      "func": {
-                        "kind": "Func::Lambda",
-                        "loc": null,
-                        "children": {
-                          "parameters": {
-                            "kind": "Func::Lambda::ParameterList",
-                            "loc": null,
-                            "children": []
-                          },
-                          "body": {
-                            "kind": "Expr::Unit",
-                            "loc": null,
-                            "children": {
-                              "faked": true
-                            }
-                          },
-                          "return_type": null,
-                          "error_type": {
-                            "kind": "ErrorType::NoErrorType",
-                            "loc": null,
-                            "children": {}
-                          },
-                          "kind": {
-                            "kind": "FnKind::Lambda",
-                            "loc": null,
-                            "children": {}
-                          },
-                          "has_error": null,
-                          "is_async": null
-                        }
-                      }
-                    }
-                  }
-                ]
-              },
-              "body": {
-                "kind": "Expr::Unit",
+              "name": {
+                "kind": "Binder",
                 "loc": null,
                 "children": {
-                  "faked": true
+                  "name": "f"
+                }
+              },
+              "func": {
+                "kind": "Func::Lambda",
+                "loc": null,
+                "children": {
+                  "parameters": {
+                    "kind": "Func::Lambda::ParameterList",
+                    "loc": null,
+                    "children": []
+                  },
+                  "body": {
+                    "kind": "Expr::Unit",
+                    "loc": null,
+                    "children": {
+                      "faked": true
+                    }
+                  },
+                  "return_type": null,
+                  "error_type": {
+                    "kind": "ErrorType::NoErrorType",
+                    "loc": null,
+                    "children": {}
+                  },
+                  "kind": {
+                    "kind": "FnKind::Lambda",
+                    "loc": null,
+                    "children": {}
+                  },
+                  "has_error": null,
+                  "is_async": null
+                }
+              },
+              "body": {
+                "kind": "Expr::LetFn",
+                "loc": null,
+                "children": {
+                  "name": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "g"
+                    }
+                  },
+                  "func": {
+                    "kind": "Func::Lambda",
+                    "loc": null,
+                    "children": {
+                      "parameters": {
+                        "kind": "Func::Lambda::ParameterList",
+                        "loc": null,
+                        "children": []
+                      },
+                      "body": {
+                        "kind": "Expr::Unit",
+                        "loc": null,
+                        "children": {
+                          "faked": true
+                        }
+                      },
+                      "return_type": null,
+                      "error_type": {
+                        "kind": "ErrorType::NoErrorType",
+                        "loc": null,
+                        "children": {}
+                      },
+                      "kind": {
+                        "kind": "FnKind::Lambda",
+                        "loc": null,
+                        "children": {}
+                      },
+                      "has_error": null,
+                      "is_async": null
+                    }
+                  },
+                  "body": {
+                    "kind": "Expr::Unit",
+                    "loc": null,
+                    "children": {
+                      "faked": true
+                    }
+                  }
                 }
               }
             }
@@ -449,6 +427,7 @@
           "doc": " comment for h2"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -512,6 +491,7 @@
           "doc": " Useless doc comment, shouldn't appear in AST"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -522,108 +502,96 @@
             "children": []
           },
           "expr": {
-            "kind": "Expr::LetRec",
+            "kind": "Expr::LetFn",
             "loc": null,
             "children": {
-              "bindings": {
-                "kind": "Expr::LetRec::BindingList",
-                "loc": null,
-                "children": [
-                  {
-                    "kind": "LetRec::Binding",
-                    "loc": null,
-                    "children": {
-                      "binder": {
-                        "kind": "Binder",
-                        "loc": null,
-                        "children": {
-                          "name": "f"
-                        }
-                      },
-                      "func": {
-                        "kind": "Func::Lambda",
-                        "loc": null,
-                        "children": {
-                          "parameters": {
-                            "kind": "Func::Lambda::ParameterList",
-                            "loc": null,
-                            "children": []
-                          },
-                          "body": {
-                            "kind": "Expr::Unit",
-                            "loc": null,
-                            "children": {
-                              "faked": true
-                            }
-                          },
-                          "return_type": null,
-                          "error_type": {
-                            "kind": "ErrorType::NoErrorType",
-                            "loc": null,
-                            "children": {}
-                          },
-                          "kind": {
-                            "kind": "FnKind::Lambda",
-                            "loc": null,
-                            "children": {}
-                          },
-                          "has_error": null,
-                          "is_async": null
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "kind": "LetRec::Binding",
-                    "loc": null,
-                    "children": {
-                      "binder": {
-                        "kind": "Binder",
-                        "loc": null,
-                        "children": {
-                          "name": "g"
-                        }
-                      },
-                      "func": {
-                        "kind": "Func::Lambda",
-                        "loc": null,
-                        "children": {
-                          "parameters": {
-                            "kind": "Func::Lambda::ParameterList",
-                            "loc": null,
-                            "children": []
-                          },
-                          "body": {
-                            "kind": "Expr::Unit",
-                            "loc": null,
-                            "children": {
-                              "faked": true
-                            }
-                          },
-                          "return_type": null,
-                          "error_type": {
-                            "kind": "ErrorType::NoErrorType",
-                            "loc": null,
-                            "children": {}
-                          },
-                          "kind": {
-                            "kind": "FnKind::Lambda",
-                            "loc": null,
-                            "children": {}
-                          },
-                          "has_error": null,
-                          "is_async": null
-                        }
-                      }
-                    }
-                  }
-                ]
-              },
-              "body": {
-                "kind": "Expr::Unit",
+              "name": {
+                "kind": "Binder",
                 "loc": null,
                 "children": {
-                  "faked": true
+                  "name": "f"
+                }
+              },
+              "func": {
+                "kind": "Func::Lambda",
+                "loc": null,
+                "children": {
+                  "parameters": {
+                    "kind": "Func::Lambda::ParameterList",
+                    "loc": null,
+                    "children": []
+                  },
+                  "body": {
+                    "kind": "Expr::Unit",
+                    "loc": null,
+                    "children": {
+                      "faked": true
+                    }
+                  },
+                  "return_type": null,
+                  "error_type": {
+                    "kind": "ErrorType::NoErrorType",
+                    "loc": null,
+                    "children": {}
+                  },
+                  "kind": {
+                    "kind": "FnKind::Lambda",
+                    "loc": null,
+                    "children": {}
+                  },
+                  "has_error": null,
+                  "is_async": null
+                }
+              },
+              "body": {
+                "kind": "Expr::LetFn",
+                "loc": null,
+                "children": {
+                  "name": {
+                    "kind": "Binder",
+                    "loc": null,
+                    "children": {
+                      "name": "g"
+                    }
+                  },
+                  "func": {
+                    "kind": "Func::Lambda",
+                    "loc": null,
+                    "children": {
+                      "parameters": {
+                        "kind": "Func::Lambda::ParameterList",
+                        "loc": null,
+                        "children": []
+                      },
+                      "body": {
+                        "kind": "Expr::Unit",
+                        "loc": null,
+                        "children": {
+                          "faked": true
+                        }
+                      },
+                      "return_type": null,
+                      "error_type": {
+                        "kind": "ErrorType::NoErrorType",
+                        "loc": null,
+                        "children": {}
+                      },
+                      "kind": {
+                        "kind": "FnKind::Lambda",
+                        "loc": null,
+                        "children": {}
+                      },
+                      "has_error": null,
+                      "is_async": null
+                    }
+                  },
+                  "body": {
+                    "kind": "Expr::Unit",
+                    "loc": null,
+                    "children": {
+                      "faked": true
+                    }
+                  }
                 }
               }
             }
@@ -702,6 +670,7 @@
           "doc": " comment for h3"
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

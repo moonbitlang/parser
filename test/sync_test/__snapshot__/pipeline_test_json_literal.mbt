@@ -1,9 +1,9 @@
 //!build: -w -27
 fn init {
   let json1 : Json = { "x": [42, true, Json::null(), { "y": "z" }] }
-  println(json1)
+  debug(json1)
   let json2 : Json = { "x": false }
-  println(json2)
+  debug(json2)
   let x : Double = 42
   let json2 : Json = [json1, Json::number(x)]
   println(json2.stringify())
@@ -39,12 +39,12 @@ fn init {
 // string interpolation also works
 fn f(x : Int, y : String) -> Unit {
   let json1 : Json = "Hello, \{x} \{y}"
-  println(json1)
+  debug(json1)
   let json2 : Json =
     $| {
     $| "x": \{x},
     $| "y": \{y}
     $| }
     $|
-  println(json2)
+  debug(json2)
 }

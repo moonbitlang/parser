@@ -84,6 +84,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclStubs",
         "loc": null,

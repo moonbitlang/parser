@@ -157,6 +157,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -329,6 +330,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -360,19 +362,25 @@
                 "loc": null,
                 "children": {
                   "func": {
-                    "kind": "Expr::Ident",
+                    "kind": "Expr::Constr",
                     "loc": null,
                     "children": {
-                      "id": {
-                        "kind": "Var",
+                      "constr": {
+                        "kind": "Constructor",
                         "loc": null,
                         "children": {
                           "name": {
-                            "kind": "LongIdent::Dot",
+                            "kind": "ConstrName",
                             "loc": null,
                             "children": {
-                              "pkg": "hashmap",
-                              "id": "new"
+                              "name": "HashMap"
+                            }
+                          },
+                          "extra_info": {
+                            "kind": "ConstructorExtraInfo::Package",
+                            "loc": null,
+                            "children": {
+                              "value": "hashmap"
                             }
                           }
                         }
@@ -382,7 +390,30 @@
                   "args": {
                     "kind": "Expr::Apply::ArgumentList",
                     "loc": null,
-                    "children": []
+                    "children": [
+                      {
+                        "kind": "Argument",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "Expr::Array",
+                            "loc": null,
+                            "children": {
+                              "exprs": {
+                                "kind": "Expr::Array::ExprList",
+                                "loc": null,
+                                "children": []
+                              }
+                            }
+                          },
+                          "kind": {
+                            "kind": "ArgumentKind::Positional",
+                            "loc": null,
+                            "children": {}
+                          }
+                        }
+                      }
+                    ]
                   },
                   "attr": {
                     "kind": "ApplyAttr::NoAttr",
@@ -891,6 +922,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1280,6 +1312,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1311,19 +1344,25 @@
                 "loc": null,
                 "children": {
                   "func": {
-                    "kind": "Expr::Ident",
+                    "kind": "Expr::Constr",
                     "loc": null,
                     "children": {
-                      "id": {
-                        "kind": "Var",
+                      "constr": {
+                        "kind": "Constructor",
                         "loc": null,
                         "children": {
                           "name": {
-                            "kind": "LongIdent::Dot",
+                            "kind": "ConstrName",
                             "loc": null,
                             "children": {
-                              "pkg": "hashmap",
-                              "id": "new"
+                              "name": "HashMap"
+                            }
+                          },
+                          "extra_info": {
+                            "kind": "ConstructorExtraInfo::Package",
+                            "loc": null,
+                            "children": {
+                              "value": "hashmap"
                             }
                           }
                         }
@@ -1333,7 +1372,30 @@
                   "args": {
                     "kind": "Expr::Apply::ArgumentList",
                     "loc": null,
-                    "children": []
+                    "children": [
+                      {
+                        "kind": "Argument",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "Expr::Array",
+                            "loc": null,
+                            "children": {
+                              "exprs": {
+                                "kind": "Expr::Array::ExprList",
+                                "loc": null,
+                                "children": []
+                              }
+                            }
+                          },
+                          "kind": {
+                            "kind": "ArgumentKind::Positional",
+                            "loc": null,
+                            "children": {}
+                          }
+                        }
+                      }
+                    ]
                   },
                   "attr": {
                     "kind": "ApplyAttr::NoAttr",
@@ -2361,6 +2423,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2596,6 +2659,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -2627,19 +2691,25 @@
                 "loc": null,
                 "children": {
                   "func": {
-                    "kind": "Expr::Ident",
+                    "kind": "Expr::Constr",
                     "loc": null,
                     "children": {
-                      "id": {
-                        "kind": "Var",
+                      "constr": {
+                        "kind": "Constructor",
                         "loc": null,
                         "children": {
                           "name": {
-                            "kind": "LongIdent::Dot",
+                            "kind": "ConstrName",
                             "loc": null,
                             "children": {
-                              "pkg": "hashmap",
-                              "id": "new"
+                              "name": "HashMap"
+                            }
+                          },
+                          "extra_info": {
+                            "kind": "ConstructorExtraInfo::Package",
+                            "loc": null,
+                            "children": {
+                              "value": "hashmap"
                             }
                           }
                         }
@@ -2649,7 +2719,30 @@
                   "args": {
                     "kind": "Expr::Apply::ArgumentList",
                     "loc": null,
-                    "children": []
+                    "children": [
+                      {
+                        "kind": "Argument",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "Expr::Array",
+                            "loc": null,
+                            "children": {
+                              "exprs": {
+                                "kind": "Expr::Array::ExprList",
+                                "loc": null,
+                                "children": []
+                              }
+                            }
+                          },
+                          "kind": {
+                            "kind": "ArgumentKind::Positional",
+                            "loc": null,
+                            "children": {}
+                          }
+                        }
+                      }
+                    ]
                   },
                   "attr": {
                     "kind": "ApplyAttr::NoAttr",
@@ -3357,6 +3450,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -3600,6 +3694,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -3631,19 +3726,25 @@
                 "loc": null,
                 "children": {
                   "func": {
-                    "kind": "Expr::Ident",
+                    "kind": "Expr::Constr",
                     "loc": null,
                     "children": {
-                      "id": {
-                        "kind": "Var",
+                      "constr": {
+                        "kind": "Constructor",
                         "loc": null,
                         "children": {
                           "name": {
-                            "kind": "LongIdent::Dot",
+                            "kind": "ConstrName",
                             "loc": null,
                             "children": {
-                              "pkg": "hashmap",
-                              "id": "new"
+                              "name": "HashMap"
+                            }
+                          },
+                          "extra_info": {
+                            "kind": "ConstructorExtraInfo::Package",
+                            "loc": null,
+                            "children": {
+                              "value": "hashmap"
                             }
                           }
                         }
@@ -3653,7 +3754,30 @@
                   "args": {
                     "kind": "Expr::Apply::ArgumentList",
                     "loc": null,
-                    "children": []
+                    "children": [
+                      {
+                        "kind": "Argument",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "Expr::Array",
+                            "loc": null,
+                            "children": {
+                              "exprs": {
+                                "kind": "Expr::Array::ExprList",
+                                "loc": null,
+                                "children": []
+                              }
+                            }
+                          },
+                          "kind": {
+                            "kind": "ArgumentKind::Positional",
+                            "loc": null,
+                            "children": {}
+                          }
+                        }
+                      }
+                    ]
                   },
                   "attr": {
                     "kind": "ApplyAttr::NoAttr",

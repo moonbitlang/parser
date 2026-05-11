@@ -1,3 +1,5 @@
+//!build: -w -27
+
 fn f1(x: Int, y: Int) -> Unit {
     loop (x, y) {
         (0, 1) => println("xx")

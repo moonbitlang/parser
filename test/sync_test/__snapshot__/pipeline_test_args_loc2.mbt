@@ -1,13 +1,14 @@
-//!build: -w -27
+//!build: -w -deprecated_syntax
 ///|
-struct T(Int) derive(Show)
+struct T(Int)
 
 ///|
 let t : T = T(42)
 
 ///|
 #callsite(autofill(loc, args_loc, dup))
-fn f(
+#warnings("-deprecated")
+fn T::f(
   self : T,
   x~ : Int,
   y~ : Int = 42,
@@ -29,7 +30,8 @@ fn init {
 
 ///|
 #callsite(autofill(loc, args_loc, dup))
-fn g(
+#warnings("-deprecated")
+fn T::g(
   self : T,
   x~ : Int,
   y~ : Int = 42,

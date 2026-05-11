@@ -275,6 +275,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -890,6 +891,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1067,6 +1069,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -1194,7 +1197,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "[ ]+"
+                                      "lit": "[ ]+",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -1288,7 +1292,8 @@
                                         "kind": "LexPattern::Regex",
                                         "loc": null,
                                         "children": {
-                                          "lit": "[0-9]+"
+                                          "lit": "[0-9]+",
+                                          "offset": 1
                                         }
                                       },
                                       "binder": {
@@ -1750,7 +1755,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "fizz"
+                                      "lit": "fizz",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -1969,7 +1975,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "buzz"
+                                      "lit": "buzz",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -2188,7 +2195,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": "fizzbuzz"
+                                      "lit": "fizzbuzz",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -2407,7 +2415,8 @@
                                     "kind": "LexPattern::Regex",
                                     "loc": null,
                                     "children": {
-                                      "lit": ""
+                                      "lit": "",
+                                      "offset": 1
                                     }
                                   }
                                 }
@@ -2598,6 +2607,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,

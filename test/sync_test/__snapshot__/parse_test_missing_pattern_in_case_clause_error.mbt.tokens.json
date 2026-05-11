@@ -768,31 +768,45 @@
     "loc": "35:15-35:18"
   },
   {
-    "token": "LBRACE",
+    "token": [
+      "SEMI",
+      true
+    ],
     "loc": "35:19-35:20"
   },
   {
+    "token": [
+      "SEMI",
+      true
+    ],
+    "loc": "35:20-35:21"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "35:22-35:23"
+  },
+  {
     "token": "ELLIPSIS",
-    "loc": "35:20-35:23"
+    "loc": "35:23-35:26"
   },
   {
     "token": "RBRACE",
-    "loc": "35:23-35:24"
+    "loc": "35:26-35:27"
   },
   {
     "token": "RBRACE",
-    "loc": "35:25-35:26"
+    "loc": "35:28-35:29"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "35:26-35:26"
+    "loc": "35:29-35:29"
   },
   {
     "token": "NEWLINE",
-    "loc": "35:26-35:27"
+    "loc": "35:29-35:30"
   },
   {
     "token": [
@@ -1581,20 +1595,34 @@
     "loc": "60:13-60:16"
   },
   {
-    "token": "LBRACE",
+    "token": [
+      "SEMI",
+      true
+    ],
     "loc": "60:17-60:18"
   },
   {
+    "token": [
+      "SEMI",
+      true
+    ],
+    "loc": "60:18-60:19"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "60:20-60:21"
+  },
+  {
     "token": "ELLIPSIS",
-    "loc": "60:18-60:21"
+    "loc": "60:21-60:24"
   },
   {
     "token": "RBRACE",
-    "loc": "60:21-60:22"
+    "loc": "60:24-60:25"
   },
   {
     "token": "NEWLINE",
-    "loc": "60:22-60:23"
+    "loc": "60:25-60:26"
   },
   {
     "token": "RBRACE",
@@ -1809,7 +1837,18 @@
     "loc": "70:1-70:2"
   },
   {
-    "token": "EOF",
+    "token": [
+      "SEMI",
+      false
+    ],
     "loc": "70:2-70:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "70:2-70:3"
+  },
+  {
+    "token": "EOF",
+    "loc": "71:1-71:1"
   }
 ]

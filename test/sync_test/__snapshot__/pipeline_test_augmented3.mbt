@@ -18,12 +18,12 @@ fn init {
   let mut a = { arr: [], get: FixedArray::make(6, 0), set: FixedArray::make(6, 0) }
   a.arr = FixedArray::make(6, a)
   a[1][1][4][5][1][4] = a
-  println(a.get)
-  println(a.set)
+  debug(a.get)
+  debug(a.set)
   a = a[1][1][4][5][1][4]
-  println(a.get)
-  println(a.set)
-  println(a[0][1][2][3][4][5].arr[5][4][3][2][1][0].get)
-  println(a[5][4][3][2][1][0].arr[0][1][2][3][4][5].set)
+  debug(a.get)
+  debug(a.set)
+  debug(a[0][1][2][3][4][5].arr[5][4][3][2][1][0].get)
+  debug(a[5][4][3][2][1][0].arr[0][1][2][3][4][5].set)
 }
 

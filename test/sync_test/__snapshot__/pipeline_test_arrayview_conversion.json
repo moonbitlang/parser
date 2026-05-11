@@ -145,6 +145,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -365,6 +366,7 @@
           "doc": ""
         }
       },
+      "where_clause": null,
       "decl_body": {
         "kind": "DeclBody::DeclBody",
         "loc": null,
@@ -719,7 +721,7 @@
                                                         "loc": null,
                                                         "children": {
                                                           "constant": {
-                                                            "kind": "Constant::String",
+                                                            "kind": "Constant::Bytes",
                                                             "loc": null,
                                                             "children": {
                                                               "value": "x"
@@ -732,7 +734,7 @@
                                                         "loc": null,
                                                         "children": {
                                                           "constant": {
-                                                            "kind": "Constant::String",
+                                                            "kind": "Constant::Bytes",
                                                             "loc": null,
                                                             "children": {
                                                               "value": "y"
@@ -745,7 +747,7 @@
                                                         "loc": null,
                                                         "children": {
                                                           "constant": {
-                                                            "kind": "Constant::String",
+                                                            "kind": "Constant::Bytes",
                                                             "loc": null,
                                                             "children": {
                                                               "value": "z"

@@ -31,7 +31,7 @@ fn Tree::is_nil(self : Tree) -> Bool {
 
 fn init {
   let tree : Tree = Branch(42, left=Nil, right=Branch(0, left=Nil, right=Nil))
-  println(tree.top())
+  debug(tree.top())
   tree.iter(println)
   println(tree.is_nil())
 }

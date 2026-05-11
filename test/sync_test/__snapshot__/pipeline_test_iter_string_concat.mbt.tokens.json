@@ -148,10 +148,7 @@
     "loc": "3:17-3:20"
   },
   {
-    "token": [
-      "AUGMENTED_ASSIGNMENT",
-      "+"
-    ],
+    "token": "PLUS_EQUAL",
     "loc": "3:21-3:23"
   },
   {

@@ -6,14 +6,19 @@ pub struct T {
 
 ///|
 fn f(x : ArrayView[T]) -> Unit {
-  loop x {
-    [{ y: "x", .. }, .. rest] => continue rest
-    [{ y: "y", .. }, ..] => println("y")
-    _ => ()
+  for rest = x {
+    match rest {
+      [{ y: "x", .. }, .. rest] => continue rest
+      [{ y: "y", .. }, ..] => {
+        println("y")
+        break
+      }
+      _ => break
+    }
   }
 }
 
 ///|
 fn main {
-  f([{ x: 1, y: "x" }, { x: 2, y: "x" }, { x: 3, y: "y" }, { x: 4, y: "z" }][:])
+  f([{ x: 1, y: "x" }, { x: 2, y: "x" }, { x: 3, y: "y" }, { x: 4, y: "z" }])
 }
