@@ -2,7 +2,7 @@
 pub(all) struct Report {
   loc : Location
   msg : String
-}
+} derive(Debug)
 
 ///|
 pub impl Show for Report with output(self, logger) {

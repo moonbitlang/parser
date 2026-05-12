@@ -3,7 +3,7 @@
 // Translated from src/ast/parsing_util.ml
 
 // Global counter for generating unique variable names
-let counter : Ref[Int] = Ref::new(0)
+let counter : Ref[Int] = Ref(0)
 
 ///|
 /// Create constant expression with location

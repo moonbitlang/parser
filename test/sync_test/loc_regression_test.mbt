@@ -18,7 +18,7 @@ fn parse_loc_regression(
     parser~,
   )
   if !diagnostics.is_empty() {
-    fail(diagnostics.to_string())
+    fail("\{to_repr(diagnostics)}")
   }
   let mut brace_group_loc = None
   let mut params_loc = None

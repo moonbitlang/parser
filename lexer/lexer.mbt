@@ -1,5 +1,5 @@
 ///|
-let use_utf16_location : Ref[Bool] = Ref::new(false)
+let use_utf16_location : Ref[Bool] = Ref(false)
 
 ///|
 fn lex_tokens(
