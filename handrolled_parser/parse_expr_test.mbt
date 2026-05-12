@@ -5,7 +5,7 @@ fn simple_parse_expr(source : String) -> @syntax.Expr raise {
   if reports.is_empty() {
     return expr
   } else {
-    fail(reports.to_string())
+    fail("\{to_repr(reports)}")
   }
 }
 

@@ -14,7 +14,7 @@ fn ast_summary(ast : Ast) -> Json {
       Json::object(Map::from_array([("$number", Json::string(float))]))
     Arr(content~, ..) => Json::array(content.map(ast_summary))
     Obj(map~, ..) => {
-      let object : Map[String, Json] = Map::new()
+      let object : Map[String, Json] = Map([])
       for key, value in map {
         object[key] = ast_summary(value)
       }
