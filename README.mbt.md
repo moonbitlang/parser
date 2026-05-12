@@ -207,6 +207,7 @@ test {
             "doc": "",
           },
         },
+        "where_clause": null,
         "decl_body": {
           "kind": "DeclBody::DeclBody",
           "loc": null,
