@@ -52,7 +52,7 @@ fn report_checks(
 }
 
 ///|
-test "pkg_parser parse nested options" {
+test "moon_config parse nested options" {
   let source =
     #|options(
     #|  nested: { "a": ["x", "y", 123], "b": { "c": false } }
@@ -71,7 +71,7 @@ test "pkg_parser parse nested options" {
 }
 
 ///|
-test "pkg_parser parse import for wbtest" {
+test "moon_config parse import for wbtest" {
   let source =
     #|import { "a/pkg", "b/pkg" } for "wbtest"
     #|
@@ -84,7 +84,7 @@ test "pkg_parser parse import for wbtest" {
 }
 
 ///|
-test "pkg_parser rejects legacy import kind syntax" {
+test "moon_config rejects legacy import kind syntax" {
   let source =
     #|import "test" { "path/to/pkg", "p" }
     #|
@@ -97,7 +97,7 @@ test "pkg_parser rejects legacy import kind syntax" {
 }
 
 ///|
-test "pkg_parser rejects legacy import alias syntax" {
+test "moon_config rejects legacy import alias syntax" {
   let source =
     #|import { "a" as @alias, "b" @ok }
     #|
@@ -112,7 +112,7 @@ test "pkg_parser rejects legacy import alias syntax" {
 }
 
 ///|
-test "pkg_parser avoids cascading after invalid import kind" {
+test "moon_config avoids cascading after invalid import kind" {
   let source =
     #|import { "a" } for next = true
     #|
@@ -127,7 +127,7 @@ test "pkg_parser avoids cascading after invalid import kind" {
 }
 
 ///|
-test "pkg_parser reports positional argument" {
+test "moon_config reports positional argument" {
   let source =
     #|apply("positional")
     #|
@@ -140,7 +140,7 @@ test "pkg_parser reports positional argument" {
 }
 
 ///|
-test "pkg_parser parse assignments" {
+test "moon_config parse assignments" {
   let source =
     #|warnings = "+w1-w1"
     #|supported_targets = "+wasm"
@@ -157,7 +157,7 @@ test "pkg_parser parse assignments" {
 }
 
 ///|
-test "pkg_parser requires statement separators" {
+test "moon_config requires statement separators" {
   let source =
     #|a = "x" b = "y"
     #|
@@ -170,7 +170,7 @@ test "pkg_parser requires statement separators" {
 }
 
 ///|
-test "pkg_parser keeps next statement after missing assignment value before semicolon" {
+test "moon_config keeps next statement after missing assignment value before semicolon" {
   let source =
     #|a = ;
     #|b = 1
@@ -184,7 +184,7 @@ test "pkg_parser keeps next statement after missing assignment value before semi
 }
 
 ///|
-test "pkg_parser keeps next statement after missing assignment value on next line" {
+test "moon_config keeps next statement after missing assignment value on next line" {
   let source =
     #|a =
     #|b = 1
@@ -198,7 +198,7 @@ test "pkg_parser keeps next statement after missing assignment value on next lin
 }
 
 ///|
-test "pkg_parser rejects unsupported numeric literals" {
+test "moon_config rejects unsupported numeric literals" {
   let source =
     #|unsigned = 1U
     #|floaty = 1.5
@@ -212,7 +212,7 @@ test "pkg_parser rejects unsupported numeric literals" {
 }
 
 ///|
-test "pkg_parser accepts bigint literal in pkg values" {
+test "moon_config accepts bigint literal in pkg values" {
   let source =
     #|big = 1N
     #|
@@ -225,7 +225,7 @@ test "pkg_parser accepts bigint literal in pkg values" {
 }
 
 ///|
-test "pkg_parser preserves duplicate object and statement entries" {
+test "moon_config preserves duplicate object and statement entries" {
   fn duplicate_entry_summary(ast : Ast) -> Array[(String, String?)] raise {
     match ast {
       Obj(root_fields, ..) => {
@@ -296,7 +296,7 @@ test "pkg_parser preserves duplicate object and statement entries" {
 }
 
 ///|
-test "pkg_parser recovers map value after missing colon" {
+test "moon_config recovers map value after missing colon" {
   let source =
     #|options(nested: { "a" 1 })
     #|
@@ -311,7 +311,7 @@ test "pkg_parser recovers map value after missing colon" {
 }
 
 ///|
-test "pkg_parser keeps next statement after missing array right bracket" {
+test "moon_config keeps next statement after missing array right bracket" {
   let source =
     #|a = [1
     #|b = 2
@@ -328,7 +328,7 @@ test "pkg_parser keeps next statement after missing array right bracket" {
 }
 
 ///|
-test "pkg_parser reports missing import right brace at eof" {
+test "moon_config reports missing import right brace at eof" {
   let source =
     #|import {
     #|
@@ -341,7 +341,7 @@ test "pkg_parser reports missing import right brace at eof" {
 }
 
 ///|
-test "pkg_parser reports missing apply right paren at eof" {
+test "moon_config reports missing apply right paren at eof" {
   let source =
     #|options(
     #|
@@ -354,7 +354,7 @@ test "pkg_parser reports missing apply right paren at eof" {
 }
 
 ///|
-test "pkg_parser reports missing array right bracket at eof" {
+test "moon_config reports missing array right bracket at eof" {
   let source =
     #|a = [
     #|
@@ -367,7 +367,7 @@ test "pkg_parser reports missing array right bracket at eof" {
 }
 
 ///|
-test "pkg_parser keeps next statement after missing apply left paren" {
+test "moon_config keeps next statement after missing apply left paren" {
   let source =
     #|options nested: true
     #|next = false
@@ -381,7 +381,7 @@ test "pkg_parser keeps next statement after missing apply left paren" {
 }
 
 ///|
-test "pkg_parser keeps next statement after missing import left brace" {
+test "moon_config keeps next statement after missing import left brace" {
   let source =
     #|import [ "a/pkg" ]
     #|next = false
@@ -395,7 +395,7 @@ test "pkg_parser keeps next statement after missing import left brace" {
 }
 
 ///|
-test "pkg_parser root loc stays ordered for layout-only source" {
+test "moon_config root loc stays ordered for layout-only source" {
   let source =
     #|
     #|
