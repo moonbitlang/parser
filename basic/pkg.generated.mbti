@@ -46,7 +46,7 @@ pub impl Show for Position
 pub(all) struct Report {
   loc : Location
   msg : String
-}
+} derive(@debug.Debug)
 pub impl Show for Report
 pub impl ToJson for Report
 

@@ -6,4 +6,5 @@ import {
   "moonbitlang/parser/tokens",
   "moonbitlang/x/fs",
   "moonbitlang/core/test",
+  "moonbitlang/core/debug",
 } for "test"
