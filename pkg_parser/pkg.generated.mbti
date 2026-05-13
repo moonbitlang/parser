@@ -3,6 +3,7 @@ package "moonbitlang/parser/pkg_parser"
 
 import {
   "moonbitlang/core/debug",
+  "moonbitlang/core/immut/vector",
   "moonbitlang/parser/basic",
   "moonbitlang/parser/tokens",
   "moonbitlang/x/fs",
@@ -25,12 +26,12 @@ pub(all) enum Ast {
   Str(str~ : String, loc~ : @basic.Location)
   Float(float~ : String, loc~ : @basic.Location)
   Arr(content~ : Array[Ast], loc~ : @basic.Location)
-  Obj(map~ : Map[String, Ast], loc~ : @basic.Location)
+  Obj(fields~ : @vector.Vector[(String, Ast)], loc~ : @basic.Location)
 } derive(Eq, @debug.Debug)
 pub fn Ast::as_array(Self) -> Array[Self]?
 pub fn Ast::as_bool(Self) -> Bool?
 pub fn Ast::as_number(Self) -> String?
-pub fn Ast::as_object(Self) -> Map[String, Self]?
+pub fn Ast::as_object(Self) -> @vector.Vector[(String, Self)]?
 pub fn Ast::as_string(Self) -> String?
 pub fn Ast::loc(Self) -> @basic.Location
 pub impl ToJson for Ast

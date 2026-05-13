@@ -13,9 +13,10 @@ fn ast_summary(ast : Ast) -> Json {
     Float(float~, ..) =>
       Json::object(Map::from_array([("$number", Json::string(float))]))
     Arr(content~, ..) => Json::array(content.map(ast_summary))
-    Obj(map~, ..) => {
+    Obj(fields~, ..) => {
       let object : Map[String, Json] = Map([])
-      for key, value in map {
+      for field in fields {
+        let (key, value) = field
         object[key] = ast_summary(value)
       }
       Json::object(object)
@@ -222,6 +223,77 @@ test "pkg_parser accepts bigint literal in pkg values" {
     "contains": [],
   })
   json_inspect(ast_summary(ast), content={ "big": { "$number": "1N" } })
+}
+
+///|
+test "pkg_parser preserves duplicate object and statement entries" {
+  fn duplicate_entry_summary(ast : Ast) -> Array[(String, String?)] raise {
+    match ast {
+      Obj(fields=root_fields, ..) => {
+        let (_, options_value) = root_fields[0]
+        match options_value {
+          Obj(fields=options_fields, ..) => {
+            let (_, dup_value) = options_fields[0]
+            match dup_value {
+              Obj(fields=dup_fields, ..) =>
+                dup_fields
+                .to_array()
+                .map(field => {
+                  let (key, value) = field
+                  (key, value.as_number())
+                })
+              _ => fail("expected duplicate entry value to be an object")
+            }
+          }
+          _ => fail("expected options argument list to be an object")
+        }
+      }
+      _ => fail("expected root to be an object")
+    }
+  }
+
+  fn root_entry_summary(ast : Ast) -> Array[(String, String?)] raise {
+    match ast {
+      Obj(fields=root_fields, ..) =>
+        root_fields
+        .to_array()
+        .map(field => {
+          let (key, value) = field
+          let value_name = match value {
+            Obj(fields~, ..) =>
+              match fields[0] {
+                ("name", Str(str~, ..)) => Some(str)
+                _ => None
+              }
+            _ => None
+          }
+          (key, value_name)
+        })
+      _ => fail("expected root to be an object")
+    }
+  }
+
+  let source =
+    #|options(dup: { "a": 1, "a": 2 })
+    #|rule(name:"rule1", command:"exe")
+    #|rule(name:"rule2", command:"exe")
+  let (ast, reports) = parse_pkg(source)
+  json_inspect(report_checks(reports, []), content={
+    "count": 0,
+    "contains": [],
+  })
+  debug_inspect(
+    duplicate_entry_summary(ast),
+    content=(
+      #|[("a", Some("1")), ("a", Some("2"))]
+    ),
+  )
+  debug_inspect(
+    root_entry_summary(ast),
+    content=(
+      #|[("options", None), ("rule", Some("rule1")), ("rule", Some("rule2"))]
+    ),
+  )
 }
 
 ///|
