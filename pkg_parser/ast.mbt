@@ -1,32 +1,29 @@
 ///|
 pub(all) enum Ast {
-  Null(Location)
-  False(Location)
-  True(Location)
-  Str(str~ : String, loc~ : Location)
-  Float(float~ : String, loc~ : Location)
-  Arr(content~ : Array[Ast], loc~ : Location)
-  Obj(fields~ : Vector[(String, Ast)], loc~ : Location)
+  Null(loc~ : Location)
+  Bool(Bool, loc~ : Location)
+  Str(String, loc~ : Location)
+  Float(String, loc~ : Location)
+  Arr(Vector[Ast], loc~ : Location)
+  Obj(Vector[(String, Ast)], loc~ : Location)
 } derive(Debug, Eq)
 
 ///|
 pub fn Ast::loc(self : Self) -> Location {
   match self {
-    Null(loc) => loc
-    False(loc) => loc
-    True(loc) => loc
-    Str(loc~, ..) => loc
-    Float(loc~, ..) => loc
-    Arr(loc~, ..) => loc
-    Obj(loc~, ..) => loc
+    Null(loc~) => loc
+    Bool(_, loc~) => loc
+    Str(_, loc~) => loc
+    Float(_, loc~) => loc
+    Arr(_, loc~) => loc
+    Obj(_, loc~) => loc
   }
 }
 
 ///|
 pub fn Ast::as_bool(self : Self) -> Bool? {
   match self {
-    True(_) => Some(true)
-    False(_) => Some(false)
+    Bool(value, ..) => Some(value)
     _ => None
   }
 }
@@ -34,7 +31,7 @@ pub fn Ast::as_bool(self : Self) -> Bool? {
 ///|
 pub fn Ast::as_string(self : Self) -> String? {
   match self {
-    Str(str~, ..) => Some(str)
+    Str(str, ..) => Some(str)
     _ => None
   }
 }
@@ -42,15 +39,15 @@ pub fn Ast::as_string(self : Self) -> String? {
 ///|
 pub fn Ast::as_number(self : Self) -> String? {
   match self {
-    Float(float~, ..) => Some(float)
+    Float(float, ..) => Some(float)
     _ => None
   }
 }
 
 ///|
-pub fn Ast::as_array(self : Self) -> Array[Ast]? {
+pub fn Ast::as_array(self : Self) -> Vector[Ast]? {
   match self {
-    Arr(content~, ..) => Some(content)
+    Arr(content, ..) => Some(content)
     _ => None
   }
 }
@@ -58,7 +55,7 @@ pub fn Ast::as_array(self : Self) -> Array[Ast]? {
 ///|
 pub fn Ast::as_object(self : Self) -> Vector[(String, Ast)]? {
   match self {
-    Obj(fields~, ..) => Some(fields)
+    Obj(fields, ..) => Some(fields)
     _ => None
   }
 }
@@ -66,12 +63,11 @@ pub fn Ast::as_object(self : Self) -> Vector[(String, Ast)]? {
 ///|
 pub impl ToJson for Ast with to_json(self) {
   match self {
-    Null(loc) => { "type": "Null", "loc": loc }
-    False(loc) => { "type": "False", "loc": loc }
-    True(loc) => { "type": "True", "loc": loc }
-    Str(str~, loc~) => { "type": "Str", "str": str, "loc": loc }
-    Float(float~, loc~) => { "type": "Float", "float": float, "loc": loc }
-    Arr(content~, loc~) => { "type": "Arr", "content": content, "loc": loc }
-    Obj(fields~, loc~) => { "type": "Obj", "fields": fields, "loc": loc }
+    Null(loc~) => { "type": "Null", "loc": loc }
+    Bool(value, loc~) => { "type": "Bool", "value": value, "loc": loc }
+    Str(str, loc~) => { "type": "Str", "str": str, "loc": loc }
+    Float(float, loc~) => { "type": "Float", "float": float, "loc": loc }
+    Arr(content, loc~) => { "type": "Arr", "content": content, "loc": loc }
+    Obj(fields, loc~) => { "type": "Obj", "fields": fields, "loc": loc }
   }
 }

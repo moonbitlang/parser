@@ -177,7 +177,7 @@ fn import_kind_to_key(kind : ImportKind) -> String {
 
 ///|
 fn null_here(state : State) -> Ast {
-  Null(state.peek_location())
+  Null(loc=state.peek_location())
 }
 
 ///|
@@ -262,7 +262,7 @@ fn parse_array(state : State) -> Ast {
     return null_here(state)
   }
   let content = parse_comma_separated(state, right=TK_RBRACKET, parse_expr)
-  Arr(content~, loc=state.loc_start_with(start))
+  Arr(Vector(content), loc=state.loc_start_with(start))
 }
 
 ///|
@@ -302,7 +302,7 @@ fn parse_map(state : State) -> Ast {
     return null_here(state)
   }
   let entries = parse_comma_separated(state, right=TK_RBRACE, parse_map_entry)
-  Obj(fields=Vector(entries), loc=state.loc_start_with(start))
+  Obj(Vector(entries), loc=state.loc_start_with(start))
 }
 
 ///|
@@ -346,10 +346,10 @@ fn parse_apply(state : State) -> (String, Ast) {
     state.report_expected_here("\"(\"")
     state.skip_until_statement_end()
     let loc = Location::{ start: args_start, end: args_start }
-    return (name, Obj(fields=Vector([]), loc~))
+    return (name, Obj(Vector([]), loc~))
   }
   let args = parse_comma_separated(state, right=TK_RPAREN, parse_argument)
-  (name, Obj(fields=Vector(args), loc=state.loc_start_with(args_start)))
+  (name, Obj(Vector(args), loc=state.loc_start_with(args_start)))
 }
 
 ///|
@@ -373,7 +373,7 @@ fn parse_assign(state : State) -> (String, Ast) {
   if is_statement_start_after_newline(state) {
     let loc = state.peek_location()
     state.report_failed_to_parse(state.peek_token(), "expression", loc)
-    return (name, Null(loc))
+    return (name, Null(loc~))
   }
   (name, parse_expr(state))
 }
@@ -421,12 +421,12 @@ fn parse_import_item(state : State) -> Ast {
     _ => None
   }
   match package_alias {
-    None => Str(str=path, loc=path_loc)
+    None => Str(path, loc=path_loc)
     Some((alias_name, alias_loc)) =>
       Obj(
-        fields=Vector([
-          ("path", Str(str=path, loc=path_loc)),
-          ("alias", Str(str=alias_name, loc=alias_loc)),
+        Vector([
+          ("path", Str(path, loc=path_loc)),
+          ("alias", Str(alias_name, loc=alias_loc)),
         ]),
         loc=path_loc,
       )
@@ -482,7 +482,7 @@ fn parse_import_statement(state : State) -> (String, Ast) {
     state.skip_until_statement_end()
     return (
       import_kind_to_key(kind),
-      Arr(content=[], loc=state.loc_start_with(start)),
+      Arr(Vector([]), loc=state.loc_start_with(start)),
     )
   }
   let packages = parse_comma_separated(
@@ -495,7 +495,7 @@ fn parse_import_statement(state : State) -> (String, Ast) {
   }
   (
     import_kind_to_key(kind),
-    Arr(content=packages, loc=state.loc_start_with(start)),
+    Arr(Vector(packages), loc=state.loc_start_with(start)),
   )
 }
 
@@ -505,17 +505,17 @@ fn parse_expr(state : State) -> Ast {
     TRUE => {
       let loc = state.peek_location()
       state.skip()
-      True(loc)
+      Bool(true, loc~)
     }
     FALSE => {
       let loc = state.peek_location()
       state.skip()
-      False(loc)
+      Bool(false, loc~)
     }
     STRING(str) => {
       let loc = state.peek_location()
       state.skip()
-      Str(str~, loc~)
+      Str(str, loc~)
     }
     INT(integer) as token => {
       let loc = state.peek_location()
@@ -524,16 +524,16 @@ fn parse_expr(state : State) -> Ast {
         state.report_failed_to_parse(
           token, "integer literals without U or L suffixes", loc,
         )
-        Null(loc)
+        Null(loc~)
       } else {
-        Float(float=integer, loc~)
+        Float(integer, loc~)
       }
     }
     FLOAT(_) | DOUBLE(_) as token => {
       let loc = state.peek_location()
       state.skip()
       state.report_failed_to_parse(token, "expression", loc)
-      Null(loc)
+      Null(loc~)
     }
     LBRACE => parse_map(state)
     LBRACKET => parse_array(state)
@@ -543,7 +543,7 @@ fn parse_expr(state : State) -> Ast {
       if other.kind() != TK_EOF && other.kind() != TK_SEMI {
         state.skip()
       }
-      Null(loc)
+      Null(loc~)
     }
   }
 }
@@ -560,7 +560,7 @@ fn parse_statement(state : State) -> (String, Ast) {
       if other.kind() != TK_EOF {
         state.skip()
       }
-      ("", Null(loc))
+      ("", Null(loc~))
     }
   }
 }
@@ -612,7 +612,7 @@ fn parse_statements(state : State) -> Array[(String, Ast)] {
 pub fn moon_pkg_of_tokens(tokens : Triples) -> (Ast, Array[Report]) {
   if tokens.is_empty() {
     let loc = Location::{ start: dummy_pos, end: dummy_pos }
-    return (Obj(fields=Vector([]), loc~), [])
+    return (Obj(Vector([]), loc~), [])
   }
   let start = tokens[0].1
   let state = State::{
@@ -624,10 +624,7 @@ pub fn moon_pkg_of_tokens(tokens : Triples) -> (Ast, Array[Report]) {
   let object_start = state.peek_spos()
   state.parsed_position = object_start
   let statements = parse_statements(state)
-  let ast = Obj(
-    fields=Vector(statements),
-    loc=state.loc_start_with(object_start),
-  )
+  let ast = Obj(Vector(statements), loc=state.loc_start_with(object_start))
   (ast, state.diagnostics)
 }
 

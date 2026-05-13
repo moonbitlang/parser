@@ -20,15 +20,14 @@ pub fn parse_string(String, name? : String) -> (Ast, Array[@basic.Report])
 
 // Types and methods
 pub(all) enum Ast {
-  Null(@basic.Location)
-  False(@basic.Location)
-  True(@basic.Location)
-  Str(str~ : String, loc~ : @basic.Location)
-  Float(float~ : String, loc~ : @basic.Location)
-  Arr(content~ : Array[Ast], loc~ : @basic.Location)
-  Obj(fields~ : @vector.Vector[(String, Ast)], loc~ : @basic.Location)
+  Null(loc~ : @basic.Location)
+  Bool(Bool, loc~ : @basic.Location)
+  Str(String, loc~ : @basic.Location)
+  Float(String, loc~ : @basic.Location)
+  Arr(@vector.Vector[Ast], loc~ : @basic.Location)
+  Obj(@vector.Vector[(String, Ast)], loc~ : @basic.Location)
 } derive(Eq, @debug.Debug)
-pub fn Ast::as_array(Self) -> Array[Self]?
+pub fn Ast::as_array(Self) -> @vector.Vector[Self]?
 pub fn Ast::as_bool(Self) -> Bool?
 pub fn Ast::as_number(Self) -> String?
 pub fn Ast::as_object(Self) -> @vector.Vector[(String, Self)]?
