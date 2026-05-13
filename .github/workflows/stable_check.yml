@@ -44,10 +44,6 @@ jobs:
           moon fmt
           git diff --exit-code
 
-      - name: Set ulimit
-        run: |
-          ulimit -s 8176
-
       - name: moon test
         run: |
-          moon test --target wasm,wasm-gc,native
+          moon test --target all
