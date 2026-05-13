@@ -3,9 +3,11 @@ import {
   "moonbitlang/parser/tokens",
   "moonbitlang/parser/lexer",
   "moonbitlang/x/fs",
+  "moonbitlang/core/immut/vector",
 }
 
 import {
   "moonbitlang/core/test",
   "moonbitlang/core/json",
+  "moonbitlang/core/debug",
 } for "test"

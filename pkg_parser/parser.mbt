@@ -302,7 +302,7 @@ fn parse_map(state : State) -> Ast {
     return null_here(state)
   }
   let entries = parse_comma_separated(state, right=TK_RBRACE, parse_map_entry)
-  Obj(map=Map::from_array(entries), loc=state.loc_start_with(start))
+  Obj(fields=Vector(entries), loc=state.loc_start_with(start))
 }
 
 ///|
@@ -346,10 +346,10 @@ fn parse_apply(state : State) -> (String, Ast) {
     state.report_expected_here("\"(\"")
     state.skip_until_statement_end()
     let loc = Location::{ start: args_start, end: args_start }
-    return (name, Obj(map=Map([]), loc~))
+    return (name, Obj(fields=Vector([]), loc~))
   }
   let args = parse_comma_separated(state, right=TK_RPAREN, parse_argument)
-  (name, Obj(map=Map::from_array(args), loc=state.loc_start_with(args_start)))
+  (name, Obj(fields=Vector(args), loc=state.loc_start_with(args_start)))
 }
 
 ///|
@@ -424,7 +424,7 @@ fn parse_import_item(state : State) -> Ast {
     None => Str(str=path, loc=path_loc)
     Some((alias_name, alias_loc)) =>
       Obj(
-        map=Map::from_array([
+        fields=Vector([
           ("path", Str(str=path, loc=path_loc)),
           ("alias", Str(str=alias_name, loc=alias_loc)),
         ]),
@@ -612,7 +612,7 @@ fn parse_statements(state : State) -> Array[(String, Ast)] {
 pub fn moon_pkg_of_tokens(tokens : Triples) -> (Ast, Array[Report]) {
   if tokens.is_empty() {
     let loc = Location::{ start: dummy_pos, end: dummy_pos }
-    return (Obj(map=Map([]), loc~), [])
+    return (Obj(fields=Vector([]), loc~), [])
   }
   let start = tokens[0].1
   let state = State::{
@@ -625,7 +625,7 @@ pub fn moon_pkg_of_tokens(tokens : Triples) -> (Ast, Array[Report]) {
   state.parsed_position = object_start
   let statements = parse_statements(state)
   let ast = Obj(
-    map=Map::from_array(statements),
+    fields=Vector(statements),
     loc=state.loc_start_with(object_start),
   )
   (ast, state.diagnostics)

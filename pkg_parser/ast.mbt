@@ -6,7 +6,7 @@ pub(all) enum Ast {
   Str(str~ : String, loc~ : Location)
   Float(float~ : String, loc~ : Location)
   Arr(content~ : Array[Ast], loc~ : Location)
-  Obj(map~ : Map[String, Ast], loc~ : Location)
+  Obj(fields~ : Vector[(String, Ast)], loc~ : Location)
 } derive(Debug, Eq)
 
 ///|
@@ -56,9 +56,9 @@ pub fn Ast::as_array(self : Self) -> Array[Ast]? {
 }
 
 ///|
-pub fn Ast::as_object(self : Self) -> Map[String, Ast]? {
+pub fn Ast::as_object(self : Self) -> Vector[(String, Ast)]? {
   match self {
-    Obj(map~, ..) => Some(map)
+    Obj(fields~, ..) => Some(fields)
     _ => None
   }
 }
@@ -72,6 +72,6 @@ pub impl ToJson for Ast with to_json(self) {
     Str(str~, loc~) => { "type": "Str", "str": str, "loc": loc }
     Float(float~, loc~) => { "type": "Float", "float": float, "loc": loc }
     Arr(content~, loc~) => { "type": "Arr", "content": content, "loc": loc }
-    Obj(map~, loc~) => { "type": "Obj", "map": map, "loc": loc }
+    Obj(fields~, loc~) => { "type": "Obj", "fields": fields, "loc": loc }
   }
 }
