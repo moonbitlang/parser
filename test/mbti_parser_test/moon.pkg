@@ -1,9 +1,8 @@
 import {
-  "moonbitlang/parser/tokens",
-  "moonbitlang/parser/basic",
   "moonbitlang/x/fs",
-  "moonbitlang/parser/lexer",
   "moonbitlang/parser/mbti_parser",
+  "moonbitlang/parser/mbti_ast",
+  "moonbitlang/core/list",
   "moonbitlang/core/test",
 } for "test"
 
