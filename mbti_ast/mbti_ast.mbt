@@ -46,6 +46,8 @@ pub(all) enum TypeDefinition {
   Newtype(Type)
   TupleStruct(@list.List[Type])
   Error(@syntax.ExceptionDecl)
+  ExtensibleEnum(@list.List[ConstrDecl])
+  ExtendEnum(target~ : QualifiedName, constructors~ : @list.List[ConstrDecl])
   Variant(@list.List[ConstrDecl])
   Record(fields~ : @list.List[FieldDecl], constr~ : FuncSig?)
   Alias(Type)
@@ -58,6 +60,7 @@ pub(all) struct TypeSig {
   components : TypeDefinition
   vis : Visibility
   attrs : Attributes
+  derives : @list.List[QualifiedName]
 }
 
 ///|
@@ -83,6 +86,7 @@ pub(all) enum AliasSig {
 pub(all) struct TraitMethodSig {
   name : Name
   params : @list.List[Parameter]
+  is_async : Location?
   has_default : Bool
   return_ : (Type, ErrorType)
   attrs : Attributes
@@ -158,4 +162,5 @@ pub(all) struct Mbti {
   imports : @list.List[PackageImport]
   sigs : @list.List[(Sig, Location)]
   loc : Location
+  base_pos : BasePos
 }
