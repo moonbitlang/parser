@@ -19,15 +19,20 @@ fn attach_docstrings(
   docstrings : Array[List[(Location, Comment)]],
   toplevels : @syntax.Impls,
 ) -> Unit {
-
-  // skip the docstring before the posisiton, return the last skipped docstring.
-  fn skip_docstrings_before(pos : Position) -> List[(Location, Comment)]? {
-    let mut previous = None
+  fn search_docstrings(
+    last_pos : Position,
+    loc : Location,
+  ) -> List[(Location, Comment)]? {
+    let mut result = None
     while docstrings.last() is Some(comments) &&
-          comments.last().unwrap().0.end <= pos {
-      previous = docstrings.pop()
+          comments.head().unwrap().0.start.lnum <= loc.start.lnum {
+      let comments = docstrings.pop().unwrap()
+      let line = comments.head().unwrap().0.start.lnum
+      if last_pos.lnum < line && line <= loc.start.lnum {
+        result = Some(comments)
+      }
     }
-    previous
+    result
   }
 
   fn make_doc(
@@ -53,39 +58,52 @@ fn attach_docstrings(
     }
   }
 
+  let mut last_pos = Position::{ fname: "", lnum: -1, bol: 0, cnum: 0 }
   for toplevel in toplevels {
-    let previous = skip_docstrings_before(toplevel.loc().start)
-    let doc = previous.map(make_doc).unwrap_or(@syntax.DocString::empty())
+    let loc = toplevel.loc()
+    let doc = search_docstrings(last_pos, loc)
+      .map(make_doc)
+      .unwrap_or(@syntax.DocString::empty())
     match toplevel {
       TopTypeDef(td) => {
         td.doc = doc
+        last_pos = loc.start
         match td.components {
           // there is no docstring inside the types
-          Abstract
-          | Extern
-          | Alias(_)
-          | Error(NoPayload | SinglePayload(_))
-          | TupleStruct(_) => ()
+          Abstract | Alias(_) | Error(NoPayload) | TupleStruct(_) => ()
           // handle docstring before the enum/suberror constructor and struct fields 
-          Error(EnumPayload(constrs)) | Variant(constrs) =>
+          Error(EnumPayload(constrs))
+          | Variant(constrs)
+          | ExtensibleEnum(constrs) =>
             constrs.each(constr => {
-              let previous = skip_docstrings_before(constr.loc.start)
+              let previous = search_docstrings(last_pos, constr.loc)
                 .map(make_doc)
                 .unwrap_or(@syntax.DocString::empty())
               constr.doc = previous
+              last_pos = constr.loc.end
+            })
+          ExtendEnum(constructors=constrs, ..) =>
+            constrs.each(constr => {
+              let previous = search_docstrings(last_pos, constr.loc)
+                .map(make_doc)
+                .unwrap_or(@syntax.DocString::empty())
+              constr.doc = previous
+              last_pos = constr.loc.end
             })
           Record(fields~, constr_decl~) => {
             fields.each(field => {
-              let previous = skip_docstrings_before(field.loc.start)
+              let previous = search_docstrings(last_pos, field.loc)
                 .map(make_doc)
                 .unwrap_or(@syntax.DocString::empty())
               field.doc = previous
+              last_pos = field.loc.end
             })
             if constr_decl is Some(constr_decl) {
-              let previous = skip_docstrings_before(constr_decl.loc.start)
+              let previous = search_docstrings(last_pos, constr_decl.loc)
                 .map(make_doc)
                 .unwrap_or(@syntax.DocString::empty())
               constr_decl.doc = previous
+              last_pos = constr_decl.loc.end
             }
           }
         }
@@ -100,7 +118,7 @@ fn attach_docstrings(
       TopImpl(..) as imp => imp.doc = doc
       TopUsing(..) as using_stmt => using_stmt.doc = doc
     }
-    skip_docstrings_before(toplevel.loc().end) |> ignore
+    last_pos = loc.end
   }
 }
 
