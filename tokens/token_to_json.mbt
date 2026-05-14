@@ -52,10 +52,14 @@ pub impl ToJson for Token with to_json(self) {
     MATCH => "MATCH"
     CONST => "CONST"
     LET => "LET"
+    PROOF_ASSERT => "PROOF_ASSERT"
+    PROOF_LET => "PROOF_LET"
     IF => "IF"
     FN => "FN"
     ELSE => "ELSE"
     PIPE => "PIPE"
+    PIPE_LEFT => "PIPE_LEFT"
+    LT_PLUS => "LT_PLUS"
     AS => "AS"
     PACKAGE_NAME(str) => ["PACKAGE_NAME", str]
     BARBAR => "BARBAR"
@@ -83,6 +87,7 @@ pub impl ToJson for Token with to_json(self) {
     RPAREN => "RPAREN"
     LPAREN => "LPAREN"
     EQUAL => "EQUAL"
+    EQ_TILDE => "EQ_TILDE"
     FNALIAS => "FNALIAS"
     TRAITALIAS => "TRAITALIAS"
     TYPEALIAS => "TYPEALIAS"
@@ -108,6 +113,7 @@ pub impl ToJson for Token with to_json(self) {
     FALSE => "FALSE"
     EOF => "EOF"
     AUGMENTED_ASSIGNMENT(str) => ["AUGMENTED_ASSIGNMENT", str]
+    PLUS_EQUAL => "PLUS_EQUAL"
     INFIX4(str) => ["INFIX4", str]
     INFIX3(str) => ["INFIX3", str]
     INFIX2(str) => ["INFIX2", str]
@@ -144,5 +150,9 @@ pub impl ToJson for Token with to_json(self) {
     WHERE => "WHERE"
     NOBREAK => "NOBREAK"
     PACKAGE => "PACKAGE"
+    EXTENUM => "EXTENUM"
+    FORALL => "FORALL"
+    EXISTS => "EXISTS"
+    IMPLIES => "IMPLIES"
   }
 }

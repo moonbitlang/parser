@@ -66,6 +66,23 @@ pub(all) struct Location {
 } derive(Eq, Compare, Hash, Debug)
 
 ///|
+pub(all) struct BasePos {
+  base_pkg : String
+  base_fname : String
+  base_lnum : Int
+} derive(Eq, Compare, Hash, Debug)
+
+///|
+pub fn BasePos::none() -> BasePos {
+  { base_pkg: "", base_fname: "", base_lnum: -1 }
+}
+
+///|
+pub fn BasePos::from_position(pkg~ : String, pos : Position) -> BasePos {
+  { base_pkg: pkg, base_fname: pos.fname, base_lnum: pos.lnum }
+}
+
+///|
 pub fn Location::trim_first_char(self : Location) -> Location {
   Location::{
     start: Position::{

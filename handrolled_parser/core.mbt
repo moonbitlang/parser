@@ -320,6 +320,27 @@ fn State::expect_lident(state : Self, context~ : String) -> String {
 }
 
 ///|
+fn State::expect_luident(state : Self, context~ : String) -> String {
+  ignore(context)
+  match state.mode {
+    Panic(_) => ""
+    Normal =>
+      match state.peek_token() {
+        LIDENT(name) | UIDENT(name) => {
+          state.skip()
+          name
+        }
+        other => {
+          let loc = state.peek_location()
+          state.report_unexpected(other, [TK_LIDENT, TK_UIDENT], loc)
+          state.panic() |> ignore
+          ""
+        }
+      }
+  }
+}
+
+///|
 fn State::expect_uident(state : Self, context~ : String) -> String {
   match state.mode {
     Panic(_) => ""

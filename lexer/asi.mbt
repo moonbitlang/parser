@@ -38,6 +38,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | RANGE_EXCLUSIVE_REV
     | PIPE
     | ELLIPSIS
+    | NORAISE
     | POST_LABEL(_) => true
     // ---------------------------
     // | EXCEPT
@@ -85,11 +86,13 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | IN
     | EQUAL
     | AUGMENTED_ASSIGNMENT(_)
+    | PLUS_EQUAL
+    | EQ_TILDE
     | EOF
     | ENUM
+    | EXTENUM
     | ENUMVIEW
     | ELSE
-    | NORAISE
     | EXTERN
     | COMMENT(_)
     | COMMA
@@ -105,6 +108,12 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | READONLY
     | TRAIT
     | TRAITALIAS
+    | PROOF_ASSERT
+    | PROOF_LET
+    | FORALL
+    | EXISTS
+    | IMPLIES
+    | LT_PLUS
     | DERIVE
     | COLONCOLON
     | TEST
@@ -117,6 +126,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | LEXMATCH
     | LEXMATCH_QUESTION
     | WHERE
+    | PIPE_LEFT
     | NOBREAK => false
   }
 }
@@ -153,6 +163,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | TYPEALIAS
     | SUBERROR
     | STRUCT
+    | EXTENUM
     | TRAIT
     | TRAITALIAS
     | PACKAGE_NAME(_)
@@ -163,6 +174,8 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | TRY_QUESTION
     | TRY_EXCLAMATION
     | LET
+    | PROOF_ASSERT
+    | PROOF_LET
     | LETREC
     | CONST
     | IMPL
@@ -178,6 +191,8 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | FNALIAS
     | EOF
     | ENUM
+    | FORALL
+    | EXISTS
     | ENUMVIEW
     | PUB
     | PRIV
@@ -224,6 +239,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | INFIX2(_)
     | INFIX3(_)
     | INFIX4(_)
+    | IMPLIES
     | AMPERAMPER
     | BARBAR
     | CARET
@@ -250,8 +266,11 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | THIN_ARROW
     | IN
     | PIPE
+    | PIPE_LEFT
     | EQUAL
     | AUGMENTED_ASSIGNMENT(_)
+    | PLUS_EQUAL
+    | EQ_TILDE
     | ELSE
     | NORAISE
     | CATCH
@@ -260,6 +279,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | BAR
     | AS
     | IS
+    | LT_PLUS
     | DOTDOT
     | DERIVE
     | WITH
