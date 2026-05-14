@@ -17,6 +17,12 @@ let fixtures_path : String = root + "/fixtures"
 let output : String = root + "/generated_test.mbt"
 
 ///|
+let generated_test_separator =
+  #|
+  #|
+  #|
+
+///|
 fn main {
   try {
     let tests = @fs.read_dir(fixtures_path).filter(name => {
@@ -26,7 +32,7 @@ fn main {
     for name in tests {
       buf
       ..write_string(gen_test(name.split(".").head().unwrap().to_owned()))
-      .write_string("\n\n")
+      .write_string(generated_test_separator)
     }
     @fs.write_string_to_file(output, buf.to_string())
   } catch {

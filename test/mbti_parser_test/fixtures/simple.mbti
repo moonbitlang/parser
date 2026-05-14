@@ -1,0 +1,26 @@
+package "username/hello/lib"
+
+import {
+  "moonbitlang/core/bytes" as @bb,
+  "moonbitlang/core/quickcheck",
+}
+
+// Values
+fn[X : I] g(A[X]) -> Unit
+
+fn h(&Show2) -> Unit
+
+const ZERO : UInt = 0
+
+let zero : UInt
+
+fn[A] T::f(Self[A]) -> Unit
+
+async fn i_am_async() -> Unit
+
+fn custom_err() -> Unit raise Failure
+fn default_err() -> Unit raise
+fn err_poly() -> Unit raise?
+
+suberror NoPayload
+suberror SinglePayload Int

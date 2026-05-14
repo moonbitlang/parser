@@ -1,0 +1,23 @@
+package "compiler/mbti_parsing_test/trait"
+
+trait I1 {
+  #callsite(autofill(f))
+  f(Self, f~: Int) -> Unit = _
+}
+
+enum E {
+  #attribute
+  C(Int)
+}
+
+#deprecated
+struct S {
+  #attribute
+  f: Int
+}
+
+#callsite(migration(a, allow_positional=true), migration(d, allow_positional=true))
+fn allow_positional(a~ : Int, Int, c? : Int, d~ : Int) -> Unit
+
+#hidden
+let zero : UInt
