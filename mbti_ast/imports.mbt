@@ -1,5 +1,5 @@
 ///|
-using @basic {type Location}
+using @basic {type BasePos, type Location}
 
 ///|
 pub using @syntax {
