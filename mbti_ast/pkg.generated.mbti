@@ -48,6 +48,7 @@ pub(all) struct Mbti {
   imports : @list.List[PackageImport]
   sigs : @list.List[(Sig, @basic.Location)]
   loc : @basic.Location
+  base_pos : @basic.BasePos
 }
 
 pub(all) struct MethodSelfType {
@@ -85,6 +86,7 @@ pub fn Sig::attrs(Self) -> @list.List[@attribute.Attribute]
 pub(all) struct TraitMethodSig {
   name : Name
   params : @list.List[@syntax.Parameter]
+  is_async : @basic.Location?
   has_default : Bool
   return_ : (@syntax.Type, @syntax.ErrorType)
   attrs : @list.List[@attribute.Attribute]
@@ -103,6 +105,8 @@ pub(all) enum TypeDefinition {
   Newtype(@syntax.Type)
   TupleStruct(@list.List[@syntax.Type])
   Error(@syntax.ExceptionDecl)
+  ExtensibleEnum(@list.List[@syntax.ConstrDecl])
+  ExtendEnum(target~ : QualifiedName, constructors~ : @list.List[@syntax.ConstrDecl])
   Variant(@list.List[@syntax.ConstrDecl])
   Record(fields~ : @list.List[@syntax.FieldDecl], constr~ : FuncSig?)
   Alias(@syntax.Type)
@@ -124,6 +128,7 @@ pub(all) struct TypeSig {
   components : TypeDefinition
   vis : @syntax.Visibility
   attrs : @list.List[@attribute.Attribute]
+  derives : @list.List[QualifiedName]
 }
 
 pub(all) struct ValueSig {
