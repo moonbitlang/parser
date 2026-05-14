@@ -1,0 +1,14 @@
+package "compiler/mbti_parsing_test/trait"
+
+trait I1 {
+  f(Self) -> Unit = _
+}
+
+pub trait I2 {
+  g(Self, Self) -> Self
+}
+
+pub(open) trait I3 {
+  h(Self) -> Int
+  async i() -> Unit
+}
