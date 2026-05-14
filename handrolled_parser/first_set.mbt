@@ -20,6 +20,7 @@ let first_impl_ : Array[TokenKind] = [
   TK_FN,
   TK_STRUCT,
   TK_ENUM,
+  TK_EXTENUM,
   TK_LET,
   TK_CONST,
   TK_EXTERN,
@@ -40,6 +41,7 @@ let first_simple_expr : Array[TokenKind] = [
   TK_DOUBLE,
   TK_CHAR,
   TK_STRING,
+  TK_REGEX_LITERAL,
   TK_MULTILINE_STRING,
   TK_MULTILINE_INTERP,
   TK_BYTE,
@@ -72,6 +74,8 @@ let first_expr : Array[TokenKind] = [
   TK_DEFER,
   TK_TRY_QUESTION,
   TK_TRY_EXCLAMATION,
+  TK_FORALL,
+  TK_EXISTS,
   TK_UNDERSCORE,
   TK_LPAREN,
   TK_LIDENT,
@@ -88,6 +92,7 @@ let first_map_pattern_key : Array[TokenKind] = [
   TK_DOUBLE,
   TK_MINUS,
   TK_STRING,
+  TK_REGEX_LITERAL,
 ]
 
 ///|

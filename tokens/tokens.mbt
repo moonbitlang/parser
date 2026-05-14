@@ -23,6 +23,7 @@ pub(all) enum Token {
   INFIX3(String)
   INFIX4(String)
   AUGMENTED_ASSIGNMENT(String)
+  PLUS_EQUAL
   EOF
   FALSE
   TRUE
@@ -48,6 +49,7 @@ pub(all) enum Token {
   TRAITALIAS
   FNALIAS
   EQUAL
+  EQ_TILDE
   LPAREN
   RPAREN
   COMMA
@@ -75,10 +77,14 @@ pub(all) enum Token {
   PACKAGE_NAME(String)
   AS
   PIPE
+  PIPE_LEFT
+  LT_PLUS
   ELSE
   FN
   IF
   LET
+  PROOF_ASSERT
+  PROOF_LET
   CONST
   MATCH
   USING
@@ -104,8 +110,12 @@ pub(all) enum Token {
   IS
   SUBERROR
   AND
+  FORALL
+  EXISTS
+  IMPLIES
   LETREC
   ENUMVIEW
+  EXTENUM
   DECLARE
   NORAISE
   NOBREAK
@@ -143,6 +153,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     INFIX3(_) => TK_INFIX3
     INFIX4(_) => TK_INFIX4
     AUGMENTED_ASSIGNMENT(_) => TK_AUGMENTED_ASSIGNMENT
+    PLUS_EQUAL => TK_PLUS_EQUAL
     EOF => TK_EOF
     FALSE => TK_FALSE
     TRUE => TK_TRUE
@@ -168,6 +179,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     TRAITALIAS => TK_TRAITALIAS
     FNALIAS => TK_FNALIAS
     EQUAL => TK_EQUAL
+    EQ_TILDE => TK_EQ_TILDE
     LPAREN => TK_LPAREN
     RPAREN => TK_RPAREN
     COMMA => TK_COMMA
@@ -195,10 +207,14 @@ pub fn Token::kind(self : Token) -> TokenKind {
     PACKAGE_NAME(_) => TK_PACKAGE_NAME
     AS => TK_AS
     PIPE => TK_PIPE
+    PIPE_LEFT => TK_PIPE_LEFT
+    LT_PLUS => TK_LT_PLUS
     ELSE => TK_ELSE
     FN => TK_FN
     IF => TK_IF
     LET => TK_LET
+    PROOF_ASSERT => TK_PROOF_ASSERT
+    PROOF_LET => TK_PROOF_LET
     CONST => TK_CONST
     MATCH => TK_MATCH
     USING => TK_USING
@@ -224,8 +240,12 @@ pub fn Token::kind(self : Token) -> TokenKind {
     IS => TK_IS
     SUBERROR => TK_SUBERROR
     AND => TK_AND
+    FORALL => TK_FORALL
+    EXISTS => TK_EXISTS
+    IMPLIES => TK_IMPLIES
     LETREC => TK_LETREC
     ENUMVIEW => TK_ENUMVIEW
+    EXTENUM => TK_EXTENUM
     DECLARE => TK_DECLARE
     NORAISE => TK_NORAISE
     NOBREAK => TK_NOBREAK
@@ -263,6 +283,7 @@ pub(all) enum TokenKind {
   TK_INFIX3
   TK_INFIX4
   TK_AUGMENTED_ASSIGNMENT
+  TK_PLUS_EQUAL
   TK_EOF
   TK_FALSE
   TK_TRUE
@@ -288,6 +309,7 @@ pub(all) enum TokenKind {
   TK_TRAITALIAS
   TK_FNALIAS
   TK_EQUAL
+  TK_EQ_TILDE
   TK_LPAREN
   TK_RPAREN
   TK_COMMA
@@ -315,10 +337,14 @@ pub(all) enum TokenKind {
   TK_PACKAGE_NAME
   TK_AS
   TK_PIPE
+  TK_PIPE_LEFT
+  TK_LT_PLUS
   TK_ELSE
   TK_FN
   TK_IF
   TK_LET
+  TK_PROOF_ASSERT
+  TK_PROOF_LET
   TK_CONST
   TK_MATCH
   TK_USING
@@ -344,8 +370,12 @@ pub(all) enum TokenKind {
   TK_IS
   TK_SUBERROR
   TK_AND
+  TK_FORALL
+  TK_EXISTS
+  TK_IMPLIES
   TK_LETREC
   TK_ENUMVIEW
+  TK_EXTENUM
   TK_DECLARE
   TK_NORAISE
   TK_NOBREAK
@@ -384,6 +414,7 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_INFIX3 => "INFIX3"
       TK_INFIX4 => "INFIX4"
       TK_AUGMENTED_ASSIGNMENT => "AUGMENTED_ASSIGNMENT"
+      TK_PLUS_EQUAL => "\"+=\""
       TK_EOF => "EOF"
       TK_FALSE => "FALSE"
       TK_TRUE => "TRUE"
@@ -409,6 +440,7 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_TRAITALIAS => "\"traitalias\""
       TK_FNALIAS => "\"fnalias\""
       TK_EQUAL => "\"=\""
+      TK_EQ_TILDE => "\"=~\""
       TK_LPAREN => "\"(\""
       TK_RPAREN => "\")\""
       TK_COMMA => "\",\""
@@ -436,10 +468,14 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_PACKAGE_NAME => "PACKAGE_NAME"
       TK_AS => "\"as\""
       TK_PIPE => "\"|>\""
+      TK_PIPE_LEFT => "\"<|\""
+      TK_LT_PLUS => "\"<+\""
       TK_ELSE => "\"else\""
       TK_FN => "\"fn\""
       TK_IF => "\"if\""
       TK_LET => "\"let\""
+      TK_PROOF_ASSERT => "\"proof_assert\""
+      TK_PROOF_LET => "\"proof_let\""
       TK_CONST => "\"const\""
       TK_MATCH => "\"match\""
       TK_USING => "\"using\""
@@ -465,8 +501,12 @@ pub impl Show for TokenKind with output(self, logger) {
       TK_IS => "\"is\""
       TK_SUBERROR => "\"suberror\""
       TK_AND => "\"and\""
+      TK_FORALL => "\"∀\""
+      TK_EXISTS => "\"∃\""
+      TK_IMPLIES => "\"→\""
       TK_LETREC => "\"letrec\""
       TK_ENUMVIEW => "\"enumview\""
+      TK_EXTENUM => "\"extenum\""
       TK_DECLARE => "\"declare\""
       TK_NORAISE => "\"noraise\""
       TK_NOBREAK => "\"nobreak\""
@@ -506,6 +546,7 @@ pub impl Debug for TokenKind with to_repr(self) {
     TK_INFIX3 => to_repr("INFIX3")
     TK_INFIX4 => to_repr("INFIX4")
     TK_AUGMENTED_ASSIGNMENT => to_repr("AUGMENTED_ASSIGNMENT")
+    TK_PLUS_EQUAL => to_repr("+=")
     TK_EOF => to_repr("EOF")
     TK_FALSE => to_repr("FALSE")
     TK_TRUE => to_repr("TRUE")
@@ -531,6 +572,7 @@ pub impl Debug for TokenKind with to_repr(self) {
     TK_TRAITALIAS => to_repr("traitalias")
     TK_FNALIAS => to_repr("fnalias")
     TK_EQUAL => to_repr("=")
+    TK_EQ_TILDE => to_repr("=~")
     TK_LPAREN => to_repr("(")
     TK_RPAREN => to_repr(")")
     TK_COMMA => to_repr(",")
@@ -558,10 +600,14 @@ pub impl Debug for TokenKind with to_repr(self) {
     TK_PACKAGE_NAME => to_repr("PACKAGE_NAME")
     TK_AS => to_repr("as")
     TK_PIPE => to_repr("|>")
+    TK_PIPE_LEFT => to_repr("<|")
+    TK_LT_PLUS => to_repr("<+")
     TK_ELSE => to_repr("else")
     TK_FN => to_repr("fn")
     TK_IF => to_repr("if")
     TK_LET => to_repr("let")
+    TK_PROOF_ASSERT => to_repr("proof_assert")
+    TK_PROOF_LET => to_repr("proof_let")
     TK_CONST => to_repr("const")
     TK_MATCH => to_repr("match")
     TK_USING => to_repr("using")
@@ -587,8 +633,12 @@ pub impl Debug for TokenKind with to_repr(self) {
     TK_IS => to_repr("is")
     TK_SUBERROR => to_repr("suberror")
     TK_AND => to_repr("and")
+    TK_FORALL => to_repr("∀")
+    TK_EXISTS => to_repr("∃")
+    TK_IMPLIES => to_repr("→")
     TK_LETREC => to_repr("letrec")
     TK_ENUMVIEW => to_repr("enumview")
+    TK_EXTENUM => to_repr("extenum")
     TK_DECLARE => to_repr("declare")
     TK_NORAISE => to_repr("noraise")
     TK_NOBREAK => to_repr("nobreak")
