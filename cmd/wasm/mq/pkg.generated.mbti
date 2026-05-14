@@ -1,0 +1,17 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/cmd/wasm/mq"
+
+// Values
+
+// Errors
+
+// Types and methods
+type CliAction
+
+type InputSource
+
+type LegacyOptions
+
+// Type aliases
+
+// Traits

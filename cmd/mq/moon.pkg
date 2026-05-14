@@ -1,0 +1,15 @@
+import {
+  "moonbitlang/parser/moon_config" @config,
+  "moonbitlang/async",
+  "moonbitlang/async/fs",
+  "moonbitlang/async/stdio",
+  "moonbitlang/async/io",
+  "moonbitlang/x/sys",
+  "moonbitlang/core/json",
+}
+
+supported_targets = "+native"
+
+options(
+  "is-main": true,
+)

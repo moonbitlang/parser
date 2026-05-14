@@ -1,0 +1,12 @@
+import {
+  "moonbitlang/parser/moon_config" @config,
+  "moonbit-community/miniio",
+  "moonbit-community/miniio/io",
+  "moonbitlang/core/json",
+}
+
+supported_targets = "wasm"
+
+options(
+  "is-main": true,
+)
