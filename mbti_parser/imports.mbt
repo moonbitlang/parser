@@ -2,7 +2,7 @@
 using @tokens {type Token, type TokenKind}
 
 ///|
-using @basic {type Location, type Position}
+using @basic {type Location, type Position, type Report}
 
 ///|
 using @tokens {
