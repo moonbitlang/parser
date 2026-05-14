@@ -11,6 +11,11 @@ fn[T] list_json_repr(
 }
 
 ///|
+fn empty_list_json_repr(kind : String, loc : Location) -> Json {
+  { "kind": kind, "loc": loc, "children": [] }
+}
+
+///|
 fn[T] option_json_repr(opt : T?, f : (T) -> Json) -> Json {
   match opt {
     Some(value) => f(value)
@@ -114,7 +119,7 @@ fn EmbeddedCode::json_repr(self : EmbeddedCode, loc : Location) -> Json {
 fn TraitMethodDecl::json_repr(self : TraitMethodDecl) -> Json {
   tagged_node("TraitMethodDecl", self.loc, {
     "name": self.name.json_repr(),
-    "has_error": option_json_repr(self.has_error, raise_json_repr),
+    "has_error": Json::null(),
     "is_async": option_json_repr(self.is_async, async_json_repr),
     "quantifiers": list_json_repr(
       "TraitMethodDecl::QuantifierList",
@@ -160,7 +165,23 @@ fn TypeDeclBinder::json_repr(self : TypeDeclBinder) -> Json {
 fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
   match self {
     Abstract => tagged_node0("TypeDesc::Abstract", loc)
-    Extern => tagged_node0("TypeDesc::Extern", loc)
+    ExtensibleEnum(constrs) => {
+      let constrs_loc = match constrs {
+        @list.Empty => loc
+        @list.More(constr, tail=@list.Empty) => constr.loc
+        @list.More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
+      }
+      tagged_node1(
+        "TypeDesc::ExtensibleEnum",
+        constrs_loc,
+        list_json_repr(
+          "TypeDesc::ExtensibleEnum::ConstrList",
+          constrs_loc,
+          constrs,
+          ConstrDecl::json_repr,
+        ),
+      )
+    }
     Error(exception_decl) =>
       tagged_node1("TypeDesc::Error", loc, exception_decl.json_repr(loc))
     Variant(constrs) => {
@@ -179,6 +200,22 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
           ConstrDecl::json_repr,
         ),
       )
+    }
+    ExtendEnum(target~, constructors~) => {
+      let constrs_loc = match constructors {
+        @list.Empty => loc
+        @list.More(constr, tail=@list.Empty) => constr.loc
+        @list.More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
+      }
+      tagged_node("TypeDesc::ExtendEnum", loc, {
+        "target": target.json_repr(),
+        "constructors": list_json_repr(
+          "TypeDesc::ExtendEnum::ConstrList",
+          constrs_loc,
+          constructors,
+          ConstrDecl::json_repr,
+        ),
+      })
     }
     Record(fields~, constr_decl~) =>
       tagged_node(
@@ -245,8 +282,6 @@ fn DerivingDirective::json_repr(self : DerivingDirective) -> Json {
 fn ExceptionDecl::json_repr(self : ExceptionDecl, loc : Location) -> Json {
   match self {
     NoPayload => tagged_node0("ExceptionDecl::NoPayload", loc)
-    SinglePayload(ty) =>
-      tagged_node1("ExceptionDecl::SinglePayload", ty.loc(), ty.json_repr())
     EnumPayload(constrs) =>
       tagged_node1(
         "ExceptionDecl::EnumPayload",
@@ -343,7 +378,7 @@ fn WhereClause::json_repr(self : WhereClause) -> Json {
 ///|
 pub fn Expr::json_repr(self : Expr) -> Json {
   match self {
-    Apply(func~, args~, attr~, loc~) => {
+    Apply(func~, args~, loc~) => {
       let args_list = list_json_repr(
         "Expr::Apply::ArgumentList",
         loc,
@@ -353,7 +388,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       tagged_node("Expr::Apply", loc, {
         "func": func.json_repr(),
         "args": args_list,
-        "attr": attr.json_repr(loc),
+        "attr": apply_attr_json_repr(loc),
       })
     }
     Infix(op~, lhs~, rhs~, loc~) =>
@@ -384,6 +419,12 @@ pub fn Expr::json_repr(self : Expr) -> Json {
           elems,
           SpreadableElem::json_repr,
         ),
+      })
+    ListComprehension(kind~, guard_~, body~, loc~) =>
+      tagged_node("Expr::ListComprehension", loc, {
+        "kind": kind.json_repr(loc),
+        "guard": option_json_repr(guard_, Expr::json_repr),
+        "body": body.json_repr(),
       })
     ArrayGet(array~, index~, loc~) =>
       tagged_node("Expr::ArrayGet", loc, {
@@ -475,6 +516,23 @@ pub fn Expr::json_repr(self : Expr) -> Json {
           p.json_repr(pat_loc)
         }),
       })
+    RegexMatch(expr~, pat~, bindings~, loc~) =>
+      tagged_node("Expr::RegexMatch", loc, {
+        "expr": expr.json_repr(),
+        "pat": pat.json_repr(),
+        "bindings": list_json_repr(
+          "Expr::RegexMatch::BindingList",
+          loc,
+          bindings,
+          fn(binding) {
+            let (label, binder) = binding
+            tagged_node("Expr::RegexMatch::Binding", label.loc, {
+              "label": label.json_repr(),
+              "binder": option_json_repr(binder, Binder::json_repr),
+            })
+          },
+        ),
+      })
     Defer(expr~, body~, loc~) =>
       tagged_node("Expr::Defer", loc, {
         "expr": expr.json_repr(),
@@ -484,19 +542,6 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       tagged_node("Expr::LetFn", loc, {
         "name": name.json_repr(),
         "func": func.json_repr(),
-        "body": body.json_repr(),
-      })
-    LetRec(bindings~, body~, loc~) =>
-      tagged_node("Expr::LetRec", loc, {
-        "bindings": list_json_repr("Expr::LetRec::BindingList", loc, bindings, fn(
-          binding,
-        ) {
-          let (binder, func) = binding
-          tagged_node("LetRec::Binding", loc, {
-            "binder": binder.json_repr(),
-            "func": func.json_repr(),
-          })
-        }),
         "body": body.json_repr(),
       })
     LetAnd(bindings~, body~, loc~) =>
@@ -570,7 +615,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "type_name": type_name.json_repr(),
         "method_name": method_name.json_repr(),
       })
-    DotApply(self~, method_name~, args~, return_self~, attr~, loc~) => {
+    DotApply(self~, method_name~, args~, return_self~, loc~) => {
       let args_list = list_json_repr(
         "Expr::DotApply::ArgList",
         loc,
@@ -582,7 +627,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "method_name": method_name.json_repr(),
         "args": args_list,
         "return_self": Json::boolean(return_self),
-        "attr": attr.json_repr(loc),
+        "attr": apply_attr_json_repr(loc),
       })
     }
     As(expr~, trait_~, loc~) =>
@@ -633,6 +678,11 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "lhs": lhs.json_repr(),
         "rhs": rhs.json_repr(),
       })
+    RevPipe(lhs~, rhs~, loc~) =>
+      tagged_node("Expr::RevPipe", loc, {
+        "lhs": lhs.json_repr(),
+        "rhs": rhs.json_repr(),
+      })
     Assign(var_~, expr~, augmented_by~, loc~) =>
       tagged_node("Expr::Assign", loc, {
         "var": var_.json_repr(),
@@ -647,6 +697,25 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       })
     Raise(err_value~, loc~) =>
       tagged_node("Expr::Raise", loc, { "err_value": err_value.json_repr() })
+    Quantifier(kind~, binder~, binder_ty~, body~, loc~) =>
+      tagged_node("Expr::Quantifier", loc, {
+        "kind": kind.json_repr(),
+        "binder": binder.json_repr(),
+        "binder_ty": binder_ty.json_repr(),
+        "body": body.json_repr(),
+      })
+    Implies(lhs~, rhs~, loc~) =>
+      tagged_node("Expr::Implies", loc, {
+        "lhs": lhs.json_repr(),
+        "rhs": rhs.json_repr(),
+      })
+    ProofAssert(expr~, loc~) =>
+      tagged_node("Expr::ProofAssert", loc, { "expr": expr.json_repr() })
+    ProofLet(binder~, expr~, loc~) =>
+      tagged_node("Expr::ProofLet", loc, {
+        "binder": binder.json_repr(),
+        "expr": expr.json_repr(),
+      })
     Unit(loc~, faked~) =>
       tagged_node("Expr::Unit", loc, { "faked": Json::boolean(faked) })
     Break(arg~, label~, loc~) =>
@@ -664,19 +733,6 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         ),
         "label": option_json_repr(label, Label::json_repr),
       })
-    Loop(arg~, body~, label~, loop_loc~, loc~) => {
-      ignore(loop_loc)
-      tagged_node("Expr::Loop", loc, {
-        "arg": arg.json_repr(),
-        "body": list_json_repr(
-          "Expr::Loop::CaseList",
-          loc,
-          body,
-          Case::json_repr,
-        ),
-        "label": option_json_repr(label, Label::json_repr),
-      })
-    }
     For(
       binders~,
       condition~,
@@ -715,22 +771,53 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "where_clause": option_json_repr(where_clause, WhereClause::json_repr),
         "label": option_json_repr(label, Label::json_repr),
       })
-    ForEach(binders~, expr~, body~, else_block~, label~, loc~) =>
-      tagged_node("Expr::ForEach", loc, {
+    ForEach(
+      binders~,
+      expr~,
+      init~,
+      continue_block~,
+      body~,
+      else_block~,
+      where_clause~,
+      label~,
+      loc~
+    ) => {
+      let children : Map[String, Json] = {
         "binders": list_json_repr("Expr::ForEach::BinderList", loc, binders, fn(
           b,
         ) {
           option_json_repr(b, Binder::json_repr)
         }),
         "expr": expr.json_repr(),
+        "init": list_json_repr("Expr::ForEach::Init", loc, init, fn(binding) {
+          let (binder, expr) = binding
+          tagged_node("ForEach::Init", loc, {
+            "init": binder.json_repr(),
+            "expr": expr.json_repr(),
+          })
+        }),
+        "continue_block": list_json_repr(
+          "Expr::ForEach::ContinueBlock",
+          loc,
+          continue_block,
+          fn(binding) {
+            let (binder, expr) = binding
+            tagged_node("ForEach::ContinueBlock", loc, {
+              "binder": binder.json_repr(),
+              "expr": expr.json_repr(),
+            })
+          },
+        ),
         "body": body.json_repr(),
         "else_block": option_json_repr(else_block, Expr::json_repr),
+        "where_clause": option_json_repr(where_clause, WhereClause::json_repr),
         "label": option_json_repr(label, Label::json_repr),
-      })
+      }
+      tagged_node("Expr::ForEach", loc, children)
+    }
     Try(
       body~,
       catch_~,
-      catch_all~,
       try_else~,
       has_try~,
       try_loc~,
@@ -748,7 +835,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
           catch_,
           Case::json_repr,
         ),
-        "catch_all": Json::boolean(catch_all),
+        "catch_all": Json::boolean(false),
         "try_else": option_json_repr(try_else, fn(cases) {
           list_json_repr(
             "Expr::Try::CaseList",
@@ -781,6 +868,12 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "expr": expr.json_repr(),
         "group": group.json_repr(loc),
       })
+    TemplateWriting(expr~, template~, loc~) =>
+      tagged_node("Expr::TemplateWriting", loc, {
+        "expr": expr.json_repr(),
+        "template": template.json_repr(),
+        "loc": loc.to_json(),
+      })
     StaticAssert(asserts~, body~) => {
       let loc = body.loc()
       tagged_node("Expr::StaticAssert", loc, {
@@ -794,20 +887,6 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       })
     }
   }
-}
-
-///|
-fn LocalTypeDecl::json_repr(self : LocalTypeDecl) -> Json {
-  tagged_node("LocalTypeDecl", self.tycon_loc, {
-    "tycon": Json::string(self.tycon),
-    "components": self.components.json_repr(self.tycon_loc),
-    "deriving": list_json_repr(
-      "LocalTypeDecl::DerivingList",
-      self.tycon_loc,
-      self.deriving,
-      DerivingDirective::json_repr,
-    ),
-  })
 }
 
 ///|
@@ -905,7 +984,7 @@ fn FunDecl::json_repr(self : FunDecl) -> Json {
   tagged_node("FunDecl", self.loc, {
     "type_name": option_json_repr(self.type_name, TypeName::json_repr),
     "name": self.name.json_repr(),
-    "has_error": option_json_repr(self.has_error, raise_json_repr),
+    "has_error": Json::null(),
     "is_async": option_json_repr(self.is_async, async_json_repr),
     "decl_params": option_json_repr(self.decl_params, fn(params) {
       list_json_repr(
@@ -937,13 +1016,10 @@ fn FunDecl::json_repr(self : FunDecl) -> Json {
 ///|
 fn DeclBody::json_repr(self : DeclBody, loc : Location) -> Json {
   match self {
-    DeclBody(local_types~, expr~) =>
+    DeclBody(expr~) =>
       tagged_node("DeclBody::DeclBody", loc, {
-        "local_types": list_json_repr(
-          "DeclBody::DeclBody::LocalTypeList",
-          loc,
-          local_types,
-          LocalTypeDecl::json_repr,
+        "local_types": empty_list_json_repr(
+          "DeclBody::DeclBody::LocalTypeList", loc,
         ),
         "expr": expr.json_repr(),
       })
@@ -1137,12 +1213,8 @@ fn ArgumentKind::json_repr(self : ArgumentKind, loc : Location) -> Json {
 }
 
 ///|
-fn ApplyAttr::json_repr(self : ApplyAttr, loc : Location) -> Json {
-  match self {
-    NoAttr => tagged_node0("ApplyAttr::NoAttr", loc)
-    Exclamation => tagged_node0("ApplyAttr::Exclamation", loc)
-    Question => tagged_node0("ApplyAttr::Question", loc)
-  }
+fn apply_attr_json_repr(loc : Location) -> Json {
+  tagged_node0("ApplyAttr::NoAttr", loc)
 }
 
 ///|
@@ -1165,6 +1237,8 @@ fn Constant::json_repr(self : Constant, loc : Location) -> Json {
     Double(s) => tagged_node1("Constant::Double", loc, Json::string(s))
     String(s) =>
       tagged_node1("Constant::String", loc, string_literal_json_repr(s))
+    Regex(s) =>
+      tagged_node1("Constant::Regex", loc, string_literal_json_repr(s))
     BigInt(s) => tagged_node1("Constant::BigInt", loc, Json::string(s))
   }
 }
@@ -1234,6 +1308,11 @@ fn ConstructorExtraInfo::json_repr(
         type_name.loc,
         type_name.json_repr(),
       )
+    TypeNameWithConstrPackage(type_name~, pkg~) =>
+      tagged_node("ConstructorExtraInfo::TypeNameWithConstrPackage", loc, {
+        "type_name": type_name.json_repr(),
+        "pkg": Json::string(pkg),
+      })
     Package(s) =>
       tagged_node1("ConstructorExtraInfo::Package", loc, Json::string(s))
     NoExtraInfo => tagged_node0("ConstructorExtraInfo::NoExtraInfo", loc)
@@ -1253,7 +1332,7 @@ fn Func::json_repr(self : Func) -> Json {
     "return_type": option_json_repr(self.return_type, Type::json_repr),
     "error_type": self.error_type.json_repr(self.loc),
     "kind": self.kind.json_repr(self.loc),
-    "has_error": option_json_repr(self.has_error, raise_json_repr),
+    "has_error": Json::null(),
     "is_async": option_json_repr(self.is_async, async_json_repr),
   })
 }
@@ -1538,8 +1617,11 @@ fn LexTopPattern::json_repr(self : LexTopPattern, loc : Location) -> Json {
 ///|
 fn LexPattern::json_repr(self : LexPattern) -> Json {
   match self {
-    Regex(lit~, loc~) =>
-      tagged_node("LexPattern::Regex", loc, { "lit": Json::string(lit) })
+    Regex(lit~, offset~, loc~) =>
+      tagged_node("LexPattern::Regex", loc, {
+        "lit": Json::string(lit),
+        "offset": Json::number(offset.to_double()),
+      })
     RegexInterp(elems~, loc~) =>
       tagged_node("LexPattern::RegexInterp", loc, {
         "elems": list_json_repr(
@@ -1549,6 +1631,8 @@ fn LexPattern::json_repr(self : LexPattern) -> Json {
           InterpElem::json_repr,
         ),
       })
+    ConstantRef(lid~, loc~) =>
+      tagged_node("LexPattern::ConstantRef", loc, { "lid": lid.json_repr(loc) })
     Alias(pat~, binder~, loc~) =>
       tagged_node("LexPattern::Alias", loc, {
         "pat": pat.json_repr(),
@@ -1563,6 +1647,103 @@ fn LexPattern::json_repr(self : LexPattern) -> Json {
           LexPattern::json_repr,
         ),
       })
+  }
+}
+
+///|
+fn RegexPattern::json_repr(self : RegexPattern) -> Json {
+  match self {
+    Literal(lit~, loc~) =>
+      tagged_node("RegexPattern::Literal", loc, { "lit": Json::string(lit) })
+    Reference(lid~, loc~) =>
+      tagged_node("RegexPattern::Reference", loc, { "lid": lid.json_repr(loc) })
+    Sequence(pat1~, pat2~, loc~) =>
+      tagged_node("RegexPattern::Sequence", loc, {
+        "pat1": pat1.json_repr(),
+        "pat2": pat2.json_repr(),
+      })
+    Alternation(pat1~, pat2~, loc~) =>
+      tagged_node("RegexPattern::Alternation", loc, {
+        "pat1": pat1.json_repr(),
+        "pat2": pat2.json_repr(),
+      })
+    Alias(pat~, binder~, loc~) =>
+      tagged_node("RegexPattern::Alias", loc, {
+        "pat": pat.json_repr(),
+        "binder": binder.json_repr(),
+      })
+  }
+}
+
+///|
+fn PredicateQuantifierKind::json_repr(self : PredicateQuantifierKind) -> Json {
+  match self {
+    Forall => Json::string("forall")
+    Exists => Json::string("exists")
+  }
+}
+
+///|
+fn ListComprehensionKind::json_repr(
+  self : ListComprehensionKind,
+  loc : Location,
+) -> Json {
+  match self {
+    Foreach(binders~, expr~, init~, continue_block~) =>
+      tagged_node("Expr::ListComprehension::Kind::Foreach", loc, {
+        "binders": list_json_repr("Expr::ForEach::BinderList", loc, binders, fn(
+          b,
+        ) {
+          option_json_repr(b, Binder::json_repr)
+        }),
+        "expr": expr.json_repr(),
+        "init": list_json_repr("Expr::ForEach::Init", loc, init, fn(binding) {
+          let (binder, expr) = binding
+          tagged_node("ForEach::Init", loc, {
+            "init": binder.json_repr(),
+            "expr": expr.json_repr(),
+          })
+        }),
+        "continue_block": list_json_repr(
+          "Expr::ForEach::ContinueBlock",
+          loc,
+          continue_block,
+          fn(binding) {
+            let (binder, expr) = binding
+            tagged_node("ForEach::ContinueBlock", loc, {
+              "binder": binder.json_repr(),
+              "expr": expr.json_repr(),
+            })
+          },
+        ),
+      })
+    For(binders~, condition~, continue_block~, for_loc~) => {
+      ignore(for_loc)
+      tagged_node("Expr::ListComprehension::Kind::For", loc, {
+        "binders": list_json_repr("Expr::For::BindingList", loc, binders, fn(
+          binding,
+        ) {
+          let (binder, expr) = binding
+          tagged_node("For::Binding", loc, {
+            "binder": binder.json_repr(),
+            "expr": expr.json_repr(),
+          })
+        }),
+        "condition": option_json_repr(condition, Expr::json_repr),
+        "continue_block": list_json_repr(
+          "Expr::For::ContBindingList",
+          loc,
+          continue_block,
+          fn(binding) {
+            let (binder, expr) = binding
+            tagged_node("For::ContBinding", loc, {
+              "binder": binder.json_repr(),
+              "expr": expr.json_repr(),
+            })
+          },
+        ),
+      })
+    }
   }
 }
 
@@ -1597,26 +1778,16 @@ fn async_json_repr(is_async : Location) -> Json {
 }
 
 ///|
-fn raise_json_repr(loc : Location) -> Json {
-  tagged_node0("Raise", loc)
-}
-
-///|
 pub fn Impl::json_repr(self : Impl) -> Json {
   match self {
-    TopExpr(expr~, is_main~, local_types~, is_async~, loc~) =>
+    TopExpr(expr~, is_main~, is_async~, loc~) =>
       tagged_node("Impl::TopExpr", loc, {
         "expr": expr.json_repr(),
         "is_main": Json::boolean(is_main),
-        "local_types": list_json_repr(
-          "Impl::TopExpr::LocalTypeList",
-          loc,
-          local_types,
-          LocalTypeDecl::json_repr,
-        ),
+        "local_types": empty_list_json_repr("Impl::TopExpr::LocalTypeList", loc),
         "is_async": option_json_repr(is_async, async_json_repr),
       })
-    TopTest(expr~, name~, params~, local_types~, is_async~, loc~, attrs~, doc~) =>
+    TopTest(expr~, name~, params~, is_async~, loc~, attrs~, doc~) =>
       tagged_node("Impl::TopTest", loc, {
         "expr": expr.json_repr(),
         "name": name.json_repr(),
@@ -1628,12 +1799,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
             Parameter::json_repr,
           )
         }),
-        "local_types": list_json_repr(
-          "Impl::TopTest::LocalTypeList",
-          loc,
-          local_types,
-          LocalTypeDecl::json_repr,
-        ),
+        "local_types": empty_list_json_repr("Impl::TopTest::LocalTypeList", loc),
         "is_async": option_json_repr(is_async, async_json_repr),
         "attrs": list_json_repr(
           "Impl::TopTest::AttrList",
@@ -1645,9 +1811,10 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       })
     TopTypeDef(type_decl) =>
       tagged_node1("Impl::TopTypeDef", type_decl.loc, type_decl.json_repr())
-    TopFuncDef(fun_decl~, decl_body~, loc~) =>
+    TopFuncDef(fun_decl~, decl_body~, where_clause~, loc~) =>
       tagged_node("Impl::TopFuncDef", loc, {
         "fun_decl": fun_decl.json_repr(),
+        "where_clause": option_json_repr(where_clause, WhereClause::json_repr),
         "decl_body": decl_body.json_repr(loc),
       })
     TopLetDef(
@@ -1682,7 +1849,6 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       self_ty~,
       trait_~,
       method_name~,
-      has_error~,
       quantifiers~,
       params~,
       ret_ty~,
@@ -1697,7 +1863,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
         "self_ty": option_json_repr(self_ty, Type::json_repr),
         "trait": trait_.json_repr(),
         "method_name": method_name.json_repr(),
-        "has_error": option_json_repr(has_error, Location::to_json),
+        "has_error": Json::null(),
         "quantifiers": list_json_repr(
           "Impl::TopImpl::QuantifierList",
           loc,

@@ -50,8 +50,8 @@ pub fn make_array_expr(
 pub fn make_interps(c : @tokens.InterpLiteral) -> @list.List[InterpElem] {
   let result = c.map(fn(lit) {
     match lit {
-      InterpLit(repr~, loc~) => Literal(repr~, loc~)
-      InterpSource(s) => Source(s)
+      InterpLit(repr~, loc~) => InterpElem::Literal(repr~, loc~)
+      InterpSource(s) => InterpElem::Source(s)
     }
   })
   @list.from_array(result)
@@ -152,7 +152,6 @@ pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
           value: arg,
           kind: ArgumentKind::Positional,
         }),
-        attr=ApplyAttr::NoAttr,
         loc~,
       )
     }
@@ -219,7 +218,6 @@ pub fn desugar_array_get(loc~ : Location, obj : Expr, index : Expr) -> Expr {
       Argument::{ value: index, kind: ArgumentKind::Positional },
     ]),
     return_self=false,
-    attr=ApplyAttr::NoAttr,
     loc~,
   )
 }
@@ -243,7 +241,6 @@ pub fn desugar_array_set(
       Argument::{ value, kind: ArgumentKind::Positional },
     ]),
     return_self=false,
-    attr=ApplyAttr::NoAttr,
     loc~,
   )
 }
@@ -432,7 +429,6 @@ pub fn make_arrow_fn(
     return_type: None,
     error_type: ErrorType::NoErrorType,
     kind: FnKind::Arrow,
-    has_error: None,
     is_async: None,
     loc,
   }
@@ -460,11 +456,12 @@ pub fn Type::loc(self : Type) -> Location {
 ///|
 pub fn loc_of_expression(expr : Expr) -> Location {
   match expr {
-    Apply(func=_, args=_, attr=_, loc~) => loc
+    Apply(func=_, args=_, loc~) => loc
     Infix(op=_, lhs=_, rhs=_, loc~) => loc
     Unary(op=_, expr=_, loc~) => loc
     Array(exprs=_, loc~) => loc
     ArraySpread(elems=_, loc~) => loc
+    ListComprehension(kind=_, guard_=_, body=_, loc~) => loc
     ArrayGet(array=_, index=_, loc~) => loc
     ArrayGetSlice(array=_, start_index=_, end_index=_, index_loc=_, loc~) => loc
     ArraySet(array=_, index=_, value=_, loc~) => loc
@@ -481,9 +478,9 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     Guard(cond=_, otherwise=_, body=_, loc~) => loc
     Is(expr=_, pat=_, loc~) => loc
     IsLexMatch(expr=_, strategy=_, pat=_, pat_loc=_, loc~) => loc
+    RegexMatch(expr=_, pat=_, bindings=_, loc~) => loc
     Defer(loc~, ..) => loc
     LetFn(name=_, func=_, body=_, loc~) => loc
-    LetRec(bindings=_, body=_, loc~) => loc
     LetAnd(bindings=_, body=_, loc~) => loc
     Let(pattern=_, expr=_, body=_, loc~) => loc
     Sequence(exprs=_, last_expr=_, loc~) => loc
@@ -492,21 +489,25 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     RecordUpdate(type_name=_, record=_, fields=_, loc~) => loc
     Field(record=_, accessor=_, loc~) => loc
     Method(type_name=_, method_name=_, loc~) => loc
-    DotApply(self=_, method_name=_, args=_, return_self=_, attr=_, loc~) => loc
+    DotApply(self=_, method_name=_, args=_, return_self=_, loc~) => loc
     As(expr=_, trait_=_, loc~) => loc
     Mutate(record=_, accessor=_, field=_, augmented_by=_, loc~) => loc
     Match(expr=_, cases=_, match_loc=_, loc~) => loc
     LexMatch(strategy=_, expr=_, match_loc=_, cases=_, loc~) => loc
     LetMut(binder=_, ty=_, expr=_, body=_, loc~) => loc
     Pipe(lhs=_, rhs=_, loc~) => loc
+    RevPipe(lhs=_, rhs=_, loc~) => loc
     Assign(var_=_, expr=_, augmented_by=_, loc~) => loc
     Hole(loc~, kind=_) => loc
     Return(return_value=_, loc~) => loc
     Raise(err_value=_, loc~) => loc
+    Quantifier(kind=_, binder=_, binder_ty=_, body=_, loc~) => loc
+    Implies(lhs=_, rhs=_, loc~) => loc
+    ProofAssert(expr=_, loc~) => loc
+    ProofLet(binder=_, expr=_, loc~) => loc
     Unit(loc~, faked=_) => loc
     Break(arg=_, label=_, loc~) => loc
     Continue(args=_, label=_, loc~) => loc
-    Loop(arg=_, body=_, label=_, loop_loc=_, loc~) => loc
     For(
       binders=_,
       condition=_,
@@ -517,11 +518,20 @@ pub fn loc_of_expression(expr : Expr) -> Location {
       loc~,
       where_clause=_
     ) => loc
-    ForEach(binders=_, expr=_, body=_, else_block=_, label=_, loc~) => loc
+    ForEach(
+      binders=_,
+      expr=_,
+      init=_,
+      continue_block=_,
+      body=_,
+      else_block=_,
+      where_clause=_,
+      label=_,
+      loc~
+    ) => loc
     Try(
       body=_,
       catch_=_,
-      catch_all=_,
       try_else=_,
       has_try=_,
       try_loc=_,
@@ -532,6 +542,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     TryOperator(loc~, ..) => loc
     Map(elems=_, loc~) => loc
     Group(expr=_, group=_, loc~) => loc
+    TemplateWriting(expr=_, template=_, loc~) => loc
     StaticAssert(asserts=_, body=_) => no_location
   }
 }
@@ -602,12 +613,4 @@ fn shift_col(pos : Position, offset : Int) -> Position {
     bol: pos.bol + offset,
     cnum: pos.cnum + offset,
   }
-}
-
-// Placeholder types that need to be defined
-
-///|
-pub(all) enum InterpolationComponent {
-  InterpLit(StringLiteral, Location)
-  InterpSource(InterpSource)
 }

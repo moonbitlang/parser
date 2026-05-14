@@ -140,7 +140,6 @@ test "impl variants to_json" {
   let fun_decl = @syntax.FunDecl::{
     type_name: None,
     name: binder,
-    has_error: None,
     is_async: None,
     decl_params: None,
     params_loc: dummy_loc,
@@ -154,7 +153,7 @@ test "impl variants to_json" {
   }
   let decl_body = @syntax.DeclBody(expr=unit_expr)
   json_inspect(
-    @syntax.TopFuncDef(fun_decl~, decl_body~, loc=dummy_loc).json_repr(),
+    @syntax.TopFuncDef(fun_decl~, decl_body~, where_clause=None, loc=dummy_loc).json_repr(),
     content={
       "kind": "Impl::TopFuncDef",
       "loc": null,
@@ -196,6 +195,7 @@ test "impl variants to_json" {
             "doc": "Test documentation",
           },
         },
+        "where_clause": null,
         "decl_body": {
           "kind": "DeclBody::DeclBody",
           "loc": null,
@@ -402,7 +402,6 @@ test "expr basic types to_json" {
     @syntax.Expr::Apply(
       func=unit_expr,
       args=@list.from_array([argument]),
-      attr=@syntax.NoAttr,
       loc=dummy_loc,
     ).json_repr(),
     content={
@@ -1085,6 +1084,54 @@ test "expr complex types to_json" {
             },
           },
         },
+      },
+    },
+  )
+}
+
+///|
+test "foreach json includes empty continue block" {
+  let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
+  json_inspect(
+    @syntax.ForEach(
+      binders=@list.from_array([]),
+      expr=unit_expr,
+      init=@list.from_array([]),
+      continue_block=@list.from_array([]),
+      body=unit_expr,
+      else_block=None,
+      where_clause=None,
+      label=None,
+      loc=dummy_loc,
+    ).json_repr(),
+    content={
+      "kind": "Expr::ForEach",
+      "loc": null,
+      "children": {
+        "binders": {
+          "kind": "Expr::ForEach::BinderList",
+          "loc": null,
+          "children": [],
+        },
+        "expr": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "init": { "kind": "Expr::ForEach::Init", "loc": null, "children": [] },
+        "continue_block": {
+          "kind": "Expr::ForEach::ContinueBlock",
+          "loc": null,
+          "children": [],
+        },
+        "body": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "else_block": null,
+        "where_clause": null,
+        "label": null,
       },
     },
   )
