@@ -394,6 +394,15 @@ fn lex_tokens(
 
     // Operators and punctuation - order matters for longer operators first
 
+    ("\+=", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::PLUS_EQUAL,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+
     // Augmented assignment operators
     ("[+\-*/%]=" as op, rest) => {
       let op_char = op.sub(start=0, end=1).to_owned()
@@ -430,6 +439,22 @@ fn lex_tokens(
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
+    ("<\|", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::PIPE_LEFT,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+    ("<\+", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::LT_PLUS,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
     ("try\?", rest) => {
       env.add_token_with_loc(
         @tokens.Token::TRY_QUESTION,
@@ -457,6 +482,14 @@ fn lex_tokens(
     ("==", rest) => {
       env.add_token_with_loc(
         @tokens.Token::INFIX1("=="),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+    ("=~", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::EQ_TILDE,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -513,6 +546,30 @@ fn lex_tokens(
     (">>", rest) => {
       env.add_token_with_loc(
         @tokens.Token::INFIX2(">>"),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+    ("\u{2200}", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::FORALL,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+    ("\u{2203}", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::EXISTS,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+    ("\u{2192}", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::IMPLIES,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -919,10 +976,11 @@ fn lex_tokens(
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
-    // Package name @package/name - simplified pattern
-    ("@" ("[a-zA-Z_][a-zA-Z0-9_/]*" as pkg_name_without_at), rest) => {
+    // Package name @package/name
+    ("@[a-zA-Z_][a-zA-Z0-9_]*(/[a-zA-Z_][a-zA-Z0-9_]*)*" as raw, rest) => {
+      let pkg_name_without_at = raw.sub(start=1, end=raw.length()).to_owned()
       env.add_token_with_loc(
-        @tokens.Token::PACKAGE_NAME(pkg_name_without_at.to_owned()),
+        @tokens.Token::PACKAGE_NAME(pkg_name_without_at),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )

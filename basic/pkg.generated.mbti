@@ -16,6 +16,14 @@ pub let show_loc : @ref.Ref[LocStyle]
 // Errors
 
 // Types and methods
+pub(all) struct BasePos {
+  base_pkg : String
+  base_fname : String
+  base_lnum : Int
+} derive(Compare, Eq, Hash, @debug.Debug)
+pub fn BasePos::from_position(pkg~ : String, Position) -> Self
+pub fn BasePos::none() -> Self
+
 pub(all) enum LocStyle {
   Hidden
   Json

@@ -58,6 +58,7 @@ pub(all) enum Token {
   INFIX3(String)
   INFIX4(String)
   AUGMENTED_ASSIGNMENT(String)
+  PLUS_EQUAL
   EOF
   FALSE
   TRUE
@@ -83,6 +84,7 @@ pub(all) enum Token {
   TRAITALIAS
   FNALIAS
   EQUAL
+  EQ_TILDE
   LPAREN
   RPAREN
   COMMA
@@ -110,10 +112,14 @@ pub(all) enum Token {
   PACKAGE_NAME(String)
   AS
   PIPE
+  PIPE_LEFT
+  LT_PLUS
   ELSE
   FN
   IF
   LET
+  PROOF_ASSERT
+  PROOF_LET
   CONST
   MATCH
   USING
@@ -139,8 +145,12 @@ pub(all) enum Token {
   IS
   SUBERROR
   AND
+  FORALL
+  EXISTS
+  IMPLIES
   LETREC
   ENUMVIEW
+  EXTENUM
   DECLARE
   NORAISE
   NOBREAK
@@ -179,6 +189,7 @@ pub(all) enum TokenKind {
   TK_INFIX3
   TK_INFIX4
   TK_AUGMENTED_ASSIGNMENT
+  TK_PLUS_EQUAL
   TK_EOF
   TK_FALSE
   TK_TRUE
@@ -204,6 +215,7 @@ pub(all) enum TokenKind {
   TK_TRAITALIAS
   TK_FNALIAS
   TK_EQUAL
+  TK_EQ_TILDE
   TK_LPAREN
   TK_RPAREN
   TK_COMMA
@@ -231,10 +243,14 @@ pub(all) enum TokenKind {
   TK_PACKAGE_NAME
   TK_AS
   TK_PIPE
+  TK_PIPE_LEFT
+  TK_LT_PLUS
   TK_ELSE
   TK_FN
   TK_IF
   TK_LET
+  TK_PROOF_ASSERT
+  TK_PROOF_LET
   TK_CONST
   TK_MATCH
   TK_USING
@@ -260,8 +276,12 @@ pub(all) enum TokenKind {
   TK_IS
   TK_SUBERROR
   TK_AND
+  TK_FORALL
+  TK_EXISTS
+  TK_IMPLIES
   TK_LETREC
   TK_ENUMVIEW
+  TK_EXTENUM
   TK_DECLARE
   TK_NORAISE
   TK_NOBREAK
