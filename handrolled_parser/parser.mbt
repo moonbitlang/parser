@@ -133,6 +133,28 @@ fn State::parse_qual_luident(self : Self) -> @syntax.LongIdent {
 }
 
 ///|
+fn State::parse_qual_uident(self : Self) -> @syntax.LongIdent {
+  guard self.mode is Normal else { @syntax.LongIdent::dummy() }
+  match self.peek_token() {
+    UIDENT(id) => {
+      self.skip()
+      Ident(name=id)
+    }
+    PACKAGE_NAME(pkg) => {
+      self.skip()
+      let id = self.expect_dot_uident(context="qualified upper identifier")
+      Dot(pkg~, id~)
+    }
+    other => {
+      let loc = self.peek_location()
+      self.report_unexpected(other, [TK_UIDENT, TK_PACKAGE_NAME], loc)
+      self.panic() |> ignore
+      @syntax.LongIdent::dummy()
+    }
+  }
+}
+
+///|
 fn State::parse_luident(self : Self) -> String {
   guard self.mode is Normal else { "" }
   match self.peek_token() {
@@ -186,7 +208,7 @@ fn State::parse_fun_binder(self : Self) -> (@syntax.TypeName?, @syntax.Binder) {
     let type_name = self.parse_type_name()
     self.expect_token(TK_COLONCOLON)
     let loc_func_name = self.peek_location()
-    let func_name = self.expect_lident(context="name of `fn`")
+    let func_name = self.expect_luident(context="name of `fn`")
     (Some(type_name), @syntax.Binder::{ name: func_name, loc: loc_func_name })
   }
 
@@ -293,18 +315,32 @@ fn State::parse_constr(self : Self) -> @syntax.Constructor {
     }
     LIDENT(_) | UIDENT(_) | PACKAGE_NAME(_) | AMPER(_) => {
       // @pkg.TypeName::Constr
+      // TypeName::@pkg.Constr
       // TypeName::Constr
       // The "&" case is just for error recovery and consistency with yacc parser
       let type_name = self.parse_type_name()
       self.expect_token(TK_COLONCOLON)
-      let right_loc = self.peek_location()
-      let right = self.expect_uident(context="constructor name")
-      let loc = self.loc_start_with(spos)
-      {
-        name: { name: right, loc: right_loc },
-        extra_info: TypeName(type_name),
-        loc,
+      let (extra_info, right_loc, right) = if self.peek_token()
+        is PACKAGE_NAME(pkg) &&
+        self.peek_token(nth=1) is DOT_UIDENT(_) {
+        self.skip()
+        let right_loc = self.peek_location()
+        let right = self.expect_dot_uident(context="constructor name")
+        (
+          @syntax.ConstructorExtraInfo::TypeNameWithConstrPackage(
+            type_name~,
+            pkg~,
+          ),
+          right_loc,
+          right,
+        )
+      } else {
+        let right_loc = self.peek_location()
+        let right = self.expect_uident(context="constructor name")
+        (@syntax.ConstructorExtraInfo::TypeName(type_name), right_loc, right)
       }
+      let loc = self.loc_start_with(spos)
+      { name: { name: right, loc: right_loc }, extra_info, loc }
     }
     other => {
       let loc = self.peek_location()
@@ -670,6 +706,7 @@ fn State::parse_top_func(
 ) -> @syntax.Impl {
   let fun_decl = self.parse_fun_decl(attrs~)
   let fun_decl = { ..fun_decl, vis, }
+  let mut where_clause : @syntax.WhereClause? = None
   let decl_body : @syntax.DeclBody = if is_declare {
     DeclNone
   } else if self.peek_token() is EQUAL {
@@ -693,11 +730,12 @@ fn State::parse_top_func(
       }
     }
   } else {
+    where_clause = self.parse_where_clause()
     let (local_types, body) = self.parse_block_expr_with_local_types()
     DeclBody(expr=body, local_types~)
   }
   let loc = self.loc_start_with(spos)
-  TopFuncDef(fun_decl~, decl_body~, loc~)
+  TopFuncDef(fun_decl~, decl_body~, where_clause~, loc~)
 }
 
 ///|
@@ -867,6 +905,51 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         is_declare,
       })
     }
+    EXTENUM => {
+      self.expect_token(TK_EXTENUM)
+      let target = self.parse_type_name()
+      let (tycon, tycon_loc) = match target.name {
+        Ident(name~) => (name, target.loc)
+        Dot(id~, ..) => (id, target.loc)
+      }
+      let params = self.parse_opt_type_params_no_constraints()
+      let components : @syntax.TypeDesc = if self.peek_token() is PLUS_EQUAL {
+        self.expect_token(TK_PLUS_EQUAL)
+        let constructors = self.surround_series(
+            invalid_delims=[TK_COMMA],
+            left=TK_LBRACE,
+            right=TK_RBRACE,
+            delim=TK_SEMI,
+            State::parse_constr_decl,
+          )
+          |> @list.from_array
+        ExtendEnum(target~, constructors~)
+      } else {
+        let constrs = self.surround_series(
+            invalid_delims=[TK_COMMA],
+            left=TK_LBRACE,
+            right=TK_RBRACE,
+            delim=TK_SEMI,
+            State::parse_constr_decl,
+          )
+          |> @list.from_array
+        ExtensibleEnum(constrs)
+      }
+      let deriving = self.parse_deriving_directive_list()
+      let loc = self.loc_start_with(spos)
+      TopTypeDef({
+        tycon,
+        tycon_loc,
+        params,
+        components,
+        type_vis: vis,
+        doc: DocString::empty(),
+        deriving,
+        loc,
+        attrs,
+        is_declare,
+      })
+    }
     LET | CONST => {
       let (is_constant, binder) = match self.peek_token() {
         LET => {
@@ -938,6 +1021,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
               code=CodeMultilineString(@list.from_array(xs)),
             ),
           ),
+          where_clause=None,
           loc~,
         )
       } else {
@@ -950,6 +1034,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             decl_body=DeclStubs(
               Import(module_name=body, func_name=fname, language=Some(language)),
             ),
+            where_clause=None,
             loc~,
           )
         } else {
@@ -959,6 +1044,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             decl_body=DeclStubs(
               Embedded(language=Some(language), code=CodeString(body)),
             ),
+            where_clause=None,
             loc~,
           )
         }
@@ -2209,7 +2295,8 @@ priv enum ArrayPatternDotDot {
 ///|
 fn is_binop(tok : Token) -> Bool {
   match tok {
-    BARBAR
+    IMPLIES
+    | BARBAR
     | AMPERAMPER
     | BAR
     | CARET
@@ -2227,6 +2314,7 @@ fn is_binop(tok : Token) -> Bool {
 ///|
 fn get_binop_prior_assoc(tok : Token) -> (Int, Assocativity) {
   match tok {
+    IMPLIES => (0, Right)
     BARBAR => (1, Right)
     AMPERAMPER => (2, Right)
     BAR => (4, Left)
@@ -2247,6 +2335,11 @@ fn State::parse_binop(self : Self) -> @syntax.Var {
     return { name: Ident(name="?binop"), loc }
   }
   match self.peek_token() {
+    IMPLIES => {
+      let loc = self.peek_location()
+      self.expect_token(TK_IMPLIES)
+      { name: Ident(name="→"), loc }
+    }
     BARBAR => {
       let loc = self.peek_location()
       self.expect_token(TK_BARBAR)
@@ -2332,8 +2425,57 @@ fn State::parse_loop_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr 
       |> @list.from_array
     Panic(_) => @list.new()
   }
+  let loop_nobreak = if self.peek_token() is NOBREAK {
+    self.with_follow(follow_set=[TK_LBRACE], fn(state) {
+      state.expect_token(TK_NOBREAK)
+    })
+    Some(self.parse_block_expr())
+  } else {
+    None
+  }
   let loc = self.loc_start_with(spos)
-  Loop(arg~, body~, label~, loop_loc~, loc~)
+  Loop(arg~, body~, loop_nobreak~, label~, loop_loc~, loc~)
+}
+
+///|
+fn State::parse_loop_binder_with_value(
+  self : State,
+) -> (@syntax.Binder, @syntax.Expr) {
+  let binder = self.parse_binder(context="loop variable name of `for`")
+  self.expect_token(TK_EQUAL)
+  let value = self.parse_expr()
+  (binder, value)
+}
+
+///|
+fn State::parse_loop_binder_with_infix_value(
+  self : State,
+) -> (@syntax.Binder, @syntax.Expr) {
+  let binder = self.parse_binder(context="loop variable name of `for`")
+  self.expect_token(TK_EQUAL)
+  let value = self.parse_infix_expr(parsed=None)
+  (binder, value)
+}
+
+///|
+fn State::parse_foreach_binder(self : State) -> @syntax.Binder? {
+  match self.peek_token() {
+    UNDERSCORE => {
+      self.skip()
+      None
+    }
+    LIDENT(name) => {
+      let loc = self.peek_location()
+      self.skip()
+      Some({ name, loc })
+    }
+    other => {
+      let loc = self.peek_location()
+      self.report_unexpected(other, [TK_LIDENT, TK_UNDERSCORE], loc)
+      self.panic() |> ignore
+      None
+    }
+  }
 }
 
 ///|
@@ -2423,29 +2565,34 @@ fn State::parse_foreach_loop(
     return Hole(loc~, kind=Synthesized)
   }
   let binders = self.with_follow(follow_set=[TK_IN], fn(state) {
-    state.sepby1(delim=TK_COMMA, fn(state) -> @syntax.Binder? {
-      match state.peek_token() {
-        UNDERSCORE => {
-          state.skip()
-          None
-        }
-        LIDENT(name) => {
-          let loc = state.peek_location()
-          state.skip()
-          Some({ name, loc })
-        }
-        other => {
-          let loc = state.peek_location()
-          state.report_unexpected(other, [TK_LIDENT, TK_UNDERSCORE], loc)
-          state.panic() |> ignore
-          None
-        }
-      }
-    })
+    state.sepby1(delim=TK_COMMA, State::parse_foreach_binder)
     |> @list.from_array
   })
   self.expect_token(TK_IN)
   let expr = self.parse_expr()
+  let (init, continue_block) = if self.peek_token() is SEMI(_) {
+    self.skip()
+    let (init, _) = self.series_with_follow(
+      delim=TK_COMMA,
+      follow_set=[TK_SEMI, TK_LBRACE],
+      State::parse_loop_binder_with_value,
+    )
+    let init = @list.from_array(init)
+    let continue_block = if self.peek_token() is SEMI(_) {
+      self.skip()
+      let (continue_block, _) = self.series_with_follow(
+        delim=TK_COMMA,
+        follow_set=[TK_LBRACE],
+        State::parse_loop_binder_with_value,
+      )
+      @list.from_array(continue_block)
+    } else {
+      @list.empty()
+    }
+    (init, continue_block)
+  } else {
+    (@list.empty(), @list.empty())
+  }
   let body = self.parse_block_expr()
   let else_block = if self.peek_token() is NOBREAK {
     self.skip()
@@ -2453,8 +2600,19 @@ fn State::parse_foreach_loop(
   } else {
     None
   }
+  let where_clause = self.parse_where_clause()
   let loc = self.loc_start_with(spos)
-  ForEach(binders~, expr~, body~, else_block~, loc~, label~)
+  ForEach(
+    binders~,
+    expr~,
+    init~,
+    continue_block~,
+    body~,
+    else_block~,
+    where_clause~,
+    loc~,
+    label~,
+  )
 }
 
 ///|
@@ -2466,17 +2624,10 @@ fn State::parse_for_loop(
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
   }
-  fn parse_binder_with_value(state : State) -> (@syntax.Binder, @syntax.Expr) {
-    let binder = state.parse_binder(context="loop variable name of `for`")
-    state.expect_token(TK_EQUAL)
-    let value = state.parse_expr()
-    (binder, value)
-  }
-
   let (binders, _) = self.series_with_follow(
     delim=TK_COMMA,
     follow_set=[TK_SEMI, TK_LBRACE],
-    parse_binder_with_value,
+    State::parse_loop_binder_with_value,
   )
   let binders = @list.from_array(binders)
   let (condition, continue_block) = match self.peek_token() {
@@ -2489,7 +2640,7 @@ fn State::parse_for_loop(
       let (continue_block, _) = self.series_with_follow(
         delim=TK_COMMA,
         follow_set=[TK_LBRACE],
-        parse_binder_with_value,
+        State::parse_loop_binder_with_value,
       )
       let continue_block = @list.from_array(continue_block)
       self.pop_sync(TK_LBRACE)
@@ -2886,7 +3037,12 @@ fn State::parse_lex_pattern(
       self.skip()
       (@list.singleton(Wildcard(loc~)), loc)
     }
-    REGEX_LITERAL(_) | REGEX_INTERP(_) | STRING(_) | INTERP(_) => {
+    REGEX_LITERAL(_)
+    | REGEX_INTERP(_)
+    | STRING(_)
+    | INTERP(_)
+    | UIDENT(_)
+    | PACKAGE_NAME(_) => {
       let spos = self.peek_spos()
       let pat = self.parse_lex_simple_atom_pattern()
       (@list.singleton(Pattern(pat)), self.loc_start_with(spos))
@@ -2952,6 +3108,8 @@ fn State::parse_lex_pattern_sequence(
       | REGEX_INTERP(_)
       | STRING(_)
       | INTERP(_)
+      | UIDENT(_)
+      | PACKAGE_NAME(_)
       | LPAREN => {
         if tok is SEMI(_) {
           self.skip()
@@ -2969,8 +3127,12 @@ fn State::parse_lex_pattern_sequence(
 ///|
 fn State::parse_lex_atom_pattern(self : State) -> @syntax.LexPattern {
   match self.peek_token() {
-    REGEX_LITERAL(_) | REGEX_INTERP(_) | STRING(_) | INTERP(_) =>
-      self.parse_lex_simple_atom_pattern()
+    REGEX_LITERAL(_)
+    | REGEX_INTERP(_)
+    | STRING(_)
+    | INTERP(_)
+    | UIDENT(_)
+    | PACKAGE_NAME(_) => self.parse_lex_simple_atom_pattern()
     LPAREN => {
       self.skip()
       let alias_spos = self.peek_spos()
@@ -3011,7 +3173,7 @@ fn State::parse_lex_simple_atom_pattern(self : State) -> @syntax.LexPattern {
     REGEX_LITERAL(lit) => {
       let loc = self.peek_location()
       self.skip()
-      Regex(lit~, loc~)
+      Regex(lit~, offset=3, loc~)
     }
     REGEX_INTERP(elems) => {
       let loc = self.peek_location()
@@ -3022,13 +3184,19 @@ fn State::parse_lex_simple_atom_pattern(self : State) -> @syntax.LexPattern {
     STRING(lit) => {
       let loc = self.peek_location()
       self.skip()
-      Regex(lit~, loc~)
+      Regex(lit~, offset=1, loc~)
     }
     INTERP(elems) => {
       let loc = self.peek_location()
       self.skip()
       let elems = @syntax.make_interps(elems)
       RegexInterp(elems~, loc~)
+    }
+    UIDENT(_) | PACKAGE_NAME(_) => {
+      let spos = self.peek_spos()
+      let lid = self.parse_qual_uident()
+      let loc = self.loc_start_with(spos)
+      ConstantRef(lid~, loc~)
     }
     _ => panic()
   }
@@ -3181,6 +3349,35 @@ fn State::parse_expr_or_binder(self : Self) -> ExprOrBinderFragment {
 }
 
 ///|
+fn State::parse_quantifier_expr(self : Self) -> @syntax.Expr {
+  if self.mode is Panic(loc~, ..) {
+    return Hole(loc~, kind=Synthesized)
+  }
+  let spos = self.peek_spos()
+  let kind : @syntax.PredicateQuantifierKind = match self.peek_token() {
+    FORALL => {
+      self.skip()
+      Forall
+    }
+    EXISTS => {
+      self.skip()
+      Exists
+    }
+    _ => panic()
+  }
+  let binder = self.parse_binder(context="quantifier binder")
+  self.expect_token(TK_COLON)
+  let binder_ty = self.parse_type()
+  self.expect_token(TK_COMMA)
+  let body = match self.peek_token() {
+    FORALL | EXISTS => self.parse_quantifier_expr()
+    _ => self.parse_infix_expr(parsed=None)
+  }
+  let loc = self.loc_start_with(spos)
+  Quantifier(kind~, binder~, binder_ty~, body~, loc~)
+}
+
+///|
 fn State::parse_expr(self : Self) -> @syntax.Expr {
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
@@ -3214,6 +3411,7 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
     TRY_EXCLAMATION => self.parse_try_exclamation()
     IF => self.parse_if_expr()
     MATCH => self.parse_match_expr()
+    FORALL | EXISTS => self.parse_quantifier_expr()
     LPAREN => self.handle_lparen()
     LIDENT(_) | UNDERSCORE if self.peek_token(nth=1) is FAT_ARROW => {
       let spos = self.peek_spos()
@@ -3313,8 +3511,21 @@ fn State::parse_simple_try_expr(
 }
 
 ///|
+fn State::parse_arrow_fn_body(
+  self : Self,
+  explicit_brace_body~ : Bool,
+) -> @syntax.Expr {
+  if explicit_brace_body && self.peek_token() is LBRACE {
+    self.parse_block_expr()
+  } else {
+    self.parse_expr_stmt_no_break_continue_return()
+  }
+}
+
+///|
 fn State::try_parse_arrow_fn_expr(
   self : State,
+  explicit_brace_body? : Bool = false,
 ) -> Result[@syntax.Expr, @syntax.Expr?] {
   match self.peek_token() {
     LPAREN => {
@@ -3352,7 +3563,7 @@ fn State::try_parse_arrow_fn_expr(
               Expr(expr) => (as_binder(expr), None)
             }
           })
-          let body = self.parse_expr_stmt_no_break_continue_return()
+          let body = self.parse_arrow_fn_body(explicit_brace_body~)
           let loc = self.loc_start_with(spos)
           Ok(
             @syntax.Expr::Function(
@@ -3405,7 +3616,7 @@ fn State::try_parse_arrow_fn_expr(
       }
       let params_loc = self.loc_start_with(spos)
       self.expect_token(TK_FAT_ARROW)
-      let body = self.parse_expr_stmt_no_break_continue_return()
+      let body = self.parse_arrow_fn_body(explicit_brace_body~)
       let loc = self.loc_start_with(spos)
       Ok(
         @syntax.Expr::Function(
@@ -3430,46 +3641,60 @@ fn State::parse_pipe_expr(self : Self, parsed~ : @syntax.Expr?) -> @syntax.Expr 
   }
   let spos = self.peek_spos_with_parsed(parsed~)
   let mut lhs = self.parse_infix_expr(parsed~)
-  while self.peek_token() is PIPE {
-    self.skip()
-    let rhs = if self.peek_token() is LIDENT(binder) &&
-      self.peek_token(nth=1) is FAT_ARROW {
-      let binder_loc = self.peek_location()
-      let spos = self.peek_spos()
-      self.skip()
-      self.skip()
-      let body = if self.peek_token() is LBRACE {
-        self.parse_block_expr()
-      } else {
-        let loc = self.peek_location()
-        self.report_failed_to_parse(self.peek_token(), "`{ ... }`", loc)
-        self.parse_infix_expr(parsed=None)
-      }
-      let loc = self.loc_start_with(spos)
-      let binder = @syntax.Binder::{ name: binder, loc: binder_loc }
-      let func = @syntax.make_arrow_fn(
-        params_loc=binder_loc,
-        loc~,
-        @list.singleton((Named(binder), None)),
-        body,
-      )
-      @syntax.Expr::Function(func~, loc~)
-    } else {
-      match self.try_parse_arrow_fn_expr() {
-        Ok(fn_expr) => {
-          // error recover: `(x) => e`, `e1 |> (x,y) => e2` or `e1 |> (x : Int) => e2`
-          let loc = fn_expr.loc()
-          ignore(loc)
-          // self.report_unexpected_structure(found="form of anonymous function", expected="`x => { ... }`", loc~)
-          fn_expr
+  while self.peek_token() is (PIPE | PIPE_LEFT) {
+    match self.peek_token() {
+      PIPE => {
+        self.skip()
+        let rhs = if self.peek_token() is LIDENT(binder) &&
+          self.peek_token(nth=1) is FAT_ARROW {
+          let binder_loc = self.peek_location()
+          let spos = self.peek_spos()
+          self.skip()
+          self.skip()
+          let body = if self.peek_token() is LBRACE {
+            self.parse_block_expr()
+          } else {
+            let loc = self.peek_location()
+            self.report_failed_to_parse(self.peek_token(), "`{ ... }`", loc)
+            self.parse_infix_expr(parsed=None)
+          }
+          let loc = self.loc_start_with(spos)
+          let binder = @syntax.Binder::{ name: binder, loc: binder_loc }
+          let func = @syntax.make_arrow_fn(
+            params_loc=binder_loc,
+            loc~,
+            @list.singleton((Named(binder), None)),
+            body,
+          )
+          @syntax.Expr::Function(func~, loc~)
+        } else {
+          match self.try_parse_arrow_fn_expr() {
+            Ok(fn_expr) => {
+              // error recover: `(x) => e`, `e1 |> (x,y) => e2` or `e1 |> (x : Int) => e2`
+              let loc = fn_expr.loc()
+              ignore(loc)
+              // self.report_unexpected_structure(found="form of anonymous function", expected="`x => { ... }`", loc~)
+              fn_expr
+            }
+            Err(parsed) =>
+              // allow `lhs |> infix_expr`, the typer will check infix_expr in a later stage.
+              self.parse_infix_expr(parsed~)
+          }
         }
-        Err(parsed) =>
-          // allow `lhs |> infix_expr`, the typer will check infix_expr in a later stage.
-          self.parse_infix_expr(parsed~)
+        let loc = self.loc_start_with(spos)
+        lhs = Pipe(lhs~, rhs~, loc~)
       }
+      PIPE_LEFT => {
+        self.skip()
+        let rhs = match self.try_parse_arrow_fn_expr(explicit_brace_body=true) {
+          Ok(fn_expr) => fn_expr
+          Err(parsed) => self.parse_infix_expr(parsed~)
+        }
+        let loc = self.loc_start_with(spos)
+        lhs = RevPipe(lhs~, rhs~, loc~)
+      }
+      _ => panic()
     }
-    let loc = self.loc_start_with(spos)
-    lhs = Pipe(lhs~, rhs~, loc~)
   }
   lhs
 }
@@ -3482,9 +3707,18 @@ fn State::parse_infix_expr(
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
   }
-  fn make_infix(lpos, lhs, op, rhs) -> (Position, @syntax.Expr) {
+  fn make_infix(
+    lpos : Position,
+    lhs : @syntax.Expr,
+    op : @syntax.Var,
+    rhs : @syntax.Expr,
+  ) -> (Position, @syntax.Expr) {
     let loc = self.loc_start_with(lpos)
-    (lpos, Infix(lhs~, op~, rhs~, loc~))
+    let expr : @syntax.Expr = match op.name {
+      Ident(name="→") => @syntax.Expr::Implies(lhs~, rhs~, loc~)
+      _ => @syntax.Expr::Infix(lhs~, op~, rhs~, loc~)
+    }
+    (lpos, expr)
   }
 
   fn push_infix(
@@ -3549,6 +3783,127 @@ fn State::parse_infix_expr(
 }
 
 ///|
+fn State::parse_regex_match_binding(
+  self : Self,
+) -> (@syntax.Label, @syntax.Binder?) {
+  match self.peek_token() {
+    LIDENT(name) if self.peek_token(nth=1) is EQUAL => {
+      let label : @syntax.Label = { name, loc: self.peek_location() }
+      self.skip()
+      self.expect_token(TK_EQUAL)
+      let binder = self.parse_binder(context="regex match binding")
+      (label, Some(binder))
+    }
+    POST_LABEL(name) => {
+      let label : @syntax.Label = { name, loc: self.peek_location() }
+      self.skip()
+      (label, None)
+    }
+    other => {
+      let loc = self.peek_location()
+      self.report_unexpected(other, [TK_LIDENT, TK_POST_LABEL], loc)
+      self.panic() |> ignore
+      ({ name: "", loc }, None)
+    }
+  }
+}
+
+///|
+fn State::parse_regex_atom_pattern(self : Self) -> @syntax.RegexPattern {
+  let spos = self.peek_spos()
+  match self.peek_token() {
+    REGEX_LITERAL(lit) => {
+      let loc = self.peek_location()
+      self.skip()
+      @syntax.RegexPattern::Literal(lit~, loc~)
+    }
+    UIDENT(_) | PACKAGE_NAME(_) => {
+      let lid = self.parse_qual_uident()
+      let loc = self.loc_start_with(spos)
+      @syntax.RegexPattern::Reference(lid~, loc~)
+    }
+    LPAREN => {
+      self.skip()
+      let pat = self.parse_regex_as_pattern()
+      self.expect_token(TK_RPAREN)
+      pat
+    }
+    other => {
+      let loc = self.peek_location()
+      self.report_failed_to_parse(other, "regex pattern", loc)
+      self.panic() |> ignore
+      @syntax.RegexPattern::Literal(lit="", loc~)
+    }
+  }
+}
+
+///|
+fn State::parse_regex_sequence_pattern(self : Self) -> @syntax.RegexPattern {
+  let spos = self.peek_spos()
+  let mut pat = self.parse_regex_atom_pattern()
+  while self.peek_token() is PLUS {
+    self.skip()
+    let rhs = self.parse_regex_atom_pattern()
+    let loc = self.loc_start_with(spos)
+    pat = @syntax.RegexPattern::Sequence(pat1=pat, pat2=rhs, loc~)
+  }
+  pat
+}
+
+///|
+fn State::parse_regex_or_pattern(self : Self) -> @syntax.RegexPattern {
+  let spos = self.peek_spos()
+  let mut pat = self.parse_regex_sequence_pattern()
+  while self.peek_token() is BAR {
+    self.skip()
+    let rhs = self.parse_regex_sequence_pattern()
+    let loc = self.loc_start_with(spos)
+    pat = @syntax.RegexPattern::Alternation(pat1=pat, pat2=rhs, loc~)
+  }
+  pat
+}
+
+///|
+fn State::parse_regex_as_pattern(self : Self) -> @syntax.RegexPattern {
+  let spos = self.peek_spos()
+  let pat = self.parse_regex_or_pattern()
+  if self.peek_token() is AS {
+    self.skip()
+    let binder = self.parse_binder(context="regex alias")
+    let loc = self.loc_start_with(spos)
+    @syntax.RegexPattern::Alias(pat~, binder~, loc~)
+  } else {
+    pat
+  }
+}
+
+///|
+fn State::parse_regex_match_rhs(
+  self : Self,
+) -> (@syntax.RegexPattern, @list.List[(@syntax.Label, @syntax.Binder?)]) {
+  match self.peek_token() {
+    LPAREN => {
+      self.skip()
+      let pat = self.parse_regex_as_pattern()
+      let bindings = if self.peek_token() is COMMA {
+        self.skip()
+        let (bindings, _) = self.series_with_follow(
+          delim=TK_COMMA,
+          follow_set=[TK_RPAREN],
+          State::parse_regex_match_binding,
+        )
+        @list.from_array(bindings)
+      } else {
+        @list.empty()
+      }
+      self.expect_token(TK_RPAREN)
+      (pat, bindings)
+    }
+    _ => (self.parse_regex_atom_pattern(), @list.empty())
+  }
+}
+
+///|
 fn State::parse_postfix_expr(
   self : Self,
   parsed~ : @syntax.Expr?,
@@ -3582,6 +3937,12 @@ fn State::parse_postfix_expr(
         strategy~,
         loc=self.loc_start_with(spos),
       )
+    }
+    EQ_TILDE => {
+      self.skip()
+      let (pat, bindings) = self.parse_regex_match_rhs()
+      let loc = self.loc_start_with(spos)
+      RegexMatch(expr~, pat~, bindings~, loc~)
     }
     _ => expr
   }
@@ -3818,7 +4179,8 @@ fn State::parse_constr_expr(
   }
   let name_loc_start = self.peek_spos()
   let constr_name = match extra_info {
-    Package(_) => self.expect_dot_uident(context="constructor name")
+    Package(_) | TypeNameWithConstrPackage(_) =>
+      self.expect_dot_uident(context="constructor name")
     NoExtraInfo | TypeName(_) => self.expect_uident(context="constructor name")
   }
   let name_loc = self.loc_start_with(name_loc_start)
@@ -4063,17 +4425,7 @@ fn State::parse_apply_attr(self : Self) -> @syntax.ApplyAttr {
   if self.mode is Panic(..) {
     return NoAttr
   }
-  match self.peek_token() {
-    EXCLAMATION => {
-      self.skip()
-      Exclamation
-    }
-    QUESTION => {
-      self.skip()
-      Question
-    }
-    _ => NoAttr
-  }
+  return NoAttr
 }
 
 ///|
@@ -4128,6 +4480,11 @@ fn State::parse_simple_expr(
       self.expect_token(TK_STRING)
       Constant(c=String(x), loc~)
     }
+    REGEX_LITERAL(x) => {
+      let loc = self.peek_location()
+      self.expect_token(TK_REGEX_LITERAL)
+      Constant(c=Regex(x), loc~)
+    }
     BYTES(x) => {
       let loc = self.peek_location()
       self.expect_token(TK_BYTES)
@@ -4146,8 +4503,9 @@ fn State::parse_simple_expr(
             self.expect_token(TK_MULTILINE_INTERP)
             let converted : Array[@syntax.InterpElem] = xs.map(fn(elem) {
               match elem {
-                InterpLit(repr~, loc~) => Literal(repr~, loc~)
-                InterpSource(source) => Source(source)
+                InterpLit(repr~, loc~) =>
+                  @syntax.InterpElem::Literal(repr~, loc~)
+                InterpSource(source) => @syntax.InterpElem::Source(source)
               }
             })
             elems.push(Interp(@list.from_array(converted)))
@@ -4217,6 +4575,9 @@ fn State::parse_simple_expr(
     }
     LPAREN => self.parse_tuple_or_constraint()
     LBRACKET => {
+      if self.peek_token(nth=1) is FOR {
+        return self.parse_list_comprehension()
+      }
       let spos = self.peek_spos()
       let mut to_spread = false
       let elems = self.surround_series(
@@ -4279,7 +4640,9 @@ fn State::parse_simple_expr(
         | FLOAT(_)
         | MINUS
         | BYTES(_)
-        | STRING(_) if self.peek_token(nth=2) is COLON => self.parse_map_expr()
+        | STRING(_)
+        | REGEX_LITERAL(_) if self.peek_token(nth=2) is COLON =>
+          self.parse_map_expr()
         _ => {
           let expr = self.parse_block_expr()
           let loc = self.loc_start_with(spos)
@@ -4317,6 +4680,13 @@ fn State::parse_coloncolon_expr(self : Self) -> @syntax.Expr {
       Method(type_name~, method_name~, loc~)
     }
     UIDENT(_) => self.parse_constr_expr(spos~, extra_info=TypeName(type_name))
+    PACKAGE_NAME(pkg) if self.peek_token(nth=1) is DOT_UIDENT(_) => {
+      self.skip()
+      self.parse_constr_expr(
+        spos~,
+        extra_info=TypeNameWithConstrPackage(type_name~, pkg~),
+      )
+    }
     LBRACE => self.parse_record_expr(type_name=Some(type_name))
     other => {
       self.report_failed_to_parse(
@@ -4336,6 +4706,157 @@ fn State::parse_coloncolon_expr(self : Self) -> @syntax.Expr {
       )
     }
   }
+}
+
+///|
+fn State::parse_template_literal_expr(self : Self) -> @syntax.Expr {
+  match self.peek_token() {
+    STRING(x) => {
+      let loc = self.peek_location()
+      self.expect_token(TK_STRING)
+      Constant(c=String(x), loc~)
+    }
+    INTERP(xs) => {
+      let loc = self.peek_location()
+      self.skip()
+      @syntax.make_interp_expr(loc~, xs)
+    }
+    MULTILINE_STRING(_) | MULTILINE_INTERP(_) => {
+      let spos = self.peek_spos()
+      let elems : Array[@syntax.MultilineStringElem] = []
+      while true {
+        match self.peek_token() {
+          MULTILINE_STRING(x) => {
+            self.expect_token(TK_MULTILINE_STRING)
+            elems.push(String(x))
+          }
+          MULTILINE_INTERP(xs) => {
+            self.expect_token(TK_MULTILINE_INTERP)
+            let converted : Array[@syntax.InterpElem] = xs.map(fn(elem) {
+              match elem {
+                InterpLit(repr~, loc~) =>
+                  @syntax.InterpElem::Literal(repr~, loc~)
+                InterpSource(source) => @syntax.InterpElem::Source(source)
+              }
+            })
+            elems.push(Interp(@list.from_array(converted)))
+          }
+          _ => break
+        }
+      }
+      let loc = self.loc_start_with(spos)
+      MultilineString(elems=@list.from_array(elems), loc~)
+    }
+    other => {
+      let loc = self.peek_location()
+      self.report_failed_to_parse(other, "template string", loc)
+      self.panic() |> ignore
+      Hole(loc~, kind=Synthesized)
+    }
+  }
+}
+
+///|
+fn State::next_is_foreach_comprehension(self : Self) -> Bool {
+  let mut nth = 0
+  match self.peek_token(nth~) {
+    LIDENT(_) | UNDERSCORE => ()
+    _ => return false
+  }
+  while true {
+    nth = nth + 1
+    match self.peek_token(nth~) {
+      IN => return true
+      COMMA => {
+        nth = nth + 1
+        match self.peek_token(nth~) {
+          LIDENT(_) | UNDERSCORE => continue
+          _ => return false
+        }
+      }
+      _ => return false
+    }
+  }
+  false
+}
+
+///|
+fn State::parse_list_comprehension(self : Self) -> @syntax.Expr {
+  let spos = self.peek_spos()
+  self.expect_token(TK_LBRACKET)
+  let for_spos = self.peek_spos()
+  self.expect_token(TK_FOR)
+  let kind : @syntax.ListComprehensionKind = if self.next_is_foreach_comprehension() {
+    let binders = self.sepby1(delim=TK_COMMA, State::parse_foreach_binder)
+      |> @list.from_array
+    self.expect_token(TK_IN)
+    let expr = self.parse_infix_expr(parsed=None)
+    let (init, continue_block) = if self.peek_token() is SEMI(_) {
+      self.skip()
+      let (init, _) = self.series_with_follow(
+        delim=TK_COMMA,
+        follow_set=[TK_SEMI, TK_IF, TK_FAT_ARROW],
+        State::parse_loop_binder_with_infix_value,
+      )
+      let init = @list.from_array(init)
+      let continue_block = if self.peek_token() is SEMI(_) {
+        self.skip()
+        let (continue_block, _) = self.series_with_follow(
+          delim=TK_COMMA,
+          follow_set=[TK_IF, TK_FAT_ARROW],
+          State::parse_loop_binder_with_infix_value,
+        )
+        @list.from_array(continue_block)
+      } else {
+        @list.empty()
+      }
+      (init, continue_block)
+    } else {
+      (@list.empty(), @list.empty())
+    }
+    Foreach(binders~, expr~, init~, continue_block~)
+  } else {
+    let (binders, _) = self.series_with_follow(
+      delim=TK_COMMA,
+      follow_set=[TK_SEMI, TK_IF, TK_FAT_ARROW],
+      State::parse_loop_binder_with_infix_value,
+    )
+    let binders = @list.from_array(binders)
+    let (condition, continue_block) = if self.peek_token() is SEMI(_) {
+      self.skip()
+      let condition = match self.peek_token() {
+        SEMI(_) | IF | FAT_ARROW => None
+        _ => Some(self.parse_infix_expr(parsed=None))
+      }
+      let continue_block = if self.peek_token() is SEMI(_) {
+        self.skip()
+        let (continue_block, _) = self.series_with_follow(
+          delim=TK_COMMA,
+          follow_set=[TK_IF, TK_FAT_ARROW],
+          State::parse_loop_binder_with_infix_value,
+        )
+        @list.from_array(continue_block)
+      } else {
+        @list.empty()
+      }
+      (condition, continue_block)
+    } else {
+      (None, @list.empty())
+    }
+    let for_loc = self.loc_start_with(for_spos)
+    For(binders~, condition~, continue_block~, for_loc~)
+  }
+  let guard_ = if self.peek_token() is IF {
+    self.skip()
+    Some(self.parse_infix_expr(parsed=None))
+  } else {
+    None
+  }
+  self.expect_token(TK_FAT_ARROW)
+  let body = self.parse_expr()
+  self.expect_token(TK_RBRACKET)
+  let loc = self.loc_start_with(spos)
+  ListComprehension(kind~, guard_~, body~, loc~)
 }
 
 ///|
@@ -4481,6 +5002,7 @@ fn State::parse_map_expr(self : Self) -> @syntax.Expr {
       }
       BYTES(x) => parse_map_expr_elem(Bytes(x))
       STRING(x) => parse_map_expr_elem(String(x))
+      REGEX_LITERAL(x) => parse_map_expr_elem(Regex(x))
       other => {
         let other_loc = state.peek_location()
         state.report_unexpected(other, first_map_pattern_key, other_loc)
@@ -4733,6 +5255,22 @@ fn State::parse_stmt(self : Self) -> Statement {
       let loc = self.loc_start_with(spos)
       StmtDefer(expr~, loc~)
     }
+    PROOF_ASSERT => {
+      let spos = self.peek_spos()
+      self.skip()
+      let expr = self.parse_expr()
+      let loc = self.loc_start_with(spos)
+      StmtExpr(ProofAssert(expr~, loc~))
+    }
+    PROOF_LET => {
+      let spos = self.peek_spos()
+      self.skip()
+      let binder = self.parse_binder(context="proof binding")
+      self.expect_token(TK_EQUAL)
+      let expr = self.parse_expr()
+      let loc = self.loc_start_with(spos)
+      StmtExpr(ProofLet(binder~, expr~, loc~))
+    }
     _ => StmtExpr(self.parse_expr_stmt())
   }
 }
@@ -4799,6 +5337,7 @@ fn State::try_parse_condition_expr(self : Self) -> @syntax.Expr {
     | BREAK
     | RETURN
     | CONTINUE => self.handle_unexpected_expr_or_statement(context="condition")
+    FORALL | EXISTS => self.parse_quantifier_expr()
     _ => self.parse_infix_expr(parsed=None)
   }
 }
@@ -4839,6 +5378,29 @@ fn State::parse_assign_or_simple_expr(self : Self) -> @syntax.Expr {
           lhs
         }
       }
+    }
+    PLUS_EQUAL => {
+      let op_loc = self.peek_location()
+      let op : @syntax.Var = { name: Ident(name="+"), loc: op_loc }
+      self.expect_token(TK_PLUS_EQUAL)
+      let rhs = self.parse_expr()
+      let loc = self.loc_start_with(spos)
+      match @syntax.make_augmented_assign_opt(loc~, op, lhs, rhs) {
+        Some(res) => res
+        None => {
+          self.report_error({
+            loc: lhs.loc(),
+            msg: "Invalid left value in assignment",
+          })
+          lhs
+        }
+      }
+    }
+    LT_PLUS => {
+      self.expect_token(TK_LT_PLUS)
+      let template = self.parse_template_literal_expr()
+      let loc = self.loc_start_with(spos)
+      TemplateWriting(expr=lhs, template~, loc~)
     }
     _ => lhs
   }

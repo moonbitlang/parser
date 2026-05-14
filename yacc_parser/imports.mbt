@@ -67,6 +67,7 @@ using @syntax {
   type FieldName,
   type ConstrId,
   type LexPattern,
+  type RegexPattern,
   type LexTopPattern,
   type UsingKind,
   type LexCase,
