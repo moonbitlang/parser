@@ -2,12 +2,17 @@ import {
   "moonbitlang/parser/basic",
   "moonbitlang/parser/tokens",
   "moonbitlang/parser/lexer",
-  "moonbitlang/x/fs",
   "moonbitlang/core/immut/vector",
+  "moonbitlang/core/json",
 }
 
 import {
   "moonbitlang/core/test",
-  "moonbitlang/core/json",
   "moonbitlang/core/debug",
 } for "test"
+
+import {
+  "moonbitlang/core/test",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
+} for "wbtest"

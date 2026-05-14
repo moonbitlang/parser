@@ -609,7 +609,7 @@ fn parse_statements(state : State) -> Array[(String, Ast)] {
 }
 
 ///|
-pub fn moon_pkg_of_tokens(tokens : Triples) -> (Ast, Array[Report]) {
+fn moon_pkg_of_tokens(tokens : Triples) -> (Ast, Array[Report]) {
   if tokens.is_empty() {
     let loc = Location::{ start: dummy_pos, end: dummy_pos }
     return (Obj(Vector([]), loc~), [])
@@ -629,10 +629,7 @@ pub fn moon_pkg_of_tokens(tokens : Triples) -> (Ast, Array[Report]) {
 }
 
 ///|
-pub fn parse_string(
-  source : String,
-  name? : String = "",
-) -> (Ast, Array[Report]) {
+fn parse_string(source : String, name? : String = "") -> (Ast, Array[Report]) {
   let lex_result = @lexer.tokens_from_string(source, comment=false, name~)
   let (ast, reports) = moon_pkg_of_tokens(lex_result.tokens)
   let diagnostics = []
@@ -645,7 +642,3 @@ pub fn parse_string(
 }
 
 ///|
-pub fn parse_file(path : String) -> (Ast, Array[Report]) raise @fs.IOError {
-  let source = @fs.read_file_to_string(path)
-  parse_string(source, name=path)
-}
