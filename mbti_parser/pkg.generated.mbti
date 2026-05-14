@@ -11,6 +11,8 @@ import {
 // Values
 pub fn mbti(Array[(@tokens.Token, @basic.Position, @basic.Position)], initial_pos? : @basic.Position) -> @mbti_ast.Mbti raise ParseError
 
+pub fn parse_string(String, name? : String) -> (@mbti_ast.Mbti, Array[@basic.Report])
+
 // Errors
 pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])

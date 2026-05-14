@@ -25,6 +25,7 @@
 %token<String> INFIX3
 %token<String> INFIX4
 %token<String> AUGMENTED_ASSIGNMENT
+%token PLUS_EQUAL "+="
 %token EOF
 %token FALSE
 %token TRUE
@@ -50,6 +51,7 @@
 %token TRAITALIAS "traitalias"
 %token FNALIAS "fnalias"
 %token EQUAL "="
+%token EQ_TILDE "=~"
 %token LPAREN "("
 %token RPAREN ")"
 %token COMMA ","
@@ -77,10 +79,14 @@
 %token<String> PACKAGE_NAME
 %token AS "as"
 %token PIPE "|>"
+%token PIPE_LEFT "<|"
+%token LT_PLUS "<+"
 %token ELSE "else"
 %token FN "fn"
 %token IF "if"
 %token LET "let"
+%token PROOF_ASSERT "proof_assert"
+%token PROOF_LET "proof_let"
 %token CONST "const"
 %token MATCH "match"
 %token MUTABLE "mut"
@@ -105,6 +111,9 @@
 %token IS "is"
 %token SUBERROR        "suberror"
 %token AND "and"
+%token FORALL "∀"
+%token EXISTS "∃"
+%token IMPLIES "→"
 %token LETREC "letrec"
 %token USING "using"
 %token DECLARE         "declare"
@@ -112,6 +121,7 @@
 %token NOBREAK         "nobreak"
 %token WHERE           "where"
 %token ENUMVIEW "enumview"
+%token EXTENUM "extenum"
 %token TRY_QUESTION    "try?"
 %token TRY_EXCLAMATION "try!"
 %token LEXMATCH        "lexmatch"
@@ -120,18 +130,27 @@
 
 %%
 
+non_empty_list_commas_rev[T](X : T) -> @list.List[T]
+  : X { @list.singleton($1) }
+  | non_empty_list_commas_rev(X) "," X { $1.add($3) }
+  ;
+
+non_empty_list_commas[T](X : T) -> @list.List[T]
+  : non_empty_list_commas_rev(X) option(",") { $1.rev() }
+  ;
+
 mbti -> Mbti
-  : PACKAGE STRING ioption(";") imports sigs EOF { Mbti::{package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc)} }
+  : PACKAGE STRING ioption(";") imports sigs EOF { Mbti::{package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
   ;
 
 imports -> @list.List[PackageImport]
   :  { @list.empty() }
-  | "import" "{" separated_nonempty_list(",", package_import) "}" ";" { $3 }
+  | "import" "{" non_empty_list_commas(package_import) "}" ";" { $3 }
   ;
 
 package_import -> PackageImport
   : STRING { PackageImport::{name: $1, alias_: None} }
-  | STRING "as" LIDENT { PackageImport::{name: $1, alias_: Some($3)} }
+  | STRING "as" PACKAGE_NAME { PackageImport::{name: $1, alias_: Some($3)} }
   ;
 
 sigs -> @list.List[(Sig, Location)]
@@ -163,8 +182,19 @@ method_self_type_coloncolon -> MethodSelfType
   MethodSelfType::{ name : $1, is_object : false, loc : mk_loc($loc($1)) }
  }
  | "&" UIDENT "::" {
-  MethodSelfType::{ name : $2, is_object : true, loc : mk_loc($loc($1)) }
+  MethodSelfType::{ name : $2, is_object : true, loc : mk_loc($loc($2)) }
  }
+ ;
+
+luident -> Name
+  : lident { $1 }
+  | uident { $1 }
+  ;
+
+func_name -> (MethodSelfType?, Name)
+  : luident { (None, $1) }
+  | method_self_type_coloncolon luident { (Some($1), $2) }
+  ;
 
 method_prefix -> Option[Name]
   : { None }
@@ -173,14 +203,15 @@ method_prefix -> Option[Name]
 
 
 func_sig -> FuncSig
-  : attributes is_async FN loption(type_params_with_constraints) option(method_self_type_coloncolon) lident delimited("(", separated_list(",", parameter), ")") "->" return_type {
-    FuncSig::{ attrs: $1, is_async : $2, type_name: $5, name: $6, type_params: $4, params: $7, return_: $9}
+  : attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+    let (type_name, name) = $6
+    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
   }
   ;
 
 trait_method_sig -> TraitMethodSig
-  : attributes lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) { 
-    TraitMethodSig::{ attrs : $1, name: $2, params: $3, return_: $5, has_default: $6} 
+  : attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) { 
+    TraitMethodSig::{ attrs : $1, is_async: $2, name: $3, params: $4, return_: $6, has_default: $7} 
   }
   ;
 
@@ -189,28 +220,40 @@ trait_method_sig -> TraitMethodSig
   ;
 
 type_sig -> TypeSig
-  : attributes vis "type" type_decl_name_with_params {
-    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract} 
+  : attributes vis "type" type_decl_name_with_params optional_derive {
+    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5} 
   }
-  | attributes vis "suberror" uident option(type_) {
+  | attributes vis "suberror" uident option(type_) optional_derive {
     let exception_decl : @syntax.ExceptionDecl = match $5 {
       None => NoPayload
       Some(ty) => SinglePayload(ty)
     }
-    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(exception_decl)}
+    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(exception_decl), derives: $6}
   }
-  | attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" {
-    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6))}
+  | attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
+    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
   }
-  | attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" {
-    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6 }
+  | attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
+    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
   }
-  | attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" {
-    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6)}
+  | attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
+    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
   }
-  | attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" {
-    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6)}
+  | attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
   }
+  | attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+  }
+  | attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
+    let (name, type_params, target) = $4
+    TypeSig::{attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+  }
+  ;
+
+optional_derive -> @list.List[QualifiedName]
+  : { @list.empty() }
+  | "derive" "(" non_empty_list_commas(qualified_uident) ")" { $3 }
   ;
 
 impl_sig -> ImplSig
@@ -223,24 +266,27 @@ impl_sig -> ImplSig
   ;
 
 trait_sig -> TraitSig
-  : attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) "{" separated_nonempty_list(";", trait_method_sig) "}" { 
-    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $7} 
+  : attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body { 
+    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6} 
   }
-  | attributes vis "trait" uident {
-    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: @list.empty(), methods: @list.empty() } 
-  }
+  ;
+
+trait_body -> @list.List[TraitMethodSig]
+  : { @list.empty() }
+  | "{" separated_list(";", trait_method_sig) "}" { $2 }
   ;
 
 using_binder -> Name?
   : { None }
   | "as" uident { Some($2) }
+  ;
 
 alias_sig -> AliasSig
   : attributes vis "type"  type_decl_name_with_params "=" type_ {
     TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6) 
   }
-  | attributes "fnalias" uident "::" lident {
-    FuncAlias(attrs = $1,name=$5, type_name=$3)
+  | attributes vis "fnalias" uident "::" lident {
+    FuncAlias(attrs = $1,name=$6, type_name=$4)
   }
   | attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
     let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
@@ -273,36 +319,11 @@ record_decl_field -> FieldDecl
   }
   ;
 
-record_decl_constr -> FuncSig
-  : attributes is_async FN loption(type_params_with_constraints) option(method_self_type_coloncolon) lident delimited("(", separated_list(",", parameter), ")") "->" return_type {
-    FuncSig::{
-      attrs : $1, is_async : $2, type_name: $5, name: $6, type_params: $4, params: $7, return_: $9
-    }
-  }
-
 record_decl_body -> TypeDefinition
-  : {
-    Record(fields = @list.empty(), constr = None)
+  : separated_list(";", record_decl_field) {
+    Record(fields = $1, constr = None)
   }
-  | record_decl_constr {
-    Record(fields = @list.empty(), constr = Some($1))
-  }
-  | record_decl_body_nonempty {
-    let (fields, constr) = $1
-    Record(fields~, constr~)
-  }
-
-record_decl_body_nonempty -> (@list.List[FieldDecl], FuncSig?)
-  : record_decl_field ";" record_decl_constr {
-    (@list.singleton($1), Some($3))
-  }
-  | record_decl_field {
-    (@list.singleton($1), None)
-  }
-  | record_decl_field ";" record_decl_body_nonempty {
-    let (fields, constr) = $3
-    (fields.add($1), constr)
-  }
+  ;
 
 type_param_with_constraints -> TypeParamWithConstraints
   : uident { TypeParamWithConstraints::{name: $1, constraints: @list.empty()} }
@@ -335,6 +356,18 @@ type_decl_name_with_params -> (Name, @list.List[TypeParamNoConstraints])
   : uident optional_type_params_no_constraints { ($1, $2) }
   ;
 
+extensible_enum_extension_target -> (Name, @list.List[TypeParamNoConstraints], QualifiedName)
+  : uident optional_type_params_no_constraints {
+    let target = QualifiedName::{ name: Ident(name = $1.name), loc: $1.loc }
+    ($1, $2, target)
+  }
+  | PACKAGE_NAME DOT_UIDENT optional_type_params_no_constraints {
+    let name = Name::{ name: $2, loc: mk_loc($loc($2)) }
+    let target = QualifiedName::{ name: Dot(pkg = $1, id = $2), loc: mk_loc($sloc) }
+    (name, $3, target)
+  }
+  ;
+
 simple_type -> Type
   : simple_type "?" { Option(ty=$1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
   | "(" type_ "," separated_nonempty_list(",", type_) ")" { Tuple(tys=$4.add($2), loc=mk_loc($sloc)) }
@@ -353,6 +386,7 @@ type_ -> Type
 
 return_type -> (Type, ErrorType)
   : type_ { ($1, NoErrorType) }
+  | simple_type "noraise" { ($1, Noraise(loc=mk_loc($sloc))) }
   | simple_type "raise" { ($1, DefaultErrorType(loc=mk_loc($loc($2)))) }
   | simple_type "raise" error_type { ($1, ErrorType(ty = $3)) }
   | simple_type "raise" "?" {
@@ -371,8 +405,8 @@ optional_type_arguments -> @list.List[Type]
   ;
 
 parameter -> Parameter
-  : type_ { DiscardPositional(ty = Some($1), loc = mk_loc($loc($1))) }
-  | post_label ":" type_ { Labelled(binder = { name : $1.name, loc : $1.loc }, ty = Some($3)) }
+  : type_ { DiscardPositional(ty = Some($1), loc = @syntax.no_location) }
+  | POST_LABEL ":" type_ { Labelled(binder = { name : $1, loc : mk_loc($loc($1)) }, ty = Some($3)) }
   | label "?" ":" type_ { QuestionOptional(binder = { name : $1.name, loc : $1.loc }, ty = Some($4)) }
   ;
 
@@ -382,17 +416,12 @@ constant -> Constant
   | BYTE { Byte($1) }
   | BYTES { Bytes($1) }
   | CHAR { Char($1) }
-  | INT {
-    match $1 {
-      [.. lit, .. "UL"] => UInt64(lit.to_owned())
-      [.. lit, 'L'] => Int64(lit.to_owned())
-      [.. lit, 'U'] => UInt(lit.to_owned())
-      [.. lit, 'N'] => BigInt(lit.to_owned())
-      lit => Int(lit)
-    }
-  }
-  | FLOAT { Float($1) }
+  | INT { make_int_literal($1) }
+  | "-" INT { make_int_literal("-" + $2) }
+  | FLOAT { make_float_literal($1) }
+  | "-" FLOAT { make_float_literal("-" + $2) }
   | DOUBLE { Double($1) }
+  | "-" DOUBLE { Double("-" + $2) }
   | STRING { String($1) }
   ;
 
@@ -436,7 +465,7 @@ label -> Label
   ;
 
 post_label -> Label
-  : POST_LABEL { Label::{name: $1, loc: mk_loc($sloc)} }
+  : POST_LABEL { Label::{name: $1, loc: Location::trim_last_char(mk_loc($sloc))} }
   ;
 
 %inline attributes -> @list.List[Attribute]
