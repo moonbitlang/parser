@@ -81,13 +81,13 @@ pub fn Statement::collect_rev(
     Empty => cont
     More(x, tail=xs) =>
       match x {
-        StmtFunc(binder~, func~, loc~) =>
-          Statement::collect_letrec(
-            loc~,
-            @list.singleton((binder, func)),
+        StmtFunc(binder~, func~, loc~) => {
+          let loc = loc.merge(loc_of_expression(cont))
+          Statement::collect_rev(
             xs,
-            cont,
+            Expr::LetFn(name=binder, func~, loc~, body=cont),
           )
+        }
         StmtExpr(_) =>
           Statement::collect_sequence(
             loc=loc_of_expression(cont),
@@ -142,36 +142,5 @@ fn Statement::collect_sequence(
         todo,
         Expr::Sequence(exprs=acc, last_expr=cont, loc~),
       )
-  }
-}
-
-///|
-pub fn Statement::collect_letrec(
-  loc~ : Location,
-  acc : @list.List[(Binder, Func)],
-  todo : @list.List[Statement],
-  cont : Expr,
-) -> Expr {
-  match todo {
-    More(StmtFunc(binder~, func~, loc~), tail=rest) =>
-      Statement::collect_letrec(loc~, acc.add((binder, func)), rest, cont)
-    _ => {
-      let expr = match acc {
-        More((name, func), tail=Empty) =>
-          Expr::LetFn(
-            name~,
-            func~,
-            loc=Location::merge(loc, loc_of_expression(cont)),
-            body=cont,
-          )
-        _ =>
-          Expr::LetRec(
-            bindings=acc,
-            body=cont,
-            loc=Location::merge(loc, loc_of_expression(cont)),
-          )
-      }
-      Statement::collect_rev(todo, expr)
-    }
   }
 }

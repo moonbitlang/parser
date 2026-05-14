@@ -571,18 +571,8 @@ test "trailing_mark to_json" {
 
 ///|
 test "apply_attr to_json" {
-  json_inspect(NoAttr.json_repr(dummy_loc), content={
+  json_inspect(apply_attr_json_repr(dummy_loc), content={
     "kind": "ApplyAttr::NoAttr",
-    "loc": null,
-    "children": {},
-  })
-  json_inspect(ApplyAttr::Exclamation.json_repr(dummy_loc), content={
-    "kind": "ApplyAttr::Exclamation",
-    "loc": null,
-    "children": {},
-  })
-  json_inspect(ApplyAttr::Question.json_repr(dummy_loc), content={
-    "kind": "ApplyAttr::Question",
     "loc": null,
     "children": {},
   })
@@ -1536,7 +1526,6 @@ test "func to_json" {
       return_type: Some(int_type),
       error_type: NoErrorType,
       kind: FnKind::Lambda,
-      has_error: Some(dummy_loc),
       is_async: None,
       loc: dummy_loc,
     }.json_repr(),
@@ -1616,7 +1605,7 @@ test "func to_json" {
           "children": {},
         },
         "kind": { "kind": "FnKind::Lambda", "loc": null, "children": {} },
-        "has_error": { "kind": "Raise", "loc": null, "children": {} },
+        "has_error": null,
         "is_async": null,
       },
     },
@@ -2565,7 +2554,6 @@ test "fun_decl to_json" {
   let fun_decl = FunDecl::{
     type_name: Some(type_name),
     name: binder,
-    has_error: Some(dummy_loc),
     is_async: Some(dummy_loc),
     decl_params: Some(@list.from_array([param])),
     params_loc: dummy_loc,
@@ -2598,7 +2586,7 @@ test "fun_decl to_json" {
         "loc": null,
         "children": { "name": "test_func" },
       },
-      "has_error": { "kind": "Raise", "loc": null, "children": {} },
+      "has_error": null,
       "is_async": { "kind": "Async", "loc": null, "children": {} },
       "decl_params": {
         "kind": "FunDecl::ParameterList",
@@ -2725,7 +2713,6 @@ test "trait_method_decl to_json" {
   }
   let trait_method = TraitMethodDecl::{
     name: binder,
-    has_error: None,
     is_async: None,
     quantifiers: @list.from_array([type_var_binder]),
     params: @list.from_array([param]),
@@ -2850,7 +2837,6 @@ test "trait_decl to_json" {
   let method_binder = Binder::{ name: "method", loc: dummy_loc }
   let trait_method = TraitMethodDecl::{
     name: method_binder,
-    has_error: None,
     is_async: None,
     quantifiers: @list.from_array([]),
     params: @list.from_array([]),
