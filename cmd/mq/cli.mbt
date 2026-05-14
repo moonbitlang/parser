@@ -76,10 +76,10 @@ fn root_usage() -> String {
   (
     #|Usage: mq <command>
     #|
-    #|Mooncakes.io backend MoonBit config tool
+    #|MoonBit config tool
     #|
     #|Commands:
-    #|  legacy  Convert Moon config DSL to legacy Mooncakes.io JSON output
+    #|  legacy  Convert Moon config DSL to legacy-compatible JSON output
     #|  help    Print help for the subcommand.
     #|
     #|Options:
@@ -92,7 +92,7 @@ fn legacy_usage() -> String {
   (
     #|Usage: mq legacy [options] [input]
     #|
-    #|Convert Moon config DSL to legacy Mooncakes.io JSON output
+    #|Convert Moon config DSL to legacy-compatible JSON output
     #|
     #|Arguments:
     #|  input  Path to moon.pkg/moon.mod/moon.work, or - for stdin
