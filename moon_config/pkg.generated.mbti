@@ -5,16 +5,14 @@ import {
   "moonbitlang/core/debug",
   "moonbitlang/core/immut/vector",
   "moonbitlang/parser/basic",
-  "moonbitlang/parser/tokens",
-  "moonbitlang/x/fs",
 }
 
 // Values
-pub fn moon_pkg_of_tokens(Array[(@tokens.Token, @basic.Position, @basic.Position)]) -> (Ast, Array[@basic.Report])
+pub fn parse_moon_mod(name? : String, String) -> (Ast, Array[@basic.Report])
 
-pub fn parse_file(String) -> (Ast, Array[@basic.Report]) raise @fs.IOError
+pub fn parse_moon_pkg(name? : String, String) -> (Ast, Array[@basic.Report])
 
-pub fn parse_string(String, name? : String) -> (Ast, Array[@basic.Report])
+pub fn parse_moon_work(name? : String, String) -> (Ast, Array[@basic.Report])
 
 // Errors
 
@@ -27,11 +25,6 @@ pub(all) enum Ast {
   Arr(@vector.Vector[Ast], loc~ : @basic.Location)
   Obj(@vector.Vector[(String, Ast)], loc~ : @basic.Location)
 } derive(Eq, @debug.Debug)
-pub fn Ast::as_array(Self) -> @vector.Vector[Self]?
-pub fn Ast::as_bool(Self) -> Bool?
-pub fn Ast::as_number(Self) -> String?
-pub fn Ast::as_object(Self) -> @vector.Vector[(String, Self)]?
-pub fn Ast::as_string(Self) -> String?
 pub fn Ast::loc(Self) -> @basic.Location
 pub impl ToJson for Ast
 

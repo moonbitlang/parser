@@ -1,418 +1,427 @@
 ///|
-fn parse_pkg(source : String) -> (Ast, Array[@basic.Report]) {
-  parse_string(source, name="moon.pkg")
-}
+struct AstNoLoc(Ast)
 
 ///|
-fn ast_summary(ast : Ast) -> Json {
-  match ast {
-    Null(_) => Json::null()
-    Bool(value, ..) => Json::boolean(value)
-    Str(str, ..) => Json::string(str)
-    Float(float, ..) =>
-      Json::object(Map::from_array([("$number", Json::string(float))]))
-    Arr(content, ..) => Json::array(content.to_array().map(ast_summary))
-    Obj(fields, ..) => {
-      let object : Map[String, Json] = Map([])
-      for field in fields {
-        let (key, value) = field
-        object[key] = ast_summary(value)
-      }
-      Json::object(object)
+impl @debug.Debug for AstNoLoc with to_repr(self) {
+  fn go(ast : Ast) -> @debug.Repr {
+    match ast {
+      Null(_) => @debug.Repr::ctor("Null", [])
+      Bool(value, ..) =>
+        @debug.Repr::ctor("Bool", [(None, @debug.to_repr(value))])
+      Str(str, ..) => @debug.Repr::ctor("Str", [(None, @debug.to_repr(str))])
+      Float(float, ..) =>
+        @debug.Repr::ctor("Float", [(None, @debug.to_repr(float))])
+      Arr(content, ..) =>
+        @debug.Repr::ctor("Arr", [
+          (None, @debug.Repr::array(content.to_array().map(item => go(item)))),
+        ])
+      Obj(fields, ..) =>
+        @debug.Repr::ctor("Obj", [
+          (
+            None,
+            @debug.Repr::array(
+              fields
+              .to_array()
+              .map(field => {
+                let (key, value) = field
+                @debug.Repr::tuple([@debug.to_repr(key), go(value)])
+              }),
+            ),
+          ),
+        ])
     }
+  }
+
+  match self {
+    AstNoLoc(ast) => go(ast)
   }
 }
 
 ///|
-fn report_contains(reports : Array[@basic.Report], needle : String) -> Bool {
-  for report in reports {
-    if report.msg.contains(needle) {
-      return true
-    }
-  }
-  false
-}
-
-///|
-fn report_checks(
-  reports : Array[@basic.Report],
-  needles : Array[String],
-) -> Json {
-  Json::object(
-    Map::from_array([
-      ("count", Json::number(reports.length().to_double())),
-      (
-        "contains",
-        Json::array(
-          needles.map(needle => Json::boolean(report_contains(reports, needle))),
-        ),
-      ),
-    ]),
-  )
-}
-
-///|
-test "moon_config parse nested options" {
+test "parse_moon_pkg postprocesses options and repeatable fields" {
   let source =
-    #|options(
-    #|  nested: { "a": ["x", "y", 123], "b": { "c": false } }
-    #|)
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, []), content={
-    "count": 0,
-    "contains": [],
-  })
-  json_inspect(ast_summary(ast), content={
-    "options": {
-      "nested": { "a": ["x", "y", { "$number": "123" }], "b": { "c": false } },
-    },
-  })
-}
-
-///|
-test "moon_config parse import for wbtest" {
-  let source =
-    #|import { "a/pkg", "b/pkg" } for "wbtest"
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, []), content={
-    "count": 0,
-    "contains": [],
-  })
-  json_inspect(ast_summary(ast), content={ "wbtest-import": ["a/pkg", "b/pkg"] })
-}
-
-///|
-test "moon_config rejects legacy import kind syntax" {
-  let source =
-    #|import "test" { "path/to/pkg", "p" }
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(
-    report_checks(reports, ["Old import syntax is no longer supported"]),
-    content={ "count": 1, "contains": [true] },
-  )
-  json_inspect(ast_summary(ast), content={ "import": ["path/to/pkg", "p"] })
-}
-
-///|
-test "moon_config rejects legacy import alias syntax" {
-  let source =
-    #|import { "a" as @alias, "b" @ok }
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(
-    report_checks(reports, ["Old import alias syntax is no longer supported"]),
-    content={ "count": 1, "contains": [true] },
-  )
-  json_inspect(ast_summary(ast), content={
-    "import": ["a", { "path": "b", "alias": "ok" }],
-  })
-}
-
-///|
-test "moon_config avoids cascading after invalid import kind" {
-  let source =
-    #|import { "a" } for next = true
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(
-    report_checks(reports, [
-      "string literal \"test\" or \"wbtest\"", "`;` or EOF",
-    ]),
-    content={ "count": 2, "contains": [true, true] },
-  )
-  json_inspect(ast_summary(ast), content={ "import": ["a"] })
-}
-
-///|
-test "moon_config reports positional argument" {
-  let source =
-    #|apply("positional")
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["labeled argument"]), content={
-    "count": 1,
-    "contains": [true],
-  })
-  json_inspect(ast_summary(ast), content={ "apply": { "": "positional" } })
-}
-
-///|
-test "moon_config parse assignments" {
-  let source =
-    #|warnings = "+w1-w1"
+    #|warnings = "+w1"
     #|supported_targets = "+wasm"
+    #|options(
+    #|  "is-main": true,
+    #|)
+    #|rule(name: "rule1", command: "exe")
+    #|rule(name: "rule2", command: "exe")
+    #|dev_build(rule: "rule1", input: "a", output: "b")
+    #|dev_build(rule: "rule2", input: "c", output: "d")
     #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, []), content={
-    "count": 0,
-    "contains": [],
-  })
-  json_inspect(ast_summary(ast), content={
-    "warnings": "+w1-w1",
-    "supported_targets": "+wasm",
-  })
+  let (ast, reports) = parse_moon_pkg(source)
+  debug_inspect(
+    reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj(
+      #|  [
+      #|    ("warn-list", Str("+w1")),
+      #|    ("supported-targets", Str("+wasm")),
+      #|    ("is-main", Bool(true)),
+      #|    ("rule", Obj([("name", Str("rule1")), ("command", Str("exe"))])),
+      #|    ("rule", Obj([("name", Str("rule2")), ("command", Str("exe"))])),
+      #|    (
+      #|      "dev_build",
+      #|      Obj([("rule", Str("rule1")), ("input", Str("a")), ("output", Str("b"))]),
+      #|    ),
+      #|    (
+      #|      "dev_build",
+      #|      Obj([("rule", Str("rule2")), ("input", Str("c")), ("output", Str("d"))]),
+      #|    ),
+      #|  ],
+      #|)
+    ),
+  )
 }
 
 ///|
-test "moon_config requires statement separators" {
+test "parse_moon_pkg keeps repeated top-level rule entries in Ast" {
   let source =
-    #|a = "x" b = "y"
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["`;` or EOF"]), content={
-    "count": 1,
-    "contains": [true],
-  })
-  json_inspect(ast_summary(ast), content={ "a": "x" })
-}
-
-///|
-test "moon_config keeps next statement after missing assignment value before semicolon" {
-  let source =
-    #|a = ;
-    #|b = 1
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["expression", "`;` or EOF"]), content={
-    "count": 1,
-    "contains": [true, false],
-  })
-  json_inspect(ast_summary(ast), content={ "a": null, "b": { "$number": "1" } })
-}
-
-///|
-test "moon_config keeps next statement after missing assignment value on next line" {
-  let source =
-    #|a =
-    #|b = 1
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["expression", "`;` or EOF"]), content={
-    "count": 1,
-    "contains": [true, false],
-  })
-  json_inspect(ast_summary(ast), content={ "a": null, "b": { "$number": "1" } })
-}
-
-///|
-test "moon_config rejects unsupported numeric literals" {
-  let source =
-    #|unsigned = 1U
-    #|floaty = 1.5
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["suffixes", "expression"]), content={
-    "count": 2,
-    "contains": [true, true],
-  })
-  json_inspect(ast_summary(ast), content={ "unsigned": null, "floaty": null })
-}
-
-///|
-test "moon_config accepts bigint literal in pkg values" {
-  let source =
-    #|big = 1N
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, []), content={
-    "count": 0,
-    "contains": [],
-  })
-  json_inspect(ast_summary(ast), content={ "big": { "$number": "1N" } })
-}
-
-///|
-test "moon_config preserves duplicate object and statement entries" {
-  fn duplicate_entry_summary(ast : Ast) -> Array[(String, String?)] raise {
-    match ast {
-      Obj(root_fields, ..) => {
-        let (_, options_value) = root_fields[0]
-        match options_value {
-          Obj(options_fields, ..) => {
-            let (_, dup_value) = options_fields[0]
-            match dup_value {
-              Obj(dup_fields, ..) =>
-                dup_fields
-                .to_array()
-                .map(field => {
-                  let (key, value) = field
-                  (key, value.as_number())
-                })
-              _ => fail("expected duplicate entry value to be an object")
-            }
-          }
-          _ => fail("expected options argument list to be an object")
-        }
-      }
-      _ => fail("expected root to be an object")
-    }
-  }
-
-  fn root_entry_summary(ast : Ast) -> Array[(String, String?)] raise {
-    match ast {
-      Obj(root_fields, ..) =>
-        root_fields
-        .to_array()
-        .map(field => {
-          let (key, value) = field
-          let value_name = match value {
-            Obj(fields, ..) =>
-              match fields[0] {
-                ("name", Str(str, ..)) => Some(str)
-                _ => None
-              }
-            _ => None
-          }
-          (key, value_name)
-        })
-      _ => fail("expected root to be an object")
-    }
-  }
-
-  let source =
-    #|options(dup: { "a": 1, "a": 2 })
     #|rule(name:"rule1", command:"exe")
     #|rule(name:"rule2", command:"exe")
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, []), content={
-    "count": 0,
-    "contains": [],
-  })
+    #|
+  let (ast, reports) = parse_moon_pkg(source)
   debug_inspect(
-    duplicate_entry_summary(ast),
+    reports,
     content=(
-      #|[("a", Some("1")), ("a", Some("2"))]
+      #|[]
     ),
   )
   debug_inspect(
-    root_entry_summary(ast),
+    AstNoLoc(ast),
     content=(
-      #|[("options", None), ("rule", Some("rule1")), ("rule", Some("rule2"))]
+      #|Obj(
+      #|  [
+      #|    ("rule", Obj([("name", Str("rule1")), ("command", Str("exe"))])),
+      #|    ("rule", Obj([("name", Str("rule2")), ("command", Str("exe"))])),
+      #|  ],
+      #|)
     ),
   )
 }
 
 ///|
-test "moon_config recovers map value after missing colon" {
-  let source =
-    #|options(nested: { "a" 1 })
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["\":\""]), content={
-    "count": 1,
-    "contains": [true],
-  })
-  json_inspect(ast_summary(ast), content={
-    "options": { "nested": { "a": { "$number": "1" } } },
-  })
-}
-
-///|
-test "moon_config keeps next statement after missing array right bracket" {
-  let source =
-    #|a = [1
-    #|b = 2
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["`]`"]), content={
-    "count": 1,
-    "contains": [true],
-  })
-  json_inspect(ast_summary(ast), content={
-    "a": [{ "$number": "1" }],
-    "b": { "$number": "2" },
-  })
-}
-
-///|
-test "moon_config reports missing import right brace at eof" {
+test "parse_moon_pkg handles package imports aliases and targets" {
   let source =
     #|import {
+    #|  "moonbit-community/fullstack-one-project-doc/shared" @shared,
+    #|  "moonbitlang/core/json" @json,
+    #|  "moonbitlang/async",
+    #|}
     #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["`}`"]), content={
-    "count": 1,
-    "contains": [true],
-  })
-  json_inspect(ast_summary(ast), content={ "import": [] })
+    #|import {
+    #|  "moonbitlang/core/test",
+    #|} for "test"
+    #|
+    #|warnings = "-test_unqualified_package"
+    #|supported_targets = "native"
+    #|
+    #|options(
+    #|  "is-main": true,
+    #|  targets: {
+    #|    "main.mbt": [ "native" ],
+    #|    "browser.mbt": [ "js" ],
+    #|  },
+    #|)
+    #|
+  let (ast, reports) = parse_moon_pkg(source)
+  debug_inspect(
+    reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj(
+      #|  [
+      #|    (
+      #|      "import",
+      #|      Arr(
+      #|        [
+      #|          Obj(
+      #|            [
+      #|              ("path", Str("moonbit-community/fullstack-one-project-doc/shared")),
+      #|              ("alias", Str("shared")),
+      #|            ],
+      #|          ),
+      #|          Obj([("path", Str("moonbitlang/core/json")), ("alias", Str("json"))]),
+      #|          Str("moonbitlang/async"),
+      #|        ],
+      #|      ),
+      #|    ),
+      #|    ("test-import", Arr([Str("moonbitlang/core/test")])),
+      #|    ("warn-list", Str("-test_unqualified_package")),
+      #|    ("supported-targets", Str("native")),
+      #|    ("is-main", Bool(true)),
+      #|    (
+      #|      "targets",
+      #|      Obj(
+      #|        [
+      #|          ("main.mbt", Arr([Str("native")])),
+      #|          ("browser.mbt", Arr([Str("js")])),
+      #|        ],
+      #|      ),
+      #|    ),
+      #|  ],
+      #|)
+    ),
+  )
 }
 
 ///|
-test "moon_config reports missing apply right paren at eof" {
+test "parse_moon_pkg handles link options" {
   let source =
     #|options(
+    #|  link: {
+    #|    "wasm-gc": {
+    #|      "use-js-builtin-string": true,
+    #|      "import-memory": { "module": "env", "name": "memory" },
+    #|      "memory-limits": { "min": 1, "max": 4 },
+    #|      "shared-memory": true,
+    #|    },
+    #|  },
+    #|)
     #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["`)`"]), content={
-    "count": 1,
-    "contains": [true],
-  })
-  json_inspect(ast_summary(ast), content={ "options": {} })
-}
-
-///|
-test "moon_config reports missing array right bracket at eof" {
-  let source =
-    #|a = [
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["`]`"]), content={
-    "count": 1,
-    "contains": [true],
-  })
-  json_inspect(ast_summary(ast), content={ "a": [] })
-}
-
-///|
-test "moon_config keeps next statement after missing apply left paren" {
-  let source =
-    #|options nested: true
-    #|next = false
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["\"(\""]), content={
-    "count": 1,
-    "contains": [true],
-  })
-  json_inspect(ast_summary(ast), content={ "options": {}, "next": false })
-}
-
-///|
-test "moon_config keeps next statement after missing import left brace" {
-  let source =
-    #|import [ "a/pkg" ]
-    #|next = false
-    #|
-  let (ast, reports) = parse_pkg(source)
-  json_inspect(report_checks(reports, ["\"{\""]), content={
-    "count": 1,
-    "contains": [true],
-  })
-  json_inspect(ast_summary(ast), content={ "import": [], "next": false })
-}
-
-///|
-test "moon_config root loc stays ordered for layout-only source" {
-  let source =
-    #|
-    #|
-  let (ast, reports) = parse_pkg(source)
-  let loc = ast.loc()
-  json_inspect(
-    Json::object(
-      Map::from_array([
-        ("ast", ast_summary(ast)),
-        ("reports", report_checks(reports, [])),
-        ("ordered", Json::boolean(loc.start.compare(loc.end) <= 0)),
-      ]),
+  let (ast, reports) = parse_moon_pkg(source)
+  debug_inspect(
+    reports,
+    content=(
+      #|[]
     ),
-    content={
-      "ast": {},
-      "reports": { "count": 0, "contains": [] },
-      "ordered": true,
-    },
+  )
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj(
+      #|  [
+      #|    (
+      #|      "link",
+      #|      Obj(
+      #|        [
+      #|          (
+      #|            "wasm-gc",
+      #|            Obj(
+      #|              [
+      #|                ("use-js-builtin-string", Bool(true)),
+      #|                (
+      #|                  "import-memory",
+      #|                  Obj([("module", Str("env")), ("name", Str("memory"))]),
+      #|                ),
+      #|                ("memory-limits", Obj([("min", Float("1")), ("max", Float("4"))])),
+      #|                ("shared-memory", Bool(true)),
+      #|              ],
+      #|            ),
+      #|          ),
+      #|        ],
+      #|      ),
+      #|    ),
+      #|  ],
+      #|)
+    ),
+  )
+}
+
+///|
+test "parse_moon_mod postprocesses imports and options" {
+  let source =
+    #|name = "user/mod"
+    #|version = "0.1.0"
+    #|import { "dep/a@1.2.3", "dep/b" }
+    #|warnings = "+w1"
+    #|supported_targets = "+wasm"
+    #|options(
+    #|  license: "MIT",
+    #|  repository: "https://example.com/repo",
+    #|)
+    #|rule(name: "rule1", command: "exe")
+    #|rule(name: "rule2", command: "exe")
+    #|
+  let (ast, reports) = parse_moon_mod(source)
+  debug_inspect(
+    reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj(
+      #|  [
+      #|    ("name", Str("user/mod")),
+      #|    ("version", Str("0.1.0")),
+      #|    ("deps", Obj([("dep/a", Str("1.2.3")), ("dep/b", Str(""))])),
+      #|    ("warn-list", Str("+w1")),
+      #|    ("supported-targets", Str("+wasm")),
+      #|    ("license", Str("MIT")),
+      #|    ("repository", Str("https://example.com/repo")),
+      #|    ("rule", Obj([("name", Str("rule1")), ("command", Str("exe"))])),
+      #|    ("rule", Obj([("name", Str("rule2")), ("command", Str("exe"))])),
+      #|  ],
+      #|)
+    ),
+  )
+}
+
+///|
+test "parse_moon_mod handles metadata options" {
+  let source =
+    #|name = "example/dsl_only"
+    #|version = "0.1.0"
+    #|import { "moonbitlang/x@0.4.6", "../dep" }
+    #|options(
+    #|  "bin-deps": {
+    #|    "tool/cli": { "bin-pkg": [ "cli" ], "path": "../bin" },
+    #|  },
+    #|  "compile-flags": [ "-DDEBUG", "-Wall" ],
+    #|  description: "A DSL fixture module",
+    #|  exclude: [ "target/**", "**/*.tmp" ],
+    #|  include: [ "src/**", "README.mbt.md" ],
+    #|  keywords: [ "dsl", "fixture" ],
+    #|  license: "Apache-2.0",
+    #|  "link-flags": [ "-lm" ],
+    #|  "preferred-target": "wasm-gc",
+    #|  readme: "README.mbt.md",
+    #|  repository: "https://example.com/repo",
+    #|  scripts: { "prebuild": "node ./prebuild.js", "postbuild": "echo done" },
+    #|  source: "src",
+    #|)
+    #|
+  let (ast, reports) = parse_moon_mod(source)
+  debug_inspect(
+    reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj(
+      #|  [
+      #|    ("name", Str("example/dsl_only")),
+      #|    ("version", Str("0.1.0")),
+      #|    ("deps", Obj([("moonbitlang/x", Str("0.4.6")), ("../dep", Str(""))])),
+      #|    (
+      #|      "bin-deps",
+      #|      Obj(
+      #|        [
+      #|          (
+      #|            "tool/cli",
+      #|            Obj([("bin-pkg", Arr([Str("cli")])), ("path", Str("../bin"))]),
+      #|          ),
+      #|        ],
+      #|      ),
+      #|    ),
+      #|    ("compile-flags", Arr([Str("-DDEBUG"), Str("-Wall")])),
+      #|    ("description", Str("A DSL fixture module")),
+      #|    ("exclude", Arr([Str("target/**"), Str("**/*.tmp")])),
+      #|    ("include", Arr([Str("src/**"), Str("README.mbt.md")])),
+      #|    ("keywords", Arr([Str("dsl"), Str("fixture")])),
+      #|    ("license", Str("Apache-2.0")),
+      #|    ("link-flags", Arr([Str("-lm")])),
+      #|    ("preferred-target", Str("wasm-gc")),
+      #|    ("readme", Str("README.mbt.md")),
+      #|    ("repository", Str("https://example.com/repo")),
+      #|    (
+      #|      "scripts",
+      #|      Obj(
+      #|        [
+      #|          ("prebuild", Str("node ./prebuild.js")),
+      #|          ("postbuild", Str("echo done")),
+      #|        ],
+      #|      ),
+      #|    ),
+      #|    ("source", Str("src")),
+      #|  ],
+      #|)
+    ),
+  )
+}
+
+///|
+test "parse_moon_work parses workspace config" {
+  let source =
+    #|members = ["./app", "./shared"]
+    #|preferred_target = "wasm-gc"
+    #|
+  let (ast, reports) = parse_moon_work(source)
+  debug_inspect(
+    reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj(
+      #|  [
+      #|    ("members", Arr([Str("./app"), Str("./shared")])),
+      #|    ("preferred_target", Str("wasm-gc")),
+      #|  ],
+      #|)
+    ),
+  )
+}
+
+///|
+test "parse_moon_work handles multiline members" {
+  let source =
+    #|members = [
+    #|  "./mod_a",
+    #|  "./mod_b",
+    #|]
+    #|
+  let (ast, reports) = parse_moon_work(source)
+  debug_inspect(
+    reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj([("members", Arr([Str("./mod_a"), Str("./mod_b")]))])
+    ),
+  )
+}
+
+///|
+test "parse_moon_mod reports duplicate non-repeatable keys" {
+  let source =
+    #|name = "user/first"
+    #|name = "user/second"
+    #|
+  let (ast, reports) = parse_moon_mod(source)
+  debug_inspect(
+    reports,
+    content=(
+      #|[
+      #|  {
+      #|    loc: {
+      #|      start: { fname: "moon.mod", lnum: 2, bol: 20, cnum: 27 },
+      #|      end: { fname: "moon.mod", lnum: 2, bol: 20, cnum: 40 },
+      #|    },
+      #|    msg: "Duplicate key `name` found in moon.mod.",
+      #|  },
+      #|]
+    ),
+  )
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj([("name", Str("user/first")), ("name", Str("user/second"))])
+    ),
   )
 }
