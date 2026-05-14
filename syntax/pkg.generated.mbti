@@ -94,8 +94,6 @@ pub fn AliasTarget::loc(Self) -> @basic.Location
 
 pub(all) enum ApplyAttr {
   NoAttr
-  Exclamation
-  Question
 }
 
 pub(all) struct Argument {
@@ -151,6 +149,7 @@ pub(all) enum Constant {
   Float(String)
   Double(String)
   String(String)
+  Regex(String)
   BigInt(String)
 }
 
@@ -192,6 +191,7 @@ pub(all) struct Constructor {
 
 pub(all) enum ConstructorExtraInfo {
   TypeName(TypeName)
+  TypeNameWithConstrPackage(type_name~ : TypeName, pkg~ : String)
   Package(String)
   NoExtraInfo
 }
@@ -247,6 +247,7 @@ pub(all) enum Expr {
   Unary(op~ : Var, expr~ : Expr, loc~ : @basic.Location)
   Array(exprs~ : @list.List[Expr], loc~ : @basic.Location)
   ArraySpread(elems~ : @list.List[SpreadableElem], loc~ : @basic.Location)
+  ListComprehension(kind~ : ListComprehensionKind, guard_~ : Expr?, body~ : Expr, loc~ : @basic.Location)
   ArrayGet(array~ : Expr, index~ : Expr, loc~ : @basic.Location)
   ArrayGetSlice(array~ : Expr, start_index~ : Expr?, end_index~ : Expr?, index_loc~ : @basic.Location, loc~ : @basic.Location)
   ArraySet(array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @basic.Location)
@@ -263,9 +264,9 @@ pub(all) enum Expr {
   Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location)
   Is(expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location)
   IsLexMatch(expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location)
+  RegexMatch(expr~ : Expr, pat~ : RegexPattern, bindings~ : @list.List[(Label, Binder?)], loc~ : @basic.Location)
   Defer(expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
   LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location)
-  LetRec(bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location)
   LetAnd(bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location)
   Let(pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
   Sequence(exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location)
@@ -281,20 +282,26 @@ pub(all) enum Expr {
   LexMatch(strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location)
   LetMut(binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
   Pipe(lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
+  RevPipe(lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
   Assign(var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location)
   Hole(loc~ : @basic.Location, kind~ : Hole)
   Return(return_value~ : Expr?, loc~ : @basic.Location)
   Raise(err_value~ : Expr, loc~ : @basic.Location)
+  Quantifier(kind~ : PredicateQuantifierKind, binder~ : Binder, binder_ty~ : Type, body~ : Expr, loc~ : @basic.Location)
+  Implies(lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
+  ProofAssert(expr~ : Expr, loc~ : @basic.Location)
+  ProofLet(binder~ : Binder, expr~ : Expr, loc~ : @basic.Location)
   Unit(loc~ : @basic.Location, faked~ : Bool)
   Break(arg~ : Expr?, label~ : Label?, loc~ : @basic.Location)
   Continue(args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location)
-  Loop(arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location)
+  Loop(arg~ : Expr, body~ : @list.List[Case], loop_nobreak~ : Expr?, label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location)
   For(binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, where_clause~ : WhereClause?, label~ : Label?, loc~ : @basic.Location)
-  ForEach(binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location)
+  ForEach(binders~ : @list.List[Binder?], expr~ : Expr, init~ : @list.List[(Binder, Expr)], continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, else_block~ : Expr?, where_clause~ : WhereClause?, label~ : Label?, loc~ : @basic.Location)
   Try(body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location)
   TryOperator(body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location)
   Map(elems~ : @list.List[MapExprElem], loc~ : @basic.Location)
   Group(expr~ : Expr, group~ : Group, loc~ : @basic.Location)
+  TemplateWriting(expr~ : Expr, template~ : Expr, loc~ : @basic.Location)
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
 }
 pub fn Expr::json_repr(Self) -> Json
@@ -383,7 +390,7 @@ pub(all) enum Impl {
   TopExpr(expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location)
   TopTest(expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopTypeDef(TypeDecl)
-  TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location)
+  TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, where_clause~ : WhereClause?, loc~ : @basic.Location)
   TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, is_declare~ : Bool)
   TopTrait(TraitDecl)
   TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
@@ -422,8 +429,9 @@ pub(all) struct LexCase {
 }
 
 pub(all) enum LexPattern {
-  Regex(lit~ : String, loc~ : @basic.Location)
+  Regex(lit~ : String, offset~ : Int, loc~ : @basic.Location)
   RegexInterp(elems~ : @list.List[InterpElem], loc~ : @basic.Location)
+  ConstantRef(lid~ : LongIdent, loc~ : @basic.Location)
   Alias(pat~ : LexPattern, binder~ : Binder, loc~ : @basic.Location)
   Sequence(pats~ : @list.List[LexPattern], loc~ : @basic.Location)
 }
@@ -432,6 +440,11 @@ pub(all) enum LexTopPattern {
   Pattern(LexPattern)
   Binder(Binder)
   Wildcard(loc~ : @basic.Location)
+}
+
+pub(all) enum ListComprehensionKind {
+  Foreach(binders~ : @list.List[Binder?], expr~ : Expr, init~ : @list.List[(Binder, Expr)], continue_block~ : @list.List[(Binder, Expr)])
+  For(binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], for_loc~ : @basic.Location)
 }
 
 pub(all) struct LocalTypeDecl {
@@ -496,10 +509,23 @@ pub(all) enum Pattern {
 }
 pub fn Pattern::loc(Self) -> @basic.Location
 
+pub(all) enum PredicateQuantifierKind {
+  Forall
+  Exists
+}
+
 pub(all) enum RangeKind {
   Inclusive
   Exclusive
   InclusiveMissingEqual
+}
+
+pub(all) enum RegexPattern {
+  Literal(lit~ : String, loc~ : @basic.Location)
+  Reference(lid~ : LongIdent, loc~ : @basic.Location)
+  Sequence(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : @basic.Location)
+  Alternation(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : @basic.Location)
+  Alias(pat~ : RegexPattern, binder~ : Binder, loc~ : @basic.Location)
 }
 
 pub(all) enum SpreadableElem {
@@ -580,8 +606,10 @@ pub(all) struct TypeDeclBinder {
 pub(all) enum TypeDesc {
   Abstract
   Extern
+  ExtensibleEnum(@list.List[ConstrDecl])
   Error(ExceptionDecl)
   Variant(@list.List[ConstrDecl])
+  ExtendEnum(target~ : TypeName, constructors~ : @list.List[ConstrDecl])
   Record(fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?)
   TupleStruct(@list.List[Type])
   Alias(Type)
@@ -710,8 +738,9 @@ pub(open) trait IterVisitor {
   visit_LexTopPattern_Binder(Self, Binder) -> Unit = _
   visit_LexTopPattern_Wildcard(Self, loc~ : @basic.Location) -> Unit = _
   visit_LexPattern(Self, LexPattern) -> Unit = _
-  visit_LexPattern_Regex(Self, lit~ : String, loc~ : @basic.Location) -> Unit = _
+  visit_LexPattern_Regex(Self, lit~ : String, offset~ : Int, loc~ : @basic.Location) -> Unit = _
   visit_LexPattern_RegexInterp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> Unit = _
+  visit_LexPattern_ConstantRef(Self, lid~ : LongIdent, loc~ : @basic.Location) -> Unit = _
   visit_LexPattern_Alias(Self, pat~ : LexPattern, binder~ : Binder, loc~ : @basic.Location) -> Unit = _
   visit_LexPattern_Sequence(Self, pats~ : @list.List[LexPattern], loc~ : @basic.Location) -> Unit = _
   visit_SpreadableElem(Self, SpreadableElem) -> Unit = _
@@ -778,7 +807,7 @@ pub(open) trait IterVisitor {
   visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location) -> Unit = _
   visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Unit = _
-  visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Unit = _
+  visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, where_clause~ : WhereClause?, loc~ : @basic.Location) -> Unit = _
   visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, is_declare~ : Bool) -> Unit = _
   visit_Impl_TopTrait(Self, TraitDecl) -> Unit = _
   visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
@@ -810,7 +839,6 @@ pub(open) trait IterVisitor {
   visit_Expr_IsLexMatch(Self, expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit = _
   visit_Expr_LetFn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_LetRec(Self, bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location) -> Unit = _
   visit_Expr_LetAnd(Self, bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Let(Self, pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Sequence(Self, exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location) -> Unit = _
@@ -833,9 +861,9 @@ pub(open) trait IterVisitor {
   visit_Expr_Unit(Self, loc~ : @basic.Location, faked~ : Bool) -> Unit = _
   visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Continue(Self, args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location) -> Unit = _
-  visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], loop_nobreak~ : Expr?, label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location, where_clause~ : WhereClause?) -> Unit = _
-  visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
+  visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, init~ : @list.List[(Binder, Expr)], continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, else_block~ : Expr?, where_clause~ : WhereClause?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Try(Self, body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   visit_Expr_TryOperator(Self, body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   visit_Expr_Map(Self, elems~ : @list.List[MapExprElem], loc~ : @basic.Location) -> Unit = _
@@ -919,8 +947,9 @@ pub(open) trait MapVisitor {
   visit_LexTopPattern_Binder(Self, Binder) -> LexTopPattern = _
   visit_LexTopPattern_Wildcard(Self, loc~ : @basic.Location) -> LexTopPattern = _
   visit_LexPattern(Self, LexPattern) -> LexPattern = _
-  visit_LexPattern_Regex(Self, lit~ : String, loc~ : @basic.Location) -> LexPattern = _
+  visit_LexPattern_Regex(Self, lit~ : String, offset~ : Int, loc~ : @basic.Location) -> LexPattern = _
   visit_LexPattern_RegexInterp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> LexPattern = _
+  visit_LexPattern_ConstantRef(Self, lid~ : LongIdent, loc~ : @basic.Location) -> LexPattern = _
   visit_LexPattern_Alias(Self, pat~ : LexPattern, binder~ : Binder, loc~ : @basic.Location) -> LexPattern = _
   visit_LexPattern_Sequence(Self, pats~ : @list.List[LexPattern], loc~ : @basic.Location) -> LexPattern = _
   visit_SpreadableElem(Self, SpreadableElem) -> SpreadableElem = _
@@ -988,7 +1017,7 @@ pub(open) trait MapVisitor {
   visit_Impl_TopExpr(Self, expr~ : Expr, is_main~ : Bool, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location) -> Impl = _
   visit_Impl_TopTest(Self, expr~ : Expr, name~ : (String, @basic.Location)?, params~ : @list.List[Parameter]?, local_types~ : @list.List[LocalTypeDecl], is_async~ : @basic.Location?, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
   visit_Impl_TopTypeDef(Self, TypeDecl) -> Impl = _
-  visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : @basic.Location) -> Impl = _
+  visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, where_clause~ : WhereClause?, loc~ : @basic.Location) -> Impl = _
   visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, is_declare~ : Bool) -> Impl = _
   visit_Impl_TopTrait(Self, TraitDecl) -> Impl = _
   visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, has_error~ : @basic.Location?, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
@@ -1019,7 +1048,6 @@ pub(open) trait MapVisitor {
   visit_Expr_IsLexMatch(Self, expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr = _
   visit_Expr_LetFn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_LetRec(Self, bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : @basic.Location) -> Expr = _
   visit_Expr_LetAnd(Self, bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Let(Self, pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Sequence(Self, exprs~ : @list.List[Expr], last_expr~ : Expr, loc~ : @basic.Location) -> Expr = _
@@ -1042,9 +1070,9 @@ pub(open) trait MapVisitor {
   visit_Expr_Unit(Self, loc~ : @basic.Location, faked~ : Bool) -> Expr = _
   visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Continue(Self, args~ : @list.List[Expr], label~ : Label?, loc~ : @basic.Location) -> Expr = _
-  visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_Loop(Self, arg~ : Expr, body~ : @list.List[Case], loop_nobreak~ : Expr?, label~ : Label?, loop_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   visit_Expr_For(Self, binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, for_else~ : Expr?, label~ : Label?, loc~ : @basic.Location, where_clause~ : WhereClause?) -> Expr = _
-  visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, body~ : Expr, else_block~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
+  visit_Expr_ForEach(Self, binders~ : @list.List[Binder?], expr~ : Expr, init~ : @list.List[(Binder, Expr)], continue_block~ : @list.List[(Binder, Expr)], body~ : Expr, else_block~ : Expr?, where_clause~ : WhereClause?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Try(Self, body~ : Expr, catch_~ : @list.List[Case], catch_all~ : Bool, try_else~ : @list.List[Case]?, has_try~ : Bool, try_loc~ : @basic.Location, catch_loc~ : @basic.Location, else_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   visit_Expr_TryOperator(Self, body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   visit_Expr_Map(Self, elems~ : @list.List[MapExprElem], loc~ : @basic.Location) -> Expr = _

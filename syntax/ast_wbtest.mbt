@@ -576,16 +576,6 @@ test "apply_attr to_json" {
     "loc": null,
     "children": {},
   })
-  json_inspect(ApplyAttr::Exclamation.json_repr(dummy_loc), content={
-    "kind": "ApplyAttr::Exclamation",
-    "loc": null,
-    "children": {},
-  })
-  json_inspect(ApplyAttr::Question.json_repr(dummy_loc), content={
-    "kind": "ApplyAttr::Question",
-    "loc": null,
-    "children": {},
-  })
 }
 
 ///|

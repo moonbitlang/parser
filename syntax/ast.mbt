@@ -25,6 +25,7 @@ pub(all) enum Constant {
   Float(String)
   Double(String)
   String(StringLiteral)
+  Regex(StringLiteral)
   BigInt(String)
 }
 
@@ -138,10 +139,14 @@ pub(all) enum TypeDesc {
   Abstract
   /// `extern type T`
   Extern
+  /// `extenum T { C1; C2 }`
+  ExtensibleEnum(@list.List[ConstrDecl])
   /// `suberror`
   Error(ExceptionDecl)
   /// `enum T { C1; C2 }`
   Variant(@list.List[ConstrDecl])
+  /// `extenum T += { C1; C2 }`
+  ExtendEnum(target~ : TypeName, constructors~ : @list.List[ConstrDecl])
   /// `struct T { field1: T1; field2: T2 }`
   Record(fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?)
   /// `struct T (T1,T2)`
@@ -185,11 +190,8 @@ pub(all) enum TrailingMark {
 }
 
 ///|
-// checked!
 pub(all) enum ApplyAttr {
   NoAttr
-  Exclamation
-  Question
 }
 
 ///|
@@ -237,6 +239,7 @@ pub(all) struct Var {
 ///|
 pub(all) enum ConstructorExtraInfo {
   TypeName(TypeName)
+  TypeNameWithConstrPackage(type_name~ : TypeName, pkg~ : String)
   Package(String)
   NoExtraInfo
 }
@@ -351,8 +354,9 @@ pub(all) enum MultilineStringElem {
 
 ///|
 pub(all) enum LexPattern {
-  Regex(lit~ : String, loc~ : Location)
+  Regex(lit~ : String, offset~ : Int, loc~ : Location)
   RegexInterp(elems~ : @list.List[InterpElem], loc~ : Location)
+  ConstantRef(lid~ : LongIdent, loc~ : Location)
   Alias(pat~ : LexPattern, binder~ : Binder, loc~ : Location)
   Sequence(pats~ : @list.List[LexPattern], loc~ : Location)
 }
@@ -373,6 +377,37 @@ pub(all) struct LexCase {
 }
 
 ///|
+pub(all) enum RegexPattern {
+  Literal(lit~ : String, loc~ : Location)
+  Reference(lid~ : LongIdent, loc~ : Location)
+  Sequence(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : Location)
+  Alternation(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : Location)
+  Alias(pat~ : RegexPattern, binder~ : Binder, loc~ : Location)
+}
+
+///|
+pub(all) enum PredicateQuantifierKind {
+  Forall
+  Exists
+}
+
+///|
+pub(all) enum ListComprehensionKind {
+  Foreach(
+    binders~ : @list.List[Binder?],
+    expr~ : Expr,
+    init~ : @list.List[(Binder, Expr)],
+    continue_block~ : @list.List[(Binder, Expr)]
+  )
+  For(
+    binders~ : @list.List[(Binder, Expr)],
+    condition~ : Expr?,
+    continue_block~ : @list.List[(Binder, Expr)],
+    for_loc~ : Location
+  )
+}
+
+///|
 pub(all) enum Expr {
   /// f(args)
   Apply(
@@ -389,6 +424,13 @@ pub(all) enum Expr {
   Array(exprs~ : @list.List[Expr], loc~ : Location)
   /// [..arr1, e1, ..arr2, e2]
   ArraySpread(elems~ : @list.List[SpreadableElem], loc~ : Location)
+  /// `[for x in xs if guard => body]`
+  ListComprehension(
+    kind~ : ListComprehensionKind,
+    guard_~ : Expr?,
+    body~ : Expr,
+    loc~ : Location
+  )
   /// e1[e2]
   ArrayGet(array~ : Expr, index~ : Expr, loc~ : Location)
   /// e1[e2:e3]
@@ -447,13 +489,16 @@ pub(all) enum Expr {
     pat_loc~ : Location,
     loc~ : Location
   )
+  RegexMatch(
+    expr~ : Expr,
+    pat~ : RegexPattern,
+    bindings~ : @list.List[(Label, Binder?)],
+    loc~ : Location
+  )
   /// `defer e1; e2`
   Defer(expr~ : Expr, body~ : Expr, loc~ : Location)
   /// `fn local(args){ e1 }; e2`
   LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : Location)
-  /// `fn f(args){ e1 }; fn g(args){ e2 }; e3`, 
-  /// where `f` and `g` are mutually recursive functions.
-  LetRec(bindings~ : @list.List[(Binder, Func)], body~ : Expr, loc~ : Location)
   LetAnd(
     bindings~ : @list.List[(Binder, Type?, Func)],
     body~ : Expr,
@@ -530,6 +575,8 @@ pub(all) enum Expr {
   /// `lhs |> rhs`
   /// The rhs is restricted to `f`, `f(args)`, `_.method(args)`, `Constructor`, or `Constructor(args)`.
   Pipe(lhs~ : Expr, rhs~ : Expr, loc~ : Location)
+  /// `lhs <| rhs`
+  RevPipe(lhs~ : Expr, rhs~ : Expr, loc~ : Location)
   /// `n = e` or `n += e`
   Assign(var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : Location)
   /// `_`
@@ -539,6 +586,16 @@ pub(all) enum Expr {
   Return(return_value~ : Expr?, loc~ : Location)
   /// `raise expr`
   Raise(err_value~ : Expr, loc~ : Location)
+  Quantifier(
+    kind~ : PredicateQuantifierKind,
+    binder~ : Binder,
+    binder_ty~ : Type,
+    body~ : Expr,
+    loc~ : Location
+  )
+  Implies(lhs~ : Expr, rhs~ : Expr, loc~ : Location)
+  ProofAssert(expr~ : Expr, loc~ : Location)
+  ProofLet(binder~ : Binder, expr~ : Expr, loc~ : Location)
   /// `()`
   /// If `faked` is true, it means it was inserted by the parser.
   Unit(loc~ : Location, faked~ : Bool)
@@ -550,6 +607,7 @@ pub(all) enum Expr {
   Loop(
     arg~ : Expr,
     body~ : @list.List[Case],
+    loop_nobreak~ : Expr?,
     label~ : Label?,
     loop_loc~ : Location,
     loc~ : Location
@@ -565,12 +623,15 @@ pub(all) enum Expr {
     label~ : Label?,
     loc~ : Location
   )
-  /// `for b1,b2 in e1 { e2 }`
+  /// `for b1,b2 in e1; init; continue_block { e2 }`
   ForEach(
     binders~ : @list.List[Binder?],
     expr~ : Expr,
+    init~ : @list.List[(Binder, Expr)],
+    continue_block~ : @list.List[(Binder, Expr)],
     body~ : Expr,
     else_block~ : Expr?,
+    where_clause~ : WhereClause?,
     label~ : Label?,
     loc~ : Location
   )
@@ -597,6 +658,8 @@ pub(all) enum Expr {
   Map(elems~ : @list.List[MapExprElem], loc~ : Location)
   /// `(expr)` or `{expr}`
   Group(expr~ : Expr, group~ : Group, loc~ : Location)
+  /// `expr <+ template`
+  TemplateWriting(expr~ : Expr, template~ : Expr, loc~ : Location)
   /// generated by compiler
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
 }
@@ -821,7 +884,12 @@ pub(all) enum Impl {
     mut doc~ : DocString
   )
   TopTypeDef(TypeDecl)
-  TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, loc~ : Location)
+  TopFuncDef(
+    fun_decl~ : FunDecl,
+    decl_body~ : DeclBody,
+    where_clause~ : WhereClause?,
+    loc~ : Location
+  )
   TopLetDef(
     binder~ : Binder,
     ty~ : Type?,
