@@ -30,6 +30,7 @@
 %token<String> INFIX3
 %token<String> INFIX4
 %token<String> AUGMENTED_ASSIGNMENT
+%token PLUS_EQUAL "+="
 %token EOF
 %token FALSE
 %token TRUE
@@ -55,6 +56,7 @@
 %token TRAITALIAS "traitalias"
 %token FNALIAS "fnalias"
 %token EQUAL "="
+%token EQ_TILDE "=~"
 %token LPAREN "("
 %token RPAREN ")"
 %token COMMA ","
@@ -82,10 +84,14 @@
 %token<String> PACKAGE_NAME
 %token AS "as"
 %token PIPE "|>"
+%token PIPE_LEFT "<|"
+%token LT_PLUS "<+"
 %token ELSE "else"
 %token FN "fn"
 %token IF "if"
 %token LET "let"
+%token PROOF_ASSERT "proof_assert"
+%token PROOF_LET "proof_let"
 %token CONST "const"
 %token MATCH "match"
 %token USING "using"
@@ -111,8 +117,12 @@
 %token IS "is"
 %token SUBERROR "suberror"
 %token AND "and"
+%token FORALL "∀"
+%token EXISTS "∃"
+%token IMPLIES "→"
 %token LETREC "letrec"
 %token ENUMVIEW "enumview"
+%token EXTENUM "extenum"
 %token DECLARE         "declare"
 %token NORAISE "noraise"
 %token NOBREAK         "nobreak"
@@ -159,6 +169,7 @@ property -> Prop:
 
 expr -> Expr:
   | name=LIDENT                                  { Ident({qual: None, name}) }
+  | name=UIDENT                                  { Ident({qual: None, name}) }
   | qual=LIDENT name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
   | name=LIDENT props=properties                 { Apply({qual: None, name}, props) }
   | qual=LIDENT name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
@@ -173,4 +184,3 @@ properties -> List[Prop]:
 non_empty_properties -> List[Prop]:
   | property { @list.from_array([$1]) }
   | x=property "," xs=non_empty_properties{ xs.add(x) }
-

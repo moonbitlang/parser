@@ -110,4 +110,32 @@ test "attribute" {
       #|}
     ),
   )
+  let attr = Attribute::new(loc=dummy_loc, ("qual", Some("name"), "(Debug)"))
+  debug_inspect(
+    attr,
+    content=(
+      #|{
+      #|  loc: {
+      #|    start: { fname: "", lnum: 0, bol: 0, cnum: 0 },
+      #|    end: { fname: "", lnum: 0, bol: 0, cnum: 0 },
+      #|  },
+      #|  raw: "#qual.name(Debug)",
+      #|  parsed: Some(Apply(qual.name, <List: [Expr(Ident(Debug))]>)),
+      #|}
+    ),
+  )
+  let attr = Attribute::new(loc=dummy_loc, ("qual", Some("name"), "("))
+  debug_inspect(
+    attr,
+    content=(
+      #|{
+      #|  loc: {
+      #|    start: { fname: "", lnum: 0, bol: 0, cnum: 0 },
+      #|    end: { fname: "", lnum: 0, bol: 0, cnum: 0 },
+      #|  },
+      #|  raw: "#qual.name(",
+      #|  parsed: None,
+      #|}
+    ),
+  )
 }

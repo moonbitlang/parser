@@ -73,7 +73,7 @@ pub fn Attribute::new(
   let parsed = match errors {
     [] =>
       try payloads(tokens, initial_pos=loc.start) catch {
-        UnexpectedEndOfInput(_) | UnexpectedToken(_) => Some(Ident(attr_id))
+        UnexpectedEndOfInput(_) | UnexpectedToken(_) => None
       } noraise {
         Empty => Some(Ident(attr_id))
         props => Some(Apply(attr_id, props))
