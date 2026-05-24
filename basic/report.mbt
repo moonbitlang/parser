@@ -5,7 +5,7 @@ pub(all) struct Report {
 } derive(Debug)
 
 ///|
-pub impl Show for Report with output(self, logger) {
+pub impl Show for Report with fn output(self, logger) {
   logger.write_string("error (")
   logger.write_string(self.loc.to_string())
   logger.write_char(':')
@@ -14,6 +14,6 @@ pub impl Show for Report with output(self, logger) {
 }
 
 ///|
-pub impl ToJson for Report with to_json(self) {
+pub impl ToJson for Report with fn to_json(self) {
   { "type": "Error", "loc": self.loc, "msg": self.msg }
 }

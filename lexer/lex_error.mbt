@@ -13,7 +13,7 @@ pub enum LexicalError {
 }
 
 ///|
-pub impl Show for LexicalError with output(self, logger) {
+pub impl Show for LexicalError with fn output(self, logger) {
   logger.write_string(
     match self {
       InvalidDotInt(s) => "invalid byte literal: \{s}"

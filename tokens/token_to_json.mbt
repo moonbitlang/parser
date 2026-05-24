@@ -1,5 +1,5 @@
 ///|
-pub impl ToJson for CommentKind with to_json(self) {
+pub impl ToJson for CommentKind with fn to_json(self) {
   match self {
     InlineTrailing => "InlineTrailing"
     Ownline(leading_blank_line~, trailing_blank_line~) =>
@@ -14,7 +14,7 @@ pub impl ToJson for CommentKind with to_json(self) {
 }
 
 ///|
-pub impl ToJson for Comment with to_json(self) {
+pub impl ToJson for Comment with fn to_json(self) {
   {
     "content": self.content,
     "kind": self.kind,
@@ -23,7 +23,7 @@ pub impl ToJson for Comment with to_json(self) {
 }
 
 ///|
-pub impl ToJson for Token with to_json(self) {
+pub impl ToJson for Token with fn to_json(self) {
   match self {
     TRY_QUESTION => "TRY_QUESTION"
     NORAISE => "NORAISE"

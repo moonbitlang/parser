@@ -7,7 +7,7 @@ pub(all) struct DocString {
 }
 
 ///|
-pub impl ToJson for DocString with to_json(self) {
+pub impl ToJson for DocString with fn to_json(self) {
   let mut docs = self.content
   let init_str = match docs {
     Empty => return ""
