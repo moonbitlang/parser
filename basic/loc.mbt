@@ -7,7 +7,7 @@ pub(all) struct Position {
 } derive(Debug, Hash, ToJson)
 
 ///|
-pub impl Show for Position with output(self, logger) {
+pub impl Show for Position with fn output(self, logger) {
   logger.write_char('"')
   if self.fname != "" {
     logger..write_string(self.fname).write_char(':')
@@ -20,12 +20,12 @@ pub impl Show for Position with output(self, logger) {
 }
 
 ///|
-pub impl Eq for Position with equal(self, other) {
+pub impl Eq for Position with fn equal(self, other) {
   self.fname == other.fname && self.cnum == other.cnum
 }
 
 ///|
-pub impl Compare for Position with compare(self, other) {
+pub impl Compare for Position with fn compare(self, other) {
   match self.fname.compare(other.fname) {
     0 =>
       match self.lnum.compare(other.lnum) {
@@ -109,7 +109,7 @@ pub fn Location::trim_last_char(self : Location) -> Location {
 }
 
 ///|
-pub impl Show for Location with output(self, buf) {
+pub impl Show for Location with fn output(self, buf) {
   buf
   ..write_string(self.start.fname)
   ..write_string("-")
@@ -123,7 +123,7 @@ pub impl Show for Location with output(self, buf) {
 }
 
 ///|
-pub impl ToJson for Location with to_json(loc) {
+pub impl ToJson for Location with fn to_json(loc) {
   match show_loc.val {
     Hidden => Json::null()
     Json =>

@@ -1,5 +1,5 @@
 ///|
-pub impl ToJson for Ast with to_json(self) {
+pub impl ToJson for Ast with fn to_json(self) {
   fn convert(ast : Ast, fold_duplicates : Bool) -> Json {
     match ast {
       Null(_) => Json::null()

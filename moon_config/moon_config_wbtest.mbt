@@ -7,7 +7,7 @@ fn parse_pkg(source : String) -> (Ast, Array[@basic.Report]) {
 struct AstNoLoc(Ast)
 
 ///|
-impl @debug.Debug for AstNoLoc with to_repr(self) {
+impl @debug.Debug for AstNoLoc with fn to_repr(self) {
   fn go(ast : Ast) -> @debug.Repr {
     match ast {
       Null(_) => @debug.Repr::ctor("Null", [])

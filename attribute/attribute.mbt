@@ -5,7 +5,7 @@ pub(all) struct Id {
 }
 
 ///|
-pub impl Show for Id with output(self, logger) {
+pub impl Show for Id with fn output(self, logger) {
   match self.qual {
     None => logger.write_string(self.name)
     Some(x) =>
@@ -14,7 +14,7 @@ pub impl Show for Id with output(self, logger) {
 }
 
 ///|
-pub impl Debug for Id with to_repr(self) {
+pub impl Debug for Id with fn to_repr(self) {
   @debug.Repr::literal(self.to_string())
 }
 
@@ -49,7 +49,7 @@ pub fn Attribute::name(self : Self) -> String? {
 }
 
 ///|
-pub impl ToJson for Attribute with to_json(attr) {
+pub impl ToJson for Attribute with fn to_json(attr) {
   { "type": "Attribute", "raw": attr.raw, "loc": attr.loc }
 }
 
