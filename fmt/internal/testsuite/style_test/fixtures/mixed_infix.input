@@ -1,0 +1,20 @@
+
+fn collapsible_if() -> Unit {
+  match e {
+    // fits after `=>`
+    Pattern => if a { b } else { c }
+    // fits in next line
+    Pattern_______________________________________________________ => if a { b } else { c }
+    // the body of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => {
+      if a { 
+        b________________________________ 
+      } else { 
+        c_____________________________ 
+      }
+    }
+    // the head of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      if a_______________________________ { b__________________________ } else { c________________________ }
+  }
+}

@@ -1,0 +1,73 @@
+fn trailing_function() {
+  function_callback(a______________________, b________________________, fn(x________, y__________){
+    let a = b
+    a
+  }) 
+  
+  function_callback(a__________________, b__________________, fn(x__, y___){
+    let a = b
+    a
+  }) 
+
+  function_callback(a_____________, b____________, c____________________, fn(x__, y___){
+    let a = b
+    a
+  }) 
+}
+
+fn trailing_arrow() {
+  function_callback(a______________________, b________________________, (x________, y__________) => {
+    let a = b
+    a
+  }) 
+  
+  function_callback(a__________________, b__________________, (x__, y___) => {
+    let a = b
+    a
+  }) 
+
+  function_callback(a_____________, b____________, c____________________, (x__, y___) => {
+    let a = b
+    a
+  }) 
+}
+
+fn trailing_array() {
+  function_callback(a______________________, b________________________, c______________, [
+    elem______________________,
+    elem______________________,
+    elem______________________,
+  ]) 
+  
+  function_callback(a__________________, b__________________, [
+    elem______________________,
+    elem______________________,
+    elem______________________,
+  ]) 
+
+}
+
+fn flatten_style() {
+  function_callback(a,b,c, fn(x, y){ a }) 
+  function_callback(a,b,c, (x, y) => a) 
+  function_callback(a, b, c, [elem,elem,elem]) 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

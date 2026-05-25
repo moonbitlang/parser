@@ -1,0 +1,16 @@
+import {
+  "moonbitlang/parser/syntax",
+  "moonbitlang/parser/basic",
+  "moonbitlang/parser/tokens",
+  "moonbit-community/prettyprinter" @pp,
+  "moonbitlang/parser/lexer",
+  "moonbitlang/parser/handrolled_parser",
+  "moonbitlang/parser/fmt/internal/comment",
+  "moonbitlang/parser/attribute",
+  "moonbitlang/core/cmp",
+  "moonbitlang/core/list",
+}
+
+import {
+  "moonbitlang/core/list",
+} for "wbtest"

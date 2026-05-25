@@ -1,0 +1,9 @@
+
+enum DeriveLineWrap1 {
+
+} derive(Show, Ty1, Ty2, Ty3(prop1="xxxxxx", prop2="xxxxxx"))
+
+enum DeriveLineWrap2 {
+
+} derive(Show________________, Ty1_____________, Ty2______________, Ty3(prop1="xxxxxx", prop2="xxxxxx"))
+

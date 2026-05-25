@@ -1,0 +1,7 @@
+async fn main {
+  ()
+}
+
+async test "async_test" {
+  ()
+}

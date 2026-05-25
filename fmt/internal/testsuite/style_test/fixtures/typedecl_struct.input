@@ -1,0 +1,16 @@
+
+struct List[T] {
+  value : T  
+  mut next : List[T]?
+}
+
+struct TypeParamsLineWrap1[T1, T2, T2, T3, T4, T5] {} 
+struct TypeParamsLineWrap2[T1_________, T2_________, T2_________, T3_________, T4_________, T5________] {} 
+
+struct FieldLineWrap {
+  field1 : TyCon[Ty1_______, Ty2________, Ty3___________, Ty4_________, Ty5__________]
+  field2 : Bool
+}
+
+
+

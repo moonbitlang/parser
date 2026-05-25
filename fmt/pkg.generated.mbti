@@ -1,0 +1,21 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/fmt"
+
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/parser/syntax",
+}
+
+// Values
+pub fn format(String, block_line? : Bool) -> String
+
+pub fn impls_to_string(@list.List[@syntax.Impl]) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

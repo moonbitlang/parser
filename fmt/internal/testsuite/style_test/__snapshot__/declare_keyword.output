@@ -1,0 +1,10 @@
+// generated file, do not edit!
+///|
+declare type T1
+
+///|
+declare pub type T2
+
+///|
+declare pub impl Show for T1
+

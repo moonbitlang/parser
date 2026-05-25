@@ -1,0 +1,10 @@
+import {
+  "moonbitlang/core/argparse",
+  "moonbitlang/x/fs",
+  "moonbitlang/parser/fmt",
+  "moonbitlang/core/env",
+}
+
+options(
+  "is-main": true,
+)

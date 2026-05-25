@@ -1,0 +1,7 @@
+
+struct TupleStruct1(Int)
+struct TupleStruct2(Int, Bool)
+struct TupleStruct3[T1,T2,T3,T4,T5,T6](T1,T2,T3,T4,T5,T6)
+struct TupleStructLineWrap1[T1______,T2______,T3______,T4______,T5______](T1______,T2______,T3______,T4______,T5______)
+struct TupleStructLineWrap2[T1______,T2______,T3______,T4______,T5______,T6______](T1______,T2______,T3______,T4______,T5______,T6______, Ty1________, Ty2_______, Ty3_______, Ty4______, Ty5______)
+

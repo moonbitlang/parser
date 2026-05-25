@@ -1,0 +1,28 @@
+fn arrow_function_with_single_param() -> Unit {
+  (x) => x + 1
+}
+
+fn arrow_function_with_multiple_params() -> Unit {
+  (x, y, z) => x + y + z
+}
+
+fn arrow_function_with_no_param() -> Unit {
+  () => 42
+}
+
+fn arrow_function_with_block_body() -> Unit {
+  (x, y) => {
+    let sum = x + y
+    sum * 2
+  }
+}
+
+fn arrow_function_with_long_parameters() -> Unit {
+  (param1_________________, param2_________________, param3_________________, param4_________________) =>
+    param1_________________ + param2_________________ + param3_________________ + param4_________________
+}
+
+
+
+
+

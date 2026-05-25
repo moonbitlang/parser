@@ -1,0 +1,37 @@
+// generated file, do not edit!
+///|
+suberror SubErr0
+
+///|
+suberror SubErr1
+
+///|
+suberror SubErr2
+
+///|
+suberror SubErr3 {
+  Constr1
+  Constr2(Int, mut label~ : Int)
+}
+
+///|
+suberror PayloadLineWrap1
+
+///|
+suberror PayloadLineWrap2
+
+///|
+suberror PayloadLineWrap2 {
+  Ctor1(Ty1, Ty2, Ty3, Ty4, Ty5, Ty6, Ty7, Ty8)
+  Ctor2(
+    Ty1______,
+    Ty2______,
+    Ty3______,
+    Ty4______,
+    Ty5______,
+    Ty6______,
+    Ty7______,
+    mut label~ : Ty8______,
+  )
+}
+

@@ -1,0 +1,89 @@
+///|
+fn case1() -> Unit {
+  match constant {
+    BigInt(s)
+    | Double(s)
+    | Float(s)
+    | UInt64(s)
+    | UInt(s)
+    | Int64(s)
+    | Int(s) => text(s)
+  }
+}
+
+///|
+fn case2() -> Unit {
+  match constant {
+    BigInt(s)
+    | Double(s)
+    | Float(s)
+    | UInt64(s)
+    | UInt(s)
+    | Int64(s)
+    | Int(s) => text(s).method1(args).method2(args)
+  }
+}
+
+///|
+fn case3() -> Unit {
+  match expr {
+    Group(_) | StaticAssert(_) => {
+      let a = b
+      panic()
+    }
+  }
+}
+
+///|
+fn case4() -> Unit {
+  match expr {
+    Group(_) | StaticAssert(_) => match expr2 {
+      A(_) => 100
+      B(_) => 200
+    }
+    Group(_) | StaticAssert(_) => {
+      field1: 10000000000,
+      field2: 20000000000,
+      field3: 30000000000,
+    }
+    Group(_) | StaticAssert(_) => {
+      field1: 10000000000,
+      field2: 20000000000,
+      field3: 30000000000,
+      field4: 30000000000,
+    }
+  }
+}
+
+///|
+fn case5() -> Unit {
+  match expr {
+    Group(_) | StaticAssert(_) => {
+      field1: 1,
+      field2: 2,
+      field3: 3,
+    }
+  }
+}
+
+
+fn compose() -> Unit {
+  match a {
+    Pattern(long_args, long_args) => if a { b } else { c }
+    Pattern(long_args, long_args) => if aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa { b } else { c }
+    Pattern(long_args, long_args) => if aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa { bbbbbbbbbbbbbbbbbbbbbbbbbbb } else { ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc }
+    Pattern(long_args, long_args) => if aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa { bbbbbbbbbbbbbbbbbbbbbbbbbbb } else { ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc }
+  }
+
+  {
+    let a = b
+    match a {
+      Pattern(long_args, long_args) => if a { b } else { c }
+      Pattern(long_args, long_args) => if aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa { b } else { c }
+      Pattern(long_args, long_args) => if aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa { bbbbbbbbbbbbbbbbbbbbbbbbbbb } else { ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc }
+      Pattern(long_args, long_args) => if aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa { bbbbbbbbbbbbbbbbbbbbbbbbbbb } else { ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc }
+    }
+    
+  }
+  let a = b
+}

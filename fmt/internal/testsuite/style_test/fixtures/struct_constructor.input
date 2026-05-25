@@ -1,0 +1,6 @@
+struct S {
+  x : Int
+  y : Int
+
+  fn new(x~ : Int, y~ : Int) -> S
+}
