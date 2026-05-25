@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/fmt/internal/format"
+
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/parser/basic",
+  "moonbitlang/parser/syntax",
+  "moonbitlang/parser/tokens",
+}
+
+// Values
+pub fn debug_comment(String) -> (String, String)
+
+pub fn format(String, block_line? : Bool) -> String
+
+pub fn impls_to_string(@list.List[@syntax.Impl]) -> String
+
+pub fn parse(String) -> (@list.List[@syntax.Impl], Array[@basic.Report], Array[(@tokens.Token, @basic.Position, @basic.Position)])
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

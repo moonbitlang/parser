@@ -1,0 +1,11 @@
+// generated file, do not edit!
+///|
+async fn main {
+  ()
+}
+
+///|
+async test "async_test" {
+  ()
+}
+

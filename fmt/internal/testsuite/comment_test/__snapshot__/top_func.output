@@ -1,0 +1,340 @@
+ // 0
+///|
+pub //1 
+async //2
+ //2a
+fn[ //2b
+  T, //2c
+  R //2d  
+  : //2e  
+  Show + Compare, //2g
+   //3 
+] f( //3a
+  p1 : T1, //4
+  p2~ : T2, //4b
+  p3? : T3, //4d
+  p4? : T4 = e, //4e
+) -> R raise T2 {
+  expr
+} //8
+
+///|
+let a =0
+
+==========================================================
+// generated file, do not edit!
+[
+  {kind: // 0, loc: -1:1-1:5, surround: (None, `pub` (-2:1-2:4))},
+  {kind: //1, loc: -2:5-2:8, surround: (`pub` (-2:1-2:4), `async` (-3:2-3:7))},
+  {
+    kind: //2,
+    loc: -3:8-3:11,
+    surround: (`async` (-3:2-3:7), COMMENT (-4:2-4:6)),
+  },
+  {kind: //2a, loc: -4:2-4:6, surround: (`async` (-3:2-3:7), `fn` (-5:2-5:4))},
+  {
+    kind: //2b,
+    loc: -5:7-5:11,
+    surround: (`[` (-5:5-5:6), id (uppercase start) (-6:3-6:4)),
+  },
+  {
+    kind: //2c,
+    loc: -6:6-6:10,
+    surround: (`,` (-6:4-6:5), id (uppercase start) (-7:3-7:4)),
+  },
+  {
+    kind: //2d ,
+    loc: -7:5-7:10,
+    surround: (id (uppercase start) (-7:3-7:4), `:` (-8:5-8:6)),
+  },
+  {
+    kind: //2e,
+    loc: -8:7-8:11,
+    surround: (`:` (-8:5-8:6), id (uppercase start) (-9:5-9:9)),
+  },
+  {
+    kind: //2f,
+    loc: -9:12-9:16,
+    surround: (`+` (-9:10-9:11), id (uppercase start) (-10:6-10:13)),
+  },
+  {
+    kind: //2g,
+    loc: -10:15-10:19,
+    surround: (`,` (-10:13-10:14), COMMENT (-11:3-11:7)),
+  },
+  {
+    kind: //3 ,
+    loc: -11:3-11:7,
+    surround: (`,` (-10:13-10:14), `]` (-12:2-12:3)),
+  },
+  {
+    kind: //3a,
+    loc: -12:7-12:11,
+    surround: (`(` (-12:5-12:6), id (lowercase start) (-13:4-13:6)),
+  },
+  {
+    kind: //4,
+    loc: -13:13-13:16,
+    surround: (`,` (-13:11-13:12), POST_LABEL (-14:4-14:7)),
+  },
+  {
+    kind: //4a,
+    loc: -14:10-14:14,
+    surround: (`:` (-14:8-14:9), id (uppercase start) (-15:6-15:8)),
+  },
+  {
+    kind: //4b,
+    loc: -15:10-15:14,
+    surround: (`,` (-15:8-15:9), id (lowercase start) (-16:4-16:6)),
+  },
+  {kind: //4c, loc: -16:8-16:12, surround: (`?` (-16:6-16:7), `:` (-17:6-17:7))},
+  {
+    kind: //4d,
+    loc: -17:12-17:16,
+    surround: (`,` (-17:10-17:11), POST_LABEL (-18:4-18:7)),
+  },
+  {
+    kind: //4e,
+    loc: -18:17-18:21,
+    surround: (id (lowercase start) (-18:15-18:16), `)` (-19:2-19:3)),
+  },
+  {kind: //5, loc: -19:4-19:7, surround: (`)` (-19:2-19:3), `->` (-20:4-20:6))},
+  {
+    kind: //6,
+    loc: -20:20-20:23,
+    surround: (`{` (-20:18-20:19), id (lowercase start) (-21:3-21:7)),
+  },
+  {
+    kind: //7,
+    loc: -22:3-22:6,
+    surround: (id (lowercase start) (-21:3-21:7), `}` (-23:1-23:2)),
+  },
+  {
+    kind: //8,
+    loc: -23:2-23:5,
+    surround: (`}` (-23:1-23:2), NEWLINE (-24:1-24:2)),
+  }
+]
+
+{
+  -2:1-2:4: [
+    {kind: //1, loc: -2:5-2:8, surround: (`pub` (-2:1-2:4), `async` (-3:2-3:7))}
+  ],
+  -3:2-3:7: [
+    {
+      kind: //2,
+      loc: -3:8-3:11,
+      surround: (`async` (-3:2-3:7), COMMENT (-4:2-4:6)),
+    }
+  ],
+  -5:2-5:4: [
+    {kind: //2a, loc: -4:2-4:6, surround: (`async` (-3:2-3:7), `fn` (-5:2-5:4))}
+  ],
+  -5:5-5:6: [
+    {
+      kind: //2b,
+      loc: -5:7-5:11,
+      surround: (`[` (-5:5-5:6), id (uppercase start) (-6:3-6:4)),
+    }
+  ],
+  -6:4-6:5: [
+    {
+      kind: //2c,
+      loc: -6:6-6:10,
+      surround: (`,` (-6:4-6:5), id (uppercase start) (-7:3-7:4)),
+    }
+  ],
+  -8:5-8:6: [
+    {
+      kind: //2e,
+      loc: -8:7-8:11,
+      surround: (`:` (-8:5-8:6), id (uppercase start) (-9:5-9:9)),
+    }
+  ],
+  -10:13-10:14: [
+    {
+      kind: //2g,
+      loc: -10:15-10:19,
+      surround: (`,` (-10:13-10:14), COMMENT (-11:3-11:7)),
+    }
+  ],
+  -12:2-12:3: [
+    {
+      kind: //3 ,
+      loc: -11:3-11:7,
+      surround: (`,` (-10:13-10:14), `]` (-12:2-12:3)),
+    }
+  ],
+  -12:5-12:6: [
+    {
+      kind: //3a,
+      loc: -12:7-12:11,
+      surround: (`(` (-12:5-12:6), id (lowercase start) (-13:4-13:6)),
+    }
+  ],
+  -13:11-13:12: [
+    {
+      kind: //4,
+      loc: -13:13-13:16,
+      surround: (`,` (-13:11-13:12), POST_LABEL (-14:4-14:7)),
+    }
+  ],
+  -14:8-14:9: [
+    {
+      kind: //4a,
+      loc: -14:10-14:14,
+      surround: (`:` (-14:8-14:9), id (uppercase start) (-15:6-15:8)),
+    }
+  ],
+  -15:8-15:9: [
+    {
+      kind: //4b,
+      loc: -15:10-15:14,
+      surround: (`,` (-15:8-15:9), id (lowercase start) (-16:4-16:6)),
+    }
+  ],
+  -16:6-16:7: [
+    {
+      kind: //4c,
+      loc: -16:8-16:12,
+      surround: (`?` (-16:6-16:7), `:` (-17:6-17:7)),
+    }
+  ],
+  -17:10-17:11: [
+    {
+      kind: //4d,
+      loc: -17:12-17:16,
+      surround: (`,` (-17:10-17:11), POST_LABEL (-18:4-18:7)),
+    }
+  ],
+  -19:2-19:3: [
+    {
+      kind: //5,
+      loc: -19:4-19:7,
+      surround: (`)` (-19:2-19:3), `->` (-20:4-20:6)),
+    }
+  ],
+  -20:18-20:19: [
+    {
+      kind: //6,
+      loc: -20:20-20:23,
+      surround: (`{` (-20:18-20:19), id (lowercase start) (-21:3-21:7)),
+    }
+  ],
+  -23:1-23:2: [
+    {
+      kind: //7,
+      loc: -22:3-22:6,
+      surround: (id (lowercase start) (-21:3-21:7), `}` (-23:1-23:2)),
+    }
+  ],
+  -2:1-23:2: [
+    {kind: // 0, loc: -1:1-1:5, surround: (None, `pub` (-2:1-2:4))},
+    {
+      kind: //8,
+      loc: -23:2-23:5,
+      surround: (`}` (-23:1-23:2), NEWLINE (-24:1-24:2)),
+    }
+  ],
+  -7:3-7:4: [
+    {
+      kind: //2d ,
+      loc: -7:5-7:10,
+      surround: (id (uppercase start) (-7:3-7:4), `:` (-8:5-8:6)),
+    }
+  ],
+  -10:6-10:13: [
+    {
+      kind: //2f,
+      loc: -9:12-9:16,
+      surround: (`+` (-9:10-9:11), id (uppercase start) (-10:6-10:13)),
+    }
+  ],
+  -18:4-18:16: [
+    {
+      kind: //4e,
+      loc: -18:17-18:21,
+      surround: (id (lowercase start) (-18:15-18:16), `)` (-19:2-19:3)),
+    }
+  ]
+}
+
+{
+  -2:1-2:4: {
+    "pub": Token(Some(-2:1-2:4)),
+    "lparen": Token(None),
+    "lident": Token(None),
+    "rparen": Token(None)
+  },
+  -2:1-23:2: {
+    "async": Token(Some(-3:2-3:7)),
+    "fn": Token(Some(-5:2-5:4)),
+    "lbracket": Token(Some(-5:5-5:6)),
+    "commas0": TokenArray([Some(-6:4-6:5), Some(-10:13-10:14)]),
+    "type_var_binders": TableArray(
+      [
+        {"colon": Token(None), "pluses": TokenArray([])},
+        {"colon": Token(Some(-8:5-8:6)), "pluses": TokenArray([None])}
+      ],
+    ),
+    "rbracket": Token(Some(-12:2-12:3)),
+    "lparen": Token(Some(-12:5-12:6)),
+    "parameters": TableArray(
+      [
+        {"colon": Token(Some(-13:7-13:8))},
+        {"colon": Token(Some(-14:8-14:9))},
+        {"question": Token(Some(-16:6-16:7)), "colon": Token(Some(-17:6-17:7))},
+        {"colon": Token(Some(-18:8-18:9)), "equal": Token(Some(-18:13-18:14))}
+      ],
+    ),
+    "commas1": TokenArray(
+      [Some(-13:11-13:12), Some(-15:8-15:9), Some(-17:10-17:11), None],
+    ),
+    "rparen": Token(Some(-19:2-19:3)),
+    "thin_arrow": Token(Some(-20:4-20:6)),
+    "raise_or_noraise": Token(Some(-20:9-20:14)),
+    "question": Token(None),
+    "lbrace": Token(Some(-20:18-20:19)),
+    "rbrace": Token(Some(-23:1-23:2))
+  }
+}
+
+{
+  -2:1-2:4: {
+    "pub": Token(Some(-2:1-2:4)),
+    "lparen": Token(None),
+    "lident": Token(None),
+    "rparen": Token(None)
+  },
+  -2:1-23:2: {
+    "async": Token(Some(-3:2-3:7)),
+    "fn": Token(Some(-5:2-5:4)),
+    "lbracket": Token(Some(-5:5-5:6)),
+    "commas0": TokenArray([Some(-6:4-6:5), Some(-10:13-10:14)]),
+    "type_var_binders": TableArray(
+      [
+        {"colon": Token(None), "pluses": TokenArray([])},
+        {"colon": Token(Some(-8:5-8:6)), "pluses": TokenArray([None])}
+      ],
+    ),
+    "rbracket": Token(Some(-12:2-12:3)),
+    "lparen": Token(Some(-12:5-12:6)),
+    "parameters": TableArray(
+      [
+        {"colon": Token(Some(-13:7-13:8))},
+        {"colon": Token(Some(-14:8-14:9))},
+        {"question": Token(Some(-16:6-16:7)), "colon": Token(Some(-17:6-17:7))},
+        {"colon": Token(Some(-18:8-18:9)), "equal": Token(Some(-18:13-18:14))}
+      ],
+    ),
+    "commas1": TokenArray(
+      [Some(-13:11-13:12), Some(-15:8-15:9), Some(-17:10-17:11), None],
+    ),
+    "rparen": Token(Some(-19:2-19:3)),
+    "thin_arrow": Token(Some(-20:4-20:6)),
+    "raise_or_noraise": Token(Some(-20:9-20:14)),
+    "question": Token(None),
+    "lbrace": Token(Some(-20:18-20:19)),
+    "rbrace": Token(Some(-23:1-23:2))
+  }
+}

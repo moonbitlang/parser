@@ -7,6 +7,7 @@ import {
   "moonbitlang/yacc@0.7.13",
   "moonbit-community/miniio@0.1.0",
   "moonbitlang/async@0.19.0",
+  "moonbit-community/prettyprinter@0.4.10",
 }
 
 readme = "README.md"

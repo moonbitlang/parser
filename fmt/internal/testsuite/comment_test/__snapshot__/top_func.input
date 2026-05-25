@@ -1,0 +1,25 @@
+// 0
+pub //1
+ async //2
+ //2a
+ fn [ //2b
+  T, //2c
+  R //2d 
+    : //2e
+    Show + //2f
+     Compare, //2g
+  //3 
+ ] f( //3a
+   p1 : T1, //4
+   p2~ : //4a
+     T2, //4b
+   p3? //4c
+     : T3, //4d
+   p4~ : T4 = e //4e
+ ) //5
+   -> R raise T2 { //6
+  expr
+  //7
+}//8
+
+let a = 0

@@ -1,0 +1,13 @@
+
+extern "c" fn native(x : Int) -> Int = "xxxx"
+extern "js" fn js1(x : Int) -> Unit = "js_code"
+extern "js" fn js2(x : Int) = 
+  #|js_code
+  #|js_code
+
+extern "js" fn js3(x : Int) = #|js_code
+
+fn wasm1(x : Int) -> Int = "xxxx" "xxxxxx"
+fn intrinsics(x : Int) -> Int = "%xxxx"
+
+

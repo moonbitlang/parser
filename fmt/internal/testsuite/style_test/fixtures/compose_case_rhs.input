@@ -1,0 +1,135 @@
+fn collapsible_apply() -> Unit {
+  match e {
+    // fits after `=>`
+    Pattern => f(arg1, arg2)
+    // fits in next line
+    Pattern_______________________________________________________ => f(arg1, arg2, arg3)
+    // the body of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      f(arg1_____________________, arg2_____________________, arg3_____________________)
+    // the head of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      f_______________________________(arg1_____________________, arg2_____________________, arg3_____________________)
+  }
+}
+
+fn collapsible_array() -> Unit {
+  match e {
+    // fits after `=>`
+    Pattern => [arg1, arg2]
+    // fits in next line
+    Pattern_______________________________________________________ => [arg1, arg2, arg3]
+    // the body of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      [arg1_____________________, arg2_____________________, arg3_____________________]
+  }
+}
+
+fn collapsible_record() -> Unit {
+  match e {
+    // fits after `=>`
+    Pattern => { field1, field2 }
+    // fits in next line
+    Pattern_______________________________________________________ => { arg1, arg2, arg3 }
+    // the body of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      { arg1_____________________, arg2_____________________, arg3_____________________ }
+  }
+}
+
+fn collapsible_constraint() -> Unit {
+  match e {
+    // fits after `=>`
+    Pattern => (expr : Anno)
+    // fits in next line
+    Pattern_______________________________________________________ => (expr________ : Anno________)
+    // the body of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      (expr_______________________________________________ : Anno_________________________________________)
+  }
+}
+
+fn collapsible_if() -> Unit {
+  match e {
+    // fits after `=>`
+    Pattern => if a { b } else { c }
+    // fits in next line
+    Pattern_______________________________________________________ => if a { b } else { c }
+    // the body of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => {
+      if a { 
+        b________________________________ 
+      } else { 
+        c_____________________________ 
+      }
+    }
+    // the head of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      if a_______________________________ { b__________________________ } else { c________________________ }
+  }
+}
+
+fn collapsible_ident() -> Unit {
+  match e {
+    // fits after `=>`
+    Pattern => id
+    // fits in next line
+    Pattern_______________________________________________________ => id__________________
+    // the collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      id________________________________________________________________________________
+  }
+}
+
+fn collapsible_dot_apply() -> Unit {
+  match e {
+    // fits after `=>`
+    Pattern => self.method(arg1, arg2)
+    // fits in next line
+    Pattern_______________________________________________________ => 
+      self.method(arg1,arg2)
+    // the body of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      self.method(arg1__________________________, arg2____________________, arg3_____________________)
+    // the head of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      [arg1_________________________, arg2_____________________, arg3________________]
+        .method(arg1__________________________,arg2____________________, arg3_____________________)
+  }
+}
+
+fn collapsible_dot_apply_chain() -> Unit {
+  match e {
+    // fits after `=>`
+    Pattern => self.method(arg1, arg2).method2(arg1, arg2)
+    // fits in next line
+    Pattern_______________________________________________________ => 
+      self.method(arg1,arg2).method(arg1,arg2)
+    // the body of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      self.method(arg1__________________________, arg2____________________, arg3_____________________)
+        .method(arg1____________________________, arg2____________________)
+    // the head of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      [arg1_________________________, arg2_____________________, arg3________________]
+        .method(arg1__________________________,arg2____________________, arg3_____________________)
+        .method(arg1____________________________, arg2____________________)
+  }
+}
+
+fn not_collapsible_assign() -> Unit {
+  match e {
+    // fits after `=>`
+    Pattern => a = b
+    // fits in next line
+    Pattern_______________________________________________________ => a________ = b_________
+    // the body of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      a________ = b______________________________________________________________________
+    // the head of collapsible expression does not fit in the next line
+    Pattern_______________________________________________________ => 
+      a__________________________________ = b____________________________________________
+  }
+}
+
+

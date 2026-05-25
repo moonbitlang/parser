@@ -1,0 +1,9 @@
+// generated file, do not edit!
+///|
+fn f(s : String) -> Unit {
+  lexmatch s {
+    "a" => ()
+    _ => ()
+  }
+}
+

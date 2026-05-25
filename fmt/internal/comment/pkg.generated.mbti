@@ -1,0 +1,76 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/fmt/internal/comment"
+
+import {
+  "moonbit-community/prettyprinter",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+  "moonbitlang/parser/basic",
+  "moonbitlang/parser/syntax",
+  "moonbitlang/parser/tokens",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) struct Comment {
+  start : @basic.Position
+  end : @basic.Position
+  left : (@tokens.Token, @basic.Position, @basic.Position)?
+  right : (@tokens.Token, @basic.Position, @basic.Position)?
+  kind : CommentKind
+} derive(@debug.Debug)
+pub impl @prettyprinter.Pretty for Comment
+
+pub(all) enum CommentKind {
+  Blank
+  Block(String)
+  Line(String)
+} derive(@debug.Debug)
+pub impl @prettyprinter.Pretty for CommentKind
+
+pub(all) enum Key {
+  Token(@basic.Location)
+  Node(@basic.Location)
+} derive(Compare, Eq, Hash)
+pub fn Key::loc(Self) -> @basic.Location
+pub impl @prettyprinter.Pretty for Key
+
+type Mapper
+pub fn Mapper::consume_comments(Self, Key?, (Comment) -> Bool) -> Array[Comment]
+pub fn Mapper::get_table(Self, @basic.Location) -> NodeTable
+pub fn Mapper::has_comment(Self, Key?) -> Bool
+pub fn Mapper::has_leading_comment(Self, Key?) -> Bool
+pub fn Mapper::has_trailing_comment(Self, Key?) -> Bool
+pub fn Mapper::new(Array[(@tokens.Token, @basic.Position, @basic.Position)], @list.List[@syntax.Impl]) -> Self
+pub fn Mapper::to_debug_info(Self) -> String
+
+type NodeArray
+pub fn NodeArray::empty() -> Self
+pub fn NodeArray::last(Self) -> Key?
+pub fn NodeArray::op_get(Self, Int) -> Key?
+pub impl @prettyprinter.Pretty for NodeArray
+
+type NodeTable
+pub fn NodeTable::empty() -> Self
+pub fn NodeTable::get_array(Self, String) -> NodeArray
+pub fn NodeTable::get_table(Self, String) -> Self
+pub fn NodeTable::get_table_array(Self, String) -> NodeTableArray
+pub fn NodeTable::get_token(Self, String) -> Key?
+pub fn NodeTable::new(Map[String, TokenGroup]) -> Self
+pub impl @prettyprinter.Pretty for NodeTable
+
+type NodeTableArray
+pub fn NodeTableArray::empty() -> Self
+pub fn NodeTableArray::op_get(Self, Int) -> NodeTable
+pub impl @prettyprinter.Pretty for NodeTableArray
+
+type TokenGroup
+pub impl @prettyprinter.Pretty for TokenGroup
+
+// Type aliases
+
+// Traits
+

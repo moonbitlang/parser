@@ -1,0 +1,49 @@
+
+trait Num : Show + ToJson {
+  add(Self,Self) -> Self
+  sub(lhs~ : Self, rhs~ : Self) -> Self
+  mul(Self,Self) -> Self = _
+  div(Self,Self) -> Self raise DivError
+  async from_string(String) -> Self
+}
+
+trait LineWrap1 : Trait1____ + Trait2____ + Trait3____ + Trait4____ + Trait5____ + Trait6____ {
+  f(Ty1______________, Ty2______________, Ty3______________, Ty4______________) -> Self
+  g(Ty1______________, Ty2______________, Ty3______________, Ty4______________) -> Self
+}
+
+
+impl Trait for Type with method(self, arg1, arg2) {
+  ...
+}
+
+impl Trait for Type with labeled(self, label1~, label2~) {
+  ...
+}
+
+impl Trait for Type with type_annotation(self : Self, label1~ : Int, label2~ : Bool) -> Unit raise Error {
+  ...
+}
+
+impl Trait with f() {
+  ...
+} 
+
+pub impl Trait with f() {
+  ...
+} 
+
+pub impl[T1 : Trait1, T2 : Trait2] Trait for Type with f() {
+  ...
+}
+
+impl Trait for Type
+impl[T1, T2] Trait for Type[T1, T2]
+
+pub impl[T1 : Trait1 + Trait2, T2 : Trait1 + Trait2 + Trait3] Trait for Type[T1__________, T2__________, T3__________, T4__________, T5__________, T6__________] with line_wrap_test(
+  self : Self, label1____~ : Int, label2____~ : Bool, label3____~ : Bool, label4____~ : Bool
+) -> Unit raise Error {
+  ...
+}
+
+

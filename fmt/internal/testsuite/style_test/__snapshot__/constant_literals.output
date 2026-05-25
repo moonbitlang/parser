@@ -1,0 +1,13 @@
+// generated file, do not edit!
+///|
+fn main {
+  let _ = 123
+  let _ = 1_000_000
+  let _ = 1000L
+  let _ = 14U
+  let _ = 14UL
+  let _ = 3.14
+  let _ = 3.14F
+  
+}
+

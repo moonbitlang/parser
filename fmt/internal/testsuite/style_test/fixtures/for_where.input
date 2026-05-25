@@ -1,0 +1,5 @@
+fn f() -> Unit {
+  for i = 0; i < 10; i = i + 1 {
+    println(i.to_string())
+  } where { proof_invariant: i >= 0, proof_reasoning: "i starts at 0" }
+}

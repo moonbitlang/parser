@@ -1,0 +1,41 @@
+
+#attribute1
+#attribute2(param1, param2="value", param3=true, f(a,b,c))
+#qual.attribute3
+#qual.attribute4(param="value", flag=true)
+test {
+
+}
+
+#alias("xxx")
+fn f() -> Unit {
+
+}
+
+#cfg(target="xxx")
+struct Foo1 {}
+
+#cfg(target="xxx")
+enum Foo2 {}
+
+#cfg(target="xxx")
+trait Foo3 {}
+
+#cfg(target="xxx")
+impl Foo4 for Int with f(){}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

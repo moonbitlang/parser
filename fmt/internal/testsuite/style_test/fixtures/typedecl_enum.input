@@ -1,0 +1,31 @@
+
+enum List[T] {
+  Nil
+  Cons(T, List[T])
+} 
+
+enum CStyleEnum {
+  Mode1 = 1  
+  Mode2 = 2
+  Mode3 = 3
+}
+
+enum WithLabelEnum {
+  Ctor1(label~ : Int, Bool)
+  Ctor2(mut label~ : Int, Bool)
+}
+
+enum EmptyEnum {}
+
+enum TypeParamsLineWrap[T1, T2, T3, T4, T5] {}
+
+enum TypeParamsLineWrap2[T1______________, T2____________, T3___________, T4___________, T5____________] {}
+
+enum ConstrLineWrap {
+  Constr2(Ty1, Ty2, Ty3, mut label~ : Ty4)
+  Constr1(
+    Ty1_________________, Ty2________________, 
+    TyCon[Ty1_____________, Ty2____________, Ty3____________, Ty3_____________, Ty4___________], 
+    mut label~ : Ty4_______________)
+}
+

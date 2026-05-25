@@ -1,0 +1,9 @@
+import {
+  "moonbitlang/parser/syntax",
+  "moonbitlang/parser/basic",
+  "moonbitlang/parser/tokens",
+  "moonbit-community/prettyprinter" @pp,
+  "moonbitlang/core/queue",
+  "moonbitlang/core/sorted_map",
+  "moonbitlang/core/debug",
+}

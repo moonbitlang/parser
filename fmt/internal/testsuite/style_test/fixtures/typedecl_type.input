@@ -1,0 +1,8 @@
+
+type Abstract1
+
+pub type Abstract2
+
+#external
+type Abstract3 
+

@@ -1,0 +1,20 @@
+
+suberror SubErr0
+suberror SubErr1 Int
+suberror SubErr2 (Bool, Int)
+suberror SubErr3 {
+  Constr1  
+  Constr2(Int, mut label~ : Int)
+}
+
+suberror PayloadLineWrap1 (Ty1, Ty2, Ty3, Ty4, Ty5, Ty6, Ty7, Ty8)
+suberror PayloadLineWrap2 (Ty1______, Ty2______, Ty3______, Ty4______, Ty5______, Ty6______, Ty7______, Ty8______)
+suberror PayloadLineWrap2 {
+  Ctor1(Ty1, Ty2, Ty3, Ty4, Ty5, Ty6, Ty7, Ty8)
+  Ctor2(Ty1______, Ty2______, Ty3______, Ty4______, Ty5______, Ty6______, Ty7______, mut label~ : Ty8______)
+}
+
+
+
+
+
