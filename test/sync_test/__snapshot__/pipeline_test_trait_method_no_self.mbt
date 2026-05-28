@@ -1,5 +1,5 @@
 trait Named {
-  name() -> String
+  fn name() -> String
 }
 
 fn[X : Named] name_of(_x : X) -> String {

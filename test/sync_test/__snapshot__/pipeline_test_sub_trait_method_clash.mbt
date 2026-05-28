@@ -1,9 +1,9 @@
 trait A {
-  f(Self) -> Int
+  fn f(Self) -> Int
 }
 
 trait B: A {
-  f(Self) -> Int
+  fn f(Self) -> Int
 }
 
 impl A for Int with f(i) { i }

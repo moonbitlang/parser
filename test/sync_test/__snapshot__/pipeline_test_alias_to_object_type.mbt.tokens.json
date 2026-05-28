@@ -19,41 +19,45 @@
     "loc": "1:10-1:11"
   },
   {
+    "token": "FN",
+    "loc": "2:3-2:5"
+  },
+  {
     "token": [
       "LIDENT",
       "f"
     ],
-    "loc": "2:3-2:4"
+    "loc": "2:6-2:7"
   },
   {
     "token": "LPAREN",
-    "loc": "2:4-2:5"
+    "loc": "2:7-2:8"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "2:5-2:9"
+    "loc": "2:8-2:12"
   },
   {
     "token": "RPAREN",
-    "loc": "2:9-2:10"
+    "loc": "2:12-2:13"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "2:11-2:13"
+    "loc": "2:14-2:16"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "2:14-2:18"
+    "loc": "2:17-2:21"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:18-2:19"
+    "loc": "2:21-2:22"
   },
   {
     "token": "RBRACE",

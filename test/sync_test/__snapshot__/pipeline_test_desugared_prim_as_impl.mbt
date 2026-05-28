@@ -1,6 +1,6 @@
 trait Range {
-  start(Self) -> Int
-  len(Self) -> Int
+  fn start(Self) -> Int
+  fn len(Self) -> Int
 }
 
 fn[R : Range] print_range(r : R) -> Unit {

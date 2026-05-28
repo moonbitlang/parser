@@ -41,9 +41,9 @@ struct MyStruct2 {
 ///|
 trait MyTrait {
   #attr.tag1
-  f() -> Self
+  fn f() -> Self
   #attr.tag2
   #attr.tag3
-  g(Self, Self) -> Unit
+  fn g(Self, Self) -> Unit
 }
 

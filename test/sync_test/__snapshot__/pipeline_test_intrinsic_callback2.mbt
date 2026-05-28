@@ -1,6 +1,6 @@
 ///|
 trait Add {
-  f(x : Self, y : Int) -> Int // currently it still works without Self type
+  fn f(x : Self, y : Int) -> Int // currently it still works without Self type
 }
 
 ///|

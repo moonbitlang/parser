@@ -1,15 +1,15 @@
 struct Writer (StringBuilder)
-fn[T : Show] Writer::write(self : Self, x : T) -> Unit {
-  self.0.write_string(repr(x))
+fn[T : Debug] Writer::write(self : Self, x : T) -> Unit {
+  self.0.write_string(to_repr(x).to_string())
 }
 fn Writer::write_string(self : Self, s : String) -> Unit {
   self.0.write_string(s)
 }
 
 struct TraceWriter (StringBuilder)
-fn[T : Show] TraceWriter::write(self : Self, x : T) -> Unit {
+fn[T : Debug] TraceWriter::write(self : Self, x : T) -> Unit {
   self.0.write_string("[value:")
-  self.0.write_string(repr(x))
+  self.0.write_string(to_repr(x).to_string())
   self.0.write_string("]")
 }
 fn TraceWriter::write_string(self : Self, s : String) -> Unit {
@@ -18,16 +18,25 @@ fn TraceWriter::write_string(self : Self, s : String) -> Unit {
   self.0.write_string("]")
 }
 
-struct Channels (Array[Writer])
-
-#alias("_[_]")
-fn Channels::get(self : Self, i : Int) -> Writer {
-  println("Channels::get")
-  self.0[i]
+struct Sql {
+  builder : StringBuilder
+}
+fn Sql::Sql() -> Sql {
+  println("Sql::Sql() was called. It should only be called once.")
+  { builder: StringBuilder::new() }
+}
+fn[T : Show] Sql::write(self : Self, x : T) -> Unit {
+  self.builder.write_string(Show::to_string(x))
+}
+fn Sql::write_string(self : Self, s : String) -> Unit {
+  self.builder.write_string(s)
+}
+fn Sql::write_end(self : Self) -> String {
+  self.builder.to_string()
 }
 
-impl Show for Channels with output(s, buf) {
-  buf.write_string((s.0)[0].0.to_string())
+fn consume_sql(sql : String) -> Unit {
+  println(sql)
 }
 
 fn main {
@@ -53,16 +62,14 @@ fn main {
 
   println(writer.0.to_string())
 
-  let chan = Channels([StringBuilder::new()])
-  chan[0] <+ "abc\{def}ghi"
-  println(chan)
-
   let trace : TraceWriter = StringBuilder::new()
   trace <+ ""
   trace <+ "asdf\{def}"
   println(trace.0.to_string())
 
+  consume_sql(Sql <+ "select \{def} from dual")
+
   let builder = StringBuilder::new()
-  builder <+ "abc\{def}ghi"
+  builder <+ "abc\{to_repr(def)}ghi"
   println(builder.to_string())
 }

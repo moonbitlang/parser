@@ -1,6 +1,6 @@
 #alias(A)
 trait I {
-  f(Self) -> Unit = _
+  fn f(Self) -> Unit = _
 }
 
 impl A with f(self) {
@@ -22,7 +22,7 @@ fn[X : A] use_A(x : X) -> Unit {
 }
 
 trait Derived : A {
-  g(Self) -> Unit
+  fn g(Self) -> Unit
 }
 
 impl Derived for Int with g(self) {

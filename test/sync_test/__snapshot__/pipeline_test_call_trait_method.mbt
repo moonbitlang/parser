@@ -1,6 +1,6 @@
 
 trait I {
-  f(Self) -> Unit
+  fn f(Self) -> Unit
 }
 
 fn[X: I] use_I(x: X) -> Unit {

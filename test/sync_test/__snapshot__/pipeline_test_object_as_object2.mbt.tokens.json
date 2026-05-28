@@ -19,41 +19,45 @@
     "loc": "1:11-1:12"
   },
   {
+    "token": "FN",
+    "loc": "2:3-2:5"
+  },
+  {
     "token": [
       "LIDENT",
       "f"
     ],
-    "loc": "2:3-2:4"
+    "loc": "2:6-2:7"
   },
   {
     "token": "LPAREN",
-    "loc": "2:4-2:5"
+    "loc": "2:7-2:8"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "2:5-2:9"
+    "loc": "2:8-2:12"
   },
   {
     "token": "RPAREN",
-    "loc": "2:9-2:10"
+    "loc": "2:12-2:13"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "2:11-2:13"
+    "loc": "2:14-2:16"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "2:14-2:18"
+    "loc": "2:17-2:21"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:18-2:19"
+    "loc": "2:21-2:22"
   },
   {
     "token": "RBRACE",
@@ -208,85 +212,93 @@
     "loc": "8:11-8:12"
   },
   {
+    "token": "FN",
+    "loc": "9:3-9:5"
+  },
+  {
     "token": [
       "LIDENT",
       "f"
     ],
-    "loc": "9:3-9:4"
+    "loc": "9:6-9:7"
   },
   {
     "token": "LPAREN",
-    "loc": "9:4-9:5"
+    "loc": "9:7-9:8"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "9:5-9:9"
+    "loc": "9:8-9:12"
   },
   {
     "token": "RPAREN",
-    "loc": "9:9-9:10"
+    "loc": "9:12-9:13"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "9:11-9:13"
+    "loc": "9:14-9:16"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "9:14-9:18"
+    "loc": "9:17-9:21"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "9:18-9:18"
+    "loc": "9:21-9:21"
   },
   {
     "token": "NEWLINE",
-    "loc": "9:18-9:19"
+    "loc": "9:21-9:22"
+  },
+  {
+    "token": "FN",
+    "loc": "10:3-10:5"
   },
   {
     "token": [
       "LIDENT",
       "g"
     ],
-    "loc": "10:3-10:4"
+    "loc": "10:6-10:7"
   },
   {
     "token": "LPAREN",
-    "loc": "10:4-10:5"
+    "loc": "10:7-10:8"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "10:5-10:9"
+    "loc": "10:8-10:12"
   },
   {
     "token": "RPAREN",
-    "loc": "10:9-10:10"
+    "loc": "10:12-10:13"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "10:11-10:13"
+    "loc": "10:14-10:16"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "10:14-10:18"
+    "loc": "10:17-10:21"
   },
   {
     "token": "NEWLINE",
-    "loc": "10:18-10:19"
+    "loc": "10:21-10:22"
   },
   {
     "token": "RBRACE",

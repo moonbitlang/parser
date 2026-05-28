@@ -19,52 +19,56 @@
     "loc": "1:15-1:16"
   },
   {
+    "token": "FN",
+    "loc": "2:3-2:5"
+  },
+  {
     "token": [
       "LIDENT",
       "write_string"
     ],
-    "loc": "2:3-2:15"
+    "loc": "2:6-2:18"
   },
   {
     "token": "LPAREN",
-    "loc": "2:15-2:16"
+    "loc": "2:18-2:19"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "2:16-2:20"
+    "loc": "2:19-2:23"
   },
   {
     "token": "COMMA",
-    "loc": "2:20-2:21"
+    "loc": "2:23-2:24"
   },
   {
     "token": [
       "UIDENT",
       "String"
     ],
-    "loc": "2:22-2:28"
+    "loc": "2:25-2:31"
   },
   {
     "token": "RPAREN",
-    "loc": "2:28-2:29"
+    "loc": "2:31-2:32"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "2:30-2:32"
+    "loc": "2:33-2:35"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "2:33-2:37"
+    "loc": "2:36-2:40"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:37-2:38"
+    "loc": "2:40-2:41"
   },
   {
     "token": "RBRACE",
@@ -224,56 +228,60 @@
     "loc": "9:17-9:18"
   },
   {
+    "token": "FN",
+    "loc": "10:3-10:5"
+  },
+  {
     "token": [
       "LIDENT",
       "log"
     ],
-    "loc": "10:3-10:6"
+    "loc": "10:6-10:9"
   },
   {
     "token": "LPAREN",
-    "loc": "10:6-10:7"
+    "loc": "10:9-10:10"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "10:7-10:11"
+    "loc": "10:10-10:14"
   },
   {
     "token": "COMMA",
-    "loc": "10:11-10:12"
+    "loc": "10:14-10:15"
   },
   {
     "token": "AMPER",
-    "loc": "10:13-10:14"
+    "loc": "10:16-10:17"
   },
   {
     "token": [
       "UIDENT",
       "Logger"
     ],
-    "loc": "10:14-10:20"
+    "loc": "10:17-10:23"
   },
   {
     "token": "RPAREN",
-    "loc": "10:20-10:21"
+    "loc": "10:23-10:24"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "10:22-10:24"
+    "loc": "10:25-10:27"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "10:25-10:29"
+    "loc": "10:28-10:32"
   },
   {
     "token": "NEWLINE",
-    "loc": "10:29-10:30"
+    "loc": "10:32-10:33"
   },
   {
     "token": "RBRACE",

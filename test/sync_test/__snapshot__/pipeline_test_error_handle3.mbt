@@ -7,8 +7,8 @@ suberror FloatError {
 }
 
 trait TF {
-  f1(Self) -> Float raise = _
-  f2(Self) -> Float raise FloatError = _
+  fn f1(Self) -> Float raise = _
+  fn f2(Self) -> Float raise FloatError = _
 }
 
 impl TF for Int with f1(x) -> Float raise {

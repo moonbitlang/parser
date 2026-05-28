@@ -1,5 +1,5 @@
 trait H {
-  name(Self)->String
+  fn name(Self)->String
 }
 
 pub fn hey(x : &H) -> Unit {

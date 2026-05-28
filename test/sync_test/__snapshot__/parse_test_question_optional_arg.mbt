@@ -18,5 +18,5 @@ fn init {
 }
 
 trait I {
-  f(label? : Int, Ty?) -> Unit
+  fn f(label? : Int, Ty?) -> Unit
 }

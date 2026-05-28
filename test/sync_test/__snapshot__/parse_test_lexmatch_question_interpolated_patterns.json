@@ -229,10 +229,47 @@
                         }
                       },
                       "body": {
-                        "kind": "Expr::Unit",
+                        "kind": "Expr::Let",
                         "loc": null,
                         "children": {
-                          "faked": true
+                          "pattern": {
+                            "kind": "Pattern::Any",
+                            "loc": null,
+                            "children": {}
+                          },
+                          "expr": {
+                            "kind": "Expr::Interp",
+                            "loc": null,
+                            "children": {
+                              "elems": {
+                                "kind": "Expr::Interp::ElemList",
+                                "loc": null,
+                                "children": [
+                                  {
+                                    "kind": "InterpElem::Literal",
+                                    "loc": null,
+                                    "children": {
+                                      "repr": "outer "
+                                    }
+                                  },
+                                  {
+                                    "kind": "InterpElem::Source",
+                                    "loc": null,
+                                    "children": {
+                                      "source": "s lexmatch? re\"a\\{\"}\"}\""
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "body": {
+                            "kind": "Expr::Unit",
+                            "loc": null,
+                            "children": {
+                              "faked": true
+                            }
+                          }
                         }
                       }
                     }

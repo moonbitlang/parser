@@ -1,4 +1,4 @@
 trait Debug {
-  show(Self,Int,Int) -> Double
-  (Self,Int,UndefinedType) -> Int //invalid, missing the method name
+  fn show(Self,Int,Int) -> Double
+  fn (Self,Int,UndefinedType) -> Int //invalid, missing the method name
 }

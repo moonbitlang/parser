@@ -1,7 +1,7 @@
 struct E(Int)
 
 trait T {
-  f(Self) -> E
+  fn f(Self) -> E
 }
 
 impl[X:Show] T for FixedArray[X] with f(self) {

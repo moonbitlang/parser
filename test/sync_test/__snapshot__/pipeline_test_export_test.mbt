@@ -121,7 +121,7 @@ pub fn[T] generic_fn(x : T) -> T {
 }
 
 pub(open) trait Disposable {
-  dispose(Self) -> Unit
+  fn dispose(Self) -> Unit
 }
 
 struct DisposableImpl {

@@ -1,4 +1,4 @@
 trait I {
-  f(x : Type, Type, label~ : Type) -> Unit
-  g(x : Int, y : Int) -> Unit
+  fn f(x : Type, Type, label~ : Type) -> Unit
+  fn g(x : Int, y : Int) -> Unit
 }

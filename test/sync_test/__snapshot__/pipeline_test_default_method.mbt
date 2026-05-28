@@ -1,7 +1,7 @@
 
 trait I {
-  f(Self) -> Unit
-  g(Self) -> Unit = _
+  fn f(Self) -> Unit
+  fn g(Self) -> Unit = _
 }
 
 impl I with g(self) {
@@ -48,7 +48,7 @@ fn init {
 
 
 trait Sub: I {
-  h(Self) -> Unit = _
+  fn h(Self) -> Unit = _
 }
 
 impl Sub with h(self) {

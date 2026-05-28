@@ -1,5 +1,5 @@
 trait Foo {
-  foo(Self) -> String
+  fn foo(Self) -> String
 }
 
 impl Foo for UInt64 with foo(self : UInt64) -> String {

@@ -1,5 +1,5 @@
 trait Obj {
-  f(Self, Int) -> Unit
+  fn f(Self, Int) -> Unit
 }
 
 impl Obj for Unit with f(_self, x) {

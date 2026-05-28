@@ -3,7 +3,7 @@
     "token": [
       "COMMENT",
       {
-        "content": "/// for more information, see MR !4034 on GitLab",
+        "content": "/// for more information, see http://192.168.86.3:53000/compiler/ideas/pulls/6545",
         "kind": [
           "Ownline",
           {
@@ -14,11 +14,11 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "1:1-1:49"
+    "loc": "1:1-1:82"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:49-1:50"
+    "loc": "1:82-1:83"
   },
   {
     "token": "FN",

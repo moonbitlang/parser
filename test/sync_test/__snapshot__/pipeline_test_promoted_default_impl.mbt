@@ -1,6 +1,6 @@
 trait I {
-  f(Self) -> Unit
-  g(Self) -> Unit = _
+  fn f(Self) -> Unit
+  fn g(Self) -> Unit = _
 }
 
 impl I with g(self) {

@@ -61,7 +61,7 @@ pub suberror MyErr2 {
 #alert(category1,"reason")
 #alert(category2,"reason")
  pub trait MyTrait {
-   f1(Int) -> Int
+   fn f1(Int) -> Int
  }
 
 #coverage.skip("string")
@@ -72,14 +72,14 @@ pub suberror MyErr2 {
 
 trait I {
   #deprecated
-  f(Self) -> Unit
+  fn f(Self) -> Unit
 
   // should not report duplicate here
   #deprecated
-  g(Self) -> Unit
+  fn g(Self) -> Unit
 
   // should report duplicate here
   #deprecated
   #deprecated
-  h(Self) -> Unit
+  fn h(Self) -> Unit
 }

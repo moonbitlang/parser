@@ -1,5 +1,5 @@
 trait Set {
-  has(Self, Int) -> Bool
+  fn has(Self, Int) -> Bool
 }
 
 struct FnSet((Int) -> Bool)
