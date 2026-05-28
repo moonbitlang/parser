@@ -1007,6 +1007,417 @@ fn lex_tokens(
 }
 
 ///|
+fn interpolation_write_view(
+  env : LexEnv,
+  buf : StringBuilder,
+  raw : StringView,
+) -> Unit {
+  env.register_surrogate_pair(raw)
+  buf.write_view(raw)
+}
+
+///|
+fn interpolation_write_char(
+  env : LexEnv,
+  buf : StringBuilder,
+  c : Char,
+) -> Unit {
+  env.register_surrogate_pair_for_char(c)
+  buf.write_char(c)
+}
+
+///|
+fn add_interpolation_lexing_error(
+  env : LexEnv,
+  base : StringView,
+  input : StringView,
+  rest : StringView,
+  err : LexicalError,
+) -> Unit {
+  env.add_lexing_error(
+    start=env.calc_offset(base~, input),
+    end=env.calc_offset(base~, rest),
+    err,
+  )
+}
+
+///|
+fn scan_interpolation_source(
+  input : StringView,
+  base~ : StringView,
+  env~ : LexEnv,
+  buf~ : StringBuilder,
+  brace_depth~ : Int,
+  preserve~ : Bool,
+) -> (StringView, Int) {
+  lexmatch input with longest {
+    (
+      "[\u0009\u000B\u000C\u0020\u00A0\uFEFF\u1680\u2000-\u200A\u202F\u205F\u3000]*\}" as raw,
+      rest
+    ) =>
+      if brace_depth == 0 {
+        if preserve {
+          interpolation_write_view(env, buf, raw)
+          (rest, env.calc_offset(base~, rest))
+        } else {
+          (rest, env.calc_offset(base~, input))
+        }
+      } else {
+        interpolation_write_view(env, buf, raw)
+        scan_interpolation_source(
+          rest,
+          base~,
+          env~,
+          buf~,
+          brace_depth=brace_depth - 1,
+          preserve~,
+        )
+      }
+    "" => {
+      env.add_lexing_error(
+        start=env.calc_offset(base~, input),
+        end=env.calc_offset(base~, input),
+        UnterminatedString,
+      )
+      (input, env.calc_offset(base~, input))
+    }
+    ("\r|\n", _) => {
+      env.add_lexing_error(
+        start=env.calc_offset(base~, input),
+        end=env.calc_offset(base~, input),
+        UnterminatedStringInVariableInterploation,
+      )
+      (input, env.calc_offset(base~, input))
+    }
+    ("b'" as raw, rest) => {
+      interpolation_write_view(env, buf, raw)
+      scan_interpolation_char_atom(
+        rest,
+        base~,
+        env~,
+        buf~,
+        brace_depth~,
+        preserve~,
+        escaped=false,
+      )
+    }
+    ("'" as raw, rest) => {
+      interpolation_write_char(env, buf, raw)
+      scan_interpolation_char_atom(
+        rest,
+        base~,
+        env~,
+        buf~,
+        brace_depth~,
+        preserve~,
+        escaped=false,
+      )
+    }
+    ("b\"" as raw, rest) => {
+      interpolation_write_view(env, buf, raw)
+      scan_interpolation_string_atom(
+        rest,
+        base~,
+        env~,
+        buf~,
+        brace_depth~,
+        preserve~,
+        allow_interp=false,
+        escaped=false,
+      )
+    }
+    ("re\"" as raw, rest) => {
+      interpolation_write_view(env, buf, raw)
+      scan_interpolation_string_atom(
+        rest,
+        base~,
+        env~,
+        buf~,
+        brace_depth~,
+        preserve~,
+        allow_interp=true,
+        escaped=false,
+      )
+    }
+    ("\"" as raw, rest) => {
+      interpolation_write_char(env, buf, raw)
+      scan_interpolation_string_atom(
+        rest,
+        base~,
+        env~,
+        buf~,
+        brace_depth~,
+        preserve~,
+        allow_interp=true,
+        escaped=false,
+      )
+    }
+    ("//[^\r\n]*" as raw, rest) => {
+      add_interpolation_lexing_error(
+        env,
+        base,
+        input,
+        rest,
+        InterpInvalidComment,
+      )
+      interpolation_write_view(env, buf, raw)
+      scan_interpolation_source(
+        rest,
+        base~,
+        env~,
+        buf~,
+        brace_depth~,
+        preserve~,
+      )
+    }
+    ("\$\|[^\r\n]*" as raw, rest) => {
+      add_interpolation_lexing_error(
+        env,
+        base,
+        input,
+        rest,
+        InterpInvalidMultilineString,
+      )
+      interpolation_write_view(env, buf, raw)
+      scan_interpolation_source(
+        rest,
+        base~,
+        env~,
+        buf~,
+        brace_depth~,
+        preserve~,
+      )
+    }
+    ("#\|[^\r\n]*" as raw, rest) => {
+      add_interpolation_lexing_error(
+        env,
+        base,
+        input,
+        rest,
+        InterpInvalidMultilineString,
+      )
+      interpolation_write_view(env, buf, raw)
+      scan_interpolation_source(
+        rest,
+        base~,
+        env~,
+        buf~,
+        brace_depth~,
+        preserve~,
+      )
+    }
+    ("#[a-zA-Z_][a-zA-Z0-9_]*[^\r\n]*" as raw, rest) => {
+      add_interpolation_lexing_error(
+        env,
+        base,
+        input,
+        rest,
+        InterpInvalidAttribute,
+      )
+      interpolation_write_view(env, buf, raw)
+      scan_interpolation_source(
+        rest,
+        base~,
+        env~,
+        buf~,
+        brace_depth~,
+        preserve~,
+      )
+    }
+    ("[{]" as raw, rest) => {
+      interpolation_write_char(env, buf, raw)
+      scan_interpolation_source(
+        rest,
+        base~,
+        env~,
+        buf~,
+        brace_depth=brace_depth + 1,
+        preserve~,
+      )
+    }
+    ("." as c, rest) => {
+      interpolation_write_char(env, buf, c)
+      scan_interpolation_source(
+        rest,
+        base~,
+        env~,
+        buf~,
+        brace_depth~,
+        preserve~,
+      )
+    }
+    _ => panic()
+  }
+}
+
+///|
+fn scan_interpolation_string_atom(
+  input : StringView,
+  base~ : StringView,
+  env~ : LexEnv,
+  buf~ : StringBuilder,
+  brace_depth~ : Int,
+  preserve~ : Bool,
+  allow_interp~ : Bool,
+  escaped~ : Bool,
+) -> (StringView, Int) {
+  lexmatch input with longest {
+    "" => {
+      env.add_lexing_error(
+        start=env.calc_offset(base~, input),
+        end=env.calc_offset(base~, input),
+        UnterminatedString,
+      )
+      (input, env.calc_offset(base~, input))
+    }
+    ("\r|\n", _) => {
+      env.add_lexing_error(
+        start=env.calc_offset(base~, input),
+        end=env.calc_offset(base~, input),
+        UnterminatedStringInVariableInterploation,
+      )
+      (input, env.calc_offset(base~, input))
+    }
+    ("\\[{]" as raw, rest) => {
+      interpolation_write_view(env, buf, raw)
+      if allow_interp && !escaped {
+        let (rest, _) = scan_interpolation_source(
+          rest,
+          base~,
+          env~,
+          buf~,
+          brace_depth=0,
+          preserve=true,
+        )
+        scan_interpolation_string_atom(
+          rest,
+          base~,
+          env~,
+          buf~,
+          brace_depth~,
+          preserve~,
+          allow_interp~,
+          escaped=false,
+        )
+      } else {
+        scan_interpolation_string_atom(
+          rest,
+          base~,
+          env~,
+          buf~,
+          brace_depth~,
+          preserve~,
+          allow_interp~,
+          escaped=false,
+        )
+      }
+    }
+    ("." as c, rest) => {
+      interpolation_write_char(env, buf, c)
+      match (c.to_int(), escaped) {
+        (34, false) =>
+          scan_interpolation_source(
+            rest,
+            base~,
+            env~,
+            buf~,
+            brace_depth~,
+            preserve~,
+          )
+        (92, false) =>
+          scan_interpolation_string_atom(
+            rest,
+            base~,
+            env~,
+            buf~,
+            brace_depth~,
+            preserve~,
+            allow_interp~,
+            escaped=true,
+          )
+        _ =>
+          scan_interpolation_string_atom(
+            rest,
+            base~,
+            env~,
+            buf~,
+            brace_depth~,
+            preserve~,
+            allow_interp~,
+            escaped=false,
+          )
+      }
+    }
+    _ => panic()
+  }
+}
+
+///|
+fn scan_interpolation_char_atom(
+  input : StringView,
+  base~ : StringView,
+  env~ : LexEnv,
+  buf~ : StringBuilder,
+  brace_depth~ : Int,
+  preserve~ : Bool,
+  escaped~ : Bool,
+) -> (StringView, Int) {
+  lexmatch input with longest {
+    "" => {
+      env.add_lexing_error(
+        start=env.calc_offset(base~, input),
+        end=env.calc_offset(base~, input),
+        UnterminatedString,
+      )
+      (input, env.calc_offset(base~, input))
+    }
+    ("\r|\n", _) => {
+      env.add_lexing_error(
+        start=env.calc_offset(base~, input),
+        end=env.calc_offset(base~, input),
+        UnterminatedStringInVariableInterploation,
+      )
+      (input, env.calc_offset(base~, input))
+    }
+    ("." as c, rest) => {
+      interpolation_write_char(env, buf, c)
+      match (c.to_int(), escaped) {
+        (39, false) =>
+          scan_interpolation_source(
+            rest,
+            base~,
+            env~,
+            buf~,
+            brace_depth~,
+            preserve~,
+          )
+        (92, false) =>
+          scan_interpolation_char_atom(
+            rest,
+            base~,
+            env~,
+            buf~,
+            brace_depth~,
+            preserve~,
+            escaped=true,
+          )
+        _ =>
+          scan_interpolation_char_atom(
+            rest,
+            base~,
+            env~,
+            buf~,
+            brace_depth~,
+            preserve~,
+            escaped=false,
+          )
+      }
+    }
+    _ => panic()
+  }
+}
+
+///|
 fn lex_invalid_byte(
   input : StringView,
   base~ : StringView,
@@ -1070,38 +1481,6 @@ fn lex_string(
         end: env.make_pos(end),
       }),
     )
-  }
-
-  fn process_interpolation(input : StringView) -> (StringView, Int) {
-    lexmatch input with longest {
-      (
-        "[\u0009\u000B\u000C\u0020\u00A0\uFEFF\u1680\u2000-\u200A\u202F\u205F\u3000]*\}",
-        // spaces + '}'
-        rest
-      ) => (rest, env.calc_offset(base~, input))
-      "" => {
-        env.add_lexing_error(
-          start=env.calc_offset(base~, input),
-          end=env.calc_offset(base~, input),
-          UnterminatedString,
-        )
-        (input, env.calc_offset(base~, input))
-      }
-      ("\r|\n", _) => {
-        env.add_lexing_error(
-          start=env.calc_offset(base~, input),
-          end=env.calc_offset(base~, input),
-          UnterminatedStringInVariableInterploation,
-        )
-        (input, env.calc_offset(base~, input))
-      }
-      ("[^\n{}]" as c, rest) => {
-        env.register_surrogate_pair_for_char(c)
-        string_repr_buf.write_char(c)
-        process_interpolation(rest)
-      }
-      _ => panic()
-    }
   }
 
   fn process_string(input : StringView, start_pos : Int) -> StringView {
@@ -1171,7 +1550,14 @@ fn lex_string(
           }
           string_repr_buf.reset()
           let interp_start_pos = env.make_pos(env.calc_offset(base~, rest))
-          let (rest, interp_end) = process_interpolation(rest)
+          let (rest, interp_end) = scan_interpolation_source(
+            rest,
+            base~,
+            env~,
+            buf=string_repr_buf,
+            brace_depth=0,
+            preserve=false,
+          )
           let loc = Location::{
             start: interp_start_pos,
             end: env.make_pos(interp_end),
