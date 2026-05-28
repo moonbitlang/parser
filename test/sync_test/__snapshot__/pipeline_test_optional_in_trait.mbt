@@ -1,5 +1,5 @@
 trait I {
-  f(Self, x~ : Int, opt? : Int) -> Unit = _
+  fn f(Self, x~ : Int, opt? : Int) -> Unit = _
 }
 
 impl I with f(_self, x~, opt? = x + 1) {

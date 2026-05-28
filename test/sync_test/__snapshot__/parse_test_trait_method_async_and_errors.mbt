@@ -1,5 +1,5 @@
 trait I {
-  async f(Self) -> Int
-  g(1) -> Int
+  async fn f(Self) -> Int
+  fn g(1) -> Int
 }
 

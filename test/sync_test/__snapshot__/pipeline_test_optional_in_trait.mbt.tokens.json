@@ -19,97 +19,101 @@
     "loc": "1:10-1:11"
   },
   {
+    "token": "FN",
+    "loc": "2:3-2:5"
+  },
+  {
     "token": [
       "LIDENT",
       "f"
     ],
-    "loc": "2:3-2:4"
+    "loc": "2:6-2:7"
   },
   {
     "token": "LPAREN",
-    "loc": "2:4-2:5"
+    "loc": "2:7-2:8"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "2:5-2:9"
+    "loc": "2:8-2:12"
   },
   {
     "token": "COMMA",
-    "loc": "2:9-2:10"
+    "loc": "2:12-2:13"
   },
   {
     "token": [
       "POST_LABEL",
       "x"
     ],
-    "loc": "2:11-2:13"
+    "loc": "2:14-2:16"
   },
   {
     "token": "COLON",
-    "loc": "2:14-2:15"
+    "loc": "2:17-2:18"
   },
   {
     "token": [
       "UIDENT",
       "Int"
     ],
-    "loc": "2:16-2:19"
+    "loc": "2:19-2:22"
   },
   {
     "token": "COMMA",
-    "loc": "2:19-2:20"
+    "loc": "2:22-2:23"
   },
   {
     "token": [
       "LIDENT",
       "opt"
     ],
-    "loc": "2:21-2:24"
+    "loc": "2:24-2:27"
   },
   {
     "token": "QUESTION",
-    "loc": "2:24-2:25"
+    "loc": "2:27-2:28"
   },
   {
     "token": "COLON",
-    "loc": "2:26-2:27"
+    "loc": "2:29-2:30"
   },
   {
     "token": [
       "UIDENT",
       "Int"
     ],
-    "loc": "2:28-2:31"
+    "loc": "2:31-2:34"
   },
   {
     "token": "RPAREN",
-    "loc": "2:31-2:32"
+    "loc": "2:34-2:35"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "2:33-2:35"
+    "loc": "2:36-2:38"
   },
   {
     "token": [
       "UIDENT",
       "Unit"
     ],
-    "loc": "2:36-2:40"
+    "loc": "2:39-2:43"
   },
   {
     "token": "EQUAL",
-    "loc": "2:41-2:42"
+    "loc": "2:44-2:45"
   },
   {
     "token": "UNDERSCORE",
-    "loc": "2:43-2:44"
+    "loc": "2:46-2:47"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:44-2:45"
+    "loc": "2:47-2:48"
   },
   {
     "token": "RBRACE",

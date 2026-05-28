@@ -7,20 +7,20 @@ fn[Self] f(x: Self) -> Self { x }
 priv struct T {}
 
 pub trait I {
-  f(Self) -> T
-  f[X](Self) -> Int
+  fn f(Self) -> T
+  fn[X] f(Self) -> Int
 }
 
-trait I_private { m(Self) }
+trait I_private { fn m(Self) }
 
 pub fn[X: I_private] f(x: X) {}
 
 trait I_dup_method {
-  m1(Self)
-  m1(Self)
-  m2(Self) -> Int
-  m2(Self) -> Double
-  m2(Self) -> Char
+  fn m1(Self)
+  fn m1(Self)
+  fn m2(Self) -> Int
+  fn m2(Self) -> Double
+  fn m2(Self) -> Char
 }
 
 pub fn I_private::m(self: Int) {}

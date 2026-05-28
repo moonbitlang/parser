@@ -3,7 +3,7 @@ suberror StringError {
 }
 
 trait FromString {
-  from_string(String) -> Self raise StringError
+  fn from_string(String) -> Self raise StringError
 }
 
 impl FromString for Bool with from_string(_self) { if (_self == "") { raise StringError("!") }; true }

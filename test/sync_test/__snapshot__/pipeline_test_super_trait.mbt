@@ -1,6 +1,6 @@
 
 trait Super {
-  f(Self) -> Unit
+  fn f(Self) -> Unit
 }
 
 fn[X: Super] useSuper(x: X) -> Unit {
@@ -9,7 +9,7 @@ fn[X: Super] useSuper(x: X) -> Unit {
 
 
 trait Derived: Super {
-  g(Self) -> Unit
+  fn g(Self) -> Unit
 }
 
 fn[X: Derived] useDerived(x: X) -> Unit {
@@ -47,8 +47,8 @@ fn init {
 }
 
 
-trait Cycle1: Cycle2 { f(Self) -> Unit }
-trait Cycle2: Cycle1 { g(Self) -> Unit }
+trait Cycle1: Cycle2 { fn f(Self) -> Unit }
+trait Cycle2: Cycle1 { fn g(Self) -> Unit }
 
 impl Cycle1 for T1 with f(_self) { println("T1::f") }
 impl Cycle2 for T1 with g(_self) { println("T1::g") }
@@ -60,10 +60,10 @@ fn init {
 }
 
 
-trait Diamond_top { top(Self) -> Unit }
-trait Diamond_left: Diamond_top { left(Self) -> Unit }
-trait Diamond_right: Diamond_top { right(Self) -> Unit }
-trait Diamond_bottom: Diamond_left + Diamond_right { bottom(Self) -> Unit }
+trait Diamond_top { fn top(Self) -> Unit }
+trait Diamond_left: Diamond_top { fn left(Self) -> Unit }
+trait Diamond_right: Diamond_top { fn right(Self) -> Unit }
+trait Diamond_bottom: Diamond_left + Diamond_right { fn bottom(Self) -> Unit }
 
 // [Diamond_top] should appear only once in the super-trait closure of [Diamond_bottom]
 pub fn[X: Diamond_bottom] useBottom(x: X) -> Unit {

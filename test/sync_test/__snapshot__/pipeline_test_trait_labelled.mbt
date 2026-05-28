@@ -1,5 +1,5 @@
 trait I {
-  f(Self, x~ : Int, Int, y~ : Int) -> Unit
+  fn f(Self, x~ : Int, Int, y~ : Int) -> Unit
 }
 
 fn[X : Show] tee(x : X) -> X {

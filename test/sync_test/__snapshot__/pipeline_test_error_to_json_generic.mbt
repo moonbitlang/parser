@@ -1,6 +1,6 @@
 ///|
 trait F {
-  f(Self) -> String
+  fn f(Self) -> String
 }
 
 ///|

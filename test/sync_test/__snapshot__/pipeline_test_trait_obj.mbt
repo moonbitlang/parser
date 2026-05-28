@@ -1,6 +1,6 @@
 trait T {
-  f(Self, Int) -> Int
-  g(Self, String) -> String
+  fn f(Self, Int) -> Int
+  fn g(Self, String) -> String
 }
 
 struct S {

@@ -1,6 +1,6 @@
 ///|
 trait Seq {
-  length(Self) -> Int
+  fn length(Self) -> Int
 }
 
 ///|

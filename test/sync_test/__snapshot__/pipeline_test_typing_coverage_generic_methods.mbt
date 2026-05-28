@@ -7,7 +7,7 @@ fn[T, U] Box::map(self : Box[T], f : (T) -> U) -> Box[U] {
 }
 
 trait Describe {
-  describe(Self) -> String
+  fn describe(Self) -> String
 }
 
 impl[T : Show] Describe for Box[T] with describe(self) {

@@ -49,7 +49,7 @@ test "fn label?" {
 }
 
 trait Trait {
-  h(Self, label12~ : Int, label13~ : Int) -> Unit
+  fn h(Self, label12~ : Int, label13~ : Int) -> Unit
 }
 
 struct MyType(Int)

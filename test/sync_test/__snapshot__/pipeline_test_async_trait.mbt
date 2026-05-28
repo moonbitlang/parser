@@ -2,7 +2,7 @@ async fn[T] suspend(f : ((T) -> Unit) -> Unit) -> T noraise = "%async.suspend"
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
 
 trait Stream {
-  async next(Self) -> Char? noraise
+  async fn next(Self) -> Char? noraise
 }
 
 struct Input {

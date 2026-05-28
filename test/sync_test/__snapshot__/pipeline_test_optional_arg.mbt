@@ -22,7 +22,7 @@ fn[X: Show] tee(x: X) -> X {
 
 
 trait I: Show {
-  value() -> Self
+  fn value() -> Self
 }
 
 impl I for Int with value() { 42 }

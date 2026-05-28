@@ -1,5 +1,5 @@
 trait T {
-  f(Self) -> Int
+  fn f(Self) -> Int
 }
 
 struct F((Int) -> Int)

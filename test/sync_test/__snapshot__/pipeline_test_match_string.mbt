@@ -40,6 +40,14 @@ fn f4(s : String) -> Unit {
   }
 }
 
+///| ranges that include surrogate code units must read full chars
+fn f5(s : String) -> Unit {
+  match s {
+    ['\u{0000}'..='\u{FFFF}'] => println("bmp range")
+    _ => println("other")
+  }
+}
+
 ///|
 fn main {
   f1("hello", 42)
@@ -58,4 +66,6 @@ fn main {
   f4("hello")
   f4("abc")
   f4("h")
+  f5("A")
+  f5("😀")
 }

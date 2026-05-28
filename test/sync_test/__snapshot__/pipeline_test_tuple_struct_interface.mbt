@@ -6,7 +6,7 @@ enum E {
 }
 
 trait I {
-  f(Self, MyInt) -> MyPair
+  fn f(Self, MyInt) -> MyPair
 }
 
 fn[T: I] toMyInt(x: T) -> MyPair {

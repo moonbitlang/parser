@@ -83,52 +83,56 @@
     "loc": "5:19-5:20"
   },
   {
+    "token": "FN",
+    "loc": "6:3-6:5"
+  },
+  {
     "token": [
       "LIDENT",
       "from_string"
     ],
-    "loc": "6:3-6:14"
+    "loc": "6:6-6:17"
   },
   {
     "token": "LPAREN",
-    "loc": "6:14-6:15"
+    "loc": "6:17-6:18"
   },
   {
     "token": [
       "UIDENT",
       "String"
     ],
-    "loc": "6:15-6:21"
+    "loc": "6:18-6:24"
   },
   {
     "token": "RPAREN",
-    "loc": "6:21-6:22"
+    "loc": "6:24-6:25"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "6:23-6:25"
+    "loc": "6:26-6:28"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "6:26-6:30"
+    "loc": "6:29-6:33"
   },
   {
     "token": "RAISE",
-    "loc": "6:31-6:36"
+    "loc": "6:34-6:39"
   },
   {
     "token": [
       "UIDENT",
       "StringError"
     ],
-    "loc": "6:37-6:48"
+    "loc": "6:40-6:51"
   },
   {
     "token": "NEWLINE",
-    "loc": "6:48-6:49"
+    "loc": "6:51-6:52"
   },
   {
     "token": "RBRACE",

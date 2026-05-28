@@ -75,7 +75,7 @@ fn init {
 }
 
 trait Obj_with_err {
-  method_with_err(Self) -> Unit raise Err
+  fn method_with_err(Self) -> Unit raise Err
 }
 
 impl Obj_with_err for Int with method_with_err(_self) {

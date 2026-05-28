@@ -1,5 +1,5 @@
 trait I {
-  f(Self) -> Unit
+  fn f(Self) -> Unit
 }
 
 impl I for Int with f(self) {

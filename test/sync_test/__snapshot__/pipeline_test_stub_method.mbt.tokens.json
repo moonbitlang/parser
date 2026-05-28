@@ -19,52 +19,56 @@
     "loc": "1:10-1:11"
   },
   {
+    "token": "FN",
+    "loc": "2:3-2:5"
+  },
+  {
     "token": [
       "LIDENT",
       "add"
     ],
-    "loc": "2:3-2:6"
+    "loc": "2:6-2:9"
   },
   {
     "token": "LPAREN",
-    "loc": "2:6-2:7"
+    "loc": "2:9-2:10"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "2:7-2:11"
+    "loc": "2:10-2:14"
   },
   {
     "token": "COMMA",
-    "loc": "2:11-2:12"
+    "loc": "2:14-2:15"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "2:13-2:17"
+    "loc": "2:16-2:20"
   },
   {
     "token": "RPAREN",
-    "loc": "2:17-2:18"
+    "loc": "2:20-2:21"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "2:19-2:21"
+    "loc": "2:22-2:24"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "2:22-2:26"
+    "loc": "2:25-2:29"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:26-2:27"
+    "loc": "2:29-2:30"
   },
   {
     "token": "RBRACE",

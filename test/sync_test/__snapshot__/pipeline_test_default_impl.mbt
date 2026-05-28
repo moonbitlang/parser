@@ -1,6 +1,6 @@
 trait XShow {
-  repr(Self)->String
-  to_string(Self)->String = _ // to_string -> to_stringx works
+  fn repr(Self)->String
+  fn to_string(Self)->String = _ // to_string -> to_stringx works
 }
 
 impl XShow with to_string(self){self.repr()+"!\n"} 

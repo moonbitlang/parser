@@ -1,6 +1,6 @@
 ///|
 trait Seq {
-  seq(Self, Self) -> Self
+  fn seq(Self, Self) -> Self
 }
 
 ///|

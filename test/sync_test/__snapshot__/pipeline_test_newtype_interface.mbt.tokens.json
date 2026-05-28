@@ -203,52 +203,56 @@
     "loc": "8:10-8:11"
   },
   {
+    "token": "FN",
+    "loc": "9:3-9:5"
+  },
+  {
     "token": [
       "LIDENT",
       "f"
     ],
-    "loc": "9:3-9:4"
+    "loc": "9:6-9:7"
   },
   {
     "token": "LPAREN",
-    "loc": "9:4-9:5"
+    "loc": "9:7-9:8"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "9:5-9:9"
+    "loc": "9:8-9:12"
   },
   {
     "token": "COMMA",
-    "loc": "9:9-9:10"
+    "loc": "9:12-9:13"
   },
   {
     "token": [
       "UIDENT",
       "MyInt"
     ],
-    "loc": "9:11-9:16"
+    "loc": "9:14-9:19"
   },
   {
     "token": "RPAREN",
-    "loc": "9:16-9:17"
+    "loc": "9:19-9:20"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "9:18-9:20"
+    "loc": "9:21-9:23"
   },
   {
     "token": [
       "UIDENT",
       "MyPair"
     ],
-    "loc": "9:21-9:27"
+    "loc": "9:24-9:30"
   },
   {
     "token": "NEWLINE",
-    "loc": "9:27-9:28"
+    "loc": "9:30-9:31"
   },
   {
     "token": "RBRACE",

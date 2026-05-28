@@ -1,9 +1,9 @@
 trait MyCompare {
-  compare(Self, Self) -> Int
-  lt(Self, Self) -> Bool = _
-  le(Self, Self) -> Bool = _
-  gt(Self, Self) -> Bool = _
-  ge(Self, Self) -> Bool = _
+  fn compare(Self, Self) -> Int
+  fn lt(Self, Self) -> Bool = _
+  fn le(Self, Self) -> Bool = _
+  fn gt(Self, Self) -> Bool = _
+  fn ge(Self, Self) -> Bool = _
 }
 
 impl MyCompare with lt(x, y) {

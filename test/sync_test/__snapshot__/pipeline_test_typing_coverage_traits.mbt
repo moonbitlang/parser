@@ -1,6 +1,6 @@
 trait Render {
-  render(Self) -> String
-  render_with(Self, prefix : String) -> String = _
+  fn render(Self) -> String
+  fn render_with(Self, prefix : String) -> String = _
 }
 
 impl Render with render_with(self, prefix) {

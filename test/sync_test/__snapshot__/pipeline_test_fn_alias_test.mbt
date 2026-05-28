@@ -1,7 +1,7 @@
 ///|
 trait I {
   #as_free_fn(obj_meth)
-  obj_meth(Self) -> Int
+  fn obj_meth(Self) -> Int
 }
 
 ///|

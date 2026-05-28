@@ -1,7 +1,7 @@
 
 // an immutable iterator over integer
 trait Iter {
-  next(Self) -> (Int, Self)?
+  fn next(Self) -> (Int, Self)?
 }
 
 fn[I: Iter] for_(i: I, f: (Int) -> Unit) -> Unit {

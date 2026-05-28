@@ -1,0 +1,483 @@
+[
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "///|",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": false,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "1:1-1:5"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "1:5-1:6"
+  },
+  {
+    "token": "FN",
+    "loc": "2:1-2:3"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "main"
+    ],
+    "loc": "2:4-2:8"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "2:9-2:10"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "2:10-2:11"
+  },
+  {
+    "token": "LET",
+    "loc": "3:3-3:6"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "name"
+    ],
+    "loc": "3:7-3:11"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "3:12-3:13"
+  },
+  {
+    "token": [
+      "STRING",
+      "moon"
+    ],
+    "loc": "3:14-3:20"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "3:20-3:20"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "3:20-3:21"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "4:3-4:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "4:10-4:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"brace block \\{{ let x = 1; x + 2 }}\""
+    ],
+    "loc": "4:11-4:48"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "4:48-4:49"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "4:49-4:49"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "4:49-4:50"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "5:3-5:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "5:10-5:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"nested block \\{{ let x = { let y = 4; y }; x }}\""
+    ],
+    "loc": "5:11-5:60"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "5:60-5:61"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "5:61-5:61"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "5:61-5:62"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "6:3-6:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "6:10-6:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"char braces \\{{ let _ = '{'; let _ = '}'; 1 }}\""
+    ],
+    "loc": "6:11-6:59"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "6:59-6:60"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "6:60-6:60"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "6:60-6:61"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "7:3-7:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "7:10-7:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"byte char braces \\{{ let _ = b'{'; let _ = b'}'; 2 }}\""
+    ],
+    "loc": "7:11-7:66"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "7:66-7:67"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "7:67-7:67"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "7:67-7:68"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "8:3-8:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "8:10-8:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"string braces \\{{ let _ = \"{\"; let _ = \"}\"; 3 }}\""
+    ],
+    "loc": "8:11-8:61"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "8:61-8:62"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "8:62-8:62"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "8:62-8:63"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "9:3-9:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "9:10-9:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"byte string braces \\{{ let _ = b\"{\"; let _ = b\"}\"; 4 }}\""
+    ],
+    "loc": "9:11-9:68"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "9:68-9:69"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "9:69-9:69"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "9:69-9:70"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "10:3-10:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "10:10-10:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"recursive \\{\"hello \\{name}\"}\""
+    ],
+    "loc": "10:11-10:41"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "10:41-10:42"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "10:42-10:42"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "10:42-10:43"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "11:3-11:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "11:10-11:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"recursive quoted \\{\"hello \\{\"world\"}\"}\""
+    ],
+    "loc": "11:11-11:51"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "11:51-11:52"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "11:52-11:52"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "11:52-11:53"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "12:3-12:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "12:10-12:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"deep braces \\{{ let a = { let b = { let c = { 5 }; c }; b }; a }}\""
+    ],
+    "loc": "12:11-12:78"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "12:78-12:79"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "12:79-12:79"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "12:79-12:80"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "13:3-13:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "13:10-13:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"mixed brace atoms \\{{ let _ = \"{\"; let _ = '}'; let _ = b\"{\"; let _ = b'}'; \"ok\" }}\""
+    ],
+    "loc": "13:11-13:96"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "13:96-13:97"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "13:97-13:97"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "13:97-13:98"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "14:3-14:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "14:10-14:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"deep recursive \\{\"level1 \\{\"level2 \\{\"level3 \\{\"level4 \\{name}\"}\"}\"}\"}\""
+    ],
+    "loc": "14:11-14:83"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "14:83-14:84"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "14:84-14:84"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "14:84-14:85"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "15:3-15:10"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "15:10-15:11"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"recursive mixed \\{\"value \\{{ let _ = \"{\"; let _ = '}'; name }}\"}\""
+    ],
+    "loc": "15:11-15:77"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "15:77-15:78"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "15:78-15:79"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "16:1-16:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "16:2-16:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "16:2-16:3"
+  },
+  {
+    "token": "EOF",
+    "loc": "17:1-17:1"
+  }
+]

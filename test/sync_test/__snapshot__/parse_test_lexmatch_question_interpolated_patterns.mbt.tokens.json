@@ -123,26 +123,182 @@
     "loc": "4:23-4:30"
   },
   {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "4:30-4:30"
+  },
+  {
     "token": "NEWLINE",
     "loc": "4:30-4:31"
   },
   {
+    "token": [
+      "COMMENT",
+      {
+        "content": "// Expected: this parses. Regex interpolation is accepted here only because",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": false,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "5:3-5:78"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "5:78-5:79"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "// `re\"a\\{\"}\"}\"` is a lexmatch pattern, not an ordinary regex expression.",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": false,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "6:3-6:76"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "6:76-6:77"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "// The outer interpolation AST is `Pexpr_interp`, whose expression part is",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": false,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "7:3-7:77"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "7:77-7:78"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "// `Pexpr_is_lexmatch` with a `Plpat_regex_interp` pattern. The `}` inside",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": false,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "8:3-8:77"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "8:77-8:78"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "// the regex interpolation belongs to the regex; the final `}` closes the",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": false,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "9:3-9:76"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "9:76-9:77"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "// outer string interpolation.",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": false,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "10:3-10:33"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "10:33-10:34"
+  },
+  {
+    "token": "LET",
+    "loc": "11:3-11:6"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "11:7-11:8"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "11:9-11:10"
+  },
+  {
+    "token": [
+      "INTERP",
+      "\"outer \\{s lexmatch? re\"a\\{\"}\"}\"}\""
+    ],
+    "loc": "11:11-11:46"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "11:46-11:47"
+  },
+  {
     "token": "RBRACE",
-    "loc": "5:1-5:2"
+    "loc": "12:1-12:2"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "5:2-5:2"
+    "loc": "12:2-12:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:2-5:3"
+    "loc": "12:2-12:3"
   },
   {
     "token": "EOF",
-    "loc": "6:1-6:1"
+    "loc": "13:1-13:1"
   }
 ]

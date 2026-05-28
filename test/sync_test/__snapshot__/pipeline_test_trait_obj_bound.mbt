@@ -1,5 +1,5 @@
 trait Name {
-  name(Self)->String
+  fn name(Self)->String
 }
 
 fn[N:Name] test_name(h:N)->String{

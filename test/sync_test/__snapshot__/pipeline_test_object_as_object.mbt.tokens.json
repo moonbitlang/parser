@@ -19,41 +19,45 @@
     "loc": "1:10-1:11"
   },
   {
+    "token": "FN",
+    "loc": "2:3-2:5"
+  },
+  {
     "token": [
       "LIDENT",
       "f"
     ],
-    "loc": "2:3-2:4"
+    "loc": "2:6-2:7"
   },
   {
     "token": "LPAREN",
-    "loc": "2:4-2:5"
+    "loc": "2:7-2:8"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "2:5-2:9"
+    "loc": "2:8-2:12"
   },
   {
     "token": "RPAREN",
-    "loc": "2:9-2:10"
+    "loc": "2:12-2:13"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "2:11-2:13"
+    "loc": "2:14-2:16"
   },
   {
     "token": [
       "UIDENT",
       "Int"
     ],
-    "loc": "2:14-2:17"
+    "loc": "2:17-2:20"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:17-2:18"
+    "loc": "2:20-2:21"
   },
   {
     "token": "RBRACE",
@@ -94,41 +98,45 @@
     "loc": "5:10-5:11"
   },
   {
+    "token": "FN",
+    "loc": "6:3-6:5"
+  },
+  {
     "token": [
       "LIDENT",
       "g"
     ],
-    "loc": "6:3-6:4"
+    "loc": "6:6-6:7"
   },
   {
     "token": "LPAREN",
-    "loc": "6:4-6:5"
+    "loc": "6:7-6:8"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "6:5-6:9"
+    "loc": "6:8-6:12"
   },
   {
     "token": "RPAREN",
-    "loc": "6:9-6:10"
+    "loc": "6:12-6:13"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "6:11-6:13"
+    "loc": "6:14-6:16"
   },
   {
     "token": [
       "UIDENT",
       "Int"
     ],
-    "loc": "6:14-6:17"
+    "loc": "6:17-6:20"
   },
   {
     "token": "NEWLINE",
-    "loc": "6:17-6:18"
+    "loc": "6:20-6:21"
   },
   {
     "token": "RBRACE",
@@ -787,41 +795,45 @@
     "loc": "28:15-28:16"
   },
   {
+    "token": "FN",
+    "loc": "29:3-29:5"
+  },
+  {
     "token": [
       "LIDENT",
       "h"
     ],
-    "loc": "29:3-29:4"
+    "loc": "29:6-29:7"
   },
   {
     "token": "LPAREN",
-    "loc": "29:4-29:5"
+    "loc": "29:7-29:8"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "29:5-29:9"
+    "loc": "29:8-29:12"
   },
   {
     "token": "RPAREN",
-    "loc": "29:9-29:10"
+    "loc": "29:12-29:13"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "29:11-29:13"
+    "loc": "29:14-29:16"
   },
   {
     "token": [
       "UIDENT",
       "Int"
     ],
-    "loc": "29:14-29:17"
+    "loc": "29:17-29:20"
   },
   {
     "token": "NEWLINE",
-    "loc": "29:17-29:18"
+    "loc": "29:20-29:21"
   },
   {
     "token": "RBRACE",

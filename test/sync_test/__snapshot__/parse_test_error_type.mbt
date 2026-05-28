@@ -23,7 +23,7 @@ fn[A, B] f5() -> Unit {
 }
 
 trait I {
-  f(Self) -> Self raise Int
+  fn f(Self) -> Self raise Int
 }
 
 impl Trait for Int with method() -> Int raise Bool {}

@@ -14,8 +14,8 @@ pub(all) enum Doc {
 }
 
 pub(open) trait Custom : Show  {
-  requirement(Self) -> Requirement
-  pretty(Self, Output, State, Int, Bool) -> Unit
+  fn requirement(Self) -> Requirement
+  fn pretty(Self, Output, State, Int, Bool) -> Unit
 }
 
 pub(all) type Output

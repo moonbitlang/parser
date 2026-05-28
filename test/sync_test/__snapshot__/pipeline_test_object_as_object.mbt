@@ -1,9 +1,9 @@
 trait T {
-  f(Self) -> Int
+  fn f(Self) -> Int
 }
 
 trait S {
-  g(Self) -> Int
+  fn g(Self) -> Int
 }
 
 struct TT(&T)
@@ -26,7 +26,7 @@ fn use_s(s: &S) -> Int {
 }
 
 trait Sub: T {
-  h(Self) -> Int
+  fn h(Self) -> Int
 }
 
 impl Sub for MyInt with h(_self) -> Int { 42 }

@@ -1,5 +1,5 @@
 trait Logger {
-  write_string(Self, String) -> Unit
+  fn write_string(Self, String) -> Unit
 }
 
 impl Logger for StringBuilder with write_string(self, str) {
@@ -7,7 +7,7 @@ impl Logger for StringBuilder with write_string(self, str) {
 }
 
 trait Loggable {
-  log(Self, &Logger) -> Unit
+  fn log(Self, &Logger) -> Unit
 }
 
 fn[X : Loggable] &Logger::write_obj(self : &Logger, x : X) -> Unit {

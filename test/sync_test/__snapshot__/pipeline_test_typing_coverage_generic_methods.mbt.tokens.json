@@ -340,41 +340,45 @@
     "loc": "9:17-9:18"
   },
   {
+    "token": "FN",
+    "loc": "10:3-10:5"
+  },
+  {
     "token": [
       "LIDENT",
       "describe"
     ],
-    "loc": "10:3-10:11"
+    "loc": "10:6-10:14"
   },
   {
     "token": "LPAREN",
-    "loc": "10:11-10:12"
+    "loc": "10:14-10:15"
   },
   {
     "token": [
       "UIDENT",
       "Self"
     ],
-    "loc": "10:12-10:16"
+    "loc": "10:15-10:19"
   },
   {
     "token": "RPAREN",
-    "loc": "10:16-10:17"
+    "loc": "10:19-10:20"
   },
   {
     "token": "THIN_ARROW",
-    "loc": "10:18-10:20"
+    "loc": "10:21-10:23"
   },
   {
     "token": [
       "UIDENT",
       "String"
     ],
-    "loc": "10:21-10:27"
+    "loc": "10:24-10:30"
   },
   {
     "token": "NEWLINE",
-    "loc": "10:27-10:28"
+    "loc": "10:30-10:31"
   },
   {
     "token": "RBRACE",

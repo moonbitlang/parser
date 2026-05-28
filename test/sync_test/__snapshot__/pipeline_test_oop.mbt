@@ -1,8 +1,8 @@
 trait ObjectImpl {
-  to_string(Self) -> String
-  copy(Self) -> Object
-  call_method(Self, Object, String) -> Object
-  set_method(Self, String, (Object) -> Object) -> Unit
+  fn to_string(Self) -> String
+  fn copy(Self) -> Object
+  fn call_method(Self, Object, String) -> Object
+  fn set_method(Self, String, (Object) -> Object) -> Unit
 }
 
 

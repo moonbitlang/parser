@@ -1,6 +1,6 @@
 
 trait X : Show {
-  name (Self) -> String
+  fn name (Self) -> String
 }
 
 struct Stock(String)

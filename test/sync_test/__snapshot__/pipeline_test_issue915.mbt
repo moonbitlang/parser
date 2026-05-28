@@ -1,5 +1,5 @@
 trait HasLength  {
-  length(Self) -> Int
+  fn length(Self) -> Int
 }
 
 fn[A : HasLength] empty(this : A) -> Bool {
