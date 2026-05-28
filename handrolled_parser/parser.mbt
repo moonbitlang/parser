@@ -448,8 +448,13 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
   } else {
     None
   }
+  let quantifiers = if self.peek_token() is FN {
+    self.skip()
+    self.parse_opt_typ_params()
+  } else {
+    @list.empty()
+  }
   let func_name = self.parse_binder(context="trait method name")
-  let quantifiers = self.parse_opt_typ_params()
   self.pop_sync(TK_LPAREN)
   let params = self.parse_trait_method_params()
   let (return_type, error_type) = self.parse_func_return_type()
@@ -986,6 +991,9 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           if self.peek_token() is WITH {
             self.skip()
             self.push_sync(TK_LBRACE)
+            if self.peek_token() is FN {
+              self.skip()
+            }
             let method_name = self.parse_binder(context="name of method")
             let params = self.surround_series(
                 left=TK_LPAREN,
@@ -1035,6 +1043,9 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           self.pop_sync(TK_WITH)
           self.skip()
           self.push_sync(TK_LBRACE)
+          if self.peek_token() is FN {
+            self.skip()
+          }
           let method_name = self.parse_binder(context="name of method")
           let params = self.surround_series(
               left=TK_LPAREN,
@@ -3773,6 +3784,12 @@ fn State::parse_postfix_expr(
       let loc = self.loc_start_with(spos)
       RegexMatch(expr~, pat~, bindings~, loc~)
     }
+    LT_PLUS => {
+      self.expect_token(TK_LT_PLUS)
+      let template = self.parse_template_literal_expr()
+      let loc = self.loc_start_with(spos)
+      TemplateWriting(expr~, template~, loc~)
+    }
     _ => expr
   }
 }
@@ -5155,12 +5172,6 @@ fn State::parse_assign_or_simple_expr(self : Self) -> @syntax.Expr {
           lhs
         }
       }
-    }
-    LT_PLUS => {
-      self.expect_token(TK_LT_PLUS)
-      let template = self.parse_template_literal_expr()
-      let loc = self.loc_start_with(spos)
-      TemplateWriting(expr=lhs, template~, loc~)
     }
     _ => lhs
   }

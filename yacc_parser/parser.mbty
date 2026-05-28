@@ -698,34 +698,34 @@ structure_item -> Impl
       doc = DocString::empty()
     )
   }
-  | attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" binder parameters func_return_type impl_body {
-    let (ret_ty, err_ty) = $11
+  | attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" option("fn") binder parameters func_return_type impl_body {
+    let (ret_ty, err_ty) = $12
     TopImpl(
       self_ty = Some($7),
       trait_ = $5,
-      method_name = $9,
+      method_name = $10,
       quantifiers = $4,
-      params = $10,
+      params = $11,
       ret_ty~,
       err_ty~,
-      body = $12,
+      body = $13,
       vis = $2,
       loc = mk_loc($sloc),
       attrs = $1,
       doc = DocString::empty()
     )
   }
-  | attributes visibility "impl" optional_type_parameters type_name "with" binder parameters func_return_type impl_body {
-    let (ret_ty, err_ty) = $9
+  | attributes visibility "impl" optional_type_parameters type_name "with" option("fn") binder parameters func_return_type impl_body {
+    let (ret_ty, err_ty) = $10
     TopImpl(
       self_ty = None,
       trait_ = $5,
-      method_name = $7,
+      method_name = $8,
       quantifiers = $4,
-      params = $8,
+      params = $9,
       ret_ty~,
       err_ty~,
-      body = $10,
+      body = $11,
       vis = $2,
       loc = mk_loc($sloc),
       attrs = $1,
@@ -973,13 +973,18 @@ deriving_directive_list -> List[DerivingDirective]
   | "derive" "(" list_commas(deriving_directive) ")" { $3 }
   ;
 
+trait_method_fn_header -> List[TypeVarBinder]
+  : { @list.empty() }
+  | "fn" optional_type_parameters { $2 }
+  ;
+
 trait_method_decl -> TraitMethodDecl
-  : attributes is_async binder optional_type_parameters "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) { 
+  : attributes is_async trait_method_fn_header binder "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) {
     let (return_type, error_type) = $8
     TraitMethodDecl::{
-      name: $3,
+      name: $4,
       is_async: $2,
-      quantifiers: $4,
+      quantifiers: $3,
       params: $6,
       return_type,
       error_type,
@@ -1112,57 +1117,15 @@ guard_statement -> Statement
   }
   ;
 
-template_writing_expr -> Expr
-  : left_value "<+" INTERP {
-    let template = make_interp_expr(loc = mk_loc($loc($3)), $3)
-    match $1 {
-      Var(var_) => {
-        let expr = @syntax.make_ident_expr(loc = var_.loc, var_)
-        TemplateWriting(expr~, template~, loc = mk_loc($sloc))
-      }
-      Field(record, accessor) => {
-        let expr = Expr::Field(record~, accessor~, loc = mk_loc($loc($1)))
-        TemplateWriting(expr~, template~, loc = mk_loc($sloc))
-      }
-      Array(array, index) => {
-        let expr = Expr::ArrayGet(array~, index~, loc = mk_loc($loc($1)))
-        TemplateWriting(expr~, template~, loc = mk_loc($sloc))
-      }
-    }
+template_rhs -> Expr
+  : INTERP {
+    make_interp_expr(loc = mk_loc($sloc), $1)
   }
-  | left_value "<+" STRING {
-    let template = Expr::Constant(c = @syntax.Constant::String($3), loc = mk_loc($loc($3)))
-    match $1 {
-      Var(var_) => {
-        let expr = @syntax.make_ident_expr(loc = var_.loc, var_)
-        TemplateWriting(expr~, template~, loc = mk_loc($sloc))
-      }
-      Field(record, accessor) => {
-        let expr = Expr::Field(record~, accessor~, loc = mk_loc($loc($1)))
-        TemplateWriting(expr~, template~, loc = mk_loc($sloc))
-      }
-      Array(array, index) => {
-        let expr = Expr::ArrayGet(array~, index~, loc = mk_loc($loc($1)))
-        TemplateWriting(expr~, template~, loc = mk_loc($sloc))
-      }
-    }
+  | STRING {
+    Expr::Constant(c = @syntax.Constant::String($1), loc = mk_loc($sloc))
   }
-  | left_value "<+" non_empty_list(multiline_string) {
-    let template = Expr::MultilineString(elems = $3, loc = mk_loc($loc($3)))
-    match $1 {
-      Var(var_) => {
-        let expr = @syntax.make_ident_expr(loc = var_.loc, var_)
-        TemplateWriting(expr~, template~, loc = mk_loc($sloc))
-      }
-      Field(record, accessor) => {
-        let expr = Expr::Field(record~, accessor~, loc = mk_loc($loc($1)))
-        TemplateWriting(expr~, template~, loc = mk_loc($sloc))
-      }
-      Array(array, index) => {
-        let expr = Expr::ArrayGet(array~, index~, loc = mk_loc($loc($1)))
-        TemplateWriting(expr~, template~, loc = mk_loc($sloc))
-      }
-    }
+  | non_empty_list(multiline_string) {
+    Expr::MultilineString(elems = $1, loc = mk_loc($sloc))
   }
   ;
 
@@ -1171,7 +1134,6 @@ expr_statement_no_break_continue_return -> Expr
   | "..." { Hole(loc = mk_loc($sloc), kind = Todo) }
   | augmented_assignment_expr { $1 }
   | assignment_expr { $1 }
-  | template_writing_expr { $1 }
   | expr { $1 }
   ;
 
@@ -1654,6 +1616,9 @@ postfix_expr -> Expr
   | range_expr "=~" regex_match_rhs {
     let (pat, bindings) = $3
     RegexMatch(expr = $1, pat~, bindings~, loc = mk_loc($sloc))
+  }
+  | range_expr "<+" template_rhs {
+    TemplateWriting(expr = $1, template = $3, loc = mk_loc($sloc))
   }
   | range_expr { $1 }
   ;
