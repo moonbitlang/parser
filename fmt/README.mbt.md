@@ -1,6 +1,6 @@
-# moonbitlang/formatter 
+# moonbitlang/parser/fmt
 
-`moonbitlang/formatter` is a code formatter for the MoonBit. This project was 
+`moonbitlang/parser/fmt` is a code formatter for the MoonBit. This package was 
 created with the following goals in mind:
 
 - Ensure readability and consistent code formatting.
@@ -8,7 +8,7 @@ created with the following goals in mind:
 - Guarantee idempotence: formatting the code multiple times yields the same result after the first application.
 - Properly handle comments and merge blank lines.
 
-**Warning: This module is highly experimental and work in progress.**
+**Warning: This package is highly experimental and work in progress.**
 
 ## Status
 
@@ -22,7 +22,7 @@ created with the following goals in mind:
 
 ## Usage
 
-```mbt nocheck
+```mbt check
 ///|
 test {
   let code =
@@ -31,8 +31,7 @@ test {
     #|
     #|/// Greet a person
     #|pub fn hello(name:String)->Unit{ let str = "hello, \{name}!"; println(str) } 
-  let result = @formatter.format(code)
-  println(result)
+  let result = @fmt.format(code)
   inspect(
     result,
     content=(
@@ -58,5 +57,5 @@ test {
 ## Contributing
 
 At this early stage, we are not ready to accept pull requests yet. 
-You can contribute by using this module in your projects and providing feedback. 
+You can contribute by using this package in your projects and providing feedback. 
 If you encounter any bugs or poor formatting results, please open an issue.
