@@ -2,7 +2,7 @@
 priv enum LeftValue {
   Var(Var)
   Field(Expr, Accessor)
-  Array(Expr, Expr)
+  Array(Expr, Expr, Location, Location)
 }
 
 ///|

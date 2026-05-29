@@ -168,9 +168,9 @@
 %nonassoc ":"
 
 // to resolve ambiguities with the "with" keyword.
-// E.g. `lexmatch a lexmatch? "" with longest {}` 
+// E.g. `lexmatch a lexmatch? "" with longest {}`
 %nonassoc prec_LEXMATCH_QUESTION
-%nonassoc WITH 
+%nonassoc WITH
 
 %%
 
@@ -180,7 +180,7 @@ non_empty_list_rev[T](X : T) -> List[T]
   | non_empty_list_rev(X) X { $1.add($2) }
   ;
 
-non_empty_list[T](X : T) -> List[T] 
+non_empty_list[T](X : T) -> List[T]
   : X { @list.singleton($1) }
   | X non_empty_list(X) { $2.add($1) }
   ;
@@ -213,14 +213,50 @@ list_commas_no_trailing[T](X : T) -> List[T]
   ;
 
 non_empty_list_commas_with_trailing_info[T](X : T) -> (List[T], Bool)
-  : non_empty_list_commas_rev(X) option(",") { 
-    ($1.rev(), $2 is Some(_)) 
+  : non_empty_list_commas_rev(X) option(",") {
+    ($1.rev(), $2 is Some(_))
   }
   ;
 
 list_commas_with_trailing_info[T](X : T) -> (List[T], Bool)
   : { (@list.empty(), false) }
   | non_empty_list_commas_with_trailing_info(X) { $1 }
+  ;
+
+non_empty_list_commas_with_locs_rev[T](X : T) -> (List[T], List[Location])
+  : X { (@list.singleton($1), @list.empty()) }
+  | non_empty_list_commas_with_locs_rev(X) "," X {
+    let (xs, locs) = $1
+    (xs.add($3), locs.add(mk_loc($loc($2))))
+  }
+  ;
+
+non_empty_list_commas_with_locs[T](X : T) -> (List[T], List[Location])
+  : non_empty_list_commas_with_locs_rev(X) {
+    let (xs, locs) = $1
+    (xs.rev(), locs.rev())
+  }
+  ;
+
+non_empty_list_commas_with_trailing_locs[T](X : T) -> (List[T], List[Location], Bool)
+  : non_empty_list_commas_with_locs_rev(X) {
+    let (xs, locs) = $1
+    (xs.rev(), locs.rev(), false)
+  }
+  | non_empty_list_commas_with_locs_rev(X) "," {
+    let (xs, locs) = $1
+    (xs.rev(), locs.add(mk_loc($loc($2))).rev(), true)
+  }
+  ;
+
+list_commas_with_locs[T](X : T) -> (List[T], List[Location])
+  : { (@list.empty(), @list.empty()) }
+  | non_empty_list_commas_with_locs(X) { $1 }
+  ;
+
+list_commas_with_trailing_locs[T](X : T) -> (List[T], List[Location], Bool)
+  : { (@list.empty(), @list.empty(), false) }
+  | non_empty_list_commas_with_trailing_locs(X) { $1 }
   ;
 
 non_empty_list_semi_rev_aux[T](X : T) -> List[T]
@@ -251,6 +287,57 @@ list_semis[T](X : T) -> List[T]
   | non_empty_list_semis(X) { $1 }
   ;
 
+non_empty_list_semi_rev_aux_with_locs[T](X : T) -> (List[T], List[Location])
+  : X { (@list.singleton($1), @list.empty()) }
+  | non_empty_list_semi_rev_aux_with_locs(X) SEMI X {
+    let (xs, locs) = $1
+    let locs = if $2 { locs.add(mk_loc($loc($2))) } else { locs }
+    (xs.add($3), locs)
+  }
+  ;
+
+none_empty_list_semis_rev_with_trailing_locs[T](X : T) -> (List[T], List[Location], Bool)
+  : non_empty_list_semi_rev_aux_with_locs(X) {
+    let (xs, locs) = $1
+    (xs, locs, false)
+  }
+  | non_empty_list_semi_rev_aux_with_locs(X) SEMI {
+    let (xs, locs) = $1
+    let locs = if $2 { locs.add(mk_loc($loc($2))) } else { locs }
+    (xs, locs, true)
+  }
+  ;
+
+non_empty_list_semis_with_trailing_locs[T](X : T) -> (List[T], List[Location], Bool)
+  : none_empty_list_semis_rev_with_trailing_locs(X) {
+    let (xs, locs, trailing) = $1
+    (xs.rev(), locs.rev(), trailing)
+  }
+  ;
+
+non_empty_list_pluses_with_locs[T](X : T) -> (List[T], List[Location])
+  : X { (@list.singleton($1), @list.empty()) }
+  | X PLUS non_empty_list_pluses_with_locs(X) {
+    let (xs, plus_locs) = $3
+    (xs.add($1), plus_locs.add(mk_loc($loc($2))))
+  }
+  ;
+
+list_semis_with_trailing_locs[T](X : T) -> (List[T], List[Location], Bool)
+  : { (@list.empty(), @list.empty(), false) }
+  | non_empty_list_semis_with_trailing_locs(X) { $1 }
+  ;
+
+%inline optional_mut_loc -> Location?
+  : "mut" { Some(mk_loc($loc($1))) }
+  | { None }
+  ;
+
+%inline optional_comma_loc -> Location?
+  : "," { Some(mk_loc($loc($1))) }
+  | { None }
+  ;
+
 %inline id[T](X : T) -> T
   : X { $1 }
   ;
@@ -263,33 +350,88 @@ list_semis[T](X : T) -> List[T]
   : ioption(annot) { $1 }
   ;
 
+%inline opt_annot_with_loc -> (Type?, Location?)
+  : ":" type_ { (Some($2), Some(mk_loc($loc($1)))) }
+  | { (None, None) }
+  ;
+
 parameter -> Parameter
-  : "_" opt_annot { DiscardPositional(ty = $2, loc = mk_loc($loc($1))) }
-  | binder opt_annot { Positional(binder = $1, ty = $2) }
-  | POST_LABEL opt_annot {
+  : "_" opt_annot_with_loc {
+      let (ty, colon_loc) = $2
+      DiscardPositional(ty~, colon_loc~, loc = mk_loc($loc($1)))
+    }
+  | binder opt_annot_with_loc {
+      let (ty, colon_loc) = $2
+      Positional(binder = $1, ty~, colon_loc~)
+    }
+  | POST_LABEL opt_annot_with_loc {
+      let (ty, colon_loc) = $2
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-      Labelled(binder~, ty = $2)
+      Labelled(
+        binder~,
+        ty~,
+        post_label_loc = Some(mk_loc($loc($1))),
+        colon_loc~,
+      )
     }
-  | POST_LABEL opt_annot "=" expr {
+  | POST_LABEL opt_annot_with_loc "=" expr {
+      let (ty, colon_loc) = $2
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-      Optional(binder~, ty = $2, default = $4)
+      Optional(
+        binder~,
+        ty~,
+        default = $4,
+        post_label_loc = Some(mk_loc($loc($1))),
+        question_loc = None,
+        colon_loc~,
+        equal_loc = mk_loc($loc($3)),
+      )
     }
-  | LIDENT "?" opt_annot "=" expr {
+  | LIDENT "?" opt_annot_with_loc "=" expr {
+      let (ty, colon_loc) = $3
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-      Optional(binder~, ty = $3, default = $5)
+      Optional(
+        binder~,
+        ty~,
+        default = $5,
+        post_label_loc = None,
+        question_loc = Some(mk_loc($loc($2))),
+        colon_loc~,
+        equal_loc = mk_loc($loc($4)),
+      )
     }
-  | LIDENT "?" opt_annot {
+  | LIDENT "?" opt_annot_with_loc {
+      let (ty, colon_loc) = $3
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-      QuestionOptional(binder~, ty = $3)
+      QuestionOptional(
+        binder~,
+        ty~,
+        question_loc = mk_loc($loc($2)),
+        colon_loc~,
+      )
     }
   ;
 
 parameters -> List[Parameter]
-  : delimited("(", list_commas(parameter), ")") { $1 }
+  : parameters_with_locs { $1.0 }
+  ;
+
+parameters_with_locs -> (List[Parameter], Location, Location, List[Location])
+  : "(" list_commas_with_trailing_locs(parameter) ")" {
+    let (params, comma_locs, _) = $2
+    (params, mk_loc($loc($1)), mk_loc($loc($3)), comma_locs)
+  }
   ;
 
 type_parameters -> List[TypeVarBinder]
-  : delimited("[", non_empty_list_commas(id(tvar_binder)), "]") { $1 }
+  : type_parameters_with_locs { $1.0 }
+  ;
+
+type_parameters_with_locs -> (List[TypeVarBinder], Location, Location, List[Location])
+  : "[" non_empty_list_commas_with_trailing_locs(tvar_binder) "]" {
+    let (params, comma_locs, _) = $2
+    (params, mk_loc($loc($1)), mk_loc($loc($3)), comma_locs)
+  }
   ;
 
 %inline is_async -> Location?
@@ -298,30 +440,39 @@ type_parameters -> List[TypeVarBinder]
   ;
 
 optional_type_parameters -> List[TypeVarBinder]
-  : option(type_parameters) {
+  : optional_type_parameters_with_locs {
+    $1.0
+  }
+  ;
+
+optional_type_parameters_with_locs -> (List[TypeVarBinder], Location?, Location?, List[Location])
+  : option(type_parameters_with_locs) {
     match $1 {
-      None => @list.empty()
-      Some(params) => params
+      None => (@list.empty(), None, None, @list.empty())
+      Some((params, lbracket_loc, rbracket_loc, comma_locs)) =>
+        (params, Some(lbracket_loc), Some(rbracket_loc), comma_locs)
     }
   }
   ;
 
 optional_type_parameters_no_constraints -> List[TypeDeclBinder]
-  : option(delimited("[", non_empty_list_commas(id(type_decl_binder)), "]")) {
-    match $1 {
-      None => @list.empty()
-      Some(params) => params
-    }
-  }
+  : optional_type_parameters_no_constraints_with_locs { $1.0 }
   ;
 
-%inline optional_type_arguments -> List[Type]
-  : ioption(delimited("[", non_empty_list_commas(type_), "]")) {
-    match $1 {
-      None => @list.empty()
-      Some(params) => params
-    }
+optional_type_parameters_no_constraints_with_locs -> (List[TypeDeclBinder], Location?, Location?, List[Location])
+  : "[" non_empty_list_commas_with_locs(id(type_decl_binder)) "]" {
+    let (params, comma_locs) = $2
+    (params, Some(mk_loc($loc($1))), Some(mk_loc($loc($3))), comma_locs)
   }
+  | { (@list.empty(), None, None, @list.empty()) }
+  ;
+
+%inline optional_type_arguments -> (List[Type], Location?, Location?, List[Location])
+  : "[" non_empty_list_commas_with_locs(type_) "]" {
+    let (params, comma_locs) = $2
+    (params, Some(mk_loc($loc($1))), Some(mk_loc($loc($3))), comma_locs)
+  }
+  | { (@list.empty(), None, None, @list.empty()) }
   ;
 
 luident -> String
@@ -329,26 +480,42 @@ luident -> String
   | UIDENT { $1 }
   ;
 
-fun_binder -> (TypeName?, Binder)
+fun_binder -> (TypeName?, Binder, Location?)
   : type_name "::" luident {
     let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
-    (Some($1), binder)
+    (Some($1), binder, Some(mk_loc($loc($2))))
   }
-  | binder { (None, $1) }
+  | binder { (None, $1, None) }
   ;
 
 fun_header -> FunDecl
-  : attributes visibility is_async fun_header_generic option(parameters) func_return_type {
-    let ((type_name, f), quants) = $4
-    let (return_type, error_type) = $6
+  : attributes visibility is_async fun_header_generic option(parameters_with_locs) func_return_type_with_loc {
+    let ((type_name, f, coloncolon_loc), quants, fn_loc, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs) = $4
+    let (return_type, error_type, return_arrow_loc) = $6
+    let (decl_params, params_lparen_loc, params_rparen_loc, param_comma_locs) = match $5 {
+      None => (None, None, None, @list.empty())
+      Some((params, lparen_loc, rparen_loc, comma_locs)) =>
+        (Some(params), Some(lparen_loc), Some(rparen_loc), comma_locs)
+    }
     FunDecl::{
       type_name,
       name: f,
       is_async : $3,
+      declare_loc: None,
+      extern_loc: None,
+      fn_loc,
+      coloncolon_loc,
       quantifiers: quants,
-      decl_params: $5,
+      decl_params,
       params_loc: mk_loc($loc($5)),
+      type_params_lbracket_loc,
+      type_params_rbracket_loc,
+      type_param_comma_locs,
+      params_lparen_loc,
+      params_rparen_loc,
+      param_comma_locs,
       return_type,
+      return_arrow_loc,
       error_type,
       vis: $2,
       doc: DocString::empty(),
@@ -359,17 +526,33 @@ fun_header -> FunDecl
   ;
 
 declare_fun_header -> FunDecl
-  : attributes "declare" visibility is_async fun_header_generic option(parameters) func_return_type {
-    let ((type_name, f), quants) = $5
-    let (return_type, error_type) = $7
+  : attributes "declare" visibility is_async fun_header_generic option(parameters_with_locs) func_return_type_with_loc {
+    let ((type_name, f, coloncolon_loc), quants, fn_loc, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs) = $5
+    let (return_type, error_type, return_arrow_loc) = $7
+    let (decl_params, params_lparen_loc, params_rparen_loc, param_comma_locs) = match $6 {
+      None => (None, None, None, @list.empty())
+      Some((params, lparen_loc, rparen_loc, comma_locs)) =>
+        (Some(params), Some(lparen_loc), Some(rparen_loc), comma_locs)
+    }
     FunDecl::{
       type_name,
       name: f,
       is_async : $4,
+      declare_loc: Some(mk_loc($loc($2))),
+      extern_loc: None,
+      fn_loc,
+      coloncolon_loc,
       quantifiers: quants,
-      decl_params: $6,
+      decl_params,
       params_loc: mk_loc($loc($6)),
+      type_params_lbracket_loc,
+      type_params_rbracket_loc,
+      type_param_comma_locs,
+      params_lparen_loc,
+      params_rparen_loc,
+      param_comma_locs,
       return_type,
+      return_arrow_loc,
       error_type,
       vis: $3,
       doc: DocString::empty(),
@@ -378,50 +561,114 @@ declare_fun_header -> FunDecl
     }
   }
 
-fun_header_generic -> ((TypeName?, Binder), List[TypeVarBinder])
-  : "fn" optional_type_parameters fun_binder { ($3, $2) }
+fun_header_generic -> ((TypeName?, Binder, Location?), List[TypeVarBinder], Location, Location?, Location?, List[Location])
+  : "fn" optional_type_parameters_with_locs fun_binder {
+    let (quants, lbracket_loc, rbracket_loc, comma_locs) = $2
+    ($3, quants, mk_loc($loc($1)), lbracket_loc, rbracket_loc, comma_locs)
+  }
   ;
 
-extern_fun_header -> (StringLiteral, FunDecl)
-  : attributes visibility "extern" STRING "fn" optional_type_parameters fun_binder option(parameters) func_return_type {
-    let (type_name, f) = $7
-    let (return_type, error_type) = $9
+extern_fun_header -> (StringLiteral, Location, FunDecl)
+  : attributes visibility "extern" STRING "fn" optional_type_parameters_with_locs fun_binder option(parameters_with_locs) func_return_type_with_loc {
+    let (type_name, f, coloncolon_loc) = $7
+    let (quants, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs) = $6
+    let (return_type, error_type, return_arrow_loc) = $9
+    let (decl_params, params_lparen_loc, params_rparen_loc, param_comma_locs) = match $8 {
+      None => (None, None, None, @list.empty())
+      Some((params, lparen_loc, rparen_loc, comma_locs)) =>
+        (Some(params), Some(lparen_loc), Some(rparen_loc), comma_locs)
+    }
     let fn_decl = FunDecl::{
       type_name,
       name: f,
       is_async : None,
-      quantifiers: $6,
-      decl_params: $8,
+      declare_loc: None,
+      extern_loc: Some(mk_loc($loc($3))),
+      fn_loc: mk_loc($loc($5)),
+      coloncolon_loc,
+      quantifiers: quants,
+      decl_params,
       params_loc: mk_loc($loc($8)),
+      type_params_lbracket_loc,
+      type_params_rbracket_loc,
+      type_param_comma_locs,
+      params_lparen_loc,
+      params_rparen_loc,
+      param_comma_locs,
       return_type,
+      return_arrow_loc,
       error_type,
       vis: $2,
       doc: DocString::empty(),
       attrs: $1,
       loc : mk_loc($loc)
     }
-    ($4, fn_decl)
+    ($4, mk_loc($loc($4)), fn_decl)
   }
   ;
 
 block_expr -> Expr
-  : "{" list_semis_rev(statement) "}" {
-    Statement::compact_rev($2, loc = mk_loc($sloc))
+  : block_expr_with_locs { $1.0 }
+  ;
+
+block_expr_with_locs -> (Expr, Location, Location)
+  : "{" option(non_empty_statements_rev_with_trailing_semis) "}" {
+    let statements = match $2 {
+      Some((statements, _)) => statements
+      None => @list.empty()
+    }
+    (
+      Statement::compact_rev(statements, loc = mk_loc($sloc)),
+      mk_loc($loc($1)),
+      mk_loc($loc($3)),
+    )
   }
   ;
 
 impl_body -> DeclBody
-  : block_expr { DeclBody(expr = $1) }
-  | "=" STRING { DeclStubs(Embedded(language = None, code = CodeString($2))) }
+  : block_expr_with_locs {
+    let (expr, lbrace_loc, rbrace_loc) = $1
+    DeclBody(expr~, lbrace_loc = Some(lbrace_loc), rbrace_loc = Some(rbrace_loc))
+  }
+  | "=" STRING {
+    let code_loc = mk_loc($loc($2))
+    DeclStubs(
+      Embedded(
+        language = None,
+        code = CodeString($2, loc = code_loc),
+        language_loc = None,
+        code_loc~,
+      ),
+      equal_loc = mk_loc($loc($1)),
+    )
+  }
+  ;
+
+multiline_strings_with_locs -> (List[String], List[Location])
+  : MULTILINE_STRING {
+    (@list.singleton($1), @list.singleton(mk_loc($loc($1))))
+  }
+  | MULTILINE_STRING multiline_strings_with_locs {
+    let (strings, locs) = $2
+    (strings.add($1), locs.add(mk_loc($loc($1))))
+  }
   ;
 
 expression -> Expr
   : expr EOF { $1 }
   ;
 
-val_header -> (List[Attribute], Bool, Bool, Visibility, Binder, Type?)
-  : attributes is_declare visibility "let" binder opt_annot { ($1, false, $2, $3, $5, $6) }
-  | attributes is_declare visibility "const" UIDENT opt_annot { ($1, true, $2, $3, Binder::{ name : $5, loc : mk_loc($loc($5)) }, $6) }
+val_header -> (List[Attribute], Bool, Bool, Location?, Visibility, Binder, Type?, Location, Location?)
+  : attributes is_declare_with_loc visibility "let" binder opt_annot_with_loc {
+    let (is_declare, declare_loc) = $2
+    let (ty, annot_colon_loc) = $6
+    ($1, false, is_declare, declare_loc, $3, $5, ty, mk_loc($loc($4)), annot_colon_loc)
+  }
+  | attributes is_declare_with_loc visibility "const" UIDENT opt_annot_with_loc {
+    let (is_declare, declare_loc) = $2
+    let (ty, annot_colon_loc) = $6
+    ($1, true, is_declare, declare_loc, $3, Binder::{ name : $5, loc : mk_loc($loc($5)) }, ty, mk_loc($loc($4)), annot_colon_loc)
+  }
   ;
 
 structure -> List[Impl]
@@ -429,8 +676,9 @@ structure -> List[Impl]
   ;
 
 structure_item -> Impl
-  : type_header deriving_directive_list {
-    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
+  : type_header deriving_directive_list_with_locs {
+    let (attrs, type_vis, is_declare, declare_loc, keyword_loc, tycon, tycon_loc, params, params_lbracket_loc, params_rbracket_loc, param_comma_locs) = $1
+    let (deriving, derive_loc, derive_lparen_loc, derive_rparen_loc, derive_comma_locs) = $2
     TopTypeDef(
       TypeDecl::{
         tycon,
@@ -439,15 +687,25 @@ structure_item -> Impl
         components: Abstract,
         type_vis,
         doc : DocString::empty(),
-        deriving: $2,
+        deriving,
+        declare_loc,
+        keyword_loc,
+        params_lbracket_loc,
+        params_rbracket_loc,
+        param_comma_locs,
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
         loc : mk_loc($sloc),
         attrs,
         is_declare
       }
     )
   }
-  | suberror_header deriving_directive_list {
-    let (attrs, type_vis, is_declare, tycon, tycon_loc) = $1
+  | suberror_header deriving_directive_list_with_locs {
+    let (attrs, type_vis, is_declare, declare_loc, keyword_loc, tycon, tycon_loc) = $1
+    let (deriving, derive_loc, derive_lparen_loc, derive_rparen_loc, derive_comma_locs) = $2
     let exception_decl : ExceptionDecl = NoPayload
     TopTypeDef(
       TypeDecl::{
@@ -457,7 +715,16 @@ structure_item -> Impl
         components: Error(exception_decl),
         type_vis,
         doc : DocString::empty(),
-        deriving: $2,
+        deriving,
+        declare_loc,
+        keyword_loc,
+        params_lbracket_loc: None,
+        params_rbracket_loc: None,
+        param_comma_locs: @list.empty(),
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
         loc : mk_loc($sloc),
         attrs,
         is_declare
@@ -465,9 +732,16 @@ structure_item -> Impl
     )
 
   }
-  | suberror_header "{" list_semis(enum_constructor) "}" deriving_directive_list {
-    let (attrs, type_vis, is_declare, tycon, tycon_loc) = $1
-    let exception_decl : ExceptionDecl = EnumPayload($3)
+  | suberror_header "{" list_semis_with_trailing_locs(enum_constructor) "}" deriving_directive_list_with_locs {
+    let (attrs, type_vis, is_declare, declare_loc, keyword_loc, tycon, tycon_loc) = $1
+    let (constrs, semi_locs, _) = $3
+    let (deriving, derive_loc, derive_lparen_loc, derive_rparen_loc, derive_comma_locs) = $5
+    let exception_decl : ExceptionDecl = EnumPayload(
+      constrs~,
+      lbrace_loc = mk_loc($loc($2)),
+      rbrace_loc = mk_loc($loc($4)),
+      semi_locs~,
+    )
     TopTypeDef(
       TypeDecl::{
         tycon,
@@ -476,107 +750,205 @@ structure_item -> Impl
         components: Error(exception_decl),
         type_vis,
         doc : DocString::empty(),
-        deriving: $5,
+        deriving,
+        declare_loc,
+        keyword_loc,
+        params_lbracket_loc: None,
+        params_rbracket_loc: None,
+        param_comma_locs: @list.empty(),
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
         loc : mk_loc($sloc),
         attrs,
         is_declare
       }
     )
   }
-  | struct_header "{" record_decl_body "}" deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc, params) = $1
-    let (fields, constr_decl) = $3
+  | struct_header "{" record_decl_body "}" deriving_directive_list_with_locs {
+    let (attrs, type_vis, keyword_loc, tycon, tycon_loc, params, params_lbracket_loc, params_rbracket_loc, param_comma_locs) = $1
+    let (fields, constr_decl, semi_locs) = $3
+    let (deriving, derive_loc, derive_lparen_loc, derive_rparen_loc, derive_comma_locs) = $5
     TopTypeDef(
       TypeDecl::{
         tycon,
         tycon_loc,
         params,
-        components: Record(fields~, constr_decl~),
+        components: Record(
+          fields~,
+          constr_decl~,
+          lbrace_loc = mk_loc($loc($2)),
+          rbrace_loc = mk_loc($loc($4)),
+          semi_locs~,
+        ),
         type_vis,
         doc : DocString::empty(),
-        deriving: $5,
+        deriving,
+        declare_loc: None,
+        keyword_loc,
+        params_lbracket_loc,
+        params_rbracket_loc,
+        param_comma_locs,
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
         loc : mk_loc($sloc),
         attrs,
         is_declare : false
       }
     )
   }
-  | struct_header "(" non_empty_list_commas(type_) ")" deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+  | struct_header "(" non_empty_list_commas_with_trailing_locs(type_) ")" deriving_directive_list_with_locs {
+    let (attrs, type_vis, keyword_loc, tycon, tycon_loc, params, params_lbracket_loc, params_rbracket_loc, param_comma_locs) = $1
+    let (types, comma_locs, _) = $3
+    let (deriving, derive_loc, derive_lparen_loc, derive_rparen_loc, derive_comma_locs) = $5
     TopTypeDef(
       TypeDecl::{
         tycon,
         tycon_loc,
         params,
-        components: TupleStruct($3),
+        components: TupleStruct(
+          types~,
+          lparen_loc = mk_loc($loc($2)),
+          rparen_loc = mk_loc($loc($4)),
+          comma_locs~,
+        ),
         type_vis,
         doc : DocString::empty(),
-        deriving: $5,
+        deriving,
+        declare_loc: None,
+        keyword_loc,
+        params_lbracket_loc,
+        params_rbracket_loc,
+        param_comma_locs,
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
         loc : mk_loc($sloc),
         attrs,
         is_declare : false
       }
     )
   }
-  | enum_header "{" list_semis(enum_constructor) "}" deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+  | enum_header "{" list_semis_with_trailing_locs(enum_constructor) "}" deriving_directive_list_with_locs {
+    let (attrs, type_vis, keyword_loc, tycon, tycon_loc, params, params_lbracket_loc, params_rbracket_loc, param_comma_locs) = $1
+    let (constrs, semi_locs, _) = $3
+    let (deriving, derive_loc, derive_lparen_loc, derive_rparen_loc, derive_comma_locs) = $5
     TopTypeDef(
       TypeDecl::{
         tycon,
         tycon_loc,
         params,
-        components: Variant($3),
+        components: Variant(
+          constrs~,
+          lbrace_loc = mk_loc($loc($2)),
+          rbrace_loc = mk_loc($loc($4)),
+          semi_locs~,
+        ),
         type_vis,
         doc : DocString::empty(),
-        deriving: $5,
+        deriving,
+        declare_loc: None,
+        keyword_loc,
+        params_lbracket_loc,
+        params_rbracket_loc,
+        param_comma_locs,
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
         loc : mk_loc($sloc),
         attrs,
         is_declare : false
       }
     )
   }
-  | attributes is_declare visibility "extenum" UIDENT optional_type_parameters_no_constraints "{" list_semis(enum_constructor) "}" deriving_directive_list {
+  | attributes is_declare_with_loc visibility "extenum" UIDENT optional_type_parameters_no_constraints_with_locs "{" list_semis_with_trailing_locs(enum_constructor) "}" deriving_directive_list_with_locs {
+    let (is_declare, declare_loc) = $2
+    let (params, params_lbracket_loc, params_rbracket_loc, param_comma_locs) = $6
+    let (constrs, semi_locs, _) = $8
+    let (deriving, derive_loc, derive_lparen_loc, derive_rparen_loc, derive_comma_locs) = $10
     let tycon_loc = mk_loc($loc($5))
     TopTypeDef(
       TypeDecl::{
         tycon : $5,
         tycon_loc,
-        params : $6,
-        components : ExtensibleEnum($8),
+        params,
+        components : ExtensibleEnum(
+          constrs~,
+          lbrace_loc = mk_loc($loc($7)),
+          rbrace_loc = mk_loc($loc($9)),
+          semi_locs~,
+        ),
         type_vis : $3,
         doc : DocString::empty(),
-        deriving : $10,
+        deriving,
+        declare_loc,
+        keyword_loc: mk_loc($loc($4)),
+        params_lbracket_loc,
+        params_rbracket_loc,
+        param_comma_locs,
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
         loc : mk_loc($sloc),
         attrs : $1,
-        is_declare : $2
+        is_declare
       }
     )
   }
-  | attributes is_declare visibility "extenum" extenum_extension_target "+=" "{" list_semis(enum_constructor) "}" deriving_directive_list {
-    let (tycon, tycon_loc, params, target) = $5
+  | attributes is_declare_with_loc visibility "extenum" extenum_extension_target "+=" "{" list_semis_with_trailing_locs(enum_constructor) "}" deriving_directive_list_with_locs {
+    let (is_declare, declare_loc) = $2
+    let (tycon, tycon_loc, params, params_lbracket_loc, params_rbracket_loc, param_comma_locs, target) = $5
+    let (constructors, semi_locs, _) = $8
+    let (deriving, derive_loc, derive_lparen_loc, derive_rparen_loc, derive_comma_locs) = $10
     TopTypeDef(
       TypeDecl::{
         tycon,
         tycon_loc,
         params,
-        components : ExtendEnum(target~, constructors = $8),
+        components : ExtendEnum(
+          target~,
+          constructors~,
+          plus_equal_loc = mk_loc($loc($6)),
+          lbrace_loc = mk_loc($loc($7)),
+          rbrace_loc = mk_loc($loc($9)),
+          semi_locs~,
+        ),
         type_vis : $3,
         doc : DocString::empty(),
-        deriving : $10,
+        deriving,
+        declare_loc,
+        keyword_loc: mk_loc($loc($4)),
+        params_lbracket_loc,
+        params_rbracket_loc,
+        param_comma_locs,
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
         loc : mk_loc($sloc),
         attrs : $1,
-        is_declare : $2
+        is_declare
       }
     )
   }
   | val_header "=" expr {
-    let (attrs, is_constant, is_declare, vis, binder, ty) = $1
+    let (attrs, is_constant, is_declare, declare_loc, vis, binder, ty, let_or_const_loc, annot_colon_loc) = $1
     TopLetDef(
       binder~,
       ty~,
       expr = $3,
       vis~,
       is_constant~,
+      declare_loc~,
+      let_or_const_loc~,
+      annot_colon_loc~,
+      equal_loc = mk_loc($loc($2)),
       loc = mk_loc($sloc),
       attrs~,
       doc = DocString::empty(),
@@ -584,192 +956,348 @@ structure_item -> Impl
     )
   }
   | extern_fun_header "=" STRING STRING {
-    let (language, fun_decl) = $1
+    let (language, language_loc, fun_decl) = $1
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl~,
+      equal_loc = Some(mk_loc($loc($2))),
       where_clause = None,
-      decl_body = DeclStubs(Import(module_name = $3, func_name = $4, language = Some(language)))
+      decl_body = DeclStubs(
+        Import(
+          module_name = $3,
+          func_name = $4,
+          language = Some(language),
+          module_name_loc = mk_loc($loc($3)),
+          func_name_loc = mk_loc($loc($4)),
+          language_loc = Some(language_loc),
+        ),
+        equal_loc = mk_loc($loc($2)),
+      )
     )
   }
-    
+
   | fun_header "=" STRING STRING {
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = $1,
+      equal_loc = Some(mk_loc($loc($2))),
       where_clause = None,
-      decl_body = DeclStubs(Import(module_name = $3, func_name = $4, language = None))
+      decl_body = DeclStubs(
+        Import(
+          module_name = $3,
+          func_name = $4,
+          language = None,
+          module_name_loc = mk_loc($loc($3)),
+          func_name_loc = mk_loc($loc($4)),
+          language_loc = None,
+        ),
+        equal_loc = mk_loc($loc($2)),
+      )
     )
   }
   | fun_header "=" STRING {
+    let code_loc = mk_loc($loc($3))
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = $1,
+      equal_loc = Some(mk_loc($loc($2))),
       where_clause = None,
-      decl_body = DeclStubs(Embedded(language = None, code = CodeString($3)))
+      decl_body = DeclStubs(
+        Embedded(
+          language = None,
+          code = CodeString($3, loc = code_loc),
+          language_loc = None,
+          code_loc~,
+        ),
+        equal_loc = mk_loc($loc($2)),
+      )
     )
   }
-  | fun_header "=" non_empty_list(MULTILINE_STRING) {
+  | fun_header "=" multiline_strings_with_locs {
+    let (strings, string_locs) = $3
+    let code_loc = mk_loc($loc($3))
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = $1,
+      equal_loc = Some(mk_loc($loc($2))),
       where_clause = None,
-      decl_body = DeclStubs(Embedded(language = None, code = CodeMultilineString($3)))
+      decl_body = DeclStubs(
+        Embedded(
+          language = None,
+          code = CodeMultilineString(strings, string_locs~),
+          language_loc = None,
+          code_loc~,
+        ),
+        equal_loc = mk_loc($loc($2)),
+      )
     )
   }
   | extern_fun_header "=" STRING {
-    let (language, decl) = $1
+    let (language, language_loc, decl) = $1
+    let code_loc = mk_loc($loc($3))
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = decl,
+      equal_loc = Some(mk_loc($loc($2))),
       where_clause = None,
-      decl_body = DeclStubs(Embedded(language = Some(language), code = CodeString($3)))
+      decl_body = DeclStubs(
+        Embedded(
+          language = Some(language),
+          code = CodeString($3, loc = code_loc),
+          language_loc = Some(language_loc),
+          code_loc~,
+        ),
+        equal_loc = mk_loc($loc($2)),
+      )
     )
   }
-  | extern_fun_header "=" non_empty_list(MULTILINE_STRING) {
-    let (language, decl) = $1
+  | extern_fun_header "=" multiline_strings_with_locs {
+    let (language, language_loc, decl) = $1
+    let (strings, string_locs) = $3
+    let code_loc = mk_loc($loc($3))
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = decl,
+      equal_loc = Some(mk_loc($loc($2))),
       where_clause = None,
-      decl_body = DeclStubs(Embedded(language = Some(language), code = CodeMultilineString($3)))
+      decl_body = DeclStubs(
+        Embedded(
+          language = Some(language),
+          code = CodeMultilineString(strings, string_locs~),
+          language_loc = Some(language_loc),
+          code_loc~,
+        ),
+        equal_loc = mk_loc($loc($2)),
+      )
     )
   }
-  | fun_header optional_where_clause block_expr {
+  | fun_header optional_where_clause block_expr_with_locs {
+    let (expr, lbrace_loc, rbrace_loc) = $3
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = $1,
+      equal_loc = None,
       where_clause = $2,
-      decl_body = DeclBody(expr = $3)
+      decl_body = DeclBody(
+        expr~,
+        lbrace_loc = Some(lbrace_loc),
+        rbrace_loc = Some(rbrace_loc),
+      )
     )
   }
   | declare_fun_header {
     TopFuncDef(
       loc = mk_loc($sloc),
       fun_decl = $1,
+      equal_loc = None,
       where_clause = None,
       decl_body = DeclNone
     )
   }
-  | attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
-    let supers = match $6 {
-      None => @list.empty()
-      Some(supers) => supers
-    }
+  | attributes is_declare_with_loc visibility "trait" UIDENT optional_trait_supers_with_locs "{" list_semis_with_trailing_locs(trait_method_decl) "}" {
+    let (is_declare, declare_loc) = $2
+    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
+    let (supers, colon_loc, super_plus_locs) = $6
+    let (methods, semi_locs, _) = $8
     TopTrait(
       TraitDecl::{
         name,
         supers,
-        methods: $8,
+        methods,
         vis: $3,
+        declare_loc,
+        trait_loc: mk_loc($loc($4)),
+        colon_loc,
+        super_plus_locs,
+        lbrace_loc: mk_loc($loc($7)),
+        rbrace_loc: mk_loc($loc($9)),
+        semi_locs,
         loc: mk_loc($sloc),
         attrs: $1,
         doc : DocString::empty(),
-        is_declare : $2
+        is_declare
       }
     )
   }
-  | type_header "=" type_ deriving_directive_list {
-    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
+  | type_header "=" type_ deriving_directive_list_with_locs {
+    let (attrs, type_vis, is_declare, declare_loc, keyword_loc, tycon, tycon_loc, params, params_lbracket_loc, params_rbracket_loc, param_comma_locs) = $1
+    let (deriving, derive_loc, derive_lparen_loc, derive_rparen_loc, derive_comma_locs) = $4
     TopTypeDef(
       TypeDecl::{
         tycon,
         tycon_loc,
         params,
-        components: Alias($3),
+        components: Alias(type_ = $3, equal_loc = mk_loc($loc($2))),
         type_vis,
         doc : DocString::empty(),
-        deriving: $4,
+        deriving,
+        declare_loc,
+        keyword_loc,
+        params_lbracket_loc,
+        params_rbracket_loc,
+        param_comma_locs,
+        derive_loc,
+        derive_lparen_loc,
+        derive_rparen_loc,
+        derive_comma_locs,
         loc : mk_loc($sloc),
         attrs,
         is_declare
       }
     )
   }
-  | attributes is_async "test" option(loced_string) option(parameters) block_expr {
+  | attributes is_async "test" option(loced_string) option(parameters_with_locs) block_expr_with_locs {
+    let (params, params_lparen_loc, params_rparen_loc, param_comma_locs) = match $5 {
+      None => (None, None, None, @list.empty())
+      Some((params, lparen_loc, rparen_loc, comma_locs)) =>
+        (Some(params), Some(lparen_loc), Some(rparen_loc), comma_locs)
+    }
+    let (expr, body_lbrace_loc, body_rbrace_loc) = $6
     TopTest(
-      expr = $6,
+      expr = expr,
       name = $4,
-      params = $5,
+      params = params,
       is_async = $2,
+      test_loc = mk_loc($loc($3)),
+      params_lparen_loc = params_lparen_loc,
+      params_rparen_loc = params_rparen_loc,
+      param_comma_locs = param_comma_locs,
+      body_lbrace_loc = body_lbrace_loc,
+      body_rbrace_loc = body_rbrace_loc,
       loc = mk_loc($sloc),
       attrs = $1,
       doc = DocString::empty()
     )
   }
-  | attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" option("fn") binder parameters func_return_type impl_body {
-    let (ret_ty, err_ty) = $12
+  | attributes visibility "impl" optional_type_parameters_with_locs type_name "for" type_ "with" optional_fn_loc binder parameters_with_locs func_return_type_with_loc impl_body {
+    let (quantifiers, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs) = $4
+    let (params, params_lparen_loc, params_rparen_loc, param_comma_locs) = $11
+    let (ret_ty, err_ty, return_arrow_loc) = $12
     TopImpl(
       self_ty = Some($7),
       trait_ = $5,
       method_name = $10,
-      quantifiers = $4,
-      params = $11,
-      ret_ty~,
-      err_ty~,
+      quantifiers = quantifiers,
+      params = params,
+      ret_ty = ret_ty,
+      err_ty = err_ty,
       body = $13,
       vis = $2,
+      impl_loc = mk_loc($loc($3)),
+      type_params_lbracket_loc = type_params_lbracket_loc,
+      type_params_rbracket_loc = type_params_rbracket_loc,
+      type_param_comma_locs = type_param_comma_locs,
+      for_loc = Some(mk_loc($loc($6))),
+      with_loc = mk_loc($loc($8)),
+      fn_loc = $9,
+      params_lparen_loc = params_lparen_loc,
+      params_rparen_loc = params_rparen_loc,
+      param_comma_locs = param_comma_locs,
+      return_arrow_loc = return_arrow_loc,
       loc = mk_loc($sloc),
       attrs = $1,
       doc = DocString::empty()
     )
   }
-  | attributes visibility "impl" optional_type_parameters type_name "with" option("fn") binder parameters func_return_type impl_body {
-    let (ret_ty, err_ty) = $10
+  | attributes visibility "impl" optional_type_parameters_with_locs type_name "with" optional_fn_loc binder parameters_with_locs func_return_type_with_loc impl_body {
+    let (quantifiers, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs) = $4
+    let (params, params_lparen_loc, params_rparen_loc, param_comma_locs) = $9
+    let (ret_ty, err_ty, return_arrow_loc) = $10
     TopImpl(
       self_ty = None,
       trait_ = $5,
       method_name = $8,
-      quantifiers = $4,
-      params = $9,
-      ret_ty~,
-      err_ty~,
+      quantifiers = quantifiers,
+      params = params,
+      ret_ty = ret_ty,
+      err_ty = err_ty,
       body = $11,
       vis = $2,
+      impl_loc = mk_loc($loc($3)),
+      type_params_lbracket_loc = type_params_lbracket_loc,
+      type_params_rbracket_loc = type_params_rbracket_loc,
+      type_param_comma_locs = type_param_comma_locs,
+      for_loc = None,
+      with_loc = mk_loc($loc($6)),
+      fn_loc = $7,
+      params_lparen_loc = params_lparen_loc,
+      params_rparen_loc = params_rparen_loc,
+      param_comma_locs = param_comma_locs,
+      return_arrow_loc = return_arrow_loc,
       loc = mk_loc($sloc),
       attrs = $1,
       doc = DocString::empty()
     )
   }
-  | attributes is_declare visibility "impl" optional_type_parameters type_name "for" type_ {
+  | attributes is_declare_with_loc visibility "impl" optional_type_parameters_with_locs type_name "for" type_ {
+    let (is_declare, declare_loc) = $2
+    let (quantifiers, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs) = $5
     TopImplRelation(
       self_ty = $8,
       trait_ = $6,
-      quantifiers = $5,
+      quantifiers = quantifiers,
       vis = $3,
       attrs = $1,
+      declare_loc = declare_loc,
+      impl_loc = mk_loc($loc($4)),
+      type_params_lbracket_loc = type_params_lbracket_loc,
+      type_params_rbracket_loc = type_params_rbracket_loc,
+      type_param_comma_locs = type_param_comma_locs,
+      for_loc = mk_loc($loc($7)),
       loc = mk_loc($sloc),
       doc = DocString::empty(),
-      is_declare = $2
+      is_declare = is_declare
     )
   }
-  | attributes visibility "enumview" optional_type_parameters UIDENT "{" list_semis(enum_constructor) "}" "for" type_ "with" binder parameters block_expr {
+  | attributes visibility "enumview" optional_type_parameters_with_locs UIDENT "{" list_semis_with_trailing_locs(enum_constructor) "}" "for" type_ "with" binder parameters_with_locs block_expr_with_locs {
+    let (quantifiers, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs) = $4
+    let (view_constrs, constructor_semi_locs, _) = $7
+    let (parameters, params_lparen_loc, params_rparen_loc, param_comma_locs) = $13
+    let (body, body_lbrace_loc, body_rbrace_loc) = $14
     TopView(
-      quantifiers = $4,
+      quantifiers = quantifiers,
       source_ty = $10,
       view_type_name = $5,
       view_type_loc = mk_loc($loc($5)),
       view_func_name = $12,
-      parameters = $13,
+      parameters = parameters,
       params_loc = mk_loc($loc($13)),
-      view_constrs = $7,
-      body = $14,
+      view_constrs = view_constrs,
+      body = body,
       vis = $2,
+      enumview_loc = mk_loc($loc($3)),
+      type_params_lbracket_loc = type_params_lbracket_loc,
+      type_params_rbracket_loc = type_params_rbracket_loc,
+      type_param_comma_locs = type_param_comma_locs,
+      lbrace_loc = mk_loc($loc($6)),
+      rbrace_loc = mk_loc($loc($8)),
+      constructor_semi_locs = constructor_semi_locs,
+      for_loc = mk_loc($loc($9)),
+      with_loc = mk_loc($loc($11)),
+      params_lparen_loc = params_lparen_loc,
+      params_rparen_loc = params_rparen_loc,
+      param_comma_locs = param_comma_locs,
+      body_lbrace_loc = body_lbrace_loc,
+      body_rbrace_loc = body_rbrace_loc,
       loc = mk_loc($sloc),
       attrs = $1,
       doc = DocString::empty()
     )
   }
-  | attributes visibility "using" PACKAGE_NAME "{" list_commas(using_binder) "}" {
+  | attributes visibility "using" PACKAGE_NAME "{" list_commas_with_trailing_locs(using_binder) "}" {
+    let (names, comma_locs, _) = $6
     TopUsing(
       pkg = {
         name : $4,
         loc : mk_loc($loc($4))
       },
-      names = $6,
+      names~,
       vis = $2,
       attrs = $1,
+      using_loc = mk_loc($loc($3)),
+      lbrace_loc = mk_loc($loc($5)),
+      rbrace_loc = mk_loc($loc($7)),
+      comma_locs~,
       loc = mk_loc($loc),
       doc = DocString::empty()
     )
@@ -800,48 +1328,68 @@ pub_attr -> String?
 %inline is_declare -> Bool
   : "declare" { true }
   | { false }
+  ;
 
-type_header -> (List[Attribute], Visibility, Bool, String, Location, List[TypeDeclBinder])
-  : attributes is_declare visibility "type" UIDENT optional_type_parameters_no_constraints { 
-    ($1, $3, $2, $5, mk_loc($loc($5)), $6) 
+%inline is_declare_with_loc -> (Bool, Location?)
+  : "declare" { (true, Some(mk_loc($loc($1)))) }
+  | { (false, None) }
+  ;
+
+type_header -> (List[Attribute], Visibility, Bool, Location?, Location, String, Location, List[TypeDeclBinder], Location?, Location?, List[Location])
+  : attributes is_declare_with_loc visibility "type" UIDENT optional_type_parameters_no_constraints_with_locs {
+    let (is_declare, declare_loc) = $2
+    let (params, lbracket_loc, rbracket_loc, comma_locs) = $6
+    ($1, $3, is_declare, declare_loc, mk_loc($loc($4)), $5, mk_loc($loc($5)), params, lbracket_loc, rbracket_loc, comma_locs)
   }
   ;
 
-suberror_header -> (List[Attribute], Visibility, Bool, String, Location)
-  : attributes is_declare visibility "suberror" UIDENT { ($1, $3, $2, $5, mk_loc($loc($5))) }
-  ;
-
-struct_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
-  : attributes visibility "struct" UIDENT optional_type_parameters_no_constraints { 
-    ($1, $2, $4, mk_loc($loc($4)), $5) 
+suberror_header -> (List[Attribute], Visibility, Bool, Location?, Location, String, Location)
+  : attributes is_declare_with_loc visibility "suberror" UIDENT {
+    let (is_declare, declare_loc) = $2
+    ($1, $3, is_declare, declare_loc, mk_loc($loc($4)), $5, mk_loc($loc($5)))
   }
   ;
 
-enum_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
-  : attributes visibility "enum" UIDENT optional_type_parameters_no_constraints { 
-    ($1, $2, $4, mk_loc($loc($4)), $5) 
+struct_header -> (List[Attribute], Visibility, Location, String, Location, List[TypeDeclBinder], Location?, Location?, List[Location])
+  : attributes visibility "struct" UIDENT optional_type_parameters_no_constraints_with_locs {
+    let (params, lbracket_loc, rbracket_loc, comma_locs) = $5
+    ($1, $2, mk_loc($loc($3)), $4, mk_loc($loc($4)), params, lbracket_loc, rbracket_loc, comma_locs)
   }
   ;
 
-extenum_extension_target -> (String, Location, List[TypeDeclBinder], TypeName)
-  : UIDENT optional_type_parameters_no_constraints {
+enum_header -> (List[Attribute], Visibility, Location, String, Location, List[TypeDeclBinder], Location?, Location?, List[Location])
+  : attributes visibility "enum" UIDENT optional_type_parameters_no_constraints_with_locs {
+    let (params, lbracket_loc, rbracket_loc, comma_locs) = $5
+    ($1, $2, mk_loc($loc($3)), $4, mk_loc($loc($4)), params, lbracket_loc, rbracket_loc, comma_locs)
+  }
+  ;
+
+extenum_extension_target -> (String, Location, List[TypeDeclBinder], Location?, Location?, List[Location], TypeName)
+  : UIDENT optional_type_parameters_no_constraints_with_locs {
     let loc = mk_loc($loc($1))
-    let target = TypeName::{ name: Ident(name = $1), is_object: false, loc }
-    ($1, loc, $2, target)
+    let (params, lbracket_loc, rbracket_loc, comma_locs) = $2
+    let target = TypeName::{ name: Ident(name = $1), is_object: false, object_amp_loc: None, loc }
+    ($1, loc, params, lbracket_loc, rbracket_loc, comma_locs, target)
   }
-  | PACKAGE_NAME DOT_UIDENT optional_type_parameters_no_constraints {
+  | PACKAGE_NAME DOT_UIDENT optional_type_parameters_no_constraints_with_locs {
     let tycon_loc = mk_loc($loc($2))
-    let target = TypeName::{ name: Dot(pkg = $1, id = $2), is_object: false, loc: mk_loc($sloc) }
-    ($2, tycon_loc, $3, target)
+    let (params, lbracket_loc, rbracket_loc, comma_locs) = $3
+    let target = TypeName::{
+      name: Dot(pkg = $1, id = $2, pkg_loc = mk_loc($loc($1)), dot_id_loc = mk_loc($loc($2))),
+      is_object: false,
+      object_amp_loc: None,
+      loc: mk_loc($sloc),
+    }
+    ($2, tycon_loc, params, lbracket_loc, rbracket_loc, comma_locs, target)
   }
   ;
 
 batch_type_alias_targets -> (Bool, Label?, List[AliasTarget])
-  : PACKAGE_NAME batch_type_alias_target(DOT_UIDENT) { 
+  : PACKAGE_NAME batch_type_alias_target(DOT_UIDENT) {
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (false, Some(pkg), @list.singleton($2))
   }
-  | PACKAGE_NAME ".(" non_empty_list_commas(batch_type_alias_target(UIDENT)) ")" { 
+  | PACKAGE_NAME ".(" non_empty_list_commas(batch_type_alias_target(UIDENT)) ")" {
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (true, Some(pkg), $3)
   }
@@ -849,37 +1397,37 @@ batch_type_alias_targets -> (Bool, Label?, List[AliasTarget])
   ;
 
 batch_type_alias_target(UIDENT_MAYBE_DOT) -> AliasTarget
-  : UIDENT_MAYBE_DOT { 
+  : UIDENT_MAYBE_DOT {
     let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-    AliasTarget::{ binder, target: None }
+    AliasTarget::{ binder, target: None, as_loc: None }
   }
-  | UIDENT_MAYBE_DOT "as" UIDENT { 
+  | UIDENT_MAYBE_DOT "as" UIDENT {
     let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
     let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
-    AliasTarget::{ binder, target: Some(target) }
+    AliasTarget::{ binder, target: Some(target), as_loc: Some(mk_loc($loc($2))) }
   }
   ;
 
 func_alias_targets -> (Label?, Label?, Bool, List[AliasTarget])
-  : ioption(func_alias_type_name(LIDENT, UIDENT)) func_alias_target(LIDENT) { 
+  : ioption(func_alias_type_name(LIDENT, UIDENT)) func_alias_target(LIDENT) {
     (None, $1, false, @list.singleton($2))
   }
-  | PACKAGE_NAME func_alias_target(DOT_LIDENT) { 
+  | PACKAGE_NAME func_alias_target(DOT_LIDENT) {
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (Some(pkg), None, false, @list.singleton($2))
   }
-  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) func_alias_target(LIDENT) { 
+  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) func_alias_target(LIDENT) {
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (Some(pkg), Some($2), false, @list.singleton($3))
   }
-  | option(func_alias_type_name(LIDENT, UIDENT)) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
+  | option(func_alias_type_name(LIDENT, UIDENT)) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" {
     (None, $1, true, $3)
   }
-  | PACKAGE_NAME ".(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
+  | PACKAGE_NAME ".(" non_empty_list_commas(func_alias_target(LIDENT)) ")" {
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (Some(pkg), None, true, $3)
   }
-  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
+  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" {
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (Some(pkg), Some($2), true, $4)
   }
@@ -891,18 +1439,23 @@ func_alias_type_name(LIDENT_MAYBE_DOT, UIDENT_MAYBE_DOT) -> Label
   ;
 
 func_alias_target(LIDENT_MAYBE_DOT) -> AliasTarget
-  : LIDENT_MAYBE_DOT option(preceded("as", binder)) { 
+  : LIDENT_MAYBE_DOT func_alias_target_as {
     match $2 {
       None => {
         let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-        AliasTarget::{ binder, target: None }
+        AliasTarget::{ binder, target: None, as_loc: None }
       }
-      Some(binder) => {
+      Some((as_loc, binder)) => {
         let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
-        AliasTarget::{ binder, target: Some(target) }
+        AliasTarget::{ binder, target: Some(target), as_loc: Some(as_loc) }
       }
     }
   }
+  ;
+
+func_alias_target_as -> (Location, Binder)?
+  : { None }
+  | "as" binder { Some((mk_loc($loc($1)), $2)) }
   ;
 
 using_binder -> (AliasTarget, UsingKind):
@@ -912,7 +1465,7 @@ using_binder -> (AliasTarget, UsingKind):
       name : $1,
       loc : mk_loc($loc)
     }
-    ({ binder, target : None }, UsingKind::Value)
+    ({ binder, target : None, as_loc : None }, UsingKind::Value)
   }
   | LIDENT "as" LIDENT
   | UIDENT "as" UIDENT {
@@ -924,14 +1477,14 @@ using_binder -> (AliasTarget, UsingKind):
       name : $1,
       loc : mk_loc($loc($1))
     }
-    ({ binder, target : Some(target) }, UsingKind::Value)
+    ({ binder, target : Some(target), as_loc : Some(mk_loc($loc($2))) }, UsingKind::Value)
   }
   | "type" UIDENT {
     let binder = Binder::{
       name : $2,
       loc : mk_loc($loc($2))
     }
-    ({ binder, target : None }, UsingKind::Type)
+    ({ binder, target : None, as_loc : None }, UsingKind::Type(loc = mk_loc($loc($1))))
   }
   | "type" UIDENT "as" UIDENT {
     let binder = Binder::{
@@ -942,14 +1495,14 @@ using_binder -> (AliasTarget, UsingKind):
       name : $2,
       loc : mk_loc($loc($2))
     }
-    ({ binder, target : Some(target) }, UsingKind::Type)
+    ({ binder, target : Some(target), as_loc : Some(mk_loc($loc($3))) }, UsingKind::Type(loc = mk_loc($loc($1))))
   }
   | "trait" UIDENT {
     let binder = Binder::{
       name : $2,
       loc : mk_loc($loc($2))
     }
-    ({ binder, target : None }, UsingKind::Trait)
+    ({ binder, target : None, as_loc : None }, UsingKind::Trait(loc = mk_loc($loc($1))))
   }
   | "trait" UIDENT "as" UIDENT {
     let binder = Binder::{
@@ -960,35 +1513,114 @@ using_binder -> (AliasTarget, UsingKind):
       name : $2,
       loc : mk_loc($loc($2))
     }
-    ({ binder, target : Some(target) }, UsingKind::Trait)
+    ({ binder, target : Some(target), as_loc : Some(mk_loc($loc($3))) }, UsingKind::Trait(loc = mk_loc($loc($1))))
   }
 
 deriving_directive -> DerivingDirective
-  : type_name { DerivingDirective::{ type_name: $1, args: @list.empty(), loc: mk_loc($sloc) } }
-  | type_name "(" list_commas(argument) ")" { DerivingDirective::{ type_name: $1, args: $3, loc: mk_loc($sloc) } }
+  : type_name {
+    DerivingDirective::{
+      type_name: $1,
+      args: @list.empty(),
+      args_lparen_loc: None,
+      args_rparen_loc: None,
+      arg_comma_locs: @list.empty(),
+      loc: mk_loc($sloc),
+    }
+  }
+  | type_name "(" list_commas_with_trailing_locs(argument) ")" {
+    let (args, comma_locs, _) = $3
+    DerivingDirective::{
+      type_name: $1,
+      args,
+      args_lparen_loc: Some(mk_loc($loc($2))),
+      args_rparen_loc: Some(mk_loc($loc($4))),
+      arg_comma_locs: comma_locs,
+      loc: mk_loc($sloc),
+    }
+  }
   ;
 
 deriving_directive_list -> List[DerivingDirective]
-  :  { @list.empty() }
-  | "derive" "(" list_commas(deriving_directive) ")" { $3 }
+  : deriving_directive_list_with_locs { $1.0 }
   ;
 
-trait_method_fn_header -> List[TypeVarBinder]
-  : { @list.empty() }
-  | "fn" optional_type_parameters { $2 }
+deriving_directive_list_with_locs -> (List[DerivingDirective], Location?, Location?, Location?, List[Location])
+  : { (@list.empty(), None, None, None, @list.empty()) }
+  | "derive" "(" list_commas_with_trailing_locs(deriving_directive) ")" {
+    let (deriving, comma_locs, _) = $3
+    (
+      deriving,
+      Some(mk_loc($loc($1))),
+      Some(mk_loc($loc($2))),
+      Some(mk_loc($loc($4))),
+      comma_locs,
+    )
+  }
+  ;
+
+optional_fn_loc -> Location?
+  : { None }
+  | "fn" { Some(mk_loc($loc($1))) }
+  ;
+
+trait_super_constraints_with_locs -> (List[TypeVarConstraint], List[Location])
+  : non_empty_list_pluses_with_locs(tvar_constraint) { $1 }
+  ;
+
+optional_trait_supers_with_locs -> (List[TypeVarConstraint], Location?, List[Location])
+  : { (@list.empty(), None, @list.empty()) }
+  | ":" trait_super_constraints_with_locs {
+    let (supers, plus_locs) = $2
+    (supers, Some(mk_loc($loc($1))), plus_locs)
+  }
+  ;
+
+trait_method_fn_header -> (List[TypeVarBinder], Location?, Location?, Location?, List[Location])
+  : { (@list.empty(), None, None, None, @list.empty()) }
+  | "fn" optional_type_parameters_with_locs {
+    let (quantifiers, lbracket_loc, rbracket_loc, comma_locs) = $2
+    (quantifiers, Some(mk_loc($loc($1))), lbracket_loc, rbracket_loc, comma_locs)
+  }
+  ;
+
+trait_method_parameters_with_locs -> (List[Parameter], Location, Location, List[Location])
+  : "(" list_commas_with_trailing_locs(trait_method_param) ")" {
+    let (params, comma_locs, _) = $2
+    (params, mk_loc($loc($1)), mk_loc($loc($3)), comma_locs)
+  }
+  ;
+
+trait_method_default -> (Location, Location)?
+  : { None }
+  | "=" wildcard { Some((mk_loc($loc($1)), $2)) }
   ;
 
 trait_method_decl -> TraitMethodDecl
-  : attributes is_async trait_method_fn_header binder "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) {
-    let (return_type, error_type) = $8
+  : attributes is_async trait_method_fn_header binder trait_method_parameters_with_locs func_return_type_with_loc trait_method_default {
+    let (quantifiers, fn_loc, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs) = $3
+    let (params, params_lparen_loc, params_rparen_loc, param_comma_locs) = $5
+    let (return_type, error_type, return_arrow_loc) = $6
+    let (default_equal_loc, has_default) = match $7 {
+      None => (None, None)
+      Some((equal_loc, wildcard_loc)) => (Some(equal_loc), Some(wildcard_loc))
+    }
     TraitMethodDecl::{
       name: $4,
       is_async: $2,
-      quantifiers: $3,
-      params: $6,
+      fn_loc,
+      quantifiers,
+      type_params_lbracket_loc,
+      type_params_rbracket_loc,
+      type_param_comma_locs,
+      params,
+      params_lparen_loc,
+      params_rparen_loc,
+      param_comma_locs,
       return_type,
+      return_arrow_loc,
       error_type,
-      has_default: $9,
+      has_default,
+      default_equal_loc,
       attrs: $1,
       loc: mk_loc($sloc)
     }
@@ -1000,29 +1632,53 @@ wildcard -> Location
   ;
 
 trait_method_param -> Parameter
-  : type_ { DiscardPositional(ty = Some($1), loc = mk_loc($sloc)) }
-  | binder ":" type_ { Positional(binder = $1, ty = Some($3)) }
-  | binder "?" ":" type_ { QuestionOptional(binder = $1, ty = Some($4)) }
-  | POST_LABEL ":" type_ { 
+  : type_ {
+    DiscardPositional(ty = Some($1), colon_loc = None, loc = mk_loc($sloc))
+  }
+  | binder ":" type_ {
+    Positional(binder = $1, ty = Some($3), colon_loc = Some(mk_loc($loc($2))))
+  }
+  | binder "?" ":" type_ {
+    QuestionOptional(
+      binder = $1,
+      ty = Some($4),
+      question_loc = mk_loc($loc($2)),
+      colon_loc = Some(mk_loc($loc($3))),
+    )
+  }
+  | POST_LABEL ":" type_ {
     let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
-    Labelled(binder~, ty = Some($3))
+    Labelled(
+      binder~,
+      ty = Some($3),
+      post_label_loc = Some(mk_loc($loc($1))),
+      colon_loc = Some(mk_loc($loc($2))),
+    )
   }
   ;
 
 qual_ident -> LongIdent
   : LIDENT { Ident(name = $1) }
-  | PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
+  | PACKAGE_NAME DOT_LIDENT {
+    Dot(pkg = $1, id = $2, pkg_loc = mk_loc($loc($1)), dot_id_loc = mk_loc($loc($2)))
+  }
   ;
 
 qual_ident_simple_expr -> LongIdent
   : LIDENT %prec prec_apply_non_ident_fn { Ident(name = $1) }
-  | PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
+  | PACKAGE_NAME DOT_LIDENT {
+    Dot(pkg = $1, id = $2, pkg_loc = mk_loc($loc($1)), dot_id_loc = mk_loc($loc($2)))
+  }
   ;
 
 %inline qual_ident_ty_inline -> LongIdent
   : UIDENT { LongIdent::Ident(name = $1) }
-  | PACKAGE_NAME DOT_LIDENT { LongIdent::Dot(pkg = $1, id = $2) }
-  | PACKAGE_NAME DOT_UIDENT { LongIdent::Dot(pkg = $1, id = $2) }
+  | PACKAGE_NAME DOT_LIDENT {
+    LongIdent::Dot(pkg = $1, id = $2, pkg_loc = mk_loc($loc($1)), dot_id_loc = mk_loc($loc($2)))
+  }
+  | PACKAGE_NAME DOT_UIDENT {
+    LongIdent::Dot(pkg = $1, id = $2, pkg_loc = mk_loc($loc($1)), dot_id_loc = mk_loc($loc($2)))
+  }
   ;
 
 qual_ident_ty -> LongIdent
@@ -1031,13 +1687,31 @@ qual_ident_ty -> LongIdent
 
 %inline qual_uident -> LongIdent
   : UIDENT { Ident(name = $1) }
-  | PACKAGE_NAME DOT_UIDENT { Dot(pkg = $1, id = $2) }
+  | PACKAGE_NAME DOT_UIDENT {
+    Dot(pkg = $1, id = $2, pkg_loc = mk_loc($loc($1)), dot_id_loc = mk_loc($loc($2)))
+  }
   ;
 
-%inline semi_expr_semi_opt -> (Expr, Bool)
-  : none_empty_list_semis_rev_with_trailing_info(statement) { 
+non_empty_statements_rev_with_semis -> List[Statement]
+  : statement { @list.singleton($1) }
+  | non_empty_statements_rev_with_semis SEMI statement {
+    let semi_loc = if $2 { Some(mk_loc($loc($2))) } else { None }
+    Statement::with_head_semi_loc_rev($1, semi_loc).add($3)
+  }
+  ;
+
+non_empty_statements_rev_with_trailing_semis -> (List[Statement], Bool)
+  : non_empty_statements_rev_with_semis { ($1, false) }
+  | non_empty_statements_rev_with_semis SEMI {
+    let semi_loc = if $2 { Some(mk_loc($loc($2))) } else { None }
+    (Statement::with_head_semi_loc_rev($1, semi_loc), true)
+  }
+  ;
+
+%inline semi_expr_semi_opt -> (Expr, Bool, List[Location])
+  : non_empty_statements_rev_with_trailing_semis {
     let (ls, trailing) = $1
-    (Statement::compact_rev(ls, loc = mk_loc($sloc)), trailing)
+    (Statement::compact_rev(ls, loc = mk_loc($sloc)), trailing, Statement::semi_locs_rev(ls))
   }
   ;
 
@@ -1046,73 +1720,245 @@ letand_func -> Func
   | anony_fn { $1 }
   ;
 
-and_func -> (Binder, Type?, Func)
-  : "and" binder opt_annot "=" letand_func { ($2, $3, $5) }
+and_func -> (Binder, Type?, Func, Location, Location?, Location)
+  : "and" binder opt_annot_with_loc "=" letand_func {
+    let (ty, annot_colon_loc) = $3
+    ($2, ty, $5, mk_loc($loc($1)), annot_colon_loc, mk_loc($loc($4)))
+  }
   ;
 
 statement -> Statement
-  : "let" pattern opt_annot "=" expr { 
-    let pat = match $3 {
+  : "let" pattern opt_annot_with_loc "=" expr {
+    let (ty, annot_colon_loc) = $3
+    let pat = match ty {
       None => $2
-      Some(ty) => Pattern::Constraint(pat = $2, ty~, loc = mk_loc($sloc))
+      Some(ty) => {
+        let colon_loc = match annot_colon_loc {
+          Some(loc) => loc
+          None => @syntax.no_location
+        }
+        Pattern::Constraint(
+          pat = $2,
+          ty~,
+          lparen_loc = None,
+          colon_loc~,
+          rparen_loc = None,
+          loc = $2.loc().merge(ty.loc()),
+        )
+      }
     }
-    StmtLet(pat~, expr = $5, loc = mk_loc($sloc))
+    StmtLet(
+      pat~,
+      expr = $5,
+      let_loc = mk_loc($loc($1)),
+      annot_colon_loc~,
+      equal_loc = mk_loc($loc($4)),
+      semi_loc = None,
+      loc = mk_loc($sloc),
+    )
   }
-  | "letrec" binder opt_annot "=" letand_func list(and_func) {
-    let bindings = $6.add(($2, $3, $5))
-    StmtLetand(bindings~, loc = mk_loc($sloc))
+  | "letrec" binder opt_annot_with_loc "=" letand_func list(and_func) {
+    let (ty, annot_colon_loc) = $3
+    let bindings = [($2, ty, $5)]
+    let and_locs = []
+    let equal_locs = [mk_loc($loc($4))]
+    let annot_colon_locs = []
+    match annot_colon_loc {
+      Some(loc) => annot_colon_locs.push(loc)
+      None => ()
+    }
+    for item in $6 {
+      let (binder, ty, func, and_loc, annot_colon_loc, equal_loc) = item
+      bindings.push((binder, ty, func))
+      and_locs.push(and_loc)
+      equal_locs.push(equal_loc)
+      match annot_colon_loc {
+        Some(loc) => annot_colon_locs.push(loc)
+        None => ()
+      }
+    }
+    StmtLetand(
+      bindings = @list.from_array(bindings),
+      letrec_loc = mk_loc($loc($1)),
+      and_locs = @list.from_array(and_locs),
+      equal_locs = @list.from_array(equal_locs),
+      annot_colon_locs = @list.from_array(annot_colon_locs),
+      semi_loc = None,
+      loc = mk_loc($sloc),
+    )
   }
-  | "let" "mut" binder opt_annot "=" expr { 
-    StmtLetmut(binder = $3, ty_opt = $4, expr = $6, loc = mk_loc($sloc))
+  | "let" "mut" binder opt_annot_with_loc "=" expr {
+    let (ty_opt, annot_colon_loc) = $4
+    StmtLetmut(
+      binder = $3,
+      ty_opt~,
+      expr = $6,
+      let_loc = mk_loc($loc($1)),
+      mut_loc = mk_loc($loc($2)),
+      annot_colon_loc~,
+      equal_loc = mk_loc($loc($5)),
+      semi_loc = None,
+      loc = mk_loc($sloc),
+    )
   }
-  | is_async "fn" binder parameters func_return_type block_expr { 
-    let (return_type, error_type) = $5
+  | is_async "fn" binder parameters_with_locs func_return_type_with_loc block_expr_with_locs {
+    let (parameters, lparen_loc, rparen_loc, comma_locs) = $4
+    let (return_type, error_type, return_arrow_loc) = $5
+    let (body, body_lbrace_loc, body_rbrace_loc) = $6
     let func = Func::{
-      parameters : $4,
-      params_loc : mk_loc($loc($4)),
-      body : $6,
+      parameters,
+      params_loc : lparen_loc.merge(rparen_loc),
+      body,
       return_type,
       error_type,
       kind : Lambda,
       is_async : $1,
+      fn_loc : Some(mk_loc($loc($2))),
+      lparen_loc : Some(lparen_loc),
+      rparen_loc : Some(rparen_loc),
+      comma_locs,
+      return_arrow_loc,
+      fat_arrow_loc : None,
+      body_lbrace_loc : Some(body_lbrace_loc),
+      body_rbrace_loc : Some(body_rbrace_loc),
       loc : mk_loc($sloc)
     }
-    StmtFunc(binder = $3, func~, loc = mk_loc($sloc))
+    StmtFunc(binder = $3, func~, semi_loc = None, loc = mk_loc($sloc))
   }
   | guard_statement { $1 }
-  | "defer" pipe_expr { StmtDefer(expr = $2, loc = mk_loc($sloc)) }
+  | "defer" pipe_expr {
+    StmtDefer(
+      expr = $2,
+      defer_loc = mk_loc($loc($1)),
+      semi_loc = None,
+      loc = mk_loc($sloc),
+    )
+  }
   | "proof_assert" expr {
-    StmtExpr(ProofAssert(expr = $2, loc = mk_loc($sloc)))
+    StmtExpr(
+      expr = ProofAssert(
+        expr = $2,
+        proof_assert_loc = mk_loc($loc($1)),
+        loc = mk_loc($sloc),
+      ),
+      semi_loc = None,
+    )
   }
   | "proof_let" binder "=" expr {
-    StmtExpr(ProofLet(binder = $2, expr = $4, loc = mk_loc($sloc)))
+    StmtExpr(
+      expr = ProofLet(
+        binder = $2,
+        expr = $4,
+        proof_let_loc = mk_loc($loc($1)),
+        equal_loc = mk_loc($loc($3)),
+        loc = mk_loc($sloc),
+      ),
+      semi_loc = None,
+    )
   }
-  | expr_statement { StmtExpr($1) }
+  | expr_statement { StmtExpr(expr = $1, semi_loc = None) }
   ;
 
 guard_statement -> Statement
-  : "guard" infix_expr { StmtGuard(cond = $2, otherwise = None, loc = mk_loc($sloc)) }
-  | "guard" infix_expr "else" block_expr { StmtGuard(cond = $2, otherwise = Some($4), loc = mk_loc($sloc)) }
+  : "guard" infix_expr {
+    StmtGuard(
+      cond = $2,
+      otherwise = None,
+      guard_loc = mk_loc($loc($1)),
+      else_loc = None,
+      else_lbrace_loc = None,
+      else_rbrace_loc = None,
+      semi_loc = None,
+      loc = mk_loc($sloc),
+    )
+  }
+  | "guard" infix_expr "else" block_expr_with_locs {
+    let (otherwise, else_lbrace_loc, else_rbrace_loc) = $4
+    StmtGuard(
+      cond = $2,
+      otherwise = Some(otherwise),
+      guard_loc = mk_loc($loc($1)),
+      else_loc = Some(mk_loc($loc($3))),
+      else_lbrace_loc = Some(else_lbrace_loc),
+      else_rbrace_loc = Some(else_rbrace_loc),
+      semi_loc = None,
+      loc = mk_loc($sloc),
+    )
+  }
   ;
 
 %inline assignment_expr -> Expr
-  : left_value "=" expr { 
+  : left_value "=" expr {
     let loc = mk_loc($sloc)
+    let equal_loc = mk_loc($loc($2))
     match $1 {
-      Var(var_) => Assign(var_~, expr=$3, augmented_by=None, loc~)
-      Field(record, accessor) => Mutate(record~, accessor~, field=$3, augmented_by=None, loc~)
-      Array(array, index) => ArraySet(array~, index~, value=$3, loc~)
+      Var(var_) =>
+        Assign(
+          var_~,
+          expr=$3,
+          augmented_by=None,
+          equal_loc=Some(equal_loc),
+          augmented_assign_loc=None,
+          loc~,
+        )
+      Field(record, accessor) =>
+        Mutate(
+          record~,
+          accessor~,
+          field=$3,
+          augmented_by=None,
+          equal_loc=Some(equal_loc),
+          augmented_assign_loc=None,
+          loc~,
+        )
+      Array(array, index, lbracket_loc, rbracket_loc) =>
+        ArraySet(
+          array~,
+          index~,
+          value=$3,
+          lbracket_loc~,
+          rbracket_loc~,
+          equal_loc~,
+          loc~,
+        )
     }
   }
   ;
 
 %inline augmented_assignment_expr -> Expr
-  : left_value assignop expr { 
+  : left_value assignop expr {
     let loc = mk_loc($sloc)
     match $1 {
-      Var(var_) => Assign(var_~, expr=$3, augmented_by=Some($2), loc~)
-      Field(record, accessor) => Mutate(record~, accessor~, field=$3, augmented_by=Some($2), loc~)
-      Array(array, index) => ArrayAugmentedSet(op=$2, array~, index~, value=$3, loc~)
+      Var(var_) =>
+        Assign(
+          var_~,
+          expr=$3,
+          augmented_by=Some($2),
+          equal_loc=None,
+          augmented_assign_loc=Some($2.loc),
+          loc~,
+        )
+      Field(record, accessor) =>
+        Mutate(
+          record~,
+          accessor~,
+          field=$3,
+          augmented_by=Some($2),
+          equal_loc=None,
+          augmented_assign_loc=Some($2.loc),
+          loc~,
+        )
+      Array(array, index, lbracket_loc, rbracket_loc) =>
+        ArrayAugmentedSet(
+          op=$2,
+          array~,
+          index~,
+          value=$3,
+          lbracket_loc~,
+          rbracket_loc~,
+          augmented_assign_loc=$2.loc,
+          loc~,
+        )
     }
   }
   ;
@@ -1130,7 +1976,9 @@ template_rhs -> Expr
   ;
 
 expr_statement_no_break_continue_return -> Expr
-  : "raise" expr { Raise(err_value = $2, loc = mk_loc($sloc)) }
+  : "raise" expr {
+    Raise(err_value = $2, raise_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+  }
   | "..." { Hole(loc = mk_loc($sloc), kind = Todo) }
   | augmented_assignment_expr { $1 }
   | assignment_expr { $1 }
@@ -1138,17 +1986,51 @@ expr_statement_no_break_continue_return -> Expr
   ;
 
 expr_statement -> Expr
-  : "break" POST_LABEL option(expr) { 
+  : "break" POST_LABEL option(expr) {
     let label = Label::{ name: $2, loc: mk_loc($loc($2)) }
-    Break(arg = $3, label = Some(label), loc = mk_loc($sloc))
+    Break(
+      arg = $3,
+      label = Some(label),
+      break_loc = mk_loc($loc($1)),
+      post_label_loc = Some(mk_loc($loc($2))),
+      loc = mk_loc($sloc),
+    )
   }
-  | "break" option(expr) { Break(arg = $2, label = None, loc = mk_loc($sloc)) }
-  | "continue" POST_LABEL list_commas_no_trailing(expr) { 
+  | "break" option(expr) {
+    Break(
+      arg = $2,
+      label = None,
+      break_loc = mk_loc($loc($1)),
+      post_label_loc = None,
+      loc = mk_loc($sloc),
+    )
+  }
+  | "continue" POST_LABEL list_commas_with_locs(expr) {
     let label = Label::{ name: $2, loc: mk_loc($loc($2)) }
-    Continue(args = $3, label = Some(label), loc = mk_loc($sloc))
+    let (args, comma_locs) = $3
+    Continue(
+      args~,
+      label = Some(label),
+      continue_loc = mk_loc($loc($1)),
+      post_label_loc = Some(mk_loc($loc($2))),
+      comma_locs~,
+      loc = mk_loc($sloc),
+    )
   }
-  | "continue" list_commas_no_trailing(expr) { Continue(args = $2, label = None, loc = mk_loc($sloc)) }
-  | "return" option(expr) { Return(return_value = $2, loc = mk_loc($sloc)) }
+  | "continue" list_commas_with_locs(expr) {
+    let (args, comma_locs) = $2
+    Continue(
+      args~,
+      label = None,
+      continue_loc = mk_loc($loc($1)),
+      post_label_loc = None,
+      comma_locs~,
+      loc = mk_loc($sloc),
+    )
+  }
+  | "return" option(expr) {
+    Return(return_value = $2, return_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+  }
   | expr_statement_no_break_continue_return { $1 }
   ;
 
@@ -1157,27 +2039,63 @@ loop_label_colon -> Label?
   |  { None}
   ;
 
+loop_label_colon_with_loc -> (Label?, Location?)
+  : POST_LABEL ":" {
+    let loc = mk_loc($sloc)
+    (Some(Label::{ name : $1, loc }), Some(loc))
+  }
+  |  { (None, None) }
+  ;
+
 while_expr -> Expr
-  : loop_label_colon "while" infix_expr block_expr optional_nobreak { 
+  : loop_label_colon_with_loc "while" infix_expr block_expr_with_locs optional_nobreak_with_locs {
+    let (label, label_colon_loc) = $1
+    let (loop_body, body_lbrace_loc, body_rbrace_loc) = $4
+    let (while_else, nobreak_loc, nobreak_lbrace_loc, nobreak_rbrace_loc) = $5
     While(
       loop_cond = $3,
-      loop_body = $4,
-      while_else = $5,
-      label = $1,
+      loop_body~,
+      while_else~,
+      label~,
+      label_colon_loc~,
+      while_loc = mk_loc($loc($2)),
+      body_lbrace_loc~,
+      body_rbrace_loc~,
+      nobreak_loc~,
+      nobreak_lbrace_loc~,
+      nobreak_rbrace_loc~,
       loc = mk_loc($sloc)
     )
   }
   ;
 
+case_guard -> (Location, Expr)
+  : "if" infix_expr { (mk_loc($loc($1)), $2) }
+  ;
+
 single_pattern_case -> Case
-  : pattern option(preceded("if", infix_expr)) "=>" expr_statement { 
-    Case::{ pattern : $1, guard_ : $2, body : $4 }
+  : pattern option(case_guard) "=>" expr_statement {
+    let (if_loc, guard_) = match $2 {
+      None => (None, None)
+      Some((loc, guard_expr)) => (Some(loc), Some(guard_expr))
+    }
+    Case::{
+      pattern : $1,
+      guard_ : guard_,
+      body : $4,
+      if_loc : if_loc,
+      fat_arrow_loc : Some(mk_loc($loc($3))),
+      ellipsis_loc : None,
+    }
   }
-  | "..." { 
-    Case::{ 
-      pattern : Pattern::Any(loc = mk_loc($sloc)), 
-      guard_ : None, 
-      body : Hole(loc = mk_loc($sloc), kind = Todo) 
+  | "..." {
+    Case::{
+      pattern : Pattern::Any(loc = mk_loc($sloc)),
+      guard_ : None,
+      body : Hole(loc = mk_loc($sloc), kind = Todo),
+      if_loc : None,
+      fat_arrow_loc : None,
+      ellipsis_loc : Some(mk_loc($loc($1))),
     }
   }
   ;
@@ -1186,43 +2104,65 @@ single_pattern_cases -> List[Case]
   : list_semis(single_pattern_case) { $1 }
   ;
 
-catch_keyword -> Location
-  : "catch" "{" { mk_loc($sloc) }
+single_pattern_cases_with_locs -> (List[Case], List[Location])
+  : list_semis_with_trailing_locs(single_pattern_case) {
+    let (cases, semi_locs, _) = $1
+    (cases, semi_locs)
+  }
   ;
 
-%inline else_keyword -> Location
-  : "noraise" "{" { mk_loc($sloc) }
+catch_keyword -> (Location, Location)
+  : "catch" "{" { (mk_loc($sloc), mk_loc($loc($2))) }
+  ;
+
+%inline else_keyword -> (Location, Location)
+  : "noraise" "{" { (mk_loc($sloc), mk_loc($loc($2))) }
   ;
 
 try_expr -> Expr
-  : "try" pipe_expr catch_keyword single_pattern_cases "}" { 
-    let catch_loc = $3
+  : "try" pipe_expr catch_keyword single_pattern_cases_with_locs "}" {
+    let (catch_loc, catch_lbrace_loc) = $3
+    let (catch_, catch_semi_locs) = $4
     Try(
       body = $2,
-      catch_ = $4,
+      catch_~,
       try_else = None,
       has_try = true,
       try_loc = mk_loc($loc($1)),
       catch_loc~,
       else_loc = @basic.Location::{ start: @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }, end: @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 } },
+      catch_lbrace_loc~,
+      catch_rbrace_loc = mk_loc($loc($5)),
+      catch_semi_locs~,
+      noraise_lbrace_loc = None,
+      noraise_rbrace_loc = None,
+      noraise_semi_locs = @list.empty(),
       loc = mk_loc($sloc)
     )
   }
-  | "try" pipe_expr catch_keyword single_pattern_cases "}" else_keyword single_pattern_cases "}" { 
-    let catch_loc = $3
-    let else_loc = $6
+  | "try" pipe_expr catch_keyword single_pattern_cases_with_locs "}" else_keyword single_pattern_cases_with_locs "}" {
+    let (catch_loc, catch_lbrace_loc) = $3
+    let (catch_, catch_semi_locs) = $4
+    let (else_loc, noraise_lbrace_loc) = $6
+    let (try_else, noraise_semi_locs) = $7
     Try(
       body = $2,
-      catch_ = $4,
-      try_else = Some($7),
+      catch_~,
+      try_else = Some(try_else),
       has_try = true,
       try_loc = mk_loc($loc($1)),
       catch_loc~,
       else_loc~,
+      catch_lbrace_loc~,
+      catch_rbrace_loc = mk_loc($loc($5)),
+      catch_semi_locs~,
+      noraise_lbrace_loc = Some(noraise_lbrace_loc),
+      noraise_rbrace_loc = Some(mk_loc($loc($8))),
+      noraise_semi_locs~,
       loc = mk_loc($sloc)
     )
   }
-  | "try?" pipe_expr { 
+  | "try?" pipe_expr {
     TryOperator(body = $2, kind = Question, try_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
   }
   | "try!" pipe_expr {
@@ -1231,53 +2171,109 @@ try_expr -> Expr
   ;
 
 if_expr -> Expr
-  : "if" infix_expr block_expr "else" block_expr { 
-    If(cond = $2, ifso = $3, ifnot = Some($5), loc = mk_loc($sloc))
+  : "if" infix_expr block_expr_with_locs "else" block_expr_with_locs {
+    let (ifso, then_lbrace_loc, then_rbrace_loc) = $3
+    let (ifnot, else_lbrace_loc, else_rbrace_loc) = $5
+    If(
+      cond = $2,
+      ifso~,
+      ifnot = Some(ifnot),
+      if_loc = mk_loc($loc($1)),
+      then_lbrace_loc~,
+      then_rbrace_loc~,
+      else_loc = Some(mk_loc($loc($4))),
+      else_lbrace_loc = Some(else_lbrace_loc),
+      else_rbrace_loc = Some(else_rbrace_loc),
+      loc = mk_loc($sloc),
+    )
   }
-  | "if" infix_expr block_expr "else" if_expr { 
-    If(cond = $2, ifso = $3, ifnot = Some($5), loc = mk_loc($sloc))
+  | "if" infix_expr block_expr_with_locs "else" if_expr {
+    let (ifso, then_lbrace_loc, then_rbrace_loc) = $3
+    If(
+      cond = $2,
+      ifso~,
+      ifnot = Some($5),
+      if_loc = mk_loc($loc($1)),
+      then_lbrace_loc~,
+      then_rbrace_loc~,
+      else_loc = Some(mk_loc($loc($4))),
+      else_lbrace_loc = None,
+      else_rbrace_loc = None,
+      loc = mk_loc($sloc),
+    )
   }
-  | "if" infix_expr block_expr { 
-    If(cond = $2, ifso = $3, ifnot = None, loc = mk_loc($sloc))
+  | "if" infix_expr block_expr_with_locs {
+    let (ifso, then_lbrace_loc, then_rbrace_loc) = $3
+    If(
+      cond = $2,
+      ifso~,
+      ifnot = None,
+      if_loc = mk_loc($loc($1)),
+      then_lbrace_loc~,
+      then_rbrace_loc~,
+      else_loc = None,
+      else_lbrace_loc = None,
+      else_rbrace_loc = None,
+      loc = mk_loc($sloc),
+    )
   }
   ;
 
-match_header -> Expr
-  : "match" infix_expr "{" { $2 }
+match_header -> (Expr, Location)
+  : "match" infix_expr "{" { ($2, mk_loc($loc($3))) }
   ;
 
 match_expr -> Expr
-  : match_header non_empty_list_semis(single_pattern_case) "}" { 
-    let expr = $1
+  : match_header non_empty_list_semis_with_trailing_locs(single_pattern_case) "}" {
+    let (expr, lbrace_loc) = $1
+    let (cases, semi_locs, _) = $2
     Match(
       expr~,
-      cases = $2,
+      cases~,
       match_loc = mk_loc($loc($1)),
+      lbrace_loc~,
+      rbrace_loc = mk_loc($loc($3)),
+      semi_locs~,
       loc = mk_loc($sloc)
     )
   }
-  | match_header "}" { 
-    let expr = $1
+  | match_header "}" {
+    let (expr, lbrace_loc) = $1
     Match(
       expr~,
       cases = @list.empty(),
       match_loc = mk_loc($loc($1)),
+      lbrace_loc~,
+      rbrace_loc = mk_loc($loc($2)),
+      semi_locs = @list.empty(),
       loc = mk_loc($sloc)
     )
   }
   ;
 
 lexmatch_expr -> Expr:
-  | lexmatch_header list_semis(lex_case) "}" {
-    LexMatch(strategy=$1.1, expr=$1.0, match_loc=mk_loc($loc($1)), cases=$2, loc=mk_loc($sloc))
+  | lexmatch_header list_semis_with_trailing_locs(lex_case) "}" {
+    let (expr, strategy, with_loc, lbrace_loc) = $1
+    let (cases, semi_locs, _) = $2
+    LexMatch(
+      strategy~,
+      expr~,
+      match_loc=mk_loc($loc($1)),
+      with_loc~,
+      lbrace_loc~,
+      rbrace_loc=mk_loc($loc($3)),
+      semi_locs~,
+      cases~,
+      loc=mk_loc($sloc)
+    )
   }
 
-lexmatch_header -> (Expr, Label?):
+lexmatch_header -> (Expr, Label?, Location?, Location):
   | "lexmatch" infix_expr "{" {
-    ($2, None)
+    ($2, None, None, mk_loc($loc($3)))
   }
   | "lexmatch" infix_expr "with" label "{" {
-    ($2, Some($4))
+    ($2, Some($4), Some(mk_loc($loc($3))), mk_loc($loc($5)))
   }
 
 lex_case -> LexCase :
@@ -1286,7 +2282,10 @@ lex_case -> LexCase :
       pat : $1,
       pat_loc : mk_loc($loc($1)),
       guard_ : None,
-      body : $3
+      body : $3,
+      if_loc : None,
+      fat_arrow_loc : Some(mk_loc($loc($2))),
+      ellipsis_loc : None,
     }
   }
   | lex_pattern "if" infix_expr "=>" expr_statement {
@@ -1294,7 +2293,10 @@ lex_case -> LexCase :
       pat : $1,
       pat_loc : mk_loc($loc($1)),
       guard_ : Some($3),
-      body : $5
+      body : $5,
+      if_loc : Some(mk_loc($loc($2))),
+      fat_arrow_loc : Some(mk_loc($loc($4))),
+      ellipsis_loc : None,
     }
   }
   | "..." {
@@ -1303,7 +2305,10 @@ lex_case -> LexCase :
       pat,
       pat_loc : mk_loc($sloc),
       guard_ : None,
-      body : Hole(loc=mk_loc($sloc), kind=Todo)
+      body : Hole(loc=mk_loc($sloc), kind=Todo),
+      if_loc : None,
+      fat_arrow_loc : None,
+      ellipsis_loc : Some(mk_loc($loc($1))),
     }
   }
 
@@ -1320,18 +2325,26 @@ lex_top_pattern -> LexTopPattern :
 
 lex_as_pattern -> LexPattern :
   | lex_pattern_sequence {
-    match $1 {
+    let (pats, semi_locs) = $1
+    match pats {
       More(pat, tail=Empty) => pat
-      _ => Sequence(pats=$1, loc=mk_loc($sloc))
+      _ => Sequence(pats~, semi_locs~, loc=mk_loc($sloc))
     }
   }
   | lex_atom_pattern "as" binder {
-    Alias(pat = $1, binder = $3, loc = mk_loc($sloc))
+    Alias(pat = $1, binder = $3, as_loc = mk_loc($loc($2)), loc = mk_loc($sloc))
   }
 
-lex_pattern_sequence -> @list.List[LexPattern] :
-  | lex_atom_pattern { @list.singleton($1) }
-  | lex_atom_pattern option(SEMI) lex_pattern_sequence { @list.cons($1, $3) }
+lex_pattern_sequence -> (List[LexPattern], List[Location]) :
+  | lex_atom_pattern { (@list.singleton($1), @list.empty()) }
+  | lex_atom_pattern option(SEMI) lex_pattern_sequence {
+    let (pats, semi_locs) = $3
+    let semi_locs = match $2 {
+      Some(true) => semi_locs.add(mk_loc($loc($2)))
+      _ => semi_locs
+    }
+    (pats.add($1), semi_locs)
+  }
 
 lex_atom_pattern -> LexPattern:
   | lex_simple_atom_pattern { $1 }
@@ -1358,19 +2371,95 @@ for_binders -> List[(Binder, Expr)]
   : list_commas_no_trailing(separated_pair(binder, "=", expr)) { $1 }
   ;
 
+for_binder_with_equal_loc -> (Binder, Location, Expr)
+  : binder "=" expr { ($1, mk_loc($loc($2)), $3) }
+  ;
+
+for_binders_with_locs -> (List[(Binder, Expr)], List[Location], List[Location])
+  : list_commas_with_locs(for_binder_with_equal_loc) {
+    let (bindings_with_locs, comma_locs) = $1
+    let bindings = []
+    let equal_locs = []
+    bindings_with_locs.each(binding => {
+      let (binder, equal_loc, expr) = binding
+      bindings.push((binder, expr))
+      equal_locs.push(equal_loc)
+    })
+    (@list.from_array(bindings), comma_locs, @list.from_array(equal_locs))
+  }
+  ;
+
 for_binders_infix -> List[(Binder, Expr)]
   : list_commas_no_trailing(separated_pair(binder, "=", infix_expr)) { $1 }
   ;
 
-list_comp_for_header -> (List[(Binder, Expr)], Expr?, List[(Binder, Expr)], Location)
-  : for_binders_infix {
-    ($1, None, @list.empty(), mk_loc($sloc))
+for_binder_infix_with_equal_loc -> (Binder, Location, Expr)
+  : binder "=" infix_expr { ($1, mk_loc($loc($2)), $3) }
+  ;
+
+for_binders_infix_with_locs -> (List[(Binder, Expr)], List[Location], List[Location])
+  : list_commas_with_locs(for_binder_infix_with_equal_loc) {
+    let (bindings_with_locs, comma_locs) = $1
+    let bindings = []
+    let equal_locs = []
+    bindings_with_locs.each(binding => {
+      let (binder, equal_loc, expr) = binding
+      bindings.push((binder, expr))
+      equal_locs.push(equal_loc)
+    })
+    (@list.from_array(bindings), comma_locs, @list.from_array(equal_locs))
   }
-  | for_binders_infix SEMI option(infix_expr) {
-    ($1, $3, @list.empty(), mk_loc($sloc))
+  ;
+
+list_comp_for_header -> (
+  List[(Binder, Expr)],
+  Expr?,
+  List[(Binder, Expr)],
+  List[Location],
+  List[Location],
+  List[Location],
+  List[Location],
+  List[Location]
+)
+  : for_binders_infix_with_locs {
+    let (binders, binder_comma_locs, binder_equal_locs) = $1
+    (
+      binders,
+      None,
+      @list.empty(),
+      binder_comma_locs,
+      @list.empty(),
+      binder_equal_locs,
+      @list.empty(),
+      @list.empty(),
+    )
   }
-  | for_binders_infix SEMI option(infix_expr) SEMI for_binders_infix {
-    ($1, $3, $5, mk_loc($sloc))
+  | for_binders_infix_with_locs SEMI option(infix_expr) {
+    let (binders, binder_comma_locs, binder_equal_locs) = $1
+    (
+      binders,
+      $3,
+      @list.empty(),
+      binder_comma_locs,
+      @list.singleton(mk_loc($loc($2))),
+      binder_equal_locs,
+      @list.empty(),
+      @list.empty(),
+    )
+  }
+  | for_binders_infix_with_locs SEMI option(infix_expr) SEMI for_binders_infix_with_locs {
+    let (binders, binder_comma_locs, binder_equal_locs) = $1
+    let (continue_block, continue_comma_locs, continue_equal_locs) = $5
+    (
+      binders,
+      $3,
+      continue_block,
+      binder_comma_locs,
+      @list.from_array([mk_loc($loc($2)), mk_loc($loc($4))]),
+      binder_equal_locs,
+      continue_comma_locs,
+      continue_equal_locs,
+    )
   }
   ;
 
@@ -1379,63 +2468,154 @@ optional_nobreak -> Expr?
   |  { None }
   ;
 
-optional_where_clause -> WhereClause? 
-  : "where" "{" list_commas(labeled_expr) "}" {
-    Some({ fields : $3, loc : mk_loc($sloc) })
+optional_nobreak_with_locs -> (Expr?, Location?, Location?, Location?)
+  : "nobreak" block_expr_with_locs {
+    let (expr, lbrace_loc, rbrace_loc) = $2
+    (Some(expr), Some(mk_loc($loc($1))), Some(lbrace_loc), Some(rbrace_loc))
+  }
+  |  { (None, None, None, None) }
+  ;
+
+optional_where_clause -> WhereClause?
+  : "where" "{" list_commas_with_trailing_locs(labeled_expr) "}" {
+    let (fields, comma_locs, _) = $3
+    Some({
+      fields,
+      where_loc : mk_loc($loc($1)),
+      lbrace_loc : mk_loc($loc($2)),
+      rbrace_loc : mk_loc($loc($4)),
+      comma_locs,
+      loc : mk_loc($sloc),
+    })
   }
   | { None }
 
 for_expr -> Expr
-  : loop_label_colon "for" for_binders SEMI option(infix_expr) SEMI list_commas_no_trailing(separated_pair(binder, "=", expr)) block_expr optional_nobreak optional_where_clause {
+  : loop_label_colon_with_loc "for" for_binders_with_locs SEMI option(infix_expr) SEMI for_binders_with_locs block_expr_with_locs optional_nobreak_with_locs optional_where_clause {
+    let (label, label_colon_loc) = $1
+    let (binders, binder_comma_locs, binder_equal_locs) = $3
+    let (continue_block, continue_comma_locs, continue_equal_locs) = $7
+    let (body, body_lbrace_loc, body_rbrace_loc) = $8
+    let (for_else, nobreak_loc, nobreak_lbrace_loc, nobreak_rbrace_loc) = $9
     For(
-      binders = $3,
+      binders~,
       condition = $5,
-      continue_block = $7,
-      body = $8,
-      for_else = $9,
-      label = $1,
+      continue_block~,
+      body~,
+      for_else~,
       loc = mk_loc($sloc),
-      where_clause = $10
+      where_clause = $10,
+      label~,
+      label_colon_loc~,
+      for_loc = mk_loc($loc($2)),
+      binder_comma_locs~,
+      binder_equal_locs~,
+      semi_locs = @list.from_array([mk_loc($loc($4)), mk_loc($loc($6))]),
+      continue_comma_locs~,
+      continue_equal_locs~,
+      body_lbrace_loc~,
+      body_rbrace_loc~,
+      nobreak_loc~,
+      nobreak_lbrace_loc~,
+      nobreak_rbrace_loc~,
     )
   }
-  | loop_label_colon "for" for_binders SEMI infix_expr block_expr optional_nobreak optional_where_clause {
+  | loop_label_colon_with_loc "for" for_binders_with_locs SEMI infix_expr block_expr_with_locs optional_nobreak_with_locs optional_where_clause {
+    let (label, label_colon_loc) = $1
+    let (binders, binder_comma_locs, binder_equal_locs) = $3
+    let (body, body_lbrace_loc, body_rbrace_loc) = $6
+    let (for_else, nobreak_loc, nobreak_lbrace_loc, nobreak_rbrace_loc) = $7
     For(
-      binders = $3,
+      binders~,
       condition = Some($5),
       continue_block = @list.empty(),
-      body = $6,
-      for_else = $7,
-      label = $1,
+      body~,
+      for_else~,
       loc = mk_loc($sloc),
-      where_clause = $8
+      where_clause = $8,
+      label~,
+      label_colon_loc~,
+      for_loc = mk_loc($loc($2)),
+      binder_comma_locs~,
+      binder_equal_locs~,
+      semi_locs = @list.singleton(mk_loc($loc($4))),
+      continue_comma_locs = @list.empty(),
+      continue_equal_locs = @list.empty(),
+      body_lbrace_loc~,
+      body_rbrace_loc~,
+      nobreak_loc~,
+      nobreak_lbrace_loc~,
+      nobreak_rbrace_loc~,
     )
   }
-  | loop_label_colon "for" for_binders block_expr optional_nobreak optional_where_clause {
+  | loop_label_colon_with_loc "for" for_binders_with_locs block_expr_with_locs optional_nobreak_with_locs optional_where_clause {
+    let (label, label_colon_loc) = $1
+    let (binders, binder_comma_locs, binder_equal_locs) = $3
+    let (body, body_lbrace_loc, body_rbrace_loc) = $4
+    let (for_else, nobreak_loc, nobreak_lbrace_loc, nobreak_rbrace_loc) = $5
     For(
-      binders = $3,
+      binders~,
       condition = None,
       continue_block = @list.empty(),
-      body = $4,
-      for_else = $5,
-      label = $1,
+      body~,
+      for_else~,
       loc = mk_loc($sloc),
-      where_clause = $6
+      where_clause = $6,
+      label~,
+      label_colon_loc~,
+      for_loc = mk_loc($loc($2)),
+      binder_comma_locs~,
+      binder_equal_locs~,
+      semi_locs = @list.empty(),
+      continue_comma_locs = @list.empty(),
+      continue_equal_locs = @list.empty(),
+      body_lbrace_loc~,
+      body_rbrace_loc~,
+      nobreak_loc~,
+      nobreak_lbrace_loc~,
+      nobreak_rbrace_loc~,
     )
   }
   ;
 
 foreach_expr -> Expr
-  : loop_label_colon "for" non_empty_list_commas(foreach_binder) "in" expr foreach_optional_loop_vars block_expr optional_nobreak optional_where_clause {
-    let (init, continue_block) = $6
+  : loop_label_colon_with_loc "for" non_empty_list_commas_with_locs(foreach_binder) "in" expr foreach_optional_loop_vars_with_locs block_expr_with_locs optional_nobreak_with_locs optional_where_clause {
+    let (label, label_colon_loc) = $1
+    let (binders, binder_comma_locs) = $3
+    let (
+      init,
+      continue_block,
+      semi_locs,
+      init_comma_locs,
+      init_equal_locs,
+      continue_comma_locs,
+      continue_equal_locs,
+    ) = $6
+    let (body, body_lbrace_loc, body_rbrace_loc) = $7
+    let (else_block, nobreak_loc, nobreak_lbrace_loc, nobreak_rbrace_loc) = $8
     ForEach(
-      binders = $3,
+      binders~,
       expr = $5,
       init~,
       continue_block~,
-      body = $7,
-      else_block = $8,
+      body~,
+      else_block~,
       where_clause = $9,
-      label = $1,
+      label~,
+      label_colon_loc~,
+      for_loc = mk_loc($loc($2)),
+      binder_comma_locs~,
+      in_loc = mk_loc($loc($4)),
+      semi_locs~,
+      init_comma_locs~,
+      init_equal_locs~,
+      continue_comma_locs~,
+      continue_equal_locs~,
+      body_lbrace_loc~,
+      body_rbrace_loc~,
+      nobreak_loc~,
+      nobreak_lbrace_loc~,
+      nobreak_rbrace_loc~,
       loc = mk_loc($sloc)
     )
   }
@@ -1451,6 +2631,101 @@ foreach_optional_loop_vars_infix -> (List[(Binder, Expr)], List[(Binder, Expr)])
   : { (@list.empty(), @list.empty()) }
   | SEMI for_binders_infix { ($2, @list.empty()) }
   | SEMI for_binders_infix SEMI for_binders_infix { ($2, $4) }
+  ;
+
+foreach_optional_loop_vars_with_locs -> (
+  List[(Binder, Expr)],
+  List[(Binder, Expr)],
+  List[Location],
+  List[Location],
+  List[Location],
+  List[Location],
+  List[Location]
+)
+  : { (
+    @list.empty(),
+    @list.empty(),
+    @list.empty(),
+    @list.empty(),
+    @list.empty(),
+    @list.empty(),
+    @list.empty(),
+  ) }
+  | SEMI for_binders_with_locs {
+    let (init, init_comma_locs, init_equal_locs) = $2
+    (
+      init,
+      @list.empty(),
+      @list.singleton(mk_loc($loc($1))),
+      init_comma_locs,
+      init_equal_locs,
+      @list.empty(),
+      @list.empty(),
+    )
+  }
+  | SEMI for_binders_with_locs SEMI for_binders_with_locs {
+    let (init, init_comma_locs, init_equal_locs) = $2
+    let (continue_block, continue_comma_locs, continue_equal_locs) = $4
+    (
+      init,
+      continue_block,
+      @list.from_array([mk_loc($loc($1)), mk_loc($loc($3))]),
+      init_comma_locs,
+      init_equal_locs,
+      continue_comma_locs,
+      continue_equal_locs,
+    )
+  }
+  ;
+
+foreach_optional_loop_vars_infix_with_locs -> (
+  List[(Binder, Expr)],
+  List[(Binder, Expr)],
+  List[Location],
+  List[Location],
+  List[Location],
+  List[Location],
+  List[Location]
+)
+  : { (
+    @list.empty(),
+    @list.empty(),
+    @list.empty(),
+    @list.empty(),
+    @list.empty(),
+    @list.empty(),
+    @list.empty(),
+  ) }
+  | SEMI for_binders_infix_with_locs {
+    let (init, init_comma_locs, init_equal_locs) = $2
+    (
+      init,
+      @list.empty(),
+      @list.singleton(mk_loc($loc($1))),
+      init_comma_locs,
+      init_equal_locs,
+      @list.empty(),
+      @list.empty(),
+    )
+  }
+  | SEMI for_binders_infix_with_locs SEMI for_binders_infix_with_locs {
+    let (init, init_comma_locs, init_equal_locs) = $2
+    let (continue_block, continue_comma_locs, continue_equal_locs) = $4
+    (
+      init,
+      continue_block,
+      @list.from_array([mk_loc($loc($1)), mk_loc($loc($3))]),
+      init_comma_locs,
+      init_equal_locs,
+      continue_comma_locs,
+      continue_equal_locs,
+    )
+  }
+  ;
+
+list_comp_guard -> (Expr?, Location?)
+  : "if" infix_expr { (Some($2), Some(mk_loc($loc($1)))) }
+  |  { (None, None) }
   ;
 
 foreach_binder -> Binder?
@@ -1472,30 +2747,45 @@ expr -> Expr
   ;
 
 simple_try_expr -> Expr
-  : pipe_expr catch_keyword single_pattern_cases "}" { 
-    let catch_loc = $2
+  : pipe_expr catch_keyword single_pattern_cases_with_locs "}" {
+    let (catch_loc, catch_lbrace_loc) = $2
+    let (catch_, catch_semi_locs) = $3
     Try(
       body = $1,
-      catch_ = $3,
+      catch_~,
       try_else = None,
       has_try = false,
       try_loc = mk_loc($loc($1)),
       catch_loc~,
       else_loc = Location::{ start: Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }, end: Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 } },
+      catch_lbrace_loc~,
+      catch_rbrace_loc = mk_loc($loc($4)),
+      catch_semi_locs~,
+      noraise_lbrace_loc = None,
+      noraise_rbrace_loc = None,
+      noraise_semi_locs = @list.empty(),
       loc = mk_loc($sloc)
     )
   }
-  | pipe_expr catch_keyword single_pattern_cases "}" else_keyword single_pattern_cases "}" {
-    let catch_loc = $2
-    let else_loc = $5
+  | pipe_expr catch_keyword single_pattern_cases_with_locs "}" else_keyword single_pattern_cases_with_locs "}" {
+    let (catch_loc, catch_lbrace_loc) = $2
+    let (catch_, catch_semi_locs) = $3
+    let (else_loc, noraise_lbrace_loc) = $5
+    let (try_else, noraise_semi_locs) = $6
     Try(
       body = $1,
-      catch_ = $3,
-      try_else = Some($6),
+      catch_~,
+      try_else = Some(try_else),
       has_try = false,
       try_loc = mk_loc($loc($1)),
       catch_loc~,
       else_loc~,
+      catch_lbrace_loc~,
+      catch_rbrace_loc = mk_loc($loc($4)),
+      catch_semi_locs~,
+      noraise_lbrace_loc = Some(noraise_lbrace_loc),
+      noraise_rbrace_loc = Some(mk_loc($loc($7))),
+      noraise_semi_locs~,
       loc = mk_loc($sloc)
     )
   }
@@ -1503,36 +2793,96 @@ simple_try_expr -> Expr
   ;
 
 arrow_fn_with_explicit_braces -> Func
-  : "(" arrow_fn_prefix "=>" "{" list_semis_rev(statement) "}" { 
+  : "(" arrow_fn_prefix "=>" "{" list_semis_rev(statement) "}" {
     let body = Statement::compact_rev($5, loc = mk_loc($loc($4)).merge(mk_loc($loc($6))))
-    make_arrow_fn($2, body, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))), loc = mk_loc($sloc))
+    make_arrow_fn(
+      $2,
+      body,
+      params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),
+      fat_arrow_loc = Some(mk_loc($loc($3))),
+      body_lbrace_loc = Some(mk_loc($loc($4))),
+      body_rbrace_loc = Some(mk_loc($loc($6))),
+      loc = mk_loc($sloc),
+    )
   }
-  | "(" ")" "=>" "{" list_semis_rev(statement) "}" { 
+  | "(" ")" "=>" "{" list_semis_rev(statement) "}" {
     let body = Statement::compact_rev($5, loc = mk_loc($loc($4)).merge(mk_loc($loc($6))))
-    make_arrow_fn(@list.empty(), body, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),loc = mk_loc($sloc))
+    make_arrow_fn(
+      @list.empty(),
+      body,
+      params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),
+      lparen_loc = Some(mk_loc($loc($1))),
+      rparen_loc = Some(mk_loc($loc($2))),
+      fat_arrow_loc = Some(mk_loc($loc($3))),
+      body_lbrace_loc = Some(mk_loc($loc($4))),
+      body_rbrace_loc = Some(mk_loc($loc($6))),
+      loc = mk_loc($sloc),
+    )
   }
-  | binder "=>" "{" list_semis_rev(statement) "}" { 
+  | binder "=>" "{" list_semis_rev(statement) "}" {
     let body = Statement::compact_rev($4, loc = mk_loc($loc($3)).merge(mk_loc($loc($5))))
-    make_arrow_fn(@list.singleton((Named($1), None)), body, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+    make_arrow_fn(
+      @list.singleton((Named($1), None)),
+      body,
+      params_loc = mk_loc($loc($1)),
+      fat_arrow_loc = Some(mk_loc($loc($2))),
+      body_lbrace_loc = Some(mk_loc($loc($3))),
+      body_rbrace_loc = Some(mk_loc($loc($5))),
+      loc = mk_loc($sloc),
+    )
   }
-  | "_" "=>" "{" list_semis_rev(statement) "}" { 
+  | "_" "=>" "{" list_semis_rev(statement) "}" {
     let body = Statement::compact_rev($4, loc = mk_loc($loc($3)).merge(mk_loc($loc($5))))
-    make_arrow_fn(@list.singleton((Unnamed(mk_loc($loc($1))), None)), body, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+    make_arrow_fn(
+      @list.singleton((Unnamed(mk_loc($loc($1))), None)),
+      body,
+      params_loc = mk_loc($loc($1)),
+      fat_arrow_loc = Some(mk_loc($loc($2))),
+      body_lbrace_loc = Some(mk_loc($loc($3))),
+      body_rbrace_loc = Some(mk_loc($loc($5))),
+      loc = mk_loc($sloc),
+    )
   }
   ;
 
 arrow_fn_expr -> Func
-  : "(" arrow_fn_prefix "=>" expr_statement_no_break_continue_return { 
-    make_arrow_fn($2, $4, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))), loc = mk_loc($sloc))
+  : "(" arrow_fn_prefix "=>" expr_statement_no_break_continue_return {
+    make_arrow_fn(
+      $2,
+      $4,
+      params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),
+      fat_arrow_loc = Some(mk_loc($loc($3))),
+      loc = mk_loc($sloc),
+    )
   }
-  | "(" ")" "=>" expr_statement_no_break_continue_return { 
-    make_arrow_fn(@list.empty(), $4, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),loc = mk_loc($sloc))
+  | "(" ")" "=>" expr_statement_no_break_continue_return {
+    make_arrow_fn(
+      @list.empty(),
+      $4,
+      params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),
+      lparen_loc = Some(mk_loc($loc($1))),
+      rparen_loc = Some(mk_loc($loc($2))),
+      fat_arrow_loc = Some(mk_loc($loc($3))),
+      loc = mk_loc($sloc),
+    )
   }
-  | binder "=>" expr_statement_no_break_continue_return { 
-    make_arrow_fn(@list.singleton((Named($1), None)), $3, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+  | binder "=>" expr_statement_no_break_continue_return {
+    make_arrow_fn(
+      @list.singleton((Named($1), None)),
+      $3,
+      params_loc = mk_loc($loc($1)),
+      fat_arrow_loc = Some(mk_loc($loc($2))),
+      loc = mk_loc($sloc),
+    )
   }
-  | "_" "=>" expr_statement_no_break_continue_return { 
-    make_arrow_fn(@list.singleton((Unnamed(mk_loc($loc($1))), None)), $3, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+  | "_" "=>" expr_statement_no_break_continue_return {
+    make_arrow_fn(
+      @list.singleton((Unnamed(mk_loc($loc($1))), None)),
+      $3,
+      params_loc = mk_loc($loc($1)),
+      fat_arrow_loc = Some(mk_loc($loc($2))),
+      loc = mk_loc($sloc),
+    )
   }
   ;
 
@@ -1547,11 +2897,33 @@ arrow_fn_prefix -> List[(ArrowFnParam, Type?)]
   | "_" ":" type_ "," arrow_fn_prefix { $5.add((Unnamed(mk_loc($loc($1))), Some($3))) }
   ;
 
-arrow_fn_prefix_no_constraint -> List[ArrowFnParam]
-  : binder ioption(",") ")" { @list.singleton(Named($1)) }
-  | "_" ioption(",") ")" { @list.singleton(Unnamed(mk_loc($loc($1)))) }
-  | binder "," arrow_fn_prefix_no_constraint { $3.add(Named($1)) }
-  | "_" "," arrow_fn_prefix_no_constraint { $3.add(Unnamed(mk_loc($loc($1)))) }
+arrow_fn_prefix_no_constraint -> (List[ArrowFnParam], List[Location], Location)
+  : binder ")" { (@list.singleton(Named($1)), @list.empty(), mk_loc($loc($2))) }
+  | binder "," ")" {
+    (@list.singleton(Named($1)), @list.singleton(mk_loc($loc($2))), mk_loc($loc($3)))
+  }
+  | "_" ")" {
+    (@list.singleton(Unnamed(mk_loc($loc($1)))), @list.empty(), mk_loc($loc($2)))
+  }
+  | "_" "," ")" {
+    (
+      @list.singleton(Unnamed(mk_loc($loc($1)))),
+      @list.singleton(mk_loc($loc($2))),
+      mk_loc($loc($3)),
+    )
+  }
+  | binder "," arrow_fn_prefix_no_constraint {
+    let (params, comma_locs, rparen_loc) = $3
+    (params.add(Named($1)), comma_locs.add(mk_loc($loc($2))), rparen_loc)
+  }
+  | "_" "," arrow_fn_prefix_no_constraint {
+    let (params, comma_locs, rparen_loc) = $3
+    (
+      params.add(Unnamed(mk_loc($loc($1)))),
+      comma_locs.add(mk_loc($loc($2))),
+      rparen_loc,
+    )
+  }
   ;
 
 backward_pipeline_rhs -> Expr
@@ -1561,27 +2933,60 @@ backward_pipeline_rhs -> Expr
 
 pipe_expr -> Expr
   : pipe_expr "<|" backward_pipeline_rhs {
-    RevPipe(lhs = $1, rhs = $3, loc = mk_loc($sloc))
+    RevPipe(
+      lhs = $1,
+      rhs = $3,
+      rev_pipe_loc = mk_loc($loc($2)),
+      loc = mk_loc($sloc),
+    )
   }
   | pipe_expr "|>" infix_expr {
-    Pipe(lhs = $1, rhs = $3, loc = mk_loc($sloc))
+    Pipe(
+      lhs = $1,
+      rhs = $3,
+      pipe_loc = mk_loc($loc($2)),
+      loc = mk_loc($sloc),
+    )
   }
   | pipe_expr "|>" binder "=>" block_expr {
     let params_loc = mk_loc($loc($3))
     let fn_loc = mk_loc($loc($3)).merge(mk_loc($loc($5)))
     let func = make_arrow_fn(@list.singleton((Named($3), None)), $5, params_loc~, loc = fn_loc)
     let rhs = Expr::Function(func~, loc = fn_loc)
-    Pipe(lhs = $1, rhs~, loc = mk_loc($sloc))
+    Pipe(
+      lhs = $1,
+      rhs~,
+      pipe_loc = mk_loc($loc($2)),
+      loc = mk_loc($sloc),
+    )
   }
   | infix_expr { $1 }
   ;
 
 quantifier_expr -> Expr
   : "∀" binder ":" type_ "," quantifier_body_expr {
-    Quantifier(kind = Forall, binder = $2, binder_ty = $4, body = $6, loc = mk_loc($sloc))
+    Quantifier(
+      kind = Forall,
+      binder = $2,
+      binder_ty = $4,
+      body = $6,
+      quantifier_loc = mk_loc($loc($1)),
+      colon_loc = mk_loc($loc($3)),
+      comma_loc = mk_loc($loc($5)),
+      loc = mk_loc($sloc),
+    )
   }
   | "∃" binder ":" type_ "," quantifier_body_expr {
-    Quantifier(kind = Exists, binder = $2, binder_ty = $4, body = $6, loc = mk_loc($sloc))
+    Quantifier(
+      kind = Exists,
+      binder = $2,
+      binder_ty = $4,
+      body = $6,
+      quantifier_loc = mk_loc($loc($1)),
+      colon_loc = mk_loc($loc($3)),
+      comma_loc = mk_loc($loc($5)),
+      loc = mk_loc($sloc),
+    )
   }
   ;
 
@@ -1592,7 +2997,12 @@ quantifier_body_expr -> Expr
 
 infix_expr -> Expr
   : infix_expr "→" infix_expr {
-    Implies(lhs = $1, rhs = $3, loc = mk_loc($sloc))
+    Implies(
+      lhs = $1,
+      rhs = $3,
+      implies_loc = mk_loc($loc($2)),
+      loc = mk_loc($sloc),
+    )
   }
   | infix_expr infixop infix_expr {
     Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
@@ -1601,62 +3011,132 @@ infix_expr -> Expr
   ;
 
 postfix_expr -> Expr
-  : range_expr "as" type_name { 
-    As(expr = $1, trait_ = $3, loc = mk_loc($sloc))
+  : range_expr "as" type_name {
+    As(expr = $1, trait_ = $3, as_loc = mk_loc($loc($2)), loc = mk_loc($sloc))
   }
-  | range_expr "is" range_pattern { 
-    Is(expr = $1, pat = $3, loc = mk_loc($sloc))
+  | range_expr "is" range_pattern {
+    Is(expr = $1, pat = $3, is_loc = mk_loc($loc($2)), loc = mk_loc($sloc))
   }
   | range_expr "lexmatch?" lex_pattern %prec prec_LEXMATCH_QUESTION {
-    IsLexMatch(expr=$1, pat=$3, pat_loc=mk_loc($loc($3)), strategy = None, loc=mk_loc($sloc))
+    IsLexMatch(
+      expr=$1,
+      pat=$3,
+      pat_loc=mk_loc($loc($3)),
+      strategy = None,
+      lexmatch_question_loc = mk_loc($loc($2)),
+      with_loc = None,
+      loc=mk_loc($sloc),
+    )
   }
   | range_expr "lexmatch?" lex_pattern "with" label {
-    IsLexMatch(expr=$1, pat=$3, pat_loc=mk_loc($loc($3)), strategy = Some($5), loc=mk_loc($sloc))
+    IsLexMatch(
+      expr=$1,
+      pat=$3,
+      pat_loc=mk_loc($loc($3)),
+      strategy = Some($5),
+      lexmatch_question_loc = mk_loc($loc($2)),
+      with_loc = Some(mk_loc($loc($4))),
+      loc=mk_loc($sloc),
+    )
   }
   | range_expr "=~" regex_match_rhs {
-    let (pat, bindings) = $3
-    RegexMatch(expr = $1, pat~, bindings~, loc = mk_loc($sloc))
+    let (
+      pat,
+      bindings,
+      rhs_lparen_loc,
+      rhs_rparen_loc,
+      binding_comma_locs,
+      binding_equal_locs,
+    ) = $3
+    RegexMatch(
+      expr = $1,
+      pat~,
+      bindings~,
+      eq_tilde_loc = mk_loc($loc($2)),
+      rhs_lparen_loc~,
+      rhs_rparen_loc~,
+      binding_comma_locs~,
+      binding_equal_locs~,
+      loc = mk_loc($sloc),
+    )
   }
   | range_expr "<+" template_rhs {
-    TemplateWriting(expr = $1, template = $3, loc = mk_loc($sloc))
+    TemplateWriting(expr = $1, template = $3, lt_plus_loc = mk_loc($loc($2)), loc = mk_loc($sloc))
   }
   | range_expr { $1 }
   ;
 
-regex_match_rhs -> (RegexPattern, List[(Label, Binder?)])
-  : regex_atom_pattern { ($1, @list.empty()) }
-  | "(" regex_as_pattern "," list_commas(regex_match_binding) ")" { ($2, $4) }
+regex_match_rhs -> (RegexPattern, List[(Label, Binder?)], Location?, Location?, List[Location], List[Location])
+  : regex_atom_pattern {
+    ($1, @list.empty(), None, None, @list.empty(), @list.empty())
+  }
+  | "(" regex_as_pattern "," list_commas_with_trailing_locs(regex_match_binding) ")" {
+    let (bindings_with_locs, comma_locs, _) = $4
+    let bindings = []
+    let binding_equal_locs = []
+    bindings_with_locs.each(binding => {
+      let (label, equal_loc, binder) = binding
+      bindings.push((label, binder))
+      match equal_loc {
+        Some(loc) => binding_equal_locs.push(loc)
+        None => ()
+      }
+    })
+    (
+      $2,
+      @list.from_array(bindings),
+      Some(mk_loc($loc($1))),
+      Some(mk_loc($loc($5))),
+      comma_locs.add(mk_loc($loc($3))),
+      @list.from_array(binding_equal_locs),
+    )
+  }
   ;
 
-regex_match_binding -> (Label, Binder?)
+regex_match_binding -> (Label, Location?, Binder?)
   : LIDENT "=" binder {
     let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
-    (label, Some($3))
+    (label, Some(mk_loc($loc($2))), Some($3))
   }
   | POST_LABEL {
     let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
-    (label, None)
+    (label, None, None)
   }
   ;
 
 regex_as_pattern -> RegexPattern
   : regex_or_pattern { $1 }
   | regex_atom_pattern "as" binder {
-    RegexPattern::Alias(pat = $1, binder = $3, loc = mk_loc($sloc))
+    RegexPattern::Alias(
+      pat = $1,
+      binder = $3,
+      as_loc = mk_loc($loc($2)),
+      loc = mk_loc($sloc),
+    )
   }
   ;
 
 regex_or_pattern -> RegexPattern
   : regex_sequence_pattern { $1 }
   | regex_or_pattern "|" regex_sequence_pattern {
-    RegexPattern::Alternation(pat1 = $1, pat2 = $3, loc = mk_loc($sloc))
+    RegexPattern::Alternation(
+      pat1 = $1,
+      pat2 = $3,
+      bar_loc = mk_loc($loc($2)),
+      loc = mk_loc($sloc),
+    )
   }
   ;
 
 regex_sequence_pattern -> RegexPattern
   : regex_atom_pattern { $1 }
   | regex_sequence_pattern "+" regex_atom_pattern {
-    RegexPattern::Sequence(pat1 = $1, pat2 = $3, loc = mk_loc($sloc))
+    RegexPattern::Sequence(
+      pat1 = $1,
+      pat2 = $3,
+      plus_loc = mk_loc($loc($2)),
+      loc = mk_loc($sloc),
+    )
   }
   ;
 
@@ -1671,43 +3151,43 @@ regex_atom_pattern -> RegexPattern
   ;
 
 range_expr -> Expr
-  : prefix_expr "..<" prefix_expr { 
+  : prefix_expr "..<" prefix_expr {
     Infix(
-      op = Var::{ name: Ident(name = "..<"), loc: mk_loc($loc($2)) }, 
-      lhs = $1, 
-      rhs = $3, 
+      op = Var::{ name: Ident(name = "..<"), loc: mk_loc($loc($2)) },
+      lhs = $1,
+      rhs = $3,
       loc = mk_loc($sloc)
     )
   }
-  | prefix_expr "..=" prefix_expr { 
+  | prefix_expr "..=" prefix_expr {
     Infix(
-      op = Var::{ name: Ident(name = "..="), loc: mk_loc($loc($2)) }, 
-      lhs = $1, 
-      rhs = $3, 
+      op = Var::{ name: Ident(name = "..="), loc: mk_loc($loc($2)) },
+      lhs = $1,
+      rhs = $3,
       loc = mk_loc($sloc)
     )
   }
   | prefix_expr "..<=" prefix_expr {
     Infix(
-      op = Var::{ name: Ident(name = "..<="), loc: mk_loc($loc($2)) }, 
-      lhs = $1, 
-      rhs = $3, 
+      op = Var::{ name: Ident(name = "..<="), loc: mk_loc($loc($2)) },
+      lhs = $1,
+      rhs = $3,
       loc = mk_loc($sloc)
     )
   }
   | prefix_expr ">=.." prefix_expr {
     Infix(
-      op = Var::{ name: Ident(name = ">=.."), loc: mk_loc($loc($2)) }, 
-      lhs = $1, 
-      rhs = $3, 
+      op = Var::{ name: Ident(name = ">=.."), loc: mk_loc($loc($2)) },
+      lhs = $1,
+      rhs = $3,
       loc = mk_loc($sloc)
     )
   }
   | prefix_expr ">.." prefix_expr {
     Infix(
-      op = Var::{ name: Ident(name = ">.."), loc: mk_loc($loc($2)) }, 
-      lhs = $1, 
-      rhs = $3, 
+      op = Var::{ name: Ident(name = ">.."), loc: mk_loc($loc($2)) },
+      lhs = $1,
+      rhs = $3,
       loc = mk_loc($sloc)
     )
   }
@@ -1732,189 +3212,471 @@ prefix_expr -> Expr
 left_value -> LeftValue
   : var { Var($1) }
   | simple_expr accessor { Field($1, $2) }
-  | simple_expr "[" expr "]" { Array($1, $3) }
+  | simple_expr "[" expr "]" {
+    Array($1, $3, mk_loc($loc($2)), mk_loc($loc($4)))
+  }
   ;
 
 constr -> Constructor
-  : UIDENT { 
+  : UIDENT {
     Constructor::{
       name: ConstrName::{ name: $1, loc: mk_loc($loc($1)) },
       extra_info: NoExtraInfo,
       loc: mk_loc($sloc)
     }
   }
-  | PACKAGE_NAME DOT_UIDENT { 
+  | PACKAGE_NAME DOT_UIDENT {
     Constructor::{
       name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
-      extra_info: Package($1),
+      extra_info: Package(
+        pkg = $1,
+        pkg_loc = mk_loc($loc($1)),
+        dot_constr_loc = mk_loc($loc($2)),
+      ),
       loc: mk_loc($sloc)
     }
   }
-  | type_name "::" UIDENT { 
+  | type_name "::" UIDENT {
     Constructor::{
       name: ConstrName::{ name: $3, loc: mk_loc($loc($3)) },
-      extra_info: TypeName($1),
+      extra_info: TypeName(type_name = $1, coloncolon_loc = mk_loc($loc($2))),
       loc: mk_loc($sloc)
     }
   }
   | type_name "::" PACKAGE_NAME DOT_UIDENT {
     Constructor::{
       name: ConstrName::{ name: $4, loc: mk_loc($loc($4)) },
-      extra_info: TypeNameWithConstrPackage(type_name = $1, pkg = $3),
+      extra_info: TypeNameWithConstrPackage(
+        type_name = $1,
+        pkg = $3,
+        coloncolon_loc = mk_loc($loc($2)),
+        pkg_loc = mk_loc($loc($3)),
+        dot_constr_loc = mk_loc($loc($4)),
+      ),
       loc: mk_loc($sloc)
     }
   }
   ;
 
-non_empty_tuple_elems -> List[Expr]
-  : expr ioption(",") ")" { @list.singleton($1) }
-  | expr "," non_empty_tuple_elems { $3.add($1) }
+non_empty_tuple_elems -> (List[Expr], List[Location], Location)
+  : expr ")" { (@list.singleton($1), @list.empty(), mk_loc($loc($2))) }
+  | expr "," ")" {
+    (@list.singleton($1), @list.singleton(mk_loc($loc($2))), mk_loc($loc($3)))
+  }
+  | expr "," non_empty_tuple_elems {
+    let (exprs, comma_locs, rparen_loc) = $3
+    (exprs.add($1), comma_locs.add(mk_loc($loc($2))), rparen_loc)
+  }
   ;
 
-non_empty_tuple_elems_with_prefix -> List[Expr]
-  : binder "," non_empty_tuple_elems_with_prefix { $3.add(@syntax.binder_to_expr($1)) }
-  | "_" "," non_empty_tuple_elems_with_prefix { $3.add(Expr::Hole(loc = mk_loc($loc($1)), kind = Incomplete)) }
+non_empty_tuple_elems_with_prefix -> (List[Expr], List[Location], Location)
+  : binder "," non_empty_tuple_elems_with_prefix {
+    let (exprs, comma_locs, rparen_loc) = $3
+    (exprs.add(@syntax.binder_to_expr($1)), comma_locs.add(mk_loc($loc($2))), rparen_loc)
+  }
+  | "_" "," non_empty_tuple_elems_with_prefix {
+    let (exprs, comma_locs, rparen_loc) = $3
+    (
+      exprs.add(Expr::Hole(loc = mk_loc($loc($1)), kind = Incomplete)),
+      comma_locs.add(mk_loc($loc($2))),
+      rparen_loc,
+    )
+  }
   | non_empty_tuple_elems { $1 }
   ;
 
-tuple_expr -> Expr 
-  : "(" arrow_fn_prefix_no_constraint { 
-    let es = $2.map(@syntax.arrow_fn_param_to_expr)
+tuple_expr -> Expr
+  : "(" arrow_fn_prefix_no_constraint {
+    let (params, comma_locs, rparen_loc) = $2
+    let lparen_loc = mk_loc($loc($1))
+    let es = params.map(@syntax.arrow_fn_param_to_expr)
     match es {
       @list.More(expr, tail=Empty) => {
         match expr {
           Constraint(..) => expr
-          _ => Group(expr~, group = Paren, loc = mk_loc($sloc))
+          _ =>
+            Group(
+              expr~,
+              group = Paren,
+              left_delim_loc = lparen_loc,
+              right_delim_loc = rparen_loc,
+              loc = mk_loc($sloc),
+            )
         }
       }
-      _ => @syntax.make_tuple_expr(loc = mk_loc($sloc), es)
+      _ => @syntax.make_tuple_expr(
+        loc = mk_loc($sloc),
+        lparen_loc~,
+        rparen_loc~,
+        comma_locs~,
+        es,
+      )
     }
   }
-  | "(" non_empty_tuple_elems_with_prefix { 
-    match $2 {
-      More(expr, tail=Empty) => Group(expr~, group = Paren, loc = mk_loc($sloc))
-      exprs => @syntax.make_tuple_expr(loc = mk_loc($sloc), exprs)
+  | "(" non_empty_tuple_elems_with_prefix {
+    let (exprs, comma_locs, rparen_loc) = $2
+    let lparen_loc = mk_loc($loc($1))
+    match exprs {
+      More(expr, tail=Empty) =>
+        Group(
+          expr~,
+          group = Paren,
+          left_delim_loc = lparen_loc,
+          right_delim_loc = rparen_loc,
+          loc = mk_loc($sloc),
+        )
+      exprs => @syntax.make_tuple_expr(
+        loc = mk_loc($sloc),
+        lparen_loc~,
+        rparen_loc~,
+        comma_locs~,
+        exprs,
+      )
     }
   }
-  | "(" binder ":" type_ ")" { Constraint(expr = @syntax.binder_to_expr($2), ty = $4, loc = mk_loc($sloc)) }
-  | "(" "_" ":" type_ ")" { Constraint(expr = Hole(loc = mk_loc($loc($2)), kind = Incomplete), ty = $4, loc = mk_loc($sloc)) }
-  | "(" expr ":" type_ ")" { Constraint(expr = $2, ty = $4, loc = mk_loc($sloc)) }
-  | "(" ")" { Unit(loc = mk_loc($sloc), faked = false) }
+  | "(" binder ":" type_ ")" {
+    Constraint(
+      expr = @syntax.binder_to_expr($2),
+      ty = $4,
+      lparen_loc = Some(mk_loc($loc($1))),
+      colon_loc = mk_loc($loc($3)),
+      rparen_loc = Some(mk_loc($loc($5))),
+      loc = mk_loc($sloc),
+    )
+  }
+  | "(" "_" ":" type_ ")" {
+    Constraint(
+      expr = Hole(loc = mk_loc($loc($2)), kind = Incomplete),
+      ty = $4,
+      lparen_loc = Some(mk_loc($loc($1))),
+      colon_loc = mk_loc($loc($3)),
+      rparen_loc = Some(mk_loc($loc($5))),
+      loc = mk_loc($sloc),
+    )
+  }
+  | "(" expr ":" type_ ")" {
+    Constraint(
+      expr = $2,
+      ty = $4,
+      lparen_loc = Some(mk_loc($loc($1))),
+      colon_loc = mk_loc($loc($3)),
+      rparen_loc = Some(mk_loc($loc($5))),
+      loc = mk_loc($sloc),
+    )
+  }
+  | "(" ")" {
+    Unit(
+      loc = mk_loc($sloc),
+      faked = false,
+      lparen_loc = mk_loc($loc($1)),
+      rparen_loc = mk_loc($loc($2)),
+    )
+  }
   ;
 
 anony_fn -> Func
-  : is_async "fn" parameters func_return_type block_expr { 
-    let (return_type, error_type) = $4
+  : is_async "fn" parameters_with_locs func_return_type_with_loc block_expr_with_locs {
+    let (parameters, lparen_loc, rparen_loc, comma_locs) = $3
+    let (return_type, error_type, return_arrow_loc) = $4
+    let (body, body_lbrace_loc, body_rbrace_loc) = $5
     Func::{
-      parameters : $3,
-      params_loc : mk_loc($loc($3)),
-      body : $5,
+      parameters,
+      params_loc : lparen_loc.merge(rparen_loc),
+      body,
       return_type,
       error_type,
       kind : Lambda,
       is_async : $1,
+      fn_loc : Some(mk_loc($loc($2))),
+      lparen_loc : Some(lparen_loc),
+      rparen_loc : Some(rparen_loc),
+      comma_locs,
+      return_arrow_loc,
+      fat_arrow_loc : None,
+      body_lbrace_loc : Some(body_lbrace_loc),
+      body_rbrace_loc : Some(body_rbrace_loc),
       loc : mk_loc($sloc)
     }
   }
   ;
 
 simple_expr -> Expr
-  : "{" record_defn "}" { 
-    let (fs, trailing) = $2
-    @syntax.make_record_expr(loc = mk_loc($sloc), trailing~, None, fs)
+  : "{" record_defn "}" {
+    let (fs, trailing, comma_locs, semi_locs) = $2
+    @syntax.make_record_expr(
+      loc = mk_loc($sloc),
+      trailing~,
+      lbrace_loc = mk_loc($loc($1)),
+      rbrace_loc = mk_loc($loc($3)),
+      comma_locs~,
+      semi_locs~,
+      None,
+      fs,
+    )
   }
-  | type_name COLONCOLON "{" list_commas_with_trailing_info(record_defn_single) "}" { 
-    let (fs, trailing) = $4  
+  | type_name COLONCOLON "{" list_commas_with_trailing_locs(record_defn_single) "}" {
+    let (fs, comma_locs, trailing) = $4
     let trailing_mark = if trailing { TrailingMark::Comma } else { TrailingMark::None }
-    @syntax.make_record_expr(loc = mk_loc($sloc), trailing = trailing_mark, Some($1), fs)
+    @syntax.make_record_expr(
+      loc = mk_loc($sloc),
+      trailing = trailing_mark,
+      coloncolon_loc = Some(mk_loc($loc($2))),
+      lbrace_loc = mk_loc($loc($3)),
+      rbrace_loc = mk_loc($loc($5)),
+      comma_locs~,
+      Some($1),
+      fs,
+    )
   }
-  | ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "}" { 
-    RecordUpdate(type_name = $1, record = $4, fields = @list.empty(), loc = mk_loc($sloc))
+  | "{" ".." expr "}" {
+    RecordUpdate(
+      type_name = None,
+      record = $3,
+      fields = @list.empty(),
+      coloncolon_loc = None,
+      lbrace_loc = mk_loc($loc($1)),
+      dotdot_loc = mk_loc($loc($2)),
+      rbrace_loc = mk_loc($loc($4)),
+      comma_locs = @list.empty(),
+      loc = mk_loc($sloc),
+    )
   }
-  | ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "," list_commas(record_defn_single) "}" { 
-    RecordUpdate(type_name = $1, record = $4, fields = $6, loc = mk_loc($sloc))
+  | type_name "::" "{" ".." expr "}" {
+    RecordUpdate(
+      type_name = Some($1),
+      record = $5,
+      fields = @list.empty(),
+      coloncolon_loc = Some(mk_loc($loc($2))),
+      lbrace_loc = mk_loc($loc($3)),
+      dotdot_loc = mk_loc($loc($4)),
+      rbrace_loc = mk_loc($loc($6)),
+      comma_locs = @list.empty(),
+      loc = mk_loc($sloc),
+    )
   }
-  | "{" semi_expr_semi_opt "}" { 
-    let (expr, trailing) = $2
+  | "{" ".." expr "," list_commas_with_trailing_locs(record_defn_single) "}" {
+    let (fields, comma_locs, _) = $5
+    RecordUpdate(
+      type_name = None,
+      record = $3,
+      fields~,
+      coloncolon_loc = None,
+      lbrace_loc = mk_loc($loc($1)),
+      dotdot_loc = mk_loc($loc($2)),
+      rbrace_loc = mk_loc($loc($6)),
+      comma_locs = comma_locs.add(mk_loc($loc($4))),
+      loc = mk_loc($sloc),
+    )
+  }
+  | type_name "::" "{" ".." expr "," list_commas_with_trailing_locs(record_defn_single) "}" {
+    let (fields, comma_locs, _) = $7
+    RecordUpdate(
+      type_name = Some($1),
+      record = $5,
+      fields~,
+      coloncolon_loc = Some(mk_loc($loc($2))),
+      lbrace_loc = mk_loc($loc($3)),
+      dotdot_loc = mk_loc($loc($4)),
+      rbrace_loc = mk_loc($loc($8)),
+      comma_locs = comma_locs.add(mk_loc($loc($6))),
+      loc = mk_loc($sloc),
+    )
+  }
+  | "{" semi_expr_semi_opt "}" {
+    let (expr, trailing, semi_locs) = $2
     match expr {
       Ident(id = { name: Ident(name~), loc }, ..) => {
         let label = Label::{ name, loc }
-        let field = @syntax.make_field_def(loc = mk_loc($sloc), label, expr, true)
+        let field = @syntax.make_field_def(loc~, label, expr, true)
         let trailing_mark = if trailing { TrailingMark::Semi } else { TrailingMark::None }
-        @syntax.make_record_expr(loc = mk_loc($sloc), trailing = trailing_mark, None, @list.singleton(field))
+        @syntax.make_record_expr(
+          loc = mk_loc($sloc),
+          trailing = trailing_mark,
+          lbrace_loc = mk_loc($loc($1)),
+          rbrace_loc = mk_loc($loc($3)),
+          semi_locs~,
+          None,
+          @list.singleton(field),
+        )
       }
-      _ => Group(expr~, group = Brace, loc = mk_loc($sloc))
+      _ =>
+        Group(
+          expr~,
+          group = Brace,
+          left_delim_loc = mk_loc($loc($1)),
+          right_delim_loc = mk_loc($loc($3)),
+          loc = mk_loc($sloc),
+        )
     }
   }
-  | "{" list_commas(map_expr_elem) "}" { 
-    Map(elems = $2, loc = mk_loc($sloc))
+  | "{" list_commas_with_trailing_locs(map_expr_elem) "}" {
+    let (elems, comma_locs, _) = $2
+    Map(
+      elems~,
+      lbrace_loc = mk_loc($loc($1)),
+      rbrace_loc = mk_loc($loc($3)),
+      comma_locs~,
+      loc = mk_loc($sloc),
+    )
   }
   | anony_fn { Function(func = $1, loc = mk_loc($sloc)) }
   | atomic_expr { $1 }
   | "_" %prec prec_lower_than_arrow_fn { Hole(loc = mk_loc($sloc), kind = Incomplete) }
   | qual_ident_simple_expr { @syntax.make_ident_expr(loc = mk_loc($sloc), Var::{ name: $1, loc: mk_loc($sloc) }) }
   | constr { Constr(constr = $1, loc = mk_loc($sloc)) }
-  | simple_expr "(" list_commas(argument) ")" { 
-    Apply(func = $1, args = $3, loc = mk_loc($sloc))
+  | simple_expr "(" list_commas_with_trailing_locs(argument) ")" {
+    let (args, comma_locs, _) = $3
+    Apply(
+      func = $1,
+      args~,
+      lparen_loc = mk_loc($loc($2)),
+      rparen_loc = mk_loc($loc($4)),
+      comma_locs~,
+      loc = mk_loc($sloc),
+    )
   }
-  | simple_expr "[" expr "]" { 
-    ArrayGet(array = $1, index = $3, loc = mk_loc($sloc))
+  | simple_expr "[" expr "]" {
+    ArrayGet(
+      array = $1,
+      index = $3,
+      lbracket_loc = mk_loc($loc($2)),
+      rbracket_loc = mk_loc($loc($4)),
+      loc = mk_loc($sloc),
+    )
   }
-  | simple_expr "[" option(expr) ":" option(expr) "]" { 
+  | simple_expr "[" option(expr) ":" option(expr) "]" {
     ArrayGetSlice(
       array = $1,
       start_index = $3,
       end_index = $5,
       index_loc = mk_loc(($loc($2).0, $loc($6).1)),
+      lbracket_loc = mk_loc($loc($2)),
+      colon_loc = mk_loc($loc($4)),
+      rbracket_loc = mk_loc($loc($6)),
       loc = mk_loc($sloc)
     )
   }
-  | simple_expr DOT_LIDENT "(" list_commas(argument) ")" { 
+  | simple_expr DOT_LIDENT "(" list_commas_with_trailing_locs(argument) ")" {
     let method_name = Label::{ name: $2, loc: mk_loc($loc($2)) }
+    let (args, comma_locs, _) = $4
     DotApply(
       self = $1,
       method_name~,
-      args = $4,
+      args~,
       return_self = false,
+      dot_loc = mk_loc($loc($2)),
+      lparen_loc = mk_loc($loc($3)),
+      rparen_loc = mk_loc($loc($5)),
+      comma_locs~,
       loc = mk_loc($sloc)
     )
   }
-  | simple_expr ".." LIDENT "(" list_commas(argument) ")" { 
+  | simple_expr ".." LIDENT "(" list_commas_with_trailing_locs(argument) ")" {
     let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
+    let (args, comma_locs, _) = $5
     DotApply(
       self = $1,
       method_name~,
-      args = $5,
+      args~,
       return_self = true,
+      dot_loc = mk_loc($loc($2)),
+      lparen_loc = mk_loc($loc($4)),
+      rparen_loc = mk_loc($loc($6)),
+      comma_locs~,
       loc = mk_loc($sloc)
     )
   }
-  | simple_expr accessor %prec prec_field { 
+  | simple_expr accessor %prec prec_field {
     Field(record = $1, accessor = $2, loc = mk_loc($sloc))
   }
-  | type_name "::" LIDENT { 
+  | type_name "::" LIDENT {
     let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
-    Method(type_name = $1, method_name~, loc = mk_loc($sloc))
+    Method(
+      type_name = $1,
+      method_name~,
+      coloncolon_loc = mk_loc($loc($2)),
+      loc = mk_loc($sloc),
+    )
   }
-  | "[" "for" non_empty_list_commas(foreach_binder) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "]" {
-    let (init, continue_block) = $6
+  | "[" "for" non_empty_list_commas_with_locs(foreach_binder) "in" infix_expr foreach_optional_loop_vars_infix_with_locs list_comp_guard "=>" expr "]" {
+    let (binders, binder_comma_locs) = $3
+    let (
+      init,
+      continue_block,
+      semi_locs,
+      init_comma_locs,
+      init_equal_locs,
+      continue_comma_locs,
+      continue_equal_locs,
+    ) = $6
+    let (guard_, if_loc) = $7
     ListComprehension(
-      kind = Foreach(binders = $3, expr = $5, init~, continue_block~),
-      guard_ = $7,
+      kind = Foreach(
+        binders~,
+        expr = $5,
+        init~,
+        continue_block~,
+        for_loc = mk_loc($loc($2)),
+        in_loc = mk_loc($loc($4)),
+        binder_comma_locs~,
+        semi_locs~,
+        init_comma_locs~,
+        init_equal_locs~,
+        continue_comma_locs~,
+        continue_equal_locs~,
+      ),
+      guard_~,
       body = $9,
+      lbracket_loc = mk_loc($loc($1)),
+      rbracket_loc = mk_loc($loc($10)),
+      if_loc~,
+      fat_arrow_loc = mk_loc($loc($8)),
       loc = mk_loc($sloc)
     )
   }
-  | "[" "for" list_comp_for_header option(preceded("if", infix_expr)) "=>" expr "]" {
-    let (binders, condition, continue_block, for_loc) = $3
+  | "[" "for" list_comp_for_header list_comp_guard "=>" expr "]" {
+    let (
+      binders,
+      condition,
+      continue_block,
+      binder_comma_locs,
+      semi_locs,
+      binder_equal_locs,
+      continue_comma_locs,
+      continue_equal_locs,
+    ) = $3
+    let (guard_, if_loc) = $4
     ListComprehension(
-      kind = For(binders~, condition~, continue_block~, for_loc~),
-      guard_ = $4,
+      kind = For(
+        binders~,
+        condition~,
+        continue_block~,
+        for_loc = mk_loc($loc($2)),
+        binder_comma_locs~,
+        semi_locs~,
+        binder_equal_locs~,
+        continue_comma_locs~,
+        continue_equal_locs~,
+      ),
+      guard_~,
       body = $6,
+      lbracket_loc = mk_loc($loc($1)),
+      rbracket_loc = mk_loc($loc($7)),
+      if_loc~,
+      fat_arrow_loc = mk_loc($loc($5)),
       loc = mk_loc($sloc)
     )
   }
-  | "[" list_commas(spreadable_elem) "]" { @syntax.make_array_expr(loc = mk_loc($sloc), $2) }
+  | "[" list_commas_with_trailing_locs(spreadable_elem) "]" {
+    let (elems, comma_locs, _) = $2
+    @syntax.make_array_expr(
+      loc = mk_loc($sloc),
+      lbracket_loc = mk_loc($loc($1)),
+      rbracket_loc = mk_loc($loc($3)),
+      comma_locs~,
+      elems,
+    )
+  }
   | tuple_expr { $1 }
   ;
 
@@ -1923,7 +3685,7 @@ simple_expr -> Expr
   ;
 
 %inline accessor -> Accessor
-  : DOT_LIDENT { 
+  : DOT_LIDENT {
     if $1 == "_" {
       Newtype(loc = mk_loc($loc($1)))
     } else {
@@ -1938,11 +3700,24 @@ simple_expr -> Expr
   ;
 
 tvar_binder -> TypeVarBinder
-  : UIDENT { 
-    TypeVarBinder::{ name: $1, constraints: @list.empty(), name_loc: mk_loc($loc($1)) }
+  : UIDENT {
+    TypeVarBinder::{
+      name: $1,
+      constraints: @list.empty(),
+      name_loc: mk_loc($loc($1)),
+      colon_loc: None,
+      plus_locs: @list.empty(),
+    }
   }
-  | UIDENT COLON separated_nonempty_list(PLUS, tvar_constraint) { 
-    TypeVarBinder::{ name: $1, constraints: $3, name_loc: mk_loc($loc($1)) }
+  | UIDENT COLON non_empty_list_pluses_with_locs(tvar_constraint) {
+    let (constraints, plus_locs) = $3
+    TypeVarBinder::{
+      name: $1,
+      constraints,
+      name_loc: mk_loc($loc($1)),
+      colon_loc: Some(mk_loc($loc($2))),
+      plus_locs,
+    }
   }
   ;
 
@@ -1960,20 +3735,24 @@ tvar_constraint -> TypeVarConstraint
   ;
 
 type_name -> TypeName
-  : qual_ident_ty { TypeName::{ name: $1, is_object: false, loc: mk_loc($sloc) } }
-  | "&" qual_ident_ty { TypeName::{ name: $2, is_object: true, loc: mk_loc($sloc) } }
+  : qual_ident_ty {
+    TypeName::{ name: $1, is_object: false, object_amp_loc: None, loc: mk_loc($sloc) }
+  }
+  | "&" qual_ident_ty {
+    TypeName::{ name: $2, is_object: true, object_amp_loc: Some(mk_loc($loc($1))), loc: mk_loc($sloc) }
+  }
   ;
 
 multiline_string -> MultilineStringElem
   : MULTILINE_STRING { String($1) }
-  | MULTILINE_INTERP { 
+  | MULTILINE_INTERP {
     Interp(make_interps($1))
   }
   ;
 
 atomic_expr -> Expr
   : simple_constant { make_constant_expr(loc = mk_loc($sloc), $1) }
-  | non_empty_list(multiline_string) { 
+  | non_empty_list(multiline_string) {
     MultilineString(elems = $1, loc = mk_loc($sloc))
   }
   | INTERP { make_interp_expr(loc = mk_loc($sloc), $1) }
@@ -2028,20 +3807,21 @@ optional_question -> Location?
   ;
 
 argument -> Argument
-  : label optional_question "=" expr { 
+  : label optional_question "=" expr {
+    let equal_loc = mk_loc($loc($3))
     let arg_kind : ArgumentKind = match $2 {
-      Some(question_loc) => LabelledOption(label = $1, question_loc~)
-      None => Labelled($1)
+      Some(question_loc) => LabelledOption(label = $1, question_loc~, equal_loc~)
+      None => Labelled(label = $1, equal_loc~)
     }
     Argument::{ value: $4, kind: arg_kind }
   }
   | expr { Argument::{ value: $1, kind: Positional } }
-  | POST_LABEL { 
+  | POST_LABEL {
     let label = Label::{ name: $1, loc: mk_loc($loc($1)) }
     let arg_value = @syntax.make_ident_expr(loc = mk_loc($loc($1)), Var::{ name: Ident(name = $1), loc: mk_loc($loc($1)) })
     Argument::{ value: arg_value, kind: LabelledPun(label) }
   }
-  | LIDENT "?" { 
+  | LIDENT "?" {
     let loc = mk_loc($loc($1))
     let label = Label::{ name: $1, loc }
     let arg_value = @syntax.make_ident_expr(loc~, Var::{ name: Ident(name = $1), loc })
@@ -2051,14 +3831,17 @@ argument -> Argument
 
 spreadable_elem -> SpreadableElem
   : expr { Regular($1) }
-  | ".." expr { Spread(expr = $2, loc = mk_loc($sloc)) }
+  | ".." expr {
+    Spread(expr = $2, dotdot_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+  }
   ;
 
 map_expr_elem -> MapExprElem
-  : map_syntax_key ":" expr { 
+  : map_syntax_key ":" expr {
     MapExprElem::{
       key: $1,
       expr: $3,
+      colon_loc: mk_loc($loc($2)),
       key_loc: mk_loc($loc($1)),
       loc: mk_loc($sloc)
     }
@@ -2066,18 +3849,31 @@ map_expr_elem -> MapExprElem
   ;
 
 pattern -> Pattern
-  : pattern "as" binder { @syntax.make_alias_pattern(loc = mk_loc($sloc), $1, $3) }
+  : pattern "as" binder {
+    @syntax.make_alias_pattern(
+      loc = mk_loc($sloc),
+      as_loc = mk_loc($loc($2)),
+      $1,
+      $3,
+    )
+  }
   | or_pattern { $1 }
   ;
 
 or_pattern -> Pattern
-  : range_pattern "|" or_pattern { Or(pat1 = $1, pat2 = $3, loc = mk_loc($sloc)) }
+  : range_pattern "|" or_pattern {
+    Or(pat1 = $1, pat2 = $3, bar_loc = mk_loc($loc($2)), loc = mk_loc($sloc))
+  }
   | range_pattern { $1 }
   ;
 
 range_pattern -> Pattern
-  : simple_pattern "..<" simple_pattern { Range(lhs = $1, rhs = $3, kind=Exclusive, loc = mk_loc($sloc)) }
-  | simple_pattern "..=" simple_pattern { Range(lhs = $1, rhs = $3, kind=Inclusive, loc = mk_loc($sloc)) }
+  : simple_pattern "..<" simple_pattern {
+    Range(lhs = $1, rhs = $3, kind=Exclusive, range_op_loc = mk_loc($loc($2)), loc = mk_loc($sloc))
+  }
+  | simple_pattern "..=" simple_pattern {
+    Range(lhs = $1, rhs = $3, kind=Inclusive, range_op_loc = mk_loc($loc($2)), loc = mk_loc($sloc))
+  }
   | simple_pattern { $1 }
   ;
 
@@ -2096,79 +3892,238 @@ simple_pattern -> Pattern
   | BYTES { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bytes($1)) }
   | UNDERSCORE { Any(loc = mk_loc($sloc)) }
   | binder { Var($1) }
-  | constr option(delimited("(", constr_pat_arguments, ")")) { 
-    let (args, is_open) = match $2 {
-      None => (None, false)
-      Some((args, is_open)) => (Some(args), is_open)
-    }
-    @syntax.make_constr_pattern(loc = mk_loc($sloc), $1, args, is_open)
+  | constr optional_constr_pat_arguments {
+    let (
+      args,
+      is_open,
+      args_lparen_loc,
+      args_rparen_loc,
+      arg_comma_locs,
+      open_dotdot_loc,
+    ) = $2
+    @syntax.make_constr_pattern(
+      loc = mk_loc($sloc),
+      args_lparen_loc~,
+      args_rparen_loc~,
+      arg_comma_locs~,
+      open_dotdot_loc~,
+      $1,
+      args,
+      is_open,
+    )
   }
-  // bits constr pattern `i32(args)` 
+  // bits constr pattern `i32(args)`
   // To disambiguate with pattern variable, the args list must be present.
-  | binder delimited("(", constr_pat_arguments_no_open, ")") {
-    Pattern::SpecialConstr(binder = $1, args = $2, loc = mk_loc($sloc))
+  | binder "(" constr_pat_arguments_no_open ")" {
+    let (args, comma_locs) = $3
+    Pattern::SpecialConstr(
+      binder = $1,
+      args~,
+      lparen_loc = mk_loc($loc($2)),
+      rparen_loc = mk_loc($loc($4)),
+      comma_locs~,
+      loc = mk_loc($sloc),
+    )
   }
   | "(" pattern ")" { $2 }
-  | "(" pattern "," non_empty_list_commas(pattern) ")" { @syntax.make_tuple_pattern(loc = mk_loc($sloc), $4.add($2)) }
-  | "(" pattern annot ")" { Constraint(pat = $2, ty = $3, loc = mk_loc($sloc)) }
-  | "[" array_sub_patterns "]" { Array(pats = $2, loc = mk_loc($sloc)) }
-  | "{" "}" { Record(fields = @list.empty(), is_closed = true, loc = mk_loc($sloc)) }
-  | "{" ".." option(",") "}" { Record(fields = @list.empty(), is_closed = false, loc = mk_loc($sloc)) }
-  | "{" non_empty_fields_pat "}" { 
-    let (fields, is_closed) = $2
-    Record(fields~, is_closed~, loc = mk_loc($sloc))
+  | "(" pattern "," non_empty_list_commas_with_trailing_locs(pattern) ")" {
+    let (rest, rest_comma_locs, _) = $4
+    let comma_locs = [mk_loc($loc($3))]
+    rest_comma_locs.each(loc => comma_locs.push(loc))
+    @syntax.make_tuple_pattern(
+      loc = mk_loc($sloc),
+      lparen_loc = mk_loc($loc($1)),
+      rparen_loc = mk_loc($loc($5)),
+      comma_locs = @list.from_array(comma_locs),
+      rest.add($2),
+    )
   }
-  | "{" non_empty_map_elems_pat "}" { 
-    let (elems, is_closed) = $2
-    Map(elems~, is_closed~, loc = mk_loc($sloc))
+  | "(" pattern ":" type_ ")" {
+    Constraint(
+      pat = $2,
+      ty = $4,
+      lparen_loc = Some(mk_loc($loc($1))),
+      colon_loc = mk_loc($loc($3)),
+      rparen_loc = Some(mk_loc($loc($5))),
+      loc = mk_loc($sloc),
+    )
+  }
+  | "[" array_sub_patterns "]" {
+    Array(
+      pats = $2,
+      lbracket_loc = mk_loc($loc($1)),
+      rbracket_loc = mk_loc($loc($3)),
+      loc = mk_loc($sloc),
+    )
+  }
+  | "{" "}" {
+    Record(
+      fields = @list.empty(),
+      is_closed = true,
+      lbrace_loc = mk_loc($loc($1)),
+      rbrace_loc = mk_loc($loc($2)),
+      comma_locs = @list.empty(),
+      dotdot_loc = None,
+      loc = mk_loc($sloc),
+    )
+  }
+  | "{" ".." optional_comma_loc "}" {
+    let comma_locs = match $3 {
+      Some(loc) => @list.singleton(loc)
+      None => @list.empty()
+    }
+    Record(
+      fields = @list.empty(),
+      is_closed = false,
+      lbrace_loc = mk_loc($loc($1)),
+      rbrace_loc = mk_loc($loc($4)),
+      comma_locs~,
+      dotdot_loc = Some(mk_loc($loc($2))),
+      loc = mk_loc($sloc),
+    )
+  }
+  | "{" non_empty_fields_pat "}" {
+    let (fields, is_closed, comma_locs, dotdot_loc) = $2
+    Record(
+      fields~,
+      is_closed~,
+      lbrace_loc = mk_loc($loc($1)),
+      rbrace_loc = mk_loc($loc($3)),
+      comma_locs~,
+      dotdot_loc~,
+      loc = mk_loc($sloc),
+    )
+  }
+  | "{" non_empty_map_elems_pat "}" {
+    let (elems, is_closed, comma_locs, dotdot_loc) = $2
+    Map(
+      elems~,
+      is_closed~,
+      lbrace_loc = mk_loc($loc($1)),
+      rbrace_loc = mk_loc($loc($3)),
+      comma_locs~,
+      dotdot_loc~,
+      loc = mk_loc($sloc),
+    )
   }
   ;
 
 array_sub_pattern -> ArrayPattern
   : pattern { Pattern($1) }
-  | ".." STRING { StringSpread(str = $2, loc = mk_loc($loc($2))) }
-  | ".." BYTES { BytesSpread(bytes = $2, loc = mk_loc($loc($2))) }
-  | ".." UIDENT { 
-    let binder = Binder::{ name: $2, loc: mk_loc($loc($2)) }
-    ConstSpread(binder~, pkg = None, loc = mk_loc($sloc))
+  | ".." STRING {
+    StringSpread(str = $2, dotdot_loc = mk_loc($loc($1)), loc = mk_loc($loc($2)))
   }
-  | ".." PACKAGE_NAME DOT_UIDENT { 
+  | ".." BYTES {
+    BytesSpread(bytes = $2, dotdot_loc = mk_loc($loc($1)), loc = mk_loc($loc($2)))
+  }
+  | ".." UIDENT {
+    let binder = Binder::{ name: $2, loc: mk_loc($loc($2)) }
+    ConstSpread(
+      binder~,
+      pkg = None,
+      dotdot_loc = mk_loc($loc($1)),
+      pkg_loc = None,
+      dot_uident_loc = None,
+      loc = mk_loc($sloc),
+    )
+  }
+  | ".." PACKAGE_NAME DOT_UIDENT {
     let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
-    ConstSpread(binder~, pkg = Some($2), loc = mk_loc($sloc))
+    ConstSpread(
+      binder~,
+      pkg = Some($2),
+      dotdot_loc = mk_loc($loc($1)),
+      pkg_loc = Some(mk_loc($loc($2))),
+      dot_uident_loc = Some(mk_loc($loc($3))),
+      loc = mk_loc($sloc),
+    )
   }
   ;
 
 dotdot_binder -> DotDotBinder
-  : ".." binder { Binder($2) }
-  | ".." "_" { Underscore }
-  | ".." "as" binder { BinderAs($3) }
-  | ".." { NoBinder }
+  : ".." binder { Binder(binder = $2, dotdot_loc = mk_loc($loc($1))) }
+  | ".." "_" {
+    Underscore(dotdot_loc = mk_loc($loc($1)), underscore_loc = mk_loc($loc($2)))
+  }
+  | ".." "as" binder {
+    BinderAs(
+      binder = $3,
+      dotdot_loc = mk_loc($loc($1)),
+      as_loc = mk_loc($loc($2)),
+    )
+  }
+  | ".." { NoBinder(dotdot_loc = mk_loc($loc($1))) }
   ;
 
 array_sub_patterns -> ArrayPatterns
-  :  { Closed(@list.empty()) }
-  | array_sub_pattern { Closed(@list.singleton($1)) }
-  | array_sub_pattern "," array_sub_patterns { 
+  :  { Closed(@list.empty(), comma_locs = @list.empty()) }
+  | array_sub_pattern { Closed(@list.singleton($1), comma_locs = @list.empty()) }
+  | array_sub_pattern "," array_sub_patterns {
     match $3 {
-      Closed(ps) => Closed(ps.add($1))
-      Open(ps1, ps2, b) => Open(ps1.add($1), ps2, b)
+      Closed(ps, comma_locs~) =>
+        Closed(ps.add($1), comma_locs = comma_locs.add(mk_loc($loc($2))))
+      Open(
+        ps1,
+        ps2,
+        b,
+        left_comma_locs~,
+        dotdot_comma_loc~,
+        right_comma_locs~,
+      ) =>
+        Open(
+          ps1.add($1),
+          ps2,
+          b,
+          left_comma_locs = left_comma_locs.add(mk_loc($loc($2))),
+          dotdot_comma_loc~,
+          right_comma_locs~,
+        )
     }
   }
-  | dotdot_binder "," non_empty_list_commas(array_sub_pattern) { Open(@list.empty(), $3, $1) }
-  | dotdot_binder ioption(",") { Open(@list.empty(), @list.empty(), $1) }
+  | dotdot_binder "," non_empty_list_commas_with_trailing_locs(array_sub_pattern) {
+    let (right, right_comma_locs, _) = $3
+    Open(
+      @list.empty(),
+      right,
+      $1,
+      left_comma_locs = @list.empty(),
+      dotdot_comma_loc = Some(mk_loc($loc($2))),
+      right_comma_locs~,
+    )
+  }
+  | dotdot_binder optional_comma_loc {
+    Open(
+      @list.empty(),
+      @list.empty(),
+      $1,
+      left_comma_locs = @list.empty(),
+      dotdot_comma_loc = $2,
+      right_comma_locs = @list.empty(),
+    )
+  }
   ;
 
 error_annotation -> ErrorType
   : "raise" { DefaultErrorType(loc = mk_loc($sloc)) }
-  | "raise" error_type { ErrorType(ty = $2) }
+  | "raise" error_type {
+    ErrorType(ty = $2, raise_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+  }
   | "noraise" { Noraise(loc = mk_loc($sloc)) }
-  | "raise" "?" { 
+  | "raise" "?" {
     let fake_error = Type::Name(
       constr_id = ConstrId::{ id: Ident(name = "Error"), loc: mk_loc($sloc) },
       tys = @list.empty(),
+      type_args_lbracket_loc = None,
+      type_args_rbracket_loc = None,
+      type_arg_comma_locs = @list.empty(),
       loc = mk_loc($sloc)
     )
-    MaybeError(ty = fake_error)
+    MaybeError(
+      ty = fake_error,
+      raise_loc = mk_loc($loc($1)),
+      question_loc = mk_loc($loc($2)),
+      loc = mk_loc($sloc),
+    )
   }
   ;
 
@@ -2178,20 +4133,30 @@ return_type -> (Type, ErrorType)
   ;
 
 func_return_type -> (Type?, ErrorType)
-  : "->" return_type { 
+  : func_return_type_with_loc {
+    let (ty, err, _) = $1
+    (ty, err)
+  }
+  ;
+
+func_return_type_with_loc -> (Type?, ErrorType, Location?)
+  : "->" return_type {
     match $2 {
-      (ty, err) => (Some(ty), err)
+      (ty, err) => (Some(ty), err, Some(mk_loc($loc($1))))
     }
   }
-  | error_annotation { (None, $1) }
-  |  { (None, NoErrorType) }
+  | error_annotation { (None, $1, None) }
+  |  { (None, NoErrorType, None) }
   ;
 
 error_type -> Type
-  : qual_ident_ty { 
+  : qual_ident_ty {
     Name(
       constr_id = ConstrId::{ id: $1, loc: mk_loc($sloc) },
       tys = @list.empty(),
+      type_args_lbracket_loc = None,
+      type_args_rbracket_loc = None,
+      type_arg_comma_locs = @list.empty(),
       loc = mk_loc($sloc)
     )
   }
@@ -2200,45 +4165,100 @@ error_type -> Type
 
 simple_type -> Type
   : simple_type "?" { @syntax.make_option_type(loc = mk_loc($sloc), constr_loc = mk_loc($loc($2)), $1) }
-  | "(" type_ "," non_empty_list_commas(type_) ")" { @syntax.make_tuple_type(loc = mk_loc($sloc), $4.add($2)) }
+  | "(" type_ "," non_empty_list_commas_with_trailing_locs(type_) ")" {
+    let (rest, rest_comma_locs, _) = $4
+    let comma_locs = [mk_loc($loc($3))]
+    rest_comma_locs.each(loc => comma_locs.push(loc))
+    @syntax.make_tuple_type(
+      loc = mk_loc($sloc),
+      lparen_loc = mk_loc($loc($1)),
+      rparen_loc = mk_loc($loc($5)),
+      comma_locs = @list.from_array(comma_locs),
+      rest.add($2),
+    )
+  }
   | "(" type_ ")" { $2 }
-  | qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as { 
+  | qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
+    let (type_args, type_args_lbracket_loc, type_args_rbracket_loc, type_arg_comma_locs) = $2
     Name(
       constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-      tys = $2,
+      tys = type_args,
+      type_args_lbracket_loc~,
+      type_args_rbracket_loc~,
+      type_arg_comma_locs~,
       loc = mk_loc($sloc)
     )
   }
-  | "&" qual_ident_ty { Object(ConstrId::{ id: $2, loc: mk_loc($loc($2)) }) }
+  | "&" qual_ident_ty {
+    Object(
+      constr_id = ConstrId::{ id: $2, loc: mk_loc($loc($2)) },
+      amp_loc = mk_loc($loc($1)),
+      loc = mk_loc($sloc),
+    )
+  }
   | "_" { Any(loc = mk_loc($sloc)) }
   ;
 
 type_ -> Type
   : simple_type { $1 }
-  | is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type { 
+  | is_async "(" type_ "," ioption(non_empty_list_commas_with_trailing_locs(type_)) ")" "->" return_type {
     let (ty_res, ty_err) = $8
-    let ts = match $5 { 
-      None => @list.empty() 
-      Some(ts) => ts 
+    let (ts, rest_comma_locs) = match $5 {
+      None => (@list.empty(), @list.empty())
+      Some((ts, rest_comma_locs, _)) => (ts, rest_comma_locs)
     }
-    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+    let comma_locs = [mk_loc($loc($4))]
+    rest_comma_locs.each(loc => comma_locs.push(loc))
+    Arrow(
+      args = ts.add($3),
+      res = ty_res,
+      err = ty_err,
+      is_async = $1,
+      lparen_loc = mk_loc($loc($2)),
+      rparen_loc = mk_loc($loc($6)),
+      arrow_loc = mk_loc($loc($7)),
+      comma_locs = @list.from_array(comma_locs),
+      loc = mk_loc($sloc),
+    )
   }
-  | is_async "(" ")" "->" return_type { 
+  | is_async "(" ")" "->" return_type {
     let (ty_res, ty_err) = $5
-    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+    Arrow(
+      args = @list.empty(),
+      res = ty_res,
+      err = ty_err,
+      is_async = $1,
+      lparen_loc = mk_loc($loc($2)),
+      rparen_loc = mk_loc($loc($3)),
+      arrow_loc = mk_loc($loc($4)),
+      comma_locs = @list.empty(),
+      loc = mk_loc($sloc),
+    )
   }
-  | is_async "(" type_ ")" "->" return_type { 
+  | is_async "(" type_ ")" "->" return_type {
     let (ty_res, ty_err) = $6
-    Arrow(args = @list.singleton($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+    Arrow(
+      args = @list.singleton($3),
+      res = ty_res,
+      err = ty_err,
+      is_async = $1,
+      lparen_loc = mk_loc($loc($2)),
+      rparen_loc = mk_loc($loc($4)),
+      arrow_loc = mk_loc($loc($5)),
+      comma_locs = @list.empty(),
+      loc = mk_loc($sloc),
+    )
   }
   ;
 
 record_decl_field -> FieldDecl
-  : attributes visibility option("mut") LIDENT ":" type_ { 
+  : attributes visibility optional_mut_loc LIDENT ":" type_ {
     FieldDecl::{
       name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
       ty: $6,
       mut_: $3 is Some(_),
+      mut_loc: $3,
+      colon_loc: mk_loc($loc($5)),
       vis: $2,
       loc: mk_loc($sloc),
       attrs: $1,
@@ -2248,16 +4268,29 @@ record_decl_field -> FieldDecl
   ;
 
 record_constr_decl -> FunDecl
-  : attributes is_async "fn" optional_type_parameters binder "(" list_commas(trait_method_param) ")" func_return_type {
-    let (return_type, error_type) = $9
+  : attributes is_async "fn" optional_type_parameters_with_locs binder parameters_with_locs func_return_type_with_loc {
+    let (quantifiers, type_params_lbracket_loc, type_params_rbracket_loc, type_param_comma_locs) = $4
+    let (params, params_lparen_loc, params_rparen_loc, param_comma_locs) = $6
+    let (return_type, error_type, return_arrow_loc) = $7
     FunDecl::{
       type_name : None,
       name : $5,
       is_async : $2,
-      quantifiers: $4,
-      decl_params: Some($7),
-      params_loc: mk_loc($loc($7)),
+      declare_loc: None,
+      extern_loc: None,
+      fn_loc: mk_loc($loc($3)),
+      coloncolon_loc: None,
+      quantifiers,
+      decl_params: Some(params),
+      params_loc: mk_loc($loc($6)),
+      type_params_lbracket_loc,
+      type_params_rbracket_loc,
+      type_param_comma_locs,
+      params_lparen_loc: Some(params_lparen_loc),
+      params_rparen_loc: Some(params_rparen_loc),
+      param_comma_locs,
       return_type,
+      return_arrow_loc,
       error_type,
       vis: Default,
       doc: DocString::empty(),
@@ -2266,44 +4299,74 @@ record_constr_decl -> FunDecl
     }
   }
 
-record_decl_body -> (List[FieldDecl], FunDecl?)
+record_decl_body -> (List[FieldDecl], FunDecl?, List[Location])
   : record_constr_decl option(SEMI) {
-    (@list.empty(), Some($1))
+    let semi_locs = match $2 {
+      Some(true) => @list.singleton(mk_loc($loc($2)))
+      _ => @list.empty()
+    }
+    (@list.empty(), Some($1), semi_locs)
   }
   | {
-    (@list.empty(), None)
+    (@list.empty(), None, @list.empty())
   }
-  | non_empty_list_semi_rev_aux(record_decl_field) SEMI record_constr_decl option(SEMI) {
-    ($1.rev(), Some($3))
+  | non_empty_list_semi_rev_aux_with_locs(record_decl_field) SEMI record_constr_decl option(SEMI) {
+    let (fields, semi_locs) = $1
+    let semi_locs = if $2 { semi_locs.add(mk_loc($loc($2))) } else { semi_locs }
+    let semi_locs = match $4 {
+      Some(true) => semi_locs.add(mk_loc($loc($4)))
+      _ => semi_locs
+    }
+    (fields.rev(), Some($3), semi_locs.rev())
   }
-  | non_empty_list_semi_rev_aux(record_decl_field) option(SEMI) {
-    ($1.rev(), None)
+  | non_empty_list_semi_rev_aux_with_locs(record_decl_field) option(SEMI) {
+    let (fields, semi_locs) = $1
+    let semi_locs = match $2 {
+      Some(true) => semi_locs.add(mk_loc($loc($2)))
+      _ => semi_locs
+    }
+    (fields.rev(), None, semi_locs.rev())
   }
 
 constructor_param -> ConstrParam
-  : option("mut") type_ { 
+  : optional_mut_loc type_ {
     ConstrParam::{
       ty: $2,
       mut_: $1 is Some(_),
-      label: None
+      label: None,
+      mut_loc: $1,
+      post_label_loc: None,
+      colon_loc: None,
     }
   }
-  | option("mut") POST_LABEL ":" type_ { 
+  | optional_mut_loc POST_LABEL ":" type_ {
     let label = Label::{ name: $2, loc: mk_loc($loc($2)).trim_last_char() }
     ConstrParam::{
       ty: $4,
       mut_: $1 is Some(_),
-      label: Some(label)
+      label: Some(label),
+      mut_loc: $1,
+      post_label_loc: Some(mk_loc($loc($2))),
+      colon_loc: Some(mk_loc($loc($3))),
     }
   }
   ;
 
 enum_constructor -> ConstrDecl
-  : attributes UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) { 
+  : attributes UIDENT optional_constructor_params option(eq_int_tag) {
+    let (args, args_lparen_loc, args_rparen_loc, arg_comma_locs) = $3
+    let (tag, tag_equal_loc) = match $4 {
+      None => (None, None)
+      Some((tag, equal_loc)) => (Some(tag), Some(equal_loc))
+    }
     ConstrDecl::{
       name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
-      args: $3,
-      tag: $4,
+      args,
+      args_lparen_loc,
+      args_rparen_loc,
+      arg_comma_locs,
+      tag,
+      tag_equal_loc,
       loc: mk_loc($sloc),
       attrs: $1,
       doc: DocString::empty()
@@ -2311,24 +4374,34 @@ enum_constructor -> ConstrDecl
   }
   ;
 
-%inline eq_int_tag -> (String, Location)
-  : "=" INT { ($2, mk_loc($loc($2))) }
+optional_constructor_params -> (List[ConstrParam]?, Location?, Location?, List[Location])
+  : { (None, None, None, @list.empty()) }
+  | "(" non_empty_list_commas_with_trailing_locs(constructor_param) ")" {
+    let (args, comma_locs, _) = $2
+    (Some(args), Some(mk_loc($loc($1))), Some(mk_loc($loc($3))), comma_locs)
+  }
   ;
 
-record_defn -> (List[FieldDef], TrailingMark)
-  : label_pun "," list_commas_with_trailing_info(record_defn_single) { 
-    let (fs, trailing) = $3
+%inline eq_int_tag -> ((String, Location), Location)
+  : "=" INT { (($2, mk_loc($loc($2))), mk_loc($loc($1))) }
+  ;
+
+record_defn -> (List[FieldDef], TrailingMark, List[Location], List[Location])
+  : label_pun "," list_commas_with_trailing_locs(record_defn_single) {
+    let (fs, comma_locs, trailing) = $3
     let trailing_mark = if fs.is_empty() || trailing { TrailingMark::Comma } else { TrailingMark::None }
-    (fs.add($1), trailing_mark)
+    (fs.add($1), trailing_mark, comma_locs.add(mk_loc($loc($2))), @list.empty())
   }
-  | labeled_expr option(",") { 
-    let trailing_mark = if $2 is Some(_) { TrailingMark::Comma } else { TrailingMark::None }
-    (@list.singleton($1), trailing_mark)
+  | labeled_expr {
+    (@list.singleton($1), TrailingMark::None, @list.empty(), @list.empty())
   }
-  | labeled_expr "," non_empty_list_commas_with_trailing_info(record_defn_single) { 
-    let (fs, trailing) = $3
+  | labeled_expr "," {
+    (@list.singleton($1), TrailingMark::Comma, @list.singleton(mk_loc($loc($2))), @list.empty())
+  }
+  | labeled_expr "," non_empty_list_commas_with_trailing_locs(record_defn_single) {
+    let (fs, comma_locs, trailing) = $3
     let trailing_mark = if trailing { TrailingMark::Comma } else { TrailingMark::None }
-    (fs.add($1), trailing_mark)
+    (fs.add($1), trailing_mark, comma_locs.add(mk_loc($loc($2))), @list.empty())
   }
   ;
 
@@ -2338,16 +4411,36 @@ record_defn_single -> FieldDef
   ;
 
 %inline labeled_expr -> FieldDef
-  : label ":" expr { @syntax.make_field_def(loc = mk_loc($sloc), $1, $3, false) }
+  : label ":" expr {
+    @syntax.make_field_def(
+      loc = mk_loc($sloc),
+      colon_loc = Some(mk_loc($loc($2))),
+      $1,
+      $3,
+      false,
+    )
+  }
   ;
 
 %inline label_pun -> FieldDef
   : label { @syntax.make_field_def(loc = mk_loc($sloc), $1, @syntax.label_to_expr(loc = mk_loc($sloc), $1), true) }
   ;
 
-non_empty_fields_pat -> (List[FieldPat], Bool)
-  : non_empty_list_commas(fields_pat_single) { ($1, true) }
-  | non_empty_list_commas_with_tail(fields_pat_single) ".." option(",") { ($1, false) }
+non_empty_fields_pat -> (List[FieldPat], Bool, List[Location], Location?)
+  : non_empty_list_commas_with_trailing_locs(fields_pat_single) {
+    let (fields, comma_locs, _) = $1
+    (fields, true, comma_locs, None)
+  }
+  | non_empty_list_commas_with_trailing_locs(fields_pat_single) ".." optional_comma_loc {
+    let (fields, comma_locs, _) = $1
+    let comma_locs_array = []
+    comma_locs.each(loc => comma_locs_array.push(loc))
+    match $3 {
+      Some(loc) => comma_locs_array.push(loc)
+      None => ()
+    }
+    (fields, false, @list.from_array(comma_locs_array), Some(mk_loc($loc($2))))
+  }
   ;
 
 fields_pat_single -> FieldPat
@@ -2356,64 +4449,119 @@ fields_pat_single -> FieldPat
   ;
 
 %inline fpat_labeled_pattern -> FieldPat
-  : label ":" pattern { @syntax.make_field_pat(loc = mk_loc($sloc), $1, $3, false) }
+  : label ":" pattern {
+    @syntax.make_field_pat(
+      loc = mk_loc($sloc),
+      colon_loc = Some(mk_loc($loc($2))),
+      $1,
+      $3,
+      false,
+    )
+  }
   ;
 
 %inline fpat_label_pun -> FieldPat
   : label { @syntax.make_field_pat(loc = mk_loc($sloc), $1, @syntax.label_to_pat(loc = mk_loc($sloc), $1), true) }
   ;
 
-non_empty_map_elems_pat -> (List[MapPatElem], Bool)
-  : non_empty_list_commas(map_elem_pat) { ($1, true) }
-  | non_empty_list_commas_with_tail(map_elem_pat) ".." option(",") { ($1, false) }
+non_empty_map_elems_pat -> (List[MapPatElem], Bool, List[Location], Location?)
+  : non_empty_list_commas_with_trailing_locs(map_elem_pat) {
+    let (elems, comma_locs, _) = $1
+    (elems, true, comma_locs, None)
+  }
+  | non_empty_list_commas_with_trailing_locs(map_elem_pat) ".." optional_comma_loc {
+    let (elems, comma_locs, _) = $1
+    let comma_locs_array = []
+    comma_locs.each(loc => comma_locs_array.push(loc))
+    match $3 {
+      Some(loc) => comma_locs_array.push(loc)
+      None => ()
+    }
+    (elems, false, @list.from_array(comma_locs_array), Some(mk_loc($loc($2))))
+  }
   ;
 
 %inline map_elem_pat -> MapPatElem
-  : map_syntax_key option("?") ":" pattern { 
+  : map_syntax_key option("?") ":" pattern {
     MapPatElem::{
       key: $1,
       pat: $4,
       match_absent: $2 is Some(_),
       key_loc: mk_loc($loc($1)),
+      question_loc: $2.map(_ => mk_loc($loc($2))),
+      colon_loc: mk_loc($loc($3)),
       loc: mk_loc($sloc)
     }
   }
   ;
 
-constr_pat_arguments -> (List[ConstrPatArg], Bool)
-  : constr_pat_argument option(",") { (@list.singleton($1), false) }
-  | ".." option(",") { (@list.empty(), true) }
-  | constr_pat_argument "," constr_pat_arguments { 
-    let (args, is_open) = $3
-    (args.add($1), is_open)
+optional_constr_pat_arguments -> (List[ConstrPatArg]?, Bool, Location?, Location?, List[Location], Location?)
+  : { (None, false, None, None, @list.empty(), None) }
+  | "(" constr_pat_arguments ")" {
+    let (args, is_open, arg_comma_locs, open_dotdot_loc) = $2
+    (
+      Some(args),
+      is_open,
+      Some(mk_loc($loc($1))),
+      Some(mk_loc($loc($3))),
+      arg_comma_locs,
+      open_dotdot_loc,
+    )
   }
   ;
 
-constr_pat_arguments_no_open -> List[ConstrPatArg]
-  : constr_pat_argument option(",") { @list.singleton($1) }
-  | constr_pat_argument "," constr_pat_arguments_no_open { $3.add($1) }
+constr_pat_arguments -> (List[ConstrPatArg], Bool, List[Location], Location?)
+  : constr_pat_argument optional_comma_loc {
+    let arg_comma_locs = match $2 {
+      Some(loc) => @list.singleton(loc)
+      None => @list.empty()
+    }
+    (@list.singleton($1), false, arg_comma_locs, None)
+  }
+  | ".." optional_comma_loc {
+    let arg_comma_locs = match $2 {
+      Some(loc) => @list.singleton(loc)
+      None => @list.empty()
+    }
+    (@list.empty(), true, arg_comma_locs, Some(mk_loc($loc($1))))
+  }
+  | constr_pat_argument "," constr_pat_arguments {
+    let (args, is_open, arg_comma_locs, open_dotdot_loc) = $3
+    (args.add($1), is_open, arg_comma_locs.add(mk_loc($loc($2))), open_dotdot_loc)
+  }
+  ;
+
+constr_pat_arguments_no_open -> (List[ConstrPatArg], List[Location])
+  : non_empty_list_commas_with_trailing_locs(constr_pat_argument) {
+    let (args, comma_locs, _) = $1
+    (args, comma_locs)
+  }
   ;
 
 constr_pat_argument -> ConstrPatArg
-  : label "=" pattern { 
+  : label "=" pattern {
+    let equal_loc = mk_loc($loc($2))
     ConstrPatArg::{
       pat: $3,
-      kind: Labelled($1)
+      kind: Labelled(label = $1, equal_loc~),
+      equal_loc: Some(equal_loc),
     }
   }
-  | POST_LABEL { 
+  | POST_LABEL {
     let loc = mk_loc($loc($1))
     let label = Label::{ name: $1, loc }
     let pat = @syntax.label_to_pat(loc = loc.trim_last_char(), label)
     ConstrPatArg::{
       pat,
-      kind: LabelledPun(label)
+      kind: LabelledPun(label),
+      equal_loc: None,
     }
   }
-  | pattern { 
+  | pattern {
     ConstrPatArg::{
       pat: $1,
-      kind: Positional
+      kind: Positional,
+      equal_loc: None,
     }
   }
   ;

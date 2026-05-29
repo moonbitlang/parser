@@ -504,30 +504,31 @@ fn[A] State::optional(
 }
 
 ///|
-/// Parse a list of elements separated by a delimiter, the list can be empty.
-/// 
-/// Note: The trailing delimiter is not allowed.
-fn[A] State::sepby(
+/// Parse a list of elements separated by a delimiter and return delimiter
+/// locations. The list can be empty, and trailing delimiters are not allowed.
+fn[A] State::sepby_locs(
   self : Self,
   first_set~ : Array[TokenKind],
   delim~ : TokenKind,
   f : (State) -> A,
-) -> Array[A] {
+) -> (Array[A], Array[Location]) {
   match self.mode {
-    Panic(_) => []
+    Panic(_) => ([], [])
     Normal => {
       self.push_sync(delim)
       if first_set.contains(self.peek_kind()) {
         let result = [f(self)]
+        let delim_locs = []
         while self.peek_kind() == delim {
+          delim_locs.push(self.peek_location())
           self..pop_sync(delim)..expect_token(delim).push_sync(delim)
           result.push(f(self))
         }
         self.pop_sync(delim)
-        result
+        (result, delim_locs)
       } else {
         self.pop_sync(delim)
-        []
+        ([], [])
       }
     }
   }
@@ -605,14 +606,14 @@ fn[A] State::with_follow(
 /// with a trailing delimiter, and followed by a set of tokens (not consumed).
 /// 
 /// This version requires at least one element.
-fn[A] State::series1_with_follow(
+fn[A] State::series1_with_follow_locs(
   self : Self,
   invalid_delims? : Array[TokenKind] = [],
   delim~ : TokenKind,
   follow_set~ : Array[TokenKind],
   f : (State) -> A,
-) -> (Array[A], Bool) {
-  guard self.mode is Normal else { ([], false) }
+) -> (Array[A], Array[Location], Bool) {
+  guard self.mode is Normal else { ([], [], false) }
   fn expect_element() -> A {
     self.push_sync(delim)
     let elem = f(self)
@@ -623,6 +624,7 @@ fn[A] State::series1_with_follow(
 
   self.push_syncs(follow_set)
   let acc = [expect_element()]
+  let delim_locs = []
   for ;; {
     match self.mode {
       Panic(_) => break
@@ -632,6 +634,7 @@ fn[A] State::series1_with_follow(
           break
         } else if self.peek_kind() == delim {
           // consume the delimiter
+          delim_locs.push(self.peek_location())
           self.expect_token(delim)
           // if the next token is not in the follow set, consume an element
           if !follow_set.contains(self.peek_kind()) {
@@ -656,15 +659,10 @@ fn[A] State::series1_with_follow(
           }
         } else {
           // Error recovery: try to skip until the next delimiter.
-          //
-          // This branch is taken when the previous loop iteration already consumed
-          // an element, and the next token is neither a delimiter nor in the follow set.
-          // 
-          // For example, in `(A, B C D, E)`, after consuming `A,` and `B`, we see `C` which is
-          // neither a `,` nor a `)`, so we skip until the next `,` or `)` and continue parsing.
           let tok = self.peek_token()
+          let loc = self.peek_location()
           self.push_sync(delim)
-          let loc = self.panic()
+          ignore(self.panic())
           self.report_unexpected(tok, [delim, ..follow_set], loc)
           self.pop_sync(delim)
           continue
@@ -673,7 +671,7 @@ fn[A] State::series1_with_follow(
   }
   self.pop_syncs(follow_set)
   let has_trailing_delim = self.previous_triple().0.kind() == delim
-  (acc, has_trailing_delim)
+  (acc, delim_locs, has_trailing_delim)
 }
 
 ///|
@@ -744,22 +742,68 @@ fn[A] State::series_with_follow(
 }
 
 ///|
-/// Parse a sequence of elements separated by a delimiter, possibly ending 
-/// with a trailing delimiter, and surrounded by `left` and `right` tokens 
-/// (which are not consumed).
-fn[A] State::surround_series(
+fn[A] State::series_with_follow_locs(
   self : Self,
   invalid_delims? : Array[TokenKind] = [],
-  left~ : TokenKind,
-  right~ : TokenKind,
   delim~ : TokenKind,
+  follow_set? : Array[TokenKind] = [],
   f : (State) -> A,
-) -> Array[A] {
+) -> (Array[A], Array[Location], Bool) {
+  fn try_recover_to_delim() {
+    let loc = self.peek_location()
+    let tok = self.peek_token()
+    self.push_sync(delim)
+    ignore(self.panic())
+    self.report_unexpected(tok, [delim, ..follow_set], loc)
+    self.pop_sync(delim)
+    if self.peek_token().kind() == delim {
+      self.expect_token(delim)
+    }
+  }
+
   match self.mode {
-    Panic(_) => []
-    Normal =>
-      self.surround(left~, right~, state => {
-        state.series_with_follow(invalid_delims~, delim~, follow_set=[right], f).0
-      }) // TODO(moonfmt): bad case
+    Panic(_) => ([], [], false)
+    Normal => {
+      let result = []
+      let delim_locs = []
+      self.push_syncs(follow_set)
+      for ;; {
+        match self.mode {
+          Panic(_) => ()
+          Normal if follow_set.contains(self.peek_kind()) => ()
+          Normal => {
+            self.push_sync(delim)
+            result.push(f(self))
+            self.pop_sync(delim)
+            match self.mode {
+              Panic(_) => ()
+              Normal if follow_set.contains(self.peek_kind()) => ()
+              Normal if self.peek_kind() == delim => {
+                delim_locs.push(self.peek_location())
+                self.expect_token(delim)
+                continue
+              }
+              Normal if invalid_delims.contains(self.peek_kind()) => {
+                self
+                ..report_error({
+                  loc: self.peek_location(),
+                  msg: "Expecting a newline or `;` here, but encountered \{delim.to_expect_string()}.",
+                })
+                .skip()
+                continue
+              }
+              Normal => {
+                try_recover_to_delim()
+                continue
+              }
+            }
+          }
+        }
+        break
+      }
+      self.pop_syncs(follow_set)
+      let has_trailing_delim = self.previous_triple().0.kind() == delim
+      (result, delim_locs, has_trailing_delim)
+    }
   }
 }
