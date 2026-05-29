@@ -238,11 +238,11 @@
 **Files:**
 - Modify: `syntax/ast.mbt`
 
-- [ ] Add only the fields needed for the first vertical slice: `Expr::If.if_loc/then_lbrace_loc/then_rbrace_loc/else_loc/else_lbrace_loc/else_rbrace_loc`, `Func.fn_loc/lparen_loc/rparen_loc/comma_locs/return_arrow_loc/fat_arrow_loc/body_lbrace_loc/body_rbrace_loc`, `Parameter::*` token fields, `Expr::Record.coloncolon_loc/lbrace_loc/rbrace_loc/comma_locs/semi_locs`, `FieldDef.colon_loc`, and `Case.if_loc/fat_arrow_loc/ellipsis_loc`.
-- [ ] Keep public variant names unchanged.
-- [ ] Prefer appending fields after existing semantic fields and before final `loc` only when it improves readability; use named constructors everywhere, so positional compatibility is not required.
-- [ ] Run: `moon check syntax`
-- [ ] Expected: this preparation step may report constructor errors in consumers that construct the vertical-slice nodes. Continue immediately through Task 6 and do not commit or hand off until `moon check` is green. Do not fix generated `parser.mbt` by hand.
+- [x] Add only the fields needed for the first vertical slice: `Expr::If.if_loc/then_lbrace_loc/then_rbrace_loc/else_loc/else_lbrace_loc/else_rbrace_loc`, `Func.fn_loc/lparen_loc/rparen_loc/comma_locs/return_arrow_loc/fat_arrow_loc/body_lbrace_loc/body_rbrace_loc`, `Parameter::*` token fields, `Expr::Record.coloncolon_loc/lbrace_loc/rbrace_loc/comma_locs/semi_locs`, `FieldDef.colon_loc`, and `Case.if_loc/fat_arrow_loc/ellipsis_loc`.
+- [x] Keep public variant names unchanged.
+- [x] Prefer appending fields after existing semantic fields and before final `loc` only when it improves readability; use named constructors everywhere, so positional compatibility is not required.
+- [x] Run: `moon check syntax`
+- [x] Expected: this preparation step may report constructor errors in consumers that construct the vertical-slice nodes. Continue immediately through Task 6 and do not commit or hand off until `moon check` is green. Do not fix generated `parser.mbt` by hand.
 
 ### Task 2: Update Core Helpers And Defaults
 
@@ -250,12 +250,12 @@
 - Modify: `syntax/utils.mbt`
 - Modify: `syntax/util/compact.mbt`
 
-- [ ] Update only first-slice location/default code: `Expr::loc`, `Parameter::loc`, and helpers that construct changed first-slice nodes such as `make_record_expr`, `make_field_def`, and `make_arrow_fn`.
-- [ ] Defer helpers for tuple/array/pattern/type nodes (`make_tuple_expr`, `make_array_expr`, `make_alias_pattern`, `make_constant_pattern`, `make_tuple_pattern`, `make_constr_pattern`, `make_tuple_type`, `make_option_type`, `make_field_pat`, assignment/desugar helpers) to the task where those AST fields are introduced.
-- [ ] Do not overhaul `syntax/util/compact.mbt` statement payloads in this preparation task unless the first-slice constructor changes force a compile fix. Full keyword/equal/semicolon propagation for `StmtLet`, `StmtLetmut`, `StmtFunc`, `StmtLetand`, `StmtDefer`, `StmtGuard`, and `StmtExpr`/sequence belongs to Task 7 when the **`syntax/util` Statement Payloads** fields are added.
-- [ ] For desugared or synthetic nodes, fill new token fields with `@syntax.no_location` or empty lists. Use `None` only when the source token is genuinely absent.
-- [ ] Run: `moon check syntax`
-- [ ] Expected: this preparation step may still report parser, visitor, or JSON constructor mismatches. Continue immediately through Task 6 and do not commit or hand off until `moon check` is green.
+- [x] Update only first-slice location/default code: `Expr::loc`, `Parameter::loc`, and helpers that construct changed first-slice nodes such as `make_record_expr`, `make_field_def`, and `make_arrow_fn`.
+- [x] Defer helpers for tuple/array/pattern/type nodes (`make_tuple_expr`, `make_array_expr`, `make_alias_pattern`, `make_constant_pattern`, `make_tuple_pattern`, `make_constr_pattern`, `make_tuple_type`, `make_option_type`, `make_field_pat`, assignment/desugar helpers) to the task where those AST fields are introduced.
+- [x] Do not overhaul `syntax/util/compact.mbt` statement payloads in this preparation task unless the first-slice constructor changes force a compile fix. Full keyword/equal/semicolon propagation for `StmtLet`, `StmtLetmut`, `StmtFunc`, `StmtLetand`, `StmtDefer`, `StmtGuard`, and `StmtExpr`/sequence belongs to Task 7 when the **`syntax/util` Statement Payloads** fields are added.
+- [x] For desugared or synthetic nodes, fill new token fields with `@syntax.no_location` or empty lists. Use `None` only when the source token is genuinely absent.
+- [x] Run: `moon check syntax`
+- [x] Expected: this preparation step may still report parser, visitor, or JSON constructor mismatches. Continue immediately through Task 6 and do not commit or hand off until `moon check` is green.
 
 ### Task 3: Update Visitors
 
@@ -263,23 +263,23 @@
 - Modify: `syntax/map_visitor.mbt`
 - Modify: `syntax/iter_visitor.mbt`
 
-- [ ] Update trait method signatures for every changed struct/variant.
-- [ ] In `MapVisitorBase`, preserve token loc fields verbatim while recursively visiting semantic children.
-- [ ] In `IterVisitorBase`, ignore token loc fields unless a method already exposes them through a visitor callback.
-- [ ] Ensure `visit_Expr` and `visit_Pattern` dispatch cases pass all new named fields.
-- [ ] Run: `moon check syntax`
-- [ ] Expected: visitor package compiles or remaining errors are JSON/parser-only. Continue immediately through Task 6 and do not commit or hand off until `moon check` is green.
+- [x] Update trait method signatures for every changed struct/variant.
+- [x] In `MapVisitorBase`, preserve token loc fields verbatim while recursively visiting semantic children.
+- [x] In `IterVisitorBase`, ignore token loc fields unless a method already exposes them through a visitor callback.
+- [x] Ensure `visit_Expr` and `visit_Pattern` dispatch cases pass all new named fields.
+- [x] Run: `moon check syntax`
+- [x] Expected: visitor package compiles or remaining errors are JSON/parser-only. Continue immediately through Task 6 and do not commit or hand off until `moon check` is green.
 
 ### Task 4: Keep JSON Representation Stable
 
 **Files:**
 - Modify: `syntax/ast_json_repr.mbt`
 
-- [ ] Update pattern matches and destructuring in `syntax/ast_json_repr.mbt` for the changed AST shapes.
-- [ ] Do not add JSON children for new loc fields. Do not expose previously ignored loc-like fields as part of this plan.
-- [ ] Keep emitted JSON field names, field order, and value shapes unchanged for existing fixtures. Run a focused snapshot diff before and after each vertical slice; any JSON diff caused only by new AST loc fields is a bug in `syntax/ast_json_repr.mbt`.
-- [ ] Run: `moon check syntax`
-- [ ] Expected: JSON code compiles once parser constructors are updated, while serialized output remains compatible with existing snapshots. Continue immediately through Task 6 and do not commit or hand off until `moon check` is green.
+- [x] Update pattern matches and destructuring in `syntax/ast_json_repr.mbt` for the changed AST shapes.
+- [x] Do not add JSON children for new loc fields. Do not expose previously ignored loc-like fields as part of this plan.
+- [x] Keep emitted JSON field names, field order, and value shapes unchanged for existing fixtures. Run a focused snapshot diff before and after each vertical slice; any JSON diff caused only by new AST loc fields is a bug in `syntax/ast_json_repr.mbt`.
+- [x] Run: `moon check syntax`
+- [x] Expected: JSON code compiles once parser constructors are updated, while serialized output remains compatible with existing snapshots. Continue immediately through Task 6 and do not commit or hand off until `moon check` is green.
 
 ### Task 5: Add Loc-Carrying List Helpers In Grammars
 
@@ -287,7 +287,7 @@
 - Modify: `yacc_parser/parser.mbty`
 - Modify: `mbti_parser/mbti_parser.mbty`
 
-- [ ] Add loc-aware list helper nonterminals next to current `list_commas` / `list_semis` helpers in `yacc_parser/parser.mbty`:
+- [x] Add loc-aware list helper nonterminals next to current `list_commas` / `list_semis` helpers in `yacc_parser/parser.mbty`:
   - `list_commas_with_locs[T](X : T) -> (List[T], List[Location])`
   - `list_commas_with_trailing_locs[T](X : T) -> (List[T], List[Location], Bool)`
   - `list_semis_with_locs[T](X : T) -> (List[T], List[Location])`
@@ -296,11 +296,11 @@
   - `binder_equal_infix_expr -> (Binder, Location, Expr)`
   - `label_equal_expr -> (Label, Location, Expr)`
   - `label_equal_pattern -> (Label, Location, Pattern)`
-- [ ] Add equivalent helpers to `mbti_parser/mbti_parser.mbty`; it has its own comma helper and also uses `separated_list`, `separated_nonempty_list`, and `delimited` for shared `syntax` nodes such as type params, tuple types, enum constructor params, record fields, and trait method params. Do not migrate derive args or `.mbti`-only tuple-struct/container delimiters in this plan.
-- [ ] Keep older helpers until all call sites migrate; delete only when no longer used. For existing `TrailingMark` behavior, use the helper `Bool` result instead of inferring trailing state from list length.
-- [ ] Run: `moon check yacc_parser`
-- [ ] Run: `moon check mbti_parser`
-- [ ] Expected: grammar generation succeeds or reports only call-site type errors to fix in Task 6. The commands may regenerate `yacc_parser/parser.mbt` and `mbti_parser/mbti_parser.mbt`; keep those generated changes, but review them only after the slice compiles.
+- [x] Add equivalent helpers to `mbti_parser/mbti_parser.mbty`; it has its own comma helper and also uses `separated_list`, `separated_nonempty_list`, and `delimited` for shared `syntax` nodes such as type params, tuple types, enum constructor params, record fields, and trait method params. Do not migrate derive args or `.mbti`-only tuple-struct/container delimiters in this plan.
+- [x] Keep older helpers until all call sites migrate; delete only when no longer used. For existing `TrailingMark` behavior, use the helper `Bool` result instead of inferring trailing state from list length.
+- [x] Run: `moon check yacc_parser`
+- [x] Run: `moon check mbti_parser`
+- [x] Expected: grammar generation succeeds or reports only call-site type errors to fix in Task 6. The commands may regenerate `yacc_parser/parser.mbt` and `mbti_parser/mbti_parser.mbt`; keep those generated changes, but review them only after the slice compiles.
 
 ### Task 6: Implement Vertical Slice
 
@@ -320,9 +320,9 @@
 - Modify: `test/sync_test/loc_regression_test.mbt`
 - Modify: `README.mbt.md`
 
-- [ ] Cover `Expr::If`, including `then_lbrace_loc/then_rbrace_loc/else_lbrace_loc/else_rbrace_loc`, `Func`, `Parameter`, `Expr::Record`, `FieldDef`, and `Case`.
-- [ ] Introduce a parser-local block payload for MoonYacc and handrolled parser call sites that need brace locations, e.g. `(expr : Expr, lbrace_loc : Location, rbrace_loc : Location)`. Use it for `if` branches and `Func` bodies; keep `Statement::compact_rev` returning plain `Expr`. Do not assert top-level `FunDecl` or `DeclBody` delimiter fields in this slice; those are Task 9 fields.
-- [ ] Extend `loc_regression_source` with:
+- [x] Cover `Expr::If`, including `then_lbrace_loc/then_rbrace_loc/else_lbrace_loc/else_rbrace_loc`, `Func`, `Parameter`, `Expr::Record`, `FieldDef`, and `Case`.
+- [x] Introduce a parser-local block payload for MoonYacc and handrolled parser call sites that need brace locations, e.g. `(expr : Expr, lbrace_loc : Location, rbrace_loc : Location)`. Use it for `if` branches and `Func` bodies; keep `Statement::compact_rev` returning plain `Expr`. Do not assert top-level `FunDecl` or `DeclBody` delimiter fields in this slice; those are Task 9 fields.
+- [x] Extend `loc_regression_source` with:
 
 ```moonbit
 fn sample(x : Int, y : Int) -> Int {
@@ -337,15 +337,15 @@ fn sample(x : Int, y : Int) -> Int {
 }
 ```
 
-- [ ] Walk into the anonymous `Expr::Function(Func)` assigned to `f` and assert exact locs for `Func.fn_loc`, `Func.lparen_loc/rparen_loc/comma_locs`, `Func.return_arrow_loc`, `Func.body_lbrace_loc/body_rbrace_loc`, and its `Parameter` fields including `Optional.question_loc/colon_loc/equal_loc`.
-- [ ] Inside that `Func` body, assert exact locs for `if_loc`, `then_lbrace_loc/then_rbrace_loc`, `else_loc`, `else_lbrace_loc/else_rbrace_loc`, record `lbrace_loc/rbrace_loc/comma_locs/semi_locs`, and field `colon_loc`. Add one small `{ x; }` or equivalent fixture so `Expr::Record.semi_locs` covers the parser's `TrailingMark::Semi` path.
-- [ ] Assert Handrolled and MoonYacc JSON equality using the unchanged JSON representation; the equality output must not gain new loc fields.
-- [ ] Run: `moon check`
-- [ ] Expected: full repo compiles after the vertical slice; if it fails on formatter or AST tests, update the files listed in this task before continuing.
-- [ ] Run: `moon test test/sync_test/loc_regression_test.mbt -v`
-- [ ] Run: `moon test handrolled_parser -v`
-- [ ] Run: `moon test README.mbt.md -v`
-- [ ] Expected: full vertical-slice check and targeted tests pass before broad rollout.
+- [x] Walk into the anonymous `Expr::Function(Func)` assigned to `f` and assert exact locs for `Func.fn_loc`, `Func.lparen_loc/rparen_loc/comma_locs`, `Func.return_arrow_loc`, `Func.body_lbrace_loc/body_rbrace_loc`, and its `Parameter` fields including `Optional.question_loc/colon_loc/equal_loc`.
+- [x] Inside that `Func` body, assert exact locs for `if_loc`, `then_lbrace_loc/then_rbrace_loc`, `else_loc`, `else_lbrace_loc/else_rbrace_loc`, record `lbrace_loc/rbrace_loc/comma_locs/semi_locs`, and field `colon_loc`. Add one small `{ x; }` or equivalent fixture so `Expr::Record.semi_locs` covers the parser's `TrailingMark::Semi` path.
+- [x] Assert Handrolled and MoonYacc JSON equality using the unchanged JSON representation; the equality output must not gain new loc fields.
+- [x] Run: `moon check`
+- [x] Expected: full repo compiles after the vertical slice; if it fails on formatter or AST tests, update the files listed in this task before continuing.
+- [x] Run: `moon test test/sync_test/loc_regression_test.mbt -v`
+- [x] Run: `moon test handrolled_parser -v`
+- [x] Run: `moon test README.mbt.md -v`
+- [x] Expected: full vertical-slice check and targeted tests pass before broad rollout.
 
 ### Task 7: Finish Expression Coverage
 
@@ -366,18 +366,18 @@ fn sample(x : Int, y : Int) -> Int {
 - Modify: `test/sync_test/loc_regression_test.mbt`
 - Modify: `README.mbt.md`
 
-- [ ] Add and fill all remaining expression fields listed under **Expressions**. For statement-derived nodes, update `syntax/util/compact.mbt` first so `Let`, `LetMut`, `LetFn`, `LetAnd`, `Defer`, `Guard`, `Sequence`, and faked `Unit` do not lose keyword, equal, annotation-colon, and explicit semicolon locs. `semi_loc` is `Some(loc)` only for source `SEMI(true)`; it is `None` for ASI `SEMI(false)` or a final statement without an explicit semicolon.
-- [ ] In MoonYacc and handrolled statement-list helpers, carry the terminator loc with the preceding `Statement` before calling `compact_rev`; do not infer `semi_loc` from statement span or child expression range. Explicit `SEMI(true)` contributes to the previous statement's `semi_loc` and to `Expr::Sequence.semi_locs`; ASI `SEMI(false)` contributes no loc.
-- [ ] Also fill `ListComprehensionKind::Foreach` and `ListComprehensionKind::For` fields from **Qualified Names And Reusable Nodes** in this expression batch.
-- [ ] Reuse the parser-local block payload from Task 6 for `while`, `for`, `foreach`, `nobreak`, and `guard else` blocks so their `{}` locations are not reconstructed from child expression ranges.
-- [ ] Use `post_label_loc` for `break label~` / `continue label~`; reserve `label_colon_loc` for loop labels parsed from `label~:`.
-- [ ] Add loc regression cases for apply, array/spread `..`, tuple, map, match, lexmatch, try/noraise, while/nobreak, guard else, for, foreach, list comprehension, assignment, mutate, pipe/revpipe, group, array slice, regex match, and template writing. Include both an explicit `;` and an ASI newline case to verify `semi_locs` / `semi_loc` policy.
-- [ ] Run: `moon check`
-- [ ] Run: `moon test test/sync_test/loc_regression_test.mbt -v`
-- [ ] Run: `moon test test/sync_test --filter parse_test_try -v`
-- [ ] Run: `moon test handrolled_parser -v`
-- [ ] Run: `moon test README.mbt.md -v`
-- [ ] Expected: loc regression passes and targeted parser snapshots still parse with unchanged JSON output. Do not update imported sync snapshots at any point for this AST loc change; if targeted parser snapshots fail because JSON shape changed, fix `syntax/ast_json_repr.mbt`.
+- [x] Add and fill all remaining expression fields listed under **Expressions**. For statement-derived nodes, update `syntax/util/compact.mbt` first so `Let`, `LetMut`, `LetFn`, `LetAnd`, `Defer`, `Guard`, `Sequence`, and faked `Unit` do not lose keyword, equal, annotation-colon, and explicit semicolon locs. `semi_loc` is `Some(loc)` only for source `SEMI(true)`; it is `None` for ASI `SEMI(false)` or a final statement without an explicit semicolon.
+- [x] In MoonYacc and handrolled statement-list helpers, carry the terminator loc with the preceding `Statement` before calling `compact_rev`; do not infer `semi_loc` from statement span or child expression range. Explicit `SEMI(true)` contributes to the previous statement's `semi_loc` and to `Expr::Sequence.semi_locs`; ASI `SEMI(false)` contributes no loc.
+- [x] Also fill `ListComprehensionKind::Foreach` and `ListComprehensionKind::For` fields from **Qualified Names And Reusable Nodes** in this expression batch.
+- [x] Reuse the parser-local block payload from Task 6 for `while`, `for`, `foreach`, `nobreak`, and `guard else` blocks so their `{}` locations are not reconstructed from child expression ranges.
+- [x] Use `post_label_loc` for `break label~` / `continue label~`; reserve `label_colon_loc` for loop labels parsed from `label~:`.
+- [x] Add loc regression cases for apply, array/spread `..`, tuple, map, match, lexmatch, try/noraise, while/nobreak, guard else, for, foreach, list comprehension, assignment, mutate, pipe/revpipe, group, array slice, regex match, and template writing. Include both an explicit `;` and an ASI newline case to verify `semi_locs` / `semi_loc` policy.
+- [x] Run: `moon check`
+- [x] Run: `moon test test/sync_test/loc_regression_test.mbt -v`
+- [x] Run: `moon test test/sync_test --filter parse_test_try -v`
+- [x] Run: `moon test handrolled_parser -v`
+- [x] Run: `moon test README.mbt.md -v`
+- [x] Expected: loc regression passes and targeted parser snapshots still parse with unchanged JSON output. Do not update imported sync snapshots at any point for this AST loc change; if targeted parser snapshots fail because JSON shape changed, fix `syntax/ast_json_repr.mbt`.
 
 ### Task 8: Finish Type And Pattern Coverage
 
@@ -399,15 +399,15 @@ fn sample(x : Int, y : Int) -> Int {
 - Create: `test/mbti_parser_test/loc_test.mbt`
 - Modify: `README.mbt.md`
 
-- [ ] Fill all fields listed under **Qualified Names And Reusable Nodes** that are type-expression, pattern, argument, constructor-reference, lex/regex, and `.mbti`-shared declaration-component related. This includes `ConstrParam`, `ConstrDecl`, `ExceptionDecl::EnumPayload`, and `FieldDecl` because `mbti_parser` constructs those `syntax` nodes directly. Leave `ListComprehensionKind::*` to Task 7, and leave source-only top-level declaration containers such as `TypeDesc`, `DerivingDirective`, `TypeDecl`, `FunDecl`, `TraitDecl`, and `Impl::*` to Task 9.
-- [ ] Fill all fields listed under **Patterns**.
-- [ ] In `mbti_parser/mbti_parser.mbty`, replace relevant `separated_list`, `separated_nonempty_list`, and `delimited` uses only where the resulting values are `syntax` AST nodes or aliases to them: function type arrows, type argument brackets, tuple types, constructor params (`ConstrParam` / `ConstrDecl`), record fields (`FieldDecl`), and trait/function method params (`Parameter`). Do not add loc fields to `mbti_ast.TypeDefinition`, `TypeSig`, `FuncSig`, `TraitSig`, or `AliasSig` in this plan.
-- [ ] Add `.mbti` fixtures for function type arrows, type arguments, tuple type values, enum constructor args, labelled constructor params, record field colon/mut tokens, and trait method params. Do not assert tuple-struct parentheses, enum braces, derive parentheses, or other `.mbti`-only container delimiter locs unless a separate follow-up extends `mbti_ast`.
-- [ ] Run: `moon check`
-- [ ] Run: `moon test test/mbti_parser_test -v`
-- [ ] Run: `moon test test/sync_test/loc_regression_test.mbt -v`
-- [ ] Run: `moon test README.mbt.md -v`
-- [ ] Expected: `.mbti` parser and source parser both expose the same token loc shape for shared `syntax` nodes.
+- [x] Fill all fields listed under **Qualified Names And Reusable Nodes** that are type-expression, pattern, argument, constructor-reference, lex/regex, and `.mbti`-shared declaration-component related. This includes `ConstrParam`, `ConstrDecl`, `ExceptionDecl::EnumPayload`, and `FieldDecl` because `mbti_parser` constructs those `syntax` nodes directly. Leave `ListComprehensionKind::*` to Task 7, and leave source-only top-level declaration containers such as `TypeDesc`, `DerivingDirective`, `TypeDecl`, `FunDecl`, `TraitDecl`, and `Impl::*` to Task 9.
+- [x] Fill all fields listed under **Patterns**.
+- [x] In `mbti_parser/mbti_parser.mbty`, replace relevant `separated_list`, `separated_nonempty_list`, and `delimited` uses only where the resulting values are `syntax` AST nodes or aliases to them: function type arrows, type argument brackets, tuple types, constructor params (`ConstrParam` / `ConstrDecl`), record fields (`FieldDecl`), and trait/function method params (`Parameter`). Do not add loc fields to `mbti_ast.TypeDefinition`, `TypeSig`, `FuncSig`, `TraitSig`, or `AliasSig` in this plan.
+- [x] Add `.mbti` fixtures for function type arrows, type arguments, tuple type values, enum constructor args, labelled constructor params, record field colon/mut tokens, and trait method params. Do not assert tuple-struct parentheses, enum braces, derive parentheses, or other `.mbti`-only container delimiter locs unless a separate follow-up extends `mbti_ast`.
+- [x] Run: `moon check`
+- [x] Run: `moon test test/mbti_parser_test -v`
+- [x] Run: `moon test test/sync_test/loc_regression_test.mbt -v`
+- [x] Run: `moon test README.mbt.md -v`
+- [x] Expected: `.mbti` parser and source parser both expose the same token loc shape for shared `syntax` nodes.
 
 ### Task 9: Finish Top-Level Declarations
 
@@ -429,16 +429,16 @@ fn sample(x : Int, y : Int) -> Int {
 - Modify: `test/mbti_parser_test/loc_test.mbt`
 - Modify: `README.mbt.md`
 
-- [ ] Fill all fields listed under **Top-Level Declarations, Bodies, And Stubs**.
-- [ ] Fill source-only declaration-component fields from **Qualified Names And Reusable Nodes** that were intentionally left out of Task 8: `TypeDesc`, `DerivingDirective`, and declaration-level `TypeVarBinder` delimiter lists.
-- [ ] Use `Impl::TopLetDef.equal_loc : Location`; current source grammar always parses top-level `let`/`const` through `val_header "=" expr`.
-- [ ] Cover `type`, `suberror`, `struct`, `enum`, `extenum`, type alias syntax, `derive`, `let`, `const`, `fn`, `extern fn`, `declare`, `trait`, `impl`, `enumview`, `using`, and `test`, including `Impl::TopTest.body_lbrace_loc/body_rbrace_loc`, `DeclBody::DeclBody.lbrace_loc/rbrace_loc`, `UsingKind::Type(loc)`, and `UsingKind::Trait(loc)`. Update `.mbti` using-alias parsing for the `UsingKind` shape change without adding loc fields to `.mbti`-only containers.
-- [ ] Preserve string token locs in `FuncStubs` and `EmbeddedCode`.
-- [ ] Run: `moon check`
-- [ ] Run: `moon test test/sync_test/loc_regression_test.mbt -v`
-- [ ] Run: `moon test test/mbti_parser_test -v`
-- [ ] Run: `moon test README.mbt.md -v`
-- [ ] Expected: all new top-level token loc fields are stored in AST and covered by direct loc assertions, while JSON output stays unchanged and Handrolled/MoonYacc source parser paths agree.
+- [x] Fill all fields listed under **Top-Level Declarations, Bodies, And Stubs**.
+- [x] Fill source-only declaration-component fields from **Qualified Names And Reusable Nodes** that were intentionally left out of Task 8: `TypeDesc`, `DerivingDirective`, and declaration-level `TypeVarBinder` delimiter lists.
+- [x] Use `Impl::TopLetDef.equal_loc : Location`; current source grammar always parses top-level `let`/`const` through `val_header "=" expr`.
+- [x] Cover `type`, `suberror`, `struct`, `enum`, `extenum`, type alias syntax, `derive`, `let`, `const`, `fn`, `extern fn`, `declare`, `trait`, `impl`, `enumview`, `using`, and `test`, including `Impl::TopTest.body_lbrace_loc/body_rbrace_loc`, `DeclBody::DeclBody.lbrace_loc/rbrace_loc`, `UsingKind::Type(loc)`, and `UsingKind::Trait(loc)`. Update `.mbti` using-alias parsing for the `UsingKind` shape change without adding loc fields to `.mbti`-only containers.
+- [x] Preserve string token locs in `FuncStubs` and `EmbeddedCode`.
+- [x] Run: `moon check`
+- [x] Run: `moon test test/sync_test/loc_regression_test.mbt -v`
+- [x] Run: `moon test test/mbti_parser_test -v`
+- [x] Run: `moon test README.mbt.md -v`
+- [x] Expected: all new top-level token loc fields are stored in AST and covered by direct loc assertions, while JSON output stays unchanged and Handrolled/MoonYacc source parser paths agree.
 
 ### Task 10: Update Downstream AST Consumers
 
@@ -456,16 +456,16 @@ fn sample(x : Int, y : Int) -> Int {
 - Modify: `README.mbt.md`
 - Must stay unchanged: `test/sync_test/__snapshot__/*.json`, `test/sync_test/parser_test.mbt`, `test/sync_test/lexer_test.mbt`, and existing JSON expectations in local tests/docs.
 
-- [ ] Update every handwritten AST constructor to pass the new loc fields, using explicit dummy locs in tests where source token locations are irrelevant.
-- [ ] Update formatter pattern matches to ignore token loc fields with `..` when formatting does not need them.
-- [ ] Run `rg -n 'visit_Expr_|visit_Pattern|Expr::(Group|Array|Tuple|Record|Match|Let|LetMut|LetFn|LetAnd|Defer|Guard|Sequence)|Pattern::|Top(FuncDef|LetDef|Trait|View|Impl|Using|Test)|TypeDesc|DeclBody|FuncStubs|EmbeddedCode|UsingKind|Stmt(Let|Letmut|Func|Letand|Defer|Guard|Expr)|LongIdent|TypeName|Parameter' top.mbt fmt/internal/format fmt/internal/comment syntax test handrolled_parser README.mbt.md` and update every handwritten pattern or constructor that still assumes the old AST shape, including visitor override signatures such as `visit_Expr_Group`.
-- [ ] Do not update JSON snapshot expectations in `syntax/ast_test.mbt`, `syntax/ast_wbtest.mbt`, `handrolled_parser/parse_expr_test.mbt`, or `README.mbt.md` for new loc fields. If they fail because serialized JSON changed, fix `syntax/ast_json_repr.mbt` so the old expected JSON remains valid.
-- [ ] Do not hand-edit or regenerate imported `test/sync_test/__snapshot__/*.json`. Do not run `moon test test/sync_test --update` or `moon run test/sync_test/generator/generator.mbt` for this plan.
-- [ ] Run: `moon check`
-- [ ] Run: `moon test syntax`
-- [ ] Run: `moon test handrolled_parser -v`
-- [ ] Run: `moon test README.mbt.md -v`
-- [ ] Expected: non-parser consumers compile, local JSON tests pass with unchanged expected output, and imported sync snapshots remain untouched before generated parser/interface files are reviewed.
+- [x] Update every handwritten AST constructor to pass the new loc fields, using explicit dummy locs in tests where source token locations are irrelevant.
+- [x] Update formatter pattern matches to ignore token loc fields with `..` when formatting does not need them.
+- [x] Run `rg -n 'visit_Expr_|visit_Pattern|Expr::(Group|Array|Tuple|Record|Match|Let|LetMut|LetFn|LetAnd|Defer|Guard|Sequence)|Pattern::|Top(FuncDef|LetDef|Trait|View|Impl|Using|Test)|TypeDesc|DeclBody|FuncStubs|EmbeddedCode|UsingKind|Stmt(Let|Letmut|Func|Letand|Defer|Guard|Expr)|LongIdent|TypeName|Parameter' top.mbt fmt/internal/format fmt/internal/comment syntax test handrolled_parser README.mbt.md` and update every handwritten pattern or constructor that still assumes the old AST shape, including visitor override signatures such as `visit_Expr_Group`.
+- [x] Do not update JSON snapshot expectations in `syntax/ast_test.mbt`, `syntax/ast_wbtest.mbt`, `handrolled_parser/parse_expr_test.mbt`, or `README.mbt.md` for new loc fields. If they fail because serialized JSON changed, fix `syntax/ast_json_repr.mbt` so the old expected JSON remains valid.
+- [x] Do not hand-edit or regenerate imported `test/sync_test/__snapshot__/*.json`. Do not run `moon test test/sync_test --update` or `moon run test/sync_test/generator/generator.mbt` for this plan.
+- [x] Run: `moon check`
+- [x] Run: `moon test syntax`
+- [x] Run: `moon test handrolled_parser -v`
+- [x] Run: `moon test README.mbt.md -v`
+- [x] Expected: non-parser consumers compile, local JSON tests pass with unchanged expected output, and imported sync snapshots remain untouched before generated parser/interface files are reviewed.
 
 ### Task 11: Regenerate Parsers And Public Interfaces
 
@@ -476,29 +476,29 @@ fn sample(x : Int, y : Int) -> Int {
 - Generated: `mbti_parser/mbti_parser.mbt.map.json`
 - Generated: `syntax/pkg.generated.mbti`, `syntax/util/pkg.generated.mbti`, `syntax/util/util.mbti`, root `pkg.generated.mbti`, and package-level `pkg.generated.mbti`
 
-- [ ] Run: `moon check`
-- [ ] Confirm parser outputs and source maps were regenerated by pre-build from `.mbty` changes. They may already have changed during Tasks 5-9; do not manually edit `yacc_parser/parser.mbt`, `yacc_parser/parser.mbt.map.json`, `mbti_parser/mbti_parser.mbt`, or `mbti_parser/mbti_parser.mbt.map.json`.
-- [ ] Run: `moon info`
-- [ ] Review generated `pkg.generated.mbti` and `syntax/util/util.mbti` diffs. Expected: public API expands with the planned loc fields, including `syntax/util/Statement` payload changes; no unrelated API changes.
+- [x] Run: `moon check`
+- [x] Confirm parser outputs and source maps were regenerated by pre-build from `.mbty` changes. They may already have changed during Tasks 5-9; do not manually edit `yacc_parser/parser.mbt`, `yacc_parser/parser.mbt.map.json`, `mbti_parser/mbti_parser.mbt`, or `mbti_parser/mbti_parser.mbt.map.json`.
+- [x] Run: `moon info`
+- [x] Review generated `pkg.generated.mbti` and `syntax/util/util.mbti` diffs. Expected: public API expands with the planned loc fields, including `syntax/util/Statement` payload changes; no unrelated API changes.
 
 ### Task 12: Full Verification
 
 **Files:**
 - No new edits unless failures identify missing fields.
 
-- [ ] Run: `moon fmt`
-- [ ] Run: `moon test syntax`
-- [ ] Run: `moon test handrolled_parser -v`
-- [ ] Run: `moon test README.mbt.md -v`
-- [ ] Run: `moon test fmt/internal/format -v`
-- [ ] Run: `moon test fmt/internal/testsuite/style_test -v`
-- [ ] Run: `moon test fmt/internal/testsuite/comment_test -v`
-- [ ] Run: `moon test test/sync_test`
-- [ ] Run: `moon test test/manual_test`
-- [ ] Run: `moon test test/mbti_parser_test`
-- [ ] Run: `moon check --target all`
-- [ ] Run: `moon info`
-- [ ] Expected: all tests pass, generated parser files are derived from `.mbty`, public API diff contains only the planned loc-field additions, and existing JSON snapshots/expectations remain unchanged.
+- [x] Run: `moon fmt`
+- [x] Run: `moon test syntax`
+- [x] Run: `moon test handrolled_parser -v`
+- [x] Run: `moon test README.mbt.md -v`
+- [x] Run: `moon test fmt/internal/format -v`
+- [x] Run: `moon test fmt/internal/testsuite/style_test -v`
+- [x] Run: `moon test fmt/internal/testsuite/comment_test -v`
+- [x] Run: `moon test test/sync_test`
+- [x] Run: `moon test test/manual_test`
+- [x] Run: `moon test test/mbti_parser_test`
+- [x] Run: `moon check --target all`
+- [x] Run: `moon info`
+- [x] Expected: all tests pass, generated parser files are derived from `.mbty`, public API diff contains only the planned loc-field additions, and existing JSON snapshots/expectations remain unchanged.
 
 ## Implementation Notes
 
