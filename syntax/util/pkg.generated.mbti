@@ -13,16 +13,19 @@ import {
 
 // Types and methods
 pub(all) enum Statement {
-  StmtExpr(@syntax.Expr)
-  StmtLet(pat~ : @syntax.Pattern, expr~ : @syntax.Expr, loc~ : @basic.Location)
-  StmtGuard(cond~ : @syntax.Expr, otherwise~ : @syntax.Expr?, loc~ : @basic.Location)
-  StmtLetmut(binder~ : @syntax.Binder, ty_opt~ : @syntax.Type?, expr~ : @syntax.Expr, loc~ : @basic.Location)
-  StmtFunc(binder~ : @syntax.Binder, func~ : @syntax.Func, loc~ : @basic.Location)
-  StmtLetand(bindings~ : @list.List[(@syntax.Binder, @syntax.Type?, @syntax.Func)], loc~ : @basic.Location)
-  StmtDefer(expr~ : @syntax.Expr, loc~ : @basic.Location)
+  StmtExpr(expr~ : @syntax.Expr, semi_loc~ : @basic.Location?)
+  StmtLet(pat~ : @syntax.Pattern, expr~ : @syntax.Expr, let_loc~ : @basic.Location, annot_colon_loc~ : @basic.Location?, equal_loc~ : @basic.Location, semi_loc~ : @basic.Location?, loc~ : @basic.Location)
+  StmtGuard(cond~ : @syntax.Expr, otherwise~ : @syntax.Expr?, guard_loc~ : @basic.Location, else_loc~ : @basic.Location?, else_lbrace_loc~ : @basic.Location?, else_rbrace_loc~ : @basic.Location?, semi_loc~ : @basic.Location?, loc~ : @basic.Location)
+  StmtLetmut(binder~ : @syntax.Binder, ty_opt~ : @syntax.Type?, expr~ : @syntax.Expr, let_loc~ : @basic.Location, mut_loc~ : @basic.Location, annot_colon_loc~ : @basic.Location?, equal_loc~ : @basic.Location, semi_loc~ : @basic.Location?, loc~ : @basic.Location)
+  StmtFunc(binder~ : @syntax.Binder, func~ : @syntax.Func, semi_loc~ : @basic.Location?, loc~ : @basic.Location)
+  StmtLetand(bindings~ : @list.List[(@syntax.Binder, @syntax.Type?, @syntax.Func)], letrec_loc~ : @basic.Location, and_locs~ : @list.List[@basic.Location], equal_locs~ : @list.List[@basic.Location], annot_colon_locs~ : @list.List[@basic.Location], semi_loc~ : @basic.Location?, loc~ : @basic.Location)
+  StmtDefer(expr~ : @syntax.Expr, defer_loc~ : @basic.Location, semi_loc~ : @basic.Location?, loc~ : @basic.Location)
 }
 pub fn Statement::collect_rev(@list.List[Self], @syntax.Expr) -> @syntax.Expr
 pub fn Statement::compact_rev(@list.List[Self], loc~ : @basic.Location) -> @syntax.Expr
+pub fn Statement::semi_locs_rev(@list.List[Self]) -> @list.List[@basic.Location]
+pub fn Statement::with_head_semi_loc_rev(@list.List[Self], @basic.Location?) -> @list.List[Self]
+pub fn Statement::with_semi_loc(Self, @basic.Location?) -> Self
 
 // Type aliases
 

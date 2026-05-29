@@ -19,7 +19,13 @@ pub(open) trait IterVisitor {
   // LongIdent
   fn visit_LongIdent(Self, LongIdent) -> Unit = _
   fn visit_LongIdent_Ident(Self, name~ : String) -> Unit = _
-  fn visit_LongIdent_Dot(Self, pkg~ : String, id~ : String) -> Unit = _
+  fn visit_LongIdent_Dot(
+    Self,
+    pkg~ : String,
+    id~ : String,
+    pkg_loc~ : Location,
+    dot_id_loc~ : Location,
+  ) -> Unit = _
 
   // TypeName
   fn visit_TypeName(Self, TypeName) -> Unit = _
@@ -36,29 +42,59 @@ pub(open) trait IterVisitor {
     res~ : Type,
     err~ : ErrorType,
     is_async~ : Location?,
+    lparen_loc~ : Location,
+    rparen_loc~ : Location,
+    arrow_loc~ : Location,
+    comma_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
   fn visit_Type_Name(
     Self,
     constr_id~ : ConstrId,
     tys~ : @list.List[Type],
+    type_args_lbracket_loc~ : Location?,
+    type_args_rbracket_loc~ : Location?,
+    type_arg_comma_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
-  fn visit_Type_Tuple(Self, tys~ : @list.List[Type], loc~ : Location) -> Unit = _
+  fn visit_Type_Tuple(
+    Self,
+    tys~ : @list.List[Type],
+    lparen_loc~ : Location,
+    rparen_loc~ : Location,
+    comma_locs~ : @list.List[Location],
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Type_Option(
     Self,
     ty~ : Type,
     loc~ : Location,
     question_loc~ : Location,
   ) -> Unit = _
-  fn visit_Type_Object(Self, ConstrId) -> Unit = _
+  fn visit_Type_Object(
+    Self,
+    constr_id~ : ConstrId,
+    amp_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
 
   // ErrorType
   fn visit_ErrorType(Self, ErrorType) -> Unit = _
-  fn visit_ErrorType_ErrorType(Self, ty~ : Type) -> Unit = _
+  fn visit_ErrorType_ErrorType(
+    Self,
+    ty~ : Type,
+    raise_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_ErrorType_DefaultErrorType(Self, loc~ : Location) -> Unit = _
   fn visit_ErrorType_Noraise(Self, loc~ : Location) -> Unit = _
-  fn visit_ErrorType_MaybeError(Self, ty~ : Type) -> Unit = _
+  fn visit_ErrorType_MaybeError(
+    Self,
+    ty~ : Type,
+    raise_loc~ : Location,
+    question_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
 
   // ConstrParam
   fn visit_ConstrParam(Self, ConstrParam) -> Unit = _
@@ -68,7 +104,13 @@ pub(open) trait IterVisitor {
 
   // ExceptionDecl
   fn visit_ExceptionDecl(Self, ExceptionDecl) -> Unit = _
-  fn visit_ExceptionDecl_EnumPayload(Self, @list.List[ConstrDecl]) -> Unit = _
+  fn visit_ExceptionDecl_EnumPayload(
+    Self,
+    constrs~ : @list.List[ConstrDecl],
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
+    semi_locs~ : @list.List[Location],
+  ) -> Unit = _
 
   // FieldName
   fn visit_FieldName(Self, FieldName) -> Unit = _
@@ -79,26 +121,42 @@ pub(open) trait IterVisitor {
   // TypeDesc
   fn visit_TypeDesc(Self, TypeDesc) -> Unit = _
   fn visit_TypeDesc_Error(Self, ExceptionDecl) -> Unit = _
-  fn visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> Unit = _
+  fn visit_TypeDesc_Variant(
+    Self,
+    constrs~ : @list.List[ConstrDecl],
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
+    semi_locs~ : @list.List[Location],
+  ) -> Unit = _
   fn visit_TypeDesc_Record(
     Self,
     fields~ : @list.List[FieldDecl],
     constr_decl~ : FunDecl?,
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
+    semi_locs~ : @list.List[Location],
   ) -> Unit = _
-  fn visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> Unit = _
-  fn visit_TypeDesc_Alias(Self, Type) -> Unit = _
+  fn visit_TypeDesc_TupleStruct(
+    Self,
+    types~ : @list.List[Type],
+    lparen_loc~ : Location,
+    rparen_loc~ : Location,
+    comma_locs~ : @list.List[Location],
+  ) -> Unit = _
+  fn visit_TypeDesc_Alias(Self, type_~ : Type, equal_loc~ : Location) -> Unit = _
 
   // Hole
   fn visit_Hole(Self, Hole) -> Unit = _
 
   // ArgumentKind
   fn visit_ArgumentKind(Self, ArgumentKind) -> Unit = _
-  fn visit_ArgumentKind_Labelled(Self, Label) -> Unit = _
+  fn visit_ArgumentKind_Labelled(Self, label~ : Label, equal_loc~ : Location) -> Unit = _
   fn visit_ArgumentKind_LabelledPun(Self, Label) -> Unit = _
   fn visit_ArgumentKind_LabelledOption(
     Self,
     label~ : Label,
     question_loc~ : Location,
+    equal_loc~ : Location,
   ) -> Unit = _
   fn visit_ArgumentKind_LabelledOptionPun(
     Self,
@@ -132,8 +190,17 @@ pub(open) trait IterVisitor {
 
   // ConstructorExtraInfo
   fn visit_ConstructorExtraInfo(Self, ConstructorExtraInfo) -> Unit = _
-  fn visit_ConstructorExtraInfo_TypeName(Self, TypeName) -> Unit = _
-  fn visit_ConstructorExtraInfo_Package(Self, String) -> Unit = _
+  fn visit_ConstructorExtraInfo_TypeName(
+    Self,
+    type_name~ : TypeName,
+    coloncolon_loc~ : Location,
+  ) -> Unit = _
+  fn visit_ConstructorExtraInfo_Package(
+    Self,
+    pkg~ : String,
+    pkg_loc~ : Location,
+    dot_constr_loc~ : Location,
+  ) -> Unit = _
 
   // Constructor
   fn visit_Constructor(Self, Constructor) -> Unit = _
@@ -152,16 +219,42 @@ pub(open) trait IterVisitor {
 
   // Parameter
   fn visit_Parameter(Self, Parameter) -> Unit = _
-  fn visit_Parameter_DiscardPositional(Self, ty~ : Type?, loc~ : Location) -> Unit = _
-  fn visit_Parameter_Positional(Self, binder~ : Binder, ty~ : Type?) -> Unit = _
-  fn visit_Parameter_Labelled(Self, binder~ : Binder, ty~ : Type?) -> Unit = _
+  fn visit_Parameter_DiscardPositional(
+    Self,
+    ty~ : Type?,
+    colon_loc~ : Location?,
+    loc~ : Location,
+  ) -> Unit = _
+  fn visit_Parameter_Positional(
+    Self,
+    binder~ : Binder,
+    ty~ : Type?,
+    colon_loc~ : Location?,
+  ) -> Unit = _
+  fn visit_Parameter_Labelled(
+    Self,
+    binder~ : Binder,
+    ty~ : Type?,
+    post_label_loc~ : Location?,
+    colon_loc~ : Location?,
+  ) -> Unit = _
   fn visit_Parameter_Optional(
     Self,
     binder~ : Binder,
     default~ : Expr,
     ty~ : Type?,
+    post_label_loc~ : Location?,
+    question_loc~ : Location?,
+    colon_loc~ : Location?,
+    equal_loc~ : Location,
   ) -> Unit = _
-  fn visit_Parameter_QuestionOptional(Self, binder~ : Binder, ty~ : Type?) -> Unit = _
+  fn visit_Parameter_QuestionOptional(
+    Self,
+    binder~ : Binder,
+    ty~ : Type?,
+    question_loc~ : Location,
+    colon_loc~ : Location?,
+  ) -> Unit = _
 
   // Case
   fn visit_Case(Self, Case) -> Unit = _
@@ -188,18 +281,25 @@ pub(open) trait IterVisitor {
     Self,
     pat~ : LexPattern,
     binder~ : Binder,
+    as_loc~ : Location,
     loc~ : Location,
   ) -> Unit = _
   fn visit_LexPattern_Sequence(
     Self,
     pats~ : @list.List[LexPattern],
+    semi_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
 
   // SpreadableElem
   fn visit_SpreadableElem(Self, SpreadableElem) -> Unit = _
   fn visit_SpreadableElem_Regular(Self, Expr) -> Unit = _
-  fn visit_SpreadableElem_Spread(Self, expr~ : Expr, loc~ : Location) -> Unit = _
+  fn visit_SpreadableElem_Spread(
+    Self,
+    expr~ : Expr,
+    dotdot_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
 
   // MapExprElem
   fn visit_MapExprElem(Self, MapExprElem) -> Unit = _
@@ -229,8 +329,19 @@ pub(open) trait IterVisitor {
 
   // DotDotBinder
   fn visit_DotDotBinder(Self, DotDotBinder) -> Unit = _
-  fn visit_DotDotBinder_BinderAs(Self, Binder) -> Unit = _
-  fn visit_DotDotBinder_Binder(Self, Binder) -> Unit = _
+  fn visit_DotDotBinder_Underscore(
+    Self,
+    dotdot_loc~ : Location,
+    underscore_loc~ : Location,
+  ) -> Unit = _
+  fn visit_DotDotBinder_NoBinder(Self, dotdot_loc~ : Location) -> Unit = _
+  fn visit_DotDotBinder_BinderAs(
+    Self,
+    binder~ : Binder,
+    dotdot_loc~ : Location,
+    as_loc~ : Location,
+  ) -> Unit = _
+  fn visit_DotDotBinder_Binder(Self, binder~ : Binder, dotdot_loc~ : Location) -> Unit = _
 
   // ArrayPattern
   fn visit_ArrayPattern(Self, ArrayPattern) -> Unit = _
@@ -238,28 +349,40 @@ pub(open) trait IterVisitor {
   fn visit_ArrayPattern_StringSpread(
     Self,
     str~ : StringLiteral,
+    dotdot_loc~ : Location,
     loc~ : Location,
   ) -> Unit = _
   fn visit_ArrayPattern_BytesSpread(
     Self,
     bytes~ : BytesLiteral,
+    dotdot_loc~ : Location,
     loc~ : Location,
   ) -> Unit = _
   fn visit_ArrayPattern_ConstSpread(
     Self,
     binder~ : Binder,
     pkg~ : String?,
+    dotdot_loc~ : Location,
+    pkg_loc~ : Location?,
+    dot_uident_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
 
   // ArrayPatterns
   fn visit_ArrayPatterns(Self, ArrayPatterns) -> Unit = _
-  fn visit_ArrayPatterns_Closed(Self, @list.List[ArrayPattern]) -> Unit = _
+  fn visit_ArrayPatterns_Closed(
+    Self,
+    @list.List[ArrayPattern],
+    comma_locs~ : @list.List[Location],
+  ) -> Unit = _
   fn visit_ArrayPatterns_Open(
     Self,
     @list.List[ArrayPattern],
     @list.List[ArrayPattern],
     DotDotBinder,
+    left_comma_locs~ : @list.List[Location],
+    dotdot_comma_loc~ : Location?,
+    right_comma_locs~ : @list.List[Location],
   ) -> Unit = _
 
   // WhereClause
@@ -283,32 +406,72 @@ pub(open) trait IterVisitor {
     Self,
     pat~ : Pattern,
     alias_~ : Binder,
+    as_loc~ : Location,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Pattern_Any(Self, loc~ : Location) -> Unit = _
-  fn visit_Pattern_Array(Self, pats~ : ArrayPatterns, loc~ : Location) -> Unit = _
+  fn visit_Pattern_Array(
+    Self,
+    pats~ : ArrayPatterns,
+    lbracket_loc~ : Location,
+    rbracket_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Pattern_Constant(Self, c~ : Constant, loc~ : Location) -> Unit = _
-  fn visit_Pattern_Constraint(Self, pat~ : Pattern, ty~ : Type, loc~ : Location) -> Unit = _
+  fn visit_Pattern_Constraint(
+    Self,
+    pat~ : Pattern,
+    ty~ : Type,
+    lparen_loc~ : Location?,
+    colon_loc~ : Location,
+    rparen_loc~ : Location?,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Pattern_Constr(
     Self,
     constr~ : Constructor,
     args~ : @list.List[ConstrPatArg]?,
     is_open~ : Bool,
+    args_lparen_loc~ : Location?,
+    args_rparen_loc~ : Location?,
+    arg_comma_locs~ : @list.List[Location],
+    open_dotdot_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
-  fn visit_Pattern_Or(Self, pat1~ : Pattern, pat2~ : Pattern, loc~ : Location) -> Unit = _
-  fn visit_Pattern_Tuple(Self, pats~ : @list.List[Pattern], loc~ : Location) -> Unit = _
+  fn visit_Pattern_Or(
+    Self,
+    pat1~ : Pattern,
+    pat2~ : Pattern,
+    bar_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
+  fn visit_Pattern_Tuple(
+    Self,
+    pats~ : @list.List[Pattern],
+    lparen_loc~ : Location,
+    rparen_loc~ : Location,
+    comma_locs~ : @list.List[Location],
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Pattern_Var(Self, Binder) -> Unit = _
   fn visit_Pattern_Record(
     Self,
     fields~ : @list.List[FieldPat],
     is_closed~ : Bool,
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
+    comma_locs~ : @list.List[Location],
+    dotdot_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Pattern_Map(
     Self,
     elems~ : @list.List[MapPatElem],
     is_closed~ : Bool,
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
+    comma_locs~ : @list.List[Location],
+    dotdot_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Pattern_Range(
@@ -316,12 +479,16 @@ pub(open) trait IterVisitor {
     lhs~ : Pattern,
     rhs~ : Pattern,
     kind~ : RangeKind,
+    range_op_loc~ : Location,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Pattern_SpecialConstr(
     Self,
     binder~ : Binder,
     args~ : @list.List[ConstrPatArg],
+    lparen_loc~ : Location,
+    rparen_loc~ : Location,
+    comma_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
 
@@ -338,22 +505,36 @@ pub(open) trait IterVisitor {
     module_name~ : StringLiteral,
     func_name~ : StringLiteral,
     language~ : StringLiteral?,
+    module_name_loc~ : Location,
+    func_name_loc~ : Location,
+    language_loc~ : Location?,
   ) -> Unit = _
   fn visit_FuncStubs_Embedded(
     Self,
     language~ : StringLiteral?,
     code~ : EmbeddedCode,
+    language_loc~ : Location?,
+    code_loc~ : Location,
   ) -> Unit = _
 
   // EmbeddedCode
   fn visit_EmbeddedCode(Self, EmbeddedCode) -> Unit = _
-  fn visit_EmbeddedCode_CodeString(Self, StringLiteral) -> Unit = _
-  fn visit_EmbeddedCode_CodeMultilineString(Self, @list.List[String]) -> Unit = _
+  fn visit_EmbeddedCode_CodeString(Self, StringLiteral, loc~ : Location) -> Unit = _
+  fn visit_EmbeddedCode_CodeMultilineString(
+    Self,
+    @list.List[String],
+    string_locs~ : @list.List[Location],
+  ) -> Unit = _
 
   // DeclBody
   fn visit_DeclBody(Self, DeclBody) -> Unit = _
-  fn visit_DeclBody_DeclBody(Self, expr~ : Expr) -> Unit = _
-  fn visit_DeclBody_DeclStubs(Self, FuncStubs) -> Unit = _
+  fn visit_DeclBody_DeclBody(
+    Self,
+    expr~ : Expr,
+    lbrace_loc~ : Location?,
+    rbrace_loc~ : Location?,
+  ) -> Unit = _
+  fn visit_DeclBody_DeclStubs(Self, FuncStubs, equal_loc~ : Location) -> Unit = _
 
   // FuncDecl
   fn visit_FunDecl(Self, FunDecl) -> Unit = _
@@ -379,6 +560,12 @@ pub(open) trait IterVisitor {
     name~ : TestName,
     params~ : Parameters?,
     is_async~ : Location?,
+    test_loc~ : Location,
+    params_lparen_loc~ : Location?,
+    params_rparen_loc~ : Location?,
+    param_comma_locs~ : @list.List[Location],
+    body_lbrace_loc~ : Location,
+    body_rbrace_loc~ : Location,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
@@ -389,6 +576,7 @@ pub(open) trait IterVisitor {
     fun_decl~ : FunDecl,
     decl_body~ : DeclBody,
     where_clause~ : WhereClause?,
+    equal_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Impl_TopLetDef(
@@ -398,6 +586,10 @@ pub(open) trait IterVisitor {
     expr~ : Expr,
     vis~ : Visibility,
     is_constant~ : Bool,
+    declare_loc~ : Location?,
+    let_or_const_loc~ : Location,
+    annot_colon_loc~ : Location?,
+    equal_loc~ : Location,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
@@ -415,6 +607,17 @@ pub(open) trait IterVisitor {
     err_ty~ : ErrorType,
     body~ : DeclBody,
     vis~ : Visibility,
+    impl_loc~ : Location,
+    type_params_lbracket_loc~ : Location?,
+    type_params_rbracket_loc~ : Location?,
+    type_param_comma_locs~ : @list.List[Location],
+    for_loc~ : Location?,
+    with_loc~ : Location,
+    fn_loc~ : Location?,
+    params_lparen_loc~ : Location,
+    params_rparen_loc~ : Location,
+    param_comma_locs~ : @list.List[Location],
+    return_arrow_loc~ : Location?,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
@@ -431,6 +634,20 @@ pub(open) trait IterVisitor {
     params_loc~ : Location,
     body~ : Expr,
     vis~ : Visibility,
+    enumview_loc~ : Location,
+    type_params_lbracket_loc~ : Location?,
+    type_params_rbracket_loc~ : Location?,
+    type_param_comma_locs~ : @list.List[Location],
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
+    constructor_semi_locs~ : @list.List[Location],
+    for_loc~ : Location,
+    with_loc~ : Location,
+    params_lparen_loc~ : Location,
+    params_rparen_loc~ : Location,
+    param_comma_locs~ : @list.List[Location],
+    body_lbrace_loc~ : Location,
+    body_rbrace_loc~ : Location,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     doc~ : DocString,
@@ -442,6 +659,12 @@ pub(open) trait IterVisitor {
     quantifiers~ : @list.List[TypeVarBinder],
     vis~ : Visibility,
     attrs~ : @list.List[Attribute],
+    declare_loc~ : Location?,
+    impl_loc~ : Location,
+    type_params_lbracket_loc~ : Location?,
+    type_params_rbracket_loc~ : Location?,
+    type_param_comma_locs~ : @list.List[Location],
+    for_loc~ : Location,
     loc~ : Location,
     doc~ : DocString,
     is_declare~ : Bool,
@@ -452,6 +675,10 @@ pub(open) trait IterVisitor {
     names~ : @list.List[(AliasTarget, UsingKind)],
     vis~ : Visibility,
     attrs~ : @list.List[Attribute],
+    using_loc~ : Location,
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
+    comma_locs~ : @list.List[Location],
     loc~ : Location,
     doc~ : DocString,
   ) -> Unit = _
@@ -465,6 +692,9 @@ pub(open) trait IterVisitor {
     Self,
     func~ : Expr,
     args~ : @list.List[Argument],
+    lparen_loc~ : Location,
+    rparen_loc~ : Location,
+    comma_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Infix(
@@ -475,19 +705,39 @@ pub(open) trait IterVisitor {
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Unary(Self, op~ : Var, expr~ : Expr, loc~ : Location) -> Unit = _
-  fn visit_Expr_Array(Self, exprs~ : @list.List[Expr], loc~ : Location) -> Unit = _
+  fn visit_Expr_Array(
+    Self,
+    exprs~ : @list.List[Expr],
+    lbracket_loc~ : Location,
+    rbracket_loc~ : Location,
+    comma_locs~ : @list.List[Location],
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_ArraySpread(
     Self,
     elems~ : @list.List[SpreadableElem],
+    lbracket_loc~ : Location,
+    rbracket_loc~ : Location,
+    comma_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
-  fn visit_Expr_ArrayGet(Self, array~ : Expr, index~ : Expr, loc~ : Location) -> Unit = _
+  fn visit_Expr_ArrayGet(
+    Self,
+    array~ : Expr,
+    index~ : Expr,
+    lbracket_loc~ : Location,
+    rbracket_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_ArrayGetSlice(
     Self,
     array~ : Expr,
     start_index~ : Expr?,
     end_index~ : Expr?,
     index_loc~ : Location,
+    lbracket_loc~ : Location,
+    colon_loc~ : Location,
+    rbracket_loc~ : Location,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_ArraySet(
@@ -495,6 +745,9 @@ pub(open) trait IterVisitor {
     array~ : Expr,
     index~ : Expr,
     value~ : Expr,
+    lbracket_loc~ : Location,
+    rbracket_loc~ : Location,
+    equal_loc~ : Location,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_ArrayAugmentedSet(
@@ -503,6 +756,9 @@ pub(open) trait IterVisitor {
     array~ : Expr,
     index~ : Expr,
     value~ : Expr,
+    lbracket_loc~ : Location,
+    rbracket_loc~ : Location,
+    augmented_assign_loc~ : Location,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Constant(Self, c~ : Constant, loc~ : Location) -> Unit = _
@@ -512,7 +768,15 @@ pub(open) trait IterVisitor {
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Interp(Self, elems~ : @list.List[InterpElem], loc~ : Location) -> Unit = _
-  fn visit_Expr_Constraint(Self, expr~ : Expr, ty~ : Type, loc~ : Location) -> Unit = _
+  fn visit_Expr_Constraint(
+    Self,
+    expr~ : Expr,
+    ty~ : Type,
+    lparen_loc~ : Location?,
+    colon_loc~ : Location,
+    rparen_loc~ : Location?,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_Constr(Self, constr~ : Constructor, loc~ : Location) -> Unit = _
   fn visit_Expr_While(
     Self,
@@ -520,6 +784,13 @@ pub(open) trait IterVisitor {
     loop_body~ : Expr,
     while_else~ : Expr?,
     label~ : Label?,
+    label_colon_loc~ : Location?,
+    while_loc~ : Location,
+    body_lbrace_loc~ : Location,
+    body_rbrace_loc~ : Location,
+    nobreak_loc~ : Location?,
+    nobreak_lbrace_loc~ : Location?,
+    nobreak_rbrace_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Function(Self, func~ : Func, loc~ : Location) -> Unit = _
@@ -529,6 +800,12 @@ pub(open) trait IterVisitor {
     cond~ : Expr,
     ifso~ : Expr,
     ifnot~ : Expr?,
+    if_loc~ : Location,
+    then_lbrace_loc~ : Location,
+    then_rbrace_loc~ : Location,
+    else_loc~ : Location?,
+    else_lbrace_loc~ : Location?,
+    else_rbrace_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Guard(
@@ -536,29 +813,55 @@ pub(open) trait IterVisitor {
     cond~ : Expr,
     otherwise~ : Expr?,
     body~ : Expr,
+    guard_loc~ : Location,
+    else_loc~ : Location?,
+    else_lbrace_loc~ : Location?,
+    else_rbrace_loc~ : Location?,
+    semi_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
-  fn visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : Location) -> Unit = _
+  fn visit_Expr_Is(
+    Self,
+    expr~ : Expr,
+    pat~ : Pattern,
+    is_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_IsLexMatch(
     Self,
     expr~ : Expr,
     strategy~ : Label?,
     pat~ : @list.List[LexTopPattern],
     pat_loc~ : Location,
+    lexmatch_question_loc~ : Location,
+    with_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
-  fn visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : Location) -> Unit = _
+  fn visit_Expr_Defer(
+    Self,
+    expr~ : Expr,
+    body~ : Expr,
+    defer_loc~ : Location,
+    semi_loc~ : Location?,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_LetFn(
     Self,
     name~ : Binder,
     func~ : Func,
     body~ : Expr,
+    semi_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_LetAnd(
     Self,
     bindings~ : @list.List[(Binder, Type?, Func)],
     body~ : Expr,
+    letrec_loc~ : Location,
+    and_locs~ : @list.List[Location],
+    equal_locs~ : @list.List[Location],
+    annot_colon_locs~ : @list.List[Location],
+    semi_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Let(
@@ -566,20 +869,37 @@ pub(open) trait IterVisitor {
     pattern~ : Pattern,
     expr~ : Expr,
     body~ : Expr,
+    let_loc~ : Location,
+    annot_colon_loc~ : Location?,
+    equal_loc~ : Location,
+    semi_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Sequence(
     Self,
     exprs~ : @list.List[Expr],
     last_expr~ : Expr,
+    semi_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
-  fn visit_Expr_Tuple(Self, exprs~ : @list.List[Expr], loc~ : Location) -> Unit = _
+  fn visit_Expr_Tuple(
+    Self,
+    exprs~ : @list.List[Expr],
+    lparen_loc~ : Location,
+    rparen_loc~ : Location,
+    comma_locs~ : @list.List[Location],
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_Record(
     Self,
     type_name~ : TypeName?,
     fields~ : @list.List[FieldDef],
     trailing~ : TrailingMark,
+    coloncolon_loc~ : Location?,
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
+    comma_locs~ : @list.List[Location],
+    semi_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_RecordUpdate(
@@ -587,6 +907,11 @@ pub(open) trait IterVisitor {
     type_name~ : TypeName?,
     record~ : Expr,
     fields~ : @list.List[FieldDef],
+    coloncolon_loc~ : Location?,
+    lbrace_loc~ : Location,
+    dotdot_loc~ : Location,
+    rbrace_loc~ : Location,
+    comma_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Field(
@@ -599,6 +924,7 @@ pub(open) trait IterVisitor {
     Self,
     type_name~ : TypeName,
     method_name~ : Label,
+    coloncolon_loc~ : Location,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_DotApply(
@@ -607,15 +933,27 @@ pub(open) trait IterVisitor {
     method_name~ : Label,
     args~ : @list.List[Argument],
     return_self~ : Bool,
+    dot_loc~ : Location,
+    lparen_loc~ : Location,
+    rparen_loc~ : Location,
+    comma_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
-  fn visit_Expr_As(Self, expr~ : Expr, trait_~ : TypeName, loc~ : Location) -> Unit = _
+  fn visit_Expr_As(
+    Self,
+    expr~ : Expr,
+    trait_~ : TypeName,
+    as_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_Mutate(
     Self,
     record~ : Expr,
     accessor~ : Accessor,
     field~ : Expr,
     augmented_by~ : Var?,
+    equal_loc~ : Location?,
+    augmented_assign_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Match(
@@ -623,6 +961,9 @@ pub(open) trait IterVisitor {
     expr~ : Expr,
     cases~ : @list.List[Case],
     match_loc~ : Location,
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
+    semi_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_LexMatch(
@@ -630,6 +971,10 @@ pub(open) trait IterVisitor {
     strategy~ : Label?,
     expr~ : Expr,
     match_loc~ : Location,
+    with_loc~ : Location?,
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
+    semi_locs~ : @list.List[Location],
     cases~ : @list.List[LexCase],
     loc~ : Location,
   ) -> Unit = _
@@ -639,25 +984,64 @@ pub(open) trait IterVisitor {
     ty~ : Type?,
     expr~ : Expr,
     body~ : Expr,
+    let_loc~ : Location,
+    mut_loc~ : Location,
+    annot_colon_loc~ : Location?,
+    equal_loc~ : Location,
+    semi_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
-  fn visit_Expr_Pipe(Self, lhs~ : Expr, rhs~ : Expr, loc~ : Location) -> Unit = _
+  fn visit_Expr_Pipe(
+    Self,
+    lhs~ : Expr,
+    rhs~ : Expr,
+    pipe_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_Assign(
     Self,
     var_~ : Var,
     expr~ : Expr,
     augmented_by~ : Var?,
+    equal_loc~ : Location?,
+    augmented_assign_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Hole(Self, loc~ : Location, kind~ : Hole) -> Unit = _
-  fn visit_Expr_Return(Self, return_value~ : Expr?, loc~ : Location) -> Unit = _
-  fn visit_Expr_Raise(Self, err_value~ : Expr, loc~ : Location) -> Unit = _
-  fn visit_Expr_Unit(Self, loc~ : Location, faked~ : Bool) -> Unit = _
-  fn visit_Expr_Break(Self, arg~ : Expr?, label~ : Label?, loc~ : Location) -> Unit = _
+  fn visit_Expr_Return(
+    Self,
+    return_value~ : Expr?,
+    return_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
+  fn visit_Expr_Raise(
+    Self,
+    err_value~ : Expr,
+    raise_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
+  fn visit_Expr_Unit(
+    Self,
+    loc~ : Location,
+    faked~ : Bool,
+    lparen_loc~ : Location,
+    rparen_loc~ : Location,
+  ) -> Unit = _
+  fn visit_Expr_Break(
+    Self,
+    arg~ : Expr?,
+    label~ : Label?,
+    break_loc~ : Location,
+    post_label_loc~ : Location?,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_Continue(
     Self,
     args~ : @list.List[Expr],
     label~ : Label?,
+    continue_loc~ : Location,
+    post_label_loc~ : Location?,
+    comma_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_For(
@@ -668,6 +1052,18 @@ pub(open) trait IterVisitor {
     body~ : Expr,
     for_else~ : Expr?,
     label~ : Label?,
+    label_colon_loc~ : Location?,
+    for_loc~ : Location,
+    binder_comma_locs~ : @list.List[Location],
+    binder_equal_locs~ : @list.List[Location],
+    semi_locs~ : @list.List[Location],
+    continue_comma_locs~ : @list.List[Location],
+    continue_equal_locs~ : @list.List[Location],
+    body_lbrace_loc~ : Location,
+    body_rbrace_loc~ : Location,
+    nobreak_loc~ : Location?,
+    nobreak_lbrace_loc~ : Location?,
+    nobreak_rbrace_loc~ : Location?,
     loc~ : Location,
     where_clause~ : WhereClause?,
   ) -> Unit = _
@@ -681,6 +1077,20 @@ pub(open) trait IterVisitor {
     else_block~ : Expr?,
     where_clause~ : WhereClause?,
     label~ : Label?,
+    label_colon_loc~ : Location?,
+    for_loc~ : Location,
+    binder_comma_locs~ : @list.List[Location],
+    in_loc~ : Location,
+    semi_locs~ : @list.List[Location],
+    init_comma_locs~ : @list.List[Location],
+    init_equal_locs~ : @list.List[Location],
+    continue_comma_locs~ : @list.List[Location],
+    continue_equal_locs~ : @list.List[Location],
+    body_lbrace_loc~ : Location,
+    body_rbrace_loc~ : Location,
+    nobreak_loc~ : Location?,
+    nobreak_lbrace_loc~ : Location?,
+    nobreak_rbrace_loc~ : Location?,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Try(
@@ -692,6 +1102,12 @@ pub(open) trait IterVisitor {
     try_loc~ : Location,
     catch_loc~ : Location,
     else_loc~ : Location,
+    catch_lbrace_loc~ : Location,
+    catch_rbrace_loc~ : Location,
+    catch_semi_locs~ : @list.List[Location],
+    noraise_lbrace_loc~ : Location?,
+    noraise_rbrace_loc~ : Location?,
+    noraise_semi_locs~ : @list.List[Location],
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_TryOperator(
@@ -701,8 +1117,22 @@ pub(open) trait IterVisitor {
     try_loc~ : Location,
     loc~ : Location,
   ) -> Unit = _
-  fn visit_Expr_Map(Self, elems~ : @list.List[MapExprElem], loc~ : Location) -> Unit = _
-  fn visit_Expr_Group(Self, expr~ : Expr, group~ : Group, loc~ : Location) -> Unit = _
+  fn visit_Expr_Map(
+    Self,
+    elems~ : @list.List[MapExprElem],
+    lbrace_loc~ : Location,
+    rbrace_loc~ : Location,
+    comma_locs~ : @list.List[Location],
+    loc~ : Location,
+  ) -> Unit = _
+  fn visit_Expr_Group(
+    Self,
+    expr~ : Expr,
+    group~ : Group,
+    left_delim_loc~ : Location,
+    right_delim_loc~ : Location,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_StaticAssert(
     Self,
     asserts~ : @list.List[StaticAssertion],
@@ -738,6 +1168,12 @@ impl IterVisitor with fn visit_Impl_TopTest(
   name~,
   params~,
   is_async~,
+  test_loc~,
+  params_lparen_loc~,
+  params_rparen_loc~,
+  param_comma_locs~,
+  body_lbrace_loc~,
+  body_rbrace_loc~,
   loc~,
   attrs~,
   doc~,
@@ -748,6 +1184,12 @@ impl IterVisitor with fn visit_Impl_TopTest(
     name~,
     params~,
     is_async~,
+    test_loc~,
+    params_lparen_loc~,
+    params_rparen_loc~,
+    param_comma_locs~,
+    body_lbrace_loc~,
+    body_rbrace_loc~,
     loc~,
     attrs~,
     doc~,
@@ -765,6 +1207,7 @@ impl IterVisitor with fn visit_Impl_TopFuncDef(
   fun_decl~,
   decl_body~,
   where_clause~,
+  equal_loc~,
   loc~,
 ) {
   IterVisitorBase::visit_Impl_TopFuncDef(
@@ -772,6 +1215,7 @@ impl IterVisitor with fn visit_Impl_TopFuncDef(
     fun_decl~,
     decl_body~,
     where_clause~,
+    equal_loc~,
     loc~,
   )
 }
@@ -784,6 +1228,10 @@ impl IterVisitor with fn visit_Impl_TopLetDef(
   expr~,
   vis~,
   is_constant~,
+  declare_loc~,
+  let_or_const_loc~,
+  annot_colon_loc~,
+  equal_loc~,
   loc~,
   attrs~,
   doc~,
@@ -796,6 +1244,10 @@ impl IterVisitor with fn visit_Impl_TopLetDef(
     expr~,
     vis~,
     is_constant~,
+    declare_loc~,
+    let_or_const_loc~,
+    annot_colon_loc~,
+    equal_loc~,
     loc~,
     attrs~,
     doc~,
@@ -820,6 +1272,17 @@ impl IterVisitor with fn visit_Impl_TopImpl(
   err_ty~,
   body~,
   vis~,
+  impl_loc~,
+  type_params_lbracket_loc~,
+  type_params_rbracket_loc~,
+  type_param_comma_locs~,
+  for_loc~,
+  with_loc~,
+  fn_loc~,
+  params_lparen_loc~,
+  params_rparen_loc~,
+  param_comma_locs~,
+  return_arrow_loc~,
   loc~,
   attrs~,
   doc~,
@@ -835,6 +1298,17 @@ impl IterVisitor with fn visit_Impl_TopImpl(
     err_ty~,
     body~,
     vis~,
+    impl_loc~,
+    type_params_lbracket_loc~,
+    type_params_rbracket_loc~,
+    type_param_comma_locs~,
+    for_loc~,
+    with_loc~,
+    fn_loc~,
+    params_lparen_loc~,
+    params_rparen_loc~,
+    param_comma_locs~,
+    return_arrow_loc~,
     loc~,
     attrs~,
     doc~,
@@ -854,6 +1328,20 @@ impl IterVisitor with fn visit_Impl_TopView(
   params_loc~,
   body~,
   vis~,
+  enumview_loc~,
+  type_params_lbracket_loc~,
+  type_params_rbracket_loc~,
+  type_param_comma_locs~,
+  lbrace_loc~,
+  rbrace_loc~,
+  constructor_semi_locs~,
+  for_loc~,
+  with_loc~,
+  params_lparen_loc~,
+  params_rparen_loc~,
+  param_comma_locs~,
+  body_lbrace_loc~,
+  body_rbrace_loc~,
   loc~,
   attrs~,
   doc~,
@@ -870,6 +1358,20 @@ impl IterVisitor with fn visit_Impl_TopView(
     params_loc~,
     body~,
     vis~,
+    enumview_loc~,
+    type_params_lbracket_loc~,
+    type_params_rbracket_loc~,
+    type_param_comma_locs~,
+    lbrace_loc~,
+    rbrace_loc~,
+    constructor_semi_locs~,
+    for_loc~,
+    with_loc~,
+    params_lparen_loc~,
+    params_rparen_loc~,
+    param_comma_locs~,
+    body_lbrace_loc~,
+    body_rbrace_loc~,
     loc~,
     attrs~,
     doc~,
@@ -884,6 +1386,12 @@ impl IterVisitor with fn visit_Impl_TopImplRelation(
   quantifiers~,
   vis~,
   attrs~,
+  declare_loc~,
+  impl_loc~,
+  type_params_lbracket_loc~,
+  type_params_rbracket_loc~,
+  type_param_comma_locs~,
+  for_loc~,
   loc~,
   doc~,
   is_declare~,
@@ -895,6 +1403,12 @@ impl IterVisitor with fn visit_Impl_TopImplRelation(
     quantifiers~,
     vis~,
     attrs~,
+    declare_loc~,
+    impl_loc~,
+    type_params_lbracket_loc~,
+    type_params_rbracket_loc~,
+    type_param_comma_locs~,
+    for_loc~,
     loc~,
     doc~,
     is_declare~,
@@ -908,6 +1422,10 @@ impl IterVisitor with fn visit_Impl_TopUsing(
   names~,
   vis~,
   attrs~,
+  using_loc~,
+  lbrace_loc~,
+  rbrace_loc~,
+  comma_locs~,
   loc~,
   doc~,
 ) {
@@ -917,6 +1435,10 @@ impl IterVisitor with fn visit_Impl_TopUsing(
     names~,
     vis~,
     attrs~,
+    using_loc~,
+    lbrace_loc~,
+    rbrace_loc~,
+    comma_locs~,
     loc~,
     doc~,
   )
@@ -933,8 +1455,24 @@ impl IterVisitor with fn visit_Expr(env, expr) {
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Apply(env, func~, args~, loc~) {
-  IterVisitorBase::visit_Expr_Apply(env, func~, args~, loc~)
+impl IterVisitor with fn visit_Expr_Apply(
+  env,
+  func~,
+  args~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Apply(
+    env,
+    func~,
+    args~,
+    lparen_loc~,
+    rparen_loc~,
+    comma_locs~,
+    loc~,
+  )
 }
 
 ///|
@@ -948,18 +1486,60 @@ impl IterVisitor with fn visit_Expr_Unary(env, op~, expr~, loc~) {
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Array(env, exprs~, loc~) {
-  IterVisitorBase::visit_Expr_Array(env, exprs~, loc~)
+impl IterVisitor with fn visit_Expr_Array(
+  env,
+  exprs~,
+  lbracket_loc~,
+  rbracket_loc~,
+  comma_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Array(
+    env,
+    exprs~,
+    lbracket_loc~,
+    rbracket_loc~,
+    comma_locs~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_ArraySpread(env, elems~, loc~) {
-  IterVisitorBase::visit_Expr_ArraySpread(env, elems~, loc~)
+impl IterVisitor with fn visit_Expr_ArraySpread(
+  env,
+  elems~,
+  lbracket_loc~,
+  rbracket_loc~,
+  comma_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_ArraySpread(
+    env,
+    elems~,
+    lbracket_loc~,
+    rbracket_loc~,
+    comma_locs~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_ArrayGet(env, array~, index~, loc~) {
-  IterVisitorBase::visit_Expr_ArrayGet(env, array~, index~, loc~)
+impl IterVisitor with fn visit_Expr_ArrayGet(
+  env,
+  array~,
+  index~,
+  lbracket_loc~,
+  rbracket_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_ArrayGet(
+    env,
+    array~,
+    index~,
+    lbracket_loc~,
+    rbracket_loc~,
+    loc~,
+  )
 }
 
 ///|
@@ -969,6 +1549,9 @@ impl IterVisitor with fn visit_Expr_ArrayGetSlice(
   start_index~,
   end_index~,
   index_loc~,
+  lbracket_loc~,
+  colon_loc~,
+  rbracket_loc~,
   loc~,
 ) {
   IterVisitorBase::visit_Expr_ArrayGetSlice(
@@ -977,13 +1560,34 @@ impl IterVisitor with fn visit_Expr_ArrayGetSlice(
     start_index~,
     end_index~,
     index_loc~,
+    lbracket_loc~,
+    colon_loc~,
+    rbracket_loc~,
     loc~,
   )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_ArraySet(env, array~, index~, value~, loc~) {
-  IterVisitorBase::visit_Expr_ArraySet(env, array~, index~, value~, loc~)
+impl IterVisitor with fn visit_Expr_ArraySet(
+  env,
+  array~,
+  index~,
+  value~,
+  lbracket_loc~,
+  rbracket_loc~,
+  equal_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_ArraySet(
+    env,
+    array~,
+    index~,
+    value~,
+    lbracket_loc~,
+    rbracket_loc~,
+    equal_loc~,
+    loc~,
+  )
 }
 
 ///|
@@ -993,6 +1597,9 @@ impl IterVisitor with fn visit_Expr_ArrayAugmentedSet(
   array~,
   index~,
   value~,
+  lbracket_loc~,
+  rbracket_loc~,
+  augmented_assign_loc~,
   loc~,
 ) {
   IterVisitorBase::visit_Expr_ArrayAugmentedSet(
@@ -1001,6 +1608,9 @@ impl IterVisitor with fn visit_Expr_ArrayAugmentedSet(
     array~,
     index~,
     value~,
+    lbracket_loc~,
+    rbracket_loc~,
+    augmented_assign_loc~,
     loc~,
   )
 }
@@ -1021,8 +1631,24 @@ impl IterVisitor with fn visit_Expr_Interp(env, elems~, loc~) {
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Constraint(env, expr~, ty~, loc~) {
-  IterVisitorBase::visit_Expr_Constraint(env, expr~, ty~, loc~)
+impl IterVisitor with fn visit_Expr_Constraint(
+  env,
+  expr~,
+  ty~,
+  lparen_loc~,
+  colon_loc~,
+  rparen_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Constraint(
+    env,
+    expr~,
+    ty~,
+    lparen_loc~,
+    colon_loc~,
+    rparen_loc~,
+    loc~,
+  )
 }
 
 ///|
@@ -1037,6 +1663,13 @@ impl IterVisitor with fn visit_Expr_While(
   loop_body~,
   while_else~,
   label~,
+  label_colon_loc~,
+  while_loc~,
+  body_lbrace_loc~,
+  body_rbrace_loc~,
+  nobreak_loc~,
+  nobreak_lbrace_loc~,
+  nobreak_rbrace_loc~,
   loc~,
 ) {
   IterVisitorBase::visit_Expr_While(
@@ -1045,6 +1678,13 @@ impl IterVisitor with fn visit_Expr_While(
     loop_body~,
     while_else~,
     label~,
+    label_colon_loc~,
+    while_loc~,
+    body_lbrace_loc~,
+    body_rbrace_loc~,
+    nobreak_loc~,
+    nobreak_lbrace_loc~,
+    nobreak_rbrace_loc~,
     loc~,
   )
 }
@@ -1060,48 +1700,181 @@ impl IterVisitor with fn visit_Expr_Ident(env, id~, loc~) {
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_If(env, cond~, ifso~, ifnot~, loc~) {
-  IterVisitorBase::visit_Expr_If(env, cond~, ifso~, ifnot~, loc~)
+impl IterVisitor with fn visit_Expr_If(
+  env,
+  cond~,
+  ifso~,
+  ifnot~,
+  if_loc~,
+  then_lbrace_loc~,
+  then_rbrace_loc~,
+  else_loc~,
+  else_lbrace_loc~,
+  else_rbrace_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_If(
+    env,
+    cond~,
+    ifso~,
+    ifnot~,
+    if_loc~,
+    then_lbrace_loc~,
+    then_rbrace_loc~,
+    else_loc~,
+    else_lbrace_loc~,
+    else_rbrace_loc~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Guard(env, cond~, otherwise~, body~, loc~) {
-  IterVisitorBase::visit_Expr_Guard(env, cond~, otherwise~, body~, loc~)
+impl IterVisitor with fn visit_Expr_Guard(
+  env,
+  cond~,
+  otherwise~,
+  body~,
+  guard_loc~,
+  else_loc~,
+  else_lbrace_loc~,
+  else_rbrace_loc~,
+  semi_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Guard(
+    env,
+    cond~,
+    otherwise~,
+    body~,
+    guard_loc~,
+    else_loc~,
+    else_lbrace_loc~,
+    else_rbrace_loc~,
+    semi_loc~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Is(env, expr~, pat~, loc~) {
-  IterVisitorBase::visit_Expr_Is(env, expr~, pat~, loc~)
+impl IterVisitor with fn visit_Expr_Is(env, expr~, pat~, is_loc~, loc~) {
+  IterVisitorBase::visit_Expr_Is(env, expr~, pat~, is_loc~, loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Defer(env, expr~, body~, loc~) {
-  IterVisitorBase::visit_Expr_Defer(env, expr~, body~, loc~)
+impl IterVisitor with fn visit_Expr_Defer(
+  env,
+  expr~,
+  body~,
+  defer_loc~,
+  semi_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Defer(
+    env,
+    expr~,
+    body~,
+    defer_loc~,
+    semi_loc~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_LetFn(env, name~, func~, body~, loc~) {
-  IterVisitorBase::visit_Expr_LetFn(env, name~, func~, body~, loc~)
+impl IterVisitor with fn visit_Expr_LetFn(
+  env,
+  name~,
+  func~,
+  body~,
+  semi_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_LetFn(env, name~, func~, body~, semi_loc~, loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_LetAnd(env, bindings~, body~, loc~) {
-  IterVisitorBase::visit_Expr_LetAnd(env, bindings~, body~, loc~)
+impl IterVisitor with fn visit_Expr_LetAnd(
+  env,
+  bindings~,
+  body~,
+  letrec_loc~,
+  and_locs~,
+  equal_locs~,
+  annot_colon_locs~,
+  semi_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_LetAnd(
+    env,
+    bindings~,
+    body~,
+    letrec_loc~,
+    and_locs~,
+    equal_locs~,
+    annot_colon_locs~,
+    semi_loc~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Let(env, pattern~, expr~, body~, loc~) {
-  IterVisitorBase::visit_Expr_Let(env, pattern~, expr~, body~, loc~)
+impl IterVisitor with fn visit_Expr_Let(
+  env,
+  pattern~,
+  expr~,
+  body~,
+  let_loc~,
+  annot_colon_loc~,
+  equal_loc~,
+  semi_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Let(
+    env,
+    pattern~,
+    expr~,
+    body~,
+    let_loc~,
+    annot_colon_loc~,
+    equal_loc~,
+    semi_loc~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Sequence(env, exprs~, last_expr~, loc~) {
-  IterVisitorBase::visit_Expr_Sequence(env, exprs~, last_expr~, loc~)
+impl IterVisitor with fn visit_Expr_Sequence(
+  env,
+  exprs~,
+  last_expr~,
+  semi_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Sequence(
+    env,
+    exprs~,
+    last_expr~,
+    semi_locs~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Tuple(env, exprs~, loc~) {
-  IterVisitorBase::visit_Expr_Tuple(env, exprs~, loc~)
+impl IterVisitor with fn visit_Expr_Tuple(
+  env,
+  exprs~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Tuple(
+    env,
+    exprs~,
+    lparen_loc~,
+    rparen_loc~,
+    comma_locs~,
+    loc~,
+  )
 }
 
 ///|
@@ -1110,9 +1883,25 @@ impl IterVisitor with fn visit_Expr_Record(
   type_name~,
   fields~,
   trailing~,
+  coloncolon_loc~,
+  lbrace_loc~,
+  rbrace_loc~,
+  comma_locs~,
+  semi_locs~,
   loc~,
 ) {
-  IterVisitorBase::visit_Expr_Record(env, type_name~, fields~, trailing~, loc~)
+  IterVisitorBase::visit_Expr_Record(
+    env,
+    type_name~,
+    fields~,
+    trailing~,
+    coloncolon_loc~,
+    lbrace_loc~,
+    rbrace_loc~,
+    comma_locs~,
+    semi_locs~,
+    loc~,
+  )
 }
 
 ///|
@@ -1121,6 +1910,11 @@ impl IterVisitor with fn visit_Expr_RecordUpdate(
   type_name~,
   record~,
   fields~,
+  coloncolon_loc~,
+  lbrace_loc~,
+  dotdot_loc~,
+  rbrace_loc~,
+  comma_locs~,
   loc~,
 ) {
   IterVisitorBase::visit_Expr_RecordUpdate(
@@ -1128,6 +1922,11 @@ impl IterVisitor with fn visit_Expr_RecordUpdate(
     type_name~,
     record~,
     fields~,
+    coloncolon_loc~,
+    lbrace_loc~,
+    dotdot_loc~,
+    rbrace_loc~,
+    comma_locs~,
     loc~,
   )
 }
@@ -1138,8 +1937,20 @@ impl IterVisitor with fn visit_Expr_Field(env, record~, accessor~, loc~) {
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Method(env, type_name~, method_name~, loc~) {
-  IterVisitorBase::visit_Expr_Method(env, type_name~, method_name~, loc~)
+impl IterVisitor with fn visit_Expr_Method(
+  env,
+  type_name~,
+  method_name~,
+  coloncolon_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Method(
+    env,
+    type_name~,
+    method_name~,
+    coloncolon_loc~,
+    loc~,
+  )
 }
 
 ///|
@@ -1149,6 +1960,10 @@ impl IterVisitor with fn visit_Expr_DotApply(
   method_name~,
   args~,
   return_self~,
+  dot_loc~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
   loc~,
 ) {
   IterVisitorBase::visit_Expr_DotApply(
@@ -1157,13 +1972,17 @@ impl IterVisitor with fn visit_Expr_DotApply(
     method_name~,
     args~,
     return_self~,
+    dot_loc~,
+    lparen_loc~,
+    rparen_loc~,
+    comma_locs~,
     loc~,
   )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_As(env, expr~, trait_~, loc~) {
-  IterVisitorBase::visit_Expr_As(env, expr~, trait_~, loc~)
+impl IterVisitor with fn visit_Expr_As(env, expr~, trait_~, as_loc~, loc~) {
+  IterVisitorBase::visit_Expr_As(env, expr~, trait_~, as_loc~, loc~)
 }
 
 ///|
@@ -1173,6 +1992,8 @@ impl IterVisitor with fn visit_Expr_Mutate(
   accessor~,
   field~,
   augmented_by~,
+  equal_loc~,
+  augmented_assign_loc~,
   loc~,
 ) {
   IterVisitorBase::visit_Expr_Mutate(
@@ -1181,13 +2002,33 @@ impl IterVisitor with fn visit_Expr_Mutate(
     accessor~,
     field~,
     augmented_by~,
+    equal_loc~,
+    augmented_assign_loc~,
     loc~,
   )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Match(env, expr~, cases~, match_loc~, loc~) {
-  IterVisitorBase::visit_Expr_Match(env, expr~, cases~, match_loc~, loc~)
+impl IterVisitor with fn visit_Expr_Match(
+  env,
+  expr~,
+  cases~,
+  match_loc~,
+  lbrace_loc~,
+  rbrace_loc~,
+  semi_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Match(
+    env,
+    expr~,
+    cases~,
+    match_loc~,
+    lbrace_loc~,
+    rbrace_loc~,
+    semi_locs~,
+    loc~,
+  )
 }
 
 ///|
@@ -1197,14 +2038,31 @@ impl IterVisitor with fn visit_Expr_LetMut(
   ty~,
   expr~,
   body~,
+  let_loc~,
+  mut_loc~,
+  annot_colon_loc~,
+  equal_loc~,
+  semi_loc~,
   loc~,
 ) {
-  IterVisitorBase::visit_Expr_LetMut(env, binder~, ty~, expr~, body~, loc~)
+  IterVisitorBase::visit_Expr_LetMut(
+    env,
+    binder~,
+    ty~,
+    expr~,
+    body~,
+    let_loc~,
+    mut_loc~,
+    annot_colon_loc~,
+    equal_loc~,
+    semi_loc~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Pipe(env, lhs~, rhs~, loc~) {
-  IterVisitorBase::visit_Expr_Pipe(env, lhs~, rhs~, loc~)
+impl IterVisitor with fn visit_Expr_Pipe(env, lhs~, rhs~, pipe_loc~, loc~) {
+  IterVisitorBase::visit_Expr_Pipe(env, lhs~, rhs~, pipe_loc~, loc~)
 }
 
 ///|
@@ -1213,9 +2071,19 @@ impl IterVisitor with fn visit_Expr_Assign(
   var_~,
   expr~,
   augmented_by~,
+  equal_loc~,
+  augmented_assign_loc~,
   loc~,
 ) {
-  IterVisitorBase::visit_Expr_Assign(env, var_~, expr~, augmented_by~, loc~)
+  IterVisitorBase::visit_Expr_Assign(
+    env,
+    var_~,
+    expr~,
+    augmented_by~,
+    equal_loc~,
+    augmented_assign_loc~,
+    loc~,
+  )
 }
 
 ///|
@@ -1224,28 +2092,69 @@ impl IterVisitor with fn visit_Expr_Hole(env, loc~, kind~) {
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Return(env, return_value~, loc~) {
-  IterVisitorBase::visit_Expr_Return(env, return_value~, loc~)
+impl IterVisitor with fn visit_Expr_Return(
+  env,
+  return_value~,
+  return_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Return(env, return_value~, return_loc~, loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Raise(env, err_value~, loc~) {
-  IterVisitorBase::visit_Expr_Raise(env, err_value~, loc~)
+impl IterVisitor with fn visit_Expr_Raise(env, err_value~, raise_loc~, loc~) {
+  IterVisitorBase::visit_Expr_Raise(env, err_value~, raise_loc~, loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Unit(env, loc~, faked~) {
-  IterVisitorBase::visit_Expr_Unit(env, loc~, faked~)
+impl IterVisitor with fn visit_Expr_Unit(
+  env,
+  loc~,
+  faked~,
+  lparen_loc~,
+  rparen_loc~,
+) {
+  IterVisitorBase::visit_Expr_Unit(env, loc~, faked~, lparen_loc~, rparen_loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Break(env, arg~, label~, loc~) {
-  IterVisitorBase::visit_Expr_Break(env, arg~, label~, loc~)
+impl IterVisitor with fn visit_Expr_Break(
+  env,
+  arg~,
+  label~,
+  break_loc~,
+  post_label_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Break(
+    env,
+    arg~,
+    label~,
+    break_loc~,
+    post_label_loc~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Continue(env, args~, label~, loc~) {
-  IterVisitorBase::visit_Expr_Continue(env, args~, label~, loc~)
+impl IterVisitor with fn visit_Expr_Continue(
+  env,
+  args~,
+  label~,
+  continue_loc~,
+  post_label_loc~,
+  comma_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Continue(
+    env,
+    args~,
+    label~,
+    continue_loc~,
+    post_label_loc~,
+    comma_locs~,
+    loc~,
+  )
 }
 
 ///|
@@ -1257,6 +2166,18 @@ impl IterVisitor with fn visit_Expr_For(
   body~,
   for_else~,
   label~,
+  label_colon_loc~,
+  for_loc~,
+  binder_comma_locs~,
+  binder_equal_locs~,
+  semi_locs~,
+  continue_comma_locs~,
+  continue_equal_locs~,
+  body_lbrace_loc~,
+  body_rbrace_loc~,
+  nobreak_loc~,
+  nobreak_lbrace_loc~,
+  nobreak_rbrace_loc~,
   loc~,
   where_clause~,
 ) {
@@ -1268,6 +2189,18 @@ impl IterVisitor with fn visit_Expr_For(
     body~,
     for_else~,
     label~,
+    label_colon_loc~,
+    for_loc~,
+    binder_comma_locs~,
+    binder_equal_locs~,
+    semi_locs~,
+    continue_comma_locs~,
+    continue_equal_locs~,
+    body_lbrace_loc~,
+    body_rbrace_loc~,
+    nobreak_loc~,
+    nobreak_lbrace_loc~,
+    nobreak_rbrace_loc~,
     loc~,
     where_clause~,
   )
@@ -1284,6 +2217,20 @@ impl IterVisitor with fn visit_Expr_ForEach(
   else_block~,
   where_clause~,
   label~,
+  label_colon_loc~,
+  for_loc~,
+  binder_comma_locs~,
+  in_loc~,
+  semi_locs~,
+  init_comma_locs~,
+  init_equal_locs~,
+  continue_comma_locs~,
+  continue_equal_locs~,
+  body_lbrace_loc~,
+  body_rbrace_loc~,
+  nobreak_loc~,
+  nobreak_lbrace_loc~,
+  nobreak_rbrace_loc~,
   loc~,
 ) {
   IterVisitorBase::visit_Expr_ForEach(
@@ -1296,6 +2243,20 @@ impl IterVisitor with fn visit_Expr_ForEach(
     else_block~,
     where_clause~,
     label~,
+    label_colon_loc~,
+    for_loc~,
+    binder_comma_locs~,
+    in_loc~,
+    semi_locs~,
+    init_comma_locs~,
+    init_equal_locs~,
+    continue_comma_locs~,
+    continue_equal_locs~,
+    body_lbrace_loc~,
+    body_rbrace_loc~,
+    nobreak_loc~,
+    nobreak_lbrace_loc~,
+    nobreak_rbrace_loc~,
     loc~,
   )
 }
@@ -1310,6 +2271,12 @@ impl IterVisitor with fn visit_Expr_Try(
   try_loc~,
   catch_loc~,
   else_loc~,
+  catch_lbrace_loc~,
+  catch_rbrace_loc~,
+  catch_semi_locs~,
+  noraise_lbrace_loc~,
+  noraise_rbrace_loc~,
+  noraise_semi_locs~,
   loc~,
 ) {
   IterVisitorBase::visit_Expr_Try(
@@ -1321,6 +2288,12 @@ impl IterVisitor with fn visit_Expr_Try(
     try_loc~,
     catch_loc~,
     else_loc~,
+    catch_lbrace_loc~,
+    catch_rbrace_loc~,
+    catch_semi_locs~,
+    noraise_lbrace_loc~,
+    noraise_rbrace_loc~,
+    noraise_semi_locs~,
     loc~,
   )
 }
@@ -1337,13 +2310,41 @@ impl IterVisitor with fn visit_Expr_TryOperator(
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Map(env, elems~, loc~) {
-  IterVisitorBase::visit_Expr_Map(env, elems~, loc~)
+impl IterVisitor with fn visit_Expr_Map(
+  env,
+  elems~,
+  lbrace_loc~,
+  rbrace_loc~,
+  comma_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Map(
+    env,
+    elems~,
+    lbrace_loc~,
+    rbrace_loc~,
+    comma_locs~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Group(env, expr~, group~, loc~) {
-  IterVisitorBase::visit_Expr_Group(env, expr~, group~, loc~)
+impl IterVisitor with fn visit_Expr_Group(
+  env,
+  expr~,
+  group~,
+  left_delim_loc~,
+  right_delim_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_Group(
+    env,
+    expr~,
+    group~,
+    left_delim_loc~,
+    right_delim_loc~,
+    loc~,
+  )
 }
 
 ///|
@@ -1392,8 +2393,14 @@ impl IterVisitor with fn visit_LongIdent_Ident(env, name~) {
 }
 
 ///|
-impl IterVisitor with fn visit_LongIdent_Dot(env, pkg~, id~) {
-  IterVisitorBase::visit_LongIdent_Dot(env, pkg~, id~)
+impl IterVisitor with fn visit_LongIdent_Dot(
+  env,
+  pkg~,
+  id~,
+  pkg_loc~,
+  dot_id_loc~,
+) {
+  IterVisitorBase::visit_LongIdent_Dot(env, pkg~, id~, pkg_loc~, dot_id_loc~)
 }
 
 ///|
@@ -1423,19 +2430,64 @@ impl IterVisitor with fn visit_Type_Arrow(
   res~,
   err~,
   is_async~,
+  lparen_loc~,
+  rparen_loc~,
+  arrow_loc~,
+  comma_locs~,
   loc~,
 ) {
-  IterVisitorBase::visit_Type_Arrow(env, args~, res~, err~, is_async~, loc~)
+  IterVisitorBase::visit_Type_Arrow(
+    env,
+    args~,
+    res~,
+    err~,
+    is_async~,
+    lparen_loc~,
+    rparen_loc~,
+    arrow_loc~,
+    comma_locs~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Type_Tuple(env, tys~, loc~) {
-  IterVisitorBase::visit_Type_Tuple(env, tys~, loc~)
+impl IterVisitor with fn visit_Type_Tuple(
+  env,
+  tys~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Type_Tuple(
+    env,
+    tys~,
+    lparen_loc~,
+    rparen_loc~,
+    comma_locs~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Type_Name(env, constr_id~, tys~, loc~) {
-  IterVisitorBase::visit_Type_Name(env, constr_id~, tys~, loc~)
+impl IterVisitor with fn visit_Type_Name(
+  env,
+  constr_id~,
+  tys~,
+  type_args_lbracket_loc~,
+  type_args_rbracket_loc~,
+  type_arg_comma_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Type_Name(
+    env,
+    constr_id~,
+    tys~,
+    type_args_lbracket_loc~,
+    type_args_rbracket_loc~,
+    type_arg_comma_locs~,
+    loc~,
+  )
 }
 
 ///|
@@ -1444,8 +2496,8 @@ impl IterVisitor with fn visit_Type_Option(env, ty~, loc~, question_loc~) {
 }
 
 ///|
-impl IterVisitor with fn visit_Type_Object(env, constr_id) {
-  IterVisitorBase::visit_Type_Object(env, constr_id)
+impl IterVisitor with fn visit_Type_Object(env, constr_id~, amp_loc~, loc~) {
+  IterVisitorBase::visit_Type_Object(env, constr_id~, amp_loc~, loc~)
 }
 
 ///|
@@ -1454,8 +2506,8 @@ impl IterVisitor with fn visit_ErrorType(env, error_type) {
 }
 
 ///|
-impl IterVisitor with fn visit_ErrorType_ErrorType(env, ty~) {
-  IterVisitorBase::visit_ErrorType_ErrorType(env, ty~)
+impl IterVisitor with fn visit_ErrorType_ErrorType(env, ty~, raise_loc~, loc~) {
+  IterVisitorBase::visit_ErrorType_ErrorType(env, ty~, raise_loc~, loc~)
 }
 
 ///|
@@ -1469,8 +2521,20 @@ impl IterVisitor with fn visit_ErrorType_Noraise(env, loc~) {
 }
 
 ///|
-impl IterVisitor with fn visit_ErrorType_MaybeError(env, ty~) {
-  IterVisitorBase::visit_ErrorType_MaybeError(env, ty~)
+impl IterVisitor with fn visit_ErrorType_MaybeError(
+  env,
+  ty~,
+  raise_loc~,
+  question_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_ErrorType_MaybeError(
+    env,
+    ty~,
+    raise_loc~,
+    question_loc~,
+    loc~,
+  )
 }
 
 ///|
@@ -1489,8 +2553,20 @@ impl IterVisitor with fn visit_ExceptionDecl(env, exception_decl) {
 }
 
 ///|
-impl IterVisitor with fn visit_ExceptionDecl_EnumPayload(env, constr_decls) {
-  IterVisitorBase::visit_ExceptionDecl_EnumPayload(env, constr_decls)
+impl IterVisitor with fn visit_ExceptionDecl_EnumPayload(
+  env,
+  constrs~,
+  lbrace_loc~,
+  rbrace_loc~,
+  semi_locs~,
+) {
+  IterVisitorBase::visit_ExceptionDecl_EnumPayload(
+    env,
+    constrs~,
+    lbrace_loc~,
+    rbrace_loc~,
+    semi_locs~,
+  )
 }
 
 ///|
@@ -1514,23 +2590,61 @@ impl IterVisitor with fn visit_TypeDesc_Error(env, exception_decl) {
 }
 
 ///|
-impl IterVisitor with fn visit_TypeDesc_Variant(env, constr_decls) {
-  IterVisitorBase::visit_TypeDesc_Variant(env, constr_decls)
+impl IterVisitor with fn visit_TypeDesc_Variant(
+  env,
+  constrs~,
+  lbrace_loc~,
+  rbrace_loc~,
+  semi_locs~,
+) {
+  IterVisitorBase::visit_TypeDesc_Variant(
+    env,
+    constrs~,
+    lbrace_loc~,
+    rbrace_loc~,
+    semi_locs~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_TypeDesc_Record(env, fields~, constr_decl~) {
-  IterVisitorBase::visit_TypeDesc_Record(env, fields~, constr_decl~)
+impl IterVisitor with fn visit_TypeDesc_Record(
+  env,
+  fields~,
+  constr_decl~,
+  lbrace_loc~,
+  rbrace_loc~,
+  semi_locs~,
+) {
+  IterVisitorBase::visit_TypeDesc_Record(
+    env,
+    fields~,
+    constr_decl~,
+    lbrace_loc~,
+    rbrace_loc~,
+    semi_locs~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_TypeDesc_TupleStruct(env, types) {
-  IterVisitorBase::visit_TypeDesc_TupleStruct(env, types)
+impl IterVisitor with fn visit_TypeDesc_TupleStruct(
+  env,
+  types~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
+) {
+  IterVisitorBase::visit_TypeDesc_TupleStruct(
+    env,
+    types~,
+    lparen_loc~,
+    rparen_loc~,
+    comma_locs~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_TypeDesc_Alias(env, type_) {
-  IterVisitorBase::visit_TypeDesc_Alias(env, type_)
+impl IterVisitor with fn visit_TypeDesc_Alias(env, type_~, equal_loc~) {
+  IterVisitorBase::visit_TypeDesc_Alias(env, type_~, equal_loc~)
 }
 
 ///|
@@ -1544,8 +2658,8 @@ impl IterVisitor with fn visit_ArgumentKind(env, argument_kind) {
 }
 
 ///|
-impl IterVisitor with fn visit_ArgumentKind_Labelled(env, label) {
-  IterVisitorBase::visit_ArgumentKind_Labelled(env, label)
+impl IterVisitor with fn visit_ArgumentKind_Labelled(env, label~, equal_loc~) {
+  IterVisitorBase::visit_ArgumentKind_Labelled(env, label~, equal_loc~)
 }
 
 ///|
@@ -1558,8 +2672,14 @@ impl IterVisitor with fn visit_ArgumentKind_LabelledOption(
   env,
   label~,
   question_loc~,
+  equal_loc~,
 ) {
-  IterVisitorBase::visit_ArgumentKind_LabelledOption(env, label~, question_loc~)
+  IterVisitorBase::visit_ArgumentKind_LabelledOption(
+    env,
+    label~,
+    question_loc~,
+    equal_loc~,
+  )
 }
 
 ///|
@@ -1621,13 +2741,31 @@ impl IterVisitor with fn visit_ConstructorExtraInfo(env, constructor_extra_info)
 }
 
 ///|
-impl IterVisitor with fn visit_ConstructorExtraInfo_TypeName(env, type_name) {
-  IterVisitorBase::visit_ConstructorExtraInfo_TypeName(env, type_name)
+impl IterVisitor with fn visit_ConstructorExtraInfo_TypeName(
+  env,
+  type_name~,
+  coloncolon_loc~,
+) {
+  IterVisitorBase::visit_ConstructorExtraInfo_TypeName(
+    env,
+    type_name~,
+    coloncolon_loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_ConstructorExtraInfo_Package(env, package_) {
-  IterVisitorBase::visit_ConstructorExtraInfo_Package(env, package_)
+impl IterVisitor with fn visit_ConstructorExtraInfo_Package(
+  env,
+  pkg~,
+  pkg_loc~,
+  dot_constr_loc~,
+) {
+  IterVisitorBase::visit_ConstructorExtraInfo_Package(
+    env,
+    pkg~,
+    pkg_loc~,
+    dot_constr_loc~,
+  )
 }
 
 ///|
@@ -1671,28 +2809,80 @@ impl IterVisitor with fn visit_Parameter(env, parameter) {
 }
 
 ///|
-impl IterVisitor with fn visit_Parameter_DiscardPositional(env, ty~, loc~) {
-  IterVisitorBase::visit_Parameter_DiscardPositional(env, ty~, loc~)
+impl IterVisitor with fn visit_Parameter_DiscardPositional(
+  env,
+  ty~,
+  colon_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Parameter_DiscardPositional(env, ty~, colon_loc~, loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_Parameter_Positional(env, binder~, ty~) {
-  IterVisitorBase::visit_Parameter_Positional(env, binder~, ty~)
+impl IterVisitor with fn visit_Parameter_Positional(
+  env,
+  binder~,
+  ty~,
+  colon_loc~,
+) {
+  IterVisitorBase::visit_Parameter_Positional(env, binder~, ty~, colon_loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_Parameter_Labelled(env, binder~, ty~) {
-  IterVisitorBase::visit_Parameter_Labelled(env, binder~, ty~)
+impl IterVisitor with fn visit_Parameter_Labelled(
+  env,
+  binder~,
+  ty~,
+  post_label_loc~,
+  colon_loc~,
+) {
+  IterVisitorBase::visit_Parameter_Labelled(
+    env,
+    binder~,
+    ty~,
+    post_label_loc~,
+    colon_loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Parameter_Optional(env, binder~, default~, ty~) {
-  IterVisitorBase::visit_Parameter_Optional(env, binder~, default~, ty~)
+impl IterVisitor with fn visit_Parameter_Optional(
+  env,
+  binder~,
+  default~,
+  ty~,
+  post_label_loc~,
+  question_loc~,
+  colon_loc~,
+  equal_loc~,
+) {
+  IterVisitorBase::visit_Parameter_Optional(
+    env,
+    binder~,
+    default~,
+    ty~,
+    post_label_loc~,
+    question_loc~,
+    colon_loc~,
+    equal_loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Parameter_QuestionOptional(env, binder~, ty~) {
-  IterVisitorBase::visit_Parameter_QuestionOptional(env, binder~, ty~)
+impl IterVisitor with fn visit_Parameter_QuestionOptional(
+  env,
+  binder~,
+  ty~,
+  question_loc~,
+  colon_loc~,
+) {
+  IterVisitorBase::visit_Parameter_QuestionOptional(
+    env,
+    binder~,
+    ty~,
+    question_loc~,
+    colon_loc~,
+  )
 }
 
 ///|
@@ -1711,8 +2901,13 @@ impl IterVisitor with fn visit_SpreadableElem_Regular(env, expr) {
 }
 
 ///|
-impl IterVisitor with fn visit_SpreadableElem_Spread(env, expr~, loc~) {
-  IterVisitorBase::visit_SpreadableElem_Spread(env, expr~, loc~)
+impl IterVisitor with fn visit_SpreadableElem_Spread(
+  env,
+  expr~,
+  dotdot_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_SpreadableElem_Spread(env, expr~, dotdot_loc~, loc~)
 }
 
 ///|
@@ -1781,13 +2976,41 @@ impl IterVisitor with fn visit_DotDotBinder(env, dot_dot_binder) {
 }
 
 ///|
-impl IterVisitor with fn visit_DotDotBinder_BinderAs(env, binder) {
-  IterVisitorBase::visit_DotDotBinder_BinderAs(env, binder)
+impl IterVisitor with fn visit_DotDotBinder_Underscore(
+  env,
+  dotdot_loc~,
+  underscore_loc~,
+) {
+  IterVisitorBase::visit_DotDotBinder_Underscore(
+    env,
+    dotdot_loc~,
+    underscore_loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_DotDotBinder_Binder(env, binder) {
-  IterVisitorBase::visit_DotDotBinder_Binder(env, binder)
+impl IterVisitor with fn visit_DotDotBinder_NoBinder(env, dotdot_loc~) {
+  IterVisitorBase::visit_DotDotBinder_NoBinder(env, dotdot_loc~)
+}
+
+///|
+impl IterVisitor with fn visit_DotDotBinder_BinderAs(
+  env,
+  binder~,
+  dotdot_loc~,
+  as_loc~,
+) {
+  IterVisitorBase::visit_DotDotBinder_BinderAs(
+    env,
+    binder~,
+    dotdot_loc~,
+    as_loc~,
+  )
+}
+
+///|
+impl IterVisitor with fn visit_DotDotBinder_Binder(env, binder~, dotdot_loc~) {
+  IterVisitorBase::visit_DotDotBinder_Binder(env, binder~, dotdot_loc~)
 }
 
 ///|
@@ -1801,13 +3024,28 @@ impl IterVisitor with fn visit_ArrayPattern_Pattern(env, pattern) {
 }
 
 ///|
-impl IterVisitor with fn visit_ArrayPattern_StringSpread(env, str~, loc~) {
-  IterVisitorBase::visit_ArrayPattern_StringSpread(env, str~, loc~)
+impl IterVisitor with fn visit_ArrayPattern_StringSpread(
+  env,
+  str~,
+  dotdot_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_ArrayPattern_StringSpread(env, str~, dotdot_loc~, loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_ArrayPattern_BytesSpread(env, bytes~, loc~) {
-  IterVisitorBase::visit_ArrayPattern_BytesSpread(env, bytes~, loc~)
+impl IterVisitor with fn visit_ArrayPattern_BytesSpread(
+  env,
+  bytes~,
+  dotdot_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_ArrayPattern_BytesSpread(
+    env,
+    bytes~,
+    dotdot_loc~,
+    loc~,
+  )
 }
 
 ///|
@@ -1815,9 +3053,20 @@ impl IterVisitor with fn visit_ArrayPattern_ConstSpread(
   env,
   binder~,
   pkg~,
+  dotdot_loc~,
+  pkg_loc~,
+  dot_uident_loc~,
   loc~,
 ) {
-  IterVisitorBase::visit_ArrayPattern_ConstSpread(env, binder~, pkg~, loc~)
+  IterVisitorBase::visit_ArrayPattern_ConstSpread(
+    env,
+    binder~,
+    pkg~,
+    dotdot_loc~,
+    pkg_loc~,
+    dot_uident_loc~,
+    loc~,
+  )
 }
 
 ///|
@@ -1826,8 +3075,12 @@ impl IterVisitor with fn visit_ArrayPatterns(env, array_patterns) {
 }
 
 ///|
-impl IterVisitor with fn visit_ArrayPatterns_Closed(env, array_patterns) {
-  IterVisitorBase::visit_ArrayPatterns_Closed(env, array_patterns)
+impl IterVisitor with fn visit_ArrayPatterns_Closed(
+  env,
+  array_patterns,
+  comma_locs~,
+) {
+  IterVisitorBase::visit_ArrayPatterns_Closed(env, array_patterns, comma_locs~)
 }
 
 ///|
@@ -1836,9 +3089,18 @@ impl IterVisitor with fn visit_ArrayPatterns_Open(
   prefix_patterns,
   suffix_patterns,
   dot_dot_binder,
+  left_comma_locs~,
+  dotdot_comma_loc~,
+  right_comma_locs~,
 ) {
   IterVisitorBase::visit_ArrayPatterns_Open(
-    env, prefix_patterns, suffix_patterns, dot_dot_binder,
+    env,
+    prefix_patterns,
+    suffix_patterns,
+    dot_dot_binder,
+    left_comma_locs~,
+    dotdot_comma_loc~,
+    right_comma_locs~,
   )
 }
 
@@ -1873,8 +3135,8 @@ impl IterVisitor with fn visit_Pattern(env, pattern) {
 }
 
 ///|
-impl IterVisitor with fn visit_Pattern_Alias(env, pat~, alias_~, loc~) {
-  IterVisitorBase::visit_Pattern_Alias(env, pat~, alias_~, loc~)
+impl IterVisitor with fn visit_Pattern_Alias(env, pat~, alias_~, as_loc~, loc~) {
+  IterVisitorBase::visit_Pattern_Alias(env, pat~, alias_~, as_loc~, loc~)
 }
 
 ///|
@@ -1883,8 +3145,20 @@ impl IterVisitor with fn visit_Pattern_Any(env, loc~) {
 }
 
 ///|
-impl IterVisitor with fn visit_Pattern_Array(env, pats~, loc~) {
-  IterVisitorBase::visit_Pattern_Array(env, pats~, loc~)
+impl IterVisitor with fn visit_Pattern_Array(
+  env,
+  pats~,
+  lbracket_loc~,
+  rbracket_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Pattern_Array(
+    env,
+    pats~,
+    lbracket_loc~,
+    rbracket_loc~,
+    loc~,
+  )
 }
 
 ///|
@@ -1893,8 +3167,24 @@ impl IterVisitor with fn visit_Pattern_Constant(env, c~, loc~) {
 }
 
 ///|
-impl IterVisitor with fn visit_Pattern_Constraint(env, pat~, ty~, loc~) {
-  IterVisitorBase::visit_Pattern_Constraint(env, pat~, ty~, loc~)
+impl IterVisitor with fn visit_Pattern_Constraint(
+  env,
+  pat~,
+  ty~,
+  lparen_loc~,
+  colon_loc~,
+  rparen_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Pattern_Constraint(
+    env,
+    pat~,
+    ty~,
+    lparen_loc~,
+    colon_loc~,
+    rparen_loc~,
+    loc~,
+  )
 }
 
 ///|
@@ -1903,19 +3193,47 @@ impl IterVisitor with fn visit_Pattern_Constr(
   constr~,
   args~,
   is_open~,
+  args_lparen_loc~,
+  args_rparen_loc~,
+  arg_comma_locs~,
+  open_dotdot_loc~,
   loc~,
 ) {
-  IterVisitorBase::visit_Pattern_Constr(env, constr~, args~, is_open~, loc~)
+  IterVisitorBase::visit_Pattern_Constr(
+    env,
+    constr~,
+    args~,
+    is_open~,
+    args_lparen_loc~,
+    args_rparen_loc~,
+    arg_comma_locs~,
+    open_dotdot_loc~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Pattern_Or(env, pat1~, pat2~, loc~) {
-  IterVisitorBase::visit_Pattern_Or(env, pat1~, pat2~, loc~)
+impl IterVisitor with fn visit_Pattern_Or(env, pat1~, pat2~, bar_loc~, loc~) {
+  IterVisitorBase::visit_Pattern_Or(env, pat1~, pat2~, bar_loc~, loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_Pattern_Tuple(env, pats~, loc~) {
-  IterVisitorBase::visit_Pattern_Tuple(env, pats~, loc~)
+impl IterVisitor with fn visit_Pattern_Tuple(
+  env,
+  pats~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Pattern_Tuple(
+    env,
+    pats~,
+    lparen_loc~,
+    rparen_loc~,
+    comma_locs~,
+    loc~,
+  )
 }
 
 ///|
@@ -1924,23 +3242,89 @@ impl IterVisitor with fn visit_Pattern_Var(env, binder) {
 }
 
 ///|
-impl IterVisitor with fn visit_Pattern_Record(env, fields~, is_closed~, loc~) {
-  IterVisitorBase::visit_Pattern_Record(env, fields~, is_closed~, loc~)
+impl IterVisitor with fn visit_Pattern_Record(
+  env,
+  fields~,
+  is_closed~,
+  lbrace_loc~,
+  rbrace_loc~,
+  comma_locs~,
+  dotdot_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Pattern_Record(
+    env,
+    fields~,
+    is_closed~,
+    lbrace_loc~,
+    rbrace_loc~,
+    comma_locs~,
+    dotdot_loc~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Pattern_Map(env, elems~, is_closed~, loc~) {
-  IterVisitorBase::visit_Pattern_Map(env, elems~, is_closed~, loc~)
+impl IterVisitor with fn visit_Pattern_Map(
+  env,
+  elems~,
+  is_closed~,
+  lbrace_loc~,
+  rbrace_loc~,
+  comma_locs~,
+  dotdot_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Pattern_Map(
+    env,
+    elems~,
+    is_closed~,
+    lbrace_loc~,
+    rbrace_loc~,
+    comma_locs~,
+    dotdot_loc~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Pattern_Range(env, lhs~, rhs~, kind~, loc~) {
-  IterVisitorBase::visit_Pattern_Range(env, lhs~, rhs~, kind~, loc~)
+impl IterVisitor with fn visit_Pattern_Range(
+  env,
+  lhs~,
+  rhs~,
+  kind~,
+  range_op_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_Pattern_Range(
+    env,
+    lhs~,
+    rhs~,
+    kind~,
+    range_op_loc~,
+    loc~,
+  )
 }
 
 ///|
-impl IterVisitor with fn visit_Pattern_SpecialConstr(env, binder~, args~, loc~) {
-  IterVisitorBase::visit_Pattern_SpecialConstr(env, binder~, args~, loc~)
+impl IterVisitor with fn visit_Pattern_SpecialConstr(
+  env,
+  binder~,
+  args~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
+  loc~,
+) {
+  IterVisitorBase::visit_Pattern_SpecialConstr(
+    env,
+    binder~,
+    args~,
+    lparen_loc~,
+    rparen_loc~,
+    comma_locs~,
+    loc~,
+  )
 }
 
 ///|
@@ -1964,18 +3348,36 @@ impl IterVisitor with fn visit_FuncStubs_Import(
   module_name~,
   func_name~,
   language~,
+  module_name_loc~,
+  func_name_loc~,
+  language_loc~,
 ) {
   IterVisitorBase::visit_FuncStubs_Import(
     env,
     module_name~,
     func_name~,
     language~,
+    module_name_loc~,
+    func_name_loc~,
+    language_loc~,
   )
 }
 
 ///|
-impl IterVisitor with fn visit_FuncStubs_Embedded(env, language~, code~) {
-  IterVisitorBase::visit_FuncStubs_Embedded(env, language~, code~)
+impl IterVisitor with fn visit_FuncStubs_Embedded(
+  env,
+  language~,
+  code~,
+  language_loc~,
+  code_loc~,
+) {
+  IterVisitorBase::visit_FuncStubs_Embedded(
+    env,
+    language~,
+    code~,
+    language_loc~,
+    code_loc~,
+  )
 }
 
 ///|
@@ -1984,13 +3386,25 @@ impl IterVisitor with fn visit_EmbeddedCode(env, embedded_code) {
 }
 
 ///|
-impl IterVisitor with fn visit_EmbeddedCode_CodeString(env, string_literal) {
-  IterVisitorBase::visit_EmbeddedCode_CodeString(env, string_literal)
+impl IterVisitor with fn visit_EmbeddedCode_CodeString(
+  env,
+  string_literal,
+  loc~,
+) {
+  IterVisitorBase::visit_EmbeddedCode_CodeString(env, string_literal, loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_EmbeddedCode_CodeMultilineString(env, strings) {
-  IterVisitorBase::visit_EmbeddedCode_CodeMultilineString(env, strings)
+impl IterVisitor with fn visit_EmbeddedCode_CodeMultilineString(
+  env,
+  strings,
+  string_locs~,
+) {
+  IterVisitorBase::visit_EmbeddedCode_CodeMultilineString(
+    env,
+    strings,
+    string_locs~,
+  )
 }
 
 ///|
@@ -1999,13 +3413,18 @@ impl IterVisitor with fn visit_DeclBody(env, decl_body) {
 }
 
 ///|
-impl IterVisitor with fn visit_DeclBody_DeclBody(env, expr~) {
-  IterVisitorBase::visit_DeclBody_DeclBody(env, expr~)
+impl IterVisitor with fn visit_DeclBody_DeclBody(
+  env,
+  expr~,
+  lbrace_loc~,
+  rbrace_loc~,
+) {
+  IterVisitorBase::visit_DeclBody_DeclBody(env, expr~, lbrace_loc~, rbrace_loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_DeclBody_DeclStubs(env, func_stubs) {
-  IterVisitorBase::visit_DeclBody_DeclStubs(env, func_stubs)
+impl IterVisitor with fn visit_DeclBody_DeclStubs(env, func_stubs, equal_loc~) {
+  IterVisitorBase::visit_DeclBody_DeclStubs(env, func_stubs, equal_loc~)
 }
 
 ///|
@@ -2030,6 +3449,8 @@ impl IterVisitor with fn visit_Expr_IsLexMatch(
   strategy~,
   pat~,
   pat_loc~,
+  lexmatch_question_loc~,
+  with_loc~,
   loc~,
 ) {
   IterVisitorBase::visit_Expr_IsLexMatch(
@@ -2038,6 +3459,8 @@ impl IterVisitor with fn visit_Expr_IsLexMatch(
     strategy~,
     pat~,
     pat_loc~,
+    lexmatch_question_loc~,
+    with_loc~,
     loc~,
   )
 }
@@ -2048,6 +3471,10 @@ impl IterVisitor with fn visit_Expr_LexMatch(
   strategy~,
   expr~,
   match_loc~,
+  with_loc~,
+  lbrace_loc~,
+  rbrace_loc~,
+  semi_locs~,
   cases~,
   loc~,
 ) {
@@ -2056,6 +3483,10 @@ impl IterVisitor with fn visit_Expr_LexMatch(
     strategy~,
     expr~,
     match_loc~,
+    with_loc~,
+    lbrace_loc~,
+    rbrace_loc~,
+    semi_locs~,
     cases~,
     loc~,
   )
@@ -2107,13 +3538,19 @@ impl IterVisitor with fn visit_LexPattern_ConstantRef(env, lid~, loc~) {
 }
 
 ///|
-impl IterVisitor with fn visit_LexPattern_Alias(env, pat~, binder~, loc~) {
-  IterVisitorBase::visit_LexPattern_Alias(env, pat~, binder~, loc~)
+impl IterVisitor with fn visit_LexPattern_Alias(
+  env,
+  pat~,
+  binder~,
+  as_loc~,
+  loc~,
+) {
+  IterVisitorBase::visit_LexPattern_Alias(env, pat~, binder~, as_loc~, loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_LexPattern_Sequence(env, pats~, loc~) {
-  IterVisitorBase::visit_LexPattern_Sequence(env, pats~, loc~)
+impl IterVisitor with fn visit_LexPattern_Sequence(env, pats~, semi_locs~, loc~) {
+  IterVisitorBase::visit_LexPattern_Sequence(env, pats~, semi_locs~, loc~)
 }
 
 ///|
@@ -2136,6 +3573,20 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
       params_loc~,
       body~,
       vis~,
+      enumview_loc~,
+      type_params_lbracket_loc~,
+      type_params_rbracket_loc~,
+      type_param_comma_locs~,
+      lbrace_loc~,
+      rbrace_loc~,
+      constructor_semi_locs~,
+      for_loc~,
+      with_loc~,
+      params_lparen_loc~,
+      params_rparen_loc~,
+      param_comma_locs~,
+      body_lbrace_loc~,
+      body_rbrace_loc~,
       attrs~,
       loc~,
       doc~
@@ -2151,6 +3602,20 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
         params_loc~,
         body~,
         vis~,
+        enumview_loc~,
+        type_params_lbracket_loc~,
+        type_params_rbracket_loc~,
+        type_param_comma_locs~,
+        lbrace_loc~,
+        rbrace_loc~,
+        constructor_semi_locs~,
+        for_loc~,
+        with_loc~,
+        params_lparen_loc~,
+        params_rparen_loc~,
+        param_comma_locs~,
+        body_lbrace_loc~,
+        body_rbrace_loc~,
         loc~,
         attrs~,
         doc~,
@@ -2165,6 +3630,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
       err_ty~,
       body~,
       vis~,
+      impl_loc~,
+      type_params_lbracket_loc~,
+      type_params_rbracket_loc~,
+      type_param_comma_locs~,
+      for_loc~,
+      with_loc~,
+      fn_loc~,
+      params_lparen_loc~,
+      params_rparen_loc~,
+      param_comma_locs~,
+      return_arrow_loc~,
       loc~,
       attrs~,
       doc~
@@ -2179,6 +3655,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
         err_ty~,
         body~,
         vis~,
+        impl_loc~,
+        type_params_lbracket_loc~,
+        type_params_rbracket_loc~,
+        type_param_comma_locs~,
+        for_loc~,
+        with_loc~,
+        fn_loc~,
+        params_lparen_loc~,
+        params_rparen_loc~,
+        param_comma_locs~,
+        return_arrow_loc~,
         loc~,
         attrs~,
         doc~,
@@ -2190,6 +3677,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
       expr~,
       vis~,
       is_constant~,
+      declare_loc~,
+      let_or_const_loc~,
+      annot_colon_loc~,
+      equal_loc~,
       loc~,
       attrs~,
       doc~,
@@ -2201,20 +3692,50 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
         expr~,
         vis~,
         is_constant~,
+        declare_loc~,
+        let_or_const_loc~,
+        annot_colon_loc~,
+        equal_loc~,
         loc~,
         attrs~,
         doc~,
         is_declare~,
       )
-    TopFuncDef(fun_decl~, decl_body~, where_clause~, loc~) =>
-      env.0.visit_Impl_TopFuncDef(fun_decl~, decl_body~, where_clause~, loc~)
+    TopFuncDef(fun_decl~, decl_body~, where_clause~, equal_loc~, loc~) =>
+      env.0.visit_Impl_TopFuncDef(
+        fun_decl~,
+        decl_body~,
+        where_clause~,
+        equal_loc~,
+        loc~,
+      )
     TopTypeDef(type_decl) => env.0.visit_Impl_TopTypeDef(type_decl)
-    TopTest(expr~, name~, params~, is_async~, loc~, attrs~, doc~) =>
+    TopTest(
+      expr~,
+      name~,
+      params~,
+      is_async~,
+      test_loc~,
+      params_lparen_loc~,
+      params_rparen_loc~,
+      param_comma_locs~,
+      body_lbrace_loc~,
+      body_rbrace_loc~,
+      loc~,
+      attrs~,
+      doc~
+    ) =>
       env.0.visit_Impl_TopTest(
         expr~,
         name~,
         params~,
         is_async~,
+        test_loc~,
+        params_lparen_loc~,
+        params_rparen_loc~,
+        param_comma_locs~,
+        body_lbrace_loc~,
+        body_rbrace_loc~,
         loc~,
         attrs~,
         doc~,
@@ -2227,6 +3748,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
       quantifiers~,
       vis~,
       attrs~,
+      declare_loc~,
+      impl_loc~,
+      type_params_lbracket_loc~,
+      type_params_rbracket_loc~,
+      type_param_comma_locs~,
+      for_loc~,
       loc~,
       doc~,
       is_declare~
@@ -2237,12 +3764,40 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
         quantifiers~,
         vis~,
         attrs~,
+        declare_loc~,
+        impl_loc~,
+        type_params_lbracket_loc~,
+        type_params_rbracket_loc~,
+        type_param_comma_locs~,
+        for_loc~,
         loc~,
         doc~,
         is_declare~,
       )
-    TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~) =>
-      env.0.visit_Impl_TopUsing(pkg~, names~, vis~, attrs~, loc~, doc~)
+    TopUsing(
+      pkg~,
+      names~,
+      vis~,
+      attrs~,
+      using_loc~,
+      lbrace_loc~,
+      rbrace_loc~,
+      comma_locs~,
+      loc~,
+      doc~
+    ) =>
+      env.0.visit_Impl_TopUsing(
+        pkg~,
+        names~,
+        vis~,
+        attrs~,
+        using_loc~,
+        lbrace_loc~,
+        rbrace_loc~,
+        comma_locs~,
+        loc~,
+        doc~,
+      )
   }
 }
 
@@ -2307,7 +3862,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_LongI
 ) {
   match long_ident {
     Ident(name~) => env.0.visit_LongIdent_Ident(name~)
-    Dot(pkg~, id~) => env.0.visit_LongIdent_Dot(pkg~, id~)
+    Dot(pkg~, id~, pkg_loc~, dot_id_loc~) =>
+      env.0.visit_LongIdent_Dot(pkg~, id~, pkg_loc~, dot_id_loc~)
   }
 }
 
@@ -2324,9 +3880,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_LongI
   _,
   pkg~,
   id~,
+  pkg_loc~,
+  dot_id_loc~,
 ) {
   ignore(pkg)
   ignore(id)
+  ignore(pkg_loc)
+  ignore(dot_id_loc)
 }
 
 ///|
@@ -2334,6 +3894,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeN
   env,
   type_name,
 ) {
+  ignore(type_name.object_amp_loc)
   env.0.visit_LongIdent(type_name.name)
 }
 
@@ -2352,14 +3913,50 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Type(
 ) {
   match type_ {
     Any(loc~) => env.0.visit_Type_Any(loc~)
-    Arrow(args~, res~, err~, is_async~, loc~) =>
-      env.0.visit_Type_Arrow(args~, res~, err~, is_async~, loc~)
-    Tuple(tys~, loc~) => env.0.visit_Type_Tuple(tys~, loc~)
-    Name(constr_id~, tys~, loc~) =>
-      env.0.visit_Type_Name(constr_id~, tys~, loc~)
+    Arrow(
+      args~,
+      res~,
+      err~,
+      is_async~,
+      lparen_loc~,
+      rparen_loc~,
+      arrow_loc~,
+      comma_locs~,
+      loc~
+    ) =>
+      env.0.visit_Type_Arrow(
+        args~,
+        res~,
+        err~,
+        is_async~,
+        lparen_loc~,
+        rparen_loc~,
+        arrow_loc~,
+        comma_locs~,
+        loc~,
+      )
+    Tuple(tys~, lparen_loc~, rparen_loc~, comma_locs~, loc~) =>
+      env.0.visit_Type_Tuple(tys~, lparen_loc~, rparen_loc~, comma_locs~, loc~)
+    Name(
+      constr_id~,
+      tys~,
+      type_args_lbracket_loc~,
+      type_args_rbracket_loc~,
+      type_arg_comma_locs~,
+      loc~
+    ) =>
+      env.0.visit_Type_Name(
+        constr_id~,
+        tys~,
+        type_args_lbracket_loc~,
+        type_args_rbracket_loc~,
+        type_arg_comma_locs~,
+        loc~,
+      )
     Option(ty~, loc~, question_loc~) =>
       env.0.visit_Type_Option(ty~, loc~, question_loc~)
-    Object(constr_id) => env.0.visit_Type_Object(constr_id)
+    Object(constr_id~, amp_loc~, loc~) =>
+      env.0.visit_Type_Object(constr_id~, amp_loc~, loc~)
   }
 }
 
@@ -2378,9 +3975,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Type_
   res~,
   err~,
   is_async~,
+  lparen_loc~,
+  rparen_loc~,
+  arrow_loc~,
+  comma_locs~,
   loc~,
 ) {
   ignore(is_async)
+  ignore(lparen_loc)
+  ignore(rparen_loc)
+  ignore(arrow_loc)
+  ignore(comma_locs)
   ignore(loc)
   args.each(x => env.0.visit_Type(x))
   env.0.visit_Type(res)
@@ -2391,8 +3996,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Type_
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Type_Tuple(
   env,
   tys~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
   loc~,
 ) {
+  ignore(lparen_loc)
+  ignore(rparen_loc)
+  ignore(comma_locs)
   ignore(loc)
   tys.each(x => env.0.visit_Type(x))
 }
@@ -2402,8 +4013,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Type_
   env,
   constr_id~,
   tys~,
+  type_args_lbracket_loc~,
+  type_args_rbracket_loc~,
+  type_arg_comma_locs~,
   loc~,
 ) {
+  ignore(type_args_lbracket_loc)
+  ignore(type_args_rbracket_loc)
+  ignore(type_arg_comma_locs)
   ignore(loc)
   env.0.visit_ConstrId(constr_id)
   tys.each(x => env.0.visit_Type(x))
@@ -2424,8 +4041,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Type_
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Type_Object(
   env,
-  constr_id,
+  constr_id~,
+  amp_loc~,
+  loc~,
 ) {
+  ignore(amp_loc)
+  ignore(loc)
   env.0.visit_ConstrId(constr_id)
 }
 
@@ -2435,11 +4056,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Error
   error_type,
 ) {
   match error_type {
-    ErrorType(ty~) => env.0.visit_ErrorType_ErrorType(ty~)
+    ErrorType(ty~, raise_loc~, loc~) =>
+      env.0.visit_ErrorType_ErrorType(ty~, raise_loc~, loc~)
     DefaultErrorType(loc~) => env.0.visit_ErrorType_DefaultErrorType(loc~)
     NoErrorType => ()
     Noraise(loc~) => env.0.visit_ErrorType_Noraise(loc~)
-    MaybeError(ty~) => env.0.visit_ErrorType_MaybeError(ty~)
+    MaybeError(ty~, raise_loc~, question_loc~, loc~) =>
+      env.0.visit_ErrorType_MaybeError(ty~, raise_loc~, question_loc~, loc~)
   }
 }
 
@@ -2447,7 +4070,11 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Error
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_ErrorType_ErrorType(
   env,
   ty~,
+  raise_loc~,
+  loc~,
 ) {
+  ignore(raise_loc)
+  ignore(loc)
   env.0.visit_Type(ty)
 }
 
@@ -2471,7 +4098,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Error
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_ErrorType_MaybeError(
   env,
   ty~,
+  raise_loc~,
+  question_loc~,
+  loc~,
 ) {
+  ignore(raise_loc)
+  ignore(question_loc)
+  ignore(loc)
   env.0.visit_Type(ty)
 }
 
@@ -2500,17 +4133,28 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Excep
 ) {
   match exception_decl {
     NoPayload => ()
-    EnumPayload(constr_decls) =>
-      env.0.visit_ExceptionDecl_EnumPayload(constr_decls)
+    EnumPayload(constrs~, lbrace_loc~, rbrace_loc~, semi_locs~) =>
+      env.0.visit_ExceptionDecl_EnumPayload(
+        constrs~,
+        lbrace_loc~,
+        rbrace_loc~,
+        semi_locs~,
+      )
   }
 }
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_ExceptionDecl_EnumPayload(
   env,
-  constr_decls,
+  constrs~,
+  lbrace_loc~,
+  rbrace_loc~,
+  semi_locs~,
 ) {
-  constr_decls.each(x => env.0.visit_ConstrDecl(x))
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
+  ignore(semi_locs)
+  constrs.each(x => env.0.visit_ConstrDecl(x))
 }
 
 ///|
@@ -2538,18 +4182,35 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeD
 ) {
   match type_desc {
     Abstract => ()
-    ExtensibleEnum(constr_decls) =>
-      constr_decls.each(x => env.0.visit_ConstrDecl(x))
+    ExtensibleEnum(constrs~, ..) => constrs.each(x => env.0.visit_ConstrDecl(x))
     Error(exception_decl) => env.0.visit_TypeDesc_Error(exception_decl)
-    Variant(constr_decls) => env.0.visit_TypeDesc_Variant(constr_decls)
-    ExtendEnum(target~, constructors~) => {
+    Variant(constrs~, lbrace_loc~, rbrace_loc~, semi_locs~) =>
+      env.0.visit_TypeDesc_Variant(
+        constrs~,
+        lbrace_loc~,
+        rbrace_loc~,
+        semi_locs~,
+      )
+    ExtendEnum(target~, constructors~, ..) => {
       env.0.visit_TypeName(target)
       constructors.each(x => env.0.visit_ConstrDecl(x))
     }
-    Record(fields~, constr_decl~) =>
-      env.0.visit_TypeDesc_Record(fields~, constr_decl~)
-    TupleStruct(types) => env.0.visit_TypeDesc_TupleStruct(types)
-    Alias(type_) => env.0.visit_TypeDesc_Alias(type_)
+    Record(fields~, constr_decl~, lbrace_loc~, rbrace_loc~, semi_locs~) =>
+      env.0.visit_TypeDesc_Record(
+        fields~,
+        constr_decl~,
+        lbrace_loc~,
+        rbrace_loc~,
+        semi_locs~,
+      )
+    TupleStruct(types~, lparen_loc~, rparen_loc~, comma_locs~) =>
+      env.0.visit_TypeDesc_TupleStruct(
+        types~,
+        lparen_loc~,
+        rparen_loc~,
+        comma_locs~,
+      )
+    Alias(type_~, equal_loc~) => env.0.visit_TypeDesc_Alias(type_~, equal_loc~)
   }
 }
 
@@ -2564,9 +4225,15 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeD
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeDesc_Variant(
   env,
-  constr_decls,
+  constrs~,
+  lbrace_loc~,
+  rbrace_loc~,
+  semi_locs~,
 ) {
-  constr_decls.each(x => env.0.visit_ConstrDecl(x))
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
+  ignore(semi_locs)
+  constrs.each(x => env.0.visit_ConstrDecl(x))
 }
 
 ///|
@@ -2574,7 +4241,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeD
   env,
   fields~,
   constr_decl~,
+  lbrace_loc~,
+  rbrace_loc~,
+  semi_locs~,
 ) {
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
+  ignore(semi_locs)
   fields.each(x => env.0.visit_FieldDecl(x))
   constr_decl.each(x => env.0.visit_FunDecl(x))
 }
@@ -2582,16 +4255,24 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeD
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeDesc_TupleStruct(
   env,
-  types,
+  types~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
 ) {
+  ignore(lparen_loc)
+  ignore(rparen_loc)
+  ignore(comma_locs)
   types.each(x => env.0.visit_Type(x))
 }
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeDesc_Alias(
   env,
-  type_,
+  type_~,
+  equal_loc~,
 ) {
+  ignore(equal_loc)
   env.0.visit_Type(type_)
 }
 
@@ -2610,10 +4291,11 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Argum
 ) {
   match argument_kind {
     Positional => ()
-    Labelled(label) => env.0.visit_ArgumentKind_Labelled(label)
+    Labelled(label~, equal_loc~) =>
+      env.0.visit_ArgumentKind_Labelled(label~, equal_loc~)
     LabelledPun(label) => env.0.visit_ArgumentKind_LabelledPun(label)
-    LabelledOption(label~, question_loc~) =>
-      env.0.visit_ArgumentKind_LabelledOption(label~, question_loc~)
+    LabelledOption(label~, question_loc~, equal_loc~) =>
+      env.0.visit_ArgumentKind_LabelledOption(label~, question_loc~, equal_loc~)
     LabelledOptionPun(label~, question_loc~) =>
       env.0.visit_ArgumentKind_LabelledOptionPun(label~, question_loc~)
   }
@@ -2622,9 +4304,11 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Argum
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_ArgumentKind_Labelled(
   _,
-  label,
+  label~,
+  equal_loc~,
 ) {
   ignore(label)
+  ignore(equal_loc)
 }
 
 ///|
@@ -2640,9 +4324,11 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Argum
   _,
   label~,
   question_loc~,
+  equal_loc~,
 ) {
   ignore(label)
   ignore(question_loc)
+  ignore(equal_loc)
 }
 
 ///|
@@ -2727,12 +4413,23 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Const
   constructor_extra_info,
 ) {
   match constructor_extra_info {
-    TypeName(type_name) => env.0.visit_ConstructorExtraInfo_TypeName(type_name)
-    TypeNameWithConstrPackage(type_name~, pkg~) => {
+    TypeName(type_name~, coloncolon_loc~) =>
+      env.0.visit_ConstructorExtraInfo_TypeName(type_name~, coloncolon_loc~)
+    TypeNameWithConstrPackage(
+      type_name~,
+      pkg~,
+      coloncolon_loc~,
+      pkg_loc~,
+      dot_constr_loc~
+    ) => {
       env.0.visit_TypeName(type_name)
       ignore(pkg)
+      ignore(coloncolon_loc)
+      ignore(pkg_loc)
+      ignore(dot_constr_loc)
     }
-    Package(package_) => env.0.visit_ConstructorExtraInfo_Package(package_)
+    Package(pkg~, pkg_loc~, dot_constr_loc~) =>
+      env.0.visit_ConstructorExtraInfo_Package(pkg~, pkg_loc~, dot_constr_loc~)
     NoExtraInfo => ()
   }
 }
@@ -2740,16 +4437,23 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Const
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_ConstructorExtraInfo_TypeName(
   env,
-  type_name,
+  type_name~,
+  coloncolon_loc~,
 ) {
   env.0.visit_TypeName(type_name)
+  ignore(coloncolon_loc)
 }
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_ConstructorExtraInfo_Package(
   _,
-  _,
+  pkg~,
+  pkg_loc~,
+  dot_constr_loc~,
 ) {
+  ignore(pkg)
+  ignore(pkg_loc)
+  ignore(dot_constr_loc)
   ()
 }
 
@@ -2823,14 +4527,37 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Param
   parameter,
 ) {
   match parameter {
-    DiscardPositional(ty~, loc~) =>
-      env.0.visit_Parameter_DiscardPositional(ty~, loc~)
-    Positional(binder~, ty~) => env.0.visit_Parameter_Positional(binder~, ty~)
-    Labelled(binder~, ty~) => env.0.visit_Parameter_Labelled(binder~, ty~)
-    Optional(binder~, default~, ty~) =>
-      env.0.visit_Parameter_Optional(binder~, default~, ty~)
-    QuestionOptional(binder~, ty~) =>
-      env.0.visit_Parameter_QuestionOptional(binder~, ty~)
+    DiscardPositional(ty~, colon_loc~, loc~) =>
+      env.0.visit_Parameter_DiscardPositional(ty~, colon_loc~, loc~)
+    Positional(binder~, ty~, colon_loc~) =>
+      env.0.visit_Parameter_Positional(binder~, ty~, colon_loc~)
+    Labelled(binder~, ty~, post_label_loc~, colon_loc~) =>
+      env.0.visit_Parameter_Labelled(binder~, ty~, post_label_loc~, colon_loc~)
+    Optional(
+      binder~,
+      default~,
+      ty~,
+      post_label_loc~,
+      question_loc~,
+      colon_loc~,
+      equal_loc~
+    ) =>
+      env.0.visit_Parameter_Optional(
+        binder~,
+        default~,
+        ty~,
+        post_label_loc~,
+        question_loc~,
+        colon_loc~,
+        equal_loc~,
+      )
+    QuestionOptional(binder~, ty~, question_loc~, colon_loc~) =>
+      env.0.visit_Parameter_QuestionOptional(
+        binder~,
+        ty~,
+        question_loc~,
+        colon_loc~,
+      )
   }
 }
 
@@ -2838,8 +4565,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Param
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Parameter_DiscardPositional(
   env,
   ty~,
+  colon_loc~,
   loc~,
 ) {
+  ignore(colon_loc)
   ignore(loc)
   ty.each(x => env.0.visit_Type(x))
 }
@@ -2849,7 +4578,9 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Param
   env,
   binder~,
   ty~,
+  colon_loc~,
 ) {
+  ignore(colon_loc)
   env.0.visit_Binder(binder)
   ty.each(x => env.0.visit_Type(x))
 }
@@ -2859,9 +4590,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Param
   env,
   binder~,
   ty~,
+  post_label_loc~,
+  colon_loc~,
 ) {
-  ignore(ty)
+  ignore(post_label_loc)
+  ignore(colon_loc)
   env.0.visit_Binder(binder)
+  ty.each(x => env.0.visit_Type(x))
 }
 
 ///|
@@ -2870,7 +4605,15 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Param
   binder~,
   default~,
   ty~,
+  post_label_loc~,
+  question_loc~,
+  colon_loc~,
+  equal_loc~,
 ) {
+  ignore(post_label_loc)
+  ignore(question_loc)
+  ignore(colon_loc)
+  ignore(equal_loc)
   env.0.visit_Binder(binder)
   env.0.visit_Expr(default)
   ty.each(x => env.0.visit_Type(x))
@@ -2881,7 +4624,11 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Param
   env,
   binder~,
   ty~,
+  question_loc~,
+  colon_loc~,
 ) {
+  ignore(question_loc)
+  ignore(colon_loc)
   env.0.visit_Binder(binder)
   ty.each(x => env.0.visit_Type(x))
 }
@@ -2891,6 +4638,9 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Case(
   env,
   case,
 ) {
+  ignore(case.if_loc)
+  ignore(case.fat_arrow_loc)
+  ignore(case.ellipsis_loc)
   env.0.visit_Pattern(case.pattern)
   case.guard_.each(x => env.0.visit_Expr(x))
   env.0.visit_Expr(case.body)
@@ -2903,7 +4653,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Sprea
 ) {
   match spreadable_elem {
     Regular(expr) => env.0.visit_SpreadableElem_Regular(expr)
-    Spread(expr~, loc~) => env.0.visit_SpreadableElem_Spread(expr~, loc~)
+    Spread(expr~, dotdot_loc~, loc~) =>
+      env.0.visit_SpreadableElem_Spread(expr~, dotdot_loc~, loc~)
   }
 }
 
@@ -2919,8 +4670,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Sprea
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_SpreadableElem_Spread(
   env,
   expr~,
+  dotdot_loc~,
   loc~,
 ) {
+  ignore(dotdot_loc)
   ignore(loc)
   env.0.visit_Expr(expr)
 }
@@ -2930,6 +4683,9 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_MapEx
   env,
   map_expr_elem,
 ) {
+  ignore(map_expr_elem.colon_loc)
+  ignore(map_expr_elem.key_loc)
+  ignore(map_expr_elem.loc)
   env.0.visit_Constant(map_expr_elem.key)
   env.0.visit_Expr(map_expr_elem.expr)
 }
@@ -2956,10 +4712,26 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Func(
     return_type,
     error_type,
     kind,
+    fn_loc,
+    lparen_loc,
+    rparen_loc,
+    comma_locs,
+    return_arrow_loc,
+    fat_arrow_loc,
+    body_lbrace_loc,
+    body_rbrace_loc,
     loc,
   } = func
   ignore(is_async)
   ignore(params_loc)
+  ignore(fn_loc)
+  ignore(lparen_loc)
+  ignore(rparen_loc)
+  ignore(comma_locs)
+  ignore(return_arrow_loc)
+  ignore(fat_arrow_loc)
+  ignore(body_lbrace_loc)
+  ignore(body_rbrace_loc)
   ignore(loc)
   parameters.each(p => env.0.visit_Parameter(p))
   env.0.visit_Expr(body)
@@ -2973,6 +4745,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Field
   env,
   field_def,
 ) {
+  ignore(field_def.colon_loc)
   env.0.visit_Label(field_def.label)
   env.0.visit_Expr(field_def.expr)
 }
@@ -3058,26 +4831,53 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_DotDo
   dot_dot_binder,
 ) {
   match dot_dot_binder {
-    Underscore => ()
-    NoBinder => ()
-    BinderAs(binder) => env.0.visit_DotDotBinder_BinderAs(binder)
-    Binder(binder) => env.0.visit_DotDotBinder_Binder(binder)
+    Underscore(dotdot_loc~, underscore_loc~) =>
+      env.0.visit_DotDotBinder_Underscore(dotdot_loc~, underscore_loc~)
+    NoBinder(dotdot_loc~) => env.0.visit_DotDotBinder_NoBinder(dotdot_loc~)
+    BinderAs(binder~, dotdot_loc~, as_loc~) =>
+      env.0.visit_DotDotBinder_BinderAs(binder~, dotdot_loc~, as_loc~)
+    Binder(binder~, dotdot_loc~) =>
+      env.0.visit_DotDotBinder_Binder(binder~, dotdot_loc~)
   }
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_DotDotBinder_Underscore(
+  _,
+  dotdot_loc~,
+  underscore_loc~,
+) {
+  ignore(dotdot_loc)
+  ignore(underscore_loc)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_DotDotBinder_NoBinder(
+  _,
+  dotdot_loc~,
+) {
+  ignore(dotdot_loc)
 }
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_DotDotBinder_BinderAs(
   env,
-  binder,
+  binder~,
+  dotdot_loc~,
+  as_loc~,
 ) {
+  ignore(dotdot_loc)
+  ignore(as_loc)
   env.0.visit_Binder(binder)
 }
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_DotDotBinder_Binder(
   env,
-  binder,
+  binder~,
+  dotdot_loc~,
 ) {
+  ignore(dotdot_loc)
   env.0.visit_Binder(binder)
 }
 
@@ -3088,12 +4888,19 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Array
 ) {
   match array_pattern {
     Pattern(pattern) => env.0.visit_ArrayPattern_Pattern(pattern)
-    StringSpread(str~, loc~) =>
-      env.0.visit_ArrayPattern_StringSpread(str~, loc~)
-    BytesSpread(bytes~, loc~) =>
-      env.0.visit_ArrayPattern_BytesSpread(bytes~, loc~)
-    ConstSpread(binder~, pkg~, loc~) =>
-      env.0.visit_ArrayPattern_ConstSpread(binder~, pkg~, loc~)
+    StringSpread(str~, dotdot_loc~, loc~) =>
+      env.0.visit_ArrayPattern_StringSpread(str~, dotdot_loc~, loc~)
+    BytesSpread(bytes~, dotdot_loc~, loc~) =>
+      env.0.visit_ArrayPattern_BytesSpread(bytes~, dotdot_loc~, loc~)
+    ConstSpread(binder~, pkg~, dotdot_loc~, pkg_loc~, dot_uident_loc~, loc~) =>
+      env.0.visit_ArrayPattern_ConstSpread(
+        binder~,
+        pkg~,
+        dotdot_loc~,
+        pkg_loc~,
+        dot_uident_loc~,
+        loc~,
+      )
   }
 }
 
@@ -3109,18 +4916,20 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Array
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_ArrayPattern_StringSpread(
   _,
   str~,
+  dotdot_loc~,
   loc~,
 ) {
-  ignore((str, loc))
+  ignore((str, dotdot_loc, loc))
 }
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_ArrayPattern_BytesSpread(
   _,
   bytes~,
+  dotdot_loc~,
   loc~,
 ) {
-  ignore((bytes, loc))
+  ignore((bytes, dotdot_loc, loc))
 }
 
 ///|
@@ -3128,9 +4937,15 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Array
   env,
   binder~,
   pkg~,
+  dotdot_loc~,
+  pkg_loc~,
+  dot_uident_loc~,
   loc~,
 ) {
   ignore(pkg)
+  ignore(dotdot_loc)
+  ignore(pkg_loc)
+  ignore(dot_uident_loc)
   ignore(loc)
   env.0.visit_Binder(binder)
 }
@@ -3141,10 +4956,23 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Array
   array_patterns,
 ) {
   match array_patterns {
-    Closed(patterns) => env.0.visit_ArrayPatterns_Closed(patterns)
-    Open(prefix_patterns, suffix_patterns, dot_dot_binder) =>
+    Closed(patterns, comma_locs~) =>
+      env.0.visit_ArrayPatterns_Closed(patterns, comma_locs~)
+    Open(
+      prefix_patterns,
+      suffix_patterns,
+      dot_dot_binder,
+      left_comma_locs~,
+      dotdot_comma_loc~,
+      right_comma_locs~
+    ) =>
       env.0.visit_ArrayPatterns_Open(
-        prefix_patterns, suffix_patterns, dot_dot_binder,
+        prefix_patterns,
+        suffix_patterns,
+        dot_dot_binder,
+        left_comma_locs~,
+        dotdot_comma_loc~,
+        right_comma_locs~,
       )
   }
 }
@@ -3153,7 +4981,9 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Array
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_ArrayPatterns_Closed(
   env,
   array_patterns,
+  comma_locs~,
 ) {
+  comma_locs.each(fn(loc) { ignore(loc) })
   array_patterns.each(x => env.0.visit_ArrayPattern(x))
 }
 
@@ -3163,7 +4993,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Array
   prefix_patterns,
   suffix_patterns,
   dot_dot_binder,
+  left_comma_locs~,
+  dotdot_comma_loc~,
+  right_comma_locs~,
 ) {
+  left_comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(dotdot_comma_loc)
+  right_comma_locs.each(fn(loc) { ignore(loc) })
   prefix_patterns.each(x => env.0.visit_ArrayPattern(x))
   suffix_patterns.each(x => env.0.visit_ArrayPattern(x))
   env.0.visit_DotDotBinder(dot_dot_binder)
@@ -3175,6 +5011,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Where
   where_clause,
 ) {
   where_clause.fields.each(x => env.0.visit_FieldDef(x))
+  ignore(where_clause.where_loc)
+  ignore(where_clause.lbrace_loc)
+  ignore(where_clause.rbrace_loc)
+  where_clause.comma_locs.each(fn(loc) { ignore(loc) })
   ignore(where_clause.loc)
 }
 
@@ -3185,6 +5025,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Field
 ) {
   env.0.visit_Label(field_pat.label)
   env.0.visit_Pattern(field_pat.pattern)
+  ignore(field_pat.colon_loc)
 }
 
 ///|
@@ -3194,6 +5035,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Const
 ) {
   env.0.visit_Pattern(constr_pat_arg.pat)
   env.0.visit_ArgumentKind(constr_pat_arg.kind)
+  ignore(constr_pat_arg.equal_loc)
 }
 
 ///|
@@ -3203,6 +5045,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_MapPa
 ) {
   env.0.visit_Constant(map_pat_elem.key)
   env.0.visit_Pattern(map_pat_elem.pat)
+  ignore(map_pat_elem.key_loc)
+  ignore(map_pat_elem.question_loc)
+  ignore(map_pat_elem.colon_loc)
+  ignore(map_pat_elem.loc)
 }
 
 ///|
@@ -3220,25 +5066,99 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
   pattern,
 ) {
   match pattern {
-    Alias(pat~, alias_~, loc~) => env.0.visit_Pattern_Alias(pat~, alias_~, loc~)
+    Alias(pat~, alias_~, as_loc~, loc~) =>
+      env.0.visit_Pattern_Alias(pat~, alias_~, as_loc~, loc~)
     Any(loc~) => env.0.visit_Pattern_Any(loc~)
-    Array(pats~, loc~) => env.0.visit_Pattern_Array(pats~, loc~)
+    Array(pats~, lbracket_loc~, rbracket_loc~, loc~) =>
+      env.0.visit_Pattern_Array(pats~, lbracket_loc~, rbracket_loc~, loc~)
     Constant(c~, loc~) => env.0.visit_Pattern_Constant(c~, loc~)
-    Constraint(pat~, ty~, loc~) =>
-      env.0.visit_Pattern_Constraint(pat~, ty~, loc~)
-    Constr(constr~, args~, is_open~, loc~) =>
-      env.0.visit_Pattern_Constr(constr~, args~, is_open~, loc~)
-    Or(pat1~, pat2~, loc~) => env.0.visit_Pattern_Or(pat1~, pat2~, loc~)
-    Tuple(pats~, loc~) => env.0.visit_Pattern_Tuple(pats~, loc~)
+    Constraint(pat~, ty~, lparen_loc~, colon_loc~, rparen_loc~, loc~) =>
+      env.0.visit_Pattern_Constraint(
+        pat~,
+        ty~,
+        lparen_loc~,
+        colon_loc~,
+        rparen_loc~,
+        loc~,
+      )
+    Constr(
+      constr~,
+      args~,
+      is_open~,
+      args_lparen_loc~,
+      args_rparen_loc~,
+      arg_comma_locs~,
+      open_dotdot_loc~,
+      loc~
+    ) =>
+      env.0.visit_Pattern_Constr(
+        constr~,
+        args~,
+        is_open~,
+        args_lparen_loc~,
+        args_rparen_loc~,
+        arg_comma_locs~,
+        open_dotdot_loc~,
+        loc~,
+      )
+    Or(pat1~, pat2~, bar_loc~, loc~) =>
+      env.0.visit_Pattern_Or(pat1~, pat2~, bar_loc~, loc~)
+    Tuple(pats~, lparen_loc~, rparen_loc~, comma_locs~, loc~) =>
+      env.0.visit_Pattern_Tuple(
+        pats~,
+        lparen_loc~,
+        rparen_loc~,
+        comma_locs~,
+        loc~,
+      )
     Var(binder) => env.0.visit_Pattern_Var(binder)
-    Record(fields~, is_closed~, loc~) =>
-      env.0.visit_Pattern_Record(fields~, is_closed~, loc~)
-    Map(elems~, is_closed~, loc~) =>
-      env.0.visit_Pattern_Map(elems~, is_closed~, loc~)
-    Range(lhs~, rhs~, kind~, loc~) =>
-      env.0.visit_Pattern_Range(lhs~, rhs~, kind~, loc~)
-    SpecialConstr(binder~, args~, loc~) =>
-      env.0.visit_Pattern_SpecialConstr(binder~, args~, loc~)
+    Record(
+      fields~,
+      is_closed~,
+      lbrace_loc~,
+      rbrace_loc~,
+      comma_locs~,
+      dotdot_loc~,
+      loc~
+    ) =>
+      env.0.visit_Pattern_Record(
+        fields~,
+        is_closed~,
+        lbrace_loc~,
+        rbrace_loc~,
+        comma_locs~,
+        dotdot_loc~,
+        loc~,
+      )
+    Map(
+      elems~,
+      is_closed~,
+      lbrace_loc~,
+      rbrace_loc~,
+      comma_locs~,
+      dotdot_loc~,
+      loc~
+    ) =>
+      env.0.visit_Pattern_Map(
+        elems~,
+        is_closed~,
+        lbrace_loc~,
+        rbrace_loc~,
+        comma_locs~,
+        dotdot_loc~,
+        loc~,
+      )
+    Range(lhs~, rhs~, kind~, range_op_loc~, loc~) =>
+      env.0.visit_Pattern_Range(lhs~, rhs~, kind~, range_op_loc~, loc~)
+    SpecialConstr(binder~, args~, lparen_loc~, rparen_loc~, comma_locs~, loc~) =>
+      env.0.visit_Pattern_SpecialConstr(
+        binder~,
+        args~,
+        lparen_loc~,
+        rparen_loc~,
+        comma_locs~,
+        loc~,
+      )
   }
 }
 
@@ -3247,8 +5167,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
   env,
   pat~,
   alias_~,
+  as_loc~,
   loc~,
 ) {
+  ignore(as_loc)
   ignore(loc)
   env.0.visit_Pattern(pat)
   env.0.visit_Binder(alias_)
@@ -3266,8 +5188,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Pattern_Array(
   env,
   pats~,
+  lbracket_loc~,
+  rbracket_loc~,
   loc~,
 ) {
+  ignore(lbracket_loc)
+  ignore(rbracket_loc)
   ignore(loc)
   env.0.visit_ArrayPatterns(pats)
 }
@@ -3287,8 +5213,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
   env,
   pat~,
   ty~,
+  lparen_loc~,
+  colon_loc~,
+  rparen_loc~,
   loc~,
 ) {
+  ignore(lparen_loc)
+  ignore(colon_loc)
+  ignore(rparen_loc)
   ignore(loc)
   env.0.visit_Pattern(pat)
   env.0.visit_Type(ty)
@@ -3300,9 +5232,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
   constr~,
   args~,
   is_open~,
+  args_lparen_loc~,
+  args_rparen_loc~,
+  arg_comma_locs~,
+  open_dotdot_loc~,
   loc~,
 ) {
   ignore(is_open)
+  ignore(args_lparen_loc)
+  ignore(args_rparen_loc)
+  arg_comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(open_dotdot_loc)
   ignore(loc)
   env.0.visit_Constructor(constr)
   args.each(args => args.each(x => env.0.visit_ConstrPatArg(x)))
@@ -3313,8 +5253,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
   env,
   pat1~,
   pat2~,
+  bar_loc~,
   loc~,
 ) {
+  ignore(bar_loc)
   ignore(loc)
   env.0.visit_Pattern(pat1)
   env.0.visit_Pattern(pat2)
@@ -3324,8 +5266,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Pattern_Tuple(
   env,
   pats~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
   loc~,
 ) {
+  ignore(lparen_loc)
+  ignore(rparen_loc)
+  comma_locs.each(fn(loc) { ignore(loc) })
   ignore(loc)
   pats.each(x => env.0.visit_Pattern(x))
 }
@@ -3343,9 +5291,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
   env,
   fields~,
   is_closed~,
+  lbrace_loc~,
+  rbrace_loc~,
+  comma_locs~,
+  dotdot_loc~,
   loc~,
 ) {
   ignore(is_closed)
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
+  comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(dotdot_loc)
   ignore(loc)
   fields.each(x => env.0.visit_FieldPat(x))
 }
@@ -3355,9 +5311,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
   env,
   elems~,
   is_closed~,
+  lbrace_loc~,
+  rbrace_loc~,
+  comma_locs~,
+  dotdot_loc~,
   loc~,
 ) {
   ignore(is_closed)
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
+  comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(dotdot_loc)
   ignore(loc)
   elems.each(x => env.0.visit_MapPatElem(x))
 }
@@ -3368,8 +5332,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
   lhs~,
   rhs~,
   kind~,
+  range_op_loc~,
   loc~,
 ) {
+  ignore(range_op_loc)
   ignore(loc)
   env.0.visit_Pattern(lhs)
   env.0.visit_Pattern(rhs)
@@ -3381,8 +5347,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
   env,
   binder~,
   args~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
   loc~,
 ) {
+  ignore(lparen_loc)
+  ignore(rparen_loc)
+  comma_locs.each(fn(loc) { ignore(loc) })
   ignore(loc)
   env.0.visit_Binder(binder)
   args.each(x => env.0.visit_ConstrPatArg(x))
@@ -3395,6 +5367,9 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Deriv
 ) {
   env.0.visit_TypeName(deriving_directive.type_name)
   deriving_directive.args.each(x => env.0.visit_Argument(x))
+  ignore(deriving_directive.args_lparen_loc)
+  ignore(deriving_directive.args_rparen_loc)
+  deriving_directive.arg_comma_locs.each(fn(loc) { ignore(loc) })
 }
 
 ///|
@@ -3406,6 +5381,15 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeD
   env.0.visit_TypeDesc(type_decl.components)
   type_decl.deriving.each(x => env.0.visit_DerivingDirective(x))
   env.0.visit_Visibility(type_decl.type_vis)
+  ignore(type_decl.declare_loc)
+  ignore(type_decl.keyword_loc)
+  ignore(type_decl.params_lbracket_loc)
+  ignore(type_decl.params_rbracket_loc)
+  type_decl.param_comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(type_decl.derive_loc)
+  ignore(type_decl.derive_lparen_loc)
+  ignore(type_decl.derive_rparen_loc)
+  type_decl.derive_comma_locs.each(fn(loc) { ignore(loc) })
 }
 
 ///|
@@ -3414,10 +5398,24 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_FuncS
   func_stubs,
 ) {
   match func_stubs {
-    Import(module_name~, func_name~, language~) =>
-      env.0.visit_FuncStubs_Import(module_name~, func_name~, language~)
-    Embedded(language~, code~) =>
-      env.0.visit_FuncStubs_Embedded(language~, code~)
+    Import(
+      module_name~,
+      func_name~,
+      language~,
+      module_name_loc~,
+      func_name_loc~,
+      language_loc~
+    ) =>
+      env.0.visit_FuncStubs_Import(
+        module_name~,
+        func_name~,
+        language~,
+        module_name_loc~,
+        func_name_loc~,
+        language_loc~,
+      )
+    Embedded(language~, code~, language_loc~, code_loc~) =>
+      env.0.visit_FuncStubs_Embedded(language~, code~, language_loc~, code_loc~)
   }
 }
 
@@ -3427,10 +5425,16 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_FuncS
   module_name~,
   func_name~,
   language~,
+  module_name_loc~,
+  func_name_loc~,
+  language_loc~,
 ) {
   ignore(module_name)
   ignore(func_name)
   ignore(language)
+  ignore(module_name_loc)
+  ignore(func_name_loc)
+  ignore(language_loc)
 }
 
 ///|
@@ -3438,8 +5442,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_FuncS
   env,
   language~,
   code~,
+  language_loc~,
+  code_loc~,
 ) {
   ignore(language)
+  ignore(language_loc)
+  ignore(code_loc)
   env.0.visit_EmbeddedCode(code)
 }
 
@@ -3449,10 +5457,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Embed
   embedded_code,
 ) {
   match embedded_code {
-    CodeString(string_literal) =>
-      env.0.visit_EmbeddedCode_CodeString(string_literal)
-    CodeMultilineString(strings) =>
-      env.0.visit_EmbeddedCode_CodeMultilineString(strings)
+    CodeString(string_literal, loc~) =>
+      env.0.visit_EmbeddedCode_CodeString(string_literal, loc~)
+    CodeMultilineString(strings, string_locs~) =>
+      env.0.visit_EmbeddedCode_CodeMultilineString(strings, string_locs~)
   }
 }
 
@@ -3460,16 +5468,18 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Embed
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_EmbeddedCode_CodeString(
   _,
   _,
+  loc~,
 ) {
-  ()
+  ignore(loc)
 }
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_EmbeddedCode_CodeMultilineString(
   _,
   _,
+  string_locs~,
 ) {
-  ()
+  ignore(string_locs)
 }
 
 ///|
@@ -3478,8 +5488,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_DeclB
   decl_body,
 ) {
   match decl_body {
-    DeclBody(expr~) => env.0.visit_DeclBody_DeclBody(expr~)
-    DeclStubs(func_stubs) => env.0.visit_DeclBody_DeclStubs(func_stubs)
+    DeclBody(expr~, lbrace_loc~, rbrace_loc~) =>
+      env.0.visit_DeclBody_DeclBody(expr~, lbrace_loc~, rbrace_loc~)
+    DeclStubs(func_stubs, equal_loc~) =>
+      env.0.visit_DeclBody_DeclStubs(func_stubs, equal_loc~)
     DeclNone => ()
   }
 }
@@ -3488,7 +5500,11 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_DeclB
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_DeclBody_DeclBody(
   env,
   expr~,
+  lbrace_loc~,
+  rbrace_loc~,
 ) {
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
   env.0.visit_Expr(expr)
 }
 
@@ -3496,7 +5512,9 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_DeclB
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_DeclBody_DeclStubs(
   env,
   func_stubs,
+  equal_loc~,
 ) {
+  ignore(equal_loc)
   env.0.visit_FuncStubs(func_stubs)
 }
 
@@ -3514,6 +5532,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_FunDe
   fun_decl.return_type.each(x => env.0.visit_Type(x))
   env.0.visit_ErrorType(fun_decl.error_type)
   env.0.visit_Visibility(fun_decl.vis)
+  ignore(fun_decl.declare_loc)
+  ignore(fun_decl.extern_loc)
+  ignore(fun_decl.fn_loc)
+  ignore(fun_decl.coloncolon_loc)
+  ignore(fun_decl.type_params_lbracket_loc)
+  ignore(fun_decl.type_params_rbracket_loc)
+  fun_decl.type_param_comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(fun_decl.params_lparen_loc)
+  ignore(fun_decl.params_rparen_loc)
+  fun_decl.param_comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(fun_decl.return_arrow_loc)
 }
 
 ///|
@@ -3526,6 +5555,15 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Trait
   trait_method_decl.params.each(param => env.0.visit_Parameter(param))
   trait_method_decl.return_type.each(x => env.0.visit_Type(x))
   env.0.visit_ErrorType(trait_method_decl.error_type)
+  ignore(trait_method_decl.fn_loc)
+  ignore(trait_method_decl.type_params_lbracket_loc)
+  ignore(trait_method_decl.type_params_rbracket_loc)
+  trait_method_decl.type_param_comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(trait_method_decl.params_lparen_loc)
+  ignore(trait_method_decl.params_rparen_loc)
+  trait_method_decl.param_comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(trait_method_decl.return_arrow_loc)
+  ignore(trait_method_decl.default_equal_loc)
 }
 
 ///|
@@ -3537,6 +5575,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Trait
   trait_decl.supers.each(x => env.0.visit_TypeVarConstraint(x))
   trait_decl.methods.each(x => env.0.visit_TraitMethodDecl(x))
   env.0.visit_Visibility(trait_decl.vis)
+  ignore(trait_decl.declare_loc)
+  ignore(trait_decl.trait_loc)
+  ignore(trait_decl.colon_loc)
+  trait_decl.super_plus_locs.each(fn(loc) { ignore(loc) })
+  ignore(trait_decl.lbrace_loc)
+  ignore(trait_decl.rbrace_loc)
+  trait_decl.semi_locs.each(fn(loc) { ignore(loc) })
 }
 
 ///|
@@ -3569,6 +5614,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   name~,
   params~,
   is_async~,
+  test_loc~,
+  params_lparen_loc~,
+  params_rparen_loc~,
+  param_comma_locs~,
+  body_lbrace_loc~,
+  body_rbrace_loc~,
   loc~,
   attrs~,
   doc~,
@@ -3578,6 +5629,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   ignore(attrs)
   ignore(doc)
   ignore(is_async)
+  ignore(test_loc)
+  ignore(params_lparen_loc)
+  ignore(params_rparen_loc)
+  param_comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(body_lbrace_loc)
+  ignore(body_rbrace_loc)
   env.0.visit_Expr(expr)
   params.each(params => params.each(param => env.0.visit_Parameter(param)))
 }
@@ -3596,8 +5653,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   fun_decl~,
   decl_body~,
   where_clause~,
+  equal_loc~,
   loc~,
 ) {
+  ignore(equal_loc)
   ignore(loc)
   env.0.visit_FunDecl(fun_decl)
   env.0.visit_DeclBody(decl_body)
@@ -3612,6 +5671,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   expr~,
   vis~,
   is_constant~,
+  declare_loc~,
+  let_or_const_loc~,
+  annot_colon_loc~,
+  equal_loc~,
   loc~,
   attrs~,
   doc~,
@@ -3622,6 +5685,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   ignore(attrs)
   ignore(doc)
   ignore(is_declare)
+  ignore(declare_loc)
+  ignore(let_or_const_loc)
+  ignore(annot_colon_loc)
+  ignore(equal_loc)
   env.0.visit_Binder(binder)
   ty.each(x => env.0.visit_Type(x))
   env.0.visit_Expr(expr)
@@ -3648,6 +5715,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   err_ty~,
   body~,
   vis~,
+  impl_loc~,
+  type_params_lbracket_loc~,
+  type_params_rbracket_loc~,
+  type_param_comma_locs~,
+  for_loc~,
+  with_loc~,
+  fn_loc~,
+  params_lparen_loc~,
+  params_rparen_loc~,
+  param_comma_locs~,
+  return_arrow_loc~,
   loc~,
   attrs~,
   doc~,
@@ -3655,6 +5733,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   ignore(loc)
   ignore(attrs)
   ignore(doc)
+  ignore(impl_loc)
+  ignore(type_params_lbracket_loc)
+  ignore(type_params_rbracket_loc)
+  type_param_comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(for_loc)
+  ignore(with_loc)
+  ignore(fn_loc)
+  ignore(params_lparen_loc)
+  ignore(params_rparen_loc)
+  param_comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(return_arrow_loc)
   self_ty.each(x => env.0.visit_Type(x))
   env.0.visit_TypeName(trait_)
   env.0.visit_Binder(method_name)
@@ -3679,6 +5768,20 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   params_loc~,
   body~,
   vis~,
+  enumview_loc~,
+  type_params_lbracket_loc~,
+  type_params_rbracket_loc~,
+  type_param_comma_locs~,
+  lbrace_loc~,
+  rbrace_loc~,
+  constructor_semi_locs~,
+  for_loc~,
+  with_loc~,
+  params_lparen_loc~,
+  params_rparen_loc~,
+  param_comma_locs~,
+  body_lbrace_loc~,
+  body_rbrace_loc~,
   loc~,
   attrs~,
   doc~,
@@ -3686,6 +5789,20 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   ignore(view_type_name)
   ignore(view_type_loc)
   ignore(params_loc)
+  ignore(enumview_loc)
+  ignore(type_params_lbracket_loc)
+  ignore(type_params_rbracket_loc)
+  ignore(type_param_comma_locs)
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
+  ignore(constructor_semi_locs)
+  ignore(for_loc)
+  ignore(with_loc)
+  ignore(params_lparen_loc)
+  ignore(params_rparen_loc)
+  ignore(param_comma_locs)
+  ignore(body_lbrace_loc)
+  ignore(body_rbrace_loc)
   ignore(loc)
   ignore(attrs)
   ignore(doc)
@@ -3706,6 +5823,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   quantifiers~,
   vis~,
   attrs~,
+  declare_loc~,
+  impl_loc~,
+  type_params_lbracket_loc~,
+  type_params_rbracket_loc~,
+  type_param_comma_locs~,
+  for_loc~,
   loc~,
   doc~,
   is_declare~,
@@ -3714,6 +5837,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   ignore(attrs)
   ignore(loc)
   ignore(doc)
+  ignore(declare_loc)
+  ignore(impl_loc)
+  ignore(type_params_lbracket_loc)
+  ignore(type_params_rbracket_loc)
+  type_param_comma_locs.each(fn(loc) { ignore(loc) })
+  ignore(for_loc)
   env.0.visit_Type(self_ty)
   env.0.visit_TypeName(trait_)
   quantifiers.each(x => env.0.visit_TypeVarBinder(x))
@@ -3727,9 +5856,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   names~,
   vis~,
   attrs~,
+  using_loc~,
+  lbrace_loc~,
+  rbrace_loc~,
+  comma_locs~,
   loc~,
   doc~,
 ) {
+  ignore(using_loc)
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
+  comma_locs.each(fn(loc) { ignore(loc) })
   ignore(loc)
   ignore(attrs)
   ignore(doc)
@@ -3746,8 +5883,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   func~,
   args~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
   loc~,
 ) {
+  ignore(lparen_loc)
+  ignore(rparen_loc)
+  ignore(comma_locs)
   ignore(loc)
   env.0.visit_Expr(func)
   args.each(x => env.0.visit_Argument(x))
@@ -3783,8 +5926,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_Array(
   env,
   exprs~,
+  lbracket_loc~,
+  rbracket_loc~,
+  comma_locs~,
   loc~,
 ) {
+  ignore(lbracket_loc)
+  ignore(rbracket_loc)
+  ignore(comma_locs)
   ignore(loc)
   exprs.each(expr => env.0.visit_Expr(expr))
 }
@@ -3793,13 +5942,20 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_ArraySpread(
   env,
   elems~,
+  lbracket_loc~,
+  rbracket_loc~,
+  comma_locs~,
   loc~,
 ) {
+  ignore(lbracket_loc)
+  ignore(rbracket_loc)
+  ignore(comma_locs)
   ignore(loc)
   elems.each(fn(elem) {
     match elem {
       Regular(expr) => env.0.visit_Expr(expr)
-      Spread(expr~, loc~) => {
+      Spread(expr~, dotdot_loc~, loc~) => {
+        ignore(dotdot_loc)
         ignore(loc)
         env.0.visit_Expr(expr)
       }
@@ -3812,8 +5968,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   array~,
   index~,
+  lbracket_loc~,
+  rbracket_loc~,
   loc~,
 ) {
+  ignore(lbracket_loc)
+  ignore(rbracket_loc)
   ignore(loc)
   env.0.visit_Expr(array)
   env.0.visit_Expr(index)
@@ -3826,10 +5986,16 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   start_index~,
   end_index~,
   index_loc~,
+  lbracket_loc~,
+  colon_loc~,
+  rbracket_loc~,
   loc~,
 ) {
   ignore(loc)
   ignore(index_loc)
+  ignore(lbracket_loc)
+  ignore(colon_loc)
+  ignore(rbracket_loc)
   env.0.visit_Expr(array)
   start_index.each(e => env.0.visit_Expr(e))
   end_index.each(e => env.0.visit_Expr(e))
@@ -3841,8 +6007,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   array~,
   index~,
   value~,
+  lbracket_loc~,
+  rbracket_loc~,
+  equal_loc~,
   loc~,
 ) {
+  ignore(lbracket_loc)
+  ignore(rbracket_loc)
+  ignore(equal_loc)
   ignore(loc)
   env.0.visit_Expr(index)
   env.0.visit_Expr(value)
@@ -3856,8 +6028,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   array~,
   index~,
   value~,
+  lbracket_loc~,
+  rbracket_loc~,
+  augmented_assign_loc~,
   loc~,
 ) {
+  ignore(lbracket_loc)
+  ignore(rbracket_loc)
+  ignore(augmented_assign_loc)
   ignore(loc)
   env.0.visit_Var(op)
   env.0.visit_Expr(array)
@@ -3900,8 +6078,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   expr~,
   ty~,
+  lparen_loc~,
+  colon_loc~,
+  rparen_loc~,
   loc~,
 ) {
+  ignore(lparen_loc)
+  ignore(colon_loc)
+  ignore(rparen_loc)
   ignore(loc)
   env.0.visit_Type(ty)
   env.0.visit_Expr(expr)
@@ -3924,9 +6108,23 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   loop_body~,
   while_else~,
   label~,
+  label_colon_loc~,
+  while_loc~,
+  body_lbrace_loc~,
+  body_rbrace_loc~,
+  nobreak_loc~,
+  nobreak_lbrace_loc~,
+  nobreak_rbrace_loc~,
   loc~,
 ) {
   ignore(loc)
+  ignore(label_colon_loc)
+  ignore(while_loc)
+  ignore(body_lbrace_loc)
+  ignore(body_rbrace_loc)
+  ignore(nobreak_loc)
+  ignore(nobreak_lbrace_loc)
+  ignore(nobreak_rbrace_loc)
   env.0.visit_Expr(loop_cond)
   env.0.visit_Expr(loop_body)
   while_else.each(else_block => env.0.visit_Expr(else_block))
@@ -3959,8 +6157,20 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   cond~,
   ifso~,
   ifnot~,
+  if_loc~,
+  then_lbrace_loc~,
+  then_rbrace_loc~,
+  else_loc~,
+  else_lbrace_loc~,
+  else_rbrace_loc~,
   loc~,
 ) {
+  ignore(if_loc)
+  ignore(then_lbrace_loc)
+  ignore(then_rbrace_loc)
+  ignore(else_loc)
+  ignore(else_lbrace_loc)
+  ignore(else_rbrace_loc)
   ignore(loc)
   env.0.visit_Expr(cond)
   env.0.visit_Expr(ifso)
@@ -3973,8 +6183,18 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   cond~,
   otherwise~,
   body~,
+  guard_loc~,
+  else_loc~,
+  else_lbrace_loc~,
+  else_rbrace_loc~,
+  semi_loc~,
   loc~,
 ) {
+  ignore(guard_loc)
+  ignore(else_loc)
+  ignore(else_lbrace_loc)
+  ignore(else_rbrace_loc)
+  ignore(semi_loc)
   ignore(loc)
   env.0.visit_Expr(cond)
   env.0.visit_Expr(body)
@@ -3986,8 +6206,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   expr~,
   pat~,
+  is_loc~,
   loc~,
 ) {
+  ignore(is_loc)
   ignore(loc)
   env.0.visit_Expr(expr)
   env.0.visit_Pattern(pat)
@@ -3998,8 +6220,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   expr~,
   body~,
+  defer_loc~,
+  semi_loc~,
   loc~,
 ) {
+  ignore(defer_loc)
+  ignore(semi_loc)
   ignore(loc)
   env.0.visit_Expr(expr)
   env.0.visit_Expr(body)
@@ -4011,8 +6237,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   name~,
   func~,
   body~,
+  semi_loc~,
   loc~,
 ) {
+  ignore(semi_loc)
   ignore(loc)
   env.0.visit_Binder(name)
   env.0.visit_Func(func)
@@ -4024,8 +6252,18 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   bindings~,
   body~,
+  letrec_loc~,
+  and_locs~,
+  equal_locs~,
+  annot_colon_locs~,
+  semi_loc~,
   loc~,
 ) {
+  ignore(letrec_loc)
+  ignore(and_locs)
+  ignore(equal_locs)
+  ignore(annot_colon_locs)
+  ignore(semi_loc)
   ignore(loc)
   bindings.each(binding => {
     match binding {
@@ -4045,8 +6283,16 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   pattern~,
   expr~,
   body~,
+  let_loc~,
+  annot_colon_loc~,
+  equal_loc~,
+  semi_loc~,
   loc~,
 ) {
+  ignore(let_loc)
+  ignore(annot_colon_loc)
+  ignore(equal_loc)
+  ignore(semi_loc)
   ignore(loc)
   env.0.visit_Pattern(pattern)
   env.0.visit_Expr(expr)
@@ -4058,8 +6304,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   exprs~,
   last_expr~,
+  semi_locs~,
   loc~,
 ) {
+  ignore(semi_locs)
   ignore(loc)
   exprs.each(expr => env.0.visit_Expr(expr))
   env.0.visit_Expr(last_expr)
@@ -4069,8 +6317,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_Tuple(
   env,
   exprs~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
   loc~,
 ) {
+  ignore(lparen_loc)
+  ignore(rparen_loc)
+  ignore(comma_locs)
   ignore(loc)
   exprs.each(expr => env.0.visit_Expr(expr))
 }
@@ -4081,8 +6335,18 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   type_name~,
   fields~,
   trailing~,
+  coloncolon_loc~,
+  lbrace_loc~,
+  rbrace_loc~,
+  comma_locs~,
+  semi_locs~,
   loc~,
 ) {
+  ignore(coloncolon_loc)
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
+  ignore(comma_locs)
+  ignore(semi_locs)
   ignore(loc)
   type_name.each(x => env.0.visit_TypeName(x))
   fields.each(x => env.0.visit_FieldDef(x))
@@ -4095,8 +6359,18 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   type_name~,
   record~,
   fields~,
+  coloncolon_loc~,
+  lbrace_loc~,
+  dotdot_loc~,
+  rbrace_loc~,
+  comma_locs~,
   loc~,
 ) {
+  ignore(coloncolon_loc)
+  ignore(lbrace_loc)
+  ignore(dotdot_loc)
+  ignore(rbrace_loc)
+  ignore(comma_locs)
   ignore(loc)
   type_name.each(x => env.0.visit_TypeName(x))
   fields.each(x => env.0.visit_FieldDef(x))
@@ -4120,8 +6394,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   type_name~,
   method_name~,
+  coloncolon_loc~,
   loc~,
 ) {
+  ignore(coloncolon_loc)
   ignore(loc)
   env.0.visit_TypeName(type_name)
   env.0.visit_Label(method_name)
@@ -4134,9 +6410,17 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   method_name~,
   args~,
   return_self~,
+  dot_loc~,
+  lparen_loc~,
+  rparen_loc~,
+  comma_locs~,
   loc~,
 ) {
   ignore(return_self)
+  ignore(dot_loc)
+  ignore(lparen_loc)
+  ignore(rparen_loc)
+  ignore(comma_locs)
   ignore(loc)
   env.0.visit_Expr(self)
   env.0.visit_Label(method_name)
@@ -4148,8 +6432,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   expr~,
   trait_~,
+  as_loc~,
   loc~,
 ) {
+  ignore(as_loc)
   ignore(loc)
   env.0.visit_TypeName(trait_)
   env.0.visit_Expr(expr)
@@ -4162,8 +6448,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   accessor~,
   field~,
   augmented_by~,
+  equal_loc~,
+  augmented_assign_loc~,
   loc~,
 ) {
+  ignore(equal_loc)
+  ignore(augmented_assign_loc)
   ignore(loc)
   env.0.visit_Expr(record)
   env.0.visit_Accessor(accessor)
@@ -4177,9 +6467,15 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   expr~,
   cases~,
   match_loc~,
+  lbrace_loc~,
+  rbrace_loc~,
+  semi_locs~,
   loc~,
 ) {
   ignore(match_loc)
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
+  ignore(semi_locs)
   ignore(loc)
   env.0.visit_Expr(expr)
   cases.each(x => env.0.visit_Case(x))
@@ -4192,8 +6488,18 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   ty~,
   expr~,
   body~,
+  let_loc~,
+  mut_loc~,
+  annot_colon_loc~,
+  equal_loc~,
+  semi_loc~,
   loc~,
 ) {
+  ignore(let_loc)
+  ignore(mut_loc)
+  ignore(annot_colon_loc)
+  ignore(equal_loc)
+  ignore(semi_loc)
   ignore(loc)
   env.0.visit_Binder(binder)
   ty.each(x => env.0.visit_Type(x))
@@ -4206,8 +6512,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   lhs~,
   rhs~,
+  pipe_loc~,
   loc~,
 ) {
+  ignore(pipe_loc)
   ignore(loc)
   env.0.visit_Expr(lhs)
   env.0.visit_Expr(rhs)
@@ -4219,8 +6527,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   var_~,
   expr~,
   augmented_by~,
+  equal_loc~,
+  augmented_assign_loc~,
   loc~,
 ) {
+  ignore(equal_loc)
+  ignore(augmented_assign_loc)
   ignore(loc)
   env.0.visit_Var(var_)
   augmented_by.each(x => env.0.visit_Var(x))
@@ -4241,8 +6553,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_Return(
   env,
   return_value~,
+  return_loc~,
   loc~,
 ) {
+  ignore(return_loc)
   ignore(loc)
   return_value.each(value => env.0.visit_Expr(value))
 }
@@ -4251,8 +6565,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_Raise(
   env,
   err_value~,
+  raise_loc~,
   loc~,
 ) {
+  ignore(raise_loc)
   ignore(loc)
   env.0.visit_Expr(err_value)
 }
@@ -4262,9 +6578,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   _,
   loc~,
   faked~,
+  lparen_loc~,
+  rparen_loc~,
 ) {
   ignore(loc)
   ignore(faked)
+  ignore(lparen_loc)
+  ignore(rparen_loc)
 }
 
 ///|
@@ -4272,8 +6592,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   arg~,
   label~,
+  break_loc~,
+  post_label_loc~,
   loc~,
 ) {
+  ignore(break_loc)
+  ignore(post_label_loc)
   ignore(loc)
   label.each(x => env.0.visit_Label(x))
   arg.each(x => env.0.visit_Expr(x))
@@ -4284,8 +6608,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   args~,
   label~,
+  continue_loc~,
+  post_label_loc~,
+  comma_locs~,
   loc~,
 ) {
+  ignore(continue_loc)
+  ignore(post_label_loc)
+  ignore(comma_locs)
   ignore(loc)
   args.each(arg => env.0.visit_Expr(arg))
   label.each(x => env.0.visit_Label(x))
@@ -4300,10 +6630,34 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   body~,
   for_else~,
   label~,
+  label_colon_loc~,
+  for_loc~,
+  binder_comma_locs~,
+  binder_equal_locs~,
+  semi_locs~,
+  continue_comma_locs~,
+  continue_equal_locs~,
+  body_lbrace_loc~,
+  body_rbrace_loc~,
+  nobreak_loc~,
+  nobreak_lbrace_loc~,
+  nobreak_rbrace_loc~,
   loc~,
   where_clause~,
 ) {
   ignore(loc)
+  ignore(label_colon_loc)
+  ignore(for_loc)
+  ignore(binder_comma_locs)
+  ignore(binder_equal_locs)
+  ignore(semi_locs)
+  ignore(continue_comma_locs)
+  ignore(continue_equal_locs)
+  ignore(body_lbrace_loc)
+  ignore(body_rbrace_loc)
+  ignore(nobreak_loc)
+  ignore(nobreak_lbrace_loc)
+  ignore(nobreak_rbrace_loc)
   binders.each(p => {
     env.0.visit_Binder(p.0)
     env.0.visit_Expr(p.1)
@@ -4330,9 +6684,37 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   else_block~,
   where_clause~,
   label~,
+  label_colon_loc~,
+  for_loc~,
+  binder_comma_locs~,
+  in_loc~,
+  semi_locs~,
+  init_comma_locs~,
+  init_equal_locs~,
+  continue_comma_locs~,
+  continue_equal_locs~,
+  body_lbrace_loc~,
+  body_rbrace_loc~,
+  nobreak_loc~,
+  nobreak_lbrace_loc~,
+  nobreak_rbrace_loc~,
   loc~,
 ) {
   ignore(loc)
+  ignore(label_colon_loc)
+  ignore(for_loc)
+  ignore(binder_comma_locs)
+  ignore(in_loc)
+  ignore(semi_locs)
+  ignore(init_comma_locs)
+  ignore(init_equal_locs)
+  ignore(continue_comma_locs)
+  ignore(continue_equal_locs)
+  ignore(body_lbrace_loc)
+  ignore(body_rbrace_loc)
+  ignore(nobreak_loc)
+  ignore(nobreak_lbrace_loc)
+  ignore(nobreak_rbrace_loc)
   binders.each(binder => binder.each(x => env.0.visit_Binder(x)))
   env.0.visit_Expr(expr)
   init.each(p => {
@@ -4359,12 +6741,24 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   try_loc~,
   catch_loc~,
   else_loc~,
+  catch_lbrace_loc~,
+  catch_rbrace_loc~,
+  catch_semi_locs~,
+  noraise_lbrace_loc~,
+  noraise_rbrace_loc~,
+  noraise_semi_locs~,
   loc~,
 ) {
   ignore(loc)
   ignore(try_loc)
   ignore(catch_loc)
   ignore(else_loc)
+  ignore(catch_lbrace_loc)
+  ignore(catch_rbrace_loc)
+  ignore(catch_semi_locs)
+  ignore(noraise_lbrace_loc)
+  ignore(noraise_rbrace_loc)
+  ignore(noraise_semi_locs)
   ignore(has_try)
   env.0.visit_Expr(body)
   catch_.each(x => env.0.visit_Case(x))
@@ -4389,8 +6783,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_Map(
   env,
   elems~,
+  lbrace_loc~,
+  rbrace_loc~,
+  comma_locs~,
   loc~,
 ) {
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
+  ignore(comma_locs)
   ignore(loc)
   elems.each(x => env.0.visit_MapExprElem(x))
 }
@@ -4400,8 +6800,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   env,
   expr~,
   group~,
+  left_delim_loc~,
+  right_delim_loc~,
   loc~,
 ) {
+  ignore(left_delim_loc)
+  ignore(right_delim_loc)
   ignore(loc)
   env.0.visit_Expr(expr)
   env.0.visit_Group(group)
@@ -4431,14 +6835,22 @@ fn[T : IterVisitor] iter_regex_pattern(
       env.0.visit_LongIdent(lid)
       ignore(loc)
     }
-    Sequence(pat1~, pat2~, loc~) | Alternation(pat1~, pat2~, loc~) => {
+    Sequence(pat1~, pat2~, plus_loc~, loc~) => {
       iter_regex_pattern(env, pat1)
       iter_regex_pattern(env, pat2)
+      ignore(plus_loc)
       ignore(loc)
     }
-    Alias(pat~, binder~, loc~) => {
+    Alternation(pat1~, pat2~, bar_loc~, loc~) => {
+      iter_regex_pattern(env, pat1)
+      iter_regex_pattern(env, pat2)
+      ignore(bar_loc)
+      ignore(loc)
+    }
+    Alias(pat~, binder~, as_loc~, loc~) => {
       iter_regex_pattern(env, pat)
       env.0.visit_Binder(binder)
+      ignore(as_loc)
       ignore(loc)
     }
   }
@@ -4450,7 +6862,28 @@ fn[T : IterVisitor] iter_list_comprehension_kind(
   kind : ListComprehensionKind,
 ) -> Unit {
   match kind {
-    Foreach(binders~, expr~, init~, continue_block~) => {
+    Foreach(
+      binders~,
+      expr~,
+      init~,
+      continue_block~,
+      for_loc~,
+      in_loc~,
+      binder_comma_locs~,
+      semi_locs~,
+      init_comma_locs~,
+      init_equal_locs~,
+      continue_comma_locs~,
+      continue_equal_locs~
+    ) => {
+      ignore(for_loc)
+      ignore(in_loc)
+      ignore(binder_comma_locs)
+      ignore(semi_locs)
+      ignore(init_comma_locs)
+      ignore(init_equal_locs)
+      ignore(continue_comma_locs)
+      ignore(continue_equal_locs)
       binders.each(binder => binder.each(x => env.0.visit_Binder(x)))
       env.0.visit_Expr(expr)
       init.each(p => {
@@ -4462,7 +6895,23 @@ fn[T : IterVisitor] iter_list_comprehension_kind(
         env.0.visit_Expr(p.1)
       })
     }
-    For(binders~, condition~, continue_block~, for_loc~) => {
+    For(
+      binders~,
+      condition~,
+      continue_block~,
+      for_loc~,
+      binder_comma_locs~,
+      semi_locs~,
+      binder_equal_locs~,
+      continue_comma_locs~,
+      continue_equal_locs~
+    ) => {
+      ignore(for_loc)
+      ignore(binder_comma_locs)
+      ignore(semi_locs)
+      ignore(binder_equal_locs)
+      ignore(continue_comma_locs)
+      ignore(continue_equal_locs)
       binders.each(p => {
         env.0.visit_Binder(p.0)
         env.0.visit_Expr(p.1)
@@ -4472,7 +6921,6 @@ fn[T : IterVisitor] iter_list_comprehension_kind(
         env.0.visit_Binder(p.0)
         env.0.visit_Expr(p.1)
       })
-      ignore(for_loc)
     }
   }
 }
@@ -4483,51 +6931,245 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
   expr,
 ) {
   match expr {
-    Apply(func~, args~, loc~) => env.0.visit_Expr_Apply(func~, args~, loc~)
+    Apply(func~, args~, lparen_loc~, rparen_loc~, comma_locs~, loc~) =>
+      env.0.visit_Expr_Apply(
+        func~,
+        args~,
+        lparen_loc~,
+        rparen_loc~,
+        comma_locs~,
+        loc~,
+      )
     Infix(op~, lhs~, rhs~, loc~) =>
       env.0.visit_Expr_Infix(op~, lhs~, rhs~, loc~)
     Unary(op~, expr~, loc~) => env.0.visit_Expr_Unary(op~, expr~, loc~)
-    Array(exprs~, loc~) => env.0.visit_Expr_Array(exprs~, loc~)
-    ArraySpread(elems~, loc~) => env.0.visit_Expr_ArraySpread(elems~, loc~)
-    ListComprehension(kind~, guard_~, body~, loc~) => {
+    Array(exprs~, lbracket_loc~, rbracket_loc~, comma_locs~, loc~) =>
+      env.0.visit_Expr_Array(
+        exprs~,
+        lbracket_loc~,
+        rbracket_loc~,
+        comma_locs~,
+        loc~,
+      )
+    ArraySpread(elems~, lbracket_loc~, rbracket_loc~, comma_locs~, loc~) =>
+      env.0.visit_Expr_ArraySpread(
+        elems~,
+        lbracket_loc~,
+        rbracket_loc~,
+        comma_locs~,
+        loc~,
+      )
+    ListComprehension(
+      kind~,
+      guard_~,
+      body~,
+      lbracket_loc~,
+      rbracket_loc~,
+      if_loc~,
+      fat_arrow_loc~,
+      loc~
+    ) => {
       ignore(loc)
+      ignore(lbracket_loc)
+      ignore(rbracket_loc)
+      ignore(if_loc)
+      ignore(fat_arrow_loc)
       iter_list_comprehension_kind(env, kind)
       guard_.each(x => env.0.visit_Expr(x))
       env.0.visit_Expr(body)
     }
-    ArrayGet(array~, index~, loc~) =>
-      env.0.visit_Expr_ArrayGet(array~, index~, loc~)
-    ArrayGetSlice(array~, start_index~, end_index~, index_loc~, loc~) =>
+    ArrayGet(array~, index~, lbracket_loc~, rbracket_loc~, loc~) =>
+      env.0.visit_Expr_ArrayGet(
+        array~,
+        index~,
+        lbracket_loc~,
+        rbracket_loc~,
+        loc~,
+      )
+    ArrayGetSlice(
+      array~,
+      start_index~,
+      end_index~,
+      index_loc~,
+      lbracket_loc~,
+      colon_loc~,
+      rbracket_loc~,
+      loc~
+    ) =>
       env.0.visit_Expr_ArrayGetSlice(
         array~,
         start_index~,
         end_index~,
         index_loc~,
+        lbracket_loc~,
+        colon_loc~,
+        rbracket_loc~,
         loc~,
       )
-    ArraySet(array~, index~, value~, loc~) =>
-      env.0.visit_Expr_ArraySet(array~, index~, value~, loc~)
-    ArrayAugmentedSet(op~, array~, index~, value~, loc~) =>
-      env.0.visit_Expr_ArrayAugmentedSet(op~, array~, index~, value~, loc~)
+    ArraySet(
+      array~,
+      index~,
+      value~,
+      lbracket_loc~,
+      rbracket_loc~,
+      equal_loc~,
+      loc~
+    ) =>
+      env.0.visit_Expr_ArraySet(
+        array~,
+        index~,
+        value~,
+        lbracket_loc~,
+        rbracket_loc~,
+        equal_loc~,
+        loc~,
+      )
+    ArrayAugmentedSet(
+      op~,
+      array~,
+      index~,
+      value~,
+      lbracket_loc~,
+      rbracket_loc~,
+      augmented_assign_loc~,
+      loc~
+    ) =>
+      env.0.visit_Expr_ArrayAugmentedSet(
+        op~,
+        array~,
+        index~,
+        value~,
+        lbracket_loc~,
+        rbracket_loc~,
+        augmented_assign_loc~,
+        loc~,
+      )
     Constant(c~, loc~) => env.0.visit_Expr_Constant(c~, loc~)
     MultilineString(elems~, loc~) =>
       env.0.visit_Expr_MultilineString(elems~, loc~)
     Interp(elems~, loc~) => env.0.visit_Expr_Interp(elems~, loc~)
-    Constraint(expr~, ty~, loc~) =>
-      env.0.visit_Expr_Constraint(expr~, ty~, loc~)
+    Constraint(expr~, ty~, lparen_loc~, colon_loc~, rparen_loc~, loc~) =>
+      env.0.visit_Expr_Constraint(
+        expr~,
+        ty~,
+        lparen_loc~,
+        colon_loc~,
+        rparen_loc~,
+        loc~,
+      )
     Constr(constr~, loc~) => env.0.visit_Expr_Constr(constr~, loc~)
-    While(loop_cond~, loop_body~, while_else~, label~, loc~) =>
-      env.0.visit_Expr_While(loop_cond~, loop_body~, while_else~, label~, loc~)
+    While(
+      loop_cond~,
+      loop_body~,
+      while_else~,
+      label~,
+      label_colon_loc~,
+      while_loc~,
+      body_lbrace_loc~,
+      body_rbrace_loc~,
+      nobreak_loc~,
+      nobreak_lbrace_loc~,
+      nobreak_rbrace_loc~,
+      loc~
+    ) =>
+      env.0.visit_Expr_While(
+        loop_cond~,
+        loop_body~,
+        while_else~,
+        label~,
+        label_colon_loc~,
+        while_loc~,
+        body_lbrace_loc~,
+        body_rbrace_loc~,
+        nobreak_loc~,
+        nobreak_lbrace_loc~,
+        nobreak_rbrace_loc~,
+        loc~,
+      )
     Function(func~, loc~) => env.0.visit_Expr_Function(func~, loc~)
     Ident(id~, loc~) => env.0.visit_Expr_Ident(id~, loc~)
-    If(cond~, ifso~, ifnot~, loc~) =>
-      env.0.visit_Expr_If(cond~, ifso~, ifnot~, loc~)
-    Guard(cond~, otherwise~, body~, loc~) =>
-      env.0.visit_Expr_Guard(cond~, otherwise~, body~, loc~)
-    Is(expr~, pat~, loc~) => env.0.visit_Expr_Is(expr~, pat~, loc~)
-    IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~) =>
-      env.0.visit_Expr_IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~)
-    RegexMatch(expr~, pat~, bindings~, loc~) => {
+    If(
+      cond~,
+      ifso~,
+      ifnot~,
+      if_loc~,
+      then_lbrace_loc~,
+      then_rbrace_loc~,
+      else_loc~,
+      else_lbrace_loc~,
+      else_rbrace_loc~,
+      loc~
+    ) =>
+      env.0.visit_Expr_If(
+        cond~,
+        ifso~,
+        ifnot~,
+        if_loc~,
+        then_lbrace_loc~,
+        then_rbrace_loc~,
+        else_loc~,
+        else_lbrace_loc~,
+        else_rbrace_loc~,
+        loc~,
+      )
+    Guard(
+      cond~,
+      otherwise~,
+      body~,
+      guard_loc~,
+      else_loc~,
+      else_lbrace_loc~,
+      else_rbrace_loc~,
+      semi_loc~,
+      loc~
+    ) =>
+      env.0.visit_Expr_Guard(
+        cond~,
+        otherwise~,
+        body~,
+        guard_loc~,
+        else_loc~,
+        else_lbrace_loc~,
+        else_rbrace_loc~,
+        semi_loc~,
+        loc~,
+      )
+    Is(expr~, pat~, is_loc~, loc~) =>
+      env.0.visit_Expr_Is(expr~, pat~, is_loc~, loc~)
+    IsLexMatch(
+      expr~,
+      strategy~,
+      pat~,
+      pat_loc~,
+      lexmatch_question_loc~,
+      with_loc~,
+      loc~
+    ) =>
+      env.0.visit_Expr_IsLexMatch(
+        expr~,
+        strategy~,
+        pat~,
+        pat_loc~,
+        lexmatch_question_loc~,
+        with_loc~,
+        loc~,
+      )
+    RegexMatch(
+      expr~,
+      pat~,
+      bindings~,
+      eq_tilde_loc~,
+      rhs_lparen_loc~,
+      rhs_rparen_loc~,
+      binding_comma_locs~,
+      binding_equal_locs~,
+      loc~
+    ) => {
+      ignore(eq_tilde_loc)
+      ignore(rhs_lparen_loc)
+      ignore(rhs_rparen_loc)
+      ignore(binding_comma_locs)
+      ignore(binding_equal_locs)
       ignore(loc)
       env.0.visit_Expr(expr)
       iter_regex_pattern(env, pat)
@@ -4537,71 +7179,278 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
         binder.each(x => env.0.visit_Binder(x))
       })
     }
-    Defer(expr~, body~, loc~) => env.0.visit_Expr_Defer(expr~, body~, loc~)
-    LetFn(name~, func~, body~, loc~) =>
-      env.0.visit_Expr_LetFn(name~, func~, body~, loc~)
-    LetAnd(bindings~, body~, loc~) =>
-      env.0.visit_Expr_LetAnd(bindings~, body~, loc~)
-    Let(pattern~, expr~, body~, loc~) =>
-      env.0.visit_Expr_Let(pattern~, expr~, body~, loc~)
-    Sequence(exprs~, last_expr~, loc~) =>
-      env.0.visit_Expr_Sequence(exprs~, last_expr~, loc~)
-    Tuple(exprs~, loc~) => env.0.visit_Expr_Tuple(exprs~, loc~)
-    Record(type_name~, fields~, trailing~, loc~) =>
-      env.0.visit_Expr_Record(type_name~, fields~, trailing~, loc~)
-    RecordUpdate(type_name~, record~, fields~, loc~) =>
-      env.0.visit_Expr_RecordUpdate(type_name~, record~, fields~, loc~)
+    Defer(expr~, body~, defer_loc~, semi_loc~, loc~) =>
+      env.0.visit_Expr_Defer(expr~, body~, defer_loc~, semi_loc~, loc~)
+    LetFn(name~, func~, body~, semi_loc~, loc~) =>
+      env.0.visit_Expr_LetFn(name~, func~, body~, semi_loc~, loc~)
+    LetAnd(
+      bindings~,
+      body~,
+      letrec_loc~,
+      and_locs~,
+      equal_locs~,
+      annot_colon_locs~,
+      semi_loc~,
+      loc~
+    ) =>
+      env.0.visit_Expr_LetAnd(
+        bindings~,
+        body~,
+        letrec_loc~,
+        and_locs~,
+        equal_locs~,
+        annot_colon_locs~,
+        semi_loc~,
+        loc~,
+      )
+    Let(
+      pattern~,
+      expr~,
+      body~,
+      let_loc~,
+      annot_colon_loc~,
+      equal_loc~,
+      semi_loc~,
+      loc~
+    ) =>
+      env.0.visit_Expr_Let(
+        pattern~,
+        expr~,
+        body~,
+        let_loc~,
+        annot_colon_loc~,
+        equal_loc~,
+        semi_loc~,
+        loc~,
+      )
+    Sequence(exprs~, last_expr~, semi_locs~, loc~) =>
+      env.0.visit_Expr_Sequence(exprs~, last_expr~, semi_locs~, loc~)
+    Tuple(exprs~, lparen_loc~, rparen_loc~, comma_locs~, loc~) =>
+      env.0.visit_Expr_Tuple(
+        exprs~,
+        lparen_loc~,
+        rparen_loc~,
+        comma_locs~,
+        loc~,
+      )
+    Record(
+      type_name~,
+      fields~,
+      trailing~,
+      coloncolon_loc~,
+      lbrace_loc~,
+      rbrace_loc~,
+      comma_locs~,
+      semi_locs~,
+      loc~
+    ) =>
+      env.0.visit_Expr_Record(
+        type_name~,
+        fields~,
+        trailing~,
+        coloncolon_loc~,
+        lbrace_loc~,
+        rbrace_loc~,
+        comma_locs~,
+        semi_locs~,
+        loc~,
+      )
+    RecordUpdate(
+      type_name~,
+      record~,
+      fields~,
+      coloncolon_loc~,
+      lbrace_loc~,
+      dotdot_loc~,
+      rbrace_loc~,
+      comma_locs~,
+      loc~
+    ) =>
+      env.0.visit_Expr_RecordUpdate(
+        type_name~,
+        record~,
+        fields~,
+        coloncolon_loc~,
+        lbrace_loc~,
+        dotdot_loc~,
+        rbrace_loc~,
+        comma_locs~,
+        loc~,
+      )
     Field(record~, accessor~, loc~) =>
       env.0.visit_Expr_Field(record~, accessor~, loc~)
-    Method(type_name~, method_name~, loc~) =>
-      env.0.visit_Expr_Method(type_name~, method_name~, loc~)
-    DotApply(self~, method_name~, args~, return_self~, loc~) =>
-      env.0.visit_Expr_DotApply(self~, method_name~, args~, return_self~, loc~)
-    As(expr~, trait_~, loc~) => env.0.visit_Expr_As(expr~, trait_~, loc~)
-    Mutate(record~, accessor~, field~, augmented_by~, loc~) =>
-      env.0.visit_Expr_Mutate(record~, accessor~, field~, augmented_by~, loc~)
-    Match(expr~, cases~, match_loc~, loc~) =>
-      env.0.visit_Expr_Match(expr~, cases~, match_loc~, loc~)
-    LexMatch(strategy~, expr~, match_loc~, cases~, loc~) =>
-      env.0.visit_Expr_LexMatch(strategy~, expr~, match_loc~, cases~, loc~)
-    LetMut(binder~, ty~, expr~, body~, loc~) =>
-      env.0.visit_Expr_LetMut(binder~, ty~, expr~, body~, loc~)
-    Pipe(lhs~, rhs~, loc~) => env.0.visit_Expr_Pipe(lhs~, rhs~, loc~)
-    RevPipe(lhs~, rhs~, loc~) => {
+    Method(type_name~, method_name~, coloncolon_loc~, loc~) =>
+      env.0.visit_Expr_Method(type_name~, method_name~, coloncolon_loc~, loc~)
+    DotApply(
+      self~,
+      method_name~,
+      args~,
+      return_self~,
+      dot_loc~,
+      lparen_loc~,
+      rparen_loc~,
+      comma_locs~,
+      loc~
+    ) =>
+      env.0.visit_Expr_DotApply(
+        self~,
+        method_name~,
+        args~,
+        return_self~,
+        dot_loc~,
+        lparen_loc~,
+        rparen_loc~,
+        comma_locs~,
+        loc~,
+      )
+    As(expr~, trait_~, as_loc~, loc~) =>
+      env.0.visit_Expr_As(expr~, trait_~, as_loc~, loc~)
+    Mutate(
+      record~,
+      accessor~,
+      field~,
+      augmented_by~,
+      equal_loc~,
+      augmented_assign_loc~,
+      loc~
+    ) =>
+      env.0.visit_Expr_Mutate(
+        record~,
+        accessor~,
+        field~,
+        augmented_by~,
+        equal_loc~,
+        augmented_assign_loc~,
+        loc~,
+      )
+    Match(expr~, cases~, match_loc~, lbrace_loc~, rbrace_loc~, semi_locs~, loc~) =>
+      env.0.visit_Expr_Match(
+        expr~,
+        cases~,
+        match_loc~,
+        lbrace_loc~,
+        rbrace_loc~,
+        semi_locs~,
+        loc~,
+      )
+    LexMatch(
+      strategy~,
+      expr~,
+      match_loc~,
+      with_loc~,
+      lbrace_loc~,
+      rbrace_loc~,
+      semi_locs~,
+      cases~,
+      loc~
+    ) =>
+      env.0.visit_Expr_LexMatch(
+        strategy~,
+        expr~,
+        match_loc~,
+        with_loc~,
+        lbrace_loc~,
+        rbrace_loc~,
+        semi_locs~,
+        cases~,
+        loc~,
+      )
+    LetMut(
+      binder~,
+      ty~,
+      expr~,
+      body~,
+      let_loc~,
+      mut_loc~,
+      annot_colon_loc~,
+      equal_loc~,
+      semi_loc~,
+      loc~
+    ) =>
+      env.0.visit_Expr_LetMut(
+        binder~,
+        ty~,
+        expr~,
+        body~,
+        let_loc~,
+        mut_loc~,
+        annot_colon_loc~,
+        equal_loc~,
+        semi_loc~,
+        loc~,
+      )
+    Pipe(lhs~, rhs~, pipe_loc~, loc~) =>
+      env.0.visit_Expr_Pipe(lhs~, rhs~, pipe_loc~, loc~)
+    RevPipe(lhs~, rhs~, rev_pipe_loc~, loc~) => {
+      ignore(rev_pipe_loc)
       ignore(loc)
       env.0.visit_Expr(lhs)
       env.0.visit_Expr(rhs)
     }
-    Assign(var_~, expr~, augmented_by~, loc~) =>
-      env.0.visit_Expr_Assign(var_~, expr~, augmented_by~, loc~)
+    Assign(var_~, expr~, augmented_by~, equal_loc~, augmented_assign_loc~, loc~) =>
+      env.0.visit_Expr_Assign(
+        var_~,
+        expr~,
+        augmented_by~,
+        equal_loc~,
+        augmented_assign_loc~,
+        loc~,
+      )
     Hole(loc~, kind~) => env.0.visit_Expr_Hole(loc~, kind~)
-    Return(return_value~, loc~) => env.0.visit_Expr_Return(return_value~, loc~)
-    Raise(err_value~, loc~) => env.0.visit_Expr_Raise(err_value~, loc~)
-    Quantifier(kind~, binder~, binder_ty~, body~, loc~) => {
+    Return(return_value~, return_loc~, loc~) =>
+      env.0.visit_Expr_Return(return_value~, return_loc~, loc~)
+    Raise(err_value~, raise_loc~, loc~) =>
+      env.0.visit_Expr_Raise(err_value~, raise_loc~, loc~)
+    Quantifier(
+      kind~,
+      binder~,
+      binder_ty~,
+      body~,
+      quantifier_loc~,
+      colon_loc~,
+      comma_loc~,
+      loc~
+    ) => {
       ignore(kind)
+      ignore(quantifier_loc)
+      ignore(colon_loc)
+      ignore(comma_loc)
       ignore(loc)
       env.0.visit_Binder(binder)
       env.0.visit_Type(binder_ty)
       env.0.visit_Expr(body)
     }
-    Implies(lhs~, rhs~, loc~) => {
+    Implies(lhs~, rhs~, implies_loc~, loc~) => {
+      ignore(implies_loc)
       ignore(loc)
       env.0.visit_Expr(lhs)
       env.0.visit_Expr(rhs)
     }
-    ProofAssert(expr~, loc~) => {
+    ProofAssert(expr~, proof_assert_loc~, loc~) => {
+      ignore(proof_assert_loc)
       ignore(loc)
       env.0.visit_Expr(expr)
     }
-    ProofLet(binder~, expr~, loc~) => {
+    ProofLet(binder~, expr~, proof_let_loc~, equal_loc~, loc~) => {
+      ignore(proof_let_loc)
+      ignore(equal_loc)
       ignore(loc)
       env.0.visit_Binder(binder)
       env.0.visit_Expr(expr)
     }
-    Unit(loc~, faked~) => env.0.visit_Expr_Unit(loc~, faked~)
-    Break(arg~, label~, loc~) => env.0.visit_Expr_Break(arg~, label~, loc~)
-    Continue(args~, label~, loc~) =>
-      env.0.visit_Expr_Continue(args~, label~, loc~)
+    Unit(loc~, faked~, lparen_loc~, rparen_loc~) =>
+      env.0.visit_Expr_Unit(loc~, faked~, lparen_loc~, rparen_loc~)
+    Break(arg~, label~, break_loc~, post_label_loc~, loc~) =>
+      env.0.visit_Expr_Break(arg~, label~, break_loc~, post_label_loc~, loc~)
+    Continue(args~, label~, continue_loc~, post_label_loc~, comma_locs~, loc~) =>
+      env.0.visit_Expr_Continue(
+        args~,
+        label~,
+        continue_loc~,
+        post_label_loc~,
+        comma_locs~,
+        loc~,
+      )
     For(
       binders~,
       condition~,
@@ -4609,6 +7458,18 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
       body~,
       for_else~,
       label~,
+      label_colon_loc~,
+      for_loc~,
+      binder_comma_locs~,
+      binder_equal_locs~,
+      semi_locs~,
+      continue_comma_locs~,
+      continue_equal_locs~,
+      body_lbrace_loc~,
+      body_rbrace_loc~,
+      nobreak_loc~,
+      nobreak_lbrace_loc~,
+      nobreak_rbrace_loc~,
       loc~,
       where_clause~
     ) =>
@@ -4619,6 +7480,18 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
         body~,
         for_else~,
         label~,
+        label_colon_loc~,
+        for_loc~,
+        binder_comma_locs~,
+        binder_equal_locs~,
+        semi_locs~,
+        continue_comma_locs~,
+        continue_equal_locs~,
+        body_lbrace_loc~,
+        body_rbrace_loc~,
+        nobreak_loc~,
+        nobreak_lbrace_loc~,
+        nobreak_rbrace_loc~,
         loc~,
         where_clause~,
       )
@@ -4631,6 +7504,20 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
       else_block~,
       where_clause~,
       label~,
+      label_colon_loc~,
+      for_loc~,
+      binder_comma_locs~,
+      in_loc~,
+      semi_locs~,
+      init_comma_locs~,
+      init_equal_locs~,
+      continue_comma_locs~,
+      continue_equal_locs~,
+      body_lbrace_loc~,
+      body_rbrace_loc~,
+      nobreak_loc~,
+      nobreak_lbrace_loc~,
+      nobreak_rbrace_loc~,
       loc~
     ) =>
       env.0.visit_Expr_ForEach(
@@ -4642,6 +7529,20 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
         else_block~,
         where_clause~,
         label~,
+        label_colon_loc~,
+        for_loc~,
+        binder_comma_locs~,
+        in_loc~,
+        semi_locs~,
+        init_comma_locs~,
+        init_equal_locs~,
+        continue_comma_locs~,
+        continue_equal_locs~,
+        body_lbrace_loc~,
+        body_rbrace_loc~,
+        nobreak_loc~,
+        nobreak_lbrace_loc~,
+        nobreak_rbrace_loc~,
         loc~,
       )
     Try(
@@ -4652,6 +7553,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
       try_loc~,
       catch_loc~,
       else_loc~,
+      catch_lbrace_loc~,
+      catch_rbrace_loc~,
+      catch_semi_locs~,
+      noraise_lbrace_loc~,
+      noraise_rbrace_loc~,
+      noraise_semi_locs~,
       loc~
     ) =>
       env.0.visit_Expr_Try(
@@ -4662,13 +7569,28 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
         try_loc~,
         catch_loc~,
         else_loc~,
+        catch_lbrace_loc~,
+        catch_rbrace_loc~,
+        catch_semi_locs~,
+        noraise_lbrace_loc~,
+        noraise_rbrace_loc~,
+        noraise_semi_locs~,
         loc~,
       )
     TryOperator(body~, kind~, try_loc~, loc~) =>
       env.0.visit_Expr_TryOperator(body~, kind~, try_loc~, loc~)
-    Map(elems~, loc~) => env.0.visit_Expr_Map(elems~, loc~)
-    Group(expr~, group~, loc~) => env.0.visit_Expr_Group(expr~, group~, loc~)
-    TemplateWriting(expr~, template~, loc~) => {
+    Map(elems~, lbrace_loc~, rbrace_loc~, comma_locs~, loc~) =>
+      env.0.visit_Expr_Map(elems~, lbrace_loc~, rbrace_loc~, comma_locs~, loc~)
+    Group(expr~, group~, left_delim_loc~, right_delim_loc~, loc~) =>
+      env.0.visit_Expr_Group(
+        expr~,
+        group~,
+        left_delim_loc~,
+        right_delim_loc~,
+        loc~,
+      )
+    TemplateWriting(expr~, template~, lt_plus_loc~, loc~) => {
+      ignore(lt_plus_loc)
       ignore(loc)
       env.0.visit_Expr(expr)
       env.0.visit_Expr(template)
@@ -4685,9 +7607,13 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   strategy~,
   pat~,
   pat_loc~,
+  lexmatch_question_loc~,
+  with_loc~,
   loc~,
 ) {
   ignore(pat_loc)
+  ignore(lexmatch_question_loc)
+  ignore(with_loc)
   ignore(loc)
   strategy.each(strategy => env.0.visit_Label(strategy))
   pat.each(pat => env.0.visit_LexTopPattern(pat))
@@ -4700,10 +7626,18 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   strategy~,
   expr~,
   match_loc~,
+  with_loc~,
+  lbrace_loc~,
+  rbrace_loc~,
+  semi_locs~,
   cases~,
   loc~,
 ) {
   ignore(match_loc)
+  ignore(with_loc)
+  ignore(lbrace_loc)
+  ignore(rbrace_loc)
+  ignore(semi_locs)
   ignore(loc)
   strategy.each(strategy => env.0.visit_Label(strategy))
   env.0.visit_Expr(expr)
@@ -4763,14 +7697,15 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_LexPa
   lex_pattern,
 ) {
   match lex_pattern {
-    Alias(pat~, binder~, loc~) =>
-      env.0.visit_LexPattern_Alias(pat~, binder~, loc~)
+    Alias(pat~, binder~, as_loc~, loc~) =>
+      env.0.visit_LexPattern_Alias(pat~, binder~, as_loc~, loc~)
     RegexInterp(elems~, loc~) =>
       env.0.visit_LexPattern_RegexInterp(elems~, loc~)
     Regex(lit~, offset~, loc~) =>
       env.0.visit_LexPattern_Regex(lit~, offset~, loc~)
     ConstantRef(lid~, loc~) => env.0.visit_LexPattern_ConstantRef(lid~, loc~)
-    Sequence(pats~, loc~) => env.0.visit_LexPattern_Sequence(pats~, loc~)
+    Sequence(pats~, semi_locs~, loc~) =>
+      env.0.visit_LexPattern_Sequence(pats~, semi_locs~, loc~)
   }
 }
 
@@ -4812,8 +7747,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_LexPa
   env,
   pat~,
   binder~,
+  as_loc~,
   loc~,
 ) {
+  ignore(as_loc)
   ignore(loc)
   env.0.visit_LexPattern(pat)
   env.0.visit_Binder(binder)
@@ -4823,8 +7760,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_LexPa
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_LexPattern_Sequence(
   env,
   pats~,
+  semi_locs~,
   loc~,
 ) {
+  semi_locs.each(ignore)
   ignore(loc)
   pats.each(pat => env.0.visit_LexPattern(pat))
 }

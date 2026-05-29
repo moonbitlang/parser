@@ -19,14 +19,23 @@ pub fn make_ident_expr(loc~ : Location, id : Var) -> Expr {
 
 ///|
 /// Create tuple expression
-pub fn make_tuple_expr(loc~ : Location, exprs : @list.List[Expr]) -> Expr {
-  Tuple(exprs~, loc~)
+pub fn make_tuple_expr(
+  loc~ : Location,
+  lparen_loc? : Location = no_location,
+  rparen_loc? : Location = no_location,
+  comma_locs? : @list.List[Location] = @list.empty(),
+  exprs : @list.List[Expr],
+) -> Expr {
+  Tuple(exprs~, lparen_loc~, rparen_loc~, comma_locs~, loc~)
 }
 
 ///|
 /// Create array expression with possible spread elements
 pub fn make_array_expr(
   loc~ : Location,
+  lbracket_loc? : Location = no_location,
+  rbracket_loc? : Location = no_location,
+  comma_locs? : @list.List[Location] = @list.empty(),
   elems : @list.List[SpreadableElem],
 ) -> Expr {
   // Try to convert to regular array if no spread elements
@@ -34,12 +43,22 @@ pub fn make_array_expr(
   for elem in elems {
     match elem {
       Regular(e) => acc = acc.add(e)
-      Spread(_) => return ArraySpread(elems~, loc~)
+      Spread(_) =>
+        return ArraySpread(
+          elems~,
+          lbracket_loc~,
+          rbracket_loc~,
+          comma_locs~,
+          loc~,
+        )
     }
   } nobreak {
     return Array(
       // If we have only regular elements, create a simple array
       exprs=acc.rev(),
+      lbracket_loc~,
+      rbracket_loc~,
+      comma_locs~,
       loc~,
     )
   }
@@ -69,20 +88,36 @@ pub fn make_interp_expr(loc~ : Location, c : @tokens.InterpLiteral) -> Expr {
 pub fn make_record_expr(
   loc~ : Location,
   trailing~ : TrailingMark,
+  coloncolon_loc? : Location? = None,
+  lbrace_loc? : Location = no_location,
+  rbrace_loc? : Location = no_location,
+  comma_locs? : @list.List[Location] = @list.empty(),
+  semi_locs? : @list.List[Location] = @list.empty(),
   type_name : TypeName?,
   fields : @list.List[FieldDef],
 ) -> Expr {
-  Record(type_name~, fields~, trailing~, loc~)
+  Record(
+    type_name~,
+    fields~,
+    trailing~,
+    coloncolon_loc~,
+    lbrace_loc~,
+    rbrace_loc~,
+    comma_locs~,
+    semi_locs~,
+    loc~,
+  )
 }
 
 ///|
 /// Create alias pattern
 pub fn make_alias_pattern(
   loc~ : Location,
+  as_loc? : Location = no_location,
   pat : Pattern,
   alias_ : Binder,
 ) -> Pattern {
-  Alias(pat~, alias_~, loc~)
+  Alias(pat~, alias_~, as_loc~, loc~)
 }
 
 ///|
@@ -95,26 +130,48 @@ pub fn make_constant_pattern(loc~ : Location, c : Constant) -> Pattern {
 /// Create tuple pattern
 pub fn make_tuple_pattern(
   loc~ : Location,
+  lparen_loc? : Location = no_location,
+  rparen_loc? : Location = no_location,
+  comma_locs? : @list.List[Location] = @list.empty(),
   pats : @list.List[Pattern],
 ) -> Pattern {
-  Tuple(pats~, loc~)
+  Tuple(pats~, lparen_loc~, rparen_loc~, comma_locs~, loc~)
 }
 
 ///|
 /// Create constructor pattern
 pub fn make_constr_pattern(
   loc~ : Location,
+  args_lparen_loc? : Location? = None,
+  args_rparen_loc? : Location? = None,
+  arg_comma_locs? : @list.List[Location] = @list.empty(),
+  open_dotdot_loc? : Location? = None,
   constr : Constructor,
   args : @list.List[ConstrPatArg]?,
   is_open : Bool,
 ) -> Pattern {
-  Constr(constr~, args~, is_open~, loc~)
+  Constr(
+    constr~,
+    args~,
+    is_open~,
+    args_lparen_loc~,
+    args_rparen_loc~,
+    arg_comma_locs~,
+    open_dotdot_loc~,
+    loc~,
+  )
 }
 
 ///|
 /// Create tuple type
-pub fn make_tuple_type(loc~ : Location, tys : @list.List[Type]) -> Type {
-  Tuple(tys~, loc~)
+pub fn make_tuple_type(
+  loc~ : Location,
+  lparen_loc? : Location = no_location,
+  rparen_loc? : Location = no_location,
+  comma_locs? : @list.List[Location] = @list.empty(),
+  tys : @list.List[Type],
+) -> Type {
+  Tuple(tys~, lparen_loc~, rparen_loc~, comma_locs~, loc~)
 }
 
 ///|
@@ -131,11 +188,12 @@ pub fn make_option_type(
 /// Create field pattern
 pub fn make_field_pat(
   loc~ : Location,
+  colon_loc? : Location? = None,
   label : Label,
   pattern : Pattern,
   is_pun : Bool,
 ) -> FieldPat {
-  FieldPat::{ label, pattern, is_pun, loc }
+  FieldPat::{ label, pattern, is_pun, colon_loc, loc }
 }
 
 ///|
@@ -152,6 +210,9 @@ pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
           value: arg,
           kind: ArgumentKind::Positional,
         }),
+        lparen_loc=no_location,
+        rparen_loc=no_location,
+        comma_locs=@list.empty(),
         loc~,
       )
     }
@@ -218,6 +279,10 @@ pub fn desugar_array_get(loc~ : Location, obj : Expr, index : Expr) -> Expr {
       Argument::{ value: index, kind: ArgumentKind::Positional },
     ]),
     return_self=false,
+    dot_loc=no_location,
+    lparen_loc=no_location,
+    rparen_loc=no_location,
+    comma_locs=@list.empty(),
     loc~,
   )
 }
@@ -241,6 +306,10 @@ pub fn desugar_array_set(
       Argument::{ value, kind: ArgumentKind::Positional },
     ]),
     return_self=false,
+    dot_loc=no_location,
+    lparen_loc=no_location,
+    rparen_loc=no_location,
+    comma_locs=@list.empty(),
     loc~,
   )
 }
@@ -284,22 +353,64 @@ pub fn desugar_array_augmented_set(
           loc~,
         ),
       ),
+      let_loc=no_location,
+      annot_colon_loc=None,
+      equal_loc=no_location,
+      semi_loc=None,
       loc~,
     ),
+    let_loc=no_location,
+    annot_colon_loc=None,
+    equal_loc=no_location,
+    semi_loc=None,
     loc~,
   )
 }
 
 ///|
 /// Try to create assignment expression
-pub fn make_assign_opt(loc~ : Location, lhs : Expr, rhs : Expr) -> Expr? {
+pub fn make_assign_opt(
+  loc~ : Location,
+  lhs : Expr,
+  rhs : Expr,
+  equal_loc? : Location = no_location,
+) -> Expr? {
   match lhs {
     Ident(id~, loc=_) =>
-      Some(Assign(var_=id, expr=rhs, augmented_by=None, loc~))
+      Some(
+        Assign(
+          var_=id,
+          expr=rhs,
+          augmented_by=None,
+          equal_loc=Some(equal_loc),
+          augmented_assign_loc=None,
+          loc~,
+        ),
+      )
     Field(record~, accessor~, loc=_) =>
-      Some(Mutate(record~, accessor~, field=rhs, augmented_by=None, loc~))
-    ArrayGet(array~, index~, loc=_) =>
-      Some(ArraySet(array~, index~, value=rhs, loc~))
+      Some(
+        Mutate(
+          record~,
+          accessor~,
+          field=rhs,
+          augmented_by=None,
+          equal_loc=None,
+          augmented_assign_loc=None,
+          loc~,
+        ),
+      )
+    ArrayGet(array~, index~, lbracket_loc~, rbracket_loc~, loc=_) =>
+      Some(
+        ArraySet(
+          array~,
+          index~,
+          value=rhs,
+          lbracket_loc~,
+          rbracket_loc~,
+          equal_loc~,
+          loc~,
+        ),
+      )
     _ => None
   }
 }
@@ -311,14 +422,45 @@ pub fn make_augmented_assign_opt(
   op : Var,
   lhs : Expr,
   rhs : Expr,
+  augmented_assign_loc? : Location = op.loc,
 ) -> Expr? {
   match lhs {
     Ident(id~, loc=_) =>
-      Some(Assign(var_=id, expr=rhs, augmented_by=Some(op), loc~))
+      Some(
+        Assign(
+          var_=id,
+          expr=rhs,
+          augmented_by=Some(op),
+          equal_loc=None,
+          augmented_assign_loc=Some(augmented_assign_loc),
+          loc~,
+        ),
+      )
     Field(record~, accessor~, loc=_) =>
-      Some(Mutate(record~, accessor~, field=rhs, augmented_by=Some(op), loc~))
-    ArrayGet(array~, index~, loc=_) =>
-      Some(ArrayAugmentedSet(op~, array~, index~, value=rhs, loc~))
+      Some(
+        Mutate(
+          record~,
+          accessor~,
+          field=rhs,
+          augmented_by=Some(op),
+          equal_loc=None,
+          augmented_assign_loc=Some(augmented_assign_loc),
+          loc~,
+        ),
+      )
+    ArrayGet(array~, index~, lbracket_loc~, rbracket_loc~, loc=_) =>
+      Some(
+        ArrayAugmentedSet(
+          op~,
+          array~,
+          index~,
+          value=rhs,
+          lbracket_loc~,
+          rbracket_loc~,
+          augmented_assign_loc~,
+          loc~,
+        ),
+      )
     _ => None
   }
 }
@@ -327,11 +469,12 @@ pub fn make_augmented_assign_opt(
 /// Create field definition
 pub fn make_field_def(
   loc~ : Location,
+  colon_loc? : Location? = None,
   label : Label,
   expr : Expr,
   is_pun : Bool,
 ) -> FieldDef {
-  FieldDef::{ label, expr, is_pun, loc }
+  FieldDef::{ label, expr, is_pun, colon_loc, loc }
 }
 
 ///|
@@ -413,13 +556,19 @@ pub fn make_arrow_fn(
   params : @list.List[(ArrowFnParam, Type?)],
   body : Expr,
   params_loc~ : Location,
+  lparen_loc? : Location? = None,
+  rparen_loc? : Location? = None,
+  comma_locs? : @list.List[Location] = @list.empty(),
+  fat_arrow_loc? : Location? = None,
+  body_lbrace_loc? : Location? = None,
+  body_rbrace_loc? : Location? = None,
   loc~ : Location,
 ) -> Func {
   let parameters = params.map(fn(p) {
     let (param, ty) = p
     match param {
-      Named(binder) => Parameter::Positional(binder~, ty~)
-      Unnamed(loc) => Parameter::DiscardPositional(ty~, loc~)
+      Named(binder) => Parameter::Positional(binder~, ty~, colon_loc=None)
+      Unnamed(loc) => Parameter::DiscardPositional(ty~, colon_loc=None, loc~)
     }
   })
   Func::{
@@ -430,6 +579,14 @@ pub fn make_arrow_fn(
     error_type: ErrorType::NoErrorType,
     kind: FnKind::Arrow,
     is_async: None,
+    fn_loc: None,
+    lparen_loc,
+    rparen_loc,
+    comma_locs,
+    return_arrow_loc: None,
+    fat_arrow_loc,
+    body_lbrace_loc,
+    body_rbrace_loc,
     loc,
   }
 }
@@ -447,7 +604,7 @@ pub fn Type::loc(self : Type) -> Location {
     | Tuple(loc~, ..)
     | Arrow(loc~, ..)
     | Any(loc~)
-    | Object({ loc, .. }) => loc
+    | Object(loc~, ..) => loc
   }
 }
 
@@ -456,93 +613,65 @@ pub fn Type::loc(self : Type) -> Location {
 ///|
 pub fn loc_of_expression(expr : Expr) -> Location {
   match expr {
-    Apply(func=_, args=_, loc~) => loc
+    Apply(loc~, ..) => loc
     Infix(op=_, lhs=_, rhs=_, loc~) => loc
     Unary(op=_, expr=_, loc~) => loc
-    Array(exprs=_, loc~) => loc
-    ArraySpread(elems=_, loc~) => loc
-    ListComprehension(kind=_, guard_=_, body=_, loc~) => loc
-    ArrayGet(array=_, index=_, loc~) => loc
-    ArrayGetSlice(array=_, start_index=_, end_index=_, index_loc=_, loc~) => loc
-    ArraySet(array=_, index=_, value=_, loc~) => loc
-    ArrayAugmentedSet(op=_, array=_, index=_, value=_, loc~) => loc
+    Array(loc~, ..) => loc
+    ArraySpread(loc~, ..) => loc
+    ListComprehension(loc~, ..) => loc
+    ArrayGet(loc~, ..) => loc
+    ArrayGetSlice(loc~, ..) => loc
+    ArraySet(loc~, ..) => loc
+    ArrayAugmentedSet(loc~, ..) => loc
     Constant(c=_, loc~) => loc
     MultilineString(elems=_, loc~) => loc
     Interp(elems=_, loc~) => loc
-    Constraint(expr=_, ty=_, loc~) => loc
+    Constraint(loc~, ..) => loc
     Constr(constr=_, loc~) => loc
-    While(loop_cond=_, loop_body=_, while_else=_, label=_, loc~) => loc
+    While(loc~, ..) => loc
     Function(func=_, loc~) => loc
     Ident(id=_, loc~) => loc
-    If(cond=_, ifso=_, ifnot=_, loc~) => loc
-    Guard(cond=_, otherwise=_, body=_, loc~) => loc
-    Is(expr=_, pat=_, loc~) => loc
-    IsLexMatch(expr=_, strategy=_, pat=_, pat_loc=_, loc~) => loc
-    RegexMatch(expr=_, pat=_, bindings=_, loc~) => loc
+    If(loc~, ..) => loc
+    Guard(cond=_, otherwise=_, body=_, loc~, ..) => loc
+    Is(loc~, ..) => loc
+    IsLexMatch(loc~, ..) => loc
+    RegexMatch(loc~, ..) => loc
     Defer(loc~, ..) => loc
-    LetFn(name=_, func=_, body=_, loc~) => loc
-    LetAnd(bindings=_, body=_, loc~) => loc
-    Let(pattern=_, expr=_, body=_, loc~) => loc
-    Sequence(exprs=_, last_expr=_, loc~) => loc
-    Tuple(exprs=_, loc~) => loc
-    Record(type_name=_, fields=_, trailing=_, loc~) => loc
-    RecordUpdate(type_name=_, record=_, fields=_, loc~) => loc
+    LetFn(name=_, func=_, body=_, loc~, ..) => loc
+    LetAnd(bindings=_, body=_, loc~, ..) => loc
+    Let(pattern=_, expr=_, body=_, loc~, ..) => loc
+    Sequence(exprs=_, last_expr=_, loc~, ..) => loc
+    Tuple(loc~, ..) => loc
+    Record(loc~, ..) => loc
+    RecordUpdate(loc~, ..) => loc
     Field(record=_, accessor=_, loc~) => loc
-    Method(type_name=_, method_name=_, loc~) => loc
-    DotApply(self=_, method_name=_, args=_, return_self=_, loc~) => loc
-    As(expr=_, trait_=_, loc~) => loc
-    Mutate(record=_, accessor=_, field=_, augmented_by=_, loc~) => loc
-    Match(expr=_, cases=_, match_loc=_, loc~) => loc
-    LexMatch(strategy=_, expr=_, match_loc=_, cases=_, loc~) => loc
-    LetMut(binder=_, ty=_, expr=_, body=_, loc~) => loc
-    Pipe(lhs=_, rhs=_, loc~) => loc
-    RevPipe(lhs=_, rhs=_, loc~) => loc
-    Assign(var_=_, expr=_, augmented_by=_, loc~) => loc
+    Method(loc~, ..) => loc
+    DotApply(loc~, ..) => loc
+    As(loc~, ..) => loc
+    Mutate(loc~, ..) => loc
+    Match(loc~, ..) => loc
+    LexMatch(loc~, ..) => loc
+    LetMut(binder=_, ty=_, expr=_, body=_, loc~, ..) => loc
+    Pipe(loc~, ..) => loc
+    RevPipe(loc~, ..) => loc
+    Assign(loc~, ..) => loc
     Hole(loc~, kind=_) => loc
-    Return(return_value=_, loc~) => loc
-    Raise(err_value=_, loc~) => loc
-    Quantifier(kind=_, binder=_, binder_ty=_, body=_, loc~) => loc
-    Implies(lhs=_, rhs=_, loc~) => loc
-    ProofAssert(expr=_, loc~) => loc
-    ProofLet(binder=_, expr=_, loc~) => loc
-    Unit(loc~, faked=_) => loc
-    Break(arg=_, label=_, loc~) => loc
-    Continue(args=_, label=_, loc~) => loc
-    For(
-      binders=_,
-      condition=_,
-      continue_block=_,
-      body=_,
-      for_else=_,
-      label=_,
-      loc~,
-      where_clause=_
-    ) => loc
-    ForEach(
-      binders=_,
-      expr=_,
-      init=_,
-      continue_block=_,
-      body=_,
-      else_block=_,
-      where_clause=_,
-      label=_,
-      loc~
-    ) => loc
-    Try(
-      body=_,
-      catch_=_,
-      try_else=_,
-      has_try=_,
-      try_loc=_,
-      catch_loc=_,
-      else_loc=_,
-      loc~
-    ) => loc
+    Return(loc~, ..) => loc
+    Raise(loc~, ..) => loc
+    Quantifier(loc~, ..) => loc
+    Implies(loc~, ..) => loc
+    ProofAssert(expr=_, loc~, ..) => loc
+    ProofLet(binder=_, expr=_, loc~, ..) => loc
+    Unit(loc~, ..) => loc
+    Break(loc~, ..) => loc
+    Continue(loc~, ..) => loc
+    For(loc~, ..) => loc
+    ForEach(loc~, ..) => loc
+    Try(loc~, ..) => loc
     TryOperator(loc~, ..) => loc
-    Map(elems=_, loc~) => loc
-    Group(expr=_, group=_, loc~) => loc
-    TemplateWriting(expr=_, template=_, loc~) => loc
+    Map(loc~, ..) => loc
+    Group(loc~, ..) => loc
+    TemplateWriting(loc~, ..) => loc
     StaticAssert(asserts=_, body=_) => no_location
   }
 }
@@ -585,15 +714,15 @@ pub fn Impl::loc(self : Self) -> Location {
 ///|
 pub fn Parameter::loc(self : Self) -> Location {
   match self {
-    Optional(binder~, ty=_, default~) => binder.loc.merge(default.loc())
-    Labelled(binder~, ty~)
-    | Positional(binder~, ty~)
-    | QuestionOptional(binder~, ty~) =>
+    Optional(binder~, ty=_, default~, ..) => binder.loc.merge(default.loc())
+    Labelled(binder~, ty~, ..)
+    | Positional(binder~, ty~, ..)
+    | QuestionOptional(binder~, ty~, ..) =>
       match ty {
         None => binder.loc
         Some(ty) => binder.loc.merge(ty.loc())
       }
-    DiscardPositional(ty=_, loc~) => loc
+    DiscardPositional(ty=_, loc~, ..) => loc
   }
 }
 
