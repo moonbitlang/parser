@@ -45,7 +45,7 @@ fn sig_name(sig : Sig) -> String {
 fn qname_to_string(name : QualifiedName) -> String {
   match name.name {
     Ident(name~) => name
-    Dot(pkg~, id~) => "\{pkg}.\{id}"
+    Dot(pkg~, id~, ..) => "\{pkg}.\{id}"
   }
 }
 
@@ -138,7 +138,7 @@ test "parse legacy mbti simple fixture" {
   guard sig_at(mbti, 5) is Func({ is_async: Some(_), .. }) else {
     fail("expected async function")
   }
-  guard sig_at(mbti, 6) is Func({ return_: (_, ErrorType(ty=err_ty)), .. }) else {
+  guard sig_at(mbti, 6) is Func({ return_: (_, ErrorType(ty=err_ty, ..)), .. }) else {
     fail("expected custom error return")
   }
   expect_type_name(err_ty, "Failure")
@@ -152,7 +152,7 @@ test "parse legacy mbti simple fixture" {
     fail("expected no-payload suberror")
   }
   guard sig_at(mbti, 10)
-    is Type({ components: Error(EnumPayload(constrs)), .. }) else {
+    is Type({ components: Error(EnumPayload(constrs~, ..)), .. }) else {
     fail("expected single-constructor suberror")
   }
   expect_constructor_name(constrs, 0, "SinglePayload")

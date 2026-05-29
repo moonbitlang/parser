@@ -21,6 +21,7 @@ test "outdated syntax is rejected" {
   expect_rejected(local_type_source, "local_type_decl_removed.mbt")
   expect_rejected("fn main!() { () }", "fn_bang_removed.mbt")
   expect_rejected("fn f[T]() { () }", "post_name_generic_removed.mbt")
+  expect_rejected("struct T ()", "empty_tuple_struct_removed.mbt")
   let local_fn_bang_source =
     #|fn main {
     #|  fn f!() { () }
