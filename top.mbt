@@ -70,11 +70,11 @@ fn attach_docstrings(
         last_pos = loc.start
         match td.components {
           // there is no docstring inside the types
-          Abstract | Alias(_) | Error(NoPayload) | TupleStruct(_) => ()
+          Abstract | Alias(..) | Error(NoPayload) | TupleStruct(..) => ()
           // handle docstring before the enum/suberror constructor and struct fields 
-          Error(EnumPayload(constrs))
-          | Variant(constrs)
-          | ExtensibleEnum(constrs) =>
+          Error(EnumPayload(constrs~, ..))
+          | Variant(constrs~, ..)
+          | ExtensibleEnum(constrs~, ..) =>
             constrs.each(constr => {
               let previous = search_docstrings(last_pos, constr.loc)
                 .map(make_doc)
@@ -90,7 +90,7 @@ fn attach_docstrings(
               constr.doc = previous
               last_pos = constr.loc.end
             })
-          Record(fields~, constr_decl~) => {
+          Record(fields~, constr_decl~, ..) => {
             fields.each(field => {
               let previous = search_docstrings(last_pos, field.loc)
                 .map(make_doc)

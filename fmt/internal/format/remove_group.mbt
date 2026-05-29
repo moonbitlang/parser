@@ -6,9 +6,11 @@ impl MapVisitor for RemoveGroup with fn visit_Expr_Group(
   self,
   expr~,
   group~,
+  left_delim_loc~,
+  right_delim_loc~,
   loc~,
 ) {
-  ignore((group, loc))
+  ignore((group, left_delim_loc, right_delim_loc, loc))
   self.visit_Expr(expr)
 }
 
