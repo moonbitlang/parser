@@ -22,5 +22,5 @@ description = "AST and parsers for the MoonBit programming language"
 
 options(
   "bin-deps": { "moonbitlang/yacc": "0.7.12" },
-  exclude: [ "test" ],
+  exclude: [ "test", "extra_modules" ],
 )
