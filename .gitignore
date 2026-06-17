@@ -6,3 +6,4 @@ target
 *.ml
 node_modules
 test/sync_test/debug
+extra_modules
