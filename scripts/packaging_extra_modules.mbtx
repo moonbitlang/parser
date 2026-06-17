@@ -1,0 +1,269 @@
+import {
+  "moonbitlang/async@0.19.0",
+  "moonbitlang/async@0.19.0/fs",
+  "moonbitlang/async@0.19.0/io",
+  "moonbitlang/async@0.19.0/process",
+  "moonbitlang/core/env",
+}
+
+// Build two standalone modules from packages in the parser repository:
+//
+//   extra_modules/
+//   ├── moon.work       # workspace for the generated modules
+//   ├── lexer/          # moonbitlang/lexer
+//   │   ├── basic/      # private support package needed by lexer and tokens
+//   │   └── tokens/     # private support package needed by lexer
+//   └── moon_config/    # moonbitlang/moon_config, depending on moonbitlang/lexer
+//
+// The generated module versions intentionally follow the local
+// moonbitlang/parser version in the repository root moon.mod.
+
+fn join_path(parent : String, child : String) -> String {
+  if parent.has_suffix("/") {
+    "\{parent}\{child}"
+  } else {
+    "\{parent}/\{child}"
+  }
+}
+
+// The script removes and recreates the output directory on each run. Keep the
+// argument deliberately narrow so a typo cannot delete an arbitrary nested path.
+fn validate_output_root(root : String) -> Unit {
+  if root == "" || root == "." || root == ".." || root.contains("/") {
+    abort("output directory must be a simple relative directory name")
+  }
+}
+
+// Keep generated modules in lockstep with the parser repository version.
+async fn read_parser_version() -> String {
+  let manifest = @fs.read_file("moon.mod").text()
+  for line in manifest.split("\n") {
+    let trimmed = line.trim()
+    if trimmed.has_prefix("version = ") {
+      let parts = trimmed.split("\"").to_array()
+      if parts.length() >= 2 {
+        return parts[1].to_owned()
+      }
+    }
+  }
+  abort("failed to find version in moon.mod")
+}
+
+async fn is_dir(path : String) -> Bool {
+  @fs.kind(path) is Directory
+}
+
+async fn ensure_dir(path : String) -> Unit {
+  if @fs.exists(path) {
+    guard is_dir(path) else {
+      abort("\{path} exists but is not a directory")
+    }
+  } else {
+    @fs.mkdir(path)
+  }
+}
+
+async fn reset_generated_root(root : String) -> Unit {
+  validate_output_root(root)
+  if @fs.exists(root) {
+    guard is_dir(root) else {
+      abort("\{root} exists but is not a directory")
+    }
+    @fs.rmdir(root, recursive=true)
+  }
+  @fs.mkdir(root)
+}
+
+async fn write_file(path : String, content : String) -> Unit {
+  @fs.write_file(path, content, create_mode=CreateOrTruncate)
+}
+
+// Copy source bytes unchanged. This includes generated .mbt files such as
+// tokens/tokens.mbt without reading or transforming their contents.
+async fn copy_file(src : String, dst : String) -> Unit {
+  @fs.write_file(dst, @fs.read_file(src), create_mode=CreateOrTruncate)
+}
+
+// Only .mbt sources are part of the packaged modules; package manifests are
+// rewritten below because import paths change when the packages become modules.
+async fn copy_mbt_files(src_dir : String, dst_dir : String) -> Unit {
+  for name in @fs.readdir(src_dir) {
+    if name.has_suffix(".mbt") {
+      copy_file(join_path(src_dir, name), join_path(dst_dir, name))
+    }
+  }
+}
+
+async fn copy_package(
+  src_dir : String,
+  dst_dir : String,
+  moon_pkg : String,
+) -> Unit {
+  ensure_dir(dst_dir)
+  copy_mbt_files(src_dir, dst_dir)
+  write_file(join_path(dst_dir, "moon.pkg"), moon_pkg)
+}
+
+// Shared moon.mod template for the generated standalone modules.
+fn package_manifest(
+  name : String,
+  version : String,
+  description : String,
+  imports : String,
+) -> String {
+  let imports = imports.trim_end()
+  let import_block = if imports == "" {
+    ""
+  } else {
+    let block =
+      $|import {
+      $|\{imports}
+      $|}
+      $|
+      $|
+    block
+  }
+  let manifest =
+    $|name = "\{name}"
+    $|
+    $|version = "\{version}"
+    $|
+    $|\{import_block}repository = "https://github.com/moonbitlang/parser"
+    $|
+    $|license = "Apache-2.0"
+    $|
+    $|description = "\{description}"
+    $|
+  manifest
+}
+
+// The lexer root package imports its support packages through the new
+// moonbitlang/lexer module path instead of moonbitlang/parser.
+let lexer_root_pkg : String =
+  #|import {
+  #|  "moonbitlang/lexer/tokens",
+  #|  "moonbitlang/lexer/basic",
+  #|  "moonbitlang/core/list",
+  #|  "moonbitlang/core/string",
+  #|  "moonbitlang/core/cmp",
+  #|  "moonbitlang/core/ref",
+  #|  "moonbitlang/core/hashset",
+  #|  "moonbitlang/core/hashmap",
+  #|}
+  #|
+
+// basic and tokens are copied under moonbitlang/lexer because lexer cannot be
+// checked independently without them.
+let lexer_basic_pkg : String =
+  #|import {
+  #|  "moonbitlang/core/ref",
+  #|}
+  #|
+  #|import {
+  #|  "moonbitlang/core/json",
+  #|} for "test"
+  #|
+
+let lexer_tokens_pkg : String =
+  #|import {
+  #|  "moonbitlang/lexer/basic",
+  #|}
+  #|
+
+// moon_config keeps its original package contents but rewrites parser-local
+// imports to depend on the generated moonbitlang/lexer module.
+let moon_config_root_pkg : String =
+  #|import {
+  #|  "moonbitlang/lexer/basic",
+  #|  "moonbitlang/lexer/tokens",
+  #|  "moonbitlang/lexer",
+  #|  "moonbitlang/core/immut/vector",
+  #|  "moonbitlang/core/json",
+  #|}
+  #|
+  #|import {
+  #|  "moonbitlang/core/test",
+  #|  "moonbitlang/core/debug",
+  #|} for "test"
+  #|
+  #|import {
+  #|  "moonbitlang/core/test",
+  #|  "moonbitlang/core/debug",
+  #|  "moonbitlang/core/json",
+  #|} for "wbtest"
+  #|
+
+// Package lexer as a module whose root package is the original lexer package.
+// basic and tokens remain subpackages of the lexer module.
+async fn write_lexer_module(root : String, version : String) -> Unit {
+  let module_dir = join_path(root, "lexer")
+  ensure_dir(module_dir)
+  write_file(
+    join_path(module_dir, "moon.mod"),
+    package_manifest(
+      "moonbitlang/lexer",
+      version,
+      "Lexer for the MoonBit programming language",
+      "",
+    ),
+  )
+  copy_package("lexer", module_dir, lexer_root_pkg)
+  copy_package("basic", join_path(module_dir, "basic"), lexer_basic_pkg)
+  copy_package("tokens", join_path(module_dir, "tokens"), lexer_tokens_pkg)
+}
+
+// Package moon_config as a separate module and add a versioned dependency on
+// the generated lexer module.
+async fn write_moon_config_module(root : String, version : String) -> Unit {
+  let module_dir = join_path(root, "moon_config")
+  let lexer_import =
+    $|  "moonbitlang/lexer@\{version}",
+    $|
+  ensure_dir(module_dir)
+  write_file(
+    join_path(module_dir, "moon.mod"),
+    package_manifest(
+      "moonbitlang/moon_config",
+      version,
+      "MoonBit package configuration parser",
+      lexer_import,
+    ),
+  )
+  copy_package("moon_config", module_dir, moon_config_root_pkg)
+}
+
+// Start with an empty workspace file, then let `moon work use` write the member
+// list so the final format stays aligned with the installed moon tool.
+async fn write_workspace(root : String) -> Unit {
+  let content =
+    #|members = []
+    #|
+  write_file(join_path(root, "moon.work"), content)
+}
+
+// Use `moon -C` rather than process cwd so the command target is explicit and
+// independent of process-spawn backend behavior.
+async fn run_moon_in(root : String, args : Array[String]) -> Unit {
+  let code = @process.run("moon", ["-C", root, ..args])
+  if code != 0 {
+    abort("moon \{args.join(" ")} failed with exit code \{code}")
+  }
+}
+
+// Running the script with no arguments regenerates extra_modules. A custom
+// simple directory name can be passed as the first argument for local testing.
+async fn main {
+  let args = @env.args()
+  let root = if args.length() > 1 { args[1] } else { "extra_modules" }
+  let version = read_parser_version()
+  reset_generated_root(root)
+  write_lexer_module(root, version)
+  write_moon_config_module(root, version)
+  write_workspace(root)
+  run_moon_in(root, ["work", "use", "./lexer", "./moon_config"])
+  run_moon_in(root, ["work", "sync"])
+  run_moon_in(root, ["check"])
+  println(
+    "packaged moonbitlang/lexer and moonbitlang/moon_config @ \{version} into \{root}",
+  )
+}
