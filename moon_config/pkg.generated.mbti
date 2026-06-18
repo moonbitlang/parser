@@ -14,6 +14,12 @@ pub fn parse_moon_pkg(name? : String, String) -> (Ast, Array[@basic.Report])
 
 pub fn parse_moon_work(name? : String, String) -> (Ast, Array[@basic.Report])
 
+pub fn validate_moon_mod(Ast) -> Array[@basic.Report]
+
+pub fn validate_moon_pkg(Ast) -> Array[@basic.Report]
+
+pub fn validate_moon_work(Ast) -> Array[@basic.Report]
+
 // Errors
 
 // Types and methods

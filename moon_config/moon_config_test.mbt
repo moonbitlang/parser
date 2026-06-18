@@ -38,6 +38,232 @@ impl @debug.Debug for AstNoLoc with fn to_repr(self) {
 }
 
 ///|
+fn test_loc() -> @basic.Location {
+  let pos : @basic.Position = { fname: "moon.config", lnum: 1, bol: 0, cnum: 0 }
+  { start: pos, end: pos }
+}
+
+///|
+test "validate_moon_pkg accepts Ast returned by parse_moon_pkg" {
+  let source =
+    #|import {
+    #|  "moonbitlang/core/json" @json,
+    #|  "moonbitlang/core/test",
+    #|}
+    #|import {
+    #|  "moonbitlang/core/debug",
+    #|} for "wbtest"
+    #|import {
+    #|  "moonbitlang/core/test",
+    #|} for "test"
+    #|warnings = "+w1"
+    #|supported_targets = "native"
+    #|options(
+    #|  "is-main": true,
+    #|  targets: { "main.mbt": [ "native" ] },
+    #|  link: { "native": { "cc-flags": [ "-O2" ] } },
+    #|  "bin-deps": { "tool/cli": { "bin-pkg": [ "cli" ], "path": "../bin" } },
+    #|)
+    #|rule(name: "rule1", command: "moon run")
+    #|dev_build(rule: "rule1", input: "a", output: "b")
+    #|
+  let (ast, parse_reports) = parse_moon_pkg(source)
+  debug_inspect(
+    parse_reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    validate_moon_pkg(ast).map(report => report.msg),
+    content=(
+      #|[]
+    ),
+  )
+}
+
+///|
+test "validate_moon_mod accepts Ast returned by parse_moon_mod" {
+  let source =
+    #|name = "user/mod"
+    #|version = "0.1.0"
+    #|import { "dep/a@1.2.3", "dep/b" }
+    #|warnings = "+w1"
+    #|supported_targets = ["js", "wasm-gc"]
+    #|preferred_target = "js"
+    #|options(
+    #|  "bin-deps": { "tool/cli": { "bin-pkg": [ "cli" ], "path": "../bin" } },
+    #|  "compile-flags": [ "-DDEBUG", "-Wall" ],
+    #|  source: "src",
+    #|)
+    #|rule(name: "rule1", command: "moon run")
+    #|
+  let (ast, parse_reports) = parse_moon_mod(source)
+  debug_inspect(
+    parse_reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    validate_moon_mod(ast).map(report => report.msg),
+    content=(
+      #|[]
+    ),
+  )
+}
+
+///|
+test "validate_moon_work accepts Ast returned by parse_moon_work" {
+  let source =
+    #|members = ["./app", "./shared"]
+    #|preferred_target = "native"
+    #|
+  let (ast, parse_reports) = parse_moon_work(source)
+  debug_inspect(
+    parse_reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    validate_moon_work(ast).map(report => report.msg),
+    content=(
+      #|[]
+    ),
+  )
+}
+
+///|
+test "validate_moon_pkg reports duplicate postprocessed keys" {
+  let loc = test_loc()
+  let ast : Ast = Obj(
+    Vector([
+      ("warn-list", Str("+w1", loc~)),
+      ("warn-list", Str("+w2", loc~)),
+      ("rule", Obj(Vector([("name", Str("r1", loc~))]), loc~)),
+      ("rule", Obj(Vector([("name", Str("r2", loc~))]), loc~)),
+      ("dev_build", Obj(Vector([("rule", Str("r1", loc~))]), loc~)),
+      ("dev_build", Obj(Vector([("rule", Str("r2", loc~))]), loc~)),
+      ("is-main", Bool(true, loc~)),
+      ("is-main", Bool(false, loc~)),
+    ]),
+    loc~,
+  )
+  let reports : Array[@basic.Report] = validate_moon_pkg(ast)
+  debug_inspect(
+    reports.map(report => report.msg),
+    content=(
+      #|[
+      #|  "Duplicate key `warn-list` found in moon.pkg.",
+      #|  "Duplicate key `is-main` found in moon.pkg.",
+      #|]
+    ),
+  )
+}
+
+///|
+test "validate_moon_mod reports duplicate postprocessed keys" {
+  let loc = test_loc()
+  let ast : Ast = Obj(
+    Vector([
+      ("rule", Obj(Vector([("name", Str("r1", loc~))]), loc~)),
+      ("rule", Obj(Vector([("name", Str("r2", loc~))]), loc~)),
+      ("deps", Obj(Vector([("dep/a", Str("1.0.0", loc~))]), loc~)),
+      ("deps", Obj(Vector([("dep/b", Str("2.0.0", loc~))]), loc~)),
+      ("preferred-target", Str("js", loc~)),
+      ("preferred-target", Str("native", loc~)),
+    ]),
+    loc~,
+  )
+  let reports : Array[@basic.Report] = validate_moon_mod(ast)
+  debug_inspect(
+    reports.map(report => report.msg),
+    content=(
+      #|[
+      #|  "Duplicate key `deps` found in moon.mod.",
+      #|  "Duplicate key `preferred-target` found in moon.mod.",
+      #|]
+    ),
+  )
+}
+
+///|
+test "validate_moon_pkg reports raw keys left after failed postprocess" {
+  let loc = test_loc()
+  let ast : Ast = Obj(
+    Vector([
+      ("warnings", Str("+w1", loc~)),
+      ("supported_targets", Str("native", loc~)),
+      ("options", Obj(Vector([("is-main", Bool(true, loc~))]), loc~)),
+    ]),
+    loc~,
+  )
+  let reports : Array[@basic.Report] = validate_moon_pkg(ast)
+  debug_inspect(
+    reports.map(report => report.msg),
+    content=(
+      #|[
+      #|  "Invalid moon.pkg config: unexpected key `warnings`.",
+      #|  "Invalid moon.pkg config: unexpected key `supported_targets`.",
+      #|  "Invalid moon.pkg config: unexpected key `options`.",
+      #|]
+    ),
+  )
+}
+
+///|
+test "validate_moon_mod reports raw keys left after failed postprocess" {
+  let loc = test_loc()
+  let ast : Ast = Obj(
+    Vector([
+      ("warnings", Str("+w1", loc~)),
+      ("supported_targets", Arr(Vector([Str("js", loc~)]), loc~)),
+      ("preferred_target", Str("js", loc~)),
+      ("import", Arr(Vector([Str("dep/a@1.0.0", loc~)]), loc~)),
+      ("options", Obj(Vector([("source", Str("src", loc~))]), loc~)),
+    ]),
+    loc~,
+  )
+  let reports : Array[@basic.Report] = validate_moon_mod(ast)
+  debug_inspect(
+    reports.map(report => report.msg),
+    content=(
+      #|[
+      #|  "Invalid moon.mod config: unexpected key `warnings`.",
+      #|  "Invalid moon.mod config: unexpected key `supported_targets`.",
+      #|  "Invalid moon.mod config: unexpected key `preferred_target`.",
+      #|  "Invalid moon.mod config: unexpected key `import`.",
+      #|  "Invalid moon.mod config: unexpected key `options`.",
+      #|]
+    ),
+  )
+}
+
+///|
+test "validate_moon_work reports duplicate and unexpected fields" {
+  let loc = test_loc()
+  let ast : Ast = Obj(
+    Vector([
+      ("members", Arr(Vector([Str("./app", loc~)]), loc~)),
+      ("members", Arr(Vector([Str("./lib", loc~)]), loc~)),
+      ("warnings", Str("+w1", loc~)),
+    ]),
+    loc~,
+  )
+  let reports : Array[@basic.Report] = validate_moon_work(ast)
+  debug_inspect(
+    reports.map(report => report.msg),
+    content=(
+      #|[
+      #|  "Duplicate key `members` found in moon.work.",
+      #|  "Invalid moon.work config: unexpected key `warnings`.",
+      #|]
+    ),
+  )
+}
+
+///|
 test "parse_moon_pkg postprocesses options and repeatable fields" {
   let source =
     #|warnings = "+w1"
@@ -438,7 +664,28 @@ test "parse_moon_work handles multiline members" {
 }
 
 ///|
-test "parse_moon_mod reports duplicate non-repeatable keys" {
+test "parse_moon_pkg leaves config validation to validate_moon_pkg" {
+  let source =
+    #|warnings = true
+    #|unexpected = "value"
+    #|
+  let (ast, reports) = parse_moon_pkg(source)
+  debug_inspect(
+    reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj([("warnings", Bool(true)), ("unexpected", Str("value"))])
+    ),
+  )
+}
+
+///|
+test "parse_moon_mod leaves config validation to validate_moon_mod" {
   let source =
     #|name = "user/first"
     #|name = "user/second"
@@ -447,21 +694,41 @@ test "parse_moon_mod reports duplicate non-repeatable keys" {
   debug_inspect(
     reports,
     content=(
-      #|[
-      #|  {
-      #|    loc: {
-      #|      start: { fname: "moon.mod", lnum: 2, bol: 20, cnum: 27 },
-      #|      end: { fname: "moon.mod", lnum: 2, bol: 20, cnum: 40 },
-      #|    },
-      #|    msg: "Duplicate key `name` found in moon.mod.",
-      #|  },
-      #|]
+      #|[]
     ),
   )
   debug_inspect(
     AstNoLoc(ast),
     content=(
       #|Obj([("name", Str("user/first")), ("name", Str("user/second"))])
+    ),
+  )
+}
+
+///|
+test "parse_moon_work leaves config validation to validate_moon_work" {
+  let source =
+    #|members = ["./app"]
+    #|members = ["./lib"]
+    #|warnings = "+w1"
+    #|
+  let (ast, reports) = parse_moon_work(source)
+  debug_inspect(
+    reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj(
+      #|  [
+      #|    ("members", Arr([Str("./app")])),
+      #|    ("members", Arr([Str("./lib")])),
+      #|    ("warnings", Str("+w1")),
+      #|  ],
+      #|)
     ),
   )
 }
