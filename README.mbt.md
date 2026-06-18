@@ -28,6 +28,11 @@ This module defines the Abstract Syntax Tree (AST) and provides parsers for Moon
 └── top.mbt             # root package parsing entry points
 ```
 
+## Package Guides
+
+- [Lexer](lexer/README.md)
+- [Moon Config](moon_config/README.md)
+
 ## Usage
 
 ```mbt check
