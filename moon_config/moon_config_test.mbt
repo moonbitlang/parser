@@ -264,6 +264,54 @@ test "validate_moon_work reports duplicate and unexpected fields" {
 }
 
 ///|
+test "parse_moon_pkg reports raw unexpected top-level keys" {
+  let source =
+    #|unexpected = "value"
+    #|
+  let (_, reports) = parse_moon_pkg(source)
+  debug_inspect(
+    reports.map(report => report.msg),
+    content=(
+      #|["Invalid moon.pkg config: unexpected key `unexpected`."]
+    ),
+  )
+}
+
+///|
+test "parse_moon_mod reports duplicate options blocks" {
+  let source =
+    #|options(
+    #|  source: "src",
+    #|)
+    #|options(
+    #|  repository: "https://example.com/repo",
+    #|)
+    #|
+  let (_, reports) = parse_moon_mod(source)
+  debug_inspect(
+    reports.map(report => report.msg),
+    content=(
+      #|["Duplicate key `options` found in moon.mod."]
+    ),
+  )
+}
+
+///|
+test "parse_moon_pkg reports duplicate raw key names" {
+  let source =
+    #|warnings = "+w1"
+    #|warnings = "+w2"
+    #|
+  let (_, reports) = parse_moon_pkg(source)
+  debug_inspect(
+    reports.map(report => report.msg),
+    content=(
+      #|["Duplicate key `warnings` found in moon.pkg."]
+    ),
+  )
+}
+
+///|
 test "parse_moon_pkg postprocesses options and repeatable fields" {
   let source =
     #|warnings = "+w1"
@@ -664,7 +712,7 @@ test "parse_moon_work handles multiline members" {
 }
 
 ///|
-test "parse_moon_pkg leaves config validation to validate_moon_pkg" {
+test "parse_moon_pkg reports config validation diagnostics" {
   let source =
     #|warnings = true
     #|unexpected = "value"
@@ -673,7 +721,22 @@ test "parse_moon_pkg leaves config validation to validate_moon_pkg" {
   debug_inspect(
     reports,
     content=(
-      #|[]
+      #|[
+      #|  {
+      #|    loc: {
+      #|      start: { fname: "moon.pkg", lnum: 1, bol: 0, cnum: 11 },
+      #|      end: { fname: "moon.pkg", lnum: 1, bol: 0, cnum: 15 },
+      #|    },
+      #|    msg: "Invalid moon.pkg config: unexpected key `warnings`.",
+      #|  },
+      #|  {
+      #|    loc: {
+      #|      start: { fname: "moon.pkg", lnum: 2, bol: 16, cnum: 29 },
+      #|      end: { fname: "moon.pkg", lnum: 2, bol: 16, cnum: 36 },
+      #|    },
+      #|    msg: "Invalid moon.pkg config: unexpected key `unexpected`.",
+      #|  },
+      #|]
     ),
   )
   debug_inspect(
@@ -685,7 +748,7 @@ test "parse_moon_pkg leaves config validation to validate_moon_pkg" {
 }
 
 ///|
-test "parse_moon_mod leaves config validation to validate_moon_mod" {
+test "parse_moon_mod reports config validation diagnostics" {
   let source =
     #|name = "user/first"
     #|name = "user/second"
@@ -694,7 +757,15 @@ test "parse_moon_mod leaves config validation to validate_moon_mod" {
   debug_inspect(
     reports,
     content=(
-      #|[]
+      #|[
+      #|  {
+      #|    loc: {
+      #|      start: { fname: "moon.mod", lnum: 2, bol: 20, cnum: 27 },
+      #|      end: { fname: "moon.mod", lnum: 2, bol: 20, cnum: 40 },
+      #|    },
+      #|    msg: "Duplicate key `name` found in moon.mod.",
+      #|  },
+      #|]
     ),
   )
   debug_inspect(
@@ -706,7 +777,7 @@ test "parse_moon_mod leaves config validation to validate_moon_mod" {
 }
 
 ///|
-test "parse_moon_work leaves config validation to validate_moon_work" {
+test "parse_moon_work reports config validation diagnostics" {
   let source =
     #|members = ["./app"]
     #|members = ["./lib"]
@@ -716,7 +787,22 @@ test "parse_moon_work leaves config validation to validate_moon_work" {
   debug_inspect(
     reports,
     content=(
-      #|[]
+      #|[
+      #|  {
+      #|    loc: {
+      #|      start: { fname: "moon.work", lnum: 2, bol: 20, cnum: 30 },
+      #|      end: { fname: "moon.work", lnum: 2, bol: 20, cnum: 39 },
+      #|    },
+      #|    msg: "Duplicate key `members` found in moon.work.",
+      #|  },
+      #|  {
+      #|    loc: {
+      #|      start: { fname: "moon.work", lnum: 3, bol: 40, cnum: 51 },
+      #|      end: { fname: "moon.work", lnum: 3, bol: 40, cnum: 56 },
+      #|    },
+      #|    msg: "Invalid moon.work config: unexpected key `warnings`.",
+      #|  },
+      #|]
     ),
   )
   debug_inspect(
