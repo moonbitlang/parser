@@ -349,6 +349,46 @@ test "parse_moon_mod handles metadata options" {
 }
 
 ///|
+test "parse_moon_mod accepts documented top-level fields" {
+  let source =
+    #|name = "example/top_level"
+    #|version = "0.1.0"
+    #|readme = "README.md"
+    #|repository = "https://example.com/repo"
+    #|license = "MIT"
+    #|keywords = ["moonbit", "parser"]
+    #|description = "A module config fixture"
+    #|preferred_target = "js"
+    #|supported_targets = ["js", "wasm-gc"]
+    #|
+  let (ast, reports) = parse_moon_mod(source)
+  debug_inspect(
+    reports,
+    content=(
+      #|[]
+    ),
+  )
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj(
+      #|  [
+      #|    ("name", Str("example/top_level")),
+      #|    ("version", Str("0.1.0")),
+      #|    ("readme", Str("README.md")),
+      #|    ("repository", Str("https://example.com/repo")),
+      #|    ("license", Str("MIT")),
+      #|    ("keywords", Arr([Str("moonbit"), Str("parser")])),
+      #|    ("description", Str("A module config fixture")),
+      #|    ("preferred-target", Str("js")),
+      #|    ("supported-targets", Arr([Str("js"), Str("wasm-gc")])),
+      #|  ],
+      #|)
+    ),
+  )
+}
+
+///|
 test "parse_moon_work parses workspace config" {
   let source =
     #|members = ["./app", "./shared"]

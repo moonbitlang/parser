@@ -104,7 +104,15 @@ fn post_process_moon_mod(ast : Ast, diagnostics : Array[Report]) -> Ast {
         let (key, value) = field
         check_unique_toplevel(key, value)
         match key {
-          "name" | "version" | "rule" => results.push(field)
+          "name"
+          | "version"
+          | "readme"
+          | "repository"
+          | "license"
+          | "keywords"
+          | "description"
+          | "rule" => results.push(field)
+          "preferred_target" => results.push(("preferred-target", value))
           "warnings" =>
             match value {
               Str(_, ..) => results.push(("warn-list", value))
@@ -116,6 +124,7 @@ fn post_process_moon_mod(ast : Ast, diagnostics : Array[Report]) -> Ast {
           "supported_targets" =>
             match value {
               Str(_, ..) => results.push(("supported-targets", value))
+              Arr(_, ..) => results.push(("supported-targets", value))
               _ => {
                 emit_invalid_config(key, value)
                 results.push(field)
