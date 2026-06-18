@@ -5,7 +5,7 @@ pub fn parse_moon_pkg(
   source : String,
 ) -> (Ast, Array[Report]) {
   let (ast, diagnostics) = parse_string(source, name~)
-  (post_process_moon_pkg(ast), diagnostics)
+  (post_process_moon_pkg(ast, diagnostics), diagnostics)
 }
 
 ///|
@@ -15,7 +15,7 @@ pub fn parse_moon_mod(
   source : String,
 ) -> (Ast, Array[Report]) {
   let (ast, diagnostics) = parse_string(source, name~)
-  (post_process_moon_mod(ast), diagnostics)
+  (post_process_moon_mod(ast, diagnostics), diagnostics)
 }
 
 ///|
@@ -25,15 +25,14 @@ pub fn parse_moon_work(
   source : String,
 ) -> (Ast, Array[Report]) {
   let (ast, diagnostics) = parse_string(source, name~)
-  (post_process_moon_work(ast), diagnostics)
+  (post_process_moon_work(ast, diagnostics), diagnostics)
 }
 
 ///|
-/// Validate the post-processed `Ast` returned by `parse_moon_mod`.
+/// Validate a post-processed `moon.mod` `Ast`.
 ///
-/// `options(...)` fields are flattened during parsing, so unknown top-level keys
-/// are tolerated and only raw keys left after failed canonicalization are
-/// reported as unexpected.
+/// Source-level checks that need raw keys, such as duplicate `options(...)`
+/// blocks, are handled by `parse_moon_mod`.
 pub fn validate_moon_mod(ast : Ast) -> Array[Report] {
   let report = []
   _validate_moon_mod(ast, report)
@@ -41,11 +40,10 @@ pub fn validate_moon_mod(ast : Ast) -> Array[Report] {
 }
 
 ///|
-/// Validate the post-processed `Ast` returned by `parse_moon_pkg`.
+/// Validate a post-processed `moon.pkg` `Ast`.
 ///
-/// `options(...)` fields are flattened during parsing, so unknown top-level keys
-/// are tolerated and only raw keys left after failed canonicalization are
-/// reported as unexpected.
+/// Source-level checks that need raw keys, such as duplicate `options(...)`
+/// blocks, are handled by `parse_moon_pkg`.
 pub fn validate_moon_pkg(ast : Ast) -> Array[Report] {
   let report = []
   _validate_moon_pkg(ast, report)
@@ -53,10 +51,7 @@ pub fn validate_moon_pkg(ast : Ast) -> Array[Report] {
 }
 
 ///|
-/// Validate the `Ast` returned by `parse_moon_work`.
-///
-/// `moon.work` parsing does not flatten option blocks, so validation rejects
-/// unknown top-level keys.
+/// Validate a `moon.work` `Ast`.
 pub fn validate_moon_work(ast : Ast) -> Array[Report] {
   let report = []
   _validate_moon_work(ast, report)
