@@ -1,11 +1,98 @@
 name: publish-package
-run-name: publish to mooncakes
-on: workflow_dispatch
+run-name: publish ${{ inputs.module }} to mooncakes
+
+on:
+  workflow_dispatch:
+    inputs:
+      module:
+        description: Module to publish
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - lexer
+          - moon_config
+          - parser
+
 jobs:
-  publish:
+  publish-lexer:
+    if: ${{ inputs.module == 'all' || inputs.module == 'lexer' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: install
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> $GITHUB_PATH
+      - name: moon version
+        run: |
+          moon version --all
+      - name: moon build
+        working-directory: lexer
+        run: |
+          moon update
+          moon build --target all
+      - name: moon check
+        working-directory: lexer
+        run: |
+          moon check --target all
+      - name: publish lexer
+        working-directory: lexer
+        run: |
+          mkdir -p ~/.moon
+          printf '%s' "$SECRET" > ~/.moon/credentials.json
+          trap 'rm -f ~/.moon/credentials.json' EXIT
+          moon publish
+        env:
+          SECRET: ${{ secrets.MOONCAKES_MOONBITLANG_TOKEN }}
+
+  publish-moon-config:
+    needs: publish-lexer
+    if: ${{ always() && (inputs.module == 'all' || inputs.module == 'moon_config') && (inputs.module != 'all' || needs.publish-lexer.result == 'success') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: install
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> $GITHUB_PATH
+      - name: moon version
+        run: |
+          moon version --all
+      - name: moon build
+        working-directory: moon_config
+        run: |
+          moon update
+          moon build --target all
+      - name: moon check
+        working-directory: moon_config
+        run: |
+          moon check --target all
+      - name: publish moon_config
+        working-directory: moon_config
+        run: |
+          mkdir -p ~/.moon
+          printf '%s' "$SECRET" > ~/.moon/credentials.json
+          trap 'rm -f ~/.moon/credentials.json' EXIT
+          moon publish
+        env:
+          SECRET: ${{ secrets.MOONCAKES_MOONBITLANG_TOKEN }}
+
+  publish-parser:
+    needs:
+      - publish-lexer
+      - publish-moon-config
+    if: ${{ always() && (inputs.module == 'all' || inputs.module == 'parser') && (inputs.module != 'all' || (needs.publish-lexer.result == 'success' && needs.publish-moon-config.result == 'success')) }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: install
         run: |
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
@@ -20,7 +107,7 @@ jobs:
       - name: moon check
         run: |
           moon check --target all
-      - name: publish
+      - name: publish parser
         run: |
           mkdir -p ~/.moon
           printf '%s' "$SECRET" > ~/.moon/credentials.json
