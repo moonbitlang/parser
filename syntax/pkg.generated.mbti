@@ -3,9 +3,9 @@ package "moonbitlang/parser/syntax"
 
 import {
   "moonbitlang/core/list",
-  "moonbitlang/parser/attribute",
   "moonbitlang/lexer/basic",
   "moonbitlang/lexer/tokens",
+  "moonbitlang/parser/attribute",
 }
 
 // Values

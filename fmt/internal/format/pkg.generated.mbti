@@ -4,8 +4,8 @@ package "moonbitlang/parser/fmt/internal/format"
 import {
   "moonbitlang/core/list",
   "moonbitlang/lexer/basic",
-  "moonbitlang/parser/syntax",
   "moonbitlang/lexer/tokens",
+  "moonbitlang/parser/syntax",
 }
 
 // Values
