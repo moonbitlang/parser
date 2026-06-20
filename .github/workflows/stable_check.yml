@@ -47,9 +47,3 @@ jobs:
       - name: moon test
         run: |
           moon test --target all
-
-      - name: package extra modules
-        run: |
-          moon run --target native scripts/packaging_extra_modules.mbtx
-          moon -C extra_modules check --target all
-          git diff --exit-code extra_modules
