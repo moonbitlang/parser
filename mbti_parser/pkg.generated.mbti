@@ -4,8 +4,8 @@ package "moonbitlang/parser/mbti_parser"
 import {
   "moonbitlang/core/debug",
   "moonbitlang/lexer/basic",
-  "moonbitlang/parser/mbti_ast",
   "moonbitlang/lexer/tokens",
+  "moonbitlang/parser/mbti_ast",
 }
 
 // Values

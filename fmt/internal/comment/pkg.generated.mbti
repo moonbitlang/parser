@@ -6,8 +6,8 @@ import {
   "moonbitlang/core/debug",
   "moonbitlang/core/list",
   "moonbitlang/lexer/basic",
-  "moonbitlang/parser/syntax",
   "moonbitlang/lexer/tokens",
+  "moonbitlang/parser/syntax",
 }
 
 // Values

@@ -4,11 +4,7 @@ import {
 
 rule(
   name: "moonyacc",
-  command: "moon runwasm moonbitlang/yacc@0.7.14 --mode only-tokens $input -o $output && moonfmt -w $output && moonfmt -w $output",
+  command: "cp ../yacc_parser/parser.mbty $input && moon runwasm moonbitlang/yacc@0.7.14 --mode only-tokens $input -o $output && moonfmt -w $output && moonfmt -w $output",
 )
 
-dev_build(
-  rule: "moonyacc",
-  input: "parser.mbty",
-  output: "tokens.mbt",
-)
+dev_build(rule: "moonyacc", input: "parser.mbty", output: "tokens.mbt")
