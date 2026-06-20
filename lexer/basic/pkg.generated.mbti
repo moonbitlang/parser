@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "moonbitlang/parser/basic"
+package "moonbitlang/lexer/basic"
 
 import {
   "moonbitlang/core/debug",

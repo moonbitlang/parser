@@ -1,9 +1,9 @@
 import {
   "moonbitlang/parser/syntax",
-  "moonbitlang/parser/basic",
-  "moonbitlang/parser/tokens",
+  "moonbitlang/lexer/basic",
+  "moonbitlang/lexer/tokens",
   "moonbit-community/prettyprinter" @pp,
-  "moonbitlang/parser/lexer",
+  "moonbitlang/lexer",
   "moonbitlang/parser/handrolled_parser",
   "moonbitlang/parser/fmt/internal/comment",
   "moonbitlang/parser/attribute",

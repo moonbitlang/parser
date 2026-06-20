@@ -4,7 +4,7 @@ package "moonbitlang/parser/mbti_ast"
 import {
   "moonbitlang/core/list",
   "moonbitlang/parser/attribute",
-  "moonbitlang/parser/basic",
+  "moonbitlang/lexer/basic",
   "moonbitlang/parser/syntax",
 }
 

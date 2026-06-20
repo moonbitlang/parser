@@ -1,6 +1,6 @@
 import {
-  "moonbitlang/parser/tokens",
-  "moonbitlang/parser/basic",
+  "moonbitlang/lexer/tokens",
+  "moonbitlang/lexer/basic",
   "moonbitlang/core/list",
   "moonbitlang/core/string",
   "moonbitlang/core/cmp",

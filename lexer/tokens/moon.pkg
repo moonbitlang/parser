@@ -1,5 +1,5 @@
 import {
-  "moonbitlang/parser/basic",
+  "moonbitlang/lexer/basic",
 }
 
 rule(
@@ -9,6 +9,6 @@ rule(
 
 dev_build(
   rule: "moonyacc",
-  input: "../yacc_parser/parser.mbty",
+  input: "parser.mbty",
   output: "tokens.mbt",
 )

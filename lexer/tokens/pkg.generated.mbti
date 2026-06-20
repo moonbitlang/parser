@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "moonbitlang/parser/tokens"
+package "moonbitlang/lexer/tokens"
 
 import {
   "moonbitlang/core/debug",
-  "moonbitlang/parser/basic",
+  "moonbitlang/lexer/basic",
 }
 
 // Values

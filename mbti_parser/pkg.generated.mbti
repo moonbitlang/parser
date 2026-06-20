@@ -3,9 +3,9 @@ package "moonbitlang/parser/mbti_parser"
 
 import {
   "moonbitlang/core/debug",
-  "moonbitlang/parser/basic",
+  "moonbitlang/lexer/basic",
   "moonbitlang/parser/mbti_ast",
-  "moonbitlang/parser/tokens",
+  "moonbitlang/lexer/tokens",
 }
 
 // Values
