@@ -1,14 +1,14 @@
 import {
   "moonbitlang/parser/syntax",
-  "moonbitlang/parser/tokens",
+  "moonbitlang/lexer/tokens",
   "moonbitlang/parser/syntax/util",
-  "moonbitlang/parser/basic",
+  "moonbitlang/lexer/basic",
   "moonbitlang/parser/attribute",
   "moonbitlang/core/list",
   "moonbitlang/core/debug",
 }
 
 import {
-  "moonbitlang/parser/lexer",
+  "moonbitlang/lexer",
   "moonbitlang/core/json",
 } for "test"

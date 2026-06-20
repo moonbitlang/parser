@@ -1,6 +1,6 @@
-# moonbitlang/parser/lexer
+# moonbitlang/lexer
 
-`moonbitlang/parser/lexer` turns MoonBit source text into token streams used by
+`moonbitlang/lexer` turns MoonBit source text into token streams used by
 the parsers in this repository.
 
 The main entry points are `tokens_from_string` and

@@ -1,10 +1,10 @@
 import {
-  "moonbitlang/parser/tokens",
-  "moonbitlang/parser/basic",
+  "moonbitlang/lexer/tokens",
+  "moonbitlang/lexer/basic",
   "moonbitlang/parser/mbti_ast",
   "moonbitlang/parser/syntax",
   "moonbitlang/parser/attribute",
-  "moonbitlang/parser/lexer",
+  "moonbitlang/lexer",
   "moonbitlang/core/list",
 }
 

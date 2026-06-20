@@ -1,7 +1,7 @@
 import {
-  "moonbitlang/parser/basic",
-  "moonbitlang/parser/tokens",
-  "moonbitlang/parser/lexer",
+  "moonbitlang/lexer/basic",
+  "moonbitlang/lexer/tokens",
+  "moonbitlang/lexer",
   "moonbitlang/core/immut/vector",
   "moonbitlang/core/json",
 }

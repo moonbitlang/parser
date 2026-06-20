@@ -1,8 +1,8 @@
 import {
   "moonbitlang/parser/syntax",
   "moonbitlang/parser/syntax/util",
-  "moonbitlang/parser/tokens",
-  "moonbitlang/parser/basic",
+  "moonbitlang/lexer/tokens",
+  "moonbitlang/lexer/basic",
   "moonbitlang/parser/attribute",
   "moonbitlang/core/list",
 }

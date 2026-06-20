@@ -1,6 +1,6 @@
 import {
   "moonbitlang/parser/attribute",
-  "moonbitlang/parser/basic",
+  "moonbitlang/lexer/basic",
   "moonbitlang/parser/syntax",
   "moonbitlang/core/list",
 }

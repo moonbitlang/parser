@@ -5,6 +5,6 @@ import {
   "moonbitlang/parser/fmt/internal/format",
   "moonbitlang/x/fs",
   "moonbitlang/parser/syntax",
-  "moonbitlang/parser/basic",
+  "moonbitlang/lexer/basic",
   "moonbitlang/core/test",
 } for "test"
