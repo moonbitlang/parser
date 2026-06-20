@@ -1,5 +1,5 @@
 import {
-  "moonbitlang/parser/moon_config" @config,
+  "moonbitlang/moon_config" @config,
   "moonbit-community/miniio",
   "moonbit-community/miniio/io",
   "moonbitlang/core/json",
