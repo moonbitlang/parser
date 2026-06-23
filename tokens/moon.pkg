@@ -2,12 +2,13 @@ import {
   "moonbitlang/parser/basic",
 }
 
-options(
-  "pre-build": [
-    {
-      "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --mode only-tokens $input -o $output && moonfmt -w $output && moonfmt -w $output",
-      "input": "../yacc_parser/parser.mbty",
-      "output": "tokens.mbt",
-    },
-  ],
+rule(
+  name: "moonyacc",
+  command: "moon runwasm moonbitlang/yacc@0.7.14 --mode only-tokens $input -o $output && moonfmt -w $output && moonfmt -w $output",
+)
+
+dev_build(
+  rule: "moonyacc",
+  input: "../yacc_parser/parser.mbty",
+  output: "tokens.mbt",
 )

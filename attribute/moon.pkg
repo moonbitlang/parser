@@ -8,12 +8,9 @@ import {
 
 warnings = "-6-3"
 
-options(
-  "pre-build": [
-    {
-      "command": "$mod_dir/.mooncakes/moonbitlang/yacc/moonyacc --external-tokens --input-mode array $input -o $output && moonfmt -w $output && moonfmt -w $output",
-      "input": "parser.mbty",
-      "output": "parser.mbt",
-    },
-  ],
+rule(
+  name: "moonyacc",
+  command: "moon runwasm moonbitlang/yacc@0.7.14 --input-mode array --external-tokens $input -o $output && moonfmt -w $output && moonfmt -w $output",
 )
+
+dev_build(rule: "moonyacc", input: "parser.mbty", output: "parser.mbt")
