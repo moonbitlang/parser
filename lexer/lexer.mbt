@@ -1051,6 +1051,13 @@ fn lex_tokens(
         '$',
         0,
       )
+    ("\$" ("[a-z][a-z]*" as kind) ":" ("[A-Z][A-Za-z0-9_]*" as name), rest) =>
+      add_metavar_token(
+        @tokens.Token::UIDENT("$" + kind.to_owned() + ":" + name.to_owned()),
+        rest,
+        '$',
+        0,
+      )
     ("\$" ("[a-z][a-z]*" as kind) ":" ("[A-Za-z_][A-Za-z0-9_]*" as name), rest) =>
       add_metavar_token(
         @tokens.Token::LIDENT("$" + kind.to_owned() + ":" + name.to_owned()),

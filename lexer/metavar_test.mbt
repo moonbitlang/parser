@@ -32,6 +32,14 @@ test "metavariable syntax encodes as ordinary tokens when enabled" {
   guard pat.tokens[0].0 is LIDENT("$pat:x") else {
     fail("expected LIDENT encoded arbitrary-kind metavariable")
   }
+  let type_name = tokens_from_string(
+    "$type:Foo",
+    comment=false,
+    enable_metavar=true,
+  )
+  guard type_name.tokens[0].0 is UIDENT("$type:Foo") else {
+    fail("expected UIDENT encoded type metavariable")
+  }
   let dot = tokens_from_string(".$id:field", comment=false, enable_metavar=true)
   guard dot.tokens[0].0 is DOT_LIDENT("$id:field") else {
     fail("expected DOT_LIDENT encoded identifier metavariable")
