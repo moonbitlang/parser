@@ -10,6 +10,7 @@ pub fn tokens_from_string(
   name? : String = "",
   start_pos? : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
   is_interpolation? : Bool = false,
+  enable_metavar? : Bool = false,
   comment~ : Bool,
   str : String,
 ) -> LexResult {
@@ -31,6 +32,7 @@ pub fn tokens_from_string(
     last_unhandled_comment: @ref.new(None),
     asi_context: ASIContext::new(),
     is_interpolation,
+    enable_metavar,
     surrogate_pair_count: 0,
   }
   lex_tokens(str, base=str, env~, preserve_comment=env.preserve_comment())
@@ -48,6 +50,7 @@ pub fn tokens_from_string_with_utf16_location(
   name? : String = "",
   start_pos? : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
   is_interpolation? : Bool = false,
+  enable_metavar? : Bool = false,
   comment~ : Bool,
   str : String,
 ) -> LexResult {
@@ -56,6 +59,7 @@ pub fn tokens_from_string_with_utf16_location(
     name~,
     start_pos~,
     is_interpolation~,
+    enable_metavar~,
     comment~,
     str,
   )
