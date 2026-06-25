@@ -11,6 +11,7 @@ priv struct LexEnv {
   asi_context : ASIContext
   start_cnum : Int
   is_interpolation : Bool
+  enable_metavar : Bool
   mut surrogate_pair_count : Int
 }
 

@@ -8,6 +8,70 @@ fn lex_tokens(
   env~ : LexEnv,
   preserve_comment~ : (Comment, Int, Int) -> Unit,
 ) -> Unit {
+  fn metavar_enabled() -> Bool {
+    env.enable_metavar && !env.is_interpolation
+  }
+
+  fn reject_disabled_metavar(ch : Char) -> Unit {
+    let start_pos = env.calc_offset(input, base~)
+    env.add_lexing_error(
+      IllegalCharacter(ch),
+      start=start_pos,
+      end=start_pos + 1,
+    )
+    lex_tokens(input[1:], base~, env~, preserve_comment~)
+  }
+
+  fn resume_disabled_dot_metavar() -> Unit {
+    let dot_pos = env.calc_offset(input, base~) + 1
+    env.add_token_with_loc(
+      @tokens.Token::DOT_LIDENT(""),
+      start=dot_pos,
+      end=dot_pos,
+    )
+    lex_tokens(input[1:], base~, env~, preserve_comment~)
+  }
+
+  fn add_metavar_token(
+    tok : @tokens.Token,
+    rest : StringView,
+    disabled_char : Char,
+    start_offset : Int,
+  ) -> Unit {
+    if metavar_enabled() {
+      env.add_token_with_loc(
+        tok,
+        start=env.calc_offset(input, base~) + start_offset,
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    } else if start_offset > 0 {
+      resume_disabled_dot_metavar()
+    } else {
+      reject_disabled_metavar(disabled_char)
+    }
+  }
+
+  fn add_metavar_error(
+    raw : StringView,
+    rest : StringView,
+    disabled_char : Char,
+    start_offset : Int,
+  ) -> Unit {
+    if metavar_enabled() {
+      env.add_lexing_error(
+        InvalidMetavarSyntax(raw.to_owned()),
+        start=env.calc_offset(input, base~) + start_offset,
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    } else if start_offset > 0 {
+      resume_disabled_dot_metavar()
+    } else {
+      reject_disabled_metavar(disabled_char)
+    }
+  }
+
   lexmatch input with longest {
     (
       "\n|\r|\r\n|\u2028|\u2029",
@@ -628,6 +692,24 @@ fn lex_tokens(
 
     // Dot with identifier
 
+    // Dot metavariable labels, only enabled for pattern parsing.
+    (
+      "\.\$"
+      ("[a-z][a-z]*" as kind)
+      ":"
+      ("[A-Za-z_][A-Za-z0-9_]*" as name),
+      rest
+    ) =>
+      add_metavar_token(
+        @tokens.Token::DOT_LIDENT("$" + kind.to_owned() + ":" + name.to_owned()),
+        rest,
+        '$',
+        1,
+      )
+    ("\.\$[a-z][a-z]*:" as raw, rest) => add_metavar_error(raw, rest, '$', 1)
+    ("\.\$:" as raw, rest) => add_metavar_error(raw, rest, '$', 1)
+    ("\.\$[A-Za-z_][A-Za-z0-9_]*:[A-Za-z_][A-Za-z0-9_]*" as raw, rest) =>
+      add_metavar_error(raw, rest, '$', 1)
     (
       "\."
       (
@@ -953,6 +1035,36 @@ fn lex_tokens(
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
+
+    // Pattern metavariables, only enabled for pattern parsing.
+    (
+      "\$"
+      ("[a-z][a-z]*" as kind)
+      ":"
+      ("[A-Za-z_][A-Za-z0-9_]*" as name)
+      "~",
+      rest
+    ) =>
+      add_metavar_token(
+        @tokens.Token::POST_LABEL("$" + kind.to_owned() + ":" + name.to_owned()),
+        rest,
+        '$',
+        0,
+      )
+    ("\$" ("[a-z][a-z]*" as kind) ":" ("[A-Za-z_][A-Za-z0-9_]*" as name), rest) =>
+      add_metavar_token(
+        @tokens.Token::LIDENT("$" + kind.to_owned() + ":" + name.to_owned()),
+        rest,
+        '$',
+        0,
+      )
+    ("\$[a-z][a-z]*:~" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
+    ("\$[a-z][a-z]*:" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
+    ("\$:" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
+    ("\$[A-Za-z_][A-Za-z0-9_]*:[A-Za-z_][A-Za-z0-9_]*~" as raw, rest) =>
+      add_metavar_error(raw, rest, '$', 0)
+    ("\$[A-Za-z_][A-Za-z0-9_]*:[A-Za-z_][A-Za-z0-9_]*" as raw, rest) =>
+      add_metavar_error(raw, rest, '$', 0)
 
     // Multiline string #|
     ("#\|[^\r\n]*" as multiline_str, rest) => {

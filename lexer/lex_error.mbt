@@ -10,6 +10,7 @@ pub enum LexicalError {
   InvalidDotInt(String)
   InvalidByteLiteral(String)
   Reserved_keyword(String)
+  InvalidMetavarSyntax(String)
 }
 
 ///|
@@ -28,6 +29,7 @@ pub impl Show for LexicalError with fn output(self, logger) {
       IllegalCharacter(c) => "unrecognized character u32: \{c}"
       InvalidByteLiteral(s) => "invalid byte literal: \{s}"
       Reserved_keyword(s) => "reserved keyword: \{s}"
+      InvalidMetavarSyntax(s) => "invalid metavariable syntax: \{s}"
     },
   )
 }

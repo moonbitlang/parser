@@ -8,9 +8,9 @@ import {
 }
 
 // Values
-pub fn tokens_from_string(name? : String, start_pos? : @basic.Position, is_interpolation? : Bool, comment~ : Bool, String) -> LexResult
+pub fn tokens_from_string(name? : String, start_pos? : @basic.Position, is_interpolation? : Bool, enable_metavar? : Bool, comment~ : Bool, String) -> LexResult
 
-pub fn tokens_from_string_with_utf16_location(name? : String, start_pos? : @basic.Position, is_interpolation? : Bool, comment~ : Bool, String) -> LexResult
+pub fn tokens_from_string_with_utf16_location(name? : String, start_pos? : @basic.Position, is_interpolation? : Bool, enable_metavar? : Bool, comment~ : Bool, String) -> LexResult
 
 // Errors
 
@@ -32,6 +32,7 @@ pub enum LexicalError {
   InvalidDotInt(String)
   InvalidByteLiteral(String)
   Reserved_keyword(String)
+  InvalidMetavarSyntax(String)
 }
 pub impl Show for LexicalError
 
