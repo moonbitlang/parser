@@ -1,6 +1,6 @@
 name = "moonbitlang/lexer"
 
-version = "0.3.6"
+version = "0.3.7"
 
 repository = "https://github.com/moonbitlang/parser"
 
