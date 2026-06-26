@@ -4,7 +4,7 @@ version = "0.3.5"
 
 import {
   "moonbitlang/x@0.4.39",
-  "moonbitlang/lexer@0.3.5",
+  "moonbitlang/lexer@0.3.6",
   "moonbitlang/moon_config@0.3.4",
   "moonbit-community/miniio@0.1.0",
   "moonbitlang/async@0.19.0",
