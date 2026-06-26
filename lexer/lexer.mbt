@@ -72,6 +72,28 @@ fn lex_tokens(
     }
   }
 
+  fn add_metavar_error_to_rest(
+    rest : StringView,
+    disabled_char : Char,
+    start_offset : Int,
+  ) -> Unit {
+    let raw_end = env.calc_offset(rest, base~) - env.calc_offset(input, base~)
+    add_metavar_error(
+      input.sub(start=0, end=raw_end),
+      rest,
+      disabled_char,
+      start_offset,
+    )
+  }
+
+  fn typed_metavar_payload(name : StringView, kind : StringView) -> String {
+    "$(" + name.to_owned() + ":" + kind.to_owned() + ")"
+  }
+
+  fn inferred_metavar_payload(name : StringView) -> String {
+    "$" + name.to_owned()
+  }
+
   lexmatch input with longest {
     (
       "\n|\r|\r\n|\u2028|\u2029",
@@ -694,21 +716,45 @@ fn lex_tokens(
 
     // Dot metavariable labels, only enabled for pattern parsing.
     (
-      "\.\$"
-      ("[a-z][a-z]*" as kind)
+      "\.\$\("
+      "[ ]*"
+      ("[A-Za-z_][A-Za-z0-9_]*" as name)
+      "[ ]*"
       ":"
-      ("[A-Za-z_][A-Za-z0-9_]*" as name),
+      "[ ]*"
+      ("[a-z][a-z]*" as kind)
+      "[ ]*"
+      "\)",
       rest
     ) =>
       add_metavar_token(
-        @tokens.Token::DOT_LIDENT("$" + kind.to_owned() + ":" + name.to_owned()),
+        @tokens.Token::DOT_LIDENT(typed_metavar_payload(name, kind)),
         rest,
         '$',
         1,
       )
-    ("\.\$[a-z][a-z]*:" as raw, rest) => add_metavar_error(raw, rest, '$', 1)
-    ("\.\$:" as raw, rest) => add_metavar_error(raw, rest, '$', 1)
-    ("\.\$[A-Za-z_][A-Za-z0-9_]*:[A-Za-z_][A-Za-z0-9_]*" as raw, rest) =>
+    ("\.\$" ("[A-Za-z_][A-Za-z0-9_]*" as name), rest) =>
+      add_metavar_token(
+        @tokens.Token::DOT_LIDENT(inferred_metavar_payload(name)),
+        rest,
+        '$',
+        1,
+      )
+    ("\.\$\([ ]*:" as raw, rest) => add_metavar_error(raw, rest, '$', 1)
+    ("\.\$\([^\)\r\n]*\)" as raw, rest) => add_metavar_error(raw, rest, '$', 1)
+    ("\.\$\(" "[ ]*" "[A-Za-z_][A-Za-z0-9_]*" "[ ]*" ":" "[ ]*" "\)", rest) =>
+      add_metavar_error_to_rest(rest, '$', 1)
+    (
+      "\.\$\("
+      "[ ]*"
+      "[A-Za-z_][A-Za-z0-9_]*"
+      "[ ]*"
+      ":"
+      "[ ]*"
+      "[a-z][a-z]*",
+      rest
+    ) => add_metavar_error_to_rest(rest, '$', 1)
+    ("\.\$[a-z][a-z]*:[a-z_][A-Za-z0-9_]*" as raw, rest) =>
       add_metavar_error(raw, rest, '$', 1)
     (
       "\."
@@ -1038,39 +1084,100 @@ fn lex_tokens(
 
     // Pattern metavariables, only enabled for pattern parsing.
     (
-      "\$"
-      ("[a-z][a-z]*" as kind)
-      ":"
+      "\$\("
+      "[ ]*"
       ("[A-Za-z_][A-Za-z0-9_]*" as name)
-      "~",
+      "[ ]*"
+      ":"
+      "[ ]*"
+      ("[a-z][a-z]*" as kind)
+      "[ ]*"
+      "\)~",
       rest
     ) =>
       add_metavar_token(
-        @tokens.Token::POST_LABEL("$" + kind.to_owned() + ":" + name.to_owned()),
+        @tokens.Token::POST_LABEL(typed_metavar_payload(name, kind)),
         rest,
         '$',
         0,
       )
-    ("\$" ("[a-z][a-z]*" as kind) ":" ("[A-Z][A-Za-z0-9_]*" as name), rest) =>
+    ("\$" ("[A-Za-z_][A-Za-z0-9_]*" as name) "~", rest) =>
       add_metavar_token(
-        @tokens.Token::UIDENT("$" + kind.to_owned() + ":" + name.to_owned()),
+        @tokens.Token::POST_LABEL(inferred_metavar_payload(name)),
         rest,
         '$',
         0,
       )
-    ("\$" ("[a-z][a-z]*" as kind) ":" ("[A-Za-z_][A-Za-z0-9_]*" as name), rest) =>
+    (
+      "\$\("
+      "[ ]*"
+      ("[A-Z][A-Za-z0-9_]*" as name)
+      "[ ]*"
+      ":"
+      "[ ]*"
+      ("[a-z][a-z]*" as kind)
+      "[ ]*"
+      "\)",
+      rest
+    ) =>
       add_metavar_token(
-        @tokens.Token::LIDENT("$" + kind.to_owned() + ":" + name.to_owned()),
+        @tokens.Token::UIDENT(typed_metavar_payload(name, kind)),
         rest,
         '$',
         0,
       )
-    ("\$[a-z][a-z]*:~" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
-    ("\$[a-z][a-z]*:" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
-    ("\$:" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
-    ("\$[A-Za-z_][A-Za-z0-9_]*:[A-Za-z_][A-Za-z0-9_]*~" as raw, rest) =>
+    (
+      "\$\("
+      "[ ]*"
+      ("[a-z_][A-Za-z0-9_]*" as name)
+      "[ ]*"
+      ":"
+      "[ ]*"
+      ("[a-z][a-z]*" as kind)
+      "[ ]*"
+      "\)",
+      rest
+    ) =>
+      add_metavar_token(
+        @tokens.Token::LIDENT(typed_metavar_payload(name, kind)),
+        rest,
+        '$',
+        0,
+      )
+    ("\$" ("[A-Z][A-Za-z0-9_]*" as name), rest) =>
+      add_metavar_token(
+        @tokens.Token::UIDENT(inferred_metavar_payload(name)),
+        rest,
+        '$',
+        0,
+      )
+    ("\$" ("[a-z_][A-Za-z0-9_]*" as name), rest) =>
+      add_metavar_token(
+        @tokens.Token::LIDENT(inferred_metavar_payload(name)),
+        rest,
+        '$',
+        0,
+      )
+    ("\$\([ ]*:" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
+    ("\$\([^\)\r\n]*\)" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
+    ("\$\(" "[ ]*" "[A-Za-z_][A-Za-z0-9_]*" "[ ]*" ":" "[ ]*" "\)", rest) =>
+      add_metavar_error_to_rest(rest, '$', 0)
+    (
+      "\$\("
+      "[ ]*"
+      "[A-Za-z_][A-Za-z0-9_]*"
+      "[ ]*"
+      ":"
+      "[ ]*"
+      "[a-z][a-z]*",
+      rest
+    ) => add_metavar_error_to_rest(rest, '$', 0)
+    ("\$\(" "[ ]*" "[A-Za-z_][A-Za-z0-9_]*" "[ ]*" "\)", rest) =>
+      add_metavar_error_to_rest(rest, '$', 0)
+    ("\$\([ ]*\)" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
+    ("\$[a-z][a-z]*:[A-Za-z_][A-Za-z0-9_]*~" as raw, rest) =>
       add_metavar_error(raw, rest, '$', 0)
-    ("\$[A-Za-z_][A-Za-z0-9_]*:[A-Za-z_][A-Za-z0-9_]*" as raw, rest) =>
+    ("\$[a-z][a-z]*:[a-z_][A-Za-z0-9_]*" as raw, rest) =>
       add_metavar_error(raw, rest, '$', 0)
 
     // Multiline string #|
