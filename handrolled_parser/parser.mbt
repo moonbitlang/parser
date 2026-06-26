@@ -89,12 +89,46 @@ fn State::parse_qual_lident(
 }
 
 ///|
-fn State::parse_qual_luident(self : Self) -> @syntax.LongIdent {
+fn State::parse_qual_uident(self : Self) -> @syntax.LongIdent {
   guard self.mode is Normal else { @syntax.LongIdent::dummy() }
   match self.peek_token() {
-    LIDENT(id) | UIDENT(id) => {
+    UIDENT(id) => {
       self.skip()
       Ident(name=id)
+    }
+    PACKAGE_NAME(pkg) => {
+      self.skip()
+      let id = self.expect_dot_uident(context="qualified upper identifier")
+      Dot(pkg~, id~)
+    }
+    other => {
+      let loc = self.peek_location()
+      self.report_unexpected(other, [TK_UIDENT, TK_PACKAGE_NAME], loc)
+      self.panic() |> ignore
+      @syntax.LongIdent::dummy()
+    }
+  }
+}
+
+///|
+fn State::parse_qual_type_ident(
+  self : Self,
+  context~ : String,
+) -> @syntax.LongIdent {
+  guard self.mode is Normal else { @syntax.LongIdent::dummy() }
+  match self.peek_token() {
+    UIDENT(id) => {
+      self.skip()
+      Ident(name=id)
+    }
+    LIDENT(id) => {
+      let loc = self.peek_location()
+      self.skip()
+      self.report_error({
+        loc,
+        msg: "Unexpected lowercase identifier \{id}, expected uppercase identifier in \{context}.",
+      })
+      @syntax.LongIdent::dummy()
     }
     PACKAGE_NAME(pkg) => {
       self.skip()
@@ -113,7 +147,7 @@ fn State::parse_qual_luident(self : Self) -> @syntax.LongIdent {
     }
     other => {
       let loc = self.peek_location()
-      self.report_unexpected(other, first_qual_luident, loc)
+      self.report_unexpected(other, [TK_UIDENT, TK_PACKAGE_NAME], loc)
       self.panic() |> ignore
       @syntax.LongIdent::dummy()
     }
@@ -121,16 +155,28 @@ fn State::parse_qual_luident(self : Self) -> @syntax.LongIdent {
 }
 
 ///|
-fn State::parse_qual_uident(self : Self) -> @syntax.LongIdent {
+fn State::parse_qual_extenum_target(
+  self : Self,
+  context~ : String,
+) -> @syntax.LongIdent {
   guard self.mode is Normal else { @syntax.LongIdent::dummy() }
   match self.peek_token() {
     UIDENT(id) => {
       self.skip()
       Ident(name=id)
     }
+    LIDENT(id) => {
+      let loc = self.peek_location()
+      self.skip()
+      self.report_error({
+        loc,
+        msg: "Unexpected lowercase identifier \{id}, expected uppercase identifier in \{context}.",
+      })
+      @syntax.LongIdent::dummy()
+    }
     PACKAGE_NAME(pkg) => {
       self.skip()
-      let id = self.expect_dot_uident(context="qualified upper identifier")
+      let id = self.expect_dot_uident(context~)
       Dot(pkg~, id~)
     }
     other => {
@@ -182,9 +228,20 @@ fn State::parse_type_name(self : Self) -> @syntax.TypeName {
     }
     _ => false
   }
-  let name = self.parse_qual_luident()
+  let name = self.parse_qual_type_ident(context="type name")
   let loc = self.loc_start_with(spos)
   { name, is_object, loc }
+}
+
+///|
+fn State::parse_extenum_target(self : Self) -> @syntax.TypeName {
+  if self.mode is Panic(loc~, ..) {
+    return { name: @syntax.LongIdent::dummy(), is_object: false, loc }
+  }
+  let spos = self.peek_spos()
+  let name = self.parse_qual_extenum_target(context="extenum target")
+  let loc = self.loc_start_with(spos)
+  { name, is_object: false, loc }
 }
 
 ///|
@@ -237,7 +294,7 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
     }
   }
   let spos = self.peek_spos()
-  let name = self.parse_luident()
+  let name = self.expect_uident(context="type variable name")
   let loc = self.loc_start_with(spos)
   let constraints : @list.List[@syntax.TypeVarConstraint]? = self.optional(
     [TK_COLON],
@@ -245,7 +302,7 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
       state.expect_token(TK_COLON)
       state.sepby1(delim=TK_PLUS, fn(state) {
         let loc = state.peek_location()
-        let trait_ = state.parse_qual_luident()
+        let trait_ = state.parse_qual_type_ident(context="trait name")
         { trait_, loc }
       })
       |> @list.from_array
@@ -269,7 +326,7 @@ fn State::parse_type_decl_binder(self : Self) -> @syntax.TypeDeclBinder {
       self.skip()
       None
     }
-    _ => Some(self.parse_luident())
+    _ => Some(self.expect_uident(context="type parameter name"))
   }
   let loc = self.loc_start_with(spos)
   { name, loc }
@@ -502,14 +559,14 @@ fn State::parse_trait_decl(
   let spos = self.peek_spos()
   self.expect_token(TK_TRAIT)
   let name_loc = self.peek_location()
-  let name = self.parse_luident()
+  let name = self.expect_uident(context="trait name")
   let trait_name : @syntax.Binder = { name, loc: name_loc }
   let supers = if self.peek_token() is COLON {
     self.skip()
     self.with_follow(follow_set=[TK_LBRACE], fn(state) {
       state.sepby1(delim=TK_PLUS, fn(state) {
         let loc = state.peek_location()
-        let trait_ = state.parse_qual_luident()
+        let trait_ = state.parse_qual_type_ident(context="trait name")
         @syntax.TypeVarConstraint::{ trait_, loc }
       })
       |> @list.from_array
@@ -683,7 +740,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
     SUBERROR => {
       self.expect_token(TK_SUBERROR)
       let tycon_loc = self.peek_location()
-      let tycon = self.parse_luident()
+      let tycon = self.expect_uident(context="suberror name")
       let components : @syntax.TypeDesc = match self.peek_token() {
         LBRACE => {
           let cs = self.surround_series(
@@ -719,7 +776,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
     TYPE => {
       self.expect_token(TK_TYPE)
       let tycon_loc = self.peek_location()
-      let tycon = self.parse_luident()
+      let tycon = self.expect_uident(context="type name")
       let params = self.parse_opt_type_params_no_constraints()
       let components : @syntax.TypeDesc = match self.peek_token() {
         SEMI(_) | EOF | DERIVE => Abstract
@@ -767,7 +824,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
     STRUCT => {
       self.expect_token(TK_STRUCT)
       let tycon_loc = self.peek_location()
-      let tycon = self.parse_luident()
+      let tycon = self.expect_uident(context="struct name")
       let params = self.parse_opt_type_params_no_constraints()
       let components : @syntax.TypeDesc = match self.peek_token() {
         LPAREN => {
@@ -801,7 +858,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
     ENUM => {
       self.expect_token(TK_ENUM)
       let tycon_loc = self.peek_location()
-      let tycon = self.parse_luident()
+      let tycon = self.expect_uident(context="enum name")
       let params = self.parse_opt_type_params_no_constraints()
       let constrs = self.surround_series(
           invalid_delims=[TK_COMMA],
@@ -828,7 +885,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
     }
     EXTENUM => {
       self.expect_token(TK_EXTENUM)
-      let target = self.parse_type_name()
+      let target = self.parse_extenum_target()
       let (tycon, tycon_loc) = match target.name {
         Ident(name~) => (name, target.loc)
         Dot(id~, ..) => (id, target.loc)
@@ -5269,7 +5326,7 @@ fn State::parse_error_type(self : Self) -> @syntax.Type {
       Name(constr_id~, tys=@list.new(), loc~)
     }
     _ => {
-      let name = self.parse_qual_luident()
+      let name = self.parse_qual_type_ident(context="error type")
       let loc = self.loc_start_with(spos)
       let constr_id : @syntax.ConstrId = { id: name, loc }
       Name(constr_id~, tys=@list.new(), loc~)
@@ -5389,7 +5446,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
   match self.peek_token() {
     PACKAGE_NAME(_) | LIDENT(_) | UIDENT(_) => {
       let name_loc = self.peek_location()
-      let name = self.parse_qual_luident()
+      let name = self.parse_qual_type_ident(context="type name")
       let args = self.optional([TK_LBRACKET], fn(self) {
         self.surround_series(
           left=TK_LBRACKET,
@@ -5473,7 +5530,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
     AMPER => {
       self.skip()
       let spos = self.peek_spos()
-      let lid = self.parse_qual_luident()
+      let lid = self.parse_qual_type_ident(context="object type")
       let loc = self.loc_start_with(spos)
       let ty = @syntax.Type::Object({ id: lid, loc })
       parse_question_mark(spos, ty)

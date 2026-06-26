@@ -2,9 +2,6 @@
 let first_qual_lident : Array[TokenKind] = [TK_LIDENT, TK_PACKAGE_NAME]
 
 ///|
-let first_qual_luident : Array[TokenKind] = [..first_qual_lident, TK_UIDENT]
-
-///|
 let first_luident : Array[TokenKind] = [TK_LIDENT, TK_UIDENT]
 
 ///|
@@ -98,7 +95,6 @@ let first_map_pattern_key : Array[TokenKind] = [
 ///|
 let first_type_ : Array[TokenKind] = [
   TK_PACKAGE_NAME,
-  TK_LIDENT,
   TK_UIDENT,
   TK_LPAREN,
   TK_UNDERSCORE,
